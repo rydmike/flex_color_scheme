@@ -1,0 +1,20 @@
+name: flex_color_scheme
+description: FlexColorScheme makes it easy to use and create beautiful ColorScheme based themes.
+version: 1.0.0
+homepage: https://github.com/rydmike/flex_color_scheme
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  test:
+
+flutter:
+  uses-material-design: true

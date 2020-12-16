@@ -1,0 +1,33 @@
+include: ../analysis_options.yaml
+
+linter:
+  rules:
+    # Example may want to print to the console
+    avoid_print: false
+
+    # Using redundant (default) argument values can be useful for in code documentation
+    # purposes and also handy as a template when trying different settings in Flutter. It is often
+    # quicker when dealing with not well known APIs to see parameter values in the call/constructor,
+    # instead of using the IDE to peek into its default to figure out what the defaults are,
+    # occasionally leaving a few redundant default valued parameters in the code is not that bad
+    # when you are developing something new. For public packages you probably want to keep this
+    # rule enabled.
+    avoid_redundant_argument_values: false
+
+    # Too verbose for apps and bring very little value
+    diagnostic_describe_all_properties: false
+
+    # Using this rule will sometimes force a line of 81 characters to be split in two.
+    # As long as we try to respect that 80 characters limit, going slightly above is fine.
+    # For packages keep this rule enabled though, because the pub.dev dart format check will
+    # penalize packages points if it does not adhere to strict dart format rules, which apparently
+    # requires max 80 char lines. This rule will then help you find cases where you go over
+    # and fix them manually when possible.
+    # I usually disable this rule if this is not a package.
+    lines_longer_than_80_chars: false
+
+    # Not necessary for examples
+    public_member_api_docs: false
+
+    # Useful for packages but not for apps
+    type_annotate_public_apis: false
