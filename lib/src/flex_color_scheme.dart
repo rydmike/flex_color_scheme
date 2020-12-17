@@ -1132,13 +1132,13 @@ class FlexColorScheme {
   ///   The design choices on text selection theme are made so that they will
   ///   match and wok well together with the [InputDecorationTheme].
   /// * A predefined slightly opinionated [InputDecorationTheme] is used. It
-  ///   set ´filled`to `true` and fill color to colorscheme primary color with
+  ///   set `filled` to `true` and fill color to colorscheme primary color with
   ///   opacity 0.035 in light mode and opacity 0.06 in dark mode. The other
   ///   key theme change is done via modification of the [ThemeData.accentColor]
   ///   described earlier above. Since the theme does not define a `border`
   ///   property TextFields in app can still easily use both the default
   ///   underline style outline style by specifying the default
-  ///   ´const OutlineInputBorder()` for the border property. If you don't
+  ///   `const OutlineInputBorder()` for the border property. If you don't
   ///   want the fill style or the primary color borders in dark mode you can
   ///   override them back with copyWith.
   /// * Theming applied to [ThemeData.buttonColor] using colorScheme primary and
