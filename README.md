@@ -7,11 +7,11 @@ interesting twists and features.
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
 
 ## Contents
-*  [Getting Started](#getting-started)
-** [Default Sample Application](#default-sample-application)
-*  [Tutorial](#tutorial)
-** [Live WEB versions of the examples](#live-web-versions-of-the-examples)
-** [Example 1 Use a predefined color scheme](#example-1-use-a-predefined-color-scheme)
+  [Getting Started](#getting-started)  
+    [Default Sample Application](#default-sample-application)  
+  [Tutorial](#tutorial)  
+    [Live WEB versions of the examples](#live-web-versions-of-the-examples)  
+    [Example 1 Use a predefined color scheme](#example-1-use-a-predefined-color-scheme)  
 
 A total of 20 different color schemes for both light and dark modes, are available as predefined color schemes. These 
 are ready to use examples, but you can just easily create your own custom color schemes and make themes from them. If
