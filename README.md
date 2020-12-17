@@ -208,21 +208,24 @@ FlexThemeModeSwitch(
 ),
 ```
 
-Using this 3-way theme mode toggle switch is totally optional and not required to use 'FlexColorScheme' based themes.
+Using this 3-way theme mode toggle switch is totally optional and not required to use `FlexColorScheme` based themes.
 It was a simple, yet interesting theme mode design that we decided to include as a bonus feature in the package.
+
 The `FlexThemeModeSwitch` has many properties that allows you to customize it further, please find its API 
 reference here (TODO add link) and its companion, the `ThemeModeOptionButton` reference here (TODO add link).
 Feel free to ignore them if you prefer your own way of toggling the theme mode 3-ways. 
 
-When you run **example 1** you get a sample application that looks like this in light and dark mode:
+#### Building and running example 1
+
+When you build and run **example 1** you get a sample application that looks like this in light and dark mode:
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1al.png?raw=true" alt="ColorScheme example 1 light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1ad.png?raw=true" alt="ColorScheme example 1 dark" width="250"/>
 
 [**Try example 1 live on the web here**](https://rydmike.com/flexcolorscheme1)
 
-Scroll down to see the theme showcase widgets further below presenting the theme with some widgets. This example
-is not using primary color surface branding, it is just a normal theme with a few convenient fixes for
-certain theme properties.
+Scroll down to see the theme showcase widgets further below, they present the theme with some common Material widgets.
+This example is not using primary color surface branding, it is just a normal theme with a few convenient fixes for
+some theme design gaps in Flutter's own themes created with `ThemeData.from` a `ColorScheme`.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1bl.png?raw=true" alt="ColorScheme example 1b light" width="250"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1cl.png?raw=true" alt="ColorScheme example 1c light" width="250"/>
 
