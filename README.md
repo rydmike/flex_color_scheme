@@ -203,25 +203,31 @@ Let us now explore the effect of branded surface color in both light and dark mo
 
 Now that we have tried the branding, you might have noticed that `FlexColorScheme` can also do some trick with the `AppBarTheme` you can easily toggle for both dark and light mode to use primary color, the standard surface/background color, the primary branded surface and bakground versions as well as an extra custom app bar scheme color that does not have to be any of the colors in Flutter `ColorScheme`. The predefined schemes are actually use the color defined for scheme `secondaryVariant` as the custom color used for the app bar. When you make your own theme you can do the same or use a totally not traditional scheme related color as the app bar color.
 
-Here you can see some different branding strengths with branded app bar color defined as well.
+Here you can see some different branding strengths with branded app bar color defined as well. This is medium versus heavy. The medium choice is usually well-balanced, but light can be subtle and nice too. If you want to make a bold statement theme, go with heavy. The visual impact of the branding also depends on how saturated the primary color.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5dl.png?raw=true" alt="ColorScheme example 5d light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5el.png?raw=true" alt="ColorScheme example 5e light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5hl.png?raw=true" alt="ColorScheme example 5h light" width="180"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5dl.png?raw=true" alt="ColorScheme example 5d light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5el.png?raw=true" alt="ColorScheme example 5e light" width="250"/>
 
-Dark mode is nice, with `FlexColorScheme` you can go deeper, to **true black** with the flick of a switch. When using the true black option for dark mode, surface and background are set fully black. This can save power on OLED screens, but it can also cause scrolling issues when pixels turn fully off. If you use branded surfaces with true black on, you will notice that it has less of an impact, only at strong and heavy mode will it have an impact.
+Here are few more images of the heavy version when looking at some widgets as well.
 
-Here is an example of a branded dark theme with true black ON and true black OFF. 
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5hl.png?raw=true" alt="ColorScheme example 5h light" width="180"/>
+
+Dark mode is nice, but with `FlexColorScheme` you can go even "deeper", to **true black** with the flick of a switch. When using the true black option for dark mode, surface and background are set fully black. This can save power on OLED screens, but it can also cause scrolling issues when pixels turn fully off. You can read about this in the Material design guide [here](https://material.io/design/color/dark-theme.html#ui-application) as well (scroll back up one heading to get to the mention of it). 
+ 
+If you use branded surfaces with true black on, you will notice that it has less of an impact, only at strong and heavy mode will it have an impact.
+
+Here is an example of a branded dark theme with true black ON and true black OFF and heavy branding. 
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cd.png?raw=true" alt="ColorScheme example 5c dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bd.png?raw=true" alt="ColorScheme example 5b dark" width="250"/>
 
 ## Behind the scenes
 
-**FlexColorScheme** does not actually use the `ThemeData.from` a passed in `ColorScheme` to make its themes. It uses the `ThemeData` factory directly with some custom theming. It does of course define a `ColorScheme` that is uses for the `ThemeData`. It includes color calculations for the primary color brand blended surfaces, and for the lazy schemes that does not specify all colors in a color scheme.
+**FlexColorScheme** does not actually use the `ThemeData.from` factory with a passed in `ColorScheme` to make its theme. It uses the `ThemeData` factory directly with some custom theming. It does of course define a `ColorScheme` that is uses for the `ThemeData`. It includes color calculations for the primary color brand blended surfaces, and for the lazy schemes that does not specify all colors in a color scheme.
 
-### Applied Theme customizations
+### Theme Customizations and Corrections
 
-In addition to the primary color branded surfaces, full shaded schemes from just one primary color, app bar tricksThe returned `ThemeData` contains some opinionated modifications and dark theme corrections, compared to what you get if you would just use the standard `ThemeData.from` a `ColorScheme`. You can always override these with your own theme modifications by using the `copyWith` method on the resulting theme.
+In addition to the primary color branded surfaces, full shaded schemes from just one primary color, true black and app bar tricks. The returned `ThemeData` contains some opinionated modifications and theme corrections, compared to what you get if you would just use the standard `ThemeData.from` with a `ColorScheme`. You can still of course override this theme with your own theme modifications and additions, by using the `copyWith` method on the resulting theme.
   
-If you want the details of what the differences from the standard `ThemeData.from`factory are, here is a list:
+If you want the details of what the differences compared to the standard `ThemeData.from` factory are, here is a complete list:
 
    * `ScaffoldBackground` has its color own property in `FlexColorScheme` and
      can if so desired differ from the `ColorScheme` background color. In the
@@ -343,17 +349,19 @@ If you want the details of what the differences from the standard `ThemeData.fro
      very similar to `ElevatedButton`, `OutlineButton` to `OutlinedButton`
      and `FlatButton` to `TextButton`. There are some differences in margins,
      and looks, especially in dark mode, but they are close enough. This is a
-     button style we used before the introduction of the new buttons with  
+     button style we used before the introduction of the new buttons with
      their improved defaults. It just happened to be very close as theme was
      based on how things looked in the design guide prior to Flutter
      releasing the new buttons that fully implement the correct design. 
-     The newer buttons are thus still nicer, especially when it     
+     
+     The newer buttons are thus still nicer, especially when it
      comes to their interactions and all the theming options they provide,
      but they are tedious to theme. If you want to make custom styled
      buttons we still recommend using the newer buttons instead of the old ones,
-     as they offer more customization possibilities. The theming applied to the
-     old buttons make them work well enough, that most might not even notice 
-     if you still use them. 
+     as they offer more customization possibilities. Still, this theming applied 
+     to the old buttons make them look close enough to the new ones, with
+     their nice defaults. To the extent that most might not even notice 
+     if you still use the old buttons. 
      
    * The default theme for Chips contain a design bug that makes the
      selected `ChoiceChip()` widget look disabled in dark mode, regardless if
