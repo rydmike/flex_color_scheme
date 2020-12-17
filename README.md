@@ -79,30 +79,25 @@ used widgets.
 
 If you just want to have a quick look at all the example applications, you can try live web versions of them.
 
-   [**Try example 1**](https://rydmike.com/flexcolorscheme1/)
-* Use a built-in scheme as your application theme and toggle between its light and dark variant, or allow device mode
-   setting to control if the dark or light theme is used.
+[**Try example 1**](https://rydmike.com/flexcolorscheme1)
+: Use a built-in scheme as your application theme and toggle between its light and dark variant, or allow device mode
+  setting to control if the dark or light theme is used.
    
-   [**Try example 1**](https://rydmike.com/flexcolorscheme1/)
+[**Try example 2**](https://rydmike.com/flexcolorscheme2)
+: Like the previous example, but here we use custom colors to make a custom scheme and turn it into a theme.
 
-2. Like the previous example, but here we use custom colors to make a custom scheme and turn it into a theme.
-
-   [**Try example 2**](https://rydmike.com/flexcolorscheme2/)  
-
-3. In this example we can toggle the active theme between 3 different predefined color schemes, plus the custom
-   one we made. 
+[**Try example 3**](https://rydmike.com/flexcolorscheme3)  
+: In this example we can toggle the active theme between 3 different predefined color schemes, plus the custom
+  one we made. 
    
-   [**Try example 3**](https://rydmike.com/flexcolorscheme3/)
-
-4. In example 4 we can toggle between all the different built in themes.
+[**Try example 4**](https://rydmike.com/flexcolorscheme4)
+: In example 4 we can toggle between all the different built in themes.
    
-   [**Try example 4**](https://rydmike.com/flexcolorscheme4/)
-
-5. The last and most complex example presents more configuration options that you can modify interactively.
-   This example is more suitable to be tested on a tablet, desktop or desktop web browser. 
-   It is presented in more detail further below.
+[**Try example 5**](https://rydmike.com/flexcolorscheme5)
+: The last and most complex example presents more configuration options, that you can modify interactively.
+  This example is best seen and tested on a tablet, desktop or desktop web browser rather than on a phone, but it
+  certainly works on a phone sized canvas too. TH example is explained in more detail further below.
    
-   [**Try example 5**](https://rydmike.com/flexcolorscheme5/)
 
 ### Example 1) Use a predefined color scheme{#example-1} 
 
