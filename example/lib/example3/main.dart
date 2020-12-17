@@ -60,8 +60,8 @@ class _DemoAppState extends State<DemoApp> {
       debugShowCheckedModeBanner: false,
       title: 'FlexColorScheme',
       // Define the light theme for the app, using current theme index and
-      // medium branded surfaces. Then use the .toTheme method to create and
-      // return a slightly opinionated theme using these properties.
+      // strong branded surfaces. Then use the .toTheme method to create and
+      // return a theme using these properties.
       theme: FlexColorScheme.light(
         colors: flexScheme == FlexScheme.custom
             ? customFlexScheme.light

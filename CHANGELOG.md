@@ -16,5 +16,6 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 - [ ] Review and update the API.
 - [ ] Review and correct documentation mistakes and typos, first pass anyway.
 - [ ] Release version 1.0.0 on pub.dev.
+- [ ] Add an API the can create the dark scheme based on the light primary color.
 - [ ] Version 1.0.x: Add tests.
 - [ ] Version 2.0.0-nullsafety.1: Add null safe version.
