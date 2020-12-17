@@ -566,6 +566,8 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: AppConst.edgePadding),
+                    // A theme mode switch that also includes color indicators
+                    // to show what the current theme looks like.
                     child: FlexThemeModeSwitch(
                       themeMode: widget.themeMode,
                       onThemeModeChanged: widget.onThemeModeChanged,
