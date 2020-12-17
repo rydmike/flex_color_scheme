@@ -151,7 +151,7 @@ class _DemoAppState extends State<DemoApp> {
   @override
   void initState() {
     themeMode = ThemeMode.light;
-    themeIndex = 21; // Start with the last index, the custom olive green one.
+    themeIndex = 7; // Start with deep blue sea.
     flexAppBarStyle = FlexAppBarStyle.primary;
     flexSurface = FlexSurface.medium;
     tooltipsMatchBackground = false;

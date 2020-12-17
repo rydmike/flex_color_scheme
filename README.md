@@ -18,6 +18,7 @@ interesting twists and features.
     * [Example 5 Full featured demo](#example-5-full-featured-demo)  
 * [Behind the scenes](#behind-the-scenes)  
     * [Theme Customizations and Corrections](#theme-customizations-and-corrections)
+* [API Reference](https://pub.dev/documentation/flex_color_picker/latest/flex_color_scheme/flex_color_scheme-library.html)    
     
 A total of 20 different color schemes for both light and dark modes, are available as predefined color schemes. These 
 are ready to use examples, but you can just easily create your own custom color schemes and make themes from them. If
