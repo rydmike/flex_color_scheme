@@ -609,15 +609,15 @@ to create pretty well toned themes from just a single color for each theme mode.
        // In this example we also demonstrate how to create the same theme with
        // the standard from color scheme ThemeData factory. The surface style
        // works, but will not be applied as elegantly, but it works fairly OK up
-       // to medium blend. The app bar style has no effect here, nor the tooltip
+       // to medium branding. The app bar style has no effect, nor the tooltip
        // style. We also have to make sure we use the same typography as the one
        // used in FlexColorScheme, otherwise the animated theme will show an
        // assertion error as it cannot animate between different typography or
        // null default typography in the theme data.
        // When toggling between the standard ThemeData.from and the
        // FlexColorScheme.toTheme we can observe the differences and also see
-       // some of the colors the standard method does not fully adjust to match
-       // the used color scheme.
+       // some of the theme colors that the standard method does not adjust
+       // to match the used color scheme.
        theme: useToThemeMethod
            ? FlexColorScheme.light(
                colors: myFlexSchemes[themeIndex].light,
@@ -743,7 +743,7 @@ color scheme based themes created by `FlexColorScheme.toTheme` and `ThemeData.fr
 the live web demo where the differences are even easier to observe since you can have both versions open side by 
 side, in a large browser windows.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bl.png?raw=true" alt="ColorScheme example 5b light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cl.png?raw=true" alt="ColorScheme example 5c light" width="250"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bl.png?raw=true" alt="ColorScheme example 5b light" width="260"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cl.png?raw=true" alt="ColorScheme example 5c light" width="260"/>
 
 Now that we have tried the branding, you might have noticed that `FlexColorScheme` can also do some tricks
 with the `AppBarTheme`. You can easily toggle both dark and light mode app bar to use differently themed background.
@@ -763,7 +763,7 @@ impact of the branding also depends on how saturated the primary color.
 
 Here are few more images of the heavy primary color branded version, when looking at some widgets as well.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5hl.png?raw=true" alt="ColorScheme example 5h light" width="180"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="200"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="200"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5hl.png?raw=true" alt="ColorScheme example 5h light" width="200"/>
 
 Dark mode is nice, but with `FlexColorScheme` you can go even "deeper", to **true black** with the flick of a 
 switch. When using the true black option for dark mode, surface, background and scaffold background are set to 
@@ -779,9 +779,9 @@ and backgrounds then avoid combining true black mode with branded surfaces. On t
 darker theme than normal dark theme eliminates the scrolling issue, since all background colored pixels are not
 fully off in the strong and heavy branding modes.
 
-Here is an example of a branded dark theme with true black ON and true black OFF when using heavy branding. 
+Here is an example of a branded dark theme with true black OFF and true black ON when using heavy branding. 
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cd.png?raw=true" alt="ColorScheme example 5c dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bd.png?raw=true" alt="ColorScheme example 5b dark" width="250"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cd.png?raw=true" alt="ColorScheme example 5c dark" width="260"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bd.png?raw=true" alt="ColorScheme example 5b dark" width="260"/>
 
 ## Behind the scenes
 
