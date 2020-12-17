@@ -1,5 +1,11 @@
 # FlexColorScheme
 
+> ## PRERELEASE VERSION !!
+> This package is still being worked on, both regarding the API and its documentation. 
+> * API is only 95% ready.
+> * Documentation is about 80% ready.
+> * The live web versions mentioned in the example have not been published yet.
+
 **FlexColorScheme** helps you make beautiful Flutter themes, with optional level of primary color branded surfaces.
 The created themes are based on the same concept as Flutter's newer `ColorScheme` based themes, but with a few
 interesting twists and features.
@@ -20,11 +26,12 @@ interesting twists and features.
     * [Theme Customizations and Corrections](#theme-customizations-and-corrections)
 * [API Reference](https://pub.dev/documentation/flex_color_picker/latest/flex_color_scheme/flex_color_scheme-library.html)    
     
-A total of 20 different color schemes for both light and dark modes, are available as predefined color schemes. These 
-are ready to use examples, but you can just easily create your own custom color schemes and make themes from them. If
-you have seen the Flutter [FlexFold web demo](https://rydmike.com/demoflexfold) application, then you have already seen
-**FlexColorScheme** in action. The **FlexFold** demo uses this package for its fancy theming and to enable switching 
-between all the themes effortlessly. The examples in this package show you how it is done.
+A total of 20 different color schemes for both light and dark modes are available as predefined color schemes. These 
+are ready to use nice color schemes, but you can just easily create your own custom color schemes and make themes 
+from them. If you have seen the Flutter [**FlexFold web demo**](https://rydmike.com/demoflexfold) application, then you 
+have already seen **FlexColorScheme** in action. The FlexFold demo uses this package for its 
+fancy theming and to enable switching between all the themes effortlessly. 
+The examples in this package show you how it is done.
 
 FlexColorScheme makes a few opinionated, but subtle theme modifications compared to the default Flutter `ThemeData.from`
 themes created from a `ColorScheme`. It also corrects a few minor theme inconsistencies, that exist in the
@@ -184,6 +191,26 @@ application theming. The critical parts are in the above `MaterialApp` theme def
 contains UI to visually show what the defined example looks like in an application with commonly used Widgets.
 It also allows interaction with a few FlexColorScheme APIs in later examples. All examples include
 the theme mode switch.
+
+The only thing on the `HomePage` of interest is perhaps the `FlexThemeModeSwitch`, which is the UI 3-way theme mode
+toggle switch used in the examples to change theme mode. Using it is very simple, pass it the selected theme mode, the
+active `FlexSchemeData` scheme and check the `onThemeModeChanged` callback for changes, and act on it.
+
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/theme_mode_switch.png?raw=true" alt="theme mode switch" width="200"/>
+
+```dart
+FlexThemeModeSwitch(
+  themeMode: themeMode,
+  onThemeModeChanged: onThemeModeChanged,
+  flexSchemeData: flexSchemeData,
+),
+```
+
+Using this 3-way theme mode toggle switch is totally optional and not required to use 'FlexColorScheme' based themes.
+It was a simple, yet interesting theme mode design that we decided to include as a bonus feature in the package.
+The `FlexThemeModeSwitch` has many properties that allows you to customize it further, please find its API 
+reference here (TODO add link) and its companion, the `ThemeModeOptionButton` reference here (TODO add link).
+Feel free to ignore them if you prefer your own way of toggling the theme mode 3-ways. 
 
 When you run **example 1** you get a sample application that looks like this in light and dark mode:
 
