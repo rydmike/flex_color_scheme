@@ -7,11 +7,15 @@ interesting twists and features.
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
 
 ## Contents
-  [Getting Started](#getting-started)  
-    [Default Sample Application](#default-sample-application)  
-  [Tutorial](#tutorial)  
-    [Live WEB versions of the examples](#live-web-versions-of-the-examples)  
-    [Example 1 Use a predefined color scheme](#example-1-use-a-predefined-color-scheme)  
+* [Getting Started](#getting-started)  
+    * [Default Sample Application](#default-sample-application)  
+* [Tutorial](#tutorial)  
+    * [Live WEB versions of the examples](#live-web-versions-of-the-examples)  
+    * [Example 1 Use a predefined color scheme](#example-1-use-a-predefined-color-scheme)  
+    * [Example 2 Create a custom color scheme](#example-2-create-a-custom-color-scheme)
+    * [Example 3 Switch between different color schemes](#example-3-switch-between-different-color-schemes)  
+    * [Example 4 Switch between all built in color schemes](#example-4-switch-between-all-built-in-color-schemes)
+    * [Example 5 Full featured demo](#example-5-full-featured-demo)
 
 A total of 20 different color schemes for both light and dark modes, are available as predefined color schemes. These 
 are ready to use examples, but you can just easily create your own custom color schemes and make themes from them. If
@@ -174,13 +178,13 @@ When you run **example 1** you get a sample application that looks like this in 
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1al.png?raw=true" alt="ColorScheme example 1 light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1ad.png?raw=true" alt="ColorScheme example 1 dark" width="250"/>
 
-[See example 1 live on the web here.](https://rydmike.com/flexcolorscheme1)
+[**Try example 1 live on the web here**](https://rydmike.com/flexcolorscheme1)
 
 Scroll down to see the theme showcase widgets further below presenting the theme with some widgets. This example is not using primary color surface branding, it is just a normal theme with a few convenient fixes for certain theme properties.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1bl.png?raw=true" alt="ColorScheme example 1b light" width="250"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1cl.png?raw=true" alt="ColorScheme example 1c light" width="250"/>
 
-## Example 2) Create a custom color scheme
+## Example 2 Create a custom color scheme
 
 This example shows how you can define your own FlexSchemeData and create a FlexColorScheme based theme from it. A theme showcase widget shows the theme with several common Material widgets.
 
@@ -261,13 +265,13 @@ class _DemoAppState extends State<DemoApp> {
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2al.png?raw=true" alt="ColorScheme example 2 light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2ad.png?raw=true" alt="ColorScheme example 2 dark" width="250"/>
 
-[See example 2 live on the web here.](https://rydmike.com/flexcolorscheme2)
+[**Try example 2 live on the web here**](https://rydmike.com/flexcolorscheme2)
 
 Scroll down to see the theme showcase widgets further below presenting the theme with some widgets. This example is not using primary color surface branding, it is just a normal theme with a few convenient fixes for certain theme properties.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2bl.png?raw=true" alt="ColorScheme example 2b light" width="250"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2cl.png?raw=true" alt="ColorScheme example 2c light" width="250"/>
 
-### Example 3) Toggle between different color schemes
+### Example 3 Switch between different color schemes
 
 This example shows how you can use three built-in color schemes, and add one custom scheme as selectable FlexColorScheme based theme options in an application. The example also uses strong branded surface colors. A theme showcase widget shows the theme with several common Material widgets.
 
@@ -373,9 +377,9 @@ This example shows how you can use three built-in color schemes, and add one cus
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex3cl.png?raw=true" alt="ColorScheme example 3c light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex3cd.png?raw=true" alt="ColorScheme example 3c dark" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex3dl.png?raw=true" alt="ColorScheme example 3d light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex3dd.png?raw=true" alt="ColorScheme example 3d dark" width="180"/>
 
-[See example 3 live on the web here.](https://rydmike.com/flexcolorscheme3)
+[**Try example 3 live on the web here**](https://rydmike.com/flexcolorscheme3)
 
-### Example 4) Toggle between all built in color schemes 
+### Example 4 Switch between all built in color schemes 
 
 This example shows how you can use all the built in color schemes in FlexColorScheme to interactively select which one of the built in schemes is used to define the active theme. The example also uses medium strength branded background and surface colors. A theme showcase widget shows the theme with several common Material widgets.
 
@@ -456,7 +460,9 @@ This example shows how you can use all the built in color schemes in FlexColorSc
 
 [See example 4 live on the web here.](https://rydmike.com/flexcolorscheme4)
 
-### Example 5) All built-in themes, plus two custom ones, with branded surfaces, app bar theme toggle and more 
+### Example 5 Full featured demo 
+
+All built-in themes, plus two custom ones, with branded surfaces, app bar theme toggle and more. 
 
 This example shows how you can use all the built in color schemes in FlexColorScheme to define themes from them and how you can define your own custom scheme colors and use them together with the predefined ones. It can give you an idea of how you can create your own complete custom list of themes if you do not want to use any of the predefined ones.
 
@@ -737,7 +743,7 @@ With this example we include a side rail, it actually expands to menu on web sit
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5al.png?raw=true" alt="ColorScheme example 5 light" width="250"/>
 
-[See example 5 live on the web here.](https://rydmike.com/flexcolorscheme5)
+[**Try example 5 live on the web here**](https://rydmike.com/flexcolorscheme5)
 
 Let us now explore the effect of branded surface color in both light and dark mode. Branded surfaces are often associated with dark mode, but it works with light mode too. Below you see how the right color get blended into to material surface and even more so into material background color. This is using the medium branding strength. You can use the toggle in the example to change from standard no branding, to light, medium, strong and heavy. The scaffold background does not receive any branding, before the heavy mode. You might think that this and all the other theming can be done by just passing the same scheme colors to the `ThemeData.from` factory. That is why this demo allows you to flip a switch to do just that so you can see and observe the theme difference between color scheme based themes created by `FlexColorScheme.toTheme` and `ThemeData.from`. Feel free to give it a try, The differences are ven easier to observer on the Web version where you can have both version side by side in different browser windows.
 
