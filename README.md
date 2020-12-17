@@ -10,13 +10,15 @@ interesting twists and features.
 * [Getting Started](#getting-started)  
     * [Default Sample Application](#default-sample-application)  
 * [Tutorial](#tutorial)  
-    * [Live WEB versions of the examples](#live-web-versions-of-the-examples)  
-    * [Example 1 Use a predefined color scheme](#example-1-use-a-predefined-color-scheme)  
-    * [Example 2 Create a custom color scheme](#example-2-create-a-custom-color-scheme)
-    * [Example 3 Switch between different color schemes](#example-3-switch-between-different-color-schemes)  
-    * [Example 4 Switch between all built in color schemes](#example-4-switch-between-all-built-in-color-schemes)
-    * [Example 5 Full featured demo](#example-5-full-featured-demo)
-
+    * [Live WEB versions of the examples](#live-web-versions-of-the-examples)    
+    * [Example 1 Use a predefined color scheme](#example-1-use-a-predefined-color-scheme)    
+    * [Example 2 Create a custom color scheme](#example-2-create-a-custom-color-scheme)   
+    * [Example 3 Switch between different color schemes](#example-3-switch-between-different-color-schemes)    
+    * [Example 4 Switch between all built in color schemes](#example-4-switch-between-all-built-in-color-schemes)    
+    * [Example 5 Full featured demo](#example-5-full-featured-demo)  
+* [Behind the scenes](#behind-the-scenes)  
+    * [Theme Customizations and Corrections](#theme-customizations-and-corrections)
+    
 A total of 20 different color schemes for both light and dark modes, are available as predefined color schemes. These 
 are ready to use examples, but you can just easily create your own custom color schemes and make themes from them. If
 you have seen the Flutter [FlexFold web demo](https://rydmike.com/demoflexfold) application, then you have already seen
@@ -458,7 +460,7 @@ This example shows how you can use all the built in color schemes in FlexColorSc
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4al.png?raw=true" alt="ColorScheme example 4a light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4bl.png?raw=true" alt="ColorScheme example 4b light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4cl.png?raw=true" alt="ColorScheme example 4c light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4cd.png?raw=true" alt="ColorScheme example 4c dark" width="180"/>
 
-[See example 4 live on the web here.](https://rydmike.com/flexcolorscheme4)
+[**Try example 4 live on the web here**](https://rydmike.com/flexcolorscheme4)
 
 ### Example 5 Full featured demo 
 
