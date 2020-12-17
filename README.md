@@ -80,7 +80,7 @@ used widgets.
 If you just want to have a quick look at all the example applications, you can try live web versions of them.
 
    [**Try example 1**](https://rydmike.com/flexcolorscheme1/)
-1. Use a built-in scheme as your application theme and toggle between its light and dark variant, or allow device mode
+* Use a built-in scheme as your application theme and toggle between its light and dark variant, or allow device mode
    setting to control if the dark or light theme is used.
    
    [**Try example 1**](https://rydmike.com/flexcolorscheme1/)
