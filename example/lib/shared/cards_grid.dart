@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../shared/constants.dart';
+import 'constants.dart';
 
 // It is not necessary to review or understand the code in this file in order
 // to understand how to use the FlexColorScheme package demonstrated in
@@ -15,18 +15,18 @@ class CardsGrid extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraint) {
         final int nrOfColumns =
-            (constraint.maxWidth.toInt()) ~/ kMinCardWidth.toInt();
+            (constraint.maxWidth.toInt()) ~/ AppConst.minCardWidth.toInt();
         return GridView.builder(
-          padding: const EdgeInsets.all(kEdgePadding / 2),
+          padding: const EdgeInsets.all(AppConst.edgePadding / 2),
           shrinkWrap: true,
           primary: false,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: nrOfColumns == 0 ? 1 : nrOfColumns,
-            mainAxisSpacing: kEdgePadding / 2,
-            crossAxisSpacing: kEdgePadding / 2,
+            mainAxisSpacing: AppConst.edgePadding / 2,
+            crossAxisSpacing: AppConst.edgePadding / 2,
             childAspectRatio: 1.4,
           ),
-          itemCount: kMaxCards,
+          itemCount: AppConst.maxCards,
           itemBuilder: (_, int index) => Card(
             clipBehavior: Clip.antiAlias,
             elevation: 1.5,

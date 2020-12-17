@@ -1,22 +1,18 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../shared/constants.dart';
-import '../shared/flex_theme_mode_switch.dart';
-import '../shared/page_body.dart';
-import '../shared/show_theme_colors.dart';
-import '../shared/theme_showcase.dart';
-
-void main() => runApp(const DemoApp());
+import '../all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 1)
 //
 // This example shows how you can use a selected predefined color scheme in
 // FlexColorScheme to define light and dark themes using the scheme
-// and switch between the light and dark mode.
+// and then switch between the light and dark mode.
 // A theme showcase widget shows the theme with several common Material widgets.
 // -----------------------------------------------------------------------------
+
+void main() => runApp(const DemoApp());
 
 class DemoApp extends StatefulWidget {
   const DemoApp({Key key}) : super(key: key);
@@ -38,7 +34,7 @@ class _DemoAppState extends State<DemoApp> {
   @override
   Widget build(BuildContext context) {
     // Select the predefined flex scheme to use. Feel free to modify the used
-    // FlexScheme enum value to try other built-in color schemes.
+    // FlexScheme enum value below to try other built-in color schemes.
     const FlexScheme usedFlexScheme = FlexScheme.mandyRed;
 
     return MaterialApp(
@@ -61,16 +57,16 @@ class _DemoAppState extends State<DemoApp> {
       home: HomePage(
         // We pass it the current theme mode.
         themeMode: themeMode,
-        // On the home page we toggle theme mode between light and dark.
+        // On the home page we can toggle theme mode between light and dark.
         onThemeModeChanged: (ThemeMode mode) {
           setState(() {
             themeMode = mode;
           });
         },
-        // Pass in the FlexSchemeData we use for active theme. Not really
+        // Pass in the FlexSchemeData we used for the active theme. Not really
         // needed to use FlexColorScheme, but we will use it to show the
         // active theme's name, descriptions and colors in the demo.
-        // We also use it for a custom theme mode switch that shows the theme's
+        // We also use it for the theme mode switch that shows the theme's
         // color's in the different theme modes.
         flexSchemeData: FlexColor.schemes[usedFlexScheme],
       ),
@@ -103,10 +99,11 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('FlexColorScheme Example 1'),
         elevation: 0,
+        actions: const <Widget>[AboutIconButton()],
       ),
       body: PageBody(
         child: ListView(
-          padding: const EdgeInsets.all(kEdgePadding),
+          padding: const EdgeInsets.all(AppConst.edgePadding),
           children: <Widget>[
             Text('Theme', style: headline4),
             const Text(
@@ -119,7 +116,8 @@ class HomePage extends StatelessWidget {
             ),
             // A 3-way theme mode toggle switch.
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: kEdgePadding),
+              padding:
+                  const EdgeInsets.symmetric(vertical: AppConst.edgePadding),
               child: FlexThemeModeSwitch(
                 themeMode: themeMode,
                 onThemeModeChanged: onThemeModeChanged,
@@ -134,7 +132,7 @@ class HomePage extends StatelessWidget {
             ),
             // Show all key active theme colors.
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: kEdgePadding),
+              padding: EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
               child: ShowThemeColors(),
             ),
             const Divider(),

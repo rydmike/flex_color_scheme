@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../shared/constants.dart';
+import 'constants.dart';
 
 // It is not necessary to review or understand the code in this file in order
 // to understand how to use the FlexColorScheme package demonstrated in
@@ -9,7 +9,6 @@ import '../shared/constants.dart';
 // function for the demo, other than to create a visual demo of what the
 // example theme looks like with a side rail or side menu that uses the primary
 // color branded surface or background colors.
-
 class SideMenu extends StatefulWidget {
   const SideMenu({
     Key key,
@@ -75,7 +74,9 @@ class _SideMenuState extends State<SideMenu> {
                         padding:
                             const EdgeInsets.only(), //  Removes all edge insets
                         children: <Widget>[
+                          // A dummy user profile on the dummy menu/rail.
                           const _UserProfile(),
+                          // Create a list of dummy menu items
                           for (int i = 0; i < 8; i++)
                             _SideItem(
                               width: size.maxWidth,
@@ -104,7 +105,7 @@ class _SideMenuState extends State<SideMenu> {
   }
 }
 
-// Menu side items, just to make the demo more real use case like
+// Menu side items, just to make the demo look more like a real use case.
 class _SideItem extends StatelessWidget {
   const _SideItem({
     Key key,
@@ -167,7 +168,7 @@ class _SideItem extends StatelessWidget {
                                   : theme.colorScheme.onSurface
                                       .withOpacity(0.55)),
                         ),
-                        if (width < kShrinkWidth + 10)
+                        if (width < AppConst.shrinkWidth + 10)
                           const SizedBox.shrink()
                         else
                           Text(
@@ -192,7 +193,7 @@ class _SideItem extends StatelessWidget {
   }
 }
 
-// A demo user profile widget that we use as leading widget ins side panel.
+// A dummy user profile widget that we use as leading widget ins side panel.
 class _UserProfile extends StatefulWidget {
   const _UserProfile({Key key}) : super(key: key);
 
@@ -229,7 +230,7 @@ class _UserProfileState extends State<_UserProfile> {
       },
       leading: CircleAvatar(
         backgroundColor: theme.colorScheme.primary,
-        radius: kShrinkWidth / 2 - hPadding,
+        radius: AppConst.shrinkWidth / 2 - hPadding,
         child: Text('JS',
             style: primaryTextTheme.subtitle1.copyWith(
                 color: theme.colorScheme.onPrimary,

@@ -1,9 +1,18 @@
+// NOTE:
+// If you clone the repo to build the samples, then open the project example
+// folder in your IDE to build this sample.
+// If you want to build all the other examples one by one without setting
+// up different configurations in you IDE for the different main files. You can
+// also just copy paste in each sample's code below and build it. Just fix the
+// relative import of the all the shared imports to:
+// import 'all_shared_imports.dart';
+// -----------------------------------------------------------------------------
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../all_shared_imports.dart';
+import 'all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 5)

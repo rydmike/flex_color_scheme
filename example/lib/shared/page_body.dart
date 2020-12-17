@@ -9,11 +9,11 @@ import 'constants.dart';
 // A wrapper for a page body.
 //
 // It provides the following features to the content of the page:
-// - Add a scrollbar
-// - Add the capability to un-focus a control like a TextFiled by clicking on
+// - Adds a scrollbar
+// - Adds the capability to un-focus a control like a TextFiled by clicking on
 //   the background.
-// - Center the content and limit the content width when a given constraint
-//   is exceeded, in this a constant value we defined.
+// - Center the content and limit the content width when a given width
+//   constraint value  is exceeded, in this case an app level constant.
 class PageBody extends StatelessWidget {
   const PageBody({Key key, this.child}) : super(key: key);
   final Widget child;
@@ -25,15 +25,15 @@ class PageBody extends StatelessWidget {
         // This allows us to un-focus a widget, typically a TextField with focus
         // by tapping somewhere outside it.
         onTap: () => FocusScope.of(context).unfocus(),
-        // The Center and ConstrainedBox is a neat way of making a layout that
-        // will never be wider than the width constraint and when the available
-        // width get wider than the constraint, the body never gets any
-        // wider and the content will be in centered column. A common web page
-        // layout, in order to never make the content so wide that it becomes
-        // difficult to read.
+        // The Center plus ConstrainedBox is a neat way of making a layout that
+        // will never be wider than the width constraint, then when available
+        // width gets wider than the constraint, the body never gets any
+        // wider and the content remains in a centered column. This is also a
+        // common web page layout, used in order to never make the content so
+        // wide that it becomes difficult to read on really large screens.
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: kMaxContentWidth),
+            constraints: const BoxConstraints(maxWidth: AppConst.maxBodyWidth),
             child: child,
           ),
         ),

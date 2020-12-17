@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-// Theme showcase for theme the current theme.
+// It is not necessary to review or understand the code in this file in order
+// to understand how to use the FlexColorScheme package demonstrated in
+// the examples.
+
+// Theme showcase for the current theme.
 //
-// Use this widget to preview your themes impact on [ThemeData] and see
+// Use this widget to review your theme's impact on [ThemeData] and see
 // how it looks with different Material widgets.
 //
 // This simple material theme demo is based on similar work in package
 // https://pub.dev/packages/flutter_material_showcase developed by
-// Miguel Beltran, thanks and credits belong to him for it.
+// Miguel Beltran, thanks and credits belong to him for the idea.
 //
-// This version adds a few more demo widgets, it also removes the
-// Calendar that exists in the original version.
+// This version adds more demo widgets, and removes the Calendar that exists
+// in the original version.
 //
 // This stateful widget is is only used in the sample to provide visual feedback
 // on how each selected and demonstrated FlexColorScheme based theme looks like.
-//
-// It is not needed to review the content of this file to understand the
-// FlexColorScheme usage demonstrated in this example.
-
 class ThemeShowcase extends StatefulWidget {
   const ThemeShowcase({
     Key key,

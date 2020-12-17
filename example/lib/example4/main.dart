@@ -2,13 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../shared/constants.dart';
-import '../shared/flex_theme_mode_switch.dart';
-import '../shared/page_body.dart';
-import '../shared/show_theme_colors.dart';
-import '../shared/theme_showcase.dart';
-
-void main() => runApp(const DemoApp());
+import '../all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 4)
@@ -19,6 +13,8 @@ void main() => runApp(const DemoApp());
 // The example also uses medium strength branded background and surface colors.
 // A theme showcase widget shows the theme with several common Material widgets.
 // -----------------------------------------------------------------------------
+
+void main() => runApp(const DemoApp());
 
 class DemoApp extends StatefulWidget {
   const DemoApp({Key key}) : super(key: key);
@@ -78,10 +74,10 @@ class _DemoAppState extends State<DemoApp> {
             themeIndex = index;
           });
         },
-        // Pass in the FlexSchemeData we use for active theme. Not really
+        // Pass in the FlexSchemeData we used for the active theme. Not really
         // needed to use FlexColorScheme, but we will use it to show the
         // active theme's name, descriptions and colors in the demo.
-        // We also use it for a custom theme mode switch that shows the theme's
+        // We also use it for the theme mode switch that shows the theme's
         // color's in the different theme modes.
         flexSchemeData: FlexColor.schemesList[themeIndex],
       ),
@@ -130,11 +126,12 @@ class HomePage extends StatelessWidget {
           child: Scaffold(
             appBar: AppBar(
               title: const Text('FlexColorScheme Example 4'),
+              actions: const <Widget>[AboutIconButton()],
               elevation: 0,
             ),
             body: PageBody(
               child: ListView(
-                padding: const EdgeInsets.all(kEdgePadding),
+                padding: const EdgeInsets.all(AppConst.edgePadding),
                 children: <Widget>[
                   Text('Theme', style: headline4),
                   const Text(
@@ -149,7 +146,8 @@ class HomePage extends StatelessWidget {
                   ),
                   // A 3-way theme mode toggle switch.
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: kEdgePadding),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppConst.edgePadding),
                     child: FlexThemeModeSwitch(
                       themeMode: themeMode,
                       onThemeModeChanged: onThemeModeChanged,
@@ -190,7 +188,8 @@ class HomePage extends StatelessWidget {
                   //
                   // Active theme color indicators.
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: kEdgePadding),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
                     child: ShowThemeColors(),
                   ),
                   const Divider(),
