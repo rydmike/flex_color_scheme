@@ -169,7 +169,7 @@ This example shows how you can use all the built in color schemes in FlexColorSc
  final int a; // Add sample code
  ```
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4al.png?raw=true" alt="ColorScheme example 4 light" width="300"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4ad.png?raw=true" alt="ColorScheme example 4 dark" width="300"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4al.png?raw=true" alt="ColorScheme example 4a light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4bl.png?raw=true" alt="ColorScheme example 4b light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4cl.png?raw=true" alt="ColorScheme example 4c light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4cd.png?raw=true" alt="ColorScheme example 4c dark" width="180"/>
 
 
 ### Example 5) All themes, plus two custom ones, branded surfaces, app bar theme toggle and more 
