@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
-// It is not necessary to review or understand the code in this file in order
-// to understand how to use the FlexColorScheme package demonstrated in
-// the examples.
-
-// I considered making the FlexThemeModeSwitch below a part of the
-// FlexColorScheme, but ultimately I think it easier to just provide as a
-// part of te example applications and you can copy, modify and re-use it
-// as needed.
+import 'flex_color.dart';
 
 /// A simple 3-way Light, Dark and System theme mode switch.
 ///
@@ -55,7 +47,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
               Text('Theme mode', style: Theme.of(context).textTheme.subtitle1),
         ),
         // Selectable thumbnail for light theme mode.
-        _ThemeOption(
+        ThemeModeOption(
           selected: themeMode == ThemeMode.light,
           onSelect: () {
             onThemeModeChanged(ThemeMode.light);
@@ -65,7 +57,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
           scheme: flexSchemeData.light,
         ),
         // Selectable thumbnail for dark theme mode.
-        _ThemeOption(
+        ThemeModeOption(
           selected: themeMode == ThemeMode.dark,
           onSelect: () {
             onThemeModeChanged(ThemeMode.dark);
@@ -79,7 +71,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
         // four colors of either mode and we place them on a grey background
         // to indicate that we do not actually know if it will be light or
         // dark, as that is controlled by the host system.
-        _ThemeOption(
+        ThemeModeOption(
           selected: themeMode == ThemeMode.system,
           onSelect: () {
             onThemeModeChanged(ThemeMode.system);
@@ -98,15 +90,16 @@ class FlexThemeModeSwitch extends StatelessWidget {
   }
 }
 
-// Stateless widget that draw a box with the 4 colors primary, primary variant
-// secondary and secondary variant from a [FlexSchemeColor] class.
-//
-// The widget has a bool [selected] for selected and not selected status.
-// The selected state has a border with width 3, using theme accentColor
-// and unSelected state using theme dividerColor. A VoidCallback provides
-// onTap select action info.
-class _ThemeOption extends StatelessWidget {
-  const _ThemeOption({
+/// Stateless widget that draw a box with the 4 colors primary, primary variant
+/// secondary and secondary variant from a [FlexSchemeColor] class.
+///
+/// The widget has a bool [selected] for selected and not selected status.
+/// The selected state has a border with width 3, using theme accentColor
+/// and unSelected state using theme dividerColor. A VoidCallback provides
+/// onTap select action info.
+class ThemeModeOption extends StatelessWidget {
+  /// Default constructor.
+  const ThemeModeOption({
     Key key,
     @required this.scheme,
     @required this.color,
