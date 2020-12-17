@@ -185,6 +185,8 @@ We pass in the `FlexSchemeData` we used for the active theme to the application'
 order ot to use `FlexColorScheme`, but we will use it to show the active theme's name and descriptions in the
 demo. We also use it for the theme mode switch, that uses the scheme colors in its toggle widget for the different
 theme modes.
+
+#### The home page of the examples
  
 The content of the HomePage in all these examples, is not really so relevant for using `FlexColorScheme` based
 application theming. The critical parts are in the above `MaterialApp` theme definitions. The `HomePage` just
@@ -196,7 +198,7 @@ The only thing on the `HomePage` of interest is perhaps the `FlexThemeModeSwitch
 toggle switch used in the examples to change theme mode. Using it is very simple, pass it the selected theme mode, the
 active `FlexSchemeData` scheme and check the `onThemeModeChanged` callback for changes, and act on it.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/theme_mode_switch.png?raw=true" alt="theme mode switch" width="200"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/theme_mode_switch.png?raw=true" alt="theme mode switch" width="300"/>
 
 ```dart
 FlexThemeModeSwitch(
