@@ -1,18 +1,18 @@
 # FlexColorScheme
 
-FlexColorScheme is a Flutter package to help you make beautiful color branded Flutter themes. The created themes are based on the same concept as Flutter's newer `ColorScheme` based theming, with a few interesting twists.
+FlexColorScheme is a Flutter package to help you make beautiful Flutter themes with optional primary color branded surfaces. The created themes are based on the same concept as Flutter's newer `ColorScheme` based theming, with a few interesting twists.
 
-A total of 20 different color schemes for both light and dark modes are available as predefined color schemes. These are just ready to use examples, you can easily also create your own custom color schemes and make themes from them. If you have seen the Flutter [FlexFold demo](https://rydmike.com/demoflexfold) application, then you have already seen **FlexColorScheme** in action, the demo uses this package for its theming.
+A total of 20 different color schemes for both light and dark modes are available as predefined color schemes. These are ready to use examples, you can just easily create your own custom color schemes and make themes from them. If you have seen the Flutter [FlexFold demo](https://rydmike.com/demoflexfold) application, then you have already seen **FlexColorScheme** in action. The FlexFold demo uses this package for its fancy theming and enable switching between all the themes without any major effort. The examples in this package will show you how it is done.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
 
-FlexColorScheme makes a few opinionated modifications to the default Flutter `ThemeData.from` a `ColorScheme` created theme. It also corrects known minor theme inconsistency issues that exist in the current version of Flutter's `ThemeData.from` factory. Both of these topics are explained in detail further below.
+FlexColorScheme makes a few opinionated modifications compared to the default Flutter `ThemeData.from` theme created from a `ColorScheme`. It also corrects known minor theme inconsistency issues, that exist in the current version of Flutter's `ThemeData.from` factory. Both of these topics are explained in detail further below.
 
-The Material guide also talks about using [color branded surfaces](https://material.io/design/color/dark-theme.html#properties), with FlexColorScheme you can easily create primary color branded themes using four built-in blend strengths of primary color into surface and background color, while avoiding blending it in with the scaffold background color, for all but the highest strength.
+The Material guide also talks about using [color branded surfaces](https://material.io/design/color/dark-theme.html#properties), with **FlexColorScheme** you can easily create such primary color branded themes. This done by using four built-in blend strengths of primary color into surface and background colors, while avoiding blending it in with the scaffold background color, for all but the highest strength.
 
-The color schemes can like Flutter's standard color scheme, be created by specifying all required schemes colors, but you can also specify just the primary color and get all other need colors for a complete color scheme computed based on the provided primary color.
+The scheme colors can like Flutter's standard `ColorScheme`, be created by specifying all required schemes colors, but you can also specify just the primary color and get all other colors needed for a complete color scheme computed based on just the provided primary color.
 
-When you have defined your `FlexColorScheme` you turn it into a theme with the `toTheme` method that returns a `ThemeData` object that you can use just like any other ThemeData object. You can of course still override this returned theme and add additional custom sub-theming to it with the normal ThemeData `copyWith` method. 
+When you have defined your `FlexColorScheme` you turn it into a theme with the `toTheme` method that returns a `ThemeData` object that you can use just like any other `ThemeData` object. You can of course still override this returned theme and add additional custom sub-theming to it with the normal ThemeData `copyWith` method. 
 
 ## Getting Started
 
@@ -34,39 +34,37 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 The package contains five different example applications with increasing complexity.
  
-To try the simplest default sample, example number 1 of FlexColorScheme on a device or simulator, clone the [repository](https://github.com/rydmike/flex_color_scheme) and run the example:
+To try the simplest default sample, example number 1 of `FlexColorScheme` on a device or simulator, clone the [repository](https://github.com/rydmike/flex_color_scheme) and run the example:
 
 ```bash
 cd example/
 flutter run --release
 ```
 
-The result is a sample app that uses one of the built color schemes as its theme, has a light/dark/system theme mode toggle, includes a theme showcase, so you can see the impact of the theme on common Material widgets.
+The result is a sample app that uses one of the built color schemes as its theme, has a light/dark/system theme mode toggle and includes a theme showcase, so you can see the impact of the theme on common Material widgets.
 
 **NOTE:**
->If you clone the repo to build the samples, then open the package `/example` folder in your IDE to build the above default example, which is the same as the example in the `/example/lib/example1` folder. If you want to build all the other examples, without setting up different configurations in you IDE for the different main files, you can just copy paste in each example's code into the `/example/lib/main.dart` file to quickly build it. Just correct the relative import of `import 'all_shared_imports.dart';` in the copy, and you are ready to build it. 
+>If you clone the repo to build the samples, then open the package `/example` folder with your IDE to build the above default example, which is the same as the example in the `/example/lib/example1` folder. If you want to build the other examples, without setting up different configurations in you IDE for the different main files, you can just copy and paste in each example's code into the `/example/lib/main.dart` file to quickly build it. Just correct the relative import of `import 'all_shared_imports.dart';` in the copy, and you are ready to go. 
 
 ## Tutorial
 
-We will review the key parts in each example below and explain the features step by step. For simplicity the example applications do not use any advanced state management solution. The key part to each example is always in the used stateful Material app, where all the scheme setup for the themes are made in these demos.
+We will go through the key topics in each example below and explain the features step by step. For simplicity the example applications do not use any advanced state management solution. The key part to each example is always in the used stateful Material app, where all the scheme setup for the themes are made in these demos. The rest of the content in the examples are just there, so you can change some settings and see the actual results.
 
-The rest of the content in the examples are just there, so you can change some settings and see the actual results.
+### Live WEB demos
 
-### All the examples - Live WEB demos
-
-If you just want to have a quick look at all the example applications you can try the live web versions of them.
+If you just want to have a quick look at all the example applications, you can try live web versions of them.
 
 
+#### Example 1
+Use a built-in scheme as your application theme and toggle between its light and dark variant, or allow device mode setting to control if the dark or light theme is used. [Try example 1 here.](https://rydmike.com/flexcolorscheme1/)
 
-1. Use a built-in scheme as your application theme and toggle between its light and dark variant, or allow device mode setting to control if the dark or light theme is used. [See example 1 here.](https://rydmike.com/flexcolorscheme1/)
+2. Like the previous example, but here we use custom colors to make a custom scheme and turn it into a theme. [Try example 2 here.](https://rydmike.com/flexcolorscheme2/)  
 
-2. Like the previous example, but here we use custom colors to make a custom scheme and turn it into a theme. [See example 2 here.](https://rydmike.com/flexcolorscheme2/)  
+3. In this example we can toggle the active theme between 3 different built in color schemes, plus the custom one we made. [Try example 3 here.](https://rydmike.com/flexcolorscheme3/)
 
-3. In this example we can toggle the active theme between 3 different built in color schemes, plus the custom one we made. [See example 3 here.](https://rydmike.com/flexcolorscheme3/)
+4. In example 4 we can toggle between all the different built in themes. [Try example 4 here.](https://rydmike.com/flexcolorscheme4/)
 
-4. In example 4 we can toggle between all the different built in themes. [See example 4 here.](https://rydmike.com/flexcolorscheme4/)
-
-5. The last, and most complex example presents more configuration options that you can modify interactively. This example is more suitable to be tested on a tablet, desktop or desktop web browser. It is presented in more detail further below. [See example 5 here.](https://rydmike.com/flexcolorscheme5/)
+5. The last, and most complex example presents more configuration options that you can modify interactively. This example is more suitable to be tested on a tablet, desktop or desktop web browser. It is presented in more detail further below. [Try example 5 here.](https://rydmike.com/flexcolorscheme5/)
 
 ### Example 1) Use an existing color scheme 
 
