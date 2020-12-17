@@ -1,3 +1,20 @@
-## [0.0.1] - TODO: Add release date.
+# Changelog
 
-* TODO: Describe initial release.
+All notable changes to the **FlexColorScheme** package will be documented in this file.
+
+## [1.0.0-dev.1] - December 17, 2020
+
+* First development pre-release on pub.dev.
+
+---
+
+## To do list and planned feature updates
+
+- [ ] Release version 1.0.0-dev.1 publicly on GitHub.
+- [ ] Complete the documentation.
+- [ ] Publish live Web versions of the five examples.
+- [ ] Review and update the API.
+- [ ] Review and correct documentation mistakes and typos, first pass anyway.
+- [ ] Release version 1.0.0 on pub.dev.
+- [ ] Version 1.0.x: Add tests.
+- [ ] Version 2.0.0-nullsafety.1: Add null safe version.

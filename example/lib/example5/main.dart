@@ -568,7 +568,7 @@ class _HomePageState extends State<HomePage> {
                   SwitchListTile.adaptive(
                     title: const Text('Dark mode uses true black'),
                     subtitle: const Text(
-                      'Keep OFF normal dark mode.',
+                      'Keep OFF for normal dark mode.',
                     ),
                     value: widget.darkIsTrueBlack,
                     onChanged: widget.onDarkIsTrueBlackChanged,

@@ -72,7 +72,7 @@ void showAppAboutDialog(BuildContext context) {
               ),
               TextSpan(
                 style: aboutTextStyle,
-                text: '. It contains the documentation and the source '
+                text: '. It contains extensive documentation and the source '
                     'of this example application.\n\n',
               ),
               TextSpan(

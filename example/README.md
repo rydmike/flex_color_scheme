@@ -1,16 +1,6 @@
-# Flex ColorPicker Example
+# FlexColorScheme Examples
 
-A simple example application using the Flex ColorPicker package.
+This folder contains 5 different examples on how to use the FlexColorScheme Flutter package.
 
-## Getting Started
+Please see the [package main documentation](https://github.com/rydmike/flex_color_scheme) for more information.
 
-To see the example on a device or simulator, clone the [flex_color_picker](https://github.com/rydmike/flex_color_picker.git) repository and run the example:
-
-```bash
-cd example/
-flutter run --release
-```
-
-The result is a basic default picker on the canvas and another picker that opens in a dialog. The dialog version and has a different style with a few more options present.
-
-<img src="https://github.com/rydmike/flex_color_picker/blob/master/resources/ColorPickerSimpleDemo.png?raw=true" alt="ColorPicker Basic"/>
