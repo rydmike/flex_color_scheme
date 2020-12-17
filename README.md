@@ -125,6 +125,14 @@ The last and most complex example presents more configuration options that you c
 This example is best seen and tested on a tablet, desktop or desktop web browser, rather than on a phone, but it
 certainly works on a phone sized canvas too. This example is explained in more detail further below.
 
+[**Flexfold demo**](https://rydmike.com/demoflexfold)  
+The fanciest example of FlexColorScheme usage is in the [Flexfold web demo app](https://rydmike.com/demoflexfold).
+While this looks cool and perhaps complex...
+<img src="https://rydmike.com/assets/FoldTheme1.gif?raw=true" alt="FlexColorScheme" width="800"/>
+it is actually only slightly more fancy than above example nr 5, that uses almost all the same theming features and 
+exactly the same themes like Flexfold. So just go through the examples, and you will be ready to make cool 
+interactively custom themed apps like the Flexfold demo app in no time.
+
 ## Tutorial
 
 Below we will go through the key topics in each of the 5 examples and explain their key features. For simplicity the
@@ -765,10 +773,10 @@ Flutter `ColorScheme`. The predefined schemes actually use the color defined for
 as the custom color used for the app bar. When you make your own schemes you can do the same or use a totally not 
 scheme related color as the app bar theme color.
 
-Below you can see some different branding strengths with a background parimary branded app bar color used as well.
+Below you can see some different branding strengths with a background primary branded app bar color used as well.
 This example shows medium strength versus heavy branding. The medium choice is usually well-balanced, but light can be 
 subtle and nice too. If you want to make a bold statement theme, go with heavy. Please note that the visual 
-impact of the branding also depends on how saturated the primary color.
+impact of the branding also depends on how saturated the primary color is.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5dl.png?raw=true" alt="ColorScheme example 5d light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5el.png?raw=true" alt="ColorScheme example 5e light" width="250"/>
 
