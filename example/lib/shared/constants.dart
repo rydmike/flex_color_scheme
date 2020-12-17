@@ -10,7 +10,7 @@ class AppConst {
   // When I build a new public version I just make sure to update this info
   // before building them.
   static const String appName = 'FlexColorScheme';
-  static const String version = '1.0.0';
+  static const String version = '1.0.0-dev.1';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
   static const String flutterVersion = 'Flutter dev 1.25.0-8.0.pre';
