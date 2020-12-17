@@ -4,3 +4,4 @@ library flex_color_scheme;
 export 'src/flex_color.dart';
 export 'src/flex_color_scheme.dart';
 export 'src/flex_extensions.dart';
+export 'src/flex_theme_mode_switch.dart';

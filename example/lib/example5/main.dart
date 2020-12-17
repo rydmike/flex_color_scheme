@@ -739,15 +739,6 @@ class _HomePageState extends State<HomePage> {
                   const Divider(),
                   Text('Theme Showcase', style: headline4),
                   const ThemeShowcase(),
-                  const Divider(),
-                  // A Card GridView with responsive column amount. This is
-                  // just here to put some content on the page to stress it
-                  // a bit during resizing and scaling and just for show
-                  // in this demo.
-                  Text('Cards in a Grid', style: headline4),
-                  const Text('These cards are only included to provide '
-                      'more demo content on the responsive main page.'),
-                  const CardsGrid(),
                 ],
               ),
             ),
