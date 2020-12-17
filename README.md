@@ -69,16 +69,17 @@ The result is a sample app that uses one of the built color schemes as its theme
 
 ## Tutorial
 
-We will go through the key topics in each example below and explain the features step by step. For simplicity the
+We will go through the key topics in each of the 5 example and explain the key features. For simplicity the
 example applications do not use any advanced state management solution. The key part to each example is always in
 the used stateful Material app, where all the scheme setup for the themes are made in these demos. The rest of the
-content in the examples are just there, so you can change some settings and see the actual results.
+content in the examples are just there, so you can change some settings and see actual results using commonly 
+used widgets.
 
-### Live WEB demos
+### Live WEB versions
 
 If you just want to have a quick look at all the example applications, you can try live web versions of them.
 
-
+   [**Try example 1**](https://rydmike.com/flexcolorscheme1/)
 1. Use a built-in scheme as your application theme and toggle between its light and dark variant, or allow device mode
    setting to control if the dark or light theme is used.
    
