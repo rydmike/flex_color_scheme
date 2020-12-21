@@ -21,7 +21,8 @@ import 'flex_color.dart';
 /// theme mode's color scheme.
 ///
 /// All other properties are optional, but it has extensive customization
-/// options in order create a theme mode switch widget with a customized look.
+/// options in order create a theme mode switch widget with a customized look,
+/// see API reference for more info.
 class FlexThemeModeSwitch extends StatelessWidget {
   /// Default constructor
   const FlexThemeModeSwitch({
@@ -268,13 +269,15 @@ class FlexThemeModeSwitch extends StatelessWidget {
   }
 }
 
-/// Stateless widget that draws a box with the 4 colors primary, primary variant
-/// secondary and secondary variant from a [FlexSchemeColor] class.
+/// Stateless widget that draws a box with the 4 colors, primary,
+/// primary variant secondary and secondary variant in [flexSchemeColor].
 ///
-/// The widget has a bool [selected] for selected and not selected status.
-/// The selected state has a border with width 3, using theme accentColor
-/// and unSelected state using theme dividerColor. A VoidCallback provides
-/// onTap select action info.
+/// The widget has a required [selected] bool property for selected and
+/// not selected status. A VoidCallback provides [onSelect] provides
+/// select action callback info.
+///
+/// The [FlexThemeModeOptionButton] offers a large number of customization
+/// options, see API reference for more info.
 class FlexThemeModeOptionButton extends StatelessWidget {
   /// Default constructor.
   const FlexThemeModeOptionButton({
