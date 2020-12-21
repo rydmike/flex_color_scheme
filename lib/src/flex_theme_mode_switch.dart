@@ -14,8 +14,10 @@ import 'flex_color.dart';
 /// included in the option toggle button for each theme mode.
 ///
 /// They scheme colors for each button will be in the order:
+/// ```
 /// | Primary    | Primary variant   |
 /// | Secondary  | Secondary variant |
+/// ```
 /// in the option button. In the system choice the 2nd column will instead
 /// contain the dark mode primary and secondary colors, thus combining both
 /// theme mode's color scheme.
@@ -78,7 +80,8 @@ class FlexThemeModeSwitch extends StatelessWidget {
   /// option button./
   final FlexSchemeData flexSchemeData;
 
-  /// Defaults to Text('Theme mode') with style subtitle1, if it is null.
+  /// A leading title widget for the theme mode switch.
+  /// Defaults to `Text('Theme mode')` with style subtitle1, if it is null.
   final Widget title;
 
   /// Option label for theme mode light.
@@ -139,17 +142,17 @@ class FlexThemeModeSwitch extends StatelessWidget {
   final EdgeInsets optionButtonPadding;
 
   /// The margin inside the option button before the scheme color boxes.
-  /// If null, defaults to `const EdgeInsetsDirectional.only(start: 6)`.
+  /// If null, defaults to `const EdgeInsets.all(4)`.
   final EdgeInsets optionButtonMargin;
 
   /// The circular borderRadius of the option button
   /// Defaults to 5.
   final double optionButtonBorderRadius;
 
-  /// The height of an individual scheme color box. Defaults to 25.
+  /// The height of an individual scheme color box. Defaults to 24.
   final double height;
 
-  /// The width of an individual scheme color box. Defaults to 25.
+  /// The width of an individual scheme color box. Defaults to 24.
   final double width;
 
   /// The circular borderRadius of an individual scheme color box.
@@ -355,7 +358,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
   final EdgeInsets optionButtonPadding;
 
   /// The margin inside the option button before the scheme color boxes.
-  /// If null, defaults to `const EdgeInsetsDirectional.only(start: 6)`.
+  /// If null, defaults to `EdgeInsets.all(4)`.
   final EdgeInsets optionButtonMargin;
 
   /// The circular borderRadius of the option button
@@ -480,6 +483,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
 ///
 /// Have defaults for standard use case, but may be modified via parent.
 class _SchemeColorBox extends StatelessWidget {
+  /// Default constructor.
   const _SchemeColorBox({
     Key key,
     @required this.color,

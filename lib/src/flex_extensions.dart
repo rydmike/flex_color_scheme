@@ -19,7 +19,7 @@ import 'package:flutter/material.dart';
 /// used by FlexColorScheme's branded surfaces.
 /// * blend(Color, int).
 ///
-/// The getShadeColor extension is very specific and used mostly to make shades
+/// * getShadeColor extension is very specific and used mostly to make shades
 /// for gradient AppBars.
 ///
 /// The color extension also include getting a color's RGB hex code as a string
