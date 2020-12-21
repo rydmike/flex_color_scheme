@@ -185,7 +185,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  //
+                  const SizedBox(height: 8),
                   // Active theme color indicators.
                   const Padding(
                     padding:

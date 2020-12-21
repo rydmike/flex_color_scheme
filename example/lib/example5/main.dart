@@ -561,6 +561,13 @@ class _HomePageState extends State<HomePage> {
                       themeMode: widget.themeMode,
                       onThemeModeChanged: widget.onThemeModeChanged,
                       flexSchemeData: widget.flexSchemeData,
+                      // Style the selected theme mode's label
+                      selectedLabelStyle: Theme.of(context)
+                          .textTheme
+                          .caption
+                          .copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.primary),
                     ),
                   ),
                   const Divider(),

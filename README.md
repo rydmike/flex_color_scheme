@@ -2,9 +2,8 @@
 
 > ## !!PRE-RELEASE VERSION !!
 > This package is still being worked on, both regarding the API and its documentation. 
-> * API is only about 90% ready.
-> * Documentation is about 80% ready.
-> * The live web versions mentioned in the example have not been published yet.
+> * API is only about 99% ready.
+> * Documentation is about 95% ready.
 
 **FlexColorScheme** helps you make beautiful color scheme based Flutter themes, with optional level of primary 
 color branded surfaces. The created themes are based on the same concept as Flutter's newer `ColorScheme` based themes, 
@@ -62,7 +61,7 @@ In the `pubspec.yaml` of your **Flutter** project, add the following dependency:
 ```yaml
 dependencies:
   ...
-  flex_color_scheme:
+  flex_color_scheme: any
 ```
 
 In your library file add the following import:
@@ -126,19 +125,22 @@ This example is best seen and tested on a tablet, desktop or desktop web browser
 certainly works on a phone sized canvas too. This example is explained in more detail further below.
 
 [**Flexfold demo**](https://rydmike.com/demoflexfold)  
-The fanciest example of FlexColorScheme usage is in the [Flexfold web demo app](https://rydmike.com/demoflexfold).
-While this looks cool and perhaps complex...
+The fanciest example of FlexColorScheme usage is in the [Flexfold demo app](https://rydmike.com/demoflexfold).
+
 <img src="https://rydmike.com/assets/FoldTheme1.gif?raw=true" alt="FlexColorScheme" width="800"/>
-it is actually only slightly more fancy than above example nr 5, that uses almost all the same theming features and 
-exactly the same themes like Flexfold. So just go through the examples, and you will be ready to make cool 
-interactively custom themed apps like the Flexfold demo app in no time.
+
+This might look and feel complicated, but it is actually only slightly more fancy than above example nr 5, 
+that uses almost all the same theming features and exactly the same themes like in Flexfold demo app. 
+So just go through the examples, and you will be ready to make cool 
+interactively custom themed apps like the ones in the Flexfold demo app in no time.
 
 ## Tutorial
 
-Below we will go through the key topics in each of the 5 examples and explain their key features. For simplicity the
+Below we will go through the key topics in each of the 5 examples and explain them. For simplicity the
 example applications do not use any advanced state management solution. The key part to each example is always in
 the used stateful Material app, where all the scheme setup for the themes are made in these demos. The rest of the
-content in the examples are just there to make a relevant visual presentation on the resulting theme.
+content in the examples are just there to make a relevant visual presentation on the resulting theme from the used
+FlexColorScheme.
 
 ### Example 1 Use a predefined color scheme
 
@@ -804,8 +806,9 @@ Here is an example of a branded dark theme with true black OFF and true black ON
 
 ## Behind the scenes
 
-**FlexColorScheme** does not actually use the `ThemeData.from` factory with a passed in `ColorScheme` to make
-its theme. It uses the `ThemeData` factory directly with some custom theming. It does of course define a
+**FlexColorScheme** does not actually use the `ThemeData.from` factory with a passed 
+in `ColorScheme` to make its theme. It uses the `ThemeData` factory directly with some 
+custom theming. It does of course define a
 `ColorScheme` that is uses for the `ThemeData`. It uses color calculations for the primary color
 brand blended surfaces, and for the lazy schemes that does not specify all colors in a color scheme.
 
@@ -821,12 +824,14 @@ If you want the details of what the differences compared to the standard `ThemeD
 are, here is a complete list:
 
    * `ScaffoldBackground` has its color own property in `FlexColorScheme` and
-     can if so desired differ from the `ColorScheme` background color. In the
-     branding implementation, the `scaffoldBackground` typically gets no
+     can if so desired differ from the `ColorScheme` `background` color. In the
+     branding implementation. The `scaffoldBackground` typically gets no
      primary branding applied, only in the heavy choice is there a small
      amount of it. Whereas `background` in the scheme receives the most
      color branding of the surface colors. Which fits well for where the
-     `background` color is used by material in Widgets.
+     `background` color is used on Material in Widgets, but it does not
+     go so well together with `scaffoldBackground`, which is the reason
+     why it got its own scheme color value in this implementation.
      
    * The `dialogBackgroundColor` uses the `ColorScheme.surface` color instead
      of the `ColorScheme.background` because the `background` color gets the
@@ -871,18 +876,22 @@ are, here is a complete list:
      in both light and dark themes that is not dependent on theme primary
      or surface color. This functionality needs a custom text theme to be
      possible to implement it without a context. The implementation does however
-     not give correct localized typography. A new feature implemented via:
-     https://github.com/flutter/flutter/pull/71184 will enable this kind
-     of app bar theme and keep the correct typography localization. This
-     new feature is (as of 13.12.2020) not yet available on the stable channel.
-     The new feature can also not be enabled via Themes only, one must also
-     opt in on an AppBar level, making it difficult to adopt the feature.
-     A proposal to introduce opt in on app bar theme has been submitted, see:
-     https://github.com/flutter/flutter/issues/72206.
-     When the feature and the proposal lands in stable, or only the feature
-     but so that app bars no longer default to old theme, the implementation
-     currently used will be changed to use the new AppBarTheme features.     
-     The `AppBarTheme` elevation defaults to 0.
+     not give correct localized typography. 
+     
+     A new feature implemented via:
+     https://github.com/flutter/flutter/pull/71184 also enables this kind
+     app bar themes and keep the correct typography localization. This new
+     feature is (as of 13.12.2020) not yet available on channel stable.
+     The first version on master could also not be enabled via Themes
+     only, one also had to opt in on AppBar level, making it difficult to
+     adopt the feature. I wrote a proposal to introduce opt in on theme 
+     level too: https://github.com/flutter/flutter/issues/72206
+     The proposal has already been implemented. When these new features land
+     in stable channel, the implementation below will be changed to use
+     the new AppBarTheme feature, as it is better than this work-around
+     since we no longer need a custom text theme to implement it.
+     
+   * The `AppBarTheme` elevation defaults to 0.
      
    * Like standard `ThemeData.from` color scheme themes, the `bottomAppBarColor`
      also uses scheme `surface` color. Additionally, this color is also applied to
@@ -891,7 +900,7 @@ are, here is a complete list:
    * A deviation from `ThemeData.from` color scheme based theme's is
      that `ThemeData.accentColor` is set to color scheme primary and not to
      secondary. This is done to get an easy way for borders on `TextField.decoration`
-     to use theme based primary color in dark mode, and not `accentColor`
+     to use theme based primary color in dark-mode, and not `accentColor`
      color. There may be a bug in the way `InputDecorationTheme` gets used
      by the `InputDecorator`. We were unable to define a theme that would
      work correctly for such a setup without resorting to making `accentColor`
@@ -901,35 +910,26 @@ are, here is a complete list:
      FAB and toggles have their own theme and colors, so they still use the 
      default expected colorScheme.secondary color, despite this change. 
      
-   * The fairly recent `TextSelectionThemeData` is slightly modified. The
-     default for `cursorColor` is `colorScheme.primary`, we also use it, 
-     likewise for the deprecated `ThemeData.cursorColor` property.
-     The default `selectionHandleColor` is color scheme primary, we use a
-     slightly darker custom shade via `primaryColorDark` instead, and
-     do the same for the deprecated `ThemeData.textSelectionHandleColor`. The
-     standard for `selectionColor` is `colorScheme.primary` with opacity
-     value `0.4` for dark, and `0.12` for light mode, we use primary with `0.5` 
-     for dark, and `0.3` for light mode. We apply the same defaults to
-     the deprecated property `ThemeData.textSelectionColor`.
-     
-     The deprecated values thus all use the same theme as the one we defined 
-     for `TextSelectionThemeData` that replaces the old properties. 
-     The values for the old properties     
-     will be removed when they are fully deprecated on channel stable, or
-     potentially already when they become incompatible with channel beta.
-     The design choices on text selection theme are made so that they will
-     match and work well together with the `InputDecorationTheme`.
+   * In `TextSelectionThemeData`, the standard for `selectionColor` is
+     `colorScheme.primary` with opacity value `0.4` for dark and `0.12` light mode.
+     Here primary with `0.5` for dark-mode and `0.3` for light mode is used.
+     The standard for `selectionHandleColor` is `colorScheme.primary`, here we use
+     the slightly darker shade `primaryColorDark` instead, which does not have a
+     proper definition in Flutter standard `ColorScheme` based themes.
      
    * A predefined slightly opinionated `InputDecorationTheme` is used. It
-     sets `filled` to `true` and fill color to color scheme primary color with
-     opacity `0.035` in light mode and opacity `0.06` in dark mode. The other
-     key theme change is done via modification of the `ThemeData.accentColor`
-     described earlier. Since the theme does not define a `border`
-     property `TextField` in an app can still easily use both the default
-     underline style or the outline style by specifying the default
-     `const OutlineInputBorder()` for the border property. If you don't
-     want the filled style, or the primary colored borders in dark mode, 
-     you can override them back with `copyWith`.
+     sets `filled` to `true` and fill color to color scheme primary color
+     with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
+     The other key theme change is done via modification of the
+     `ThemeData.accentColor` described earlier. Since the theme does not
+     define a `border` property of `TextField` in an app can still easily
+     use both the default underline style, or the outline style by
+     specifying the default `const OutlineInputBorder()` for the border
+     property. If you don't  want the filled style, or the primary colored
+     borders in dark-mode, you can override them back with `copyWith`.
+     
+   * The property `fixTextFieldOutlineLabel` is set to `true` by default,
+     it looks much better.
      
    * Button theming is applied to `ThemeData.buttonColor` using color scheme
      primary. The entire color scheme is passed to old button's 
@@ -938,8 +938,8 @@ are, here is a complete list:
      target size, it makes the old buttons almost match the default design and
      look of their corresponding newer buttons. Thus `RaisedButton` looks
      very similar to `ElevatedButton`, `OutlineButton` to `OutlinedButton`
-     and `FlatButton` to `TextButton`. There are some differences in margins,
-     and looks, especially in dark mode, but they are close enough. This is a
+     and `FlatButton` to `TextButton`. There are some differences in margins
+     and looks, especially in dark-mode, but they are close enough. This is a
      button style we used before the introduction of the new buttons with
      their improved defaults. It just happened to be very close as theme was
      based on how things looked in the design guide prior to Flutter
@@ -955,7 +955,7 @@ are, here is a complete list:
      if you still use the old buttons. 
      
    * The default theme for Chips contain a design bug that makes the
-     selected `ChoiceChip()` widget look disabled in dark mode, regardless if
+     selected `ChoiceChip()` widget look disabled in dark-mode, regardless if
      created with `ThemeData` or `ThemeData.from` factory.
      See issue: https://github.com/flutter/flutter/issues/65663
      The used `ChipThemeData` modification fixes the issue.
@@ -977,10 +977,7 @@ are, here is a complete list:
      This feature was deprecated after v1.13.2.
      
    * For `TabBarTheme` a default design that fits with surface color is
-     used, instead of one that fits with the app bar color. Including this
-     in the theme design is still being evaluated. It might be removed in the
-     final release in preference for guidance on how to theme it like this
-     when so needed.
+     used, instead of one that fits with the app bar color. 
      
    * The `BottomNavigationBarThemeData` uses color scheme primary color for
      the selected item. Flutter defaults to secondary color. Primary color
@@ -1003,13 +1000,12 @@ are, here is a complete list:
      platform adaptation of the tooltip style, or give users a preference
      toggle if you like.
      
-   * We like same color on the app bar and status bar with in Android, like
-     on iOS it is cleaner. We would also like transparent navigation bar in
-     Android to be transparent. The first design is included and works, but
-     controlling the navigation bar seems to be tricky. 
-     See related issue(s): https://github.com/flutter/flutter/issues/69999.
-     This pre-release still contains some experiments with these styles by
-     using `SystemChrome.setSystemUIOverlayStyle` in the toTheme method. We
-     will probably remove it in the first official release version, in favor
-     of setting these design elsewhere and via other means in our apps.
+   * On Android devices a `setSystemUIOverlayStyle` call makes
+     the AppBar one-colored like on iOS, which looks better (opinionated).
+     It would be nice if we could also make the system navigation button area
+     on Android transparent, but it does not work if we set
+     systemNavigationBarColor to a transparent color.
+     It is doable, but requires modifying Android config files, not possible
+     as far as I have seen from Flutter only.
+     Related issue: https://github.com/flutter/flutter/issues/69999.
 

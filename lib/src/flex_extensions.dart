@@ -2,27 +2,31 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-/// Extension methods that mimic some of TinyColor's functions
-/// https://pub.dev/packages/tinycolor
+/// Extension on color to brighten, lighten, darken and blend colors and
+/// can get a shade for gradients.
 ///
-/// Included functions from TinyColor re-implemented as color extension are:
+/// The extension methods are re-implement some of TinyColor's functions
+/// https://pub.dev/packages/tinycolor
+/// The functions from TinyColor re-implemented as color extension are:
 /// * brighten(int)
 /// * lighten (int)
 /// * darken(int)
-///
-/// The TinyColor algorithms have also been re-implemented using
+/// The TinyColor algorithms are also been re-implemented using
 /// Flutter's HSLColor class instead of the custom one in the TinyColor lib.
 ///
 /// A new custom extension is the one used to blend two colors using alpha
-/// value. This extension is used to calculate make the branded surface colors
+/// value. This extension is used to calculate branded surface colors
 /// used by FlexColorScheme's branded surfaces.
 /// * blend(Color, int).
 ///
 /// The getShadeColor extension is very specific and used mostly to make shades
-/// for gradient app bars.
+/// for gradient AppBars.
 ///
-/// The extension also include getting a color's RGB hex code as a string in two
-/// different formats.
+/// The color extension also include getting a color's RGB hex code as a string
+/// in two different formats.
+/// * hexCode - Flutter HEX code of a color starting with 0x and alpha value.
+///   with alpha alpha value first.
+/// * hex - Traditional API style color starting with # and no alpha.
 extension FlexColorExtensions on Color {
   /// Like TinyColor brighten function, it brightens the color with the
   /// given integer percentage amount.

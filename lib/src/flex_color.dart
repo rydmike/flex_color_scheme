@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'flex_color_scheme.dart';
+import 'flex_constants.dart';
 import 'flex_extensions.dart';
 
 /// Enum used to access predefined [FlexSchemeData] definitions that
@@ -832,8 +833,8 @@ class FlexColor {
 
   /// A [FlexScheme] enum to [FlexSchemeData] constant map that contains a
   /// number of pre-made ready to go nice dark and light [FlexSchemeColor]
-  /// colors schemes that can be used e.g. by [FlexColorScheme], but also
-  /// by [ColorScheme]. The [FlexColor.schemes] also contain the standard
+  /// colors schemes that can be used by [FlexColorScheme].
+  /// The [FlexColor.schemes] also contain the standard
   /// default material design themes, both the normal and the newer high
   /// contrast version.
   ///
@@ -1254,8 +1255,8 @@ class FlexColor {
 
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map that contains
   /// all the pre-made ready to use dark and light [FlexSchemeColor]
-  /// color values that can be used e.g. by [FlexColorScheme], but also
-  /// by [ColorScheme]. The [FlexColor.schemesWithCustom] also contain the
+  /// color values that can be used e.g. by [FlexColorScheme].
+  /// The [FlexColor.schemesWithCustom] also contain the
   /// standard default material design themes, both the normal and the
   /// newer high contrast version.
   ///
@@ -1298,14 +1299,17 @@ class FlexColor {
   };
 
   /// Return a list with all the predefined [FlexSchemeData] objects.
+  ///
+  /// This list excludes the custom [FlexSchemeData] placeholder that
+  /// exists in the [schemesWithCustom] map.
   static List<FlexSchemeData> schemesList = <FlexSchemeData>[
     ...FlexColor.schemes.values
   ];
 }
 
 /// Immutable data class that holds [name] and [description] string scheme
-/// descriptions, plus [light] and [dark] [FlexSchemeColor] definitions that
-/// is used by [FlexColorScheme] to create a theme.
+/// descriptions, plus [light] and [dark], [FlexSchemeColor] definitions that
+/// are used by [FlexColorScheme] to create a theme.
 ///
 /// This class can also be used to make a map with [FlexScheme] enum or some
 /// other usable lookup value as key, and [FlexSchemeData] as values, that you
@@ -1401,7 +1405,7 @@ class FlexSchemeColor with Diagnosticable {
     @required this.secondary,
     @required this.secondaryVariant,
     // App bar color and error colors are not required, if they are null
-    // they will be provided by theme constructor defaults later.
+    // they will be provided by theme constructor defaults.
     this.appBarColor,
     this.error,
   })  : assert(primary != null, 'Primary color may not be null.'),
@@ -1413,7 +1417,7 @@ class FlexSchemeColor with Diagnosticable {
 
   /// Make a [FlexSchemeColor] from just one primary color or possible also
   /// from a more complete color scheme set. This is a convenience factory that
-  /// can create a nice toned color scheme based on just the primary color.
+  /// can create a nice toned color schemes based on only the primary color.
   factory FlexSchemeColor.from({
     @required Color primary,
     Color primaryVariant,
