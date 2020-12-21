@@ -2,8 +2,9 @@
 
 > ## !!PRE-RELEASE VERSION !!
 > This package is still being worked on, both regarding the API and its documentation. 
-> * API is only about 99% ready.
+> * API is now about 99% ready.
 > * Documentation is about 95% ready.
+> * This is hopefully the last pre-release before 1.0.0 release.
 
 **FlexColorScheme** helps you make beautiful color scheme based Flutter themes, with optional level of primary 
 color branded surfaces. The created themes are based on the same concept as Flutter's newer `ColorScheme` based themes, 
@@ -156,7 +157,9 @@ needed in to use `FlexColorScheme` schemes based themes, but we use it to be abl
 theme's name and description in the examples. We also use it for the 3-way theme mode switch, that uses the
 scheme colors in its toggle widget for its custom theme mode option buttons.
 
-The only thing on the `HomePage` of interest is perhaps the `FlexThemeModeSwitch`, which is the UI for the 
+#### The Optional FlexThemeModeSwitch
+
+The only thing on the `HomePage` that might be of interest is the `FlexThemeModeSwitch`, which is the UI for the 
 3-way theme mode toggle switch used in the examples to change theme mode. 
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/theme_mode_switch.png?raw=true" alt="theme mode switch" width="350"/>
@@ -182,6 +185,11 @@ that allows you to customize it extensively, please find its [API
 reference here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexThemeModeSwitch-class.html)
 and its companion, the `FlexThemeModeOptionButton` 
 [API reference here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexThemeModeOptionButton-class.html).
+
+You can vary the way it looks, here are some examples that just scracth the surfce:
+
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/ThemeSwitchCustomize.png?raw=true"
+alt="theme mode customize"/>
 
 ### Example 1 Use a predefined color scheme
 
