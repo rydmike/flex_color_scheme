@@ -14,7 +14,8 @@ You can find a shorter overview of FlexColorScheme [**here**](https://rydmike.co
     * [Default Sample Application](#default-sample-application)
     * [Live WEB Demos of the Examples](#live-web-demos-of-the-examples)          
 * [Tutorial](#tutorial)  
-    * [The HomePage of all the Examples](#the-homepage-of-all-the-examples)
+    * [HomePage for the Examples](#homepage-for-the-examples)
+    * [Optional FlexThemeModeSwitch](#optional-flexthememodeswitch)
     * [Example 1 Use a predefined color scheme](#example-1-use-a-predefined-color-scheme)    
     * [Example 2 Create a custom color scheme](#example-2-create-a-custom-color-scheme)   
     * [Example 3 Switch between different color schemes](#example-3-switch-between-different-color-schemes)    
@@ -139,7 +140,7 @@ the used stateful Material app, where all the scheme setup for the themes are ma
 content in the examples are just there to make a relevant visual presentation on the resulting theme from the used
 FlexColorScheme.
 
-#### The HomePage of all the Examples
+### HomePage for the Examples
  
 The content of the `HomePage` in all these examples is not really so relevant for using `FlexColorScheme` based
 application theming. The critical parts are in the example `MaterialApp` theme definitions. The `HomePage` just
@@ -152,7 +153,7 @@ needed in to use `FlexColorScheme` schemes based themes, but we use it to be abl
 theme's name and description in the examples. We also use it for the 3-way theme mode switch, that uses the
 scheme colors in its toggle widget for its custom theme mode option buttons.
 
-#### The Optional FlexThemeModeSwitch
+### Optional FlexThemeModeSwitch
 
 The only thing on the `HomePage` that might be of interest is the `FlexThemeModeSwitch`, which is the UI for the 
 3-way theme mode toggle switch used in the examples to change theme mode. 
