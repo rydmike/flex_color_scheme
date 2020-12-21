@@ -279,11 +279,11 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.all(8),
+        Padding(
+          padding: const EdgeInsets.all(8),
           child: TextField(
             enabled: false,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Disabled text input with outline border',
             ),
@@ -312,11 +312,11 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.all(8),
+        Padding(
+          padding: const EdgeInsets.all(8),
           child: TextField(
             enabled: false,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Disabled text input',
             ),
           ),
