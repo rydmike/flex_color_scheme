@@ -172,17 +172,17 @@ FlexThemeModeSwitch(
 ```
 
 Using the `FlexThemeModeSwitch` 3-way theme mode toggle switch is totally optional and not required to
-use `FlexColorScheme` based themes. It is a simple, yet interesting theme mode switch design, it was included on
-request as a bonus feature in the `FlexColorScheme` package after being requested after it was seen based on
+use `FlexColorScheme` based themes. It is a simple, yet interesting theme mode switch design. It was included 
+as a bonus feature in the `FlexColorScheme` package on request, after it was observed in the wild 
 in the Flexfold demo app.  
 
-In the Flexfold demo it was originally a fairly fixed design but now `FlexThemeModeSwitch` has many properties 
+In the Flexfold demo it was originally a fairly fixed design, but now `FlexThemeModeSwitch` has many properties 
 that allows you to customize it extensively, please find its [API 
 reference here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexThemeModeSwitch-class.html)
 and its companion, the `FlexThemeModeOptionButton` 
 [API reference here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexThemeModeOptionButton-class.html).
 
-You can vary the way it looks, here are some examples that just scratch the surface:
+You can customize the way it looks, here are some examples that just scratch the surface:
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/ThemeSwitchCustomize.png?raw=true"
 alt="theme mode customize"/>
