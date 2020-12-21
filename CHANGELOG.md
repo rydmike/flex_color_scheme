@@ -2,6 +2,11 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [1.0.0] - December 21, 2020
+
+* Version 1.0.0 released
+* Documentation layout updates and typo corrections. 
+  
 ## [1.0.0-dev.2] - December 21, 2020
 
 * Made planned API name changes, SchemeOnColors -> FlexSchemeOnColors and 
@@ -30,8 +35,9 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 - [x] Complete the documentation.
 - [x] Publish live Web versions of the five examples.
 - [x] Review and update the API.
-- [ ] Review and correct documentation mistakes and typos, first pass anyway.
-- [ ] Release version 1.0.0 on pub.dev.
+- [x] Review and correct documentation mistakes and typos, first pass anyway.
+- [x] Release version 1.0.0 on pub.dev.
 - [ ] Add an API the can create the dark scheme based on the light primary color.
+- [ ] Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable. See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206.
 - [ ] Version 1.0.x: Add tests.
 - [ ] Version 2.0.0-nullsafety.1: Add null safe version.

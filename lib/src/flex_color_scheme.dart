@@ -1533,29 +1533,6 @@ class FlexColorScheme {
         fillColor: isDark
             ? colorScheme.primary.withOpacity(0.06)
             : colorScheme.primary.withOpacity(0.035),
-        // The commented InputDecorationTheme experiments below were part of
-        // a test to theme the InputDecorationTheme further. It was not possible
-        // to make it work as desired. It is kept here as a reminder to study it
-        // more and potentially make an issue report of it.
-        // The accentColor workaround mentioned earlier above, worked as a very
-        // nice workaround producing the desired outcome.
-        // TODO Remove commented code below when issue is studied/submitted.
-        // hintStyle: textTheme.caption.copyWith(color: hintColor),
-        // errorStyle: textTheme.caption.copyWith(color: colorScheme.error),
-        // labelStyle: textTheme.subtitle1.copyWith(color: colorScheme.primary),
-        // helperStyle: textTheme.subtitle1.copyWith(color: hintColor),
-        // border: OutlineInputBorder(
-        //     borderSide: BorderSide(color: colorScheme.primary)),
-        // focusedBorder: OutlineInputBorder(
-        //     borderSide: BorderSide(width: 1.5, color: colorScheme.primary)),
-        // enabledBorder: OutlineInputBorder(
-        //     borderSide: BorderSide(width: 0.9, color: primarySwatch[100])),
-        // disabledBorder: OutlineInputBorder(
-        //     borderSide: BorderSide(width: 0.5, color: disabledColor)),
-        // errorBorder: OutlineInputBorder(
-        //     borderSide: BorderSide(width: 0.9, color: colorScheme.error)),
-        // focusedErrorBorder: OutlineInputBorder(
-        //     borderSide: BorderSide(width: 2, color: colorScheme.error)),
       ),
 
       // The button color and button theming below almost makes the old buttons
