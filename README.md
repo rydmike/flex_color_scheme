@@ -125,12 +125,11 @@ certainly works on a phone sized canvas too. This example is explained in more d
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5al.png?raw=true" alt="ColorScheme example 5 light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bl.png?raw=true" alt="ColorScheme example 5b light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="120"/>
 
 [**Flexfold demo**](https://rydmike.com/demoflexfold)  
-The fanciest example of FlexColorScheme usage is in the [**Flexfold demo app**](https://rydmike.com/demoflexfold).  
+A really fancy example of FlexColorScheme usage is the [**Flexfold demo app**](https://rydmike.com/demoflexfold).  
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FoldTheme1.gif?raw=true" alt="FlexColorScheme" width="650"/>  
-This might look and feel complicated, but it is actually only slightly more fancy than above example nr 5, 
-that uses almost all the same theming features and exactly the same themes as the Flexfold demo app. 
-Just go through the examples, and you will be ready to make cool 
-interactively custom themed apps like the ones in the Flexfold demo app in no time.
+This might look and feel complicated, but it is actually only slightly more fancy than the above example nr 5, that
+has almost all the same theming features and exactly the same themes as the Flexfold demo app. Go through the examples,
+and you will be ready to make cool interactively custom themed apps in no time.
 
 ## Tutorial
 
