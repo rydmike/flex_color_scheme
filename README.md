@@ -10,6 +10,8 @@
 color branded surfaces. The created themes are based on the same concept as Flutter's newer `ColorScheme` based themes, 
 but with a few interesting twists and features.
 
+You can find a blog summary [**here**](https://rydmike.com/colorscheme).
+
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
 
 ## Contents
