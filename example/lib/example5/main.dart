@@ -2,8 +2,10 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../all_shared_imports.dart';
+import '../shared/sub_page.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 5)
@@ -19,6 +21,11 @@ import '../all_shared_imports.dart';
 // of the true black theme feature for dark themes is also demonstrated.
 // Using the optional Windows desktop like tooltip theme is also shown.
 //
+// A toggle that allows us to compare the result of custom defined dark schemes
+// to the lazy computed versions is also available. To further demonstrate the
+// difference between FlexColorScheme.toTheme and ThemeData.from an option
+// to try both is presented for comparison purposes.
+//
 // The example includes a dummy responsive side menu and rail to give a visual
 // presentation of what applications that have larger visible surfaces using the
 // surface branding look like.
@@ -33,18 +40,18 @@ import '../all_shared_imports.dart';
 
 void main() => runApp(const DemoApp());
 
-// Create a custom flex color scheme for a light theme.
+// Create a custom flex scheme color for a light theme.
 const FlexSchemeColor myScheme1Light = FlexSchemeColor(
   primary: Color(0xFF4E0028),
   primaryVariant: Color(0xFF320019),
   secondary: Color(0xFF003419),
   secondaryVariant: Color(0xFF002411),
-  // The built in color schemes use their secondary variant color as their
+  // The built in schemes use their secondary variant color as their
   // custom app bar color, it could of course be any color, but for consistency
   // we will do the same in this custom FlexSchemeColor.
   appBarColor: Color(0xFF002411),
 );
-// Create a corresponding custom flex color scheme for a dark theme.
+// Create a corresponding custom flex scheme color for a dark theme.
 const FlexSchemeColor myScheme1Dark = FlexSchemeColor(
   primary: Color(0xFF9E7389),
   primaryVariant: Color(0xFF775C69),
@@ -55,21 +62,28 @@ const FlexSchemeColor myScheme1Dark = FlexSchemeColor(
 );
 
 // You can build a scheme the long way, by specifying all the required hand
-// picked scheme colors, like above. You can also build color schemes from a
+// picked scheme colors, like above, or you can build schemes from a
 // single primary color. With the [.from] factory, then the only required color
 // is the primary color, the other colors will be computed. You can optionally
 // also provide the primaryVariant, secondary and secondaryVariant colors with
 // the factory, but any color that is not provided will always be computed for
 // the full set of required colors in a FlexSchemeColor.
-//
+
 // In this example we create our 2nd scheme from just a primary color
 // for the light and dark schemes. The custom app bar color will in this case
 // also receive the same color value as the one that is computed for
-// secondaryVariant color.
+// secondaryVariant color, this is the default in the [from] factory.
 final FlexSchemeColor myScheme2Light =
     FlexSchemeColor.from(primary: const Color(0xFF4C4E06));
 final FlexSchemeColor myScheme2Dark =
     FlexSchemeColor.from(primary: const Color(0xFF9D9E76));
+
+// For our 3rd custom scheme we will define primary and secondary colors, but no
+// variant colors, we will not make any dark scheme definitions either.
+final FlexSchemeColor myScheme3Light = FlexSchemeColor.from(
+  primary: const Color(0xFF993200),
+  secondary: const Color(0xFF1B5C62),
+);
 
 // Create a list with all color schemes we will use, starting with all
 // the built-in ones and then adding our custom ones at the end.
@@ -82,10 +96,10 @@ final List<FlexSchemeData> myFlexSchemes = <FlexSchemeData>[
   // Then add our first custom FlexSchemeData to the list, we give it a name
   // and description too.
   const FlexSchemeData(
-    name: 'Custom purple',
-    description: 'Purple theme created from custom defined colors.',
-    // Flex scheme data holds separate defined color schemes for its light and
-    // matching dark theme color. Dark theme colors need to be much less
+    name: 'Toledo purple',
+    description: 'Purple theme, created from full custom defined color scheme.',
+    // Flex scheme data holds separate defined color schemes for light and
+    // matching dark theme colors. Dark theme colors need to be much less
     // saturated than light theme. Using the same colors in light and dark
     // theme modes does not look nice.
     light: myScheme1Light,
@@ -93,10 +107,20 @@ final List<FlexSchemeData> myFlexSchemes = <FlexSchemeData>[
   ),
   // Do the same for our second custom scheme.
   FlexSchemeData(
-    name: 'Custom olive green',
-    description: 'Olive green theme created from custom primary color.',
+    name: 'Olive green',
+    description:
+        'Olive green theme, created from primary light and dark colors.',
     light: myScheme2Light,
     dark: myScheme2Dark,
+  ),
+  // We also do the same for our 3rd custom scheme, BUT we create its matching
+  // dark colors, from the light FlexSchemeColor with the toDark method.
+  FlexSchemeData(
+    name: 'Oregon orange',
+    description: 'Custom orange and blue theme, from only light scheme colors.',
+    light: myScheme3Light,
+    // We create the dark desaturated colors from the light scheme.
+    dark: myScheme3Light.toDark(),
   ),
 ];
 
@@ -132,6 +156,12 @@ class _DemoAppState extends State<DemoApp> {
   // Allow toggling between normal dark mode and true black dark mode.
   bool darkIsTrueBlack;
 
+  // Allow toggling between using the actual defined dark color scheme or try
+  // how it would look if we had not defined the dark colors, but had been lazy
+  // and just created the dark scheme from the light scheme with the toDark()
+  // method.
+  bool useToDarkMethod;
+
   // Use the toTheme method to create Themes from [FlexColorScheme]. This
   // is the preferred method when using [FlexColorScheme]. In this demo
   // you can use a toggle to see what a FlexColorScheme looks like if you just
@@ -147,6 +177,7 @@ class _DemoAppState extends State<DemoApp> {
     flexSurface = FlexSurface.medium;
     tooltipsMatchBackground = false;
     darkIsTrueBlack = false;
+    useToDarkMethod = false;
     useToThemeMethod = true;
     super.initState();
   }
@@ -158,7 +189,7 @@ class _DemoAppState extends State<DemoApp> {
       title: 'FlexColorScheme',
       // Define the light theme for the app, using current theme index, selected
       // surface style and app bar style. With the built in 20 themes and the
-      // custom ones we defined above, we can use 22 different app themes via
+      // custom ones we defined above, we can use 23 different app themes via
       // the definition below, times the surface styles and app bar variants.
       // The factory FlexColorScheme.light is used to define a FlexColorScheme
       // for a light theme, from the light FlexSchemeColor plus some other theme
@@ -187,15 +218,21 @@ class _DemoAppState extends State<DemoApp> {
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
+              visualDensity: FlexColorScheme.comfortablePlatformDensity,
             ).toTheme
+          // The default ThemeData.from method as an option, for demo and
+          // comparison purposes. It will not not be fully color scheme colored,
+          // nor will it look as nice and balanced when color branding is used.
           : ThemeData.from(
               colorScheme: FlexColorScheme.light(
                 colors: myFlexSchemes[themeIndex].light,
                 surfaceStyle: flexSurface,
                 appBarStyle: flexAppBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
+                visualDensity: FlexColorScheme.comfortablePlatformDensity,
               ).toScheme,
             ).copyWith(
+              visualDensity: FlexColorScheme.comfortablePlatformDensity,
               typography: Typography.material2018(
                 platform: defaultTargetPlatform,
               ),
@@ -208,21 +245,28 @@ class _DemoAppState extends State<DemoApp> {
       // using the standard ThemeData.from factory to create the theme.
       darkTheme: useToThemeMethod
           ? FlexColorScheme.dark(
-              colors: myFlexSchemes[themeIndex].dark,
+              colors: useToDarkMethod
+                  ? myFlexSchemes[themeIndex].light.toDark()
+                  : myFlexSchemes[themeIndex].dark,
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               darkIsTrueBlack: darkIsTrueBlack,
+              visualDensity: FlexColorScheme.comfortablePlatformDensity,
             ).toTheme
           : ThemeData.from(
               colorScheme: FlexColorScheme.dark(
-                colors: myFlexSchemes[themeIndex].dark,
+                colors: useToDarkMethod
+                    ? myFlexSchemes[themeIndex].light.toDark()
+                    : myFlexSchemes[themeIndex].dark,
                 surfaceStyle: flexSurface,
                 appBarStyle: flexAppBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 darkIsTrueBlack: darkIsTrueBlack,
+                visualDensity: FlexColorScheme.comfortablePlatformDensity,
               ).toScheme,
             ).copyWith(
+              visualDensity: FlexColorScheme.comfortablePlatformDensity,
               typography: Typography.material2018(
                 platform: defaultTargetPlatform,
               ),
@@ -279,6 +323,14 @@ class _DemoAppState extends State<DemoApp> {
             darkIsTrueBlack = value;
           });
         },
+        // We pass in the current dark scheme creation method
+        useToDark: useToDarkMethod,
+        // And toggle the dark scheme creation method.
+        onUseToDarkChanged: (bool value) {
+          setState(() {
+            useToDarkMethod = value;
+          });
+        },
         // We pass in the current theme creation method
         useToTheme: useToThemeMethod,
         // And toggle the theme creation method.
@@ -292,7 +344,13 @@ class _DemoAppState extends State<DemoApp> {
         // active theme's name, descriptions and colors in the demo.
         // We also use it for the theme mode switch that shows the theme's
         // color's in the different theme modes.
-        flexSchemeData: myFlexSchemes[themeIndex],
+        // We use copyWith to modify the dark scheme to the colors we get from
+        // toggling the switch for computed dark colors or the actual defined
+        // dark colors.
+        flexSchemeData: myFlexSchemes[themeIndex].copyWith(
+            dark: useToDarkMethod
+                ? myFlexSchemes[themeIndex].light.toDark()
+                : myFlexSchemes[themeIndex].dark),
       ),
     );
   }
@@ -317,6 +375,8 @@ class HomePage extends StatefulWidget {
     @required this.onTooltipsMatchBackgroundChanged,
     @required this.darkIsTrueBlack,
     @required this.onDarkIsTrueBlackChanged,
+    @required this.useToDark,
+    @required this.onUseToDarkChanged,
     @required this.useToTheme,
     @required this.onUseToThemeChanged,
     @required this.flexSchemeData,
@@ -333,6 +393,8 @@ class HomePage extends StatefulWidget {
   final ValueChanged<bool> onTooltipsMatchBackgroundChanged;
   final bool darkIsTrueBlack;
   final ValueChanged<bool> onDarkIsTrueBlackChanged;
+  final bool useToDark;
+  final ValueChanged<bool> onUseToDarkChanged;
   final bool useToTheme;
   final ValueChanged<bool> onUseToThemeChanged;
   final FlexSchemeData flexSchemeData;
@@ -344,8 +406,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // The reason for example 5 using a stateful widget is that it holds the
   // state of the dummy side menu/rail locally. All state concerning the
-  // application theme are in this example also held by the stateful material
-  // app and values are passed in and changed via ValueChanged callbacks.
+  // application theme are in this example also held by the stateful MaterialApp
+  // widget, and values are passed in and changed via ValueChanged callbacks.
   double currentSidePanelWidth;
   bool isSidePanelExpanded;
   bool showSidePanel;
@@ -441,11 +503,11 @@ class _HomePageState extends State<HomePage> {
       FlexAppBarStyle.material: Padding(
         padding: EdgeInsets.all(5),
         child: Text(
-          // Wait, what is \u{00AD} below?? It is Unicode char code for an
+          // Wait, what is \u{00AD} below?? It is Unicode char-code for an
           // invisible soft hyphen. It can be used to guide text layout where
           // it can break a word to the next line, if it has to. On small phones
-          // or a desktop build where you can make the UI really narrow in
-          // Flutter, you can observe this for the 'background' word below.
+          // or a desktop builds where you can make the UI really narrow in
+          // Flutter, you can observe this with the 'background' word below.
           'Default\nback\u{00AD}ground',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 11),
@@ -477,281 +539,330 @@ class _HomePageState extends State<HomePage> {
       ),
     };
 
-    return Row(
-      children: <Widget>[
-        // Contains the demo menu and side rail.
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
-          child: Material(
-            elevation: 0,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              width: currentSidePanelWidth,
-              child: SideMenu(
-                isVisible: showSidePanel,
-                menuWidth: AppConst.expandWidth,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      // FlexColorScheme contains a helper that can be use to theme
+      // the system navigation bar using an AnnotatedRegion. Without this
+      // page wrapper the system navigation bar in Android will not change
+      // theme color as we change themes for the page. This is a
+      // Flutter "feature", but with this annotated region we can have the
+      // navigation bar at least follow the background color and theme-mode,
+      // which looks nicer and as it should on an Android device.
+      //
+      // You will notice when you open the sub-page that we do not need to apply
+      // the annotated region again to it, it is kept in effect there as well.
+      //
+      // It would be nice if we could also make the system navigation bar
+      // transparent from Flutter side, but this is currently not possible.
+      // See issue: https:///github.com/flutter/flutter/issues/69999.
+      value: FlexColorScheme.themedSystemNavigationBar(context),
+      child: Row(
+        children: <Widget>[
+          // Contains the demo menu and side rail.
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
+            child: Material(
+              elevation: 0,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: currentSidePanelWidth,
+                child: SideMenu(
+                  isVisible: showSidePanel,
+                  menuWidth: AppConst.expandWidth,
+                ),
               ),
             ),
           ),
-        ),
-        // The actual page content is a normal Scaffold.
-        Expanded(
-          child: Scaffold(
-            // For scrolling behind the app bar
-            extendBodyBehindAppBar: true,
-            // For scrolling behind the bottom nav bar, if there would be one.
-            extendBody: true,
-            appBar: AppBar(
-              title: const Text('FlexColorScheme Example 5'),
-              actions: const <Widget>[AboutIconButton()],
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              // Gradient partially transparent AppBar, just because it looks
-              // nice and we can see content scroll behind it.
-              flexibleSpace: Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Theme.of(context).dividerColor),
+          // The actual page content is a normal Scaffold.
+          Expanded(
+            child: Scaffold(
+              // For scrolling behind the app bar
+              extendBodyBehindAppBar: true,
+              // For scrolling behind the bottom nav bar, if there would be one.
+              extendBody: true,
+              appBar: AppBar(
+                title: const Text('FlexColorScheme Example 5'),
+                actions: const <Widget>[AboutIconButton()],
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                // Gradient partially transparent AppBar, just because it looks
+                // nice and we can see content scroll behind it.
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Theme.of(context).dividerColor),
+                    ),
+                    gradient: LinearGradient(
+                      begin: AlignmentDirectional.centerStart,
+                      end: AlignmentDirectional.centerEnd,
+                      colors: <Color>[
+                        appBarColor,
+                        appBarColor.withOpacity(0.8),
+                      ],
+                    ),
                   ),
-                  gradient: LinearGradient(
-                    begin: AlignmentDirectional.centerStart,
-                    end: AlignmentDirectional.centerEnd,
-                    colors: <Color>[
-                      appBarColor,
-                      appBarColor.withOpacity(0.8),
-                    ],
-                  ),
+                  child: null,
                 ),
-                child: null,
               ),
-            ),
-            body: PageBody(
-              child: ListView(
-                padding: EdgeInsets.fromLTRB(
-                  AppConst.edgePadding,
-                  topPadding + kToolbarHeight + AppConst.edgePadding,
-                  AppConst.edgePadding,
-                  AppConst.edgePadding + bottomPadding,
-                ),
-                children: <Widget>[
-                  Text('Theme', style: headline4),
-                  const Text(
-                    'This example shows how you can use all the built in '
-                    'color schemes in FlexColorScheme to define themes '
-                    'from them and how you can make your own custom '
-                    'scheme colors and use them together with the '
-                    'predefined ones.\n\n'
-                    'The example also shows how to use the surface '
-                    'branding feature and the app bar theme '
-                    'options in FlexColorScheme. The usage of the '
-                    'true black option for dark themes is also '
-                    'demonstrated.\n\n'
-                    'The example includes a dummy responsive side menu and '
-                    'rail to give a visual example of what applications '
-                    'that have larger visible surfaces using surface '
-                    'branding may look like. '
-                    'A theme showcase widget shows the active theme with '
-                    'several common Material widgets.',
+              body: PageBody(
+                child: ListView(
+                  padding: EdgeInsets.fromLTRB(
+                    AppConst.edgePadding,
+                    topPadding + kToolbarHeight + AppConst.edgePadding,
+                    AppConst.edgePadding,
+                    AppConst.edgePadding + bottomPadding,
                   ),
-                  // A 3-way theme mode toggle switch.
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: AppConst.edgePadding),
-                    child: FlexThemeModeSwitch(
-                      themeMode: widget.themeMode,
-                      onThemeModeChanged: widget.onThemeModeChanged,
-                      flexSchemeData: widget.flexSchemeData,
-                      // Style the selected theme mode's label
-                      selectedLabelStyle: Theme.of(context)
-                          .textTheme
-                          .caption
-                          .copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.primary),
+                  children: <Widget>[
+                    Text('Theme', style: headline4),
+                    const Text(
+                      'This example shows how you can use all the built in '
+                      'color schemes in FlexColorScheme to define themes '
+                      'from them and how you can make your own custom '
+                      'scheme colors and use them together with the '
+                      'predefined ones.\n\n'
+                      'The example also shows how to use the surface '
+                      'branding feature and the app bar theme '
+                      'options in FlexColorScheme. The usage of the '
+                      'true black option for dark themes is also '
+                      'demonstrated.\n\n'
+                      'The example includes a dummy responsive side menu and '
+                      'rail to give a visual example of what applications '
+                      'that have larger visible surfaces using surface '
+                      'branding may look like. '
+                      'A theme showcase widget shows the active theme with '
+                      'several common Material widgets.\n',
                     ),
-                  ),
-                  const Divider(),
-                  // Set dark mode to use true black!
-                  SwitchListTile.adaptive(
-                    title: const Text('Dark mode uses true black'),
-                    subtitle: const Text(
-                      'Keep OFF for normal dark mode.',
-                    ),
-                    value: widget.darkIsTrueBlack,
-                    onChanged: widget.onDarkIsTrueBlackChanged,
-                  ),
-                  // Popup menu button to select color scheme.
-                  PopupMenuButton<int>(
-                    padding: const EdgeInsets.all(0),
-                    onSelected: widget.onSchemeChanged,
-                    itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-                      for (int i = 0; i < myFlexSchemes.length; i++)
-                        PopupMenuItem<int>(
-                          value: i,
-                          child: ListTile(
-                            leading: Icon(Icons.lens,
-                                color: isLight
-                                    ? myFlexSchemes[i].light.primary
-                                    : myFlexSchemes[i].dark.primary,
-                                size: 35),
-                            title: Text(myFlexSchemes[i].name),
-                          ),
-                        )
-                    ],
-                    child: ListTile(
-                      title: Text('${widget.flexSchemeData.name} theme'),
-                      subtitle: Text(widget.flexSchemeData.description),
-                      trailing: Icon(
-                        Icons.lens,
-                        color: colorScheme.primary,
-                        size: 40,
+                    Text('${widget.flexSchemeData.name} theme',
+                        style: textTheme.headline5),
+                    // A 3-way theme mode toggle switch.
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: AppConst.edgePadding),
+                      child: FlexThemeModeSwitch(
+                        themeMode: widget.themeMode,
+                        onThemeModeChanged: widget.onThemeModeChanged,
+                        flexSchemeData: widget.flexSchemeData,
+                        // Style the selected theme mode's label
+                        selectedLabelStyle: Theme.of(context)
+                            .textTheme
+                            .caption
+                            .copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.primary),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  // Active theme color indicators.
-                  const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
-                    child: ShowThemeColors(),
-                  ),
-                  // Surface style selector.
-                  const SizedBox(height: 8),
-                  const ListTile(
-                    title: Text('Branded surface and background'),
-                    subtitle: Text(
-                      'Default Material design uses white and dark surface '
-                      'colors. With the light, medium, heavy '
-                      'and strong branding, you can blend primary '
-                      'color into surface and background colors with '
-                      'increasing strength.',
+                    const Divider(),
+                    // Set dark mode to use true black!
+                    SwitchListTile.adaptive(
+                      title: const Text('Dark mode uses true black'),
+                      subtitle: const Text(
+                        'Keep OFF for normal dark mode.',
+                      ),
+                      value: widget.darkIsTrueBlack,
+                      onChanged: widget.onDarkIsTrueBlackChanged,
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  CupertinoSegmentedControl<FlexSurface>(
-                    children: themeSurface,
-                    groupValue: widget.themeSurface,
-                    onValueChanged: widget.onThemeSurfaceChanged,
-                    borderColor:
-                        isLight ? colorScheme.primary : theme.primaryColorLight,
-                    selectedColor:
-                        isLight ? colorScheme.primary : theme.primaryColorLight,
-                    unselectedColor: theme.cardColor,
-                  ),
-                  const SizedBox(height: 8),
-                  const ListTile(
-                    title: Text('App bar theme'),
-                    subtitle: Text(
-                      'Material design uses a primary '
-                      'colored app bar in light mode and a background '
-                      'colored one in dark mode. With FlexColorScheme '
-                      'you can use different defaults for the app bar and '
-                      'select if it should use primary, surface or '
-                      'custom colors. The predefined schemes use their '
-                      'secondary variant color as the custom color for the '
-                      'app bar theme, but it could be any color.',
+                    // Set to make dark scheme lazily for light theme
+                    SwitchListTile.adaptive(
+                      title:
+                          const Text('Make dark scheme from the light scheme'),
+                      subtitle: const Text(
+                        'Set to ON, to not use the custom tuned dark scheme '
+                        'colors, and instead compute them from the light '
+                        'scheme.',
+                      ),
+                      value: widget.useToDark,
+                      onChanged: widget.onUseToDarkChanged,
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  // AppBar style
-                  CupertinoSegmentedControl<FlexAppBarStyle>(
-                    children: themeAppBar,
-                    groupValue: widget.appBarStyle,
-                    onValueChanged: widget.onAppBarStyleChanged,
-                    borderColor:
-                        isLight ? colorScheme.primary : theme.primaryColorLight,
-                    selectedColor:
-                        isLight ? colorScheme.primary : theme.primaryColorLight,
-                    unselectedColor: theme.cardColor,
-                  ),
-                  const SizedBox(height: 8),
-                  // Tooltip theme style.
-                  Tooltip(
-                    message: 'A tooltip, on the tooltip style toggle',
-                    child: SwitchListTile.adaptive(
+                    // Popup menu button to select color scheme.
+                    PopupMenuButton<int>(
+                      padding: const EdgeInsets.all(0),
+                      onSelected: widget.onSchemeChanged,
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuItem<int>>[
+                        for (int i = 0; i < myFlexSchemes.length; i++)
+                          PopupMenuItem<int>(
+                            value: i,
+                            child: ListTile(
+                              leading: Icon(Icons.lens,
+                                  color: isLight
+                                      ? myFlexSchemes[i].light.primary
+                                      : myFlexSchemes[i].dark.primary,
+                                  size: 35),
+                              title: Text(myFlexSchemes[i].name),
+                            ),
+                          )
+                      ],
+                      child: ListTile(
+                        title: Text('${widget.flexSchemeData.name} theme'),
+                        subtitle: Text(widget.flexSchemeData.description),
+                        trailing: Icon(
+                          Icons.lens,
+                          color: colorScheme.primary,
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // Active theme color indicators.
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: AppConst.edgePadding),
+                      child: ShowThemeColors(),
+                    ),
+                    // Surface style selector.
+                    const SizedBox(height: 8),
+                    const ListTile(
+                      title: Text('Branded surface and background'),
+                      subtitle: Text(
+                        'Default Material design uses white and dark surface '
+                        'colors. With the light, medium, heavy '
+                        'and strong branding, you can blend primary '
+                        'color into surface and background colors with '
+                        'increasing strength.',
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    CupertinoSegmentedControl<FlexSurface>(
+                      children: themeSurface,
+                      groupValue: widget.themeSurface,
+                      onValueChanged: widget.onThemeSurfaceChanged,
+                      borderColor: isLight
+                          ? colorScheme.primary
+                          : theme.primaryColorLight,
+                      selectedColor: isLight
+                          ? colorScheme.primary
+                          : theme.primaryColorLight,
+                      unselectedColor: theme.cardColor,
+                    ),
+                    const SizedBox(height: 8),
+                    const ListTile(
+                      title: Text('App bar theme'),
+                      subtitle: Text(
+                        'Material design uses a primary '
+                        'colored app bar in light mode and a background '
+                        'colored one in dark mode. With FlexColorScheme '
+                        'you can use different defaults for the app bar and '
+                        'select if it should use primary, surface or '
+                        'custom colors. The predefined schemes use their '
+                        'secondary variant color as the custom color for the '
+                        'app bar theme, but it could be any color.',
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    // AppBar style
+                    CupertinoSegmentedControl<FlexAppBarStyle>(
+                      children: themeAppBar,
+                      groupValue: widget.appBarStyle,
+                      onValueChanged: widget.onAppBarStyleChanged,
+                      borderColor: isLight
+                          ? colorScheme.primary
+                          : theme.primaryColorLight,
+                      selectedColor: isLight
+                          ? colorScheme.primary
+                          : theme.primaryColorLight,
+                      unselectedColor: theme.cardColor,
+                    ),
+                    const SizedBox(height: 8),
+                    // Tooltip theme style.
+                    Tooltip(
+                      message: 'A tooltip, on the tooltip style toggle',
+                      child: SwitchListTile.adaptive(
+                        title: const Text(
+                          'Tooltips are light on light, and dark on dark',
+                        ),
+                        subtitle: const Text(
+                          'Keep OFF to use Material default inverted '
+                          'background style.',
+                        ),
+                        value: widget.tooltipsMatchBackground,
+                        onChanged: widget.onTooltipsMatchBackgroundChanged,
+                      ),
+                    ),
+                    const Divider(),
+                    // Theme creation method.
+                    SwitchListTile.adaptive(
                       title: const Text(
-                        'Tooltips are light on light, and dark on dark',
+                        'Make the theme with FlexColorScheme toTheme method',
                       ),
                       subtitle: const Text(
-                        'Keep OFF to use Material default inverted '
-                        'background style.',
+                        'Turn OFF to make the theme using the standard '
+                        'ThemeData from color scheme method. '
+                        'NOT RECOMMENDED, but in this example you can '
+                        'try it to see the differences.',
                       ),
-                      value: widget.tooltipsMatchBackground,
-                      onChanged: widget.onTooltipsMatchBackgroundChanged,
+                      value: widget.useToTheme,
+                      onChanged: widget.onUseToThemeChanged,
                     ),
-                  ),
-                  const Divider(),
-                  // Theme creation method.
-                  SwitchListTile.adaptive(
-                    title: const Text(
-                      'Make the theme with FlexColorScheme toTheme method',
+                    const Divider(),
+                    // Open a sub-page
+                    ListTile(
+                      title: const Text('Open a demo sub-page'),
+                      subtitle: const Text(
+                        'The sub-page will use the same '
+                        'color scheme based theme automatically.',
+                      ),
+                      trailing: const Icon(Icons.chevron_right, size: 34),
+                      onTap: () {
+                        SubPage.show(context);
+                      },
                     ),
-                    subtitle: const Text(
-                      'Turn OFF to make the theme using the standard '
-                      'ThemeData from color scheme method. '
-                      'NOT RECOMMENDED, but in this example you can '
-                      'try it to see the differences.',
+                    const Divider(),
+                    Text('Menu', style: headline4),
+                    const Text(
+                      'The menu is a just a demo to make a larger '
+                      'area that uses the primary branded background color.',
                     ),
-                    value: widget.useToTheme,
-                    onChanged: widget.onUseToThemeChanged,
-                  ),
-                  const Divider(),
-                  Text('Menu', style: headline4),
-                  const Text(
-                    'The menu is a just a demo to make a larger '
-                    'area that uses the primary branded background color.',
-                  ),
-                  SwitchListTile.adaptive(
-                    title: const Text('Turn ON to show the menu'),
-                    subtitle: const Text('Turn OFF to hide the menu.'),
-                    value: showSidePanel,
-                    onChanged: (bool value) {
-                      setState(() {
-                        showSidePanel = value;
-                        if (showSidePanel) {
-                          if (isSidePanelExpanded) {
-                            currentSidePanelWidth = AppConst.expandWidth;
+                    SwitchListTile.adaptive(
+                      title: const Text('Turn ON to show the menu'),
+                      subtitle: const Text('Turn OFF to hide the menu.'),
+                      value: showSidePanel,
+                      onChanged: (bool value) {
+                        setState(() {
+                          showSidePanel = value;
+                          if (showSidePanel) {
+                            if (isSidePanelExpanded) {
+                              currentSidePanelWidth = AppConst.expandWidth;
+                            } else {
+                              currentSidePanelWidth = AppConst.shrinkWidth;
+                            }
                           } else {
-                            currentSidePanelWidth = AppConst.shrinkWidth;
+                            currentSidePanelWidth = 0.01;
                           }
-                        } else {
-                          currentSidePanelWidth = 0.01;
-                        }
-                      });
-                    },
-                  ),
-                  SwitchListTile.adaptive(
-                    title: const Text('Turn ON for full sized menu'),
-                    subtitle: const Text(
-                      'Turn OFF for a rail sized menu. '
-                      'The full size menu will only be shown when '
-                      'screen width is above 650 dp and this toggle is ON.',
+                        });
+                      },
                     ),
-                    value: isSidePanelExpanded,
-                    onChanged: (bool value) {
-                      setState(() {
-                        isSidePanelExpanded = value;
-                        if (showSidePanel) {
-                          if (isSidePanelExpanded) {
-                            currentSidePanelWidth = AppConst.expandWidth;
+                    SwitchListTile.adaptive(
+                      title: const Text('Turn ON for full sized menu'),
+                      subtitle: const Text(
+                        'Turn OFF for a rail sized menu. '
+                        'The full size menu will only be shown when '
+                        'screen width is above 650 dp and this toggle is ON.',
+                      ),
+                      value: isSidePanelExpanded,
+                      onChanged: (bool value) {
+                        setState(() {
+                          isSidePanelExpanded = value;
+                          if (showSidePanel) {
+                            if (isSidePanelExpanded) {
+                              currentSidePanelWidth = AppConst.expandWidth;
+                            } else {
+                              currentSidePanelWidth = AppConst.shrinkWidth;
+                            }
                           } else {
-                            currentSidePanelWidth = AppConst.shrinkWidth;
+                            currentSidePanelWidth = 0.01;
                           }
-                        } else {
-                          currentSidePanelWidth = 0.01;
-                        }
-                      });
-                    },
-                  ),
-                  const Divider(),
-                  Text('Theme Showcase', style: headline4),
-                  const ThemeShowcase(),
-                ],
+                        });
+                      },
+                    ),
+                    const Divider(),
+                    Text('Theme Showcase', style: headline4),
+                    const ThemeShowcase(),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

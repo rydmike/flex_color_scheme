@@ -4,8 +4,10 @@
 // If you want to build all the other examples one by one without setting
 // up different configurations in you IDE for the different main files. You can
 // also just copy paste in each sample's code below and build it. Just fix the
-// relative import of the all the shared imports to:
+// relative import of the all shared imports to:
 // import 'all_shared_imports.dart';
+// and for examples 4 and 5, also the sub page import to:
+// import 'shared/sub_page.dart';
 // -----------------------------------------------------------------------------
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -51,15 +53,18 @@ class _DemoAppState extends State<DemoApp> {
       title: 'FlexColorScheme',
       // Use a predefined light theme for the app and call .toTheme method
       // to create the slightly opinionated theme from the defined color scheme.
-      theme:
-          FlexColorScheme.light(colors: FlexColor.schemes[usedFlexScheme].light)
-              .toTheme,
+      theme: FlexColorScheme.light(
+        colors: FlexColor.schemes[usedFlexScheme].light,
+        // Use comfortable on desktops instead of compact, devices as default.
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      ).toTheme,
       // We do the exact same definition for the dark theme, but using
       // FlexColorScheme.dark factory and the dark FlexSchemeColor in
       // FlexColor.schemes.
-      darkTheme:
-          FlexColorScheme.dark(colors: FlexColor.schemes[usedFlexScheme].dark)
-              .toTheme,
+      darkTheme: FlexColorScheme.dark(
+        colors: FlexColor.schemes[usedFlexScheme].dark,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      ).toTheme,
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
       // This simple example app has only one page.

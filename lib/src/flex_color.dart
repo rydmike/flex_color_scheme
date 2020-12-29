@@ -4,8 +4,8 @@ import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
 
-/// Enum used to access predefined [FlexSchemeData] definitions that
-/// can be used by [FlexColorScheme].
+/// Name for predefined [FlexSchemeData] color scheme definitions that can be
+/// used by [FlexColorScheme].
 enum FlexScheme {
   /// The example theme used in the Material design guide.
   /// Light version:
@@ -14,7 +14,7 @@ enum FlexScheme {
   /// https://material.io/design/color/dark-theme.html#ui-application
   material,
 
-  /// New high contrast theme. Same as Flutter [ColorScheme.highContrastLight]
+  /// Material contrast theme. Same as Flutter [ColorScheme.highContrastLight]
   /// and [ColorScheme.highContrastDark].
   materialHc,
 
@@ -72,7 +72,7 @@ enum FlexScheme {
   /// Playful mango mojito theme.
   mango,
 
-  /// Placeholder for adding a custom configured scheme. When this theme
+  /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a [FlexColorScheme] based on a custom
   /// [FlexSchemeData] object. If not provided, it defaults to the
   /// [FlexScheme.material] theme.
@@ -105,8 +105,8 @@ class FlexColor {
 
   // Custom static constants for surface, background, scaffold and background
   // colors. Some surface colors are slightly modified from the Material
-  // standards and different constants are used so we can tweak them if so
-  // desired without touching the material standard surface values.
+  // standards and different constants are used so we can modify them, if so
+  // desired, without touching the material standard surface values.
 
   /// FlexColors standard for light surface, same as material.
   static const Color lightSurface = Colors.white;
@@ -120,7 +120,7 @@ class FlexColor {
   static const Color lightScaffoldBackground = Colors.white;
 
   /// Both dark surface and background are slightly darker than Material
-  /// variants so we can blend in more primary color without getting too
+  /// variants, so we can blend in more primary color without getting too
   /// light too soon.
   static const Color darkSurface = Color(0xFF111111);
 
@@ -152,10 +152,10 @@ class FlexColor {
   // The primary and variant Material theme colors as defined by:
   // https://material.io/design/color/the-color-system.html#color-theme-creation.
   //
-  /// English name of the standard material theme.
+  /// English name of the standard Material theme.
   static const String materialName = 'Material default';
 
-  /// English description of the standard material theme.
+  /// English description of the standard Material theme.
   static const String materialDescription =
       'Default Material color theme, used in the design guide.';
 
@@ -832,14 +832,15 @@ class FlexColor {
   static const String customDescription = 'Define your own custom theme by '
       'selecting color scheme and surface colors.';
 
-  /// A [FlexScheme] enum to [FlexSchemeData] constant map that contains a
-  /// number of pre-made ready to go nice dark and light [FlexSchemeColor]
-  /// colors schemes that can be used by [FlexColorScheme].
-  /// The [FlexColor.schemes] also contain the standard
+  /// A [FlexScheme] enum to [FlexSchemeData] constant map.
+  ///
+  /// Contains pre-made ready to go nice dark and light [FlexSchemeColor]
+  /// color schemes that can be used by [FlexColorScheme].
+  /// The [FlexColor.schemes] map also contain the standard
   /// default material design themes, both the normal and the newer high
   /// contrast version.
   ///
-  /// Each of these predefined color schemes include matching hand tuned light
+  /// Each of these predefined color schemes include matching hand-tuned light
   /// and dark mode theme colors for the theme it defines.
   ///
   /// There is no need to use these predefined themes, you can make your own
@@ -1254,8 +1255,9 @@ class FlexColor {
     ),
   };
 
-  /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map that contains
-  /// all the pre-made ready to use dark and light [FlexSchemeColor]
+  /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
+  ///
+  /// Contains all the pre-made ready to use dark and light [FlexSchemeColor]
   /// color values that can be used e.g. by [FlexColorScheme].
   /// The [FlexColor.schemesWithCustom] also contain the
   /// standard default material design themes, both the normal and the
@@ -1266,7 +1268,7 @@ class FlexColor {
   /// Flex themes that you can use in an app to allow users to select totally
   /// different pre-made nice themes, no just dark and light.
   ///
-  /// Each pre-made custom theme include hand tuned light and dark modes colors
+  /// Each pre-made custom theme include hand-tuned light and dark modes colors
   /// for the theme it defines.
   static const Map<FlexScheme, FlexSchemeData> schemesWithCustom =
       <FlexScheme, FlexSchemeData>{
@@ -1299,7 +1301,7 @@ class FlexColor {
     ),
   };
 
-  /// Return a list with all the predefined [FlexSchemeData] objects.
+  /// Returns a list with all the predefined [FlexSchemeData] objects.
   ///
   /// This list excludes the custom [FlexSchemeData] placeholder that
   /// exists in the [schemesWithCustom] map.
@@ -1309,7 +1311,7 @@ class FlexColor {
 }
 
 /// Immutable data class that holds [name] and [description] string scheme
-/// descriptions, plus [light] and [dark], [FlexSchemeColor] definitions that
+/// descriptions, [light] and [dark], [FlexSchemeColor] definitions that
 /// are used by [FlexColorScheme] to create a theme.
 ///
 /// This class can also be used to make a map with [FlexScheme] enum or some
@@ -1378,6 +1380,7 @@ class FlexSchemeData with Diagnosticable {
         other.dark == dark;
   }
 
+  /// Diagnostics properties.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -1405,9 +1408,10 @@ class FlexSchemeColor with Diagnosticable {
     @required this.primaryVariant,
     @required this.secondary,
     @required this.secondaryVariant,
-    // App bar color and error colors are not required, if they are null
-    // they will be provided by theme constructor defaults.
+    // The appBarColor, accentColor and error colors are not required, if they
+    // are null they will be provided by theme constructor defaults later.
     this.appBarColor,
+    this.accentColor,
     this.error,
   })  : assert(primary != null, 'Primary color may not be null.'),
         assert(
@@ -1425,6 +1429,7 @@ class FlexSchemeColor with Diagnosticable {
     Color secondary,
     Color secondaryVariant,
     Color appBarColor,
+    Color accentColor,
     Color error,
   }) {
     // Check valid primary input
@@ -1445,6 +1450,8 @@ class FlexSchemeColor with Diagnosticable {
           // ignore: avoid_redundant_argument_values
           secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
           primary.darken(kDarkenSecondaryVariant),
+      // Accent color defaults to primary if not defined.
+      accentColor: accentColor ?? primary,
       error: error,
     );
   }
@@ -1471,9 +1478,48 @@ class FlexSchemeColor with Diagnosticable {
   /// that differs from this default.
   final Color appBarColor;
 
+  /// The accentColor in ThemeData.
+  ///
+  /// In default ThemeData.from this is set to [secondary] color, here we use
+  /// [primary] color as default instead. Accent color is only used for the
+  /// border color on text input in dark theme mode. By defining a custom color
+  /// on this accentColor we can easily the color of the active input border on
+  /// text fields in dark mode separately without complicated input decoration
+  /// themes. This only applies to dark mode, border side for light theme mode
+  /// remains tied to primary color.
+  final Color accentColor;
+
   /// The color to use for input validation errors, e.g. for
   /// [InputDecoration.errorText].
   final Color error;
+
+  /// Returns a new [FlexSchemeColor] instance suitable for dark mode, if the
+  /// current one is designed for light theme mode.
+  ///
+  /// Assumes that the colors this FlexColorScheme is made for are for a light
+  /// theme, it does not check that current colors actually are so.
+  ///
+  /// Calculates less saturated colors of any colors predefined for this
+  /// [FlexSchemeColor] color by blending any none null values with white.
+  /// The default [whiteBlend] is 35%, this is normally a suitable value.
+  /// For more saturated primary color try 40%, which is also used in the
+  /// Material design guid to convert the default red error color for
+  /// light mode to dark mode. For primary light mode color with low saturation
+  /// a white blend of 30% often also produces nice results.
+  FlexSchemeColor toDark([int whiteBlend = 35]) {
+    // If null passed, use 35, the default value.
+    // ignore: parameter_assignments
+    whiteBlend ??= 35;
+    return FlexSchemeColor.from(
+      primary: primary?.blend(Colors.white, whiteBlend),
+      primaryVariant: primaryVariant?.blend(Colors.white, whiteBlend),
+      secondary: secondary?.blend(Colors.white, whiteBlend),
+      secondaryVariant: secondaryVariant?.blend(Colors.white, whiteBlend),
+      appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
+      accentColor: accentColor?.blend(Colors.white, whiteBlend),
+      error: error?.blend(Colors.white, whiteBlend),
+    );
+  }
 
   /// Copy the object with one or more provided properties changed.
   FlexSchemeColor copyWith({
@@ -1482,6 +1528,7 @@ class FlexSchemeColor with Diagnosticable {
     Color secondary,
     Color secondaryVariant,
     Color appBarColor,
+    Color accentColor,
     Color error,
   }) {
     return FlexSchemeColor(
@@ -1490,6 +1537,7 @@ class FlexSchemeColor with Diagnosticable {
       secondary: secondary ?? this.secondary,
       secondaryVariant: secondaryVariant ?? this.secondaryVariant,
       appBarColor: appBarColor ?? this.appBarColor,
+      accentColor: accentColor ?? this.accentColor,
       error: error ?? this.error,
     );
   }
@@ -1502,6 +1550,7 @@ class FlexSchemeColor with Diagnosticable {
       secondary,
       secondaryVariant,
       appBarColor,
+      accentColor,
       error,
     );
   }
@@ -1516,6 +1565,7 @@ class FlexSchemeColor with Diagnosticable {
         other.secondary == secondary &&
         other.secondaryVariant == secondaryVariant &&
         other.appBarColor == appBarColor &&
+        other.accentColor == accentColor &&
         other.error == error;
   }
 
@@ -1527,6 +1577,7 @@ class FlexSchemeColor with Diagnosticable {
     properties.add(ColorProperty('secondary', secondary));
     properties.add(ColorProperty('secondaryVariant', secondaryVariant));
     properties.add(ColorProperty('appBarColor', appBarColor));
+    properties.add(ColorProperty('accentColor', accentColor));
     properties.add(ColorProperty('error', error));
   }
 }

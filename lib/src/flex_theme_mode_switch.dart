@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'flex_color.dart';
 
-/// A 3-way Light, Dark and System theme mode switch widget.
+/// A 3-way Light, Dark and System theme-mode switch widget.
 ///
-/// Pass in current selected [themeMode] value and [onThemeModeChanged]
-/// callback will return the selected theme mode.
+/// Pass in current selected [themeMode] value and the [onThemeModeChanged]
+/// callback will return the selected theme-mode.
 ///
-/// Requires a [FlexSchemeData] object in [flexSchemeData], you
+/// Requires a [FlexSchemeData] object via [flexSchemeData]. You
 /// should pass it one that has the same value as the one currently used by
 /// your `FlexColorScheme` based theme. Doing so, the option toggle buttons
 /// will contain the scheme colors for both the light and dark theme
@@ -18,7 +18,7 @@ import 'flex_color.dart';
 /// | Primary    | Primary variant   |
 /// | Secondary  | Secondary variant |
 /// ```
-/// in the option button. In the system choice the 2nd column will instead
+/// In the option button. In the system choice the 2nd column will instead
 /// contain the dark mode primary and secondary colors, thus combining both
 /// theme mode's color scheme.
 ///
@@ -36,6 +36,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
     this.labelLight = 'LIGHT',
     this.labelDark = 'DARK',
     this.labelSystem = 'SYSTEM',
+    this.showSystemMode = true,
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
     this.labelAbove = true,
@@ -58,6 +59,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
         assert(
             onThemeModeChanged != null, 'On theme mode changed cannot be null'),
         assert(flexSchemeData != null, 'Flex scheme data cannot be null'),
+        assert(showSystemMode != null, 'Show system mode cannot be null'),
         assert(labelAbove != null, 'Label above cannot be null'),
         assert(selectedElevation != null && selectedElevation >= 0.0,
             'Selected elevation cannot be null and must be >= 0.0'),
@@ -95,6 +97,12 @@ class FlexThemeModeSwitch extends StatelessWidget {
   /// Option label for theme mode system.
   /// Defaults to 'SYSTEM', assign null to omit the label.
   final String labelSystem;
+
+  /// Include a theme option button for selecting system theme mode.
+  ///
+  /// Defaults to true.
+  /// If set to false, only a light and dark-mode options are available.
+  final bool showSystemMode;
 
   /// Optional text style for the theme mode selected label.
   /// If null, default to Theme.of(context).textTheme.caption).
@@ -146,17 +154,17 @@ class FlexThemeModeSwitch extends StatelessWidget {
   final EdgeInsets optionButtonMargin;
 
   /// The circular borderRadius of the option button
-  /// Defaults to 5.
+  /// Defaults to 5 dp.
   final double optionButtonBorderRadius;
 
-  /// The height of an individual scheme color box. Defaults to 24.
+  /// The height of an individual scheme color box. Defaults to 24 dp.
   final double height;
 
-  /// The width of an individual scheme color box. Defaults to 24.
+  /// The width of an individual scheme color box. Defaults to 24 dp.
   final double width;
 
   /// The circular borderRadius of an individual scheme color box.
-  /// Defaults to 3.
+  /// Defaults to 3 dp.
   final double borderRadius;
 
   /// Padding around an individual scheme color box.
@@ -236,51 +244,54 @@ class FlexThemeModeSwitch extends StatelessWidget {
         // four colors of either mode and we place them on a different
         // background to indicate that we do not actually know if it will
         // be light or dark, as that is controlled by the host system.
-        FlexThemeModeOptionButton(
-          flexSchemeColor: FlexSchemeColor(
-            primary: flexSchemeData.light.primary,
-            primaryVariant: flexSchemeData.dark.primary,
-            secondary: flexSchemeData.light.secondary,
-            secondaryVariant: flexSchemeData.dark.secondary,
+        if (showSystemMode)
+          FlexThemeModeOptionButton(
+            flexSchemeColor: FlexSchemeColor(
+              primary: flexSchemeData.light.primary,
+              primaryVariant: flexSchemeData.dark.primary,
+              secondary: flexSchemeData.light.secondary,
+              secondaryVariant: flexSchemeData.dark.secondary,
+            ),
+            backgroundColor: backgroundSystem ?? Colors.grey[500],
+            label: labelSystem,
+            labelStyle: themeMode == ThemeMode.system
+                ? selectedLabelStyle
+                : unselectedLabelStyle,
+            labelAbove: labelAbove,
+            selected: themeMode == ThemeMode.system,
+            onSelect: () {
+              onThemeModeChanged(ThemeMode.system);
+            },
+            selectedBorder: selectedBorder,
+            unselectedBorder: unselectedBorder,
+            elevation: themeMode == ThemeMode.system
+                ? selectedElevation
+                : unselectedElevation,
+            optionButtonPadding: optionButtonPadding,
+            optionButtonMargin: optionButtonMargin,
+            optionButtonBorderRadius: optionButtonBorderRadius,
+            height: height,
+            width: width,
+            borderRadius: borderRadius,
+            padding: padding,
+            hoverColor: hoverColor,
           ),
-          backgroundColor: backgroundSystem ?? Colors.grey[500],
-          label: labelSystem,
-          labelStyle: themeMode == ThemeMode.system
-              ? selectedLabelStyle
-              : unselectedLabelStyle,
-          labelAbove: labelAbove,
-          selected: themeMode == ThemeMode.system,
-          onSelect: () {
-            onThemeModeChanged(ThemeMode.system);
-          },
-          selectedBorder: selectedBorder,
-          unselectedBorder: unselectedBorder,
-          elevation: themeMode == ThemeMode.system
-              ? selectedElevation
-              : unselectedElevation,
-          optionButtonPadding: optionButtonPadding,
-          optionButtonMargin: optionButtonMargin,
-          optionButtonBorderRadius: optionButtonBorderRadius,
-          height: height,
-          width: width,
-          borderRadius: borderRadius,
-          padding: padding,
-          hoverColor: hoverColor,
-        ),
       ],
     );
   }
 }
 
 /// Stateless widget that draws a box with the 4 colors, primary,
-/// primary variant secondary and secondary variant in [flexSchemeColor].
+/// primary variant secondary and secondary variant in the properties of
+/// passed in [flexSchemeColor].
 ///
 /// The widget has a required [selected] bool property for selected and
 /// not selected status. A VoidCallback provides [onSelect] provides
 /// select action callback info.
 ///
 /// The [FlexThemeModeOptionButton] offers a large number of customization
-/// options, see API reference for more info.
+/// options, see API reference for more info. This widget is typically used
+/// via the [FlexThemeModeSwitch] widget.
 class FlexThemeModeOptionButton extends StatelessWidget {
   /// Default constructor.
   const FlexThemeModeOptionButton({
@@ -362,17 +373,17 @@ class FlexThemeModeOptionButton extends StatelessWidget {
   final EdgeInsets optionButtonMargin;
 
   /// The circular borderRadius of the option button
-  /// Defaults to 5.
+  /// Defaults to 5 dp.
   final double optionButtonBorderRadius;
 
-  /// The height of an individual scheme color box. Defaults to 25.
+  /// The height of an individual scheme color box. Defaults to 24 dp.
   final double height;
 
-  /// The width of an individual scheme color box. Defaults to 25.
+  /// The width of an individual scheme color box. Defaults to 24 dp.
   final double width;
 
   /// The circular borderRadius of an individual scheme color box.
-  /// Defaults to 3.
+  /// Defaults to 4 dp.
   final double borderRadius;
 
   /// Padding around an individual scheme color box.
@@ -381,8 +392,8 @@ class FlexThemeModeOptionButton extends StatelessWidget {
 
   /// The InkWell hover color for the option button.
   ///
-  /// If null, default to `Color(0x50BCBCBC)` in light mode and to
-  /// `Color(0x99555555)` dark mode.
+  /// If null, defaults to `Color(0x50BCBCBC)` in light mode and to
+  /// `Color(0x99555555)` in dark-mode.
   final Color hoverColor;
 
   @override
@@ -479,7 +490,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
   }
 }
 
-/// Draws a box with rounded corners with background color [color].
+/// Draws a box with rounded corners with given background [color].
 ///
 /// Have defaults for standard use case, but may be modified via parent.
 class _SchemeColorBox extends StatelessWidget {
