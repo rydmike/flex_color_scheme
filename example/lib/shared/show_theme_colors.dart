@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 // the examples.
 
 // Draw a number of boxes showing the colors of key theme color properties
-// in a the ColorScheme of the theme and in the overall Theme.
-// This is used so we can visually see the active theme colors in the example.
+// in the ColorScheme of the inherited ThemeData and some of its key color
+// properties.
+// This widget is just used so we can visually see the active theme colors
+// in the examples and their used FlexColorScheme based themes.
 class ShowThemeColors extends StatelessWidget {
   const ShowThemeColors({Key key}) : super(key: key);
 
@@ -16,6 +18,8 @@ class ShowThemeColors extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
     final Color appBarColor = theme.appBarTheme.color ?? theme.primaryColor;
 
+    // A Wrap widget is just the right handy widget for this type of
+    // widget to make it responsive.
     return Wrap(
       spacing: 4,
       runSpacing: 4,
@@ -73,7 +77,7 @@ class ShowThemeColors extends StatelessWidget {
           textColor: colorScheme.onSecondary,
         ),
         ThemeCard(
-          label: 'Accent',
+          label: 'Accent\nColor',
           color: theme.accentColor,
           textColor: colorScheme.onPrimary,
         ),

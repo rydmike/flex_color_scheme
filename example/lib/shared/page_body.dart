@@ -13,7 +13,7 @@ import 'constants.dart';
 // - Adds the capability to un-focus a control like a TextFiled by clicking on
 //   the background.
 // - Center the content and limit the content width when a given width
-//   constraint value  is exceeded, in this case an app level constant.
+//   constraint value is exceeded, in this case an app level max width constant.
 class PageBody extends StatelessWidget {
   const PageBody({Key key, this.child}) : super(key: key);
   final Widget child;
@@ -26,7 +26,7 @@ class PageBody extends StatelessWidget {
         // by tapping somewhere outside it.
         onTap: () => FocusScope.of(context).unfocus(),
         // The Center plus ConstrainedBox is a neat way of making a layout that
-        // will never be wider than the width constraint, then when available
+        // will never be wider than the width constraint, when available
         // width gets wider than the constraint, the body never gets any
         // wider and the content remains in a centered column. This is also a
         // common web page layout, used in order to never make the content so

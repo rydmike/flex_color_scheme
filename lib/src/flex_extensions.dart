@@ -71,7 +71,9 @@ extension FlexColorExtensions on Color {
   /// the alphaBlend static function that exists in dart:ui Color. It is used
   /// to create the branded surface colors in FlexColorScheme.
   Color blend(Color input, [int amount = 10]) {
-    if (amount == null || amount <= 0) return this;
+    if (amount == null || amount <= 0 || input == null || this == null) {
+      return this;
+    }
     if (amount >= 100) return input;
     return Color.alphaBlend(input.withAlpha(255 * amount ~/ 100), this);
   }

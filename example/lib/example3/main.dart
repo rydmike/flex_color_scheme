@@ -11,6 +11,7 @@ import '../all_shared_imports.dart';
 // a custom scheme as selectable FlexColorScheme based theme options in an
 // application. The example also uses strong branded surface colors.
 // A theme showcase widget shows the theme with several common Material widgets.
+// In this example the FlexThemeModeSwitch excludes the system mode.
 // -----------------------------------------------------------------------------
 
 void main() => runApp(const DemoApp());
@@ -18,7 +19,7 @@ void main() => runApp(const DemoApp());
 // Create a custom FlexSchemeData scheme with name, description and a light
 // and dark FlexSchemeColor.
 const FlexSchemeData customFlexScheme = FlexSchemeData(
-  name: 'Custom purple',
+  name: 'Toledo purple',
   description: 'Purple theme created from custom defined colors.',
   light: FlexSchemeColor(
     primary: Color(0xFF4E0028),
@@ -67,6 +68,8 @@ class _DemoAppState extends State<DemoApp> {
             ? customFlexScheme.light
             : FlexColor.schemesWithCustom[flexScheme].light,
         surfaceStyle: FlexSurface.strong,
+        // Use comfortable on desktops instead of compact, devices as default.
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
       ).toTheme,
       // We do the exact same definition for the dark theme, but using
       // FlexColorScheme.dark factory and the dark FlexSchemeColor instead.
@@ -75,6 +78,7 @@ class _DemoAppState extends State<DemoApp> {
             ? customFlexScheme.dark
             : FlexColor.schemesWithCustom[flexScheme].dark,
         surfaceStyle: FlexSurface.strong,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
       ).toTheme,
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
@@ -199,6 +203,7 @@ class HomePage extends StatelessWidget {
                 themeMode: themeMode,
                 onThemeModeChanged: onThemeModeChanged,
                 flexSchemeData: flexSchemeData,
+                showSystemMode: false,
               ),
             ),
             const Divider(),

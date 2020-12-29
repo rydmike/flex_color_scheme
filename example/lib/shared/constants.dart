@@ -10,10 +10,10 @@ class AppConst {
   // When I build a new public version I just make sure to update this info
   // before building them.
   static const String appName = 'FlexColorScheme';
-  static const String version = '1.0.0-dev.1';
+  static const String version = '1.1.0';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
-  static const String flutterVersion = 'Flutter dev 1.25.0-8.0.pre';
+  static const String flutterVersion = 'Flutter 1.26.0-1.0.pre';
   static const String copyright = '© 2020';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
@@ -32,14 +32,8 @@ class AppConst {
   static const double edgePadding = 12;
 
   // The width of the side menu when expanded, only used by example 5.
-  static const double expandWidth = 220;
+  static const double expandWidth = 225;
 
   // The width of the side menu when rail sized, only used by example 5.
   static const double shrinkWidth = 60;
-
-  // The minimum width the demo card can be, only used by example 5.
-  static const double minCardWidth = 150;
-
-  // The number of cards displayed, only used by example 5.
-  static const int maxCards = 200;
 }

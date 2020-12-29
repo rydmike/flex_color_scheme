@@ -16,7 +16,7 @@ void main() => runApp(const DemoApp());
 // Create a custom FlexSchemeData scheme with name, description and a light
 // and dark FlexSchemeColor.
 const FlexSchemeData customFlexScheme = FlexSchemeData(
-  name: 'Custom purple',
+  name: 'Toledo purple',
   description: 'Purple theme created from custom defined colors.',
   light: FlexSchemeColor(
     primary: Color(0xFF4E0028),
@@ -57,10 +57,17 @@ class _DemoAppState extends State<DemoApp> {
       // Use the custom light scheme to define a light FlexColorScheme for the
       // app and call .toTheme method to create the slightly opinionated theme
       // from the defined custom flex scheme data.
-      theme: FlexColorScheme.light(colors: customFlexScheme.light).toTheme,
+      theme: FlexColorScheme.light(
+        colors: customFlexScheme.light,
+        // Use comfortable on desktops instead of compact, devices as default.
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      ).toTheme,
       // We do the exact same definition for the dark theme, but using
       // FlexColorScheme.dark factory and the flexSchemeColor dark scheme.
-      darkTheme: FlexColorScheme.dark(colors: customFlexScheme.dark).toTheme,
+      darkTheme: FlexColorScheme.dark(
+        colors: customFlexScheme.dark,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      ).toTheme,
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
       // This simple example app has only one page.
