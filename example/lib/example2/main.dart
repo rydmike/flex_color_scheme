@@ -61,12 +61,14 @@ class _DemoAppState extends State<DemoApp> {
         colors: customFlexScheme.light,
         // Use comfortable on desktops instead of compact, devices as default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        fontFamily: AppFonts.mainFont,
       ).toTheme,
       // We do the exact same definition for the dark theme, but using
       // FlexColorScheme.dark factory and the flexSchemeColor dark scheme.
       darkTheme: FlexColorScheme.dark(
         colors: customFlexScheme.dark,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        fontFamily: AppFonts.mainFont,
       ).toTheme,
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,

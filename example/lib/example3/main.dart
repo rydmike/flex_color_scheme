@@ -70,6 +70,7 @@ class _DemoAppState extends State<DemoApp> {
         surfaceStyle: FlexSurface.strong,
         // Use comfortable on desktops instead of compact, devices as default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        fontFamily: AppFonts.mainFont,
       ).toTheme,
       // We do the exact same definition for the dark theme, but using
       // FlexColorScheme.dark factory and the dark FlexSchemeColor instead.
@@ -79,6 +80,7 @@ class _DemoAppState extends State<DemoApp> {
             : FlexColor.schemesWithCustom[flexScheme].dark,
         surfaceStyle: FlexSurface.strong,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        fontFamily: AppFonts.mainFont,
       ).toTheme,
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,

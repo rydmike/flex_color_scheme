@@ -13,7 +13,8 @@ class AppConst {
   static const String version = '1.1.0';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
-  static const String flutterVersion = 'Flutter 1.26.0-1.0.pre';
+  static const String flutterVersion =
+      'Flutter 1.26.0-1.0.pre Channel Dev using CanvasKit build option';
   static const String copyright = '© 2020';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
@@ -36,4 +37,21 @@ class AppConst {
 
   // The width of the side menu when rail sized, only used by example 5.
   static const double shrinkWidth = 60;
+}
+
+/// Fonts assets used in this application,
+class AppFonts {
+  AppFonts._();
+
+  // We use usage specific terms like mainFont and logoFont in the code,
+  // not actual font names. These names then refer to const strings containing
+  // the actual used font name.
+  static const String mainFont = fontRoboto;
+
+  // We use Roboto as an asset so we can get it on all platforms and have same
+  // look. If we do not do this, then on some platforms we will instead get a
+  // Roboto 'like' font as replacement font. In this app we want to make sure
+  // we actually use Roboto on all platforms. So we provide it as a bundled asset
+  // and also specify it in our theme explicitly via the mainFont.
+  static const String fontRoboto = 'Roboto';
 }

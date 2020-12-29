@@ -219,6 +219,7 @@ class _DemoAppState extends State<DemoApp> {
               appBarStyle: flexAppBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
+              fontFamily: AppFonts.mainFont,
             ).toTheme
           // The default ThemeData.from method as an option, for demo and
           // comparison purposes. It will not not be fully color scheme colored,
@@ -230,6 +231,7 @@ class _DemoAppState extends State<DemoApp> {
                 appBarStyle: flexAppBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                fontFamily: AppFonts.mainFont,
               ).toScheme,
             ).copyWith(
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -253,6 +255,7 @@ class _DemoAppState extends State<DemoApp> {
               tooltipsMatchBackground: tooltipsMatchBackground,
               darkIsTrueBlack: darkIsTrueBlack,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
+              fontFamily: AppFonts.mainFont,
             ).toTheme
           : ThemeData.from(
               colorScheme: FlexColorScheme.dark(
@@ -264,6 +267,7 @@ class _DemoAppState extends State<DemoApp> {
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 darkIsTrueBlack: darkIsTrueBlack,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                fontFamily: AppFonts.mainFont,
               ).toScheme,
             ).copyWith(
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
