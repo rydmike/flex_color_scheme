@@ -23,7 +23,7 @@ You can find an article describing FlexColorScheme [**here**](https://rydmike.co
     * [Example 4 Switch between all built in color schemes](#example-4-switch-between-all-built-in-color-schemes)    
     * [Example 5 Full featured demo](#example-5-full-featured-demo)
     * [Computed Dark Theme](#computed-dark-theme)
-    * [Branded surfaces](#branded-surfaces)
+    * [Branded Surfaces](#branded-surfaces)
     * [True Black](#true-black)
 * [Behind the scenes](#behind-the-scenes)  
     * [Used Theme Customizations](#used-theme-customizations)
@@ -293,7 +293,7 @@ class _DemoAppState extends State<DemoApp> {
 
 When you build and run **example 1** you get a sample application that looks like this in light and dark mode:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1al.png?raw=true" alt="ColorScheme example 1 light" width="200"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1ad.png?raw=true" alt="ColorScheme example 1 dark" width="200"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1al.png?raw=true" alt="ColorScheme example 1 light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1ad.png?raw=true" alt="ColorScheme example 1 dark" width="250"/>
 
 Try example 1 live on the [**web here**](https://rydmike.com/flexcolorscheme1).
 
@@ -301,7 +301,7 @@ In the app, scroll down to see the theme showcase further below, it presents the
 This simple first example is not using primary color surface branding, it is just a normal theme with a few 
 convenient fixes for some theme design gaps in Flutter's own themes created with `ThemeData.from` a `ColorScheme`.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1bl.png?raw=true" alt="ColorScheme example 1b light" width="200"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1cl.png?raw=true" alt="ColorScheme example 1c light" width="200"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1bl.png?raw=true" alt="ColorScheme example 1b light" width="250"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1cl.png?raw=true" alt="ColorScheme example 1c light" width="250"/>
 
 ### Example 2 Create a custom color scheme
 
@@ -370,7 +370,7 @@ pass the appropriate scheme's colors to the `FlexColorScheme.light` and `dark` f
 ```
 When you build and run **example 2** you get a sample application that looks like this in light and dark mode:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2al.png?raw=true" alt="ColorScheme example 2 light" width="200"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2ad.png?raw=true" alt="ColorScheme example 2 dark" width="200"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2al.png?raw=true" alt="ColorScheme example 2 light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2ad.png?raw=true" alt="ColorScheme example 2 dark" width="250"/>
 
 Try example 2 live on the [**web here**](https://rydmike.com/flexcolorscheme2).
 
@@ -378,7 +378,7 @@ Scroll down to see the theme showcase widgets further below, presenting the them
 not using primary color surface branding, it is just a normal theme with a few convenient fixes for certain
 theme properties.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2bl.png?raw=true" alt="ColorScheme example 2b light" width="200"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2cl.png?raw=true" alt="ColorScheme example 2c light" width="200"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2bl.png?raw=true" alt="ColorScheme example 2b light" width="250"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2cl.png?raw=true" alt="ColorScheme example 2c light" width="250"/>
 
 ### Example 3 Switch between different color schemes
 
@@ -707,8 +707,8 @@ even be tuned with a parameter if so desired. If you use this toggle on the last
 any difference, because we already created its dark scheme with this method, the toggle just again computes the same
 dark scheme.
 
-additionally we will make a toggle that allows us to instead of using the `FlexColorScheme.toTheme` method, use 
-the standard flutter `ThemeData.from` factory to create the theme from the same color scheme definition. 
+Additionally, we will include a toggle that allows us to instead of using the `FlexColorScheme.toTheme` method, use 
+the standard flutter `ThemeData.from` factory to create the theme from the same color scheme definitions. 
 This way we can use this toggle to see and study the differences. 
 
 
@@ -756,7 +756,7 @@ This way we can use this toggle to see and study the differences.
 ```
 
 We define the light theme for the app, using current theme index, selected surface style and app bar style. With 
-the built-in 20 themes, and the three custom ones we maded, we can use 23 different app themes via the setup below, 
+the built-in 20 themes, and the three custom ones we made, we can use 23 different app themes via the setup below, 
 times the five surface styles and app bar variants.
 
 The factory `FlexColorScheme.light` is used to define a `FlexColorScheme` for a light theme, from the light 
@@ -790,7 +790,7 @@ typography in the theme data.
 
 When toggling between the standard `ThemeData.from` and the `FlexColorScheme.toTheme` made themes from the 
 same `ColorScheme` data, we can observe the differences and see some theme colors that the standard method does 
-not adjust to match the used color scheme. The article [**here**](https://rydmike.com/colorscheme) includes
+not adjust to match the used color scheme. The previously mentioned [article](https://rydmike.com/colorscheme) includes
 a visual presentation of the differences.
 
 ```dart
@@ -813,10 +813,6 @@ a visual presentation of the differences.
 We do the equivalent definition for the dark theme, and we add
 the true black option as well. We also use the switch for `colors` to pass it a `FlexSchemeColor` that is either
 using the predefined ones or computes them from the light `FlexSchemeColor`,
-
-In dark-mode we can see many gaps in the resulting ThemeData when
-using the standard `ThemeData.from` factory to create the theme.
-
 
 ```dart
        
@@ -849,10 +845,11 @@ using the standard `ThemeData.from` factory to create the theme.
            ),
          ),
 ```
+In dark-mode we will see some more gaps in the resulting ThemeData when using the standard `ThemeData.from` factory 
+to create the theme.
 
 The rest of the additions in the stateful MaterialApp are just passing in current values and getting a new value for 
 it via callbacks for all our settings and their current values.
-
 
 ```dart
        // themeMode value and change callback
@@ -913,15 +910,16 @@ it via callbacks for all our settings and their current values.
  }
 ```
 
-With this example we include a side rail, it actually expands to menu on web and desktop sized canvas and even 
-phone landscape, just for demo purposes. It is there to give a better idea what a surface branded theme 
+With this example we include a side rail, it expands to a menu on web and desktop, when using a larger 
+canvas, it even does it in phone landscape mode. This just for demo purposes. It is here to give a better 
+idea and presentation of what a surface branded theme 
 looks like. It is of course best viewed and experienced on a tablet, or the web demo where the surface branding 
 theming effect is more obvious.
 
-
 The HomePage's build method for this example starts by wrapping the entire page content in an `AnnotatedRegion` 
-with value that we get from the static helper `FlexColorScheme.themedSystemNavigationBar(context)`. This way 
-we can get a system navigation bar in Android that has one, that follows the active theme's background color and mode.
+with a value that we get from the static helper `FlexColorScheme.themedSystemNavigationBar(context)`. This way 
+we can get a system navigation bar on Android phones that still uses one, that also follows the active theme's 
+background color and theme mode.
 
 ```dart
    return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -930,7 +928,7 @@ we can get a system navigation bar in Android that has one, that follows the act
    );
 ```
 
-This example starts with the **deep blue sea** scheme, and the example image below show the new feature included from
+This example starts with the **deep blue sea** scheme. The example image below show the new feature included from
 version 1.1.0, with correctly themed system navigation bar on Android devices. (Some older example screenshots 
 further below have not been updated to include this feature.)
 
@@ -943,12 +941,12 @@ Try example 5 live on the [**web here**](https://rydmike.com/flexcolorscheme5)
 Since the example allows us to toggle the dark mode from using its hand tuned predefined dark scheme colors, to the
 dark scheme colors computed from the light scheme colors. Let's compare some examples.
 
-With the above **deep blue sea** scheme, the computed ones are a bit more dull and muted. These screenshots
-are using medium surface branding, the computed dark scheme is on the right.
+With the above **deep blue sea** scheme, the computed ones are a bit more dull and muted in this example. 
+These screenshots are using medium surface branding, the computed dark scheme is on the right.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad-to-black.png?raw=true" alt="ColorScheme example 5 dark computed" width="250"/>
 
-With some other schemes, like the **Aqua blue** one there is only a very minor difference. These screenshots
+With some other schemes, like the **Aqua blue** one there is only a minor difference. These screenshots
 are using strong surface branding, the computed dark scheme is on the right.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5a2d.png?raw=true" alt="ColorScheme example 5a2 dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5a2d-to-black.png?raw=true" alt="ColorScheme example 5 dark computed" width="250"/>
@@ -957,13 +955,13 @@ The result of the `toDark` method varies depending on how saturated the used lig
 to tune the calculated dark scheme by modifying the `whiteBlend` parameter it uses to blend in white to make the 
 dark scheme. The default `whiteBlend` is 35%, this is normally a suitable value. For more saturated light scheme 
 colors try 40%, which is also used in the Material design guide to convert the default red error color for light mode,
-to dark mode. For light scheme color with low saturation a white blend of 30% often also produces nice results.
+to dark mode. For light scheme color with low saturation, a white blend of 30% often also produces nice results.
 
 ### Branded Surfaces
 
-Let us now explore the effect of branded surface color in both light and dark mode. Branded surfaces are often 
+Let us now explore the effect of branded surface colors. Branded surfaces are often 
 associated with dark mode, but it works well with light mode too when applied delicately. Below you see how 
-the primary color gets blended into Material surface and even stronger so, into Material background. 
+the primary color gets blended into Material surface and even stronger so, into Material background colors. 
 The screenshots below are using the medium branding strength.
 
 You can use the toggle in the example to change from standard no branded surfaces colors, to light, medium, 
@@ -978,14 +976,14 @@ side, in a large browser windows.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bl.png?raw=true" alt="ColorScheme example 5b light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cl.png?raw=true" alt="ColorScheme example 5c light" width="250"/>
 
-Now when we tried the branding, we can test the tricks `FlexColorScheme` can do
+Now that when we tried basic branding, we can test the tricks `FlexColorScheme` can do
 with the `AppBarTheme`. You can easily toggle both dark and light mode app bar theme to use differently
-themed backgrounds. 
-It can use scheme primary color, the default Material plain white/dark background color, or the primary branded 
-surface and background color versions, as well as an extra custom app bar scheme color, which is a separate scheme
-color, that does not exist in Flutter's `ColorScheme`, it thus does not have to be any of the colors in 
-Flutter `ColorScheme`. The predefined schemes actually use the color defined for normal scheme `secondaryVariant` 
-as the custom color used for the app bar theme. When you make your own schemes you can do the same or use a totally not 
+themed backgrounds. It can use scheme primary color, the default Material plain white/dark background color, 
+or the primary branded surface and background color versions, as well as an extra custom app bar scheme color, 
+which is a separate scheme color, that does not exist in Flutter's `ColorScheme`, it thus does 
+not have to be any of the colors in Flutter `ColorScheme`. The predefined schemes actually use the color defined 
+for normal scheme `secondaryVariant` as the custom color used for the app bar theme. 
+When you make your own schemes you can do the same or use a totally not 
 scheme related color as the app bar's theme color.
 
 Below you can see some different branding strengths with a background primary color branded app bar color used as well.
@@ -999,9 +997,9 @@ Here are few more images of the heavy primary color branded version, when lookin
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="250"/>
 
-### True black
+### True Black
 
-Dark-mode is nice, but with `FlexColorScheme` you can go even "deeper", to **true black** with the flick of a 
+Dark-mode is nice, but with `FlexColorScheme` you can go even "deeper", go **true black** with the flick of a 
 switch. When using the true black option for dark-mode, surface, background and scaffold background are set to 
 fully black. This can save power on OLED screens as the pixels are turned off, but it can also cause scrolling artefact 
 issues when pixels turn fully on and off rapidly as you scroll. You can read about this and see an example of it in 
@@ -1021,6 +1019,8 @@ when using heavy branding with the **Red red wine** color scheme.
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cd.png?raw=true" alt="ColorScheme example 5c dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bd.png?raw=true" alt="ColorScheme example 5b dark" width="250"/>
 
 Here is another difference example with the **Deep blue sea** scheme, when using medium strength surface branding.
+These screenshots are also from the newer version 1.1.0 of example 5 that includes the proper theming and branding of
+system navigation bar.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad-true-black.png?raw=true" alt="ColorScheme example 5 true black" width="250"/>
 
@@ -1190,18 +1190,18 @@ are, here is a complete list:
     `ButtonTextTheme.primary`, plus minor changes to padding and tap target
     size. These modifications make the old buttons almost match the
     default design and look of their corresponding newer buttons.
-    Thus the `RaisedButton` looks
+    Thus, the `RaisedButton` looks
     very similar to `ElevatedButton`, `OutlineButton` to `OutlinedButton`
     and `FlatButton` to `TextButton`. There are some differences in
     margins and looks, especially in dark-mode, but they are very similar.
 
     This is a button style we used before the introduction of
     the new buttons with their improved defaults. It just happened to be
-    very close, since theme was based on how things looked in the Material
-    design guide already prior to Flutter releasing the new buttons that
-    fully implement the correct Material design.
+    very close, since the theme was based on how things looked in the Material
+    design guide already prior to Google releasing the new Flutter Material 
+    buttons that fully implement the correct Material design.
 
-    The newer buttons are still nicer, especially when it
+    The newer buttons are nicer, especially when it
     comes to their interactions and all the theming options they provide,
     but they are a bit verbose to theme. If you want to make custom styled
     buttons we still recommend using the newer buttons instead of the old
@@ -1291,5 +1291,3 @@ are, here is a complete list:
     the active color scheme and theme mode to make it at least use
     a correctly colored theme colored background for the active theme.
     _See example 5 for a demo on how to use this._
-
-

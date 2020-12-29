@@ -68,5 +68,5 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 - [x] API to opt-out from one-toned AppBar and return it to Android's default two-toned.
 - [x] API to assist with themed annotated region for system navigation bar theming.  
 - [ ] Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable channel. See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206.
-- [ ] Version 1.1.x: Add tests.
+- [ ] Version 1.1.x: Add tests and fine tune the docs.
 - [ ] Version 2.0.0-nullsafety.1: Add null safe version.
