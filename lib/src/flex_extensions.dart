@@ -1,32 +1,29 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
-/// Extension on color to brighten, lighten, darken and blend colors and
+/// Extensions on [Color] to brighten, lighten, darken and blend colors and
 /// can get a shade for gradients.
 ///
-/// The extension methods are re-implement some of TinyColor's functions
-/// https://pub.dev/packages/tinycolor
-/// The functions from TinyColor re-implemented as color extension are:
-/// * brighten(int)
-/// * lighten (int)
-/// * darken(int)
-/// The TinyColor algorithms are also been re-implemented using
-/// Flutter's HSLColor class instead of the custom one in the TinyColor lib.
+/// Some of the extensions are rewrites of TinyColor's functions
+/// https://pub.dev/packages/tinycolor. The TinyColor algorithms are also
+/// been modified to use Flutter's HSLColor class instead of the custom one in
+/// the TinyColor lib. The functions from TinyColor reimplemented as Color
+/// extensions here are, [brighten], [lighten] and [darken]. They are used
+/// for color calculations in FlexColorScheme but also exposed for reuse.
 ///
-/// A new custom extension is the one used to blend two colors using alpha
-/// value. This extension is used to calculate branded surface colors
-/// used by FlexColorScheme's branded surfaces.
-/// * blend(Color, int).
+/// Another frequently used extension is the one used to [blend] two colors
+/// using alpha value. This extension is used to calculate branded surface
+/// colors used by FlexColorScheme's branded surfaces and for automatic dark
+/// color schemes from a light scheme.
 ///
-/// * getShadeColor extension is very specific and used mostly to make shades
-/// for gradient AppBars.
+/// The [getShadeColor] extension is less frequently used and used used mostly
+/// to make shades for gradient AppBars.
 ///
 /// The color extension also include getting a color's RGB hex code as a string
-/// in two different formats.
-/// * hexCode - Flutter HEX code of a color starting with 0x and alpha value.
-///   with alpha alpha value first.
-/// * hex - Traditional API style color starting with # and no alpha.
+/// in two different formats. Extension [hexCode] returns a Flutter style
+/// HEX code string of a Color value, meaning it starts with 0x and alpha value
+/// before the RGB Hex values. The plain [hex] extension returns a typical
+/// API formatted hex color string starting with # and no alpha value.
 extension FlexColorExtensions on Color {
   /// Like TinyColor brighten function, it brightens the color with the
   /// given integer percentage amount.
@@ -40,8 +37,8 @@ extension FlexColorExtensions on Color {
     return color;
   }
 
-  /// Like TinyColor lighten function, it lightens the color with the
-  /// given integer percentage amount.
+  /// Lightens the color with the given integer percentage amount.
+  /// Defaults to 10%.
   Color lighten([int amount = 10]) {
     // HSLColor returns saturation 1 for black, we want 0 instead to be able
     // lighten black color up along the grey scale from black.
@@ -54,8 +51,8 @@ extension FlexColorExtensions on Color {
         .toColor();
   }
 
-  /// Like TinyColor darken function, it darkens the color with the
-  /// given integer percentage amount.
+  /// Darkens the color with the given integer percentage amount.
+  /// Defaults to 10%.
   Color darken([int amount = 10]) {
     final HSLColor hsl = HSLColor.fromColor(this);
     return hsl
@@ -65,15 +62,22 @@ extension FlexColorExtensions on Color {
   }
 
   /// Blend in the given input Color with a percentage of alpha.
+  ///
   /// You typically apply this on a background color, light or dark
   /// to create a background color with a hint of a color used in a theme.
-  /// This function does not exist in TinyColor, its an use case of
-  /// the alphaBlend static function that exists in dart:ui Color. It is used
-  /// to create the branded surface colors in FlexColorScheme.
+  ///
+  /// This is a use case of the alphaBlend static function that exists in
+  /// dart:ui Color. It is used to create the branded surface colors in
+  /// FlexColorScheme and to calculate dark scheme colors from light ones,
+  /// by blending in white color with light scheme color.
+  ///
+  /// Defaults to 10% alpha blend of the passed in Color value.
   Color blend(Color input, [int amount = 10]) {
+    // Skip blending for impossible value and return the instance color value.
     if (amount == null || amount <= 0 || input == null || this == null) {
       return this;
     }
+    // Blend amounts >= 100 results in the input Color.
     if (amount >= 100) return input;
     return Color.alphaBlend(input.withAlpha(255 * amount ~/ 100), this);
   }
@@ -84,12 +88,15 @@ extension FlexColorExtensions on Color {
   /// It can be used to make a shade of a color to be used in a gradient.
   /// By default it makes a color that is 15% lighter. If lighten is false
   /// it makes a color that is 15% darker by default.
+  ///
   /// By default it does not affect black and white colors, but
   /// if [keepWhite] is set to false, it will darken white color when [lighten]
   /// is false and return a grey color. Wise versa for black with [keepBlack]
   /// set to false, it will lighten black color, when [lighten] is true and
-  /// return a grey shade. White cannot be made lighter and black cannot be made
-  /// darker, the extension just return white and black for such attempts with
+  /// return a grey shade.
+  ///
+  /// White cannot be made lighter and black cannot be made
+  /// darker, the extension just returns white or black for such attempts, with
   /// a quick exist from the call.
   Color getShadeColor({
     bool lighten = true,
@@ -125,23 +132,23 @@ extension FlexColorExtensions on Color {
   }
 
   /// Return uppercase RGB hex code string, with # and no alpha value.
-  /// This format is often used in APIs and in in CSS styles.
+  /// This format is often used in APIs and in CSS color values..
   String get hex {
     return '#${value.toRadixString(16).substring(2).toUpperCase()}';
   }
 }
 
-/// Extension methods on String.
+/// Extensions on [String].
 ///
-/// Included extensions are:
-/// * Convert a string to a Color.
-/// * Capitalize the first letter in a String.
-/// * Get remaining string after first dot "." in a String.
+/// Included extensions are, [toColor] to convert a String to a Color.
+/// To [capitalize] the first letter in a String and [dotTail] to get
+/// remaining string after first dot "." in a String.
 extension FlexStringExtensions on String {
-  /// Convert a HEX value encoded RGB string to a Color(). The string may
-  /// include the "#" char, but does not have to. The String may start with
-  /// alpha channel, but does not have to, if alpha is missing "FF" is used
-  /// for alpha.
+  /// Convert a HEX value encoded RGB string to a Dart Color.
+  ///
+  /// The string may include the "#" char, but does not have to.
+  /// The String may start with alpha channel hex value, but does not have to,
+  /// if alpha is missing "FF" is used for alpha.
   /// If the value cannot be parsed to a Color, fully opaque black color
   /// is returned.
   Color toColor() {
@@ -157,8 +164,10 @@ extension FlexStringExtensions on String {
     return const Color(0xFF000000);
   }
 
-  /// Capitalize the first letter in a string. The extension can handle being
-  /// passed an empty string or a null value in a safe way.
+  /// Capitalize the first letter in a string.
+  ///
+  /// The extension can handle being passed an empty string or a null
+  /// value in a safe way.
   String get capitalize {
     return (this != null && length > 1)
         ? this[0].toUpperCase() + substring(1)
@@ -168,6 +177,7 @@ extension FlexStringExtensions on String {
   }
 
   /// Return the string remaining in a string after the first "." in a String.
+  ///
   /// This function can be used to e.g. return the enum tail value from an
   /// enum's standard toString method.
   String get dotTail {

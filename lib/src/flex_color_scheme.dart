@@ -6,7 +6,7 @@ import 'flex_color.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
 
-/// Enum for using pre-defined surface types in [FlexColorScheme] based themes.
+/// Enum for using predefined surface types in [FlexColorScheme] based themes.
 enum FlexSurface {
   /// Use Material design default light and dark surface and background colors.
   material,
@@ -27,7 +27,7 @@ enum FlexSurface {
   custom,
 }
 
-/// Enum to select the used app bar style in [FlexColorScheme] based themes.
+/// Enum to select the used AppBarTheme style in [FlexColorScheme] based themes.
 enum FlexAppBarStyle {
   /// Use the theme primary color as app bar background theme color.
   ///
@@ -90,16 +90,16 @@ enum FlexAppBarStyle {
 @immutable
 class FlexColorScheme {
   /// Default constructor that requires its key color properties in
-  /// order to make a purposefully designed theme.
+  /// order to make a purposefully designed color scheme for a theme.
   ///
-  /// It can be tedious to define nice themes directly with this default
+  /// It can be tedious to define nice color scheme directly with this default
   /// constructor. [FlexColorScheme] is primarily intended to be used with its
   /// two factory constructors [FlexColorScheme.light] and
-  /// [FlexColorScheme.dark] that can create nice themes using defaults plus
-  /// computed color values, from only a defined primary color, if so desired.
+  /// [FlexColorScheme.dark] that can create nice schemes using defaults and
+  /// computed color values, from only a primary scheme color.
   ///
-  /// The factories also contain additional properties that can be used to
-  /// create branded surface colors, toggle the app bar theme between a few
+  /// The factories contain additional properties that can be used to
+  /// create branded surface colors, toggle the AppBarTheme between a few
   /// styles and to make dark themes that uses true black background and
   /// surfaces.
   const FlexColorScheme({
@@ -139,10 +139,10 @@ class FlexColorScheme {
   ///
   /// The only required property is [FlexSchemeColor], which can be
   /// created with just one color property using the factory
-  /// [FlexSchemeColor.from], more detailed color themes can also be defined.
+  /// [FlexSchemeColor.from], more detailed color schemes can also be defined.
   factory FlexColorScheme.light({
     /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
-    /// from. You can use predefined [FlexSchemeColor] from
+    /// from. You can use predefined [FlexSchemeColor] values from
     /// [FlexColor.schemesWithCustom] or define your own colors with
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
     @required FlexSchemeColor colors,
@@ -196,7 +196,7 @@ class FlexColorScheme {
 
     /// The background color for widgets like Card, BottomAppBar and Dialogs.
     ///
-    /// If null, the color is determined by [FlexSurface] flexSurface.
+    /// If null, the color is determined by [FlexSurface] `surfaceStyle`.
     Color surface,
 
     /// A color that typically appears behind scrollable content.
@@ -204,12 +204,12 @@ class FlexColorScheme {
     /// The color is applied to ThemeData `canvasColor` and`backgroundColor`,
     /// it is used eg in menu drawer.
     ///
-    /// If null, the color is determined by [FlexSurface] flexSurface.
+    /// If null, the color is determined by [FlexSurface] `surfaceStyle`.
     Color background,
 
     /// The color of the scaffold background.
     ///
-    /// If null, the color is determined by [FlexSurface] flexSurface.
+    /// If null, the color is determined by [FlexSurface] `surfaceStyle`.
     Color scaffoldBackground,
 
     /// A color that is clearly legible when drawn on [primary] color.
@@ -218,26 +218,26 @@ class FlexColorScheme {
     /// color, and will be be black if it is light and white if it is dark.
     Color onPrimary,
 
-    /// A color that's clearly legible when drawn on [secondary] color.
+    /// A color that is clearly legible when drawn on [secondary] color.
     ///
     /// If null, the on color is derived from the brightness of the [secondary]
     /// color, and will be be black if it is light and white if it is dark.
     Color onSecondary,
 
-    /// A color that's clearly legible when drawn on [surface] color.
+    /// A color that is clearly legible when drawn on [surface] color.
     ///
     /// If null, the on color is derived from the brightness of the [surface]
     /// color, and will be be black if it is light and white if it is dark.
     Color onSurface,
 
-    /// A color that's clearly legible when drawn on [background] color, it is
+    /// A color that is clearly legible when drawn on [background] color, it is
     /// also used as on color for [scaffoldBackground].
     ///
     /// If null, the on color is derived from the brightness of the [background]
     /// color, and will be be black if it is light and white if it is dark.
     Color onBackground,
 
-    /// A color that's clearly legible when drawn on [error].
+    /// A color that is clearly legible when drawn on [error].
     ///
     /// If null, the on color is derived from the brightness of the [error]
     /// color, and will be be black if it is light and white if it is dark.
@@ -263,7 +263,10 @@ class FlexColorScheme {
     ///
     /// When true, the AppBar in Android mimics the look of one-toned AppBar's
     /// typically used on iOS. Set to `false`, to revert back and use
-    /// Android's default two-toned look.
+    /// Android's default two-toned look. If true the status bar area is
+    /// actually also transparent so that if the app bar is also translucent,
+    /// content that scrolls behind it, is also visible behind the status
+    /// bar area.
     ///
     /// You may need to fully restart the app and even rebuild for changes to
     /// this setting to take effect on Android devices and emulators.
@@ -296,7 +299,7 @@ class FlexColorScheme {
   }) {
     // Check valid inputs
     assert(colors != null, 'Colors cannot be null');
-    assert(surfaceStyle != null, 'themeSurface cannot be null');
+    assert(surfaceStyle != null, 'surfaceStyle cannot be null');
     assert(usedColors != null, 'usedColors cannot be null');
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4');
     assert(appBarStyle != null, 'appBarStyle cannot be null');
@@ -509,7 +512,7 @@ class FlexColorScheme {
 
     /// The background color for widgets like Card, BottomAppBar and dialogs.
     ///
-    /// If null, the color is determined by [FlexSurface] flexSurface.
+    /// If null, the color is determined by [FlexSurface] `surfaceStyle`.
     Color surface,
 
     /// A color that typically appears behind scrollable content.
@@ -517,12 +520,12 @@ class FlexColorScheme {
     /// The color is applied to ThemeData `canvasColor` and`backgroundColor`,
     /// it is used eg in menu drawer.
     ///
-    /// If null, the color is determined by [FlexSurface] flexSurface.
+    /// If null, the color is determined by [FlexSurface] `surfaceStyle`.
     Color background,
 
     /// The color of the scaffold background.
     ///
-    /// If null the color is defined by [FlexSurface] flexSurface.
+    /// If null the color is defined by [FlexSurface] `surfaceStyle`.
     Color scaffoldBackground,
 
     /// A color that is clearly legible when drawn on [primary] color.
@@ -531,26 +534,26 @@ class FlexColorScheme {
     /// color, and will be be black if it is light and white if it is dark.
     Color onPrimary,
 
-    /// A color that's clearly legible when drawn on [secondary] color.
+    /// A color that is clearly legible when drawn on [secondary] color.
     ///
     /// If null, the on color is derived from the brightness of the [secondary]
     /// color, and will be be black if it is light and white if it is dark.
     Color onSecondary,
 
-    /// A color that's clearly legible when drawn on [surface] color.
+    /// A color that is clearly legible when drawn on [surface] color.
     ///
     /// If null, the on color is derived from the brightness of the [surface]
     /// color, and will be be black if it is light and white if it is dark.
     Color onSurface,
 
-    /// A color that's clearly legible when drawn on [background] color, it is
+    /// A color that is clearly legible when drawn on [background] color, it is
     /// also used as on color for [scaffoldBackground].
     ///
     /// If null, the on color is derived from the brightness of the [background]
     /// color, and will be be black if it is light and white if it is dark.
     Color onBackground,
 
-    /// A color that's clearly legible when drawn on [error].
+    /// A color that is clearly legible when drawn on [error].
     ///
     /// If null, the on color is derived from the brightness of the [error]
     /// color, and will be be black if it is light and white if it is dark.
@@ -583,7 +586,10 @@ class FlexColorScheme {
     ///
     /// When true, the AppBar in Android mimics the look of one-toned AppBar's
     /// typically used on iOS. Set to `false`, to revert back and use
-    /// Android's default two-toned look.
+    /// Android's default two-toned look. If true the status bar area is
+    /// actually also transparent so that if the app bar is also translucent,
+    /// content that scrolls behind it, is also visible behind the status
+    /// bar area.
     ///
     /// You may need to fully restart the app and even rebuild for changes to
     /// this setting to take effect on Android devices and emulators.
@@ -615,7 +621,7 @@ class FlexColorScheme {
   }) {
     // Check valid inputs
     assert(colors != null, 'colors may not be null.');
-    assert(surfaceStyle != null, 'themeSurface may not be null.');
+    assert(surfaceStyle != null, 'surfaceStyle may not be null.');
     assert(usedColors != null, 'usedColors may not be null.');
     assert(
         usedColors >= 1 && usedColors <= 4,
@@ -814,8 +820,8 @@ class FlexColorScheme {
     );
   }
 
-  /// Returns a [VisualDensity] that is adaptive to comfortable instead
-  /// of default compact, based on the [defaultTargetPlatform].
+  /// Returns a [VisualDensity] that is adaptive to `comfortable` instead
+  /// of to the default `compact`, based on active [defaultTargetPlatform].
   ///
   /// For desktop platforms, this returns [VisualDensity.comfortable], and
   /// for other platforms, it returns the default [VisualDensity].
@@ -823,7 +829,7 @@ class FlexColorScheme {
   /// returns [VisualDensity.compact] for the desktop platforms. If this seems
   /// too dense and you prefer `comfortable` on desktop and still like the even
   /// less dense default on on devices, then use this platform dependent
-  /// [VisualDensity] function instead.
+  /// [VisualDensity] function instead for `visualDensity` in your theme.
   static VisualDensity get comfortablePlatformDensity {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -838,7 +844,7 @@ class FlexColorScheme {
     return const VisualDensity();
   }
 
-  /// Return a [SystemUiOverlayStyle] that has a navigation bar style
+  /// Return a [SystemUiOverlayStyle] that has a system navigation bar style
   /// that matches the current theme.
   ///
   /// Requires a build context with access to an inherited theme.
@@ -848,9 +854,9 @@ class FlexColorScheme {
   ///
   /// Does not set the system overlay for AppBar, it has its own built in
   /// annotated region in the AppBarTheme and also its own property in
-  /// FlexColorScheme that sets it overrides.
+  /// FlexColorScheme that sets it.
   ///
-  /// You may need to fully restart the app and even rebuild for changes to
+  /// You may need to fully restart the app and even rebuild it for changes to
   /// this setting to take effect on Android devices and emulators.
   /// Especially the divider seems a bit tricky and erratic to turn on and off.
   static SystemUiOverlayStyle themedSystemNavigationBar(BuildContext context,
@@ -860,12 +866,12 @@ class FlexColorScheme {
     // The used system navigation bar divider colors below were tuned to
     // fit well with most color schemes and possible surface branding.
     // Using the theme divider color does not work as the system call does
-    // not use the alpha channel value in the passed color, default divider
-    // color of the theme uses alpha.
+    // not use the alpha channel value in the passed in color, default divider
+    // color of the theme uses alpha, using it will thus not look good.
     //
     // A future modification could expose the divider color, but then you
     // could just as well just copy and use this overlay style directly in your
-    // AnnotatedRegion if this does not produce a desired result.
+    // AnnotatedRegion if this does not produce the desired result.
     return SystemUiOverlayStyle(
       systemNavigationBarColor: Theme.of(context).colorScheme.background,
       systemNavigationBarDividerColor: (useDivider ?? true)
@@ -950,20 +956,23 @@ class FlexColorScheme {
   /// based light and dark app bar theme colors.
   final Color appBarBackground;
 
-  /// The accentColor in ThemeData as color scheme property.
+  /// The accentColor in ThemeData as a color scheme property.
   ///
   /// In default [ThemeData.from] this is set to [secondary] color, here we use
-  /// [primary] color instead as default. Accent color is now only used for the
-  /// border color on text input in dark theme mode. By allowing a custom color
-  /// with color scheme based themes, we can control the color of the active
-  /// input border on text fields in dark themes separately from the rest of
-  /// the color scheme based colors, without the need for a complex
-  /// text input decoration theme. This only applies for the dark theme mode.
+  /// [primary] color instead as default. The accentColor is in FlexColorScheme
+  /// only used for the active border color on text input in dark theme mode.
+  /// By allowing a custom color with color scheme based themes, we can control
+  /// the color of the active input border on text fields in dark themes
+  /// separately from the rest of the color scheme based colors, without the
+  /// need for a complex text input decoration theme. This only applies to
+  /// the dark theme mode. The light theme mode still uses the primary color
+  /// for the active border. If you want to change that you will have to make a
+  /// custom input decoration themes.
   ///
-  /// We could have named this extra property textDarkBorderColor, but since
-  /// it is still defining the accentColor in ThemeData, it was decided to
-  /// continue to use this name for the property, just in case in still also
-  /// impacts other color properties that does not get themed to scheme
+  /// We could have named this extra property textDarkActiveBorderColor, but
+  /// since it is still defining the accentColor in ThemeData, it was decided to
+  /// continue to use this name for the property, just in case it still also
+  /// impacts other color properties that does not get themed to the scheme
   /// secondary color separately. We have not yet noticed any such widgets
   /// when using FlexColorScheme. If you come across any, please let us know.
   final Color accentColor;
@@ -1038,7 +1047,10 @@ class FlexColorScheme {
   ///
   /// When true, the AppBar in Android mimics the look of one-toned AppBar's
   /// typically used on iOS. Set to `false`, to revert back and use
-  /// Android's default two-toned look.
+  /// Android's default two-toned look. If true the status bar area is
+  /// actually also transparent so that if the app bar is also translucent,
+  /// content that scrolls behind it, is also visible behind the status
+  /// bar area.
   ///
   /// You may need to fully restart the app and even rebuild for changes to
   /// this setting to take effect on Android devices and emulators.
@@ -1476,7 +1488,7 @@ class FlexColorScheme {
 
     // Same as in ThemeData.from, but defined for reuse access in sub-themes.
     final Color dividerColor = colorScheme.onSurface.withOpacity(0.12);
-    // Same as in ThemeData, but defined for reuse in custom sub-themes.
+    // Same as in ThemeData, but defined here for reuse in custom sub-themes.
     final Color disabledColor = isDark ? Colors.white38 : Colors.black38;
     final Color hintColor =
         isDark ? Colors.white60 : Colors.black.withOpacity(0.6);
@@ -1496,7 +1508,7 @@ class FlexColorScheme {
       platform: _platform,
       // Most definitions below are very close to the ones used by the Flutter
       // factory ThemeData.from for creating a theme from a color scheme and
-      // text theme, modifications to it are mentioned further below.
+      // text theme. Any modifications to it are explained.
       brightness: colorScheme.brightness,
       primaryColor: colorScheme.primary,
       primaryColorBrightness:
@@ -1504,7 +1516,7 @@ class FlexColorScheme {
       canvasColor: colorScheme.background,
 
       // A theming difference to the norm, is that [accentColor] is set to
-      // [colorScheme.primary] and not [colorScheme.secondary] , if it is not
+      // [colorScheme.primary] and not [colorScheme.secondary], if it is not
       // defined via its own the [accentColor] property in [FlexColorScheme].
       // Reason is to get a way for borders on TextField decoration to use
       // primary color in dark themes and not accentColor.
@@ -1513,7 +1525,7 @@ class FlexColorScheme {
       // would work correctly. This definition works
       // around the problem and achieves the goal. There were no other widgets
       // that seemed to use the accentColor. FAB and toggles use their own theme
-      // and colors, that still use the expected colorScheme.variant color
+      // and colors, that still use the expected colorScheme.secondary color
       // despite this change. The only observed impact from this theme change
       // was in fact the desired change on TextField design.
       // It was a version 1.1.0 addition to add separate property in
@@ -1663,7 +1675,7 @@ class FlexColorScheme {
         elevation: 0,
       ),
 
-      // The bottom app bar often hold a tab bar and it is kept as surface
+      // The bottom app bar may hold a tab bar kept as surface
       // colored, which is also the standard in ThemeData.from(ColorScheme).
       bottomAppBarColor: colorScheme.surface,
       bottomAppBarTheme: BottomAppBarTheme(
@@ -1679,12 +1691,14 @@ class FlexColorScheme {
       // that override them with copyWith, just as you would on the default
       // ThemeData factory.
       // ----------------------------------------------------------------------
+      // Set to true, because it looks better and it should be true in standard
+      // too, bu it is kept as false there for legacy compatibility.
       fixTextFieldOutlineLabel: true,
       // In TextSelectionThemeData, the standard for selectionColor is
-      // colorScheme.primary with opacity value 0.4 for dark and 0.12 light mode
-      // here primary with 0.5 for dark mode and 0.3 for light mode is used.
-      // The standard selectionHandleColor is colorScheme.primary, here we use
-      // the slightly darker shade primaryColorDark instead.
+      // colorScheme.primary with opacity value 0.4 for dark and 0.12 light
+      // mode. Here we use primary with 0.5 for dark mode and 0.3 for light
+      // mode. The standard selectionHandleColor is colorScheme.primary,
+      // here we use the slightly darker shade primaryColorDark instead.
       textSelectionTheme: TextSelectionThemeData(
         // cursorColor: colorScheme.primary,
         selectionColor: isDark
@@ -1829,6 +1843,7 @@ class FlexColorScheme {
     // It is doable, but requires modifying Android config files, not doable
     // as far as I have seen from Flutter only.
     // Related issue: https://github.com/flutter/flutter/issues/69999.
+    //
     // TODO: Use new AppBarTheme SystemOverlayStyle when it lands in stable.
     // We can change this implementation to be a part of the AppBarTheme
     // when the new theme features https://github.com/flutter/flutter/pull/71184
@@ -1865,7 +1880,7 @@ class FlexColorScheme {
   /// scheme will not include any of the theme fixes, but then again also none
   /// of the opinionated styles, used in [FlexColorScheme.toTheme] method.
   ///
-  /// The AppBar theme options will also no be available and scaffoldBackground
+  /// The AppBar theme options will also not be available and scaffoldBackground
   /// will be equal to background, which does not look so good if heavy
   /// branding was used on surfaces.
   ColorScheme get toScheme {
@@ -1967,6 +1982,12 @@ class FlexColorScheme {
 /// colors are [surface] and [background],
 /// plus an own surface color for [scaffoldBackground], which is not a part of
 /// Flutter's standard [ColorScheme].
+///
+/// This class, and its factory are only used by the
+/// [FlexColorScheme.light] and [FlexColorScheme.dark] factories. You normally
+/// do not have to use it, unless you are making a customized version
+/// of [FlexColorScheme] or similar feature, or if you want to, you can use it
+/// for getting surface colors for a standard [ColorScheme].
 @immutable
 class FlexSchemeSurfaceColors {
   /// Default constructor.
@@ -1976,9 +1997,11 @@ class FlexSchemeSurfaceColors {
     @required this.scaffoldBackground,
   });
 
-  /// Returns the surface colors from provided [Brightness] and [FlexSurface].
-  /// If [FlexSurface] is light,medium, heavy or strong, then the [primary]
-  /// color is also a required parameter.
+  /// Returns the surface colors for given [brightness] and [themeSurface]
+  /// values.
+  ///
+  /// If [themeSurface] is light, medium, strong or heavy, then the [primary]
+  /// color may not be null.
   ///
   /// The [FlexSurface] enum is used to represent surface color schemes.
   /// [FlexSurface.material] is the surface colors scheme presented
@@ -1988,17 +2011,17 @@ class FlexSchemeSurfaceColors {
   /// https://material.io/design/color/dark-theme.html#ui-application
   ///
   /// The [FlexSurface.light], [FlexSurface.medium], [FlexSurface.strong]
-  /// and [FlexSurface.heavy] blends in an increasing amount of the theme
-  /// primary color into the surface, background and scaffold background colors
-  /// colors for a branded or primary color tones surfaces look.
+  /// and [FlexSurface.heavy] blends in an increasing amount of the scheme's
+  /// primary color into the surface, background and scaffold background colors,
+  /// for a primary color branded look on these background colors.
   ///
-  /// The percentage of blend values for each strength are separate for surface
-  /// background and scaffold background. Scaffold background is only receiving
-  /// a slight blend heavy mode. Surface receives a lower percentage blend than
-  /// background used by scrolling surfaces. The value are also different for
+  /// The percentage of blend values for each strength are separate for
+  /// [surface], [background] and [scaffoldBackground]. Scaffold background
+  /// only gets a slight blend in heavy mode. Surface receives a lower
+  /// percentage blend than background. The blend values are also different for
   /// light and dark themes, as light themes require less of the typically more
   /// saturated primary color. Dark themes must use a slightly desaturated
-  /// primary color so the blend percentage values for dark surfaces must be
+  /// primary color, so the blend percentage values for dark surfaces must be
   /// higher.
   ///
   /// This kind of surface branding is based on the Material guide found
@@ -2009,6 +2032,15 @@ class FlexSchemeSurfaceColors {
   /// The surface colors returned by this factory can also be used to make
   /// branded surface colors for Flutter's standard [ColorScheme], it does
   /// not have to be used exclusively by [FlexColorScheme].
+  ///
+  /// ERRATA: The parameter name [themeSurface] for the [FlexSurface] should
+  /// be named `surfaceStyle` for consistency with other API usage of it in this
+  /// package. The `themeSurface` name was used at some
+  /// point during development and unfortunately never updated in this factory.
+  /// It would be a breaking change to correct it at this point, since
+  /// this factory has VERY low usage exposure outside this library it will
+  /// be corrected together with the future 2.0.0 null-safety version, that will
+  /// probably contain other breaking changes as well.
   factory FlexSchemeSurfaceColors.from({
     /// The light or dark theme brightness setting we will create surface for.
     Brightness brightness = Brightness.light,
@@ -2153,10 +2185,12 @@ class FlexSchemeSurfaceColors {
               break;
             case FlexSurface.custom:
               {
-                // Custom surface theme returns same surface as standard
-                // material surface. If surface colors are not overridden by
-                // providing none null custom surface colors values to the
-                // FlexColorScheme, the results is the same as material.
+                // Custom surface theme returns same surface colors as standard
+                // material surface.
+                // It is up to the implementation of creating the scheme
+                // to decide what to do when surfaceStyle [FlexSurface.custom]
+                // is used. If the case is not handled, the custom style
+                // will just result in the same style as [FlexSurface.material].
                 surface = FlexColor.materialDarkSurface;
                 background = FlexColor.materialDarkBackground;
                 scaffoldBackground = FlexColor.materialDarkScaffoldBackground;

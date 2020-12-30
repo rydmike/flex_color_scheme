@@ -7,7 +7,7 @@ import 'flex_extensions.dart';
 /// Name for predefined [FlexSchemeData] color scheme definitions that can be
 /// used by [FlexColorScheme].
 enum FlexScheme {
-  /// The example theme used in the Material design guide.
+  /// The example theme used in the Material Design guide.
   /// Light version:
   /// https://material.io/design/color/the-color-system.html#color-usage-and-palettes
   /// Dark version:
@@ -82,7 +82,7 @@ enum FlexScheme {
 /// Defines colors, names and color schemes used to make maps and a list or
 /// predefined [FlexSchemeData] objects that can be used by [FlexColorScheme].
 class FlexColor {
-  /// Private constructor, a static color data class.
+  /// Private constructor, this is a static color data class.
   FlexColor._();
 
   /// Material standard color for light surface.
@@ -1380,7 +1380,6 @@ class FlexSchemeData with Diagnosticable {
         other.dark == dark;
   }
 
-  /// Diagnostics properties.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -1518,6 +1517,46 @@ class FlexSchemeColor with Diagnosticable {
       appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
       accentColor: accentColor?.blend(Colors.white, whiteBlend),
       error: error?.blend(Colors.white, whiteBlend),
+    );
+  }
+
+  /// Return a copy of this [FlexSchemeColor] that will when used, result in a
+  /// theme that use the Material Guide default error color.
+  ///
+  /// The [error] is actually left out when the new object is created, this
+  /// results in a copy where the scheme error color will be null, this again
+  /// will result in that a theme created from the color scheme will use the
+  /// Material design guide's default and standard error color.
+  ///
+  /// This function is useful if we want to create a dark scheme
+  /// from a light scheme that already specifies the light scheme's error color,
+  /// but we do not want a dark scheme where this light error color is used by
+  /// [toDark] to compute an error color for the dark scheme, instead we prefer
+  /// to use use the Material default dark mode error color.
+  ///
+  /// This is demonstrated in example 5) where the toDark method is used, but
+  /// we do not want use the already defined built-in light schemes error colors
+  /// for the computed dark schemes error colors.
+  ///
+  /// Generally if you make your own schemes and are satisfied with the Material
+  /// default error color, you can omit defining it for the light scheme
+  /// too. In that case it will remain null and get its default value, and
+  /// likewise for the dark scheme. In example 5 for the three custom schemes
+  /// this is used. If you in the example remove the [defaultError] before the
+  /// [toDark] you will notice that dark scheme's from the built-in schemes get
+  /// a dark scheme where the error color changes when you use the
+  /// "Compute dark theme" feature and the white blend level slider.
+  /// Whereas, the custom example schemes that had no error color specified
+  /// for their light scheme, still get the fixed default dark error color,
+  /// as when we used this [defaultError] feature.
+  FlexSchemeColor get defaultError {
+    return FlexSchemeColor(
+      primary: primary,
+      primaryVariant: primaryVariant,
+      secondary: secondary,
+      secondaryVariant: secondaryVariant,
+      appBarColor: appBarColor,
+      accentColor: accentColor,
     );
   }
 
