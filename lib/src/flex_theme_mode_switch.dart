@@ -26,7 +26,7 @@ import 'flex_color.dart';
 /// options in order create a theme mode switch widget with a customized look,
 /// see API reference for more info.
 class FlexThemeModeSwitch extends StatelessWidget {
-  /// Default constructor
+  /// Default constructor.
   const FlexThemeModeSwitch({
     Key key,
     @required this.themeMode,
@@ -79,7 +79,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
   final ValueChanged<ThemeMode> onThemeModeChanged;
 
   /// The FlexSchemeData used to colorize the four colors in each theme mode
-  /// option button./
+  /// option button.
   final FlexSchemeData flexSchemeData;
 
   /// A leading title widget for the theme mode switch.
@@ -173,7 +173,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
 
   /// The InkWell hover color for the option buttons.
   ///
-  /// If null, default to `Color(0x50BCBCBC)` in light mode and to
+  /// If null, defaults to `Color(0x50BCBCBC)` in light mode and to
   /// `Color(0x99555555)` dark mode.
   final Color hoverColor;
 

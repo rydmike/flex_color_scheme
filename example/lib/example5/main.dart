@@ -162,6 +162,10 @@ class _DemoAppState extends State<DemoApp> {
   // method.
   bool useToDarkMethod;
 
+  // The 'level' of white blend percentage used when computing dark scheme
+  // colors from the light scheme colors with the toDark method.
+  int level;
+
   // Use the toTheme method to create Themes from [FlexColorScheme]. This
   // is the preferred method when using [FlexColorScheme]. In this demo
   // you can use a toggle to see what a FlexColorScheme looks like if you just
@@ -178,6 +182,7 @@ class _DemoAppState extends State<DemoApp> {
     tooltipsMatchBackground = false;
     darkIsTrueBlack = false;
     useToDarkMethod = false;
+    level = 35;
     useToThemeMethod = true;
     super.initState();
   }
@@ -241,14 +246,12 @@ class _DemoAppState extends State<DemoApp> {
             ),
       // We do the exact same definition for the dark theme, but using
       // FlexColorScheme.dark factory and the dark FlexSchemeColor and we add
-      // the true black option as well.
-      //
-      // In dark mode we can see many gaps in the resulting ThemeData when
-      // using the standard ThemeData.from factory to create the theme.
+      // the true black option as well and the feature to demonstrate
+      // the usage of computed dark schemes.
       darkTheme: useToThemeMethod
           ? FlexColorScheme.dark(
               colors: useToDarkMethod
-                  ? myFlexSchemes[themeIndex].light.toDark()
+                  ? myFlexSchemes[themeIndex].light.defaultError.toDark(level)
                   : myFlexSchemes[themeIndex].dark,
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
@@ -260,7 +263,7 @@ class _DemoAppState extends State<DemoApp> {
           : ThemeData.from(
               colorScheme: FlexColorScheme.dark(
                 colors: useToDarkMethod
-                    ? myFlexSchemes[themeIndex].light.toDark()
+                    ? myFlexSchemes[themeIndex].light.defaultError.toDark(level)
                     : myFlexSchemes[themeIndex].dark,
                 surfaceStyle: flexSurface,
                 appBarStyle: flexAppBarStyle,
@@ -335,6 +338,14 @@ class _DemoAppState extends State<DemoApp> {
             useToDarkMethod = value;
           });
         },
+        // We pass in the current dark scheme creation method
+        whiteBlend: level,
+        // And use the new white blend value.
+        onWhiteBlendChanged: (int value) {
+          setState(() {
+            level = value;
+          });
+        },
         // We pass in the current theme creation method
         useToTheme: useToThemeMethod,
         // And toggle the theme creation method.
@@ -353,7 +364,7 @@ class _DemoAppState extends State<DemoApp> {
         // dark colors.
         flexSchemeData: myFlexSchemes[themeIndex].copyWith(
             dark: useToDarkMethod
-                ? myFlexSchemes[themeIndex].light.toDark()
+                ? myFlexSchemes[themeIndex].light.defaultError.toDark(level)
                 : myFlexSchemes[themeIndex].dark),
       ),
     );
@@ -381,6 +392,8 @@ class HomePage extends StatefulWidget {
     @required this.onDarkIsTrueBlackChanged,
     @required this.useToDark,
     @required this.onUseToDarkChanged,
+    @required this.whiteBlend,
+    @required this.onWhiteBlendChanged,
     @required this.useToTheme,
     @required this.onUseToThemeChanged,
     @required this.flexSchemeData,
@@ -399,6 +412,8 @@ class HomePage extends StatefulWidget {
   final ValueChanged<bool> onDarkIsTrueBlackChanged;
   final bool useToDark;
   final ValueChanged<bool> onUseToDarkChanged;
+  final int whiteBlend;
+  final ValueChanged<int> onWhiteBlendChanged;
   final bool useToTheme;
   final ValueChanged<bool> onUseToThemeChanged;
   final FlexSchemeData flexSchemeData;
@@ -655,27 +670,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const Divider(),
-                    // Set dark mode to use true black!
-                    SwitchListTile.adaptive(
-                      title: const Text('Dark mode uses true black'),
-                      subtitle: const Text(
-                        'Keep OFF for normal dark mode.',
-                      ),
-                      value: widget.darkIsTrueBlack,
-                      onChanged: widget.onDarkIsTrueBlackChanged,
-                    ),
-                    // Set to make dark scheme lazily for light theme
-                    SwitchListTile.adaptive(
-                      title:
-                          const Text('Make dark scheme from the light scheme'),
-                      subtitle: const Text(
-                        'Set to ON, to not use the custom tuned dark scheme '
-                        'colors, and instead compute them from the light '
-                        'scheme.',
-                      ),
-                      value: widget.useToDark,
-                      onChanged: widget.onUseToDarkChanged,
-                    ),
+
                     // Popup menu button to select color scheme.
                     PopupMenuButton<int>(
                       padding: const EdgeInsets.all(0),
@@ -712,6 +707,59 @@ class _HomePageState extends State<HomePage> {
                           horizontal: AppConst.edgePadding),
                       child: ShowThemeColors(),
                     ),
+                    const SizedBox(height: 8),
+                    SwitchListTile.adaptive(
+                      title: const Text('Compute dark theme'),
+                      subtitle: const Text(
+                        'From the light scheme, instead '
+                        'of using a dark scheme.',
+                      ),
+                      value: widget.useToDark,
+                      onChanged: widget.onUseToDarkChanged,
+                    ),
+                    // White blend slider in a ListTile.
+                    ListTile(
+                      title: Slider.adaptive(
+                        min: 0,
+                        max: 100,
+                        divisions: 100,
+                        label: widget.whiteBlend.toString(),
+                        value: widget.whiteBlend.toDouble(),
+                        onChanged: (double value) {
+                          widget.onWhiteBlendChanged(value.floor().toInt());
+                        },
+                      ),
+                      trailing: Padding(
+                        padding: const EdgeInsetsDirectional.only(end: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              'LEVEL',
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                            Text(
+                              '${widget.whiteBlend} %',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption
+                                  .copyWith(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    // Set dark mode to use true black!
+                    SwitchListTile.adaptive(
+                      title: const Text('Dark mode uses true black'),
+                      subtitle: const Text(
+                        'Keep OFF for normal dark mode.',
+                      ),
+                      value: widget.darkIsTrueBlack,
+                      onChanged: widget.onDarkIsTrueBlackChanged,
+                    ),
+                    // Set to make dark scheme lazily for light theme
+
                     // Surface style selector.
                     const SizedBox(height: 8),
                     const ListTile(
@@ -741,14 +789,13 @@ class _HomePageState extends State<HomePage> {
                     const ListTile(
                       title: Text('App bar theme'),
                       subtitle: Text(
-                        'Material design uses a primary '
-                        'colored app bar in light mode and a background '
+                        'Flutter ColorScheme themes have a primary '
+                        'colored app bar in light mode, and a background '
                         'colored one in dark mode. With FlexColorScheme '
-                        'you can use different defaults for the app bar and '
-                        'select if it should use primary, surface or '
-                        'custom colors. The predefined schemes use their '
-                        'secondary variant color as the custom color for the '
-                        'app bar theme, but it could be any color.',
+                        'you can choose if it should be primary, background, '
+                        'surface or a custom color. The predefined schemes '
+                        'use their secondary variant color as the custom '
+                        'color for the app bar theme, but it can be any color.',
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -774,7 +821,7 @@ class _HomePageState extends State<HomePage> {
                           'Tooltips are light on light, and dark on dark',
                         ),
                         subtitle: const Text(
-                          'Keep OFF to use Material default inverted '
+                          "Keep OFF to use Material's default inverted "
                           'background style.',
                         ),
                         value: widget.tooltipsMatchBackground,
@@ -785,13 +832,13 @@ class _HomePageState extends State<HomePage> {
                     // Theme creation method.
                     SwitchListTile.adaptive(
                       title: const Text(
-                        'Make the theme with FlexColorScheme toTheme method',
+                        'Theme with FlexColorScheme.toTheme',
                       ),
                       subtitle: const Text(
-                        'Turn OFF to make the theme using the standard '
-                        'ThemeData from color scheme method. '
-                        'NOT RECOMMENDED, but in this example you can '
-                        'try it to see the differences.',
+                        'Turn OFF to make the theme with the '
+                        'ThemeData.from factory.\n'
+                        'NOT recommended, but try it in this demo '
+                        'to see the differences.',
                       ),
                       value: widget.useToTheme,
                       onChanged: widget.onUseToThemeChanged,

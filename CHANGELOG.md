@@ -2,6 +2,20 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [1.1.1] - December 30, 2020
+
+* Updated example 5 to include UI that can be used to vary the computed dark themes white blend percentage level.
+  This was added to better demonstrate the `toDark` feature.
+* Added a `defaultError` fix/modifier that enables the built-in schemes to use the Material design guide's default dark 
+  error color when using the `toDark` method to compute a dark scheme from a light scheme, that already defines a light 
+  scheme error color. The `toDark` method can be used without the `defaultError` scheme modifier as well, but then the 
+  dark error color also change with the other computed dark scheme colors when using the "Compute dark theme" feature 
+  and the level adjustment. This is not necessarily the desired behavior. The fix enables the alternative more often
+  desired behavior and ensures that the dark error color just uses the default value. For custom schemes that do not 
+  specify a custom error color for their light scheme and thus default to the Material Guide's standard error color, 
+  the fix is not needed. Example 5 demonstrates the use case of `defaultError` as well.
+* Documentation updates and corrections.
+
 ## [1.1.0] - December 29, 2020
 
 * Added API to make a matching dark scheme from a light scheme. See

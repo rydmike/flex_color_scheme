@@ -1229,9 +1229,9 @@ are, here is a complete list:
     get the following deprecated warning:
 
     ```
-    Warning: The support for configuring the foreground color of FloatingActionButtons 
-    using ThemeData.accentIconTheme has been deprecated. Please use 
-    ThemeData.floatingActionButtonTheme instead.
+    Warning: The support for configuring the foreground color of 
+    FloatingActionButtons using ThemeData.accentIconTheme has been 
+    deprecated. Please use ThemeData.floatingActionButtonTheme instead. 
     See https:flutter.dev/go/remove-fab-accent-theme-dependency.
     This feature was deprecated after v1.13.2.
     ```
