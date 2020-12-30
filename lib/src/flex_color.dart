@@ -4,18 +4,22 @@ import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
 
-/// Name for predefined [FlexSchemeData] color scheme definitions that can be
-/// used by [FlexColorScheme].
+/// Enum that can be used to lookup predefined [FlexSchemeData] scheme
+/// definition objects.
 enum FlexScheme {
   /// The example theme used in the Material Design guide.
-  /// Light version:
+  ///
+  /// Light scheme version, in Flutter SDK known as [ColorScheme.light].
   /// https://material.io/design/color/the-color-system.html#color-usage-and-palettes
-  /// Dark version:
+  ///
+  /// Dark scheme version, in Flutter SDK known as [ColorScheme.dark].
   /// https://material.io/design/color/dark-theme.html#ui-application
   material,
 
-  /// Material contrast theme. Same as Flutter [ColorScheme.highContrastLight]
-  /// and [ColorScheme.highContrastDark].
+  /// Material high contrast theme.
+  ///
+  /// Same as Flutter
+  /// [ColorScheme.highContrastLight] and [ColorScheme.highContrastDark].
   materialHc,
 
   /// Material blue and Material light blue based theme.
@@ -54,7 +58,7 @@ enum FlexScheme {
   /// Material green forest and Material teal based theme.
   green,
 
-  /// Green money theme, a "show me the money theme".
+  /// Green money theme, as in "show me the money theme".
   money,
 
   /// Lush green jungle inspired theme.
@@ -66,7 +70,7 @@ enum FlexScheme {
   /// Wild willow and wasabi green with orchid purple inspired theme.
   wasabi,
 
-  /// Golden sunset inspired theme.
+  /// Gold sunset inspired theme.
   gold,
 
   /// Playful mango mojito theme.
@@ -79,7 +83,7 @@ enum FlexScheme {
   custom,
 }
 
-/// Defines colors, names and color schemes used to make maps and a list or
+/// Defines colors, names and color schemes used to make maps and a list of
 /// predefined [FlexSchemeData] objects that can be used by [FlexColorScheme].
 class FlexColor {
   /// Private constructor, this is a static color data class.
@@ -111,21 +115,30 @@ class FlexColor {
   /// FlexColors standard for light surface, same as material.
   static const Color lightSurface = Colors.white;
 
-  /// FlexColors standard for light background. A very light grey,
-  /// lighter than grey50, used for better blend effect when
+  /// FlexColors standard for light background.
+  ///
+  /// A very light grey, lighter than grey50, used for better blend effect when
   /// blending in primary color with the surface color.
   static const Color lightBackground = Color(0xFFFDFDFD);
 
   /// FlexColors standard for light scaffold background, just white as Material.
   static const Color lightScaffoldBackground = Colors.white;
 
-  /// Both dark surface and background are slightly darker than Material
-  /// variants, so we can blend in more primary color without getting too
-  /// light too soon.
+  /// FlexColors standard for dark surfaces.
+  ///
+  /// Slightly darker than its Material counter part, so we can blend in
+  /// more primary color without getting too light too soon.
   static const Color darkSurface = Color(0xFF111111);
 
-  /// FlexColors standard for dark background, slightly darker than Material
-  /// default and a tad darker than FlexColors dark surface color too.
+  /// FlexColors standard for dark background.
+  ///
+  /// Slightly darker than its Material counter part, so we can blend in
+  /// more primary color without getting too light too soon.
+  ///
+  /// It is also a tad darker then [darkSurface] because we will be blending
+  /// in more of the primary color into it. Making its starting value darker
+  /// allows us to do so without it getting too light when we blend in more
+  /// primary color.
   static const Color darkBackground = Color(0xFF101010);
 
   /// FlexColors standard for dark scaffold background, same as Material.
@@ -133,7 +146,7 @@ class FlexColor {
 
   // The Material standard error colors for light and dark modes as defined by
   // https://material.io/design/color/the-color-system.html#color-theme-creation.
-  // As they were July 11 2020.
+  // As they were July 11, 2020.
 
   /// Material standard light error color.
   static const Color materialLightError = Color(0xFFB00020);
@@ -219,7 +232,7 @@ class FlexColor {
   /// Material high contrast color for dark secondary variant color.
   static const Color materialDarkSecondaryVariantHc = Color(0xff66fff9);
 
-  // Material blue and light blue palette.
+  // Material blue and light blue scheme.
   //
   /// English name of the blue theme.
   static const String blueName = 'Blue delight';
@@ -252,7 +265,7 @@ class FlexColor {
   /// Blue theme color for dark secondary variant color.
   static const Color blueDarkSecondaryVariant = Color(0xFFE1F5FE); // lBlue50
 
-  // Material indigo and purple palette
+  // Material indigo and purple scheme
   //
   /// English name of the indigo theme.
   static const String indigoName = 'Indigo nights';
@@ -320,7 +333,7 @@ class FlexColor {
   /// Hippie blue theme color for dark secondary variant color.
   static const Color hippieBlueDarkSecondaryVariant = Color(0xFFF75F67);
 
-  // Aqua tropical blue ocean palette.
+  // Aqua tropical blue ocean scheme.
   //
   /// English name of the aqua blue theme.
   static const String aquaBlueName = 'Aqua blue';
@@ -835,7 +848,7 @@ class FlexColor {
   /// A [FlexScheme] enum to [FlexSchemeData] constant map.
   ///
   /// Contains pre-made ready to go nice dark and light [FlexSchemeColor]
-  /// color schemes that can be used by [FlexColorScheme].
+  /// color schemes, that can be used by [FlexColorScheme].
   /// The [FlexColor.schemes] map also contain the standard
   /// default material design themes, both the normal and the newer high
   /// contrast version.
@@ -1312,12 +1325,15 @@ class FlexColor {
 
 /// Immutable data class that holds [name] and [description] string scheme
 /// descriptions, [light] and [dark], [FlexSchemeColor] definitions that
-/// are used by [FlexColorScheme] to create a theme.
+/// can used by the [FlexColorScheme.light] and [FlexColorScheme.dark]
+/// factories to create a [FlexColorScheme].
 ///
 /// This class can also be used to make a map with [FlexScheme] enum or some
 /// other usable lookup value as key, and [FlexSchemeData] as values, that you
 /// can then use as input to define multiple theme options for [FlexColorScheme]
-/// based themes. A predefined example of a [FlexScheme] and [FlexSchemeData]
+/// based themes.
+///
+/// A predefined example of a [FlexScheme] and [FlexSchemeData]
 /// map is available in [FlexColor.schemes] and [FlexColor.schemesWithCustom].
 @immutable
 class FlexSchemeData with Diagnosticable {
@@ -1390,16 +1406,18 @@ class FlexSchemeData with Diagnosticable {
   }
 }
 
-/// Immutable data class for the main colors used in a [FlexColorScheme] based
-/// color scheme.
+/// Immutable data class for the main scheme colors used in a [FlexColorScheme]
+/// based color scheme.
 ///
 /// The default constructor requires all parameters. To make a [FlexSchemeColor]
 /// from a minimum of just the primary color, use the factory
 /// [FlexSchemeColor.from] which only requires the primary color to make
-/// a complete color set, but can use the other values as optional values.
+/// a complete color set, but can use the other colors as optional values.
 @immutable
 class FlexSchemeColor with Diagnosticable {
-  /// Default constructor. Consider using the [FlexSchemeColor.from] factory
+  /// Default constructor.
+  ///
+  /// Consider using the [FlexSchemeColor.from] factory
   /// constructor for more flexibility and less required values based on
   /// using computed defaults for missing, but required values.
   const FlexSchemeColor({
@@ -1492,19 +1510,21 @@ class FlexSchemeColor with Diagnosticable {
   /// [InputDecoration.errorText].
   final Color error;
 
-  /// Returns a new [FlexSchemeColor] instance suitable for dark mode, if the
-  /// current one is designed for light theme mode.
+  /// Returns a new [FlexSchemeColor] instance based on this one that is
+  /// suitable for dark mode.
   ///
   /// Assumes that the colors this FlexColorScheme is made for are for a light
   /// theme, it does not check that current colors actually are so.
   ///
-  /// Calculates less saturated colors of any colors predefined for this
-  /// [FlexSchemeColor] color by blending any none null values with white.
+  /// Calculates less saturated colors of any colors defined for this
+  /// [FlexSchemeColor] colors, by blending any none null values with white
+  /// using a set alpha blend percentage.
+  ///
   /// The default [whiteBlend] is 35%, this is normally a suitable value.
   /// For more saturated primary color try 40%, which is also used in the
-  /// Material design guid to convert the default red error color for
-  /// light mode to dark mode. For primary light mode color with low saturation
-  /// a white blend of 30% often also produces nice results.
+  /// Material design guide to convert the default red error color for
+  /// light mode to dark mode. For primary light mode color with low saturation,
+  /// a white blend of 20...30% often also produces nice results.
   FlexSchemeColor toDark([int whiteBlend = 35]) {
     // If null passed, use 35, the default value.
     // ignore: parameter_assignments
@@ -1521,10 +1541,10 @@ class FlexSchemeColor with Diagnosticable {
   }
 
   /// Return a copy of this [FlexSchemeColor] that will when used, result in a
-  /// theme that use the Material Guide default error color.
+  /// theme that use the Material Guide's default error color.
   ///
-  /// The [error] is actually left out when the new object is created, this
-  /// results in a copy where the scheme error color will be null, this again
+  /// The [error] color is left out when the new object is created. This
+  /// results in a copy where the scheme error color is null, this again
   /// will result in that a theme created from the color scheme will use the
   /// Material design guide's default and standard error color.
   ///
@@ -1534,18 +1554,20 @@ class FlexSchemeColor with Diagnosticable {
   /// [toDark] to compute an error color for the dark scheme, instead we prefer
   /// to use use the Material default dark mode error color.
   ///
-  /// This is demonstrated in example 5) where the toDark method is used, but
-  /// we do not want use the already defined built-in light schemes error colors
-  /// for the computed dark schemes error colors.
+  /// This is demonstrated in example 5) where the [toDark] method is used, but
+  /// we do not want use the already defined built-in light schemes' error
+  /// colors for the computed dark schemes' error colors.
   ///
   /// Generally if you make your own schemes and are satisfied with the Material
   /// default error color, you can omit defining it for the light scheme
   /// too. In that case it will remain null and get its default value, and
-  /// likewise for the dark scheme. In example 5 for the three custom schemes
-  /// this is used. If you in the example remove the [defaultError] before the
-  /// [toDark] you will notice that dark scheme's from the built-in schemes get
+  /// likewise for the dark scheme. Example 5, the three custom schemes
+  /// uses this setup.
+  ///
+  /// If you in example 5 remove the [defaultError] before the [toDark],
+  /// you will notice that dark scheme's from the built-in schemes get
   /// a dark scheme where the error color changes when you use the
-  /// "Compute dark theme" feature and the white blend level slider.
+  /// "Compute dark theme" feature and the white blend "level" slider.
   /// Whereas, the custom example schemes that had no error color specified
   /// for their light scheme, still get the fixed default dark error color,
   /// as when we used this [defaultError] feature.
