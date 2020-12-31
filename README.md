@@ -1282,12 +1282,12 @@ are, here is a complete list:
     The Flutter default just uses the default `ThemeData` colors and
     not the actual colors you define in the `ColorScheme` you create your
     theme from. Perhaps an oversight in Flutter?
-    See issue: https:github.com/flutter/flutter/issues/65782.
+    See issue [#65782](https://github.com/flutter/flutter/issues/65782).
     
 
   * Flutter themes created with `ThemeData.from` does not define any color
     scheme related color for the `primaryColorDark` color, this method
-    does.  See issue: https:github.com/flutter/flutter/issues/65782.
+    does.  See issue [#65782](https://github.com/flutter/flutter/issues/65782).
     The `ThemeData.from` leaves this color at `ThemeData` factory default,
     this may not match your scheme. Widgets seldom use this color, so the
     issue is rarely seen.
@@ -1295,7 +1295,7 @@ are, here is a complete list:
 
   * Flutter themes created with `ThemeData.from` does not define any color
     scheme based color for the `primaryColorLight` color, this method does.
-    See issue: https:github.com/flutter/flutter/issues/65782.
+    See issue [#65782](https://github.com/flutter/flutter/issues/65782).
     The `ThemeData.from` leaves this color at `ThemeData` factory default
     this may not match your scheme. Widgets seldom use this color, so the
     issue is rarely seen.
@@ -1303,7 +1303,7 @@ are, here is a complete list:
 
   * Flutter themes created with `ThemeData.from` does not define any color
     scheme based color for the `secondaryHeaderColor` color, this method
-    does. See issue: https:github.com/flutter/flutter/issues/65782.
+    does. See issue [#65782](https://github.com/flutter/flutter/issues/65782).
     `ThemeData.from` leaves this color at `ThemeData` factory default this
     may not match your scheme. Widgets seldom use this color, so the issue
     is rarely seen.
@@ -1315,14 +1315,14 @@ are, here is a complete list:
     to be possible to implement without a context. This implementation
     does however not get correctly localized typography.  
     
-    A new feature implemented via:
-    https:github.com/flutter/flutter/pull/71184 also enables this kind
+    A new feature implemented via
+    [#71184](https://github.com/flutter/flutter/pull/71184) also enables this kind
     app bar theme and keep the correct typography localization. This new
-    feature is (as of 28.12.2020) not yet available on channel stable.
+    feature is (as of 31.12.2020) not yet available on channel stable.
     The first version on master could also not be enabled via Themes
     only, one also had to opt in on AppBar level making it difficult to
     adopt the feature. I wrote a proposal to introduce opt-in on theme
-    level too: https:github.com/flutter/flutter/issues/72206
+    level too, see [#72206](https://github.com/flutter/flutter/issues/72206).
     The proposal has already been implemented. When these new features land
     in stable channel, the implementation below will be changed to use
     the new AppBarTheme feature, which is better than the work-around
@@ -1420,9 +1420,9 @@ are, here is a complete list:
     
 
   * The default theme for Chips contain a design bug that makes the
-    selected `ChoiceChip()` widget look disabled in dark-mode, regardless
+    selected `ChoiceChip` widget look disabled in dark-mode, regardless
     if was created with `ThemeData` or `ThemeData.from` factory.
-    See issue: https:github.com/flutter/flutter/issues/65663
+    See issue [#65663](https://github.com/flutter/flutter/issues/65663).
     The `ChipThemeData` modification used here fixes the issue.
     
 
@@ -1440,7 +1440,7 @@ are, here is a complete list:
     Warning: The support for configuring the foreground color of 
     FloatingActionButtons using ThemeData.accentIconTheme has been 
     deprecated. Please use ThemeData.floatingActionButtonTheme instead. 
-    See https:flutter.dev/go/remove-fab-accent-theme-dependency.
+    See https://flutter.dev/go/remove-fab-accent-theme-dependency.
     This feature was deprecated after v1.13.2.
     ```
 
@@ -1456,7 +1456,7 @@ are, here is a complete list:
 
   * Default `tooltipTheme` in Flutter is currently a bit flawed on desktop
     and web, because it defaults to using a very small font (10 dp).
-    See issue: https:github.com/flutter/flutter/issues/71429
+    See issue [#71429](https:github.com/flutter/flutter/issues/71429).
 
     The default theming also does not handle multiline tooltips very well.
     The here used `TooltipThemeData` theme design corrects both these
@@ -1481,8 +1481,8 @@ are, here is a complete list:
     > The modification is in current implementation made with an extra call
     to `SystemChrome.setSystemUIOverlayStyle` to make the
     statusBarColor transparent. The used implementation will be changed
-    when the new AppBarTheme
-    https://github.com/flutter/flutter/pull/71184 lands in channel stable
+    when the new AppBarTheme [#71184](https://github.com/flutter/flutter/pull/71184)
+    lands in channel stable
     that allows us to modify its AnnotatedRegion with a passed in
     `SystemOverlayStyle`.
     > 
@@ -1492,7 +1492,7 @@ are, here is a complete list:
     it does not change it all if called during the theme definition.
     The style is doable, but requires modifying Android config files, not
     possible from Flutter only (as per current information).
-    Related issue: https:github.com/flutter/flutter/issues/69999.
+    Related issue [#69999](https://github.com/flutter/flutter/issues/69999).
     >
     > FlexColorScheme offers a helper that allows us to easily create
     and annotated region for the system navigation bar that uses
