@@ -829,7 +829,7 @@ class FlexColorScheme {
   /// returns [VisualDensity.compact] for the desktop platforms. If this seems
   /// too dense and you prefer `comfortable` on desktop and still like the even
   /// less dense default on on devices, then use this platform dependent
-  /// [VisualDensity] function instead for `visualDensity` in your theme.
+  /// [VisualDensity] function as `visualDensity` for your theme.
   static VisualDensity get comfortablePlatformDensity {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
