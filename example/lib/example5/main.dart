@@ -338,9 +338,9 @@ class _DemoAppState extends State<DemoApp> {
             useToDarkMethod = value;
           });
         },
-        // We pass in the current dark scheme creation method
+        // We pass in the current dark scheme level
         whiteBlend: level,
-        // And use the new white blend value.
+        // And use the new white blend level value.
         onWhiteBlendChanged: (int value) {
           setState(() {
             level = value;
