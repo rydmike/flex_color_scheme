@@ -48,8 +48,8 @@ FlexColorScheme corrects these minor inconsistencies and gaps that exist in the 
 [visual presentation](https://rydmike.com/colorscheme#the-difference) of the differences.
 
 This is just the basic part, FlexColorScheme can do some other nice theme design tricks.
-If you have seen the Flutter [**FlexFold web demo**](https://rydmike.com/demoflexfold) application, then you 
-have already seen **FlexColorScheme** in action. The FlexFold demo app uses this package for its fancy theming and to
+If you have seen the Flutter [**Flexfold web demo**](https://rydmike.com/demoflexfold) application, then you 
+have already seen **FlexColorScheme** in action. The Flexfold demo app uses this package for its fancy theming and to
 enable effortless switching between all the themes it uses. The package included examples in the 
 [tutorial chapter](#tutorial), show you how the Flexfold demo app theming is done with this package.
 
