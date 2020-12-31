@@ -210,50 +210,58 @@ on common Material widgets.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1al.png?raw=true" alt="ColorScheme example 1 light" width="150"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1bl.png?raw=true" alt="ColorScheme example 1 lightb" width="150"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1cl.png?raw=true" alt="ColorScheme example 1 dark" width="150"/>
 
-> #### NOTE:
->If you clone the repository to build the samples, then open the package `/example` folder with your IDE to build
+> **Building the other examples**  
+>If you clone the repository to build the examples, then open the package `/example` folder with your IDE to build
 >the above default example. This example is the same as the example in the `/example/lib/example1` folder.
 > 
->If you want to build the other examples, without setting up different configurations in your IDE for the 
->different main files, you can just
->copy and paste each example's code into the `/example/lib/main.dart` file to build it.
+>If you want to build the other examples, without setting up different configurations in your IDE for the different 
+>main files, you can just copy and paste each example's code into the `/example/lib/main.dart` file to build it.
 > 
->Just correct the relative import for the all shared imports to `import 'all_shared_imports.dart';` 
->and for examples 4 and 5, also the sub page import to
-> `import 'shared/sub_page.dart';` and you are ready to go. 
+>Just change the relative import for the all shared imports to:  
+>`import 'all_shared_imports.dart';`   
+>and for examples 4 and 5, also the sub page import to:  
+>`import 'shared/sub_page.dart';` 
 
 ### Live WEB Demos of the Examples
 
-If you just want to have a quick look at all the example applications, you can try live web versions of them.
+If you want to take a quick look at all the example applications, you can try live web versions of them.
 
-[**Example 1**](https://rydmike.com/flexcolorscheme1)presents the simplest use case, to just use one of the 
+[**Example 1**](https://rydmike.com/flexcolorscheme1) represents the simplest use case, to just use one of the 
 built-in color schemes as your application theme and toggle between its light 
-and dark variant, or allow device mode setting to control if the dark or light theme is used.  
+and dark variant, or allow device mode setting to control if the dark or light theme is used.
+
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1al.png?raw=true" alt="ColorScheme example 1 light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1ad.png?raw=true" alt="ColorScheme example 1 dark" width="120"/>
    
-[**Example 2**](https://rydmike.com/flexcolorscheme2) is like example 1, but here we use custom colors to make a custom scheme and turn it into a theme.  
+[**Example 2**](https://rydmike.com/flexcolorscheme2) is like example 1, but here we use custom colors 
+to make a custom scheme and turn it into a theme.
+
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2al.png?raw=true" alt="ColorScheme example 2 light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2ad.png?raw=true" alt="ColorScheme example 2 dark" width="120"/> 
 
 [**In example 3**](https://rydmike.com/flexcolorscheme3) we can toggle the active theme between 3 different 
-predefined color schemes, plus the custom one we made in example 2.  
+predefined color schemes, plus the custom one we made in example 2.
+
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex3al.png?raw=true" alt="ColorScheme example 3a light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex3ad.png?raw=true" alt="ColorScheme example 3a dark" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex3bl.png?raw=true" alt="ColorScheme example 3b light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex3bd.png?raw=true" alt="ColorScheme example 3b dark" width="120"/>
    
 [**In example 4**](https://rydmike.com/flexcolorscheme4) we can select any of the different built-in themes
-and three custom ones we made.  
+and three custom ones we made.
+
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4al.png?raw=true" alt="ColorScheme example 4a light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4bl.png?raw=true" alt="ColorScheme example 4b light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4cl.png?raw=true" alt="ColorScheme example 4c light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4cd.png?raw=true" alt="ColorScheme example 4c dark" width="120"/>
    
 [**Example 5**](https://rydmike.com/flexcolorscheme5) is the last, and most complex one of the examples and presents
 more configuration options that you can modify interactively.
 This example is best seen and tested on a tablet, desktop or desktop web browser, rather than on a phone, but it
-certainly works on a phone sized canvas too. This example is explained in more detail further below.  
+certainly works on a phone sized canvas too. This example is explained in more detail further below. 
+
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5al.png?raw=true" alt="ColorScheme example 5 light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bl.png?raw=true" alt="ColorScheme example 5b light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="120"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="120"/>
 
-[**Flexfold demo**](https://rydmike.com/demoflexfold)  
+[**Flexfold demo**](https://rydmike.com/demoflexfold)
+
 A really fancy example of FlexColorScheme usage is the [**Flexfold demo app**](https://rydmike.com/demoflexfold).  
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FoldTheme1.gif?raw=true" alt="FlexColorScheme" width="650"/>  
-This might look and feel complicated, but it is actually only slightly more fancy than the above example nr 5, that
-has almost all the same theming features and exactly the same themes as the Flexfold demo app. Go through the examples,
-and you will be ready to make cool interactively custom themed apps in no time.
+
+It might look and feel complicated, but it is actually only slightly more involved than the above example nr 5, that
+has almost all the same theming features and exactly the same themes as the Flexfold demo app. 
+Go through the examples, and you will be ready to make cool interactively custom themed apps in no time.
 
 ## Tutorial
 
