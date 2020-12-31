@@ -265,34 +265,35 @@ Go through the examples, and you will be ready to make cool interactively custom
 
 ## Tutorial
 
-Below we will go through the key topics in each of the 5 examples and explain them. For simplicity the
+In this tutorial we go through all the bundled examples and explain them. For simplicity the
 example applications do not use any advanced state management solution. The key part to each example is always in
-the used stateful **MaterialApp**, where all the scheme setup for the themes are made in these demos. The rest of the
-content in the examples are just there to make a relevant visual presentation of the resulting theme from the used
-**FlexColorScheme**.
+the used stateful **MaterialApp**, where all the scheme setup for the themes are made. The rest of the
+content in the examples is just there to make a relevant visual presentation of the resulting theme from the used
+color scheme.
 
 ### HomePage for the Examples
  
 The content of the `HomePage` in all these examples is not really so relevant for using `FlexColorScheme` based
 application theming. The critical parts are in the example `MaterialApp` theme definitions. The `HomePage` just
 contains UI to visually show what the defined themes look like when used in an application with commonly 
-used Widgets. It also allows interaction with a few FlexColorScheme APIs in example 5. All 
-examples use the optional theme mode switch `FlexThemeModeSwitch` to do the theme mode switching.
+used Widgets. In example 5 we can also make interactive changes to used FlexColorScheme API values to
+see and learn how they work.
 
-In the examples we pass in the `FlexSchemeData` we used for the active theme to the application's `HomePage`. 
-This is not really needed in order to use `FlexColorScheme` schemes based themes, but we use it to be able to show
-the active theme's name and description in the examples. We also use it for the 3-way theme mode switch
-`FlexThemeModeSwitch`, that uses the scheme colors in its toggle widget for its custom theme mode option buttons.
+In all the examples we pass in the `FlexSchemeData` we used for the active theme to the application's `HomePage`. 
+This is not really needed in order to use `FlexColorScheme` based themes, but we use it to be able to show
+the active theme name and its description in the examples. We also use its color data for the 3-way theme mode switch
+`FlexThemeModeSwitch`, that uses the light and ark scheme colors in its theme toggle widget for the theme mode 
+option buttons that also show the 4 main colors in the active light and dark scheme.
 
 ### Optional FlexThemeModeSwitch
 
-One feature on the `HomePage` that can be interesting is the `FlexThemeModeSwitch`, which is the UI for the 
-3-way theme mode toggle switch used in the examples to change theme mode. 
+One special feature on the `HomePage` of all the examples is the `FlexThemeModeSwitch`. It is the UI Widget used 
+for the 3-way theme mode switch used in all the examples to change the active theme mode. 
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/theme_mode_switch.png?raw=true" alt="theme mode switch" width="350"/>
 
-Using it is very simple, pass it the selected theme mode, the active `FlexSchemeData` scheme and check
-the `onThemeModeChanged` callback for changes, and act on it in the `MaterialApp`.
+Using it is very simple, give it the active theme mode, the active `FlexSchemeData` scheme and use the
+`onThemeModeChanged` callback for changes, and act on it in the `MaterialApp` `themeMode`.
 
 ```dart
 FlexThemeModeSwitch(
@@ -302,23 +303,27 @@ FlexThemeModeSwitch(
 ),
 ```
 
-Using the `FlexThemeModeSwitch` 3-way theme mode toggle switch is totally optional and not required to
-use `FlexColorScheme` based themes. It is a simple, yet interesting theme mode switch design. It was included 
-as a bonus feature in the `FlexColorScheme` package based on request, after it was observed in the wild 
-in the Flexfold demo app.  
+Using the `FlexThemeModeSwitch` 3-way theme mode switch is optional and not required to
+use `FlexColorScheme` based themes. It is a simple, but different theme mode switch design and was included 
+as a bonus feature in the `FlexColorScheme` package. It was added based on a request after it
+had been seen in the Flexfold demo app.  
 
-In the Flexfold demo app it was originally a fairly fixed design, but now `FlexThemeModeSwitch` has many properties 
-that allows you to customize it extensively, please find its [API 
+In the Flexfold demo app the switch was originally a fairly fixed design, but now `FlexThemeModeSwitch` has many
+properties that allows you to customize it extensively. You can find its [API 
 reference here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexThemeModeSwitch-class.html)
 and its companion, the `FlexThemeModeOptionButton` 
 [API reference here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexThemeModeOptionButton-class.html). 
-The `FlexThemeModeOptionButton` is usually just used by the `FlexThemeModeSwitch`, but it can also be used to make 
-other theme related indicator widgets. Like the scrolling horizontal list used in the Flexfold demo, that is used in 
-the Flexfold demo app as a way to select the active theme, just as an alternative to the popup menu.
 
-You can customize the way the `FlexThemeModeSwitch` looks, here are some examples:
+With the API you can customize the look of the `FlexThemeModeSwitch`, here are some examples:
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/ThemeSwitchCustomize.png?raw=true" alt="theme mode customize"/>
+
+The `FlexThemeModeOptionButton` is typically just used by the `FlexThemeModeSwitch`, but it can also be used as a part
+of other theme related indicator widgets. Like for example the scrolling horizontal list used in the Flexfold demo.
+Where it is used as theme indicator in a list used as a way to show available themes and select the active theme, 
+just as an alternative to the rather plain popup menu.
+
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/ThemeIndicatorList.png?raw=true" alt="theme indicator list"/>
 
 ### Example 1 Use a predefined color scheme
 
