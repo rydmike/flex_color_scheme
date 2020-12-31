@@ -1152,7 +1152,7 @@ to adjust the `toDark` theme result. A sharp eye might notice that this recordin
 error color modifier, the changing dark error color does not look so nice when tuning the computed scheme colors.
 The bundled example 5 and live web version of it uses the modifier.
 
-<img src="https://rydmike.com/assets/fcs_v1-1-0-phone1.gif?raw=true" alt="Dark scheme calc level"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_v1-1-0-phone3.gif?raw=true" alt="Dark scheme calc level"/>
 
 #### Branded Surfaces and App Bar Options
 
