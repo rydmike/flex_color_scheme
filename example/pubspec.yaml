@@ -6,8 +6,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  flex_color_scheme:
-    path: ../
+  flex_color_scheme: any
 
   flutter:
     sdk: flutter
