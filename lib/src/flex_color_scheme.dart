@@ -54,7 +54,7 @@ enum FlexAppBarStyle {
   /// Use the color defined by the separate [FlexColorScheme.appBarBackground]
   /// color. The built in themes use the [FlexColorScheme.secondaryVariant]
   /// color as the color assigned to [FlexColorScheme.appBarBackground]. Custom
-  /// themes can assign any color to their `appBarBackground` color.
+  /// schemes can assign any color to their `appBarBackground` color.
   custom,
 }
 
@@ -71,8 +71,8 @@ enum FlexAppBarStyle {
 /// The [FlexColorScheme] fixes the gaps and makes it easy to create complete
 /// themes using the ColorScheme concept. [FlexColorScheme] does not rely
 /// on [ThemeData.from] a [ColorScheme] for its implementation, it uses the
-/// [Theme] factory directly under the hood to create the [ThemeData] object
-/// from [FlexColorScheme] and a [ColorScheme] that it uses to return a custom
+/// [ThemeData] factory directly under the hood to create the [ThemeData] object
+/// from [FlexColorScheme] and a [ColorScheme] that is used to return a
 /// slightly opinionated theme with the [toTheme] method.
 ///
 /// [FlexColorScheme] also makes it easier to make a theme where the app bar
@@ -83,7 +83,7 @@ enum FlexAppBarStyle {
 /// that use so called branded surfaces, that blend in a varying degree of the
 /// primary color into surfaces amd backgrounds using four pre-defined tuned
 /// levels of blend strength. Branded surface are also described in the
-/// Material design guide but Flutter offers no out of the box help to
+/// Material design guide, but Flutter offers no out of the box help to
 /// make such themes. With [FlexColorScheme] you can use a varying degree of
 /// surface and background branding level for any theme you make, both in light
 /// and dark themes.
@@ -143,7 +143,7 @@ class FlexColorScheme {
   factory FlexColorScheme.light({
     /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
     /// from. You can use predefined [FlexSchemeColor] values from
-    /// [FlexColor.schemesWithCustom] or define your own colors with
+    /// [FlexColor.schemes] map or define your own colors with
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
     @required FlexSchemeColor colors,
 
@@ -152,8 +152,8 @@ class FlexColorScheme {
     /// Defaults to [FlexSurface.material] which results in Flutter
     /// standard [ColorScheme.light] surface colors, which follows the
     /// default color scheme in the Material Design
-    /// guide for light theme found here:
-    /// https://material.io/design/color/the-color-system.html#color-theme-creation
+    /// guide for light theme found
+    /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
     ///
     /// If values for [surface], [background] ot [scaffoldBackground] are
     /// provided, they are used instead of values that would be assigned based
@@ -459,7 +459,7 @@ class FlexColorScheme {
   factory FlexColorScheme.dark({
     /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
     /// from. You can use predefined [FlexSchemeColor] from
-    /// [FlexColor.schemesWithCustom] or define your own colors with
+    /// [FlexColor.schemes] or define your own colors with
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
     @required FlexSchemeColor colors,
 
@@ -1392,7 +1392,7 @@ class FlexColorScheme {
       onError: onError,
     );
     // Define a standard Flutter ColorScheme from the provided brightness and
-    // text theme we defined, plus the provided colors.
+    // provided/computes/default colors.
     final ColorScheme colorScheme = ColorScheme(
       primary: primary,
       primaryVariant: primaryVariant,
@@ -1435,11 +1435,11 @@ class FlexColorScheme {
 
     // We need some logic for the appBarColor. If a custom color for the
     // app bar was passed in, we use that, if not we use the surface color in
-    // dark mode and primary color in light mode, this per the same logic as
-    // the standard Flutter ThemeData.from color scheme factory uses.
+    // dark mode and primary color in light mode, the latter part is the same
+    // logic the standard Flutter ThemeData.from color scheme factory uses.
     final Color effectiveAppBarColor = appBarBackground ??
         (isDark ? colorScheme.surface : colorScheme.primary);
-    // Calculate the brightness for the app bar based on the effective color.
+    // Calculate brightness for the app bar from the resulting effective color.
     final Brightness appBarBrightness =
         ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
 
@@ -1453,7 +1453,7 @@ class FlexColorScheme {
         typography ?? Typography.material2018(platform: _platform);
 
     // The current default theme for Material themed Tooltips are poor design
-    // choices for desktop  https://material.io/components/tooltips#specs.
+    // choices for desktop https://material.io/components/tooltips#specs.
     // See issue: https://github.com/flutter/flutter/issues/71429
     // The font size of 10dp is just too small for desktops with pixel density
     // 1.0 also the dark tooltips on light theme and light tooltips on dark
@@ -1547,7 +1547,7 @@ class FlexColorScheme {
       dividerColor: dividerColor,
       backgroundColor: colorScheme.background,
       // Same as in ThemeData factory, but defined via final value in build for
-      // potential reuse access in sub-themes further below as well.
+      // easy reuse access in sub-themes further below.
       disabledColor: disabledColor,
       hintColor: hintColor,
       // Flutter standard dialogBackgroundColor for color scheme based themes
@@ -1569,12 +1569,12 @@ class FlexColorScheme {
       // Replaced Flutter standard indicator color with colorScheme.primary.
       // The default is onSurface in dark mode and onPrimary in light mode,
       // which is designed to fit an app bar colored tab bar. Since we made
-      // use the tab bar on surface colors, we want the indicator to be
-      // primary colored both in dark and light mode.
+      // the tab bar to be used primarily on surface color, we want the
+      // indicator to be primary colored both in dark and light mode.
       indicatorColor: colorScheme.primary,
 
       // Elevation overlay on dark material elevation is used on dark themes
-      // on surfaces by default. Flutter ThemeData.from color scheme based
+      // on surfaces by default. Flutter ThemeData.from ColorScheme based
       // themes also uses this by default, but ThemeData factory does not.
       applyElevationOverlayColor: isDark,
 
@@ -1582,7 +1582,7 @@ class FlexColorScheme {
       // colorScheme. Newer standard Flutter sub themes use the colorScheme
       // for their theming and all sub themes will eventually be converted to
       // be based on the defined color scheme colors. FlexColorScheme passes
-      // scheme it has created to the colorScheme property in ThemeData.
+      // the scheme it has created to the colorScheme property in ThemeData.
       // More info here: https://flutter.dev/go/material-theme-system-updates
       colorScheme: colorScheme,
 
@@ -1590,13 +1590,13 @@ class FlexColorScheme {
       // The theme settings below are corrective additions to the Flutter
       // standard Theme.from(colorScheme) factory. They are needed because it
       // omits some definitions that will not be aligned with the ColorScheme
-      // theme, if they are not added to it manually.
-      // This as per the state in master channel December 15.2020.
+      // theme if they are not added to it manually.
+      // This as per the state in master channel December 15, 2020.
       // This document again relates to the on going transition:
       // https://flutter.dev/go/material-theme-system-updates
       // This issue explains and demos some of the current gaps:
       // https://github.com/flutter/flutter/issues/65782
-      // Some of th gaps will probably be solved eventually when Flutter's theme
+      // Some of the gaps will probably be solved when Flutter's theme
       // migration progresses. This package will monitor the development and
       // remove no longer needed corrections or remove totally deprecated
       // ThemeData properties when it is appropriate and timely to do so.
@@ -1692,7 +1692,7 @@ class FlexColorScheme {
       // ThemeData factory.
       // ----------------------------------------------------------------------
       // Set to true, because it looks better and it should be true in standard
-      // too, bu it is kept as false there for legacy compatibility.
+      // too, but it is kept as false there for legacy compatibility.
       fixTextFieldOutlineLabel: true,
       // In TextSelectionThemeData, the standard for selectionColor is
       // colorScheme.primary with opacity value 0.4 for dark and 0.12 light
@@ -1759,7 +1759,7 @@ class FlexColorScheme {
       ),
 
       // We have to separately specify the foreground color in FABs to be the
-      // accentColor or ColorScheme secondary color, at least if we expect it
+      // ColorScheme secondary color, at least if we expect it
       // to match accentIconTheme as before. Otherwise we get a deprecated
       // warning like this:
       //
@@ -1792,7 +1792,7 @@ class FlexColorScheme {
 
       // Opinionated theming for the bottom navigation bar.
       // It uses primary color for the selected item. Flutter default uses
-      // secondary color.
+      // secondary color. Primary color is also "iOS" style for the bottom nav.
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedIconTheme: IconThemeData(
           color: colorScheme.primary,
@@ -1803,7 +1803,7 @@ class FlexColorScheme {
       // Opinionated theming of Tooltips, as stated previously above, the
       // default theme for Material themed Tooltips are poor design choices
       // https://material.io/components/tooltips#specs.
-      // The theming below is an opinionated other nicer design with an option
+      // The theming below is an opinionated nicer design with an option
       // to also invert the tooltip background color.
       // See issue: https://github.com/flutter/flutter/issues/71429
       tooltipTheme: TooltipThemeData(
@@ -1865,14 +1865,14 @@ class FlexColorScheme {
 
   /// Returns the [ColorScheme] object defined by [FlexColorScheme] properties.
   ///
-  /// After you have defined your theme with [FlexColorScheme] or one of its
+  /// After you have defined your scheme with [FlexColorScheme] or one of its
   /// recommended factories [FlexColorScheme.light], [FlexColorScheme.dark], use
   /// the [toScheme] method to get the resulting [ColorScheme] object defined
   /// by your [FlexColorScheme] definition.
   ///
   /// You can use then use this returned color scheme in a standard
   /// [ThemeData.from] color scheme based theme factory to create a theme from
-  /// the [FlexColorScheme]. This will result in a theme that is based on the
+  /// [FlexColorScheme]. This will result in a theme that is based on the
   /// color scheme defined in [FlexColorScheme], including the surface and
   /// background color branding, and true black for dark mode, if those were
   /// used in its creation via the light and dark factories. The main difference
