@@ -397,18 +397,20 @@ class _DemoAppState extends State<DemoApp> {
 ```
 
 > **There is one more minor addition**  
-> Example 1 and the other examples, use comfortable adaptive platform visual density via
+> Example 1, and the other examples all use comfortable adaptive platform visual density via
 > `FlexColorScheme.comfortablePlatformDensity`, instead of the counter app's normal
 > `VisualDensity.adaptivePlatformDensity`.
 > 
 > This is an alternative that on desktop applications results in the Flutter
 > `comfortable` visual density being used, instead of `compact`. On devices, they both result in the default large
-> visual density that is required for small touch devices. This helper function was added to provide an easy option 
+> visual density that is good for small touch devices. This helper function was added to provide an easy option 
 > for using a bit larger UI elements also on desktop and web apps, while keeping the correct size for devices. 
-> This is useful if the desktop
-> and web versions are occasionally used on computers with touch screens. The `comfortable` density is a nice 
-> balance that still looks compact enough to be desktop like, while providing a bit
-> more touch friendly space without looking like an overblown device UI on a desktop.
+> This is useful if the desktop and web versions are occasionally used on computers with touch screens. 
+> The `comfortable` density is a nice balance that still looks compact enough to be desktop like, while providing 
+> a bit more touch friendly space without looking like an overblown device UI on a desktop.
+> 
+> The Flutter SDK standard `VisualDensity.adaptivePlatformDensity` can of course also be used. If you prefer it, 
+> just replace the line with it.
 
 #### Building and running example 1
 
