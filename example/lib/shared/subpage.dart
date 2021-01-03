@@ -7,23 +7,23 @@ import '../all_shared_imports.dart';
 
 // This sub page is used as a demo in Examples 4 and 5 to show a sub-page
 // using the same FlexColorScheme based theme.
-class SubPage extends StatefulWidget {
-  const SubPage({Key key}) : super(key: key);
+class Subpage extends StatefulWidget {
+  const Subpage({Key key}) : super(key: key);
 
-  // A static convenience function to show this page as a modal screen.
+  // A static convenience function show this screen, as pushed on top.
   static Future<void> show(BuildContext context) async {
     await Navigator.of(context).push<Widget>(
       MaterialPageRoute<Widget>(
-        builder: (BuildContext context) => const SubPage(),
+        builder: (BuildContext context) => const Subpage(),
       ),
     );
   }
 
   @override
-  _SubPageState createState() => _SubPageState();
+  _SubpageState createState() => _SubpageState();
 }
 
-class _SubPageState extends State<SubPage> {
+class _SubpageState extends State<Subpage> {
   int _buttonIndex;
 
   @override
@@ -42,15 +42,12 @@ class _SubPageState extends State<SubPage> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Sub-page Demo'),
-          elevation: 0,
+          title: const Text('Subpage Demo'),
           actions: const <Widget>[AboutIconButton()],
           bottom: const TabBar(
-            // indicatorColor: Colors.white,
-            // indicatorWeight: 5,
             tabs: <Widget>[
               Tab(icon: Icon(Icons.home), text: 'Home'),
-              Tab(icon: Icon(Icons.star), text: 'Feed'),
+              Tab(icon: Icon(Icons.star), text: 'Favorites'),
               Tab(icon: Icon(Icons.face), text: 'Profile'),
               Tab(icon: Icon(Icons.settings), text: 'Settings'),
             ],

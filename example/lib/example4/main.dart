@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../all_shared_imports.dart';
-import '../shared/sub_page.dart';
+import '../shared/subpage.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 4)
@@ -226,7 +226,6 @@ class HomePage extends StatelessWidget {
             appBar: AppBar(
               title: const Text('FlexColorScheme Example 4'),
               actions: const <Widget>[AboutIconButton()],
-              elevation: 0,
             ),
             body: PageBody(
               child: ListView(
@@ -292,14 +291,14 @@ class HomePage extends StatelessWidget {
                   const Divider(),
                   // Open a sub-page
                   ListTile(
-                    title: const Text('Open a demo sub-page'),
+                    title: const Text('Open a demo subpage'),
                     subtitle: const Text(
-                      'The sub-page will use the same '
+                      'The subpage will use the same '
                       'color scheme based theme automatically.',
                     ),
                     trailing: const Icon(Icons.chevron_right, size: 34),
                     onTap: () {
-                      SubPage.show(context);
+                      Subpage.show(context);
                     },
                   ),
                   const Divider(),

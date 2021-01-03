@@ -339,11 +339,11 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'TabBar primarily used in AppBar',
+            'TabBar is used in AppBar (default)',
             style: Theme.of(context).textTheme.caption,
           ),
           Text(
-            'Use FlexTabBarStyle.forAppBar style (default)',
+            'Use style FlexTabBarStyle.forAppBar',
             style: Theme.of(context).textTheme.caption.copyWith(fontSize: 10),
           ),
           Container(
@@ -377,11 +377,11 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'TabBar primary used on background color',
+            'TabBar always used on background color',
             style: Theme.of(context).textTheme.caption,
           ),
           Text(
-            'Use FlexTabBarStyle.forBackground style',
+            'Use style FlexTabBarStyle.forBackground',
             style: Theme.of(context).textTheme.caption.copyWith(fontSize: 10),
           ),
           const TabBar(

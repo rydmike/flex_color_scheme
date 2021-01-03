@@ -67,7 +67,7 @@ enum FlexTabBarStyle {
 
   /// Themed to fit with current background color.
   ///
-  /// Indicator is primary, text and icons follow on AppBar background color.
+  /// Indicator is primary color, text and icons fit on background colors.
   forBackground,
 }
 
@@ -100,6 +100,10 @@ enum FlexTabBarStyle {
 /// make such themes. With [FlexColorScheme] you can use a varying degree of
 /// surface and background branding level for any theme you make, both in light
 /// and dark themes.
+///
+/// A [FlexColorScheme] can also adjust the [TabBarTheme] to match with the
+/// active AppBar background or to be themed to always fit on background/surface
+/// colors, if its primary usage will be for that.
 @immutable
 class FlexColorScheme {
   /// Default constructor that requires its key color properties in
@@ -133,6 +137,8 @@ class FlexColorScheme {
     this.onBackground,
     this.onError,
     this.tabBarStyle = FlexTabBarStyle.forAppBar,
+    this.appBarElevation = 0,
+    this.bottomAppBarElevation = 0,
     this.tooltipsMatchBackground = false,
     this.transparentStatusBar = true,
     this.visualDensity,
@@ -147,6 +153,10 @@ class FlexColorScheme {
         assert(secondaryVariant != null,
             'Secondary variant color may not be null.'),
         assert(tabBarStyle != null, 'Tab bar style cannot be null.'),
+        assert(appBarElevation != null && appBarElevation >= 0.0,
+            'AppBar elevation cannot be null and must be >= 0.'),
+        assert(bottomAppBarElevation != null && bottomAppBarElevation >= 0.0,
+            'Bottom AppBar elevation cannot be null and must be >= 0.'),
         assert(tooltipsMatchBackground != null,
             'Tooltips match background color may not be null.'),
         assert(transparentStatusBar != null,
@@ -219,10 +229,22 @@ class FlexColorScheme {
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
     /// which typically also on works surface and scaffoldBackground color.
-    /// This default TabBar style is useful if you primarily intended to use the
+    /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
     FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+
+    /// The themed elevation for the app bar.
+    ///
+    /// Default to 0, also defaults 0 if null. The 0 elevation is an iOs style
+    /// influenced opinionated choice, but it can easily be adjusted for the
+    /// theme with this property.
+    double appBarElevation,
+
+    /// The themed elevation for the bottom app bar.
+    ///
+    /// If null, defaults to the value given to the `appBarElevation` elevation.
+    double bottomAppBarElevation,
 
     /// The background color for widgets like Card, BottomAppBar and Dialogs.
     ///
@@ -333,6 +355,10 @@ class FlexColorScheme {
     assert(usedColors != null, 'usedColors cannot be null');
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4');
     assert(appBarStyle != null, 'appBarStyle cannot be null');
+    assert(appBarElevation == null || appBarElevation >= 0.0,
+        'AppBar elevation must be null or >= 0.');
+    assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
+        'Bottom AppBar elevation must be null or must be >= 0.');
     assert(tooltipsMatchBackground != null,
         'tooltipsMatchBackground cannot be null');
     assert(transparentStatusBar != null, 'transparentStatusBar cannot be null');
@@ -345,6 +371,8 @@ class FlexColorScheme {
     appBarStyle ??= FlexAppBarStyle.primary;
     tooltipsMatchBackground ??= false;
     transparentStatusBar ??= true;
+    appBarElevation ??= 0;
+    bottomAppBarElevation ??= appBarElevation;
 
     // Make effective colors using 1...4 of the passed in theme colors via
     // the [usedColors] property.
@@ -468,6 +496,8 @@ class FlexColorScheme {
       onBackground: onColorsTheme.onBackground,
       onError: onColorsTheme.onError,
       tabBarStyle: tabBarStyle,
+      appBarElevation: appBarElevation,
+      bottomAppBarElevation: bottomAppBarElevation,
       // This is light theme factory, so brightness is always light
       brightness: Brightness.light,
       tooltipsMatchBackground: tooltipsMatchBackground,
@@ -551,10 +581,22 @@ class FlexColorScheme {
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
     /// which typically also on works surface and scaffoldBackground color.
-    /// This default TabBar style is useful if you primarily intended to use the
+    /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
     FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+
+    /// The themed elevation for the app bar.
+    ///
+    /// Default to 0, also defaults 0 if null. The 0 elevation is an iOs style
+    /// influenced opinionated choice, but it can easily be adjusted for the
+    /// theme with this property.
+    double appBarElevation,
+
+    /// The themed elevation for the bottom app bar.
+    ///
+    /// If null, defaults to the value given to the `appBarElevation` elevation.
+    double bottomAppBarElevation,
 
     /// The background color for widgets like Card, BottomAppBar and dialogs.
     ///
@@ -669,16 +711,17 @@ class FlexColorScheme {
     assert(colors != null, 'colors may not be null.');
     assert(surfaceStyle != null, 'surfaceStyle may not be null.');
     assert(usedColors != null, 'usedColors may not be null.');
-    assert(
-        usedColors >= 1 && usedColors <= 4,
-        'usedColors must be from '
-        '1 to 4.');
+    assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
     assert(appBarStyle != null, 'appBarStyle may not be null.');
-    assert(tabBarStyle != null, 'tabBarStyle may not be null.');
+    assert(appBarElevation == null || appBarElevation >= 0.0,
+        'AppBar elevation must be null or >= 0.');
+    assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
+        'Bottom AppBar elevation must be null or must be >= 0.');
     assert(darkIsTrueBlack != null, 'darkIsTrueBlack color may not be null.');
     assert(tooltipsMatchBackground != null,
         'tooltipsMatchBackground cannot be null');
-
+    assert(transparentStatusBar != null, 'transparentStatusBar cannot be null');
+    assert(tabBarStyle != null, 'tabBarStyle cannot be null');
     // Just in case null is passed in release mode, we use fallback values.
     colors ??= FlexColor.schemesWithCustom[FlexScheme.material].dark;
     surfaceStyle ??= FlexSurface.material;
@@ -688,6 +731,8 @@ class FlexColorScheme {
     darkIsTrueBlack ??= false;
     tooltipsMatchBackground ??= false;
     transparentStatusBar ??= true;
+    appBarElevation ??= 0;
+    bottomAppBarElevation ??= appBarElevation;
 
     // Make effective colors using 1...4 of the passed in theme colors via
     // the [usedColors] value.
@@ -854,6 +899,8 @@ class FlexColorScheme {
       onBackground: onColorsTheme.onBackground,
       onError: onColorsTheme.onError,
       tabBarStyle: tabBarStyle,
+      appBarElevation: appBarElevation,
+      bottomAppBarElevation: bottomAppBarElevation,
       // This is dark theme factory, so brightness is always dark
       brightness: Brightness.dark,
       tooltipsMatchBackground: tooltipsMatchBackground,
@@ -1084,10 +1131,24 @@ class FlexColorScheme {
   /// When setting this to [FlexTabBarStyle.forBackground], it will default
   /// to a theme that uses the color scheme and fits on background color,
   /// which typically also on works surface and scaffoldBackground color.
-  /// This default TabBar style is useful if you primarily intended to use the
+  /// This TabBarTheme style is useful if you primarily intended to use the
   /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
   /// colors.
   final FlexTabBarStyle tabBarStyle;
+
+  /// The themed elevation for the app bar.
+  ///
+  /// Defaults to 0, cannot be null. The 0 elevation is an iOs style
+  /// influenced opinionated choice, but it can easily be adjusted for the
+  /// theme with this property.
+  final double appBarElevation;
+
+  /// The themed elevation for the bottom app bar.
+  ///
+  /// Defaults to 0, cannot be null. The 0 default is so it matches the themed
+  /// app bar elevation default, but it can easily be adjusted for the
+  /// theme with this property.
+  final double bottomAppBarElevation;
 
   /// Tooltips background color will match the brightness of the theme's
   /// background color.
@@ -1268,7 +1329,13 @@ class FlexColorScheme {
   ///    the new AppBarTheme feature, which is better than the work-around
   ///    since we no longer need a custom text theme.
   ///
-  ///  * The `AppBarTheme` elevation defaults to 1, an opinionated choice.
+  ///  * The `AppBarTheme` elevation defaults to 0, an iOs style influenced
+  ///    opinionated choice. It can easily be adjusted directly in the
+  ///    `FlexColorScheme` definition with property value `appBarElevation`
+  ///    without creating a sub theme or using `copyWith`.
+  ///    For the main less used constructor of `FlexColorScheme` it is required
+  ///    and cannot be null. The `FlexColorScheme` `light` and `dark` factories
+  ///    can be null but it will default to 0 if null.
   ///
   ///  * The `bottomAppBarColor` uses color scheme background color to match the
   ///    background color of the drawer, bottom navigation bar, possible side
@@ -1276,7 +1343,11 @@ class FlexColorScheme {
   ///    This is a slight change from the ColorScheme default that uses
   ///    surface color.
   ///
-  ///  * The `bottomAppBarColor` elevation defaults to 1, an opinionated choice.
+  ///  * The `BottomAppBarTheme` elevation defaults to `appBarElevation` or 0 if
+  ///    it is null, an iOs style influenced opinionated choice. It can easily
+  ///    be adjusted directly in the `FlexColorScheme` definition with property
+  ///    value `bottomAppBarElevation` without creating a sub theme or
+  ///    using `copyWith`.
   ///
   ///  * A deviation from `ThemeData.from` color scheme based theme's is
   ///    that `ThemeData.accentColor` is set to `ColorScheme.primary` and not to
@@ -1376,14 +1447,12 @@ class FlexColorScheme {
   ///    > This feature was deprecated after v1.13.2.
   ///
   /// * For [TabBarTheme], the Flutter standard selected tab and indicator
-  ///   color is onSurface in dark mode and onPrimary in light mode, which is
-  ///   designed to fit an AppBar colored TabBar. This is kept, amd the default
+  ///   color is onSurface in dark mode and on Primary in light mode, which is
+  ///   designed to fit an AppBar colored TabBar. This is kept, and the default
   ///   via [FlexTabBarStyle.forAppBar] style, with a minor modification. If
   ///   AppBar is "light", then black87 is used, not black, it is the same as
-  ///   the textTheme on AppBar in light app bar brightness. However, if
-  ///   AppBar was white, surface or background color, while "light", then it
-  ///   uses color scheme primary for selected color.
-  ///   Finally, if the [FlexTabBarStyle.forBackground] style was used, the
+  ///   the textTheme on AppBar in light app bar brightness.
+  ///   If the [FlexTabBarStyle.forBackground] style was used, the
   ///   selected  color is always color scheme primary color, which works well
   ///   on surface, background and scaffold background colors.
   ///
@@ -1542,24 +1611,17 @@ class FlexColorScheme {
     // dark mode and onPrimary in light mode, which is designed to fit an AppBar
     // colored TabBar. We keep this default when FlexTabBarStyle.forAppBar style
     // is used, with a minor modification. If AppBar is "light", then we use
-    // black87, not black, so its like the textTheme on AppBar. However, if
-    // AppBar was white, surface or background color, while "light", then it
-    // uses color scheme primary for selected color.
-    // Finally, if the FlexTabBarStyle.forAppBar style was used, the selected
+    // black87, not black, so its like the textTheme on AppBar.
+    // If the FlexTabBarStyle.forBackground style was used, the selected
     // color is always color scheme primary color, which will work on surface,
     // background and scaffold background colors.
     Color _effectiveTabColor() {
       if (tabBarStyle == FlexTabBarStyle.forBackground) {
         return _colorScheme.primary;
       } else {
+        // We use default style for usage in an AppBar, or some other case.
         if (_appBarBrightness == Brightness.light) {
-          if (_effectiveAppBarColor == Colors.white ||
-              _effectiveAppBarColor == _colorScheme.surface ||
-              _effectiveAppBarColor == _colorScheme.background) {
-            return _colorScheme.primary;
-          } else {
-            return Colors.black87;
-          }
+          return Colors.black87; // Match AppBar texTheme style on light.
         } else {
           return Colors.white;
         }
@@ -1577,6 +1639,12 @@ class FlexColorScheme {
     // unselectedTabColor is the selected tab color with 70% opacity. This
     // opacity value is the same  as Flutter default for the default theme
     // that is also designed for AppBar usage.
+    //
+    // This conditional expression is not so pretty, but I preferred it as an
+    // expression. Since it only has two outcomes, I thought it was
+    // still reasonable to write it like this, instead of via a function like
+    // the effectiveTabColor, that has 3 outcomes. If it needs more logic
+    // later, consider a rewrite with a function with logic.
     final Color _unselectedTabColor =
         (tabBarStyle == FlexTabBarStyle.forBackground ||
                 (_appBarBrightness == Brightness.light &&
@@ -1589,7 +1657,7 @@ class FlexColorScheme {
     // The current default theme for Material themed Tooltips are poor design
     // choices for desktop https://material.io/components/tooltips#specs.
     // See issue: https://github.com/flutter/flutter/issues/71429
-    // The font size of 10dp is just too small for desktops with pixel density
+    // The font size of 10 dp is just too small for desktops with pixel density
     // 1.0 also the dark tooltips on light theme and light tooltips on dark
     // themes seem more reminiscent of bootstrap Web theme and does not fit so
     // well on desktop, windows native for example uses light tooltips on light
@@ -1805,8 +1873,7 @@ class FlexColorScheme {
         actionsIconTheme: _appBarBrightness == Brightness.dark
             ? const IconThemeData(color: Colors.white)
             : const IconThemeData(color: Colors.black87),
-        // Opinionated, adjust with a copyWith for elevation if needed.
-        elevation: 1,
+        elevation: appBarElevation,
       ),
 
       // The bottom app bar uses color scheme background color to match the
@@ -1817,8 +1884,7 @@ class FlexColorScheme {
       bottomAppBarColor: _colorScheme.background,
       bottomAppBarTheme: BottomAppBarTheme(
         color: _colorScheme.background,
-        // Opinionated, adjust with a copyWith for elevation if needed.
-        elevation: 1,
+        elevation: bottomAppBarElevation,
       ),
 
       // ----------------------------------------------------------------------
@@ -1969,8 +2035,6 @@ class FlexColorScheme {
     // makes the AppBar one-colored like on iOS, which looks better
     // (opinionated).
     //
-    // We have to make this call AFTER we defined the theme so it can override
-    // the annotated region AppBar sets when theme is defined.
     //
     // It would be nice if we could also make the system navigation button area
     // on Android transparent, but it does not work if we set
@@ -1987,6 +2051,11 @@ class FlexColorScheme {
     // Opt out is available by setting `transparentStatusBar` to false and
     // totally skip this SystemChrome call, if it becomes an issue or is not
     // desired.
+    // We currently have to make this call AFTER we defined the theme so it can
+    // override the annotated region AppBar sets when theme is defined. This is
+    // the reason why the ThemeData is not returned directly, but stored in a
+    // local temp instance first. Consider changing this too when #71184 lands.
+    // Oddly this works though, will be better via new AppBar theme though.
     if (transparentStatusBar) {
       SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(

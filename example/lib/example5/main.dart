@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../all_shared_imports.dart';
-import '../shared/sub_page.dart';
+import '../shared/subpage.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 5)
@@ -145,6 +145,9 @@ class _DemoAppState extends State<DemoApp> {
   // Enum used to select what app bar style we use.
   FlexAppBarStyle flexAppBarStyle;
 
+  // Used to modify the themed app bar elevation.
+  double appBarElevation;
+
   // Enum used to select what tab bar style we use.
   FlexTabBarStyle flexTabBarStyle;
 
@@ -183,6 +186,7 @@ class _DemoAppState extends State<DemoApp> {
     themeIndex = 7; // Start with deep blue sea.
     flexSurface = FlexSurface.medium;
     flexAppBarStyle = FlexAppBarStyle.primary;
+    appBarElevation = 0;
     flexTabBarStyle = FlexTabBarStyle.forAppBar;
     tooltipsMatchBackground = false;
     darkIsTrueBlack = false;
@@ -226,6 +230,7 @@ class _DemoAppState extends State<DemoApp> {
               colors: myFlexSchemes[themeIndex].light,
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
+              appBarElevation: appBarElevation,
               tabBarStyle: flexTabBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -243,6 +248,7 @@ class _DemoAppState extends State<DemoApp> {
                 colors: myFlexSchemes[themeIndex].light,
                 surfaceStyle: flexSurface,
                 appBarStyle: flexAppBarStyle,
+                appBarElevation: appBarElevation,
                 tabBarStyle: flexTabBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -265,6 +271,7 @@ class _DemoAppState extends State<DemoApp> {
                   : myFlexSchemes[themeIndex].dark,
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
+              appBarElevation: appBarElevation,
               tabBarStyle: flexTabBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               darkIsTrueBlack: darkIsTrueBlack,
@@ -282,6 +289,7 @@ class _DemoAppState extends State<DemoApp> {
                     : myFlexSchemes[themeIndex].dark,
                 surfaceStyle: flexSurface,
                 appBarStyle: flexAppBarStyle,
+                appBarElevation: appBarElevation,
                 tabBarStyle: flexTabBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 darkIsTrueBlack: darkIsTrueBlack,
@@ -328,6 +336,14 @@ class _DemoAppState extends State<DemoApp> {
         onAppBarStyleChanged: (FlexAppBarStyle style) {
           setState(() {
             flexAppBarStyle = style;
+          });
+        },
+        // We pass in the current app bar elevation level
+        appBarElevation: appBarElevation,
+        // And use the new white elevation value.
+        onAppBarElevationChanged: (double value) {
+          setState(() {
+            appBarElevation = value;
           });
         },
         // We pass in the active tab bar style.
@@ -410,6 +426,8 @@ class HomePage extends StatefulWidget {
     @required this.onThemeSurfaceChanged,
     @required this.appBarStyle,
     @required this.onAppBarStyleChanged,
+    @required this.appBarElevation,
+    @required this.onAppBarElevationChanged,
     @required this.tabBarStyle,
     @required this.onTabBarStyleChanged,
     @required this.tooltipsMatchBackground,
@@ -433,6 +451,8 @@ class HomePage extends StatefulWidget {
   final FlexAppBarStyle appBarStyle;
   final ValueChanged<FlexAppBarStyle> onAppBarStyleChanged;
   final FlexTabBarStyle tabBarStyle;
+  final double appBarElevation;
+  final ValueChanged<double> onAppBarElevationChanged;
   final ValueChanged<FlexTabBarStyle> onTabBarStyleChanged;
   final bool tooltipsMatchBackground;
   final ValueChanged<bool> onTooltipsMatchBackgroundChanged;
@@ -649,7 +669,6 @@ class _HomePageState extends State<HomePage> {
               appBar: AppBar(
                 title: const Text('FlexColorScheme Example 5'),
                 actions: const <Widget>[AboutIconButton()],
-                elevation: 0,
                 backgroundColor: Colors.transparent,
                 // Gradient partially transparent AppBar, just because it looks
                 // nice and we can see content scroll behind it.
@@ -663,7 +682,7 @@ class _HomePageState extends State<HomePage> {
                       end: AlignmentDirectional.centerEnd,
                       colors: <Color>[
                         appBarColor,
-                        appBarColor.withOpacity(0.8),
+                        appBarColor.withOpacity(0.85),
                       ],
                     ),
                   ),
@@ -861,6 +880,25 @@ class _HomePageState extends State<HomePage> {
                       unselectedColor: theme.cardColor,
                     ),
                     const SizedBox(height: 8),
+                    // AppBar elevation value in a ListTile.
+                    ListTile(
+                      title: const Text('App bar themed elevation'),
+                      subtitle: Slider.adaptive(
+                        min: 0,
+                        max: 30,
+                        divisions: 30,
+                        label: widget.appBarElevation.floor().toString(),
+                        value: widget.appBarElevation.roundToDouble(),
+                        onChanged: widget.onAppBarElevationChanged,
+                      ),
+                      trailing: Text(
+                        '${widget.appBarElevation.floor()}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
                     const ListTile(
                       title: Text('Tab bar theme'),
                       subtitle: Text(
@@ -916,14 +954,14 @@ class _HomePageState extends State<HomePage> {
                     const Divider(),
                     // Open a sub-page
                     ListTile(
-                      title: const Text('Open a demo sub-page'),
+                      title: const Text('Open a demo subpage'),
                       subtitle: const Text(
-                        'The sub-page will use the same '
+                        'The subpage will use the same '
                         'color scheme based theme automatically.',
                       ),
                       trailing: const Icon(Icons.chevron_right, size: 34),
                       onTap: () {
-                        SubPage.show(context);
+                        Subpage.show(context);
                       },
                     ),
                     const Divider(),
