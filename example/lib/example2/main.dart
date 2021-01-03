@@ -45,8 +45,8 @@ class _DemoAppState extends State<DemoApp> {
 
   @override
   void initState() {
-    themeMode = ThemeMode.light;
     super.initState();
+    themeMode = ThemeMode.light;
   }
 
   @override

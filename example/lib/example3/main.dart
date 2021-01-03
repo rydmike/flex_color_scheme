@@ -50,9 +50,9 @@ class _DemoAppState extends State<DemoApp> {
 
   @override
   void initState() {
+    super.initState();
     themeMode = ThemeMode.light;
     flexScheme = FlexScheme.hippieBlue;
-    super.initState();
   }
 
   @override

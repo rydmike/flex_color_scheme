@@ -76,6 +76,18 @@ enum FlexScheme {
   /// Playful mango mojito theme.
   mango,
 
+  /// Material amber and blue accent based theme.
+  amber,
+
+  /// Vesuvius burned orange and eden green based theme.
+  vesuviusBurn,
+
+  /// Deep purple, daisy bush theme.
+  deepPurple,
+
+  /// Ebony clay deep blue grey and watercourse green theme.
+  ebonyClay,
+
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a [FlexColorScheme] based on a custom
   /// [FlexSchemeData] object. If not provided, it defaults to the
@@ -804,7 +816,7 @@ class FlexColor {
   /// Gold sunset theme color for dark secondary variant color.
   static const Color goldDarkSecondaryVariant = Color(0xFFddab88); // S.alm.L70%
 
-  // Custom mango mojito palette
+  // Custom mango mojito scheme.
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
   //
   /// English name of the mango mojito theme.
@@ -837,6 +849,143 @@ class FlexColor {
 
   /// Mango mojito theme color for dark secondary variant color.
   static const Color mangoDarkSecondaryVariant = Color(0xFF81816C);
+
+  // Material amber scheme.
+  //
+  /// English name of the amber theme.
+  static const String amberName = 'Amber blue';
+
+  /// English description of the amber theme.
+  static const String amberDescription =
+      'Amber blaze and blue color theme, based on '
+      'Material amber and blue accent colors.';
+
+  /// Amber theme color for light primary color.
+  static const Color amberLightPrimary = Color(0xFFE65100); // Amber900
+
+  /// Amber theme color for light primary variant color.
+  static const Color amberLightPrimaryVariant = Color(0xFFFF8F00); // Amber800
+
+  /// Amber theme color for light secondary color.
+  static const Color amberLightSecondary = Color(0xFF2979FF); // BlueAccent400
+
+  /// Amber theme color for light secondary variant color.
+  static const Color amberLightSecondaryVariant =
+      Color(0xFF2962FF); // BlueAccent700
+
+  /// Amber theme color for dark primary color.
+  static const Color amberDarkPrimary = Color(0xFFFFB300); // Amber600
+
+  /// Amber theme color for dark primary variant color.
+  static const Color amberDarkPrimaryVariant = Color(0xFFFFD54F); // Amber300
+
+  /// Amber theme color for dark secondary color.
+  static const Color amberDarkSecondary = Color(0xFF82B1FF); // BlueAccent100
+
+  /// Amber theme color for dark secondary variant color.
+  static const Color amberDarkSecondaryVariant =
+      Color(0xFF448AFF); // BlueAccent100
+
+  // Custom vesuvius burned and eden green scheme.
+  //
+  /// English name of the vesuvius burned orange theme.
+  static const String vesuviusBurnName = 'Vesuvius burned';
+
+  /// English description of the vesuvius burned orange theme.
+  static const String vesuviusBurnDescription =
+      'Vesuvius burned orange and eden green theme.';
+
+  /// Vesuvius burned theme color for light primary color.
+  static const Color vesuviusBurnLightPrimary = Color(0xFFA6400F);
+
+  /// Vesuvius burned theme color for light primary variant color.
+  static const Color vesuviusBurnLightPrimaryVariant = Color(0xFF7A2800);
+
+  /// Vesuvius burned theme color for light secondary color.
+  static const Color vesuviusBurnLightSecondary = Color(0xFF185358);
+
+  /// Vesuvius burned theme color for light secondary variant color.
+  static const Color vesuviusBurnLightSecondaryVariant = Color(0xFF144447);
+
+  /// Vesuvius burned theme color for dark primary color.
+  static const Color vesuviusBurnDarkPrimary = Color(0xFFD17D53);
+
+  /// Vesuvius burned theme color for dark primary variant color.
+  static const Color vesuviusBurnDarkPrimaryVariant = Color(0xFFA7613E);
+
+  /// Vesuvius burned theme color for dark secondary color.
+  static const Color vesuviusBurnDarkSecondary = Color(0xFF5B8A8E);
+
+  /// Vesuvius burned theme color for dark secondary variant color.
+  static const Color vesuviusBurnDarkSecondaryVariant = Color(0xFF3A7175);
+
+  // Material deepPurple and light blue accent scheme.
+  //
+  /// English name of the deepPurple theme.
+  static const String deepPurpleName = 'Deep purple';
+
+  /// English description of the deepPurple theme.
+  static const String deepPurpleDescription = 'Deep purple daisy bush theme, '
+      'based on Material deepPurple and lightBlueAccent colors.';
+
+  /// Indigo theme color for light primary color.
+  static const Color deepPurpleLightPrimary = Color(0xFF4527A0); // dp800
+
+  /// Indigo theme color for light primary variant color.
+  static const Color deepPurpleLightPrimaryVariant = Color(0xFF673AB7); // dp500
+
+  /// Indigo theme color for light secondary color.
+  static const Color deepPurpleLightSecondary = Color(0xFF0091EA); // lba700
+
+  /// Indigo theme color for light secondary variant color.
+  static const Color deepPurpleLightSecondaryVariant =
+      Color(0xFF00B0FF); // lba400
+
+  /// Indigo theme color for dark primary color.
+  static const Color deepPurpleDarkPrimary = Color(0xFFB39DDB); // dp200
+
+  /// Indigo theme color for dark primary variant color.
+  static const Color deepPurpleDarkPrimaryVariant = Color(0xFF9575CD); // dp200
+
+  /// Indigo theme color for dark secondary color.
+  static const Color deepPurpleDarkSecondary = Color(0xFF80D8FF); // lba100
+
+  /// Indigo theme color for dark secondary variant color.
+  static const Color deepPurpleDarkSecondaryVariant =
+      Color(0xFF40C4FF); // lba200
+
+  // Custom Ebony Clay super dark blue grey scheme.
+  //
+  /// English name of the Ebony clay theme.
+  static const String ebonyClayName = 'Ebony clay';
+
+  /// English description of the Ebony clay theme.
+  static const String ebonyClayDescription =
+      'Ebony clay dark blue-grey and watercourse green colored theme.';
+
+  /// Ebony clay theme color for light primary color.
+  static const Color ebonyClayLightPrimary = Color(0xFF202541);
+
+  /// Ebony clay theme color for light primary variant color.
+  static const Color ebonyClayLightPrimaryVariant = Color(0xFF202531);
+
+  /// Ebony clay theme color for light secondary color.
+  static const Color ebonyClayLightSecondary = Color(0xFF006B54);
+
+  /// Ebony clay theme color for light secondary variant color.
+  static const Color ebonyClayLightSecondaryVariant = Color(0xFF004B3B);
+
+  /// Ebony clay theme color for dark primary color.
+  static const Color ebonyClayDarkPrimary = Color(0xFF4E597D);
+
+  /// Ebony clay theme color for dark primary variant color.
+  static const Color ebonyClayDarkPrimaryVariant = Color(0xFF707EAC);
+
+  /// Ebony clay theme color for dark secondary color.
+  static const Color ebonyClayDarkSecondary = Color(0xFF4BA390);
+
+  /// Ebony clay theme color for dark secondary variant color.
+  static const Color ebonyClayDarkSecondaryVariant = Color(0xFF3D8475);
 
   /// English name of the custom theme.
   static const String customName = 'Custom';
@@ -1263,6 +1412,86 @@ class FlexColor {
         secondary: mangoDarkSecondary,
         secondaryVariant: mangoDarkSecondaryVariant,
         appBarColor: mangoDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.amber: FlexSchemeData(
+      name: amberName,
+      description: amberDescription,
+      light: FlexSchemeColor(
+        primary: amberLightPrimary,
+        primaryVariant: amberLightPrimaryVariant,
+        secondary: amberLightSecondary,
+        secondaryVariant: amberLightSecondaryVariant,
+        appBarColor: amberLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: amberDarkPrimary,
+        primaryVariant: amberDarkPrimaryVariant,
+        secondary: amberDarkSecondary,
+        secondaryVariant: amberDarkSecondaryVariant,
+        appBarColor: amberDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.vesuviusBurn: FlexSchemeData(
+      name: vesuviusBurnName,
+      description: vesuviusBurnDescription,
+      light: FlexSchemeColor(
+        primary: vesuviusBurnLightPrimary,
+        primaryVariant: vesuviusBurnLightPrimaryVariant,
+        secondary: vesuviusBurnLightSecondary,
+        secondaryVariant: vesuviusBurnLightSecondaryVariant,
+        appBarColor: vesuviusBurnLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: vesuviusBurnDarkPrimary,
+        primaryVariant: vesuviusBurnDarkPrimaryVariant,
+        secondary: vesuviusBurnDarkSecondary,
+        secondaryVariant: vesuviusBurnDarkSecondaryVariant,
+        appBarColor: vesuviusBurnDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.deepPurple: FlexSchemeData(
+      name: deepPurpleName,
+      description: deepPurpleDescription,
+      light: FlexSchemeColor(
+        primary: deepPurpleLightPrimary,
+        primaryVariant: deepPurpleLightPrimaryVariant,
+        secondary: deepPurpleLightSecondary,
+        secondaryVariant: deepPurpleLightSecondaryVariant,
+        appBarColor: deepPurpleLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: deepPurpleDarkPrimary,
+        primaryVariant: deepPurpleDarkPrimaryVariant,
+        secondary: deepPurpleDarkSecondary,
+        secondaryVariant: deepPurpleDarkSecondaryVariant,
+        appBarColor: deepPurpleDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.ebonyClay: FlexSchemeData(
+      name: ebonyClayName,
+      description: ebonyClayDescription,
+      light: FlexSchemeColor(
+        primary: ebonyClayLightPrimary,
+        primaryVariant: ebonyClayLightPrimaryVariant,
+        secondary: ebonyClayLightSecondary,
+        secondaryVariant: ebonyClayLightSecondaryVariant,
+        appBarColor: ebonyClayLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: ebonyClayDarkPrimary,
+        primaryVariant: ebonyClayDarkPrimaryVariant,
+        secondary: ebonyClayDarkSecondary,
+        secondaryVariant: ebonyClayDarkSecondaryVariant,
+        appBarColor: ebonyClayDarkSecondaryVariant,
         error: materialDarkError,
       ),
     ),
