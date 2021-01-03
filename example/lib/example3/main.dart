@@ -182,7 +182,6 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('FlexColorScheme Example 3'),
         actions: const <Widget>[AboutIconButton()],
-        elevation: 0,
       ),
       body: PageBody(
         child: ListView(

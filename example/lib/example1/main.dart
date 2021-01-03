@@ -103,7 +103,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('FlexColorScheme Example 1'),
-        elevation: 0,
         actions: const <Widget>[AboutIconButton()],
       ),
       body: PageBody(
