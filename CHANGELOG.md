@@ -2,6 +2,21 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [1.2.0] - January 3, 2021
+* Added N new built-in color schemes (list them here...)
+* Added a style option for the tab bar theme, for use on background (current/past existing one, default) or for use on
+  AppBar with whatever active style it has, so it will fit on it, regardless of what theme it has based on 
+  the used AppBar style option. 
+* Added unit tests
+     
+  **Examples:**
+
+* All examples: The widget showcase now show the tab bar, both on background color and app bar color.
+* Example 5 includes a demo toggle that can be used to select the tab bar theme style.
+* Corrected example 5 so that the Roboto font is used always by the examples regardless of platform, now also gets
+  used when you toggle to create the theme from the scheme with the ThemeData.from(colorScheme) as well. It looked
+  a bit ood when it chnaged to platform default on Desktop and Web builds and the FlexColorScheme.toTheme used Roboto.
+
 ## [1.1.1] - December 31, 2020
 
 * Updated example 5 to include UI that can be used to vary the computed dark themes white blend percentage level.

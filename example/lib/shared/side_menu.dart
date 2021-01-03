@@ -27,8 +27,8 @@ class _SideMenuState extends State<SideMenu> {
 
   @override
   void initState() {
-    selectedItem = 2;
     super.initState();
+    selectedItem = 2;
   }
 
   @override
@@ -206,8 +206,8 @@ class _UserProfileState extends State<_UserProfile> {
 
   @override
   void initState() {
-    collapsedProfile = true;
     super.initState();
+    collapsedProfile = true;
   }
 
   @override

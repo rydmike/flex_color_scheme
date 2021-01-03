@@ -138,12 +138,15 @@ class _DemoAppState extends State<DemoApp> {
   // Used to select which FlexSchemeData we use in our list of schemes.
   int themeIndex;
 
-  // Enum used to select what app bar style we use.
-  FlexAppBarStyle flexAppBarStyle;
-
   // Enum used to control the level of primary color surface branding applied
   // to surfaces and backgrounds.
   FlexSurface flexSurface;
+
+  // Enum used to select what app bar style we use.
+  FlexAppBarStyle flexAppBarStyle;
+
+  // Enum used to select what tab bar style we use.
+  FlexTabBarStyle flexTabBarStyle;
 
   // If true, tooltip theme background will be light in light theme, and dark
   // in dark themes. The Flutter and Material default and standard is the other
@@ -175,16 +178,17 @@ class _DemoAppState extends State<DemoApp> {
 
   @override
   void initState() {
+    super.initState();
     themeMode = ThemeMode.light;
     themeIndex = 7; // Start with deep blue sea.
-    flexAppBarStyle = FlexAppBarStyle.primary;
     flexSurface = FlexSurface.medium;
+    flexAppBarStyle = FlexAppBarStyle.primary;
+    flexTabBarStyle = FlexTabBarStyle.forAppBar;
     tooltipsMatchBackground = false;
     darkIsTrueBlack = false;
     useToDarkMethod = false;
     level = 35;
     useToThemeMethod = true;
-    super.initState();
   }
 
   @override
@@ -222,6 +226,7 @@ class _DemoAppState extends State<DemoApp> {
               colors: myFlexSchemes[themeIndex].light,
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
+              tabBarStyle: flexTabBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
               fontFamily: AppFonts.mainFont,
@@ -230,10 +235,15 @@ class _DemoAppState extends State<DemoApp> {
           // comparison purposes. It will not not be fully color scheme colored,
           // nor will it look as nice and balanced when color branding is used.
           : ThemeData.from(
+              textTheme: ThemeData(
+                brightness: Brightness.light,
+                fontFamily: AppFonts.mainFont,
+              ).textTheme,
               colorScheme: FlexColorScheme.light(
                 colors: myFlexSchemes[themeIndex].light,
                 surfaceStyle: flexSurface,
                 appBarStyle: flexAppBarStyle,
+                tabBarStyle: flexTabBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
                 fontFamily: AppFonts.mainFont,
@@ -255,18 +265,24 @@ class _DemoAppState extends State<DemoApp> {
                   : myFlexSchemes[themeIndex].dark,
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
+              tabBarStyle: flexTabBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               darkIsTrueBlack: darkIsTrueBlack,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
               fontFamily: AppFonts.mainFont,
             ).toTheme
           : ThemeData.from(
+              textTheme: ThemeData(
+                brightness: Brightness.dark,
+                fontFamily: AppFonts.mainFont,
+              ).textTheme,
               colorScheme: FlexColorScheme.dark(
                 colors: useToDarkMethod
                     ? myFlexSchemes[themeIndex].light.defaultError.toDark(level)
                     : myFlexSchemes[themeIndex].dark,
                 surfaceStyle: flexSurface,
                 appBarStyle: flexAppBarStyle,
+                tabBarStyle: flexTabBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 darkIsTrueBlack: darkIsTrueBlack,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -298,6 +314,14 @@ class _DemoAppState extends State<DemoApp> {
             themeIndex = index;
           });
         },
+        // We pass in the current surface and background style.
+        themeSurface: flexSurface,
+        // And select a new surface and background style.
+        onThemeSurfaceChanged: (FlexSurface surface) {
+          setState(() {
+            flexSurface = surface;
+          });
+        },
         // We pass in the active app bar style.
         appBarStyle: flexAppBarStyle,
         // And select a new app bar style.
@@ -306,12 +330,12 @@ class _DemoAppState extends State<DemoApp> {
             flexAppBarStyle = style;
           });
         },
-        // We pass in the current surface and background style.
-        themeSurface: flexSurface,
-        // And select a new surface and background style.
-        onThemeSurfaceChanged: (FlexSurface surface) {
+        // We pass in the active tab bar style.
+        tabBarStyle: flexTabBarStyle,
+        // And select a new tab bar style.
+        onTabBarStyleChanged: (FlexTabBarStyle style) {
           setState(() {
-            flexSurface = surface;
+            flexTabBarStyle = style;
           });
         },
         // We pass in the current tooltip style.
@@ -382,10 +406,12 @@ class HomePage extends StatefulWidget {
     @required this.onThemeModeChanged,
     @required this.schemeIndex,
     @required this.onSchemeChanged,
-    @required this.appBarStyle,
-    @required this.onAppBarStyleChanged,
     @required this.themeSurface,
     @required this.onThemeSurfaceChanged,
+    @required this.appBarStyle,
+    @required this.onAppBarStyleChanged,
+    @required this.tabBarStyle,
+    @required this.onTabBarStyleChanged,
     @required this.tooltipsMatchBackground,
     @required this.onTooltipsMatchBackgroundChanged,
     @required this.darkIsTrueBlack,
@@ -402,10 +428,12 @@ class HomePage extends StatefulWidget {
   final ValueChanged<ThemeMode> onThemeModeChanged;
   final int schemeIndex;
   final ValueChanged<int> onSchemeChanged;
-  final FlexAppBarStyle appBarStyle;
-  final ValueChanged<FlexAppBarStyle> onAppBarStyleChanged;
   final FlexSurface themeSurface;
   final ValueChanged<FlexSurface> onThemeSurfaceChanged;
+  final FlexAppBarStyle appBarStyle;
+  final ValueChanged<FlexAppBarStyle> onAppBarStyleChanged;
+  final FlexTabBarStyle tabBarStyle;
+  final ValueChanged<FlexTabBarStyle> onTabBarStyleChanged;
   final bool tooltipsMatchBackground;
   final ValueChanged<bool> onTooltipsMatchBackgroundChanged;
   final bool darkIsTrueBlack;
@@ -433,10 +461,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
     currentSidePanelWidth = AppConst.expandWidth;
     isSidePanelExpanded = true;
     showSidePanel = true;
-    super.initState();
   }
 
   @override
@@ -552,6 +580,26 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(5),
         child: Text(
           'Custom\ncolor',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 11),
+        ),
+      ),
+    };
+
+    // FlexTabBarStyle enum to widget map, used in a CupertinoSegment control.
+    const Map<FlexTabBarStyle, Widget> themeTabBar = <FlexTabBarStyle, Widget>{
+      FlexTabBarStyle.forAppBar: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          'TabBar used\nin AppBar',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 11),
+        ),
+      ),
+      FlexTabBarStyle.forBackground: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          'TabBar used\non background',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 11),
         ),
@@ -804,6 +852,28 @@ class _HomePageState extends State<HomePage> {
                       children: themeAppBar,
                       groupValue: widget.appBarStyle,
                       onValueChanged: widget.onAppBarStyleChanged,
+                      borderColor: isLight
+                          ? colorScheme.primary
+                          : theme.primaryColorLight,
+                      selectedColor: isLight
+                          ? colorScheme.primary
+                          : theme.primaryColorLight,
+                      unselectedColor: theme.cardColor,
+                    ),
+                    const SizedBox(height: 8),
+                    const ListTile(
+                      title: Text('Tab bar theme'),
+                      subtitle: Text(
+                        'Choose the style that fit best with where '
+                        'you primarily intend to use the TabBar.',
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    // AppBar style
+                    CupertinoSegmentedControl<FlexTabBarStyle>(
+                      children: themeTabBar,
+                      groupValue: widget.tabBarStyle,
+                      onValueChanged: widget.onTabBarStyleChanged,
                       borderColor: isLight
                           ? colorScheme.primary
                           : theme.primaryColorLight,

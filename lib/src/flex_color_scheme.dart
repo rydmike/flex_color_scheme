@@ -58,6 +58,19 @@ enum FlexAppBarStyle {
   custom,
 }
 
+/// Enum to select TabBarTheme preference in [FlexColorScheme] based themes.
+enum FlexTabBarStyle {
+  /// Themed to fit with active FlexAppBarStyle and AppBarTheme.
+  ///
+  /// Indicator is white, text and icons follow on AppBar background color.
+  forAppBar,
+
+  /// Themed to fit with current background color.
+  ///
+  /// Indicator is primary, text and icons follow on AppBar background color.
+  forBackground,
+}
+
 /// Used to build Flutter [ThemeData] objects, based on Flutter [ColorScheme]
 /// concept. This implementation uses an enhanced and opinionated version of
 /// creating [ThemeData] using the [ColorScheme] idea.
@@ -119,6 +132,7 @@ class FlexColorScheme {
     this.onSurface,
     this.onBackground,
     this.onError,
+    this.tabBarStyle = FlexTabBarStyle.forAppBar,
     this.tooltipsMatchBackground = false,
     this.transparentStatusBar = true,
     this.visualDensity,
@@ -132,8 +146,11 @@ class FlexColorScheme {
         assert(secondary != null, 'Secondary color may not be null.'),
         assert(secondaryVariant != null,
             'Secondary variant color may not be null.'),
+        assert(tabBarStyle != null, 'Tab bar style cannot be null.'),
         assert(tooltipsMatchBackground != null,
-            'Tooltips match background color may not be null.');
+            'Tooltips match background color may not be null.'),
+        assert(transparentStatusBar != null,
+            'Transparent status bar may not be null.');
 
   /// Creates a light [FlexColorScheme] based on the given [FlexSchemeColor].
   ///
@@ -193,6 +210,19 @@ class FlexColorScheme {
     /// as a Flutter standard light [ThemeData.from] by tying the app bar color
     /// to the primary color.
     FlexAppBarStyle appBarStyle = FlexAppBarStyle.primary,
+
+    /// Select preferred style for the default TabBarTheme.
+    ///
+    /// By default the TabBarTheme is made to fit with the style of the AppBar,
+    /// via default value [FlexTabBarStyle.forAppBar].
+    ///
+    /// When setting this to [FlexTabBarStyle.forBackground], it will default
+    /// to a theme that uses the color scheme and fits on background color,
+    /// which typically also on works surface and scaffoldBackground color.
+    /// This default TabBar style is useful if you primarily intended to use the
+    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
+    /// colors.
+    FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
 
     /// The background color for widgets like Card, BottomAppBar and Dialogs.
     ///
@@ -306,9 +336,11 @@ class FlexColorScheme {
     assert(tooltipsMatchBackground != null,
         'tooltipsMatchBackground cannot be null');
     assert(transparentStatusBar != null, 'transparentStatusBar cannot be null');
+    assert(tabBarStyle != null, 'tabBarStyle cannot be null');
     // Just in case null is passed in release mode, we use fallback values.
     colors ??= FlexColor.schemesWithCustom[FlexScheme.material].light;
     surfaceStyle ??= FlexSurface.material;
+    tabBarStyle ??= FlexTabBarStyle.forAppBar;
     usedColors ??= 4;
     appBarStyle ??= FlexAppBarStyle.primary;
     tooltipsMatchBackground ??= false;
@@ -435,6 +467,7 @@ class FlexColorScheme {
       onSurface: onColorsTheme.onSurface,
       onBackground: onColorsTheme.onBackground,
       onError: onColorsTheme.onError,
+      tabBarStyle: tabBarStyle,
       // This is light theme factory, so brightness is always light
       brightness: Brightness.light,
       tooltipsMatchBackground: tooltipsMatchBackground,
@@ -509,6 +542,19 @@ class FlexColorScheme {
     /// as a Flutter standard dark [ThemeData.from] by tying the app bar color
     /// to the surface color.
     FlexAppBarStyle appBarStyle = FlexAppBarStyle.material,
+
+    /// Select preferred style for the default TabBarTheme.
+    ///
+    /// By default the TabBarTheme is made to fit with the style of the AppBar,
+    /// via default value [FlexTabBarStyle.forAppBar].
+    ///
+    /// When setting this to [FlexTabBarStyle.forBackground], it will default
+    /// to a theme that uses the color scheme and fits on background color,
+    /// which typically also on works surface and scaffoldBackground color.
+    /// This default TabBar style is useful if you primarily intended to use the
+    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
+    /// colors.
+    FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
 
     /// The background color for widgets like Card, BottomAppBar and dialogs.
     ///
@@ -628,6 +674,7 @@ class FlexColorScheme {
         'usedColors must be from '
         '1 to 4.');
     assert(appBarStyle != null, 'appBarStyle may not be null.');
+    assert(tabBarStyle != null, 'tabBarStyle may not be null.');
     assert(darkIsTrueBlack != null, 'darkIsTrueBlack color may not be null.');
     assert(tooltipsMatchBackground != null,
         'tooltipsMatchBackground cannot be null');
@@ -635,6 +682,7 @@ class FlexColorScheme {
     // Just in case null is passed in release mode, we use fallback values.
     colors ??= FlexColor.schemesWithCustom[FlexScheme.material].dark;
     surfaceStyle ??= FlexSurface.material;
+    tabBarStyle ??= FlexTabBarStyle.forAppBar;
     usedColors ??= 4;
     appBarStyle ??= FlexAppBarStyle.surface;
     darkIsTrueBlack ??= false;
@@ -805,6 +853,7 @@ class FlexColorScheme {
       onSurface: onColorsTheme.onSurface,
       onBackground: onColorsTheme.onBackground,
       onError: onColorsTheme.onError,
+      tabBarStyle: tabBarStyle,
       // This is dark theme factory, so brightness is always dark
       brightness: Brightness.dark,
       tooltipsMatchBackground: tooltipsMatchBackground,
@@ -1027,6 +1076,19 @@ class FlexColorScheme {
   /// color, and will be be black if it is light and white if it is dark.
   final Color onError;
 
+  /// Select preferred style for the default TabBarTheme.
+  ///
+  /// By default the TabBarTheme is made to fit with the style of the AppBar,
+  /// via default value [FlexTabBarStyle.forAppBar].
+  ///
+  /// When setting this to [FlexTabBarStyle.forBackground], it will default
+  /// to a theme that uses the color scheme and fits on background color,
+  /// which typically also on works surface and scaffoldBackground color.
+  /// This default TabBar style is useful if you primarily intended to use the
+  /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
+  /// colors.
+  final FlexTabBarStyle tabBarStyle;
+
   /// Tooltips background color will match the brightness of the theme's
   /// background color.
   ///
@@ -1206,12 +1268,15 @@ class FlexColorScheme {
   ///    the new AppBarTheme feature, which is better than the work-around
   ///    since we no longer need a custom text theme.
   ///
-  ///  * The `AppBarTheme` elevation defaults to 0, an opinionated choice.
+  ///  * The `AppBarTheme` elevation defaults to 1, an opinionated choice.
   ///
-  ///  * Like standard `ThemeData.from` color scheme themes, the
-  ///    `bottomAppBarColor` also uses scheme `surface` color. Additionally,
-  ///    this color is also applied to `BottomAppBarTheme`, that like the
-  ///    app bar also gets default elevation 0.
+  ///  * The `bottomAppBarColor` uses color scheme background color to match the
+  ///    background color of the drawer, bottom navigation bar, possible side
+  ///    menu and system navigation bar on android (if theming of it is used).
+  ///    This is a slight change from the ColorScheme default that uses
+  ///    surface color.
+  ///
+  ///  * The `bottomAppBarColor` elevation defaults to 1, an opinionated choice.
   ///
   ///  * A deviation from `ThemeData.from` color scheme based theme's is
   ///    that `ThemeData.accentColor` is set to `ColorScheme.primary` and not to
@@ -1310,81 +1375,100 @@ class FlexColorScheme {
   ///    > See https:///flutter.dev/go/remove-fab-accent-theme-dependency.
   ///    > This feature was deprecated after v1.13.2.
   ///
-  ///  * For `TabBarTheme` a default design that fits with surface color is
-  ///    used instead of one that fits with the app bar color.
+  /// * For [TabBarTheme], the Flutter standard selected tab and indicator
+  ///   color is onSurface in dark mode and onPrimary in light mode, which is
+  ///   designed to fit an AppBar colored TabBar. This is kept, amd the default
+  ///   via [FlexTabBarStyle.forAppBar] style, with a minor modification. If
+  ///   AppBar is "light", then black87 is used, not black, it is the same as
+  ///   the textTheme on AppBar in light app bar brightness. However, if
+  ///   AppBar was white, surface or background color, while "light", then it
+  ///   uses color scheme primary for selected color.
+  ///   Finally, if the [FlexTabBarStyle.forBackground] style was used, the
+  ///   selected  color is always color scheme primary color, which works well
+  ///   on surface, background and scaffold background colors.
   ///
-  ///  * The `BottomNavigationBarThemeData` uses color scheme primary color for
-  ///    the selected item. Flutter defaults to secondary color. Primary color
-  ///    is a design used on iOS by default for the bottom navigation bar. We
-  ///    agree and think it looks better as the default choice for apps.
+  ///   The unselected TabBar color when [FlexTabBarStyle.forBackground] style
+  ///   is used, is always the onSurface color with 60% opacity. This is also
+  ///   the color if the AppBar background color brightness is light AND its
+  ///   color is white, surface or background colored.
+  ///   Otherwise when the style [FlexTabBarStyle.forAppBar] is used, the
+  ///   unselected tab bar color is the selected tab color with 70% opacity.
+  ///   This opacity value is the same  as Flutter default for the default
+  ///   theme that is also designed for AppBar usage.
   ///
-  ///  * Default tooltip theme in Flutter is currently a bit flawed on desktop
-  ///    and web, because it defaults to using a very small font (10 dp).
-  ///    See issue: https:///github.com/flutter/flutter/issues/71429
+  /// * The `BottomNavigationBarThemeData` uses color scheme primary color for
+  ///   the selected item. Flutter defaults to secondary color. Primary color
+  ///   is a design used on iOS by default for the bottom navigation bar. We
+  ///   agree and think it looks better as the default choice for apps.
   ///
-  ///    The default theming also does not handle multiline tooltips very well.
-  ///    The here used `TooltipThemeData` theme design corrects both these
-  ///    issues. It uses 12 dp font on desktop and web instead of 10 dp,
-  ///    and some padding instead of a height constraint to ensure that
-  ///    multiline tooltips look nice too.
+  /// * Default tooltip theme in Flutter is currently a bit flawed on desktop
+  ///   and web, because it defaults to using a very small font (10 dp).
+  ///   See issue: https:///github.com/flutter/flutter/issues/71429
   ///
-  ///    FlexColorScheme also includes a new boolean property
-  ///    `tooltipsMatchBackground`, that can be toggled to not used Flutter's
-  ///    Material default that has a theme mode
-  ///    inverted background. Tooltips using light background in light theme
-  ///    and dark in dark, are commonly used on the Windows desktop platform.
-  ///    You can tie the extra property to used platform to make an automatic
-  ///    platform adaptation of the tooltip style if you like, or give users
-  ///    a preference toggle the tooltip style to their liking.
+  ///   The default theming also does not handle multiline tooltips very well.
+  ///   The here used `TooltipThemeData` theme design corrects both these
+  ///   issues. It uses 12 dp font on desktop and web instead of 10 dp,
+  ///   and some padding instead of a height constraint to ensure that
+  ///   multiline tooltips look nice too.
   ///
-  ///  * The property `transparentStatusBar` is set to true by default and
-  ///    used to make to the AppBar one-toned on Android device like on iOS.
-  ///    Set it to `false` to restore default Android design.
+  ///   FlexColorScheme also includes a new boolean property
+  ///   `tooltipsMatchBackground`, that can be toggled to not used Flutter's
+  ///   Material default that has a theme mode
+  ///   inverted background. Tooltips using light background in light theme
+  ///   and dark in dark, are commonly used on the Windows desktop platform.
+  ///   You can tie the extra property to used platform to make an automatic
+  ///   platform adaptation of the tooltip style if you like, or give users
+  ///   a preference toggle the tooltip style to their liking.
   ///
-  ///    > The modification is in current implementation made with an extra call
-  ///    > to `SystemChrome.setSystemUIOverlayStyle` to make the
-  ///    > statusBarColor transparent. The used implementation will be changed
-  ///    > when the new AppBarTheme
-  ///    > https://github.com/flutter/flutter/pull/71184 lands in channel stable
-  ///    > that allows us to modify its AnnotatedRegion with a passed in
-  ///    > SystemOverlayStyle.
+  /// * The property `transparentStatusBar` is set to true by default and
+  ///   used to make to the AppBar one-toned on Android device like on iOS.
+  ///   Set it to `false` to restore default Android design.
   ///
-  ///    > It would be nice if we could also make the system navigation button
-  ///    > area on Android transparent, but it does not work if we set
-  ///    > systemNavigationBarColor to a transparent color in the same call,
-  ///    > it does not change it all if called during the theme definition.
-  ///    > The style is doable, but requires modifying Android config files, not
-  ///    > possible from Flutter only (as per current information).
-  ///    > Related issue: https:///github.com/flutter/flutter/issues/69999.
-  ///    >
-  ///    > FlexColorScheme offers a helper that allows us to easily create
-  ///    > and annotated region for the system navigation bar that uses
-  ///    > the active color scheme and theme mode to make it at least use
-  ///    > a correctly colored theme colored background for the active theme.
-  ///    > See example 5 for a demo on how to use this.
+  ///   > The modification is in current implementation made with an extra call
+  ///   > to `SystemChrome.setSystemUIOverlayStyle` to make the
+  ///   > statusBarColor transparent. The used implementation will be changed
+  ///   > when the new AppBarTheme
+  ///   > https://github.com/flutter/flutter/pull/71184 lands in channel stable
+  ///   > that allows us to modify its AnnotatedRegion with a passed in
+  ///   > SystemOverlayStyle.
   ///
+  ///   > It would be nice if we could also make the system navigation button
+  ///   > area on Android transparent, but it does not work if we set
+  ///   > systemNavigationBarColor to a transparent color in the same call,
+  ///   > it does not change it all if called during the theme definition.
+  ///   > The style is doable, but requires modifying Android config files, not
+  ///   > possible from Flutter only (as per current information).
+  ///   > Related issue: https:///github.com/flutter/flutter/issues/69999.
+  ///   >
+  ///   > FlexColorScheme offers a helper that allows us to easily create
+  ///   > and annotated region for the system navigation bar that uses
+  ///   > the active color scheme and theme mode to make it at least use
+  ///   > a correctly colored theme colored background for the active theme.
+  ///   > See example 5 for a demo on how to use this.
   ThemeData get toTheme {
     // A convenience bool to check if this theme is for light or dark mode
-    final bool isDark = brightness == Brightness.dark;
+    final bool _isDark = brightness == Brightness.dark;
     // Create a TextTheme that is appropriate for the light/dark mode
-    final TextTheme textTheme =
-        (isDark ? ThemeData.dark() : ThemeData.light()).textTheme;
+    final TextTheme _textTheme =
+        (_isDark ? ThemeData.dark() : ThemeData.light()).textTheme;
     // Check brightness of primary, secondary, error, surface and background
     // colors, and then calculate appropriate colors for their onColors, if an
     // "on" color was not passed in.
-    final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
+    final FlexSchemeOnColors _onColors = FlexSchemeOnColors.from(
       primary: primary,
       secondary: secondary,
       surface: surface ??
-          (isDark
+          (_isDark
               ? FlexColor.materialDarkSurface
               : FlexColor.materialLightSurface),
       background: background ??
-          (isDark
+          (_isDark
               ? FlexColor.materialDarkBackground
               : FlexColor.materialLightBackground),
       error: error ??
-          (isDark ? FlexColor.materialDarkError : FlexColor.materialLightError),
+          (_isDark
+              ? FlexColor.materialDarkError
+              : FlexColor.materialLightError),
       onPrimary: onPrimary,
       onSecondary: onSecondary,
       onSurface: onSurface,
@@ -1393,26 +1477,28 @@ class FlexColorScheme {
     );
     // Define a standard Flutter ColorScheme from the provided brightness and
     // provided/computes/default colors.
-    final ColorScheme colorScheme = ColorScheme(
+    final ColorScheme _colorScheme = ColorScheme(
       primary: primary,
       primaryVariant: primaryVariant,
       secondary: secondary,
       secondaryVariant: secondaryVariant,
       surface: surface ??
-          (isDark
+          (_isDark
               ? FlexColor.materialDarkSurface
               : FlexColor.materialLightSurface),
       background: background ??
-          (isDark
+          (_isDark
               ? FlexColor.materialDarkBackground
               : FlexColor.materialLightBackground),
       error: error ??
-          (isDark ? FlexColor.materialDarkError : FlexColor.materialLightError),
-      onBackground: onColors.onBackground,
-      onSurface: onColors.onSurface,
-      onError: onColors.onError,
-      onPrimary: onColors.onPrimary,
-      onSecondary: onColors.onSecondary,
+          (_isDark
+              ? FlexColor.materialDarkError
+              : FlexColor.materialLightError),
+      onBackground: _onColors.onBackground,
+      onSurface: _onColors.onSurface,
+      onError: _onColors.onError,
+      onPrimary: _onColors.onPrimary,
+      onSecondary: _onColors.onSecondary,
       brightness: brightness,
     );
 
@@ -1421,27 +1507,27 @@ class FlexColorScheme {
     // Theme colors from that are needed. To be able to do so we make
     // a complete material color swatch from the provided primary color,
     // using the primary color as its middle [500] index color.
-    final MaterialColor primarySwatch =
-        createPrimarySwatch(colorScheme.primary);
+    final MaterialColor _primarySwatch =
+        createPrimarySwatch(_colorScheme.primary);
     // We now have a swatch of the primary color provided via a color scheme,
     // we can use it do define some of the traditional theme colors in a way
     // that relates to the color scheme primary color, like ThemeData factory
     // does when you create a theme from a swatch. This gives us some missing
     // critical primary shades to work with.
-    final Color primaryColorDark =
-        isDark ? primarySwatch[700] : primarySwatch[800];
-    final Color primaryColorLight = primarySwatch[100];
-    final Color secondaryHeaderColor = primarySwatch[50];
+    final Color _primaryColorDark =
+        _isDark ? _primarySwatch[700] : _primarySwatch[800];
+    final Color _primaryColorLight = _primarySwatch[100];
+    final Color _secondaryHeaderColor = _primarySwatch[50];
 
     // We need some logic for the appBarColor. If a custom color for the
     // app bar was passed in, we use that, if not we use the surface color in
     // dark mode and primary color in light mode, the latter part is the same
     // logic the standard Flutter ThemeData.from color scheme factory uses.
-    final Color effectiveAppBarColor = appBarBackground ??
-        (isDark ? colorScheme.surface : colorScheme.primary);
+    final Color _effectiveAppBarColor = appBarBackground ??
+        (_isDark ? _colorScheme.surface : _colorScheme.primary);
     // Calculate brightness for the app bar from the resulting effective color.
-    final Brightness appBarBrightness =
-        ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
+    final Brightness _appBarBrightness =
+        ThemeData.estimateBrightnessForColor(_effectiveAppBarColor);
 
     // Use passed in target platform or the default one.
     final TargetPlatform _platform = platform ?? defaultTargetPlatform;
@@ -1451,6 +1537,54 @@ class FlexColorScheme {
     // as default, if one is not provided.
     final Typography _typography =
         typography ?? Typography.material2018(platform: _platform);
+
+    // The Flutter standard selected tab and indicator color is onSurface in
+    // dark mode and onPrimary in light mode, which is designed to fit an AppBar
+    // colored TabBar. We keep this default when FlexTabBarStyle.forAppBar style
+    // is used, with a minor modification. If AppBar is "light", then we use
+    // black87, not black, so its like the textTheme on AppBar. However, if
+    // AppBar was white, surface or background color, while "light", then it
+    // uses color scheme primary for selected color.
+    // Finally, if the FlexTabBarStyle.forAppBar style was used, the selected
+    // color is always color scheme primary color, which will work on surface,
+    // background and scaffold background colors.
+    Color _effectiveTabColor() {
+      if (tabBarStyle == FlexTabBarStyle.forBackground) {
+        return _colorScheme.primary;
+      } else {
+        if (_appBarBrightness == Brightness.light) {
+          if (_effectiveAppBarColor == Colors.white ||
+              _effectiveAppBarColor == _colorScheme.surface ||
+              _effectiveAppBarColor == _colorScheme.background) {
+            return _colorScheme.primary;
+          } else {
+            return Colors.black87;
+          }
+        } else {
+          return Colors.white;
+        }
+      }
+    }
+
+    // Calculate the selected tab bar color and store it in a local variable.
+    final Color _selectedTabColor = _effectiveTabColor();
+
+    // The unselected TabBar color when [FlexTabBarStyle.forBackground] style
+    // is used, is always the onSurface color with 60% opacity. This is also
+    // the color if the AppBar background color brightness is light AND its
+    // color is white, surface or background colored.
+    // Otherwise when the style [FlexTabBarStyle.forAppBar] is used, the
+    // unselectedTabColor is the selected tab color with 70% opacity. This
+    // opacity value is the same  as Flutter default for the default theme
+    // that is also designed for AppBar usage.
+    final Color _unselectedTabColor =
+        (tabBarStyle == FlexTabBarStyle.forBackground ||
+                (_appBarBrightness == Brightness.light &&
+                    (_effectiveAppBarColor == Colors.white ||
+                        _effectiveAppBarColor == _colorScheme.surface ||
+                        _effectiveAppBarColor == _colorScheme.background)))
+            ? _onColors.onSurface.withOpacity(0.6)
+            : _selectedTabColor.withOpacity(0.7);
 
     // The current default theme for Material themed Tooltips are poor design
     // choices for desktop https://material.io/components/tooltips#specs.
@@ -1487,16 +1621,16 @@ class FlexColorScheme {
     }
 
     // Same as in ThemeData.from, but defined for reuse access in sub-themes.
-    final Color dividerColor = colorScheme.onSurface.withOpacity(0.12);
+    final Color _dividerColor = _colorScheme.onSurface.withOpacity(0.12);
     // Same as in ThemeData, but defined here for reuse in custom sub-themes.
-    final Color disabledColor = isDark ? Colors.white38 : Colors.black38;
-    final Color hintColor =
-        isDark ? Colors.white60 : Colors.black.withOpacity(0.6);
+    final Color _disabledColor = _isDark ? Colors.white38 : Colors.black38;
+    final Color _hintColor =
+        _isDark ? Colors.white60 : Colors.black.withOpacity(0.6);
 
-    // Make a ThemeData object defined by the FlexColorScheme properties and
-    // the designed slightly opinionated theme design choices over default
-    // Flutter Material theme implementation.
-    final ThemeData theme = ThemeData(
+    // Make the ThemeData object defined by the FlexColorScheme
+    // properties and the designed slightly opinionated theme design choices
+    // over default Flutter Material theme implementation.
+    final ThemeData _theme = ThemeData(
       // These properties we just pass along these to the standard ThemeData
       // factory. They are included in FlexColorScheme so we do not have to
       // apply them via ThemeData copyWith separately for cases when we want
@@ -1509,11 +1643,11 @@ class FlexColorScheme {
       // Most definitions below are very close to the ones used by the Flutter
       // factory ThemeData.from for creating a theme from a color scheme and
       // text theme. Any modifications to it are explained.
-      brightness: colorScheme.brightness,
-      primaryColor: colorScheme.primary,
+      brightness: _colorScheme.brightness,
+      primaryColor: _colorScheme.primary,
       primaryColorBrightness:
-          ThemeData.estimateBrightnessForColor(colorScheme.primary),
-      canvasColor: colorScheme.background,
+          ThemeData.estimateBrightnessForColor(_colorScheme.primary),
+      canvasColor: _colorScheme.background,
 
       // A theming difference to the norm, is that [accentColor] is set to
       // [colorScheme.primary] and not [colorScheme.secondary], if it is not
@@ -1530,9 +1664,9 @@ class FlexColorScheme {
       // was in fact the desired change on TextField design.
       // It was a version 1.1.0 addition to add separate property in
       // FlexColorScheme and hence also in FlexSchemeColors for the accentColor.
-      accentColor: accentColor ?? colorScheme.primary,
+      accentColor: accentColor ?? _colorScheme.primary,
       accentColorBrightness: ThemeData.estimateBrightnessForColor(
-          accentColor ?? colorScheme.primary),
+          accentColor ?? _colorScheme.primary),
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
       // Here it is replaced with a separate color for the scaffold background,
       // so we can use a configuration with a separate scaffold background
@@ -1541,15 +1675,15 @@ class FlexColorScheme {
       // ThemeData factory can of course, but color scheme based themes in
       // flutter cannot specify it separately. We need to be able to do so
       // in order to make elegantly primary color branded themes.
-      scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.background,
+      scaffoldBackgroundColor: scaffoldBackground ?? _colorScheme.background,
       // Card, divider and background colors are same as in ThemeData.from.
-      cardColor: colorScheme.surface,
-      dividerColor: dividerColor,
-      backgroundColor: colorScheme.background,
+      cardColor: _colorScheme.surface,
+      dividerColor: _dividerColor,
+      backgroundColor: _colorScheme.background,
       // Same as in ThemeData factory, but defined via final value in build for
       // easy reuse access in sub-themes further below.
-      disabledColor: disabledColor,
-      hintColor: hintColor,
+      disabledColor: _disabledColor,
+      hintColor: _hintColor,
       // Flutter standard dialogBackgroundColor for color scheme based themes
       // uses colorScheme.background.
       // We use surface color instead of background for the dialog background.
@@ -1561,22 +1695,22 @@ class FlexColorScheme {
       // dialog background instead. This modification keeps the dialog color
       // as expected for standard default surfaces, but also works well when
       // using a slightly darker or stronger branded color for background.
-      dialogBackgroundColor: colorScheme.surface,
+      dialogBackgroundColor: _colorScheme.surface,
 
       // Define errorColor via color scheme error color.
-      errorColor: colorScheme.error,
+      errorColor: _colorScheme.error,
 
       // Replaced Flutter standard indicator color with colorScheme.primary.
       // The default is onSurface in dark mode and onPrimary in light mode,
       // which is designed to fit an app bar colored tab bar. Since we made
       // the tab bar to be used primarily on surface color, we want the
       // indicator to be primary colored both in dark and light mode.
-      indicatorColor: colorScheme.primary,
+      indicatorColor: _selectedTabColor,
 
       // Elevation overlay on dark material elevation is used on dark themes
       // on surfaces by default. Flutter ThemeData.from ColorScheme based
       // themes also uses this by default, but ThemeData factory does not.
-      applyElevationOverlayColor: isDark,
+      applyElevationOverlayColor: _isDark,
 
       // Pass the from FlexColorScheme defined colorScheme to ThemeData
       // colorScheme. Newer standard Flutter sub themes use the colorScheme
@@ -1584,7 +1718,7 @@ class FlexColorScheme {
       // be based on the defined color scheme colors. FlexColorScheme passes
       // the scheme it has created to the colorScheme property in ThemeData.
       // More info here: https://flutter.dev/go/material-theme-system-updates
-      colorScheme: colorScheme,
+      colorScheme: _colorScheme,
 
       // ----------------------------------------------------------------------
       // The theme settings below are corrective additions to the Flutter
@@ -1608,7 +1742,7 @@ class FlexColorScheme {
       // does not include this, in our opinion correct application of the color
       // scheme based theme, it should really do the same as below.
       // See issue: https://github.com/flutter/flutter/issues/65782
-      toggleableActiveColor: colorScheme.secondary,
+      toggleableActiveColor: _colorScheme.secondary,
 
       // The primary dark color no longer exists in ColorScheme themes, but
       // it still needs to be set to match the ColorScheme theme, otherwise we
@@ -1617,14 +1751,14 @@ class FlexColorScheme {
       // color that is not a blue hue. To fix this we use the [700] value from
       // the calculated primary swatch for dark mode and [800] for light mode.
       // See issue: https://github.com/flutter/flutter/issues/65782
-      primaryColorDark: primaryColorDark,
+      primaryColorDark: _primaryColorDark,
 
       // The light primary color no longer exists in ColorScheme themes, but it
       // still needs to be set to match the ColorScheme theme, otherwise we
       // get a default blue color for it coming from the default primarySwatch.
       // We use the [100] value from the calculated primary swatch.
       // See issue: https://github.com/flutter/flutter/issues/65782
-      primaryColorLight: primaryColorLight,
+      primaryColorLight: _primaryColorLight,
 
       // Define a secondary header color, not sure what uses it, but we should
       // give it a color that will work with ColorScheme based themes. If it is
@@ -1632,7 +1766,7 @@ class FlexColorScheme {
       // default theme.light factory. We use the [50] value from the
       // calculated primary swatch instead.
       // See issue: https://github.com/flutter/flutter/issues/65782
-      secondaryHeaderColor: secondaryHeaderColor,
+      secondaryHeaderColor: _secondaryHeaderColor,
 
       // This app bar theme will allow us to use a custom colored appbar theme
       // in both light and dark themes that is not dependent on theme primary
@@ -1657,30 +1791,34 @@ class FlexColorScheme {
       // since we no longer need a custom text theme to implement it.
       // TODO Change implementation to new AppBarTheme when it lands in stable.
       appBarTheme: AppBarTheme(
-        textTheme: appBarBrightness == Brightness.light
+        textTheme: _appBarBrightness == Brightness.light
             ? _typography.black.merge(Typography.englishLike2018)
             : _typography.white.merge(Typography.englishLike2018),
         // Use the defined appbar color for the theme
-        color: effectiveAppBarColor,
+        color: _effectiveAppBarColor,
         // Set appbar brightness based on the appbar color
-        brightness: appBarBrightness,
+        brightness: _appBarBrightness,
         // Define appropriate brightness on the icon themes
-        iconTheme: appBarBrightness == Brightness.dark
+        iconTheme: _appBarBrightness == Brightness.dark
             ? const IconThemeData(color: Colors.white)
             : const IconThemeData(color: Colors.black87),
-        actionsIconTheme: appBarBrightness == Brightness.dark
+        actionsIconTheme: _appBarBrightness == Brightness.dark
             ? const IconThemeData(color: Colors.white)
             : const IconThemeData(color: Colors.black87),
-        // Opinionated, adjust Theme with a copyWith for elevation if needed.
-        elevation: 0,
+        // Opinionated, adjust with a copyWith for elevation if needed.
+        elevation: 1,
       ),
 
-      // The bottom app bar may hold a tab bar kept as surface
-      // colored, which is also the standard in ThemeData.from(ColorScheme).
-      bottomAppBarColor: colorScheme.surface,
+      // The bottom app bar uses color scheme background color to match the
+      // background color of the drawer, bottom navigation bar, possible side
+      // menu and system navigation bar on android (if theming of it is used).
+      // This is a slight change from the ColorScheme default that uses
+      // surface color.
+      bottomAppBarColor: _colorScheme.background,
       bottomAppBarTheme: BottomAppBarTheme(
-        color: colorScheme.surface,
-        elevation: 0,
+        color: _colorScheme.background,
+        // Opinionated, adjust with a copyWith for elevation if needed.
+        elevation: 1,
       ),
 
       // ----------------------------------------------------------------------
@@ -1700,18 +1838,17 @@ class FlexColorScheme {
       // mode. The standard selectionHandleColor is colorScheme.primary,
       // here we use the slightly darker shade primaryColorDark instead.
       textSelectionTheme: TextSelectionThemeData(
-        // cursorColor: colorScheme.primary,
-        selectionColor: isDark
-            ? colorScheme.primary.withOpacity(0.50)
-            : colorScheme.primary.withOpacity(0.30),
-        selectionHandleColor: primaryColorDark,
+        selectionColor: _isDark
+            ? _colorScheme.primary.withOpacity(0.50)
+            : _colorScheme.primary.withOpacity(0.30),
+        selectionHandleColor: _primaryColorDark,
       ),
       // Input decoration theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: isDark
-            ? colorScheme.primary.withOpacity(0.06)
-            : colorScheme.primary.withOpacity(0.035),
+        fillColor: _isDark
+            ? _colorScheme.primary.withOpacity(0.06)
+            : _colorScheme.primary.withOpacity(0.035),
       ),
 
       // The button color and button theming below almost makes the old buttons
@@ -1725,7 +1862,7 @@ class FlexColorScheme {
       //
       // Set buttonColor to colorScheme.primary and not to grey. Similar to
       // to the Material design for the newer buttons.
-      buttonColor: colorScheme.primary,
+      buttonColor: _colorScheme.primary,
       // When the button color is set to primary, we also need to define the
       // [ButtonThemeData] so that we get correct onSurface colors for the
       // buttons. This buttonColor and buttonTheme setup, makes the older
@@ -1743,7 +1880,7 @@ class FlexColorScheme {
       // want to make custom styled buttons I recommend using the newer buttons
       // instead of the old ones as they offer more customization possibilities.
       buttonTheme: ButtonThemeData(
-        colorScheme: colorScheme,
+        colorScheme: _colorScheme,
         textTheme: ButtonTextTheme.primary,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -1753,9 +1890,9 @@ class FlexColorScheme {
       // themes. See issue: https://github.com/flutter/flutter/issues/65663
       // The chip theme below fixes it by using the colorScheme.primary color.
       chipTheme: ChipThemeData.fromDefaults(
-        secondaryColor: colorScheme.primary,
-        brightness: colorScheme.brightness,
-        labelStyle: textTheme.bodyText1,
+        secondaryColor: _colorScheme.primary,
+        brightness: _colorScheme.brightness,
+        labelStyle: _textTheme.bodyText1,
       ),
 
       // We have to separately specify the foreground color in FABs to be the
@@ -1769,25 +1906,19 @@ class FlexColorScheme {
       //   See https://flutter.dev/go/remove-fab-accent-theme-dependency.
       //   This feature was deprecated after v1.13.2.
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: colorScheme.secondary,
-        foregroundColor: colorScheme.onSecondary,
+        backgroundColor: _colorScheme.secondary,
+        foregroundColor: _colorScheme.onSecondary,
       ),
 
-      // Opinionated theming for the tab bar.
-      // This theme is designed to work on surface color instead of the app bar
-      // color. A common usage of this is when it is not used with the app
-      // bar's color, but it as part of the body of a scaffold at the top of
-      // the body. It can of course be used like this in an app bar as well, it
-      // will work nicely with the bottom app bar theme used as default in this
-      // theme too.
-      // If you need a tab bar that will be placed on a bottom app bar that
-      // is the same color as the app bar you will need to create another theme
-      // for that use case or modify this theme with copyWith to override it.
+      // Define the TabBar theme that will fit nicely in an AppBar
+      // (default) or on background color for use eg in a Scaffold, the choice
+      // depends on tabBarStyle `FlexTabBarStyle`, that defaults to
+      // `FlexTabBarStyle.forAppBar`.
       tabBarTheme: TabBarTheme(
         indicatorSize: TabBarIndicatorSize.tab,
         labelStyle: const TextTheme().button,
-        labelColor: colorScheme.primary,
-        unselectedLabelColor: onColors.onSurface.withOpacity(0.6),
+        labelColor: _selectedTabColor,
+        unselectedLabelColor: _unselectedTabColor,
       ),
 
       // Opinionated theming for the bottom navigation bar.
@@ -1795,9 +1926,9 @@ class FlexColorScheme {
       // secondary color. Primary color is also "iOS" style for the bottom nav.
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedIconTheme: IconThemeData(
-          color: colorScheme.primary,
+          color: _colorScheme.primary,
         ),
-        selectedItemColor: colorScheme.primary,
+        selectedItemColor: _colorScheme.primary,
       ),
 
       // Opinionated theming of Tooltips, as stated previously above, the
@@ -1810,25 +1941,25 @@ class FlexColorScheme {
         // We do not use the min height, the custom padding handles it instead.
         padding: _tooltipPadding(),
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        textStyle: textTheme.bodyText2.copyWith(
+        textStyle: _textTheme.bodyText2.copyWith(
           inherit: false,
           color: tooltipsMatchBackground
-              ? isDark
+              ? _isDark
                   ? Colors.white
                   : Colors.black
-              : isDark
+              : _isDark
                   ? Colors.black
                   : Colors.white,
           fontSize: _tooltipFontSize(),
         ),
         decoration: tooltipsMatchBackground
             ? BoxDecoration(
-                color: isDark
+                color: _isDark
                     ? Colors.grey[900].withOpacity(0.93)
                     : Colors.white.withOpacity(0.94),
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
                 border: Border.all(
-                    color: isDark ? Colors.grey[600] : Colors.grey[900]),
+                    color: _isDark ? Colors.grey[600] : Colors.grey[900]),
               )
             : null,
       ),
@@ -1837,6 +1968,10 @@ class FlexColorScheme {
     // On Android devices this default opt-in `setSystemUIOverlayStyle` call
     // makes the AppBar one-colored like on iOS, which looks better
     // (opinionated).
+    //
+    // We have to make this call AFTER we defined the theme so it can override
+    // the annotated region AppBar sets when theme is defined.
+    //
     // It would be nice if we could also make the system navigation button area
     // on Android transparent, but it does not work if we set
     // systemNavigationBarColor to a transparent color.
@@ -1859,8 +1994,9 @@ class FlexColorScheme {
         ),
       );
     }
-    // Return the resulting ThemeData object that a MaterialApp can use.
-    return theme;
+    //
+    // Finally return the ThemeData we defined above.
+    return _theme;
   }
 
   /// Returns the [ColorScheme] object defined by [FlexColorScheme] properties.

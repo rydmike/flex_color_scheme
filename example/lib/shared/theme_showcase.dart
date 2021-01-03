@@ -60,12 +60,13 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
           _buildChipRow(),
           _buildCheckboxRow(),
           _buildTextInput(),
-          _buildTabRow(context),
+          _buildTabRowForAppBar(),
+          _buildTabRowForBackground(),
           _buildBottomNavigation(),
           _buildCard(),
           _listTiles(),
           _buildDialog(),
-          _buildText(context),
+          _buildText(),
         ],
       ),
     );
@@ -325,22 +326,79 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
     );
   }
 
-  Widget _buildTabRow(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(8),
-      child: TabBar(
-        tabs: <Widget>[
-          Tab(
-            text: 'TAB1',
-            icon: Icon(Icons.chat_bubble),
+  Widget _buildTabRowForAppBar() {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    final Color effectiveTabBackground = Theme.of(context).appBarTheme?.color ??
+        (isDark ? colorScheme.surface : colorScheme.primary);
+
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'TabBar primarily used in AppBar',
+            style: Theme.of(context).textTheme.caption,
           ),
-          Tab(
-            text: 'TAB2',
-            icon: Icon(Icons.beenhere),
+          Text(
+            'Use FlexTabBarStyle.forAppBar style (default)',
+            style: Theme.of(context).textTheme.caption.copyWith(fontSize: 10),
           ),
-          Tab(
-            text: 'TAB3',
-            icon: Icon(Icons.create_new_folder),
+          Container(
+            color: effectiveTabBackground,
+            child: const TabBar(
+              tabs: <Widget>[
+                Tab(
+                  text: 'Tab 1',
+                  icon: Icon(Icons.chat_bubble),
+                ),
+                Tab(
+                  text: 'Tab 2',
+                  icon: Icon(Icons.beenhere),
+                ),
+                Tab(
+                  text: 'Tab 3',
+                  icon: Icon(Icons.create_new_folder),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabRowForBackground() {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'TabBar primary used on background color',
+            style: Theme.of(context).textTheme.caption,
+          ),
+          Text(
+            'Use FlexTabBarStyle.forBackground style',
+            style: Theme.of(context).textTheme.caption.copyWith(fontSize: 10),
+          ),
+          const TabBar(
+            tabs: <Widget>[
+              Tab(
+                text: 'Tab 1',
+                icon: Icon(Icons.chat_bubble),
+              ),
+              Tab(
+                text: 'Tab 2',
+                icon: Icon(Icons.beenhere),
+              ),
+              Tab(
+                text: 'Tab 3',
+                icon: Icon(Icons.create_new_folder),
+              ),
+            ],
           ),
         ],
       ),
@@ -351,28 +409,37 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: SizedBox(
-        child: BottomNavigationBar(
-          onTap: (int value) {
-            setState(() {
-              _buttonIndex = value;
-            });
-          },
-          currentIndex: _buttonIndex,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble),
-              label: 'Item 1',
-              // title: Text('Item 1'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'BottomNavigationBar',
+              style: Theme.of(context).textTheme.caption,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.beenhere),
-              label: 'Item 2',
-              // title: Text('Item 2'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.create_new_folder),
-              label: 'Item 3',
-              // title: Text('Item 3'),
+            BottomNavigationBar(
+              onTap: (int value) {
+                setState(() {
+                  _buttonIndex = value;
+                });
+              },
+              currentIndex: _buttonIndex,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.chat_bubble),
+                  label: 'Item 1',
+                  // title: Text('Item 1'),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.beenhere),
+                  label: 'Item 2',
+                  // title: Text('Item 2'),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.create_new_folder),
+                  label: 'Item 3',
+                  // title: Text('Item 3'),
+                ),
+              ],
             ),
           ],
         ),
@@ -465,7 +532,7 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
     );
   }
 
-  Widget _buildText(BuildContext context) {
+  Widget _buildText() {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Column(

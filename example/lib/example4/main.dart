@@ -125,9 +125,9 @@ class _DemoAppState extends State<DemoApp> {
 
   @override
   void initState() {
+    super.initState();
     themeMode = ThemeMode.light;
     themeIndex = 6; // Start with index 6, the brand blue colors.
-    super.initState();
   }
 
   @override
