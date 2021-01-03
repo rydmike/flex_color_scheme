@@ -814,7 +814,7 @@ found in different well known web brands. The primary blue color in the light sc
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4al.png?raw=true" alt="ColorScheme example 4a light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4bl.png?raw=true" alt="ColorScheme example 4b light" width="250"/>
 
 You can use the popup menu available in the ListTile showing the current theme to change the active theme. You
-can choose any of the built-in 20 schemes, plus the three custom color schemes we added. When you change scheme, you 
+can choose any of the built-in 24 schemes, plus the three custom color schemes we added. When you change scheme, you 
 will notice that the active theme color changes are animated by interpolating from the active theme colors, 
 to the new theme colors. This is a very nice standard feature when you modify the theme used by a Flutter 
 Material applications.
@@ -891,6 +891,8 @@ We can use this toggle to see and study the differences that `FlexColorScheme.to
    FlexSurface flexSurface;
    // Enum used to select what app bar style we use.
    FlexAppBarStyle flexAppBarStyle;
+   // Used to modify the themed app bar elevation.
+   double appBarElevation;
    // Enum used to select what tab bar style we use.
    FlexTabBarStyle flexTabBarStyle;
    // If true, tooltip background will be light in light theme, and dark
@@ -919,6 +921,7 @@ We can use this toggle to see and study the differences that `FlexColorScheme.to
      themeIndex = 7; // Start with deep blue see theme.
      flexSurface = FlexSurface.medium;
      flexAppBarStyle = FlexAppBarStyle.primary;
+     appBarElevation = 0;
      flexTabBarStyle = FlexTabBarStyle.forAppBar;
      tooltipsMatchBackground = false;
      darkIsTrueBlack = false;
@@ -930,7 +933,7 @@ We can use this toggle to see and study the differences that `FlexColorScheme.to
 ```
 
 We define the light theme for the app, using current theme index, selected surface style and app bar style. With 
-the built-in 20 themes, and the three custom ones we made, we can use 23 different app themes via the setup below, 
+the built-in 24 themes, and the three custom ones we made, we can use 27 different app themes via the setup below, 
 times the five surface styles and five app bar variants.  
 
 The factory `FlexColorScheme.light` is used to define a `FlexColorScheme` for a light theme, from the light 
@@ -949,6 +952,7 @@ this example, as well as the tooltip and true black setting for the dark theme.
              colors: myFlexSchemes[themeIndex].light,
              surfaceStyle: flexSurface,
              appBarStyle: flexAppBarStyle,
+             appBarElevation: appBarElevation,
              tabBarStyle: flexTabBarStyle,
              tooltipsMatchBackground: tooltipsMatchBackground,
              visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -974,6 +978,7 @@ a visual presentation of the differences.
                colors: myFlexSchemes[themeIndex].light,
                surfaceStyle: flexSurface,
                appBarStyle: flexAppBarStyle,
+               appBarElevation: appBarElevation,
                tabBarStyle: flexTabBarStyle,
                tooltipsMatchBackground: tooltipsMatchBackground,
                visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -1012,8 +1017,9 @@ This is certainly also a usable option, but in this example we do not want this 
           colors: useToDarkMethod
              ? myFlexSchemes[themeIndex].light.defaultError.toDark(level)
              : myFlexSchemes[themeIndex].dark,
-           surfaceStyle: flexSurface,
+           surfaceStyle: flexSurface,           
            appBarStyle: flexAppBarStyle,
+           appBarElevation: appBarElevation,
            tabBarStyle: flexTabBarStyle,
            tooltipsMatchBackground: tooltipsMatchBackground,
            darkIsTrueBlack: darkIsTrueBlack,
@@ -1027,6 +1033,7 @@ This is certainly also a usable option, but in this example we do not want this 
                : myFlexSchemes[themeIndex].dark,
              surfaceStyle: flexSurface,
              appBarStyle: flexAppBarStyle,
+             appBarElevation: appBarElevation,
              tabBarStyle: flexTabBarStyle,
              tooltipsMatchBackground: tooltipsMatchBackground,
              darkIsTrueBlack: darkIsTrueBlack,
@@ -1044,54 +1051,59 @@ The rest of the additions in the stateful MaterialApp are just passing in curren
 it via callbacks for all our settings and their current values.
 
 ```dart
-       // themeMode value and change callback
+       // themeMode value and change callback.
        themeMode: themeMode,
        home: HomePage(
          themeMode: themeMode,
          onThemeModeChanged: (ThemeMode mode) {
            setState(() { themeMode = mode; });
          },
-         // Used theme index and change callback
+         // Used theme index and change callback.
          schemeIndex: themeIndex,
          onSchemeChanged: (int index) {
            setState(() { themeIndex = index;});
          },
-         // Used surface branding and change callback
+         // Used surface branding and change callback.
          themeSurface: flexSurface,
          onThemeSurfaceChanged: (FlexSurface surface) {
            setState(() { flexSurface = surface; });
          },
-         // Used app bar style and change callback
+         // Used app bar style and change callback.
          appBarStyle: flexAppBarStyle,
          onAppBarStyleChanged: (FlexAppBarStyle style) {
            setState(() { flexAppBarStyle = style; });
          },
-         // Used tab bar style and change callback
+         // WUsed app bar elevation and change value callback.
+         appBarElevation: appBarElevation,
+         onAppBarElevationChanged: (double value) {
+           setState(() { appBarElevation = value; });
+         },
+         // Used tab bar style and change callback.
          tabBarStyle: flexTabBarStyle,
          onTabBarStyleChanged: (FlexTabBarStyle style) {
            setState(() { flexTabBarStyle = style; });
          },
-         // Used tooltip style and change callback
+         // Used tooltip style and change callback.
          tooltipsMatchBackground: tooltipsMatchBackground,
          onTooltipsMatchBackgroundChanged: (bool value) {
            setState(() { tooltipsMatchBackground = value; });
          },
-         // True black mode and change callback
+         // True black mode and change callback.
          darkIsTrueBlack: darkIsTrueBlack,
          onDarkIsTrueBlackChanged: (bool value) {
            setState(() { darkIsTrueBlack = value; });
          },
-         // Dark scheme method and toggle method callback 
+         // Dark scheme method and toggle method callback.
          useToDark: useToDarkMethod,
          onUseToDarkChanged: (bool value) {
            setState(() { useToDarkMethod = value; });
          },
-        // Dark scheme white blend level and change callback 
+        // Dark scheme white blend level and change callback.
          whiteBlend: level,
          onWhiteBlendChanged: (int value) {
            setState(() { level = value; });
          },
-         // Theme creation method and toggle method callback
+         // Theme creation method and toggle method callback.
          useToTheme: useToThemeMethod,
          onUseToThemeChanged: (bool value) {
            setState(() { useToThemeMethod = value; });
