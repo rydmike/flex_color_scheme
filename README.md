@@ -1164,7 +1164,7 @@ are using strong surface branding, the computed dark scheme is on the right.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5a2d.png?raw=true" alt="ColorScheme example 5a2 dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5a2d-to-black.png?raw=true" alt="ColorScheme example 5 dark computed" width="250"/>
 
-#### Computed Dark Theme with Level Adjustment
+### Computed Dark Theme with Level Adjustment
 
 The result of the `toDark` method varies depending on how saturated the used light scheme colors are. It is possible
 to tune the calculated dark scheme by modifying the `whiteBlend` parameter it uses to blend in white to make the 
@@ -1192,7 +1192,7 @@ The bundled example 5 and live web version of it uses the modifier.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_v1-1-0-phone3.gif?raw=true" alt="Dark scheme calc level"/>
 
-#### Branded Surfaces and App Bar Options
+### Branded Surfaces and App Bar Options
 
 Let us now explore the effect of branded surface colors. Branded surfaces are often 
 associated with dark mode, but it works well with light mode too when applied delicately. Below you can see how 
@@ -1244,37 +1244,37 @@ Here are few more images of the heavy primary color branded version, when lookin
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="250"/>
 
-#### The TabBar Style
+### The TabBar Style
 
-The `tabBarStyle` property to can be used to toggle the theme the tab bar receives. By default, a theme that is designed
-to make it fit in an app bar, regardless of which style you have active for it, is used. This is the 
-`FlexTabBarStyle.forAppBar` style. The typical place for of a TabBar is to have it in an AppBar and this default style
-works for that use case.
+The `tabBarStyle` property can be used to toggle the theme the tab bar receives. By default, a theme that is designed
+to make it fit in an app bar, regardless of which style you have selected for it, is used. This is the 
+`FlexTabBarStyle.forAppBar` style. The typical usage of a TabBar is to have it in an AppBar, and the default style
+works for this use case.
 
 Alternatively you can choose a style that makes a `TabBarTheme` that fits well on background colors. Use this
-option if you intend to use the TabBar primarily in a Scaffold body, in dialog or Drawer or other surface and
-background colored material, then you do not have re-theme it or style it for that purpose.
+option if you only intend to use the TabBar in a Scaffold body, in Dialogs, Drawers or other surface and
+background colored Material, then you do not have re-theme it or style it separately for this purpose.
 
-If you intend to use a TabBar widget in both AppBar's or on surface/background colors, you will have to choose the one 
-that makes most sense for your use case and theme it separately for the other usage, just like you have to do 
-otherwise as for such a situation.
+If you intend to use TabBar widgets in both AppBar's and on surface and backgrounds, you will have to choose the style 
+that makes most sense for your use case and theme it separately for the other case, just like you have to do 
+with Flutter standard TabBar theme as well. 
 
-Which tab bar style and resulting tab bar theme, actually works when, depends on the background color. Here we see a 
-tab bars used on surface and in an app bar, when the app bar is using primary color. As can be seen the tab bar theme
-that goes well in an app bar in such a case, does not fit on the surfaces at all, and wise versa.
+Which tab bar style and resulting tab bar theme, actually works best, depends on the background color. Here we see 
+tab bars used on surfaces and in an app bar, when the app bar is using the primary color. As can be seen, the tab bar 
+theme that goes well in an app bar in such a case, does not fit on the surfaces at all, and wise versa.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/TabBar-on-primary.png?raw=true" alt="tabbar on primary"/>
 
-If on the other hand you happen to use a surface/background colored app bar, you can see that both tab bar styles and 
-their resulting themes actually work for both cases. The difference is minor, and a matter of opinion which one is 
-preferred. Both style options can thus be used and if you restrict you app bar color to background colors. You 
-can then get away with using just the one of the built-in style options, even if you intend to use tab bars on both 
+If you plan to use only surface/background (also the branded ones) colored app bar, you can see that both tab bar styles
+and their resulting themes work for both situations. The difference is minor, and it is a matter of opinion which one is 
+preferred. Both style options can thus be used if you restrict your app bar color to background colors. In this case you 
+can then get away with using just the one of the built-in style options, even if you intend to use tab bars both 
 in app bars and on other surfaces.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/TabBar-on-surface.png?raw=true" alt="tabbar on surface"/>
 
 
-#### True Black
+### True Black
 
 Dark-mode is nice, but with `FlexColorScheme` you can go even darker, go **true black** with the flick of a 
 switch. When using the true black option for dark-mode, surface, background and scaffold background are set to 
@@ -1314,7 +1314,7 @@ In addition to the primary color branded surfaces, full shaded schemes from just
 black and app bar tricks. The returned `ThemeData` contains some opinionated modifications and theme
 corrections compared to what you get if you would just use the standard `ThemeData.from` with a `ColorScheme`.
 You can still of course override the returned theme with your own theme modifications and additions, by using
-the `copyWith` method on the resulting theme.
+the `copyWith` method on the resulting theme data object.
   
 If you want the details of what the differences compared to the standard `ThemeData.from` factory
 are, here is a complete list:
@@ -1331,7 +1331,7 @@ are, here is a complete list:
     
 
   * The `dialogBackgroundColor` uses the `ColorScheme.surface` color
-    instead of the `ColorScheme.background`. The `background` color needed
+    instead of `ColorScheme.background`. The `background` color needed
     the strongest branding when branding is used, but this did not look
     so good on dialogs, so its color choice was changed to `surface`
     instead, that gets lighter branding in FlexColorScheme when it is
@@ -1451,7 +1451,7 @@ are, here is a complete list:
 
   * A predefined slightly opinionated `InputDecorationTheme` is used. It
     sets `filled` to `true` and fill color to color scheme primary color
-    with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
+    with opacity `0.035` in light mode and with opacity `0.06` in dark-mode.
     Another theme design change is done via modification of the
     `ThemeData.accentColor` described earlier. Since the used theme, like
     the default theme, does not define a `border` property of `TextField`,
