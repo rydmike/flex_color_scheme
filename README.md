@@ -32,7 +32,7 @@ For more information about **FlexColorScheme**, its use cases and background, th
       * [The TabBar Style](#the-tabbar-style)  
       * [True Black](#true-black)
 * [Behind the scenes](#behind-the-scenes)  
-    * [Used Theme Customizations](#used-theme-customizations)
+    * [Theme Improvements](#theme-improvements)
 * [API Reference](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/flex_color_scheme-library.html)    
     
 ## Introduction
@@ -45,7 +45,8 @@ color scheme on the built-in Material UI Widgets, well on most of them anyway. F
 
 FlexColorScheme corrects these minor inconsistencies and gaps that exist in the current version of Flutter's
 `ThemeData.from` factory. It also makes a few opinionated, but subtle theme modifications compared to the 
-`ThemeData.from` themes created from a `ColorScheme`. These topics are covered in detail in  the [last chapter](#used-theme-customizations) and in the article you can find a 
+`ThemeData.from` themes created from a `ColorScheme`. These topics are covered in detail in  the 
+[last chapter](#theme-improvements) and in the article you can find a 
 [visual presentation](https://rydmike.com/colorscheme#the-difference) of the differences.
 
 This is just the basic part, FlexColorScheme can do some other nice theme design tricks.
@@ -73,7 +74,7 @@ There is a helper class with a factory `FlexSchemeColor.from` that can do this f
 also create a computed matching dark scheme, from a defined light scheme this is done with `FlexSchemeColor.toDark`. 
 This works regardless of if you created a fully specified custom light scheme or just one from a single color. 
 These features are presented and explained in the tutorial with 
-[example 4]((#example-4-switch-between-all-built-in-color-schemes-and-three-custom-ones)) and 
+[example 4](#example-4-switch-between-all-built-in-color-schemes-and-three-custom-ones) and 
 [example 5](#example-5-full-featured-demo).
 
 ### What About My Theme Additions?
@@ -819,7 +820,7 @@ will notice that the active theme color changes are animated by interpolating fr
 to the new theme colors. This is a very nice standard feature when you modify the theme used by a Flutter 
 Material applications.
 
-Try some of the other themes, here is for example the **Mango mojito** theme.
+Try some other theme, here is for example the **Mango mojito** theme.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4cl.png?raw=true" alt="ColorScheme example 4c light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4cd.png?raw=true" alt="ColorScheme example 4c dark" width="250"/>
 
@@ -1007,7 +1008,7 @@ This is certainly also a usable option, but in this example we do not want this 
 > the `toTheme` method. For the custom `FlexSchemeColor` objects we made for example 4 and 5 we did not specify 
 > any error color, so they are already `null` and get the default fixed Material error in dark mode anyway.
 > However, the built-in schemes do specify their error color for both their light and dark schemes, mostly they use
-> the same Material default error color, but some of the red colored schemes use the high contrast Material error 
+> the same Material default error color, but some red colored schemes use the high contrast Material error 
 > color. Because the light error color is defined, if we do not want `toDark` to compute a dark scheme error color that
 > changes with the level, we can modify its value to null before `toDark` is used. 
 
@@ -1263,15 +1264,15 @@ Which tab bar style and resulting tab bar theme, actually works best, depends on
 tab bars used on surfaces and in an app bar, when the app bar is using the primary color. As can be seen, the tab bar 
 theme that goes well in an app bar in such a case, does not fit on the surfaces at all, and wise versa.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/TabBar-on-primary.png?raw=true" alt="tabbar on primary"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/TabBar-on-primary.png?raw=true" alt="tab bar on primary"/>
 
-If you plan to use only surface/background (also the branded ones) colored app bar, you can see that both tab bar styles
-and their resulting themes work for both situations. The difference is minor, and it is a matter of opinion which one is 
-preferred. Both style options can thus be used if you restrict your app bar color to background colors. In this case you 
-can then get away with using just the one of the built-in style options, even if you intend to use tab bars both 
-in app bars and on other surfaces.
+If you plan to use only surface, background (also the branded ones) colored app bars, you can see that both tab bar 
+styles, and their resulting themes work for both situations. The difference is minor, and it is a matter of opinion 
+which one is preferable. Both style options can be used if you restrict your app bar color to background colors. 
+In such a use case you can get away with using just one of the built-in style options, even if you use tab 
+bars in both app bars and on other surfaces.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/TabBar-on-surface.png?raw=true" alt="tabbar on surface"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/TabBar-on-surface.png?raw=true" alt="tab bar on surface"/>
 
 
 ### True Black
@@ -1295,8 +1296,8 @@ when using heavy branding with the **Red red wine** color scheme.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cd.png?raw=true" alt="ColorScheme example 5c dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bd.png?raw=true" alt="ColorScheme example 5b dark" width="250"/>
 
-Here is another difference example with the **Deep blue sea** scheme, when using medium strength surface branding and
-a primary colored app bar in dark mode.
+Here is another difference example with the **Deep blue sea** scheme, when using medium strength surface branding, and
+a primary colored app bar in dark-mode.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad-true-black.png?raw=true" alt="ColorScheme example 5 true black" width="250"/>
 
@@ -1308,7 +1309,7 @@ custom theming. It does of course define a
 `ColorScheme` that it uses for the `ThemeData`. FlexColorScheme uses color calculations for the primary color
 brand blended surfaces, and for the lazy schemes that do not specify all colors in a color scheme.
 
-### Used Theme Customizations
+### Theme Improvements
 
 In addition to the primary color branded surfaces, full shaded schemes from just one primary color, true
 black and app bar tricks. The returned `ThemeData` contains some opinionated modifications and theme
@@ -1551,7 +1552,7 @@ are, here is a complete list:
 
   * Default `tooltipTheme` in Flutter is currently a bit flawed on desktop
     and web, because it defaults to using a very small font (10 dp).
-    See issue [#71429](https:github.com/flutter/flutter/issues/71429).
+    See issue [#71429](https://github.com/flutter/flutter/issues/71429).
 
     The default theming also does not handle multiline tooltips very well.
     The here used `TooltipThemeData` theme design corrects both these

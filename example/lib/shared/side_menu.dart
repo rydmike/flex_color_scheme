@@ -51,7 +51,6 @@ class _SideMenuState extends State<SideMenu> {
                     onPressed: () {},
                   ),
                 ),
-                elevation: 0,
               ),
               Expanded(
                 child: Container(

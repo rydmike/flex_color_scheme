@@ -57,10 +57,10 @@ class _SubpageState extends State<Subpage> {
           child: ListView(
             padding: const EdgeInsets.all(AppConst.edgePadding),
             children: <Widget>[
-              Text('Sub-page demo', style: headline4),
+              Text('Subpage demo', style: headline4),
               const Text(
                 'This page just shows another example page with the same '
-                'FlexColorScheme based theme applied when you open a sub-page. '
+                'FlexColorScheme based theme applied when you open a subpage. '
                 'It also has a BottomNavigationBar and TabBar in the AppBar.',
               ),
               const Divider(),
@@ -87,17 +87,20 @@ class _SubpageState extends State<Subpage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.chat_bubble),
               label: 'Chat',
-              tooltip: '',
+              // API still only on Master channel
+              // tooltip: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.beenhere),
               label: 'Tasks',
-              tooltip: '',
+              // API still only on Master channel
+              // tooltip: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.create_new_folder),
               label: 'Archive',
-              tooltip: '',
+              // API still only on Master channel
+              // tooltip: '',
             ),
           ],
         ),
