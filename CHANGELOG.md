@@ -2,6 +2,23 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [1.3.0] - January 7, 2021
+
+* Marked `FlexSchemeSurfaceColors.themeSurface` as deprecated in favor of the correctly named
+  `FlexSchemeSurfaceColors.surfaceStyle` version. The older `themeSurface` will be removed when
+  null safe Version 2.0.0 is officially released as the main version.
+* Added `Diagnosticable` mixin to classes `FlexSchemeOnColors`, `FlexSchemeSurfaceColors` and `FlexColorScheme`,
+  that all also received proper identity overrides and `copyWith` methods.
+* Improved internal null safe behavior, with fall-backs values in some classes and helper functions. 
+  It might make migration to null-safety easier.
+* Added 248 tests. They will make the migration to null-safety easier to quality control.
+* Documentation improvements and API doc fixes.  
+  In previous version API doc analysis says
+  "441 out of 444 API elements (99.3 %) have documentation comments.". I have not been able to find any missing ones.
+  The result from this update will only be seen after it has been uploaded. I doubt it will change much. If
+  somebody happens to find the missing doc comments let my know, the IDE analyser does not find them either.
+  
+  
 ## [1.2.0] - January 4, 2021
 * Added four new built-in color schemes. 
   * **Amber blue** - Amber blaze and blue color theme, based on Material amber and blue accent colors.
@@ -107,18 +124,49 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 
 ---
 
-## To do list and planned feature updates
+# Planned Updates and New Features
 
-- [x] Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
-- [x] Complete the documentation.
-- [x] Publish live Web versions of the five examples.
-- [x] Review and update the API.
-- [x] Review and correct documentation mistakes and typos, first pass anyway.
-- [x] Release version 1.0.0 on pub.dev.
-- [x] Add API the can create the dark scheme based on a light scheme's colors.
-- [x] Add API that allows us to use an additional extra color definition for ThemeData.accentColor to easily make themes with custom input border color in dark-mode.
-- [x] API to opt-out from one-toned AppBar and return it to Android's default two-toned.
-- [x] API to assist with themed annotated region for system navigation bar theming.  
-- [ ] Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable channel. See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206.
-- [ ] Version 1.2.x: Add tests and fine tune the docs.
-- [ ] Version 2.0.0-nullsafety.1: Add null safe version.
+These are the topics I currently have on the TODO list for this package. Have a new suggestion and idea? 
+Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_scheme/issues) in the repo. 
+
+### TODO  
+- Version 2.0.0-nullsafety.1: Add first null safe version.
+- Version 2.0.0-nullsafety.2: Add some minor new APIs and features (maybe). 
+- Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
+- Version 2.0.1 Write more widget tests.
+- Version 2.1.0 Release more color schemes. Making schemes is fun, documenting the changes a bit less so.
+- Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable channel. See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206. Will not impact
+  API or functionality, the implementation will only be changed to one that is supported directly by the SDK, so it
+  becomes easier and cleaner to do it.
+
+### COMPLETED
+- Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
+- Complete the documentation.
+- Publish live Web versions of the five examples.
+- Review and update the API.
+- Review and correct documentation mistakes and typos, first pass anyway.
+- Release version 1.0.0 on pub.dev.
+- Add API the can create the dark scheme based on a light scheme's colors.
+- Add API that allows us to use an additional extra color definition for ThemeData.accentColor to easily make themes with custom input border color in dark-mode.
+- API to opt-out from one-toned AppBar and return it to Android's default two-toned.
+- API to assist with themed annotated region for system navigation bar theming.
+- Version 1.3.0: Add 195 units and widgets test (mostly unit tests)
+
+### MAYBE
+- **Companion Web App**  
+  I started playing with a small companion app that will allow you to design `FlexColorSchemes` and copy-paste the 
+  needed setup code into an app. If/when I finnish it, I will release it as live version with open source code as well.
+  
+- **Serialization of FlexColorScheme**  
+  Including built-in serialization of FlexColorScheme, and its key classes has been suggested. I consider
+  `FlexColorScheme` to be functionally on a level similar to `ColorScheme`, and therefore it should not cover 
+  serialization of itself. Serialization have to deal with a lot of potential failure points that I think should
+  not have to be a concern in this type of component. I am not planning to add it, not yet at least, I might
+  reconsider it later.
+  
+  My recommendation for saving the state of a `FlexColorScheme`. Include values for its settings that you 
+  use in your implementation, in other models in your application, like an "AppSettings" model or similar. 
+  You probably serialize and store such data already, perhaps with shared preferences, hive, get_storage or 
+  some other solution. Include the values you need for your `FlexColorScheme` implementation in your stored settings
+  and then use those values to restore your `FlexColorScheme` configuration and theme. This way, your implementation
+  also remain in control of what it needs to store and restore.  

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// can get a shade for gradients.
 ///
 /// Some of the extensions are rewrites of TinyColor's functions
-/// https://pub.dev/packages/tinycolor. The TinyColor algorithms are also
+/// https://pub.dev/packages/tinycolor. The TinyColor algorithms have also
 /// been modified to use Flutter's HSLColor class instead of the custom one in
 /// the TinyColor lib. The functions from TinyColor reimplemented as Color
 /// extensions here are, [brighten], [lighten] and [darken]. They are used
@@ -16,8 +16,9 @@ import 'package:flutter/material.dart';
 /// colors used by FlexColorScheme's branded surfaces and for automatic dark
 /// color schemes from a light scheme.
 ///
-/// The [getShadeColor] extension is less frequently used and used used mostly
-/// to make shades for gradient AppBars.
+/// The [getShadeColor] extension is less frequently used and when used,
+/// typically used to color makes colors shades for gradient AppBars, with
+/// default setting to not change black and white.
 ///
 /// The color extension also include getting a color's RGB hex code as a string
 /// in two different formats. Extension [hexCode] returns a Flutter style
@@ -25,9 +26,11 @@ import 'package:flutter/material.dart';
 /// before the RGB Hex values. The plain [hex] extension returns a typical
 /// API formatted hex color string starting with # and no alpha value.
 extension FlexColorExtensions on Color {
-  /// Like TinyColor brighten function, it brightens the color with the
-  /// given integer percentage amount.
+  /// Brightens the color with the given integer percentage amount.
+  /// Defaults to 10%.
   Color brighten([int amount = 10]) {
+    if (amount == null || amount <= 0 || this == null) return this;
+    if (amount > 100) return Colors.white;
     final Color color = Color.fromARGB(
       alpha,
       math.max(0, math.min(255, red - (255 * -(amount / 100)).round())),
@@ -40,6 +43,8 @@ extension FlexColorExtensions on Color {
   /// Lightens the color with the given integer percentage amount.
   /// Defaults to 10%.
   Color lighten([int amount = 10]) {
+    if (amount == null || amount <= 0 || this == null) return this;
+    if (amount > 100) return Colors.white;
     // HSLColor returns saturation 1 for black, we want 0 instead to be able
     // lighten black color up along the grey scale from black.
     final HSLColor hsl = this == const Color(0xFF000000)
@@ -54,6 +59,8 @@ extension FlexColorExtensions on Color {
   /// Darkens the color with the given integer percentage amount.
   /// Defaults to 10%.
   Color darken([int amount = 10]) {
+    if (amount == null || amount <= 0 || this == null) return this;
+    if (amount > 100) return Colors.black;
     final HSLColor hsl = HSLColor.fromColor(this);
     return hsl
         .withLightness(
@@ -99,12 +106,27 @@ extension FlexColorExtensions on Color {
   /// darker, the extension just returns white or black for such attempts, with
   /// a quick exist from the call.
   Color getShadeColor({
+    int shadeValue = 15,
     bool lighten = true,
     bool keepBlack = true,
     bool keepWhite = true,
-    int shadeValue = 15, // The default shade change percentage
   }) {
+    if (shadeValue == null || shadeValue <= 0 || this == null) return this;
+    // ignore: parameter_assignments
+    if (shadeValue > 100) shadeValue = 100;
+
+    // If null is forced for any parameter, use default.
+    // ignore: parameter_assignments
+    shadeValue ??= 15;
+    // ignore: parameter_assignments
+    lighten ??= true;
+    // ignore: parameter_assignments
+    keepBlack ??= true;
+    // ignore: parameter_assignments
+    keepWhite ??= true;
+
     // Trying to make black darker, just return black
+    // ignore: parameter_assignments
     if (this == Colors.black && !lighten) return this;
     // Black is defined to be kept as black.
     if (this == Colors.black && keepBlack) return this;
@@ -128,13 +150,16 @@ extension FlexColorExtensions on Color {
 
   /// Return uppercase Flutter style hex code string of the color.
   String get hexCode {
-    return value.toRadixString(16).toUpperCase();
+    if (this == null) return '';
+    return value.toRadixString(16).toUpperCase().padLeft(8, '0');
   }
 
   /// Return uppercase RGB hex code string, with # and no alpha value.
   /// This format is often used in APIs and in CSS color values..
   String get hex {
-    return '#${value.toRadixString(16).substring(2).toUpperCase()}';
+    if (this == null) return '';
+    // ignore: lines_longer_than_80_chars
+    return '#${value.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}';
   }
 }
 
@@ -144,24 +169,27 @@ extension FlexColorExtensions on Color {
 /// To [capitalize] the first letter in a String and [dotTail] to get
 /// remaining string after first dot "." in a String.
 extension FlexStringExtensions on String {
-  /// Convert a HEX value encoded RGB string to a Dart Color.
+  /// Convert a HEX value encoded (A)RGB string to a Dart Color.
   ///
-  /// The string may include the "#" char, but does not have to.
-  /// The String may start with alpha channel hex value, but does not have to,
-  /// if alpha is missing "FF" is used for alpha.
-  /// If the value cannot be parsed to a Color, fully opaque black color
-  /// is returned.
-  Color toColor() {
+  /// * The string may include the '#' char, but does not have to.
+  /// * String may also include '0x' Dart Hex indicator, but does not have to.
+  /// * Any '#' '0x' patterns are trimmed out and String is assumed to be Hex.
+  /// * The String may start with alpha channel hex value, but does not have to,
+  ///   if alpha value is missing "FF" is used for alpha.
+  /// * String may be longer than 8 chars, after trimming out # and 0x, it will
+  ///   be RIGHT truncated to max 8 chars before parsing.
+  ///
+  /// IF the resulting string cannot be parsed to a Color, is empty or null
+  /// THEN fully opaque black color is returned ELSE the Color is returned.
+  Color get toColor {
+    if (this == null || this == '') return const Color(0xFF000000);
     String hexColor = replaceAll('#', '');
-    if (hexColor.length == 6) {
-      hexColor = 'FF$hexColor';
-    }
-    if (hexColor.length == 8) {
-      return Color(int.parse('0x$hexColor'));
-    }
-    // If the string cannot be parsed at all, or if it was not 6 or 8 chars
-    // long, black color is returned.
-    return const Color(0xFF000000);
+    hexColor = hexColor.replaceAll('0x', '');
+    hexColor = hexColor.padLeft(6, '0');
+    hexColor = hexColor.padLeft(8, 'F');
+    final int length = hexColor.length;
+    return Color(int.tryParse('0x${hexColor.substring(length - 8, length)}') ??
+        0xFF000000);
   }
 
   /// Capitalize the first letter in a string.
@@ -176,11 +204,13 @@ extension FlexStringExtensions on String {
             : null;
   }
 
-  /// Return the string remaining in a string after the first "." in a String.
+  /// Return the string remaining in a string after the last "." in a String,
+  /// if there is no "." the string itself is returned.
   ///
   /// This function can be used to e.g. return the enum tail value from an
   /// enum's standard toString method.
   String get dotTail {
+    if (this == null) return '';
     return split('.').last;
   }
 }

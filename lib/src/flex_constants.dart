@@ -67,5 +67,5 @@ const int kDarkBlendBackgroundStrong = 11;
 /// Primary background color heavy blend percentage value for dark theme.
 const int kDarkBlendBackgroundHeavy = 14;
 
-/// Primary scaffoldBackground color heavy blend percentage value , dark theme.
+/// Primary scaffoldBackground color heavy blend percentage value, dark theme.
 const int kDarkBlendScaffoldHeavy = 2;
