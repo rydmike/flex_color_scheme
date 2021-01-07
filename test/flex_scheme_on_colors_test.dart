@@ -64,27 +64,38 @@ void main() {
       onError: const Color(0xFFAAAAAA),
     );
     test(
-        'FSOC1.01: GIVEN two identical FlexSchemeOnColors objects '
+        'FSOC1.01a: GIVEN two identical FlexSchemeOnColors objects '
         'EXPECT them to have equality', () {
       expect(m1, m2);
     });
     test(
-        'FSOC1.02: GIVEN none identical FlexSchemeOnColors objects '
+        'FSOC1.01b: GIVEN two identical FlexSchemeOnColors objects '
+        'EXPECT them to have equality with operator', () {
+      expect(m1 == m2, true);
+    });
+    test(
+        'FSOC1.02a: GIVEN none identical FlexSchemeOnColors objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
     });
     test(
+        'FSOC1.02b: GIVEN none identical FlexSchemeOnColors objects '
+        'EXPECT them to be unequal with operator', () {
+      expect(m1 != m3, true);
+    });
+    test(
         'FSOC1.03: GIVEN a FlexSchemeOnColors object EXPECT it to be '
-        'equal to an unequal object made equal with copyWith.', () {
+        'equal to an unequal object when made equal with copyWith.', () {
       expect(
-          m1,
-          m4.copyWith(
-            onPrimary: Colors.white,
-            onSecondary: Colors.white,
-            onSurface: Colors.black,
-            onBackground: Colors.black,
-            onError: Colors.white,
-          ));
+        m4.copyWith(
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onBackground: Colors.black,
+          onError: Colors.white,
+        ),
+        m1,
+      );
     });
     test(
         'FSOC1.04: GIVEN a FlexSchemeOnColors created from default Material '
@@ -114,6 +125,22 @@ void main() {
           onError: Color(0xFFAAAAAA),
         ),
       );
+    });
+    test(
+        'FSOC1.06: Test toString implemented via debugFillProperties '
+        'EXPECT working data print.', () {
+      expect(
+          m1.toString(),
+          // ignore: lines_longer_than_80_chars
+          'FlexSchemeOnColors#81a45(onPrimary: Color(0xffffffff), onSecondary: Color(0xffffffff), onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff))');
+    });
+    test(
+        'FSOC1.07: Test toStringShort implemented via debugFillProperties '
+        'EXPECT working data print.', () {
+      expect(m1.toStringShort(), 'FlexSchemeOnColors#81a45');
+    });
+    test('FSOC1.08: Test hashCode.', () {
+      expect(m1.hashCode, 440932933);
     });
   });
 }
