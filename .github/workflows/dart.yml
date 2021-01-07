@@ -1,0 +1,42 @@
+name: Test
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Note that this workflow uses the latest stable version of the Dart SDK.
+    # Docker images for other release channels - like dev and beta - are also
+    # available. See https://hub.docker.com/r/google/dart/ for the available
+    # images.
+    #container:
+    #  image:  google/dart:latest
+    steps:
+    # This was the checkout in the default dart action, try it later
+    #  - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1.3.2
+      - name: Print Flutter SDK version
+        run: flutter --version
+      - name: Install app dependencies
+        run: flutter pub get
+    
+    # Uncomment this step to verify the use of 'dart format' on each commit.
+    # - name: Verify formatting
+    #   run: dart format --output=none --set-exit-if-changed .
+
+    # Consider passing '--fatal-infos' for slightly stricter analysis.
+      - name: Analyze project source
+        run: dart analyze
+
+      - name: Test app
+        run: flutter test --coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage/lcov.info
+      
