@@ -15,11 +15,11 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 * Documentation improvements and API doc fixes.  
   In previous version API doc analysis says
   "441 out of 444 API elements (99.3 %) have documentation comments.". I have not been able to find any missing ones.
-  The result from this update will only be seen after it has been uploaded. I doubt it will change much. If
+  The result from this update will only be seen after it has been uploaded, but I doubt it will change much. If
   somebody happens to find the missing doc comments let my know, the IDE analyser does not find them either.
-  
-  
+    
 ## [1.2.0] - January 4, 2021
+
 * Added four new built-in color schemes. 
   * **Amber blue** - Amber blaze and blue color theme, based on Material amber and blue accent colors.
     Use enum value `FlexScheme.amber` for easy access to it. 
