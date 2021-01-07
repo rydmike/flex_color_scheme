@@ -19,7 +19,7 @@ For more information about **FlexColorScheme**, its background and use cases, th
     * [Default Sample Application](#default-sample-application)
     * [Live WEB Demos of the Examples](#live-web-demos-of-the-examples)          
 * [Tutorial](#tutorial)  
-    * [HomePage for the Examples](#homepage-for-the-examples)
+    * [Used HomePage in the Examples](#used-homepage-in-the-examples)
     * [Optional FlexThemeModeSwitch](#optional-flexthememodeswitch)
     * [Example 1 Use a predefined color scheme](#example-1-use-a-predefined-color-scheme)    
     * [Example 2 Create a custom color scheme](#example-2-create-a-custom-color-scheme)   
