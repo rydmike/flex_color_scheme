@@ -84,7 +84,7 @@ void main() {
       expect(m1 != m3, true);
     });
     test(
-        'FSOC1.03: GIVEN a FlexSchemeOnColors object EXPECT it to be '
+        'FSOC1.03a: GIVEN a FlexSchemeOnColors object EXPECT it to be '
         'equal to an unequal object when made equal with copyWith.', () {
       expect(
         m4.copyWith(
@@ -96,6 +96,11 @@ void main() {
         ),
         m1,
       );
+    });
+    test(
+        'FSOC1.03b: GIVEN a FlexSchemeOnColors object EXPECT it to be '
+        'unchanged after and empty copyWith.', () {
+      expect(m4.copyWith(), m4);
     });
     test(
         'FSOC1.04: GIVEN a FlexSchemeOnColors created from default Material '

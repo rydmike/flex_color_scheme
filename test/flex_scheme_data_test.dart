@@ -159,7 +159,7 @@ void main() {
     // Basic copyWith test.
     //**************************************************************************
     test(
-        'FSD1.09: GIVEN a FlexSchemeData object EXPECT it to be equal to '
+        'FSD1.09a: GIVEN a FlexSchemeData object EXPECT it to be equal to '
         'an unequal object when made equal with copyWith.', () {
       expect(
         mHc.copyWith(
@@ -184,6 +184,11 @@ void main() {
         ),
         m1,
       );
+    });
+    test(
+        'FSD1.09b: GIVEN a FlexSchemeData object EXPECT it to be unchanged '
+        'after and empty copyWith.', () {
+      expect(mHc.copyWith(), mHc);
     });
     test(
         'FSD1.10: Test toString implemented via debugFillProperties '

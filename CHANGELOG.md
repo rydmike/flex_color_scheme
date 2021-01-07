@@ -11,7 +11,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   that all also received proper identity overrides and `copyWith` methods.
 * Improved internal null safe behavior, with fall-backs values in some classes and helper functions. 
   It might make migration to null-safety easier.
-* Added 381 tests. Coverage is 70.52% based on Codecov report. Will add more coverage later.
+* Added 386 tests. Coverage is 70.52% based on Codecov report. Will add more coverage later.
 * The tests will make the migration to null-safety easier by providing some quality control checks.
 * Added GitHub actions to run all the tests and automated test coverage analysis with Codecov.
 * Documentation improvements and API doc fixes.  
