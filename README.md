@@ -1,3 +1,5 @@
+![Test](https://github.com/rydmike/flex_color_scheme/workflows/Test/badge.svg)
+
 # FlexColorScheme
 
 **FlexColorScheme** helps you make beautiful color scheme based Flutter themes, with optional primary 
