@@ -163,6 +163,12 @@ linter:
     # Conflicts with 'always_specify_types' that is used, so then we can't have this rule either.
     omit_local_variable_types: false
 
+    # I do like this most of the time, but I want to have the default constructor first,
+    # then its properties, after this other named constructors and factories. This rule gets
+    # in the way of that and forces you to put the class properties after the factories, this is
+    # both confusing and messy, imo.
+    sort_constructors_first: false
+
     # We want to create other instances classes via static helpers in another
     # class. This lint rules complains about that too. I'm OK with it preferring it
     # if we use statics to create an instance from within the same class.

@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
 import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
@@ -168,6 +169,7 @@ class FlexColor {
 
   // High contrast Material standard error color as per those used in Flutter
   // ColorScheme.highContrastLight and ColorScheme.highContrastDark
+
   /// Material standard high contrast light error color.
   static const Color materialLightErrorHc = Color(0xff790000);
 
@@ -176,7 +178,7 @@ class FlexColor {
 
   // The primary and variant Material theme colors as defined by:
   // https://material.io/design/color/the-color-system.html#color-theme-creation.
-  //
+
   /// English name of the standard Material theme.
   static const String materialName = 'Material default';
 
@@ -212,7 +214,7 @@ class FlexColor {
 
   // High contrast versions of Material Guide colors as per those used
   // in ColorScheme.highContrastLight and ColorScheme.highContrastDark.
-  //
+
   /// English name of the material high contrast theme.
   static const String materialHcName = 'Material high contrast';
 
@@ -244,8 +246,8 @@ class FlexColor {
   /// Material high contrast color for dark secondary variant color.
   static const Color materialDarkSecondaryVariantHc = Color(0xff66fff9);
 
-  // Material blue and light blue scheme.
-  //
+  // Material blue and light blue colors based scheme.
+
   /// English name of the blue theme.
   static const String blueName = 'Blue delight';
 
@@ -277,8 +279,8 @@ class FlexColor {
   /// Blue theme color for dark secondary variant color.
   static const Color blueDarkSecondaryVariant = Color(0xFFE1F5FE); // lBlue50
 
-  // Material indigo and purple scheme
-  //
+  // Material indigo and deep purple colors based scheme.
+
   /// English name of the indigo theme.
   static const String indigoName = 'Indigo nights';
 
@@ -310,10 +312,10 @@ class FlexColor {
   /// Indigo theme color for dark secondary variant color.
   static const Color indigoDarkSecondaryVariant = Color(0xFF7E57C2); // dPurp400
 
-  // Hippie blue colors.
-  // Found some of them here:
+  // Hippie blue colors. Found some of them here:
   // https://www.designwizard.com/blog/design-trends/colour-combination
-  //
+  // However, colors and scheme name by "name that color" library.
+
   /// English name of the hippie blue theme.
   static const String hippieBlueName = 'Hippie blue';
 
@@ -346,7 +348,8 @@ class FlexColor {
   static const Color hippieBlueDarkSecondaryVariant = Color(0xFFF75F67);
 
   // Aqua tropical blue ocean scheme.
-  //
+  // The scheme looks like clear tropical coral waters, hence the name.
+
   /// English name of the aqua blue theme.
   static const String aquaBlueName = 'Aqua blue';
 
@@ -377,8 +380,8 @@ class FlexColor {
   /// Aqua blue theme color for dark secondary variant color.
   static const Color aquaBlueDarkSecondaryVariant = Color(0xFFA0E5E5);
 
-  // Blue color scheme based on blue brand colors.
-  //
+  // Blue color scheme based on well known blue web brand colors.
+
   /// English name of the brand blue colors theme.
   static const String brandBlueName = 'Brand blues';
 
@@ -410,8 +413,9 @@ class FlexColor {
   /// Brand blues theme color for dark secondary variant color.
   static const Color brandBlueDarkSecondaryVariant = Color(0xFF88B2F8);
 
-  // Deep blue sea palette
-  //
+  // Deep blue sea color scheme.
+  // Colors looked like a deep abyss, hence the name.
+
   /// English name of the dark deep blue sea theme.
   static const String deepBlueName = 'Deep blue sea';
 
@@ -442,9 +446,9 @@ class FlexColor {
   /// Deep blue theme color for dark secondary variant color.
   static const Color deepBlueDarkSecondaryVariant = Color(0xFF219AB5);
 
-  // Custom Pink Sakura palette
+  // Pink Sakura color scheme.
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
-  //
+
   /// English name of the pink sakura inspired theme.
   static const String sakuraName = 'Pink sakura';
 
@@ -476,8 +480,9 @@ class FlexColor {
   /// Sakura theme color for dark secondary variant color.
   static const Color sakuraDarkSecondaryVariant = Color(0xFFf7e0d4); // Peche90%
 
-  // Custom Mandy Red and Viking blue colors.
-  //
+  // Mandy Red and Viking blue color scheme.
+  // Colors and scheme named by "name that color" library.
+
   /// English name of the Mandy Red inspired theme.
   static const String mandyRedName = 'Oh Mandy red';
 
@@ -509,8 +514,8 @@ class FlexColor {
   /// Mandy red theme color for dark secondary variant color.
   static const Color mandyRedDarkSecondaryVariant = Color(0xFF85C6D6);
 
-  // Material red and pink palette
-  //
+  // Material red and pink color scheme.
+
   /// English name of the red theme.
   static const String redName = 'Red tornado';
 
@@ -544,9 +549,9 @@ class FlexColor {
 
   // Custom red wine palette
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
-  // The names that the name that color lib gives these colors are
-  // often wine related.
-  //
+  // The names that the "name that color" lib gives these colors are
+  // wine related, and yes it is a song title. (Neil Diamond 1968, UB40 1983).
+
   /// English name of the red wine theme.
   static const String redWineName = 'Red red wine';
 
@@ -578,10 +583,10 @@ class FlexColor {
   /// Red wine theme color for dark secondary variant color.
   static const Color redWineDarkSecondaryVariant = Color(0xFFBD545B); // B.L 45%
 
-  // Custom purple brown theme.
+  // Purple brown theme.
   // Color sources: https://visme.co/blog/website-color-schemes/
   // Scheme 8 on the above link.
-  //
+
   /// English name of the purple brown theme.
   static const String purpleBrownName = 'Purple brown';
 
@@ -613,8 +618,8 @@ class FlexColor {
   /// Purple brown theme color for dark secondary variant color.
   static const Color purpleBrownDarkSecondaryVariant = Color(0xFF5F4C5A);
 
-  // Material green and cyan palette
-  //
+  // Material green and cyan color scheme.
+
   /// English name of the green theme.
   static const String greenName = 'Green forest';
 
@@ -646,10 +651,10 @@ class FlexColor {
   /// Green theme color for dark secondary variant color.
   static const Color greenDarkSecondaryVariant = Color(0xFF4DB6AC); // cyan300
 
-  // Custom Eden palette
+  // Custom Eden color scheme.
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
-  // Looks like colors suitable for finance app, so I named it money
-  //
+  // Looks like colors suitable for a finance app, so I named it accordingly.
+
   /// English name of the green money theme.
   static const String moneyName = 'Green money';
 
@@ -681,9 +686,9 @@ class FlexColor {
   /// Money green theme color for dark secondary variant color.
   static const Color moneyDarkSecondaryVariant = Color(0xFFbbbe74); //Gua. 60%
 
-  // Custom jungle green palette
-  // Looks like colors suitable for finance app, so I named it jungle
-  //
+  // Jungle green color scheme.
+  // Looks like all the green colors in a rain forest, hence the name.
+
   /// English name of the lush green jungle theme.
   static const String jungleName = 'Green jungle';
 
@@ -715,8 +720,8 @@ class FlexColor {
   /// Jungle green theme color for dark secondary variant color.
   static const Color jungleDarkSecondaryVariant = Color(0xFF73A497);
 
-  // Custom Legal palette
-  // Looks like colors suitable for a law firm, so I named it legal grey
+  // Custom Legal color scheme.
+  // The colors are suitable for a law firm, named it accordingly, with a twist.
 
   /// English name of the grey law theme.
   static const String greyLawName = 'Grey law';
@@ -749,8 +754,9 @@ class FlexColor {
   /// Grey law theme color for dark secondary variant color.
   static const Color greyLawDarkSecondaryVariant = Color(0xFF373D5C);
 
-  // Wild willow and wasabi greenish and purple orchid inspired theme.
-  //
+  // Wild willow and wasabi greenish and purple orchid inspired colors.
+  // Colors and theme from "name that color" library.
+
   /// English name of the green Wild Willow and wasabi theme.
   static const String wasabiName = 'Willow and wasabi';
 
@@ -782,9 +788,9 @@ class FlexColor {
   /// Willow and wasabi green theme color for dark secondary variant color.
   static const Color wasabiDarkSecondaryVariant = Color(0xFFA664CD);
 
-  // Custom golden orange palette
+  // Gold orange colors, like a tropical evening sunset.
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
-  //
+
   /// English name of the gold sunset theme.
   static const String goldName = 'Gold sunset';
 
@@ -816,9 +822,10 @@ class FlexColor {
   /// Gold sunset theme color for dark secondary variant color.
   static const Color goldDarkSecondaryVariant = Color(0xFFddab88); // S.alm.L70%
 
-  // Custom mango mojito scheme.
+  // Mango mojito colored scheme.
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
-  //
+  // Colors and scheme named by "name that color" library.
+
   /// English name of the mango mojito theme.
   static const String mangoName = 'Mango mojito';
 
@@ -850,8 +857,8 @@ class FlexColor {
   /// Mango mojito theme color for dark secondary variant color.
   static const Color mangoDarkSecondaryVariant = Color(0xFF81816C);
 
-  // Material amber scheme.
-  //
+  // Material amber and blue accent colors based scheme.
+
   /// English name of the amber theme.
   static const String amberName = 'Amber blue';
 
@@ -886,8 +893,9 @@ class FlexColor {
   static const Color amberDarkSecondaryVariant =
       Color(0xFF448AFF); // BlueAccent100
 
-  // Custom vesuvius burned and eden green scheme.
-  //
+  // Vesuvius burned and eden green scheme.
+  // Colors and scheme named by "name that color" library.
+
   /// English name of the vesuvius burned orange theme.
   static const String vesuviusBurnName = 'Vesuvius burned';
 
@@ -919,8 +927,8 @@ class FlexColor {
   /// Vesuvius burned theme color for dark secondary variant color.
   static const Color vesuviusBurnDarkSecondaryVariant = Color(0xFF3A7175);
 
-  // Material deepPurple and light blue accent scheme.
-  //
+  // Material deepPurple and light blue accent colors based scheme.
+
   /// English name of the deepPurple theme.
   static const String deepPurpleName = 'Deep purple';
 
@@ -954,8 +962,9 @@ class FlexColor {
   static const Color deepPurpleDarkSecondaryVariant =
       Color(0xFF40C4FF); // lba200
 
-  // Custom Ebony Clay super dark blue grey scheme.
-  //
+  // Ebony Clay super dark blue grey scheme.
+  // Colors and scheme named by "name that color" library.
+
   /// English name of the Ebony clay theme.
   static const String ebonyClayName = 'Ebony clay';
 
@@ -1566,7 +1575,9 @@ class FlexColor {
 /// map is available in [FlexColor.schemes] and [FlexColor.schemesWithCustom].
 @immutable
 class FlexSchemeData with Diagnosticable {
-  /// Default constructor.
+  /// Default constructor, used to make an immutable FlexSchemeData object.
+  ///
+  /// Contains [name], [description] plus [light] and [dark] scheme colors.
   const FlexSchemeData({
     @required this.name,
     @required this.description,
@@ -1605,16 +1616,6 @@ class FlexSchemeData with Diagnosticable {
   }
 
   @override
-  int get hashCode {
-    return hashValues(
-      name,
-      description,
-      light,
-      dark,
-    );
-  }
-
-  @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
@@ -1623,6 +1624,16 @@ class FlexSchemeData with Diagnosticable {
         other.description == description &&
         other.light == light &&
         other.dark == dark;
+  }
+
+  @override
+  int get hashCode {
+    return hashValues(
+      name,
+      description,
+      light,
+      dark,
+    );
   }
 
   @override
@@ -1650,12 +1661,12 @@ class FlexSchemeColor with Diagnosticable {
   /// constructor for more flexibility and less required values based on
   /// using computed defaults for missing, but required values.
   const FlexSchemeColor({
+    // The appBarColor, accentColor and error colors are not required, if they
+    // are null they will be provided by theme defaults later.
     @required this.primary,
     @required this.primaryVariant,
     @required this.secondary,
     @required this.secondaryVariant,
-    // The appBarColor, accentColor and error colors are not required, if they
-    // are null they will be provided by theme constructor defaults later.
     this.appBarColor,
     this.accentColor,
     this.error,
@@ -1665,42 +1676,6 @@ class FlexSchemeColor with Diagnosticable {
         assert(secondary != null, 'Secondary color may not be null.'),
         assert(secondaryVariant != null,
             'Secondary variant color may not be null.');
-
-  /// Make a [FlexSchemeColor] from just one primary color or possible also
-  /// from a more complete color scheme set. This is a convenience factory that
-  /// can create a nice toned color schemes based on only the primary color.
-  factory FlexSchemeColor.from({
-    @required Color primary,
-    Color primaryVariant,
-    Color secondary,
-    Color secondaryVariant,
-    Color appBarColor,
-    Color accentColor,
-    Color error,
-  }) {
-    // Check valid primary input
-    assert(primary != null, 'Primary color may not be null.');
-    // If null slips through in a release build, give it a fallback color.
-    primary ??= FlexColor.materialLightPrimary;
-
-    return FlexSchemeColor(
-      primary: primary,
-      // ignore: avoid_redundant_argument_values
-      primaryVariant: primaryVariant ?? primary.darken(kDarkenPrimaryVariant),
-      secondary: secondary ?? primary.darken(kDarkenSecondary),
-      secondaryVariant: secondaryVariant ??
-          // ignore: avoid_redundant_argument_values
-          secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
-          primary.darken(kDarkenSecondaryVariant),
-      appBarColor: appBarColor ??
-          // ignore: avoid_redundant_argument_values
-          secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
-          primary.darken(kDarkenSecondaryVariant),
-      // Accent color defaults to primary if not defined.
-      accentColor: accentColor ?? primary,
-      error: error,
-    );
-  }
 
   /// The color displayed most frequently across your application's screens
   /// and components.
@@ -1739,6 +1714,42 @@ class FlexSchemeColor with Diagnosticable {
   /// [InputDecoration.errorText].
   final Color error;
 
+  /// Make a [FlexSchemeColor] from just one primary color or possible also
+  /// from a more complete color scheme set. This is a convenience factory that
+  /// can create a nice toned color schemes based on only the primary color.
+  factory FlexSchemeColor.from({
+    @required Color primary,
+    Color primaryVariant,
+    Color secondary,
+    Color secondaryVariant,
+    Color appBarColor,
+    Color accentColor,
+    Color error,
+  }) {
+    // Check valid primary input
+    assert(primary != null, 'Primary color may not be null.');
+    // If null slips through in a release build, give it a fallback color.
+    primary ??= FlexColor.materialLightPrimary;
+
+    return FlexSchemeColor(
+      primary: primary,
+      // ignore: avoid_redundant_argument_values
+      primaryVariant: primaryVariant ?? primary.darken(kDarkenPrimaryVariant),
+      secondary: secondary ?? primary.darken(kDarkenSecondary),
+      secondaryVariant: secondaryVariant ??
+          // ignore: avoid_redundant_argument_values
+          secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
+          primary.darken(kDarkenSecondaryVariant),
+      appBarColor: appBarColor ??
+          // ignore: avoid_redundant_argument_values
+          secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
+          primary.darken(kDarkenSecondaryVariant),
+      // Accent color defaults to primary if not defined.
+      accentColor: accentColor ?? primary,
+      error: error,
+    );
+  }
+
   /// Returns a new [FlexSchemeColor] instance based on this one that is
   /// suitable for dark mode.
   ///
@@ -1747,7 +1758,7 @@ class FlexSchemeColor with Diagnosticable {
   ///
   /// Calculates less saturated colors of any colors defined for this
   /// [FlexSchemeColor] colors, by blending any none null values with white
-  /// using a set alpha blend percentage.
+  /// using given alpha [whiteBlend] percentage.
   ///
   /// The default [whiteBlend] is 35%, this is normally a suitable value.
   /// For more saturated primary color try 40%, which is also used in the
@@ -1770,7 +1781,7 @@ class FlexSchemeColor with Diagnosticable {
   }
 
   /// Return a copy of this [FlexSchemeColor] that will when used, result in a
-  /// theme that use the Material Guide's default error color.
+  /// theme that use the Material Guide's default [error] color.
   ///
   /// The [error] color is left out when the new object is created. This
   /// results in a copy where the scheme error color is null, this again
@@ -1833,19 +1844,6 @@ class FlexSchemeColor with Diagnosticable {
   }
 
   @override
-  int get hashCode {
-    return hashValues(
-      primary,
-      primaryVariant,
-      secondary,
-      secondaryVariant,
-      appBarColor,
-      accentColor,
-      error,
-    );
-  }
-
-  @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
@@ -1857,6 +1855,19 @@ class FlexSchemeColor with Diagnosticable {
         other.appBarColor == appBarColor &&
         other.accentColor == accentColor &&
         other.error == error;
+  }
+
+  @override
+  int get hashCode {
+    return hashValues(
+      primary,
+      primaryVariant,
+      secondary,
+      secondaryVariant,
+      appBarColor,
+      accentColor,
+      error.hashCode,
+    );
   }
 
   @override
