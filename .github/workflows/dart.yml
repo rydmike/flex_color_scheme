@@ -6,22 +6,16 @@ on:
     branches: [ master ]
 jobs:
   build:
-    runs-on: macos-latest
-    # Note that this workflow uses the latest stable version of the Dart SDK.
-    # Docker images for other release channels - like dev and beta - are also
-    # available. See https://hub.docker.com/r/google/dart/ for the available
-    # images.
-    #container:
-    #  image:  google/dart:latest
+    runs-on: ubuntu-latest
     steps:
-    # This was the checkout in the default dart action, try it later
       - uses: actions/checkout@v2
-    #  - uses: actions/checkout@v1
       - name: Install Flutter
-        uses: subosito/flutter-action@v1.3.2
-      - name: Print Flutter SDK version
+        uses: subosito/flutter-action@v1.4.0
+      - name: Show Dart SDK version
+        run: dart --version
+      - name: Show Flutter SDK version
         run: flutter --version
-      - name: Install app dependencies
+      - name: Install dependencies
         run: flutter pub get
     
     # Uncomment this step to verify the use of 'dart format' on each commit.
