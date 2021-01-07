@@ -89,6 +89,11 @@ void main() {
       );
     });
     test(
+        'FSC1.03: GIVEN a FlexSchemeColor object EXPECT it to be unchanged '
+        'after an empty copyWith().', () {
+      expect(m3.copyWith(), m3);
+    });
+    test(
         'FSC1.04: GIVEN FlexSchemeColor.from Material default light primary '
         'color EXPECT it to be equal to manually created version with same '
         'reference colors.', () {

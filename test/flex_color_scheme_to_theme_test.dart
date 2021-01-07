@@ -568,6 +568,9 @@ void main() {
       appBarStyle: FlexAppBarStyle.background,
       appBarElevation: 2,
       tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
     ).toTheme;
 
     final ThemeData tDarkH = FlexColorScheme.dark(
@@ -576,6 +579,9 @@ void main() {
       appBarStyle: FlexAppBarStyle.background,
       appBarElevation: 4,
       tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
     ).toTheme;
 
     test(

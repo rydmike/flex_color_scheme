@@ -67,7 +67,7 @@ void main() {
       expect(m1 != m3, true);
     });
     test(
-        'FCS1.03: GIVEN a FlexColorScheme object EXPECT it to be '
+        'FCS1.03a: GIVEN a FlexColorScheme object EXPECT it to be '
         'equal to an unequal object when made equal with copyWith.', () {
       expect(
           m4.copyWith(
@@ -78,6 +78,11 @@ void main() {
             secondaryVariant: FlexColor.materialLightSecondaryVariant,
           ),
           m1);
+    });
+    test(
+        'FCS1.03b: GIVEN a FlexColorScheme object EXPECT it to be '
+        'unchanged after an empty .copyWith().', () {
+      expect(m4.copyWith(), m4);
     });
     test(
         'FCS1.04: GIVEN a FlexColorScheme.light created object '

@@ -60,7 +60,7 @@ void main() {
       expect(m1 != m3, true);
     });
     test(
-        'FSSC1.03: GIVEN a FlexSchemeSurfaceColors object EXPECT it to be '
+        'FSSC1.03a: GIVEN a FlexSchemeSurfaceColors object EXPECT it to be '
         'equal to an unequal object when made equal with copyWith.', () {
       expect(
         m4.copyWith(
@@ -70,6 +70,11 @@ void main() {
         ),
         m1,
       );
+    });
+    test(
+        'FSSC1.03b: GIVEN a FlexSchemeSurfaceColors object EXPECT it to be '
+        'unchanged after and empty copyWith.', () {
+      expect(m4.copyWith(), m4);
     });
     test(
         'FSSC1.04: GIVEN a light FlexSchemeSurfaceColors.from created object '
