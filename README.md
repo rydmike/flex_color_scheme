@@ -104,7 +104,7 @@ dark color versions as well. So OK, there are actually "only" 22 new ready-made 
 There is of course no need to use any of the built-in color schemes, the package examples show how you can easily
 make your own custom schemes, maybe the built-in examples will inspire you.
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ## Installing and Using
 
@@ -200,7 +200,7 @@ switch, an effective theme colors widget, plus a bunch of dummy commonly used Ma
 > The rationale for the slightly involved structure, is to keep it flexible, but at the same time provide self
 > documenting API guidance on how the data was designed to be used and consumed.
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ### Default Sample Application
 
@@ -231,7 +231,7 @@ With them you can see the active theme's colors, and the created theme's impact 
 >and for examples 4 and 5, also the "sub page" import to:  
 >`import 'shared/sub_page.dart';` 
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ### Live WEB Demos of the Examples
 
@@ -275,7 +275,7 @@ It might look and feel complicated, but it is actually only slightly more involv
 has almost all the same theming features and exactly the same themes as the Flexfold demo app. 
 Go through the examples, and you will be ready to make cool interactively custom themed apps like this in no time.
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
  
 ## Tutorial
 
@@ -339,7 +339,7 @@ just as an alternative to the rather plain popup menu.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/ThemeIndicatorList.png?raw=true" alt="theme indicator list"/>
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ## Example 1 Use a predefined color scheme
 
@@ -451,7 +451,7 @@ convenient fixes for some theme design gaps in Flutter's own themes created with
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1bl.png?raw=true" alt="ColorScheme example 1b light" width="250"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1cl.png?raw=true" alt="ColorScheme example 1c light" width="250"/>
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ## Example 2 Create a custom color scheme
 
@@ -534,7 +534,7 @@ theme properties.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2bl.png?raw=true" alt="ColorScheme example 2b light" width="250"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2cl.png?raw=true" alt="ColorScheme example 2c light" width="250"/>
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ## Example 3 Switch between different color schemes
 
@@ -646,7 +646,7 @@ use with this example.
 
 Try example 3 live on the [**web here**](https://rydmike.com/flexcolorscheme3).
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ## Example 4 Switch between all built in color schemes and three custom ones
 
@@ -849,7 +849,7 @@ Try some other theme, here is for example the **Mango mojito** theme.
 
 Try example 4 live on the [**web here**](https://rydmike.com/flexcolorscheme4)
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ## Example 5 Full featured demo 
 
@@ -1176,7 +1176,7 @@ themed system navigation bar on the Android device.
 Try example 5 live on the [**web here**](https://rydmike.com/flexcolorscheme5)
 
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ### Computed Dark Theme
 
@@ -1193,7 +1193,7 @@ are using strong surface branding, the computed dark scheme is on the right.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5a2d.png?raw=true" alt="ColorScheme example 5a2 dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5a2d-to-black.png?raw=true" alt="ColorScheme example 5 dark computed" width="250"/>
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ### Computed Dark Theme with Level Adjustment
 
@@ -1223,7 +1223,7 @@ The bundled example 5 and live web version of it uses the modifier.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_v1-1-0-phone3.gif?raw=true" alt="Dark scheme calc level"/>
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ### Branded Surfaces and App Bar Options
 
@@ -1277,7 +1277,7 @@ Here are few more images of the heavy primary color branded version, when lookin
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="250"/>
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ### The TabBar Style
 
@@ -1308,7 +1308,7 @@ bars in both app bars and on other surfaces.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/TabBar-on-surface.png?raw=true" alt="tab bar on surface"/>
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ### True Black
 
@@ -1337,7 +1337,7 @@ a primary colored app bar in dark-mode.
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad-true-black.png?raw=true" alt="ColorScheme example 5 true black" width="250"/>
 
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
 
 ## Behind the Scenes
 
@@ -1636,4 +1636,4 @@ are, here is a complete list:
     on how to use this.
 
 
-[*< Back to contents*]((#contents))
+[*< Back to contents*](#contents)
