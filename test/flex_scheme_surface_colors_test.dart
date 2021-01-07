@@ -40,25 +40,36 @@ void main() {
       scaffoldBackground: Color(0xFFAAAAAA),
     );
     test(
-        'FSSC1.01: GIVEN two identical FlexSchemeSurfaceColors objects '
+        'FSSC1.01a: GIVEN two identical FlexSchemeSurfaceColors objects '
         'EXPECT them to have equality', () {
       expect(m1, m2);
     });
     test(
-        'FSSC1.02: GIVEN none identical FlexSchemeSurfaceColors objects '
+        'FSSC1.01b: GIVEN two identical FlexSchemeSurfaceColors objects '
+        'EXPECT them to have equality with operator', () {
+      expect(m1 == m2, true);
+    });
+    test(
+        'FSSC1.02a: GIVEN none identical FlexSchemeSurfaceColors objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
     });
     test(
+        'FSSC1.02b: GIVEN none identical FlexSchemeSurfaceColors objects '
+        'EXPECT them to be unequal with operator', () {
+      expect(m1 != m3, true);
+    });
+    test(
         'FSSC1.03: GIVEN a FlexSchemeSurfaceColors object EXPECT it to be '
-        'equal to an unequal object made equal with copyWith.', () {
+        'equal to an unequal object when made equal with copyWith.', () {
       expect(
-          m1,
-          m4.copyWith(
-            surface: FlexColor.materialLightSurface,
-            background: FlexColor.materialLightBackground,
-            scaffoldBackground: FlexColor.materialLightScaffoldBackground,
-          ));
+        m4.copyWith(
+          surface: FlexColor.materialLightSurface,
+          background: FlexColor.materialLightBackground,
+          scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+        ),
+        m1,
+      );
     });
     test(
         'FSSC1.04: GIVEN a light FlexSchemeSurfaceColors.from created object '
@@ -264,6 +275,22 @@ void main() {
               .blend(FlexColor.materialDarkPrimary, 2),
         ),
       );
+    });
+    test(
+        'FSSC1.16: Test toString implemented via debugFillProperties '
+        'EXPECT working data print.', () {
+      expect(
+          m1.toString(),
+          // ignore: lines_longer_than_80_chars
+          'FlexSchemeSurfaceColors#4228a(surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff))');
+    });
+    test(
+        'FSSC1.17: Test toStringShort implemented via debugFillProperties '
+        'EXPECT working data print.', () {
+      expect(m1.toStringShort(), 'FlexSchemeSurfaceColors#4228a');
+    });
+    test('FSSC1.18: Test hashCode.', () {
+      expect(m1.hashCode, 107225738);
     });
   });
 }

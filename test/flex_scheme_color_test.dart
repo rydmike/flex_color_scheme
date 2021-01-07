@@ -48,33 +48,63 @@ void main() {
       accentColor: FlexColor.materialLightPrimary,
       error: FlexColor.materialLightError,
     );
+    // mFrom, create from just a primary color.
+    final FlexSchemeColor mFrom = FlexSchemeColor.from(
+      primary: FlexColor.materialLightPrimary,
+    );
     test(
-        'FSC1.01: GIVEN two identical FlexSchemeColor objects '
+        'FSC1.01a: GIVEN two identical FlexSchemeColor objects '
         'EXPECT them to have equality', () {
       expect(m1, m2);
     });
     test(
-        'FSC1.02: GIVEN none identical FlexSchemeColor objects '
+        'FSC1.01b: GIVEN two identical FlexSchemeColor objects '
+        'EXPECT them to have equality with operator', () {
+      expect(m1 == m2, true);
+    });
+    test(
+        'FSC1.02a: GIVEN none identical FlexSchemeColor objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
     });
     test(
+        'FSC1.02b: GIVEN none identical FlexSchemeColor objects '
+        'EXPECT them to be unequal with operator', () {
+      expect(m1 != m3, true);
+    });
+    test(
         'FSC1.03: GIVEN a FlexSchemeColor object EXPECT it to be equal to '
-        'an unequal object made equal with copyWith.', () {
+        'an unequal object when made equal with copyWith.', () {
       expect(
-          mFull,
-          m3.copyWith(
+        m3.copyWith(
+          primary: FlexColor.materialLightPrimary,
+          primaryVariant: FlexColor.materialLightPrimaryVariant,
+          secondary: FlexColor.materialLightSecondary,
+          secondaryVariant: FlexColor.materialLightSecondaryVariant,
+          appBarColor: FlexColor.materialLightSecondaryVariant,
+          accentColor: FlexColor.materialLightPrimary,
+          error: FlexColor.materialLightError,
+        ),
+        mFull,
+      );
+    });
+    test(
+        'FSC1.04: GIVEN FlexSchemeColor.from Material default light primary '
+        'color EXPECT it to be equal to manually created version with same '
+        'reference colors.', () {
+      expect(
+          mFrom,
+          const FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
-            primaryVariant: FlexColor.materialLightPrimaryVariant,
-            secondary: FlexColor.materialLightSecondary,
-            secondaryVariant: FlexColor.materialLightSecondaryVariant,
-            appBarColor: FlexColor.materialLightSecondaryVariant,
-            accentColor: FlexColor.materialLightPrimary,
-            error: FlexColor.materialLightError,
+            primaryVariant: Color(0xff4d00bb),
+            secondary: Color(0xff5800d5),
+            secondaryVariant: Color(0xff4500a7),
+            appBarColor: Color(0xff4500a7),
+            accentColor: Color(0xff6200ee),
           ));
     });
     test(
-        'FSC1.04: GIVEN a FlexSchemeColor with none null colors EXPECT '
+        'FSC1.05: GIVEN a FlexSchemeColor with none null colors EXPECT '
         'its default toDark() to be equal to result from toDark(35).', () {
       expect(
           mFull.toDark(),
@@ -82,7 +112,7 @@ void main() {
           mFull.toDark(35));
     });
     test(
-        'FSC1.05: GIVEN a FlexSchemeColor object with one null value  '
+        'FSC1.06: GIVEN a FlexSchemeColor object with one null value  '
         'EXPECT its toDark() to be equal to result from toDark(35).', () {
       expect(
           m1.toDark(),
@@ -90,12 +120,12 @@ void main() {
           m1.toDark(35));
     });
     test(
-        'FSC1.06: GIVEN a FlexSchemeColor with non null colors EXPECT its '
+        'FSC1.07: GIVEN a FlexSchemeColor with non null colors EXPECT its '
         'toDark(0) to be equal to original object', () {
       expect(mFull, mFull.toDark(0));
     });
     test(
-        'FSC1.07: GIVEN a FlexSchemeColor with non null colors EXPECT its '
+        'FSC1.08: GIVEN a FlexSchemeColor with non null colors EXPECT its '
         'toDark(100) to be equal to FlexSchemeColor object with all '
         'white colors.', () {
       expect(
@@ -111,12 +141,12 @@ void main() {
           ));
     });
     test(
-        'FSC1.08: GIVEN a FlexSchemeColor with none null '
+        'FSC1.09: GIVEN a FlexSchemeColor with none null '
         'error color EXPECT its ".defaultError.toDark()" to be null.', () {
       expect(m1.defaultError.toDark().error, null);
     });
     test(
-        'FSC1.09: GIVEN a FlexSchemeColor Material light based colors  '
+        'FSC1.10: GIVEN a FlexSchemeColor Material light based colors  '
         'EXPECT its toDark(40) error Color to be equal to '
         'FlexColor.materialDarkError.', () {
       // Note: This just works because it is how the Material design team
@@ -125,6 +155,20 @@ void main() {
       // that the here used "white blend" method is the one referred to in the
       // design guide.
       expect(m1.toDark(40).error, FlexColor.materialDarkError);
+    });
+
+    test(
+        'FSC1.11: Test toString implemented via debugFillProperties '
+        'EXPECT working data print.', () {
+      expect(m1.toString().length, greaterThan(15));
+    });
+    test(
+        'FSC1.12: Test toStringShort implemented via debugFillProperties '
+        'EXPECT working data print.', () {
+      expect(m1.toStringShort().length, greaterThan(10));
+    });
+    test('FSC1.13: Test hashCode.', () {
+      expect(m1.hashCode, isNotNull);
     });
   });
 }

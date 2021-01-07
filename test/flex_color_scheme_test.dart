@@ -12,6 +12,8 @@ void main() {
   // same result as matching one with default constructor.
   //****************************************************************************
   group('FCS1: WITH FlexColorScheme ', () {
+    debugDefaultTargetPlatformOverride = null;
+
     // m1 = Default material light scheme colors.
     const FlexColorScheme m1 = FlexColorScheme(
       brightness: Brightness.light,
@@ -45,27 +47,37 @@ void main() {
       secondaryVariant: FlexColor.materialDarkSecondaryVariant,
     );
     test(
-        'FCS1.01: GIVEN two identical FlexColorScheme objects '
+        'FCS1.01a: GIVEN two identical FlexColorScheme objects '
         'EXPECT them to have equality', () {
       expect(m1, m2);
     });
     test(
-        'FCS1.02: GIVEN none identical FlexColorScheme objects '
+        'FCS1.01b: GIVEN two identical FlexColorScheme objects '
+        'EXPECT them to have equality with operator', () {
+      expect(m1 == m2, true);
+    });
+    test(
+        'FCS1.02a: GIVEN none identical FlexColorScheme objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
     });
     test(
+        'FCS1.02b: GIVEN none identical FlexColorScheme objects '
+        'EXPECT them to be unequal with operator.', () {
+      expect(m1 != m3, true);
+    });
+    test(
         'FCS1.03: GIVEN a FlexColorScheme object EXPECT it to be '
-        'equal to an unequal object made equal with copyWith.', () {
+        'equal to an unequal object when made equal with copyWith.', () {
       expect(
-          m1,
           m4.copyWith(
             brightness: Brightness.light,
             primary: FlexColor.materialLightPrimary,
             primaryVariant: FlexColor.materialLightPrimaryVariant,
             secondary: FlexColor.materialLightSecondary,
             secondaryVariant: FlexColor.materialLightSecondaryVariant,
-          ));
+          ),
+          m1);
     });
     test(
         'FCS1.04: GIVEN a FlexColorScheme.light created object '
@@ -116,6 +128,19 @@ void main() {
           onError: Colors.white,
         ),
       );
+    });
+    test(
+        'FCS1.06: Test toString implemented via debugFillProperties '
+        'EXPECT working data print.', () {
+      expect(m1.toString().length, greaterThan(15));
+    });
+    test(
+        'FCS1.07: Test toStringShort implemented via debugFillProperties '
+        'EXPECT working data print.', () {
+      expect(m1.toStringShort().length, greaterThan(10));
+    });
+    test('FCS1.08: Test hashCode.', () {
+      expect(m1.hashCode, isNotNull);
     });
   });
 
