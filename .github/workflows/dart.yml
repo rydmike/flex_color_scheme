@@ -15,8 +15,8 @@ jobs:
     #  image:  google/dart:latest
     steps:
     # This was the checkout in the default dart action, try it later
-    #  - uses: actions/checkout@v2
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+    #  - uses: actions/checkout@v1
       - name: Install Flutter
         uses: subosito/flutter-action@v1.3.2
       - name: Print Flutter SDK version
