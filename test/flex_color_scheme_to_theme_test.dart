@@ -683,5 +683,47 @@ void main() {
       expect(tDarkH.tabBarTheme.unselectedLabelColor,
           tDarkH.colorScheme.onSurface.withOpacity(0.6));
     });
+
+    //**************************************************************************
+    // FlexColorScheme.light & dark factory tests. With HEAVY surface branding.
+    //
+    // Test result with custom features like surface, appbar, tab bar options.
+    //**************************************************************************
+
+    final ThemeData tLightC = FlexColorScheme.light(
+      colors: FlexColor.schemes[FlexScheme.mandyRed].light,
+      surfaceStyle: FlexSurface.custom,
+      appBarStyle: FlexAppBarStyle.custom,
+      appBarElevation: 2,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
+      usedColors: 1,
+    ).toTheme;
+
+    final ThemeData tDarkC = FlexColorScheme.dark(
+      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      surfaceStyle: FlexSurface.custom,
+      appBarStyle: FlexAppBarStyle.custom,
+      appBarElevation: 4,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
+      darkIsTrueBlack: true,
+      usedColors: 1,
+    ).toTheme;
+
+    test(
+        'FCS7.78: GIVEN a FlexColorScheme.light with more options '
+        'EXPECT none null result.', () {
+      expect(tLightH, isNotNull);
+    });
+    test(
+        'FCS7.78: GIVEN a FlexColorScheme.dark with more options '
+        'EXPECT none null result.', () {
+      expect(tDarkH, isNotNull);
+    });
   });
 }
