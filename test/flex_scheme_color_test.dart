@@ -11,6 +11,30 @@ void main() {
   // Additionally testing of the .defaultError and .toDark() methods.
   //****************************************************************************
   group('FSC1: WITH FlexSchemeColor ', () {
+    // Define a color that is null.
+    // Start with null tests.
+    test(
+        'FSC1.00a: GIVEN a FlexSchemeColor.from primary null '
+        'EXPECT throws null assertion error.', () {
+      expect(
+        () => FlexSchemeColor.from(primary: null),
+        throwsAssertionError,
+      );
+    });
+
+    test(
+        'FSC1.00b: GIVEN a FlexSchemeColo with null values '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeColor(
+                primary: null,
+                primaryVariant: null,
+                secondary: null,
+                secondaryVariant: null,
+              ),
+          throwsAssertionError);
+    });
+
     // m1 = Basic flex scheme color with null accentColor.
     const FlexSchemeColor m1 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
@@ -163,16 +187,33 @@ void main() {
     });
 
     test(
-        'FSC1.11: Test toString implemented via debugFillProperties '
+        'FSC1.11: GIVEN a FlexSchemeColor.from primary and secondary '
+        'EXPECT primary and secondary as given other computed.', () {
+      expect(
+          FlexSchemeColor.from(
+              primary: FlexColor.materialLightPrimary,
+              secondary: FlexColor.materialLightSecondary),
+          const FlexSchemeColor(
+            primary: FlexColor.materialLightPrimary,
+            primaryVariant: Color(0xff4d00bb),
+            secondary: FlexColor.materialLightSecondary,
+            secondaryVariant: Color(0xff02a898),
+            appBarColor: Color(0xff02a898),
+            accentColor: FlexColor.materialLightPrimary,
+          ));
+    });
+
+    test(
+        'FSC1.12: Test toString implemented via debugFillProperties '
         'EXPECT working data print.', () {
       expect(m1.toString().length, greaterThan(15));
     });
     test(
-        'FSC1.12: Test toStringShort implemented via debugFillProperties '
+        'FSC1.13: Test toStringShort implemented via debugFillProperties '
         'EXPECT working data print.', () {
       expect(m1.toStringShort().length, greaterThan(10));
     });
-    test('FSC1.13: Test hashCode.', () {
+    test('FSC1.14: Test hashCode.', () {
       expect(m1.hashCode, isNotNull);
     });
   });

@@ -15,6 +15,28 @@ void main() {
   // not changed from original definitions.
   //****************************************************************************
   group('FSSC1: WITH FlexSchemeSurfaceColors ', () {
+    // Start with null tests
+    test(
+        'FCS1.00a: GIVEN a FlexSchemeSurfaceColors with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeSurfaceColors(
+                surface: null,
+                background: null,
+                scaffoldBackground: null,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FCS1.00b: GIVEN a FlexSchemeSurfaceColors.from with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeSurfaceColors.from(
+                brightness: null,
+                surfaceStyle: null,
+              ),
+          throwsAssertionError);
+    });
     // m1 = Default material light theme surface colors.
     const FlexSchemeSurfaceColors m1 = FlexSchemeSurfaceColors(
       surface: FlexColor.materialLightSurface,

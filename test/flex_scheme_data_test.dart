@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
@@ -8,6 +9,20 @@ void main() {
   // Basic object tests, equality, none equal.
   //****************************************************************************
   group('FSD1: WITH FlexSchemeData ', () {
+    // start with null tests.
+    test(
+        'FSC1.10: GIVEN a FlexSchemeData with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeData(
+                name: null,
+                description: null,
+                light: null,
+                dark: null,
+              ),
+          throwsAssertionError);
+    });
+
     // m1, is the FlexSchemeData with Material standard scheme.
     const FlexSchemeData m1 = FlexSchemeData(
       name: FlexColor.materialName,
@@ -156,7 +171,7 @@ void main() {
     //**************************************************************************
     // FlexSchemeData unit tests.
     //
-    // Basic copyWith test.
+    // Test .copyWith, full and null..
     //**************************************************************************
     test(
         'FSD1.09a: GIVEN a FlexSchemeData object EXPECT it to be equal to '
@@ -190,17 +205,23 @@ void main() {
         'after and empty copyWith.', () {
       expect(mHc.copyWith(), mHc);
     });
+    //**************************************************************************
+    // FlexSchemeData unit tests.
+    //
+    // toString plus hashcode.
+    //**************************************************************************
+
     test(
-        'FSD1.10: Test toString implemented via debugFillProperties '
+        'FSD1.11: Test toString implemented via debugFillProperties '
         'EXPECT working data print.', () {
       expect(m1.toString().length, greaterThan(15));
     });
     test(
-        'FSD1.11: Test toStringShort implemented via debugFillProperties '
+        'FSD1.12: Test toStringShort implemented via debugFillProperties '
         'EXPECT working data print.', () {
       expect(m1.toStringShort().length, greaterThan(10));
     });
-    test('FSD1.12: Test hashCode.', () {
+    test('FSD1.13: Test hashCode.', () {
       expect(m1.hashCode, isNotNull);
     });
   });

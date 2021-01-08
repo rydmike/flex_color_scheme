@@ -718,12 +718,12 @@ void main() {
     test(
         'FCS7.78: GIVEN a FlexColorScheme.light with more options '
         'EXPECT none null result.', () {
-      expect(tLightH, isNotNull);
+      expect(tLightC, isNotNull);
     });
     test(
         'FCS7.78: GIVEN a FlexColorScheme.dark with more options '
         'EXPECT none null result.', () {
-      expect(tDarkH, isNotNull);
+      expect(tDarkC, isNotNull);
     });
   });
 }

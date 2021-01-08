@@ -14,6 +14,54 @@ void main() {
   group('FCS1: WITH FlexColorScheme ', () {
     debugDefaultTargetPlatformOverride = null;
 
+    test(
+        'FCS1.00a: GIVEN a FlexColorScheme with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexColorScheme(
+                brightness: null,
+                primary: null,
+                primaryVariant: null,
+                secondary: null,
+                secondaryVariant: null,
+                tabBarStyle: null,
+                appBarElevation: null,
+                tooltipsMatchBackground: null,
+                transparentStatusBar: null,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FCS1.00b: GIVEN a FlexColorScheme.light with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexColorScheme.light(
+                colors: null,
+                usedColors: null,
+                surfaceStyle: null,
+                appBarStyle: null,
+                tabBarStyle: null,
+                tooltipsMatchBackground: null,
+                transparentStatusBar: null,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FCS1.00c: GIVEN a FlexColorScheme.light with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexColorScheme.dark(
+              colors: null,
+              usedColors: null,
+              surfaceStyle: null,
+              appBarStyle: null,
+              tabBarStyle: null,
+              tooltipsMatchBackground: null,
+              transparentStatusBar: null,
+              darkIsTrueBlack: null),
+          throwsAssertionError);
+    });
+
     // m1 = Default material light scheme colors.
     const FlexColorScheme m1 = FlexColorScheme(
       brightness: Brightness.light,
@@ -46,6 +94,7 @@ void main() {
       secondary: FlexColor.materialDarkSecondary,
       secondaryVariant: FlexColor.materialDarkSecondaryVariant,
     );
+
     test(
         'FCS1.01a: GIVEN two identical FlexColorScheme objects '
         'EXPECT them to have equality', () {
