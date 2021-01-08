@@ -9,6 +9,13 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 //****************************************************************************
 
 void main() {
+  group('FC1: WITH FlexColor() ', () {
+    // How to do private constructor test in Dart for better test coverage?
+    // const ColorScheme ml = ColorScheme.light();
+    // test('FC1.01: GIVEN a FlexColor() call expect error ', () {
+    //   expect(FlexColor(), ml.primary);
+    // });
+  });
   //****************************************************************************
   // FlexColor unit tests - Color verification 1.
   //
@@ -198,7 +205,8 @@ void main() {
   // changed. If they are, or need to be changed it is visible in the repo and
   // will be reported as a breaking change.
   //
-  // These FlexColor color values are still only partially.... more coming...
+  // These FlexColor color values are still only partially tested. More coming
+  // eventually...
   //****************************************************************************
   group('FC5: WITH FlexColor test color definitions are as specified', () {
     test('FC5 colors', () {
@@ -437,6 +445,38 @@ void main() {
     });
     test('FC5 colors', () {
       expect(FlexColor.aquaBlueDarkSecondaryVariant, const Color(0xFFA0E5E5));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueName, 'Brand blues');
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueDescription,
+          'Blue colors used in well known brand themes.');
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueLightPrimary, const Color(0xFF3B5998));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueLightPrimaryVariant, const Color(0xFF3F729B));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueLightSecondary, const Color(0xFF55ACEE));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueLightSecondaryVariant, const Color(0xFF4285F4));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueDarkPrimary, const Color(0xFF8B9DC3));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueDarkPrimaryVariant, const Color(0xFF799CB9));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueDarkSecondary, const Color(0xFFA0D1F5));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.brandBlueDarkSecondaryVariant, const Color(0xFF88B2F8));
     });
   });
 }
