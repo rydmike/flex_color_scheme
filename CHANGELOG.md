@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 
 ## [1.3.1] - January 8, 2021
 
- * Added more tests, now 417 test.
+ * Added more tests, now 447 test.
 
 ## [1.3.0] - January 7, 2021
 
