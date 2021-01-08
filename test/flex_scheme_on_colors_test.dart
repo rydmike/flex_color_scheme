@@ -12,6 +12,33 @@ void main() {
   // produces onColors using the override colors.
   //****************************************************************************
   group('FSOC1: WITH FlexSchemeOnColors ', () {
+    // Start with null tests
+    test(
+        'FSOC1.00a: GIVEN a FlexSchemeOnColors with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors(
+                onPrimary: null,
+                onSecondary: null,
+                onSurface: null,
+                onBackground: null,
+                onError: null,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSOC1.00a: GIVEN a FlexSchemeOnColors.from with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors.from(
+                primary: null,
+                secondary: null,
+                surface: null,
+                background: null,
+                error: null,
+              ),
+          throwsAssertionError);
+    });
     // m1 = Typical light surface with saturated primary
     const FlexSchemeOnColors m1 = FlexSchemeOnColors(
       onPrimary: Colors.white,
