@@ -9,20 +9,47 @@ void main() {
   // Basic object tests, equality, none equal.
   //****************************************************************************
   group('FSD1: WITH FlexSchemeData ', () {
+    const FlexSchemeColor col = FlexSchemeColor(
+      primary: FlexColor.materialLightPrimary,
+      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      secondary: FlexColor.materialLightSecondary,
+      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      appBarColor: FlexColor.materialLightSecondaryVariant,
+      error: FlexColor.materialLightError,
+    );
     // start with null tests.
     test(
-        'FSC1.10: GIVEN a FlexSchemeData with nulls '
+        'FSC1.00a: GIVEN a FlexSchemeData with nulls '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeData(
-                name: null,
-                description: null,
-                light: null,
-                dark: null,
-              ),
+              name: null, description: 'Desc', light: col, dark: col),
           throwsAssertionError);
     });
-
+    test(
+        'FSC1.00a: GIVEN a FlexSchemeData with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeData(
+              name: 'Name', description: null, light: col, dark: col),
+          throwsAssertionError);
+    });
+    test(
+        'FSC1.00a: GIVEN a FlexSchemeData with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeData(
+              name: 'Name', description: 'Desc', light: null, dark: col),
+          throwsAssertionError);
+    });
+    test(
+        'FSC1.00a: GIVEN a FlexSchemeData with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeData(
+              name: 'Name', description: 'Desc', light: col, dark: null),
+          throwsAssertionError);
+    });
     // m1, is the FlexSchemeData with Material standard scheme.
     const FlexSchemeData m1 = FlexSchemeData(
       name: FlexColor.materialName,
@@ -85,6 +112,8 @@ void main() {
         error: FlexColor.materialDarkError,
       ),
     );
+
+    // Do identity test
     test(
         'FSD1.01a: GIVEN two identical FlexSchemeData objects '
         'EXPECT them to have equality', () {

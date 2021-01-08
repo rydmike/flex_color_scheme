@@ -11,7 +11,6 @@ void main() {
   // Additionally testing of the .defaultError and .toDark() methods.
   //****************************************************************************
   group('FSC1: WITH FlexSchemeColor ', () {
-    // Define a color that is null.
     // Start with null tests.
     test(
         'FSC1.00a: GIVEN a FlexSchemeColor.from primary null '
@@ -28,8 +27,44 @@ void main() {
       expect(
           () => FlexSchemeColor(
                 primary: null,
+                primaryVariant: Colors.white,
+                secondary: Colors.white,
+                secondaryVariant: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSC1.00c: GIVEN a FlexSchemeColo with null values '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeColor(
+                primary: Colors.white,
                 primaryVariant: null,
+                secondary: Colors.white,
+                secondaryVariant: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSC1.00d: GIVEN a FlexSchemeColo with null values '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeColor(
+                primary: Colors.white,
+                primaryVariant: Colors.white,
                 secondary: null,
+                secondaryVariant: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSC1.00e: GIVEN a FlexSchemeColo with null values '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeColor(
+                primary: Colors.white,
+                primaryVariant: Colors.white,
+                secondary: Colors.white,
                 secondaryVariant: null,
               ),
           throwsAssertionError);

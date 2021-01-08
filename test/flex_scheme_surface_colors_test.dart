@@ -22,7 +22,29 @@ void main() {
       expect(
           () => FlexSchemeSurfaceColors(
                 surface: null,
+                background: Colors.white,
+                scaffoldBackground: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FCS1.00a: GIVEN a FlexSchemeSurfaceColors with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeSurfaceColors(
+                surface: Colors.white,
                 background: null,
+                scaffoldBackground: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FCS1.00a: GIVEN a FlexSchemeSurfaceColors with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeSurfaceColors(
+                surface: Colors.white,
+                background: Colors.white,
                 scaffoldBackground: null,
               ),
           throwsAssertionError);
@@ -32,11 +54,22 @@ void main() {
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeSurfaceColors.from(
-                brightness: null,
+                brightness: Brightness.dark,
                 surfaceStyle: null,
               ),
           throwsAssertionError);
     });
+    test(
+        'FCS1.00b: GIVEN a FlexSchemeSurfaceColors.from with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeSurfaceColors.from(
+                brightness: null,
+                surfaceStyle: FlexSurface.medium,
+              ),
+          throwsAssertionError);
+    });
+
     // m1 = Default material light theme surface colors.
     const FlexSchemeSurfaceColors m1 = FlexSchemeSurfaceColors(
       surface: FlexColor.materialLightSurface,

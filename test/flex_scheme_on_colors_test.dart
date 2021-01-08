@@ -19,22 +19,126 @@ void main() {
       expect(
           () => FlexSchemeOnColors(
                 onPrimary: null,
+                onSecondary: Colors.white,
+                onSurface: Colors.white,
+                onBackground: Colors.white,
+                onError: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSOC1.00b: GIVEN a FlexSchemeOnColors with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors(
+                onPrimary: Colors.white,
                 onSecondary: null,
+                onSurface: Colors.white,
+                onBackground: Colors.white,
+                onError: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSOC1.00c: GIVEN a FlexSchemeOnColors with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors(
+                onPrimary: Colors.white,
+                onSecondary: Colors.white,
                 onSurface: null,
+                onBackground: Colors.white,
+                onError: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSOC1.00d: GIVEN a FlexSchemeOnColors with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors(
+                onPrimary: Colors.white,
+                onSecondary: Colors.white,
+                onSurface: Colors.white,
                 onBackground: null,
+                onError: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSOC1.00e: GIVEN a FlexSchemeOnColors with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors(
+                onPrimary: Colors.white,
+                onSecondary: Colors.white,
+                onSurface: Colors.white,
+                onBackground: Colors.white,
                 onError: null,
               ),
           throwsAssertionError);
     });
     test(
-        'FSOC1.00a: GIVEN a FlexSchemeOnColors.from with nulls '
+        'FSOC1.00f: GIVEN a FlexSchemeOnColors.from with nulls '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeOnColors.from(
                 primary: null,
+                secondary: Colors.white,
+                surface: Colors.white,
+                background: Colors.white,
+                error: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSOC1.00g: GIVEN a FlexSchemeOnColors.from with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors.from(
+                primary: Colors.white,
                 secondary: null,
+                surface: Colors.white,
+                background: Colors.white,
+                error: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSOC1.00h: GIVEN a FlexSchemeOnColors.from with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors.from(
+                primary: Colors.white,
+                secondary: Colors.white,
                 surface: null,
+                background: Colors.white,
+                error: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSOC1.00i: GIVEN a FlexSchemeOnColors.from with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors.from(
+                primary: Colors.white,
+                secondary: Colors.white,
+                surface: Colors.white,
                 background: null,
+                error: Colors.white,
+              ),
+          throwsAssertionError);
+    });
+    test(
+        'FSOC1.00j: GIVEN a FlexSchemeOnColors.from with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexSchemeOnColors.from(
+                primary: Colors.white,
+                secondary: Colors.white,
+                surface: Colors.white,
+                background: Colors.white,
                 error: null,
               ),
           throwsAssertionError);
