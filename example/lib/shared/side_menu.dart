@@ -156,7 +156,6 @@ class _SideItem extends StatelessWidget {
                     minWidth: 0,
                     maxWidth: menuWidth,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         ConstrainedBox(
                           constraints: const BoxConstraints.tightFor(

@@ -2,9 +2,13 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
-## [1.3.1] - January 8, 2021
+## [1.3.1] - January 10, 2021
 
- * Added more tests, now 447 test.
+ * Added more tests, now 453 test.
+ * Documentation: Removed the "back to contents" link after chapters, it works fine on Github, but for some reason
+   not on pub.dev. Tried finding and adding comments for the 3 missing API comments needed to reach 100% API
+   documentation comments, not sure if I succeeded. I will see when I publish the update, doubtful but let's see.
+   
 
 ## [1.3.0] - January 7, 2021
 
@@ -141,9 +145,14 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
 - Version 2.0.1 Write more widget tests.
 - Version 2.1.0 Release more color schemes. Making schemes is fun, documenting the changes a bit less so.
-- Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable channel. See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206. Will not impact
+- Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable channel. 
+  See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206. Will not impact
   API or functionality, the implementation will only be changed to one that is supported directly by the SDK, so it
   becomes easier and cleaner to do it.
+- Currently, the build and test pipeline are the same that include the test code coverage report. While the tests do
+  include a test of a minimal app, I would like to set up a separate build that can be run after a package update, but 
+  also when there is a new Flutter release on stable and beta channels. It should build all five example apps for Web 
+  and publishes them on GitHub Pages. 
 
 ### COMPLETED
 - Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
@@ -156,13 +165,16 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - Add API that allows us to use an additional extra color definition for ThemeData.accentColor to easily make themes with custom input border color in dark-mode.
 - API to opt-out from one-toned AppBar and return it to Android's default two-toned.
 - API to assist with themed annotated region for system navigation bar theming.
-- Version 1.3.0: Add 195 units and widgets test (mostly unit tests)
+- Version 1.3.0: Added 195 unit and widgets tests, mostly unit tests.
 
 ### MAYBE
 - **Companion Web App**  
   I started playing with a small companion app that will allow you to design `FlexColorSchemes` and copy-paste the 
   needed setup code into an app. If/when I finnish it, I will release it as live version with open source code as well.
   
+- **Branded surface customization**
+  Add API offering more flexibility and customization capabilities to the surface branding.
+
 - **Serialization of FlexColorScheme**  
   Including built-in serialization of FlexColorScheme, and its key classes has been suggested. I consider
   `FlexColorScheme` to be functionally on a level similar to `ColorScheme`, and therefore it should not cover 
