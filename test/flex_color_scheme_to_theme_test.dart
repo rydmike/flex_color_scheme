@@ -16,6 +16,20 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
     TestWidgetsFlutterBinding.ensureInitialized();
 
+    // ToTheme gives same ThemeData
+    final ThemeData tLv1 = FlexColorScheme.light(
+      colors: FlexColor.schemes[FlexScheme.material].light,
+    ).toTheme;
+    final ThemeData tLv2 = FlexColorScheme.light(
+      colors: FlexColor.schemes[FlexScheme.material].light,
+    ).toTheme;
+
+    test(
+        'FCS7.00: GIVEN two FlexColorScheme.light made with identical '
+        'parameters EXPECT their ThemeData to bve equal.', () {
+      expect(tLv1, tLv1);
+    });
+
     // themeLight = Default material light scheme colors.
     final ThemeData themeLight = const FlexColorScheme(
       brightness: Brightness.light,
@@ -687,7 +701,71 @@ void main() {
     //**************************************************************************
     // FlexColorScheme.light & dark factory tests. With HEAVY surface branding.
     //
+    // Test result with 2...3 colors and true black.
+    // Just verify not failing (coverage), should check result as well later.
+    //**************************************************************************
+
+    final ThemeData tLightH2 = FlexColorScheme.light(
+      colors: FlexColor.schemes[FlexScheme.mandyRed].light,
+      surfaceStyle: FlexSurface.heavy,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      usedColors: 2,
+    ).toTheme;
+
+    final ThemeData tDarkH2 = FlexColorScheme.dark(
+      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      surfaceStyle: FlexSurface.heavy,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      darkIsTrueBlack: true,
+      usedColors: 2,
+    ).toTheme;
+
+    test(
+        'FCS7.79: GIVEN a FlexColorScheme.light with heavy branding and 2 '
+        'colors EXPECT none null result.', () {
+      expect(tLightH2, isNotNull);
+    });
+    test(
+        'FCS7.80: GIVEN a FlexColorScheme.dark with heavy branding and '
+        '2 colors and true black EXPECT none null result.', () {
+      expect(tDarkH2, isNotNull);
+    });
+
+    final ThemeData tLightH3 = FlexColorScheme.light(
+      colors: FlexColor.schemes[FlexScheme.mandyRed].light,
+      surfaceStyle: FlexSurface.heavy,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      usedColors: 3,
+    ).toTheme;
+
+    final ThemeData tDarkH3 = FlexColorScheme.dark(
+      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      surfaceStyle: FlexSurface.heavy,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      darkIsTrueBlack: true,
+      usedColors: 3,
+    ).toTheme;
+
+    test(
+        'FCS7.79: GIVEN a FlexColorScheme.light with heavy branding and 3 '
+        'colors EXPECT none null result.', () {
+      expect(tLightH3, isNotNull);
+    });
+    test(
+        'FCS7.80: GIVEN a FlexColorScheme.dark with heavy branding and '
+        '3 colors and true black EXPECT none null result.', () {
+      expect(tDarkH3, isNotNull);
+    });
+
+    //**************************************************************************
+    // FlexColorScheme.light & dark factory tests. With CUSTOM surface branding.
+    //
     // Test result with custom features like surface, appbar, tab bar options.
+    // Just verify not failing (coverage), should check result as well later.
     //**************************************************************************
 
     final ThemeData tLightC = FlexColorScheme.light(
@@ -716,12 +794,12 @@ void main() {
     ).toTheme;
 
     test(
-        'FCS7.78: GIVEN a FlexColorScheme.light with more options '
+        'FCS7.81: GIVEN a FlexColorScheme.light with more options '
         'EXPECT none null result.', () {
       expect(tLightC, isNotNull);
     });
     test(
-        'FCS7.78: GIVEN a FlexColorScheme.dark with more options '
+        'FCS7.82: GIVEN a FlexColorScheme.dark with more options '
         'EXPECT none null result.', () {
       expect(tDarkC, isNotNull);
     });

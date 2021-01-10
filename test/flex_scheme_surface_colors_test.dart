@@ -177,6 +177,7 @@ void main() {
       expect(
         FlexSchemeSurfaceColors.from(
           surfaceStyle: FlexSurface.heavy,
+          // ignore: deprecated_member_use_from_same_package
           themeSurface: FlexSurface.material,
         ),
         const FlexSchemeSurfaceColors(

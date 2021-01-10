@@ -235,8 +235,8 @@ class HomePage extends StatelessWidget {
                   const Text(
                     'This example shows how you can use all the built in '
                     'color schemes in FlexColorScheme, add 3 custom schemes to '
-                    'it and how to interactively select which scheme is used to '
-                    'define the active theme.\n\n'
+                    'it and how to interactively select which scheme is used '
+                    'to define the active theme.\n\n'
                     'The example also uses medium strength branded '
                     'background and surface colors. '
                     'A theme showcase widget shows the theme with several '

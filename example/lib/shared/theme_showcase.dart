@@ -454,7 +454,6 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
         children: const <Widget>[
           Material(
             elevation: 1,
-            type: MaterialType.canvas,
             child: SizedBox(
               height: 70,
               child: Center(

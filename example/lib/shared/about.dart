@@ -52,7 +52,6 @@ void showAppAboutDialog(BuildContext context) {
     applicationIcon: const Image(image: AssetImage(AppConst.icon)),
     applicationLegalese:
         '${AppConst.copyright} ${AppConst.author} ${AppConst.license}',
-    useRootNavigator: true,
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(top: 24),

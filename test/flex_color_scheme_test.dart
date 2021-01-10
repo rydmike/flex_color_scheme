@@ -384,6 +384,21 @@ void main() {
               ),
           throwsAssertionError);
     });
+    test(
+        'FCS1.00x: GIVEN a FlexColorScheme.dark with nulls '
+        'EXPECT throws null assertion error.', () {
+      expect(
+          () => FlexColorScheme.dark(
+              colors: sc,
+              usedColors: 1,
+              surfaceStyle: FlexSurface.medium,
+              appBarStyle: FlexAppBarStyle.background,
+              tabBarStyle: FlexTabBarStyle.forBackground,
+              tooltipsMatchBackground: true,
+              transparentStatusBar: false,
+              darkIsTrueBlack: null),
+          throwsAssertionError);
+    });
 
     // m1 = Default material light scheme colors.
     const FlexColorScheme m1 = FlexColorScheme(

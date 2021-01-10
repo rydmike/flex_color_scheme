@@ -51,7 +51,7 @@ class AppFonts {
   // We use Roboto as an asset so we can get it on all platforms and have same
   // look. If we do not do this, then on some platforms we will instead get a
   // Roboto 'like' font as replacement font. In this app we want to make sure
-  // we actually use Roboto on all platforms. So we provide it as a bundled asset
-  // and also specify it in our theme explicitly via the mainFont.
+  // we actually use Roboto on all platforms. So we provide it as a bundled
+  // asset and also specify it in our theme explicitly via the mainFont.
   static const String fontRoboto = 'Roboto';
 }

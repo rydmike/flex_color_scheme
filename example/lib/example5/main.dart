@@ -648,7 +648,6 @@ class _HomePageState extends State<HomePage> {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
             child: Material(
-              elevation: 0,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 width: currentSidePanelWidth,
@@ -686,7 +685,6 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  child: null,
                 ),
               ),
               body: PageBody(
@@ -787,7 +785,6 @@ class _HomePageState extends State<HomePage> {
                     // White blend slider in a ListTile.
                     ListTile(
                       title: Slider.adaptive(
-                        min: 0,
                         max: 100,
                         divisions: 100,
                         label: widget.whiteBlend.toString(),
@@ -884,7 +881,6 @@ class _HomePageState extends State<HomePage> {
                     ListTile(
                       title: const Text('App bar themed elevation'),
                       subtitle: Slider.adaptive(
-                        min: 0,
                         max: 30,
                         divisions: 30,
                         label: widget.appBarElevation.floor().toString(),
