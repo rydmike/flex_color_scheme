@@ -12,7 +12,8 @@ dependencies:
 
   # Color scheme package (by Mike Rydstrom, rydmike.com).
   flex_color_scheme:
-    path: ..\
+    git:
+      url: git://github.com/rydmike/flex_color_scheme.git
 
   # The Flutter SDK (by Google flutter.dev).
   flutter:
