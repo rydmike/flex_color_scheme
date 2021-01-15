@@ -60,9 +60,11 @@ packages:
   flex_color_scheme:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: b9dcdfe81496c2b3abfa5300b2a9231914b38544
+      url: "git://github.com/rydmike/flex_color_scheme.git"
+    source: git
     version: "1.4.0"
   flutter:
     dependency: "direct main"
