@@ -34,6 +34,7 @@ For more information about **FlexColorScheme**, its background and use cases, th
       * [Branded Surfaces and App Bar Options](#branded-surfaces-and-app-bar-options)
       * [The TabBar Style](#the-tabbar-style)  
       * [True Black](#true-black)
+    * [Android Transparent System Navigation Bar](#android-transparent-system-navigation-bar)
 * [Behind the scenes](#behind-the-scenes)  
     * [Theme Improvements](#theme-improvements)
 * [API Reference](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/flex_color_scheme-library.html)
@@ -131,29 +132,6 @@ built-in FlexColorScheme's schemes to use with it.
 
 In this example we use **"Oh Mandy red"** scheme that is represented by enum value `FlexScheme.mandyRed`. 
 
-There is a `FlexColor.schemes` **map** with the `FlexScheme` enums as keys, with corresponding predefined 
-`FlexSchemeData` objects as values. We use this `FlexSchemeData` object's light colors for the light color scheme that 
-we make with the `FlexColorScheme.light` factory by assigning the light `FlexSchemeColor` set, from the 
-predefined `FlexSchemeData` we got with the enum key from the map, to the `colors` property of the
-`FlexColorScheme.light` factory.
-
-Then we use `toTheme` to let the resulting `FlexColorScheme.light` object return the theme this factory defines, 
-that we finally assign to the `MaterialApp` `theme` property.
-
-The above may sound a bit complicated, but it is just one line of code:
-
-```dart
-theme: FlexColorScheme.light(colors: FlexColor.schemes[FlexScheme.mandyRed].light).toTheme,
-```
-
-For the dark theme we do the equivalent using the `FlexColorScheme.dark` factory and the `dark` version of the
-`FlexSchemeColor` that we have in our `FlexSchemeData` object from the `FlexColor.schemes` map via 
-the same `FlexScheme.mandyRed` key.
-
-```dart
-darkTheme: FlexColorScheme.dark(colors: FlexColor.schemes[FlexScheme.mandyRed].dark).toTheme,
-```
-
 We also set the app's `themeMode` property to `ThemeMode.system` so that the used device can control if the app 
 uses its light or dark theme, based on the device system setting for light and dark theme.
 
@@ -167,20 +145,26 @@ import of course. The modified MaterialApp from the Flutter default counter app 
     return MaterialApp(
       title: 'Flutter Demo',
       // The Mandy red light theme.
-      theme: FlexColorScheme.light(
-        colors: FlexColor.schemes[FlexScheme.mandyRed].light,
-      ).toTheme,
+      theme: FlexColorScheme.light(scheme: FlexScheme.mandyRed).toTheme,
       // The Mandy red dark theme.
-      darkTheme: FlexColorScheme.dark(
-        colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
-      ).toTheme,
+      darkTheme: FlexColorScheme.dark(scheme: FlexScheme.mandyRed).toTheme,
       // Use dark or light theme based on system setting.
       themeMode: ThemeMode.system,
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
 ```
 
-This gives us the following counter app look:
+> **NOTE:**  
+> Version 1.4.0 introduces a new easier and less verbose `scheme` convenience factory parameter. You can use it
+> if all you want to do is just use one of the built-in color schemes. The
+> previous way of using `colors` via `FlexColor.schemes` **map** with the `FlexScheme` enums as keys, works as before 
+> too, but is not needed for this simple use case. The `colors` parameter is used in the examples for custom schemes.
+> 
+> If both `scheme` and `colors` are defined, then `colors` takes precedence. If both are
+> undefined (null), then `scheme` defaults to `FlexScheme.material`, which defines the color scheme used in the 
+> [Material Design Guide](https://material.io/design/color/the-color-system.html#color-theme-creation).
+
+The above additions gives us the following counter app look:
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_counter_app.png?raw=true" alt="counter sample"/>
 
@@ -374,14 +358,14 @@ class _DemoAppState extends State<DemoApp> {
       // A light scheme, passed to FlexColorScheme.light factory, then use  
       // toTheme to return the resulting theme to the MaterialApp theme.
       theme: FlexColorScheme.light(
-        colors: FlexColor.schemes[usedFlexScheme].light,
+        scheme: usedFlexScheme,
         // Use comfortable on desktops instead of compact, devices use default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
       ).toTheme,
       // We do the same thing for the dark theme, but using FlexColorScheme.dark 
       // factory and the dark FlexSchemeColor in FlexColor.schemes.
       darkTheme: FlexColorScheme.dark(
-        colors: FlexColor.schemes[usedFlexScheme].dark,
+        scheme: usedFlexScheme,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
       ).toTheme,
       // Use the above dark or light theme, based on active themeMode 
@@ -457,6 +441,12 @@ To make a custom color scheme, we will for simplicity just define it as a consta
 We make a `FlexSchemeData` object with a name, description and scheme colors defined with
 `FlexSchemeColor` for the light and matching dark scheme. In this example we use dark purple and deep green 
 and matching desaturated versions for the dark scheme.
+
+We could also have stored the light and dark scheme in their own FlexSchemeColor objects, or even created them 
+directly in their respective `colors` parameter in the light and dark factories. However, since we will also use this
+information on the HomePage for the theme switch widget and to display the scheme name and description, putting them 
+in a FlexSchemeData object that contains both the light and dark scheme, plus its name and description, is a 
+convenient way to re-use the information.
 
 ```dart
 const FlexSchemeData customFlexScheme = FlexSchemeData(
@@ -1309,6 +1299,35 @@ Here is another difference example with the **Deep blue sea** scheme, when using
 a primary colored app bar in dark-mode.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad-true-black.png?raw=true" alt="ColorScheme example 5 true black" width="250"/>
+
+## Android Transparent System Navigation Bar
+
+Version 1.4.0 adds experimental support for transparent system navigation bar for Android for SDK >= 30. 
+The support is added via the new `opacity` parameter in `FlexColorScheme.themedSystemNavigationBar`. 
+A separate example that builds on example 5 for this more advanced use case, shows and explains how and when 
+transparent system navigation bar can be used in Android. 
+
+The example also shows how to manage it so that it looks as nice as possible when using primary color branded 
+background color, applied to the system navigation bar in Android, when transparency is not supported, and your 
+app uses transparent system navigation bar when running on an API level that supports it.
+
+Please see the separate small stand-alone example Android project called
+[**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for full details.
+
+With this experimental feature you can make an Android system navigation that looks like the left one below when 
+it is supported, but falls back to just being theme color branded, like the right one, on API levels that do not
+support it.
+
+The example below uses the classical system navigation bar with the navigation buttons, but it also works when
+the phone settings is changed to the much smaller gesture bar or on phones that don't even have a visible gesture
+bar. 
+
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/sysnavbar4.gif?raw=true" alt="System navbar transparent"/>
+
+>Please note that phones with API30 (Android 11), were when this was written (Jan 16, 2021) still very 
+>rare, and at the time did not even register on 
+>[**statcounter**](https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide). This
+> will improve over time.
 
 ## Behind the Scenes
 

@@ -171,25 +171,59 @@ void main() {
     // ---------------------------
 
     final FlexSchemeColor sc =
-        FlexSchemeColor.from(primary: FlexColor.materialDarkPrimary);
+        FlexSchemeColor.from(primary: FlexColor.materialLightPrimary);
 
     test(
-        'FCS1.00j: GIVEN a FlexColorScheme.light with nulls '
-        'EXPECT throws null assertion error.', () {
+        'FCS1.00j1: GIVEN a FlexColorScheme.light with null colors and null '
+        'scheme EXPECT FlexColorScheme.light with scheme Material.', () {
       expect(
-          () => FlexColorScheme.light(
-                colors: null,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
+        FlexColorScheme.light(
+          usedColors: 1,
+          surfaceStyle: FlexSurface.medium,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+        ),
+        FlexColorScheme.light(
+          scheme: FlexScheme.material,
+          usedColors: 1,
+          surfaceStyle: FlexSurface.medium,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+        ),
+      );
     });
     test(
-        'FCS1.00k: GIVEN a FlexColorScheme.light with nulls '
+        'FCS1.00j2: GIVEN a FlexColorScheme.light with colors sc and given '
+        'scheme EXPECT FlexColorScheme.light with colors sc and null scheme.',
+        () {
+      expect(
+        FlexColorScheme.light(
+          colors: sc,
+          scheme: FlexScheme.materialHc,
+          usedColors: 1,
+          surfaceStyle: FlexSurface.medium,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+        ),
+        FlexColorScheme.light(
+          colors: sc,
+          usedColors: 1,
+          surfaceStyle: FlexSurface.medium,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+        ),
+      );
+    });
+    test(
+        'FCS1.00k: GIVEN a FlexColorScheme.light with null usedColors '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.light(
@@ -204,7 +238,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00l: GIVEN a FlexColorScheme.light with nulls '
+        'FCS1.00l: GIVEN a FlexColorScheme.light with null surfaceStyle '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.light(
@@ -219,7 +253,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00m: GIVEN a FlexColorScheme.light with nulls '
+        'FCS1.00m: GIVEN a FlexColorScheme.light with null appBarStyle '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.light(
@@ -234,7 +268,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00n: GIVEN a FlexColorScheme.light with nulls '
+        'FCS1.00n: GIVEN a FlexColorScheme.light with null tabBarStyle '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.light(
@@ -249,8 +283,8 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00o: GIVEN a FlexColorScheme.light with nulls '
-        'EXPECT throws null assertion error.', () {
+        'FCS1.00o: GIVEN a FlexColorScheme.light with null '
+        'tooltipsMatchBackground EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.light(
                 colors: sc,
@@ -264,8 +298,8 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00p: GIVEN a FlexColorScheme.light with nulls '
-        'EXPECT throws null assertion error.', () {
+        'FCS1.00p: GIVEN a FlexColorScheme.light with null '
+        'transparentStatusBar EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.light(
                 colors: sc,
@@ -280,22 +314,56 @@ void main() {
     });
     // ---------------------------
     test(
-        'FCS1.00q: GIVEN a FlexColorScheme.dark with nulls '
-        'EXPECT throws null assertion error.', () {
+        'FCS1.00q1: GIVEN a FlexColorScheme.dark with null colors and null '
+        'scheme EXPECT FlexColorScheme.dark with scheme Material.', () {
       expect(
-          () => FlexColorScheme.dark(
-                colors: null,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
+        FlexColorScheme.dark(
+          usedColors: 1,
+          surfaceStyle: FlexSurface.medium,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+        ),
+        FlexColorScheme.dark(
+          scheme: FlexScheme.material,
+          usedColors: 1,
+          surfaceStyle: FlexSurface.medium,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+        ),
+      );
     });
     test(
-        'FCS1.00r: GIVEN a FlexColorScheme.dark with nulls '
+        'FCS1.00q2: GIVEN a FlexColorScheme.dark with colors sc and given '
+        'scheme EXPECT FlexColorScheme.dark with colors sc and null scheme.',
+        () {
+      expect(
+        FlexColorScheme.dark(
+          colors: sc,
+          scheme: FlexScheme.materialHc,
+          usedColors: 1,
+          surfaceStyle: FlexSurface.medium,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+        ),
+        FlexColorScheme.dark(
+          colors: sc,
+          usedColors: 1,
+          surfaceStyle: FlexSurface.medium,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+        ),
+      );
+    });
+    test(
+        'FCS1.00r: GIVEN a FlexColorScheme.dark with null usedColors '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.dark(
@@ -310,7 +378,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00s: GIVEN a FlexColorScheme.dark with nulls '
+        'FCS1.00s: GIVEN a FlexColorScheme.dark with null surfaceStyle '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.dark(
@@ -325,7 +393,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00t: GIVEN a FlexColorScheme.dark with nulls '
+        'FCS1.00t: GIVEN a FlexColorScheme.dark with null appBarStyle '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.dark(
@@ -340,7 +408,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00u: GIVEN a FlexColorScheme.dark with nulls '
+        'FCS1.00u: GIVEN a FlexColorScheme.dark with null tabBarStyle '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.dark(
@@ -355,8 +423,8 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00v: GIVEN a FlexColorScheme.dark with nulls '
-        'EXPECT throws null assertion error.', () {
+        'FCS1.00v: GIVEN a FlexColorScheme.dark with null '
+        'tooltipsMatchBackground EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.dark(
                 colors: sc,
@@ -370,8 +438,8 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00w: GIVEN a FlexColorScheme.dark with nulls '
-        'EXPECT throws null assertion error.', () {
+        'FCS1.00w: GIVEN a FlexColorScheme.dark with null '
+        'transparentStatusBar EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.dark(
                 colors: sc,
@@ -385,7 +453,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00x: GIVEN a FlexColorScheme.dark with nulls '
+        'FCS1.00x: GIVEN a FlexColorScheme.dark with null darkIsTrueBlack '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexColorScheme.dark(
