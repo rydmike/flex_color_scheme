@@ -458,10 +458,31 @@ class FlexColorScheme with Diagnosticable {
   /// [FlexSchemeColor.from], more detailed color schemes can also be defined.
   factory FlexColorScheme.light({
     /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
-    /// from. You can use predefined [FlexSchemeColor] values from
+    /// from.
+    ///
+    /// You can use predefined [FlexSchemeColor] values from
     /// [FlexColor.schemes] map or define your own colors with
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
-    @required FlexSchemeColor colors,
+    ///
+    /// For using built-in color schemed, the convenience shortcut to select
+    /// it with the `scheme` parameter is recommended and leaving `colors`
+    /// undefined. If both are specified the scheme colors defined by `colors`
+    /// are used. If both are null then `scheme` defaults to
+    /// [FlexScheme.material], thus defining the resulting scheme.
+    FlexSchemeColor colors,
+
+    /// A shortcut to use one of the built-in color schemes defined by
+    /// enum [FlexScheme].
+    ///
+    /// Just give it one of the enum values to use the scheme, like eg.
+    /// [FlexScheme.mandyRed].
+    ///
+    /// To create custom color schemes use the `colors` parameter. If both
+    /// `colors`and `scheme` are specified, the scheme defined by
+    /// `colors` is used. If both are null, then `scheme` defaults to
+    /// [FlexScheme.material], thus defining the resulting scheme.
+    ///
+    FlexScheme scheme,
 
     /// Defines which surface style to use.
     ///
@@ -639,7 +660,6 @@ class FlexColorScheme with Diagnosticable {
     Typography typography,
   }) {
     // LIGHT: Check valid inputs
-    assert(colors != null, 'Colors cannot be null');
     assert(usedColors != null, 'usedColors cannot be null');
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4');
     assert(surfaceStyle != null, 'surfaceStyle cannot be null');
@@ -652,8 +672,11 @@ class FlexColorScheme with Diagnosticable {
     assert(tooltipsMatchBackground != null,
         'tooltipsMatchBackground cannot be null');
     assert(transparentStatusBar != null, 'transparentStatusBar cannot be null');
+    // Fallback value for scheme is default material scheme.
+    scheme ??= FlexScheme.material;
+    // If colors was null, we used the scheme based value.
+    colors ??= FlexColor.schemesWithCustom[scheme].light;
     // Just in case null is passed in release mode, we use fallback values.
-    colors ??= FlexColor.schemesWithCustom[FlexScheme.material].light;
     usedColors ??= 4;
     surfaceStyle ??= FlexSurface.material;
     appBarStyle ??= FlexAppBarStyle.primary;
@@ -818,10 +841,31 @@ class FlexColorScheme with Diagnosticable {
   /// [FlexSchemeColor.from], more detailed color themes can also be defined.
   factory FlexColorScheme.dark({
     /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
-    /// from. You can use predefined [FlexSchemeColor] from
-    /// [FlexColor.schemes] or define your own colors with
+    /// from.
+    ///
+    /// You can use predefined [FlexSchemeColor] values from
+    /// [FlexColor.schemes] map or define your own colors with
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
-    @required FlexSchemeColor colors,
+    ///
+    /// For using built-in color schemed, the convenience shortcut to select
+    /// it with the `scheme` parameter is recommended and leaving `colors`
+    /// undefined. If both are specified the scheme colors defined by `colors`
+    /// are used. If both are null then `scheme` defaults to
+    /// [FlexScheme.material], thus defining the resulting scheme.
+    FlexSchemeColor colors,
+
+    /// A shortcut to use one of the built-in color schemes defined by
+    /// enum [FlexScheme].
+    ///
+    /// Just give it one of the enum values to use the scheme, like eg.
+    /// [FlexScheme.mandyRed].
+    ///
+    /// To create custom color schemes use the `colors` parameter. If both
+    /// `colors`and `scheme` are specified, the scheme defined by
+    /// `colors` is used. If both are null, then `scheme` defaults to
+    /// [FlexScheme.material], thus defining the resulting scheme.
+    ///
+    FlexScheme scheme,
 
     /// The number of the four main scheme colors to be used of the ones
     /// passed in via the required colors [FlexSchemeColor] property.
@@ -1005,7 +1049,6 @@ class FlexColorScheme with Diagnosticable {
     Typography typography,
   }) {
     // DARK: Check valid inputs
-    assert(colors != null, 'colors may not be null.');
     assert(usedColors != null, 'usedColors may not be null.');
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
     assert(surfaceStyle != null, 'surfaceStyle may not be null.');
@@ -1019,9 +1062,11 @@ class FlexColorScheme with Diagnosticable {
     assert(tooltipsMatchBackground != null,
         'tooltipsMatchBackground cannot be null');
     assert(transparentStatusBar != null, 'transparentStatusBar cannot be null');
-
+    // Fallback value for scheme is default material scheme.
+    scheme ??= FlexScheme.material;
+    // If colors was null, we used the scheme based value.
+    colors ??= FlexColor.schemesWithCustom[scheme].dark;
     // Just in case null is passed in release mode, we use fallback values.
-    colors ??= FlexColor.schemesWithCustom[FlexScheme.material].dark;
     usedColors ??= 4;
     surfaceStyle ??= FlexSurface.material;
     appBarStyle ??= FlexAppBarStyle.surface;
@@ -1269,6 +1314,9 @@ class FlexColorScheme with Diagnosticable {
       /// Use a divider line on the top edge of the system navigation bar.
       bool useDivider = true,
 
+      /// Opacity value for the system navigation bar
+      double opacity = 1,
+
       /// Brightness used if context is null, mostly used for testing.
       Brightness nullContextBrightness = Brightness.light,
 
@@ -1278,6 +1326,15 @@ class FlexColorScheme with Diagnosticable {
     // Use Brightness.light if it was forced to null for some reason.
     // ignore: parameter_assignments
     nullContextBrightness ??= Brightness.light;
+
+    // For the opacity validity checks and enforcement, we ignore parameter
+    // re-assignment lint rule.
+    // ignore: parameter_assignments
+    opacity ??= 1.0;
+    // ignore: parameter_assignments
+    if (opacity < 0) opacity = 0;
+    // ignore: parameter_assignments
+    if (opacity > 1) opacity = 1;
 
     // If context was null use nullContextBrightness as brightness value.
     final bool isDark = context != null
@@ -1302,7 +1359,7 @@ class FlexColorScheme with Diagnosticable {
     // could just as well just copy and use this overlay style directly in your
     // AnnotatedRegion if this does not produce the desired result.
     return SystemUiOverlayStyle(
-      systemNavigationBarColor: background,
+      systemNavigationBarColor: background.withOpacity(opacity),
       systemNavigationBarDividerColor: (useDivider ?? true)
           ? isDark
               ? const Color(0xFF2C2C2C)

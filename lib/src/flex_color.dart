@@ -521,7 +521,7 @@ class FlexColor {
 
   /// English description of the red theme.
   static const String redDescription = 'Red color theme, based on '
-      'Material red and pink colors';
+      'Material red and pink colors.';
 
   /// Red theme color for light primary color.
   static const Color redLightPrimary = Color(0xFFC62828); // red800

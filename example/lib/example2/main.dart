@@ -58,6 +58,11 @@ class _DemoAppState extends State<DemoApp> {
       // app and call .toTheme method to create the slightly opinionated theme
       // from the defined custom flex scheme data.
       theme: FlexColorScheme.light(
+        // You could also have stored the light scheme just in a
+        // FlexSchemeColor and used that, but we will use it also on the
+        // HomePage for the switch widget and to display its name, where we
+        // pass it as a FlexSchemeData object that contains both the light
+        // and dark scheme and its name and description.
         colors: customFlexScheme.light,
         // Use comfortable on desktops instead of compact, devices as default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,

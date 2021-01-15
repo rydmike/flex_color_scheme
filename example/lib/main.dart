@@ -54,7 +54,7 @@ class _DemoAppState extends State<DemoApp> {
       // Use a predefined light theme for the app and call .toTheme method
       // to create the slightly opinionated theme from the defined color scheme.
       theme: FlexColorScheme.light(
-        colors: FlexColor.schemes[usedFlexScheme].light,
+        scheme: usedFlexScheme,
         // Use comfortable on desktops instead of compact, devices use default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: AppFonts.mainFont,
@@ -63,7 +63,7 @@ class _DemoAppState extends State<DemoApp> {
       // FlexColorScheme.dark factory and the dark FlexSchemeColor in
       // FlexColor.schemes.
       darkTheme: FlexColorScheme.dark(
-        colors: FlexColor.schemes[usedFlexScheme].dark,
+        scheme: usedFlexScheme,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: AppFonts.mainFont,
       ).toTheme,

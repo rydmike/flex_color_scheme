@@ -1,6 +1,6 @@
 name: flex_color_scheme_example
 description: Five examples that demonstrate how to use the FlexColorScheme package.
-version: 1.3.0
+version: 1.4.0
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
@@ -11,7 +11,8 @@ dependencies:
   cupertino_icons: ^1.0.0
 
   # Color scheme package (by Mike Rydstrom, rydmike.com).
-  flex_color_scheme: any
+  flex_color_scheme:
+    path: ..\
 
   # The Flutter SDK (by Google flutter.dev).
   flutter:
