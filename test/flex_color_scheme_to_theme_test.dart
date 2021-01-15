@@ -26,8 +26,8 @@ void main() {
 
     test(
         'FCS7.00: GIVEN two FlexColorScheme.light made with identical '
-        'parameters EXPECT their ThemeData to bve equal.', () {
-      expect(tLv1, tLv1);
+        'parameters EXPECT their ThemeData to be equal.', () {
+      expect(tLv1, tLv2);
     });
 
     // themeLight = Default material light scheme colors.
