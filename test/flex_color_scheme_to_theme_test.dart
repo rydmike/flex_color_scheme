@@ -16,18 +16,86 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
     TestWidgetsFlutterBinding.ensureInitialized();
 
-    // ToTheme gives same ThemeData
-    final ThemeData tLv1 = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.material].light,
-    ).toTheme;
-    final ThemeData tLv2 = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.material].light,
-    ).toTheme;
+    test(
+        'FCS7.00aL: GIVEN two FlexColorScheme.light made with identical '
+        'parameters EXPECT their ThemeData to be equal.', () {
+      expect(
+          FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material].light,
+          ).toTheme,
+          FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material].light,
+          ).toTheme);
+    });
+    test(
+        'FCS7.00bL: GIVEN a FlexColorScheme.light made with no '
+        'parameters EXPECT ThemeData to be equal to one made with '
+        'scheme FlexScheme.material.', () {
+      expect(FlexColorScheme.light().toTheme,
+          FlexColorScheme.light(scheme: FlexScheme.material).toTheme);
+    });
+    test(
+        'FCS7.00cL: GIVEN a FlexColorScheme.light made with colors '
+        'material EXPECT ThemeData to be equal to one made with '
+        'scheme FlexScheme.material.', () {
+      expect(
+          FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material].light,
+          ).toTheme,
+          FlexColorScheme.light(
+            scheme: FlexScheme.material,
+          ).toTheme);
+    });
+    test(
+        'FCS7.00dL: GIVEN a FlexColorScheme.light made with scheme '
+        'material EXPECT ThemeData to be equal to one made with '
+        'no params.', () {
+      expect(
+          FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material].light,
+          ).toTheme,
+          FlexColorScheme.light().toTheme);
+    });
 
     test(
-        'FCS7.00: GIVEN two FlexColorScheme.light made with identical '
+        'FCS7.00aD: GIVEN two FlexColorScheme.dark made with identical '
         'parameters EXPECT their ThemeData to be equal.', () {
-      expect(tLv1, tLv2);
+      expect(
+          FlexColorScheme.dark(
+            colors: FlexColor.schemes[FlexScheme.material].dark,
+          ).toTheme,
+          FlexColorScheme.dark(
+            colors: FlexColor.schemes[FlexScheme.material].dark,
+          ).toTheme);
+    });
+    test(
+        'FCS7.00bD: GIVEN a FlexColorScheme.dark made with no '
+        'parameters EXPECT ThemeData to be equal to one made with '
+        'scheme FlexScheme.material.', () {
+      expect(FlexColorScheme.dark().toTheme,
+          FlexColorScheme.dark(scheme: FlexScheme.material).toTheme);
+    });
+    test(
+        'FCS7.00cD: GIVEN a FlexColorScheme.dark made with colors '
+        'material EXPECT ThemeData to be equal to one made with '
+        'scheme FlexScheme.material.', () {
+      expect(
+          FlexColorScheme.dark(
+            colors: FlexColor.schemes[FlexScheme.material].dark,
+          ).toTheme,
+          FlexColorScheme.dark(
+            scheme: FlexScheme.material,
+          ).toTheme);
+    });
+    test(
+        'FCS7.00dD: GIVEN a FlexColorScheme.dark made with scheme '
+        'material EXPECT ThemeData to be equal to one made with '
+        'no params.', () {
+      expect(
+          FlexColorScheme.dark(
+            colors: FlexColor.schemes[FlexScheme.material].dark,
+          ).toTheme,
+          FlexColorScheme.dark().toTheme);
     });
 
     // themeLight = Default material light scheme colors.
