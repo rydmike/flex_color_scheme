@@ -4,22 +4,31 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 
 ## [1.4.0] - January 16, 2021
 
-* Added convenience property `scheme` to FlexColorScheme factories light and dark. This is an optional shortcut for
-  just using one of the built-in color schemes. The `colors` property can still be used as before. The `.light` and
+* Added convenience property `scheme` to FlexColorScheme factories light and dark. This a shortcut for
+  using the built-in color schemes. The `colors` property can still be used as before. The `.light` and
   `.dark` factories no longer have any required parameters. If `scheme` is not provided it defaults 
   to `FlexScheme.material` and if both `scheme` and `colors` are provided, the scheme provided via `colors` prevail.
-* Added experimental support for transparent system navigation bar for Android for SDK >= 30. The support is added
-  via new `opacity` parameter in `FlexColorScheme.themedSystemNavigationBar`. A separate example that builds
+* Added experimental support for transparent system navigation bar for Android for SDK >= 30 (Android 11).
+  The support is added
+  via new `opacity` parameter in `FlexColorScheme.themedSystemNavigationBar`.    
+  
+  A separate example that builds
   on example 5, shows and explains how and when transparent system navigation bar can be used in Android. It also shows
-  how to manage it so that it looks as nice as possible when using primary color branded background color
+  how to design it so that it looks as nice as possible when using primary color branded background color
   applied to the system navigation bar in Android, when transparency is not supported, and your app also uses
-  transparent system navigation bar when running on API level that supports it. Please see a separate small stand-alone 
-  example Android project called 
+  transparent system navigation bar when running on API level that supports it. Please see separate small stand-alone 
+  example Android project  
   [**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for full details.    
-* Added more tests, now 515 tests. A bit more would still be nice, for the ThemeWidget at least.
-* Documentation: Removed the "back to contents" link after chapters. It worked fine on Github, but for some reason
-  not on pub.dev. Tried finding and adding comments for the 3 missing API comments needed to reach 100% API
-  documentation comments, not sure if it succeeded. I will see when the update is published.
+* Added more tests, now 632 tests. All color values used are now also tested, any modification to them is considered
+  a breaking change. A bit more tests would still be nice, for the ThemeModeSwitch Widget at least.
+* **Documentation:** 
+  * Changed example one, and the intro, to use the new simpler `scheme` property when using built-in schemes.
+  * Added a section that lists which sub-themes, and which of their properties, are NOT null when creating a theme data 
+    object with FlexColorScheme.toTheme.  
+  * Removed the "back to contents" link after chapters. It worked fine on Github, but for some reason
+    not on pub.dev
+  * Tried finding and adding comments for the 3 missing API comments needed to reach 100% API
+    documentation comments, not sure if it succeeded. I will see when the update is published.
    
 
 ## [1.3.0] - January 7, 2021

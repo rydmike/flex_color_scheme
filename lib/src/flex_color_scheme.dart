@@ -1595,7 +1595,7 @@ class FlexColorScheme with Diagnosticable {
   ///    See issue: https:///github.com/flutter/flutter/issues/65663
   ///    The `ChipThemeData` modification used here fixes the issue.
   ///
-  ///  * The `FloatingActionButtonThemeData` is set as follows:
+  ///  * The `floatingActionButtonTheme` is set as follows:
   ///    ```dart
   ///    FloatingActionButtonThemeData(
   ///      backgroundColor: colorScheme.secondary,
