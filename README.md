@@ -37,10 +37,10 @@ For more information about **FlexColorScheme**, its background and use cases, th
   - [Example 3 - Switch Between Different Color Schemes](#example-3---switch-between-different-color-schemes)
   - [Example 4 - Switch Between Built-in Color Schemes and Custom Ones](#example-4---switch-between-built-in-color-schemes-and-custom-ones)
   - [Example 5 - Full Featured Demo](#example-5---full-featured-demo)
-    - [Equivalent Setup for the Dark Theme, but with More Options](#example-5---equivalent-setup-for-the-dark-theme-but-with-more-options)
-    - [Local State and Setup](#example-5---local-state-and-setup)  
+    - [Local State and Setup](#example-5---local-state-and-setup)
     - [FlexColorScheme Parameters and toTheme](#example-5---the-flexcolorscheme-parameters-and-totheme)  
     - [FlexColorScheme Parameters and toScheme](#example-5---the-flexcolorscheme-parameters-and-toscheme)  
+    - [Equivalent Setup for the Dark Theme, but with More Options](#example-5---equivalent-setup-for-the-dark-theme-but-with-more-options)    
     - [Passing All the Values Back and Forth to the HomePage](#example-5---passing-all-the-values-back-and-forth-to-the-homepage)
     - [Themed System Navigation Bar in Android](#example-5---themed-system-navigation-bar-in-android)
     - [Building the Example](#example-5---building-the-example)
@@ -169,7 +169,7 @@ benefit from FlexColorScheme's capabilities.
 No, current predefined schemes will not be changed. Changing them would be a breaking change to the package
 version promise. Sure, the scheme colors could in theory be changed by releasing a new major version 
 that break past scheme color definitions. At the moment, there are no plans to ever add breaking releases to just 
-change a predefined scheme's color(s). All current color definition values are also included in the package tests and
+change a predefined scheme's color(s). All current color definition values are also included in the package tests, and
 a failed color value test is considered a breaking change.
 
 #### Can We Add This Scheme?
@@ -615,7 +615,7 @@ theme properties.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2bl.png?raw=true" alt="ColorScheme example 2b light" width="250"/></nb></nb><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex2cl.png?raw=true" alt="ColorScheme example 2c light" width="250"/>
 
-## Example 3 - Switch between different color schemes
+## Example 3 - Switch Between Different Color Schemes
 
 This example shows how you can use three built-in color schemes, add a custom scheme and then use all four as
 selectable `FlexColorScheme` based theme options in an application. The example also uses strong branded surface
@@ -1101,20 +1101,22 @@ different defaults for the used typography. To fix this, we use the same nicer a
 by default by FlexColorScheme based themes. We also add the visual density to 
 the ThemeData with the same `copyWith` so we get the same Widget spacing as the one used in out `toTheme` setup. 
 
->**IMPORTANT**  
+**IMPORTANT**  
 When using FlexColorScheme and making themes with it, you would normally **NOT USE THE ABOVE toScheme APPROACH**.
 It is **ONLY** included in this example to be able to demonstrate the theme adjustments provided by 
 `FlexColorScheme.toTheme`. That being said, it is as shown totally possible to do so if you for some reason prefer
-the results with the `toScheme` approach. By doing so you do however loose many of the features
-offered by FlexColorScheme. You can see an example visual comparison and presentation of the
+the results with the `toScheme` approach. By doing so you do however loose most of the end results and features
+offered by `FlexColorScheme`. You can see an example visual comparison and presentation of the
 [**differences here**](https://rydmike.com/colorscheme#the-difference).
 
-The `FlexColorScheme.light` parameters `appBarStyle`, `appBarElevation`, `tabBarStyle`, 
-`tooltipsMatchBackground` and `visualDensity` actually have
-no impact on the returned `ColorScheme` by `toScheme` as it can only return colors in a `ColorScheme`, that of course 
-have no such theming concepts. Defining these values above could just as well be removed, but they were left in 
-there to demonstrate that for this with FlexColorScheme not recommended theme defintion method, they have no impact
-on the end result. Only parameters that adjust color, like `colors`, `scheme`, `surfaceStyle`, 
+The used `FlexColorScheme.light` parameters `appBarStyle`, `appBarElevation`, `tabBarStyle`, 
+`tooltipsMatchBackground` and `visualDensity` in the example above, actually have
+no impact at all on the returned `ColorScheme` by `toScheme`. It can only return colors in a `ColorScheme`, 
+that of course have no such theming concepts. Definition of these values above could just as well be removed in the
+above example, but they were left in there to demonstrate that for this NOT recommended FlexColorScheme theme 
+definition method, they have no impact on the end result. Only parameters that adjust scheme colors, 
+like `colors`, `scheme`, `surfaceStyle` and `usedColors` will have an impact on the `toScheme` 
+returned by **FlexColorScheme**.
 
 ### Example 5 - Equivalent Setup for the Dark Theme, but with More Options
 
@@ -1128,15 +1130,6 @@ toDark scheme will ignore any existing light scheme error color definition, and 
 error color as its error color. Without this modifier, toDark will also compute the error color for the
 dark scheme from the light scheme's error color. It will thus also change with the level adjustment.
 This is certainly also a usable option, but in this example we do not want this behavior.
-
-> The `defaultError` modifier creates a new copy of the object, where `error` color is null.
-> This causes the `toDark` method to skip it and keep it as null, it then gets the default Material error via
-> the `toTheme` method. For the custom `FlexSchemeColor` objects we made for example 4 and 5 we did not specify
-> any error color, so they are already `null` and get the default fixed Material error in dark mode anyway.
-> However, the built-in schemes do specify their error color for both their light and dark schemes, mostly they use
-> the same Material default error color, but some red colored schemes use the high contrast Material error
-> color. Because the light error color is defined, if we do not want `toDark` to compute a dark scheme error color that
-> changes with the level, we can modify its value to null before `toDark` is used.
 
 ```dart
      darkTheme: useToThemeMethod
@@ -1173,6 +1166,16 @@ This is certainly also a usable option, but in this example we do not want this 
            ),
          ),
 ```
+
+> **What does defaultError actually do?**  
+> The `defaultError` modifier creates a new copy of the object, where `error` color is null.
+> This causes the `toDark` method to skip it and keep it as null, it then gets the default Material error via
+> the `toTheme` method. For the custom `FlexSchemeColor` objects we made for example 4 and 5, we did not specify
+> any error color, so they are already `null` and get the default fixed Material error in dark mode anyway.
+> However, the built-in schemes do specify their error color for both their light and dark schemes, mostly they use
+> the same Material default error color, but some red colored schemes use the high contrast Material error
+> color. Because the light error color is defined, if we do not want `toDark` to compute a dark scheme error color that
+> changes with the level, we can modify its value to null before `toDark` is used.
 
 ### Example 5 - Passing All the Values Back and Forth to the HomePage
 
