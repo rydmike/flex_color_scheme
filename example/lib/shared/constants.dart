@@ -2,8 +2,11 @@
 // to understand how to use the FlexColorScheme package demonstrated in
 // the examples.
 
-// Layout constants and strings used in the example application
+/// Layout constants and strings used in the example application
 class AppConst {
+  // This class is not meant to be instantiated or extended; this constructor
+  // prevents instantiation and extension.
+  // ignore: unused_element
   AppConst._();
 
   // This info is mainly for the Live public web builds of the examples.
@@ -41,6 +44,9 @@ class AppConst {
 
 /// Fonts assets used in this application,
 class AppFonts {
+  // This class is not meant to be instantiated or extended; this constructor
+  // prevents instantiation and extension.
+  // ignore: unused_element
   AppFonts._();
 
   // We use usage specific terms like mainFont and logoFont in the code,

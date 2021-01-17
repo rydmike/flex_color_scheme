@@ -501,10 +501,17 @@ void main() {
       secondaryVariant: FlexColor.materialDarkSecondaryVariant,
     );
 
+    // Identity and equality tests
+
+    test(
+        'FCS1.01a: GIVEN the same FlexColorScheme objects '
+        'EXPECT them to have equality', () {
+      expect(m1, equals(m1));
+    });
     test(
         'FCS1.01a: GIVEN two identical FlexColorScheme objects '
         'EXPECT them to have equality', () {
-      expect(m1, m2);
+      expect(m1, equals(m2));
     });
     test(
         'FCS1.01b: GIVEN two identical FlexColorScheme objects '
@@ -589,19 +596,105 @@ void main() {
         ),
       );
     });
+
+    //**************************************************************************
+    // FlexColorScheme unit tests.
+    //
+    // toString and hashcode.
+    //**************************************************************************
+
+    final FlexColorScheme m5 = FlexColorScheme(
+      brightness: Brightness.light,
+      primary: FlexColor.materialLightPrimary,
+      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      secondary: FlexColor.materialLightSecondary,
+      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: FlexColor.materialLightError,
+      scaffoldBackground: FlexColor.materialLightBackground,
+      appBarBackground: FlexColor.materialLightPrimary,
+      accentColor: FlexColor.materialLightSecondary,
+      onPrimary: Colors.white,
+      onSecondary: Colors.black,
+      onSurface: Colors.black,
+      onBackground: Colors.black,
+      onError: Colors.white,
+      visualDensity: VisualDensity.standard,
+      fontFamily: 'Roboto',
+      platform: TargetPlatform.android,
+      typography: Typography.material2018(),
+    );
+
     test(
-        'FCS1.06: Test toString implemented via debugFillProperties '
+        'FCS1.06a: Test toString implemented via debugFillProperties '
         'EXPECT working data print.', () {
-      expect(m1.toString().length, greaterThan(15));
+      expect(m5.toString().length, greaterThan(15));
     });
+    // test(
+    //     'FCS1.06b: Test toString implemented via debugFillProperties '
+    //     'EXPECT exact print string value.', () {
+    //   expect(
+    //       m5.toString(),
+    //       // ignore: lines_longer_than_80_chars
+    //       'FlexColorScheme#b4088(brightness: light, primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), surface: Color(0xffffffff), background: Color(0xffffffff), error: Color(0xffb00020), scaffoldBackground: Color(0xffffffff), appBarBackground: Color(0xff6200ee), accentColor: null, onPrimary: Color(0xffffffff), onSecondary: Color(0xff000000), onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff), tabBarStyle: forAppBar, appBarElevation: 0.0, bottomAppBarElevation: 0.0, tooltipsMatchBackground: false, transparentStatusBar: true, visualDensity: 0, v: 0.0), fontFamily: Roboto, platform: android, typography: null)');
+    // });
     test(
-        'FCS1.07: Test toStringShort implemented via debugFillProperties '
+        'FCS1.07a: Test toStringShort implemented via debugFillProperties '
         'EXPECT working data print.', () {
-      expect(m1.toStringShort().length, greaterThan(10));
+      expect(m5.toStringShort().length, greaterThan(10));
     });
-    test('FCS1.08: Test hashCode.', () {
-      expect(m1.hashCode, isNotNull);
+    test('FCS1.08a: Test hashCode has value.', () {
+      expect(m5.hashCode, isNotNull);
     });
+
+    // TODO: This is strange, why is the hashCode result different on new runs?
+    // The hashCode should imo remain the same when using same algorithm on same
+    // data over multiple runs. It does with other objects, but not this one.
+    // Is it the usage fo the list version? If I change it to ^ operator
+    // does it work then? In Flutter ThemeData uses the hashcode operator I
+    // used here, but I have seen some issue mentioned with ThemeData copies.
+    // could it be related? Investigate!
+    // I tested with standard .hashCode ^ hash algo, same result on this object.
+    // I also experimented with Flutter ThemeData and ColorScheme, they also
+    // change hashcode between runs! So i guess that is OK then...
+    //
+    // Since this test is not statically repeatable with a fixed hasCode, it
+    // also seems to result in that the toSring and toStringShort methods via
+    // debugFillProperties are not either since they contain some hasHcode hex
+    // object ID as well.
+    //
+    // test('FCS1.08b: Test hashCode exact value.', () {
+    //   expect(m5.hashCode, 3464563086);
+    // });
+    test('FCS1.08c: Test hashCode copyWith has exact same value.', () {
+      expect(m5.hashCode, equals(m5.copyWith().hashCode));
+    });
+
+    // HashCode experiments with ThemeData and ColorScheme below
+    //
+    // final ThemeData mTd1 =
+    //     ThemeData.from(colorScheme: const ColorScheme.dark());
+    // final ThemeData mTd2 =
+    //     ThemeData.from(colorScheme: const ColorScheme.dark());
+    // test(
+    //     'FCS1.08b: Test ThemeData hashCode ${mTd1.hashCode} '
+    //     'exact value.', () {
+    //   expect(mTd1.hashCode, 165713125);
+    // });
+    // test('FCS1.08b: Test ThemeData hashCode exact value.', () {
+    //   expect(mTd1.hashCode, mTd2.hashCode);
+    // });
+    //
+    // const ColorScheme mCs1 = ColorScheme.dark();
+    // const ColorScheme mCs2 = ColorScheme.dark();
+    // test('FCS1.08b: Test ColorScheme hashCode ${mCs1.hashCode} exact value.',
+    //     () {
+    //   expect(mCs1.hashCode, 160966695);
+    // });
+    // test('FCS1.08b: Test ColorScheme hashCode exact value.', () {
+    //   expect(mCs1.hashCode, mCs2.hashCode);
+    // });
   });
 
   //****************************************************************************
@@ -960,6 +1053,87 @@ void main() {
         ),
         const SystemUiOverlayStyle(
           systemNavigationBarColor: Color(0xFF202020),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+    test(
+        'FCS5.07: GIVEN Brightness.dark divider:false + defined color '
+        '+ opacity > 1 EXPECT defined colored system navbar, with NO divider '
+        'and NO opacity.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          useDivider: false,
+          opacity: 100,
+          nullContextBrightness: Brightness.dark,
+          nullContextBackground: const Color(0xFF202020),
+        ),
+        const SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0xFF202020),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+    test(
+        'FCS5.07: GIVEN Brightness.dark divider:true + defined color '
+        '+ opacity = 1 EXPECT defined colored system navbar, with divider '
+        'and NO opacity.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          // ignore: avoid_redundant_argument_values
+          useDivider: true,
+          // ignore: avoid_redundant_argument_values
+          opacity: 1,
+          nullContextBrightness: Brightness.dark,
+          nullContextBackground: const Color(0xFF202020),
+        ),
+        const SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0xFF202020),
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+    test(
+        'FCS5.08: GIVEN Brightness.dark divider:true + defined color '
+        '+ opacity = 0 EXPECT fully transparent defined colored system '
+        'navbar, with divider .', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          // ignore: avoid_redundant_argument_values
+          useDivider: true,
+          // ignore: avoid_redundant_argument_values
+          opacity: 0,
+          nullContextBrightness: Brightness.dark,
+          nullContextBackground: const Color(0xFF202020),
+        ),
+        const SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0x00202020),
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+    test(
+        'FCS5.09: GIVEN Brightness.dark divider:true + defined color '
+        '+ opacity < 0 EXPECT fully transparent defined colored system '
+        'navbar, with divider .', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          // ignore: avoid_redundant_argument_values
+          useDivider: true,
+          // ignore: avoid_redundant_argument_values
+          opacity: -10.1,
+          nullContextBrightness: Brightness.dark,
+          nullContextBackground: const Color(0xFF202020),
+        ),
+        const SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0x00202020),
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
         ),
       );

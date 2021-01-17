@@ -94,13 +94,20 @@ void main() {
       background: Color(0xFFCCCCCC),
       scaffoldBackground: Color(0xFFAAAAAA),
     );
+
+    // Identity and equality tests
     test(
-        'FSSC1.01a: GIVEN two identical FlexSchemeSurfaceColors objects '
-        'EXPECT them to have equality', () {
-      expect(m1, m2);
+        'FSSC1.01a: GIVEN the same FlexSchemeSurfaceColor object '
+        'EXPECT them to have identity', () {
+      expect(m1, equals(m1));
     });
     test(
         'FSSC1.01b: GIVEN two identical FlexSchemeSurfaceColors objects '
+        'EXPECT them to have equality', () {
+      expect(m1, equals(m2));
+    });
+    test(
+        'FSSC1.01c: GIVEN two identical FlexSchemeSurfaceColors objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
     });
@@ -337,21 +344,44 @@ void main() {
         ),
       );
     });
+
+    //**************************************************************************
+    // FlexSchemeSurfaceColors unit tests.
+    //
+    // toString and hashcode.
+    //**************************************************************************
+
     test(
-        'FSSC1.16: Test toString implemented via debugFillProperties '
+        'FSSC1.16a: Test toString implemented via debugFillProperties '
         'EXPECT working data print.', () {
+      expect(m1.toString().length, greaterThan(15));
+    });
+    test(
+        'FSSC1.16b: Test toString implemented via debugFillProperties '
+        'EXPECT exact print string', () {
       expect(
           m1.toString(),
           // ignore: lines_longer_than_80_chars
           'FlexSchemeSurfaceColors#4228a(surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff))');
     });
     test(
-        'FSSC1.17: Test toStringShort implemented via debugFillProperties '
+        'FSSC1.17a: Test toStringShort implemented via debugFillProperties '
         'EXPECT working data print.', () {
+      expect(m1.toStringShort().length, greaterThan(10));
+    });
+    test(
+        'FSSC1.17b: Test toStringShort implemented via debugFillProperties '
+        'EXPECT exact short printout string', () {
       expect(m1.toStringShort(), 'FlexSchemeSurfaceColors#4228a');
     });
-    test('FSSC1.18: Test hashCode.', () {
+    test('FSSC1.18a: Test hashCode has value.', () {
+      expect(m1.hashCode, isNotNull);
+    });
+    test('FSSC1.18b: Test hashCode exact value.', () {
       expect(m1.hashCode, 107225738);
+    });
+    test('FSSC1.18c: Test hashCode copyWith has same exact value.', () {
+      expect(m1.hashCode, equals(m1.copyWith().hashCode));
     });
   });
 }

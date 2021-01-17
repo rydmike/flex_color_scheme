@@ -22,7 +22,7 @@ void main() {
     });
 
     test(
-        'FSC1.00b: GIVEN a FlexSchemeColo with null values '
+        'FSC1.00b: GIVEN a FlexSchemeColor with null values '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeColor(
@@ -111,13 +111,19 @@ void main() {
     final FlexSchemeColor mFrom = FlexSchemeColor.from(
       primary: FlexColor.materialLightPrimary,
     );
+    // Identity and equality tests
     test(
-        'FSC1.01a: GIVEN two identical FlexSchemeColor objects '
-        'EXPECT them to have equality', () {
-      expect(m1, m2);
+        'FSC1.01a: GIVEN same FlexSchemeColor objects '
+        'EXPECT them to have identity', () {
+      expect(m1, equals(m1));
     });
     test(
         'FSC1.01b: GIVEN two identical FlexSchemeColor objects '
+        'EXPECT them to have equality', () {
+      expect(m1, equals(m2));
+    });
+    test(
+        'FSC1.01c: GIVEN two identical FlexSchemeColor objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
     });
@@ -238,18 +244,43 @@ void main() {
           ));
     });
 
+    //**************************************************************************
+    // FlexSchemeColor unit tests.
+    //
+    // toString and hashcode.
+    //**************************************************************************
+
     test(
-        'FSC1.12: Test toString implemented via debugFillProperties '
+        'FSC1.12a: Test toString implemented via debugFillProperties '
         'EXPECT working data print.', () {
       expect(m1.toString().length, greaterThan(15));
     });
     test(
-        'FSC1.13: Test toStringShort implemented via debugFillProperties '
+        'FSC1.12b: Test toString implemented via debugFillProperties '
+        'EXPECT exact print string', () {
+      expect(
+          m1.toString(),
+          // ignore: lines_longer_than_80_chars
+          'FlexSchemeColor#1b048(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), accentColor: null, error: Color(0xffb00020))');
+    });
+    test(
+        'FSC1.13a: Test toStringShort implemented via debugFillProperties '
         'EXPECT working data print.', () {
       expect(m1.toStringShort().length, greaterThan(10));
     });
-    test('FSC1.14: Test hashCode.', () {
+    test(
+        'FSC1.13b: Test toStringShort implemented via debugFillProperties '
+        'EXPECT exact short printout string.', () {
+      expect(m1.toStringShort(), 'FlexSchemeColor#1b048');
+    });
+    test('FSC1.14a: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
+    });
+    test('FSC1.14b: Test hashCode exact value.', () {
+      expect(m1.hashCode, 209825864);
+    });
+    test('FSC1.14c: Test hashCode copyWith has same exact value.', () {
+      expect(m1.hashCode, equals(m1.copyWith().hashCode));
     });
   });
 }
