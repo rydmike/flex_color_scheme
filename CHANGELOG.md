@@ -9,27 +9,24 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   `.dark` factories no longer have any required parameters. If `scheme` is not provided it defaults 
   to `FlexScheme.material` and if both `scheme` and `colors` are provided, the scheme provided via `colors` prevail.
 * Added experimental support for transparent system navigation bar for Android for SDK >= 30 (Android 11).
-  The support is added
-  via new `opacity` parameter in `FlexColorScheme.themedSystemNavigationBar`.    
+  The support is added via new `opacity` parameter in `FlexColorScheme.themedSystemNavigationBar`.    
   
   A separate example that builds
   on example 5, shows and explains how and when transparent system navigation bar can be used in Android. It also shows
-  how to design it so that it looks as nice as possible when using primary color branded background color
-  applied to the system navigation bar in Android, when transparency is not supported, and your app also uses
-  transparent system navigation bar when running on API level that supports it. Please see separate small stand-alone 
-  example Android project  
-  [**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for full details.    
+  how to design it so that it looks nice when using primary color branded background color applied to the system 
+  navigation bar in Android, when transparency is not supported, and your app uses transparent system navigation 
+  bar when running on an API level that supports it. Please see this separate small stand-alone example Android project
+  [**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for more information.    
 * Added more tests, now 632 tests. All color values used are now also tested, any modification to them is considered
   a breaking change. A bit more tests would still be nice, for the ThemeModeSwitch Widget at least.
 * **Documentation:** 
-  * Changed example one, and the intro, to use the new simpler `scheme` property when using built-in schemes.
+  * Changed example one and the intro, to use the new simpler `scheme` property when using built-in schemes.
   * Added a section that lists which sub-themes, and which of their properties, are NOT null when creating a theme data 
     object with FlexColorScheme.toTheme.  
-  * Removed the "back to contents" link after chapters. It worked fine on Github, but for some reason
-    not on pub.dev
+  * Removed the "back to contents" link after each chapter. It was nice and worked fine on Github, but for some reason
+    it did not on pub.dev.
   * Tried finding and adding comments for the 3 missing API comments needed to reach 100% API
     documentation comments, not sure if it succeeded. I will see when the update is published.
-   
 
 ## [1.3.0] - January 7, 2021
 
@@ -164,7 +161,7 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - Version 2.0.0-nullsafety.1: Add first null safe version.
 - Version 2.0.0-nullsafety.2: Add some minor new APIs and features (maybe). 
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
-- Version 2.0.1 Write more widget tests.
+- Version 2.0.1 Improve the tests further, after or together with the null-safe version.
 - Version 2.1.0 Release more color schemes. Making schemes is fun, documenting the changes a bit less so.
 - Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable channel. 
   See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206. Will not impact
@@ -187,6 +184,9 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - API to opt-out from one-toned AppBar and return it to Android's default two-toned.
 - API to assist with themed annotated region for system navigation bar theming.
 - Version 1.3.0: Added 195 unit and widgets tests, mostly unit tests.
+- Version 1.4.0: Increased unit and widget test to 632 tests. All color definitions are now also tested to ensure 
+  they will not be changed by any accidental edit. Test coverage is higher than 95%, certainly sufficient for this 
+  type of package, but there are still some areas that could and will be improved.
 
 ### MAYBE
 - **Companion Web App**  
