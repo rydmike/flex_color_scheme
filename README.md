@@ -53,7 +53,8 @@ For more information about **FlexColorScheme**, its background and use cases, th
   - [Behind the Scenes](#behind-the-scenes)
     - [None Null Sub-Themes](#none-null-sub-themes)
     - [ThemeData Default Modifications](#themedata-default-modifications)
-
+  - [Appendix A - Built-in Scheme Reference](#appendix-a---built-in-scheme-reference)
+  
 ## Introduction
 
 When you design Flutter applications you should base the colors of your application on a light theme mode
@@ -117,7 +118,9 @@ find [**high resolution images**](https://rydmike.com/colorscheme#built-in-color
 Another convenient and recommended way to see and try all the predefined color schemes is by using the live Web
 versions of the package [example 4](https://rydmike.com/flexcolorscheme4) or 
 [example 5](https://rydmike.com/flexcolorscheme4), where you can try all the built-in color schemes and see 
-the impact they have on often used Flutter widgets.
+the impact they have on often used Flutter widgets. In [Appendix A](#appendix-a---built-in-scheme-reference) you
+can find a table listing all the built-in schemes, their `FlexScheme` enum value, name and description, plus
+links to the high-resoltuion images of each color scheme.
 
 The built-in color schemes are all tuned matching light and dark scheme pairs. Most of them are pretty conservative,
 but some are intentionally a bit more playful and bold. The first two color schemes are actually
@@ -1104,7 +1107,7 @@ the ThemeData with the same `copyWith` so we get the same Widget spacing as the 
 **IMPORTANT**  
 When using FlexColorScheme and making themes with it, you would normally **NOT USE THE ABOVE toScheme APPROACH**.
 It is **ONLY** included in this example to be able to demonstrate the theme adjustments provided by 
-`FlexColorScheme.toTheme`. That being said, it is as shown totally possible to do so if you for some reason prefer
+`FlexColorScheme.toTheme`. That being said, it is as shown totally possible to do so if you for some reasons prefer
 the results with the `toScheme` approach. By doing so you do however loose most of the end results and features
 offered by `FlexColorScheme`. You can see an example visual comparison and presentation of the
 [**differences here**](https://rydmike.com/colorscheme#the-difference).
@@ -1916,3 +1919,34 @@ are, as well as the rationale behind the made design choices and changes to the 
     a correctly colored theme colored background for the active theme.
     See [example 5](#example-5-full-featured-demo) for an explanation
     on how to use this.
+
+## Appendix A - Built-in Scheme Reference
+
+This table lists all current built-in schemes and provides a link a high resoltuion image of each one.
+
+| FlexScheme   | Name                   | Description | Light | Dark |
+| ----         | ----                   | ----        | ----  | ---- |
+| material     | Material default       | Default Material color theme, used in the design guide. | [Light](https://rydmike.com/assets/LightScheme001.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme001.png?raw=true) |
+| materialHc   | Material high contrast | High contrast Material design guide theme. | [Light](https://rydmike.com/assets/LightScheme002.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme002.png?raw=true) |
+| blue         | Blue delight           | Blue color theme, based on Material blue and light blue colors. | [Light](https://rydmike.com/assets/LightScheme003.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme003.png?raw=true) |
+| indigo       | Indigo nights          | Indigo color theme, based on Material indigo and deep purple colors. | [Light](https://rydmike.com/assets/LightScheme004.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme004.png?raw=true) |
+| hippieBlue   | Hippie blue            | Hippie blue with surfie green and chock coral pink theme. | [Light](https://rydmike.com/assets/LightScheme005.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme005.png?raw=true) |
+| aquaBlue     | Aqua blue              | Aqua tropical ocean blue theme. | [Light](https://rydmike.com/assets/LightScheme006.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme006.png?raw=true) |
+| brandBlue    | Brand blues            | Blue colors used in well known brand themes. | [Light](https://rydmike.com/assets/LightScheme007.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme007.png?raw=true) |
+| deepBlue     | Deep blue sea          | Dark deep blue sea color theme. | [Light](https://rydmike.com/assets/LightScheme008.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme008.png?raw=true) |
+| sakura       | Pink sakura            | Pink color theme, based on sakura cherry blossom like colors. | [Light](https://rydmike.com/assets/LightScheme009.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme009.png?raw=true) |
+| mandyRed     | Oh Mandy red           | Mandy red and Viking blue inspired red theme. | [Light](https://rydmike.com/assets/LightScheme010.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme010.png?raw=true) |
+| red          | Red tornado            | Red color theme, based on Material red and pink colors. | [Light](https://rydmike.com/assets/LightScheme011.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme011.png?raw=true) |
+| redWine      | Red red wine           | Red color theme, based on red wine like colors. | [Light](https://rydmike.com/assets/LightScheme012.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme012.png?raw=true) |
+| purpleBrown  | Purple brown           | Purple brown tinted aubergine and eggplant colored theme. | [Light](https://rydmike.com/assets/LightScheme013.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme013.png?raw=true) |
+| green        | Green forest           | Green color theme, based on Material green and cyan colors. | [Light](https://rydmike.com/assets/LightScheme014.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme014.png?raw=true) |
+| money        | Green money            | Green money and finance style color theme. | [Light](https://rydmike.com/assets/LightScheme015.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme015.png?raw=true) |
+| jungle       | Green jungle           | Green jungle and rain forest color theme. | [Light](https://rydmike.com/assets/LightScheme016.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme016.png?raw=true) |
+| greyLaw      | Grey law               | Material blue grey and ultra dark purple color theme, law firm style.  | [Light](https://rydmike.com/assets/LightScheme017.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme017.png?raw=true) |
+| wasabi       | Willow and wasabi      | Wild Willow and wasabi green with orchid purple inspired colors. | [Light](https://rydmike.com/assets/LightScheme018.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme018.png?raw=true) |
+| gold         | Gold sunset            | Gold sunset color theme, based on orange like colors. | [Light](https://rydmike.com/assets/LightScheme019.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme019.png?raw=true) |
+| mango        | Mango mojito           | Orange and green Mango mojito color theme.  | [Light](https://rydmike.com/assets/LightScheme020.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme020.png?raw=true) |
+| amber        | Amber blue             | Amber blaze and blue color theme, based on Material amber and blue accent colors. | [Light](https://rydmike.com/assets/LightScheme021.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme021.png?raw=true)|
+| vesuviusBurn | Vesuvius burned        | Vesuvius burned orange and eden green theme. | [Light](https://rydmike.com/assets/LightScheme022.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme022.png?raw=true) |
+| deepPurple   | Deep purple            | Deep purple daisy bush theme, based on Material deepPurple and lightBlueAccent colors. | [Light](https://rydmike.com/assets/LightScheme023.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme023.png?raw=true)|
+| ebonyClay    | Ebony clay             | Ebony clay dark blue-grey and watercourse green colored theme. | [Light](https://rydmike.com/assets/LightScheme024.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme024.png?raw=true) |
