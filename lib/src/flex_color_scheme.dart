@@ -2610,7 +2610,9 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     /// Primary color to blend into surface colors when ThemeSurface light,
     /// medium, strong and heavy are used. Is not used for and not required
     /// for Material or custom surface style.
-    /// Defaults to [FlexColor.materialLightPrimary].
+    ///
+    /// Defaults to [FlexColor.materialLightPrimary] if brightness is light,
+    /// otherwise defaults to [FlexColor.materialDarkPrimary].
     Color primary = FlexColor.materialLightPrimary,
 
     /// Old parameter name for the style of the used surfaces colors.
@@ -2622,12 +2624,21 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   }) {
     assert(brightness != null, 'Brightness may not be null.');
     assert(surfaceStyle != null, 'ThemeSurface may not be null.');
-    assert(
-        (surfaceStyle != FlexSurface.material ||
-                surfaceStyle != FlexSurface.custom) &&
-            primary != null,
-        'When themeSurface is something else than material or custom, then '
-        'primary color may not be null.');
+    // assert(
+    //     (surfaceStyle != FlexSurface.material ||
+    //             surfaceStyle != FlexSurface.custom) &&
+    //         primary == null,
+    //     'When surfaceStyle is something else than material or custom, then '
+    //     'primary color may not be null.');
+
+    // assert(
+    //     (surfaceStyle == FlexSurface.light ||
+    //             surfaceStyle == FlexSurface.medium ||
+    //             surfaceStyle == FlexSurface.strong ||
+    //             surfaceStyle == FlexSurface.heavy) &&
+    //         primary != null,
+    //     'When surfaceStyle is using branded surfaces, then '
+    //     'primary color may not be null.');
 
     // Null checks and fallback values.
     brightness ??= Brightness.light;
@@ -2647,7 +2658,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     Color _background;
     Color _scaffoldBackground;
 
-    // If for some reason null got passed for primary color and we need it
+    // If for some reason primary color was null and we need it
     // below, we give it the default material primary color for the given
     // brightness as a fallback.
     final Color _primary = primary ??

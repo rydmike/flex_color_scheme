@@ -871,5 +871,50 @@ void main() {
         'EXPECT none null result.', () {
       expect(tDarkC, isNotNull);
     });
+
+    // With surface and background colors defined
+    final ThemeData tLightC2 = FlexColorScheme.light(
+      colors: FlexColor.schemes[FlexScheme.mandyRed].light,
+      surfaceStyle: FlexSurface.custom,
+      appBarStyle: FlexAppBarStyle.custom,
+      appBarElevation: 2,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
+      usedColors: 3,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      scaffoldBackground: FlexColor.materialLightBackground,
+    ).toTheme;
+
+    final ThemeData tDarkC2 = FlexColorScheme.dark(
+      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      surfaceStyle: FlexSurface.custom,
+      appBarStyle: FlexAppBarStyle.custom,
+      appBarElevation: 4,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
+      darkIsTrueBlack: true,
+      usedColors: 3,
+      surface: FlexColor.materialDarkSurface,
+      background: FlexColor.materialDarkBackground,
+      scaffoldBackground: FlexColor.materialDarkBackground,
+    ).toTheme;
+
+    test(
+        'FCS7.81: GIVEN a FlexColorScheme.light with more options '
+        'like custom surface and background '
+        'EXPECT OK and identical to copy.', () {
+      expect(tLightC2, tLightC2.copyWith());
+    });
+    test(
+        'FCS7.82: GIVEN a FlexColorScheme.dark with more options '
+        'like custom surface and background '
+        'EXPECT OK and identical to copy.', () {
+      expect(tDarkC2, isNotNull);
+    });
   });
 }
