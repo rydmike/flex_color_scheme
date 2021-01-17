@@ -634,10 +634,7 @@ class _HomePageState extends State<HomePage> {
       // Flutter "feature", but with this annotated region we can have the
       // navigation bar at least follow the background color and theme-mode,
       // which looks nicer and as it should on an Android device.
-      value: FlexColorScheme.themedSystemNavigationBar(
-        context,
-        useDivider: false,
-      ),
+      value: FlexColorScheme.themedSystemNavigationBar(context),
       child: Row(
         children: <Widget>[
           // Contains the demo menu and side rail.
