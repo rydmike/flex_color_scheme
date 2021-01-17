@@ -120,7 +120,7 @@ versions of the package [example 4](https://rydmike.com/flexcolorscheme4) or
 [example 5](https://rydmike.com/flexcolorscheme4), where you can try all the built-in color schemes and see 
 the impact they have on often used Flutter widgets. In [Appendix A](#appendix-a---built-in-scheme-reference) you
 can find a table listing all the built-in schemes, their `FlexScheme` enum value, name and description, plus
-links to the high-resoltuion images of each color scheme.
+links to the high-resolution images of each color scheme.
 
 The built-in color schemes are all tuned matching light and dark scheme pairs. Most of them are pretty conservative,
 but some are intentionally a bit more playful and bold. The first two color schemes are actually
@@ -1596,14 +1596,14 @@ longer necessary and will be removed from FlexColorScheme. In this case it will 
   * brightness: `colorScheme.brightness`
   * labelStyle: `textTheme.bodyText1`
 
-
-* **FloatingActionButtonThemeData** in `ThemeData.floatingActionButtonTheme` is NOT null.
   
-  **INFO:** This sub-theme will be removed in version 2.0.0, its sub-theme definition is no longer needed. 
-  Flutter SDK default now results in the same design by default. It currently sets:    
-  * backgroundColor: `colorScheme.secondary`
-  * foregroundColor: `colorScheme.onSecondary`
-
+* **FloatingActionButtonThemeData** in `ThemeData.floatingActionButtonTheme` is NOT null.  
+  **NOTE** This sub-theme will be removed in version 2.0.0, its sub-theme definition is 
+  no longer needed. Flutter SDK default now results in the same design by default.    
+  It currently sets:    
+   * backgroundColor: `colorScheme.secondary`
+   * foregroundColor: `colorScheme.onSecondary`  
+ 
 
 * **TabBarTheme** in `ThemeData.tabBarTheme` is NOT null.  
   Its colors depend on if a theme appropriate for current active app bar background color (default), or one for
@@ -1851,7 +1851,8 @@ are, as well as the rationale behind the made design choices and changes to the 
       backgroundColor: colorScheme.secondary,
       foregroundColor: colorScheme.onSecondary)
     ```
-    **NOTE** This definition will be removed in version 2.0.0.    
+    **NOTE**  
+    This definition will be removed in version 2.0.0.    
     It is no longer needed. Flutter SDK now produces the same end result by default.
     
 
@@ -1922,7 +1923,7 @@ are, as well as the rationale behind the made design choices and changes to the 
 
 ## Appendix A - Built-in Scheme Reference
 
-This table lists all current built-in schemes and provides a link a high resoltuion image of each one.
+This table lists all current built-in schemes and provides a link a high-resolution image of each one.
 
 | FlexScheme   | Name                   | Description | Light | Dark |
 | ----         | ----                   | ----        | ----  | ---- |
