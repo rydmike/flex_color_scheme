@@ -28,7 +28,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00a: GIVEN a FlexSchemeSurfaceColors with nulls '
+        'FCS1.00b: GIVEN a FlexSchemeSurfaceColors with nulls '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeSurfaceColors(
@@ -39,7 +39,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00a: GIVEN a FlexSchemeSurfaceColors with nulls '
+        'FCS1.00c: GIVEN a FlexSchemeSurfaceColors with nulls '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeSurfaceColors(
@@ -50,7 +50,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00b: GIVEN a FlexSchemeSurfaceColors.from with nulls '
+        'FCS1.00d: GIVEN a FlexSchemeSurfaceColors.from with nulls '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeSurfaceColors.from(
@@ -60,7 +60,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FCS1.00b: GIVEN a FlexSchemeSurfaceColors.from with nulls '
+        'FCS1.00e: GIVEN a FlexSchemeSurfaceColors.from with nulls '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeSurfaceColors.from(
@@ -69,7 +69,80 @@ void main() {
               ),
           throwsAssertionError);
     });
-
+    test(
+        'FCS1.00f: GIVEN a FlexSchemeSurfaceColors.from light with null '
+        'primary when surface style is blend surface '
+        'EXPECT OK and same as if primary: materialLightPrimary used.', () {
+      expect(
+        FlexSchemeSurfaceColors.from(
+          // ignore: avoid_redundant_argument_values
+          brightness: Brightness.light,
+          surfaceStyle: FlexSurface.medium,
+          primary: null,
+        ),
+        FlexSchemeSurfaceColors.from(
+          // ignore: avoid_redundant_argument_values
+          brightness: Brightness.light,
+          surfaceStyle: FlexSurface.medium,
+          // ignore: avoid_redundant_argument_values
+          primary: FlexColor.materialLightPrimary,
+        ),
+      );
+    });
+    test(
+        'FCS1.00g: GIVEN a FlexSchemeSurfaceColors.from dark with null '
+        'primary when surface style is blend surface '
+        'EXPECT OK and same as if primary: materialDarkPrimary used.', () {
+      expect(
+        FlexSchemeSurfaceColors.from(
+          brightness: Brightness.dark,
+          surfaceStyle: FlexSurface.heavy,
+          primary: null,
+        ),
+        FlexSchemeSurfaceColors.from(
+          brightness: Brightness.dark,
+          surfaceStyle: FlexSurface.heavy,
+          // ignore: avoid_redundant_argument_values
+          primary: FlexColor.materialDarkPrimary,
+        ),
+      );
+    });
+    test(
+        'FCS1.00h: GIVEN a FlexSchemeSurfaceColors.from dark with null primary '
+        'when surface style is none blend surface '
+        'EXPECT OK and equals to self from copyWith', () {
+      expect(
+          FlexSchemeSurfaceColors.from(
+            brightness: Brightness.dark,
+            // ignore: avoid_redundant_argument_values
+            surfaceStyle: FlexSurface.material,
+            primary: null,
+          ),
+          FlexSchemeSurfaceColors.from(
+            brightness: Brightness.dark,
+            // ignore: avoid_redundant_argument_values
+            surfaceStyle: FlexSurface.material,
+            primary: null,
+          ).copyWith());
+    });
+    test(
+        'FCS1.00i: GIVEN a FlexSchemeSurfaceColors.from lighty with null '
+        'primary when surface style is none blend surface '
+        'EXPECT OK and equals to self from copyWith', () {
+      expect(
+          FlexSchemeSurfaceColors.from(
+            // ignore: avoid_redundant_argument_values
+            brightness: Brightness.light,
+            surfaceStyle: FlexSurface.custom,
+            primary: null,
+          ),
+          FlexSchemeSurfaceColors.from(
+            // ignore: avoid_redundant_argument_values
+            brightness: Brightness.light,
+            surfaceStyle: FlexSurface.custom,
+            primary: null,
+          ).copyWith());
+    });
     // m1 = Default material light theme surface colors.
     const FlexSchemeSurfaceColors m1 = FlexSchemeSurfaceColors(
       surface: FlexColor.materialLightSurface,
