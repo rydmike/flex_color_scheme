@@ -1923,7 +1923,7 @@ are, as well as the rationale behind the made design choices and changes to the 
 
 ## Appendix A - Built-in Scheme Reference
 
-This table lists all current built-in schemes and provides a link a high-resolution image of each one.
+This table lists all current built-in schemes and provides a link to a high-resolution example phone image of each one.
 
 | FlexScheme   | Name                   | Description | Light | Dark |
 | ----         | ----                   | ----        | ----  | ---- |
