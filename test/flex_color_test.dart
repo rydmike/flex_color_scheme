@@ -10,9 +10,10 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 //****************************************************************************
 
 void main() {
+  // ignore: lines_longer_than_80_chars
+  // TODO Figure out how to do a private constructor test in Dart for better test coverage?
+  // Alternatively, if there is a directive to ignore it it, that also works.
   // group('FC1: WITH FlexColor() ', () {
-  // How to do a private constructor test in Dart for better test coverage?
-  //
   // const ColorScheme ml = ColorScheme.light();
   // test('FC1.01: GIVEN a FlexColor() call expect error ', () {
   //   expect(FlexColor(), ml.primary);

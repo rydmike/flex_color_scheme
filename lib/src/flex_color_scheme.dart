@@ -2416,6 +2416,11 @@ class FlexColorScheme with Diagnosticable {
         other.typography == typography;
   }
 
+  // The Jenkins list hashCode algorithm used by e.g. ThemeData in Flutter SDK.
+  // Comment it and uncomment the other standard one with ^ (bitwise XOR),
+  // to switch and test the difference.  Using this one for now, I wonder why
+  // this one is used generally in Flutter SDK over the bitwise XOR variant?
+  // Is this better? Why? How? Investigate!
   @override
   int get hashCode {
     final List<Object> values = <Object>[
@@ -2447,6 +2452,38 @@ class FlexColorScheme with Diagnosticable {
     ];
     return hashList(values);
   }
+
+  // The standard normal hashCode method with bitwise XOR ^ instead of the one
+  // using the Jenkins list function used by eg ThemeData in Flutter repo.
+  // Uncomment this one and comment the other one to switch.
+  // @override
+  // int get hashCode {
+  //   return brightness.hashCode ^
+  //       primary.hashCode ^
+  //       primaryVariant.hashCode ^
+  //       secondary.hashCode ^
+  //       secondaryVariant.hashCode ^
+  //       surface.hashCode ^
+  //       background.hashCode ^
+  //       error.hashCode ^
+  //       scaffoldBackground.hashCode ^
+  //       appBarBackground.hashCode ^
+  //       accentColor.hashCode ^
+  //       onPrimary.hashCode ^
+  //       onSecondary.hashCode ^
+  //       onSurface.hashCode ^
+  //       onBackground.hashCode ^
+  //       onError.hashCode ^
+  //       tabBarStyle.hashCode ^
+  //       appBarElevation.hashCode ^
+  //       bottomAppBarElevation.hashCode ^
+  //       tooltipsMatchBackground.hashCode ^
+  //       transparentStatusBar.hashCode ^
+  //       visualDensity.hashCode ^
+  //       fontFamily.hashCode ^
+  //       platform.hashCode ^
+  //       typography.hashCode;
+  // }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

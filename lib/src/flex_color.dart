@@ -99,7 +99,9 @@ enum FlexScheme {
 /// Defines colors, names and color schemes used to make maps and a list of
 /// predefined [FlexSchemeData] objects that can be used by [FlexColorScheme].
 class FlexColor {
-  /// Private constructor, this is a static color data class.
+  // This class is not meant to be instantiated or extended; this constructor
+  // prevents instantiation and extension.
+  // ignore: unused_element
   FlexColor._();
 
   /// Material standard color for light surface.
