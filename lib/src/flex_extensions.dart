@@ -115,7 +115,7 @@ extension FlexColorExtensions on Color {
     // ignore: parameter_assignments
     if (shadeValue > 100) shadeValue = 100;
 
-    // If null is forced for any parameter, use default.
+    // If null is forced for any property, use default.
     // ignore: parameter_assignments
     shadeValue ??= 15;
     // ignore: parameter_assignments

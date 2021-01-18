@@ -17,7 +17,7 @@ class AppConst {
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
   static const String flutterVersion =
-      '1.26.0-2.0.pre.168 Channel Master using CanvasKit build option';
+      '1.26.0-2.0.pre.401 Channel Master using CanvasKit build option';
   static const String copyright = '© 2020';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
