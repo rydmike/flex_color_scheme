@@ -714,11 +714,12 @@ class FlexColorScheme with Diagnosticable {
       error: colors.error,
     );
 
-    // If [surfaceStyle] is [ThemeSurface.custom] then the returned surfaceTheme
-    // will be null and surface colors must have been passed in to
-    // FlexColorScheme.light, if they were not, then Material default colors
-    // will be used as fallback further below.
-    final FlexSchemeSurfaceColors surfaceTheme = FlexSchemeSurfaceColors.from(
+    // If [surfaceStyle] is [FlexSurface.custom] then the returned surfaceColors
+    // will be same as [FlexSurface.material], to get a different result
+    // surface colors must be been passed in to FlexColorScheme.light. It is
+    // up to the implementation using [FlexSurface.custom] to do so.
+    // The returned surfaceColors will NEVER be null, it always has colors.
+    final FlexSchemeSurfaceColors surfaceColors = FlexSchemeSurfaceColors.from(
       // ignore: avoid_redundant_argument_values
       brightness: Brightness.light,
       surfaceStyle: surfaceStyle,
@@ -733,9 +734,9 @@ class FlexColorScheme with Diagnosticable {
       primary: effectiveColors.primary,
       secondary: effectiveColors.secondary,
       surface:
-          surface ?? surfaceTheme.surface ?? FlexColor.materialLightSurface,
+          surface ?? surfaceColors.surface ?? FlexColor.materialLightSurface,
       background: background ??
-          surfaceTheme.background ??
+          surfaceColors.background ??
           FlexColor.materialLightBackground,
       error: effectiveColors.error ?? FlexColor.materialLightError,
       onPrimary: onPrimary,
@@ -755,13 +756,13 @@ class FlexColorScheme with Diagnosticable {
         effectiveAppBarColor = FlexColor.materialLightSurface;
         break;
       case FlexAppBarStyle.background:
-        effectiveAppBarColor = background ??
-            surfaceTheme.background ??
-            FlexColor.materialLightBackground;
+        effectiveAppBarColor = background ?? surfaceColors.background;
+        // ??
+        //     FlexColor.materialLightBackground;
         break;
       case FlexAppBarStyle.surface:
-        effectiveAppBarColor =
-            surface ?? surfaceTheme.surface ?? FlexColor.materialLightSurface;
+        effectiveAppBarColor = surface ??
+            surfaceColors.surface; // ?? FlexColor.materialLightSurface;
         break;
       case FlexAppBarStyle.custom:
         effectiveAppBarColor =
@@ -791,15 +792,16 @@ class FlexColorScheme with Diagnosticable {
       secondaryVariant: effectiveColors.secondaryVariant,
       // Surface is used e.g. by Card and bottom appbar and in this
       // implementation also by dialogs.
-      surface:
-          surface ?? surfaceTheme.surface ?? FlexColor.materialLightSurface,
+      surface: surface ?? surfaceColors.surface,
+      // ?? FlexColor.materialLightSurface,
       // Background is used e.g. by drawer and bottom bar.
-      background: background ??
-          surfaceTheme.background ??
-          FlexColor.materialLightBackground,
-      scaffoldBackground: scaffoldBackground ??
-          surfaceTheme.scaffoldBackground ??
-          FlexColor.materialLightScaffoldBackground,
+      background: background ?? surfaceColors.background,
+      // ??
+      //     FlexColor.materialLightBackground,
+      scaffoldBackground:
+          scaffoldBackground ?? surfaceColors.scaffoldBackground,
+      // ??
+      //     FlexColor.materialLightScaffoldBackground,
       // Set app bar background to effective background color.
       appBarBackground: effectiveAppBarColor,
       // Set the accent color to the effective accent color.
@@ -1105,11 +1107,12 @@ class FlexColorScheme with Diagnosticable {
       error: colors.error,
     );
 
-    // If [surfaceStyle] is [ThemeSurface.custom] then the returned surfaceTheme
-    // will be null and surface colors must have been passed in to
-    // FlexColorScheme.light, if they were not, then Material default colors
-    // will be used as fallback further below.
-    final FlexSchemeSurfaceColors surfaceTheme = FlexSchemeSurfaceColors.from(
+    // If [surfaceStyle] is [FlexSurface.custom] then the returned surfaceColors
+    // will be same as [FlexSurface.material], to get a different result
+    // surface colors must be been passed in to FlexColorScheme.dark. It is
+    // up to the implementation using [FlexSurface.custom] to do so.
+    // The returned surfaceColors will NEVER be null, it always has colors.
+    final FlexSchemeSurfaceColors surfaceColors = FlexSchemeSurfaceColors.from(
       brightness: Brightness.dark,
       surfaceStyle: surfaceStyle,
       primary: effectiveColors.primary,
@@ -1122,9 +1125,10 @@ class FlexColorScheme with Diagnosticable {
     final FlexSchemeOnColors onColorsTheme = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       secondary: effectiveColors.secondary,
-      surface: surface ?? surfaceTheme.surface ?? FlexColor.materialDarkSurface,
+      surface:
+          surface ?? surfaceColors.surface ?? FlexColor.materialDarkSurface,
       background: background ??
-          surfaceTheme.background ??
+          surfaceColors.background ??
           FlexColor.materialDarkBackground,
       error: effectiveColors.error ?? FlexColor.materialDarkError,
       onPrimary: onPrimary,
@@ -1138,37 +1142,41 @@ class FlexColorScheme with Diagnosticable {
     // Surface is used e.g. by Card and bottom appbar and in this
     // implementation also by dialogs.
     // If true black, we make a darker than normal surface. If not
-    // true black, we use provided surface color.
-    // Fallback from theme, to custom value to material default const.
+    // true black, we use provided surface color, or computed one.
     Color effectiveSurfaceColor;
     if (darkIsTrueBlack) {
-      effectiveSurfaceColor = surface?.darken(6) ??
-          surfaceTheme.surface?.darken(6) ??
-          const Color(0xFF000000).blend(
-              effectiveColors.primary ?? FlexColor.materialDarkPrimary, 6);
+      effectiveSurfaceColor =
+          surface?.darken(6) ?? surfaceColors.surface.darken(6);
+      // This is dead code, commenting out to test it!
+      // ??
+      //     const Color(0xFF000000).blend(
+      //         effectiveColors.primary ?? FlexColor.materialDarkPrimary, 6);
     } else {
-      effectiveSurfaceColor = surface ??
-          surfaceTheme.surface ??
-          FlexColor.materialDarkSurface.blend(
-              effectiveColors.primary ?? FlexColor.materialDarkPrimary, 5);
+      effectiveSurfaceColor = surface ?? surfaceColors.surface;
+      // This is dead code, commenting out to test it!
+      //   ??
+      //       FlexColor.materialDarkSurface.blend(
+      //           effectiveColors.primary ?? FlexColor.materialDarkPrimary, 5);
     }
 
     // Determine effective background color.
     // Used e.g. by drawer, nav rail, side menu and bottom bar.
     // If true black, we use darker then normal background. If not true black,
-    // we use provided background color
-    // Fallback from theme, to custom value to material default const.
+    // we use provided background color, or computed one.
     Color effectiveBackgroundColor;
     if (darkIsTrueBlack) {
-      effectiveBackgroundColor = background?.darken(8) ??
-          surfaceTheme.background?.darken(8) ??
-          const Color(0xFF000000).blend(
-              effectiveColors.primary ?? FlexColor.materialDarkPrimary, 8);
+      effectiveBackgroundColor =
+          background?.darken(8) ?? surfaceColors.background.darken(8);
+      // This is dead code, commenting out to test it!
+      // ??
+      // const Color(0xFF000000).blend(
+      //     effectiveColors.primary ?? FlexColor.materialDarkPrimary, 8);
     } else {
-      effectiveBackgroundColor = background ??
-          surfaceTheme.background ??
-          FlexColor.materialDarkBackground.blend(
-              effectiveColors.primary ?? FlexColor.materialDarkPrimary, 6);
+      effectiveBackgroundColor = background ?? surfaceColors.background;
+      // This is dead code, commenting out to test it!
+      //   ??
+      //       FlexColor.materialDarkBackground.blend(
+      //           effectiveColors.primary ?? FlexColor.materialDarkPrimary, 6);
     }
 
     // Get the effective app bar color based on the style
@@ -1228,7 +1236,7 @@ class FlexColorScheme with Diagnosticable {
       scaffoldBackground: darkIsTrueBlack
           ? const Color(0xFF000000)
           : scaffoldBackground ??
-              surfaceTheme.scaffoldBackground ??
+              surfaceColors.scaffoldBackground ??
               FlexColor.materialDarkScaffoldBackground.blend(
                   effectiveColors.primary ??
                       colors.primary ??
@@ -2565,9 +2573,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// Returns the surface colors for given [brightness] and [surfaceStyle]
   /// values.
   ///
-  /// If [surfaceStyle] is light, medium, strong or heavy, then the [primary]
-  /// color may not be null.
-  ///
   /// The [FlexSurface] enum is used to represent surface color schemes.
   /// [FlexSurface.material] is the surface colors scheme presented
   /// in Material design guide here for light theme:
@@ -2576,9 +2581,16 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// https://material.io/design/color/dark-theme.html#ui-application
   ///
   /// The [FlexSurface.light], [FlexSurface.medium], [FlexSurface.strong]
-  /// and [FlexSurface.heavy] blends in an increasing amount of the scheme's
-  /// primary color into the surface, background and scaffold background colors,
-  /// for a primary color branded look on these background colors.
+  /// and [FlexSurface.heavy] blends in an increasing amount of the provided
+  /// [primary] color into the surface, background and scaffold background
+  /// colors, for a primary color branded look on these background colors.
+  ///
+  /// The [primary] color is not used for for Material or custom surface style.
+  /// If [primary] is not provided it defaults to
+  /// [FlexColor.materialLightPrimary] if brightness is light, and
+  /// otherwise defaults to [FlexColor.materialDarkPrimary]. When creating
+  /// surface colors that fits a given scheme, the scheme's primary color
+  /// should be passed to [primary].
   ///
   /// The percentage of blend values for each strength are separate for
   /// [surface], [background] and [scaffoldBackground]. Scaffold background
@@ -2613,7 +2625,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     ///
     /// Defaults to [FlexColor.materialLightPrimary] if brightness is light,
     /// otherwise defaults to [FlexColor.materialDarkPrimary].
-    Color primary = FlexColor.materialLightPrimary,
+    Color primary,
 
     /// Old parameter name for the style of the used surfaces colors.
     @Deprecated('Use surfaceStyle instead that replaces it and is just a '
@@ -2624,25 +2636,12 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   }) {
     assert(brightness != null, 'Brightness may not be null.');
     assert(surfaceStyle != null, 'ThemeSurface may not be null.');
-    // assert(
-    //     (surfaceStyle != FlexSurface.material ||
-    //             surfaceStyle != FlexSurface.custom) &&
-    //         primary == null,
-    //     'When surfaceStyle is something else than material or custom, then '
-    //     'primary color may not be null.');
-
-    // assert(
-    //     (surfaceStyle == FlexSurface.light ||
-    //             surfaceStyle == FlexSurface.medium ||
-    //             surfaceStyle == FlexSurface.strong ||
-    //             surfaceStyle == FlexSurface.heavy) &&
-    //         primary != null,
-    //     'When surfaceStyle is using branded surfaces, then '
-    //     'primary color may not be null.');
 
     // Null checks and fallback values.
     brightness ??= Brightness.light;
     surfaceStyle ??= FlexSurface.material;
+    // Primary color gets default via brightness and Material default colors
+    // if it was not provided, should be provided when making branded surfaces.
     primary ??= brightness == Brightness.light
         ? FlexColor.materialLightPrimary
         : FlexColor.materialDarkPrimary;
@@ -2658,14 +2657,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     Color _background;
     Color _scaffoldBackground;
 
-    // If for some reason primary color was null and we need it
-    // below, we give it the default material primary color for the given
-    // brightness as a fallback.
-    final Color _primary = primary ??
-        (brightness == Brightness.light
-            ? FlexColor.materialLightPrimary
-            : FlexColor.materialDarkPrimary);
-
     switch (brightness ?? Brightness.light) {
       case Brightness.light:
         {
@@ -2680,38 +2671,38 @@ class FlexSchemeSurfaceColors with Diagnosticable {
             case FlexSurface.light:
               {
                 _surface = FlexColor.lightSurface
-                    .blend(_primary, kLightBlendSurfaceLight);
+                    .blend(primary, kLightBlendSurfaceLight);
                 _background = FlexColor.lightBackground
-                    .blend(_primary, kLightBlendBackgroundLight);
+                    .blend(primary, kLightBlendBackgroundLight);
                 _scaffoldBackground = FlexColor.lightScaffoldBackground;
               }
               break;
             case FlexSurface.medium:
               {
                 _surface = FlexColor.lightSurface
-                    .blend(_primary, kLightBlendSurfaceMedium);
+                    .blend(primary, kLightBlendSurfaceMedium);
                 _background = FlexColor.lightBackground
-                    .blend(_primary, kLightBlendBackgroundMedium);
+                    .blend(primary, kLightBlendBackgroundMedium);
                 _scaffoldBackground = FlexColor.lightScaffoldBackground;
               }
               break;
             case FlexSurface.strong:
               {
                 _surface = FlexColor.lightSurface
-                    .blend(_primary, kLightBlendSurfaceStrong);
+                    .blend(primary, kLightBlendSurfaceStrong);
                 _background = FlexColor.lightBackground
-                    .blend(_primary, kLightBlendBackgroundStrong);
+                    .blend(primary, kLightBlendBackgroundStrong);
                 _scaffoldBackground = FlexColor.lightScaffoldBackground;
               }
               break;
             case FlexSurface.heavy:
               {
                 _surface = FlexColor.lightSurface
-                    .blend(_primary, kLightBlendSurfaceHeavy);
+                    .blend(primary, kLightBlendSurfaceHeavy);
                 _background = FlexColor.lightBackground
-                    .blend(_primary, kLightBlendBackgroundHeavy);
+                    .blend(primary, kLightBlendBackgroundHeavy);
                 _scaffoldBackground = FlexColor.lightScaffoldBackground
-                    .blend(_primary, kLightBlendScaffoldHeavy);
+                    .blend(primary, kLightBlendScaffoldHeavy);
               }
               break;
             case FlexSurface.custom:
@@ -2741,38 +2732,38 @@ class FlexSchemeSurfaceColors with Diagnosticable {
             case FlexSurface.light:
               {
                 _surface = FlexColor.darkSurface
-                    .blend(_primary, kDarkBlendSurfaceLight);
+                    .blend(primary, kDarkBlendSurfaceLight);
                 _background = FlexColor.darkBackground
-                    .blend(_primary, kDarkBlendBackgroundLight);
+                    .blend(primary, kDarkBlendBackgroundLight);
                 _scaffoldBackground = FlexColor.darkScaffoldBackground;
               }
               break;
             case FlexSurface.medium:
               {
                 _surface = FlexColor.darkSurface
-                    .blend(_primary, kDarkBlendSurfaceMedium);
+                    .blend(primary, kDarkBlendSurfaceMedium);
                 _background = FlexColor.darkBackground
-                    .blend(_primary, kDarkBlendBackgroundMedium);
+                    .blend(primary, kDarkBlendBackgroundMedium);
                 _scaffoldBackground = FlexColor.darkScaffoldBackground;
               }
               break;
             case FlexSurface.strong:
               {
                 _surface = FlexColor.darkSurface
-                    .blend(_primary, kDarkBlendSurfaceStrong);
+                    .blend(primary, kDarkBlendSurfaceStrong);
                 _background = FlexColor.darkBackground
-                    .blend(_primary, kDarkBlendBackgroundStrong);
+                    .blend(primary, kDarkBlendBackgroundStrong);
                 _scaffoldBackground = FlexColor.darkScaffoldBackground;
               }
               break;
             case FlexSurface.heavy:
               {
                 _surface = FlexColor.darkSurface
-                    .blend(_primary, kDarkBlendSurfaceHeavy);
+                    .blend(primary, kDarkBlendSurfaceHeavy);
                 _background = FlexColor.darkBackground
-                    .blend(_primary, kDarkBlendBackgroundHeavy);
+                    .blend(primary, kDarkBlendBackgroundHeavy);
                 _scaffoldBackground = FlexColor.darkScaffoldBackground
-                    .blend(_primary, kDarkBlendScaffoldHeavy);
+                    .blend(primary, kDarkBlendScaffoldHeavy);
               }
               break;
             case FlexSurface.custom:
