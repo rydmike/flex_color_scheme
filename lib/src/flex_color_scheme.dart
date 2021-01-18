@@ -1235,13 +1235,13 @@ class FlexColorScheme with Diagnosticable {
       // Fallback from theme, to custom value to material default const.
       scaffoldBackground: darkIsTrueBlack
           ? const Color(0xFF000000)
-          : scaffoldBackground ??
-              surfaceColors.scaffoldBackground ??
-              FlexColor.materialDarkScaffoldBackground.blend(
-                  effectiveColors.primary ??
-                      colors.primary ??
-                      FlexColor.materialDarkPrimary,
-                  8),
+          : scaffoldBackground ?? surfaceColors.scaffoldBackground,
+      // This is dead code ??
+      //         FlexColor.materialDarkScaffoldBackground.blend(
+      //             effectiveColors.primary ??
+      //                 colors.primary ??
+      //                 FlexColor.materialDarkPrimary,
+      //             8),
       // Set app bar background to effective background color.
       appBarBackground: effectiveAppBarColor,
       // Set the accent color to the effective accent color.
@@ -1900,7 +1900,7 @@ class FlexColorScheme with Diagnosticable {
     // Make the ThemeData object defined by the FlexColorScheme
     // properties and the designed slightly opinionated theme design choices
     // over default Flutter Material theme implementation.
-    final ThemeData _theme = ThemeData(
+    final ThemeData theme = ThemeData(
       // These properties we just pass along these to the standard ThemeData
       // factory. They are included in FlexColorScheme so we do not have to
       // apply them via ThemeData copyWith separately for cases when we want
@@ -2259,7 +2259,7 @@ class FlexColorScheme with Diagnosticable {
     }
     //
     // Finally return the ThemeData we defined above.
-    return _theme;
+    return theme;
   }
 
   /// Returns the [ColorScheme] object defined by [FlexColorScheme] properties.
