@@ -786,7 +786,7 @@ only required color is the primary color, the other colors will be computed. You
 provided will always be computed for the full set of required colors in a `FlexSchemeColor`.
 
 In this example we create our 2nd scheme from just a primary color for the light and dark schemes. The custom
-`appBbarColor` will in this case also receive the same color value as the one that is computed for `secondaryVariant`
+`appBarColor` will in this case also receive the same color value as the one that is computed for `secondaryVariant`
 color, this is the default with the `FlexSchemeColor.from` factory if the color is not specified. The used example
 color is an olive green like color.
 
@@ -1187,7 +1187,7 @@ it via callbacks for all our settings and their current values.
 
 It is certainly getting tedious to do it this way by now, but since it was stated that we would not add any 
 advanced state management solution or verbose inherited widget to these bundled examples. We are sticking to this 
-way in this more complex example as well. Let at the same time be a good example of why and when a state management 
+way in this more complex example as well. Let it at the same time be a good example of why and when a state management 
 solution should really be considered.
 
 ```dart
