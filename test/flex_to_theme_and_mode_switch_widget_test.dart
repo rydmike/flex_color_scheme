@@ -6,7 +6,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 //****************************************************************************
 // FlexThemeModeSwitch and FlexColorScheme.toTheme Widget tests.
 //
-// TODO Add more tests for this widget, now just a "hi I got built OK test".
 //****************************************************************************
 void main() {
   group('FTMS1: WITH FlexThemeModeSwitch and FlexColorScheme', () {
@@ -21,10 +20,12 @@ void main() {
       ));
 
       final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
+      await tester.tap(themeSwitch);
       await tester.pump();
       expect(themeSwitch, findsOneWidget);
 
       final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.tap(optionButton);
       await tester.pump();
       expect(optionButton, findsOneWidget);
     });
@@ -38,10 +39,12 @@ void main() {
       ));
 
       final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
+      await tester.tap(themeSwitch);
       await tester.pump();
       expect(themeSwitch, findsOneWidget);
 
       final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.tap(optionButton);
       await tester.pump();
       expect(optionButton, findsOneWidget);
     });
@@ -55,10 +58,12 @@ void main() {
       ));
 
       final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
+      await tester.tap(themeSwitch);
       await tester.pump();
       expect(themeSwitch, findsOneWidget);
 
       final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.tap(optionButton);
       await tester.pump();
       expect(optionButton, findsOneWidget);
     });
