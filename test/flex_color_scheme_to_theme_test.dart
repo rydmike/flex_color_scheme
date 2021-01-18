@@ -23,9 +23,9 @@ void main() {
           FlexColorScheme.light(
             colors: FlexColor.schemes[FlexScheme.material].light,
           ).toTheme,
-          FlexColorScheme.light(
+          equals(FlexColorScheme.light(
             colors: FlexColor.schemes[FlexScheme.material].light,
-          ).toTheme);
+          ).toTheme));
     });
     test(
         'FCS7.00bL: GIVEN a FlexColorScheme.light made with no '
@@ -96,6 +96,48 @@ void main() {
             colors: FlexColor.schemes[FlexScheme.material].dark,
           ).toTheme,
           FlexColorScheme.dark().toTheme);
+    });
+
+    test(
+        'FCS7.00eL: GIVEN a FlexColorScheme() made with scheme default '
+        'constructor + light and '
+        'material EXPECT ThemeData to be equal to an identical one.', () {
+      expect(
+          const FlexColorScheme(
+            brightness: Brightness.light,
+            primary: FlexColor.materialLightPrimary,
+            primaryVariant: FlexColor.materialLightPrimaryVariant,
+            secondary: FlexColor.materialLightSecondary,
+            secondaryVariant: FlexColor.materialLightSecondaryVariant,
+          ).toTheme,
+          equals(const FlexColorScheme(
+            brightness: Brightness.light,
+            primary: FlexColor.materialLightPrimary,
+            primaryVariant: FlexColor.materialLightPrimaryVariant,
+            secondary: FlexColor.materialLightSecondary,
+            secondaryVariant: FlexColor.materialLightSecondaryVariant,
+          ).toTheme));
+    });
+
+    test(
+        'FCS7.00eD: GIVEN a FlexColorScheme() made with scheme default '
+        'constructor + dark and '
+        'material EXPECT ThemeData to be equal to an identical one.', () {
+      expect(
+          const FlexColorScheme(
+            brightness: Brightness.dark,
+            primary: FlexColor.materialDarkPrimary,
+            primaryVariant: FlexColor.materialDarkPrimaryVariant,
+            secondary: FlexColor.materialDarkSecondary,
+            secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+          ).toTheme,
+          equals(const FlexColorScheme(
+            brightness: Brightness.dark,
+            primary: FlexColor.materialDarkPrimary,
+            primaryVariant: FlexColor.materialDarkPrimaryVariant,
+            secondary: FlexColor.materialDarkSecondary,
+            secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+          ).toTheme));
     });
 
     // themeLight = Default material light scheme colors.
