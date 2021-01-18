@@ -126,7 +126,7 @@ void main() {
           ).copyWith());
     });
     test(
-        'FCS1.00i: GIVEN a FlexSchemeSurfaceColors.from lighty with null '
+        'FCS1.00i: GIVEN a FlexSchemeSurfaceColors.from light with null '
         'primary when surface style is none blend surface '
         'EXPECT OK and equals to self from copyWith', () {
       expect(

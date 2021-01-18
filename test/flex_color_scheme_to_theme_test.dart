@@ -904,6 +904,21 @@ void main() {
       scaffoldBackground: FlexColor.materialDarkBackground,
     ).toTheme;
 
+    final ThemeData tDarkC2tb = FlexColorScheme.dark(
+      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      surfaceStyle: FlexSurface.custom,
+      appBarStyle: FlexAppBarStyle.custom,
+      appBarElevation: 4,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
+      usedColors: 3,
+      surface: FlexColor.materialDarkSurface,
+      background: FlexColor.materialDarkBackground,
+      scaffoldBackground: FlexColor.materialDarkBackground,
+    ).toTheme;
+
     test(
         'FCS7.81: GIVEN a FlexColorScheme.light with more options '
         'like custom surface and background '
@@ -914,7 +929,13 @@ void main() {
         'FCS7.82: GIVEN a FlexColorScheme.dark with more options '
         'like custom surface and background '
         'EXPECT OK and identical to copy.', () {
-      expect(tDarkC2, isNotNull);
+      expect(tDarkC2, tDarkC2.copyWith());
+    });
+    test(
+        'FCS7.82: GIVEN a FlexColorScheme.dark with more options '
+        'like custom surface and background and true black '
+        'EXPECT OK and identical to copy.', () {
+      expect(tDarkC2tb, tDarkC2tb.copyWith());
     });
   });
 }
