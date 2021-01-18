@@ -38,8 +38,8 @@ For more information about **FlexColorScheme**, its background and use cases, th
   - [Example 4 - Switch Between Built-in Color Schemes and Custom Ones](#example-4---switch-between-built-in-color-schemes-and-custom-ones)
   - [Example 5 - Full Featured Demo](#example-5---full-featured-demo)
     - [Local State and Setup](#example-5---local-state-and-setup)
-    - [FlexColorScheme Parameters and toTheme](#example-5---the-flexcolorscheme-parameters-and-totheme)  
-    - [FlexColorScheme Parameters and toScheme](#example-5---the-flexcolorscheme-parameters-and-toscheme)  
+    - [FlexColorScheme Properties and toTheme](#example-5---the-flexcolorscheme-properties-and-totheme)  
+    - [FlexColorScheme Properties and toScheme](#example-5---the-flexcolorscheme-properties-and-toscheme)  
     - [Equivalent Setup for the Dark Theme, but with More Options](#example-5---equivalent-setup-for-the-dark-theme-but-with-more-options)    
     - [Passing All the Values Back and Forth to the HomePage](#example-5---passing-all-the-values-back-and-forth-to-the-homepage)
     - [Themed System Navigation Bar in Android](#example-5---themed-system-navigation-bar-in-android)
@@ -242,47 +242,47 @@ to using FlexColorScheme and is really only there to better demonstrate the resu
 
 
 > **NOTE:**  
-> Version 1.4.0 introduces the easier and less verbose `scheme` convenience factory parameter used above.
+> Version 1.4.0 introduces the easier and less verbose `scheme` convenience factory property used above.
 > You can use it instead of `colors` if all you want to do is just use one of the built-in color schemes.
 > The previous way of
 > using `colors` with the `FlexColor.schemes` **map**, with the `FlexScheme` enum values as keys, works as before
-> too, but is not needed for this simple use case. The `colors` parameter is still used in the examples for custom
+> too, but is not needed for this simple use case. The `colors` property is still used in the examples for custom
 > color schemes and mixing custom schemes with selected built-in ones.
 >
-> For reference and comparison, with the `color` factory parameter, using a built-in color scheme looks like this:
+> For reference and comparison, with the `color` factory property, using a built-in color scheme looks like this:
 >
 > ```dart
 > theme: FlexColorScheme.light(
 >     colors: FlexColor.schemes[FlexScheme.mandyRed].light,
 >  ).toTheme,
 > ```
-> with the `scheme` convenience parameter this can instead be written like this:
+> with the `scheme` convenience property this can instead be written like this:
 >
 > ```dart
 > theme: FlexColorScheme.light(scheme: FlexScheme.mandyRed).toTheme,
 > ```
 > Which is a much nicer way to access and use a predefined color scheme.
 >
-> The `FlexColorScheme.light`and `FlexColorScheme.dark` factories no longer require any of their parameters.
-> If both `scheme` and `colors` parameters are defined, then `colors` takes precedence. If both are
+> The `FlexColorScheme.light`and `FlexColorScheme.dark` factories no longer require any of their properties.
+> If both `scheme` and `colors` properties are defined, then `colors` takes precedence. If both are
 > undefined (null), then `scheme` defaults to `FlexScheme.material`, which defines the color scheme used in the
 > [Material Design Guide](https://material.io/design/color/the-color-system.html#color-theme-creation). This addition
 > does not change any possible past behavior.
 
 #### Can I use different built-in color schemes for my light and dark themes?
 Yes this is possible, just use different `FlexScheme` enums values for the light and dark FlexColorScheme factories
-`scheme` parameter. If the colors used by the selected schemes are a bit related, this
+`scheme` property. If the colors used by the selected schemes are a bit related, this
 can be used to create nice and unique light and dark combinations of the predefined schemes.
 
-By using the `colors` parameter you could even apply a `FlexSchemeColor` that has data that was designed for a light 
+By using the `colors` property you could even apply a `FlexSchemeColor` that has data that was designed for a light 
 theme to the FlexColorScheme.dark factory and wise versa. For example, with the 
-`FlexColorScheme.dark` factory, you could to its `colors` parameter assign the `FlexSchemeColors` from  
+`FlexColorScheme.dark` factory, you could to its `colors` property assign the `FlexSchemeColors` from  
 `FlexColor.schemes[FlexScheme.mandyRed].light` that are designed and intended to be used with the light mode factory.
 The results will typically just not be as useful or pretty.
 The rationale for the slightly involved structure, is to keep it flexible, but at the same time provide self
-documenting API guidance on how the data was designed to be used and consumed. The new `scheme` parameter 
+documenting API guidance on how the data was designed to be used and consumed. The new `scheme` property 
 prevents using the light scheme colors for the dark factory and wise versa. It can however still be done if so desired
-with the `colors` parameter as shown above. The `colors` parameter is always needed and used when you make 
+with the `colors` property as shown above. The `colors` property is always needed and used when you make 
 custom color schemes with the `FlexColorScheme.light` and `FlexColorScheme.dark` factories.
 
 ### Default Sample Application
@@ -546,7 +546,7 @@ We make a `FlexSchemeData` object with a name, description and scheme colors def
 and matching desaturated versions for the dark scheme.
 
 We could also have stored the light and dark scheme in their own FlexSchemeColor objects, or even created them
-directly in their respective `colors` parameter in the light and dark factories. However, since we will also use this
+directly in their respective `colors` property in the light and dark factories. However, since we will also use this
 information on the HomePage for the theme switch widget and to display the scheme name and description, putting them
 in a FlexSchemeData object that contains both the light and dark scheme, plus its name and description, is a
 convenient way to re-use the information.
@@ -975,7 +975,7 @@ background colored material, then you do not have re-theme it or style it for th
 
 We also introduce a toggle that allows us to for all the schemes use the `toDark` computed dark schemes, instead
 of the hand tuned built-in ones. You can then compare the results, the `toDark` method does a pretty good job and can
-even be tuned with a parameter if so desired. If you use this toggle on the last custom scheme, you will not see
+even be tuned with a property if so desired. If you use this toggle on the last custom scheme, you will not see
 any difference, because we already created its dark scheme with this method, the toggle just again computes the same
 dark scheme. There is also a slider that you can use to adjust the white blend level of the `toDark` method
 from its default value of 35%, to be anything from 0...100 %, so you can experiment with it and see what it does.
@@ -1037,7 +1037,7 @@ We can use this toggle to see and study the differences that `FlexColorScheme.to
    }
 ```
 
-### Example 5 - The FlexColorScheme Parameters and toTheme
+### Example 5 - The FlexColorScheme Properties and toTheme
 
 We define the light theme for the app, using current theme index, selected surface style and app bar style. With
 the built-in 24 themes, and the three custom ones we made, we can use 27 different app themes via the setup below,
@@ -1067,7 +1067,7 @@ this example, as well as the tooltip and true black setting for the dark theme.
 ```
 
 
-### Example 5 - The FlexColorScheme Parameters and toScheme
+### Example 5 - The FlexColorScheme Properties and toScheme
 
 We also demonstrate how to create the same theme with the standard from color scheme ThemeData factory
 `ThemeData.from`. The surface style works, but will not be applied as elegantly, but it works fairly OK up
@@ -1112,12 +1112,12 @@ the results with the `toScheme` approach. By doing so you do however loose most 
 offered by `FlexColorScheme`. You can see an example visual comparison and presentation of the
 [**differences here**](https://rydmike.com/colorscheme#the-difference).
 
-The used `FlexColorScheme.light` parameters `appBarStyle`, `appBarElevation`, `tabBarStyle`, 
+The used `FlexColorScheme.light` properties `appBarStyle`, `appBarElevation`, `tabBarStyle`, 
 `tooltipsMatchBackground` and `visualDensity` in the example above, actually have
 no impact at all on the returned `ColorScheme` by `toScheme`. It can only return colors in a `ColorScheme`, 
 that of course have no such theming concepts. Definition of these values above could just as well be removed in the
 above example, but they were left in there to demonstrate that for this NOT recommended FlexColorScheme theme 
-definition method, they have no impact on the end result. Only parameters that adjust scheme colors, 
+definition method, they have no impact on the end result. Only properties that adjust scheme colors, 
 like `colors`, `scheme`, `surfaceStyle` and `usedColors` will have an impact on the `toScheme` 
 returned by **FlexColorScheme**.
 
@@ -1127,7 +1127,7 @@ We do the equivalent definition for the dark theme, and we add
 the true black option as well. We also use the `useToDarkMethod` boolean as switch for `colors` to pass it a
 `FlexSchemeColor` that is either using the predefined ones or computes it from its light `FlexSchemeColor`.
 
-For the `toDark` calculation we give it the level parameter that allows us to tune the dark conversion with
+For the `toDark` calculation we give it the level property that allows us to tune the dark conversion with
 the slider in the UI. We also use the `defaultError` modifier. This ensures that the resulting computed
 toDark scheme will ignore any existing light scheme error color definition, and use Material default dark mode
 error color as its error color. Without this modifier, toDark will also compute the error color for the
@@ -1315,7 +1315,7 @@ are using strong surface branding, the computed dark scheme is on the right.
 ### Example 5 - Computed Dark Theme with Level Adjustment
 
 The result of the `toDark` method varies depending on how saturated the used light scheme colors are. It is possible
-to tune the calculated dark scheme by modifying the `whiteBlend` parameter it uses to blend in white to make the
+to tune the calculated dark scheme by modifying the `whiteBlend` property it uses to blend in white to make the
 dark scheme. The default `whiteBlend` is 35%, this is normally a suitable value. For more saturated light scheme
 colors try 40%, which is also used in the Material design guide to convert the default red error color for light mode,
 to dark mode. For light scheme color with low saturation, a white blend of 20...30% often also produces nice results.
@@ -1450,7 +1450,7 @@ a primary colored app bar in dark-mode.
 ## Android Transparent System Navigation Bar
 
 Version 1.4.0 adds experimental support for transparent system navigation bar for Android for SDK >= 30.
-The support is added via the new `opacity` parameter in `FlexColorScheme.themedSystemNavigationBar`.
+The support is added via the new `opacity` property in `FlexColorScheme.themedSystemNavigationBar`.
 A separate example that builds on example 5 for this more advanced use case, shows and explains how and when
 transparent system navigation bar can be used in Android.
 

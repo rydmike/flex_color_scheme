@@ -78,6 +78,7 @@ void main() {
           // ignore: avoid_redundant_argument_values
           brightness: Brightness.light,
           surfaceStyle: FlexSurface.medium,
+          // ignore: avoid_redundant_argument_values
           primary: null,
         ),
         FlexSchemeSurfaceColors.from(
@@ -97,6 +98,7 @@ void main() {
         FlexSchemeSurfaceColors.from(
           brightness: Brightness.dark,
           surfaceStyle: FlexSurface.heavy,
+          // ignore: avoid_redundant_argument_values
           primary: null,
         ),
         FlexSchemeSurfaceColors.from(
@@ -116,12 +118,14 @@ void main() {
             brightness: Brightness.dark,
             // ignore: avoid_redundant_argument_values
             surfaceStyle: FlexSurface.material,
+            // ignore: avoid_redundant_argument_values
             primary: null,
           ),
           FlexSchemeSurfaceColors.from(
             brightness: Brightness.dark,
             // ignore: avoid_redundant_argument_values
             surfaceStyle: FlexSurface.material,
+            // ignore: avoid_redundant_argument_values
             primary: null,
           ).copyWith());
     });
@@ -134,12 +138,14 @@ void main() {
             // ignore: avoid_redundant_argument_values
             brightness: Brightness.light,
             surfaceStyle: FlexSurface.custom,
+            // ignore: avoid_redundant_argument_values
             primary: null,
           ),
           FlexSchemeSurfaceColors.from(
             // ignore: avoid_redundant_argument_values
             brightness: Brightness.light,
             surfaceStyle: FlexSurface.custom,
+            // ignore: avoid_redundant_argument_values
             primary: null,
           ).copyWith());
     });

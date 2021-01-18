@@ -64,7 +64,7 @@ enum FlexAppBarStyle {
   /// When using the [custom] style option, the color assigned in
   /// [FlexSchemeColor.appBarColor] in the [FlexSchemeColor] passed to the
   /// factories [FlexColorScheme.light] or [FlexColorScheme.dark] `colors`
-  /// parameter, will be used as the value for
+  /// property, will be used as the value for
   /// [FlexColorScheme.appBarBackground] when  the factory creates the
   /// [FlexColorScheme] object. If there is no custom color definition
   /// in factory `colors` in the used [FlexSchemeColor] passed to it, then
@@ -471,7 +471,7 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
     ///
     /// For using built-in color schemed, the convenience shortcut to select
-    /// it with the `scheme` parameter is recommended and leaving `colors`
+    /// it with the `scheme` property is recommended and leaving `colors`
     /// undefined. If both are specified the scheme colors defined by `colors`
     /// are used. If both are null then `scheme` defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
@@ -483,7 +483,7 @@ class FlexColorScheme with Diagnosticable {
     /// Just give it one of the enum values to use the scheme, like eg.
     /// [FlexScheme.mandyRed].
     ///
-    /// To create custom color schemes use the `colors` parameter. If both
+    /// To create custom color schemes use the `colors` property. If both
     /// `colors`and `scheme` are specified, the scheme defined by
     /// `colors` is used. If both are null, then `scheme` defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
@@ -848,7 +848,7 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
     ///
     /// For using built-in color schemed, the convenience shortcut to select
-    /// it with the `scheme` parameter is recommended and leaving `colors`
+    /// it with the `scheme` property is recommended and leaving `colors`
     /// undefined. If both are specified the scheme colors defined by `colors`
     /// are used. If both are null then `scheme` defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
@@ -860,7 +860,7 @@ class FlexColorScheme with Diagnosticable {
     /// Just give it one of the enum values to use the scheme, like eg.
     /// [FlexScheme.mandyRed].
     ///
-    /// To create custom color schemes use the `colors` parameter. If both
+    /// To create custom color schemes use the `colors` property. If both
     /// `colors`and `scheme` are specified, the scheme defined by
     /// `colors` is used. If both are null, then `scheme` defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
@@ -2594,10 +2594,10 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     /// otherwise defaults to [FlexColor.materialDarkPrimary].
     Color primary,
 
-    /// Old parameter name for the style of the used surfaces colors.
+    /// Old property name for the style of the used surfaces colors.
     @Deprecated('Use surfaceStyle instead that replaces it and is just a '
         'renamed themeSurface.\n'
-        'This parameter was deprecated in v1.3.0 and will be totally removed '
+        'This property was deprecated in v1.3.0 and will be totally removed '
         'in null safe versions (v2.0.0).')
         FlexSurface themeSurface,
   }) {

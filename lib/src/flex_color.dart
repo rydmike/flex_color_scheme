@@ -1651,8 +1651,8 @@ class FlexSchemeData with Diagnosticable {
 /// Immutable data class for the main scheme colors used in a [FlexColorScheme]
 /// based color scheme.
 ///
-/// The default constructor requires all parameters. To make a [FlexSchemeColor]
-/// from a minimum of just the primary color, use the factory
+/// The default constructor requires many properties. To make a
+/// [FlexSchemeColor] from a minimum of just the primary color, use the factory
 /// [FlexSchemeColor.from] which only requires the primary color to make
 /// a complete color set, but can use the other colors as optional values.
 @immutable

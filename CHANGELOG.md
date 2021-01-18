@@ -2,14 +2,16 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
-## [1.4.0] - January 16, 2021
+## [1.4.0] - January 18, 2021
 
 * Added convenience property `scheme` to FlexColorScheme factories light and dark. This a shortcut for
   using the built-in color schemes. The `colors` property can still be used as before. The `.light` and
-  `.dark` factories no longer have any required parameters. If `scheme` is not provided it defaults 
+  `.dark` factories no longer have any required properties. If `scheme` is not provided it defaults 
   to `FlexScheme.material` and if both `scheme` and `colors` are provided, the scheme provided via `colors` prevail.
+* Updated the simple example 1 to use the new `scheme` property, as in 
+  `theme: FlexColorScheme.light(scheme: FlexScheme.mandyRed).toTheme`.  
 * Added experimental support for transparent system navigation bar for Android for SDK >= 30 (Android 11).
-  The support is added via new `opacity` parameter in `FlexColorScheme.themedSystemNavigationBar`.    
+  The support is added via new `opacity` property in `FlexColorScheme.themedSystemNavigationBar`.    
   
   A separate example that builds
   on example 5, shows and explains how and when transparent system navigation bar can be used in Android. It also shows
@@ -19,6 +21,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   [**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for more information.    
 * Added more tests, now 689 tests. All color values used are now also tested, any modification to them is considered
   a breaking change. A bit more tests would still be nice, for the ThemeModeSwitch Widget at least.
+  Total test coverage > 98%, it will do for now.
 * **Documentation:** 
   * Changed example one and the intro, to use the new simpler `scheme` property when using built-in schemes.
   * Added a section that lists which sub-themes, and which of their properties, are NOT null when creating a theme data 
@@ -167,10 +170,7 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
   See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206. Will not impact
   API or functionality, the implementation will only be changed to one that is supported directly by the SDK, so it
   becomes easier and cleaner to do it.
-- Currently, the build and test pipeline are the same that include the test code coverage report. While the tests do
-  include a test of a minimal app, I would like to set up a separate build that can be run after a package update, but 
-  also when there is a new Flutter release on stable and beta channels. It should build all five example apps for Web 
-  and publishes them on GitHub Pages. 
+
 
 ### COMPLETED
 - Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
@@ -192,6 +192,12 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - **Companion Web App**  
   I started playing with a small companion app that will allow you to design `FlexColorSchemes` and copy-paste the 
   needed setup code into an app. If/when I finnish it, I will release it as live version with open source code as well.
+
+- **Automate the web example builds**  
+  Currently, the build and test pipeline are the same that include the test code coverage report. While the tests do
+  include a test of a minimal app, I would like to set up a separate build that can be run after a package update, but
+  also when there is a new Flutter release on stable and beta channels. It should build all five example apps for Web
+  and publishes them on GitHub Pages.
   
 - **Branded surface customization**
   Add API offering more flexibility and customization capabilities to the surface branding.
