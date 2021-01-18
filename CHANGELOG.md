@@ -17,7 +17,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   navigation bar in Android, when transparency is not supported, and your app uses transparent system navigation 
   bar when running on an API level that supports it. Please see this separate small stand-alone example Android project
   [**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for more information.    
-* Added more tests, now 665 tests. All color values used are now also tested, any modification to them is considered
+* Added more tests, now 689 tests. All color values used are now also tested, any modification to them is considered
   a breaking change. A bit more tests would still be nice, for the ThemeModeSwitch Widget at least.
 * **Documentation:** 
   * Changed example one and the intro, to use the new simpler `scheme` property when using built-in schemes.
@@ -184,7 +184,7 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - API to opt-out from one-toned AppBar and return it to Android's default two-toned.
 - API to assist with themed annotated region for system navigation bar theming.
 - Version 1.3.0: Added 195 unit and widgets tests, mostly unit tests.
-- Version 1.4.0: Increased unit and widget test to 665 tests. All color definitions are now also tested to ensure 
+- Version 1.4.0: Increased unit and widget test to 689 tests. All color definitions are now also tested to ensure 
   they will not be changed by any accidental edit. Test coverage is higher than 95%, certainly sufficient for this 
   type of package, but there are still some areas that could and will be improved.
 

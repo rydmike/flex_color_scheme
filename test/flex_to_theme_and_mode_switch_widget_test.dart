@@ -17,20 +17,50 @@ void main() {
       await tester.pumpWidget(const ThemeSwitchApp(
         themeMode: ThemeMode.light,
         labelAbove: true,
+        selected: true,
       ));
+
       final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
       await tester.pump();
       expect(themeSwitch, findsOneWidget);
+
+      final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.pump();
+      expect(optionButton, findsOneWidget);
     });
+
     testWidgets('FTMS1.02: Finds FlexThemeModeSwitch DarkMode',
         (WidgetTester tester) async {
       await tester.pumpWidget(const ThemeSwitchApp(
         themeMode: ThemeMode.dark,
         labelAbove: false,
+        selected: false,
       ));
+
       final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
       await tester.pump();
       expect(themeSwitch, findsOneWidget);
+
+      final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.pump();
+      expect(optionButton, findsOneWidget);
+    });
+
+    testWidgets('FTMS1.03: Finds FlexThemeModeSwitch DarkMode',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const ThemeSwitchApp(
+        themeMode: ThemeMode.system,
+        labelAbove: false,
+        selected: true,
+      ));
+
+      final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
+      await tester.pump();
+      expect(themeSwitch, findsOneWidget);
+
+      final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.pump();
+      expect(optionButton, findsOneWidget);
     });
   });
 
@@ -415,10 +445,12 @@ class ThemeSwitchApp extends StatefulWidget {
   const ThemeSwitchApp({
     this.themeMode,
     this.labelAbove,
+    this.selected,
     Key key,
   }) : super(key: key);
   final ThemeMode themeMode;
   final bool labelAbove;
+  final bool selected;
 
   @override
   _ThemeSwitchAppState createState() => _ThemeSwitchAppState();
@@ -427,12 +459,14 @@ class ThemeSwitchApp extends StatefulWidget {
 class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
   ThemeMode mode;
   bool labelAbove;
+  bool selected;
 
   @override
   void initState() {
     super.initState();
     mode = widget.themeMode;
     labelAbove = widget.labelAbove;
+    selected = widget.selected;
   }
 
   @override
@@ -449,16 +483,31 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
       themeMode: mode,
       home: Scaffold(
         appBar: AppBar(title: const Text('Theme Switch')),
-        body: FlexThemeModeSwitch(
-            key: const ValueKey<String>('switch'),
-            themeMode: mode,
-            labelAbove: labelAbove,
-            onThemeModeChanged: (ThemeMode value) {
-              setState(() {
-                mode = value;
-              });
-            },
-            flexSchemeData: FlexColor.schemes[FlexScheme.material]),
+        body: Column(
+          children: <Widget>[
+            FlexThemeModeSwitch(
+                key: const ValueKey<String>('switch'),
+                themeMode: mode,
+                labelAbove: labelAbove,
+                onThemeModeChanged: (ThemeMode value) {
+                  setState(() {
+                    mode = value;
+                  });
+                },
+                flexSchemeData: FlexColor.schemes[FlexScheme.material]),
+            FlexThemeModeOptionButton(
+              key: const ValueKey<String>('option'),
+              flexSchemeColor: FlexColor.schemes[FlexScheme.material].light,
+              backgroundColor: Colors.white,
+              selected: selected,
+              onSelect: () {
+                setState(() {
+                  selected = !selected;
+                });
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
