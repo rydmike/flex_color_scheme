@@ -2,6 +2,26 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [1.4.1] - January 26, 2021
+
+* Added four new built-in color schemes.
+  * **Barossa** - Barossa red and cardin green theme..
+    Use enum value `FlexScheme.barossa` for easy access to it.
+  * **Shark and orange** - Shark grey and orange ecstasy theme.
+    Use enum value `FlexScheme.shark` for easy access to it.
+  * **Big stone tulip** - Big stone blue and tulip tree yellow theme.
+    Use enum value `FlexScheme.bigStone` for easy access to it.
+  * **Damask and lunar** - Damask red and lunar green theme.
+    Use enum value `FlexScheme.damask` for easy access to it.
+    
+* Improved tests.
+* Added GitHub actions to automate build and publish the examples on the web.  
+* Minor changes to the examples. Modified to not need the `late` keyword when they are converted 
+  to null safe versions.
+* **Documentation:**
+  * Added the new color schemes to the documentation.
+  * Minor typo corrections. 
+  
 ## [1.4.0] - January 18, 2021
 
 * Added convenience property `scheme` to FlexColorScheme factories light and dark. This a shortcut for

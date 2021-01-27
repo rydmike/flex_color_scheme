@@ -10,14 +10,11 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 //****************************************************************************
 
 void main() {
-  // ignore: lines_longer_than_80_chars
-  // TODO Figure out how to do a private constructor test in Dart for better test coverage?
-  // Alternatively, if there is a directive to ignore it it, that also works.
-  // group('FC1: WITH FlexColor() ', () {
-  // const ColorScheme ml = ColorScheme.light();
-  // test('FC1.01: GIVEN a FlexColor() call expect error ', () {
-  //   expect(FlexColor(), ml.primary);
-  // });
+  // This is just a stupid test for coverage.
+  // group('FC1: WITH FlexColor ', () {
+  //   test('FC1.01: GIVEN a FlexColor._() expect FlexColor._(). ', () {
+  //     expect(FlexColor._(), FlexColor._());
+  //   });
   // });
   //****************************************************************************
   // FlexColor unit tests - Color verification 1.
@@ -1069,6 +1066,142 @@ void main() {
     });
     test('FC5 colors', () {
       expect(FlexColor.ebonyClayDarkSecondaryVariant, const Color(0xFF3D8475));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.barossaName, 'Barossa');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.barossaDescription,
+        'Barossa red and cardin green colored theme.',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.barossaLightPrimary, const Color(0xFF4E0029));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.barossaLightPrimaryVariant, const Color(0xFF750D43));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.barossaLightSecondary, const Color(0xFF00341A));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.barossaLightSecondaryVariant, const Color(0xFF124C2F));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.barossaDarkPrimary, const Color(0xFF94667E));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.barossaDarkPrimaryVariant, const Color(0xFFB3718D));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.barossaDarkSecondary, const Color(0xFF6B9882));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.barossaDarkSecondaryVariant, const Color(0xFF599B7B));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.sharkName, 'Shark and orange');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.sharkDescription,
+        'Shark grey and orange ecstasy colored theme.',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sharkLightPrimary, const Color(0xFF1D2228));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sharkLightPrimaryVariant, const Color(0xFF484C50));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sharkLightSecondary, const Color(0xFFFB8122));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sharkLightSecondaryVariant, const Color(0xFFEA9654));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sharkDarkPrimary, const Color(0xFF777A7E));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sharkDarkPrimaryVariant, const Color(0xFF919396));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sharkDarkSecondary, const Color(0xFFFCB075));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sharkDarkSecondaryVariant, const Color(0xFFEFB383));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.bigStoneName, 'Big stone tulip');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.bigStoneDescription,
+        'Big stone blue and tulip tree yellow colored theme.',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bigStoneLightPrimary, const Color(0xFF1A2C42));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bigStoneLightPrimaryVariant, const Color(0xFF0C1115));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bigStoneLightSecondary, const Color(0xFFE59A18));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bigStoneLightSecondaryVariant, const Color(0xFFF0B03F));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bigStoneDarkPrimary, const Color(0xFF60748A));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bigStoneDarkPrimaryVariant, const Color(0xFF889EB6));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bigStoneDarkSecondary, const Color(0xFFEBB251));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bigStoneDarkSecondaryVariant, const Color(0xFFF4CA7E));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.damaskName, 'Damask and lunar');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.damaskDescription,
+        'Damask red and lunar green colored theme.',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.damaskLightPrimary, const Color(0xFFC96646));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.damaskLightPrimaryVariant, const Color(0xFFD48166));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.damaskLightSecondary, const Color(0xFF373A36));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.damaskLightSecondaryVariant, const Color(0xFF343E32));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.damaskDarkPrimary, const Color(0xFFDA9882));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.damaskDarkPrimaryVariant, const Color(0xFFECC9BD));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.damaskDarkSecondary, const Color(0xFF767D75));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.damaskDarkSecondaryVariant, const Color(0xFF839081));
     });
   });
 }

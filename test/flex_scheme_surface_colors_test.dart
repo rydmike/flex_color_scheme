@@ -431,31 +431,24 @@ void main() {
     //**************************************************************************
 
     test(
-        'FSSC1.16a: Test toString implemented via debugFillProperties '
-        'EXPECT working data print.', () {
-      expect(m1.toString().length, greaterThan(15));
-    });
-    test(
-        'FSSC1.16b: Test toString implemented via debugFillProperties '
+        'FSSC1.16: Test toString implemented via debugFillProperties '
         'EXPECT exact print string', () {
-      expect(
-          m1.toString(),
+      expect(m1.toString(), equalsIgnoringHashCodes(
           // ignore: lines_longer_than_80_chars
-          'FlexSchemeSurfaceColors#4228a(surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff))');
+          'FlexSchemeSurfaceColors#00000(surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff))'));
     });
+
     test(
-        'FSSC1.17a: Test toStringShort implemented via debugFillProperties '
-        'EXPECT working data print.', () {
-      expect(m1.toStringShort().length, greaterThan(10));
-    });
-    test(
-        'FSSC1.17b: Test toStringShort implemented via debugFillProperties '
+        'FSSC1.17: Test toStringShort implemented via debugFillProperties '
         'EXPECT exact short printout string', () {
-      expect(m1.toStringShort(), 'FlexSchemeSurfaceColors#4228a');
+      expect(m1.toStringShort(),
+          equalsIgnoringHashCodes('FlexSchemeSurfaceColors#00000'));
     });
     test('FSSC1.18a: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
     });
+    // This happens to always equal now in tests, if it start failing, test
+    // 18c is actually enough.
     test('FSSC1.18b: Test hashCode exact value.', () {
       expect(m1.hashCode, 107225738);
     });

@@ -7,7 +7,7 @@
 color branding on surfaces. The created themes are based on the same concept as Flutter's ColorScheme based themes,
 but with a few interesting twists and convenience features.
 
-For more information about **FlexColorScheme**, its background and use cases, this package companion
+For some addtional information about **FlexColorScheme**, its background and use cases, this package companion
 [**blog post and article**](https://rydmike.com/colorscheme) is also recommended reading.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
@@ -73,7 +73,7 @@ FlexColorScheme can also do some other nice theme design tricks.
 If you have seen the Flutter [**Flexfold web demo**](https://rydmike.com/demoflexfold) application, then you
 have already seen **FlexColorScheme** in action. The Flexfold demo app uses this package for its fancy theming and to
 enable effortless switching between all the themes it uses. The package included examples in the
-[tutorial chapter](#tutorial), show you how the Flexfold demo app theming is done by using package.
+[tutorial chapter](#tutorial), show you how the Flexfold demo app theming is done with this package.
 
 ### Color Branded Backgrounds and Surfaces
 
@@ -108,10 +108,10 @@ ThemeData `copyWith` method before passing it on to your application's `theme` o
 ### Built-in Color Schemes
 
 Color schemes are no fun without some built-in example schemes to use and play with.
-**FlexColorScheme** comes with **24** ready to go matching light and dark schemes, that you can use in your
+**FlexColorScheme** comes with **28** ready to go matching light and dark schemes, that you can use in your
 applications if you like. Here is a composite image showing them all.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_all_schemes_24_at_75.png?raw=true" alt="ColorScheme all"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_all_schemes_28_at_100.png?raw=true" alt="ColorScheme all"/>
 
 The above image is just an overview teaser of all the color schemes. In the package companion blog post you can
 find [**high resolution images**](https://rydmike.com/colorscheme#built-in-color-schemes) of each one of them.
@@ -202,7 +202,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 ```
 
 You can now start using `FlexColorScheme` based themes in your application. The easiest way to do so is to use one
-of the 24 built-in color schemes. The schemes have enums that you can use to refer to them. Their corresponding
+of the 28 built-in color schemes. The schemes have enums that you can use to refer to them. Their corresponding
 data object holds name, description and separate scheme data for each schemes' light and dark mode.
 
 As a simple use case, take the **default Flutter counter app**, do the above installation and select one of the
@@ -443,13 +443,7 @@ class DemoApp extends StatefulWidget {
 
 class _DemoAppState extends State<DemoApp> {
   // Used to select if we use the dark or light theme.
-  ThemeMode themeMode;
-
-  @override
-  void initState() {
-    themeMode = ThemeMode.light;
-    super.initState();
-  }
+  ThemeMode themeMode = ThemeMode.light;
 
   @override
   Widget build(BuildContext context) {
@@ -577,23 +571,22 @@ This setup is totally equivalent to how we used one of the built-in predefined `
 in this case we just defined our own custom `FlexSchemeData` in `customFlexScheme`.
 
 ```dart
-  :
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FlexColorScheme',
-
+      // The color scheme for the light theme, made toTheme
       theme: FlexColorScheme.light(
         colors: customFlexScheme.light,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
       ).toTheme,
-
+      // The color scheme for the dark theme, made toTheme
       darkTheme: FlexColorScheme.dark(
         colors: customFlexScheme.dark,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
       ).toTheme,
-
+      // Demo home page, same as in example 1
       home: HomePage(
         themeMode: themeMode,
         onThemeModeChanged: (ThemeMode mode) {
@@ -634,24 +627,16 @@ the selected built-in scheme we selected on the HomePage is used. We also set th
 `FlexSurface.strong`, for a strong primary color branded blend in surfaces and backgrounds.
 
  ```dart
- :
  class _DemoAppState extends State<DemoApp> {
-   ThemeMode themeMode;
+   ThemeMode themeMode = ThemeMode.light;
    // Used to store which FlexSchemeData option we selected
-   FlexScheme flexScheme;
+   FlexScheme flexScheme = FlexScheme.hippieBlue; // Default selected theme
 
-   @override
-   void initState() {
-     themeMode = ThemeMode.light;
-     flexScheme = FlexScheme.hippieBlue; // Default selected theme
-     super.initState();
-   }
    @override
    Widget build(BuildContext context) {
      return MaterialApp(
        debugShowCheckedModeBanner: false,
        title: 'FlexColorScheme',
-
        theme: FlexColorScheme.light(
          // When we select the custom FlexScheme on the home
          // page, we get the custom enum value back and use the custom
@@ -701,14 +686,13 @@ In this example on the **HomePage** we removed the option to allow the theme mod
 setting, by setting `showSystemMode` to `false`, thus removing this option from the switch.
 
 ```dart
-  :
   FlexThemeModeSwitch(
     themeMode: themeMode,
     onThemeModeChanged: onThemeModeChanged,
     flexSchemeData: flexSchemeData,
+    // We don't show the system mode option button
     showSystemMode: false,
   ),
-  :
 ```
 
 These are the four resulting different themes with their light and dark modes, that we can select and
@@ -854,18 +838,10 @@ the light scheme, to get one automatically computed from the defined light schem
 The setup of the stateful MaterialApp is just as simple as in the previous examples.
 
 ```dart
- :
  class _DemoAppState extends State<DemoApp> {
-   ThemeMode themeMode;
+   ThemeMode themeMode = ThemeMode.light;
    // Used to select which FlexSchemeData we currently use in our list.
-   int themeIndex;
-
-   @override
-   void initState() {
-     themeMode = ThemeMode.light;
-     themeIndex = 6; // Start with index 6, the brand blue colors.
-     super.initState();
-   }
+   int themeIndex = 6; // Start with index 6, the brand blue colors.
 
    @override
    Widget build(BuildContext context) {
@@ -918,7 +894,7 @@ found in different well known web brands. The primary blue color in the light sc
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4al.png?raw=true" alt="ColorScheme example 4a light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4bl.png?raw=true" alt="ColorScheme example 4b light" width="250"/>
 
 You can use the popup menu available in the ListTile showing the current theme to change the active theme. You
-can choose any of the built-in 24 schemes, plus the three custom color schemes we added. When you change scheme, you
+can choose any of the built-in 28 schemes, plus the three custom color schemes we added. When you change scheme, you
 will notice that the active theme color changes are animated by interpolating from the active theme colors,
 to the new theme colors. This is a very nice standard feature when you modify the theme used by a Flutter
 Material applications.
@@ -985,62 +961,44 @@ the standard flutter `ThemeData.from` factory to create the theme from the same 
 We can use this toggle to see and study the differences that `FlexColorScheme.toTheme` brings.
 
 ```dart
- :
-
  class _DemoAppState extends State<DemoApp> {
    // Used to select if we use the dark or light theme.
-   ThemeMode themeMode;
+   ThemeMode themeMode = ThemeMode.light;
     // Used to select which FlexSchemeData we use in our list of schemes.
-   int themeIndex;
+   int themeIndex = 7; // Start with deep blue see theme.
    // Enum used to control primary color branding on surface and background.
-   FlexSurface flexSurface;
+   FlexSurface flexSurface = FlexSurface.medium;
    // Enum used to select what app bar style we use.
-   FlexAppBarStyle flexAppBarStyle;
+   FlexAppBarStyle flexAppBarStyle = FlexAppBarStyle.primary;
    // Used to modify the themed app bar elevation.
-   double appBarElevation;
+   double appBarElevation = 0;
    // Enum used to select what tab bar style we use.
-   FlexTabBarStyle flexTabBarStyle;
+   FlexTabBarStyle flexTabBarStyle = FlexTabBarStyle.forAppBar;
    // If true, tooltip background will be light in light theme, and dark
    // in dark themes. The Flutter Material default and standard is the other
    // way, tooltip background color is inverted compared to app background.
-   bool tooltipsMatchBackground;
+   bool tooltipsMatchBackground = false;
    // Allow toggling between normal dark mode and true black dark mode.
-   bool darkIsTrueBlack;
+   bool darkIsTrueBlack = false;
    // Allow toggling between using the actual defined dark color scheme or
    // try how it would look if we had not defined the dark colors, but had
    // been lazy and just created the dark scheme from the light scheme
    // with the toDark() method.
-   bool useToDarkMethod;
+   bool useToDarkMethod = false;
    // The 'level' of white blend percentage used when computing dark scheme
    // colors from the light scheme colors with the toDark method.
-   int level;
+   int level = 35;
    // Use the toTheme to create Themes from `FlexColorScheme`. This is
    // the preferred method when using `FlexColorScheme`. In the demo
    // you can use a toggle to see what a FlexColorScheme looks like if
    // you the color scheme and `ThemeData.from` to instead create the theme.
-   bool useToThemeMethod;
-
-   @override
-   void initState() {
-     themeMode = ThemeMode.light;
-     themeIndex = 7; // Start with deep blue see theme.
-     flexSurface = FlexSurface.medium;
-     flexAppBarStyle = FlexAppBarStyle.primary;
-     appBarElevation = 0;
-     flexTabBarStyle = FlexTabBarStyle.forAppBar;
-     tooltipsMatchBackground = false;
-     darkIsTrueBlack = false;
-     useToDarkMethod = false;
-     level = 35;
-     useToThemeMethod = true;
-     super.initState();
-   }
+   bool useToThemeMethod = true;
 ```
 
 ### Example 5 - The FlexColorScheme Properties and toTheme
 
 We define the light theme for the app, using current theme index, selected surface style and app bar style. With
-the built-in 24 themes, and the three custom ones we made, we can use 27 different app themes via the setup below,
+the built-in 28 themes, and the three custom ones we made, we can use 27 different app themes via the setup below,
 times the five surface styles and five app bar variants.
 
 The factory `FlexColorScheme.light` is used to define a `FlexColorScheme` for a light theme, from the light
@@ -1048,7 +1006,6 @@ FlexSchemeColor in the `myFlexSchemes` list, plus some other properties, like th
 this example, as well as the tooltip and true black setting for the dark theme.
 
 ```dart
-   :
    @override
    Widget build(BuildContext context) {
      return MaterialApp(
@@ -1283,7 +1240,7 @@ toggle dark and light theme mode. Many Flutter applications neglect or forget to
 ```dart
    return AnnotatedRegion<SystemUiOverlayStyle>(
      value: FlexColorScheme.themedSystemNavigationBar(context),
-     child: ...
+     child: ....
    );
 ```
 
@@ -1933,21 +1890,25 @@ This table lists all current built-in schemes and provides a link to a high-reso
 | indigo       | Indigo nights          | Indigo color theme, based on Material indigo and deep purple colors. | [Light](https://rydmike.com/assets/LightScheme004.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme004.png?raw=true) |
 | hippieBlue   | Hippie blue            | Hippie blue with surfie green and chock coral pink theme. | [Light](https://rydmike.com/assets/LightScheme005.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme005.png?raw=true) |
 | aquaBlue     | Aqua blue              | Aqua tropical ocean blue theme. | [Light](https://rydmike.com/assets/LightScheme006.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme006.png?raw=true) |
-| brandBlue    | Brand blues            | Blue colors used in well known brand themes. | [Light](https://rydmike.com/assets/LightScheme007.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme007.png?raw=true) |
+| brandBlue    | Brand blues            | A mixture of blue colors from well known web brands. | [Light](https://rydmike.com/assets/LightScheme007.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme007.png?raw=true) |
 | deepBlue     | Deep blue sea          | Dark deep blue sea color theme. | [Light](https://rydmike.com/assets/LightScheme008.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme008.png?raw=true) |
 | sakura       | Pink sakura            | Pink color theme, based on sakura cherry blossom like colors. | [Light](https://rydmike.com/assets/LightScheme009.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme009.png?raw=true) |
-| mandyRed     | Oh Mandy red           | Mandy red and Viking blue inspired red theme. | [Light](https://rydmike.com/assets/LightScheme010.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme010.png?raw=true) |
+| mandyRed     | Oh Mandy red           | Mandy red and Viking blue colored theme. | [Light](https://rydmike.com/assets/LightScheme010.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme010.png?raw=true) |
 | red          | Red tornado            | Red color theme, based on Material red and pink colors. | [Light](https://rydmike.com/assets/LightScheme011.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme011.png?raw=true) |
 | redWine      | Red red wine           | Red color theme, based on red wine like colors. | [Light](https://rydmike.com/assets/LightScheme012.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme012.png?raw=true) |
 | purpleBrown  | Purple brown           | Purple brown tinted aubergine and eggplant colored theme. | [Light](https://rydmike.com/assets/LightScheme013.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme013.png?raw=true) |
 | green        | Green forest           | Green color theme, based on Material green and cyan colors. | [Light](https://rydmike.com/assets/LightScheme014.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme014.png?raw=true) |
 | money        | Green money            | Green money and finance style color theme. | [Light](https://rydmike.com/assets/LightScheme015.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme015.png?raw=true) |
 | jungle       | Green jungle           | Green jungle and rain forest color theme. | [Light](https://rydmike.com/assets/LightScheme016.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme016.png?raw=true) |
-| greyLaw      | Grey law               | Material blue grey and ultra dark purple color theme, law firm style.  | [Light](https://rydmike.com/assets/LightScheme017.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme017.png?raw=true) |
+| greyLaw      | Grey law               | Material blue grey and ultra dark purple color theme. Colors suitable for law firms.  | [Light](https://rydmike.com/assets/LightScheme017.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme017.png?raw=true) |
 | wasabi       | Willow and wasabi      | Wild Willow and wasabi green with orchid purple inspired colors. | [Light](https://rydmike.com/assets/LightScheme018.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme018.png?raw=true) |
 | gold         | Gold sunset            | Gold sunset color theme, based on orange like colors. | [Light](https://rydmike.com/assets/LightScheme019.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme019.png?raw=true) |
 | mango        | Mango mojito           | Orange and green Mango mojito color theme.  | [Light](https://rydmike.com/assets/LightScheme020.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme020.png?raw=true) |
-| amber        | Amber blue             | Amber blaze and blue color theme, based on Material amber and blue accent colors. | [Light](https://rydmike.com/assets/LightScheme021.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme021.png?raw=true)|
+| amber        | Amber blue             | Amber blaze and blue color theme, based on Material amber and blue accent colors, a high-contrast theme. An alternative to the default Material high contrast theme.| [Light](https://rydmike.com/assets/LightScheme021.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme021.png?raw=true)|
 | vesuviusBurn | Vesuvius burned        | Vesuvius burned orange and eden green theme. | [Light](https://rydmike.com/assets/LightScheme022.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme022.png?raw=true) |
 | deepPurple   | Deep purple            | Deep purple daisy bush theme, based on Material deepPurple and lightBlueAccent colors. | [Light](https://rydmike.com/assets/LightScheme023.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme023.png?raw=true)|
 | ebonyClay    | Ebony clay             | Ebony clay dark blue-grey and watercourse green colored theme. | [Light](https://rydmike.com/assets/LightScheme024.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme024.png?raw=true) |
+| barossa      | Barossa                | Barossa red and cardin green colored theme. A somber color set suited for courts and law firms. | [Light](https://rydmike.com/assets/LightScheme025.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme025.png?raw=true) |
+| shark        | Shark and orange       | Shark grey and orange ecstasy colored theme. | [Light](https://rydmike.com/assets/LightScheme026.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme026.png?raw=true) |
+| bigStone     | Big stone tulip        | Big stone blue and tulip tree yellow colored theme. | [Light](https://rydmike.com/assets/LightScheme027.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme027.png?raw=true) |
+| damask       | Damask and lunar       | Damask red and lunar green colored theme. | [Light](https://rydmike.com/assets/LightScheme028.png?raw=true) | [Dark](https://rydmike.com/assets/DarkScheme028.png?raw=true) |

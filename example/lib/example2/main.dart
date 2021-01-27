@@ -41,13 +41,7 @@ class DemoApp extends StatefulWidget {
 
 class _DemoAppState extends State<DemoApp> {
   // Used to select if we use the dark or light theme.
-  ThemeMode themeMode;
-
-  @override
-  void initState() {
-    super.initState();
-    themeMode = ThemeMode.light;
-  }
+  ThemeMode themeMode = ThemeMode.light;
 
   @override
   Widget build(BuildContext context) {

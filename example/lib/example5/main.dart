@@ -133,23 +133,23 @@ class DemoApp extends StatefulWidget {
 
 class _DemoAppState extends State<DemoApp> {
   // Used to select if we use the dark or light theme.
-  ThemeMode themeMode;
+  ThemeMode themeMode = ThemeMode.light;
 
   // Used to select which FlexSchemeData we use in our list of schemes.
-  int themeIndex;
+  int themeIndex = 7; // Start with deep blue sea.
 
   // Enum used to control the level of primary color surface branding applied
   // to surfaces and backgrounds.
-  FlexSurface flexSurface;
+  FlexSurface flexSurface = FlexSurface.medium;
 
   // Enum used to select what app bar style we use.
-  FlexAppBarStyle flexAppBarStyle;
+  FlexAppBarStyle flexAppBarStyle = FlexAppBarStyle.primary;
 
   // Used to modify the themed app bar elevation.
-  double appBarElevation;
+  double appBarElevation = 0;
 
   // Enum used to select what tab bar style we use.
-  FlexTabBarStyle flexTabBarStyle;
+  FlexTabBarStyle flexTabBarStyle = FlexTabBarStyle.forAppBar;
 
   // If true, tooltip theme background will be light in light theme, and dark
   // in dark themes. The Flutter and Material default and standard is the other
@@ -157,43 +157,27 @@ class _DemoAppState extends State<DemoApp> {
   // Set to true, to mimic e.g. the look of Windows desktop tooltips. You
   // could tie this to the active platform and have different style of tooltips
   // on different platforms.
-  bool tooltipsMatchBackground;
+  bool tooltipsMatchBackground = false;
 
   // Allow toggling between normal dark mode and true black dark mode.
-  bool darkIsTrueBlack;
+  bool darkIsTrueBlack = false;
 
   // Allow toggling between using the actual defined dark color scheme or try
   // how it would look if we had not defined the dark colors, but had been lazy
   // and just created the dark scheme from the light scheme with the toDark()
   // method.
-  bool useToDarkMethod;
+  bool useToDarkMethod = false;
 
   // The 'level' of white blend percentage used when computing dark scheme
   // colors from the light scheme colors with the toDark method.
-  int level;
+  int level = 35;
 
   // Use the toTheme method to create Themes from [FlexColorScheme]. This
   // is the preferred method when using [FlexColorScheme]. In this demo
   // you can use a toggle to see what a FlexColorScheme looks like if you just
   // return its color scheme and use [ThemeData.from] to instead create your
   // theme.
-  bool useToThemeMethod;
-
-  @override
-  void initState() {
-    super.initState();
-    themeMode = ThemeMode.light;
-    themeIndex = 7; // Start with deep blue sea.
-    flexSurface = FlexSurface.medium;
-    flexAppBarStyle = FlexAppBarStyle.primary;
-    appBarElevation = 0;
-    flexTabBarStyle = FlexTabBarStyle.forAppBar;
-    tooltipsMatchBackground = false;
-    darkIsTrueBlack = false;
-    useToDarkMethod = false;
-    level = 35;
-    useToThemeMethod = true;
-  }
+  bool useToThemeMethod = true;
 
   @override
   Widget build(BuildContext context) {

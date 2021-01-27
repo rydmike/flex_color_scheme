@@ -89,6 +89,18 @@ enum FlexScheme {
   /// Ebony clay deep blue grey and watercourse green theme.
   ebonyClay,
 
+  /// Barossa red and cardin green theme.
+  barossa,
+
+  /// Shark grey and orange ecstasy theme.
+  shark,
+
+  /// Big stone blue and tulip tree yellow theme.
+  bigStone,
+
+  /// Damask red and lunar green theme.
+  damask,
+
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a [FlexColorScheme] based on a custom
   /// [FlexSchemeData] object. If not provided, it defaults to the
@@ -101,7 +113,7 @@ enum FlexScheme {
 class FlexColor {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
-  // ignore: unused_element
+  // coverage:ignore-line
   FlexColor._();
 
   /// Material standard color for light surface.
@@ -998,6 +1010,142 @@ class FlexColor {
   /// Ebony clay theme color for dark secondary variant color.
   static const Color ebonyClayDarkSecondaryVariant = Color(0xFF3D8475);
 
+  // Barossa dark purple and cardin green scheme.
+  // Colors and scheme named by "name that color" library for the light colors.
+
+  /// English name of the Barossa theme.
+  static const String barossaName = 'Barossa';
+
+  /// English description of the Barossa theme.
+  static const String barossaDescription =
+      'Barossa red and cardin green colored theme.';
+
+  /// Barossa theme color for light primary color.
+  static const Color barossaLightPrimary = Color(0xFF4E0029);
+
+  /// Barossa theme color for light primary variant color.
+  static const Color barossaLightPrimaryVariant = Color(0xFF750D43);
+
+  /// Barossa theme color for light secondary color.
+  static const Color barossaLightSecondary = Color(0xFF00341A);
+
+  /// Barossa theme color for light secondary variant color.
+  static const Color barossaLightSecondaryVariant = Color(0xFF124C2F);
+
+  /// Barossa theme color for dark primary color.
+  static const Color barossaDarkPrimary = Color(0xFF94667E);
+
+  /// Barossa theme color for dark primary variant color.
+  static const Color barossaDarkPrimaryVariant = Color(0xFFB3718D);
+
+  /// Barossa theme color for dark secondary color.
+  static const Color barossaDarkSecondary = Color(0xFF6B9882);
+
+  /// Barossa theme color for dark secondary variant color.
+  static const Color barossaDarkSecondaryVariant = Color(0xFF599B7B);
+
+  // Shark grey and orange ecstasy scheme.
+  // Color scheme named by "name that color" library using the light colors.
+
+  /// English name of the Shark ecstasy theme.
+  static const String sharkName = 'Shark and orange';
+
+  /// English description of the Shark ecstasy theme.
+  static const String sharkDescription =
+      'Shark grey and orange ecstasy colored theme.';
+
+  /// Shark ecstasy theme color for light primary color.
+  static const Color sharkLightPrimary = Color(0xFF1D2228);
+
+  /// Shark ecstasy theme color for light primary variant color.
+  static const Color sharkLightPrimaryVariant = Color(0xFF484C50);
+
+  /// Shark ecstasy theme color for light secondary color.
+  static const Color sharkLightSecondary = Color(0xFFFB8122);
+
+  /// Shark ecstasy theme color for light secondary variant color.
+  static const Color sharkLightSecondaryVariant = Color(0xFFEA9654);
+
+  /// Shark ecstasy theme color for dark primary color.
+  static const Color sharkDarkPrimary = Color(0xFF777A7E);
+
+  /// Shark ecstasy theme color for dark primary variant color.
+  static const Color sharkDarkPrimaryVariant = Color(0xFF919396);
+
+  /// Shark ecstasy theme color for dark secondary color.
+  static const Color sharkDarkSecondary = Color(0xFFFCB075);
+
+  /// Shark ecstasy theme color for dark secondary variant color.
+  static const Color sharkDarkSecondaryVariant = Color(0xFFEFB383);
+
+  // Big stone blue and neon tulip-three yellow scheme.
+  // Colors and scheme named by "name that color" library for the light colors.
+
+  /// English name of the Big stone ecstasy theme.
+  static const String bigStoneName = 'Big stone tulip';
+
+  /// English description of the Big stone ecstasy theme.
+  static const String bigStoneDescription =
+      'Big stone blue and tulip tree yellow colored theme.';
+
+  /// Big stone theme color for light primary color.
+  static const Color bigStoneLightPrimary = Color(0xFF1A2C42);
+
+  /// Big stone theme color for light primary variant color.
+  static const Color bigStoneLightPrimaryVariant = Color(0xFF0C1115);
+
+  /// Big stone theme color for light secondary color.
+  static const Color bigStoneLightSecondary = Color(0xFFE59A18);
+
+  /// Big stone theme color for light secondary variant color.
+  static const Color bigStoneLightSecondaryVariant = Color(0xFFF0B03F);
+
+  /// Big stone theme color for dark primary color.
+  static const Color bigStoneDarkPrimary = Color(0xFF60748A);
+
+  /// Big stone theme color for dark primary variant color.
+  static const Color bigStoneDarkPrimaryVariant = Color(0xFF889EB6);
+
+  /// Big stone theme color for dark secondary color.
+  static const Color bigStoneDarkSecondary = Color(0xFFEBB251);
+
+  /// Big stone theme color for dark secondary variant color.
+  static const Color bigStoneDarkSecondaryVariant = Color(0xFFF4CA7E);
+
+  // Damask red and lunar green scheme.
+  // Colors and scheme named by "name that color" library for the light colors.
+
+  /// English name of the damask theme.
+  static const String damaskName = 'Damask and lunar';
+
+  /// English description of the Big stone ecstasy theme.
+  static const String damaskDescription =
+      'Damask red and lunar green colored theme.';
+
+  /// Big stone theme color for light primary color.
+  static const Color damaskLightPrimary = Color(0xFFC96646);
+
+  /// Big stone theme color for light primary variant color.
+  static const Color damaskLightPrimaryVariant = Color(0xFFD48166);
+
+  /// Big stone theme color for light secondary color.
+  static const Color damaskLightSecondary = Color(0xFF373A36);
+
+  /// Big stone theme color for light secondary variant color.
+  static const Color damaskLightSecondaryVariant = Color(0xFF343E32);
+
+  /// Big stone theme color for dark primary color.
+  static const Color damaskDarkPrimary = Color(0xFFDA9882);
+
+  /// Big stone theme color for dark primary variant color.
+  static const Color damaskDarkPrimaryVariant = Color(0xFFECC9BD);
+
+  /// Big stone theme color for dark secondary color.
+  static const Color damaskDarkSecondary = Color(0xFF767D75);
+
+  /// Big stone theme color for dark secondary variant color.
+  static const Color damaskDarkSecondaryVariant = Color(0xFF839081);
+
   /// English name of the custom theme.
   static const String customName = 'Custom';
 
@@ -1503,6 +1651,86 @@ class FlexColor {
         secondary: ebonyClayDarkSecondary,
         secondaryVariant: ebonyClayDarkSecondaryVariant,
         appBarColor: ebonyClayDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.barossa: FlexSchemeData(
+      name: barossaName,
+      description: barossaDescription,
+      light: FlexSchemeColor(
+        primary: barossaLightPrimary,
+        primaryVariant: barossaLightPrimaryVariant,
+        secondary: barossaLightSecondary,
+        secondaryVariant: barossaLightSecondaryVariant,
+        appBarColor: barossaLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: barossaDarkPrimary,
+        primaryVariant: barossaDarkPrimaryVariant,
+        secondary: barossaDarkSecondary,
+        secondaryVariant: barossaDarkSecondaryVariant,
+        appBarColor: barossaDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.shark: FlexSchemeData(
+      name: sharkName,
+      description: sharkDescription,
+      light: FlexSchemeColor(
+        primary: sharkLightPrimary,
+        primaryVariant: sharkLightPrimaryVariant,
+        secondary: sharkLightSecondary,
+        secondaryVariant: sharkLightSecondaryVariant,
+        appBarColor: sharkLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: sharkDarkPrimary,
+        primaryVariant: sharkDarkPrimaryVariant,
+        secondary: sharkDarkSecondary,
+        secondaryVariant: sharkDarkSecondaryVariant,
+        appBarColor: sharkDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.bigStone: FlexSchemeData(
+      name: bigStoneName,
+      description: bigStoneDescription,
+      light: FlexSchemeColor(
+        primary: bigStoneLightPrimary,
+        primaryVariant: bigStoneLightPrimaryVariant,
+        secondary: bigStoneLightSecondary,
+        secondaryVariant: bigStoneLightSecondaryVariant,
+        appBarColor: bigStoneLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: bigStoneDarkPrimary,
+        primaryVariant: bigStoneDarkPrimaryVariant,
+        secondary: bigStoneDarkSecondary,
+        secondaryVariant: bigStoneDarkSecondaryVariant,
+        appBarColor: bigStoneDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.damask: FlexSchemeData(
+      name: damaskName,
+      description: damaskDescription,
+      light: FlexSchemeColor(
+        primary: damaskLightPrimary,
+        primaryVariant: damaskLightPrimaryVariant,
+        secondary: damaskLightSecondary,
+        secondaryVariant: damaskLightSecondaryVariant,
+        appBarColor: damaskLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: damaskDarkPrimary,
+        primaryVariant: damaskDarkPrimaryVariant,
+        secondary: damaskDarkSecondary,
+        secondaryVariant: damaskDarkSecondaryVariant,
+        appBarColor: damaskDarkSecondaryVariant,
         error: materialDarkError,
       ),
     ),

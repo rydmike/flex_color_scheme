@@ -251,31 +251,25 @@ void main() {
     //**************************************************************************
 
     test(
-        'FSC1.12a: Test toString implemented via debugFillProperties '
-        'EXPECT working data print.', () {
-      expect(m1.toString().length, greaterThan(15));
-    });
-    test(
-        'FSC1.12b: Test toString implemented via debugFillProperties '
+        'FSC1.12: Test toString implemented via debugFillProperties '
         'EXPECT exact print string', () {
-      expect(
-          m1.toString(),
+      expect(m1.toString(), equalsIgnoringHashCodes(
           // ignore: lines_longer_than_80_chars
-          'FlexSchemeColor#1b048(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), accentColor: null, error: Color(0xffb00020))');
+          'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), accentColor: null, error: Color(0xffb00020))'));
     });
     test(
-        'FSC1.13a: Test toStringShort implemented via debugFillProperties '
-        'EXPECT working data print.', () {
-      expect(m1.toStringShort().length, greaterThan(10));
-    });
-    test(
-        'FSC1.13b: Test toStringShort implemented via debugFillProperties '
+        'FSC1.13: Test toStringShort implemented via debugFillProperties '
         'EXPECT exact short printout string.', () {
-      expect(m1.toStringShort(), 'FlexSchemeColor#1b048');
+      expect(
+        m1.toStringShort(),
+        equalsIgnoringHashCodes('FlexSchemeColor#00000'),
+      );
     });
     test('FSC1.14a: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
     });
+    // This happens to always equal now in tests, if it start failing, test
+    // 14c is actually enough.
     test('FSC1.14b: Test hashCode exact value.', () {
       expect(m1.hashCode, 209825864);
     });
