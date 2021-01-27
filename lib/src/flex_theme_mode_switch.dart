@@ -449,17 +449,19 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                           Row(
                             children: <Widget>[
                               _SchemeColorBox(
-                                color: flexSchemeColor.primary,
-                                height: height,
-                                width: width,
-                                borderRadius: borderRadius,
+                                color: flexSchemeColor?.primary ??
+                                    FlexColor.materialLightPrimary,
+                                height: height ?? 24,
+                                width: width ?? 24,
+                                borderRadius: borderRadius ?? 4,
                                 padding: padding,
                               ),
                               _SchemeColorBox(
-                                color: flexSchemeColor.primaryVariant,
-                                height: height,
-                                width: width,
-                                borderRadius: borderRadius,
+                                color: flexSchemeColor?.primaryVariant ??
+                                    FlexColor.materialLightPrimaryVariant,
+                                height: height ?? 24,
+                                width: width ?? 24,
+                                borderRadius: borderRadius ?? 4,
                                 padding: padding,
                               ),
                             ],
@@ -467,17 +469,19 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                           Row(
                             children: <Widget>[
                               _SchemeColorBox(
-                                color: flexSchemeColor.secondary,
-                                height: height,
-                                width: width,
-                                borderRadius: borderRadius,
+                                color: flexSchemeColor?.secondary ??
+                                    FlexColor.materialLightSecondary,
+                                height: height ?? 24,
+                                width: width ?? 24,
+                                borderRadius: borderRadius ?? 4,
                                 padding: padding,
                               ),
                               _SchemeColorBox(
-                                color: flexSchemeColor.secondaryVariant,
-                                height: height,
-                                width: width,
-                                borderRadius: borderRadius,
+                                color: flexSchemeColor?.secondaryVariant ??
+                                    FlexColor.materialLightSecondaryVariant,
+                                height: height ?? 24,
+                                width: width ?? 24,
+                                borderRadius: borderRadius ?? 4,
                                 padding: padding,
                               ),
                             ],
@@ -514,11 +518,7 @@ class _SchemeColorBox extends StatelessWidget {
     this.width = 24,
     this.borderRadius = 4,
     this.padding,
-  })  : assert(color != null, 'Color cannot be null'),
-        assert(height != null, 'Height cannot be null'),
-        assert(width != null, 'Width cannot be null'),
-        assert(borderRadius != null, 'Border radius cannot be null'),
-        super(key: key);
+  }) : super(key: key);
 
   /// The background color used to draw an individual scheme color box.
   /// Required, cannot be null.
