@@ -10,12 +10,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 //****************************************************************************
 
 void main() {
-  // This is just a stupid test for coverage.
-  // group('FC1: WITH FlexColor ', () {
-  //   test('FC1.01: GIVEN a FlexColor._() expect FlexColor._(). ', () {
-  //     expect(FlexColor._(), FlexColor._());
-  //   });
-  // });
   //****************************************************************************
   // FlexColor unit tests - Color verification 1.
   //

@@ -34,7 +34,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FSC1.00c: GIVEN a FlexSchemeColo with null values '
+        'FSC1.00c: GIVEN a FlexSchemeColor with null values '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeColor(
@@ -46,7 +46,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FSC1.00d: GIVEN a FlexSchemeColo with null values '
+        'FSC1.00d: GIVEN a FlexSchemeColor with null values '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeColor(
@@ -58,7 +58,7 @@ void main() {
           throwsAssertionError);
     });
     test(
-        'FSC1.00e: GIVEN a FlexSchemeColo with null values '
+        'FSC1.00e: GIVEN a FlexSchemeColor with null values '
         'EXPECT throws null assertion error.', () {
       expect(
           () => FlexSchemeColor(

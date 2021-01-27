@@ -131,13 +131,13 @@ void main() {
             secondary: FlexColor.materialDarkSecondary,
             secondaryVariant: FlexColor.materialDarkSecondaryVariant,
           ).toTheme,
-          equals(const FlexColorScheme(
+          const FlexColorScheme(
             brightness: Brightness.dark,
             primary: FlexColor.materialDarkPrimary,
             primaryVariant: FlexColor.materialDarkPrimaryVariant,
             secondary: FlexColor.materialDarkSecondary,
             secondaryVariant: FlexColor.materialDarkSecondaryVariant,
-          ).toTheme));
+          ).toTheme);
     });
 
     // themeLight = Default material light scheme colors.

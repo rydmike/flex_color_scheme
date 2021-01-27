@@ -182,6 +182,7 @@ class _DemoAppState extends State<DemoApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      showSemanticsDebugger: true,
       debugShowCheckedModeBanner: false,
       title: 'FlexColorScheme',
       // Define the light theme for the app, using current theme index, selected
