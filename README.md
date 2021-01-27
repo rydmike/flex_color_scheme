@@ -563,6 +563,11 @@ const FlexSchemeData customFlexScheme = FlexSchemeData(
   ),
 );
 ```
+> **NOTE:** The above custom color scheme is fairly close to the built-in scheme
+**Barossa**. If you like it, you can probably use it instead. It is not
+exactly the same though. The 'Barossa' variant is tuned a bit differently.
+The 'Barossa' theme was introduced in version 1.4.1, and was inspired
+and based on this example.
 
 Then we use this `FlexSchemeData` **customFlexScheme** instance `light` and `dark` properties as scheme `colors`
 for the `FlexColorScheme.light` and `dark` factory for each theme mode and `toTheme` to get the themes they define.

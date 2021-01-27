@@ -14,7 +14,8 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   * **Damask and lunar** - Damask red and lunar green theme.
     Use enum value `FlexScheme.damask` for easy access to it.
     
-* Improved tests.
+* Improved Semantics for the ThemeMode Widget buttons.
+* Improved the widget tests, makes and checks for system mode changes. Totally 723 tests.
 * Added GitHub actions to automate build and publish the examples on the web.  
 * Minor changes to the examples. Modified to not need the `late` keyword when they are converted 
   to null safe versions.

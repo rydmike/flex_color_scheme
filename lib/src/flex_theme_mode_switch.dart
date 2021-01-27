@@ -410,8 +410,11 @@ class FlexThemeModeOptionButton extends StatelessWidget {
           Column(
             children: <Widget>[
               if (label != null && labelAbove)
-                Text(label,
-                    style: labelStyle ?? Theme.of(context).textTheme.caption),
+                Text(
+                  label,
+                  style: labelStyle ?? Theme.of(context).textTheme.caption,
+                  semanticsLabel: '', // Is set on button instead
+                ),
               Material(
                 elevation: elevation,
                 color: backgroundColor,
@@ -431,57 +434,66 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                             color: Theme.of(context).dividerColor,
                           ),
                 ),
-                child: InkWell(
-                  hoverColor: effectiveHoverColor,
-                  onTap: onSelect,
-                  child: Padding(
-                    padding: optionButtonMargin ?? const EdgeInsets.all(4),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            _SchemeColorBox(
-                              color: flexSchemeColor.primary,
-                              height: height,
-                              width: width,
-                              borderRadius: borderRadius,
-                              padding: padding,
-                            ),
-                            _SchemeColorBox(
-                              color: flexSchemeColor.primaryVariant,
-                              height: height,
-                              width: width,
-                              borderRadius: borderRadius,
-                              padding: padding,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            _SchemeColorBox(
-                              color: flexSchemeColor.secondary,
-                              height: height,
-                              width: width,
-                              borderRadius: borderRadius,
-                              padding: padding,
-                            ),
-                            _SchemeColorBox(
-                              color: flexSchemeColor.secondaryVariant,
-                              height: height,
-                              width: width,
-                              borderRadius: borderRadius,
-                              padding: padding,
-                            ),
-                          ],
-                        ),
-                      ],
+                child: Semantics(
+                  label: label ?? 'Theme',
+                  selected: selected,
+                  button: true,
+                  enabled: true,
+                  child: InkWell(
+                    hoverColor: effectiveHoverColor,
+                    onTap: onSelect,
+                    child: Padding(
+                      padding: optionButtonMargin ?? const EdgeInsets.all(4),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              _SchemeColorBox(
+                                color: flexSchemeColor.primary,
+                                height: height,
+                                width: width,
+                                borderRadius: borderRadius,
+                                padding: padding,
+                              ),
+                              _SchemeColorBox(
+                                color: flexSchemeColor.primaryVariant,
+                                height: height,
+                                width: width,
+                                borderRadius: borderRadius,
+                                padding: padding,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              _SchemeColorBox(
+                                color: flexSchemeColor.secondary,
+                                height: height,
+                                width: width,
+                                borderRadius: borderRadius,
+                                padding: padding,
+                              ),
+                              _SchemeColorBox(
+                                color: flexSchemeColor.secondaryVariant,
+                                height: height,
+                                width: width,
+                                borderRadius: borderRadius,
+                                padding: padding,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
               if (label != null && !labelAbove)
-                Text(label,
-                    style: labelStyle ?? Theme.of(context).textTheme.caption),
+                Text(
+                  label,
+                  style: labelStyle ?? Theme.of(context).textTheme.caption,
+                  semanticsLabel: '', // Is set on button instead
+                ),
             ],
           ),
         ],
