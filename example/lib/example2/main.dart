@@ -13,6 +13,12 @@ import '../all_shared_imports.dart';
 
 void main() => runApp(const DemoApp());
 
+// NOTE: This example custom theme is fairly close to the built-in scheme
+// 'Barossa', so if you like it, you can probably use it instead. It is not
+// exactly the same though, the 'Barossa' variant is tuned a bit differently.
+// The 'Barossa' theme was introduced in version 1.4.1, and was inspired
+// and based on this example.
+
 // Create a custom FlexSchemeData scheme with name, description and a light
 // and dark FlexSchemeColor.
 const FlexSchemeData customFlexScheme = FlexSchemeData(
