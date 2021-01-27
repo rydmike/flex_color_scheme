@@ -119,16 +119,9 @@ class DemoApp extends StatefulWidget {
 
 class _DemoAppState extends State<DemoApp> {
   // Used to select if we use the dark or light theme.
-  ThemeMode themeMode;
+  ThemeMode themeMode = ThemeMode.light;
   // Used to select which FlexSchemeData we use.
-  int themeIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    themeMode = ThemeMode.light;
-    themeIndex = 6; // Start with index 6, the brand blue colors.
-  }
+  int themeIndex = 6; // Start with index 6, the brand blue colors.
 
   @override
   Widget build(BuildContext context) {

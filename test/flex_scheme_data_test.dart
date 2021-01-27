@@ -246,31 +246,23 @@ void main() {
     //**************************************************************************
 
     test(
-        'FSD1.11a: Test toString implemented via debugFillProperties '
-        'EXPECT working data print.', () {
-      expect(m1.toString().length, greaterThan(15));
-    });
-    test(
-        'FSD1.11b: Test toString implemented via debugFillProperties '
+        'FSD1.11: Test toString implemented via debugFillProperties '
         'EXPECT exact print string value.', () {
-      expect(
-          m1.toString(),
+      expect(m1.toString(), equalsIgnoringHashCodes(
           // ignore: lines_longer_than_80_chars
-          'FlexSchemeData#f88ec(name: "Material default", description: "Default Material color theme, used in the design guide.", light: FlexSchemeColor#1b048(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), accentColor: null, error: Color(0xffb00020)), dark: FlexSchemeColor#74195(primary: Color(0xffbb86fc), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff03dac6), appBarColor: Color(0xff03dac6), accentColor: null, error: Color(0xffcf6679)))');
+          'FlexSchemeData#00000(name: "Material default", description: "Default Material color theme, used in the design guide.", light: FlexSchemeColor#1b048(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), accentColor: null, error: Color(0xffb00020)), dark: FlexSchemeColor#74195(primary: Color(0xffbb86fc), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff03dac6), appBarColor: Color(0xff03dac6), accentColor: null, error: Color(0xffcf6679)))'));
     });
     test(
-        'FSD1.12a: Test toStringShort implemented via debugFillProperties '
-        'EXPECT working data print.', () {
-      expect(m1.toStringShort().length, greaterThan(10));
-    });
-    test(
-        'FSD1.12b: Test toStringShort implemented via debugFillProperties '
+        'FSD1.12: Test toStringShort implemented via debugFillProperties '
         'EXPECT exact short printout.', () {
-      expect(m1.toStringShort(), 'FlexSchemeData#f88ec');
+      expect(
+          m1.toStringShort(), equalsIgnoringHashCodes('FlexSchemeData#00000'));
     });
     test('FSD1.13a: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
     });
+    // This happens to always equal now in tests, if it start failing, test
+    // 13c is actually enough.
     test('FSD1.13b: Test hashCode exact value.', () {
       expect(m1.hashCode, 411011308);
     });
