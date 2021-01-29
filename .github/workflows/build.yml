@@ -31,7 +31,7 @@ jobs:
         run: flutter test
 
   build_web:
-    name: Build Flutter Web examples
+    name: Build Flutter Web Example 2
     needs: [flutter_tests]
     runs-on: ubuntu-latest
     steps:
