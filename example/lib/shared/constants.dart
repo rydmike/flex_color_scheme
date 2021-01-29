@@ -6,18 +6,16 @@
 class AppConst {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
-  // ignore: unused_element
   AppConst._();
 
   // This info is mainly for the Live public web builds of the examples.
   // When I build a new public version I just make sure to update this info
   // before building them.
   static const String appName = 'FlexColorScheme';
-  static const String version = '1.4.0';
+  static const String version = '1.4.1';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
-  static const String flutterVersion =
-      '1.26.0-2.0.pre.401 Channel Master using CanvasKit build option';
+  static const String flutterVersion = 'Channel dev 1.26.0-12.0.pre, CanvasKit';
   static const String copyright = '© 2020';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
@@ -46,7 +44,6 @@ class AppConst {
 class AppFonts {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
-  // ignore: unused_element
   AppFonts._();
 
   // We use usage specific terms like mainFont and logoFont in the code,

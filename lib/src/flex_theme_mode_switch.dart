@@ -543,11 +543,11 @@ class _SchemeColorBox extends StatelessWidget {
     return Padding(
       padding: padding ?? const EdgeInsets.all(3),
       child: Container(
-        height: height,
-        width: width,
+        height: height ?? 24,
+        width: width ?? 24,
         decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+          color: color ?? FlexColor.materialLightPrimary,
+          borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 4)),
         ),
       ),
     );
