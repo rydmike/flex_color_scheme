@@ -1,0 +1,76 @@
+name: Build Web
+on:
+  pull_request:
+    branches: [ master ]
+jobs:
+  flutter_tests:
+    name: Run Flutter analyze and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Flutter and Dart SDK
+        uses: subosito/flutter-action@v1.4.0
+        with:
+          channel: dev
+      - name: Show Dart SDK version
+        run: dart --version
+
+      - name: Show Flutter SDK version
+        run: flutter --version
+
+      - name: Flutter Enable Web
+        run: flutter config --enable-web
+
+      - name: Install Flutter package dependencies
+        run: flutter pub get
+
+      - name: Analyze Dart source
+        run: dart analyze
+
+      - name: Test package FlexColorScheme with test coverage
+        run: flutter test
+
+
+  build_web:
+    name: Build Flutter Web examples
+    needs: [flutter_tests]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Flutter and Dart SDK
+        uses: subosito/flutter-action@v1.4.0
+        with:
+          channel: dev
+      - name: Show Dart SDK version
+        run: dart --version
+
+      - name: Show Flutter SDK version
+        run: flutter --version
+
+      - name: Flutter Enable Web
+        run: flutter config --enable-web
+
+      - name: Install Flutter package dependencies
+        run: flutter pub get
+
+      - name: Install repl
+        run: apt-get install rpl
+
+      - name: Build Web Example 2 with CanvasKit
+        run: cd examples && flutter build web --web-renderer canvaskit --release "lib/example2/main.dart"
+
+      - name: Fix URL reference before publish
+        run: rpl “<base href="/">” “<base href="/flexcolorscheme2/">” build/web/index.html
+
+      - name: Pushes build files
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'build/web/.'
+          destination_repo: 'rydmike/rydmike.github.io/flexcolorscheme2'
+          user_email: 'm.rydstrom+gh@gmail.com'
+          user_name: 'releasebot'
+
+
+
