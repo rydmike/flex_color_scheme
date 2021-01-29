@@ -53,7 +53,7 @@ jobs:
         run: flutter pub get
 
       - name: Install repl
-        run: apt-get install rpl
+        run: sudo apt-get install rpl
 
       - name: Build Web Example 2 with CanvasKit
         run: cd examples && flutter build web --web-renderer canvaskit --release "lib/example2/main.dart"
