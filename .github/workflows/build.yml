@@ -76,9 +76,10 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_repo: 'rydmike/rydmike.github.io/flexcolorscheme2'
+          destination_folder: 'flexcolorscheme2'
+          destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom+gh@gmail.com'
-          user_name: 'releasebot'
+          user_name: 'rydmike'
 
 
 
