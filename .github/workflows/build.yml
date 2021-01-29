@@ -30,7 +30,6 @@ jobs:
       - name: Test package FlexColorScheme with test coverage
         run: flutter test
 
-
   build_web:
     name: Build Flutter Web examples
     needs: [flutter_tests]
@@ -40,7 +39,7 @@ jobs:
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v1.4.0
         with:
-          channel: dev
+          channel: "dev"
       - name: Show Dart SDK version
         run: dart --version
 
