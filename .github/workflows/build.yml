@@ -58,18 +58,27 @@ jobs:
       - name: Build Web Example 2 with CanvasKit
         run: cd example && flutter build web --web-renderer canvaskit --release "lib/example2/main.dart"
 
-      - name: Fix URL reference before publish
-        run: rpl “<base href="/">” “<base href="/flexcolorscheme2/">” "/build/web/index.html"
+      - name: List files (dir)
+        run: ls
 
-      - name: Push built Web example to GitHub pages folder
-        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source_file: 'build/web/.'
-          destination_repo: 'rydmike/rydmike.github.io/flexcolorscheme2'
-          user_email: 'm.rydstrom+gh@gmail.com'
-          user_name: 'releasebot'
+      - name: Show content of index.html BEFORE rpl fix href URL
+        run: cat build/web/index.html
+
+      - name: Fix href URL reference before publish
+        run: rpl '<base href="/">' '<base href="/flexcolorscheme2/">' build/web/index.html
+
+      - name: Show content of index.html AFTER rpl fix href URL
+        run: cat build/web/index.html
+
+  #    - name: Push built Web example to GitHub pages folder
+  #      uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+  #      env:
+  #        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+  #      with:
+  #        source_file: 'build/web/.'
+  #        destination_repo: 'rydmike/rydmike.github.io/flexcolorscheme2'
+  #        user_email: 'm.rydstrom+gh@gmail.com'
+  #        user_name: 'releasebot'
 
 
 
