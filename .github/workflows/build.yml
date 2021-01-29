@@ -59,7 +59,7 @@ jobs:
         run: cd example && flutter build web --web-renderer canvaskit --release "lib/example2/main.dart"
 
       - name: Fix URL reference before publish
-        run: rpl “<base href="/">” “<base href="/flexcolorscheme2/">” "build/web/index.html"
+        run: rpl “<base href="/">” “<base href="/flexcolorscheme2/">” "/build/web/index.html"
 
       - name: Push built Web example to GitHub pages folder
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
