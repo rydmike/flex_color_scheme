@@ -16,8 +16,8 @@ jobs:
       - name: Install Flutter package dependencies
         run: flutter pub get
     # Uncomment this step to verify the use of 'dart format' on each commit.
-     - name: Verify that Dart formatting is used, fail if not.
-       run: dart format --output=none --set-exit-if-changed .
+      - name: Verify that Dart formatting is used, fail if not
+        run: dart format --output=none --set-exit-if-changed .
     # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: Analyze Dart source --fatal-infos
         run: dart analyze
