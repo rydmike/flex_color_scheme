@@ -125,7 +125,7 @@ links to the high-resolution images of each color scheme.
 The built-in color schemes are all tuned matching light and dark scheme pairs. Most of them are pretty conservative,
 but some are intentionally a bit more playful and bold. The first two color schemes are actually
 the Flutter and Material Design Guide examples of light and dark color schemes, and the Flutter high contrast light and
-dark color versions as well. So OK, there are actually "only" 22 new ready-made light and dark color scheme pairs.
+dark color versions as well. So OK, there are actually "only" 26 new ready-made light and dark color scheme pairs.
 
 #### This ColorScheme Should be Different!
 
