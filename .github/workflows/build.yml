@@ -70,15 +70,15 @@ jobs:
       - name: Show content of index.html AFTER rpl fix href URL
         run: cat example/build/web/index.html
 
-  #    - name: Push built Web example to GitHub pages folder
-  #      uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-  #      env:
-  #        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-  #      with:
-  #        source_file: 'build/web/.'
-  #        destination_repo: 'rydmike/rydmike.github.io/flexcolorscheme2'
-  #        user_email: 'm.rydstrom+gh@gmail.com'
-  #        user_name: 'releasebot'
+      - name: Push built Web example to GitHub pages folder
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'example/build/web/.'
+          destination_repo: 'rydmike/rydmike.github.io/flexcolorscheme2'
+          user_email: 'm.rydstrom+gh@gmail.com'
+          user_name: 'releasebot'
 
 
 
