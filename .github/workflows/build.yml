@@ -39,34 +39,59 @@ jobs:
       - name: Install repl
         run: sudo apt-get install rpl
 
+      # Example 1 Build and deploy
 
-      - name: BUILD-1 START and run Flutter clean before build
+      - name: EXAMPLE-1 START BUILD - Flutter clean before build
         run: flutter clean && cd example && flutter clean
 
-      - name: WEB release build of EXAMPLE-1 using CanvasKit
-        run: cd example && flutter build web --web-renderer canvaskit --release -v -t lib/example1/main.dart
+      - name: EXAMPLE-1 WEB release build using CanvasKit
+        run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example1/main.dart
 
-      - name: List files (dir)
-        run: ls example
-
-      - name: Show content of index.html BEFORE rpl fix of href URL
-        run: cat example/build/web/index.html
-
-      - name: Fix href URL reference before publish
+      - name: EXAMPLE-1 Fix href URL reference before publish
         run: rpl '<base href="/">' '<base href="/flexcolorscheme1/">' example/build/web/index.html
 
-      - name: Show content of index.html AFTER rpl fix of href URL
-        run: cat example/build/web/index.html
+      # Example 2 Build and deploy
 
-
-      - name: BUILD-2 START and run Flutter clean before build
+      - name: EXAMPLE-2 START BUILD - Flutter clean before build
         run: flutter clean && cd example && flutter clean
 
-      - name: WEB release build of EXAMPLE-2 using CanvasKit
-        run: cd example && flutter build web --web-renderer canvaskit --release -v -t lib/example2/main.dart
+      - name: EXAMPLE-2 WEB release build using CanvasKit
+        run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example2/main.dart
 
-      - name: Fix href URL reference before publish
+      - name: EXAMPLE-2 Fix href URL reference before publish
         run: rpl '<base href="/">' '<base href="/flexcolorscheme2/">' example/build/web/index.html
 
+      # Example 3 Build and deploy
+
+      - name: EXAMPLE-3 START BUILD - Flutter clean before build
+        run: flutter clean && cd example && flutter clean
+
+      - name: EXAMPLE-3 WEB release build using CanvasKit
+        run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example3/main.dart
+
+      - name: EXAMPLE-3 Fix href URL reference before publish
+        run: rpl '<base href="/">' '<base href="/flexcolorscheme3/">' example/build/web/index.html
+
+      # Example 4 Build and deploy
+
+      - name: EXAMPLE-4 START BUILD - Flutter clean before build
+        run: flutter clean && cd example && flutter clean
+
+      - name: EXAMPLE-4 WEB release build using CanvasKit
+        run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example4/main.dart
+
+      - name: EXAMPLE-4 Fix href URL reference before publish
+        run: rpl '<base href="/">' '<base href="/flexcolorscheme4/">' example/build/web/index.html
+
+      # Example 5 Build and deploy
+
+      - name: EXAMPLE-5 START BUILD - Flutter clean before build
+        run: flutter clean && cd example && flutter clean
+
+      - name: EXAMPLE-5 WEB release build using CanvasKit
+        run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example5/main.dart
+
+      - name: EXAMPLE-5 Fix href URL reference before publish
+        run: rpl '<base href="/">' '<base href="/flexcolorscheme5/">' example/build/web/index.html
 
 
