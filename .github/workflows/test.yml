@@ -21,7 +21,7 @@ jobs:
         run: flutter pub get
 
       - name: Analyze Dart source with fatal-infos, fail if fatal-infos
-        run: dart analyze --fatal-infos
+        run: dart analyze
 
       - name: Verify that Dart formatting is used, fail if not
         run: dart format --output=none --set-exit-if-changed .

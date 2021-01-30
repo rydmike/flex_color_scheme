@@ -4,7 +4,7 @@ on:
     branches: [ master ]
 jobs:
   flutter_tests:
-    name: Flutter analyze, test, build and deploy the 5 web samples
+    name: Analyze, test, build and deploy 5 web apps
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,8 +24,8 @@ jobs:
       - name: Install Flutter package dependencies
         run: flutter pub get
 
-      - name: Analyze Dart source with fatal-infos, fail if fatal-infos
-        run: dart analyze --fatal-infos
+      - name: Analyze Dart source
+        run: dart analyze
 
       - name: Verify that Dart formatting is used, fail if not
         run: dart format --output=none --set-exit-if-changed .
