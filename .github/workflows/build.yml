@@ -73,11 +73,11 @@ jobs:
       - name: Push built Web example to GitHub pages folder
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_API_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
           destination_folder: 'flexcolorscheme2'
-          destination_repo: 'https://github.com/rydmike/rydmike.github.io'
+          destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
 
