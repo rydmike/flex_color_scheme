@@ -41,7 +41,7 @@ jobs:
 
 
 
-      - name: BUILD-1 :: Run Flutter clean before build
+      - name: Start BUILD-1 and run Flutter clean before build
         run: flutter clean && cd example && flutter clean
 
       - name: WEB release build of EXAMPLE-1 using CanvasKit
@@ -61,7 +61,7 @@ jobs:
 
 
 
-      - name: BUILD-2 :: Run Flutter clean before build
+      - name: Start BUILD-2 and run Flutter clean before build
         run: flutter clean && cd example && flutter clean
 
       - name: WEB release build of EXAMPLE-2 using CanvasKit
