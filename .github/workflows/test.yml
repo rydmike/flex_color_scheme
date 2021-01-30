@@ -20,7 +20,7 @@ jobs:
       - name: Install Flutter package dependencies
         run: flutter pub get
 
-      - name: Analyze Dart source with fatal-infos, fail if fatal-infos
+      - name: Analyze Dart source
         run: dart analyze
 
       - name: Verify that Dart formatting is used, fail if not
