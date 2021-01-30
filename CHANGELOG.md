@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
-## [1.4.1] - January 27, 2021
+## [1.4.1] - January 30, 2021
 
 * Added four new built-in color schemes.
   * **Barossa** - Barossa red and cardin green theme.
