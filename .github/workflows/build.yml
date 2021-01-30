@@ -73,7 +73,7 @@ jobs:
       - name: Push built Web example to GitHub pages folder
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_API_TOKEN }}
         with:
           source_file: 'example/build/web/.'
           destination_folder: 'flexcolorscheme2'
