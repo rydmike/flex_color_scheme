@@ -7,7 +7,7 @@
 color branding on surfaces. The created themes are based on the same concept as Flutter's ColorScheme based themes,
 but with a few interesting twists and convenience features.
 
-For some addtional information about **FlexColorScheme**, its background and use cases, this package companion
+For some additional information about **FlexColorScheme**, its background and use cases, this package companion
 [**blog post and article**](https://rydmike.com/colorscheme) is also recommended reading.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
@@ -94,8 +94,8 @@ There is a helper class with a factory `FlexSchemeColor.from` that can do this f
 create a computed matching dark scheme from a defined light scheme, this is done with `FlexSchemeColor.toDark`.
 This works regardless of if you created a fully specified custom light scheme, or one from just a single color.
 These features are presented and explained in tutorial
-[example 4](#example-4-switch-between-all-built-in-color-schemes-and-three-custom-ones) and
-[example 5](#example-5-full-featured-demo).
+[example 4](#example-4---switch-between-built-in-color-schemes-and-custom-ones) and
+[example 5](#example-5---full-featured-demo).
 
 ### What About My Own Theme Additions?
 
@@ -305,6 +305,10 @@ light/dark/system theme mode switch, includes a theme colors presentation widget
 With them you can see the active theme's colors, and the created theme's impact on common Material UI widgets.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1al.png?raw=true" alt="ColorScheme example 1 light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1bl.png?raw=true" alt="ColorScheme example 1 lightb" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1cl.png?raw=true" alt="ColorScheme example 1 dark" width="180"/>
+
+The default sample app, example 1, just shows the simplest use-case of FlexColorScheme and barely scratches the 
+surface of what it can do. To get the full details in a step by step progression you should go through the tutorial 
+that uses examples 1 through 5 to introduce more features in a step by step complexity progression.
 
 > **Building the examples**
 >If you cloned the repository to build the examples, you can open the package `/example` folder with your IDE to build
@@ -937,7 +941,7 @@ have matching background and theme mode that matches the active application them
 how this can be fixed and that the used method remain in effect when opening a subpage.
 
 The same custom color schemes as in example 4, are also used in this example. They are not explained here again, please
-see [example 4](#example-4-switch-between-all-built-in-color-schemes-and-three-custom-ones) for details.
+see [example 4](#example-4---switch-between-built-in-color-schemes-and-custom-ones) for details.
 The full example code is not shown here either, please see the code in the package folder
 [flex_color_scheme/example/lib/example5](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example5/main.dart)
 for the entire example's code.
@@ -1880,7 +1884,7 @@ are, as well as the rationale behind the made design choices and changes to the 
     an annotated region for the system navigation bar that uses
     the active color scheme and theme mode to make use
     a correctly colored theme colored background for the active theme.
-    See [example 5](#example-5-full-featured-demo) for an explanation
+    See [example 5](#example-5---full-featured-demo) for an explanation
     on how to use this.
 
 ## Appendix A - Built-in Scheme Reference

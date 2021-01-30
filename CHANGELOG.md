@@ -5,7 +5,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 ## [1.4.1] - January 27, 2021
 
 * Added four new built-in color schemes.
-  * **Barossa** - Barossa red and cardin green theme..
+  * **Barossa** - Barossa red and cardin green theme.
     Use enum value `FlexScheme.barossa` for easy access to it.
   * **Shark and orange** - Shark grey and orange ecstasy theme.
     Use enum value `FlexScheme.shark` for easy access to it.
@@ -15,7 +15,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
     Use enum value `FlexScheme.damask` for easy access to it.
     
 * Improved Semantics for the ThemeMode Widget buttons.
-* Improved the widget tests, makes and checks for system mode changes. Totally 723 tests.
+* Improved the widget tests, makes and checks for system mode changes. Totally 723 tests, codecov > 99.5%.
 * Added GitHub actions to automate build and publish the examples on the web.  
 * Minor changes to the examples. Modified to not need the `late` keyword when they are converted 
   to null safe versions.
@@ -185,8 +185,7 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - Version 2.0.0-nullsafety.1: Add first null safe version.
 - Version 2.0.0-nullsafety.2: Add some minor new APIs and features (maybe). 
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
-- Version 2.0.1 Improve the tests further, after or together with the null-safe version.
-- Version 2.1.0 Release more color schemes. Making schemes is fun, documenting the changes a bit less so.
+- Version 2.1.0 Release even more color schemes. Making schemes is fun, documenting the changes a bit less so.
 - Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable channel. 
   See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206. Will not impact
   API or functionality, the implementation will only be changed to one that is supported directly by the SDK, so it
@@ -208,18 +207,14 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - Version 1.4.0: Increased unit and widget test to 689 tests. All color definitions are now also tested to ensure 
   they will not be changed by any accidental edit. Test coverage is higher than 95%, certainly sufficient for this 
   type of package, but there are still some areas that could and will be improved.
+- Version 1.4.1 Consider testing sufficient for now. 
+- Version 1.4.1 Added automated build and publish pipes for the Web examples!  
 
 ### MAYBE
 - **Companion Web App**  
   I started playing with a small companion app that will allow you to design `FlexColorSchemes` and copy-paste the 
   needed setup code into an app. If/when I finnish it, I will release it as live version with open source code as well.
 
-- **Automate the web example builds**  
-  Currently, the build and test pipeline are the same that include the test code coverage report. While the tests do
-  include a test of a minimal app, I would like to set up a separate build that can be run after a package update, but
-  also when there is a new Flutter release on stable and beta channels. It should build all five example apps for Web
-  and publishes them on GitHub Pages.
-  
 - **Branded surface customization**
   Add API offering more flexibility and customization capabilities to the surface branding.
 
