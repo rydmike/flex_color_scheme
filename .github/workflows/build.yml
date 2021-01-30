@@ -24,6 +24,9 @@ jobs:
       - name: Install Flutter package dependencies
         run: flutter pub get
 
+      - name: Show outdated packges
+        run: dart pub outdated
+
       - name: Analyze Dart source
         run: dart analyze
 
@@ -36,11 +39,33 @@ jobs:
       - name: Install repl
         run: sudo apt-get install rpl
 
-      - name: Run Flutter clean before build
-        run: flutter clean
 
-      - name: Release build of Web EXAMPLE-2 with CanvasKit
-        run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example2/main.dart
+
+      - name: BUILD-1 :: Run Flutter clean before build
+        run: flutter clean && cd example && flutter clean
+
+      - name: WEB release build of EXAMPLE-1 using CanvasKit
+        run: cd example && flutter build web --web-renderer canvaskit --release -v -t lib/example1/main.dart
+
+      - name: List files (dir)
+        run: ls example
+
+      - name: Show content of index.html BEFORE rpl fix of href URL
+        run: cat example/build/web/index.html
+
+      - name: Fix href URL reference before publish
+        run: rpl '<base href="/">' '<base href="/flexcolorscheme1/">' example/build/web/index.html
+
+      - name: Show content of index.html AFTER rpl fix of href URL
+        run: cat example/build/web/index.html
+
+
+
+      - name: BUILD-2 :: Run Flutter clean before build
+        run: flutter clean && cd example && flutter clean
+
+      - name: WEB release build of EXAMPLE-2 using CanvasKit
+        run: cd example && flutter build web --web-renderer canvaskit --release -v -t lib/example2/main.dart
 
       - name: List files (dir)
         run: ls example
@@ -53,19 +78,6 @@ jobs:
 
       - name: Show content of index.html AFTER rpl fix of href URL
         run: cat example/build/web/index.html
-
-      - name: Push built Web Example-2 to GitHub Pages repository, site is published on commit.
-        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme2'
-          destination_repo: 'rydmike/rydmike.github.io'
-          user_email: 'm.rydstrom@gmail.com'
-          user_name: 'rydmike'
-        # The commit message is not supported on version 1.0.4, need new release for that.
-        #  commit_message: 'Update FlexColorScheme live Web example2'
 
 
 

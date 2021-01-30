@@ -73,7 +73,7 @@ jobs:
       - name: Show content of index.html AFTER rpl fix href URL
         run: cat example/build/web/index.html
 
-      - name: Push built Web example to GitHub pages folder
+      - name: Push built Web Example-2 to GitHub Pages repository, site is published on commit.
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
@@ -83,7 +83,8 @@ jobs:
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
-          commit_message: 'Update FlexColorScheme live Web example2'
+        # The commit message is not supported on version 1.0.4, need new release for that.
+        #  commit_message: 'Update FlexColorScheme live Web example2'
 
 
 
