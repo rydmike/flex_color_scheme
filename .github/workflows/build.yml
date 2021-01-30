@@ -56,8 +56,7 @@ jobs:
         run: sudo apt-get install rpl
 
       - name: Build Web Example 2 with CanvasKit
-        run: cd example
-          - run: flutter build web --web-renderer canvaskit --release 'lib/example2/main.dart'
+        run: cd example && flutter build web --web-renderer canvaskit --release 'lib/example2/main.dart'
 
       - name: List files (dir)
         run: ls example
