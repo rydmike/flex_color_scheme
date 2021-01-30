@@ -15,7 +15,7 @@ class AppConst {
   static const String version = '1.4.1';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
-  static const String flutterVersion = 'Channel dev 1.26.0-12.0.pre, CanvasKit';
+  static const String flutterVersion = 'Channel dev 1.26.0-17.1.pre, CanvasKit';
   static const String copyright = '© 2020';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';

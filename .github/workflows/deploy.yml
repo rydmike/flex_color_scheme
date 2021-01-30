@@ -1,4 +1,5 @@
-# This GitHub action runs on pull request to master, it:
+# This GitHub action runs on a release, when it is published, created or edited.
+# TODO: Test how this trigger works in practice!
 #
 #  - Installs dart and flutter
 #  - Uses flutter dev channel for now, will change to stable when web supported on stable.
@@ -16,20 +17,15 @@
 #    - Flutter clean.
 #    - Flutter build web app, in release mode and with CanvasKit renderer.
 #    - Use rpl to fix/modify the index.html file to give it the correct href deployment sub-folder.
-#  - This CI/CD stops here, it does not deploy, that is done by the deploy workflow, that is otherwise identical,
-#    but runs on release, when it is published, created or edited.
+#    - Deploy each built Web App to GitHub pages.
 #
-#  TODO Maybe set this workflow up to also run on a weekly schedule to check that nothing is broken?
-#       Also planning to setup another matrix test run, but this one is also a nice test
-#       since it does not just runs tests, but also builds actual Web apps using the package.
-#
-name: Build Web
+name: Deploy Web
 on:
-  pull_request:
-    branches: [ master ]
+  release:
+    types: [published, created, edited]
 jobs:
   flutter_tests:
-    name: Analyze, test and build 5 web apps
+    name: Analyze, test build and deploy 5 web apps
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -70,7 +66,7 @@ jobs:
       - name: Install rpl
         run: sudo apt-get install rpl
 
-      # Example 1 Build
+      # Example 1 Build and deploy
 
       - name: EXAMPLE-1 START BUILD - Flutter clean before build
         run: flutter clean && cd example && flutter clean
@@ -81,7 +77,18 @@ jobs:
       - name: EXAMPLE-1 FIX href URL reference before publish
         run: rpl '<base href="/">' '<base href="/flexcolorscheme1/">' example/build/web/index.html
 
-      # Example 2 Build
+      - name: EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit.
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'example/build/web/.'
+          destination_folder: 'flexcolorscheme1'
+          destination_repo: 'rydmike/rydmike.github.io'
+          user_email: 'm.rydstrom@gmail.com'
+          user_name: 'rydmike'
+
+      # Example 2 Build and deploy
 
       - name: EXAMPLE-2 START BUILD - Flutter clean before build
         run: flutter clean && cd example && flutter clean
@@ -92,7 +99,18 @@ jobs:
       - name: EXAMPLE-2 FIX href URL reference before publish
         run: rpl '<base href="/">' '<base href="/flexcolorscheme2/">' example/build/web/index.html
 
-      # Example 3 Build
+      - name: EXAMPLE-2 DEPLOY to GitHub Pages repository, published on commit.
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'example/build/web/.'
+          destination_folder: 'flexcolorscheme2'
+          destination_repo: 'rydmike/rydmike.github.io'
+          user_email: 'm.rydstrom@gmail.com'
+          user_name: 'rydmike'
+
+      # Example 3 Build and deploy
 
       - name: EXAMPLE-3 START BUILD - Flutter clean before build
         run: flutter clean && cd example && flutter clean
@@ -103,7 +121,18 @@ jobs:
       - name: EXAMPLE-3 FIX href URL reference before publish
         run: rpl '<base href="/">' '<base href="/flexcolorscheme3/">' example/build/web/index.html
 
-      # Example 4 Build
+      - name: EXAMPLE-3 DEPLOY to GitHub Pages repository, published on commit.
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'example/build/web/.'
+          destination_folder: 'flexcolorscheme3'
+          destination_repo: 'rydmike/rydmike.github.io'
+          user_email: 'm.rydstrom@gmail.com'
+          user_name: 'rydmike'
+
+      # Example 4 Build and deploy
 
       - name: EXAMPLE-4 START BUILD - Flutter clean before build
         run: flutter clean && cd example && flutter clean
@@ -114,7 +143,18 @@ jobs:
       - name: EXAMPLE-4 FIX href URL reference before publish
         run: rpl '<base href="/">' '<base href="/flexcolorscheme4/">' example/build/web/index.html
 
-      # Example 5 Build
+      - name: EXAMPLE-4 DEPLOY to GitHub Pages repository, published on commit.
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'example/build/web/.'
+          destination_folder: 'flexcolorscheme4'
+          destination_repo: 'rydmike/rydmike.github.io'
+          user_email: 'm.rydstrom@gmail.com'
+          user_name: 'rydmike'
+
+      # Example 5 Build and deploy
 
       - name: EXAMPLE-5 START BUILD - Flutter clean before build
         run: flutter clean && cd example && flutter clean
@@ -125,4 +165,13 @@ jobs:
       - name: EXAMPLE-5 FIX href URL reference before publish
         run: rpl '<base href="/">' '<base href="/flexcolorscheme5/">' example/build/web/index.html
 
-
+      - name: EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit.
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'example/build/web/.'
+          destination_folder: 'flexcolorscheme5'
+          destination_repo: 'rydmike/rydmike.github.io'
+          user_email: 'm.rydstrom@gmail.com'
+          user_name: 'rydmike'
