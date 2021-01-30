@@ -7,22 +7,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v1.4.0
+
       - name: Show Dart SDK version
         run: dart --version
+
       - name: Show Flutter SDK version
         run: flutter --version
+
       - name: Install Flutter package dependencies
         run: flutter pub get
-    # Uncomment this step to verify the use of 'dart format' on each commit.
+
+      - name: Analyze Dart source
+        run: dart analyze
+
       - name: Verify that Dart formatting is used, fail if not
         run: dart format --output=none --set-exit-if-changed .
-    # Consider passing '--fatal-infos' for slightly stricter analysis.
-      - name: Analyze Dart source --fatal-infos
-        run: dart analyze
+
       - name: Test package FlexColorScheme with test coverage
         run: flutter test --coverage
+
       - name: Upload test coverage to Codecov
         uses: codecov/codecov-action@v1
         with:

@@ -1,0 +1,90 @@
+name: Build Web
+on:
+  pull_request:
+    branches: [ master ]
+jobs:
+  flutter_tests:
+    name: Run Flutter analyze and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Flutter and Dart SDK
+        uses: subosito/flutter-action@v1.4.0
+        with:
+          channel: dev
+      - name: Show Dart SDK version
+        run: dart --version
+
+      - name: Show Flutter SDK version
+        run: flutter --version
+
+      - name: Flutter Enable Web
+        run: flutter config --enable-web
+
+      - name: Install Flutter package dependencies
+        run: flutter pub get
+
+      - name: Analyze Dart source with fatal-infos, fail if fatal-infos
+        run: dart analyze --fatal-infos
+
+      - name: Verify that Dart formatting is used, fail if not
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Test package FlexColorScheme with test coverage
+        run: flutter test
+
+  build_web:
+    name: Build Flutter Web Example 2
+    needs: [flutter_tests]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Flutter and Dart SDK
+        uses: subosito/flutter-action@v1.4.0
+        with:
+          channel: "dev"
+      - name: Show Dart SDK version
+        run: dart --version
+
+      - name: Show Flutter SDK version
+        run: flutter --version
+
+      - name: Flutter Enable Web
+        run: flutter config --enable-web
+
+      - name: Install Flutter package dependencies
+        run: flutter pub get
+
+      - name: Install repl
+        run: sudo apt-get install rpl
+
+      - name: Build Web Example 2 with CanvasKit
+        run: cd example && flutter build web --web-renderer canvaskit --release lib/example2/main.dart
+
+      - name: List files (dir)
+        run: ls example
+
+      - name: Show content of index.html BEFORE rpl fix href URL
+        run: cat example/build/web/index.html
+
+      - name: Fix href URL reference before publish
+        run: rpl '<base href="/">' '<base href="/flexcolorscheme2/">' example/build/web/index.html
+
+      - name: Show content of index.html AFTER rpl fix href URL
+        run: cat example/build/web/index.html
+
+      - name: Push built Web Example-2 to GitHub Pages repository, site is published on commit.
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'example/build/web/.'
+          destination_folder: 'flexcolorscheme2'
+          destination_repo: 'rydmike/rydmike.github.io'
+          user_email: 'm.rydstrom@gmail.com'
+          user_name: 'rydmike'
+        # The commit message is not supported on version 1.0.4, need new release for that.
+        #  commit_message: 'Update FlexColorScheme live Web example2'
+
+
+
