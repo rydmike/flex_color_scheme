@@ -24,11 +24,11 @@ jobs:
       - name: Install Flutter package dependencies
         run: flutter pub get
 
-      - name: Show outdated packges
-        run: dart pub outdated
-
       - name: Analyze Dart source
         run: dart analyze
+
+      - name: Show outdated packges
+        run: flutter pub outdated
 
       - name: Verify that Dart formatting is used, fail if not
         run: dart format --output=none --set-exit-if-changed .
@@ -40,8 +40,7 @@ jobs:
         run: sudo apt-get install rpl
 
 
-
-      - name: Start BUILD-1 and run Flutter clean before build
+      - name: BUILD-1 START and run Flutter clean before build
         run: flutter clean && cd example && flutter clean
 
       - name: WEB release build of EXAMPLE-1 using CanvasKit
@@ -60,24 +59,14 @@ jobs:
         run: cat example/build/web/index.html
 
 
-
-      - name: Start BUILD-2 and run Flutter clean before build
+      - name: BUILD-2 START and run Flutter clean before build
         run: flutter clean && cd example && flutter clean
 
       - name: WEB release build of EXAMPLE-2 using CanvasKit
         run: cd example && flutter build web --web-renderer canvaskit --release -v -t lib/example2/main.dart
 
-      - name: List files (dir)
-        run: ls example
-
-      - name: Show content of index.html BEFORE rpl fix of href URL
-        run: cat example/build/web/index.html
-
       - name: Fix href URL reference before publish
         run: rpl '<base href="/">' '<base href="/flexcolorscheme2/">' example/build/web/index.html
-
-      - name: Show content of index.html AFTER rpl fix of href URL
-        run: cat example/build/web/index.html
 
 
 
