@@ -40,7 +40,7 @@ jobs:
         run: flutter clean
 
       - name: Release build of Web EXAMPLE-2 with CanvasKit
-        run: cd example && flutter build web --web-renderer canvaskit --release lib/example2/main.dart
+        run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example2/main.dart
 
       - name: List files (dir)
         run: ls example
