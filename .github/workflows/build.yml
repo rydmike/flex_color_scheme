@@ -78,8 +78,8 @@ jobs:
           source_file: 'example/build/web/.'
           destination_folder: 'flexcolorscheme2'
           destination_repo: 'rydmike/rydmike.github.io'
-          user_email: 'm.rydstrom+gh@gmail.com'
-          user_name: 'Rydmike'
+          user_email: 'm.rydstrom@gmail.com'
+          user_name: 'rydmike'
 
 
 
