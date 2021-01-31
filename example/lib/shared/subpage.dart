@@ -46,10 +46,10 @@ class _SubpageState extends State<Subpage> {
           actions: const <Widget>[AboutIconButton()],
           bottom: const TabBar(
             tabs: <Widget>[
-              Tab(icon: Icon(Icons.home), text: 'Home'),
-              Tab(icon: Icon(Icons.star), text: 'Favorites'),
-              Tab(icon: Icon(Icons.face), text: 'Profile'),
-              Tab(icon: Icon(Icons.settings), text: 'Settings'),
+              Tab(text: 'Home'),
+              Tab(text: 'Favorites'),
+              Tab(text: 'Profile'),
+              Tab(text: 'Settings'),
             ],
           ),
         ),

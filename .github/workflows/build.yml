@@ -10,7 +10,8 @@
 #  - Show outdated packages, just added for info.
 #  - Verify that dart format is used by all committed code, fails if not. Controversial but pub.dev penalizes you if
 #    dart format is not used.
-#  - Run all tests.
+#  - Run all tests with coverage.
+#  - Upload code coverage output to Codecov for analysis.
 #  - Install linux rpl tool. It is used to automate the needed change of a line in index.html.
 #  - Build 5 different WEB example apps using FlexColorScheme. All examples use these steps:
 #    - Flutter clean.
@@ -20,8 +21,8 @@
 #    but runs on release, when it is published, created or edited.
 #
 #  TODO Maybe set this workflow up to also run on a weekly schedule to check that nothing is broken?
-#       Also planning to setup another matrix test run, but this one is also a nice test
-#       since it does not just runs tests, but also builds actual Web apps using the package.
+#       Also planning to setup a matrix test run, but this one is anyway a nice test
+#       since it does not just runs tests, it also builds actual Web apps using the package.
 #
 name: Build Web
 on:

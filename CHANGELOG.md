@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
-## [1.4.1] - January 30, 2021
+## [1.4.1] - January 31, 2021
 
 * Added four new built-in color schemes.
   * **Barossa** - Barossa red and cardin green theme.
@@ -15,8 +15,9 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
     Use enum value `FlexScheme.damask` for easy access to it.
     
 * Improved Semantics for the ThemeMode Widget buttons.
-* Improved the widget tests, makes and checks for system mode changes. Totally 723 tests, codecov > 99.5%.
-* Added GitHub actions to automate build and publish the examples on the web.  
+* Improved FlexThemeModeSwitch widget tests, makes and checks for system mode changes. 
+* More tests, totally 723 tests, codecov is now > 99.5%.
+* Added GitHub actions to automate build and to publish the examples on the Web on a new release.  
 * Minor changes to the examples. Modified to not need the `late` keyword when they are converted 
   to null safe versions.
 * **Documentation:**
@@ -207,7 +208,7 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - Version 1.4.0: Increased unit and widget test to 689 tests. All color definitions are now also tested to ensure 
   they will not be changed by any accidental edit. Test coverage is higher than 95%, certainly sufficient for this 
   type of package, but there are still some areas that could and will be improved.
-- Version 1.4.1 Consider testing sufficient for now. 
+- Version 1.4.1 More tests, tests are now considered sufficient for current features. 
 - Version 1.4.1 Added automated build and publish pipes for the Web examples!  
 
 ### MAYBE
@@ -223,10 +224,10 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
   `FlexColorScheme` to be functionally on a level similar to `ColorScheme`, and therefore it should not cover 
   serialization of itself. Serialization have to deal with a lot of potential failure points that I think should
   not have to be a concern in this type of component. I am not planning to add it, not yet at least, I might
-  reconsider it later.
+  reconsider this later.
   
-  My recommendation for saving the state of a `FlexColorScheme`. Include values for its settings that you 
-  use in your implementation, in other models in your application, like an "AppSettings" model or similar. 
+  My recommendation for saving the state of a `FlexColorScheme` is to include values for its settings that you 
+  use in your implementation in other models in your application, like an "AppSettings" model or similar. 
   You probably serialize and store such data already, perhaps with shared preferences, hive, get_storage or 
   some other solution. Include the values you need for your `FlexColorScheme` implementation in your stored settings
   and then use those values to restore your `FlexColorScheme` configuration and theme. This way, your implementation

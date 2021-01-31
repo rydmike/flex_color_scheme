@@ -281,7 +281,7 @@ class HomePage extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
                     child: ShowThemeColors(),
                   ),
-                  const Divider(),
+                  const SizedBox(height: 8),
                   // Open a sub-page
                   ListTile(
                     title: const Text('Open a demo subpage'),

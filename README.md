@@ -7,7 +7,7 @@
 color branding on surfaces. The created themes are based on the same concept as Flutter's ColorScheme based themes,
 but with a few interesting twists and convenience features.
 
-For some additional information about **FlexColorScheme**, its background and use cases, this package companion
+For some additional information about **FlexColorScheme**, its background and use cases, the package companion
 [**blog post and article**](https://rydmike.com/colorscheme) is also recommended reading.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
@@ -242,7 +242,7 @@ to using FlexColorScheme and is really only there to better demonstrate the resu
 
 
 > **NOTE:**  
-> Version 1.4.0 introduces the easier and less verbose `scheme` convenience factory property used above.
+> Version 1.4.0 introduced the easier and less verbose `scheme` convenience factory property used above.
 > You can use it instead of `colors` if all you want to do is just use one of the built-in color schemes.
 > The previous way of
 > using `colors` with the `FlexColor.schemes` **map**, with the `FlexScheme` enum values as keys, works as before
@@ -306,9 +306,9 @@ With them you can see the active theme's colors, and the created theme's impact 
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1al.png?raw=true" alt="ColorScheme example 1 light" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1bl.png?raw=true" alt="ColorScheme example 1 lightb" width="180"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex1cl.png?raw=true" alt="ColorScheme example 1 dark" width="180"/>
 
-The default sample app, example 1, just shows the simplest use-case of FlexColorScheme and barely scratches the 
-surface of what it can do. To get the full details in a step by step progression you should go through the tutorial 
-that uses examples 1 through 5 to introduce more features in a step by step complexity progression.
+The default sample app, example 1, shows the simplest use-case of FlexColorScheme and barely scratches the 
+surface of what it can do. To get the full details in a step by step progression,  go through the tutorial 
+that uses examples 1 through 5, to introduce more features in a step by step complexity progression.
 
 > **Building the examples**
 >If you cloned the repository to build the examples, you can open the package `/example` folder with your IDE to build
@@ -434,7 +434,7 @@ widget shows the theme with several common Material widgets.
 
 This example is basically a repeat of the Flutter default counter app modification earlier, but with a different
 `HomePage` and a way to change the `MaterialApp` active `themeMode` property value via the `FlexThemeModeSwitch`
-switch on the `HomePage`, using a basic value changed callback function.
+switch on the `HomePage`, using a normal value changed callback function.
 
  ```dart
 void main() => runApp(const DemoApp());

@@ -1,5 +1,4 @@
 # This GitHub action runs on a release, when it is published, created or edited.
-# TODO: Test how this trigger works in practice!
 #
 #  - Installs dart and flutter
 #  - Uses flutter dev channel for now, will change to stable when web supported on stable.
@@ -11,7 +10,8 @@
 #  - Show outdated packages, just added for info.
 #  - Verify that dart format is used by all committed code, fails if not. Controversial but pub.dev penalizes you if
 #    dart format is not used.
-#  - Run all tests.
+#  - Run all tests with coverage.
+#  - Upload code coverage output to Codecov for analysis.
 #  - Install linux rpl tool. It is used to automate the needed change of a line in index.html.
 #  - Build 5 different WEB example apps using FlexColorScheme. All examples use these steps:
 #    - Flutter clean.
