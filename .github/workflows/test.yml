@@ -1,3 +1,15 @@
+# This GitHub action runs on push to master, it:
+#
+#  - Installs dart and flutter
+#  - Uses flutter stable channel for now, might setup a matrix later with beta and dev included too.
+#  - Gets package dependencies
+#  - Runs dart analyze, allows deprecation warnings, we on purpose allow use of deprecated features for now.
+#  - Show outdated packages, just added for info.
+#  - Verify that dart format is used by all committed code, fails if not. Controversial but pub.dev penalizes you if
+#    dart format is not used.
+#  - Run all tests with coverage.
+#  - Upload code coverage output to Codecov for analysis.
+#
 name: Test
 on:
   push:
@@ -22,6 +34,9 @@ jobs:
 
       - name: Analyze Dart source
         run: dart analyze
+
+      - name: Show outdated packges
+        run: flutter pub outdated
 
       - name: Verify that Dart formatting is used, fail if not
         run: dart format --output=none --set-exit-if-changed .

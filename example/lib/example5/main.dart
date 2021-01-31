@@ -750,6 +750,20 @@ class _HomePageState extends State<HomePage> {
                       child: ShowThemeColors(),
                     ),
                     const SizedBox(height: 8),
+                    // Open a sub-page
+                    ListTile(
+                      title: const Text('Open a demo subpage'),
+                      subtitle: const Text(
+                        'The subpage will use the same '
+                        'color scheme based theme automatically.',
+                      ),
+                      trailing: const Icon(Icons.chevron_right, size: 34),
+                      onTap: () {
+                        Subpage.show(context);
+                      },
+                    ),
+                    const Divider(),
+                    // const SizedBox(height: 8),
                     SwitchListTile.adaptive(
                       title: const Text('Compute dark theme'),
                       subtitle: const Text(
@@ -923,19 +937,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                       value: widget.useToTheme,
                       onChanged: widget.onUseToThemeChanged,
-                    ),
-                    const Divider(),
-                    // Open a sub-page
-                    ListTile(
-                      title: const Text('Open a demo subpage'),
-                      subtitle: const Text(
-                        'The subpage will use the same '
-                        'color scheme based theme automatically.',
-                      ),
-                      trailing: const Icon(Icons.chevron_right, size: 34),
-                      onTap: () {
-                        Subpage.show(context);
-                      },
                     ),
                     const Divider(),
                     Text('Menu', style: headline4),
