@@ -178,381 +178,381 @@ void main() {
     });
   });
 
-  group('FTMS2: WITH FlexThemeModeSwitch Assertions ', () {
-    // Test null assertion combinations
-    test(
-        'FTMS2.01: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: null,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: false,
-              labelAbove: false,
-              selectedElevation: 1,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.02: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: null,
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: false,
-              labelAbove: false,
-              selectedElevation: 1,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.03: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: null,
-              showSystemMode: false,
-              labelAbove: false,
-              selectedElevation: 1,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.04: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: null,
-              labelAbove: false,
-              selectedElevation: 1,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.05: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: false,
-              labelAbove: null,
-              selectedElevation: 1,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.06: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: false,
-              labelAbove: false,
-              selectedElevation: null,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.07: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: false,
-              labelAbove: false,
-              selectedElevation: 1,
-              unselectedElevation: null,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.08: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: false,
-              labelAbove: false,
-              selectedElevation: 1,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: null,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.09: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: false,
-              labelAbove: false,
-              selectedElevation: 1,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: 1,
-              height: null,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.10: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: false,
-              labelAbove: false,
-              selectedElevation: 1,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: null,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS2.11: GIVEN a FlexThemeModeSwitch with a required as null value '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeSwitch(
-              themeMode: ThemeMode.light,
-              onThemeModeChanged: (ThemeMode value) {},
-              flexSchemeData: FlexColor.schemes[FlexScheme.material],
-              showSystemMode: false,
-              labelAbove: false,
-              selectedElevation: 1,
-              unselectedElevation: 1,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: null),
-          throwsAssertionError);
-    });
-  });
+  // group('FTMS2: WITH FlexThemeModeSwitch Assertions ', () {
+  // Test null assertion combinations
+  // test(
+  //     'FTMS2.01: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: null,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: false,
+  //           labelAbove: false,
+  //           selectedElevation: 1,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.02: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: null,
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: false,
+  //           labelAbove: false,
+  //           selectedElevation: 1,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.03: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: null,
+  //           showSystemMode: false,
+  //           labelAbove: false,
+  //           selectedElevation: 1,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.04: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: null,
+  //           labelAbove: false,
+  //           selectedElevation: 1,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.05: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: false,
+  //           labelAbove: null,
+  //           selectedElevation: 1,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.06: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: false,
+  //           labelAbove: false,
+  //           selectedElevation: null,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.07: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: false,
+  //           labelAbove: false,
+  //           selectedElevation: 1,
+  //           unselectedElevation: null,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.08: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: false,
+  //           labelAbove: false,
+  //           selectedElevation: 1,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: null,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.09: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: false,
+  //           labelAbove: false,
+  //           selectedElevation: 1,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: 1,
+  //           height: null,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.10: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: false,
+  //           labelAbove: false,
+  //           selectedElevation: 1,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: null,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS2.11: GIVEN a FlexThemeModeSwitch with a required as null value '
+  //     'EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeSwitch(
+  //           themeMode: ThemeMode.light,
+  //           onThemeModeChanged: (ThemeMode value) {},
+  //           flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+  //           showSystemMode: false,
+  //           labelAbove: false,
+  //           selectedElevation: 1,
+  //           unselectedElevation: 1,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: null),
+  //       throwsAssertionError);
+  // });
+  // });
 
-  group('FTMS3: WITH FlexThemeModeOptionButton Assertions ', () {
-    // Test null assertion combinations
-    test(
-        'FTMS3.01: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: null,
-              backgroundColor: Colors.black,
-              labelAbove: false,
-              selected: false,
-              onSelect: () {},
-              elevation: 2,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS3.02: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].dark,
-              backgroundColor: null,
-              labelAbove: false,
-              selected: false,
-              onSelect: () {},
-              elevation: 2,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS3.03: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].dark,
-              backgroundColor: Colors.black,
-              labelAbove: null,
-              selected: false,
-              onSelect: () {},
-              elevation: 2,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS3.04: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].dark,
-              backgroundColor: Colors.black,
-              labelAbove: false,
-              selected: null,
-              onSelect: () {},
-              elevation: 2,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS3.05: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].dark,
-              backgroundColor: Colors.black,
-              labelAbove: false,
-              selected: false,
-              onSelect: null,
-              elevation: 2,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS3.06: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].dark,
-              backgroundColor: Colors.black,
-              labelAbove: false,
-              selected: false,
-              onSelect: () {},
-              elevation: null,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS3.07: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].dark,
-              backgroundColor: Colors.black,
-              labelAbove: false,
-              selected: false,
-              onSelect: () {},
-              elevation: 2,
-              optionButtonBorderRadius: null,
-              height: 10,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS3.08: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].dark,
-              backgroundColor: Colors.black,
-              labelAbove: false,
-              selected: false,
-              onSelect: () {},
-              elevation: 2,
-              optionButtonBorderRadius: 1,
-              height: null,
-              width: 10,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS3.09: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].dark,
-              backgroundColor: Colors.black,
-              labelAbove: false,
-              selected: false,
-              onSelect: () {},
-              elevation: 2,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: null,
-              borderRadius: 5),
-          throwsAssertionError);
-    });
-    test(
-        'FTMS3.10: GIVEN a FlexThemeModeOptionButton with a required as null '
-        'value EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexThemeModeOptionButton(
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].dark,
-              backgroundColor: Colors.black,
-              labelAbove: false,
-              selected: false,
-              onSelect: () {},
-              elevation: 2,
-              optionButtonBorderRadius: 1,
-              height: 10,
-              width: 10,
-              borderRadius: null),
-          throwsAssertionError);
-    });
-  });
+  // group('FTMS3: WITH FlexThemeModeOptionButton Assertions ', () {
+  // Test null assertion combinations
+  // test(
+  //     'FTMS3.01: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: null,
+  //           backgroundColor: Colors.black,
+  //           labelAbove: false,
+  //           selected: false,
+  //           onSelect: () {},
+  //           elevation: 2,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS3.02: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.dark,
+  //           backgroundColor: null,
+  //           labelAbove: false,
+  //           selected: false,
+  //           onSelect: () {},
+  //           elevation: 2,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS3.03: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.dark,
+  //           backgroundColor: Colors.black,
+  //           labelAbove: null,
+  //           selected: false,
+  //           onSelect: () {},
+  //           elevation: 2,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS3.04: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.dark,
+  //           backgroundColor: Colors.black,
+  //           labelAbove: false,
+  //           selected: null,
+  //           onSelect: () {},
+  //           elevation: 2,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS3.05: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.dark,
+  //           backgroundColor: Colors.black,
+  //           labelAbove: false,
+  //           selected: false,
+  //           onSelect: null,
+  //           elevation: 2,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS3.06: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.dark,
+  //           backgroundColor: Colors.black,
+  //           labelAbove: false,
+  //           selected: false,
+  //           onSelect: () {},
+  //           elevation: null,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS3.07: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.dark,
+  //           backgroundColor: Colors.black,
+  //           labelAbove: false,
+  //           selected: false,
+  //           onSelect: () {},
+  //           elevation: 2,
+  //           optionButtonBorderRadius: null,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS3.08: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.dark,
+  //           backgroundColor: Colors.black,
+  //           labelAbove: false,
+  //           selected: false,
+  //           onSelect: () {},
+  //           elevation: 2,
+  //           optionButtonBorderRadius: 1,
+  //           height: null,
+  //           width: 10,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS3.09: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.dark,
+  //           backgroundColor: Colors.black,
+  //           labelAbove: false,
+  //           selected: false,
+  //           onSelect: () {},
+  //           elevation: 2,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: null,
+  //           borderRadius: 5),
+  //       throwsAssertionError);
+  // });
+  // test(
+  //     'FTMS3.10: GIVEN a FlexThemeModeOptionButton with a required as null '
+  //     'value EXPECT throws null assertion error.', () {
+  //   expect(
+  //       () => FlexThemeModeOptionButton(
+  //           flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.dark,
+  //           backgroundColor: Colors.black,
+  //           labelAbove: false,
+  //           selected: false,
+  //           onSelect: () {},
+  //           elevation: 2,
+  //           optionButtonBorderRadius: 1,
+  //           height: 10,
+  //           width: 10,
+  //           borderRadius: null),
+  //       throwsAssertionError);
+  // });
+  // });
 }
 
 class ThemeSwitchApp extends StatefulWidget {
@@ -564,7 +564,7 @@ class ThemeSwitchApp extends StatefulWidget {
     this.labelDark = 'DARK',
     this.labelSystem = 'SYSTEM',
     this.selected = true,
-    Key key,
+    Key? key,
   }) : super(key: key);
   final ThemeMode themeMode;
   final bool showSystemMode;
@@ -579,8 +579,8 @@ class ThemeSwitchApp extends StatefulWidget {
 }
 
 class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
-  ThemeMode mode;
-  bool selected;
+  ThemeMode? mode;
+  late bool selected;
 
   @override
   void initState() {
@@ -596,10 +596,10 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
       key: const ValueKey<String>('theApp'),
       title: 'Theme Switch',
       theme: FlexColorScheme.light(
-              colors: FlexColor.schemes[FlexScheme.material].light)
+              colors: FlexColor.schemes[FlexScheme.material]!.light)
           .toTheme,
       darkTheme: FlexColorScheme.dark(
-              colors: FlexColor.schemes[FlexScheme.material].dark)
+              colors: FlexColor.schemes[FlexScheme.material]!.dark)
           .toTheme,
       themeMode: mode,
       home: Scaffold(
@@ -608,7 +608,7 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
           children: <Widget>[
             FlexThemeModeSwitch(
                 key: const ValueKey<String>('switch'),
-                themeMode: mode,
+                themeMode: mode!,
                 labelAbove: widget.labelAbove,
                 labelLight: widget.labelLight,
                 labelDark: widget.labelDark,
@@ -619,10 +619,10 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
                     mode = value;
                   });
                 },
-                flexSchemeData: FlexColor.schemes[FlexScheme.material]),
+                flexSchemeData: FlexColor.schemes[FlexScheme.material]!),
             FlexThemeModeOptionButton(
               key: const ValueKey<String>('option'),
-              flexSchemeColor: FlexColor.schemes[FlexScheme.material].light,
+              flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.light,
               backgroundColor: Colors.white,
               selected: selected,
               onSelect: () {

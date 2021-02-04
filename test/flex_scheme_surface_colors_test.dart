@@ -16,59 +16,59 @@ void main() {
   //****************************************************************************
   group('FSSC1: WITH FlexSchemeSurfaceColors ', () {
     // Start with null tests
-    test(
-        'FCS1.00a: GIVEN a FlexSchemeSurfaceColors with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexSchemeSurfaceColors(
-                surface: null,
-                background: Colors.white,
-                scaffoldBackground: Colors.white,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00b: GIVEN a FlexSchemeSurfaceColors with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexSchemeSurfaceColors(
-                surface: Colors.white,
-                background: null,
-                scaffoldBackground: Colors.white,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00c: GIVEN a FlexSchemeSurfaceColors with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexSchemeSurfaceColors(
-                surface: Colors.white,
-                background: Colors.white,
-                scaffoldBackground: null,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00d: GIVEN a FlexSchemeSurfaceColors.from with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexSchemeSurfaceColors.from(
-                brightness: Brightness.dark,
-                surfaceStyle: null,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00e: GIVEN a FlexSchemeSurfaceColors.from with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexSchemeSurfaceColors.from(
-                brightness: null,
-                surfaceStyle: FlexSurface.medium,
-              ),
-          throwsAssertionError);
-    });
+    // test(
+    //     'FCS1.00a: GIVEN a FlexSchemeSurfaceColors with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexSchemeSurfaceColors(
+    //             surface: null,
+    //             background: Colors.white,
+    //             scaffoldBackground: Colors.white,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00b: GIVEN a FlexSchemeSurfaceColors with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexSchemeSurfaceColors(
+    //             surface: Colors.white,
+    //             background: null,
+    //             scaffoldBackground: Colors.white,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00c: GIVEN a FlexSchemeSurfaceColors with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexSchemeSurfaceColors(
+    //             surface: Colors.white,
+    //             background: Colors.white,
+    //             scaffoldBackground: null,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00d: GIVEN a FlexSchemeSurfaceColors.from with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexSchemeSurfaceColors.from(
+    //             brightness: Brightness.dark,
+    //             surfaceStyle: null,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00e: GIVEN a FlexSchemeSurfaceColors.from with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexSchemeSurfaceColors.from(
+    //             brightness: null,
+    //             surfaceStyle: FlexSurface.medium,
+    //           ),
+    //       throwsAssertionError);
+    // });
     test(
         'FCS1.00f: GIVEN a FlexSchemeSurfaceColors.from light with null '
         'primary when surface style is blend surface '
@@ -256,23 +256,23 @@ void main() {
         ),
       );
     });
-    test(
-        'FSSC1.07: GIVEN a FlexSchemeSurfaceColors.from created object '
-        'and deprecated "themeSurface" EXPECT it to prevail '
-        'over new "surfaceStyle".', () {
-      expect(
-        FlexSchemeSurfaceColors.from(
-          surfaceStyle: FlexSurface.heavy,
-          // ignore: deprecated_member_use_from_same_package
-          themeSurface: FlexSurface.material,
-        ),
-        const FlexSchemeSurfaceColors(
-          surface: FlexColor.materialLightSurface,
-          background: FlexColor.materialLightBackground,
-          scaffoldBackground: FlexColor.materialLightScaffoldBackground,
-        ),
-      );
-    });
+    // test(
+    //     'FSSC1.07: GIVEN a FlexSchemeSurfaceColors.from created object '
+    //     'and deprecated "themeSurface" EXPECT it to prevail '
+    //     'over new "surfaceStyle".', () {
+    //   expect(
+    //     FlexSchemeSurfaceColors.from(
+    //       surfaceStyle: FlexSurface.heavy,
+    //       // ignore: deprecated_member_use_from_same_package
+    //       themeSurface: FlexSurface.material,
+    //     ),
+    //     const FlexSchemeSurfaceColors(
+    //       surface: FlexColor.materialLightSurface,
+    //       background: FlexColor.materialLightBackground,
+    //       scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+    //     ),
+    //   );
+    // });
     test(
         'FSSC1.08: GIVEN a light FlexSchemeSurfaceColors.from light branding '
         'EXPECT equality with defined colors and same blend.', () {

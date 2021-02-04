@@ -11,9 +11,9 @@ import 'constants.dart';
 // color branded surface or background colors.
 class SideMenu extends StatefulWidget {
   const SideMenu({
-    Key key,
-    this.isVisible,
-    this.menuWidth,
+    Key? key,
+    required this.isVisible,
+    required this.menuWidth,
   }) : super(key: key);
   final bool isVisible;
   final double menuWidth;
@@ -23,13 +23,7 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
-  int selectedItem;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedItem = 2;
-  }
+  int selectedItem = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -107,13 +101,13 @@ class _SideMenuState extends State<SideMenu> {
 // Menu side items, just to make the demo look more like a real use case.
 class _SideItem extends StatelessWidget {
   const _SideItem({
-    Key key,
-    this.width,
-    this.menuWidth,
-    this.onTap,
+    Key? key,
+    required this.width,
+    required this.menuWidth,
+    required this.onTap,
     this.selected = false,
-    this.icon,
-    this.label,
+    required this.icon,
+    required this.label,
     this.showDivider = false,
   }) : super(key: key);
 
@@ -172,9 +166,9 @@ class _SideItem extends StatelessWidget {
                           Text(
                             label,
                             style: selected
-                                ? theme.textTheme.bodyText1
+                                ? theme.textTheme.bodyText1!
                                     .copyWith(color: theme.colorScheme.primary)
-                                : theme.textTheme.bodyText1.copyWith(
+                                : theme.textTheme.bodyText1!.copyWith(
                                     color: theme.colorScheme.onSurface
                                         .withOpacity(0.64)),
                           )
@@ -193,20 +187,14 @@ class _SideItem extends StatelessWidget {
 
 // A dummy user profile widget that we use as leading widget ins side panel.
 class _UserProfile extends StatefulWidget {
-  const _UserProfile({Key key}) : super(key: key);
+  const _UserProfile({Key? key}) : super(key: key);
 
   @override
   _UserProfileState createState() => _UserProfileState();
 }
 
 class _UserProfileState extends State<_UserProfile> {
-  bool collapsedProfile;
-
-  @override
-  void initState() {
-    super.initState();
-    collapsedProfile = true;
-  }
+  bool collapsedProfile = true;
 
   @override
   Widget build(BuildContext context) {
@@ -230,12 +218,12 @@ class _UserProfileState extends State<_UserProfile> {
         backgroundColor: theme.colorScheme.primary,
         radius: AppConst.shrinkWidth / 2 - hPadding,
         child: Text('JS',
-            style: primaryTextTheme.subtitle1.copyWith(
+            style: primaryTextTheme.subtitle1!.copyWith(
                 color: theme.colorScheme.onPrimary,
                 fontWeight: FontWeight.w600)),
       ),
       title: Text('John Smith',
-          style: textTheme.subtitle1.copyWith(fontWeight: FontWeight.w600)),
+          style: textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w600)),
       subtitle: const Text('Company Inc'),
       trailing: ExpandIcon(
         isExpanded: !collapsedProfile,
@@ -258,10 +246,8 @@ class _UserProfileState extends State<_UserProfile> {
           child: Row(
             children: <Widget>[
               const Spacer(),
-              OutlineButton(
+              OutlinedButton(
                 onPressed: () {},
-                visualDensity: VisualDensity.comfortable,
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: Column(
                   children: <Widget>[
                     const Icon(Icons.person),
@@ -270,10 +256,8 @@ class _UserProfileState extends State<_UserProfile> {
                 ),
               ),
               const SizedBox(width: 10),
-              OutlineButton(
+              OutlinedButton(
                 onPressed: () {},
-                visualDensity: VisualDensity.comfortable,
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: Column(
                   children: <Widget>[
                     const Icon(Icons.exit_to_app),
