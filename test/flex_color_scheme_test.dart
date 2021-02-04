@@ -15,159 +15,159 @@ void main() {
   group('FCS1: WITH FlexColorScheme ', () {
     debugDefaultTargetPlatformOverride = null;
 
-    test(
-        'FCS1.00a: GIVEN a FlexColorScheme with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme(
-                brightness: null,
-                primary: Colors.white,
-                primaryVariant: Colors.white,
-                secondary: Colors.white,
-                secondaryVariant: Colors.white,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                appBarElevation: 1,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00b: GIVEN a FlexColorScheme with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme(
-                brightness: Brightness.dark,
-                primary: null,
-                primaryVariant: Colors.white,
-                secondary: Colors.white,
-                secondaryVariant: Colors.white,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                appBarElevation: 1,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00c: GIVEN a FlexColorScheme with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme(
-                brightness: Brightness.dark,
-                primary: Colors.white,
-                primaryVariant: null,
-                secondary: Colors.white,
-                secondaryVariant: Colors.white,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                appBarElevation: 1,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00d: GIVEN a FlexColorScheme with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme(
-                brightness: Brightness.dark,
-                primary: Colors.white,
-                primaryVariant: Colors.white,
-                secondary: null,
-                secondaryVariant: Colors.white,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                appBarElevation: 1,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00e: GIVEN a FlexColorScheme with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme(
-                brightness: Brightness.dark,
-                primary: Colors.white,
-                primaryVariant: Colors.white,
-                secondary: Colors.white,
-                secondaryVariant: null,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                appBarElevation: 1,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00f: GIVEN a FlexColorScheme with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme(
-                brightness: Brightness.dark,
-                primary: Colors.white,
-                primaryVariant: Colors.white,
-                secondary: Colors.white,
-                secondaryVariant: Colors.white,
-                tabBarStyle: null,
-                appBarElevation: 1,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00g: GIVEN a FlexColorScheme with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme(
-                brightness: Brightness.dark,
-                primary: Colors.white,
-                primaryVariant: Colors.white,
-                secondary: Colors.white,
-                secondaryVariant: Colors.white,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                appBarElevation: null,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00a: GIVEN a FlexColorScheme with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme(
-                brightness: Brightness.dark,
-                primary: Colors.white,
-                primaryVariant: Colors.white,
-                secondary: Colors.white,
-                secondaryVariant: Colors.white,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                appBarElevation: 1,
-                tooltipsMatchBackground: null,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00i: GIVEN a FlexColorScheme with nulls '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme(
-                brightness: Brightness.dark,
-                primary: Colors.white,
-                primaryVariant: Colors.white,
-                secondary: Colors.white,
-                secondaryVariant: Colors.white,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                appBarElevation: 1,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: null,
-              ),
-          throwsAssertionError);
-    });
+    // test(
+    //     'FCS1.00a: GIVEN a FlexColorScheme with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme(
+    //             brightness: null,
+    //             primary: Colors.white,
+    //             primaryVariant: Colors.white,
+    //             secondary: Colors.white,
+    //             secondaryVariant: Colors.white,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             appBarElevation: 1,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00b: GIVEN a FlexColorScheme with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme(
+    //             brightness: Brightness.dark,
+    //             primary: null,
+    //             primaryVariant: Colors.white,
+    //             secondary: Colors.white,
+    //             secondaryVariant: Colors.white,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             appBarElevation: 1,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00c: GIVEN a FlexColorScheme with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme(
+    //             brightness: Brightness.dark,
+    //             primary: Colors.white,
+    //             primaryVariant: null,
+    //             secondary: Colors.white,
+    //             secondaryVariant: Colors.white,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             appBarElevation: 1,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00d: GIVEN a FlexColorScheme with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme(
+    //             brightness: Brightness.dark,
+    //             primary: Colors.white,
+    //             primaryVariant: Colors.white,
+    //             secondary: null,
+    //             secondaryVariant: Colors.white,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             appBarElevation: 1,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00e: GIVEN a FlexColorScheme with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme(
+    //             brightness: Brightness.dark,
+    //             primary: Colors.white,
+    //             primaryVariant: Colors.white,
+    //             secondary: Colors.white,
+    //             secondaryVariant: null,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             appBarElevation: 1,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00f: GIVEN a FlexColorScheme with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme(
+    //             brightness: Brightness.dark,
+    //             primary: Colors.white,
+    //             primaryVariant: Colors.white,
+    //             secondary: Colors.white,
+    //             secondaryVariant: Colors.white,
+    //             tabBarStyle: null,
+    //             appBarElevation: 1,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00g: GIVEN a FlexColorScheme with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme(
+    //             brightness: Brightness.dark,
+    //             primary: Colors.white,
+    //             primaryVariant: Colors.white,
+    //             secondary: Colors.white,
+    //             secondaryVariant: Colors.white,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             appBarElevation: null,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00a: GIVEN a FlexColorScheme with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme(
+    //             brightness: Brightness.dark,
+    //             primary: Colors.white,
+    //             primaryVariant: Colors.white,
+    //             secondary: Colors.white,
+    //             secondaryVariant: Colors.white,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             appBarElevation: 1,
+    //             tooltipsMatchBackground: null,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00i: GIVEN a FlexColorScheme with nulls '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme(
+    //             brightness: Brightness.dark,
+    //             primary: Colors.white,
+    //             primaryVariant: Colors.white,
+    //             secondary: Colors.white,
+    //             secondaryVariant: Colors.white,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             appBarElevation: 1,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: null,
+    //           ),
+    //       throwsAssertionError);
+    // });
     // ---------------------------
 
     final FlexSchemeColor sc =
@@ -222,96 +222,96 @@ void main() {
         ),
       );
     });
-    test(
-        'FCS1.00k: GIVEN a FlexColorScheme.light with null usedColors '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.light(
-                colors: sc,
-                usedColors: null,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00l: GIVEN a FlexColorScheme.light with null surfaceStyle '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.light(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: null,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00m: GIVEN a FlexColorScheme.light with null appBarStyle '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.light(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: null,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00n: GIVEN a FlexColorScheme.light with null tabBarStyle '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.light(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: null,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00o: GIVEN a FlexColorScheme.light with null '
-        'tooltipsMatchBackground EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.light(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: null,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00p: GIVEN a FlexColorScheme.light with null '
-        'transparentStatusBar EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.light(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: null,
-              ),
-          throwsAssertionError);
-    });
+    // test(
+    //     'FCS1.00k: GIVEN a FlexColorScheme.light with null usedColors '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.light(
+    //             colors: sc,
+    //             usedColors: null,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00l: GIVEN a FlexColorScheme.light with null surfaceStyle '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.light(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: null,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00m: GIVEN a FlexColorScheme.light with null appBarStyle '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.light(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: null,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00n: GIVEN a FlexColorScheme.light with null tabBarStyle '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.light(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: null,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00o: GIVEN a FlexColorScheme.light with null '
+    //     'tooltipsMatchBackground EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.light(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: null,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00p: GIVEN a FlexColorScheme.light with null '
+    //     'transparentStatusBar EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.light(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: null,
+    //           ),
+    //       throwsAssertionError);
+    // });
     // ---------------------------
     test(
         'FCS1.00q1: GIVEN a FlexColorScheme.dark with null colors and null '
@@ -362,111 +362,111 @@ void main() {
         ),
       );
     });
-    test(
-        'FCS1.00r: GIVEN a FlexColorScheme.dark with null usedColors '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.dark(
-                colors: sc,
-                usedColors: null,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00s: GIVEN a FlexColorScheme.dark with null surfaceStyle '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.dark(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: null,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00t: GIVEN a FlexColorScheme.dark with null appBarStyle '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.dark(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: null,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00u: GIVEN a FlexColorScheme.dark with null tabBarStyle '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.dark(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: null,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00v: GIVEN a FlexColorScheme.dark with null '
-        'tooltipsMatchBackground EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.dark(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: null,
-                transparentStatusBar: false,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00w: GIVEN a FlexColorScheme.dark with null '
-        'transparentStatusBar EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.dark(
-                colors: sc,
-                usedColors: 1,
-                surfaceStyle: FlexSurface.medium,
-                appBarStyle: FlexAppBarStyle.background,
-                tabBarStyle: FlexTabBarStyle.forBackground,
-                tooltipsMatchBackground: true,
-                transparentStatusBar: null,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FCS1.00x: GIVEN a FlexColorScheme.dark with null darkIsTrueBlack '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexColorScheme.dark(
-              colors: sc,
-              usedColors: 1,
-              surfaceStyle: FlexSurface.medium,
-              appBarStyle: FlexAppBarStyle.background,
-              tabBarStyle: FlexTabBarStyle.forBackground,
-              tooltipsMatchBackground: true,
-              transparentStatusBar: false,
-              darkIsTrueBlack: null),
-          throwsAssertionError);
-    });
+    // test(
+    //     'FCS1.00r: GIVEN a FlexColorScheme.dark with null usedColors '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.dark(
+    //             colors: sc,
+    //             usedColors: null,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00s: GIVEN a FlexColorScheme.dark with null surfaceStyle '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.dark(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: null,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00t: GIVEN a FlexColorScheme.dark with null appBarStyle '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.dark(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: null,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00u: GIVEN a FlexColorScheme.dark with null tabBarStyle '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.dark(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: null,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00v: GIVEN a FlexColorScheme.dark with null '
+    //     'tooltipsMatchBackground EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.dark(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: null,
+    //             transparentStatusBar: false,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00w: GIVEN a FlexColorScheme.dark with null '
+    //     'transparentStatusBar EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.dark(
+    //             colors: sc,
+    //             usedColors: 1,
+    //             surfaceStyle: FlexSurface.medium,
+    //             appBarStyle: FlexAppBarStyle.background,
+    //             tabBarStyle: FlexTabBarStyle.forBackground,
+    //             tooltipsMatchBackground: true,
+    //             transparentStatusBar: null,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FCS1.00x: GIVEN a FlexColorScheme.dark with null darkIsTrueBlack '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexColorScheme.dark(
+    //           colors: sc,
+    //           usedColors: 1,
+    //           surfaceStyle: FlexSurface.medium,
+    //           appBarStyle: FlexAppBarStyle.background,
+    //           tabBarStyle: FlexTabBarStyle.forBackground,
+    //           tooltipsMatchBackground: true,
+    //           transparentStatusBar: false,
+    //           darkIsTrueBlack: null),
+    //       throwsAssertionError);
+    // });
 
     // m1 = Default material light scheme colors.
     const FlexColorScheme m1 = FlexColorScheme(
@@ -551,7 +551,7 @@ void main() {
         'EXPECT equality when made by matching default constructor.', () {
       expect(
         FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material].light),
+            colors: FlexColor.schemes[FlexScheme.material]!.light),
         const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightPrimary,
@@ -576,7 +576,7 @@ void main() {
         'EXPECT equality when made by matching default constructor.', () {
       expect(
         FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material].dark),
+            colors: FlexColor.schemes[FlexScheme.material]!.dark),
         const FlexColorScheme(
           brightness: Brightness.dark,
           primary: FlexColor.materialDarkPrimary,
