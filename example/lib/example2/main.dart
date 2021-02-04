@@ -39,7 +39,7 @@ const FlexSchemeData customFlexScheme = FlexSchemeData(
 );
 
 class DemoApp extends StatefulWidget {
-  const DemoApp({Key key}) : super(key: key);
+  const DemoApp({Key? key}) : super(key: key);
 
   @override
   _DemoAppState createState() => _DemoAppState();
@@ -104,10 +104,10 @@ class _DemoAppState extends State<DemoApp> {
 // defined example looks like in an application and with commonly used Widgets.
 class HomePage extends StatelessWidget {
   const HomePage({
-    Key key,
-    @required this.themeMode,
-    @required this.onThemeModeChanged,
-    @required this.flexSchemeData,
+    Key? key,
+    required this.themeMode,
+    required this.onThemeModeChanged,
+    required this.flexSchemeData,
   }) : super(key: key);
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
@@ -117,7 +117,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final TextStyle headline4 = textTheme.headline4;
+    final TextStyle headline4 = textTheme.headline4!;
 
     return Scaffold(
       appBar: AppBar(

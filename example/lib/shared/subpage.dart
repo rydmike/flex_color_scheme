@@ -8,7 +8,7 @@ import '../all_shared_imports.dart';
 // This sub page is used as a demo in Examples 4 and 5 to show a sub-page
 // using the same FlexColorScheme based theme.
 class Subpage extends StatefulWidget {
-  const Subpage({Key key}) : super(key: key);
+  const Subpage({Key? key}) : super(key: key);
 
   // A static convenience function show this screen, as pushed on top.
   static Future<void> show(BuildContext context) async {
@@ -24,19 +24,13 @@ class Subpage extends StatefulWidget {
 }
 
 class _SubpageState extends State<Subpage> {
-  int _buttonIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    _buttonIndex = 0;
-  }
+  int _buttonIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final TextStyle headline4 = textTheme.headline4;
+    final TextStyle headline4 = textTheme.headline4!;
 
     return DefaultTabController(
       length: 4,

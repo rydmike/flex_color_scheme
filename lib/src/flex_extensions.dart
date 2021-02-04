@@ -29,7 +29,7 @@ extension FlexColorExtensions on Color {
   /// Brightens the color with the given integer percentage amount.
   /// Defaults to 10%.
   Color brighten([int amount = 10]) {
-    if (amount == null || amount <= 0 || this == null) return this;
+    if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     final Color color = Color.fromARGB(
       alpha,
@@ -43,7 +43,7 @@ extension FlexColorExtensions on Color {
   /// Lightens the color with the given integer percentage amount.
   /// Defaults to 10%.
   Color lighten([int amount = 10]) {
-    if (amount == null || amount <= 0 || this == null) return this;
+    if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     // HSLColor returns saturation 1 for black, we want 0 instead to be able
     // lighten black color up along the grey scale from black.
@@ -51,20 +51,18 @@ extension FlexColorExtensions on Color {
         ? HSLColor.fromColor(this).withSaturation(0)
         : HSLColor.fromColor(this);
     return hsl
-        .withLightness(
-            math.min(1, math.max(0, hsl.lightness + (amount ?? 10) / 100)))
+        .withLightness(math.min(1, math.max(0, hsl.lightness + amount / 100)))
         .toColor();
   }
 
   /// Darkens the color with the given integer percentage amount.
   /// Defaults to 10%.
   Color darken([int amount = 10]) {
-    if (amount == null || amount <= 0 || this == null) return this;
+    if (amount <= 0) return this;
     if (amount > 100) return Colors.black;
     final HSLColor hsl = HSLColor.fromColor(this);
     return hsl
-        .withLightness(
-            math.min(1, math.max(0, hsl.lightness - (amount ?? 10) / 100)))
+        .withLightness(math.min(1, math.max(0, hsl.lightness - amount / 100)))
         .toColor();
   }
 
@@ -81,9 +79,7 @@ extension FlexColorExtensions on Color {
   /// Defaults to 10% alpha blend of the passed in Color value.
   Color blend(Color input, [int amount = 10]) {
     // Skip blending for impossible value and return the instance color value.
-    if (amount == null || amount <= 0 || input == null || this == null) {
-      return this;
-    }
+    if (amount <= 0) return this;
     // Blend amounts >= 100 results in the input Color.
     if (amount >= 100) return input;
     return Color.alphaBlend(input.withAlpha(255 * amount ~/ 100), this);
@@ -111,19 +107,9 @@ extension FlexColorExtensions on Color {
     bool keepBlack = true,
     bool keepWhite = true,
   }) {
-    if (shadeValue == null || shadeValue <= 0 || this == null) return this;
+    if (shadeValue <= 0) return this;
     // ignore: parameter_assignments
     if (shadeValue > 100) shadeValue = 100;
-
-    // If null is forced for any property, use default.
-    // ignore: parameter_assignments
-    shadeValue ??= 15;
-    // ignore: parameter_assignments
-    lighten ??= true;
-    // ignore: parameter_assignments
-    keepBlack ??= true;
-    // ignore: parameter_assignments
-    keepWhite ??= true;
 
     // Trying to make black darker, just return black
     // ignore: parameter_assignments
@@ -150,14 +136,12 @@ extension FlexColorExtensions on Color {
 
   /// Return uppercase Flutter style hex code string of the color.
   String get hexCode {
-    if (this == null) return '';
     return value.toRadixString(16).toUpperCase().padLeft(8, '0');
   }
 
   /// Return uppercase RGB hex code string, with # and no alpha value.
   /// This format is often used in APIs and in CSS color values..
   String get hex {
-    if (this == null) return '';
     // ignore: lines_longer_than_80_chars
     return '#${value.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}';
   }
@@ -182,7 +166,7 @@ extension FlexStringExtensions on String {
   /// IF the resulting string cannot be parsed to a Color, is empty or null
   /// THEN fully opaque black color is returned ELSE the Color is returned.
   Color get toColor {
-    if (this == null || this == '') return const Color(0xFF000000);
+    if (this == '') return const Color(0xFF000000);
     String hexColor = replaceAll('#', '');
     hexColor = hexColor.replaceAll('0x', '');
     hexColor = hexColor.padLeft(6, '0');
@@ -193,15 +177,8 @@ extension FlexStringExtensions on String {
   }
 
   /// Capitalize the first letter in a string.
-  ///
-  /// The extension can handle being passed an empty string or a null
-  /// value in a safe way.
   String get capitalize {
-    return (this != null && length > 1)
-        ? this[0].toUpperCase() + substring(1)
-        : (this != null)
-            ? toUpperCase()
-            : null;
+    return (length > 1) ? this[0].toUpperCase() + substring(1) : toUpperCase();
   }
 
   /// Return the string remaining in a string after the last "." in a String,
@@ -210,7 +187,7 @@ extension FlexStringExtensions on String {
   /// This function can be used to e.g. return the enum tail value from an
   /// enum's standard toString method.
   String get dotTail {
-    if (this == null) return '';
+    // if (this == null) return '';
     return split('.').last;
   }
 }
