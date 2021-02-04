@@ -15,7 +15,7 @@ import 'constants.dart';
 // - Center the content and limit the content width when a given width
 //   constraint value is exceeded, in this case an app level max width constant.
 class PageBody extends StatelessWidget {
-  const PageBody({Key key, this.child}) : super(key: key);
+  const PageBody({Key? key, required this.child}) : super(key: key);
   final Widget child;
 
   @override

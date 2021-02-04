@@ -2,6 +2,13 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [2.0.0-nullsafety.1] - February 4, 2021
+
+* First version with null-safety.
+* Additional breaking: Removed in version 1.3.0 deprecated `FlexSchemeSurfaceColors.themeSurface`, use
+  `FlexSchemeSurfaceColors.surfaceStyle` instead.
+* Number of tests reduced from 723 to 639 when all null related tests were removed.  
+
 ## [1.4.1] - January 31, 2021
 
 * Added four new built-in color schemes.
@@ -182,8 +189,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 These are the topics I currently have on the TODO list for this package. Have a new suggestion and idea? 
 Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_scheme/issues) in the repo. 
 
-### TODO  
-- Version 2.0.0-nullsafety.1: Add first null safe version.
+### TODO
 - Version 2.0.0-nullsafety.2: Add some minor new APIs and features (maybe). 
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
 - Version 2.1.0 Release even more color schemes. Making schemes is fun, documenting the changes a bit less so.
@@ -209,7 +215,8 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
   they will not be changed by any accidental edit. Test coverage is higher than 95%, certainly sufficient for this 
   type of package, but there are still some areas that could and will be improved.
 - Version 1.4.1 More tests, tests are now considered sufficient for current features. 
-- Version 1.4.1 Added automated build and publish pipes for the Web examples!  
+- Version 1.4.1 Added automated build and publish pipes for the Web examples!
+- Version 2.0.0-nullsafety.1 released!
 
 ### MAYBE
 - **Companion Web App**  

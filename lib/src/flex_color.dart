@@ -1809,14 +1809,11 @@ class FlexSchemeData with Diagnosticable {
   ///
   /// Contains [name], [description] plus [light] and [dark] scheme colors.
   const FlexSchemeData({
-    @required this.name,
-    @required this.description,
-    @required this.light,
-    @required this.dark,
-  })  : assert(name != null, 'Name may not be null.'),
-        assert(description != null, 'Description may not be null.'),
-        assert(light != null, 'Light may not be null.'),
-        assert(dark != null, 'Dark may not be null.');
+    required this.name,
+    required this.description,
+    required this.light,
+    required this.dark,
+  });
 
   /// A short name for the [FlexSchemeData] based color scheme.
   final String name;
@@ -1832,10 +1829,10 @@ class FlexSchemeData with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexSchemeData copyWith({
-    String name,
-    String description,
-    FlexSchemeColor light,
-    FlexSchemeColor dark,
+    String? name,
+    String? description,
+    FlexSchemeColor? light,
+    FlexSchemeColor? dark,
   }) {
     return FlexSchemeData(
       name: name ?? this.name,
@@ -1893,19 +1890,14 @@ class FlexSchemeColor with Diagnosticable {
   const FlexSchemeColor({
     // The appBarColor, accentColor and error colors are not required, if they
     // are null they will be provided by theme defaults later.
-    @required this.primary,
-    @required this.primaryVariant,
-    @required this.secondary,
-    @required this.secondaryVariant,
+    required this.primary,
+    required this.primaryVariant,
+    required this.secondary,
+    required this.secondaryVariant,
     this.appBarColor,
     this.accentColor,
     this.error,
-  })  : assert(primary != null, 'Primary color may not be null.'),
-        assert(
-            primaryVariant != null, 'Primary variant color may not be null.'),
-        assert(secondary != null, 'Secondary color may not be null.'),
-        assert(secondaryVariant != null,
-            'Secondary variant color may not be null.');
+  });
 
   /// The color displayed most frequently across your application's screens
   /// and components.
@@ -1927,7 +1919,7 @@ class FlexSchemeColor with Diagnosticable {
   /// default to primary color and to surface color in dark mode.
   /// [FlexSchemeColor] allows you to define a color for the app bar theme
   /// that differs from this default.
-  final Color appBarColor;
+  final Color? appBarColor;
 
   /// The accentColor in ThemeData.
   ///
@@ -1938,29 +1930,24 @@ class FlexSchemeColor with Diagnosticable {
   /// text fields in dark mode separately without complicated input decoration
   /// themes. This only applies to dark mode, border side for light theme mode
   /// remains tied to primary color.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The color to use for input validation errors, e.g. for
   /// [InputDecoration.errorText].
-  final Color error;
+  final Color? error;
 
   /// Make a [FlexSchemeColor] from just one primary color or possible also
   /// from a more complete color scheme set. This is a convenience factory that
   /// can create a nice toned color schemes based on only the primary color.
   factory FlexSchemeColor.from({
-    @required Color primary,
-    Color primaryVariant,
-    Color secondary,
-    Color secondaryVariant,
-    Color appBarColor,
-    Color accentColor,
-    Color error,
+    required Color primary,
+    Color? primaryVariant,
+    Color? secondary,
+    Color? secondaryVariant,
+    Color? appBarColor,
+    Color? accentColor,
+    Color? error,
   }) {
-    // Check valid primary input
-    assert(primary != null, 'Primary color may not be null.');
-    // If null slips through in a release build, give it a fallback color.
-    primary ??= FlexColor.materialLightPrimary;
-
     return FlexSchemeColor(
       primary: primary,
       // ignore: avoid_redundant_argument_values
@@ -1996,14 +1983,11 @@ class FlexSchemeColor with Diagnosticable {
   /// light mode to dark mode. For primary light mode color with low saturation,
   /// a white blend of 20...30% often also produces nice results.
   FlexSchemeColor toDark([int whiteBlend = 35]) {
-    // If null passed, use 35, the default value.
-    // ignore: parameter_assignments
-    whiteBlend ??= 35;
     return FlexSchemeColor.from(
-      primary: primary?.blend(Colors.white, whiteBlend),
-      primaryVariant: primaryVariant?.blend(Colors.white, whiteBlend),
-      secondary: secondary?.blend(Colors.white, whiteBlend),
-      secondaryVariant: secondaryVariant?.blend(Colors.white, whiteBlend),
+      primary: primary.blend(Colors.white, whiteBlend),
+      primaryVariant: primaryVariant.blend(Colors.white, whiteBlend),
+      secondary: secondary.blend(Colors.white, whiteBlend),
+      secondaryVariant: secondaryVariant.blend(Colors.white, whiteBlend),
       appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
       accentColor: accentColor?.blend(Colors.white, whiteBlend),
       error: error?.blend(Colors.white, whiteBlend),
@@ -2054,13 +2038,13 @@ class FlexSchemeColor with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexSchemeColor copyWith({
-    Color primary,
-    Color primaryVariant,
-    Color secondary,
-    Color secondaryVariant,
-    Color appBarColor,
-    Color accentColor,
-    Color error,
+    Color? primary,
+    Color? primaryVariant,
+    Color? secondary,
+    Color? secondaryVariant,
+    Color? appBarColor,
+    Color? accentColor,
+    Color? error,
   }) {
     return FlexSchemeColor(
       primary: primary ?? this.primary,

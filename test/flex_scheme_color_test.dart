@@ -12,63 +12,63 @@ void main() {
   //****************************************************************************
   group('FSC1: WITH FlexSchemeColor ', () {
     // Start with null tests.
-    test(
-        'FSC1.00a: GIVEN a FlexSchemeColor.from primary null '
-        'EXPECT throws null assertion error.', () {
-      expect(
-        () => FlexSchemeColor.from(primary: null),
-        throwsAssertionError,
-      );
-    });
-
-    test(
-        'FSC1.00b: GIVEN a FlexSchemeColor with null values '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexSchemeColor(
-                primary: null,
-                primaryVariant: Colors.white,
-                secondary: Colors.white,
-                secondaryVariant: Colors.white,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FSC1.00c: GIVEN a FlexSchemeColor with null values '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexSchemeColor(
-                primary: Colors.white,
-                primaryVariant: null,
-                secondary: Colors.white,
-                secondaryVariant: Colors.white,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FSC1.00d: GIVEN a FlexSchemeColor with null values '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexSchemeColor(
-                primary: Colors.white,
-                primaryVariant: Colors.white,
-                secondary: null,
-                secondaryVariant: Colors.white,
-              ),
-          throwsAssertionError);
-    });
-    test(
-        'FSC1.00e: GIVEN a FlexSchemeColor with null values '
-        'EXPECT throws null assertion error.', () {
-      expect(
-          () => FlexSchemeColor(
-                primary: Colors.white,
-                primaryVariant: Colors.white,
-                secondary: Colors.white,
-                secondaryVariant: null,
-              ),
-          throwsAssertionError);
-    });
+    // test(
+    //     'FSC1.00a: GIVEN a FlexSchemeColor.from primary null '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //     () => FlexSchemeColor.from(primary: null),
+    //     throwsAssertionError,
+    //   );
+    // });
+    //
+    // test(
+    //     'FSC1.00b: GIVEN a FlexSchemeColor with null values '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexSchemeColor(
+    //             primary: null,
+    //             primaryVariant: Colors.white,
+    //             secondary: Colors.white,
+    //             secondaryVariant: Colors.white,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FSC1.00c: GIVEN a FlexSchemeColor with null values '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexSchemeColor(
+    //             primary: Colors.white,
+    //             primaryVariant: null,
+    //             secondary: Colors.white,
+    //             secondaryVariant: Colors.white,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FSC1.00d: GIVEN a FlexSchemeColor with null values '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexSchemeColor(
+    //             primary: Colors.white,
+    //             primaryVariant: Colors.white,
+    //             secondary: null,
+    //             secondaryVariant: Colors.white,
+    //           ),
+    //       throwsAssertionError);
+    // });
+    // test(
+    //     'FSC1.00e: GIVEN a FlexSchemeColor with null values '
+    //     'EXPECT throws null assertion error.', () {
+    //   expect(
+    //       () => FlexSchemeColor(
+    //             primary: Colors.white,
+    //             primaryVariant: Colors.white,
+    //             secondary: Colors.white,
+    //             secondaryVariant: null,
+    //           ),
+    //       throwsAssertionError);
+    // });
 
     // m1 = Basic flex scheme color with null accentColor.
     const FlexSchemeColor m1 = FlexSchemeColor(

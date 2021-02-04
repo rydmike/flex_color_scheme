@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 // This widget is just used so we can visually see the active theme colors
 // in the examples and their used FlexColorScheme based themes.
 class ShowThemeColors extends StatelessWidget {
-  const ShowThemeColors({Key key}) : super(key: key);
+  const ShowThemeColors({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class ShowThemeColors extends StatelessWidget {
         ThemeCard(
           label: 'Primary\nColor',
           color: theme.primaryColor,
-          textColor: theme.primaryTextTheme.subtitle1.color,
+          textColor: theme.primaryTextTheme.subtitle1!.color ?? Colors.white,
         ),
         ThemeCard(
           label: 'Primary\nColorDark',
@@ -165,10 +165,10 @@ class ShowThemeColors extends StatelessWidget {
 // and text label color. Used to show the colors of a theme color property.
 class ThemeCard extends StatelessWidget {
   const ThemeCard({
-    Key key,
-    this.label,
-    this.color,
-    this.textColor,
+    Key? key,
+    required this.label,
+    required this.color,
+    required this.textColor,
   }) : super(key: key);
 
   final String label;

@@ -21,10 +21,10 @@ void main() {
         'parameters EXPECT their ThemeData to be equal.', () {
       expect(
           FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material].light,
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
           ).toTheme,
           equals(FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material].light,
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
           ).toTheme));
     });
     test(
@@ -40,7 +40,7 @@ void main() {
         'scheme FlexScheme.material.', () {
       expect(
           FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material].light,
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
           ).toTheme,
           FlexColorScheme.light(
             scheme: FlexScheme.material,
@@ -52,7 +52,7 @@ void main() {
         'no params.', () {
       expect(
           FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material].light,
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
           ).toTheme,
           FlexColorScheme.light().toTheme);
     });
@@ -62,10 +62,10 @@ void main() {
         'parameters EXPECT their ThemeData to be equal.', () {
       expect(
           FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material].dark,
+            colors: FlexColor.schemes[FlexScheme.material]!.dark,
           ).toTheme,
           FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material].dark,
+            colors: FlexColor.schemes[FlexScheme.material]!.dark,
           ).toTheme);
     });
     test(
@@ -81,7 +81,7 @@ void main() {
         'scheme FlexScheme.material.', () {
       expect(
           FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material].dark,
+            colors: FlexColor.schemes[FlexScheme.material]!.dark,
           ).toTheme,
           FlexColorScheme.dark(
             scheme: FlexScheme.material,
@@ -93,7 +93,7 @@ void main() {
         'no params.', () {
       expect(
           FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material].dark,
+            colors: FlexColor.schemes[FlexScheme.material]!.dark,
           ).toTheme,
           FlexColorScheme.dark().toTheme);
     });
@@ -318,14 +318,14 @@ void main() {
     //**************************************************************************
 
     final ThemeData tLightL = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.material].light,
+      colors: FlexColor.schemes[FlexScheme.material]!.light,
       surfaceStyle: FlexSurface.light,
       appBarStyle: FlexAppBarStyle.surface,
       tabBarStyle: FlexTabBarStyle.forBackground,
     ).toTheme;
 
     final ThemeData tDarkL = FlexColorScheme.dark(
-      colors: FlexColor.schemes[FlexScheme.material].dark,
+      colors: FlexColor.schemes[FlexScheme.material]!.dark,
       surfaceStyle: FlexSurface.light,
       appBarStyle: FlexAppBarStyle.surface,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -438,7 +438,7 @@ void main() {
     //**************************************************************************
 
     final ThemeData tLightM = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.material].light,
+      colors: FlexColor.schemes[FlexScheme.material]!.light,
       surfaceStyle: FlexSurface.medium,
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 1,
@@ -447,7 +447,7 @@ void main() {
     ).toTheme;
 
     final ThemeData tDarkM = FlexColorScheme.dark(
-      colors: FlexColor.schemes[FlexScheme.material].dark,
+      colors: FlexColor.schemes[FlexScheme.material]!.dark,
       surfaceStyle: FlexSurface.medium,
       appBarStyle: FlexAppBarStyle.primary,
       appBarElevation: 3,
@@ -562,7 +562,7 @@ void main() {
     //**************************************************************************
 
     final ThemeData tLightS = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.material].light,
+      colors: FlexColor.schemes[FlexScheme.material]!.light,
       surfaceStyle: FlexSurface.strong,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 6,
@@ -571,7 +571,7 @@ void main() {
     ).toTheme;
 
     final ThemeData tDarkS = FlexColorScheme.dark(
-      colors: FlexColor.schemes[FlexScheme.material].dark,
+      colors: FlexColor.schemes[FlexScheme.material]!.dark,
       surfaceStyle: FlexSurface.strong,
       // ignore: avoid_redundant_argument_values
       appBarStyle: FlexAppBarStyle.material,
@@ -687,7 +687,7 @@ void main() {
     //**************************************************************************
 
     final ThemeData tLightH = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.material].light,
+      colors: FlexColor.schemes[FlexScheme.material]!.light,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
       appBarElevation: 2,
@@ -698,7 +698,7 @@ void main() {
     ).toTheme;
 
     final ThemeData tDarkH = FlexColorScheme.dark(
-      colors: FlexColor.schemes[FlexScheme.material].dark,
+      colors: FlexColor.schemes[FlexScheme.material]!.dark,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
       appBarElevation: 4,
@@ -816,7 +816,7 @@ void main() {
     //**************************************************************************
 
     final ThemeData tLightH2 = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.mandyRed].light,
+      colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -824,7 +824,7 @@ void main() {
     ).toTheme;
 
     final ThemeData tDarkH2 = FlexColorScheme.dark(
-      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -844,7 +844,7 @@ void main() {
     });
 
     final ThemeData tLightH3 = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.mandyRed].light,
+      colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -852,7 +852,7 @@ void main() {
     ).toTheme;
 
     final ThemeData tDarkH3 = FlexColorScheme.dark(
-      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -879,7 +879,7 @@ void main() {
     //**************************************************************************
 
     final ThemeData tLightC = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.mandyRed].light,
+      colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceStyle: FlexSurface.custom,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 2,
@@ -891,7 +891,7 @@ void main() {
     ).toTheme;
 
     final ThemeData tDarkC = FlexColorScheme.dark(
-      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
       surfaceStyle: FlexSurface.custom,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,
@@ -916,7 +916,7 @@ void main() {
 
     // With surface and background colors defined
     final ThemeData tLightC2 = FlexColorScheme.light(
-      colors: FlexColor.schemes[FlexScheme.mandyRed].light,
+      colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceStyle: FlexSurface.custom,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 2,
@@ -931,7 +931,7 @@ void main() {
     ).toTheme;
 
     final ThemeData tDarkC2 = FlexColorScheme.dark(
-      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
       surfaceStyle: FlexSurface.custom,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,
@@ -947,7 +947,7 @@ void main() {
     ).toTheme;
 
     final ThemeData tDarkC2tb = FlexColorScheme.dark(
-      colors: FlexColor.schemes[FlexScheme.mandyRed].dark,
+      colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
       surfaceStyle: FlexSurface.custom,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,

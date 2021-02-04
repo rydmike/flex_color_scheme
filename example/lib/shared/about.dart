@@ -15,7 +15,7 @@ import 'link_text_span.dart';
 // iOS device we assume somebody is just learning how to use the package
 // and don't show the about info.
 class AboutIconButton extends StatelessWidget {
-  const AboutIconButton({Key key}) : super(key: key);
+  const AboutIconButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +40,10 @@ class AboutIconButton extends StatelessWidget {
 /// that exist(ed) in the Flutter Gallery App.
 void showAppAboutDialog(BuildContext context) {
   final ThemeData themeData = Theme.of(context);
-  final TextStyle aboutTextStyle = themeData.textTheme.bodyText1;
-  final TextStyle footerStyle = themeData.textTheme.caption;
+  final TextStyle aboutTextStyle = themeData.textTheme.bodyText1!;
+  final TextStyle footerStyle = themeData.textTheme.caption!;
   final TextStyle linkStyle =
-      themeData.textTheme.bodyText1.copyWith(color: themeData.primaryColor);
+      themeData.textTheme.bodyText1!.copyWith(color: themeData.primaryColor);
 
   showAboutDialog(
     context: context,
