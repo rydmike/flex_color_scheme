@@ -7,11 +7,10 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 //****************************************************************************
 // FlexColorScheme themedSystemNavigationBar Widget tests
 //
-// TODO figure out some more ways to test this as a widget.
-// Covered quite will in flex_color_scheme_test unit test group FCS5, but
+// Covered quite well in flex_color_scheme_test unit test group FCS5, but
 // could potentially do more here. Current test just tests that it can build
 // an app and find an AnnotatedRegion using the themedSystemNavigationBar
-// styled SystemUiOverlayStyle. Sure that is certainly a bit already as it
+// styled SystemUiOverlayStyle. Which is certainly a bit already, as it
 // tests that it builds and works as a widget.
 //****************************************************************************
 void main() {

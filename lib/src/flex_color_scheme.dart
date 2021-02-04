@@ -1369,7 +1369,7 @@ class FlexColorScheme with Diagnosticable {
   // Introducing it now for existing schemes would be breaking changes for the
   // colors they get for primaryColorDark, primaryColoLight and
   // secondaryHeaderColor. It could however be introduced as an optional toggle
-  // for schemes when using a colro from any MaterialColor swatch. This way
+  // for schemes when using a color from any MaterialColor swatch. This way
   // these rarely used supporting colors would get and use actual colors from
   // the corresponding MaterialColor swatch and not computed
   // approximations, in cases where a Material Swatch is used as the
