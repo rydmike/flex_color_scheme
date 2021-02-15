@@ -44,7 +44,7 @@ analyzer:
     #  such as ??= is used. Otherwise, arbitrarily reassigning parameters is usually a mistake."
     # One might even think the rule would allow using the ??= operator, but it does not. For now
     # I am keeping this lint as warning and overriding locally with
-    #  // ignore: parameter_assignments
+    #  ignore: parameter_assignments
     # when I need it for the ??= operator, or some copy/paste in of some code that does things
     # that needs it too and that I don't want to deal with fixing at the moment.
     parameter_assignments: warning
@@ -54,7 +54,7 @@ analyzer:
 # Disable unwanted or conflicting lint rules.
 linter:
   rules:
-    # DO separate the control structure expression from its statement.
+    # ALWAYS separate the control structure expression from its statement.
     #
     # https://dart-lang.github.io/linter/lints/always_put_control_body_on_new_line.html
     #
@@ -68,7 +68,7 @@ linter:
     # Flutter repo   enabled  : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
     always_put_control_body_on_new_line: false
 
-    # DO specify @required on named parameter before other named parameters.
+    # ALWAYS specify @required on named parameter before other named parameters.
     #
     # https://dart-lang.github.io/linter/lints/always_put_required_named_parameters_first.html
     #
@@ -82,7 +82,7 @@ linter:
     # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
     always_put_required_named_parameters_first: false
 
-    # Do specify type annotations.
+    # ALWAYS specify type annotations.
     #
     # https://dart-lang.github.io/linter/lints/always_specify_types.html
     #
@@ -119,7 +119,7 @@ linter:
     #
     # always_specify_types: false
 
-    # DO avoid relative imports for files in lib/.
+    # ALWAYS use package imports for files in lib/.
     #
     # https://dart-lang.github.io/linter/lints/always_use_package_imports.html
     #
@@ -242,7 +242,7 @@ linter:
     # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
     avoid_positional_boolean_parameters: false
 
-    # DO avoid print calls in production code.
+    # AVOID print calls in production code.
     #
     # https://dart-lang.github.io/linter/lints/avoid_print.html
     #
@@ -264,6 +264,29 @@ linter:
     #
     # avoid_print: false
 
+    # AVOID redundant argument values.
+    #
+    # https://dart-lang.github.io/linter/lints/avoid_redundant_argument_values.html
+    #
+    # Using redundant (default) argument values can be useful for in code documentation
+    # purposes and also handy as a template when trying different settings in Flutter. It is often
+    # quicker when dealing with not well known APIs to see parameter values in the call/constructor,
+    # instead of using the IDE to peek into its default to figure out what the defaults are,
+    # occasionally leaving a few redundant default valued parameters in the code is not that bad
+    # when you are developing something new. For public packages you probably want to keep this
+    # rule enabled.
+    #
+    # Other known linters use:
+    # Pedantic       disabled : https://pub.dev/packages/pedantic
+    # Effective Dart disabled : https://pub.dev/packages/effective_dart
+    # Lint           enabled  : https://pub.dev/packages/lint
+    # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    #
+    # PACKAGE:       ENABLE   : By commenting it out.
+    # APPLICATION:   DISABLE  : With false value.
+    #
+    # avoid_redundant_argument_values: false
+
     # AVOID annotating types for function expression parameters.
     #
     # https://dart-lang.github.io/linter/lints/avoid_catches_without_on_clauses.html
@@ -282,7 +305,7 @@ linter:
     # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
     avoid_types_on_closure_parameters: false
 
-    # DO Use the cascading style when succesively invoking methods on the same reference.
+    # DO Use the cascading style when successively invoking methods on the same reference.
     #
     # https://dart-lang.github.io/linter/lints/cascade_invocations.html
     #
@@ -392,19 +415,45 @@ linter:
     # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
     omit_local_variable_types: false
 
+    # PREFER asserts with a message string.
+    #
+    # https://dart-lang.github.io/linter/lints/prefer_asserts_with_message.html
+    #
+    # When assertions fail it's not always simple to understand why. Adding a message to the
+    # assert helps the developer to understand why the AssertionError occurs.
+    #
+    # While this is true, Dart does nowadays create very clear messages from the assert terms
+    # as well.
+    # Flutter SDK does not use this rule or style. When you borrow code fro it for customized
+    # widgets you will end having to write your own messages for the code snippet.
+    # Rationale for not using this in Flutter SDK:
+    # "Assertions blocks don't require a message because they throw simple to understand errors"
+    # I agree, so turning OFF this rule for now.
+    #
+    # Other known linters use:
+    # Pedantic       disabled : https://pub.dev/packages/pedantic
+    # Effective Dart disabled : https://pub.dev/packages/effective_dart
+    # Lint           disabled : https://pub.dev/packages/lint
+    # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    #
+    # PACKAGE:       ENABLE   : By commenting it out.
+    # APPLICATION:   DISABLE  : With false value. (My default).
+    #
+    # prefer_asserts_with_message: false
+
     # PREFER defining constructors instead of static methods to create instances.
     #
     # https://dart-lang.github.io/linter/lints/prefer_constructors_over_static_methods.html
     #
     # Dart has named constructors. Static methods in other languages (java) are a workaround which don't have
-    # named constructors. I don't mind this lin rule, I think it is OK, BUT I noticed that if
+    # named constructors. I don't mind this lint rule, I think it is OK, BUT I noticed that
     # if you want/need to create instances of classes via static helpers in another class, that
     # this lint rules complains about it. I'm OK with preferring a named
     # constructor over a static method to create an instance from within the same class.
     # But this lint rule complained about the above usage too where I think it makes sense to use this.
     # This rule currently complains about use cases that imo in some scenarios is impossible to comply with.
     # Maybe this is another issue with this lint rule, I should investigate further and report
-    # it if it is. For now disabling this rule.
+    # it, if it is. For now disabling this rule.
     # A past now resolved issue with this lint rule was: https://github.com/dart-lang/linter/issues/2149
     #
     # Other known linters use:
@@ -471,7 +520,8 @@ linter:
     # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
     #
     # PACKAGE:       ENABLE   : By commenting it out.
-    # APPLICATION:   DISABLE  : With false value. (My default, assume we are making an app most of the time.)
+    # APPLICATION:   DISABLE  : With false value.
+    #
     # public_member_api_docs: false
 
     # DO sort constructor declarations before other members.
