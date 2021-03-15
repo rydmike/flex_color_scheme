@@ -15,161 +15,6 @@ void main() {
   group('FCS1: WITH FlexColorScheme ', () {
     debugDefaultTargetPlatformOverride = null;
 
-    // test(
-    //     'FCS1.00a: GIVEN a FlexColorScheme with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme(
-    //             brightness: null,
-    //             primary: Colors.white,
-    //             primaryVariant: Colors.white,
-    //             secondary: Colors.white,
-    //             secondaryVariant: Colors.white,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             appBarElevation: 1,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00b: GIVEN a FlexColorScheme with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme(
-    //             brightness: Brightness.dark,
-    //             primary: null,
-    //             primaryVariant: Colors.white,
-    //             secondary: Colors.white,
-    //             secondaryVariant: Colors.white,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             appBarElevation: 1,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00c: GIVEN a FlexColorScheme with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme(
-    //             brightness: Brightness.dark,
-    //             primary: Colors.white,
-    //             primaryVariant: null,
-    //             secondary: Colors.white,
-    //             secondaryVariant: Colors.white,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             appBarElevation: 1,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00d: GIVEN a FlexColorScheme with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme(
-    //             brightness: Brightness.dark,
-    //             primary: Colors.white,
-    //             primaryVariant: Colors.white,
-    //             secondary: null,
-    //             secondaryVariant: Colors.white,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             appBarElevation: 1,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00e: GIVEN a FlexColorScheme with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme(
-    //             brightness: Brightness.dark,
-    //             primary: Colors.white,
-    //             primaryVariant: Colors.white,
-    //             secondary: Colors.white,
-    //             secondaryVariant: null,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             appBarElevation: 1,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00f: GIVEN a FlexColorScheme with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme(
-    //             brightness: Brightness.dark,
-    //             primary: Colors.white,
-    //             primaryVariant: Colors.white,
-    //             secondary: Colors.white,
-    //             secondaryVariant: Colors.white,
-    //             tabBarStyle: null,
-    //             appBarElevation: 1,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00g: GIVEN a FlexColorScheme with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme(
-    //             brightness: Brightness.dark,
-    //             primary: Colors.white,
-    //             primaryVariant: Colors.white,
-    //             secondary: Colors.white,
-    //             secondaryVariant: Colors.white,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             appBarElevation: null,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00a: GIVEN a FlexColorScheme with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme(
-    //             brightness: Brightness.dark,
-    //             primary: Colors.white,
-    //             primaryVariant: Colors.white,
-    //             secondary: Colors.white,
-    //             secondaryVariant: Colors.white,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             appBarElevation: 1,
-    //             tooltipsMatchBackground: null,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00i: GIVEN a FlexColorScheme with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme(
-    //             brightness: Brightness.dark,
-    //             primary: Colors.white,
-    //             primaryVariant: Colors.white,
-    //             secondary: Colors.white,
-    //             secondaryVariant: Colors.white,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             appBarElevation: 1,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: null,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // ---------------------------
-
     final FlexSchemeColor sc =
         FlexSchemeColor.from(primary: FlexColor.materialLightPrimary);
 
@@ -222,97 +67,7 @@ void main() {
         ),
       );
     });
-    // test(
-    //     'FCS1.00k: GIVEN a FlexColorScheme.light with null usedColors '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.light(
-    //             colors: sc,
-    //             usedColors: null,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00l: GIVEN a FlexColorScheme.light with null surfaceStyle '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.light(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: null,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00m: GIVEN a FlexColorScheme.light with null appBarStyle '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.light(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: null,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00n: GIVEN a FlexColorScheme.light with null tabBarStyle '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.light(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: null,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00o: GIVEN a FlexColorScheme.light with null '
-    //     'tooltipsMatchBackground EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.light(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: null,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00p: GIVEN a FlexColorScheme.light with null '
-    //     'transparentStatusBar EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.light(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: null,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // ---------------------------
+
     test(
         'FCS1.00q1: GIVEN a FlexColorScheme.dark with null colors and null '
         'scheme EXPECT FlexColorScheme.dark with scheme Material.', () {
@@ -362,112 +117,6 @@ void main() {
         ),
       );
     });
-    // test(
-    //     'FCS1.00r: GIVEN a FlexColorScheme.dark with null usedColors '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.dark(
-    //             colors: sc,
-    //             usedColors: null,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00s: GIVEN a FlexColorScheme.dark with null surfaceStyle '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.dark(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: null,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00t: GIVEN a FlexColorScheme.dark with null appBarStyle '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.dark(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: null,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00u: GIVEN a FlexColorScheme.dark with null tabBarStyle '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.dark(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: null,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00v: GIVEN a FlexColorScheme.dark with null '
-    //     'tooltipsMatchBackground EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.dark(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: null,
-    //             transparentStatusBar: false,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00w: GIVEN a FlexColorScheme.dark with null '
-    //     'transparentStatusBar EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.dark(
-    //             colors: sc,
-    //             usedColors: 1,
-    //             surfaceStyle: FlexSurface.medium,
-    //             appBarStyle: FlexAppBarStyle.background,
-    //             tabBarStyle: FlexTabBarStyle.forBackground,
-    //             tooltipsMatchBackground: true,
-    //             transparentStatusBar: null,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FCS1.00x: GIVEN a FlexColorScheme.dark with null darkIsTrueBlack '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexColorScheme.dark(
-    //           colors: sc,
-    //           usedColors: 1,
-    //           surfaceStyle: FlexSurface.medium,
-    //           appBarStyle: FlexAppBarStyle.background,
-    //           tabBarStyle: FlexTabBarStyle.forBackground,
-    //           tooltipsMatchBackground: true,
-    //           transparentStatusBar: false,
-    //           darkIsTrueBlack: null),
-    //       throwsAssertionError);
-    // });
-
     // m1 = Default material light scheme colors.
     const FlexColorScheme m1 = FlexColorScheme(
       brightness: Brightness.light,
@@ -509,12 +158,22 @@ void main() {
       expect(m1, equals(m1));
     });
     test(
-        'FCS1.01a: GIVEN two identical FlexColorScheme objects '
+        'FCS1.01b: GIVEN the same FlexColorScheme objects '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m1), true);
+    });
+    test(
+        'FCS1.01c: GIVEN two equal FlexColorScheme objects '
         'EXPECT them to have equality', () {
       expect(m1, equals(m2));
     });
     test(
-        'FCS1.01b: GIVEN two identical FlexColorScheme objects '
+        'FCS1.01d: GIVEN two equal FlexColorScheme objects '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m2), true);
+    });
+    test(
+        'FCS1.01e: GIVEN two identical FlexColorScheme objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
     });
@@ -600,7 +259,7 @@ void main() {
     //**************************************************************************
     // FlexColorScheme unit tests.
     //
-    // toString and hashcode.
+    // toString and hashCode.
     //**************************************************************************
 
     final FlexColorScheme m5 = FlexColorScheme(
@@ -942,7 +601,7 @@ void main() {
         FlexColorScheme.themedSystemNavigationBar(null),
         const SystemUiOverlayStyle(
           systemNavigationBarColor: Colors.white,
-          systemNavigationBarDividerColor: Color(0xFFDDDDDD),
+          // systemNavigationBarDividerColor: Color(0xFFDDDDDD),
           systemNavigationBarIconBrightness: Brightness.dark,
         ),
       );
@@ -953,6 +612,7 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
+          // ignore: avoid_redundant_argument_values
           useDivider: false,
         ),
         const SystemUiOverlayStyle(
@@ -967,7 +627,10 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
+          // ignore: avoid_redundant_argument_values
           useDivider: false,
+          // Testing that the deprecated member still works as it should.
+          // ignore: deprecated_member_use_from_same_package
           nullContextBackground: const Color(0xFFCCCCCC),
         ),
         const SystemUiOverlayStyle(
@@ -982,6 +645,7 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
+          useDivider: true,
           nullContextBrightness: Brightness.dark,
         ),
         const SystemUiOverlayStyle(
@@ -997,6 +661,7 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
+          // ignore: avoid_redundant_argument_values
           useDivider: false,
           nullContextBrightness: Brightness.dark,
         ),
@@ -1007,13 +672,34 @@ void main() {
       );
     });
     test(
-        'FCS5.06: GIVEN Brightness.dark divider:false + defined color '
+        'FCS5.06a: GIVEN Brightness.dark divider:false + defined new color '
         'EXPECT defined colored system navbar, with NO divider.', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
+          // ignore: avoid_redundant_argument_values
           useDivider: false,
           nullContextBrightness: Brightness.dark,
+          // Testing that new color works as it should.
+          systemNavigationBarColor: const Color(0xFF202020),
+        ),
+        const SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0xFF202020),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+    test(
+        'FCS5.06b: GIVEN Brightness.dark divider:false + defined old color '
+        'EXPECT defined colored system navbar, with NO divider.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          // ignore: avoid_redundant_argument_values
+          useDivider: false,
+          nullContextBrightness: Brightness.dark,
+          // Testing that the deprecated member still works as it should.
+          // ignore: deprecated_member_use_from_same_package
           nullContextBackground: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
@@ -1023,16 +709,79 @@ void main() {
       );
     });
     test(
-        'FCS5.07: GIVEN Brightness.dark divider:false + defined color '
+        'FCS5.06c: GIVEN Brightness.dark divider:false + old defined color '
+        'EXPECT to be same as when using the new color property.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          // ignore: avoid_redundant_argument_values
+          useDivider: false,
+          nullContextBrightness: Brightness.dark,
+          // Testing that the deprecated member still works as it should.
+          // ignore: deprecated_member_use_from_same_package
+          nullContextBackground: const Color(0xFF202020),
+        ),
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          // ignore: avoid_redundant_argument_values
+          useDivider: false,
+          nullContextBrightness: Brightness.dark,
+          systemNavigationBarColor: const Color(0xFF202020),
+        ),
+      );
+    });
+    test(
+        'FCS5.06a: GIVEN Brightness.dark divider:false + defined old color '
+        'EXPECT defined colored system navbar, with NO divider.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          // ignore: avoid_redundant_argument_values
+          useDivider: false,
+          nullContextBrightness: Brightness.dark,
+          // Testing that the deprecated member still works as it should.
+          // ignore: deprecated_member_use_from_same_package
+          nullContextBackground: const Color(0xFF202020),
+        ),
+        const SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0xFF202020),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+    test(
+        'FCS5.06d: GIVEN Brightness.dark divider:false + defined old & new '
+        'color '
+        'EXPECT defined new colored system navbar, with NO divider.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          // ignore: avoid_redundant_argument_values
+          useDivider: false,
+          nullContextBrightness: Brightness.dark,
+          systemNavigationBarColor: const Color(0xFF4545F3),
+          // Testing that the deprecated member still works as it should.
+          // ignore: deprecated_member_use_from_same_package
+          nullContextBackground: const Color(0xFF202020),
+        ),
+        const SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0xFF4545F3),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+    test(
+        'FCS5.07a: GIVEN Brightness.dark divider:false + defined new color '
         '+ opacity > 1 EXPECT defined colored system navbar, with NO divider '
         'and NO opacity.', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
+          // ignore: avoid_redundant_argument_values
           useDivider: false,
           opacity: 100,
           nullContextBrightness: Brightness.dark,
-          nullContextBackground: const Color(0xFF202020),
+          systemNavigationBarColor: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
           systemNavigationBarColor: Color(0xFF202020),
@@ -1041,17 +790,38 @@ void main() {
       );
     });
     test(
-        'FCS5.07: GIVEN Brightness.dark divider:true + defined color '
+        'FCS5.07b: GIVEN Brightness.dark divider:true + defined new color '
         '+ opacity = 1 EXPECT defined colored system navbar, with divider '
         'and NO opacity.', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: true,
           // ignore: avoid_redundant_argument_values
           opacity: 1,
           nullContextBrightness: Brightness.dark,
+          systemNavigationBarColor: const Color(0xFF202020),
+        ),
+        const SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0xFF202020),
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+    test(
+        'FCS5.07c: GIVEN Brightness.dark divider:true + defined old color '
+        '+ opacity = 1 EXPECT defined colored system navbar, with divider '
+        'and NO opacity.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          useDivider: true,
+          // ignore: avoid_redundant_argument_values
+          opacity: 1,
+          nullContextBrightness: Brightness.dark,
+          // Testing that the deprecated member still works as it should.
+          // ignore: deprecated_member_use_from_same_package
           nullContextBackground: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
@@ -1062,17 +832,38 @@ void main() {
       );
     });
     test(
-        'FCS5.08: GIVEN Brightness.dark divider:true + defined color '
+        'FCS5.08a: GIVEN Brightness.dark divider:true + defined new color '
         '+ opacity = 0 EXPECT fully transparent defined colored system '
         'navbar, with divider .', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: true,
           // ignore: avoid_redundant_argument_values
           opacity: 0,
           nullContextBrightness: Brightness.dark,
+          systemNavigationBarColor: const Color(0xFF202020),
+        ),
+        const SystemUiOverlayStyle(
+          systemNavigationBarColor: Color(0x00202020),
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+    test(
+        'FCS5.08b: GIVEN Brightness.dark divider:true + defined old color '
+        '+ opacity = 0 EXPECT fully transparent defined colored system '
+        'navbar, with divider .', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          useDivider: true,
+          // ignore: avoid_redundant_argument_values
+          opacity: 0,
+          nullContextBrightness: Brightness.dark,
+          // Testing that the deprecated member still works as it should.
+          // ignore: deprecated_member_use_from_same_package
           nullContextBackground: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
@@ -1083,23 +874,172 @@ void main() {
       );
     });
     test(
-        'FCS5.09: GIVEN Brightness.dark divider:true + defined color '
+        'FCS5.09: GIVEN Brightness.dark divider:true + defined new color '
         '+ opacity < 0 EXPECT fully transparent defined colored system '
         'navbar, with divider .', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: true,
           // ignore: avoid_redundant_argument_values
           opacity: -10.1,
           nullContextBrightness: Brightness.dark,
-          nullContextBackground: const Color(0xFF202020),
+          systemNavigationBarColor: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
           systemNavigationBarColor: Color(0x00202020),
           systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+
+    test(
+        'FCS5.010: GIVEN Brightness.dark divider:true noAppBar: true '
+        'EXPECT black system navbar, with divider and transparent status bar '
+        'and normal white status icons.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          noAppBar: true,
+          useDivider: true,
+          nullContextBrightness: Brightness.dark,
+        ),
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.black,
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+
+    test(
+        'FCS5.011: GIVEN Brightness.dark divider:true noAppBar: true and '
+        'invertStatusIcons: true '
+        'EXPECT black system navbar, with divider and transparent status bar '
+        'and black (invisible) status icons.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          noAppBar: true,
+          invertStatusIcons: true,
+          useDivider: true,
+          nullContextBrightness: Brightness.dark,
+        ),
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: Colors.black,
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+      );
+    });
+
+    test(
+        'FCS5.012: GIVEN Brightness.light divider:false noAppBar: true '
+        'EXPECT white system navbar, with no divider and transparent '
+        'status bar and normal black status icons.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          noAppBar: true,
+          // ignore: avoid_redundant_argument_values
+          useDivider: false,
+          // ignore: avoid_redundant_argument_values
+          nullContextBrightness: Brightness.light,
+        ),
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: Colors.white,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
+      );
+    });
+
+    test(
+        'FCS5.013: GIVEN Brightness.dark divider:false noAppBar: true and '
+        'invertStatusIcons: true '
+        'EXPECT white system navbar, with divider and transparent status bar '
+        'and white (invisible) status icons.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          noAppBar: true,
+          invertStatusIcons: true,
+          // ignore: avoid_redundant_argument_values
+          useDivider: false,
+          // ignore: avoid_redundant_argument_values
+          nullContextBrightness: Brightness.light,
+        ),
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.white,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
+      );
+    });
+
+    test(
+        'FCS5.014: GIVEN Brightness.light divider:false, '
+        'systemNavigationBarDividerColor: blue, '
+        'systemNavigationBarColor: red, '
+        'noAppBar: true '
+        'EXPECT red system navbar, with no divider and transparent '
+        'status bar and normal black status icons.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          noAppBar: true,
+          // ignore: avoid_redundant_argument_values
+          useDivider: false,
+          systemNavigationBarDividerColor: const Color(0xFF2196F3),
+          systemNavigationBarColor: const Color(0xFFF44336),
+          // ignore: avoid_redundant_argument_values
+          nullContextBrightness: Brightness.light,
+        ),
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: Color(0xFFF44336),
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
+      );
+    });
+
+    test(
+        'FCS5.015: GIVEN Brightness.light divider:true, '
+        'systemNavigationBarDividerColor: blue, '
+        'systemNavigationBarColor: red, '
+        'noAppBar: true '
+        'EXPECT red system navbar, with blue divider and transparent '
+        'status bar and normal black status icons.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          noAppBar: true,
+          useDivider: true,
+          systemNavigationBarDividerColor: const Color(0xFF2196F3),
+          systemNavigationBarColor: const Color(0xFFF44336),
+          // ignore: avoid_redundant_argument_values
+          nullContextBrightness: Brightness.light,
+        ),
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarDividerColor: Color(0xFF2196F3),
+          systemNavigationBarColor: Color(0xFFF44336),
+          systemNavigationBarIconBrightness: Brightness.dark,
         ),
       );
     });

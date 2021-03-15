@@ -1233,42 +1233,121 @@ class FlexColorScheme with Diagnosticable {
   /// that matches the current theme.
   ///
   /// Requires a build context with access to an inherited theme.
-  /// By default it tries to use a divider on the navigation bar, which is only
-  /// respected on Android P (= Pie = API 28 = Android 9) or higher. If the
-  /// useDivider true causes issues, set it to false.
   ///
-  /// Does not set the system overlay for AppBar, it has its own built in
-  /// annotated region in the AppBarTheme and also its own property in
-  /// FlexColorScheme that sets it.
+  /// Can use optional divider on the navigation bar, which is only
+  /// respected on Android P (= Pie = API 28 = Android 9) or higher.
+  ///
+  /// By default does not set any system overlay for the status bar. Status has
+  /// its own built in SystemUiOverlayStyle as a part of [AppBar] and
+  /// [AppBarTheme]. [FlexColorScheme] normally managed the
+  /// [SystemUiOverlayStyle] via it. However, if your screen has no [AppBar] you
+  /// can use the properties `noAppBar` and `invertStatusIcons` to affect
+  /// the look of the status icons when there is no [AppBar] present on the
+  /// page, this is useful e.g. for splash and intro screens
   ///
   /// You may need to fully restart the app and even rebuild it for changes to
   /// this setting to take effect on Android devices and emulators.
   /// Especially the divider seems a bit tricky and erratic to turn on and off.
   ///
-  /// Use and support for the opacity value is EXPERIMENTAL, it ONLY
-  /// works on Android API 30 (=Android 11) or higher. For more information
-  /// and a complete example of how it can be used, please see:
-  /// https://github.com/rydmike/sysnavbar
-  static SystemUiOverlayStyle themedSystemNavigationBar(BuildContext? context,
-      {
+  /// Use and support for the opacity value on the system navigation bar
+  /// is EXPERIMENTAL, it ONLY works on Android API 30 (=Android 11) or higher.
+  /// For more information and a complete example of how it can be used,
+  /// please see: https://github.com/rydmike/sysnavbar
+  static SystemUiOverlayStyle themedSystemNavigationBar(
+    BuildContext? context, {
 
-      /// Use a divider line on the top edge of the system navigation bar.
-      bool useDivider = true,
+    /// Use a divider line on the top edge of the system navigation bar.
+    ///
+    /// Defaults to false.
+    ///
+    /// The divider on the navigation bar, is only respected on Android P
+    /// (= Pie = API 28 = Android 9) or higher.
+    bool useDivider = false,
 
-      /// Opacity value for the system navigation bar.
-      ///
-      /// Use and support for this opacity value is EXPERIMENTAL, it ONLY
-      /// works on Android API 30 (=Android 11) or higher. For more information
-      /// and complete example of how it can be used, please see:
-      /// https://github.com/rydmike/sysnavbar
-      double opacity = 1,
+    /// Opacity value for the system navigation bar.
+    ///
+    /// Defaults to 1, fully opaque.
+    ///
+    /// Use and support for this opacity value is EXPERIMENTAL, it ONLY
+    /// works on Android API 30 (=Android 11) or higher. For more information
+    /// and complete example of how it can be used, please see:
+    /// https://github.com/rydmike/sysnavbar
+    double opacity = 1,
 
-      /// Brightness used if context is null, mostly used for testing.
-      Brightness nullContextBrightness = Brightness.light,
+    /// Set this to true if you do not use a Material AppBar and want
+    /// a uniform background for that status bar region.
+    ///
+    /// This would typically be true on pages like splash screens and intro
+    /// screen that don't use an AppBar. The Material AppBar uses its own
+    /// SystemUiOverlayStyle so don't use this with AppBar, set the style
+    /// on the AppBar theme instead. However if you don't have an [AppBar] this
+    /// is a convenient way of to remove the system icons scrim for a more
+    /// clean look on Android.
+    bool noAppBar = false,
 
-      /// Background used if context is null, mostly used for testing. If null,
-      /// then black for dark brightness, and white for light brightness.
-      Color? nullContextBackground}) {
+    /// Set to true to invert top status bar icons like, battery, network,
+    /// wifi icons etc. in relation to their norma theme brightness related
+    /// color.
+    ///
+    /// Defaults to false.
+    ///
+    /// This setting works well together with the `noAppBar` flag to make an
+    /// even cleaner looking splash screen by making the
+    /// top status bar icons less visible or even invisible.
+    /// On a white background the status icons will be invisible, and if a
+    /// fully black background is used in dark mode, they will be invisible
+    /// in dark mode too. This can be used to create clean screen with no
+    /// app bar and no status icons.
+    ///
+    /// For no status bar and and system navigation bar, you can also try using:
+    /// `SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[]);` to
+    /// remove the top status bar and bottom navigation bar completely. When
+    /// using that method there are however issues with them showing up again
+    /// on navigation and when keyboard becomes visible, or app is restored
+    /// from being in the background while using another app. You
+    /// also have to managed putting the overlays back yourself manually with
+    /// `SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);` when
+    /// moving away from the screen that had removed them. Using an
+    /// AnnotatedRegion with `themedSystemNavigationBar` and both `noAppBar`
+    /// and `invertStatusIcons` set to true, you can avoid these issues. You are
+    /// however limited to using background white, in light mode and black in
+    /// dark mode, if you want the status bar invisible and navigation bar to
+    /// blend in with the background completely.
+    bool invertStatusIcons = false,
+
+    /// Background color of the system navigation bar. If null the theme of
+    /// context `colorScheme.background` will be used as background color.
+    ///
+    /// The point with this static helper is to give you a background color
+    /// themed system navigation bar automatically. If you for some reason
+    /// want a different color you can still override it.
+    ///
+    /// If `context` is null, `nullContextBrightness` will be used as brightness
+    /// value and it will determine if the background is white (for
+    /// Brightness.light) or black (for Brightness.dark). A null context is
+    /// mostly used for testing.
+    Color? systemNavigationBarColor,
+
+    /// Optional color for the system navigation bar divider. A divider will
+    /// only be present if `useDivider` is true and in this color if a
+    /// value was given to it.
+    ///
+    /// If a color is not given the `Color(0xFF2C2C2C)` will be used in
+    /// dark mode and the color `Color(0xFFDDDDDD)` will be used in light mode
+    /// as the divider color for the system navigation bar.
+    ///
+    /// The divider on the navigation bar, is only respected on Android P
+    /// (= Pie = API 28 = Android 9) or higher.
+    Color? systemNavigationBarDividerColor,
+
+    /// Brightness used if context is null, mostly used for testing.
+    Brightness nullContextBrightness = Brightness.light,
+
+    /// Deprecated property, use systemNavigationBarColor instead.
+    @Deprecated('This property is deprecated use systemNavigationBarColor '
+        'instead. Deprecated in v2.0.0.')
+        Color? nullContextBackground,
+  }) {
     // Opacity validity checks and enforcement, we ignore the parameter
     // re-assignment lint rule.
     // ignore: parameter_assignments
@@ -1276,18 +1355,28 @@ class FlexColorScheme with Diagnosticable {
     // ignore: parameter_assignments
     if (opacity > 1) opacity = 1;
 
+    // If systemNavigationBarColor is null, we assign nullContextBackground
+    // to it, that may also be null. Done for backwards compatibility.
+    systemNavigationBarColor ??= nullContextBackground;
+
     // If context was null, use nullContextBrightness as brightness value.
     final bool isDark = context != null
         ? Theme.of(context).brightness == Brightness.dark
         : nullContextBrightness == Brightness.dark;
 
-    // If nullContextBackground is null use black for dark, and white for light.
-    nullContextBackground ??= isDark ? Colors.black : Colors.white;
+    // If a systemNavigationBarColor color is given, it will always be used,
+    // If it is not given and we have a context, we use colorscheme background.
+    // If we have no context, the systemNavigationBarColor is used if we
+    // have a color, if not, it is black in dark mode and white in light mode.
+    final Color background = (context != null)
+        ? systemNavigationBarColor ?? Theme.of(context).colorScheme.background
+        : systemNavigationBarColor ?? (isDark ? Colors.black : Colors.white);
 
-    // Use Theme colorScheme background if possible, else nullContextBackground.
-    final Color background = context != null
-        ? Theme.of(context).colorScheme.background
-        : nullContextBackground;
+    // Use provided `systemNavigationBarDividerColor` if a values was given
+    // or fallback to suitable theme mode default divider colors if no
+    // colors given.
+    final Color dividerColor = systemNavigationBarDividerColor ??
+        (isDark ? const Color(0xFF2C2C2C) : const Color(0xFFDDDDDD));
 
     // The used system navigation bar divider colors below were tuned to
     // fit well with most color schemes and possible surface branding.
@@ -1299,12 +1388,18 @@ class FlexColorScheme with Diagnosticable {
     // could just as well just copy and use this overlay style directly in your
     // AnnotatedRegion if this does not produce the desired result.
     return SystemUiOverlayStyle(
-      systemNavigationBarColor: background.withOpacity(opacity),
-      systemNavigationBarDividerColor: useDivider
-          ? isDark
-              ? const Color(0xFF2C2C2C)
-              : const Color(0xFFDDDDDD)
+      // The top status bar settings.
+      statusBarColor: noAppBar ? Colors.transparent : null,
+      statusBarBrightness:
+          noAppBar ? (isDark ? Brightness.dark : Brightness.light) : null,
+      statusBarIconBrightness: noAppBar
+          ? invertStatusIcons
+              ? (isDark ? Brightness.dark : Brightness.light)
+              : (isDark ? Brightness.light : Brightness.dark)
           : null,
+      // The bottom navigation bar settings.
+      systemNavigationBarColor: background.withOpacity(opacity),
+      systemNavigationBarDividerColor: useDivider ? dividerColor : null,
       systemNavigationBarIconBrightness:
           isDark ? Brightness.light : Brightness.dark,
     );
@@ -1324,7 +1419,7 @@ class FlexColorScheme with Diagnosticable {
   // 'primary' scheme color. For cases when the primary scheme color is not a
   // MaterialSwatch color, the toggle would have no impact, the colors would
   // be computed same way as now.
-  //
+
   /// Create a primary Material color swatch from a given [color].
   ///
   /// The provided [color] is used as the Material swatch default color 500
@@ -1430,24 +1525,15 @@ class FlexColorScheme with Diagnosticable {
   ///    may not match your scheme. Widgets seldom use this color, so the issue
   ///    is rarely seen.
   ///
-  ///  * Background color for `AppBarTheme` can use a custom colored app bar
-  ///    theme in both light and dark themes, that is not dependent on theme
-  ///    primary or surface color. This functionality needs a custom text theme
-  ///    to be possible to implement without a context. This implementation
-  ///    does however not get correctly localized typography.
-  ///
-  ///    A new feature implemented via:
-  ///    https:///github.com/flutter/flutter/pull/71184 also enables this kind
-  ///    app bar theme and keep the correct typography localization. This new
-  ///    feature is (as of 28.12.2020) not yet available on channel stable.
-  ///    The first version on master could also not be enabled via Themes
-  ///    only, one also had to opt in on AppBar level making it difficult to
-  ///    adopt the feature. I wrote a proposal to introduce opt-in on theme
-  ///    level too: https:///github.com/flutter/flutter/issues/72206
-  ///    The proposal has already been implemented. When these new features land
-  ///    in stable channel, the implementation below will be changed to use
-  ///    the new AppBarTheme feature, which is better than the work-around
-  ///    since we no longer need a custom text theme.
+  ///  * Background color for `AppBarTheme` can use a custom color theme
+  ///    in both light and dark themes, that is not dependent on theme
+  ///    primary or surface color.
+  ///    In the versions prior to Flutter 2.0.0 doing this was difficult to do.
+  ///    As presented in https://github.com/flutter/flutter/issues/50606
+  ///    A new feature in Flutter 2.0.0 implemented via:
+  ///    https://github.com/flutter/flutter/pull/71184 makes this easy and
+  ///    better. FlexColorScheme's implementation has been changed to use this
+  ///    new AppBarTheme feature starting with version 2.0.0-nullsafety.2.
   ///
   ///  * The `AppBarTheme` elevation defaults to 0, an iOs style influenced
   ///    opinionated choice. It can easily be adjusted directly in the
@@ -1518,50 +1604,32 @@ class FlexColorScheme with Diagnosticable {
   ///    it looks better. The only reason why it is not the default in Flutter,
   ///    is for default backwards legacy design compatibility.
   ///
+  /// **NOTE:** Since the old buttons have been deprecated in Flutter 2.0.0
+  /// they are no longer presented or used in code in FlexColorScheme and its
+  /// examples. However, FlexColorScheme still defines the theme for
+  /// them described below. Defining the theme does not yet issue any
+  /// deprecation warnings or errors, as long as that is the case. this
+  /// theming will be kept available to support out of the box nice themes for
+  /// the old buttons as before.
+  ///
   ///  * Button theming is applied to [ThemeData.buttonColor] using color
   ///    `colorScheme.primary` color.
   ///
   ///  * For [ThemeData.buttonTheme] the entire color scheme is passed to its
   ///    `colorScheme` property and it uses `textTheme` set to
-  ///    `ButtonTextTheme.primary`,
-  ///    plus minor changes to padding and tap target
+  ///    `ButtonTextTheme.primary`, plus minor changes to padding and tap target
   ///    size. These modifications make the old buttons almost match the
   ///    default design and look of their corresponding newer buttons.
-  ///    Thus the `RaisedButton` looks
-  ///    very similar to `ElevatedButton`, `OutlineButton` to `OutlinedButton`
-  ///    and `FlatButton` to `TextButton`. There are some differences in
-  ///    margins and looks, especially in dark-mode, but they are very similar.
-  ///
-  ///    This is a button style we used before the introduction of
-  ///    the new buttons with their improved defaults. It just happened to be
-  ///    very close, since theme was based on how things looked in the Material
-  ///    design guide already prior to Flutter releasing the new buttons that
-  ///    fully implement the correct Material design.
-  ///
-  ///    The newer buttons are still nicer, especially when it
-  ///    comes to their interactions and all the theming options they provide,
-  ///    but they are a bit verbose to theme. If you want to make custom styled
-  ///    buttons we still recommend using the newer buttons instead of the old
-  ///    ones, as they offer more customization possibilities. Still, this
-  ///    theming applied to the old buttons make them look close enough to
-  ///    the new ones, to the extent that most might not even notice if
-  ///    you still use the old buttons.
+  ///    Thus the `RaisedButton` looks very similar to `ElevatedButton`,
+  ///    `OutlineButton` to `OutlinedButton` and `FlatButton` to `TextButton`.
+  ///    There are some differences in margins and looks, especially in
+  ///    dark-mode, but they are very similar.
   ///
   ///  * The default theme for Chips contain a design bug that makes the
   ///    selected `ChoiceChip()` widget look disabled in dark-mode, regardless
   ///    if was created with `ThemeData` or `ThemeData.from` factory.
   ///    See issue: https:///github.com/flutter/flutter/issues/65663
   ///    The [ChipThemeData] modification used here fixes the issue.
-  ///
-  ///   * The [ThemeData.floatingActionButtonTheme] is set as follows:
-  ///     ```dart
-  ///     FloatingActionButtonThemeData(
-  ///       backgroundColor: colorScheme.secondary,
-  ///       foregroundColor: colorScheme.onSecondary)
-  ///     ```
-  ///     **NOTE** This definition will be removed in version 2.0.0.
-  ///     It is no longer needed. Flutter SDK now produces the same end
-  ///     result by default.
   ///
   /// * For [TabBarTheme], the Flutter standard selected tab and indicator
   ///   color is onSurface in dark mode and on Primary in light mode, which is
@@ -1610,27 +1678,19 @@ class FlexColorScheme with Diagnosticable {
   ///   used to make to the AppBar one-toned on Android device like on iOS.
   ///   Set it to `false` to restore default Android design.
   ///
-  ///   > The modification is in current implementation made with an extra call
-  ///   > to `SystemChrome.setSystemUIOverlayStyle` to make the
-  ///   > statusBarColor transparent. The used implementation will be changed
-  ///   > when the new AppBarTheme
-  ///   > https://github.com/flutter/flutter/pull/71184 lands in channel stable
-  ///   > that allows us to modify its AnnotatedRegion with a passed in
-  ///   > SystemOverlayStyle.
-  ///
   ///   > It would be nice if we could also make the system navigation button
-  ///   > area on Android transparent, but it does not work if we set
-  ///   > systemNavigationBarColor to a transparent color in the same call,
-  ///   > it does not change it all if called during the theme definition.
+  ///   > area on Android transparent via a theme, but it does not work.
   ///   > The style is doable, but requires modifying Android config files, not
   ///   > possible from Flutter only (as per current information).
   ///   > Related issue: https:///github.com/flutter/flutter/issues/69999.
   ///   >
-  ///   > FlexColorScheme offers a helper that allows us to easily create
-  ///   > and annotated region for the system navigation bar that uses
-  ///   > the active color scheme and theme mode to make it at least use
-  ///   > a correctly colored theme colored background for the active theme.
+  ///   > FlexColorScheme offers a static helper [themedSystemNavigationBar]
+  ///   > that allows us to easily create an annotated region for the system
+  ///   > navigation bar that uses the active color scheme and theme mode to
+  ///   > make it at least use a correctly colored theme colored background
+  ///   > for the active theme.
   ///   > See example 5 for a demo on how to use this.
+  ///
   ThemeData get toTheme {
     // A convenience bool to check if this theme is for light or dark mode
     final bool _isDark = brightness == Brightness.dark;
@@ -1812,10 +1872,10 @@ class FlexColorScheme with Diagnosticable {
     final Color _hintColor =
         _isDark ? Colors.white60 : Colors.black.withOpacity(0.6);
 
-    // Make the ThemeData object defined by the FlexColorScheme
+    // Make and return the ThemeData object defined by the FlexColorScheme
     // properties and the designed slightly opinionated theme design choices
     // over default Flutter Material theme implementation.
-    final ThemeData _themeData = ThemeData(
+    return ThemeData(
       // These properties we just pass along these to the standard ThemeData
       // factory. They are included in FlexColorScheme so we do not have to
       // apply them via ThemeData copyWith separately for cases when we want
@@ -1953,36 +2013,20 @@ class FlexColorScheme with Diagnosticable {
       // See issue: https://github.com/flutter/flutter/issues/65782
       secondaryHeaderColor: _secondaryHeaderColor,
 
-      // This app bar theme will allow us to use a custom colored appbar theme
+      // The app bar theme allows us to use a custom colored appbar theme
       // in both light and dark themes that is not dependent on theme primary
       // or surface color, and still gets a correct working text and icon theme.
-      // As presented in https://github.com/flutter/flutter/issues/50606 doing
-      // this is a bit tricky and any added new TextTheme here will break
-      // default appbar styles. The solution below for now give us the needed
-      // typography for a color themed AppBar. It does however not give correct
-      // localized typography.
-      //
-      // A new feature implemented via:
-      // https://github.com/flutter/flutter/pull/71184 also enables this kind
-      // app bar themes and keep the correct typography localization. This new
-      // feature is (as of 13.12.2020) not yet available on stable channel.
-      // The first version on master could also not be enabled via Themes
-      // only, one also had to opt in on AppBar level, making it difficult to
-      // adopt the feature. I wrote a proposal to introduce opt in on theme
-      // level too: https://github.com/flutter/flutter/issues/72206
-      // The proposal has already been implemented. When these new features land
-      // in stable channel, the implementation below will be changed to use
-      // the new AppBarTheme feature, as it is better than this work-around
-      // since we no longer need a custom text theme to implement it.
-      // TODO Change implementation to new AppBarTheme when it lands in stable.
+      // In the versions prior to Flutter 2.0.0 doing this was difficult, as
+      // presented in https://github.com/flutter/flutter/issues/50606 doing
+      // this is a bit tricky. A new feature in Flutter 2.0.0 implemented via:
+      // https://github.com/flutter/flutter/pull/71184 makes this easy and
+      // better. The FlexColorScheme implementation below has been changed to
+      // use this new AppBarTheme feature from version 2.0.0-nullsafety.2
       appBarTheme: AppBarTheme(
-        textTheme: _appBarBrightness == Brightness.light
-            ? _typography.black.merge(Typography.englishLike2018)
-            : _typography.white.merge(Typography.englishLike2018),
         // Use the defined appbar color for the theme
-        color: _effectiveAppBarColor,
-        // Set appbar brightness based on the appbar color
-        brightness: _appBarBrightness,
+        backgroundColor: _effectiveAppBarColor,
+        foregroundColor:
+            _appBarBrightness == Brightness.dark ? Colors.white : Colors.black,
         // Define appropriate brightness on the icon themes
         iconTheme: _appBarBrightness == Brightness.dark
             ? const IconThemeData(color: Colors.white)
@@ -1991,6 +2035,14 @@ class FlexColorScheme with Diagnosticable {
             ? const IconThemeData(color: Colors.white)
             : const IconThemeData(color: Colors.black87),
         elevation: appBarElevation,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: transparentStatusBar ? Colors.transparent : null,
+          statusBarBrightness: _appBarBrightness,
+          statusBarIconBrightness: _appBarBrightness == Brightness.dark
+              ? Brightness.light
+              : Brightness.dark,
+        ),
+        backwardsCompatibility: false,
       ),
 
       // The bottom app bar uses color scheme background color to match the
@@ -2034,7 +2086,13 @@ class FlexColorScheme with Diagnosticable {
             : _colorScheme.primary.withOpacity(0.035),
       ),
 
-      // The button color and button theming below almost makes the old buttons
+      // NOTE: Since the old buttons have been deprecated in Flutter 2.0.0
+      // they are no longer presented or used in the code in FlexColorScheme.
+      // However, FlexColorScheme still defines the themes for them described
+      // below. Defining the theme does not yet issue any deprecation warning
+      // or error, as long as that is the case this theming will be kept.
+      //
+      // The button color and button theming below makes the old buttons almost
       // look like the defaults for the new ElevatedButton, TextButton and
       // OutlinedButton. These were defaults I used previously for the old
       // buttons. With these themes as defaults for the old buttons,
@@ -2076,21 +2134,6 @@ class FlexColorScheme with Diagnosticable {
         secondaryColor: _colorScheme.primary,
         brightness: _colorScheme.brightness,
         labelStyle: _textTheme.bodyText1!,
-      ),
-
-      // We have to separately specify the foreground color in FABs to be the
-      // ColorScheme secondary color, at least if we expect it
-      // to match accentIconTheme as before. Otherwise we get a deprecated
-      // warning like this:
-      //
-      // * Warning: The support for configuring the foreground color of
-      //   FloatingActionButtons using ThemeData.accentIconTheme has been
-      //   deprecated. Please use ThemeData.floatingActionButtonTheme instead.
-      //   See https://flutter.dev/go/remove-fab-accent-theme-dependency.
-      //   This feature was deprecated after v1.13.2.
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: _colorScheme.secondary,
-        foregroundColor: _colorScheme.onSecondary,
       ),
 
       // Define the TabBar theme that will fit nicely in an AppBar
@@ -2137,44 +2180,14 @@ class FlexColorScheme with Diagnosticable {
         ),
         decoration: tooltipsMatchBackground
             ? BoxDecoration(
-                color: _isDark
-                    ? Colors.grey[900]!.withOpacity(0.93)
-                    : Colors.white.withOpacity(0.94),
+                color:
+                    _isDark ? const Color(0xED444444) : const Color(0xF0FCFCFC),
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
-                border: Border.all(
-                    color: _isDark ? Colors.grey[600]! : Colors.grey[900]!),
+                border: Border.all(color: _dividerColor),
               )
             : null,
       ),
     );
-
-    // On Android devices this default opt-in `setSystemUIOverlayStyle` call
-    // makes the AppBar one-colored like on iOS, which looks better
-    // (opinionated).
-    //
-    // TODO: Use new AppBarTheme SystemOverlayStyle when it lands in stable.
-    // We can change this implementation to be a part of the AppBarTheme
-    // when the new theme features https://github.com/flutter/flutter/pull/71184
-    // lands in stable channel. For now though, this seems to work in Android
-    // and not do any harm otherwise.
-    // Opt out is available by setting `transparentStatusBar` to false and
-    // totally skip this SystemChrome call, if it becomes an issue or is not
-    // desired.
-    // We currently have to make this call AFTER we defined the theme so it can
-    // override the annotated region AppBar sets when theme is defined. This is
-    // the reason why the ThemeData is not returned directly, but stored in a
-    // local temp instance first. Consider changing this too when #71184 lands.
-    // Oddly this works though, will be better via new AppBar theme though.
-    if (transparentStatusBar) {
-      SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-        ),
-      );
-    }
-    //
-    // Finally return the ThemeData we defined above.
-    return _themeData;
   }
 
   /// Returns the [ColorScheme] object defined by [FlexColorScheme] properties.

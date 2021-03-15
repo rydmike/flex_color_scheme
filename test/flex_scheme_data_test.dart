@@ -8,47 +8,6 @@ void main() {
   // Basic object tests, equality, none equal.
   //****************************************************************************
   group('FSD1: WITH FlexSchemeData ', () {
-    // const FlexSchemeColor col = FlexSchemeColor(
-    //   primary: FlexColor.materialLightPrimary,
-    //   primaryVariant: FlexColor.materialLightPrimaryVariant,
-    //   secondary: FlexColor.materialLightSecondary,
-    //   secondaryVariant: FlexColor.materialLightSecondaryVariant,
-    //   appBarColor: FlexColor.materialLightSecondaryVariant,
-    //   error: FlexColor.materialLightError,
-    // );
-    // start with null tests.
-    // test(
-    //     'FSC1.00a: GIVEN a FlexSchemeData with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeData(
-    //           name: null, description: 'Desc', light: col, dark: col),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSC1.00a: GIVEN a FlexSchemeData with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeData(
-    //           name: 'Name', description: null, light: col, dark: col),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSC1.00a: GIVEN a FlexSchemeData with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeData(
-    //           name: 'Name', description: 'Desc', light: null, dark: col),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSC1.00a: GIVEN a FlexSchemeData with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeData(
-    //           name: 'Name', description: 'Desc', light: col, dark: null),
-    //       throwsAssertionError);
-    // });
     // m1, is the FlexSchemeData with Material standard scheme.
     const FlexSchemeData m1 = FlexSchemeData(
       name: FlexColor.materialName,
@@ -115,26 +74,36 @@ void main() {
     // Do identity tests
     test(
         'FSD1.01a: GIVEN same FlexSchemeData objects '
-        'EXPECT them to have identity', () {
+        'EXPECT them to be equal', () {
       expect(m1, equals(m1));
     });
     test(
-        'FSD1.01b: GIVEN two identical FlexSchemeData objects '
+        'FSD1.01b: GIVEN same FlexSchemeData objects '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m1), true);
+    });
+    test(
+        'FSD1.01c: GIVEN two equal FlexSchemeData objects '
         'EXPECT them to have equality', () {
       expect(m1, equals(m2));
     });
     test(
-        'FSD1.01c: GIVEN two identical FlexSchemeData objects '
+        'FSD1.01d: GIVEN two equal FlexSchemeData objects '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m2), true);
+    });
+    test(
+        'FSD1.01c: GIVEN two equal FlexSchemeData objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
     });
     test(
-        'FSD1.02a: GIVEN none identical FlexSchemeData objects '
+        'FSD1.02a: GIVEN none equal FlexSchemeData objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
     });
     test(
-        'FSD1.02b: GIVEN none identical FlexSchemeData objects '
+        'FSD1.02b: GIVEN none equal FlexSchemeData objects '
         'EXPECT them to be unequal with operator', () {
       expect(m1 != m3, true);
     });
