@@ -726,12 +726,9 @@ class FlexColorScheme with Diagnosticable {
         break;
       case FlexAppBarStyle.background:
         effectiveAppBarColor = background ?? surfaceColors.background;
-        // ??
-        //     FlexColor.materialLightBackground;
         break;
       case FlexAppBarStyle.surface:
-        effectiveAppBarColor = surface ??
-            surfaceColors.surface; // ?? FlexColor.materialLightSurface;
+        effectiveAppBarColor = surface ?? surfaceColors.surface;
         break;
       case FlexAppBarStyle.custom:
         effectiveAppBarColor =
@@ -1690,7 +1687,6 @@ class FlexColorScheme with Diagnosticable {
   ///   > make it at least use a correctly colored theme colored background
   ///   > for the active theme.
   ///   > See example 5 for a demo on how to use this.
-  ///
   ThemeData get toTheme {
     // A convenience bool to check if this theme is for light or dark mode
     final bool _isDark = brightness == Brightness.dark;
