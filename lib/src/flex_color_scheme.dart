@@ -2389,38 +2389,6 @@ class FlexColorScheme with Diagnosticable {
     return hashList(values);
   }
 
-  // The standard normal hashCode method with bitwise XOR ^ instead of the one
-  // using the Jenkins list function used by eg ThemeData in Flutter repo.
-  // Uncomment this one and comment the other one to switch.
-  // @override
-  // int get hashCode {
-  //   return brightness.hashCode ^
-  //       primary.hashCode ^
-  //       primaryVariant.hashCode ^
-  //       secondary.hashCode ^
-  //       secondaryVariant.hashCode ^
-  //       surface.hashCode ^
-  //       background.hashCode ^
-  //       error.hashCode ^
-  //       scaffoldBackground.hashCode ^
-  //       appBarBackground.hashCode ^
-  //       accentColor.hashCode ^
-  //       onPrimary.hashCode ^
-  //       onSecondary.hashCode ^
-  //       onSurface.hashCode ^
-  //       onBackground.hashCode ^
-  //       onError.hashCode ^
-  //       tabBarStyle.hashCode ^
-  //       appBarElevation.hashCode ^
-  //       bottomAppBarElevation.hashCode ^
-  //       tooltipsMatchBackground.hashCode ^
-  //       transparentStatusBar.hashCode ^
-  //       visualDensity.hashCode ^
-  //       fontFamily.hashCode ^
-  //       platform.hashCode ^
-  //       typography.hashCode;
-  // }
-
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -2558,144 +2526,119 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         ? FlexColor.materialLightPrimary
         : FlexColor.materialDarkPrimary;
 
-    // These colors will be computed from defaults for the surface
-    // provided style [FlexSurface], [brightness] and [primary] color.
-    late Color _surface;
-    late Color _background;
-    late Color _scaffoldBackground;
-
     switch (brightness) {
       case Brightness.light:
         {
           switch (surfaceStyle) {
             case FlexSurface.material:
-              {
-                _surface = FlexColor.materialLightSurface;
-                _background = FlexColor.materialLightBackground;
-                _scaffoldBackground = FlexColor.materialLightScaffoldBackground;
-              }
-              break;
+              return const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialLightSurface,
+                background: FlexColor.materialLightBackground,
+                scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+              );
             case FlexSurface.light:
-              {
-                _surface = FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceLight);
-                _background = FlexColor.lightBackground
-                    .blend(primary, kLightBlendBackgroundLight);
-                _scaffoldBackground = FlexColor.lightScaffoldBackground;
-              }
-              break;
+              return FlexSchemeSurfaceColors(
+                surface: FlexColor.lightSurface
+                    .blend(primary, kLightBlendSurfaceLight),
+                background: FlexColor.lightBackground
+                    .blend(primary, kLightBlendBackgroundLight),
+                scaffoldBackground: FlexColor.lightScaffoldBackground,
+              );
             case FlexSurface.medium:
-              {
-                _surface = FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceMedium);
-                _background = FlexColor.lightBackground
-                    .blend(primary, kLightBlendBackgroundMedium);
-                _scaffoldBackground = FlexColor.lightScaffoldBackground;
-              }
-              break;
+              return FlexSchemeSurfaceColors(
+                surface: FlexColor.lightSurface
+                    .blend(primary, kLightBlendSurfaceMedium),
+                background: FlexColor.lightBackground
+                    .blend(primary, kLightBlendBackgroundMedium),
+                scaffoldBackground: FlexColor.lightScaffoldBackground,
+              );
             case FlexSurface.strong:
-              {
-                _surface = FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceStrong);
-                _background = FlexColor.lightBackground
-                    .blend(primary, kLightBlendBackgroundStrong);
-                _scaffoldBackground = FlexColor.lightScaffoldBackground;
-              }
-              break;
+              return FlexSchemeSurfaceColors(
+                surface: FlexColor.lightSurface
+                    .blend(primary, kLightBlendSurfaceStrong),
+                background: FlexColor.lightBackground
+                    .blend(primary, kLightBlendBackgroundStrong),
+                scaffoldBackground: FlexColor.lightScaffoldBackground,
+              );
             case FlexSurface.heavy:
-              {
-                _surface = FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceHeavy);
-                _background = FlexColor.lightBackground
-                    .blend(primary, kLightBlendBackgroundHeavy);
-                _scaffoldBackground = FlexColor.lightScaffoldBackground
-                    .blend(primary, kLightBlendScaffoldHeavy);
-              }
-              break;
+              return FlexSchemeSurfaceColors(
+                surface: FlexColor.lightSurface
+                    .blend(primary, kLightBlendSurfaceHeavy),
+                background: FlexColor.lightBackground
+                    .blend(primary, kLightBlendBackgroundHeavy),
+                scaffoldBackground: FlexColor.lightScaffoldBackground
+                    .blend(primary, kLightBlendScaffoldHeavy),
+              );
             case FlexSurface.custom:
-              {
-                // Custom surface theme returns same surface as standard
-                // material surface. If surface colors are not overridden by
-                // providing none null custom surface colors values to the
-                // FlexColorScheme, the results is the same as material.
-                _surface = FlexColor.materialLightSurface;
-                _background = FlexColor.materialLightBackground;
-                _scaffoldBackground = FlexColor.materialLightScaffoldBackground;
-              }
-              break;
+              // Custom surface theme returns same surface as standard
+              // material surface. If surface colors are not overridden by
+              // providing none null custom surface colors values to the
+              // FlexColorScheme, the results is the same as material.
+              return const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialLightSurface,
+                background: FlexColor.materialLightBackground,
+                scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+              );
           }
         }
-        break;
+      // break;
       case Brightness.dark:
         {
           switch (surfaceStyle) {
             case FlexSurface.material:
-              {
-                _surface = FlexColor.materialDarkSurface;
-                _background = FlexColor.materialDarkBackground;
-                _scaffoldBackground = FlexColor.materialDarkScaffoldBackground;
-              }
-              break;
+              return const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialDarkSurface,
+                background: FlexColor.materialDarkBackground,
+                scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
+              );
             case FlexSurface.light:
-              {
-                _surface = FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceLight);
-                _background = FlexColor.darkBackground
-                    .blend(primary, kDarkBlendBackgroundLight);
-                _scaffoldBackground = FlexColor.darkScaffoldBackground;
-              }
-              break;
+              return FlexSchemeSurfaceColors(
+                surface: FlexColor.darkSurface
+                    .blend(primary, kDarkBlendSurfaceLight),
+                background: FlexColor.darkBackground
+                    .blend(primary, kDarkBlendBackgroundLight),
+                scaffoldBackground: FlexColor.darkScaffoldBackground,
+              );
             case FlexSurface.medium:
-              {
-                _surface = FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceMedium);
-                _background = FlexColor.darkBackground
-                    .blend(primary, kDarkBlendBackgroundMedium);
-                _scaffoldBackground = FlexColor.darkScaffoldBackground;
-              }
-              break;
+              return FlexSchemeSurfaceColors(
+                surface: FlexColor.darkSurface
+                    .blend(primary, kDarkBlendSurfaceMedium),
+                background: FlexColor.darkBackground
+                    .blend(primary, kDarkBlendBackgroundMedium),
+                scaffoldBackground: FlexColor.darkScaffoldBackground,
+              );
             case FlexSurface.strong:
-              {
-                _surface = FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceStrong);
-                _background = FlexColor.darkBackground
-                    .blend(primary, kDarkBlendBackgroundStrong);
-                _scaffoldBackground = FlexColor.darkScaffoldBackground;
-              }
-              break;
+              return FlexSchemeSurfaceColors(
+                surface: FlexColor.darkSurface
+                    .blend(primary, kDarkBlendSurfaceStrong),
+                background: FlexColor.darkBackground
+                    .blend(primary, kDarkBlendBackgroundStrong),
+                scaffoldBackground: FlexColor.darkScaffoldBackground,
+              );
             case FlexSurface.heavy:
-              {
-                _surface = FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceHeavy);
-                _background = FlexColor.darkBackground
-                    .blend(primary, kDarkBlendBackgroundHeavy);
-                _scaffoldBackground = FlexColor.darkScaffoldBackground
-                    .blend(primary, kDarkBlendScaffoldHeavy);
-              }
-              break;
+              return FlexSchemeSurfaceColors(
+                surface: FlexColor.darkSurface
+                    .blend(primary, kDarkBlendSurfaceHeavy),
+                background: FlexColor.darkBackground
+                    .blend(primary, kDarkBlendBackgroundHeavy),
+                scaffoldBackground: FlexColor.darkScaffoldBackground
+                    .blend(primary, kDarkBlendScaffoldHeavy),
+              );
             case FlexSurface.custom:
-              {
-                // Custom surface theme returns same surface colors as standard
-                // material surface.
-                // It is up to the implementation of creating the scheme
-                // to decide what to do when surfaceStyle [FlexSurface.custom]
-                // is used. If the case is not handled, the custom style
-                // will just result in the same style as [FlexSurface.material].
-                _surface = FlexColor.materialDarkSurface;
-                _background = FlexColor.materialDarkBackground;
-                _scaffoldBackground = FlexColor.materialDarkScaffoldBackground;
-              }
-              break;
+              // Custom surface theme returns same surface colors as standard
+              // material surface.
+              // It is up to the implementation of creating the scheme
+              // to decide what to do when surfaceStyle [FlexSurface.custom]
+              // is used. If the case is not handled, the custom style
+              // will just result in the same style as [FlexSurface.material].
+              return const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialDarkSurface,
+                background: FlexColor.materialDarkBackground,
+                scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
+              );
           }
         }
-        break;
     }
-
-    return FlexSchemeSurfaceColors(
-      surface: _surface,
-      background: _background,
-      scaffoldBackground: _scaffoldBackground,
-    );
   }
 
   /// Copy the object with one or more provided properties changed.
