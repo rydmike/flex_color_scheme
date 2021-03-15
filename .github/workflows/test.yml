@@ -1,7 +1,8 @@
 # This GitHub action runs on push to master, it:
 #
 #  - Installs dart and flutter
-#  - Uses flutter stable channel for now, might setup a matrix later with beta and dev included too.
+#  - Uses flutter dev channel for now, might setup a matrix later with beta and dev included too.
+#    * 15.3.2021 Temp change to channel DEV from stable, tests use a feature that is not on stable.
 #  - Gets package dependencies
 #  - Runs dart analyze, allows deprecation warnings, we on purpose allow use of deprecated features for now.
 #  - Show outdated packages, just added for info.
@@ -22,6 +23,8 @@ jobs:
 
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v1.4.0
+        with:
+          channel: "dev"
 
       - name: Show Dart SDK version
         run: dart --version
