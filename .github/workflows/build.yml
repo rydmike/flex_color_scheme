@@ -26,7 +26,8 @@
 #
 name: Build Web
 on:
-  pull_request:
+  # pull_request:
+  push:
     branches: [ master ]
 jobs:
   flutter_tests:
