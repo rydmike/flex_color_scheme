@@ -113,12 +113,12 @@ applications if you like. Here is a composite image showing them all.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_all_schemes_28_at_100.png?raw=true" alt="ColorScheme all"/>
 
-The above image is just an overview teaser of all the color schemes. In the package companion blog post you can
+The above image is just an overview of all the color schemes. In the package companion blog post you can
 find [**high resolution images**](https://rydmike.com/colorscheme#built-in-color-schemes) of each one of them.
 Another convenient and recommended way to see and try all the predefined color schemes is by using the live Web
 versions of the package [example 4](https://rydmike.com/flexcolorscheme4) or 
 [example 5](https://rydmike.com/flexcolorscheme4), where you can try all the built-in color schemes and see 
-the impact they have on often used Flutter widgets. In [Appendix A](#appendix-a---built-in-scheme-reference) you
+the impact they have on often used Flutter widgets. In [**Appendix A**](#appendix-a---built-in-scheme-reference) you
 can find a table listing all the built-in schemes, their `FlexScheme` enum value, name and description, plus 
 thumbnails of each color scheme with a link its high-resolution images.
 
