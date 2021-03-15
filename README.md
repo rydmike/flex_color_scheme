@@ -1253,6 +1253,14 @@ toggle dark and light theme mode. Many Flutter applications neglect or forget to
    );
 ```
 
+You can also use the `FlexColorScheme.themedSystemNavigationBar` to hide the status icons if you are not
+using an app bar at all. This can be useful e.g. on a splash or onboarding page. Example 5 contains 3 different
+examples, each with their own limitations, read more in the example 5 source code comments on how it
+can be used, here what they look like. The last Example SplashPage 2, would be the ideal version, and it 
+works well on some versions of Android, but seems to fail on newer ones, so you may prefer 1b instead.
+
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FlexColorScheme-Splash-half-Size.png?raw=true" alt="ColorScheme Splash pages"/>
+
 ### Example 5 - Building the Example
 
 The above concludes the code walk through of example 5. When we build it, the example starts with 
@@ -1506,31 +1514,26 @@ Chip case, if it is modified to fix its dark theme bug, then FlexColorScheme wou
 for its own fix. In cases where Flutter defaults moves in a direction that the same definition is no longer
 needed in FlexColorScheme, such sub-theme definitions may eventually be removed, **but not without due warning**.
 
-One current such case is actually the `floatingActionButtonTheme` sub-theme that FlexColorScheme currently creates.
-The used sub-theme does not change current default behavior. However, in some earlier versions of Flutter there was
-a severe deprecation warning if the current sub-theme was not defined. (FlexColorScheme actually existed for quite 
-a while before it was published as a package on pub.dev, the current definition is a remnant of that). 
-It was recently observed that in current Flutter version, the Flutter SDK default and
-FlexColorScheme sub-theme now agrees 100% on the design and there is no longer any deprecated warning if
-the sub-theme is totally removed from FlexColorScheme's theme definition. This sub-theme definition is thus no
-longer necessary and will be removed from FlexColorScheme. In this case it will wait until release 2.0.0 
-(null safe version) that will contain other breaking changes as well. Consider this as pre-info of this change though.
+One recent such case was actually the `floatingActionButtonTheme` sub-theme that FlexColorScheme created in earlier
+versions. The used sub-theme did not change Flutter's default behavior. However, in some older versions of 
+Flutter there were a severe deprecation warning if the sub-theme was not defined. Later it was 
+observed that Flutter SDK default and FlexColorScheme sub-theme now agrees 100% on the design, and there is
+no longer any deprecated warning if the sub-theme is totally removed from FlexColorScheme's theme definition. 
+This sub-theme definition was thus no longer needed and was removed starting from FlexColorScheme  
+version 2.0.0-nullsafety.2.
 
 * **AppBarTheme** in `ThemeData.appBarTheme` is NOT null.  
   The actual values are defined to match the offered convenience theming options for the AppBar.
   The property values depend on made configuration choices.
-  When the these matters land in stable [#71184](https://github.com/flutter/flutter/pull/71184)
-  [#72206](https://github.com/flutter/flutter/issues/72206) the implementation will be changed.
-  Some currently defined properties may no longer be required be defined when the new feature for
-  app bar land in stable channel.
-  * TextTheme: A custom textTheme to enable white app bars. This one will be removed when above new app bar theming features land in stable channel.
-  * color: *Depends on chosen app bar theme style.*
-  * brightness: : *Depends on chosen app bar theme style.*
+  * backgroundColor: *Depends on chosen app bar theme style.*
+  * foregroundColor: Black if brightness of backgroundColor is light otherwise white.  
   * iconTheme: Not null, defines:
     * color: : *Depends on chosen app bar theme style.*
   * actionsIconTheme: Not null, defines:
     * color: : *Depends on chosen app bar theme style.*
   * elevation: *As defined, default is 0*
+  * systemOverlayStyle: *A custom SystemUiOverlayStyle is defined*  
+  * backwardsCompatibility: `false`
 
 
 * **BottomAppBarTheme** in `ThemeData.bottomAppBarTheme` is NOT null.
@@ -1562,14 +1565,6 @@ longer necessary and will be removed from FlexColorScheme. In this case it will 
   * brightness: `colorScheme.brightness`
   * labelStyle: `textTheme.bodyText1`
 
-  
-* **FloatingActionButtonThemeData** in `ThemeData.floatingActionButtonTheme` is NOT null.  
-  **NOTE** This sub-theme will be removed in version 2.0.0, its sub-theme definition is 
-  no longer needed. Flutter SDK default now results in the same design by default.    
-  It currently sets:    
-   * backgroundColor: `colorScheme.secondary`
-   * foregroundColor: `colorScheme.onSecondary`  
- 
 
 * **TabBarTheme** in `ThemeData.tabBarTheme` is NOT null.  
   Its colors depend on if a theme appropriate for current active app bar background color (default), or one for
@@ -1598,17 +1593,17 @@ longer necessary and will be removed from FlexColorScheme. In this case it will 
     textTheme.bodyText2.copyWith(  
       inherit: false,
       color: tooltipsMatchBackground 
-              ? dark ? Colors.white : Colors.black    
-              : dark ? Colors.black : Colors.white,    
+         ? dark ? Colors.white : Colors.black    
+         : dark ? Colors.black : Colors.white,    
       fontSize: desktop ? 12 : 14)
     ```
   * decoration: 
     ```dart
     tooltipsMatchBackground
       ? BoxDecoration(
-          color: dark ? Colors.grey[900].withOpacity(0.93) : Colors.white.withOpacity(0.94),
-          borderRadius: const BorderRadius.all(Radius.circular(4)),
-          border: Border.all(color: dark ? Colors.grey[600] : Colors.grey[900]))
+         color: isDark ? const Color(0xED444444) : const Color(0xF0FCFCFC),
+         borderRadius: const BorderRadius.all(Radius.circular(4)),
+         border: Border.all(color: dividerThemeColor))
      : null // Use default Flutter SDK decoration.
     ```
   
@@ -1681,25 +1676,16 @@ are, as well as the rationale behind the made design choices and changes to the 
     is rarely seen.
 
 
-  * Background color for `AppBarTheme` can use a custom colored app bar
-    theme in both light and dark themes, that is not dependent on theme
-    primary or surface color. This functionality needs a custom text theme
-    to be possible to implement without a context. This implementation
-    does however not get correctly localized typography.
-
-    A new feature implemented via
-    [#71184](https://github.com/flutter/flutter/pull/71184) also enables this kind
-    app bar theme and keep the correct typography localization. This new
-    feature is (as of 31.12.2020) not yet available on channel stable.
-    The first version on master could also not be enabled via Themes
-    only, one also had to opt in on AppBar level making it difficult to
-    adopt the feature. I wrote a proposal to introduce opt-in on theme
-    level too, see [#72206](https://github.com/flutter/flutter/issues/72206).
-    The proposal has already been implemented. When these new features land
-    in stable channel, the implementation below will be changed to use
-    the new AppBarTheme feature, which is better than the current work-around
-    since we no longer need a custom text theme.
-
+  * Background color for `AppBarTheme` can use a custom color theme
+    in both light and dark themes, that is not dependent on the theme's
+    primary or surface color.
+    In the versions prior to Flutter 2.0.0 doing this was difficult to do,
+    as presented in [#50606](https://github.com/flutter/flutter/issues/50606)
+    A new feature in Flutter 2.0.0 implemented via:
+    [#71184](https://github.com/flutter/flutter/pull/71184) makes this easy and
+    better. FlexColorScheme's implementation has been changed to use this
+    new AppBarTheme feature starting from version 2.0.0-nullsafety.2.
+    
 
   * The `AppBarTheme` elevation defaults to 0, an iOs style influenced
     opinionated choice. It can easily be adjusted directly in the
@@ -1775,33 +1761,29 @@ are, as well as the rationale behind the made design choices and changes to the 
   * The property `fixTextFieldOutlineLabel` is set to `true` by default,
     it looks better. The only reason why it is not the default in Flutter,
     is for default backwards legacy design compatibility.
+    
 
+  * **NOTE:**  
+    Since the old buttons have been deprecated in Flutter 2.0.0
+    they are no longer presented or used in code in FlexColorScheme and its
+    examples. However, FlexColorScheme still defines the theme for
+    them described below. Defining the theme does not yet cause any
+    deprecation warnings or errors, as long as that is the case. this
+    theming will be kept available to support out of the box nice themes for
+    the old buttons as before.
+    
+  * Button theming is applied to `ThemeData.buttonColor` using color
+    `colorScheme.primary` color.
 
-  * Button theming is applied to `ThemeData.buttonColor` using color scheme
-    primary color. The entire color scheme is passed to old button's
-    `ButtonThemeData` and it uses `textTheme` set to
+  * For `ThemeData.buttonTheme` the entire color scheme is passed to its
+    `colorScheme` property and it uses `textTheme` set to
     `ButtonTextTheme.primary`, plus minor changes to padding and tap target
     size. These modifications make the old buttons almost match the
     default design and look of their corresponding newer buttons.
-    Thus, the `RaisedButton` looks
-    very similar to `ElevatedButton`, `OutlineButton` to `OutlinedButton`
-    and `FlatButton` to `TextButton`. There are some differences in
-    margins and looks, especially in dark-mode, but they are very similar.
-
-    This is a button style we used before the introduction of
-    the new buttons with their improved defaults. It just happened to be
-    very close, since the theme was based on how things looked in the Material
-    design guide already prior to Google releasing the new Flutter Material
-    buttons that fully implement the correct Material design.
-
-    The newer buttons are nicer, especially when it
-    comes to their interactions and all the theming options they provide,
-    but they are a bit verbose to theme. If you want to make custom styled
-    buttons we still recommend using the newer buttons instead of the old
-    ones, as they offer more customization possibilities. Still, this
-    theming applied to the old buttons make them look close enough to
-    the new ones, to the extent that most might not even notice if
-    you still use the old buttons.
+    Thus the `RaisedButton` looks very similar to `ElevatedButton`,
+    `OutlineButton` to `OutlinedButton` and `FlatButton` to `TextButton`.
+    There are some differences in margins and looks, especially in
+    dark-mode, but they are very similar.
 
 
   * The default theme for Chips contain a design bug that makes the
@@ -1809,17 +1791,6 @@ are, as well as the rationale behind the made design choices and changes to the 
     if was created with `ThemeData` or `ThemeData.from` factory.
     See issue [#65663](https://github.com/flutter/flutter/issues/65663).
     The `ChipThemeData` modification used here fixes the issue.
-
-
-  * The `FloatingActionButtonTheme` is set as follows:
-    ```dart
-    FloatingActionButtonThemeData(
-      backgroundColor: colorScheme.secondary,
-      foregroundColor: colorScheme.onSecondary)
-    ```
-    **NOTE**  
-    This definition will be removed in version 2.0.0.    
-    It is no longer needed. Flutter SDK now produces the same end result by default.
     
 
  * For `TabBarTheme`, the Flutter standard selected tab and indicator
@@ -1851,14 +1822,14 @@ are, as well as the rationale behind the made design choices and changes to the 
   * Default `tooltipTheme` in Flutter is currently a bit flawed on desktop
     and web, because it defaults to using a very small font (10dp).
     See issue [#71429](https://github.com/flutter/flutter/issues/71429).
-
     The default theming also does not handle multiline tooltips very well.
     The here used `TooltipThemeData` theme design, corrects both these
     issues. It uses 12dp font on desktop and web instead of 10dp,
     and some padding instead of a height constraint to ensure that
     multiline tooltips look nice too.
-
-    FlexColorScheme also includes a new boolean property
+    
+       
+  * FlexColorScheme also includes a boolean property
     `tooltipsMatchBackground`, that can be toggled to not use Flutter's
     Material default design that has a theme mode
     inverted background. Tooltips using light background in light theme
@@ -1868,24 +1839,10 @@ are, as well as the rationale behind the made design choices and changes to the 
     a preference toggle where they change the tooltip style to their liking.
 
 
-  * The property `transparentStatusBar` is set to true by default. This is
+  * The property `transparentStatusBar` is set to true by default. It is
     used to make to the AppBar one-toned on Android devices, like on iOS devices.
-    Set it to `false` if you want to restore the default Android design.
+    Set it to `false` if you want to restore the default Android two toned design.
 
-    > This modification is in current implementation made with an extra call
-    to `SystemChrome.setSystemUIOverlayStyle` to make the
-    statusBarColor transparent. The used implementation will be changed
-    when the new AppBarTheme [#71184](https://github.com/flutter/flutter/pull/71184)
-    lands in channel stable
-    that allows us to modify its AnnotatedRegion with a passed in
-    `SystemOverlayStyle`.
-    >
-    > FlexColorScheme also offers a helper that allows us to easily create
-    an annotated region for the system navigation bar that uses
-    the active color scheme and theme mode to make use
-    a correctly colored theme colored background for the active theme.
-    See [example 5](#example-5---full-featured-demo) for an explanation
-    on how to use this.
 
 ## Appendix A - Built-in Scheme Reference
 

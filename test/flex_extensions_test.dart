@@ -28,15 +28,9 @@ void main() {
     test('FCE1.04: GIVEN brighten(>100) EXPECT White.', () {
       expect(col.brighten(101), white);
     });
-    // test('FCE1.05: GIVEN brighten(null) EXPECT no change.', () {
-    //   expect(col.brighten(null), col);
-    // });
-    test('FCE1.06: GIVEN $col.brighten(20) EXPECT Color(0xff9533ff).', () {
+    test('FCE1.05: GIVEN $col.brighten(20) EXPECT Color(0xff9533ff).', () {
       expect(col.brighten(20), const Color(0xff9533ff));
     });
-    // test('FCE1.07: GIVEN <null>.brighten() EXPECT <null>.', () {
-    //   expect(nullColor!.brighten(), isNull);
-    // });
   });
 
   //****************************************************************************
@@ -65,18 +59,12 @@ void main() {
     test('FCE2.05: GIVEN lighten(>100) EXPECT White.', () {
       expect(col.lighten(101), white);
     });
-    // test('FCE2.06: GIVEN lighten(null) EXPECT no change.', () {
-    //   expect(col.lighten(null), col);
-    // });
-    test('FCE2.07: GIVEN $col.lighten(20) EXPECT Color(0xff9b55ff).', () {
+    test('FCE2.06: GIVEN $col.lighten(20) EXPECT Color(0xff9b55ff).', () {
       expect(col.lighten(20), const Color(0xff9b55ff));
     });
-    test('FCE2.08: GIVEN $black.lighten(1) EXPECT Color(0xff9b55ff).', () {
+    test('FCE2.07: GIVEN $black.lighten(1) EXPECT Color(0xff9b55ff).', () {
       expect(black.lighten(1), const Color(0xff030303));
     });
-    // test('FCE2.09: GIVEN <null>.lighten() EXPECT <null>.', () {
-    //   expect(nullColor!.lighten(), isNull);
-    // });
   });
 
   //****************************************************************************
@@ -88,7 +76,6 @@ void main() {
     const Color col = Color(0xFF6200EE);
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
-    // const Color? nullColor = null;
     test('FCE3.01: GIVEN darken() EXPECT default darken(10).', () {
       // ignore: avoid_redundant_argument_values
       expect(col.darken(), col.darken(10));
@@ -105,18 +92,12 @@ void main() {
     test('FCE3.05: GIVEN darken(>100) EXPECT black.', () {
       expect(col.darken(101), black);
     });
-    // test('FCE3.06: GIVEN darken(null) EXPECT no change.', () {
-    //   expect(col.darken(null), col);
-    // });
-    test('FCE3.07: GIVEN $col.darken(20) EXPECT Color(0xff380088).', () {
+    test('FCE3.06: GIVEN $col.darken(20) EXPECT Color(0xff380088).', () {
       expect(col.darken(20), const Color(0xff380088));
     });
     test('FCE3.08: GIVEN $white.darken(1) EXPECT Color(0xfffcfcfc).', () {
       expect(white.darken(1), const Color(0xfffcfcfc));
     });
-    // test('FCE3.09: GIVEN <null>.darken() EXPECT <null>.', () {
-    //   expect(nullColor!.darken(), isNull);
-    // });
   });
 
   //****************************************************************************
@@ -130,50 +111,37 @@ void main() {
     const Color col3 = Color(0xFFCF6679);
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
-    // const Color? nullColor = null;
     test('FCE4.01: GIVEN blend(color) EXPECT default blend(color, 10) ', () {
       // ignore: avoid_redundant_argument_values
       expect(col1.blend(white), col1.blend(white, 10));
     });
-    // test('FCE4.02: GIVEN color.blend(null, null) EXPECT color.', () {
-    //   expect(col1.blend(null, null), col1);
-    // });
-    // test('FCE4.03: GIVEN color.blend(color2, null) EXPECT color.', () {
-    //   expect(col1.blend(white, null), col1);
-    // });
-    test('FCE4.04: GIVEN color.blend(color2, 0) EXPECT color.', () {
+    test('FCE4.02: GIVEN color.blend(color2, 0) EXPECT color.', () {
       expect(col1.blend(white, 0), col1);
     });
-    test('FCE4.05: GIVEN color.blend(color2, <0) EXPECT color.', () {
+    test('FCE4.03: GIVEN color.blend(color2, <0) EXPECT color.', () {
       expect(col1.blend(white, -1), col1);
     });
-    test('FCE4.06: GIVEN color.blend(color2, 100) EXPECT color2.', () {
+    test('FCE4.04: GIVEN color.blend(color2, 100) EXPECT color2.', () {
       expect(col1.blend(col2, 100), col2);
     });
-    test('FCE4.07: GIVEN color.blend(color2, >100) EXPECT color2.', () {
+    test('FCE4.05: GIVEN color.blend(color2, >100) EXPECT color2.', () {
       expect(col1.blend(col2, 101), col2);
     });
-    test('FCE4.08: GIVEN color.blend(white, 0) EXPECT color.', () {
+    test('FCE4.06: GIVEN color.blend(white, 0) EXPECT color.', () {
       expect(col1.blend(white, 0), col1);
     });
-    test('FCE4.09: GIVEN color.blend(white, 100) EXPECT white.', () {
+    test('FCE4.07: GIVEN color.blend(white, 100) EXPECT white.', () {
       expect(col1.blend(white, 100), white);
     });
-    test('FCE4.10: GIVEN color.blend(black, 0) EXPECT color.', () {
+    test('FCE4.08: GIVEN color.blend(black, 0) EXPECT color.', () {
       expect(col1.blend(black, 0), col1);
     });
-    test('FCE4.11: GIVEN color.blend(black, 100) EXPECT white.', () {
+    test('FCE4.09: GIVEN color.blend(black, 100) EXPECT white.', () {
       expect(col1.blend(black, 100), black);
     });
-    test('FCE4.12: GIVEN $col1.blend(white, 40) EXPECT $col3.', () {
+    test('FCE4.10: GIVEN $col1.blend(white, 40) EXPECT $col3.', () {
       expect(col1.blend(white, 40), col3);
     });
-    // test('FCE4.13: GIVEN <null>blend(white, 40) EXPECT <null>.', () {
-    //   expect(nullColor!.blend(white, 40), isNull);
-    // });
-    // test('FCE4.14: GIVEN <null>.blend(null, null) EXPECT <null>.', () {
-    //   expect(nullColor!.blend(null, null), isNull);
-    // });
   });
 
   //****************************************************************************
@@ -188,7 +156,6 @@ void main() {
     const Color col4 = Color(0x00CF6679);
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
-    // const Color? nullColor = null;
     test('FCE5.01: GIVEN $col1 EXPECT "FFB00020".', () {
       expect(col1.hexCode, 'FFB00020');
     });
@@ -207,9 +174,6 @@ void main() {
     test('FCE5.06: GIVEN $black EXPECT "FF000000".', () {
       expect(black.hexCode, 'FF000000');
     });
-    // test('FCE5.07: GIVEN <$nullColor>.hexCode EXPECT "".', () {
-    //   expect(nullColor!.hexCode, '');
-    // });
   });
 
   //****************************************************************************
@@ -224,7 +188,6 @@ void main() {
     const Color col4 = Color(0x00CF6679);
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
-    // const Color? nullColor = null;
     test('FCE6.01: GIVEN $col1 EXPECT "#B00020".', () {
       expect(col1.hex, '#B00020');
     });
@@ -243,9 +206,6 @@ void main() {
     test('FCE6.06: GIVEN $black EXPECT "#000000".', () {
       expect(black.hex, '#000000');
     });
-    // test('FCE6.07: GIVEN <$nullColor>.hex EXPECT "".', () {
-    //   expect(nullColor!.hex, '');
-    // });
   });
 
   //****************************************************************************
@@ -257,7 +217,6 @@ void main() {
     const Color col1 = Color(0xFFB00020);
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
-    // const Color? nullColor = null;
     test(
         'FCE7.01: GIVEN color.getShadeColor() EXPECT '
         'color.getShadeColor(shadeValue: 15, lighten: true, keepBlack: true, '
@@ -321,9 +280,6 @@ void main() {
       expect(col1.getShadeColor(shadeValue: 20, lighten: false),
           const Color(0xff4a000d));
     });
-    // test('FCE7.11: GIVEN <$nullColor>.getShadeColor() EXPECT <null>.', () {
-    //   expect(nullColor!.getShadeColor(), null);
-    // });
   });
 
   //****************************************************************************
@@ -353,9 +309,6 @@ void main() {
     test('FSE1.05: GIVEN "$enumStr5".dotTail EXPECT "hey".', () {
       expect(enumStr5.dotTail, 'hey');
     });
-    // test('FSE1.06: GIVEN <$nullStr>.dotTail EXPECT "".', () {
-    //   expect(nullStr!.dotTail, '');
-    // });
   });
 
   //****************************************************************************
@@ -385,9 +338,6 @@ void main() {
     test('FSE2.05: GIVEN "$str5".capitalize EXPECT "".', () {
       expect(str5.capitalize, '');
     });
-    // test('FSE2.06: GIVEN <$nullStr>.capitalize EXPECT <null>.', () {
-    //   expect(nullStr!.capitalize, isNull);
-    // });
   });
 
   //****************************************************************************
@@ -478,8 +428,5 @@ void main() {
     test('FSE3.20: GIVEN "$emptyStr".toColor EXPECT "Color(0xFF000000)".', () {
       expect(emptyStr.toColor, const Color(0xFF000000));
     });
-    // test('FSE3.21: GIVEN "$nullStr".toColor EXP "Color(0xFF000000)".', () {
-    //   expect(nullStr!.toColor, const Color(0xFF000000));
-    // });
   });
 }
