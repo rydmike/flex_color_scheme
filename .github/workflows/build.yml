@@ -27,8 +27,10 @@
 name: Build Web
 on:
   # pull_request:
-  push:
-    branches: [ master ]
+  # push:
+  #  branches: [ master ]
+  release:
+    types: [ published ]
 jobs:
   flutter_tests:
     name: Analyze, test and build 5 web apps
