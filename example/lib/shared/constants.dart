@@ -12,11 +12,11 @@ class AppConst {
   // When I build a new public version I just make sure to update this info
   // before building them.
   static const String appName = 'FlexColorScheme';
-  static const String version = '2.0.0-nullsafety.1';
+  static const String version = '2.0.0-nullsafety.2';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
-  static const String flutterVersion = 'Beta 1.25.0-8.3.pre, CanvasKit';
-  static const String copyright = '© 2020';
+  static const String flutterVersion = 'Channel dev, 2.1.0-12.1.pre, CanvasKit';
+  static const String copyright = '© 2020, 2021';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';

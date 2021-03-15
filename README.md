@@ -131,8 +131,8 @@ dark color versions as well. So OK, there are actually "only" 26 new ready-made 
 
 The built-in schemes in no way claim to be a "this selection" fits all needs collection, nor do they claim to be 
 more correct than any other color scheme. What fits your needs and looks good to you, is of course the right choice
-for your application and use case. You can easily make your own custom scheme totally from scratch or copy the colors
-in an existing scheme and change the color that does not fit your design requirements.
+for your application and use case. You can easily make your own custom scheme totally from scratch or copy colors
+from an existing scheme, or change the colors that do not fit your design requirements.
 
 #### Design Your Custom Schemes for FlexColorScheme
 
