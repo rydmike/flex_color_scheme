@@ -2,6 +2,14 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [2.0.0] - March 15, 2021
+
+* First stable release of FlexColorScheme with sound null safety.
+* Includes the changes from [2.0.0-nullsafety.1] and [2.0.0-nullsafety.2].
+* Breaking: The by default enabled divider for `FlexColorScheme.themedSystemNavigationBar` has been 
+  revised to be disabled by default. To use a divider on the top of the system navigation bar on Android, 
+  you have to enabled it manually. This is more in line with expected default behaviour. 
+  
 ## [2.0.0-nullsafety.2] - March 15, 2021
 
 * Migrated AppBar theming to use the implementation introduced in Flutter 2.0.0 instead of using
@@ -11,24 +19,21 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 * The static helper `FlexColorScheme.themedSystemNavigationBar` received three new properties 
   `noAppBar`, `invertStatusIcons` and `systemNavigationBarDividerColor`. The old property
   `nullContextBackground` was deprecated and replaced with `systemNavigationBarColor`. Example 5
-  has been updated to show how and when the new features can be used.
-* As stated earlier in the documentation, as a planned change for version 2.0.0 the sub theme for
-  `FloatingActionButtonThemeData` was removed. It is thus now null as in default Flutter ThemeData.
-  It still produces the same default theme as before, the ThemeData definition was just no 
-  longer needed to do so.
+  has been updated to show how and when these new features can be used.
+* As stated earlier in the documentation, as a planned change for version 2.0.0, the sub theme for
+  `FloatingActionButtonThemeData` was removed. It is thus now null, just as in a default Flutter ThemeData.
+  It still produces the same theme as before, the ThemeData definition was just no longer needed to do so.
 * Number of tests increased from 639 to 661. Coverage 99.78%.  
-* Updated the documentation. Added thumbnails to Appendix A. This pub.dev version is also to test the
+* Updated the documentation. **Added thumbnails to Appendix A**. This pub.dev version is also to test the
   thumbnails work and how they look on pub.dev before stable 2.0.0 release.
      
-  *See API documentation for more information.*
-
 
 ## [2.0.0-nullsafety.1] - February 4, 2021
 
 * First version with null-safety.
-* Additional breaking: Removed in version 1.3.0 deprecated `FlexSchemeSurfaceColors.themeSurface`, use
+* Additional breaking: Removed the in version 1.3.0 deprecated `FlexSchemeSurfaceColors.themeSurface`, use
   `FlexSchemeSurfaceColors.surfaceStyle` instead.
-* Number of tests reduced from 723 to 639 when all null related tests were removed.  
+* Number of tests were reduced from 723 to 639, when all null related tests were removed.  
 
 ## [1.4.1] - January 31, 2021
 
