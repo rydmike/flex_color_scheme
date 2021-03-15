@@ -16,8 +16,9 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   `FloatingActionButtonThemeData` was removed. It is thus now null as in default Flutter ThemeData.
   It still produces the same default theme as before, the ThemeData definition was just no 
   longer needed to do so.
-* Number of tests increased from 639 to 661. Coverage  
-* Updated the documentation.  
+* Number of tests increased from 639 to 661. Coverage 99.78%.  
+* Updated the documentation. Added thumbnails to Appendix A. This pub.dev version is also to test the
+  thumbnails work and how they look on pub.dev before stable 2.0.0 release.
      
   *See API documentation for more information.*
 
