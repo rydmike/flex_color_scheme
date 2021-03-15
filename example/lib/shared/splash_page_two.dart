@@ -81,6 +81,7 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
       value: FlexColorScheme.themedSystemNavigationBar(context, noAppBar: true),
       child: Scaffold(
         backgroundColor: theme.colorScheme.background,
+        resizeToAvoidBottomInset: true,
         body: GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () {
@@ -101,7 +102,8 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
                 const Text('No status bar and no navigation bar',
                     textAlign: TextAlign.center),
                 const SizedBox(height: 30),
-                const Text('Tap to close'),
+                Text('Tap screen to close',
+                    style: TextStyle(color: theme.colorScheme.secondary)),
               ],
             ),
           ),

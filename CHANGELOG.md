@@ -214,31 +214,29 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
  
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
 - Version 2.1.0 Release even more color schemes. Making schemes is fun, documenting the changes a bit less so.
-- Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable channel. 
-  See https://github.com/flutter/flutter/pull/71184 and https://github.com/flutter/flutter/issues/72206. Will not impact
-  API or functionality, the implementation will only be changed to one that is supported directly by the SDK, so it
-  becomes easier and cleaner to do it.
-
 
 ### COMPLETED
 - Version 2.0.0-nullsafety.2: Minor new APIs and features added. Example 5 updated.
-- Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
-- Complete the documentation.
-- Publish live Web versions of the five examples.
-- Review and update the API.
-- Review and correct documentation mistakes and typos, first pass anyway.
-- Release version 1.0.0 on pub.dev.
-- Add API the can create the dark scheme based on a light scheme's colors.
-- Add API that allows us to use an additional extra color definition for ThemeData.accentColor to easily make themes with custom input border color in dark-mode.
-- API to opt-out from one-toned AppBar and return it to Android's default two-toned.
-- API to assist with themed annotated region for system navigation bar theming.
-- Version 1.3.0: Added 195 unit and widgets tests, mostly unit tests.
-- Version 1.4.0: Increased unit and widget test to 689 tests. All color definitions are now also tested to ensure 
-  they will not be changed by any accidental edit. Test coverage is higher than 95%, certainly sufficient for this 
-  type of package, but there are still some areas that could and will be improved.
-- Version 1.4.1 More tests, tests are now considered sufficient for current features. 
+- This [#71184](https://github.com/flutter/flutter/pull/71184) landed in Flutter 2.0.0. The past custom "white" 
+  AppBarTheme implementation was as planned changed to the new one that is supported by the SDK.  
+- Version 2.0.0-nullsafety.1 released
 - Version 1.4.1 Added automated build and publish pipes for the Web examples!
-- Version 2.0.0-nullsafety.1 released!
+- Version 1.4.1 More tests, tests are now considered sufficient for current features. 
+- Version 1.4.0: Increased unit and widget test to 689 tests. All color definitions are now also tested to ensure
+  they will not be changed by any accidental edit. Test coverage is higher than 95%, certainly sufficient for this
+  type of package, but there are still some areas that could and will be improved.
+- Version 1.3.0: Added 195 unit and widgets tests, mostly unit tests.
+- API to assist with themed annotated region for system navigation bar theming.
+- API to opt-out from one-toned AppBar and return it to Android's default two-toned.
+- Add API that allows us to use an additional extra color definition for ThemeData.accentColor to easily make themes
+  with custom input border color in dark-mode.
+- Add API the can create the dark scheme based on a light scheme's colors.
+- Release version 1.0.0 on pub.dev.
+- Review and correct documentation mistakes and typos, first pass anyway.
+- Review and update the API.
+- Publish live Web versions of the five examples.
+- Complete the documentation.
+- Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
 
 ### MAYBE
 - **Companion Web App**  
