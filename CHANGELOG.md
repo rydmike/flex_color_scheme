@@ -2,6 +2,26 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [2.0.0-nullsafety.2] - March 15, 2021
+
+* Migrated AppBar theming to use the implementation introduced in Flutter 2.0.0 instead of using
+  its own custom implementation for the "white" app bar theme.
+* Minor change to the none default `tooltipsMatchBackground: true` border style, it now uses
+  the theme divider color as its default outline color.    
+* The static helper `FlexColorScheme.themedSystemNavigationBar` received three new properties 
+  `noAppBar`, `invertStatusIcons` and `systemNavigationBarDividerColor`. The old property
+  `nullContextBackground` was deprecated and replaced with `systemNavigationBarColor`. Example 5
+  has been updated to show how and when the new features can be used.
+* As stated earlier in the documentation, as a planned change for version 2.0.0 the sub theme for
+  `FloatingActionButtonThemeData` was removed. It is thus now null as in default Flutter ThemeData.
+  It still produces the same default theme as before, the ThemeData definition was just no 
+  longer needed to do so.
+* Number of tests increased from 639 to 661. Coverage  
+* Updated the documentation.  
+     
+  *See API documentation for more information.*
+
+
 ## [2.0.0-nullsafety.1] - February 4, 2021
 
 * First version with null-safety.
@@ -190,7 +210,7 @@ These are the topics I currently have on the TODO list for this package. Have a 
 Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_scheme/issues) in the repo. 
 
 ### TODO
-- Version 2.0.0-nullsafety.2: Add some minor new APIs and features (maybe). 
+ 
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
 - Version 2.1.0 Release even more color schemes. Making schemes is fun, documenting the changes a bit less so.
 - Change the current "white" AppBarTheme implementation to new AppBarTheme when it lands in stable channel. 
@@ -200,6 +220,7 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 
 
 ### COMPLETED
+- Version 2.0.0-nullsafety.2: Minor new APIs and features added. Example 5 updated.
 - Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
 - Complete the documentation.
 - Publish live Web versions of the five examples.

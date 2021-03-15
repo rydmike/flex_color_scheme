@@ -11,65 +11,6 @@ void main() {
   // Additionally testing of the .defaultError and .toDark() methods.
   //****************************************************************************
   group('FSC1: WITH FlexSchemeColor ', () {
-    // Start with null tests.
-    // test(
-    //     'FSC1.00a: GIVEN a FlexSchemeColor.from primary null '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //     () => FlexSchemeColor.from(primary: null),
-    //     throwsAssertionError,
-    //   );
-    // });
-    //
-    // test(
-    //     'FSC1.00b: GIVEN a FlexSchemeColor with null values '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeColor(
-    //             primary: null,
-    //             primaryVariant: Colors.white,
-    //             secondary: Colors.white,
-    //             secondaryVariant: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSC1.00c: GIVEN a FlexSchemeColor with null values '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeColor(
-    //             primary: Colors.white,
-    //             primaryVariant: null,
-    //             secondary: Colors.white,
-    //             secondaryVariant: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSC1.00d: GIVEN a FlexSchemeColor with null values '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeColor(
-    //             primary: Colors.white,
-    //             primaryVariant: Colors.white,
-    //             secondary: null,
-    //             secondaryVariant: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSC1.00e: GIVEN a FlexSchemeColor with null values '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeColor(
-    //             primary: Colors.white,
-    //             primaryVariant: Colors.white,
-    //             secondary: Colors.white,
-    //             secondaryVariant: null,
-    //           ),
-    //       throwsAssertionError);
-    // });
-
     // m1 = Basic flex scheme color with null accentColor.
     const FlexSchemeColor m1 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
@@ -114,16 +55,26 @@ void main() {
     // Identity and equality tests
     test(
         'FSC1.01a: GIVEN same FlexSchemeColor objects '
-        'EXPECT them to have identity', () {
+        'EXPECT them to be equal', () {
       expect(m1, equals(m1));
     });
     test(
-        'FSC1.01b: GIVEN two identical FlexSchemeColor objects '
+        'FSC1.01b: GIVEN same FlexSchemeColor objects '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m1), true);
+    });
+    test(
+        'FSC1.01c: GIVEN two equal FlexSchemeColor objects '
         'EXPECT them to have equality', () {
       expect(m1, equals(m2));
     });
     test(
-        'FSC1.01c: GIVEN two identical FlexSchemeColor objects '
+        'FSC1.01c: GIVEN two equal FlexSchemeColor objects '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m2), true);
+    });
+    test(
+        'FSC1.01e: GIVEN two identical FlexSchemeColor objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
     });

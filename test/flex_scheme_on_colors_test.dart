@@ -12,137 +12,6 @@ void main() {
   // produces onColors using the override colors.
   //****************************************************************************
   group('FSOC1: WITH FlexSchemeOnColors ', () {
-    // Start with null tests
-    // test(
-    //     'FSOC1.00a: GIVEN a FlexSchemeOnColors with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors(
-    //             onPrimary: null,
-    //             onSecondary: Colors.white,
-    //             onSurface: Colors.white,
-    //             onBackground: Colors.white,
-    //             onError: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSOC1.00b: GIVEN a FlexSchemeOnColors with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors(
-    //             onPrimary: Colors.white,
-    //             onSecondary: null,
-    //             onSurface: Colors.white,
-    //             onBackground: Colors.white,
-    //             onError: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSOC1.00c: GIVEN a FlexSchemeOnColors with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors(
-    //             onPrimary: Colors.white,
-    //             onSecondary: Colors.white,
-    //             onSurface: null,
-    //             onBackground: Colors.white,
-    //             onError: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSOC1.00d: GIVEN a FlexSchemeOnColors with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors(
-    //             onPrimary: Colors.white,
-    //             onSecondary: Colors.white,
-    //             onSurface: Colors.white,
-    //             onBackground: null,
-    //             onError: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSOC1.00e: GIVEN a FlexSchemeOnColors with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors(
-    //             onPrimary: Colors.white,
-    //             onSecondary: Colors.white,
-    //             onSurface: Colors.white,
-    //             onBackground: Colors.white,
-    //             onError: null,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSOC1.00f: GIVEN a FlexSchemeOnColors.from with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors.from(
-    //             primary: null,
-    //             secondary: Colors.white,
-    //             surface: Colors.white,
-    //             background: Colors.white,
-    //             error: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSOC1.00g: GIVEN a FlexSchemeOnColors.from with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors.from(
-    //             primary: Colors.white,
-    //             secondary: null,
-    //             surface: Colors.white,
-    //             background: Colors.white,
-    //             error: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSOC1.00h: GIVEN a FlexSchemeOnColors.from with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors.from(
-    //             primary: Colors.white,
-    //             secondary: Colors.white,
-    //             surface: null,
-    //             background: Colors.white,
-    //             error: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSOC1.00i: GIVEN a FlexSchemeOnColors.from with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors.from(
-    //             primary: Colors.white,
-    //             secondary: Colors.white,
-    //             surface: Colors.white,
-    //             background: null,
-    //             error: Colors.white,
-    //           ),
-    //       throwsAssertionError);
-    // });
-    // test(
-    //     'FSOC1.00j: GIVEN a FlexSchemeOnColors.from with nulls '
-    //     'EXPECT throws null assertion error.', () {
-    //   expect(
-    //       () => FlexSchemeOnColors.from(
-    //             primary: Colors.white,
-    //             secondary: Colors.white,
-    //             surface: Colors.white,
-    //             background: Colors.white,
-    //             error: null,
-    //           ),
-    //       throwsAssertionError);
-    // });
     // m1 = Typical light surface with saturated primary
     const FlexSchemeOnColors m1 = FlexSchemeOnColors(
       onPrimary: Colors.white,
@@ -198,26 +67,36 @@ void main() {
     // Identity and quality tests
     test(
         'FSOC1.01a: GIVEN the same FlexSchemeOnColor object '
-        'EXPECT them to have identity', () {
+        'EXPECT them to be equal', () {
       expect(m1, equals(m1));
     });
     test(
-        'FSOC1.01b: GIVEN two identical FlexSchemeOnColors objects '
-        'EXPECT them to have equality', () {
+        'FSOC1.01b: GIVEN the same FlexSchemeOnColor object '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m1), true);
+    });
+    test(
+        'FSOC1.01c: GIVEN two equal FlexSchemeOnColors objects '
+        'EXPECT them to be equal', () {
       expect(m1, equals(m2));
     });
     test(
-        'FSOC1.01c: GIVEN two identical FlexSchemeOnColors objects '
+        'FSOC1.01d: GIVEN two equal FlexSchemeOnColors objects '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m2), true);
+    });
+    test(
+        'FSOC1.01e: GIVEN two equal FlexSchemeOnColors objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
     });
     test(
-        'FSOC1.02a: GIVEN none identical FlexSchemeOnColors objects '
+        'FSOC1.02a: GIVEN none equal FlexSchemeOnColors objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
     });
     test(
-        'FSOC1.02b: GIVEN none identical FlexSchemeOnColors objects '
+        'FSOC1.02b: GIVEN none equal FlexSchemeOnColors objects '
         'EXPECT them to be unequal with operator', () {
       expect(m1 != m3, true);
     });
