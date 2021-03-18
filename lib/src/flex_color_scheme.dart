@@ -1226,25 +1226,27 @@ class FlexColorScheme with Diagnosticable {
     return const VisualDensity();
   }
 
-  /// Return a [SystemUiOverlayStyle] that has a system navigation bar style
+  /// Returns a [SystemUiOverlayStyle] that has a system navigation bar style
   /// that matches the current theme.
   ///
-  /// Requires a build context with access to an inherited theme.
+  /// Requires a build context with access to the inherited theme.
   ///
   /// Can use optional divider on the navigation bar, which is only
   /// respected on Android P (= Pie = API 28 = Android 9) or higher.
   ///
-  /// By default does not set any system overlay for the status bar. Status has
-  /// its own built in SystemUiOverlayStyle as a part of [AppBar] and
-  /// [AppBarTheme]. [FlexColorScheme] normally managed the
-  /// [SystemUiOverlayStyle] via it. However, if your screen has no [AppBar] you
-  /// can use the properties `noAppBar` and `invertStatusIcons` to affect
-  /// the look of the status icons when there is no [AppBar] present on the
-  /// page, this is useful e.g. for splash and intro screens
+  /// By default it does not set any system overlay for the status bar. The
+  /// status bas has its own built in SystemUiOverlayStyle as a part of
+  /// [AppBar] and [AppBarTheme]. [FlexColorScheme] normally manages the
+  /// [SystemUiOverlayStyle] for the status bar via it. However, if your screen
+  /// has no [AppBar] you can use the properties `noAppBar` and
+  /// `invertStatusIcons` to affect the look of the status icons when
+  /// there is no [AppBar] present on the page, this is useful e.g.
+  /// for splash and intro screens.
   ///
   /// You may need to fully restart the app and even rebuild it for changes to
   /// this setting to take effect on Android devices and emulators.
-  /// Especially the divider seems a bit tricky and erratic to turn on and off.
+  /// Especially the divider seems to be a bit tricky and erratic to
+  /// turn on and off.
   ///
   /// Use and support for the opacity value on the system navigation bar
   /// is EXPERIMENTAL, it ONLY works on Android API 30 (=Android 11) or higher.
@@ -1272,18 +1274,18 @@ class FlexColorScheme with Diagnosticable {
     double opacity = 1,
 
     /// Set this to true if you do not use a Material AppBar and want
-    /// a uniform background for that status bar region.
+    /// a uniform background where the status bar's icon region is.
     ///
     /// This would typically be true on pages like splash screens and intro
-    /// screen that don't use an AppBar. The Material AppBar uses its own
-    /// SystemUiOverlayStyle so don't use this with AppBar, set the style
-    /// on the AppBar theme instead. However if you don't have an [AppBar] this
+    /// screens that don't use an AppBar. The Material AppBar uses its own
+    /// `SystemUiOverlayStyle` so don't use this with an AppBar, set the style
+    /// on the AppBar theme instead. However, if you don't have an [AppBar] this
     /// is a convenient way of to remove the system icons scrim for a more
     /// clean look on Android.
     bool noAppBar = false,
 
     /// Set to true to invert top status bar icons like, battery, network,
-    /// wifi icons etc. in relation to their norma theme brightness related
+    /// wifi icons etc. in relation to their normal theme brightness related
     /// color.
     ///
     /// Defaults to false.
@@ -1291,6 +1293,7 @@ class FlexColorScheme with Diagnosticable {
     /// This setting works well together with the `noAppBar` flag to make an
     /// even cleaner looking splash screen by making the
     /// top status bar icons less visible or even invisible.
+    ///
     /// On a white background the status icons will be invisible, and if a
     /// fully black background is used in dark mode, they will be invisible
     /// in dark mode too. This can be used to create clean screen with no
@@ -1302,14 +1305,14 @@ class FlexColorScheme with Diagnosticable {
     /// using that method there are however issues with them showing up again
     /// on navigation and when keyboard becomes visible, or app is restored
     /// from being in the background while using another app. You
-    /// also have to managed putting the overlays back yourself manually with
-    /// `SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);` when
+    /// also have to manage putting the overlays back yourself manually with
+    /// `SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values)` when
     /// moving away from the screen that had removed them. Using an
-    /// AnnotatedRegion with `themedSystemNavigationBar` and both `noAppBar`
+    /// `AnnotatedRegion` with `themedSystemNavigationBar` and both `noAppBar`
     /// and `invertStatusIcons` set to true, you can avoid these issues. You are
     /// however limited to using background white, in light mode and black in
-    /// dark mode, if you want the status bar invisible and navigation bar to
-    /// blend in with the background completely.
+    /// dark mode, if you want the status bar to be totally invisible and
+    /// navigation bar to blend in with the background completely.
     bool invertStatusIcons = false,
 
     /// Background color of the system navigation bar. If null the theme of
@@ -1321,8 +1324,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If `context` is null, `nullContextBrightness` will be used as brightness
     /// value and it will determine if the background is white (for
-    /// Brightness.light) or black (for Brightness.dark). A null context is
-    /// mostly used for testing.
+    /// Brightness.light) or black (for Brightness.dark). The null context is
+    /// mostly used for unit testing with no context.
     Color? systemNavigationBarColor,
 
     /// Optional color for the system navigation bar divider. A divider will
@@ -1337,7 +1340,8 @@ class FlexColorScheme with Diagnosticable {
     /// (= Pie = API 28 = Android 9) or higher.
     Color? systemNavigationBarDividerColor,
 
-    /// Brightness used if context is null, mostly used for testing.
+    /// Brightness used if context is null, mostly used for unit testing,
+    /// with no context present.
     Brightness nullContextBrightness = Brightness.light,
 
     /// Deprecated property, use systemNavigationBarColor instead.
@@ -1369,23 +1373,23 @@ class FlexColorScheme with Diagnosticable {
         ? systemNavigationBarColor ?? Theme.of(context).colorScheme.background
         : systemNavigationBarColor ?? (isDark ? Colors.black : Colors.white);
 
-    // Use provided `systemNavigationBarDividerColor` if a values was given
+    // Use provided `systemNavigationBarDividerColor` if a value was given
     // or fallback to suitable theme mode default divider colors if no
     // colors given.
+    //
+    // The used default system navigation bar divider colors below were tuned
+    // to fit well with most color schemes and possible surface branding.
+    // Using the theme divider color does not work as the system call does
+    // not use the alpha channel value in the passed in color, default divider
+    // color of the theme uses alpha, using it does not look good at all.
     final Color dividerColor = systemNavigationBarDividerColor ??
         (isDark ? const Color(0xFF2C2C2C) : const Color(0xFFDDDDDD));
 
-    // The used system navigation bar divider colors below were tuned to
-    // fit well with most color schemes and possible surface branding.
-    // Using the theme divider color does not work as the system call does
-    // not use the alpha channel value in the passed in color, default divider
-    // color of the theme uses alpha, using it will thus not look good.
-    //
-    // A future modification could expose the divider color, but then you
-    // could just as well just copy and use this overlay style directly in your
-    // AnnotatedRegion if this does not produce the desired result.
     return SystemUiOverlayStyle(
-      // The top status bar settings.
+      // The top status bar settings. If no params are set that indicates we
+      // on purpose want to adjust it because there is no `AppBar` we should
+      // just pass null to avoid changing any of its values controlled by the
+      // `AppBar` and its theme.
       statusBarColor: noAppBar ? Colors.transparent : null,
       statusBarBrightness:
           noAppBar ? (isDark ? Brightness.dark : Brightness.light) : null,
