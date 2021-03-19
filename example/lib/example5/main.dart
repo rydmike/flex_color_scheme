@@ -511,8 +511,7 @@ class _HomePageState extends State<HomePage> {
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
-    // TODO: Why did this exist? Remove it?
-    // final Color appBarColor = theme.appBarTheme.color ?? theme.primaryColor;
+    final Color appBarColor = theme.appBarTheme.color ?? theme.primaryColor;
     final bool isLight = Theme.of(context).brightness == Brightness.light;
 
     // Give the width of the side panel some automatic adaptive behavior and
@@ -726,24 +725,24 @@ class _HomePageState extends State<HomePage> {
               title: const Text('Scrim test'),
               actions: const <Widget>[AboutIconButton()],
               // TODO: Removed this AppBar styling to test that normal works OK.
-              // backgroundColor: Colors.transparent,
-              // // Gradient partially transparent AppBar, just because it looks
-              // // nice and we can see content scroll behind it.
-              // flexibleSpace: Container(
-              //   decoration: BoxDecoration(
-              //     border: Border(
-              //      bottom: BorderSide(color: Theme.of(context).dividerColor),
-              //     ),
-              //     gradient: LinearGradient(
-              //       begin: AlignmentDirectional.centerStart,
-              //       end: AlignmentDirectional.centerEnd,
-              //       colors: <Color>[
-              //         appBarColor,
-              //         appBarColor.withOpacity(0.85),
-              //       ],
-              //     ),
-              //   ),
-              // ),
+              backgroundColor: Colors.transparent,
+              // Gradient partially transparent AppBar, just because it looks
+              // nice and we can see content scroll behind it.
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Theme.of(context).dividerColor),
+                  ),
+                  gradient: LinearGradient(
+                    begin: AlignmentDirectional.centerStart,
+                    end: AlignmentDirectional.centerEnd,
+                    colors: <Color>[
+                      appBarColor,
+                      appBarColor.withOpacity(0.85),
+                    ],
+                  ),
+                ),
+              ),
             ),
             body: PageBody(
               child: ListView(
