@@ -148,6 +148,12 @@ class _DemoAppState extends State<DemoApp> {
   // Used to modify the themed app bar elevation.
   double appBarElevation = 0;
 
+  // Used to control if we use one or two toned status bar.
+  bool transparentStatusBar = false;
+
+  // Used to control system navbar style
+  FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.standard;
+
   // Enum used to select what tab bar style we use.
   FlexTabBarStyle flexTabBarStyle = FlexTabBarStyle.forAppBar;
 
@@ -216,6 +222,8 @@ class _DemoAppState extends State<DemoApp> {
               appBarStyle: flexAppBarStyle,
               appBarElevation: appBarElevation,
               tabBarStyle: flexTabBarStyle,
+              transparentStatusBar: transparentStatusBar,
+              systemNavBarStyle: systemNavBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
               fontFamily: AppFonts.mainFont,
@@ -234,6 +242,8 @@ class _DemoAppState extends State<DemoApp> {
                 appBarStyle: flexAppBarStyle,
                 appBarElevation: appBarElevation,
                 tabBarStyle: flexTabBarStyle,
+                transparentStatusBar: transparentStatusBar,
+                systemNavBarStyle: systemNavBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
                 fontFamily: AppFonts.mainFont,
@@ -257,6 +267,8 @@ class _DemoAppState extends State<DemoApp> {
               appBarStyle: flexAppBarStyle,
               appBarElevation: appBarElevation,
               tabBarStyle: flexTabBarStyle,
+              transparentStatusBar: transparentStatusBar,
+              systemNavBarStyle: systemNavBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               darkIsTrueBlack: darkIsTrueBlack,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -275,6 +287,8 @@ class _DemoAppState extends State<DemoApp> {
                 appBarStyle: flexAppBarStyle,
                 appBarElevation: appBarElevation,
                 tabBarStyle: flexTabBarStyle,
+                transparentStatusBar: transparentStatusBar,
+                systemNavBarStyle: systemNavBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 darkIsTrueBlack: darkIsTrueBlack,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -320,6 +334,22 @@ class _DemoAppState extends State<DemoApp> {
         onAppBarStyleChanged: (FlexAppBarStyle style) {
           setState(() {
             flexAppBarStyle = style;
+          });
+        },
+        // We pass in the active status bar transparency.
+        transparentStatusBar: transparentStatusBar,
+        // And select a new transparency.
+        onTransparentStatusBarChanged: (bool value) {
+          setState(() {
+            transparentStatusBar = value;
+          });
+        },
+        // We pass in the active system navbar style.
+        systemNavBarStyle: systemNavBarStyle,
+        // And select a new system navbar style.
+        onSystemNavBarStyleChanged: (FlexSystemNavBarStyle style) {
+          setState(() {
+            systemNavBarStyle = style;
           });
         },
         // We pass in the current app bar elevation level
@@ -410,6 +440,10 @@ class HomePage extends StatefulWidget {
     required this.onThemeSurfaceChanged,
     required this.appBarStyle,
     required this.onAppBarStyleChanged,
+    required this.transparentStatusBar,
+    required this.onTransparentStatusBarChanged,
+    required this.systemNavBarStyle,
+    required this.onSystemNavBarStyleChanged,
     required this.appBarElevation,
     required this.onAppBarElevationChanged,
     required this.tabBarStyle,
@@ -434,9 +468,13 @@ class HomePage extends StatefulWidget {
   final ValueChanged<FlexSurface> onThemeSurfaceChanged;
   final FlexAppBarStyle appBarStyle;
   final ValueChanged<FlexAppBarStyle> onAppBarStyleChanged;
-  final FlexTabBarStyle tabBarStyle;
+  final bool transparentStatusBar;
+  final ValueChanged<bool> onTransparentStatusBarChanged;
+  final FlexSystemNavBarStyle systemNavBarStyle;
+  final ValueChanged<FlexSystemNavBarStyle> onSystemNavBarStyleChanged;
   final double appBarElevation;
   final ValueChanged<double> onAppBarElevationChanged;
+  final FlexTabBarStyle tabBarStyle;
   final ValueChanged<FlexTabBarStyle> onTabBarStyleChanged;
   final bool tooltipsMatchBackground;
   final ValueChanged<bool> onTooltipsMatchBackgroundChanged;
@@ -473,7 +511,8 @@ class _HomePageState extends State<HomePage> {
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
-    final Color appBarColor = theme.appBarTheme.color ?? theme.primaryColor;
+    // TODO: Why did this exist? Remove it?
+    // final Color appBarColor = theme.appBarTheme.color ?? theme.primaryColor;
     final bool isLight = Theme.of(context).brightness == Brightness.light;
 
     // Give the width of the side panel some automatic adaptive behavior and
@@ -582,6 +621,51 @@ class _HomePageState extends State<HomePage> {
       ),
     };
 
+    // FlexSystemNavBarStyle enum to widget map, used in a CupertinoSegment.
+    const Map<FlexSystemNavBarStyle, Widget> systemNavBar =
+        <FlexSystemNavBarStyle, Widget>{
+      FlexSystemNavBarStyle.standard: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          'Default',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 11),
+        ),
+      ),
+      FlexSystemNavBarStyle.surface: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          'Surface',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 11),
+        ),
+      ),
+      FlexSystemNavBarStyle.background: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          'Back\u{00AD}ground',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 11),
+        ),
+      ),
+      FlexSystemNavBarStyle.scaffoldBackground: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          'Scaffold\nback\u{00AD}ground',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 11),
+        ),
+      ),
+      FlexSystemNavBarStyle.transparent: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          'Trans\u{00AD}parent',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 11),
+        ),
+      ),
+    };
+
     // FlexTabBarStyle enum to widget map, used in a CupertinoSegment control.
     const Map<FlexTabBarStyle, Widget> themeTabBar = <FlexTabBarStyle, Widget>{
       FlexTabBarStyle.forAppBar: Padding(
@@ -602,428 +686,461 @@ class _HomePageState extends State<HomePage> {
       ),
     };
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      // FlexColorScheme contains a helper that can be use to theme
-      // the system navigation bar using an AnnotatedRegion. Without this
-      // page wrapper the system navigation bar in Android will not change
-      // theme color as we change themes for the page. This is a
-      // Flutter "feature", but with this annotated region we can have the
-      // navigation bar at least follow the background color and theme-mode,
-      // which looks nicer and as it should on an Android device.
-      value: FlexColorScheme.themedSystemNavigationBar(context),
-      child: Row(
-        children: <Widget>[
-          // Contains the demo menu and side rail.
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
-            child: Material(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: currentSidePanelWidth,
-                child: SideMenu(
-                  isVisible: showSidePanel,
-                  menuWidth: AppConst.expandWidth,
-                ),
+    return
+        // TODO: Annotated region removed to test if it can work without it.
+        // AnnotatedRegion<SystemUiOverlayStyle>(
+        // // FlexColorScheme contains a helper that can be use to theme
+        // // the system navigation bar using an AnnotatedRegion. Without this
+        // // page wrapper the system navigation bar in Android will not change
+        // // theme color as we change themes for the page. This is a
+        // // Flutter "feature", but with this annotated region we can have the
+        // // navigation bar at least follow the background color and theme-mode,
+        // // which looks nicer and as it should on an Android device.
+        // value: FlexColorScheme.themedSystemNavigationBar(context),
+        // child:
+        Row(
+      children: <Widget>[
+        // Contains the demo menu and side rail.
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
+          child: Material(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: currentSidePanelWidth,
+              child: SideMenu(
+                isVisible: showSidePanel,
+                menuWidth: AppConst.expandWidth,
               ),
             ),
           ),
-          // The actual page content is a normal Scaffold.
-          Expanded(
-            child: Scaffold(
-              // For scrolling behind the app bar
-              extendBodyBehindAppBar: true,
-              // For scrolling behind the bottom nav bar, if there would be one.
-              extendBody: true,
-              appBar: AppBar(
-                title: const Text('FlexColorScheme Example 5'),
-                actions: const <Widget>[AboutIconButton()],
-                backgroundColor: Colors.transparent,
-                // Gradient partially transparent AppBar, just because it looks
-                // nice and we can see content scroll behind it.
-                flexibleSpace: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Theme.of(context).dividerColor),
-                    ),
-                    gradient: LinearGradient(
-                      begin: AlignmentDirectional.centerStart,
-                      end: AlignmentDirectional.centerEnd,
-                      colors: <Color>[
-                        appBarColor,
-                        appBarColor.withOpacity(0.85),
-                      ],
-                    ),
-                  ),
+        ),
+        // The actual page content is a normal Scaffold.
+        Expanded(
+          child: Scaffold(
+            // For scrolling behind the app bar
+            extendBodyBehindAppBar: true,
+            // For scrolling behind the bottom nav bar, if there would be one.
+            extendBody: true,
+            appBar: AppBar(
+              // title: const Text('FlexColorScheme Example 5'),
+              title: const Text('Scrim test'),
+              actions: const <Widget>[AboutIconButton()],
+              // TODO: Removed this AppBar styling to test that normal works OK.
+              // backgroundColor: Colors.transparent,
+              // // Gradient partially transparent AppBar, just because it looks
+              // // nice and we can see content scroll behind it.
+              // flexibleSpace: Container(
+              //   decoration: BoxDecoration(
+              //     border: Border(
+              //      bottom: BorderSide(color: Theme.of(context).dividerColor),
+              //     ),
+              //     gradient: LinearGradient(
+              //       begin: AlignmentDirectional.centerStart,
+              //       end: AlignmentDirectional.centerEnd,
+              //       colors: <Color>[
+              //         appBarColor,
+              //         appBarColor.withOpacity(0.85),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+            ),
+            body: PageBody(
+              child: ListView(
+                padding: EdgeInsets.fromLTRB(
+                  AppConst.edgePadding,
+                  topPadding + kToolbarHeight + AppConst.edgePadding,
+                  AppConst.edgePadding,
+                  AppConst.edgePadding + bottomPadding,
                 ),
-              ),
-              body: PageBody(
-                child: ListView(
-                  padding: EdgeInsets.fromLTRB(
-                    AppConst.edgePadding,
-                    topPadding + kToolbarHeight + AppConst.edgePadding,
-                    AppConst.edgePadding,
-                    AppConst.edgePadding + bottomPadding,
+                children: <Widget>[
+                  Text('Theme', style: headline4),
+                  const Text(
+                    'This example shows how you can use all the built in '
+                    'color schemes in FlexColorScheme to define themes '
+                    'from them and how you can make your own custom '
+                    'scheme colors and use them together with the '
+                    'predefined ones.\n\n'
+                    'The example also shows how to use the surface '
+                    'branding feature and the app bar theme '
+                    'options in FlexColorScheme. The usage of the '
+                    'true black option for dark themes is also '
+                    'demonstrated.\n\n'
+                    'The example includes a dummy responsive side menu and '
+                    'rail to give a visual example of what applications '
+                    'that have larger visible surfaces using surface '
+                    'branding may look like. '
+                    'A theme showcase widget shows the active theme with '
+                    'several common Material widgets.\n',
                   ),
-                  children: <Widget>[
-                    Text('Theme', style: headline4),
-                    const Text(
-                      'This example shows how you can use all the built in '
-                      'color schemes in FlexColorScheme to define themes '
-                      'from them and how you can make your own custom '
-                      'scheme colors and use them together with the '
-                      'predefined ones.\n\n'
-                      'The example also shows how to use the surface '
-                      'branding feature and the app bar theme '
-                      'options in FlexColorScheme. The usage of the '
-                      'true black option for dark themes is also '
-                      'demonstrated.\n\n'
-                      'The example includes a dummy responsive side menu and '
-                      'rail to give a visual example of what applications '
-                      'that have larger visible surfaces using surface '
-                      'branding may look like. '
-                      'A theme showcase widget shows the active theme with '
-                      'several common Material widgets.\n',
+                  Text('${widget.flexSchemeData.name} theme',
+                      style: textTheme.headline5),
+                  // A 3-way theme mode toggle switch.
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppConst.edgePadding),
+                    child: FlexThemeModeSwitch(
+                      themeMode: widget.themeMode,
+                      onThemeModeChanged: widget.onThemeModeChanged,
+                      flexSchemeData: widget.flexSchemeData,
+                      // Style the selected theme mode's label
+                      selectedLabelStyle: Theme.of(context)
+                          .textTheme
+                          .caption!
+                          .copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.primary),
                     ),
-                    Text('${widget.flexSchemeData.name} theme',
-                        style: textTheme.headline5),
-                    // A 3-way theme mode toggle switch.
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: AppConst.edgePadding),
-                      child: FlexThemeModeSwitch(
-                        themeMode: widget.themeMode,
-                        onThemeModeChanged: widget.onThemeModeChanged,
-                        flexSchemeData: widget.flexSchemeData,
-                        // Style the selected theme mode's label
-                        selectedLabelStyle: Theme.of(context)
-                            .textTheme
-                            .caption!
-                            .copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.primary),
-                      ),
-                    ),
-                    const Divider(),
+                  ),
+                  const Divider(),
 
-                    // Popup menu button to select color scheme.
-                    PopupMenuButton<int>(
-                      padding: const EdgeInsets.all(0),
-                      onSelected: widget.onSchemeChanged,
-                      itemBuilder: (BuildContext context) =>
-                          <PopupMenuItem<int>>[
-                        for (int i = 0; i < myFlexSchemes.length; i++)
-                          PopupMenuItem<int>(
-                            value: i,
-                            child: ListTile(
-                              leading: Icon(Icons.lens,
-                                  color: isLight
-                                      ? myFlexSchemes[i].light.primary
-                                      : myFlexSchemes[i].dark.primary,
-                                  size: 35),
-                              title: Text(myFlexSchemes[i].name),
-                            ),
-                          )
-                      ],
-                      child: ListTile(
-                        title: Text('${widget.flexSchemeData.name} theme'),
-                        subtitle: Text(widget.flexSchemeData.description),
-                        trailing: Icon(
-                          Icons.lens,
-                          color: colorScheme.primary,
-                          size: 40,
-                        ),
+                  // Popup menu button to select color scheme.
+                  PopupMenuButton<int>(
+                    padding: const EdgeInsets.all(0),
+                    onSelected: widget.onSchemeChanged,
+                    itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+                      for (int i = 0; i < myFlexSchemes.length; i++)
+                        PopupMenuItem<int>(
+                          value: i,
+                          child: ListTile(
+                            leading: Icon(Icons.lens,
+                                color: isLight
+                                    ? myFlexSchemes[i].light.primary
+                                    : myFlexSchemes[i].dark.primary,
+                                size: 35),
+                            title: Text(myFlexSchemes[i].name),
+                          ),
+                        )
+                    ],
+                    child: ListTile(
+                      title: Text('${widget.flexSchemeData.name} theme'),
+                      subtitle: Text(widget.flexSchemeData.description),
+                      trailing: Icon(
+                        Icons.lens,
+                        color: colorScheme.primary,
+                        size: 40,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    // Active theme color indicators.
-                    const Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: AppConst.edgePadding),
-                      child: ShowThemeColors(),
+                  ),
+                  const SizedBox(height: 8),
+                  // Active theme color indicators.
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
+                    child: ShowThemeColors(),
+                  ),
+                  const SizedBox(height: 8),
+                  // Open a sub-page
+                  ListTile(
+                    title: const Text('Open a demo subpage'),
+                    subtitle: const Text(
+                      'The subpage will use the same '
+                      'color scheme based theme automatically.',
                     ),
-                    const SizedBox(height: 8),
-                    // Open a sub-page
-                    ListTile(
-                      title: const Text('Open a demo subpage'),
-                      subtitle: const Text(
-                        'The subpage will use the same '
-                        'color scheme based theme automatically.',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        Subpage.show(context);
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Subpage.show(context);
+                    },
+                  ),
+                  const Divider(),
+                  // const SizedBox(height: 8),
+                  SwitchListTile.adaptive(
+                    title: const Text('Compute dark theme'),
+                    subtitle: const Text(
+                      'From the light scheme, instead '
+                      'of using a dark scheme.',
+                    ),
+                    value: widget.useToDark,
+                    onChanged: widget.onUseToDarkChanged,
+                  ),
+                  // White blend slider in a ListTile.
+                  ListTile(
+                    title: Slider.adaptive(
+                      max: 100,
+                      divisions: 100,
+                      label: widget.whiteBlend.toString(),
+                      value: widget.whiteBlend.toDouble(),
+                      onChanged: (double value) {
+                        widget.onWhiteBlendChanged(value.floor().toInt());
                       },
                     ),
-                    const Divider(),
-                    // const SizedBox(height: 8),
-                    SwitchListTile.adaptive(
-                      title: const Text('Compute dark theme'),
-                      subtitle: const Text(
-                        'From the light scheme, instead '
-                        'of using a dark scheme.',
-                      ),
-                      value: widget.useToDark,
-                      onChanged: widget.onUseToDarkChanged,
-                    ),
-                    // White blend slider in a ListTile.
-                    ListTile(
-                      title: Slider.adaptive(
-                        max: 100,
-                        divisions: 100,
-                        label: widget.whiteBlend.toString(),
-                        value: widget.whiteBlend.toDouble(),
-                        onChanged: (double value) {
-                          widget.onWhiteBlendChanged(value.floor().toInt());
-                        },
-                      ),
-                      trailing: Padding(
-                        padding: const EdgeInsetsDirectional.only(end: 12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Text(
-                              'LEVEL',
-                              style: Theme.of(context).textTheme.caption,
-                            ),
-                            Text(
-                              '${widget.whiteBlend} %',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .caption!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
+                    trailing: Padding(
+                      padding: const EdgeInsetsDirectional.only(end: 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            'LEVEL',
+                            style: Theme.of(context).textTheme.caption,
+                          ),
+                          Text(
+                            '${widget.whiteBlend} %',
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                     ),
-                    // Set dark mode to use true black!
-                    SwitchListTile.adaptive(
-                      title: const Text('Dark mode uses true black'),
-                      subtitle: const Text(
-                        'Keep OFF for normal dark mode.',
-                      ),
-                      value: widget.darkIsTrueBlack,
-                      onChanged: widget.onDarkIsTrueBlackChanged,
+                  ),
+                  // Set dark mode to use true black!
+                  SwitchListTile.adaptive(
+                    title: const Text('Dark mode uses true black'),
+                    subtitle: const Text(
+                      'Keep OFF for normal dark mode.',
                     ),
-                    // Set to make dark scheme lazily for light theme
+                    value: widget.darkIsTrueBlack,
+                    onChanged: widget.onDarkIsTrueBlackChanged,
+                  ),
+                  // Set to make dark scheme lazily for light theme
 
-                    // Surface style selector.
-                    const SizedBox(height: 8),
-                    const ListTile(
-                      title: Text('Branded surface and background'),
-                      subtitle: Text(
-                        'Default Material design uses white and dark surface '
-                        'colors. With the light, medium, heavy '
-                        'and strong branding, you can blend primary '
-                        'color into surface and background colors with '
-                        'increasing strength.',
-                      ),
+                  // Surface style selector.
+                  const SizedBox(height: 8),
+                  const ListTile(
+                    title: Text('Branded surface and background'),
+                    subtitle: Text(
+                      'Default Material design uses white and dark surface '
+                      'colors. With the light, medium, heavy '
+                      'and strong branding, you can blend primary '
+                      'color into surface and background colors with '
+                      'increasing strength.',
                     ),
-                    const SizedBox(height: 4),
-                    CupertinoSegmentedControl<FlexSurface>(
-                      children: themeSurface,
-                      groupValue: widget.themeSurface,
-                      onValueChanged: widget.onThemeSurfaceChanged,
-                      borderColor: isLight
-                          ? colorScheme.primary
-                          : theme.primaryColorLight,
-                      selectedColor: isLight
-                          ? colorScheme.primary
-                          : theme.primaryColorLight,
-                      unselectedColor: theme.cardColor,
+                  ),
+                  const SizedBox(height: 4),
+                  CupertinoSegmentedControl<FlexSurface>(
+                    children: themeSurface,
+                    groupValue: widget.themeSurface,
+                    onValueChanged: widget.onThemeSurfaceChanged,
+                    borderColor:
+                        isLight ? colorScheme.primary : theme.primaryColorLight,
+                    selectedColor:
+                        isLight ? colorScheme.primary : theme.primaryColorLight,
+                    unselectedColor: theme.cardColor,
+                  ),
+                  const SizedBox(height: 8),
+                  const ListTile(
+                    title: Text('App bar theme'),
+                    subtitle: Text(
+                      'Flutter ColorScheme themes have a primary '
+                      'colored app bar in light mode, and a background '
+                      'colored one in dark mode. With FlexColorScheme '
+                      'you can choose if it should be primary, background, '
+                      'surface or a custom color. The predefined schemes '
+                      'use their secondary variant color as the custom '
+                      'color for the app bar theme, but it can be any color.',
                     ),
-                    const SizedBox(height: 8),
-                    const ListTile(
-                      title: Text('App bar theme'),
-                      subtitle: Text(
-                        'Flutter ColorScheme themes have a primary '
-                        'colored app bar in light mode, and a background '
-                        'colored one in dark mode. With FlexColorScheme '
-                        'you can choose if it should be primary, background, '
-                        'surface or a custom color. The predefined schemes '
-                        'use their secondary variant color as the custom '
-                        'color for the app bar theme, but it can be any color.',
-                      ),
+                  ),
+                  const SizedBox(height: 4),
+                  // AppBar style
+                  CupertinoSegmentedControl<FlexAppBarStyle>(
+                    children: themeAppBar,
+                    groupValue: widget.appBarStyle,
+                    onValueChanged: widget.onAppBarStyleChanged,
+                    borderColor:
+                        isLight ? colorScheme.primary : theme.primaryColorLight,
+                    selectedColor:
+                        isLight ? colorScheme.primary : theme.primaryColorLight,
+                    unselectedColor: theme.cardColor,
+                  ),
+                  const SizedBox(height: 8),
+                  // Theme creation method.
+                  SwitchListTile.adaptive(
+                    title: const Text(
+                      'One toned AppBar with transparent status bar',
                     ),
-                    const SizedBox(height: 4),
-                    // AppBar style
-                    CupertinoSegmentedControl<FlexAppBarStyle>(
-                      children: themeAppBar,
-                      groupValue: widget.appBarStyle,
-                      onValueChanged: widget.onAppBarStyleChanged,
-                      borderColor: isLight
-                          ? colorScheme.primary
-                          : theme.primaryColorLight,
-                      selectedColor: isLight
-                          ? colorScheme.primary
-                          : theme.primaryColorLight,
-                      unselectedColor: theme.cardColor,
+                    subtitle: const Text(
+                      'If ON there is no scrim on the status bar. '
+                      'Turn OFF for normal two toned AppBar on Android.',
                     ),
-                    const SizedBox(height: 8),
-                    // AppBar elevation value in a ListTile.
-                    ListTile(
-                      title: const Text('App bar themed elevation'),
-                      subtitle: Slider.adaptive(
-                        max: 30,
-                        divisions: 30,
-                        label: widget.appBarElevation.floor().toString(),
-                        value: widget.appBarElevation.roundToDouble(),
-                        onChanged: widget.onAppBarElevationChanged,
-                      ),
-                      trailing: Text(
-                        '${widget.appBarElevation.floor()}',
-                        style: Theme.of(context)
-                            .textTheme
-                            .caption!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
+                    value: widget.transparentStatusBar,
+                    onChanged: widget.onTransparentStatusBarChanged,
+                  ),
+                  // AppBar elevation value in a ListTile.
+                  ListTile(
+                    title: const Text('App bar themed elevation'),
+                    subtitle: Slider.adaptive(
+                      max: 30,
+                      divisions: 30,
+                      label: widget.appBarElevation.floor().toString(),
+                      value: widget.appBarElevation.roundToDouble(),
+                      onChanged: widget.onAppBarElevationChanged,
                     ),
-                    const ListTile(
-                      title: Text('Tab bar theme'),
-                      subtitle: Text(
-                        'Choose the style that fit best with where '
-                        'you primarily intend to use the TabBar.',
-                      ),
+                    trailing: Text(
+                      '${widget.appBarElevation.floor()}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 4),
-                    // AppBar style
-                    CupertinoSegmentedControl<FlexTabBarStyle>(
-                      children: themeTabBar,
-                      groupValue: widget.tabBarStyle,
-                      onValueChanged: widget.onTabBarStyleChanged,
-                      borderColor: isLight
-                          ? colorScheme.primary
-                          : theme.primaryColorLight,
-                      selectedColor: isLight
-                          ? colorScheme.primary
-                          : theme.primaryColorLight,
-                      unselectedColor: theme.cardColor,
+                  ),
+                  const ListTile(
+                    title: Text('System navbar style'),
+                    subtitle: Text(
+                      'Test to style the system navbar using AppBarTheme. '
+                      'Default is white in light theme and black in dark '
+                      'theme. The others would match the respective theme '
+                      'color. Transparent would show background and system nav '
+                      'buttons on top.\n',
                     ),
-                    const SizedBox(height: 8),
-                    // Tooltip theme style.
-                    Tooltip(
-                      message: 'A tooltip, on the tooltip style toggle',
-                      child: SwitchListTile.adaptive(
-                        title: const Text(
-                          'Tooltips are light on light, and dark on dark',
-                        ),
-                        subtitle: const Text(
-                          "Keep OFF to use Material's default inverted "
-                          'background style.',
-                        ),
-                        value: widget.tooltipsMatchBackground,
-                        onChanged: widget.onTooltipsMatchBackgroundChanged,
-                      ),
+                  ),
+                  const SizedBox(height: 4),
+                  // AppBar style
+                  CupertinoSegmentedControl<FlexSystemNavBarStyle>(
+                    children: systemNavBar,
+                    groupValue: widget.systemNavBarStyle,
+                    onValueChanged: widget.onSystemNavBarStyleChanged,
+                    borderColor:
+                        isLight ? colorScheme.primary : theme.primaryColorLight,
+                    selectedColor:
+                        isLight ? colorScheme.primary : theme.primaryColorLight,
+                    unselectedColor: theme.cardColor,
+                  ),
+                  const ListTile(
+                    title: Text('Tab bar theme'),
+                    subtitle: Text(
+                      'Choose the style that fit best with where '
+                      'you primarily intend to use the TabBar.',
                     ),
-                    const Divider(),
-                    // Theme creation method.
-                    SwitchListTile.adaptive(
+                  ),
+                  const SizedBox(height: 4),
+                  // AppBar style
+                  CupertinoSegmentedControl<FlexTabBarStyle>(
+                    children: themeTabBar,
+                    groupValue: widget.tabBarStyle,
+                    onValueChanged: widget.onTabBarStyleChanged,
+                    borderColor:
+                        isLight ? colorScheme.primary : theme.primaryColorLight,
+                    selectedColor:
+                        isLight ? colorScheme.primary : theme.primaryColorLight,
+                    unselectedColor: theme.cardColor,
+                  ),
+                  const SizedBox(height: 8),
+                  // Tooltip theme style.
+                  Tooltip(
+                    message: 'A tooltip, on the tooltip style toggle',
+                    child: SwitchListTile.adaptive(
                       title: const Text(
-                        'Theme with FlexColorScheme.toTheme',
+                        'Tooltips are light on light, and dark on dark',
                       ),
                       subtitle: const Text(
-                        'Turn OFF to make the theme with the '
-                        'ThemeData.from factory.\n'
-                        'NOT recommended, but try it in this demo '
-                        'to see the differences.',
+                        "Keep OFF to use Material's default inverted "
+                        'background style.',
                       ),
-                      value: widget.useToTheme,
-                      onChanged: widget.onUseToThemeChanged,
+                      value: widget.tooltipsMatchBackground,
+                      onChanged: widget.onTooltipsMatchBackgroundChanged,
                     ),
-                    const Divider(),
-                    // Splash pages...
-                    ListTile(
-                      title: const Text('Splash page demo 1a'),
-                      subtitle: const Text(
-                        'No scrim and normal status icons.\n'
-                        'Using themedSystemNavigationBar (noAppBar:true)',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        SplashPageOne.show(context, false);
-                      },
+                  ),
+                  const Divider(),
+                  // Theme creation method.
+                  SwitchListTile.adaptive(
+                    title: const Text(
+                      'Theme with FlexColorScheme.toTheme',
                     ),
-                    ListTile(
-                      title: const Text('Splash page demo 1b'),
-                      subtitle: const Text(
-                        'No scrim and inverted status icons.\n'
-                        'Using themedSystemNavigationBar (noAppBar:true, '
-                        'invertStatusIcons:true)',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        SplashPageOne.show(context, true);
-                      },
+                    subtitle: const Text(
+                      'Turn OFF to make the theme with the '
+                      'ThemeData.from factory.\n'
+                      'NOT recommended, but try it in this demo '
+                      'to see the differences.',
                     ),
-                    ListTile(
-                      title: const Text('Splash page demo 2'),
-                      subtitle: const Text(
-                        'No status icons or navigation bar.\n'
-                        'Using setEnabledSystemUIOverlays([])',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        SplashPageTwo.show(context, true);
-                      },
+                    value: widget.useToTheme,
+                    onChanged: widget.onUseToThemeChanged,
+                  ),
+                  const Divider(),
+                  // Splash pages...
+                  ListTile(
+                    title: const Text('Splash page demo 1a'),
+                    subtitle: const Text(
+                      'No scrim and normal status icons.\n'
+                      'Using themedSystemNavigationBar (noAppBar:true)',
                     ),
-                    const Divider(),
-                    Text('Menu', style: headline4),
-                    const Text(
-                      'The menu is a just a demo to make a larger '
-                      'area that uses the primary branded background color.',
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      SplashPageOne.show(context, false);
+                    },
+                  ),
+                  ListTile(
+                    title: const Text('Splash page demo 1b'),
+                    subtitle: const Text(
+                      'No scrim and inverted status icons.\n'
+                      'Using themedSystemNavigationBar (noAppBar:true, '
+                      'invertStatusIcons:true)',
                     ),
-                    SwitchListTile.adaptive(
-                      title: const Text('Turn ON to show the menu'),
-                      subtitle: const Text('Turn OFF to hide the menu.'),
-                      value: showSidePanel,
-                      onChanged: (bool value) {
-                        setState(() {
-                          showSidePanel = value;
-                          if (showSidePanel) {
-                            if (isSidePanelExpanded) {
-                              currentSidePanelWidth = AppConst.expandWidth;
-                            } else {
-                              currentSidePanelWidth = AppConst.shrinkWidth;
-                            }
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      SplashPageOne.show(context, true);
+                    },
+                  ),
+                  ListTile(
+                    title: const Text('Splash page demo 2'),
+                    subtitle: const Text(
+                      'No status icons or navigation bar.\n'
+                      'Using setEnabledSystemUIOverlays([])',
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      SplashPageTwo.show(context, true);
+                    },
+                  ),
+                  const Divider(),
+                  Text('Menu', style: headline4),
+                  const Text(
+                    'The menu is a just a demo to make a larger '
+                    'area that uses the primary branded background color.',
+                  ),
+                  SwitchListTile.adaptive(
+                    title: const Text('Turn ON to show the menu'),
+                    subtitle: const Text('Turn OFF to hide the menu.'),
+                    value: showSidePanel,
+                    onChanged: (bool value) {
+                      setState(() {
+                        showSidePanel = value;
+                        if (showSidePanel) {
+                          if (isSidePanelExpanded) {
+                            currentSidePanelWidth = AppConst.expandWidth;
                           } else {
-                            currentSidePanelWidth = 0.01;
+                            currentSidePanelWidth = AppConst.shrinkWidth;
                           }
-                        });
-                      },
+                        } else {
+                          currentSidePanelWidth = 0.01;
+                        }
+                      });
+                    },
+                  ),
+                  SwitchListTile.adaptive(
+                    title: const Text('Turn ON for full sized menu'),
+                    subtitle: const Text(
+                      'Turn OFF for a rail sized menu. '
+                      'The full size menu will only be shown when '
+                      'screen width is above 650 dp and this toggle is ON.',
                     ),
-                    SwitchListTile.adaptive(
-                      title: const Text('Turn ON for full sized menu'),
-                      subtitle: const Text(
-                        'Turn OFF for a rail sized menu. '
-                        'The full size menu will only be shown when '
-                        'screen width is above 650 dp and this toggle is ON.',
-                      ),
-                      value: isSidePanelExpanded,
-                      onChanged: (bool value) {
-                        setState(() {
-                          isSidePanelExpanded = value;
-                          if (showSidePanel) {
-                            if (isSidePanelExpanded) {
-                              currentSidePanelWidth = AppConst.expandWidth;
-                            } else {
-                              currentSidePanelWidth = AppConst.shrinkWidth;
-                            }
+                    value: isSidePanelExpanded,
+                    onChanged: (bool value) {
+                      setState(() {
+                        isSidePanelExpanded = value;
+                        if (showSidePanel) {
+                          if (isSidePanelExpanded) {
+                            currentSidePanelWidth = AppConst.expandWidth;
                           } else {
-                            currentSidePanelWidth = 0.01;
+                            currentSidePanelWidth = AppConst.shrinkWidth;
                           }
-                        });
-                      },
-                    ),
-                    const Divider(),
-                    Text('Theme Showcase', style: headline4),
-                    const ThemeShowcase(),
-                  ],
-                ),
+                        } else {
+                          currentSidePanelWidth = 0.01;
+                        }
+                      });
+                    },
+                  ),
+                  const Divider(),
+                  Text('Theme Showcase', style: headline4),
+                  const ThemeShowcase(),
+                ],
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
+      // TODO Uncomment when putting Annotated Region back
+      // ),
     );
   }
 }

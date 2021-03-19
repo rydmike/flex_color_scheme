@@ -76,6 +76,43 @@ enum FlexAppBarStyle {
   custom,
 }
 
+/// Enum used to define the [SystemUiOverlayStyle] for the system navigation
+/// bar. The style is actually defined via the AppBarTheme and only works
+/// when there is an AppBar present on the screen. If you are using a screen
+/// that does not have an [AppBar] you can control the style of the system
+/// navigation bar
+enum FlexSystemNavBarStyle {
+  /// Standard style, white in light theme and black in dark theme.
+  ///
+  /// This is the default style.
+  standard,
+
+  /// The system navigation bar will be the same color as active theme
+  /// colorScheme.surface color. If your FlexColorScheme definition is set to
+  /// use primary branded surface and background colors, the same primary
+  /// color blend that the surface color has received will be used.
+  surface,
+
+  /// The system navigation bar will be the same color as active theme
+  /// colorScheme.background color. If your FlexColorScheme definition is set
+  /// to use primary branded surface and background colors, the same primary
+  /// color blend that the background color has received will be used.
+  background,
+
+  /// The system navigation bar will be the same color as active theme
+  /// scaffoldBackground color. If your FlexColorScheme definition is set
+  /// to use primary branded surface and background colors, the same primary
+  /// color blend that the scaffoldBackground color has received will be used.
+  scaffoldBackground,
+
+  /// Experimental feature. The goal is that it will make the system
+  /// navigation bar fully transparent on Android, showing the background while
+  /// navigation buttons are floating over the background. This only works
+  /// if it is also been configured in Android embedder and on SDK 30 or higher.
+  /// More information in this example: https://github.com/rydmike/sysnavbar
+  transparent,
+}
+
 /// Enum to select TabBarTheme preference in [FlexColorScheme] based themes.
 enum FlexTabBarStyle {
   /// Themed to fit with active FlexAppBarStyle and AppBarTheme.
@@ -165,6 +202,7 @@ class FlexColorScheme with Diagnosticable {
     this.bottomAppBarElevation = 0,
     this.tooltipsMatchBackground = false,
     this.transparentStatusBar = true,
+    this.systemNavBarStyle = FlexSystemNavBarStyle.standard,
     this.visualDensity,
     this.fontFamily,
     this.platform,
@@ -371,6 +409,10 @@ class FlexColorScheme with Diagnosticable {
   /// You may need to fully restart the app and even rebuild for changes to
   /// this setting to take effect on Android devices and emulators.
   final bool transparentStatusBar;
+
+  // TODO Document properly
+  /// Defines the...
+  final FlexSystemNavBarStyle systemNavBarStyle;
 
   /// The density value for specifying the compactness of various UI components.
   ///
@@ -627,6 +669,10 @@ class FlexColorScheme with Diagnosticable {
     /// this setting to take effect on Android devices and emulators.
     bool transparentStatusBar = true,
 
+    // TODO Document properly
+    /// Defines the...
+    FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.standard,
+
     /// Same property as in [ThemeData] factory, it is just passed along to it.
     ///
     /// Included for convenience to avoid a copyWith if it needs to be changed.
@@ -783,6 +829,7 @@ class FlexColorScheme with Diagnosticable {
       brightness: Brightness.light,
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
+      systemNavBarStyle: systemNavBarStyle,
       // Visual density, fontFamily, platform and typography values are just
       // passed along as were along to FlexColorScheme and from there to
       // the [toTheme] method factory.
@@ -993,6 +1040,10 @@ class FlexColorScheme with Diagnosticable {
     /// this setting to take effect on Android devices and emulators.
     bool transparentStatusBar = true,
 
+    // TODO Document properly
+    /// Defines the...
+    FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.standard,
+
     /// Same property as in [ThemeData] factory, it is just passed along to it.
     ///
     /// Included for convenience to avoid a copyWith if it needs to be changed.
@@ -1181,6 +1232,7 @@ class FlexColorScheme with Diagnosticable {
       brightness: Brightness.dark,
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
+      systemNavBarStyle: systemNavBarStyle,
       // Visual density, fontFamily, platform and typography values are just
       // passed as is along to FlexColorScheme and from there to Theme factory.
       // They are just included as a way to include them also when needed
@@ -1315,6 +1367,14 @@ class FlexColorScheme with Diagnosticable {
     /// navigation bar to blend in with the background completely.
     bool invertStatusIcons = false,
 
+    /// The [FlexSystemNavBarStyle] used to determine the background color
+    /// used for the system navigation bar. Used if systemNavigationBarColor is
+    /// null and context is not null so the correspondiong theme color can be
+    /// found.
+    ///
+    /// Defaults to [FlexSystemNavBarStyle.standard].
+    FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.standard,
+
     /// Background color of the system navigation bar. If null the theme of
     /// context `colorScheme.background` will be used as background color.
     ///
@@ -1365,13 +1425,31 @@ class FlexColorScheme with Diagnosticable {
         ? Theme.of(context).brightness == Brightness.dark
         : nullContextBrightness == Brightness.dark;
 
+    // Get the defined effective background color for the used style.
+    final Color _flexBackGround = (context != null)
+        ? systemNavBarStyle == FlexSystemNavBarStyle.standard
+            ? (isDark ? Colors.black : Colors.white)
+            : systemNavBarStyle == FlexSystemNavBarStyle.background
+                ? Theme.of(context).colorScheme.background
+                : systemNavBarStyle == FlexSystemNavBarStyle.surface
+                    ? Theme.of(context).colorScheme.surface
+                    : systemNavBarStyle ==
+                            FlexSystemNavBarStyle.scaffoldBackground
+                        ? Theme.of(context).scaffoldBackgroundColor
+                        : Theme.of(context)
+                            .scaffoldBackgroundColor
+                            .withOpacity(0.1)
+        : (isDark ? Colors.black : Colors.white);
+
     // If a systemNavigationBarColor color is given, it will always be used,
     // If it is not given and we have a context, we use colorscheme background.
     // If we have no context, the systemNavigationBarColor is used if we
     // have a color, if not, it is black in dark mode and white in light mode.
-    final Color background = (context != null)
-        ? systemNavigationBarColor ?? Theme.of(context).colorScheme.background
-        : systemNavigationBarColor ?? (isDark ? Colors.black : Colors.white);
+    final Color background = systemNavigationBarColor ?? _flexBackGround;
+    // TODO Remove this old version that did not use "Flex" background.
+    // final Color background = (context != null)
+    //     ? systemNavigationBarColor ?? _flexBackGround
+    //     : systemNavigationBarColor ?? (isDark ? Colors.black : Colors.white);
 
     // Use provided `systemNavigationBarDividerColor` if a value was given
     // or fallback to suitable theme mode default divider colors if no
@@ -1872,6 +1950,22 @@ class FlexColorScheme with Diagnosticable {
     final Color _hintColor =
         _isDark ? Colors.white60 : Colors.black.withOpacity(0.6);
 
+    Color _effectiveSysNavBarColor() {
+      switch (systemNavBarStyle) {
+        case FlexSystemNavBarStyle.standard:
+          return _isDark ? Colors.black : Colors.white;
+        case FlexSystemNavBarStyle.surface:
+          return _colorScheme.surface;
+        case FlexSystemNavBarStyle.background:
+          return _colorScheme.background;
+        case FlexSystemNavBarStyle.scaffoldBackground:
+          return scaffoldBackground ?? _colorScheme.background;
+        case FlexSystemNavBarStyle.transparent:
+          return (scaffoldBackground ?? _colorScheme.background)
+              .withOpacity(0.1);
+      }
+    }
+
     // Make and return the ThemeData object defined by the FlexColorScheme
     // properties and the designed slightly opinionated theme design choices
     // over default Flutter Material theme implementation.
@@ -2035,13 +2129,31 @@ class FlexColorScheme with Diagnosticable {
             ? const IconThemeData(color: Colors.white)
             : const IconThemeData(color: Colors.black87),
         elevation: appBarElevation,
+        // TODO: Trying to use AppBarTheme overlay style here to style sysnav.
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: transparentStatusBar ? Colors.transparent : null,
+          // AppBar overlay style.
+          statusBarColor: transparentStatusBar
+              ? Colors.transparent
+              : const Color(0x40000000),
           statusBarBrightness: _appBarBrightness,
           statusBarIconBrightness: _appBarBrightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
+          // System navbar overlay - The one used by default AppBar in SDK:
+          // systemNavigationBarColor: const Color(0xFF000000),
+          // Would be nice if this worked instead of above, but it does not:
+          systemNavigationBarColor: _effectiveSysNavBarColor(),
+          // System navbar overlay - The one used by default AppBar in SDK:
+          // systemNavigationBarIconBrightness: Brightness.dark,
+          // Would be nice if this worked instead of above, but it does not:
+          systemNavigationBarIconBrightness:
+              _isDark ? Brightness.light : Brightness.dark,
+          // System navbar overlay - The one used by default AppBar in SDK:
+          // ignore: avoid_redundant_argument_values
+          systemNavigationBarDividerColor: Colors.transparent,
         ),
+        // We use the new AppBarTheme that has more features, but is not
+        // backwards compatible.
         backwardsCompatibility: false,
       ),
 
