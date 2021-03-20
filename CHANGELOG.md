@@ -2,42 +2,69 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [2.1.0] - March 21, 2021
+
+* **Bugfix:** Toggling `FlexColorScheme(transparentStatusBar)` from true to false, did not restore the
+  Android default status bar scrim, unless the app was completely rebuilt. This has been fixed.
+* **Bugfix:** When using `FlexColorScheme.themedSystemNavigationBar(useDivider)` in an `AnnotatedRegion`, toggling
+  `useDivider` from true to false, did not remove the system navigation bar divider again, unless the 
+  app was completely rebuilt. This has been fixed. 
+* **Feature:** The `FlexColorScheme.themedSystemNavigationBar` for styling the system navigation bar got a
+  new convenience property `systemNavBarStyle` that takes a `FlexSystemNavBarStyle` enum with values:
+  * `system`:  For default white system nav bar in light theme and black in dark theme mode.
+  * `surface`: The system navigation bar will be the same color as active theme `colorScheme.surface` color. 
+    If your FlexColorScheme definition is set to use primary branded surface and background colors, the 
+    same primary color blend that the surface color has received will be used.
+  * `background`: The system navigation bar will be the same color as active theme `colorScheme.background` color.
+    If your FlexColorScheme definition is set to use primary branded surface and background colors, the
+    same primary color blend that the background color has received will be used.
+  * `scaffoldBackground`: The system navigation bar will be the same color as active theme `scaffoldBackground` color.
+    If your FlexColorScheme definition is set to use primary branded surface and background colors, the
+    same primary color blend that the scaffoldBackground color has received will be used.
+  * `transparent`: An experimental feature. The goal is to make the system navigation bar fully transparent, 
+    showing the background, while navigation buttons float over the background. This feature only works if it is 
+    also configured in the Android embedder and on SDK 30 or higher.
+    More information in this example: https://github.com/rydmike/sysnavbar
+* **Examples:** Added statusbar scrim toggle and system navigation divider and navbar style toggles to example 5.
+  These only work on Android builds and do not have any functionality on the live Web builds.
+* **Tests:** Added tests for the new features. Total 675, coverage
+
 ## [2.0.0] - March 15, 2021
 
-* First stable release of FlexColorScheme with sound null safety.
+* **First** stable release of FlexColorScheme with sound null safety.
 * Includes the changes from [2.0.0-nullsafety.1] and [2.0.0-nullsafety.2].
-* Breaking: The by default enabled divider for `FlexColorScheme.themedSystemNavigationBar` has been 
+* **Breaking:** The by default enabled divider for `FlexColorScheme.themedSystemNavigationBar` has been 
   revised to be disabled by default. To use a divider on the top of the system navigation bar on Android, 
   you have to enabled it manually. This is more in line with expected default behaviour. 
   
 ## [2.0.0-nullsafety.2] - March 15, 2021
 
-* Migrated AppBar theming to use the implementation introduced in Flutter 2.0.0 instead of using
-  its own custom implementation for the "white" app bar theme.
-* Minor change to the none default `tooltipsMatchBackground: true` border style, it now uses
-  the theme divider color as its default outline color.    
-* The static helper `FlexColorScheme.themedSystemNavigationBar` received three new properties 
+* **Breaking** Minor change to the none default `tooltipsMatchBackground: true` border style, it now uses
+  the theme divider color as its default outline color.
+* **Breaking:** As stated earlier in the documentation, as a planned change for version 2.0.0, the sub theme for
+  `FloatingActionButtonThemeData` was removed. It is thus now null, just as in a default Flutter ThemeData.
+  It still produces the same theme as before, the ThemeData definition was just no longer needed to do so.
+* **Features:** The static helper `FlexColorScheme.themedSystemNavigationBar` received three new properties
   `noAppBar`, `invertStatusIcons` and `systemNavigationBarDividerColor`. The old property
   `nullContextBackground` was deprecated and replaced with `systemNavigationBarColor`. Example 5
   has been updated to show how and when these new features can be used.
-* As stated earlier in the documentation, as a planned change for version 2.0.0, the sub theme for
-  `FloatingActionButtonThemeData` was removed. It is thus now null, just as in a default Flutter ThemeData.
-  It still produces the same theme as before, the ThemeData definition was just no longer needed to do so.
-* Number of tests increased from 639 to 661. Coverage 99.78%.  
-* Updated the documentation. **Added thumbnails to Appendix A**. This pub.dev version is also to test the
+* **Migrated** AppBar theming to use the implementation introduced in Flutter 2.0.0 instead of using
+  its own custom implementation for the "white" app bar theme.
+* **Tests:** Number of tests increased from 639 to 661. Coverage 99.78%.  
+* **Documentation:** Added thumbnails to **Appendix A**. This pub.dev version is also to test the
   thumbnails work and how they look on pub.dev before stable 2.0.0 release.
      
 
 ## [2.0.0-nullsafety.1] - February 4, 2021
 
-* First version with null-safety.
-* Additional breaking: Removed the in version 1.3.0 deprecated `FlexSchemeSurfaceColors.themeSurface`, use
+* **First** version with null-safety.
+* **Breaking:** Removed the in version 1.3.0 deprecated `FlexSchemeSurfaceColors.themeSurface`, use
   `FlexSchemeSurfaceColors.surfaceStyle` instead.
-* Number of tests were reduced from 723 to 639, when all null related tests were removed.  
+* **Tests:** Number of tests were reduced from 723 to 639, when all null related tests were removed.  
 
 ## [1.4.1] - January 31, 2021
 
-* Added four new built-in color schemes.
+* **New schemes:** Added four new built-in color schemes.
   * **Barossa** - Barossa red and cardin green theme.
     Use enum value `FlexScheme.barossa` for easy access to it.
   * **Shark and orange** - Shark grey and orange ecstasy theme.
@@ -47,11 +74,11 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   * **Damask and lunar** - Damask red and lunar green theme.
     Use enum value `FlexScheme.damask` for easy access to it.
     
-* Improved Semantics for the ThemeMode Widget buttons.
-* Improved FlexThemeModeSwitch widget tests, makes and checks for system mode changes. 
-* More tests, totally 723 tests, codecov is now > 99.5%.
-* Added GitHub actions to automate build and to publish the examples on the Web on a new release.  
-* Minor changes to the examples. Modified to not need the `late` keyword when they are converted 
+* **Improved:** Semantics for the ThemeMode Widget buttons.
+* **Tests:** FlexThemeModeSwitch widget tests, makes and checks for system mode changes. 
+* **Tests:** More tests, totally 723 tests, codecov is now > 99.5%.
+* **CI/CD:** Added GitHub actions to automate build and to publish the examples on the Web on a new release.  
+* **Examples:** Minor changes to the examples. Modified to not need the `late` keyword when they are converted 
   to null safe versions.
 * **Documentation:**
   * Added the new color schemes to the documentation.
@@ -59,13 +86,13 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   
 ## [1.4.0] - January 18, 2021
 
-* Added convenience property `scheme` to FlexColorScheme factories light and dark. This a shortcut for
+* **Feature:** Added convenience property `scheme` to FlexColorScheme factories light and dark. This a shortcut for
   using the built-in color schemes. The `colors` property can still be used as before. The `.light` and
   `.dark` factories no longer have any required properties. If `scheme` is not provided it defaults 
   to `FlexScheme.material` and if both `scheme` and `colors` are provided, the scheme provided via `colors` prevail.
-* Updated the simple example 1 to use the new `scheme` property, as in 
+* **Examples:** Updated the simple example 1 to use the new `scheme` property, as in 
   `theme: FlexColorScheme.light(scheme: FlexScheme.mandyRed).toTheme`.  
-* Added experimental support for transparent system navigation bar for Android for SDK >= 30 (Android 11).
+* **Feature:** Added experimental support for transparent system navigation bar for Android for SDK >= 30 (Android 11).
   The support is added via new `opacity` property in `FlexColorScheme.themedSystemNavigationBar`.    
   
   A separate example that builds
@@ -74,7 +101,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   navigation bar in Android, when transparency is not supported, and your app uses transparent system navigation 
   bar when running on an API level that supports it. Please see this separate small stand-alone example Android project
   [**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for more information.    
-* Added more tests, now 689 tests. All color values used are now also tested, any modification to them is considered
+* **Tests:** Added more tests, now 689 tests. All color values used are now also tested, any modification to them is considered
   a breaking change. A bit more tests would still be nice, for the ThemeModeSwitch Widget at least.
   Total test coverage > 98%, it will do for now.
 * **Documentation:** 

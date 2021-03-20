@@ -690,7 +690,7 @@ class _HomePageState extends State<HomePage> {
       // page wrapper the system navigation bar in Android will not change
       // theme color as we change themes for the page. This is a
       // Flutter "feature", but with this annotated region we can have the
-      // navigation bar at least follow the background color and theme-mode,
+      // navigation bar at least follow desired background color and theme-mode,
       // which looks nicer and as it should on an Android device.
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
