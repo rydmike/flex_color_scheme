@@ -103,10 +103,10 @@ enum FlexSystemNavBarStyle {
   /// color blend that the scaffoldBackground color has received will be used.
   scaffoldBackground,
 
-  /// Experimental feature. The goal is that it will make the system
-  /// navigation bar fully transparent on Android, showing the background while
-  /// navigation buttons are floating over the background. This only works
-  /// if it is also been configured in Android embedder and on SDK 30 or higher.
+  /// An experimental feature. The goal is to make the system
+  /// navigation bar fully transparent, showing the background, while navigation
+  /// buttons float over the background. This feature only works if it is also
+  /// configured in the Android embedder and on SDK 30 or higher.
   /// More information in this example: https://github.com/rydmike/sysnavbar
   transparent,
 }
@@ -1354,9 +1354,9 @@ class FlexColorScheme with Diagnosticable {
     bool invertStatusIcons = false,
 
     /// The [FlexSystemNavBarStyle] used to determine the background color
-    /// used for the system navigation bar. Used when systemNavigationBarColor
-    /// is null and context is not null, when the corresponding theme color can
-    /// be used.
+    /// for the system navigation bar. Used when systemNavigationBarColor
+    /// is null and context is not null, so theme colors corresponding to it
+    /// can be used for the background color.
     ///
     /// Defaults to [FlexSystemNavBarStyle.background].
     FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.background,
@@ -1366,12 +1366,14 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// The point with this static helper is to give you a background color
     /// themed system navigation bar automatically. If you for some reason
-    /// want a different color you can still override it.
+    /// want a different color you can still override it this property.
     ///
     /// If `context` is null, `nullContextBrightness` will be used as brightness
     /// value and it will determine if the background is white (for
-    /// Brightness.light) or black (for Brightness.dark). The null context is
-    /// mostly used for unit testing with no context.
+    /// Brightness.light) or black (for Brightness.dark) if this property is
+    /// also null. The null context is mostly used for simple unit testing
+    /// with no context, but can also be used to make a `SystemUiOverlayStyle`
+    /// with this helper without having a context.
     Color? systemNavigationBarColor,
 
     /// Optional color for the system navigation bar divider. A divider will
@@ -1379,15 +1381,18 @@ class FlexColorScheme with Diagnosticable {
     /// value was given to it.
     ///
     /// If a color is not given the `Color(0xFF2C2C2C)` will be used in
-    /// dark mode and the color `Color(0xFFDDDDDD)` will be used in light mode
+    /// dark mode and the color `Color(0xFFDDDDDD)` will be used in light mode,
     /// as the divider color for the system navigation bar.
     ///
     /// The divider on the navigation bar, is only respected on Android P
     /// (= Pie = API 28 = Android 9) or higher.
     Color? systemNavigationBarDividerColor,
 
-    /// Brightness used if context is null, mostly used for unit testing,
-    /// with no context present.
+    /// Brightness used if context is null, mostly used for simple unit testing,
+    /// with no context present. However, it can also be used to make a
+    /// `SystemUiOverlayStyle` with this helper without having a context.
+    ///
+    /// Defaults to Brightness.light.
     Brightness nullContextBrightness = Brightness.light,
 
     /// Deprecated property, use systemNavigationBarColor instead.
@@ -1403,13 +1408,13 @@ class FlexColorScheme with Diagnosticable {
     if (opacity > 1) opacity = 1;
 
     // If systemNavigationBarColor is null, we assign nullContextBackground
-    // to it, that may also be null. Done for backwards compatibility.
+    // to it, that may also be null. This is done for backwards compatibility.
     systemNavigationBarColor ??= nullContextBackground;
 
-    // If we don't have a system nav bar color by now,and we are using
+    // If we don't have a system nav bar color by now, and we are using
     // `systemNavBarStyle` transparent, we should set opacity 0.01 to ensure
     // transparency, not fully transparent though, because that will result
-    // in a scrim being added on Android.
+    // in a scrim being added on the Android system navigation bar.
     if (systemNavigationBarColor != null &&
         systemNavBarStyle == FlexSystemNavBarStyle.transparent) {
       opacity = 0.01; // ignore: parameter_assignments
@@ -1421,7 +1426,7 @@ class FlexColorScheme with Diagnosticable {
         : nullContextBrightness == Brightness.dark;
 
     // Get the defined effective background color for the used style.
-    final Color _flexBackGround = (context != null)
+    final Color _flexBackground = (context != null)
         ? systemNavBarStyle == FlexSystemNavBarStyle.system
             ? (isDark ? Colors.black : Colors.white)
             : systemNavBarStyle == FlexSystemNavBarStyle.background
@@ -1435,28 +1440,26 @@ class FlexColorScheme with Diagnosticable {
         : (isDark ? Colors.black : Colors.white);
 
     // If a systemNavigationBarColor color is given, it will always be used,
-    // If it is not given and we have a context, we use colorscheme background.
-    // If we have no context, the systemNavigationBarColor is used if we
-    // have a color, if not, it is black in dark mode and white in light mode.
-    final Color background = systemNavigationBarColor ?? _flexBackGround;
+    // If it is not given, we use above _flexBackground.
+    final Color background = systemNavigationBarColor ?? _flexBackground;
 
     // Use provided `systemNavigationBarDividerColor` if a value was given
     // or fallback to suitable theme mode default divider colors if no
-    // colors given.
+    // color was given.
     //
     // The used default system navigation bar divider colors below were tuned
     // to fit well with most color schemes and possible surface branding.
-    // Using the theme divider color does not work as the system call does
+    // Using the theme divider color does not work, as the system call does
     // not use the alpha channel value in the passed in color, default divider
-    // color of the theme uses alpha, using it does not look good at all.
+    // color of the theme uses alpha, using it here does not look good at all.
     final Color dividerColor = systemNavigationBarDividerColor ??
         (isDark ? const Color(0xFF2C2C2C) : const Color(0xFFDDDDDD));
 
     return SystemUiOverlayStyle(
-      // The top status bar settings. If no params are set that indicates we
-      // on purpose want to adjust it because there is no `AppBar` we should
-      // just pass null to avoid changing any of its values controlled by the
-      // `AppBar` and its theme.
+      // The top status bar settings.
+      // If no params are set that indicates we on purpose want to adjust it
+      // because there is no `AppBar`, we must pass null to avoid changing any
+      // of its values controlled by the `AppBar` and its theme.
       statusBarColor: noAppBar ? Colors.transparent : null,
       statusBarBrightness:
           noAppBar ? (isDark ? Brightness.dark : Brightness.light) : null,
@@ -1467,9 +1470,8 @@ class FlexColorScheme with Diagnosticable {
           : null,
       // The bottom navigation bar settings.
       systemNavigationBarColor: background.withOpacity(opacity),
-      // TODO: Add final config for this.
-      // When not using the divider, setting it to same style as whatever
-      // the background is, should in theory remove it. To be tested.
+      // When not using the divider, we set it to same color as
+      // the background is to keep it invisible, it is never null though.
       systemNavigationBarDividerColor:
           useDivider ? dividerColor : background.withOpacity(opacity),
       systemNavigationBarIconBrightness:
