@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
-## [2.1.0] - March 21, 2021
+## [2.1.0] - March 22, 2021
 
 * **Fix:** Toggling `FlexColorScheme(transparentStatusBar)` from true to false, did not restore the
   Android default status bar scrim, unless the app was completely rebuilt. This has been fixed.

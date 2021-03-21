@@ -1280,6 +1280,9 @@ like shown below:
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FlexSchemeAppBar.gif?raw=true" alt="AppBar StatusBar" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FlexSchemeNavBar.gif?raw=true" alt="SysNavBar Style" width="250"/>
 
+The top status bar scrim toggle and system navigation divider and sysem navbar style only work on Android builds 
+and do not have any functionality on the live Web example.
+
 > **NOTE:**  
 > The static helper `FlexColorScheme.themedSystemNavigationBar(context, ...)` is designed to provide a convenience
 > wrapper for a `SystemUiOverlayStyle` that works for screens that use and adhere to current theme mode colors.
@@ -1301,7 +1304,7 @@ The above concludes the code walk through of example 5. When we build it, the ex
 the **deep blue sea** scheme. In the example below we can also see the correctly
 themed system navigation bar on the Android device.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5al.png?raw=true" alt="ColorScheme example 5 light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5al.png?raw=true" alt="ColorScheme example 5 light" width="300"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="300"/>
 
 Try example 5 live on the [**web here**](https://rydmike.com/flexcolorscheme5)
 

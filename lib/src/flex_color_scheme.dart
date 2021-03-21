@@ -1303,9 +1303,9 @@ class FlexColorScheme with Diagnosticable {
   /// [systemNavigationBarDividerColor]. The call to set and use the divider
   /// color is only made once a none null value has been given to [useDivider].
   /// Android does not use any provided alpha value on the color of the
-  /// divider color and calling it with null again will not remove it, thus
-  /// for working with transparent system navigation bars, never set any divider
-  /// because you can't get rid of it once it has been set.
+  /// divider color and calling it with null again will not remove it. Unless
+  /// you are working with experimental transparent system navigation bars. If
+  /// you are, then transparency or alpha channel on the divider also works.
   ///
   /// Use and support for the [opacity] value on the system navigation bar
   /// is EXPERIMENTAL, it ONLY works on Android API 30 (=Android 11) or higher.
@@ -1325,9 +1325,9 @@ class FlexColorScheme with Diagnosticable {
 
     /// Use a divider line on the top edge of the system navigation bar.
     ///
-    /// Defaults to null. Keeping it null, byt omission or passing null always
+    /// Defaults to null. Keeping it null, by omission or passing null, always
     /// omits the call to set any divider color in the created
-    /// [SystemUiOverlayStyle]
+    /// [SystemUiOverlayStyle].
     ///
     /// The divider on the navigation bar, is only respected on Android P
     /// (= Pie = API 28 = Android 9) or higher.
@@ -1484,7 +1484,9 @@ class FlexColorScheme with Diagnosticable {
     // Using the theme divider color does not work, as Android system calls do
     // not use the alpha channel value in the passed color. Default divider
     // theme color uses alpha, using it here does not look good at all as the
-    // alpha channel value is not used.
+    // alpha channel value is not used. If you are working with enabled
+    // transparent system navigation bar on Android API 30 or higher, then
+    // opacity on the divider also works as expected.
     //
     // The logic below is intended to keep the `dividerColor` used in the
     // [SystemUiOverlayStyle] as null as long as `useDivider` is null. As soon
@@ -1495,18 +1497,13 @@ class FlexColorScheme with Diagnosticable {
     // with a null color value after it has been enabled with any known
     // `SystemUiOverlayStyle` and `SystemChrome` call. The false value then
     // provide means to at least hide it again, but it will still be there.
-    // This can be observed if you use transparent sys navbar, so never enable
-    // the divider if you intend to use system navigation bars that are fully
-    // transparent, you won't be able to get rid of it again from Flutter side
-    // without removing it and rebuilding the app.
     //
     // Worth noticing is also the the opacity does not really have any effect on
-    // divider color in current versions of Android. We apply it here anyway
-    // in case it does some day. It would be nice if it was supported for two
-    // reasons:
-    //   1. We could use Flutter default Divider theme color as its color.
-    //   2. We could make it invisible on transparent nav bars after it has
-    //      has been enabled as well.
+    // divider color in most versions of Android. We apply it here anyway
+    // because if you are experimenting with transparent system navigation bar
+    // on Android API30 or higher it does work. It would be nice if it worked
+    // on lower version and without adjusting the Android embedder, then we
+    // could use Flutter default Divider theme color as its color.
     Color? dividerColor;
 
     if (useDivider == null) {
