@@ -4,11 +4,11 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 
 ## [2.1.0] - March 21, 2021
 
-* **Bugfix:** Toggling `FlexColorScheme(transparentStatusBar)` from true to false, did not restore the
+* **Fix:** Toggling `FlexColorScheme(transparentStatusBar)` from true to false, did not restore the
   Android default status bar scrim, unless the app was completely rebuilt. This has been fixed.
-* **Bugfix:** When using `FlexColorScheme.themedSystemNavigationBar(useDivider)` in an `AnnotatedRegion`, toggling
+* **Fix:** When using `FlexColorScheme.themedSystemNavigationBar(useDivider)` in an `AnnotatedRegion`, toggling
   `useDivider` from true to false, did not remove the system navigation bar divider again, unless the 
-  app was completely rebuilt. This has been fixed. 
+  app was completely rebuilt. This has been fixed, see API docs for more info. 
 * **Feature:** The `FlexColorScheme.themedSystemNavigationBar` for styling the system navigation bar got a
   new convenience property `systemNavBarStyle` that takes a `FlexSystemNavBarStyle` enum with values:
   * `system`:  For default white system nav bar in light theme and black in dark theme mode.
@@ -25,9 +25,9 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
     showing the background, while navigation buttons float over the background. This feature only works if it is 
     also configured in the Android embedder and on SDK 30 or higher.
     More information in this example: https://github.com/rydmike/sysnavbar
-* **Examples:** Added statusbar scrim toggle and system navigation divider and navbar style toggles to example 5.
+* **Examples:** Added top status bar scrim toggle and system navigation divider and navbar style toggles to example 5.
   These only work on Android builds and do not have any functionality on the live Web builds.
-* **Tests:** Added tests for the new features. Total 675, coverage
+* **Tests:** Added tests for the new features. Total 686 test, coverage 99.75%.
 
 ## [2.0.0] - March 15, 2021
 
@@ -243,11 +243,11 @@ These are the topics I currently have on the TODO list for this package. Have a 
 Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_scheme/issues) in the repo. 
 
 ### TODO
- 
-- Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
-- Version 2.1.0 Release even more color schemes. Making schemes is fun, documenting the changes a bit less so.
+
+- Version 2.2.0 Release even more color schemes. Making schemes is fun, documenting the changes a bit less so.
 
 ### COMPLETED
+- Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
 - Version 2.0.0-nullsafety.2: Minor new APIs and features added. Example 5 updated.
 - This [#71184](https://github.com/flutter/flutter/pull/71184) landed in Flutter 2.0.0. The past custom "white" 
   AppBarTheme implementation was as planned changed to the new one that is supported by the SDK.  
