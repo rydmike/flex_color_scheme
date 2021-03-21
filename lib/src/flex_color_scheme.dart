@@ -2179,26 +2179,32 @@ class FlexColorScheme with Diagnosticable {
             ? const IconThemeData(color: Colors.white)
             : const IconThemeData(color: Colors.black87),
         elevation: appBarElevation,
-        // TODO: Trying to use AppBarTheme overlay style here to style sysnav.
         systemOverlayStyle: SystemUiOverlayStyle(
           // AppBar overlay style.
           statusBarColor: transparentStatusBar
               ? Colors.transparent
+              // This is the actual scrim color used by Android by default,
+              // here we just re-apply if false or if it had been removed
+              // earlier, using `null` does not restore we need the actual used
+              // scrim by Android ro restore if it has been removed earlier.
               : const Color(0x40000000),
           statusBarBrightness: _appBarBrightness,
           statusBarIconBrightness: _appBarBrightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
-          // System navbar overlay - The one used by default AppBar in SDK:
+
+          // The systemNavigationBarColor used by default AppBar in SDK:
           systemNavigationBarColor: const Color(0xFF000000),
           // Would be nice if this worked instead of above, but it does not:
           // systemNavigationBarColor: _isDark ? Colors.black : Colors.white;,
-          // System navbar overlay - The one used by default AppBar in SDK:
+
+          // The systemNavigationBarIconBrightness used by the AppBar in SDK:
           systemNavigationBarIconBrightness: Brightness.dark,
           // Would be nice if this worked instead of above, but it does not:
           // systemNavigationBarIconBrightness:
           //     _isDark ? Brightness.light : Brightness.dark,
-          // System navbar overlay - The one used by default AppBar in SDK:
+
+          // The systemNavigationBarDividerColor used by default AppBar in SDK:
           // ignore: avoid_redundant_argument_values
           systemNavigationBarDividerColor: null,
         ),
