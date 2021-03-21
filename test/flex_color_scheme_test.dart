@@ -598,12 +598,11 @@ void main() {
 
     test(
         'FCS5.01: GIVEN all default values '
-        'EXPECT white system navbar, with no visible divider', () {
+        'EXPECT white system navbar, with NO divider', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(null),
         const SystemUiOverlayStyle(
           systemNavigationBarColor: Colors.white,
-          systemNavigationBarDividerColor: Colors.white,
           systemNavigationBarIconBrightness: Brightness.dark,
         ),
       );
@@ -614,7 +613,6 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
         ),
         const SystemUiOverlayStyle(
@@ -625,12 +623,11 @@ void main() {
       );
     });
     test(
-        'FCS5.03: GIVEN Brightness.light divider:false + defined color '
+        'FCS5.03: GIVEN Brightness.light divider:true + defined color '
         'EXPECT defined colored system navbar, with default divider.', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: true,
           // Testing that the deprecated member still works as it should.
           // ignore: deprecated_member_use_from_same_package
@@ -661,11 +658,10 @@ void main() {
     });
     test(
         'FCS5.05: GIVEN Brightness.dark divider:false '
-        'EXPECT black system navbar, with NO visible divider', () {
+        'EXPECT black system navbar, with no visible divider', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           nullContextBrightness: Brightness.dark,
         ),
@@ -682,7 +678,6 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           nullContextBrightness: Brightness.dark,
           // Testing that new color works as it should.
@@ -701,7 +696,6 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           nullContextBrightness: Brightness.dark,
           // Testing that the deprecated member still works as it should.
@@ -721,7 +715,6 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           nullContextBrightness: Brightness.dark,
           // Testing that the deprecated member still works as it should.
@@ -730,7 +723,6 @@ void main() {
         ),
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           nullContextBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFF202020),
@@ -743,7 +735,6 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: true,
           nullContextBrightness: Brightness.dark,
           // Testing that the deprecated member still works as it should.
@@ -764,7 +755,6 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           nullContextBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFF4545F3),
@@ -786,7 +776,6 @@ void main() {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           opacity: 100,
           nullContextBrightness: Brightness.dark,
@@ -844,41 +833,41 @@ void main() {
     test(
         'FCS5.08a: GIVEN Brightness.dark divider:true + defined new color '
         '+ opacity = 0 EXPECT fully transparent defined colored system '
-        'navbar, with divider .', () {
+        'navbar and divider .', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
           useDivider: true,
-          // ignore: avoid_redundant_argument_values
           opacity: 0,
           nullContextBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFF202020),
         ),
-        const SystemUiOverlayStyle(
-          systemNavigationBarColor: Color(0x00202020),
-          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+        SystemUiOverlayStyle(
+          systemNavigationBarColor: const Color(0x00202020).withOpacity(0),
+          systemNavigationBarDividerColor:
+              const Color(0xFF2C2C2C).withOpacity(0),
           systemNavigationBarIconBrightness: Brightness.light,
         ),
       );
     });
     test(
         'FCS5.08b: GIVEN Brightness.dark divider:true + defined old color '
-        '+ opacity = 0 EXPECT fully transparent defined colored system '
-        'navbar, with divider .', () {
+        '+ opacity = 0.5 EXPECT fully transparent defined colored system '
+        'navbar, and divider with opacity 0.5.', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
           useDivider: true,
-          // ignore: avoid_redundant_argument_values
-          opacity: 0,
+          opacity: 0.5,
           nullContextBrightness: Brightness.dark,
           // Testing that the deprecated member still works as it should.
           // ignore: deprecated_member_use_from_same_package
           nullContextBackground: const Color(0xFF202020),
         ),
-        const SystemUiOverlayStyle(
-          systemNavigationBarColor: Color(0x00202020),
-          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+        SystemUiOverlayStyle(
+          systemNavigationBarColor: const Color(0x00202020).withOpacity(0.5),
+          systemNavigationBarDividerColor:
+              const Color(0xFF2C2C2C).withOpacity(0.5),
           systemNavigationBarIconBrightness: Brightness.light,
         ),
       );
@@ -886,7 +875,7 @@ void main() {
     test(
         'FCS5.09: GIVEN Brightness.dark divider:true + defined new color '
         '+ opacity < 0 EXPECT fully transparent defined colored system '
-        'navbar, with divider .', () {
+        'navbar and divider .', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
@@ -896,9 +885,10 @@ void main() {
           nullContextBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFF202020),
         ),
-        const SystemUiOverlayStyle(
-          systemNavigationBarColor: Color(0x00202020),
-          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+        SystemUiOverlayStyle(
+          systemNavigationBarColor: const Color(0x00202020).withOpacity(0),
+          systemNavigationBarDividerColor:
+              const Color(0xFF2C2C2C).withOpacity(0),
           systemNavigationBarIconBrightness: Brightness.light,
         ),
       );
@@ -958,7 +948,6 @@ void main() {
         FlexColorScheme.themedSystemNavigationBar(
           null,
           noAppBar: true,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           // ignore: avoid_redundant_argument_values
           nullContextBrightness: Brightness.light,
@@ -984,7 +973,6 @@ void main() {
           null,
           noAppBar: true,
           invertStatusIcons: true,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           // ignore: avoid_redundant_argument_values
           nullContextBrightness: Brightness.light,
@@ -1011,7 +999,6 @@ void main() {
         FlexColorScheme.themedSystemNavigationBar(
           null,
           noAppBar: true,
-          // ignore: avoid_redundant_argument_values
           useDivider: false,
           systemNavigationBarDividerColor: const Color(0xFF2196F3),
           systemNavigationBarColor: const Color(0xFFF44336),
@@ -1031,6 +1018,37 @@ void main() {
 
     test(
         'FCS5.15: GIVEN Brightness.light divider:true, '
+        'systemNavigationBarDividerColor: blue, '
+        'systemNavigationBarColor: red, '
+        'noAppBar: true '
+        'opacity: 0.5 '
+        'EXPECT red system navbar, with blue divider both with opacity 0.5 '
+        'status bar and normal dark status icons.', () {
+      expect(
+        FlexColorScheme.themedSystemNavigationBar(
+          null,
+          noAppBar: true,
+          useDivider: true,
+          opacity: 0.5,
+          systemNavigationBarDividerColor: const Color(0xFF2196F3),
+          systemNavigationBarColor: const Color(0xFFF44336),
+          // ignore: avoid_redundant_argument_values
+          nullContextBrightness: Brightness.light,
+        ),
+        SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: const Color(0xFFF44336).withOpacity(0.5),
+          systemNavigationBarDividerColor:
+              const Color(0xFF2196F3).withOpacity(0.5),
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
+      );
+    });
+
+    test(
+        'FCS5.16: GIVEN Brightness.light divider:true, '
         'systemNavigationBarDividerColor: blue, '
         'systemNavigationBarColor: red, '
         'noAppBar: true '
@@ -1068,10 +1086,10 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
 
     testWidgets(
-        'FCS5.01L: GIVEN A light theme with defined background colors AND '
+        'FCS5.01La: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.system '
-        'EXPECT white system navbar, with no visible divider.',
+        'EXPECT white system navbar, with NO divider.',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         Theme(
@@ -1092,6 +1110,43 @@ void main() {
                 ),
                 const SystemUiOverlayStyle(
                   systemNavigationBarColor: Colors.white,
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS5.01Lb: GIVEN A light theme with defined background colors AND '
+        'themedSystemNavigationBar WITH useDivider:false '
+        'systemNavBarStyle: FlexSystemNavBarStyle.system divider:false '
+        'EXPECT white system navbar, with no visible divider.',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.light(
+              background: Color(0xFF90CAF9),
+              surface: Color(0xFFBBDEFB),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFFE3F2FD),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.system,
+                  useDivider: false,
+                ),
+                const SystemUiOverlayStyle(
+                  systemNavigationBarColor: Colors.white,
                   systemNavigationBarDividerColor: Colors.white,
                   systemNavigationBarIconBrightness: Brightness.dark,
                 ),
@@ -1105,10 +1160,10 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.02L: GIVEN A light theme with defined background colors AND '
+        'FCS5.02La: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground '
-        'EXPECT scaffoldBackground system navbar, with no visible divider.',
+        'EXPECT scaffoldBackground system navbar, with NO divider.',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         Theme(
@@ -1130,6 +1185,44 @@ void main() {
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS5.02Lb: GIVEN A light theme with defined background colors AND '
+        'themedSystemNavigationBar WITH useDivider:false '
+        'systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground '
+        'EXPECT scaffoldBackground system navbar, with no visible divider.',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.light(
+              background: Color(0xFF90CAF9),
+              surface: Color(0xFFBBDEFB),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFFE3F2FD),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground,
+                  useDivider: false,
+                ),
+                SystemUiOverlayStyle(
+                  systemNavigationBarColor:
+                      Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarDividerColor:
                       Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.dark,
@@ -1144,10 +1237,10 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.03L: GIVEN A light theme with defined background colors AND '
+        'FCS5.03La: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
-        'EXPECT surface colored system navbar, with no visible divider.',
+        'EXPECT surface colored system navbar, with NO divider.',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         Theme(
@@ -1169,6 +1262,44 @@ void main() {
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS5.03Lb: GIVEN A light theme with defined background colors AND '
+        'themedSystemNavigationBar WITH useDivider:false '
+        'systemNavBarStyle: FlexSystemNavBarStyle.surface '
+        'EXPECT surface colored system navbar, with no visible divider.',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.light(
+              background: Color(0xFF90CAF9),
+              surface: Color(0xFFBBDEFB),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFFE3F2FD),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.surface,
+                  useDivider: false,
+                ),
+                SystemUiOverlayStyle(
+                  systemNavigationBarColor:
+                      Theme.of(context).colorScheme.surface,
                   systemNavigationBarDividerColor:
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.dark,
@@ -1183,8 +1314,46 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.04L: GIVEN A light theme with defined background colors AND '
+        'FCS5.04La: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
+        'systemNavBarStyle: FlexSystemNavBarStyle.background '
+        'EXPECT background colored system navbar, with NO divider.',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.light(
+              background: Color(0xFF90CAF9),
+              surface: Color(0xFFBBDEFB),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFFE3F2FD),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  // ignore: avoid_redundant_argument_values
+                  systemNavBarStyle: FlexSystemNavBarStyle.background,
+                ),
+                SystemUiOverlayStyle(
+                  systemNavigationBarColor:
+                      Theme.of(context).colorScheme.background,
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS5.04Lb: GIVEN A light theme with defined background colors AND '
+        'themedSystemNavigationBar WITH  useDivider:false '
         'systemNavBarStyle: FlexSystemNavBarStyle.background '
         'EXPECT background colored system navbar, with no visible divider.',
         (WidgetTester tester) async {
@@ -1205,6 +1374,7 @@ void main() {
                   context,
                   // ignore: avoid_redundant_argument_values
                   systemNavBarStyle: FlexSystemNavBarStyle.background,
+                  useDivider: false,
                 ),
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
@@ -1289,7 +1459,8 @@ void main() {
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                  systemNavigationBarDividerColor: const Color(0xFFDDDDDD),
+                  systemNavigationBarDividerColor:
+                      const Color(0xFFDDDDDD).withOpacity(0.5),
                   systemNavigationBarIconBrightness: Brightness.dark,
                 ),
               );
@@ -1342,13 +1513,56 @@ void main() {
       );
     });
 
-    //---
+    testWidgets(
+        'FCS5.08L: GIVEN A light theme with defined background colors AND '
+        'themedSystemNavigationBar WITH NO divider and '
+        'systemNavBarStyle: FlexSystemNavBarStyle.transparent and opacity:0.5 '
+        'EXPECT scaffoldBackground colored system navbar with 0.01 opacity, '
+        'with no visible divider.', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.light(
+              background: Color(0xFF90CAF9),
+              surface: Color(0xFFBBDEFB),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFFE3F2FD),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.transparent,
+                  useDivider: false,
+                  opacity: 0.5,
+                ),
+                SystemUiOverlayStyle(
+                  systemNavigationBarColor: Theme.of(context)
+                      .scaffoldBackgroundColor
+                      .withOpacity(0.01),
+                  systemNavigationBarDividerColor: Theme.of(context)
+                      .scaffoldBackgroundColor
+                      .withOpacity(0.01),
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    // Tests for dark mode
 
     testWidgets(
-        'FCS5.01D: GIVEN A dark theme with defined background colors AND '
+        'FCS5.01Da: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.system '
-        'EXPECT black system navbar, with no visible divider.',
+        'EXPECT black system navbar, with NO divider.',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         Theme(
@@ -1369,6 +1583,43 @@ void main() {
                 ),
                 const SystemUiOverlayStyle(
                   systemNavigationBarColor: Colors.black,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS5.01Db: GIVEN A dark theme with defined background colors AND '
+        'themedSystemNavigationBar WITH useDivider: false '
+        'systemNavBarStyle: FlexSystemNavBarStyle.system '
+        'EXPECT black system navbar, with no visible divider.',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.dark(
+              background: Color(0xFF303030),
+              surface: Color(0xFF424242),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFF212121),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.system,
+                  useDivider: false,
+                ),
+                const SystemUiOverlayStyle(
+                  systemNavigationBarColor: Colors.black,
                   systemNavigationBarDividerColor: Colors.black,
                   systemNavigationBarIconBrightness: Brightness.light,
                 ),
@@ -1382,10 +1633,10 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.02D: GIVEN A dark theme with defined background colors AND '
+        'FCS5.02Da: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground '
-        'EXPECT scaffoldBackground system navbar, with no visible divider.',
+        'EXPECT scaffoldBackground system navbar, with NO divider.',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         Theme(
@@ -1407,6 +1658,44 @@ void main() {
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS5.02Db: GIVEN A dark theme with defined background colors AND '
+        'themedSystemNavigationBar WITH useDivider: false '
+        'systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground '
+        'EXPECT scaffoldBackground system navbar, with no visible divider.',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.dark(
+              background: Color(0xFF303030),
+              surface: Color(0xFF424242),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFF212121),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground,
+                  useDivider: false,
+                ),
+                SystemUiOverlayStyle(
+                  systemNavigationBarColor:
+                      Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarDividerColor:
                       Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.light,
@@ -1421,10 +1710,10 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.03D: GIVEN A dark theme with defined background colors AND '
+        'FCS5.03Da: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
-        'EXPECT surface colored system navbar, with no visible divider.',
+        'EXPECT surface colored system navbar, with NO divider.',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         Theme(
@@ -1446,6 +1735,44 @@ void main() {
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS5.03Db: GIVEN A dark theme with defined background colors AND '
+        'themedSystemNavigationBar WITH '
+        'systemNavBarStyle: FlexSystemNavBarStyle.surface '
+        'EXPECT surface colored system navbar, with no visible divider.',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.dark(
+              background: Color(0xFF303030),
+              surface: Color(0xFF424242),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFF212121),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.surface,
+                  useDivider: false,
+                ),
+                SystemUiOverlayStyle(
+                  systemNavigationBarColor:
+                      Theme.of(context).colorScheme.surface,
                   systemNavigationBarDividerColor:
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.light,
@@ -1460,7 +1787,45 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.04D: GIVEN A dark theme with defined background colors AND '
+        'FCS5.04Da: GIVEN A dark theme with defined background colors AND '
+        'themedSystemNavigationBar WITH '
+        'systemNavBarStyle: FlexSystemNavBarStyle.background '
+        'EXPECT background colored system navbar, with NO divider.',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.dark(
+              background: Color(0xFF303030),
+              surface: Color(0xFF424242),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFF212121),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  // ignore: avoid_redundant_argument_values
+                  systemNavBarStyle: FlexSystemNavBarStyle.background,
+                ),
+                SystemUiOverlayStyle(
+                  systemNavigationBarColor:
+                      Theme.of(context).colorScheme.background,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS5.04Db: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.background '
         'EXPECT background colored system navbar, with no visible divider.',
@@ -1482,6 +1847,7 @@ void main() {
                   context,
                   // ignore: avoid_redundant_argument_values
                   systemNavBarStyle: FlexSystemNavBarStyle.background,
+                  useDivider: false,
                 ),
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
@@ -1542,7 +1908,7 @@ void main() {
         'FCS5.06D: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH divider and opacity 0.5 and '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
-        'EXPECT surface colored system navbar with 0.5 opacity , with divider.',
+        'EXPECT surface colored system navbar and divider with 0.5 opacity.',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         Theme(
@@ -1566,7 +1932,8 @@ void main() {
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                  systemNavigationBarDividerColor: const Color(0xFF2C2C2C),
+                  systemNavigationBarDividerColor:
+                      const Color(0xFF2C2C2C).withOpacity(0.5),
                   systemNavigationBarIconBrightness: Brightness.light,
                 ),
               );
@@ -1608,6 +1975,49 @@ void main() {
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
                   systemNavigationBarDividerColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS5.08D: GIVEN A dark theme with defined background colors AND '
+        'themedSystemNavigationBar WITH NO divider and '
+        'systemNavBarStyle: FlexSystemNavBarStyle.transparent and opacity:0.5 '
+        'EXPECT scaffoldBackground colored system navbar with 0.01 opacity, '
+        'with no visible divider.', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData.from(
+            colorScheme: const ColorScheme.dark(
+              background: Color(0xFF303030),
+              surface: Color(0xFF424242),
+            ),
+          ).copyWith(
+            scaffoldBackgroundColor: const Color(0xFF212121),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.transparent,
+                  useDivider: false,
+                  opacity: 0.5,
+                ),
+                SystemUiOverlayStyle(
+                  systemNavigationBarColor: Theme.of(context)
+                      .scaffoldBackgroundColor
+                      .withOpacity(0.01),
+                  systemNavigationBarDividerColor: Theme.of(context)
+                      .scaffoldBackgroundColor
+                      .withOpacity(0.01),
                   systemNavigationBarIconBrightness: Brightness.light,
                 ),
               );

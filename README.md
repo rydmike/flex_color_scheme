@@ -981,6 +981,8 @@ We can use this toggle to see and study the differences that `FlexColorScheme.to
    FlexAppBarStyle flexAppBarStyle = FlexAppBarStyle.primary;
    // Used to modify the themed app bar elevation.
    double appBarElevation = 0;
+   // Used to control if we use one or two toned status bar.
+   bool transparentStatusBar = false;
    // Enum used to select what tab bar style we use.
    FlexTabBarStyle flexTabBarStyle = FlexTabBarStyle.forAppBar;
    // If true, tooltip background will be light in light theme, and dark
@@ -1026,9 +1028,11 @@ this example, as well as the tooltip and true black setting for the dark theme.
              surfaceStyle: flexSurface,
              appBarStyle: flexAppBarStyle,
              appBarElevation: appBarElevation,
+             transparentStatusBar: transparentStatusBar,
              tabBarStyle: flexTabBarStyle,
              tooltipsMatchBackground: tooltipsMatchBackground,
              visualDensity: FlexColorScheme.comfortablePlatformDensity,
+             fontFamily: AppFonts.mainFont,
            ).toTheme
 ```
 
@@ -1052,9 +1056,11 @@ a [visual presentation of the differences](https://rydmike.com/colorscheme#the-d
                surfaceStyle: flexSurface,
                appBarStyle: flexAppBarStyle,
                appBarElevation: appBarElevation,
+               transparentStatusBar: transparentStatusBar,
                tabBarStyle: flexTabBarStyle,
                tooltipsMatchBackground: tooltipsMatchBackground,
                visualDensity: FlexColorScheme.comfortablePlatformDensity,
+               fontFamily: AppFonts.mainFont,
              ).toScheme,
            ).copyWith(
              visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -1109,10 +1115,12 @@ This is certainly also a usable option, but in this example we do not want this 
            surfaceStyle: flexSurface,
            appBarStyle: flexAppBarStyle,
            appBarElevation: appBarElevation,
+           transparentStatusBar: transparentStatusBar,
            tabBarStyle: flexTabBarStyle,
            tooltipsMatchBackground: tooltipsMatchBackground,
            darkIsTrueBlack: darkIsTrueBlack,
            visualDensity: FlexColorScheme.comfortablePlatformDensity,
+           fontFamily: AppFonts.mainFont,
          ).toTheme
 
        : ThemeData.from(
@@ -1123,10 +1131,12 @@ This is certainly also a usable option, but in this example we do not want this 
              surfaceStyle: flexSurface,
              appBarStyle: flexAppBarStyle,
              appBarElevation: appBarElevation,
+             transparentStatusBar: transparentStatusBar,
              tabBarStyle: flexTabBarStyle,
              tooltipsMatchBackground: tooltipsMatchBackground,
              darkIsTrueBlack: darkIsTrueBlack,
              visualDensity: FlexColorScheme.comfortablePlatformDensity,
+             fontFamily: AppFonts.mainFont,
            ).toScheme,
          ).copyWith(
              visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -1179,7 +1189,12 @@ solution should really be considered.
          onAppBarStyleChanged: (FlexAppBarStyle style) {
            setState(() { flexAppBarStyle = style; });
          },
-         // WUsed app bar elevation and change value callback.
+         // Used transparentStatusBar and change callback.
+         transparentStatusBar: transparentStatusBar,
+         onTransparentStatusBarChanged: (bool value) {
+           setState(() {transparentStatusBar = value; });
+         },
+         // Used app bar elevation and change value callback.
          appBarElevation: appBarElevation,
          onAppBarElevationChanged: (double value) {
            setState(() { appBarElevation = value; });
@@ -1239,21 +1254,40 @@ theming effect is more obvious.
 ### Example 5 - Themed System Navigation Bar in Android
 
 The HomePage's build method for this example starts by wrapping the entire page content in an `AnnotatedRegion`
-with a value that we get from the static helper `FlexColorScheme.themedSystemNavigationBar(context)`. 
+with a `SystemUiOverlayStyle` value that we get from the static helper
+`FlexColorScheme.themedSystemNavigationBar(context, ...)`. 
 
-Using this setup we can get a system navigation bar, typically on older Android phones that still uses one, that 
-also follows the active theme's background color and theme mode. The system navigation bar will get updated as 
+Using this we can get a system navigation bar, typically on older Android phones that still uses one, that 
+follows the active theme's background color and theme mode. The system navigation bar will get updated as 
 you select new themes, different background color branding style and strength, and 
 toggle dark and light theme mode. Many Flutter applications neglect or forget to include this feature in their themes.
 
 ```dart
    return AnnotatedRegion<SystemUiOverlayStyle>(
-     value: FlexColorScheme.themedSystemNavigationBar(context),
+     value: FlexColorScheme.themedSystemNavigationBar(
+       context,
+       systemNavBarStyle: systemNavBarStyle,
+       useDivider: useSysNavDivider,
+     ),
      child: ....
    );
 ```
 
-You can also use the `FlexColorScheme.themedSystemNavigationBar` to hide the status icons if you are not
+Above the `systemNavBarStyle` is a local `FlexSystemNavBarStyle` state variable tied to the same UI choice in the demo
+home screen and `useSysNavDivider` is local bool state variable. Together with the option to remove the status bar 
+scrim, you can have easy complete control of both the AppBar's status bar, and the system navigation bar look, 
+like shown below:
+
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FlexSchemeAppBar.gif?raw=true" alt="AppBar StatusBar" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FlexSchemeNavBar.gif?raw=true" alt="SysNavBar Style" width="250"/>
+
+> **NOTE:**  
+> The static helper `FlexColorScheme.themedSystemNavigationBar(context, ...)` is designed to provide a convenience
+> wrapper for a `SystemUiOverlayStyle` that works for screens that use and adhere to current theme mode colors.
+> If your application use screens that do not follow the current theme, then just use `SystemUiOverlayStyle`
+> directly in the annotated region for such screens to define their desired style. You can also make your own 
+> convenience wrapper function or even just a const value for it if you need to use a fixed style and design frequently.
+
+You can also use the `FlexColorScheme.themedSystemNavigationBar` to hide the top status icons if you are not
 using an app bar at all. This can be useful e.g. on a splash or onboarding page. Example 5 contains 3 different
 examples, each with their own limitations, read more in the example 5 source code comments on how it
 can be used, here what they look like. The last Example SplashPage 2, would be the ideal version, and it 
@@ -1850,31 +1884,31 @@ This table lists all current built-in schemes and provides a link to a high-reso
 
 | FlexScheme   | Name                   | Description | Light | Dark |
 | ----         | ----                   | ----        | ----  | ---- |
-| material     | Material default       | Default Material color theme, used in the design guide. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb01.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme001.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb01.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme001.png?raw=true) |
-| materialHc   | Material high contrast | High contrast Material design guide theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb02.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme002.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb02.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme002.png?raw=true) |
-| blue         | Blue delight           | Blue color theme, based on Material blue and light blue colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb03.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme003.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb03.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme003.png?raw=true) |
-| indigo       | Indigo nights          | Indigo color theme, based on Material indigo and deep purple colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb04.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme004.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb04.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme004.png?raw=true) |
-| hippieBlue   | Hippie blue            | Hippie blue with surfie green and chock coral pink theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb05.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme005.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb05.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme005.png?raw=true) |
-| aquaBlue     | Aqua blue              | Aqua tropical ocean blue theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb06.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme006.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb06.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme006.png?raw=true) |
-| brandBlue    | Brand blues            | A mixture of blue colors from well known web brands. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb07.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme007.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb07.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme007.png?raw=true) |
-| deepBlue     | Deep blue sea          | Dark deep blue sea color theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb08.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme008.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb08.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme008.png?raw=true) |
-| sakura       | Pink sakura            | Pink color theme, based on sakura cherry blossom like colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb09.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme009.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb09.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme009.png?raw=true) |
-| mandyRed     | Oh Mandy red           | Mandy red and Viking blue colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb10.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme010.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb10.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme010.png?raw=true) |
-| red          | Red tornado            | Red color theme, based on Material red and pink colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb11.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme011.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb11.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme011.png?raw=true) |
-| redWine      | Red red wine           | Red color theme, based on red wine like colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb12.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme012.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb12.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme012.png?raw=true) |
-| purpleBrown  | Purple brown           | Purple brown tinted aubergine and eggplant colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb13.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme013.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb13.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme013.png?raw=true) |
-| green        | Green forest           | Green color theme, based on Material green and cyan colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb14.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme014.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb14.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme014.png?raw=true) |
-| money        | Green money            | Green money and finance style color theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb15.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme015.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb15.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme015.png?raw=true) |
-| jungle       | Green jungle           | Green jungle and rain forest color theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb16.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme016.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb16.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme016.png?raw=true) |
-| greyLaw      | Grey law               | Material blue grey and ultra dark purple color theme. Colors suitable for law firms.  | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb17.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme017.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb17.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme017.png?raw=true) |
-| wasabi       | Willow and wasabi      | Wild Willow and wasabi green with orchid purple inspired colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb18.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme018.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb18.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme018.png?raw=true) |
-| gold         | Gold sunset            | Gold sunset color theme, based on orange like colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb19.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme019.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb19.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme019.png?raw=true) |
-| mango        | Mango mojito           | Orange and green Mango mojito color theme.  | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb20.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme020.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb20.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme020.png?raw=true) |
-| amber        | Amber blue             | Amber blaze and blue color theme, based on Material amber and blue accent colors, a high-contrast theme. An alternative to the default Material high contrast theme.| [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb21.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme021.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb21.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme021.png?raw=true)|
-| vesuviusBurn | Vesuvius burned        | Vesuvius burned orange and eden green theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb22.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme022.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb22.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme022.png?raw=true) |
-| deepPurple   | Deep purple            | Deep purple daisy bush theme, based on Material deepPurple and lightBlueAccent colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb23.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme023.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb23.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme023.png?raw=true)|
-| ebonyClay    | Ebony clay             | Ebony clay dark blue-grey and watercourse green colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb24.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme024.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb24.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme024.png?raw=true) |
-| barossa      | Barossa                | Barossa red and cardin green colored theme. A somber color set suited for courts and law firms. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb25.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme025.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb25.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme025.png?raw=true) |
-| shark        | Shark and orange       | Shark grey and orange ecstasy colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb26.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme026.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb26.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme026.png?raw=true) |
-| bigStone     | Big stone tulip        | Big stone blue and tulip tree yellow colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb27.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme027.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb27.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme027.png?raw=true) |
-| damask       | Damask and lunar       | Damask red and lunar green colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb28.jpg?raw=true" width="80"/>](https://rydmike.com/assets/LightScheme028.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb28.jpg?raw=true" width="80"/>](https://rydmike.com/assets/DarkScheme028.png?raw=true) |
+| material     | Material default       | Default Material color theme, used in the design guide. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb01.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme001.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb01.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme001.png?raw=true) |
+| materialHc   | Material high contrast | High contrast Material design guide theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb02.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme002.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb02.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme002.png?raw=true) |
+| blue         | Blue delight           | Blue color theme, based on Material blue and light blue colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb03.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme003.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb03.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme003.png?raw=true) |
+| indigo       | Indigo nights          | Indigo color theme, based on Material indigo and deep purple colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb04.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme004.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb04.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme004.png?raw=true) |
+| hippieBlue   | Hippie blue            | Hippie blue with surfie green and chock coral pink theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb05.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme005.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb05.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme005.png?raw=true) |
+| aquaBlue     | Aqua blue              | Aqua tropical ocean blue theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb06.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme006.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb06.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme006.png?raw=true) |
+| brandBlue    | Brand blues            | A mixture of blue colors from well known web brands. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb07.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme007.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb07.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme007.png?raw=true) |
+| deepBlue     | Deep blue sea          | Dark deep blue sea color theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb08.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme008.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb08.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme008.png?raw=true) |
+| sakura       | Pink sakura            | Pink color theme, based on sakura cherry blossom like colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb09.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme009.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb09.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme009.png?raw=true) |
+| mandyRed     | Oh Mandy red           | Mandy red and Viking blue colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb10.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme010.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb10.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme010.png?raw=true) |
+| red          | Red tornado            | Red color theme, based on Material red and pink colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb11.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme011.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb11.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme011.png?raw=true) |
+| redWine      | Red red wine           | Red color theme, based on red wine like colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb12.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme012.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb12.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme012.png?raw=true) |
+| purpleBrown  | Purple brown           | Purple brown tinted aubergine and eggplant colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb13.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme013.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb13.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme013.png?raw=true) |
+| green        | Green forest           | Green color theme, based on Material green and cyan colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb14.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme014.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb14.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme014.png?raw=true) |
+| money        | Green money            | Green money and finance style color theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb15.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme015.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb15.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme015.png?raw=true) |
+| jungle       | Green jungle           | Green jungle and rain forest color theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb16.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme016.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb16.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme016.png?raw=true) |
+| greyLaw      | Grey law               | Material blue grey and ultra dark purple color theme. Colors suitable for law firms.  | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb17.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme017.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb17.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme017.png?raw=true) |
+| wasabi       | Willow and wasabi      | Wild Willow and wasabi green with orchid purple inspired colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb18.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme018.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb18.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme018.png?raw=true) |
+| gold         | Gold sunset            | Gold sunset color theme, based on orange like colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb19.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme019.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb19.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme019.png?raw=true) |
+| mango        | Mango mojito           | Orange and green Mango mojito color theme.  | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb20.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme020.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb20.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme020.png?raw=true) |
+| amber        | Amber blue             | Amber blaze and blue color theme, based on Material amber and blue accent colors, a high-contrast theme. An alternative to the default Material high contrast theme.| [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb21.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme021.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb21.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme021.png?raw=true)|
+| vesuviusBurn | Vesuvius burned        | Vesuvius burned orange and eden green theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb22.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme022.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb22.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme022.png?raw=true) |
+| deepPurple   | Deep purple            | Deep purple daisy bush theme, based on Material deepPurple and lightBlueAccent colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb23.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme023.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb23.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme023.png?raw=true)|
+| ebonyClay    | Ebony clay             | Ebony clay dark blue-grey and watercourse green colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb24.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme024.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb24.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme024.png?raw=true) |
+| barossa      | Barossa                | Barossa red and cardin green colored theme. A somber color set suited for courts and law firms. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb25.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme025.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb25.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme025.png?raw=true) |
+| shark        | Shark and orange       | Shark grey and orange ecstasy colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb26.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme026.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb26.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme026.png?raw=true) |
+| bigStone     | Big stone tulip        | Big stone blue and tulip tree yellow colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb27.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme027.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb27.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme027.png?raw=true) |
+| damask       | Damask and lunar       | Damask red and lunar green colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb28.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme028.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb28.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme028.png?raw=true) |

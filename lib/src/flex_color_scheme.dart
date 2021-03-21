@@ -77,7 +77,7 @@ enum FlexAppBarStyle {
 }
 
 /// Enum used to define the [SystemUiOverlayStyle] for the system navigation
-/// bar. Can be used in the [FlexColorScheme.themedSystemNavigationBar]
+/// bar. Can be used with the [FlexColorScheme.themedSystemNavigationBar]
 /// helper to select the background style of system navigation bar when using
 /// the helper in an [AnnotatedRegion] to style the system navigation bar.
 enum FlexSystemNavBarStyle {
@@ -1261,42 +1261,77 @@ class FlexColorScheme with Diagnosticable {
     return const VisualDensity();
   }
 
-  /// Returns a [SystemUiOverlayStyle] that has a system navigation bar style
-  /// that matches the current theme.
+  /// Returns a [SystemUiOverlayStyle] that by default has a system navigation
+  /// bar style that matches the current theme.
   ///
-  /// Requires a build context with access to the inherited theme.
+  /// For its default behavior it requires a build context with access to the
+  /// inherited theme. This static function is a convenience wrapper for making
+  /// a [SystemUiOverlayStyle] that follows current theme. For very customized
+  /// styles you should use [SystemUiOverlayStyle] directly.
   ///
-  /// Can use optional divider on the navigation bar, which is only
-  /// respected on Android P (= Pie = API 28 = Android 9) or higher.
+  /// By default when calling [themedSystemNavigationBar] with context, it
+  /// creates a [SystemUiOverlayStyle] where the system navigator bar uses
+  /// current theme's ´colorScheme.background´ as its background color and
+  /// icon colors that match this background, without any divider.
   ///
-  /// By default it does not set any system overlay for the status bar. The
-  /// status bas has its own built in SystemUiOverlayStyle as a part of
-  /// [AppBar] and [AppBarTheme]. [FlexColorScheme] normally manages the
-  /// [SystemUiOverlayStyle] for the status bar via it. However, if your screen
-  /// has no [AppBar] you can use the properties `noAppBar` and
-  /// `invertStatusIcons` to affect the look of the status icons when
-  /// there is no [AppBar] present on the page, this is useful e.g.
-  /// for splash and intro screens.
+  /// The background color can be modified with [systemNavBarStyle] that
+  /// can use: system, surface, background, scaffoldBackground or transparent
+  /// options as background color options, it defaults to background.
+  /// See [FlexSystemNavBarStyle] for more info.
   ///
-  /// You may need to fully restart the app and even rebuild it for changes to
-  /// this setting to take effect on Android devices and emulators.
-  /// Especially the divider seems to be a bit tricky and erratic to
-  /// turn on and off.
+  /// In standard Flutter themes, the surface, background, scaffoldBackground
+  /// and in light theme, even system are all the same color. For such themes
+  /// this convenience toggle does not make so much sense. However, if you use
+  /// FlexColorScheme and its primary color surface branding, these colors are
+  /// not the same, this toggle then offer a convenient way to switch the
+  /// background color of your system navigation bar in a way that matches
+  /// your theme's surface branded background color and to easily choose which
+  /// one to use easily.
   ///
-  /// Use and support for the opacity value on the system navigation bar
+  /// An optional divider on the navigation bar, which is only
+  /// respected on Android P (= Pie = API 28 = Android 9) or higher, can be
+  /// turned by setting [useDivider] to true. This produces a divider on top of
+  /// the system navigation bar that in light theme uses color 0xFF2C2C2C and
+  /// in dark mode and 0xFFDDDDDD in light mode.
+  ///
+  /// Be aware that once you have enabled the divider by setting it to true that
+  /// there is not any convenient way to get rid of it. You can set the value
+  /// to false, but that will just make the divider same color as your current
+  /// nav bar background color to make it invisible, it is still there.
+  ///
+  /// You can modify the default color of the divider with the optional
+  /// [systemNavigationBarDividerColor]. The call to set and use the divider
+  /// color is only made once a none null value has been given to [useDivider].
+  /// Android does not use any provided alpha value on the color of the
+  /// divider color and calling it with null again will not remove it, thus
+  /// for working with transparent system navigation bars, never set any divider
+  /// because you can't get rid of it once it has been set.
+  ///
+  /// Use and support for the [opacity] value on the system navigation bar
   /// is EXPERIMENTAL, it ONLY works on Android API 30 (=Android 11) or higher.
   /// For more information and a complete example of how it can be used,
   /// please see: https://github.com/rydmike/sysnavbar
+  ///
+  /// By default [themedSystemNavigationBar] does not set any system overlay
+  /// for the status bar. In Flutter SDK the top status bar has its own built in
+  /// [SystemUiOverlayStyle] as a part of [AppBar] and [AppBarTheme].
+  /// [FlexColorScheme] also manages the [SystemUiOverlayStyle] for the status
+  /// bar via it. However, if your screen has no [AppBar] you can use the
+  /// property [noAppBar] and [invertStatusIcons] to affect the look of the
+  /// status icons when there is no [AppBar] present on the page, this is
+  /// useful e.g. for splash and intro screens.
   static SystemUiOverlayStyle themedSystemNavigationBar(
     BuildContext? context, {
 
     /// Use a divider line on the top edge of the system navigation bar.
     ///
-    /// Defaults to false.
+    /// Defaults to null. Keeping it null, byt omission or passing null always
+    /// omits the call to set any divider color in the created
+    /// [SystemUiOverlayStyle]
     ///
     /// The divider on the navigation bar, is only respected on Android P
     /// (= Pie = API 28 = Android 9) or higher.
-    bool useDivider = false,
+    bool? useDivider,
 
     /// Opacity value for the system navigation bar.
     ///
@@ -1390,7 +1425,7 @@ class FlexColorScheme with Diagnosticable {
 
     /// Brightness used if context is null, mostly used for simple unit testing,
     /// with no context present. However, it can also be used to make a
-    /// `SystemUiOverlayStyle` with this helper without having a context.
+    /// `SystemUiOverlayStyle` without having a context.
     ///
     /// Defaults to Brightness.light.
     Brightness nullContextBrightness = Brightness.light,
@@ -1411,15 +1446,11 @@ class FlexColorScheme with Diagnosticable {
     // to it, that may also be null. This is done for backwards compatibility.
     systemNavigationBarColor ??= nullContextBackground;
 
-    // If we don't have a system nav bar color by now, and we are using
-    // `systemNavBarStyle` transparent, we should set opacity 0.01 to ensure
-    // transparency, not fully transparent though, because that will result
-    // in a scrim being added on the Android system navigation bar.
-    if (systemNavigationBarColor != null &&
-        systemNavBarStyle == FlexSystemNavBarStyle.transparent) {
+    // If the systemNavBarStyle is FlexSystemNavBarStyle.transparent we will
+    // override opacity to 0.01.
+    if (systemNavBarStyle == FlexSystemNavBarStyle.transparent) {
       opacity = 0.01; // ignore: parameter_assignments
     }
-
     // If context was null, use nullContextBrightness as brightness value.
     final bool isDark = context != null
         ? Theme.of(context).brightness == Brightness.dark
@@ -1443,18 +1474,61 @@ class FlexColorScheme with Diagnosticable {
     // If it is not given, we use above _flexBackground.
     final Color background = systemNavigationBarColor ?? _flexBackground;
 
-    // Use provided `systemNavigationBarDividerColor` if a value was given
+    // A divider will be applied if `useDivider` is true and it will
+    // use provided `systemNavigationBarDividerColor` if a value was given
     // or fallback to suitable theme mode default divider colors if no
     // color was given.
     //
     // The used default system navigation bar divider colors below were tuned
     // to fit well with most color schemes and possible surface branding.
-    // Using the theme divider color does not work, as the system call does
-    // not use the alpha channel value in the passed in color, default divider
-    // color of the theme uses alpha, using it here does not look good at all.
-    final Color dividerColor = systemNavigationBarDividerColor ??
-        (isDark ? const Color(0xFF2C2C2C) : const Color(0xFFDDDDDD));
+    // Using the theme divider color does not work, as Android system calls do
+    // not use the alpha channel value in the passed color. Default divider
+    // theme color uses alpha, using it here does not look good at all as the
+    // alpha channel value is not used.
+    //
+    // The logic below is intended to keep the `dividerColor` used in the
+    // [SystemUiOverlayStyle] as null as long as `useDivider` is null. As soon
+    // as it is not, it will set a Divider color, also with `false` value. With
+    // false it will be set to resulting background color in order to hide the
+    // divider by making it background colored. This is a way to remove
+    // the divider if it has been enabled earlier, since you cannot remove it
+    // with a null color value after it has been enabled with any known
+    // `SystemUiOverlayStyle` and `SystemChrome` call. The false value then
+    // provide means to at least hide it again, but it will still be there.
+    // This can be observed if you use transparent sys navbar, so never enable
+    // the divider if you intend to use system navigation bars that are fully
+    // transparent, you won't be able to get rid of it again from Flutter side
+    // without removing it and rebuilding the app.
+    //
+    // Worth noticing is also the the opacity does not really have any effect on
+    // divider color in current versions of Android. We apply it here anyway
+    // in case it does some day. It would be nice if it was supported for two
+    // reasons:
+    //   1. We could use Flutter default Divider theme color as its color.
+    //   2. We could make it invisible on transparent nav bars after it has
+    //      has been enabled as well.
+    Color? dividerColor;
 
+    if (useDivider == null) {
+      // The dividerColor is already null from declaration above with no value,
+      // but being explicit that in this case this is the case where we want a
+      // null color value for the divider as well in order to not include it
+      // in the `SystemUiOverlayStyle`.
+      dividerColor = null;
+    } else if (useDivider && systemNavigationBarDividerColor == null) {
+      // We should have a divider, but have no given color, use defaults.
+      dividerColor = isDark
+          ? const Color(0xFF2C2C2C).withOpacity(opacity)
+          : const Color(0xFFDDDDDD).withOpacity(opacity);
+    } else if (useDivider && systemNavigationBarDividerColor != null) {
+      // We should have a divider, with a given color.
+      dividerColor = systemNavigationBarDividerColor.withOpacity(opacity);
+    } else {
+      // If this is reached, then useDivider is false and we must define its
+      // color to whatever color the background is, in order to hide it as well
+      // as possible.
+      dividerColor = background.withOpacity(opacity);
+    }
     return SystemUiOverlayStyle(
       // The top status bar settings.
       // If no params are set that indicates we on purpose want to adjust it
@@ -1470,10 +1544,7 @@ class FlexColorScheme with Diagnosticable {
           : null,
       // The bottom navigation bar settings.
       systemNavigationBarColor: background.withOpacity(opacity),
-      // When not using the divider, we set it to same color as
-      // the background is to keep it invisible, it is never null though.
-      systemNavigationBarDividerColor:
-          useDivider ? dividerColor : background.withOpacity(opacity),
+      systemNavigationBarDividerColor: dividerColor,
       systemNavigationBarIconBrightness:
           isDark ? Brightness.light : Brightness.dark,
     );
