@@ -27,7 +27,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
     More information in this example: https://github.com/rydmike/sysnavbar
 * **Examples:** Added top status bar scrim toggle and system navigation divider and navbar style toggles to example 5.
   These only work on Android builds and do not have any functionality on the live Web builds.
-* **Tests:** Added tests for the new features. Total 686 test, coverage 99.75%.
+* **Tests:** Added tests for the new features. Total 690 tests, coverage 99.76%.
 
 ## [2.0.0] - March 15, 2021
 
