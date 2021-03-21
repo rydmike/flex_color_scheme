@@ -17,6 +17,21 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     test(
+        'FCS7.00RawL: GIVEN FlexColorScheme() made with min required light '
+        'params that equals default Material light scheme '
+        'EXPECT its ThemeData to be equal to one made with light scheme with '
+        'no parameters.', () {
+      expect(
+          const FlexColorScheme(
+            brightness: Brightness.light,
+            primary: FlexColor.materialLightPrimary,
+            primaryVariant: FlexColor.materialLightPrimaryVariant,
+            secondary: FlexColor.materialLightSecondary,
+            secondaryVariant: FlexColor.materialLightSecondaryVariant,
+          ).toTheme,
+          equals(FlexColorScheme.light().toTheme));
+    });
+    test(
         'FCS7.00DefL: GIVEN FlexColorScheme.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
@@ -64,6 +79,22 @@ void main() {
             colors: FlexColor.schemes[FlexScheme.material]!.light,
           ).toTheme,
           FlexColorScheme.light().toTheme);
+    });
+
+    test(
+        'FCS7.00RawD: GIVEN FlexColorScheme() made with min required dark '
+        'params that equals default Material dark scheme '
+        'EXPECT its ThemeData to be equal to one made with dark scheme with '
+        'no parameters.', () {
+      expect(
+          const FlexColorScheme(
+            brightness: Brightness.dark,
+            primary: FlexColor.materialDarkPrimary,
+            primaryVariant: FlexColor.materialDarkPrimaryVariant,
+            secondary: FlexColor.materialDarkSecondary,
+            secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+          ).toTheme,
+          equals(FlexColorScheme.dark().toTheme));
     });
 
     test(

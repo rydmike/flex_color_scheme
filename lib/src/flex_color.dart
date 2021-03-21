@@ -113,6 +113,7 @@ enum FlexScheme {
 class FlexColor {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
+  // coverage:ignore-line
   FlexColor._(); // coverage:ignore-line
 
   /// Material standard color for light surface.
