@@ -17,6 +17,15 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     test(
+        'FCS7.00DefL: GIVEN FlexColorScheme.light made with no parameters '
+        'EXPECT its ThemeData to be equal to one made with light scheme.', () {
+      expect(
+          FlexColorScheme.light().toTheme,
+          equals(FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
+          ).toTheme));
+    });
+    test(
         'FCS7.00aL: GIVEN two FlexColorScheme.light made with identical '
         'parameters EXPECT their ThemeData to be equal.', () {
       expect(
@@ -57,6 +66,15 @@ void main() {
           FlexColorScheme.light().toTheme);
     });
 
+    test(
+        'FCS7.00DefL: GIVEN FlexColorScheme.dark made with no parameters '
+        'EXPECT its ThemeData to be equal to one made with light scheme.', () {
+      expect(
+          FlexColorScheme.dark().toTheme,
+          equals(FlexColorScheme.dark(
+            colors: FlexColor.schemes[FlexScheme.material]!.dark,
+          ).toTheme));
+    });
     test(
         'FCS7.00aD: GIVEN two FlexColorScheme.dark made with identical '
         'parameters EXPECT their ThemeData to be equal.', () {
