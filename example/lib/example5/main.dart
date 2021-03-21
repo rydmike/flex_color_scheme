@@ -151,9 +151,6 @@ class _DemoAppState extends State<DemoApp> {
   // Used to control if we use one or two toned status bar.
   bool transparentStatusBar = false;
 
-  // Used to control system navbar style
-  FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.background;
-
   // Enum used to select what tab bar style we use.
   FlexTabBarStyle flexTabBarStyle = FlexTabBarStyle.forAppBar;
 
@@ -221,8 +218,8 @@ class _DemoAppState extends State<DemoApp> {
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
               appBarElevation: appBarElevation,
-              tabBarStyle: flexTabBarStyle,
               transparentStatusBar: transparentStatusBar,
+              tabBarStyle: flexTabBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
               fontFamily: AppFonts.mainFont,
@@ -240,8 +237,8 @@ class _DemoAppState extends State<DemoApp> {
                 surfaceStyle: flexSurface,
                 appBarStyle: flexAppBarStyle,
                 appBarElevation: appBarElevation,
-                tabBarStyle: flexTabBarStyle,
                 transparentStatusBar: transparentStatusBar,
+                tabBarStyle: flexTabBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
                 fontFamily: AppFonts.mainFont,
@@ -264,8 +261,8 @@ class _DemoAppState extends State<DemoApp> {
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
               appBarElevation: appBarElevation,
-              tabBarStyle: flexTabBarStyle,
               transparentStatusBar: transparentStatusBar,
+              tabBarStyle: flexTabBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
               darkIsTrueBlack: darkIsTrueBlack,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -283,8 +280,8 @@ class _DemoAppState extends State<DemoApp> {
                 surfaceStyle: flexSurface,
                 appBarStyle: flexAppBarStyle,
                 appBarElevation: appBarElevation,
-                tabBarStyle: flexTabBarStyle,
                 transparentStatusBar: transparentStatusBar,
+                tabBarStyle: flexTabBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 darkIsTrueBlack: darkIsTrueBlack,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -338,14 +335,6 @@ class _DemoAppState extends State<DemoApp> {
         onTransparentStatusBarChanged: (bool value) {
           setState(() {
             transparentStatusBar = value;
-          });
-        },
-        // We pass in the active system navbar style.
-        systemNavBarStyle: systemNavBarStyle,
-        // And select a new system navbar style.
-        onSystemNavBarStyleChanged: (FlexSystemNavBarStyle style) {
-          setState(() {
-            systemNavBarStyle = style;
           });
         },
         // We pass in the current app bar elevation level
@@ -438,8 +427,6 @@ class HomePage extends StatefulWidget {
     required this.onAppBarStyleChanged,
     required this.transparentStatusBar,
     required this.onTransparentStatusBarChanged,
-    required this.systemNavBarStyle,
-    required this.onSystemNavBarStyleChanged,
     required this.appBarElevation,
     required this.onAppBarElevationChanged,
     required this.tabBarStyle,
@@ -466,8 +453,6 @@ class HomePage extends StatefulWidget {
   final ValueChanged<FlexAppBarStyle> onAppBarStyleChanged;
   final bool transparentStatusBar;
   final ValueChanged<bool> onTransparentStatusBarChanged;
-  final FlexSystemNavBarStyle systemNavBarStyle;
-  final ValueChanged<FlexSystemNavBarStyle> onSystemNavBarStyleChanged;
   final double appBarElevation;
   final ValueChanged<double> onAppBarElevationChanged;
   final FlexTabBarStyle tabBarStyle;
@@ -496,8 +481,11 @@ class _HomePageState extends State<HomePage> {
   double currentSidePanelWidth = AppConst.expandWidth;
   bool isSidePanelExpanded = true;
   bool showSidePanel = true;
-  // The state for the system navbar divider usage is also local as is only
-  // used by the AnnotatedRegion, not by the Theme setup via FlexColorScheme.
+  // The state for the system navbar style and divider usage is local as it is
+  // is only used by the AnnotatedRegion, not by FlexColorScheme.toTheme.
+  // Used to control system navbar style via an AnnotatedRegion.
+  FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.background;
+  // Used to control if we have a top divider on the system navigation bar.
   bool useSysNavDivider = false;
 
   @override
@@ -690,11 +678,11 @@ class _HomePageState extends State<HomePage> {
       // page wrapper the system navigation bar in Android will not change
       // theme color as we change themes for the page. This is a
       // Flutter "feature", but with this annotated region we can have the
-      // navigation bar at least follow desired background color and theme-mode,
-      // which looks nicer and as it should on an Android device.
+      // navigation bar follow desired background color and theme-mode,
+      // which looks nicer and more as it should on an Android device.
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
-        systemNavBarStyle: widget.systemNavBarStyle,
+        systemNavBarStyle: systemNavBarStyle,
         useDivider: useSysNavDivider,
       ),
       child: Row(
@@ -990,8 +978,12 @@ class _HomePageState extends State<HomePage> {
                     // AppBar style
                     CupertinoSegmentedControl<FlexSystemNavBarStyle>(
                       children: systemNavBar,
-                      groupValue: widget.systemNavBarStyle,
-                      onValueChanged: widget.onSystemNavBarStyleChanged,
+                      groupValue: systemNavBarStyle,
+                      onValueChanged: (FlexSystemNavBarStyle value) {
+                        setState(() {
+                          systemNavBarStyle = value;
+                        });
+                      },
                       borderColor: isLight
                           ? colorScheme.primary
                           : theme.primaryColorLight,
