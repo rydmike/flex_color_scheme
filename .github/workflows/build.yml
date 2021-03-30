@@ -27,7 +27,7 @@
 name: Build Web
 on:
   pull_request:
-    branches: [master]
+    branches: [none-null-safe]
   # push:
   #  branches: [ master ]
   # release:

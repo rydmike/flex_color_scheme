@@ -290,7 +290,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
     this.labelStyle,
     this.labelAbove = true,
     required this.selected,
-    required this.onSelect,
+    this.onSelect,
     this.selectedBorder,
     this.unselectedBorder,
     this.elevation = 0,
@@ -326,7 +326,11 @@ class FlexThemeModeOptionButton extends StatelessWidget {
   final bool selected;
 
   /// The button was clicked and selected.
-  final VoidCallback onSelect;
+  ///
+  /// The optional callback allows for the button to be used eg as a trailing
+  /// widget in a ListTile. Keep it null to not have any callback and use the
+  /// click event in the parent instead.
+  final VoidCallback? onSelect;
 
   /// Border side for the selected option state.
   /// If null, defaults to

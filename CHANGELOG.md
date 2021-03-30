@@ -2,6 +2,15 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [2.1.1] - March 30, 2021
+
+* **Change:** Made the VoidCallback `onSelect` in `FlexThemeModeOptionButton` nullable.
+  The optional callback allows for the button to be used e.g. as a trailing
+  widget in a ListTile. Keep it null to not have any callback, nor hover or Ink of its own, and use
+  the select event of the parent instead. When it is used as standalone button you
+  normally want to use this callback, but not if you want the parent to handle it, that use case was
+  not allowed with previous version. 
+
 ## [2.1.0] - March 22, 2021
 
 * **Fix:** Toggling `FlexColorScheme(transparentStatusBar)` from true to false, did not restore the
