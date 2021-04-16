@@ -1,8 +1,8 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 void main() {
   //****************************************************************************
@@ -247,7 +247,7 @@ void main() {
     test(
         'FCS7.05: GIVEN a FlexColorScheme theme with null VisualDensity input '
         'EXPECT VisualDensity().', () {
-      expect(themeLight.visualDensity, const VisualDensity());
+      expect(themeLight.visualDensity, VisualDensity.standard);
     });
     test(
         'FCS7.06: GIVEN a FlexColorScheme theme with null Typography input '
