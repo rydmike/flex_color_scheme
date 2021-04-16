@@ -181,7 +181,7 @@ class ThemeCard extends StatelessWidget {
       height: 50,
       width: 85,
       child: Card(
-        margin: const EdgeInsets.all(0),
+        margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
           side: BorderSide(

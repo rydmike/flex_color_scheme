@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'constants.dart';
 
 // It is not necessary to review or understand the code in this file in order
@@ -64,8 +65,7 @@ class _SideMenuState extends State<SideMenu> {
                       minWidth: 0,
                       maxWidth: widget.menuWidth,
                       child: ListView(
-                        padding:
-                            const EdgeInsets.only(), //  Removes all edge insets
+                        padding: EdgeInsets.zero, //  Removes all edge insets
                         children: <Widget>[
                           // A dummy user profile on the dummy menu/rail.
                           const _UserProfile(),
@@ -227,7 +227,7 @@ class _UserProfileState extends State<_UserProfile> {
       subtitle: const Text('Company Inc'),
       trailing: ExpandIcon(
         isExpanded: !collapsedProfile,
-        padding: const EdgeInsets.all(0),
+        padding: EdgeInsets.zero,
         onPressed: (_) {
           setState(() {
             collapsedProfile = !collapsedProfile;

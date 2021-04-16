@@ -782,7 +782,7 @@ class _HomePageState extends State<HomePage> {
 
                     // Popup menu button to select color scheme.
                     PopupMenuButton<int>(
-                      padding: const EdgeInsets.all(0),
+                      padding: EdgeInsets.zero,
                       onSelected: widget.onSchemeChanged,
                       itemBuilder: (BuildContext context) =>
                           <PopupMenuItem<int>>[

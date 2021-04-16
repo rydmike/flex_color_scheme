@@ -248,7 +248,7 @@ class HomePage extends StatelessWidget {
                   const Divider(),
                   // Popup menu button to select color scheme.
                   PopupMenuButton<int>(
-                    padding: const EdgeInsets.all(0),
+                    padding: EdgeInsets.zero,
                     onSelected: onSchemeChanged,
                     itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
                       for (int i = 0; i < myFlexSchemes.length; i++)

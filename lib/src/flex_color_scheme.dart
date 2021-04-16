@@ -1258,7 +1258,7 @@ class FlexColorScheme with Diagnosticable {
       case TargetPlatform.windows:
         return VisualDensity.comfortable;
     }
-    return const VisualDensity();
+    return VisualDensity.standard;
   }
 
   /// Returns a [SystemUiOverlayStyle] that by default has a system navigation
@@ -1579,7 +1579,9 @@ class FlexColorScheme with Diagnosticable {
     const List<double> strengths = <double> //
         [0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
     final Map<int, Color> swatch = <int, Color>{};
-    final int r = color.red, g = color.green, b = color.blue;
+    final int r = color.red;
+    final int g = color.green;
+    final int b = color.blue;
     for (final double strength in strengths) {
       final double ds = 0.5 - strength;
       swatch[(strength * 1000).round()] = Color.fromRGBO(
