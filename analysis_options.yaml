@@ -24,7 +24,7 @@ analyzer:
     todo: ignore
 
     # Causes false positives (https://github.com/dart-lang/sdk/issues/41571
-    top_level_function_literal_block: ignore
+    # top_level_function_literal_block: ignore
 
     # DON'T assign new values to parameters of methods or functions.
     #
@@ -523,6 +523,21 @@ linter:
     # APPLICATION:   DISABLE  : With false value.
     #
     # public_member_api_docs: false
+
+    # DO use trailing commas for all function calls and declarations unless the function call or definition,
+    # from the start of the function name up to the closing parenthesis, fits in a single line.
+    #
+    # https://dart-lang.github.io/linter/lints/require_trailing_commas.html
+    #
+    # This rule forces commas even in places where it just adds extra lines that
+    # adds no value. The rule is experimental (20.4.2021) and in current state not very useful.
+    #
+    # Other known linters use:
+    # Pedantic       disabled : https://pub.dev/packages/pedantic
+    # Effective Dart disabled : https://pub.dev/packages/effective_dart
+    # Lint           disabled : https://pub.dev/packages/lint
+    # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    require_trailing_commas: false,
 
     # DO sort constructor declarations before other members.
     #
