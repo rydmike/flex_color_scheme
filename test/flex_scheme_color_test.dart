@@ -1,6 +1,6 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 void main() {
   //****************************************************************************
@@ -11,7 +11,7 @@ void main() {
   // Additionally testing of the .defaultError and .toDark() methods.
   //****************************************************************************
   group('FSC1: WITH FlexSchemeColor ', () {
-    // m1 = Basic flex scheme color with null accentColor.
+    // m1 = Basic flex scheme color .
     const FlexSchemeColor m1 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimaryVariant,
@@ -38,6 +38,7 @@ void main() {
       appBarColor: FlexColor.materialDarkSecondaryVariant,
       error: FlexColor.materialDarkError,
     );
+    // TODO: Test based on this may no longer be needed!?
     // mFull, as m1 but with accentColor not null.
     const FlexSchemeColor mFull = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
@@ -45,7 +46,8 @@ void main() {
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
       appBarColor: FlexColor.materialLightSecondaryVariant,
-      accentColor: FlexColor.materialLightPrimary,
+      // TODO: Test if all work when we remove this!
+      // accentColor: FlexColor.materialLightPrimary,
       error: FlexColor.materialLightError,
     );
     // mFrom, create from just a primary color.
@@ -98,7 +100,8 @@ void main() {
           secondary: FlexColor.materialLightSecondary,
           secondaryVariant: FlexColor.materialLightSecondaryVariant,
           appBarColor: FlexColor.materialLightSecondaryVariant,
-          accentColor: FlexColor.materialLightPrimary,
+          // TODO: Test if all work when we remove this!
+          // accentColor: FlexColor.materialLightPrimary,
           error: FlexColor.materialLightError,
         ),
         mFull,
@@ -121,7 +124,8 @@ void main() {
             secondary: Color(0xff5800d5),
             secondaryVariant: Color(0xff4500a7),
             appBarColor: Color(0xff4500a7),
-            accentColor: Color(0xff6200ee),
+            // TODO: Test if all work when we remove this!
+            // accentColor: Color(0xff6200ee),
           ));
     });
     test(
@@ -157,7 +161,8 @@ void main() {
             secondary: Colors.white,
             secondaryVariant: Colors.white,
             appBarColor: Colors.white,
-            accentColor: Colors.white,
+            // TODO: Test if all work when we remove this!
+            // accentColor: Colors.white,
             error: Colors.white,
           ));
     });
@@ -191,7 +196,8 @@ void main() {
             secondary: FlexColor.materialLightSecondary,
             secondaryVariant: Color(0xff02a898),
             appBarColor: Color(0xff02a898),
-            accentColor: FlexColor.materialLightPrimary,
+            // TODO: Test if all work when we remove this!
+            // accentColor: FlexColor.materialLightPrimary,
           ));
     });
 
@@ -205,8 +211,10 @@ void main() {
         'FSC1.12: Test toString implemented via debugFillProperties '
         'EXPECT exact print string', () {
       expect(m1.toString(), equalsIgnoringHashCodes(
+          // TODO: Test fixes after accentColor removal
           // ignore: lines_longer_than_80_chars
-          'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), accentColor: null, error: Color(0xffb00020))'));
+          'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020))'));
+      // 'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), accentColor: null, error: Color(0xffb00020))'));
     });
     test(
         'FSC1.13: Test toStringShort implemented via debugFillProperties '
@@ -219,10 +227,12 @@ void main() {
     test('FSC1.14a: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
     });
-    // This happens to always equal now in tests, if it start failing, test
+    // This happens to be always equal now in tests, if it start failing, test
     // 14c is actually enough.
     test('FSC1.14b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 209825864);
+      // TODO: Test fixes after accentColor removal
+      // expect(m1.hashCode, 209825864);
+      expect(m1.hashCode, 416146294);
     });
     test('FSC1.14c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));
