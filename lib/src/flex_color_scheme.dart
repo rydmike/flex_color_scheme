@@ -280,18 +280,38 @@ class FlexColorScheme with Diagnosticable {
   /// based light and dark app bar theme colors.
   final Color? appBarBackground;
 
-  /// The accentColor in ThemeData as a color scheme property.
+  /// Obsolete property that was originally used as the foreground
+  /// color for widgets (knobs, text, overscroll edge effect, etc).
   ///
-  /// In default [ThemeData.from] this is set to [secondary] color, here we use
-  /// [primary] color instead as default. The accentColor is in FlexColorScheme
+  /// The material library no longer uses this property. In most cases
+  /// the theme's [colorScheme] [ColorScheme.secondary] property is now
+  /// used instead.
+  ///
+  /// Apps should migrate uses of this property to the theme's [colorScheme]
+  /// [ColorScheme.secondary] color. In cases where a color is needed that
+  /// that contrasts well with the secondary color [ColorScheme.onSecondary]
+  /// can be used.
+  ///
+  /// In previous versions [accentColor] for THemeData was set to [primary]
+  /// color instead as default. The [accentColor] was in FlexColorScheme
   /// only used for the active border color on text input in dark theme mode.
-  /// By allowing a custom color with color scheme based themes, we can control
-  /// the color of the active input border on text fields in dark themes
+  /// By allowing a custom color with color scheme based themes, we could
+  /// control the color of the active input border on text fields in dark themes
   /// separately from the rest of the color scheme based colors, without the
   /// need for a complex text input decoration theme. This only applies to
   /// the dark theme mode. The light theme mode still uses the primary color
   /// for the active border. If you want to change that you will have to make a
-  /// custom input decoration themes.
+  /// custom input decoration themes. The prupose of the past modification was
+  /// actually to get InputDecorations on TextFields in dark theme mode that
+  /// as default theme used primary color, instead of accentColor, which
+  /// by default in the past was same color as secondaryColor. This was actually
+  /// done to get a default FlexColorScheme based theme that matched the
+  /// Material Design guide. Flutter SDK (from v2.0.0 it seems) has been
+  /// updated to have the same default behavior now that FlexColorScheme already
+  /// did before for InputDecorators. Thus there is no longer any need for this
+  /// property or ot set a value for it. We can thus deprecate it and not use
+  /// it for anything, even before the ThemeData.accentColor deprecation
+  /// actually lands
   ///
   /// We could have named this extra property textDarkActiveBorderColor, but
   /// since it is still defining the accentColor in ThemeData, it was decided to
@@ -299,6 +319,11 @@ class FlexColorScheme with Diagnosticable {
   /// impacts other color properties that does not get themed to the scheme
   /// secondary color separately. We have not yet noticed any such widgets
   /// when using FlexColorScheme. If you come across any, please let us know.
+
+  @Deprecated(
+    'This property no longer has any function in FlexColorScheme. '
+    'This property is also deprecated in Flutter SDK after v2.3.0-0.1.pre.',
+  )
   final Color? accentColor;
 
   /// A color that is clearly legible when drawn on [primary].
@@ -717,7 +742,8 @@ class FlexColorScheme with Diagnosticable {
               ? colors.secondary.darken(kDarkenSecondaryVariantFromSecondary)
               : colors.primary.darken(kDarkenSecondaryVariant),
       appBarColor: colors.appBarColor,
-      accentColor: colors.accentColor,
+      // TODO: Test if all work when we remove this!
+      // accentColor: colors.accentColor,
       error: colors.error,
     );
 
@@ -801,7 +827,8 @@ class FlexColorScheme with Diagnosticable {
       // Set app bar background to effective background color.
       appBarBackground: effectiveAppBarColor,
       // Set the accent color to the effective accent color.
-      accentColor: effectiveColors.accentColor,
+      // TODO: Test if all work when we remove this!
+      // accentColor: effectiveColors.accentColor,
       // Effective error color and null fallback.
       error: effectiveColors.error ?? FlexColor.materialLightError,
       // The "on" colors will get defaults later by [toTheme] getter if they do
@@ -1082,7 +1109,8 @@ class FlexColorScheme with Diagnosticable {
               ? colors.secondary.darken(kDarkenSecondaryVariantFromSecondary)
               : colors.primary.darken(kDarkenSecondaryVariant),
       appBarColor: colors.appBarColor,
-      accentColor: colors.accentColor,
+      // TODO: Test if all work when we remove this!
+      // accentColor: colors.accentColor,
       error: colors.error,
     );
 
@@ -1199,7 +1227,8 @@ class FlexColorScheme with Diagnosticable {
       // Set app bar background to effective background color.
       appBarBackground: effectiveAppBarColor,
       // Set the accent color to the effective accent color.
-      accentColor: effectiveColors.accentColor,
+      // TODO: Test if all work when we remove this!
+      // accentColor: effectiveColors.accentColor,
       // Effective error color and null fallback.
       error: effectiveColors.error ?? FlexColor.materialDarkError,
       // The "on" colors will get defaults later by [toTheme] getter if they do
@@ -1731,6 +1760,7 @@ class FlexColorScheme with Diagnosticable {
   ///  * A predefined slightly opinionated [InputDecorationTheme] is used. It
   ///    sets `filled` to `true` and fill color to color scheme primary color
   ///    with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
+  ///
   ///    Another theme design change is done via modification of the
   ///    `ThemeData.accentColor` described earlier. Since the used theme, like
   ///    the default theme, does not define a `border` property of `TextField`,
@@ -2052,9 +2082,12 @@ class FlexColorScheme with Diagnosticable {
       // was in fact the desired change on TextField design.
       // It was a version 1.1.0 addition to add separate property in
       // FlexColorScheme and hence also in FlexSchemeColors for the accentColor.
-      accentColor: accentColor ?? _colorScheme.primary,
-      accentColorBrightness: ThemeData.estimateBrightnessForColor(
-          accentColor ?? _colorScheme.primary),
+
+      // TODO: Test if all work when we remove this!
+      // accentColor: accentColor ?? _colorScheme.primary,
+      // accentColorBrightness: ThemeData.estimateBrightnessForColor(
+      //     accentColor ?? _colorScheme.primary),
+
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
       // Here it is replaced with a separate color for the scaffold background,
       // so we can use a configuration with a separate scaffold background
@@ -2440,7 +2473,8 @@ class FlexColorScheme with Diagnosticable {
     Color? error,
     Color? scaffoldBackground,
     Color? appBarBackground,
-    Color? accentColor,
+    // TODO: Test if all work when we remove this!
+    // Color? accentColor,
     Color? onPrimary,
     Color? onSecondary,
     Color? onSurface,
@@ -2467,7 +2501,8 @@ class FlexColorScheme with Diagnosticable {
       error: error ?? this.error,
       scaffoldBackground: scaffoldBackground ?? this.scaffoldBackground,
       appBarBackground: appBarBackground ?? this.appBarBackground,
-      accentColor: accentColor ?? this.accentColor,
+      // TODO: Test if all work when we remove this!
+      // accentColor: accentColor ?? this.accentColor,
       onPrimary: onPrimary ?? this.onPrimary,
       onSecondary: onSecondary ?? this.onSecondary,
       onSurface: onSurface ?? this.onSurface,
@@ -2502,7 +2537,8 @@ class FlexColorScheme with Diagnosticable {
         other.error == error &&
         other.scaffoldBackground == scaffoldBackground &&
         other.appBarBackground == appBarBackground &&
-        other.accentColor == accentColor &&
+        // TODO: Test if all work when we remove this!
+        // other.accentColor == accentColor &&
         other.onPrimary == onPrimary &&
         other.onSecondary == onSecondary &&
         other.onSurface == onSurface &&
@@ -2537,7 +2573,8 @@ class FlexColorScheme with Diagnosticable {
       error,
       scaffoldBackground,
       appBarBackground,
-      accentColor,
+      // TODO: Test if all work when we remove this!
+      // accentColor,
       onPrimary,
       onSecondary,
       onSurface,
@@ -2569,7 +2606,8 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('scaffoldBackground', scaffoldBackground));
     properties.add(ColorProperty('appBarBackground', appBarBackground));
-    properties.add(ColorProperty('accentColor', accentColor));
+    // TODO: Test if all work when we remove this!
+    // properties.add(ColorProperty('accentColor', accentColor));
     properties.add(ColorProperty('onPrimary', onPrimary));
     properties.add(ColorProperty('onSecondary', onSecondary));
     properties.add(ColorProperty('onSurface', onSurface));

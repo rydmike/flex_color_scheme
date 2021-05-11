@@ -1895,7 +1895,8 @@ class FlexSchemeColor with Diagnosticable {
     required this.secondary,
     required this.secondaryVariant,
     this.appBarColor,
-    this.accentColor,
+    // TODO: Test if all work when we remove this!
+    // this.accentColor,
     this.error,
   });
 
@@ -1930,7 +1931,8 @@ class FlexSchemeColor with Diagnosticable {
   /// text fields in dark mode separately without complicated input decoration
   /// themes. This only applies to dark mode, border side for light theme mode
   /// remains tied to primary color.
-  final Color? accentColor;
+  // TODO: Test if all work when we remove this!
+  // final Color? accentColor;
 
   /// The color to use for input validation errors, e.g. for
   /// [InputDecoration.errorText].
@@ -1945,7 +1947,8 @@ class FlexSchemeColor with Diagnosticable {
     Color? secondary,
     Color? secondaryVariant,
     Color? appBarColor,
-    Color? accentColor,
+    // TODO: Test if all work when we remove this!
+    // Color? accentColor,
     Color? error,
   }) {
     return FlexSchemeColor(
@@ -1962,7 +1965,7 @@ class FlexSchemeColor with Diagnosticable {
           secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
           primary.darken(kDarkenSecondaryVariant),
       // Accent color defaults to primary if not defined.
-      accentColor: accentColor ?? primary,
+      // accentColor: accentColor ?? primary,
       error: error,
     );
   }
@@ -1989,7 +1992,8 @@ class FlexSchemeColor with Diagnosticable {
       secondary: secondary.blend(Colors.white, whiteBlend),
       secondaryVariant: secondaryVariant.blend(Colors.white, whiteBlend),
       appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
-      accentColor: accentColor?.blend(Colors.white, whiteBlend),
+      // TODO: Test if all work when we remove this!
+      // accentColor: accentColor?.blend(Colors.white, whiteBlend),
       error: error?.blend(Colors.white, whiteBlend),
     );
   }
@@ -2032,7 +2036,8 @@ class FlexSchemeColor with Diagnosticable {
       secondary: secondary,
       secondaryVariant: secondaryVariant,
       appBarColor: appBarColor,
-      accentColor: accentColor,
+      // TODO: Test if all work when we remove this!
+      // accentColor: accentColor,
     );
   }
 
@@ -2043,7 +2048,8 @@ class FlexSchemeColor with Diagnosticable {
     Color? secondary,
     Color? secondaryVariant,
     Color? appBarColor,
-    Color? accentColor,
+    // TODO: Test if all work when we remove this!
+    // Color? accentColor,
     Color? error,
   }) {
     return FlexSchemeColor(
@@ -2052,7 +2058,8 @@ class FlexSchemeColor with Diagnosticable {
       secondary: secondary ?? this.secondary,
       secondaryVariant: secondaryVariant ?? this.secondaryVariant,
       appBarColor: appBarColor ?? this.appBarColor,
-      accentColor: accentColor ?? this.accentColor,
+      // TODO: Test if all work when we remove this!
+      // accentColor: accentColor ?? this.accentColor,
       error: error ?? this.error,
     );
   }
@@ -2067,7 +2074,8 @@ class FlexSchemeColor with Diagnosticable {
         other.secondary == secondary &&
         other.secondaryVariant == secondaryVariant &&
         other.appBarColor == appBarColor &&
-        other.accentColor == accentColor &&
+        // TODO: Test if all work when we remove this!
+        // other.accentColor == accentColor &&
         other.error == error;
   }
 
@@ -2079,7 +2087,8 @@ class FlexSchemeColor with Diagnosticable {
       secondary,
       secondaryVariant,
       appBarColor,
-      accentColor,
+      // TODO: Test if all work when we remove this!
+      // accentColor,
       error.hashCode,
     );
   }
@@ -2092,7 +2101,8 @@ class FlexSchemeColor with Diagnosticable {
     properties.add(ColorProperty('secondary', secondary));
     properties.add(ColorProperty('secondaryVariant', secondaryVariant));
     properties.add(ColorProperty('appBarColor', appBarColor));
-    properties.add(ColorProperty('accentColor', accentColor));
+    // TODO: Test if all work when we remove this!
+    // properties.add(ColorProperty('accentColor', accentColor));
     properties.add(ColorProperty('error', error));
   }
 }

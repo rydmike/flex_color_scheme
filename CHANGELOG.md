@@ -2,6 +2,13 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [2.2.0] - May XX, 2021
+
+* **Change:** Made the VoidCallback `onSelect` in `FlexThemeModeOptionButton` nullable.
+  The optional callback allows for the button to be used e.g. as a trailing
+  widget in a List
+* **Tests:** Added tests for the new features. Total 690 tests, coverage 99.76%.
+
 ## [2.1.1] - March 30, 2021
 
 * **Change:** Made the VoidCallback `onSelect` in `FlexThemeModeOptionButton` nullable.
@@ -254,6 +261,20 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 ### TODO
 
 - Version 2.2.0 Release even more color schemes. Making schemes is fun, documenting the changes a bit less so.
+- ThemeData.accentColor is deprecated starting in v2.3.0-0.1.pre. When that lands in stable channel
+  an update is needed to remove the usage of accentColor as a way to set the InputDecorator color to
+  default to colorScheme.primary in both dark and light theme mode. 
+
+  Based on a quick look at the modified code
+  in the SDK to support the removal of ThemeData.accentColor, it seems like the new default for
+  dak theme mode is also now the primary color. In the past it was using the accentColor as default 
+  color for input decorators in dark theme mode. This was not inline with newer Material Design.
+  FlexColorScheme currently corrects this by modifying the ThemeData.accentColor to be same as
+  colorScheme.primary. This worked since the only widget in FlexColorScheme based ThemeData that
+  used the ThemeData.accentColor was the InputDecorator, all other widgets that required the
+  accentColor already uses colorScheme.secondary. It looks like the fixe for FlexColorScheme when
+  it lands in stable will just be to deprecate its usage of accentColor but default behavior should 
+  still remain unchanged from current defaults. 
 
 ### COMPLETED
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
