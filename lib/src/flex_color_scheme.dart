@@ -292,7 +292,7 @@ class FlexColorScheme with Diagnosticable {
   /// that contrasts well with the secondary color [ColorScheme.onSecondary]
   /// can be used.
   ///
-  /// In previous versions [accentColor] for THemeData was set to [primary]
+  /// In previous versions [accentColor] for ThemeData was set to [primary]
   /// color instead as default. The [accentColor] was in FlexColorScheme
   /// only used for the active border color on text input in dark theme mode.
   /// By allowing a custom color with color scheme based themes, we could
@@ -301,7 +301,7 @@ class FlexColorScheme with Diagnosticable {
   /// need for a complex text input decoration theme. This only applies to
   /// the dark theme mode. The light theme mode still uses the primary color
   /// for the active border. If you want to change that you will have to make a
-  /// custom input decoration themes. The prupose of the past modification was
+  /// custom input decoration themes. The purpose of the past modification was
   /// actually to get InputDecorations on TextFields in dark theme mode that
   /// as default theme used primary color, instead of accentColor, which
   /// by default in the past was same color as secondaryColor. This was actually
@@ -319,7 +319,6 @@ class FlexColorScheme with Diagnosticable {
   /// impacts other color properties that does not get themed to the scheme
   /// secondary color separately. We have not yet noticed any such widgets
   /// when using FlexColorScheme. If you come across any, please let us know.
-
   @Deprecated(
     'This property no longer has any function in FlexColorScheme. '
     'This property is also deprecated in Flutter SDK after v2.3.0-0.1.pre.',

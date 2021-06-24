@@ -4,28 +4,30 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 
 ## [3.0.0] - June 24, 2021
 
-* **Breaking:** The color `accentColor` is being deprecated in Flutter SDK `ThemeData`.
-  Usage and dependence of `accentColor` in FlexColorScheme is removed to support this
+* **Breaking:** The color `accentColor` is being deprecated in Flutter SDK `ThemeData` starting
+  from version v2.3.0-0.1.pre.
+  Usage and dependence of `accentColor` in **FlexColorScheme** is removed to support this
   transition. Its abrupt removal as a property in FlexColorScheme is however
   a potential breaking change. The probability that you might have used it as a property in your 
   FlexColorScheme based theme is low. It only served the purpose of being defined to primary color
-  in FlexColorScheme. Via that it set highlight color of outlines on
-  text field boxes to primary color in dark theme mode. The old accent color was actually 
+  in FlexColorScheme, to set highlight color of outlines on
+  text field boxes to primary color in dark theme mode. The old `accentColor` was actually 
   not used for anything else in
   themes anymore when using FlexColorScheme. The property is now going away totally
   in Flutter SDK. The default ThemeData in Flutter SDK now in dark mode creates a
   theme for Outline and Underline indicator on input fields that are based on primary color 
-  just like FlexColorScheme did before. It no longer uses `accentColor` for it. The resulting 
-  default dark mode style on text fields thus remains unchanged. If you had used the
-  `accentColor` property before in FlexColorScheme as a short-cut to define text field outline or 
+  just like FlexColorScheme does too. Flutter SDK no longer uses `accentColor` for it. The resulting 
+  default dark mode style on text fields thus remains unchanged also in FlexColorScheme
+  with this definition removed. If you had used the
+  `accentColor` before in FlexColorScheme as a short-cut to define text field outline or 
   highlight color that differed from primary color in dark mode, then you will need 
-  to recreate this via explicit text field decoration themes.
+  to recreate it via text field decoration themes.
   
 * **New:** The `FlexColorScheme.dark` and `FlexColorScheme.light` factories have a new 
   property `swapColors`. If true, this will swap primary and variant colors with their
   secondary counter-parts.
   
-  This flag can be set to true, if you want to make a theme where your primary and secondary 
+  This flag can be set to true if you want to make a theme where your primary and secondary 
   colors are swapped compared to their definition. This effectively doubles the
   variation possibilities of themes based on the pre-defined color schemes.
   
@@ -49,7 +51,8 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   is toggled. The `usedColors` property is not shown in any 
   example, but it could be used similarly.
 
-* **New schemes:** Added four new built-in color schemes.
+* **New schemes:** Added four new built-in color schemes.  
+  **PLACEHOLDER FOR NEW SCHEMES WILL ADD 4 NEW ONES** 
   * **Barossa** - Barossa red and cardin green theme.
     Use enum value `FlexScheme.barossa` for easy access to it.
   * **Shark and orange** - Shark grey and orange ecstasy theme.
