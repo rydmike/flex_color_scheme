@@ -958,6 +958,11 @@ Alternatively you can choose a style that makes a `TabBarTheme` that fits well o
 option if you intend to use the TabBar primarily in a Scaffold body, in dialog or Drawer or other surface and
 background colored material, then you do not have re-theme it or style it for that purpose.
 
+Starting with version 3.0.0 we can use the `swapColors` property to swap the primary and secondary colors
+in a color scheme. All built-in colors schemes might not work so well when using this, but many do. One possible
+theme variation that one can use is to only swap the colors in dark theme and keep them as defined
+for light theme mode. This can work quite well with many of the pre-defined color schemes.
+
 We also introduce a toggle that allows us to for all the schemes use the `toDark` computed dark schemes, instead
 of the hand tuned built-in ones. You can then compare the results, the `toDark` method does a pretty good job and can
 even be tuned with a property if so desired. If you use this toggle on the last custom scheme, you will not see
@@ -989,6 +994,10 @@ We can use this toggle to see and study the differences that `FlexColorScheme.to
    // in dark themes. The Flutter Material default and standard is the other
    // way, tooltip background color is inverted compared to app background.
    bool tooltipsMatchBackground = false;
+   // Swap primary and secondary colors in light theme mode.
+   bool swapLightColors = false;
+   // Swap primary and secondary colors in dark theme mode.
+   bool swapDarkColors = false;
    // Allow toggling between normal dark mode and true black dark mode.
    bool darkIsTrueBlack = false;
    // Allow toggling between using the actual defined dark color scheme or
@@ -1031,6 +1040,7 @@ this example, as well as the tooltip and true black setting for the dark theme.
              transparentStatusBar: transparentStatusBar,
              tabBarStyle: flexTabBarStyle,
              tooltipsMatchBackground: tooltipsMatchBackground,
+             swapColors: swapLightColors,
              visualDensity: FlexColorScheme.comfortablePlatformDensity,
              fontFamily: AppFonts.mainFont,
            ).toTheme
@@ -1059,6 +1069,7 @@ a [visual presentation of the differences](https://rydmike.com/colorscheme#the-d
                transparentStatusBar: transparentStatusBar,
                tabBarStyle: flexTabBarStyle,
                tooltipsMatchBackground: tooltipsMatchBackground,
+               swapColors: swapLightColors,
                visualDensity: FlexColorScheme.comfortablePlatformDensity,
                fontFamily: AppFonts.mainFont,
              ).toScheme,
@@ -1070,11 +1081,13 @@ a [visual presentation of the differences](https://rydmike.com/colorscheme#the-d
            ),
 ```
 
+**AVOID** using a light theme and dark theme that do no define and use the same `Typogrpahy`.  
 To make this switch work interactively we also have to make sure we use the same typography as the one used
 in FlexColorScheme, otherwise the animated theme will show an assertion error, since it cannot animate between the
 different defaults for the used typography. To fix this, we use the same nicer and newer typography that is used 
 by default by FlexColorScheme based themes. We also add the visual density to 
-the ThemeData with the same `copyWith` so we get the same Widget spacing as the one used in out `toTheme` setup. 
+the ThemeData with the same `copyWith` so we get the same Widget spacing as the one used in out `toTheme` setup.
+
 
 **IMPORTANT**  
 When using FlexColorScheme and making themes with it, you would normally **NOT USE THE ABOVE toScheme APPROACH**.
@@ -1118,6 +1131,7 @@ This is certainly also a usable option, but in this example we do not want this 
            transparentStatusBar: transparentStatusBar,
            tabBarStyle: flexTabBarStyle,
            tooltipsMatchBackground: tooltipsMatchBackground,
+           swapColors: swapDarkColors,
            darkIsTrueBlack: darkIsTrueBlack,
            visualDensity: FlexColorScheme.comfortablePlatformDensity,
            fontFamily: AppFonts.mainFont,
@@ -1134,6 +1148,7 @@ This is certainly also a usable option, but in this example we do not want this 
              transparentStatusBar: transparentStatusBar,
              tabBarStyle: flexTabBarStyle,
              tooltipsMatchBackground: tooltipsMatchBackground,
+             swapColors: swapDarkColors,
              darkIsTrueBlack: darkIsTrueBlack,
              visualDensity: FlexColorScheme.comfortablePlatformDensity,
              fontFamily: AppFonts.mainFont,
@@ -1208,6 +1223,16 @@ solution should really be considered.
          tooltipsMatchBackground: tooltipsMatchBackground,
          onTooltipsMatchBackgroundChanged: (bool value) {
            setState(() { tooltipsMatchBackground = value; });
+         },
+         // Swap colors value for light mode and change callback.
+         swapLightColors: swapLightColors,
+         onSwapLightColors: (bool value) {
+           setState(() { swapLightColors = value; });
+         },
+         // Swap colors value for dark mode and change callback.
+         swapDarkColors: swapDarkColors,
+         onSwapDarkColors: (bool value) {
+           setState(() { swapDarkColors = value; });
          },
          // True black mode and change callback.
          darkIsTrueBlack: darkIsTrueBlack,
@@ -1742,31 +1767,6 @@ are, as well as the rationale behind the made design choices and changes to the 
     be adjusted directly in the `FlexColorScheme` definition with property
     value `bottomAppBarElevation` without creating a sub theme or
     using `copyWith`.
-
-
-  * A deviation from `ThemeData.from` color scheme based theme's is
-    that `ThemeData.accentColor` is set to `ColorScheme.primary` and not to
-    `secondary` if not otherwise defined. This is done to get an easy way
-    for borders on `TextField.decoration` to use theme based primary
-    color in dark-mode, and not `accentColor` color.
-
-    There may be a bug in the way
-    `InputDecorationTheme` gets used by the `InputDecorator`. We were
-    unable to define a theme that would work correctly for such a setup
-    without resorting to making `accentColor` equal to
-    `ThemeData.primaryColor`. This definition has less of an impact
-    visually to any built-in widgets than one might suspect. With all
-    the other included theme definitions, we saw no other widget that used
-    `accentColor`. FAB and toggles have their own theme and default colors, so
-    they still use the default expected `colorScheme.secondary` color
-    despite this change.
-
-
-  * The `accentColor` is made available as a separate scheme property.
-    This done to enable control of the `OutlineInputBorder()` active border
-    color property in color scheme based themes for dark theme-mode.
-    This is just provided as an easy way to override its customized
-    definition without using a `copyWith` on the resulting ThemeData.
 
 
   * In `TextSelectionThemeData`, the standard for `selectionColor` is

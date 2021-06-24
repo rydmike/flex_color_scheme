@@ -494,6 +494,17 @@ class FlexColorScheme with Diagnosticable {
   /// Used default value deviates from the Flutter standard, that uses the old
   /// [Typography.material2014]. Here we use the newer [Typography.material2018]
   /// as default typography if one is not provided.
+  ///
+  /// Never mix different [Typography] in light and dark theme mode. If you
+  /// do, lerping between dark and light theme mode will fail due Flutter SDK
+  /// not being able to handle the use case. If you use a default light or dark
+  /// Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for the
+  /// other one, you must set either the default ThemeData to
+  /// [Typography.material2018] OR the [FlexColorScheme.typography] to
+  /// [Typography.material2014] to avoid this issue. It is not generally
+  /// recommended to create you light and dark theme mode data with
+  /// different methods. If you use FlexColorScheme, DO use it for both the
+  /// light and dark theme mode.
   final Typography? typography;
 
   //****************************************************************************
@@ -658,6 +669,20 @@ class FlexColorScheme with Diagnosticable {
     /// color, and will be be black if it is light and white if it is dark.
     Color? onError,
 
+    /// If true, this will swap primary and variant colors with their
+    /// secondary counter parts.
+    ///
+    /// This flag can be set to true, if you want to make a theme where
+    /// your primary and secondary colors are swapped.
+    ///
+    /// This feature is useful if you want to do this with the pre-defined
+    /// schemes. If you are explicitly defining all your theme colors you can
+    /// of course define them as desired. Even if you do
+    /// that, this feature will still swap whatever colors you defined
+    /// for primary and secondary. You can offer these feature as an easy end
+    /// user modifiable theme option if you like.
+    bool swapColors = false,
+
     /// Tooltips background color will match the brightness of the theme's
     /// background color.
     ///
@@ -710,6 +735,17 @@ class FlexColorScheme with Diagnosticable {
     /// Default value deviates from the Flutter standard that uses the old
     /// [Typography.material2014], in favor of newer [Typography.material2018]
     /// as default typography if one is not provided.
+    ///
+    /// Never mix different [Typography] in light and dark theme mode. If you
+    /// do, lerping between dark and light theme mode will fail due Flutter SDK
+    /// not being able to handle the use case. If you use a default light or dark
+    /// Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for the
+    /// other one, you must set either the default ThemeData to
+    /// [Typography.material2018] OR the [FlexColorScheme.typography] to
+    /// [Typography.material2014] to avoid this issue. It is not generally
+    /// recommended to create you light and dark theme mode data with
+    /// different methods. If you use FlexColorScheme, DO use it for both the
+    /// light and dark theme mode.
     Typography? typography,
   }) {
     // LIGHT: Check valid inputs
@@ -724,28 +760,9 @@ class FlexColorScheme with Diagnosticable {
     // If bottomAppBarElevation was null, it defaults to appBarElevation.
     bottomAppBarElevation ??= appBarElevation;
 
-    // Make effective colors using 1...4 of the passed in theme colors via
-    // the [usedColors] property.
-    final FlexSchemeColor effectiveColors = FlexSchemeColor(
-      primary: colors.primary,
-      primaryVariant: usedColors > 2
-          ? colors.primaryVariant
-          // ignore: avoid_redundant_argument_values
-          : colors.primary.darken(kDarkenPrimaryVariant),
-      secondary: usedColors > 1
-          ? colors.secondary
-          : colors.primary.darken(kDarkenSecondary),
-      secondaryVariant: usedColors > 3
-          ? colors.secondaryVariant
-          : usedColors > 1
-              // ignore: avoid_redundant_argument_values
-              ? colors.secondary.darken(kDarkenSecondaryVariantFromSecondary)
-              : colors.primary.darken(kDarkenSecondaryVariant),
-      appBarColor: colors.appBarColor,
-      // TODO: Test if all work when we remove this!
-      // accentColor: colors.accentColor,
-      error: colors.error,
-    );
+    // Get the actual used color scheme that depends on usedColors and scheme.
+    final FlexSchemeColor effectiveColors =
+        FlexSchemeColor.effective(colors, usedColors, swapColors: swapColors);
 
     // If [surfaceStyle] is [FlexSurface.custom] then the returned surfaceColors
     // will be same as [FlexSurface.material], to get a different result
@@ -826,9 +843,6 @@ class FlexColorScheme with Diagnosticable {
           scaffoldBackground ?? surfaceColors.scaffoldBackground,
       // Set app bar background to effective background color.
       appBarBackground: effectiveAppBarColor,
-      // Set the accent color to the effective accent color.
-      // TODO: Test if all work when we remove this!
-      // accentColor: effectiveColors.accentColor,
       // Effective error color and null fallback.
       error: effectiveColors.error ?? FlexColor.materialLightError,
       // The "on" colors will get defaults later by [toTheme] getter if they do
@@ -871,14 +885,14 @@ class FlexColorScheme with Diagnosticable {
   /// created with just one color property using the factory
   /// [FlexSchemeColor.from], more detailed color themes can also be defined.
   factory FlexColorScheme.dark({
-    /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
+    /// The [FlexSchemeColor] that we will create the dark [FlexColorScheme]
     /// from.
     ///
     /// You can use predefined [FlexSchemeColor] values from
     /// [FlexColor.schemes] map or define your own colors with
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
     ///
-    /// For using built-in color schemed, the convenience shortcut to select
+    /// For using built-in color schemes, the convenience shortcut to select
     /// it with the `scheme` property is recommended and leaving `colors`
     /// undefined. If both are specified the scheme colors defined by `colors`
     /// are used. If both are null then `scheme` defaults to
@@ -895,7 +909,6 @@ class FlexColorScheme with Diagnosticable {
     /// `colors`and `scheme` are specified, the scheme defined by
     /// `colors` is used. If both are null, then `scheme` defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
-    ///
     FlexScheme? scheme,
 
     /// The number of the four main scheme colors to be used of the ones
@@ -1026,6 +1039,20 @@ class FlexColorScheme with Diagnosticable {
     /// off black mode when primary blended surface are used.
     bool darkIsTrueBlack = false,
 
+    /// If true, this will swap primary and variant colors with their
+    /// secondary counter parts.
+    ///
+    /// This flag can be set to true, if you want to make a theme where
+    /// your primary and secondary colors are swapped.
+    ///
+    /// This feature is useful if you want to do this with the pre-defined
+    /// schemes or with computed dark themes from light theme. If you are
+    /// explicitly defining all your theme colors you can of course define
+    /// them as desired. Even if you do that, this feature will still swap
+    /// whatever colors you defined for primary and secondary. You can offer this
+    /// feature as an easy end user modifiable theme option if you like.
+    bool swapColors = false,
+
     /// Tooltips background color will match the brightness of the theme's
     /// background color.
     ///
@@ -1077,6 +1104,17 @@ class FlexColorScheme with Diagnosticable {
     /// Default value deviates from the Flutter standard that uses the old
     /// [Typography.material2014], in favor of newer [Typography.material2018]
     /// as default typography if one is not provided.
+    ///
+    /// Never mix different [Typography] in light and dark theme mode. If you
+    /// do, lerping between dark and light theme mode will fail due Flutter SDK
+    /// not being able to handle the use case. If you use a default light or dark
+    /// Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for the
+    /// other one, you must set either the default ThemeData to
+    /// [Typography.material2018] OR the [FlexColorScheme.typography] to
+    /// [Typography.material2014] to avoid this issue. It is not generally
+    /// recommended to create you light and dark theme mode data with
+    /// different methods. If you use FlexColorScheme, DO use it for both the
+    /// light and dark theme mode.
     Typography? typography,
   }) {
     // DARK: Check valid inputs
@@ -1091,28 +1129,9 @@ class FlexColorScheme with Diagnosticable {
     // If bottomAppBarElevation is null default to appBarElevation.
     bottomAppBarElevation ??= appBarElevation;
 
-    // Make effective colors using 1...4 of the passed in theme colors via
-    // the [usedColors] value.
-    final FlexSchemeColor effectiveColors = FlexSchemeColor(
-      primary: colors.primary,
-      primaryVariant: usedColors > 2
-          ? colors.primaryVariant
-          // ignore: avoid_redundant_argument_values
-          : colors.primary.darken(kDarkenPrimaryVariant),
-      secondary: usedColors > 1
-          ? colors.secondary
-          : colors.primary.darken(kDarkenSecondary),
-      secondaryVariant: usedColors > 3
-          ? colors.secondaryVariant
-          : usedColors > 1
-              // ignore: avoid_redundant_argument_values
-              ? colors.secondary.darken(kDarkenSecondaryVariantFromSecondary)
-              : colors.primary.darken(kDarkenSecondaryVariant),
-      appBarColor: colors.appBarColor,
-      // TODO: Test if all work when we remove this!
-      // accentColor: colors.accentColor,
-      error: colors.error,
-    );
+    // Get the actual used color scheme that depends on usedColors and scheme.
+    final FlexSchemeColor effectiveColors =
+        FlexSchemeColor.effective(colors, usedColors, swapColors: swapColors);
 
     // If [surfaceStyle] is [FlexSurface.custom] then the returned surfaceColors
     // will be same as [FlexSurface.material], to get a different result
@@ -1226,9 +1245,6 @@ class FlexColorScheme with Diagnosticable {
           : scaffoldBackground ?? surfaceColors.scaffoldBackground,
       // Set app bar background to effective background color.
       appBarBackground: effectiveAppBarColor,
-      // Set the accent color to the effective accent color.
-      // TODO: Test if all work when we remove this!
-      // accentColor: effectiveColors.accentColor,
       // Effective error color and null fallback.
       error: effectiveColors.error ?? FlexColor.materialDarkError,
       // The "on" colors will get defaults later by [toTheme] getter if they do
@@ -1728,27 +1744,6 @@ class FlexColorScheme with Diagnosticable {
   ///    value `bottomAppBarElevation` without creating a sub theme or
   ///    using `copyWith`.
   ///
-  ///  * A deviation from `ThemeData.from` color scheme based theme's is
-  ///    that `ThemeData.accentColor` is set to `ColorScheme.primary` and not to
-  ///    `secondary` if not otherwise defined. This is done to get an easy way
-  ///    for borders on `TextField.decoration` to use theme based primary
-  ///    color in dark-mode, and not `accentColor` color.
-  ///
-  ///    There may be a bug in the way
-  ///    `InputDecorationTheme` gets used by the `InputDecorator`. We were
-  ///    unable to define a theme that would work correctly for such a setup
-  ///    without resorting to making `accentColor` equal to
-  ///    `ThemeData.primaryColor`. This definition has less of an impact
-  ///    visually to any built-in widgets than one might suspect. With the all
-  ///    the other included theme definitions we saw no other widget that used
-  ///    `accentColor`. FAB and toggles have their own theme and colors, so
-  ///    they still use the default expected `colorScheme.secondary` color
-  ///    despite this change.
-  ///
-  ///  * The [accentColor] is made available as a separate scheme property.
-  ///    Done to enable control of the `OutlineInputBorder()` active border
-  ///    color property in color scheme based themes for dark theme-mode.
-  ///
   ///  * In `TextSelectionThemeData`, the standard for `selectionColor` is
   ///    `colorScheme.primary` with opacity value `0.4` for dark-mode and `0.12`
   ///    for light mode. Here primary with `0.5` for dark-mode and `0.3` for
@@ -1760,19 +1755,6 @@ class FlexColorScheme with Diagnosticable {
   ///  * A predefined slightly opinionated [InputDecorationTheme] is used. It
   ///    sets `filled` to `true` and fill color to color scheme primary color
   ///    with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
-  ///
-  ///    Another theme design change is done via modification of the
-  ///    `ThemeData.accentColor` described earlier. Since the used theme, like
-  ///    the default theme, does not define a `border` property of `TextField`,
-  ///    an app can still easily use both the default underline style, or the
-  ///    outline style by just specifying the default `OutlineInputBorder()`
-  ///    for the border property when outlined TextField is desired.
-  ///    If you don't  want the filled style, or the primary colored
-  ///    borders in dark-mode, you can override them back with `copyWith`.
-  ///    For totally different border color in dark-mode you can alternatively
-  ///    specify it via the `accentColor` property. Which should not affect
-  ///    any other color than this border color when using FlexColorScheme
-  ///    based themes.
   ///
   ///  * The property `fixTextFieldOutlineLabel` is set to `true` by default,
   ///    it looks better. The only reason why it is not the default in Flutter,
@@ -2067,26 +2049,10 @@ class FlexColorScheme with Diagnosticable {
           ThemeData.estimateBrightnessForColor(_colorScheme.primary),
       canvasColor: _colorScheme.background,
 
-      // A theming difference to the norm, is that [accentColor] is set to
-      // [colorScheme.primary] and not [colorScheme.secondary], if it is not
-      // defined via its own the [accentColor] property in [FlexColorScheme].
-      // Reason is to get a way for borders on TextField decoration to use
-      // primary color in dark themes and not accentColor.
-      // There may be a bug in the way InputDecorationTheme gets used by
-      // the InputDecorator. We were unable to define a theme that
-      // would work correctly. This definition works
-      // around the problem and achieves the goal. There were no other widgets
-      // that seemed to use the accentColor. FAB and toggles use their own theme
-      // and colors, that still use the expected colorScheme.secondary color
-      // despite this change. The only observed impact from this theme change
-      // was in fact the desired change on TextField design.
-      // It was a version 1.1.0 addition to add separate property in
-      // FlexColorScheme and hence also in FlexSchemeColors for the accentColor.
-
-      // TODO: Test if all work when we remove this!
-      // accentColor: accentColor ?? _colorScheme.primary,
-      // accentColorBrightness: ThemeData.estimateBrightnessForColor(
-      //     accentColor ?? _colorScheme.primary),
+      // TODO: Remove accentColor when deprecated on stable.
+      accentColor: _colorScheme.secondary,
+      accentColorBrightness:
+          ThemeData.estimateBrightnessForColor(_colorScheme.secondary),
 
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
       // Here it is replaced with a separate color for the scaffold background,
@@ -2473,8 +2439,6 @@ class FlexColorScheme with Diagnosticable {
     Color? error,
     Color? scaffoldBackground,
     Color? appBarBackground,
-    // TODO: Test if all work when we remove this!
-    // Color? accentColor,
     Color? onPrimary,
     Color? onSecondary,
     Color? onSurface,
@@ -2501,8 +2465,6 @@ class FlexColorScheme with Diagnosticable {
       error: error ?? this.error,
       scaffoldBackground: scaffoldBackground ?? this.scaffoldBackground,
       appBarBackground: appBarBackground ?? this.appBarBackground,
-      // TODO: Test if all work when we remove this!
-      // accentColor: accentColor ?? this.accentColor,
       onPrimary: onPrimary ?? this.onPrimary,
       onSecondary: onSecondary ?? this.onSecondary,
       onSurface: onSurface ?? this.onSurface,
@@ -2537,8 +2499,6 @@ class FlexColorScheme with Diagnosticable {
         other.error == error &&
         other.scaffoldBackground == scaffoldBackground &&
         other.appBarBackground == appBarBackground &&
-        // TODO: Test if all work when we remove this!
-        // other.accentColor == accentColor &&
         other.onPrimary == onPrimary &&
         other.onSecondary == onSecondary &&
         other.onSurface == onSurface &&
@@ -2573,8 +2533,6 @@ class FlexColorScheme with Diagnosticable {
       error,
       scaffoldBackground,
       appBarBackground,
-      // TODO: Test if all work when we remove this!
-      // accentColor,
       onPrimary,
       onSecondary,
       onSurface,
@@ -2606,8 +2564,6 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('scaffoldBackground', scaffoldBackground));
     properties.add(ColorProperty('appBarBackground', appBarBackground));
-    // TODO: Test if all work when we remove this!
-    // properties.add(ColorProperty('accentColor', accentColor));
     properties.add(ColorProperty('onPrimary', onPrimary));
     properties.add(ColorProperty('onSecondary', onSecondary));
     properties.add(ColorProperty('onSurface', onSurface));

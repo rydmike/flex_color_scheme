@@ -97,6 +97,40 @@ void main() {
           equals(FlexColorScheme.dark().toTheme));
     });
 
+    // themeDark = Default material dark scheme colors.
+    test(
+        'FCS7.00SwapL: GIVEN FlexColorScheme.light(swapColors: true) EXPECT it to'
+        'be equal to one made with light scheme colors swapped ', () {
+      expect(
+          FlexColorScheme.light(
+            swapColors: true,
+          ).toTheme,
+          equals(const FlexColorScheme(
+            brightness: Brightness.light,
+            primary: FlexColor.materialLightSecondary,
+            primaryVariant: FlexColor.materialLightSecondaryVariant,
+            secondary: FlexColor.materialLightPrimary,
+            secondaryVariant: FlexColor.materialLightPrimaryVariant,
+          ).toTheme));
+    });
+
+    // themeDark = Default material dark scheme colors.
+    test(
+        'FCS7.00SwapD: GIVEN FlexColorScheme.dark(swapColors: true) EXPECT it to'
+        'be equal to one made with dark scheme colors swapped ', () {
+      expect(
+          FlexColorScheme.dark(
+            swapColors: true,
+          ).toTheme,
+          equals(const FlexColorScheme(
+            brightness: Brightness.dark,
+            primary: FlexColor.materialDarkSecondary,
+            primaryVariant: FlexColor.materialDarkSecondaryVariant,
+            secondary: FlexColor.materialDarkPrimary,
+            secondaryVariant: FlexColor.materialDarkPrimaryVariant,
+          ).toTheme));
+    });
+
     test(
         'FCS7.00DefL: GIVEN FlexColorScheme.dark made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {

@@ -453,11 +453,34 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
       child: Column(
         children: const <Widget>[
           Material(
-            elevation: 1,
+            type: MaterialType.canvas,
+            elevation: 0,
             child: SizedBox(
-              height: 70,
+              height: 50,
               child: Center(
-                child: Text('Material type canvas, elevation 1'),
+                child: Text('Material type canvas, elevation 0'),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 8,
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Text('Material type canvas, elevation 8'),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Material(
+            elevation: 0,
+            type: MaterialType.card,
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Text('Material type card, elevation 0'),
               ),
             ),
           ),
@@ -466,9 +489,20 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
             elevation: 1,
             type: MaterialType.card,
             child: SizedBox(
-              height: 70,
+              height: 50,
               child: Center(
                 child: Text('Material type card, elevation 1'),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Material(
+            elevation: 4,
+            type: MaterialType.card,
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Text('Material type card, elevation 4'),
               ),
             ),
           ),
@@ -476,7 +510,7 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
           Card(
             elevation: 4,
             child: SizedBox(
-              height: 70,
+              height: 50,
               child: Center(
                 child: Text('Card widget, elevation 4'),
               ),

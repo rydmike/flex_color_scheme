@@ -58,8 +58,7 @@ void main() {
 
       // EXPECT: That we find a single option button.
       final Finder optionButton = find.byKey(const ValueKey<String>('option'));
-      // TODO: Test not availble on stable, only on beta, put back for beta!
-      // await tester.tap(optionButton, warnIfMissed: false);
+      await tester.tap(optionButton, warnIfMissed: false);
       await tester.pumpAndSettle();
       expect(optionButton, findsOneWidget);
     });
@@ -121,8 +120,7 @@ void main() {
 
       // EXPECT: That we find a single option button.
       final Finder optionButton = find.byKey(const ValueKey<String>('option'));
-      // TODO: Test not availble on stable, only on beta, put back for beta!
-      // await tester.tap(optionButton, warnIfMissed: false);
+      await tester.tap(optionButton, warnIfMissed: false);
       await tester.pumpAndSettle();
       expect(optionButton, findsOneWidget);
     });
@@ -174,8 +172,7 @@ void main() {
 
       // EXPECT: That we find a single option button.
       final Finder optionButton = find.byKey(const ValueKey<String>('option'));
-      // TODO: Test not availble on stable, only on beta, put back for beta!
-      // await tester.tap(optionButton, warnIfMissed: false);
+      await tester.tap(optionButton, warnIfMissed: false);
       await tester.pumpAndSettle();
       expect(optionButton, findsOneWidget);
     });
