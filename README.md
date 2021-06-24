@@ -1101,7 +1101,7 @@ The used `FlexColorScheme.light` properties `appBarStyle`, `appBarElevation`, `t
 `tooltipsMatchBackground` and `visualDensity` in the example above, actually have
 no impact at all on the returned `ColorScheme` by `toScheme`. It can only return colors in a `ColorScheme`, 
 that of course have no such theming concepts. Definition of these values above could just as well be removed in the
-above example, but they were left in there to demonstrate that for this NOT recommended FlexColorScheme theme 
+above example. They were left in there to demonstrate that for this NOT recommended FlexColorScheme theme 
 definition method, they have no impact on the end result. Only properties that adjust scheme colors, 
 like `colors`, `scheme`, `surfaceStyle` and `usedColors` will have an impact on the `toScheme` 
 returned by **FlexColorScheme**.
