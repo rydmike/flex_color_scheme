@@ -1,7 +1,7 @@
 # This GitHub action runs on pull request to master, it:
 #
 #  - Installs dart and flutter
-#  - Uses flutter dev channel for now, will change to stable when web supported on stable.
+#  - Uses flutter stable channel. Might setup a matrix later with beta and dev included too.
 #  - Enables flutter web
 #  - Gets package dependencies
 #  - Runs dart analyze, allows deprecation warnings, we on purpose allow use of deprecated features on dev channel,
@@ -41,7 +41,7 @@ jobs:
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v1.4.0
         with:
-          channel: "dev"
+          channel: "stable"
       - name: Show Dart SDK version
         run: dart --version
 

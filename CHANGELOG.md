@@ -2,17 +2,74 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
-## [2.2.0] - May XX, 2021
+## [3.0.0] - June 24, 2021
+
+* **Breaking:** The color `accentColor` is being deprecated in Flutter SDK `ThemeData`.
+  Usage and dependence of `accentColor` in FlexColorScheme is removed to support this
+  transition. Its abrupt removal as a property in FlexColorScheme is however
+  a potential breaking change. The probability that you might have used it as a property in your 
+  FlexColorScheme based theme is low. It only served the purpose of being defined to primary color
+  in FlexColorScheme. Via that it set highlight color of outlines on
+  text field boxes to primary color in dark theme mode. The old accent color was actually 
+  not used for anything else in
+  themes anymore when using FlexColorScheme. The property is now going away totally
+  in Flutter SDK. The default ThemeData in Flutter SDK now in dark mode creates a
+  theme for Outline and Underline indicator on input fields that are based on primary color 
+  just like FlexColorScheme did before. It no longer uses `accentColor` for it. The resulting 
+  default dark mode style on text fields thus remains unchanged. If you had used the
+  `accentColor` property before in FlexColorScheme as a short-cut to define text field outline or 
+  highlight color that differed from primary color in dark mode, then you will need 
+  to recreate this via explicit text field decoration themes.
+  
+* **New:** The `FlexColorScheme.dark` and `FlexColorScheme.light` factories have a new 
+  property `swapColors`. If true, this will swap primary and variant colors with their
+  secondary counter-parts.
+  
+  This flag can be set to true, if you want to make a theme where your primary and secondary 
+  colors are swapped compared to their definition. This effectively doubles the
+  variation possibilities of themes based on the pre-defined color schemes.
+  
+  This feature is useful if you want to quickly swap primary and secondary colors when
+  using the pre-defined color 
+  schemes or with computed dark schemes from light schemes. If you are
+  explicitly defining all you light or dark scheme colors, you can of course define
+  them in desired order. Even if you do that, this feature will still swap whatever 
+  colors you defined for primary and secondary when set to true. You can thus also 
+  use this feature as an easy end-user modifiable theme option if you like
+  to offer the capability to toggle the primary and secondary theme colors the 
+  other way around.
+  
+* **New:** The static function `FlexSchemeColor.effective(FlexSchemeColor colors,
+  int usedColors, {bool swapColors = false})` is used to implement the above
+  `swapColors` feature. It also exposes the logic behind the FlexColorScheme 
+  dark and light theme `usedColors` property. This static method is helpful if 
+  you need to compute effective theme colors externally to FlexColorScheme 
+  to present the active theme, based on same settings. This is used by example 5
+  to change the colors on the theme mode switch when the swap color settings
+  is toggled. The `usedColors` property is not shown in any 
+  example, but it could be used similarly.
+
+* **New schemes:** Added four new built-in color schemes.
+  * **Barossa** - Barossa red and cardin green theme.
+    Use enum value `FlexScheme.barossa` for easy access to it.
+  * **Shark and orange** - Shark grey and orange ecstasy theme.
+    Use enum value `FlexScheme.shark` for easy access to it.
+  * **Big stone tulip** - Big stone blue and tulip tree yellow theme.
+    Use enum value `FlexScheme.bigStone` for easy access to it.
+  * **Damask and lunar** - Damask red and lunar green theme.
+    Use enum value `FlexScheme.damask` for easy access to it.
 
 * **Change:** Made the VoidCallback `onSelect` in `FlexThemeModeOptionButton` nullable.
-  The optional callback allows for the button to be used e.g. as a trailing
-  widget in a List
-* **Tests:** Added tests for the new features. Total 690 tests, coverage 99.76%.
+  The optional callback allows the button to be used as a trailing
+  widget in a ListTile by allowing it to use its parents onTap callback instead.
+  
+* **Tests:** Added tests for the new features and removed test related to
+  accentColor. Total 696 tests, coverage 99.76%.
 
 ## [2.1.1] - March 30, 2021
 
 * **Change:** Made the VoidCallback `onSelect` in `FlexThemeModeOptionButton` nullable.
-  The optional callback allows for the button to be used e.g. as a trailing
+  The optional callback allows for the button to be used for example as a trailing
   widget in a ListTile. Keep it null to not have any callback, nor hover or Ink of its own, and use
   the select event of the parent instead. When it is used as standalone button you
   normally want to use this callback, but not if you want the parent to handle it, that use case was
@@ -41,7 +98,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
     showing the background, while navigation buttons float over the background. This feature only works if it is 
     also configured in the Android embedder and on SDK 30 or higher.
     More information in this example: https://github.com/rydmike/sysnavbar
-* **Examples:** Added top status bar scrim toggle and system navigation divider and navbar style toggles to example 5.
+* **Examples:** Added top status bar scrim toggle, system navigation divider, and navbar style toggles to example 5.
   These only work on Android builds and do not have any functionality on the live Web builds.
 * **Tests:** Added tests for the new features. Total 690 tests, coverage 99.76%.
 
@@ -113,9 +170,9 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   
   A separate example that builds
   on example 5, shows and explains how and when transparent system navigation bar can be used in Android. It also shows
-  how to design it so that it looks nice when using primary color branded background color applied to the system 
-  navigation bar in Android, when transparency is not supported, and your app uses transparent system navigation 
-  bar when running on an API level that supports it. Please see this separate small stand-alone example Android project
+  how to make it look nice when using primary color branded background color applied to the system 
+  navigation bar in Android, that is used when transparency is not supported. While if supported, your app otherwise 
+  uses a transparent system navigation. Please see this separate small stand-alone example Android project
   [**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for more information.    
 * **Tests:** Added more tests, now 689 tests. All color values used are now also tested, any modification to them is considered
   a breaking change. A bit more tests would still be nice, for the ThemeModeSwitch Widget at least.
@@ -261,7 +318,8 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 ### TODO
 
 - Version 2.2.0 Release even more color schemes. Making schemes is fun, documenting the changes a bit less so.
-- ThemeData.accentColor is deprecated starting in v2.3.0-0.1.pre. When that lands in stable channel
+  
+- WIP: (add test) ThemeData.accentColor is deprecated starting in v2.3.0-0.1.pre. When that lands in stable channel
   an update is needed to remove the usage of accentColor as a way to set the InputDecorator color to
   default to colorScheme.primary in both dark and light theme mode. 
 
@@ -274,7 +332,29 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
   used the ThemeData.accentColor was the InputDecorator, all other widgets that required the
   accentColor already uses colorScheme.secondary. It looks like the fixe for FlexColorScheme when
   it lands in stable will just be to deprecate its usage of accentColor but default behavior should 
-  still remain unchanged from current defaults. 
+  still remain unchanged from current defaults.
+  
+- Elevated surfaces for
+
+- To dark scheme add a swap primary/secondary flag.
+
+- Add a use actual Material color shades for the light/dark mode, when a Material color
+  is selected. Make this new default and keep old around as option.
+  
+- Find the color algo google uses on it Material colors site here
+  https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+  and here
+  https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=582aed&secondary.color=00B0FF
+  
+Starting points for the algo:
+https://stackoverflow.com/questions/32942503/material-design-color-palette
+https://github.com/Hammwerk/material-color-palette
+
+Interesting and simpler Ant design: https://2x.ant.design/docs/spec/colors
+
+Tools: https://onextrapixel.com/best-tools-generate-color-palettes/
+
+
 
 ### COMPLETED
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
