@@ -1895,8 +1895,6 @@ class FlexSchemeColor with Diagnosticable {
     required this.secondary,
     required this.secondaryVariant,
     this.appBarColor,
-    // TODO: Test if all work when we remove this!
-    // this.accentColor,
     this.error,
   });
 
@@ -1922,18 +1920,6 @@ class FlexSchemeColor with Diagnosticable {
   /// that differs from this default.
   final Color? appBarColor;
 
-  /// The accentColor in ThemeData.
-  ///
-  /// In default ThemeData.from this is set to [secondary] color, here we use
-  /// [primary] color as default instead. Accent color is only used for the
-  /// border color on text input in dark theme mode. By defining a custom color
-  /// on this accentColor we can easily the color of the active input border on
-  /// text fields in dark mode separately without complicated input decoration
-  /// themes. This only applies to dark mode, border side for light theme mode
-  /// remains tied to primary color.
-  // TODO: Test if all work when we remove this!
-  // final Color? accentColor;
-
   /// The color to use for input validation errors, e.g. for
   /// [InputDecoration.errorText].
   final Color? error;
@@ -1947,8 +1933,6 @@ class FlexSchemeColor with Diagnosticable {
     Color? secondary,
     Color? secondaryVariant,
     Color? appBarColor,
-    // TODO: Test if all work when we remove this!
-    // Color? accentColor,
     Color? error,
   }) {
     return FlexSchemeColor(
@@ -1968,6 +1952,45 @@ class FlexSchemeColor with Diagnosticable {
       // accentColor: accentColor ?? primary,
       error: error,
     );
+  }
+
+  /// Make effective colors using 1...4 of the passed in [FlexSchemeColor]
+  /// colors via the [usedColors] value.
+  ///
+  /// If [swapColors] is true the primary and secondary colors are returned
+  /// swapped.
+  static FlexSchemeColor effective(FlexSchemeColor colors, int usedColors,
+      {bool swapColors = false}) {
+    assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
+
+    final FlexSchemeColor effectiveColors = FlexSchemeColor(
+      primary: colors.primary,
+      primaryVariant: usedColors > 2
+          ? colors.primaryVariant
+          // ignore: avoid_redundant_argument_values
+          : colors.primary.darken(kDarkenPrimaryVariant),
+      secondary: usedColors > 1
+          ? colors.secondary
+          : colors.primary.darken(kDarkenSecondary),
+      secondaryVariant: usedColors > 3
+          ? colors.secondaryVariant
+          : usedColors > 1
+              // ignore: avoid_redundant_argument_values
+              ? colors.secondary.darken(kDarkenSecondaryVariantFromSecondary)
+              : colors.primary.darken(kDarkenSecondaryVariant),
+      appBarColor: colors.appBarColor,
+      error: colors.error,
+    );
+
+    // Get the effective scheme with primary and secondary potentially swapped.
+    return swapColors
+        ? effectiveColors.copyWith(
+            primary: effectiveColors.secondary,
+            primaryVariant: effectiveColors.secondaryVariant,
+            secondary: effectiveColors.primary,
+            secondaryVariant: effectiveColors.primaryVariant,
+          )
+        : effectiveColors;
   }
 
   /// Returns a new [FlexSchemeColor] instance based on this one that is
@@ -1992,8 +2015,6 @@ class FlexSchemeColor with Diagnosticable {
       secondary: secondary.blend(Colors.white, whiteBlend),
       secondaryVariant: secondaryVariant.blend(Colors.white, whiteBlend),
       appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
-      // TODO: Test if all work when we remove this!
-      // accentColor: accentColor?.blend(Colors.white, whiteBlend),
       error: error?.blend(Colors.white, whiteBlend),
     );
   }
@@ -2036,8 +2057,6 @@ class FlexSchemeColor with Diagnosticable {
       secondary: secondary,
       secondaryVariant: secondaryVariant,
       appBarColor: appBarColor,
-      // TODO: Test if all work when we remove this!
-      // accentColor: accentColor,
     );
   }
 
@@ -2048,8 +2067,6 @@ class FlexSchemeColor with Diagnosticable {
     Color? secondary,
     Color? secondaryVariant,
     Color? appBarColor,
-    // TODO: Test if all work when we remove this!
-    // Color? accentColor,
     Color? error,
   }) {
     return FlexSchemeColor(
@@ -2058,8 +2075,6 @@ class FlexSchemeColor with Diagnosticable {
       secondary: secondary ?? this.secondary,
       secondaryVariant: secondaryVariant ?? this.secondaryVariant,
       appBarColor: appBarColor ?? this.appBarColor,
-      // TODO: Test if all work when we remove this!
-      // accentColor: accentColor ?? this.accentColor,
       error: error ?? this.error,
     );
   }
@@ -2074,8 +2089,6 @@ class FlexSchemeColor with Diagnosticable {
         other.secondary == secondary &&
         other.secondaryVariant == secondaryVariant &&
         other.appBarColor == appBarColor &&
-        // TODO: Test if all work when we remove this!
-        // other.accentColor == accentColor &&
         other.error == error;
   }
 
@@ -2087,8 +2100,6 @@ class FlexSchemeColor with Diagnosticable {
       secondary,
       secondaryVariant,
       appBarColor,
-      // TODO: Test if all work when we remove this!
-      // accentColor,
       error.hashCode,
     );
   }
@@ -2101,8 +2112,6 @@ class FlexSchemeColor with Diagnosticable {
     properties.add(ColorProperty('secondary', secondary));
     properties.add(ColorProperty('secondaryVariant', secondaryVariant));
     properties.add(ColorProperty('appBarColor', appBarColor));
-    // TODO: Test if all work when we remove this!
-    // properties.add(ColorProperty('accentColor', accentColor));
     properties.add(ColorProperty('error', error));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -38,18 +39,15 @@ void main() {
       appBarColor: FlexColor.materialDarkSecondaryVariant,
       error: FlexColor.materialDarkError,
     );
-    // TODO: Test based on this may no longer be needed!?
-    // mFull, as m1 but with accentColor not null.
-    const FlexSchemeColor mFull = FlexSchemeColor(
-      primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
-      secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
-      appBarColor: FlexColor.materialLightSecondaryVariant,
-      // TODO: Test if all work when we remove this!
-      // accentColor: FlexColor.materialLightPrimary,
-      error: FlexColor.materialLightError,
-    );
+    // // mFull, as m1 but with accentColor not null.
+    // const FlexSchemeColor mFull = FlexSchemeColor(
+    //   primary: FlexColor.materialLightPrimary,
+    //   primaryVariant: FlexColor.materialLightPrimaryVariant,
+    //   secondary: FlexColor.materialLightSecondary,
+    //   secondaryVariant: FlexColor.materialLightSecondaryVariant,
+    //   appBarColor: FlexColor.materialLightSecondaryVariant,
+    //   error: FlexColor.materialLightError,
+    // );
     // mFrom, create from just a primary color.
     final FlexSchemeColor mFrom = FlexSchemeColor.from(
       primary: FlexColor.materialLightPrimary,
@@ -100,11 +98,9 @@ void main() {
           secondary: FlexColor.materialLightSecondary,
           secondaryVariant: FlexColor.materialLightSecondaryVariant,
           appBarColor: FlexColor.materialLightSecondaryVariant,
-          // TODO: Test if all work when we remove this!
-          // accentColor: FlexColor.materialLightPrimary,
           error: FlexColor.materialLightError,
         ),
-        mFull,
+        m1,
       );
     });
     test(
@@ -124,18 +120,17 @@ void main() {
             secondary: Color(0xff5800d5),
             secondaryVariant: Color(0xff4500a7),
             appBarColor: Color(0xff4500a7),
-            // TODO: Test if all work when we remove this!
-            // accentColor: Color(0xff6200ee),
           ));
     });
-    test(
-        'FSC1.05: GIVEN a FlexSchemeColor with none null colors EXPECT '
-        'its default toDark() to be equal to result from toDark(35).', () {
-      expect(
-          mFull.toDark(),
-          // ignore: avoid_redundant_argument_values
-          mFull.toDark(35));
-    });
+// TODO See about this test, no longer needed?
+    // test(
+    //     'FSC1.05: GIVEN a FlexSchemeColor with none null colors EXPECT '
+    //     'its default toDark() to be equal to result from toDark(35).', () {
+    //   expect(
+    //       m1.toDark(),
+    //       // ignore: avoid_redundant_argument_values
+    //       m1.toDark(35));
+    // });
     test(
         'FSC1.06: GIVEN a FlexSchemeColor object with one null value  '
         'EXPECT its toDark() to be equal to result from toDark(35).', () {
@@ -147,22 +142,20 @@ void main() {
     test(
         'FSC1.07: GIVEN a FlexSchemeColor with non null colors EXPECT its '
         'toDark(0) to be equal to original object', () {
-      expect(mFull, mFull.toDark(0));
+      expect(m1, m1.toDark(0));
     });
     test(
         'FSC1.08: GIVEN a FlexSchemeColor with non null colors EXPECT its '
         'toDark(100) to be equal to FlexSchemeColor object with all '
         'white colors.', () {
       expect(
-          mFull.toDark(100),
-          mFull.copyWith(
+          m1.toDark(100),
+          m1.copyWith(
             primary: Colors.white,
             primaryVariant: Colors.white,
             secondary: Colors.white,
             secondaryVariant: Colors.white,
             appBarColor: Colors.white,
-            // TODO: Test if all work when we remove this!
-            // accentColor: Colors.white,
             error: Colors.white,
           ));
     });
@@ -196,9 +189,66 @@ void main() {
             secondary: FlexColor.materialLightSecondary,
             secondaryVariant: Color(0xff02a898),
             appBarColor: Color(0xff02a898),
-            // TODO: Test if all work when we remove this!
-            // accentColor: FlexColor.materialLightPrimary,
           ));
+    });
+
+    test(
+        'FSC1.12: GIVEN a FlexSchemeColor.effective(SchemeColors, 4) EXPECT it '
+        'to be equal to SchemeColors ', () {
+      expect(FlexSchemeColor.effective(m1, 4), m1);
+    });
+
+    test(
+        'FSC1.13: GIVEN a FlexSchemeColor.effective(SchemeColors, 3) EXPECT it '
+        'to be equal to SchemeColors with Secondary variant computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1, 3),
+        m1.copyWith(
+          secondaryVariant:
+              m1.secondary.darken(kDarkenSecondaryVariantFromSecondary),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.14: GIVEN a FlexSchemeColor.effective(SchemeColors, 2) EXPECT it '
+        'to be equal to SchemeColors with primary variant and Secondary variant '
+        'computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1, 2),
+        m1.copyWith(
+          primaryVariant: m1.primary.darken(kDarkenPrimaryVariant),
+          secondaryVariant:
+              m1.secondary.darken(kDarkenSecondaryVariantFromSecondary),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.15: GIVEN a FlexSchemeColor.effective(SchemeColors, 1) EXPECT it '
+        'to be equal to SchemeColors with primary variant, secondary '
+        'and Secondary variant computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1, 1),
+        m1.copyWith(
+          primaryVariant: m1.primary.darken(kDarkenPrimaryVariant),
+          secondary: m1.primary.darken(kDarkenSecondary),
+          secondaryVariant: m1.primary.darken(kDarkenSecondaryVariant),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.16: GIVEN a FlexSchemeColor.effective(SchemeColors, 4, '
+        'swapColors: true) EXPECT it to be equal to SchemeColors '
+        'with primary and secondary swapped', () {
+      expect(
+          FlexSchemeColor.effective(m1, 4, swapColors: true),
+          m1.copyWith(
+              primary: m1.secondary,
+              primaryVariant: m1.secondaryVariant,
+              secondary: m1.primary,
+              secondaryVariant: m1.primaryVariant));
     });
 
     //**************************************************************************
@@ -208,33 +258,29 @@ void main() {
     //**************************************************************************
 
     test(
-        'FSC1.12: Test toString implemented via debugFillProperties '
+        'FSC1.18: Test toString implemented via debugFillProperties '
         'EXPECT exact print string', () {
       expect(m1.toString(), equalsIgnoringHashCodes(
-          // TODO: Test fixes after accentColor removal
           // ignore: lines_longer_than_80_chars
           'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020))'));
-      // 'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), accentColor: null, error: Color(0xffb00020))'));
     });
     test(
-        'FSC1.13: Test toStringShort implemented via debugFillProperties '
+        'FSC1.18: Test toStringShort implemented via debugFillProperties '
         'EXPECT exact short printout string.', () {
       expect(
         m1.toStringShort(),
         equalsIgnoringHashCodes('FlexSchemeColor#00000'),
       );
     });
-    test('FSC1.14a: Test hashCode has value.', () {
+    test('FSC1.19a: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
     });
     // This happens to be always equal now in tests, if it start failing, test
     // 14c is actually enough.
-    test('FSC1.14b: Test hashCode exact value.', () {
-      // TODO: Test fixes after accentColor removal
-      // expect(m1.hashCode, 209825864);
+    test('FSC1.19b: Test hashCode exact value.', () {
       expect(m1.hashCode, 416146294);
     });
-    test('FSC1.14c: Test hashCode copyWith has same exact value.', () {
+    test('FSC1.19c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));
     });
   });

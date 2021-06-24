@@ -162,6 +162,12 @@ class _DemoAppState extends State<DemoApp> {
   // on different platforms.
   bool tooltipsMatchBackground = false;
 
+  // Swap primary and secondary colors in light theme mode.
+  bool swapLightColors = false;
+
+  // Swap primary and secondary colors in dark theme mode.
+  bool swapDarkColors = false;
+
   // Allow toggling between normal dark mode and true black dark mode.
   bool darkIsTrueBlack = false;
 
@@ -221,6 +227,7 @@ class _DemoAppState extends State<DemoApp> {
               transparentStatusBar: transparentStatusBar,
               tabBarStyle: flexTabBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
+              swapColors: swapLightColors,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
               fontFamily: AppFonts.mainFont,
             ).toTheme
@@ -240,6 +247,7 @@ class _DemoAppState extends State<DemoApp> {
                 transparentStatusBar: transparentStatusBar,
                 tabBarStyle: flexTabBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
+                swapColors: swapLightColors,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
                 fontFamily: AppFonts.mainFont,
               ).toScheme,
@@ -264,6 +272,7 @@ class _DemoAppState extends State<DemoApp> {
               transparentStatusBar: transparentStatusBar,
               tabBarStyle: flexTabBarStyle,
               tooltipsMatchBackground: tooltipsMatchBackground,
+              swapColors: swapDarkColors,
               darkIsTrueBlack: darkIsTrueBlack,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
               fontFamily: AppFonts.mainFont,
@@ -283,6 +292,7 @@ class _DemoAppState extends State<DemoApp> {
                 transparentStatusBar: transparentStatusBar,
                 tabBarStyle: flexTabBarStyle,
                 tooltipsMatchBackground: tooltipsMatchBackground,
+                swapColors: swapDarkColors,
                 darkIsTrueBlack: darkIsTrueBlack,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
                 fontFamily: AppFonts.mainFont,
@@ -361,6 +371,22 @@ class _DemoAppState extends State<DemoApp> {
             tooltipsMatchBackground = value;
           });
         },
+        // We pass in the current swap colors value for light mode.
+        swapLightColors: swapLightColors,
+        // And toggle the swap colors value.
+        onSwapLightColors: (bool value) {
+          setState(() {
+            swapLightColors = value;
+          });
+        },
+        // We pass in the current swap colors value for dark mode.
+        swapDarkColors: swapDarkColors,
+        // And toggle the swap colors value.
+        onSwapDarkColors: (bool value) {
+          setState(() {
+            swapDarkColors = value;
+          });
+        },
         // We pass in the current true black value.
         darkIsTrueBlack: darkIsTrueBlack,
         // And toggle the dark mode's true black value.
@@ -433,6 +459,10 @@ class HomePage extends StatefulWidget {
     required this.onTabBarStyleChanged,
     required this.tooltipsMatchBackground,
     required this.onTooltipsMatchBackgroundChanged,
+    required this.swapLightColors,
+    required this.onSwapLightColors,
+    required this.swapDarkColors,
+    required this.onSwapDarkColors,
     required this.darkIsTrueBlack,
     required this.onDarkIsTrueBlackChanged,
     required this.useToDark,
@@ -459,6 +489,10 @@ class HomePage extends StatefulWidget {
   final ValueChanged<FlexTabBarStyle> onTabBarStyleChanged;
   final bool tooltipsMatchBackground;
   final ValueChanged<bool> onTooltipsMatchBackgroundChanged;
+  final bool swapLightColors;
+  final ValueChanged<bool> onSwapLightColors;
+  final bool swapDarkColors;
+  final ValueChanged<bool> onSwapDarkColors;
   final bool darkIsTrueBlack;
   final ValueChanged<bool> onDarkIsTrueBlackChanged;
   final bool useToDark;
@@ -768,7 +802,14 @@ class _HomePageState extends State<HomePage> {
                       child: FlexThemeModeSwitch(
                         themeMode: widget.themeMode,
                         onThemeModeChanged: widget.onThemeModeChanged,
-                        flexSchemeData: widget.flexSchemeData,
+                        flexSchemeData: widget.flexSchemeData.copyWith(
+                          light: FlexSchemeColor.effective(
+                              widget.flexSchemeData.light, 4,
+                              swapColors: widget.swapLightColors),
+                          dark: FlexSchemeColor.effective(
+                              widget.flexSchemeData.dark, 4,
+                              swapColors: widget.swapDarkColors),
+                        ),
                         // Style the selected theme mode's label
                         selectedLabelStyle: Theme.of(context)
                             .textTheme
@@ -779,7 +820,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const Divider(),
-
                     // Popup menu button to select color scheme.
                     PopupMenuButton<int>(
                       padding: EdgeInsets.zero,
@@ -830,7 +870,24 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     const Divider(),
-                    // const SizedBox(height: 8),
+                    SwitchListTile.adaptive(
+                      title: const Text('Light mode swap colors'),
+                      subtitle: const Text(
+                        'Light mode swaps primary and secondary colors.',
+                      ),
+                      value: widget.swapLightColors,
+                      onChanged: widget.onSwapLightColors,
+                    ),
+                    SwitchListTile.adaptive(
+                      title: const Text('Dark mode swap colors'),
+                      subtitle: const Text(
+                        'Dark mode swaps primary and secondary colors.',
+                      ),
+                      value: widget.swapDarkColors,
+                      onChanged: widget.onSwapDarkColors,
+                    ),
+
+                    // Set to make dark scheme lazily for light theme
                     SwitchListTile.adaptive(
                       title: const Text('Compute dark theme'),
                       subtitle: const Text(
@@ -880,7 +937,7 @@ class _HomePageState extends State<HomePage> {
                       value: widget.darkIsTrueBlack,
                       onChanged: widget.onDarkIsTrueBlackChanged,
                     ),
-                    // Set to make dark scheme lazily for light theme
+                    // Set dark mode to use true black!
 
                     // Surface style selector.
                     const SizedBox(height: 8),

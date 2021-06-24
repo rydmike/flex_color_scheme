@@ -285,7 +285,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
   const FlexThemeModeOptionButton({
     Key? key,
     required this.flexSchemeColor,
-    required this.backgroundColor,
+    this.backgroundColor,
     this.label,
     this.labelStyle,
     this.labelAbove = true,
@@ -308,8 +308,10 @@ class FlexThemeModeOptionButton extends StatelessWidget {
   /// The scheme colors used to colorize the option button's four colors.
   final FlexSchemeColor flexSchemeColor;
 
-  /// The background color of the option button
-  final Color backgroundColor;
+  /// The background color of the option button.
+  ///
+  /// Defaults to Material default background color if null.
+  final Color? backgroundColor;
 
   /// Optional text label for the button, if null, the label is omitted.
   final String? label;
@@ -416,7 +418,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                           ),
                 ),
                 child: Semantics(
-                  label: label ?? 'Theme',
+                  label: label ?? 'Theme mode option button',
                   selected: selected,
                   button: true,
                   enabled: true,

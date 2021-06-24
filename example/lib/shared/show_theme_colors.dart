@@ -79,7 +79,7 @@ class ShowThemeColors extends StatelessWidget {
         ThemeCard(
           label: 'Accent\nColor',
           color: theme.accentColor,
-          textColor: colorScheme.onPrimary,
+          textColor: colorScheme.onSecondary,
         ),
         ThemeCard(
           label: 'Toggleable\nActive',
