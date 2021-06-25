@@ -101,6 +101,18 @@ enum FlexScheme {
   /// Damask red and lunar green theme.
   damask,
 
+  /// Bahama blue and trinidad orange.
+  bahamaBlue,
+
+  /// Mallard green and valencia pink.
+  mallardGreen,
+
+  /// Espresso and crema.
+  espresso,
+
+  /// Outer space and red stage.
+  outerSpace,
+
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a [FlexColorScheme] based on a custom
   /// [FlexSchemeData] object. If not provided, it defaults to the
@@ -113,7 +125,6 @@ enum FlexScheme {
 class FlexColor {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
-  // coverage:ignore-line
   FlexColor._(); // coverage:ignore-line
 
   /// Material standard color for light surface.
@@ -1084,7 +1095,7 @@ class FlexColor {
   /// English name of the Big stone ecstasy theme.
   static const String bigStoneName = 'Big stone tulip';
 
-  /// English description of the Big stone ecstasy theme.
+  /// English description of the Big stone tulip yellow theme.
   static const String bigStoneDescription =
       'Big stone blue and tulip tree yellow colored theme.';
 
@@ -1118,33 +1129,173 @@ class FlexColor {
   /// English name of the damask theme.
   static const String damaskName = 'Damask and lunar';
 
-  /// English description of the Big stone ecstasy theme.
+  /// English description of the damask theme.
   static const String damaskDescription =
       'Damask red and lunar green colored theme.';
 
-  /// Big stone theme color for light primary color.
+  /// Damask theme color for light primary color.
   static const Color damaskLightPrimary = Color(0xFFC96646);
 
-  /// Big stone theme color for light primary variant color.
+  /// Damask theme color for light primary variant color.
   static const Color damaskLightPrimaryVariant = Color(0xFFD48166);
 
-  /// Big stone theme color for light secondary color.
+  /// Damask theme color for light secondary color.
   static const Color damaskLightSecondary = Color(0xFF373A36);
 
-  /// Big stone theme color for light secondary variant color.
+  /// Damask theme color for light secondary variant color.
   static const Color damaskLightSecondaryVariant = Color(0xFF343E32);
 
-  /// Big stone theme color for dark primary color.
+  /// Damask theme color for dark primary color.
   static const Color damaskDarkPrimary = Color(0xFFDA9882);
 
-  /// Big stone theme color for dark primary variant color.
+  /// Damask theme color for dark primary variant color.
   static const Color damaskDarkPrimaryVariant = Color(0xFFECC9BD);
 
-  /// Big stone theme color for dark secondary color.
+  /// Damask theme color for dark secondary color.
   static const Color damaskDarkSecondary = Color(0xFF767D75);
 
-  /// Big stone theme color for dark secondary variant color.
+  /// Damask theme color for dark secondary variant color.
   static const Color damaskDarkSecondaryVariant = Color(0xFF839081);
+
+  // Bahama blue red and lunar green scheme.
+  // Colors and scheme named by "name that color" library for the light colors.
+  // The colors are based on image theme nr 4 mix 1 in Flexfold demo app.
+
+  /// English name of the bahamaBlue theme.
+  static const String bahamaBlueName = 'Bahama and trinidad';
+
+  /// English description of the bahamaBlue theme.
+  static const String bahamaBlueDescription =
+      'Bahama blue and trinidad orange colored theme.';
+
+  /// Bahama blue theme color for light primary color.
+  static const Color bahamaBlueLightPrimary = Color(0xFF095D9E);
+
+  /// Bahama blue theme color for light primary variant color.
+  static const Color bahamaBlueLightPrimaryVariant = Color(0xFF658EAF);
+
+  /// Bahama blue theme color for light secondary color.
+  static const Color bahamaBlueLightSecondary = Color(0xFFDD520F);
+
+  /// Bahama blue theme color for light secondary variant color.
+  static const Color bahamaBlueLightSecondaryVariant = Color(0xFF7CC8F8);
+
+  /// Bahama blue theme color for dark primary color.
+  static const Color bahamaBlueDarkPrimary = Color(0xFF4585B5);
+
+  /// Bahama blue theme color for dark primary variant color.
+  static const Color bahamaBlueDarkPrimaryVariant = Color(0xFF70A1C9);
+
+  /// Bahama blue theme color for dark secondary color.
+  static const Color bahamaBlueDarkSecondary = Color(0xFFE57C4A);
+
+  /// Bahama blue theme color for dark secondary variant color.
+  static const Color bahamaBlueDarkSecondaryVariant = Color(0xFF9CD5F9);
+
+  // Mallard green and Valencia pink green scheme.
+  // Colors and scheme named by "name that color" library for the light colors.
+  // The colors are based on image theme nr 5 mix 4 in Flexfold demo app.
+
+  /// English name of the mallardGreen theme.
+  static const String mallardGreenName = 'Mallard and valencia';
+
+  /// English description of the mallardGreen theme.
+  static const String mallardGreenDescription =
+      'Mallard green and Valencia pink colored theme.';
+
+  /// Mallard green theme color for light primary color.
+  static const Color mallardGreenLightPrimary = Color(0xFF2D4421);
+
+  /// Mallard green theme color for light primary variant color.
+  static const Color mallardGreenLightPrimaryVariant = Color(0xFF779151);
+
+  /// Mallard green theme color for light secondary color.
+  static const Color mallardGreenLightSecondary = Color(0xFFD34B4B);
+
+  /// Mallard green theme color for light secondary variant color.
+  static const Color mallardGreenLightSecondaryVariant = Color(0xFF959D33);
+
+  /// Mallard green theme color for dark primary color.
+  static const Color mallardGreenDarkPrimary = Color(0xFF808E79);
+
+  /// Mallard green theme color for dark primary variant color.
+  static const Color mallardGreenDarkPrimaryVariant = Color(0xFFA3B58A);
+
+  /// Mallard green theme color for dark secondary color.
+  static const Color mallardGreenDarkSecondary = Color(0xFFE18686);
+
+  /// Mallard green theme color for dark secondary variant color.
+  static const Color mallardGreenDarkSecondaryVariant = Color(0xFFC3C87A);
+
+  // Espresso dark brown and crema scheme.
+  // Colors and scheme named by "name that color" library for the light colors.
+  // The colors are based on image theme nr 11 mix 1 in Flexfold demo app.
+
+  /// English name of the espresso theme.
+  static const String espressoName = 'Espresso and crema';
+
+  /// English description of the espresso theme.
+  static const String espressoDescription =
+      'Espresso dark brown and crema colored theme.';
+
+  /// Espresso theme color for light primary color.
+  static const Color espressoLightPrimary = Color(0xFF220804);
+
+  /// Espresso theme color for light primary variant color.
+  static const Color espressoLightPrimaryVariant = Color(0xFF977F55);
+
+  /// Espresso theme color for light secondary color.
+  static const Color espressoLightSecondary = Color(0xFFE3B964);
+
+  /// Espresso theme color for light secondary variant color.
+  static const Color espressoLightSecondaryVariant = Color(0xFFF5E9C9);
+
+  /// Espresso theme color for dark primary color.
+  static const Color espressoDarkPrimary = Color(0xFF8D7F7D);
+
+  /// Espresso theme color for dark primary variant color.
+  static const Color espressoDarkPrimaryVariant = Color(0xFFC3B59D);
+
+  /// Espresso theme color for dark secondary color.
+  static const Color espressoDarkSecondary = Color(0xFFEED6A6);
+
+  /// Espresso theme color for dark secondary variant color.
+  static const Color espressoDarkSecondaryVariant = Color(0xFFF8ECD4);
+
+  // Outer Space dark bluegrey and stage red orange scheme.
+  // Colors and scheme named by "name that color" library for the light colors.
+  // The colors are based on image theme nr 19 mix 1 in Flexfold demo app.
+
+  /// English name of the outerSpace theme.
+  static const String outerSpaceName = 'Outer space stage';
+
+  /// English description of the outerSpace theme.
+  static const String outerSpaceDescription =
+      'Outer space dark blue-grey and stage red theme.';
+
+  /// Outer Space theme color for light primary color.
+  static const Color outerSpaceLightPrimary = Color(0xFF1F3339);
+
+  /// Outer Space theme color for light primary variant color.
+  static const Color outerSpaceLightPrimaryVariant = Color(0xFF416A7D);
+
+  /// Outer Space theme color for light secondary color.
+  static const Color outerSpaceLightSecondary = Color(0xFFD2600A);
+
+  /// Outer Space theme color for light secondary variant color.
+  static const Color outerSpaceLightSecondaryVariant = Color(0xFF93A0A9);
+
+  /// Outer Space theme color for dark primary color.
+  static const Color outerSpaceDarkPrimary = Color(0xFF486A71);
+
+  /// Outer Space theme color for dark primary variant color.
+  static const Color outerSpaceDarkPrimaryVariant = Color(0xFF6A8A99);
+
+  /// Outer Space theme color for dark secondary color.
+  static const Color outerSpaceDarkSecondary = Color(0xFFDB823F);
+
+  /// Outer Space theme color for dark secondary variant color.
+  static const Color outerSpaceDarkSecondaryVariant = Color(0xFFAAB4BB);
 
   /// English name of the custom theme.
   static const String customName = 'Custom';
@@ -1731,6 +1882,86 @@ class FlexColor {
         secondary: damaskDarkSecondary,
         secondaryVariant: damaskDarkSecondaryVariant,
         appBarColor: damaskDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.bahamaBlue: FlexSchemeData(
+      name: bahamaBlueName,
+      description: bahamaBlueDescription,
+      light: FlexSchemeColor(
+        primary: bahamaBlueLightPrimary,
+        primaryVariant: bahamaBlueLightPrimaryVariant,
+        secondary: bahamaBlueLightSecondary,
+        secondaryVariant: bahamaBlueLightSecondaryVariant,
+        appBarColor: bahamaBlueLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: bahamaBlueDarkPrimary,
+        primaryVariant: bahamaBlueDarkPrimaryVariant,
+        secondary: bahamaBlueDarkSecondary,
+        secondaryVariant: bahamaBlueDarkSecondaryVariant,
+        appBarColor: bahamaBlueDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.mallardGreen: FlexSchemeData(
+      name: mallardGreenName,
+      description: mallardGreenDescription,
+      light: FlexSchemeColor(
+        primary: mallardGreenLightPrimary,
+        primaryVariant: mallardGreenLightPrimaryVariant,
+        secondary: mallardGreenLightSecondary,
+        secondaryVariant: mallardGreenLightSecondaryVariant,
+        appBarColor: mallardGreenLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: mallardGreenDarkPrimary,
+        primaryVariant: mallardGreenDarkPrimaryVariant,
+        secondary: mallardGreenDarkSecondary,
+        secondaryVariant: mallardGreenDarkSecondaryVariant,
+        appBarColor: mallardGreenDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.espresso: FlexSchemeData(
+      name: espressoName,
+      description: espressoDescription,
+      light: FlexSchemeColor(
+        primary: espressoLightPrimary,
+        primaryVariant: espressoLightPrimaryVariant,
+        secondary: espressoLightSecondary,
+        secondaryVariant: espressoLightSecondaryVariant,
+        appBarColor: espressoLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: espressoDarkPrimary,
+        primaryVariant: espressoDarkPrimaryVariant,
+        secondary: espressoDarkSecondary,
+        secondaryVariant: espressoDarkSecondaryVariant,
+        appBarColor: espressoDarkSecondaryVariant,
+        error: materialDarkError,
+      ),
+    ),
+    FlexScheme.outerSpace: FlexSchemeData(
+      name: outerSpaceName,
+      description: outerSpaceDescription,
+      light: FlexSchemeColor(
+        primary: outerSpaceLightPrimary,
+        primaryVariant: outerSpaceLightPrimaryVariant,
+        secondary: outerSpaceLightSecondary,
+        secondaryVariant: outerSpaceLightSecondaryVariant,
+        appBarColor: outerSpaceLightSecondaryVariant,
+        error: materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: outerSpaceDarkPrimary,
+        primaryVariant: outerSpaceDarkPrimaryVariant,
+        secondary: outerSpaceDarkSecondary,
+        secondaryVariant: outerSpaceDarkSecondaryVariant,
+        appBarColor: outerSpaceDarkSecondaryVariant,
         error: materialDarkError,
       ),
     ),
