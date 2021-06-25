@@ -108,10 +108,10 @@ ThemeData `copyWith` method before passing it on to your application's `theme` o
 ### Built-in Color Schemes
 
 Color schemes are no fun without some built-in example schemes to use and play with.
-**FlexColorScheme** comes with **28** ready to go matching light and dark schemes, that you can use in your
+**FlexColorScheme** comes with **32** ready to go matching light and dark schemes, that you can use in your
 applications if you like. Here is a composite image showing them all.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_all_schemes_28_at_100.png?raw=true" alt="ColorScheme all"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_all_schemes_32_at_100.png?raw=true" alt="ColorScheme all"/>
 
 The above image is just an overview of all the color schemes. In the package companion blog post you can
 find [**high resolution images**](https://rydmike.com/colorscheme#built-in-color-schemes) of each one of them.
@@ -125,7 +125,7 @@ thumbnails of each color scheme with a link its high-resolution images.
 The built-in color schemes are all tuned matching light and dark scheme pairs. Most of them are pretty conservative,
 but some are intentionally a bit more playful and bold. The first two color schemes are actually
 the Flutter and Material Design Guide examples of light and dark color schemes, and the Flutter high contrast light and
-dark color versions as well. So OK, there are actually "only" 26 new ready-made light and dark color scheme pairs.
+dark color versions as well. So OK, there are actually "only" 30 new ready-made light and dark color scheme pairs.
 
 #### This ColorScheme Should be Different!
 
@@ -202,7 +202,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 ```
 
 You can now start using `FlexColorScheme` based themes in your application. The easiest way to do so is to use one
-of the 28 built-in color schemes. The schemes have enums that you can use to refer to them. Their corresponding
+of the 32 built-in color schemes. The schemes have enums that you can use to refer to them. Their corresponding
 data object holds name, description and separate scheme data for each schemes' light and dark mode.
 
 As a simple use case, take the **default Flutter counter app**, do the above installation and select one of the
@@ -903,7 +903,7 @@ found in different well known web brands. The primary blue color in the light sc
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4al.png?raw=true" alt="ColorScheme example 4a light" width="250"/><img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4bl.png?raw=true" alt="ColorScheme example 4b light" width="250"/>
 
 You can use the popup menu available in the ListTile showing the current theme to change the active theme. You
-can choose any of the built-in 28 schemes, plus the three custom color schemes we added. When you change scheme, you
+can choose any of the built-in 32 schemes, plus the three custom color schemes we added. When you change scheme, you
 will notice that the active theme color changes are animated by interpolating from the active theme colors,
 to the new theme colors. This is a very nice standard feature when you modify the theme used by a Flutter
 Material applications.
@@ -1018,7 +1018,7 @@ We can use this toggle to see and study the differences that `FlexColorScheme.to
 ### Example 5 - The FlexColorScheme Properties and toTheme
 
 We define the light theme for the app, using current theme index, selected surface style and app bar style. With
-the built-in 28 themes, and the three custom ones we made, we can use 27 different app themes via the setup below,
+the built-in 32 themes, and the three custom ones we made, we can use 27 different app themes via the setup below,
 times the five surface styles and five app bar variants.
 
 The factory `FlexColorScheme.light` is used to define a `FlexColorScheme` for a light theme, from the light
@@ -1314,6 +1314,10 @@ and do not have any functionality on the live Web example.
 > If your application use screens that do not follow the current theme, then just use `SystemUiOverlayStyle`
 > directly in the annotated region for such screens to define their desired style. You can also make your own 
 > convenience wrapper function or even just a const value for it if you need to use a fixed style and design frequently.
+> 
+> The system navigation bar icons also do not seem to change color correctly until API30 (Android 11). On earlier
+> API levels you may up with light themed system navigation bar icons. This was observed with Pixel 4XL
+> emulator.
 
 You can also use the `FlexColorScheme.themedSystemNavigationBar` to hide the top status icons if you are not
 using an app bar at all. This can be useful e.g. on a splash or onboarding page. Example 5 contains 3 different
@@ -1915,3 +1919,7 @@ This table lists all current built-in schemes and provides a link to a high-reso
 | shark        | Shark and orange       | Shark grey and orange ecstasy colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb26.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme026.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb26.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme026.png?raw=true) |
 | bigStone     | Big stone tulip        | Big stone blue and tulip tree yellow colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb27.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme027.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb27.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme027.png?raw=true) |
 | damask       | Damask and lunar       | Damask red and lunar green colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb28.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme028.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb28.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme028.png?raw=true) |
+| bahamaBlue       |Bahama and trinidad | Bahama blue and trinidad orange colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb29.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme029.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb29.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme029.png?raw=true) |
+| mallardGreen       | Mallard and valencia | Mallard green and Valencia pink colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb30.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme030.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb30.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme030.png?raw=true) |
+| espresso       | Espresso and crema   | Espresso dark brown and crema colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb31.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme031.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb31.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme031.png?raw=true) |
+| outerSpace       | Outer space stage  | Outer space dark blue-grey and stage red theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb32.jpg?raw=true" width="100"/>](https://rydmike.com/assets/LightScheme032.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb32.jpg?raw=true" width="100"/>](https://rydmike.com/assets/DarkScheme032.png?raw=true) |
