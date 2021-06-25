@@ -1,6 +1,6 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 //****************************************************************************
 // These simple FlexColor unit test just monitors that the used color values
@@ -1196,6 +1196,147 @@ void main() {
     });
     test('FC5 colors', () {
       expect(FlexColor.damaskDarkSecondaryVariant, const Color(0xFF839081));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.bahamaBlueName, 'Bahama and trinidad');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.bahamaBlueDescription,
+        'Bahama blue and trinidad orange colored theme.',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bahamaBlueLightPrimary, const Color(0xFF095D9E));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bahamaBlueLightPrimaryVariant, const Color(0xFF658EAF));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bahamaBlueLightSecondary, const Color(0xFFDD520F));
+    });
+    test('FC5 colors', () {
+      expect(
+          FlexColor.bahamaBlueLightSecondaryVariant, const Color(0xFF7CC8F8));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bahamaBlueDarkPrimary, const Color(0xFF4585B5));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bahamaBlueDarkPrimaryVariant, const Color(0xFF70A1C9));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bahamaBlueDarkSecondary, const Color(0xFFE57C4A));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.bahamaBlueDarkSecondaryVariant, const Color(0xFF9CD5F9));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.mallardGreenName, 'Mallard and valencia');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.mallardGreenDescription,
+        'Mallard green and Valencia pink colored theme.',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.mallardGreenLightPrimary, const Color(0xFF2D4421));
+    });
+    test('FC5 colors', () {
+      expect(
+          FlexColor.mallardGreenLightPrimaryVariant, const Color(0xFF779151));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.mallardGreenLightSecondary, const Color(0xFFD34B4B));
+    });
+    test('FC5 colors', () {
+      expect(
+          FlexColor.mallardGreenLightSecondaryVariant, const Color(0xFF959D33));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.mallardGreenDarkPrimary, const Color(0xFF808E79));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.mallardGreenDarkPrimaryVariant, const Color(0xFFA3B58A));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.mallardGreenDarkSecondary, const Color(0xFFE18686));
+    });
+    test('FC5 colors', () {
+      expect(
+          FlexColor.mallardGreenDarkSecondaryVariant, const Color(0xFFC3C87A));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.espressoName, 'Espresso and crema');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.espressoDescription,
+        'Espresso dark brown and crema colored theme.',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.espressoLightPrimary, const Color(0xFF220804));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.espressoLightPrimaryVariant, const Color(0xFF977F55));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.espressoLightSecondary, const Color(0xFFE3B964));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.espressoLightSecondaryVariant, const Color(0xFFF5E9C9));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.espressoDarkPrimary, const Color(0xFF8D7F7D));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.espressoDarkPrimaryVariant, const Color(0xFFC3B59D));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.espressoDarkSecondary, const Color(0xFFEED6A6));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.espressoDarkSecondaryVariant, const Color(0xFFF8ECD4));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.outerSpaceName, 'Outer space stage');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.outerSpaceDescription,
+        'Outer space dark blue-grey and stage red theme.',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.outerSpaceLightPrimary, const Color(0xFF1F3339));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.outerSpaceLightPrimaryVariant, const Color(0xFF416A7D));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.outerSpaceLightSecondary, const Color(0xFFD2600A));
+    });
+    test('FC5 colors', () {
+      expect(
+          FlexColor.outerSpaceLightSecondaryVariant, const Color(0xFF93A0A9));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.outerSpaceDarkPrimary, const Color(0xFF486A71));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.outerSpaceDarkPrimaryVariant, const Color(0xFF6A8A99));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.outerSpaceDarkSecondary, const Color(0xFFDB823F));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.outerSpaceDarkSecondaryVariant, const Color(0xFFAAB4BB));
     });
   });
 }

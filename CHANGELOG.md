@@ -2,25 +2,24 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
-## [3.0.0] - June 24, 2021
+## [3.0.0] - June 25, 2021
 
 * **Breaking:** The color `accentColor` is being deprecated in Flutter SDK `ThemeData` starting
   from version v2.3.0-0.1.pre.
   Usage and dependence of `accentColor` in **FlexColorScheme** is removed to support this
   transition. Its abrupt removal as a property in FlexColorScheme is however
   a potential breaking change. The probability that you might have used it as a property in your 
-  FlexColorScheme based theme is low. It only served the purpose of being defined to primary color
-  in FlexColorScheme, to set highlight color of outlines on
-  text field boxes to primary color in dark theme mode. The old `accentColor` was actually 
+  FlexColorScheme based theme is low. It was set to primary color
+  in FlexColorScheme, to make the highlight color of outlines on
+  text field boxes to primary color in dark theme mode. The old `accentColor` was  
   not used for anything else in
   themes anymore when using FlexColorScheme. The property is now going away totally
-  in Flutter SDK. The default ThemeData in Flutter SDK now in dark mode creates a
-  theme for Outline and Underline indicator on input fields that are based on primary color 
-  just like FlexColorScheme does too. Flutter SDK no longer uses `accentColor` for it. The resulting 
+  in Flutter SDK. The default ThemeData in Flutter SDK in dark mode now creates a
+  theme for outline and underline indicators on input fields that are based on primary color, 
+  just like FlexColorScheme does. Flutter SDK no longer uses `accentColor` for it. The resulting 
   default dark mode style on text fields thus remains unchanged also in FlexColorScheme
-  with this definition removed. If you had used the
-  `accentColor` before in FlexColorScheme as a short-cut to define text field outline or 
-  highlight color that differed from primary color in dark mode, then you will need 
+  with this definition removed. If you had used `accentColor` in FlexColorScheme as a 
+  short-cut to define a different text field outline or highlight color, then you will need 
   to recreate it via text field decoration themes.
   
 * **New:** The `FlexColorScheme.dark` and `FlexColorScheme.light` factories have a new 
@@ -28,16 +27,17 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   secondary counter-parts.
   
   This flag can be set to true if you want to make a theme where your primary and secondary 
-  colors are swapped compared to their definition. This effectively doubles the
-  variation possibilities of themes based on the pre-defined color schemes.
+  colors are swapped compared to their definition. 
   
   This feature is useful if you want to quickly swap primary and secondary colors when
   using the pre-defined color 
-  schemes or with computed dark schemes from light schemes. If you are
-  explicitly defining all you light or dark scheme colors, you can of course define
-  them in desired order. Even if you do that, this feature will still swap whatever 
+  schemes or with computed dark schemes from light schemes. It doubles the
+  variation possibilities of themes based on the pre-defined color schemes. 
+  
+  If you are explicitly defining all you light or dark scheme colors, you can of course define
+  them in desired order. This feature will still swap whatever 
   colors you defined for primary and secondary when set to true. You can thus also 
-  use this feature as an easy end-user modifiable theme option if you like
+  use this feature as an easy end-user modifiable theme option, if you like
   to offer the capability to toggle the primary and secondary theme colors the 
   other way around.
   
@@ -45,29 +45,24 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   int usedColors, {bool swapColors = false})` is used to implement the above
   `swapColors` feature. It also exposes the logic behind the FlexColorScheme 
   dark and light theme `usedColors` property. This static method is helpful if 
-  you need to compute effective theme colors externally to FlexColorScheme 
-  to present the active theme, based on same settings. This is used by example 5
+  you need to compute effective built-in theme colors externally to FlexColorScheme 
+  to present the active theme, based on these settings. This is used by example 5
   to change the colors on the theme mode switch when the swap color settings
   is toggled. The `usedColors` property is not shown in any 
-  example, but it could be used similarly.
+  example, but it can be used the same way.
 
 * **New schemes:** Added four new built-in color schemes.  
-  **PLACEHOLDER FOR NEW SCHEMES WILL ADD 4 NEW ONES** 
-  * **Barossa** - Barossa red and cardin green theme.
-    Use enum value `FlexScheme.barossa` for easy access to it.
-  * **Shark and orange** - Shark grey and orange ecstasy theme.
-    Use enum value `FlexScheme.shark` for easy access to it.
-  * **Big stone tulip** - Big stone blue and tulip tree yellow theme.
-    Use enum value `FlexScheme.bigStone` for easy access to it.
-  * **Damask and lunar** - Damask red and lunar green theme.
-    Use enum value `FlexScheme.damask` for easy access to it.
+  * **Bahama and trinidad** - Bahama blue and trinidad orange colored theme.
+    Use enum value `FlexScheme.bahamaBlue` for easy access to it.
+  * **Mallard and valencia** - Mallard green and Valencia pink colored theme.
+    Use enum value `FlexScheme.mallardGreen` for easy access to it.
+  * **Espresso and crema** - Espresso dark brown and crema colored theme.
+    Use enum value `FlexScheme.espresso` for easy access to it.
+  * **Outer space stage** - Outer space dark blue-grey and stage red theme.
+    Use enum value `FlexScheme.outerSpace` for easy access to it.
 
-* **Change:** Made the VoidCallback `onSelect` in `FlexThemeModeOptionButton` nullable.
-  The optional callback allows the button to be used as a trailing
-  widget in a ListTile by allowing it to use its parents onTap callback instead.
-  
 * **Tests:** Added tests for the new features and removed test related to
-  accentColor. Total 696 tests, coverage 99.76%.
+  accentColor. Total 736 tests, coverage 99.76%.
 
 ## [2.1.1] - March 30, 2021
 
