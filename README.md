@@ -1889,7 +1889,7 @@ are, as well as the rationale behind the made design choices and changes to the 
 
 This table lists all current built-in schemes and provides a link to a high-resolution example phone image of each one.
 
-| FlexScheme   | Name                   | Description | Light    | Dark    |
+| FlexScheme   | Name                   | Description | Light____| Dark____|
 | ----         | ----                   | ----        | ----  | ---- |
 | material     | Material default       | Default Material color theme, used in the design guide. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb01.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme001.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb01.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme001.png?raw=true) |
 | materialHc   | Material high contrast | High contrast Material design guide theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb02.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme002.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb02.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme002.png?raw=true) |
