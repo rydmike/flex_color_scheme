@@ -29,7 +29,7 @@ on:
   #pull_request:
   #  branches: [ none ]
   push:
-    branches: [ none ]
+    branches: [none]
   # release:
   #   types: [ published ]
 jobs:
