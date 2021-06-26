@@ -18,104 +18,110 @@ void main() {
     final FlexSchemeColor sc =
         FlexSchemeColor.from(primary: FlexColor.materialLightPrimary);
 
+    final FlexColorScheme fc1 = FlexColorScheme.light(
+      usedColors: 1,
+      surfaceStyle: FlexSurface.medium,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+    );
+    final FlexColorScheme fc1i = FlexColorScheme.light(
+      scheme: FlexScheme.material,
+      usedColors: 1,
+      surfaceStyle: FlexSurface.medium,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+    );
     test(
         'FCS1.00j1: GIVEN a FlexColorScheme.light with null colors and null '
         'scheme EXPECT FlexColorScheme.light with scheme Material.', () {
-      expect(
-        FlexColorScheme.light(
-          usedColors: 1,
-          surfaceStyle: FlexSurface.medium,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-        ),
-        FlexColorScheme.light(
-          scheme: FlexScheme.material,
-          usedColors: 1,
-          surfaceStyle: FlexSurface.medium,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-        ),
-      );
+      expect(fc1, fc1i);
+      // Expect toTheme from them to full-fill same condition.
+      expect(fc1.toTheme, fc1i.toTheme);
     });
+
+    final FlexColorScheme fc2 = FlexColorScheme.light(
+      colors: sc,
+      scheme: FlexScheme.materialHc,
+      usedColors: 1,
+      surfaceStyle: FlexSurface.medium,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+    );
+    final FlexColorScheme fc2i = FlexColorScheme.light(
+      colors: sc,
+      usedColors: 1,
+      surfaceStyle: FlexSurface.medium,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+    );
     test(
         'FCS1.00j2: GIVEN a FlexColorScheme.light with colors sc and given '
         'scheme EXPECT FlexColorScheme.light with colors sc and null scheme.',
         () {
-      expect(
-        FlexColorScheme.light(
-          colors: sc,
-          scheme: FlexScheme.materialHc,
-          usedColors: 1,
-          surfaceStyle: FlexSurface.medium,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-        ),
-        FlexColorScheme.light(
-          colors: sc,
-          usedColors: 1,
-          surfaceStyle: FlexSurface.medium,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-        ),
-      );
+      expect(fc2, fc2i);
+      // Expect toTheme from them to full-fill same condition.
+      expect(fc2.toTheme, fc2i.toTheme);
     });
 
+    final FlexColorScheme fc3 = FlexColorScheme.dark(
+      usedColors: 1,
+      surfaceStyle: FlexSurface.medium,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+    );
+    final FlexColorScheme fc3i = FlexColorScheme.dark(
+      scheme: FlexScheme.material,
+      usedColors: 1,
+      surfaceStyle: FlexSurface.medium,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+    );
     test(
         'FCS1.00q1: GIVEN a FlexColorScheme.dark with null colors and null '
         'scheme EXPECT FlexColorScheme.dark with scheme Material.', () {
-      expect(
-        FlexColorScheme.dark(
-          usedColors: 1,
-          surfaceStyle: FlexSurface.medium,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-        ),
-        FlexColorScheme.dark(
-          scheme: FlexScheme.material,
-          usedColors: 1,
-          surfaceStyle: FlexSurface.medium,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-        ),
-      );
+      expect(fc3, fc3i);
+      // Expect toTheme from them to full-fill same condition.
+      expect(fc3.toTheme, fc3i.toTheme);
     });
+
+    final FlexColorScheme fc4 = FlexColorScheme.dark(
+      colors: sc,
+      scheme: FlexScheme.materialHc,
+      usedColors: 1,
+      surfaceStyle: FlexSurface.medium,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+    );
+    final FlexColorScheme fc4i = FlexColorScheme.dark(
+      colors: sc,
+      usedColors: 1,
+      surfaceStyle: FlexSurface.medium,
+      appBarStyle: FlexAppBarStyle.background,
+      tabBarStyle: FlexTabBarStyle.forBackground,
+      tooltipsMatchBackground: true,
+      transparentStatusBar: false,
+    );
     test(
         'FCS1.00q2: GIVEN a FlexColorScheme.dark with colors sc and given '
         'scheme EXPECT FlexColorScheme.dark with colors sc and null scheme.',
         () {
-      expect(
-        FlexColorScheme.dark(
-          colors: sc,
-          scheme: FlexScheme.materialHc,
-          usedColors: 1,
-          surfaceStyle: FlexSurface.medium,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-        ),
-        FlexColorScheme.dark(
-          colors: sc,
-          usedColors: 1,
-          surfaceStyle: FlexSurface.medium,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-        ),
-      );
+      expect(fc4, fc4i);
+      // Expect toTheme from them to full-fill same condition.
+      expect(fc3.toTheme, fc3i.toTheme);
     });
     // m1 = Default material light scheme colors.
     const FlexColorScheme m1 = FlexColorScheme(
@@ -156,6 +162,8 @@ void main() {
         'FCS1.01a: GIVEN the same FlexColorScheme objects '
         'EXPECT them to have equality', () {
       expect(m1, equals(m1));
+      // Expect toTheme from them to full-fill same condition.
+      expect(m1.toTheme, equals(m1.toTheme));
     });
     test(
         'FCS1.01b: GIVEN the same FlexColorScheme objects '
@@ -166,6 +174,8 @@ void main() {
         'FCS1.01c: GIVEN two equal FlexColorScheme objects '
         'EXPECT them to have equality', () {
       expect(m1, equals(m2));
+      // Expect toTheme from them to full-fill same condition.
+      expect(m1.toTheme, equals(m2.toTheme));
     });
     test(
         'FCS1.01d: GIVEN two equal FlexColorScheme objects '
@@ -176,83 +186,109 @@ void main() {
         'FCS1.01e: GIVEN two identical FlexColorScheme objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
+      // Expect toTheme from them to full-fill same condition.
+      expect(m1.toTheme == m2.toTheme, true);
     });
     test(
         'FCS1.02a: GIVEN none identical FlexColorScheme objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
+      // Expect toTheme from them to full-fill same condition.
+      expect(m1.toTheme, isNot(m3.toTheme));
     });
     test(
         'FCS1.02b: GIVEN none identical FlexColorScheme objects '
         'EXPECT them to be unequal with operator.', () {
       expect(m1 != m3, true);
+      // Expect toTheme from them to full-fill same condition.
+      expect(m1.toTheme != m3.toTheme, true);
     });
+
+    final FlexColorScheme m1e1 = m4.copyWith(
+      brightness: Brightness.light,
+      primary: FlexColor.materialLightPrimary,
+      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      secondary: FlexColor.materialLightSecondary,
+      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+    );
     test(
         'FCS1.03a: GIVEN a FlexColorScheme object EXPECT it to be '
         'equal to an unequal object when made equal with copyWith.', () {
-      expect(
-          m4.copyWith(
-            brightness: Brightness.light,
-            primary: FlexColor.materialLightPrimary,
-            primaryVariant: FlexColor.materialLightPrimaryVariant,
-            secondary: FlexColor.materialLightSecondary,
-            secondaryVariant: FlexColor.materialLightSecondaryVariant,
-          ),
-          m1);
+      expect(m1e1, m1);
+      // Expect toTheme from them to full-fill same condition.
+      expect(m1e1.toTheme, m1.toTheme);
     });
     test(
         'FCS1.03b: GIVEN a FlexColorScheme object EXPECT it to be '
         'unchanged after an empty .copyWith().', () {
       expect(m4.copyWith(), m4);
+      // Expect toTheme from them to full-fill same condition.
+      expect(m4.copyWith().toTheme, m4.toTheme);
     });
+
+    final FlexColorScheme m1e2 = const FlexColorScheme(
+      brightness: Brightness.light,
+      primary: FlexColor.materialLightPrimary,
+      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      secondary: FlexColor.materialLightSecondary,
+      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: FlexColor.materialLightError,
+      scaffoldBackground: FlexColor.materialLightBackground,
+      appBarBackground: FlexColor.materialLightPrimary,
+      onPrimary: Colors.white,
+      onSecondary: Colors.black,
+      onSurface: Colors.black,
+      onBackground: Colors.black,
+      onError: Colors.white,
+    );
     test(
         'FCS1.04: GIVEN a FlexColorScheme.light created object '
         'EXPECT equality when made by matching default constructor.', () {
       expect(
-        FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light),
-        const FlexColorScheme(
-          brightness: Brightness.light,
-          primary: FlexColor.materialLightPrimary,
-          primaryVariant: FlexColor.materialLightPrimaryVariant,
-          secondary: FlexColor.materialLightSecondary,
-          secondaryVariant: FlexColor.materialLightSecondaryVariant,
-          surface: FlexColor.materialLightSurface,
-          background: FlexColor.materialLightBackground,
-          error: FlexColor.materialLightError,
-          scaffoldBackground: FlexColor.materialLightBackground,
-          appBarBackground: FlexColor.materialLightPrimary,
-          onPrimary: Colors.white,
-          onSecondary: Colors.black,
-          onSurface: Colors.black,
-          onBackground: Colors.black,
-          onError: Colors.white,
-        ),
-      );
+          FlexColorScheme.light(
+              colors: FlexColor.schemes[FlexScheme.material]!.light),
+          m1e2);
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+          FlexColorScheme.light(
+                  colors: FlexColor.schemes[FlexScheme.material]!.light)
+              .toTheme,
+          m1e2.toTheme);
     });
+
+    final FlexColorScheme m1e3 = const FlexColorScheme(
+      brightness: Brightness.dark,
+      primary: FlexColor.materialDarkPrimary,
+      primaryVariant: FlexColor.materialDarkPrimaryVariant,
+      secondary: FlexColor.materialDarkSecondary,
+      secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+      surface: FlexColor.materialDarkSurface,
+      background: FlexColor.materialDarkBackground,
+      error: FlexColor.materialDarkError,
+      scaffoldBackground: FlexColor.materialDarkBackground,
+      appBarBackground: FlexColor.materialDarkSurface,
+      onPrimary: Colors.black,
+      onSecondary: Colors.black,
+      onSurface: Colors.white,
+      onBackground: Colors.white,
+      onError: Colors.white,
+    );
     test(
         'FCS1.05: GIVEN a FlexColorScheme.dark created object '
         'EXPECT equality when made by matching default constructor.', () {
       expect(
         FlexColorScheme.dark(
             colors: FlexColor.schemes[FlexScheme.material]!.dark),
-        const FlexColorScheme(
-          brightness: Brightness.dark,
-          primary: FlexColor.materialDarkPrimary,
-          primaryVariant: FlexColor.materialDarkPrimaryVariant,
-          secondary: FlexColor.materialDarkSecondary,
-          secondaryVariant: FlexColor.materialDarkSecondaryVariant,
-          surface: FlexColor.materialDarkSurface,
-          background: FlexColor.materialDarkBackground,
-          error: FlexColor.materialDarkError,
-          scaffoldBackground: FlexColor.materialDarkBackground,
-          appBarBackground: FlexColor.materialDarkSurface,
-          onPrimary: Colors.black,
-          onSecondary: Colors.black,
-          onSurface: Colors.white,
-          onBackground: Colors.white,
-          onError: Colors.white,
-        ),
+        m1e3,
+      );
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.dark(
+                colors: FlexColor.schemes[FlexScheme.material]!.dark)
+            .toTheme,
+        m1e3.toTheme,
       );
     });
 
@@ -1353,7 +1389,7 @@ void main() {
 
     testWidgets(
         'FCS5.04Lb: GIVEN A light theme with defined background colors AND '
-        'themedSystemNavigationBar WITH  useDivider:false '
+        'themedSystemNavigationBar WITH useDivider:false '
         'systemNavBarStyle: FlexSystemNavBarStyle.background '
         'EXPECT background colored system navbar, with no visible divider.',
         (WidgetTester tester) async {
