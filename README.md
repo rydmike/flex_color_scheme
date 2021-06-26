@@ -532,13 +532,13 @@ class _DemoAppState extends State<DemoApp> {
 > `FlexColorScheme.comfortablePlatformDensity`, instead of the **default** counter application's
 > `VisualDensity.adaptivePlatformDensity`.
 >
-> This is an alternative visaul density design that on desktop applications results in the Flutter
+> This is an alternative visual density design that on desktop applications results in the Flutter
 > `comfortable` visual density being used, instead of `compact`. On devices, they both result in the default large
 > `standard` visual density that is suitable for small touch devices. 
 > 
 > This helper function was added to
-> provide an easy option for using a bit larger UI elements on desktop and web apps, while keeping the correct
-> size for devices.
+> provide an easy option for using a bit larger UI elements on desktop and web apps, 
+> while keeping the correct size for devices.
 >
 > If the desktop and web versions of the app is used on computers with touch screens, the `comfortable` density provides
 > a nice balance. It still looks compact enough to be desktop like, while providing
@@ -572,13 +572,12 @@ convenient fixes for some theme design gaps in Flutter's own themes created with
 ## Example 2 - Create a Custom Color Scheme
 
 This example shows how you can define your own `FlexSchemeData` and create `FlexColorScheme` based themes from it.
-A theme showcase widget shows the theme with several common Material widgets.
 
-The full code is not shown in the tutorial, please see the code in the package folder
+The full code is not shown in the tutorial, please see the code in the folder
 [flex_color_scheme/example/lib/example2](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example2/main.dart)
 for the entire example.
 
-To make a custom color scheme, we will for simplicity just define it as a constant in this example.
+To make a custom color scheme, we will for simplicity define it as a constant in this example.
 We make a `FlexSchemeData` object with a name, description and scheme colors defined with
 `FlexSchemeColor` for the light and matching dark scheme. In this example we use dark purple and deep green
 and matching desaturated versions for the dark scheme.
@@ -609,10 +608,7 @@ const FlexSchemeData customFlexScheme = FlexSchemeData(
 ```
 > **NOTE:**   
 >The above custom color scheme is fairly close to the built-in scheme
-> **Barossa**. If you like it, you can probably use it instead. It is not
-> exactly the same though, the `barossa` color scheme is a bit different, but 
-> only in very minor ways. The `barossa` color scheme was introduced in version 
-> 1.4.1, and was inspired and based on this example.
+> **Barossa**. If you like it, you can probably use it instead. 
 
 We use the `FlexSchemeData` **customFlexScheme** instance `light` and `dark` properties as scheme `colors`
 for the `FlexColorScheme.light` and `dark` factory for each theme mode and `toTheme` to get the themes they define.
@@ -664,10 +660,10 @@ theme properties.
 ## Example 3 - Switch Between Different Color Schemes
 
 This example shows how you can use three built-in color schemes, add a custom scheme and then use all four as
-selectable `FlexColorScheme` based theme options in an application. The example also uses strong branded surface
-colors. A theme showcase widget shows the theme with several common Material widgets.
+selectable `FlexColorScheme` based theme options in an application. The example also uses strong branded
+surface colors. 
 
-The full example code is not shown here, please see the code in the package folder
+The full example code is not shown here, please see the code in the folder
 [flex_color_scheme/example/lib/example3](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example3/main.dart)
 for the entire example.
 
@@ -745,7 +741,7 @@ setting, by setting `showSystemMode` to `false`, thus removing this option from 
   ),
 ```
 
-These are the four resulting different themes with their light and dark modes, that we can select and
+These are the four resulting themes with their light and dark modes, that we can select and
 use in this example.
 
 **Hippie blue** scheme in light and dark mode.  
@@ -766,8 +762,7 @@ Try example 3 live on the [**web here**](https://rydmike.com/flexcolorscheme3).
 
 This example shows how you can use all the built-in color schemes, plus three custom schemes.
 How to interactively select which one of these schemes is used to define the active theme. The example also uses
-medium branded background and surface colors. A theme showcase widget shows the theme with several common Material
-widgets. A subpage is also available that shows the same theme applied when opening another page, that in Flutter
+medium branded background and surface colors. A subpage is also available that shows the same theme applied when opening another page, that in Flutter
 just inherits the same theme.
 
 The full example code is not shown here, please see the code in the package folder
@@ -847,10 +842,7 @@ Next we create a list with all the `FlexSchemeData` objects we will use as our s
 starting with all the built-in ones and adding our three custom ones at the end.
 
 >A **FlexSchemeData** object stores `name` and `description` plus the matching `FlexSchemeColor` for `light`
->and `dark` mode color schemes. As a rule of thumb, the dark scheme colors must be less saturated than its light
->scheme colors used for a light theme. Using the same colors in a light and dark color schemes seldom produce nice
->looking or very usable dark and light theme mode pairs. You can read more in the Material Design guide about
->selecting suitable [dark theme colors](https://www.material.io/design/color/dark-theme.html#usage).
+>and `dark` mode color schemes. 
 
 Next we unpack the predefined `FlexSchemeData` into the list `myFlexSchemes` with the spread operator, add our
 own light and dark scheme definition pairs as `FlexSchemeData` to the end. For our last custom `FlexSchemeColor`
@@ -967,8 +959,7 @@ bar theme features. The usage of the true black theme feature for dark themes is
 Using the optional Windows desktop like tooltip theme is also shown.
 
 The example includes a dummy responsive side menu and rail to give a visual presentation of what applications
-that have larger visible surfaces using the surface branding look like. A theme showcase widget again shows
-the theme with several common Material widgets.
+that have larger visible surfaces using the surface branding look like. 
 
 A subpage is also available that show that the same active theme is also applied when opening another page.
 This is because all the built-in widgets use the same inherited theme and use the colors in the theme in
@@ -989,7 +980,7 @@ for the entire example's code.
 
 ### Example 5 - Local State and Setup
 
-In this example we will be able to toggle the used app bar theme style, the surfaces branding strength,
+In this example we can toggle the used app bar theme style, the surfaces branding strength,
 tooltip style and try the true black theme toggle for dark-mode. This is done so that you can interactively try the
 options and see what they do.
 
@@ -1009,7 +1000,7 @@ We also introduce a toggle that allows us to for all the schemes use the `toDark
 of the hand tuned built-in ones. You can then compare the results. The `toDark` method does a pretty good job and can
 even be tuned with a property if so desired. If you use this toggle on the last custom scheme, you will not see
 any difference, because we already created its dark scheme with this method. The toggle computes the same
-dark scheme for that case again. There is also a slider that you can use to adjust the white blend level 
+dark scheme for that case again. There is a slider that you can use to adjust the white blend level 
 of the `toDark` method. From its default value of 35%, to be anything from 0...100 %, so you can experiment 
 with it and see what it does.
 
@@ -1145,8 +1136,7 @@ like `colors`, `scheme`, `surfaceStyle` and `usedColors` will have an impact on 
 returned by **FlexColorScheme**.
 
 > **AVOID**   
-> Using a light theme and dark theme that do no define and use the same `Typogrpahy`!
-> 
+> Using a light theme and dark theme that do no define and use the same `Typogrpahy`!   
 > To make the above demo work interactively we also have to make sure we use the same **typography** when
 > we make the ThemeData object from the returned ColorScheme.
 > If we do not, the animated theme will show an assertion error, because the **Flutter SDK** cannot 
@@ -1154,9 +1144,6 @@ returned by **FlexColorScheme**.
 > and newer typography that is used by default by FlexColorScheme based themes. We also add the 
 > visual density to the `ThemeData` with the same `copyWith`, so we get the same Widget spacing 
 > as the one used in our `FlexColorScheme.light().toTheme` setup.
-> 
-> The above setups ensures that we get as equivalent ThemeData designs as possible, showing only
-> the actual differences.
 
 ### Example 5 - Equivalent Setup for the Dark Theme, but with More Options
 
@@ -1227,7 +1214,7 @@ This is certainly also a usable option, but in this example we do not want this 
 
 ### Example 5 - Passing All the Values Back and Forth to the HomePage
 
-The rest of the additions in the stateful MaterialApp are just passing in current values and getting a new value for
+The rest of the additions in the stateful MaterialApp are only passing in current values and getting a new value for
 it via callbacks for all our settings and their current values.
 
 It is certainly getting tedious to do it this way by now. Since it was stated that we would not add any 
