@@ -26,10 +26,10 @@
 #
 name: Build Web
 on:
-  pull_request:
-    branches: [none-null-safe]
-  # push:
-  #  branches: [ master ]
+  #pull_request:
+  #  branches: [ none ]
+  push:
+    branches: [ none ]
   # release:
   #   types: [ published ]
 jobs:
