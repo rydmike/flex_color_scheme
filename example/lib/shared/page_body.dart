@@ -34,7 +34,16 @@ class PageBody extends StatelessWidget {
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: AppConst.maxBodyWidth),
-            child: child,
+            // The scrollbars are added above manually to keep them at the
+            // edge of the screen and not being around the centered content.
+            // Therefore we have to remove the ones that show up by default
+            // on ListView in Web and Desktop builds. Here we can do it
+            // for all content in the body.
+            child: ScrollConfiguration(
+              behavior:
+                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              child: child,
+            ),
           ),
         ),
       ),
