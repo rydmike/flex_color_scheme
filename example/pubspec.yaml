@@ -13,7 +13,7 @@ dependencies:
   # Color scheme package (by Mike Rydstrom, rydmike.com).
   # flex_color_scheme: ^3.0.0
   flex_color_scheme:
-    path: ..\
+    path: ../
 
   # The Flutter SDK (by Google flutter.dev).
   flutter:
