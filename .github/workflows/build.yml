@@ -1,5 +1,4 @@
 # This GitHub action runs on pull request to master, it:
-#
 #  - Installs dart and flutter
 #  - Uses flutter stable channel. Might setup a matrix later with beta and dev included too.
 #  - Enables flutter web
@@ -19,19 +18,17 @@
 #    - Use rpl to fix/modify the index.html file to give it the correct href deployment sub-folder.
 #  - This CI/CD stops here, it does not deploy, that is done by the deploy workflow, that is otherwise identical,
 #    but runs on release, when it is published, created or edited.
-#
 #  TODO Maybe set this workflow up to also run on a weekly schedule to check that nothing is broken?
 #       Also planning to setup a matrix test run, but this one is anyway a nice test
 #       since it does not just runs tests, it also builds actual Web apps using the package.
-#
 name: Build Web
 on:
   #pull_request:
-  #  branches: [ none ]
+  #  branches: [none]
   push:
     branches: [none]
   # release:
-  #   types: [ published ]
+  #   types: [published]
 jobs:
   flutter_tests:
     name: Analyze, test and build 5 web apps
