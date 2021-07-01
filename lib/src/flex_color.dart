@@ -2185,43 +2185,54 @@ class FlexSchemeColor with Diagnosticable {
     );
   }
 
-  /// Make effective colors using 1...4 of the passed in [FlexSchemeColor]
-  /// colors via the [usedColors] value.
+  /// Make effective [FlexSchemeColor] colors using 1...4 of the passed in
+  /// [colors] based on the [usedColors] property.
   ///
-  /// If [swapColors] is true the primary and secondary colors are returned
-  /// swapped.
+  /// The [usedColors] value corresponds to:
+  ///
+  /// * 1: Use only [primary] color in [colors], and compute [primaryVariant],
+  ///   [secondary] and [secondaryVariant] for returned [FlexSchemeColor].
+  /// * 2: Use [primary] and [secondary] in [colors] and compute
+  ///   [primaryVariant] and [secondaryVariant] for returned [FlexSchemeColor].
+  /// * 3: Use [primary], [secondary] and [primaryVariant] in [colors] and
+  ///   compute and [secondaryVariant] for returned [FlexSchemeColor].
+  /// * 4: Use all 4 [colors] in passed in [FlexColorsScheme] as they are.
+  ///
+  /// If [swapColors] is **true**, [primary] and [secondary], as well as
+  /// [primaryVariant] and [secondaryVariant] are swapped, before being
+  /// usage limited by [usedColors].
   static FlexSchemeColor effective(FlexSchemeColor colors, int usedColors,
       {bool swapColors = false}) {
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
 
-    final FlexSchemeColor effectiveColors = FlexSchemeColor(
-      primary: colors.primary,
+    final FlexSchemeColor effectiveColors = swapColors
+        ? colors.copyWith(
+            primary: colors.secondary,
+            primaryVariant: colors.secondaryVariant,
+            secondary: colors.primary,
+            secondaryVariant: colors.primaryVariant,
+          )
+        : colors;
+
+    return effectiveColors.copyWith(
+      primary: effectiveColors.primary,
       primaryVariant: usedColors > 2
-          ? colors.primaryVariant
+          ? effectiveColors.primaryVariant
           // ignore: avoid_redundant_argument_values
-          : colors.primary.darken(kDarkenPrimaryVariant),
+          : effectiveColors.primary.darken(kDarkenPrimaryVariant),
       secondary: usedColors > 1
-          ? colors.secondary
-          : colors.primary.darken(kDarkenSecondary),
+          ? effectiveColors.secondary
+          : effectiveColors.primary.darken(kDarkenSecondary),
       secondaryVariant: usedColors > 3
-          ? colors.secondaryVariant
+          ? effectiveColors.secondaryVariant
           : usedColors > 1
               // ignore: avoid_redundant_argument_values
-              ? colors.secondary.darken(kDarkenSecondaryVariantFromSecondary)
-              : colors.primary.darken(kDarkenSecondaryVariant),
+              ? effectiveColors.secondary
+                  .darken(kDarkenSecondaryVariantFromSecondary)
+              : effectiveColors.primary.darken(kDarkenSecondaryVariant),
       appBarColor: colors.appBarColor,
       error: colors.error,
     );
-
-    // Get the effective scheme with primary and secondary potentially swapped.
-    return swapColors
-        ? effectiveColors.copyWith(
-            primary: effectiveColors.secondary,
-            primaryVariant: effectiveColors.secondaryVariant,
-            secondary: effectiveColors.primary,
-            secondaryVariant: effectiveColors.primaryVariant,
-          )
-        : effectiveColors;
   }
 
   /// Returns a new [FlexSchemeColor] instance based on this one that is
