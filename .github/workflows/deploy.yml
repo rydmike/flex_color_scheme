@@ -1,5 +1,4 @@
 # This GitHub action runs on a release, when it is published, created or edited.
-#
 #  - Installs dart and flutter
 #  - Uses flutter stable channel. Might setup a matrix later with beta and dev included too.
 #  - Enables flutter web
@@ -18,7 +17,6 @@
 #    - Flutter build web app, in release mode and with CanvasKit renderer.
 #    - Use rpl to fix/modify the index.html file to give it the correct href deployment sub-folder.
 #    - Deploy each built Web App to GitHub pages.
-#
 name: Deploy Web
 on:
   release:

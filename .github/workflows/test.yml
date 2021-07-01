@@ -1,5 +1,4 @@
 # This GitHub action runs on push to master, it:
-#
 #  - Installs dart and flutter
 #  - Uses flutter stable channel. Might setup a matrix later with beta and dev included too.
 #  - Gets package dependencies
@@ -9,11 +8,10 @@
 #    dart format is not used.
 #  - Run all tests with coverage.
 #  - Upload code coverage output to Codecov for analysis.
-#
 name: Test
 on:
   push:
-    branches: [master]
+    branches: [none]
 jobs:
   flutter_test:
     runs-on: ubuntu-latest
