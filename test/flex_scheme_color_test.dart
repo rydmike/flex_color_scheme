@@ -123,21 +123,21 @@ void main() {
           ));
     });
 // TODO See about this test, no longer needed?
-    // test(
-    //     'FSC1.05: GIVEN a FlexSchemeColor with none null colors EXPECT '
-    //     'its default toDark() to be equal to result from toDark(35).', () {
-    //   expect(
-    //       m1.toDark(),
-    //       // ignore: avoid_redundant_argument_values
-    //       m1.toDark(35));
-    // });
     test(
-        'FSC1.06: GIVEN a FlexSchemeColor object with one null value  '
-        'EXPECT its toDark() to be equal to result from toDark(35).', () {
+        'FSC1.05: GIVEN a FlexSchemeColor with none null colors EXPECT '
+        'its default toDark() to be equal to result from toDark(35).', () {
       expect(
           m1.toDark(),
           // ignore: avoid_redundant_argument_values
           m1.toDark(35));
+    });
+    test(
+        'FSC1.06: GIVEN a FlexSchemeColor object with one null value  '
+        'EXPECT its toDark() to be equal to result from toDark(35).', () {
+      expect(
+          m3.toDark(),
+          // ignore: avoid_redundant_argument_values
+          m3.toDark(35));
     });
     test(
         'FSC1.07: GIVEN a FlexSchemeColor with non null colors EXPECT its '
@@ -249,6 +249,70 @@ void main() {
               primaryVariant: m1.secondaryVariant,
               secondary: m1.primary,
               secondaryVariant: m1.primaryVariant));
+    });
+
+    const FlexSchemeColor m1Swap = FlexSchemeColor(
+      primary: FlexColor.materialLightSecondary,
+      primaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondary: FlexColor.materialLightPrimary,
+      secondaryVariant: FlexColor.materialLightPrimaryVariant,
+      appBarColor: FlexColor.materialLightSecondaryVariant,
+      error: FlexColor.materialLightError,
+    );
+
+    test(
+        'FSC1.17: GIVEN a FlexSchemeColor.effective(SchemeColors, 4, '
+        'swapColors: true) EXPECT it '
+        'to be equal to SchemeColor made with colors swapped. ', () {
+      expect(FlexSchemeColor.effective(m1, 4, swapColors: true), m1Swap);
+    });
+
+    // This test fails in version 3.0.0, fix released in 3.0.1.
+    test(
+        'FSC1.18: GIVEN a FlexSchemeColor.effective(SchemeColors, 3, '
+        'swapColors: true) EXPECT it '
+        'to be equal to SchemeColor made with colors swapped,'
+        ' with Secondary variant computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1, 3, swapColors: true),
+        m1Swap.copyWith(
+          secondaryVariant:
+              m1Swap.secondary.darken(kDarkenSecondaryVariantFromSecondary),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.19: GIVEN a FlexSchemeColor.effective(SchemeColors, 2, '
+        'swapColors: true) EXPECT it '
+        'to be equal to SchemeColor made with colors swapped, '
+        'with primary variant and Secondary variant '
+        'computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1, 2, swapColors: true),
+        m1Swap.copyWith(
+          primaryVariant: m1Swap.primary.darken(kDarkenPrimaryVariant),
+          secondaryVariant:
+              m1Swap.secondary.darken(kDarkenSecondaryVariantFromSecondary),
+        ),
+      );
+    });
+
+    // This test fails in version 3.0.0, fix released in 3.0.1.
+    test(
+        'FSC1.20: GIVEN a FlexSchemeColor.effective(SchemeColors, 1), '
+        'swapColors: true) EXPECT it '
+        'to be equal to SchemeColor made with colors swapped, '
+        'with primary variant, secondary '
+        'and Secondary variant computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1, 1, swapColors: true),
+        m1Swap.copyWith(
+          primaryVariant: m1Swap.primary.darken(kDarkenPrimaryVariant),
+          secondary: m1Swap.primary.darken(kDarkenSecondary),
+          secondaryVariant: m1Swap.primary.darken(kDarkenSecondaryVariant),
+        ),
+      );
     });
 
     //**************************************************************************

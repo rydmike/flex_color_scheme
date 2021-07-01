@@ -290,7 +290,8 @@ class FlexColorScheme with Diagnosticable {
   /// Apps should migrate uses of this property to the theme's [colorScheme]
   /// [ColorScheme.secondary] color. In cases where a color is needed that
   /// that contrasts well with the secondary color [ColorScheme.onSecondary]
-  /// can be used.
+  /// can be used. For more information see:
+  /// https://flutter.dev/docs/release/breaking-changes/theme-data-accent-properties
   ///
   /// In previous versions [accentColor] for ThemeData was set to [primary]
   /// color instead as default. The [accentColor] was in FlexColorScheme
@@ -321,7 +322,9 @@ class FlexColorScheme with Diagnosticable {
   /// when using FlexColorScheme. If you come across any, please let us know.
   @Deprecated(
     'This property no longer has any function in FlexColorScheme. '
-    'This property is also deprecated in Flutter SDK after v2.3.0-0.1.pre.',
+    'It is also deprecated in Flutter SDK after v2.3.0-0.1.pre. '
+    'For more info see: '
+    'https://flutter.dev/docs/release/breaking-changes/theme-data-accent-properties',
   )
   final Color? accentColor;
 

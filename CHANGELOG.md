@@ -2,28 +2,42 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [3.0.1] - July 1, 2021
+
+* **Fix:** The internal order of swapping primary and secondary colors and reducing 
+  used colors in static function `FlexSchemeColor.effective(FlexSchemeColor colors,
+  int usedColors, {bool swapColors = false})` matters for the intended result when
+  used together in the same call. The function now swaps primary and secondary colors,
+  before reducing the used colors.
+* **Tests:** Added tests for above fix that captures the issue and fails
+  in version 3.0.0. Total 741 tests, coverage 99.75%.
+* Documentation and typo fixes.  
+
 ## [3.0.0] - June 25, 2021
 
 * **Breaking:** The color `accentColor` is being deprecated in Flutter SDK `ThemeData` starting
-  from version v2.3.0-0.1.pre.
+  from version v2.3.0-0.1.pre. For more info see 
+  [Flutter docs here.](https://flutter.dev/docs/release/breaking-changes/theme-data-accent-properties)  
+  
   Usage of `accentColor` in **FlexColorScheme** is removed to support this
-  transition. The property is deprecated in FlexColorScheme, but is still present. Its
-  usage does however no longer have impact on produced themes, this is a potential breaking change.
+  transition. The property is deprecated in FlexColorScheme, but it is still present. Its
+  usage does however no longer have any impact on produced themes. 
+  This is a potential breaking change.
   The probability that you might have used it as a property in your 
-  FlexColorScheme based theme is low. It was set before to primary color
+  FlexColorScheme based theme is low. It was before set to primary color
   in FlexColorScheme, as a way to make the highlight color of outlines and underlines on
-  text field boxes primary colored in dark theme mode, and not secondary/accent colored as they used
-  to bve in Flutter's default dark theme mode. The old `accentColor` was  
-  not used for anything else in themes anymore when using FlexColorScheme. 
-  The property is now going away totally
-  in Flutter SDK. The default ThemeData in Flutter SDK in dark mode now creates a
+  text field boxes primary colored in dark theme mode. In default Flutter dark theme they
+  used accentColor that followed `colorScheme.secondary` color. The old `accentColor` was 
+  previously not used for anything else in themes anymore when using FlexColorScheme. 
+  The property is now going away totally in Flutter SDK. 
+  The default ThemeData in Flutter SDK in dark mode now creates a
   theme for outline and underline indicators on input fields that are based on primary color, 
-  just like FlexColorScheme does and already did before. Flutter SDK no longer uses 
-  `accentColor` for it. The resulting default dark mode style on text fields thus now remain 
-  unchanged in FlexColorScheme even with this definition removed. If you 
-  had used `accentColor` in FlexColorScheme as a short-cut to define a different text field 
-  outline or underline highlight color in dark theme mode than primary color, then you will need to 
-  recreate it via text field decoration theming.
+  just like **FlexColorScheme** always did. The resulting default dark mode style on text 
+  fields thus remains unchanged in FlexColorScheme even with this definition removed.  
+  
+  If you had used `accentColor` in FlexColorScheme as an unusual way to define a different 
+  text field outline or underline color in dark mode than primary color. In that case 
+  you will need to recreate this style via a text field decoration theme.
   
   
 * **New:** The `FlexColorScheme.dark` and `FlexColorScheme.light` factories have a new 
@@ -65,18 +79,20 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   * **Outer space stage** - Outer space dark blue-grey and stage red theme.
     Use enum value `FlexScheme.outerSpace` for easy access to it.
 
-  Inspired by **MaterialYou** at GoogleIO 2021, I recently hooked up FlexColorScheme 
-  with an algorithm that extracts prominent colors from images. Then fed these 
-  colors to FlexColorScheme to make themes from them. The above new color schemes in 
-  release 3.0.0 came from these image based theme experiments. You can see examples
-  of FlexColorScheme making color schemes and themes from images in my Tweets about it.
-  This was a first [quick test](https://twitter.com/RydMike/status/1399139552200114179?s=20)
-  of the idea, later I added some more features to it, [here](https://twitter.com/RydMike/status/1399301081939820545?s=20) and [here](https://twitter.com/RydMike/status/1399933068614504451?s=20). This 
-  quick test shows that FlexColorScheme is very versatile.
-  
-
 * **Tests:** Added tests for the new features and removed test related to
-  accentColor. Total 736 tests, coverage 99.76%.
+  `accentColor`. Total 736 tests, coverage 99.75%.
+
+
+* Inspired by **MaterialYou** at GoogleIO 2021, I recently hooked up **FlexColorScheme**
+  with a Google Dart library that extracts prominent colors from images. Then fed these
+  colors to FlexColorScheme to make themes from them. The above new color schemes in
+  release 3.0.0 came from these image based theme experiments. You can see examples
+  of **FlexColorScheme** making color schemes and themes from images in my Tweets about it.
+  This was a first [quick test](https://twitter.com/RydMike/status/1399139552200114179?s=20)
+  of the idea, later I added some more features to it, [here](https://twitter.com/RydMike/status/1399301081939820545?s=20) and [here](https://twitter.com/RydMike/status/1399933068614504451?s=20). These
+  quick tests show that FlexColorScheme is very versatile. It already supports
+  Android 12 like image color branded themes, by wiring extracted image
+  colors, to colors in a FlexColorScheme based theme.
 
 ## [2.1.1] - March 30, 2021
 
@@ -110,9 +126,10 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
     showing the background, while navigation buttons float over the background. This feature only works if it is 
     also configured in the Android embedder and on SDK 30 or higher.
     More information in this example: https://github.com/rydmike/sysnavbar
-* **Examples:** Added top status bar scrim toggle, system navigation divider, and navbar style toggles to example 5.
+* **Examples:** Added status bar scrim, system navigation bar divider, 
+  and navigation bar style toggles to example 5.
   These only work on Android builds and do not have any functionality on the live Web builds.
-* **Tests:** Added tests for the new features. Total 690 tests, coverage 99.76%.
+* **Tests:** Added tests for the new features. Total 690 tests, coverage 99.75%.
 
 ## [2.0.0] - March 15, 2021
 
@@ -193,7 +210,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   * Changed example one and the intro, to use the new simpler `scheme` property when using built-in schemes.
   * Added a section that lists which sub-themes, and which of their properties, are NOT null when creating a theme data 
     object with FlexColorScheme.toTheme.  
-  * Removed the "back to contents" link after each chapter. It was nice and worked fine on Github, but for some reason
+  * Removed the "back to contents" link after each chapter. It was nice and worked fine on GitHub, but for some reason
     it did not on pub.dev.
   * Tried finding and adding comments for the 3 missing API comments needed to reach 100% API
     documentation comments, not sure if it succeeded. I will see when the update is published.
@@ -236,7 +253,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   The style is set via the `FlexColorScheme` property `tabBarStyle` using enum values `FlexTabBarStyle.forAppBar` 
   (default) and `FlexTabBarStyle.forBackground`.
   
-* The themed `AppBar` and `BottomAppBar` elevations still default to 0. However, and for convenience, the themed values 
+* The themed `AppBar` and `BottomAppBar` elevations still default to 0. For convenience, the themed values 
   can now both be modified directly via the `FlexColorScheme` properties `appBarElevation` and `bottomAppBarElevation`, 
   without need to change these frequently modified values with an extra `copyWith` to get them re-themed as desired.
   When using the recommended `FlexColorScheme.light` and `FlexColorScheme.dark` factories, `appBarElevation` 
@@ -250,19 +267,20 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 * Example 4 and 5: The sub-page now has a demo tab bar in the app bar, and a demo bottom navigation bar.  
 * Example 5: Now includes a toggle that can be used to select the tab bar theme style.
 * Example 5: Now includes a slider to modify the themed app bar elevation.  
-* Example 5: Fixed so that the Roboto font, that is always used by the examples regardless of platform, now also gets
-  used when you toggle to create the theme from the scheme with the ThemeData.from(colorScheme). It looked
-  a bit ood when it changed to platform default font on Desktop and Web versions, and FlexColorScheme.toTheme used
-  Roboto. This was modified so that the resulting themes use the same font and are comparable.
+* Example 5: The Roboto font that is always used by the examples regardless of platform, is now also
+  used when you create the theme from the scheme with the `ThemeData.from(colorScheme)`. It looked
+  a bit odd when it changed to platform default font on Desktop and Web versions, while
+  `FlexColorScheme.toTheme` used Roboto. This was modified so that the resulting themes use the 
+  same font and are thus more comparable.
 
 ## [1.1.1] - December 31, 2020
 
 * Updated example 5 to include UI that can be used to vary the computed dark themes white blend percentage level.
   This was added to better demonstrate the `toDark` feature.
-* Added a `defaultError` fix/modifier that enables the built-in schemes to use the Material design guide's default dark 
-  error color when using the `toDark` method to compute a dark scheme from a light scheme, that already defines a light 
-  scheme error color. The `toDark` method can be used without the `defaultError` scheme modifier as well, but then the 
-  dark error color also change with the other computed dark scheme colors when using the "Compute dark theme" feature 
+* Added a `defaultError` modifier that enables the built-in schemes to use the Material design guide's default dark 
+  error color when using the `toDark` method to compute a dark scheme from a light scheme.
+  The `toDark` method can be used without the `defaultError` scheme modifier, but then the 
+  error color also changes with the other computed dark scheme colors when using `toDark` method 
   and the level adjustment. This is not necessarily the desired behavior. The fix enables the alternative more often
   desired behavior and ensures that the dark error color just uses the default value. For custom schemes that do not 
   specify a custom error color for their light scheme and thus default to the Material Guide's standard error color, 
@@ -290,8 +308,8 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   - Example 5 now includes an option make all the dark mode schemes with the `toDark` option, so it can be 
     toggled and compared to the hand-tuned versions. The same custom color scheme as in example 4 are also included.
     Example 5 also has the same sub-page as example 4. Example 5 now also show how to solve the issue that the system
-    navigation bar does not get color scheme and theme mode appropriate system navigation bar style in Android as we 
-    change the color scheme and theme mode. This is done with an `AnnotatedRegion` and the new helper
+    navigation bar does not get color scheme and theme mode appropriate style in Android when we 
+    change the theme. This improvement is done with an `AnnotatedRegion` and the new static helper
     method `FlexColorScheme.themedSystemNavigationBar`.
 * Documentation updates and typo corrections.
 
@@ -305,9 +323,9 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 * Made planned API name changes, SchemeOnColors -> FlexSchemeOnColors and 
   SchemeSurfaceColors -> FlexSchemeSurfaceColors. These are lower level APIs that are 
   only used when making custom on and surface colors.
-  Changed ThemeModeOptionButton -> FlexThemeModeOptionButton, this is also a lower
+  Changed ThemeModeOptionButton -> FlexThemeModeOptionButton, this is a lower
   level API that can be used when making more advanced custom theme selection 
-  control that are based on the same button as the FlexThemeModeSwitch uses.     
+  controls that are based on the same button that the `FlexThemeModeSwitch` uses.     
 * Exposed planned configuration APIs for the FlexThemeModeSwitch and FlexThemeModeOptionButton.
 * Removed the constants that had no function in the public interface from the API.
 * Documentation updates and corrections.
@@ -329,46 +347,29 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 
 ### TODO
 
-- Version 2.2.0 Release even more color schemes. Making schemes is fun, documenting the changes a bit less so.
+- Add a property option to use actual Material color shades when a Material 
+  color is selected as primary color, for its light/dark shade. 
   
-- WIP: (add test) ThemeData.accentColor is deprecated starting in v2.3.0-0.1.pre. When that lands in stable channel
-  an update is needed to remove the usage of accentColor as a way to set the InputDecorator color to
-  default to colorScheme.primary in both dark and light theme mode. 
-
-  Based on a quick look at the modified code
-  in the SDK to support the removal of ThemeData.accentColor, it seems like the new default for
-  dak theme mode is also now the primary color. In the past it was using the accentColor as default 
-  color for input decorators in dark theme mode. This was not inline with newer Material Design.
-  FlexColorScheme currently corrects this by modifying the ThemeData.accentColor to be same as
-  colorScheme.primary. This worked since the only widget in FlexColorScheme based ThemeData that
-  used the ThemeData.accentColor was the InputDecorator, all other widgets that required the
-  accentColor already uses colorScheme.secondary. It looks like the fixe for FlexColorScheme when
-  it lands in stable will just be to deprecate its usage of accentColor but default behavior should 
-  still remain unchanged from current defaults.
-  
-- Elevated surfaces for
-
-- To dark scheme add a swap primary/secondary flag.
-
-- Add a use actual Material color shades for the light/dark mode, when a Material color
-  is selected. Make this new default and keep old around as option.
-  
-- Find the color algo google uses on it Material colors site here
+- For color swatch calculations, find and use the color algorithm Google uses on its 
+  Material colors site here
   https://material.io/design/color/the-color-system.html#tools-for-picking-colors
   and here
-  https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=582aed&secondary.color=00B0FF
+  https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=582aed&secondary.color=00B0FF  
+  The algorithms for them are actually a bit different. The second link also seems to imply that ColorScheme's should have
+  primary and secondary colors, with light and dark variants. Instead of using just one variant color
+  like current `ColorScheme` class in Flutter. Maybe this is a coming change with **MaterialYou** or perhaps
+  an older design? Status currently unknown.
   
-Starting points for the algo:
-https://stackoverflow.com/questions/32942503/material-design-color-palette
-https://github.com/Hammwerk/material-color-palette
-
-Interesting and simpler Ant design: https://2x.ant.design/docs/spec/colors
-
-Tools: https://onextrapixel.com/best-tools-generate-color-palettes/
-
-
+  - Starting points for the Dart Material color swatch algorithm could be ports of these:
+    https://stackoverflow.com/questions/32942503/material-design-color-palette and
+    https://github.com/Hammwerk/material-color-palette
+  - Wait and see if Google might make their Material color swatch algorithm available 
+    in Dart/Flutter with MaterialYou.  
+  - Interesting and simpler Ant design: https://2x.ant.design/docs/spec/colors color swatches.
+  - Color palette tools link: https://onextrapixel.com/best-tools-generate-color-palettes/ as ref info.
 
 ### COMPLETED
+- Version 3.0.0 Deprecated `accentColor`. Swap primary and secondary colors feature added. Added 4 new color schemes.
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
 - Version 2.0.0-nullsafety.2: Minor new APIs and features added. Example 5 updated.
 - This [#71184](https://github.com/flutter/flutter/pull/71184) landed in Flutter 2.0.0. The past custom "white" 
