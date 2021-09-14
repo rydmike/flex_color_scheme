@@ -124,7 +124,6 @@ void main() {
             appBarColor: Color(0xff4500a7),
           ));
     });
-// TODO See about this test, no longer needed?
     test(
         'FSC1.05: GIVEN a FlexSchemeColor with none null colors EXPECT '
         'its default toDark() to be equal to result from toDark(35).', () {

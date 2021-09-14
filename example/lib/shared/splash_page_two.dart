@@ -50,7 +50,7 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     // the keyboard will bring the navigation bar back.
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.edgeToEdge,
-      // overlays: <SystemUiOverlay>[],
+      overlays: <SystemUiOverlay>[],
     );
     super.initState();
   }
@@ -82,7 +82,12 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
       // that in this example for the scaffold background as well, it should
       // match nicely if it pops up back up at some point while this screen is
       // used, eg via keyboard activation.
-      value: FlexColorScheme.themedSystemNavigationBar(context, noAppBar: true),
+      value: FlexColorScheme.themedSystemNavigationBar(
+        context,
+        noAppBar: true,
+        invertStatusIcons: true,
+        opacity: 0.01,
+      ),
       child: Scaffold(
         backgroundColor: theme.colorScheme.background,
         resizeToAvoidBottomInset: true,

@@ -377,26 +377,6 @@ void main() {
       );
     });
 
-    // TODO: Remove deprecated test
-    // test(
-    //     'FCS7.15: GIVEN a FlexColorScheme theme with Material scheme light '
-    //     'colors EXPECT buttonColor equality with '
-    //     'colorScheme.primary.', () {
-    //   expect(
-    //     themeLight.buttonColor,
-    //     themeLight.colorScheme.primary,
-    //   );
-    // });
-    // test(
-    //     'FCS7.16: GIVEN a FlexColorScheme theme with Material scheme dark '
-    //     'colors EXPECT buttonColor equality with '
-    //     'colorScheme.primary.', () {
-    //   expect(
-    //     themeDark.buttonColor,
-    //     themeDark.colorScheme.primary,
-    //   );
-    // });
-
     //**************************************************************************
     // FlexColorScheme.light & dark factory tests. With LIGHT surface branding.
     //

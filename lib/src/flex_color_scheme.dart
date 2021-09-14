@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'flex_color.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
+import 'flex_scheme.dart';
 
 /// Enum for using predefined surface types in [FlexColorScheme] based themes.
 enum FlexSurface {
@@ -189,14 +190,6 @@ class FlexColorScheme with Diagnosticable {
     this.error,
     this.scaffoldBackground,
     this.appBarBackground,
-    @Deprecated(
-      'This property no longer has any function in FlexColorScheme. '
-      'It is also deprecated in Flutter SDK after v2.3.0-0.1.pre. '
-      'For more info see: '
-      'https://flutter.dev/docs/release/breaking-changes/'
-      'theme-data-accent-properties',
-    )
-        this.accentColor,
     this.onPrimary,
     this.onSecondary,
     this.onSurface,
@@ -286,54 +279,6 @@ class FlexColorScheme with Diagnosticable {
   /// If no color is given it defaults to the Flutter standard color scheme
   /// based light and dark app bar theme colors.
   final Color? appBarBackground;
-
-  /// Obsolete property that was originally used as the foreground
-  /// color for widgets (knobs, text, overscroll edge effect, etc).
-  ///
-  /// The material library no longer uses this property. In most cases
-  /// the theme's [colorScheme] [ColorScheme.secondary] property is now
-  /// used instead.
-  ///
-  /// Apps should migrate uses of this property to the theme's colorScheme
-  /// [ColorScheme.secondary] color. In cases where a color is needed that
-  /// that contrasts well with the secondary color [ColorScheme.onSecondary]
-  /// can be used. For more information see:
-  /// https://flutter.dev/docs/release/breaking-changes/theme-data-accent-properties
-  ///
-  /// In previous versions [accentColor] for ThemeData was set to [primary]
-  /// color instead as default. The [accentColor] was in FlexColorScheme
-  /// only used for the active border color on text input in dark theme mode.
-  /// By allowing a custom color with color scheme based themes, we could
-  /// control the color of the active input border on text fields in dark themes
-  /// separately from the rest of the color scheme based colors, without the
-  /// need for a complex text input decoration theme. This only applies to
-  /// the dark theme mode. The light theme mode still uses the primary color
-  /// for the active border. If you want to change that you will have to make a
-  /// custom input decoration themes. The purpose of the past modification was
-  /// actually to get InputDecorations on TextFields in dark theme mode that
-  /// as default theme used primary color, instead of accentColor, which
-  /// by default in the past was same color as secondaryColor. This was actually
-  /// done to get a default FlexColorScheme based theme that matched the
-  /// Material Design guide. Flutter SDK (from v2.0.0 it seems) has been
-  /// updated to have the same default behavior now that FlexColorScheme already
-  /// did before for InputDecorators. Thus there is no longer any need for this
-  /// property or ot set a value for it. We can thus deprecate it and not use
-  /// it for anything, even before the ThemeData.accentColor deprecation
-  /// actually lands
-  ///
-  /// We could have named this extra property textDarkActiveBorderColor, but
-  /// since it is still defining the accentColor in ThemeData, it was decided to
-  /// continue to use this name for the property, just in case it still also
-  /// impacts other color properties that does not get themed to the scheme
-  /// secondary color separately. We have not yet noticed any such widgets
-  /// when using FlexColorScheme. If you come across any, please let us know.
-  @Deprecated(
-    'This property no longer has any function in FlexColorScheme. '
-    'It is also deprecated in Flutter SDK after v2.3.0-0.1.pre. '
-    'For more info see: '
-    'https://flutter.dev/docs/release/breaking-changes/theme-data-accent-properties',
-  )
-  final Color? accentColor;
 
   /// A color that is clearly legible when drawn on [primary].
   ///
@@ -564,7 +509,7 @@ class FlexColorScheme with Diagnosticable {
     /// guide for light theme found
     /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
     ///
-    /// If values for [surface], [background] ot [scaffoldBackground] are
+    /// If values for [surface], [background] or [scaffoldBackground] are
     /// provided, they are used instead of values that would be assigned based
     /// on the selected and provided [FlexSurface] style.
     FlexSurface surfaceStyle = FlexSurface.material,
@@ -954,7 +899,7 @@ class FlexColorScheme with Diagnosticable {
     /// guide for dark theme found here:
     /// https://material.io/design/color/dark-theme.html#ui-application
     ///
-    /// If values for [surface], [background] ot [scaffoldBackground] are
+    /// If values for [surface], [background] or [scaffoldBackground] are
     /// provided, they are used instead of values that would be assigned based
     /// on the selected and provided [FlexSurface] style.
     FlexSurface surfaceStyle = FlexSurface.material,
@@ -1934,7 +1879,7 @@ class FlexColorScheme with Diagnosticable {
     // With Typography we deviate from the Flutter standard that uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
     // as default, if one is not provided.
-    // TODO: The need for this is being deprecated in Flutter 2.4.
+    // TODO: Remove? The need for this was deprecated in Flutter 2.5.
     final Typography _typography =
         typography ?? Typography.material2018(platform: _platform);
 
@@ -2238,11 +2183,11 @@ class FlexColorScheme with Diagnosticable {
 
       // NOTE: Since the old buttons have been deprecated in Flutter 2.0.0
       // they are no longer presented or used in the code in FlexColorScheme.
-      // However, FlexColorScheme still defines the themes for them described
-      // below. Defining the theme does not yet issue any deprecation warning
-      // or error, as long as that is the case this theming will be kept.
+      // The button color was deprecated in Flutter 2.5, but the old theme
+      // still exists, so we keep still keep it defined as before in
+      // FlexColorScheme, until it becomes deprecated too.
       //
-      // The button color and button theming below makes the old buttons almost
+      // The button theming below makes the old buttons almost
       // look like the defaults for the new ElevatedButton, TextButton and
       // OutlinedButton. These were defaults I used previously for the old
       // buttons. With these themes as defaults for the old buttons,
@@ -2251,14 +2196,8 @@ class FlexColorScheme with Diagnosticable {
       // pretty good out of the box. But the old ones did not, the next two
       // theme settings fixes that.
       //
-      // Set buttonColor to colorScheme.primary and not to grey. Similar to
-      // to the Material design for the newer buttons.
-
-      // TODO: Remove deprecated button color, take away thse comments too
-      // buttonColor: _colorScheme.primary,
-
-      // When the button color is set to primary, we also need to define the
-      // [ButtonThemeData] so that we get correct onSurface colors for the
+      // When the deprecated button color was set to primary, and we also define
+      // the [ButtonThemeData] so that we get correct onSurface colors for the
       // buttons. This buttonColor and buttonTheme setup, makes the older
       // Flutter Material buttons [RaisedButton], [OutlineButton] and
       // [FlatButton] very similar in style to the default color scheme based
