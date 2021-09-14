@@ -2,7 +2,7 @@ SF:lib\src\flex_color.dart
 DA:14,0
 DA:1906,3
 DA:1907,1
-DA:1928,13
+DA:1928,14
 DA:1948,1
 DA:1954,1
 DA:1955,1
@@ -28,7 +28,7 @@ DA:1986,3
 DA:1987,3
 DA:1988,3
 DA:1989,3
-DA:2007,18
+DA:2007,19
 DA:2047,2
 DA:2055,2
 DA:2058,2
@@ -111,10 +111,10 @@ LF:108
 LH:107
 end_of_record
 SF:lib\src\flex_color_scheme.dart
-DA:11,11
-DA:33,11
-DA:84,11
-DA:116,12
+DA:11,12
+DA:33,12
+DA:84,12
+DA:116,13
 DA:182,6
 DA:207,4
 DA:208,4
@@ -474,7 +474,7 @@ DA:2512,3
 DA:2513,3
 DA:2514,3
 DA:2515,3
-DA:2539,16
+DA:2539,17
 DA:2600,5
 DA:2617,1
 DA:2622,5
@@ -636,7 +636,7 @@ LF:53
 LH:53
 end_of_record
 SF:lib\src\flex_scheme.dart
-DA:3,11
+DA:3,12
 LF:1
 LH:1
 end_of_record
