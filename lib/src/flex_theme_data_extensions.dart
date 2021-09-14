@@ -9,13 +9,32 @@ import 'flex_scheme.dart';
 ///
 /// Provided extensions:
 ///
-/// * ThemeData.flexLight(), based on factory FlexColorScheme.light().toTheme
-/// * ThemeData.flexDark(), based on factory FlexColorScheme.dark().toTheme
-/// * ThemeData.flexRaw(), based on factory FlexColorScheme().toTheme
-extension FlexThemeExtension on ThemeData {
+/// * FlexThemeData.light(), based on FlexColorScheme.light().toTheme
+/// * FlexThemeData.dark(), based on FlexColorScheme.dark().toTheme
+/// * FlexThemeData.raw(), based on FlexColorScheme().toTheme
+///
+/// The goal is to eventually be able to provide these as static on extesions
+/// on ThemeData so it would be possible to say:
+///
+/// * ThemeData.flexLight(), based on FlexColorScheme.light().toTheme
+/// * ThemeData.flexDark(), based on FlexColorScheme.dark().toTheme
+/// * ThemeData.flexRaw(), based on FlexColorScheme().toTheme
+///
+/// Unfortunately Dart does not yet support such extensions, see:
+/// https://github.com/dart-lang/language/issues/723
+///
+/// Using these static extension with the Extension name does not yet add as
+/// much familiarity as being able to use it on ThemeData directly would do.
+/// It was anyway added as an option, hopefully pending delivery on above
+/// mentioned issue will allow for the 2nd mentioned syntax as well some day.
+///
+/// Using FlexThemeData.light() is still a bit shorter than
+/// FlexColorScheme.light().toTheme, and may better show that it returns
+/// ThemeData object.
+extension FlexThemeData on ThemeData {
   /// Return a ThemeData defined by factory FlexColorScheme().light object and
   /// its toTheme method.
-  ThemeData flexLight({
+  static ThemeData light({
     /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
     /// from.
     ///
@@ -272,7 +291,7 @@ extension FlexThemeExtension on ThemeData {
 
   /// Return a ThemeData defined by factory FlexColorScheme().dark object and
   /// its toTheme method.
-  ThemeData flexDark({
+  static ThemeData dark({
     /// The [FlexSchemeColor] that we will create the dark [FlexColorScheme]
     /// from.
     ///
@@ -535,7 +554,7 @@ extension FlexThemeExtension on ThemeData {
 
   /// Return a ThemeData defined by raw FlexColorScheme() object and its
   /// toTheme method.
-  ThemeData flexRaw({
+  static ThemeData raw({
     /// The overall brightness of this color scheme.
     ///
     /// The brightness value is required and cannot be null.
