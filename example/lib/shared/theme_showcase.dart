@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // to understand how to use the FlexColorScheme package demonstrated in
 // the examples.
 
+// ignore_for_file: avoid_redundant_argument_values
+
 // Theme showcase for the current theme.
 //
 // Use this widget to review your theme's impact on [ThemeData] and see
@@ -76,13 +78,6 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: <Widget>[
-        // Padding(
-        //   padding: const EdgeInsets.all(8),
-        //   child: RaisedButton(
-        //     onPressed: () {},
-        //     child: const Text('RAISED BUTTON'),
-        //   ),
-        // ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: ElevatedButton(
@@ -90,13 +85,6 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
             child: const Text('ELEVATED BUTTON'),
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.all(8),
-        //   child: OutlineButton(
-        //     onPressed: () {},
-        //     child: const Text('OUTLINE BUTTON'),
-        //   ),
-        // ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: OutlinedButton(
@@ -104,13 +92,6 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
             child: const Text('OUTLINED BUTTON'),
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.all(8),
-        //   child: FlatButton(
-        //     onPressed: () {},
-        //     child: const Text('FLAT BUTTON'),
-        //   ),
-        // ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: TextButton(

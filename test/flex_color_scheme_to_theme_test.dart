@@ -99,8 +99,8 @@ void main() {
 
     // themeDark = Default material dark scheme colors.
     test(
-        'FCS7.00SwapL: GIVEN FlexColorScheme.light(swapColors: true) EXPECT it to'
-        'be equal to one made with light scheme colors swapped ', () {
+        'FCS7.00SwapL: GIVEN FlexColorScheme.light(swapColors: true) EXPECT it '
+        'to be equal to one made with light scheme colors swapped ', () {
       expect(
           FlexColorScheme.light(
             swapColors: true,
@@ -116,8 +116,8 @@ void main() {
 
     // themeDark = Default material dark scheme colors.
     test(
-        'FCS7.00SwapD: GIVEN FlexColorScheme.dark(swapColors: true) EXPECT it to'
-        'be equal to one made with dark scheme colors swapped ', () {
+        'FCS7.00SwapD: GIVEN FlexColorScheme.dark(swapColors: true) EXPECT it '
+        'to be equal to one made with dark scheme colors swapped ', () {
       expect(
           FlexColorScheme.dark(
             swapColors: true,

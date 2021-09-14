@@ -2196,7 +2196,7 @@ class FlexSchemeColor with Diagnosticable {
   ///   [primaryVariant] and [secondaryVariant] for returned [FlexSchemeColor].
   /// * 3: Use [primary], [secondary] and [primaryVariant] in [colors] and
   ///   compute and [secondaryVariant] for returned [FlexSchemeColor].
-  /// * 4: Use all 4 [colors] in passed in [FlexColorsScheme] as they are.
+  /// * 4: Use all 4 [colors] in passed in FlexColorsScheme as they are.
   ///
   /// If [swapColors] is **true**, [primary] and [secondary], as well as
   /// [primaryVariant] and [secondaryVariant] are swapped, before being
@@ -2226,9 +2226,8 @@ class FlexSchemeColor with Diagnosticable {
       secondaryVariant: usedColors > 3
           ? effectiveColors.secondaryVariant
           : usedColors > 1
-              // ignore: avoid_redundant_argument_values
-              ? effectiveColors.secondary
-                  .darken(kDarkenSecondaryVariantFromSecondary)
+              ? effectiveColors.secondary.darken(
+                  kDarkenSecondaryVariantFromSecondary) // ignore: avoid_redundant_argument_values
               : effectiveColors.primary.darken(kDarkenSecondaryVariant),
       appBarColor: colors.appBarColor,
       error: colors.error,

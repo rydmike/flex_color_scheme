@@ -189,7 +189,14 @@ class FlexColorScheme with Diagnosticable {
     this.error,
     this.scaffoldBackground,
     this.appBarBackground,
-    this.accentColor,
+    @Deprecated(
+      'This property no longer has any function in FlexColorScheme. '
+      'It is also deprecated in Flutter SDK after v2.3.0-0.1.pre. '
+      'For more info see: '
+      'https://flutter.dev/docs/release/breaking-changes/'
+      'theme-data-accent-properties',
+    )
+        this.accentColor,
     this.onPrimary,
     this.onSecondary,
     this.onSurface,
@@ -287,7 +294,7 @@ class FlexColorScheme with Diagnosticable {
   /// the theme's [colorScheme] [ColorScheme.secondary] property is now
   /// used instead.
   ///
-  /// Apps should migrate uses of this property to the theme's [colorScheme]
+  /// Apps should migrate uses of this property to the theme's colorScheme
   /// [ColorScheme.secondary] color. In cases where a color is needed that
   /// that contrasts well with the secondary color [ColorScheme.onSecondary]
   /// can be used. For more information see:
@@ -498,7 +505,7 @@ class FlexColorScheme with Diagnosticable {
   /// as default typography if one is not provided.
   ///
   /// Never mix different [Typography] in light and dark theme mode. If you
-  /// do, lerping between dark and light theme mode will fail due Flutter SDK
+  /// do, lerp between dark and light theme mode will fail due Flutter SDK
   /// not being able to handle the use case. If you use a default light or dark
   /// Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for the
   /// other one, you must set either the default ThemeData to
@@ -739,10 +746,10 @@ class FlexColorScheme with Diagnosticable {
     /// as default typography if one is not provided.
     ///
     /// Never mix different [Typography] in light and dark theme mode. If you
-    /// do, lerping between dark and light theme mode will fail due Flutter SDK
-    /// not being able to handle the use case. If you use a default light or dark
-    /// Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for the
-    /// other one, you must set either the default ThemeData to
+    /// do, lerp between dark and light theme mode will fail due Flutter SDK
+    /// not being able to handle the use case. If you use a default light or
+    /// dark Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for
+    /// the other one, you must set either the default ThemeData to
     /// [Typography.material2018] OR the [FlexColorScheme.typography] to
     /// [Typography.material2014] to avoid this issue. It is not generally
     /// recommended to create you light and dark theme mode data with
@@ -1051,8 +1058,8 @@ class FlexColorScheme with Diagnosticable {
     /// schemes or with computed dark themes from light theme. If you are
     /// explicitly defining all your theme colors you can of course define
     /// them as desired. Even if you do that, this feature will still swap
-    /// whatever colors you defined for primary and secondary. You can offer this
-    /// feature as an easy end user modifiable theme option if you like.
+    /// whatever colors you defined for primary and secondary. You can offer
+    /// this feature as an easy end user modifiable theme option.
     bool swapColors = false,
 
     /// Tooltips background color will match the brightness of the theme's
@@ -1108,10 +1115,10 @@ class FlexColorScheme with Diagnosticable {
     /// as default typography if one is not provided.
     ///
     /// Never mix different [Typography] in light and dark theme mode. If you
-    /// do, lerping between dark and light theme mode will fail due Flutter SDK
-    /// not being able to handle the use case. If you use a default light or dark
-    /// Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for the
-    /// other one, you must set either the default ThemeData to
+    /// do, lerp between dark and light theme mode will fail due Flutter SDK
+    /// not being able to handle the use case. If you use a default light or
+    /// dark Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for
+    /// the other one, you must set either the default ThemeData to
     /// [Typography.material2018] OR the [FlexColorScheme.typography] to
     /// [Typography.material2014] to avoid this issue. It is not generally
     /// recommended to create you light and dark theme mode data with
@@ -1879,7 +1886,7 @@ class FlexColorScheme with Diagnosticable {
       onError: onError,
     );
     // Define a standard Flutter ColorScheme from the provided brightness and
-    // provided/computes/default colors.
+    // provided/computed/default colors.
     final ColorScheme _colorScheme = ColorScheme(
       primary: primary,
       primaryVariant: primaryVariant,
@@ -1907,8 +1914,9 @@ class FlexColorScheme with Diagnosticable {
 
     // When working with color scheme based colors, there is no longer a
     // Material primary swatch that we can use to create some of the old
-    // Theme colors from that are needed. To be able to do so we make
-    // a complete material color swatch from the provided primary color,
+    // Theme colors from, that are still needed by some standard Widgets.
+    // To be able to make these colors we compute a complete material like
+    // color swatch from the provided primary color,
     // using the primary color as its middle [500] index color.
     final MaterialColor _primarySwatch =
         createPrimarySwatch(_colorScheme.primary);
@@ -1925,7 +1933,7 @@ class FlexColorScheme with Diagnosticable {
     // We need some logic for the appBarColor. If a custom color for the
     // app bar was passed in, we use that, if not we use the surface color in
     // dark mode and primary color in light mode, the latter part is the same
-    // logic the standard Flutter ThemeData.from color scheme factory uses.
+    // logic the standard Flutter ThemeData.from(colorScheme) factory uses.
     final Color _effectiveAppBarColor = appBarBackground ??
         (_isDark ? _colorScheme.surface : _colorScheme.primary);
     // Calculate brightness for the app bar from the resulting effective color.
@@ -1938,6 +1946,7 @@ class FlexColorScheme with Diagnosticable {
     // With Typography we deviate from the Flutter standard that uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
     // as default, if one is not provided.
+    // TODO: The need for this is being deprecated in Flutter 2.4.
     final Typography _typography =
         typography ?? Typography.material2018(platform: _platform);
 
@@ -1974,11 +1983,11 @@ class FlexColorScheme with Diagnosticable {
     // opacity value is the same  as Flutter default for the default theme
     // that is also designed for AppBar usage.
     //
-    // This conditional expression is not so pretty, but I preferred it as an
+    // This condition is not so pretty, but I preferred it as an
     // expression. Since it only has two outcomes, I thought it was
     // still reasonable to write it like this, instead of via a function like
     // the effectiveTabColor, that has 3 outcomes. If it needs more logic
-    // later, consider a rewrite with a function with logic.
+    // later, I will rewrite it as a function with logic.
     final Color _unselectedTabColor =
         (tabBarStyle == FlexTabBarStyle.forBackground ||
                 (_appBarBrightness == Brightness.light &&
@@ -2051,7 +2060,7 @@ class FlexColorScheme with Diagnosticable {
           ThemeData.estimateBrightnessForColor(_colorScheme.primary),
       canvasColor: _colorScheme.background,
 
-      // TODO: Remove accentColor when deprecated on stable.
+      // TODO: Remove accentColor and its brightness when deprecated on stable.
       accentColor: _colorScheme.secondary,
       accentColorBrightness:
           ThemeData.estimateBrightnessForColor(_colorScheme.secondary),
@@ -2062,7 +2071,7 @@ class FlexColorScheme with Diagnosticable {
       // color from scheme background and surface, if so desired. Flutter's
       // standard ThemeData.from a ColorScheme cannot do this. The good old
       // ThemeData factory can of course, but color scheme based themes in
-      // flutter cannot specify it separately. We need to be able to do so
+      // Flutter cannot specify it separately. We need to be able to do so
       // in order to make elegantly primary color branded themes.
       scaffoldBackgroundColor: scaffoldBackground ?? _colorScheme.background,
       // Card, divider and background colors are same as in ThemeData.from.
@@ -2076,7 +2085,7 @@ class FlexColorScheme with Diagnosticable {
       // Flutter standard dialogBackgroundColor for color scheme based themes
       // uses colorScheme.background.
       // We use surface color instead of background for the dialog background.
-      // In Flutter ColorScheme .dark and .light, they are the same, but
+      // In Flutter ColorScheme.dark and .light, they are the same, but
       // background color affects things like drawer, bottom bar and we
       // like them slightly darker than surface, and when using primary blended
       // background, we want it to be a stronger blend than surface, but this
@@ -2089,16 +2098,12 @@ class FlexColorScheme with Diagnosticable {
       // Define errorColor via color scheme error color.
       errorColor: _colorScheme.error,
 
-      // Replaced Flutter standard indicator color with colorScheme.primary.
-      // The default is onSurface in dark mode and onPrimary in light mode,
-      // which is designed to fit an app bar colored tab bar. Since we made
-      // the tab bar to be used primarily on surface color, we want the
-      // indicator to be primary colored both in dark and light mode.
+      // Use the calculated _selectedTabColor as indicatorColor.
       indicatorColor: _selectedTabColor,
 
       // Elevation overlay on dark material elevation is used on dark themes
       // on surfaces by default. Flutter ThemeData.from ColorScheme based
-      // themes also uses this by default, but ThemeData factory does not.
+      // themes also uses this by default, but older ThemeData factory does not.
       applyElevationOverlayColor: _isDark,
 
       // Pass the from FlexColorScheme defined colorScheme to ThemeData
@@ -2128,8 +2133,8 @@ class FlexColorScheme with Diagnosticable {
       // This color is important, if it is not set we get a teal color for it
       // in dark mode, and not actually the secondary color that we want for
       // our color scheme based theme. The Flutter color scheme based theme
-      // does not include this, in our opinion correct application of the color
-      // scheme based theme, it should really do the same as below.
+      // does not include this, in our opinion for correct application of the
+      // color scheme based theme, it should really do the same as below.
       // See issue: https://github.com/flutter/flutter/issues/65782
       toggleableActiveColor: _colorScheme.secondary,
 
@@ -2186,7 +2191,7 @@ class FlexColorScheme with Diagnosticable {
               // This is the actual scrim color used by Android by default,
               // here we just re-apply if false or if it had been removed
               // earlier, using `null` does not restore we need the actual used
-              // scrim by Android ro restore if it has been removed earlier.
+              // scrim by Android to restore if it has been removed earlier.
               : const Color(0x40000000),
           statusBarBrightness: _appBarBrightness,
           statusBarIconBrightness: _appBarBrightness == Brightness.dark
@@ -2210,6 +2215,8 @@ class FlexColorScheme with Diagnosticable {
         ),
         // We use the new AppBarTheme that has more features, but is not
         // backwards compatible.
+        // TODO: Remove this when its deprecation reaches stable.
+        //  In version 2.4 "false" is the new default and only option.
         backwardsCompatibility: false,
       ),
 
@@ -2361,20 +2368,25 @@ class FlexColorScheme with Diagnosticable {
   /// Returns the [ColorScheme] object defined by [FlexColorScheme] properties.
   ///
   /// After you have defined your scheme with [FlexColorScheme] or one of its
-  /// recommended factories [FlexColorScheme.light], [FlexColorScheme.dark], use
-  /// the [toScheme] method to get the resulting [ColorScheme] object defined
-  /// by your [FlexColorScheme] definition.
+  /// recommended factories [FlexColorScheme.light], [FlexColorScheme.dark],
+  /// you can use the [toScheme] method to get the resulting standard Flutter
+  /// [ColorScheme] object defined by your [FlexColorScheme] definition.
   ///
-  /// You can use then use this returned color scheme in a standard
+  /// While you can use use this returned color scheme in a standard
   /// [ThemeData.from] color scheme based theme factory to create a theme from
-  /// [FlexColorScheme]. This will result in a theme that is based on the
-  /// color scheme defined in [FlexColorScheme], including the surface and
-  /// background color branding, and true black for dark mode, if those were
-  /// used in its creation via the light and dark factories. The main difference
-  /// will be that the Flutter's [ThemeData.from] theme creation from this
-  /// scheme will not include any of the theme fixes, but then again also none
-  /// of the opinionated styles, used in [FlexColorScheme.toTheme] method.
+  /// [FlexColorScheme], this is **NOT** the recommended way to make a
+  /// fully [FlexColorScheme] based theme. Normally you want to use use
+  /// [FlexColorScheme.toTheme] to make your ThemeData when using
+  /// FlexColorScheme.
   ///
+  /// If you use [ThemeData.from] and the [ColorScheme] returned by
+  /// [FlexColorScheme.toScheme] this will result in a theme that is based on
+  /// the color scheme defined in [FlexColorScheme], including the surface and
+  /// background color branding, and true black for dark mode, if those were
+  /// used in its creation via the light and dark factories. **However**, the
+  /// big difference will be that the Flutter's [ThemeData.from] theme creation
+  /// from this scheme will not include any of the theme fixes, included
+  /// in [FlexColorScheme.toTheme] method.
   /// The AppBar theme options will also not be available and scaffoldBackground
   /// will be equal to background, which does not look so good if heavy
   /// branding was used on surfaces.

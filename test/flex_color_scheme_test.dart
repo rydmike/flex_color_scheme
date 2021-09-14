@@ -226,7 +226,7 @@ void main() {
       expect(m4.copyWith().toTheme, m4.toTheme);
     });
 
-    final FlexColorScheme m1e2 = const FlexColorScheme(
+    const FlexColorScheme m1e2 = FlexColorScheme(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimaryVariant,
@@ -258,7 +258,7 @@ void main() {
           m1e2.toTheme);
     });
 
-    final FlexColorScheme m1e3 = const FlexColorScheme(
+    const FlexColorScheme m1e3 = FlexColorScheme(
       brightness: Brightness.dark,
       primary: FlexColor.materialDarkPrimary,
       primaryVariant: FlexColor.materialDarkPrimaryVariant,

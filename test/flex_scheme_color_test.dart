@@ -3,6 +3,8 @@ import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+// ignore_for_file: avoid_redundant_argument_values
+
 void main() {
   //****************************************************************************
   // FlexColorScheme unit tests.
@@ -126,18 +128,12 @@ void main() {
     test(
         'FSC1.05: GIVEN a FlexSchemeColor with none null colors EXPECT '
         'its default toDark() to be equal to result from toDark(35).', () {
-      expect(
-          m1.toDark(),
-          // ignore: avoid_redundant_argument_values
-          m1.toDark(35));
+      expect(m1.toDark(), m1.toDark(35));
     });
     test(
         'FSC1.06: GIVEN a FlexSchemeColor object with one null value  '
         'EXPECT its toDark() to be equal to result from toDark(35).', () {
-      expect(
-          m3.toDark(),
-          // ignore: avoid_redundant_argument_values
-          m3.toDark(35));
+      expect(m3.toDark(), m3.toDark(35));
     });
     test(
         'FSC1.07: GIVEN a FlexSchemeColor with non null colors EXPECT its '
@@ -212,8 +208,8 @@ void main() {
 
     test(
         'FSC1.14: GIVEN a FlexSchemeColor.effective(SchemeColors, 2) EXPECT it '
-        'to be equal to SchemeColors with primary variant and Secondary variant '
-        'computed.', () {
+        'to be equal to SchemeColors with primary variant and Secondary '
+        'variant computed.', () {
       expect(
         FlexSchemeColor.effective(m1, 2),
         m1.copyWith(

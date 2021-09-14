@@ -905,7 +905,7 @@ class _HomePageState extends State<HomePage> {
                         label: widget.whiteBlend.toString(),
                         value: widget.whiteBlend.toDouble(),
                         onChanged: (double value) {
-                          widget.onWhiteBlendChanged(value.floor().toInt());
+                          widget.onWhiteBlendChanged(value.floor());
                         },
                       ),
                       trailing: Padding(
