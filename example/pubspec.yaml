@@ -11,14 +11,15 @@ dependencies:
   cupertino_icons: ^1.0.3
 
   # Color scheme package (by Mike Rydstrom, rydmike.com).
-  flex_color_scheme: ^3.0.1
+  flex_color_scheme:
+    path: ../
 
   # The Flutter SDK (by Google flutter.dev).
   flutter:
     sdk: flutter
 
   # Used for launching a WEB URL (by Google flutter.dev).
-  url_launcher: ^6.0.2
+  url_launcher: ^6.0.10
 
 dev_dependencies:
   flutter_test:

@@ -48,7 +48,10 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     //
     // Another thing to be aware of with this method is that eg bringing up
     // the keyboard will bring the navigation bar back.
-    SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[]);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.edgeToEdge,
+      // overlays: <SystemUiOverlay>[],
+    );
     super.initState();
   }
 
@@ -59,7 +62,8 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     //
     // This screen needs to be stateful so we can correctly manage the
     // life-cycle of the removed overlay and putting them back.
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     super.dispose();
   }
 

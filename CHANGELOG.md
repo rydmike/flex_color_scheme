@@ -2,6 +2,33 @@
 
 All notable changes to the **FlexColorScheme** package will be documented in this file.
 
+## [4.0.0] - September 15, 2021
+
+* **Breaking:** Remove all theme properties that were deprecated in Flutter 2.5.
+  FlexColorScheme went all in also removed previous already known to beomce
+  deprecated `accentColor` from its API totally. This breaks API with previous
+  versions.
+* **Breaking:** The color branding is correctly applied to dark overlay
+  elevated surfaces. This breaks past style of of elevated color branded 
+  surfaces that did not get correct elevated coloration
+* **New:** Add `textTheme` property to `FlexColorScheme` to enable easier
+  usage of custom text themes without need to merge a custom `TextTheme` via 
+  a copyWith plus merge to the default text theme.
+* **New:** Added convenience support for Flutter 2.5 full screen mode to
+  `FlexColorScheme.themedSystemNavigationBar`.
+
+
+
+* **DRAFT New color schemes:** Added four new built-in color schemes.
+  * **Bahama and trinidad** - Bahama blue and trinidad orange colored theme.
+    Use enum value `FlexScheme.bahamaBlue` for easy access to it.
+  * **Mallard and valencia** - Mallard green and Valencia pink colored theme.
+    Use enum value `FlexScheme.mallardGreen` for easy access to it.
+  * **Espresso and crema** - Espresso dark brown and crema colored theme.
+    Use enum value `FlexScheme.espresso` for easy access to it.
+  * **Outer space stage** - Outer space dark blue-grey and stage red theme.
+    Use enum value `FlexScheme.outerSpace` for easy access to it.
+
 ## [3.0.1] - July 1, 2021
 
 * **Fix:** The internal order of swapping primary and secondary colors and reducing 
@@ -12,6 +39,8 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 * **Tests:** Added tests for above fix that captures the issue and fails
   in version 3.0.0. Total 741 tests, coverage 99.75%.
 * Documentation and typo fixes.  
+
+
 
 ## [3.0.0] - June 25, 2021
 

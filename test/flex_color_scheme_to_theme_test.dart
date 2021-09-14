@@ -269,13 +269,15 @@ void main() {
     test(
         'FCS7.03: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT appbar theme color to be primary color.', () {
-      expect(themeLight.appBarTheme.color, themeLight.colorScheme.primary);
+      expect(themeLight.appBarTheme.backgroundColor,
+          themeLight.colorScheme.primary);
     });
 
     test(
         'FCS7.04: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT appbar theme color to be surface color.', () {
-      expect(themeDark.appBarTheme.color, themeDark.colorScheme.surface);
+      expect(
+          themeDark.appBarTheme.backgroundColor, themeDark.colorScheme.surface);
     });
 
     test(
@@ -375,24 +377,25 @@ void main() {
       );
     });
 
-    test(
-        'FCS7.15: GIVEN a FlexColorScheme theme with Material scheme light '
-        'colors EXPECT buttonColor equality with '
-        'colorScheme.primary.', () {
-      expect(
-        themeLight.buttonColor,
-        themeLight.colorScheme.primary,
-      );
-    });
-    test(
-        'FCS7.16: GIVEN a FlexColorScheme theme with Material scheme dark '
-        'colors EXPECT buttonColor equality with '
-        'colorScheme.primary.', () {
-      expect(
-        themeDark.buttonColor,
-        themeDark.colorScheme.primary,
-      );
-    });
+    // TODO: Remove deprecated test
+    // test(
+    //     'FCS7.15: GIVEN a FlexColorScheme theme with Material scheme light '
+    //     'colors EXPECT buttonColor equality with '
+    //     'colorScheme.primary.', () {
+    //   expect(
+    //     themeLight.buttonColor,
+    //     themeLight.colorScheme.primary,
+    //   );
+    // });
+    // test(
+    //     'FCS7.16: GIVEN a FlexColorScheme theme with Material scheme dark '
+    //     'colors EXPECT buttonColor equality with '
+    //     'colorScheme.primary.', () {
+    //   expect(
+    //     themeDark.buttonColor,
+    //     themeDark.colorScheme.primary,
+    //   );
+    // });
 
     //**************************************************************************
     // FlexColorScheme.light & dark factory tests. With LIGHT surface branding.
@@ -418,13 +421,13 @@ void main() {
         'FCS7.16: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.surface EXPECT appbar theme color '
         'colorScheme.surface.', () {
-      expect(tLightL.appBarTheme.color, tLightL.colorScheme.surface);
+      expect(tLightL.appBarTheme.backgroundColor, tLightL.colorScheme.surface);
     });
     test(
         'FCS7.17: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.surface EXPECT appbar theme color '
         'colorScheme.surface.', () {
-      expect(tDarkL.appBarTheme.color, tDarkL.colorScheme.surface);
+      expect(tDarkL.appBarTheme.backgroundColor, tDarkL.colorScheme.surface);
     });
 
     test(
@@ -542,13 +545,14 @@ void main() {
         'FCS7.32: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.material EXPECT appbar theme color '
         'FlexColor.materialLightSurface.', () {
-      expect(tLightM.appBarTheme.color, FlexColor.materialLightSurface);
+      expect(
+          tLightM.appBarTheme.backgroundColor, FlexColor.materialLightSurface);
     });
     test(
         'FCS7.33: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.primary EXPECT appbar theme color '
         'colorScheme.primary.', () {
-      expect(tDarkM.appBarTheme.color, tDarkM.colorScheme.primary);
+      expect(tDarkM.appBarTheme.backgroundColor, tDarkM.colorScheme.primary);
     });
 
     test(
@@ -667,13 +671,14 @@ void main() {
         'FCS7.47: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.material EXPECT appbar theme color '
         'FlexColor.materialLightSurface.', () {
-      expect(tLightS.appBarTheme.color, tLightS.colorScheme.secondaryVariant);
+      expect(tLightS.appBarTheme.backgroundColor,
+          tLightS.colorScheme.secondaryVariant);
     });
     test(
         'FCS7.48: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.primary EXPECT appbar theme color '
         'colorScheme.primary.', () {
-      expect(tDarkS.appBarTheme.color, FlexColor.materialDarkSurface);
+      expect(tDarkS.appBarTheme.backgroundColor, FlexColor.materialDarkSurface);
     });
 
     test(
@@ -795,13 +800,14 @@ void main() {
         'FCS7.63: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
-      expect(tLightH.appBarTheme.color, tLightH.colorScheme.background);
+      expect(
+          tLightH.appBarTheme.backgroundColor, tLightH.colorScheme.background);
     });
     test(
         'FCS7.64: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
-      expect(tDarkH.appBarTheme.color, tDarkH.colorScheme.background);
+      expect(tDarkH.appBarTheme.backgroundColor, tDarkH.colorScheme.background);
     });
 
     test(

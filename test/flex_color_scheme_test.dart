@@ -309,7 +309,6 @@ void main() {
       error: FlexColor.materialLightError,
       scaffoldBackground: FlexColor.materialLightBackground,
       appBarBackground: FlexColor.materialLightPrimary,
-      accentColor: FlexColor.materialLightSecondary,
       onPrimary: Colors.white,
       onSecondary: Colors.black,
       onSurface: Colors.black,

@@ -311,8 +311,9 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    final Color effectiveTabBackground = Theme.of(context).appBarTheme.color ??
-        (isDark ? colorScheme.surface : colorScheme.primary);
+    final Color effectiveTabBackground =
+        Theme.of(context).appBarTheme.backgroundColor ??
+            (isDark ? colorScheme.surface : colorScheme.primary);
 
     return Padding(
       padding: const EdgeInsets.all(8),

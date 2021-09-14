@@ -497,8 +497,7 @@ class FlexColorScheme with Diagnosticable {
   final TargetPlatform? platform;
 
   /// The color and geometry [TextTheme] values used to configure
-  /// [ThemeData.textTheme], [ThemeData.primaryTextTheme] and
-  /// [ThemeData.accentTextTheme].
+  /// [ThemeData.textTheme] and [ThemeData.primaryTextTheme].
   ///
   /// Used default value deviates from the Flutter standard, that uses the old
   /// [Typography.material2014]. Here we use the newer [Typography.material2018]
@@ -1769,17 +1768,6 @@ class FlexColorScheme with Diagnosticable {
   ///    it looks better. The only reason why it is not the default in Flutter,
   ///    is for default backwards legacy design compatibility.
   ///
-  /// **NOTE:** Since the old buttons have been deprecated in Flutter 2.0.0
-  /// they are no longer presented or used in code in FlexColorScheme and its
-  /// examples. However, FlexColorScheme still defines the theme for
-  /// them described below. Defining the theme does not yet issue any
-  /// deprecation warnings or errors, as long as that is the case. this
-  /// theming will be kept available to support out of the box nice themes for
-  /// the old buttons as before.
-  ///
-  ///  * Button theming is applied to [ThemeData.buttonColor] using color
-  ///    `colorScheme.primary` color.
-  ///
   ///  * For [ThemeData.buttonTheme] the entire color scheme is passed to its
   ///    `colorScheme` property and it uses `textTheme` set to
   ///    `ButtonTextTheme.primary`, plus minor changes to padding and tap target
@@ -2060,11 +2048,6 @@ class FlexColorScheme with Diagnosticable {
           ThemeData.estimateBrightnessForColor(_colorScheme.primary),
       canvasColor: _colorScheme.background,
 
-      // TODO: Remove accentColor and its brightness when deprecated on stable.
-      accentColor: _colorScheme.secondary,
-      accentColorBrightness:
-          ThemeData.estimateBrightnessForColor(_colorScheme.secondary),
-
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
       // Here it is replaced with a separate color for the scaffold background,
       // so we can use a configuration with a separate scaffold background
@@ -2213,11 +2196,6 @@ class FlexColorScheme with Diagnosticable {
           // ignore: avoid_redundant_argument_values
           systemNavigationBarDividerColor: null,
         ),
-        // We use the new AppBarTheme that has more features, but is not
-        // backwards compatible.
-        // TODO: Remove this when its deprecation reaches stable.
-        //  In version 2.4 "false" is the new default and only option.
-        backwardsCompatibility: false,
       ),
 
       // The bottom app bar uses color scheme background color to match the
@@ -2239,9 +2217,6 @@ class FlexColorScheme with Diagnosticable {
       // that override them with copyWith, just as you would on the default
       // ThemeData factory.
       // ----------------------------------------------------------------------
-      // Set to true, because it looks better and it should be true in standard
-      // too, but it is kept as false there for legacy compatibility.
-      fixTextFieldOutlineLabel: true,
       // In TextSelectionThemeData, the standard for selectionColor is
       // colorScheme.primary with opacity value 0.4 for dark and 0.12 light
       // mode. Here we use primary with 0.5 for dark mode and 0.3 for light
@@ -2278,7 +2253,10 @@ class FlexColorScheme with Diagnosticable {
       //
       // Set buttonColor to colorScheme.primary and not to grey. Similar to
       // to the Material design for the newer buttons.
-      buttonColor: _colorScheme.primary,
+
+      // TODO: Remove deprecated button color, take away thse comments too
+      // buttonColor: _colorScheme.primary,
+
       // When the button color is set to primary, we also need to define the
       // [ButtonThemeData] so that we get correct onSurface colors for the
       // buttons. This buttonColor and buttonTheme setup, makes the older

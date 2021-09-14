@@ -532,7 +532,8 @@ class _HomePageState extends State<HomePage> {
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
-    final Color appBarColor = theme.appBarTheme.color ?? theme.primaryColor;
+    final Color appBarColor =
+        theme.appBarTheme.backgroundColor ?? theme.primaryColor;
     final bool isLight = Theme.of(context).brightness == Brightness.light;
 
     // Give the width of the side panel some automatic adaptive behavior and

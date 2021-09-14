@@ -16,7 +16,8 @@ class ShowThemeColors extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final Color appBarColor = theme.appBarTheme.color ?? theme.primaryColor;
+    final Color appBarColor =
+        theme.appBarTheme.backgroundColor ?? theme.primaryColor;
 
     // A Wrap widget is just the right handy widget for this type of
     // widget to make it responsive.
@@ -74,11 +75,6 @@ class ShowThemeColors extends StatelessWidget {
         ThemeCard(
           label: 'Secondary',
           color: colorScheme.secondary,
-          textColor: colorScheme.onSecondary,
-        ),
-        ThemeCard(
-          label: 'Accent\nColor',
-          color: theme.accentColor,
           textColor: colorScheme.onSecondary,
         ),
         ThemeCard(
