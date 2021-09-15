@@ -1192,7 +1192,9 @@ class FlexColor {
 
   // Define private FlexSchemeData objects for all color schemes, so we can use
   // them as const in both a map and list, without repeating them.
-  static const FlexSchemeData _material = FlexSchemeData(
+
+  /// Material default color scheme based FlexSchemeData.
+  static const FlexSchemeData material = FlexSchemeData(
     name: materialName,
     description: materialDescription,
     light: FlexSchemeColor(
@@ -1213,7 +1215,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _materialHc = FlexSchemeData(
+  /// Material default high contrast color scheme based FlexSchemeData.
+  static const FlexSchemeData materialHc = FlexSchemeData(
     name: materialHcName,
     description: materialHcDescription,
     light: FlexSchemeColor(
@@ -1234,7 +1237,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _blue = FlexSchemeData(
+  /// Material blue color scheme based FlexSchemeData.
+  static const FlexSchemeData blue = FlexSchemeData(
     name: blueName,
     description: blueDescription,
     light: FlexSchemeColor(
@@ -1255,7 +1259,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _indigo = FlexSchemeData(
+  /// Material indigo and deep purple color scheme based FlexSchemeData.
+  static const FlexSchemeData indigo = FlexSchemeData(
     name: indigoName,
     description: indigoDescription,
     light: FlexSchemeColor(
@@ -1276,7 +1281,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _hippieBlue = FlexSchemeData(
+  /// Hippie blue with surfie green and chock coral pink based FlexSchemeData.
+  static const FlexSchemeData hippieBlue = FlexSchemeData(
     name: hippieBlueName,
     description: hippieBlueDescription,
     light: FlexSchemeColor(
@@ -1297,7 +1303,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _aquaBlue = FlexSchemeData(
+  /// Aqua tropical blue ocean color scheme based FlexSchemeData.
+  static const FlexSchemeData aquaBlue = FlexSchemeData(
     name: aquaBlueName,
     description: aquaBlueDescription,
     light: FlexSchemeColor(
@@ -1318,7 +1325,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _brandBlue = FlexSchemeData(
+  /// Brand blues theme color based FlexSchemeData.
+  static const FlexSchemeData brandBlue = FlexSchemeData(
     name: brandBlueName,
     description: brandBlueDescription,
     light: FlexSchemeColor(
@@ -1339,7 +1347,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _deepBlue = FlexSchemeData(
+  /// Dark deep blue sea color based FlexSchemeData.
+  static const FlexSchemeData deepBlue = FlexSchemeData(
     name: deepBlueName,
     description: deepBlueDescription,
     light: FlexSchemeColor(
@@ -1360,7 +1369,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _sakura = FlexSchemeData(
+  /// Sakura cherry blossom like colors based FlexSchemeData.
+  static const FlexSchemeData sakura = FlexSchemeData(
     name: sakuraName,
     description: sakuraDescription,
     light: FlexSchemeColor(
@@ -1381,7 +1391,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _mandyRed = FlexSchemeData(
+  /// Mandy red and Viking blue inspired colors based FlexSchemeData.
+  static const FlexSchemeData mandyRed = FlexSchemeData(
     name: mandyRedName,
     description: mandyRedDescription,
     light: FlexSchemeColor(
@@ -1402,7 +1413,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _red = FlexSchemeData(
+  /// Material red and pink colors based FlexSchemeData.
+  static const FlexSchemeData red = FlexSchemeData(
     name: redName,
     description: redDescription,
     light: FlexSchemeColor(
@@ -1423,7 +1435,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _redWine = FlexSchemeData(
+  /// Red wine like colors based FlexSchemeData.
+  static const FlexSchemeData redWine = FlexSchemeData(
     name: redWineName,
     description: redWineDescription,
     light: FlexSchemeColor(
@@ -1444,7 +1457,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _purpleBrown = FlexSchemeData(
+  /// Purple brown tinted aubergine and eggplant colored based FlexSchemeData.
+  static const FlexSchemeData purpleBrown = FlexSchemeData(
     name: purpleBrownName,
     description: purpleBrownDescription,
     light: FlexSchemeColor(
@@ -1465,7 +1479,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _green = FlexSchemeData(
+  /// Material green and cyan colors based FlexSchemeData.
+  static const FlexSchemeData green = FlexSchemeData(
     name: greenName,
     description: greenDescription,
     light: FlexSchemeColor(
@@ -1486,7 +1501,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _money = FlexSchemeData(
+  /// Green money and finance style colors based FlexSchemeData.
+  static const FlexSchemeData money = FlexSchemeData(
     name: moneyName,
     description: moneyDescription,
     light: FlexSchemeColor(
@@ -1507,7 +1523,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _jungle = FlexSchemeData(
+  /// Green jungle and rain forest colors based FlexSchemeData.
+  static const FlexSchemeData jungle = FlexSchemeData(
     name: jungleName,
     description: jungleDescription,
     light: FlexSchemeColor(
@@ -1528,7 +1545,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _greyLaw = FlexSchemeData(
+  /// Material blue grey and ultra dark purple colors based FlexSchemeData.
+  static const FlexSchemeData greyLaw = FlexSchemeData(
     name: greyLawName,
     description: greyLawDescription,
     light: FlexSchemeColor(
@@ -1549,7 +1567,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _wasabi = FlexSchemeData(
+  /// Willow and wasabi green colors based FlexSchemeData.
+  static const FlexSchemeData wasabi = FlexSchemeData(
     name: wasabiName,
     description: wasabiDescription,
     light: FlexSchemeColor(
@@ -1570,7 +1589,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _gold = FlexSchemeData(
+  /// Gold sunset colors based FlexSchemeData.
+  static const FlexSchemeData gold = FlexSchemeData(
     name: goldName,
     description: goldDescription,
     light: FlexSchemeColor(
@@ -1591,7 +1611,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _mango = FlexSchemeData(
+  /// Orange and green Mango mojito colors based FlexSchemeData.
+  static const FlexSchemeData mango = FlexSchemeData(
     name: mangoName,
     description: mangoDescription,
     light: FlexSchemeColor(
@@ -1612,7 +1633,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _amber = FlexSchemeData(
+  /// Material amber and blue accent colors based FlexSchemeData.
+  static const FlexSchemeData amber = FlexSchemeData(
     name: amberName,
     description: amberDescription,
     light: FlexSchemeColor(
@@ -1633,7 +1655,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _vesuviusBurn = FlexSchemeData(
+  /// Vesuvius burned orange and eden green colors based FlexSchemeData.
+  static const FlexSchemeData vesuviusBurn = FlexSchemeData(
     name: vesuviusBurnName,
     description: vesuviusBurnDescription,
     light: FlexSchemeColor(
@@ -1654,7 +1677,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _deepPurple = FlexSchemeData(
+  /// Material deepPurple and lightBlueAccent colors based FlexSchemeData.
+  static const FlexSchemeData deepPurple = FlexSchemeData(
     name: deepPurpleName,
     description: deepPurpleDescription,
     light: FlexSchemeColor(
@@ -1675,7 +1699,9 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _ebonyClay = FlexSchemeData(
+  /// Ebony clay dark blue-grey and watercourse green colors
+  /// based FlexSchemeData.
+  static const FlexSchemeData ebonyClay = FlexSchemeData(
     name: ebonyClayName,
     description: ebonyClayDescription,
     light: FlexSchemeColor(
@@ -1696,7 +1722,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _barossa = FlexSchemeData(
+  /// Barossa red and cardin green colors based FlexSchemeData.
+  static const FlexSchemeData barossa = FlexSchemeData(
     name: barossaName,
     description: barossaDescription,
     light: FlexSchemeColor(
@@ -1717,7 +1744,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _shark = FlexSchemeData(
+  /// Shark grey and orange ecstasy colors based FlexSchemeData.
+  static const FlexSchemeData shark = FlexSchemeData(
     name: sharkName,
     description: sharkDescription,
     light: FlexSchemeColor(
@@ -1738,7 +1766,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _bigStone = FlexSchemeData(
+  /// Big stone blue and tulip tree yellow colors based FlexSchemeData.
+  static const FlexSchemeData bigStone = FlexSchemeData(
     name: bigStoneName,
     description: bigStoneDescription,
     light: FlexSchemeColor(
@@ -1759,7 +1788,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _damask = FlexSchemeData(
+  /// Damask red and lunar green colors based FlexSchemeData.
+  static const FlexSchemeData damask = FlexSchemeData(
     name: damaskName,
     description: damaskDescription,
     light: FlexSchemeColor(
@@ -1780,7 +1810,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _bahamaBlue = FlexSchemeData(
+  /// Bahama blue and trinidad orange colors based FlexSchemeData.
+  static const FlexSchemeData bahamaBlue = FlexSchemeData(
     name: bahamaBlueName,
     description: bahamaBlueDescription,
     light: FlexSchemeColor(
@@ -1801,7 +1832,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _mallardGreen = FlexSchemeData(
+  /// Mallard green and Valencia pink colors based FlexSchemeData.
+  static const FlexSchemeData mallardGreen = FlexSchemeData(
     name: mallardGreenName,
     description: mallardGreenDescription,
     light: FlexSchemeColor(
@@ -1822,7 +1854,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _espresso = FlexSchemeData(
+  /// Espresso dark brown and crema colors based FlexSchemeData.
+  static const FlexSchemeData espresso = FlexSchemeData(
     name: espressoName,
     description: espressoDescription,
     light: FlexSchemeColor(
@@ -1843,7 +1876,8 @@ class FlexColor {
     ),
   );
 
-  static const FlexSchemeData _outerSpace = FlexSchemeData(
+  /// Outer space dark blue-grey and stage red colors based FlexSchemeData.
+  static const FlexSchemeData outerSpace = FlexSchemeData(
     name: outerSpaceName,
     description: outerSpaceDescription,
     light: FlexSchemeColor(
@@ -1885,38 +1919,38 @@ class FlexColor {
   /// [FlexScheme.custom] value, use the [schemesWithCustom] map instead.
   static const Map<FlexScheme, FlexSchemeData> schemes =
       <FlexScheme, FlexSchemeData>{
-    FlexScheme.material: _material,
-    FlexScheme.materialHc: _materialHc,
-    FlexScheme.blue: _blue,
-    FlexScheme.indigo: _indigo,
-    FlexScheme.hippieBlue: _hippieBlue,
-    FlexScheme.aquaBlue: _aquaBlue,
-    FlexScheme.brandBlue: _brandBlue,
-    FlexScheme.deepBlue: _deepBlue,
-    FlexScheme.sakura: _sakura,
-    FlexScheme.mandyRed: _mandyRed,
-    FlexScheme.red: _red,
-    FlexScheme.redWine: _redWine,
-    FlexScheme.purpleBrown: _purpleBrown,
-    FlexScheme.green: _green,
-    FlexScheme.money: _money,
-    FlexScheme.jungle: _jungle,
-    FlexScheme.greyLaw: _greyLaw,
-    FlexScheme.wasabi: _wasabi,
-    FlexScheme.gold: _gold,
-    FlexScheme.mango: _mango,
-    FlexScheme.amber: _amber,
-    FlexScheme.vesuviusBurn: _vesuviusBurn,
-    FlexScheme.deepPurple: _deepPurple,
-    FlexScheme.ebonyClay: _ebonyClay,
-    FlexScheme.barossa: _barossa,
-    FlexScheme.shark: _shark,
-    FlexScheme.bigStone: _bigStone,
-    FlexScheme.damask: _damask,
-    FlexScheme.bahamaBlue: _bahamaBlue,
-    FlexScheme.mallardGreen: _mallardGreen,
-    FlexScheme.espresso: _espresso,
-    FlexScheme.outerSpace: _outerSpace,
+    FlexScheme.material: material,
+    FlexScheme.materialHc: materialHc,
+    FlexScheme.blue: blue,
+    FlexScheme.indigo: indigo,
+    FlexScheme.hippieBlue: hippieBlue,
+    FlexScheme.aquaBlue: aquaBlue,
+    FlexScheme.brandBlue: brandBlue,
+    FlexScheme.deepBlue: deepBlue,
+    FlexScheme.sakura: sakura,
+    FlexScheme.mandyRed: mandyRed,
+    FlexScheme.red: red,
+    FlexScheme.redWine: redWine,
+    FlexScheme.purpleBrown: purpleBrown,
+    FlexScheme.green: green,
+    FlexScheme.money: money,
+    FlexScheme.jungle: jungle,
+    FlexScheme.greyLaw: greyLaw,
+    FlexScheme.wasabi: wasabi,
+    FlexScheme.gold: gold,
+    FlexScheme.mango: mango,
+    FlexScheme.amber: amber,
+    FlexScheme.vesuviusBurn: vesuviusBurn,
+    FlexScheme.deepPurple: deepPurple,
+    FlexScheme.ebonyClay: ebonyClay,
+    FlexScheme.barossa: barossa,
+    FlexScheme.shark: shark,
+    FlexScheme.bigStone: bigStone,
+    FlexScheme.damask: damask,
+    FlexScheme.bahamaBlue: bahamaBlue,
+    FlexScheme.mallardGreen: mallardGreen,
+    FlexScheme.espresso: espresso,
+    FlexScheme.outerSpace: outerSpace,
   };
 
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
@@ -1970,38 +2004,38 @@ class FlexColor {
   /// This list excludes the custom [FlexSchemeData] placeholder that
   /// exists in the [schemesWithCustom] map.
   static const List<FlexSchemeData> schemesList = <FlexSchemeData>[
-    _material,
-    _materialHc,
-    _blue,
-    _indigo,
-    _hippieBlue,
-    _aquaBlue,
-    _brandBlue,
-    _deepBlue,
-    _sakura,
-    _mandyRed,
-    _red,
-    _redWine,
-    _purpleBrown,
-    _green,
-    _money,
-    _jungle,
-    _greyLaw,
-    _wasabi,
-    _gold,
-    _mango,
-    _amber,
-    _vesuviusBurn,
-    _deepPurple,
-    _ebonyClay,
-    _barossa,
-    _shark,
-    _bigStone,
-    _damask,
-    _bahamaBlue,
-    _mallardGreen,
-    _espresso,
-    _outerSpace,
+    material,
+    materialHc,
+    blue,
+    indigo,
+    hippieBlue,
+    aquaBlue,
+    brandBlue,
+    deepBlue,
+    sakura,
+    mandyRed,
+    red,
+    redWine,
+    purpleBrown,
+    green,
+    money,
+    jungle,
+    greyLaw,
+    wasabi,
+    gold,
+    mango,
+    amber,
+    vesuviusBurn,
+    deepPurple,
+    ebonyClay,
+    barossa,
+    shark,
+    bigStone,
+    damask,
+    bahamaBlue,
+    mallardGreen,
+    espresso,
+    outerSpace,
   ];
 }
 
