@@ -23,7 +23,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
 * **New:** Added convenience support for Flutter 2.5 full screen mode to
   `FlexColorScheme.themedSystemNavigationBar`.
 
-* **Tests:** Added tests for above features. Total 842 tests, coverage 99.75%.
+* **Tests:** Added tests for above features. Total 864 tests, coverage 99.75%.
 * Documentation and typo fixes.
 
 * **DRAFT New color schemes:** Added four new built-in color schemes.

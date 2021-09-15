@@ -1190,6 +1190,155 @@ class FlexColor {
   static const String customDescription = 'Define your own custom theme by '
       'selecting color scheme and surface colors.';
 
+  // Define private FlexSchemeData objects for all color schemes, so we can use
+  // them as const in both a map and list, without repeating them.
+  static const FlexSchemeData _material = FlexSchemeData(
+    name: materialName,
+    description: materialDescription,
+    light: FlexSchemeColor(
+      primary: materialLightPrimary,
+      primaryVariant: materialLightPrimaryVariant,
+      secondary: materialLightSecondary,
+      secondaryVariant: materialLightSecondaryVariant,
+      appBarColor: materialLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: materialDarkPrimary,
+      primaryVariant: materialDarkPrimaryVariant,
+      secondary: materialDarkSecondary,
+      secondaryVariant: materialDarkSecondaryVariant,
+      appBarColor: materialDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
+  static const FlexSchemeData _materialHc = FlexSchemeData(
+    name: materialHcName,
+    description: materialHcDescription,
+    light: FlexSchemeColor(
+      primary: materialLightPrimaryHc,
+      primaryVariant: materialLightPrimaryVariantHc,
+      secondary: materialLightSecondaryHc,
+      secondaryVariant: materialLightSecondaryVariantHc,
+      appBarColor: materialLightSecondaryVariantHc,
+      error: materialLightErrorHc,
+    ),
+    dark: FlexSchemeColor(
+      primary: materialDarkPrimaryHc,
+      primaryVariant: materialDarkPrimaryVariantHc,
+      secondary: materialDarkSecondaryHc,
+      secondaryVariant: materialDarkSecondaryVariantHc,
+      appBarColor: materialDarkSecondaryVariantHc,
+      error: materialDarkErrorHc,
+    ),
+  );
+
+  static const FlexSchemeData _blue = FlexSchemeData(
+    name: blueName,
+    description: blueDescription,
+    light: FlexSchemeColor(
+      primary: blueLightPrimary,
+      primaryVariant: blueLightPrimaryVariant,
+      secondary: blueLightSecondary,
+      secondaryVariant: blueLightSecondaryVariant,
+      appBarColor: blueLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: blueDarkPrimary,
+      primaryVariant: blueDarkPrimaryVariant,
+      secondary: blueDarkSecondary,
+      secondaryVariant: blueDarkSecondaryVariant,
+      appBarColor: blueDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
+  static const FlexSchemeData _indigo = FlexSchemeData(
+    name: indigoName,
+    description: indigoDescription,
+    light: FlexSchemeColor(
+      primary: indigoLightPrimary,
+      primaryVariant: indigoLightPrimaryVariant,
+      secondary: indigoLightSecondary,
+      secondaryVariant: indigoLightSecondaryVariant,
+      appBarColor: indigoLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: indigoDarkPrimary,
+      primaryVariant: indigoDarkPrimaryVariant,
+      secondary: indigoDarkSecondary,
+      secondaryVariant: indigoDarkSecondaryVariant,
+      appBarColor: indigoDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
+  static const FlexSchemeData _hippieBlue = FlexSchemeData(
+    name: hippieBlueName,
+    description: hippieBlueDescription,
+    light: FlexSchemeColor(
+      primary: hippieBlueLightPrimary,
+      primaryVariant: hippieBlueLightPrimaryVariant,
+      secondary: hippieBlueLightSecondary,
+      secondaryVariant: hippieBlueLightSecondaryVariant,
+      appBarColor: hippieBlueLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: hippieBlueDarkPrimary,
+      primaryVariant: hippieBlueDarkPrimaryVariant,
+      secondary: hippieBlueDarkSecondary,
+      secondaryVariant: hippieBlueDarkSecondaryVariant,
+      appBarColor: hippieBlueDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
+  static const FlexSchemeData _aquaBlue = FlexSchemeData(
+    name: aquaBlueName,
+    description: aquaBlueDescription,
+    light: FlexSchemeColor(
+      primary: aquaBlueLightPrimary,
+      primaryVariant: aquaBlueLightPrimaryVariant,
+      secondary: aquaBlueLightSecondary,
+      secondaryVariant: aquaBlueLightSecondaryVariant,
+      appBarColor: aquaBlueLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: aquaBlueDarkPrimary,
+      primaryVariant: aquaBlueDarkPrimaryVariant,
+      secondary: aquaBlueDarkSecondary,
+      secondaryVariant: aquaBlueDarkSecondaryVariant,
+      appBarColor: aquaBlueDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
+  static const FlexSchemeData _brandBlue = FlexSchemeData(
+    name: brandBlueName,
+    description: brandBlueDescription,
+    light: FlexSchemeColor(
+      primary: brandBlueLightPrimary,
+      primaryVariant: brandBlueLightPrimaryVariant,
+      secondary: brandBlueLightSecondary,
+      secondaryVariant: brandBlueLightSecondaryVariant,
+      appBarColor: brandBlueLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: brandBlueDarkPrimary,
+      primaryVariant: brandBlueDarkPrimaryVariant,
+      secondary: brandBlueDarkSecondary,
+      secondaryVariant: brandBlueDarkSecondaryVariant,
+      appBarColor: brandBlueDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
   /// A [FlexScheme] enum to [FlexSchemeData] constant map.
   ///
   /// Contains pre-made ready to go nice dark and light [FlexSchemeColor]
@@ -1211,146 +1360,13 @@ class FlexColor {
   /// [FlexScheme.custom] value, use the [schemesWithCustom] map instead.
   static const Map<FlexScheme, FlexSchemeData> schemes =
       <FlexScheme, FlexSchemeData>{
-    FlexScheme.material: FlexSchemeData(
-      name: materialName,
-      description: materialDescription,
-      light: FlexSchemeColor(
-        primary: materialLightPrimary,
-        primaryVariant: materialLightPrimaryVariant,
-        secondary: materialLightSecondary,
-        secondaryVariant: materialLightSecondaryVariant,
-        appBarColor: materialLightSecondaryVariant,
-        error: materialLightError,
-      ),
-      dark: FlexSchemeColor(
-        primary: materialDarkPrimary,
-        primaryVariant: materialDarkPrimaryVariant,
-        secondary: materialDarkSecondary,
-        secondaryVariant: materialDarkSecondaryVariant,
-        appBarColor: materialDarkSecondaryVariant,
-        error: materialDarkError,
-      ),
-    ),
-    FlexScheme.materialHc: FlexSchemeData(
-      name: materialHcName,
-      description: materialHcDescription,
-      light: FlexSchemeColor(
-        primary: materialLightPrimaryHc,
-        primaryVariant: materialLightPrimaryVariantHc,
-        secondary: materialLightSecondaryHc,
-        secondaryVariant: materialLightSecondaryVariantHc,
-        appBarColor: materialLightSecondaryVariantHc,
-        error: materialLightErrorHc,
-      ),
-      dark: FlexSchemeColor(
-        primary: materialDarkPrimaryHc,
-        primaryVariant: materialDarkPrimaryVariantHc,
-        secondary: materialDarkSecondaryHc,
-        secondaryVariant: materialDarkSecondaryVariantHc,
-        appBarColor: materialDarkSecondaryVariantHc,
-        error: materialDarkErrorHc,
-      ),
-    ),
-    FlexScheme.blue: FlexSchemeData(
-      name: blueName,
-      description: blueDescription,
-      light: FlexSchemeColor(
-        primary: blueLightPrimary,
-        primaryVariant: blueLightPrimaryVariant,
-        secondary: blueLightSecondary,
-        secondaryVariant: blueLightSecondaryVariant,
-        appBarColor: blueLightSecondaryVariant,
-        error: materialLightError,
-      ),
-      dark: FlexSchemeColor(
-        primary: blueDarkPrimary,
-        primaryVariant: blueDarkPrimaryVariant,
-        secondary: blueDarkSecondary,
-        secondaryVariant: blueDarkSecondaryVariant,
-        appBarColor: blueDarkSecondaryVariant,
-        error: materialDarkError,
-      ),
-    ),
-    FlexScheme.indigo: FlexSchemeData(
-      name: indigoName,
-      description: indigoDescription,
-      light: FlexSchemeColor(
-        primary: indigoLightPrimary,
-        primaryVariant: indigoLightPrimaryVariant,
-        secondary: indigoLightSecondary,
-        secondaryVariant: indigoLightSecondaryVariant,
-        appBarColor: indigoLightSecondaryVariant,
-        error: materialLightError,
-      ),
-      dark: FlexSchemeColor(
-        primary: indigoDarkPrimary,
-        primaryVariant: indigoDarkPrimaryVariant,
-        secondary: indigoDarkSecondary,
-        secondaryVariant: indigoDarkSecondaryVariant,
-        appBarColor: indigoDarkSecondaryVariant,
-        error: materialDarkError,
-      ),
-    ),
-    FlexScheme.hippieBlue: FlexSchemeData(
-      name: hippieBlueName,
-      description: hippieBlueDescription,
-      light: FlexSchemeColor(
-        primary: hippieBlueLightPrimary,
-        primaryVariant: hippieBlueLightPrimaryVariant,
-        secondary: hippieBlueLightSecondary,
-        secondaryVariant: hippieBlueLightSecondaryVariant,
-        appBarColor: hippieBlueLightSecondaryVariant,
-        error: materialLightError,
-      ),
-      dark: FlexSchemeColor(
-        primary: hippieBlueDarkPrimary,
-        primaryVariant: hippieBlueDarkPrimaryVariant,
-        secondary: hippieBlueDarkSecondary,
-        secondaryVariant: hippieBlueDarkSecondaryVariant,
-        appBarColor: hippieBlueDarkSecondaryVariant,
-        error: materialDarkError,
-      ),
-    ),
-    FlexScheme.aquaBlue: FlexSchemeData(
-      name: aquaBlueName,
-      description: aquaBlueDescription,
-      light: FlexSchemeColor(
-        primary: aquaBlueLightPrimary,
-        primaryVariant: aquaBlueLightPrimaryVariant,
-        secondary: aquaBlueLightSecondary,
-        secondaryVariant: aquaBlueLightSecondaryVariant,
-        appBarColor: aquaBlueLightSecondaryVariant,
-        error: materialLightError,
-      ),
-      dark: FlexSchemeColor(
-        primary: aquaBlueDarkPrimary,
-        primaryVariant: aquaBlueDarkPrimaryVariant,
-        secondary: aquaBlueDarkSecondary,
-        secondaryVariant: aquaBlueDarkSecondaryVariant,
-        appBarColor: aquaBlueDarkSecondaryVariant,
-        error: materialDarkError,
-      ),
-    ),
-    FlexScheme.brandBlue: FlexSchemeData(
-      name: brandBlueName,
-      description: brandBlueDescription,
-      light: FlexSchemeColor(
-        primary: brandBlueLightPrimary,
-        primaryVariant: brandBlueLightPrimaryVariant,
-        secondary: brandBlueLightSecondary,
-        secondaryVariant: brandBlueLightSecondaryVariant,
-        appBarColor: brandBlueLightSecondaryVariant,
-        error: materialLightError,
-      ),
-      dark: FlexSchemeColor(
-        primary: brandBlueDarkPrimary,
-        primaryVariant: brandBlueDarkPrimaryVariant,
-        secondary: brandBlueDarkSecondary,
-        secondaryVariant: brandBlueDarkSecondaryVariant,
-        appBarColor: brandBlueDarkSecondaryVariant,
-        error: materialDarkError,
-      ),
-    ),
+    FlexScheme.material: _material,
+    FlexScheme.materialHc: _materialHc,
+    FlexScheme.blue: _blue,
+    FlexScheme.indigo: _indigo,
+    FlexScheme.hippieBlue: _hippieBlue,
+    FlexScheme.aquaBlue: _aquaBlue,
+    FlexScheme.brandBlue: _brandBlue,
     FlexScheme.deepBlue: FlexSchemeData(
       name: deepBlueName,
       description: deepBlueDescription,

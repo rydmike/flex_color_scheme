@@ -201,6 +201,8 @@ class FlexColorScheme with Diagnosticable {
     this.tooltipsMatchBackground = false,
     this.transparentStatusBar = true,
     this.visualDensity,
+    this.textTheme,
+    this.primaryTextTheme,
     this.fontFamily,
     this.platform,
     this.typography,
@@ -412,6 +414,12 @@ class FlexColorScheme with Diagnosticable {
   /// A larger value translates to a spacing increase (less dense), and a
   /// smaller value translates to a spacing decrease (more dense).
   final VisualDensity? visualDensity;
+
+  /// Text with a color that contrasts with the card and canvas colors.
+  final TextTheme? textTheme;
+
+  /// A text theme that contrasts with the primary color.
+  final TextTheme? primaryTextTheme;
 
   /// Name of the font family to use as default for the theme.
   final String? fontFamily;
@@ -670,6 +678,12 @@ class FlexColorScheme with Diagnosticable {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     VisualDensity? visualDensity,
 
+    /// Text with a color that contrasts with the card and canvas colors.
+    TextTheme? textTheme,
+
+    /// A text theme that contrasts with the primary color.
+    TextTheme? primaryTextTheme,
+
     /// Same property as in [ThemeData] factory, it is just passed along to it.
     ///
     /// Included for convenience to avoid a copyWith if it needs to be changed.
@@ -818,6 +832,8 @@ class FlexColorScheme with Diagnosticable {
       // They are a convenience inclusion here to avoid an extra Theme
       // copyWith after making a Theme with [FlexColorScheme.toTheme].
       visualDensity: visualDensity,
+      textTheme: textTheme,
+      primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
       platform: platform,
       typography: typography,
@@ -1040,6 +1056,12 @@ class FlexColorScheme with Diagnosticable {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     VisualDensity? visualDensity,
 
+    /// Text with a color that contrasts with the card and canvas colors.
+    TextTheme? textTheme,
+
+    /// A text theme that contrasts with the primary color.
+    TextTheme? primaryTextTheme,
+
     /// Same property as in [ThemeData] factory, it is just passed along to it.
     ///
     /// Included for convenience to avoid a copyWith if it needs to be changed.
@@ -1219,6 +1241,8 @@ class FlexColorScheme with Diagnosticable {
       // They are just included as a way to include them also when needed
       // in FlexColorScheme based themes.
       visualDensity: visualDensity,
+      textTheme: textTheme,
+      primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
       platform: platform,
       typography: typography,
@@ -1791,9 +1815,38 @@ class FlexColorScheme with Diagnosticable {
   ThemeData get toTheme {
     // A convenience bool to check if this theme is for light or dark mode
     final bool _isDark = brightness == Brightness.dark;
+
+    // A convenience bool to check if primary color is light or dark.
+    final bool _primaryIsDark =
+        ThemeData.estimateBrightnessForColor(primary) == Brightness.dark;
+
     // Create a TextTheme that is appropriate for the light/dark mode
-    final TextTheme _textTheme =
-        (_isDark ? ThemeData.dark() : ThemeData.light()).textTheme;
+    // final TextTheme _textTheme =
+    //     (_isDark ? ThemeData.dark() : ThemeData.light()).textTheme;
+
+    // Use passed in target platform or the default one.
+    final TargetPlatform _platform = platform ?? defaultTargetPlatform;
+
+    // With Typography we deviate from the Flutter standard that uses the
+    // old Typography.material2014 in favor of the newer Typography.material2018
+    // as default, if one is not provided.
+    // TODO: Remove when it is new default, it is still 2014 in Flutter 2.5.0
+    final Typography _typography =
+        typography ?? Typography.material2018(platform: _platform);
+
+    TextTheme defaultTextTheme =
+        _isDark ? _typography.white : _typography.black;
+    TextTheme defaultPrimaryTextTheme =
+        _primaryIsDark ? _typography.white : _typography.black;
+    if (fontFamily != null) {
+      defaultTextTheme = defaultTextTheme.apply(fontFamily: fontFamily);
+      defaultPrimaryTextTheme =
+          defaultPrimaryTextTheme.apply(fontFamily: fontFamily);
+    }
+    final TextTheme _textTheme = defaultTextTheme.merge(textTheme);
+    final TextTheme _primaryTextTheme =
+        defaultPrimaryTextTheme.merge(primaryTextTheme);
+
     // Check brightness of primary, secondary, error, surface and background
     // colors, and then calculate appropriate colors for their onColors, if an
     // "on" color was not passed in.
@@ -1872,16 +1925,6 @@ class FlexColorScheme with Diagnosticable {
     // Calculate brightness for the app bar from the resulting effective color.
     final Brightness _appBarBrightness =
         ThemeData.estimateBrightnessForColor(_effectiveAppBarColor);
-
-    // Use passed in target platform or the default one.
-    final TargetPlatform _platform = platform ?? defaultTargetPlatform;
-
-    // With Typography we deviate from the Flutter standard that uses the
-    // old Typography.material2014 in favor of the newer Typography.material2018
-    // as default, if one is not provided.
-    // TODO: Remove? The need for this was deprecated in Flutter 2.5.
-    final Typography _typography =
-        typography ?? Typography.material2018(platform: _platform);
 
     // The Flutter standard selected tab and indicator color is onSurface in
     // dark mode and onPrimary in light mode, which is designed to fit an AppBar
@@ -1982,6 +2025,12 @@ class FlexColorScheme with Diagnosticable {
       // of the values may be null and get defaults via the ThemeData() factory.
       fontFamily: fontFamily,
       visualDensity: visualDensity,
+      // TextTheme properties use the same logic as in ThemeData, allowing us
+      // to optionally define them. AccentTextTheme is omitted since it has
+      // been deprecated in Flutter 2.5.0.
+      textTheme: _textTheme,
+      primaryTextTheme: _primaryTextTheme,
+      // Pass along custom typography and platform logic.
       typography: _typography,
       platform: _platform,
       // Most definitions below are very close to the ones used by the Flutter
@@ -2381,6 +2430,8 @@ class FlexColorScheme with Diagnosticable {
     bool? tooltipsMatchBackground,
     bool? transparentStatusBar,
     VisualDensity? visualDensity,
+    TextTheme? textTheme,
+    TextTheme? primaryTextTheme,
     String? fontFamily,
     TargetPlatform? platform,
     Typography? typography,
@@ -2409,6 +2460,8 @@ class FlexColorScheme with Diagnosticable {
           tooltipsMatchBackground ?? this.tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar ?? this.transparentStatusBar,
       visualDensity: visualDensity ?? this.visualDensity,
+      textTheme: textTheme ?? this.textTheme,
+      primaryTextTheme: primaryTextTheme ?? this.primaryTextTheme,
       fontFamily: fontFamily ?? this.fontFamily,
       platform: platform ?? this.platform,
       typography: typography ?? this.typography,
@@ -2441,6 +2494,8 @@ class FlexColorScheme with Diagnosticable {
         other.tooltipsMatchBackground == tooltipsMatchBackground &&
         other.transparentStatusBar == transparentStatusBar &&
         other.visualDensity == visualDensity &&
+        other.textTheme == textTheme &&
+        other.primaryTextTheme == primaryTextTheme &&
         other.fontFamily == fontFamily &&
         other.platform == platform &&
         other.typography == typography;
@@ -2475,6 +2530,8 @@ class FlexColorScheme with Diagnosticable {
       tooltipsMatchBackground,
       transparentStatusBar,
       visualDensity,
+      textTheme,
+      primaryTextTheme,
       fontFamily,
       platform,
       typography,
@@ -2510,6 +2567,9 @@ class FlexColorScheme with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>(
         'transparentStatusBar', transparentStatusBar));
     properties.add(EnumProperty<VisualDensity>('visualDensity', visualDensity));
+    properties.add(DiagnosticsProperty<TextTheme>('textTheme', textTheme));
+    properties.add(
+        DiagnosticsProperty<TextTheme>('primaryTextTheme', primaryTextTheme));
     properties.add(DiagnosticsProperty<String>('fontFamily', fontFamily));
     properties.add(EnumProperty<TargetPlatform>('platform', platform));
     properties.add(DiagnosticsProperty<Typography>('typography', typography));
