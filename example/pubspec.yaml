@@ -18,6 +18,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Google fonts (by Google material.io).
+  google_fonts: ^2.1.0
+
   # Used for launching a WEB URL (by Google flutter.dev).
   url_launcher: ^6.0.10
 
@@ -31,39 +34,3 @@ flutter:
   #   Only an app icon used in the About dialog for now
   assets:
     - assets/images/
-  # All bundled fonts
-  fonts:
-    # While Roboto is included in Android Flutter, it is not available on all platforms
-    # to ensure that we get the actual Roboto font on all platform we include it as an asset.
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto/Roboto-Thin.ttf
-          weight: 100
-        - asset: assets/fonts/Roboto/Roboto-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Roboto/Roboto-Black.ttf
-          weight: 900
-        - asset: assets/fonts/Roboto/Roboto-ThinItalic.ttf
-          weight: 100
-          style: italic
-        - asset: assets/fonts/Roboto/Roboto-LightItalic.ttf
-          weight: 300
-          style: italic
-        - asset: assets/fonts/Roboto/Roboto-RegularItalic.ttf
-          weight: 400
-          style: italic
-        - asset: assets/fonts/Roboto/Roboto-MediumItalic.ttf
-          weight: 500
-          style: italic
-        - asset: assets/fonts/Roboto/Roboto-BoldItalic.ttf
-          weight: 700
-          style: italic
-        - asset: assets/fonts/Roboto/Roboto-BlackItalic.ttf
-          weight: 900
-          style: italic

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../all_shared_imports.dart';
 import '../shared/subpage.dart';
@@ -229,7 +230,7 @@ class _DemoAppState extends State<DemoApp> {
               tooltipsMatchBackground: tooltipsMatchBackground,
               swapColors: swapLightColors,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
-              fontFamily: AppFonts.mainFont,
+              fontFamily: GoogleFonts.notoSans().fontFamily,
             ).toTheme
           // The default ThemeData.from method as an option, for demo and
           // comparison purposes. It will not not be fully color scheme colored,
@@ -237,7 +238,7 @@ class _DemoAppState extends State<DemoApp> {
           : ThemeData.from(
               textTheme: ThemeData(
                 brightness: Brightness.light,
-                fontFamily: AppFonts.mainFont,
+                fontFamily: GoogleFonts.notoSans().fontFamily,
               ).textTheme,
               colorScheme: FlexColorScheme.light(
                 colors: myFlexSchemes[themeIndex].light,
@@ -249,7 +250,7 @@ class _DemoAppState extends State<DemoApp> {
                 tooltipsMatchBackground: tooltipsMatchBackground,
                 swapColors: swapLightColors,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
-                fontFamily: AppFonts.mainFont,
+                fontFamily: GoogleFonts.notoSans().fontFamily,
               ).toScheme,
             ).copyWith(
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -275,12 +276,12 @@ class _DemoAppState extends State<DemoApp> {
               swapColors: swapDarkColors,
               darkIsTrueBlack: darkIsTrueBlack,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
-              fontFamily: AppFonts.mainFont,
+              fontFamily: GoogleFonts.notoSans().fontFamily,
             ).toTheme
           : ThemeData.from(
               textTheme: ThemeData(
                 brightness: Brightness.dark,
-                fontFamily: AppFonts.mainFont,
+                fontFamily: GoogleFonts.notoSans().fontFamily,
               ).textTheme,
               colorScheme: FlexColorScheme.dark(
                 colors: useToDarkMethod
@@ -295,7 +296,7 @@ class _DemoAppState extends State<DemoApp> {
                 swapColors: swapDarkColors,
                 darkIsTrueBlack: darkIsTrueBlack,
                 visualDensity: FlexColorScheme.comfortablePlatformDensity,
-                fontFamily: AppFonts.mainFont,
+                fontFamily: GoogleFonts.notoSans().fontFamily,
               ).toScheme,
             ).copyWith(
               visualDensity: FlexColorScheme.comfortablePlatformDensity,

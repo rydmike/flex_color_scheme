@@ -1,5 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../all_shared_imports.dart';
 
@@ -66,14 +67,14 @@ class _DemoAppState extends State<DemoApp> {
         colors: customFlexScheme.light,
         // Use comfortable on desktops instead of compact, devices as default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        fontFamily: AppFonts.mainFont,
+        fontFamily: GoogleFonts.notoSans().fontFamily,
       ).toTheme,
       // We do the exact same definition for the dark theme, but using
       // FlexColorScheme.dark factory and the flexSchemeColor dark scheme.
       darkTheme: FlexColorScheme.dark(
         colors: customFlexScheme.dark,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        fontFamily: AppFonts.mainFont,
+        fontFamily: GoogleFonts.notoSans().fontFamily,
       ).toTheme,
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,

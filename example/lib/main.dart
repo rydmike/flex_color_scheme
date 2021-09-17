@@ -11,6 +11,7 @@
 // -----------------------------------------------------------------------------
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'all_shared_imports.dart';
 
@@ -45,22 +46,21 @@ class _DemoAppState extends State<DemoApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FlexColorScheme',
-      // Use a predefined light theme for the app and call .toTheme method
-      // to create the slightly opinionated theme from the defined color scheme.
-      theme: FlexColorScheme.light(
+      // Use a predefined FlexThemeData.light() theme for the app.
+      theme: FlexThemeData.light(
         scheme: usedFlexScheme,
         // Use comfortable on desktops instead of compact, devices use default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        fontFamily: AppFonts.mainFont,
-      ).toTheme,
+        fontFamily: GoogleFonts.notoSans().fontFamily,
+      ),
       // We do the exact same definition for the dark theme, but using
-      // FlexColorScheme.dark factory and the dark FlexSchemeColor in
+      // FlexThemeData.light() and the dark FlexSchemeColor in
       // FlexColor.schemes.
-      darkTheme: FlexColorScheme.dark(
+      darkTheme: FlexThemeData.dark(
         scheme: usedFlexScheme,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        fontFamily: AppFonts.mainFont,
-      ).toTheme,
+        fontFamily: GoogleFonts.notoSans().fontFamily,
+      ),
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
       // This simple example app has only one page.
