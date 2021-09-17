@@ -1338,5 +1338,39 @@ void main() {
     test('FC5 colors', () {
       expect(FlexColor.outerSpaceDarkSecondaryVariant, const Color(0xFFAAB4BB));
     });
+
+    test('FC5 colors', () {
+      expect(FlexColor.blueWhaleName, 'Blue whale');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.blueWhaleDescription,
+        'Blue whale, jungle green and outrageous tango orange.',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blueWhaleLightPrimary, const Color(0xFF023047));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blueWhaleLightPrimaryVariant, const Color(0xFF2A9D8F));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blueWhaleLightSecondary, const Color(0xFFF86541));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blueWhaleLightSecondaryVariant, const Color(0xFFF07E24));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blueWhaleDarkPrimary, const Color(0xFF57859D));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blueWhaleDarkPrimaryVariant, const Color(0xFF50A399));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blueWhaleDarkSecondary, const Color(0xFFFF6E48));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blueWhaleDarkSecondaryVariant, const Color(0xFFED7F29));
+    });
   });
 }

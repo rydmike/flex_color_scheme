@@ -1148,7 +1148,7 @@ class FlexColor {
   /// Espresso theme color for dark secondary variant color.
   static const Color espressoDarkSecondaryVariant = Color(0xFFF8ECD4);
 
-  // Outer Space dark bluegrey and stage red orange scheme.
+  // Outer Space dark blue grey and stage red orange scheme.
   // Colors and scheme named by "name that color" library for the light colors.
   // The colors are based on image theme nr 19 mix 1 in Flexfold demo app.
 
@@ -1182,6 +1182,41 @@ class FlexColor {
 
   /// Outer Space theme color for dark secondary variant color.
   static const Color outerSpaceDarkSecondaryVariant = Color(0xFFAAB4BB);
+
+  // Blue whale dark blue grey and stage red orange scheme.
+  // Colors and scheme named by "name that color" library for the light colors.
+  // The colors are based on image theme nr 19 mix 1 in Flexfold demo app.
+
+  /// English name of the blueWhale theme.
+  static const String blueWhaleName = 'Blue whale';
+
+  /// English description of the blueWhale theme.
+  static const String blueWhaleDescription =
+      'Blue whale, jungle green and outrageous tango orange.';
+
+  /// Blue whale theme color for light primary color.
+  static const Color blueWhaleLightPrimary = Color(0xFF023047);
+
+  /// Blue whale theme color for light primary variant color.
+  static const Color blueWhaleLightPrimaryVariant = Color(0xFF2A9D8F);
+
+  /// Blue whale theme color for light secondary color.
+  static const Color blueWhaleLightSecondary = Color(0xFFF86541);
+
+  /// Blue whale theme color for light secondary variant color.
+  static const Color blueWhaleLightSecondaryVariant = Color(0xFFF07E24);
+
+  /// Blue whale theme color for dark primary color.
+  static const Color blueWhaleDarkPrimary = Color(0xFF57859D);
+
+  /// Blue whale theme color for dark primary variant color.
+  static const Color blueWhaleDarkPrimaryVariant = Color(0xFF50A399);
+
+  /// Blue whale theme color for dark secondary color.
+  static const Color blueWhaleDarkSecondary = Color(0xFFFF6E48);
+
+  /// Blue whale theme color for dark secondary variant color.
+  static const Color blueWhaleDarkSecondaryVariant = Color(0xFFED7F29);
 
   /// English name of the custom theme.
   static const String customName = 'Custom';
@@ -1898,6 +1933,28 @@ class FlexColor {
     ),
   );
 
+  /// Blue whale dark blue-grey and stage red colors based FlexSchemeData.
+  static const FlexSchemeData blueWhale = FlexSchemeData(
+    name: blueWhaleName,
+    description: blueWhaleDescription,
+    light: FlexSchemeColor(
+      primary: blueWhaleLightPrimary,
+      primaryVariant: blueWhaleLightPrimaryVariant,
+      secondary: blueWhaleLightSecondary,
+      secondaryVariant: blueWhaleLightSecondaryVariant,
+      appBarColor: blueWhaleLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: blueWhaleDarkPrimary,
+      primaryVariant: blueWhaleDarkPrimaryVariant,
+      secondary: blueWhaleDarkSecondary,
+      secondaryVariant: blueWhaleDarkSecondaryVariant,
+      appBarColor: blueWhaleDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
   /// A [FlexScheme] enum to [FlexSchemeData] constant map.
   ///
   /// Contains pre-made ready to go nice dark and light [FlexSchemeColor]
@@ -1951,6 +2008,7 @@ class FlexColor {
     FlexScheme.mallardGreen: mallardGreen,
     FlexScheme.espresso: espresso,
     FlexScheme.outerSpace: outerSpace,
+    FlexScheme.blueWhale: blueWhale,
   };
 
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
@@ -2036,6 +2094,7 @@ class FlexColor {
     mallardGreen,
     espresso,
     outerSpace,
+    blueWhale,
   ];
 }
 

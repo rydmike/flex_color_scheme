@@ -1,39 +1,46 @@
 # Changelog
 
-All notable changes to the **FlexColorScheme** package will be documented in this file.
+All notable changes to the **FlexColorScheme** package are documented in this file.
 
 ## [4.0.0] - September 15, 2021
 
 * **Breaking:** Remove all theme properties that were deprecated in Flutter 2.5.
-  FlexColorScheme went all-in, by also removed previous already known to 
+  FlexColorScheme went all-in, by also removing previous already known to 
   become deprecated `accentColor` from its API totally. This is a minor API 
-  breaks with previous versions, but it was warned that it will happen in
-  already in previous versions. The break is minor since it was deprecated 
-  already in previous version.
-* **Breaking:** The color branding is correctly applied to dark overlay
+  break with previous versions, but it was warned that this will happen when
+  Flutter SDK deprecates the property.  The break is small since it was 
+  deprecated already in previous version.
+* **TODO Breaking:** The color branding is correctly applied to dark overlay
   elevated surfaces. This breaks past style of of elevated color branded 
-  surfaces that did not get correct elevated coloration
-* **New:** Add `textTheme` property to `FlexColorScheme` to enable easier
-  usage of custom text themes without need to merge a custom `TextTheme` via 
-  a copyWith, plus merge with the default text theme.
-* **New:** Added FlexThemeData static extension on ThemeData. Themes can now 
-  optionally be created with the nicer syntax FlexThemeData.light() and
-  FlexThemeData.dark(), instead of with FlexColorScheme.light().toTheme and
-  FlexColorScheme.dark().toTheme.
-* **New:** Added convenience support for Flutter 2.5 full screen mode to
+  surfaces that did not get correct elevated coloration.
+* **TODO Breaking:** Better algorithm for calculating MaterialColor schemes.
+* **New:** Add `textTheme` and `primaryTextTHeme` properties to `FlexColorScheme` to 
+  enable easier usage of custom `TextThemes` without need to merge a custom 
+  `TextTheme` via a `copyWith`, plus `merge` with the default text theme.
+* **New:** Added `FlexThemeData` static extension on `ThemeData`. Themes can now 
+  optionally be created with the convenience syntax `FlexThemeData.light()` and
+  `FlexThemeData.dark()`, instead of with `FlexColorScheme.light().toTheme` and
+  `FlexColorScheme.dark().toTheme`.
+* **New:** All `FlexSchemeData` objects in `FlexColor` are exposed as static const
+  objects, making them easy to pick and reuse as const objects individually in 
+  custom color scheme lists. Previously only the individual color definitions
+  were exposed.
+* **Change:** The `FlexColor.schemesList` is now const for improved efficiency. 
+
+* **TODO New:** Added convenience support for Flutter 2.5 full screen mode to
   `FlexColorScheme.themedSystemNavigationBar`.
 
 * **Tests:** Added tests for above features. Total 864 tests, coverage 99.75%.
 * Documentation and typo fixes.
 
-* **DRAFT New color schemes:** Added four new built-in color schemes.
-  * **Bahama and trinidad** - Bahama blue and trinidad orange colored theme.
-    Use enum value `FlexScheme.bahamaBlue` for easy access to it.
-  * **Mallard and valencia** - Mallard green and Valencia pink colored theme.
+* **TODO New color schemes:** Added four new built-in color schemes.
+  * **Blue whale** - Blue whale, jungle green and outrageous tango orange.
+    Use enum value `FlexScheme.blueWhale` for easy access to it.
+  * **TODO** - Mallard green and Valencia pink colored theme.
     Use enum value `FlexScheme.mallardGreen` for easy access to it.
-  * **Espresso and crema** - Espresso dark brown and crema colored theme.
+  * **TODO** - Espresso dark brown and crema colored theme.
     Use enum value `FlexScheme.espresso` for easy access to it.
-  * **Outer space stage** - Outer space dark blue-grey and stage red theme.
+  * **TODO** - Outer space dark blue-grey and stage red theme.
     Use enum value `FlexScheme.outerSpace` for easy access to it.
 
 ## [3.0.1] - July 1, 2021
@@ -45,9 +52,7 @@ All notable changes to the **FlexColorScheme** package will be documented in thi
   before reducing the used colors.
 * **Tests:** Added tests for above fix that captures the issue and fails
   in version 3.0.0. Total 741 tests, coverage 99.75%.
-* Documentation and typo fixes.  
-
-
+* Documentation and typo fixes.
 
 ## [3.0.0] - June 25, 2021
 
@@ -408,7 +413,7 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - Version 3.0.0 Deprecated `accentColor`. Swap primary and secondary colors feature added. Added 4 new color schemes.
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
 - Version 2.0.0-nullsafety.2: Minor new APIs and features added. Example 5 updated.
-- This [#71184](https://github.com/flutter/flutter/pull/71184) landed in Flutter 2.0.0. The past custom "white" 
+- Since [#71184](https://github.com/flutter/flutter/pull/71184) landed in Flutter 2.0.0. The past custom "white" 
   AppBarTheme implementation was as planned changed to the new one that is supported by the SDK.  
 - Version 2.0.0-nullsafety.1 released
 - Version 1.4.1 Added automated build and publish pipes for the Web examples!

@@ -2061,9 +2061,9 @@ class FlexColorScheme with Diagnosticable {
       hintColor: _hintColor,
       // Flutter standard dialogBackgroundColor for color scheme based themes
       // uses colorScheme.background.
-      // We use surface color instead of background for the dialog background.
-      // In Flutter ColorScheme.dark and .light, they are the same, but
-      // background color affects things like drawer, bottom bar and we
+      // We use colorScheme.surface color instead of background for the dialog
+      // background. In Flutter ColorScheme.dark and .light, they are the same,
+      // but background color affects things like drawer, bottom bar and we
       // like them slightly darker than surface, and when using primary blended
       // background, we want it to be a stronger blend than surface, but this
       // does not fit so well on dialogs, so we use colorScheme.surface for
@@ -2144,7 +2144,7 @@ class FlexColorScheme with Diagnosticable {
       // or surface color, and still gets a correct working text and icon theme.
       // In the versions prior to Flutter 2.0.0 doing this was difficult, as
       // presented in https://github.com/flutter/flutter/issues/50606 doing
-      // this is a bit tricky. A new feature in Flutter 2.0.0 implemented via:
+      // this was a bit tricky. A new feature in Flutter 2.0.0 implemented via:
       // https://github.com/flutter/flutter/pull/71184 makes this easy and
       // better. The FlexColorScheme implementation below has been changed to
       // use this new AppBarTheme feature from version 2.0.0-nullsafety.2

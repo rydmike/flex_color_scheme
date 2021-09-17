@@ -13,7 +13,7 @@ import 'flex_scheme.dart';
 /// * FlexThemeData.dark(), based on FlexColorScheme.dark().toTheme
 /// * FlexThemeData.raw(), based on FlexColorScheme().toTheme
 ///
-/// The goal is to eventually be able to provide these as static on extesions
+/// The goal is to eventually be able to provide these as static on extensions
 /// on ThemeData so it would be possible to say:
 ///
 /// * ThemeData.flexLight(), based on FlexColorScheme.light().toTheme
@@ -28,9 +28,8 @@ import 'flex_scheme.dart';
 /// It was anyway added as an option, hopefully pending delivery on above
 /// mentioned issue will allow for the 2nd mentioned syntax as well some day.
 ///
-/// Using FlexThemeData.light() is still a bit shorter than
-/// FlexColorScheme.light().toTheme, and may better show that it returns
-/// ThemeData object.
+/// Using FlexThemeData.light() is still a bit shorter
+/// than FlexColorScheme.light().toTheme, and it may feel more familiar.
 extension FlexThemeData on ThemeData {
   /// Return a ThemeData defined by factory FlexColorScheme().light object and
   /// its toTheme method.
@@ -231,6 +230,12 @@ extension FlexThemeData on ThemeData {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     VisualDensity? visualDensity,
 
+    /// Text with a color that contrasts with the card and canvas colors.
+    TextTheme? textTheme,
+
+    /// A text theme that contrasts with the primary color.
+    TextTheme? primaryTextTheme,
+
     /// Same property as in [ThemeData] factory, it is just passed along to it.
     ///
     /// Included for convenience to avoid a copyWith if it needs to be changed.
@@ -283,6 +288,8 @@ extension FlexThemeData on ThemeData {
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
       visualDensity: visualDensity,
+      textTheme: textTheme,
+      primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
       platform: platform,
       typography: typography,
@@ -494,6 +501,12 @@ extension FlexThemeData on ThemeData {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     VisualDensity? visualDensity,
 
+    /// Text with a color that contrasts with the card and canvas colors.
+    TextTheme? textTheme,
+
+    /// A text theme that contrasts with the primary color.
+    TextTheme? primaryTextTheme,
+
     /// Same property as in [ThemeData] factory, it is just passed along to it.
     ///
     /// Included for convenience to avoid a copyWith if it needs to be changed.
@@ -546,6 +559,8 @@ extension FlexThemeData on ThemeData {
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
       visualDensity: visualDensity,
+      textTheme: textTheme,
+      primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
       platform: platform,
       typography: typography,
@@ -762,6 +777,12 @@ extension FlexThemeData on ThemeData {
     /// smaller value translates to a spacing decrease (more dense).
     final VisualDensity? visualDensity,
 
+    /// Text with a color that contrasts with the card and canvas colors.
+    TextTheme? textTheme,
+
+    /// A text theme that contrasts with the primary color.
+    TextTheme? primaryTextTheme,
+
     /// Name of the font family to use as default for the theme.
     final String? fontFamily,
 
@@ -831,6 +852,8 @@ extension FlexThemeData on ThemeData {
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
       visualDensity: visualDensity,
+      textTheme: textTheme,
+      primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
       platform: platform,
       typography: typography,

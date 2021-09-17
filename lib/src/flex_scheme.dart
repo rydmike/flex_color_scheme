@@ -100,11 +100,14 @@ enum FlexScheme {
   /// Mallard green and valencia pink.
   mallardGreen,
 
-  /// Espresso and crema.
+  /// Espresso and crema theme.
   espresso,
 
-  /// Outer space and red stage.
+  /// Outer space and red stage theme.
   outerSpace,
+
+  /// Blue whale, jungle green and outrageous tango orange theme.
+  blueWhale,
 
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a `FlexColorScheme` based on a custom

@@ -930,12 +930,12 @@ void main() {
     ).toTheme;
 
     test(
-        'FCS7.79: GIVEN a FlexColorScheme.light with heavy branding and 3 '
+        'FCS7.81: GIVEN a FlexColorScheme.light with heavy branding and 3 '
         'colors EXPECT none null result.', () {
       expect(tLightH3, isNotNull);
     });
     test(
-        'FCS7.80: GIVEN a FlexColorScheme.dark with heavy branding and '
+        'FCS7.82: GIVEN a FlexColorScheme.dark with heavy branding and '
         '3 colors and true black EXPECT none null result.', () {
       expect(tDarkH3, isNotNull);
     });
@@ -973,12 +973,12 @@ void main() {
     ).toTheme;
 
     test(
-        'FCS7.81: GIVEN a FlexColorScheme.light with more options '
+        'FCS7.83: GIVEN a FlexColorScheme.light with more options '
         'EXPECT none null result.', () {
       expect(tLightC, isNotNull);
     });
     test(
-        'FCS7.82: GIVEN a FlexColorScheme.dark with more options '
+        'FCS7.84: GIVEN a FlexColorScheme.dark with more options '
         'EXPECT none null result.', () {
       expect(tDarkC, isNotNull);
     });
@@ -1031,22 +1031,195 @@ void main() {
     ).toTheme;
 
     test(
-        'FCS7.81: GIVEN a FlexColorScheme.light with more options '
+        'FCS7.85: GIVEN a FlexColorScheme.light with more options '
         'like custom surface and background '
         'EXPECT OK and identical to copy.', () {
       expect(tLightC2, tLightC2.copyWith());
     });
     test(
-        'FCS7.82: GIVEN a FlexColorScheme.dark with more options '
+        'FCS7.86: GIVEN a FlexColorScheme.dark with more options '
         'like custom surface and background '
         'EXPECT OK and identical to copy.', () {
       expect(tDarkC2, tDarkC2.copyWith());
     });
     test(
-        'FCS7.82: GIVEN a FlexColorScheme.dark with more options '
+        'FCS7.87: GIVEN a FlexColorScheme.dark with more options '
         'like custom surface and background and true black '
         'EXPECT OK and identical to copy.', () {
       expect(tDarkC2tb, tDarkC2tb.copyWith());
+    });
+
+    // Default light TextTheme equality verification.
+    //
+    // Flex default TextTheme light
+    final TextTheme fLightT = FlexColorScheme.light().toTheme.textTheme;
+    // Should be same as a light ThemeData textTheme with Typography 2018
+    final TextTheme nLightT =
+        ThemeData(typography: Typography.material2018()).textTheme;
+    test(
+        'FCS7.88: GIVEN a FlexColorScheme.light with no TextTheme defined '
+        'EXPECT equal to '
+        'ThemeData(typography: Typography.material2018()).textTheme.', () {
+      expect(fLightT, equals(nLightT));
+    });
+
+    // Default light Primary TextTheme equality verification.
+    //
+    // Flex default TextTheme light
+    final TextTheme fLightP = FlexColorScheme.light().toTheme.primaryTextTheme;
+    // Should be same as a light ThemeData textTheme with Typography 2018
+    final TextTheme nLightP =
+        ThemeData(typography: Typography.material2018()).primaryTextTheme;
+    test(
+        'FCS7.89: GIVEN a FlexColorScheme.light with no PrimaryTextTheme '
+        'defined EXPECT equal '
+        'ThemeData(typography: Typography.material2018()).primaryTextTheme',
+        () {
+      expect(fLightP, equals(nLightP));
+    });
+
+    // Default dark TextTheme equality verification.
+    final TextTheme fDarkT = FlexColorScheme.dark().toTheme.textTheme;
+    final TextTheme nDarkT = ThemeData(
+      brightness: Brightness.dark,
+      typography: Typography.material2018(),
+    ).textTheme;
+    test(
+        'FCS7.90: GIVEN a FlexColorScheme.dark with no TextTheme defined '
+        'EXPECT equal to default dark with Typography 2018.', () {
+      expect(fDarkT, equals(nDarkT));
+    });
+
+    // Primary dark text theme verification, this is not equal to default
+    // ThemeData primary text theme, it is so by design, we have to also
+    // set the primaryColor to the color used by FlexColorScheme.dark, otherwise
+    // default dark theme uses an almost black color as primary color, giving
+    // us the wrong on primaryTextTheme color for this test case, which is
+    // part of the test.
+    final TextTheme fDarkP = FlexColorScheme.dark().toTheme.primaryTextTheme;
+    final Color nDarkPColor = FlexColorScheme.dark().toTheme.primaryColor;
+    final TextTheme nDarkP = ThemeData(
+      brightness: Brightness.dark,
+      primaryColor: nDarkPColor,
+      typography: Typography.material2018(),
+    ).primaryTextTheme;
+    // Default dark Primary TextTheme equality verification.
+    test(
+        'FCS7.91: GIVEN a FlexColorScheme.dark with no PrimaryTextThemes '
+        'defined EXPECT equal to default default dark with Typography 2018 and '
+        'primaryColor set as in FlexColorScheme.light.', () {
+      expect(fDarkP, equals(nDarkP));
+    });
+
+    // Next let's test som crazy themes, make one for TextTheme
+    const TextTheme customText = TextTheme(
+      headline6: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+        height: 24 / 20,
+      ),
+      headline5: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+      ),
+      headline4: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.15,
+      ),
+      subtitle2: TextStyle(
+        fontSize: 17,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.25,
+        height: 20 / 17,
+      ),
+      bodyText1: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+        height: 20 / 14,
+      ),
+      bodyText2: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.5,
+      ),
+    );
+
+    // Make a custom text theme for PrimaryTextTheme, it should only get these
+    // customizations + default style, not the the ones in the custom TextTheme.
+    const TextTheme customPrimText = TextTheme(
+      bodyText2: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.5,
+      ),
+      overline: TextStyle(
+        letterSpacing: 0.5,
+      ),
+    );
+
+    // Light theme with custom text theme
+    final ThemeData fLightTD = FlexColorScheme.light(
+      textTheme: customText,
+      primaryTextTheme: customPrimText,
+    ).toTheme;
+    final ThemeData nLightTD = ThemeData(
+      textTheme: customText,
+      primaryTextTheme: customPrimText,
+      typography: Typography.material2018(),
+    );
+
+    // Custom light TextTheme equality verification.
+    final TextTheme fCText = fLightTD.textTheme;
+    final TextTheme nCText = nLightTD.textTheme;
+    test(
+        'FCS7.92: GIVEN a FlexColorScheme.light with custom TextTheme defined '
+        'EXPECT equal to default with same text theme and typography 2018', () {
+      expect(fCText, equals(nCText));
+    });
+    // Custom light TextTheme with Primary derived from it equality test.
+    final TextTheme fCPText = fLightTD.primaryTextTheme;
+    final TextTheme nCPText = nLightTD.primaryTextTheme;
+    test(
+        'FCS7.93: GIVEN a FlexColorScheme.light with custom PrimaryTextTheme '
+        'defined EXPECT the primaryTextTheme to be equal with default ThemeData '
+        'with same primary text theme and typography 2018.', () {
+      expect(fCPText, equals(nCPText));
+    });
+
+    // Dark theme with custom text theme
+    final ThemeData fDarkTD = FlexColorScheme.dark(
+      textTheme: customText,
+      primaryTextTheme: customPrimText,
+    ).toTheme;
+    final ThemeData nDarkTD = ThemeData(
+      brightness: Brightness.dark,
+      textTheme: customText,
+      primaryTextTheme: customPrimText,
+      primaryColor: nDarkPColor,
+      typography: Typography.material2018(),
+    );
+
+    // Custom dark TextTheme equality verification.
+    final TextTheme fCDText = fDarkTD.textTheme;
+    final TextTheme nCDText = nDarkTD.textTheme;
+    test(
+        'FCS7.94: GIVEN a FlexColorScheme.dark with custom TextTheme defined '
+        'EXPECT equal to default with same text theme and typography 2018', () {
+      expect(fCDText, equals(nCDText));
+    });
+
+    // Custom dark TextTheme with Primary derived from it equality test.
+    final TextTheme fCPDText = fDarkTD.primaryTextTheme;
+    final TextTheme nCPDText = nDarkTD.primaryTextTheme;
+    test(
+        'FCS7.95: GIVEN a FlexColorScheme.dark with custom PrimaryTextTheme '
+        'defined EXPECT equal to default with same primary text theme and '
+        'typography 2018 and primaryColor set as in FlexColorScheme.dark.', () {
+      expect(fCPDText, equals(nCPDText));
     });
   });
 }
