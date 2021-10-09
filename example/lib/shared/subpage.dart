@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../all_shared_imports.dart';
+import 'all_shared_imports.dart';
 // It is not necessary to review or understand the code in this file in order
 // to understand how to use the FlexColorScheme package demonstrated in
 // the examples.
@@ -49,7 +49,7 @@ class _SubpageState extends State<Subpage> {
         ),
         body: PageBody(
           child: ListView(
-            padding: const EdgeInsets.all(AppConst.edgePadding),
+            padding: const EdgeInsets.all(App.edgePadding),
             children: <Widget>[
               Text('Subpage demo', style: headline4),
               const Text(
@@ -61,7 +61,7 @@ class _SubpageState extends State<Subpage> {
               // Show all key active theme colors.
               Text('Theme colors', style: headline4),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
+                padding: EdgeInsets.symmetric(horizontal: App.edgePadding),
                 child: ShowThemeColors(),
               ),
               const Divider(),

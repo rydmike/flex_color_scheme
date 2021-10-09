@@ -1,4 +1,4 @@
-/// A library to help you make beautiful ColorScheme based themes for Flutter.
+/// A library to help you make beautiful color scheme based themes for Flutter.
 library flex_color_scheme;
 
 /// Offers built-in reusable color schemes and color values. Can be used

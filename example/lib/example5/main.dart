@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../all_shared_imports.dart';
-import '../shared/subpage.dart';
+import '../shared/all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 5)
@@ -14,8 +13,8 @@ import '../shared/subpage.dart';
 // This example shows how you can use all the built in color schemes in
 // FlexColorScheme to define themes from them and how you can define your own
 // custom scheme colors and use them together with the predefined ones.
-// It can give you an idea of how you can create your own complete custom list
-// of themes if you do not want to use any of the predefined ones.
+// It gives you an idea of how you can create your own complete custom list
+// of themes, if you do not want to use any of the predefined ones.
 //
 // The example also shows how you can use the surface branding feature and
 // how to use the custom app bar theme features of FlexColorScheme. The usage
@@ -23,17 +22,19 @@ import '../shared/subpage.dart';
 // Using the optional Windows desktop like tooltip theme is also shown.
 //
 // A toggle that allows us to compare the result of custom defined dark schemes
-// to the lazy computed versions is also available. To further demonstrate the
-// difference between FlexColorScheme.toTheme and ThemeData.from an option
-// to try both is presented for comparison purposes.
+// its computed versions is also available. To further demonstrate the
+// difference between FlexThemeData and ThemeData.from, a toggle to try
+// both is available for comparison purposes.
 //
 // The example includes a dummy responsive side menu and rail to give a visual
 // presentation of what applications that have larger visible surfaces using the
-// surface branding look like.
+// surface branding looks like.
+//
+// We also use the Google font Noto Sans for the app and usage of a
+// custom text theme is also demonstrated.
 //
 // A theme showcase widget shows the theme with several common Material widgets.
 //
-// ---
 // For simplicity this example just creates a few const and final instances
 // of the needed objects and list. In a real app, you may want to use a Provider
 // or equivalent package(s) to provide the objects where needed in your app.
@@ -42,7 +43,7 @@ import '../shared/subpage.dart';
 void main() => runApp(const DemoApp());
 
 // Create a custom flex scheme color for a light theme.
-const FlexSchemeColor myScheme1Light = FlexSchemeColor(
+const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
   primary: Color(0xFF4E0028),
   primaryVariant: Color(0xFF320019),
   secondary: Color(0xFF003419),
@@ -53,7 +54,7 @@ const FlexSchemeColor myScheme1Light = FlexSchemeColor(
   appBarColor: Color(0xFF002411),
 );
 // Create a corresponding custom flex scheme color for a dark theme.
-const FlexSchemeColor myScheme1Dark = FlexSchemeColor(
+const FlexSchemeColor _myScheme1Dark = FlexSchemeColor(
   primary: Color(0xFF9E7389),
   primaryVariant: Color(0xFF775C69),
   secondary: Color(0xFF738F81),
@@ -74,21 +75,21 @@ const FlexSchemeColor myScheme1Dark = FlexSchemeColor(
 // for the light and dark schemes. The custom app bar color will in this case
 // also receive the same color value as the one that is computed for
 // secondaryVariant color, this is the default in the [from] factory.
-final FlexSchemeColor myScheme2Light =
+final FlexSchemeColor _myScheme2Light =
     FlexSchemeColor.from(primary: const Color(0xFF4C4E06));
-final FlexSchemeColor myScheme2Dark =
+final FlexSchemeColor _myScheme2Dark =
     FlexSchemeColor.from(primary: const Color(0xFF9D9E76));
 
 // For our 3rd custom scheme we will define primary and secondary colors, but no
 // variant colors, we will not make any dark scheme definitions either.
-final FlexSchemeColor myScheme3Light = FlexSchemeColor.from(
+final FlexSchemeColor _myScheme3Light = FlexSchemeColor.from(
   primary: const Color(0xFF993200),
   secondary: const Color(0xFF1B5C62),
 );
 
 // Create a list with all color schemes we will use, starting with all
 // the built-in ones and then adding our custom ones at the end.
-final List<FlexSchemeData> myFlexSchemes = <FlexSchemeData>[
+final List<FlexSchemeData> _myFlexSchemes = <FlexSchemeData>[
   // Use the built in FlexColor schemes, but exclude the placeholder for custom
   // scheme, a selection that would typically be used to compose a theme
   // interactively in the app using a color picker, we won't be doing that in
@@ -103,27 +104,46 @@ final List<FlexSchemeData> myFlexSchemes = <FlexSchemeData>[
     // matching dark theme colors. Dark theme colors need to be much less
     // saturated than light theme. Using the same colors in light and dark
     // theme modes does not look nice.
-    light: myScheme1Light,
-    dark: myScheme1Dark,
+    light: _myScheme1Light,
+    dark: _myScheme1Dark,
   ),
   // Do the same for our second custom scheme.
   FlexSchemeData(
     name: 'Olive green',
     description:
         'Olive green theme, created from primary light and dark colors.',
-    light: myScheme2Light,
-    dark: myScheme2Dark,
+    light: _myScheme2Light,
+    dark: _myScheme2Dark,
   ),
   // We also do the same for our 3rd custom scheme, BUT we create its matching
   // dark colors, from the light FlexSchemeColor with the toDark method.
   FlexSchemeData(
     name: 'Oregon orange',
     description: 'Custom orange and blue theme, from only light scheme colors.',
-    light: myScheme3Light,
+    light: _myScheme3Light,
     // We create the dark desaturated colors from the light scheme.
-    dark: myScheme3Light.toDark(),
+    dark: _myScheme3Light.toDark(),
   ),
 ];
+
+// We define a custom text theme for our app. Here we have decided that
+// Headline1 is too big to be useful for us, so we make it a bit smaller.
+// We also think buttons should have a bit bigger text, tighter letter spacing,
+// and that overline is a bit too small and have weird letter spacing,
+// so we change them too.
+const TextTheme _myTextTheme = TextTheme(
+  headline1: TextStyle(
+    fontSize: 70, // Defaults to 96 in Material2018 Typography.
+  ),
+  button: TextStyle(
+    fontSize: 16, // Defaults to 14 in Material2018 Typography.
+    letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
+  ),
+  overline: TextStyle(
+    fontSize: 11, // Defaults to 10 in Material2018 Typography.
+    letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
+  ),
+);
 
 class DemoApp extends StatefulWidget {
   const DemoApp({Key? key}) : super(key: key);
@@ -182,46 +202,44 @@ class _DemoAppState extends State<DemoApp> {
   // colors from the light scheme colors with the toDark method.
   int level = 35;
 
-  // Use the toTheme method to create Themes from [FlexColorScheme]. This
-  // is the preferred method when using [FlexColorScheme]. In this demo
-  // you can use a toggle to see what a FlexColorScheme looks like if you just
-  // return its color scheme and use [ThemeData.from] to instead create your
-  // theme.
-  bool useToThemeMethod = true;
+  /// Use [FlexColorScheme] based ThemeData with [FlexThemeData]. This
+  /// is the preferred method when using [FlexColorScheme]. In this demo
+  /// you can use a toggle to see what a [FlexColorScheme] looks like if you
+  /// just return its color scheme and use [ThemeData.from] to instead create
+  /// your theme.
+  bool useFlexThemeData = true;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'FlexColorScheme',
+      title: 'Sample 5) All Features',
       // Define the light theme for the app, using current theme index, selected
-      // surface style and app bar style. With the built in 20 themes and the
-      // custom ones we defined above, we can use 23 different app themes via
+      // surface style and app bar style. With the built in 36 themes and the
+      // custom ones we defined above, we can use 39 different app themes via
       // the definition below, times the surface styles and app bar variants.
-      // The factory FlexColorScheme.light is used to define a FlexColorScheme
-      // for a light theme, from the light FlexSchemeColor plus some other theme
-      // factory properties, like the surface and app bar style used in
-      // this example as well as the tooltip and true black setting for the dark
-      // theme.
-      // Lastly the method .toTheme is used to create the slightly opinionated
-      // theme from the defined color scheme.
+      //
+      // FlexThemeData.light is used to define a FlexColorScheme for a light
+      // theme, from the light FlexSchemeColor plus some other theme
+      // properties, like the surface and app bar style used in this example
+      // as well as the tooltip, and true black setting for the dark/ theme.
       //
       // In this example we also demonstrate how to create the same theme with
-      // the standard from color scheme ThemeData factory. The surface style
-      // works, but will not be applied as elegantly, but it works fairly OK up
-      // to medium blend. The app bar style has no effect here, nor the tooltip
-      // style. We also have to make sure we use the same typography as the one
-      // used in FlexColorScheme, otherwise the animated theme will show an
-      // assertion error as it cannot animate between different typography or
-      // null default typography in the theme data.
+      // the standard from color scheme ThemeData.from factory. The surface
+      // style works, but will not be applied as elegantly, but it works fairly
+      // OK up to medium blend. The app bar style has no effect here, nor the
+      // tooltip style. We also have to make sure we use the same typography,
+      // since the one used in FlexColorScheme, otherwise the animated theme
+      // will show an assertion error as it cannot animate between different
+      // typography or null default typography in the theme data.
       //
       // When toggling between the standard ThemeData.from and the
-      // FlexColorScheme.toTheme we can observe the differences and also see
+      // FlexThemeData we can observe the differences and also see
       // some of the colors the standard method does not fully adjust to match
       // the used color scheme.
-      theme: useToThemeMethod
-          ? FlexColorScheme.light(
-              colors: myFlexSchemes[themeIndex].light,
+      theme: useFlexThemeData
+          ? FlexThemeData.light(
+              colors: _myFlexSchemes[themeIndex].light,
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
               appBarElevation: appBarElevation,
@@ -231,26 +249,33 @@ class _DemoAppState extends State<DemoApp> {
               swapColors: swapLightColors,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
               fontFamily: GoogleFonts.notoSans().fontFamily,
-            ).toTheme
-          // The default ThemeData.from method as an option, for demo and
+              textTheme: _myTextTheme,
+              primaryTextTheme: _myTextTheme,
+            )
+          // Use the default ThemeData.from method as an option, for demo and
           // comparison purposes. It will not not be fully color scheme colored,
           // nor will it look as nice and balanced when color branding is used.
           : ThemeData.from(
               textTheme: ThemeData(
                 brightness: Brightness.light,
                 fontFamily: GoogleFonts.notoSans().fontFamily,
+                textTheme: _myTextTheme,
+                primaryTextTheme: _myTextTheme,
               ).textTheme,
               colorScheme: FlexColorScheme.light(
-                colors: myFlexSchemes[themeIndex].light,
-                surfaceStyle: flexSurface,
-                appBarStyle: flexAppBarStyle,
-                appBarElevation: appBarElevation,
-                transparentStatusBar: transparentStatusBar,
-                tabBarStyle: flexTabBarStyle,
-                tooltipsMatchBackground: tooltipsMatchBackground,
+                colors: _myFlexSchemes[themeIndex].light,
+                // TODO(rydmike): Remove comments, write in doc why!
+                // surfaceStyle: flexSurface,
+                // appBarStyle: flexAppBarStyle,
+                // appBarElevation: appBarElevation,
+                // transparentStatusBar: transparentStatusBar,
+                // tabBarStyle: flexTabBarStyle,
+                // tooltipsMatchBackground: tooltipsMatchBackground,
                 swapColors: swapLightColors,
-                visualDensity: FlexColorScheme.comfortablePlatformDensity,
-                fontFamily: GoogleFonts.notoSans().fontFamily,
+                // visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                // fontFamily: GoogleFonts.notoSans().fontFamily,
+                // textTheme: _myTextTheme,
+                // primaryTextTheme: _myTextTheme,
               ).toScheme,
             ).copyWith(
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -259,14 +284,14 @@ class _DemoAppState extends State<DemoApp> {
               ),
             ),
       // We do the exact same definition for the dark theme, but using
-      // FlexColorScheme.dark factory and the dark FlexSchemeColor and we add
+      // FlexThemeData.dark() and the dark FlexSchemeColors and we add
       // the true black option as well and the feature to demonstrate
       // the usage of computed dark schemes.
-      darkTheme: useToThemeMethod
-          ? FlexColorScheme.dark(
+      darkTheme: useFlexThemeData
+          ? FlexThemeData.dark(
               colors: useToDarkMethod
-                  ? myFlexSchemes[themeIndex].light.defaultError.toDark(level)
-                  : myFlexSchemes[themeIndex].dark,
+                  ? _myFlexSchemes[themeIndex].light.defaultError.toDark(level)
+                  : _myFlexSchemes[themeIndex].dark,
               surfaceStyle: flexSurface,
               appBarStyle: flexAppBarStyle,
               appBarElevation: appBarElevation,
@@ -277,26 +302,36 @@ class _DemoAppState extends State<DemoApp> {
               darkIsTrueBlack: darkIsTrueBlack,
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
               fontFamily: GoogleFonts.notoSans().fontFamily,
-            ).toTheme
+              textTheme: _myTextTheme,
+              primaryTextTheme: _myTextTheme,
+            )
           : ThemeData.from(
               textTheme: ThemeData(
                 brightness: Brightness.dark,
                 fontFamily: GoogleFonts.notoSans().fontFamily,
+                textTheme: _myTextTheme,
+                primaryTextTheme: _myTextTheme,
               ).textTheme,
               colorScheme: FlexColorScheme.dark(
                 colors: useToDarkMethod
-                    ? myFlexSchemes[themeIndex].light.defaultError.toDark(level)
-                    : myFlexSchemes[themeIndex].dark,
+                    ? _myFlexSchemes[themeIndex]
+                        .light
+                        .defaultError
+                        .toDark(level)
+                    : _myFlexSchemes[themeIndex].dark,
+                // TODO(rydmike): Remove comments, write in doc why!
                 surfaceStyle: flexSurface,
-                appBarStyle: flexAppBarStyle,
-                appBarElevation: appBarElevation,
-                transparentStatusBar: transparentStatusBar,
-                tabBarStyle: flexTabBarStyle,
-                tooltipsMatchBackground: tooltipsMatchBackground,
+                // appBarStyle: flexAppBarStyle,
+                // appBarElevation: appBarElevation,
+                // transparentStatusBar: transparentStatusBar,
+                // tabBarStyle: flexTabBarStyle,
+                // tooltipsMatchBackground: tooltipsMatchBackground,
                 swapColors: swapDarkColors,
                 darkIsTrueBlack: darkIsTrueBlack,
-                visualDensity: FlexColorScheme.comfortablePlatformDensity,
-                fontFamily: GoogleFonts.notoSans().fontFamily,
+                // visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                // fontFamily: GoogleFonts.notoSans().fontFamily,
+                // textTheme: _myTextTheme,
+                // primaryTextTheme: _myTextTheme,
               ).toScheme,
             ).copyWith(
               visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -413,11 +448,11 @@ class _DemoAppState extends State<DemoApp> {
           });
         },
         // We pass in the current theme creation method
-        useToTheme: useToThemeMethod,
+        useToTheme: useFlexThemeData,
         // And toggle the theme creation method.
         onUseToThemeChanged: (bool value) {
           setState(() {
-            useToThemeMethod = value;
+            useFlexThemeData = value;
           });
         },
         // Pass in the FlexSchemeData we used for the active theme. Not really
@@ -428,10 +463,10 @@ class _DemoAppState extends State<DemoApp> {
         // We use copyWith to modify the dark scheme to the colors we get from
         // toggling the switch for computed dark colors or the actual defined
         // dark colors.
-        flexSchemeData: myFlexSchemes[themeIndex].copyWith(
+        flexSchemeData: _myFlexSchemes[themeIndex].copyWith(
             dark: useToDarkMethod
-                ? myFlexSchemes[themeIndex].light.defaultError.toDark(level)
-                : myFlexSchemes[themeIndex].dark),
+                ? _myFlexSchemes[themeIndex].light.defaultError.toDark(level)
+                : _myFlexSchemes[themeIndex].dark),
       ),
     );
   }
@@ -510,25 +545,186 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // The reason for example 5 using a stateful widget is that it holds the
-  // state of the dummy side menu/rail locally. All state concerning the
+  // state of the dummy side menu/rail locally. However, all state for the
   // application theme are in this example also held by the stateful MaterialApp
   // widget, and values are passed in and changed via ValueChanged callbacks.
-  double currentSidePanelWidth = AppConst.expandWidth;
-  bool isSidePanelExpanded = true;
-  bool showSidePanel = true;
+  double _menuWidth = App.expandWidth;
+  bool _isExpanded = true;
+
   // The state for the system navbar style and divider usage is local as it is
-  // is only used by the AnnotatedRegion, not by FlexColorScheme.toTheme.
+  // is only used by the AnnotatedRegion, not by FlexThemeData.
+  //
   // Used to control system navbar style via an AnnotatedRegion.
-  FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.background;
+  FlexSystemNavBarStyle _navBarStyle = FlexSystemNavBarStyle.background;
   // Used to control if we have a top divider on the system navigation bar.
-  bool useSysNavDivider = false;
+  bool _useNavDivider = false;
+
+  // FlexSurface enum to widget map, used in a CupertinoSegment control.
+  static const Map<FlexSurface, Widget> _themeSurface = <FlexSurface, Widget>{
+    FlexSurface.material: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Default\ndesign',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexSurface.light: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Light\nprimary',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexSurface.medium: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Medium\nprimary',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexSurface.strong: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Strong\nprimary',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexSurface.heavy: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Heavy\nprimary',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+  };
+
+  // FlexAppBarStyle enum to widget map, used in a CupertinoSegment control.
+  static const Map<FlexAppBarStyle, Widget> _themeAppBar =
+      <FlexAppBarStyle, Widget>{
+    FlexAppBarStyle.primary: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Primary\ncolor',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexAppBarStyle.material: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        // Wait, what is \u{00AD} below?? It is Unicode char-code for an
+        // invisible soft hyphen. It can be used to guide text layout where
+        // it can break a word to the next line, if it has to. On small phones
+        // or a desktop builds where you can make the UI really narrow in
+        // Flutter, you can observe this with the 'background' word below.
+        'Default\nback\u{00AD}ground',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexAppBarStyle.surface: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Branded\nsurface',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexAppBarStyle.background: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Branded\nback\u{00AD}ground',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexAppBarStyle.custom: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Custom\ncolor',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+  };
+
+  // FlexSystemNavBarStyle enum to widget map, used in a CupertinoSegment.
+  static const Map<FlexSystemNavBarStyle, Widget> _systemNavBar =
+      <FlexSystemNavBarStyle, Widget>{
+    FlexSystemNavBarStyle.system: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'System',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexSystemNavBarStyle.surface: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Surface',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexSystemNavBarStyle.background: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Back\u{00AD}ground',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexSystemNavBarStyle.scaffoldBackground: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Scaffold\nback\u{00AD}ground',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexSystemNavBarStyle.transparent: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'Trans\u{00AD}parent',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+  };
+
+  // FlexTabBarStyle enum to widget map, used in a CupertinoSegment control.
+  static const Map<FlexTabBarStyle, Widget> _themeTabBar =
+      <FlexTabBarStyle, Widget>{
+    FlexTabBarStyle.forAppBar: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'TabBar used\nin AppBar',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexTabBarStyle.forBackground: Padding(
+      padding: EdgeInsets.all(5),
+      child: Text(
+        'TabBar used\non background',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+  };
 
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final double topPadding = media.padding.top;
     final double bottomPadding = media.padding.bottom;
-    final bool menuAvailable = media.size.width > 650;
+    final bool menuAvailable = media.size.width >= App.desktopBreakpoint;
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
@@ -540,173 +736,15 @@ class _HomePageState extends State<HomePage> {
     // Give the width of the side panel some automatic adaptive behavior and
     // make it rail sized when there is not enough room for a menu, even if
     // menu size is requested.
-    if (!menuAvailable && showSidePanel) {
-      currentSidePanelWidth = AppConst.shrinkWidth;
+    if (!menuAvailable) {
+      _menuWidth = App.shrinkWidth;
     }
-    if (menuAvailable && showSidePanel && !isSidePanelExpanded) {
-      currentSidePanelWidth = AppConst.shrinkWidth;
+    if (menuAvailable && !_isExpanded) {
+      _menuWidth = App.shrinkWidth;
     }
-    if (menuAvailable && showSidePanel && isSidePanelExpanded) {
-      currentSidePanelWidth = AppConst.expandWidth;
+    if (menuAvailable && _isExpanded) {
+      _menuWidth = App.expandWidth;
     }
-
-    // FlexSurface enum to widget map, used in a CupertinoSegment control.
-    const Map<FlexSurface, Widget> themeSurface = <FlexSurface, Widget>{
-      FlexSurface.material: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Default\ndesign',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexSurface.light: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Light\nprimary',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexSurface.medium: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Medium\nprimary',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexSurface.strong: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Strong\nprimary',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexSurface.heavy: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Heavy\nprimary',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-    };
-
-    // FlexAppBarStyle enum to widget map, used in a CupertinoSegment control.
-    const Map<FlexAppBarStyle, Widget> themeAppBar = <FlexAppBarStyle, Widget>{
-      FlexAppBarStyle.primary: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Primary\ncolor',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexAppBarStyle.material: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          // Wait, what is \u{00AD} below?? It is Unicode char-code for an
-          // invisible soft hyphen. It can be used to guide text layout where
-          // it can break a word to the next line, if it has to. On small phones
-          // or a desktop builds where you can make the UI really narrow in
-          // Flutter, you can observe this with the 'background' word below.
-          'Default\nback\u{00AD}ground',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexAppBarStyle.surface: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Branded\nsurface',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexAppBarStyle.background: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Branded\nback\u{00AD}ground',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexAppBarStyle.custom: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Custom\ncolor',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-    };
-
-    // FlexSystemNavBarStyle enum to widget map, used in a CupertinoSegment.
-    const Map<FlexSystemNavBarStyle, Widget> systemNavBar =
-        <FlexSystemNavBarStyle, Widget>{
-      FlexSystemNavBarStyle.system: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'System',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexSystemNavBarStyle.surface: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Surface',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexSystemNavBarStyle.background: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Back\u{00AD}ground',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexSystemNavBarStyle.scaffoldBackground: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Scaffold\nback\u{00AD}ground',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexSystemNavBarStyle.transparent: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'Trans\u{00AD}parent',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-    };
-
-    // FlexTabBarStyle enum to widget map, used in a CupertinoSegment control.
-    const Map<FlexTabBarStyle, Widget> themeTabBar = <FlexTabBarStyle, Widget>{
-      FlexTabBarStyle.forAppBar: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'TabBar used\nin AppBar',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexTabBarStyle.forBackground: Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'TabBar used\non background',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-    };
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       // FlexColorScheme contains a helper that can be use to theme
@@ -718,21 +756,27 @@ class _HomePageState extends State<HomePage> {
       // which looks nicer and more as it should on an Android device.
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
-        systemNavBarStyle: systemNavBarStyle,
-        useDivider: useSysNavDivider,
+        systemNavBarStyle: _navBarStyle,
+        useDivider: _useNavDivider,
       ),
       child: Row(
         children: <Widget>[
           // Contains the demo menu and side rail.
           ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
+            constraints: const BoxConstraints(maxWidth: App.expandWidth),
             child: Material(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                width: currentSidePanelWidth,
+                width: _menuWidth,
                 child: SideMenu(
-                  isVisible: showSidePanel,
-                  menuWidth: AppConst.expandWidth,
+                  maxWidth: App.expandWidth,
+                  onTap: menuAvailable
+                      ? () {
+                          setState(() {
+                            _isExpanded = !_isExpanded;
+                          });
+                        }
+                      : null,
                 ),
               ),
             ),
@@ -745,8 +789,7 @@ class _HomePageState extends State<HomePage> {
               // For scrolling behind the bottom nav bar, if there would be one.
               extendBody: true,
               appBar: AppBar(
-                // title: const Text('FlexColorScheme Example 5'),
-                title: const Text('FlexColorScheme Example 5'),
+                title: Text(App.title(context)),
                 actions: const <Widget>[AboutIconButton()],
                 backgroundColor: Colors.transparent,
                 // Gradient partially transparent AppBar, just because it looks
@@ -768,12 +811,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               body: PageBody(
+                constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
                 child: ListView(
                   padding: EdgeInsets.fromLTRB(
-                    AppConst.edgePadding,
-                    topPadding + kToolbarHeight + AppConst.edgePadding,
-                    AppConst.edgePadding,
-                    AppConst.edgePadding + bottomPadding,
+                    App.edgePadding,
+                    topPadding + kToolbarHeight + App.edgePadding,
+                    App.edgePadding,
+                    App.edgePadding + bottomPadding,
                   ),
                   children: <Widget>[
                     Text('Theme', style: headline4),
@@ -799,8 +843,8 @@ class _HomePageState extends State<HomePage> {
                         style: textTheme.headline5),
                     // A 3-way theme mode toggle switch.
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: AppConst.edgePadding),
+                      padding:
+                          const EdgeInsets.symmetric(vertical: App.edgePadding),
                       child: FlexThemeModeSwitch(
                         themeMode: widget.themeMode,
                         onThemeModeChanged: widget.onThemeModeChanged,
@@ -828,16 +872,16 @@ class _HomePageState extends State<HomePage> {
                       onSelected: widget.onSchemeChanged,
                       itemBuilder: (BuildContext context) =>
                           <PopupMenuItem<int>>[
-                        for (int i = 0; i < myFlexSchemes.length; i++)
+                        for (int i = 0; i < _myFlexSchemes.length; i++)
                           PopupMenuItem<int>(
                             value: i,
                             child: ListTile(
                               leading: Icon(Icons.lens,
                                   color: isLight
-                                      ? myFlexSchemes[i].light.primary
-                                      : myFlexSchemes[i].dark.primary,
+                                      ? _myFlexSchemes[i].light.primary
+                                      : _myFlexSchemes[i].dark.primary,
                                   size: 35),
-                              title: Text(myFlexSchemes[i].name),
+                              title: Text(_myFlexSchemes[i].name),
                             ),
                           )
                       ],
@@ -854,8 +898,8 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 8),
                     // Active theme color indicators.
                     const Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: AppConst.edgePadding),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: App.edgePadding),
                       child: ShowThemeColors(),
                     ),
                     const SizedBox(height: 8),
@@ -955,7 +999,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 4),
                     CupertinoSegmentedControl<FlexSurface>(
-                      children: themeSurface,
+                      children: _themeSurface,
                       groupValue: widget.themeSurface,
                       onValueChanged: widget.onThemeSurfaceChanged,
                       borderColor: isLight
@@ -982,7 +1026,7 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 4),
                     // AppBar style
                     CupertinoSegmentedControl<FlexAppBarStyle>(
-                      children: themeAppBar,
+                      children: _themeAppBar,
                       groupValue: widget.appBarStyle,
                       onValueChanged: widget.onAppBarStyleChanged,
                       borderColor: isLight
@@ -1036,11 +1080,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // AppBar style
                     CupertinoSegmentedControl<FlexSystemNavBarStyle>(
-                      children: systemNavBar,
-                      groupValue: systemNavBarStyle,
+                      children: _systemNavBar,
+                      groupValue: _navBarStyle,
                       onValueChanged: (FlexSystemNavBarStyle value) {
                         setState(() {
-                          systemNavBarStyle = value;
+                          _navBarStyle = value;
                         });
                       },
                       borderColor: isLight
@@ -1056,10 +1100,10 @@ class _HomePageState extends State<HomePage> {
                       title: const Text(
                         'System navbar has divider',
                       ),
-                      value: useSysNavDivider,
+                      value: _useNavDivider,
                       onChanged: (bool value) {
                         setState(() {
-                          useSysNavDivider = value;
+                          _useNavDivider = value;
                         });
                       },
                     ),
@@ -1073,7 +1117,7 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 4),
                     // AppBar style
                     CupertinoSegmentedControl<FlexTabBarStyle>(
-                      children: themeTabBar,
+                      children: _themeTabBar,
                       groupValue: widget.tabBarStyle,
                       onValueChanged: widget.onTabBarStyleChanged,
                       borderColor: isLight
@@ -1149,54 +1193,6 @@ class _HomePageState extends State<HomePage> {
                       trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         SplashPageTwo.show(context, true);
-                      },
-                    ),
-                    const Divider(),
-                    Text('Menu', style: headline4),
-                    const Text(
-                      'The menu is a just a demo to make a larger '
-                      'area that uses the primary branded background color.',
-                    ),
-                    SwitchListTile.adaptive(
-                      title: const Text('Turn ON to show the menu'),
-                      subtitle: const Text('Turn OFF to hide the menu.'),
-                      value: showSidePanel,
-                      onChanged: (bool value) {
-                        setState(() {
-                          showSidePanel = value;
-                          if (showSidePanel) {
-                            if (isSidePanelExpanded) {
-                              currentSidePanelWidth = AppConst.expandWidth;
-                            } else {
-                              currentSidePanelWidth = AppConst.shrinkWidth;
-                            }
-                          } else {
-                            currentSidePanelWidth = 0.01;
-                          }
-                        });
-                      },
-                    ),
-                    SwitchListTile.adaptive(
-                      title: const Text('Turn ON for full sized menu'),
-                      subtitle: const Text(
-                        'Turn OFF for a rail sized menu. '
-                        'The full size menu will only be shown when '
-                        'screen width is above 650 dp and this toggle is ON.',
-                      ),
-                      value: isSidePanelExpanded,
-                      onChanged: (bool value) {
-                        setState(() {
-                          isSidePanelExpanded = value;
-                          if (showSidePanel) {
-                            if (isSidePanelExpanded) {
-                              currentSidePanelWidth = AppConst.expandWidth;
-                            } else {
-                              currentSidePanelWidth = AppConst.shrinkWidth;
-                            }
-                          } else {
-                            currentSidePanelWidth = 0.01;
-                          }
-                        });
                       },
                     ),
                     const Divider(),

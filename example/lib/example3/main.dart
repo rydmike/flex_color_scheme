@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../all_shared_imports.dart';
+import '../shared/all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 3)
@@ -11,6 +11,9 @@ import '../all_shared_imports.dart';
 // This example shows how you can use three built in color schemes and
 // a custom scheme as selectable FlexColorScheme based theme options in an
 // application. The example also uses strong branded surface colors.
+//
+// We also use the Google font Noto Sans for the app.
+//
 // A theme showcase widget shows the theme with several common Material widgets.
 // In this example the FlexThemeModeSwitch excludes the system mode.
 // -----------------------------------------------------------------------------
@@ -19,7 +22,7 @@ void main() => runApp(const DemoApp());
 
 // Create a custom FlexSchemeData scheme with name, description and a light
 // and dark FlexSchemeColor.
-const FlexSchemeData customFlexScheme = FlexSchemeData(
+const FlexSchemeData _myFlexScheme = FlexSchemeData(
   name: 'Toledo purple',
   description: 'Purple theme created from custom defined colors.',
   light: FlexSchemeColor(
@@ -53,32 +56,31 @@ class _DemoAppState extends State<DemoApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'FlexColorScheme',
+      title: 'Sample 3) Use 4 Themes',
       // Define the light theme for the app, using current theme index and
-      // strong branded surfaces. Then use the .toTheme method to create and
-      // return a theme using these properties.
-      theme: FlexColorScheme.light(
+      // strong branded surfaces FlexThemeData.light().
+      theme: FlexThemeData.light(
         colors: flexScheme == FlexScheme.custom
-            ? customFlexScheme.light
+            ? _myFlexScheme.light
             : FlexColor.schemesWithCustom[flexScheme]!.light,
         surfaceStyle: FlexSurface.strong,
         // Use comfortable on desktops instead of compact, devices as default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
-      ).toTheme,
+      ),
       // We do the exact same definition for the dark theme, but using
-      // FlexColorScheme.dark factory and the dark FlexSchemeColor instead.
-      darkTheme: FlexColorScheme.dark(
+      // FlexThemeData.dark() and the dark FlexSchemeColors instead.
+      darkTheme: FlexThemeData.dark(
         colors: flexScheme == FlexScheme.custom
-            ? customFlexScheme.dark
+            ? _myFlexScheme.dark
             : FlexColor.schemesWithCustom[flexScheme]!.dark,
         surfaceStyle: FlexSurface.strong,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
-      ).toTheme,
-      // Use the above dark or light theme based on active themeMode.
+      ),
+      // Use the above dark or light theme, based on active themeMode.
       themeMode: themeMode,
-      // This simple example app has only one page
+      // This simple example app has only one page.
       home: HomePage(
         // We pass it the current theme mode.
         themeMode: themeMode,
@@ -102,7 +104,7 @@ class _DemoAppState extends State<DemoApp> {
         // We also use it for the theme mode switch that shows the theme's
         // color's in the different theme modes.
         flexSchemeData: flexScheme == FlexScheme.custom
-            ? customFlexScheme
+            ? _myFlexScheme
             : FlexColor.schemesWithCustom[flexScheme]!,
       ),
     );
@@ -128,6 +130,42 @@ class HomePage extends StatelessWidget {
   final ValueChanged<FlexScheme> onFlexSchemeChanged;
   final FlexSchemeData flexSchemeData;
 
+  // Const FlexScheme enum to widget map, used in the CupertinoSegment control.
+  static const Map<FlexScheme, Widget> _schemeOptions = <FlexScheme, Widget>{
+    FlexScheme.hippieBlue: Padding(
+      padding: EdgeInsets.all(6),
+      child: Text(
+        'Hippie\nblue',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexScheme.money: Padding(
+      padding: EdgeInsets.all(6),
+      child: Text(
+        'Green\nmoney',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexScheme.redWine: Padding(
+      padding: EdgeInsets.all(6),
+      child: Text(
+        'Red red\nwine',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+    FlexScheme.custom: Padding(
+      padding: EdgeInsets.all(6),
+      child: Text(
+        'Custom\npurple',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 11),
+      ),
+    ),
+  };
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -136,64 +174,28 @@ class HomePage extends StatelessWidget {
     final TextStyle headline4 = textTheme.headline4!;
     final bool isLight = Theme.of(context).brightness == Brightness.light;
 
-    // FlexSurface enum to widget map, used in a CupertinoSegment control.
-    const Map<FlexScheme, Widget> schemeOptions = <FlexScheme, Widget>{
-      FlexScheme.hippieBlue: Padding(
-        padding: EdgeInsets.all(6),
-        child: Text(
-          'Hippie\nblue',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexScheme.money: Padding(
-        padding: EdgeInsets.all(6),
-        child: Text(
-          'Green\nmoney',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexScheme.redWine: Padding(
-        padding: EdgeInsets.all(6),
-        child: Text(
-          'Red red\nwine',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-      FlexScheme.custom: Padding(
-        padding: EdgeInsets.all(6),
-        child: Text(
-          'Custom\npurple',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11),
-        ),
-      ),
-    };
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FlexColorScheme Example 3'),
+        title: Text(App.title(context)),
         actions: const <Widget>[AboutIconButton()],
       ),
       body: PageBody(
+        constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
         child: ListView(
-          padding: const EdgeInsets.all(AppConst.edgePadding),
+          padding: const EdgeInsets.all(App.edgePadding),
           children: <Widget>[
             Text('Theme', style: headline4),
             const Text(
               'This example shows how you can use three built in '
               'color schemes and a custom scheme as selectable '
-              'FlexColorScheme based theme options in an application. '
+              'example based theme options in an application. '
               'The example also uses strong branded surface colors. '
               'A theme showcase widget shows the theme with several '
               'common Material widgets.',
             ),
             // A 3-way theme mode toggle switch.
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppConst.edgePadding),
+              padding: const EdgeInsets.symmetric(vertical: App.edgePadding),
               child: FlexThemeModeSwitch(
                 themeMode: themeMode,
                 onThemeModeChanged: onThemeModeChanged,
@@ -204,7 +206,7 @@ class HomePage extends StatelessWidget {
             const Divider(),
             const SizedBox(height: 8),
             CupertinoSegmentedControl<FlexScheme>(
-              children: schemeOptions,
+              children: _schemeOptions,
               groupValue: flexScheme,
               onValueChanged: onFlexSchemeChanged,
               borderColor:
@@ -220,7 +222,7 @@ class HomePage extends StatelessWidget {
             ),
             // Show all key active theme colors.
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
+              padding: EdgeInsets.symmetric(horizontal: App.edgePadding),
               child: ShowThemeColors(),
             ),
             const Divider(),

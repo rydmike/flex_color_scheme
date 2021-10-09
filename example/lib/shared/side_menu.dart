@@ -1,30 +1,50 @@
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
+import 'app.dart';
 
-// It is not necessary to review or understand the code in this file in order
-// to understand how to use the FlexColorScheme package demonstrated in
-// the example.
-
-// The side panel and all widgets in this file in this example have no actual
-// function for the demo, other than to create a visual demo of what the
-// example theme looks like with a side rail or side menu that uses the primary
-// color branded surface or background colors.
+/// Dummy side panel.
+///
+/// The side panel and all widgets in this file in this example have no actual
+/// function for the demo, other than to create a visual demo of what the
+/// example theme looks like with a side rail or side menu that uses the primary
+/// color branded surface or background colors.
 class SideMenu extends StatefulWidget {
   const SideMenu({
     Key? key,
-    required this.isVisible,
-    required this.menuWidth,
+    required this.maxWidth,
+    this.onTap,
   }) : super(key: key);
-  final bool isVisible;
-  final double menuWidth;
+  final double maxWidth;
+  final VoidCallback? onTap;
 
   @override
   _SideMenuState createState() => _SideMenuState();
 }
 
 class _SideMenuState extends State<SideMenu> {
-  int selectedItem = 2;
+  int selectedItem = 4;
+
+  static const List<IconData> _icons = <IconData>[
+    Icons.ac_unit,
+    Icons.hvac_outlined,
+    Icons.account_balance,
+    Icons.add_circle_outline,
+    Icons.assignment_ind,
+    Icons.assignment_turned_in,
+    Icons.arrow_upward,
+    Icons.logout
+  ];
+
+  static const List<String> _labels = <String>[
+    'Cooling',
+    'Ventilation',
+    'Key safe',
+    'Add keys',
+    'My tasks',
+    'Done tasks',
+    'Upload report',
+    'Sign out',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +53,17 @@ class _SideMenuState extends State<SideMenu> {
         return OverflowBox(
           alignment: AlignmentDirectional.topStart,
           minWidth: 0,
-          maxWidth: widget.menuWidth,
+          maxWidth: widget.maxWidth,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AppBar(
-                title: const Text('Side panel'),
+                title: const Text(App.appName),
                 leading: ConstrainedBox(
                   constraints: const BoxConstraints.tightFor(width: 56),
                   child: IconButton(
                     icon: const Icon(Icons.auto_awesome_motion),
-                    onPressed: () {},
+                    onPressed: widget.onTap,
                   ),
                 ),
               ),
@@ -51,19 +71,17 @@ class _SideMenuState extends State<SideMenu> {
                 child: Container(
                   width: size.maxWidth,
                   decoration: BoxDecoration(
-                    border: widget.isVisible
-                        ? BorderDirectional(
-                            end: BorderSide(
-                              color: Theme.of(context).dividerColor,
-                            ),
-                          )
-                        : null,
+                    border: BorderDirectional(
+                      end: BorderSide(
+                        color: Theme.of(context).dividerColor,
+                      ),
+                    ),
                   ),
                   child: ClipRect(
                     child: OverflowBox(
                       alignment: AlignmentDirectional.topStart,
                       minWidth: 0,
-                      maxWidth: widget.menuWidth,
+                      maxWidth: widget.maxWidth,
                       child: ListView(
                         padding: EdgeInsets.zero, //  Removes all edge insets
                         children: <Widget>[
@@ -73,16 +91,16 @@ class _SideMenuState extends State<SideMenu> {
                           for (int i = 0; i < 8; i++)
                             _SideItem(
                               width: size.maxWidth,
-                              menuWidth: widget.menuWidth,
+                              menuWidth: widget.maxWidth,
                               onTap: () {
                                 setState(() {
                                   selectedItem = i;
                                 });
                               },
                               selected: selectedItem == i,
-                              icon: Icons.article_outlined,
-                              label: 'This is item $i',
-                              showDivider: (i % 3 == 0) && i != 0,
+                              icon: _icons[i],
+                              label: _labels[i],
+                              showDivider: i.isEven, // && i != 0,
                             ),
                         ],
                       ),
@@ -98,7 +116,7 @@ class _SideMenuState extends State<SideMenu> {
   }
 }
 
-// Menu side items, just to make the demo look more like a real use case.
+/// Menu side items, just to make the demo look more like a real use case.
 class _SideItem extends StatelessWidget {
   const _SideItem({
     Key? key,
@@ -121,7 +139,10 @@ class _SideItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final ThemeData _theme = Theme.of(context);
+    final bool _isLight = _theme.brightness == Brightness.light;
+    final Color _selectedColor =
+        _isLight ? _theme.primaryColorDark : _theme.primaryColorLight;
     if (width < 5) {
       return const SizedBox.shrink();
     } else {
@@ -138,7 +159,7 @@ class _SideItem extends StatelessWidget {
                 bottomRight: Radius.circular(50 / 2.0),
               ),
               color: selected
-                  ? Theme.of(context).colorScheme.primary.withAlpha(0x3d)
+                  ? Theme.of(context).colorScheme.primary.withAlpha(0x2d)
                   : Colors.transparent,
               child: InkWell(
                 onTap: onTap,
@@ -156,20 +177,20 @@ class _SideItem extends StatelessWidget {
                               width: 56, height: 56),
                           child: Icon(icon,
                               color: selected
-                                  ? theme.colorScheme.primary
-                                  : theme.colorScheme.onSurface
+                                  ? _selectedColor
+                                  : _theme.colorScheme.onSurface
                                       .withOpacity(0.55)),
                         ),
-                        if (width < AppConst.shrinkWidth + 10)
+                        if (width < App.shrinkWidth + 10)
                           const SizedBox.shrink()
                         else
                           Text(
                             label,
                             style: selected
-                                ? theme.textTheme.bodyText1!
-                                    .copyWith(color: theme.colorScheme.primary)
-                                : theme.textTheme.bodyText1!.copyWith(
-                                    color: theme.colorScheme.onSurface
+                                ? _theme.textTheme.bodyText1!
+                                    .copyWith(color: _selectedColor)
+                                : _theme.textTheme.bodyText1!.copyWith(
+                                    color: _theme.colorScheme.onSurface
                                         .withOpacity(0.64)),
                           )
                       ],
@@ -185,7 +206,7 @@ class _SideItem extends StatelessWidget {
   }
 }
 
-// A dummy user profile widget that we use as leading widget ins side panel.
+/// A dummy user profile widget that we use as leading widget ins side panel.
 class _UserProfile extends StatefulWidget {
   const _UserProfile({Key? key}) : super(key: key);
 
@@ -194,7 +215,7 @@ class _UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<_UserProfile> {
-  bool collapsedProfile = true;
+  bool _collapsed = true;
 
   @override
   Widget build(BuildContext context) {
@@ -204,19 +225,19 @@ class _UserProfileState extends State<_UserProfile> {
     const double hPadding = 5;
 
     final Widget closedProfile = ListTile(
-      visualDensity: VisualDensity.compact,
+      visualDensity: VisualDensity.comfortable,
       contentPadding: const EdgeInsets.symmetric(
         horizontal: hPadding,
         vertical: hPadding,
       ),
       onTap: () {
         setState(() {
-          collapsedProfile = !collapsedProfile;
+          _collapsed = !_collapsed;
         });
       },
       leading: CircleAvatar(
         backgroundColor: theme.colorScheme.primary,
-        radius: AppConst.shrinkWidth / 2 - hPadding,
+        radius: App.shrinkWidth / 2 - hPadding,
         child: Text('JS',
             style: primaryTextTheme.subtitle1!.copyWith(
                 color: theme.colorScheme.onPrimary,
@@ -226,11 +247,11 @@ class _UserProfileState extends State<_UserProfile> {
           style: textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w600)),
       subtitle: const Text('Company Inc'),
       trailing: ExpandIcon(
-        isExpanded: !collapsedProfile,
+        isExpanded: !_collapsed,
         padding: EdgeInsets.zero,
         onPressed: (_) {
           setState(() {
-            collapsedProfile = !collapsedProfile;
+            _collapsed = !_collapsed;
           });
         },
       ),
@@ -246,7 +267,7 @@ class _UserProfileState extends State<_UserProfile> {
           child: Row(
             children: <Widget>[
               const Spacer(),
-              OutlinedButton(
+              TextButton(
                 onPressed: () {},
                 child: Column(
                   children: <Widget>[
@@ -256,12 +277,12 @@ class _UserProfileState extends State<_UserProfile> {
                 ),
               ),
               const SizedBox(width: 10),
-              OutlinedButton(
+              TextButton(
                 onPressed: () {},
                 child: Column(
                   children: <Widget>[
                     const Icon(Icons.exit_to_app),
-                    Text('Logout', style: textTheme.overline),
+                    Text('Sign in', style: textTheme.overline),
                   ],
                 ),
               ),
@@ -275,9 +296,8 @@ class _UserProfileState extends State<_UserProfile> {
     return AnimatedCrossFade(
       firstChild: closedProfile,
       secondChild: openProfile,
-      crossFadeState: collapsedProfile
-          ? CrossFadeState.showFirst
-          : CrossFadeState.showSecond,
+      crossFadeState:
+          _collapsed ? CrossFadeState.showFirst : CrossFadeState.showSecond,
       duration: const Duration(milliseconds: 200),
     );
   }

@@ -2,27 +2,34 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../all_shared_imports.dart';
+import '../shared/all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 2)
 //
 // This example shows how you can define your own FlexSchemeData and create a
 // FlexColorScheme based theme from it.
+//
+// We also use the Google font Noto Sans for the app.
+//
 // A theme showcase widget shows the theme with several common Material widgets.
 // -----------------------------------------------------------------------------
 
 void main() => runApp(const DemoApp());
 
-// NOTE: This example custom color scheme is fairly close to the built-in scheme
-// 'Barossa'. If you like it, you can probably use it instead. It is not
+// Create a custom FlexSchemeData scheme with name, description and a light
+// and dark FlexSchemeColor.
+//
+// You can also just create a FlexSchemeColor for light and dark theme,
+// without the name and description, but in this example we will also use
+// use the name and description to describe created themes.
+//
+// These example custom colors are fairly close to the built-in color scheme
+// 'Barossa'. If you like them, you can probably use it instead. It is not
 // exactly the same though. The 'Barossa' variant is tuned a bit differently.
 // The 'Barossa' theme was introduced in version 1.4.1, and was inspired
 // and based on this example.
-
-// Create a custom FlexSchemeData scheme with name, description and a light
-// and dark FlexSchemeColor.
-const FlexSchemeData customFlexScheme = FlexSchemeData(
+const FlexSchemeData _myFlexScheme = FlexSchemeData(
   name: 'Toledo purple',
   description: 'Purple theme created from custom defined colors.',
   light: FlexSchemeColor(
@@ -54,35 +61,34 @@ class _DemoAppState extends State<DemoApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'FlexColorScheme',
-      // Use the custom light scheme to define a light FlexColorScheme for the
-      // app and call .toTheme method to create the slightly opinionated theme
-      // from the defined custom flex scheme data.
-      theme: FlexColorScheme.light(
-        // You could also have stored the light scheme just in a
+      title: 'Sample 2) Use Custom Theme',
+      // Use the custom light scheme to define FlexThemeData.light().
+      theme: FlexThemeData.light(
+        // You could also have stored the light scheme in a
         // FlexSchemeColor and used that, but we will use it also on the
         // HomePage for the switch widget and to display its name, where we
         // pass it as a FlexSchemeData object that contains both the light
         // and dark scheme and its name and description.
-        colors: customFlexScheme.light,
-        // Use comfortable on desktops instead of compact, devices as default.
+        colors: _myFlexScheme.light,
+        // Here we use comfortable adaptive platform density on desktops instead
+        // compact, devices will still use their default density.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
-      ).toTheme,
-      // We do the exact same definition for the dark theme, but using
-      // FlexColorScheme.dark factory and the flexSchemeColor dark scheme.
-      darkTheme: FlexColorScheme.dark(
-        colors: customFlexScheme.dark,
+      ),
+      // Same definitions for the dark theme, but with FlexThemeData.dark().
+      darkTheme: FlexThemeData.dark(
+        colors: _myFlexScheme.dark,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
-      ).toTheme,
+      ),
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
       // This simple example app has only one page.
       home: HomePage(
         // We pass it the current theme mode.
         themeMode: themeMode,
-        // On the home page we toggle theme mode between light and dark.
+        // On the home page we toggle theme mode between light and dark and
+        // get the result back in this callback function.
         onThemeModeChanged: (ThemeMode mode) {
           setState(() {
             themeMode = mode;
@@ -93,7 +99,7 @@ class _DemoAppState extends State<DemoApp> {
         // active theme's name, descriptions and colors in the demo.
         // We also use it for the theme mode switch that shows the theme's
         // color's in the different theme modes.
-        flexSchemeData: customFlexScheme,
+        flexSchemeData: _myFlexScheme,
       ),
     );
   }
@@ -122,12 +128,13 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FlexColorScheme Example 2'),
+        title: Text(App.title(context)),
         actions: const <Widget>[AboutIconButton()],
       ),
       body: PageBody(
+        constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
         child: ListView(
-          padding: const EdgeInsets.all(AppConst.edgePadding),
+          padding: const EdgeInsets.all(App.edgePadding),
           children: <Widget>[
             Text('Theme', style: headline4),
             const Text(
@@ -139,8 +146,7 @@ class HomePage extends StatelessWidget {
             ),
             // A 3-way theme mode toggle switch.
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppConst.edgePadding),
+              padding: const EdgeInsets.symmetric(vertical: App.edgePadding),
               child: FlexThemeModeSwitch(
                 themeMode: themeMode,
                 onThemeModeChanged: onThemeModeChanged,
@@ -155,7 +161,7 @@ class HomePage extends StatelessWidget {
             ),
             // Show all key active theme colors.
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
+              padding: EdgeInsets.symmetric(horizontal: App.edgePadding),
               child: ShowThemeColors(),
             ),
             const Divider(),

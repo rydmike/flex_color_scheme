@@ -1,19 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
+import 'app.dart';
 import 'link_text_span.dart';
 
-// It is not necessary to review or understand the code in this file in order
-// to understand how to use the FlexColorScheme package demonstrated in
-// the examples.
-
-// An about icon button used on the example's app app bar, but only if the
-// app is built for web or desktop. Main usage is to show licenses on the Web
-// version and to show what version of Flutter the Live version of the
-// example app was built with. When building the example for an Android or
-// iOS device we assume somebody is just learning how to use the package
-// and don't show the about info.
+/// An about icon button used on the example's app app bar, but only if the
+/// app is built for web or desktop. Main usage is to show licenses on the Web
+/// version and to show what version of Flutter the Live version of the
+/// example app was built with. When building the example for an Android or
+/// iOS device we assume somebody is just learning how to use the package
+/// and don't show the about info.
 class AboutIconButton extends StatelessWidget {
   const AboutIconButton({Key? key}) : super(key: key);
 
@@ -47,11 +43,10 @@ void showAppAboutDialog(BuildContext context) {
 
   showAboutDialog(
     context: context,
-    applicationName: AppConst.appName,
-    applicationVersion: AppConst.version,
-    applicationIcon: const Image(image: AssetImage(AppConst.icon)),
-    applicationLegalese:
-        '${AppConst.copyright} ${AppConst.author} ${AppConst.license}',
+    applicationName: App.appName,
+    applicationVersion: App.version,
+    applicationIcon: const Image(image: AssetImage(App.icon)),
+    applicationLegalese: '${App.copyright} ${App.author} ${App.license}',
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(top: 24),
@@ -61,12 +56,12 @@ void showAppAboutDialog(BuildContext context) {
               TextSpan(
                 style: aboutTextStyle,
                 text: 'This example shows some of the features of the '
-                    '${AppConst.appName} theming package. To learn more, check '
+                    '${App.appName} theming package. To learn more, check '
                     'out the package on ',
               ),
               LinkTextSpan(
                 style: linkStyle,
-                url: AppConst.packageUrl,
+                url: App.packageUrl,
                 text: 'pub.dev',
               ),
               TextSpan(
@@ -76,8 +71,8 @@ void showAppAboutDialog(BuildContext context) {
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with ${AppConst.flutterVersion}, '
-                    'using ${AppConst.packageVersion}\n\n',
+                text: 'Built with ${App.flutterVersion}, '
+                    'using ${App.packageVersion}\n\n',
               ),
             ],
           ),

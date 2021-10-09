@@ -29,7 +29,7 @@ import 'package:flutter/material.dart';
 extension FlexColorExtensions on Color {
   /// Brightens the color with the given integer percentage amount.
   /// Defaults to 10%.
-  Color brighten([int amount = 10]) {
+  Color brighten([final int amount = 10]) {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     final Color color = Color.fromARGB(
@@ -43,7 +43,7 @@ extension FlexColorExtensions on Color {
 
   /// Lightens the color with the given integer percentage amount.
   /// Defaults to 10%.
-  Color lighten([int amount = 10]) {
+  Color lighten([final int amount = 10]) {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     // HSLColor returns saturation 1 for black, we want 0 instead to be able
@@ -58,7 +58,7 @@ extension FlexColorExtensions on Color {
 
   /// Darkens the color with the given integer percentage amount.
   /// Defaults to 10%.
-  Color darken([int amount = 10]) {
+  Color darken([final int amount = 10]) {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.black;
     final HSLColor hsl = HSLColor.fromColor(this);
@@ -78,12 +78,32 @@ extension FlexColorExtensions on Color {
   /// by blending in white color with light scheme color.
   ///
   /// Defaults to 10% alpha blend of the passed in Color value.
-  Color blend(Color input, [int amount = 10]) {
+  Color blend(final Color input, [final int amount = 10]) {
     // Skip blending for impossible value and return the instance color value.
     if (amount <= 0) return this;
     // Blend amounts >= 100 results in the input Color.
     if (amount >= 100) return input;
     return Color.alphaBlend(input.withAlpha(255 * amount ~/ 100), this);
+  }
+
+  /// Blend in the given input Color with an alpha value.
+  ///
+  /// You typically apply this on a background color, light or dark
+  /// to create a background color with a hint of a color used in a theme.
+  ///
+  /// This is a use case of the alphaBlend static function that exists in
+  /// dart:ui Color. It is used to create the branded surface colors in
+  /// FlexColorScheme and to calculate dark scheme colors from light ones,
+  /// by blending in white color with light scheme color.
+  ///
+  /// Defaults to alpha 0x0A alpha blend of the passed in Color value,
+  /// which is 10% alpha blend.
+  Color blendAlpha(final Color input, [final int alpha = 0x0A]) {
+    // Skip blending for impossible value and return the instance color value.
+    if (alpha <= 0) return this;
+    // Blend amounts >= 255 results in the input Color.
+    if (alpha >= 255) return input;
+    return Color.alphaBlend(input.withAlpha(alpha), this);
   }
 
   /// The [getShadeColor] extension is used to make a color darker or lighter,
@@ -103,35 +123,34 @@ extension FlexColorExtensions on Color {
   /// darker, the extension just returns white or black for such attempts, with
   /// a quick exist from the call.
   Color getShadeColor({
-    int shadeValue = 15,
-    bool lighten = true,
-    bool keepBlack = true,
-    bool keepWhite = true,
+    final int shadeValue = 15,
+    final bool lighten = true,
+    final bool keepBlack = true,
+    final bool keepWhite = true,
   }) {
     if (shadeValue <= 0) return this;
-    // ignore: parameter_assignments
-    if (shadeValue > 100) shadeValue = 100;
+    int _shadeValue = shadeValue;
+    if (_shadeValue > 100) _shadeValue = 100;
 
     // Trying to make black darker, just return black
-    // ignore: parameter_assignments
     if (this == Colors.black && !lighten) return this;
     // Black is defined to be kept as black.
     if (this == Colors.black && keepBlack) return this;
     // Make black lighter as lighten was set and we do not keepBlack
-    if (this == Colors.black) return this.lighten(shadeValue);
+    if (this == Colors.black) return this.lighten(_shadeValue);
 
     // Trying to make white lighter, just return white
     if (this == Colors.white && lighten) return this;
     // White is defined to be kept as white.
     if (this == Colors.white && keepWhite) return this;
     // Make white darker as we do not keep white.
-    if (this == Colors.white) return darken(shadeValue);
+    if (this == Colors.white) return darken(_shadeValue);
     // We are dealing with some other color than white or black, so we
     // make it lighter or darker based on flag and requested shade %
     if (lighten) {
-      return this.lighten(shadeValue);
+      return this.lighten(_shadeValue);
     } else {
-      return darken(shadeValue);
+      return darken(_shadeValue);
     }
   }
 
@@ -188,7 +207,6 @@ extension FlexStringExtensions on String {
   /// This function can be used to e.g. return the enum tail value from an
   /// enum's standard toString method.
   String get dotTail {
-    // if (this == null) return '';
     return split('.').last;
   }
 }

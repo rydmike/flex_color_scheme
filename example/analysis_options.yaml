@@ -2,44 +2,27 @@ include: ../analysis_options.yaml
 
 linter:
   rules:
-    # DO avoid print calls in production code.
-    #
-    # https://dart-lang.github.io/linter/lints/avoid_print.html
-    #
-    # My default is to have this rule enabled.
-    #
-    # Examples may want to print to the console, you might want to do so during development too. I keep the rule here
-    # to handily disable/enable as and when needed. This lint rule is a good way to find prints statements that you
-    # may have used during development in code that should not have them in production, so at least before
-    # committing the code in such projects, make sure to keep this rule enabled by commenting it out here.
-    #
-    # Other known linters use:
-    # Pedantic       disabled : https://pub.dev/packages/pedantic
-    # Effective Dart disabled : https://pub.dev/packages/effective_dart
-    # Lint           enabled  : https://pub.dev/packages/lint
-    # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
-    #
-    # RELEASE:       ENABLE   : By commenting it out. (My default).
-    # DEVELOPMENT:   DISABLE  : With false value, if the warnings bother you during dev or making a console app.
-    #
-    # avoid_print: false
-
     # DO reference all public properties in debug method implementations.
     #
     # https://dart-lang.github.io/linter/lints/diagnostic_describe_all_properties.html
     #
     # Consider using this lint rule if you are making a public Flutter package, for private ones and private apps
-    # I recommend keeping it off as you probably won't be making diagnostic properties for all your
+    # we recommend keeping it off as you probably won't be making diagnostic properties for all your
     # classes, unless you are using a data class lib that does it for you via code generation.
     #
     # Other known linters use:
+    #
+    # Core           disabled : https://pub.dev/packages/lints
+    # Recommended    disabled : https://pub.dev/packages/lints
+    # Flutter Lints  disabled : https://pub.dev/packages/flutter_lints
     # Pedantic       disabled : https://pub.dev/packages/pedantic
     # Effective Dart disabled : https://pub.dev/packages/effective_dart
     # Lint           disabled : https://pub.dev/packages/lint
     # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
-    #
-    # PACKAGE:       ENABLE   : By commenting it out.
-    # APPLICATION:   DISABLE  : With false value. (My default, assume we are making an app most of the time.)
+    # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
+    # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+    #   PACKAGE:     enabled  : By commenting it out.
+    #   APPLICATION: disabled : With false value. (Default, assume we are making an app most of the time.)
     diagnostic_describe_all_properties: false
 
     # DO document all public members.
@@ -47,22 +30,27 @@ linter:
     # https://dart-lang.github.io/linter/lints/public_member_api_docs.html
     #
     # All non-overriding public members should be documented with /// doc-style comments.
-    # Not necessary for an app or the examples in a pub.dev package. I enabled this for
-    # public packages, I keep the rule here so I can enable by commenting out this rule here.
+    # Not necessary for an app or the examples in a pub.dev package. I always enable this for
+    # public packages.
     #
     # NOTE: There is also the lint rule "package_api_docs", that is enabled as well via all being enabled.
     # https://dart-lang.github.io/linter/lints/package_api_docs.html
     # "DO provide doc comments for all public APIs.", is what it is supposed to do, but only for packages.
-    # However, if I turn OFF rule "public_member_api_docs", then the "package_api_docs" offers no warnings
-    # on missing API doc comments alone. So my conclusion for now is that this rule has to be used instead
+    # However, if we turn OFF rule "public_member_api_docs", then the "package_api_docs" offers no warnings
+    # on missing API doc comments alone. So our conclusion for now is that this rule has to be used instead
     # to ensure we find all APIs that should have documentation comments in a package as well.
     #
     # Other known linters use:
+    #
+    # Core           disabled : https://pub.dev/packages/lints
+    # Recommended    disabled : https://pub.dev/packages/lints
+    # Flutter Lints  disabled : https://pub.dev/packages/flutter_lints
     # Pedantic       disabled : https://pub.dev/packages/pedantic
     # Effective Dart enabled  : https://pub.dev/packages/effective_dart
-    # Lint           disabled : https://pub.dev/packages/lint
     # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
-    #
-    # PACKAGE:       ENABLE   : By commenting it out.
-    # APPLICATION:   DISABLE  : With false value. (My default, assume we are making an app most of the time.)
+    # Lint           disabled : https://pub.dev/packages/lint
+    # VG Analysis    enabled  : https://pub.dev/packages/very_good_analysis
+    # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+    #   PACKAGE:     enabled  : By commenting it out. (My default, I start with this)
+    #   APPLICATION: disabled : With false value. (But usually uncomment the false value if it is an app)
     public_member_api_docs: false

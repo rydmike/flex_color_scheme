@@ -2,8 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../all_shared_imports.dart';
-import '../shared/subpage.dart';
+import '../shared/all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 4)
@@ -14,13 +13,16 @@ import '../shared/subpage.dart';
 // It can give you an idea of how you can create your own complete custom list
 // of themes if you do not want to use any of the predefined ones.
 //
-// We keep the custom color scheme we made in example 3 and add two more custom,
-// for a total of 23 usable themes that we can select from.
+// We keep the custom color scheme we made in example 3 and add two more
+// custom schemes, for a total of 39 usable themes that we can select from.
+//
 // The 2nd scheme we create by just defining primary color for dark and light
 // scheme. The 3rd one we create by computing it from the light theme.
 // The example also uses medium strength branded background and surface colors.
 // A theme showcase widget shows the theme with several common Material widgets.
-// ---
+//
+// We also use the Google font Noto Sans for the app.
+//
 // For simplicity this example just creates a few const and final instances
 // of the needed objects and list. In a real app, you may want to use a Provider
 // or equivalent package(s) to provide the objects where needed in your app.
@@ -128,25 +130,24 @@ class _DemoAppState extends State<DemoApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'FlexColorScheme',
+      title: 'Sample 4) All Themes and Custom x3',
       // Define the light theme for the app, using current theme index and
-      // medium branded surfaces. Then use the .toTheme method to create and
-      // return a slightly opinionated theme using these properties.
-      theme: FlexColorScheme.light(
+      // medium branded surfaces.
+      theme: FlexThemeData.light(
         colors: myFlexSchemes[themeIndex].light,
         surfaceStyle: FlexSurface.medium,
         // Use comfortable on desktops instead of compact, devices as default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
-      ).toTheme,
+      ),
       // We do the exact same definition for the dark theme, but using
-      // FlexColorScheme.dark factory and the dark FlexSchemeColor instead.
-      darkTheme: FlexColorScheme.dark(
+      // FlexThemeData.dark() and the dark FlexSchemeColors instead.
+      darkTheme: FlexThemeData.dark(
         colors: myFlexSchemes[themeIndex].dark,
         surfaceStyle: FlexSurface.medium,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
-      ).toTheme,
+      ),
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
       // This simple example app has only one page.
@@ -218,12 +219,13 @@ class HomePage extends StatelessWidget {
           // automatically. No idea why, just something I noticed by accident.
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('FlexColorScheme Example 4'),
+              title: Text(App.title(context)),
               actions: const <Widget>[AboutIconButton()],
             ),
             body: PageBody(
+              constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
               child: ListView(
-                padding: const EdgeInsets.all(AppConst.edgePadding),
+                padding: const EdgeInsets.all(App.edgePadding),
                 children: <Widget>[
                   Text('Theme', style: headline4),
                   const Text(
@@ -238,8 +240,8 @@ class HomePage extends StatelessWidget {
                   ),
                   // A 3-way theme mode toggle switch.
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: AppConst.edgePadding),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: App.edgePadding),
                     child: FlexThemeModeSwitch(
                       themeMode: themeMode,
                       onThemeModeChanged: onThemeModeChanged,
@@ -278,8 +280,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 8),
                   // Active theme color indicators.
                   const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
+                    padding: EdgeInsets.symmetric(horizontal: App.edgePadding),
                     child: ShowThemeColors(),
                   ),
                   const SizedBox(height: 8),

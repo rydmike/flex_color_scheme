@@ -105,42 +105,88 @@ void main() {
   //
   // Color.blend function, reference value and edge cases tests.
   //****************************************************************************
-  group('FCE4: WITH Color extension Color.blend ', () {
+  group('FCE4a: WITH Color extension Color.blend ', () {
     const Color col1 = Color(0xFFB00020);
     const Color col2 = Color(0xFF03DAC6);
     const Color col3 = Color(0xFFCF6679);
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
-    test('FCE4.01: GIVEN blend(color) EXPECT default blend(color, 10) ', () {
+    test('FCE4a.01: GIVEN blend(color) EXPECT default blend(color, 10) ', () {
       // ignore: avoid_redundant_argument_values
       expect(col1.blend(white), col1.blend(white, 10));
     });
-    test('FCE4.02: GIVEN color.blend(color2, 0) EXPECT color.', () {
+    test('FCE4a.02: GIVEN color.blend(color2, 0) EXPECT $col1.', () {
       expect(col1.blend(white, 0), col1);
     });
-    test('FCE4.03: GIVEN color.blend(color2, <0) EXPECT color.', () {
+    test('FCE4a.03: GIVEN color.blend(color2, <0) EXPECT $col1.', () {
       expect(col1.blend(white, -1), col1);
     });
-    test('FCE4.04: GIVEN color.blend(color2, 100) EXPECT color2.', () {
+    test('FCE4a.04: GIVEN color.blend(color2, 100) EXPECT $col2.', () {
       expect(col1.blend(col2, 100), col2);
     });
-    test('FCE4.05: GIVEN color.blend(color2, >100) EXPECT color2.', () {
+    test('FCE4a.05: GIVEN color.blend(color2, >100) EXPECT $col2.', () {
       expect(col1.blend(col2, 101), col2);
     });
-    test('FCE4.06: GIVEN color.blend(white, 0) EXPECT color.', () {
+    test('FCE4a.06: GIVEN color.blend(white, 0) EXPECT $col1.', () {
       expect(col1.blend(white, 0), col1);
     });
-    test('FCE4.07: GIVEN color.blend(white, 100) EXPECT white.', () {
+    test('FCE4a.07: GIVEN color.blend(white, 100) EXPECT $white.', () {
       expect(col1.blend(white, 100), white);
     });
-    test('FCE4.08: GIVEN color.blend(black, 0) EXPECT color.', () {
+    test('FCE4a.08: GIVEN color.blend(black, 0) EXPECT $col1.', () {
       expect(col1.blend(black, 0), col1);
     });
-    test('FCE4.09: GIVEN color.blend(black, 100) EXPECT white.', () {
+    test('FCE4a.09: GIVEN color.blend(black, 100) EXPECT $black.', () {
       expect(col1.blend(black, 100), black);
     });
-    test('FCE4.10: GIVEN $col1.blend(white, 40) EXPECT $col3.', () {
+    test('FCE4a.10: GIVEN $col1.blend(white, 40) EXPECT $col3.', () {
       expect(col1.blend(white, 40), col3);
+    });
+  });
+
+  //****************************************************************************
+  // FlexColorExtensions unit tests.
+  //
+  // Color.blendAlpha function, reference value and edge cases tests.
+  //****************************************************************************
+  group('FCE4a: WITH Color extension Color.blendAlpha ', () {
+    const Color col1 = Color(0xFFB00020);
+    const Color col2 = Color(0xFF03DAC6);
+    const Color col3 = Color(0xFFCF6679);
+    const Color white = Color(0xFFFFFFFF);
+    const Color black = Color(0xFF000000);
+    test(
+        'FCE4a.01: GIVEN blendAlpha(color) EXPECT default '
+        'blendAlpha(color, 0x0A).', () {
+      // ignore: avoid_redundant_argument_values
+      expect(col1.blendAlpha(white), col1.blendAlpha(white, 0x0A));
+    });
+    test('FCE4a.02: GIVEN color.blendAlpha(color2, 0) EXPECT $col1.', () {
+      expect(col1.blendAlpha(white, 0), col1);
+    });
+    test('FCE4a.03: GIVEN color.blendAlpha(color2, <0) EXPECT $col1.', () {
+      expect(col1.blendAlpha(white, -1), col1);
+    });
+    test('FCE4a.04: GIVEN color.blendAlpha(color2, 255) EXPECT $col2.', () {
+      expect(col1.blendAlpha(col2, 255), col2);
+    });
+    test('FCE4a.05: GIVEN color.blendAlpha(color2, >100) EXPECT $col2.', () {
+      expect(col1.blendAlpha(col2, 256), col2);
+    });
+    test('FCE4a.06: GIVEN color.blendAlpha(white, 0) EXPECT $col1.', () {
+      expect(col1.blendAlpha(white, 0), col1);
+    });
+    test('FCE4a.07: GIVEN color.blendAlpha(white, 100) EXPECT $white.', () {
+      expect(col1.blendAlpha(white, 255), white);
+    });
+    test('FCE4a.08: GIVEN color.blendAlpha(black, 0) EXPECT $col1.', () {
+      expect(col1.blendAlpha(black, 0), col1);
+    });
+    test('FCE4a.09: GIVEN color.blendAlpha(black, 100) EXPECT $black.', () {
+      expect(col1.blendAlpha(black, 255), black);
+    });
+    test('FCE4a.10: GIVEN $col1.blendAlpha(white, 0x66) EXPECT $col3.', () {
+      expect(col1.blendAlpha(white, 0x66), col3);
     });
   });
 

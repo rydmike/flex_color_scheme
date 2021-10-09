@@ -100,24 +100,28 @@ void main() {
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+      dialogBackground: FlexColor.materialLightSurface,
     );
     // m2, same definition as m1.
     const FlexSchemeSurfaceColors m2 = FlexSchemeSurfaceColors(
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+      dialogBackground: FlexColor.materialLightSurface,
     );
     // m3, one different values than m1 and m2.
     const FlexSchemeSurfaceColors m3 = FlexSchemeSurfaceColors(
       surface: FlexColor.materialLightSurface,
       background: FlexColor.lightBackground, // Different from m1 and m2.
       scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+      dialogBackground: FlexColor.materialLightSurface,
     );
     // m4, all values different from m1 and m2.
     const FlexSchemeSurfaceColors m4 = FlexSchemeSurfaceColors(
       surface: Color(0xFFEEEEEE),
       background: Color(0xFFCCCCCC),
       scaffoldBackground: Color(0xFFAAAAAA),
+      dialogBackground: Color(0xFFBBBBBB),
     );
 
     // Identity and equality tests
@@ -164,6 +168,7 @@ void main() {
           surface: FlexColor.materialLightSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+          dialogBackground: FlexColor.materialLightSurface,
         ),
         m1,
       );
@@ -182,6 +187,7 @@ void main() {
           surface: FlexColor.materialLightSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+          dialogBackground: FlexColor.materialLightSurface,
         ),
       );
     });
@@ -209,6 +215,7 @@ void main() {
           surface: FlexColor.materialDarkSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
+          dialogBackground: FlexColor.materialDarkSurface,
         ),
       );
     });
@@ -226,6 +233,8 @@ void main() {
               .blend(FlexColor.materialLightPrimary, 2),
           scaffoldBackground: FlexColor.lightScaffoldBackground
               .blend(FlexColor.materialLightPrimary, 0),
+          dialogBackground:
+              FlexColor.lightSurface.blend(FlexColor.materialLightPrimary, 0),
         ),
       );
     });
@@ -244,6 +253,8 @@ void main() {
               .blend(FlexColor.materialLightPrimary, 4),
           scaffoldBackground: FlexColor.lightScaffoldBackground
               .blend(FlexColor.materialLightPrimary, 0),
+          dialogBackground:
+              FlexColor.lightSurface.blend(FlexColor.materialLightPrimary, 1),
         ),
       );
     });
@@ -262,6 +273,8 @@ void main() {
               .blend(FlexColor.materialLightPrimary, 6),
           scaffoldBackground: FlexColor.lightScaffoldBackground
               .blend(FlexColor.materialLightPrimary, 0),
+          dialogBackground:
+              FlexColor.lightSurface.blend(FlexColor.materialLightPrimary, 2),
         ),
       );
     });
@@ -280,6 +293,8 @@ void main() {
               .blend(FlexColor.materialLightPrimary, 8),
           scaffoldBackground: FlexColor.lightScaffoldBackground
               .blend(FlexColor.materialLightPrimary, 1),
+          dialogBackground:
+              FlexColor.lightSurface.blend(FlexColor.materialLightPrimary, 3),
         ),
       );
     });
@@ -299,6 +314,8 @@ void main() {
               FlexColor.darkBackground.blend(FlexColor.materialDarkPrimary, 5),
           scaffoldBackground: FlexColor.darkScaffoldBackground
               .blend(FlexColor.materialDarkPrimary, 0),
+          dialogBackground:
+              FlexColor.darkSurface.blend(FlexColor.materialDarkPrimary, 2),
         ),
       );
     });
@@ -319,6 +336,8 @@ void main() {
               FlexColor.darkBackground.blend(FlexColor.materialDarkPrimary, 8),
           scaffoldBackground: FlexColor.darkScaffoldBackground
               .blend(FlexColor.materialDarkPrimary, 0),
+          dialogBackground:
+              FlexColor.darkSurface.blend(FlexColor.materialDarkPrimary, 4),
         ),
       );
     });
@@ -339,6 +358,8 @@ void main() {
               FlexColor.darkBackground.blend(FlexColor.materialDarkPrimary, 11),
           scaffoldBackground: FlexColor.darkScaffoldBackground
               .blend(FlexColor.materialDarkPrimary, 0),
+          dialogBackground:
+              FlexColor.darkSurface.blend(FlexColor.materialDarkPrimary, 6),
         ),
       );
     });
@@ -359,6 +380,8 @@ void main() {
               FlexColor.darkBackground.blend(FlexColor.materialDarkPrimary, 14),
           scaffoldBackground: FlexColor.darkScaffoldBackground
               .blend(FlexColor.materialDarkPrimary, 2),
+          dialogBackground:
+              FlexColor.darkSurface.blend(FlexColor.materialDarkPrimary, 8),
         ),
       );
     });
@@ -374,7 +397,7 @@ void main() {
         'EXPECT exact print string', () {
       expect(m1.toString(), equalsIgnoringHashCodes(
           // ignore: lines_longer_than_80_chars
-          'FlexSchemeSurfaceColors#00000(surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff))'));
+          'FlexSchemeSurfaceColors#00000(surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff), dialogBackground: Color(0xffffffff))'));
     });
 
     test(
@@ -389,7 +412,7 @@ void main() {
     // This happens to always equal now in tests, if it start failing, test
     // 18c is actually enough.
     test('FSSC1.18b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 107225738);
+      expect(m1.hashCode, 301748450);
     });
     test('FSSC1.18c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));

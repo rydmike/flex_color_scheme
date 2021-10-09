@@ -282,8 +282,8 @@ void main() {
     });
 
     test(
-        'FTD1.05: GIVEN a FlexThemeData.raw theme with null VisualDensity input '
-        'EXPECT VisualDensity().', () {
+        'FTD1.05: GIVEN a FlexThemeData.raw theme with null VisualDensity '
+        'input EXPECT VisualDensity().', () {
       expect(themeLight.visualDensity, VisualDensity.standard);
     });
     test(
@@ -1186,8 +1186,8 @@ void main() {
     final TextTheme nCPText = nLightTD.primaryTextTheme;
     test(
         'FTD1.88: GIVEN a FlexThemeData.light with custom PrimaryTextTheme '
-        'defined EXPECT the primaryTextTheme to be equal with default ThemeData '
-        'with same primary text theme and typography 2018.', () {
+        'defined EXPECT the primaryTextTheme to be equal with default '
+        'ThemeData with same primary text theme and typography 2018.', () {
       expect(fCPText, equals(nCPText));
     });
 
@@ -1223,4 +1223,6 @@ void main() {
       expect(fCPDText, equals(nCPDText));
     });
   });
+
+  // TODO(rydmike): Add test for applyElevationOverlayColor
 }

@@ -182,7 +182,7 @@ linter:
     # https://dart-lang.github.io/linter/lints/avoid_annotating_with_dynamic.html
     #
     # Violates Effective Dart "PREFER annotating with dynamic instead of letting inference fail", it
-    # also conflicts with strong mode disabling `implicit-dynamic`. Turning it OFF as well.
+    # also conflicts with strong mode disabling `implicit-dynamic`. Turning it OFF.
     #
     # Other known linters use:
     #
@@ -321,7 +321,8 @@ linter:
     # instead of using the IDE to peek into its default to figure out what the defaults are.
     # Occasionally leaving a few redundant default valued parameters in the code is not that bad
     # when you are developing something new. For public packages you probably want to keep this
-    # rule enabled.
+    # rule enabled. In this package we like the oportinity to be explicit and sometimes
+    # specify value that are same as default one.
     #
     # Other known linters use:
     #
@@ -336,7 +337,7 @@ linter:
     # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     #   PACKAGE:     enabled  : By commenting it out. (default)
     #   APPLICATION: disabled : With false value.
-    # avoid_redundant_argument_values: false
+    avoid_redundant_argument_values: false
 
     # AVOID annotating types for function expression parameters.
     #
@@ -401,7 +402,7 @@ linter:
     # Lint           disabled : https://pub.dev/packages/lint
     # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
-    close_sinks: false
+    #close_sinks: false
 
     # DO reference all public properties in debug method implementations.
     #
@@ -445,7 +446,7 @@ linter:
     # Lint           disabled : https://pub.dev/packages/lint
     # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
-    flutter_style_todos: false
+    #flutter_style_todos: false
 
     # AVOID using library private types in public APIs.
     #
@@ -517,7 +518,7 @@ linter:
     # Lint           disabled : https://pub.dev/packages/lint
     # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
-    no_default_cases: false
+    #no_default_cases: false
 
     # CONSIDER omitting type annotations for local variables.
     #
@@ -714,7 +715,7 @@ linter:
     # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     #   PACKAGE:     enabled  : By commenting it out. (My default, I start with this)
     #   APPLICATION: disabled : With false value. (But usually uncomment the false value if it is an app)
-    # public_member_api_docs: false
+    public_member_api_docs: false
 
     # DO use trailing commas for all function calls and declarations unless the function call or
     # definition, from the start of the function name up to the closing parenthesis,

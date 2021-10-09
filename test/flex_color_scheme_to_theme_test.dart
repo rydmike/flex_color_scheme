@@ -1185,8 +1185,8 @@ void main() {
     final TextTheme nCPText = nLightTD.primaryTextTheme;
     test(
         'FCS7.93: GIVEN a FlexColorScheme.light with custom PrimaryTextTheme '
-        'defined EXPECT the primaryTextTheme to be equal with default ThemeData '
-        'with same primary text theme and typography 2018.', () {
+        'defined EXPECT the primaryTextTheme to be equal with default '
+        'ThemeData with same primary text theme and typography 2018.', () {
       expect(fCPText, equals(nCPText));
     });
 
@@ -1222,4 +1222,5 @@ void main() {
       expect(fCPDText, equals(nCPDText));
     });
   });
+  // TODO(rydmike): Add test for applyElevationOverlayColor
 }

@@ -1,47 +1,76 @@
 # Changelog
 
-All notable changes to the **FlexColorScheme** package are documented in this file.
+All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.0.0] - September 15, 2021
+## [WIP 4.0.0] - October 10, 2021
 
-* **Breaking:** Remove all theme properties that were deprecated in Flutter 2.5.
-  FlexColorScheme went all-in, by also removing previous already known to 
-  become deprecated `accentColor` from its API totally. This is a minor API 
-  break with previous versions, but it was warned that this will happen when
-  Flutter SDK deprecates the property.  The break is small since it was 
-  deprecated already in previous version.
-* **TODO Breaking:** The color branding is correctly applied to dark overlay
-  elevated surfaces. This breaks past style of of elevated color branded 
-  surfaces that did not get correct elevated coloration.
+* **Breaking:** Removed `accentColor` property that was deprecated in Flutter
+  2.5.0 and FlexColorScheme 3.0.0.
+* **Breaking:** In dark mode, the `darkIsTrueBlack` now makes `surface` color
+  8% darker instead of 6%. This change was needed to support overlay color
+  in dark mode when using `darkIsTrueBlack` when using `surfaceMode`
+  options that start with `equal...`. For more information see Flutter SDK
+  issue [90353](https://github.com/flutter/flutter/issues/90353).
 * **TODO Breaking:** Better algorithm for calculating MaterialColor schemes.
-* **New:** Add `textTheme` and `primaryTextTHeme` properties to `FlexColorScheme` to 
-  enable easier usage of custom `TextThemes` without need to merge a custom 
-  `TextTheme` via a `copyWith`, plus `merge` with the default text theme.
-* **New:** Added `FlexThemeData` static extension on `ThemeData`. Themes can now 
-  optionally be created with the convenience syntax `FlexThemeData.light()` and
-  `FlexThemeData.dark()`, instead of with `FlexColorScheme.light().toTheme` and
-  `FlexColorScheme.dark().toTheme`.
-* **New:** All `FlexSchemeData` objects in `FlexColor` are exposed as static const
-  objects, making them easy to pick and reuse as const objects individually in 
-  custom color scheme lists. Previously only the individual color definitions
-  were exposed.
-* **Change:** The `FlexColor.schemesList` is now const for improved efficiency. 
+* **New:** Added new more flexible and powerful color branding feature for 
+  surface and background colors. The new properties in the `FlexColorScheme` 
+  factories `light` and `dark`, `surfaceMode` using enum `FlexSurfaceMode`, and
+  property `blendLevel` using enum `FlexBlendLevel` are recommended to be used 
+  instead of `surfaceStyle`. The `surfaceStyle` is still default and not yet
+  deprecated in current version, but will be deprecated in next version and 
+  later removed.
+* **New:** Added `FlexThemeData` static extension on `ThemeData`. Themes can now
+  optionally be created with the convenience syntax `FlexThemeData.light` and
+  `FlexThemeData.dark`, instead of with `FlexColorScheme.light.toTheme` and
+  `FlexColorScheme.dark.toTheme`. The `toTheme` methods are still
+  available and works as before. They will not be deprecated, they are needed
+  for more elaborate sub-theming when using `FlexColorScheme` based themes. 
+* **New:** Added `textTheme` and `primaryTextTHeme` properties to 
+  `FlexColorScheme` to enable easier usage of custom `TextThemes` without the
+   need to add a custom `TextTheme` via a `copyWith` plus `merge` with the 
+   default text theme.
+* **New:** Added `FlexColorScheme.dialogBackground` as a background surface that
+  can be controlled and themed separately. 
+* **New:** To `FlexColorScheme` factories `light` and `dark`, added the `Color` 
+  properties `primary`, `primaryVariant`, `secondary`, `sedondaryVariant`, 
+  `appBarBackground` and `dialogBackground`. They all default to null, but if
+  provided they can be used as override values to the factory behaviors defined
+  by `scheme`, `colors`, `appBarStyle`, `surfaceMode` and `surfaceStyle` that
+  otherwise in the factories define colors for these properties.  
+* **New:** Exposed boolean property `applyElevationOverlayColor`. It has the same
+  function as the same property in `ThemeData`. It applies a semi-transparent 
+  overlay color on Material surfaces to indicate elevation for dark themes.  
+  In `FlexColorScheme` it defaults to true. In Flutter `ThemeData.from` it
+  also default to true, but in `ThemeData` it defaults to false.
+  The property is just for convenience, so you can avoid a `copyWith` if 
+  you wish to turn it off.
+* **New:** All `FlexSchemeData` objects in `FlexColor` are exposed as static 
+  const objects, making them easy to pick and reuse as const objects 
+  individually in custom color scheme lists or as input to `colors` property.
+  Previously only the individual color definitions were exposed.
+* **New:** Added extension `.blendAlpha()` on `Color` in `FlexColorExtensions`. 
+* **Change:** The `FlexColor.schemesList` is now a `const` for improved 
+  efficiency. 
 
 * **TODO New:** Added convenience support for Flutter 2.5 full screen mode to
   `FlexColorScheme.themedSystemNavigationBar`.
 
-* **Tests:** Added tests for above features. Total 864 tests, coverage 99.75%.
-* Documentation and typo fixes.
-
 * **TODO New color schemes:** Added four new built-in color schemes.
   * **Blue whale** - Blue whale, jungle green and outrageous tango orange.
     Use enum value `FlexScheme.blueWhale` for easy access to it.
-  * **TODO** - Mallard green and Valencia pink colored theme.
-    Use enum value `FlexScheme.mallardGreen` for easy access to it.
-  * **TODO** - Espresso dark brown and crema colored theme.
-    Use enum value `FlexScheme.espresso` for easy access to it.
-  * **TODO** - Outer space dark blue-grey and stage red theme.
-    Use enum value `FlexScheme.outerSpace` for easy access to it.
+  * **TODO** - Nnn.
+    Use enum value `FlexScheme.nnn` for easy access to it.
+  * **TODO** - Nnn,
+    Use enum value `FlexScheme.nnn` for easy access to it.
+  * **TODO** - Nnn.
+    Use enum value `FlexScheme.nnn` for easy access to it.
+
+* **TODO Documentation:** Updated with a quick start guide and new example. Tutorial
+  examples as before, but using the new `FlexThemeData` syntax. Added a more 
+  complex example that also persists theme and its FlexColorScheme settings. 
+  Some typos were corrected.
+
+* **TODO Tests:** Added tests for the new features. Total NNN tests, coverage 99.xx%.
 
 ## [3.0.1] - July 1, 2021
 
@@ -381,6 +410,16 @@ All notable changes to the **FlexColorScheme** package are documented in this fi
 
 ---
 
+## KNOWN ISSUES
+- The color branding is not applied to Widgets using elevated `Material` of type `canvas` in Flutter when using
+  primary colored surface and backgrounds, and the theme's `applyElevationOverlayColor: true` is
+  true. This is caused by this Flutter SDK issue and limitation: https://github.com/flutter/flutter/issues/90353.
+
+  The surface branding in versions before 4.0.0 was controlled via one property 
+  `FlexColorScheme.FlexSurface`
+
+---
+
 # Planned Updates and New Features
 
 These are the topics I currently have on the TODO list for this package. Have a new suggestion and idea? 
@@ -410,6 +449,10 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
   - Color palette tools link: https://onextrapixel.com/best-tools-generate-color-palettes/ as ref info.
 
 ### COMPLETED
+- Version 4.0.0 Docs with quick start example first. 
+- Version 4.0.0 Added a more complex example that also persists theme.
+- Version 4.0.0 Added API offering more flexibility and customization 
+  capabilities to the surface color branding.
 - Version 3.0.0 Deprecated `accentColor`. Swap primary and secondary colors feature added. Added 4 new color schemes.
 - Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
 - Version 2.0.0-nullsafety.2: Minor new APIs and features added. Example 5 updated.
@@ -435,23 +478,28 @@ Feel free to open a [suggestion or issue](https://github.com/rydmike/flex_color_
 - Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
 
 ### MAYBE
-- **Companion Web App**  
-  I started playing with a small companion app that will allow you to design `FlexColorSchemes` and copy-paste the 
-  needed setup code into an app. If/when I finnish it, I will release it as live version with open source code as well.
 
-- **Branded surface customization**
-  Add API offering more flexibility and customization capabilities to the surface branding.
+All TODOs and features that were on my original maybe list have been completed.
 
-- **Serialization of FlexColorScheme**  
-  Including built-in serialization of FlexColorScheme, and its key classes has been suggested. I consider
-  `FlexColorScheme` to be functionally on a level similar to `ColorScheme`, and therefore it should not cover 
-  serialization of itself. Serialization have to deal with a lot of potential failure points that I think should
-  not have to be a concern in this type of component. I am not planning to add it, not yet at least, I might
-  reconsider this later.
+
+### OUT OF SCOPE
+
+#### Serialization of FlexColorScheme  
   
-  My recommendation for saving the state of a `FlexColorScheme` is to include values for its settings that you 
-  use in your implementation in other models in your application, like an "AppSettings" model or similar. 
-  You probably serialize and store such data already, perhaps with shared preferences, hive, get_storage or 
-  some other solution. Include the values you need for your `FlexColorScheme` implementation in your stored settings
-  and then use those values to restore your `FlexColorScheme` configuration and theme. This way, your implementation
-  also remain in control of what it needs to store and restore.  
+Including built-in serialization of FlexColorScheme, and its key classes has been suggested.
+I consider `FlexColorScheme` to be functionally on a level similar to `ThemeData` 
+and `ColorScheme`. Therefore, it should not cover serialization of itself. 
+Serialization have to deal with a lot of potential failure points that I think should
+not have to be a concern in this type of component. I am not planning to add it.
+  
+My recommendation for saving the state of a `FlexColorScheme` is to include values for its settings that you 
+use in your implementation in other models in your application, like an "AppSettings" model or similar. 
+You probably serialize and store such data already, perhaps with shared preferences, hive, get_storage or 
+some other solution. Include the values you need for your `FlexColorScheme` implementation in your stored settings
+and then use those values to restore your `FlexColorScheme` configuration and theme. This way, your implementation
+also remain in control of what it needs to store and restore. 
+  
+From version 4.0.0 a simple approach using Hive and Riverpod to store and persist FlexColorScheme is
+demonstrated. This is just one example, other implementation with Riverpod or using Provider, 
+Flutter Bloc, GetX etc, and completely different local persistence like Shared 
+Preferences and similar, are just as valid.

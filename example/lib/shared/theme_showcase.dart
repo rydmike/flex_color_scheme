@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 
-// It is not necessary to review or understand the code in this file in order
-// to understand how to use the FlexColorScheme package demonstrated in
-// the examples.
-
-// ignore_for_file: avoid_redundant_argument_values
-
-// Theme showcase for the current theme.
-//
-// Use this widget to review your theme's impact on [ThemeData] and see
-// how it looks with different Material widgets.
-//
-// This simple material theme demo is based on similar work in package
-// https://pub.dev/packages/flutter_material_showcase developed by
-// Miguel Beltran, thanks and credits belong to him for the idea.
-//
-// This version adds more demo widgets, and removes the Calendar that exists
-// in the original version.
-//
-// This stateful widget is is only used in the sample to provide visual feedback
-// on how each selected and demonstrated FlexColorScheme based theme looks like.
+/// Theme showcase for the current theme.
+///
+/// Use this widget to review your theme's impact on [ThemeData] and see
+/// how it looks with different Material widgets.
+///
+/// This simple material theme demo is based on similar work in package
+/// https://pub.dev/packages/flutter_material_showcase developed by
+/// Miguel Beltran, thanks and credits belong to him for the idea.
+///
+/// This version adds more demo widgets, and removes the Calendar that exists
+/// in the original version.
+///
+/// This stateful widget is only used in to provide visual feedback on how each
+/// selected and demonstrated FlexColorScheme based theme looks like.
 class ThemeShowcase extends StatefulWidget {
   const ThemeShowcase({
     Key? key,
@@ -434,6 +428,7 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
       padding: const EdgeInsets.all(8),
       child: Column(
         children: const <Widget>[
+          Divider(),
           Material(
             type: MaterialType.canvas,
             elevation: 0,
@@ -441,6 +436,28 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
               height: 50,
               child: Center(
                 child: Text('Material type canvas, elevation 0'),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 1,
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Text('Material type canvas, elevation 1'),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 4,
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Text('Material type canvas, elevation 4'),
               ),
             ),
           ),
@@ -456,6 +473,7 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
             ),
           ),
           SizedBox(height: 10),
+          Divider(),
           Material(
             elevation: 0,
             type: MaterialType.card,
@@ -489,6 +507,38 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
             ),
           ),
           SizedBox(height: 10),
+          Material(
+            elevation: 8,
+            type: MaterialType.card,
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Text('Material type card, elevation 8'),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Divider(),
+          Card(
+            elevation: 0,
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Text('Card widget, elevation 0'),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Card(
+            elevation: 1,
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Text('Card widget, elevation 1'),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
           Card(
             elevation: 4,
             child: SizedBox(
@@ -498,6 +548,17 @@ class _ThemeShowcaseState extends State<ThemeShowcase> {
               ),
             ),
           ),
+          SizedBox(height: 10),
+          Card(
+            elevation: 8,
+            child: SizedBox(
+              height: 50,
+              child: Center(
+                child: Text('Card widget, elevation 8'),
+              ),
+            ),
+          ),
+          Divider(),
         ],
       ),
     );

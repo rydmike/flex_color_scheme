@@ -11,7 +11,7 @@
 name: Test
 on:
   push:
-    branches: [none]
+    branches: [master]
 jobs:
   flutter_test:
     runs-on: ubuntu-latest

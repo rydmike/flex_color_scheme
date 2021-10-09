@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../all_shared_imports.dart';
+import '../shared/all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 1)
@@ -10,6 +10,9 @@ import '../all_shared_imports.dart';
 // This example shows how you can use a selected predefined color scheme in
 // FlexColorScheme to define light and dark themes using the scheme
 // and then switch between the light and dark mode.
+//
+// We also use the Google font Noto Sans for the app.
+//
 // A theme showcase widget shows the theme with several common Material widgets.
 // -----------------------------------------------------------------------------
 
@@ -28,23 +31,22 @@ class _DemoAppState extends State<DemoApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Select the predefined flex scheme to use. Feel free to modify the used
+    // Select the predefined FlexScheme to use. Feel free to modify the used
     // FlexScheme enum value below to try other built-in color schemes.
     const FlexScheme usedFlexScheme = FlexScheme.mandyRed;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'FlexColorScheme',
+      title: 'Sample 1) Use Predefined Theme',
       // Use a predefined FlexThemeData.light() theme for the app.
       theme: FlexThemeData.light(
         scheme: usedFlexScheme,
         // Use comfortable on desktops instead of compact, devices use default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        // We use GoogleFonts NotoSans instead of platform defaults.
         fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
-      // We do the exact same definition for the dark theme, but using
-      // FlexThemeData.light() and the dark FlexSchemeColor in
-      // FlexColor.schemes.
+      // Same definition for the dark theme, using FlexThemeData.dark().
       darkTheme: FlexThemeData.dark(
         scheme: usedFlexScheme,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -96,12 +98,13 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FlexColorScheme Example 1'),
+        title: Text(App.title(context)),
         actions: const <Widget>[AboutIconButton()],
       ),
       body: PageBody(
+        constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
         child: ListView(
-          padding: const EdgeInsets.all(AppConst.edgePadding),
+          padding: const EdgeInsets.all(App.edgePadding),
           children: <Widget>[
             Text('Theme', style: headline4),
             const Text(
@@ -114,8 +117,7 @@ class HomePage extends StatelessWidget {
             ),
             // A 3-way theme mode toggle switch.
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: AppConst.edgePadding),
+              padding: const EdgeInsets.symmetric(vertical: App.edgePadding),
               child: FlexThemeModeSwitch(
                 themeMode: themeMode,
                 onThemeModeChanged: onThemeModeChanged,
@@ -130,7 +132,7 @@ class HomePage extends StatelessWidget {
             ),
             // Show all key active theme colors.
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
+              padding: EdgeInsets.symmetric(horizontal: App.edgePadding),
               child: ShowThemeColors(),
             ),
             const Divider(),

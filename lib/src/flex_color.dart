@@ -2210,6 +2210,14 @@ class FlexSchemeColor with Diagnosticable {
   final Color primary;
 
   /// Typically a darker version of the primary color.
+  ///
+  /// In Flutter SDK the [primaryVariant] color is only used by [SnackBar]
+  /// button color in dark theme mode as a part of predefined widget behavior.
+  /// If you provide a custom [SnackBarThemeData] where you define
+  /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
+  /// color property becomes a good property to use if you need a custom color
+  /// for custom widgets accessible via your application's ThemeData, that is
+  /// not used as default color by any built-in widgets.
   final Color primaryVariant;
 
   /// An accent color that, when used sparingly, calls attention to parts
@@ -2217,6 +2225,12 @@ class FlexSchemeColor with Diagnosticable {
   final Color secondary;
 
   /// Typically a darker version of the secondary color.
+  ///
+  /// In Flutter SDK the [secondaryVariant] color is not used by in any
+  /// built-in widgets default themes or predefined widget behavior.
+  /// It is an excellent property to use if you need a custom color for
+  /// custom widgets accessible via your application's ThemeData, that is
+  /// not used as default color by any built-in widgets.
   final Color secondaryVariant;
 
   /// The color of the app bar.
@@ -2244,19 +2258,14 @@ class FlexSchemeColor with Diagnosticable {
   }) {
     return FlexSchemeColor(
       primary: primary,
-      // ignore: avoid_redundant_argument_values
       primaryVariant: primaryVariant ?? primary.darken(kDarkenPrimaryVariant),
       secondary: secondary ?? primary.darken(kDarkenSecondary),
       secondaryVariant: secondaryVariant ??
-          // ignore: avoid_redundant_argument_values
           secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
           primary.darken(kDarkenSecondaryVariant),
       appBarColor: appBarColor ??
-          // ignore: avoid_redundant_argument_values
           secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
           primary.darken(kDarkenSecondaryVariant),
-      // Accent color defaults to primary if not defined.
-      // accentColor: accentColor ?? primary,
       error: error,
     );
   }
@@ -2277,8 +2286,9 @@ class FlexSchemeColor with Diagnosticable {
   /// If [swapColors] is **true**, [primary] and [secondary], as well as
   /// [primaryVariant] and [secondaryVariant] are swapped, before being
   /// usage limited by [usedColors].
-  static FlexSchemeColor effective(FlexSchemeColor colors, int usedColors,
-      {bool swapColors = false}) {
+  static FlexSchemeColor effective(
+      final FlexSchemeColor colors, final int usedColors,
+      {final bool swapColors = false}) {
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
 
     final FlexSchemeColor effectiveColors = swapColors
@@ -2294,7 +2304,6 @@ class FlexSchemeColor with Diagnosticable {
       primary: effectiveColors.primary,
       primaryVariant: usedColors > 2
           ? effectiveColors.primaryVariant
-          // ignore: avoid_redundant_argument_values
           : effectiveColors.primary.darken(kDarkenPrimaryVariant),
       secondary: usedColors > 1
           ? effectiveColors.secondary
@@ -2302,8 +2311,8 @@ class FlexSchemeColor with Diagnosticable {
       secondaryVariant: usedColors > 3
           ? effectiveColors.secondaryVariant
           : usedColors > 1
-              ? effectiveColors.secondary.darken(
-                  kDarkenSecondaryVariantFromSecondary) // ignore: avoid_redundant_argument_values
+              ? effectiveColors.secondary
+                  .darken(kDarkenSecondaryVariantFromSecondary)
               : effectiveColors.primary.darken(kDarkenSecondaryVariant),
       appBarColor: colors.appBarColor,
       error: colors.error,
@@ -2325,7 +2334,7 @@ class FlexSchemeColor with Diagnosticable {
   /// Material design guide to convert the default red error color for
   /// light mode to dark mode. For primary light mode color with low saturation,
   /// a white blend of 20...30% often also produces nice results.
-  FlexSchemeColor toDark([int whiteBlend = 35]) {
+  FlexSchemeColor toDark([final int whiteBlend = 35]) {
     return FlexSchemeColor.from(
       primary: primary.blend(Colors.white, whiteBlend),
       primaryVariant: primaryVariant.blend(Colors.white, whiteBlend),

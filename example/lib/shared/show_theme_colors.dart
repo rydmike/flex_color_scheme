@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
-// It is not necessary to review or understand the code in this file in order
-// to understand how to use the FlexColorScheme package demonstrated in
-// the examples.
-
-// Draw a number of boxes showing the colors of key theme color properties
-// in the ColorScheme of the inherited ThemeData and some of its key color
-// properties.
-// This widget is just used so we can visually see the active theme colors
-// in the examples and their used FlexColorScheme based themes.
+/// Draw a number of boxes showing the colors of key theme color properties
+/// in the ColorScheme of the inherited ThemeData and some of its key color
+/// properties.
+///
+/// This widget is just used so we can visually see the active theme colors
+/// in the examples and their used FlexColorScheme based themes.
 class ShowThemeColors extends StatelessWidget {
   const ShowThemeColors({Key? key}) : super(key: key);
+
+  // On color used when a theme color property does not have a theme onColor.
+  static Color _onColor(final Color color) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light
+          ? Colors.black
+          : Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -39,38 +42,22 @@ class ShowThemeColors extends StatelessWidget {
         ThemeCard(
           label: 'Primary\nColorDark',
           color: theme.primaryColorDark,
-          textColor:
-              ThemeData.estimateBrightnessForColor(theme.primaryColorDark) ==
-                      Brightness.dark
-                  ? Colors.white
-                  : Colors.black,
+          textColor: _onColor(theme.primaryColorDark),
         ),
         ThemeCard(
           label: 'Primary\nColorLight',
           color: theme.primaryColorLight,
-          textColor:
-              ThemeData.estimateBrightnessForColor(theme.primaryColorLight) ==
-                      Brightness.dark
-                  ? Colors.white
-                  : Colors.black,
+          textColor: _onColor(theme.primaryColorLight),
         ),
         ThemeCard(
           label: 'Secondary\nHeader',
           color: theme.secondaryHeaderColor,
-          textColor: ThemeData.estimateBrightnessForColor(
-                      theme.secondaryHeaderColor) ==
-                  Brightness.dark
-              ? Colors.white
-              : Colors.black,
+          textColor: _onColor(theme.secondaryHeaderColor),
         ),
         ThemeCard(
           label: 'Primary\nVariant',
           color: colorScheme.primaryVariant,
-          textColor: ThemeData.estimateBrightnessForColor(
-                      colorScheme.primaryVariant) ==
-                  Brightness.dark
-              ? Colors.white
-              : Colors.black,
+          textColor: _onColor(colorScheme.primaryVariant),
         ),
         ThemeCard(
           label: 'Secondary',
@@ -80,37 +67,22 @@ class ShowThemeColors extends StatelessWidget {
         ThemeCard(
           label: 'Toggleable\nActive',
           color: theme.toggleableActiveColor,
-          textColor: ThemeData.estimateBrightnessForColor(
-                      theme.toggleableActiveColor) ==
-                  Brightness.dark
-              ? Colors.white
-              : Colors.black,
+          textColor: _onColor(theme.toggleableActiveColor),
         ),
         ThemeCard(
           label: 'Secondary\nVariant',
           color: colorScheme.secondaryVariant,
-          textColor: ThemeData.estimateBrightnessForColor(
-                      colorScheme.secondaryVariant) ==
-                  Brightness.dark
-              ? Colors.white
-              : Colors.black,
+          textColor: _onColor(colorScheme.secondaryVariant),
         ),
         ThemeCard(
           label: 'AppBar',
           color: appBarColor,
-          textColor: ThemeData.estimateBrightnessForColor(appBarColor) ==
-                  Brightness.dark
-              ? Colors.white
-              : Colors.black,
+          textColor: _onColor(appBarColor),
         ),
         ThemeCard(
           label: 'Bottom\nAppBar',
           color: theme.bottomAppBarColor,
-          textColor:
-              ThemeData.estimateBrightnessForColor(theme.bottomAppBarColor) ==
-                      Brightness.dark
-                  ? Colors.white
-                  : Colors.black,
+          textColor: _onColor(theme.bottomAppBarColor),
         ),
         ThemeCard(
           label: 'Divider',
@@ -157,8 +129,8 @@ class ShowThemeColors extends StatelessWidget {
   }
 }
 
-// This is just simple SizedBox with a Card with a passed in label, background
-// and text label color. Used to show the colors of a theme color property.
+/// This is just simple SizedBox with a Card with a passed in label, background
+/// and text label color. Used to show the colors of a theme color property.
 class ThemeCard extends StatelessWidget {
   const ThemeCard({
     Key? key,

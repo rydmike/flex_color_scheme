@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run all TESTS" type="FlutterTestConfigType" factoryName="Flutter Test" singleton="false">
+    <option name="testDir" value="C:\Users\mryds\OneDrive\code\flutter\_mr\flex_color_scheme\test" />
+    <option name="useRegexp" value="false" />
+    <option name="additionalArgs" value="" />
+    <method v="2" />
+  </configuration>
+</component>

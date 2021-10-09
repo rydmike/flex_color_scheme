@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'shared/all_shared_imports.dart';
+import '../shared/all_shared_imports.dart';
 
-// -----------------------------------------------------------------------------
-// To easily run and try the tutorial examples 1...5 on a device, you can
-// copy/paste all their code starting from their void main() function below.
-//
-// There are also predefined run configurations for VS-Code and IntelliJ/AS.
-// -----------------------------------------------------------------------------
+// This is a copy of the default main.dart file in the example/lib folder.
+// It is just here to have a handy copy of it. To build the tutorials in
+// examples 1-5 on a device, you can just copy/paste the main.dart code without
+// imports from these examples to example/lib/main.dart file. Then you do not
+// have to setup build configs for them in your project.
 
 /// FlexColorScheme default example.
 ///
@@ -79,14 +78,14 @@ class DemoApp extends StatelessWidget {
       title: 'Default Example',
       // Define the light theme for the app, based on defined colors.
       theme: FlexThemeData.light(
-        // colors: _mySchemeLight,
+        colors: _mySchemeLight,
         // Just want to use a built in scheme? Then comment colors above and
         // use scheme below to select a built-in one:
-        scheme: FlexScheme.blueWhale,
-        surfaceStyle: FlexSurface.heavy,
-        //
+        // scheme: FlexScheme.hippieBlue,
+        surfaceStyle: FlexSurface.medium,
+        // TODO(rydmike): Get these to work
         surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
-        blendLevel: FlexBlendLevel.five,
+        blendLevel: FlexBlendLevel.none,
         //
         appBarStyle: FlexAppBarStyle.primary,
         appBarElevation: 0,
@@ -107,17 +106,13 @@ class DemoApp extends StatelessWidget {
         // a nice shortcut if you do not want to design your dark theme.
         // The whiteBlend for the desaturation of the light theme colors
         // defaults to 35%, you can try other values too, here we use 30.
-        // colors: _mySchemeLight.toDark(30),
+        colors: _mySchemeLight.toDark(30),
         // If you want to use the defined custom dark colors, use it instead:
-        colors: _mySchemeDark,
+        // colors: _mySchemeDark,
         // Just want to use a built in scheme? Then comment colors above and
         // use scheme below to select a built-in one:
         // scheme: FlexScheme.hippieBlue,
-        surfaceStyle: FlexSurface.light,
-        //
-        surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
-        blendLevel: FlexBlendLevel.two,
-        //
+        surfaceStyle: FlexSurface.strong,
         appBarStyle: FlexAppBarStyle.background,
         appBarElevation: 0,
         transparentStatusBar: true,

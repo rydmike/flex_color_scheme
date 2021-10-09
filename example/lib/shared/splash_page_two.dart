@@ -2,7 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// SplashPage represents the splash page
+/// SplashPageTwo represents a splash page that uses native full screen mode
+/// by using [SystemChrome.setEnabledSystemUIMode].
 class SplashPageTwo extends StatefulWidget {
   /// Default const constructor.
   const SplashPageTwo({
@@ -30,7 +31,6 @@ class SplashPageTwo extends StatefulWidget {
 class _SplashPageTwoState extends State<SplashPageTwo> {
   @override
   void initState() {
-    //
     // This call will remove to top and bottom UI overlays.
     //
     // For some reason on some newer Android versions, it does not work
@@ -57,9 +57,7 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
 
   @override
   void dispose() {
-    //
     // Set the UI overlays back when we dispose this screen.
-    //
     // This screen needs to be stateful so we can correctly manage the
     // life-cycle of the removed overlay and putting them back.
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
