@@ -162,7 +162,7 @@ enum FlexSurfaceMode {
 
   /// Use your own custom surface and background blend style.
   ///
-  /// If you set this option and use the [FlexSchemeSurfaceColors.flexBlend]
+  /// If you set this option and use the [FlexSchemeSurfaceColors.blend]
   /// constructor to make custom surface colors, the passed in `surfaceColors`
   /// property will be used as base surface for each surface color property.
   custom,
@@ -1410,11 +1410,11 @@ class FlexColorScheme with Diagnosticable {
     // factory FlexSchemeSurfaceColors.flexBlend otherwise we use the one
     // defined by factory FlexSchemeSurfaceColors.from.
     final FlexSchemeSurfaceColors _surfaceSchemeColors = surfaceMode != null
-        ? FlexSchemeSurfaceColors.flexBlend(
+        ? FlexSchemeSurfaceColors.blend(
             brightness: Brightness.light,
             surfaceMode: surfaceMode,
             blendLevel: blendLevel,
-            blendColors: _effectiveColors,
+            schemeColors: _effectiveColors,
           )
         : FlexSchemeSurfaceColors.from(
             brightness: Brightness.light,
@@ -2146,11 +2146,11 @@ class FlexColorScheme with Diagnosticable {
     // factory FlexSchemeSurfaceColors.flexBlend otherwise we use the one
     // defined by factory FlexSchemeSurfaceColors.from.
     final FlexSchemeSurfaceColors _surfaceSchemeColors = surfaceMode != null
-        ? FlexSchemeSurfaceColors.flexBlend(
+        ? FlexSchemeSurfaceColors.blend(
             brightness: Brightness.dark,
             surfaceMode: surfaceMode,
             blendLevel: blendLevel,
-            blendColors: _effectiveColors,
+            schemeColors: _effectiveColors,
           )
         : FlexSchemeSurfaceColors.from(
             brightness: Brightness.dark,
@@ -3688,7 +3688,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   ///
   /// [FlexSchemeSurfaceColors] was in versions older than 4.0 created with
   /// the [FlexSchemeSurfaceColors.from] factory, version 4.0 and later
-  /// recommends using the [FlexSchemeSurfaceColors.flexBlend] factory for even
+  /// recommends using the [FlexSchemeSurfaceColors.blend] factory for even
   /// more nuanced surface branding options.
   ///
   /// This kind of surface branding is based on the Material guide found
@@ -3702,7 +3702,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// The surface colors returned by this factory can also be used to make
   /// branded surface colors for Flutter's standard [ColorScheme], it does
   /// not have to be used exclusively by [FlexColorScheme].
-  factory FlexSchemeSurfaceColors.flexBlend({
+  factory FlexSchemeSurfaceColors.blend({
     /// Controls if we create surface colors for light or dark surfaces.
     final Brightness brightness = Brightness.light,
 
@@ -3717,7 +3717,15 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     ///
     /// If null, default material light or dark scheme colors will be used,
     /// depending on if we are making light or dark surfaces.
-    FlexSchemeColor? blendColors,
+    FlexSchemeColor? schemeColors,
+
+    /// The colors to be blended into each surface color.
+    ///
+    /// If not null, these colors will be blended into each surface color.
+    /// If it is null, then `schemeColors.primary` will be assigned to all
+    /// surfaces, the `surfaceMode` may override this and assign other
+    /// `schemeColors` to some of the surfaces.
+    FlexSchemeSurfaceColors? blendColors,
 
     /// The surface colors that we will mix the blend colors into.
     ///
@@ -3734,11 +3742,27 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     final bool _light = brightness == Brightness.light;
 
     // We get scheme default blend in colors via brightness and Material
-    // default colors for the theme mode, if it was not provided. It it
-    // is normally provided when making branded surfaces, but Material default
+    // default colors for the theme mode, if it was not provided. It is
+    // normally provided when making branded surfaces, but Material default
     // colors are used as fallback colors.
-    final FlexSchemeColor _blend = blendColors ??
+    final FlexSchemeColor _scheme = schemeColors ??
         (_light ? FlexColor.material.light : FlexColor.material.dark);
+
+    // The color that should be blended into each surface, defaults to primary
+    // color for all surfaces.
+    FlexSchemeSurfaceColors _blendColor = blendColors ??
+        FlexSchemeSurfaceColors(
+          surface: _scheme.primary,
+          dialogBackground: _scheme.primary,
+          background: _scheme.primary,
+          scaffoldBackground: _scheme.primary,
+        );
+
+    // Set dialog blend colors to secondary color for modes that use that.
+    if (surfaceMode == FlexSurfaceMode.equalSurfacesLowScaffoldSecDialog ||
+        surfaceMode == FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog) {
+      _blendColor = _blendColor.copyWith(dialogBackground: _scheme.secondary);
+    }
 
     // We get surface starting default colors via brightness and Material
     // default colors if it was not provided. It is normally provided when
@@ -3758,22 +3782,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
                 dialogBackground: FlexColor.materialDarkSurface,
               ));
-
-    // The color that should be blended into each surface, defaults to primary
-    // color for all surfaces.
-    // TODO(rydmike): This needs another prop for customization options.
-    FlexSchemeSurfaceColors _color = FlexSchemeSurfaceColors(
-      surface: _blend.primary,
-      dialogBackground: _blend.primary,
-      background: _blend.primary,
-      scaffoldBackground: _blend.primary,
-    );
-
-    // Set dialog blend colors to secondary color for modes that use that.
-    if (surfaceMode == FlexSurfaceMode.equalSurfacesLowScaffoldSecDialog ||
-        surfaceMode == FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog) {
-      _color = _color.copyWith(dialogBackground: _blend.secondary);
-    }
 
     // If legacy `scaffoldSurfaceBackground` and no blend level, we use Material
     // default surfaces. scaffoldBackgroundSurface
@@ -3928,13 +3936,13 @@ class FlexSchemeSurfaceColors with Diagnosticable {
 
     // Return the computed and resulting surface colors.
     return FlexSchemeSurfaceColors(
-      surface: _surface.surface.blendAlpha(_color.surface, _surfaceMix),
+      surface: _surface.surface.blendAlpha(_blendColor.surface, _surfaceMix),
       dialogBackground: _surface.dialogBackground
-          .blendAlpha(_color.dialogBackground, _dialogMix),
-      background:
-          _surface.background.blendAlpha(_color.background, _backgroundMix),
+          .blendAlpha(_blendColor.dialogBackground, _dialogMix),
+      background: _surface.background
+          .blendAlpha(_blendColor.background, _backgroundMix),
       scaffoldBackground: _surface.scaffoldBackground
-          .blendAlpha(_color.scaffoldBackground, _scaffoldMix),
+          .blendAlpha(_blendColor.scaffoldBackground, _scaffoldMix),
     );
   }
 

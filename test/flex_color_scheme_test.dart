@@ -244,17 +244,62 @@ void main() {
       onError: Colors.white,
     );
     test(
-        'FCS1.04: GIVEN a FlexColorScheme.light created object '
+        'FCS1.04a: GIVEN a FlexColorScheme.light created object '
+        'EXPECT equality when made by matching default constructor.', () {
+      expect(FlexColorScheme.light(), m1e2);
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.light().toTheme,
+        m1e2.toTheme,
+      );
+    });
+
+    test(
+        'FCS1.04b: GIVEN a FlexColorScheme.light created object with colors  '
         'EXPECT equality when made by matching default constructor.', () {
       expect(
+        FlexColorScheme.light(colors: FlexColor.material.light),
+        m1e2,
+      );
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.light(colors: FlexColor.material.light).toTheme,
+        m1e2.toTheme,
+      );
+    });
+
+    test(
+        'FCS1.04c: GIVEN a FlexColorScheme.light created object with colors '
+        'map EXPECT equality when made by matching default constructor.', () {
+      expect(
+        FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material]!.light),
+        m1e2,
+      );
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.light(
+                colors: FlexColor.schemes[FlexScheme.material]!.light)
+            .toTheme,
+        m1e2.toTheme,
+      );
+    });
+
+    test(
+        'FCS1.04d: GIVEN a FlexColorScheme.light created object with colors  '
+        'EXPECT equality when made by matching mode factory constructor.', () {
+      expect(
           FlexColorScheme.light(
-              colors: FlexColor.schemes[FlexScheme.material]!.light),
+            surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
+            blendLevel: FlexBlendLevel.none,
+          ),
           m1e2);
       // Expect toTheme from them to full-fill same condition.
       expect(
           FlexColorScheme.light(
-                  colors: FlexColor.schemes[FlexScheme.material]!.light)
-              .toTheme,
+            surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
+            blendLevel: FlexBlendLevel.none,
+          ).toTheme,
           m1e2.toTheme);
     });
 
@@ -276,20 +321,69 @@ void main() {
       onError: Colors.white,
     );
     test(
-        'FCS1.05: GIVEN a FlexColorScheme.dark created object '
+        'FCS1.05a: GIVEN a FlexColorScheme.dark created object '
+        'EXPECT equality when made by matching default constructor.', () {
+      expect(
+        FlexColorScheme.dark(),
+        m1e3,
+      );
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.dark().toTheme,
+        m1e3.toTheme,
+      );
+    });
+    test(
+        'FCS1.05b: GIVEN a FlexColorScheme.dark created object with colors '
         'EXPECT equality when made by matching default constructor.', () {
       expect(
         FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark),
+          colors: FlexColor.material.dark,
+        ),
         m1e3,
       );
       // Expect toTheme from them to full-fill same condition.
       expect(
         FlexColorScheme.dark(
-                colors: FlexColor.schemes[FlexScheme.material]!.dark)
-            .toTheme,
+          colors: FlexColor.material.dark,
+        ).toTheme,
         m1e3.toTheme,
       );
+    });
+    test(
+        'FCS1.05cb: GIVEN a FlexColorScheme.dark created object with colors '
+        'map EXPECT equality when made by matching default constructor.', () {
+      expect(
+        FlexColorScheme.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ),
+        m1e3,
+      );
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toTheme,
+        m1e3.toTheme,
+      );
+    });
+
+    test(
+        'FCS1.05d: GIVEN a FlexColorScheme.dark created object with colors  '
+        'EXPECT equality when made by matching mode factory constructor.', () {
+      expect(
+          FlexColorScheme.dark(
+            surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
+            blendLevel: FlexBlendLevel.none,
+          ),
+          m1e3);
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+          FlexColorScheme.dark(
+            surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
+            blendLevel: FlexBlendLevel.none,
+          ).toTheme,
+          m1e3.toTheme);
     });
 
     //**************************************************************************

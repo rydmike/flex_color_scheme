@@ -1224,5 +1224,622 @@ void main() {
     });
   });
 
-  // TODO(rydmike): Add test for applyElevationOverlayColor
+  //****************************************************************************
+  // FlexThemeData and FlexColorScheme.toTheme equality tests.
+  //
+  // TESTS to ensure we have matching results between
+  // FlexThemeData and FlexColorScheme.toTheme.
+  //****************************************************************************
+  group('FTD2: TEST FlexThemeData and FlexColorScheme.toTHeme equality', () {
+    test(
+        'FTD1.01: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'EXPECT equal.', () {
+      expect(FlexThemeData.light(), FlexColorScheme.light().toTheme);
+      expect(FlexThemeData.dark(), FlexColorScheme.dark().toTheme);
+    });
+    test(
+        'FTD1.02: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'EXPECT equal.', () {
+      expect(
+        FlexThemeData.light(
+          colors: FlexColor.mandyRed.light,
+        ),
+        FlexColorScheme.light(
+          colors: FlexColor.mandyRed.light,
+        ).toTheme,
+      );
+      expect(
+        FlexThemeData.dark(
+          colors: FlexColor.mandyRed.dark,
+        ),
+        FlexColorScheme.dark(
+          colors: FlexColor.mandyRed.dark,
+        ).toTheme,
+      );
+    });
+    test(
+        'FTD1.03: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'EXPECT equal.', () {
+      expect(
+        FlexThemeData.light(
+          scheme: FlexScheme.barossa,
+          usedColors: 1,
+        ),
+        FlexColorScheme.light(
+          scheme: FlexScheme.barossa,
+          usedColors: 1,
+        ).toTheme,
+      );
+      expect(
+        FlexThemeData.dark(
+          scheme: FlexScheme.barossa,
+          usedColors: 1,
+        ),
+        FlexColorScheme.dark(
+          scheme: FlexScheme.barossa,
+          usedColors: 1,
+        ).toTheme,
+      );
+    });
+    test(
+        'FTD1.04: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'EXPECT equal.', () {
+      expect(
+        FlexThemeData.light(
+          scheme: FlexScheme.bigStone,
+          surfaceStyle: FlexSurface.heavy,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          usedColors: 2,
+        ),
+        FlexColorScheme.light(
+          scheme: FlexScheme.bigStone,
+          surfaceStyle: FlexSurface.heavy,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          usedColors: 2,
+        ).toTheme,
+      );
+      expect(
+        FlexThemeData.dark(
+          scheme: FlexScheme.bigStone,
+          surfaceStyle: FlexSurface.heavy,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          usedColors: 2,
+        ),
+        FlexColorScheme.dark(
+          scheme: FlexScheme.bigStone,
+          surfaceStyle: FlexSurface.heavy,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          usedColors: 2,
+        ).toTheme,
+      );
+    });
+    test(
+        'FTD1.05: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'EXPECT equal.', () {
+      expect(
+        FlexThemeData.light(
+          colors: FlexColor.mandyRed.light,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.equalAll,
+          blendLevel: FlexBlendLevel.none,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.light.primary,
+          primaryVariant: FlexColor.indigo.light.primaryVariant,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightBackground,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+          visualDensity: VisualDensity.compact,
+          applyElevationOverlayColor: false,
+        ),
+        FlexColorScheme.light(
+          colors: FlexColor.mandyRed.light,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.equalAll,
+          blendLevel: FlexBlendLevel.none,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.light.primary,
+          primaryVariant: FlexColor.indigo.light.primaryVariant,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightBackground,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+          visualDensity: VisualDensity.compact,
+          applyElevationOverlayColor: false,
+        ).toTheme,
+      );
+      expect(
+        FlexThemeData.dark(
+          colors: FlexColor.mandyRed.dark,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.equalAll,
+          blendLevel: FlexBlendLevel.none,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.dark.primary,
+          primaryVariant: FlexColor.indigo.dark.primaryVariant,
+          secondary: FlexColor.indigo.dark.secondary,
+          secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkBackground,
+          scaffoldBackground: FlexColor.darkScaffoldBackground,
+          dialogBackground: FlexColor.darkSurface,
+          appBarBackground: FlexColor.indigo.dark.primary,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+          visualDensity: VisualDensity.compact,
+          applyElevationOverlayColor: false,
+        ),
+        FlexColorScheme.dark(
+          colors: FlexColor.mandyRed.dark,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.equalAll,
+          blendLevel: FlexBlendLevel.none,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.dark.primary,
+          primaryVariant: FlexColor.indigo.dark.primaryVariant,
+          secondary: FlexColor.indigo.dark.secondary,
+          secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkBackground,
+          scaffoldBackground: FlexColor.darkScaffoldBackground,
+          dialogBackground: FlexColor.darkSurface,
+          appBarBackground: FlexColor.indigo.dark.primary,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: false,
+          visualDensity: VisualDensity.compact,
+          applyElevationOverlayColor: false,
+        ).toTheme,
+      );
+    });
+    test(
+        'FTD1.06: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'EXPECT equal.', () {
+      expect(
+        FlexThemeData.light(
+          colors: FlexColor.mandyRed.light,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog,
+          blendLevel: FlexBlendLevel.fifteen,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.light.primary,
+          primaryVariant: FlexColor.indigo.light.primaryVariant,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightBackground,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: VisualDensity.compact,
+          applyElevationOverlayColor: true,
+          platform: defaultTargetPlatform,
+        ),
+        FlexColorScheme.light(
+          colors: FlexColor.mandyRed.light,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog,
+          blendLevel: FlexBlendLevel.fifteen,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.light.primary,
+          primaryVariant: FlexColor.indigo.light.primaryVariant,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightBackground,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: VisualDensity.compact,
+          applyElevationOverlayColor: true,
+          platform: defaultTargetPlatform,
+        ).toTheme,
+      );
+      expect(
+        FlexThemeData.dark(
+          colors: FlexColor.mandyRed.dark,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog,
+          blendLevel: FlexBlendLevel.fifteen,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.dark.primary,
+          primaryVariant: FlexColor.indigo.dark.primaryVariant,
+          secondary: FlexColor.indigo.dark.secondary,
+          secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkBackground,
+          scaffoldBackground: FlexColor.darkScaffoldBackground,
+          dialogBackground: FlexColor.darkSurface,
+          appBarBackground: FlexColor.indigo.dark.primary,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: VisualDensity.compact,
+          applyElevationOverlayColor: true,
+          platform: defaultTargetPlatform,
+        ),
+        FlexColorScheme.dark(
+          colors: FlexColor.mandyRed.dark,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog,
+          blendLevel: FlexBlendLevel.fifteen,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.dark.primary,
+          primaryVariant: FlexColor.indigo.dark.primaryVariant,
+          secondary: FlexColor.indigo.dark.secondary,
+          secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkBackground,
+          scaffoldBackground: FlexColor.darkScaffoldBackground,
+          dialogBackground: FlexColor.darkSurface,
+          appBarBackground: FlexColor.indigo.dark.primary,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: VisualDensity.compact,
+          applyElevationOverlayColor: true,
+          platform: defaultTargetPlatform,
+        ).toTheme,
+      );
+    });
+    test(
+        'FTD1.07: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'EXPECT equal.', () {
+      const TextTheme _myTextTheme = TextTheme(
+        headline1: TextStyle(
+          fontSize: 70, // Defaults to 96 in Material2018 Typography.
+        ),
+        button: TextStyle(
+          fontSize: 16, // Defaults to 14 in Material2018 Typography.
+          letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
+        ),
+        overline: TextStyle(
+          fontSize: 11, // Defaults to 10 in Material2018 Typography.
+          letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
+        ),
+      );
+      expect(
+        FlexThemeData.light(
+          colors: FlexColor.mandyRed.light,
+          scheme: FlexScheme.bigStone,
+          usedColors: 4,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+          blendLevel: FlexBlendLevel.fifteen,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.light.primary,
+          primaryVariant: FlexColor.indigo.light.primaryVariant,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightBackground,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onBackground: Colors.black,
+          onError: Colors.white,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: _myTextTheme,
+          primaryTextTheme: _myTextTheme,
+          platform: defaultTargetPlatform,
+          typography: Typography.material2018(platform: defaultTargetPlatform),
+          applyElevationOverlayColor: true,
+        ),
+        FlexColorScheme.light(
+          colors: FlexColor.mandyRed.light,
+          scheme: FlexScheme.bigStone,
+          usedColors: 4,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+          blendLevel: FlexBlendLevel.fifteen,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.light.primary,
+          primaryVariant: FlexColor.indigo.light.primaryVariant,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightBackground,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onBackground: Colors.black,
+          onError: Colors.white,
+          swapColors: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: _myTextTheme,
+          primaryTextTheme: _myTextTheme,
+          platform: defaultTargetPlatform,
+          typography: Typography.material2018(platform: defaultTargetPlatform),
+          applyElevationOverlayColor: true,
+        ).toTheme,
+      );
+      expect(
+        FlexThemeData.dark(
+          colors: FlexColor.mandyRed.dark,
+          scheme: FlexScheme.bigStone,
+          usedColors: 4,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+          blendLevel: FlexBlendLevel.fifteen,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.dark.primary,
+          primaryVariant: FlexColor.indigo.dark.primaryVariant,
+          secondary: FlexColor.indigo.dark.secondary,
+          secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkBackground,
+          scaffoldBackground: FlexColor.darkScaffoldBackground,
+          dialogBackground: FlexColor.darkSurface,
+          appBarBackground: FlexColor.indigo.dark.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.white,
+          onBackground: Colors.white,
+          onError: Colors.white,
+          swapColors: true,
+          darkIsTrueBlack: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: _myTextTheme,
+          primaryTextTheme: _myTextTheme,
+          platform: defaultTargetPlatform,
+          typography: Typography.material2018(platform: defaultTargetPlatform),
+          applyElevationOverlayColor: true,
+        ),
+        FlexColorScheme.dark(
+          colors: FlexColor.mandyRed.dark,
+          scheme: FlexScheme.bigStone,
+          usedColors: 4,
+          surfaceStyle: FlexSurface.strong,
+          surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+          blendLevel: FlexBlendLevel.fifteen,
+          appBarStyle: FlexAppBarStyle.background,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          primary: FlexColor.indigo.dark.primary,
+          primaryVariant: FlexColor.indigo.dark.primaryVariant,
+          secondary: FlexColor.indigo.dark.secondary,
+          secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkBackground,
+          scaffoldBackground: FlexColor.darkScaffoldBackground,
+          dialogBackground: FlexColor.darkSurface,
+          appBarBackground: FlexColor.indigo.dark.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.white,
+          onBackground: Colors.white,
+          onError: Colors.white,
+          swapColors: true,
+          darkIsTrueBlack: true,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: _myTextTheme,
+          primaryTextTheme: _myTextTheme,
+          platform: defaultTargetPlatform,
+          typography: Typography.material2018(platform: defaultTargetPlatform),
+          applyElevationOverlayColor: true,
+        ).toTheme,
+      );
+    });
+    test(
+        'FTD1.08: GIVEN equal FlexThemeData RAW and FlexColorScheme.toTheme '
+        'EXPECT equal.', () {
+      const TextTheme _myTextTheme = TextTheme(
+        headline1: TextStyle(
+          fontSize: 70, // Defaults to 96 in Material2018 Typography.
+        ),
+        button: TextStyle(
+          fontSize: 16, // Defaults to 14 in Material2018 Typography.
+          letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
+        ),
+        overline: TextStyle(
+          fontSize: 11, // Defaults to 10 in Material2018 Typography.
+          letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
+        ),
+      );
+      expect(
+        FlexThemeData.raw(
+          brightness: Brightness.light,
+          primary: FlexColor.indigo.light.primary,
+          primaryVariant: FlexColor.indigo.light.primaryVariant,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightBackground,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onBackground: Colors.black,
+          onError: Colors.white,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: _myTextTheme,
+          primaryTextTheme: _myTextTheme,
+          platform: defaultTargetPlatform,
+          typography: Typography.material2018(platform: defaultTargetPlatform),
+          applyElevationOverlayColor: true,
+        ),
+        FlexColorScheme(
+          brightness: Brightness.light,
+          primary: FlexColor.indigo.light.primary,
+          primaryVariant: FlexColor.indigo.light.primaryVariant,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightBackground,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onBackground: Colors.black,
+          onError: Colors.white,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: _myTextTheme,
+          primaryTextTheme: _myTextTheme,
+          platform: defaultTargetPlatform,
+          typography: Typography.material2018(platform: defaultTargetPlatform),
+          applyElevationOverlayColor: true,
+        ).toTheme,
+      );
+      expect(
+        FlexThemeData.raw(
+          brightness: Brightness.dark,
+          primary: FlexColor.indigo.dark.primary,
+          primaryVariant: FlexColor.indigo.dark.primaryVariant,
+          secondary: FlexColor.indigo.dark.secondary,
+          secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkBackground,
+          scaffoldBackground: FlexColor.darkScaffoldBackground,
+          dialogBackground: FlexColor.darkSurface,
+          appBarBackground: FlexColor.indigo.dark.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.white,
+          onBackground: Colors.white,
+          onError: Colors.white,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: _myTextTheme,
+          primaryTextTheme: _myTextTheme,
+          platform: defaultTargetPlatform,
+          typography: Typography.material2018(platform: defaultTargetPlatform),
+          applyElevationOverlayColor: true,
+        ),
+        FlexColorScheme(
+          brightness: Brightness.dark,
+          primary: FlexColor.indigo.dark.primary,
+          primaryVariant: FlexColor.indigo.dark.primaryVariant,
+          secondary: FlexColor.indigo.dark.secondary,
+          secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkBackground,
+          scaffoldBackground: FlexColor.darkScaffoldBackground,
+          dialogBackground: FlexColor.darkSurface,
+          appBarBackground: FlexColor.indigo.dark.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.white,
+          onBackground: Colors.white,
+          onError: Colors.white,
+          tabBarStyle: FlexTabBarStyle.forBackground,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          tooltipsMatchBackground: true,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: _myTextTheme,
+          primaryTextTheme: _myTextTheme,
+          platform: defaultTargetPlatform,
+          typography: Typography.material2018(platform: defaultTargetPlatform),
+          applyElevationOverlayColor: true,
+        ).toTheme,
+      );
+    });
+  });
 }

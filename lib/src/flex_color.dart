@@ -11,7 +11,10 @@ import 'flex_scheme.dart';
 class FlexColor {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
-  FlexColor._(); // coverage:ignore-line
+
+  // coverage:ignore-start
+  FlexColor._();
+  // coverage:ignore-end
 
   /// Material standard color for light surface.
   static const Color materialLightSurface = Colors.white;
