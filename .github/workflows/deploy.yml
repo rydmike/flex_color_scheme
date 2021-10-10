@@ -1,85 +1,71 @@
-# This GitHub action runs on a release, when it is published, created or edited.
+# This GitHub action runs on a release, when the GitHub repo is "published".
+# This workflow:
 #  - Installs dart and flutter
-#  - Uses flutter stable channel. Might setup a matrix later with beta and dev included too.
+#  - Uses flutter stable channel.
+#    Consider setting up a matrix later with beta and dev included too.
 #  - Enables flutter web
 #  - Gets package dependencies
-#  - Runs dart analyze, allows deprecation warnings, we on purpose allow use of deprecated features on dev channel,
-#    as they might not yet be deprecated on stable and we will keep using some of the features that are deprecated
-#    as long as they are not also deprecated on stable.
+#  - Runs dart analyze.
 #  - Show outdated packages, just added for info.
-#  - Verify that dart format is used by all committed code, fails if not. Controversial but pub.dev penalizes you if
-#    dart format is not used.
+#  - Verify that dart format is used by all committed code, fails if not.
+#    Controversial but pub.dev penalizes you if dart format is not used.
 #  - Run all tests with coverage.
 #  - Upload code coverage output to Codecov for analysis.
-#  - Install linux rpl tool. It is used to automate the needed change of a line in index.html.
-#  - Build 5 different WEB example apps using FlexColorScheme. All examples use these steps:
+#  - Install linux rpl tool, used to automate change of a line in index.html.
+#  - Build 5 different WEB example apps using FlexColorScheme.
+#    All examples use these steps:
 #    - Flutter clean.
 #    - Flutter build web app, in release mode and with CanvasKit renderer.
-#    - Use rpl to fix/modify the index.html file to give it the correct href deployment sub-folder.
+#    - Use rpl to fix/modify the index.html file to give it the correct
+#      href deployment sub-folder.
 #    - Deploy each built Web App to GitHub pages.
 name: Deploy Web
 on:
   release:
     types: [published]
-# Edit and add other trigger options if an extra new Web deployment is needed.
-# Generally I only need a new deployment when I publish a new release, but I may want to trigger it on defaults:
-# prerelease or just an edit sometimes to test the workflow or a new build irl, these trigger types can be used then:
-#    types: [published, created, edited, prereleased]
+#   types: [published, created, edited, prereleased]
 jobs:
   flutter_tests:
-    name: Analyze, test build and deploy 5 web apps
+    name: "Analyze and test package, then build and deploy 5 web apps"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install Flutter and Dart SDK
-        uses: subosito/flutter-action@v1.4.0
+        uses: subosito/flutter-action@v1.5.3
         with:
           channel: "stable"
-      - name: Show Dart SDK version
+      - name: "Show Dart SDK version"
         run: dart --version
-
-      - name: Show Flutter SDK version
+      - name: "Show Flutter SDK version"
         run: flutter --version
-
-      - name: Flutter Enable Web
+      - name: "Flutter Enable Web"
         run: flutter config --enable-web
-
-      - name: Install Flutter package dependencies
+      - name: "Install Flutter package dependencies"
         run: flutter pub get
-
-      - name: Analyze Dart source
+      - name: "Analyze Dart source"
         run: dart analyze
-
-      - name: Show outdated packges
+      - name: "Show outdated packages"
         run: flutter pub outdated
-
-      - name: Verify that Dart formatting is used, fail if not
+      - name: "Verify that Dart formatting is used, fail if not"
         run: dart format --output=none --set-exit-if-changed .
-
-      - name: Test package FlexColorScheme using test coverage
+      - name: "Test package FlexColorScheme with coverage"
         run: flutter test --coverage
-
-      - name: Upload test coverage to Codecov
+      - name: "Upload test coverage to Codecov"
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: coverage/lcov.info
-
-      - name: Install rpl
+      - name: "Install rpl"
         run: sudo apt-get install rpl
 
       # Example 1 Build and deploy
-
-      - name: EXAMPLE-1 START BUILD - Flutter clean before build
+      - name: "EXAMPLE-1 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
-
-      - name: EXAMPLE-1 WEB release build using CanvasKit
+      - name: "EXAMPLE-1 WEB release build using CanvasKit"
         run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example1/main.dart
-
-      - name: EXAMPLE-1 FIX href URL reference before publish
+      - name: "EXAMPLE-1 FIX href URL reference before publish"
         run: rpl '<base href="/">' '<base href="/flexcolorscheme1/">' example/build/web/index.html
-
-      - name: EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit.
+      - name: "EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
@@ -91,17 +77,13 @@ jobs:
           user_name: 'rydmike'
 
       # Example 2 Build and deploy
-
-      - name: EXAMPLE-2 START BUILD - Flutter clean before build
+      - name: "EXAMPLE-2 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
-
-      - name: EXAMPLE-2 WEB release build using CanvasKit
+      - name: "EXAMPLE-2 WEB release build using CanvasKit"
         run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example2/main.dart
-
-      - name: EXAMPLE-2 FIX href URL reference before publish
+      - name: "EXAMPLE-2 FIX href URL reference before publish"
         run: rpl '<base href="/">' '<base href="/flexcolorscheme2/">' example/build/web/index.html
-
-      - name: EXAMPLE-2 DEPLOY to GitHub Pages repository, published on commit.
+      - name: "EXAMPLE-2 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
@@ -113,17 +95,13 @@ jobs:
           user_name: 'rydmike'
 
       # Example 3 Build and deploy
-
-      - name: EXAMPLE-3 START BUILD - Flutter clean before build
+      - name: "EXAMPLE-3 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
-
-      - name: EXAMPLE-3 WEB release build using CanvasKit
+      - name: "EXAMPLE-3 WEB release build using CanvasKit"
         run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example3/main.dart
-
-      - name: EXAMPLE-3 FIX href URL reference before publish
+      - name: "EXAMPLE-3 FIX href URL reference before publish"
         run: rpl '<base href="/">' '<base href="/flexcolorscheme3/">' example/build/web/index.html
-
-      - name: EXAMPLE-3 DEPLOY to GitHub Pages repository, published on commit.
+      - name: "EXAMPLE-3 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
@@ -135,17 +113,13 @@ jobs:
           user_name: 'rydmike'
 
       # Example 4 Build and deploy
-
-      - name: EXAMPLE-4 START BUILD - Flutter clean before build
+      - name: "EXAMPLE-4 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
-
-      - name: EXAMPLE-4 WEB release build using CanvasKit
+      - name: "EXAMPLE-4 WEB release build using CanvasKit"
         run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example4/main.dart
-
-      - name: EXAMPLE-4 FIX href URL reference before publish
+      - name: "EXAMPLE-4 FIX href URL reference before publish"
         run: rpl '<base href="/">' '<base href="/flexcolorscheme4/">' example/build/web/index.html
-
-      - name: EXAMPLE-4 DEPLOY to GitHub Pages repository, published on commit.
+      - name: "EXAMPLE-4 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
@@ -157,17 +131,13 @@ jobs:
           user_name: 'rydmike'
 
       # Example 5 Build and deploy
-
-      - name: EXAMPLE-5 START BUILD - Flutter clean before build
+      - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
-
-      - name: EXAMPLE-5 WEB release build using CanvasKit
+      - name: "EXAMPLE-5 WEB release build using CanvasKit"
         run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example5/main.dart
-
-      - name: EXAMPLE-5 FIX href URL reference before publish
+      - name: "EXAMPLE-5 FIX href URL reference before publish"
         run: rpl '<base href="/">' '<base href="/flexcolorscheme5/">' example/build/web/index.html
-
-      - name: EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit.
+      - name: "EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}

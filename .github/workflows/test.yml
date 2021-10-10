@@ -1,49 +1,45 @@
-# This GitHub action runs on push to master, it:
+# This GitHub action is configured to run "on" push to "master".
+# Currently, using the "validate" workflow instead, this is an older test CI/CD.
+# This workflow:
 #  - Installs dart and flutter
-#  - Uses flutter stable channel. Might setup a matrix later with beta and dev included too.
+#  - Uses flutter stable channel.
+#    Consider setting up a matrix later with beta and dev included too.
+#  - Enables flutter web
 #  - Gets package dependencies
-#  - Runs dart analyze, allows deprecation warnings, we on purpose allow use of deprecated features for now.
+#  - Runs dart analyze.
 #  - Show outdated packages, just added for info.
-#  - Verify that dart format is used by all committed code, fails if not. Controversial but pub.dev penalizes you if
-#    dart format is not used.
+#  - Verify that dart format is used by all committed code, fails if not.
+#    Controversial but pub.dev penalizes you if dart format is not used.
 #  - Run all tests with coverage.
 #  - Upload code coverage output to Codecov for analysis.
 name: Test
 on:
   push:
-    branches: [master]
+    branches: [none]
 jobs:
   flutter_test:
+    name: "Analyze and test package"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Install Flutter and Dart SDK
+      - name: "Install Flutter and Dart SDK"
         uses: subosito/flutter-action@v1.5.3
         with:
           channel: "stable"
-
-      - name: Show Dart SDK version
+      - name: "Show Dart SDK version"
         run: dart --version
-
-      - name: Show Flutter SDK version
+      - name: "Show Flutter SDK version"
         run: flutter --version
-
-      - name: Install Flutter package dependencies
+      - name: "Install Flutter package dependencies"
         run: flutter pub get
-
-      - name: Analyze Dart source
+      - name: "Analyze Dart source"
         run: dart analyze
-
-      - name: Show outdated packges
+      - name: "Show outdated packages"
         run: flutter pub outdated
-
-      - name: Verify that Dart formatting is used, fail if not
+      - name: "Verify that Dart formatting is used, fail if not"
         run: dart format --output=none --set-exit-if-changed .
-
-      - name: Test package FlexColorScheme with test coverage
+      - name: "Test package FlexColorScheme with coverage"
         run: flutter test --coverage
-
       - name: Upload test coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
