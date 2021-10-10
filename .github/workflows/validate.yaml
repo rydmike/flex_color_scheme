@@ -12,7 +12,7 @@ jobs:
     name: "Analyze code style compliance"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
         with:
           fetch-depth: 0
       - name: "Install Flutter"
@@ -38,7 +38,7 @@ jobs:
     name: "Tests and coverage"
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
         with:
           fetch-depth: 0
       - name: "Install Flutter"
