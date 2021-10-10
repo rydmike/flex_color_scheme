@@ -2119,10 +2119,10 @@ class FlexSchemeData with Diagnosticable {
   ///
   /// Contains [name], [description] plus [light] and [dark] scheme colors.
   const FlexSchemeData({
-    required this.name,
-    required this.description,
-    required this.light,
-    required this.dark,
+    required final this.name,
+    required final this.description,
+    required final this.light,
+    required final this.dark,
   });
 
   /// A short name for the [FlexSchemeData] based color scheme.
@@ -2139,10 +2139,10 @@ class FlexSchemeData with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexSchemeData copyWith({
-    String? name,
-    String? description,
-    FlexSchemeColor? light,
-    FlexSchemeColor? dark,
+    final String? name,
+    final String? description,
+    final FlexSchemeColor? light,
+    final FlexSchemeColor? dark,
   }) {
     return FlexSchemeData(
       name: name ?? this.name,
@@ -2200,12 +2200,12 @@ class FlexSchemeColor with Diagnosticable {
   const FlexSchemeColor({
     // The appBarColor, accentColor and error colors are not required, if they
     // are null they will be provided by theme defaults later.
-    required this.primary,
-    required this.primaryVariant,
-    required this.secondary,
-    required this.secondaryVariant,
-    this.appBarColor,
-    this.error,
+    required final this.primary,
+    required final this.primaryVariant,
+    required final this.secondary,
+    required final this.secondaryVariant,
+    final this.appBarColor,
+    final this.error,
   });
 
   /// The color displayed most frequently across your application's screens
@@ -2391,12 +2391,12 @@ class FlexSchemeColor with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexSchemeColor copyWith({
-    Color? primary,
-    Color? primaryVariant,
-    Color? secondary,
-    Color? secondaryVariant,
-    Color? appBarColor,
-    Color? error,
+    final Color? primary,
+    final Color? primaryVariant,
+    final Color? secondary,
+    final Color? secondaryVariant,
+    final Color? appBarColor,
+    final Color? error,
   }) {
     return FlexSchemeColor(
       primary: primary ?? this.primary,

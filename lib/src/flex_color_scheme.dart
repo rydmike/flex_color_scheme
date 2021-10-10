@@ -402,34 +402,34 @@ class FlexColorScheme with Diagnosticable {
   /// styles and to make dark themes that use true black backgrounds and
   /// surfaces.
   const FlexColorScheme({
-    required this.brightness,
-    required this.primary,
-    required this.primaryVariant,
-    required this.secondary,
-    required this.secondaryVariant,
-    this.error,
-    this.surface,
-    this.background,
-    this.scaffoldBackground,
-    this.dialogBackground,
-    this.appBarBackground,
-    this.onPrimary,
-    this.onSecondary,
-    this.onSurface,
-    this.onBackground,
-    this.onError,
-    this.tabBarStyle = FlexTabBarStyle.forAppBar,
-    this.appBarElevation = 0,
-    this.bottomAppBarElevation = 0,
-    this.tooltipsMatchBackground = false,
-    this.transparentStatusBar = true,
-    this.visualDensity,
-    this.textTheme,
-    this.primaryTextTheme,
-    this.fontFamily,
-    this.platform,
-    this.typography,
-    this.applyElevationOverlayColor = true,
+    required final this.brightness,
+    required final this.primary,
+    required final this.primaryVariant,
+    required final this.secondary,
+    required final this.secondaryVariant,
+    final this.error,
+    final this.surface,
+    final this.background,
+    final this.scaffoldBackground,
+    final this.dialogBackground,
+    final this.appBarBackground,
+    final this.onPrimary,
+    final this.onSecondary,
+    final this.onSurface,
+    final this.onBackground,
+    final this.onError,
+    final this.tabBarStyle = FlexTabBarStyle.forAppBar,
+    final this.appBarElevation = 0,
+    final this.bottomAppBarElevation = 0,
+    final this.tooltipsMatchBackground = false,
+    final this.transparentStatusBar = true,
+    final this.visualDensity,
+    final this.textTheme,
+    final this.primaryTextTheme,
+    final this.fontFamily,
+    final this.platform,
+    final this.typography,
+    final this.applyElevationOverlayColor = true,
   })  : assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.'),
         assert(bottomAppBarElevation >= 0.0,
             'Bottom AppBar elevation must be >= 0.');
@@ -839,7 +839,7 @@ class FlexColorScheme with Diagnosticable {
     /// undefined. If both are specified the scheme colors defined by `colors`
     /// are used. If both are null then `scheme` defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
-    FlexSchemeColor? colors,
+    final FlexSchemeColor? colors,
 
     /// A shortcut to use one of the built-in color schemes defined by
     /// enum [FlexScheme].
@@ -851,7 +851,7 @@ class FlexColorScheme with Diagnosticable {
     /// `colors`and `scheme` are specified, the scheme defined by
     /// `colors` is used. If both are null, then `scheme` defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
-    FlexScheme? scheme,
+    final FlexScheme? scheme,
 
     /// The number of the four main scheme colors to be used of the ones
     /// passed in via the required colors [FlexSchemeColor] property.
@@ -878,7 +878,7 @@ class FlexColorScheme with Diagnosticable {
     /// effective scheme as the computed values will be the same as the
     /// [FlexSchemeColor.from] is using to compute any main missing scheme
     /// color values.
-    int usedColors = 4,
+    final int usedColors = 4,
 
     /// Blends theme colors into surfaces and backgrounds. Consider using
     /// `surfaceStyle` instead.
@@ -900,7 +900,7 @@ class FlexColorScheme with Diagnosticable {
     /// they are used instead of values that would be assigned based
     /// on used [FlexSurfaceMode] via `surfaceMode` or [FlexSurface] in
     /// this `surfaceStyle`.
-    FlexSurface surfaceStyle = FlexSurface.material,
+    final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///
@@ -931,20 +931,20 @@ class FlexColorScheme with Diagnosticable {
     /// they are used instead of values that would be assigned based
     /// on used [FlexSurfaceMode] via `surfaceMode` or [FlexSurface] in
     /// this `surfaceStyle`.
-    FlexSurfaceMode? surfaceMode,
+    final FlexSurfaceMode? surfaceMode,
 
     /// When `surfaceMode` is used, this defines the blend level strength used
     /// by the surface mode.
     ///
     /// Defaults to FlexBlendLevel.three,
-    FlexBlendLevel blendLevel = FlexBlendLevel.three,
+    final FlexBlendLevel blendLevel = FlexBlendLevel.three,
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
     /// Defaults to [FlexAppBarStyle.primary] which produces the same results
     /// as a Flutter standard light [ThemeData.from] by tying the app bar color
     /// to the primary color.
-    FlexAppBarStyle appBarStyle = FlexAppBarStyle.primary,
+    final FlexAppBarStyle appBarStyle = FlexAppBarStyle.primary,
 
     /// Select preferred themed style for the [TabBarTheme].
     ///
@@ -957,19 +957,19 @@ class FlexColorScheme with Diagnosticable {
     /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
-    FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
 
     /// The themed elevation for the app bar.
     ///
     /// Default to 0. The 0 elevation is an iOs style
     /// influenced opinionated choice, but it can easily be adjusted for the
     /// theme with this property.
-    double appBarElevation = 0,
+    final double appBarElevation = 0,
 
     /// The themed elevation for the bottom app bar.
     ///
     /// If null, defaults to the value given to the `appBarElevation` elevation.
-    double? bottomAppBarElevation,
+    final double? bottomAppBarElevation,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -985,7 +985,7 @@ class FlexColorScheme with Diagnosticable {
     /// properties `usedColors` and `swapColors` and included in their behavior.
     ///
     /// Defaults to null.
-    Color? primary,
+    final Color? primary,
 
     /// A darker version of the primary color.
     ///
@@ -1008,7 +1008,7 @@ class FlexColorScheme with Diagnosticable {
     /// properties `usedColors` and `swapColors` and included in their behavior.
     ///
     /// Defaults to null.
-    Color? primaryVariant,
+    final Color? primaryVariant,
 
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
@@ -1024,7 +1024,7 @@ class FlexColorScheme with Diagnosticable {
     /// properties `usedColors` and `swapColors` and included in their behavior.
     ///
     /// Defaults to null.
-    Color? secondary,
+    final Color? secondary,
 
     /// A darker version of the secondary color.
     ///
@@ -1045,7 +1045,7 @@ class FlexColorScheme with Diagnosticable {
     /// properties `usedColors` and `swapColors` and included in their behavior.
     ///
     /// Defaults to null.
-    Color? secondaryVariant,
+    final Color? secondaryVariant,
 
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
@@ -1060,7 +1060,7 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSurface].
     ///
     /// Defaults to null.
-    Color? surface,
+    final Color? surface,
 
     /// A color that typically appears behind scrollable content.
     ///
@@ -1074,7 +1074,7 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSurface].
     ///
     /// Defaults to null.
-    Color? background,
+    final Color? background,
 
     /// The color of the [Scaffold] background.
     ///
@@ -1086,7 +1086,7 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSurface].
     ///
     /// Defaults to null.
-    Color? scaffoldBackground,
+    final Color? scaffoldBackground,
 
     /// The background color of [Dialog] elements.
     ///
@@ -1098,7 +1098,7 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSurface].
     ///
     /// Defaults to null.
-    Color? dialogBackground,
+    final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
     ///
@@ -1107,7 +1107,7 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSchemeColor] `colors` or for this color defined when using a
     /// pre-defined color scheme based on [FlexScheme] `scheme` property and
     /// the [FlexAppBarStyle] `appBarStyle` property.
-    Color? appBarBackground,
+    final Color? appBarBackground,
 
     /// A color that is clearly legible when drawn on [primary] color.
     ///
@@ -1117,7 +1117,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [primary]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onPrimary,
+    final Color? onPrimary,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -1127,7 +1127,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [secondary]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onSecondary,
+    final Color? onSecondary,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -1137,7 +1137,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [surface]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onSurface,
+    final Color? onSurface,
 
     /// A color that is clearly legible when drawn on [background] color.
     ///
@@ -1147,7 +1147,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [background]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onBackground,
+    final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
     ///
@@ -1157,7 +1157,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [error]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onError,
+    final Color? onError,
 
     /// When true, the primary and primaryVariant colors will be swapped with
     /// their secondary counter parts.
@@ -1175,7 +1175,7 @@ class FlexColorScheme with Diagnosticable {
     /// user modifiable theme option if you like. One usage possibility is to
     /// set `swapColors` to true only for the dark modem and use your color
     /// scheme the other way around only in dark mode.
-    bool swapColors = false,
+    final bool swapColors = false,
 
     /// When `true`, tooltip background color will match the brightness of the
     /// theme's background color.
@@ -1199,7 +1199,7 @@ class FlexColorScheme with Diagnosticable {
     /// theme, it has slightly larger font for improved legibility on web and
     /// desktop with device pixel ratio 1.0 and also use a padding style also
     /// suitable for multiline tooltips.
-    bool tooltipsMatchBackground = false,
+    final bool tooltipsMatchBackground = false,
 
     /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -1212,7 +1212,7 @@ class FlexColorScheme with Diagnosticable {
     /// actually also transparent so that if the app bar is also translucent,
     /// content that scrolls behind it, is also visible behind the status
     /// bar area.
-    bool transparentStatusBar = true,
+    final bool transparentStatusBar = true,
 
     /// The density value for specifying the compactness of various UI
     /// components.
@@ -1252,18 +1252,18 @@ class FlexColorScheme with Diagnosticable {
     /// smaller value translates to a spacing decrease (more dense).
     ///
     /// Defaults to [VisualDensity.adaptivePlatformDensity].
-    VisualDensity? visualDensity,
+    final VisualDensity? visualDensity,
 
     /// Text with a color that contrasts with the card and canvas colors.
-    TextTheme? textTheme,
+    final TextTheme? textTheme,
 
     /// A text theme that contrasts with the primary color.
-    TextTheme? primaryTextTheme,
+    final TextTheme? primaryTextTheme,
 
     /// Same property as in [ThemeData] factory, it is just passed along to it.
     ///
     /// Included for convenience to avoid a copyWith if it needs to be changed.
-    String? fontFamily,
+    final String? fontFamily,
 
     /// The platform adaptive widgets should adapt to target and mechanics too.
     ///
@@ -1291,7 +1291,7 @@ class FlexColorScheme with Diagnosticable {
     /// behavior for other platforms by setting the [platform] of the [Theme]
     /// explicitly to another [TargetPlatform] value, or by setting
     /// [debugDefaultTargetPlatformOverride].
-    TargetPlatform? platform,
+    final TargetPlatform? platform,
 
     /// The color and geometry [TextTheme] values use to configure [textTheme].
     ///
@@ -1316,7 +1316,7 @@ class FlexColorScheme with Diagnosticable {
     /// recommended to create your light and dark theme data with
     /// different methods. If you use FlexColorScheme, DO use it for both the
     /// light and dark theme mode.
-    Typography? typography,
+    final Typography? typography,
 
     /// Apply a semi-transparent overlay color on Material surfaces to indicate
     /// elevation for dark themes.
@@ -1371,7 +1371,7 @@ class FlexColorScheme with Diagnosticable {
     /// lack of it might not be an issue with other modes in such themes.
     /// For more information about this limitation see Flutter SDK issue:
     /// https://github.com/flutter/flutter/issues/90353
-    bool applyElevationOverlayColor = true,
+    final bool applyElevationOverlayColor = true,
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4');
@@ -1380,24 +1380,27 @@ class FlexColorScheme with Diagnosticable {
         'Bottom AppBar elevation must be null or must be >= 0.');
 
     // If bottomAppBarElevation was null, fallback to appBarElevation.
-    bottomAppBarElevation ??= appBarElevation;
+    final double _bottomAppBarElevation =
+        bottomAppBarElevation ?? appBarElevation;
 
     // Fallback value for scheme is default material scheme.
-    scheme ??= FlexScheme.material;
+    final FlexScheme _scheme = scheme ?? FlexScheme.material;
     // If colors was null, we used the scheme based value.
-    colors ??= FlexColor.schemesWithCustom[scheme]!.light;
+    final FlexSchemeColor _colors =
+        colors ?? FlexColor.schemesWithCustom[_scheme]!.light;
     // If the passed in property values are not null, we will override colors
     // properties with them, this gets us also correct effective and swap
     // behavior on directly passed in property values.
-    colors = colors.copyWith(
+    final FlexSchemeColor _copyColors = _colors.copyWith(
       primary: primary,
       primaryVariant: primaryVariant,
       secondary: secondary,
       secondaryVariant: secondaryVariant,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
-    final FlexSchemeColor _effectiveColors =
-        FlexSchemeColor.effective(colors, usedColors, swapColors: swapColors);
+    final FlexSchemeColor _effectiveColors = FlexSchemeColor.effective(
+        _copyColors, usedColors,
+        swapColors: swapColors);
 
     // If [surfaceStyle] is [FlexSurface.custom] then the returned
     // _surfaceSchemeColors will be same as [FlexSurface.material], to get a
@@ -1505,7 +1508,7 @@ class FlexColorScheme with Diagnosticable {
       onError: _onColors.onError,
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
-      bottomAppBarElevation: bottomAppBarElevation,
+      bottomAppBarElevation: _bottomAppBarElevation,
       // This is light theme factory, so brightness is always light
       brightness: Brightness.light,
       tooltipsMatchBackground: tooltipsMatchBackground,
@@ -1560,7 +1563,7 @@ class FlexColorScheme with Diagnosticable {
     /// undefined. If both are specified the scheme colors defined by `colors`
     /// are used. If both are null then `scheme` defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
-    FlexSchemeColor? colors,
+    final FlexSchemeColor? colors,
 
     /// A shortcut to use one of the built-in color schemes defined by
     /// enum [FlexScheme].
@@ -1572,7 +1575,7 @@ class FlexColorScheme with Diagnosticable {
     /// `colors`and `scheme` are specified, the scheme defined by
     /// `colors` is used. If both are null, then `scheme` defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
-    FlexScheme? scheme,
+    final FlexScheme? scheme,
 
     /// The number of the four main scheme colors to be used of the ones
     /// passed in via the required colors [FlexSchemeColor] property.
@@ -1599,7 +1602,7 @@ class FlexColorScheme with Diagnosticable {
     /// effective scheme as the computed values will be the same as the
     /// [FlexSchemeColor.from] is using to compute any main missing scheme
     /// color values.
-    int usedColors = 4,
+    final int usedColors = 4,
 
     /// Blends theme colors into surfaces and backgrounds. Consider using
     /// `surfaceStyle` instead.
@@ -1622,7 +1625,7 @@ class FlexColorScheme with Diagnosticable {
     /// they are used instead of values that would be assigned based
     /// on used [FlexSurfaceMode] via `surfaceMode` or [FlexSurface] in
     /// this `surfaceStyle`.
-    FlexSurface surfaceStyle = FlexSurface.material,
+    final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///
@@ -1655,20 +1658,20 @@ class FlexColorScheme with Diagnosticable {
     /// they are used instead of values that would be assigned based
     /// on used [FlexSurfaceMode] via `surfaceMode` or [FlexSurface] in
     /// this `surfaceStyle`.
-    FlexSurfaceMode? surfaceMode,
+    final FlexSurfaceMode? surfaceMode,
 
     /// When `surfaceMode` is used, this defines the blend level strength used
     /// by the surface mode.
     ///
     /// Defaults to FlexBlendLevel.three,
-    FlexBlendLevel blendLevel = FlexBlendLevel.three,
+    final FlexBlendLevel blendLevel = FlexBlendLevel.three,
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
     /// Defaults to [FlexAppBarStyle.material] which produces the same results
     /// as a Flutter standard dark [ThemeData.from] by tying the app bar color
     /// to the surface color.
-    FlexAppBarStyle appBarStyle = FlexAppBarStyle.material,
+    final FlexAppBarStyle appBarStyle = FlexAppBarStyle.material,
 
     /// Select preferred themed style for the [TabBarTheme].
     ///
@@ -1681,19 +1684,19 @@ class FlexColorScheme with Diagnosticable {
     /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
-    FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
 
     /// The themed elevation for the app bar.
     ///
     /// Default to 0. The 0 elevation is an iOs style
     /// influenced opinionated choice, but it can easily be adjusted for the
     /// theme with this property.
-    double appBarElevation = 0,
+    final double appBarElevation = 0,
 
     /// The themed elevation for the bottom app bar.
     ///
     /// If null, defaults to the value given to the `appBarElevation` elevation.
-    double? bottomAppBarElevation,
+    final double? bottomAppBarElevation,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -1709,7 +1712,7 @@ class FlexColorScheme with Diagnosticable {
     /// properties `usedColors` and `swapColors` and included in their behavior.
     ///
     /// Defaults to null.
-    Color? primary,
+    final Color? primary,
 
     /// A darker version of the primary color.
     ///
@@ -1732,7 +1735,7 @@ class FlexColorScheme with Diagnosticable {
     /// properties `usedColors` and `swapColors` and included in their behavior.
     ///
     /// Defaults to null.
-    Color? primaryVariant,
+    final Color? primaryVariant,
 
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
@@ -1748,7 +1751,7 @@ class FlexColorScheme with Diagnosticable {
     /// properties `usedColors` and `swapColors` and included in their behavior.
     ///
     /// Defaults to null.
-    Color? secondary,
+    final Color? secondary,
 
     /// A darker version of the secondary color.
     ///
@@ -1769,7 +1772,7 @@ class FlexColorScheme with Diagnosticable {
     /// properties `usedColors` and `swapColors` and included in their behavior.
     ///
     /// Defaults to null.
-    Color? secondaryVariant,
+    final Color? secondaryVariant,
 
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
@@ -1786,7 +1789,7 @@ class FlexColorScheme with Diagnosticable {
     /// `darkIsTrueBlack` property.
     ///
     /// Defaults to null.
-    Color? surface,
+    final Color? surface,
 
     /// A color that typically appears behind scrollable content.
     ///
@@ -1802,7 +1805,7 @@ class FlexColorScheme with Diagnosticable {
     /// `darkIsTrueBlack` property.
     ///
     /// Defaults to null.
-    Color? background,
+    final Color? background,
 
     /// The color of the [Scaffold] background.
     ///
@@ -1816,7 +1819,7 @@ class FlexColorScheme with Diagnosticable {
     /// `darkIsTrueBlack` property.
     ///
     /// Defaults to null.
-    Color? scaffoldBackground,
+    final Color? scaffoldBackground,
 
     /// The background color of Dialog elements.
     ///
@@ -1828,7 +1831,7 @@ class FlexColorScheme with Diagnosticable {
     /// `darkIsTrueBlack` property.
     ///
     /// Defaults to null.
-    Color? dialogBackground,
+    final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
     ///
@@ -1837,7 +1840,7 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSchemeColor] `colors` or for this color defined when using a
     /// pre-defined color scheme based on [FlexScheme] `scheme` property and
     /// the [FlexAppBarStyle] `appBarStyle` property.
-    Color? appBarBackground,
+    final Color? appBarBackground,
 
     /// A color that is clearly legible when drawn on [primary] color.
     ///
@@ -1847,7 +1850,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [primary]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onPrimary,
+    final Color? onPrimary,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -1857,7 +1860,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [secondary]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onSecondary,
+    final Color? onSecondary,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -1867,7 +1870,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [surface]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onSurface,
+    final Color? onSurface,
 
     /// A color that is clearly legible when drawn on [background] color.
     ///
@@ -1877,7 +1880,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [background]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onBackground,
+    final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
     ///
@@ -1887,14 +1890,14 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [error]
     /// color, and will be be black if it is light and white if it is dark.
-    Color? onError,
+    final Color? onError,
 
     /// Makes the dark theme even darker.
     ///
     /// Scaffold background will become fully black, and other surfaces also
     /// get considerably darker and if only using low blend levels they may
     /// become fully black too.
-    bool darkIsTrueBlack = false,
+    final bool darkIsTrueBlack = false,
 
     /// When true, the primary and primaryVariant colors will be swapped with
     /// their secondary counter parts.
@@ -1912,7 +1915,7 @@ class FlexColorScheme with Diagnosticable {
     /// user modifiable theme option if you like. One usage possibility is to
     /// set `swapColors` to true only for the dark modem and use your color
     /// scheme the other way around only in dark mode.
-    bool swapColors = false,
+    final bool swapColors = false,
 
     /// When `true`, tooltip background color will match the brightness of the
     /// theme's background color.
@@ -1936,7 +1939,7 @@ class FlexColorScheme with Diagnosticable {
     /// theme, it has slightly larger font for improved legibility on web and
     /// desktop with device pixel ratio 1.0 and also use a padding style also
     /// suitable for multiline tooltips.
-    bool tooltipsMatchBackground = false,
+    final bool tooltipsMatchBackground = false,
 
     /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -1949,7 +1952,7 @@ class FlexColorScheme with Diagnosticable {
     /// actually also transparent so that if the app bar is also translucent,
     /// content that scrolls behind it, is also visible behind the status
     /// bar area.
-    bool transparentStatusBar = true,
+    final bool transparentStatusBar = true,
 
     /// The density value for specifying the compactness of various UI
     /// components.
@@ -1989,18 +1992,18 @@ class FlexColorScheme with Diagnosticable {
     /// smaller value translates to a spacing decrease (more dense).
     ///
     /// Defaults to [VisualDensity.adaptivePlatformDensity].
-    VisualDensity? visualDensity,
+    final VisualDensity? visualDensity,
 
     /// Text with a color that contrasts with the card and canvas colors.
-    TextTheme? textTheme,
+    final TextTheme? textTheme,
 
     /// A text theme that contrasts with the primary color.
-    TextTheme? primaryTextTheme,
+    final TextTheme? primaryTextTheme,
 
     /// Same property as in [ThemeData] factory, it is just passed along to it.
     ///
     /// Included for convenience to avoid a copyWith if it needs to be changed.
-    String? fontFamily,
+    final String? fontFamily,
 
     /// The platform adaptive widgets should adapt to target and mechanics too.
     ///
@@ -2028,7 +2031,7 @@ class FlexColorScheme with Diagnosticable {
     /// behavior for other platforms by setting the [platform] of the [Theme]
     /// explicitly to another [TargetPlatform] value, or by setting
     /// [debugDefaultTargetPlatformOverride].
-    TargetPlatform? platform,
+    final TargetPlatform? platform,
 
     /// The color and geometry [TextTheme] values use to configure [textTheme].
     ///
@@ -2053,7 +2056,7 @@ class FlexColorScheme with Diagnosticable {
     /// recommended to create your light and dark theme data with
     /// different methods. If you use FlexColorScheme, DO use it for both the
     /// light and dark theme mode.
-    Typography? typography,
+    final Typography? typography,
 
     /// Apply a semi-transparent overlay color on Material surfaces to indicate
     /// elevation for dark themes.
@@ -2108,7 +2111,7 @@ class FlexColorScheme with Diagnosticable {
     /// lack of it might not be an issue with other modes in such themes.
     /// For more information about this limitation see Flutter SDK issue:
     /// https://github.com/flutter/flutter/issues/90353
-    bool applyElevationOverlayColor = true,
+    final bool applyElevationOverlayColor = true,
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
@@ -2116,24 +2119,29 @@ class FlexColorScheme with Diagnosticable {
     assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
         'Bottom AppBar elevation must be null or must be >= 0.');
     // If bottomAppBarElevation is null, fallback to appBarElevation.
-    bottomAppBarElevation ??= appBarElevation;
+    final double _bottomAppBarElevation =
+        bottomAppBarElevation ?? appBarElevation;
+
     // Fallback value for scheme is default material scheme.
-    scheme ??= FlexScheme.material;
+    final FlexScheme _scheme = scheme ?? FlexScheme.material;
     // If colors was null, we used the scheme based value.
-    colors ??= FlexColor.schemesWithCustom[scheme]!.dark;
+    final FlexSchemeColor _colors =
+        colors ?? FlexColor.schemesWithCustom[_scheme]!.dark;
     // If the passed in property values are not null, we will override colors
     // properties with them, this gets us also correct effective and swap
     // behavior on directly passed in property values.
-    colors = colors.copyWith(
+    final FlexSchemeColor _copyColors = _colors.copyWith(
       primary: primary,
       primaryVariant: primaryVariant,
       secondary: secondary,
       secondaryVariant: secondaryVariant,
     );
-
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
-    final FlexSchemeColor _effectiveColors =
-        FlexSchemeColor.effective(colors, usedColors, swapColors: swapColors);
+    final FlexSchemeColor _effectiveColors = FlexSchemeColor.effective(
+      _copyColors,
+      usedColors,
+      swapColors: swapColors,
+    );
 
     // If [surfaceStyle] is [FlexSurface.custom] then the returned
     // _surfaceSchemeColors will be same as [FlexSurface.material], to get a
@@ -2285,7 +2293,7 @@ class FlexColorScheme with Diagnosticable {
       onError: _onColors.onError,
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
-      bottomAppBarElevation: bottomAppBarElevation,
+      bottomAppBarElevation: _bottomAppBarElevation,
       // This is dark theme factory, so brightness is always dark
       brightness: Brightness.dark,
       tooltipsMatchBackground: tooltipsMatchBackground,
@@ -2412,7 +2420,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// The divider on the navigation bar, is only respected on Android P
     /// (= Pie = API 28 = Android 9) or higher.
-    bool? useDivider,
+    final bool? useDivider,
 
     /// Opacity value for the system navigation bar.
     ///
@@ -2425,7 +2433,7 @@ class FlexColorScheme with Diagnosticable {
     /// works on Android API 30 (=Android 11) or higher. For more information
     /// and complete example of how it can be used, please see:
     /// https://github.com/rydmike/sysnavbar
-    double opacity = 1,
+    final double opacity = 1,
 
     /// Set this to true if you do not use a Material AppBar and want
     /// a uniform background where the status bar's icon region is.
@@ -2436,7 +2444,7 @@ class FlexColorScheme with Diagnosticable {
     /// on the AppBar theme instead. However, if you don't have an [AppBar] this
     /// is a convenient way of to remove the system icons scrim for a more
     /// clean look on Android.
-    bool noAppBar = false,
+    final bool noAppBar = false,
 
     /// Set to true to invert top status bar icons like, battery, network,
     /// wifi icons etc. in relation to their normal theme brightness related
@@ -2467,7 +2475,7 @@ class FlexColorScheme with Diagnosticable {
     /// however limited to using background white, in light mode and black in
     /// dark mode, if you want the status bar to be totally invisible and
     /// navigation bar to blend in with the background completely.
-    bool invertStatusIcons = false,
+    final bool invertStatusIcons = false,
 
     /// The [FlexSystemNavBarStyle] used to determine the background color
     /// for the system navigation bar. Used when systemNavigationBarColor
@@ -2475,7 +2483,8 @@ class FlexColorScheme with Diagnosticable {
     /// can be used for the background color.
     ///
     /// Defaults to [FlexSystemNavBarStyle.background].
-    FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.background,
+    final FlexSystemNavBarStyle systemNavBarStyle =
+        FlexSystemNavBarStyle.background,
 
     /// Background color of the system navigation bar. If null the theme of
     /// context `colorScheme.background` will be used as background color.
@@ -2490,7 +2499,7 @@ class FlexColorScheme with Diagnosticable {
     /// also null. The null context is mostly used for simple unit testing
     /// with no context, but can also be used to make a `SystemUiOverlayStyle`
     /// with this helper without having a context.
-    Color? systemNavigationBarColor,
+    final Color? systemNavigationBarColor,
 
     /// Optional color for the system navigation bar divider. A divider will
     /// only be present if `useDivider` is true and in this color if a
@@ -2502,14 +2511,14 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// The divider on the navigation bar, is only respected on Android P
     /// (= Pie = API 28 = Android 9) or higher.
-    Color? systemNavigationBarDividerColor,
+    final Color? systemNavigationBarDividerColor,
 
     /// Brightness used if context is null, mostly used for simple unit testing,
     /// with no context present. However, it can also be used to make a
     /// `SystemUiOverlayStyle` without having a context.
     ///
     /// Defaults to Brightness.light.
-    Brightness nullContextBrightness = Brightness.light,
+    final Brightness nullContextBrightness = Brightness.light,
 
     /// Deprecated property, use systemNavigationBarColor instead.
     @Deprecated('This property is deprecated use systemNavigationBarColor '
@@ -2518,19 +2527,21 @@ class FlexColorScheme with Diagnosticable {
   }) {
     // Opacity validity checks and enforcement, we ignore the parameter
     // re-assignment lint rule.
+    double _opacity = opacity;
     // ignore: parameter_assignments
-    if (opacity < 0) opacity = 0;
+    if (_opacity < 0) _opacity = 0;
     // ignore: parameter_assignments
-    if (opacity > 1) opacity = 1;
+    if (_opacity > 1) _opacity = 1;
 
     // If systemNavigationBarColor is null, we assign nullContextBackground
     // to it, that may also be null. This is done for backwards compatibility.
-    systemNavigationBarColor ??= nullContextBackground;
+    final Color? _systemNavigationBarColor =
+        systemNavigationBarColor ?? nullContextBackground;
 
     // If the systemNavBarStyle is FlexSystemNavBarStyle.transparent we will
     // override opacity to 0.01.
     if (systemNavBarStyle == FlexSystemNavBarStyle.transparent) {
-      opacity = 0.01; // ignore: parameter_assignments
+      _opacity = 0.01; // ignore: parameter_assignments
     }
     // If context was null, use nullContextBrightness as brightness value.
     final bool isDark = context != null
@@ -2553,7 +2564,7 @@ class FlexColorScheme with Diagnosticable {
 
     // If a systemNavigationBarColor color is given, it will always be used,
     // If it is not given, we use above _flexBackground.
-    final Color background = systemNavigationBarColor ?? _flexBackground;
+    final Color background = _systemNavigationBarColor ?? _flexBackground;
 
     // A divider will be applied if `useDivider` is true and it will
     // use provided `systemNavigationBarDividerColor` if a value was given
@@ -2596,16 +2607,16 @@ class FlexColorScheme with Diagnosticable {
     } else if (useDivider && systemNavigationBarDividerColor == null) {
       // We should have a divider, but have no given color, use defaults.
       dividerColor = isDark
-          ? const Color(0xFF2C2C2C).withOpacity(opacity)
-          : const Color(0xFFDDDDDD).withOpacity(opacity);
+          ? const Color(0xFF2C2C2C).withOpacity(_opacity)
+          : const Color(0xFFDDDDDD).withOpacity(_opacity);
     } else if (useDivider && systemNavigationBarDividerColor != null) {
       // We should have a divider, with a given color.
-      dividerColor = systemNavigationBarDividerColor.withOpacity(opacity);
+      dividerColor = systemNavigationBarDividerColor.withOpacity(_opacity);
     } else {
       // If this is reached, then useDivider is false and we must define its
       // color to whatever color the background is, in order to hide it as well
       // as possible.
-      dividerColor = background.withOpacity(opacity);
+      dividerColor = background.withOpacity(_opacity);
     }
     return SystemUiOverlayStyle(
       // The top status bar settings.
@@ -2621,7 +2632,7 @@ class FlexColorScheme with Diagnosticable {
               : (isDark ? Brightness.light : Brightness.dark)
           : null,
       // The bottom navigation bar settings.
-      systemNavigationBarColor: background.withOpacity(opacity),
+      systemNavigationBarColor: background.withOpacity(_opacity),
       systemNavigationBarDividerColor: dividerColor,
       systemNavigationBarIconBrightness:
           isDark ? Brightness.light : Brightness.dark,
@@ -2653,15 +2664,15 @@ class FlexColorScheme with Diagnosticable {
   /// eg `Colors.red[500]` it will not return the same swatch as `Colors.red`.
   /// This function is an approximation and gives an automated way of creating
   /// a Material like primary swatch.
-  static MaterialColor createPrimarySwatch(Color? color) {
+  static MaterialColor createPrimarySwatch(final Color? color) {
     // Null default fallback is default material primary light color.
-    color ??= FlexColor.materialLightPrimary; // ignore: parameter_assignments
+    final Color _color = color ?? FlexColor.materialLightPrimary;
     const List<double> strengths = <double> //
         [0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
     final Map<int, Color> swatch = <int, Color>{};
-    final int r = color.red;
-    final int g = color.green;
-    final int b = color.blue;
+    final int r = _color.red;
+    final int g = _color.green;
+    final int b = _color.blue;
     for (final double strength in strengths) {
       final double ds = 0.5 - strength;
       swatch[(strength * 1000).round()] = Color.fromRGBO(
@@ -2671,7 +2682,7 @@ class FlexColorScheme with Diagnosticable {
         1,
       );
     }
-    return MaterialColor(color.value, swatch);
+    return MaterialColor(_color.value, swatch);
   }
 
   //****************************************************************************
@@ -3480,6 +3491,7 @@ class FlexColorScheme with Diagnosticable {
     Color? background,
     Color? error,
     Color? scaffoldBackground,
+    Color? dialogBackground,
     Color? appBarBackground,
     Color? onPrimary,
     Color? onSecondary,
@@ -3497,6 +3509,7 @@ class FlexColorScheme with Diagnosticable {
     String? fontFamily,
     TargetPlatform? platform,
     Typography? typography,
+    bool? applyElevationOverlayColor,
   }) {
     return FlexColorScheme(
       brightness: brightness ?? this.brightness,
@@ -3509,6 +3522,7 @@ class FlexColorScheme with Diagnosticable {
       error: error ?? this.error,
       scaffoldBackground: scaffoldBackground ?? this.scaffoldBackground,
       appBarBackground: appBarBackground ?? this.appBarBackground,
+      dialogBackground: dialogBackground ?? this.dialogBackground,
       onPrimary: onPrimary ?? this.onPrimary,
       onSecondary: onSecondary ?? this.onSecondary,
       onSurface: onSurface ?? this.onSurface,
@@ -3527,6 +3541,8 @@ class FlexColorScheme with Diagnosticable {
       fontFamily: fontFamily ?? this.fontFamily,
       platform: platform ?? this.platform,
       typography: typography ?? this.typography,
+      applyElevationOverlayColor:
+          applyElevationOverlayColor ?? this.applyElevationOverlayColor,
     );
   }
 
@@ -3545,6 +3561,7 @@ class FlexColorScheme with Diagnosticable {
         other.error == error &&
         other.scaffoldBackground == scaffoldBackground &&
         other.appBarBackground == appBarBackground &&
+        other.dialogBackground == dialogBackground &&
         other.onPrimary == onPrimary &&
         other.onSecondary == onSecondary &&
         other.onSurface == onSurface &&
@@ -3560,7 +3577,8 @@ class FlexColorScheme with Diagnosticable {
         other.primaryTextTheme == primaryTextTheme &&
         other.fontFamily == fontFamily &&
         other.platform == platform &&
-        other.typography == typography;
+        other.typography == typography &&
+        other.applyElevationOverlayColor == applyElevationOverlayColor;
   }
 
   // The Jenkins list hashCode algorithm used by e.g. ThemeData in Flutter SDK.
@@ -3581,6 +3599,7 @@ class FlexColorScheme with Diagnosticable {
       error,
       scaffoldBackground,
       appBarBackground,
+      dialogBackground,
       onPrimary,
       onSecondary,
       onSurface,
@@ -3597,6 +3616,7 @@ class FlexColorScheme with Diagnosticable {
       fontFamily,
       platform,
       typography,
+      applyElevationOverlayColor,
     ];
     return hashList(values);
   }
@@ -3614,6 +3634,7 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('scaffoldBackground', scaffoldBackground));
     properties.add(ColorProperty('appBarBackground', appBarBackground));
+    properties.add(ColorProperty('dialogBackground', dialogBackground));
     properties.add(ColorProperty('onPrimary', onPrimary));
     properties.add(ColorProperty('onSecondary', onSecondary));
     properties.add(ColorProperty('onSurface', onSurface));
@@ -3635,6 +3656,8 @@ class FlexColorScheme with Diagnosticable {
     properties.add(DiagnosticsProperty<String>('fontFamily', fontFamily));
     properties.add(EnumProperty<TargetPlatform>('platform', platform));
     properties.add(DiagnosticsProperty<Typography>('typography', typography));
+    properties.add(DiagnosticsProperty<bool>(
+        'applyElevationOverlayColor', applyElevationOverlayColor));
   }
 }
 
