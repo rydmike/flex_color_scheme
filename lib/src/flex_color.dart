@@ -13,7 +13,7 @@ class FlexColor {
   // prevents instantiation and extension.
 
   // coverage:ignore-start
-  FlexColor._();
+  FlexColor._(); // coverage:ignore-line
   // coverage:ignore-end
 
   /// Material standard color for light surface.

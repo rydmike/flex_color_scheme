@@ -3048,7 +3048,7 @@ class FlexColorScheme with Diagnosticable {
           return 12;
         case TargetPlatform.iOS:
         case TargetPlatform.android:
-        case TargetPlatform.fuchsia:
+        case TargetPlatform.fuchsia: // coverage:ignore-line
           return 14;
       }
     }
@@ -3063,7 +3063,7 @@ class FlexColorScheme with Diagnosticable {
           return const EdgeInsets.fromLTRB(8, 3, 8, 4);
         case TargetPlatform.iOS:
         case TargetPlatform.android:
-        case TargetPlatform.fuchsia:
+        case TargetPlatform.fuchsia: // coverage:ignore-line
           return const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
       }
     }
