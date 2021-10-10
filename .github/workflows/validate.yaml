@@ -35,7 +35,7 @@ jobs:
           ./.github/workflows/scripts/validate-formatting.sh
   test:
     runs-on: ubuntu-latest
-    name: "Run all tests and upload coverage to Codecov"
+    name: "Tests and coverage"
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v2

@@ -79,14 +79,25 @@ class DemoApp extends StatelessWidget {
       title: 'Default Example',
       // Define the light theme for the app, based on defined colors.
       theme: FlexThemeData.light(
-        // colors: _mySchemeLight,
+        colors: _mySchemeLight,
         // Just want to use a built in scheme? Then comment colors above and
         // use scheme below to select a built-in one:
         scheme: FlexScheme.blueWhale,
+        //
+        primary: FlexColor.indigo.light.primary,
+        primaryVariant: FlexColor.indigo.light.primaryVariant,
+        secondary: FlexColor.indigo.light.secondary,
+        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+        surface: FlexColor.lightSurface,
+        background: FlexColor.lightBackground,
+        scaffoldBackground: FlexColor.lightScaffoldBackground,
+        dialogBackground: FlexColor.lightSurface,
+        appBarBackground: FlexColor.indigo.light.primary,
+        //
         surfaceStyle: FlexSurface.heavy,
         //
-        surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
-        blendLevel: FlexBlendLevel.five,
+        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        blendLevel: FlexBlendLevel.fifteen,
         //
         appBarStyle: FlexAppBarStyle.primary,
         appBarElevation: 0,
@@ -132,7 +143,7 @@ class DemoApp extends StatelessWidget {
       ),
       // Use the above dark or light theme based on active themeMode below.
       // Toggle in code here, or set to system to toggle with device.
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       home: const HomePage(),
     );
   }
