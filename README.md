@@ -1,18 +1,15 @@
 [![Pub Version](https://img.shields.io/pub/v/flex_color_scheme?label=flex_color_scheme&labelColor=333940&logo=dart)](https://pub.dev/packages/flex_color_scheme) ![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/rydmike/flex_color_scheme/Test?event=push)
-![Test](https://github.com/rydmike/flex_color_scheme/workflows/validate/badge.svg) [![codecov](https://codecov.io/gh/rydmike/flex_color_scheme/branch/master/graph/badge.svg?token=4XJU30IGO3)](https://codecov.io/gh/rydmike/flex_color_scheme) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+![Test](https://github.com/rydmike/flex_color_scheme/workflows/test/badge.svg) [![codecov](https://codecov.io/gh/rydmike/flex_color_scheme/branch/master/graph/badge.svg?token=4XJU30IGO3)](https://codecov.io/gh/rydmike/flex_color_scheme) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 # FlexColorScheme
 
-**FlexColorScheme** helps you make beautiful color scheme based Flutter themes, with optional primary
-color branded surfaces. The created themes are based on the same concept as Flutter's ColorScheme based themes,
-but with many useful and convenience features.
-
-For additional information about **FlexColorScheme**, its background and use cases, the package companion
-[**blog post and article**](https://rydmike.com/colorscheme) is recommended reading.
+Use **FlexColorScheme** to make beautiful color scheme based Flutter themes, with optional color 
+branded surfaces. The created themes are based on the same concept as Flutter's ColorScheme based 
+themes, with many additional useful and convenient features.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
 
-## Contents
+# Contents
 - [FlexColorScheme](#flexcolorscheme)
   - [Contents](#contents)
   - [Introduction](#introduction)
@@ -78,6 +75,66 @@ enable effortless switching between all the themes it uses. The included example
 the Flexfold demo app theming is done. The [tutorial chapter](#tutorial) walks through and explains
 each example in detail.
 
+For some additional information about **FlexColorScheme** and its background see this 
+[**blog**](https://rydmike.com/colorscheme).
+
+## Installing and Using
+
+In the `pubspec.yaml` of your **Flutter** project, add the following dependency:
+
+```yaml
+dependencies:
+  flex_color_scheme: ^4.0.0
+```
+
+In your library file add the following import:
+
+```dart
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+```
+
+You can now start using `FlexColorScheme` based themes in your application. The easiest way to do so is to use one
+of the 36 built-in color schemes. The schemes have enums that you can use to refer to them. Their corresponding
+data object holds name, description and separate scheme data for each schemes' light and dark mode.
+
+As a simple use case, take the **default Flutter counter app**, do the above installation and select one of the
+built-in FlexColorScheme's schemes to use with it.
+
+In this example we use **"Oh Mandy red"** scheme that is represented by enum value `FlexScheme.mandyRed`.
+
+We set `MaterialApp.themeMode` to `ThemeMode.system`, so that the device can control if the app
+uses its light or dark theme mode, based on the device theme mode system setting.
+
+Totally just one property modified, and two properties added to the default counter app, plus the package
+import of course. The modified `MaterialApp` from the Flutter default counter app is shown below.
+
+```dart
+  class MyApp extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      // The Mandy red, light theme.
+      theme: FlexColorScheme.light(scheme: FlexScheme.mandyRed).toTheme,
+      // The Mandy red, dark theme.
+      darkTheme: FlexColorScheme.dark(scheme: FlexScheme.mandyRed).toTheme,
+      // Use dark or light theme based on system setting.
+      themeMode: ThemeMode.system,
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+```
+
+The above additions gives us the following counter app look:
+
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_counter_app.png?raw=true" alt="counter sample"/>
+
+Perhaps not so exciting, that is because the basic counter app uses very few features and widgets, so it cannot really
+illustrate the result very well. This is why the included examples contain demo UI, that is not really at all relevant
+to using FlexColorScheme and is really only there to better demonstrate the results.
+
+
+
+
 ### Color Branded Backgrounds and Surfaces
 
 The Material Guide briefly mentions
@@ -118,7 +175,7 @@ ThemeData `copyWith` method, before passing it on to your application's `theme` 
 ### Built-in Color Schemes
 
 Color schemes are no fun without some built-in example schemes to use and play with.
-**FlexColorScheme** comes with **32** ready to go matching light and dark color schemes, that you can 
+**FlexColorScheme** comes with **36** ready to go matching light and dark color schemes, that you can 
 use in your applications if you like. Here is a composite image showing them all.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_all_schemes_32_at_100.png?raw=true" alt="ColorScheme all"/>
@@ -214,88 +271,7 @@ think it is a nice, unique and overall a pretty color scheme, it will very likel
 Coming up with nice color schemes is trickier than it seems, so contributions to new ones will 
 certainly be considered.
 
-## Installing and Using
 
-In the `pubspec.yaml` of your **Flutter** project, add the following dependency:
-
-```yaml
-dependencies:
-  flex_color_scheme: ^3.0.1
-```
-
-In your library file add the following import:
-
-```dart
-import 'package:flex_color_scheme/flex_color_scheme.dart';
-```
-
-You can now start using `FlexColorScheme` based themes in your application. The easiest way to do so is to use one
-of the 32 built-in color schemes. The schemes have enums that you can use to refer to them. Their corresponding
-data object holds name, description and separate scheme data for each schemes' light and dark mode.
-
-As a simple use case, take the **default Flutter counter app**, do the above installation and select one of the
-built-in FlexColorScheme's schemes to use with it.
-
-In this example we use **"Oh Mandy red"** scheme that is represented by enum value `FlexScheme.mandyRed`.
-
-We set `MaterialApp.themeMode` to `ThemeMode.system`, so that the device can control if the app
-uses its light or dark theme mode, based on the device theme mode system setting.
-
-Totally just one property modified, and two properties added to the default counter app, plus the package
-import of course. The modified `MaterialApp` from the Flutter default counter app is shown below.
-
-```dart
-  class MyApp extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      // The Mandy red, light theme.
-      theme: FlexColorScheme.light(scheme: FlexScheme.mandyRed).toTheme,
-      // The Mandy red, dark theme.
-      darkTheme: FlexColorScheme.dark(scheme: FlexScheme.mandyRed).toTheme,
-      // Use dark or light theme based on system setting.
-      themeMode: ThemeMode.system,
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-```
-
-The above additions gives us the following counter app look:
-
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_counter_app.png?raw=true" alt="counter sample"/>
-
-Perhaps not so exciting, that is because the basic counter app uses very few features and widgets, so it cannot really
-illustrate the result very well. This is why the included examples contain demo UI, that is not really at all relevant
-to using FlexColorScheme and is really only there to better demonstrate the results.
-
-
-> **NOTE:**  
-> Version 1.4.0 introduced the easier and less verbose `scheme` convenience property used above.
-> You can use it instead of `colors` if all you want to do is just use one of the built-in color schemes.
-> The previous way of
-> using `colors` with the `FlexColor.schemes` **map**, with the `FlexScheme` enum values as keys, works as before
-> too, but is not needed for this simple use case. The `colors` property is still used in the examples for custom
-> color schemes and mixing custom schemes with selected built-in ones.
->
-> For reference and comparison, with the `color` factory property, using a built-in color scheme looks like this:
->
-> ```dart
-> theme: FlexColorScheme.light(
->     colors: FlexColor.schemes[FlexScheme.mandyRed].light,
->  ).toTheme,
-> ```
-> with the `scheme` convenience property this can instead be written like this:
->
-> ```dart
-> theme: FlexColorScheme.light(scheme: FlexScheme.mandyRed).toTheme,
-> ```
-> Which is a much nicer way to access and use a predefined color scheme.
->
-> The `FlexColorScheme.light`and `FlexColorScheme.dark` factories no longer require any of their properties.
-> If both `scheme` and `colors` properties are defined, then `colors` takes precedence. If both are
-> undefined (null), then `scheme` defaults to `FlexScheme.material`, which defines the color scheme used in the
-> [Material Design Guide](https://material.io/design/color/the-color-system.html#color-theme-creation). This addition
-> does not change any possible past behavior.
 
 #### Can I use different built-in color schemes for my light and dark themes?
 
@@ -939,7 +915,7 @@ found in different well known web brands. The primary blue color in the light sc
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4al.png?raw=true" alt="ColorScheme example 4a light" width="250"/>  <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex4bl.png?raw=true" alt="ColorScheme example 4b light" width="250"/>
 
 You can use the popup menu available in the ListTile showing the current theme to change the active theme. You
-can choose any of the built-in 32 schemes, plus the three custom color schemes we added. When you change scheme, you
+can choose any of the built-in 36 schemes, plus the three custom color schemes we added. When you change scheme, you
 will notice that the active theme color changes are animated by interpolating from the active theme colors,
 to the new theme colors. This is a very nice standard feature when you modify the theme used by a Flutter
 Material applications.
@@ -1058,7 +1034,7 @@ We can use this toggle to see and study the differences that `FlexColorScheme.to
 ### Example 5 - The FlexColorScheme Properties and toTheme
 
 We define the light theme for the app, using current theme index, selected surface style and app bar style. 
-With the built-in 32 themes, and the three custom ones we made, we can use 35 different app themes via the setup below.
+With the built-in 36 themes, and the three custom ones we made, we can use 35 different app themes via the setup below.
 
 If we consider the other style, options we have to multiply that with five different surface styles and five app 
 bar variants, four times for the variations from swapping primary and secondary colors. That's a lot of styles and 

@@ -41,15 +41,6 @@ void main() {
       appBarColor: FlexColor.materialDarkSecondaryVariant,
       error: FlexColor.materialDarkError,
     );
-    // // mFull, as m1 but with accentColor not null.
-    // const FlexSchemeColor mFull = FlexSchemeColor(
-    //   primary: FlexColor.materialLightPrimary,
-    //   primaryVariant: FlexColor.materialLightPrimaryVariant,
-    //   secondary: FlexColor.materialLightSecondary,
-    //   secondaryVariant: FlexColor.materialLightSecondaryVariant,
-    //   appBarColor: FlexColor.materialLightSecondaryVariant,
-    //   error: FlexColor.materialLightError,
-    // );
     // mFrom, create from just a primary color.
     final FlexSchemeColor mFrom = FlexSchemeColor.from(
       primary: FlexColor.materialLightPrimary,

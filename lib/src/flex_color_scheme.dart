@@ -815,19 +815,20 @@ class FlexColorScheme with Diagnosticable {
   //
   //****************************************************************************
 
-  /// Creates a light [FlexColorScheme].
+  /// Creates a [FlexColorScheme] for light theme mode.
   ///
   /// The factory has no required [FlexSchemeColor] properties, but typically
   /// a [FlexScheme] `scheme` value would be provided to use a pre-defined color
   /// scheme or alternatively the [FlexSchemeColor] `colors` property would be
   /// used to define custom scheme colors. That can be created with just one
   /// color property by using the factory [FlexSchemeColor.from], more
-  /// detailed color schemes can also be defined with factory.
+  /// detailed color schemes can also be created with the factory.
   ///
   /// The factory contains a large number of other properties that can be used
   /// to create beautiful themes by just adjusting a few behavior properties.
   factory FlexColorScheme.light({
-    /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
+    //
+    /// The `FlexSchemeColor` that we will create the light `FlexColorScheme`
     /// from.
     ///
     /// You can use predefined [FlexSchemeColor] values from [FlexColor] or
@@ -842,7 +843,7 @@ class FlexColorScheme with Diagnosticable {
     final FlexSchemeColor? colors,
 
     /// A shortcut to use one of the built-in color schemes defined by
-    /// enum [FlexScheme].
+    /// enum `FlexScheme`.
     ///
     /// Just give it one of the enum values to use the scheme, like eg.
     /// [FlexScheme.mandyRed].
@@ -858,13 +859,13 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// This is a convenience property that allows you to vary which colors to
     /// use of the primary, secondary and variant colors included in `colors` in
-    /// [FlexSchemeColor]. The integer number corresponds to using:
+    /// `FlexSchemeColor` The integer number corresponds to using:
     /// 1 = Only the primary color
     /// 2 = Primary + Secondary colors
     /// 3 = Primary + Primary variant + Secondary colors
     /// 4 = Primary + Primary variant + Secondary + Secondary variant colors
     /// By default the value is 4 and all main scheme colors in
-    /// [FlexSchemeColor] are used.
+    /// `FlexSchemeColor` are used.
     ///
     /// When the value is 1, the result is the same as if we would have
     /// created the colors with [FlexSchemeColor.from] by only giving it the
@@ -936,7 +937,7 @@ class FlexColorScheme with Diagnosticable {
     /// When `surfaceMode` is used, this defines the blend level strength used
     /// by the surface mode.
     ///
-    /// Defaults to FlexBlendLevel.three,
+    /// Defaults to `FlexBlendLevel.three`.
     final FlexBlendLevel blendLevel = FlexBlendLevel.three,
 
     /// Style used to define the themed color of the [AppBar] background color.
@@ -946,9 +947,9 @@ class FlexColorScheme with Diagnosticable {
     /// to the primary color.
     final FlexAppBarStyle appBarStyle = FlexAppBarStyle.primary,
 
-    /// Select preferred themed style for the [TabBarTheme].
+    /// Select preferred themed style for the `TabBarTheme`
     ///
-    /// By default the [TabBarTheme] is made to fit with the style of the
+    /// By default the `TabBarTheme` is made to fit with the style of the
     /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
@@ -1462,11 +1463,8 @@ class FlexColorScheme with Diagnosticable {
             _effectiveColors.appBarColor ?? _effectiveColors.primary;
         break;
     }
-
-    // Return a LIGHT FlexColorScheme based on above values, we use
-    // fallbacks in the constructor too, they are required for the custom
-    // settings if some provided values were null.
     return FlexColorScheme(
+      brightness: Brightness.light,
       // Primary color for the application
       primary: _effectiveColors.primary,
       // The primary variant should generally be a bit darker color than
@@ -1485,7 +1483,7 @@ class FlexColorScheme with Diagnosticable {
       secondaryVariant: _effectiveColors.secondaryVariant,
       // Surface is used e.g. by Card and bottom appbar.
       surface: surface ?? _surfaceSchemeColors.surface,
-      // Background is used e.g. by drawer and bottom bar.
+      // Background is used e.g. by drawer and bottom nav bar.
       background: background ?? _surfaceSchemeColors.background,
       // Color of the scaffold background.
       scaffoldBackground:
@@ -1499,8 +1497,6 @@ class FlexColorScheme with Diagnosticable {
       appBarBackground: appBarBackground ?? _effectiveAppBarColor,
       // Effective error color and null fallback.
       error: _effectiveColors.error ?? FlexColor.materialLightError,
-      // The "on" colors will get defaults later by [toTheme] getter if they do
-      // not have values here, so we do not need to check them here.
       onPrimary: _onColors.onPrimary,
       onSecondary: _onColors.onSecondary,
       onSurface: _onColors.onSurface,
@@ -1509,18 +1505,8 @@ class FlexColorScheme with Diagnosticable {
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: _bottomAppBarElevation,
-      // This is light theme factory, so brightness is always light
-      brightness: Brightness.light,
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
-      // Visual density, primaryTextTheme, fontFamily, platform, typography and
-      // applyElevationOverlayColor values are just
-      // passed along as given to FlexColorScheme and from there to
-      // the [toTheme] method factory.
-      // They are a convenience inclusion here to avoid an extra Theme
-      // copyWith after making a Theme with [FlexColorScheme.toTheme].
-      // The textTheme property actually get built the same way as in ThemeData
-      // and passed in as pre-defined to ThemeData().
       visualDensity: visualDensity,
       textTheme: textTheme,
       primaryTextTheme: primaryTextTheme,
@@ -1539,18 +1525,19 @@ class FlexColorScheme with Diagnosticable {
   //
   //****************************************************************************
 
-  /// Creates a dark [FlexColorScheme].
+  /// Creates a [FlexColorScheme] for dark theme mode.
   ///
   /// The factory has no required [FlexSchemeColor] properties, but typically
   /// a [FlexScheme] `scheme` value would be provided to use a pre-defined color
   /// scheme or alternatively the [FlexSchemeColor] `colors` property would be
   /// used to define custom scheme colors. That can be created with just one
   /// color property by using the factory [FlexSchemeColor.from], more
-  /// detailed color schemes can also be defined with factory.
+  /// detailed color schemes can also be crated with the factory.
   ///
   /// The factory contains a large number of other properties that can be used
   /// to create beautiful themes by just adjusting a few behavior properties.
   factory FlexColorScheme.dark({
+    //
     /// The [FlexSchemeColor] that we will create the dark [FlexColorScheme]
     /// from.
     ///
@@ -2245,12 +2232,9 @@ class FlexColorScheme with Diagnosticable {
                 : FlexColor.materialDarkSurface);
         break;
     }
-
-    // Return a DARK FlexColorScheme based on above values, we use
-    // fallbacks in the constructor too, they are required for the custom
-    // settings if some provided values were null.
     return FlexColorScheme(
-      // Primary color for the application
+      brightness: Brightness.dark,
+      // Primary color for the application.
       primary: _effectiveColors.primary,
       // The primary variant should generally be a bit darker color than
       // primary, preferably of a color like it or darker hue of primary.
@@ -2284,8 +2268,6 @@ class FlexColorScheme with Diagnosticable {
       appBarBackground: appBarBackground ?? _effectiveAppBarColor,
       // Effective error color and null fallback.
       error: _effectiveColors.error ?? FlexColor.materialDarkError,
-      // The "on" colors will get defaults later by [toTheme] getter if they do
-      // not have values here, so we do not need to check them here.
       onPrimary: _onColors.onPrimary,
       onSecondary: _onColors.onSecondary,
       onSurface: _onColors.onSurface,
@@ -2294,18 +2276,8 @@ class FlexColorScheme with Diagnosticable {
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: _bottomAppBarElevation,
-      // This is dark theme factory, so brightness is always dark
-      brightness: Brightness.dark,
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
-      // Visual density, primaryTextTheme, fontFamily, platform, typography and
-      // applyElevationOverlayColor values are just
-      // passed along as given to FlexColorScheme and from there to
-      // the [toTheme] method factory.
-      // They are a convenience inclusion here to avoid an extra Theme
-      // copyWith after making a Theme with [FlexColorScheme.toTheme].
-      // The textTheme property actually get built the same way as in ThemeData
-      // and passed in as pre-defined to ThemeData().
       visualDensity: visualDensity,
       textTheme: textTheme,
       primaryTextTheme: primaryTextTheme,

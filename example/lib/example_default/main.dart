@@ -83,7 +83,6 @@ class DemoApp extends StatelessWidget {
         // use scheme below to select a built-in one:
         // scheme: FlexScheme.hippieBlue,
         surfaceStyle: FlexSurface.medium,
-        // TODO(rydmike): Get these to work
         surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
         blendLevel: FlexBlendLevel.none,
         //

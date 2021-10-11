@@ -1,9 +1,8 @@
-name: validate
+name: Validate
 on:
   pull_request:
   push:
-    branches:
-      - master
+    branches: [none]
     paths-ignore:
       - "**.md"
 jobs:
