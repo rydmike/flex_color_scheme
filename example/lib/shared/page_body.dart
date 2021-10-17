@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-// A wrapper for a page body.
+/// A centered width constrained web page body.
+//
+// This type of layout is often used on web pages.
 //
 // It provides the following features to the content of the page:
 // - Adds a scrollbar
@@ -11,7 +13,7 @@ class PageBody extends StatelessWidget {
   const PageBody({
     Key? key,
     this.controller,
-    this.constraints = const BoxConstraints(maxWidth: 900),
+    this.constraints = const BoxConstraints(maxWidth: 1000),
     this.padding = EdgeInsets.zero,
     required this.child,
   }) : super(key: key);

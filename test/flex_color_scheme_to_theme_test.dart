@@ -35,50 +35,54 @@ void main() {
         'FCS7.00DefL: GIVEN FlexColorScheme.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
-          FlexColorScheme.light().toTheme,
-          equals(FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ).toTheme));
+        FlexColorScheme.light().toTheme,
+        equals(FlexColorScheme.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toTheme),
+      );
     });
     test(
         'FCS7.00aL: GIVEN two FlexColorScheme.light made with identical '
         'parameters EXPECT their ThemeData to be equal.', () {
       expect(
-          FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ).toTheme,
-          equals(FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ).toTheme));
+        FlexColorScheme.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toTheme,
+        equals(FlexColorScheme.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toTheme),
+      );
     });
     test(
         'FCS7.00bL: GIVEN a FlexColorScheme.light made with no '
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
-      expect(FlexColorScheme.light().toTheme,
-          FlexColorScheme.light(scheme: FlexScheme.material).toTheme);
+      expect(
+        FlexColorScheme.light().toTheme,
+        equals(FlexColorScheme.light(scheme: FlexScheme.material).toTheme),
+      );
     });
     test(
         'FCS7.00cL: GIVEN a FlexColorScheme.light made with colors '
         'material EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(
-          FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ).toTheme,
-          FlexColorScheme.light(
-            scheme: FlexScheme.material,
-          ).toTheme);
+        FlexColorScheme.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toTheme,
+        equals(FlexColorScheme.light(scheme: FlexScheme.material).toTheme),
+      );
     });
     test(
         'FCS7.00dL: GIVEN a FlexColorScheme.light made with scheme '
         'material EXPECT ThemeData to be equal to one made with '
         'no params.', () {
       expect(
-          FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ).toTheme,
-          FlexColorScheme.light().toTheme);
+        FlexColorScheme.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toTheme,
+        equals(FlexColorScheme.light().toTheme),
+      );
     });
 
     test(
@@ -102,16 +106,17 @@ void main() {
         'FCS7.00SwapL: GIVEN FlexColorScheme.light(swapColors: true) EXPECT it '
         'to be equal to one made with light scheme colors swapped ', () {
       expect(
-          FlexColorScheme.light(
-            swapColors: true,
-          ).toTheme,
-          equals(const FlexColorScheme(
-            brightness: Brightness.light,
-            primary: FlexColor.materialLightSecondary,
-            primaryVariant: FlexColor.materialLightSecondaryVariant,
-            secondary: FlexColor.materialLightPrimary,
-            secondaryVariant: FlexColor.materialLightPrimaryVariant,
-          ).toTheme));
+        FlexColorScheme.light(
+          swapColors: true,
+        ).toTheme,
+        equals(const FlexColorScheme(
+          brightness: Brightness.light,
+          primary: FlexColor.materialLightSecondary,
+          primaryVariant: FlexColor.materialLightSecondaryVariant,
+          secondary: FlexColor.materialLightPrimary,
+          secondaryVariant: FlexColor.materialLightPrimaryVariant,
+        ).toTheme),
+      );
     });
 
     // themeDark = Default material dark scheme colors.
@@ -119,37 +124,40 @@ void main() {
         'FCS7.00SwapD: GIVEN FlexColorScheme.dark(swapColors: true) EXPECT it '
         'to be equal to one made with dark scheme colors swapped ', () {
       expect(
-          FlexColorScheme.dark(
-            swapColors: true,
-          ).toTheme,
-          equals(const FlexColorScheme(
-            brightness: Brightness.dark,
-            primary: FlexColor.materialDarkSecondary,
-            primaryVariant: FlexColor.materialDarkSecondaryVariant,
-            secondary: FlexColor.materialDarkPrimary,
-            secondaryVariant: FlexColor.materialDarkPrimaryVariant,
-          ).toTheme));
+        FlexColorScheme.dark(
+          swapColors: true,
+        ).toTheme,
+        equals(const FlexColorScheme(
+          brightness: Brightness.dark,
+          primary: FlexColor.materialDarkSecondary,
+          primaryVariant: FlexColor.materialDarkSecondaryVariant,
+          secondary: FlexColor.materialDarkPrimary,
+          secondaryVariant: FlexColor.materialDarkPrimaryVariant,
+        ).toTheme),
+      );
     });
 
     test(
         'FCS7.00DefL: GIVEN FlexColorScheme.dark made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
-          FlexColorScheme.dark().toTheme,
-          equals(FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          ).toTheme));
+        FlexColorScheme.dark().toTheme,
+        equals(FlexColorScheme.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toTheme),
+      );
     });
     test(
         'FCS7.00aD: GIVEN two FlexColorScheme.dark made with identical '
         'parameters EXPECT their ThemeData to be equal.', () {
       expect(
-          FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          ).toTheme,
-          FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          ).toTheme);
+        FlexColorScheme.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toTheme,
+        equals(FlexColorScheme.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toTheme),
+      );
     });
     test(
         'FCS7.00bD: GIVEN a FlexColorScheme.dark made with no '
@@ -163,22 +171,24 @@ void main() {
         'material EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(
-          FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          ).toTheme,
-          FlexColorScheme.dark(
-            scheme: FlexScheme.material,
-          ).toTheme);
+        FlexColorScheme.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toTheme,
+        equals(FlexColorScheme.dark(
+          scheme: FlexScheme.material,
+        ).toTheme),
+      );
     });
     test(
         'FCS7.00dD: GIVEN a FlexColorScheme.dark made with scheme '
         'material EXPECT ThemeData to be equal to one made with '
         'no params.', () {
       expect(
-          FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          ).toTheme,
-          FlexColorScheme.dark().toTheme);
+        FlexColorScheme.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toTheme,
+        equals(FlexColorScheme.dark().toTheme),
+      );
     });
 
     test(
@@ -186,20 +196,21 @@ void main() {
         'constructor + light and '
         'material EXPECT ThemeData to be equal to an identical one.', () {
       expect(
-          const FlexColorScheme(
-            brightness: Brightness.light,
-            primary: FlexColor.materialLightPrimary,
-            primaryVariant: FlexColor.materialLightPrimaryVariant,
-            secondary: FlexColor.materialLightSecondary,
-            secondaryVariant: FlexColor.materialLightSecondaryVariant,
-          ).toTheme,
-          equals(const FlexColorScheme(
-            brightness: Brightness.light,
-            primary: FlexColor.materialLightPrimary,
-            primaryVariant: FlexColor.materialLightPrimaryVariant,
-            secondary: FlexColor.materialLightSecondary,
-            secondaryVariant: FlexColor.materialLightSecondaryVariant,
-          ).toTheme));
+        const FlexColorScheme(
+          brightness: Brightness.light,
+          primary: FlexColor.materialLightPrimary,
+          primaryVariant: FlexColor.materialLightPrimaryVariant,
+          secondary: FlexColor.materialLightSecondary,
+          secondaryVariant: FlexColor.materialLightSecondaryVariant,
+        ).toTheme,
+        equals(const FlexColorScheme(
+          brightness: Brightness.light,
+          primary: FlexColor.materialLightPrimary,
+          primaryVariant: FlexColor.materialLightPrimaryVariant,
+          secondary: FlexColor.materialLightSecondary,
+          secondaryVariant: FlexColor.materialLightSecondaryVariant,
+        ).toTheme),
+      );
     });
 
     test(
@@ -207,20 +218,21 @@ void main() {
         'constructor + dark and '
         'material EXPECT ThemeData to be equal to an identical one.', () {
       expect(
-          const FlexColorScheme(
-            brightness: Brightness.dark,
-            primary: FlexColor.materialDarkPrimary,
-            primaryVariant: FlexColor.materialDarkPrimaryVariant,
-            secondary: FlexColor.materialDarkSecondary,
-            secondaryVariant: FlexColor.materialDarkSecondaryVariant,
-          ).toTheme,
-          const FlexColorScheme(
-            brightness: Brightness.dark,
-            primary: FlexColor.materialDarkPrimary,
-            primaryVariant: FlexColor.materialDarkPrimaryVariant,
-            secondary: FlexColor.materialDarkSecondary,
-            secondaryVariant: FlexColor.materialDarkSecondaryVariant,
-          ).toTheme);
+        const FlexColorScheme(
+          brightness: Brightness.dark,
+          primary: FlexColor.materialDarkPrimary,
+          primaryVariant: FlexColor.materialDarkPrimaryVariant,
+          secondary: FlexColor.materialDarkSecondary,
+          secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+        ).toTheme,
+        equals(const FlexColorScheme(
+          brightness: Brightness.dark,
+          primary: FlexColor.materialDarkPrimary,
+          primaryVariant: FlexColor.materialDarkPrimaryVariant,
+          secondary: FlexColor.materialDarkSecondary,
+          secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+        ).toTheme),
+      );
     });
 
     // themeLight = Default material light scheme colors.
@@ -255,12 +267,20 @@ void main() {
     test(
         'FCS7.01: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT .colorScheme equality with ColorScheme.light().', () {
-      expect(themeLight.colorScheme, const ColorScheme.light());
+      expect(
+        themeLight.colorScheme,
+        equals(const ColorScheme.light()),
+      );
     });
     test(
         'FCS7.02: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT .colorScheme equality with ColorScheme.dark().', () {
-      expect(themeDark.colorScheme, const ColorScheme.dark());
+      expect(
+        themeDark.colorScheme,
+        equals(
+          const ColorScheme.dark(),
+        ),
+      );
     });
 
     //**************************************************************************
@@ -277,19 +297,26 @@ void main() {
         'FCS7.04: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT appbar theme color to be surface color.', () {
       expect(
-          themeDark.appBarTheme.backgroundColor, themeDark.colorScheme.surface);
+        themeDark.appBarTheme.backgroundColor,
+        equals(themeDark.colorScheme.surface),
+      );
     });
 
     test(
         'FCS7.05: GIVEN a FlexColorScheme theme with null VisualDensity input '
         'EXPECT VisualDensity().', () {
-      expect(themeLight.visualDensity, VisualDensity.standard);
+      expect(
+        themeLight.visualDensity,
+        equals(VisualDensity.standard),
+      );
     });
     test(
         'FCS7.06: GIVEN a FlexColorScheme theme with null Typography input '
         'EXPECT Typography.material2018.', () {
-      expect(themeLight.typography,
-          Typography.material2018(platform: defaultTargetPlatform));
+      expect(
+        themeLight.typography,
+        equals(Typography.material2018(platform: defaultTargetPlatform)),
+      );
     });
 
     //**************************************************************************
@@ -303,7 +330,7 @@ void main() {
         'colorScheme.secondary.', () {
       expect(
         themeLight.toggleableActiveColor,
-        themeLight.colorScheme.secondary,
+        equals(themeLight.colorScheme.secondary),
       );
     });
     test(
@@ -312,7 +339,7 @@ void main() {
         'colorScheme.secondary.', () {
       expect(
         themeDark.toggleableActiveColor,
-        themeDark.colorScheme.secondary,
+        equals(themeDark.colorScheme.secondary),
       );
     });
     final MaterialColor lightSwatch =
@@ -326,7 +353,7 @@ void main() {
         'createPrimarySwatch(primaryColor)[800].', () {
       expect(
         themeLight.primaryColorDark,
-        lightSwatch[800],
+        equals(lightSwatch[800]),
       );
     });
     test(
@@ -335,7 +362,7 @@ void main() {
         'createPrimarySwatch(primaryColor)[700].', () {
       expect(
         themeDark.primaryColorDark,
-        darkSwatch[700],
+        equals(darkSwatch[700]),
       );
     });
 
@@ -345,7 +372,7 @@ void main() {
         'createPrimarySwatch(primaryColor)[100].', () {
       expect(
         themeLight.primaryColorLight,
-        lightSwatch[100],
+        equals(lightSwatch[100]),
       );
     });
     test(
@@ -354,7 +381,7 @@ void main() {
         'createPrimarySwatch(primaryColor)[100].', () {
       expect(
         themeDark.primaryColorLight,
-        darkSwatch[100],
+        equals(darkSwatch[100]),
       );
     });
 
@@ -364,7 +391,7 @@ void main() {
         'createPrimarySwatch(primaryColor)[50].', () {
       expect(
         themeLight.secondaryHeaderColor,
-        lightSwatch[50],
+        equals(lightSwatch[50]),
       );
     });
     test(
@@ -373,7 +400,7 @@ void main() {
         'createPrimarySwatch(primaryColor)[50].', () {
       expect(
         themeDark.secondaryHeaderColor,
-        darkSwatch[50],
+        equals(darkSwatch[50]),
       );
     });
 
@@ -401,100 +428,117 @@ void main() {
         'FCS7.16: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.surface EXPECT appbar theme color '
         'colorScheme.surface.', () {
-      expect(tLightL.appBarTheme.backgroundColor, tLightL.colorScheme.surface);
+      expect(
+        tLightL.appBarTheme.backgroundColor,
+        equals(tLightL.colorScheme.surface),
+      );
     });
     test(
         'FCS7.17: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.surface EXPECT appbar theme color '
         'colorScheme.surface.', () {
-      expect(tDarkL.appBarTheme.backgroundColor, tDarkL.colorScheme.surface);
+      expect(
+        tDarkL.appBarTheme.backgroundColor,
+        equals(tDarkL.colorScheme.surface),
+      );
     });
 
     test(
         'FCS7.18: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH appBarElevation: default EXPECT appbar theme elevation 0.', () {
-      expect(tLightL.appBarTheme.elevation, 0);
+      expect(tLightL.appBarTheme.elevation, equals(0));
     });
     test(
         'FCS7.19: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH appBarElevation: default EXPECT appbar theme elevation 0.', () {
-      expect(tDarkL.appBarTheme.elevation, 0);
+      expect(tDarkL.appBarTheme.elevation, equals(0));
     });
 
     test(
         'FCS7.2: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.light EXPECT surface Color(0xffffffff).', () {
-      expect(tLightL.colorScheme.surface, const Color(0xffffffff));
+      expect(tLightL.colorScheme.surface, equals(const Color(0xffffffff)));
     });
     test(
         'FCS7.21: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.light EXPECT surface Color(0xff141315).', () {
-      expect(tDarkL.colorScheme.surface, const Color(0xff141315));
+      expect(tDarkL.colorScheme.surface, equals(const Color(0xff141315)));
     });
 
     test(
         'FCS7.22: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.light EXPECT background Color(0xfff9f8fc).', () {
-      expect(tLightL.colorScheme.background, const Color(0xfff9f8fc));
+      expect(tLightL.colorScheme.background, equals(const Color(0xfff9f8fc)));
     });
     test(
         'FCS7.23: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.light EXPECT background Color(0xff18151b).', () {
-      expect(tDarkL.colorScheme.background, const Color(0xff18151b));
+      expect(tDarkL.colorScheme.background, equals(const Color(0xff18151b)));
     });
 
     test(
         'FCS7.24: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.light EXPECT scaffold '
         'background Color(0xffffffff).', () {
-      expect(tLightL.scaffoldBackgroundColor, const Color(0xffffffff));
+      expect(tLightL.scaffoldBackgroundColor, equals(const Color(0xffffffff)));
     });
     test(
         'FCS7.25: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.light EXPECT scaffold '
         'background Color(0xff121212).', () {
-      expect(tDarkL.scaffoldBackgroundColor, const Color(0xff121212));
+      expect(tDarkL.scaffoldBackgroundColor, equals(const Color(0xff121212)));
     });
 
     test(
         'FCS7.26: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color primary.', () {
-      expect(tLightL.indicatorColor, tLightL.colorScheme.primary);
+      expect(tLightL.indicatorColor, equals(tLightL.colorScheme.primary));
     });
     test(
         'FCS7.27: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color primary.', () {
-      expect(tDarkL.indicatorColor, tDarkL.colorScheme.primary);
+      expect(tDarkL.indicatorColor, equals(tDarkL.colorScheme.primary));
     });
 
     test(
         'FCS7.28: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.labelColor primary.', () {
-      expect(tLightL.tabBarTheme.labelColor, tLightL.colorScheme.primary);
+      expect(
+        tLightL.tabBarTheme.labelColor,
+        equals(tLightL.colorScheme.primary),
+      );
     });
     test(
         'FCS7.296: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.labelColor primary.', () {
-      expect(tDarkL.tabBarTheme.labelColor, tDarkL.colorScheme.primary);
+      expect(
+        tDarkL.tabBarTheme.labelColor,
+        equals(tDarkL.colorScheme.primary),
+      );
     });
 
     test(
         'FCS7.30: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).', () {
-      expect(tLightL.tabBarTheme.unselectedLabelColor,
-          tLightL.colorScheme.onSurface.withOpacity(0.6));
+      expect(
+          tLightL.tabBarTheme.unselectedLabelColor,
+          equals(
+            tLightL.colorScheme.onSurface.withOpacity(0.6),
+          ));
     });
     test(
         'FCS7.31: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6)', () {
-      expect(tDarkL.tabBarTheme.unselectedLabelColor,
-          tDarkL.colorScheme.onSurface.withOpacity(0.6));
+      expect(
+        tDarkL.tabBarTheme.unselectedLabelColor,
+        equals(tDarkL.colorScheme.onSurface.withOpacity(0.6)),
+      );
     });
 
     //**************************************************************************
@@ -526,100 +570,109 @@ void main() {
         'WITH FlexAppBarStyle.material EXPECT appbar theme color '
         'FlexColor.materialLightSurface.', () {
       expect(
-          tLightM.appBarTheme.backgroundColor, FlexColor.materialLightSurface);
+        tLightM.appBarTheme.backgroundColor,
+        equals(FlexColor.materialLightSurface),
+      );
     });
     test(
         'FCS7.33: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.primary EXPECT appbar theme color '
         'colorScheme.primary.', () {
-      expect(tDarkM.appBarTheme.backgroundColor, tDarkM.colorScheme.primary);
+      expect(
+        tDarkM.appBarTheme.backgroundColor,
+        equals(tDarkM.colorScheme.primary),
+      );
     });
 
     test(
         'FCS7.34: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH appBarElevation: 1 EXPECT appbar theme elevation 1.', () {
-      expect(tLightM.appBarTheme.elevation, 1);
+      expect(tLightM.appBarTheme.elevation, equals(1));
     });
     test(
         'FCS7.35: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH appBarElevation: 3 EXPECT appbar theme elevation 3.', () {
-      expect(tDarkM.appBarTheme.elevation, 3);
+      expect(tDarkM.appBarTheme.elevation, equals(3));
     });
 
     test(
         'FCS7.36: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.medium EXPECT surface Color(0xfffdfdfe).', () {
-      expect(tLightM.colorScheme.surface, const Color(0xfffdfdfe));
+      expect(tLightM.colorScheme.surface, equals(const Color(0xfffdfdfe)));
     });
     test(
         'FCS7.37: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.medium EXPECT surface Color(0xff17151a).', () {
-      expect(tDarkM.colorScheme.surface, const Color(0xff17151a));
+      expect(tDarkM.colorScheme.surface, equals(const Color(0xff17151a)));
     });
 
     test(
         'FCS7.38: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.medium EXPECT background Color(0xfff6f3fc).', () {
-      expect(tLightM.colorScheme.background, const Color(0xfff6f3fc));
+      expect(tLightM.colorScheme.background, equals(const Color(0xfff6f3fc)));
     });
     test(
         'FCS7.24: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.medium EXPECT background Color(0xff1d1922).', () {
-      expect(tDarkM.colorScheme.background, const Color(0xff1d1922));
+      expect(tDarkM.colorScheme.background, equals(const Color(0xff1d1922)));
     });
 
     test(
         'FCS7.39: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.medium EXPECT scaffold '
         'background Color(0xffffffff).', () {
-      expect(tLightM.scaffoldBackgroundColor, const Color(0xffffffff));
+      expect(tLightM.scaffoldBackgroundColor, equals(const Color(0xffffffff)));
     });
     test(
         'FCS7.40: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.medium EXPECT scaffold '
         'background Color(0xff121212).', () {
-      expect(tDarkM.scaffoldBackgroundColor, const Color(0xff121212));
+      expect(tDarkM.scaffoldBackgroundColor, equals(const Color(0xff121212)));
     });
 
     test(
         'FCS7.41: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color black87.', () {
-      expect(tLightM.indicatorColor, Colors.black87);
+      expect(tLightM.indicatorColor, equals(Colors.black87));
     });
     test(
         'FCS7.42: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color black87.', () {
-      expect(tDarkM.indicatorColor, Colors.black87);
+      expect(tDarkM.indicatorColor, equals(Colors.black87));
     });
 
     test(
         'FCS7.43: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.labelColor black87.', () {
-      expect(tLightM.tabBarTheme.labelColor, Colors.black87);
+      expect(tLightM.tabBarTheme.labelColor, equals(Colors.black87));
     });
     test(
         'FCS7.44: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.labelColor black87.', () {
-      expect(tDarkM.tabBarTheme.labelColor, Colors.black87);
+      expect(tDarkM.tabBarTheme.labelColor, equals(Colors.black87));
     });
 
     test(
         'FCS7.45: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).', () {
-      expect(tLightM.tabBarTheme.unselectedLabelColor,
-          tLightM.colorScheme.onSurface.withOpacity(0.6));
+      expect(
+        tLightM.tabBarTheme.unselectedLabelColor,
+        equals(tLightM.colorScheme.onSurface.withOpacity(0.6)),
+      );
     });
     test(
         'FCS7.46: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.unselectedLabelColor black87.withOpacity(0.7)', () {
-      expect(tDarkM.tabBarTheme.unselectedLabelColor,
-          Colors.black87.withOpacity(0.7));
+      expect(
+        tDarkM.tabBarTheme.unselectedLabelColor,
+        equals(Colors.black87.withOpacity(0.7)),
+      );
     });
 
     //**************************************************************************
@@ -651,101 +704,110 @@ void main() {
         'FCS7.47: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.material EXPECT appbar theme color '
         'FlexColor.materialLightSurface.', () {
-      expect(tLightS.appBarTheme.backgroundColor,
-          tLightS.colorScheme.secondaryVariant);
+      expect(
+        tLightS.appBarTheme.backgroundColor,
+        equals(tLightS.colorScheme.secondaryVariant),
+      );
     });
     test(
         'FCS7.48: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.primary EXPECT appbar theme color '
         'colorScheme.primary.', () {
-      expect(tDarkS.appBarTheme.backgroundColor, FlexColor.materialDarkSurface);
+      expect(
+        tDarkS.appBarTheme.backgroundColor,
+        equals(FlexColor.materialDarkSurface),
+      );
     });
 
     test(
         'FCS7.49: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH appBarElevation: 6 EXPECT appbar theme elevation 6.', () {
-      expect(tLightS.appBarTheme.elevation, 6);
+      expect(tLightS.appBarTheme.elevation, equals(6));
     });
     test(
         'FCS7.50: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH appBarElevation: 6 EXPECT appbar theme elevation 6.', () {
-      expect(tDarkS.appBarTheme.elevation, 6);
+      expect(tDarkS.appBarTheme.elevation, equals(6));
     });
 
     test(
         'FCS7.51: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.strong EXPECT surface Color(0xfffbfafe).', () {
-      expect(tLightS.colorScheme.surface, const Color(0xfffbfafe));
+      expect(tLightS.colorScheme.surface, equals(const Color(0xfffbfafe)));
     });
     test(
         'FCS7.52: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.strong EXPECT surface Color(0xff1b171e).', () {
-      expect(tDarkS.colorScheme.surface, const Color(0xff1b171e));
+      expect(tDarkS.colorScheme.surface, equals(const Color(0xff1b171e)));
     });
 
     test(
         'FCS7.53: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.strong EXPECT background Color(0xfff3eefc).', () {
-      expect(tLightS.colorScheme.background, const Color(0xfff3eefc));
+      expect(tLightS.colorScheme.background, equals(const Color(0xfff3eefc)));
     });
     test(
         'FCS7.54: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.strong EXPECT background Color(0xff221c29).', () {
-      expect(tDarkS.colorScheme.background, const Color(0xff221c29));
+      expect(tDarkS.colorScheme.background, equals(const Color(0xff221c29)));
     });
 
     test(
         'FCS7.55: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.strong EXPECT scaffold '
         'background Color(0xffffffff).', () {
-      expect(tLightS.scaffoldBackgroundColor, const Color(0xffffffff));
+      expect(tLightS.scaffoldBackgroundColor, equals(const Color(0xffffffff)));
     });
     test(
         'FCS7.56: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.strong EXPECT scaffold '
         'background Color(0xff121212).', () {
-      expect(tDarkS.scaffoldBackgroundColor, const Color(0xff121212));
+      expect(tDarkS.scaffoldBackgroundColor, equals(const Color(0xff121212)));
     });
 
     test(
         'FCS7.57: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color white.', () {
-      expect(tLightS.indicatorColor, Colors.white);
+      expect(tLightS.indicatorColor, equals(Colors.white));
     });
     test(
         'FCS7.58: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color white.', () {
-      expect(tDarkS.indicatorColor, Colors.white);
+      expect(tDarkS.indicatorColor, equals(Colors.white));
     });
 
     test(
         'FCS7.59: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.labelColor white.', () {
-      expect(tLightS.tabBarTheme.labelColor, Colors.white);
+      expect(tLightS.tabBarTheme.labelColor, equals(Colors.white));
     });
     test(
         'FCS7.60: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.labelColor white.', () {
-      expect(tDarkS.tabBarTheme.labelColor, Colors.white);
+      expect(tDarkS.tabBarTheme.labelColor, equals(Colors.white));
     });
 
     test(
         'FCS7.61: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.unselectedLabelColor white.withOpacity(0.7).', () {
-      expect(tLightS.tabBarTheme.unselectedLabelColor,
-          Colors.white.withOpacity(0.7));
+      expect(
+        tLightS.tabBarTheme.unselectedLabelColor,
+        equals(Colors.white.withOpacity(0.7)),
+      );
     });
     test(
         'FCS7.62: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.unselectedLabelColor white.withOpacity(0.7)', () {
-      expect(tDarkS.tabBarTheme.unselectedLabelColor,
-          Colors.white.withOpacity(0.7));
+      expect(
+        tDarkS.tabBarTheme.unselectedLabelColor,
+        equals(Colors.white.withOpacity(0.7)),
+      );
     });
 
     //**************************************************************************
@@ -781,100 +843,119 @@ void main() {
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
       expect(
-          tLightH.appBarTheme.backgroundColor, tLightH.colorScheme.background);
+        tLightH.appBarTheme.backgroundColor,
+        equals(tLightH.colorScheme.background),
+      );
     });
     test(
         'FCS7.64: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
-      expect(tDarkH.appBarTheme.backgroundColor, tDarkH.colorScheme.background);
+      expect(
+        tDarkH.appBarTheme.backgroundColor,
+        equals(tDarkH.colorScheme.background),
+      );
     });
 
     test(
         'FCS7.65: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH appBarElevation: 2 EXPECT appbar theme elevation 2.', () {
-      expect(tLightH.appBarTheme.elevation, 2);
+      expect(tLightH.appBarTheme.elevation, equals(2));
     });
     test(
         'FCS7.66: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH appBarElevation: 4 EXPECT appbar theme elevation 4.', () {
-      expect(tDarkH.appBarTheme.elevation, 4);
+      expect(tDarkH.appBarTheme.elevation, equals(4));
     });
 
     test(
         'FCS7.67: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.heavy EXPECT surface Color(0xfffaf8fe).', () {
-      expect(tLightH.colorScheme.surface, const Color(0xfffaf8fe));
+      expect(tLightH.colorScheme.surface, equals(const Color(0xfffaf8fe)));
     });
     test(
         'FCS7.68: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.heavy EXPECT surface Color(0xff1e1a23).', () {
-      expect(tDarkH.colorScheme.surface, const Color(0xff1e1a23));
+      expect(tDarkH.colorScheme.surface, equals(const Color(0xff1e1a23)));
     });
 
     test(
         'FCS7.69: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.heavy EXPECT background Color(0xfff0e9fb).', () {
-      expect(tLightH.colorScheme.background, const Color(0xfff0e9fb));
+      expect(tLightH.colorScheme.background, equals(const Color(0xfff0e9fb)));
     });
     test(
         'FCS7.70: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.heavy EXPECT background Color(0xff272030).', () {
-      expect(tDarkH.colorScheme.background, const Color(0xff272030));
+      expect(tDarkH.colorScheme.background, equals(const Color(0xff272030)));
     });
 
     test(
         'FCS7.71: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexSurface.heavy EXPECT scaffold '
         'background Color(0xfffdfdfe).', () {
-      expect(tLightH.scaffoldBackgroundColor, const Color(0xfffdfdfe));
+      expect(tLightH.scaffoldBackgroundColor, equals(const Color(0xfffdfdfe)));
     });
     test(
         'FCS7.72: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexSurface.heavy EXPECT scaffold '
         'background Color(0xff151416).', () {
-      expect(tDarkH.scaffoldBackgroundColor, const Color(0xff151416));
+      expect(tDarkH.scaffoldBackgroundColor, equals(const Color(0xff151416)));
     });
 
     test(
         'FCS7.73: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color primary.', () {
-      expect(tLightH.indicatorColor, tLightH.colorScheme.primary);
+      expect(tLightH.indicatorColor, equals(tLightH.colorScheme.primary));
     });
     test(
         'FCS7.74: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color primary.', () {
-      expect(tDarkH.indicatorColor, tDarkH.colorScheme.primary);
+      expect(tDarkH.indicatorColor, equals(tDarkH.colorScheme.primary));
     });
 
     test(
         'FCS7.75: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.labelColor primary.', () {
-      expect(tLightH.tabBarTheme.labelColor, tLightH.colorScheme.primary);
+      expect(
+        tLightH.tabBarTheme.labelColor,
+        equals(tLightH.colorScheme.primary),
+      );
     });
     test(
         'FCS7.76: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.labelColor primary.', () {
-      expect(tDarkH.tabBarTheme.labelColor, tDarkH.colorScheme.primary);
+      expect(
+        tDarkH.tabBarTheme.labelColor,
+        equals(tDarkH.colorScheme.primary),
+      );
     });
 
     test(
         'FCS7.77: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).', () {
-      expect(tLightH.tabBarTheme.unselectedLabelColor,
-          tLightH.colorScheme.onSurface.withOpacity(0.6));
+      expect(
+        tLightH.tabBarTheme.unselectedLabelColor,
+        equals(
+          tLightH.colorScheme.onSurface.withOpacity(0.6),
+        ),
+      );
     });
     test(
         'FCS7.78: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6)', () {
-      expect(tDarkH.tabBarTheme.unselectedLabelColor,
-          tDarkH.colorScheme.onSurface.withOpacity(0.6));
+      expect(
+        tDarkH.tabBarTheme.unselectedLabelColor,
+        equals(
+          tDarkH.colorScheme.onSurface.withOpacity(0.6),
+        ),
+      );
     });
 
     //**************************************************************************
@@ -882,6 +963,7 @@ void main() {
     //
     // Test result with 2...3 colors and true black.
     // Just verify not failing (coverage), should check result as well later.
+    // TODO(rydmike): Improve these tests so they verify the results too.
     //**************************************************************************
 
     final ThemeData tLightH2 = FlexColorScheme.light(
@@ -945,6 +1027,7 @@ void main() {
     //
     // Test result with custom features like surface, appbar, tab bar options.
     // Just verify not failing (coverage), should check result as well later.
+    // TODO(rydmike): Improve these tests so they verify the results too.
     //**************************************************************************
 
     final ThemeData tLightC = FlexColorScheme.light(
@@ -997,6 +1080,7 @@ void main() {
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       scaffoldBackground: FlexColor.materialLightBackground,
+      applyElevationOverlayColor: false,
     ).toTheme;
 
     final ThemeData tDarkC2 = FlexColorScheme.dark(
@@ -1013,6 +1097,7 @@ void main() {
       surface: FlexColor.materialDarkSurface,
       background: FlexColor.materialDarkBackground,
       scaffoldBackground: FlexColor.materialDarkBackground,
+      applyElevationOverlayColor: true,
     ).toTheme;
 
     final ThemeData tDarkC2tb = FlexColorScheme.dark(
@@ -1034,21 +1119,30 @@ void main() {
         'FCS7.85: GIVEN a FlexColorScheme.light with more options '
         'like custom surface and background '
         'EXPECT OK and identical to copy.', () {
-      expect(tLightC2, tLightC2.copyWith());
+      expect(
+        tLightC2,
+        equals(tLightC2.copyWith(applyElevationOverlayColor: false)),
+      );
     });
     test(
         'FCS7.86: GIVEN a FlexColorScheme.dark with more options '
         'like custom surface and background '
         'EXPECT OK and identical to copy.', () {
-      expect(tDarkC2, tDarkC2.copyWith());
+      expect(
+        tDarkC2,
+        equals(tDarkC2.copyWith(applyElevationOverlayColor: true)),
+      );
     });
     test(
         'FCS7.87: GIVEN a FlexColorScheme.dark with more options '
         'like custom surface and background and true black '
         'EXPECT OK and identical to copy.', () {
-      expect(tDarkC2tb, tDarkC2tb.copyWith());
+      expect(tDarkC2tb, equals(tDarkC2tb.copyWith()));
     });
 
+    //**************************************************************************
+    // Text Theme TESTS
+    //**************************************************************************
     // Default light TextTheme equality verification.
     //
     // Flex default TextTheme light
@@ -1194,6 +1288,7 @@ void main() {
     final ThemeData fDarkTD = FlexColorScheme.dark(
       textTheme: customText,
       primaryTextTheme: customPrimText,
+      applyElevationOverlayColor: false,
     ).toTheme;
     final ThemeData nDarkTD = ThemeData(
       brightness: Brightness.dark,
@@ -1222,5 +1317,5 @@ void main() {
       expect(fCPDText, equals(nCPDText));
     });
   });
-  // TODO(rydmike): Add test for applyElevationOverlayColor
+  // TODO(rydmike): Add test for
 }

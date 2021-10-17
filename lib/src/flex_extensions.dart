@@ -67,6 +67,20 @@ extension FlexColorExtensions on Color {
         .toColor();
   }
 
+  // TODO(rydmike): Make tests for this!
+  /// Get onColor for a color.
+  ///
+  /// The onColor is white if the color has brightness dark and black if
+  /// the color has brightness light.
+  ///
+  /// Use the function to get black/white color typically used for text and
+  /// icons when they are placed on a surface/background using `color` as its
+  /// background color.
+  Color get onColor =>
+      ThemeData.estimateBrightnessForColor(this) == Brightness.light
+          ? Colors.black
+          : Colors.white;
+
   /// Blend in the given input Color with a percentage of alpha.
   ///
   /// You typically apply this on a background color, light or dark

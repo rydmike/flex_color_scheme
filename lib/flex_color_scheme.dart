@@ -23,6 +23,12 @@ export 'src/flex_extensions.dart';
 /// definition objects.
 export 'src/flex_scheme.dart';
 
+/// Defines a FlexSubTheme.
+export 'src/flex_sub_theme.dart';
+
+/// Defines a FlexSubThemeConfig.
+export 'src/flex_sub_theme_config.dart';
+
 /// Extensions on ThemeData to return a ThemeData object defined
 /// by a FlexColorScheme and its toTheme method.
 export 'src/flex_theme_data_extensions.dart';

@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'flex_color.dart';
 import 'flex_color_scheme.dart';
 import 'flex_scheme.dart';
+import 'flex_sub_theme_config.dart';
 
 /// Convenience extensions on ThemeData to return a ThemeData object defined
 /// by [FlexColorScheme.toTheme] method.
 ///
-/// Provides convenience extensions are:
+/// Provided convenience extensions are:
 ///
 /// * FlexThemeData.light(), based on FlexColorScheme.light().toTheme
 /// * FlexThemeData.dark(), based on FlexColorScheme.dark().toTheme
 /// * FlexThemeData.raw(), based on FlexColorScheme().toTheme
 ///
-/// The goal is to eventually be able to provide these as static on extensions
-/// on ThemeData so it would be possible to say:
+/// The goal is to eventually be able to provide these as static extensions
+/// on ThemeData, so it would be possible to say:
 ///
 /// * ThemeData.flexLight(), based on FlexColorScheme.light().toTheme
 /// * ThemeData.flexDark(), based on FlexColorScheme.dark().toTheme
@@ -31,10 +32,10 @@ import 'flex_scheme.dart';
 /// Using FlexThemeData.light() is still a bit shorter
 /// than FlexColorScheme.light().toTheme, and it may feel more familiar.
 ///
-/// For elaborate theming when constructing elaborate themes, were sub themes
+/// For advanced theming, when constructing elaborate themes where sub themes
 /// need access to the [ColorScheme] as defined by your [FlexColorScheme].
-/// Consider instead using [FlexColorScheme] to create your scheme. Then get
-/// the [ColorScheme] it defines with [FlexColorScheme.toScheme] and use
+/// Consider using [FlexColorScheme], then get the [ColorScheme] it defines
+/// with [FlexColorScheme.toScheme] and use
 /// colors from this scheme or the entire [ColorScheme] in you sub-themes,
 /// that you then apply with [ThemeData.copyWith] to the
 /// [ThemeData] given by [FlexColorScheme.toTheme]. You can of course do
@@ -137,7 +138,7 @@ extension FlexThemeData on ThemeData {
     /// [FlexSurfaceMode.scaffoldSurfaceBackground].
     ///
     /// In light theme mode:
-    /// * [FlexSurface.material] : [FlexBlendLevel.none]
+    /// * [FlexSurface.material] : [FlexBlendLevel.zero]
     /// * [FlexSurface.light] : [FlexBlendLevel.two]
     /// * [FlexSurface.medium] : [FlexBlendLevel.three]
     /// * [FlexSurface.strong] : [FlexBlendLevel.four]
@@ -595,6 +596,42 @@ extension FlexThemeData on ThemeData {
     /// For more information about this limitation see Flutter SDK issue:
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
+
+    /// Set to true to opt-in on using additional slightly opinionated
+    /// sub-themes.
+    ///
+    /// Opinionated sub themes are provided for:
+    /// * [BottomSheet]
+    /// * [Card]
+    /// * [Dialog]
+    /// * [PopupMenuButton]
+    /// * [TimePickerDialog]
+    /// * [InputDecoration]
+    /// * [ElevatedButton]
+    /// * [OutlinedButton]
+    /// * [TextButton]
+    /// * [ToggleButtons]
+    /// * A custom [ButtonTextTheme] still provides matching styling to support
+    ///   the deprecated legacy buttons if they are used.
+    ///
+    /// The sub-themes are a convenient way to opt-in on customized corner
+    /// radius on Widgets using above themes. By opting in you can set corner
+    /// radius for all above Widgets to same corner radius in one go.
+    final bool subThemesOptIn = false,
+
+    /// Optional configuration parameters for the opt-in sub-themes.
+    ///
+    /// If you opt-in to use the opinionated sub-theming offered by
+    /// [FlexColorScheme] you can also configure them by passing
+    /// in a [FlexSubThemeConfig] that allows you to modify them.
+    ///
+    /// The primary purpose of the opinionated sub-themes is to make it easy
+    /// to add themed corner radius to all Widgets that support it, and to
+    /// provide a consistent look on all buttons, including [ToggleButtons].
+    ///
+    /// Defaults to null, resulting in a default [FlexSubThemeConfig] being used
+    /// when [subThemesOptIn] is set to true.
+    final FlexSubThemeConfig? subThemeConfig,
   }) {
     return FlexColorScheme.light(
       colors: colors,
@@ -631,6 +668,8 @@ extension FlexThemeData on ThemeData {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
+      subThemesOptIn: subThemesOptIn,
+      subThemeConfig: subThemeConfig,
     ).toTheme;
   }
 
@@ -731,7 +770,7 @@ extension FlexThemeData on ThemeData {
     /// complete match when using [FlexSurfaceMode.scaffoldSurfaceBackground].
     ///
     /// In dark theme mode:
-    /// * [FlexSurface.material] : [FlexBlendLevel.none]
+    /// * [FlexSurface.material] : [FlexBlendLevel.zero]
     /// * [FlexSurface.light] : [FlexBlendLevel.two]
     /// * [FlexSurface.medium] : [FlexBlendLevel.three]
     /// * [FlexSurface.strong] : [FlexBlendLevel.four]
@@ -1178,6 +1217,42 @@ extension FlexThemeData on ThemeData {
     /// For more information about this limitation see Flutter SDK issue:
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
+
+    /// Set to true to opt-in on using additional slightly opinionated
+    /// sub-themes.
+    ///
+    /// Opinionated sub themes are provided for:
+    /// * [BottomSheet]
+    /// * [Card]
+    /// * [Dialog]
+    /// * [PopupMenuButton]
+    /// * [TimePickerDialog]
+    /// * [InputDecoration]
+    /// * [ElevatedButton]
+    /// * [OutlinedButton]
+    /// * [TextButton]
+    /// * [ToggleButtons]
+    /// * A custom [ButtonTextTheme] still provides matching styling to support
+    ///   the deprecated legacy buttons if they are used.
+    ///
+    /// The sub-themes are a convenient way to opt-in on customized corner
+    /// radius on Widgets using above themes. By opting in you can set corner
+    /// radius for all above Widgets to same corner radius in one go.
+    final bool subThemesOptIn = false,
+
+    /// Optional configuration parameters for the opt-in sub-themes.
+    ///
+    /// If you opt-in to use the opinionated sub-theming offered by
+    /// [FlexColorScheme] you can also configure them by passing
+    /// in a [FlexSubThemeConfig] that allows you to modify them.
+    ///
+    /// The primary purpose of the opinionated sub-themes is to make it easy
+    /// to add themed corner radius to all Widgets that support it, and to
+    /// provide a consistent look on all buttons, including [ToggleButtons].
+    ///
+    /// Defaults to null, resulting in a default [FlexSubThemeConfig] being used
+    /// when [subThemesOptIn] is set to true.
+    final FlexSubThemeConfig? subThemeConfig,
   }) {
     return FlexColorScheme.dark(
       colors: colors,
@@ -1215,6 +1290,8 @@ extension FlexThemeData on ThemeData {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
+      subThemesOptIn: subThemesOptIn,
+      subThemeConfig: subThemeConfig,
     ).toTheme;
   }
 
@@ -1580,6 +1657,42 @@ extension FlexThemeData on ThemeData {
     /// For more information about this limitation see Flutter SDK issue:
     /// https://github.com/flutter/flutter/issues/90353
     bool applyElevationOverlayColor = true,
+
+    /// Set to true to opt-in on using additional slightly opinionated
+    /// sub-themes.
+    ///
+    /// Opinionated sub themes are provided for:
+    /// * [BottomSheet]
+    /// * [Card]
+    /// * [Dialog]
+    /// * [PopupMenuButton]
+    /// * [TimePickerDialog]
+    /// * [InputDecoration]
+    /// * [ElevatedButton]
+    /// * [OutlinedButton]
+    /// * [TextButton]
+    /// * [ToggleButtons]
+    /// * A custom [ButtonTextTheme] still provides matching styling to support
+    ///   the deprecated legacy buttons if they are used.
+    ///
+    /// The sub-themes are a convenient way to opt-in on customized corner
+    /// radius on Widgets using above themes. By opting in you can set corner
+    /// radius for all above Widgets to same corner radius in one go.
+    final bool subThemesOptIn = false,
+
+    /// Optional configuration parameters for the opt-in sub-themes.
+    ///
+    /// If you opt-in to use the opinionated sub-theming offered by
+    /// [FlexColorScheme] you can also configure them by passing
+    /// in a [FlexSubThemeConfig] that allows you to modify them.
+    ///
+    /// The primary purpose of the opinionated sub-themes is to make it easy
+    /// to add themed corner radius to all Widgets that support it, and to
+    /// provide a consistent look on all buttons, including [ToggleButtons].
+    ///
+    /// Defaults to null, resulting in a default [FlexSubThemeConfig] being used
+    /// when [subThemesOptIn] is set to true.
+    final FlexSubThemeConfig? subThemeConfig,
   }) {
     return FlexColorScheme(
       brightness: brightness,
@@ -1610,6 +1723,8 @@ extension FlexThemeData on ThemeData {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
+      subThemesOptIn: subThemesOptIn,
+      subThemeConfig: subThemeConfig,
     ).toTheme;
   }
 }

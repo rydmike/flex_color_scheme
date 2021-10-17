@@ -16,46 +16,66 @@ import 'shared/all_shared_imports.dart';
 
 /// FlexColorScheme default example.
 ///
-/// This example shows how you can use define a few colors, use
-/// [FlexColorScheme] to theme your app with them, and also define other custom
-/// theme properties and how to use a [GoogleFonts] based font as the overall
-/// default font for your theme, and how to use a customized [TextTheme].
+/// This quick guide example shows how you can define a few colors, use
+/// [FlexColorScheme] to theme your app with them or use a predefined theme.
+/// It also offers a playground you can use to quickly experiment with its
+/// quick theming properties and optional opinionated sub-theming.
+///
+/// Additional it is demonstrated how to use a [GoogleFonts] based font as the
+/// default font for your theme, and how to customize your [TextTheme].
 ///
 /// To learn more about how to use FlexColorScheme and all its features,
-/// please go through the examples in the readme documentation.
+/// please go through the tutorial examples in the readme documentation.
 void main() => runApp(const DemoApp());
 
-// For our custom color scheme we will define primary and secondary colors,
+// For our custom color scheme we define primary and secondary colors,
 // but no variant or other colors.
 // ignore: unused_element
-final FlexSchemeColor _mySchemeLight = FlexSchemeColor.from(
+final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   primary: const Color(0xFF3B5997),
   // If you do not want to define secondary, primaryVariant and
   // secondaryVariant, error and appBar colors you do not have to,
   // they will get defined automatically when using the FlexSchemeColor.from()
-  // factory. With raw default constructor FlexSchemeColor() you have to define
-  // more required color properties.
+  // factory. When using FlexSchemeColor.from() you only have to define the
+  // primary color, anything nor defined will get derived automatically from
+  // the primary color and you get a theme that is based just on shades of
+  // the primary color.
+  //
+  // With the default constructor FlexSchemeColor() you have to define
+  // all 4 main color properties required for a complete color scheme. If you
+  // do define them all, then prefer using it, as it can be const.
   //
   // Here we do define a secondary color, but if you don't it will get a
-  // default shade based on the primary color.
+  // default shade based on the primary color. When you do define a secondary
+  // color but not a secondaryVariant color, it will get derived from the
+  // secondary color instead of the primary.
   secondary: const Color(0xFFFB8123),
 );
 
-// These are custom defined matching dark mode colors, but below we instead show
+// These are custom defined matching dark mode colors, below we also show
 // how to base them of the light color scheme. You can swap in these too in the
-// code example further below.
+// code example further below and compare the result of these manually defined
+// matching dark mode colors, to the ones computed via the "lazy" designer
+// matching dark colors.
 // ignore: unused_element
-final FlexSchemeColor _mySchemeDark = FlexSchemeColor.from(
+final FlexSchemeColor _schemeDark = FlexSchemeColor.from(
   primary: const Color(0xFF8B9DC3),
   secondary: const Color(0xFFFCB075),
 );
 
-// We define a custom text theme for our app. Here we have decided that
+// Use another font as default font for your theme.
+final String? _fontFamily = GoogleFonts.lato().fontFamily;
+
+// To use a pre-defined color scheme, don't assign any FlexSchemeColor to
+// `colors` instead, just pick a FlexScheme and assign it to the `scheme`.
+const FlexScheme _scheme = FlexScheme.blueWhale;
+
+// Define a custom text theme for our app. Here we have decided that
 // Headline1 is too big to be useful for us, so we make it a bit smaller.
 // We also think buttons should have a bit bigger text, tighter letter spacing,
 // and that overline is a bit too small and have weird letter spacing,
 // so we change them too.
-const TextTheme _myTextTheme = TextTheme(
+const TextTheme _textTheme = TextTheme(
   headline1: TextStyle(
     fontSize: 70, // Defaults to 96 in Material2018 Typography.
   ),
@@ -69,8 +89,62 @@ const TextTheme _myTextTheme = TextTheme(
   ),
 );
 
-class DemoApp extends StatelessWidget {
+// FlexColorScheme before version 4.0.0 used the surfaceStyle property to
+// define the surface color blend mode, if you are migrating from an earlier
+// version, no worries it still works as before.
+const FlexSurface _surfaceStyle = FlexSurface.strong;
+// However, if you define the new `surfaceMode` property used below, it
+// will override any defined `surfaceStyle`.
+// The mode `scaffoldSurfaceBackground` equals all the previous `surfaceStyle`
+// settings, but its blend level is set separately in finer and more increments
+// via `blendLevel`. There are several new surface blend mode strategies in
+// version 4.0.0, instead of just one as in previous versions.
+const FlexSurfaceMode _surfaceMode = FlexSurfaceMode.equalSurfacesHighScaffold;
+const FlexBlendLevel _blendLevel = FlexBlendLevel.ten;
+
+// The `subThemesOptIn` sets weather you want to opt-in or not on additional
+// opinionated sub-theming. By default FlexColorScheme as before does very
+// little styling on widgets, other than a few important adjustments, described
+// in detail in the readme. Using the sub-theme opt-in it now also offers
+// easy to sue additional out-of the box opinionated styling of Widgets.
+const bool _subThemesOptIn = true;
+// The opt-in opinionated sub-theming offers easy to use consistent corner
+// radius rounding setting on all sub-themes and a consistent button design.
+// It comes with defaults Material3 like rounded defaults, but you can adjust
+// its configuration via simple parameters in a passed in configuration class.
+const FlexSubThemeConfig _subThemeConfig = FlexSubThemeConfig(
+  // Default is 16, but make it whatever you like, even 0.
+  cornerRadius: 16,
+  // You can override individual corner rounding for each sub-themes from
+  // the global `cornerRadius`, let's do that for the PopupMenuButton, it
+  // does not look so nice with super big rounding on the menu container.
+  cornerRadiusPopupMenuButton: 8,
+  cardElevation: 0,
+  thickOutlineWidth: 2,
+  thinOutlineWidth: 1.5,
+  inputDecoratorIsOutlinedBorder: true,
+);
+
+// Visual density setting defaults to same as SDK,
+// VisualDensity.adaptivePlatformDensity, but you can define a fixed one too
+// or use FlexColorScheme.comfortablePlatformDensity.
+final VisualDensity _visualDensity =
+    VisualDensity.standard; //FlexColorScheme.comfortablePlatformDensity;
+
+// This is just standard `platform` property in `ThemeData` but handy to have as
+// a direct property, you can use it to test how things changes on different
+// platforms.
+final TargetPlatform _platform = defaultTargetPlatform;
+
+class DemoApp extends StatefulWidget {
   const DemoApp({Key? key}) : super(key: key);
+
+  @override
+  State<DemoApp> createState() => _DemoAppState();
+}
+
+class _DemoAppState extends State<DemoApp> {
+  ThemeMode themeMode = ThemeMode.system;
 
   @override
   Widget build(BuildContext context) {
@@ -79,72 +153,96 @@ class DemoApp extends StatelessWidget {
       title: 'Default Example',
       // Define the light theme for the app, based on defined colors.
       theme: FlexThemeData.light(
-        colors: _mySchemeLight,
+        // colors: _schemeLight,
         // Just want to use a built in scheme? Then comment colors above and
         // use scheme below to select a built-in one:
-        scheme: FlexScheme.blueWhale,
+        scheme: _scheme,
+        swapColors: false, // To swap your primaries and secondaries, use true.
         //
-        primary: FlexColor.indigo.light.primary,
-        primaryVariant: FlexColor.indigo.light.primaryVariant,
-        secondary: FlexColor.indigo.light.secondary,
-        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
-        surface: FlexColor.lightSurface,
-        background: FlexColor.lightBackground,
-        scaffoldBackground: FlexColor.lightScaffoldBackground,
-        dialogBackground: FlexColor.lightSurface,
-        appBarBackground: FlexColor.indigo.light.primary,
+        // If you provide a color directly it override anything specified by
+        // other properties. The priority from lowest to highest order is:
+        // 1. scheme 2. colors 3. Individual color values.
+        // You can uncomment a color property below to try it:
+        // primary: FlexColor.indigo.light.primary,
+        // primaryVariant: FlexColor.indigo.light.primaryVariant,
+        // secondary: FlexColor.indigo.light.secondary,
+        // secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+        // surface: FlexColor.lightSurface,
+        // background: FlexColor.lightBackground,
+        // scaffoldBackground: FlexColor.lightScaffoldBackground,
+        // dialogBackground: FlexColor.lightSurface,
+        // appBarBackground: FlexColor.indigo.light.primary,
         //
-        surfaceStyle: FlexSurface.heavy,
-        //
-        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
-        blendLevel: FlexBlendLevel.fifteen,
-        //
+        // To use the previous surfaceStyle mode, don't assign surfaceMode.
+        surfaceStyle: _surfaceStyle,
+        surfaceMode: _surfaceMode,
+        blendLevel: _blendLevel,
+        // The default style of AppBar in light mode uses scheme primary color
+        // The appBarStyle FlexAppBarStyle.primary, results in this too and is
+        // the default. You can choose another themed style, here we use
+        // background that also gets active color blend from used surfaceMode.
         appBarStyle: FlexAppBarStyle.primary,
         appBarElevation: 0,
-        transparentStatusBar: true,
+        // If your AppBar is using surface colors, like `appBarStyle`
+        // material, surface or background, you may prefer the
+        // forBackground style on your TabBar, even if you use it in an AppBar.
+        // For a ´primary` appBarStyle or `custom`, use the
+        // FlexTabBarStyle.forAppBar style.
         tabBarStyle: FlexTabBarStyle.forAppBar,
-        tooltipsMatchBackground: false,
-        swapColors: false,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        // Set the default font for the ThemeData using GoogleFonts.
-        fontFamily: GoogleFonts.lato().fontFamily,
-        // And custom text themes.
-        textTheme: _myTextTheme,
-        primaryTextTheme: _myTextTheme,
+        transparentStatusBar: true, // Status bar becomes same color as AppBar.
+        tooltipsMatchBackground: false, // False is default, which is inverted.
+        fontFamily: _fontFamily, // Default theme font.
+        textTheme: _textTheme, // Add custom text themes.
+        primaryTextTheme: _textTheme,
+        subThemesOptIn: _subThemesOptIn,
+        subThemeConfig: _subThemeConfig,
+        visualDensity: _visualDensity,
+        platform: _platform,
       ),
       // Define the dark theme for the app, based on custom colors.
       darkTheme: FlexThemeData.dark(
         // If you want to base the dark scheme on your light colors, this is
-        // a nice shortcut if you do not want to design your dark theme.
+        // a shortcut if you do not want to define your dark theme colors.
         // The whiteBlend for the desaturation of the light theme colors
         // defaults to 35%, you can try other values too, here we use 30.
-        // colors: _mySchemeLight.toDark(30),
+        // colors: _schemeLight.toDark(20), // Adjust % to change saturation.
         // If you want to use the defined custom dark colors, use it instead:
-        colors: _mySchemeDark,
-        // Just want to use a built in scheme? Then comment colors above and
-        // use scheme below to select a built-in one:
-        // scheme: FlexScheme.hippieBlue,
-        surfaceStyle: FlexSurface.light,
-        //
-        surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
-        blendLevel: FlexBlendLevel.two,
-        //
+        // colors: _schemeDark,
+        // To use a built in scheme, Don't assign colors above, use scheme.
+        scheme: _scheme,
+        swapColors: false, // To swap your primaries and secondaries, use true.
+        darkIsTrueBlack: false, // For an ink black dark mode, use true.
+        // To use the previous surfaceStyle mode, don't assign surfaceMode.
+        surfaceStyle: _surfaceStyle,
+        surfaceMode: _surfaceMode,
+        blendLevel: _blendLevel,
+        // The SDK default style of the AppBar in dark mode uses a fixed dark
+        // background color defined via surface color. The appBarStyle
+        // FlexAppBarStyle.material defines the same color value.
+        // You can use another themed style, here we use background that
+        // also gets active color blend from used surfaceMode.
         appBarStyle: FlexAppBarStyle.background,
         appBarElevation: 0,
-        transparentStatusBar: true,
         tabBarStyle: FlexTabBarStyle.forAppBar,
-        tooltipsMatchBackground: false,
-        swapColors: false,
-        darkIsTrueBlack: false,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        fontFamily: GoogleFonts.lato().fontFamily,
-        textTheme: _myTextTheme,
-        primaryTextTheme: _myTextTheme,
+        transparentStatusBar: true,
+        tooltipsMatchBackground: true,
+        fontFamily: _fontFamily,
+        textTheme: _textTheme,
+        primaryTextTheme: _textTheme,
+        subThemesOptIn: _subThemesOptIn,
+        subThemeConfig: _subThemeConfig,
+        visualDensity: _visualDensity,
+        platform: _platform,
       ),
-      // Use the above dark or light theme based on active themeMode below.
-      // Toggle in code here, or set to system to toggle with device.
-      themeMode: ThemeMode.light,
-      home: const HomePage(),
+      themeMode: themeMode,
+      home: HomePage(
+        themeMode: themeMode,
+        onThemeModeChanged: (ThemeMode mode) {
+          setState(() {
+            themeMode = mode;
+          });
+        },
+      ),
     );
   }
 }
@@ -156,13 +254,20 @@ class DemoApp extends StatelessWidget {
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
+    required this.themeMode,
+    required this.onThemeModeChanged,
   }) : super(key: key);
+
+  final ThemeMode themeMode;
+  final ValueChanged<ThemeMode> onThemeModeChanged;
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  late ScrollController scrollController;
+
   // The reason why HomePage is using a stateful widget is that it holds the
   // state of the dummy side menu/rail locally.
   double _menuWidth = App.expandWidth;
@@ -174,6 +279,19 @@ class _HomePageState extends State<HomePage> {
   FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.background;
   // Used to control if we have a top divider on the system navigation bar.
   bool useSysNavDivider = false;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController =
+        ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -265,8 +383,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               body: PageBody(
+                // key: const ValueKey<String>('PageBody'),
+                controller: scrollController,
                 constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
                 child: ListView(
+                  controller: scrollController,
                   padding: EdgeInsets.fromLTRB(
                     App.edgePadding,
                     topPadding + kToolbarHeight + App.edgePadding,
@@ -285,6 +406,15 @@ class _HomePageState extends State<HomePage> {
                         'you can modify to test other FlexColorScheme '
                         'features.'),
                     const SizedBox(height: 8),
+                    ListTile(
+                      title: const Text('Change theme mode'),
+                      subtitle: Text('Theme mode '
+                          '${widget.themeMode.toString().dotTail}'),
+                      trailing: ThemeModeSwitch(
+                        themeMode: widget.themeMode,
+                        onChanged: widget.onThemeModeChanged,
+                      ),
+                    ),
                     // Active theme color indicators.
                     const Padding(
                       padding:
@@ -293,54 +423,59 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 8),
                     // Open a sub-page
-                    ListTile(
-                      title: const Text('Open a demo subpage'),
-                      subtitle: const Text(
-                        'The subpage will use the same '
-                        'color scheme based theme automatically.',
+                    Card(
+                      child: Column(
+                        children: <Widget>[
+                          ListTile(
+                            title: const Text('Open a demo subpage'),
+                            subtitle: const Text(
+                              'The subpage will use the same '
+                              'color scheme based theme automatically.',
+                            ),
+                            trailing: const Icon(Icons.arrow_forward_ios),
+                            onTap: () {
+                              Subpage.show(context);
+                            },
+                          ),
+                          const Divider(),
+                          // Splash pages...
+                          ListTile(
+                            title: const Text('Splash page demo 1a'),
+                            subtitle: const Text(
+                              'No scrim and normal status icons.\n'
+                              'Using themedSystemNavigationBar (noAppBar:true)',
+                            ),
+                            trailing: const Icon(Icons.arrow_forward_ios),
+                            onTap: () {
+                              SplashPageOne.show(context, false);
+                            },
+                          ),
+                          ListTile(
+                            title: const Text('Splash page demo 1b'),
+                            subtitle: const Text(
+                              'No scrim and inverted status icons.\n'
+                              'Using themedSystemNavigationBar (noAppBar:true, '
+                              'invertStatusIcons:true)',
+                            ),
+                            trailing: const Icon(Icons.arrow_forward_ios),
+                            onTap: () {
+                              SplashPageOne.show(context, true);
+                            },
+                          ),
+                          ListTile(
+                            title: const Text('Splash page demo 2'),
+                            subtitle: const Text(
+                              'No status icons or navigation bar.\n'
+                              'Using setEnabledSystemUIOverlays([])',
+                            ),
+                            trailing: const Icon(Icons.arrow_forward_ios),
+                            onTap: () {
+                              SplashPageTwo.show(context, true);
+                            },
+                          ),
+                        ],
                       ),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        Subpage.show(context);
-                      },
                     ),
-                    const Divider(),
-                    // Splash pages...
-                    ListTile(
-                      title: const Text('Splash page demo 1a'),
-                      subtitle: const Text(
-                        'No scrim and normal status icons.\n'
-                        'Using themedSystemNavigationBar (noAppBar:true)',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        SplashPageOne.show(context, false);
-                      },
-                    ),
-                    ListTile(
-                      title: const Text('Splash page demo 1b'),
-                      subtitle: const Text(
-                        'No scrim and inverted status icons.\n'
-                        'Using themedSystemNavigationBar (noAppBar:true, '
-                        'invertStatusIcons:true)',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        SplashPageOne.show(context, true);
-                      },
-                    ),
-                    ListTile(
-                      title: const Text('Splash page demo 2'),
-                      subtitle: const Text(
-                        'No status icons or navigation bar.\n'
-                        'Using setEnabledSystemUIOverlays([])',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        SplashPageTwo.show(context, true);
-                      },
-                    ),
-                    const Divider(),
                     Text('Theme Showcase', style: headline4),
                     const ThemeShowcase(),
                   ],

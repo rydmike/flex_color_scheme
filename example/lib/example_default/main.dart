@@ -84,7 +84,7 @@ class DemoApp extends StatelessWidget {
         // scheme: FlexScheme.hippieBlue,
         surfaceStyle: FlexSurface.medium,
         surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
-        blendLevel: FlexBlendLevel.none,
+        blendLevel: FlexBlendLevel.zero,
         //
         appBarStyle: FlexAppBarStyle.primary,
         appBarElevation: 0,

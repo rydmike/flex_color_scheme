@@ -25,8 +25,8 @@ class ShowThemeColors extends StatelessWidget {
     // A Wrap widget is just the right handy widget for this type of
     // widget to make it responsive.
     return Wrap(
-      spacing: 4,
-      runSpacing: 4,
+      spacing: 6,
+      runSpacing: 6,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: <Widget>[
         ThemeCard(
@@ -146,17 +146,10 @@ class ThemeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 55,
       width: 85,
       child: Card(
         margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-          side: BorderSide(
-            color: Theme.of(context).dividerColor,
-          ),
-        ),
-        elevation: 0,
         color: color,
         child: Center(
           child: Text(

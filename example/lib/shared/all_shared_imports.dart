@@ -8,4 +8,5 @@ export 'side_menu.dart';
 export 'splash_page_one.dart';
 export 'splash_page_two.dart';
 export 'subpage.dart';
+export 'theme_mode_switch.dart';
 export 'theme_showcase.dart';
