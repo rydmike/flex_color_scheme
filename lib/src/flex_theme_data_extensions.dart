@@ -42,11 +42,18 @@ import 'flex_sub_theme_config.dart';
 /// this with these extensions too, but in that case you will need to store
 /// the theme in an intermediate [ThemeData] object.
 extension FlexThemeData on ThemeData {
+  //
+  // coverage:ignore-start
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.light]
   /// and its `toTheme` method.
-  // coverage:ignore-start
   static ThemeData light({
+    // coverage:ignore-line
+
     // coverage:ignore-end
+
+    // TODO(rydmike): Figure out why the above ignore does not work!
+    // TODO(rydmike): Figure out why test does not hit the row, it is tested!!
+
     /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
     /// from.
     ///
@@ -676,11 +683,17 @@ extension FlexThemeData on ThemeData {
     ).toTheme;
   }
 
+  // coverage:ignore-start
   /// Return a ThemeData defined by factory FlexColorScheme().dark object and
   /// its toTheme method.
-  // coverage:ignore-start
   static ThemeData dark({
+    // coverage:ignore-line
+
     // coverage:ignore-end
+
+    // TODO(rydmike): Figure out why the above ignore does not work!
+    // TODO(rydmike): Figure out why test does not hit the row, it is tested!!
+
     /// The [FlexSchemeColor] that we will create the dark [FlexColorScheme]
     /// from.
     ///

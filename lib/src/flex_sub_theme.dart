@@ -447,6 +447,7 @@ class FlexSubTheme {
         ).copyWith(
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
+              // coverage:ignore-start
               if (states.contains(MaterialState.hovered)) {
                 return colorScheme.primary.withOpacity(0.08);
               }
@@ -456,11 +457,13 @@ class FlexSubTheme {
               if (states.contains(MaterialState.pressed)) {
                 return colorScheme.primary.withOpacity(0.2);
               }
+              // coverage:ignore-end
               return Colors.transparent;
             },
           ),
           side: MaterialStateProperty.resolveWith<BorderSide?>(
             (final Set<MaterialState> states) {
+              // coverage:ignore-start
               if (states.contains(MaterialState.disabled)) {
                 return BorderSide(
                   color: colorScheme.onSurface.withOpacity(0.12),
@@ -473,6 +476,7 @@ class FlexSubTheme {
                   width: selectedOutlineThickness,
                 );
               }
+              // coverage:ignore-end
               return BorderSide(
                 color: colorScheme.primary,
                 width: selectedOutlineThickness,
@@ -516,6 +520,7 @@ class FlexSubTheme {
         ).copyWith(
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
+              // coverage:ignore-start
               if (states.contains(MaterialState.hovered)) {
                 return colorScheme.primary.withOpacity(0.08);
               }
@@ -525,6 +530,7 @@ class FlexSubTheme {
               if (states.contains(MaterialState.pressed)) {
                 return colorScheme.primary.withOpacity(0.2);
               }
+              // coverage:ignore-end
               return Colors.transparent;
             },
           ),

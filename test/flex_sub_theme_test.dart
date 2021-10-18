@@ -31,6 +31,32 @@ void main() {
       );
     });
     test(
+        'FST1.01custom: GIVEN a custom FlexSubTheme.bottomSheetTheme() '
+        'EXPECT equal to BottomSheetThemeData() version with same values', () {
+      expect(
+        FlexSubTheme.bottomSheetTheme(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          elevation: 2,
+          modalElevation: 4,
+          radius: 5,
+        ),
+        equals(
+          const BottomSheetThemeData(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            elevation: 2,
+            modalElevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(5),
+                topRight: Radius.circular(5),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
         'FST1.02: GIVEN a default FlexSubTheme.bottomNavigationBar() '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -39,6 +65,19 @@ void main() {
         equals(
           const BottomNavigationBarThemeData(
             elevation: 0,
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.02custom: GIVEN a custom FlexSubTheme.bottomNavigationBar() '
+        'EXPECT equal to BottomNavigationBarThemeData() version '
+        'with same values', () {
+      expect(
+        FlexSubTheme.bottomNavigationBar(elevation: 10),
+        equals(
+          const BottomNavigationBarThemeData(
+            elevation: 10,
           ),
         ),
       );
@@ -55,6 +94,28 @@ void main() {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(16),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.03custom: GIVEN a custom FlexSubTheme.cardTheme() '
+        'EXPECT equal to CardTheme() version with same values', () {
+      expect(
+        FlexSubTheme.cardTheme(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          elevation: 2,
+          radius: 1,
+        ),
+        equals(
+          const CardTheme(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(1),
               ),
             ),
           ),
@@ -79,6 +140,26 @@ void main() {
       );
     });
     test(
+        'FST1.04custom: GIVEN a custom FlexSubTheme.dialogTheme() '
+        'EXPECT equal to DialogTheme() version with same values', () {
+      expect(
+        FlexSubTheme.dialogTheme(
+          elevation: 10,
+          radius: 6,
+        ),
+        equals(
+          const DialogTheme(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
         'FST1.05: GIVEN a default FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
@@ -89,6 +170,26 @@ void main() {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(16),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.05custom: GIVEN a custom FlexSubTheme.popupMenuTheme() '
+        'EXPECT equal to PopupMenuThemeData() version with same values', () {
+      expect(
+        FlexSubTheme.popupMenuTheme(
+          elevation: 8,
+          radius: 8,
+        ),
+        equals(
+          const PopupMenuThemeData(
+            elevation: 8,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
               ),
             ),
           ),
@@ -270,6 +371,33 @@ void main() {
               ), //buttonShape,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               elevation: 0,
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.08custom: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'EXPECT equal to ElevatedButtonThemeData() version with '
+        'same values', () {
+      expect(
+        FlexSubTheme.elevatedButtonTheme(
+                elevation: 1,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                minButtonSize: const Size(50, 50),
+                radius: 10)
+            .toString(),
+        equalsIgnoringHashCodes(
+          ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(50, 50),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ), //buttonShape,
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              elevation: 1,
             ),
           ).toString(),
         ),
