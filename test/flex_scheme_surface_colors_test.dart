@@ -178,6 +178,11 @@ void main() {
         'unchanged after and empty copyWith.', () {
       expect(m4.copyWith(), m4);
     });
+
+    //**************************************************************************
+    // TEST FlexSchemeSurfaceColors.from
+    //**************************************************************************
+
     test(
         'FSSC1.04: GIVEN a light FlexSchemeSurfaceColors.from created object '
         'EXPECT equality when made by matching light defined colors.', () {
@@ -417,5 +422,38 @@ void main() {
     test('FSSC1.18c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));
     });
+
+    //**************************************************************************
+    // TEST FlexSchemeSurfaceColors.blend
+    //**************************************************************************
+
+    test(
+        'FSSC1.16: GIVEN a light FlexSchemeSurfaceColors.blend created object '
+        'EXPECT equality when made by matching light defined colors.', () {
+      expect(
+        FlexSchemeSurfaceColors.blend(),
+        const FlexSchemeSurfaceColors(
+          surface: FlexColor.materialLightSurface,
+          background: FlexColor.materialLightBackground,
+          scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+          dialogBackground: FlexColor.materialLightSurface,
+        ),
+      );
+    });
+    test(
+        'FSSC1.17: GIVEN a light FlexSchemeSurfaceColors.blend( '
+        'brightness: Brightness.dark) created object '
+        'EXPECT equality when made by matching dark defined colors.', () {
+      expect(
+        FlexSchemeSurfaceColors.blend(brightness: Brightness.dark),
+        const FlexSchemeSurfaceColors(
+          surface: FlexColor.materialDarkSurface,
+          background: FlexColor.materialDarkBackground,
+          scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
+          dialogBackground: FlexColor.materialDarkSurface,
+        ),
+      );
+    });
+    // TODO(rydmike): More validation tests for FlexSchemeSurfaceColors.blend
   });
 }

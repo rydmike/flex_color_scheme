@@ -1231,13 +1231,13 @@ void main() {
   //****************************************************************************
   group('FTD2: TEST FlexThemeData and FlexColorScheme.toTHeme equality', () {
     test(
-        'FTD1.01: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'FTD2.01: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
       expect(FlexThemeData.light(), FlexColorScheme.light().toTheme);
       expect(FlexThemeData.dark(), FlexColorScheme.dark().toTheme);
     });
     test(
-        'FTD1.02: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'FTD2.02: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
       expect(
         FlexThemeData.light(
@@ -1257,7 +1257,7 @@ void main() {
       );
     });
     test(
-        'FTD1.03: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'FTD2.03: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
       expect(
         FlexThemeData.light(
@@ -1281,7 +1281,7 @@ void main() {
       );
     });
     test(
-        'FTD1.04: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'FTD2.04: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
       expect(
         FlexThemeData.light(
@@ -1317,7 +1317,7 @@ void main() {
       );
     });
     test(
-        'FTD1.05: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'FTD2.05: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
       expect(
         FlexThemeData.light(
@@ -1429,7 +1429,7 @@ void main() {
       );
     });
     test(
-        'FTD1.06: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'FTD2.06: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
       expect(
         FlexThemeData.light(
@@ -1545,7 +1545,7 @@ void main() {
       );
     });
     test(
-        'FTD1.07: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'FTD2.07: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'case no sub-themes EXPECT equal.', () {
       const TextTheme _myTextTheme = TextTheme(
         headline1: TextStyle(
@@ -1729,7 +1729,7 @@ void main() {
       );
     });
     test(
-        'FTD1.07-w-sub: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'FTD2.07-w-sub: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'case with sub-theme EXPECT equal.', () {
       const TextTheme _myTextTheme = TextTheme(
         headline1: TextStyle(
@@ -1923,7 +1923,7 @@ void main() {
       );
     });
     test(
-        'FTD1.08: GIVEN equal FlexThemeData RAW and FlexColorScheme.toTheme '
+        'FTD2.08: GIVEN equal FlexThemeData RAW and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
       const TextTheme _myTextTheme = TextTheme(
         headline1: TextStyle(
@@ -2058,6 +2058,231 @@ void main() {
           typography: Typography.material2018(platform: defaultTargetPlatform),
           applyElevationOverlayColor: true,
         ).toTheme,
+      );
+    });
+
+    debugDefaultTargetPlatformOverride = null;
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    test(
+        'FTD3.00RawL: GIVEN FlexThemeData.raw() made with min required light '
+        'params that equals default Material light scheme '
+        'EXPECT its FlexColorScheme to be equal to one made with light scheme '
+        'with no parameters.', () {
+      expect(
+        FlexThemeData.raw(
+          brightness: Brightness.light,
+          primary: FlexColor.materialLightPrimary,
+          primaryVariant: FlexColor.materialLightPrimaryVariant,
+          secondary: FlexColor.materialLightSecondary,
+          secondaryVariant: FlexColor.materialLightSecondaryVariant,
+        ),
+        equals(FlexColorScheme.light().toTheme),
+      );
+    });
+    test(
+        'FTD3.00DefL: GIVEN FlexThemeData.light made with no parameters '
+        'EXPECT its ThemeData to be equal to one made with light scheme.', () {
+      expect(
+          FlexThemeData.light(),
+          equals(FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
+          ).toTheme));
+    });
+    test(
+        'FTD3.00aL: GIVEN FlexThemeData.light made with identical '
+        'parameters as FlexColorScheme EXPECT their ThemeData '
+        'to be equal.', () {
+      expect(
+          FlexThemeData.light(
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
+          ),
+          equals(FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
+          ).toTheme));
+    });
+    test(
+        'FTD3.00bL: GIVEN a FlexColorScheme.light made with no '
+        'parameters EXPECT ThemeData to be equal to one made with '
+        'scheme FlexThemeData.light FlexScheme.material.', () {
+      expect(FlexColorScheme.light().toTheme,
+          equals(FlexThemeData.light(scheme: FlexScheme.material)));
+    });
+    test(
+        'FTD3.00cL: GIVEN a FlexThemeData.light made with colors '
+        'material EXPECT ThemeData to be equal to one made with '
+        'scheme FlexColorScheme.light FlexScheme.material.', () {
+      expect(
+          FlexThemeData.light(
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
+          ),
+          equals(FlexColorScheme.light(
+            scheme: FlexScheme.material,
+          ).toTheme));
+    });
+    test(
+        'FTD3.00dL: GIVEN a FlexThemeData.light made with scheme '
+        'material EXPECT ThemeData to be equal to one made with '
+        'no params.', () {
+      expect(
+          FlexThemeData.light(
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
+          ),
+          equals(FlexColorScheme.light().toTheme));
+    });
+
+    test(
+        'FTD3.00RawD: GIVEN FlexThemeData.raw() made with min required dark '
+        'params that equals default Material dark scheme '
+        'EXPECT its ThemeData to be equal to one made with FlexColorScheme '
+        'dark scheme with no parameters.', () {
+      expect(
+          FlexThemeData.raw(
+            brightness: Brightness.dark,
+            primary: FlexColor.materialDarkPrimary,
+            primaryVariant: FlexColor.materialDarkPrimaryVariant,
+            secondary: FlexColor.materialDarkSecondary,
+            secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+          ),
+          equals(FlexColorScheme.dark().toTheme));
+    });
+
+    // themeDark = Default material dark scheme colors.
+    test(
+        'FTD3.00SwapL: GIVEN FlexThemeData.light(swapColors: true) EXPECT it '
+        'to be equal to one made with FlexColorScheme() colors swapped ', () {
+      expect(
+        FlexThemeData.light(
+          swapColors: true,
+        ),
+        equals(const FlexColorScheme(
+          brightness: Brightness.light,
+          primary: FlexColor.materialLightSecondary,
+          primaryVariant: FlexColor.materialLightSecondaryVariant,
+          secondary: FlexColor.materialLightPrimary,
+          secondaryVariant: FlexColor.materialLightPrimaryVariant,
+        ).toTheme),
+      );
+    });
+
+    // themeDark = Default material dark scheme colors.
+    test(
+        'FTD3.00SwapD: GIVEN FlexColorScheme.dark(swapColors: true) EXPECT it '
+        'to be equal to one made with FlexThemeData.raw and dark scheme '
+        'colors swapped ', () {
+      expect(
+        FlexColorScheme.dark(
+          swapColors: true,
+        ).toTheme,
+        equals(FlexThemeData.raw(
+          brightness: Brightness.dark,
+          primary: FlexColor.materialDarkSecondary,
+          primaryVariant: FlexColor.materialDarkSecondaryVariant,
+          secondary: FlexColor.materialDarkPrimary,
+          secondaryVariant: FlexColor.materialDarkPrimaryVariant,
+        )),
+      );
+    });
+
+    test(
+        'FTD3.00DefL: GIVEN FlexColorScheme.dark made with no parameters '
+        'EXPECT its ThemeData to be equal to one made with FlexThemeData '
+        'dark scheme.', () {
+      expect(
+        FlexColorScheme.dark().toTheme,
+        equals(FlexThemeData.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        )),
+      );
+    });
+    test(
+        'FTD3.00aD: GIVEN two FlexColorScheme.dark made with identical '
+        'parameters as a FlexThemeData.dark EXPECT their ThemeData to '
+        'be equal.', () {
+      expect(
+        FlexColorScheme.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toTheme,
+        equals(FlexThemeData.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        )),
+      );
+    });
+    test(
+        'FTD3.00bD: GIVEN a FlexThemeData.dark made with no '
+        'parameters EXPECT ThemeData to be equal to one made with '
+        'scheme FlexScheme.material.', () {
+      expect(
+        FlexThemeData.dark(),
+        equals(FlexThemeData.dark(scheme: FlexScheme.material)),
+      );
+    });
+    test(
+        'FTD3.00cD: GIVEN a FlexThemeData.dark made with colors '
+        'material EXPECT ThemeData to be equal to one made with '
+        'FlexColorScheme.dark FlexScheme.material.', () {
+      expect(
+        FlexThemeData.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ),
+        equals(FlexColorScheme.dark(
+          scheme: FlexScheme.material,
+        ).toTheme),
+      );
+    });
+    test(
+        'FTD3.00dD: GIVEN a FlexColorScheme.dark made with scheme '
+        'material EXPECT ThemeData to be equal to one made with '
+        'FlexThemeData.dark and no params.', () {
+      expect(
+        FlexColorScheme.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toTheme,
+        equals(FlexThemeData.dark()),
+      );
+    });
+
+    test(
+        'FTD3.00eL: GIVEN a FlexThemeData.raw() made with scheme default '
+        'constructor + light and '
+        'material EXPECT ThemeData to be equal to an identical one.', () {
+      expect(
+        FlexThemeData.raw(
+          brightness: Brightness.light,
+          primary: FlexColor.materialLightPrimary,
+          primaryVariant: FlexColor.materialLightPrimaryVariant,
+          secondary: FlexColor.materialLightSecondary,
+          secondaryVariant: FlexColor.materialLightSecondaryVariant,
+        ),
+        equals(const FlexColorScheme(
+          brightness: Brightness.light,
+          primary: FlexColor.materialLightPrimary,
+          primaryVariant: FlexColor.materialLightPrimaryVariant,
+          secondary: FlexColor.materialLightSecondary,
+          secondaryVariant: FlexColor.materialLightSecondaryVariant,
+        ).toTheme),
+      );
+    });
+
+    test(
+        'FTD3.00eD: GIVEN a FlexThemeData.raw() made with scheme default '
+        'constructor + dark and material EXPECT its ThemeData to be equal to '
+        'one made with FlexColorScheme().toTheme.', () {
+      expect(
+        FlexThemeData.raw(
+          brightness: Brightness.dark,
+          primary: FlexColor.materialDarkPrimary,
+          primaryVariant: FlexColor.materialDarkPrimaryVariant,
+          secondary: FlexColor.materialDarkSecondary,
+          secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+        ),
+        equals(const FlexColorScheme(
+          brightness: Brightness.dark,
+          primary: FlexColor.materialDarkPrimary,
+          primaryVariant: FlexColor.materialDarkPrimaryVariant,
+          secondary: FlexColor.materialDarkSecondary,
+          secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+        ).toTheme),
       );
     });
   });
