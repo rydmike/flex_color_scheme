@@ -43,6 +43,7 @@ class FlexSubThemeConfig with Diagnosticable {
     this.dialogElevation = kDialogElevation,
     this.bottomSheetElevation = kBottomSheetElevation,
     this.bottomSheetModalElevation = kBottomSheetModalElevation,
+    this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
     this.minButtonSize = kMinButtonSize,
     this.buttonPadding = kButtonPadding,
     this.thickOutlineWidth = kThickOutlineWidth,
@@ -139,6 +140,11 @@ class FlexSubThemeConfig with Diagnosticable {
   /// Defaults to [kBottomSheetModalElevation].
   final double bottomSheetModalElevation;
 
+  /// Elevation of [BottomNavigationBar].
+  ///
+  /// Defaults to [kBottomNavigationBarElevation].
+  final double bottomNavigationBarElevation;
+
   /// Minimum button size for all buttons.
   ///
   /// Applies to [TextButton], [ElevatedButton], [OutlinedButton] and
@@ -213,6 +219,7 @@ class FlexSubThemeConfig with Diagnosticable {
     final double? dialogElevation,
     final double? bottomSheetElevation,
     final double? bottomSheetModalElevation,
+    final double? bottomNavigationBarElevation,
     final Size? minButtonSize,
     final EdgeInsetsGeometry? buttonPadding,
     final double? thickOutlineWidth,
@@ -249,6 +256,8 @@ class FlexSubThemeConfig with Diagnosticable {
       bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
       bottomSheetModalElevation:
           bottomSheetModalElevation ?? this.bottomSheetModalElevation,
+      bottomNavigationBarElevation:
+          bottomNavigationBarElevation ?? this.bottomNavigationBarElevation,
       minButtonSize: minButtonSize ?? this.minButtonSize,
       buttonPadding: buttonPadding ?? this.buttonPadding,
       thickOutlineWidth: thickOutlineWidth ?? this.thickOutlineWidth,
@@ -284,6 +293,7 @@ class FlexSubThemeConfig with Diagnosticable {
         other.dialogElevation == dialogElevation &&
         other.bottomSheetElevation == bottomSheetElevation &&
         other.bottomSheetModalElevation == bottomSheetModalElevation &&
+        other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
         other.minButtonSize == minButtonSize &&
         other.buttonPadding == buttonPadding &&
         other.thickOutlineWidth == thickOutlineWidth &&
@@ -313,6 +323,7 @@ class FlexSubThemeConfig with Diagnosticable {
       dialogElevation,
       bottomSheetElevation,
       bottomSheetModalElevation,
+      bottomNavigationBarElevation,
       minButtonSize,
       buttonPadding,
       thickOutlineWidth,
@@ -359,6 +370,8 @@ class FlexSubThemeConfig with Diagnosticable {
         'bottomSheetElevation', bottomSheetElevation));
     properties.add(DiagnosticsProperty<double>(
         'bottomSheetModalElevation', bottomSheetModalElevation));
+    properties.add(DiagnosticsProperty<double>(
+        'bottomNavigationBarElevation', bottomNavigationBarElevation));
     properties.add(DiagnosticsProperty<Size>('minButtonSize', minButtonSize));
     properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
         'buttonPadding', buttonPadding));

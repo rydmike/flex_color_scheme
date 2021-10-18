@@ -3515,12 +3515,21 @@ class FlexColorScheme with Diagnosticable {
       // Opinionated theming for the bottom navigation bar, use primary color
       // for selected item. Flutter defaults to using secondary color. Primary
       // color is an "iOS" influenced style for the bottom navigation bar.
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        selectedIconTheme: IconThemeData(
-          color: _colorScheme.primary,
-        ),
-        selectedItemColor: _colorScheme.primary,
-      ),
+      bottomNavigationBarTheme: subThemesOptIn
+          ? FlexSubTheme.bottomNavigationBar(
+              elevation: _subTheme.bottomNavigationBarElevation,
+            ).copyWith(
+              selectedIconTheme: IconThemeData(
+                color: _colorScheme.primary,
+              ),
+              selectedItemColor: _colorScheme.primary,
+            )
+          : BottomNavigationBarThemeData(
+              selectedIconTheme: IconThemeData(
+                color: _colorScheme.primary,
+              ),
+              selectedItemColor: _colorScheme.primary,
+            ),
 
       // Opinionated theming of Tooltips, the default theme for Material
       // themed Tooltips are not good design choices on desktop and web
