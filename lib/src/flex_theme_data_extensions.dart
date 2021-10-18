@@ -44,7 +44,9 @@ import 'flex_sub_theme_config.dart';
 extension FlexThemeData on ThemeData {
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.light]
   /// and its `toTheme` method.
+  // coverage:ignore-start
   static ThemeData light({
+    // coverage:ignore-end
     /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
     /// from.
     ///
@@ -676,7 +678,9 @@ extension FlexThemeData on ThemeData {
 
   /// Return a ThemeData defined by factory FlexColorScheme().dark object and
   /// its toTheme method.
+  // coverage:ignore-start
   static ThemeData dark({
+    // coverage:ignore-end
     /// The [FlexSchemeColor] that we will create the dark [FlexColorScheme]
     /// from.
     ///

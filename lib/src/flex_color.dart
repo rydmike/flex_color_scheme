@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
 import 'flex_scheme.dart';
 
 /// Defines colors, names and color schemes used to make maps and a list of
-/// predefined [FlexSchemeData] objects that can be used by [FlexColorScheme].
+/// predefined [FlexSchemeData] objects that can be used by FlexColorScheme.
 /// There is also const values for each color value and [FlexSchemeData] of
 /// of each scheme.
 class FlexColor {
-  // coverage:ignore-start
   FlexColor._(); // coverage:ignore-line
-  // coverage:ignore-end
+
+  // TODO(rydmike): Figure out why the above ignore does not work!
+
   /// Material standard color for light surface.
   static const Color materialLightSurface = Colors.white;
 
@@ -1959,7 +1959,7 @@ class FlexColor {
   /// A [FlexScheme] enum to [FlexSchemeData] constant map.
   ///
   /// Contains pre-made ready to go nice dark and light [FlexSchemeColor]
-  /// color schemes, that can be used by [FlexColorScheme].
+  /// color schemes, that can be used by FlexColorScheme.
   /// The [FlexColor.schemes] map also contain the standard
   /// default material design themes, both the normal and the newer high
   /// contrast version.
@@ -2015,7 +2015,7 @@ class FlexColor {
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
   ///
   /// Contains all the pre-made ready to use dark and light [FlexSchemeColor]
-  /// color values that can be used e.g. by [FlexColorScheme].
+  /// color values that can be used e.g. by FlexColorScheme.
   /// The [FlexColor.schemesWithCustom] also contain the
   /// standard default material design themes, both the normal and the
   /// newer high contrast version.
@@ -2101,12 +2101,12 @@ class FlexColor {
 
 /// Immutable data class that holds [name] and [description] string scheme
 /// descriptions, [light] and [dark], [FlexSchemeColor] definitions that
-/// can used by the [FlexColorScheme.light] and [FlexColorScheme.dark]
-/// factories to create a [FlexColorScheme].
+/// can used by the FlexColorScheme.light and FlexColorScheme.dark
+/// factories to create a FlexColorScheme.
 ///
 /// This class can also be used to make a map with [FlexScheme] enum or some
 /// other usable lookup value as key, and [FlexSchemeData] as values, that you
-/// can then use as input to define multiple theme options for [FlexColorScheme]
+/// can then use as input to define multiple theme options for FlexColorScheme
 /// based themes.
 ///
 /// A predefined example of a [FlexScheme] and [FlexSchemeData]
@@ -2181,7 +2181,7 @@ class FlexSchemeData with Diagnosticable {
   }
 }
 
-/// Immutable data class for the main scheme colors used in a [FlexColorScheme]
+/// Immutable data class for the main scheme colors used in a FlexColorScheme
 /// based color scheme.
 ///
 /// The default constructor requires many properties. To make a
