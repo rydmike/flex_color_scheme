@@ -602,6 +602,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// Opinionated sub themes are provided for:
     /// * [BottomSheet]
+    /// * [BottomNavigationBar]
     /// * [Card]
     /// * [Dialog]
     /// * [PopupMenuButton]
@@ -1223,6 +1224,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// Opinionated sub themes are provided for:
     /// * [BottomSheet]
+    /// * [BottomNavigationBar]
     /// * [Card]
     /// * [Dialog]
     /// * [PopupMenuButton]
@@ -1663,6 +1665,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// Opinionated sub themes are provided for:
     /// * [BottomSheet]
+    /// * [BottomNavigationBar]
     /// * [Card]
     /// * [Dialog]
     /// * [PopupMenuButton]

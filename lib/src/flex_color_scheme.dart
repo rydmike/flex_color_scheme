@@ -233,8 +233,12 @@ enum FlexBlendLevel {
 
   /// Level fifteen: Alpha 0x23 in light mode and 0x46 in dark mode.
   fifteen,
+
+  /// Level fifteen: Alpha 0x25 in light mode and 0x50 in dark mode.
+  sixteen,
 }
 
+// TODO(rydmike): Review and tune blend levels - check excel
 /// Map with blend level enum values to alpha blend value.
 const Map<FlexBlendLevel, int> _kBlendToAlpha = <FlexBlendLevel, int>{
   FlexBlendLevel.zero: 0x00,
@@ -253,6 +257,7 @@ const Map<FlexBlendLevel, int> _kBlendToAlpha = <FlexBlendLevel, int>{
   FlexBlendLevel.thirteen: 0x1E,
   FlexBlendLevel.fourteen: 0x21,
   FlexBlendLevel.fifteen: 0x23,
+  FlexBlendLevel.sixteen: 0x25,
 };
 
 /// Light to dark mode alpha blend increase is 2x.
@@ -846,6 +851,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// When opting in, opinionated sub-themes are provided for:
   /// * [BottomSheet]
+  /// * [BottomNavigationBar]
   /// * [Card]
   /// * [Dialog]
   /// * [PopupMenuButton]
@@ -1452,6 +1458,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// When opting in, opinionated sub-themes are provided for:
     /// * [BottomSheet]
+    /// * [BottomNavigationBar]
     /// * [Card]
     /// * [Dialog]
     /// * [PopupMenuButton]
@@ -2219,6 +2226,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// When opting in, opinionated sub-themes are provided for:
     /// * [BottomSheet]
+    /// * [BottomNavigationBar]
     /// * [Card]
     /// * [Dialog]
     /// * [PopupMenuButton]

@@ -8,9 +8,10 @@ import 'flex_scheme.dart';
 
 /// Defines colors, names and color schemes used to make maps and a list of
 /// predefined [FlexSchemeData] objects that can be used by [FlexColorScheme].
+/// There is also const values for each color value and [FlexSchemeData] of
+/// of each scheme.
 class FlexColor {
   FlexColor._(); // coverage:ignore-line
-
   /// Material standard color for light surface.
   static const Color materialLightSurface = Colors.white;
 

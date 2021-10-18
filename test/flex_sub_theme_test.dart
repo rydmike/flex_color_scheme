@@ -31,7 +31,20 @@ void main() {
       );
     });
     test(
-        'FST1.02: GIVEN a default FlexSubTheme.cardTheme() '
+        'FST1.02: GIVEN a default FlexSubTheme.bottomNavigationBar() '
+        'EXPECT equal to BottomNavigationBarThemeData() version '
+        'with same values', () {
+      expect(
+        FlexSubTheme.bottomNavigationBar(),
+        equals(
+          const BottomNavigationBarThemeData(
+            elevation: 0,
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.03: GIVEN a default FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
         FlexSubTheme.cardTheme(),
@@ -49,7 +62,7 @@ void main() {
       );
     });
     test(
-        'FST1.03: GIVEN a default FlexSubTheme.dialogTheme() '
+        'FST1.04: GIVEN a default FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
         FlexSubTheme.dialogTheme(),
@@ -66,7 +79,24 @@ void main() {
       );
     });
     test(
-        'FST1.04: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'FST1.05: GIVEN a default FlexSubTheme.popupMenuTheme() '
+        'EXPECT equal to PopupMenuThemeData() version with same values', () {
+      expect(
+        FlexSubTheme.popupMenuTheme(),
+        equals(
+          const PopupMenuThemeData(
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.06: GIVEN a default FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       expect(
         FlexSubTheme.timePickerTheme(),
@@ -96,7 +126,7 @@ void main() {
       );
     });
     test(
-        'FST1.05a: GIVEN a default FlexSubTheme.inputDecorationTheme() '
+        'FST1.07a: GIVEN a default FlexSubTheme.inputDecorationTheme() '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -147,7 +177,7 @@ void main() {
       );
     });
     test(
-        'FST1.05b: GIVEN a default '
+        'FST1.07b: GIVEN a default '
         'FlexSubTheme.inputDecorationTheme(useOutlinedBorder: false) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -223,7 +253,7 @@ void main() {
     // Applies to: tests: FST1.06, FST1.07, FST1.08, all using ButtonStyle.
     // Same happens if we compare the ButtonStyle object directly too.
     test(
-        'FST1.06: GIVEN a default FlexSubTheme.elevatedButtonTheme() '
+        'FST1.08: GIVEN a default FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       expect(
@@ -246,7 +276,7 @@ void main() {
       );
     });
     test(
-        'FST1.07: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
+        'FST1.09: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -303,7 +333,7 @@ void main() {
       );
     });
     test(
-        'FST1.08: GIVEN a default FlexSubTheme.textButtonTheme() '
+        'FST1.10: GIVEN a default FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -340,7 +370,7 @@ void main() {
       );
     });
     test(
-        'FST1.09: GIVEN a default FlexSubTheme.buttonTheme() '
+        'FST1.11: GIVEN a default FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -371,7 +401,7 @@ void main() {
       );
     });
     test(
-        'FST1.10: GIVEN a default FlexSubTheme.toggleButtonsTheme() EXPECT '
+        'FST1.12: GIVEN a default FlexSubTheme.toggleButtonsTheme() EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       final VisualDensity _visualDensity =

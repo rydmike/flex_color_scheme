@@ -45,8 +45,7 @@ import 'flex_extensions.dart';
 class FlexSubTheme {
   FlexSubTheme._(); // coverage:ignore-line
 
-  // TODO(rydmike): Consider adding SnackBarThemeData?
-  // TODO(RydMike): Consider adding Snackbar, needs two versions though, how-to?
+  // TODO(rydmike): Add SnackBarThemeData? Needs two versions though, how-to?
 
   /// A slightly opinionated [BottomSheetThemeData] with custom top corner
   /// radius.
