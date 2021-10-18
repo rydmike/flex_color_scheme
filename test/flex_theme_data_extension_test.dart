@@ -1547,7 +1547,7 @@ void main() {
     test(
         'FTD2.07: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'case no sub-themes EXPECT equal.', () {
-      const TextTheme _myTextTheme = TextTheme(
+      const TextTheme myTextTheme = TextTheme(
         headline1: TextStyle(
           fontSize: 70, // Defaults to 96 in Material2018 Typography.
         ),
@@ -1561,7 +1561,7 @@ void main() {
         ),
       );
       // Make a FlexColorScheme.
-      final FlexColorScheme _fcsLight = FlexColorScheme.light(
+      final FlexColorScheme fcsLight = FlexColorScheme.light(
         colors: FlexColor.mandyRed.light,
         scheme: FlexScheme.bigStone,
         usedColors: 4,
@@ -1590,8 +1590,8 @@ void main() {
         tooltipsMatchBackground: true,
         transparentStatusBar: true,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        textTheme: _myTextTheme,
-        primaryTextTheme: _myTextTheme,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
         fontFamily: 'Roboto',
         platform: defaultTargetPlatform,
         typography: Typography.material2018(platform: defaultTargetPlatform),
@@ -1599,158 +1599,16 @@ void main() {
       );
 
       // Turn it into ThemeData.
-      final ThemeData _fcsLightTd = _fcsLight.toTheme;
+      final ThemeData fcsLightTd = fcsLight.toTheme;
 
       // Make same ThemeData via extension.
-      final ThemeData _ftdLight = FlexThemeData.light(
+      final ThemeData ftdLight = FlexThemeData.light(
         // The manual colors will override commented ones:
-        // -> colors: FlexColor.mandyRed.light,
-        // -> scheme: FlexScheme.bigStone,
-        usedColors: 4,
-        // -> surfaceStyle: FlexSurface.strong,
-        // -> surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
-        // -> blendLevel: FlexBlendLevel.fifteen,
-        appBarStyle: FlexAppBarStyle.primary,
-        tabBarStyle: FlexTabBarStyle.forAppBar,
-        appBarElevation: 1,
-        bottomAppBarElevation: 1,
-        primary: FlexColor.indigo.light.primary,
-        primaryVariant: FlexColor.indigo.light.primaryVariant,
-        secondary: FlexColor.indigo.light.secondary,
-        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
-        surface: FlexColor.lightSurface,
-        background: FlexColor.lightBackground,
-        scaffoldBackground: FlexColor.lightScaffoldBackground,
-        dialogBackground: FlexColor.lightSurface,
-        appBarBackground: FlexColor.indigo.light.primary,
-        onPrimary: Colors.white,
-        onSecondary: Colors.white,
-        onSurface: Colors.black,
-        onBackground: Colors.black,
-        onError: Colors.white,
-        swapColors: false,
-        tooltipsMatchBackground: true,
-        transparentStatusBar: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        textTheme: _myTextTheme,
-        primaryTextTheme: _myTextTheme,
-        fontFamily: 'Roboto',
-        platform: defaultTargetPlatform,
-        typography: Typography.material2018(platform: defaultTargetPlatform),
-        applyElevationOverlayColor: true,
-      );
-      // Check to String equality
-      expect(
-        _fcsLightTd.toString(),
-        equalsIgnoringHashCodes(_ftdLight.toString()),
-      );
-      // Check object equality
-      // expect(
-      //   _ftdLight,
-      //   equals(_fcsLightTd),
-      // );
-      // Same test for dark mode
-      final FlexColorScheme _fcsDark = FlexColorScheme.dark(
-        // colors: FlexColor.mandyRed.dark,
-        // scheme: FlexScheme.bigStone,
-        usedColors: 4,
-        surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
-        blendLevel: FlexBlendLevel.fifteen,
-        appBarStyle: FlexAppBarStyle.background,
-        tabBarStyle: FlexTabBarStyle.forBackground,
-        appBarElevation: 1,
-        bottomAppBarElevation: 1,
-        primary: FlexColor.indigo.dark.primary,
-        primaryVariant: FlexColor.indigo.dark.primaryVariant,
-        secondary: FlexColor.indigo.dark.secondary,
-        secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
-        surface: FlexColor.darkSurface,
-        background: FlexColor.darkBackground,
-        scaffoldBackground: FlexColor.darkScaffoldBackground,
-        dialogBackground: FlexColor.darkSurface,
-        appBarBackground: FlexColor.indigo.dark.primary,
-        onPrimary: Colors.white,
-        onSecondary: Colors.white,
-        onSurface: Colors.white,
-        onBackground: Colors.white,
-        onError: Colors.white,
-        swapColors: true,
-        darkIsTrueBlack: true,
-        tooltipsMatchBackground: true,
-        transparentStatusBar: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        textTheme: _myTextTheme,
-        primaryTextTheme: _myTextTheme,
-        fontFamily: 'Roboto',
-        platform: defaultTargetPlatform,
-        typography: Typography.material2018(platform: defaultTargetPlatform),
-        applyElevationOverlayColor: true,
-      );
-      expect(
-        FlexThemeData.dark(
-          colors: FlexColor.mandyRed.dark,
-          scheme: FlexScheme.bigStone,
-          usedColors: 4,
-          surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
-          blendLevel: FlexBlendLevel.fifteen,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          appBarElevation: 1,
-          bottomAppBarElevation: 1,
-          primary: FlexColor.indigo.dark.primary,
-          primaryVariant: FlexColor.indigo.dark.primaryVariant,
-          secondary: FlexColor.indigo.dark.secondary,
-          secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
-          surface: FlexColor.darkSurface,
-          background: FlexColor.darkBackground,
-          scaffoldBackground: FlexColor.darkScaffoldBackground,
-          dialogBackground: FlexColor.darkSurface,
-          appBarBackground: FlexColor.indigo.dark.primary,
-          onPrimary: Colors.white,
-          onSecondary: Colors.white,
-          onSurface: Colors.white,
-          onBackground: Colors.white,
-          onError: Colors.white,
-          swapColors: true,
-          darkIsTrueBlack: true,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: true,
-          visualDensity: FlexColorScheme.comfortablePlatformDensity,
-          textTheme: _myTextTheme,
-          primaryTextTheme: _myTextTheme,
-          fontFamily: 'Roboto',
-          platform: defaultTargetPlatform,
-          typography: Typography.material2018(platform: defaultTargetPlatform),
-          applyElevationOverlayColor: true,
-        ),
-        _fcsDark.toTheme,
-      );
-    });
-    test(
-        'FTD2.07-w-sub: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
-        'case with sub-theme EXPECT equal.', () {
-      const TextTheme _myTextTheme = TextTheme(
-        headline1: TextStyle(
-          fontSize: 70, // Defaults to 96 in Material2018 Typography.
-        ),
-        button: TextStyle(
-          fontSize: 16, // Defaults to 14 in Material2018 Typography.
-          letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
-        ),
-        overline: TextStyle(
-          fontSize: 11, // Defaults to 10 in Material2018 Typography.
-          letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
-        ),
-      );
-      // Make a FlexColorScheme.
-      final FlexColorScheme _fcsLight = FlexColorScheme.light(
         colors: FlexColor.mandyRed.light,
         scheme: FlexScheme.bigStone,
         usedColors: 4,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.primary,
         tabBarStyle: FlexTabBarStyle.forAppBar,
@@ -1774,71 +1632,23 @@ void main() {
         tooltipsMatchBackground: true,
         transparentStatusBar: true,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        textTheme: _myTextTheme,
-        primaryTextTheme: _myTextTheme,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
         fontFamily: 'Roboto',
         platform: defaultTargetPlatform,
         typography: Typography.material2018(platform: defaultTargetPlatform),
         applyElevationOverlayColor: true,
-        subThemesOptIn: true,
-        subThemeConfig: const FlexSubThemeConfig(),
-      );
-
-      // Turn it into ThemeData.
-      final ThemeData _fcsLightTd = _fcsLight.toTheme;
-
-      // Make same ThemeData via extension.
-      final ThemeData _ftdLight = FlexThemeData.light(
-        // The manual colors will override commented ones:
-        // -> colors: FlexColor.mandyRed.light,
-        // -> scheme: FlexScheme.bigStone,
-        usedColors: 4,
-        // -> surfaceStyle: FlexSurface.strong,
-        // -> surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
-        // -> blendLevel: FlexBlendLevel.fifteen,
-        appBarStyle: FlexAppBarStyle.primary,
-        tabBarStyle: FlexTabBarStyle.forAppBar,
-        appBarElevation: 1,
-        bottomAppBarElevation: 1,
-        primary: FlexColor.indigo.light.primary,
-        primaryVariant: FlexColor.indigo.light.primaryVariant,
-        secondary: FlexColor.indigo.light.secondary,
-        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
-        surface: FlexColor.lightSurface,
-        background: FlexColor.lightBackground,
-        scaffoldBackground: FlexColor.lightScaffoldBackground,
-        dialogBackground: FlexColor.lightSurface,
-        appBarBackground: FlexColor.indigo.light.primary,
-        onPrimary: Colors.white,
-        onSecondary: Colors.white,
-        onSurface: Colors.black,
-        onBackground: Colors.black,
-        onError: Colors.white,
-        swapColors: false,
-        tooltipsMatchBackground: true,
-        transparentStatusBar: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        textTheme: _myTextTheme,
-        primaryTextTheme: _myTextTheme,
-        fontFamily: 'Roboto',
-        platform: defaultTargetPlatform,
-        typography: Typography.material2018(platform: defaultTargetPlatform),
-        applyElevationOverlayColor: true,
-        subThemesOptIn: true,
-        subThemeConfig: const FlexSubThemeConfig(),
       );
       // Check to String equality
       expect(
-        _fcsLightTd.toString(),
-        equalsIgnoringHashCodes(_ftdLight.toString()),
+        fcsLightTd.toString(),
+        equalsIgnoringHashCodes(ftdLight.toString()),
       );
-      // TODO(rydmike): Check this again when this issue lands in stable.
-      // https://github.com/flutter/flutter/issues/91587
       // Check object equality
-      // expect(
-      //   _ftdLight,
-      //   equals(_fcsLightTd),
-      // );
+      expect(
+        ftdLight,
+        equals(fcsLightTd),
+      );
       // Same test for dark mode
       final FlexColorScheme _fcsDark = FlexColorScheme.dark(
         colors: FlexColor.mandyRed.dark,
@@ -1870,14 +1680,12 @@ void main() {
         tooltipsMatchBackground: true,
         transparentStatusBar: true,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        textTheme: _myTextTheme,
-        primaryTextTheme: _myTextTheme,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
         fontFamily: 'Roboto',
         platform: defaultTargetPlatform,
         typography: Typography.material2018(platform: defaultTargetPlatform),
         applyElevationOverlayColor: true,
-        subThemesOptIn: true,
-        subThemeConfig: const FlexSubThemeConfig(),
       );
       expect(
         FlexThemeData.dark(
@@ -1910,18 +1718,339 @@ void main() {
           tooltipsMatchBackground: true,
           transparentStatusBar: true,
           visualDensity: FlexColorScheme.comfortablePlatformDensity,
-          textTheme: _myTextTheme,
-          primaryTextTheme: _myTextTheme,
+          textTheme: myTextTheme,
+          primaryTextTheme: myTextTheme,
           fontFamily: 'Roboto',
           platform: defaultTargetPlatform,
           typography: Typography.material2018(platform: defaultTargetPlatform),
           applyElevationOverlayColor: true,
-          subThemesOptIn: true,
-          subThemeConfig: const FlexSubThemeConfig(),
-        ).toString(),
-        equalsIgnoringHashCodes(_fcsDark.toTheme.toString()),
+        ),
+        _fcsDark.toTheme,
       );
     });
+    test(
+        'FTD2.08-w-sub: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'case with sub-theme EXPECT equal.', () {
+      const TextTheme myTextTheme = TextTheme(
+        headline1: TextStyle(
+          fontSize: 70, // Defaults to 96 in Material2018 Typography.
+        ),
+        button: TextStyle(
+          fontSize: 16, // Defaults to 14 in Material2018 Typography.
+          letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
+        ),
+        overline: TextStyle(
+          fontSize: 11, // Defaults to 10 in Material2018 Typography.
+          letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
+        ),
+      );
+      // Make a FlexColorScheme.
+      final FlexColorScheme fcsLight1 = FlexColorScheme.light(
+        colors: FlexColor.mandyRed.light,
+        scheme: FlexScheme.bigStone,
+        usedColors: 4,
+        surfaceStyle: FlexSurface.strong,
+        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        blendLevel: FlexBlendLevel.fifteen,
+        appBarStyle: FlexAppBarStyle.primary,
+        tabBarStyle: FlexTabBarStyle.forAppBar,
+        appBarElevation: 1,
+        bottomAppBarElevation: 1,
+        primary: FlexColor.indigo.light.primary,
+        primaryVariant: FlexColor.indigo.light.primaryVariant,
+        secondary: FlexColor.indigo.light.secondary,
+        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+        surface: FlexColor.lightSurface,
+        background: FlexColor.lightBackground,
+        scaffoldBackground: FlexColor.lightScaffoldBackground,
+        dialogBackground: FlexColor.lightSurface,
+        appBarBackground: FlexColor.indigo.light.primary,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.black,
+        onBackground: Colors.black,
+        onError: Colors.white,
+        swapColors: false,
+        tooltipsMatchBackground: true,
+        transparentStatusBar: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
+        fontFamily: 'Roboto',
+        platform: defaultTargetPlatform,
+        typography: Typography.material2018(platform: defaultTargetPlatform),
+        applyElevationOverlayColor: true,
+        subThemesOptIn: true,
+        subThemeConfig: const FlexSubThemeConfig(),
+      );
+
+      final FlexColorScheme fcsLight2 = FlexColorScheme.light(
+        colors: FlexColor.mandyRed.light,
+        scheme: FlexScheme.bigStone,
+        usedColors: 4,
+        surfaceStyle: FlexSurface.strong,
+        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        blendLevel: FlexBlendLevel.fifteen,
+        appBarStyle: FlexAppBarStyle.primary,
+        tabBarStyle: FlexTabBarStyle.forAppBar,
+        appBarElevation: 1,
+        bottomAppBarElevation: 1,
+        primary: FlexColor.indigo.light.primary,
+        primaryVariant: FlexColor.indigo.light.primaryVariant,
+        secondary: FlexColor.indigo.light.secondary,
+        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+        surface: FlexColor.lightSurface,
+        background: FlexColor.lightBackground,
+        scaffoldBackground: FlexColor.lightScaffoldBackground,
+        dialogBackground: FlexColor.lightSurface,
+        appBarBackground: FlexColor.indigo.light.primary,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.black,
+        onBackground: Colors.black,
+        onError: Colors.white,
+        swapColors: false,
+        tooltipsMatchBackground: true,
+        transparentStatusBar: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
+        fontFamily: 'Roboto',
+        platform: defaultTargetPlatform,
+        typography: Typography.material2018(platform: defaultTargetPlatform),
+        applyElevationOverlayColor: true,
+        subThemesOptIn: true,
+        subThemeConfig: const FlexSubThemeConfig(),
+      );
+
+      // Check FlexColorScheme light object equality - with all props.
+      expect(
+        fcsLight1,
+        equals(fcsLight2),
+      );
+
+      // Turn it into ThemeData.
+      final ThemeData fcsLightTd = fcsLight1.toTheme;
+
+      // Make same ThemeData via extension.
+      final ThemeData ftdLight = FlexThemeData.light(
+        // The manual colors will override commented ones:
+        colors: FlexColor.mandyRed.light,
+        scheme: FlexScheme.bigStone,
+        usedColors: 4,
+        surfaceStyle: FlexSurface.strong,
+        surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+        blendLevel: FlexBlendLevel.fifteen,
+        appBarStyle: FlexAppBarStyle.primary,
+        tabBarStyle: FlexTabBarStyle.forAppBar,
+        appBarElevation: 1,
+        bottomAppBarElevation: 1,
+        primary: FlexColor.indigo.light.primary,
+        primaryVariant: FlexColor.indigo.light.primaryVariant,
+        secondary: FlexColor.indigo.light.secondary,
+        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+        surface: FlexColor.lightSurface,
+        background: FlexColor.lightBackground,
+        scaffoldBackground: FlexColor.lightScaffoldBackground,
+        dialogBackground: FlexColor.lightSurface,
+        appBarBackground: FlexColor.indigo.light.primary,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.black,
+        onBackground: Colors.black,
+        onError: Colors.white,
+        swapColors: false,
+        tooltipsMatchBackground: true,
+        transparentStatusBar: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
+        fontFamily: 'Roboto',
+        platform: defaultTargetPlatform,
+        typography: Typography.material2018(platform: defaultTargetPlatform),
+        applyElevationOverlayColor: true,
+        subThemesOptIn: true,
+        subThemeConfig: const FlexSubThemeConfig(),
+      );
+      // Check to String equality
+      expect(
+        fcsLightTd.toString(),
+        equalsIgnoringHashCodes(ftdLight.toString()),
+      );
+      // TODO(rydmike): Check this again when this issue lands in stable.
+      // https://github.com/flutter/flutter/issues/91587
+      // Check object equality
+      // expect(
+      //   ftdLight,
+      //   equals(fcsLightTd),
+      // );
+    });
+
+    test(
+        'FTD2.09-w-sub-DARK: GIVEN equal FlexThemeData and '
+        'FlexColorScheme.toTheme case with sub-theme EXPECT equal.', () {
+      const TextTheme myTextTheme = TextTheme(
+        headline1: TextStyle(
+          fontSize: 70, // Defaults to 96 in Material2018 Typography.
+        ),
+        button: TextStyle(
+          fontSize: 16, // Defaults to 14 in Material2018 Typography.
+          letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
+        ),
+        overline: TextStyle(
+          fontSize: 11, // Defaults to 10 in Material2018 Typography.
+          letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
+        ),
+      );
+
+      // Same test for dark mode
+      final FlexColorScheme fcsDark1 = FlexColorScheme.dark(
+        colors: FlexColor.mandyRed.dark,
+        scheme: FlexScheme.bigStone,
+        usedColors: 4,
+        surfaceStyle: FlexSurface.strong,
+        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        blendLevel: FlexBlendLevel.fifteen,
+        appBarStyle: FlexAppBarStyle.background,
+        tabBarStyle: FlexTabBarStyle.forBackground,
+        appBarElevation: 1,
+        bottomAppBarElevation: 1,
+        primary: FlexColor.indigo.dark.primary,
+        primaryVariant: FlexColor.indigo.dark.primaryVariant,
+        secondary: FlexColor.indigo.dark.secondary,
+        secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+        surface: FlexColor.darkSurface,
+        background: FlexColor.darkBackground,
+        scaffoldBackground: FlexColor.darkScaffoldBackground,
+        dialogBackground: FlexColor.darkSurface,
+        appBarBackground: FlexColor.indigo.dark.primary,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.white,
+        onBackground: Colors.white,
+        onError: Colors.white,
+        swapColors: true,
+        darkIsTrueBlack: true,
+        tooltipsMatchBackground: true,
+        transparentStatusBar: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
+        fontFamily: 'Roboto',
+        platform: defaultTargetPlatform,
+        typography: Typography.material2018(platform: defaultTargetPlatform),
+        applyElevationOverlayColor: true,
+        subThemesOptIn: true,
+        subThemeConfig: const FlexSubThemeConfig(),
+      );
+
+      final FlexColorScheme fcsDark2 = FlexColorScheme.dark(
+        colors: FlexColor.mandyRed.dark,
+        scheme: FlexScheme.bigStone,
+        usedColors: 4,
+        surfaceStyle: FlexSurface.strong,
+        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        blendLevel: FlexBlendLevel.fifteen,
+        appBarStyle: FlexAppBarStyle.background,
+        tabBarStyle: FlexTabBarStyle.forBackground,
+        appBarElevation: 1,
+        bottomAppBarElevation: 1,
+        primary: FlexColor.indigo.dark.primary,
+        primaryVariant: FlexColor.indigo.dark.primaryVariant,
+        secondary: FlexColor.indigo.dark.secondary,
+        secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+        surface: FlexColor.darkSurface,
+        background: FlexColor.darkBackground,
+        scaffoldBackground: FlexColor.darkScaffoldBackground,
+        dialogBackground: FlexColor.darkSurface,
+        appBarBackground: FlexColor.indigo.dark.primary,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.white,
+        onBackground: Colors.white,
+        onError: Colors.white,
+        swapColors: true,
+        darkIsTrueBlack: true,
+        tooltipsMatchBackground: true,
+        transparentStatusBar: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
+        fontFamily: 'Roboto',
+        platform: defaultTargetPlatform,
+        typography: Typography.material2018(platform: defaultTargetPlatform),
+        applyElevationOverlayColor: true,
+        subThemesOptIn: true,
+        subThemeConfig: const FlexSubThemeConfig(),
+      );
+
+      // Check FlexColorScheme dark object equality - with all props.
+      expect(
+        fcsDark1,
+        equals(fcsDark2),
+      );
+
+      // Turn it into ThemeData.
+      final ThemeData fcsTdDark = fcsDark1.toTheme;
+
+      final ThemeData fcsDarkTd = FlexThemeData.dark(
+        colors: FlexColor.mandyRed.dark,
+        scheme: FlexScheme.bigStone,
+        usedColors: 4,
+        surfaceStyle: FlexSurface.strong,
+        surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+        blendLevel: FlexBlendLevel.fifteen,
+        appBarStyle: FlexAppBarStyle.background,
+        tabBarStyle: FlexTabBarStyle.forBackground,
+        appBarElevation: 1,
+        bottomAppBarElevation: 1,
+        primary: FlexColor.indigo.dark.primary,
+        primaryVariant: FlexColor.indigo.dark.primaryVariant,
+        secondary: FlexColor.indigo.dark.secondary,
+        secondaryVariant: FlexColor.indigo.dark.secondaryVariant,
+        surface: FlexColor.darkSurface,
+        background: FlexColor.darkBackground,
+        scaffoldBackground: FlexColor.darkScaffoldBackground,
+        dialogBackground: FlexColor.darkSurface,
+        appBarBackground: FlexColor.indigo.dark.primary,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.white,
+        onBackground: Colors.white,
+        onError: Colors.white,
+        swapColors: true,
+        darkIsTrueBlack: true,
+        tooltipsMatchBackground: true,
+        transparentStatusBar: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
+        fontFamily: 'Roboto',
+        platform: defaultTargetPlatform,
+        typography: Typography.material2018(platform: defaultTargetPlatform),
+        applyElevationOverlayColor: true,
+        subThemesOptIn: true,
+        subThemeConfig: const FlexSubThemeConfig(),
+      );
+
+      // Check to String equality
+      expect(
+        fcsTdDark.toString(),
+        equalsIgnoringHashCodes(fcsDarkTd.toString()),
+      );
+      // TODO(rydmike): Check this again when this issue lands in stable.
+      // https://github.com/flutter/flutter/issues/91587
+      // Check object equality
+      // expect(
+      //   fcsTdDark,
+      //   equals(fcsDarkTd),
+      // );
+    });
+
+    //**************************************************************************
+    // FlexThemeData.raw TESTS
+    //**************************************************************************
+
     test(
         'FTD2.08: GIVEN equal FlexThemeData RAW and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
