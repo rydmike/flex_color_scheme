@@ -248,12 +248,12 @@ class FlexSubTheme {
 
     /// The outline border when the input is selected.
     ///
-    /// Defaults to 1.5.
+    /// Defaults to 2.0.
     final double focusedBorderWidth = kThickOutlineWidth,
 
     /// The outline border when the input is unselected or disabled.
     ///
-    /// Defaults to 1.0.
+    /// Defaults to 0.5.
     final double unfocusedBorderWidth = kThinOutlineWidth,
   }) {
     final Color _fillColor =
@@ -417,15 +417,15 @@ class FlexSubTheme {
     /// The button corner radius, defaults to 16.
     final double radius = kCornerRadius,
 
-    /// The outline thickness when the button is selected.
+    /// The outline thickness when the button is pressed.
     ///
-    /// Defaults to 1.5.
-    final double selectedOutlineThickness = kThickOutlineWidth,
+    /// Defaults to 2.0.
+    final double pressedOutlineWidth = kThickOutlineWidth,
 
     /// The outline thickness when the button is not selected.
     ///
-    /// Defaults to 1.0.
-    final double unselectedOutlineThickness = kThinOutlineWidth,
+    /// Defaults to 0.5.
+    final double outlineWidth = kThinOutlineWidth,
 
     /// Padding defaults to EdgeInsets.symmetric(horizontal: 16).
     final EdgeInsetsGeometry padding = kButtonPadding,
@@ -467,19 +467,24 @@ class FlexSubTheme {
               if (states.contains(MaterialState.disabled)) {
                 return BorderSide(
                   color: colorScheme.onSurface.withOpacity(0.12),
-                  width: unselectedOutlineThickness,
+                  width: outlineWidth,
                 );
               }
               if (states.contains(MaterialState.error)) {
                 return BorderSide(
                   color: colorScheme.error,
-                  width: selectedOutlineThickness,
+                  width: pressedOutlineWidth,
                 );
               }
-
+              if (states.contains(MaterialState.pressed)) {
+                return BorderSide(
+                  color: colorScheme.primary,
+                  width: pressedOutlineWidth,
+                );
+              }
               return BorderSide(
                 color: colorScheme.primary,
-                width: selectedOutlineThickness,
+                width: outlineWidth,
               );
             },
             // coverage:ignore-end
@@ -615,8 +620,8 @@ class FlexSubTheme {
     /// In this design it uses the same default as outline thickness for
     /// selected outline button and input decorator.
     ///
-    /// Defaults to 1.5.
-    final double borderWidth = kThickOutlineWidth,
+    /// Defaults to 0.5.
+    final double borderWidth = kThinOutlineWidth,
 
     /// Minimum button size.
     ///

@@ -146,12 +146,13 @@ const EdgeInsetsGeometry kButtonPadding = EdgeInsets.symmetric(horizontal: 16);
 
 /// Default width of thick outline borders.
 ///
-/// Applies to enabled [OutlinedButton] border and to all states of
-/// [ToggleButtons], as well as selected state of [InputDecorator] border.
-const double kThickOutlineWidth = 1.5;
+/// Applies to pressed [OutlinedButton] border and , as well as selected
+/// state of [InputDecorator] border.
+const double kThickOutlineWidth = 2;
 
 /// Default width of thin outline borders.
 ///
 /// Applies to disabled [OutlinedButton] border and to un-selected state of
-/// [InputDecorator] when using [OutlineInputBorder].
-const double kThinOutlineWidth = 1;
+/// [InputDecorator] when using [OutlineInputBorder], and to all states of
+/// [ToggleButtons].
+const double kThinOutlineWidth = 0.5;

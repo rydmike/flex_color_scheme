@@ -242,35 +242,35 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary,
-                width: 1.5,
+                width: 2,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary.withOpacity(0.65),
-                width: 1,
+                width: 0.5,
               ),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.12),
-                width: 1,
+                width: 0.5,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error,
-                width: 1.5,
+                width: 2,
               ),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error,
-                width: 1,
+                width: 0.5,
               ),
             ),
           ),
@@ -300,7 +300,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.primary,
-                width: 1.5,
+                width: 2,
               ),
             ),
             enabledBorder: UnderlineInputBorder(
@@ -310,7 +310,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.primary.withOpacity(0.65),
-                width: 1,
+                width: 0.5,
               ),
             ),
             disabledBorder: UnderlineInputBorder(
@@ -320,7 +320,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.12),
-                width: 1,
+                width: 0.5,
               ),
             ),
             focusedErrorBorder: UnderlineInputBorder(
@@ -330,7 +330,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.error,
-                width: 1.5,
+                width: 2,
               ),
             ),
             errorBorder: UnderlineInputBorder(
@@ -340,7 +340,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.error,
-                width: 1,
+                width: 0.5,
               ),
             ),
           ),
@@ -538,7 +538,7 @@ void main() {
         FlexSubTheme.toggleButtonsTheme(colorScheme: colorScheme),
         equals(
           ToggleButtonsThemeData(
-            borderWidth: 1.5,
+            borderWidth: 0.5,
             selectedColor: colorScheme.background,
             color: colorScheme.primary,
             fillColor: colorScheme.primary,
@@ -557,8 +557,8 @@ void main() {
             borderRadius: BorderRadius.circular(16),
             constraints: BoxConstraints.tight(
               Size(
-                48 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
-                48 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
+                48 - 0.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
+                48 - 0.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
               ),
             ),
           ),

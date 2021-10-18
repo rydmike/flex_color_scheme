@@ -24,8 +24,8 @@ void main() {
       bottomNavigationBarElevation: 0,
       minButtonSize: Size(kMinInteractiveDimension, kMinInteractiveDimension),
       buttonPadding: EdgeInsets.symmetric(horizontal: 16),
-      thickOutlineWidth: 1.5,
-      thinOutlineWidth: 1,
+      thickOutlineWidth: 2,
+      thinOutlineWidth: 0.5,
       inputDecoratorIsFilled: true,
       inputDecoratorIsOutlinedBorder: true,
     );
@@ -41,8 +41,8 @@ void main() {
       bottomNavigationBarElevation: 0,
       minButtonSize: Size(kMinInteractiveDimension, kMinInteractiveDimension),
       buttonPadding: EdgeInsets.symmetric(horizontal: 16),
-      thickOutlineWidth: 1.5,
-      thinOutlineWidth: 1,
+      thickOutlineWidth: 2,
+      thinOutlineWidth: 0.5,
       inputDecoratorIsFilled: true,
       inputDecoratorIsOutlinedBorder: false,
     );
@@ -58,8 +58,8 @@ void main() {
       bottomNavigationBarElevation: 1,
       minButtonSize: Size(36, 36),
       buttonPadding: EdgeInsets.symmetric(horizontal: 24),
-      thickOutlineWidth: 2,
-      thinOutlineWidth: 0.5,
+      thickOutlineWidth: 3,
+      thinOutlineWidth: 1.5,
       inputDecoratorIsFilled: false,
       inputDecoratorIsOutlinedBorder: true,
     );
@@ -115,8 +115,8 @@ void main() {
           minButtonSize:
               const Size(kMinInteractiveDimension, kMinInteractiveDimension),
           buttonPadding: const EdgeInsets.symmetric(horizontal: 16),
-          thickOutlineWidth: 1.5,
-          thinOutlineWidth: 1,
+          thickOutlineWidth: 2,
+          thinOutlineWidth: 0.5,
           inputDecoratorIsFilled: true,
           inputDecoratorIsOutlinedBorder: true,
         ),
@@ -139,7 +139,7 @@ void main() {
         'EXPECT exact print string.', () {
       expect(m1.toString(), equalsIgnoringHashCodes(
           // ignore: lines_longer_than_80_chars
-          'FlexSubThemeConfig#00000(cornerRadius: 16.0, cornerRadiusBottomSheet: null, cornerRadiusCard: null, cornerRadiusDialog: null, cornerRadiusPopupMenuButton: null, cornerRadiusTimePickerDialog: null, cornerRadiusInputDecoration: null, cornerRadiusTextButton: null, cornerRadiusElevatedButton: null, cornerRadiusOutlinedButton: null, cornerRadiusToggleButtons: null, cardElevation: 0.0, elevatedButtonElevation: 0.0, popupMenuElevation: 2.0, dialogElevation: 12.0, bottomSheetElevation: 4.0, bottomSheetModalElevation: 12.0, bottomNavigationBarElevation: 0.0, minButtonSize: Size(48.0, 48.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickOutlineWidth: 1.5, thinOutlineWidth: 1.0, inputDecoratorIsOutlinedBorder: true, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorIsOutlinedBorder: true)'));
+          'FlexSubThemeConfig#00000(cornerRadius: 16.0, cornerRadiusBottomSheet: null, cornerRadiusCard: null, cornerRadiusDialog: null, cornerRadiusPopupMenuButton: null, cornerRadiusTimePickerDialog: null, cornerRadiusInputDecoration: null, cornerRadiusTextButton: null, cornerRadiusElevatedButton: null, cornerRadiusOutlinedButton: null, cornerRadiusToggleButtons: null, cardElevation: 0.0, elevatedButtonElevation: 0.0, popupMenuElevation: 2.0, dialogElevation: 12.0, bottomSheetElevation: 4.0, bottomSheetModalElevation: 12.0, bottomNavigationBarElevation: 0.0, minButtonSize: Size(48.0, 48.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickOutlineWidth: 2.0, thinOutlineWidth: 0.5, inputDecoratorIsOutlinedBorder: true, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorIsOutlinedBorder: true)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '
@@ -153,7 +153,7 @@ void main() {
     // This happens to always equal now in tests, if it start failing, test
     // 08c is actually enough.
     test('FSTC1.08b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 168509674);
+      expect(m1.hashCode, 135030117);
     });
     test('FSTC1.08c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));

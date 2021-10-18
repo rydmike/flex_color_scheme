@@ -3611,8 +3611,8 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: _colorScheme,
               radius: _subTheme.cornerRadiusOutlinedButton ??
                   _subTheme.cornerRadius,
-              selectedOutlineThickness: _subTheme.thickOutlineWidth,
-              unselectedOutlineThickness: _subTheme.thinOutlineWidth,
+              pressedOutlineWidth: _subTheme.thickOutlineWidth,
+              outlineWidth: _subTheme.thinOutlineWidth,
               padding: _subTheme.buttonPadding,
               minButtonSize: _subTheme.minButtonSize,
             )
@@ -3629,7 +3629,7 @@ class FlexColorScheme with Diagnosticable {
       toggleButtonsTheme: subThemesOptIn
           ? FlexSubTheme.toggleButtonsTheme(
               colorScheme: _colorScheme,
-              borderWidth: _subTheme.thickOutlineWidth,
+              borderWidth: _subTheme.thinOutlineWidth,
               radius:
                   _subTheme.cornerRadiusToggleButtons ?? _subTheme.cornerRadius,
               minButtonSize: _subTheme.minButtonSize,
