@@ -1,10 +1,14 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-/// A list tile that can be toggled via trailing widget to open to reveal
-/// more content and hidden again.
+/// A list tile that can be toggled via trailing widget to open and reveal
+/// more content in a child Widget.
 ///
-/// The ListTile and its revealed child are wrapped in a Card widget.
+//  The open reveal is animated.
+/// The ListTile and its revealed child are wrapped in a Card widget, it
+/// is designed to placed on color of scaffold background color.
+///
+/// The widget is kept alive with AutomaticKeepAliveClientMixin so it does
+/// not get dismissed and closed in scroll views.
 class RevealListTileCard extends StatefulWidget {
   const RevealListTileCard({
     Key? key,
@@ -47,7 +51,7 @@ class RevealListTileCard extends StatefulWidget {
   /// Whether this list tile is interactive.
   final bool enabled;
 
-  /// Whether widget is closed or open-
+  /// Whether widget is closed or open.
   ///
   /// Set to false to hide child.
   final bool closed;
@@ -55,10 +59,10 @@ class RevealListTileCard extends StatefulWidget {
   /// Callback called if the open/close state was changed.
   final ValueChanged<bool>? onChange;
 
-  /// The duration of the hide animation.
+  /// The duration of the show and hide animation of child.
   final Duration duration;
 
-  /// The child to be revealed
+  /// The child to be revealed.
   final Widget? child;
 
   @override
@@ -95,18 +99,36 @@ class _RevealListTileCardState extends State<RevealListTileCard>
     final ColorScheme scheme = theme.colorScheme;
     final bool isDark = theme.brightness == Brightness.dark;
     final int blendFactor = isDark ? 3 : 2;
-    Color surface = scheme.surface.blend(scheme.primary, 3 * blendFactor);
-    if (surface == theme.scaffoldBackgroundColor) {
-      surface = surface.blend(scheme.primary, 1 * blendFactor);
+
+    // Get default card background color.
+    Color cardColor = theme.cardColor;
+    // Compute a header with fixed primary blend, to give it a different tint.
+    Color headerColor =
+        Color.alphaBlend(scheme.primary.withAlpha(6 * blendFactor), cardColor);
+
+    // If card or its header color, is equal to scaffold background, we will
+    // adjust it.
+    if (cardColor == theme.scaffoldBackgroundColor ||
+        headerColor == theme.scaffoldBackgroundColor) {
+      cardColor = Color.alphaBlend(
+          scheme.primary.withAlpha(4 * blendFactor), cardColor);
+      headerColor = Color.alphaBlend(
+          scheme.primary.withAlpha(4 * blendFactor), headerColor);
     }
+    // If it was header color that was equal, same adjustment on card, may have
+    // caused card to become equal to background, let's check and adjust it
+    // once again, very unlikely that this would happen but possible
+    if (cardColor == theme.scaffoldBackgroundColor) {
+      cardColor = Color.alphaBlend(
+          scheme.primary.withAlpha(2 * blendFactor), cardColor);
+    }
+
     return Card(
-      color: scheme.surface.blend(scheme.primary, 1 * blendFactor),
+      color: cardColor,
       child: Column(
         children: <Widget>[
           Theme(
-            data: theme.copyWith(
-                cardColor: surface,
-                colorScheme: scheme.copyWith(surface: surface)),
+            data: theme.copyWith(cardColor: headerColor),
             child: Material(
               type: MaterialType.card,
               child: ListTile(

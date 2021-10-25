@@ -55,51 +55,6 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  // FlexSystemNavBarStyle enum to widget map, used in a CupertinoSegment.
-  static const Map<FlexSystemNavBarStyle, Widget> _systemNavBar =
-      <FlexSystemNavBarStyle, Widget>{
-    FlexSystemNavBarStyle.system: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'System',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexSystemNavBarStyle.surface: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'Surface',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexSystemNavBarStyle.background: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'Back\u{00AD}ground',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexSystemNavBarStyle.scaffoldBackground: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'Scaffold\nback\u{00AD}ground',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexSystemNavBarStyle.transparent: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'Trans\u{00AD}parent',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-  };
-
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
@@ -108,8 +63,6 @@ class _HomePageState extends State<HomePage> {
     final bool menuAvailable = media.size.width >= AppConst.desktopBreakpoint;
 
     final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
-    final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
 
@@ -207,114 +160,31 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // Card with theme colors and toggle on/off
                     // using FlexColorScheme.
-                    _ThemeSettings(controller: widget.controller),
+                    _ThemeColors(controller: widget.controller),
                     // Card with theme mode settings.
-                    _ModeSettings(controller: widget.controller),
+                    _ModeOptions(controller: widget.controller),
                     // Card for enabling sub themes and their settings.
                     _SubThemes(controller: widget.controller),
                     // Surface mode settings.
-                    _SurfaceSettings(controller: widget.controller),
+                    _SurfaceBlends(controller: widget.controller),
                     // App bar theme settings.
-                    _AppBarSettings(controller: widget.controller),
-                    // Other settings, these settings control the annotated
-                    // region and are not persisted theme settings.
-                    RevealListTileCard(
-                      title: Text(
-                        'System navigation',
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      closed: true,
-                      child: Column(
-                        children: <Widget>[
-                          const ListTile(
-                            title: Text('Android system navigation bar style'),
-                            subtitle: Text(
-                              'Styled with annotated region. System is white '
-                              'in light theme and black in dark. '
-                              'Others use their respective theme '
-                              'color. Transparent shows background with system '
-                              'navigation buttons on background.\n',
-                            ),
-                          ),
-                          // AppBar style
-                          CupertinoSegmentedControl<FlexSystemNavBarStyle>(
-                            children: _systemNavBar,
-                            groupValue: _navBarStyle,
-                            onValueChanged: (FlexSystemNavBarStyle value) {
-                              setState(() {
-                                _navBarStyle = value;
-                              });
-                            },
-                            borderColor: isLight
-                                ? colorScheme.primary
-                                : theme.primaryColorLight,
-                            selectedColor: isLight
-                                ? colorScheme.primary
-                                : theme.primaryColorLight,
-                            unselectedColor: theme.cardColor,
-                          ),
-                          // System navbar has divider or not?
-                          SwitchListTile.adaptive(
-                            title: const Text(
-                              'System navbar has divider',
-                            ),
-                            value: _useNavDivider,
-                            onChanged: (bool value) {
-                              setState(() {
-                                _useNavDivider = value;
-                              });
-                            },
-                          ),
-                          const ListTile(
-                            title: Text('Opacity'),
-                            subtitle: Text(
-                              'Used by system navigation bar and themed bottom '
-                              'navigation bar opacity. They are different '
-                              'parameters, but share setting in this example.',
-                            ),
-                          ),
-                          ListTile(
-                            title: Slider.adaptive(
-                              max: 100,
-                              divisions: 100,
-                              label: (widget.controller
-                                          .bottomNavigationBarOpacity *
-                                      100)
-                                  .toStringAsFixed(0),
-                              value:
-                                  widget.controller.bottomNavigationBarOpacity *
-                                      100,
-                              onChanged: (double value) {
-                                widget.controller
-                                    .setBottomNavigationBarOpacity(value / 100);
-                              },
-                            ),
-                            trailing: Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.only(end: 12),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: <Widget>[
-                                  Text(
-                                    'OPACITY',
-                                    style: Theme.of(context).textTheme.caption,
-                                  ),
-                                  Text(
-                                    // ignore: lines_longer_than_80_chars
-                                    '${(widget.controller.bottomNavigationBarOpacity * 100).toStringAsFixed(0)} %',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .caption!
-                                        .copyWith(fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    _AppBarStyle(controller: widget.controller),
+                    // Bottom and system navbar settings.
+                    _BottomNavBars(
+                      controller: widget.controller,
+                      navBarStyle: _navBarStyle,
+                      onNavBarStyle: (FlexSystemNavBarStyle value) {
+                        setState(() {
+                          _navBarStyle = value;
+                        });
+                      },
+                      hasDivider: _useNavDivider,
+                      onHasDivider: (bool value) {
+                        setState(() {
+                          _useNavDivider = value;
+                        });
+                      },
                     ),
-                    // Sub page and splash pages demos.
                     const _SubPages(),
                     const Divider(),
                     Text('Theme Showcase', style: headline4),
@@ -330,8 +200,8 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class _ThemeSettings extends StatelessWidget {
-  const _ThemeSettings({
+class _ThemeColors extends StatelessWidget {
+  const _ThemeColors({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -390,8 +260,8 @@ class _ThemeSettings extends StatelessWidget {
   }
 }
 
-class _ModeSettings extends StatelessWidget {
-  const _ModeSettings({
+class _ModeOptions extends StatelessWidget {
+  const _ModeOptions({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -615,8 +485,8 @@ class _SubThemes extends StatelessWidget {
   }
 }
 
-class _SurfaceSettings extends StatelessWidget {
-  const _SurfaceSettings({
+class _SurfaceBlends extends StatelessWidget {
+  const _SurfaceBlends({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -663,11 +533,12 @@ class _SurfaceSettings extends StatelessWidget {
             subtitle: Text(
               'Default Material design uses white and dark background colors. '
               'With FlexColorScheme you can adjust the primary color '
-              'alpha blend strategy used on surface and background colors.',
+              'alpha blend strategy used to blend primary color into surface '
+              'and background colors.',
             ),
           ),
           ListTile(
-            title: const Text('Surface mode'),
+            title: const Text('Surface blend mode'),
             subtitle: Text(explainMode(controller.surfaceMode)),
           ),
           ListTile(
@@ -679,7 +550,7 @@ class _SurfaceSettings extends StatelessWidget {
           const ListTile(
             title: Text('Alpha blend level'),
             subtitle: Text(
-              'Adjust level of surface color alpha blending',
+              'Adjust the alpha level of the color blending',
             ),
           ),
           ListTile(
@@ -720,114 +591,46 @@ class _SurfaceSettings extends StatelessWidget {
   }
 }
 
-class _AppBarSettings extends StatelessWidget {
-  const _AppBarSettings({
+class _AppBarStyle extends StatelessWidget {
+  const _AppBarStyle({
     Key? key,
     required this.controller,
   }) : super(key: key);
   final ThemeController controller;
 
-  // FlexAppBarStyle enum to widget map, used in a CupertinoSegment control.
-  static const Map<FlexAppBarStyle, Widget> _themeAppBar =
-      <FlexAppBarStyle, Widget>{
-    FlexAppBarStyle.primary: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'Primary\ncolor',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexAppBarStyle.material: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        // Wait, what is \u{00AD} below?? It is Unicode char-code for an
-        // invisible soft hyphen. It can be used to guide text layout where
-        // it can break a word to the next line, if it has to. On small phones
-        // or a desktop builds where you can make the UI really narrow in
-        // Flutter, you can observe this with the 'background' word below.
-        'Material guide\nback\u{00AD}ground',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexAppBarStyle.surface: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'Branded\nsurface',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexAppBarStyle.background: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'Branded\nback\u{00AD}ground',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexAppBarStyle.custom: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'Custom\ncolor',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-  };
-
-  // FlexTabBarStyle enum to widget map, used in a CupertinoSegment control.
-  static const Map<FlexTabBarStyle, Widget> _themeTabBar =
-      <FlexTabBarStyle, Widget>{
-    FlexTabBarStyle.forAppBar: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'TabBar used\nin AppBar',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexTabBarStyle.forBackground: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'TabBar used\non background',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexTabBarStyle.useDefault: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'TabBar uses\nSDK default',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-    FlexTabBarStyle.universal: Padding(
-      padding: EdgeInsets.all(5),
-      child: Text(
-        'TabBar uses\nuniversal style',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 11),
-      ),
-    ),
-  };
-
   String explainStyle(final FlexAppBarStyle style, final bool isLight) {
     switch (style) {
       case FlexAppBarStyle.primary:
-        return 'Use primary color.';
+        return isLight ? 'Use primary color. (Default)' : 'Use primary color.';
       case FlexAppBarStyle.material:
         return isLight
-            ? 'Use Material guide light theme background color (white).'
-            : 'Use Material guide dark theme background color (#121212).';
+            ? 'Use Material guide light white background color.'
+            : 'Use Material guide dark (#121212) background color. (Default)';
       case FlexAppBarStyle.surface:
-        return 'Use the primary branded surface color.';
+        return 'Use surface color including its primary color alpha blend.';
       case FlexAppBarStyle.background:
-        return 'Use the primary branded background color.';
+        return 'Use background color including its primary color alpha blend.';
       case FlexAppBarStyle.custom:
-        return 'Uses secondary variant color, but you can make it any color.';
+        return 'Built-in schemes use their secondary variant color as custom '
+            'color choice, but you can make it any color.';
+    }
+  }
+
+  String explainTabStyle(final FlexTabBarStyle style) {
+    switch (style) {
+      case FlexTabBarStyle.forAppBar:
+        return 'Themed to fit chosen FlexColorScheme AppBar style in both '
+            'dark and light mode. Typically the one you want. (Default)';
+      case FlexTabBarStyle.forBackground:
+        return 'Themed to fit background color, eg on Scaffold. Also works '
+            'well on background colored AppBars.';
+      case FlexTabBarStyle.useDefault:
+        return 'Flutter SDK default. Works on primary color in light mode, and '
+            'background color in dark mode.';
+      case FlexTabBarStyle.universal:
+        return 'Universal style. Experimental feature, the '
+            'style may change in the future. Has low contrast on some theme '
+            'combinations.';
     }
   }
 
@@ -859,37 +662,29 @@ class _AppBarSettings extends StatelessWidget {
           ),
           if (isLight) ...<Widget>[
             ListTile(
-              title: const Text('Light AppBar theme'),
+              title: const Text('Light mode AppBar background color'),
               subtitle: Text(
                 explainStyle(controller.lightAppBarStyle, isLight),
               ),
             ),
-            CupertinoSegmentedControl<FlexAppBarStyle>(
-              children: _themeAppBar,
-              groupValue: controller.lightAppBarStyle,
-              onValueChanged: controller.setLightAppBarStyle,
-              borderColor:
-                  isLight ? colorScheme.primary : theme.primaryColorLight,
-              selectedColor:
-                  isLight ? colorScheme.primary : theme.primaryColorLight,
-              unselectedColor: theme.cardColor,
-            )
+            ListTile(
+              trailing: AppBarStyleButtons(
+                style: controller.lightAppBarStyle,
+                onChanged: controller.setLightAppBarStyle,
+              ),
+            ),
           ] else ...<Widget>[
             ListTile(
-              title: const Text('Dark AppBar theme'),
+              title: const Text('Dark mode AppBar background color'),
               subtitle: Text(
                 explainStyle(controller.darkAppBarStyle, isLight),
               ),
             ),
-            CupertinoSegmentedControl<FlexAppBarStyle>(
-              children: _themeAppBar,
-              groupValue: controller.darkAppBarStyle,
-              onValueChanged: controller.setDarkAppBarStyle,
-              borderColor:
-                  isLight ? colorScheme.primary : theme.primaryColorLight,
-              selectedColor:
-                  isLight ? colorScheme.primary : theme.primaryColorLight,
-              unselectedColor: theme.cardColor,
+            ListTile(
+              trailing: AppBarStyleButtons(
+                style: controller.darkAppBarStyle,
+                onChanged: controller.setDarkAppBarStyle,
+              ),
             ),
           ],
           SwitchListTile.adaptive(
@@ -972,22 +767,118 @@ class _AppBarSettings extends StatelessWidget {
           const ListTile(
             title: Text('TabBar theme'),
             subtitle: Text(
-              'Choose the style that fit best with where '
-              'you primarily intend to use the TabBar.',
+              'Choose the style that fit best with where you primarily intend '
+              'to use your TabBars.',
             ),
           ),
+          // ListTile(
+          //
+          // ),
           const SizedBox(height: 4),
-          CupertinoSegmentedControl<FlexTabBarStyle>(
-            children: _themeTabBar,
-            groupValue: controller.tabBarStyle,
-            onValueChanged: controller.setTabBarStyle,
-            borderColor:
-                isLight ? colorScheme.primary : theme.primaryColorLight,
-            selectedColor:
-                isLight ? colorScheme.primary : theme.primaryColorLight,
-            unselectedColor: theme.cardColor,
+          ListTile(
+            subtitle: Text(explainTabStyle(controller.tabBarStyle)),
+            trailing: TabBarStyleButtons(
+              style: controller.tabBarStyle,
+              onChanged: controller.setTabBarStyle,
+            ),
           ),
           const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
+class _BottomNavBars extends StatelessWidget {
+  const _BottomNavBars({
+    Key? key,
+    required this.controller,
+    required this.navBarStyle,
+    required this.onNavBarStyle,
+    required this.hasDivider,
+    required this.onHasDivider,
+  }) : super(key: key);
+  final ThemeController controller;
+
+  final FlexSystemNavBarStyle navBarStyle;
+  final ValueChanged<FlexSystemNavBarStyle> onNavBarStyle;
+
+  final bool hasDivider;
+  final ValueChanged<bool> onHasDivider;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      title: Text(
+        'Bottom and system navigation',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      closed: true,
+      child: Column(
+        children: <Widget>[
+          const ListTile(
+            title: Text('Opacity'),
+            subtitle: Text(
+              'Used by system navigation bar and themed bottom '
+              'navigation bar opacity. They are different '
+              'parameters, but share setting in this example.',
+            ),
+          ),
+          ListTile(
+            title: Slider.adaptive(
+              max: 100,
+              divisions: 100,
+              label: (controller.bottomNavigationBarOpacity * 100)
+                  .toStringAsFixed(0),
+              value: controller.bottomNavigationBarOpacity * 100,
+              onChanged: (double value) {
+                controller.setBottomNavigationBarOpacity(value / 100);
+              },
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'OPACITY',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    // ignore: lines_longer_than_80_chars
+                    '${(controller.bottomNavigationBarOpacity * 100).toStringAsFixed(0)} %',
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Divider(height: 1),
+          const ListTile(
+            title: Text('Android system navigation bar style'),
+            subtitle: Text(
+              'Styled with annotated region. System is white '
+              'in light theme and black in dark. '
+              'Others use their respective theme '
+              'color. Transparent shows background with system '
+              'navigation buttons on background.\n',
+            ),
+          ),
+          ListTile(
+            title: const Text('Style'),
+            trailing: SystemNavBarStyleButtons(
+              style: navBarStyle,
+              onChanged: onNavBarStyle,
+            ),
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('System navigation bar has divider'),
+            value: hasDivider,
+            onChanged: onHasDivider,
+          ),
         ],
       ),
     );

@@ -48,6 +48,7 @@ class PageBody extends StatelessWidget {
     // the screen where it belongs.
     return Scrollbar(
       controller: controller,
+      // TODO(rydmike): Put back un-focus, need on device!
       child: Center(
         child: ConstrainedBox(
           constraints: constraints,

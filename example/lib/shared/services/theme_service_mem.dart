@@ -128,7 +128,7 @@ class ThemeServiceMem implements ThemeService {
   ///
   /// Defaults to 0.96, just a nice default effect for the example.
   @override
-  Future<double> appBarOpacity() async => 0.96;
+  Future<double> appBarOpacity() async => 0.94;
 
   /// Persists the used app bar opacity setting in example 5.
   @override
@@ -165,7 +165,7 @@ class ThemeServiceMem implements ThemeService {
   ///
   /// Defaults to 0.96, just a nice default effect for the example.
   @override
-  Future<double> bottomNavigationBarOpacity() async => 0.96;
+  Future<double> bottomNavigationBarOpacity() async => 0.94;
 
   /// Persists the used app bar opacity setting in example 5.
   @override

@@ -153,6 +153,7 @@ class DemoApp extends StatelessWidget {
                     subThemesData: FlexSubThemesData(
                       cornerRadius: themeController.cornerRadius,
                       themedEffects: themeController.themedEffects,
+                      bottomNavigationBarElevation: 0.5,
                       bottomNavigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
                       inputDecoratorIsFilled:
@@ -219,6 +220,7 @@ class DemoApp extends StatelessWidget {
                     subThemesData: FlexSubThemesData(
                       cornerRadius: themeController.cornerRadius,
                       themedEffects: themeController.themedEffects,
+                      bottomNavigationBarElevation: 0.5,
                       bottomNavigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
                       inputDecoratorIsFilled:
