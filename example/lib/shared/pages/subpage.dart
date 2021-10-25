@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'all_shared_imports.dart';
+import '../all_shared_imports.dart';
 // It is not necessary to review or understand the code in this file in order
 // to understand how to use the FlexColorScheme package demonstrated in
 // the examples.
@@ -32,9 +32,18 @@ class _SubpageState extends State<Subpage> {
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
 
+    final MediaQueryData media = MediaQuery.of(context);
+    final double topPadding = media.padding.top + kToolbarHeight * 2;
+    final double bottomPadding =
+        media.padding.bottom + kBottomNavigationBarHeight;
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        // For scrolling behind the app bar.
+        extendBodyBehindAppBar: true,
+        // For scrolling behind the bottom nav bar, if there is one.
+        extendBody: true,
         appBar: AppBar(
           title: const Text('Subpage Demo'),
           actions: const <Widget>[AboutIconButton()],
@@ -49,7 +58,12 @@ class _SubpageState extends State<Subpage> {
         ),
         body: PageBody(
           child: ListView(
-            padding: const EdgeInsets.all(App.edgePadding),
+            padding: EdgeInsets.fromLTRB(
+              AppConst.edgePadding,
+              topPadding + AppConst.edgePadding,
+              AppConst.edgePadding,
+              AppConst.edgePadding + bottomPadding,
+            ),
             children: <Widget>[
               Text('Subpage demo', style: headline4),
               const Text(
@@ -61,7 +75,7 @@ class _SubpageState extends State<Subpage> {
               // Show all key active theme colors.
               Text('Theme colors', style: headline4),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: App.edgePadding),
+                padding: EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
                 child: ShowThemeColors(),
               ),
               const Divider(),

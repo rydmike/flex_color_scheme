@@ -30,7 +30,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # All image assets used by the program.
-  #   Only an app icon used in the About dialog for now
-  assets:
-    - assets/images/

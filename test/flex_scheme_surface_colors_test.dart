@@ -400,9 +400,12 @@ void main() {
     test(
         'FSSC1.16: Test toString implemented via debugFillProperties '
         'EXPECT exact print string', () {
-      expect(m1.toString(), equalsIgnoringHashCodes(
-          // ignore: lines_longer_than_80_chars
-          'FlexSchemeSurfaceColors#00000(surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff), dialogBackground: Color(0xffffffff))'));
+      expect(
+          m1.toString(),
+          //
+          equalsIgnoringHashCodes(
+              // ignore: lines_longer_than_80_chars
+              'FlexSchemeSurfaceColors#00000(surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff), dialogBackground: Color(0xffffffff))'));
     });
 
     test(

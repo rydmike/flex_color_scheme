@@ -132,6 +132,9 @@ const double kBottomSheetModalElevation = 12;
 /// Default for elevation of [BottomNavigationBar].
 const double kBottomNavigationBarElevation = 0;
 
+/// Default for elevation of [SnackBar].
+const double kSnackBarElevation = 4;
+
 /// Default minimum button size.
 ///
 /// Applies to [TextButton], [ElevatedButton], [OutlinedButton] and
@@ -146,13 +149,76 @@ const EdgeInsetsGeometry kButtonPadding = EdgeInsets.symmetric(horizontal: 16);
 
 /// Default width of thick outline borders.
 ///
-/// Applies to pressed [OutlinedButton] border and , as well as selected
+/// Applies to pressed [OutlinedButton] border and selected
 /// state of [InputDecorator] border.
-const double kThickOutlineWidth = 2;
+const double kThickBorderWidth = 2;
 
 /// Default width of thin outline borders.
 ///
 /// Applies to disabled [OutlinedButton] border and to un-selected state of
 /// [InputDecorator] when using [OutlineInputBorder], and to all states of
 /// [ToggleButtons].
-const double kThinOutlineWidth = 0.5;
+const double kThinBorderWidth = 1.5;
+
+// TODO(rydmike): Consider adding SDK default values to doc comments below.
+
+/// Hover opacity on background.
+///
+/// Used on opt in sub-themes by [InputDecorator],
+/// [ElevatedButton], [OutlinedButton] and [TextButton].
+const double kHoverBackgroundOpacity = 0.06; // E:0.08 D:0.04 FO:0.08
+
+/// Focus opacity on background.
+///
+/// Used on opt in sub-themes by [InputDecorator],
+/// [ElevatedButton], [OutlinedButton] and [TextButton].
+const double kFocusBackgroundOpacity = 0.15; // E:0.24 D:0.12, FO:0.01
+
+/// Pressed opacity on background.
+///
+/// Ued on opt in sub-themes by [OutlinedButton] and [TextButton].
+const double kPressedBackgroundOpacity = 0.2; // E:0.24 D:? E:0.24
+
+/// Disabled opacity on background elements.
+///
+/// Used on opt in sub-themes by [InputDecorator], [ElevatedButton],
+/// [OutlinedButton], [TextButton], [ButtonThemeData] for legacy buttons and
+/// by [ToggleButtons].
+const double kDisabledBackgroundOpacity = 0.12; // E:0.12 D0.12
+
+/// Disabled opacity on foreground elements.
+///
+/// Used on opt in sub-themes by [ElevatedButton], [OutlinedButton] and by
+/// [ToggleButtons] as well as by [ThemeData.disabledColor] when opting in
+/// on sub-theme effects, for consistent disable colors.
+const double kDisabledForegroundOpacity = 0.38; // E:0.38 D:0.38
+
+/// Enabled border opacity on border sides.
+///
+/// Used on opt in sub-themes by [InputDecorator], [OutlinedButton] and by
+/// [ToggleButtons].
+const double kEnabledBorderOpacity = 0.65; // D:?
+
+/// White alpha blend for primary colored hover opt in effects theming.
+const int kHoverAlphaBlend = 40;
+
+/// White alpha blend for primary colored focus opt in effects theming.
+const int kFocusAlphaBlend = 20;
+
+/// White alpha blend for primary colored highlight opt in effects theming.
+const int kHighlightAlphaBlend = 20;
+
+/// White alpha blend for primary colored splash opt in effects theming.
+const int kSplashAlphaBlend = 25;
+
+/// Opacity value for hover on the custom opt in effects.
+const double kHoverOpacity = 0.12;
+
+/// Opacity value for focus on the custom opt in effects.
+const double kFocusOpacity = 0.25;
+
+/// Opacity value for highlight on the custom opt in effects.
+const double kHighlightOpacity = 0.25;
+
+/// Opacity value for splash on the custom opt in effects.
+const double kSplashOpacity = 0.30;

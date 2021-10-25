@@ -667,10 +667,10 @@ void main() {
     test(
         'FCS7.46: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.unselectedLabelColor black87.withOpacity(0.7)', () {
+        'TabBarTheme.unselectedLabelColor black87.withAlpha(0xB2)', () {
       expect(
         tDarkM.tabBarTheme.unselectedLabelColor,
-        equals(Colors.black87.withOpacity(0.7)),
+        equals(Colors.black87.withAlpha(0xB2)),
       );
     });
 
@@ -793,19 +793,19 @@ void main() {
     test(
         'FCS7.61: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor white.withOpacity(0.7).', () {
+        'TabBarTheme.unselectedLabelColor white.withAlpha(0xB2).', () {
       expect(
         tLightS.tabBarTheme.unselectedLabelColor,
-        equals(Colors.white.withOpacity(0.7)),
+        equals(Colors.white.withAlpha(0xB2)),
       );
     });
     test(
         'FCS7.62: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.unselectedLabelColor white.withOpacity(0.7)', () {
+        'TabBarTheme.unselectedLabelColor white.withAlpha(0xB2).', () {
       expect(
         tDarkS.tabBarTheme.unselectedLabelColor,
-        equals(Colors.white.withOpacity(0.7)),
+        equals(Colors.white.withAlpha(0xB2)),
       );
     });
 

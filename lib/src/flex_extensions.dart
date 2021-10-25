@@ -12,8 +12,9 @@ import 'package:flutter/material.dart';
 /// extensions here are, [brighten], [lighten] and [darken]. They are used
 /// for color calculations in FlexColorScheme but also exposed for reuse.
 ///
-/// Another frequently used extension is the one used to [blend] two colors
-/// using alpha value. This extension is used to calculate branded surface
+/// Another frequently used extension is [blend] and [blendAlpha] used to blend
+/// two colors using alpha as a percentage or as an 8-bit int alpha value.
+/// This extension is used to calculate branded surface
 /// colors used by FlexColorScheme's branded surfaces and for automatic dark
 /// color schemes from a light scheme.
 ///
@@ -67,7 +68,6 @@ extension FlexColorExtensions on Color {
         .toColor();
   }
 
-  // TODO(rydmike): Make tests for this!
   /// Get onColor for a color.
   ///
   /// The onColor is white if the color has brightness dark and black if

@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'flex_color.dart';
 
+// TODO(rydmike): Add enum with order selection of theme mode buttons
+// Something like this, plus implementation.
+// enum FlexThemeModeButtonOrder {
+//   lightDarkSystem,
+//   lightSystemDark,
+//   darkSystemLight,
+//   darkLightSystem,
+// }
+
 /// A 3-way Light, Dark and System theme-mode switch widget.
 ///
 /// Pass in current selected [themeMode] value and the [onThemeModeChanged]
@@ -33,6 +42,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
     required final this.onThemeModeChanged,
     required final this.flexSchemeData,
     final this.title,
+    final this.hasTitle = true,
     final this.labelLight = 'LIGHT',
     final this.labelDark = 'DARK',
     final this.labelSystem = 'SYSTEM',
@@ -73,6 +83,11 @@ class FlexThemeModeSwitch extends StatelessWidget {
   /// A leading title widget for the theme mode switch.
   /// Defaults to `Text('Theme mode')` with style subtitle1, if it is null.
   final Widget? title;
+
+  /// To use the widget without any leading title set to false;
+  ///
+  /// Defaults to true.
+  final bool hasTitle;
 
   /// Option label for theme mode light.
   /// Defaults to 'LIGHT', assign null to omit the label.
@@ -169,10 +184,11 @@ class FlexThemeModeSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Expanded(
-          child: title ??
-              Text('Theme mode', style: Theme.of(context).textTheme.subtitle1),
-        ),
+        if (hasTitle)
+          Expanded(
+              child: title ??
+                  Text('Theme mode',
+                      style: Theme.of(context).textTheme.subtitle1)),
         // Option button for light theme mode.
         FlexThemeModeOptionButton(
           flexSchemeColor: flexSchemeData.light,
@@ -377,6 +393,9 @@ class FlexThemeModeOptionButton extends StatelessWidget {
   ///
   /// If null, defaults to `Color(0x50BCBCBC)` in light mode and to
   /// `Color(0x99555555)` in dark-mode.
+  ///
+  /// If using nice custom theming that should be used, pass in
+  /// Theme.of(context).hoverColor.
   final Color? hoverColor;
 
   @override

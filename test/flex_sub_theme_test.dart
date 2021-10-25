@@ -14,7 +14,7 @@ void main() {
         'FST1.01: GIVEN a default FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(
-        FlexSubTheme.bottomSheetTheme(),
+        FlexSubThemes.bottomSheetTheme(),
         equals(
           const BottomSheetThemeData(
             clipBehavior: Clip.antiAlias,
@@ -34,7 +34,7 @@ void main() {
         'FST1.01custom: GIVEN a custom FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(
-        FlexSubTheme.bottomSheetTheme(
+        FlexSubThemes.bottomSheetTheme(
           clipBehavior: Clip.antiAliasWithSaveLayer,
           elevation: 2,
           modalElevation: 4,
@@ -61,7 +61,7 @@ void main() {
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
       expect(
-        FlexSubTheme.bottomNavigationBar(),
+        FlexSubThemes.bottomNavigationBar(),
         equals(
           const BottomNavigationBarThemeData(
             elevation: 0,
@@ -74,19 +74,53 @@ void main() {
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
       expect(
-        FlexSubTheme.bottomNavigationBar(elevation: 10),
+        FlexSubThemes.bottomNavigationBar(
+          elevation: 10,
+          backgroundColor: const Color(0xF0341287),
+        ),
         equals(
           const BottomNavigationBarThemeData(
             elevation: 10,
+            backgroundColor: Color(0xF0341287),
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.03: GIVEN a default FlexSubTheme.snackBarTheme() '
+        'EXPECT equal to SnackBarThemeData() version '
+        'with same values', () {
+      expect(
+        FlexSubThemes.snackBarTheme(),
+        equals(
+          const SnackBarThemeData(
+            elevation: 4,
           ),
         ),
       );
     });
     test(
-        'FST1.03: GIVEN a default FlexSubTheme.cardTheme() '
+        'FST1.03custom: GIVEN a custom FlexSubTheme.snackBarTheme() '
+        'EXPECT equal to SnackBarThemeData() version '
+        'with same values', () {
+      expect(
+        FlexSubThemes.snackBarTheme(
+          elevation: 10,
+        ),
+        equals(
+          const SnackBarThemeData(
+            elevation: 10,
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.04: GIVEN a default FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
-        FlexSubTheme.cardTheme(),
+        FlexSubThemes.cardTheme(),
         equals(
           const CardTheme(
             clipBehavior: Clip.antiAlias,
@@ -101,10 +135,10 @@ void main() {
       );
     });
     test(
-        'FST1.03custom: GIVEN a custom FlexSubTheme.cardTheme() '
+        'FST1.04custom: GIVEN a custom FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
-        FlexSubTheme.cardTheme(
+        FlexSubThemes.cardTheme(
           clipBehavior: Clip.antiAliasWithSaveLayer,
           elevation: 2,
           radius: 1,
@@ -123,10 +157,10 @@ void main() {
       );
     });
     test(
-        'FST1.04: GIVEN a default FlexSubTheme.dialogTheme() '
+        'FST1.05: GIVEN a default FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
-        FlexSubTheme.dialogTheme(),
+        FlexSubThemes.dialogTheme(),
         equals(
           const DialogTheme(
             elevation: 12,
@@ -140,10 +174,10 @@ void main() {
       );
     });
     test(
-        'FST1.04custom: GIVEN a custom FlexSubTheme.dialogTheme() '
+        'FST1.05custom: GIVEN a custom FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
-        FlexSubTheme.dialogTheme(
+        FlexSubThemes.dialogTheme(
           elevation: 10,
           radius: 6,
         ),
@@ -160,10 +194,10 @@ void main() {
       );
     });
     test(
-        'FST1.05: GIVEN a default FlexSubTheme.popupMenuTheme() '
+        'FST1.06: GIVEN a default FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
-        FlexSubTheme.popupMenuTheme(),
+        FlexSubThemes.popupMenuTheme(),
         equals(
           const PopupMenuThemeData(
             elevation: 2,
@@ -177,10 +211,10 @@ void main() {
       );
     });
     test(
-        'FST1.05custom: GIVEN a custom FlexSubTheme.popupMenuTheme() '
+        'FST1.06custom: GIVEN a custom FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
-        FlexSubTheme.popupMenuTheme(
+        FlexSubThemes.popupMenuTheme(
           elevation: 8,
           radius: 8,
         ),
@@ -197,10 +231,10 @@ void main() {
       );
     });
     test(
-        'FST1.06: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'FST1.07: GIVEN a default FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       expect(
-        FlexSubTheme.timePickerTheme(),
+        FlexSubThemes.timePickerTheme(),
         equals(
           TimePickerThemeData(
             shape: const RoundedRectangleBorder(
@@ -227,16 +261,16 @@ void main() {
       );
     });
     test(
-        'FST1.07a: GIVEN a default FlexSubTheme.inputDecorationTheme() '
+        'FST1.08a: GIVEN a default FlexSubTheme.inputDecorationTheme() '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubTheme.inputDecorationTheme(colorScheme: colorScheme),
+        FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme),
         equals(
           InputDecorationTheme(
             filled: true,
-            fillColor: colorScheme.primary.withOpacity(0.075),
-            hoverColor: colorScheme.primary.withOpacity(0.1),
+            fillColor: colorScheme.primary.withOpacity(0.06),
+            hoverColor: colorScheme.primary.withOpacity(0.06),
             focusColor: colorScheme.primary.withOpacity(0.15),
             focusedBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
@@ -249,14 +283,14 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary.withOpacity(0.65),
-                width: 0.5,
+                width: 1.5,
               ),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.12),
-                width: 0.5,
+                width: 1.5,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
@@ -270,7 +304,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error,
-                width: 0.5,
+                width: 1.5,
               ),
             ),
           ),
@@ -278,20 +312,20 @@ void main() {
       );
     });
     test(
-        'FST1.07b: GIVEN a default '
+        'FST1.08b: GIVEN a default '
         'FlexSubTheme.inputDecorationTheme(useOutlinedBorder: false) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubTheme.inputDecorationTheme(
+        FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
           useOutlinedBorder: false,
         ),
         equals(
           InputDecorationTheme(
             filled: true,
-            fillColor: colorScheme.primary.withOpacity(0.075),
-            hoverColor: colorScheme.primary.withOpacity(0.1),
+            fillColor: colorScheme.primary.withOpacity(0.06),
+            hoverColor: colorScheme.primary.withOpacity(0.06),
             focusColor: colorScheme.primary.withOpacity(0.15),
             focusedBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
@@ -310,7 +344,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.primary.withOpacity(0.65),
-                width: 0.5,
+                width: 1.5,
               ),
             ),
             disabledBorder: UnderlineInputBorder(
@@ -320,7 +354,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.12),
-                width: 0.5,
+                width: 1.5,
               ),
             ),
             focusedErrorBorder: UnderlineInputBorder(
@@ -340,7 +374,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.error,
-                width: 0.5,
+                width: 1.5,
               ),
             ),
           ),
@@ -354,16 +388,16 @@ void main() {
     // Applies to: tests: FST1.06, FST1.07, FST1.08, all using ButtonStyle.
     // Same happens if we compare the ButtonStyle object directly too.
     test(
-        'FST1.08: GIVEN a default FlexSubTheme.elevatedButtonTheme() '
+        'FST1.09: GIVEN a default FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubTheme.elevatedButtonTheme().toString(),
+        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              minimumSize: const Size(
-                  kMinInteractiveDimension, kMinInteractiveDimension),
+              minimumSize: const Size(48, 48),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(16),
@@ -371,17 +405,50 @@ void main() {
               ), //buttonShape,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               elevation: 0,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.onSurface.withOpacity(0.38);
+                  }
+                  return colorScheme.onPrimary;
+                },
+              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.onSurface.withOpacity(0.12);
+                  }
+                  return colorScheme.primary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.onPrimary.withOpacity(0.06);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.onPrimary.withOpacity(0.15);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onPrimary.withOpacity(0.2);
+                  }
+                  return Colors.transparent;
+                },
+              ),
             ),
           ).toString(),
         ),
       );
     });
     test(
-        'FST1.08custom: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'FST1.09custom: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubTheme.elevatedButtonTheme(
+        FlexSubThemes.elevatedButtonTheme(
+                colorScheme: colorScheme,
                 elevation: 1,
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 minButtonSize: const Size(50, 50),
@@ -398,22 +465,52 @@ void main() {
               ), //buttonShape,
               padding: const EdgeInsets.symmetric(horizontal: 8),
               elevation: 1,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.onSurface.withOpacity(0.38);
+                  }
+                  return colorScheme.onPrimary;
+                },
+              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.onSurface.withOpacity(0.12);
+                  }
+                  return colorScheme.primary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.onPrimary.withOpacity(0.06);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.onPrimary.withOpacity(0.15);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onPrimary.withOpacity(0.2);
+                  }
+                  return Colors.transparent;
+                },
+              ),
             ),
           ).toString(),
         ),
       );
     });
     test(
-        'FST1.09: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
+        'FST1.10: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubTheme.outlinedButtonTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
-              minimumSize: const Size(
-                  kMinInteractiveDimension, kMinInteractiveDimension),
+              minimumSize: const Size(48, 48),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(16),
@@ -421,13 +518,21 @@ void main() {
               ), //buttonShape,
               padding: const EdgeInsets.symmetric(horizontal: 16),
             ).copyWith(
-              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.onSurface.withOpacity(0.38);
+                  }
+                  return colorScheme.primary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withOpacity(0.06);
                   }
                   if (states.contains(MaterialState.focused)) {
-                    return colorScheme.primary.withOpacity(0.1);
+                    return colorScheme.primary.withOpacity(0.15);
                   }
                   if (states.contains(MaterialState.pressed)) {
                     return colorScheme.primary.withOpacity(0.2);
@@ -440,17 +545,23 @@ void main() {
                   if (states.contains(MaterialState.disabled)) {
                     return BorderSide(
                       color: colorScheme.onSurface.withOpacity(0.12),
-                      width: 1,
+                      width: 1.5,
                     );
                   }
                   if (states.contains(MaterialState.error)) {
                     return BorderSide(
                       color: colorScheme.error,
-                      width: 1.5,
+                      width: 2,
+                    );
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return BorderSide(
+                      color: colorScheme.primary,
+                      width: 2,
                     );
                   }
                   return BorderSide(
-                    color: colorScheme.primary,
+                    color: colorScheme.primary.withOpacity(0.65),
                     width: 1.5,
                   );
                 },
@@ -461,16 +572,15 @@ void main() {
       );
     });
     test(
-        'FST1.10: GIVEN a default FlexSubTheme.textButtonTheme() '
+        'FST1.11: GIVEN a default FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubTheme.textButtonTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.textButtonTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           TextButtonThemeData(
             style: TextButton.styleFrom(
-              minimumSize: const Size(
-                  kMinInteractiveDimension, kMinInteractiveDimension),
+              minimumSize: const Size(48, 48),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(16),
@@ -478,13 +588,13 @@ void main() {
               ), // buttonShape,
               padding: const EdgeInsets.symmetric(horizontal: 16),
             ).copyWith(
-              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withOpacity(0.06);
                   }
                   if (states.contains(MaterialState.focused)) {
-                    return colorScheme.primary.withOpacity(0.1);
+                    return colorScheme.primary.withOpacity(0.15);
                   }
                   if (states.contains(MaterialState.pressed)) {
                     return colorScheme.primary.withOpacity(0.2);
@@ -498,24 +608,25 @@ void main() {
       );
     });
     test(
-        'FST1.11: GIVEN a default FlexSubTheme.buttonTheme() '
+        'FST1.12: GIVEN a default FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubTheme.buttonTheme(colorScheme: colorScheme),
+        FlexSubThemes.buttonTheme(colorScheme: colorScheme),
         equals(
           ButtonThemeData(
             colorScheme: colorScheme,
             minWidth: 48,
             height: 48,
             hoverColor:
-                colorScheme.primary.blend(Colors.white, 30).withOpacity(0.2),
+                colorScheme.primary.blend(Colors.white, 40).withOpacity(0.12),
             focusColor:
                 colorScheme.primary.blend(Colors.white, 20).withOpacity(0.25),
-            splashColor:
-                colorScheme.primary.blend(Colors.white, 30).withOpacity(0.35),
             highlightColor:
-                colorScheme.primary.blend(Colors.white, 10).withOpacity(0.2),
+                colorScheme.primary.blend(Colors.white, 20).withOpacity(0.25),
+            splashColor:
+                colorScheme.primary.blend(Colors.white, 25).withOpacity(0.3),
+            disabledColor: colorScheme.onSurface.withOpacity(0.12),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(16),
@@ -535,31 +646,29 @@ void main() {
       final VisualDensity _visualDensity =
           VisualDensity.adaptivePlatformDensity;
       expect(
-        FlexSubTheme.toggleButtonsTheme(colorScheme: colorScheme),
+        FlexSubThemes.toggleButtonsTheme(colorScheme: colorScheme),
         equals(
           ToggleButtonsThemeData(
-            borderWidth: 0.5,
+            borderWidth: 1.5,
             selectedColor: colorScheme.background,
             color: colorScheme.primary,
             fillColor: colorScheme.primary,
-            borderColor: colorScheme.primary,
+            borderColor: colorScheme.primary.withOpacity(0.65),
             selectedBorderColor: colorScheme.primary,
             hoverColor:
-                colorScheme.primary.blend(Colors.white, 30).withOpacity(0.2),
+                colorScheme.primary.blend(Colors.white, 40).withOpacity(0.12),
             focusColor:
                 colorScheme.primary.blend(Colors.white, 20).withOpacity(0.25),
-            splashColor:
-                colorScheme.primary.blend(Colors.white, 30).withOpacity(0.35),
             highlightColor:
-                colorScheme.primary.blend(Colors.white, 10).withOpacity(0.2),
-            disabledColor: colorScheme.onSurface.withOpacity(0.3),
+                colorScheme.primary.blend(Colors.white, 20).withOpacity(0.25),
+            splashColor:
+                colorScheme.primary.blend(Colors.white, 25).withOpacity(0.3),
+            disabledColor: colorScheme.onSurface.withOpacity(0.38),
             disabledBorderColor: colorScheme.onSurface.withOpacity(0.12),
             borderRadius: BorderRadius.circular(16),
-            constraints: BoxConstraints.tight(
-              Size(
-                48 - 0.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
-                48 - 0.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
-              ),
+            constraints: BoxConstraints(
+              minWidth: 48 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
+              minHeight: 48 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
             ),
           ),
         ),

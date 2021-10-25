@@ -137,7 +137,7 @@ class _LegacyButtonRow extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: OutlineButton(
             onPressed: enabled ? () {} : null,
-            child: const Text('OUTLINED BUTTON'),
+            child: const Text('OUTLINE BUTTON'),
           ),
         ),
         Padding(
@@ -160,12 +160,17 @@ class _PopupMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
+      // One way to make a TextButton styled and background colored button
+      // for a PopupMenuButton, with a Card style background. Just wanted
+      // something that always uses same rounding and style as buttons, but
+      // with a varied branded background style from branded Card color.
       child: Card(
         clipBehavior: Clip.antiAlias,
         margin: EdgeInsets.zero,
         child: PopupMenuButton<int>(
           onSelected: (_) {},
           enabled: enabled,
+          tooltip: enabled ? 'Show menu' : 'Menu disabled',
           itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
             PopupMenuItem<int>(value: 1, child: Text('Option 1')),
             PopupMenuItem<int>(value: 2, child: Text('Option 2')),
@@ -174,6 +179,10 @@ class _PopupMenuButton extends StatelessWidget {
           ],
           child: AbsorbPointer(
             child: TextButton(
+              focusNode: FocusNode(
+                skipTraversal: true,
+                canRequestFocus: false,
+              ),
               onPressed: enabled ? () {} : null,
               child: const Text('POPUP MENU'),
             ),
@@ -412,11 +421,12 @@ class _TabRowForAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'TabBar is used in AppBar (default)',
+            'If the TabBar will always be used in an AppBar',
             style: Theme.of(context).textTheme.caption,
           ),
           Text(
-            'Use style FlexTabBarStyle.forAppBar',
+            'Then use style FlexTabBarStyle.forAppBar (default), '
+            'it will work here.',
             style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 10),
           ),
           Container(
@@ -458,11 +468,11 @@ class _TabRowForBackground extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'TabBar always used on background color',
+            'If the TabBar will always be used on background colors',
             style: Theme.of(context).textTheme.caption,
           ),
           Text(
-            'Use style FlexTabBarStyle.forBackground',
+            'Then use style FlexTabBarStyle.forBackground, it will work here.',
             style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 10),
           ),
           const TabBar(
@@ -628,18 +638,21 @@ class _BottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: BottomSheet(
-        onClosing: () {},
-        builder: (final BuildContext context) => SizedBox(
-          height: 100,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'A BottomSheet',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-            ],
+      child: AbsorbPointer(
+        child: BottomSheet(
+          enableDrag: false,
+          onClosing: () {},
+          builder: (final BuildContext context) => SizedBox(
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'A BottomSheet',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -746,62 +759,76 @@ class _TextStyles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme text = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Headline 1',
-            style: Theme.of(context).textTheme.headline1,
+            'Headline 1 '
+            '(${text.headline1!.fontSize!.toStringAsFixed(0)})',
+            style: text.headline1,
           ),
           Text(
-            'Headline 2',
-            style: Theme.of(context).textTheme.headline2,
+            'Headline 2 '
+            '(${text.headline2!.fontSize!.toStringAsFixed(0)})',
+            style: text.headline2,
           ),
           Text(
-            'Headline 3',
-            style: Theme.of(context).textTheme.headline3,
+            'Headline 3 '
+            '(${text.headline3!.fontSize!.toStringAsFixed(0)})',
+            style: text.headline3,
           ),
           Text(
-            'Headline 4',
-            style: Theme.of(context).textTheme.headline4,
+            'Headline 4 '
+            '(${text.headline4!.fontSize!.toStringAsFixed(0)})',
+            style: text.headline4,
           ),
           Text(
-            'Headline 5',
-            style: Theme.of(context).textTheme.headline5,
+            'Headline 5 '
+            '(${text.headline5!.fontSize!.toStringAsFixed(0)})',
+            style: text.headline5,
           ),
           Text(
-            'Headline 6',
-            style: Theme.of(context).textTheme.headline6,
+            'Headline 6 '
+            '(${text.headline6!.fontSize!.toStringAsFixed(0)})',
+            style: text.headline6,
           ),
           Text(
-            'Subtitle 1',
-            style: Theme.of(context).textTheme.subtitle1,
+            'Subtitle 1 '
+            '(${text.subtitle1!.fontSize!.toStringAsFixed(0)})',
+            style: text.subtitle1,
           ),
           Text(
-            'Subtitle 2',
-            style: Theme.of(context).textTheme.subtitle2,
+            'Subtitle 2 '
+            '(${text.subtitle2!.fontSize!.toStringAsFixed(0)})',
+            style: text.subtitle2,
           ),
           Text(
-            'Body Text 1',
-            style: Theme.of(context).textTheme.bodyText1,
+            'Body Text 1 '
+            '(${text.bodyText1!.fontSize!.toStringAsFixed(0)})',
+            style: text.bodyText1,
           ),
           Text(
-            'Body Text 2',
-            style: Theme.of(context).textTheme.bodyText2,
+            'Body Text 2 '
+            '(${text.bodyText2!.fontSize!.toStringAsFixed(0)})',
+            style: text.bodyText2,
           ),
           Text(
-            'Button',
-            style: Theme.of(context).textTheme.button,
+            'Button '
+            '(${text.button!.fontSize!.toStringAsFixed(0)})',
+            style: text.button,
           ),
           Text(
-            'Caption',
-            style: Theme.of(context).textTheme.caption,
+            'Caption '
+            '(${text.caption!.fontSize!.toStringAsFixed(0)})',
+            style: text.caption,
           ),
           Text(
-            'Overline',
-            style: Theme.of(context).textTheme.overline,
+            'Overline '
+            '(${text.overline!.fontSize!.toStringAsFixed(0)})',
+            style: text.overline,
           ),
         ],
       ),

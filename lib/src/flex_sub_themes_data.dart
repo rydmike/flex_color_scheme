@@ -3,29 +3,34 @@ import 'package:flutter/material.dart';
 
 import 'flex_constants.dart';
 
-/// Configuration parameters for FlexSubTheme used to customize the look of
-/// your `FlexColorScheme` when its `subThemesOptIn` property is set to true.
+// ignore_for_file: comment_references
+
+/// Parameters used by [FlexColorScheme] to configure [FlexSubTheme] when
+/// [FlexColorScheme.useSubThemes] is true.
 ///
-/// The main use case for FlexSubTheme is for easy to use customization
-/// of default corner radius on all Flutter SDK Widgets and elements that
-/// supports corner radius either via [ShapeBorder] or [BorderRadiusGeometry].
+/// The main use case for [FlexSubTheme] and the [FlexSubThemesData] is for
+/// easy to use customization of default corner radius on all Flutter SDK
+/// Widgets and elements that supports corner radius either via [ShapeBorder]
+/// or [BorderRadiusGeometry].
 ///
 /// The predefined default setting is a prominent rounding of 16 dp.
 /// It can be easily changed for all classes with a single override value,
-/// the corner rounding of each included theme can also be individually
+/// the corner radius of each included theme can also be individually
 /// changed if so desired.
 ///
-/// Additional sub-theming offers a consistent button design on all buttons,
-/// including [ToggleButtons] that is style to match size of [OutlinedButton]
+/// Additionally the sub-theming offers a consistent button design on all
+/// buttons, including [ToggleButtons] that is style to match size of
+/// [OutlinedButton]
 /// regarding outline and the selected button color to [ElevatedButton]
 /// primary color. Hover and Focus colors are also matched. It is also size
 /// matched with the other buttons, and includes a theme implementation that
 /// makes it implement [VisualDensity] which it does not do out of the box
 /// in the SDK.
 @immutable
-class FlexSubThemeConfig with Diagnosticable {
+class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemeConfig object.
-  const FlexSubThemeConfig({
+  const FlexSubThemesData({
+    this.themedEffects = true,
     this.cornerRadius = kCornerRadius,
     this.cornerRadiusBottomSheet,
     this.cornerRadiusCard,
@@ -44,14 +49,41 @@ class FlexSubThemeConfig with Diagnosticable {
     this.bottomSheetElevation = kBottomSheetElevation,
     this.bottomSheetModalElevation = kBottomSheetModalElevation,
     this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
+    this.bottomNavigationBarOpacity,
+    this.bottomNavigationBarLandscapeLayout,
     this.minButtonSize = kMinButtonSize,
     this.buttonPadding = kButtonPadding,
-    this.thickOutlineWidth = kThickOutlineWidth,
-    this.thinOutlineWidth = kThinOutlineWidth,
+    this.thickBorderWidth = kThickBorderWidth,
+    this.thinBorderWidth = kThinBorderWidth,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
     this.inputDecoratorIsOutlinedBorder = true,
+    this.inputDecoratorUnfocusedHasBorder = true,
   });
+
+  /// Opt in on using color branded hover, focus, highlight and splash effects.
+  ///
+  /// The standard colors on hover, focus, highlight and splash effects use
+  /// greys, white or black with different opacity levels.
+  ///
+  /// To get a color themed effect, set [themedEffects] to true and to false
+  /// for SDK default values.
+  ///
+  /// These effects apply to all Widgets that get them from [ThemeData]. The
+  /// newer buttons [ElevatedButton], [OutlinedButton] and [TextButton] define
+  /// theme style by default that use their own theme material state effects.
+  ///
+  /// The opt-in on [themedEffects] makes the overall theme consistent with this
+  /// style. It is not an exact match with the [ButtonStyleButton] buttons
+  ///
+  /// In order for [ToggleButtons] and legacy buttons `RaisedButton`,
+  /// `OutlineButton` and `FlatButton` match this style, they always use the
+  /// same effect as [themedEffects] provides on overall theme.
+  ///
+  ///
+  ///
+  /// Defaults to true.
+  final bool themedEffects;
 
   /// Corner radius of all widgets covered by `FlexSubTheme` sub-theme.
   ///
@@ -82,6 +114,19 @@ class FlexSubThemeConfig with Diagnosticable {
   final double? cornerRadiusDialog;
 
   /// Corner radius override value for [PopupMenuButton].
+  ///
+  /// When used by [FlexColorScheme] the corner radius of popup menus follows
+  /// the [cornerRadius] until and including 10 dp. After which it stays at
+  /// 10 dp. If you need a higher corner radius on popup menus than 10 dp,
+  /// you will have to explicitly override it here. It will not look very
+  /// good, the highlight inside the menu will start to overflow the corners and
+  /// it is not clipped along the border radius. The underlying Widget is not
+  /// designed with this high border rounding in mind, which makes sense since
+  /// it does not look good with too much rounding on a small menu.
+  ///
+  /// The built-in behavior in FlexColorScheme allows it to match at low
+  /// inherited radius values but to also stay below the usable max rounding
+  /// automatically at higher global border radius values.
   final double? cornerRadiusPopupMenuButton;
 
   /// Corner radius override value for [TimePickerDialog].
@@ -145,6 +190,49 @@ class FlexSubThemeConfig with Diagnosticable {
   /// Defaults to [kBottomNavigationBarElevation].
   final double bottomNavigationBarElevation;
 
+  /// BottomNavigationBar opacity
+  ///
+  /// If null, defaults to 1, fully opaque.
+  ///
+  /// Used by FlexColorScheme to modify the opacity on the effective
+  /// colorScheme.background color on the themed BottomNavigationBar color.
+  ///
+  /// For opacity to be applied to the background a defined color also have
+  /// be passed. If opacity is not null, FlexColorScheme will apply it to
+  /// colorScheme.background and pass it to
+  /// [FlexSubThemes.bottomNavigationBar]'s backgroundColor. If it is null,
+  /// FlexColorScheme will not pass any color the sub-theme background color.
+  ///
+  /// Typically you would apply some opacity in the range 0.85 to 0.98 if
+  /// to show content scrolling behind it when using the Scaffold property
+  /// extendBody is used.
+  final double? bottomNavigationBarOpacity;
+
+  /// The arrangement of the bar's [items] when the enclosing
+  /// [MediaQueryData.orientation] is [Orientation.landscape].
+  ///
+  /// The following alternatives are supported:
+  ///
+  /// * [BottomNavigationBarLandscapeLayout.spread] - the items are
+  ///   evenly spaced and spread out across the available width. Each
+  ///   item's label and icon are arranged in a column.
+  /// * [BottomNavigationBarLandscapeLayout.centered] - the items are
+  ///   evenly spaced in a row but only consume as much width as they
+  ///   would in portrait orientation. The row of items is centered within
+  ///   the available width. Each item's label and icon are arranged
+  ///   in a column.
+  /// * [BottomNavigationBarLandscapeLayout.linear] - the items are
+  ///   evenly spaced and each item's icon and label are lined up in a
+  ///   row instead of a column.
+  ///
+  /// If this property is null, then the value of the enclosing
+  /// [BottomNavigationBarThemeData.landscapeLayout is used. If that
+  /// property is also null, then
+  /// [BottomNavigationBarLandscapeLayout.spread] is used.
+  ///
+  /// This property is null by default.
+  final BottomNavigationBarLandscapeLayout? bottomNavigationBarLandscapeLayout;
+
   /// Minimum button size for all buttons.
   ///
   /// Applies to [TextButton], [ElevatedButton], [OutlinedButton] and
@@ -164,20 +252,24 @@ class FlexSubThemeConfig with Diagnosticable {
   /// Border width of Widgets with an outline border.
   ///
   /// Applies to enabled [OutlinedButton] and always to [ToggleButtons], as well
-  /// as to selected state of [InputDecorator] when using [OutlineInputBorder].
+  /// as to selected state of [InputDecorator].
   ///
-  /// Default to [kThickOutlineWidth].
-  final double thickOutlineWidth;
+  /// Default to [kThickBorderWidth].
+  final double thickBorderWidth;
 
   /// Border thickness on unselected input decorator and disabled buttons.
   ///
   /// Applies to disabled [OutlinedButton] and to un-selected state in
-  /// [InputDecorator] when using [OutlineInputBorder].
+  /// [InputDecorator].
   ///
-  /// Default to [kThinOutlineWidth].
-  final double thinOutlineWidth;
+  /// Default to [kThinBorderWidth].
+  final double thinBorderWidth;
 
   /// Determines if the [InputDecorator] is filled with a color.
+  ///
+  /// This property also affects if the fill color is used when not opting in
+  /// on sub-themes. Giving an opportunity to make the past always filled input
+  /// decorator even less opinionated.
   ///
   /// Defaults to true;
   final bool inputDecoratorIsFilled;
@@ -198,10 +290,26 @@ class FlexSubThemeConfig with Diagnosticable {
   /// [cornerRadiusInputDecoration] that will then override [cornerRadius].
   final bool inputDecoratorIsOutlinedBorder;
 
+  /// Determines if the [InputDecorator] unfocused state has a border.
+  ///
+  /// Defaults to true.
+  ///
+  /// Applies to both outline and underline mode, so regardless of is
+  /// [inputDecoratorIsOutlinedBorder] is true or false.
+  ///
+  /// You would typically
+  /// use this in a design where you use a fill color and want unfocused
+  /// input fields to only be highlighted by the fill color and not even
+  /// have an unfocused input border style.
+  ///
+  /// When set to false, there is no border bored on states enabledBorder and
+  /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
+  /// and errorBorder, so error thus has a border also when it is not focused.
+  final bool inputDecoratorUnfocusedHasBorder;
+
   /// Copy the object with one or more provided properties changed.
-  FlexSubThemeConfig copyWith({
-    final String? name,
-    final String? description,
+  FlexSubThemesData copyWith({
+    final bool? themedEffects,
     final double? cornerRadius,
     final double? cornerRadiusBottomSheet,
     final double? cornerRadiusCard,
@@ -220,15 +328,20 @@ class FlexSubThemeConfig with Diagnosticable {
     final double? bottomSheetElevation,
     final double? bottomSheetModalElevation,
     final double? bottomNavigationBarElevation,
+    final double? bottomNavigationBarOpacity,
+    final BottomNavigationBarLandscapeLayout?
+        bottomNavigationBarLandscapeLayout,
     final Size? minButtonSize,
     final EdgeInsetsGeometry? buttonPadding,
-    final double? thickOutlineWidth,
-    final double? thinOutlineWidth,
+    final double? thickBorderWidth,
+    final double? thinBorderWidth,
     final bool? inputDecoratorIsFilled,
     final Color? inputDecoratorFillColor,
     final bool? inputDecoratorIsOutlinedBorder,
+    final bool? inputDecoratorUnfocusedHasBorder,
   }) {
-    return FlexSubThemeConfig(
+    return FlexSubThemesData(
+      themedEffects: themedEffects ?? this.themedEffects,
       cornerRadius: cornerRadius ?? this.cornerRadius,
       cornerRadiusBottomSheet:
           cornerRadiusBottomSheet ?? this.cornerRadiusBottomSheet,
@@ -258,16 +371,22 @@ class FlexSubThemeConfig with Diagnosticable {
           bottomSheetModalElevation ?? this.bottomSheetModalElevation,
       bottomNavigationBarElevation:
           bottomNavigationBarElevation ?? this.bottomNavigationBarElevation,
+      bottomNavigationBarOpacity:
+          bottomNavigationBarOpacity ?? this.bottomNavigationBarOpacity,
+      bottomNavigationBarLandscapeLayout: bottomNavigationBarLandscapeLayout ??
+          this.bottomNavigationBarLandscapeLayout,
       minButtonSize: minButtonSize ?? this.minButtonSize,
       buttonPadding: buttonPadding ?? this.buttonPadding,
-      thickOutlineWidth: thickOutlineWidth ?? this.thickOutlineWidth,
-      thinOutlineWidth: thinOutlineWidth ?? this.thinOutlineWidth,
+      thickBorderWidth: thickBorderWidth ?? this.thickBorderWidth,
+      thinBorderWidth: thinBorderWidth ?? this.thinBorderWidth,
       inputDecoratorIsFilled:
           inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
       inputDecoratorFillColor:
           inputDecoratorFillColor ?? this.inputDecoratorFillColor,
       inputDecoratorIsOutlinedBorder:
           inputDecoratorIsOutlinedBorder ?? this.inputDecoratorIsOutlinedBorder,
+      inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ??
+          this.inputDecoratorUnfocusedHasBorder,
     );
   }
 
@@ -275,7 +394,8 @@ class FlexSubThemeConfig with Diagnosticable {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
-    return other is FlexSubThemeConfig &&
+    return other is FlexSubThemesData &&
+        other.themedEffects == themedEffects &&
         other.cornerRadius == cornerRadius &&
         other.cornerRadiusBottomSheet == cornerRadiusBottomSheet &&
         other.cornerRadiusCard == cornerRadiusCard &&
@@ -294,18 +414,25 @@ class FlexSubThemeConfig with Diagnosticable {
         other.bottomSheetElevation == bottomSheetElevation &&
         other.bottomSheetModalElevation == bottomSheetModalElevation &&
         other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
+        other.bottomNavigationBarOpacity == bottomNavigationBarOpacity &&
+        other.bottomNavigationBarLandscapeLayout ==
+            bottomNavigationBarLandscapeLayout &&
         other.minButtonSize == minButtonSize &&
         other.buttonPadding == buttonPadding &&
-        other.thickOutlineWidth == thickOutlineWidth &&
-        other.thinOutlineWidth == thinOutlineWidth &&
+        other.thickBorderWidth == thickBorderWidth &&
+        other.thinBorderWidth == thinBorderWidth &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
-        other.inputDecoratorIsOutlinedBorder == inputDecoratorIsOutlinedBorder;
+        other.inputDecoratorIsOutlinedBorder ==
+            inputDecoratorIsOutlinedBorder &&
+        other.inputDecoratorUnfocusedHasBorder ==
+            inputDecoratorUnfocusedHasBorder;
   }
 
   @override
   int get hashCode {
     final List<Object?> values = <Object?>[
+      themedEffects,
       cornerRadius,
       cornerRadiusBottomSheet,
       cornerRadiusCard,
@@ -324,13 +451,16 @@ class FlexSubThemeConfig with Diagnosticable {
       bottomSheetElevation,
       bottomSheetModalElevation,
       bottomNavigationBarElevation,
+      bottomNavigationBarOpacity,
+      bottomNavigationBarLandscapeLayout,
       minButtonSize,
       buttonPadding,
-      thickOutlineWidth,
-      thinOutlineWidth,
+      thickBorderWidth,
+      thinBorderWidth,
       inputDecoratorIsFilled,
       inputDecoratorFillColor,
       inputDecoratorIsOutlinedBorder,
+      inputDecoratorUnfocusedHasBorder,
     ];
     return hashList(values);
   }
@@ -338,6 +468,7 @@ class FlexSubThemeConfig with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('themedEffects', themedEffects));
     properties.add(DiagnosticsProperty<double>('cornerRadius', cornerRadius));
     properties.add(DiagnosticsProperty<double>(
         'cornerRadiusBottomSheet', cornerRadiusBottomSheet));
@@ -372,13 +503,18 @@ class FlexSubThemeConfig with Diagnosticable {
         'bottomSheetModalElevation', bottomSheetModalElevation));
     properties.add(DiagnosticsProperty<double>(
         'bottomNavigationBarElevation', bottomNavigationBarElevation));
+    properties.add(DiagnosticsProperty<double>(
+        'bottomNavigationBarOpacity', bottomNavigationBarOpacity));
+    properties.add(EnumProperty<BottomNavigationBarLandscapeLayout>(
+        'bottomNavigationBarLandscapeLayout',
+        bottomNavigationBarLandscapeLayout));
     properties.add(DiagnosticsProperty<Size>('minButtonSize', minButtonSize));
     properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
         'buttonPadding', buttonPadding));
-    properties.add(
-        DiagnosticsProperty<double>('thickOutlineWidth', thickOutlineWidth));
     properties
-        .add(DiagnosticsProperty<double>('thinOutlineWidth', thinOutlineWidth));
+        .add(DiagnosticsProperty<double>('thickBorderWidth', thickBorderWidth));
+    properties
+        .add(DiagnosticsProperty<double>('thinBorderWidth', thinBorderWidth));
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorIsOutlinedBorder', inputDecoratorIsOutlinedBorder));
     properties.add(DiagnosticsProperty<bool>(
@@ -387,5 +523,7 @@ class FlexSubThemeConfig with Diagnosticable {
         .add(ColorProperty('inputDecoratorFillColor', inputDecoratorFillColor));
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorIsOutlinedBorder', inputDecoratorIsOutlinedBorder));
+    properties.add(DiagnosticsProperty<bool>(
+        'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
   }
 }

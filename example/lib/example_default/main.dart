@@ -81,7 +81,7 @@ class DemoApp extends StatelessWidget {
         // use scheme below to select a built-in one:
         // scheme: FlexScheme.hippieBlue,
         surfaceStyle: FlexSurface.medium,
-        surfaceMode: FlexSurfaceMode.scaffoldSurfaceBackground,
+        surfaceMode: FlexSurfaceMode.highBackground,
         blendLevel: FlexBlendLevel.zero,
         //
         appBarStyle: FlexAppBarStyle.primary,
@@ -146,7 +146,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // The reason why HomePage is using a stateful widget is that it holds the
   // state of the dummy side menu/rail locally.
-  double _menuWidth = App.expandWidth;
+  double _menuWidth = AppConst.expandWidth;
   bool _isExpanded = true;
 
   // The state for the system navbar style and divider usage is local as it is
@@ -172,13 +172,13 @@ class _HomePageState extends State<HomePage> {
     // make it rail sized when there is not enough room for a menu, even if
     // menu size is requested.
     if (!menuAvailable) {
-      _menuWidth = App.shrinkWidth;
+      _menuWidth = AppConst.collapseWidth;
     }
     if (menuAvailable && !_isExpanded) {
-      _menuWidth = App.shrinkWidth;
+      _menuWidth = AppConst.collapseWidth;
     }
     if (menuAvailable && _isExpanded) {
-      _menuWidth = App.expandWidth;
+      _menuWidth = AppConst.expandWidth;
     }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -198,13 +198,13 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           // Contains the demo menu and side rail.
           ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: App.expandWidth),
+            constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
             child: Material(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 width: _menuWidth,
                 child: SideMenu(
-                  maxWidth: App.expandWidth,
+                  maxWidth: AppConst.expandWidth,
                   onTap: menuAvailable
                       ? () {
                           setState(() {
@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
               // For scrolling behind the bottom nav bar, if there would be one.
               extendBody: true,
               appBar: AppBar(
-                title: Text(App.title(context)),
+                title: Text(AppConst.title(context)),
                 actions: const <Widget>[AboutIconButton()],
                 backgroundColor: Colors.transparent,
                 // Gradient partially transparent AppBar, just because it looks
@@ -246,13 +246,14 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               body: PageBody(
-                constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
+                constraints:
+                    const BoxConstraints(maxWidth: AppConst.maxBodyWidth),
                 child: ListView(
                   padding: EdgeInsets.fromLTRB(
-                    App.edgePadding,
-                    topPadding + kToolbarHeight + App.edgePadding,
-                    App.edgePadding,
-                    App.edgePadding + bottomPadding,
+                    AppConst.edgePadding,
+                    topPadding + kToolbarHeight + AppConst.edgePadding,
+                    AppConst.edgePadding,
+                    AppConst.edgePadding + bottomPadding,
                   ),
                   children: <Widget>[
                     Text('Theme', style: headline4),
@@ -268,8 +269,8 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 8),
                     // Active theme color indicators.
                     const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: App.edgePadding),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: AppConst.edgePadding),
                       child: ShowThemeColors(),
                     ),
                     const SizedBox(height: 8),

@@ -310,9 +310,12 @@ void main() {
     test(
         'FSC1.18: Test toString implemented via debugFillProperties '
         'EXPECT exact print string', () {
-      expect(m1.toString(), equalsIgnoringHashCodes(
-          // ignore: lines_longer_than_80_chars
-          'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020))'));
+      expect(
+          m1.toString(),
+          //
+          equalsIgnoringHashCodes(
+              // ignore: lines_longer_than_80_chars
+              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020))'));
     });
     test(
         'FSC1.18: Test toStringShort implemented via debugFillProperties '

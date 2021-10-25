@@ -158,9 +158,12 @@ void main() {
     test(
         'FSOC1.06: Test toString implemented via debugFillProperties '
         'EXPECT exact print string.', () {
-      expect(m1.toString(), equalsIgnoringHashCodes(
-          // ignore: lines_longer_than_80_chars
-          'FlexSchemeOnColors#00000(onPrimary: Color(0xffffffff), onSecondary: Color(0xffffffff), onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff))'));
+      expect(
+          m1.toString(),
+          //
+          equalsIgnoringHashCodes(
+              // ignore: lines_longer_than_80_chars
+              'FlexSchemeOnColors#00000(onPrimary: Color(0xffffffff), onSecondary: Color(0xffffffff), onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff))'));
     });
     test(
         'FSOC1.07: Test toStringShort implemented via debugFillProperties '

@@ -617,9 +617,9 @@ void main() {
     test(
         'FTD1.46: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.unselectedLabelColor black87.withOpacity(0.7)', () {
+        'TabBarTheme.unselectedLabelColor black87.withAlpha(0xB2)', () {
       expect(tDarkM.tabBarTheme.unselectedLabelColor,
-          Colors.black87.withOpacity(0.7));
+          Colors.black87.withAlpha(0xB2));
     });
 
     //**************************************************************************
@@ -736,16 +736,16 @@ void main() {
     test(
         'FTD1.61: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor white.withOpacity(0.7).', () {
+        'TabBarTheme.unselectedLabelColor white.withAlpha(0xB2).', () {
       expect(tLightS.tabBarTheme.unselectedLabelColor,
-          Colors.white.withOpacity(0.7));
+          Colors.white.withAlpha(0xB2));
     });
     test(
         'FTD1.62: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.unselectedLabelColor white.withOpacity(0.7)', () {
+        'TabBarTheme.unselectedLabelColor white.withAlpha(0xB2)', () {
       expect(tDarkS.tabBarTheme.unselectedLabelColor,
-          Colors.white.withOpacity(0.7));
+          Colors.white.withAlpha(0xB2));
     });
 
     //**************************************************************************
@@ -1325,7 +1325,7 @@ void main() {
           scheme: FlexScheme.bigStone,
           usedColors: 3,
           surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.equalAll,
+          surfaceMode: FlexSurfaceMode.flat,
           blendLevel: FlexBlendLevel.zero,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1351,7 +1351,7 @@ void main() {
           scheme: FlexScheme.bigStone,
           usedColors: 3,
           surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.equalAll,
+          surfaceMode: FlexSurfaceMode.flat,
           blendLevel: FlexBlendLevel.zero,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1379,7 +1379,7 @@ void main() {
           scheme: FlexScheme.bigStone,
           usedColors: 3,
           surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.equalAll,
+          surfaceMode: FlexSurfaceMode.flat,
           blendLevel: FlexBlendLevel.zero,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1405,7 +1405,7 @@ void main() {
           scheme: FlexScheme.bigStone,
           usedColors: 3,
           surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.equalAll,
+          surfaceMode: FlexSurfaceMode.flat,
           blendLevel: FlexBlendLevel.zero,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1437,7 +1437,7 @@ void main() {
           scheme: FlexScheme.bigStone,
           usedColors: 3,
           surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog,
+          surfaceMode: FlexSurfaceMode.highScaffoldVariantDialog,
           blendLevel: FlexBlendLevel.fifteen,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1464,7 +1464,7 @@ void main() {
           scheme: FlexScheme.bigStone,
           usedColors: 3,
           surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog,
+          surfaceMode: FlexSurfaceMode.highScaffoldVariantDialog,
           blendLevel: FlexBlendLevel.fifteen,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1493,7 +1493,7 @@ void main() {
           scheme: FlexScheme.bigStone,
           usedColors: 3,
           surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog,
+          surfaceMode: FlexSurfaceMode.highScaffoldVariantDialog,
           blendLevel: FlexBlendLevel.fifteen,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1520,7 +1520,7 @@ void main() {
           scheme: FlexScheme.bigStone,
           usedColors: 3,
           surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.equalSurfacesHighScaffoldSecDialog,
+          surfaceMode: FlexSurfaceMode.highScaffoldVariantDialog,
           blendLevel: FlexBlendLevel.fifteen,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1566,7 +1566,7 @@ void main() {
         scheme: FlexScheme.bigStone,
         usedColors: 2,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        surfaceMode: FlexSurfaceMode.lowScaffold,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.primary,
         tabBarStyle: FlexTabBarStyle.forAppBar,
@@ -1608,7 +1608,7 @@ void main() {
         scheme: FlexScheme.bigStone,
         usedColors: 2,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+        surfaceMode: FlexSurfaceMode.highSurface,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.primary,
         tabBarStyle: FlexTabBarStyle.forAppBar,
@@ -1642,7 +1642,9 @@ void main() {
       // Check to String equality
       expect(
         fcsLightTd.toString(),
-        equalsIgnoringHashCodes(ftdLight.toString()),
+        equalsIgnoringHashCodes(
+          ftdLight.toString(),
+        ),
       );
       // Check object equality
       expect(
@@ -1655,7 +1657,7 @@ void main() {
         scheme: FlexScheme.bigStone,
         usedColors: 3,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        surfaceMode: FlexSurfaceMode.lowScaffold,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.background,
         tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1693,7 +1695,7 @@ void main() {
           scheme: FlexScheme.bigStone,
           usedColors: 3,
           surfaceStyle: FlexSurface.strong,
-          surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+          surfaceMode: FlexSurfaceMode.highSurface,
           blendLevel: FlexBlendLevel.fifteen,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1750,7 +1752,7 @@ void main() {
         scheme: FlexScheme.bigStone,
         usedColors: 3,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        surfaceMode: FlexSurfaceMode.lowScaffold,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.primary,
         tabBarStyle: FlexTabBarStyle.forAppBar,
@@ -1780,8 +1782,8 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        subThemesOptIn: true,
-        subThemeConfig: const FlexSubThemeConfig(),
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(),
       );
 
       final FlexColorScheme fcsLight2 = FlexColorScheme.light(
@@ -1789,7 +1791,7 @@ void main() {
         scheme: FlexScheme.bigStone,
         usedColors: 3,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        surfaceMode: FlexSurfaceMode.lowScaffold,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.primary,
         tabBarStyle: FlexTabBarStyle.forAppBar,
@@ -1819,8 +1821,8 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        subThemesOptIn: true,
-        subThemeConfig: const FlexSubThemeConfig(),
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(),
       );
 
       // Check FlexColorScheme light object equality - with all props.
@@ -1839,7 +1841,7 @@ void main() {
         scheme: FlexScheme.bigStone,
         usedColors: 3,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+        surfaceMode: FlexSurfaceMode.highSurface,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.primary,
         tabBarStyle: FlexTabBarStyle.forAppBar,
@@ -1869,13 +1871,15 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        subThemesOptIn: true,
-        subThemeConfig: const FlexSubThemeConfig(),
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(),
       );
       // Check to String equality
       expect(
         fcsLightTd.toString(),
-        equalsIgnoringHashCodes(ftdLight.toString()),
+        equalsIgnoringHashCodes(
+          ftdLight.toString(),
+        ),
       );
       // TODO(rydmike): Check this again when this issue lands in stable.
       // https://github.com/flutter/flutter/issues/91587
@@ -1909,7 +1913,7 @@ void main() {
         scheme: FlexScheme.bigStone,
         usedColors: 3,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        surfaceMode: FlexSurfaceMode.lowScaffold,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.background,
         tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1940,8 +1944,8 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        subThemesOptIn: true,
-        subThemeConfig: const FlexSubThemeConfig(),
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(),
       );
 
       final FlexColorScheme fcsDark2 = FlexColorScheme.dark(
@@ -1949,7 +1953,7 @@ void main() {
         scheme: FlexScheme.bigStone,
         usedColors: 3,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.equalSurfacesLowScaffold,
+        surfaceMode: FlexSurfaceMode.lowScaffold,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.background,
         tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1980,8 +1984,8 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        subThemesOptIn: true,
-        subThemeConfig: const FlexSubThemeConfig(),
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(),
       );
 
       // Check FlexColorScheme dark object equality - with all props.
@@ -1998,7 +2002,7 @@ void main() {
         scheme: FlexScheme.bigStone,
         usedColors: 3,
         surfaceStyle: FlexSurface.strong,
-        surfaceMode: FlexSurfaceMode.scaffoldBackgroundSurface,
+        surfaceMode: FlexSurfaceMode.highSurface,
         blendLevel: FlexBlendLevel.fifteen,
         appBarStyle: FlexAppBarStyle.background,
         tabBarStyle: FlexTabBarStyle.forBackground,
@@ -2029,14 +2033,16 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        subThemesOptIn: true,
-        subThemeConfig: const FlexSubThemeConfig(),
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(),
       );
 
       // Check to String equality
       expect(
         fcsTdDark.toString(),
-        equalsIgnoringHashCodes(fcsDarkTd.toString()),
+        equalsIgnoringHashCodes(
+          fcsDarkTd.toString(),
+        ),
       );
       // TODO(rydmike): Check this again when this issue lands in stable.
       // https://github.com/flutter/flutter/issues/91587

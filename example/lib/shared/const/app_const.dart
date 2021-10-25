@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 /// App static functions and constants used in the example applications.
-class App {
+class AppConst {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
-  App._();
+  AppConst._();
 
   // This info is mainly for the Live public web builds of the examples.
   // When I build a new public version I just make sure to update this info
@@ -13,7 +13,7 @@ class App {
   static const String version = '4.0.0';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
-  static const String flutterVersion = 'Channel stable, 2.5.2';
+  static const String flutterVersion = 'Channel stable, 2.5.3';
   static const String copyright = '© 2020, 2021';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
@@ -38,7 +38,7 @@ class App {
   static const double expandWidth = 265;
 
   // The width of the side menu when rail sized.
-  static const double shrinkWidth = 60;
+  static const double collapseWidth = 60;
 
   // Returns title of used MaterialApp.
   static String title(BuildContext context) =>

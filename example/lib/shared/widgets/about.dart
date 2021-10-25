@@ -1,34 +1,22 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'app.dart';
+import '../const/app_const.dart';
 import 'link_text_span.dart';
 
-/// An about icon button used on the example's app app bar, but only if the
-/// app is built for web or desktop. Main usage is to show licenses on the Web
-/// version and to show what version of Flutter the Live version of the
-/// example app was built with. When building the example for an Android or
-/// iOS device we assume somebody is just learning how to use the package
-/// and don't show the about info.
+/// An about icon button used on the example's app app bar.
 class AboutIconButton extends StatelessWidget {
   const AboutIconButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final TargetPlatform platformIs = Theme.of(context).platform;
-    final bool showIconButton = kIsWeb ||
-        platformIs == TargetPlatform.windows ||
-        platformIs == TargetPlatform.macOS ||
-        platformIs == TargetPlatform.linux;
-
-    return showIconButton
-        ? IconButton(
-            icon: const Icon(Icons.info),
-            onPressed: () {
-              showAppAboutDialog(context);
-            },
-          )
-        : const SizedBox.shrink();
+    return IconButton(
+      icon: const Icon(Icons.info),
+      onPressed: () {
+        showAppAboutDialog(context);
+      },
+    );
   }
 }
 
@@ -43,10 +31,28 @@ void showAppAboutDialog(BuildContext context) {
 
   showAboutDialog(
     context: context,
-    applicationName: App.appName,
-    applicationVersion: App.version,
-    applicationIcon: const Image(image: AssetImage(App.icon)),
-    applicationLegalese: '${App.copyright} ${App.author} ${App.license}',
+    applicationName: AppConst.appName,
+    applicationVersion: AppConst.version,
+    applicationIcon: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        FlexThemeModeOptionButton(
+          selected: true,
+          width: 30,
+          height: 30,
+          flexSchemeColor: FlexSchemeColor(
+            primary: themeData.colorScheme.primary,
+            primaryVariant: themeData.colorScheme.primaryVariant,
+            secondary: themeData.colorScheme.secondary,
+            secondaryVariant: themeData.colorScheme.secondaryVariant,
+          ),
+        ),
+      ],
+    ),
+    // TODO(rydmike): Old icon image - remove comment and asset too?
+    // applicationIcon: const Image(image: AssetImage(App.icon)),
+    applicationLegalese:
+        '${AppConst.copyright} ${AppConst.author} ${AppConst.license}',
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(top: 24),
@@ -56,12 +62,12 @@ void showAppAboutDialog(BuildContext context) {
               TextSpan(
                 style: aboutTextStyle,
                 text: 'This example shows some of the features of the '
-                    '${App.appName} theming package. To learn more, check '
+                    '${AppConst.appName} theming package. To learn more, check '
                     'out the package on ',
               ),
               LinkTextSpan(
                 style: linkStyle,
-                url: App.packageUrl,
+                url: AppConst.packageUrl,
                 text: 'pub.dev',
               ),
               TextSpan(
@@ -71,8 +77,8 @@ void showAppAboutDialog(BuildContext context) {
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with ${App.flutterVersion}, '
-                    'using ${App.packageVersion}\n\n',
+                text: 'Built with ${AppConst.flutterVersion}, '
+                    'using ${AppConst.packageVersion}\n\n',
               ),
             ],
           ),

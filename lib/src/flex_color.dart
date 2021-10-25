@@ -10,12 +10,7 @@ import 'flex_scheme.dart';
 /// There is also const values for each color value and [FlexSchemeData] of
 /// of each scheme.
 class FlexColor {
-  //
-  // coverage:ignore-start
-  FlexColor._(); // coverage:ignore-line
-  // coverage:ignore-end
-
-  // TODO(rydmike): Figure out why the above ignores do not work!
+  FlexColor._();
 
   /// Material standard color for light surface.
   static const Color materialLightSurface = Colors.white;
@@ -37,8 +32,8 @@ class FlexColor {
 
   // Custom static constants for surface, background, scaffold and background
   // colors. Some surface colors are slightly modified from the Material
-  // standards and different constants are used so we can modify them, if so
-  // desired, without touching the material standard surface values.
+  // standards and different constants are used so we could tune them,
+  // without touching the material standard surface values.
 
   /// FlexColors standard for light surface, same as material.
   static const Color lightSurface = Colors.white;
@@ -1673,6 +1668,10 @@ class FlexColor {
   );
 
   /// Material amber and blue accent colors based FlexSchemeData.
+  ///
+  /// This is a high contrast color scheme, an alternative to the Material
+  /// design hih contrast color scheme set [FlexColor.materialHc].
+  ///
   static const FlexSchemeData amber = FlexSchemeData(
     name: amberName,
     description: amberDescription,
@@ -1964,15 +1963,15 @@ class FlexColor {
   /// Contains pre-made ready to go nice dark and light [FlexSchemeColor]
   /// color schemes, that can be used by FlexColorScheme.
   /// The [FlexColor.schemes] map also contain the standard
-  /// default material design themes, both the normal and the newer high
+  /// default material design themes, both the normal and the high
   /// contrast version.
   ///
   /// Each of these predefined color schemes include matching hand-tuned light
   /// and dark mode theme colors for the theme it defines.
   ///
-  /// There is no need to use these predefined themes, you can make your own
-  /// as well. This can be used as an example on how to define your own
-  /// [FlexSchemeData] schemes that you can use instead.
+  /// You can make your own color schemes as well. This can also serve as an
+  /// example on how to define your own [FlexSchemeData] schemes that you can
+  /// use instead.
   ///
   /// This map excludes the last enum [FlexScheme.custom], it can thus not be
   /// directly iterated over using the [FlexScheme] enum values list.
@@ -2023,13 +2022,12 @@ class FlexColor {
   /// standard default material design themes, both the normal and the
   /// newer high contrast version.
   ///
-  /// There is no need to use these predefined themes, you can make your own
-  /// as well. These can be used as an example on how to define your own
-  /// Flex themes that you can use in an app to allow users to select totally
-  /// different pre-made nice themes, no just dark and light.
-  ///
   /// Each pre-made custom theme include hand-tuned light and dark modes colors
   /// for the theme it defines.
+  ///
+  /// You can make your own color schemes as well. This list can serve as an
+  /// example on how to define your own [FlexSchemeData] schemes that you can
+  /// use instead.
   static const Map<FlexScheme, FlexSchemeData> schemesWithCustom =
       <FlexScheme, FlexSchemeData>{
     ...schemes,
@@ -2103,17 +2101,20 @@ class FlexColor {
 }
 
 /// Immutable data class that holds [name] and [description] string scheme
-/// descriptions, [light] and [dark], [FlexSchemeColor] definitions that
-/// can used by the FlexColorScheme.light and FlexColorScheme.dark
-/// factories to create a FlexColorScheme.
+/// descriptions, [light] and [dark], [FlexSchemeColor] definitions.
+///
+/// The [FlexSchemeData] bundles together a [FlexSchemeColor] pair suitable
+/// for light and dark theme mode, that can used by the FlexColorScheme.light
+/// and FlexColorScheme.dark factories to create a FlexColorScheme and
+/// corresponding [ThemeData] from it.
 ///
 /// This class can also be used to make a map with [FlexScheme] enum or some
 /// other usable lookup value as key, and [FlexSchemeData] as values, that you
 /// can then use as input to define multiple theme options for FlexColorScheme
 /// based themes.
 ///
-/// A predefined example of a [FlexScheme] and [FlexSchemeData]
-/// map is available in [FlexColor.schemes] and [FlexColor.schemesWithCustom].
+/// A predefined example of a [FlexScheme] and [FlexSchemeData] maps are
+/// available in [FlexColor.schemes] and [FlexColor.schemesWithCustom].
 @immutable
 class FlexSchemeData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSchemeData object.
@@ -2187,10 +2188,17 @@ class FlexSchemeData with Diagnosticable {
 /// Immutable data class for the main scheme colors used in a FlexColorScheme
 /// based color scheme.
 ///
-/// The default constructor requires many properties. To make a
+/// The default constructor requires the main color properties. To make a
 /// [FlexSchemeColor] from a minimum of just the primary color, use the factory
 /// [FlexSchemeColor.from] which only requires the primary color to make
 /// a complete color set, but can use the other colors as optional values.
+///
+/// The [FlexSchemeColor] is just a set of main colors, a palette used to define
+/// a color scheme for a theme. See also [FlexSchemeData] that defines
+/// a name and description for a pair of matched light and dark
+/// [FlexSchemeColor] classes, used to make a color scheme pair, that is
+/// eventually used to make light and dark [ThemeData], typically toggled
+/// with [ThemeMode].
 @immutable
 class FlexSchemeColor with Diagnosticable {
   /// Default constructor.
@@ -2198,8 +2206,11 @@ class FlexSchemeColor with Diagnosticable {
   /// Consider using the [FlexSchemeColor.from] factory
   /// constructor for more flexibility and less required values based on
   /// using computed defaults for missing, but required values.
+  ///
+  /// If you are defining all four required color values, then prefer using this
+  /// constructor as it can be const.
   const FlexSchemeColor({
-    // The appBarColor, accentColor and error colors are not required, if they
+    // The appBarColor and error colors are not required, if they
     // are null they will be provided by theme defaults later.
     required final this.primary,
     required final this.primaryVariant,
@@ -2251,7 +2262,7 @@ class FlexSchemeColor with Diagnosticable {
 
   /// Make a [FlexSchemeColor] from just one primary color or possible also
   /// from a more complete color scheme set. This is a convenience factory that
-  /// can create a nice toned color schemes based on only the primary color.
+  /// can create nice toned color schemes based on only the primary color.
   factory FlexSchemeColor.from({
     required Color primary,
     Color? primaryVariant,
@@ -2267,6 +2278,7 @@ class FlexSchemeColor with Diagnosticable {
       secondaryVariant: secondaryVariant ??
           secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
           primary.darken(kDarkenSecondaryVariant),
+      // TODO(rydmike): Investigate, should this not only pass appBarColor?
       appBarColor: appBarColor ??
           secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
           primary.darken(kDarkenSecondaryVariant),

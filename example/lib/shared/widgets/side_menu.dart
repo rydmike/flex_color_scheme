@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app.dart';
+import '../const/app_const.dart';
 
 /// Dummy side panel.
 ///
@@ -58,7 +58,7 @@ class _SideMenuState extends State<SideMenu> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AppBar(
-                title: const Text(App.appName),
+                title: const Text(AppConst.appName),
                 leading: ConstrainedBox(
                   constraints: const BoxConstraints.tightFor(width: 56),
                   child: IconButton(
@@ -158,9 +158,7 @@ class _SideItem extends StatelessWidget {
                 topRight: Radius.circular(50 / 2.0),
                 bottomRight: Radius.circular(50 / 2.0),
               ),
-              color: selected
-                  ? Theme.of(context).colorScheme.primary.withAlpha(0x2d)
-                  : Colors.transparent,
+              color: selected ? _theme.focusColor : Colors.transparent,
               child: InkWell(
                 onTap: onTap,
                 child: SizedBox(
@@ -174,14 +172,16 @@ class _SideItem extends StatelessWidget {
                       children: <Widget>[
                         ConstrainedBox(
                           constraints: const BoxConstraints.tightFor(
-                              width: 56, height: 56),
+                            width: 56,
+                            height: 56,
+                          ),
                           child: Icon(icon,
                               color: selected
                                   ? _selectedColor
                                   : _theme.colorScheme.onSurface
                                       .withOpacity(0.55)),
                         ),
-                        if (width < App.shrinkWidth + 10)
+                        if (width < AppConst.collapseWidth + 10)
                           const SizedBox.shrink()
                         else
                           Text(
@@ -224,81 +224,85 @@ class _UserProfileState extends State<_UserProfile> {
     final TextTheme primaryTextTheme = theme.primaryTextTheme;
     const double hPadding = 5;
 
-    final Widget closedProfile = ListTile(
-      visualDensity: VisualDensity.comfortable,
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: hPadding,
-        vertical: hPadding,
-      ),
-      onTap: () {
-        setState(() {
-          _collapsed = !_collapsed;
-        });
-      },
-      leading: CircleAvatar(
-        backgroundColor: theme.colorScheme.primary,
-        radius: App.shrinkWidth / 2 - hPadding,
-        child: Text('JS',
-            style: primaryTextTheme.subtitle1!.copyWith(
-                color: theme.colorScheme.onPrimary,
-                fontWeight: FontWeight.w600)),
-      ),
-      title: Text('John Smith',
-          style: textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w600)),
-      subtitle: const Text('Company Inc'),
-      trailing: ExpandIcon(
-        isExpanded: !_collapsed,
-        padding: EdgeInsets.zero,
-        onPressed: (_) {
-          setState(() {
-            _collapsed = !_collapsed;
-          });
-        },
-      ),
-    );
-    // An opened version of the mock user profile
-    final Widget openProfile = Column(
+    return Column(
       children: <Widget>[
-        // Included the closed profile above the opened button panel
-        closedProfile,
-        // Add some buttons for the opened state
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Row(
-            children: <Widget>[
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: Column(
-                  children: <Widget>[
-                    const Icon(Icons.person),
-                    Text('Profile', style: textTheme.overline),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 10),
-              TextButton(
-                onPressed: () {},
-                child: Column(
-                  children: <Widget>[
-                    const Icon(Icons.exit_to_app),
-                    Text('Sign in', style: textTheme.overline),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 8),
-            ],
+        ListTile(
+          visualDensity: VisualDensity.comfortable,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: hPadding,
+            vertical: hPadding,
           ),
-          // ),
+          leading: CircleAvatar(
+            backgroundColor: theme.colorScheme.primary,
+            radius: AppConst.collapseWidth / 2 - hPadding,
+            child: Text(
+              'JS',
+              style: primaryTextTheme.subtitle1!.copyWith(
+                  color: theme.colorScheme.onPrimary,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
+          title: Text(
+            'John Smith',
+            style: textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w600),
+          ),
+          subtitle: const Text('Company Inc'),
+          trailing: ExpandIcon(
+            isExpanded: !_collapsed,
+            size: 36,
+            padding: EdgeInsets.zero,
+            onPressed: (_) {
+              setState(() {
+                _collapsed = !_collapsed;
+              });
+            },
+          ),
+          onTap: () {
+            setState(() {
+              _collapsed = !_collapsed;
+            });
+          },
+        ),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return SizeTransition(
+              sizeFactor: animation,
+              child: child,
+            );
+          },
+          child: _collapsed
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                    children: <Widget>[
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {},
+                        child: Column(
+                          children: <Widget>[
+                            const Icon(Icons.person),
+                            Text('Profile', style: textTheme.overline),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      TextButton(
+                        onPressed: () {},
+                        child: Column(
+                          children: <Widget>[
+                            const Icon(Icons.exit_to_app),
+                            Text('Sign in', style: textTheme.overline),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ),
         ),
       ],
-    );
-    return AnimatedCrossFade(
-      firstChild: closedProfile,
-      secondChild: openProfile,
-      crossFadeState:
-          _collapsed ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-      duration: const Duration(milliseconds: 200),
     );
   }
 }

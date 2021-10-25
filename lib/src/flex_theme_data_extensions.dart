@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'flex_color.dart';
 import 'flex_color_scheme.dart';
 import 'flex_scheme.dart';
-import 'flex_sub_theme_config.dart';
+import 'flex_sub_themes_data.dart';
 
 /// Convenience extensions on ThemeData to return a ThemeData object defined
 /// by [FlexColorScheme.toTheme] method.
@@ -42,18 +42,9 @@ import 'flex_sub_theme_config.dart';
 /// this with these extensions too, but in that case you will need to store
 /// the theme in an intermediate [ThemeData] object.
 extension FlexThemeData on ThemeData {
-  //
-  // coverage:ignore-start
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.light]
   /// and its `toTheme` method.
   static ThemeData light({
-    // coverage:ignore-line
-
-    // coverage:ignore-end
-
-    // TODO(rydmike): Figure out why the above ignore does not work!
-    // TODO(rydmike): Figure out why test does not hit the row, it is tested!!
-
     /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
     /// from.
     ///
@@ -173,18 +164,16 @@ extension FlexThemeData on ThemeData {
     /// to the primary color.
     final FlexAppBarStyle appBarStyle = FlexAppBarStyle.primary,
 
-    /// Select preferred themed style for the [TabBarTheme].
+    /// Themed app bar opacity.
     ///
-    /// By default the [TabBarTheme] is made to fit with the style of the
-    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    /// The opacity is applied to resulting app bar background color determined
+    /// by [appBarStyle]. It is also used on tab bars in the app bar. Typically
+    /// you would apply an opacity of 0.85 to 0.95 when using the [Scaffold]
+    /// property [extendBodyBehindAppBar] set to true, in order to partially
+    /// show scrolling content behind the app bar.
     ///
-    /// When setting this to [FlexTabBarStyle.forBackground], it will default
-    /// to a theme that uses the color scheme and fits on background color,
-    /// which typically also on works surface and scaffoldBackground color.
-    /// This TabBarTheme style is useful if you primarily intended to use the
-    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
-    /// colors.
-    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
+    final double appBarOpacity = 1,
 
     /// The themed elevation for the app bar.
     ///
@@ -197,6 +186,19 @@ extension FlexThemeData on ThemeData {
     ///
     /// If null, defaults to the value given to the `appBarElevation` elevation.
     final double? bottomAppBarElevation,
+
+    /// Select preferred themed style for the [TabBarTheme].
+    ///
+    /// By default the [TabBarTheme] is made to fit with the style of the
+    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    ///
+    /// When setting this to [FlexTabBarStyle.forBackground], it will default
+    /// to a theme that uses the color scheme and fits on background color,
+    /// which typically also on works surface and scaffoldBackground color.
+    /// This TabBarTheme style is useful if you primarily intended to use the
+    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
+    /// colors.
+    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -627,21 +629,21 @@ extension FlexThemeData on ThemeData {
     /// The sub-themes are a convenient way to opt-in on customized corner
     /// radius on Widgets using above themes. By opting in you can set corner
     /// radius for all above Widgets to same corner radius in one go.
-    final bool subThemesOptIn = false,
+    final bool useSubThemes = false,
 
     /// Optional configuration parameters for the opt-in sub-themes.
     ///
     /// If you opt-in to use the opinionated sub-theming offered by
     /// [FlexColorScheme] you can also configure them by passing
-    /// in a [FlexSubThemeConfig] that allows you to modify them.
+    /// in a [FlexSubThemesData] that allows you to modify them.
     ///
     /// The primary purpose of the opinionated sub-themes is to make it easy
     /// to add themed corner radius to all Widgets that support it, and to
     /// provide a consistent look on all buttons, including [ToggleButtons].
     ///
-    /// Defaults to null, resulting in a default [FlexSubThemeConfig] being used
-    /// when [subThemesOptIn] is set to true.
-    final FlexSubThemeConfig? subThemeConfig,
+    /// Defaults to null, resulting in a default [FlexSubThemesData] being used
+    /// when [useSubThemes] is set to true.
+    final FlexSubThemesData? subThemesData,
   }) {
     return FlexColorScheme.light(
       colors: colors,
@@ -651,9 +653,10 @@ extension FlexThemeData on ThemeData {
       surfaceMode: surfaceMode,
       blendLevel: blendLevel,
       appBarStyle: appBarStyle,
-      tabBarStyle: tabBarStyle,
+      appBarOpacity: appBarOpacity,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: bottomAppBarElevation,
+      tabBarStyle: tabBarStyle,
       primary: primary,
       primaryVariant: primaryVariant,
       secondary: secondary,
@@ -678,22 +681,14 @@ extension FlexThemeData on ThemeData {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
-      subThemesOptIn: subThemesOptIn,
-      subThemeConfig: subThemeConfig,
+      useSubThemes: useSubThemes,
+      subThemesData: subThemesData,
     ).toTheme;
   }
 
-  // coverage:ignore-start
   /// Return a ThemeData defined by factory FlexColorScheme().dark object and
   /// its toTheme method.
   static ThemeData dark({
-    // coverage:ignore-line
-
-    // coverage:ignore-end
-
-    // TODO(rydmike): Figure out why the above ignore does not work!
-    // TODO(rydmike): Figure out why test does not hit the row, it is tested!!
-
     /// The [FlexSchemeColor] that we will create the dark [FlexColorScheme]
     /// from.
     ///
@@ -816,18 +811,16 @@ extension FlexThemeData on ThemeData {
     /// to the surface color.
     final FlexAppBarStyle appBarStyle = FlexAppBarStyle.material,
 
-    /// Select preferred themed style for the [TabBarTheme].
+    /// Themed app bar opacity.
     ///
-    /// By default the [TabBarTheme] is made to fit with the style of the
-    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    /// The opacity is applied to resulting app bar background color determined
+    /// by [appBarStyle]. It is also used on tab bars in the app bar. Typically
+    /// you would apply an opacity of 0.85 to 0.95 when using the [Scaffold]
+    /// property [extendBodyBehindAppBar] set to true, in order to partially
+    /// show scrolling content behind the app bar.
     ///
-    /// When setting this to [FlexTabBarStyle.forBackground], it will default
-    /// to a theme that uses the color scheme and fits on background color,
-    /// which typically also on works surface and scaffoldBackground color.
-    /// This TabBarTheme style is useful if you primarily intended to use the
-    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
-    /// colors.
-    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
+    final double appBarOpacity = 1,
 
     /// The themed elevation for the app bar.
     ///
@@ -840,6 +833,19 @@ extension FlexThemeData on ThemeData {
     ///
     /// If null, defaults to the value given to the `appBarElevation` elevation.
     final double? bottomAppBarElevation,
+
+    /// Select preferred themed style for the [TabBarTheme].
+    ///
+    /// By default the [TabBarTheme] is made to fit with the style of the
+    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    ///
+    /// When setting this to [FlexTabBarStyle.forBackground], it will default
+    /// to a theme that uses the color scheme and fits on background color,
+    /// which typically also on works surface and scaffoldBackground color.
+    /// This TabBarTheme style is useful if you primarily intended to use the
+    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
+    /// colors.
+    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -1257,21 +1263,21 @@ extension FlexThemeData on ThemeData {
     /// The sub-themes are a convenient way to opt-in on customized corner
     /// radius on Widgets using above themes. By opting in you can set corner
     /// radius for all above Widgets to same corner radius in one go.
-    final bool subThemesOptIn = false,
+    final bool useSubThemes = false,
 
     /// Optional configuration parameters for the opt-in sub-themes.
     ///
     /// If you opt-in to use the opinionated sub-theming offered by
     /// [FlexColorScheme] you can also configure them by passing
-    /// in a [FlexSubThemeConfig] that allows you to modify them.
+    /// in a [FlexSubThemesData] that allows you to modify them.
     ///
     /// The primary purpose of the opinionated sub-themes is to make it easy
     /// to add themed corner radius to all Widgets that support it, and to
     /// provide a consistent look on all buttons, including [ToggleButtons].
     ///
-    /// Defaults to null, resulting in a default [FlexSubThemeConfig] being used
-    /// when [subThemesOptIn] is set to true.
-    final FlexSubThemeConfig? subThemeConfig,
+    /// Defaults to null, resulting in a default [FlexSubThemesData] being used
+    /// when [useSubThemes] is set to true.
+    final FlexSubThemesData? subThemesData,
   }) {
     return FlexColorScheme.dark(
       colors: colors,
@@ -1281,9 +1287,10 @@ extension FlexThemeData on ThemeData {
       surfaceMode: surfaceMode,
       blendLevel: blendLevel,
       appBarStyle: appBarStyle,
-      tabBarStyle: tabBarStyle,
+      appBarOpacity: appBarOpacity,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: bottomAppBarElevation,
+      tabBarStyle: tabBarStyle,
       primary: primary,
       primaryVariant: primaryVariant,
       secondary: secondary,
@@ -1309,8 +1316,8 @@ extension FlexThemeData on ThemeData {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
-      subThemesOptIn: subThemesOptIn,
-      subThemeConfig: subThemeConfig,
+      useSubThemes: useSubThemes,
+      subThemesData: subThemesData,
     ).toTheme;
   }
 
@@ -1698,21 +1705,21 @@ extension FlexThemeData on ThemeData {
     /// The sub-themes are a convenient way to opt-in on customized corner
     /// radius on Widgets using above themes. By opting in you can set corner
     /// radius for all above Widgets to same corner radius in one go.
-    final bool subThemesOptIn = false,
+    final bool useSubThemes = false,
 
     /// Optional configuration parameters for the opt-in sub-themes.
     ///
     /// If you opt-in to use the opinionated sub-theming offered by
     /// [FlexColorScheme] you can also configure them by passing
-    /// in a [FlexSubThemeConfig] that allows you to modify them.
+    /// in a [FlexSubThemesData] that allows you to modify them.
     ///
     /// The primary purpose of the opinionated sub-themes is to make it easy
     /// to add themed corner radius to all Widgets that support it, and to
     /// provide a consistent look on all buttons, including [ToggleButtons].
     ///
-    /// Defaults to null, resulting in a default [FlexSubThemeConfig] being used
-    /// when [subThemesOptIn] is set to true.
-    final FlexSubThemeConfig? subThemeConfig,
+    /// Defaults to null, resulting in a default [FlexSubThemesData] being used
+    /// when [useSubThemes] is set to true.
+    final FlexSubThemesData? subThemesData,
   }) {
     return FlexColorScheme(
       brightness: brightness,
@@ -1743,8 +1750,8 @@ extension FlexThemeData on ThemeData {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
-      subThemesOptIn: subThemesOptIn,
-      subThemeConfig: subThemeConfig,
+      useSubThemes: useSubThemes,
+      subThemesData: subThemesData,
     ).toTheme;
   }
 }

@@ -1,14 +1,14 @@
 /// A library to help you make beautiful color scheme based themes for Flutter.
 library flex_color_scheme;
 
-/// Offers built-in reusable color schemes and color values. Can be used
-/// to hold custom color scheme definitions.
+/// Offers built-in reusable color schemes and color values. Can also be used
+/// to bundle custom color definitions into color schemes that can be used
+/// by FlexColorScheme.
 export 'src/flex_color.dart';
 
-/// Defines a FlexColorScheme and can convert it to Flutter `ThemeData` or
-/// optionally a standard `ColorScheme`.
+/// Defines a FlexColorScheme and can convert it to Flutter ThemeData.
 ///
-/// Includes helpers for surface styles and "on color" calculations.
+/// Includes helpers for surface styles and on color calculations.
 export 'src/flex_color_scheme.dart';
 
 /// Extensions for `Color` and `String` to assist with color
@@ -23,11 +23,12 @@ export 'src/flex_extensions.dart';
 /// definition objects.
 export 'src/flex_scheme.dart';
 
-/// Defines a FlexSubTheme.
-export 'src/flex_sub_theme.dart';
+/// Defines opinionated FlexSubThemes used by FlexColorScheme.
+export 'src/flex_sub_themes.dart';
 
-/// Defines a FlexSubThemeConfig.
-export 'src/flex_sub_theme_config.dart';
+/// Defines a FlexSubThemeData object used to configure FlexSubThemes used by
+/// FlexColorScheme.
+export 'src/flex_sub_themes_data.dart';
 
 /// Extensions on ThemeData to return a ThemeData object defined
 /// by a FlexColorScheme and its toTheme method.
