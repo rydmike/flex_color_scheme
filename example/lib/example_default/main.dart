@@ -246,7 +246,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               body: PageBody(
-                constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
+                constraints:
+                    const BoxConstraints(maxWidth: AppData.maxBodyWidth),
                 child: ListView(
                   padding: EdgeInsets.fromLTRB(
                     AppData.edgePadding,
