@@ -59,10 +59,10 @@ class _SubpageState extends State<Subpage> {
         body: PageBody(
           child: ListView(
             padding: EdgeInsets.fromLTRB(
-              AppConst.edgePadding,
-              topPadding + AppConst.edgePadding,
-              AppConst.edgePadding,
-              AppConst.edgePadding + bottomPadding,
+              AppData.edgePadding,
+              topPadding + AppData.edgePadding,
+              AppData.edgePadding,
+              AppData.edgePadding + bottomPadding,
             ),
             children: <Widget>[
               Text('Subpage demo', style: headline4),
@@ -75,7 +75,7 @@ class _SubpageState extends State<Subpage> {
               // Show all key active theme colors.
               Text('Theme colors', style: headline4),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
+                padding: EdgeInsets.symmetric(horizontal: AppData.edgePadding),
                 child: ShowThemeColors(),
               ),
               const Divider(),

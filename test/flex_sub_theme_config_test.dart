@@ -23,7 +23,7 @@ void main() {
       bottomSheetElevation: 4,
       bottomSheetModalElevation: 12,
       bottomNavigationBarElevation: 0,
-      minButtonSize: Size(48, 48),
+      minButtonSize: Size(46, 46),
       buttonPadding: EdgeInsets.symmetric(horizontal: 16),
       thickBorderWidth: 2,
       thinBorderWidth: 1.5,
@@ -42,7 +42,7 @@ void main() {
       bottomSheetElevation: 4,
       bottomSheetModalElevation: 12,
       bottomNavigationBarElevation: 0,
-      minButtonSize: Size(48, 48),
+      minButtonSize: Size(46, 46),
       buttonPadding: EdgeInsets.symmetric(horizontal: 16),
       thickBorderWidth: 2,
       thinBorderWidth: 1.5,
@@ -119,7 +119,7 @@ void main() {
           bottomSheetElevation: 4,
           bottomSheetModalElevation: 12,
           bottomNavigationBarElevation: 0,
-          minButtonSize: const Size(48, 48),
+          minButtonSize: const Size(46, 46),
           buttonPadding: const EdgeInsets.symmetric(horizontal: 16),
           thickBorderWidth: 2,
           thinBorderWidth: 1.5,
@@ -149,7 +149,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSubThemesData#00000(themedEffects: true, cornerRadius: 16.0, cornerRadiusBottomSheet: null, cornerRadiusCard: null, cornerRadiusDialog: null, cornerRadiusPopupMenuButton: null, cornerRadiusTimePickerDialog: null, cornerRadiusInputDecoration: null, cornerRadiusTextButton: null, cornerRadiusElevatedButton: null, cornerRadiusOutlinedButton: null, cornerRadiusToggleButtons: null, cardElevation: 0.0, elevatedButtonElevation: 0.0, popupMenuElevation: 2.0, dialogElevation: 12.0, bottomSheetElevation: 4.0, bottomSheetModalElevation: 12.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: null, bottomNavigationBarLandscapeLayout: null, minButtonSize: Size(48.0, 48.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, inputDecoratorIsOutlinedBorder: true, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorIsOutlinedBorder: true, inputDecoratorUnfocusedHasBorder: true)'));
+              'FlexSubThemesData#00000(themedEffects: true, cornerRadius: 16.0, cornerRadiusBottomSheet: null, cornerRadiusCard: null, cornerRadiusDialog: null, cornerRadiusPopupMenuButton: null, cornerRadiusTimePickerDialog: null, cornerRadiusInputDecoration: null, cornerRadiusTextButton: null, cornerRadiusElevatedButton: null, cornerRadiusOutlinedButton: null, cornerRadiusToggleButtons: null, cardElevation: 0.0, elevatedButtonElevation: 0.0, popupMenuElevation: 2.0, dialogElevation: 12.0, bottomSheetElevation: 4.0, bottomSheetModalElevation: 12.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: null, bottomNavigationBarLandscapeLayout: null, minButtonSize: Size(46.0, 46.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, inputDecoratorIsOutlinedBorder: true, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorIsOutlinedBorder: true, inputDecoratorUnfocusedHasBorder: true)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '
@@ -163,7 +163,7 @@ void main() {
     // This happens to always equal now in tests, if it start failing, test
     // 08c is actually enough.
     test('FSTC1.08b: Test hashCode exact value.', () {
-      expect(m1.hashCode, equals(230372543));
+      expect(m1.hashCode, equals(263552208));
     });
     test('FSTC1.08c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../const/app_const.dart';
+import '../const/app_data.dart';
 
 /// Dummy side panel.
 ///
@@ -58,7 +58,7 @@ class _SideMenuState extends State<SideMenu> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AppBar(
-                title: const Text(AppConst.appName),
+                title: const Text(AppData.appName),
                 leading: ConstrainedBox(
                   constraints: const BoxConstraints.tightFor(width: 56),
                   child: IconButton(
@@ -181,7 +181,7 @@ class _SideItem extends StatelessWidget {
                                   : _theme.colorScheme.onSurface
                                       .withOpacity(0.55)),
                         ),
-                        if (width < AppConst.collapseWidth + 10)
+                        if (width < AppData.collapseWidth + 10)
                           const SizedBox.shrink()
                         else
                           Text(
@@ -234,7 +234,7 @@ class _UserProfileState extends State<_UserProfile> {
           ),
           leading: CircleAvatar(
             backgroundColor: theme.colorScheme.primary,
-            radius: AppConst.collapseWidth / 2 - hPadding,
+            radius: AppData.collapseWidth / 2 - hPadding,
             child: Text(
               'JS',
               style: primaryTextTheme.subtitle1!.copyWith(

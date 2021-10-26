@@ -270,7 +270,7 @@ void main() {
           InputDecorationTheme(
             filled: true,
             fillColor: colorScheme.primary.withOpacity(0.06),
-            hoverColor: colorScheme.primary.withOpacity(0.06),
+            hoverColor: colorScheme.primary.withOpacity(0.05),
             focusColor: colorScheme.primary.withOpacity(0.15),
             focusedBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
@@ -325,7 +325,7 @@ void main() {
           InputDecorationTheme(
             filled: true,
             fillColor: colorScheme.primary.withOpacity(0.06),
-            hoverColor: colorScheme.primary.withOpacity(0.06),
+            hoverColor: colorScheme.primary.withOpacity(0.05),
             focusColor: colorScheme.primary.withOpacity(0.15),
             focusedBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
@@ -397,7 +397,7 @@ void main() {
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              minimumSize: const Size(48, 48),
+              minimumSize: const Size(46, 46),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(16),
@@ -425,7 +425,7 @@ void main() {
               overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.onPrimary.withOpacity(0.06);
+                    return colorScheme.onPrimary.withOpacity(0.05);
                   }
                   if (states.contains(MaterialState.focused)) {
                     return colorScheme.onPrimary.withOpacity(0.15);
@@ -485,7 +485,7 @@ void main() {
               overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.onPrimary.withOpacity(0.06);
+                    return colorScheme.onPrimary.withOpacity(0.05);
                   }
                   if (states.contains(MaterialState.focused)) {
                     return colorScheme.onPrimary.withOpacity(0.15);
@@ -510,7 +510,7 @@ void main() {
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
-              minimumSize: const Size(48, 48),
+              minimumSize: const Size(46, 46),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(16),
@@ -529,7 +529,7 @@ void main() {
               overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.06);
+                    return colorScheme.primary.withOpacity(0.05);
                   }
                   if (states.contains(MaterialState.focused)) {
                     return colorScheme.primary.withOpacity(0.15);
@@ -580,7 +580,7 @@ void main() {
         equalsIgnoringHashCodes(
           TextButtonThemeData(
             style: TextButton.styleFrom(
-              minimumSize: const Size(48, 48),
+              minimumSize: const Size(46, 46),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(16),
@@ -591,7 +591,7 @@ void main() {
               overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.06);
+                    return colorScheme.primary.withOpacity(0.05);
                   }
                   if (states.contains(MaterialState.focused)) {
                     return colorScheme.primary.withOpacity(0.15);
@@ -616,8 +616,8 @@ void main() {
         equals(
           ButtonThemeData(
             colorScheme: colorScheme,
-            minWidth: 48,
-            height: 48,
+            minWidth: 46,
+            height: 46,
             hoverColor:
                 colorScheme.primary.blend(Colors.white, 40).withOpacity(0.12),
             focusColor:
@@ -667,8 +667,8 @@ void main() {
             disabledBorderColor: colorScheme.onSurface.withOpacity(0.12),
             borderRadius: BorderRadius.circular(16),
             constraints: BoxConstraints(
-              minWidth: 48 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
-              minHeight: 48 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
+              minWidth: 46 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
+              minHeight: 46 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
             ),
           ),
         ),

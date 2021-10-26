@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 //
 // It provides the following features to the content of the page:
 // - Adds a scrollbar
+// - Adds the capability to un-focus a control like a TextFiled by clicking on
+//   the background.
 // - Center the content and limit the content width when a given width
 //   constraint value is exceeded, in this case an app level max width constant.
 class PageBody extends StatelessWidget {
@@ -49,15 +51,22 @@ class PageBody extends StatelessWidget {
     return Scrollbar(
       controller: controller,
       // TODO(rydmike): Put back un-focus, need on device!
-      child: Center(
-        child: ConstrainedBox(
-          constraints: constraints,
-          child: ScrollConfiguration(
-            behavior:
-                ScrollConfiguration.of(context).copyWith(scrollbars: false),
-            child: Padding(
-              padding: padding,
-              child: child,
+      child: GestureDetector(
+        // This allows us to un-focus a widget, typically a TextField with focus
+        // by tapping somewhere outside it. It is no longer needed on desktop
+        // builds, it is done automatically there, but not on tablet and phone
+        // app. In this demo we want it on them too.
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: constraints,
+            child: ScrollConfiguration(
+              behavior:
+                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              child: Padding(
+                padding: padding,
+                child: child,
+              ),
             ),
           ),
         ),

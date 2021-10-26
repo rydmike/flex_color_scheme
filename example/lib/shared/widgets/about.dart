@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../const/app_const.dart';
+import '../const/app_data.dart';
 import 'link_text_span.dart';
 
 /// An about icon button used on the example's app app bar.
@@ -31,8 +31,8 @@ void showAppAboutDialog(BuildContext context) {
 
   showAboutDialog(
     context: context,
-    applicationName: AppConst.appName,
-    applicationVersion: AppConst.version,
+    applicationName: AppData.appName,
+    applicationVersion: AppData.version,
     applicationIcon: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -52,7 +52,7 @@ void showAppAboutDialog(BuildContext context) {
     // TODO(rydmike): Old icon image - remove comment and asset too?
     // applicationIcon: const Image(image: AssetImage(App.icon)),
     applicationLegalese:
-        '${AppConst.copyright} ${AppConst.author} ${AppConst.license}',
+        '${AppData.copyright} ${AppData.author} ${AppData.license}',
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(top: 24),
@@ -62,12 +62,12 @@ void showAppAboutDialog(BuildContext context) {
               TextSpan(
                 style: aboutTextStyle,
                 text: 'This example shows some of the features of the '
-                    '${AppConst.appName} theming package. To learn more, check '
+                    '${AppData.appName} theming package. To learn more, check '
                     'out the package on ',
               ),
               LinkTextSpan(
                 style: linkStyle,
-                url: AppConst.packageUrl,
+                url: AppData.packageUrl,
                 text: 'pub.dev',
               ),
               TextSpan(
@@ -77,8 +77,8 @@ void showAppAboutDialog(BuildContext context) {
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with ${AppConst.flutterVersion}, '
-                    'using ${AppConst.packageVersion}\n\n',
+                text: 'Built with ${AppData.flutterVersion}, '
+                    'using ${AppData.packageVersion}\n\n',
               ),
             ],
           ),

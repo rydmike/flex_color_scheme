@@ -276,7 +276,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Determines if the color of the filled [InputDecorator].
   ///
-  /// Defaults to colorScheme.primary.withOpacity(0.075) if null.
+  /// Defaults to colorScheme.primary.withOpacity(0.06) if null.
   final Color? inputDecoratorFillColor;
 
   /// Determines if the [InputDecorator] uses [OutlineInputBorder] or

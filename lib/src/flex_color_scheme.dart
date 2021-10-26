@@ -3336,7 +3336,10 @@ class FlexColorScheme with Diagnosticable {
                 subTheme.cornerRadiusInputDecoration ?? subTheme.cornerRadius,
             useOutlinedBorder: subTheme.inputDecoratorIsOutlinedBorder,
             filled: subTheme.inputDecoratorIsFilled,
-            fillColor: subTheme.inputDecoratorFillColor,
+            fillColor: subTheme.inputDecoratorFillColor ??
+                (isDark
+                    ? colorScheme.primary.withOpacity(kFillColorOpacityDark)
+                    : colorScheme.primary.withOpacity(kFillColorOpacityLight)),
             focusedBorderWidth: subTheme.thickBorderWidth,
             unfocusedBorderWidth: subTheme.thinBorderWidth,
             unfocusedHasBorder: subTheme.inputDecoratorUnfocusedHasBorder,
@@ -3633,6 +3636,7 @@ class FlexColorScheme with Diagnosticable {
         labelStyle: effectiveTextTheme.bodyText1!,
       ),
 
+      // TODO(Rydmike): Broke past tab bar text style, revert and use as before!
       // Define the TabBar theme that will fit nicely in an AppBar
       // (default) or on background color for use eg in a Scaffold, the choice
       // depends on tabBarStyle `FlexTabBarStyle`, that defaults to

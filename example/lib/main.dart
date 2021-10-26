@@ -293,7 +293,7 @@ class _HomePageState extends State<HomePage> {
 
   // The reason why HomePage is using a stateful widget is that it holds the
   // state of the dummy side menu/rail locally.
-  double _menuWidth = AppConst.expandWidth;
+  double _menuWidth = AppData.expandWidth;
   bool _isExpanded = true;
 
   // The state for the system navbar style and divider usage is local as it is
@@ -319,26 +319,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool menuAvailable = media.size.width > 650;
+    final double topPadding =
+        media.padding.top + kToolbarHeight + AppData.edgePadding;
+    final double bottomPadding = media.padding.bottom + AppData.edgePadding;
+
+    final bool menuCanOperate = media.size.width > AppData.desktopBreakpoint;
+    final bool menuHide = media.size.width < AppData.phoneBreakpoint;
+
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
-    final Color appBarColor =
-        theme.appBarTheme.backgroundColor ?? theme.primaryColor;
 
     // Give the width of the side panel some automatic adaptive behavior and
     // make it rail sized when there is not enough room for a menu, even if
-    // menu size is requested.
-    if (!menuAvailable) {
-      _menuWidth = AppConst.collapseWidth;
-    }
-    if (menuAvailable && !_isExpanded) {
-      _menuWidth = AppConst.collapseWidth;
-    }
-    if (menuAvailable && _isExpanded) {
-      _menuWidth = AppConst.expandWidth;
+    // menu size is requested, and no rail on narrow phones.
+    if (menuHide) {
+      _menuWidth = 0.01;
+    } else {
+      if (!menuCanOperate) {
+        _menuWidth = AppData.collapseWidth;
+      }
+      if (menuCanOperate && !_isExpanded) {
+        _menuWidth = AppData.collapseWidth;
+      }
+      if (menuCanOperate && _isExpanded) {
+        _menuWidth = AppData.expandWidth;
+      }
     }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -358,14 +364,14 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           // Contains the demo menu and side rail.
           ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
+            constraints: const BoxConstraints(maxWidth: AppData.expandWidth),
             child: Material(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 width: _menuWidth,
                 child: SideMenu(
-                  maxWidth: AppConst.expandWidth,
-                  onTap: menuAvailable
+                  maxWidth: AppData.expandWidth,
+                  onTap: menuCanOperate
                       ? () {
                           setState(() {
                             _isExpanded = !_isExpanded;
@@ -379,44 +385,23 @@ class _HomePageState extends State<HomePage> {
           // The actual page content is a normal Scaffold.
           Expanded(
             child: Scaffold(
-              // For scrolling behind the app bar
               extendBodyBehindAppBar: true,
-              // For scrolling behind the bottom nav bar, if there would be one.
               extendBody: true,
               appBar: AppBar(
-                title: Text(AppConst.title(context)),
+                title: Text(AppData.title(context)),
                 actions: const <Widget>[AboutIconButton()],
-                backgroundColor: Colors.transparent,
-                // Gradient partially transparent AppBar, just because it looks
-                // nice and we can see content scroll behind it.
-                flexibleSpace: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Theme.of(context).dividerColor),
-                    ),
-                    gradient: LinearGradient(
-                      begin: AlignmentDirectional.centerStart,
-                      end: AlignmentDirectional.centerEnd,
-                      colors: <Color>[
-                        appBarColor,
-                        appBarColor.withOpacity(0.85),
-                      ],
-                    ),
-                  ),
-                ),
               ),
               body: PageBody(
-                // key: const ValueKey<String>('PageBody'),
                 controller: scrollController,
                 constraints:
-                    const BoxConstraints(maxWidth: AppConst.maxBodyWidth),
+                    const BoxConstraints(maxWidth: AppData.maxBodyWidth),
                 child: ListView(
                   controller: scrollController,
                   padding: EdgeInsets.fromLTRB(
-                    AppConst.edgePadding,
-                    topPadding + kToolbarHeight + AppConst.edgePadding,
-                    AppConst.edgePadding,
-                    AppConst.edgePadding + bottomPadding,
+                    AppData.edgePadding,
+                    topPadding,
+                    AppData.edgePadding,
+                    bottomPadding,
                   ),
                   children: <Widget>[
                     Text('Theme', style: headline4),
@@ -441,8 +426,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // Active theme color indicators.
                     const Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: AppConst.edgePadding),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: AppData.edgePadding),
                       child: ShowThemeColors(),
                     ),
                     const SizedBox(height: 8),

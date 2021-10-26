@@ -368,7 +368,7 @@ class FlexSubThemes {
     final bool unfocusedHasBorder = true,
   }) {
     final Color _fillColor =
-        fillColor ?? colorScheme.primary.withOpacity(kHoverBackgroundOpacity);
+        fillColor ?? colorScheme.primary.withOpacity(kFillColorOpacityDefault);
     return useOutlinedBorder
         ? InputDecorationTheme(
             filled: filled,

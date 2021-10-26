@@ -140,7 +140,7 @@ const double kSnackBarElevation = 4;
 /// Applies to [TextButton], [ElevatedButton], [OutlinedButton] and
 /// [ToggleButtons].
 const Size kMinButtonSize =
-    Size(kMinInteractiveDimension, kMinInteractiveDimension);
+    Size(kMinInteractiveDimension - 2, kMinInteractiveDimension - 2);
 
 /// Default padding on buttons.
 ///
@@ -162,11 +162,20 @@ const double kThinBorderWidth = 1.5;
 
 // TODO(rydmike): Consider adding SDK default values to doc comments below.
 
+/// Fill color opacity for [InputDecorator] when fill color is not specified.
+const double kFillColorOpacityDefault = 0.06;
+
+/// Fill color opacity [InputDecorator] used by FlexColorScheme in light theme.
+const double kFillColorOpacityLight = 0.05;
+
+/// Fill color opacity [InputDecorator] used by FlexColorScheme in dark theme.
+const double kFillColorOpacityDark = 0.08;
+
 /// Hover opacity on background.
 ///
 /// Used on opt in sub-themes by [InputDecorator],
 /// [ElevatedButton], [OutlinedButton] and [TextButton].
-const double kHoverBackgroundOpacity = 0.06; // E:0.08 D:0.04 FO:0.08
+const double kHoverBackgroundOpacity = 0.05; // E:0.08 D:0.04 FO:0.08
 
 /// Focus opacity on background.
 ///
@@ -176,7 +185,7 @@ const double kFocusBackgroundOpacity = 0.15; // E:0.24 D:0.12, FO:0.01
 
 /// Pressed opacity on background.
 ///
-/// Ued on opt in sub-themes by [OutlinedButton] and [TextButton].
+/// Used on opt in sub-themes by [OutlinedButton] and [TextButton].
 const double kPressedBackgroundOpacity = 0.2; // E:0.24 D:? E:0.24
 
 /// Disabled opacity on background elements.

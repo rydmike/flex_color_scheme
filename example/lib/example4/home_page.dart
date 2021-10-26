@@ -38,14 +38,13 @@ class HomePage extends StatelessWidget {
           // automatically. No idea why, just something I noticed by accident.
           child: Scaffold(
             appBar: AppBar(
-              title: Text(AppConst.title(context)),
+              title: Text(AppData.title(context)),
               actions: const <Widget>[AboutIconButton()],
             ),
             body: PageBody(
-              constraints:
-                  const BoxConstraints(maxWidth: AppConst.maxBodyWidth),
+              constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
               child: ListView(
-                padding: const EdgeInsets.all(AppConst.edgePadding),
+                padding: const EdgeInsets.all(AppData.edgePadding),
                 children: <Widget>[
                   Text('Theme', style: headline4),
                   const Text(
@@ -67,8 +66,8 @@ class HomePage extends StatelessWidget {
                         // A 3-way theme mode toggle switch.
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                            vertical: AppConst.edgePadding,
-                            horizontal: AppConst.edgePadding + 4,
+                            vertical: AppData.edgePadding,
+                            horizontal: AppData.edgePadding + 4,
                           ),
                           child: FlexThemeModeSwitch(
                             themeMode: controller.themeMode,
@@ -89,7 +88,7 @@ class HomePage extends StatelessWidget {
                         // Active theme color indicators.
                         const Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: AppConst.edgePadding,
+                            horizontal: AppData.edgePadding,
                           ),
                           child: ShowThemeColors(),
                         ),

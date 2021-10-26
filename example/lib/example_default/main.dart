@@ -146,7 +146,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // The reason why HomePage is using a stateful widget is that it holds the
   // state of the dummy side menu/rail locally.
-  double _menuWidth = AppConst.expandWidth;
+  double _menuWidth = AppData.expandWidth;
   bool _isExpanded = true;
 
   // The state for the system navbar style and divider usage is local as it is
@@ -172,13 +172,13 @@ class _HomePageState extends State<HomePage> {
     // make it rail sized when there is not enough room for a menu, even if
     // menu size is requested.
     if (!menuAvailable) {
-      _menuWidth = AppConst.collapseWidth;
+      _menuWidth = AppData.collapseWidth;
     }
     if (menuAvailable && !_isExpanded) {
-      _menuWidth = AppConst.collapseWidth;
+      _menuWidth = AppData.collapseWidth;
     }
     if (menuAvailable && _isExpanded) {
-      _menuWidth = AppConst.expandWidth;
+      _menuWidth = AppData.expandWidth;
     }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -198,13 +198,13 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           // Contains the demo menu and side rail.
           ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
+            constraints: const BoxConstraints(maxWidth: AppData.expandWidth),
             child: Material(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 width: _menuWidth,
                 child: SideMenu(
-                  maxWidth: AppConst.expandWidth,
+                  maxWidth: AppData.expandWidth,
                   onTap: menuAvailable
                       ? () {
                           setState(() {
@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
               // For scrolling behind the bottom nav bar, if there would be one.
               extendBody: true,
               appBar: AppBar(
-                title: Text(AppConst.title(context)),
+                title: Text(AppData.title(context)),
                 actions: const <Widget>[AboutIconButton()],
                 backgroundColor: Colors.transparent,
                 // Gradient partially transparent AppBar, just because it looks
@@ -246,14 +246,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               body: PageBody(
-                constraints:
-                    const BoxConstraints(maxWidth: AppConst.maxBodyWidth),
+                constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
                 child: ListView(
                   padding: EdgeInsets.fromLTRB(
-                    AppConst.edgePadding,
-                    topPadding + kToolbarHeight + AppConst.edgePadding,
-                    AppConst.edgePadding,
-                    AppConst.edgePadding + bottomPadding,
+                    AppData.edgePadding,
+                    topPadding + kToolbarHeight + AppData.edgePadding,
+                    AppData.edgePadding,
+                    AppData.edgePadding + bottomPadding,
                   ),
                   children: <Widget>[
                     Text('Theme', style: headline4),
@@ -269,8 +268,8 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 8),
                     // Active theme color indicators.
                     const Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: AppConst.edgePadding),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: AppData.edgePadding),
                       child: ShowThemeColors(),
                     ),
                     const SizedBox(height: 8),

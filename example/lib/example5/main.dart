@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+// import 'package:google_fonts/google_fonts.dart';
 
 import '../shared/all_shared_imports.dart';
 import 'home_page.dart';
@@ -72,34 +73,6 @@ Future<void> main() async {
   runApp(DemoApp(themeController: themeController));
 }
 
-// We define a custom text theme for our app. Here we decided that
-// Headline1...4 are too big to be useful for us, so we make them smaller.
-// We also think buttons should have a bit bigger text, tighter letter spacing,
-// and that overline is a bit too small and have weird letter spacing,
-// so we change them too.
-const TextTheme _myTextTheme = TextTheme(
-  headline1: TextStyle(
-    fontSize: 64, // Defaults to 96 in Material2018 Typography.
-  ),
-  headline2: TextStyle(
-    fontSize: 52, // Defaults to 60 in Material2018 Typography.
-  ),
-  headline3: TextStyle(
-    fontSize: 42, // Defaults to 48 in Material2018 Typography.
-  ),
-  headline4: TextStyle(
-    fontSize: 32, // Defaults to 34 in Material2018 Typography.
-  ),
-  button: TextStyle(
-    fontSize: 16, // Defaults to 14 in Material2018 Typography.
-    letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
-  ),
-  overline: TextStyle(
-    fontSize: 11, // Defaults to 10 in Material2018 Typography.
-    letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
-  ),
-);
-
 class DemoApp extends StatelessWidget {
   const DemoApp({Key? key, required this.themeController}) : super(key: key);
   final ThemeController themeController;
@@ -146,9 +119,9 @@ class DemoApp extends StatelessWidget {
                     swapColors: themeController.swapLightColors,
                     useSubThemes: themeController.useSubThemes,
                     visualDensity: FlexColorScheme.comfortablePlatformDensity,
-                    fontFamily: GoogleFonts.notoSans().fontFamily,
-                    textTheme: _myTextTheme,
-                    primaryTextTheme: _myTextTheme,
+                    fontFamily: AppData.font,
+                    textTheme: AppData.textTheme,
+                    primaryTextTheme: AppData.textTheme,
                     // Add some quick and easy options for sub-themes.
                     subThemesData: FlexSubThemesData(
                       cornerRadius: themeController.cornerRadius,
@@ -164,14 +137,14 @@ class DemoApp extends StatelessWidget {
                           themeController.inputDecoratorUnfocusedHasBorder,
                     ),
                   )
-                // Do NOT use FlexThemeData. Use the default ThemeData.from
-                // method as an option, just for comparison purposes.
+                // Here we are NOT using FlexThemeData. We use the default
+                // ThemeData.from method, to see the differences.
                 : ThemeData.from(
                     textTheme: ThemeData(
                       brightness: Brightness.light,
-                      fontFamily: GoogleFonts.notoSans().fontFamily,
-                      textTheme: _myTextTheme,
-                      primaryTextTheme: _myTextTheme,
+                      fontFamily: AppData.font,
+                      textTheme: AppData.textTheme,
+                      primaryTextTheme: AppData.textTheme,
                     ).textTheme,
                     colorScheme: FlexColorScheme.light(
                       colors:
@@ -214,9 +187,9 @@ class DemoApp extends StatelessWidget {
                     darkIsTrueBlack: themeController.darkIsTrueBlack,
                     useSubThemes: themeController.useSubThemes,
                     visualDensity: FlexColorScheme.comfortablePlatformDensity,
-                    fontFamily: GoogleFonts.notoSans().fontFamily,
-                    textTheme: _myTextTheme,
-                    primaryTextTheme: _myTextTheme,
+                    fontFamily: AppData.font,
+                    textTheme: AppData.textTheme,
+                    primaryTextTheme: AppData.textTheme,
                     subThemesData: FlexSubThemesData(
                       cornerRadius: themeController.cornerRadius,
                       themedEffects: themeController.themedEffects,
@@ -231,12 +204,14 @@ class DemoApp extends StatelessWidget {
                           themeController.inputDecoratorUnfocusedHasBorder,
                     ),
                   )
+                // Here we are NOT using FlexThemeData. We use the default
+                // ThemeData.from method, to see the differences.
                 : ThemeData.from(
                     textTheme: ThemeData(
                       brightness: Brightness.dark,
-                      fontFamily: GoogleFonts.notoSans().fontFamily,
-                      textTheme: _myTextTheme,
-                      primaryTextTheme: _myTextTheme,
+                      fontFamily: AppData.font,
+                      textTheme: AppData.textTheme,
+                      primaryTextTheme: AppData.textTheme,
                     ).textTheme,
                     colorScheme: FlexColorScheme.dark(
                       colors: themeController.useToDarkMethod

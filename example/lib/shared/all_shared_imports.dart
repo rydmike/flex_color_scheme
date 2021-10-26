@@ -5,7 +5,7 @@
 // The folder structure is organization more for convenience for 6 demo apps
 // sharing example a lot of case and not what you might use in a real app.
 export 'const/app_color.dart';
-export 'const/app_const.dart';
+export 'const/app_data.dart';
 export 'controllers/theme_controller.dart';
 export 'pages/splash_page_one.dart';
 export 'pages/splash_page_two.dart';

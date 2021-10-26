@@ -1,5 +1,4 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -32,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   // state of the dummy side menu/rail locally. However, all state for the
   // application theme are in this example also held by the stateful MaterialApp
   // widget, and values are passed in and changed via ValueChanged callbacks.
-  double _menuWidth = AppConst.expandWidth;
+  double _menuWidth = AppData.expandWidth;
   bool _isExpanded = true;
 
   // The state for the system navbar style and divider usage is local as it is
@@ -58,25 +57,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool menuAvailable = media.size.width >= AppConst.desktopBreakpoint;
+    final double topPadding =
+        media.padding.top + kToolbarHeight + AppData.edgePadding;
+    final double bottomPadding = media.padding.bottom + AppData.edgePadding;
+
+    final bool menuCanOperate = media.size.width >= AppData.desktopBreakpoint;
+    final bool menuHide = media.size.width < AppData.phoneBreakpoint;
 
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
 
-    // Give the width of the side panel some automatic adaptive behavior and
+    // Give the width of the side panel some automatic responsive behavior and
     // make it rail sized when there is not enough room for a menu, even if
-    // menu size is requested.
-    if (!menuAvailable) {
-      _menuWidth = AppConst.collapseWidth;
-    }
-    if (menuAvailable && !_isExpanded) {
-      _menuWidth = AppConst.collapseWidth;
-    }
-    if (menuAvailable && _isExpanded) {
-      _menuWidth = AppConst.expandWidth;
+    // menu size is requested, and even remove rail on narrow phones.
+    if (menuHide) {
+      _menuWidth = 0.01;
+    } else {
+      if (!menuCanOperate) {
+        _menuWidth = AppData.collapseWidth;
+      }
+      if (menuCanOperate && !_isExpanded) {
+        _menuWidth = AppData.collapseWidth;
+      }
+      if (menuCanOperate && _isExpanded) {
+        _menuWidth = AppData.expandWidth;
+      }
     }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -97,14 +103,14 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           // The dummy demo menu and side rail.
           ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppConst.expandWidth),
+            constraints: const BoxConstraints(maxWidth: AppData.expandWidth),
             child: Material(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 width: _menuWidth,
                 child: SideMenu(
-                  maxWidth: AppConst.expandWidth,
-                  onTap: menuAvailable
+                  maxWidth: AppData.expandWidth,
+                  onTap: menuCanOperate
                       ? () {
                           setState(() {
                             _isExpanded = !_isExpanded;
@@ -118,25 +124,23 @@ class _HomePageState extends State<HomePage> {
           // The actual page content is a normal Scaffold.
           Expanded(
             child: Scaffold(
-              // For scrolling behind the app bar.
               extendBodyBehindAppBar: true,
-              // For scrolling behind the bottom nav bar, if there is one.
               extendBody: true,
               appBar: AppBar(
-                title: Text(AppConst.title(context)),
+                title: Text(AppData.title(context)),
                 actions: const <Widget>[AboutIconButton()],
               ),
               body: PageBody(
                 controller: scrollController,
                 constraints:
-                    const BoxConstraints(maxWidth: AppConst.maxBodyWidth),
+                    const BoxConstraints(maxWidth: AppData.maxBodyWidth),
                 child: ListView(
                   controller: scrollController,
                   padding: EdgeInsets.fromLTRB(
-                    AppConst.edgePadding,
-                    topPadding + kToolbarHeight + AppConst.edgePadding,
-                    AppConst.edgePadding,
-                    AppConst.edgePadding + bottomPadding,
+                    AppData.edgePadding,
+                    topPadding,
+                    AppData.edgePadding,
+                    bottomPadding,
                   ),
                   children: <Widget>[
                     Text('Theme', style: headline4),
@@ -158,18 +162,11 @@ class _HomePageState extends State<HomePage> {
                       'A theme showcase widget shows the active theme with '
                       'several common Material widgets.\n',
                     ),
-                    // Card with theme colors and toggle on/off
-                    // using FlexColorScheme.
                     _ThemeColors(controller: widget.controller),
-                    // Card with theme mode settings.
                     _ModeOptions(controller: widget.controller),
-                    // Card for enabling sub themes and their settings.
                     _SubThemes(controller: widget.controller),
-                    // Surface mode settings.
                     _SurfaceBlends(controller: widget.controller),
-                    // App bar theme settings.
                     _AppBarStyle(controller: widget.controller),
-                    // Bottom and system navbar settings.
                     _BottomNavBars(
                       controller: widget.controller,
                       navBarStyle: _navBarStyle,
@@ -223,7 +220,7 @@ class _ThemeColors extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppConst.edgePadding),
+            padding: EdgeInsets.symmetric(horizontal: AppData.edgePadding),
             child: ShowThemeColors(),
           ),
           const SizedBox(height: 8),
@@ -504,7 +501,7 @@ class _SurfaceBlends extends StatelessWidget {
         return 'Low scaffold: Scaffold (1/3x) Surface and Background (1x)';
       case FlexSurfaceMode.highScaffold:
         return 'High scaffold: Scaffold (3x) Surface and Background (1x)\n'
-            'When used, scaffold content typically placed in cards with '
+            'When used, scaffold content is typically placed on Cards with '
             'less primary color blend.';
       case FlexSurfaceMode.lowScaffoldVariantDialog:
         return 'Low scaffold: Scaffold (1/3x) Surface and Background (1x)\n'
@@ -598,7 +595,7 @@ class _AppBarStyle extends StatelessWidget {
   }) : super(key: key);
   final ThemeController controller;
 
-  String explainStyle(final FlexAppBarStyle style, final bool isLight) {
+  String explainAppBarStyle(final FlexAppBarStyle style, final bool isLight) {
     switch (style) {
       case FlexAppBarStyle.primary:
         return isLight ? 'Use primary color. (Default)' : 'Use primary color.';
@@ -638,7 +635,6 @@ class _AppBarStyle extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final ColorScheme colorScheme = theme.colorScheme;
 
     return RevealListTileCard(
       title: Text(
@@ -664,7 +660,7 @@ class _AppBarStyle extends StatelessWidget {
             ListTile(
               title: const Text('Light mode AppBar background color'),
               subtitle: Text(
-                explainStyle(controller.lightAppBarStyle, isLight),
+                explainAppBarStyle(controller.lightAppBarStyle, isLight),
               ),
             ),
             ListTile(
@@ -677,7 +673,7 @@ class _AppBarStyle extends StatelessWidget {
             ListTile(
               title: const Text('Dark mode AppBar background color'),
               subtitle: Text(
-                explainStyle(controller.darkAppBarStyle, isLight),
+                explainAppBarStyle(controller.darkAppBarStyle, isLight),
               ),
             ),
             ListTile(
@@ -810,7 +806,7 @@ class _BottomNavBars extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       title: Text(
-        'Bottom and system navigation',
+        'Bottom navigation',
         style: Theme.of(context).textTheme.headline6,
       ),
       closed: true,
