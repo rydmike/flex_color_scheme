@@ -118,7 +118,7 @@ class DemoApp extends StatelessWidget {
                     // Swap primary and secondary colors
                     swapColors: themeController.swapLightColors,
                     useSubThemes: themeController.useSubThemes,
-                    visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                    visualDensity: AppData.visualDensity,
                     fontFamily: AppData.font,
                     textTheme: AppData.textTheme,
                     primaryTextTheme: AppData.textTheme,
@@ -154,7 +154,7 @@ class DemoApp extends StatelessWidget {
                       swapColors: themeController.swapLightColors,
                     ).toScheme,
                   ).copyWith(
-                    visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                    visualDensity: AppData.visualDensity,
                     typography: Typography.material2018(
                       platform: defaultTargetPlatform,
                     ),
@@ -186,7 +186,7 @@ class DemoApp extends StatelessWidget {
                     swapColors: themeController.swapDarkColors,
                     darkIsTrueBlack: themeController.darkIsTrueBlack,
                     useSubThemes: themeController.useSubThemes,
-                    visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                    visualDensity: AppData.visualDensity,
                     fontFamily: AppData.font,
                     textTheme: AppData.textTheme,
                     primaryTextTheme: AppData.textTheme,
@@ -225,7 +225,7 @@ class DemoApp extends StatelessWidget {
                       darkIsTrueBlack: themeController.darkIsTrueBlack,
                     ).toScheme,
                   ).copyWith(
-                    visualDensity: FlexColorScheme.comfortablePlatformDensity,
+                    visualDensity: AppData.visualDensity,
                     typography: Typography.material2018(
                       platform: defaultTargetPlatform,
                     ),

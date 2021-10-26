@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -50,6 +51,11 @@ class AppData {
 
   // Get the main font used in the examples.
   static String? get font => GoogleFonts.roboto().fontFamily;
+
+  // Defining the visual density here to so we can change it one spot when
+  // we want to try different options.
+  static VisualDensity get visualDensity =>
+      FlexColorScheme.comfortablePlatformDensity;
 
   // We define a custom text theme for our app. Here we decided that
   // Headline1...4 are too big to be useful for us, so we make them smaller.
