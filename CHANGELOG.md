@@ -23,7 +23,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   factories `light` and `dark` are `surfaceMode` using enum `FlexSurfaceMode`
   and `blendLevel` `<int>`. Consider using them instead of previous `surfaceStyle`.
   The surface alpha blend method `surfaceStyle` is still default, and not yet
-  deprecated, but may be so in later versions. It is not rally needed anymore,
+  deprecated, but may be so in later versions. It is not really needed anymore,
   but there was no major reason to break things by removing it either.
 * **New:** Major new feature; simple sub-theming of Flutter SDK UI widgets.  
   * You can opt in on nice looking opinionated widget sub-themes with
@@ -44,35 +44,36 @@ All notable changes to the **FlexColorScheme** package are documented here.
   * Themes can now optionally be created with the convenience syntax
   `FlexThemeData.light` and `FlexThemeData.dark`, instead of with 
   `FlexColorScheme.light().toTheme` and `FlexColorScheme.dark().toTheme`. 
-  * The `toTheme` method is still available and works as before. It will **not**
+  * The `toTheme` method is still available and works as before. It will not
     be deprecated. It is needed when doing elaborate custom sub-theming beyond
-    what is offered when using `FlexColorScheme` based automatic sub-themes. 
+    what is offered when using `FlexColorScheme` based sub-themes. 
 * **New:** Added `textTheme` and `primaryTextTHeme` properties to 
   `FlexColorScheme` to enable easier setup of custom `TextThemes` without the
    need to add a custom `TextTheme` via a `copyWith`, plus `merge` with the 
    default text theme.
 * **New:** Added `FlexColorScheme.dialogBackground` as a background surface 
   color that can be controlled and themed separately. 
-* **New:** Added `appBarOpacity` to FlexColorScheme factories light() and dark().
-  With it, you can apply themed opacity to the app bar color to its selected 
-  style.
-* **New:** On the `FlexColorScheme` factories `light` and `dark`, exposed 
+* **New:** Added `appBarOpacity` to `FlexColorScheme.light()` and `dark()`.
+  With it, you can apply themed opacity to the app bar color to whatever 
+  selected `FlexAppBarStyle` it is using.
+* **New:** On the `FlexColorScheme` factories `light` and `dark`, we exposed 
   the `Color` properties `primary`, `primaryVariant`, `secondary`, 
   `sedondaryVariant`, `appBarBackground`, `dialogBackground` and `error`.
   They all default to null, but if provided they can be used as override values
   to factory behaviors defined by `scheme`, `colors`, `appBarStyle`,
   `surfaceMode` and `surfaceStyle` that
-  otherwise via the factories define the colors for these properties. If a value  
+  otherwise via the factories define the colors for these properties. If a value
   for one of the new direct color properties is used with the factory, it always
-  has the highest precedence.
+  has precedence over other properties that assign or compute colors for it. 
 * **New:** Exposed boolean property `applyElevationOverlayColor`. It has the same
   function as the same property in `ThemeData`. It applies a semi-transparent 
-  overlay color on Material surfaces to indicate elevation for dark themes.  
+  overlay color on Material surfaces to indicate elevation for dark themes.
   In `FlexColorScheme` it defaults to true. In Flutter `ThemeData.from` it
   also default to true, but in `ThemeData` it defaults to false.
-  The property is just available for convenience, so you can avoid a`copyWith` if 
-  you wish to turn it off. It is not necessarily needed or een desired when 
-  using strong alpha blends on surfaces in dark mode.
+  The property is just available for convenience, so you can avoid a `copyWith`
+  if you wish to turn it off. It is not necessarily needed or even desired when 
+  using strong alpha blends on surfaces in dark mode, to use an elevation 
+  overlay color.
   
 * **New:** All `FlexSchemeData` objects in `FlexColor` are exposed as static 
   const objects, making them easy to pick and reuse as const objects 
@@ -81,8 +82,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
 * **New:** Added convenience extension `.blendAlpha()` on `Color` 
   in `FlexColorExtensions`.
 
-* **New:** The `FlexThemeModeSwitch` got a bool property `hasTitle` that can be
-    set to `true` to remove its title entirely.
+* **New:** The `FlexThemeModeSwitch` got a bool property `hasTitle`, if set
+    to `false` it removes the title entirely.
 * **New:** The `FlexThemeModeSwitch` got a `buttonOrder` property using enum
   `FlexThemeModeButtonOrder` that you can use to define the order of its
   light, system and dark theme mode buttons, in all possible combinations.
