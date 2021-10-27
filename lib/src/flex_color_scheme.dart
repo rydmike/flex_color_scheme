@@ -78,14 +78,43 @@ enum FlexSurfaceMode {
   ///
   /// Theme colorScheme.primary color is used as blend color on all surfaces.
   ///
-  /// This style can be used to replace the style that is produced when using
-  /// `surfaceStyle` property in [FlexColorScheme.light] and
-  /// [FlexColorScheme.dark].
+  /// In combination with the blend level [FlexColorScheme.blendLevel], it
+  /// results in a style where scaffold background has a much lower blend
+  /// strength, 0.25x of blend level value and remains mostly unbranded at
+  /// low blend levels. Surface uses the blend level value, and
+  /// background gets 2x the blend level value.
   ///
-  /// In combination with the blend strengths, it results in the same style
-  /// where scaffold background has a much lower blend strength, 0.25x of blend
-  /// level value and remains mostly unbranded at low blend levels. Surface uses
-  /// the blend level value, and background gets 2x the blend level value.
+  /// The mode [FlexSurfaceMode.highBackground] can be used to replace the
+  /// style that is produced when using [FlexColorScheme.surfaceStyle] enum
+  /// property [FlexSurface] in [FlexColorScheme.light] and
+  /// [FlexColorScheme.dark]. The mode [FlexSurfaceMode.highBackground] uses
+  /// the same design concept as the only style offered by [FlexSurface] in
+  /// [FlexColorScheme.surfaceStyle] before version 4.0.0.
+  ///
+  /// By adjusting the [FlexColorScheme.blendLevel] property and using this
+  /// style, you can find a similar visual effect when using
+  /// [FlexSurfaceMode.highBackground] with the following values when matching
+  /// match most prominent blended [ColorScheme.background] color.
+  ///
+  /// In light theme mode:
+  /// * [FlexSurface.material] 0% : blendLevel = 0
+  /// * [FlexSurface.light]    2% : blendLevel = 2..3
+  /// * [FlexSurface.medium]   4% : blendLevel = 5
+  /// * [FlexSurface.strong]   6% : blendLevel = 7..8
+  /// * [FlexSurface.heavy]    8% : blendLevel = 10
+  ///
+  /// In dark theme mode:
+  /// * [FlexSurface.material] 0% : blendLevel = 0
+  /// * [FlexSurface.light]    5% : blendLevel = 3
+  /// * [FlexSurface.medium]   8% : blendLevel = 5
+  /// * [FlexSurface.strong]  11% : blendLevel = 7
+  /// * [FlexSurface.heavy]   14% : blendLevel = 8..9
+  ///
+  /// Since there is not an exact 2:1 relationship between background and
+  /// surface, when using the older [FlexSurface] based style, nor is
+  /// scaffoldBackground : surface always a 1 : 4 relationship. The old and new
+  /// designs do never align exactly at any blendLevel, but the above values
+  /// produce visually very close results.
   ///
   /// To get elevation overlay color in dark themes on all surfaces used by
   /// [Material], use one of the modes where background and dialog color equals
@@ -1026,19 +1055,51 @@ class FlexColorScheme with Diagnosticable {
     /// it offers more color branded surface modes and separate control over
     /// the used branding level via the separate `blendLevel` property.
     ///
-    /// The mode [FlexSurfaceMode.scaffoldSurfaceBackground] is closest to the
-    /// style used in [FlexColorScheme] before version 4.0.0 via the to be
-    /// deprecated [FlexSurface] enum property `surfaceStyle` in
-    /// [FlexColorScheme]. By adjusting `blendLevel` property and using this
-    /// style, you can find a similar style when using
-    /// [FlexSurfaceMode.scaffoldSurfaceBackground].
+    /// The mode [FlexSurfaceMode.highBackground] can be used to replace the
+    /// style that is produced when using [FlexColorScheme.surfaceStyle] enum
+    /// property [FlexSurface] in [FlexColorScheme.light] and
+    /// [FlexColorScheme.dark]. The mode [FlexSurfaceMode.highBackground] uses
+    /// the same design concept as the only style offered by [FlexSurface] in
+    /// [FlexColorScheme.surfaceStyle] before version 4.0.0.
+    ///
+    /// By adjusting the [FlexColorScheme.blendLevel] property and using this
+    /// style, you can find a similar visual effect when using
+    /// [FlexSurfaceMode.highBackground] with the following values when matching
+    /// match most prominent blended [ColorScheme.background] color.
     ///
     /// In light theme mode:
-    /// * [FlexSurface.material] : [FlexBlendLevel.zero]
-    /// * [FlexSurface.light] : [FlexBlendLevel.two]
-    /// * [FlexSurface.medium] : [FlexBlendLevel.four]
-    /// * [FlexSurface.strong] : [FlexBlendLevel.six]
-    /// * [FlexSurface.heavy] : [FlexBlendLevel.eight]
+    /// * [FlexSurface.material] 0% : blendLevel = 0
+    /// * [FlexSurface.light]    2% : blendLevel = 2..3
+    /// * [FlexSurface.medium]   4% : blendLevel = 5
+    /// * [FlexSurface.strong]   6% : blendLevel = 7..8
+    /// * [FlexSurface.heavy]    8% : blendLevel = 10
+    ///
+    /// In dark theme mode:
+    /// * [FlexSurface.material] 0% : blendLevel = 0
+    /// * [FlexSurface.light]    5% : blendLevel = 3
+    /// * [FlexSurface.medium]   8% : blendLevel = 5
+    /// * [FlexSurface.strong]  11% : blendLevel = 7
+    /// * [FlexSurface.heavy]   14% : blendLevel = 8..9
+    ///
+    /// Since there is not an exact 2:1 relationship between background and
+    /// surface, when using the older [FlexSurface] based style, nor is
+    /// scaffoldBackground : surface always a 1 : 4 relationship. The old and
+    /// new designs do never align exactly at any blendLevel, but the above
+    /// values produce visually very close results.
+    ///
+    /// To get elevation overlay color in dark themes on all surfaces used by
+    /// [Material], use one of the modes where background and dialog color
+    /// equals the blend strength on surface color, like [flat], [lowScaffold],
+    /// [highScaffold], [highScaffold]. Other modes will only use elevation
+    /// overlay if their background happens to be equal to resulting
+    /// colorScheme.surface color. For more information
+    /// see issue: https://github.com/flutter/flutter/issues/90353
+    ///
+    /// When using very strong surface branding in dark mode, having an overlay
+    /// elevation color in dark mode is less critical, since the elevation
+    /// becomes partially visible via shadows and the surface may even have
+    /// another color tint if using e.g. [lowScaffoldVariantDialog] or
+    /// [highScaffoldVariantDialog].
     ///
     /// If values for the properties `surface`, `background`,
     /// `dialogBackground` or `scaffoldBackground` are given in the constructor,
@@ -1819,21 +1880,51 @@ class FlexColorScheme with Diagnosticable {
     /// it offers more color branded surface modes and separate control over
     /// the used branding level via the separate `blendLevel` property.
     ///
-    /// The mode [FlexSurfaceMode.scaffoldSurfaceBackground] is closest to the
-    /// style used in [FlexColorScheme] before version 4.0.0 via the to be
-    /// deprecated [FlexSurface] enum property `surfaceStyle` in
-    /// [FlexColorScheme]. By adjusting `blendLevel` property and using this
-    /// style, you can find a similar style. These is not always a
-    /// complete match when using [FlexSurfaceMode.scaffoldSurfaceBackground].
+    /// The mode [FlexSurfaceMode.highBackground] can be used to replace the
+    /// style that is produced when using [FlexColorScheme.surfaceStyle] enum
+    /// property [FlexSurface] in [FlexColorScheme.light] and
+    /// [FlexColorScheme.dark]. The mode [FlexSurfaceMode.highBackground] uses
+    /// the same design concept as the only style offered by [FlexSurface] in
+    /// [FlexColorScheme.surfaceStyle] before version 4.0.0.
+    ///
+    /// By adjusting the [FlexColorScheme.blendLevel] property and using this
+    /// style, you can find a similar visual effect when using
+    /// [FlexSurfaceMode.highBackground] with the following values when matching
+    /// match most prominent blended [ColorScheme.background] color.
+    ///
+    /// In light theme mode:
+    /// * [FlexSurface.material] 0% : blendLevel = 0
+    /// * [FlexSurface.light]    2% : blendLevel = 2..3
+    /// * [FlexSurface.medium]   4% : blendLevel = 5
+    /// * [FlexSurface.strong]   6% : blendLevel = 7..8
+    /// * [FlexSurface.heavy]    8% : blendLevel = 10
     ///
     /// In dark theme mode:
-    /// * [FlexSurface.material] : [FlexBlendLevel.zero]
-    /// * [FlexSurface.light] : [FlexBlendLevel.three]
-    /// * [FlexSurface.medium] : [FlexBlendLevel.four]
-    /// * [FlexSurface.strong] : [FlexBlendLevel.six]
-    /// * [FlexSurface.heavy] : The exact value is between
-    ///   [FlexBlendLevel.seven] and [FlexBlendLevel.eight] and cannot be
-    ///   represented exactly, recommended to use [FlexBlendLevel.eight].
+    /// * [FlexSurface.material] 0% : blendLevel = 0
+    /// * [FlexSurface.light]    5% : blendLevel = 3
+    /// * [FlexSurface.medium]   8% : blendLevel = 5
+    /// * [FlexSurface.strong]  11% : blendLevel = 7
+    /// * [FlexSurface.heavy]   14% : blendLevel = 8..9
+    ///
+    /// Since there is not an exact 2:1 relationship between background and
+    /// surface, when using the older [FlexSurface] based style, nor is
+    /// scaffoldBackground : surface always a 1 : 4 relationship. The old and
+    /// new designs do never align exactly at any blendLevel, but the above
+    /// values produce visually very close results.
+    ///
+    /// To get elevation overlay color in dark themes on all surfaces used by
+    /// [Material], use one of the modes where background and dialog color
+    /// equals the blend strength on surface color, like [flat], [lowScaffold],
+    /// [highScaffold], [highScaffold]. Other modes will only use elevation
+    /// overlay if their background happens to be equal to resulting
+    /// colorScheme.surface color. For more information
+    /// see issue: https://github.com/flutter/flutter/issues/90353
+    ///
+    /// When using very strong surface branding in dark mode, having an overlay
+    /// elevation color in dark mode is less critical, since the elevation
+    /// becomes partially visible via shadows and the surface may even have
+    /// another color tint if using e.g. [lowScaffoldVariantDialog] or
+    /// [highScaffoldVariantDialog].
     ///
     /// If values for the properties `surface`, `background`,
     /// `dialogBackground` or `scaffoldBackground` are given in the constructor,
