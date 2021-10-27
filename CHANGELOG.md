@@ -20,35 +20,36 @@ All notable changes to the **FlexColorScheme** package are documented here.
  
 * **New:** Added a more flexible and powerful alpha blending feature for 
   surface and background colors. The new properties in the `FlexColorScheme` 
-  factories `light` and `dark` are `surfaceMode` using enum `FlexSurfaceMode`
-  and `blendLevel` `<int>`. Consider using them instead of previous `surfaceStyle`.
-  The surface alpha blend method `surfaceStyle` is still default, and not yet
+  factories `light` and `dark` are `surfaceMode`, of type enum `FlexSurfaceMode`
+  and integer `blendLevel`. Consider using them instead of previous 
+  `surfaceStyle`.
+  The surface color blend style `surfaceStyle` is still default, and not yet
   deprecated, but may be so in later versions. It is not really needed anymore,
   but there was no major reason to break things by removing it either.
 * **New:** Major new feature; simple sub-theming of Flutter SDK UI widgets.  
   * You can opt in on nice looking opinionated widget sub-themes with
   `FlexColorScheme.useSubThemes` by setting it to true.
   * You can also tweak these sub themes with quick and easy parameter 
-  values defined via the `FlexSubThemesData` class, passed in to 
+  values, defined via the `FlexSubThemesData` class, passed in to 
   `FlexColorScheme.subThemesData`.
-  * For example, the `FlexSubThemesData` provide parameters for easy adjustment 
-  of corner radius in Widgets that use `ShapeBorder` or decorations that
-  support changing the Widget's corner radius. With the sub-themes enabled you 
-  can easily create a theme with a consistent corner radius on all built-in 
-  widgets.
+  * For example, `FlexSubThemesData` provides parameters for easy adjustment 
+  of corner radius in Widgets that use `ShapeBorder` or decorations, that
+  support changing the Widget's corner radius. With the sub-themes enabled, you 
+  can easily create a theme with a consistent corner radius on built-in 
+  Flutter SDK UI widgets.
   * The widget sub-themes also harmonize a few other styles, e.g. `ToggleButtons`
   to match the standard buttons regarding size and design as far as possible.
-  * In case you still use the old SDK deprecated buttons, they also get 
+  * In case you still use the old deprecated buttons, they also get 
   `ButtonThemeData` that as far as possible match the same style. 
 * **New:** Added `FlexThemeData` static extension on `ThemeData`. 
-  * Themes can now optionally be created with the convenience syntax
+  * Themes can now also be created with the new syntax
   `FlexThemeData.light` and `FlexThemeData.dark`, instead of with 
   `FlexColorScheme.light().toTheme` and `FlexColorScheme.dark().toTheme`. 
   * The `toTheme` method is still available and works as before. It will not
-    be deprecated. It is needed when doing elaborate custom sub-theming beyond
-    what is offered when using `FlexColorScheme` based sub-themes. 
+    be deprecated. It is needed when making elaborate custom sub-themes beyond
+    what is offered when using `FlexColorScheme` based opt in sub-themes. 
 * **New:** Added `textTheme` and `primaryTextTHeme` properties to 
-  `FlexColorScheme` to enable easier setup of custom `TextThemes` without the
+  `FlexColorScheme` to enable easy setup of custom `TextThemes`, without the
    need to add a custom `TextTheme` via a `copyWith`, plus `merge` with the 
    default text theme.
 * **New:** Added `FlexColorScheme.dialogBackground` as a background surface 
@@ -478,16 +479,16 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 ---
 
-## KNOWN ISSUES
+# Known General Issues
 - The color branding is not applied to Widgets using elevated `Material` of 
   type `canvas` in Flutter when using primary colored surface and backgrounds, 
   and the theme's `applyElevationOverlayColor: true` is true. This is caused 
-  by this Flutter SDK issue and limitation: https://github.com/flutter/flutter/issues/90353.
+  by this Flutter [SDK issue and limitation](https://github.com/flutter/flutter/issues/90353).
   Version 4.0.0 addresses this limitation by introducing more color blend
   modes that keep the colors equal in order to not be affected by this
-  limitation.   If you are using heavy color branding in dark theme mode, the 
-  overlay color is not really necessary. Material 3 (You) is based on some code
-  comments seen on the NavigationBar going this way.
+  limitation. If you are using heavy color branding in dark theme mode, the 
+  overlay color is not really necessary. Material 3 (You) is, based on some code
+  comments seen on the NavigationBar, maybe leaning this way too.
 
 ---
 
@@ -504,44 +505,48 @@ in the repo.
   color is selected as primary color, for its light/dark shade. 
   
 - For color swatch calculations, find and use the color algorithm Google uses on its 
-  Material colors site here
-  https://material.io/design/color/the-color-system.html#tools-for-picking-colors
-  and here
-  https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=582aed&secondary.color=00B0FF  
-  The algorithms for them are actually a bit different. The second link also 
+  Material colors site [here](https://material.io/design/color/the-color-system.html#tools-for-picking-colors) and [here](https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=582aed&secondary.color=00B0FF).
+- The algorithms for them are actually a bit different. The second link also 
   seems to imply that ColorScheme's should have primary and secondary colors, 
   with light and dark variants. Instead of using just one variant color like 
   current `ColorScheme` class in Flutter. Maybe this is a coming change 
   with Material 3 (You) or perhaps an older design? Status currently unknown.
   
-  - Starting points for the Dart Material color swatch algorithm could be ports of these:
-    https://stackoverflow.com/questions/32942503/material-design-color-palette and
-    https://github.com/Hammwerk/material-color-palette
-  - Wait and see if Google might make their Material color swatch algorithm available 
-    in Dart/Flutter with MaterialYou.  
-  - Interesting and simpler Ant design: https://2x.ant.design/docs/spec/colors color swatches.
-  - Color palette tools link: https://onextrapixel.com/best-tools-generate-color-palettes/ as ref info.
+  - Starting points for the Dart Material color swatch algorithm could be ports
+    of [this](https://stackoverflow.com/questions/32942503/material-design-color-palette) 
+    and/or [this](https://github.com/Hammwerk/material-color-palette)
+  - Wait and see if Google might make their Material color swatch algorithm 
+    available in Dart/Flutter with MaterialYou.  
+  - Interesting and simpler [Ant design](https://2x.ant.design/docs/spec/colors) color swatches.
+  - Color palette [tools](https://onextrapixel.com/best-tools-generate-color-palettes/) as info.
 
 ### COMPLETED
 - Version 4.0.0 Docs with quick start example first. 
 - Version 4.0.0 Added a more complex example that also persists theme.
 - Version 4.0.0 Added API offering more flexibility and customization 
   capabilities to the surface color branding.
-- Version 3.0.0 Deprecated `accentColor`. Swap primary and secondary colors feature added. Added 4 new color schemes.
-- Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
+- Version 3.0.0 Deprecated `accentColor`. Swap primary and secondary colors 
+  feature added. Added 4 new color schemes.
+- Version 2.0.0 Release official null-safe version, when nullsafety is
+  available in Flutter stable channel.
 - Version 2.0.0-nullsafety.2: Minor new APIs and features added. Example 5 updated.
-- Since [#71184](https://github.com/flutter/flutter/pull/71184) landed in Flutter 2.0.0. The past custom "white" 
-  AppBarTheme implementation was as planned changed to the new one that is supported by the SDK.  
+- Since [#71184](https://github.com/flutter/flutter/pull/71184) landed in 
+  Flutter 2.0.0. The past custom "white" 
+  AppBarTheme implementation was as planned changed to the new one that is 
+  supported by the SDK.  
 - Version 2.0.0-nullsafety.1 released
 - Version 1.4.1 Added automated build and publish pipes for the Web examples!
 - Version 1.4.1 More tests, tests are now considered sufficient for current features. 
-- Version 1.4.0: Increased unit and widget test to 689 tests. All color definitions are now also tested to ensure
-  they will not be changed by any accidental edit. Test coverage is higher than 95%, certainly sufficient for this
-  type of package, but there are still some areas that could and will be improved.
+- Version 1.4.0: Increased unit and widget test to 689 tests. All color 
+  definitions are now also tested to ensure they will not be changed by 
+  any accidental edit. Test coverage is higher than 95%, certainly sufficient
+  for this type of package, but there are still some areas that could and 
+  will be improved.
 - Version 1.3.0: Added 195 unit and widgets tests, mostly unit tests.
 - API to assist with themed annotated region for system navigation bar theming.
 - API to opt-out from one-toned AppBar and return it to Android's default two-toned.
-- Add API that allows us to use an additional extra color definition for ThemeData.accentColor to easily make themes
+- Add API that allows us to use an additional extra color definition for
+  ThemeData.accentColor to easily make themes
   with custom input border color in dark-mode.
 - Add API the can create the dark scheme based on a light scheme's colors.
 - Release version 1.0.0 on pub.dev.
@@ -553,7 +558,7 @@ in the repo.
 
 ### MAYBE
 
-All TODOs and features that were on my original maybe list have been completed.
+All TODOs and features that were on my original "maybe" list have been completed.
 
 
 ### OUT OF SCOPE
@@ -578,8 +583,9 @@ and then use those values to restore your `FlexColorScheme` configuration and
 theme. This way, your implementation also remain in control of what it needs 
 to store and restore. 
   
-From version 4.0.0 a simple approach using Hive and Riverpod to store and 
-persist FlexColorScheme is demonstrated. This is just one example, other 
-implementation with Riverpod or using Provider, Flutter Bloc, GetX etc., and
-completely different local persistence like Shared Preferences and similar, 
-are just as valid.
+From version 4.0.0 a simple approach using the architecture introduced via the
+Flutter "skeleton" template in Flutter version 2.5 was used together with 
+Shared Preferences and Hive, to persist and load FlexColorScheme on start.
+This is just one example, other implementations together with Riverpod, Provider, 
+Flutter Bloc, GetX etc., and completely different local persistence packages 
+work well too. 
