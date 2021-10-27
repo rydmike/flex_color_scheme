@@ -66,21 +66,38 @@ class FlexSubThemesData with Diagnosticable {
   /// The standard colors on hover, focus, highlight and splash effects use
   /// greys, white or black with different opacity levels.
   ///
-  /// To get a color themed effect, set [themedEffects] to true and to false
-  /// for SDK default values.
+  /// To get a color themed effect, set [themedEffects] to true, and to false
+  /// for the SDK default values.
   ///
-  /// These effects apply to all Widgets that get them from [ThemeData]. The
-  /// newer buttons [ElevatedButton], [OutlinedButton] and [TextButton] define
-  /// theme style by default that use their own theme material state effects.
+  /// These effects apply to all Widgets that get them from [ThemeData].
   ///
-  /// The opt-in on [themedEffects] makes the overall theme consistent with this
-  /// style. It is not an exact match with the [ButtonStyleButton] buttons
+  /// The buttons [ElevatedButton], [OutlinedButton] and [TextButton] define
+  /// theme styles that by default use their own themed Material state
+  /// effects for hover, focus, highlight and splash. These already include
+  /// primary color blends and own different opacity values by default.
+  /// The defaults on SDK overall [ThemeData] hover, focus, highlight and
+  /// splash do not match this newer design, and they look out of place,
+  /// especially in an otherwise primary color, alpha blended surface theme.
   ///
-  /// In order for [ToggleButtons] and legacy buttons `RaisedButton`,
-  /// `OutlineButton` and `FlatButton` match this style, they always use the
-  /// same effect as [themedEffects] provides on overall theme.
+  /// When you opt in on [themedEffects] it makes the overall hover, focus,
+  /// highlight and splash effects in [ThemeData] visually consistent with the
+  /// style the buttons [ElevatedButton], [OutlinedButton] and [TextButton]
+  /// with their own state effects use by default. It is not an exact
+  /// match with the [ButtonStyleButton] buttons, the common class for the newer
+  /// buttons, but very close. Because of for example the white opacity
+  /// overlay used on primary colored button [ElevatedButton], it cannot be
+  /// matched exactly in all situations. It is still visually very similar on
+  /// most widgets, and does not stick out like the grey splashes do otherwise
+  /// when using primary color blended themes.
   ///
+  /// So that [ToggleButtons] and legacy buttons `RaisedButton`, `OutlineButton`
+  /// and `FlatButton` always match the style the new buttons use,
+  /// even when [themedEffects] style is disabled, they also always use the same
+  /// effect as [themedEffects] provides on overall theme, so that they always
+  /// match the [ButtonStyleButton] buttons.
   ///
+  /// The effects provided by [themedEffects] are most clearly visible on large
+  /// surface ink effects, like e.g. on ListTile and SwitchListTile.
   ///
   /// Defaults to true.
   final bool themedEffects;

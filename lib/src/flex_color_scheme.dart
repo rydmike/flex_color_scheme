@@ -1176,6 +1176,14 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? secondaryVariant,
 
+    /// The color to use for input validation errors, e.g. for
+    /// [InputDecoration.errorText].
+    ///
+    /// If no value is given defaults to [FlexColor.materialLightError] if
+    /// brightness is light and to [FlexColor.materialDarkError] if brightness
+    /// is dark.
+    final Color? error,
+
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
     ///
@@ -1579,6 +1587,7 @@ class FlexColorScheme with Diagnosticable {
       primaryVariant: primaryVariant,
       secondary: secondary,
       secondaryVariant: secondaryVariant,
+      error: error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
     final FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
@@ -1961,6 +1970,14 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to null.
     final Color? secondaryVariant,
+
+    /// The color to use for input validation errors, e.g. for
+    /// [InputDecoration.errorText].
+    ///
+    /// If no value is given defaults to [FlexColor.materialLightError] if
+    /// brightness is light and to [FlexColor.materialDarkError] if brightness
+    /// is dark.
+    final Color? error,
 
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
@@ -2377,6 +2394,7 @@ class FlexColorScheme with Diagnosticable {
       primaryVariant: primaryVariant,
       secondary: secondary,
       secondaryVariant: secondaryVariant,
+      error: error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
     final FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
@@ -3599,6 +3617,7 @@ class FlexColorScheme with Diagnosticable {
               padding: const EdgeInsets.symmetric(horizontal: 16),
             ),
 
+      // TODO(Rydmike): Consider sub-theme for ChipThemeData!
       // The default chip theme in Flutter does not work correctly with dark
       // themes. See issue: https://github.com/flutter/flutter/issues/65663
       // The chip theme below fixes it by using the colorScheme.primary color.
@@ -3608,7 +3627,7 @@ class FlexColorScheme with Diagnosticable {
         labelStyle: effectiveTextTheme.bodyText1!,
       ),
 
-      // TODO(Rydmike): Broke past tab bar text style, revert and use as before!
+      // TODO(Rydmike): Consider sub-theme for TabBar!
       // Define the TabBar theme that will fit nicely in an AppBar
       // (default) or on background color for use eg in a Scaffold, the choice
       // depends on tabBarStyle `FlexTabBarStyle`, that defaults to

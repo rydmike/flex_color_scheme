@@ -1881,7 +1881,7 @@ void main() {
           ftdLight.toString(),
         ),
       );
-      // TODO(rydmike): Check this again when this issue lands in stable.
+      // TODO(rydmike): SDK ThemeData operator issue, fix in master!
       // https://github.com/flutter/flutter/issues/91587
       // Check object equality
       // expect(
@@ -2044,7 +2044,7 @@ void main() {
           fcsDarkTd.toString(),
         ),
       );
-      // TODO(rydmike): Check this again when this issue lands in stable.
+      // TODO(rydmike): SDK ThemeData operator issue, fix in master!
       // https://github.com/flutter/flutter/issues/91587
       // Check object equality
       // expect(

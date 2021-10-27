@@ -58,7 +58,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   style.
 * **New:** On the `FlexColorScheme` factories `light` and `dark`, exposed 
   the `Color` properties `primary`, `primaryVariant`, `secondary`, 
-  `sedondaryVariant`, `appBarBackground` and `dialogBackground`.
+  `sedondaryVariant`, `appBarBackground`, `dialogBackground` and `error`.
   They all default to null, but if provided they can be used as override values
   to factory behaviors defined by `scheme`, `colors`, `appBarStyle`,
   `surfaceMode` and `surfaceStyle` that

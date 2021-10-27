@@ -436,15 +436,15 @@ class _TabRowForAppBar extends StatelessWidget {
               child: TabBar(
                 tabs: <Widget>[
                   Tab(
-                    text: 'Tab 1',
+                    text: 'CHAT',
                     icon: Icon(Icons.chat_bubble),
                   ),
                   Tab(
-                    text: 'Tab 2',
+                    text: 'TASKS',
                     icon: Icon(Icons.beenhere),
                   ),
                   Tab(
-                    text: 'Tab 3',
+                    text: 'FOLDER',
                     icon: Icon(Icons.create_new_folder),
                   ),
                 ],
@@ -478,15 +478,15 @@ class _TabRowForBackground extends StatelessWidget {
           const TabBar(
             tabs: <Widget>[
               Tab(
-                text: 'Tab 1',
+                text: 'CHAT',
                 icon: Icon(Icons.chat_bubble),
               ),
               Tab(
-                text: 'Tab 2',
+                text: 'TASKS',
                 icon: Icon(Icons.beenhere),
               ),
               Tab(
-                text: 'Tab 3',
+                text: 'FOLDER',
                 icon: Icon(Icons.create_new_folder),
               ),
             ],
@@ -524,17 +524,17 @@ class _BottomNavigation extends StatelessWidget {
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(Icons.chat_bubble),
-                  label: 'Item 1',
+                  label: 'Chat',
                   // title: Text('Item 1'),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.beenhere),
-                  label: 'Item 2',
+                  label: 'Tasks',
                   // title: Text('Item 2'),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.create_new_folder),
-                  label: 'Item 3',
+                  label: 'Folder',
                   // title: Text('Item 3'),
                 ),
               ],

@@ -961,37 +961,125 @@ void main() {
     // FlexColorScheme.light & dark factory tests. With HEAVY surface branding.
     //
     // Test result with 2...3 colors and true black.
-    // Just verify not failing (coverage), should check result as well later.
-    // TODO(rydmike): Improve these tests so they verify the results too.
     //**************************************************************************
 
-    final ThemeData tLightH2 = FlexColorScheme.light(
+    final FlexColorScheme sLightH2 = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       usedColors: 2,
-    ).toTheme;
+    );
+    final ThemeData tLightH2 = sLightH2.toTheme;
 
-    final ThemeData tDarkH2 = FlexColorScheme.dark(
+    final FlexColorScheme sLightH2Raw = FlexColorScheme.light(
+        primary: const Color(0xffcd5758),
+        primaryVariant: const Color(0xffba3738),
+        secondary: const Color(0xff57c8d3),
+        secondaryVariant: const Color(0xff33b7c4),
+        surface: const Color(0xfffdfafa),
+        background: const Color(0xfff9eff0),
+        error: const Color(0xff790000),
+        scaffoldBackground: const Color(0xfffefdfd),
+        appBarBackground: const Color(0xfff9eff0),
+        dialogBackground: const Color(0xfffdfafa),
+        onPrimary: const Color(0xffffffff),
+        onSecondary: const Color(0xff000000),
+        onSurface: const Color(0xff000000),
+        onBackground: const Color(0xff000000),
+        onError: const Color(0xffffffff),
+        tabBarStyle: FlexTabBarStyle.forBackground,
+        appBarElevation: 0,
+        bottomAppBarElevation: 0,
+        tooltipsMatchBackground: false,
+        transparentStatusBar: true,
+        visualDensity: null,
+        textTheme: null,
+        primaryTextTheme: null,
+        fontFamily: null,
+        platform: null,
+        typography: null,
+        applyElevationOverlayColor: true,
+        useSubThemes: false,
+        subThemesData: null);
+    final ThemeData tLightH2Raw = sLightH2Raw.toTheme;
+
+    test(
+        'FCS7.79raw: GIVEN a Equal Raw and FlexColorScheme.light with '
+        'heavy branding and 2 colors EXPECT equal schemes.', () {
+      expect(sLightH2Raw, equals(sLightH2));
+    });
+    test(
+        'FCS7.79a: GIVEN a Equal Raw and FlexColorScheme.light with heavy '
+        'branding and 2 colors EXPECT equal strings.', () {
+      expect(sLightH2.toString(), equalsIgnoringHashCodes(sLightH2.toString()));
+    });
+    test(
+        'FCS7.79b: GIVEN a Equal Raw and FlexColorScheme.light with heavy '
+        'branding and 2 colors EXPECT toTheme equals.', () {
+      expect(tLightH2, equals(tLightH2Raw));
+    });
+
+    final FlexColorScheme sDarkH2 = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       darkIsTrueBlack: true,
       usedColors: 2,
-    ).toTheme;
+    );
+    final ThemeData tDarkH2 = sDarkH2.toTheme;
+
+    final FlexColorScheme sDarkH2Raw = FlexColorScheme.dark(
+        primary: const Color(0xffda8585),
+        primaryVariant: const Color(0xffce5e5e),
+        secondary: const Color(0xff68cdd7),
+        secondaryVariant: const Color(0xff40c0cc),
+        surface: const Color(0xff090808),
+        background: const Color(0xff140f0f),
+        error: const Color(0xffcf6679),
+        scaffoldBackground: const Color(0xff000000),
+        appBarBackground: const Color(0xff140f0f),
+        dialogBackground: const Color(0xff090808),
+        onPrimary: const Color(0xffffffff),
+        onSecondary: const Color(0xff000000),
+        onSurface: const Color(0xffffffff),
+        onBackground: const Color(0xffffffff),
+        onError: const Color(0xffffffff),
+        tabBarStyle: FlexTabBarStyle.forBackground,
+        appBarElevation: 0,
+        bottomAppBarElevation: 00,
+        tooltipsMatchBackground: false,
+        transparentStatusBar: true,
+        visualDensity: null,
+        textTheme: null,
+        primaryTextTheme: null,
+        fontFamily: null,
+        platform: null,
+        typography: null,
+        applyElevationOverlayColor: true,
+        useSubThemes: false,
+        subThemesData: null);
+    final ThemeData tDarkH2Raw = sDarkH2Raw.toTheme;
 
     test(
-        'FCS7.79: GIVEN a FlexColorScheme.light with heavy branding and 2 '
-        'colors EXPECT none null result.', () {
-      expect(tLightH2, isNotNull);
+        'FCS7.80raw: GIVEN a Equal Raw and FlexColorScheme.dark with heavy '
+        'branding and 2 colors and true black EXPECT equals schemes.', () {
+      expect(sDarkH2, equals(sDarkH2Raw));
     });
     test(
-        'FCS7.80: GIVEN a FlexColorScheme.dark with heavy branding and '
-        '2 colors and true black EXPECT none null result.', () {
-      expect(tDarkH2, isNotNull);
+        'FCS7.80a: GIVEN a Equal Raw and FlexColorScheme.dark with heavy '
+        'branding and 2 colors and true black EXPECT equals strings.', () {
+      expect(
+          sDarkH2.toString(), equalsIgnoringHashCodes(sDarkH2Raw.toString()));
     });
+    test(
+        'FCS7.80b: GIVEN a Equal Raw and FlexColorScheme.dark with heavy '
+        'branding and 2 colors and true black EXPECT equals toTheme.', () {
+      expect(tDarkH2, equals(tDarkH2Raw));
+    });
+
+    // TODO(rydmike): Set the tests below up as the ones above!
 
     final ThemeData tLightH3 = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
@@ -1026,7 +1114,7 @@ void main() {
     //
     // Test result with custom features like surface, appbar, tab bar options.
     // Just verify not failing (coverage), should check result as well later.
-    // TODO(rydmike): Improve these tests so they verify the results too.
+    // TODO(rydmike): Improve these tests to verify the results too.
     //**************************************************************************
 
     final ThemeData tLightC = FlexColorScheme.light(

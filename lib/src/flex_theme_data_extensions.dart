@@ -280,6 +280,14 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? secondaryVariant,
 
+    /// The color to use for input validation errors, e.g. for
+    /// [InputDecoration.errorText].
+    ///
+    /// If no value is given defaults to [FlexColor.materialLightError] if
+    /// brightness is light and to [FlexColor.materialDarkError] if brightness
+    /// is dark.
+    final Color? error,
+
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
     ///
@@ -675,6 +683,7 @@ extension FlexThemeData on ThemeData {
       primaryVariant: primaryVariant,
       secondary: secondary,
       secondaryVariant: secondaryVariant,
+      error: error,
       surface: surface,
       background: background,
       scaffoldBackground: scaffoldBackground,
@@ -940,6 +949,14 @@ extension FlexThemeData on ThemeData {
     ///
     /// Defaults to null.
     final Color? secondaryVariant,
+
+    /// The color to use for input validation errors, e.g. for
+    /// [InputDecoration.errorText].
+    ///
+    /// If no value is given defaults to [FlexColor.materialLightError] if
+    /// brightness is light and to [FlexColor.materialDarkError] if brightness
+    /// is dark.
+    final Color? error,
 
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
@@ -1322,6 +1339,7 @@ extension FlexThemeData on ThemeData {
       primaryVariant: primaryVariant,
       secondary: secondary,
       secondaryVariant: secondaryVariant,
+      error: error,
       surface: surface,
       background: background,
       scaffoldBackground: scaffoldBackground,
