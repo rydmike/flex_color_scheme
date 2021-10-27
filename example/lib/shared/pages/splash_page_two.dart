@@ -35,9 +35,10 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     //
     // For some reason on some newer Android versions, it does not work
     // correctly and leaves a black ugly bar on top. Happens eg on Pixel 4XL
-    // (emulator with Android 11), OnePlus 7T (device with Android 10), but not
-    // on some Android Tablets Samsung Galaxy Tab A (device with Android 10),
-    // Nexus 7 (device with Android 6) nor Pixel C (emulator with Android 11).
+    // (emulator with Android 11), OnePlus 7T (device with Android 10 & 111),
+    // but not on some Android Tablets Samsung Galaxy Tab A
+    // (device with Android 10), Nexus 7 (device with Android 6) nor
+    // Pixel C (emulator with Android 11).
     //
     // Because of this issue with this method, you may want to use the method
     // presented a demo 1b instead. If you see this issue with this method
@@ -47,7 +48,8 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     // white/black backgrounds as well.
     //
     // Another thing to be aware of with this method is that eg bringing up
-    // the keyboard will bring the navigation bar back.
+    // the keyboard will bring the navigation bar back, so that is not so nice
+    // with it either.
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.edgeToEdge,
       overlays: <SystemUiOverlay>[],

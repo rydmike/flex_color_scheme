@@ -50,7 +50,6 @@ class PageBody extends StatelessWidget {
     // the screen where it belongs.
     return Scrollbar(
       controller: controller,
-      // TODO(rydmike): Put back un-focus, need on device!
       child: GestureDetector(
         // This allows us to un-focus a widget, typically a TextField with focus
         // by tapping somewhere outside it. It is no longer needed on desktop

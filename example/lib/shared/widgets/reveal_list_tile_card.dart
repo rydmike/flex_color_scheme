@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 
-/// A list tile that can be toggled via trailing widget to open and reveal
-/// more content in a child Widget.
+/// A list tile in a [Card] that can be toggled via its trailing widget to
+/// open and reveal more content provided via [child].
 ///
-//  The open reveal is animated.
-/// The ListTile and its revealed child are wrapped in a Card widget, it
-/// is designed to placed on color of scaffold background color.
+///  The open reveal is animated.
 ///
-/// The widget is kept alive with AutomaticKeepAliveClientMixin so it does
-/// not get dismissed and closed in scroll views.
+/// The ListTile and its revealed child are wrapped in a Card widget. The
+/// [RevealListTileCard] is primarily designed to be placed on scaffold using
+/// its themed background color.
+///
+/// The header and background color of the Card get a slight primary color
+/// blend, a notch above whatever the scaffold background might be using.
+/// It always avoids the same color as the scaffold background, for both the
+/// list tile heading and the card itself.
+///
+/// The widget is kept alive with [AutomaticKeepAliveClientMixin] so it does
+/// not get dismissed and closed in scroll views. This "may" be a bit expensive
+/// memory usage wise if this widget is used a lot in large lists. This widget
+/// is intended for a limited amount of containers enabling showing and hiding
+/// their content and keeping their opn/close state alive. If you need one that
+/// is more memory efficient, consider removing the
+/// AutomaticKeepAliveClientMixin.
 class RevealListTileCard extends StatefulWidget {
   const RevealListTileCard({
     Key? key,
@@ -73,6 +85,7 @@ class _RevealListTileCardState extends State<RevealListTileCard>
     with AutomaticKeepAliveClientMixin {
   bool _closed = true;
 
+  // Must override wantKeepAlive, when using AutomaticKeepAliveClientMixin.
   @override
   bool get wantKeepAlive => true;
 
@@ -92,22 +105,24 @@ class _RevealListTileCardState extends State<RevealListTileCard>
 
   @override
   Widget build(BuildContext context) {
-    // Must call super.
+    // Must call super when using AutomaticKeepAliveClientMixin.
     super.build(context);
 
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
     final bool isDark = theme.brightness == Brightness.dark;
+
+    // Dark mode needs stronger blends to be visible.
     final int blendFactor = isDark ? 3 : 2;
 
     // Get default card background color.
     Color cardColor = theme.cardColor;
-    // Compute a header with fixed primary blend, to give it a different tint.
+    // Compute a header color with fixed primary blend, make it a stronger tint.
     Color headerColor =
         Color.alphaBlend(scheme.primary.withAlpha(6 * blendFactor), cardColor);
 
     // If card or its header color, is equal to scaffold background, we will
-    // adjust it.
+    // adjust both and make them more primary tinted.
     if (cardColor == theme.scaffoldBackgroundColor ||
         headerColor == theme.scaffoldBackgroundColor) {
       cardColor = Color.alphaBlend(
@@ -115,14 +130,14 @@ class _RevealListTileCardState extends State<RevealListTileCard>
       headerColor = Color.alphaBlend(
           scheme.primary.withAlpha(4 * blendFactor), headerColor);
     }
-    // If it was header color that was equal, same adjustment on card, may have
-    // caused card to become equal to background, let's check and adjust it
-    // once again, very unlikely that this would happen but possible
+    // If it was header color that was equal, the same adjustment on card, may
+    // have caused card body to become equal to scaffold background, let's
+    // check for it and adjust only it once again if it happened. Very unlikely
+    // that this happens, but it is possible.
     if (cardColor == theme.scaffoldBackgroundColor) {
       cardColor = Color.alphaBlend(
           scheme.primary.withAlpha(2 * blendFactor), cardColor);
     }
-
     return Card(
       color: cardColor,
       child: Column(

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'flex_color.dart';
 
-// TODO(rydmike): Add enum with order selection of theme mode buttons
-// Something like this, plus implementation.
-// enum FlexThemeModeButtonOrder {
-//   lightDarkSystem,
-//   lightSystemDark,
-//   darkSystemLight,
-//   darkLightSystem,
-// }
+/// Enum used to define the order, from left to right, of the theme mode
+/// selection buttons on the [FlexThemeModeSwitch].
+enum FlexThemeModeButtonOrder {
+  lightDarkSystem,
+  lightSystemDark,
+  darkSystemLight,
+  darkLightSystem,
+}
 
 /// A 3-way Light, Dark and System theme-mode switch widget.
 ///
@@ -47,6 +47,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
     final this.labelDark = 'DARK',
     final this.labelSystem = 'SYSTEM',
     final this.showSystemMode = true,
+    final this.buttonOrder = FlexThemeModeButtonOrder.lightDarkSystem,
     final this.selectedLabelStyle,
     final this.unselectedLabelStyle,
     final this.labelAbove = true,
@@ -106,6 +107,14 @@ class FlexThemeModeSwitch extends StatelessWidget {
   /// Defaults to true.
   /// If set to false, only a light and dark-mode options are available.
   final bool showSystemMode;
+
+  /// Set the order of the system mode selection buttons.
+  ///
+  /// Order follows the enum label from left to right. If [showSystemMode] is
+  /// false, the system button is left out in the resulting order.
+  ///
+  /// Defaults to [FlexThemeModeButtonOrder.lightDarkSystem].
+  final FlexThemeModeButtonOrder buttonOrder;
 
   /// Optional text style for the theme mode selected label.
   /// If null, default to Theme.of(context).textTheme.caption).
@@ -182,104 +191,130 @@ class FlexThemeModeSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FlexThemeModeOptionButton lightButton = FlexThemeModeOptionButton(
+      flexSchemeColor: flexSchemeData.light,
+      backgroundColor: backgroundLight ?? Colors.white,
+      label: labelLight,
+      labelStyle: themeMode == ThemeMode.light
+          ? selectedLabelStyle
+          : unselectedLabelStyle,
+      labelAbove: labelAbove,
+      selected: themeMode == ThemeMode.light,
+      onSelect: () {
+        onThemeModeChanged(ThemeMode.light);
+      },
+      selectedBorder: selectedBorder,
+      unselectedBorder: unselectedBorder,
+      elevation: themeMode == ThemeMode.light
+          ? selectedElevation
+          : unselectedElevation,
+      optionButtonPadding: optionButtonPadding,
+      optionButtonMargin: optionButtonMargin,
+      optionButtonBorderRadius: optionButtonBorderRadius,
+      height: height,
+      width: width,
+      borderRadius: borderRadius,
+      padding: padding,
+      hoverColor: hoverColor,
+    );
+
+    final FlexThemeModeOptionButton darkButton = FlexThemeModeOptionButton(
+      flexSchemeColor: flexSchemeData.dark,
+      backgroundColor: backgroundDark ?? Colors.grey[850]!,
+      label: labelDark,
+      labelStyle: themeMode == ThemeMode.dark
+          ? selectedLabelStyle
+          : unselectedLabelStyle,
+      labelAbove: labelAbove,
+      selected: themeMode == ThemeMode.dark,
+      onSelect: () {
+        onThemeModeChanged(ThemeMode.dark);
+      },
+      selectedBorder: selectedBorder,
+      unselectedBorder: unselectedBorder,
+      elevation:
+          themeMode == ThemeMode.dark ? selectedElevation : unselectedElevation,
+      optionButtonPadding: optionButtonPadding,
+      optionButtonMargin: optionButtonMargin,
+      optionButtonBorderRadius: optionButtonBorderRadius,
+      height: height,
+      width: width,
+      borderRadius: borderRadius,
+      padding: padding,
+      hoverColor: hoverColor,
+    );
+
+    // Option button for system theme mode. For this case we show
+    // the primary and variant color of light and dark theme, ie not all
+    // four colors of either mode and we place them on a different
+    // background to indicate that we do not actually know if it will
+    // be light or dark, as that is controlled by the host system.
+    final FlexThemeModeOptionButton systemButton = FlexThemeModeOptionButton(
+      flexSchemeColor: FlexSchemeColor(
+        primary: flexSchemeData.light.primary,
+        primaryVariant: flexSchemeData.dark.primary,
+        secondary: flexSchemeData.light.secondary,
+        secondaryVariant: flexSchemeData.dark.secondary,
+      ),
+      backgroundColor: backgroundSystem ?? Colors.grey[500]!,
+      label: labelSystem,
+      labelStyle: themeMode == ThemeMode.system
+          ? selectedLabelStyle
+          : unselectedLabelStyle,
+      labelAbove: labelAbove,
+      selected: themeMode == ThemeMode.system,
+      onSelect: () {
+        onThemeModeChanged(ThemeMode.system);
+      },
+      selectedBorder: selectedBorder,
+      unselectedBorder: unselectedBorder,
+      elevation: themeMode == ThemeMode.system
+          ? selectedElevation
+          : unselectedElevation,
+      optionButtonPadding: optionButtonPadding,
+      optionButtonMargin: optionButtonMargin,
+      optionButtonBorderRadius: optionButtonBorderRadius,
+      height: height,
+      width: width,
+      borderRadius: borderRadius,
+      padding: padding,
+      hoverColor: hoverColor,
+    );
+
     return Row(
       children: <Widget>[
         if (hasTitle)
           Expanded(
-              child: title ??
-                  Text('Theme mode',
-                      style: Theme.of(context).textTheme.subtitle1)),
-        // Option button for light theme mode.
-        FlexThemeModeOptionButton(
-          flexSchemeColor: flexSchemeData.light,
-          backgroundColor: backgroundLight ?? Colors.white,
-          label: labelLight,
-          labelStyle: themeMode == ThemeMode.light
-              ? selectedLabelStyle
-              : unselectedLabelStyle,
-          labelAbove: labelAbove,
-          selected: themeMode == ThemeMode.light,
-          onSelect: () {
-            onThemeModeChanged(ThemeMode.light);
-          },
-          selectedBorder: selectedBorder,
-          unselectedBorder: unselectedBorder,
-          elevation: themeMode == ThemeMode.light
-              ? selectedElevation
-              : unselectedElevation,
-          optionButtonPadding: optionButtonPadding,
-          optionButtonMargin: optionButtonMargin,
-          optionButtonBorderRadius: optionButtonBorderRadius,
-          height: height,
-          width: width,
-          borderRadius: borderRadius,
-          padding: padding,
-          hoverColor: hoverColor,
-        ),
-        // Option button for dark theme mode.
-        FlexThemeModeOptionButton(
-          flexSchemeColor: flexSchemeData.dark,
-          backgroundColor: backgroundDark ?? Colors.grey[850]!,
-          label: labelDark,
-          labelStyle: themeMode == ThemeMode.dark
-              ? selectedLabelStyle
-              : unselectedLabelStyle,
-          labelAbove: labelAbove,
-          selected: themeMode == ThemeMode.dark,
-          onSelect: () {
-            onThemeModeChanged(ThemeMode.dark);
-          },
-          selectedBorder: selectedBorder,
-          unselectedBorder: unselectedBorder,
-          elevation: themeMode == ThemeMode.dark
-              ? selectedElevation
-              : unselectedElevation,
-          optionButtonPadding: optionButtonPadding,
-          optionButtonMargin: optionButtonMargin,
-          optionButtonBorderRadius: optionButtonBorderRadius,
-          height: height,
-          width: width,
-          borderRadius: borderRadius,
-          padding: padding,
-          hoverColor: hoverColor,
-        ),
-        // Option button for system theme mode. For this case we show
-        // the primary and variant color of light and dark theme, ie not all
-        // four colors of either mode and we place them on a different
-        // background to indicate that we do not actually know if it will
-        // be light or dark, as that is controlled by the host system.
-        if (showSystemMode)
-          FlexThemeModeOptionButton(
-            flexSchemeColor: FlexSchemeColor(
-              primary: flexSchemeData.light.primary,
-              primaryVariant: flexSchemeData.dark.primary,
-              secondary: flexSchemeData.light.secondary,
-              secondaryVariant: flexSchemeData.dark.secondary,
-            ),
-            backgroundColor: backgroundSystem ?? Colors.grey[500]!,
-            label: labelSystem,
-            labelStyle: themeMode == ThemeMode.system
-                ? selectedLabelStyle
-                : unselectedLabelStyle,
-            labelAbove: labelAbove,
-            selected: themeMode == ThemeMode.system,
-            onSelect: () {
-              onThemeModeChanged(ThemeMode.system);
-            },
-            selectedBorder: selectedBorder,
-            unselectedBorder: unselectedBorder,
-            elevation: themeMode == ThemeMode.system
-                ? selectedElevation
-                : unselectedElevation,
-            optionButtonPadding: optionButtonPadding,
-            optionButtonMargin: optionButtonMargin,
-            optionButtonBorderRadius: optionButtonBorderRadius,
-            height: height,
-            width: width,
-            borderRadius: borderRadius,
-            padding: padding,
-            hoverColor: hoverColor,
+            child: title ??
+                Text(
+                  'Theme mode',
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
           ),
+        if (buttonOrder ==
+            FlexThemeModeButtonOrder.lightDarkSystem) ...<Widget>[
+          lightButton,
+          darkButton,
+          if (showSystemMode) systemButton,
+        ],
+        if (buttonOrder ==
+            FlexThemeModeButtonOrder.darkLightSystem) ...<Widget>[
+          darkButton,
+          lightButton,
+          if (showSystemMode) systemButton,
+        ],
+        if (buttonOrder ==
+            FlexThemeModeButtonOrder.lightSystemDark) ...<Widget>[
+          lightButton,
+          if (showSystemMode) systemButton,
+          darkButton,
+        ],
+        if (buttonOrder ==
+            FlexThemeModeButtonOrder.darkSystemLight) ...<Widget>[
+          darkButton,
+          if (showSystemMode) systemButton,
+          lightButton,
+        ],
       ],
     );
   }

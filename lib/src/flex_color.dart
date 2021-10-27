@@ -2185,33 +2185,35 @@ class FlexSchemeData with Diagnosticable {
   }
 }
 
-/// Immutable data class for the main scheme colors used in a FlexColorScheme
-/// based color scheme.
+/// Immutable color data class for the main scheme colors used in a
+///  FlexColorScheme based color scheme and theming engine.
 ///
 /// The default constructor requires the main color properties. To make a
 /// [FlexSchemeColor] from a minimum of just the primary color, use the factory
 /// [FlexSchemeColor.from] which only requires the primary color to make
 /// a complete color set, but can use the other colors as optional values.
 ///
-/// The [FlexSchemeColor] is just a set of main colors, a palette used to define
+/// The [FlexSchemeColor] is a set of main colors, or a palette used to define
 /// a color scheme for a theme. See also [FlexSchemeData] that defines
 /// a name and description for a pair of matched light and dark
 /// [FlexSchemeColor] classes, used to make a color scheme pair, that is
-/// eventually used to make light and dark [ThemeData], typically toggled
-/// with [ThemeMode].
+/// then used to make light and dark [ThemeData], typically toggled
+/// by [ThemeMode].
 @immutable
 class FlexSchemeColor with Diagnosticable {
-  /// Default constructor.
+  /// Default constructor, that requires the main four colors.
   ///
   /// Consider using the [FlexSchemeColor.from] factory
   /// constructor for more flexibility and less required values based on
-  /// using computed defaults for missing, but required values.
+  /// using computed defaults for missing, but required values in a complete
+  /// [FlexSchemeColor].
   ///
   /// If you are defining all four required color values, then prefer using this
-  /// constructor as it can be const.
+  /// default constructor as it can be const.
+  ///
+  /// The appBarColor and error colors are not required, if they
+  /// are null, they will be provided by defaults in theme creation later.
   const FlexSchemeColor({
-    // The appBarColor and error colors are not required, if they
-    // are null they will be provided by theme defaults later.
     required final this.primary,
     required final this.primaryVariant,
     required final this.secondary,
@@ -2278,7 +2280,6 @@ class FlexSchemeColor with Diagnosticable {
       secondaryVariant: secondaryVariant ??
           secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
           primary.darken(kDarkenSecondaryVariant),
-      // TODO(rydmike): Investigate, should this not only pass appBarColor?
       appBarColor: appBarColor ??
           secondary?.darken(kDarkenSecondaryVariantFromSecondary) ??
           primary.darken(kDarkenSecondaryVariant),
@@ -2286,7 +2287,7 @@ class FlexSchemeColor with Diagnosticable {
     );
   }
 
-  /// Make effective [FlexSchemeColor] colors using 1...4 of the passed in
+  /// Make effective [FlexSchemeColor] colors using 1 to 4 of the passed in
   /// [colors] based on the [usedColors] property.
   ///
   /// The [usedColors] value corresponds to:
@@ -2299,7 +2300,7 @@ class FlexSchemeColor with Diagnosticable {
   ///   compute and [secondaryVariant] for returned [FlexSchemeColor].
   /// * 4: Use all 4 [colors] in passed in FlexColorsScheme as they are.
   ///
-  /// If [swapColors] is **true**, [primary] and [secondary], as well as
+  /// If [swapColors] is true, [primary] and [secondary], as well as
   /// [primaryVariant] and [secondaryVariant] are swapped, before being
   /// usage limited by [usedColors].
   static FlexSchemeColor effective(

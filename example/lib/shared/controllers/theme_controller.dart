@@ -120,9 +120,9 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveSurfaceMode(value);
   }
 
-  late FlexBlendLevel _blendLevel;
-  FlexBlendLevel get blendLevel => _blendLevel;
-  Future<void> setBlendLevel(FlexBlendLevel? value) async {
+  late int _blendLevel;
+  int get blendLevel => _blendLevel;
+  Future<void> setBlendLevel(int? value) async {
     if (value == null) return;
     if (value == _blendLevel) return;
     _blendLevel = value;

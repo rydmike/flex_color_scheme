@@ -18,6 +18,7 @@ class SurfaceModeButtons extends StatelessWidget {
       mode == FlexSurfaceMode.flat,
       mode == FlexSurfaceMode.highBackground,
       mode == FlexSurfaceMode.highSurface,
+      mode == FlexSurfaceMode.lowSurfaceHighScaffold,
       mode == FlexSurfaceMode.lowScaffold,
       mode == FlexSurfaceMode.highScaffold,
       mode == FlexSurfaceMode.lowScaffoldVariantDialog,
@@ -42,6 +43,10 @@ class SurfaceModeButtons extends StatelessWidget {
           child: Icon(Icons.layers_outlined),
         ),
         const Tooltip(
+          message: 'Low surface\nHigh scaffold',
+          child: Icon(Icons.dynamic_feed_rounded),
+        ),
+        const Tooltip(
           message: 'Low scaffold',
           child: Icon(Icons.horizontal_split),
         ),
@@ -56,7 +61,7 @@ class SurfaceModeButtons extends StatelessWidget {
             alignment: Alignment.center,
             children: <Widget>[
               const Icon(Icons.horizontal_split),
-              Icon(Icons.stop, color: scheme.secondaryVariant, size: 16),
+              Icon(Icons.stop, color: scheme.secondaryVariant, size: 18),
             ],
           ),
         ),
@@ -67,20 +72,10 @@ class SurfaceModeButtons extends StatelessWidget {
             children: <Widget>[
               const RotatedBox(
                   quarterTurns: 2, child: Icon(Icons.horizontal_split)),
-              Icon(Icons.stop, color: scheme.secondaryVariant, size: 16),
+              Icon(Icons.stop, color: scheme.secondaryVariant, size: 18),
             ],
           ),
         ),
-        // Tooltip(
-        //   message: 'High scaffold\nVariant dialog',
-        //   child: Icon(Icons.view_carousel),
-        // ),
-        // Icon(Icons.view_agenda),
-        // Icon(Icons.view_array),
-        // Icon(Icons.horizontal_split),
-        // Icon(Icons.horizontal_split_outlined),
-        // Icon(Icons.view_day_outlined)
-        // Icon(Icons.view_day)
       ],
     );
   }

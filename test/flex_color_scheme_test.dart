@@ -313,7 +313,7 @@ void main() {
       expect(
         FlexColorScheme.light(
           surfaceMode: FlexSurfaceMode.highBackground,
-          blendLevel: FlexBlendLevel.zero,
+          blendLevel: 0,
         ),
         equals(m1e2),
       );
@@ -321,7 +321,7 @@ void main() {
       expect(
         FlexColorScheme.light(
           surfaceMode: FlexSurfaceMode.highBackground,
-          blendLevel: FlexBlendLevel.zero,
+          blendLevel: 0,
         ).toTheme,
         equals(m1e2.toTheme),
       );
@@ -399,14 +399,14 @@ void main() {
       expect(
           FlexColorScheme.dark(
             surfaceMode: FlexSurfaceMode.highBackground,
-            blendLevel: FlexBlendLevel.zero,
+            blendLevel: 0,
           ),
           m1e3);
       // Expect toTheme from them to full-fill same condition.
       expect(
         FlexColorScheme.dark(
           surfaceMode: FlexSurfaceMode.highBackground,
-          blendLevel: FlexBlendLevel.zero,
+          blendLevel: 0,
         ).toTheme,
         equals(m1e3.toTheme),
       );

@@ -9,10 +9,10 @@ import 'home_page.dart';
 // EXAMPLE 1)
 //
 // This example shows how to use a selected predefined color scheme in
-// FlexColorScheme to define light and dark themes using the scheme
-// and then switch between the light and dark mode.
+// FlexColorScheme to define light and dark themes using the scheme,
+// and then how to switch between the light and dark mode.
 //
-// It also uses the Google font Noto Sans to show how to use custom fonts.
+// It uses the Google font Noto Sans to show how to use custom fonts.
 // -----------------------------------------------------------------------------
 void main() => runApp(const DemoApp());
 
@@ -25,13 +25,13 @@ class DemoApp extends StatefulWidget {
 
 class _DemoAppState extends State<DemoApp> {
   // Used to select if we use the dark or light theme.
-  ThemeMode themeMode = ThemeMode.light;
+  ThemeMode themeMode = ThemeMode.system;
 
   @override
   Widget build(BuildContext context) {
     // Select the predefined FlexScheme color scheme to use. Modify the
     // used FlexScheme enum value below to try other pre-made color schemes.
-    const FlexScheme usedFlexScheme = FlexScheme.mandyRed;
+    const FlexScheme usedScheme = FlexScheme.mandyRed;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -39,9 +39,9 @@ class _DemoAppState extends State<DemoApp> {
       title: 'Example 1) Use Predefined Theme',
       // Use a predefined FlexThemeData.light() theme for the light theme.
       theme: FlexThemeData.light(
-        scheme: usedFlexScheme,
+        scheme: usedScheme,
         // Use very subtly themed app bar elevation in light mode.
-        appBarElevation: 1,
+        appBarElevation: 0.5,
         // Comfortable density on desktops, devices use default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         // We use GoogleFonts NotoSans instead of platform defaults.
@@ -49,9 +49,9 @@ class _DemoAppState extends State<DemoApp> {
       ),
       // Same definition for the dark theme, using FlexThemeData.dark().
       darkTheme: FlexThemeData.dark(
-        scheme: usedFlexScheme,
+        scheme: usedScheme,
         // Use stronger app bar elevation in dark mode.
-        appBarElevation: 4,
+        appBarElevation: 2,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
@@ -71,7 +71,7 @@ class _DemoAppState extends State<DemoApp> {
         // active theme's name, descriptions and colors in the demo.
         // We also use it for the theme mode switch that shows the theme's
         // colors in the different theme modes.
-        flexSchemeData: FlexColor.schemes[usedFlexScheme]!,
+        flexSchemeData: FlexColor.schemes[usedScheme]!,
       ),
     );
   }

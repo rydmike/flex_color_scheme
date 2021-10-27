@@ -36,27 +36,28 @@ class HomePage extends StatelessWidget {
       body: PageBody(
         constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
         child: ListView(
-          padding: const EdgeInsets.all(AppData.edgePadding),
+          padding: const EdgeInsets.all(AppData.edgeInsets),
           children: <Widget>[
             Text('Theme', style: headline4),
             const Text(
               'This example shows how to use a selected '
-              'predefined color scheme in FlexColorScheme for app '
-              'light and dark theme, and switch between light and dark mode. '
+              'predefined color scheme in FlexColorScheme for '
+              'light and dark theme mode, and switch between the modes. '
               'A theme showcase displays the resulting theme using '
               'common Material widgets.',
             ),
             const SizedBox(height: 8),
-            // A 3-way theme mode toggle switch.
+            // A 3-way theme mode toggle switch that shows the color scheme.
             Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: AppData.edgePadding,
-                horizontal: AppData.edgePadding + 4,
+                vertical: AppData.edgeInsets,
+                horizontal: AppData.edgeInsets + 4,
               ),
               child: FlexThemeModeSwitch(
                 themeMode: themeMode,
                 onThemeModeChanged: onThemeModeChanged,
                 flexSchemeData: flexSchemeData,
+                buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
               ),
             ),
             // Show theme name and description.
@@ -66,7 +67,7 @@ class HomePage extends StatelessWidget {
             ),
             // Show all key active theme colors.
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppData.edgePadding),
+              padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
               child: ShowThemeColors(),
             ),
             const SizedBox(height: 8),

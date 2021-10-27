@@ -4,12 +4,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   //****************************************************************************
-  // FlexSubThemeConfig unit tests.
+  // FlexThemesData unit tests.
   //
   // Basic object tests, equality, none equal, copyWith. Factory creation
   // same result as matching one with default constructor.
   //****************************************************************************
-  group('FSTC1: WITH FlexSubThemeConfig ', () {
+  group('FSTC1: WITH FlexThemesData ', () {
     // m1 = Default FlexSubThemeConfig
     const FlexSubThemesData m1 = FlexSubThemesData();
     // m2, same definition as m1, but using default values to create.
@@ -137,7 +137,7 @@ void main() {
     });
 
     //**************************************************************************
-    // FlexSubThemeConfig unit tests.
+    // FlexThemesData unit tests.
     //
     // toString and hashcode.
     //**************************************************************************

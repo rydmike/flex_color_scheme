@@ -5,20 +5,20 @@ import 'flex_extensions.dart';
 
 // ignore_for_file: comment_references
 
-/// Static helpers for opt-in sub-theming offered by [FlexColorScheme].
+/// Static helpers for opt in widget theming offered by [FlexColorScheme].
 ///
 /// FlexSubTheme offers opinionated static theme helpers that are opt-in via
 /// FlexColorScheme(subThemesOptIn: true). You can also configure the
 /// default of the opt in setup by defining custom configuration values in the
-/// [FlexSubThemeConfig] configuration class, and passing it to the
-/// FlexColorScheme(subThemeConfig) constructor property.
+/// [FlexSubThemesData] configuration class, and passing it to the
+/// FlexColorScheme(flexThemesData) constructor property.
 ///
-/// The configuration class [FlexSubThemeConfig] offers simple configuration
+/// The configuration class [FlexSubThemesData] offers simple configuration
 /// properties for using the sub-themes in FlexColorScheme. You can also use
 /// the static sub-themes without using FlexColorScheme based theming,
-/// however the [FlexSubThemeConfig] has no impact on the static helpers it
-/// is [FlexColorScheme] to uses the [FlexSubThemeConfig] class to configure
-/// the opt in sub-themes. You can do the too if you  [FlexSubThemeConfig]
+/// however the [FlexSubThemesData] has no impact on the static helpers, it
+/// is [FlexColorScheme] that uses the [FlexSubThemesData] class to configure
+/// the opt in sub-themes. You can do the it too if you use [FlexSubThemesData]
 /// outside of [FlexColorScheme] or in copyWith on each sub-theme in more
 /// custom [ThemeData].
 ///
@@ -92,7 +92,7 @@ class FlexSubThemes {
     final Clip clipBehavior = Clip.antiAlias,
   }) =>
       BottomSheetThemeData(
-        // TODO(rydmike): Not available in FlexSubThemeConfig, maybe add later.
+        // TODO(rydmike): Not exposed in FlexSubThemesData, maybe add later.
         clipBehavior: clipBehavior,
         elevation: elevation,
         modalElevation: modalElevation,
@@ -145,10 +145,12 @@ class FlexSubThemes {
         landscapeLayout: landscapeLayout,
       );
 
-  // TODO(rydmike): SnackBar needs two corner radius versions, how-to?
+  // TODO(rydmike): SnackBar needs two corner radius versions, how?
   // The pinned should not have a shape, but the floating one should.
   // Doable via themes? Might not be, if it can be then the floating one.
   // should follow the globally themed corner radius setting.
+  // Maybe offer rounding that can be opted in on if never plan to use pinned
+  // version?
 
   /// An opinionated [SnackBarThemeData] with custom elevation.
   ///
@@ -177,7 +179,7 @@ class FlexSubThemes {
     final Clip clipBehavior = Clip.antiAlias,
   }) =>
       CardTheme(
-        // TODO(rydmike): Not available in FlexSubThemeConfig, maybe add later.
+        // TODO(rydmike): Not exposed in FlexSubThemesData, maybe add later.
         clipBehavior: clipBehavior,
         elevation: elevation,
         shape: RoundedRectangleBorder(

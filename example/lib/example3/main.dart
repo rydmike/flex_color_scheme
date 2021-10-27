@@ -8,9 +8,9 @@ import 'home_page.dart';
 // -----------------------------------------------------------------------------
 // EXAMPLE 3)
 //
-// This example shows how to use three built in color schemes and  a custom
-// scheme as selectable FlexColorScheme based theme options in an
-// application. The example also uses primary color surface branding.
+// This example shows how to use three built in color schemes and a custom
+// scheme, as selectable FlexColorScheme based theme options in an
+// application. The example also uses primary color surface alpha blends.
 //
 // The Google font Noto Sans is used to show how to use custom fonts.
 //
@@ -84,11 +84,11 @@ class DemoApp extends StatelessWidget {
                 : FlexColor.schemes[themeController.usedScheme]!.light,
             // We use a surface color mode where all Material surfaces use
             // the same primary color branding, but scaffold background
-            // is using much less.
+            // uses much less.
             surfaceMode: FlexSurfaceMode.lowScaffold,
-            // We set the blend level strength to six.
-            blendLevel: FlexBlendLevel.six,
-            appBarElevation: 1,
+            // We set the blend level strength to 20.
+            blendLevel: 20,
+            appBarElevation: 0.5,
             useSubThemes: themeController.useSubThemes,
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
@@ -99,11 +99,15 @@ class DemoApp extends StatelessWidget {
             colors: themeController.usedScheme == FlexScheme.custom
                 ? _myFlexScheme.dark
                 : FlexColor.schemes[themeController.usedScheme]!.dark,
-            surfaceMode: FlexSurfaceMode.lowScaffold,
+            // We don't have to use the same surface mode in dark mode, for an
+            // interesting effect here we use a mode where scaffold background
+            // color gets a much higher blend value than surface and background.
+            surfaceMode: FlexSurfaceMode.highScaffold,
             // You don't have to use same blend level or mode in light
-            // and dark mode, here we go stronger in dark mode.
-            blendLevel: FlexBlendLevel.eight,
-            appBarElevation: 4,
+            // and dark mode, here we use a lower value in dark mode, that
+            // goes better together with the highScaffold mode.
+            blendLevel: 15,
+            appBarElevation: 1,
             useSubThemes: themeController.useSubThemes,
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
@@ -115,7 +119,7 @@ class DemoApp extends StatelessWidget {
             // Pass in the FlexSchemeData we used for the active theme. Not
             // really needed to use FlexColorScheme, but we will use it to
             // show the active theme's name, descriptions and colors in the
-            // demo. We also use it for the theme mode switch that shows the
+            // example. We also use it for the theme mode switch that shows the
             // theme's colors in the different theme modes.
             flexSchemeData: themeController.usedScheme == FlexScheme.custom
                 ? _myFlexScheme

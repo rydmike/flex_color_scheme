@@ -11,7 +11,7 @@ import 'home_page.dart';
 // This example shows how to define your own FlexSchemeData, using
 // FlexSchemeColor and create a FlexColorScheme based theme from it.
 //
-// It also uses the Google font Noto Sans to show how to use custom fonts.
+// It uses the Google font Noto Sans to show how to use custom fonts.
 //
 // In this example we use a ThemeService and ThemeController to manage our
 // theme settings. This follows the example architecture you get when you
@@ -39,7 +39,6 @@ Future<void> main() async {
 
 // Create a custom FlexSchemeData scheme with name, description and a light
 // and dark FlexSchemeColor.
-//
 // You can also just create a FlexSchemeColor for light and dark theme,
 // without the name and description, but in this example we will use
 // the name and description to describe created themes.
@@ -113,12 +112,12 @@ class DemoApp extends StatelessWidget {
             home: HomePage(
               // Pass in the FlexSchemeData we used for the active theme. Not
               // really needed to use FlexColorScheme, but we will use it to
-              // show the active theme's name, descriptions and colors in the
-              // demo. We also use it for the theme mode switch that shows the
+              // show the active theme's name, description and colors in the
+              // demo. It is also used for the theme mode switch that shows the
               // theme's colors in the different theme modes.
               flexSchemeData: _myFlexScheme,
               // Pass in the theme controller to the home page.
-              themeController: themeController,
+              controller: themeController,
             ),
           );
         });

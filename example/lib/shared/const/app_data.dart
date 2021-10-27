@@ -24,14 +24,14 @@ class AppData {
   // The max dp width used for layout content on the screen in the available
   // body area. Wider content gets growing side padding, kind of like on most
   // web pages when they are used on super wide screen. Just a design used for
-  // this demo app, that works pretty well in this use case.
+  // this demo app, that works pretty well in this use case too.
   static const double maxBodyWidth = 1000;
 
-  // Edge padding for page content on the screen. A better looking result
+  // Edge padding insets for page content on the screen. A better looking result
   // can be obtained if this increases in steps depending on canvas size.
-  // Keeping it fairly tight now, but not too small, it is a compromise for
+  // Keeping it fairly small, but not too small, it is a compromise for
   // both phone and larger media.
-  static const double edgePadding = 12;
+  static const double edgeInsets = 12;
 
   // The minimum media size needed for desktop/large tablet menu view.
   static const double desktopBreakpoint = 720;

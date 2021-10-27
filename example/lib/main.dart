@@ -10,6 +10,7 @@ import 'shared/all_shared_imports.dart';
 ///
 /// This example shows how you can define custom colors, use [FlexColorScheme]
 /// to theme your app with them, or use a predefined theme.
+///
 /// It offers a playground you can use to experiment with all its
 /// theming properties and optional opinionated sub-theming.
 ///
@@ -20,9 +21,33 @@ import 'shared/all_shared_imports.dart';
 /// please go through the five tutorial examples in the readme documentation.
 void main() => runApp(const DemoApp());
 
-// For the custom color scheme we define primary and secondary colors,
+// This default example contains a long list of const and final property values
+// that are just passed in to the corresponding properties in
+// FlexThemeData.light() and FlexThemeData.dark() convenience extension on
+// ThemeData to FlexColorScheme.light().toTheme and
+// FlexColorScheme.dark().toTheme.
+//
+// The purpose is to provide any easy to use in-code based playground that
+// you can experiment with and use as quick starter template to start using
+// FlexColorScheme to make beautiful Flutter themes for your applications.
+// It is also a code and comment based quick guide for devs that don't read
+// long documentation.
+//
+// This setup is convenient since you can edit the values for both the light
+// and dark theme mode via shared property values on observer the changes
+// in the built via hot reload.
+// In a real app you might tuck away your color definitions and FlexColorScheme
+// settings in a static class with const and final values and static functions
+// as required. The other tutorials show one possible example of this as well.
+//
+// To learn more about using FlexColorScheme, it is recommended to go through
+// the step-by-step tutorial that uses examples 1 to 5 to explain and
+// demonstrate the features with increasing complexity. Example 5 represents
+// the full bonanza where pretty much everything can be changed dynamically
+// while running the app.
+
+// For our custom color scheme we define primary and secondary colors,
 // but no variant or other colors.
-// ignore: unused_element
 final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   primary: const Color(0xFF3B5997),
   // If you do not want to define secondary, primaryVariant and
@@ -49,18 +74,55 @@ final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
 // code example further below and compare the result of these manually defined
 // matching dark mode colors, to the ones computed via the "lazy" designer
 // matching dark colors.
-// ignore: unused_element
 final FlexSchemeColor _schemeDark = FlexSchemeColor.from(
   primary: const Color(0xFF8B9DC3),
   secondary: const Color(0xFFFCB075),
 );
 
-// Use another font as default font for your theme.
-final String? _fontFamily = GoogleFonts.roboto().fontFamily;
-
 // To use a pre-defined color scheme, don't assign any FlexSchemeColor to
 // `colors` instead, just pick a FlexScheme and assign it to the `scheme`.
 const FlexScheme _scheme = FlexScheme.blueWhale;
+
+// A quick setting for the themed app bar elevation, it defaults to 0.
+// A very low, like 0.5 is pretty nice too, since it gives an underline effect
+// visible with e.g. white or light app bars.
+const double _appBarElevation = 0.5;
+
+// There is quick setting to put an opacity value on the app bar, so we can
+// see content scroll behind it fi we extend the scaffold behind it.
+const double _appBarOpacity = 0.93;
+
+// To make it easy to toggle between using the custom colors, or the selected
+// predefined scheme in this example, set use scheme below to true, to use the
+// selected predefined scheme above, chnage to false to use the custom colors.
+const bool _useScheme = true;
+
+// If you set _computeDarkTheme below to true the dark scheme will be computed
+// both for the selected scheme and the custom colors, from the light scheme.
+// There is a bit of logic hoops below to make it happen via these bool toggles.
+//
+// Going "toDark()" on your light FlexSchemeColor definition is just a quick
+// way you can make a dark theme from a light color scheme definition, without
+// figuring out usable color values yourself. Useful during development, when
+// you test custom colors, but usually you probably want to hand tune your
+// final custom dark color scheme colors to const values.
+const bool _computeDarkTheme = true;
+
+// When you use _computeDarkTheme, use this desaturation % level to calculate
+// the dark scheme from the light scheme colors. The default is 35%, but values
+// from 20% might work on less saturated light scheme colors. For more
+// deep and colorful starting values, you can try 40%. Trivia: The default
+// red dark error color in the Material design guide, is computed from the light
+// theme error color value, by using 40% with the same algorithm used here.
+const int _toDarkLevel = 30;
+
+// To swap primaries and secondaries, set to true. With some color schemes
+// interesting and even useful inverted themes can be obtained by only
+// swapping the colors on your dark scheme.
+const bool _swapColors = false;
+
+// Use a GoogleFonts, font as default font for your theme, Noto Sans is nice.
+final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 
 // Define a custom text theme for the app. Here we have decided that
 // Headline1 is too big to be useful for us, so we make it a bit smaller.
@@ -81,64 +143,90 @@ const TextTheme _textTheme = TextTheme(
   ),
 );
 
-// FlexColorScheme before version 4.0.0 used the surfaceStyle property to
-// define the surface color blend mode, if you are migrating from an earlier
-// version, no worries it still works as before.
-const FlexSurface _surfaceStyle = FlexSurface.light;
-// However, if you define the new `surfaceMode` property used below, it
-// will override any defined `surfaceStyle`.
+// FlexColorScheme before version 4.0.0 used the `surfaceStyle` property to
+// define the surface color blend mode. If you are migrating from an earlier
+// version, no worries it still works as before. But we won't be using it in
+// this example anymore.
+// When you define a value for the new `surfaceMode` property used below,
+// it will also override any defined `surfaceStyle`.
+// It is recommended to use this method to make alpha blended surfaces
+// starting with version 4.
 // The mode `scaffoldSurfaceBackground` equals all the previous `surfaceStyle`
 // settings, but its blend level is set separately in finer and more increments
 // via `blendLevel`. There are several new surface blend mode strategies in
-// version 4.0.0, instead of just one in previous versions.
+// version 4.0.0, instead of just one as in previous versions.
 const FlexSurfaceMode _surfaceMode = FlexSurfaceMode.lowScaffold;
-const FlexBlendLevel _blendLevel = FlexBlendLevel.sixteen;
+
+// The alpha blend level strength can be defined separately from the
+// SurfaceMode strategy, and has 40 alpha blend level strengths.
+const int _blendLevel = 20;
 
 // The `useSubThemes` sets weather you want to opt-in or not on additional
 // opinionated sub-theming. By default FlexColorScheme as before does very
 // little styling on widgets, other than a few important adjustments, described
 // in detail in the readme. By using the sub-theme opt-in, it now also offers
-// easy to use additional out-of the box opinionated styling of Widgets.
+// easy to use additional out-of the box opinionated styling of SDK UI Widgets.
 const bool _useSubThemes = true;
+
 // The opt-in opinionated sub-theming offers easy to use consistent corner
-// radius rounding setting on all sub-themes and a consistent button design.
+// radius rounding setting on all sub-themes and a ToggleButtons design that
+// matches the normal buttons style and size.
 // It comes with Material You like rounded defaults, but you can adjust
-// its configuration via simple parameters via a passed in configuration class.
+// its configuration via simple parameters in a passed in configuration class
+// called FlexSubThemesData.
+// Here are some some configuration examples:
 const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // Opt in for themed hover, focus, highlight and splash effects.
+  // New buttons use primary themed effects by default, this setting makes
+  // the general ThemeData hover, focus, highlight and splash match that.
   // True by default when opting in on sub themes, but you can turn it off.
   themedEffects: true,
   // Global corner radius. Default is 16, but make it whatever you like, even 0.
   // You can also override individual corner radius for each sub-theme to make
   // it different from the global `cornerRadius`.
-  cornerRadius: 18,
-  // Try eg. the one on the InputDecorator.
+  cornerRadius: 16,
+  // Try eg. the one on the InputDecorator, commented below:
   // cornerRadiusInputDecoration: 8,
+  // Set inputDecoratorIsOutlinedBorder to false to use the underline version.
   inputDecoratorIsOutlinedBorder: true,
+  // For a primary color tinted background on the input decorator set to true.
   inputDecoratorIsFilled: true,
+  // If you do not want any underline/outline on the input decorator when it is
+  // not in focus, then set this to false.
+  inputDecoratorUnfocusedHasBorder: true,
   // Elevations have easy override values as well.
   elevatedButtonElevation: 1,
-  // Widgets that use outline borders can be easily adjusted.
+  // Widgets that use outline borders can be easily adjusted via these
+  // properties, they affect the outline input decorator, outlined button and
+  // toggle buttons.
   thickBorderWidth: 2, // Default is 2.0.
   thinBorderWidth: 1.5, // Default is 1.5.
 );
 
-// If true, then the Android status bar becomes same color as AppBar.
+// If true, the top part of the Android AppBar has no scrim, it becomes
+// one colored like on iOS.
 const bool _transparentStatusBar = true;
+
+// Usually the TabBar is used in an AppBar. This style themes it right for
+// that, regardless of what FlexAppBarStyle you use for the `appBarStyle`.
+// If you will use TabBar on scaffold or other background colors,
+// use the style FlexTabBarStyle.forBackground.
+const FlexTabBarStyle _tabBarForAppBar = FlexTabBarStyle.forAppBar;
 
 // If true, tooltip background brightness is same as background brightness.
 // False by default, which is inverted background brightness compared to theme.
+// Setting this to true is more Windows desktop like.
 const bool _tooltipsMatchBackground = true;
 
-// Visual density setting defaults to same as SDK,
-// VisualDensity.adaptivePlatformDensity, but you can define a fixed one too
-// or use FlexColorScheme.comfortablePlatformDensity.
-final VisualDensity
-    _visualDensity = //FlexColorScheme.comfortablePlatformDensity;
-// VisualDensity.adaptivePlatformDensity;
-//     VisualDensity.compact;
-// VisualDensity.comfortable;
-    VisualDensity.standard;
+// The visual density setting defaults to same as SDK default value,
+// VisualDensity.adaptivePlatformDensity. You can define a fixed one
+// or try FlexColorScheme.comfortablePlatformDensity.
+// The `comfortablePlatformDensity` is an alternative adaptive density to the
+// default `adaptivePlatformDensity`. It makes the density `comfortable` on
+// desktops, instead of `compact` as the `adaptivePlatformDensity` does.
+// This is useful on desktop with touch screens, since it keeps tap targets
+// a bit larger.
+final VisualDensity _visualDensity = FlexColorScheme.comfortablePlatformDensity;
 
 // This is just standard `platform` property in `ThemeData`, handy to have as
 // a direct property, you can use it to test how things changes on different
@@ -160,19 +248,21 @@ class _DemoAppState extends State<DemoApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Default Example',
-      // Define the light theme for the app, based on defined colors.
+      // Define the light theme for the app, based on defined colors and
+      // properties above.
       theme: FlexThemeData.light(
-        // Want to use a built in scheme? Comment custom colors line below.
-        // colors: _schemeLight,
-        // Then the FlexScheme assigned to _scheme below will be used.
+        // Want to use a built in scheme? Don't assign any value to colors.
+        colors: _useScheme ? null : _schemeLight,
         scheme: _scheme,
-        // To swap primaries and secondaries, set to true.
-        swapColors: false,
-        // If you provide a color value to a direct color property it will
-        // override anything specified via the other properties.
+        swapColors: _swapColors, // If true, swap primary and secondaries.
+
+        // If you provide a color value to a direct color property, the color
+        // value will override anything specified via the other properties.
         // The priority from lowest to highest order is:
         // 1. scheme 2. colors 3. Individual color values.
-        // You can uncomment a color property below to try it:
+        // You can uncomment a color property below on the light theme
+        // to try it:
+        //
         // primary: FlexColor.indigo.light.primary,
         // primaryVariant: FlexColor.indigo.light.primaryVariant,
         // secondary: FlexColor.indigo.light.secondary,
@@ -182,70 +272,81 @@ class _DemoAppState extends State<DemoApp> {
         // scaffoldBackground: FlexColor.lightScaffoldBackground,
         // dialogBackground: FlexColor.lightSurface,
         // appBarBackground: FlexColor.indigo.light.primary,
-        //
+
         // The default style of AppBar in Flutter SDK light mode uses scheme
         // primary color as its background color.
         // The appBarStyle FlexAppBarStyle.primary, results in this too and is
-        // the default. You can also choose other themed styles. Here we use
-        // FlexAppBarStyle.background, that gets active color blend from used
-        // surfaceMode or surfaceStyle, depending on which one is being used.
+        // the default in light mode. You can also choose other themed styles.
+        // Here we use FlexAppBarStyle.background, that gets active color blend
+        // from used surfaceMode or surfaceStyle, depending on which one is
+        // being used.
+        // You may often want a different style on the app bar in dark and light
+        // theme mode, therefore it was not set via a shared value here.
         appBarStyle: FlexAppBarStyle.background,
-        appBarElevation: 0,
+        appBarElevation: _appBarElevation,
+        appBarOpacity: _appBarOpacity,
         transparentStatusBar: _transparentStatusBar,
-        // If your AppBar is using surface colors, like `FlexAppBarStyle`
-        // material, surface or background, you may prefer the
-        // forBackground style on your TabBar, even if you use it in an AppBar.
-        // For a ´primary` appBarStyle or `custom`, use the
-        // FlexTabBarStyle.forAppBar style.
-        tabBarStyle: FlexTabBarStyle.forBackground,
-        // If true, the top part of the Android AppBar has no scrim, it become
-        // one colored like on iOS.
-        // To use surfaceStyle as before v4.0.0, don't assign surfaceMode.
-        surfaceStyle: _surfaceStyle,
-        // Prefer using in version 4.0.0 new surface mode.
+        tabBarStyle: _tabBarForAppBar,
         surfaceMode: _surfaceMode,
-        // The blend level strength can be defined separately from the
-        // SurfaceMode strategy and has from zero to sixteen levels.
         blendLevel: _blendLevel,
         tooltipsMatchBackground: _tooltipsMatchBackground,
-        // Add a custom theme default font.
         fontFamily: _fontFamily,
-        // Add custom text themes.
         textTheme: _textTheme,
         primaryTextTheme: _textTheme,
-        // Opt in on opinionated sub-theme styles.
         useSubThemes: _useSubThemes,
-        // Add optional customization the to the opinionated sub-themes.
         subThemesData: _subThemesData,
-        // Define the the visual density of Widgets.
         visualDensity: _visualDensity,
         platform: _platform,
       ),
       // Define the corresponding dark theme for the app.
       darkTheme: FlexThemeData.dark(
-        // If you want to base the dark scheme on your light colors, this is
-        // a shortcut if you do not want to define your dark theme colors.
-        // The whiteBlend for the desaturation of the light theme colors
-        // defaults to 35%, you can try other values too, here we use 30:
-        // colors: _schemeLight.toDark(30), // Adjust % to change saturation.
-        // If you want to use the defined custom dark colors, use it instead:
-        // colors: _schemeDark,
-        // To use a built in scheme, don't assign colors above, use scheme:
+        // If you want to base the dark scheme on your light colors,
+        // you can also compute it from the light theme's FlexSchemeColors.
+        // Here we do so by setting _computeDarkTheme to true.
+        // The FlexSchemeColors class has a toDark() method that can convert
+        // a color scheme designed for a light theme, to corresponding colors
+        // suitable for a dark theme. For the built in themes there is no
+        // need to do so, they all have hand tuned dark scheme colors.
+        // Regardless, below we anyway demonstrate how you can do that too.
+        //
+        // Normally you would not do wild things like this logic, this is just
+        // here so you can toggle a few booleans above to try the options.
+        colors: (_useScheme && _computeDarkTheme)
+            // If we use predefined schemes and want to compute a dark
+            // theme from its light colors, we can grab the light scheme colors
+            // for _schemes from the FlexColor.schemes map and use toDark(),
+            // that takes a white blend saturation %, where 0 is same colors as
+            // the input light scheme colors, and 100% makes it white.
+            ? FlexColor.schemes[_scheme]!.light.toDark(_toDarkLevel)
+            // If we use a predefined scheme, then pass, null so we get
+            // selected _scheme via the scheme property.
+            : _useScheme
+                ? null
+                // If we compute a scheme from our custom data, then use the
+                // toDark() method on our custom light FlexSchemeColor data.
+                : _computeDarkTheme
+                    ? _schemeLight.toDark(_toDarkLevel)
+                    // And finally, use the defined custom dark colors.
+                    : _schemeDark,
+        // To use a built-in scheme based on enum, don't assign colors above.
         scheme: _scheme,
-        // To swap primaries and secondaries, set to true.
-        swapColors: false,
-        // For an optional ink black dark mode, set to true.
+        swapColors: _swapColors,
+        // For an optional ink black dark mode, set darkIsTrueBlack to true.
         darkIsTrueBlack: false,
+
         // The SDK default style of the AppBar in dark mode uses a fixed dark
-        // background color defined via colorScheme.surface color. The
-        // appBarStyle FlexAppBarStyle.material defines the same color value.
+        // background color, defined via colorScheme.surface color. The
+        // appBarStyle FlexAppBarStyle.material results in the same color value.
+        // It is also the default if you do not define the style.
         // You can also use other themed styles. Here we use background, that
         // also gets active color blend from used SurfaceMode or SurfaceStyle.
+        // You may often want a different style on the app bar in dark and light
+        // theme mode, therefore it was not set via a shared value here.
         appBarStyle: FlexAppBarStyle.background,
-        appBarElevation: 0,
+        appBarElevation: _appBarElevation,
+        appBarOpacity: _appBarOpacity,
         transparentStatusBar: _transparentStatusBar,
-        tabBarStyle: FlexTabBarStyle.forAppBar,
-        surfaceStyle: _surfaceStyle,
+        tabBarStyle: _tabBarForAppBar,
         surfaceMode: _surfaceMode,
         blendLevel: _blendLevel,
         tooltipsMatchBackground: _tooltipsMatchBackground,
@@ -272,8 +373,8 @@ class _DemoAppState extends State<DemoApp> {
 
 // The content of the HomePage below is not relevant for using FlexColorScheme
 // based application theming. The critical parts are in the MaterialApp
-// theme definitions. The HomePage just contains UI to visually show what the
-// defined example looks like in an application and with commonly used Widgets.
+// theme definitions above. The HomePage just contains UI to visually show what
+// the defined example looks like in an application and with common Widgets.
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
@@ -320,8 +421,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final double topPadding =
-        media.padding.top + kToolbarHeight + AppData.edgePadding;
-    final double bottomPadding = media.padding.bottom + AppData.edgePadding;
+        media.padding.top + kToolbarHeight + AppData.edgeInsets;
+    final double bottomPadding = media.padding.bottom + AppData.edgeInsets;
 
     final bool menuCanOperate = media.size.width > AppData.desktopBreakpoint;
     final bool menuHide = media.size.width < AppData.phoneBreakpoint;
@@ -398,9 +499,9 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   controller: scrollController,
                   padding: EdgeInsets.fromLTRB(
-                    AppData.edgePadding,
+                    AppData.edgeInsets,
                     topPadding,
-                    AppData.edgePadding,
+                    AppData.edgeInsets,
                     bottomPadding,
                   ),
                   children: <Widget>[
@@ -412,7 +513,7 @@ class _HomePageState extends State<HomePage> {
                         'It uses ThemeMode.system and device settings to '
                         'toggle between light and dark theme.\n\n'
                         'The example also has property place holders that '
-                        'you can modify to test other FlexColorScheme '
+                        'you can modify to test most of the FlexColorScheme '
                         'features.'),
                     const SizedBox(height: 8),
                     ListTile(
@@ -427,7 +528,7 @@ class _HomePageState extends State<HomePage> {
                     // Active theme color indicators.
                     const Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: AppData.edgePadding),
+                          EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
                       child: ShowThemeColors(),
                     ),
                     const SizedBox(height: 8),
@@ -446,7 +547,7 @@ class _HomePageState extends State<HomePage> {
                               Subpage.show(context);
                             },
                           ),
-                          const Divider(),
+                          const Divider(height: 1),
                           // Splash pages...
                           ListTile(
                             title: const Text('Splash page demo 1a'),

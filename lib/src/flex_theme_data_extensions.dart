@@ -154,8 +154,12 @@ extension FlexThemeData on ThemeData {
     /// When `surfaceMode` is used, this defines the blend level strength used
     /// by the surface mode.
     ///
-    /// Defaults to FlexBlendLevel.three,
-    final FlexBlendLevel blendLevel = FlexBlendLevel.three,
+    /// In light mode the blend level value equals the alpha value in the
+    /// alpha blends for the surfaces, in dark mode, 2x the blend value
+    /// is used for alpha.
+    ///
+    /// Defaults to 10.
+    final int blendLevel = 10,
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
@@ -608,10 +612,18 @@ extension FlexThemeData on ThemeData {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
-    /// Set to true to opt-in on using additional slightly opinionated
-    /// sub-themes.
+    /// Set to true to opt in on using additional opinionated widget sub-themes.
     ///
-    /// Opinionated sub themes are provided for:
+    /// By default [FlexThemeData.light] and [FlexColorScheme.toTheme],
+    /// tries to do as little as they need to just provide a consistent color
+    /// schemed theme.
+    ///
+    /// By opting in via [subThemesData] you get an opinionated set of widget
+    /// sub-themes applied. They can be conveniently customized via the
+    /// [subThemesData] property, that holds quick and easy sub-theme
+    /// configuration values in the data class [FlexSubThemesData].
+    ///
+    /// Opinionated sub-themes are provided for:
     /// * [BottomSheet]
     /// * [BottomNavigationBar]
     /// * [Card]
@@ -626,9 +638,11 @@ extension FlexThemeData on ThemeData {
     /// * A custom [ButtonTextTheme] still provides matching styling to support
     ///   the deprecated legacy buttons if they are used.
     ///
-    /// The sub-themes are a convenient way to opt-in on customized corner
+    /// The sub-themes are e.g. a convenient way to opt-in on customized corner
     /// radius on Widgets using above themes. By opting in you can set corner
     /// radius for all above Widgets to same corner radius in one go.
+    ///
+    /// Defaults to false.
     final bool useSubThemes = false,
 
     /// Optional configuration parameters for the opt-in sub-themes.
@@ -801,8 +815,12 @@ extension FlexThemeData on ThemeData {
     /// When `surfaceMode` is used, this defines the blend level strength used
     /// by the surface mode.
     ///
-    /// Defaults to FlexBlendLevel.three,
-    final FlexBlendLevel blendLevel = FlexBlendLevel.three,
+    /// In light mode the blend level value equals the alpha value in the
+    /// alpha blends for the surfaces, in dark mode, 2x the blend value
+    /// is used for alpha.
+    ///
+    /// Defaults to 10.
+    final int blendLevel = 10,
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
@@ -1242,10 +1260,17 @@ extension FlexThemeData on ThemeData {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
-    /// Set to true to opt-in on using additional slightly opinionated
-    /// sub-themes.
+    /// Set to true to opt in on using additional opinionated widget sub-themes.
     ///
-    /// Opinionated sub themes are provided for:
+    /// By default [FlexThemeData.dark] and [FlexColorScheme.toTheme],
+    /// tries to do as little as they need to just provide a consistent color
+    /// schemed theme.
+    /// By opting in via [useSubThemes] you get an opinionated set of widget
+    /// sub-themes applied. They can be conveniently customized via the
+    /// [subThemesData] property, that holds quick and easy sub-theme
+    /// configuration values in the data class [FlexSubThemesData].
+    ///
+    /// Opinionated sub-themes are provided for:
     /// * [BottomSheet]
     /// * [BottomNavigationBar]
     /// * [Card]
@@ -1260,9 +1285,11 @@ extension FlexThemeData on ThemeData {
     /// * A custom [ButtonTextTheme] still provides matching styling to support
     ///   the deprecated legacy buttons if they are used.
     ///
-    /// The sub-themes are a convenient way to opt-in on customized corner
+    /// The sub-themes are e.g. a convenient way to opt-in on customized corner
     /// radius on Widgets using above themes. By opting in you can set corner
     /// radius for all above Widgets to same corner radius in one go.
+    ///
+    /// Defaults to false.
     final bool useSubThemes = false,
 
     /// Optional configuration parameters for the opt-in sub-themes.
@@ -1684,10 +1711,17 @@ extension FlexThemeData on ThemeData {
     /// https://github.com/flutter/flutter/issues/90353
     bool applyElevationOverlayColor = true,
 
-    /// Set to true to opt-in on using additional slightly opinionated
-    /// sub-themes.
+    /// Set to true to opt in on using additional opinionated widget sub-themes.
     ///
-    /// Opinionated sub themes are provided for:
+    /// By default [FlexThemeData.raw] and [FlexColorScheme.toTheme],
+    /// tries to do as little as they need to just provide a consistent color
+    /// schemed theme.
+    /// By opting in via [useSubThemes] you get an opinionated set of widget
+    /// sub-themes applied. They can be conveniently customized via the
+    /// [subThemesData] property, that holds quick and easy sub-theme
+    /// configuration values in the data class [FlexSubThemesData].
+    ///
+    /// Opinionated sub-themes are provided for:
     /// * [BottomSheet]
     /// * [BottomNavigationBar]
     /// * [Card]
@@ -1702,9 +1736,11 @@ extension FlexThemeData on ThemeData {
     /// * A custom [ButtonTextTheme] still provides matching styling to support
     ///   the deprecated legacy buttons if they are used.
     ///
-    /// The sub-themes are a convenient way to opt-in on customized corner
+    /// The sub-themes are e.g. a convenient way to opt-in on customized corner
     /// radius on Widgets using above themes. By opting in you can set corner
     /// radius for all above Widgets to same corner radius in one go.
+    ///
+    /// Defaults to false.
     final bool useSubThemes = false,
 
     /// Optional configuration parameters for the opt-in sub-themes.

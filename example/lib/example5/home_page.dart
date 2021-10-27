@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final double topPadding =
-        media.padding.top + kToolbarHeight + AppData.edgePadding;
-    final double bottomPadding = media.padding.bottom + AppData.edgePadding;
+        media.padding.top + kToolbarHeight + AppData.edgeInsets;
+    final double bottomPadding = media.padding.bottom + AppData.edgeInsets;
 
     final bool menuCanOperate = media.size.width >= AppData.desktopBreakpoint;
     final bool menuHide = media.size.width < AppData.phoneBreakpoint;
@@ -137,9 +137,9 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   controller: scrollController,
                   padding: EdgeInsets.fromLTRB(
-                    AppData.edgePadding,
+                    AppData.edgeInsets,
                     topPadding,
-                    AppData.edgePadding,
+                    AppData.edgeInsets,
                     bottomPadding,
                   ),
                   children: <Widget>[
@@ -220,7 +220,7 @@ class _ThemeColors extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppData.edgePadding),
+            padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
             child: ShowThemeColors(),
           ),
           const SizedBox(height: 8),
@@ -375,16 +375,16 @@ class _SubThemes extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       title: Text(
-        'Sub themes',
+        'Widget themes',
         style: Theme.of(context).textTheme.headline6,
       ),
       closed: true,
       child: Column(
         children: <Widget>[
           SwitchListTile.adaptive(
-            title: const Text('Use sub theming'),
+            title: const Text('Use widget theming'),
             subtitle: const Text('Turn ON to enable opinionated widget '
-                'sub themes.'),
+                'theming.'),
             value: controller.useSubThemes,
             onChanged: controller.setUseSubThemes,
           ),
@@ -497,6 +497,9 @@ class _SurfaceBlends extends StatelessWidget {
         return 'High background: Background (2x) Surface (1x) Scaffold (1/4x)';
       case FlexSurfaceMode.highSurface:
         return 'High surface: Surface (2x) Background (1x) Scaffold (1/4x)';
+      case FlexSurfaceMode.lowSurfaceHighScaffold:
+        return 'Low surface, high scaffold: Surface (1x) Background (2x) '
+            'Scaffold (4x)';
       case FlexSurfaceMode.lowScaffold:
         return 'Low scaffold: Scaffold (1/3x) Surface and Background (1x)';
       case FlexSurfaceMode.highScaffold:
@@ -553,13 +556,12 @@ class _SurfaceBlends extends StatelessWidget {
           ListTile(
             title: Slider.adaptive(
               min: 0,
-              max: 20,
-              divisions: 20,
-              label: controller.blendLevel.index.toString(),
-              value: controller.blendLevel.index.toDouble(),
+              max: 40,
+              divisions: 40,
+              label: controller.blendLevel.toString(),
+              value: controller.blendLevel.toDouble(),
               onChanged: (double value) {
-                final int level = value.toInt();
-                controller.setBlendLevel(FlexBlendLevel.values[level]);
+                controller.setBlendLevel(value.toInt());
               },
             ),
             trailing: Padding(
@@ -572,7 +574,7 @@ class _SurfaceBlends extends StatelessWidget {
                     style: Theme.of(context).textTheme.caption,
                   ),
                   Text(
-                    '${controller.blendLevel.index}',
+                    '${controller.blendLevel}',
                     style: Theme.of(context)
                         .textTheme
                         .caption!
@@ -651,7 +653,7 @@ class _AppBarStyle extends StatelessWidget {
               'colored AppBar in light mode, and a Material guide background '
               'colored one in dark mode. With FlexColorScheme you can choose '
               'if it should be primary color, Material guide background color, '
-              'branded background, branded surface or a custom color. '
+              'blended background or surface color or even a custom color. '
               'The predefined schemes use their secondary variant color as '
               'the custom color for the AppBar color, but it can be any color.',
             ),
@@ -665,9 +667,18 @@ class _AppBarStyle extends StatelessWidget {
             ),
             ListTile(
               trailing: AppBarStyleButtons(
-                style: controller.lightAppBarStyle,
-                onChanged: controller.setLightAppBarStyle,
-              ),
+                  style: controller.lightAppBarStyle,
+                  onChanged: controller.setLightAppBarStyle,
+                  // To access the custom color we defined for app bar, in this
+                  // toggle buttons widget, we have to pass it in. It is not
+                  // carried with the theme so we cannot get it from there in
+                  // the widget. FlexColorScheme knows the color when
+                  // you switch to it. This is just to be able to show the
+                  // correct color on the 'custom' toggle button option. In our
+                  // example we only actually have a custom color in the 1st
+                  // custom color example named Toledo.
+                  customAppBarColor: AppColor
+                      .schemes[controller.schemeIndex].light.appBarColor),
             ),
           ] else ...<Widget>[
             ListTile(
@@ -678,9 +689,10 @@ class _AppBarStyle extends StatelessWidget {
             ),
             ListTile(
               trailing: AppBarStyleButtons(
-                style: controller.darkAppBarStyle,
-                onChanged: controller.setDarkAppBarStyle,
-              ),
+                  style: controller.darkAppBarStyle,
+                  onChanged: controller.setDarkAppBarStyle,
+                  customAppBarColor: AppColor
+                      .schemes[controller.schemeIndex].dark.appBarColor),
             ),
           ],
           SwitchListTile.adaptive(
@@ -760,19 +772,17 @@ class _AppBarStyle extends StatelessWidget {
             ),
           ),
           const Divider(height: 1),
-          const ListTile(
-            title: Text('TabBar theme'),
+          const SizedBox(height: 8),
+          ListTile(
+            title: const Text('TabBar theme'),
             subtitle: Text(
               'Choose the style that fit best with where you primarily intend '
-              'to use your TabBars.',
+              'to use your TabBars.\n'
+              '${explainTabStyle(controller.tabBarStyle)}',
             ),
           ),
-          // ListTile(
-          //
-          // ),
           const SizedBox(height: 4),
           ListTile(
-            subtitle: Text(explainTabStyle(controller.tabBarStyle)),
             trailing: TabBarStyleButtons(
               style: controller.tabBarStyle,
               onChanged: controller.setTabBarStyle,

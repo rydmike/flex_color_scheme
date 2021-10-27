@@ -67,10 +67,10 @@ abstract class ThemeService {
   Future<void> saveSurfaceMode(FlexSurfaceMode value);
 
   /// Loads used surface blend level setting in example 5.
-  Future<FlexBlendLevel> blendLevel();
+  Future<int> blendLevel();
 
   /// Persists the used surface blend level setting in example 5.
-  Future<void> saveBlendLevel(FlexBlendLevel value);
+  Future<void> saveBlendLevel(int value);
 
   /// Loads used app bar style for light theme setting in example 5.
   Future<FlexAppBarStyle> lightAppBarStyle();

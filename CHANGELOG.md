@@ -2,74 +2,102 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [WIP 4.0.0] - October 18, 2021
+## [WIP 4.0.0] - October 27, 2021
 
-* The breaking matters refer to minor difference in produced style for true
+* The breaking case refer to a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.x.x.
   Major version was bumped due to the small change in produced output in some
-  rare usage options. Version 4.0.0 does however also contain many new features
-  that it in itself warrants a new major release bump.
+  rare usage options. Version 4.0.0 does however also contain so many new 
+  features that it in itself warrants a new major release bump.
+
+
 * **Breaking:** In dark mode, the `darkIsTrueBlack` now makes `surface` color
   8% darker instead of 6%. This change was needed to support overlay color
-  in dark mode when using `darkIsTrueBlack` when using `surfaceMode`
-  options that start with `equal...`. For more information see Flutter SDK
+  in dark mode when using `darkIsTrueBlack` when using the new `surfaceMode`
+  property. For more information see Flutter SDK
   issue [90353](https://github.com/flutter/flutter/issues/90353).
-* **New:** Added new more flexible and powerful color branding feature for 
+
+ 
+* **New:** Added a more flexible and powerful alpha blending feature for 
   surface and background colors. The new properties in the `FlexColorScheme` 
-  factories `light` and `dark`, `surfaceMode` using enum `FlexSurfaceMode`, and
-  property `blendLevel` using enum `FlexBlendLevel` are recommended to be used 
-  instead of `surfaceStyle`. The `surfaceStyle` is still default and not yet
-  deprecated in current version, but will be deprecated in next version and 
-  later removed.
-* **New:** Major new feature. You can opt in on nice, slightly opinionated 
-  sub-themes with `FlexColorScheme.subThemesOptIn` by setting it to true. The
-  sub-themes provide quick parameters for easily adjusting the corner radius in
-  Widgets that use `Shape` and decoration that support changing its corner 
-  radius. With the sub-theme you can easily create a global theme with a 
-  consistent corner radius on all built-in widgets. The sub-themes also 
-  harmonizes a few other style, e.g. `ToggleButtons` to match the standard 
-  buttons size and design as far as possible with theming. Even the old 
-  deprecated buttons still get matching `ButtonThemeData`, as far as possible, 
-  in case you still use them.
-* **New:** Added `FlexThemeData` static extension on `ThemeData`. Themes can now
-  optionally be created with the convenience syntax `FlexThemeData.light` and
-  `FlexThemeData.dark`, instead of with `FlexColorScheme.light.toTheme` and
-  `FlexColorScheme.dark.toTheme`. The `toTheme` methods are still
-  available and works as before. They will not be deprecated, they are needed
-  for more elaborate sub-theming when using `FlexColorScheme` based themes. 
+  factories `light` and `dark` are `surfaceMode` using enum `FlexSurfaceMode`
+  and `blendLevel` `<int>`. Consider using them instead of previous `surfaceStyle`.
+  The surface alpha blend method `surfaceStyle` is still default, and not yet
+  deprecated, but may be so in later versions. It is not rally needed anymore,
+  but there was no major reason to break things by removing it either.
+* **New:** Major new feature; simple sub-theming of Flutter SDK UI widgets.  
+  * You can opt in on nice looking opinionated widget sub-themes with
+  `FlexColorScheme.useSubThemes` by setting it to true.
+  * You can also tweak these sub themes with quick and easy parameter 
+  values defined via the `FlexSubThemesData` class, passed in to 
+  `FlexColorScheme.subThemesData`.
+  * For example, the `FlexSubThemesData` provide parameters for easy adjustment 
+  of corner radius in Widgets that use `ShapeBorder` or decorations that
+  support changing the Widget's corner radius. With the sub-themes enabled you 
+  can easily create a theme with a consistent corner radius on all built-in 
+  widgets.
+  * The widget sub-themes also harmonize a few other styles, e.g. `ToggleButtons`
+  to match the standard buttons regarding size and design as far as possible.
+  * In case you still use the old SDK deprecated buttons, they also get 
+  `ButtonThemeData` that as far as possible match the same style. 
+* **New:** Added `FlexThemeData` static extension on `ThemeData`. 
+  * Themes can now optionally be created with the convenience syntax
+  `FlexThemeData.light` and `FlexThemeData.dark`, instead of with 
+  `FlexColorScheme.light().toTheme` and `FlexColorScheme.dark().toTheme`. 
+  * The `toTheme` method is still available and works as before. It will **not**
+    be deprecated. It is needed when doing elaborate custom sub-theming beyond
+    what is offered when using `FlexColorScheme` based automatic sub-themes. 
 * **New:** Added `textTheme` and `primaryTextTHeme` properties to 
-  `FlexColorScheme` to enable easier usage of custom `TextThemes` without the
-   need to add a custom `TextTheme` via a `copyWith` plus `merge` with the 
+  `FlexColorScheme` to enable easier setup of custom `TextThemes` without the
+   need to add a custom `TextTheme` via a `copyWith`, plus `merge` with the 
    default text theme.
-* **New:** Added `FlexColorScheme.dialogBackground` as a background surface that
-  can be controlled and themed separately. 
-* **New:** To `FlexColorScheme` factories `light` and `dark`, exposed 
+* **New:** Added `FlexColorScheme.dialogBackground` as a background surface 
+  color that can be controlled and themed separately. 
+* **New:** Added `appBarOpacity` to FlexColorScheme factories light() and dark().
+  With it, you can apply themed opacity to the app bar color to its selected 
+  style.
+* **New:** On the `FlexColorScheme` factories `light` and `dark`, exposed 
   the `Color` properties `primary`, `primaryVariant`, `secondary`, 
   `sedondaryVariant`, `appBarBackground` and `dialogBackground`.
   They all default to null, but if provided they can be used as override values
   to factory behaviors defined by `scheme`, `colors`, `appBarStyle`,
   `surfaceMode` and `surfaceStyle` that
-  otherwise in the factories define the colors for these properties.  
+  otherwise via the factories define the colors for these properties. If a value  
+  for one of the new direct color properties is used with the factory, it always
+  has the highest precedence.
 * **New:** Exposed boolean property `applyElevationOverlayColor`. It has the same
   function as the same property in `ThemeData`. It applies a semi-transparent 
   overlay color on Material surfaces to indicate elevation for dark themes.  
   In `FlexColorScheme` it defaults to true. In Flutter `ThemeData.from` it
   also default to true, but in `ThemeData` it defaults to false.
-  The property is just for convenience, so you can avoid a `copyWith` if 
-  you wish to turn it off.
+  The property is just available for convenience, so you can avoid a`copyWith` if 
+  you wish to turn it off. It is not necessarily needed or een desired when 
+  using strong alpha blends on surfaces in dark mode.
+  
 * **New:** All `FlexSchemeData` objects in `FlexColor` are exposed as static 
   const objects, making them easy to pick and reuse as const objects 
-  individually in custom color scheme lists or as input to `colors` property.
-  Previously only the individual color definitions were exposed.
-* **New:** Added extension `.blendAlpha()` on `Color` in `FlexColorExtensions`. 
-* **Change:** The `FlexColor.schemesList` is now a `const` for improved 
-  efficiency. 
+  individually in custom color scheme lists or as input to the `colors` property.
+  Previously only the individual color value definitions were exposed.
+* **New:** Added convenience extension `.blendAlpha()` on `Color` 
+  in `FlexColorExtensions`.
+
+* **New:** The `FlexThemeModeSwitch` got a bool property `hasTitle` that can be
+    set to `true` to remove its title entirely.
+* **New:** The `FlexThemeModeSwitch` got a `buttonOrder` property using enum
+  `FlexThemeModeButtonOrder` that you can use to define the order of its
+  light, system and dark theme mode buttons, in all possible combinations.
+
+
+* **Change:** The `FlexColor.schemesList` is now a `const` for improved
+  efficiency.
+
 
 * **TODO New:** Added convenience support for Flutter 2.5 full screen mode to
   `FlexColorScheme.themedSystemNavigationBar`. This brings the experimental
   support of transparent system navigation bar into the supported fold, as
-  far as Flutter SDK supports. Its function is based on support in used Android
-  SDK level, for more info see:
+  far as Flutter SDK supports it. Its function is based on support in used 
+  Android SDK level NN, for more info see: NN
+
 
 * **TODO New color schemes:** Added four new built-in color schemes.
   * **Blue whale** - Blue whale, jungle green and outrageous tango orange.
@@ -80,14 +108,36 @@ All notable changes to the **FlexColorScheme** package are documented here.
     Use enum value `FlexScheme.nnn` for easy access to it.
   * **TODO** - Nnn.
     Use enum value `FlexScheme.nnn` for easy access to it.
+  
 
-* **TODO Documentation:** Added a quick start guide and new example. Tutorial
-  examples as before, but using the new `FlexThemeData` syntax. Added a more 
-  complex example that also persists theme and its FlexColorScheme settings.
-  Some older documentation that is less relevant now was removed. 
-  Typos corrections.
+* **Documentation:** 
+  * The new main example is a complete quick start guide that doubles as 
+    "developers" hot reload based playground template. It has comments 
+    explaining what is going on.
+    If you skip reading the readme docs and tutorial, the example may help
+    to kick-start using FlexColorScheme and all its features. It shows most 
+    of the features in last tutorial example 5, but without any interactive UI.
+    You are the UI and can edit prop values and use hot-reload to see changes.
+  * All examples now use the new `FlexThemeData` extension syntax to create the
+    `ThemeData` and `surfaceMode` to define the alpha blended surfaces.
+  * Examples 2 to 5 also use the in Flutter 2.5 new skeleton architecture with
+    a ChangeNotifier based controller, AnimatedBuilder to listen to it and
+    an abstract service to get and persist the theme settings, with a concrete
+    in-memory implementation.
+* **TODO Documentation:**
+  * Examples 2 - 5 now also persist their settings with Shared Preferences or
+    Hive. (TODO)
+  * Some older documentation that is not relevant was removed, like older APIs
+    no longer described in read me, only in API docs.
+  * Almost all screenshot will need to be updated. (sigh)
+  * Typo review and corrections.
 
-* **TODO Tests:** Added tests for the new features. Total NNN tests, coverage 99.xx%.
+
+* **TODO Tests:** 
+  * Added tests for the new features.
+  * Total 1017 tests, 
+  * Coverage temporarily down to around 95%. 
+  * More tests to be added before release.
 
 ## [3.0.1] - July 1, 2021
 

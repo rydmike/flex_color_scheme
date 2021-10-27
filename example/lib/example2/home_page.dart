@@ -18,11 +18,11 @@ class HomePage extends StatelessWidget {
   const HomePage({
     Key? key,
     required this.flexSchemeData,
-    required this.themeController,
+    required this.controller,
   }) : super(key: key);
 
   final FlexSchemeData flexSchemeData;
-  final ThemeController themeController;
+  final ThemeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -38,31 +38,32 @@ class HomePage extends StatelessWidget {
       body: PageBody(
         constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
         child: ListView(
-          padding: const EdgeInsets.all(AppData.edgePadding),
+          padding: const EdgeInsets.all(AppData.edgeInsets),
           children: <Widget>[
             Text('Theme', style: headline4),
             const Text(
-              'This example shows how you can define your own '
+              'This example shows how to define your own '
               'FlexSchemeData and create a FlexColorScheme based theme '
-              'from it and toggle between light and dark mode.\n\n'
-              'The new opinionated widget sub-theming is ON. You can '
+              'from it, and toggle between light and dark mode.\n\n'
+              'The new opinionated widget theming is ON. You can '
               'turn it OFF to use default widget themes. '
               'A theme showcase displays the resulting theme using '
               'common Material widgets.',
             ),
-            // A 3-way theme mode toggle switch.
+            // A 3-way theme mode toggle switch that shows the color scheme.
             Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: AppData.edgePadding,
-                horizontal: AppData.edgePadding + 4,
+                vertical: AppData.edgeInsets,
+                horizontal: AppData.edgeInsets + 4,
               ),
               child: FlexThemeModeSwitch(
                 // Read the selected themeMode from the controller
-                themeMode: themeController.themeMode,
+                themeMode: controller.themeMode,
                 // Call the updateThemeMode method when user selects a mode.
-                onThemeModeChanged: themeController.setThemeMode,
+                onThemeModeChanged: controller.setThemeMode,
                 flexSchemeData: flexSchemeData,
-                optionButtonBorderRadius: themeController.useSubThemes ? 16 : 4,
+                optionButtonBorderRadius: controller.useSubThemes ? 16 : 4,
+                buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
               ),
             ),
             // Show theme name and description.
@@ -72,17 +73,17 @@ class HomePage extends StatelessWidget {
             ),
             // Show all key active theme colors.
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppData.edgePadding),
+              padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
               child: ShowThemeColors(),
             ),
             const SizedBox(height: 8),
             SwitchListTile.adaptive(
-              title: const Text('Use FlexColorScheme sub-theming'),
+              title: const Text('Use FlexColorScheme widget theming'),
               subtitle: const Text(
-                'Turn ON to enable opinionated sub-themes.',
+                'Turn ON to enable opinionated widget themes.',
               ),
-              value: themeController.useSubThemes,
-              onChanged: themeController.setUseSubThemes,
+              value: controller.useSubThemes,
+              onChanged: controller.setUseSubThemes,
             ),
             const Divider(),
             Text('Theme Showcase', style: headline4),

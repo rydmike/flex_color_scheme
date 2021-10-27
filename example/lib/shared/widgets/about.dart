@@ -49,8 +49,6 @@ void showAppAboutDialog(BuildContext context) {
         ),
       ],
     ),
-    // TODO(rydmike): Old icon image - remove comment and asset too?
-    // applicationIcon: const Image(image: AssetImage(App.icon)),
     applicationLegalese:
         '${AppData.copyright} ${AppData.author} ${AppData.license}',
     children: <Widget>[

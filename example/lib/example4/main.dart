@@ -8,21 +8,23 @@ import 'home_page.dart';
 // EXAMPLE 4)
 //
 // This example shows how to use all the built in color schemes in
-// FlexColorScheme to define themes from them and how you can define your own
+// FlexColorScheme to define themes from them and how to define your own
 // custom scheme colors and use them together with the predefined ones.
 //
-// We keep the custom color scheme we made in example 3 and add two more
-// custom schemes.
+// We now moved the color definitions to a separate color class called AppColor,
+// in its own file '/const/app_color.dart'. It includes the color definitions
+// we made in example 3, and adds two more custom schemes.
 //
-// The 2nd scheme we create by just defining primary color for dark and light
+// The 2nd scheme is created by just defining primary color for dark and light
 // scheme. The 3rd one we create by computing it from the light theme.
-// The example also uses medium strength branded background and surface colors.
-// A theme showcase widget shows the theme with several common Material widgets.
+// Primary color alpha blended background and surface colors is used.
 //
-// The color value definition and list of FlexSchemeData is tucked into
-// a static class as AppColor.schemes.
+// The color value definition and list of all built in FlexSchemeData plus our
+// custom definitions, are tucked into static list called schemes in AppColor.
 //
 // The Google font Noto Sans is used to show how to use custom fonts.
+//
+// A theme showcase widget shows the theme with several common Material widgets.
 //
 // A ThemeService and ThemeController is used to manage our
 // theme settings. This follows the example architecture you get when you
@@ -64,28 +66,39 @@ class DemoApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           scrollBehavior: AppScrollBehavior(),
           title: 'Example 4) All Plus Three Custom Themes',
-          // Define the light theme for the app, using current theme index.
+          // Define the light theme for the app, using current scheme index.
           theme: FlexThemeData.light(
+            // The definition of the list of color schemes to use we moved into
+            // a separate static class and list, we use the theme controller
+            // to just change the index of the used color scheme.
             colors: AppColor.schemes[themeController.schemeIndex].light,
-            // We use another surface branding mode, where the scaffold
-            // background gets a strong branding. This type is commonly used
-            // on web/desktop when  you wrap content on the scaffold in a
+            // Here we use another surface blend mode, where the scaffold
+            // background gets a strong blend. This type is commonly used
+            // on web/desktop when you wrap content on the scaffold in a
             // card that has a darker background.
             surfaceMode: FlexSurfaceMode.highScaffold,
             // Our content is not all wrapped in cards in this demo, so
             // we keep the blend level fairly low for good contrast.
-            blendLevel: FlexBlendLevel.five,
+            blendLevel: 5,
             appBarElevation: 0.5,
             useSubThemes: themeController.useSubThemes,
+            // In this example we use the values for visual density and font
+            // from a single static source, so we can change it easily there.
             visualDensity: AppData.visualDensity,
             fontFamily: AppData.font,
           ),
           // We do the exact same definition for the dark theme, but using
-          // FlexThemeData.dark() and the dark FlexSchemeColors instead.
+          // FlexThemeData.dark() and the dark FlexSchemeColors in our
+          // AppColor.schemes list instead.
           darkTheme: FlexThemeData.dark(
             colors: AppColor.schemes[themeController.schemeIndex].dark,
             surfaceMode: FlexSurfaceMode.highScaffold,
-            blendLevel: FlexBlendLevel.four,
+            // We go with a slightly stronger blend in dark mode. It is worth
+            // noticing, that in light mode, the alpha value used for the blends
+            // is the blend level value, but in dark mode it is 2x this value.
+            // Visually they match fairly well, but it depends on how saturated
+            // your dark mode primary color is.
+            blendLevel: 7,
             appBarElevation: 0.5,
             useSubThemes: themeController.useSubThemes,
             visualDensity: AppData.visualDensity,

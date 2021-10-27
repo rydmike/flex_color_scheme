@@ -42,9 +42,9 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used scheme index setting from mem in examples 4 and 5.
   ///
-  /// Defaults to 6, brand blues.
+  /// Defaults to 32, blue whale.
   @override
-  Future<int> schemeIndex() async => 6;
+  Future<int> schemeIndex() async => 32;
 
   /// Persists the used scheme setting to mem in examples 4 and 5.
   @override
@@ -92,7 +92,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used surface mode setting in example 5.
   @override
-  Future<FlexSurfaceMode> surfaceMode() async => FlexSurfaceMode.lowScaffold;
+  Future<FlexSurfaceMode> surfaceMode() async => FlexSurfaceMode.highBackground;
 
   /// Persists the used surface mode setting in example 5.
   @override
@@ -100,13 +100,13 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used surface blend level setting in example 5.
   ///
-  /// Defaults to [FlexBlendLevel.five].
+  /// Defaults to 12.
   @override
-  Future<FlexBlendLevel> blendLevel() async => FlexBlendLevel.five;
+  Future<int> blendLevel() async => 12;
 
   /// Persists the used surface blend level setting in example 5.
   @override
-  Future<void> saveBlendLevel(FlexBlendLevel value) async {}
+  Future<void> saveBlendLevel(int value) async {}
 
   /// Loads used app bar style for light theme setting in example 5.
   @override
@@ -126,7 +126,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used app bar opacity setting in example 5.
   ///
-  /// Defaults to 0.96, just a nice default effect for the example.
+  /// Defaults to 0.94, just a nice default effect for the example.
   @override
   Future<double> appBarOpacity() async => 0.94;
 
@@ -163,7 +163,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used bottom navigation bar opacity setting in example 5.
   ///
-  /// Defaults to 0.96, just a nice default effect for the example.
+  /// Defaults to 0.94, just a nice default effect for the example.
   @override
   Future<double> bottomNavigationBarOpacity() async => 0.94;
 
@@ -173,7 +173,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used tooltip style setting in example 5.
   @override
-  Future<bool> tooltipsMatchBackground() async => false;
+  Future<bool> tooltipsMatchBackground() async => true;
 
   /// Persists used tooltip style setting in example 5.
   @override

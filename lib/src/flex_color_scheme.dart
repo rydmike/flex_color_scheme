@@ -9,6 +9,8 @@ import 'flex_scheme.dart';
 import 'flex_sub_themes.dart';
 import 'flex_sub_themes_data.dart';
 
+// ignore_for_file: comment_references
+
 /// Enum for using predefined surface branding strengths in [FlexColorScheme]
 /// based themes.
 ///
@@ -122,8 +124,30 @@ enum FlexSurfaceMode {
   /// [highScaffoldVariantDialog].
   highSurface,
 
+  /// Increasing blend strengths in listed order, surface, background, scaffold.
+  ///
+  /// The blend strength increases on surfaces in this order:
+  /// * Surface & dialogs (1x) -> background (2x)-> Scaffold background (4x).
+  ///
+  /// Theme colorScheme.primary color is used as blend color on all surfaces.
+  ///
+  /// To get elevation overlay color in dark themes on all surfaces used by
+  /// [Material], use one of the modes where background and dialog color equals
+  /// the blend strength on surface color, like [flat], [lowScaffold],
+  /// [highScaffold], [highScaffold]. Other modes will only use elevation
+  /// overlay if their background happens to be equal to resulting
+  /// colorScheme.surface color. For more information
+  /// see issue: https://github.com/flutter/flutter/issues/90353
+  ///
+  /// When using very strong surface branding in dark mode, having an overlay
+  /// elevation color in dark mode is less critical, since the elevation
+  /// becomes partially visible via shadows and the surface may even have
+  /// another color tint if using e.g. [lowScaffoldVariantDialog] or
+  /// [highScaffoldVariantDialog].
+  lowSurfaceHighScaffold,
+
   /// All surfaces have same alpha blend strength, but scaffold background is
-  /// like in [highBackground], only at very high [FlexBlendLevel] does it get
+  /// like in [highBackground], only at very high blend levels does it get
   /// any blends.
   ///
   /// The blend strength definition:
@@ -158,7 +182,7 @@ enum FlexSurfaceMode {
   highScaffold,
 
   /// All surfaces have same alpha blend strength, but scaffold background is
-  /// like classic, only at very high [FlexBlendLevel] does it get any blends.
+  /// like classic, only at very high blend level does it get any blends.
   ///
   /// The blend strength definition:
   /// * Surface, dialogs, background (1x), scaffoldBackground (1/4x)
@@ -225,102 +249,9 @@ enum FlexSurfaceMode {
   /// Use your own custom surface and background blend style.
   ///
   /// Use this option and use the [FlexSchemeSurfaceColors.blend] constructor
-  /// to make your custom surface colors using the offered [FlexBlendLevel]
-  /// blend levels.
+  /// to make your custom surface colors using the applied blend levels.
   custom,
 }
-
-/// Enum describing the blend level strength of the blend color into the
-/// surface color.
-enum FlexBlendLevel {
-  /// No blend color in the surface color.
-  zero,
-
-  /// Level one: Alpha 0x01 in light mode and 0x02 in dark mode.
-  one,
-
-  /// Level two: Alpha 0x02 in light mode and 0x04 in dark mode.
-  two,
-
-  /// Level three: Alpha 0x03 in light mode and 0x06 in dark mode.
-  three,
-
-  /// Level four: Alpha 0x05 in light mode and 0x0A in dark mode.
-  four,
-
-  /// Level five: Alpha 0x06 in light mode and 0x0C in dark mode.
-  five,
-
-  /// Level six: Alpha 0x07 in light mode and 0x0E in dark mode.
-  six,
-
-  /// Level seven: Alpha 0x08 in light mode and 0x10 in dark mode.
-  seven,
-
-  /// Level eight: Alpha 0x0A in light mode and 0x24 in dark mode.
-  eight,
-
-  /// Level nine: Alpha 0x0C in light mode and 0x18 in dark mode.
-  nine,
-
-  /// Level ten: Alpha 0x0F in light mode and 0x1E in dark mode.
-  ten,
-
-  /// Level eleven: Alpha 0x11 in light mode and 0x22 in dark mode.
-  eleven,
-
-  /// Level twelve: Alpha 0x14 in light mode and 0x28 in dark mode.
-  twelve,
-
-  /// Level thirteen: Alpha 0x16 in light mode and 0x2C in dark mode.
-  thirteen,
-
-  /// Level fourteen: Alpha 0x19 in light mode and 0x32 in dark mode.
-  fourteen,
-
-  /// Level fifteen: Alpha 0x1C in light mode and 0x38 in dark mode.
-  fifteen,
-
-  /// Level sixteen: Alpha 0x1E in light mode and 0x3C in dark mode.
-  sixteen,
-
-  /// Level seventeen: Alpha 0x1F in light mode and 0x3E in dark mode.
-  seventeen,
-
-  /// Level eighteen: Alpha 0x21 in light mode and 0x42 in dark mode.
-  eighteen,
-
-  /// Level nineteen: Alpha 0x22 in light mode and 0x44 in dark mode.
-  nineteen,
-
-  /// Level nineteen: Alpha 0x23 in light mode and 0x46 in dark mode.
-  twenty,
-}
-
-/// Map with blend level enum values to alpha blend value.
-const Map<FlexBlendLevel, int> _kBlendToAlpha = <FlexBlendLevel, int>{
-  FlexBlendLevel.zero: 0x00,
-  FlexBlendLevel.one: 0x01,
-  FlexBlendLevel.two: 0x02,
-  FlexBlendLevel.three: 0x03,
-  FlexBlendLevel.four: 0x05,
-  FlexBlendLevel.five: 0x06,
-  FlexBlendLevel.six: 0x07,
-  FlexBlendLevel.seven: 0x08,
-  FlexBlendLevel.eight: 0x0A,
-  FlexBlendLevel.nine: 0x0C,
-  FlexBlendLevel.ten: 0x0F,
-  FlexBlendLevel.eleven: 0x11,
-  FlexBlendLevel.twelve: 0x14,
-  FlexBlendLevel.thirteen: 0x16,
-  FlexBlendLevel.fourteen: 0x19,
-  FlexBlendLevel.fifteen: 0x1C,
-  FlexBlendLevel.sixteen: 0x1E,
-  FlexBlendLevel.seventeen: 0x1F,
-  FlexBlendLevel.eighteen: 0x21,
-  FlexBlendLevel.nineteen: 0x22,
-  FlexBlendLevel.twenty: 0x23,
-};
 
 /// Light to dark mode alpha blend increase is 2x.
 ///
@@ -471,29 +402,29 @@ enum FlexTabBarStyle {
 /// its implementation. It uses the [ThemeData] factory directly under the hood
 /// to create the [ThemeData] object
 /// from [FlexColorScheme] and a [ColorScheme] that is used to return a
-/// slightly opinionated theme with the [toTheme] getter.
+/// theme with the [toTheme] getter.
 ///
 /// A more opinionated theme and style can be returned by setting
 /// [FlexColorScheme.useSubThemes] to true. These sub-themes can be easily
 /// configured further by passing a custom [FlexSubThemesData] to
-/// [FlexColorScheme.subThemesData]. A key offered sub-theme feature is an easy
-/// way to adjust the default corner radius on
+/// [FlexColorScheme.subThemesData]. A key offered sub-theme feature is
+/// an easy way to adjust the default corner radius on
 /// all sub-themes for widgets that supports it. The design is also a bit more
 /// flat and features primary tinted hover, focus, highlight and splash colors.
 ///
-/// It can be verbose to define nice color scheme directly with the class
+/// It can be verbose to define nice color scheme directly with this class
 /// default constructor. [FlexColorScheme] is primarily intended to be used
 /// with its two factory constructors [FlexColorScheme.light] and
 /// [FlexColorScheme.dark], that create nice schemes using defaults and
 /// computed color values. With the light and dark factories you can create
 /// beautiful toned themes from just a single color. The light and dark
 /// factories also provide properties that enables you to create themes with
-/// color branded surfaces automatically. You can customize all properties with
-/// the factories as well, but you usually don't have to.
+/// primary color alpha blended surfaces automatically. You can customize all
+/// properties with the factories as well, but you usually you don't have to.
 ///
 /// [FlexColorScheme] makes it easy to create themes that use color branded
-/// surfaces (background), that blend in a varying degree of a color (typically
-/// the primary color) into surfaces and backgrounds.
+/// surfaces (backgrounds), that uses alpha blend, to mix in a varying degree
+/// of a color (typically the primary color) into surfaces and backgrounds.
 /// Branded surface are described in the Material design guide, but Flutter
 /// offers no out of the box help to make such themes. With [FlexColorScheme]
 /// you can use a varying degree of surface and background branding levels for
@@ -514,12 +445,12 @@ enum FlexTabBarStyle {
 /// [tooltipsMatchBackground].
 @immutable
 class FlexColorScheme with Diagnosticable {
-  /// Default constructor that requires [brightness] and color scheme color
-  /// properties in order to make a fully defined color scheme for
+  /// Default constructor that requires [brightness] and four main color scheme
+  /// color properties in order to make a fully defined color scheme for
   /// a [ThemeData] object.
   ///
   /// For more convenient usage of [FlexColorScheme] consider using its two
-  /// factory constructors [FlexColorScheme.light] and [FlexColorScheme.dark]
+  /// factory constructors [FlexColorScheme.light] and [FlexColorScheme.dark],
   /// that can create schemes using defaults and computed color values, with
   /// custom overrides as needed.
   ///
@@ -565,7 +496,7 @@ class FlexColorScheme with Diagnosticable {
   /// The overall brightness of this color scheme.
   ///
   /// The [Brightness.light] denotes a theme for light theme mode and
-  /// [Brightness.dark] a drak theme mode.
+  /// [Brightness.dark] a dark theme mode.
   ///
   /// The brightness value is required and cannot be null.
   final Brightness brightness;
@@ -942,9 +873,18 @@ class FlexColorScheme with Diagnosticable {
   /// https://github.com/flutter/flutter/issues/90353
   final bool applyElevationOverlayColor;
 
-  /// Set to true to opt-in on using additional opinionated sub-themes.
+  /// Set to true to opt in on using additional opinionated widget sub-themes.
   ///
-  /// When opting in, opinionated sub-themes are provided for:
+  /// By default [FlexThemeData.light], [FlexThemeData.dark] and
+  /// [FlexColorScheme.toTheme], tries to do as
+  /// little as they need to just provide a consistent color schemed theme.
+  ///
+  /// By opting in via [useSubThemes] you get an opinionated set of widget
+  /// sub-themes applied. They can be conveniently customized via the
+  /// [subThemesData] property, that holds quick and easy sub-theme
+  /// configuration values in the data class [FlexSubThemesData].
+  ///
+  /// Opinionated sub-themes are provided for:
   /// * [BottomSheet]
   /// * [BottomNavigationBar]
   /// * [Card]
@@ -959,16 +899,14 @@ class FlexColorScheme with Diagnosticable {
   /// * A custom [ButtonTextTheme] still provides matching styling to support
   ///   the deprecated legacy buttons if they are used.
   ///
-  /// The sub-themes are a convenient way to opt-in on customized corner
-  /// radius for all Widgets using above themes. By opting in you can set
-  /// corner radius for all above Widgets to same corner radius in one go.
-  /// There are also additional styling made to make widgets have a more
-  /// consistent style.
+  /// The sub-themes are e.g. a convenient way to opt-in on customized corner
+  /// radius on Widgets using above themes. By opting in you can set corner
+  /// radius for all above Widgets to same corner radius in one go.
   ///
-  /// See [FlexSubThemes] and [FlexSubThemesData] for more information.
+  /// Defaults to false.
   final bool useSubThemes;
 
-  /// Optional configuration parameters for the opt-in sub-themes.
+  /// Optional configuration parameters for the opt-in widget sub-themes.
   ///
   /// If you opt-in to use the opinionated sub-theming offered by
   /// [FlexColorScheme] you can also configure them by passing
@@ -1112,8 +1050,12 @@ class FlexColorScheme with Diagnosticable {
     /// When `surfaceMode` is used, this defines the blend level strength used
     /// by the surface mode.
     ///
-    /// Defaults to `FlexBlendLevel.three`.
-    final FlexBlendLevel blendLevel = FlexBlendLevel.three,
+    /// In light mode the blend level value equals the alpha value in the
+    /// alpha blends for the surfaces, in dark mode, 2x the blend value
+    /// is used for alpha.
+    ///
+    /// Defaults to 10.
+    final int blendLevel = 10,
 
     /// Style used to define the themed color of the AppBar background color.
     ///
@@ -1560,9 +1502,18 @@ class FlexColorScheme with Diagnosticable {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
-    /// Set to true to opt-in on using additional opinionated sub-themes.
+    /// Set to true to opt in on using additional opinionated widget sub-themes.
     ///
-    /// When opting in, opinionated sub-themes are provided for:
+    /// By default [FlexThemeData.light], [FlexThemeData.dark] and
+    /// [FlexColorScheme.toTheme], tries to do as
+    /// little as they need to just provide a consistent color schemed theme.
+    ///
+    /// By opting in via [useSubThemes] you get an opinionated set of widget
+    /// sub-themes applied. They can be conveniently customized via the
+    /// [subThemesData] property, that holds quick and easy sub-theme
+    /// configuration values in the data class [FlexSubThemesData].
+    ///
+    /// Opinionated sub-themes are provided for:
     /// * [BottomSheet]
     /// * [BottomNavigationBar]
     /// * [Card]
@@ -1577,16 +1528,14 @@ class FlexColorScheme with Diagnosticable {
     /// * A custom [ButtonTextTheme] still provides matching styling to support
     ///   the deprecated legacy buttons if they are used.
     ///
-    /// The sub-themes are a convenient way to opt-in on customized corner
-    /// radius for all Widgets using above themes. By opting in you can set
-    /// corner radius for all above Widgets to same corner radius in one go.
-    /// There are also additional styling made to make widgets have a more
-    /// consistent style.
+    /// The sub-themes are e.g. a convenient way to opt-in on customized corner
+    /// radius on Widgets using above themes. By opting in you can set corner
+    /// radius for all above Widgets to same corner radius in one go.
     ///
-    /// See [FlexSubTheme] and [FlexSubThemeData] for more information.
+    /// Defaults to false.
     final bool useSubThemes = false,
 
-    /// Optional configuration parameters for the opt-in sub-themes.
+    /// Optional configuration parameters for the opt in sub-themes.
     ///
     /// If you opt-in to use the opinionated sub-theming offered by
     /// [FlexColorScheme] you can also configure them by passing
@@ -1604,6 +1553,11 @@ class FlexColorScheme with Diagnosticable {
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4');
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
+    assert(
+      blendLevel >= 0 && blendLevel <= 40,
+      'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
+      'not produce results that are visually very appealing or useful.',
+    );
     assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
     assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
         'Bottom AppBar elevation must be null or must be >= 0.');
@@ -1882,8 +1836,12 @@ class FlexColorScheme with Diagnosticable {
     /// When `surfaceMode` is used, this defines the blend level strength used
     /// by the surface mode.
     ///
-    /// Defaults to FlexBlendLevel.three,
-    final FlexBlendLevel blendLevel = FlexBlendLevel.three,
+    /// In light mode the blend level value equals the alpha value in the
+    /// alpha blends for the surfaces, in dark mode, 2x the blend value
+    /// is used for alpha.
+    ///
+    /// Defaults to 10.
+    final int blendLevel = 10,
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
@@ -2343,9 +2301,18 @@ class FlexColorScheme with Diagnosticable {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
-    /// Set to true to opt-in on using additional opinionated sub-themes.
+    /// Set to true to opt in on using additional opinionated widget sub-themes.
     ///
-    /// When opting in, opinionated sub-themes are provided for:
+    /// By default [FlexThemeData.light], [FlexThemeData.dark] and
+    /// [FlexColorScheme.toTheme], tries to do as
+    /// little as they need to just provide a consistent color schemed theme.
+    ///
+    /// By opting in via [useSubThemes] you get an opinionated set of widget
+    /// sub-themes applied. They can be conveniently customized via the
+    /// [subThemesData] property, that holds quick and easy sub-theme
+    /// configuration values in the data class [FlexSubThemesData].
+    ///
+    /// Opinionated sub-themes are provided for:
     /// * [BottomSheet]
     /// * [BottomNavigationBar]
     /// * [Card]
@@ -2360,16 +2327,14 @@ class FlexColorScheme with Diagnosticable {
     /// * A custom [ButtonTextTheme] still provides matching styling to support
     ///   the deprecated legacy buttons if they are used.
     ///
-    /// The sub-themes are a convenient way to opt-in on customized corner
-    /// radius for all Widgets using above themes. By opting in you can set
-    /// corner radius for all above Widgets to same corner radius in one go.
-    /// There are also additional styling made to make widgets have a more
-    /// consistent style.
+    /// The sub-themes are e.g. a convenient way to opt-in on customized corner
+    /// radius on Widgets using above themes. By opting in you can set corner
+    /// radius for all above Widgets to same corner radius in one go.
     ///
-    /// See [FlexSubTheme] and [FlexSubThemeData] for more information.
+    /// Defaults to false.
     final bool useSubThemes = false,
 
-    /// Optional configuration parameters for the opt-in sub-themes.
+    /// Optional configuration parameters for the opt in sub-themes.
     ///
     /// If you opt-in to use the opinionated sub-theming offered by
     /// [FlexColorScheme] you can also configure them by passing
@@ -2387,6 +2352,11 @@ class FlexColorScheme with Diagnosticable {
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
+    assert(
+      blendLevel >= 0 && blendLevel <= 40,
+      'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
+      'not produce results that are visually very appealing or useful.',
+    );
     assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
     assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
         'Bottom AppBar elevation must be null or must be >= 0.');
@@ -2983,10 +2953,10 @@ class FlexColorScheme with Diagnosticable {
   ///    but it does not go so well together with `scaffoldBackground`, which
   ///    is the reason why it has its own color value in this implementation.
   ///
-  ///  * The `dialogBackgroundColor` uses the `ColorScheme.surface` color
-  ///    instead of the `ColorScheme.background`. The `background` color needed
-  ///    the strongest branding when branding is used, but this did not look
-  ///    so good on dialogs, so its color choice was changed to `surface`
+  ///  * The default `dialogBackgroundColor` uses the `ColorScheme.surface`
+  ///    color instead of the `ColorScheme.background`. The `background` color
+  ///    needed the strongest branding when branding is used, but this did not
+  ///    look so good on dialogs, so its color choice was changed to `surface`
   ///    instead, that gets lighter branding in FlexColorScheme when it is
   ///    used. With standard Material surface colors the `background` and
   ///    `surface` colors are the same, so there is no difference when using
@@ -3106,9 +3076,11 @@ class FlexColorScheme with Diagnosticable {
   ///   theme that is also designed for AppBar usage.
   ///
   /// * The [BottomNavigationBarThemeData] uses color scheme primary color for
-  ///   the selected item. Flutter defaults to secondary color. Primary color
+  ///   the selected item in both light and dark theme. Flutter SDK defaults
+  ///   to secondary color in dark mode. Using only primary color
   ///   is a design used on iOS by default for the bottom navigation bar. We
-  ///   agree and think it looks better as the default choice for apps.
+  ///   agree and think it looks better as the default choice for apps also
+  ///   in dark mode.
   ///
   /// * Default tooltip theme in Flutter is currently a bit flawed on desktop
   ///   and web, because it defaults to using a very small font (10 dp).
@@ -4137,7 +4109,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     final FlexSurfaceMode surfaceMode = FlexSurfaceMode.highBackground,
 
     /// The the blend level strength used for the mode.
-    final FlexBlendLevel blendLevel = FlexBlendLevel.zero,
+    final int blendLevel = 0,
 
     /// The colors used to blend into surfaces when using `surfaceMode` mode
     /// based styles and modes.
@@ -4174,6 +4146,15 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     /// to construct surface colors with custom base surface colors.
     FlexSchemeSurfaceColors? surfaceColors,
   }) {
+    assert(
+        blendLevel >= 0 && blendLevel <= 40,
+        'Only blend levels from 0 to 40 '
+        'are allowed. Very high alpha blend levels may not produce results '
+        'that are visually very appealing or useful.');
+    int _blendLevel = blendLevel;
+    // If above happen in none debug mode we use 0, no blends.
+    if (blendLevel < 0 || blendLevel > 40) _blendLevel = 0;
+
     final bool isLight = brightness == Brightness.light;
 
     // We get scheme default blend in colors via brightness and Material
@@ -4219,13 +4200,14 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 dialogBackground: FlexColor.materialDarkSurface,
               ));
 
-    // If using `highBackground` or `highSurface` and `blendLevel` is zero, we
-    // use Material default surfaces. This is the same style as used in
-    // versions before 4.0 when using `surfaceStyle` based surfaces and no
-    // blends via `FlexSurface.material`.
+    // If using `highBackground` or `highSurface` or `lowSurfaceHighScaffold`
+    // and `_blendLevel` is zero, we use Material default surfaces.
+    // This is the same style as used in versions before 4.0 when using
+    // `surfaceStyle` based surfaces and no blends via `FlexSurface.material`.
     if (surfaceMode == FlexSurfaceMode.highBackground ||
-        surfaceMode == FlexSurfaceMode.highSurface) {
-      if (blendLevel == FlexBlendLevel.zero) {
+        surfaceMode == FlexSurfaceMode.highSurface ||
+        surfaceMode == FlexSurfaceMode.lowSurfaceHighScaffold) {
+      if (_blendLevel == 0) {
         if (isLight) {
           surface = const FlexSchemeSurfaceColors(
             surface: FlexColor.materialLightSurface,
@@ -4242,7 +4224,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           );
         }
       } else {
-        // For other `blendLevel` values than `FlexBlendLevel.zero` we use the
+        // For other `_blendLevel` values than `0` we use the
         // surface color defined by [FlexColor] surfaces. They differ slightly
         // from Material starting colors to provide better blend effects.
         // White is slightly off-white for background and in dark mode
@@ -4275,7 +4257,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     // and requires stronger blend percentage, we use 2x via _lightToDarkFactor.
     final int _modeFactor = isLight ? 1 : _kLightToDarkFactor;
     // The base alpha value for mixing our blend color into each surface.
-    int _surfaceAlpha = _kBlendToAlpha[blendLevel]! * _modeFactor;
+    int _surfaceAlpha = _blendLevel * _modeFactor;
     // Dialog alpha defaults to surface alpha.
     int _dialogAlpha = _surfaceAlpha;
     // Background alpha defaults to 2x surface alpha.
@@ -4290,6 +4272,11 @@ class FlexSchemeSurfaceColors with Diagnosticable {
       _backgroundAlpha = _surfaceAlpha;
       _surfaceAlpha = _surfaceAlpha * 2;
       _dialogAlpha = _surfaceAlpha;
+    }
+
+    // Blend level for mode `lowSurfaceHighScaffold`. Change scaffold alpha
+    if (surfaceMode == FlexSurfaceMode.lowSurfaceHighScaffold) {
+      _scaffoldAlpha = _surfaceAlpha * 4;
     }
 
     // In mode `flat`, we use FlexColor default surface color on all surfaces.

@@ -160,7 +160,7 @@ const double kThickBorderWidth = 2;
 /// [ToggleButtons].
 const double kThinBorderWidth = 1.5;
 
-// TODO(rydmike): Consider adding SDK default values to doc comments below.
+// TODO(rydmike): For ref, consider adding SDK defaults to doc comments below.
 
 /// Fill color opacity for [InputDecorator] when fill color is not specified.
 const double kFillColorOpacityDefault = 0.06;

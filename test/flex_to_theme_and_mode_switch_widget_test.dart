@@ -8,12 +8,14 @@ import 'package:flutter_test/flutter_test.dart';
 //
 //****************************************************************************
 void main() {
-  group('FTMS1: WITH FlexThemeModeSwitch LightMode', () {
+  group('FTMS1 LDS: WITH FlexThemeModeSwitch LightMode LightDarkSystem', () {
     debugDefaultTargetPlatformOverride = null;
 
     testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode',
         (WidgetTester tester) async {
-      await tester.pumpWidget(const ThemeSwitchApp());
+      await tester.pumpWidget(const ThemeSwitchApp(
+        order: FlexThemeModeButtonOrder.lightDarkSystem,
+      ));
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -64,9 +66,194 @@ void main() {
     });
   });
 
-  group('FTMS2: WITH FlexThemeModeSwitch DarkMode', () {
+  group('FTMS1 LSD: WITH FlexThemeModeSwitch LightMode LightSystemDark', () {
     debugDefaultTargetPlatformOverride = null;
-    testWidgets('FTMS2.01: Finds FlexThemeModeSwitch in DarkMode',
+
+    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const ThemeSwitchApp(
+        order: FlexThemeModeButtonOrder.lightSystemDark,
+      ));
+
+      // EXPECT: That we find the built MaterialApp.
+      final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
+      await tester.pump();
+      expect(theApp, findsOneWidget);
+
+      // EXPECT: That it STARTED in light theme mode.
+      // ignore: prefer_function_declarations_over_variables
+      final WidgetPredicate lightMaterialApp = (Widget widget) =>
+          widget is MaterialApp && widget.themeMode == ThemeMode.light;
+      expect(find.byWidgetPredicate(lightMaterialApp), findsOneWidget);
+
+      // EXPECT: That we find a theme mode 3-way switch.
+      final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
+      await tester.tap(themeSwitch);
+      await tester.pumpAndSettle();
+      expect(themeSwitch, findsOneWidget);
+
+      // EXPECT: That we find a light theme mode button
+      final Finder lightSwitch = find.bySemanticsLabel('LIGHT');
+      await tester.tap(lightSwitch);
+      await tester.pumpAndSettle();
+      expect(lightSwitch, findsOneWidget);
+
+      // EXPECT: That we find a dark theme mode button
+      final Finder darkSwitch = find.bySemanticsLabel('DARK');
+      await tester.tap(darkSwitch);
+      await tester.pumpAndSettle();
+      expect(darkSwitch, findsOneWidget);
+
+      // EXPECT: That after the DARK theme mode TAP the app is in DARK mode.
+      // ignore: prefer_function_declarations_over_variables
+      final WidgetPredicate darkMaterialApp = (Widget widget) =>
+          widget is MaterialApp && widget.themeMode == ThemeMode.dark;
+      expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
+
+      // EXPECT: That we find a system theme mode button
+      final Finder systemSwitch = find.bySemanticsLabel('SYSTEM');
+      await tester.tap(systemSwitch);
+      await tester.pumpAndSettle();
+      expect(systemSwitch, findsOneWidget);
+
+      // EXPECT: That we find a single option button.
+      final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.tap(optionButton, warnIfMissed: false);
+      await tester.pumpAndSettle();
+      expect(optionButton, findsOneWidget);
+    });
+  });
+
+  group('FTMS1 DLS: WITH FlexThemeModeSwitch LightMode DarkLightSystem', () {
+    debugDefaultTargetPlatformOverride = null;
+
+    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const ThemeSwitchApp(
+        order: FlexThemeModeButtonOrder.darkLightSystem,
+      ));
+
+      // EXPECT: That we find the built MaterialApp.
+      final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
+      await tester.pump();
+      expect(theApp, findsOneWidget);
+
+      // EXPECT: That we find a Text with 'Theme mode'.
+      final Finder textThemeMode = find.text('Theme mode');
+      await tester.pump();
+      expect(textThemeMode, findsOneWidget);
+
+      // EXPECT: That it STARTED in light theme mode.
+      // ignore: prefer_function_declarations_over_variables
+      final WidgetPredicate lightMaterialApp = (Widget widget) =>
+          widget is MaterialApp && widget.themeMode == ThemeMode.light;
+      expect(find.byWidgetPredicate(lightMaterialApp), findsOneWidget);
+
+      // EXPECT: That we find a theme mode 3-way switch.
+      final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
+      await tester.tap(themeSwitch);
+      await tester.pumpAndSettle();
+      expect(themeSwitch, findsOneWidget);
+
+      // EXPECT: That we find a light theme mode button
+      final Finder lightSwitch = find.bySemanticsLabel('LIGHT');
+      await tester.tap(lightSwitch);
+      await tester.pumpAndSettle();
+      expect(lightSwitch, findsOneWidget);
+
+      // EXPECT: That we find a dark theme mode button
+      final Finder darkSwitch = find.bySemanticsLabel('DARK');
+      await tester.tap(darkSwitch);
+      await tester.pumpAndSettle();
+      expect(darkSwitch, findsOneWidget);
+
+      // EXPECT: That after the DARK theme mode TAP the app is in DARK mode.
+      // ignore: prefer_function_declarations_over_variables
+      final WidgetPredicate darkMaterialApp = (Widget widget) =>
+          widget is MaterialApp && widget.themeMode == ThemeMode.dark;
+      expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
+
+      // EXPECT: That we find a system theme mode button
+      final Finder systemSwitch = find.bySemanticsLabel('SYSTEM');
+      await tester.tap(systemSwitch);
+      await tester.pumpAndSettle();
+      expect(systemSwitch, findsOneWidget);
+
+      // EXPECT: That we find a single option button.
+      final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.tap(optionButton, warnIfMissed: false);
+      await tester.pumpAndSettle();
+      expect(optionButton, findsOneWidget);
+    });
+  });
+
+  group('FTMS1 DSL: WITH FlexThemeModeSwitch LightMode DarkSystemLight', () {
+    debugDefaultTargetPlatformOverride = null;
+
+    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const ThemeSwitchApp(
+        order: FlexThemeModeButtonOrder.darkSystemLight,
+        title: Text('TITLE'),
+      ));
+
+      // EXPECT: That we find the built MaterialApp.
+      final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
+      await tester.pump();
+      expect(theApp, findsOneWidget);
+
+      // EXPECT: That we find a Text with 'TITLE' since we added custom title.
+      final Finder textThemeMode = find.text('TITLE');
+      await tester.pump();
+      expect(textThemeMode, findsOneWidget);
+
+      // EXPECT: That it STARTED in light theme mode.
+      // ignore: prefer_function_declarations_over_variables
+      final WidgetPredicate lightMaterialApp = (Widget widget) =>
+          widget is MaterialApp && widget.themeMode == ThemeMode.light;
+      expect(find.byWidgetPredicate(lightMaterialApp), findsOneWidget);
+
+      // EXPECT: That we find a theme mode 3-way switch.
+      final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
+      await tester.tap(themeSwitch);
+      await tester.pumpAndSettle();
+      expect(themeSwitch, findsOneWidget);
+
+      // EXPECT: That we find a light theme mode button
+      final Finder lightSwitch = find.bySemanticsLabel('LIGHT');
+      await tester.tap(lightSwitch);
+      await tester.pumpAndSettle();
+      expect(lightSwitch, findsOneWidget);
+
+      // EXPECT: That we find a dark theme mode button
+      final Finder darkSwitch = find.bySemanticsLabel('DARK');
+      await tester.tap(darkSwitch);
+      await tester.pumpAndSettle();
+      expect(darkSwitch, findsOneWidget);
+
+      // EXPECT: That after the DARK theme mode TAP the app is in DARK mode.
+      // ignore: prefer_function_declarations_over_variables
+      final WidgetPredicate darkMaterialApp = (Widget widget) =>
+          widget is MaterialApp && widget.themeMode == ThemeMode.dark;
+      expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
+
+      // EXPECT: That we find a system theme mode button
+      final Finder systemSwitch = find.bySemanticsLabel('SYSTEM');
+      await tester.tap(systemSwitch);
+      await tester.pumpAndSettle();
+      expect(systemSwitch, findsOneWidget);
+
+      // EXPECT: That we find a single option button.
+      final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.tap(optionButton, warnIfMissed: false);
+      await tester.pumpAndSettle();
+      expect(optionButton, findsOneWidget);
+    });
+  });
+
+  group('FTMS2 LDS: WITH FlexThemeModeSwitch DarkMode LightDarkSystem', () {
+    debugDefaultTargetPlatformOverride = null;
+    testWidgets('FTMS2.01: Finds FlexThemeModeSwitch in DarkMode no System btn',
         (WidgetTester tester) async {
       await tester.pumpWidget(const ThemeSwitchApp(
         themeMode: ThemeMode.dark,
@@ -76,12 +263,18 @@ void main() {
         labelDark: 'dark',
         labelSystem: 'system',
         selected: false,
+        hasTitle: false,
       ));
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
       await tester.pump();
       expect(theApp, findsOneWidget);
+
+      // EXPECT: That we find no Text with 'Theme mode' when it has no title.
+      final Finder textThemeMode = find.text('Theme mode');
+      await tester.pump();
+      expect(textThemeMode, findsNothing);
 
       // EXPECT: That it STARTED in dark theme mode.
       // ignore: prefer_function_declarations_over_variables
@@ -91,7 +284,7 @@ void main() {
 
       // EXPECT: That we find a theme mode 3-way switch.
       final Finder themeSwitch = find.byKey(const ValueKey<String>('switch'));
-      await tester.tap(themeSwitch);
+      await tester.tap(themeSwitch, warnIfMissed: false);
       await tester.pumpAndSettle();
       expect(themeSwitch, findsOneWidget);
 
@@ -140,6 +333,11 @@ void main() {
       await tester.pump();
       expect(theApp, findsOneWidget);
 
+      // EXPECT: That we find a Text with 'Theme mode'.
+      final Finder textThemeMode = find.text('Theme mode');
+      await tester.pump();
+      expect(textThemeMode, findsOneWidget);
+
       // EXPECT: That it STARTED in system theme mode.
       // ignore: prefer_function_declarations_over_variables
       final WidgetPredicate systemMaterialApp = (Widget widget) =>
@@ -169,12 +367,6 @@ void main() {
       final WidgetPredicate darkMaterialApp = (Widget widget) =>
           widget is MaterialApp && widget.themeMode == ThemeMode.dark;
       expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
-
-      // EXPECT: That we find a single option button.
-      final Finder optionButton = find.byKey(const ValueKey<String>('option'));
-      await tester.tap(optionButton, warnIfMissed: false);
-      await tester.pumpAndSettle();
-      expect(optionButton, findsOneWidget);
     });
   });
 }
@@ -182,21 +374,27 @@ void main() {
 class ThemeSwitchApp extends StatefulWidget {
   const ThemeSwitchApp({
     this.themeMode = ThemeMode.light,
+    this.order = FlexThemeModeButtonOrder.lightDarkSystem,
     this.showSystemMode = true,
     this.labelAbove = true,
     this.labelLight = 'LIGHT',
     this.labelDark = 'DARK',
     this.labelSystem = 'SYSTEM',
     this.selected = true,
+    this.hasTitle = true,
+    this.title,
     Key? key,
   }) : super(key: key);
   final ThemeMode themeMode;
   final bool showSystemMode;
+  final FlexThemeModeButtonOrder order;
   final bool labelAbove;
   final String labelLight;
   final String labelDark;
   final String labelSystem;
   final bool selected;
+  final bool hasTitle;
+  final Widget? title;
 
   @override
   _ThemeSwitchAppState createState() => _ThemeSwitchAppState();
@@ -238,6 +436,9 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
                 labelDark: widget.labelDark,
                 labelSystem: widget.labelSystem,
                 showSystemMode: widget.showSystemMode,
+                buttonOrder: widget.order,
+                title: widget.title,
+                hasTitle: widget.hasTitle,
                 onThemeModeChanged: (ThemeMode value) {
                   setState(() {
                     mode = value;

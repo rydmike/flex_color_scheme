@@ -34,35 +34,40 @@ class HomePage extends StatelessWidget {
       body: PageBody(
         constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
         child: ListView(
-          padding: const EdgeInsets.all(AppData.edgePadding),
+          padding: const EdgeInsets.all(AppData.edgeInsets),
           children: <Widget>[
             Text('Theme', style: headline4),
             const Text(
               'This example shows how to use three built-in '
-              'color schemes, and a custom color scheme as selectable '
+              'color schemes, plus one custom color scheme as selectable '
               'themes in an application.\n\n'
-              'The example uses primary color branded surface colors. '
-              'The new opinionated widget sub-theming is ON. You can '
+              'The example uses primary color alpha blended surface colors. '
+              'The new opinionated widget theming is ON. You can '
               'turn it OFF to use default widget themes. '
               'A theme showcase displays the resulting theme using '
               'common Material widgets.',
             ),
             const SizedBox(height: 8),
-            // A 3-way theme mode toggle switch.
+            // The content is wrapped in a card so we can see the
+            // theme's surface blend impact better via the Card widget.
             Card(
               child: Column(
                 children: <Widget>[
+                  // A 3-way theme mode toggle switch that shows the scheme.
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: AppData.edgePadding,
-                      horizontal: AppData.edgePadding + 4,
+                      vertical: AppData.edgeInsets,
+                      horizontal: AppData.edgeInsets + 4,
                     ),
                     child: FlexThemeModeSwitch(
                       themeMode: controller.themeMode,
                       onThemeModeChanged: controller.setThemeMode,
                       flexSchemeData: flexSchemeData,
+                      // This is not an SDK BorderShape themed widget, but we
+                      // can pass it property values to make it match.
                       optionButtonBorderRadius:
                           controller.useSubThemes ? 16 : 4,
+                      buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
                     ),
                   ),
                   ListTile(
@@ -72,7 +77,6 @@ class HomePage extends StatelessWidget {
                       onChanged: controller.setUsedScheme,
                     ),
                   ),
-
                   // Show theme name and description.
                   ListTile(
                     title: Text('${flexSchemeData.name} theme'),
@@ -81,14 +85,14 @@ class HomePage extends StatelessWidget {
                   // Show all key active theme colors.
                   const Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: AppData.edgePadding),
+                        EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
                     child: ShowThemeColors(),
                   ),
                   const SizedBox(height: 8),
                   SwitchListTile.adaptive(
-                    title: const Text('Use FlexColorScheme sub-theming'),
+                    title: const Text('Use FlexColorScheme widget theming'),
                     subtitle: const Text(
-                      'Turn ON to enable opinionated sub-themes.',
+                      'Turn ON to enable opinionated widget themes.',
                     ),
                     value: controller.useSubThemes,
                     onChanged: controller.setUseSubThemes,

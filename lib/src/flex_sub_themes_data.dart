@@ -5,10 +5,10 @@ import 'flex_constants.dart';
 
 // ignore_for_file: comment_references
 
-/// Parameters used by [FlexColorScheme] to configure [FlexSubTheme] when
+/// Parameters used by [FlexColorScheme] to configure [FlexSubThemes] when
 /// [FlexColorScheme.useSubThemes] is true.
 ///
-/// The main use case for [FlexSubTheme] and the [FlexSubThemesData] is for
+/// The main use case for [FlexSubThemes] and the [FlexSubThemesData] is for
 /// easy to use customization of default corner radius on all Flutter SDK
 /// Widgets and elements that supports corner radius either via [ShapeBorder]
 /// or [BorderRadiusGeometry].
@@ -28,7 +28,7 @@ import 'flex_constants.dart';
 /// in the SDK.
 @immutable
 class FlexSubThemesData with Diagnosticable {
-  /// Default constructor, used to make an immutable FlexSubThemeConfig object.
+  /// Default constructor, used to make an immutable FlexSubThemesData object.
   const FlexSubThemesData({
     this.themedEffects = true,
     this.cornerRadius = kCornerRadius,
@@ -85,7 +85,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool themedEffects;
 
-  /// Corner radius of all widgets covered by `FlexSubTheme` sub-theme.
+  /// Corner radius of all widgets covered by `FlexSubThemes` sub-theme.
   ///
   /// These widgets will get their shape corner rounding from [cornerRadius]:
   /// * [BottomSheet]
