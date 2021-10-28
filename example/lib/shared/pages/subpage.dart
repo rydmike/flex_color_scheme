@@ -37,8 +37,11 @@ class _SubpageState extends State<Subpage> {
     final double bottomPadding =
         media.padding.bottom + kBottomNavigationBarHeight;
 
+    final bool isNarrow = media.size.width < AppData.phoneBreakpoint;
+    final double sideMargin = isNarrow ? 8 : AppData.edgeInsets;
+
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         // For scrolling behind the app bar.
         extendBodyBehindAppBar: true,
@@ -50,8 +53,7 @@ class _SubpageState extends State<Subpage> {
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(text: 'HOME'),
-              Tab(text: 'FAVORITES'),
-              Tab(text: 'PROFILE'),
+              Tab(text: 'FEED'),
               Tab(text: 'SETTINGS'),
             ],
           ),
@@ -59,9 +61,9 @@ class _SubpageState extends State<Subpage> {
         body: PageBody(
           child: ListView(
             padding: EdgeInsets.fromLTRB(
-              AppData.edgeInsets,
+              sideMargin,
               topPadding + AppData.edgeInsets,
-              AppData.edgeInsets,
+              sideMargin,
               AppData.edgeInsets + bottomPadding,
             ),
             children: <Widget>[

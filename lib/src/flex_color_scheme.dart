@@ -74,7 +74,7 @@ enum FlexSurfaceMode {
   /// Increasing blend strengths in order scaffold, surface, background.
   ///
   /// The blend strength increases on surfaces in this order:
-  /// * Scaffold background (1/4x)-> surface & dialogs (1x)-> background (2x)
+  /// * Scaffold background (1/3x)-> surface & dialogs (1x)-> background (2x)
   ///
   /// Theme colorScheme.primary color is used as blend color on all surfaces.
   ///
@@ -112,9 +112,9 @@ enum FlexSurfaceMode {
   ///
   /// Since there is not an exact 2:1 relationship between background and
   /// surface, when using the older [FlexSurface] based style, nor is
-  /// scaffoldBackground : surface always a 1 : 4 relationship. The old and new
+  /// scaffoldBackground : surface always a 1 : 3 relationship. The old and new
   /// designs do never align exactly at any blendLevel, but the above values
-  /// produce visually very close results.
+  /// produce visually similar results.
   ///
   /// To get elevation overlay color in dark themes on all surfaces used by
   /// [Material], use one of the modes where background and dialog color equals
@@ -134,7 +134,7 @@ enum FlexSurfaceMode {
   /// Increasing blend strengths in listed order, scaffold, background, surface.
   ///
   /// The blend strength increases on surfaces in this order:
-  /// * Scaffold background (1/4x)-> background (1x)-> surface & dialogs (2x)
+  /// * Scaffold background (1/3x)-> background (1x)-> surface & dialogs (2x)
   ///
   /// Theme colorScheme.primary color is used as blend color on all surfaces.
   ///
@@ -156,7 +156,7 @@ enum FlexSurfaceMode {
   /// Increasing blend strengths in listed order, surface, background, scaffold.
   ///
   /// The blend strength increases on surfaces in this order:
-  /// * Surface & dialogs (1x) -> background (2x)-> Scaffold background (4x).
+  /// * Surface & dialogs (1x) -> background (2x)-> Scaffold background (3x).
   ///
   /// Theme colorScheme.primary color is used as blend color on all surfaces.
   ///
@@ -214,7 +214,7 @@ enum FlexSurfaceMode {
   /// like classic, only at very high blend level does it get any blends.
   ///
   /// The blend strength definition:
-  /// * Surface, dialogs, background (1x), scaffoldBackground (1/4x)
+  /// * Surface, dialogs, background (1x), scaffoldBackground (1/3x)
   ///
   /// Theme colorScheme.primary color is used as blend color, but dialog
   /// background color uses theme colorScheme.secondaryVariant as its
@@ -247,7 +247,7 @@ enum FlexSurfaceMode {
   /// very high blends of the blend color.
   ///
   /// The blend strength definition:
-  /// * Surface, dialogs, background (1x), scaffoldBackground (2x)
+  /// * Surface, dialogs, background (1x), scaffoldBackground (3x)
   ///
   /// Theme colorScheme.primary color is used as blend color, but dialog
   /// background uses theme colorScheme.secondaryVariant as its blend color.
@@ -1083,9 +1083,9 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Since there is not an exact 2:1 relationship between background and
     /// surface, when using the older [FlexSurface] based style, nor is
-    /// scaffoldBackground : surface always a 1 : 4 relationship. The old and
+    /// scaffoldBackground : surface always a 1 : 3 relationship. The old and
     /// new designs do never align exactly at any blendLevel, but the above
-    /// values produce visually very close results.
+    /// values produce visually similar results.
     ///
     /// To get elevation overlay color in dark themes on all surfaces used by
     /// [Material], use one of the modes where background and dialog color
@@ -1908,9 +1908,9 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Since there is not an exact 2:1 relationship between background and
     /// surface, when using the older [FlexSurface] based style, nor is
-    /// scaffoldBackground : surface always a 1 : 4 relationship. The old and
+    /// scaffoldBackground : surface always a 1 : 3 relationship. The old and
     /// new designs do never align exactly at any blendLevel, but the above
-    /// values produce visually very close results.
+    /// values produce visually similar results.
     ///
     /// To get elevation overlay color in dark themes on all surfaces used by
     /// [Material], use one of the modes where background and dialog color
@@ -2715,10 +2715,17 @@ class FlexColorScheme with Diagnosticable {
   /// and in light theme, even system are all the same color. For such themes
   /// this convenience property does not make so much sense. However, if you use
   /// FlexColorScheme and its primary color surface branding, these colors are
-  /// not the same, this then offer a convenient way to switch the
+  /// not the same. This then offers a convenient way to switch the
   /// background color of your system navigation bar in a way that matches
-  /// your theme's surface branded background color and to easily choose which
-  /// one to use easily.
+  /// your theme's surface branded background color and to choose which one
+  /// to use.
+  ///
+  /// The always sets `systemNavigationBarContrastEnforced: false` to try to
+  /// avoid the system scrim on Android version where it is supported. This
+  /// is done because the selected background color is the scrim itself when
+  /// used with the opacity parameter and we never want an extra scrim. If we
+  /// set opacity very low and loose contrast due to that, it is because it is
+  /// our intent.
   ///
   /// An optional divider on the navigation bar, which is only
   /// respected on Android P (= Pie = API 28 = Android 9) or higher, can be
@@ -2726,23 +2733,22 @@ class FlexColorScheme with Diagnosticable {
   /// of the system navigation bar that in light theme mode uses color
   /// 0xFF2C2C2C and in dark mode and 0xFFDDDDDD.
   ///
-  /// Be aware that once you have enabled the divider by setting it to true that
-  /// there is not any convenient way to get rid of it. You can set the value
-  /// to false, but that will just make the divider same color as your current
-  /// nav bar background color to make it invisible, it is still there.
-  ///
   /// You can modify the default color of the divider with the optional
   /// [systemNavigationBarDividerColor]. The call to set and use the divider
   /// color is only made once a none null value has been given to [useDivider].
-  /// Android does not use any provided alpha value on the color of the
-  /// divider color and calling it with null again will not remove it. Unless
-  /// you are working with experimental transparent system navigation bars. If
-  /// you are, then transparency or alpha channel on the divider also works.
+  /// Android SDK < 29 does not respect provided alpha value on the color of
+  /// the divider color, and calling it with null again will not remove it.
+  ///
+  /// Be aware that once you have enabled the divider by setting it to true that
+  /// there is no convenient way to get rid of it. You can set the value
+  /// to false, but that will just make the divider same color as your current
+  /// nav bar background color to make it invisible, it is still there, but
+  /// still this implmentation trick works well.
   ///
   /// Use and support for the [opacity] value on the system navigation bar
-  /// is EXPERIMENTAL, it ONLY works on Android API 30 (=Android 11) or higher.
-  /// For more information and a complete example of how it can be used,
-  /// please see: https://github.com/rydmike/sysnavbar
+  /// is now supported starting from Flutter 2.5. This PR once it lands in
+  /// stable will also for more predictable and consistent behavior limit its
+  /// functionality to SDK >= 29: https://github.com/flutter/engine/pull/28616
   ///
   /// By default [themedSystemNavigationBar] does not set any system overlay
   /// for the status bar. In Flutter SDK the top status bar has its own built in
@@ -2763,6 +2769,11 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// The divider on the navigation bar, is only respected on Android P
     /// (= Pie = API 28 = Android 9) or higher.
+    ///
+    /// Activating the divider also introduces a system overlay scrim on the
+    /// system navigation bar. It becomes visible at high opacity values, but
+    /// it removed when opacity is 0. This happens despite that we always set
+    /// `systemNavigationBarContrastEnforced: false` in the call.
     final bool? useDivider,
 
     /// Opacity value for the system navigation bar.
@@ -2772,10 +2783,14 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to 1, fully opaque.
     ///
-    /// Use and support for this opacity value is EXPERIMENTAL, it ONLY
-    /// works on Android API 30 (=Android 11) or higher. For more information
-    /// and complete example of how it can be used, please see:
-    /// https://github.com/rydmike/sysnavbar
+    /// This feature is now supported starting from Flutter 2.5.
+    /// Be aware that it only works on Android SDK >= 29. There may even
+    /// may be some issues on Android SDK < 29 until this PR lands in stable:
+    /// https://github.com/flutter/engine/pull/28616
+    ///
+    /// This issue is a good source for more information on current state
+    /// of transparent navigation bars in Flutter on Android:
+    /// https://github.com/flutter/flutter/issues/90098
     final double opacity = 1,
 
     /// Set this to true if you do not use a Material AppBar and want
@@ -2910,15 +2925,6 @@ class FlexColorScheme with Diagnosticable {
     // or fallback to suitable theme mode default divider colors if no
     // color was given.
     //
-    // The used default system navigation bar divider colors below were tuned
-    // to fit well with most color schemes and possible surface branding.
-    // Using the theme divider color does not work, as Android system calls do
-    // not use the alpha channel value in the passed color. Default divider
-    // theme color uses alpha, using it here does not look good at all as the
-    // alpha channel value is not used. If you are working with enabled
-    // transparent system navigation bar on Android API 30 or higher, then
-    // opacity on the divider also works as expected.
-    //
     // The logic below is intended to keep the `dividerColor` used in the
     // [SystemUiOverlayStyle] as null as long as `useDivider` is null. As soon
     // as it is not, it will set a Divider color, also with `false` value. With
@@ -2929,13 +2935,18 @@ class FlexColorScheme with Diagnosticable {
     // `SystemUiOverlayStyle` and `SystemChrome` call. The false value then
     // provide means to at least hide it again, but it will still be there.
     //
-    // Worth noticing is also the the opacity does not really have any effect on
-    // divider color in most versions of Android. We apply it here anyway
-    // because if you are experimenting with transparent system navigation bar
-    // on Android API30 or higher it does work. It would be nice if it worked
-    // on lower version and without adjusting the Android embedder, then we
-    // could use Flutter default Divider theme color as its color.
+    // Worth noticing is also that the opacity does not have any effect on
+    // divider color in SDK<29 of Android. We apply some opacity anyway because
+    // if you are using transparent system navigation bar on Android API30 or
+    // higher it does, work and it looks nicer when it has some transparency
+    // if the navbar is also transparent.
     Color? dividerColor;
+
+    // If we have opacity on the navbar, we should have some on the divider too
+    // when we have a divider, we use some, but not a lot, we do want to keep
+    // visible and not fade a way with background opacity, since a divider was
+    // requested.
+    final double dividerOpacity = _opacity < 1 ? 0.8 : 1;
 
     if (useDivider == null) {
       // The dividerColor is already null from declaration above with no value,
@@ -2946,16 +2957,29 @@ class FlexColorScheme with Diagnosticable {
     } else if (useDivider && systemNavigationBarDividerColor == null) {
       // We should have a divider, but have no given color, use defaults.
       dividerColor = isDark
-          ? const Color(0xFF2C2C2C).withOpacity(_opacity)
-          : const Color(0xFFDDDDDD).withOpacity(_opacity);
+          ? const Color(0xFF2C2C2C).withOpacity(dividerOpacity)
+          : const Color(0xFFDDDDDD).withOpacity(dividerOpacity);
     } else if (useDivider && systemNavigationBarDividerColor != null) {
       // We should have a divider, with a given color.
-      dividerColor = systemNavigationBarDividerColor.withOpacity(_opacity);
+      dividerColor =
+          systemNavigationBarDividerColor.withOpacity(dividerOpacity);
     } else {
-      // If this is reached, then useDivider is false and we must define its
-      // color to whatever color the background is, in order to hide it as well
-      // as possible.
+      // If this branch is reached, then useDivider is false and we must define
+      // its color to whatever color the background is, in order to hide it
+      // as well as possible.
       dividerColor = background.withOpacity(_opacity);
+    }
+    // If opacity is specified, we need to enable SystemUiMode.edgeToEdge to
+    // be able to see content scrolling behind the transparent. We only do so
+    // when we have any opacity specified.
+    // TODO(Rydmike): Do we need some other check for edgeToEdge?
+    // Like not web and we are on Android, sdk >= 29? Not sure, trying
+    // without any checks for now and will test and see what happens on other
+    // devices and different with different Android SDK levels.
+    // TODO(rydmike): Follow-up on edgeToEdge issue and adjust as it evolves.
+    // This is a gold mine: https://github.com/flutter/flutter/issues/90098
+    if (_opacity < 1) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
     return SystemUiOverlayStyle(
       // The top status bar settings.
@@ -2971,6 +2995,7 @@ class FlexColorScheme with Diagnosticable {
               : (isDark ? Brightness.light : Brightness.dark)
           : null,
       // The bottom navigation bar settings.
+      systemNavigationBarContrastEnforced: false,
       systemNavigationBarColor: background.withOpacity(_opacity),
       systemNavigationBarDividerColor: dividerColor,
       systemNavigationBarIconBrightness:
@@ -3622,8 +3647,8 @@ class FlexColorScheme with Diagnosticable {
               ? Colors.transparent
               // This is the actual scrim color used by Android by default,
               // here we just re-apply if false or if it had been removed
-              // earlier, using `null` does not restore we need the actual used
-              // scrim by Android to restore if it has been removed earlier.
+              // earlier, using `null` does not restore it, we need used scrim
+              // color by Android to restore if it has been removed earlier.
               : const Color(0x40000000),
           statusBarBrightness: appBarBrightness,
           statusBarIconBrightness: appBarBrightness == Brightness.dark
@@ -3637,7 +3662,6 @@ class FlexColorScheme with Diagnosticable {
 
           // The systemNavigationBarIconBrightness used by the AppBar in SDK:
           systemNavigationBarIconBrightness: Brightness.dark,
-          // TODO(rydmike): Test this again, maybe leave it in here anyway?
           // Would be nice if this worked instead of above, but it does not:
           // systemNavigationBarIconBrightness:
           //     isDark ? Brightness.light : Brightness.dark,
@@ -3708,7 +3732,7 @@ class FlexColorScheme with Diagnosticable {
               padding: const EdgeInsets.symmetric(horizontal: 16),
             ),
 
-      // TODO(Rydmike): Consider sub-theme for ChipThemeData!
+      // TODO(Rydmike): Also consider a sub-theme for ChipThemeData.
       // The default chip theme in Flutter does not work correctly with dark
       // themes. See issue: https://github.com/flutter/flutter/issues/65663
       // The chip theme below fixes it by using the colorScheme.primary color.
@@ -3718,7 +3742,7 @@ class FlexColorScheme with Diagnosticable {
         labelStyle: effectiveTextTheme.bodyText1!,
       ),
 
-      // TODO(Rydmike): Consider sub-theme for TabBar!
+      // TODO(Rydmike): Also consider a sub-theme for TabBar.
       // Define the TabBar theme that will fit nicely in an AppBar
       // (default) or on background color for use eg in a Scaffold, the choice
       // depends on tabBarStyle `FlexTabBarStyle`, that defaults to
@@ -3735,9 +3759,10 @@ class FlexColorScheme with Diagnosticable {
         unselectedLabelColor: unselectedTabColor(),
       ),
 
-      // Opinionated theming for the bottom navigation bar, use primary color
-      // for selected item. Flutter defaults to using secondary color. Primary
-      // color is an "iOS" influenced style for the bottom navigation bar.
+      // Opinionated default theming for the bottom navigation bar: Use primary
+      // color for selected item. Flutter defaults to using secondary color in
+      // dark mode, we want primary in dark mode too, like it is in light
+      // mode. Primary color is an iOS influenced style for the bottom nav.
       bottomNavigationBarTheme: useSubThemes
           ? FlexSubThemes.bottomNavigationBar(
                   elevation: subTheme.bottomNavigationBarElevation,
@@ -3865,7 +3890,7 @@ class FlexColorScheme with Diagnosticable {
     );
   }
 
-  /// Returns the [ColorScheme] object defined by [FlexColorScheme] properties.
+  /// Returns the [ColorScheme] defined by [FlexColorScheme] properties.
   ///
   /// After you have defined your scheme with [FlexColorScheme] or one of its
   /// recommended factories [FlexColorScheme.light], [FlexColorScheme.dark],
@@ -4372,8 +4397,8 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     int _dialogAlpha = _surfaceAlpha;
     // Background alpha defaults to 2x surface alpha.
     int _backgroundAlpha = _surfaceAlpha * 2;
-    // Scaffold background alpha defaults to 1/4 of surface alpha.
-    int _scaffoldAlpha = _surfaceAlpha ~/ 4;
+    // Scaffold background alpha defaults to 1/3 of surface alpha.
+    int _scaffoldAlpha = _surfaceAlpha ~/ 3;
 
     // In mode `highSurface`, change order of background and
     // surface/dialog blend strengths compared to default and legacy
@@ -4386,7 +4411,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
 
     // Blend level for mode `lowSurfaceHighScaffold`. Change scaffold alpha
     if (surfaceMode == FlexSurfaceMode.lowSurfaceHighScaffold) {
-      _scaffoldAlpha = _surfaceAlpha * 4;
+      _scaffoldAlpha = _surfaceAlpha * 3;
     }
 
     // In mode `flat`, we use FlexColor default surface color on all surfaces.
@@ -4432,10 +4457,9 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         );
       }
       // The alpha on all elevated surfaces is the same.
-      // _surfaceAlpha = _surfaceAlpha ~/ 1.5;
       _dialogAlpha = _surfaceAlpha;
       _backgroundAlpha = _surfaceAlpha;
-      // Scaffold alpha that never elevates is 1/4 of the other surfaces.
+      // Scaffold alpha is 1/3 of the other surfaces.
       _scaffoldAlpha = _surfaceAlpha ~/ 3;
     }
 
@@ -4461,10 +4485,9 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         );
       }
       // The alpha on all elevated surfaces is the same.
-      // _surfaceAlpha = _surfaceAlpha ~/ 1.5;
       _dialogAlpha = _surfaceAlpha;
       _backgroundAlpha = _surfaceAlpha;
-      // Scaffold alpha is 4x of the other surfaces, creating more of a
+      // Scaffold alpha is 3x of the other surfaces, creating more of a
       // heavily colored primary colored scaffold background. This setup
       // is typically used if you intend to always show content on the scaffold
       // wrapped in eg a Card with less color branded background than the

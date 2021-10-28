@@ -183,7 +183,7 @@ class ThemeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 55,
-      width: 85,
+      width: 82,
       child: Card(
         margin: EdgeInsets.zero,
         color: color,

@@ -14,6 +14,7 @@ class SystemNavBarStyleButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
 
     final List<bool> isSelected = <bool>[
       style == FlexSystemNavBarStyle.system,
@@ -29,9 +30,10 @@ class SystemNavBarStyleButtons extends StatelessWidget {
         onChanged(FlexSystemNavBarStyle.values[newIndex]);
       },
       children: <Widget>[
-        const Tooltip(
-          message: 'Android default,\ntypically black',
-          child: Icon(Icons.lens, color: Colors.black),
+        Tooltip(
+          message:
+              isLight ? 'Android default\n(White)' : 'Android default\n(Black)',
+          child: Icon(Icons.lens, color: isLight ? Colors.white : Colors.black),
         ),
         Tooltip(
           message: 'Themed surface color',

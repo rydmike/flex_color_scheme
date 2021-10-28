@@ -102,6 +102,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool themedEffects;
 
+  // TODO(rydmike): Maybe also consider ContinuousRectangleBorder (future?).
+
   /// Corner radius of all widgets covered by `FlexSubThemes` sub-theme.
   ///
   /// These widgets will get their shape corner rounding from [cornerRadius]:

@@ -36,31 +36,41 @@ class SurfaceModeButtons extends StatelessWidget {
         ),
         const Tooltip(
           message: 'High background',
-          child: Icon(Icons.layers),
-        ),
-        const Tooltip(
-          message: 'High surface',
           child: Icon(Icons.layers_outlined),
         ),
         const Tooltip(
-          message: 'Low surface\nHigh scaffold',
-          child: Icon(Icons.dynamic_feed_rounded),
+          message: 'High surface',
+          child: Icon(Icons.layers),
         ),
+        Tooltip(
+            message: 'Low surface\nHigh scaffold',
+            // child: Icon(Icons.dynamic_feed_rounded),
+            child: Stack(
+              alignment: Alignment.center,
+              children: const <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Icon(Icons.layers_outlined),
+                ),
+                Icon(Icons.layers), //, color: Colors.blue),
+              ],
+            )),
         const Tooltip(
           message: 'Low scaffold',
-          child: Icon(Icons.horizontal_split),
+          child:
+              RotatedBox(quarterTurns: 2, child: Icon(Icons.horizontal_split)),
         ),
         const Tooltip(
           message: 'High scaffold',
-          child:
-              RotatedBox(quarterTurns: 2, child: Icon(Icons.horizontal_split)),
+          child: Icon(Icons.horizontal_split),
         ),
         Tooltip(
           message: 'Low scaffold\nVariant dialog',
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              const Icon(Icons.horizontal_split),
+              const RotatedBox(
+                  quarterTurns: 2, child: Icon(Icons.horizontal_split)),
               Icon(Icons.stop, color: scheme.secondaryVariant, size: 18),
             ],
           ),
@@ -70,8 +80,7 @@ class SurfaceModeButtons extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              const RotatedBox(
-                  quarterTurns: 2, child: Icon(Icons.horizontal_split)),
+              const Icon(Icons.horizontal_split),
               Icon(Icons.stop, color: scheme.secondaryVariant, size: 18),
             ],
           ),

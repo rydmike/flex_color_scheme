@@ -50,7 +50,7 @@ void showAppAboutDialog(BuildContext context) {
       ],
     ),
     applicationLegalese:
-        '${AppData.copyright} ${AppData.author} ${AppData.license}',
+        '${AppData.copyright}\n${AppData.author}\n${AppData.license}',
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(top: 24),
@@ -59,9 +59,9 @@ void showAppAboutDialog(BuildContext context) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'This example shows some of the features of the '
-                    '${AppData.appName} theming package. To learn more, check '
-                    'out the package on ',
+                text: 'This example shows some features of the '
+                    '${AppData.appName} Flutter theming package. To learn '
+                    'more, check out the package on ',
               ),
               LinkTextSpan(
                 style: linkStyle,
@@ -70,12 +70,12 @@ void showAppAboutDialog(BuildContext context) {
               ),
               TextSpan(
                 style: aboutTextStyle,
-                text: '. It contains extensive documentation and the source '
-                    'of this example application.\n\n',
+                text: '. It is well documented and also includes the source '
+                    'code of this example.\n\n',
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with ${AppData.flutterVersion}, '
+                text: 'Built with Flutter ${AppData.flutterVersion}, '
                     'using ${AppData.packageVersion}\n\n',
               ),
             ],

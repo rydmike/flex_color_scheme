@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+// ignore_for_file: avoid_redundant_argument_values
+
 void main() {
   //****************************************************************************
   // FlexColorScheme unit tests.
@@ -830,7 +832,8 @@ void main() {
         equals(
           const SystemUiOverlayStyle(
               systemNavigationBarColor: Colors.white,
-              systemNavigationBarIconBrightness: Brightness.dark),
+              systemNavigationBarIconBrightness: Brightness.dark,
+              systemNavigationBarContrastEnforced: false),
         ),
       );
     });
@@ -847,6 +850,7 @@ void main() {
             systemNavigationBarColor: Colors.white,
             systemNavigationBarDividerColor: Colors.white,
             systemNavigationBarIconBrightness: Brightness.dark,
+            systemNavigationBarContrastEnforced: false,
           ),
         ),
       );
@@ -867,6 +871,7 @@ void main() {
             systemNavigationBarColor: Color(0xFFCCCCCC),
             systemNavigationBarDividerColor: Color(0xFFDDDDDD),
             systemNavigationBarIconBrightness: Brightness.dark,
+            systemNavigationBarContrastEnforced: false,
           ),
         ),
       );
@@ -885,6 +890,7 @@ void main() {
             systemNavigationBarColor: Colors.black,
             systemNavigationBarDividerColor: Color(0xFF2C2C2C),
             systemNavigationBarIconBrightness: Brightness.light,
+            systemNavigationBarContrastEnforced: false,
           ),
         ),
       );
@@ -903,6 +909,7 @@ void main() {
             systemNavigationBarColor: Colors.black,
             systemNavigationBarDividerColor: Colors.black,
             systemNavigationBarIconBrightness: Brightness.light,
+            systemNavigationBarContrastEnforced: false,
           ),
         ),
       );
@@ -923,6 +930,7 @@ void main() {
             systemNavigationBarColor: Color(0xFF202020),
             systemNavigationBarDividerColor: Color(0xFF202020),
             systemNavigationBarIconBrightness: Brightness.light,
+            systemNavigationBarContrastEnforced: false,
           ),
         ),
       );
@@ -944,6 +952,7 @@ void main() {
             systemNavigationBarColor: Color(0xFF202020),
             systemNavigationBarDividerColor: Color(0xFF202020),
             systemNavigationBarIconBrightness: Brightness.light,
+            systemNavigationBarContrastEnforced: false,
           ),
         ),
       );
@@ -986,6 +995,7 @@ void main() {
           systemNavigationBarColor: Color(0xFF202020),
           systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1007,6 +1017,7 @@ void main() {
           systemNavigationBarColor: Color(0xFF4545F3),
           systemNavigationBarDividerColor: Color(0xFF4545F3),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1026,6 +1037,7 @@ void main() {
           systemNavigationBarColor: Color(0xFF202020),
           systemNavigationBarDividerColor: Color(0xFF202020),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1037,7 +1049,6 @@ void main() {
         FlexColorScheme.themedSystemNavigationBar(
           null,
           useDivider: true,
-          // ignore: avoid_redundant_argument_values
           opacity: 1,
           nullContextBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFF202020),
@@ -1046,6 +1057,7 @@ void main() {
           systemNavigationBarColor: Color(0xFF202020),
           systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1057,7 +1069,7 @@ void main() {
         FlexColorScheme.themedSystemNavigationBar(
           null,
           useDivider: true,
-          // ignore: avoid_redundant_argument_values
+
           opacity: 1,
           nullContextBrightness: Brightness.dark,
           // Testing that the deprecated member still works as it should.
@@ -1068,6 +1080,7 @@ void main() {
           systemNavigationBarColor: Color(0xFF202020),
           systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1085,9 +1098,11 @@ void main() {
         ),
         SystemUiOverlayStyle(
           systemNavigationBarColor: const Color(0x00202020).withOpacity(0),
+          // Divider has opacity 0.8, when there is opacity on navbar.
           systemNavigationBarDividerColor:
-              const Color(0xFF2C2C2C).withOpacity(0),
+              const Color(0xFF2C2C2C).withOpacity(0.8),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1107,9 +1122,11 @@ void main() {
         ),
         SystemUiOverlayStyle(
           systemNavigationBarColor: const Color(0x00202020).withOpacity(0.5),
+          // Divider has opacity 0.8, when there is opacity on navbar.
           systemNavigationBarDividerColor:
-              const Color(0xFF2C2C2C).withOpacity(0.5),
+              const Color(0xFF2C2C2C).withOpacity(0.8),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1121,16 +1138,17 @@ void main() {
         FlexColorScheme.themedSystemNavigationBar(
           null,
           useDivider: true,
-          // ignore: avoid_redundant_argument_values
           opacity: -10.1,
           nullContextBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFF202020),
         ),
         SystemUiOverlayStyle(
           systemNavigationBarColor: const Color(0x00202020).withOpacity(0),
+          // Divider has opacity 0.8, when there is opacity on navbar.
           systemNavigationBarDividerColor:
-              const Color(0xFF2C2C2C).withOpacity(0),
+              const Color(0xFF2C2C2C).withOpacity(0.8),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1153,6 +1171,7 @@ void main() {
           systemNavigationBarColor: Colors.black,
           systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1177,6 +1196,7 @@ void main() {
           systemNavigationBarColor: Colors.black,
           systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1190,7 +1210,6 @@ void main() {
           null,
           noAppBar: true,
           useDivider: false,
-          // ignore: avoid_redundant_argument_values
           nullContextBrightness: Brightness.light,
         ),
         const SystemUiOverlayStyle(
@@ -1200,6 +1219,7 @@ void main() {
           systemNavigationBarColor: Colors.white,
           systemNavigationBarDividerColor: Colors.white,
           systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1215,7 +1235,6 @@ void main() {
           noAppBar: true,
           invertStatusIcons: true,
           useDivider: false,
-          // ignore: avoid_redundant_argument_values
           nullContextBrightness: Brightness.light,
         ),
         const SystemUiOverlayStyle(
@@ -1225,6 +1244,7 @@ void main() {
           systemNavigationBarColor: Colors.white,
           systemNavigationBarDividerColor: Colors.white,
           systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1243,7 +1263,6 @@ void main() {
           useDivider: false,
           systemNavigationBarDividerColor: const Color(0xFF2196F3),
           systemNavigationBarColor: const Color(0xFFF44336),
-          // ignore: avoid_redundant_argument_values
           nullContextBrightness: Brightness.light,
         ),
         const SystemUiOverlayStyle(
@@ -1253,6 +1272,7 @@ void main() {
           systemNavigationBarColor: Color(0xFFF44336),
           systemNavigationBarDividerColor: Color(0xFFF44336),
           systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1273,7 +1293,6 @@ void main() {
           opacity: 0.5,
           systemNavigationBarDividerColor: const Color(0xFF2196F3),
           systemNavigationBarColor: const Color(0xFFF44336),
-          // ignore: avoid_redundant_argument_values
           nullContextBrightness: Brightness.light,
         ),
         SystemUiOverlayStyle(
@@ -1281,9 +1300,11 @@ void main() {
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFFF44336).withOpacity(0.5),
+          // Divider has opacity 0.8, when there is opacity on navbar.
           systemNavigationBarDividerColor:
-              const Color(0xFF2196F3).withOpacity(0.5),
+              const Color(0xFF2196F3).withOpacity(0.8),
           systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1302,7 +1323,6 @@ void main() {
           useDivider: true,
           systemNavigationBarDividerColor: const Color(0xFF2196F3),
           systemNavigationBarColor: const Color(0xFFF44336),
-          // ignore: avoid_redundant_argument_values
           nullContextBrightness: Brightness.light,
         ),
         const SystemUiOverlayStyle(
@@ -1312,6 +1332,7 @@ void main() {
           systemNavigationBarDividerColor: Color(0xFF2196F3),
           systemNavigationBarColor: Color(0xFFF44336),
           systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarContrastEnforced: false,
         ),
       );
     });
@@ -1352,6 +1373,7 @@ void main() {
                 const SystemUiOverlayStyle(
                   systemNavigationBarColor: Colors.white,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1390,6 +1412,7 @@ void main() {
                   systemNavigationBarColor: Colors.white,
                   systemNavigationBarDividerColor: Colors.white,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1427,6 +1450,7 @@ void main() {
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1467,6 +1491,7 @@ void main() {
                   systemNavigationBarDividerColor:
                       Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1504,6 +1529,7 @@ void main() {
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1544,6 +1570,7 @@ void main() {
                   systemNavigationBarDividerColor:
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1575,13 +1602,13 @@ void main() {
               expect(
                 FlexColorScheme.themedSystemNavigationBar(
                   context,
-                  // ignore: avoid_redundant_argument_values
                   systemNavBarStyle: FlexSystemNavBarStyle.background,
                 ),
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1613,7 +1640,6 @@ void main() {
               expect(
                 FlexColorScheme.themedSystemNavigationBar(
                   context,
-                  // ignore: avoid_redundant_argument_values
                   systemNavBarStyle: FlexSystemNavBarStyle.background,
                   useDivider: false,
                 ),
@@ -1623,6 +1649,7 @@ void main() {
                   systemNavigationBarDividerColor:
                       Theme.of(context).colorScheme.background,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1662,6 +1689,7 @@ void main() {
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarDividerColor: const Color(0xFFDDDDDD),
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1700,9 +1728,11 @@ void main() {
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
+                  // Divider has opacity 0.8, when there is opacity on navbar.
                   systemNavigationBarDividerColor:
-                      const Color(0xFFDDDDDD).withOpacity(0.5),
+                      const Color(0xFFDDDDDD).withOpacity(0.8),
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1744,6 +1774,7 @@ void main() {
                   systemNavigationBarDividerColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1787,6 +1818,7 @@ void main() {
                       .scaffoldBackgroundColor
                       .withOpacity(0.01),
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1825,6 +1857,7 @@ void main() {
                 const SystemUiOverlayStyle(
                   systemNavigationBarColor: Colors.black,
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1863,6 +1896,7 @@ void main() {
                   systemNavigationBarColor: Colors.black,
                   systemNavigationBarDividerColor: Colors.black,
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1900,6 +1934,7 @@ void main() {
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1940,6 +1975,7 @@ void main() {
                   systemNavigationBarDividerColor:
                       Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -1977,6 +2013,7 @@ void main() {
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -2017,6 +2054,7 @@ void main() {
                   systemNavigationBarDividerColor:
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -2048,13 +2086,13 @@ void main() {
               expect(
                 FlexColorScheme.themedSystemNavigationBar(
                   context,
-                  // ignore: avoid_redundant_argument_values
                   systemNavBarStyle: FlexSystemNavBarStyle.background,
                 ),
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -2086,7 +2124,6 @@ void main() {
               expect(
                 FlexColorScheme.themedSystemNavigationBar(
                   context,
-                  // ignore: avoid_redundant_argument_values
                   systemNavBarStyle: FlexSystemNavBarStyle.background,
                   useDivider: false,
                 ),
@@ -2096,6 +2133,7 @@ void main() {
                   systemNavigationBarDividerColor:
                       Theme.of(context).colorScheme.background,
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -2135,6 +2173,7 @@ void main() {
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarDividerColor: const Color(0xFF2C2C2C),
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -2173,9 +2212,11 @@ void main() {
                 SystemUiOverlayStyle(
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
+                  // Divider has opacity 0.8, when there is opacity on navbar.
                   systemNavigationBarDividerColor:
-                      const Color(0xFF2C2C2C).withOpacity(0.5),
+                      const Color(0xFF2C2C2C).withOpacity(0.8),
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -2217,6 +2258,7 @@ void main() {
                   systemNavigationBarDividerColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.
@@ -2260,6 +2302,7 @@ void main() {
                       .scaffoldBackgroundColor
                       .withOpacity(0.01),
                   systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
                 ),
               );
               // The builder function must return a widget.

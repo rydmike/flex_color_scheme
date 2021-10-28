@@ -2,13 +2,13 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [WIP 4.0.0] - October 27, 2021
+## [WIP 4.0.0] - October 28, 2021
 
 * The breaking case refer to a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.x.x.
   Major version was bumped due to the small change in produced output in some
-  rare usage options. Version 4.0.0 does however also contain so many new 
-  features that it in itself warrants a new major release bump.
+  rare usage options. Version 4.0.0 does however contain so many new 
+  features, that it in itself warrants a new major release bump.
 
 
 * **Breaking:** In dark mode, the `darkIsTrueBlack` now makes `surface` color
@@ -94,11 +94,14 @@ All notable changes to the **FlexColorScheme** package are documented here.
   efficiency.
 
 
-* **TODO New:** Added convenience support for Flutter 2.5 full screen mode to
-  `FlexColorScheme.themedSystemNavigationBar`. This brings the experimental
-  support of transparent system navigation bar into the supported fold, as
-  far as Flutter SDK supports it. Its function is based on support in used 
-  Android SDK level NN, for more info see: NN
+* **New:** Added edgeToEdge support to
+  `FlexColorScheme.themedSystemNavigationBar`. This brings the previously 
+   experimental support for transparent system navigation bar in Android 
+   into the supported fold in FlexColorScheme. Its functionality 
+   requires min Android SDK level 29, but other than that it works without
+   Android setup shenanigans. No added APIs, the API for it already existed
+   in previous version of FlexColorScheme, using it did however require 
+   special Android build configuration setup, this is no longer required.
 
 
 * **TODO New color schemes:** Added four new built-in color schemes.
@@ -137,7 +140,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 * **TODO Tests:** 
   * Added tests for the new features.
-  * Total 1017 tests, 
+  * Total 1022 tests, 
   * Coverage temporarily down to around 95%. 
   * More tests to be added before release.
 

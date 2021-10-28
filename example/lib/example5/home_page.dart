@@ -62,7 +62,8 @@ class _HomePageState extends State<HomePage> {
     final double bottomPadding = media.padding.bottom + AppData.edgeInsets;
 
     final bool menuCanOperate = media.size.width >= AppData.desktopBreakpoint;
-    final bool menuHide = media.size.width < AppData.phoneBreakpoint;
+    final bool isNarrow = media.size.width < AppData.phoneBreakpoint;
+    final double sideMargin = isNarrow ? 8 : AppData.edgeInsets;
 
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
     // Give the width of the side panel some automatic responsive behavior and
     // make it rail sized when there is not enough room for a menu, even if
     // menu size is requested, and even remove rail on narrow phones.
-    if (menuHide) {
+    if (isNarrow) {
       _menuWidth = 0.01;
     } else {
       if (!menuCanOperate) {
@@ -137,37 +138,32 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   controller: scrollController,
                   padding: EdgeInsets.fromLTRB(
-                    AppData.edgeInsets,
+                    sideMargin,
                     topPadding,
-                    AppData.edgeInsets,
+                    sideMargin,
                     bottomPadding,
                   ),
                   children: <Widget>[
-                    Text('Theme', style: headline4),
+                    Text('FlexColorScheme', style: headline4),
                     const Text(
-                      'This example shows how you can use all the built in '
-                      'color schemes in FlexColorScheme to define themes '
-                      'from them and how you can make your own custom '
-                      'scheme colors and use them together with the '
-                      'predefined ones.\n\n'
-                      'The example also shows how to use the surface '
-                      'branding feature and the app bar theme '
-                      'options in FlexColorScheme. The usage of the '
-                      'true black option for dark themes is also '
-                      'demonstrated.\n\n'
-                      'The example includes a dummy responsive side menu and '
-                      'rail, to give a visual example of what applications '
-                      'that have larger visible surfaces using surface '
-                      'branding may look like. '
-                      'A theme showcase widget shows the active theme with '
-                      'several common Material widgets.\n',
+                      'In this example you can try all themes and almost '
+                      'all features.\n\n'
+                      'See how to surface blends and the app bar theme '
+                      'options work. Try the true black option for dark '
+                      'themes along with computed dark themes.\n\n'
+                      'A dummy responsive side menu/rail is visible on '
+                      'larger media. It is used to demonstrate the different '
+                      'surface blends more clearly. '
+                      'A widget showcase demonstrates theme impact on common '
+                      'Material widgets.',
                     ),
-                    _ThemeColors(controller: widget.controller),
+                    const Divider(),
+                    _Theme(controller: widget.controller),
                     _ModeOptions(controller: widget.controller),
-                    _SubThemes(controller: widget.controller),
+                    _WidgetThemes(controller: widget.controller),
                     _SurfaceBlends(controller: widget.controller),
-                    _AppBarStyle(controller: widget.controller),
-                    _BottomNavBars(
+                    _AppBar(controller: widget.controller),
+                    _BottomNavigation(
                       controller: widget.controller,
                       navBarStyle: _navBarStyle,
                       onNavBarStyle: (FlexSystemNavBarStyle value) {
@@ -183,7 +179,6 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     const _SubPages(),
-                    const Divider(),
                     Text('Theme Showcase', style: headline4),
                     const ThemeShowcase(),
                   ],
@@ -197,8 +192,8 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class _ThemeColors extends StatelessWidget {
-  const _ThemeColors({
+class _Theme extends StatelessWidget {
+  const _Theme({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -208,7 +203,7 @@ class _ThemeColors extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       title: Text(
-        'Theme colors',
+        'Theme',
         style: Theme.of(context).textTheme.headline6,
       ),
       closed: false,
@@ -218,6 +213,7 @@ class _ThemeColors extends StatelessWidget {
             schemeIndex: controller.schemeIndex,
             onChanged: controller.setSchemeIndex,
           ),
+          // TODO(rydmike): Add the buttons list selector from FlexFold.
           const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
@@ -225,9 +221,9 @@ class _ThemeColors extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ListTile(
-            title: const Text('Theme mode'),
-            subtitle: Text('Using theme mode '
-                '${controller.themeMode.toString().dotTail}'),
+            title: const Text('Mode'),
+            subtitle: Text('Using ${controller.themeMode.toString().dotTail} '
+                'mode'),
             trailing: ThemeModeSwitch(
               themeMode: controller.themeMode,
               onChanged: controller.setThemeMode,
@@ -243,10 +239,10 @@ class _ThemeColors extends StatelessWidget {
           ),
           SwitchListTile.adaptive(
             title: const Text(
-              'Use FlexColorScheme theming',
+              'Use the theming features',
             ),
             subtitle: const Text(
-              'Turn OFF to use default ThemeData and see the difference.',
+              'Turn OFF to see Flutter default theming',
             ),
             value: controller.useFlexColorScheme,
             onChanged: controller.setUseFlexColorScheme,
@@ -279,18 +275,18 @@ class _ModeOptions extends StatelessWidget {
         children: <Widget>[
           if (isLight)
             SwitchListTile.adaptive(
-              title: const Text('Light mode swap colors'),
+              title: const Text('Light mode color swap'),
               subtitle: const Text(
-                'Turn ON to swap primary and secondary colors.',
+                'Swap primary and secondary colors',
               ),
               value: controller.swapLightColors,
               onChanged: controller.setSwapLightColors,
             )
           else
             SwitchListTile.adaptive(
-              title: const Text('Dark mode swap colors'),
+              title: const Text('Dark mode color swap'),
               subtitle: const Text(
-                'Turn ON to swap primary and secondary colors.',
+                'Swap primary and secondary colors',
               ),
               value: controller.swapDarkColors,
               onChanged: controller.setSwapDarkColors,
@@ -304,9 +300,8 @@ class _ModeOptions extends StatelessWidget {
                 SwitchListTile.adaptive(
                   title: const Text('True black'),
                   subtitle: const Text(
-                    'Makes scaffold background black in all surface blends and '
-                    'other backgrounds much darker. Keep OFF for normal '
-                    'dark mode.',
+                    'Ink black scaffold in all blend modes, '
+                    'other backgrounds are darker too',
                   ),
                   value: controller.darkIsTrueBlack,
                   onChanged: controller.setDarkIsTrueBlack,
@@ -364,8 +359,8 @@ class _ModeOptions extends StatelessWidget {
   }
 }
 
-class _SubThemes extends StatelessWidget {
-  const _SubThemes({
+class _WidgetThemes extends StatelessWidget {
+  const _WidgetThemes({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -383,8 +378,7 @@ class _SubThemes extends StatelessWidget {
         children: <Widget>[
           SwitchListTile.adaptive(
             title: const Text('Use widget theming'),
-            subtitle: const Text('Turn ON to enable opinionated widget '
-                'theming.'),
+            subtitle: const Text('Enable opinionated sub themes'),
             value: controller.useSubThemes,
             onChanged: controller.setUseSubThemes,
           ),
@@ -425,14 +419,14 @@ class _SubThemes extends StatelessWidget {
                 SwitchListTile.adaptive(
                   title: const Text('Themed state effects'),
                   subtitle: const Text('Hover, focus, highlight and '
-                      'splash use primary color.'),
+                      'splash use primary color'),
                   value: controller.themedEffects,
                   onChanged: controller.setThemedEffects,
                 ),
                 const Divider(height: 1),
                 SwitchListTile.adaptive(
                   title: const Text(
-                    'Input decorator has fill color',
+                    'Input decorator with fill color',
                   ),
                   value: controller.inputDecoratorIsFilled,
                   onChanged: controller.setInputDecoratorIsFilled,
@@ -442,14 +436,14 @@ class _SubThemes extends StatelessWidget {
                     'Input decorator border style',
                   ),
                   subtitle: const Text(
-                    'ON for outline, OFF for underline.',
+                    'ON for outline   OFF for underline',
                   ),
                   value: controller.inputDecoratorIsOutlinedBorder,
                   onChanged: controller.setInputDecoratorIsOutlinedBorder,
                 ),
                 SwitchListTile.adaptive(
                   title: const Text(
-                    'Unfocused input decorator has border',
+                    'Unfocused decorator has border',
                   ),
                   // subtitle: const Text(
                   //   'ON for outline, OFF for underline.',
@@ -466,11 +460,10 @@ class _SubThemes extends StatelessWidget {
             message: 'A tooltip, on the tooltip style toggle',
             child: SwitchListTile.adaptive(
               title: const Text(
-                'Tooltips are light on light, and dark on dark',
+                'Tooltip brightness',
               ),
               subtitle: const Text(
-                "Keep OFF to use Material's default inverted "
-                'background style.',
+                'ON Normal  OFF Inverted (Material style)',
               ),
               value: controller.tooltipsMatchBackground,
               onChanged: controller.setTooltipsMatchBackground,
@@ -492,25 +485,27 @@ class _SurfaceBlends extends StatelessWidget {
   String explainMode(final FlexSurfaceMode mode) {
     switch (mode) {
       case FlexSurfaceMode.flat:
-        return 'Flat: All surface and background colors at blend level (1x)';
+        return 'Flat\nAll surface colors at blend level (1x)';
       case FlexSurfaceMode.highBackground:
-        return 'High background: Background (2x) Surface (1x) Scaffold (1/4x)';
+        return 'High background\nBackground (2x) Surface (1x) Scaffold (1/3x)';
       case FlexSurfaceMode.highSurface:
-        return 'High surface: Surface (2x) Background (1x) Scaffold (1/4x)';
+        return 'High surface\nSurface (2x) Background (1x) Scaffold (1/3x)';
       case FlexSurfaceMode.lowSurfaceHighScaffold:
-        return 'Low surface, high scaffold: Surface (1x) Background (2x) '
-            'Scaffold (4x)';
+        return 'Low surface, high scaffold\nSurface (1x) Background (2x) '
+            'Scaffold (3x)\n'
+            'When used, content is typically placed in Cards with '
+            'less primary color blend';
       case FlexSurfaceMode.lowScaffold:
-        return 'Low scaffold: Scaffold (1/3x) Surface and Background (1x)';
+        return 'Low scaffold\nScaffold (1/3x) Surface and Background (1x)';
       case FlexSurfaceMode.highScaffold:
-        return 'High scaffold: Scaffold (3x) Surface and Background (1x)\n'
-            'When used, scaffold content is typically placed on Cards with '
-            'less primary color blend.';
+        return 'High scaffold\nScaffold (3x) Surface and Background (1x)\n'
+            'When used, content is typically placed in Cards with '
+            'less primary color blend';
       case FlexSurfaceMode.lowScaffoldVariantDialog:
-        return 'Low scaffold: Scaffold (1/3x) Surface and Background (1x)\n'
+        return 'Low scaffold\nScaffold (1/3x) Surface and Background (1x)\n'
             'Dialog background (1x) using secondary variant color';
       case FlexSurfaceMode.highScaffoldVariantDialog:
-        return 'High scaffold: Scaffold (3x) Surface and Background (1x)\n'
+        return 'High scaffold\nScaffold (3x) Surface and Background (1x)\n'
             'Dialog background (1x) using secondary variant color';
       case FlexSurfaceMode.custom:
         return '';
@@ -528,30 +523,32 @@ class _SurfaceBlends extends StatelessWidget {
       child: Column(
         children: <Widget>[
           const ListTile(
-            title: Text('Alpha blended surfaces and backgrounds'),
+            title: Text('Blended surfaces and backgrounds'),
             isThreeLine: true,
             subtitle: Text(
-              'Default Material design uses white and dark background colors. '
-              'With FlexColorScheme you can adjust the primary color '
-              'alpha blend strategy used to blend primary color into surface '
-              'and background colors.',
+              'Standard Material design use white and dark surface colors, '
+              'but it also mentions using surfaces with different alpha '
+              'blends. Typically you blend primary color into surface '
+              'colors. This is supported by using blend mode and level.',
             ),
           ),
           ListTile(
-            title: const Text('Surface blend mode'),
+            title: const Text('Blend mode'),
             subtitle: Text(explainMode(controller.surfaceMode)),
           ),
-          ListTile(
-            trailing: SurfaceModeButtons(
-              mode: controller.surfaceMode,
-              onChanged: controller.setSurface,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              SurfaceModeButtons(
+                mode: controller.surfaceMode,
+                onChanged: controller.setSurface,
+              ),
+              const SizedBox(width: 16),
+            ],
           ),
           const ListTile(
-            title: Text('Alpha blend level'),
-            subtitle: Text(
-              'Adjust the alpha level of the color blending',
-            ),
+            title: Text('Blend level'),
+            subtitle: Text('Adjust the blend strength'),
           ),
           ListTile(
             title: Slider.adaptive(
@@ -590,8 +587,8 @@ class _SurfaceBlends extends StatelessWidget {
   }
 }
 
-class _AppBarStyle extends StatelessWidget {
-  const _AppBarStyle({
+class _AppBar extends StatelessWidget {
+  const _AppBar({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -600,36 +597,39 @@ class _AppBarStyle extends StatelessWidget {
   String explainAppBarStyle(final FlexAppBarStyle style, final bool isLight) {
     switch (style) {
       case FlexAppBarStyle.primary:
-        return isLight ? 'Use primary color. (Default)' : 'Use primary color.';
+        return isLight ? 'Primary color (Default)' : 'Primary color';
       case FlexAppBarStyle.material:
         return isLight
-            ? 'Use Material guide light white background color.'
-            : 'Use Material guide dark (#121212) background color. (Default)';
+            ? 'Material guide white background color'
+            : 'Material guide dark (#121212) background color (Default)';
       case FlexAppBarStyle.surface:
-        return 'Use surface color including its primary color alpha blend.';
+        return 'Surface, including its primary color alpha blend';
       case FlexAppBarStyle.background:
-        return 'Use background color including its primary color alpha blend.';
+        return 'Background, including its primary color alpha blend';
       case FlexAppBarStyle.custom:
-        return 'Built-in schemes use their secondary variant color as custom '
-            'color choice, but you can make it any color.';
+        return 'Built-in schemes use their secondary variant color as '
+            'their custom AppBar color, but you can use any color';
     }
   }
 
   String explainTabStyle(final FlexTabBarStyle style) {
     switch (style) {
       case FlexTabBarStyle.forAppBar:
-        return 'Themed to fit chosen FlexColorScheme AppBar style in both '
-            'dark and light mode. Typically the one you want. (Default)';
+        return 'Style: forAppbar\n'
+            'Works with used app bar style (Default)';
       case FlexTabBarStyle.forBackground:
-        return 'Themed to fit background color, eg on Scaffold. Also works '
-            'well on background colored AppBars.';
+        return 'Style: forBackground:\n'
+            'Works on surface colors, like Scaffold, but '
+            'also works on surface colored app bars';
       case FlexTabBarStyle.useDefault:
-        return 'Flutter SDK default. Works on primary color in light mode, and '
-            'background color in dark mode.';
+        return 'Style: useDefault\n'
+            'Works on primary color in light mode, and '
+            'background color in dark mode';
       case FlexTabBarStyle.universal:
-        return 'Universal style. Experimental feature, the '
-            'style may change in the future. Has low contrast on some theme '
-            'combinations.';
+        return 'Style: universal\n'
+            'An experimental design intended to work anywhere, but has '
+            'low contrast in some combinations. This '
+            'style may be changed in future versions';
     }
   }
 
@@ -640,7 +640,7 @@ class _AppBarStyle extends StatelessWidget {
 
     return RevealListTileCard(
       title: Text(
-        'AppBar style',
+        'App bar',
         style: Theme.of(context).textTheme.headline6,
       ),
       closed: true,
@@ -649,18 +649,18 @@ class _AppBarStyle extends StatelessWidget {
           const SizedBox(height: 8),
           const ListTile(
             subtitle: Text(
-              'Flutter SDK ColorScheme based themes have a primary '
-              'colored AppBar in light mode, and a Material guide background '
-              'colored one in dark mode. With FlexColorScheme you can choose '
-              'if it should be primary color, Material guide background color, '
-              'blended background or surface color or even a custom color. '
-              'The predefined schemes use their secondary variant color as '
-              'the custom color for the AppBar color, but it can be any color.',
+              'Default Flutter themes use primary colored AppBar in light '
+              'mode, and almost black in dark mode. Now you can select '
+              'if it should be Primary, Material background, background or '
+              'surface color, with their primary blends or a custom color. '
+              'Predefined themes use their secondary variant color for '
+              'custom AppBar color, but you can make it any color.',
             ),
           ),
           if (isLight) ...<Widget>[
             ListTile(
-              title: const Text('Light mode AppBar background color'),
+              isThreeLine: true,
+              title: const Text('Light mode color'),
               subtitle: Text(
                 explainAppBarStyle(controller.lightAppBarStyle, isLight),
               ),
@@ -682,7 +682,8 @@ class _AppBarStyle extends StatelessWidget {
             ),
           ] else ...<Widget>[
             ListTile(
-              title: const Text('Dark mode AppBar background color'),
+              isThreeLine: true,
+              title: const Text('Dark mode color'),
               subtitle: Text(
                 explainAppBarStyle(controller.darkAppBarStyle, isLight),
               ),
@@ -697,11 +698,11 @@ class _AppBarStyle extends StatelessWidget {
           ],
           SwitchListTile.adaptive(
             title: const Text(
-              'One toned AppBar with transparent status bar',
+              'One colored app bar on Android',
             ),
             subtitle: const Text(
-              'If ON there is no scrim on the status bar. '
-              'Turn OFF for normal two toned AppBar on Android.',
+              'ON   There is no scrim on the status bar\n'
+              'OFF  Use default two toned style',
             ),
             value: controller.transparentStatusBar,
             onChanged: controller.setTransparentStatusBar,
@@ -721,7 +722,7 @@ class _AppBarStyle extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'ELEVATE',
+                      'ELEV',
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
@@ -735,9 +736,9 @@ class _AppBarStyle extends StatelessWidget {
                 ),
               )),
           const ListTile(
-            title: Text('Background opacity'),
+            title: Text('Opacity'),
             subtitle: Text(
-              'Set themed AppBar opacity, typically 85% to 98% works well.',
+              'Themed opacity. Try 85% to 98%',
             ),
           ),
           ListTile(
@@ -774,10 +775,9 @@ class _AppBarStyle extends StatelessWidget {
           const Divider(height: 1),
           const SizedBox(height: 8),
           ListTile(
-            title: const Text('TabBar theme'),
+            title: const Text('Tab bar'),
             subtitle: Text(
-              'Choose the style that fit best with where you primarily intend '
-              'to use your TabBars.\n'
+              'Choose a style that fits your intend usage.\n'
               '${explainTabStyle(controller.tabBarStyle)}',
             ),
           ),
@@ -795,8 +795,8 @@ class _AppBarStyle extends StatelessWidget {
   }
 }
 
-class _BottomNavBars extends StatelessWidget {
-  const _BottomNavBars({
+class _BottomNavigation extends StatelessWidget {
+  const _BottomNavigation({
     Key? key,
     required this.controller,
     required this.navBarStyle,
@@ -812,8 +812,26 @@ class _BottomNavBars extends StatelessWidget {
   final bool hasDivider;
   final ValueChanged<bool> onHasDivider;
 
+  String explainStyle(final FlexSystemNavBarStyle style, final bool isLight) {
+    switch (style) {
+      case FlexSystemNavBarStyle.system:
+        return isLight
+            ? 'System, white with opacity in light mode'
+            : 'System, black with opacity in dark mode';
+      case FlexSystemNavBarStyle.surface:
+        return 'Surface color, with opacity & alpha blend';
+      case FlexSystemNavBarStyle.background:
+        return 'Background color, with opacity & alpha blend';
+      case FlexSystemNavBarStyle.scaffoldBackground:
+        return 'Scaffold background, with opacity & alpha blend';
+      case FlexSystemNavBarStyle.transparent:
+        return 'Fully transparent regardless of opacity value';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     return RevealListTileCard(
       title: Text(
         'Bottom navigation',
@@ -825,9 +843,9 @@ class _BottomNavBars extends StatelessWidget {
           const ListTile(
             title: Text('Opacity'),
             subtitle: Text(
-              'Used by system navigation bar and themed bottom '
-              'navigation bar opacity. They are different '
-              'parameters, but share setting in this example.',
+              'System navigation and bottom '
+              'navigation bar opacity. They are separate parameters, but '
+              'share input control value in this example',
             ),
           ),
           ListTile(
@@ -862,26 +880,20 @@ class _BottomNavBars extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(height: 1),
-          const ListTile(
-            title: Text('Android system navigation bar style'),
-            subtitle: Text(
-              'Styled with annotated region. System is white '
-              'in light theme and black in dark. '
-              'Others use their respective theme '
-              'color. Transparent shows background with system '
-              'navigation buttons on background.\n',
-            ),
+          ListTile(
+            title: const Text('Android system navigation bar'),
+            subtitle: Text('FlexColorScheme.themedSystemNavigationBar\n'
+                '${explainStyle(navBarStyle, isLight)}'),
           ),
           ListTile(
-            title: const Text('Style'),
             trailing: SystemNavBarStyleButtons(
               style: navBarStyle,
               onChanged: onNavBarStyle,
             ),
           ),
           SwitchListTile.adaptive(
-            title: const Text('System navigation bar has divider'),
+            title: const Text('System navigation bar divider'),
+            subtitle: const Text('Recommend OFF, due to extra scrim'),
             value: hasDivider,
             onChanged: onHasDivider,
           ),
@@ -942,7 +954,7 @@ class _SubPages extends StatelessWidget {
             title: const Text('Splash page demo 2'),
             subtitle: const Text(
               'No status icons or navigation bar.\n'
-              'Using setEnabledSystemUIOverlays([])',
+              'Using setEnabledSystemUIMode',
             ),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {

@@ -158,9 +158,9 @@ extension FlexThemeData on ThemeData {
     ///
     /// Since there is not an exact 2:1 relationship between background and
     /// surface, when using the older [FlexSurface] based style, nor is
-    /// scaffoldBackground : surface always a 1 : 4 relationship. The old and
+    /// scaffoldBackground : surface always a 1 : 3 relationship. The old and
     /// new designs do never align exactly at any blendLevel, but the above
-    /// values produce visually very close results.
+    /// values produce visually similar results.
     ///
     /// To get elevation overlay color in dark themes on all surfaces used by
     /// [Material], use one of the modes where background and dialog color
@@ -858,9 +858,9 @@ extension FlexThemeData on ThemeData {
     ///
     /// Since there is not an exact 2:1 relationship between background and
     /// surface, when using the older [FlexSurface] based style, nor is
-    /// scaffoldBackground : surface always a 1 : 4 relationship. The old and
+    /// scaffoldBackground : surface always a 1 : 3 relationship. The old and
     /// new designs do never align exactly at any blendLevel, but the above
-    /// values produce visually very close results.
+    /// values produce visually similar results.
     ///
     /// To get elevation overlay color in dark themes on all surfaces used by
     /// [Material], use one of the modes where background and dialog color

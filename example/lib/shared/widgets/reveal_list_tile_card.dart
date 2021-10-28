@@ -139,6 +139,7 @@ class _RevealListTileCardState extends State<RevealListTileCard>
           scheme.primary.withAlpha(2 * blendFactor), cardColor);
     }
     return Card(
+      margin: const EdgeInsets.symmetric(vertical: 4),
       color: cardColor,
       child: Column(
         children: <Widget>[

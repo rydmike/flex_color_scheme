@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -31,20 +30,23 @@ class SplashPageTwo extends StatefulWidget {
 class _SplashPageTwoState extends State<SplashPageTwo> {
   @override
   void initState() {
-    // This call will remove to top and bottom UI overlays.
+    // This call should remove the top and bottom UI overlays on Android.
     //
     // For some reason on some newer Android versions, it does not work
-    // correctly and leaves a black ugly bar on top. Happens eg on Pixel 4XL
-    // (emulator with Android 11), OnePlus 7T (device with Android 10 & 111),
-    // but not on some Android Tablets Samsung Galaxy Tab A
-    // (device with Android 10), Nexus 7 (device with Android 6) nor
-    // Pixel C (emulator with Android 11).
+    // correctly and in some cases leaves a black ugly bar on top.
+    // Happened eg on Pixel 4XL (emulator with Android 11),
+    // OnePlus 7T (device with Android 10 & 11), but not on some Android
+    // Tablets like Samsung Galaxy Tab A (Android 10), Nexus 7 (Android 6)
+    // nor Pixel C (emulator with Android 11).
     //
-    // Because of this issue with this method, you may want to use the method
-    // presented a demo 1b instead. If you see this issue with this method
+    // In some cases there is no sad big bar, but the status icons and system
+    // navigation bar overlays remained visible, not what we wanted either.
+    //
+    // Because of the issues with this method, you may want to use the method
+    // presented in demo 1b instead. If you see this issue with this method
     // on a device and figure out a way to fix it, please let me know.
     // I would prefer this method for clean screens too, since you
-    // can completely remove the status bar and navigation bar and use none
+    // can completely remove the status bar and navigation bar with none
     // white/black backgrounds as well.
     //
     // Another thing to be aware of with this method is that eg bringing up
@@ -71,50 +73,34 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    // This splash page sets scaffold background to color scheme background,
-    // thus if we have used primary color surface and background branding
-    // (blending) in FlexColorScheme, it will included a hint of the
-    // primary color. This is just done in this example to show that
-    // this way we can use a colored background.
-    //
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      // This make system navigation bar theme background color, since we use
-      // that in this example for the scaffold background as well, it should
-      // match nicely if it pops up back up at some point while this screen is
-      // used, eg via keyboard activation.
-      value: FlexColorScheme.themedSystemNavigationBar(
-        context,
-        noAppBar: true,
-        invertStatusIcons: true,
-        opacity: 0.01,
-      ),
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.background,
-        resizeToAvoidBottomInset: true,
-        body: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Splash!',
-                  style: theme.textTheme.headline2!
-                      .copyWith(color: theme.colorScheme.primary),
-                ),
-                const SizedBox(height: 20),
-                const Text('A clean splash screen'),
-                const SizedBox(height: 8),
-                const Text('No status bar and no navigation bar',
-                    textAlign: TextAlign.center),
-                const SizedBox(height: 30),
-                Text('Tap screen to close',
-                    style: TextStyle(color: theme.colorScheme.secondary)),
-              ],
-            ),
+    // When using surface blend modes that use strong primary color blends on
+    // themed scaffold background color, you will see it on this page as well.
+    return Scaffold(
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Splash!',
+                style: theme.textTheme.headline2!
+                    .copyWith(color: theme.colorScheme.primary),
+              ),
+              const SizedBox(height: 20),
+              const Text('A clean splash screen'),
+              const SizedBox(height: 8),
+              const Text('No status bar and no navigation bar',
+                  textAlign: TextAlign.center),
+              const SizedBox(height: 30),
+              Text(
+                'Tap screen to close',
+                style: TextStyle(color: theme.colorScheme.secondary),
+              ),
+            ],
           ),
         ),
       ),

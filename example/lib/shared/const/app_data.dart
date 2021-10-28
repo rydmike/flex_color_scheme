@@ -11,11 +11,11 @@ class AppData {
   // This info is mainly for the Live public web builds of the examples.
   // When I build a new public version I just make sure to update this info
   // before building them.
-  static const String appName = 'FlexColorScheme';
+  static const String appName = 'FlexColor\u{00AD}Scheme';
   static const String version = '4.0.0';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
-  static const String flutterVersion = 'Channel stable, 2.5.3';
+  static const String flutterVersion = 'stable v2.5.3';
   static const String copyright = '© 2020, 2021';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
