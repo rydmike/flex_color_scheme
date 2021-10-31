@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../shared/all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
-// Home Page for EXAMPLE 4)
+// Home Page for EXAMPLE 4 - All Themes
 //
 // The content of the HomePage below is not relevant for using FlexColorScheme
 // based application theming. The critical parts are in the above MaterialApp
@@ -21,6 +21,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double margins =
+        AppData.responsiveInsets(MediaQuery.of(context).size.width);
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
@@ -44,7 +46,7 @@ class HomePage extends StatelessWidget {
             body: PageBody(
               constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
               child: ListView(
-                padding: const EdgeInsets.all(AppData.edgeInsets),
+                padding: EdgeInsets.all(margins),
                 children: <Widget>[
                   Text('Theme', style: headline4),
                   const Text(
@@ -53,7 +55,7 @@ class HomePage extends StatelessWidget {
                     'it and how to select the used theme.\n\n'
                     'A primary color branding style common on desktop and web '
                     'is used. '
-                    'The new opinionated widget sub-theming is ON. You can '
+                    'The new opinionated widget theming is ON. You can '
                     'turn it OFF to use default widget themes. '
                     'A theme showcase displays the resulting theme using '
                     'common Material widgets.',
@@ -65,9 +67,9 @@ class HomePage extends StatelessWidget {
                       children: <Widget>[
                         // A 3-way theme toggle switch that shows the scheme.
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: AppData.edgeInsets,
-                            horizontal: AppData.edgeInsets + 4,
+                          padding: EdgeInsets.symmetric(
+                            vertical: margins,
+                            horizontal: margins + 4,
                           ),
                           child: FlexThemeModeSwitch(
                             themeMode: controller.themeMode,
@@ -88,16 +90,15 @@ class HomePage extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         // Active theme color indicators.
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: AppData.edgeInsets,
+                            horizontal: margins,
                           ),
-                          child: ShowThemeColors(),
+                          child: const ShowThemeColors(),
                         ),
                         const SizedBox(height: 8),
                         SwitchListTile.adaptive(
-                          title:
-                              const Text('Use FlexColorScheme widget theming'),
+                          title: const Text('Use widget theming'),
                           subtitle: const Text(
                             'Turn ON to enable opinionated widget themes.',
                           ),
@@ -118,8 +119,7 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Divider(),
+                  const SizedBox(height: 16),
                   Text('Theme Showcase', style: headline4),
                   const ThemeShowcase(),
                 ],

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 /// A centered width constrained web page body.
-//
-// This type of layout is often used on web pages.
-//
-// It provides the following features to the content of the page:
-// - Adds a scrollbar
-// - Adds the capability to un-focus a control like a TextFiled by clicking on
-//   the background.
-// - Center the content and limit the content width when a given width
-//   constraint value is exceeded, in this case an app level max width constant.
+///
+/// This type of layout is often used on web pages.
+///
+/// It provides the following features to the content of the page:
+/// - Adds a scrollbar
+/// - Adds the capability to un-focus a control like a TextFiled by clicking on
+///   the background.
+/// - Center the content and limit the content width when a given max width
+///   constraint is exceeded.
 class PageBody extends StatelessWidget {
   /// Default constructor for the constrained PageBody.
   const PageBody({

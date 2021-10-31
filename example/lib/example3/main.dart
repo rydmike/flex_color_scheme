@@ -6,7 +6,7 @@ import '../shared/all_shared_imports.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------
-// EXAMPLE 3)
+// EXAMPLE 3 - Four Themes
 //
 // This example shows how to use three built in color schemes and a custom
 // scheme, as selectable FlexColorScheme based theme options in an
@@ -72,7 +72,7 @@ class DemoApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           scrollBehavior: AppScrollBehavior(),
-          title: 'Example 3) Use Four Themes',
+          title: 'Four Themes',
           // Select used light theme for the app by using the ThemeController
           // usedScheme, that contains the value of currently selected
           // FlexScheme enum. If it is the custom scheme, we use the above

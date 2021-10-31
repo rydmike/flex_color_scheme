@@ -4,13 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// import 'package:google_fonts/google_fonts.dart';
-
 import '../shared/all_shared_imports.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------
-// EXAMPLE 5)
+// EXAMPLE 5 - Themes Playground
 //
 // This example shows how you can use all the built in color schemes in
 // FlexColorScheme to define themes from them and how you can define your own
@@ -86,7 +84,7 @@ class DemoApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             scrollBehavior: AppScrollBehavior(),
-            title: 'Features Demo',
+            title: 'Themes Playground',
             theme: themeController.useFlexColorScheme
                 ? FlexThemeData.light(
                     // Use controller to select color scheme from our list.

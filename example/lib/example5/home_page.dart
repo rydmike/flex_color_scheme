@@ -6,12 +6,14 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../shared/all_shared_imports.dart';
 
 // -----------------------------------------------------------------------------
-// Home Page for EXAMPLE 5)
+// Home Page for EXAMPLE 5 - Themes Playground
 //
 // The content of the HomePage below is not relevant for using FlexColorScheme
 // based application theming. The critical parts are in the above MaterialApp
 // theme definitions. The HomePage contains UI to visually show what the
 // defined example looks like in an application and with commonly used Widgets.
+//
+// That said there is some interesting stuff going one here! :)
 // -----------------------------------------------------------------------------
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -28,12 +30,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late ScrollController scrollController;
 
-  // Controls the active width of the menu-rail: expanded - collapsed - 0.
-  double menuWidth = AppData.menuWidth;
-  // Controls if the menu is expanded, when it can be.
-  bool isMenuExpanded = true;
-  // Controls if the rail is closed when it can be.
-  bool isMenuClosed = false;
   // Used to control system navbar style via an AnnotatedRegion that uses
   // FlexColorScheme.themedSystemNavigationBar.
   FlexSystemNavBarStyle navBarStyle = FlexSystemNavBarStyle.background;
@@ -65,198 +61,148 @@ class _HomePageState extends State<HomePage> {
     final MediaQueryData media = MediaQuery.of(context);
     // Paddings so content shows up visible area when we use Scaffold props
     // extendBodyBehindAppBar and extendBody.
-    final double topPadding =
-        media.padding.top + kToolbarHeight + AppData.edgeInsets;
-    final double bottomPadding = media.padding.bottom + AppData.edgeInsets;
+    final double topPadding = media.padding.top + kToolbarHeight;
+    final double bottomPadding = media.padding.bottom;
 
-    // We are on desktop width media, based on our definition in this app.
-    final bool isDesktop = media.size.width >= AppData.desktopBreakpoint;
+    // // We are on desktop width media, based on our definition in this app.
+    // final bool isDesktop = media.size.width >= AppData.desktopBreakpoint;
+
     // We are on phone width media, based on our definition in this app.
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
-    // Make tighter margins on phone size.
-    final double margins = isPhone ? 8 : AppData.edgeInsets;
-
-    // Secret sauce for a mock responsive toggleable drawer-rail-menu.
-    if (!isDesktop) menuWidth = AppData.railWidth;
-    if (!isDesktop && isMenuClosed) menuWidth = 0.01;
-    if (!isDesktop && !isMenuClosed) menuWidth = AppData.railWidth;
-    if (isDesktop && !isMenuExpanded) menuWidth = AppData.railWidth;
-    if (isDesktop && isMenuExpanded) menuWidth = AppData.menuWidth;
-
-    // We know how wide the side menu is, so we don't need a layout builder,
-    // we just calculate the available width usable by  content and chop it
-    // up into columns, based on arbitrary break-width, 700 in this case.
-    final int columns = (media.size.width - menuWidth) ~/ 720 + 1;
-
-    if (prevColumns != columns) {
-      if (columns == 1) isCardClosed = true;
-      if (columns >= 2) isCardClosed = false;
-      prevColumns = columns;
-    }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      // FlexColorScheme contains a helper that can be use to theme
+      // FlexColorScheme contains a static helper that can be use to theme
       // the system navigation bar using an AnnotatedRegion. Without this
-      // page wrapper the system navigation bar in Android will not change
-      // theme color as we change themes for the page. This is a
-      // Flutter "feature", but with this annotated region we can have the
-      // navigation bar follow desired background color and theme-mode,
-      // which looks nicer and more as it should on an Android device.
+      // wrapper the system navigation bar in Android will not change
+      // theme color as we change themes for the page. This is normal Flutter
+      // behavior. By using an annotated region with the helper function
+      // FlexColorScheme.themedSystemNavigationBar, we can make the
+      // navigation bar follow desired background color and theme-mode.
+      // This looks much better and as it should on Android devices.
+      // It also supports system navbar with opacity or fully transparent
+      // Android system navigation bar on Android SDK >= 29.
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
         systemNavBarStyle: navBarStyle,
         useDivider: useNavDivider,
         opacity: widget.controller.bottomNavigationBarOpacity,
       ),
-      child: Row(
-        children: <Widget>[
-          // The dummy demo menu and side rail.
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppData.menuWidth),
-            child: Material(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: menuWidth,
-                child: ResponsiveMenu(
-                  maxWidth: AppData.menuWidth,
-                  onTap: () {
-                    setState(() {
-                      if (isDesktop) isMenuExpanded = !isMenuExpanded;
-                      if (!isDesktop) isMenuClosed = !isMenuClosed;
-                    });
-                  },
-                ),
-              ),
+      child: ResponsiveScaffold(
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          // Just a suitable breakpoint for when we want to have more
+          // than one column in the body with this particular content.
+          final int columns = constraints.maxWidth ~/ 780 + 1;
+          if (prevColumns != columns) {
+            if (columns == 1) isCardClosed = true;
+            if (columns >= 2) isCardClosed = false;
+            prevColumns = columns;
+          }
+          // Make margins respond to media size and nr of columns.
+          double margins = AppData.edgeInsetsPhone;
+          if (!isPhone && columns == 1) margins = AppData.edgeInsetsTablet;
+          if (columns >= 2) margins = AppData.edgeInsetsDesktop;
+          if (columns >= 4) margins = AppData.edgeInsetsBigDesktop;
+
+          return StaggeredGridView.countBuilder(
+            controller: scrollController,
+            crossAxisCount: columns,
+            mainAxisSpacing: margins,
+            crossAxisSpacing: margins,
+            padding: EdgeInsets.fromLTRB(
+              margins,
+              topPadding + margins,
+              margins,
+              bottomPadding + margins,
             ),
-          ),
-          // The actual page content is a normal Scaffold.
-          Expanded(
-            child: Scaffold(
-              extendBodyBehindAppBar: true,
-              extendBody: true,
-              drawerEnableOpenDragGesture: !isDesktop && isMenuClosed,
-              appBar: AppBar(
-                title: Text(AppData.title(context)),
-                actions: const <Widget>[AboutIconButton()],
-                automaticallyImplyLeading: !isDesktop && isMenuClosed,
-              ),
-              drawer: ConstrainedBox(
-                constraints:
-                    const BoxConstraints.expand(width: AppData.menuWidth),
-                child: Drawer(
-                  child: ResponsiveMenu(
-                    maxWidth: AppData.menuWidth,
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      setState(() {
-                        isMenuClosed = !isMenuClosed;
-                      });
-                    },
+            staggeredTileBuilder: (int index) {
+              // To make some RevealListTileCard panels below use more columns
+              // we can do this:
+              // if (index == 2) return const StaggeredTile.fit(2);
+              return const StaggeredTile.fit(1);
+            },
+            itemBuilder: (BuildContext context, int index) => <Widget>[
+              RevealListTileCard(
+                isClosed: false,
+                title: Text('FlexColorScheme',
+                    style: Theme.of(context).textTheme.headline6),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: <Widget>[
+                      const SizedBox(height: 8),
+                      const Text(
+                        'In this example you can try all themes and '
+                        'features. Experiment with surface blends and see '
+                        'how the app bar theme options work. '
+                        'Try the true black option for dark '
+                        'themes along with computed dark themes.\n\n'
+                        'A responsive side menu/rail is used to visually '
+                        'demonstrate the different surface blends. '
+                        'The impact on Flutter SDK Material widgets is shown '
+                        'in expandable cards with the "Themed" heading.',
+                      ),
+                      const SizedBox(height: 16),
+                      ThemeSelector(controller: widget.controller),
+                    ],
                   ),
                 ),
               ),
-              body: StaggeredGridView.countBuilder(
-                controller: scrollController,
-                crossAxisCount: columns,
-                mainAxisSpacing: margins,
-                crossAxisSpacing: margins,
-                padding: EdgeInsets.fromLTRB(
-                  margins,
-                  topPadding,
-                  margins,
-                  bottomPadding,
-                ),
-                staggeredTileBuilder: (int index) {
-                  // To make some panels use more columns we can do this
-                  // if (index == 2) return const StaggeredTile.fit(2);
-                  return const StaggeredTile.fit(1);
+              _ThemeColors(
+                controller: widget.controller,
+                isClosed: isCardClosed,
+              ),
+              _ThemeMode(
+                controller: widget.controller,
+                isClosed: isCardClosed,
+              ),
+              _WidgetThemes(
+                controller: widget.controller,
+                isClosed: isCardClosed,
+              ),
+              _SurfaceBlends(
+                controller: widget.controller,
+                isClosed: isCardClosed,
+              ),
+              _AppBarSettings(
+                controller: widget.controller,
+                isClosed: isCardClosed,
+              ),
+              _BottomNavigation(
+                controller: widget.controller,
+                navBarStyle: navBarStyle,
+                onNavBarStyle: (FlexSystemNavBarStyle value) {
+                  setState(() {
+                    navBarStyle = value;
+                  });
                 },
-                itemBuilder: (BuildContext context, int index) => <Widget>[
-                  RevealListTileCard(
-                    // key: const ValueKey<int>(1),
-                    isClosed: false,
-                    title: Text('FlexColorScheme',
-                        style: Theme.of(context).textTheme.headline6),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(children: const <Widget>[
-                        SizedBox(height: 8),
-                        Text(
-                          'In this example you can try all themes and '
-                          'features. Experiment with surface blends and see '
-                          'how the app bar theme options work. '
-                          'Try the true black option for dark '
-                          'themes along with computed dark themes.\n\n'
-                          'A responsive side menu/rail is used to visually '
-                          'demonstrate the different surface blends. '
-                          'The impact on Flutter SDK Material widgets is shown '
-                          'in expandable cards with the "Themed" heading.',
-                        )
-                      ]),
-                    ),
-                  ),
-                  _ThemeColors(
-                    // key: const ValueKey<int>(2),
-                    controller: widget.controller,
-                    isClosed: isCardClosed,
-                  ),
-                  _ThemeMode(
-                    // key: const ValueKey<int>(3),
-                    controller: widget.controller,
-                    isClosed: isCardClosed,
-                  ),
-                  _WidgetThemes(
-                    // key: const ValueKey<int>(4),
-                    controller: widget.controller,
-                    isClosed: isCardClosed,
-                  ),
-                  _SurfaceBlends(
-                    key: const ValueKey<int>(5),
-                    controller: widget.controller,
-                    isClosed: isCardClosed,
-                  ),
-                  _AppBarSettings(
-                    // key: const ValueKey<int>(6),
-                    controller: widget.controller,
-                    isClosed: isCardClosed,
-                  ),
-                  _BottomNavigation(
-                    // key: const ValueKey<int>(6),
-                    controller: widget.controller,
-                    navBarStyle: navBarStyle,
-                    onNavBarStyle: (FlexSystemNavBarStyle value) {
-                      setState(() {
-                        navBarStyle = value;
-                      });
-                    },
-                    hasDivider: useNavDivider,
-                    onHasDivider: (bool value) {
-                      setState(() {
-                        useNavDivider = value;
-                      });
-                    },
-                    isClosed: isCardClosed,
-                  ),
-                  _SubPages(
-                    // key: const ValueKey<int>(8),
-                    isClosed: isCardClosed,
-                  ),
-                  const _ButtonsShowcase(),
-                  const _InputShowcase(),
-                  const _ThemeBarsShowcase(),
-                  const _ListTileShowcase(),
-                  const _TimePickerDialogShowcase(),
-                  const _DatePickerDialogShowcase(),
-                  const _AlertDialogShowcase(),
-                  const _BottomSheetAndMaterialShowcase(),
-                  const _CardShowcase(),
-                  const _TextThemeShowcase(),
-                ].elementAt(index),
-                itemCount: 18,
+                hasDivider: useNavDivider,
+                onHasDivider: (bool value) {
+                  setState(() {
+                    useNavDivider = value;
+                  });
+                },
+                isClosed: isCardClosed,
               ),
-            ),
-          )
-        ],
+              _SubPages(
+                isClosed: isCardClosed,
+              ),
+              const _ButtonsShowcase(),
+              const _InputShowcase(),
+              const _ThemeBarsShowcase(),
+              const _ListTileShowcase(),
+              const _TimePickerDialogShowcase(),
+              const _DatePickerDialogShowcase(),
+              const _AlertDialogShowcase(),
+              const _BottomSheetAndMaterialShowcase(),
+              const _CardShowcase(),
+              const _TextThemeShowcase(),
+            ].elementAt(index),
+            itemCount: 18,
+          );
+        }),
       ),
     );
   }
@@ -287,7 +233,7 @@ class _ThemeColors extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
+            padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
             child: ShowThemeColors(),
           ),
           const SizedBox(height: 8),
@@ -331,9 +277,8 @@ class _ThemeMode extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
-            title: const Text('Mode'),
-            subtitle: Text('Using ${controller.themeMode.toString().dotTail} '
-                'mode'),
+            title: const Text('Theme mode'),
+            subtitle: Text('Mode ${controller.themeMode.toString().dotTail}'),
             trailing: ThemeModeSwitch(
               themeMode: controller.themeMode,
               onChanged: controller.setThemeMode,

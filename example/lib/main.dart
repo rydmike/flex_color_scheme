@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'shared/all_shared_imports.dart';
 
-/// FlexColorScheme default example.
+/// DEFAULT EXAMPLE - Hot Reload Playground
 ///
 /// This example shows how you can define custom colors, use [FlexColorScheme]
 /// to theme your app with them, or use a predefined theme.
@@ -248,7 +248,7 @@ class _DemoAppState extends State<DemoApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Default Example',
+      title: 'Hot Reload Playground',
       // Define the light theme for the app, based on defined colors and
       // properties above.
       theme: FlexThemeData.light(
@@ -393,11 +393,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late ScrollController scrollController;
 
-  // The reason why HomePage is using a stateful widget is that it holds the
-  // state of the dummy side menu/rail locally.
-  double _menuWidth = AppData.menuWidth;
-  bool _isExpanded = true;
-
   // The state for the system navbar style and divider usage is local as it is
   // is only used by the AnnotatedRegion.
   // Used to control system navbar style via an AnnotatedRegion.
@@ -421,181 +416,135 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding =
-        media.padding.top + kToolbarHeight + AppData.edgeInsets;
-    final double bottomPadding = media.padding.bottom + AppData.edgeInsets;
-
-    final bool menuCanOperate = media.size.width > AppData.desktopBreakpoint;
-    final bool menuHide = media.size.width < AppData.phoneBreakpoint;
+    final double margins = AppData.responsiveInsets(media.size.width);
+    final double topPadding = media.padding.top + kToolbarHeight + margins;
+    final double bottomPadding = media.padding.bottom + margins;
 
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
 
-    // Give the width of the side panel some automatic adaptive behavior and
-    // make it rail sized when there is not enough room for a menu, even if
-    // menu size is requested, and no rail on narrow phones.
-    if (menuHide) {
-      _menuWidth = 0.01;
-    } else {
-      if (!menuCanOperate) {
-        _menuWidth = AppData.railWidth;
-      }
-      if (menuCanOperate && !_isExpanded) {
-        _menuWidth = AppData.railWidth;
-      }
-      if (menuCanOperate && _isExpanded) {
-        _menuWidth = AppData.menuWidth;
-      }
-    }
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      // FlexColorScheme contains a helper that can be use to theme
+      // FlexColorScheme contains a static helper that can be use to theme
       // the system navigation bar using an AnnotatedRegion. Without this
-      // page wrapper the system navigation bar in Android will not change
-      // theme color as we change themes for the page. This is a
-      // Flutter "feature", but with this annotated region we can have the
-      // navigation bar follow desired background color and theme-mode,
-      // which looks nicer and more as it should on an Android device.
+      // wrapper the system navigation bar in Android will not change
+      // theme color as we change themes for the page. This is normal Flutter
+      // behavior. By using an annotated region with the helper function
+      // FlexColorScheme.themedSystemNavigationBar, we can make the
+      // navigation bar follow desired background color and theme-mode.
+      // This looks much better and as it should on Android devices.
+      // It also supports system navbar with opacity or fully transparent
+      // Android system navigation bar on Android SDK >= 29.
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
         systemNavBarStyle: systemNavBarStyle,
         useDivider: useSysNavDivider,
       ),
-      child: Row(
-        children: <Widget>[
-          // Contains the demo menu and side rail.
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppData.menuWidth),
-            child: Material(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: _menuWidth,
-                child: ResponsiveMenu(
-                  maxWidth: AppData.menuWidth,
-                  onTap: menuCanOperate
-                      ? () {
-                          setState(() {
-                            _isExpanded = !_isExpanded;
-                          });
-                        }
-                      : null,
+      child: ResponsiveScaffold(
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: PageBody(
+          controller: scrollController,
+          constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
+          child: ListView(
+            controller: scrollController,
+            padding: EdgeInsets.fromLTRB(
+                margins, topPadding, margins, bottomPadding),
+            children: <Widget>[
+              Text('Theme', style: headline4),
+              const Text('This example shows how you can use custom colors '
+                  'with FlexColorScheme in light and dark mode, '
+                  'just as defined values in a stateless app.\n\n'
+                  'This example function as developers hot reload playground. '
+                  'It has property placeholders for every feature, that '
+                  'you can modify to try different FlexColorScheme features.'),
+              const SizedBox(height: 8),
+              ListTile(
+                title: const Text('Theme mode'),
+                subtitle: Text('Mode '
+                    '${widget.themeMode.toString().dotTail}'),
+                trailing: ThemeModeSwitch(
+                  themeMode: widget.themeMode,
+                  onChanged: widget.onThemeModeChanged,
                 ),
+                onTap: () {
+                  if (Theme.of(context).brightness == Brightness.light) {
+                    widget.onThemeModeChanged(ThemeMode.dark);
+                  } else {
+                    widget.onThemeModeChanged(ThemeMode.light);
+                  }
+                },
               ),
-            ),
-          ),
-          // The actual page content is a normal Scaffold.
-          Expanded(
-            child: Scaffold(
-              extendBodyBehindAppBar: true,
-              extendBody: true,
-              appBar: AppBar(
-                title: Text(AppData.title(context)),
-                actions: const <Widget>[AboutIconButton()],
+              const SizedBox(height: 8),
+              // Active theme color indicators.
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: margins),
+                child: const ShowThemeColors(),
               ),
-              body: PageBody(
-                controller: scrollController,
-                constraints:
-                    const BoxConstraints(maxWidth: AppData.maxBodyWidth),
-                child: ListView(
-                  controller: scrollController,
-                  padding: EdgeInsets.fromLTRB(
-                    AppData.edgeInsets,
-                    topPadding,
-                    AppData.edgeInsets,
-                    bottomPadding,
-                  ),
+              const SizedBox(height: 8),
+              // Open a sub-page
+              Card(
+                child: Column(
                   children: <Widget>[
-                    Text('Theme', style: headline4),
-                    const Text(
-                        'This example shows how you can use custom colors '
-                        'with FlexColorScheme in light and dark mode, '
-                        'just as defined values in a stateless app.\n\n'
-                        'It uses ThemeMode.system and device settings to '
-                        'toggle between light and dark theme.\n\n'
-                        'The example also has property place holders that '
-                        'you can modify to test most of the FlexColorScheme '
-                        'features.'),
-                    const SizedBox(height: 8),
                     ListTile(
-                      title: const Text('Change theme mode'),
-                      subtitle: Text('Theme mode '
-                          '${widget.themeMode.toString().dotTail}'),
-                      trailing: ThemeModeSwitch(
-                        themeMode: widget.themeMode,
-                        onChanged: widget.onThemeModeChanged,
+                      title: const Text('Open a demo subpage'),
+                      subtitle: const Text(
+                        'The subpage will use the same '
+                        'color scheme based theme automatically.',
                       ),
+                      trailing: const Icon(Icons.arrow_forward_ios),
+                      onTap: () {
+                        Subpage.show(context);
+                      },
                     ),
-                    // Active theme color indicators.
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
-                      child: ShowThemeColors(),
-                    ),
-                    const SizedBox(height: 8),
-                    // Open a sub-page
-                    Card(
-                      child: Column(
-                        children: <Widget>[
-                          ListTile(
-                            title: const Text('Open a demo subpage'),
-                            subtitle: const Text(
-                              'The subpage will use the same '
-                              'color scheme based theme automatically.',
-                            ),
-                            trailing: const Icon(Icons.arrow_forward_ios),
-                            onTap: () {
-                              Subpage.show(context);
-                            },
-                          ),
-                          const Divider(height: 1),
-                          // Splash pages...
-                          ListTile(
-                            title: const Text('Splash page demo 1a'),
-                            subtitle: const Text(
-                              'No scrim and normal status icons.\n'
-                              'Using themedSystemNavigationBar (noAppBar:true)',
-                            ),
-                            trailing: const Icon(Icons.arrow_forward_ios),
-                            onTap: () {
-                              SplashPageOne.show(context, false);
-                            },
-                          ),
-                          ListTile(
-                            title: const Text('Splash page demo 1b'),
-                            subtitle: const Text(
-                              'No scrim and inverted status icons.\n'
-                              'Using themedSystemNavigationBar (noAppBar:true, '
-                              'invertStatusIcons:true)',
-                            ),
-                            trailing: const Icon(Icons.arrow_forward_ios),
-                            onTap: () {
-                              SplashPageOne.show(context, true);
-                            },
-                          ),
-                          ListTile(
-                            title: const Text('Splash page demo 2'),
-                            subtitle: const Text(
-                              'No status icons or navigation bar.\n'
-                              'Using setEnabledSystemUIOverlays([])',
-                            ),
-                            trailing: const Icon(Icons.arrow_forward_ios),
-                            onTap: () {
-                              SplashPageTwo.show(context, true);
-                            },
-                          ),
-                        ],
+                    const Divider(height: 1),
+                    // Splash pages...
+                    ListTile(
+                      title: const Text('Splash page demo 1a'),
+                      subtitle: const Text(
+                        'No scrim and normal status icons.\n'
+                        'Using themedSystemNavigationBar (noAppBar:true)',
                       ),
+                      trailing: const Icon(Icons.arrow_forward_ios),
+                      onTap: () {
+                        SplashPageOne.show(context, false);
+                      },
                     ),
-                    Text('Theme Showcase', style: headline4),
-                    const ThemeShowcase(),
+                    ListTile(
+                      title: const Text('Splash page demo 1b'),
+                      subtitle: const Text(
+                        'No scrim and inverted status icons.\n'
+                        'Using themedSystemNavigationBar (noAppBar:true, '
+                        'invertStatusIcons:true)',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios),
+                      onTap: () {
+                        SplashPageOne.show(context, true);
+                      },
+                    ),
+                    ListTile(
+                      title: const Text('Splash page demo 2'),
+                      subtitle: const Text(
+                        'No status icons or navigation bar.\n'
+                        'Using setEnabledSystemUIOverlays([ ])',
+                      ),
+                      trailing: const Icon(Icons.arrow_forward_ios),
+                      onTap: () {
+                        SplashPageTwo.show(context, true);
+                      },
+                    ),
                   ],
                 ),
               ),
-            ),
+              Text('Theme Showcase', style: headline4),
+              const ThemeShowcase(),
+            ],
           ),
-        ],
+        ),
       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

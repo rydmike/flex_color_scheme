@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../const/app_data.dart';
 
-/// A mock responsive side menu content.
+/// A side menu with some fake content.
 ///
 /// The side menu content and all widgets in this file in this example have no
 /// actual function for the demo, other than to create a visual demo of what the

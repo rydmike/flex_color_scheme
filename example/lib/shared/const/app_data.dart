@@ -8,9 +8,9 @@ class AppData {
   // prevents instantiation and extension.
   AppData._();
 
-  // This info is mainly for the Live public web builds of the examples.
-  // When I build a new public version I just make sure to update this info
-  // before building them.
+  // Info about the app.
+  // When I build new public web versions of the demos, I just make sure to
+  // update this info before I trigger GitHub actions CI/CD that builds them.
   static const String appName = 'FlexColor\u{00AD}Scheme';
   static const String version = '4.0.0';
   static const String packageVersion = 'FlexColorScheme package $version';
@@ -27,16 +27,27 @@ class AppData {
   // this demo app, that works pretty well in this use case too.
   static const double maxBodyWidth = 1000;
 
-  // Edge padding insets for page content on the screen. A better looking result
-  // can be obtained if this increases in steps depending on canvas size.
-  // Keeping it fairly small, but not too small, it is a compromise for
-  // both phone and larger media.
-  static const double edgeInsets = 12;
+  // Edge padding insets for page content on the screen.
+  static const double edgeInsetsPhone = 6;
+  static const double edgeInsetsTablet = 12;
+  static const double edgeInsetsDesktop = 16;
+  // Used by Staggered gridview layout when are in 4 column layout mode.
+  static const double edgeInsetsBigDesktop = 18;
+
+  static double responsiveInsets(double width) {
+    if (width < phoneBreakpoint) return edgeInsetsPhone;
+    if (width < desktopBreakpoint) return edgeInsetsTablet;
+    return edgeInsetsDesktop;
+  }
 
   // The minimum media size needed for desktop/large tablet menu view.
-  static const double desktopBreakpoint = 720;
+  // Only at higher than this breakpoint will the menu open and be possible
+  // to toggle between menu and rail. Below this breakpoint it toggles between
+  // hidden in the Drawer and rail, also one phones. In this simple demo there
+  // is no switching to bottom navigation.
+  static const double desktopBreakpoint = 960;
 
-  // The minimum media size needed for side rail tablet menu view.
+  // The minimum media width treated as a phone device in this demo.
   static const double phoneBreakpoint = 500;
 
   // The width of the side menu when expanded to full menu.

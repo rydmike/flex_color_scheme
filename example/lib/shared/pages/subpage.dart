@@ -38,7 +38,7 @@ class _SubpageState extends State<Subpage> {
         media.padding.bottom + kBottomNavigationBarHeight;
 
     final bool isNarrow = media.size.width < AppData.phoneBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsets;
+    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
 
     return DefaultTabController(
       length: 3,
@@ -62,9 +62,9 @@ class _SubpageState extends State<Subpage> {
           child: ListView(
             padding: EdgeInsets.fromLTRB(
               sideMargin,
-              topPadding + AppData.edgeInsets,
+              topPadding + AppData.edgeInsetsTablet,
               sideMargin,
-              AppData.edgeInsets + bottomPadding,
+              AppData.edgeInsetsTablet + bottomPadding,
             ),
             children: <Widget>[
               Text('Subpage Demo', style: headline4),
@@ -77,7 +77,8 @@ class _SubpageState extends State<Subpage> {
               // Show all key active theme colors.
               Text('Theme Colors', style: headline4),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
+                padding:
+                    EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
                 child: ShowThemeColors(),
               ),
               const Divider(),

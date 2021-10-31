@@ -5,15 +5,8 @@ import 'package:flutter/material.dart';
 /// Use this widget to review your theme's impact on [ThemeData] and see
 /// how it looks with different Material widgets.
 ///
-/// This simple material theme demo is based on similar work in package
-/// https://pub.dev/packages/flutter_material_showcase developed by
-/// Miguel Beltran, credits belong to him for the idea and inspiration.
-///
-/// This version adds more demo widgets, and removes the Calendar that exists
-/// in the original version.
-///
-/// This stateful widget is only used in to provide visual feedback on how each
-/// selected and demonstrated FlexColorScheme based theme looks like.
+/// The sub widgets used in this theme show case can also be used on their
+/// own. This is done in example 5, where they are used in expanding Cards.
 class ThemeShowcase extends StatelessWidget {
   const ThemeShowcase({Key? key}) : super(key: key);
 
@@ -43,6 +36,7 @@ class ThemeShowcase extends StatelessWidget {
         const DatePickerDialogShowcase(),
         const AlertDialogShowcase(),
         const BottomSheetAndMaterialShowcase(),
+        const SizedBox(height: 16),
         const CardShowcase(),
         const TextThemeShowcase(),
       ],
@@ -678,7 +672,7 @@ class BottomSheetAndMaterialShowcase extends StatelessWidget {
             child: Center(child: Text('Material type canvas, elevation 4')),
           ),
         ),
-        const Divider(height: 32),
+        const SizedBox(height: 32),
         Text(
           'Material type card',
           style: Theme.of(context)

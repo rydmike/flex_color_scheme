@@ -5,7 +5,7 @@ import '../shared/all_shared_imports.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------
-// EXAMPLE 4)
+// EXAMPLE 4 - All Themes
 //
 // This example shows how to use all the built in color schemes in
 // FlexColorScheme to define themes from them and how to define your own
@@ -65,7 +65,7 @@ class DemoApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           scrollBehavior: AppScrollBehavior(),
-          title: 'Example 4) All Plus Three Custom Themes',
+          title: 'All Themes',
           // Define the light theme for the app, using current scheme index.
           theme: FlexThemeData.light(
             // The definition of the list of color schemes to use we moved into

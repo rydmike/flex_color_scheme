@@ -6,7 +6,7 @@ import '../shared/all_shared_imports.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------
-// EXAMPLE 1)
+// EXAMPLE 1 - Basic Theme Usage
 //
 // This example shows how to use a selected predefined color scheme in
 // FlexColorScheme to define light and dark themes using the scheme,
@@ -36,7 +36,7 @@ class _DemoAppState extends State<DemoApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       scrollBehavior: AppScrollBehavior(),
-      title: 'Example 1) Use Predefined Theme',
+      title: 'Basic Theme Usage',
       // Use a predefined FlexThemeData.light() theme for the light theme.
       theme: FlexThemeData.light(
         scheme: usedScheme,

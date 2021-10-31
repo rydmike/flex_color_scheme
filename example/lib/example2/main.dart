@@ -6,7 +6,7 @@ import '../shared/all_shared_imports.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------
-// EXAMPLE 2)
+// EXAMPLE 2 - Custom Theme
 //
 // This example shows how to define your own FlexSchemeData, using
 // FlexSchemeColor and create a FlexColorScheme based theme from it.
@@ -83,7 +83,7 @@ class DemoApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             scrollBehavior: AppScrollBehavior(),
-            title: 'Example 2) Use a Custom Theme',
+            title: 'Custom Theme',
             // Define FlexThemeData.light() theme using custom colors.
             theme: FlexThemeData.light(
               // You could have stored the light scheme in a FlexSchemeColor
