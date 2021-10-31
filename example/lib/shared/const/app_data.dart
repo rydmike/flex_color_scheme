@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /// App static functions and constants used in the example applications.
+///
+/// In a real app you probably prefer putting these into different static
+/// classes that serves your application's usage. For these examples I
+/// put them all in the same class, except the colors that are in their
+/// own class.
 class AppData {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.

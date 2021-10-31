@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.example">
+    package="com.rydmike.flexcolorscheme">
    <application
-        android:label="example"
+        android:label="ColorScheme"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -38,4 +38,10 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <!-- Flutter needs it to communicate with the running application
+     to allow setting breakpoints, to provide hot reload, etc.
+     Also needed for Flutter fonts in this app that loads them from the
+     internet. Added by @RydMike
+    -->
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

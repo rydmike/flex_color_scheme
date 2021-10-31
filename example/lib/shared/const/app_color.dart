@@ -2,6 +2,9 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 /// Static App color schemes used in examples 4 & 5.
+///
+/// Putting static const color data in their own class with only color values
+/// and data related to the colors is common useful and convenient practice.
 class AppColor {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
@@ -36,11 +39,11 @@ class AppColor {
 // secondaryVariant colors with the factory, but any color that is not provided
 // will always be computed to get all the required colors in `FlexSchemeColor`.
 
-// In this example we create our 2nd scheme from just a primary color
+// In this example we create our 2nd color scheme from just a primary color
 // for the light and dark schemes. The custom app bar color will also
 // receive the same color value as the one that is computed for
 // secondaryVariant color, this is default null behavior for custom app bar
-// color when using the factory.
+// color when using this factory.
   static final FlexSchemeColor _myScheme2Light =
       FlexSchemeColor.from(primary: const Color(0xFF4C4E06));
   static final FlexSchemeColor _myScheme2Dark =
@@ -48,30 +51,32 @@ class AppColor {
 
 // For our 3rd custom scheme we will define primary and secondary colors, but no
 // variant colors, we will not make any dark scheme definitions either, all
-// these missing colors will be computed, the missing colors definitions below
-// will get computed by the factory `FlexSchemeColor.from` when it creates
-// the `FlexSchemeColor` object. To make our dark colors for this scheme, we
-// will use the method `toDark` with the `_myScheme3Light` instance.
+// these missing colors will be computed, the missing color definitions will
+// get computed by the factory `FlexSchemeColor.from` when it creates the
+// `FlexSchemeColor` object. To make our dark colors for this light scheme, we
+// use the method `toDark` further below with the `_myScheme3Light` instance.
   static final FlexSchemeColor _myScheme3Light = FlexSchemeColor.from(
     primary: const Color(0xFF993200),
     secondary: const Color(0xFF1B5C62),
   );
 
-// Create a list with all color schemes we will use. Starting with all
-// the built-in ones, and then adding our custom ones at the end.
+// Finally we create a list with all color schemes we will use. Starting with
+// our custom schemes, since normally when we make custom schemes, those are
+// probably the ones we want to use primarily. After our custom schemes,
+// we add all the pre-defined built-in ones, offering them as options the users
+// can switch to and use if they like.
   static final List<FlexSchemeData> schemes = <FlexSchemeData>[
-    // Use all the built in FlexColor schemes.
-    ...FlexColor.schemesList,
-    // Then add our first custom FlexSchemeData to the end of the schemes list.
-    // We give it a name and description too.
+    // We add our custom light and dark FlexSchemeColor schemes we defined
+    // to a list of FlexSchemeData, where we can bundle each light and dark
+    // theme that goes together and give it a name and description too.
     const FlexSchemeData(
       name: 'Toledo purple',
       description:
           'Purple theme, created from full custom defined color scheme.',
       // FlexSchemeData holds separate defined color schemes for light and
-      // matching dark theme colors. Dark theme colors need to be much less
-      // saturated than light theme. Using the same colors in light and dark
-      // theme modes does not look as nice.
+      // matching dark theme colors. Dark theme colors typically need to be less
+      // saturated versions of their than light counter parts. Using the same
+      // colors in light and dark theme modes does not work so well.
       light: _myScheme1Light,
       dark: _myScheme1Dark,
     ),
@@ -93,5 +98,8 @@ class AppColor {
       // We create the dark desaturated colors from the light scheme.
       dark: _myScheme3Light.toDark(),
     ),
+
+    // Use all the built in FlexColor schemes.
+    ...FlexColor.schemesList,
   ];
 }
