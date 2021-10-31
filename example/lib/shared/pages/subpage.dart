@@ -67,15 +67,15 @@ class _SubpageState extends State<Subpage> {
               AppData.edgeInsets + bottomPadding,
             ),
             children: <Widget>[
-              Text('Subpage demo', style: headline4),
+              Text('Subpage Demo', style: headline4),
               const Text(
-                'This page just shows another example page with the same '
-                'FlexColorScheme based theme applied when you open a subpage. '
+                'This screen shows an example page with the same '
+                'FlexColorScheme based inherited theme being used. '
                 'It also has a BottomNavigationBar and TabBar in the AppBar.',
               ),
               const Divider(),
               // Show all key active theme colors.
-              Text('Theme colors', style: headline4),
+              Text('Theme Colors', style: headline4),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
                 child: ShowThemeColors(),

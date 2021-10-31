@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'flex_constants.dart';
+import 'flex_sub_themes.dart';
 
 // ignore_for_file: comment_references
 
@@ -46,6 +47,7 @@ class FlexSubThemesData with Diagnosticable {
     this.elevatedButtonElevation = kElevatedButtonElevation,
     this.popupMenuElevation = kPopupMenuElevation,
     this.dialogElevation = kDialogElevation,
+    this.snackBarElevation = kSnackBarElevation,
     this.bottomSheetElevation = kBottomSheetElevation,
     this.bottomSheetModalElevation = kBottomSheetModalElevation,
     this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
@@ -57,7 +59,7 @@ class FlexSubThemesData with Diagnosticable {
     this.thinBorderWidth = kThinBorderWidth,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
-    this.inputDecoratorIsOutlinedBorder = true,
+    this.inputDecoratorBorderType = FlexInputBorderType.outline,
     this.inputDecoratorUnfocusedHasBorder = true,
   });
 
@@ -181,7 +183,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Default elevation of [PopupMenuButton].
   ///
-  /// The SDK elevation 8 is too high, we make it more subtle via
+  /// The SDK elevation 8 is too high, we make it much more subtle via
   /// opinionated default value [kPopupMenuElevation].
   final double popupMenuElevation;
 
@@ -193,6 +195,11 @@ class FlexSubThemesData with Diagnosticable {
   /// elevation in dark mode, the elevated dialog surface will become too
   /// light and contrast poorly with primary color.
   final double dialogElevation;
+
+  /// Elevation of [SnackBar].
+  ///
+  /// Defaults to [kSnackBarElevation].
+  final double snackBarElevation;
 
   /// Elevation of none modal [BottomSheet].
   ///
@@ -298,23 +305,23 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to colorScheme.primary.withOpacity(0.06) if null.
   final Color? inputDecoratorFillColor;
 
-  /// Determines if the [InputDecorator] uses [OutlineInputBorder] or
-  /// [UnderlineInputBorder].
+  /// Determines the of border [InputDecorator] uses.
   ///
-  /// Defaults to true to prefer the [OutlineInputBorder].
-  /// To use the underline style set to off. The top border are still rounded
-  /// according to overall [cornerRadius].
+  /// Defaults to [FlexInputBorderType.outline] to prefer the outline style.
+  ///
+  /// To use the underline style set it to [FlexInputBorderType.underline].
+  /// The top border are still rounded according to overall [cornerRadius].
   ///
   /// To change input decorator's corner radius separately define
   /// [cornerRadiusInputDecoration] that will then override [cornerRadius].
-  final bool inputDecoratorIsOutlinedBorder;
+  final FlexInputBorderType inputDecoratorBorderType;
 
   /// Determines if the [InputDecorator] unfocused state has a border.
   ///
   /// Defaults to true.
   ///
   /// Applies to both outline and underline mode, so regardless of is
-  /// [inputDecoratorIsOutlinedBorder] is true or false.
+  /// [inputDecoratorBorderType] is true or false.
   ///
   /// You would typically
   /// use this in a design where you use a fill color and want unfocused
@@ -344,6 +351,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? elevatedButtonElevation,
     final double? popupMenuElevation,
     final double? dialogElevation,
+    final double? snackBarElevation,
     final double? bottomSheetElevation,
     final double? bottomSheetModalElevation,
     final double? bottomNavigationBarElevation,
@@ -356,7 +364,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? thinBorderWidth,
     final bool? inputDecoratorIsFilled,
     final Color? inputDecoratorFillColor,
-    final bool? inputDecoratorIsOutlinedBorder,
+    final FlexInputBorderType? inputDecoratorBorderType,
     final bool? inputDecoratorUnfocusedHasBorder,
   }) {
     return FlexSubThemesData(
@@ -385,6 +393,7 @@ class FlexSubThemesData with Diagnosticable {
           elevatedButtonElevation ?? this.elevatedButtonElevation,
       popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
       dialogElevation: dialogElevation ?? this.dialogElevation,
+      snackBarElevation: snackBarElevation ?? this.snackBarElevation,
       bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
       bottomSheetModalElevation:
           bottomSheetModalElevation ?? this.bottomSheetModalElevation,
@@ -402,8 +411,8 @@ class FlexSubThemesData with Diagnosticable {
           inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
       inputDecoratorFillColor:
           inputDecoratorFillColor ?? this.inputDecoratorFillColor,
-      inputDecoratorIsOutlinedBorder:
-          inputDecoratorIsOutlinedBorder ?? this.inputDecoratorIsOutlinedBorder,
+      inputDecoratorBorderType:
+          inputDecoratorBorderType ?? this.inputDecoratorBorderType,
       inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ??
           this.inputDecoratorUnfocusedHasBorder,
     );
@@ -430,6 +439,7 @@ class FlexSubThemesData with Diagnosticable {
         other.elevatedButtonElevation == elevatedButtonElevation &&
         other.popupMenuElevation == popupMenuElevation &&
         other.dialogElevation == dialogElevation &&
+        other.snackBarElevation == snackBarElevation &&
         other.bottomSheetElevation == bottomSheetElevation &&
         other.bottomSheetModalElevation == bottomSheetModalElevation &&
         other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
@@ -442,8 +452,7 @@ class FlexSubThemesData with Diagnosticable {
         other.thinBorderWidth == thinBorderWidth &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
-        other.inputDecoratorIsOutlinedBorder ==
-            inputDecoratorIsOutlinedBorder &&
+        other.inputDecoratorBorderType == inputDecoratorBorderType &&
         other.inputDecoratorUnfocusedHasBorder ==
             inputDecoratorUnfocusedHasBorder;
   }
@@ -467,6 +476,7 @@ class FlexSubThemesData with Diagnosticable {
       elevatedButtonElevation,
       popupMenuElevation,
       dialogElevation,
+      snackBarElevation,
       bottomSheetElevation,
       bottomSheetModalElevation,
       bottomNavigationBarElevation,
@@ -478,7 +488,7 @@ class FlexSubThemesData with Diagnosticable {
       thinBorderWidth,
       inputDecoratorIsFilled,
       inputDecoratorFillColor,
-      inputDecoratorIsOutlinedBorder,
+      inputDecoratorBorderType,
       inputDecoratorUnfocusedHasBorder,
     ];
     return hashList(values);
@@ -516,6 +526,8 @@ class FlexSubThemesData with Diagnosticable {
         DiagnosticsProperty<double>('popupMenuElevation', popupMenuElevation));
     properties
         .add(DiagnosticsProperty<double>('dialogElevation', dialogElevation));
+    properties.add(
+        DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
     properties.add(DiagnosticsProperty<double>(
         'bottomSheetElevation', bottomSheetElevation));
     properties.add(DiagnosticsProperty<double>(
@@ -535,13 +547,11 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(DiagnosticsProperty<double>('thinBorderWidth', thinBorderWidth));
     properties.add(DiagnosticsProperty<bool>(
-        'inputDecoratorIsOutlinedBorder', inputDecoratorIsOutlinedBorder));
-    properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorIsFilled', inputDecoratorIsFilled));
     properties
         .add(ColorProperty('inputDecoratorFillColor', inputDecoratorFillColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'inputDecoratorIsOutlinedBorder', inputDecoratorIsOutlinedBorder));
+    properties.add(EnumProperty<FlexInputBorderType>(
+        'inputDecoratorBorderType', inputDecoratorBorderType));
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
   }

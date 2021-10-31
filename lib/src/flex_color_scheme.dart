@@ -1623,8 +1623,8 @@ class FlexColorScheme with Diagnosticable {
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
     assert(
-      blendLevel >= 0 && blendLevel <= 40,
-      'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
+      blendLevel >= 0 && blendLevel <= 50,
+      'Only blend levels from 0 to 50 are allowed. Very high alpha values may '
       'not produce results that are visually very appealing or useful.',
     );
     assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
@@ -2461,8 +2461,8 @@ class FlexColorScheme with Diagnosticable {
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
     assert(
-      blendLevel >= 0 && blendLevel <= 40,
-      'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
+      blendLevel >= 0 && blendLevel <= 50,
+      'Only blend levels from 0 to 50 are allowed. Very high alpha values may '
       'not produce results that are visually very appealing or useful.',
     );
     assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
@@ -3440,7 +3440,7 @@ class FlexColorScheme with Diagnosticable {
             colorScheme: colorScheme,
             radius:
                 subTheme.cornerRadiusInputDecoration ?? subTheme.cornerRadius,
-            useOutlinedBorder: subTheme.inputDecoratorIsOutlinedBorder,
+            borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor ??
                 (isDark
@@ -3539,11 +3539,12 @@ class FlexColorScheme with Diagnosticable {
 
       // Flutter standard dialogBackgroundColor for color scheme based themes
       // uses colorScheme.background.
-      // The FlexColorScheme.from() factory constructor passed in a dialog
-      // background color that is same as surface color or even other tinted
-      // surfaces.
-      // If using surface blends that are no equal for all Material surface
-      // backgrounds colors. Use dialogs with background color that equals theme
+      // The FlexColorScheme.from() factory constructor uses passed in a dialog
+      // background color that is same as surface color or even any other color.
+      // If using surface blends that are not equal for all Material surface
+      // backgrounds colors. Ther will be no elevation overlay color in dark
+      // mode even if so requested.
+      // Use dialogs with background color that equals theme
       // colorScheme.surface to ensure it gets elevation overlay color applied
       // in dark mode. See issue:
       // https://github.com/flutter/flutter/issues/90353
@@ -3702,36 +3703,6 @@ class FlexColorScheme with Diagnosticable {
         selectionHandleColor: primaryColorDark,
       ),
 
-      // Since the old buttons have been deprecated in Flutter 2.0.0
-      // they are no longer presented or used in the code in FlexColorScheme.
-      // The button theming below still makes the old buttons almost
-      // look like the defaults for the new ElevatedButton, TextButton and
-      // OutlinedButton.
-      // This buttonTheme setup, makes the old legacy Material buttons
-      // [RaisedButton], [OutlineButton] and [FlatButton] very similar in
-      // style to the default color scheme based style used for the
-      // newer Material buttons [ElevatedButton], [OutlinedButton] and
-      // [TextButton]. There are some differences in margin
-      // and outline color and the elevation behavior on the raised button.
-      // A subThemesOptIn was added in version 4.0.0 to also still support
-      // the old buttons. Be aware that the theme will be removed from
-      // FlexColorScheme when it becomes deprecated in Flutter SDK or the
-      // buttons that already are deprecated and that use the ButtonThemeData
-      // are completely removed.
-      buttonTheme: useSubThemes
-          ? FlexSubThemes.buttonTheme(
-              colorScheme: colorScheme,
-              radius: subTheme.cornerRadiusTextButton ?? subTheme.cornerRadius,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.minButtonSize,
-            )
-          : ButtonThemeData(
-              colorScheme: colorScheme,
-              textTheme: ButtonTextTheme.primary,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-            ),
-
       // TODO(Rydmike): Also consider a sub-theme for ChipThemeData.
       // The default chip theme in Flutter does not work correctly with dark
       // themes. See issue: https://github.com/flutter/flutter/issues/65663
@@ -3759,30 +3730,7 @@ class FlexColorScheme with Diagnosticable {
         unselectedLabelColor: unselectedTabColor(),
       ),
 
-      // Opinionated default theming for the bottom navigation bar: Use primary
-      // color for selected item. Flutter defaults to using secondary color in
-      // dark mode, we want primary in dark mode too, like it is in light
-      // mode. Primary color is an iOS influenced style for the bottom nav.
-      bottomNavigationBarTheme: useSubThemes
-          ? FlexSubThemes.bottomNavigationBar(
-                  elevation: subTheme.bottomNavigationBarElevation,
-                  backgroundColor: subTheme.bottomNavigationBarOpacity == null
-                      ? null
-                      : colorScheme.background
-                          .withOpacity(subTheme.bottomNavigationBarOpacity!))
-              .copyWith(
-              selectedIconTheme: IconThemeData(
-                color: colorScheme.primary,
-              ),
-              selectedItemColor: colorScheme.primary,
-            )
-          : BottomNavigationBarThemeData(
-              selectedIconTheme: IconThemeData(
-                color: colorScheme.primary,
-              ),
-              selectedItemColor: colorScheme.primary,
-            ),
-
+      // TODO(Rydmike): Also consider a sub-theme for tooltips.
       // Opinionated theming of Tooltips, the default theme for Material
       // themed Tooltips are not ideal design choices on desktop and web
       // https://material.io/components/tooltips#specs.
@@ -3813,7 +3761,6 @@ class FlexColorScheme with Diagnosticable {
               )
             : null,
       ),
-
       bottomSheetTheme: useSubThemes
           ? FlexSubThemes.bottomSheetTheme(
               radius: subTheme.cornerRadiusBottomSheet ?? subTheme.cornerRadius,
@@ -3821,6 +3768,30 @@ class FlexColorScheme with Diagnosticable {
               modalElevation: subTheme.bottomSheetModalElevation,
             )
           : null,
+      // Opinionated default theming for the bottom navigation bar: Use primary
+      // color for selected item. Flutter defaults to using secondary color in
+      // dark mode, we want primary in dark mode too, like it is in light
+      // mode. Primary color is an iOS influenced style for the bottom nav.
+      // Above was default in version < 4, version 4 can also use sub-theme.
+      bottomNavigationBarTheme: useSubThemes
+          ? FlexSubThemes.bottomNavigationBar(
+                  elevation: subTheme.bottomNavigationBarElevation,
+                  backgroundColor: subTheme.bottomNavigationBarOpacity == null
+                      ? null
+                      : colorScheme.background
+                          .withOpacity(subTheme.bottomNavigationBarOpacity!))
+              .copyWith(
+              selectedIconTheme: IconThemeData(
+                color: colorScheme.primary,
+              ),
+              selectedItemColor: colorScheme.primary,
+            )
+          : BottomNavigationBarThemeData(
+              selectedIconTheme: IconThemeData(
+                color: colorScheme.primary,
+              ),
+              selectedItemColor: colorScheme.primary,
+            ),
       cardTheme: useSubThemes
           ? FlexSubThemes.cardTheme(
               radius: subTheme.cornerRadiusCard ?? subTheme.cornerRadius,
@@ -3833,11 +3804,9 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.dialogElevation,
             )
           : null,
-      popupMenuTheme: useSubThemes
-          ? FlexSubThemes.popupMenuTheme(
-              radius: subTheme.cornerRadiusPopupMenuButton ??
-                  (subTheme.cornerRadius > 10 ? 10 : subTheme.cornerRadius),
-              elevation: subTheme.popupMenuElevation,
+      snackBarTheme: useSubThemes
+          ? FlexSubThemes.snackBarTheme(
+              elevation: subTheme.snackBarElevation,
             )
           : null,
       timePickerTheme: useSubThemes
@@ -3846,6 +3815,13 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.cornerRadiusTimePickerDialog ??
                   subTheme.cornerRadius,
               inputDecorationTheme: effectiveInputDecorationTheme)
+          : null,
+      popupMenuTheme: useSubThemes
+          ? FlexSubThemes.popupMenuTheme(
+              radius: subTheme.cornerRadiusPopupMenuButton ??
+                  (subTheme.cornerRadius > 10 ? 10 : subTheme.cornerRadius),
+              elevation: subTheme.popupMenuElevation,
+            )
           : null,
       inputDecorationTheme: effectiveInputDecorationTheme,
       elevatedButtonTheme: useSubThemes
@@ -3877,6 +3853,37 @@ class FlexColorScheme with Diagnosticable {
               minButtonSize: subTheme.minButtonSize,
             )
           : null,
+      // Since the old buttons have been deprecated in Flutter 2.0.0
+      // they are no longer presented or used in the code in FlexColorScheme.
+      // The button theming below still makes the old buttons almost
+      // look like the defaults for the new ElevatedButton, TextButton and
+      // OutlinedButton.
+      // This buttonTheme setup, makes the old legacy Material buttons
+      // [RaisedButton], [OutlineButton] and [FlatButton] very similar in
+      // style to the default color scheme based style used for the
+      // newer Material buttons [ElevatedButton], [OutlinedButton] and
+      // [TextButton]. There are some differences in margin
+      // and outline color and the elevation behavior on the raised button.
+      // A subThemesOptIn was added in version 4.0.0 to also still support
+      // the old buttons. Be aware that the theme will be removed from
+      // FlexColorScheme when it becomes deprecated in Flutter SDK or the
+      // buttons that already are deprecated and that use the ButtonThemeData
+      // are completely removed.
+      buttonTheme: useSubThemes
+          ? FlexSubThemes.buttonTheme(
+              colorScheme: colorScheme,
+              radius: subTheme.cornerRadiusTextButton ?? subTheme.cornerRadius,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.minButtonSize,
+            )
+          : ButtonThemeData(
+              colorScheme: colorScheme,
+              textTheme: ButtonTextTheme.primary,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+            ),
+      // Toggle buttons have limited theming capability and cannot match new
+      // buttons fully, this is an approximation.
       toggleButtonsTheme: useSubThemes
           ? FlexSubThemes.toggleButtonsTheme(
               colorScheme: colorScheme,
@@ -4282,13 +4289,13 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     FlexSchemeSurfaceColors? surfaceColors,
   }) {
     assert(
-        blendLevel >= 0 && blendLevel <= 40,
-        'Only blend levels from 0 to 40 '
+        blendLevel >= 0 && blendLevel <= 50,
+        'Only blend levels from 0 to 50 '
         'are allowed. Very high alpha blend levels may not produce results '
         'that are visually very appealing or useful.');
     int _blendLevel = blendLevel;
-    // If above happen in none debug mode we use 0, no blends.
-    if (blendLevel < 0 || blendLevel > 40) _blendLevel = 0;
+    // If above happens in none debug mode, use 0, no blends.
+    if (blendLevel < 0 || blendLevel > 50) _blendLevel = 0;
 
     final bool isLight = brightness == Brightness.light;
 

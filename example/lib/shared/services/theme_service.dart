@@ -48,11 +48,11 @@ abstract class ThemeService {
   /// Persists used inputDecoratorIsFilled setting in example 5.
   Future<void> saveInputDecoratorIsFilled(bool value);
 
-  /// Loads used inputDecoratorIsOutlinedBorder setting in example 5.
-  Future<bool> inputDecoratorIsOutlinedBorder();
+  /// Loads used inputDecoratorBorderType setting in example 5.
+  Future<FlexInputBorderType> inputDecoratorBorderType();
 
-  /// Persists used inputDecoratorIsOutlinedBorder setting in example 5.
-  Future<void> saveInputDecoratorIsOutlinedBorder(bool value);
+  /// Persists used inputDecoratorBorderType setting in example 5.
+  Future<void> saveInputDecoratorBorderType(FlexInputBorderType value);
 
   /// Loads used inputDecoratorUnfocusedHasBorder setting in example 5.
   Future<bool> inputDecoratorUnfocusedHasBorder();

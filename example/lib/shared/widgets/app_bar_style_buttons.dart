@@ -15,7 +15,7 @@ class AppBarStyleButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final ColorScheme scheme = Theme.of(context).colorScheme;
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     final List<bool> isSelected = <bool>[
       style == FlexAppBarStyle.primary,
@@ -26,34 +26,35 @@ class AppBarStyleButtons extends StatelessWidget {
     ];
     return ToggleButtons(
       isSelected: isSelected,
-      fillColor: colorScheme.primary.lighten(15),
       onPressed: (int newIndex) {
         onChanged(FlexAppBarStyle.values[newIndex]);
       },
       children: <Widget>[
         Tooltip(
           message: 'Primary colored',
-          child: Icon(Icons.lens, color: colorScheme.primary),
+          child: Icon(Icons.lens, color: scheme.primary),
         ),
         Tooltip(
           message: 'Material background',
           child: Icon(
             Icons.lens,
-            color: isLight ? Colors.white : const Color(0xFF121212),
+            color: isLight
+                ? FlexColor.materialLightSurface // Colors.white
+                : FlexColor.materialDarkSurface, // Color(0xFF121212)
           ),
         ),
         Tooltip(
           message: 'Surface colored',
-          child: Icon(Icons.lens, color: colorScheme.surface.darken(5)),
+          child: Icon(Icons.lens, color: scheme.surface.darken(5)),
         ),
         Tooltip(
           message: 'Background colored',
-          child: Icon(Icons.lens, color: colorScheme.background.darken(5)),
+          child: Icon(Icons.lens, color: scheme.background.darken(5)),
         ),
         Tooltip(
           message: 'Custom, typically\nsecondary variant',
           child: Icon(Icons.lens,
-              color: customAppBarColor ?? colorScheme.secondaryVariant),
+              color: customAppBarColor ?? scheme.secondaryVariant),
         ),
       ],
     );

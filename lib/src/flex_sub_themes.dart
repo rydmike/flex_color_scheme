@@ -5,6 +5,18 @@ import 'flex_extensions.dart';
 
 // ignore_for_file: comment_references
 
+/// Enum used to select the type of border used on by the input decorator in
+/// [FlexSubThemes.inputDecorationTheme].
+enum FlexInputBorderType {
+  /// Used to select [OutlineInputBorder] as input decorator in
+  /// [FlexSubThemes.inputDecorationTheme].
+  outline,
+
+  /// Used to select [UnderlineInputBorder] as input decorator in
+  /// [FlexSubThemes.inputDecorationTheme].
+  underline,
+}
+
 /// Static helpers for opt in widget theming offered by [FlexColorScheme].
 ///
 /// FlexSubTheme offers opinionated static theme helpers that are opt-in via
@@ -26,9 +38,9 @@ import 'flex_extensions.dart';
 /// [FlexColorScheme]:
 /// * [BottomSheet]
 /// * [BottomNavigationBar]
-/// * [SnackBar]
 /// * [Card]
 /// * [Dialog]
+/// * [SnackBar]
 /// * [TimePickerDialog]
 /// * [PopupMenuButton]
 /// * [InputDecoration]
@@ -47,7 +59,7 @@ import 'flex_extensions.dart';
 /// match the same theme style as the Material states used on two different
 /// [ButtonStyleButton] buttons.
 ///
-/// The theme [ButtonTextTheme] is also included to provide a very similar
+/// The theme [ButtonThemeData] is also included to provide a very similar
 /// theme style on the deprecated legacy buttons `RaisedButton`,
 /// `OutlineButton` and `FlatButton` as on the current main buttons. It is again
 /// not an exact match, since the legacy buttons do not offer as flexible
@@ -145,24 +157,6 @@ class FlexSubThemes {
         landscapeLayout: landscapeLayout,
       );
 
-  // TODO(rydmike): SnackBar needs two corner radius versions, how?
-  // The pinned should not have a shape, but the floating one should.
-  // Doable via themes? Might not be, if it can be then the floating one.
-  // should follow the globally themed corner radius setting.
-  // Maybe offer rounding that can be opted in on if never plan to use pinned
-  // version?
-
-  /// An opinionated [SnackBarThemeData] with custom elevation.
-  ///
-  /// Its `elevation` defaults to [kSnackBarElevation] (4).
-  static SnackBarThemeData snackBarTheme({
-    /// BottomNavigationBar elevation defaults to 4.
-    final double? elevation = kSnackBarElevation,
-  }) =>
-      SnackBarThemeData(
-        elevation: elevation,
-      );
-
   /// An opinionated [CardTheme] with custom corner radius and elevation.
   ///
   /// Corner `radius` to [kCornerRadius] (16) and `elevation` defaults to
@@ -207,6 +201,26 @@ class FlexSubThemes {
             Radius.circular(radius),
           ),
         ),
+      );
+
+  // TODO(rydmike): SnackBar needs two corner radius versions, but how?
+  // The pinned one should not have a shape, but the floating one should.
+  // Doable via themes? Might not be, if it can be then the floating one.
+  // should follow the globally themed corner radius setting and pinned one
+  // remain straight.
+  // Maybe open an issue about the limitation that corner radius on none
+  // pinned one cannot be changed via theme while keeping straight one
+  // straight.
+
+  /// An opinionated [SnackBarThemeData] with custom elevation.
+  ///
+  /// Its `elevation` defaults to [kSnackBarElevation] (4).
+  static SnackBarThemeData snackBarTheme({
+    /// BottomNavigationBar elevation defaults to 4.
+    final double? elevation = kSnackBarElevation,
+  }) =>
+      SnackBarThemeData(
+        elevation: elevation,
       );
 
   /// An opinionated [PopupMenuThemeData] with custom corner radius.
@@ -322,10 +336,10 @@ class FlexSubThemes {
     /// Corner radius defaults to 16.
     final double radius = kCornerRadius,
 
-    /// Use outlined input border, instead of underline input border.
+    /// Selects input border type.
     ///
-    /// Defaults to true.
-    final bool useOutlinedBorder = true,
+    /// Defaults to [FlexInputBorderType.outline].
+    final FlexInputBorderType borderType = FlexInputBorderType.outline,
 
     /// If true the decoration's container is filled with [fillColor].
     ///
@@ -355,6 +369,12 @@ class FlexSubThemes {
     /// Defaults to 1.5.
     final double unfocusedBorderWidth = kThinBorderWidth,
 
+    /// Horizontal padding on either side of the border's
+    /// [InputDecoration.labelText] width gap.
+    ///
+    /// Defaults to 4, also default in SDK, no major reason to change it.
+    final double gapPadding = 4,
+
     /// Unfocused input decoration has a border.
     ///
     /// Defaults to true.
@@ -371,120 +391,125 @@ class FlexSubThemes {
   }) {
     final Color _fillColor =
         fillColor ?? colorScheme.primary.withOpacity(kFillColorOpacityDefault);
-    return useOutlinedBorder
-        ? InputDecorationTheme(
-            filled: filled,
-            fillColor: _fillColor,
-            hoverColor:
-                colorScheme.primary.withOpacity(kHoverBackgroundOpacity),
-            focusColor:
-                colorScheme.primary.withOpacity(kFocusBackgroundOpacity),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(radius)),
-              borderSide: BorderSide(
-                color: colorScheme.primary,
-                width: focusedBorderWidth,
-              ),
+
+    switch (borderType) {
+      case FlexInputBorderType.outline:
+        return InputDecorationTheme(
+          filled: filled,
+          fillColor: _fillColor,
+          hoverColor: colorScheme.primary.withOpacity(kHoverBackgroundOpacity),
+          focusColor: colorScheme.primary.withOpacity(kFocusBackgroundOpacity),
+          focusedBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
+            borderSide: BorderSide(
+              color: colorScheme.primary,
+              width: focusedBorderWidth,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(radius)),
-              borderSide: unfocusedHasBorder
-                  ? BorderSide(
-                      color: colorScheme.primary
-                          .withOpacity(kEnabledBorderOpacity),
-                      width: unfocusedBorderWidth,
-                    )
-                  : BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
+            borderSide: unfocusedHasBorder
+                ? BorderSide(
+                    color:
+                        colorScheme.primary.withOpacity(kEnabledBorderOpacity),
+                    width: unfocusedBorderWidth,
+                  )
+                : BorderSide.none,
+          ),
+          disabledBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
+            borderSide: unfocusedHasBorder
+                ? BorderSide(
+                    color: colorScheme.onSurface
+                        .withOpacity(kDisabledBackgroundOpacity),
+                    width: unfocusedBorderWidth,
+                  )
+                : BorderSide.none,
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: focusedBorderWidth,
             ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(radius)),
-              borderSide: unfocusedHasBorder
-                  ? BorderSide(
-                      color: colorScheme.onSurface
-                          .withOpacity(kDisabledBackgroundOpacity),
-                      width: unfocusedBorderWidth,
-                    )
-                  : BorderSide.none,
+          ),
+          errorBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: unfocusedBorderWidth,
             ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(radius)),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: focusedBorderWidth,
-              ),
+          ),
+        );
+      case FlexInputBorderType.underline:
+        return InputDecorationTheme(
+          filled: filled,
+          fillColor: _fillColor,
+          hoverColor: colorScheme.primary.withOpacity(kHoverBackgroundOpacity),
+          focusColor: colorScheme.primary.withOpacity(kFocusBackgroundOpacity),
+          focusedBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(radius),
+              topRight: Radius.circular(radius),
             ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(radius)),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: unfocusedBorderWidth,
-              ),
+            borderSide: BorderSide(
+              color: colorScheme.primary,
+              width: focusedBorderWidth,
             ),
-          )
-        : InputDecorationTheme(
-            filled: filled,
-            fillColor: _fillColor,
-            hoverColor:
-                colorScheme.primary.withOpacity(kHoverBackgroundOpacity),
-            focusColor:
-                colorScheme.primary.withOpacity(kFocusBackgroundOpacity),
-            focusedBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(radius),
-                topRight: Radius.circular(radius),
-              ),
-              borderSide: BorderSide(
-                color: colorScheme.primary,
-                width: focusedBorderWidth,
-              ),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(radius),
+              topRight: Radius.circular(radius),
             ),
-            enabledBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(radius),
-                topRight: Radius.circular(radius),
-              ),
-              borderSide: unfocusedHasBorder
-                  ? BorderSide(
-                      color: colorScheme.primary
-                          .withOpacity(kEnabledBorderOpacity),
-                      width: unfocusedBorderWidth,
-                    )
-                  : BorderSide.none,
+            borderSide: unfocusedHasBorder
+                ? BorderSide(
+                    color:
+                        colorScheme.primary.withOpacity(kEnabledBorderOpacity),
+                    width: unfocusedBorderWidth,
+                  )
+                : BorderSide.none,
+          ),
+          disabledBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(radius),
+              topRight: Radius.circular(radius),
             ),
-            disabledBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(radius),
-                topRight: Radius.circular(radius),
-              ),
-              borderSide: unfocusedHasBorder
-                  ? BorderSide(
-                      color: colorScheme.onSurface
-                          .withOpacity(kDisabledBackgroundOpacity),
-                      width: unfocusedBorderWidth,
-                    )
-                  : BorderSide.none,
+            borderSide: unfocusedHasBorder
+                ? BorderSide(
+                    color: colorScheme.onSurface
+                        .withOpacity(kDisabledBackgroundOpacity),
+                    width: unfocusedBorderWidth,
+                  )
+                : BorderSide.none,
+          ),
+          focusedErrorBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(radius),
+              topRight: Radius.circular(radius),
             ),
-            focusedErrorBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(radius),
-                topRight: Radius.circular(radius),
-              ),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: focusedBorderWidth,
-              ),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: focusedBorderWidth,
             ),
-            errorBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(radius),
-                topRight: Radius.circular(radius),
-              ),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: unfocusedBorderWidth,
-              ),
+          ),
+          errorBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(radius),
+              topRight: Radius.circular(radius),
             ),
-          );
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: unfocusedBorderWidth,
+            ),
+          ),
+        );
+    }
   }
 
   /// An opinionated [ElevatedButtonThemeData] theme.
@@ -573,7 +598,7 @@ class FlexSubThemes {
         ),
       );
 
-  /// A slightly opinionated [OutlinedButtonThemeData] theme.
+  /// An opinionated [OutlinedButtonThemeData] theme.
   ///
   /// Requires a `ColorScheme`. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
@@ -676,7 +701,7 @@ class FlexSubThemes {
         ),
       );
 
-  /// A slightly opinionated [TextButtonThemeData] theme.
+  /// An opinionated [TextButtonThemeData] theme.
   ///
   /// Requires a `ColorScheme`. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
@@ -733,10 +758,12 @@ class FlexSubThemes {
         ),
       );
 
-  /// A slightly opinionated [ButtonThemeData] theme.
+  /// An opinionated [ButtonThemeData] theme.
   ///
   /// This theme is used to provide the same opinionated theme and style on
   /// the deprecated buttons `RaisedButton`, `OutlineButtons` and `FlatButton`.
+  /// Toggle buttons have more limited theming capability and cannot match
+  /// the Material style buttons fully, this is an approximation.
   ///
   /// The adjustable button corner `radius` defaults to 16.
   ///
@@ -786,7 +813,7 @@ class FlexSubThemes {
         padding: padding,
       );
 
-  /// A slightly opinionated [ToggleButtonsThemeData] theme.
+  /// An opinionated [ToggleButtonsThemeData] theme.
   ///
   /// The adjustable button corner `radius` default to 16.
   /// Its buttons border width can be adjusted and defaults to same width
@@ -834,22 +861,23 @@ class FlexSubThemes {
         visualDensity ?? VisualDensity.adaptivePlatformDensity;
     return ToggleButtonsThemeData(
       borderWidth: borderWidth,
-      selectedColor: colorScheme.onPrimary,
+      selectedColor: colorScheme.onPrimary.withOpacity(0.8),
       color: colorScheme.primary,
-      fillColor: colorScheme.primary,
+      fillColor: colorScheme.primary.blend(Colors.white, kAltPrimaryAlphaBlend),
       borderColor: colorScheme.primary.withOpacity(kEnabledBorderOpacity),
-      selectedBorderColor: colorScheme.primary,
+      selectedBorderColor:
+          colorScheme.primary.blend(Colors.white, kAltPrimaryAlphaBlend),
       hoverColor: colorScheme.primary
-          .blend(Colors.white, kHoverAlphaBlend)
+          .blend(Colors.white, kHoverAlphaBlend + kAltPrimaryAlphaBlend)
           .withOpacity(kHoverOpacity),
       focusColor: colorScheme.primary
-          .blend(Colors.white, kFocusAlphaBlend)
+          .blend(Colors.white, kFocusAlphaBlend + kAltPrimaryAlphaBlend)
           .withOpacity(kFocusOpacity),
       highlightColor: colorScheme.primary
-          .blend(Colors.white, kHighlightAlphaBlend)
+          .blend(Colors.white, kHighlightAlphaBlend + kAltPrimaryAlphaBlend)
           .withOpacity(kHighlightOpacity),
       splashColor: colorScheme.primary
-          .blend(Colors.white, kSplashAlphaBlend)
+          .blend(Colors.white, kSplashAlphaBlend + kAltPrimaryAlphaBlend)
           .withOpacity(kSplashOpacity),
       disabledColor:
           colorScheme.onSurface.withOpacity(kDisabledForegroundOpacity),

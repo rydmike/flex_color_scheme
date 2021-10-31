@@ -68,7 +68,7 @@ extension FlexColorExtensions on Color {
         .toColor();
   }
 
-  /// Get onColor for a color.
+  /// Get the right black or white contrasting onColor for a color.
   ///
   /// The onColor is white if the color has brightness dark and black if
   /// the color has brightness light.
@@ -80,6 +80,14 @@ extension FlexColorExtensions on Color {
       ThemeData.estimateBrightnessForColor(this) == Brightness.light
           ? Colors.black
           : Colors.white;
+
+  /// Returns true if the color's brightness is [Brightness.light], else false.
+  bool get isLight =>
+      ThemeData.estimateBrightnessForColor(this) == Brightness.light;
+
+  /// Returns true if the color's brightness is [Brightness.dark], else false.
+  bool get isDark =>
+      ThemeData.estimateBrightnessForColor(this) == Brightness.dark;
 
   /// Blend in the given input Color with a percentage of alpha.
   ///

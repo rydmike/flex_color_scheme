@@ -19,7 +19,7 @@ void main() {
           const BottomSheetThemeData(
             clipBehavior: Clip.antiAlias,
             elevation: 4,
-            modalElevation: 12,
+            modalElevation: 8,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
@@ -163,7 +163,7 @@ void main() {
         FlexSubThemes.dialogTheme(),
         equals(
           const DialogTheme(
-            elevation: 12,
+            elevation: 10,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(16),
@@ -319,7 +319,7 @@ void main() {
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
-          useOutlinedBorder: false,
+          borderType: FlexInputBorderType.underline,
         ),
         equals(
           InputDecorationTheme(
@@ -619,13 +619,13 @@ void main() {
             minWidth: 46,
             height: 46,
             hoverColor:
-                colorScheme.primary.blend(Colors.white, 40).withOpacity(0.12),
+                colorScheme.primary.blend(Colors.white, 25).withOpacity(0.1),
             focusColor:
-                colorScheme.primary.blend(Colors.white, 20).withOpacity(0.25),
+                colorScheme.primary.blend(Colors.white, 30).withOpacity(0.3),
             highlightColor:
-                colorScheme.primary.blend(Colors.white, 20).withOpacity(0.25),
+                colorScheme.primary.blend(Colors.white, 25).withOpacity(0.1),
             splashColor:
-                colorScheme.primary.blend(Colors.white, 25).withOpacity(0.3),
+                colorScheme.primary.blend(Colors.white, 35).withOpacity(0.2),
             disabledColor: colorScheme.onSurface.withOpacity(0.12),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -650,19 +650,23 @@ void main() {
         equals(
           ToggleButtonsThemeData(
             borderWidth: 1.5,
-            selectedColor: colorScheme.background,
+            selectedColor: colorScheme.onPrimary.withOpacity(0.8),
             color: colorScheme.primary,
-            fillColor: colorScheme.primary,
+            fillColor: colorScheme.primary.blend(Colors.white, 15),
             borderColor: colorScheme.primary.withOpacity(0.65),
-            selectedBorderColor: colorScheme.primary,
-            hoverColor:
-                colorScheme.primary.blend(Colors.white, 40).withOpacity(0.12),
-            focusColor:
-                colorScheme.primary.blend(Colors.white, 20).withOpacity(0.25),
-            highlightColor:
-                colorScheme.primary.blend(Colors.white, 20).withOpacity(0.25),
-            splashColor:
-                colorScheme.primary.blend(Colors.white, 25).withOpacity(0.3),
+            selectedBorderColor: colorScheme.primary.blend(Colors.white, 15),
+            hoverColor: colorScheme.primary
+                .blend(Colors.white, 25 + 15)
+                .withOpacity(0.1),
+            focusColor: colorScheme.primary
+                .blend(Colors.white, 30 + 15)
+                .withOpacity(0.3),
+            highlightColor: colorScheme.primary
+                .blend(Colors.white, 25 + 15)
+                .withOpacity(0.1),
+            splashColor: colorScheme.primary
+                .blend(Colors.white, 35 + 15)
+                .withOpacity(0.2),
             disabledColor: colorScheme.onSurface.withOpacity(0.38),
             disabledBorderColor: colorScheme.onSurface.withOpacity(0.12),
             borderRadius: BorderRadius.circular(16),

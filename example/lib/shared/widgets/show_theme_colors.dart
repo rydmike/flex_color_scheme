@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 /// Draw a number of boxes showing the colors of key theme color properties
@@ -45,6 +46,33 @@ class ShowThemeColors extends StatelessWidget {
         ),
       );
     }
+
+    // Warning label for scaffold background when it uses to much blend.
+    final String scaffoldTooHigh = isDark
+        ? theme.scaffoldBackgroundColor.isLight
+            ? '\nTOO HIGH'
+            : ''
+        : theme.scaffoldBackgroundColor.isDark
+            ? '\nTOO HIGH'
+            : '';
+    // Warning label for scaffold background when it uses to much blend.
+    final String surfaceTooHigh = isDark
+        ? theme.colorScheme.surface.isLight
+            ? '\nTOO HIGH'
+            : ''
+        : theme.colorScheme.surface.isDark
+            ? '\nTOO HIGH'
+            : '';
+
+    // Warning label for scaffold background when it uses to much blend.
+    final String backTooHigh = isDark
+        ? theme.colorScheme.background.isLight
+            ? '\nTOO HIGH'
+            : ''
+        : theme.colorScheme.background.isDark
+            ? '\nTOO HIGH'
+            : '';
+
     // A Wrap widget is just the right handy widget for this type of
     // widget to make it responsive.
     return Theme(
@@ -125,34 +153,34 @@ class ShowThemeColors extends StatelessWidget {
             textColor: colorScheme.onBackground,
           ),
           ThemeCard(
-            label: 'Background',
+            label: 'Background$backTooHigh',
             color: colorScheme.background,
             textColor: colorScheme.onBackground,
           ),
           ThemeCard(
-            label: 'Canvas',
+            label: 'Canvas$backTooHigh',
             color: theme.canvasColor,
             textColor: colorScheme.onBackground,
           ),
           ThemeCard(
-            label: 'Surface',
+            label: 'Surface$surfaceTooHigh',
             color: colorScheme.surface,
             textColor: colorScheme.onSurface,
           ),
           ThemeCard(
-            label: 'Card',
+            label: 'Card$surfaceTooHigh',
             color: theme.cardColor,
-            textColor: colorScheme.onBackground,
+            textColor: colorScheme.onSurface,
           ),
           ThemeCard(
             label: 'Dialog',
             color: theme.dialogBackgroundColor,
-            textColor: colorScheme.onBackground,
+            textColor: _onColor(theme.dialogBackgroundColor),
           ),
           ThemeCard(
-            label: 'Scaffold\nbackground',
+            label: 'Scaffold\nbackground$scaffoldTooHigh',
             color: theme.scaffoldBackgroundColor,
-            textColor: colorScheme.onBackground,
+            textColor: _onColor(theme.scaffoldBackgroundColor),
           ),
           ThemeCard(
             label: 'Error',
@@ -182,8 +210,8 @@ class ThemeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55,
-      width: 82,
+      height: 54,
+      width: 80,
       child: Card(
         margin: EdgeInsets.zero,
         color: color,

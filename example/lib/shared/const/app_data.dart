@@ -39,11 +39,11 @@ class AppData {
   // The minimum media size needed for side rail tablet menu view.
   static const double phoneBreakpoint = 500;
 
-  // The width of the side menu when expanded.
-  static const double expandWidth = 265;
+  // The width of the side menu when expanded to full menu.
+  static const double menuWidth = 265;
 
-  // The width of the side menu when rail sized.
-  static const double collapseWidth = 60;
+  // The width of the side menu when collapsed to a rail.
+  static const double railWidth = 60;
 
   // Returns title of used MaterialApp.
   static String title(BuildContext context) =>

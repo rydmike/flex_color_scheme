@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// A list tile in a [Card] that can be toggled via its trailing widget to
 /// open and reveal more content provided via [child].
 ///
-///  The open reveal is animated.
+/// The open reveal is animated.
 ///
 /// The ListTile and its revealed child are wrapped in a Card widget. The
 /// [RevealListTileCard] is primarily designed to be placed on scaffold using
@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 /// not get dismissed and closed in scroll views. This "may" be a bit expensive
 /// memory usage wise if this widget is used a lot in large lists. This widget
 /// is intended for a limited amount of containers enabling showing and hiding
-/// their content and keeping their opn/close state alive. If you need one that
+/// their content and keeping their open/close state alive. If you need one that
 /// is more memory efficient, consider removing the
 /// AutomaticKeepAliveClientMixin.
 class RevealListTileCard extends StatefulWidget {
@@ -27,9 +27,10 @@ class RevealListTileCard extends StatefulWidget {
     this.leading,
     this.title,
     this.subtitle,
-    this.contentPadding,
+    this.margin = EdgeInsets.zero,
+    this.headerPadding,
     this.enabled = true,
-    this.closed = true,
+    this.isClosed = false,
     this.onChange,
     this.duration = const Duration(milliseconds: 200),
     this.child,
@@ -53,20 +54,26 @@ class RevealListTileCard extends StatefulWidget {
   /// Typically a [Text] widget.
   final Widget? subtitle;
 
-  /// The tile's internal padding.
+  /// The margins around the entire reveal list tile card.
   ///
-  /// Insets a [ListTile]'s contents: its [leading], [title], [subtitle].
+  /// Defaults to [EdgeInsets.zero].
+  final EdgeInsetsGeometry margin;
+
+  /// The internal padding of the ListTile used as header.
+  ///
+  /// Insets the header [ListTile]'s contents:
+  /// its [leading], [title], [subtitle].
   ///
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
-  final EdgeInsetsGeometry? contentPadding;
+  final EdgeInsetsGeometry? headerPadding;
 
   /// Whether this list tile is interactive.
   final bool enabled;
 
-  /// Whether widget is closed or open.
+  /// Set to true to close the reveal list tile card and hide the child.
   ///
-  /// Set to false to hide child.
-  final bool closed;
+  /// Defaults to false, the card is open and child is shown.
+  final bool isClosed;
 
   /// Callback called if the open/close state was changed.
   final ValueChanged<bool>? onChange;
@@ -92,13 +99,13 @@ class _RevealListTileCardState extends State<RevealListTileCard>
   @override
   void initState() {
     super.initState();
-    _closed = widget.closed;
+    _closed = widget.isClosed;
   }
 
   @override
   void didUpdateWidget(covariant RevealListTileCard oldWidget) {
-    if (oldWidget.closed != widget.closed) {
-      _closed = widget.closed;
+    if (oldWidget.isClosed != widget.isClosed) {
+      _closed = widget.isClosed;
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -115,11 +122,13 @@ class _RevealListTileCardState extends State<RevealListTileCard>
     // Dark mode needs stronger blends to be visible.
     final int blendFactor = isDark ? 3 : 2;
 
-    // Get default card background color.
-    Color cardColor = theme.cardColor;
+    // Make card slightly more colored than card background is
+    Color cardColor = Color.alphaBlend(
+        scheme.primary.withAlpha(4 * blendFactor), theme.cardColor);
+
     // Compute a header color with fixed primary blend, make it a stronger tint.
     Color headerColor =
-        Color.alphaBlend(scheme.primary.withAlpha(6 * blendFactor), cardColor);
+        Color.alphaBlend(scheme.primary.withAlpha(14 * blendFactor), cardColor);
 
     // If card or its header color, is equal to scaffold background, we will
     // adjust both and make them more primary tinted.
@@ -139,7 +148,7 @@ class _RevealListTileCardState extends State<RevealListTileCard>
           scheme.primary.withAlpha(2 * blendFactor), cardColor);
     }
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 4),
+      margin: widget.margin,
       color: cardColor,
       child: Column(
         children: <Widget>[
@@ -148,7 +157,7 @@ class _RevealListTileCardState extends State<RevealListTileCard>
             child: Material(
               type: MaterialType.card,
               child: ListTile(
-                contentPadding: widget.contentPadding,
+                contentPadding: widget.headerPadding,
                 leading: widget.leading,
                 title: widget.title,
                 trailing: ExpandIcon(

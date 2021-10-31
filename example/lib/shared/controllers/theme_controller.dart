@@ -29,8 +29,7 @@ class ThemeController with ChangeNotifier {
     _themedEffects = await _themeService.themedEffects();
     _cornerRadius = await _themeService.cornerRadius();
     _inputDecoratorIsFilled = await _themeService.inputDecoratorIsFilled();
-    _inputDecoratorIsOutlinedBorder =
-        await _themeService.inputDecoratorIsOutlinedBorder();
+    _inputDecoratorBorderType = await _themeService.inputDecoratorBorderType();
     _inputDecoratorUnfocusedHasBorder =
         await _themeService.inputDecoratorUnfocusedHasBorder();
     _surfaceMode = await _themeService.surfaceMode();
@@ -160,14 +159,16 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveInputDecoratorIsFilled(value);
   }
 
-  late bool _inputDecoratorIsOutlinedBorder;
-  bool get inputDecoratorIsOutlinedBorder => _inputDecoratorIsOutlinedBorder;
-  Future<void> setInputDecoratorIsOutlinedBorder(bool? value) async {
+  late FlexInputBorderType _inputDecoratorBorderType;
+  FlexInputBorderType get inputDecoratorIsOutlinedBorder =>
+      _inputDecoratorBorderType;
+  Future<void> setInputDecoratorIsOutlinedBorder(
+      FlexInputBorderType? value) async {
     if (value == null) return;
-    if (value == _inputDecoratorIsOutlinedBorder) return;
-    _inputDecoratorIsOutlinedBorder = value;
+    if (value == _inputDecoratorBorderType) return;
+    _inputDecoratorBorderType = value;
     notifyListeners();
-    await _themeService.saveInputDecoratorIsOutlinedBorder(value);
+    await _themeService.saveInputDecoratorBorderType(value);
   }
 
   late bool _inputDecoratorUnfocusedHasBorder;

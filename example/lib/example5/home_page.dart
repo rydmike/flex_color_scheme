@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../shared/all_shared_imports.dart';
 
@@ -27,20 +28,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late ScrollController scrollController;
 
-  // The reason for example 5 using a stateful widget is that it holds the
-  // state of the dummy side menu/rail locally. However, all state for the
-  // application theme are in this example also held by the stateful MaterialApp
-  // widget, and values are passed in and changed via ValueChanged callbacks.
-  double _menuWidth = AppData.expandWidth;
-  bool _isExpanded = true;
-
-  // The state for the system navbar style and divider usage is local as it is
-  // is only used by the AnnotatedRegion, not by FlexThemeData.
-  //
-  // Used to control system navbar style via an AnnotatedRegion.
-  FlexSystemNavBarStyle _navBarStyle = FlexSystemNavBarStyle.background;
+  // Controls the active width of the menu-rail: expanded - collapsed - 0.
+  double menuWidth = AppData.menuWidth;
+  // Controls if the menu is expanded, when it can be.
+  bool isMenuExpanded = true;
+  // Controls if the rail is closed when it can be.
+  bool isMenuClosed = false;
+  // Used to control system navbar style via an AnnotatedRegion that uses
+  // FlexColorScheme.themedSystemNavigationBar.
+  FlexSystemNavBarStyle navBarStyle = FlexSystemNavBarStyle.background;
   // Used to control if we have a top divider on the system navigation bar.
-  bool _useNavDivider = false;
+  bool useNavDivider = false;
+
+  // Previous amount of used columns in the layout, used to auto close when
+  // going one column and open when going multi column.
+  int prevColumns = 0;
+
+  // Trigger open/close of card panel views on window resizes
+  bool isCardClosed = true;
 
   @override
   void initState() {
@@ -56,34 +61,37 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Short handle to the media query, used to get size and paddings.
     final MediaQueryData media = MediaQuery.of(context);
+    // Paddings so content shows up visible area when we use Scaffold props
+    // extendBodyBehindAppBar and extendBody.
     final double topPadding =
         media.padding.top + kToolbarHeight + AppData.edgeInsets;
     final double bottomPadding = media.padding.bottom + AppData.edgeInsets;
 
-    final bool menuCanOperate = media.size.width >= AppData.desktopBreakpoint;
-    final bool isNarrow = media.size.width < AppData.phoneBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsets;
+    // We are on desktop width media, based on our definition in this app.
+    final bool isDesktop = media.size.width >= AppData.desktopBreakpoint;
+    // We are on phone width media, based on our definition in this app.
+    final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+    // Make tighter margins on phone size.
+    final double margins = isPhone ? 8 : AppData.edgeInsets;
 
-    final ThemeData theme = Theme.of(context);
-    final TextTheme textTheme = theme.textTheme;
-    final TextStyle headline4 = textTheme.headline4!;
+    // Secret sauce for a mock responsive toggleable drawer-rail-menu.
+    if (!isDesktop) menuWidth = AppData.railWidth;
+    if (!isDesktop && isMenuClosed) menuWidth = 0.01;
+    if (!isDesktop && !isMenuClosed) menuWidth = AppData.railWidth;
+    if (isDesktop && !isMenuExpanded) menuWidth = AppData.railWidth;
+    if (isDesktop && isMenuExpanded) menuWidth = AppData.menuWidth;
 
-    // Give the width of the side panel some automatic responsive behavior and
-    // make it rail sized when there is not enough room for a menu, even if
-    // menu size is requested, and even remove rail on narrow phones.
-    if (isNarrow) {
-      _menuWidth = 0.01;
-    } else {
-      if (!menuCanOperate) {
-        _menuWidth = AppData.collapseWidth;
-      }
-      if (menuCanOperate && !_isExpanded) {
-        _menuWidth = AppData.collapseWidth;
-      }
-      if (menuCanOperate && _isExpanded) {
-        _menuWidth = AppData.expandWidth;
-      }
+    // We know how wide the side menu is, so we don't need a layout builder,
+    // we just calculate the available width usable by  content and chop it
+    // up into columns, based on arbitrary break-width, 700 in this case.
+    final int columns = (media.size.width - menuWidth) ~/ 720 + 1;
+
+    if (prevColumns != columns) {
+      if (columns == 1) isCardClosed = true;
+      if (columns >= 2) isCardClosed = false;
+      prevColumns = columns;
     }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -96,28 +104,27 @@ class _HomePageState extends State<HomePage> {
       // which looks nicer and more as it should on an Android device.
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
-        systemNavBarStyle: _navBarStyle,
-        useDivider: _useNavDivider,
+        systemNavBarStyle: navBarStyle,
+        useDivider: useNavDivider,
         opacity: widget.controller.bottomNavigationBarOpacity,
       ),
       child: Row(
         children: <Widget>[
           // The dummy demo menu and side rail.
           ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppData.expandWidth),
+            constraints: const BoxConstraints(maxWidth: AppData.menuWidth),
             child: Material(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                width: _menuWidth,
-                child: SideMenu(
-                  maxWidth: AppData.expandWidth,
-                  onTap: menuCanOperate
-                      ? () {
-                          setState(() {
-                            _isExpanded = !_isExpanded;
-                          });
-                        }
-                      : null,
+                width: menuWidth,
+                child: ResponsiveMenu(
+                  maxWidth: AppData.menuWidth,
+                  onTap: () {
+                    setState(() {
+                      if (isDesktop) isMenuExpanded = !isMenuExpanded;
+                      if (!isDesktop) isMenuClosed = !isMenuClosed;
+                    });
+                  },
                 ),
               ),
             ),
@@ -127,122 +134,170 @@ class _HomePageState extends State<HomePage> {
             child: Scaffold(
               extendBodyBehindAppBar: true,
               extendBody: true,
+              drawerEnableOpenDragGesture: !isDesktop && isMenuClosed,
               appBar: AppBar(
                 title: Text(AppData.title(context)),
                 actions: const <Widget>[AboutIconButton()],
+                automaticallyImplyLeading: !isDesktop && isMenuClosed,
               ),
-              body: PageBody(
-                controller: scrollController,
+              drawer: ConstrainedBox(
                 constraints:
-                    const BoxConstraints(maxWidth: AppData.maxBodyWidth),
-                child: ListView(
-                  controller: scrollController,
-                  padding: EdgeInsets.fromLTRB(
-                    sideMargin,
-                    topPadding,
-                    sideMargin,
-                    bottomPadding,
+                    const BoxConstraints.expand(width: AppData.menuWidth),
+                child: Drawer(
+                  child: ResponsiveMenu(
+                    maxWidth: AppData.menuWidth,
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      setState(() {
+                        isMenuClosed = !isMenuClosed;
+                      });
+                    },
                   ),
-                  children: <Widget>[
-                    Text('FlexColorScheme', style: headline4),
-                    const Text(
-                      'In this example you can try all themes and almost '
-                      'all features.\n\n'
-                      'See how to surface blends and the app bar theme '
-                      'options work. Try the true black option for dark '
-                      'themes along with computed dark themes.\n\n'
-                      'A dummy responsive side menu/rail is visible on '
-                      'larger media. It is used to demonstrate the different '
-                      'surface blends more clearly. '
-                      'A widget showcase demonstrates theme impact on common '
-                      'Material widgets.',
-                    ),
-                    const Divider(),
-                    _Theme(controller: widget.controller),
-                    _ModeOptions(controller: widget.controller),
-                    _WidgetThemes(controller: widget.controller),
-                    _SurfaceBlends(controller: widget.controller),
-                    _AppBar(controller: widget.controller),
-                    _BottomNavigation(
-                      controller: widget.controller,
-                      navBarStyle: _navBarStyle,
-                      onNavBarStyle: (FlexSystemNavBarStyle value) {
-                        setState(() {
-                          _navBarStyle = value;
-                        });
-                      },
-                      hasDivider: _useNavDivider,
-                      onHasDivider: (bool value) {
-                        setState(() {
-                          _useNavDivider = value;
-                        });
-                      },
-                    ),
-                    const _SubPages(),
-                    Text('Theme Showcase', style: headline4),
-                    const ThemeShowcase(),
-                  ],
                 ),
               ),
+              body: StaggeredGridView.countBuilder(
+                controller: scrollController,
+                crossAxisCount: columns,
+                mainAxisSpacing: margins,
+                crossAxisSpacing: margins,
+                padding: EdgeInsets.fromLTRB(
+                  margins,
+                  topPadding,
+                  margins,
+                  bottomPadding,
+                ),
+                staggeredTileBuilder: (int index) {
+                  // To make some panels use more columns we can do this
+                  // if (index == 2) return const StaggeredTile.fit(2);
+                  return const StaggeredTile.fit(1);
+                },
+                itemBuilder: (BuildContext context, int index) => <Widget>[
+                  RevealListTileCard(
+                    // key: const ValueKey<int>(1),
+                    isClosed: false,
+                    title: Text('FlexColorScheme',
+                        style: Theme.of(context).textTheme.headline6),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(children: const <Widget>[
+                        SizedBox(height: 8),
+                        Text(
+                          'In this example you can try all themes and '
+                          'features. Experiment with surface blends and see '
+                          'how the app bar theme options work. '
+                          'Try the true black option for dark '
+                          'themes along with computed dark themes.\n\n'
+                          'A responsive side menu/rail is used to visually '
+                          'demonstrate the different surface blends. '
+                          'The impact on Flutter SDK Material widgets is shown '
+                          'in expandable cards with the "Themed" heading.',
+                        )
+                      ]),
+                    ),
+                  ),
+                  _ThemeColors(
+                    // key: const ValueKey<int>(2),
+                    controller: widget.controller,
+                    isClosed: isCardClosed,
+                  ),
+                  _ThemeMode(
+                    // key: const ValueKey<int>(3),
+                    controller: widget.controller,
+                    isClosed: isCardClosed,
+                  ),
+                  _WidgetThemes(
+                    // key: const ValueKey<int>(4),
+                    controller: widget.controller,
+                    isClosed: isCardClosed,
+                  ),
+                  _SurfaceBlends(
+                    key: const ValueKey<int>(5),
+                    controller: widget.controller,
+                    isClosed: isCardClosed,
+                  ),
+                  _AppBarSettings(
+                    // key: const ValueKey<int>(6),
+                    controller: widget.controller,
+                    isClosed: isCardClosed,
+                  ),
+                  _BottomNavigation(
+                    // key: const ValueKey<int>(6),
+                    controller: widget.controller,
+                    navBarStyle: navBarStyle,
+                    onNavBarStyle: (FlexSystemNavBarStyle value) {
+                      setState(() {
+                        navBarStyle = value;
+                      });
+                    },
+                    hasDivider: useNavDivider,
+                    onHasDivider: (bool value) {
+                      setState(() {
+                        useNavDivider = value;
+                      });
+                    },
+                    isClosed: isCardClosed,
+                  ),
+                  _SubPages(
+                    // key: const ValueKey<int>(8),
+                    isClosed: isCardClosed,
+                  ),
+                  const _ButtonsShowcase(),
+                  const _InputShowcase(),
+                  const _ThemeBarsShowcase(),
+                  const _ListTileShowcase(),
+                  const _TimePickerDialogShowcase(),
+                  const _DatePickerDialogShowcase(),
+                  const _AlertDialogShowcase(),
+                  const _BottomSheetAndMaterialShowcase(),
+                  const _CardShowcase(),
+                  const _TextThemeShowcase(),
+                ].elementAt(index),
+                itemCount: 18,
+              ),
             ),
-          ),
+          )
         ],
       ),
     );
   }
 }
 
-class _Theme extends StatelessWidget {
-  const _Theme({
+class _ThemeColors extends StatelessWidget {
+  const _ThemeColors({
     Key? key,
     required this.controller,
+    this.isClosed = false,
   }) : super(key: key);
   final ThemeController controller;
+  final bool isClosed;
 
   @override
   Widget build(BuildContext context) {
     return RevealListTileCard(
+      isClosed: isClosed,
       title: Text(
-        'Theme',
+        'Theme Colors',
         style: Theme.of(context).textTheme.headline6,
       ),
-      closed: false,
       child: Column(
         children: <Widget>[
           ThemePopupMenu(
             schemeIndex: controller.schemeIndex,
             onChanged: controller.setSchemeIndex,
           ),
-          // TODO(rydmike): Add the buttons list selector from FlexFold.
           const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsets),
             child: ShowThemeColors(),
           ),
           const SizedBox(height: 8),
-          ListTile(
-            title: const Text('Mode'),
-            subtitle: Text('Using ${controller.themeMode.toString().dotTail} '
-                'mode'),
-            trailing: ThemeModeSwitch(
-              themeMode: controller.themeMode,
-              onChanged: controller.setThemeMode,
-            ),
-            // Make it possible to toggle theme mode also via the ListTile.
-            onTap: () {
-              if (Theme.of(context).brightness == Brightness.light) {
-                controller.setThemeMode(ThemeMode.dark);
-              } else {
-                controller.setThemeMode(ThemeMode.light);
-              }
-            },
-          ),
           SwitchListTile.adaptive(
             title: const Text(
-              'Use the theming features',
+              'Use FlexColorScheme theming features',
             ),
             subtitle: const Text(
-              'Turn OFF to see Flutter default theming',
+              'Turn OFF to see Flutter default theming with selected '
+              'color scheme',
             ),
             value: controller.useFlexColorScheme,
             onChanged: controller.setUseFlexColorScheme,
@@ -253,12 +308,14 @@ class _Theme extends StatelessWidget {
   }
 }
 
-class _ModeOptions extends StatelessWidget {
-  const _ModeOptions({
+class _ThemeMode extends StatelessWidget {
+  const _ThemeMode({
     Key? key,
     required this.controller,
+    this.isClosed = false,
   }) : super(key: key);
   final ThemeController controller;
+  final bool isClosed;
 
   @override
   Widget build(BuildContext context) {
@@ -266,13 +323,30 @@ class _ModeOptions extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     return RevealListTileCard(
+      isClosed: isClosed,
       title: Text(
-        'Mode options',
+        'Theme Mode',
         style: Theme.of(context).textTheme.headline6,
       ),
-      closed: true,
       child: Column(
         children: <Widget>[
+          ListTile(
+            title: const Text('Mode'),
+            subtitle: Text('Using ${controller.themeMode.toString().dotTail} '
+                'mode'),
+            trailing: ThemeModeSwitch(
+              themeMode: controller.themeMode,
+              onChanged: controller.setThemeMode,
+            ),
+            // Toggle theme mode also via the ListTile tap.
+            onTap: () {
+              if (Theme.of(context).brightness == Brightness.light) {
+                controller.setThemeMode(ThemeMode.dark);
+              } else {
+                controller.setThemeMode(ThemeMode.light);
+              }
+            },
+          ),
           if (isLight)
             SwitchListTile.adaptive(
               title: const Text('Light mode color swap'),
@@ -363,17 +437,19 @@ class _WidgetThemes extends StatelessWidget {
   const _WidgetThemes({
     Key? key,
     required this.controller,
+    this.isClosed = false,
   }) : super(key: key);
   final ThemeController controller;
+  final bool isClosed;
 
   @override
   Widget build(BuildContext context) {
     return RevealListTileCard(
+      isClosed: isClosed,
       title: Text(
-        'Widget themes',
+        'Widget Theme Settings',
         style: Theme.of(context).textTheme.headline6,
       ),
-      closed: true,
       child: Column(
         children: <Widget>[
           SwitchListTile.adaptive(
@@ -438,8 +514,17 @@ class _WidgetThemes extends StatelessWidget {
                   subtitle: const Text(
                     'ON for outline   OFF for underline',
                   ),
-                  value: controller.inputDecoratorIsOutlinedBorder,
-                  onChanged: controller.setInputDecoratorIsOutlinedBorder,
+                  value: controller.inputDecoratorIsOutlinedBorder ==
+                      FlexInputBorderType.outline,
+                  onChanged: (bool isOn) {
+                    if (isOn) {
+                      controller.setInputDecoratorIsOutlinedBorder(
+                          FlexInputBorderType.outline);
+                    } else {
+                      controller.setInputDecoratorIsOutlinedBorder(
+                          FlexInputBorderType.underline);
+                    }
+                  },
                 ),
                 SwitchListTile.adaptive(
                   title: const Text(
@@ -479,28 +564,27 @@ class _SurfaceBlends extends StatelessWidget {
   const _SurfaceBlends({
     Key? key,
     required this.controller,
+    this.isClosed = false,
   }) : super(key: key);
   final ThemeController controller;
+  final bool isClosed;
 
   String explainMode(final FlexSurfaceMode mode) {
     switch (mode) {
       case FlexSurfaceMode.flat:
-        return 'Flat\nAll surface colors at blend level (1x)';
+        return 'Flat\nAll surface colors at blend level (1x)\n';
       case FlexSurfaceMode.highBackground:
-        return 'High background\nBackground (2x) Surface (1x) Scaffold (1/3x)';
+        return 'High background\nBackground (2x) Surface (1x) '
+            'Scaffold (1/3x)\n';
       case FlexSurfaceMode.highSurface:
-        return 'High surface\nSurface (2x) Background (1x) Scaffold (1/3x)';
+        return 'High surface\nSurface (2x) Background (1x) Scaffold (1/3x)\n';
       case FlexSurfaceMode.lowSurfaceHighScaffold:
         return 'Low surface, high scaffold\nSurface (1x) Background (2x) '
-            'Scaffold (3x)\n'
-            'When used, content is typically placed in Cards with '
-            'less primary color blend';
+            'Scaffold (3x)\n';
       case FlexSurfaceMode.lowScaffold:
-        return 'Low scaffold\nScaffold (1/3x) Surface and Background (1x)';
+        return 'Low scaffold\nScaffold (1/3x) Surface and Background (1x)\n';
       case FlexSurfaceMode.highScaffold:
-        return 'High scaffold\nScaffold (3x) Surface and Background (1x)\n'
-            'When used, content is typically placed in Cards with '
-            'less primary color blend';
+        return 'High scaffold\nScaffold (3x) Surface and Background (1x)\n';
       case FlexSurfaceMode.lowScaffoldVariantDialog:
         return 'Low scaffold\nScaffold (1/3x) Surface and Background (1x)\n'
             'Dialog background (1x) using secondary variant color';
@@ -515,11 +599,11 @@ class _SurfaceBlends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RevealListTileCard(
+      isClosed: isClosed,
       title: Text(
-        'Surface blends',
+        'Surface Blends',
         style: Theme.of(context).textTheme.headline6,
       ),
-      closed: true,
       child: Column(
         children: <Widget>[
           const ListTile(
@@ -553,8 +637,8 @@ class _SurfaceBlends extends StatelessWidget {
           ListTile(
             title: Slider.adaptive(
               min: 0,
-              max: 40,
-              divisions: 40,
+              max: 50,
+              divisions: 50,
               label: controller.blendLevel.toString(),
               value: controller.blendLevel.toDouble(),
               onChanged: (double value) {
@@ -587,12 +671,14 @@ class _SurfaceBlends extends StatelessWidget {
   }
 }
 
-class _AppBar extends StatelessWidget {
-  const _AppBar({
+class _AppBarSettings extends StatelessWidget {
+  const _AppBarSettings({
     Key? key,
     required this.controller,
+    this.isClosed = false,
   }) : super(key: key);
   final ThemeController controller;
+  final bool isClosed;
 
   String explainAppBarStyle(final FlexAppBarStyle style, final bool isLight) {
     switch (style) {
@@ -618,7 +704,7 @@ class _AppBar extends StatelessWidget {
         return 'Style: forAppbar\n'
             'Works with used app bar style (Default)';
       case FlexTabBarStyle.forBackground:
-        return 'Style: forBackground:\n'
+        return 'Style: forBackground\n'
             'Works on surface colors, like Scaffold, but '
             'also works on surface colored app bars';
       case FlexTabBarStyle.useDefault:
@@ -627,9 +713,9 @@ class _AppBar extends StatelessWidget {
             'background color in dark mode';
       case FlexTabBarStyle.universal:
         return 'Style: universal\n'
-            'An experimental design intended to work anywhere, but has '
+            'Experimental design intended to work anywhere, has '
             'low contrast in some combinations. This '
-            'style may be changed in future versions';
+            'style may change in future versions';
     }
   }
 
@@ -639,11 +725,11 @@ class _AppBar extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     return RevealListTileCard(
+      isClosed: isClosed,
       title: Text(
-        'App bar',
+        'AppBar Settings',
         style: Theme.of(context).textTheme.headline6,
       ),
-      closed: true,
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),
@@ -803,6 +889,7 @@ class _BottomNavigation extends StatelessWidget {
     required this.onNavBarStyle,
     required this.hasDivider,
     required this.onHasDivider,
+    this.isClosed = false,
   }) : super(key: key);
   final ThemeController controller;
 
@@ -811,6 +898,7 @@ class _BottomNavigation extends StatelessWidget {
 
   final bool hasDivider;
   final ValueChanged<bool> onHasDivider;
+  final bool isClosed;
 
   String explainStyle(final FlexSystemNavBarStyle style, final bool isLight) {
     switch (style) {
@@ -833,11 +921,11 @@ class _BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return RevealListTileCard(
+      isClosed: isClosed,
       title: Text(
-        'Bottom navigation',
+        'Bottom Navigation Settings',
         style: Theme.of(context).textTheme.headline6,
       ),
-      closed: true,
       child: Column(
         children: <Widget>[
           const ListTile(
@@ -904,16 +992,20 @@ class _BottomNavigation extends StatelessWidget {
 }
 
 class _SubPages extends StatelessWidget {
-  const _SubPages({Key? key}) : super(key: key);
+  const _SubPages({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
 
   @override
   Widget build(BuildContext context) {
     return RevealListTileCard(
+      isClosed: isClosed,
       title: Text(
-        'Page examples',
+        'Page Examples',
         style: Theme.of(context).textTheme.headline6,
       ),
-      closed: true,
       child: Column(
         children: <Widget>[
           ListTile(
@@ -962,6 +1054,250 @@ class _SubPages extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ButtonsShowcase extends StatelessWidget {
+  const _ButtonsShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: Text(
+        'Themed Buttons',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const IconButtonShowcase(),
+            const ButtonsShowcase(),
+            const ButtonsShowcase(enabled: false),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text('Legacy buttons deprecated',
+                  style: Theme.of(context).textTheme.headline6),
+            ),
+            const LegacyButtonShowcase(),
+            const LegacyButtonShowcase(enabled: false),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _InputShowcase extends StatelessWidget {
+  const _InputShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: Text(
+        'Themed Inputs',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const <Widget>[
+            ChipShowcase(),
+            CheckboxShowcase(),
+            TextInputField(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ThemeBarsShowcase extends StatelessWidget {
+  const _ThemeBarsShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: Text(
+        'Themed Bars',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: const <Widget>[
+            TabBarForAppBarShowcase(),
+            TabBarForBackgroundShowcase(),
+            BottomNavigationBarShowcase(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ListTileShowcase extends StatelessWidget {
+  const _ListTileShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: Text(
+        'Themed ListTile',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      child: const ListTileShowcase(),
+    );
+  }
+}
+
+class _TimePickerDialogShowcase extends StatelessWidget {
+  const _TimePickerDialogShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: Text(
+        'Themed TimePickerDialog',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      child: const TimePickerDialogShowcase(),
+    );
+  }
+}
+
+class _DatePickerDialogShowcase extends StatelessWidget {
+  const _DatePickerDialogShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: Text(
+        'Themed DatePickerDialog',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      child: const DatePickerDialogShowcase(),
+    );
+  }
+}
+
+class _AlertDialogShowcase extends StatelessWidget {
+  const _AlertDialogShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: Text(
+        'Themed Dialog',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      child: const AlertDialogShowcase(),
+    );
+  }
+}
+
+class _BottomSheetAndMaterialShowcase extends StatelessWidget {
+  const _BottomSheetAndMaterialShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: Text(
+        'Themed Material',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
+        child: BottomSheetAndMaterialShowcase(),
+      ),
+    );
+  }
+}
+
+class _CardShowcase extends StatelessWidget {
+  const _CardShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+        isClosed: isClosed,
+        title: Text(
+          'Themed Card',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(16),
+          child: CardShowcase(),
+        ));
+  }
+}
+
+class _TextThemeShowcase extends StatelessWidget {
+  const _TextThemeShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: Text(
+        'Themed TextTheme',
+        style: Theme.of(context).textTheme.headline6,
+      ),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
+        child: TextThemeShowcase(),
       ),
     );
   }

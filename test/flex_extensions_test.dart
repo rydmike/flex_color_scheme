@@ -105,22 +105,70 @@ void main() {
   //
   // Color.onColor function, reference values and edge cases tests.
   //****************************************************************************
-  group('FCE3o: WITH Color extension Color.onColor ', () {
+  group('FCE3oN: WITH Color extension Color.onColor ', () {
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
     const Color col1 = Color(0xFF6200EE);
     const Color col2 = Color(0xFFC3B2E2);
-    test('FCE3o.01: GIVEN Color($white) EXPECT Color($black).', () {
+    test('FCE3oN.01: GIVEN Color($white) EXPECT Color($black).', () {
       expect(white.onColor, equals(black));
     });
-    test('FCE3o.02: GIVEN Color($white) EXPECT Color($black).', () {
+    test('FCE3oN.02: GIVEN Color($white) EXPECT Color($black).', () {
       expect(black.onColor, equals(white));
     });
-    test('FCE3o.03: GIVEN Color($col1) EXPECT Color($white).', () {
+    test('FCE3oN.03: GIVEN Color($col1) EXPECT Color($white).', () {
       expect(col1.onColor, equals(white));
     });
-    test('FCE3o.04: GIVEN Color($col2) EXPECT Color($black).', () {
+    test('FCE3oN.04: GIVEN Color($col2) EXPECT Color($black).', () {
       expect(col2.onColor, equals(black));
+    });
+  });
+
+  //****************************************************************************
+  // FlexColorExtensions unit tests.
+  //
+  // Color.isLight function, reference values and edge cases tests.
+  //****************************************************************************
+  group('FCE3isL: WITH Color extension Color.isLight ', () {
+    const Color white = Color(0xFFFFFFFF);
+    const Color black = Color(0xFF000000);
+    const Color col1 = Color(0xFF6200EE);
+    const Color col2 = Color(0xFFC3B2E2);
+    test('FCE3isL.01: GIVEN Color($white) EXPECT isLight = true.', () {
+      expect(white.isLight, equals(true));
+    });
+    test('FCE3isL.02: GIVEN Color($white) EXPECT isLight = false.', () {
+      expect(black.isLight, equals(false));
+    });
+    test('FCE3isL.03: GIVEN Color($col1) EXPECT isLight = false.', () {
+      expect(col1.isLight, equals(false));
+    });
+    test('FCE3isL.04: GIVEN Color($col2) EXPECT isLight = true.', () {
+      expect(col2.isLight, equals(true));
+    });
+  });
+
+  //****************************************************************************
+  // FlexColorExtensions unit tests.
+  //
+  // Color.isDark function, reference values and edge cases tests.
+  //****************************************************************************
+  group('FCE3isL: WITH Color extension Color.isDark ', () {
+    const Color white = Color(0xFFFFFFFF);
+    const Color black = Color(0xFF000000);
+    const Color col1 = Color(0xFF6200EE);
+    const Color col2 = Color(0xFFC3B2E2);
+    test('FCE3isL.01: GIVEN Color($white) EXPECT isDark = false.', () {
+      expect(white.isDark, equals(false));
+    });
+    test('FCE3isL.02: GIVEN Color($white) EXPECT isDark = true.', () {
+      expect(black.isDark, equals(true));
+    });
+    test('FCE3isL.03: GIVEN Color($col1) EXPECT isDark = true.', () {
+      expect(col1.isDark, equals(true));
+    });
+    test('FCE3isL.04: GIVEN Color($col2) EXPECT isDark = false.', () {
+      expect(col2.isDark, equals(false));
     });
   });
 

@@ -21,7 +21,7 @@ export 'widgets/app_scroll_behavior.dart';
 export 'widgets/page_body.dart';
 export 'widgets/reveal_list_tile_card.dart';
 export 'widgets/show_theme_colors.dart';
-export 'widgets/side_menu.dart';
+export 'widgets/responsive_menu.dart';
 export 'widgets/surface_mode_buttons.dart';
 export 'widgets/system_nav_bar_style_buttons.dart';
 export 'widgets/tab_bar_style_buttons.dart';

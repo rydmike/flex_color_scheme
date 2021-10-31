@@ -187,8 +187,9 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   cornerRadius: 16,
   // Try eg. the one on the InputDecorator, commented below:
   // cornerRadiusInputDecoration: 8,
-  // Set inputDecoratorIsOutlinedBorder to false to use the underline version.
-  inputDecoratorIsOutlinedBorder: true,
+  // Select input decorator type, only SDK options outline and underline
+  // supported no, but custom ones may be added later.
+  inputDecoratorBorderType: FlexInputBorderType.underline,
   // For a primary color tinted background on the input decorator set to true.
   inputDecoratorIsFilled: true,
   // If you do not want any underline/outline on the input decorator when it is
@@ -394,7 +395,7 @@ class _HomePageState extends State<HomePage> {
 
   // The reason why HomePage is using a stateful widget is that it holds the
   // state of the dummy side menu/rail locally.
-  double _menuWidth = AppData.expandWidth;
+  double _menuWidth = AppData.menuWidth;
   bool _isExpanded = true;
 
   // The state for the system navbar style and divider usage is local as it is
@@ -438,13 +439,13 @@ class _HomePageState extends State<HomePage> {
       _menuWidth = 0.01;
     } else {
       if (!menuCanOperate) {
-        _menuWidth = AppData.collapseWidth;
+        _menuWidth = AppData.railWidth;
       }
       if (menuCanOperate && !_isExpanded) {
-        _menuWidth = AppData.collapseWidth;
+        _menuWidth = AppData.railWidth;
       }
       if (menuCanOperate && _isExpanded) {
-        _menuWidth = AppData.expandWidth;
+        _menuWidth = AppData.menuWidth;
       }
     }
 
@@ -465,13 +466,13 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           // Contains the demo menu and side rail.
           ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppData.expandWidth),
+            constraints: const BoxConstraints(maxWidth: AppData.menuWidth),
             child: Material(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 width: _menuWidth,
-                child: SideMenu(
-                  maxWidth: AppData.expandWidth,
+                child: ResponsiveMenu(
+                  maxWidth: AppData.menuWidth,
                   onTap: menuCanOperate
                       ? () {
                           setState(() {

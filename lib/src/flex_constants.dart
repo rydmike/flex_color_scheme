@@ -121,13 +121,13 @@ const double kElevatedButtonElevation = 0;
 const double kPopupMenuElevation = 2;
 
 /// Default elevation of [Dialog].
-const double kDialogElevation = 12;
+const double kDialogElevation = 10;
 
 /// Default for elevation of none modal [BottomSheet].
 const double kBottomSheetElevation = 4;
 
 /// Default for elevation of modal [BottomSheet].
-const double kBottomSheetModalElevation = 12;
+const double kBottomSheetModalElevation = 8;
 
 /// Default for elevation of [BottomNavigationBar].
 const double kBottomNavigationBarElevation = 0;
@@ -161,6 +161,10 @@ const double kThickBorderWidth = 2;
 const double kThinBorderWidth = 1.5;
 
 // TODO(rydmike): For ref, consider adding SDK defaults to doc comments below.
+
+// The values below for all the effects opacities and alpha blends are tricky.
+// Getting them just right is magic and dark arts plus some pixie dust.
+// These are the values I settled on for the opinionated themes.
 
 /// Fill color opacity for [InputDecorator] when fill color is not specified.
 const double kFillColorOpacityDefault = 0.06;
@@ -208,26 +212,31 @@ const double kDisabledForegroundOpacity = 0.38; // E:0.38 D:0.38
 /// [ToggleButtons].
 const double kEnabledBorderOpacity = 0.65; // D:?
 
+/// White alpha blend for alternative less saturated primary color.
+///
+/// Used by selected button and selected border color on [ToggleButtons].
+const int kAltPrimaryAlphaBlend = 15;
+
 /// White alpha blend for primary colored hover opt in effects theming.
-const int kHoverAlphaBlend = 40;
+const int kHoverAlphaBlend = 25;
 
 /// White alpha blend for primary colored focus opt in effects theming.
-const int kFocusAlphaBlend = 20;
+const int kFocusAlphaBlend = 30;
 
 /// White alpha blend for primary colored highlight opt in effects theming.
-const int kHighlightAlphaBlend = 20;
+const int kHighlightAlphaBlend = 25;
 
 /// White alpha blend for primary colored splash opt in effects theming.
-const int kSplashAlphaBlend = 25;
+const int kSplashAlphaBlend = 35;
 
 /// Opacity value for hover on the custom opt in effects.
-const double kHoverOpacity = 0.12;
+const double kHoverOpacity = 0.1;
 
 /// Opacity value for focus on the custom opt in effects.
-const double kFocusOpacity = 0.25;
+const double kFocusOpacity = 0.3;
 
 /// Opacity value for highlight on the custom opt in effects.
-const double kHighlightOpacity = 0.25;
+const double kHighlightOpacity = 0.1;
 
 /// Opacity value for splash on the custom opt in effects.
-const double kSplashOpacity = 0.30;
+const double kSplashOpacity = 0.2;

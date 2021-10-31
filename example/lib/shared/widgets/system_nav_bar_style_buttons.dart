@@ -25,7 +25,6 @@ class SystemNavBarStyleButtons extends StatelessWidget {
     ];
     return ToggleButtons(
       isSelected: isSelected,
-      fillColor: scheme.primary.lighten(15),
       onPressed: (int newIndex) {
         onChanged(FlexSystemNavBarStyle.values[newIndex]);
       },

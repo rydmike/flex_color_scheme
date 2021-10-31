@@ -74,13 +74,14 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> saveInputDecoratorIsFilled(bool value) async {}
 
-  /// Loads used inputDecoratorIsOutlinedBorder setting in example 5.
+  /// Loads used inputDecoratorBorderType setting in example 5.
   @override
-  Future<bool> inputDecoratorIsOutlinedBorder() async => true;
+  Future<FlexInputBorderType> inputDecoratorBorderType() async =>
+      FlexInputBorderType.outline;
 
-  /// Persists used inputDecoratorIsOutlinedBorder setting in example 5.
+  /// Persists used inputDecoratorBorderType setting in example 5.
   @override
-  Future<void> saveInputDecoratorIsOutlinedBorder(bool value) async {}
+  Future<void> saveInputDecoratorBorderType(FlexInputBorderType value) async {}
 
   /// Loads used inputDecoratorUnfocusedHasBorder setting in example 5.
   @override
@@ -126,9 +127,9 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used app bar opacity setting in example 5.
   ///
-  /// Defaults to 0.94, just a nice default effect for the example.
+  /// Defaults to 0.9, just a default effect for the example.
   @override
-  Future<double> appBarOpacity() async => 0.94;
+  Future<double> appBarOpacity() async => 0.9;
 
   /// Persists the used app bar opacity setting in example 5.
   @override
@@ -163,9 +164,9 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used bottom navigation bar opacity setting in example 5.
   ///
-  /// Defaults to 0.94, just a nice default effect for the example.
+  /// Defaults to 0.9, just a default effect for the example.
   @override
-  Future<double> bottomNavigationBarOpacity() async => 0.94;
+  Future<double> bottomNavigationBarOpacity() async => 0.9;
 
   /// Persists the used app bar opacity setting in example 5.
   @override

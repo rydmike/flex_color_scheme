@@ -86,7 +86,7 @@ class DemoApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             scrollBehavior: AppScrollBehavior(),
-            title: 'Example 5) All Features',
+            title: 'Features Demo',
             theme: themeController.useFlexColorScheme
                 ? FlexThemeData.light(
                     // Use controller to select color scheme from our list.
@@ -131,7 +131,7 @@ class DemoApp extends StatelessWidget {
                           themeController.bottomNavigationBarOpacity,
                       inputDecoratorIsFilled:
                           themeController.inputDecoratorIsFilled,
-                      inputDecoratorIsOutlinedBorder:
+                      inputDecoratorBorderType:
                           themeController.inputDecoratorIsOutlinedBorder,
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
@@ -198,7 +198,7 @@ class DemoApp extends StatelessWidget {
                           themeController.bottomNavigationBarOpacity,
                       inputDecoratorIsFilled:
                           themeController.inputDecoratorIsFilled,
-                      inputDecoratorIsOutlinedBorder:
+                      inputDecoratorBorderType:
                           themeController.inputDecoratorIsOutlinedBorder,
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
