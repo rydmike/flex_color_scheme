@@ -52,6 +52,46 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Reset all values to default and save as current settings.
+  ///
+  /// Calls setters with notify = false, and just calls notifyListeners, once
+  /// after all values have been reset and persisted.
+  Future<void> resetAllToDefaults() async {
+    await setThemeMode(ThemeService.defaultThemeMode, false);
+    await setUseSubThemes(ThemeService.defaultUseSubThemes, false);
+    await setUsedScheme(ThemeService.defaultUsedScheme, false);
+    await setSchemeIndex(ThemeService.defaultSchemeIndex, false);
+    await setThemedEffects(ThemeService.defaultThemedEffects, false);
+    await setCornerRadius(ThemeService.defaultCornerRadius, false);
+    await setInputDecoratorIsFilled(
+        ThemeService.defaultInputDecoratorIsFilled, false);
+    await setInputDecoratorBorderType(
+        ThemeService.defaultInputDecoratorBorderType, false);
+    await setInputDecoratorUnfocusedHasBorder(
+        ThemeService.defaultInputDecoratorUnfocusedHasBorder, false);
+    await setSurfaceMode(ThemeService.defaultSurfaceMode, false);
+    await setBlendLevel(ThemeService.defaultBlendLevel, false);
+    await setLightAppBarStyle(ThemeService.defaultLightAppBarStyle, false);
+    await setDarkAppBarStyle(ThemeService.defaultDarkAppBarStyle, false);
+    await setAppBarOpacity(ThemeService.defaultAppBarOpacity, false);
+    await setAppBarElevation(ThemeService.defaultAppBarElevation, false);
+    await setTransparentStatusBar(
+        ThemeService.defaultTransparentStatusBar, false);
+    await setTabBarStyle(ThemeService.defaultTabBarStyle, false);
+
+    await setBottomNavigationBarOpacity(
+        ThemeService.defaultBottomNavigationBarOpacity, false);
+    await setTooltipsMatchBackground(
+        ThemeService.defaultTooltipsMatchBackground, false);
+    await setSwapLightColors(ThemeService.defaultSwapLightColors, false);
+    await setSwapDarkColors(ThemeService.defaultSwapDarkColors, false);
+    await setDarkIsTrueBlack(ThemeService.defaultDarkIsTrueBlack, false);
+    await setUseToDarkMethod(ThemeService.defaultUseToDarkMethod, false);
+    await setDarkMethodLevel(ThemeService.defaultDarkMethodLevel, false);
+    await setUseFlexColorScheme(ThemeService.defaultUseFlexColorScheme, false);
+    notifyListeners();
+  }
+
   // Make all ThemeController properties private so they cannot be saved
   // directly without also persisting the changes with the ThemeService,
   // by making a setter and getter for each property.
@@ -63,15 +103,15 @@ class ThemeController with ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
 
   /// Set and persist new ThemeMode value.
-  Future<void> setThemeMode(ThemeMode? value) async {
+  Future<void> setThemeMode(ThemeMode? value, [bool notify = true]) async {
     // No work if null value passed.
     if (value == null) return;
     // Do not perform any work if new and old value are identical.
     if (value == _themeMode) return;
     // Otherwise, assign new value to private property.
     _themeMode = value;
-    // Inform all listeners a change has occurred.
-    notifyListeners();
+    // Inform all listeners a change has occurred, if notify flag true.
+    if (notify) notifyListeners();
     // Persist the change to whatever storage is used with the ThemeService.
     await _themeService.saveThemeMode(value);
   }
@@ -81,27 +121,27 @@ class ThemeController with ChangeNotifier {
   // FlexColorScheme properties.
   late bool _useSubThemes;
   bool get useSubThemes => _useSubThemes;
-  Future<void> setUseSubThemes(bool? value) async {
+  Future<void> setUseSubThemes(bool? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _useSubThemes) return;
     _useSubThemes = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveUseSubThemes(value);
   }
 
   late FlexScheme _usedScheme;
   FlexScheme get usedScheme => _usedScheme;
-  Future<void> setUsedScheme(FlexScheme? value) async {
+  Future<void> setUsedScheme(FlexScheme? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _usedScheme) return;
     _usedScheme = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveUsedScheme(value);
   }
 
   late int _schemeIndex;
   int get schemeIndex => _schemeIndex;
-  Future<void> setSchemeIndex(int? value) async {
+  Future<void> setSchemeIndex(int? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _schemeIndex) return;
     _schemeIndex = value;
@@ -111,204 +151,213 @@ class ThemeController with ChangeNotifier {
 
   late FlexSurfaceMode _surfaceMode;
   FlexSurfaceMode get surfaceMode => _surfaceMode;
-  Future<void> setSurface(FlexSurfaceMode? value) async {
+  Future<void> setSurfaceMode(FlexSurfaceMode? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _surfaceMode) return;
     _surfaceMode = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveSurfaceMode(value);
   }
 
   late int _blendLevel;
   int get blendLevel => _blendLevel;
-  Future<void> setBlendLevel(int? value) async {
+  Future<void> setBlendLevel(int? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _blendLevel) return;
     _blendLevel = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveBlendLevel(value);
   }
 
   late bool _themedEffects;
   bool get themedEffects => _themedEffects;
-  Future<void> setThemedEffects(bool? value) async {
+  Future<void> setThemedEffects(bool? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _themedEffects) return;
     _themedEffects = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveThemedEffects(value);
   }
 
   late double _cornerRadius;
   double get cornerRadius => _cornerRadius;
-  Future<void> setCornerRadius(double? value) async {
+  Future<void> setCornerRadius(double? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _cornerRadius) return;
     _cornerRadius = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveCornerRadius(value);
   }
 
   late bool _inputDecoratorIsFilled;
   bool get inputDecoratorIsFilled => _inputDecoratorIsFilled;
-  Future<void> setInputDecoratorIsFilled(bool? value) async {
+  Future<void> setInputDecoratorIsFilled(bool? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _inputDecoratorIsFilled) return;
     _inputDecoratorIsFilled = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveInputDecoratorIsFilled(value);
   }
 
   late FlexInputBorderType _inputDecoratorBorderType;
   FlexInputBorderType get inputDecoratorIsOutlinedBorder =>
       _inputDecoratorBorderType;
-  Future<void> setInputDecoratorIsOutlinedBorder(
-      FlexInputBorderType? value) async {
+  Future<void> setInputDecoratorBorderType(FlexInputBorderType? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _inputDecoratorBorderType) return;
     _inputDecoratorBorderType = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveInputDecoratorBorderType(value);
   }
 
   late bool _inputDecoratorUnfocusedHasBorder;
   bool get inputDecoratorUnfocusedHasBorder =>
       _inputDecoratorUnfocusedHasBorder;
-  Future<void> setInputDecoratorUnfocusedHasBorder(bool? value) async {
+  Future<void> setInputDecoratorUnfocusedHasBorder(bool? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _inputDecoratorUnfocusedHasBorder) return;
     _inputDecoratorUnfocusedHasBorder = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveInputDecoratorUnfocusedHasBorder(value);
   }
 
   late FlexAppBarStyle _lightAppBarStyle;
   FlexAppBarStyle get lightAppBarStyle => _lightAppBarStyle;
-  Future<void> setLightAppBarStyle(FlexAppBarStyle? value) async {
+  Future<void> setLightAppBarStyle(FlexAppBarStyle? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _lightAppBarStyle) return;
     _lightAppBarStyle = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveLightAppBarStyle(value);
   }
 
   late FlexAppBarStyle _darkAppBarStyle;
   FlexAppBarStyle get darkAppBarStyle => _darkAppBarStyle;
-  Future<void> setDarkAppBarStyle(FlexAppBarStyle? value) async {
+  Future<void> setDarkAppBarStyle(FlexAppBarStyle? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _darkAppBarStyle) return;
     _darkAppBarStyle = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveDarkAppBarStyle(value);
   }
 
   late double _appBarOpacity;
   double get appBarOpacity => _appBarOpacity;
-  Future<void> setAppBarOpacity(double? value) async {
+  Future<void> setAppBarOpacity(double? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _appBarOpacity) return;
     _appBarOpacity = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveAppBarOpacity(value);
   }
 
   late double _appBarElevation;
   double get appBarElevation => _appBarElevation;
-  Future<void> setAppBarElevation(double? value) async {
+  Future<void> setAppBarElevation(double? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _appBarElevation) return;
     _appBarElevation = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveAppBarElevation(value);
   }
 
   late bool _transparentStatusBar;
   bool get transparentStatusBar => _transparentStatusBar;
-  Future<void> setTransparentStatusBar(bool? value) async {
+  Future<void> setTransparentStatusBar(bool? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _transparentStatusBar) return;
     _transparentStatusBar = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveTransparentStatusBar(value);
   }
 
   late FlexTabBarStyle _tabBarStyle;
   FlexTabBarStyle get tabBarStyle => _tabBarStyle;
-  Future<void> setTabBarStyle(FlexTabBarStyle? value) async {
+  Future<void> setTabBarStyle(FlexTabBarStyle? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _tabBarStyle) return;
     _tabBarStyle = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveTabBarStyle(value);
   }
 
   late double _bottomNavigationBarOpacity;
   double get bottomNavigationBarOpacity => _bottomNavigationBarOpacity;
-  Future<void> setBottomNavigationBarOpacity(double? value) async {
+  Future<void> setBottomNavigationBarOpacity(double? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _bottomNavigationBarOpacity) return;
     _bottomNavigationBarOpacity = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveBottomNavigationBarOpacity(value);
   }
 
   late bool _tooltipsMatchBackground;
   bool get tooltipsMatchBackground => _tooltipsMatchBackground;
-  Future<void> setTooltipsMatchBackground(bool? value) async {
+  Future<void> setTooltipsMatchBackground(bool? value,
+      [bool notify = true]) async {
     if (value == null) return;
     if (value == _tooltipsMatchBackground) return;
     _tooltipsMatchBackground = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveTooltipsMatchBackground(value);
   }
 
   late bool _swapLightColors;
   bool get swapLightColors => _swapLightColors;
-  Future<void> setSwapLightColors(bool? value) async {
+  Future<void> setSwapLightColors(bool? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _swapLightColors) return;
     _swapLightColors = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveSwapLightColors(value);
   }
 
   late bool _swapDarkColors;
   bool get swapDarkColors => _swapDarkColors;
-  Future<void> setSwapDarkColors(bool? value) async {
+  Future<void> setSwapDarkColors(bool? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _swapDarkColors) return;
     _swapDarkColors = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveSwapDarkColors(value);
   }
 
   late bool _darkIsTrueBlack;
   bool get darkIsTrueBlack => _darkIsTrueBlack;
-  Future<void> setDarkIsTrueBlack(bool? value) async {
+  Future<void> setDarkIsTrueBlack(bool? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _darkIsTrueBlack) return;
     _darkIsTrueBlack = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveDarkIsTrueBlack(value);
   }
 
   late bool _useToDarkMethod;
   bool get useToDarkMethod => _useToDarkMethod;
-  Future<void> setUseToDarkMethod(bool? value) async {
+  Future<void> setUseToDarkMethod(bool? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _useToDarkMethod) return;
     _useToDarkMethod = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveUseToDarkMethod(value);
   }
 
   late int _darkMethodLevel;
   int get darkMethodLevel => _darkMethodLevel;
-  Future<void> setDarkMethodLevel(int? value) async {
+  Future<void> setDarkMethodLevel(int? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _darkMethodLevel) return;
     _darkMethodLevel = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveDarkMethodLevel(value);
   }
 
@@ -316,11 +365,11 @@ class ThemeController with ChangeNotifier {
   // ON/OFF the usage of FlexColorScheme
   late bool _useFlexColorScheme;
   bool get useFlexColorScheme => _useFlexColorScheme;
-  Future<void> setUseFlexColorScheme(bool? value) async {
+  Future<void> setUseFlexColorScheme(bool? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _useFlexColorScheme) return;
     _useFlexColorScheme = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     await _themeService.saveUseFlexColorScheme(value);
   }
 }

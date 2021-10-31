@@ -18,7 +18,7 @@ import 'theme_service.dart';
 class ThemeServiceMem implements ThemeService {
   /// Loads the ThemeMode from local or remote storage.
   @override
-  Future<ThemeMode> themeMode() async => ThemeMode.system;
+  Future<ThemeMode> themeMode() async => ThemeService.defaultThemeMode;
 
   /// Persists the ThemeMode to mem in examples 2, 3, 4 and 5.
   @override
@@ -26,7 +26,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads the use sub themes setting from mem in examples 2, 3, 4 and 5.
   @override
-  Future<bool> useSubThemes() async => true;
+  Future<bool> useSubThemes() async => ThemeService.defaultUseSubThemes;
 
   /// Persists the use sub themes setting to mem in examples 2, 3, 4 and 5.
   @override
@@ -34,17 +34,15 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads the used scheme setting from mem in example 3.
   @override
-  Future<FlexScheme> usedScheme() async => FlexScheme.hippieBlue;
+  Future<FlexScheme> usedScheme() async => ThemeService.defaultUsedScheme;
 
   /// Persists the used scheme setting to mem in example 3.
   @override
   Future<void> saveUsedScheme(FlexScheme value) async {}
 
   /// Loads used scheme index setting from mem in examples 4 and 5.
-  ///
-  /// Defaults to 32, blue whale.
   @override
-  Future<int> schemeIndex() async => 32;
+  Future<int> schemeIndex() async => ThemeService.defaultSchemeIndex;
 
   /// Persists the used scheme setting to mem in examples 4 and 5.
   @override
@@ -52,7 +50,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used themed effects setting in example 5.
   @override
-  Future<bool> themedEffects() async => true;
+  Future<bool> themedEffects() async => ThemeService.defaultThemedEffects;
 
   /// Persists used themed effects setting in example 5.
   @override
@@ -60,7 +58,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used corner radius setting in example 5.
   @override
-  Future<double> cornerRadius() async => 16;
+  Future<double> cornerRadius() async => ThemeService.defaultCornerRadius;
 
   /// Persists the used corner radius setting in example 5.
   @override
@@ -68,7 +66,8 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used inputDecoratorIsFilled setting in example 5.
   @override
-  Future<bool> inputDecoratorIsFilled() async => true;
+  Future<bool> inputDecoratorIsFilled() async =>
+      ThemeService.defaultInputDecoratorIsFilled;
 
   /// Persists used inputDecoratorIsFilled setting in example 5.
   @override
@@ -77,7 +76,7 @@ class ThemeServiceMem implements ThemeService {
   /// Loads used inputDecoratorBorderType setting in example 5.
   @override
   Future<FlexInputBorderType> inputDecoratorBorderType() async =>
-      FlexInputBorderType.outline;
+      ThemeService.defaultInputDecoratorBorderType;
 
   /// Persists used inputDecoratorBorderType setting in example 5.
   @override
@@ -85,7 +84,8 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used inputDecoratorUnfocusedHasBorder setting in example 5.
   @override
-  Future<bool> inputDecoratorUnfocusedHasBorder() async => true;
+  Future<bool> inputDecoratorUnfocusedHasBorder() async =>
+      ThemeService.defaultInputDecoratorUnfocusedHasBorder;
 
   /// Persists used inputDecoratorUnfocusedHasBorder setting in example 5.
   @override
@@ -93,17 +93,17 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used surface mode setting in example 5.
   @override
-  Future<FlexSurfaceMode> surfaceMode() async => FlexSurfaceMode.highBackground;
+  Future<FlexSurfaceMode> surfaceMode() async =>
+      ThemeService.defaultSurfaceMode;
 
   /// Persists the used surface mode setting in example 5.
   @override
   Future<void> saveSurfaceMode(FlexSurfaceMode value) async {}
 
   /// Loads used surface blend level setting in example 5.
-  ///
-  /// Defaults to 12.
+
   @override
-  Future<int> blendLevel() async => 12;
+  Future<int> blendLevel() async => ThemeService.defaultBlendLevel;
 
   /// Persists the used surface blend level setting in example 5.
   @override
@@ -111,7 +111,8 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used app bar style for light theme setting in example 5.
   @override
-  Future<FlexAppBarStyle> lightAppBarStyle() async => FlexAppBarStyle.primary;
+  Future<FlexAppBarStyle> lightAppBarStyle() async =>
+      ThemeService.defaultLightAppBarStyle;
 
   /// Persists the used app bar style for light theme setting in example 5.
   @override
@@ -119,28 +120,24 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used app bar style for dark theme setting in example 5.
   @override
-  Future<FlexAppBarStyle> darkAppBarStyle() async => FlexAppBarStyle.background;
+  Future<FlexAppBarStyle> darkAppBarStyle() async =>
+      ThemeService.defaultDarkAppBarStyle;
 
   /// Persists the used app bar style for dark theme setting in example 5.
   @override
   Future<void> saveDarkAppBarStyle(FlexAppBarStyle value) async {}
 
   /// Loads used app bar opacity setting in example 5.
-  ///
-  /// Defaults to 0.9, just a default effect for the example.
   @override
-  Future<double> appBarOpacity() async => 0.9;
+  Future<double> appBarOpacity() async => ThemeService.defaultAppBarOpacity;
 
   /// Persists the used app bar opacity setting in example 5.
   @override
   Future<void> saveAppBarOpacity(double value) async {}
 
   /// Loads used app bar elevation setting in example 5.
-  ///
-  /// Defaults to 0.5, just a hint of elevation, gives us a bottom border for
-  /// free on light backgrounds.
   @override
-  Future<double> appBarElevation() async => 0.5;
+  Future<double> appBarElevation() async => ThemeService.defaultAppBarElevation;
 
   /// Persists the used app bar elevation setting in example 5.
   @override
@@ -148,7 +145,8 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used status bar transparency setting in example 5.
   @override
-  Future<bool> transparentStatusBar() async => true;
+  Future<bool> transparentStatusBar() async =>
+      ThemeService.defaultTransparentStatusBar;
 
   /// Persists used status bar transparency setting in example 5.
   @override
@@ -156,17 +154,17 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used tab bar style setting in example 5.
   @override
-  Future<FlexTabBarStyle> tabBarStyle() async => FlexTabBarStyle.forAppBar;
+  Future<FlexTabBarStyle> tabBarStyle() async =>
+      ThemeService.defaultTabBarStyle;
 
   /// Persists used tab bar style setting in example 5.
   @override
   Future<void> saveTabBarStyle(FlexTabBarStyle value) async {}
 
   /// Loads used bottom navigation bar opacity setting in example 5.
-  ///
-  /// Defaults to 0.9, just a default effect for the example.
   @override
-  Future<double> bottomNavigationBarOpacity() async => 0.9;
+  Future<double> bottomNavigationBarOpacity() async =>
+      ThemeService.defaultBottomNavigationBarOpacity;
 
   /// Persists the used app bar opacity setting in example 5.
   @override
@@ -174,7 +172,8 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used tooltip style setting in example 5.
   @override
-  Future<bool> tooltipsMatchBackground() async => true;
+  Future<bool> tooltipsMatchBackground() async =>
+      ThemeService.defaultTooltipsMatchBackground;
 
   /// Persists used tooltip style setting in example 5.
   @override
@@ -182,7 +181,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads swap primary/secondary colors in light mode, in example 5.
   @override
-  Future<bool> swapLightColors() async => false;
+  Future<bool> swapLightColors() async => ThemeService.defaultSwapLightColors;
 
   /// Persists swap primary/secondary colors in light mode, in example 5.
   @override
@@ -190,7 +189,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads swap primary/secondary colors in dark mode, in example 5.
   @override
-  Future<bool> swapDarkColors() async => false;
+  Future<bool> swapDarkColors() async => ThemeService.defaultSwapDarkColors;
 
   /// Persists swap primary/secondary colors in dark mode, in example 5.
   @override
@@ -198,7 +197,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads dark uses true black setting in dark mode, in example 5.
   @override
-  Future<bool> darkIsTrueBlack() async => false;
+  Future<bool> darkIsTrueBlack() async => ThemeService.defaultDarkIsTrueBlack;
 
   /// Persists dark uses true black setting in dark mode, in example 5.
   @override
@@ -206,7 +205,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads use computed dark mode setting, in example 5.
   @override
-  Future<bool> useToDarkMethod() async => false;
+  Future<bool> useToDarkMethod() async => ThemeService.defaultUseToDarkMethod;
 
   /// Persists use computed dark mode setting, in example 5.
   @override
@@ -214,7 +213,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads use computed dark mode level setting, in example 5.
   @override
-  Future<int> darkMethodLevel() async => 35;
+  Future<int> darkMethodLevel() async => ThemeService.defaultDarkMethodLevel;
 
   /// Persists use computed dark mode level setting, in example 5.
   @override
@@ -222,7 +221,8 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads setting that turns ON/OFF FlexColorScheme theme, in example 5.
   @override
-  Future<bool> useFlexColorScheme() async => true;
+  Future<bool> useFlexColorScheme() async =>
+      ThemeService.defaultUseFlexColorScheme;
 
   /// Persists setting that turns ON/OFF FlexColorScheme theme, in example 5.
   @override

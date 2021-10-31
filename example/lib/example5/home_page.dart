@@ -463,10 +463,10 @@ class _WidgetThemes extends StatelessWidget {
                       FlexInputBorderType.outline,
                   onChanged: (bool isOn) {
                     if (isOn) {
-                      controller.setInputDecoratorIsOutlinedBorder(
+                      controller.setInputDecoratorBorderType(
                           FlexInputBorderType.outline);
                     } else {
-                      controller.setInputDecoratorIsOutlinedBorder(
+                      controller.setInputDecoratorBorderType(
                           FlexInputBorderType.underline);
                     }
                   },
@@ -570,7 +570,7 @@ class _SurfaceBlends extends StatelessWidget {
             children: <Widget>[
               SurfaceModeButtons(
                 mode: controller.surfaceMode,
-                onChanged: controller.setSurface,
+                onChanged: controller.setSurfaceMode,
               ),
               const SizedBox(width: 16),
             ],
