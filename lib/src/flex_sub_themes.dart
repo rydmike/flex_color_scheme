@@ -116,6 +116,7 @@ class FlexSubThemes {
         ),
       );
 
+  // TODO(rydmike): Review the style, could eg use some blend colors.
   /// An opinionated [BottomNavigationBarThemeData] with custom elevation.
   ///
   /// Its `elevation` defaults to [kBottomNavigationBarElevation] (0).
@@ -193,9 +194,20 @@ class FlexSubThemes {
 
     /// Dialog elevation defaults to 12.
     final double? elevation = kDialogElevation,
+
+    /// Dialog background color.
+    ///
+    /// Defaults to null and gest default via Dialog's default null theme
+    /// behavior.
+    ///
+    /// This property is here so we can provide a custom themed dialog
+    /// background color when the ThemeData property dialogBackgroundColor
+    /// is deprecated in Flutter SDK.
+    final Color? backgroundColor,
   }) =>
       DialogTheme(
         elevation: elevation,
+        backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(radius),

@@ -4006,6 +4006,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.dialogTheme(
               radius: subTheme.cornerRadiusDialog ?? subTheme.cornerRadius,
               elevation: subTheme.dialogElevation,
+              backgroundColor: dialogBackground ?? colorScheme.background,
             )
           : null,
       snackBarTheme: useSubThemes
