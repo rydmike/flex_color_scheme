@@ -168,6 +168,7 @@ class _HomePageState extends State<HomePage> {
           if (columns >= 4) margins = AppData.edgeInsetsBigDesktop;
 
           return StaggeredGridView.countBuilder(
+            key: ValueKey<double>(constraints.maxWidth),
             controller: scrollController,
             crossAxisCount: columns,
             mainAxisSpacing: margins,
