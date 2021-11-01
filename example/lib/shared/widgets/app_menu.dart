@@ -5,8 +5,8 @@ import '../const/app_data.dart';
 
 /// App side menu and rail, used in default example and example 4 and 5.
 ///
-/// Contains command to control the views for example 5 and reset settings
-/// to default values.
+/// Contains command to control the views for example 5 and reset settings to
+/// default values. Not super optimal, just a simple working hack fro this demo.
 class AppMenu extends StatefulWidget {
   const AppMenu({
     Key? key,

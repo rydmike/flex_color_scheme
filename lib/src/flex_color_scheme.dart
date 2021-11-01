@@ -3079,6 +3079,8 @@ class FlexColorScheme with Diagnosticable {
   // TODO(rydmike): Find the algorithm that produces the Material Colors.
   // Having access to the actual algorithm that produces the Material color
   // swatches would be even better than the above approach.
+  // Not bothering with it now, wait and see what Material You brings to
+  // Flutter.
 
   /// Create a primary Material color swatch from a given [color].
   ///
@@ -3319,7 +3321,12 @@ class FlexColorScheme with Diagnosticable {
 
     // Check brightness of primary, secondary, error, surface and background
     // colors, and then calculate appropriate colors for their onColors, if an
-    // "on" color was not passed in.
+    // "on" color was not passed in. For each onColor that is not noll
+    // in FlexColorScheme, the FlexSchemeOnColors.from just returns the onColor.
+    // This fills in the blanks when using the raw default constructor.
+    // The factories .light and .dark do their own complex onColor calculations
+    // that are already defined at this point if FlexColorScheme was created
+    // using one of the them..
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: primary,
       secondary: secondary,
@@ -3392,12 +3399,13 @@ class FlexColorScheme with Diagnosticable {
           defaultPrimaryTextTheme.apply(fontFamily: fontFamily);
     }
 
-    // We are using sub themes and blend on text themes, if surfaces and
+    // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
-    // different.
+    // different, a bit more muted, but only marginally.
     if (useSubThemes && subTheme.blendTextTheme) {
       // Use the on color for surface or background that gives us better
-      // contrast. Comparing with red value seemed to work.
+      // contrast. Finding right one by comparing with red value seemed to work
+      // well enough.
       final Color _onColor = isDark
           ? (colorScheme.onBackground.red < colorScheme.onSurface.red)
               ? colorScheme.onSurface
@@ -3405,6 +3413,9 @@ class FlexColorScheme with Diagnosticable {
           : (colorScheme.onBackground.red > colorScheme.onSurface.red)
               ? colorScheme.onSurface
               : colorScheme.onBackground;
+      // Calculate colors for the different TextStyle.
+      // TODO(rydmike): Review and improve before release.
+      // TODO(rydmike): Later consider using Material You and new Flutter APIs.
       final Color _head = isDark
           ? _onColor.blend(colorScheme.primary, 40)
           : _onColor.blend(colorScheme.primary, 60);
@@ -3414,6 +3425,11 @@ class FlexColorScheme with Diagnosticable {
       final Color _small = isDark
           ? _onColor.blend(colorScheme.primary, 10)
           : _onColor.blend(colorScheme.primary, 20);
+      // Apply the computed colors. fonts have no opacity when using this
+      // type of styling, the are computed with a color matching their
+      // background. Does not work so well if need to put text on completely
+      // different colored container. Which is why this feature can be opted
+      // out of.
       defaultTextTheme = defaultTextTheme.copyWith(
         headline1: defaultTextTheme.headline1!.copyWith(color: _head),
         headline2: defaultTextTheme.headline2!.copyWith(color: _head),
@@ -3429,7 +3445,7 @@ class FlexColorScheme with Diagnosticable {
         button: defaultTextTheme.button!.copyWith(color: _medium),
         overline: defaultTextTheme.overline!.copyWith(color: _small),
       );
-
+      // Equivalent calculations for primary text theme.
       final Color _headP = primaryIsDark
           ? colorScheme.onPrimary.blend(colorScheme.primary, 30)
           : colorScheme.onPrimary.blend(colorScheme.primary, 10);
@@ -3455,6 +3471,8 @@ class FlexColorScheme with Diagnosticable {
         overline: defaultPrimaryTextTheme.overline!.copyWith(color: _smallP),
       );
     }
+    // Make our final complete TextTheme, by also merging in the two TextThemes
+    // passed in via constructor.
     final TextTheme effectiveTextTheme = defaultTextTheme.merge(textTheme);
     final TextTheme effectivePrimaryTextTheme =
         defaultPrimaryTextTheme.merge(primaryTextTheme);
@@ -3486,14 +3504,16 @@ class FlexColorScheme with Diagnosticable {
         (isDark ? colorScheme.surface : colorScheme.primary);
     final Brightness appBarBrightness =
         ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
-
     Color appBarForeground =
         appBarBrightness == Brightness.dark ? Colors.white : Colors.black;
+    // Icons are slightly transparent in light mode! Follows SDK design.
     Color appBarIconColor =
         appBarBrightness == Brightness.dark ? Colors.white : Colors.black87;
-
+    // If we are using subThemes and blended TxtTheme, we need to manage it for
+    // our app bar foreground color as well.
+    // TODO(rydmike): This is messy, maybe cleaner to do in the factories? TBD.
     if (useSubThemes && subTheme.blendTextTheme) {
-      // Get darker (in dark mode) or lighter (in light mode) of surface
+      // Get darker (in dark mode) or lighter (in light mode) color of surface
       // or background color.
       final Color _bestSurface = isDark
           ? (colorScheme.background.red > colorScheme.surface.red)
@@ -3502,52 +3522,45 @@ class FlexColorScheme with Diagnosticable {
           : (colorScheme.background.red < colorScheme.surface.red)
               ? colorScheme.surface
               : colorScheme.background;
-
-      // Dark mode: TextTheme is light
+      // Dark mode: TextTheme is light on dark surface
       if (isDark) {
         if (appBarBrightness == Brightness.dark && !primaryIsDark) {
-          // Needs light text color
+          // Needs light text color, main TextTheme is OK.
           appBarForeground = effectiveTextTheme.headline6!.color!;
         } else if (appBarBrightness == Brightness.dark && primaryIsDark) {
-          // Needs light text color
+          // Needs light text color, since primari is dark it conatains right
+          // tinted one.
           appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
         } else if (appBarBrightness == Brightness.light && !primaryIsDark) {
-          // Needs dark text color
+          // Needs dark text, primary is light, so it contains suitable color.
           appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
         } else {
-          // In dark mode and app bar is light and primary is dark (light text)
-          // App bar needs dark text color, we have none in theme, we use
-          // background or surface, the darker one is used for better contrast.
+          // Dark mode, and app bar is light and primary is dark (light text)
+          // App bar needs dark text color, we have none in TextThemes. We use
+          // background or surface color. We use the darker one, since it
+          // ist.
           appBarForeground = _bestSurface;
         }
         // Light mode: TextTheme is dark
       } else {
         if (appBarBrightness == Brightness.dark && !primaryIsDark) {
-          // Need a light text color
+          // Needs light text color, we are in light mode, TextTheme is fine.
           appBarForeground = effectiveTextTheme.headline6!.color!;
         } else if (appBarBrightness == Brightness.dark && primaryIsDark) {
-          // Need a light text color
+          // Needs a light text color, primary isDark, so its TextTheme is made
+          // for this exact usage.
           appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
         } else if (appBarBrightness == Brightness.light && !primaryIsDark) {
-          // Need a dark text color
+          // Need a dark text color,
           appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
         } else {
           // Need a dark text color
           appBarForeground = effectiveTextTheme.headline6!.color!;
         }
       }
+      // Override icon colo and use same color as app bar foreground.
       appBarIconColor = appBarForeground;
     }
-
-    // appBarBrightness == Brightness.dark ? Colors.white : Colors.black,
-    // // Define appropriate brightness on the icon themes
-    // iconTheme: appBarBrightness == Brightness.dark
-    // ? const IconThemeData(color: Colors.white)
-    //     : const IconThemeData(color: Colors.black87),
-    // actionsIconTheme: appBarBrightness == Brightness.dark
-    // ? const IconThemeData(color: Colors.white)
-    //     : const IconThemeData(color: Colors.black87),
-
     // Selected TabBar color is based on FlexTabBarStyle tabBarStyle.
     // The `useDefault` sets values corresponding to SDK Default behavior.
     Color selectedTabColor() {
@@ -3560,6 +3573,7 @@ class FlexColorScheme with Diagnosticable {
           return appBarBrightness == Brightness.light
               ? Colors.black87
               : Colors.white;
+        // TODO(rydmike): See if we can improve this "universal" style.
         case FlexTabBarStyle.universal:
           return isDark
               ? primary.blend(Colors.white, 90)
@@ -3625,7 +3639,8 @@ class FlexColorScheme with Diagnosticable {
     // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
     final Color dividerColor = colorScheme.onSurface.withOpacity(0.12);
 
-    // Make the effective input decoration theme.
+    // Make the effective input decoration theme, by using FCS v4 sub themes
+    // if opted in, otherwise use pre-v4 version as before.
     final InputDecorationTheme effectiveInputDecorationTheme = useSubThemes
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
@@ -3655,9 +3670,8 @@ class FlexColorScheme with Diagnosticable {
     // Use themedEffects on hover, focus, highlight and splash?
     final bool themedEffects = useSubThemes && subTheme.themedEffects;
 
-    // Make and return the ThemeData object defined by the FlexColorScheme
-    // properties and the designed slightly opinionated theme design choices
-    // over default Flutter Material theme implementation.
+    // Return the ThemeData object defined by the FlexColorScheme
+    // properties and the designed opinionated theme design choices.
     return ThemeData(
       // These properties we just pass along these to the standard ThemeData
       // factory. They are included in FlexColorScheme so we do not have to
@@ -3671,7 +3685,7 @@ class FlexColorScheme with Diagnosticable {
       // been deprecated in Flutter 2.5.0.
       textTheme: effectiveTextTheme,
       primaryTextTheme: effectivePrimaryTextTheme,
-      // Pass along custom typography and platform logic.
+      // Pass along custom typography and platform.
       typography: effectiveTypography,
       platform: effectivePlatform,
       // Most definitions below are very close to the ones used by the Flutter
@@ -3686,11 +3700,14 @@ class FlexColorScheme with Diagnosticable {
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
       // Here it is replaced with a separate color for the scaffold background,
       // so we can use a configuration with a separate scaffold background
-      // color from scheme background and surface, if so desired. Flutter's
-      // standard ThemeData.from a ColorScheme cannot do this. The good old
-      // ThemeData factory can of course, but color scheme based themes in
-      // Flutter cannot specify it separately. We need to be able to do so
-      // in order to make elegantly nuanced primary color branded themes.
+      // color from scheme background and surface. Flutter's ThemeData.from
+      // a ColorScheme cannot do this. The good old ThemeData factory can of
+      // course, but color scheme based themes in Flutter cannot specify it
+      // separately. We need to be able to do so/ in order to make elegantly
+      // nuanced primary color branded themes.
+      // TODO(rydmike): Followup in with issue about need to keep it around.
+      // Could be in a proper new sub-theme and prop in ThemeData can migrate
+      // to it.
       scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.background,
       // Card, divider and background colors are same as in ThemeData.from.
       cardColor: colorScheme.surface,
@@ -3703,10 +3720,12 @@ class FlexColorScheme with Diagnosticable {
           : isDark
               ? Colors.white38
               : Colors.black38,
+      // Same as ThemeData SDK.
       hintColor: isDark ? Colors.white60 : Colors.black.withOpacity(0.6),
 
       // Special theming on hover, focus, highlight and splash, if opting in on
-      // themedEffects, otherwise use ThemeData defaults.
+      // themedEffects, otherwise use ThemeData defaults by passing in null
+      // and letting it assign its values.
       hoverColor: themedEffects
           ? colorScheme.primary
               .blend(Colors.white, kHoverAlphaBlend)
@@ -3731,7 +3750,8 @@ class FlexColorScheme with Diagnosticable {
       // Flutter standard dialogBackgroundColor for color scheme based themes
       // uses colorScheme.background.
       // The FlexColorScheme.from() factory constructor uses passed in a dialog
-      // background color that is same as surface color or even any other color.
+      // background color that is same as surface color if not defined, but
+      // may also be any other other color.
       // If using surface blends that are not equal for all Material surface
       // backgrounds colors. There will be no elevation overlay color in dark
       // mode even if so requested.
@@ -3739,6 +3759,7 @@ class FlexColorScheme with Diagnosticable {
       // colorScheme.surface to ensure it gets elevation overlay color applied
       // in dark mode. See issue:
       // https://github.com/flutter/flutter/issues/90353
+      // The dialogBackgroundColor in ThemeData is being deprecated
       dialogBackgroundColor: dialogBackground ?? colorScheme.background,
 
       // Define errorColor via color scheme error color.
@@ -4396,10 +4417,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
 
   /// The color of the [Scaffold] background.
   final Color scaffoldBackground;
-
-  // TODO(rydmike): Consider reverse alpha blends for on colors?
-  // The alpha value for the surface blend.
-  // final Color? surfaceAlpha;
 
   /// Create nuanced surface colors using pre-defined behavior via enum
   /// [FlexSurfaceMode] property `surfaceMode` or make totally custom color

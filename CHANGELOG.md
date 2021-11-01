@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [WIP 4.0.0] - October 28, 2021
+## [WIP 4.0.0] - November 2, 2021
 
 * The breaking case refer to a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.x.x.
@@ -41,6 +41,9 @@ All notable changes to the **FlexColorScheme** package are documented here.
   to match the standard buttons regarding size and design as far as possible.
   * In case you still use the old deprecated buttons, they also get 
   `ButtonThemeData` that as far as possible match the same style. 
+  * Via the sub-themes it is by default opted-in to also use a bit Material You
+  like coloring on the text style. This can also be opted out of, even if
+  otherwise opting in on sub-themes.
 * **New:** Added `FlexThemeData` static extension on `ThemeData`. 
   * Themes can now also be created with the new syntax
   `FlexThemeData.light` and `FlexThemeData.dark`, instead of with 
@@ -107,11 +110,12 @@ All notable changes to the **FlexColorScheme** package are documented here.
 * **TODO New color schemes:** Added four new built-in color schemes.
   * **Blue whale** - Blue whale, jungle green and outrageous tango orange.
     Use enum value `FlexScheme.blueWhale` for easy access to it.
-  * **TODO** - Nnn.
+    This theme is final and selected for inclusion as a new one.
+  * **TODO** - Added draft placeholder 1 theme, nothing decided yet.
     Use enum value `FlexScheme.nnn` for easy access to it.
-  * **TODO** - Nnn,
+  * **TODO** - Added draft placeholder 2 theme, nothing decided yet.
     Use enum value `FlexScheme.nnn` for easy access to it.
-  * **TODO** - Nnn.
+  * **TODO** - Added draft placeholder 3 theme, nothing decided yet.
     Use enum value `FlexScheme.nnn` for easy access to it.
   
 
@@ -140,7 +144,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 * **TODO Tests:** 
   * Added tests for the new features.
-  * Total 1022 tests, 
+  * Total 1033 tests, 
   * Coverage temporarily down to around 95%. 
   * More tests to be added before release.
 

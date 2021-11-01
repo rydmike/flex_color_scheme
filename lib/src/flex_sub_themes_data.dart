@@ -68,12 +68,12 @@ class FlexSubThemesData with Diagnosticable {
   /// Opt in on using color branded hover, focus, highlight and splash effects.
   ///
   /// The standard colors on hover, focus, highlight and splash effects use
-  /// greys, white or black with different opacity levels.
+  /// greys, i.e. white or black with different opacity levels.
   ///
   /// To get a color themed effect, set [themedEffects] to true, and to false
   /// for the SDK default values.
   ///
-  /// These effects apply to all Widgets that get them from [ThemeData].
+  /// These effects apply to all Widgets that get theme from [ThemeData].
   ///
   /// The buttons [ElevatedButton], [OutlinedButton] and [TextButton] define
   /// theme styles that by default use their own themed Material state
