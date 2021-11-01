@@ -61,7 +61,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorFillColor,
     this.inputDecoratorBorderType = FlexInputBorderType.outline,
     this.inputDecoratorUnfocusedHasBorder = true,
-    this.blendOnColors = false,
+    this.blendOnColors = true,
     this.blendTextTheme = true,
   });
 

@@ -331,7 +331,7 @@ abstract class ThemeService {
   static const String keyBlendLightOnColors = 'blendLightOnColors';
 
   /// Default value for the blendLightOnColors, also to reset settings.
-  static const bool defaultBlendLightOnColors = false;
+  static const bool defaultBlendLightOnColors = true;
 
   /// Loads setting that blends light colors, in example 5.
   Future<bool> blendLightOnColors();
@@ -343,7 +343,7 @@ abstract class ThemeService {
   static const String keyBlendDarkOnColors = 'blendDarkOnColors';
 
   /// Default value for the blendDarkOnColors, also to reset settings.
-  static const bool defaultBlendDarkOnColors = false;
+  static const bool defaultBlendDarkOnColors = true;
 
   /// Loads setting that blends dark colors, in example 5.
   Future<bool> blendDarkOnColors();

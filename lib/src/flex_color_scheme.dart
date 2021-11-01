@@ -156,7 +156,7 @@ enum FlexSurfaceMode {
   /// Increasing blend strengths in listed order, surface, background, scaffold.
   ///
   /// The blend strength increases on surfaces in this order:
-  /// * Surface & dialogs (0.5x) -> background (1x)-> Scaffold background (2x).
+  /// * Surface & dialogs (0.5x) -> background (1x)-> Scaffold background (3x).
   ///
   /// Theme colorScheme.primary color is used as blend color on all surfaces.
   ///
@@ -1716,7 +1716,7 @@ class FlexColorScheme with Diagnosticable {
     // calculate onColors for. If some onColors were passed in, we give
     // that value to it, if it was not null it will be used instead of the
     // calculated on color.
-    const int divN = 3; // Tuned to used less blend with onColors.
+    const int divN = 3; // Tuned to use less blend with onColors.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       secondary: effectiveColors.secondary,

@@ -14,8 +14,8 @@ class AppColor {
   static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
     primary: Color(0xFF00296b),
     primaryVariant: Color(0xFF003f88),
-    secondary: Color(0xFFfdc500),
-    secondaryVariant: Color(0xFFffd500),
+    secondary: Color(0xffff8c00),
+    secondaryVariant: Color(0xfffdb100),
     // The built in schemes use their secondary variant color as their
     // custom app bar color, but it can be any color. We use a custom color
     // here. We will see this in example 5 when using this theme and selecting
@@ -24,11 +24,11 @@ class AppColor {
   );
 // Create a corresponding custom flex scheme color for a dark theme.
   static const FlexSchemeColor _myScheme1Dark = FlexSchemeColor(
-    primary: Color(0xff3d5176),
-    primaryVariant: Color(0xff2a609d),
-    secondary: Color(0xffceb972),
-    secondaryVariant: Color(0xFFffd500),
-    appBarColor: Color(0xffc76657),
+    primary: Color(0xff6b8bc3),
+    primaryVariant: Color(0xff4874aa),
+    secondary: Color(0xffff7155),
+    secondaryVariant: Color(0xfff8a844),
+    appBarColor: Color(0xff892807),
   );
 
 // You can build a scheme the long way, by specifying all the required hand
@@ -45,9 +45,9 @@ class AppColor {
 // secondaryVariant color, this is default null behavior for custom app bar
 // color when using this factory.
   static final FlexSchemeColor _myScheme2Light =
-      FlexSchemeColor.from(primary: const Color(0xFF334617));
+      FlexSchemeColor.from(primary: const Color(0xFF00673C));
   static final FlexSchemeColor _myScheme2Dark =
-      FlexSchemeColor.from(primary: const Color(0xff869b45));
+      FlexSchemeColor.from(primary: const Color(0xFF46D494));
 
 // For our 3rd custom scheme we will define primary and secondary colors, but no
 // variant colors, we will not make any dark scheme definitions either, all
@@ -56,8 +56,8 @@ class AppColor {
 // `FlexSchemeColor` object. To make our dark colors for this light scheme, we
 // use the method `toDark` further below with the `_myScheme3Light` instance.
   static final FlexSchemeColor _myScheme3Light = FlexSchemeColor.from(
-    primary: const Color(0xFF001f54),
-    secondary: const Color(0xFFf18701),
+    primary: const Color(0xff04368e),
+    secondary: const Color(0xffd92828),
   );
 
 // Finally we create a list with all color schemes we will use. Starting with

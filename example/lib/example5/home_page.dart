@@ -602,7 +602,7 @@ class _SurfaceBlends extends StatelessWidget {
             'Surface (2x) Background (1x) Scaffold (1/3x)\n';
       case FlexSurfaceMode.veryLowSurfaceHighScaffold:
         return 'Very low surface, high scaffold\n'
-            'Surface & dialog (1/2x) Background (1x) Scaffold (2x)\n';
+            'Surface & dialog (1/2x) Background (1x) Scaffold (3x)\n';
       case FlexSurfaceMode.lowSurfaceHighScaffold:
         return 'Low surface, Very high scaffold\n'
             'Surface (1x) Background (2x) Scaffold (3x)\n';
@@ -697,23 +697,23 @@ class _SurfaceBlends extends StatelessWidget {
               children: <Widget>[
                 if (isDark) ...<Widget>[
                   SwitchListTile.adaptive(
-                    title: const Text('Dark TextThemes have color blends'),
+                    title: const Text('Dark TextThemes with color blends'),
                     value: controller.blendDarkTextTheme,
                     onChanged: controller.setBlendDarkTextTheme,
                   ),
                   SwitchListTile.adaptive(
-                    title: const Text('Dark theme onColors have color blends'),
+                    title: const Text('Dark theme onColors with color blends'),
                     value: controller.blendDarkOnColors,
                     onChanged: controller.setBlendDarkOnColors,
                   )
                 ] else ...<Widget>[
                   SwitchListTile.adaptive(
-                    title: const Text('Light TextThemes have color blends'),
+                    title: const Text('Light TextThemes with color blends'),
                     value: controller.blendLightTextTheme,
                     onChanged: controller.setBlendLightTextTheme,
                   ),
                   SwitchListTile.adaptive(
-                    title: const Text('Light theme onColors have color blends'),
+                    title: const Text('Light theme onColors with color blends'),
                     value: controller.blendLightOnColors,
                     onChanged: controller.setBlendLightOnColors,
                   )

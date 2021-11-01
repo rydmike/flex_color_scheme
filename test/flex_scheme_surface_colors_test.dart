@@ -825,7 +825,7 @@ void main() {
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff8f5fe),
           background: Color(0xfff2ebfd),
-          scaffoldBackground: Color(0xffe6d7fc),
+          scaffoldBackground: Color(0xffdac3fb),
           dialogBackground: Color(0xfff8f5fe),
         )),
       );
@@ -972,7 +972,7 @@ void main() {
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff1e1a23),
           background: Color(0xff2b2335),
-          scaffoldBackground: Color(0xff46355a),
+          scaffoldBackground: Color(0xff61487f),
           dialogBackground: Color(0xff1e1a23),
         )),
       );
