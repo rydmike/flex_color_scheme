@@ -1645,8 +1645,8 @@ class FlexColorScheme with Diagnosticable {
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
     assert(
-      blendLevel >= 0 && blendLevel <= 50,
-      'Only blend levels from 0 to 50 are allowed. Very high alpha values may '
+      blendLevel >= 0 && blendLevel <= 40,
+      'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
       'not produce results that are visually very appealing or useful.',
     );
     assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
@@ -2501,8 +2501,8 @@ class FlexColorScheme with Diagnosticable {
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
     assert(
-      blendLevel >= 0 && blendLevel <= 50,
-      'Only blend levels from 0 to 50 are allowed. Very high alpha values may '
+      blendLevel >= 0 && blendLevel <= 40,
+      'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
       'not produce results that are visually very appealing or useful.',
     );
     assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
@@ -4496,13 +4496,13 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     FlexSchemeSurfaceColors? surfaceColors,
   }) {
     assert(
-        blendLevel >= 0 && blendLevel <= 50,
-        'Only blend levels from 0 to 50 '
+        blendLevel >= 0 && blendLevel <= 40,
+        'Only blend levels from 0 to 40 '
         'are allowed. Very high alpha blend levels may not produce results '
         'that are visually very appealing or useful.');
     int _blendLevel = blendLevel;
     // If above happens in none debug mode, use 0, no blends.
-    if (blendLevel < 0 || blendLevel > 50) _blendLevel = 0;
+    if (blendLevel < 0 || blendLevel > 40) _blendLevel = 0;
 
     final bool isLight = brightness == Brightness.light;
 
@@ -5126,6 +5126,7 @@ class _AlphaValues {
           backgroundAlpha: blendLevel * modeFactor * 2,
           scaffoldAlpha: blendLevel * modeFactor ~/ 3,
         );
+      // TODO(rydmike): Consider surface * 3 ~/ 2 instead.
       // Result: scaffold (1/3x) background (1x) surface & dialog (2x).
       case FlexSurfaceMode.highSurface:
         return _AlphaValues(

@@ -664,8 +664,8 @@ class _SurfaceBlends extends StatelessWidget {
           ListTile(
             title: Slider.adaptive(
               min: 0,
-              max: 50,
-              divisions: 50,
+              max: 40,
+              divisions: 40,
               label: controller.blendLevel.toString(),
               value: controller.blendLevel.toDouble(),
               onChanged: (double value) {
