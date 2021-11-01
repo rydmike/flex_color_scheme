@@ -61,6 +61,8 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorFillColor,
     this.inputDecoratorBorderType = FlexInputBorderType.outline,
     this.inputDecoratorUnfocusedHasBorder = true,
+    this.blendOnColors = false,
+    this.blendTextTheme = true,
   });
 
   /// Opt in on using color branded hover, focus, highlight and splash effects.
@@ -333,6 +335,23 @@ class FlexSubThemesData with Diagnosticable {
   /// and errorBorder, so error thus has a border also when it is not focused.
   final bool inputDecoratorUnfocusedHasBorder;
 
+  /// Use [FlexSurfaceMode] selection [surfaceMode] and [blendLevel] in
+  /// [FlexColorScheme.light] and [FlexColorScheme.dark] to also blend primary
+  /// color into onColors.
+  ///
+  /// Blending the on colors results in lower contrast than when not doing,
+  /// but it often works well on lower blend levels.
+  ///
+  /// Defaults to false.
+  final bool blendOnColors;
+
+  /// Use [FlexSurfaceMode] selection [surfaceMode] and [blendLevel] in
+  /// [FlexColorScheme.light] and [FlexColorScheme.dark] to also blend primary
+  /// color into text themes.
+  ///
+  /// Defaults to true.
+  final bool blendTextTheme;
+
   /// Copy the object with one or more provided properties changed.
   FlexSubThemesData copyWith({
     final bool? themedEffects,
@@ -366,6 +385,8 @@ class FlexSubThemesData with Diagnosticable {
     final Color? inputDecoratorFillColor,
     final FlexInputBorderType? inputDecoratorBorderType,
     final bool? inputDecoratorUnfocusedHasBorder,
+    final bool? blendOnColors,
+    final bool? blendTextTheme,
   }) {
     return FlexSubThemesData(
       themedEffects: themedEffects ?? this.themedEffects,
@@ -415,6 +436,8 @@ class FlexSubThemesData with Diagnosticable {
           inputDecoratorBorderType ?? this.inputDecoratorBorderType,
       inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ??
           this.inputDecoratorUnfocusedHasBorder,
+      blendOnColors: blendOnColors ?? this.blendOnColors,
+      blendTextTheme: blendTextTheme ?? this.blendTextTheme,
     );
   }
 
@@ -454,7 +477,9 @@ class FlexSubThemesData with Diagnosticable {
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
         other.inputDecoratorBorderType == inputDecoratorBorderType &&
         other.inputDecoratorUnfocusedHasBorder ==
-            inputDecoratorUnfocusedHasBorder;
+            inputDecoratorUnfocusedHasBorder &&
+        other.blendOnColors == blendOnColors &&
+        other.blendTextTheme == blendTextTheme;
   }
 
   @override
@@ -490,6 +515,8 @@ class FlexSubThemesData with Diagnosticable {
       inputDecoratorFillColor,
       inputDecoratorBorderType,
       inputDecoratorUnfocusedHasBorder,
+      blendOnColors,
+      blendTextTheme,
     ];
     return hashList(values);
   }
@@ -554,5 +581,9 @@ class FlexSubThemesData with Diagnosticable {
         'inputDecoratorBorderType', inputDecoratorBorderType));
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
+    properties
+        .add(DiagnosticsProperty<bool>('blendLightOnColors', blendOnColors));
+    properties
+        .add(DiagnosticsProperty<bool>('blendLightModeText', blendTextTheme));
   }
 }

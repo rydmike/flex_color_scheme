@@ -134,6 +134,8 @@ class DemoApp extends StatelessWidget {
                           themeController.inputDecoratorIsOutlinedBorder,
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
+                      blendOnColors: themeController.blendLightOnColors,
+                      blendTextTheme: themeController.blendLightTextTheme,
                     ),
                   )
                 // Here we are NOT using FlexThemeData. We use the default
@@ -202,6 +204,8 @@ class DemoApp extends StatelessWidget {
                           themeController.inputDecoratorIsOutlinedBorder,
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
+                      blendOnColors: themeController.blendDarkOnColors,
+                      blendTextTheme: themeController.blendDarkTextTheme,
                     ),
                   )
                 // Here we are NOT using FlexThemeData. We use the default

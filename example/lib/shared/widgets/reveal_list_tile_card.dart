@@ -33,6 +33,7 @@ class RevealListTileCard extends StatefulWidget {
     this.isClosed = false,
     this.onChange,
     this.duration = const Duration(milliseconds: 200),
+    this.color,
     // If we don't want bold titles by default, set the default to false.
     this.boldTitle = true,
     this.child,
@@ -82,6 +83,9 @@ class RevealListTileCard extends StatefulWidget {
 
   /// The duration of the show and hide animation of child.
   final Duration duration;
+
+  /// Define this color to override that automatic adaptive background color.
+  final Color? color;
 
   /// Make the title bold.
   ///
@@ -169,6 +173,12 @@ class _RevealListTileCardState extends State<RevealListTileCard>
             const TextStyle(fontWeight: FontWeight.bold),
       );
     }
+
+    // If in rare occasion we had passed a background card color, we just
+    // use that as color. This is intended to be an exception when we need
+    // to present something in the card that must be on a certain color.
+    // Like primary text theme text must be on primary color.
+    if (widget.color != null) cardColor = widget.color!;
 
     return Card(
       margin: widget.margin,

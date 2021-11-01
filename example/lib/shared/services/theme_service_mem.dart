@@ -236,4 +236,40 @@ class ThemeServiceMem implements ThemeService {
   /// Persists setting that turns ON/OFF FlexColorScheme theme, in example 5.
   @override
   Future<void> saveUseFlexColorScheme(bool value) async {}
+
+  /// Loads setting that blends light colors, in example 5.
+  @override
+  Future<bool> blendLightOnColors() async =>
+      ThemeService.defaultBlendLightOnColors;
+
+  /// Persists setting that blends light colors, in example 5.
+  @override
+  Future<void> saveBlendLightOnColors(bool value) async {}
+
+  /// Loads setting that blends dark colors, in example 5.
+  @override
+  Future<bool> blendDarkOnColors() async =>
+      ThemeService.defaultBlendDarkOnColors;
+
+  /// Persists setting that blends dark colors, in example 5.
+  @override
+  Future<void> saveBlendDarkOnColors(bool value) async {}
+
+  /// Loads setting that blends light text theme, in example 5.
+  @override
+  Future<bool> blendLightTextTheme() async =>
+      ThemeService.defaultBlendLightTextTheme;
+
+  /// Persists setting that blends light text theme, in example 5.
+  @override
+  Future<void> saveBlendLightTextTheme(bool value) async {}
+
+  /// Loads setting that blends dark text theme, in example 5.
+  @override
+  Future<bool> blendDarkTextTheme() async =>
+      ThemeService.defaultBlendDarkTextTheme;
+
+  /// Persists setting that blends dark text theme, in example 5.
+  @override
+  Future<void> saveBlendDarkTextTheme(bool value) async {}
 }

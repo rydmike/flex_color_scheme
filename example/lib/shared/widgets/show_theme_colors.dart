@@ -82,110 +82,165 @@ class ShowThemeColors extends StatelessWidget {
           shape: border,
         ),
       ),
-      child: Wrap(
-        spacing: 6,
-        runSpacing: 6,
-        crossAxisAlignment: WrapCrossAlignment.center,
+      child: Column(
         children: <Widget>[
-          ThemeCard(
-            label: 'Primary',
-            color: colorScheme.primary,
-            textColor: colorScheme.onPrimary,
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              'ColorScheme Colors',
+              style: theme.textTheme.subtitle1,
+            ),
           ),
-          ThemeCard(
-            label: 'Primary\nColor',
-            color: theme.primaryColor,
-            textColor: colorScheme.onPrimary,
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: <Widget>[
+              ThemeCard(
+                label: 'Primary',
+                color: colorScheme.primary,
+                textColor: colorScheme.onPrimary,
+              ),
+              ThemeCard(
+                label: 'onPrimary',
+                color: colorScheme.onPrimary,
+                textColor: colorScheme.primary,
+              ),
+              ThemeCard(
+                label: 'Primary\nVariant',
+                color: colorScheme.primaryVariant,
+                textColor: _onColor(colorScheme.primaryVariant),
+              ),
+              ThemeCard(
+                label: 'Secondary',
+                color: colorScheme.secondary,
+                textColor: colorScheme.onSecondary,
+              ),
+              ThemeCard(
+                label: 'onSecondary',
+                color: colorScheme.onSecondary,
+                textColor: colorScheme.secondary,
+              ),
+              ThemeCard(
+                label: 'Secondary\nVariant',
+                color: colorScheme.secondaryVariant,
+                textColor: _onColor(colorScheme.secondaryVariant),
+              ),
+              ThemeCard(
+                label: 'Background$backTooHigh',
+                color: colorScheme.background,
+                textColor: colorScheme.onBackground,
+              ),
+              ThemeCard(
+                label: 'on\nBackground',
+                color: colorScheme.onBackground,
+                textColor: colorScheme.background,
+              ),
+              ThemeCard(
+                label: 'Surface$surfaceTooHigh',
+                color: colorScheme.surface,
+                textColor: colorScheme.onSurface,
+              ),
+              ThemeCard(
+                label: 'onSurface',
+                color: colorScheme.onSurface,
+                textColor: colorScheme.surface,
+              ),
+              ThemeCard(
+                label: 'Error',
+                color: colorScheme.error,
+                textColor: colorScheme.onError,
+              ),
+              ThemeCard(
+                label: 'onError',
+                color: colorScheme.onError,
+                textColor: colorScheme.error,
+              ),
+              ThemeCard(
+                label: 'Themed\nAppBar',
+                color: appBarColor,
+                textColor: _onColor(appBarColor),
+              ),
+            ],
           ),
-          ThemeCard(
-            label: 'Primary\nColorDark',
-            color: theme.primaryColorDark,
-            textColor: colorScheme.onPrimary,
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              'ThemeData Colors (to be deprecated in SDK)',
+              style: theme.textTheme.subtitle1,
+            ),
           ),
-          ThemeCard(
-            label: 'Primary\nColorLight',
-            color: theme.primaryColorLight,
-            textColor: _onColor(theme.primaryColorLight),
-          ),
-          ThemeCard(
-            label: 'Secondary\nHeader',
-            color: theme.secondaryHeaderColor,
-            textColor: _onColor(theme.secondaryHeaderColor),
-          ),
-          ThemeCard(
-            label: 'Primary\nVariant',
-            color: colorScheme.primaryVariant,
-            textColor: _onColor(colorScheme.primaryVariant),
-          ),
-          ThemeCard(
-            label: 'Secondary',
-            color: colorScheme.secondary,
-            textColor: colorScheme.onSecondary,
-          ),
-          ThemeCard(
-            label: 'Toggleable\nActive',
-            color: theme.toggleableActiveColor,
-            textColor: colorScheme.onSecondary,
-          ),
-          ThemeCard(
-            label: 'Secondary\nVariant',
-            color: colorScheme.secondaryVariant,
-            textColor: colorScheme.onSecondary,
-          ),
-          ThemeCard(
-            label: 'AppBar',
-            color: appBarColor,
-            textColor: _onColor(appBarColor),
-          ),
-          ThemeCard(
-            label: 'Bottom\nAppBar',
-            color: theme.bottomAppBarColor,
-            textColor: _onColor(theme.bottomAppBarColor),
-          ),
-          ThemeCard(
-            label: 'Divider',
-            color: theme.dividerColor,
-            textColor: colorScheme.onBackground,
-          ),
-          ThemeCard(
-            label: 'Disabled',
-            color: theme.disabledColor,
-            textColor: colorScheme.onBackground,
-          ),
-          ThemeCard(
-            label: 'Background$backTooHigh',
-            color: colorScheme.background,
-            textColor: colorScheme.onBackground,
-          ),
-          ThemeCard(
-            label: 'Canvas$backTooHigh',
-            color: theme.canvasColor,
-            textColor: colorScheme.onBackground,
-          ),
-          ThemeCard(
-            label: 'Surface$surfaceTooHigh',
-            color: colorScheme.surface,
-            textColor: colorScheme.onSurface,
-          ),
-          ThemeCard(
-            label: 'Card$surfaceTooHigh',
-            color: theme.cardColor,
-            textColor: colorScheme.onSurface,
-          ),
-          ThemeCard(
-            label: 'Dialog',
-            color: theme.dialogBackgroundColor,
-            textColor: colorScheme.onSurface,
-          ),
-          ThemeCard(
-            label: 'Scaffold\nbackground$scaffoldTooHigh',
-            color: theme.scaffoldBackgroundColor,
-            textColor: colorScheme.onBackground,
-          ),
-          ThemeCard(
-            label: 'Error',
-            color: colorScheme.error,
-            textColor: colorScheme.onError,
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: <Widget>[
+              ThemeCard(
+                label: 'Primary\nColor',
+                color: theme.primaryColor,
+                textColor: colorScheme.onPrimary,
+              ),
+              ThemeCard(
+                label: 'Primary\nColorDark',
+                color: theme.primaryColorDark,
+                textColor: colorScheme.onPrimary,
+              ),
+              ThemeCard(
+                label: 'Primary\nColorLight',
+                color: theme.primaryColorLight,
+                textColor: _onColor(theme.primaryColorLight),
+              ),
+              ThemeCard(
+                label: 'Secondary\nHeaderColor',
+                color: theme.secondaryHeaderColor,
+                textColor: _onColor(theme.secondaryHeaderColor),
+              ),
+              ThemeCard(
+                label: 'Toggleable\nActive',
+                color: theme.toggleableActiveColor,
+                textColor: colorScheme.onSecondary,
+              ),
+              ThemeCard(
+                label: 'Bottom\nAppBarColor',
+                color: theme.bottomAppBarColor,
+                textColor: _onColor(theme.bottomAppBarColor),
+              ),
+              ThemeCard(
+                label: 'Divider\nColor',
+                color: theme.dividerColor,
+                textColor: colorScheme.onBackground,
+              ),
+              ThemeCard(
+                label: 'Disabled\nColor',
+                color: theme.disabledColor,
+                textColor: colorScheme.onBackground,
+              ),
+              ThemeCard(
+                label: 'CanvasColor$backTooHigh',
+                color: theme.canvasColor,
+                textColor: colorScheme.onBackground,
+              ),
+              ThemeCard(
+                label: 'CardColor$surfaceTooHigh',
+                color: theme.cardColor,
+                textColor: colorScheme.onSurface,
+              ),
+              ThemeCard(
+                label: 'DialogBg\nColor',
+                color: theme.dialogBackgroundColor,
+                textColor: colorScheme.onSurface,
+              ),
+              ThemeCard(
+                label: 'Scaffold\nbackground$scaffoldTooHigh',
+                color: theme.scaffoldBackgroundColor,
+                textColor: colorScheme.onBackground,
+              ),
+              ThemeCard(
+                label: 'Error\nColor',
+                color: theme.errorColor,
+                textColor: colorScheme.onError,
+              ),
+            ],
           ),
         ],
       ),

@@ -38,7 +38,18 @@ class ThemeShowcase extends StatelessWidget {
         const BottomSheetAndMaterialShowcase(),
         const SizedBox(height: 16),
         const CardShowcase(),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Text('Normal TextTheme',
+              style: Theme.of(context).textTheme.subtitle1),
+        ),
         const TextThemeShowcase(),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Text('Primary TextTheme',
+              style: Theme.of(context).textTheme.subtitle1),
+        ),
+        const PrimaryTextThemeShowcase(),
       ],
     );
   }
@@ -814,6 +825,85 @@ class TextThemeShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme text = Theme.of(context).textTheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Headline 1 '
+          '(${text.headline1!.fontSize!.toStringAsFixed(0)})',
+          style: text.headline1,
+        ),
+        Text(
+          'Headline 2 '
+          '(${text.headline2!.fontSize!.toStringAsFixed(0)})',
+          style: text.headline2,
+        ),
+        Text(
+          'Headline 3 '
+          '(${text.headline3!.fontSize!.toStringAsFixed(0)})',
+          style: text.headline3,
+        ),
+        Text(
+          'Headline 4 '
+          '(${text.headline4!.fontSize!.toStringAsFixed(0)})',
+          style: text.headline4,
+        ),
+        Text(
+          'Headline 5 '
+          '(${text.headline5!.fontSize!.toStringAsFixed(0)})',
+          style: text.headline5,
+        ),
+        Text(
+          'Headline 6 '
+          '(${text.headline6!.fontSize!.toStringAsFixed(0)})',
+          style: text.headline6,
+        ),
+        Text(
+          'Subtitle 1 '
+          '(${text.subtitle1!.fontSize!.toStringAsFixed(0)})',
+          style: text.subtitle1,
+        ),
+        Text(
+          'Subtitle 2 '
+          '(${text.subtitle2!.fontSize!.toStringAsFixed(0)})',
+          style: text.subtitle2,
+        ),
+        Text(
+          'Body Text 1 '
+          '(${text.bodyText1!.fontSize!.toStringAsFixed(0)})',
+          style: text.bodyText1,
+        ),
+        Text(
+          'Body Text 2 '
+          '(${text.bodyText2!.fontSize!.toStringAsFixed(0)})',
+          style: text.bodyText2,
+        ),
+        Text(
+          'Button '
+          '(${text.button!.fontSize!.toStringAsFixed(0)})',
+          style: text.button,
+        ),
+        Text(
+          'Caption '
+          '(${text.caption!.fontSize!.toStringAsFixed(0)})',
+          style: text.caption,
+        ),
+        Text(
+          'Overline '
+          '(${text.overline!.fontSize!.toStringAsFixed(0)})',
+          style: text.overline,
+        ),
+      ],
+    );
+  }
+}
+
+class PrimaryTextThemeShowcase extends StatelessWidget {
+  const PrimaryTextThemeShowcase({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme text = Theme.of(context).primaryTextTheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

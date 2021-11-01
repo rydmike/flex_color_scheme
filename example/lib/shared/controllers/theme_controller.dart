@@ -51,6 +51,12 @@ class ThemeController with ChangeNotifier {
     _useToDarkMethod = await _themeService.useToDarkMethod();
     _darkMethodLevel = await _themeService.darkMethodLevel();
     _useFlexColorScheme = await _themeService.useFlexColorScheme();
+
+    _blendLightOnColors = await _themeService.blendLightOnColors();
+    _blendDarkOnColors = await _themeService.blendDarkOnColors();
+    _blendLightTextTheme = await _themeService.blendLightTextTheme();
+    _blendDarkTextTheme = await _themeService.blendDarkTextTheme();
+
     notifyListeners();
   }
 
@@ -93,6 +99,13 @@ class ThemeController with ChangeNotifier {
     await setUseToDarkMethod(ThemeService.defaultUseToDarkMethod, false);
     await setDarkMethodLevel(ThemeService.defaultDarkMethodLevel, false);
     await setUseFlexColorScheme(ThemeService.defaultUseFlexColorScheme, false);
+
+    await setBlendLightOnColors(ThemeService.defaultBlendLightOnColors, false);
+    await setBlendDarkOnColors(ThemeService.defaultBlendDarkOnColors, false);
+    await setBlendLightTextTheme(
+        ThemeService.defaultBlendLightTextTheme, false);
+    await setBlendDarkTextTheme(ThemeService.defaultBlendDarkTextTheme, false);
+
     notifyListeners();
   }
 
@@ -386,5 +399,47 @@ class ThemeController with ChangeNotifier {
     _useFlexColorScheme = value;
     if (notify) notifyListeners();
     await _themeService.saveUseFlexColorScheme(value);
+  }
+
+  // On color blending ON/OFF
+  late bool _blendLightOnColors;
+  bool get blendLightOnColors => _blendLightOnColors;
+  Future<void> setBlendLightOnColors(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _blendLightOnColors) return;
+    _blendLightOnColors = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBlendLightOnColors(value);
+  }
+
+  late bool _blendDarkOnColors;
+  bool get blendDarkOnColors => _blendDarkOnColors;
+  Future<void> setBlendDarkOnColors(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _blendDarkOnColors) return;
+    _blendDarkOnColors = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBlendDarkOnColors(value);
+  }
+
+  // TextThem blending ON/OFF
+  late bool _blendLightTextTheme;
+  bool get blendLightTextTheme => _blendLightTextTheme;
+  Future<void> setBlendLightTextTheme(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _blendLightTextTheme) return;
+    _blendLightTextTheme = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBlendLightTextTheme(value);
+  }
+
+  late bool _blendDarkTextTheme;
+  bool get blendDarkTextTheme => _blendDarkTextTheme;
+  Future<void> setBlendDarkTextTheme(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _blendDarkTextTheme) return;
+    _blendDarkTextTheme = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBlendDarkTextTheme(value);
   }
 }

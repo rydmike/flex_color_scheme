@@ -141,8 +141,10 @@ class _SideItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData _theme = Theme.of(context);
+    final Color _itemSelectedColor =
+        _theme.colorScheme.onBackground.blend(_theme.colorScheme.primary, 50);
     final Color _itemColor =
-        _theme.colorScheme.onBackground.blend(_theme.colorScheme.primary, 30);
+        _theme.colorScheme.onBackground.blend(_theme.colorScheme.primary, 20);
     if (width < 5) {
       return const SizedBox.shrink();
     } else {
@@ -177,8 +179,8 @@ class _SideItem extends StatelessWidget {
                           ),
                           child: Icon(icon,
                               color: selected
-                                  ? _itemColor.withOpacity(0.9)
-                                  : _itemColor.withOpacity(0.7)),
+                                  ? _itemSelectedColor
+                                  : _itemColor.withOpacity(0.8)),
                         ),
                         if (width < AppData.railWidth + 10)
                           const SizedBox.shrink()
@@ -186,10 +188,10 @@ class _SideItem extends StatelessWidget {
                           Text(
                             label,
                             style: selected
-                                ? _theme.textTheme.bodyText1!.copyWith(
-                                    color: _itemColor.withOpacity(0.9))
+                                ? _theme.textTheme.bodyText1!
+                                    .copyWith(color: _itemSelectedColor)
                                 : _theme.textTheme.bodyText1!.copyWith(
-                                    color: _itemColor.withOpacity(0.7)),
+                                    color: _itemColor.withOpacity(0.8)),
                           )
                       ],
                     ),

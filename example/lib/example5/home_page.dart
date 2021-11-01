@@ -261,8 +261,9 @@ class _HomePageState extends State<HomePage> {
               _BottomSheetAndMaterialShowcase(isClosed: collapseThemed),
               _CardShowcase(isClosed: collapseThemed),
               _TextThemeShowcase(isClosed: collapseThemed),
+              _PrimaryTextThemeShowcase(isClosed: collapseThemed),
             ].elementAt(index),
-            itemCount: 18,
+            itemCount: 19,
           );
         }),
       ),
@@ -552,12 +553,7 @@ class _WidgetThemes extends StatelessWidget {
                   },
                 ),
                 SwitchListTile.adaptive(
-                  title: const Text(
-                    'Unfocused decorator has border',
-                  ),
-                  // subtitle: const Text(
-                  //   'ON for outline, OFF for underline.',
-                  // ),
+                  title: const Text('Unfocused decorator has border'),
                   value: controller.inputDecoratorUnfocusedHasBorder,
                   onChanged: controller.setInputDecoratorUnfocusedHasBorder,
                 ),
@@ -630,6 +626,7 @@ class _SurfaceBlends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return RevealListTileCard(
       isClosed: isClosed,
       title: const Text('Surface Blends'),
@@ -692,6 +689,36 @@ class _SurfaceBlends extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ),
+          AnimatedSwitchHide(
+            showChild: controller.useSubThemes,
+            child: Column(
+              children: <Widget>[
+                if (isDark) ...<Widget>[
+                  SwitchListTile.adaptive(
+                    title: const Text('Dark TextThemes have color blends'),
+                    value: controller.blendDarkTextTheme,
+                    onChanged: controller.setBlendDarkTextTheme,
+                  ),
+                  SwitchListTile.adaptive(
+                    title: const Text('Dark theme onColors have color blends'),
+                    value: controller.blendDarkOnColors,
+                    onChanged: controller.setBlendDarkOnColors,
+                  )
+                ] else ...<Widget>[
+                  SwitchListTile.adaptive(
+                    title: const Text('Light TextThemes have color blends'),
+                    value: controller.blendLightTextTheme,
+                    onChanged: controller.setBlendLightTextTheme,
+                  ),
+                  SwitchListTile.adaptive(
+                    title: const Text('Light theme onColors have color blends'),
+                    value: controller.blendLightOnColors,
+                    onChanged: controller.setBlendLightOnColors,
+                  )
+                ],
+              ],
             ),
           ),
         ],
@@ -1315,6 +1342,27 @@ class _TextThemeShowcase extends StatelessWidget {
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: TextThemeShowcase(),
+      ),
+    );
+  }
+}
+
+class _PrimaryTextThemeShowcase extends StatelessWidget {
+  const _PrimaryTextThemeShowcase({
+    Key? key,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      color: Theme.of(context).colorScheme.primary,
+      isClosed: isClosed,
+      title: const Text('Themed PrimaryTextTheme'),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
+        child: PrimaryTextThemeShowcase(),
       ),
     );
   }

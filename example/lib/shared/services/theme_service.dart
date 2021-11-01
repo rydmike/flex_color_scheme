@@ -326,4 +326,52 @@ abstract class ThemeService {
 
   /// Persists setting that turns ON/OFF FlexColorScheme theme, in example 5.
   Future<void> saveUseFlexColorScheme(bool value);
+
+  /// Key used to read and save the blendLightOnColors value.
+  static const String keyBlendLightOnColors = 'blendLightOnColors';
+
+  /// Default value for the blendLightOnColors, also to reset settings.
+  static const bool defaultBlendLightOnColors = false;
+
+  /// Loads setting that blends light colors, in example 5.
+  Future<bool> blendLightOnColors();
+
+  /// Persists setting that blends light colors, in example 5.
+  Future<void> saveBlendLightOnColors(bool value);
+
+  /// Key used to read and save the blendDarkOnColors value.
+  static const String keyBlendDarkOnColors = 'blendDarkOnColors';
+
+  /// Default value for the blendDarkOnColors, also to reset settings.
+  static const bool defaultBlendDarkOnColors = false;
+
+  /// Loads setting that blends dark colors, in example 5.
+  Future<bool> blendDarkOnColors();
+
+  /// Persists setting that blends dark colors, in example 5.
+  Future<void> saveBlendDarkOnColors(bool value);
+
+  /// Key used to read and save the blendLightTextTheme value.
+  static const String keyBlendLightTextTheme = 'blendLightTextTheme';
+
+  /// Default value for the blendLightTextTheme, also to reset settings.
+  static const bool defaultBlendLightTextTheme = true;
+
+  /// Loads setting that blends light text theme, in example 5.
+  Future<bool> blendLightTextTheme();
+
+  /// Persists setting that blends light text theme, in example 5.
+  Future<void> saveBlendLightTextTheme(bool value);
+
+  /// Key used to read and save the blendDarkTextTheme value.
+  static const String keyBlendDarkTextTheme = 'blendDarkTextTheme';
+
+  /// Default value for the blendDarkTextTheme, also to reset settings.
+  static const bool defaultBlendDarkTextTheme = true;
+
+  /// Loads setting that blends dark text theme, in example 5.
+  Future<bool> blendDarkTextTheme();
+
+  /// Persists setting that blends dark text theme, in example 5.
+  Future<void> saveBlendDarkTextTheme(bool value);
 }

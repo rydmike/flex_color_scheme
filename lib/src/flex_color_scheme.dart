@@ -1700,10 +1700,17 @@ class FlexColorScheme with Diagnosticable {
             primary: effectiveColors.primary,
           );
 
-    // Get alpha blend values corresponding to used mode, level and brightness.
-    final _AlphaValues _blend = surfaceMode != null
-        ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.light)
-        : const _AlphaValues();
+    // Use passed in sub-theme config data, or a default one, if none given.
+    final FlexSubThemesData subTheme =
+        subThemesData ?? const FlexSubThemesData();
+
+    // Get alpha blend values corresponding to used mode, level and brightness,
+    // if using surfaceMode, opted in to use sub themes and in them opted
+    // in to also blend the on colors.
+    final _AlphaValues _blend =
+        surfaceMode != null && useSubThemes && subTheme.blendOnColors
+            ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.light)
+            : const _AlphaValues();
 
     // For the on colors we pass in the primary, secondary and surface colors to
     // calculate onColors for. If some onColors were passed in, we give
@@ -2549,10 +2556,17 @@ class FlexColorScheme with Diagnosticable {
             primary: effectiveColors.primary,
           );
 
-    // Get alpha blend values corresponding to used mode, level and brightness.
-    final _AlphaValues _blend = surfaceMode != null
-        ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.dark)
-        : const _AlphaValues();
+    // Use passed in sub-theme config data, or a default one, if none given.
+    final FlexSubThemesData subTheme =
+        subThemesData ?? const FlexSubThemesData();
+
+    // Get alpha blend values corresponding to used mode, level and brightness,
+    // if using surfaceMode, opted in to use sub themes and in them opted
+    // in to also blend the on colors.
+    final _AlphaValues _blend =
+        surfaceMode != null && useSubThemes && subTheme.blendOnColors
+            ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.dark)
+            : const _AlphaValues();
 
     // For the on colors we pass in the primary, secondary and surface colors to
     // calculate onColors for. If some onColors were passed in, we give
@@ -3297,27 +3311,9 @@ class FlexColorScheme with Diagnosticable {
     // A convenience bool to check if this theme is for light or dark mode
     final bool isDark = brightness == Brightness.dark;
 
-    // Use passed in target platform, else actual host platform.
-    final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
-
-    // Used Typography deviates from the Flutter standard that uses the
-    // old Typography.material2014 in favor of the newer Typography.material2018
-    // as default, if one is not provided.
-    // TODO(rydmike): Remove when default in Flutter, still 2014 in Flutter 2.5.
-    final Typography effectiveTypography =
-        typography ?? Typography.material2018(platform: effectivePlatform);
-
-    // We need the text theme locally for the theming, so we must form it
-    // fully using the same process that ThemeData() factory uses.
-    // The PrimaryTextTheme is not used in sub-themes here, so we will just
-    // pass it along to ThemeData() factory used to make the ThemeData, it then
-    // handle the creation of the primaryTextTheme.
-    TextTheme defaultTextTheme =
-        isDark ? effectiveTypography.white : effectiveTypography.black;
-    if (fontFamily != null) {
-      defaultTextTheme = defaultTextTheme.apply(fontFamily: fontFamily);
-    }
-    final TextTheme effectiveTextTheme = defaultTextTheme.merge(textTheme);
+    // Use passed in sub-theme config data, or a default one, if none given.
+    final FlexSubThemesData subTheme =
+        subThemesData ?? const FlexSubThemesData();
 
     // Check brightness of primary, secondary, error, surface and background
     // colors, and then calculate appropriate colors for their onColors, if an
@@ -3367,6 +3363,100 @@ class FlexColorScheme with Diagnosticable {
       brightness: brightness,
     );
 
+    // Use passed in target platform, else actual host platform.
+    final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
+
+    // Used Typography deviates from the Flutter standard that uses the
+    // old Typography.material2014 in favor of the newer Typography.material2018
+    // as default, if one is not provided.
+    // TODO(rydmike): Remove when default in Flutter, still 2014 in Flutter 2.5.
+    final Typography effectiveTypography =
+        typography ?? Typography.material2018(platform: effectivePlatform);
+
+    // We need the text themes locally for the theming, so we must form them
+    // fully using the same process that ThemeData() factory uses.
+    TextTheme defaultTextTheme =
+        isDark ? effectiveTypography.white : effectiveTypography.black;
+
+    final bool primaryIsDark =
+        ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
+            Brightness.dark;
+    TextTheme defaultPrimaryTextTheme =
+        primaryIsDark ? effectiveTypography.white : effectiveTypography.black;
+
+    if (fontFamily != null) {
+      defaultTextTheme = defaultTextTheme.apply(fontFamily: fontFamily);
+      defaultPrimaryTextTheme =
+          defaultPrimaryTextTheme.apply(fontFamily: fontFamily);
+    }
+
+    // We are using sub themes and blend on text themes, if surfaces and
+    // background are not set to use blends, the effect will be slightly
+    // different.
+    if (useSubThemes && subTheme.blendTextTheme) {
+      // Use the on color for surface or background that gives us better
+      // contrast. Comparing with red value seemed to work.
+      final Color _onColor = isDark
+          ? (colorScheme.onBackground.red < colorScheme.onSurface.red)
+              ? colorScheme.onSurface
+              : colorScheme.onBackground
+          : (colorScheme.onBackground.red > colorScheme.onSurface.red)
+              ? colorScheme.onSurface
+              : colorScheme.onBackground;
+      final Color _head = isDark
+          ? _onColor.blend(colorScheme.primary, 40)
+          : _onColor.blend(colorScheme.primary, 60);
+      final Color _medium = isDark
+          ? _onColor.blend(colorScheme.primary, 20)
+          : _onColor.blend(colorScheme.primary, 30);
+      final Color _small = isDark
+          ? _onColor.blend(colorScheme.primary, 10)
+          : _onColor.blend(colorScheme.primary, 20);
+      defaultTextTheme = defaultTextTheme.copyWith(
+        headline1: defaultTextTheme.headline1!.copyWith(color: _head),
+        headline2: defaultTextTheme.headline2!.copyWith(color: _head),
+        headline3: defaultTextTheme.headline3!.copyWith(color: _head),
+        headline4: defaultTextTheme.headline4!.copyWith(color: _head),
+        headline5: defaultTextTheme.headline5!.copyWith(color: _medium),
+        headline6: defaultTextTheme.headline6!.copyWith(color: _medium),
+        bodyText1: defaultTextTheme.bodyText1!.copyWith(color: _medium),
+        bodyText2: defaultTextTheme.bodyText2!.copyWith(color: _medium),
+        subtitle1: defaultTextTheme.subtitle1!.copyWith(color: _medium),
+        subtitle2: defaultTextTheme.subtitle2!.copyWith(color: _small),
+        caption: defaultTextTheme.caption!.copyWith(color: _head),
+        button: defaultTextTheme.button!.copyWith(color: _medium),
+        overline: defaultTextTheme.overline!.copyWith(color: _small),
+      );
+
+      final Color _headP = primaryIsDark
+          ? colorScheme.onPrimary.blend(colorScheme.primary, 15)
+          : colorScheme.onPrimary.blend(colorScheme.primary, 10);
+      final Color _mediumP = primaryIsDark
+          ? colorScheme.onPrimary.blend(colorScheme.primary, 10)
+          : colorScheme.onPrimary.blend(colorScheme.primary, 5);
+      final Color _smallP = primaryIsDark
+          ? colorScheme.onPrimary.blend(colorScheme.primary, 5)
+          : colorScheme.onPrimary.blend(colorScheme.primary, 1);
+      defaultPrimaryTextTheme = defaultPrimaryTextTheme.copyWith(
+        headline1: defaultPrimaryTextTheme.headline1!.copyWith(color: _headP),
+        headline2: defaultPrimaryTextTheme.headline2!.copyWith(color: _headP),
+        headline3: defaultPrimaryTextTheme.headline3!.copyWith(color: _headP),
+        headline4: defaultPrimaryTextTheme.headline4!.copyWith(color: _headP),
+        headline5: defaultPrimaryTextTheme.headline5!.copyWith(color: _mediumP),
+        headline6: defaultPrimaryTextTheme.headline6!.copyWith(color: _mediumP),
+        bodyText1: defaultPrimaryTextTheme.bodyText1!.copyWith(color: _mediumP),
+        bodyText2: defaultPrimaryTextTheme.bodyText2!.copyWith(color: _mediumP),
+        subtitle1: defaultPrimaryTextTheme.subtitle1!.copyWith(color: _mediumP),
+        subtitle2: defaultPrimaryTextTheme.subtitle2!.copyWith(color: _smallP),
+        caption: defaultPrimaryTextTheme.caption!.copyWith(color: _headP),
+        button: defaultPrimaryTextTheme.button!.copyWith(color: _mediumP),
+        overline: defaultPrimaryTextTheme.overline!.copyWith(color: _smallP),
+      );
+    }
+    final TextTheme effectiveTextTheme = defaultTextTheme.merge(textTheme);
+    final TextTheme effectivePrimaryTextTheme =
+        defaultPrimaryTextTheme.merge(primaryTextTheme);
+
     // When working with color scheme based colors, there is no longer a
     // Material primary swatch that we can use to create some of the old
     // Theme colors from, that are still needed by some Flutter SDK Widgets.
@@ -3394,6 +3484,55 @@ class FlexColorScheme with Diagnosticable {
         (isDark ? colorScheme.surface : colorScheme.primary);
     final Brightness appBarBrightness =
         ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
+
+    Color appBarForeground =
+        appBarBrightness == Brightness.dark ? Colors.white : Colors.black;
+    Color appBarIconColor =
+        appBarBrightness == Brightness.dark ? Colors.white : Colors.black87;
+
+    if (useSubThemes && subTheme.blendTextTheme) {
+      // Dark mode: TextTheme is light
+      if (isDark) {
+        if (appBarBrightness == Brightness.dark && !primaryIsDark) {
+          // Needs light text color
+          appBarForeground = effectiveTextTheme.headline6!.color!;
+        } else if (appBarBrightness == Brightness.dark && primaryIsDark) {
+          // Needs light text color
+          appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
+        } else if (appBarBrightness == Brightness.light && !primaryIsDark) {
+          // Needs dark text color
+          appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
+        } else {
+          // Needs dark text color
+          appBarForeground = colorScheme.onSurface;
+        }
+        // Light mode: TextTheme is dark
+      } else {
+        if (appBarBrightness == Brightness.dark && !primaryIsDark) {
+          // Need a light text color
+          appBarForeground = effectiveTextTheme.headline6!.color!;
+        } else if (appBarBrightness == Brightness.dark && primaryIsDark) {
+          // Need a light text color
+          appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
+        } else if (appBarBrightness == Brightness.light && !primaryIsDark) {
+          // Need a dark text color
+          appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
+        } else {
+          // Need a dark text color
+          appBarForeground = effectiveTextTheme.headline6!.color!;
+        }
+      }
+      appBarIconColor = appBarForeground;
+    }
+
+    // appBarBrightness == Brightness.dark ? Colors.white : Colors.black,
+    // // Define appropriate brightness on the icon themes
+    // iconTheme: appBarBrightness == Brightness.dark
+    // ? const IconThemeData(color: Colors.white)
+    //     : const IconThemeData(color: Colors.black87),
+    // actionsIconTheme: appBarBrightness == Brightness.dark
+    // ? const IconThemeData(color: Colors.white)
+    //     : const IconThemeData(color: Colors.black87),
 
     // Selected TabBar color is based on FlexTabBarStyle tabBarStyle.
     // The `useDefault` sets values corresponding to SDK Default behavior.
@@ -3472,10 +3611,6 @@ class FlexColorScheme with Diagnosticable {
     // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
     final Color dividerColor = colorScheme.onSurface.withOpacity(0.12);
 
-    // Use passed in sub-theme config data, or a default one if not given.
-    final FlexSubThemesData subTheme =
-        subThemesData ?? const FlexSubThemesData();
-
     // Make the effective input decoration theme.
     final InputDecorationTheme effectiveInputDecorationTheme = useSubThemes
         ? FlexSubThemes.inputDecorationTheme(
@@ -3521,7 +3656,7 @@ class FlexColorScheme with Diagnosticable {
       // to optionally define them. AccentTextTheme is omitted since it has
       // been deprecated in Flutter 2.5.0.
       textTheme: effectiveTextTheme,
-      primaryTextTheme: primaryTextTheme,
+      primaryTextTheme: effectivePrimaryTextTheme,
       // Pass along custom typography and platform logic.
       typography: effectiveTypography,
       platform: effectivePlatform,
@@ -3674,15 +3809,23 @@ class FlexColorScheme with Diagnosticable {
       appBarTheme: AppBarTheme(
         // Use the defined appbar color for the theme
         backgroundColor: effectiveAppBarColor,
-        foregroundColor:
-            appBarBrightness == Brightness.dark ? Colors.white : Colors.black,
+
+        // TODO(rydmike): Test all the app bar colors
+        foregroundColor: appBarForeground,
+        // appBarBrightness == Brightness.dark ? Colors.white : Colors.black,
+
         // Define appropriate brightness on the icon themes
-        iconTheme: appBarBrightness == Brightness.dark
-            ? const IconThemeData(color: Colors.white)
-            : const IconThemeData(color: Colors.black87),
-        actionsIconTheme: appBarBrightness == Brightness.dark
-            ? const IconThemeData(color: Colors.white)
-            : const IconThemeData(color: Colors.black87),
+        iconTheme: IconThemeData(color: appBarIconColor),
+
+        // appBarBrightness == Brightness.dark
+        //     ? const IconThemeData(color: Colors.white)
+        //     : const IconThemeData(color: Colors.black87),
+
+        actionsIconTheme: IconThemeData(color: appBarIconColor),
+
+        // appBarBrightness == Brightness.dark
+        //     ? const IconThemeData(color: Colors.white)
+        //     : const IconThemeData(color: Colors.black87),
         elevation: appBarElevation,
         systemOverlayStyle: SystemUiOverlayStyle(
           // AppBar overlay style.
@@ -4787,8 +4930,6 @@ class FlexSchemeOnColors with Diagnosticable {
   /// A color that is clearly legible when drawn on error color.
   final Color onError;
 
-  // TODO(rydmike): Implement usage of alpha in OnColors
-  //
   /// Compute on colors for required primary, secondary, surface, background
   /// and error colors and returns a valid [FlexSchemeOnColors] with correct on
   /// colors for these colors.
