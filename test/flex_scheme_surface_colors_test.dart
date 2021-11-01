@@ -519,6 +519,24 @@ void main() {
       );
     });
     test(
+        'FSSC1.19b: GIVEN a light FlexSchemeSurfaceColors.blend created object '
+        'with surface mode veryLowSurfaceHighScaffold and level 0 '
+        'EXPECT equality when made by matching light defined colors.', () {
+      expect(
+        FlexSchemeSurfaceColors.blend(
+          brightness: Brightness.light,
+          blendLevel: 0,
+          surfaceMode: FlexSurfaceMode.veryLowSurfaceHighScaffold,
+        ),
+        equals(const FlexSchemeSurfaceColors(
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightSurface,
+          scaffoldBackground: FlexColor.lightSurface,
+          dialogBackground: FlexColor.lightSurface,
+        )),
+      );
+    });
+    test(
         'FSSC1.20: GIVEN a light FlexSchemeSurfaceColors.blend created object '
         'with surface mode flat and level 0 '
         'EXPECT equality when made by matching light defined colors.', () {
@@ -644,6 +662,24 @@ void main() {
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
           dialogBackground: FlexColor.materialDarkSurface,
+        )),
+      );
+    });
+    test(
+        'FSSC1.26b: GIVEN a dark FlexSchemeSurfaceColors.blend created object '
+        'with surface mode veryLowSurfaceHighScaffold and level 0 '
+        'EXPECT equality when made by matching dark defined colors.', () {
+      expect(
+        FlexSchemeSurfaceColors.blend(
+          brightness: Brightness.dark,
+          blendLevel: 0,
+          surfaceMode: FlexSurfaceMode.veryLowSurfaceHighScaffold,
+        ),
+        equals(const FlexSchemeSurfaceColors(
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkSurface,
+          scaffoldBackground: FlexColor.darkSurface,
+          dialogBackground: FlexColor.darkSurface,
         )),
       );
     });
@@ -777,6 +813,24 @@ void main() {
       );
     });
     test(
+        'FSSC1.33: GIVEN a light FlexSchemeSurfaceColors.blend created object '
+        'with surface mode veryLowSurfaceHighScaffold and level 20 '
+        'EXPECT equality when made by matching light defined colors.', () {
+      expect(
+        FlexSchemeSurfaceColors.blend(
+          brightness: Brightness.light,
+          blendLevel: 20,
+          surfaceMode: FlexSurfaceMode.veryLowSurfaceHighScaffold,
+        ),
+        equals(const FlexSchemeSurfaceColors(
+          surface: Color(0xfff8f5fe),
+          background: Color(0xfff2ebfd),
+          scaffoldBackground: Color(0xffe6d7fc),
+          dialogBackground: Color(0xfff8f5fe),
+        )),
+      );
+    });
+    test(
         'FSSC1.34: GIVEN a light FlexSchemeSurfaceColors.blend created object '
         'with surface mode flat and level 20 '
         'EXPECT equality when made by matching light defined colors.', () {
@@ -902,6 +956,24 @@ void main() {
           background: Color(0xff45355a),
           scaffoldBackground: Color(0xff614880),
           dialogBackground: Color(0xff2b2335),
+        )),
+      );
+    });
+    test(
+        'FSSC1.40b: GIVEN a dark FlexSchemeSurfaceColors.blend created object '
+        'with surface mode veryLowSurfaceHighScaffold and level 20 '
+        'EXPECT equality when made by matching dark defined colors.', () {
+      expect(
+        FlexSchemeSurfaceColors.blend(
+          brightness: Brightness.dark,
+          blendLevel: 20,
+          surfaceMode: FlexSurfaceMode.veryLowSurfaceHighScaffold,
+        ),
+        equals(const FlexSchemeSurfaceColors(
+          surface: Color(0xff1e1a23),
+          background: Color(0xff2b2335),
+          scaffoldBackground: Color(0xff46355a),
+          dialogBackground: Color(0xff1e1a23),
         )),
       );
     });

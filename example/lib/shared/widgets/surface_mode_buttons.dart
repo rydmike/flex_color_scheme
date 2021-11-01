@@ -23,7 +23,8 @@ class SurfaceModeButtons extends StatelessWidget {
       mode == FlexSurfaceMode.flat,
       mode == FlexSurfaceMode.highBackground,
       mode == FlexSurfaceMode.highSurface,
-      mode == FlexSurfaceMode.lowSurfaceHighScaffold,
+      mode == FlexSurfaceMode.veryLowSurfaceHighScaffold,
+      if (isWide) mode == FlexSurfaceMode.lowSurfaceHighScaffold,
       mode == FlexSurfaceMode.lowScaffold,
       mode == FlexSurfaceMode.highScaffold,
       // Only show these exotic blend modes in wider media, there is not
@@ -50,18 +51,23 @@ class SurfaceModeButtons extends StatelessWidget {
           child: Icon(Icons.layers),
         ),
         Tooltip(
-            message: 'Low surface\nHigh scaffold',
-            // child: Icon(Icons.dynamic_feed_rounded),
-            child: Stack(
-              alignment: Alignment.center,
-              children: const <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Icon(Icons.layers_outlined),
-                ),
-                Icon(Icons.layers), //, color: Colors.blue),
-              ],
-            )),
+          message: 'Very low surface\nHigh scaffold',
+          child: Stack(
+            alignment: Alignment.center,
+            children: const <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Icon(Icons.layers_outlined),
+              ),
+              Icon(Icons.layers),
+            ],
+          ),
+        ),
+        if (isWide)
+          const Tooltip(
+            message: 'Low surface\nVery high scaffold',
+            child: Icon(Icons.dynamic_feed_rounded),
+          ),
         const Tooltip(
           message: 'Low scaffold',
           child:

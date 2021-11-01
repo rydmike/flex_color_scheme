@@ -170,6 +170,15 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> saveBottomNavigationBarOpacity(double value) async {}
 
+  /// Loads used bottom navigation bar elevation setting in example 5.
+  @override
+  Future<double> bottomNavigationBarElevation() async =>
+      ThemeService.defaultBottomNavigationBarElevation;
+
+  /// Persists the used app bar elevation setting in example 5.
+  @override
+  Future<void> saveBottomNavigationBarElevation(double value) async {}
+
   /// Loads used tooltip style setting in example 5.
   @override
   Future<bool> tooltipsMatchBackground() async =>

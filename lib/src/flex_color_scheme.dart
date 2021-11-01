@@ -156,6 +156,28 @@ enum FlexSurfaceMode {
   /// Increasing blend strengths in listed order, surface, background, scaffold.
   ///
   /// The blend strength increases on surfaces in this order:
+  /// * Surface & dialogs (0.5x) -> background (1x)-> Scaffold background (2x).
+  ///
+  /// Theme colorScheme.primary color is used as blend color on all surfaces.
+  ///
+  /// To get elevation overlay color in dark themes on all surfaces used by
+  /// [Material], use one of the modes where background and dialog color equals
+  /// the blend strength on surface color, like [flat], [lowScaffold],
+  /// [highScaffold], [highScaffold]. Other modes will only use elevation
+  /// overlay if their background happens to be equal to resulting
+  /// colorScheme.surface color. For more information
+  /// see issue: https://github.com/flutter/flutter/issues/90353
+  ///
+  /// When using very strong surface branding in dark mode, having an overlay
+  /// elevation color in dark mode is less critical, since the elevation
+  /// becomes partially visible via shadows and the surface may even have
+  /// another color tint if using e.g. [lowScaffoldVariantDialog] or
+  /// [highScaffoldVariantDialog].
+  veryLowSurfaceHighScaffold,
+
+  /// Increasing blend strengths in listed order, surface, background, scaffold.
+  ///
+  /// The blend strength increases on surfaces in this order:
   /// * Surface & dialogs (1x) -> background (2x)-> Scaffold background (3x).
   ///
   /// Theme colorScheme.primary color is used as blend color on all surfaces.
@@ -4394,22 +4416,23 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     // and starting point values for other modes. For simplicity we just mutate
     // these values in other modes as needed for the mode further below.
     //
-    // DEFAULTS:
+    // DEFAULTS: scaffold (1/3x) surface & dialog (1x) background (2x).
     // Light and dark mode blend factor, dark mode uses less saturated colors
     // and requires stronger blend percentage, we use 2x via _lightToDarkFactor.
     final int _modeFactor = isLight ? 1 : _kLightToDarkFactor;
-    // The base alpha value for mixing our blend color into each surface.
+    // The base alpha value for mixing our blend color into each surface (1x).
     int _surfaceAlpha = _blendLevel * _modeFactor;
-    // Dialog alpha defaults to surface alpha.
+    // Dialog alpha defaults to surface alpha (1x).
     int _dialogAlpha = _surfaceAlpha;
-    // Background alpha defaults to 2x surface alpha.
+    // Background alpha defaults to (2x) surface alpha.
     int _backgroundAlpha = _surfaceAlpha * 2;
-    // Scaffold background alpha defaults to 1/3 of surface alpha.
+    // Scaffold background alpha defaults to (1/3x) of surface alpha.
     int _scaffoldAlpha = _surfaceAlpha ~/ 3;
 
     // In mode `highSurface`, change order of background and
     // surface/dialog blend strengths compared to default and legacy
     // `scaffoldSurfaceBackground` mode.
+    // Result: scaffold (1/3x) background (1x) surface & dialog (2x).
     if (surfaceMode == FlexSurfaceMode.highSurface) {
       _backgroundAlpha = _surfaceAlpha;
       _surfaceAlpha = _surfaceAlpha * 2;
@@ -4417,6 +4440,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     }
 
     // Blend level for mode `lowSurfaceHighScaffold`. Change scaffold alpha
+    // Result: surface & dialog (1x) background (2x) scaffold (3x).
     if (surfaceMode == FlexSurfaceMode.lowSurfaceHighScaffold) {
       _scaffoldAlpha = _surfaceAlpha * 3;
     }
@@ -4438,10 +4462,37 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           dialogBackground: FlexColor.darkSurface,
         );
       }
-      // The alpha blend is also equal for all surface in this mode.
+      // The alpha blend level is equal for all surfaces in flat mode.
+      // Result: surface, dialog, background and scaffold (1x).
       _dialogAlpha = _surfaceAlpha;
       _backgroundAlpha = _surfaceAlpha;
       _scaffoldAlpha = _surfaceAlpha;
+    }
+
+    // In mode `veryLowSurfaceHighScaffold` we use FlexColor
+    // default surface color on all surfaces.
+    if (surfaceMode == FlexSurfaceMode.veryLowSurfaceHighScaffold) {
+      if (isLight) {
+        surface = const FlexSchemeSurfaceColors(
+          surface: FlexColor.lightSurface,
+          background: FlexColor.lightSurface,
+          scaffoldBackground: FlexColor.lightSurface,
+          dialogBackground: FlexColor.lightSurface,
+        );
+      } else {
+        surface = const FlexSchemeSurfaceColors(
+          surface: FlexColor.darkSurface,
+          background: FlexColor.darkSurface,
+          scaffoldBackground: FlexColor.darkSurface,
+          dialogBackground: FlexColor.darkSurface,
+        );
+      }
+
+      // Result: Surface & dialogs(0.5x), background (1x), Scaffold (2x).
+      _backgroundAlpha = _surfaceAlpha;
+      _scaffoldAlpha = _surfaceAlpha * 2;
+      _surfaceAlpha = _surfaceAlpha ~/ 2;
+      _dialogAlpha = _surfaceAlpha;
     }
 
     // In mode `lowScaffold` and `lowScaffoldVariantDialog`, we use FlexColor
@@ -4463,6 +4514,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           dialogBackground: FlexColor.darkSurface,
         );
       }
+      // Result: Surface, dialogs and background (1x), Scaffold (1/3x).
       // The alpha on all elevated surfaces is the same.
       _dialogAlpha = _surfaceAlpha;
       _backgroundAlpha = _surfaceAlpha;
@@ -4491,6 +4543,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           dialogBackground: FlexColor.darkBackground,
         );
       }
+      // Result: Surface, dialogs and background (1x), Scaffold (3x).
       // The alpha on all elevated surfaces is the same.
       _dialogAlpha = _surfaceAlpha;
       _backgroundAlpha = _surfaceAlpha;

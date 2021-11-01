@@ -91,10 +91,9 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   SwitchListTile.adaptive(
-                    title: const Text('Use widget theming'),
-                    subtitle: const Text(
-                      'Turn ON to enable opinionated widget themes.',
-                    ),
+                    title: const Text('Use sub theming'),
+                    subtitle:
+                        const Text('Enable opinionated widget sub themes'),
                     value: controller.useSubThemes,
                     onChanged: controller.setUseSubThemes,
                   ),

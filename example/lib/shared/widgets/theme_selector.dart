@@ -69,7 +69,9 @@ class _ThemeSelectorState extends State<ThemeSelector> {
               itemCount: AppColor.schemes.length,
               itemBuilder: (BuildContext context, int index) {
                 return FlexThemeModeOptionButton(
-                  optionButtonBorderRadius: widget.controller.cornerRadius,
+                  optionButtonBorderRadius: widget.controller.useSubThemes
+                      ? widget.controller.cornerRadius
+                      : 4,
                   height: 30,
                   width: 30,
                   padding: const EdgeInsets.all(0.3),

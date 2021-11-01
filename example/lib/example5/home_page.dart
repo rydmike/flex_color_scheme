@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
             builder: (BuildContext context, BoxConstraints constraints) {
           // Just a suitable breakpoint for when we want to have more
           // than one column in the body with this particular content.
-          final int columns = constraints.maxWidth ~/ 780 + 1;
+          final int columns = constraints.maxWidth ~/ 820 + 1;
           if (prevColumns != columns) {
             if (columns == 1) collapseSettings = true;
             if (columns >= 2) collapseSettings = false;
@@ -283,14 +283,14 @@ class _RestSettingsDialog extends StatelessWidget {
       actions: <Widget>[
         TextButton(
             onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('RESET')),
-        TextButton(
-            onPressed: () {
               Navigator.of(context).pop(false);
             },
             child: const Text('CANCEL')),
+        TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: const Text('RESET')),
       ],
       actionsPadding: const EdgeInsets.symmetric(horizontal: 16),
     );
@@ -599,19 +599,26 @@ class _SurfaceBlends extends StatelessWidget {
       case FlexSurfaceMode.flat:
         return 'Flat\nAll surface colors at blend level (1x)\n';
       case FlexSurfaceMode.highBackground:
-        return 'High background\nBackground (2x) Surface (1x) '
-            'Scaffold (1/3x)\n';
+        return 'High background, very low scaffold\n'
+            'Background (2x) Surface (1x) Scaffold (1/3x)\n';
       case FlexSurfaceMode.highSurface:
-        return 'High surface\nSurface (2x) Background (1x) Scaffold (1/3x)\n';
+        return 'High surface, very low scaffold\n'
+            'Surface (2x) Background (1x) Scaffold (1/3x)\n';
+      case FlexSurfaceMode.veryLowSurfaceHighScaffold:
+        return 'Very low surface, high scaffold\n'
+            'Surface & dialog (1/2x) Background (1x) Scaffold (2x)\n';
       case FlexSurfaceMode.lowSurfaceHighScaffold:
-        return 'Low surface, high scaffold\nSurface (1x) Background (2x) '
-            'Scaffold (3x)\n';
+        return 'Low surface, Very high scaffold\n'
+            'Surface (1x) Background (2x) Scaffold (3x)\n';
       case FlexSurfaceMode.lowScaffold:
-        return 'Low scaffold\nScaffold (1/3x) Surface and Background (1x)\n';
+        return 'Low scaffold\n'
+            'Scaffold (1/3x) Surface and Background (1x)\n';
       case FlexSurfaceMode.highScaffold:
-        return 'High scaffold\nScaffold (3x) Surface and Background (1x)\n';
+        return 'High scaffold\n'
+            'Scaffold (3x) Surface and Background (1x)\n';
       case FlexSurfaceMode.lowScaffoldVariantDialog:
-        return 'Low scaffold\nScaffold (1/3x) Surface and Background (1x)\n'
+        return 'Low scaffold\n'
+            'Scaffold (1/3x) Surface and Background (1x)\n'
             'Dialog background (1x) using secondary variant color';
       case FlexSurfaceMode.highScaffoldVariantDialog:
         return 'High scaffold\nScaffold (3x) Surface and Background (1x)\n'
@@ -811,33 +818,34 @@ class _AppBarSettings extends StatelessWidget {
             onChanged: controller.setTransparentStatusBar,
           ),
           ListTile(
-              title: const Text('Elevation'),
-              subtitle: Slider.adaptive(
-                max: 24,
-                divisions: 48,
-                label: controller.appBarElevation.toStringAsFixed(1),
-                value: controller.appBarElevation,
-                onChanged: controller.setAppBarElevation,
+            title: const Text('Elevation'),
+            subtitle: Slider.adaptive(
+              max: 24,
+              divisions: 48,
+              label: controller.appBarElevation.toStringAsFixed(1),
+              value: controller.appBarElevation,
+              onChanged: controller.setAppBarElevation,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    controller.appBarElevation.toStringAsFixed(1),
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              trailing: Padding(
-                padding: const EdgeInsetsDirectional.only(end: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'ELEV',
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Text(
-                      controller.appBarElevation.toStringAsFixed(1),
-                      style: Theme.of(context)
-                          .textTheme
-                          .caption!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              )),
+            ),
+          ),
           const ListTile(
             title: Text('Opacity'),
             subtitle: Text('Themed opacity. Try 85% to 98%'),
@@ -937,15 +945,48 @@ class _BottomNavigation extends StatelessWidget {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return RevealListTileCard(
       isClosed: isClosed,
-      title: const Text('Bottom Navigation Settings'),
+      title: const Text('Bottom Bar Settings'),
       child: Column(
         children: <Widget>[
           const ListTile(
+            title: Text('Elevation'),
+            subtitle: Text(
+              'Bottom navigation bar elevation',
+            ),
+          ),
+          ListTile(
+            title: Slider.adaptive(
+              max: 24,
+              divisions: 48,
+              label: controller.bottomNavigationBarElevation.toStringAsFixed(1),
+              value: controller.bottomNavigationBarElevation,
+              onChanged: controller.setBottomNavigationBarElevation,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    controller.bottomNavigationBarElevation.toStringAsFixed(1),
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const ListTile(
             title: Text('Opacity'),
             subtitle: Text(
-              'System navigation and bottom '
-              'navigation bar opacity. They are separate parameters, but '
-              'share input control value in this example',
+              'Bottom and system navigation bar opacity. They are separate '
+              'parameters, but share input control value in this example',
             ),
           ),
           ListTile(
@@ -1018,11 +1059,8 @@ class _SubPages extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
-            title: const Text('Open a demo subpage'),
-            subtitle: const Text(
-              'The subpage will use the same '
-              'color scheme based theme automatically.',
-            ),
+            title: const Text('Sub page demo'),
+            subtitle: const Text('Page uses the same color scheme based theme'),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               Subpage.show(context);
@@ -1031,7 +1069,7 @@ class _SubPages extends StatelessWidget {
           ListTile(
             title: const Text('Splash page demo 1a'),
             subtitle: const Text(
-              'No scrim and normal status icons.\n'
+              'No scrim and normal status icons\n'
               'Using themedSystemNavigationBar (noAppBar:true)',
             ),
             trailing: const Icon(Icons.arrow_forward_ios),
@@ -1042,7 +1080,7 @@ class _SubPages extends StatelessWidget {
           ListTile(
             title: const Text('Splash page demo 1b'),
             subtitle: const Text(
-              'No scrim and inverted status icons.\n'
+              'No scrim and inverted status icons\n'
               'Using themedSystemNavigationBar (noAppBar:true, '
               'invertStatusIcons:true)',
             ),
@@ -1218,7 +1256,7 @@ class _AlertDialogShowcase extends StatelessWidget {
     return RevealListTileCard(
       isClosed: isClosed,
       title: const Text('Themed Dialog'),
-      child: const _RestSettingsDialog(),
+      child: const AlertDialogShowcase(),
     );
   }
 }

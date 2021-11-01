@@ -98,20 +98,19 @@ class HomePage extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         SwitchListTile.adaptive(
-                          title: const Text('Use widget theming'),
+                          title: const Text('Use sub theming'),
                           subtitle: const Text(
-                            'Turn ON to enable opinionated widget themes.',
-                          ),
+                              'Enable opinionated widget sub themes'),
                           value: controller.useSubThemes,
                           onChanged: controller.setUseSubThemes,
                         ),
                         // Open a sub-page
                         ListTile(
-                          title: const Text('Open a demo subpage'),
-                          subtitle: const Text(
-                            'The subpage uses the same theme automatically.',
-                          ),
-                          trailing: const Icon(Icons.chevron_right, size: 34),
+                          title: const Text('Sub page demo'),
+                          subtitle:
+                              const Text('Page uses the same color scheme '
+                                  'based theme'),
+                          trailing: const Icon(Icons.arrow_forward_ios),
                           onTap: () {
                             Subpage.show(context);
                           },

@@ -171,7 +171,7 @@ abstract class ThemeService {
   static const String keyAppBarOpacity = 'appBarOpacity';
 
   /// Default value for the appBarOpacity, also used to reset settings.
-  static const double defaultAppBarOpacity = 0.94;
+  static const double defaultAppBarOpacity = 0.95;
 
   /// Loads used app bar opacity setting in example 5.
   Future<double> appBarOpacity();
@@ -183,7 +183,7 @@ abstract class ThemeService {
   static const String keyAppBarElevation = 'appBarElevation';
 
   /// Default value for the appBarElevation, also used to reset settings.
-  static const double defaultAppBarElevation = 0.5;
+  static const double defaultAppBarElevation = 0;
 
   /// Loads used app bar elevation setting in example 5.
   Future<double> appBarElevation();
@@ -220,13 +220,26 @@ abstract class ThemeService {
       'bottomNavigationBarOpacity';
 
   /// Default value for the bottomNavigationBarOpacity, also to reset settings.
-  static const double defaultBottomNavigationBarOpacity = 0.94;
+  static const double defaultBottomNavigationBarOpacity = 0.95;
 
   /// Loads used bottom navigation bar opacity setting in example 5.
   Future<double> bottomNavigationBarOpacity();
 
   /// Persists the used app bar opacity setting in example 5.
   Future<void> saveBottomNavigationBarOpacity(double value);
+
+  /// Key used to read and save the bottomNavigationBarElevation value.
+  static const String keyBottomNavigationBarElevation =
+      'bottomNavigationBarElevation';
+
+  /// Default value for the bottomNavigationBarElevation, also reset settings.
+  static const double defaultBottomNavigationBarElevation = 0;
+
+  /// Loads used bottom navigation bar elevation setting in example 5.
+  Future<double> bottomNavigationBarElevation();
+
+  /// Persists the used app bar elevation setting in example 5.
+  Future<void> saveBottomNavigationBarElevation(double value);
 
   /// Key used to read and save the tooltipsMatchBackground value.
   static const String keyTooltipsMatchBackground = 'tooltipsMatchBackground';

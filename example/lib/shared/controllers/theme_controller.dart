@@ -42,6 +42,8 @@ class ThemeController with ChangeNotifier {
     _tabBarStyle = await _themeService.tabBarStyle();
     _bottomNavigationBarOpacity =
         await _themeService.bottomNavigationBarOpacity();
+    _bottomNavigationBarElevation =
+        await _themeService.bottomNavigationBarElevation();
     _tooltipsMatchBackground = await _themeService.tooltipsMatchBackground();
     _swapLightColors = await _themeService.swapLightColors();
     _swapDarkColors = await _themeService.swapDarkColors();
@@ -81,6 +83,8 @@ class ThemeController with ChangeNotifier {
 
     await setBottomNavigationBarOpacity(
         ThemeService.defaultBottomNavigationBarOpacity, false);
+    await setBottomNavigationBarElevation(
+        ThemeService.defaultBottomNavigationBarElevation, false);
     await setTooltipsMatchBackground(
         ThemeService.defaultTooltipsMatchBackground, false);
     await setSwapLightColors(ThemeService.defaultSwapLightColors, false);
@@ -298,6 +302,17 @@ class ThemeController with ChangeNotifier {
     _bottomNavigationBarOpacity = value;
     if (notify) notifyListeners();
     await _themeService.saveBottomNavigationBarOpacity(value);
+  }
+
+  late double _bottomNavigationBarElevation;
+  double get bottomNavigationBarElevation => _bottomNavigationBarElevation;
+  Future<void> setBottomNavigationBarElevation(double? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _bottomNavigationBarElevation) return;
+    _bottomNavigationBarElevation = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBottomNavigationBarElevation(value);
   }
 
   late bool _tooltipsMatchBackground;
