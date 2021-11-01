@@ -3934,6 +3934,8 @@ class FlexColorScheme with Diagnosticable {
         unselectedLabelColor: unselectedTabColor(),
       ),
 
+      // TODO(rydmike): Also consider a sub-theme for icons.
+
       // TODO(Rydmike): Also consider a sub-theme for tooltips.
       // Opinionated theming of Tooltips, the default theme for Material
       // themed Tooltips are not ideal design choices on desktop and web
