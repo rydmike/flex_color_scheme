@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../const/app_data.dart';
 import 'about.dart';
-import 'responsive_menu.dart';
+import 'app_menu.dart';
 
 /// A simplistic animated responsive Scaffold.
 ///
@@ -19,7 +19,7 @@ class ResponsiveScaffold extends StatefulWidget {
   const ResponsiveScaffold({
     Key? key,
     // Additional ResponsiveScaffold properties.
-
+    this.onSelect,
     // Standard Scaffold properties.
     this.body,
     this.floatingActionButton,
@@ -43,6 +43,9 @@ class ResponsiveScaffold extends StatefulWidget {
     this.endDrawerEnableOpenDragGesture = true,
     this.restorationId,
   }) : super(key: key);
+
+  /// Callback called with menu index when user taps on a menu item.
+  final ValueChanged<int>? onSelect;
 
   /// If true, and [bottomNavigationBar] or [persistentFooterButtons]
   /// is specified, then the [body] extends to the bottom of the Scaffold,
@@ -337,9 +340,10 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 246), // Same as Drawer.
               width: menuWidth,
-              child: ResponsiveMenu(
+              child: AppMenu(
                 maxWidth: AppData.menuWidth,
-                onTap: () {
+                onSelect: widget.onSelect,
+                onOperate: () {
                   setState(() {
                     if (isDesktop) isMenuExpanded = !isMenuExpanded;
                     if (!isDesktop) isMenuClosed = !isMenuClosed;
@@ -367,9 +371,13 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
               constraints:
                   const BoxConstraints.expand(width: AppData.menuWidth),
               child: Drawer(
-                child: ResponsiveMenu(
+                child: AppMenu(
                   maxWidth: AppData.menuWidth,
-                  onTap: () {
+                  onSelect: (int index) {
+                    Navigator.of(context).pop();
+                    widget.onSelect?.call(index);
+                  },
+                  onOperate: () {
                     Navigator.of(context).pop();
                     setState(() {
                       isMenuClosed = !isMenuClosed;

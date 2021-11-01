@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-/// A list tile in a [Card] that can be toggled via its trailing widget to
-/// open and reveal more content provided via [child].
+/// A [Card] with a [ListTile] header that can be toggled via its trailing
+/// widget to open and reveal more content provided via [child] in the card.
 ///
 /// The open reveal is animated.
 ///
 /// The ListTile and its revealed child are wrapped in a Card widget. The
-/// [RevealListTileCard] is primarily designed to be placed on scaffold using
+/// [RevealListTileCard] is primarily designed to be placed on [Scaffold] using
 /// its themed background color.
 ///
-/// The header and background color of the Card get a slight primary color
-/// blend, a notch above whatever the scaffold background might be using.
+/// The header and background color of the [Card] get a slight primary color
+/// blend added to its default surface color.
 /// It always avoids the same color as the scaffold background, for both the
 /// list tile heading and the card itself.
 ///
@@ -33,6 +33,8 @@ class RevealListTileCard extends StatefulWidget {
     this.isClosed = false,
     this.onChange,
     this.duration = const Duration(milliseconds: 200),
+    // If we don't want bold titles by default, set the default to false.
+    this.boldTitle = true,
     this.child,
   }) : super(key: key);
 
@@ -81,6 +83,12 @@ class RevealListTileCard extends StatefulWidget {
   /// The duration of the show and hide animation of child.
   final Duration duration;
 
+  /// Make the title bold.
+  ///
+  /// The title Widget will be made bold if it is a [Text] widget,
+  /// regardless of used style it has.
+  final bool boldTitle;
+
   /// The child to be revealed.
   final Widget? child;
 
@@ -124,7 +132,7 @@ class _RevealListTileCardState extends State<RevealListTileCard>
 
     // Make card slightly more colored than card background is
     Color cardColor = Color.alphaBlend(
-        scheme.primary.withAlpha(4 * blendFactor), theme.cardColor);
+        scheme.primary.withAlpha(2 * blendFactor), theme.cardColor);
 
     // Compute a header color with fixed primary blend, make it a stronger tint.
     Color headerColor =
@@ -147,6 +155,21 @@ class _RevealListTileCardState extends State<RevealListTileCard>
       cardColor = Color.alphaBlend(
           scheme.primary.withAlpha(2 * blendFactor), cardColor);
     }
+
+    // Force title widget for Card header to use opinionated bold style,
+    // if we have a title, boldTitle is true and title title was a Text.
+    Widget? _title = widget.title;
+    if (_title != null && _title is Text && widget.boldTitle) {
+      final Text textTitle = _title;
+      final TextStyle? _style = _title.style;
+      final String _text = textTitle.data ?? '';
+      _title = Text(
+        _text,
+        style: _style?.copyWith(fontWeight: FontWeight.bold) ??
+            const TextStyle(fontWeight: FontWeight.bold),
+      );
+    }
+
     return Card(
       margin: widget.margin,
       color: cardColor,
@@ -159,9 +182,9 @@ class _RevealListTileCardState extends State<RevealListTileCard>
               child: ListTile(
                 contentPadding: widget.headerPadding,
                 leading: widget.leading,
-                title: widget.title,
+                title: _title,
                 trailing: ExpandIcon(
-                  size: 36,
+                  size: 32,
                   isExpanded: !_closed,
                   padding: EdgeInsets.zero,
                   onPressed: (_) {

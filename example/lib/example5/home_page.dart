@@ -40,8 +40,14 @@ class _HomePageState extends State<HomePage> {
   // going one column and open when going multi column.
   int prevColumns = 0;
 
-  // Trigger open/close of card panel views on window resizes
-  bool isCardClosed = true;
+  // Set expand/collapse state for main Card.
+  bool collapseMain = false;
+
+  // Set expand/collapse state for all settings Cards.
+  bool collapseSettings = true;
+
+  // Set expand/collapse state for all themed result Cards.
+  bool collapseThemed = false;
 
   @override
   void initState() {
@@ -90,14 +96,69 @@ class _HomePageState extends State<HomePage> {
       child: ResponsiveScaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
+        // Callback from menu, an item was clicked
+        onSelect: (int index) async {
+          // Toggle all cards
+          if (index == 0) {
+            setState(() {
+              collapseMain = false;
+              collapseSettings = false;
+              collapseThemed = false;
+            });
+          }
+          // Collapse all cards
+          if (index == 1) {
+            setState(() {
+              collapseMain = true;
+              collapseSettings = true;
+              collapseThemed = true;
+            });
+          }
+          // Expand settings cards
+          if (index == 2) {
+            setState(() {
+              collapseSettings = false;
+            });
+          }
+          // Collapse settings cards
+          if (index == 3) {
+            setState(() {
+              collapseSettings = true;
+            });
+          }
+          // Expand themed cards
+          if (index == 4) {
+            setState(() {
+              collapseThemed = false;
+            });
+          }
+          // Collapse themed cards
+          if (index == 5) {
+            setState(() {
+              collapseThemed = true;
+            });
+          }
+          // Reset theme settings.
+          if (index == 6) {
+            final bool? reset = await showDialog<bool?>(
+              context: context,
+              builder: (BuildContext context) {
+                return const _RestSettingsDialog();
+              },
+            );
+            if (reset ?? false) {
+              await widget.controller.resetAllToDefaults();
+            }
+          }
+        },
         body: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
           // Just a suitable breakpoint for when we want to have more
           // than one column in the body with this particular content.
           final int columns = constraints.maxWidth ~/ 780 + 1;
           if (prevColumns != columns) {
-            if (columns == 1) isCardClosed = true;
-            if (columns >= 2) isCardClosed = false;
+            if (columns == 1) collapseSettings = true;
+            if (columns >= 2) collapseSettings = false;
             prevColumns = columns;
           }
           // Make margins respond to media size and nr of columns.
@@ -125,9 +186,8 @@ class _HomePageState extends State<HomePage> {
             },
             itemBuilder: (BuildContext context, int index) => <Widget>[
               RevealListTileCard(
-                isClosed: false,
-                title: Text('FlexColorScheme',
-                    style: Theme.of(context).textTheme.headline6),
+                isClosed: collapseMain,
+                title: const Text('FlexColorScheme'),
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
@@ -150,28 +210,31 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              //
+              // The "Settings" Cards.
               _ThemeColors(
                 controller: widget.controller,
-                isClosed: isCardClosed,
+                isClosed: collapseSettings,
               ),
               _ThemeMode(
                 controller: widget.controller,
-                isClosed: isCardClosed,
+                isClosed: collapseSettings,
               ),
               _WidgetThemes(
                 controller: widget.controller,
-                isClosed: isCardClosed,
+                isClosed: collapseSettings,
               ),
               _SurfaceBlends(
                 controller: widget.controller,
-                isClosed: isCardClosed,
+                isClosed: collapseSettings,
               ),
               _AppBarSettings(
                 controller: widget.controller,
-                isClosed: isCardClosed,
+                isClosed: collapseSettings,
               ),
               _BottomNavigation(
                 controller: widget.controller,
+                isClosed: collapseSettings,
                 navBarStyle: navBarStyle,
                 onNavBarStyle: (FlexSystemNavBarStyle value) {
                   setState(() {
@@ -184,26 +247,52 @@ class _HomePageState extends State<HomePage> {
                     useNavDivider = value;
                   });
                 },
-                isClosed: isCardClosed,
               ),
-              _SubPages(
-                isClosed: isCardClosed,
-              ),
-              const _ButtonsShowcase(),
-              const _InputShowcase(),
-              const _ThemeBarsShowcase(),
-              const _ListTileShowcase(),
-              const _TimePickerDialogShowcase(),
-              const _DatePickerDialogShowcase(),
-              const _AlertDialogShowcase(),
-              const _BottomSheetAndMaterialShowcase(),
-              const _CardShowcase(),
-              const _TextThemeShowcase(),
+              _SubPages(isClosed: collapseSettings),
+              //
+              // The "Themed" results Cards.
+              _ButtonsShowcase(isClosed: collapseThemed),
+              _InputShowcase(isClosed: collapseThemed),
+              _ThemeBarsShowcase(isClosed: collapseThemed),
+              _ListTileShowcase(isClosed: collapseThemed),
+              _TimePickerDialogShowcase(isClosed: collapseThemed),
+              _DatePickerDialogShowcase(isClosed: collapseThemed),
+              _AlertDialogShowcase(isClosed: collapseThemed),
+              _BottomSheetAndMaterialShowcase(isClosed: collapseThemed),
+              _CardShowcase(isClosed: collapseThemed),
+              _TextThemeShowcase(isClosed: collapseThemed),
             ].elementAt(index),
             itemCount: 18,
           );
         }),
       ),
+    );
+  }
+}
+
+class _RestSettingsDialog extends StatelessWidget {
+  const _RestSettingsDialog({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Reset Theme Settings'),
+      content: const Text('Reset all settings back to their default values?\n'
+          'Persisted theme settings will also be updated '
+          'to default values.'),
+      actions: <Widget>[
+        TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: const Text('RESET')),
+        TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: const Text('CANCEL')),
+      ],
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 16),
     );
   }
 }
@@ -221,10 +310,7 @@ class _ThemeColors extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Theme Colors',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Theme Colors'),
       child: Column(
         children: <Widget>[
           ThemePopupMenu(
@@ -270,10 +356,7 @@ class _ThemeMode extends StatelessWidget {
 
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Theme Mode',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Theme Mode'),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -391,15 +474,12 @@ class _WidgetThemes extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Widget Theme Settings',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Sub Theme Settings'),
       child: Column(
         children: <Widget>[
           SwitchListTile.adaptive(
-            title: const Text('Use widget theming'),
-            subtitle: const Text('Enable opinionated sub themes'),
+            title: const Text('Use sub theming'),
+            subtitle: const Text('Enable opinionated widget sub themes'),
             value: controller.useSubThemes,
             onChanged: controller.setUseSubThemes,
           ),
@@ -545,10 +625,7 @@ class _SurfaceBlends extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Surface Blends',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Surface Blends'),
       child: Column(
         children: <Widget>[
           const ListTile(
@@ -671,10 +748,7 @@ class _AppBarSettings extends StatelessWidget {
 
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'AppBar Settings',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('AppBar Settings'),
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),
@@ -728,9 +802,7 @@ class _AppBarSettings extends StatelessWidget {
             ),
           ],
           SwitchListTile.adaptive(
-            title: const Text(
-              'One colored app bar on Android',
-            ),
+            title: const Text('One colored app bar on Android'),
             subtitle: const Text(
               'ON   There is no scrim on the status bar\n'
               'OFF  Use default two toned style',
@@ -768,9 +840,7 @@ class _AppBarSettings extends StatelessWidget {
               )),
           const ListTile(
             title: Text('Opacity'),
-            subtitle: Text(
-              'Themed opacity. Try 85% to 98%',
-            ),
+            subtitle: Text('Themed opacity. Try 85% to 98%'),
           ),
           ListTile(
             title: Slider.adaptive(
@@ -867,10 +937,7 @@ class _BottomNavigation extends StatelessWidget {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Bottom Navigation Settings',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Bottom Navigation Settings'),
       child: Column(
         children: <Widget>[
           const ListTile(
@@ -947,10 +1014,7 @@ class _SubPages extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Page Examples',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Page Examples'),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -1015,10 +1079,7 @@ class _ButtonsShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Themed Buttons',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Themed Buttons'),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -1052,10 +1113,7 @@ class _InputShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Themed Inputs',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Themed Inputs'),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -1082,10 +1140,7 @@ class _ThemeBarsShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Themed Bars',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Themed Bars'),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -1111,10 +1166,7 @@ class _ListTileShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Themed ListTile',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Themed ListTile'),
       child: const ListTileShowcase(),
     );
   }
@@ -1131,10 +1183,7 @@ class _TimePickerDialogShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Themed TimePickerDialog',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Themed TimePickerDialog'),
       child: const TimePickerDialogShowcase(),
     );
   }
@@ -1151,10 +1200,7 @@ class _DatePickerDialogShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Themed DatePickerDialog',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Themed DatePickerDialog'),
       child: const DatePickerDialogShowcase(),
     );
   }
@@ -1171,11 +1217,8 @@ class _AlertDialogShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Themed Dialog',
-        style: Theme.of(context).textTheme.headline6,
-      ),
-      child: const AlertDialogShowcase(),
+      title: const Text('Themed Dialog'),
+      child: const _RestSettingsDialog(),
     );
   }
 }
@@ -1191,10 +1234,7 @@ class _BottomSheetAndMaterialShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Themed Material',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Themed Material'),
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: BottomSheetAndMaterialShowcase(),
@@ -1214,10 +1254,7 @@ class _CardShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
         isClosed: isClosed,
-        title: Text(
-          'Themed Card',
-          style: Theme.of(context).textTheme.headline6,
-        ),
+        title: const Text('Themed Card'),
         child: const Padding(
           padding: EdgeInsets.all(16),
           child: CardShowcase(),
@@ -1236,10 +1273,7 @@ class _TextThemeShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: Text(
-        'Themed TextTheme',
-        style: Theme.of(context).textTheme.headline6,
-      ),
+      title: const Text('Themed TextTheme'),
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: TextThemeShowcase(),

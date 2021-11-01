@@ -3,48 +3,46 @@ import 'package:flutter/material.dart';
 
 import '../const/app_data.dart';
 
-/// A side menu with some fake content.
+/// App side menu and rail, used in default example and example 4 and 5.
 ///
-/// The side menu content and all widgets in this file in this example have no
-/// actual function for the demo, other than to create a visual demo of what the
-/// example theme looks like with a side rail or side menu that uses the primary
-/// color branded surface or background colors.
-class ResponsiveMenu extends StatefulWidget {
-  const ResponsiveMenu({
+/// Contains command to control the views for example 5 and reset settings
+/// to default values.
+class AppMenu extends StatefulWidget {
+  const AppMenu({
     Key? key,
     required this.maxWidth,
-    this.onTap,
+    this.onOperate,
+    this.onSelect,
   }) : super(key: key);
   final double maxWidth;
-  final VoidCallback? onTap;
+  final VoidCallback? onOperate;
+  final ValueChanged<int>? onSelect;
 
   @override
-  _ResponsiveMenuState createState() => _ResponsiveMenuState();
+  _AppMenuState createState() => _AppMenuState();
 }
 
-class _ResponsiveMenuState extends State<ResponsiveMenu> {
+class _AppMenuState extends State<AppMenu> {
   int selectedItem = 4;
 
   static const List<IconData> _icons = <IconData>[
-    Icons.ac_unit,
-    Icons.hvac_outlined,
-    Icons.account_balance,
-    Icons.add_circle_outline,
-    Icons.assignment_ind,
-    Icons.assignment_turned_in,
-    Icons.arrow_upward,
-    Icons.logout
+    Icons.open_in_full_outlined,
+    Icons.close_fullscreen_outlined,
+    Icons.expand_more_outlined,
+    Icons.expand_less_outlined,
+    Icons.unfold_more_outlined,
+    Icons.unfold_less_outlined,
+    Icons.replay_outlined,
   ];
 
   static const List<String> _labels = <String>[
-    'Cooling',
-    'Ventilation',
-    'Key safe',
-    'Add keys',
-    'My tasks',
-    'Done tasks',
-    'Upload report',
-    'Sign out',
+    'Expand all',
+    'Close all',
+    'Expand settings',
+    'Close settings',
+    'Expand themed',
+    'Close themed',
+    'Reset settings',
   ];
 
   @override
@@ -64,7 +62,7 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> {
                   constraints: const BoxConstraints.tightFor(width: 56),
                   child: IconButton(
                     icon: const Icon(Icons.menu),
-                    onPressed: widget.onTap,
+                    onPressed: widget.onOperate,
                   ),
                 ),
               ),
@@ -88,8 +86,8 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> {
                         children: <Widget>[
                           // A dummy user profile on the dummy menu/rail.
                           const _UserProfile(),
-                          // Create a list of dummy menu items
-                          for (int i = 0; i < 8; i++)
+                          // Create a list of the menu items
+                          for (int i = 0; i < _icons.length; i++)
                             _SideItem(
                               width: size.maxWidth,
                               menuWidth: widget.maxWidth,
@@ -97,12 +95,14 @@ class _ResponsiveMenuState extends State<ResponsiveMenu> {
                                 setState(() {
                                   selectedItem = i;
                                 });
+                                widget.onSelect?.call(i);
                               },
                               selected: selectedItem == i,
                               icon: _icons[i],
                               label: _labels[i],
-                              showDivider: i.isEven, // && i != 0,
+                              showDivider: i.isEven,
                             ),
+                          const Divider(thickness: 1, height: 1),
                         ],
                       ),
                     ),
@@ -204,7 +204,7 @@ class _SideItem extends StatelessWidget {
   }
 }
 
-/// A dummy user profile widget that we use as leading widget ins side panel.
+/// A dummy user profile widget that we use as leading widget in the menu.
 class _UserProfile extends StatefulWidget {
   const _UserProfile({Key? key}) : super(key: key);
 
@@ -249,7 +249,7 @@ class _UserProfileState extends State<_UserProfile> {
             subtitle: const Text('Company Inc'),
             trailing: ExpandIcon(
               isExpanded: !_collapsed,
-              size: 36,
+              size: 32,
               padding: EdgeInsets.zero,
               onPressed: (_) {
                 setState(() {
