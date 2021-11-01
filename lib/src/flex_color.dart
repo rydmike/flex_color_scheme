@@ -1217,6 +1217,102 @@ class FlexColor {
   /// Blue whale theme color for dark secondary variant color.
   static const Color blueWhaleDarkSecondaryVariant = Color(0xFFED7F29);
 
+  // The New one theme is based on...
+
+  /// English name of the newOne theme.
+  static const String newOneName = 'New one';
+
+  /// English description of the newOne theme.
+  static const String newOneDescription = 'New one.';
+
+  /// Blue whale theme color for light primary color.
+  static const Color newOneLightPrimary = Color(0xFF023047);
+
+  /// Blue whale theme color for light primary variant color.
+  static const Color newOneLightPrimaryVariant = Color(0xFF2A9D8F);
+
+  /// Blue whale theme color for light secondary color.
+  static const Color newOneLightSecondary = Color(0xFFF86541);
+
+  /// Blue whale theme color for light secondary variant color.
+  static const Color newOneLightSecondaryVariant = Color(0xFFF07E24);
+
+  /// Blue whale theme color for dark primary color.
+  static const Color newOneDarkPrimary = Color(0xFF57859D);
+
+  /// Blue whale theme color for dark primary variant color.
+  static const Color newOneDarkPrimaryVariant = Color(0xFF50A399);
+
+  /// Blue whale theme color for dark secondary color.
+  static const Color newOneDarkSecondary = Color(0xFFFF6E48);
+
+  /// Blue whale theme color for dark secondary variant color.
+  static const Color newOneDarkSecondaryVariant = Color(0xFFED7F29);
+
+  // The New two theme is based on...
+
+  /// English name of the newTwo theme.
+  static const String newTwoName = 'New two';
+
+  /// English description of the newTwo theme.
+  static const String newTwoDescription = 'New two.';
+
+  /// Blue whale theme color for light primary color.
+  static const Color newTwoLightPrimary = Color(0xFF023047);
+
+  /// Blue whale theme color for light primary variant color.
+  static const Color newTwoLightPrimaryVariant = Color(0xFF2A9D8F);
+
+  /// Blue whale theme color for light secondary color.
+  static const Color newTwoLightSecondary = Color(0xFFF86541);
+
+  /// Blue whale theme color for light secondary variant color.
+  static const Color newTwoLightSecondaryVariant = Color(0xFFF07E24);
+
+  /// Blue whale theme color for dark primary color.
+  static const Color newTwoDarkPrimary = Color(0xFF57859D);
+
+  /// Blue whale theme color for dark primary variant color.
+  static const Color newTwoDarkPrimaryVariant = Color(0xFF50A399);
+
+  /// Blue whale theme color for dark secondary color.
+  static const Color newTwoDarkSecondary = Color(0xFFFF6E48);
+
+  /// Blue whale theme color for dark secondary variant color.
+  static const Color newTwoDarkSecondaryVariant = Color(0xFFED7F29);
+
+  // The New three theme is based on...
+
+  /// English name of the newThree theme.
+  static const String newThreeName = 'New three';
+
+  /// English description of the newThree theme.
+  static const String newThreeDescription = 'New three.';
+
+  /// Blue whale theme color for light primary color.
+  static const Color newThreeLightPrimary = Color(0xFF023047);
+
+  /// Blue whale theme color for light primary variant color.
+  static const Color newThreeLightPrimaryVariant = Color(0xFF2A9D8F);
+
+  /// Blue whale theme color for light secondary color.
+  static const Color newThreeLightSecondary = Color(0xFFF86541);
+
+  /// Blue whale theme color for light secondary variant color.
+  static const Color newThreeLightSecondaryVariant = Color(0xFFF07E24);
+
+  /// Blue whale theme color for dark primary color.
+  static const Color newThreeDarkPrimary = Color(0xFF57859D);
+
+  /// Blue whale theme color for dark primary variant color.
+  static const Color newThreeDarkPrimaryVariant = Color(0xFF50A399);
+
+  /// Blue whale theme color for dark secondary color.
+  static const Color newThreeDarkSecondary = Color(0xFFFF6E48);
+
+  /// Blue whale theme color for dark secondary variant color.
+  static const Color newThreeDarkSecondaryVariant = Color(0xFFED7F29);
+
   /// English name of the custom theme.
   static const String customName = 'Custom';
 
@@ -1958,6 +2054,72 @@ class FlexColor {
     ),
   );
 
+  /// New one based FlexSchemeData.
+  static const FlexSchemeData newOne = FlexSchemeData(
+    name: newOneName,
+    description: newOneDescription,
+    light: FlexSchemeColor(
+      primary: newOneLightPrimary,
+      primaryVariant: newOneLightPrimaryVariant,
+      secondary: newOneLightSecondary,
+      secondaryVariant: newOneLightSecondaryVariant,
+      appBarColor: newOneLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: newOneDarkPrimary,
+      primaryVariant: newOneDarkPrimaryVariant,
+      secondary: newOneDarkSecondary,
+      secondaryVariant: newOneDarkSecondaryVariant,
+      appBarColor: newOneDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
+  /// New two based FlexSchemeData.
+  static const FlexSchemeData newTwo = FlexSchemeData(
+    name: newTwoName,
+    description: newTwoDescription,
+    light: FlexSchemeColor(
+      primary: newTwoLightPrimary,
+      primaryVariant: newTwoLightPrimaryVariant,
+      secondary: newTwoLightSecondary,
+      secondaryVariant: newTwoLightSecondaryVariant,
+      appBarColor: newTwoLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: newTwoDarkPrimary,
+      primaryVariant: newTwoDarkPrimaryVariant,
+      secondary: newTwoDarkSecondary,
+      secondaryVariant: newTwoDarkSecondaryVariant,
+      appBarColor: newTwoDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
+  /// New three based FlexSchemeData.
+  static const FlexSchemeData newThree = FlexSchemeData(
+    name: newThreeName,
+    description: newThreeDescription,
+    light: FlexSchemeColor(
+      primary: newThreeLightPrimary,
+      primaryVariant: newThreeLightPrimaryVariant,
+      secondary: newThreeLightSecondary,
+      secondaryVariant: newThreeLightSecondaryVariant,
+      appBarColor: newThreeLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: newThreeDarkPrimary,
+      primaryVariant: newThreeDarkPrimaryVariant,
+      secondary: newThreeDarkSecondary,
+      secondaryVariant: newThreeDarkSecondaryVariant,
+      appBarColor: newThreeDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
   /// A [FlexScheme] enum to [FlexSchemeData] constant map.
   ///
   /// Contains pre-made ready to go nice dark and light [FlexSchemeColor]
@@ -2012,6 +2174,9 @@ class FlexColor {
     FlexScheme.espresso: espresso,
     FlexScheme.outerSpace: outerSpace,
     FlexScheme.blueWhale: blueWhale,
+    FlexScheme.newOne: newOne,
+    FlexScheme.newTwo: newTwo,
+    FlexScheme.newThree: newThree,
   };
 
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
@@ -2097,6 +2262,9 @@ class FlexColor {
     espresso,
     outerSpace,
     blueWhale,
+    newOne,
+    newTwo,
+    newThree
   ];
 }
 

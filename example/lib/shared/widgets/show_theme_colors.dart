@@ -95,12 +95,12 @@ class ShowThemeColors extends StatelessWidget {
           ThemeCard(
             label: 'Primary\nColor',
             color: theme.primaryColor,
-            textColor: theme.primaryTextTheme.subtitle1!.color ?? Colors.white,
+            textColor: colorScheme.onPrimary,
           ),
           ThemeCard(
             label: 'Primary\nColorDark',
             color: theme.primaryColorDark,
-            textColor: _onColor(theme.primaryColorDark),
+            textColor: colorScheme.onPrimary,
           ),
           ThemeCard(
             label: 'Primary\nColorLight',
@@ -125,12 +125,12 @@ class ShowThemeColors extends StatelessWidget {
           ThemeCard(
             label: 'Toggleable\nActive',
             color: theme.toggleableActiveColor,
-            textColor: _onColor(theme.toggleableActiveColor),
+            textColor: colorScheme.onSecondary,
           ),
           ThemeCard(
             label: 'Secondary\nVariant',
             color: colorScheme.secondaryVariant,
-            textColor: _onColor(colorScheme.secondaryVariant),
+            textColor: colorScheme.onSecondary,
           ),
           ThemeCard(
             label: 'AppBar',
@@ -175,12 +175,12 @@ class ShowThemeColors extends StatelessWidget {
           ThemeCard(
             label: 'Dialog',
             color: theme.dialogBackgroundColor,
-            textColor: _onColor(theme.dialogBackgroundColor),
+            textColor: colorScheme.onSurface,
           ),
           ThemeCard(
             label: 'Scaffold\nbackground$scaffoldTooHigh',
             color: theme.scaffoldBackgroundColor,
-            textColor: _onColor(theme.scaffoldBackgroundColor),
+            textColor: colorScheme.onBackground,
           ),
           ThemeCard(
             label: 'Error',

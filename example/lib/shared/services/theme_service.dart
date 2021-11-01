@@ -43,8 +43,8 @@ abstract class ThemeService {
   static const String keSchemeIndex = 'schemeIndex';
 
   /// Default value for the schemeIndex, also used to reset settings.
-  /// Defaults to 32, blue whale.
-  static const int defaultSchemeIndex = 32;
+  /// Defaults to 1, the first custom theme made in example 4 and 5.
+  static const int defaultSchemeIndex = 0;
 
   /// Loads used scheme index setting, in examples 4 and 5.
   Future<int> schemeIndex();

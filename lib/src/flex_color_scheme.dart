@@ -1700,6 +1700,11 @@ class FlexColorScheme with Diagnosticable {
             primary: effectiveColors.primary,
           );
 
+    // Get alpha blend values corresponding to used mode, level and brightness.
+    final _AlphaValues _blend = surfaceMode != null
+        ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.light)
+        : const _AlphaValues();
+
     // For the on colors we pass in the primary, secondary and surface colors to
     // calculate onColors for. If some onColors were passed in, we give
     // that value to it, if it was not null it will be used instead of the
@@ -1715,6 +1720,11 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface,
       onBackground: onBackground,
       onError: onError,
+      primaryAlpha: _blend.primaryAlpha,
+      secondaryAlpha: _blend.secondaryAlpha,
+      surfaceAlpha: _blend.surfaceAlpha,
+      backgroundAlpha: _blend.backgroundAlpha,
+      errorAlpha: _blend.errorAlpha,
     );
 
     // Get the effective app bar color based on the style and opacity.
@@ -2539,6 +2549,11 @@ class FlexColorScheme with Diagnosticable {
             primary: effectiveColors.primary,
           );
 
+    // Get alpha blend values corresponding to used mode, level and brightness.
+    final _AlphaValues _blend = surfaceMode != null
+        ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.dark)
+        : const _AlphaValues();
+
     // For the on colors we pass in the primary, secondary and surface colors to
     // calculate onColors for. If some onColors were passed in, we give
     // that value to it, if it was not null it will be used instead of the
@@ -2554,6 +2569,11 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface,
       onBackground: onBackground,
       onError: onError,
+      primaryAlpha: _blend.primaryAlpha,
+      secondaryAlpha: _blend.secondaryAlpha,
+      surfaceAlpha: _blend.surfaceAlpha,
+      backgroundAlpha: _blend.backgroundAlpha,
+      errorAlpha: _blend.errorAlpha,
     );
 
     // Determine effective surface color.
@@ -4236,6 +4256,10 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// The color of the [Scaffold] background.
   final Color scaffoldBackground;
 
+  // TODO(rydmike): Consider reverse alpha blends for on colors?
+  // The alpha value for the surface blend.
+  // final Color? surfaceAlpha;
+
   /// Create nuanced surface colors using pre-defined behavior via enum
   /// [FlexSurfaceMode] property `surfaceMode` or make totally custom color
   /// blended surfaces.
@@ -4327,7 +4351,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     // colors are used as fallback colors.
     final FlexSchemeColor scheme = schemeColors ??
         (isLight ? FlexColor.material.light : FlexColor.material.dark);
-
     // The color that should be blended into each surface, defaults to primary
     // color for all surfaces.
     FlexSchemeSurfaceColors blendColor = blendColors ??
@@ -4337,14 +4360,12 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           background: scheme.primary,
           scaffoldBackground: scheme.primary,
         );
-
     // Set dialog blend colors to secondary variant color for modes using it.
     if (surfaceMode == FlexSurfaceMode.lowScaffoldVariantDialog ||
         surfaceMode == FlexSurfaceMode.highScaffoldVariantDialog) {
       blendColor =
           blendColor.copyWith(dialogBackground: scheme.secondaryVariant);
     }
-
     // We get surface starting default colors via brightness and Material
     // default colors if it was not provided. It is normally provided when
     // making branded surfaces, but Material default colors are used as
@@ -4363,7 +4384,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
                 dialogBackground: FlexColor.materialDarkSurface,
               ));
-
     // If using `highBackground` or `highSurface` or `lowSurfaceHighScaffold`
     // and `_blendLevel` is zero, we use Material default surfaces.
     // This is the same style as used in versions before 4.0 when using
@@ -4411,93 +4431,10 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         }
       }
     }
-
-    // The default blend values for [FlexSurfaceMode.scaffoldSurfaceBackground]
-    // and starting point values for other modes. For simplicity we just mutate
-    // these values in other modes as needed for the mode further below.
-    //
-    // DEFAULTS: scaffold (1/3x) surface & dialog (1x) background (2x).
-    // Light and dark mode blend factor, dark mode uses less saturated colors
-    // and requires stronger blend percentage, we use 2x via _lightToDarkFactor.
-    final int _modeFactor = isLight ? 1 : _kLightToDarkFactor;
-    // The base alpha value for mixing our blend color into each surface (1x).
-    int _surfaceAlpha = _blendLevel * _modeFactor;
-    // Dialog alpha defaults to surface alpha (1x).
-    int _dialogAlpha = _surfaceAlpha;
-    // Background alpha defaults to (2x) surface alpha.
-    int _backgroundAlpha = _surfaceAlpha * 2;
-    // Scaffold background alpha defaults to (1/3x) of surface alpha.
-    int _scaffoldAlpha = _surfaceAlpha ~/ 3;
-
-    // In mode `highSurface`, change order of background and
-    // surface/dialog blend strengths compared to default and legacy
-    // `scaffoldSurfaceBackground` mode.
-    // Result: scaffold (1/3x) background (1x) surface & dialog (2x).
-    if (surfaceMode == FlexSurfaceMode.highSurface) {
-      _backgroundAlpha = _surfaceAlpha;
-      _surfaceAlpha = _surfaceAlpha * 2;
-      _dialogAlpha = _surfaceAlpha;
-    }
-
-    // Blend level for mode `lowSurfaceHighScaffold`. Change scaffold alpha
-    // Result: surface & dialog (1x) background (2x) scaffold (3x).
-    if (surfaceMode == FlexSurfaceMode.lowSurfaceHighScaffold) {
-      _scaffoldAlpha = _surfaceAlpha * 3;
-    }
-
-    // In mode `flat`, we use FlexColor default surface color on all surfaces.
-    if (surfaceMode == FlexSurfaceMode.flat) {
-      if (isLight) {
-        surface = const FlexSchemeSurfaceColors(
-          surface: FlexColor.lightSurface,
-          background: FlexColor.lightSurface,
-          scaffoldBackground: FlexColor.lightSurface,
-          dialogBackground: FlexColor.lightSurface,
-        );
-      } else {
-        surface = const FlexSchemeSurfaceColors(
-          surface: FlexColor.darkSurface,
-          background: FlexColor.darkSurface,
-          scaffoldBackground: FlexColor.darkSurface,
-          dialogBackground: FlexColor.darkSurface,
-        );
-      }
-      // The alpha blend level is equal for all surfaces in flat mode.
-      // Result: surface, dialog, background and scaffold (1x).
-      _dialogAlpha = _surfaceAlpha;
-      _backgroundAlpha = _surfaceAlpha;
-      _scaffoldAlpha = _surfaceAlpha;
-    }
-
-    // In mode `veryLowSurfaceHighScaffold` we use FlexColor
-    // default surface color on all surfaces.
-    if (surfaceMode == FlexSurfaceMode.veryLowSurfaceHighScaffold) {
-      if (isLight) {
-        surface = const FlexSchemeSurfaceColors(
-          surface: FlexColor.lightSurface,
-          background: FlexColor.lightSurface,
-          scaffoldBackground: FlexColor.lightSurface,
-          dialogBackground: FlexColor.lightSurface,
-        );
-      } else {
-        surface = const FlexSchemeSurfaceColors(
-          surface: FlexColor.darkSurface,
-          background: FlexColor.darkSurface,
-          scaffoldBackground: FlexColor.darkSurface,
-          dialogBackground: FlexColor.darkSurface,
-        );
-      }
-
-      // Result: Surface & dialogs(0.5x), background (1x), Scaffold (2x).
-      _backgroundAlpha = _surfaceAlpha;
-      _scaffoldAlpha = _surfaceAlpha * 2;
-      _surfaceAlpha = _surfaceAlpha ~/ 2;
-      _dialogAlpha = _surfaceAlpha;
-    }
-
-    // In mode `lowScaffold` and `lowScaffoldVariantDialog`, we use FlexColor
-    // default surface color on all surfaces.
-    if (surfaceMode == FlexSurfaceMode.lowScaffold ||
+    // In these modes we use FlexColor default surface color on all surfaces.
+    if (surfaceMode == FlexSurfaceMode.flat ||
+        surfaceMode == FlexSurfaceMode.veryLowSurfaceHighScaffold ||
+        surfaceMode == FlexSurfaceMode.lowScaffold ||
         surfaceMode == FlexSurfaceMode.lowScaffoldVariantDialog) {
       if (isLight) {
         surface = const FlexSchemeSurfaceColors(
@@ -4514,14 +4451,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           dialogBackground: FlexColor.darkSurface,
         );
       }
-      // Result: Surface, dialogs and background (1x), Scaffold (1/3x).
-      // The alpha on all elevated surfaces is the same.
-      _dialogAlpha = _surfaceAlpha;
-      _backgroundAlpha = _surfaceAlpha;
-      // Scaffold alpha is 1/3 of the other surfaces.
-      _scaffoldAlpha = _surfaceAlpha ~/ 3;
     }
-
     // In mode `highScaffold` and `highScaffoldVariantDialog`, we use FlexColor
     // default background color on all surfaces. The FlexColor background color
     // is slightly darker in dark mode and a bit off white in light mode,
@@ -4543,27 +4473,20 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           dialogBackground: FlexColor.darkBackground,
         );
       }
-      // Result: Surface, dialogs and background (1x), Scaffold (3x).
-      // The alpha on all elevated surfaces is the same.
-      _dialogAlpha = _surfaceAlpha;
-      _backgroundAlpha = _surfaceAlpha;
-      // Scaffold alpha is 3x of the other surfaces, creating more of a
-      // heavily colored primary colored scaffold background. This setup
-      // is typically used if you intend to always show content on the scaffold
-      // wrapped in eg a Card with less color branded background than the
-      // scaffold. This type of design is more common on web, than on phones.
-      _scaffoldAlpha = _surfaceAlpha * 3;
     }
-
+    // Get alpha blend values corresponding to used mode, level and brightness.
+    final _AlphaValues _blend =
+        _AlphaValues.getAlphas(surfaceMode, _blendLevel, brightness);
     // Return the computed and resulting surface colors.
     return FlexSchemeSurfaceColors(
-      surface: surface.surface.blendAlpha(blendColor.surface, _surfaceAlpha),
+      surface:
+          surface.surface.blendAlpha(blendColor.surface, _blend.surfaceAlpha),
       dialogBackground: surface.dialogBackground
-          .blendAlpha(blendColor.dialogBackground, _dialogAlpha),
+          .blendAlpha(blendColor.dialogBackground, _blend.dialogAlpha),
       background: surface.background
-          .blendAlpha(blendColor.background, _backgroundAlpha),
+          .blendAlpha(blendColor.background, _blend.backgroundAlpha),
       scaffoldBackground: surface.scaffoldBackground
-          .blendAlpha(blendColor.scaffoldBackground, _scaffoldAlpha),
+          .blendAlpha(blendColor.scaffoldBackground, _blend.scaffoldAlpha),
     );
   }
 
@@ -4864,6 +4787,8 @@ class FlexSchemeOnColors with Diagnosticable {
   /// A color that is clearly legible when drawn on error color.
   final Color onError;
 
+  // TODO(rydmike): Implement usage of alpha in OnColors
+  //
   /// Compute on colors for required primary, secondary, surface, background
   /// and error colors and returns a valid [FlexSchemeOnColors] with correct on
   /// colors for these colors.
@@ -4871,6 +4796,9 @@ class FlexSchemeOnColors with Diagnosticable {
   /// If an optional on color value is given as input, the value for that
   /// particular on color will be used instead of the computed on color value
   /// for the corresponding provided color.
+  ///
+  /// The factory can also alpha blend the onColor, with each color using an
+  /// optionally provided alpha blend level, that defaults to 0.
   factory FlexSchemeOnColors.from({
     required Color primary,
     required Color secondary,
@@ -4882,32 +4810,35 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? onSurface,
     Color? onBackground,
     Color? onError,
+    int primaryAlpha = 0,
+    int secondaryAlpha = 0,
+    int surfaceAlpha = 0,
+    int backgroundAlpha = 0,
+    int errorAlpha = 0,
   }) {
     // Check brightness of primary, secondary, error, surface and background
     // colors, then calculate appropriate colors for their onColors, if an
     // "on" color was not passed in, otherwise we just use its given color.
     final Color _onPrimary = onPrimary ??
         (ThemeData.estimateBrightnessForColor(primary) == Brightness.dark
-            ? Colors.white
-            : Colors.black);
+            ? Colors.white.blendAlpha(primary, primaryAlpha)
+            : Colors.black.blendAlpha(primary, primaryAlpha));
     final Color _onSecondary = onSecondary ??
         (ThemeData.estimateBrightnessForColor(secondary) == Brightness.dark
-            ? Colors.white
-            : Colors.black);
-    final Color _onError = onError ??
-        (ThemeData.estimateBrightnessForColor(error) == Brightness.dark
-            ? Colors.white
-            : Colors.black);
-
+            ? Colors.white.blendAlpha(secondary, secondaryAlpha)
+            : Colors.black.blendAlpha(secondary, secondaryAlpha));
     final Color _onSurface = onSurface ??
         (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
-            ? Colors.white
-            : Colors.black);
-
+            ? Colors.white.blendAlpha(surface, surfaceAlpha)
+            : Colors.black.blendAlpha(surface, surfaceAlpha));
     final Color _onBackground = onBackground ??
         (ThemeData.estimateBrightnessForColor(background) == Brightness.dark
-            ? Colors.white
-            : Colors.black);
+            ? Colors.white.blendAlpha(background, backgroundAlpha)
+            : Colors.black.blendAlpha(background, backgroundAlpha));
+    final Color _onError = onError ??
+        (ThemeData.estimateBrightnessForColor(error) == Brightness.dark
+            ? Colors.white.blendAlpha(error, errorAlpha)
+            : Colors.black.blendAlpha(error, errorAlpha));
 
     return FlexSchemeOnColors(
       onPrimary: _onPrimary,
@@ -4966,5 +4897,133 @@ class FlexSchemeOnColors with Diagnosticable {
     properties.add(ColorProperty('onSurface', onSurface));
     properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
+  }
+}
+
+// Private class to hold alpha values for a given FlexSurfaceMode blend mode
+// and blend level and static helper to compute the alpha blend values.
+@immutable
+class _AlphaValues {
+  const _AlphaValues({
+    this.primaryAlpha = 0,
+    this.secondaryAlpha = 0,
+    this.errorAlpha = 0,
+    this.surfaceAlpha = 0,
+    this.dialogAlpha = 0,
+    this.backgroundAlpha = 0,
+    this.scaffoldAlpha = 0,
+  });
+
+  /// Alpha blend value for primary color.
+  final int primaryAlpha;
+
+  /// Alpha blend value for primary color.
+  final int secondaryAlpha;
+
+  /// as on color for scaffold background color.
+  final int errorAlpha;
+
+  /// Alpha blend value for primary color.
+  final int surfaceAlpha;
+
+  /// Alpha blend value for primary color.
+  final int dialogAlpha;
+
+  /// Alpha blend value for primary color.
+  final int backgroundAlpha;
+
+  /// Alpha blend value for primary color.
+  final int scaffoldAlpha;
+
+  // Returns alpha values for a given blend level and blend mode and brightness.
+  static _AlphaValues getAlphas(
+    final FlexSurfaceMode mode,
+    final int blendLevel,
+    final Brightness brightness,
+  ) {
+    final int modeFactor =
+        brightness == Brightness.light ? 1 : _kLightToDarkFactor;
+    switch (mode) {
+      case FlexSurfaceMode.flat:
+      case FlexSurfaceMode.custom:
+        // Flat is all (1x)
+        return _AlphaValues(
+          primaryAlpha: blendLevel * modeFactor,
+          secondaryAlpha: blendLevel * modeFactor,
+          errorAlpha: blendLevel * modeFactor,
+          surfaceAlpha: blendLevel * modeFactor,
+          dialogAlpha: blendLevel * modeFactor,
+          backgroundAlpha: blendLevel * modeFactor,
+          scaffoldAlpha: blendLevel * modeFactor,
+        );
+      // Scaffold (1/3x) surface & dialog (1x) background (2x).
+      case FlexSurfaceMode.highBackground:
+        return _AlphaValues(
+          primaryAlpha: blendLevel * modeFactor,
+          secondaryAlpha: blendLevel * modeFactor,
+          errorAlpha: blendLevel * modeFactor,
+          surfaceAlpha: blendLevel * modeFactor,
+          dialogAlpha: blendLevel * modeFactor,
+          backgroundAlpha: blendLevel * modeFactor * 2,
+          scaffoldAlpha: blendLevel * modeFactor ~/ 3,
+        );
+      // Result: scaffold (1/3x) background (1x) surface & dialog (2x).
+      case FlexSurfaceMode.highSurface:
+        return _AlphaValues(
+          primaryAlpha: blendLevel * modeFactor,
+          secondaryAlpha: blendLevel * modeFactor,
+          errorAlpha: blendLevel * modeFactor,
+          surfaceAlpha: blendLevel * modeFactor * 2,
+          dialogAlpha: blendLevel * modeFactor * 2,
+          backgroundAlpha: blendLevel * modeFactor,
+          scaffoldAlpha: blendLevel * modeFactor ~/ 3,
+        );
+      // Result: Surface & dialogs(0.5x), background (1x), Scaffold (2x).
+      case FlexSurfaceMode.veryLowSurfaceHighScaffold:
+        return _AlphaValues(
+          primaryAlpha: blendLevel * modeFactor,
+          secondaryAlpha: blendLevel * modeFactor,
+          errorAlpha: blendLevel * modeFactor,
+          surfaceAlpha: blendLevel * modeFactor ~/ 2,
+          dialogAlpha: blendLevel * modeFactor ~/ 2,
+          backgroundAlpha: blendLevel * modeFactor,
+          scaffoldAlpha: blendLevel * modeFactor * 2,
+        );
+      // Result: surface & dialog (1x) background (2x) scaffold (3x).
+      case FlexSurfaceMode.lowSurfaceHighScaffold:
+        return _AlphaValues(
+          primaryAlpha: blendLevel * modeFactor,
+          secondaryAlpha: blendLevel * modeFactor,
+          errorAlpha: blendLevel * modeFactor,
+          surfaceAlpha: blendLevel * modeFactor,
+          dialogAlpha: blendLevel * modeFactor,
+          backgroundAlpha: blendLevel * modeFactor * 2,
+          scaffoldAlpha: blendLevel * modeFactor * 3,
+        );
+      // Result: Surface, dialogs and background (1x), Scaffold (1/3x).
+      case FlexSurfaceMode.lowScaffold:
+      case FlexSurfaceMode.lowScaffoldVariantDialog:
+        return _AlphaValues(
+          primaryAlpha: blendLevel * modeFactor,
+          secondaryAlpha: blendLevel * modeFactor,
+          errorAlpha: blendLevel * modeFactor,
+          surfaceAlpha: blendLevel * modeFactor,
+          dialogAlpha: blendLevel * modeFactor,
+          backgroundAlpha: blendLevel * modeFactor,
+          scaffoldAlpha: blendLevel * modeFactor ~/ 3,
+        );
+      // Result: Surface, dialogs and background (1x), Scaffold (3x).
+      case FlexSurfaceMode.highScaffold:
+      case FlexSurfaceMode.highScaffoldVariantDialog:
+        return _AlphaValues(
+          primaryAlpha: blendLevel * modeFactor,
+          secondaryAlpha: blendLevel * modeFactor,
+          errorAlpha: blendLevel * modeFactor,
+          surfaceAlpha: blendLevel * modeFactor,
+          dialogAlpha: blendLevel * modeFactor,
+          backgroundAlpha: blendLevel * modeFactor,
+          scaffoldAlpha: blendLevel * modeFactor * 3,
+        );
+    }
   }
 }

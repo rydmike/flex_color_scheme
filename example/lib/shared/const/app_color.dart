@@ -70,9 +70,9 @@ class AppColor {
     // to a list of FlexSchemeData, where we can bundle each light and dark
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
-      name: 'Toledo purple',
+      name: 'Custom1: Toledo purple',
       description:
-          'Purple theme, created from full custom defined color scheme.',
+          'Custom purple theme, created from full custom defined color scheme.',
       // FlexSchemeData holds separate defined color schemes for light and
       // matching dark theme colors. Dark theme colors typically need to be less
       // saturated versions of their than light counter parts. Using the same
@@ -82,16 +82,16 @@ class AppColor {
     ),
     // Do the same for our second custom scheme.
     FlexSchemeData(
-      name: 'Olive green',
-      description:
-          'Olive green theme, created from primary light and dark colors.',
+      name: 'Custom2 Olive green',
+      description: 'Custom olive green theme, created from primary '
+          'light and dark colors.',
       light: _myScheme2Light,
       dark: _myScheme2Dark,
     ),
     // We also do the same for our 3rd custom scheme, BUT we create its matching
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
-      name: 'Oregon orange',
+      name: 'Custom3: Oregon orange',
       description:
           'Custom orange and blue theme, from only light scheme colors.',
       light: _myScheme3Light,

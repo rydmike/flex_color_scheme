@@ -109,6 +109,15 @@ enum FlexScheme {
   /// Blue whale, jungle green and outrageous tango orange theme.
   blueWhale,
 
+  /// New one theme
+  newOne,
+
+  /// New two theme
+  newTwo,
+
+  /// New three theme
+  newThree,
+
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a `FlexColorScheme` based on a custom
   /// `FlexSchemeData` object. If not provided, it defaults to the
