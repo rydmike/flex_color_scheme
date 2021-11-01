@@ -1220,86 +1220,86 @@ class FlexColor {
   // The New one theme is based on...
 
   /// English name of the newOne theme.
-  static const String newOneName = 'New one';
+  static const String newOneName = 'New1: Roosewod';
 
   /// English description of the newOne theme.
-  static const String newOneDescription = 'New one.';
+  static const String newOneDescription = 'A draft theme...';
 
   /// Blue whale theme color for light primary color.
-  static const Color newOneLightPrimary = Color(0xFF023047);
+  static const Color newOneLightPrimary = Color(0xFF68000E);
 
   /// Blue whale theme color for light primary variant color.
-  static const Color newOneLightPrimaryVariant = Color(0xFF2A9D8F);
+  static const Color newOneLightPrimaryVariant = Color(0xFFDC7072);
 
   /// Blue whale theme color for light secondary color.
-  static const Color newOneLightSecondary = Color(0xFFF86541);
+  static const Color newOneLightSecondary = Color(0xFFE04B4B);
 
   /// Blue whale theme color for light secondary variant color.
-  static const Color newOneLightSecondaryVariant = Color(0xFFF07E24);
+  static const Color newOneLightSecondaryVariant = Color(0xFFFFECEB);
 
   /// Blue whale theme color for dark primary color.
-  static const Color newOneDarkPrimary = Color(0xFF57859D);
+  static const Color newOneDarkPrimary = Color(0xFFEA8787);
 
   /// Blue whale theme color for dark primary variant color.
-  static const Color newOneDarkPrimaryVariant = Color(0xFF50A399);
+  static const Color newOneDarkPrimaryVariant = Color(0xFFFFF2F1);
 
   /// Blue whale theme color for dark secondary color.
-  static const Color newOneDarkSecondary = Color(0xFFFF6E48);
+  static const Color newOneDarkSecondary = Color(0xFF9A565F);
 
   /// Blue whale theme color for dark secondary variant color.
-  static const Color newOneDarkSecondaryVariant = Color(0xFFED7F29);
+  static const Color newOneDarkSecondaryVariant = Color(0xFFE7A0A1);
 
   // The New two theme is based on...
 
   /// English name of the newTwo theme.
-  static const String newTwoName = 'New two';
+  static const String newTwoName = 'New2: Valencia Sands';
 
   /// English description of the newTwo theme.
-  static const String newTwoDescription = 'New two.';
+  static const String newTwoDescription = 'Another a draft theme...';
 
   /// Blue whale theme color for light primary color.
-  static const Color newTwoLightPrimary = Color(0xFF023047);
+  static const Color newTwoLightPrimary = Color(0xFFE04B4B);
 
   /// Blue whale theme color for light primary variant color.
-  static const Color newTwoLightPrimaryVariant = Color(0xFF2A9D8F);
+  static const Color newTwoLightPrimaryVariant = Color(0xFF8E0013);
 
   /// Blue whale theme color for light secondary color.
-  static const Color newTwoLightSecondary = Color(0xFFF86541);
+  static const Color newTwoLightSecondary = Color(0xFFE9C281);
 
   /// Blue whale theme color for light secondary variant color.
-  static const Color newTwoLightSecondaryVariant = Color(0xFFF07E24);
+  static const Color newTwoLightSecondaryVariant = Color(0xFFF3D7A7);
 
   /// Blue whale theme color for dark primary color.
-  static const Color newTwoDarkPrimary = Color(0xFF57859D);
+  static const Color newTwoDarkPrimary = Color(0xFFEDCE9B);
 
   /// Blue whale theme color for dark primary variant color.
-  static const Color newTwoDarkPrimaryVariant = Color(0xFF50A399);
+  static const Color newTwoDarkPrimaryVariant = Color(0xFFF5DFB9);
 
   /// Blue whale theme color for dark secondary color.
-  static const Color newTwoDarkSecondary = Color(0xFFFF6E48);
+  static const Color newTwoDarkSecondary = Color(0xFFEB8D8D);
 
   /// Blue whale theme color for dark secondary variant color.
-  static const Color newTwoDarkSecondaryVariant = Color(0xFFED7F29);
+  static const Color newTwoDarkSecondaryVariant = Color(0xFFEB7685);
 
   // The New three theme is based on...
 
   /// English name of the newThree theme.
-  static const String newThreeName = 'New three';
+  static const String newThreeName = 'New3 Blumine';
 
   /// English description of the newThree theme.
-  static const String newThreeDescription = 'New three.';
+  static const String newThreeDescription = 'A thrid draft theme...';
 
   /// Blue whale theme color for light primary color.
-  static const Color newThreeLightPrimary = Color(0xFF023047);
+  static const Color newThreeLightPrimary = Color(0xFF19647E);
 
   /// Blue whale theme color for light primary variant color.
-  static const Color newThreeLightPrimaryVariant = Color(0xFF2A9D8F);
+  static const Color newThreeLightPrimaryVariant = Color(0xFF119DA4);
 
   /// Blue whale theme color for light secondary color.
-  static const Color newThreeLightSecondary = Color(0xFFF86541);
+  static const Color newThreeLightSecondary = Color(0xFFFFC857);
 
   /// Blue whale theme color for light secondary variant color.
-  static const Color newThreeLightSecondaryVariant = Color(0xFFF07E24);
+  static const Color newThreeLightSecondaryVariant = Color(0xFF4B3F72);
 
   /// Blue whale theme color for dark primary color.
   static const Color newThreeDarkPrimary = Color(0xFF57859D);
@@ -1308,10 +1308,10 @@ class FlexColor {
   static const Color newThreeDarkPrimaryVariant = Color(0xFF50A399);
 
   /// Blue whale theme color for dark secondary color.
-  static const Color newThreeDarkSecondary = Color(0xFFFF6E48);
+  static const Color newThreeDarkSecondary = Color(0xFFFFD682);
 
   /// Blue whale theme color for dark secondary variant color.
-  static const Color newThreeDarkSecondaryVariant = Color(0xFFED7F29);
+  static const Color newThreeDarkSecondaryVariant = Color(0xFF797096);
 
   /// English name of the custom theme.
   static const String customName = 'Custom';

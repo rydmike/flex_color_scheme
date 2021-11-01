@@ -1716,6 +1716,7 @@ class FlexColorScheme with Diagnosticable {
     // calculate onColors for. If some onColors were passed in, we give
     // that value to it, if it was not null it will be used instead of the
     // calculated on color.
+    const int divN = 3; // Tuned to used less blend with onColors.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       secondary: effectiveColors.secondary,
@@ -1727,11 +1728,11 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface,
       onBackground: onBackground,
       onError: onError,
-      primaryAlpha: _blend.primaryAlpha,
-      secondaryAlpha: _blend.secondaryAlpha,
-      surfaceAlpha: _blend.surfaceAlpha,
-      backgroundAlpha: _blend.backgroundAlpha,
-      errorAlpha: _blend.errorAlpha,
+      primaryAlpha: _blend.primaryAlpha * 2 ~/ divN,
+      secondaryAlpha: _blend.secondaryAlpha * 2 ~/ divN,
+      surfaceAlpha: _blend.surfaceAlpha * 2 ~/ divN,
+      backgroundAlpha: _blend.backgroundAlpha * 2 ~/ divN,
+      errorAlpha: _blend.errorAlpha * 2 ~/ divN,
     );
 
     // Get the effective app bar color based on the style and opacity.
@@ -2572,6 +2573,7 @@ class FlexColorScheme with Diagnosticable {
     // calculate onColors for. If some onColors were passed in, we give
     // that value to it, if it was not null it will be used instead of the
     // calculated onColor.
+    const int divN = 3; // Tuned to used less blend with onColors.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       secondary: effectiveColors.secondary,
@@ -2583,11 +2585,11 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface,
       onBackground: onBackground,
       onError: onError,
-      primaryAlpha: _blend.primaryAlpha,
-      secondaryAlpha: _blend.secondaryAlpha,
-      surfaceAlpha: _blend.surfaceAlpha,
-      backgroundAlpha: _blend.backgroundAlpha,
-      errorAlpha: _blend.errorAlpha,
+      primaryAlpha: _blend.primaryAlpha * 2 ~/ divN,
+      secondaryAlpha: _blend.secondaryAlpha * 2 ~/ divN,
+      surfaceAlpha: _blend.surfaceAlpha * 2 ~/ divN,
+      backgroundAlpha: _blend.backgroundAlpha * 2 ~/ divN,
+      errorAlpha: _blend.errorAlpha * 2 ~/ divN,
     );
 
     // Determine effective surface color.
@@ -2799,7 +2801,7 @@ class FlexColorScheme with Diagnosticable {
   /// there is no convenient way to get rid of it. You can set the value
   /// to false, but that will just make the divider same color as your current
   /// nav bar background color to make it invisible, it is still there, but
-  /// still this implmentation trick works well.
+  /// still this implementation trick works well.
   ///
   /// Use and support for the [opacity] value on the system navigation bar
   /// is now supported starting from Flutter 2.5. This PR once it lands in
@@ -3429,7 +3431,7 @@ class FlexColorScheme with Diagnosticable {
       );
 
       final Color _headP = primaryIsDark
-          ? colorScheme.onPrimary.blend(colorScheme.primary, 15)
+          ? colorScheme.onPrimary.blend(colorScheme.primary, 30)
           : colorScheme.onPrimary.blend(colorScheme.primary, 10);
       final Color _mediumP = primaryIsDark
           ? colorScheme.onPrimary.blend(colorScheme.primary, 10)
@@ -3491,6 +3493,16 @@ class FlexColorScheme with Diagnosticable {
         appBarBrightness == Brightness.dark ? Colors.white : Colors.black87;
 
     if (useSubThemes && subTheme.blendTextTheme) {
+      // Get darker (in dark mode) or lighter (in light mode) of surface
+      // or background color.
+      final Color _bestSurface = isDark
+          ? (colorScheme.background.red > colorScheme.surface.red)
+              ? colorScheme.surface
+              : colorScheme.background
+          : (colorScheme.background.red < colorScheme.surface.red)
+              ? colorScheme.surface
+              : colorScheme.background;
+
       // Dark mode: TextTheme is light
       if (isDark) {
         if (appBarBrightness == Brightness.dark && !primaryIsDark) {
@@ -3503,8 +3515,10 @@ class FlexColorScheme with Diagnosticable {
           // Needs dark text color
           appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
         } else {
-          // Needs dark text color
-          appBarForeground = colorScheme.onSurface;
+          // In dark mode and app bar is light and primary is dark (light text)
+          // App bar needs dark text color, we have none in theme, we use
+          // background or surface, the darker one is used for better contrast.
+          appBarForeground = _bestSurface;
         }
         // Light mode: TextTheme is dark
       } else {
@@ -3719,7 +3733,7 @@ class FlexColorScheme with Diagnosticable {
       // The FlexColorScheme.from() factory constructor uses passed in a dialog
       // background color that is same as surface color or even any other color.
       // If using surface blends that are not equal for all Material surface
-      // backgrounds colors. Ther will be no elevation overlay color in dark
+      // backgrounds colors. There will be no elevation overlay color in dark
       // mode even if so requested.
       // Use dialogs with background color that equals theme
       // colorScheme.surface to ensure it gets elevation overlay color applied
@@ -3807,25 +3821,10 @@ class FlexColorScheme with Diagnosticable {
       // better. The FlexColorScheme implementation below has been changed to
       // use this new AppBarTheme feature from version 2.0.0-nullsafety.2
       appBarTheme: AppBarTheme(
-        // Use the defined appbar color for the theme
         backgroundColor: effectiveAppBarColor,
-
-        // TODO(rydmike): Test all the app bar colors
         foregroundColor: appBarForeground,
-        // appBarBrightness == Brightness.dark ? Colors.white : Colors.black,
-
-        // Define appropriate brightness on the icon themes
         iconTheme: IconThemeData(color: appBarIconColor),
-
-        // appBarBrightness == Brightness.dark
-        //     ? const IconThemeData(color: Colors.white)
-        //     : const IconThemeData(color: Colors.black87),
-
         actionsIconTheme: IconThemeData(color: appBarIconColor),
-
-        // appBarBrightness == Brightness.dark
-        //     ? const IconThemeData(color: Colors.white)
-        //     : const IconThemeData(color: Colors.black87),
         elevation: appBarElevation,
         systemOverlayStyle: SystemUiOverlayStyle(
           // AppBar overlay style.
@@ -3840,18 +3839,17 @@ class FlexColorScheme with Diagnosticable {
           statusBarIconBrightness: appBarBrightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
-
           // The systemNavigationBarColor used by default AppBar in SDK:
           systemNavigationBarColor: const Color(0xFF000000),
           // Would be nice if this worked instead of above, but it does not:
           // systemNavigationBarColor: isDark ? Colors.black : Colors.white;,
-
+          //
           // The systemNavigationBarIconBrightness used by the AppBar in SDK:
           systemNavigationBarIconBrightness: Brightness.dark,
           // Would be nice if this worked instead of above, but it does not:
           // systemNavigationBarIconBrightness:
           //     isDark ? Brightness.light : Brightness.dark,
-
+          //
           // The systemNavigationBarDividerColor used by default AppBar in SDK:
           systemNavigationBarDividerColor: null,
         ),
@@ -5119,7 +5117,7 @@ class _AlphaValues {
           backgroundAlpha: blendLevel * modeFactor,
           scaffoldAlpha: blendLevel * modeFactor ~/ 3,
         );
-      // Result: Surface & dialogs(0.5x), background (1x), Scaffold (2x).
+      // Result: Surface & dialogs(0.5x), background (1x), Scaffold (3x).
       case FlexSurfaceMode.veryLowSurfaceHighScaffold:
         return _AlphaValues(
           primaryAlpha: blendLevel * modeFactor,
@@ -5128,7 +5126,7 @@ class _AlphaValues {
           surfaceAlpha: blendLevel * modeFactor ~/ 2,
           dialogAlpha: blendLevel * modeFactor ~/ 2,
           backgroundAlpha: blendLevel * modeFactor,
-          scaffoldAlpha: blendLevel * modeFactor * 2,
+          scaffoldAlpha: blendLevel * modeFactor * 3,
         );
       // Result: surface & dialog (1x) background (2x) scaffold (3x).
       case FlexSurfaceMode.lowSurfaceHighScaffold:

@@ -12,23 +12,23 @@ class AppColor {
 
   // Create a custom flex scheme color for a light theme.
   static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
-    primary: Color(0xFF4E0028),
-    primaryVariant: Color(0xFF320019),
-    secondary: Color(0xFF003419),
-    secondaryVariant: Color(0xFF002411),
+    primary: Color(0xFF00296b),
+    primaryVariant: Color(0xFF003f88),
+    secondary: Color(0xFFfdc500),
+    secondaryVariant: Color(0xFFffd500),
     // The built in schemes use their secondary variant color as their
     // custom app bar color, but it can be any color. We use a custom color
     // here. We will see this in example 5 when using this theme and selecting
     // the custom app bar style.
-    appBarColor: Color(0xFF490B56),
+    appBarColor: Color(0xFFf95738),
   );
 // Create a corresponding custom flex scheme color for a dark theme.
   static const FlexSchemeColor _myScheme1Dark = FlexSchemeColor(
-    primary: Color(0xFF9E7389),
-    primaryVariant: Color(0xFF775C69),
-    secondary: Color(0xFF738F81),
-    secondaryVariant: Color(0xFF5C7267),
-    appBarColor: Color(0xFF2D0235),
+    primary: Color(0xff3d5176),
+    primaryVariant: Color(0xff2a609d),
+    secondary: Color(0xffceb972),
+    secondaryVariant: Color(0xFFffd500),
+    appBarColor: Color(0xffc76657),
   );
 
 // You can build a scheme the long way, by specifying all the required hand
@@ -45,9 +45,9 @@ class AppColor {
 // secondaryVariant color, this is default null behavior for custom app bar
 // color when using this factory.
   static final FlexSchemeColor _myScheme2Light =
-      FlexSchemeColor.from(primary: const Color(0xFF4C4E06));
+      FlexSchemeColor.from(primary: const Color(0xFF334617));
   static final FlexSchemeColor _myScheme2Dark =
-      FlexSchemeColor.from(primary: const Color(0xFF9D9E76));
+      FlexSchemeColor.from(primary: const Color(0xff869b45));
 
 // For our 3rd custom scheme we will define primary and secondary colors, but no
 // variant colors, we will not make any dark scheme definitions either, all
@@ -56,8 +56,8 @@ class AppColor {
 // `FlexSchemeColor` object. To make our dark colors for this light scheme, we
 // use the method `toDark` further below with the `_myScheme3Light` instance.
   static final FlexSchemeColor _myScheme3Light = FlexSchemeColor.from(
-    primary: const Color(0xFF993200),
-    secondary: const Color(0xFF1B5C62),
+    primary: const Color(0xFF001f54),
+    secondary: const Color(0xFFf18701),
   );
 
 // Finally we create a list with all color schemes we will use. Starting with
@@ -70,9 +70,9 @@ class AppColor {
     // to a list of FlexSchemeData, where we can bundle each light and dark
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
-      name: 'Custom1: Toledo purple',
+      name: 'Custom1: Midnight blue',
       description:
-          'Custom purple theme, created from full custom defined color scheme.',
+          'Midnight blue theme, created by defining all scheme colors.',
       // FlexSchemeData holds separate defined color schemes for light and
       // matching dark theme colors. Dark theme colors typically need to be less
       // saturated versions of their than light counter parts. Using the same
@@ -91,9 +91,9 @@ class AppColor {
     // We also do the same for our 3rd custom scheme, BUT we create its matching
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
-      name: 'Custom3: Oregon orange',
+      name: 'Custom3: Green Vogue',
       description:
-          'Custom orange and blue theme, from only light scheme colors.',
+          'Custom green and orange theme, from only light scheme colors.',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.
       dark: _myScheme3Light.toDark(),

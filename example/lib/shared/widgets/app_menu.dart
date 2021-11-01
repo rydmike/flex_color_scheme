@@ -140,11 +140,13 @@ class _SideItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData _theme = Theme.of(context);
-    final Color _itemSelectedColor =
-        _theme.colorScheme.onBackground.blend(_theme.colorScheme.primary, 50);
-    final Color _itemColor =
-        _theme.colorScheme.onBackground.blend(_theme.colorScheme.primary, 20);
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color itemSelectedColor = isLight
+        ? theme.colorScheme.onBackground.blend(theme.primaryColorDark, 60)
+        : theme.colorScheme.onBackground.blend(theme.colorScheme.primary, 50);
+    final Color itemColor =
+        theme.colorScheme.onBackground.blend(theme.colorScheme.primary, 20);
     if (width < 5) {
       return const SizedBox.shrink();
     } else {
@@ -160,7 +162,7 @@ class _SideItem extends StatelessWidget {
                 topRight: Radius.circular(50 / 2.0),
                 bottomRight: Radius.circular(50 / 2.0),
               ),
-              color: selected ? _theme.focusColor : Colors.transparent,
+              color: selected ? theme.focusColor : Colors.transparent,
               child: InkWell(
                 onTap: onTap,
                 child: SizedBox(
@@ -179,8 +181,8 @@ class _SideItem extends StatelessWidget {
                           ),
                           child: Icon(icon,
                               color: selected
-                                  ? _itemSelectedColor
-                                  : _itemColor.withOpacity(0.8)),
+                                  ? itemSelectedColor
+                                  : itemColor.withOpacity(0.8)),
                         ),
                         if (width < AppData.railWidth + 10)
                           const SizedBox.shrink()
@@ -188,10 +190,10 @@ class _SideItem extends StatelessWidget {
                           Text(
                             label,
                             style: selected
-                                ? _theme.textTheme.bodyText1!
-                                    .copyWith(color: _itemSelectedColor)
-                                : _theme.textTheme.bodyText1!.copyWith(
-                                    color: _itemColor.withOpacity(0.8)),
+                                ? theme.textTheme.bodyText1!
+                                    .copyWith(color: itemSelectedColor)
+                                : theme.textTheme.bodyText1!.copyWith(
+                                    color: itemColor.withOpacity(0.8)),
                           )
                       ],
                     ),
