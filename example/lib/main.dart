@@ -180,11 +180,11 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // New buttons use primary themed effects by default, this setting makes
   // the general ThemeData hover, focus, highlight and splash match that.
   // True by default when opting in on sub themes, but you can turn it off.
-  themedEffects: true,
+  interactionEffects: true,
   // Global corner radius. Default is 16, but make it whatever you like, even 0.
   // You can also override individual corner radius for each sub-theme to make
   // it different from the global `cornerRadius`.
-  cornerRadius: 16,
+  defaultRadius: 16,
   // Try eg. the one on the InputDecorator, commented below:
   // cornerRadiusInputDecoration: 8,
   // Select input decorator type, only SDK options outline and underline

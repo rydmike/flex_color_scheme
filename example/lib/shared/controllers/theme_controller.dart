@@ -1,5 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../services/theme_service.dart';
@@ -24,9 +25,11 @@ class ThemeController with ChangeNotifier {
   Future<void> loadAll() async {
     _themeMode = await _themeService.themeMode();
     _useSubThemes = await _themeService.useSubThemes();
+    _useTextTheme = await _themeService.useTextTheme();
     _usedScheme = await _themeService.usedScheme();
     _schemeIndex = await _themeService.schemeIndex();
-    _themedEffects = await _themeService.themedEffects();
+    _themedEffects = await _themeService.interactionEffects();
+    _useDefaultRadius = await _themeService.useDefaultRadius();
     _cornerRadius = await _themeService.cornerRadius();
     _inputDecoratorIsFilled = await _themeService.inputDecoratorIsFilled();
     _inputDecoratorBorderType = await _themeService.inputDecoratorBorderType();
@@ -57,6 +60,10 @@ class ThemeController with ChangeNotifier {
     _blendLightTextTheme = await _themeService.blendLightTextTheme();
     _blendDarkTextTheme = await _themeService.blendDarkTextTheme();
 
+    // Not using the ThemeService just a local toggle for platform, resets
+    // to actual default platform when settings are loaded.
+    _platform = defaultTargetPlatform;
+
     notifyListeners();
   }
 
@@ -67,9 +74,11 @@ class ThemeController with ChangeNotifier {
   Future<void> resetAllToDefaults() async {
     await setThemeMode(ThemeService.defaultThemeMode, false);
     await setUseSubThemes(ThemeService.defaultUseSubThemes, false);
+    await setUseTextTheme(ThemeService.defaultUseTextTheme, false);
     await setUsedScheme(ThemeService.defaultUsedScheme, false);
     await setSchemeIndex(ThemeService.defaultSchemeIndex, false);
-    await setThemedEffects(ThemeService.defaultThemedEffects, false);
+    await setInteractionEffects(ThemeService.defaultInteractionEffects, false);
+    await setUseDefaultRadius(ThemeService.defaultUseDefaultRadius, false);
     await setCornerRadius(ThemeService.defaultCornerRadius, false);
     await setInputDecoratorIsFilled(
         ThemeService.defaultInputDecoratorIsFilled, false);
@@ -105,6 +114,9 @@ class ThemeController with ChangeNotifier {
     await setBlendLightTextTheme(
         ThemeService.defaultBlendLightTextTheme, false);
     await setBlendDarkTextTheme(ThemeService.defaultBlendDarkTextTheme, false);
+
+    // Not using ThemeService, just a locally controlled toggle
+    await setPlatform(defaultTargetPlatform, false);
 
     notifyListeners();
   }
@@ -144,6 +156,16 @@ class ThemeController with ChangeNotifier {
     _useSubThemes = value;
     if (notify) notifyListeners();
     await _themeService.saveUseSubThemes(value);
+  }
+
+  late bool _useTextTheme;
+  bool get useTextTheme => _useTextTheme;
+  Future<void> setUseTextTheme(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useTextTheme) return;
+    _useTextTheme = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUseTextTheme(value);
   }
 
   late FlexScheme _usedScheme;
@@ -189,12 +211,22 @@ class ThemeController with ChangeNotifier {
 
   late bool _themedEffects;
   bool get themedEffects => _themedEffects;
-  Future<void> setThemedEffects(bool? value, [bool notify = true]) async {
+  Future<void> setInteractionEffects(bool? value, [bool notify = true]) async {
     if (value == null) return;
     if (value == _themedEffects) return;
     _themedEffects = value;
     if (notify) notifyListeners();
-    await _themeService.saveThemedEffects(value);
+    await _themeService.saveInteractionEffects(value);
+  }
+
+  late bool _useDefaultRadius;
+  bool get useDefaultRadius => _useDefaultRadius;
+  Future<void> setUseDefaultRadius(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useDefaultRadius) return;
+    _useDefaultRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUseDefaultRadius(value);
   }
 
   late double _cornerRadius;
@@ -441,5 +473,18 @@ class ThemeController with ChangeNotifier {
     _blendDarkTextTheme = value;
     if (notify) notifyListeners();
     await _themeService.saveBlendDarkTextTheme(value);
+  }
+
+  /// This is just a local controller properties for the Platform menu control.
+  /// It is used as input to the theme, but never persisted so it always
+  /// defaults to the actual target platform when starting the app.
+  /// Being able to toggle it during demos and development is a handy feature.
+  late TargetPlatform _platform;
+  TargetPlatform get platform => _platform;
+  Future<void> setPlatform(TargetPlatform? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _platform) return;
+    _platform = value;
+    if (notify) notifyListeners();
   }
 }

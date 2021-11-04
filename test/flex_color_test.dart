@@ -260,7 +260,7 @@ void main() {
     });
     test('FC5 colors Material default', () {
       expect(FlexColor.materialDescription,
-          'Default Material color theme, used in the design guide.');
+          'Default Material color theme, used in the design guide');
     });
     test('FC5 colors Material default', () {
       expect(FlexColor.materialLightPrimary, const Color(0xff6200ee));
@@ -291,7 +291,7 @@ void main() {
     });
     test('FC5 colors', () {
       expect(FlexColor.materialHcDescription,
-          'High contrast Material design guide theme.');
+          'High contrast Material design guide theme');
     });
     test('FC5 colors', () {
       expect(FlexColor.materialLightPrimaryHc, const Color(0xff0000ba));
@@ -324,7 +324,7 @@ void main() {
     });
     test('FC5 colors', () {
       expect(FlexColor.blueDescription,
-          'Blue color theme, based on Material blue and light blue colors.');
+          'Blue color theme, based on Material blue and light blue colors');
     });
     test('FC5 colors', () {
       expect(FlexColor.blueLightPrimary, const Color(0xFF1565C0));
@@ -357,7 +357,7 @@ void main() {
       expect(
           FlexColor.indigoDescription,
           'Indigo color theme, based on Material indigo and deep '
-          'purple colors.');
+          'purple colors');
     });
     test('FC5 colors', () {
       expect(FlexColor.indigoLightPrimary, const Color(0xFF303F9F));
@@ -388,7 +388,7 @@ void main() {
     });
     test('FC5 colors', () {
       expect(FlexColor.hippieBlueDescription,
-          'Hippie blue with surfie green and chock coral pink theme.');
+          'Hippie blue with surfie green and chock coral pink theme');
     });
     test('FC5 colors', () {
       expect(FlexColor.hippieBlueLightPrimary, const Color(0xFF4C9BBA));
@@ -420,7 +420,7 @@ void main() {
       expect(FlexColor.aquaBlueName, 'Aqua blue');
     });
     test('FC5 colors', () {
-      expect(FlexColor.aquaBlueDescription, 'Aqua tropical ocean blue theme.');
+      expect(FlexColor.aquaBlueDescription, 'Aqua tropical ocean blue theme');
     });
     test('FC5 colors', () {
       expect(FlexColor.aquaBlueLightPrimary, const Color(0xFF35A0CB));
@@ -452,7 +452,7 @@ void main() {
     });
     test('FC5 colors', () {
       expect(FlexColor.brandBlueDescription,
-          'Blue colors used in well known brand themes.');
+          'Blue colors used in well known brand themes');
     });
     test('FC5 colors', () {
       expect(FlexColor.brandBlueLightPrimary, const Color(0xFF3B5998));
@@ -483,7 +483,7 @@ void main() {
       expect(FlexColor.deepBlueName, 'Deep blue sea');
     });
     test('FC5 colors', () {
-      expect(FlexColor.deepBlueDescription, 'Dark deep blue sea color theme.');
+      expect(FlexColor.deepBlueDescription, 'Dark deep blue sea color theme');
     });
     test('FC5 colors', () {
       expect(FlexColor.deepBlueLightPrimary, const Color(0xFF223A5E));
@@ -516,7 +516,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.sakuraDescription,
-        'Pink color theme, based on sakura cherry blossom like colors.',
+        'Pink color theme, based on sakura cherry blossom like colors',
       );
     });
     test('FC5 colors', () {
@@ -550,7 +550,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.mandyRedDescription,
-        'Mandy red and Viking blue inspired red theme.',
+        'Mandy red and Viking blue inspired red theme',
       );
     });
     test('FC5 colors', () {
@@ -584,7 +584,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.redDescription,
-        'Red color theme, based on Material red and pink colors.',
+        'Red color theme, based on Material red and pink colors',
       );
     });
     test('FC5 colors', () {
@@ -618,7 +618,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.redWineDescription,
-        'Red color theme, based on red wine like colors.',
+        'Red color theme, based on red wine like colors',
       );
     });
     test('FC5 colors', () {
@@ -652,7 +652,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.purpleBrownDescription,
-        'Purple brown tinted aubergine and eggplant colored theme.',
+        'Purple brown tinted aubergine and eggplant colored theme',
       );
     });
     test('FC5 colors', () {
@@ -688,7 +688,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.moneyDescription,
-        'Green money and finance style color theme.',
+        'Green money and finance style color theme',
       );
     });
     test('FC5 colors', () {
@@ -722,7 +722,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.greenDescription,
-        'Green color theme, based on Material green and cyan colors.',
+        'Green color theme, based on Material green and cyan colors',
       );
     });
     test('FC5 colors', () {
@@ -756,7 +756,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.jungleDescription,
-        'Green jungle and rain forest color theme.',
+        'Green jungle and rain forest color theme',
       );
     });
     test('FC5 colors', () {
@@ -790,7 +790,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.greyLawDescription,
-        'Material blue grey and ultra dark purple color theme, law firm style.',
+        'Material blue grey and ultra dark purple color theme, law firm style',
       );
     });
     test('FC5 colors', () {
@@ -824,7 +824,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.wasabiDescription,
-        'Wild Willow and wasabi green with orchid purple inspired colors.',
+        'Wild Willow and wasabi green with orchid purple inspired colors',
       );
     });
     test('FC5 colors', () {
@@ -858,7 +858,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.goldDescription,
-        'Gold sunset color theme, based on orange like colors.',
+        'Gold sunset color theme, based on orange like colors',
       );
     });
     test('FC5 colors', () {
@@ -892,7 +892,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.mangoDescription,
-        'Orange and green Mango mojito color theme.',
+        'Orange and green Mango mojito color theme',
       );
     });
     test('FC5 colors', () {
@@ -927,7 +927,7 @@ void main() {
       expect(
         FlexColor.amberDescription,
         'Amber blaze and blue color theme, based on '
-        'Material amber and blue accent colors.',
+        'Material amber and blue accent colors',
       );
     });
     test('FC5 colors', () {
@@ -961,7 +961,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.vesuviusBurnDescription,
-        'Vesuvius burned orange and eden green theme.',
+        'Vesuvius burned orange and eden green theme',
       );
     });
     test('FC5 colors', () {
@@ -999,7 +999,7 @@ void main() {
       expect(
         FlexColor.deepPurpleDescription,
         'Deep purple daisy bush theme, '
-        'based on Material deepPurple and lightBlueAccent colors.',
+        'based on Material deepPurple and lightBlueAccent colors',
       );
     });
     test('FC5 colors', () {
@@ -1034,7 +1034,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.ebonyClayDescription,
-        'Ebony clay dark blue-grey and watercourse green colored theme.',
+        'Ebony clay dark blue-grey and watercourse green colored theme',
       );
     });
     test('FC5 colors', () {
@@ -1068,7 +1068,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.barossaDescription,
-        'Barossa red and cardin green colored theme.',
+        'Barossa red and cardin green colored theme',
       );
     });
     test('FC5 colors', () {
@@ -1102,7 +1102,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.sharkDescription,
-        'Shark grey and orange ecstasy colored theme.',
+        'Shark grey and orange ecstasy colored theme',
       );
     });
     test('FC5 colors', () {
@@ -1136,7 +1136,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.bigStoneDescription,
-        'Big stone blue and tulip tree yellow colored theme.',
+        'Big stone blue and tulip tree yellow colored theme',
       );
     });
     test('FC5 colors', () {
@@ -1170,7 +1170,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.damaskDescription,
-        'Damask red and lunar green colored theme.',
+        'Damask red and lunar green colored theme',
       );
     });
     test('FC5 colors', () {
@@ -1204,7 +1204,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.bahamaBlueDescription,
-        'Bahama blue and trinidad orange colored theme.',
+        'Bahama blue and trinidad orange colored theme',
       );
     });
     test('FC5 colors', () {
@@ -1239,7 +1239,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.mallardGreenDescription,
-        'Mallard green and Valencia pink colored theme.',
+        'Mallard green and Valencia pink colored theme',
       );
     });
     test('FC5 colors', () {
@@ -1276,7 +1276,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.espressoDescription,
-        'Espresso dark brown and crema colored theme.',
+        'Espresso dark brown and crema colored theme',
       );
     });
     test('FC5 colors', () {
@@ -1310,7 +1310,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.outerSpaceDescription,
-        'Outer space dark blue-grey and stage red theme.',
+        'Outer space dark blue-grey and stage red theme',
       );
     });
     test('FC5 colors', () {
@@ -1345,7 +1345,7 @@ void main() {
     test('FC5 colors', () {
       expect(
         FlexColor.blueWhaleDescription,
-        'Blue whale, jungle green and outrageous tango orange.',
+        'Blue whale, jungle green and outrageous tango orange',
       );
     });
     test('FC5 colors', () {

@@ -16,7 +16,9 @@ All notable changes to the **FlexColorScheme** package are documented here.
   in dark mode when using `darkIsTrueBlack` when using the new `surfaceMode`
   property. For more information see Flutter SDK
   issue [90353](https://github.com/flutter/flutter/issues/90353).
-
+* **Fix/Breaking**: From the color scheme English descriptions the sentence
+  end "." was removed from all description strings. If and when you want one, 
+  you can add it as needed.
  
 * **New:** Added a more flexible and powerful alpha blending feature for 
   surface and background colors. The new properties in the `FlexColorScheme` 
@@ -26,41 +28,57 @@ All notable changes to the **FlexColorScheme** package are documented here.
   The surface color blend style `surfaceStyle` is still default, and not yet
   deprecated, but may be so in later versions. It is not really needed anymore,
   but there was no major reason to break things by removing it either.
-* **New:** Major new feature; simple sub-theming of Flutter SDK UI widgets.  
-  * You can opt in on nice looking opinionated widget sub-themes with
-  `FlexColorScheme.useSubThemes` by setting it to true.
-  * You can also tweak these sub themes with quick and easy parameter 
-  values, defined via the `FlexSubThemesData` class, passed in to 
+* **New:** Major new feature; easy sub-theming of Flutter SDK UI widgets.  
+  * You can opt in on nice looking opinionated widget sub-themes by setting
+  `FlexColorScheme.useSubThemes` to true, it is false by default.
+  * The default settings for the sub-theme is inspired by 
+  [Material 3 design (M3)](https://m3.material.io/.) It mimics it to large extent 
+  when using default value sub-theme values and settings. The varying corner
+  radius is different per widget type. The new TextTheme Typography is also
+  included. All parts cannot be made to look exactly like M3 in Flutter when using
+  [Material 2 design (M2)](https://material.io/), but many parts 
+  can, and where possible the defaults try follow those values. You can of 
+  course override the default.
+  * You can tweak these sub themes with a number of parameters 
+  defined in the `FlexSubThemesData` class, passed to 
   `FlexColorScheme.subThemesData`.
-  * For example, `FlexSubThemesData` provides parameters for easy adjustment 
+  * The `FlexSubThemesData` class provides parameters for easy adjustment 
   of corner radius in Widgets that use `ShapeBorder` or decorations, that
-  support changing the Widget's corner radius. With the sub-themes enabled, you 
+  support changing the Widget's corner radius. With the sub themes enabled, you 
   can easily create a theme with a consistent corner radius on built-in 
   Flutter SDK UI widgets.
   * The widget sub-themes also harmonize a few other styles, e.g. `ToggleButtons`
   to match the standard buttons regarding size and design as far as possible.
   * In case you still use the old deprecated buttons, they also get 
   `ButtonThemeData` that as far as possible match the same style. 
-  * Via the sub-themes it is by default opted-in to also use a bit Material You
-  like coloring on the text style. This can also be opted out of, even if
-  otherwise opting in on sub-themes.
+  * Via the sub themes it is by default opted-in to also use a bit Material You
+  like coloring on the text styles. This can also be opted out of, even if
+  otherwise opting in on sub-themes, it is on by default when opting in on
+  sub themes.
 * **New:** Added `FlexThemeData` static extension on `ThemeData`. 
-  * Themes can now also be created with the new syntax
-  `FlexThemeData.light` and `FlexThemeData.dark`, instead of with 
+  * FlexColorScheme Themes can now also be created with the new syntax
+  `FlexThemeData.light` and `FlexThemeData.dark`, instead of using 
   `FlexColorScheme.light().toTheme` and `FlexColorScheme.dark().toTheme`. 
   * The `toTheme` method is still available and works as before. It will not
-    be deprecated. It is needed when making elaborate custom sub-themes beyond
-    what is offered when using `FlexColorScheme` based opt in sub-themes. 
-* **New:** Added `textTheme` and `primaryTextTHeme` properties to 
+    be deprecated. It is needed when making elaborate custom sub themes beyond
+    what is offered when using `FlexColorScheme` based opt-in sub themes. When 
+    you make custom sub themes yourself, you often need access to
+    the `ColorScheme` that is defined in current `FlexColorScheme()` instance. 
+    You can get it with `FlexColorScheme().toScheme`. Then use this 
+    this standard `ColorScheme` or any of its colors, in your custom sub theme 
+    definitions, that you then add with copyWith to your FlexColorScheme based 
+    theme, like `FlexColorScheme().toTheme.copyWith(..."your sub themes and  
+    other ThemeData over-rides here")`. 
+* **New:** Added `textTheme` and `primaryTextTheme` properties to 
   `FlexColorScheme` to enable easy setup of custom `TextThemes`, without the
    need to add a custom `TextTheme` via a `copyWith`, plus `merge` with the 
    default text theme.
 * **New:** Added `FlexColorScheme.dialogBackground` as a background surface 
   color that can be controlled and themed separately. 
 * **New:** Added `appBarOpacity` to `FlexColorScheme.light()` and `dark()`.
-  With it, you can apply themed opacity to the app bar color to whatever 
-  selected `FlexAppBarStyle` it is using.
-* **New:** On the `FlexColorScheme` factories `light` and `dark`, we exposed 
+  With it, you can apply themed opacity to the `AppBar` background color to  
+  the selected `FlexAppBarStyle` it is using.
+* **New:** On the `FlexColorScheme` factories `light` and `dark`, exposed 
   the `Color` properties `primary`, `primaryVariant`, `secondary`, 
   `sedondaryVariant`, `appBarBackground`, `dialogBackground` and `error`.
   They all default to null, but if provided they can be used as override values
@@ -81,8 +99,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
   
 * **New:** All `FlexSchemeData` objects in `FlexColor` are exposed as static 
   const objects, making them easy to pick and reuse as const objects 
-  individually in custom color scheme lists or as input to the `colors` property.
-  Previously only the individual color value definitions were exposed.
+  individually in custom color scheme lists, or as input to the `colors` 
+  property. Previously only the individual color value definitions were exposed.
 * **New:** Added convenience extension `.blendAlpha()` on `Color` 
   in `FlexColorExtensions`.
 
@@ -92,11 +110,6 @@ All notable changes to the **FlexColorScheme** package are documented here.
   `FlexThemeModeButtonOrder` that you can use to define the order of its
   light, system and dark theme mode buttons, in all possible combinations.
 
-
-* **Change:** The `FlexColor.schemesList` is now a `const` for improved
-  efficiency.
-
-
 * **New:** Added edgeToEdge support to
   `FlexColorScheme.themedSystemNavigationBar`. This brings the previously 
    experimental support for transparent system navigation bar in Android 
@@ -105,6 +118,10 @@ All notable changes to the **FlexColorScheme** package are documented here.
    Android setup shenanigans. No added APIs, the API for it already existed
    in previous version of FlexColorScheme, using it did however require 
    special Android build configuration setup, this is no longer required.
+
+
+* **Change:** The `FlexColor.schemesList` is now a `const` for improved
+  efficiency.
 
 
 * **TODO New color schemes:** Added four new built-in color schemes.

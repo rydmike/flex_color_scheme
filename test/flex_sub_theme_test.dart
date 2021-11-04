@@ -127,7 +127,7 @@ void main() {
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(16),
+                Radius.circular(12),
               ),
             ),
           ),
@@ -166,7 +166,7 @@ void main() {
             elevation: 10,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(16),
+                Radius.circular(28),
               ),
             ),
           ),
@@ -200,10 +200,10 @@ void main() {
         FlexSubThemes.popupMenuTheme(),
         equals(
           const PopupMenuThemeData(
-            elevation: 2,
+            elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(16),
+                Radius.circular(10),
               ),
             ),
           ),
@@ -239,17 +239,17 @@ void main() {
           TimePickerThemeData(
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(16),
+                Radius.circular(28),
               ),
             ),
             hourMinuteShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(16),
+                Radius.circular(12),
               ),
             ),
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(16),
+                Radius.circular(12),
               ),
             ),
             inputDecorationTheme: const InputDecorationTheme().copyWith(
@@ -269,39 +269,41 @@ void main() {
         equals(
           InputDecorationTheme(
             filled: true,
-            fillColor: colorScheme.primary.withOpacity(0.06),
-            hoverColor: colorScheme.primary.withOpacity(0.05),
-            focusColor: colorScheme.primary.withOpacity(0.15),
+            fillColor: colorScheme.primary.withAlpha(0x0F),
+            hoverColor: colorScheme.primary.withAlpha(0x0D),
+            focusColor: colorScheme.primary.withAlpha(0x26),
             focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide(
                 color: colorScheme.primary,
                 width: 2,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide(
-                color: colorScheme.primary.withOpacity(0.65),
+                color: colorScheme.primary.withAlpha(0xA7),
                 width: 1.5,
               ),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide(
-                color: colorScheme.onSurface.withOpacity(0.12),
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .withAlpha(0x31),
                 width: 1.5,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide(
                 color: colorScheme.error,
                 width: 2,
               ),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide(
                 color: colorScheme.error,
                 width: 1.5,
@@ -324,13 +326,13 @@ void main() {
         equals(
           InputDecorationTheme(
             filled: true,
-            fillColor: colorScheme.primary.withOpacity(0.06),
-            hoverColor: colorScheme.primary.withOpacity(0.05),
-            focusColor: colorScheme.primary.withOpacity(0.15),
+            fillColor: colorScheme.primary.withAlpha(0x0F),
+            hoverColor: colorScheme.primary.withAlpha(0x0D),
+            focusColor: colorScheme.primary.withAlpha(0x26),
             focusedBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
               ),
               borderSide: BorderSide(
                 color: colorScheme.primary,
@@ -339,11 +341,11 @@ void main() {
             ),
             enabledBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
               ),
               borderSide: BorderSide(
-                color: colorScheme.primary.withOpacity(0.65),
+                color: colorScheme.primary.withAlpha(0xA7),
                 width: 1.5,
               ),
             ),
@@ -353,14 +355,16 @@ void main() {
                 topRight: Radius.circular(16),
               ),
               borderSide: BorderSide(
-                color: colorScheme.onSurface.withOpacity(0.12),
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .withAlpha(0x31),
                 width: 1.5,
               ),
             ),
             focusedErrorBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
               ),
               borderSide: BorderSide(
                 color: colorScheme.error,
@@ -369,8 +373,8 @@ void main() {
             ),
             errorBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
               ),
               borderSide: BorderSide(
                 color: colorScheme.error,
@@ -397,19 +401,22 @@ void main() {
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              minimumSize: const Size(46, 46),
+              minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(16),
+                  Radius.circular(20),
                 ),
               ), //buttonShape,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              // TODO(rydmike) padding under review
+              // padding: const EdgeInsets.symmetric(horizontal: 16),
               elevation: 0,
             ).copyWith(
               foregroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.onSurface.withOpacity(0.38);
+                    return colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
                   }
                   return colorScheme.onPrimary;
                 },
@@ -417,7 +424,9 @@ void main() {
               backgroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.onSurface.withOpacity(0.12);
+                    return colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x31);
                   }
                   return colorScheme.primary;
                 },
@@ -425,13 +434,13 @@ void main() {
               overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.onPrimary.withOpacity(0.05);
+                    return colorScheme.onPrimary.withAlpha(0x0D);
                   }
                   if (states.contains(MaterialState.focused)) {
-                    return colorScheme.onPrimary.withOpacity(0.15);
+                    return colorScheme.onPrimary.withAlpha(0x26);
                   }
                   if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.onPrimary.withOpacity(0.2);
+                    return colorScheme.onPrimary.withAlpha(0x33);
                   }
                   return Colors.transparent;
                 },
@@ -450,7 +459,8 @@ void main() {
         FlexSubThemes.elevatedButtonTheme(
                 colorScheme: colorScheme,
                 elevation: 1,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                // TODO(rydmike): Review if padding really needed.
+                // padding: const EdgeInsets.symmetric(horizontal: 8),
                 minButtonSize: const Size(50, 50),
                 radius: 10)
             .toString(),
@@ -463,13 +473,15 @@ void main() {
                   Radius.circular(10),
                 ),
               ), //buttonShape,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              // padding: const EdgeInsets.symmetric(horizontal: 8),
               elevation: 1,
             ).copyWith(
               foregroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.onSurface.withOpacity(0.38);
+                    return colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
                   }
                   return colorScheme.onPrimary;
                 },
@@ -477,7 +489,9 @@ void main() {
               backgroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.onSurface.withOpacity(0.12);
+                    return colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x31);
                   }
                   return colorScheme.primary;
                 },
@@ -485,13 +499,13 @@ void main() {
               overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.onPrimary.withOpacity(0.05);
+                    return colorScheme.onPrimary.withAlpha(0x0D);
                   }
                   if (states.contains(MaterialState.focused)) {
-                    return colorScheme.onPrimary.withOpacity(0.15);
+                    return colorScheme.onPrimary.withAlpha(0x26);
                   }
                   if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.onPrimary.withOpacity(0.2);
+                    return colorScheme.onPrimary.withAlpha(0x33);
                   }
                   return Colors.transparent;
                 },
@@ -510,10 +524,10 @@ void main() {
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
-              minimumSize: const Size(46, 46),
+              minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(16),
+                  Radius.circular(20),
                 ),
               ), //buttonShape,
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -521,7 +535,9 @@ void main() {
               foregroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.onSurface.withOpacity(0.38);
+                    return colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
                   }
                   return colorScheme.primary;
                 },
@@ -529,13 +545,13 @@ void main() {
               overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.05);
+                    return colorScheme.primary.withAlpha(0x0D);
                   }
                   if (states.contains(MaterialState.focused)) {
-                    return colorScheme.primary.withOpacity(0.15);
+                    return colorScheme.primary.withAlpha(0x26);
                   }
                   if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.primary.withOpacity(0.2);
+                    return colorScheme.primary.withAlpha(0x33);
                   }
                   return Colors.transparent;
                 },
@@ -544,7 +560,9 @@ void main() {
                 (final Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
                     return BorderSide(
-                      color: colorScheme.onSurface.withOpacity(0.12),
+                      color: colorScheme.primary
+                          .blendAlpha(colorScheme.onSurface, 0x66)
+                          .withAlpha(0x31),
                       width: 1.5,
                     );
                   }
@@ -561,7 +579,7 @@ void main() {
                     );
                   }
                   return BorderSide(
-                    color: colorScheme.primary.withOpacity(0.65),
+                    color: colorScheme.primary.withAlpha(0xA7),
                     width: 1.5,
                   );
                 },
@@ -580,24 +598,34 @@ void main() {
         equalsIgnoringHashCodes(
           TextButtonThemeData(
             style: TextButton.styleFrom(
-              minimumSize: const Size(46, 46),
+              minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(16),
+                  Radius.circular(20),
                 ),
               ), // buttonShape,
               padding: const EdgeInsets.symmetric(horizontal: 16),
             ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.primary;
+                },
+              ),
               overlayColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.05);
+                    return colorScheme.primary.withAlpha(0x0D);
                   }
                   if (states.contains(MaterialState.focused)) {
-                    return colorScheme.primary.withOpacity(0.15);
+                    return colorScheme.primary.withAlpha(0x26);
                   }
                   if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.primary.withOpacity(0.2);
+                    return colorScheme.primary.withAlpha(0x33);
                   }
                   return Colors.transparent;
                 },
@@ -616,25 +644,32 @@ void main() {
         equals(
           ButtonThemeData(
             colorScheme: colorScheme,
-            minWidth: 46,
-            height: 46,
-            hoverColor:
-                colorScheme.primary.blend(Colors.white, 25).withOpacity(0.1),
-            focusColor:
-                colorScheme.primary.blend(Colors.white, 30).withOpacity(0.3),
-            highlightColor:
-                colorScheme.primary.blend(Colors.white, 25).withOpacity(0.1),
-            splashColor:
-                colorScheme.primary.blend(Colors.white, 35).withOpacity(0.2),
-            disabledColor: colorScheme.onSurface.withOpacity(0.12),
+            minWidth: 40,
+            height: 40,
+            // TODO(rydmike): Review padding!
+            // padding: const EdgeInsets.symmetric(horizontal: 16),
+            hoverColor: colorScheme.primary
+                .blendAlpha(Colors.white, 0x40)
+                .withAlpha(0x19),
+            focusColor: colorScheme.primary
+                .blendAlpha(Colors.white, 0x4C)
+                .withAlpha(0x4C),
+            highlightColor: colorScheme.primary
+                .blendAlpha(Colors.white, 0x40)
+                .withAlpha(0x19),
+            splashColor: colorScheme.primary
+                .blendAlpha(Colors.white, 0x1F)
+                .withAlpha(0x33),
+            disabledColor: colorScheme.primary
+                .blendAlpha(colorScheme.onSurface, 0x66)
+                .withAlpha(0x31),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(16),
+                Radius.circular(20),
               ),
             ),
             textTheme: ButtonTextTheme.primary,
             materialTapTargetSize: MaterialTapTargetSize.padded,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
           ),
         ),
       );
@@ -650,29 +685,108 @@ void main() {
         equals(
           ToggleButtonsThemeData(
             borderWidth: 1.5,
-            selectedColor: colorScheme.onPrimary.withOpacity(0.8),
+            selectedColor: colorScheme.onPrimary.withAlpha(0xCC),
             color: colorScheme.primary,
-            fillColor: colorScheme.primary.blend(Colors.white, 15),
-            borderColor: colorScheme.primary.withOpacity(0.65),
-            selectedBorderColor: colorScheme.primary.blend(Colors.white, 15),
+            fillColor: colorScheme.primary.blendAlpha(Colors.white, 0x26),
+            borderColor: colorScheme.primary.withAlpha(0xA7),
+            selectedBorderColor:
+                colorScheme.primary.blendAlpha(Colors.white, 0x26),
             hoverColor: colorScheme.primary
-                .blend(Colors.white, 25 + 15)
-                .withOpacity(0.1),
+                .blendAlpha(Colors.white, 0x40 + 0x26)
+                .withAlpha(0x19),
             focusColor: colorScheme.primary
-                .blend(Colors.white, 30 + 15)
-                .withOpacity(0.3),
+                .blendAlpha(Colors.white, 0x4C + 0x26)
+                .withAlpha(0x4C),
             highlightColor: colorScheme.primary
-                .blend(Colors.white, 25 + 15)
-                .withOpacity(0.1),
+                .blendAlpha(Colors.white, 0x40 + 0x26)
+                .withAlpha(0x19),
             splashColor: colorScheme.primary
-                .blend(Colors.white, 35 + 15)
-                .withOpacity(0.2),
-            disabledColor: colorScheme.onSurface.withOpacity(0.38),
-            disabledBorderColor: colorScheme.onSurface.withOpacity(0.12),
-            borderRadius: BorderRadius.circular(16),
+                .blendAlpha(Colors.white, 0x1F + 0x26)
+                .withAlpha(0x33),
+            disabledColor: colorScheme.primary
+                .blendAlpha(colorScheme.onSurface, 0x66)
+                .withAlpha(0x5E),
+            disabledBorderColor: colorScheme.primary
+                .blendAlpha(colorScheme.onSurface, 0x66)
+                .withAlpha(0x31),
+            borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
-              minWidth: 46 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
-              minHeight: 46 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
+              minWidth: 40 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
+              minHeight: 40 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.14: GIVEN a default FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same values', () {
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(),
+        equals(
+          const FloatingActionButtonThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.14b: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same values', () {
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          radius: 30,
+        ),
+        equals(
+          const FloatingActionButtonThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(30),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.15: GIVEN a default FlexSubTheme.chipTheme() '
+        'EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final TextTheme textTheme =
+          Typography.material2018(platform: TargetPlatform.android).black;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          labelStyle: textTheme.button!,
+        ),
+        equals(
+          ChipThemeData(
+            brightness: Brightness.dark,
+            padding: const EdgeInsets.all(4),
+            labelStyle:
+                textTheme.button!.copyWith(color: const Color(0xff310077)),
+            secondaryLabelStyle:
+                textTheme.button!.copyWith(color: const Color(0xff310077)),
+            backgroundColor: const Color(0xffdfccfb),
+            deleteIconColor: const Color(0xff6200ee),
+            disabledColor: const Color(0x313a008e),
+            selectedColor: const Color(0xffbe96f8),
+            secondarySelectedColor: const Color(0xffbe96f8),
+            checkmarkColor: const Color(0xff310077),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
             ),
           ),
         ),

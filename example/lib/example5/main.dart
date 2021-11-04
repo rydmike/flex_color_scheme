@@ -115,37 +115,77 @@ class DemoApp extends StatelessWidget {
                         themeController.tooltipsMatchBackground,
                     // Swap primary and secondary colors
                     swapColors: themeController.swapLightColors,
+                    // Opt in/out of using the new sub v4 sub themes.
                     useSubThemes: themeController.useSubThemes,
+                    // Modify these const values in the AppData class.
                     visualDensity: AppData.visualDensity,
-                    fontFamily: AppData.font,
-                    textTheme: AppData.textTheme,
-                    primaryTextTheme: AppData.textTheme,
-                    // Add some quick and easy options for sub-themes.
+                    // Use a custom font from Google fonts.
+                    // fontFamily: AppData.font,
+                    // fontFamily: 'Roboto',
+                    // The platform can be toggled in the app, but not saved.
+                    platform: themeController.platform,
+                    // TODO: put me back
+                    // textTheme: AppData.textTheme,
+                    // primaryTextTheme: AppData.textTheme,
+                    // Add some some options to modify the sub-themes, there
+                    // are more controls, here we use:
                     subThemesData: FlexSubThemesData(
-                      cornerRadius: themeController.cornerRadius,
-                      themedEffects: themeController.themedEffects,
+                      // Opt-in out of ne M3 text theme.
+                      useTextTheme: themeController.useTextTheme,
+                      // Slider to adjust themed border radius on widgets with
+                      // an adjustable corner rounding, this one is darn handy,
+                      // but if null, it default tho Material3 (You) design
+                      // guide values, when they are known from the new guide.
+                      defaultRadius: themeController.useDefaultRadius
+                          ? null
+                          : themeController.cornerRadius,
+                      // Want color themed hover, focus, highlight and splash?
+                      // Keep this one on.
+                      interactionEffects: themeController.themedEffects,
+                      // Themed opacity of bottom navigation bar.
                       bottomNavigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
+                      // Elevation of bottom navigation bar.
                       bottomNavigationBarElevation:
                           themeController.bottomNavigationBarElevation,
+                      // Text input field uses a themed fill color.
                       inputDecoratorIsFilled:
                           themeController.inputDecoratorIsFilled,
+                      // Do you like underline or outline border type?
+                      // We we could add some new styles in a future update.
                       inputDecoratorBorderType:
                           themeController.inputDecoratorIsOutlinedBorder,
+                      // Only want a border when the text input has focus
+                      // or error, set this to false. By default it always
+                      // has a border of selected style.
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
+                      // True gives a very light hint of primary color also to
+                      // onColors for onSurface, onBackground and onError.
+                      // It is on by default, the chosen effect is very subtle
+                      // even at highest blend levels. On by default.
                       blendOnColors: themeController.blendLightOnColors,
+                      // By default sub themes mode also opts-in for using
+                      // colored text for the themed text, like Material3/You.
+                      // These colors will likely change a bit later releases
+                      // when we get Material3 support in Flutter.
+                      // This already works very well tough. If you plan to
+                      // put text on surfaces that are not primary color tinted
+                      // or primary colored, then you may need to turn this
+                      // off, or make custom text themes for those surfaces.
+                      // Material3 has containers with matching text color
+                      // tints, can't do that yet with only Themes in Flutter.
                       blendTextTheme: themeController.blendLightTextTheme,
+                      // Set some opacity on popup menu.
+                      popupMenuOpacity: 0.97,
                     ),
                   )
                 // Here we are NOT using FlexThemeData. We use the default
-                // ThemeData.from method, to see the differences.
+                // ThemeData.from method, just to see the differences.
                 : ThemeData.from(
                     textTheme: ThemeData(
                       brightness: Brightness.light,
                       fontFamily: AppData.font,
-                      textTheme: AppData.textTheme,
-                      primaryTextTheme: AppData.textTheme,
                     ).textTheme,
                     colorScheme: FlexColorScheme.light(
                       colors:
@@ -157,7 +197,7 @@ class DemoApp extends StatelessWidget {
                   ).copyWith(
                     visualDensity: AppData.visualDensity,
                     typography: Typography.material2018(
-                      platform: defaultTargetPlatform,
+                      platform: themeController.platform,
                     ),
                   ),
             // We do the exact same definition for the dark theme, but using
@@ -188,12 +228,17 @@ class DemoApp extends StatelessWidget {
                     darkIsTrueBlack: themeController.darkIsTrueBlack,
                     useSubThemes: themeController.useSubThemes,
                     visualDensity: AppData.visualDensity,
-                    fontFamily: AppData.font,
-                    textTheme: AppData.textTheme,
-                    primaryTextTheme: AppData.textTheme,
+                    // fontFamily: AppData.font,
+                    // TODO: put me back
+                    // textTheme: AppData.textTheme,
+                    // primaryTextTheme: AppData.textTheme,
+                    platform: themeController.platform,
                     subThemesData: FlexSubThemesData(
-                      cornerRadius: themeController.cornerRadius,
-                      themedEffects: themeController.themedEffects,
+                      useTextTheme: themeController.useTextTheme,
+                      defaultRadius: themeController.useDefaultRadius
+                          ? null
+                          : themeController.cornerRadius,
+                      interactionEffects: themeController.themedEffects,
                       bottomNavigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
                       bottomNavigationBarElevation:
@@ -206,6 +251,7 @@ class DemoApp extends StatelessWidget {
                           themeController.inputDecoratorUnfocusedHasBorder,
                       blendOnColors: themeController.blendDarkOnColors,
                       blendTextTheme: themeController.blendDarkTextTheme,
+                      popupMenuOpacity: 0.95,
                     ),
                   )
                 // Here we are NOT using FlexThemeData. We use the default
@@ -214,8 +260,6 @@ class DemoApp extends StatelessWidget {
                     textTheme: ThemeData(
                       brightness: Brightness.dark,
                       fontFamily: AppData.font,
-                      textTheme: AppData.textTheme,
-                      primaryTextTheme: AppData.textTheme,
                     ).textTheme,
                     colorScheme: FlexColorScheme.dark(
                       colors: themeController.useToDarkMethod
@@ -231,7 +275,7 @@ class DemoApp extends StatelessWidget {
                   ).copyWith(
                     visualDensity: AppData.visualDensity,
                     typography: Typography.material2018(
-                      platform: defaultTargetPlatform,
+                      platform: themeController.platform,
                     ),
                   ),
             // Use the dark or light theme based on controller setting.

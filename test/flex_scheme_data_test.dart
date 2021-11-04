@@ -222,7 +222,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeData#00000(name: "Material default", description: "Default Material color theme, used in the design guide.", light: FlexSchemeColor#1b048(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020)), dark: FlexSchemeColor#74195(primary: Color(0xffbb86fc), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff03dac6), appBarColor: Color(0xff03dac6), error: Color(0xffcf6679)))'));
+              'FlexSchemeData#00000(name: "Material default", description: "Default Material color theme, used in the design guide", light: FlexSchemeColor#1b048(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020)), dark: FlexSchemeColor#74195(primary: Color(0xffbb86fc), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff03dac6), appBarColor: Color(0xff03dac6), error: Color(0xffcf6679)))'));
     });
     test(
         'FSD1.12: Test toStringShort implemented via debugFillProperties '
@@ -236,7 +236,7 @@ void main() {
     // This happens to always equal now in tests, if it start failing, test
     // 13c is actually enough.
     test('FSD1.13b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 370677927);
+      expect(m1.hashCode, 275401919);
     });
     test('FSD1.13c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));

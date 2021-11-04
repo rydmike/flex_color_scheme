@@ -2714,13 +2714,111 @@ class FlexColorScheme with Diagnosticable {
 
   //****************************************************************************
   //
-  // STATIC HELPER FUNCTIONS
+  // STATIC HELPER FUNCTIONS AND CONSTANTS
   //
+  //  * flexTextTheme - M3 like text theme, font size wise.
   //  * comfortablePlatformDensity
   //  * themedSystemNavigationBar
   //  * createPrimarySwatch
   //
   //****************************************************************************
+
+  /// A Material 3 guide like text theme.
+  ///
+  /// This is used by the sub-themes opt-in toggle to by default make the
+  /// TextTHeme match Material phone size themes. This is done as far as it
+  /// can easily be defined within the constraint of Flutter SDK and its set
+  /// of Material 1 and Material 2 typography.
+  ///
+  /// https://m3.material.io/styles/typography/overview
+  /// Also see:
+  /// https://github.com/flutter/flutter/issues/89853
+  ///
+  /// The default text when opting in on sub themes, can also be turned off
+  /// when opted in by setting [FlexSubThemesData.useTextTheme] to false.
+  static const TextTheme m3TextTheme = TextTheme(
+    // M3 Display Large. In Material2018 Typography: 96, w300, -1.5
+    headline1: TextStyle(
+      fontSize: 57,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+    ),
+    // M3 Display Medium. In Material2018 Typography: 60, w300, -0.5
+    headline2: TextStyle(
+      fontSize: 45,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+    ),
+    // M3 Display Small. In Material2018 Typography: 48, w400, 0
+    headline3: TextStyle(
+      fontSize: 36,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+    ),
+    // M3 Headline Medium. In Material2018 Typography: 34, w400, 0.25
+    headline4: TextStyle(
+      fontSize: 28,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+    ),
+    // M3 Headline Small. In Material2018 Typography: 24, w400, 0
+    headline5: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+    ),
+    // M3 Title Large. In Material2018 Typography: 20, w500, 0.15
+    headline6: TextStyle(
+      fontSize: 22,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0,
+    ),
+    // M3 Title Medium. In Material2018 Typography: 16, w400, 0.15
+    subtitle1: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.15,
+    ),
+    // M3 Title Small. In Material2018 Typography: 14, w500, 0.1
+    subtitle2: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.1,
+    ),
+    // M3 Body Large. In Material2018 Typography: 16, w400, 0.5
+    bodyText1: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      // M3 Guide says 0.15: https://m3.material.io/styles/typography/tokens
+      // Table here said 0.5: https://github.com/flutter/flutter/issues/89853
+      // Went with M3 Guide value, reported discrepancy.
+      letterSpacing: 0.15,
+    ),
+    // M3 Body Medium. In Material2018 Typography: 14, w400, 0.25
+    bodyText2: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.25,
+    ),
+    // M3 Body Small. In Material2018 Typography: 12, w400, 0.4
+    caption: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.4,
+    ),
+    // M3 Label Large. In Material2018 Typography: 14, w500, 1.25
+    button: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.1,
+    ),
+    // M3 Label Small. In Material2018 Typography: 10, w400, 1.5
+    overline: TextStyle(
+      fontSize: 11,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.5,
+    ),
+  );
 
   /// Returns a [VisualDensity] that is adaptive to `comfortable` instead
   /// of to the default `compact`, based on active [defaultTargetPlatform].
@@ -3384,19 +3482,29 @@ class FlexColorScheme with Diagnosticable {
 
     // We need the text themes locally for the theming, so we must form them
     // fully using the same process that ThemeData() factory uses.
-    TextTheme defaultTextTheme =
+    TextTheme defTextTheme =
         isDark ? effectiveTypography.white : effectiveTypography.black;
 
     final bool primaryIsDark =
         ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
             Brightness.dark;
-    TextTheme defaultPrimaryTextTheme =
+    TextTheme defPrimaryTextTheme =
         primaryIsDark ? effectiveTypography.white : effectiveTypography.black;
 
+    // debugPrint('From typography\n$defTextTheme\n');
     if (fontFamily != null) {
-      defaultTextTheme = defaultTextTheme.apply(fontFamily: fontFamily);
-      defaultPrimaryTextTheme =
-          defaultPrimaryTextTheme.apply(fontFamily: fontFamily);
+      // ThemeData uses this to apply a font fro fontFamily, it works OK, but
+      // it resets all typography and it uses regular style and weight
+      // for all style in the text theme. Consider defining the text theme
+      // explicitly via textTheme and primaryTextTheme with the custom
+      // font applied if you want to use custom fonts and keep the standard
+      // typography, or supply your own complete typography with your
+      // custom text theme.
+      defTextTheme = defTextTheme.apply(fontFamily: fontFamily);
+      defPrimaryTextTheme = defPrimaryTextTheme.apply(fontFamily: fontFamily);
+      // debugPrint('After apply\n$defTextTheme\n');
+      // One solution is that if a font family is used to merge once again
+      // with the correct typography.
     }
 
     // We are using sub themes and blend colors on text themes. If surfaces and
@@ -3426,24 +3534,24 @@ class FlexColorScheme with Diagnosticable {
           ? _onColor.blend(colorScheme.primary, 10)
           : _onColor.blend(colorScheme.primary, 20);
       // Apply the computed colors. fonts have no opacity when using this
-      // type of styling, the are computed with a color matching their
-      // background. Does not work so well if need to put text on completely
+      // type of styling, they are computed with a color matching their
+      // background. Does not work so well if you need to put text on completely
       // different colored container. Which is why this feature can be opted
-      // out of.
-      defaultTextTheme = defaultTextTheme.copyWith(
-        headline1: defaultTextTheme.headline1!.copyWith(color: _head),
-        headline2: defaultTextTheme.headline2!.copyWith(color: _head),
-        headline3: defaultTextTheme.headline3!.copyWith(color: _head),
-        headline4: defaultTextTheme.headline4!.copyWith(color: _head),
-        headline5: defaultTextTheme.headline5!.copyWith(color: _medium),
-        headline6: defaultTextTheme.headline6!.copyWith(color: _medium),
-        bodyText1: defaultTextTheme.bodyText1!.copyWith(color: _medium),
-        bodyText2: defaultTextTheme.bodyText2!.copyWith(color: _medium),
-        subtitle1: defaultTextTheme.subtitle1!.copyWith(color: _medium),
-        subtitle2: defaultTextTheme.subtitle2!.copyWith(color: _small),
-        caption: defaultTextTheme.caption!.copyWith(color: _head),
-        button: defaultTextTheme.button!.copyWith(color: _medium),
-        overline: defaultTextTheme.overline!.copyWith(color: _small),
+      // out of. M3 has separate colored text for different colored containers.
+      defTextTheme = defTextTheme.copyWith(
+        headline1: defTextTheme.headline1!.copyWith(color: _head),
+        headline2: defTextTheme.headline2!.copyWith(color: _head),
+        headline3: defTextTheme.headline3!.copyWith(color: _head),
+        headline4: defTextTheme.headline4!.copyWith(color: _head),
+        headline5: defTextTheme.headline5!.copyWith(color: _medium),
+        headline6: defTextTheme.headline6!.copyWith(color: _medium),
+        bodyText1: defTextTheme.bodyText1!.copyWith(color: _medium),
+        bodyText2: defTextTheme.bodyText2!.copyWith(color: _medium),
+        subtitle1: defTextTheme.subtitle1!.copyWith(color: _medium),
+        subtitle2: defTextTheme.subtitle2!.copyWith(color: _small),
+        caption: defTextTheme.caption!.copyWith(color: _head),
+        button: defTextTheme.button!.copyWith(color: _medium),
+        overline: defTextTheme.overline!.copyWith(color: _small),
       );
       // Equivalent calculations for primary text theme.
       final Color _headP = primaryIsDark
@@ -3455,27 +3563,31 @@ class FlexColorScheme with Diagnosticable {
       final Color _smallP = primaryIsDark
           ? colorScheme.onPrimary.blend(colorScheme.primary, 5)
           : colorScheme.onPrimary.blend(colorScheme.primary, 1);
-      defaultPrimaryTextTheme = defaultPrimaryTextTheme.copyWith(
-        headline1: defaultPrimaryTextTheme.headline1!.copyWith(color: _headP),
-        headline2: defaultPrimaryTextTheme.headline2!.copyWith(color: _headP),
-        headline3: defaultPrimaryTextTheme.headline3!.copyWith(color: _headP),
-        headline4: defaultPrimaryTextTheme.headline4!.copyWith(color: _headP),
-        headline5: defaultPrimaryTextTheme.headline5!.copyWith(color: _mediumP),
-        headline6: defaultPrimaryTextTheme.headline6!.copyWith(color: _mediumP),
-        bodyText1: defaultPrimaryTextTheme.bodyText1!.copyWith(color: _mediumP),
-        bodyText2: defaultPrimaryTextTheme.bodyText2!.copyWith(color: _mediumP),
-        subtitle1: defaultPrimaryTextTheme.subtitle1!.copyWith(color: _mediumP),
-        subtitle2: defaultPrimaryTextTheme.subtitle2!.copyWith(color: _smallP),
-        caption: defaultPrimaryTextTheme.caption!.copyWith(color: _headP),
-        button: defaultPrimaryTextTheme.button!.copyWith(color: _mediumP),
-        overline: defaultPrimaryTextTheme.overline!.copyWith(color: _smallP),
+      defPrimaryTextTheme = defPrimaryTextTheme.copyWith(
+        headline1: defPrimaryTextTheme.headline1!.copyWith(color: _headP),
+        headline2: defPrimaryTextTheme.headline2!.copyWith(color: _headP),
+        headline3: defPrimaryTextTheme.headline3!.copyWith(color: _headP),
+        headline4: defPrimaryTextTheme.headline4!.copyWith(color: _headP),
+        headline5: defPrimaryTextTheme.headline5!.copyWith(color: _mediumP),
+        headline6: defPrimaryTextTheme.headline6!.copyWith(color: _mediumP),
+        bodyText1: defPrimaryTextTheme.bodyText1!.copyWith(color: _mediumP),
+        bodyText2: defPrimaryTextTheme.bodyText2!.copyWith(color: _mediumP),
+        subtitle1: defPrimaryTextTheme.subtitle1!.copyWith(color: _mediumP),
+        subtitle2: defPrimaryTextTheme.subtitle2!.copyWith(color: _smallP),
+        caption: defPrimaryTextTheme.caption!.copyWith(color: _headP),
+        button: defPrimaryTextTheme.button!.copyWith(color: _mediumP),
+        overline: defPrimaryTextTheme.overline!.copyWith(color: _smallP),
       );
+    }
+    if (useSubThemes && subTheme.useTextTheme) {
+      defTextTheme = defTextTheme.merge(m3TextTheme);
+      defPrimaryTextTheme = defPrimaryTextTheme.merge(m3TextTheme);
     }
     // Make our final complete TextTheme, by also merging in the two TextThemes
     // passed in via constructor.
-    final TextTheme effectiveTextTheme = defaultTextTheme.merge(textTheme);
+    final TextTheme effectiveTextTheme = defTextTheme.merge(textTheme);
     final TextTheme effectivePrimaryTextTheme =
-        defaultPrimaryTextTheme.merge(primaryTextTheme);
+        defPrimaryTextTheme.merge(primaryTextTheme);
 
     // When working with color scheme based colors, there is no longer a
     // Material primary swatch that we can use to create some of the old
@@ -3484,6 +3596,7 @@ class FlexColorScheme with Diagnosticable {
     // color swatch from the provided primary color, using the primary color
     // as the MaterialColor's mid [500] index color.
     // TODO(rydmike): Find a better or actual Material algorithm for swatch.
+    // Might come in Material3, but have an idea with alphaBlends too!
     final MaterialColor primarySwatch =
         createPrimarySwatch(colorScheme.primary);
     // We now have a swatch of the primary color provided via a color scheme,
@@ -3528,8 +3641,7 @@ class FlexColorScheme with Diagnosticable {
           // Needs light text color, main TextTheme is OK.
           appBarForeground = effectiveTextTheme.headline6!.color!;
         } else if (appBarBrightness == Brightness.dark && primaryIsDark) {
-          // Needs light text color, since primari is dark it conatains right
-          // tinted one.
+          // Needs light text, since primary is dark it contains right one.
           appBarForeground = effectivePrimaryTextTheme.headline6!.color!;
         } else if (appBarBrightness == Brightness.light && !primaryIsDark) {
           // Needs dark text, primary is light, so it contains suitable color.
@@ -3576,8 +3688,8 @@ class FlexColorScheme with Diagnosticable {
         // TODO(rydmike): See if we can improve this "universal" style.
         case FlexTabBarStyle.universal:
           return isDark
-              ? primary.blend(Colors.white, 90)
-              : primary.blend(Colors.white, 50);
+              ? primary.blendAlpha(Colors.white, 0xE6) // 90%
+              : primary.blendAlpha(Colors.white, 0xB2); // 50%
       }
     }
 
@@ -3586,20 +3698,22 @@ class FlexColorScheme with Diagnosticable {
     Color unselectedTabColor() {
       switch (tabBarStyle) {
         case FlexTabBarStyle.useDefault:
-          return selectedTabColor().withAlpha(0xB2); // 70% alpha
+          return selectedTabColor().withAlpha(0xB2); // 70%
         case FlexTabBarStyle.forBackground:
-          return onColors.onSurface.withOpacity(0.6);
+          return onColors.onSurface.withAlpha(0x99); // 60%
         case FlexTabBarStyle.forAppBar:
           return (appBarBrightness == Brightness.light &&
                   (effectiveAppBarColor == Colors.white ||
                       effectiveAppBarColor == colorScheme.surface ||
                       effectiveAppBarColor == colorScheme.background))
-              ? onColors.onSurface.withOpacity(0.6)
+              ? onColors.onSurface.withAlpha(0x99) // 60%
               : selectedTabColor().withAlpha(0xB2); // 70% alpha
         case FlexTabBarStyle.universal:
           return isDark
-              ? primary.blend(Colors.white, 90).withAlpha(0xB2) // 70% alpha
-              : primary.blend(Colors.white, 50).withOpacity(0.5);
+              ? primary
+                  .blendAlpha(Colors.white, 0xE6) // 90%
+                  .withAlpha(0xB2) // 70% alpha
+              : primary.blendAlpha(Colors.white, 0x7F).withAlpha(0x7F); // 50%a
       }
     }
 
@@ -3637,21 +3751,22 @@ class FlexColorScheme with Diagnosticable {
     }
 
     // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
-    final Color dividerColor = colorScheme.onSurface.withOpacity(0.12);
+    final Color dividerColor = colorScheme.onSurface.withAlpha(0x1E); // 12%
 
     // Make the effective input decoration theme, by using FCS v4 sub themes
     // if opted in, otherwise use pre-v4 version as before.
     final InputDecorationTheme effectiveInputDecorationTheme = useSubThemes
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
-            radius:
-                subTheme.cornerRadiusInputDecoration ?? subTheme.cornerRadius,
+            radius: subTheme.inputDecorationRadius ??
+                subTheme.defaultRadius ??
+                kButtonRadius,
             borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor ??
                 (isDark
-                    ? colorScheme.primary.withOpacity(kFillColorOpacityDark)
-                    : colorScheme.primary.withOpacity(kFillColorOpacityLight)),
+                    ? colorScheme.primary.withAlpha(kFillColorAlphaDark)
+                    : colorScheme.primary.withAlpha(kFillColorAlphaLight)),
             focusedBorderWidth: subTheme.thickBorderWidth,
             unfocusedBorderWidth: subTheme.thinBorderWidth,
             unfocusedHasBorder: subTheme.inputDecoratorUnfocusedHasBorder,
@@ -3663,12 +3778,12 @@ class FlexColorScheme with Diagnosticable {
             // to filled as before, but can now also be unfilled.
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: isDark
-                ? colorScheme.primary.withOpacity(0.06)
-                : colorScheme.primary.withOpacity(0.035),
+                ? colorScheme.primary.withAlpha(0x0F) // 6%
+                : colorScheme.primary.withAlpha(0x09), //3.5%
           );
 
     // Use themedEffects on hover, focus, highlight and splash?
-    final bool themedEffects = useSubThemes && subTheme.themedEffects;
+    final bool themedEffects = useSubThemes && subTheme.interactionEffects;
 
     // Return the ThemeData object defined by the FlexColorScheme
     // properties and the designed opinionated theme design choices.
@@ -3713,38 +3828,40 @@ class FlexColorScheme with Diagnosticable {
       cardColor: colorScheme.surface,
       dividerColor: dividerColor,
       backgroundColor: colorScheme.background,
-      // Disabled color uses a slightly different style with themedEffects,
-      // but if not opted in, we as before v4.0.0 use ThemeData default.
+      // Disabled color uses a different style with themedEffects,
+      // but if not opted in, same as before v4.0.0 use ThemeData default.
       disabledColor: themedEffects
-          ? colorScheme.onSurface.withOpacity(kDisabledForegroundOpacity)
+          ? colorScheme.primary
+              .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+              .withAlpha(kDisabledBackgroundAlpha)
           : isDark
               ? Colors.white38
               : Colors.black38,
       // Same as ThemeData SDK.
-      hintColor: isDark ? Colors.white60 : Colors.black.withOpacity(0.6),
+      hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
 
       // Special theming on hover, focus, highlight and splash, if opting in on
       // themedEffects, otherwise use ThemeData defaults by passing in null
       // and letting it assign its values.
       hoverColor: themedEffects
           ? colorScheme.primary
-              .blend(Colors.white, kHoverAlphaBlend)
-              .withOpacity(kHoverOpacity)
+              .blendAlpha(Colors.white, kHoverAlphaBlend)
+              .withAlpha(kHoverAlpha)
           : null,
       focusColor: themedEffects
           ? colorScheme.primary
-              .blend(Colors.white, kFocusAlphaBlend)
-              .withOpacity(kFocusOpacity)
+              .blendAlpha(Colors.white, kFocusAlphaBlend)
+              .withAlpha(kFocusAlpha)
           : null,
       highlightColor: themedEffects
           ? colorScheme.primary
-              .blend(Colors.white, kHighlightAlphaBlend)
-              .withOpacity(kHighlightOpacity)
+              .blendAlpha(Colors.white, kHighlightAlphaBlend)
+              .withAlpha(kHighlightAlpha)
           : null,
       splashColor: themedEffects
           ? colorScheme.primary
-              .blend(Colors.white, kSplashAlphaBlend)
-              .withOpacity(kSplashOpacity)
+              .blendAlpha(Colors.white, kSplashAlphaBlend)
+              .withAlpha(kSplashAlpha)
           : null,
 
       // Flutter standard dialogBackgroundColor for color scheme based themes
@@ -3902,19 +4019,9 @@ class FlexColorScheme with Diagnosticable {
       // here we use the slightly darker shade primaryColorDark instead.
       textSelectionTheme: TextSelectionThemeData(
         selectionColor: isDark
-            ? colorScheme.primary.withOpacity(0.50)
-            : colorScheme.primary.withOpacity(0.30),
+            ? colorScheme.primary.withAlpha(0xB2) // 50%
+            : colorScheme.primary.withAlpha(0x4C), // 30%
         selectionHandleColor: primaryColorDark,
-      ),
-
-      // TODO(Rydmike): Also consider a sub-theme for ChipThemeData.
-      // The default chip theme in Flutter does not work correctly with dark
-      // themes. See issue: https://github.com/flutter/flutter/issues/65663
-      // The chip theme below fixes it by using the colorScheme.primary color.
-      chipTheme: ChipThemeData.fromDefaults(
-        secondaryColor: colorScheme.primary,
-        brightness: colorScheme.brightness,
-        labelStyle: effectiveTextTheme.bodyText1!,
       ),
 
       // TODO(Rydmike): Also consider a sub-theme for TabBar.
@@ -3967,9 +4074,136 @@ class FlexColorScheme with Diagnosticable {
               )
             : null,
       ),
+
+      textButtonTheme: useSubThemes
+          ? FlexSubThemes.textButtonTheme(
+              colorScheme: colorScheme,
+              radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+            )
+          : null,
+      elevatedButtonTheme: useSubThemes
+          ? FlexSubThemes.elevatedButtonTheme(
+              colorScheme: colorScheme,
+              radius: subTheme.elevatedButtonRadius ?? subTheme.defaultRadius,
+              elevation: subTheme.elevatedButtonElevation,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+            )
+          : null,
+      outlinedButtonTheme: useSubThemes
+          ? FlexSubThemes.outlinedButtonTheme(
+              colorScheme: colorScheme,
+              radius: subTheme.outlinedButtonRadius ?? subTheme.defaultRadius,
+              pressedOutlineWidth: subTheme.thickBorderWidth,
+              outlineWidth: subTheme.thinBorderWidth,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+            )
+          : null,
+      // Since the old buttons have been deprecated in Flutter 2.0.0
+      // they are no longer presented or used in the code in FlexColorScheme.
+      // The button theming below still makes the old buttons almost
+      // look like the defaults for the new ElevatedButton, TextButton and
+      // OutlinedButton.
+      // This buttonTheme setup, makes the old legacy Material buttons
+      // [RaisedButton], [OutlineButton] and [FlatButton] very similar in
+      // style to the default color scheme based style used for the
+      // newer Material buttons [ElevatedButton], [OutlinedButton] and
+      // [TextButton]. There are some differences in margin
+      // and outline color and the elevation behavior on the raised button.
+      // A useSubThemes was added in version 4.0.0 to also there still support
+      // the old buttons. Be aware that the theme will be removed from
+      // FlexColorScheme when it becomes deprecated in Flutter SDK or the
+      // buttons that already are deprecated, and that use this ButtonThemeData
+      // are completely removed.
+      buttonTheme: useSubThemes
+          ? FlexSubThemes.buttonTheme(
+              colorScheme: colorScheme,
+              radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+            )
+          : ButtonThemeData(
+              colorScheme: colorScheme,
+              textTheme: ButtonTextTheme.primary,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+            ),
+      // Toggle buttons have limited theming capability and cannot match new
+      // buttons fully, this is an approximation.
+      toggleButtonsTheme: useSubThemes
+          ? FlexSubThemes.toggleButtonsTheme(
+              colorScheme: colorScheme,
+              borderWidth: subTheme.thinBorderWidth,
+              radius: subTheme.toggleButtonsRadius ?? subTheme.defaultRadius,
+              minButtonSize: subTheme.buttonMinSize,
+              visualDensity: visualDensity,
+            )
+          : null,
+      inputDecorationTheme: effectiveInputDecorationTheme,
+      floatingActionButtonTheme: useSubThemes
+          ? FlexSubThemes.floatingActionButtonTheme(
+              radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
+            )
+          : null,
+
+      // TODO(Rydmike): Also consider a sub-theme for ChipThemeData.
+      // The default chip theme in Flutter does not work correctly with dark
+      // themes. See issue: https://github.com/flutter/flutter/issues/65663
+      // The chip theme below fixes it by using the colorScheme.primary color.
+      chipTheme: useSubThemes
+          ? FlexSubThemes.chipTheme(
+              colorScheme: colorScheme,
+              labelStyle: effectiveTextTheme.button!,
+              radius: subTheme.chipRadius ?? subTheme.defaultRadius,
+            )
+          : ChipThemeData.fromDefaults(
+              secondaryColor: colorScheme.primary,
+              brightness: colorScheme.brightness,
+              labelStyle: effectiveTextTheme.bodyText1!,
+            ),
+      cardTheme: useSubThemes
+          ? FlexSubThemes.cardTheme(
+              radius: subTheme.cardRadius ?? subTheme.defaultRadius,
+              elevation: subTheme.cardElevation,
+            )
+          : null,
+      popupMenuTheme: useSubThemes
+          ? FlexSubThemes.popupMenuTheme(
+              radius: subTheme.popupMenuRadius ??
+                  ((subTheme.defaultRadius ?? 16) > 10
+                      ? 10
+                      : subTheme.defaultRadius),
+              elevation: subTheme.popupMenuElevation,
+              color: subTheme.popupMenuOpacity == null
+                  ? null
+                  : colorScheme.surface.withOpacity(subTheme.popupMenuOpacity!),
+            )
+          : null,
+      dialogTheme: useSubThemes
+          ? FlexSubThemes.dialogTheme(
+              radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
+              elevation: subTheme.dialogElevation,
+              backgroundColor: dialogBackground ?? colorScheme.background,
+            )
+          : null,
+      timePickerTheme: useSubThemes
+          ? FlexSubThemes.timePickerTheme(
+              backgroundColor: dialogBackground ?? colorScheme.background,
+              radius: subTheme.timePickerDialogRadius ?? subTheme.defaultRadius,
+              elementRadius: subTheme.cardRadius ?? subTheme.defaultRadius,
+              inputDecorationTheme: effectiveInputDecorationTheme)
+          : null,
+      snackBarTheme: useSubThemes
+          ? FlexSubThemes.snackBarTheme(
+              elevation: subTheme.snackBarElevation,
+            )
+          : null,
       bottomSheetTheme: useSubThemes
           ? FlexSubThemes.bottomSheetTheme(
-              radius: subTheme.cornerRadiusBottomSheet ?? subTheme.cornerRadius,
+              radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,
               elevation: subTheme.bottomSheetElevation,
               modalElevation: subTheme.bottomSheetModalElevation,
             )
@@ -3979,6 +4213,7 @@ class FlexColorScheme with Diagnosticable {
       // dark mode, we want primary in dark mode too, like it is in light
       // mode. Primary color is an iOS influenced style for the bottom nav.
       // Above was default in version < 4, version 4 can also use sub-theme.
+      // TODO(rydmike): Put the icon theming into the sub theme!
       bottomNavigationBarTheme: useSubThemes
           ? FlexSubThemes.bottomNavigationBar(
                   elevation: subTheme.bottomNavigationBarElevation,
@@ -3998,109 +4233,6 @@ class FlexColorScheme with Diagnosticable {
               ),
               selectedItemColor: colorScheme.primary,
             ),
-      cardTheme: useSubThemes
-          ? FlexSubThemes.cardTheme(
-              radius: subTheme.cornerRadiusCard ?? subTheme.cornerRadius,
-              elevation: subTheme.cardElevation,
-            )
-          : null,
-      dialogTheme: useSubThemes
-          ? FlexSubThemes.dialogTheme(
-              radius: subTheme.cornerRadiusDialog ?? subTheme.cornerRadius,
-              elevation: subTheme.dialogElevation,
-              backgroundColor: dialogBackground ?? colorScheme.background,
-            )
-          : null,
-      snackBarTheme: useSubThemes
-          ? FlexSubThemes.snackBarTheme(
-              elevation: subTheme.snackBarElevation,
-            )
-          : null,
-      timePickerTheme: useSubThemes
-          ? FlexSubThemes.timePickerTheme(
-              backgroundColor: dialogBackground ?? colorScheme.background,
-              radius: subTheme.cornerRadiusTimePickerDialog ??
-                  subTheme.cornerRadius,
-              inputDecorationTheme: effectiveInputDecorationTheme)
-          : null,
-      popupMenuTheme: useSubThemes
-          ? FlexSubThemes.popupMenuTheme(
-              radius: subTheme.cornerRadiusPopupMenuButton ??
-                  (subTheme.cornerRadius > 10 ? 10 : subTheme.cornerRadius),
-              elevation: subTheme.popupMenuElevation,
-            )
-          : null,
-      inputDecorationTheme: effectiveInputDecorationTheme,
-      elevatedButtonTheme: useSubThemes
-          ? FlexSubThemes.elevatedButtonTheme(
-              colorScheme: colorScheme,
-              radius:
-                  subTheme.cornerRadiusElevatedButton ?? subTheme.cornerRadius,
-              elevation: subTheme.elevatedButtonElevation,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.minButtonSize,
-            )
-          : null,
-      outlinedButtonTheme: useSubThemes
-          ? FlexSubThemes.outlinedButtonTheme(
-              colorScheme: colorScheme,
-              radius:
-                  subTheme.cornerRadiusOutlinedButton ?? subTheme.cornerRadius,
-              pressedOutlineWidth: subTheme.thickBorderWidth,
-              outlineWidth: subTheme.thinBorderWidth,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.minButtonSize,
-            )
-          : null,
-      textButtonTheme: useSubThemes
-          ? FlexSubThemes.textButtonTheme(
-              colorScheme: colorScheme,
-              radius: subTheme.cornerRadiusTextButton ?? subTheme.cornerRadius,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.minButtonSize,
-            )
-          : null,
-      // Since the old buttons have been deprecated in Flutter 2.0.0
-      // they are no longer presented or used in the code in FlexColorScheme.
-      // The button theming below still makes the old buttons almost
-      // look like the defaults for the new ElevatedButton, TextButton and
-      // OutlinedButton.
-      // This buttonTheme setup, makes the old legacy Material buttons
-      // [RaisedButton], [OutlineButton] and [FlatButton] very similar in
-      // style to the default color scheme based style used for the
-      // newer Material buttons [ElevatedButton], [OutlinedButton] and
-      // [TextButton]. There are some differences in margin
-      // and outline color and the elevation behavior on the raised button.
-      // A subThemesOptIn was added in version 4.0.0 to also still support
-      // the old buttons. Be aware that the theme will be removed from
-      // FlexColorScheme when it becomes deprecated in Flutter SDK or the
-      // buttons that already are deprecated and that use the ButtonThemeData
-      // are completely removed.
-      buttonTheme: useSubThemes
-          ? FlexSubThemes.buttonTheme(
-              colorScheme: colorScheme,
-              radius: subTheme.cornerRadiusTextButton ?? subTheme.cornerRadius,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.minButtonSize,
-            )
-          : ButtonThemeData(
-              colorScheme: colorScheme,
-              textTheme: ButtonTextTheme.primary,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-            ),
-      // Toggle buttons have limited theming capability and cannot match new
-      // buttons fully, this is an approximation.
-      toggleButtonsTheme: useSubThemes
-          ? FlexSubThemes.toggleButtonsTheme(
-              colorScheme: colorScheme,
-              borderWidth: subTheme.thinBorderWidth,
-              radius:
-                  subTheme.cornerRadiusToggleButtons ?? subTheme.cornerRadius,
-              minButtonSize: subTheme.minButtonSize,
-              visualDensity: visualDensity,
-            )
-          : null,
     );
   }
 

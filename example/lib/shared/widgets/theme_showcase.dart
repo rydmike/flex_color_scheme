@@ -68,21 +68,21 @@ class ButtonsShowcase extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: ElevatedButton(
             onPressed: enabled ? () {} : null,
-            child: const Text('ELEVATED BUTTON'),
+            child: const Text('Elevated button'),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: OutlinedButton(
             onPressed: enabled ? () {} : null,
-            child: const Text('OUTLINED BUTTON'),
+            child: const Text('Outlined button'),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: TextButton(
             onPressed: enabled ? () {} : null,
-            child: const Text('TEXT BUTTON'),
+            child: const Text('Text button'),
           ),
         ),
         Padding(
@@ -116,21 +116,21 @@ class LegacyButtonShowcase extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: RaisedButton(
             onPressed: enabled ? () {} : null,
-            child: const Text('RAISED BUTTON'),
+            child: const Text('Raised button'),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: OutlineButton(
             onPressed: enabled ? () {} : null,
-            child: const Text('OUTLINE BUTTON'),
+            child: const Text('Outline button'),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: FlatButton(
             onPressed: enabled ? () {} : null,
-            child: const Text('FLAT BUTTON'),
+            child: const Text('Flat button'),
           ),
         ),
       ],
@@ -156,6 +156,7 @@ class _PopupMenuButton extends StatelessWidget {
           PopupMenuItem<int>(value: 2, child: Text('Option 2')),
           PopupMenuItem<int>(value: 3, child: Text('Option 3')),
           PopupMenuItem<int>(value: 4, child: Text('Option 4')),
+          PopupMenuItem<int>(value: 4, child: Text('Option 5')),
         ],
         child: AbsorbPointer(
           child: TextButton(
@@ -164,7 +165,7 @@ class _PopupMenuButton extends StatelessWidget {
               canRequestFocus: false,
             ),
             onPressed: enabled ? () {} : null,
-            child: const Text('POPUP MENU'),
+            child: const Text('Popup menu'),
           ),
         ),
       ),
@@ -219,10 +220,11 @@ class ChipShowcase extends StatelessWidget {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.all(8),
+        Padding(
+          padding: const EdgeInsets.all(8),
           child: Chip(
-            label: Text('Chip'),
+            label: const Text('Chip'),
+            onDeleted: () {},
           ),
         ),
         const Padding(
@@ -239,10 +241,20 @@ class ChipShowcase extends StatelessWidget {
             onSelected: (bool value) {},
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: InputChip(
+            showCheckmark: true,
+            selected: true,
+            label: const Text('Chip check'),
+            onSelected: (bool value) {},
+          ),
+        ),
         const Padding(
           padding: EdgeInsets.all(8),
           child: InputChip(
-            label: Text('Disabled Input Chip'),
+            label: Text('Disabled Chip'),
+            isEnabled: false,
           ),
         ),
         Padding(
@@ -256,7 +268,7 @@ class ChipShowcase extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8),
           child: ChoiceChip(
-            label: const Text('Not Selected Chip'),
+            label: const Text('Not selected Chip'),
             selected: false,
             onSelected: (bool value) {},
           ),
@@ -408,8 +420,8 @@ class TabBarForAppBarShowcase extends StatelessWidget {
           ),
           Text(
             'If the TabBar will always be used in an AppBar, then use '
-            'style FlexTabBarStyle.forAppBar (default), '
-            'it will fit contrast wise here.',
+            'style FlexTabBarStyle forAppBar (default), '
+            'it will fit contrast wise here',
             style: Theme.of(context).textTheme.caption,
           ),
           const SizedBox(height: 8),
@@ -461,8 +473,8 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
           ),
           Text(
             'If the TabBar will always be used on background and surface '
-            'colors, then use style FlexTabBarStyle.forBackground, '
-            'it will fit contrast wise here.',
+            'colors, then use style FlexTabBarStyle forBackground, '
+            'it will fit contrast wise here',
             style: Theme.of(context).textTheme.caption,
           ),
           const SizedBox(height: 8),
@@ -515,8 +527,9 @@ class _BottomNavigationBarShowcaseState
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           Text(
-            'Default background color is theme.canvasColor via Material, and '
-            'theme.canvasColor is set to theme.colorScheme.background.',
+            'Default background color is theme canvasColor via Material, and '
+            'theme canvasColor is set to theme colorScheme and its background '
+            'color',
             style: Theme.of(context).textTheme.caption,
           ),
           const SizedBox(height: 8),
@@ -626,7 +639,7 @@ class AlertDialogShowcase extends StatelessWidget {
     return AlertDialog(
       title: const Text('Allow location services'),
       content: const Text('Let us help determine location. This means '
-          'sending anonymous location data to us.'),
+          'sending anonymous location data to us'),
       actions: <Widget>[
         TextButton(onPressed: () {}, child: const Text('CANCEL')),
         TextButton(onPressed: () {}, child: const Text('ALLOW')),
@@ -654,7 +667,7 @@ class BottomSheetAndMaterialShowcase extends StatelessWidget {
         Text(
           'Default background color is theme.canvasColor, and '
           'theme.canvasColor is set to theme.colorScheme.background. The '
-          'color canvasColor is going to be deprecated in Flutter SDK.',
+          'color canvasColor is going to be deprecated in Flutter SDK',
           style: Theme.of(context).textTheme.caption,
         ),
         const Material(
@@ -694,7 +707,7 @@ class BottomSheetAndMaterialShowcase extends StatelessWidget {
         Text(
           'Default background color is theme.cardColor, and '
           'theme.cardColor is set to theme.colorScheme.surface. The '
-          'color cardColor is going to be deprecated in Flutter SDK.',
+          'color cardColor is going to be deprecated in Flutter SDK',
           style: Theme.of(context).textTheme.caption,
         ),
         const Material(
@@ -779,7 +792,7 @@ class CardShowcase extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            'Default background color comes from Material of type card. ',
+            'Default background color comes from Material of type card',
             style: Theme.of(context).textTheme.caption,
           ),
         ),
@@ -828,6 +841,8 @@ class TextThemeShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        Text('Font: ${text.subtitle2!.fontFamily}',
+            style: text.subtitle1!.copyWith(fontWeight: FontWeight.w600)),
         Text(
           'Headline 1 '
           '(${text.headline1!.fontSize!.toStringAsFixed(0)})',
@@ -907,6 +922,8 @@ class PrimaryTextThemeShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        Text('Font: ${text.subtitle2!.fontFamily}',
+            style: text.subtitle1!.copyWith(fontWeight: FontWeight.w600)),
         Text(
           'Headline 1 '
           '(${text.headline1!.fontSize!.toStringAsFixed(0)})',

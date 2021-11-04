@@ -1,36 +1,34 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../all_shared_imports.dart';
-
 /// Widget used to change the used surface mode in example 5.
 class SurfaceModeButtons extends StatelessWidget {
   const SurfaceModeButtons({
     Key? key,
     required this.mode,
     required this.onChanged,
+    this.showAllModes = true,
   }) : super(key: key);
   final FlexSurfaceMode mode;
   final ValueChanged<FlexSurfaceMode> onChanged;
+  final bool showAllModes;
 
   @override
   Widget build(BuildContext context) {
-    // Wider media? If so we can show a few more buttons.
-    final bool isWide =
-        MediaQuery.of(context).size.width >= AppData.phoneBreakpoint;
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final List<bool> isSelected = <bool>[
       mode == FlexSurfaceMode.flat,
       mode == FlexSurfaceMode.highBackground,
       mode == FlexSurfaceMode.highSurface,
       mode == FlexSurfaceMode.veryLowSurfaceHighScaffold,
-      if (isWide) mode == FlexSurfaceMode.lowSurfaceHighScaffold,
+      // Only show this exotic blend if flag set.
+      if (showAllModes) mode == FlexSurfaceMode.lowSurfaceHighScaffold,
       mode == FlexSurfaceMode.lowScaffold,
       mode == FlexSurfaceMode.highScaffold,
       // Only show these exotic blend modes in wider media, there is not
       // enough room for them on phones, and they are not so important.
-      if (isWide) mode == FlexSurfaceMode.lowScaffoldVariantDialog,
-      if (isWide) mode == FlexSurfaceMode.highScaffoldVariantDialog,
+      if (showAllModes) mode == FlexSurfaceMode.lowScaffoldVariantDialog,
+      if (showAllModes) mode == FlexSurfaceMode.highScaffoldVariantDialog,
     ];
     return ToggleButtons(
       isSelected: isSelected,
@@ -63,7 +61,7 @@ class SurfaceModeButtons extends StatelessWidget {
             ],
           ),
         ),
-        if (isWide)
+        if (showAllModes)
           const Tooltip(
             message: 'Low surface\nVery high scaffold',
             child: Icon(Icons.dynamic_feed_rounded),
@@ -77,7 +75,7 @@ class SurfaceModeButtons extends StatelessWidget {
           message: 'High scaffold',
           child: Icon(Icons.horizontal_split),
         ),
-        if (isWide)
+        if (showAllModes)
           Tooltip(
             message: 'Low scaffold\nVariant dialog',
             child: Stack(
@@ -89,7 +87,7 @@ class SurfaceModeButtons extends StatelessWidget {
               ],
             ),
           ),
-        if (isWide)
+        if (showAllModes)
           Tooltip(
             message: 'High scaffold\nVariant dialog',
             child: Stack(

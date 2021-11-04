@@ -31,47 +31,52 @@ import 'flex_sub_themes.dart';
 class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.
   const FlexSubThemesData({
-    this.themedEffects = true,
-    this.cornerRadius = kCornerRadius,
-    this.cornerRadiusBottomSheet,
-    this.cornerRadiusCard,
-    this.cornerRadiusDialog,
-    this.cornerRadiusPopupMenuButton,
-    this.cornerRadiusTimePickerDialog,
-    this.cornerRadiusInputDecoration,
-    this.cornerRadiusTextButton,
-    this.cornerRadiusElevatedButton,
-    this.cornerRadiusOutlinedButton,
-    this.cornerRadiusToggleButtons,
-    this.cardElevation = kCardElevation,
+    this.interactionEffects = true,
+    this.blendOnColors = true,
+    this.blendTextTheme = true,
+    this.useTextTheme = true,
+    this.defaultRadius = kDefaultRadius,
+    this.buttonMinSize = kButtonMinSize,
+    this.buttonPadding = kButtonPadding,
+    this.thickBorderWidth = kThickBorderWidth,
+    this.thinBorderWidth = kThinBorderWidth,
+    this.textButtonRadius,
+    this.elevatedButtonRadius,
     this.elevatedButtonElevation = kElevatedButtonElevation,
+    this.outlinedButtonRadius,
+    this.toggleButtonsRadius,
+    this.inputDecorationRadius,
+    this.inputDecoratorIsFilled = true,
+    this.inputDecoratorFillColor,
+    this.inputDecoratorBorderType = FlexInputBorderType.outline,
+    this.inputDecoratorUnfocusedHasBorder = true,
+    this.chipRadius,
+    this.fabRadius,
+    this.cardRadius,
+    this.cardElevation = kCardElevation,
+    this.popupMenuRadius,
     this.popupMenuElevation = kPopupMenuElevation,
+    this.popupMenuOpacity,
+    this.dialogRadius,
     this.dialogElevation = kDialogElevation,
+    this.timePickerDialogRadius,
     this.snackBarElevation = kSnackBarElevation,
+    this.bottomSheetRadius,
     this.bottomSheetElevation = kBottomSheetElevation,
     this.bottomSheetModalElevation = kBottomSheetModalElevation,
     this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
     this.bottomNavigationBarOpacity,
     this.bottomNavigationBarLandscapeLayout,
-    this.minButtonSize = kMinButtonSize,
-    this.buttonPadding = kButtonPadding,
-    this.thickBorderWidth = kThickBorderWidth,
-    this.thinBorderWidth = kThinBorderWidth,
-    this.inputDecoratorIsFilled = true,
-    this.inputDecoratorFillColor,
-    this.inputDecoratorBorderType = FlexInputBorderType.outline,
-    this.inputDecoratorUnfocusedHasBorder = true,
-    this.blendOnColors = true,
-    this.blendTextTheme = true,
   });
 
-  /// Opt in on using color branded hover, focus, highlight and splash effects.
+  /// Opt-in on using color branded hover, focus, highlight and splash
+  /// interaction state effects.
   ///
   /// The standard colors on hover, focus, highlight and splash effects use
   /// greys, i.e. white or black with different opacity levels.
   ///
-  /// To get a color themed effect, set [themedEffects] to true, and to false
-  /// for the SDK default values.
+  /// To get a color themed effect, set [interactionEffects] to true, and to
+  /// false for the Flutter SDK Material 2 default [ThemeData] values.
   ///
   /// These effects apply to all Widgets that get theme from [ThemeData].
   ///
@@ -81,9 +86,9 @@ class FlexSubThemesData with Diagnosticable {
   /// primary color blends and own different opacity values by default.
   /// The defaults on SDK overall [ThemeData] hover, focus, highlight and
   /// splash do not match this newer design, and they look out of place,
-  /// especially in an otherwise primary color, alpha blended surface theme.
+  /// especially in an otherwise primary color, alpha blended theme.
   ///
-  /// When you opt in on [themedEffects] it makes the overall hover, focus,
+  /// When you opt-in on [interactionEffects] it makes the overall hover, focus,
   /// highlight and splash effects in [ThemeData] visually consistent with the
   /// style the buttons [ElevatedButton], [OutlinedButton] and [TextButton]
   /// with their own state effects use by default. It is not an exact
@@ -94,87 +99,130 @@ class FlexSubThemesData with Diagnosticable {
   /// most widgets, and does not stick out like the grey splashes do otherwise
   /// when using primary color blended themes.
   ///
-  /// So that [ToggleButtons] and legacy buttons `RaisedButton`, `OutlineButton`
-  /// and `FlatButton` always match the style the new buttons use,
-  /// even when [themedEffects] style is disabled, they also always use the same
-  /// effect as [themedEffects] provides on overall theme, so that they always
-  /// match the [ButtonStyleButton] buttons.
+  /// For [ToggleButtons] and legacy buttons `RaisedButton`, `OutlineButton`
+  /// and `FlatButton` to always match the style the new buttons use,
+  /// even when [interactionEffects] style is disabled, they also always use the
+  /// same effect as [interactionEffects] provides on overall theme, so that
+  /// they always match the [ButtonStyleButton] buttons as closely as possible.
   ///
-  /// The effects provided by [themedEffects] are most clearly visible on large
-  /// surface ink effects, like e.g. on ListTile and SwitchListTile.
+  /// The effects provided by [interactionEffects] are more visible on large
+  /// surface ink effects, like e.g. on the ListTile and SwitchListTile taps.
   ///
   /// Defaults to true.
-  final bool themedEffects;
+  final bool interactionEffects;
 
-  // TODO(rydmike): Maybe also consider ContinuousRectangleBorder (future?).
-
-  /// Corner radius of all widgets covered by `FlexSubThemes` sub-theme.
+  /// Use selected [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
+  /// and [FlexColorScheme.dark] to also blend in each corresponding
+  /// [ColorScheme] color property's color into their onColors [onSurface],
+  /// [onBackGround], [onError], [onPrimary] and [onSecondary].
   ///
-  /// These widgets will get their shape corner rounding from [cornerRadius]:
-  /// * [BottomSheet]
-  /// * [Card]
-  /// * [Dialog]
-  /// * [PopupMenuButton]
-  /// * [TimePickerDialog]
-  /// * [InputDecoration]
+  /// Blending the on colors results in lower contrast than when not doing so,
+  /// but it still works well on lower blend levels. The effect is actually
+  /// quite subtle and can be turned off by setting [blendOnColors] to false.
+  ///
+  /// Defaults to true.
+  final bool blendOnColors;
+
+  /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
+  /// and [FlexColorScheme.dark] to also blend primary color into text themes
+  /// for both [ThemeData.textTheme] and [ThemeData.primaryTextTheme].
+  ///
+  /// This feature is similar to the slightly colored texts seen in Material3
+  /// (You). At heavy blend levels it may reduce contrast too much and can
+  /// be turned off if so desired. This feature is a bit experimental in nature
+  /// and will be improved over time. It will be made to more closely match
+  /// the Material 3 implementation, or even use it instead when it becomes
+  /// available.
+  ///
+  /// Expect minor changes to the visual result when using this option in
+  /// future versions.
+  ///
+  /// Defaults to true.
+  final bool blendTextTheme;
+
+  /// Use the Material 3 like text theme.
+  ///
+  /// When opting in on using the sub theming, this flag controls if the
+  /// text theme that uses Material 3 like font sizes as specified for phones,
+  /// is also used.
+  ///
+  /// The text theme is defined in [FlexColorScheme.m3TextTheme].
+  ///
+  /// Defaults to true.
+  final bool useTextTheme;
+
+  /// Corner radius used on all widgets when [FlexColorScheme] use its
+  /// [FlexSubThemesData] to configure sub themes with [FlexSubThemes].
+  ///
+  /// These widgets will get their shape corner rounding from [defaultRadius]
+  /// when it is defined.
+  ///
   /// * [TextButton]
   /// * [ElevatedButton]
   /// * [OutlinedButton]
+  /// * Older buttons using [ButtonThemeData]
   /// * [ToggleButtons]
+  /// * [InputDecoration]
+  /// * [Card]
+  /// * [PopupMenuButton]
+  /// * [Dialog]
+  /// * [TimePickerDialog]
+  /// * [BottomSheet]
+  /// * [BottomNavigationBar]
   ///
-  /// Defaults to [kCornerRadius]. Flutter SDK general corner radius is 4
-  /// as defined by the Material Design guide. Material 3 (You) uses much
-  /// higher corner radius.
-  final double cornerRadius;
-
-  /// Corner radius override value for [BottomSheet].
-  final double? cornerRadiusBottomSheet;
-
-  /// Corner radius override value for [Card].
-  final double? cornerRadiusCard;
-
-  /// Corner radius override value for [Dialog].
-  final double? cornerRadiusDialog;
-
-  /// Corner radius override value for [PopupMenuButton].
+  /// Defaults to null.
   ///
-  /// When used by [FlexColorScheme] the corner radius of popup menus follows
-  /// the [cornerRadius] until and including 10 dp. After which it stays at
-  /// 10 dp. If you need a higher corner radius on popup menus than 10 dp,
-  /// you will have to explicitly override it here. It will not look very
-  /// good, the highlight inside the menu will start to overflow the corners and
-  /// it is not clipped along the border radius. The underlying Widget is not
-  /// designed with this high border rounding in mind, which makes sense since
-  /// it does not look good with too much rounding on a small menu.
+  /// When it is null, the sub themes will use their null default that aims
+  /// to follow Material 3 standard for all widgets it includes.
   ///
-  /// The built-in behavior in FlexColorScheme allows it to match at low
-  /// inherited radius values but to also stay below the usable max rounding
-  /// automatically at higher global border radius values.
-  final double? cornerRadiusPopupMenuButton;
+  /// When you set [defaultRadius] to a value, it will override these defaults
+  /// with this global default. You can still set and lock each individual
+  /// border radius back for these widget sub themes to some specific value, or
+  /// to its Material3 standard, which is mentioned in each theme as the used
+  /// default when its value is null.
+  ///
+  /// Flutter current SDK general corner radius is 4, as defined by the
+  /// Material 2 design guide. Material 3 (You) uses much
+  /// higher corner radius, but it varies by widget in Flutter.
+  final double? defaultRadius;
 
-  /// Corner radius override value for [TimePickerDialog].
-  final double? cornerRadiusTimePickerDialog;
+  /// Minimum button size for all buttons.
+  ///
+  /// Applies to [TextButton], [ElevatedButton], [OutlinedButton] and
+  /// [ToggleButtons] and legacy deprecated buttons.
+  ///
+  /// Defaults to [kButtonMinSize].
+  final Size buttonMinSize;
 
-  /// Corner radius override value for [InputDecoration].
-  final double? cornerRadiusInputDecoration;
+  /// Rounded buttons need a bit more horizontal padding to
+  /// accommodate for the rounding.
+  ///
+  /// Applies to [TextButton], [ElevatedButton] and [OutlinedButton].
+  ///
+  /// Defaults to [kButtonPadding].
+  final EdgeInsetsGeometry buttonPadding;
+
+  /// Border width of Widgets with an outline border.
+  ///
+  /// Applies to enabled [OutlinedButton] and always to [ToggleButtons], as well
+  /// as to selected state of [InputDecorator].
+  ///
+  /// Default to [kThickBorderWidth].
+  final double thickBorderWidth;
+
+  /// Border thickness on unselected input decorator and disabled buttons.
+  ///
+  /// Applies to disabled [OutlinedButton] and to un-selected state in
+  /// [InputDecorator].
+  ///
+  /// Default to [kThinBorderWidth].
+  final double thinBorderWidth;
 
   /// Corner radius override value for [TextButton].
-  final double? cornerRadiusTextButton;
+  final double? textButtonRadius;
 
   /// Corner radius override value for [ElevatedButton].
-  final double? cornerRadiusElevatedButton;
-
-  /// Corner radius override value for [OutlinedButton].
-  final double? cornerRadiusOutlinedButton;
-
-  /// Corner radius override value for [ToggleButtons].
-  final double? cornerRadiusToggleButtons;
-
-  /// Elevation of [Card].
-  ///
-  /// This design favors a flat design using color branded tint on card
-  /// background, and defaults to [kCardElevation] elevation on [Card].
-  final double cardElevation;
+  final double? elevatedButtonRadius;
 
   /// Default elevation of [ElevatedButton].
   ///
@@ -183,11 +231,115 @@ class FlexSubThemesData with Diagnosticable {
   /// and defaults to [kElevatedButtonElevation] elevation on [ElevatedButton].
   final double elevatedButtonElevation;
 
+  /// Corner radius override value for [OutlinedButton].
+  final double? outlinedButtonRadius;
+
+  /// Corner radius override value for [ToggleButtons].
+  final double? toggleButtonsRadius;
+
+  /// Corner radius override value for [InputDecoration].
+  final double? inputDecorationRadius;
+
+  /// Determines if the [InputDecorator] is filled with a color.
+  ///
+  /// This property also affects if the fill color is used when not opting in
+  /// on sub-themes. Giving an opportunity to make the past always filled input
+  /// decorator even less opinionated.
+  ///
+  /// Defaults to true;
+  final bool inputDecoratorIsFilled;
+
+  /// Determines if the color of the filled [InputDecorator].
+  ///
+  /// Defaults to colorScheme.primary.withOpacity(0.06) if null.
+  final Color? inputDecoratorFillColor;
+
+  // TODO(rydmike): Consider ContinuousRectangleBorder and beveled as new types.
+
+  /// Determines the of border [InputDecorator] uses.
+  ///
+  /// Defaults to [FlexInputBorderType.outline] to prefer the outline style.
+  ///
+  /// To use the underline style set it to [FlexInputBorderType.underline].
+  /// The top border are still rounded according to overall [defaultRadius].
+  ///
+  /// To change input decorator's corner radius separately define
+  /// [inputDecorationRadius] that will then override [defaultRadius].
+  final FlexInputBorderType inputDecoratorBorderType;
+
+  /// Determines if the [InputDecorator] unfocused state has a border.
+  ///
+  /// Defaults to true.
+  ///
+  /// Applies to both outline and underline mode, so regardless of is
+  /// [inputDecoratorBorderType] is true or false.
+  ///
+  /// You would typically
+  /// use this in a design where you use a fill color and want unfocused
+  /// input fields to only be highlighted by the fill color and not even
+  /// have an unfocused input border style.
+  ///
+  /// When set to false, there is no border bored on states enabledBorder and
+  /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
+  /// and errorBorder, so error thus has a border also when it is not focused.
+  final bool inputDecoratorUnfocusedHasBorder;
+
+  /// Corner radius override value for [FloatingActionButton].
+  final double? fabRadius;
+
+  /// Corner radius override value for [Chip].
+  final double? chipRadius;
+
+  /// Corner radius override value for [Card].
+  final double? cardRadius;
+
+  /// Elevation of [Card].
+  ///
+  /// This design favors a flat design using color branded tint on card
+  /// background, and defaults to [kCardElevation] elevation on [Card].
+  final double cardElevation;
+
+  /// Corner radius override value for the menu on [PopupMenuButton].
+  ///
+  /// When used by [FlexColorScheme] the corner radius of popup menus follows
+  /// the [defaultRadius] until and including 10 dp. After which it stays at
+  /// 10 dp. If you need a higher corner radius on popup menus than 10 dp,
+  /// you will have to explicitly override it here. It will not look very
+  /// good, the highlight inside the menu will start to overflow the corners and
+  /// it is not clipped along the border radius. The underlying Widget is not
+  /// designed with this high border rounding in mind, which makes sense since
+  /// it does not look good with too much rounding on a small menu.
+  ///
+  /// The built-in behavior in FlexColorScheme allows it to match at low
+  /// inherited default radius values, but to also stay below the usable max
+  /// rounding automatically at higher global default border radius values.
+  final double? popupMenuRadius;
+
   /// Default elevation of [PopupMenuButton].
   ///
   /// The SDK elevation 8 is too high, we make it much more subtle via
   /// opinionated default value [kPopupMenuElevation].
   final double popupMenuElevation;
+
+  /// Popup menu background opacity
+  ///
+  /// If null, defaults to 1, fully opaque.
+  ///
+  /// Used by FlexColorScheme to modify the opacity on the effective
+  /// colorScheme.surface color used on the themed PopupMenu background color.
+  ///
+  /// For opacity to be applied to the background a defined color also have
+  /// be passed. If opacity is not null, FlexColorScheme will apply it to its
+  /// [colorScheme.surface] and pass it to
+  /// [FlexSubThemes.popupMenuTheme]'s backgroundColor [color]. If it is null,
+  /// FlexColorScheme will not pass any color the sub-theme background color,
+  /// and widget then uses its default behavior background color, which also
+  /// happens to be to use [ThemeData.colorscheme] and in it
+  /// [ColorScheme.surface].
+  final double? popupMenuOpacity;
+
+  /// Corner radius override value for [Dialog].
+  final double? dialogRadius;
 
   /// Elevation of [Dialog].
   ///
@@ -198,10 +350,16 @@ class FlexSubThemesData with Diagnosticable {
   /// light and contrast poorly with primary color.
   final double dialogElevation;
 
+  /// Corner radius override value for [TimePickerDialog].
+  final double? timePickerDialogRadius;
+
   /// Elevation of [SnackBar].
   ///
   /// Defaults to [kSnackBarElevation].
   final double snackBarElevation;
+
+  /// Corner radius override value for [BottomSheet].
+  final double? bottomSheetRadius;
 
   /// Elevation of none modal [BottomSheet].
   ///
@@ -226,10 +384,12 @@ class FlexSubThemesData with Diagnosticable {
   /// colorScheme.background color on the themed BottomNavigationBar color.
   ///
   /// For opacity to be applied to the background a defined color also have
-  /// be passed. If opacity is not null, FlexColorScheme will apply it to
-  /// colorScheme.background and pass it to
+  /// be passed. If opacity is not null, FlexColorScheme will apply it to its
+  /// [colorScheme.background] and pass it to
   /// [FlexSubThemes.bottomNavigationBar]'s backgroundColor. If it is null,
   /// FlexColorScheme will not pass any color the sub-theme background color.
+  /// and widget uses its default behavior background color, which also happens
+  /// to be to use [ThemeData.colorscheme] and in it [ColorScheme.background].
   ///
   /// Typically you would apply some opacity in the range 0.85 to 0.98 if
   /// to show content scrolling behind it when using the Scaffold property
@@ -261,160 +421,85 @@ class FlexSubThemesData with Diagnosticable {
   /// This property is null by default.
   final BottomNavigationBarLandscapeLayout? bottomNavigationBarLandscapeLayout;
 
-  /// Minimum button size for all buttons.
-  ///
-  /// Applies to [TextButton], [ElevatedButton], [OutlinedButton] and
-  /// [ToggleButtons] and legacy deprecated buttons.
-  ///
-  /// Defaults to [kMinButtonSize].
-  final Size minButtonSize;
-
-  /// Rounded buttons need a bit more horizontal padding to
-  /// accommodate for the rounding.
-  ///
-  /// Applies to [TextButton], [ElevatedButton] and [OutlinedButton].
-  ///
-  /// Defaults to [kButtonPadding].
-  final EdgeInsetsGeometry buttonPadding;
-
-  /// Border width of Widgets with an outline border.
-  ///
-  /// Applies to enabled [OutlinedButton] and always to [ToggleButtons], as well
-  /// as to selected state of [InputDecorator].
-  ///
-  /// Default to [kThickBorderWidth].
-  final double thickBorderWidth;
-
-  /// Border thickness on unselected input decorator and disabled buttons.
-  ///
-  /// Applies to disabled [OutlinedButton] and to un-selected state in
-  /// [InputDecorator].
-  ///
-  /// Default to [kThinBorderWidth].
-  final double thinBorderWidth;
-
-  /// Determines if the [InputDecorator] is filled with a color.
-  ///
-  /// This property also affects if the fill color is used when not opting in
-  /// on sub-themes. Giving an opportunity to make the past always filled input
-  /// decorator even less opinionated.
-  ///
-  /// Defaults to true;
-  final bool inputDecoratorIsFilled;
-
-  /// Determines if the color of the filled [InputDecorator].
-  ///
-  /// Defaults to colorScheme.primary.withOpacity(0.06) if null.
-  final Color? inputDecoratorFillColor;
-
-  /// Determines the of border [InputDecorator] uses.
-  ///
-  /// Defaults to [FlexInputBorderType.outline] to prefer the outline style.
-  ///
-  /// To use the underline style set it to [FlexInputBorderType.underline].
-  /// The top border are still rounded according to overall [cornerRadius].
-  ///
-  /// To change input decorator's corner radius separately define
-  /// [cornerRadiusInputDecoration] that will then override [cornerRadius].
-  final FlexInputBorderType inputDecoratorBorderType;
-
-  /// Determines if the [InputDecorator] unfocused state has a border.
-  ///
-  /// Defaults to true.
-  ///
-  /// Applies to both outline and underline mode, so regardless of is
-  /// [inputDecoratorBorderType] is true or false.
-  ///
-  /// You would typically
-  /// use this in a design where you use a fill color and want unfocused
-  /// input fields to only be highlighted by the fill color and not even
-  /// have an unfocused input border style.
-  ///
-  /// When set to false, there is no border bored on states enabledBorder and
-  /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
-  /// and errorBorder, so error thus has a border also when it is not focused.
-  final bool inputDecoratorUnfocusedHasBorder;
-
-  /// Use [FlexSurfaceMode] selection [surfaceMode] and [blendLevel] in
-  /// [FlexColorScheme.light] and [FlexColorScheme.dark] to also blend primary
-  /// color into onColors.
-  ///
-  /// Blending the on colors results in lower contrast than when not doing,
-  /// but it often works well on lower blend levels.
-  ///
-  /// Defaults to false.
-  final bool blendOnColors;
-
-  /// Use [FlexSurfaceMode] selection [surfaceMode] and [blendLevel] in
-  /// [FlexColorScheme.light] and [FlexColorScheme.dark] to also blend primary
-  /// color into text themes.
-  ///
-  /// Defaults to true.
-  final bool blendTextTheme;
-
   /// Copy the object with one or more provided properties changed.
   FlexSubThemesData copyWith({
-    final bool? themedEffects,
-    final double? cornerRadius,
-    final double? cornerRadiusBottomSheet,
-    final double? cornerRadiusCard,
-    final double? cornerRadiusDialog,
-    final double? cornerRadiusPopupMenuButton,
-    final double? cornerRadiusTimePickerDialog,
-    final double? cornerRadiusInputDecoration,
-    final double? cornerRadiusTextButton,
-    final double? cornerRadiusElevatedButton,
-    final double? cornerRadiusOutlinedButton,
-    final double? cornerRadiusToggleButtons,
-    final double? cardElevation,
+    final bool? interactionEffects,
+    final bool? blendOnColors,
+    final bool? blendTextTheme,
+    final bool? useTextTheme,
+    final double? defaultRadius,
+    final Size? buttonMinSize,
+    final EdgeInsetsGeometry? buttonPadding,
+    final double? thickBorderWidth,
+    final double? thinBorderWidth,
+    final double? textButtonRadius,
+    final double? elevatedButtonRadius,
     final double? elevatedButtonElevation,
+    final double? outlinedButtonRadius,
+    final double? toggleButtonsRadius,
+    final double? inputDecorationRadius,
+    final bool? inputDecoratorIsFilled,
+    final Color? inputDecoratorFillColor,
+    final FlexInputBorderType? inputDecoratorBorderType,
+    final bool? inputDecoratorUnfocusedHasBorder,
+    final double? fabRadius,
+    final double? chipRadius,
+    final double? cardRadius,
+    final double? cardElevation,
+    final double? popupMenuRadius,
     final double? popupMenuElevation,
+    final double? popupMenuOpacity,
     final double? dialogElevation,
+    final double? dialogRadius,
+    final double? timePickerDialogRadius,
     final double? snackBarElevation,
+    final double? bottomSheetRadius,
     final double? bottomSheetElevation,
     final double? bottomSheetModalElevation,
     final double? bottomNavigationBarElevation,
     final double? bottomNavigationBarOpacity,
     final BottomNavigationBarLandscapeLayout?
         bottomNavigationBarLandscapeLayout,
-    final Size? minButtonSize,
-    final EdgeInsetsGeometry? buttonPadding,
-    final double? thickBorderWidth,
-    final double? thinBorderWidth,
-    final bool? inputDecoratorIsFilled,
-    final Color? inputDecoratorFillColor,
-    final FlexInputBorderType? inputDecoratorBorderType,
-    final bool? inputDecoratorUnfocusedHasBorder,
-    final bool? blendOnColors,
-    final bool? blendTextTheme,
   }) {
     return FlexSubThemesData(
-      themedEffects: themedEffects ?? this.themedEffects,
-      cornerRadius: cornerRadius ?? this.cornerRadius,
-      cornerRadiusBottomSheet:
-          cornerRadiusBottomSheet ?? this.cornerRadiusBottomSheet,
-      cornerRadiusCard: cornerRadiusCard ?? this.cornerRadiusCard,
-      cornerRadiusDialog: cornerRadiusDialog ?? this.cornerRadiusDialog,
-      cornerRadiusPopupMenuButton:
-          cornerRadiusPopupMenuButton ?? this.cornerRadiusPopupMenuButton,
-      cornerRadiusTimePickerDialog:
-          cornerRadiusTimePickerDialog ?? this.cornerRadiusTimePickerDialog,
-      cornerRadiusInputDecoration:
-          cornerRadiusInputDecoration ?? this.cornerRadiusInputDecoration,
-      cornerRadiusTextButton:
-          cornerRadiusTextButton ?? this.cornerRadiusTextButton,
-      cornerRadiusElevatedButton:
-          cornerRadiusElevatedButton ?? this.cornerRadiusElevatedButton,
-      cornerRadiusOutlinedButton:
-          cornerRadiusOutlinedButton ?? this.cornerRadiusOutlinedButton,
-      cornerRadiusToggleButtons:
-          cornerRadiusToggleButtons ?? this.cornerRadiusToggleButtons,
-      cardElevation: cardElevation ?? this.cardElevation,
+      interactionEffects: interactionEffects ?? this.interactionEffects,
+      blendOnColors: blendOnColors ?? this.blendOnColors,
+      blendTextTheme: blendTextTheme ?? this.blendTextTheme,
+      useTextTheme: useTextTheme ?? this.useTextTheme,
+      defaultRadius: defaultRadius ?? this.defaultRadius,
+      buttonMinSize: buttonMinSize ?? this.buttonMinSize,
+      buttonPadding: buttonPadding ?? this.buttonPadding,
+      thickBorderWidth: thickBorderWidth ?? this.thickBorderWidth,
+      thinBorderWidth: thinBorderWidth ?? this.thinBorderWidth,
+      textButtonRadius: textButtonRadius ?? this.textButtonRadius,
+      elevatedButtonRadius: elevatedButtonRadius ?? this.elevatedButtonRadius,
       elevatedButtonElevation:
           elevatedButtonElevation ?? this.elevatedButtonElevation,
-      popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
+      outlinedButtonRadius: outlinedButtonRadius ?? this.outlinedButtonRadius,
+      toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
+      inputDecorationRadius:
+          inputDecorationRadius ?? this.inputDecorationRadius,
+      inputDecoratorIsFilled:
+          inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
+      inputDecoratorFillColor:
+          inputDecoratorFillColor ?? this.inputDecoratorFillColor,
+      inputDecoratorBorderType:
+          inputDecoratorBorderType ?? this.inputDecoratorBorderType,
+      inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ??
+          this.inputDecoratorUnfocusedHasBorder,
+      fabRadius: fabRadius ?? this.fabRadius,
+      chipRadius: chipRadius ?? this.chipRadius,
+      cardRadius: cardRadius ?? this.cardRadius,
+      cardElevation: cardElevation ?? this.cardElevation,
+      dialogRadius: dialogRadius ?? this.dialogRadius,
       dialogElevation: dialogElevation ?? this.dialogElevation,
+      popupMenuRadius: popupMenuRadius ?? this.popupMenuRadius,
+      popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
+      popupMenuOpacity: popupMenuOpacity ?? this.popupMenuOpacity,
+      timePickerDialogRadius:
+          timePickerDialogRadius ?? this.timePickerDialogRadius,
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
+      bottomSheetRadius: bottomSheetRadius ?? this.bottomSheetRadius,
       bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
       bottomSheetModalElevation:
           bottomSheetModalElevation ?? this.bottomSheetModalElevation,
@@ -424,20 +509,6 @@ class FlexSubThemesData with Diagnosticable {
           bottomNavigationBarOpacity ?? this.bottomNavigationBarOpacity,
       bottomNavigationBarLandscapeLayout: bottomNavigationBarLandscapeLayout ??
           this.bottomNavigationBarLandscapeLayout,
-      minButtonSize: minButtonSize ?? this.minButtonSize,
-      buttonPadding: buttonPadding ?? this.buttonPadding,
-      thickBorderWidth: thickBorderWidth ?? this.thickBorderWidth,
-      thinBorderWidth: thinBorderWidth ?? this.thinBorderWidth,
-      inputDecoratorIsFilled:
-          inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
-      inputDecoratorFillColor:
-          inputDecoratorFillColor ?? this.inputDecoratorFillColor,
-      inputDecoratorBorderType:
-          inputDecoratorBorderType ?? this.inputDecoratorBorderType,
-      inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ??
-          this.inputDecoratorUnfocusedHasBorder,
-      blendOnColors: blendOnColors ?? this.blendOnColors,
-      blendTextTheme: blendTextTheme ?? this.blendTextTheme,
     );
   }
 
@@ -446,77 +517,85 @@ class FlexSubThemesData with Diagnosticable {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
     return other is FlexSubThemesData &&
-        other.themedEffects == themedEffects &&
-        other.cornerRadius == cornerRadius &&
-        other.cornerRadiusBottomSheet == cornerRadiusBottomSheet &&
-        other.cornerRadiusCard == cornerRadiusCard &&
-        other.cornerRadiusDialog == cornerRadiusDialog &&
-        other.cornerRadiusPopupMenuButton == cornerRadiusPopupMenuButton &&
-        other.cornerRadiusTimePickerDialog == cornerRadiusTimePickerDialog &&
-        other.cornerRadiusInputDecoration == cornerRadiusInputDecoration &&
-        other.cornerRadiusTextButton == cornerRadiusTextButton &&
-        other.cornerRadiusElevatedButton == cornerRadiusElevatedButton &&
-        other.cornerRadiusOutlinedButton == cornerRadiusOutlinedButton &&
-        other.cornerRadiusToggleButtons == cornerRadiusToggleButtons &&
-        other.cardElevation == cardElevation &&
-        other.elevatedButtonElevation == elevatedButtonElevation &&
-        other.popupMenuElevation == popupMenuElevation &&
-        other.dialogElevation == dialogElevation &&
-        other.snackBarElevation == snackBarElevation &&
-        other.bottomSheetElevation == bottomSheetElevation &&
-        other.bottomSheetModalElevation == bottomSheetModalElevation &&
-        other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
-        other.bottomNavigationBarOpacity == bottomNavigationBarOpacity &&
-        other.bottomNavigationBarLandscapeLayout ==
-            bottomNavigationBarLandscapeLayout &&
-        other.minButtonSize == minButtonSize &&
+        other.interactionEffects == interactionEffects &&
+        other.blendOnColors == blendOnColors &&
+        other.blendTextTheme == blendTextTheme &&
+        other.useTextTheme == useTextTheme &&
+        other.defaultRadius == defaultRadius &&
+        other.buttonMinSize == buttonMinSize &&
         other.buttonPadding == buttonPadding &&
         other.thickBorderWidth == thickBorderWidth &&
         other.thinBorderWidth == thinBorderWidth &&
+        other.textButtonRadius == textButtonRadius &&
+        other.elevatedButtonRadius == elevatedButtonRadius &&
+        other.elevatedButtonElevation == elevatedButtonElevation &&
+        other.outlinedButtonRadius == outlinedButtonRadius &&
+        other.toggleButtonsRadius == toggleButtonsRadius &&
+        other.inputDecorationRadius == inputDecorationRadius &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
         other.inputDecoratorBorderType == inputDecoratorBorderType &&
         other.inputDecoratorUnfocusedHasBorder ==
             inputDecoratorUnfocusedHasBorder &&
-        other.blendOnColors == blendOnColors &&
-        other.blendTextTheme == blendTextTheme;
+        other.fabRadius == fabRadius &&
+        other.chipRadius == chipRadius &&
+        other.cardRadius == cardRadius &&
+        other.cardElevation == cardElevation &&
+        other.popupMenuRadius == popupMenuRadius &&
+        other.popupMenuElevation == popupMenuElevation &&
+        other.popupMenuOpacity == popupMenuOpacity &&
+        other.dialogRadius == dialogRadius &&
+        other.dialogElevation == dialogElevation &&
+        other.timePickerDialogRadius == timePickerDialogRadius &&
+        other.snackBarElevation == snackBarElevation &&
+        other.bottomSheetRadius == bottomSheetRadius &&
+        other.bottomSheetElevation == bottomSheetElevation &&
+        other.bottomSheetModalElevation == bottomSheetModalElevation &&
+        other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
+        other.bottomNavigationBarOpacity == bottomNavigationBarOpacity &&
+        other.bottomNavigationBarLandscapeLayout ==
+            bottomNavigationBarLandscapeLayout;
   }
 
   @override
   int get hashCode {
     final List<Object?> values = <Object?>[
-      themedEffects,
-      cornerRadius,
-      cornerRadiusBottomSheet,
-      cornerRadiusCard,
-      cornerRadiusDialog,
-      cornerRadiusPopupMenuButton,
-      cornerRadiusTimePickerDialog,
-      cornerRadiusInputDecoration,
-      cornerRadiusTextButton,
-      cornerRadiusElevatedButton,
-      cornerRadiusOutlinedButton,
-      cornerRadiusToggleButtons,
-      cardElevation,
+      interactionEffects,
+      blendOnColors,
+      blendTextTheme,
+      useTextTheme,
+      defaultRadius,
+      buttonMinSize,
+      buttonPadding,
+      thickBorderWidth,
+      thinBorderWidth,
+      textButtonRadius,
+      elevatedButtonRadius,
       elevatedButtonElevation,
+      outlinedButtonRadius,
+      toggleButtonsRadius,
+      inputDecorationRadius,
+      inputDecoratorIsFilled,
+      inputDecoratorFillColor,
+      inputDecoratorBorderType,
+      inputDecoratorUnfocusedHasBorder,
+      fabRadius,
+      chipRadius,
+      cardRadius,
+      cardElevation,
+      popupMenuRadius,
       popupMenuElevation,
+      popupMenuOpacity,
+      dialogRadius,
       dialogElevation,
+      timePickerDialogRadius,
       snackBarElevation,
+      bottomSheetRadius,
       bottomSheetElevation,
       bottomSheetModalElevation,
       bottomNavigationBarElevation,
       bottomNavigationBarOpacity,
       bottomNavigationBarLandscapeLayout,
-      minButtonSize,
-      buttonPadding,
-      thickBorderWidth,
-      thinBorderWidth,
-      inputDecoratorIsFilled,
-      inputDecoratorFillColor,
-      inputDecoratorBorderType,
-      inputDecoratorUnfocusedHasBorder,
-      blendOnColors,
-      blendTextTheme,
     ];
     return hashList(values);
   }
@@ -524,37 +603,58 @@ class FlexSubThemesData with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('themedEffects', themedEffects));
-    properties.add(DiagnosticsProperty<double>('cornerRadius', cornerRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'cornerRadiusBottomSheet', cornerRadiusBottomSheet));
-    properties
-        .add(DiagnosticsProperty<double>('cornerRadiusCard', cornerRadiusCard));
     properties.add(
-        DiagnosticsProperty<double>('cornerRadiusDialog', cornerRadiusDialog));
+        DiagnosticsProperty<bool>('interactionEffects', interactionEffects));
+    properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
+    properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
+    properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
+    properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));
+    properties.add(DiagnosticsProperty<Size>('buttonMinSize', buttonMinSize));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
+        'buttonPadding', buttonPadding));
+    properties
+        .add(DiagnosticsProperty<double>('thickBorderWidth', thickBorderWidth));
+    properties
+        .add(DiagnosticsProperty<double>('thinBorderWidth', thinBorderWidth));
+    properties
+        .add(DiagnosticsProperty<double>('textButtonRadius', textButtonRadius));
     properties.add(DiagnosticsProperty<double>(
-        'cornerRadiusPopupMenuButton', cornerRadiusPopupMenuButton));
-    properties.add(DiagnosticsProperty<double>(
-        'cornerRadiusTimePickerDialog', cornerRadiusTimePickerDialog));
-    properties.add(DiagnosticsProperty<double>(
-        'cornerRadiusInputDecoration', cornerRadiusInputDecoration));
-    properties.add(DiagnosticsProperty<double>(
-        'cornerRadiusTextButton', cornerRadiusTextButton));
-    properties.add(DiagnosticsProperty<double>(
-        'cornerRadiusElevatedButton', cornerRadiusElevatedButton));
-    properties.add(DiagnosticsProperty<double>(
-        'cornerRadiusOutlinedButton', cornerRadiusOutlinedButton));
-    properties.add(DiagnosticsProperty<double>(
-        'cornerRadiusToggleButtons', cornerRadiusToggleButtons));
-    properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
+        'elevatedButtonRadius', elevatedButtonRadius));
     properties.add(DiagnosticsProperty<double>(
         'elevatedButtonElevation', elevatedButtonElevation));
+    properties.add(DiagnosticsProperty<double>(
+        'outlinedButtonRadius', outlinedButtonRadius));
+    properties.add(DiagnosticsProperty<double>(
+        'toggleButtonsRadius', toggleButtonsRadius));
+    properties.add(DiagnosticsProperty<double>(
+        'inputDecorationRadius', inputDecorationRadius));
+    properties.add(DiagnosticsProperty<bool>(
+        'inputDecoratorIsFilled', inputDecoratorIsFilled));
+    properties
+        .add(ColorProperty('inputDecoratorFillColor', inputDecoratorFillColor));
+    properties.add(EnumProperty<FlexInputBorderType>(
+        'inputDecoratorBorderType', inputDecoratorBorderType));
+    properties.add(DiagnosticsProperty<bool>(
+        'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
+    properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
+    properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
+    properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
+    properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
+    properties
+        .add(DiagnosticsProperty<double>('popupMenuRadius', popupMenuRadius));
     properties.add(
         DiagnosticsProperty<double>('popupMenuElevation', popupMenuElevation));
     properties
+        .add(DiagnosticsProperty<double>('popupMenuOpacity', popupMenuOpacity));
+    properties.add(DiagnosticsProperty<double>('dialogRadius', dialogRadius));
+    properties
         .add(DiagnosticsProperty<double>('dialogElevation', dialogElevation));
+    properties.add(DiagnosticsProperty<double>(
+        'timePickerDialogRadius', timePickerDialogRadius));
     properties.add(
         DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
+    properties.add(
+        DiagnosticsProperty<double>('bottomSheetRadius', bottomSheetRadius));
     properties.add(DiagnosticsProperty<double>(
         'bottomSheetElevation', bottomSheetElevation));
     properties.add(DiagnosticsProperty<double>(
@@ -566,24 +666,5 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<BottomNavigationBarLandscapeLayout>(
         'bottomNavigationBarLandscapeLayout',
         bottomNavigationBarLandscapeLayout));
-    properties.add(DiagnosticsProperty<Size>('minButtonSize', minButtonSize));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
-        'buttonPadding', buttonPadding));
-    properties
-        .add(DiagnosticsProperty<double>('thickBorderWidth', thickBorderWidth));
-    properties
-        .add(DiagnosticsProperty<double>('thinBorderWidth', thinBorderWidth));
-    properties.add(DiagnosticsProperty<bool>(
-        'inputDecoratorIsFilled', inputDecoratorIsFilled));
-    properties
-        .add(ColorProperty('inputDecoratorFillColor', inputDecoratorFillColor));
-    properties.add(EnumProperty<FlexInputBorderType>(
-        'inputDecoratorBorderType', inputDecoratorBorderType));
-    properties.add(DiagnosticsProperty<bool>(
-        'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
-    properties
-        .add(DiagnosticsProperty<bool>('blendLightOnColors', blendOnColors));
-    properties
-        .add(DiagnosticsProperty<bool>('blendLightModeText', blendTextTheme));
   }
 }

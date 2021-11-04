@@ -57,7 +57,7 @@ class AppColor {
 // use the method `toDark` further below with the `_myScheme3Light` instance.
   static final FlexSchemeColor _myScheme3Light = FlexSchemeColor.from(
     primary: const Color(0xff04368e),
-    secondary: const Color(0xffd92828),
+    secondary: const Color(0xffa00505),
   );
 
 // Finally we create a list with all color schemes we will use. Starting with
@@ -71,8 +71,7 @@ class AppColor {
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
       name: 'Custom1: Midnight blue',
-      description:
-          'Midnight blue theme, created by defining all scheme colors.',
+      description: 'Midnight blue theme, created by defining all scheme colors',
       // FlexSchemeData holds separate defined color schemes for light and
       // matching dark theme colors. Dark theme colors typically need to be less
       // saturated versions of their than light counter parts. Using the same
@@ -82,18 +81,17 @@ class AppColor {
     ),
     // Do the same for our second custom scheme.
     FlexSchemeData(
-      name: 'Custom2 Olive green',
-      description: 'Custom olive green theme, created from primary '
-          'light and dark colors.',
+      name: 'Custom2 Green',
+      description: 'Vivid green theme, created only from primary '
+          'light and dark colors',
       light: _myScheme2Light,
       dark: _myScheme2Dark,
     ),
     // We also do the same for our 3rd custom scheme, BUT we create its matching
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
-      name: 'Custom3: Green Vogue',
-      description:
-          'Custom green and orange theme, from only light scheme colors.',
+      name: 'Custom3: Red&Blue',
+      description: 'Classic read and blue, from only light scheme colors.',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.
       dark: _myScheme3Light.toDark(),

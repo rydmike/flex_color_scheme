@@ -15,7 +15,19 @@ import 'theme_service.dart';
 /// values or the [ThemeServiceHive] that uses the hive packages to accomplish
 /// the same thing. You could also make an implementation that stores settings
 /// on a web server, e.g. with the http package.
+///
+/// The ThemeController that this is service is used with, keeps all latest
+/// setting values in memory itself, so this memory implementation
+/// does not really do anything when calling save for each property,
+/// they are all just no-op.
+///
+/// Loading value from just returns the default value for each settings
+/// property.
 class ThemeServiceMem implements ThemeService {
+  /// ThemeServiceMem implementations needs no init, it is just a no op.
+  @override
+  Future<void> init() async {}
+
   /// Loads the ThemeMode from local or remote storage.
   @override
   Future<ThemeMode> themeMode() async => ThemeService.defaultThemeMode;
@@ -31,6 +43,14 @@ class ThemeServiceMem implements ThemeService {
   /// Persists the use sub themes setting to mem in examples 2, 3, 4 and 5.
   @override
   Future<void> saveUseSubThemes(bool value) async {}
+
+  /// Loads the useTextTheme setting in example 5.
+  @override
+  Future<bool> useTextTheme() async => ThemeService.defaultUseTextTheme;
+
+  /// Persists the useTextTheme setting in example 5.
+  @override
+  Future<void> saveUseTextTheme(bool value) async {}
 
   /// Loads the used scheme setting from mem in example 3.
   @override
@@ -50,11 +70,20 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used themed effects setting in example 5.
   @override
-  Future<bool> themedEffects() async => ThemeService.defaultThemedEffects;
+  Future<bool> interactionEffects() async =>
+      ThemeService.defaultInteractionEffects;
 
   /// Persists used themed effects setting in example 5.
   @override
-  Future<void> saveThemedEffects(bool value) async {}
+  Future<void> saveInteractionEffects(bool value) async {}
+
+  /// Loads used useDefaultRadius setting in example 5.
+  @override
+  Future<bool> useDefaultRadius() async => ThemeService.defaultUseDefaultRadius;
+
+  /// Persists the useDefaultRadius setting in example 5.
+  @override
+  Future<void> saveUseDefaultRadius(bool value) async {}
 
   /// Loads used corner radius setting in example 5.
   @override

@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 /// Interface for ThemeService used to read and save theme properties.
 abstract class ThemeService {
+  /// ThemeService implementations may override this method to perform needed
+  /// initialization and setup work.
+  Future<void> init();
+
   /// Key used to read and save the themeMode value.
   static const String keyThemeMode = 'themeMode';
 
@@ -26,6 +30,18 @@ abstract class ThemeService {
 
   /// Persists the use sub themes setting in examples 2, 3, 4 and 5.
   Future<void> saveUseSubThemes(bool value);
+
+  /// Key used to read and save the useTextTheme value.
+  static const String keyUseTextTheme = 'useTextTheme';
+
+  /// Default value for the useSubThemes, also used to reset settings.
+  static const bool defaultUseTextTheme = true;
+
+  /// Loads the useTextTheme setting in example 5.
+  Future<bool> useTextTheme();
+
+  /// Persists the useTextTheme setting in example 5.
+  Future<void> saveUseTextTheme(bool value);
 
   /// Key used to read and save the usedScheme value.
   static const String keyUsedScheme = 'usedScheme';
@@ -52,17 +68,29 @@ abstract class ThemeService {
   /// Persists the used scheme setting, in examples 4 and 5.
   Future<void> saveSchemeIndex(int value);
 
-  /// Key used to read and save the themedEffects value.
-  static const String keyThemedEffects = 'themedEffects';
+  /// Key used to read and save the interactionEffects value.
+  static const String keyInteractionEffects = 'interactionEffects';
 
-  /// Default value for the themedEffects, also used to reset settings.
-  static const bool defaultThemedEffects = true;
+  /// Default value for the interactionEffects, also used to reset settings.
+  static const bool defaultInteractionEffects = true;
 
   /// Loads used themed effects setting in example 5.
-  Future<bool> themedEffects();
+  Future<bool> interactionEffects();
 
   /// Persists used themed effects setting in example 5.
-  Future<void> saveThemedEffects(bool value);
+  Future<void> saveInteractionEffects(bool value);
+
+  /// Key used to read and save the useDefaultRadius value.
+  static const String keyUseDefaultRadius = 'useDefaultRadius';
+
+  /// Default value for the useDefaultRadius, also used to reset settings.
+  static const bool defaultUseDefaultRadius = true;
+
+  /// Loads used useDefaultRadius setting in example 5.
+  Future<bool> useDefaultRadius();
+
+  /// Persists the useDefaultRadius setting in example 5.
+  Future<void> saveUseDefaultRadius(bool value);
 
   /// Key used to read and save the cornerRadius value.
   static const String keyCornerRadius = 'cornerRadius';

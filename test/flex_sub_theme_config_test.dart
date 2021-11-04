@@ -14,64 +14,69 @@ void main() {
     const FlexSubThemesData m1 = FlexSubThemesData();
     // m2, same definition as m1, but using default values to create.
     const FlexSubThemesData m2 = FlexSubThemesData(
-      themedEffects: true,
-      cornerRadius: 16,
-      cardElevation: 0,
-      elevatedButtonElevation: 0,
-      popupMenuElevation: 2,
-      dialogElevation: 10,
-      snackBarElevation: 4,
-      bottomSheetElevation: 4,
-      bottomSheetModalElevation: 8,
-      bottomNavigationBarElevation: 0,
-      minButtonSize: Size(46, 46),
-      buttonPadding: EdgeInsets.symmetric(horizontal: 16),
+      interactionEffects: true,
+      blendOnColors: true,
+      blendTextTheme: true,
+      useTextTheme: true,
+      defaultRadius: 16,
+      buttonMinSize: Size(40, 40),
       thickBorderWidth: 2,
       thinBorderWidth: 1.5,
+      elevatedButtonElevation: 2,
       inputDecoratorIsFilled: true,
       inputDecoratorBorderType: FlexInputBorderType.outline,
       inputDecoratorUnfocusedHasBorder: true,
-    );
-    // m3, one different values than m1 and m2.
-    const FlexSubThemesData m3 = FlexSubThemesData(
-      themedEffects: true,
-      cornerRadius: 16,
       cardElevation: 0,
-      elevatedButtonElevation: 0,
-      popupMenuElevation: 2,
+      popupMenuElevation: 4,
       dialogElevation: 10,
       snackBarElevation: 4,
       bottomSheetElevation: 4,
       bottomSheetModalElevation: 8,
       bottomNavigationBarElevation: 0,
-      minButtonSize: Size(46, 46),
-      buttonPadding: EdgeInsets.symmetric(horizontal: 16),
+    );
+    // m3, one different values than m1 and m2.
+    const FlexSubThemesData m3 = FlexSubThemesData(
+      interactionEffects: true,
+      blendOnColors: true,
+      blendTextTheme: true,
+      useTextTheme: true,
+      defaultRadius: 16,
+      buttonMinSize: Size(40, 40),
       thickBorderWidth: 2,
       thinBorderWidth: 1.5,
+      elevatedButtonElevation: 2,
       inputDecoratorIsFilled: true,
-      inputDecoratorBorderType:
-          FlexInputBorderType.underline, // <==This differs
+      inputDecoratorBorderType: FlexInputBorderType.underline, // <--diff
       inputDecoratorUnfocusedHasBorder: true,
+      cardElevation: 0,
+      popupMenuElevation: 4,
+      dialogElevation: 10,
+      snackBarElevation: 4,
+      bottomSheetElevation: 4,
+      bottomSheetModalElevation: 8,
+      bottomNavigationBarElevation: 0,
     );
     // m4, all values different from m1 and m2.
     const FlexSubThemesData m4 = FlexSubThemesData(
-      themedEffects: false,
-      cornerRadius: 12,
+      interactionEffects: false,
+      blendOnColors: false,
+      blendTextTheme: false,
+      useTextTheme: false,
+      defaultRadius: 10,
+      buttonMinSize: Size(44, 49),
+      thickBorderWidth: 3,
+      thinBorderWidth: 2,
+      elevatedButtonElevation: 3,
+      inputDecoratorIsFilled: false,
+      inputDecoratorBorderType: FlexInputBorderType.underline,
+      inputDecoratorUnfocusedHasBorder: false,
       cardElevation: 1,
-      elevatedButtonElevation: 2,
-      popupMenuElevation: 4,
-      dialogElevation: 16,
+      popupMenuElevation: 5,
+      dialogElevation: 10,
       snackBarElevation: 5,
       bottomSheetElevation: 3,
       bottomSheetModalElevation: 10,
       bottomNavigationBarElevation: 1,
-      minButtonSize: Size(36, 36),
-      buttonPadding: EdgeInsets.symmetric(horizontal: 24),
-      thickBorderWidth: 3,
-      thinBorderWidth: 2.5,
-      inputDecoratorIsFilled: false,
-      inputDecoratorBorderType: FlexInputBorderType.underline,
-      inputDecoratorUnfocusedHasBorder: false,
     );
     // Identity and quality tests
     test(
@@ -110,27 +115,39 @@ void main() {
       expect(m1 != m3, true);
     });
     test(
+        'FSTC1.02c: GIVEN none equal FlexSubThemeConfig objects '
+        'EXPECT them to be equal after copy with change to make equal', () {
+      expect(
+        m1,
+        equals(
+          m3.copyWith(inputDecoratorBorderType: FlexInputBorderType.outline),
+        ),
+      );
+    });
+    test(
         'FSTC1.03a: GIVEN a FlexSubThemeConfig object EXPECT it to be '
         'equal to an unequal object when made equal with copyWith.', () {
       expect(
         m4.copyWith(
-          themedEffects: true,
-          cornerRadius: 16,
+          interactionEffects: true,
+          blendOnColors: true,
+          blendTextTheme: true,
+          useTextTheme: true,
+          defaultRadius: 16,
+          buttonMinSize: Size(40, 40),
+          thickBorderWidth: 2,
+          thinBorderWidth: 1.5,
+          elevatedButtonElevation: 2,
+          inputDecoratorIsFilled: true,
+          inputDecoratorBorderType: FlexInputBorderType.outline,
+          inputDecoratorUnfocusedHasBorder: true,
           cardElevation: 0,
-          elevatedButtonElevation: 0,
-          popupMenuElevation: 2,
+          popupMenuElevation: 4,
           dialogElevation: 10,
           snackBarElevation: 4,
           bottomSheetElevation: 4,
           bottomSheetModalElevation: 8,
           bottomNavigationBarElevation: 0,
-          minButtonSize: const Size(46, 46),
-          buttonPadding: const EdgeInsets.symmetric(horizontal: 16),
-          thickBorderWidth: 2,
-          thinBorderWidth: 1.5,
-          inputDecoratorIsFilled: true,
-          inputDecoratorBorderType: FlexInputBorderType.outline,
-          inputDecoratorUnfocusedHasBorder: true,
         ),
         equals(m1),
       );
@@ -154,7 +171,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSubThemesData#00000(themedEffects: true, cornerRadius: 16.0, cornerRadiusBottomSheet: null, cornerRadiusCard: null, cornerRadiusDialog: null, cornerRadiusPopupMenuButton: null, cornerRadiusTimePickerDialog: null, cornerRadiusInputDecoration: null, cornerRadiusTextButton: null, cornerRadiusElevatedButton: null, cornerRadiusOutlinedButton: null, cornerRadiusToggleButtons: null, cardElevation: 0.0, elevatedButtonElevation: 0.0, popupMenuElevation: 2.0, dialogElevation: 10.0, snackBarElevation: 4.0, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: null, bottomNavigationBarLandscapeLayout: null, minButtonSize: Size(46.0, 46.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, blendLightOnColors: true, blendLightModeText: true)'));
+              'FlexSubThemesData#00000(interactionEffects: true, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: 16.0, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 2.0, outlinedButtonRadius: null, toggleButtonsRadius: null, inputDecorationRadius: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, chipRadius: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 4.0, popupMenuOpacity: null, dialogRadius: null, dialogElevation: 10.0, timePickerDialogRadius: null, snackBarElevation: 4.0, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: null, bottomNavigationBarLandscapeLayout: null)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '
@@ -180,7 +197,8 @@ void main() {
     // above is a bit strange, it depends on something that changes the
     // outcome of the hashCode. Some rainy day I would like to understand why.
     test('FSTC1.08c: Test hashCode copyWith has same exact value.', () {
-      expect(m1.hashCode, equals(m1.copyWith(themedEffects: true).hashCode));
+      expect(
+          m1.hashCode, equals(m1.copyWith(interactionEffects: true).hashCode));
     });
   });
 }

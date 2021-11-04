@@ -88,7 +88,7 @@ class _AppMenuState extends State<AppMenu> {
                           const _UserProfile(),
                           // Create a list of the menu items
                           for (int i = 0; i < _icons.length; i++)
-                            _SideItem(
+                            _MenuItem(
                               width: size.maxWidth,
                               menuWidth: widget.maxWidth,
                               onTap: () {
@@ -118,8 +118,8 @@ class _AppMenuState extends State<AppMenu> {
 }
 
 /// Menu side items, just to make the demo look more like a real use case.
-class _SideItem extends StatelessWidget {
-  const _SideItem({
+class _MenuItem extends StatelessWidget {
+  const _MenuItem({
     Key? key,
     required this.width,
     required this.menuWidth,
@@ -146,7 +146,7 @@ class _SideItem extends StatelessWidget {
         ? theme.colorScheme.onBackground.blend(theme.primaryColorDark, 60)
         : theme.colorScheme.onBackground.blend(theme.colorScheme.primary, 50);
     final Color itemColor =
-        theme.colorScheme.onBackground.blend(theme.colorScheme.primary, 20);
+        theme.colorScheme.onBackground; //.blend(theme.colorScheme.primary, 20);
     if (width < 5) {
       return const SizedBox.shrink();
     } else {
@@ -162,7 +162,11 @@ class _SideItem extends StatelessWidget {
                 topRight: Radius.circular(50 / 2.0),
                 bottomRight: Radius.circular(50 / 2.0),
               ),
-              color: selected ? theme.focusColor : Colors.transparent,
+              // Do something like this on a menu that selects a route/page:
+              // color: selected ? theme.focusColor : Colors.transparent,
+              // But this is just tap commands so we keep it transparent, we
+              // still get hover and tap ink splash.
+              color: Colors.transparent,
               child: InkWell(
                 onTap: onTap,
                 child: SizedBox(

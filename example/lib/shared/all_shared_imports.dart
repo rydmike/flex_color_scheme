@@ -20,6 +20,7 @@ export 'widgets/app_bar_style_buttons.dart';
 export 'widgets/app_menu.dart';
 export 'widgets/app_scroll_behavior.dart';
 export 'widgets/page_body.dart';
+export 'widgets/platform_popup_menu.dart';
 export 'widgets/responsive_scaffold.dart';
 export 'widgets/reveal_list_tile_card.dart';
 export 'widgets/show_theme_colors.dart';
