@@ -1,0 +1,20 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+
+/// Custom app scroll behavior class.
+///
+/// If we want to use the old style drag scroll that was in use on Flutter
+/// stable 2.2.x and earlier, also on desktop and web we can use this scroll
+/// behaviour for the entire application.
+///
+/// This is a Flutter class that only depends on the SDK and can be dropped
+/// into any application. This is actually not a Widget, but it was
+/// convenient to drop it into this folder in these example applications.
+class AppScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => <PointerDeviceKind>{
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
+}

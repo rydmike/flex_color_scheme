@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 /// The open reveal is animated.
 ///
 /// The ListTile and its revealed child are wrapped in a Card widget. The
-/// [RevealListTileCard] is primarily designed to be placed on [Scaffold] using
+/// [HeaderCard] is primarily designed to be placed on [Scaffold] using
 /// its themed background color.
 ///
 /// The header and background color of the [Card] get a slight primary color
@@ -21,8 +21,11 @@ import 'package:flutter/material.dart';
 /// their content and keeping their open/close state alive. If you need one that
 /// is more memory efficient, consider removing the
 /// AutomaticKeepAliveClientMixin.
-class RevealListTileCard extends StatefulWidget {
-  const RevealListTileCard({
+///
+/// This is a Flutter "Universal" Widget that only depends on the SDK and
+/// can be dropped into any application.
+class HeaderCard extends StatefulWidget {
+  const HeaderCard({
     Key? key,
     this.leading,
     this.title,
@@ -34,7 +37,6 @@ class RevealListTileCard extends StatefulWidget {
     this.onChange,
     this.duration = const Duration(milliseconds: 200),
     this.color,
-    // If we don't want bold titles by default, set the default to false.
     this.boldTitle = true,
     this.child,
   }) : super(key: key);
@@ -97,10 +99,10 @@ class RevealListTileCard extends StatefulWidget {
   final Widget? child;
 
   @override
-  _RevealListTileCardState createState() => _RevealListTileCardState();
+  _HeaderCardState createState() => _HeaderCardState();
 }
 
-class _RevealListTileCardState extends State<RevealListTileCard>
+class _HeaderCardState extends State<HeaderCard>
     with AutomaticKeepAliveClientMixin {
   bool _closed = true;
 
@@ -115,7 +117,7 @@ class _RevealListTileCardState extends State<RevealListTileCard>
   }
 
   @override
-  void didUpdateWidget(covariant RevealListTileCard oldWidget) {
+  void didUpdateWidget(covariant HeaderCard oldWidget) {
     if (oldWidget.isClosed != widget.isClosed) {
       _closed = widget.isClosed;
     }
@@ -161,7 +163,7 @@ class _RevealListTileCardState extends State<RevealListTileCard>
     }
 
     // Force title widget for Card header to use opinionated bold style,
-    // if we have a title, boldTitle is true and title title was a Text.
+    // if we have a title, boldTitle is true and title was a Text.
     Widget? _title = widget.title;
     if (_title != null && _title is Text && widget.boldTitle) {
       final Text textTitle = _title;
@@ -177,7 +179,7 @@ class _RevealListTileCardState extends State<RevealListTileCard>
     // If in rare occasion we had passed a background card color, we just
     // use that as color. This is intended to be an exception when we need
     // to present something in the card that must be on a certain color.
-    // Like primary text theme text must be on primary color.
+    // Like primary text theme, text must be on primary color.
     if (widget.color != null) cardColor = widget.color!;
 
     return Card(

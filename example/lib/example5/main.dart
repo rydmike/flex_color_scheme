@@ -52,14 +52,18 @@ Future<void> main() async {
   // The controller uses an abstract ThemeService interface to get and save the
   // settings. There are 3 implementations available to choose from:
   //
-  // 1. ThemeServiceMem - Only keeps settings in memory.
+  // 0. ThemeService      - Abstract interface base class, contains defaults
+  //                        values and shared storage key value strings.
+  // 1. ThemeServiceMem   - Only keeps settings in memory.
   // 2. ThemeServicePrefs - Persist settings locally using SharedPreferences.
-  // 3. ThemeServiceHive - Persist settings locally using Hive.
+  // 3. ThemeServiceHive  - Persist settings locally using Hive.
   //
-  // Here we use Hive. These examples are all built using same "example" app
-  // build file. If we use SharedPreferences all examples would use the same
-  // storage container and share the settings when you build them. By
-  // using Hive we can change the storage container name for each example.
+  // Here we use Shared Preferences. The examples are all built using same
+  // "example" app. If we use SharedPreferences in more than one of the apps
+  // they would use the same storage container and share the settings when you
+  // build them locally. By using Hive for the other example, we can change
+  // the storage container name for each example. This also demonstrates how
+  // swap used persistence implementation.
   final ThemeService themeService = ThemeServicePrefs();
   await themeService.init();
   final ThemeController themeController = ThemeController(themeService);
@@ -70,6 +74,9 @@ Future<void> main() async {
 
   // Run the app and pass in the ThemeController. The app listens to the
   // ThemeController for changes, then passes it further down to the HomePage.
+  // The ThemeController controls all the myriad of Theme settings used
+  // in the demo application and also persists settings with injected
+  // ThemeService.
   runApp(DemoApp(themeController: themeController));
 }
 

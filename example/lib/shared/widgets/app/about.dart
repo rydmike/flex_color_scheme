@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../const/app_data.dart';
+import '../../const/app_data.dart';
 import 'link_text_span.dart';
 
 /// An about icon button used on the example's app app bar.

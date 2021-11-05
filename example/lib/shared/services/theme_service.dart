@@ -56,7 +56,7 @@ abstract class ThemeService {
   Future<void> saveUsedScheme(FlexScheme value);
 
   /// Key used to read and save the schemeIndex value.
-  static const String keSchemeIndex = 'schemeIndex';
+  static const String keySchemeIndex = 'schemeIndex';
 
   /// Default value for the schemeIndex, also used to reset settings.
   /// Defaults to 1, the first custom theme made in example 4 and 5.
@@ -211,7 +211,7 @@ abstract class ThemeService {
   static const String keyAppBarElevation = 'appBarElevation';
 
   /// Default value for the appBarElevation, also used to reset settings.
-  static const double defaultAppBarElevation = 0;
+  static const double defaultAppBarElevation = 0.5;
 
   /// Loads used app bar elevation setting in example 5.
   Future<double> appBarElevation();

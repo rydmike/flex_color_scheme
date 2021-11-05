@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [WIP 4.0.0] - November 2, 2021
+## [WIP 4.0.0] - November 5, 2021
 
 * The breaking case refer to a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.x.x.
@@ -161,7 +161,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 * **TODO Tests:** 
   * Added tests for the new features.
-  * Total 1033 tests, 
+  * Total 1037 tests, 
   * Coverage temporarily down to around 95%. 
   * More tests to be added before release.
 

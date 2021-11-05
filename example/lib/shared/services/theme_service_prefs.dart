@@ -8,6 +8,14 @@ import 'theme_service.dart';
 /// A service that stores and retrieves theme settings locally using
 /// package Shared Preferences: https://pub.dev/packages/shared_preferences
 ///
+/// This service on purpose demonstrates persisting each theme setting value as
+/// it own string key and value pair. With this amount of of values,
+/// bundling them all up in a data class an persisting them all is one
+/// serialized JSON string with just one settings key, would be more
+/// convenient, on the other hand it this is probably more resources
+/// efficient and gives us faster saves of persisted slider values, that can
+/// be dragged quickly in the UI. Writing this setup for this many properties is
+/// a bit error prone, even if it is simple and very mechanical.
 class ThemeServicePrefs implements ThemeService {
   // Create an instance to the shared preferences.
   late final SharedPreferences _prefs;
@@ -32,8 +40,9 @@ class ThemeServicePrefs implements ThemeService {
   @override
   Future<ThemeMode> themeMode() async {
     try {
-      final int? value = _prefs.getInt(ThemeService.keyThemeMode);
-      return ThemeMode.values[value!];
+      final int value = _prefs.getInt(ThemeService.keyThemeMode) ??
+          ThemeService.defaultThemeMode.index;
+      return ThemeMode.values[value];
     } catch (e) {
       debugPrint(e.toString());
       // If something goes wrong we return the default value.
@@ -46,280 +55,756 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveThemeMode(ThemeMode value) async {
     // We store enums as their int index value. This breaks if enum definitions
     // are changed in any other way than adding more enums to the end.
-    await _prefs.setInt(ThemeService.keyThemeMode, value.index);
+    try {
+      await _prefs.setInt(ThemeService.keyThemeMode, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   /// Loads the use sub themes setting from mem in examples 2, 3, 4 and 5.
   @override
-  Future<bool> useSubThemes() async => ThemeService.defaultUseSubThemes;
+  Future<bool> useSubThemes() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseSubThemes) ??
+          ThemeService.defaultUseSubThemes;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseSubThemes;
+    }
+  }
 
   /// Persists the use sub themes setting to mem in examples 2, 3, 4 and 5.
   @override
-  Future<void> saveUseSubThemes(bool value) async {}
+  Future<void> saveUseSubThemes(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseSubThemes, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads the useTextTheme setting in example 5.
   @override
-  Future<bool> useTextTheme() async => ThemeService.defaultUseTextTheme;
+  Future<bool> useTextTheme() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseTextTheme) ??
+          ThemeService.defaultUseTextTheme;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseTextTheme;
+    }
+  }
 
   /// Persists the useTextTheme setting in example 5.
   @override
-  Future<void> saveUseTextTheme(bool value) async {}
+  Future<void> saveUseTextTheme(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseTextTheme, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads the used scheme setting from mem in example 3.
   @override
-  Future<FlexScheme> usedScheme() async => ThemeService.defaultUsedScheme;
+  Future<FlexScheme> usedScheme() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyUsedScheme) ??
+          ThemeService.defaultUsedScheme.index;
+      return FlexScheme.values[value];
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUsedScheme;
+    }
+  }
 
   /// Persists the used scheme setting to mem in example 3.
   @override
-  Future<void> saveUsedScheme(FlexScheme value) async {}
+  Future<void> saveUsedScheme(FlexScheme value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyUsedScheme, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used scheme index setting from mem in examples 4 and 5.
   @override
-  Future<int> schemeIndex() async => ThemeService.defaultSchemeIndex;
+  Future<int> schemeIndex() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keySchemeIndex) ??
+          ThemeService.defaultSchemeIndex;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultSchemeIndex;
+    }
+  }
 
   /// Persists the used scheme setting to mem in examples 4 and 5.
   @override
-  Future<void> saveSchemeIndex(int value) async {}
+  Future<void> saveSchemeIndex(int value) async {
+    try {
+      await _prefs.setInt(ThemeService.keySchemeIndex, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used themed effects setting in example 5.
   @override
-  Future<bool> interactionEffects() async =>
-      ThemeService.defaultInteractionEffects;
+  Future<bool> interactionEffects() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyInteractionEffects) ??
+          ThemeService.defaultInteractionEffects;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultInteractionEffects;
+    }
+  }
 
   /// Persists used themed effects setting in example 5.
   @override
-  Future<void> saveInteractionEffects(bool value) async {}
+  Future<void> saveInteractionEffects(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyInteractionEffects, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used useDefaultRadius setting in example 5.
   @override
-  Future<bool> useDefaultRadius() async => ThemeService.defaultUseDefaultRadius;
+  Future<bool> useDefaultRadius() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseDefaultRadius) ??
+          ThemeService.defaultUseDefaultRadius;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseDefaultRadius;
+    }
+  }
 
   /// Persists the useDefaultRadius setting in example 5.
   @override
-  Future<void> saveUseDefaultRadius(bool value) async {}
+  Future<void> saveUseDefaultRadius(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseDefaultRadius, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used corner radius setting in example 5.
   @override
-  Future<double> cornerRadius() async => ThemeService.defaultCornerRadius;
+  Future<double> cornerRadius() async {
+    try {
+      final double value = _prefs.getDouble(ThemeService.keyCornerRadius) ??
+          ThemeService.defaultCornerRadius;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultCornerRadius;
+    }
+  }
 
   /// Persists the used corner radius setting in example 5.
   @override
-  Future<void> saveCornerRadius(double value) async {}
+  Future<void> saveCornerRadius(double value) async {
+    try {
+      await _prefs.setDouble(ThemeService.keyCornerRadius, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used inputDecoratorIsFilled setting in example 5.
   @override
-  Future<bool> inputDecoratorIsFilled() async =>
-      ThemeService.defaultInputDecoratorIsFilled;
+  Future<bool> inputDecoratorIsFilled() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyInputDecoratorIsFilled) ??
+              ThemeService.defaultInputDecoratorIsFilled;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultInputDecoratorIsFilled;
+    }
+  }
 
   /// Persists used inputDecoratorIsFilled setting in example 5.
   @override
-  Future<void> saveInputDecoratorIsFilled(bool value) async {}
+  Future<void> saveInputDecoratorIsFilled(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyInputDecoratorIsFilled, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used inputDecoratorBorderType setting in example 5.
   @override
-  Future<FlexInputBorderType> inputDecoratorBorderType() async =>
-      ThemeService.defaultInputDecoratorBorderType;
+  Future<FlexInputBorderType> inputDecoratorBorderType() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyInputDecoratorBorderType) ??
+              ThemeService.defaultInputDecoratorBorderType.index;
+      return FlexInputBorderType.values[value];
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultInputDecoratorBorderType;
+    }
+  }
 
   /// Persists used inputDecoratorBorderType setting in example 5.
   @override
-  Future<void> saveInputDecoratorBorderType(FlexInputBorderType value) async {}
+  Future<void> saveInputDecoratorBorderType(FlexInputBorderType value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyInputDecoratorBorderType, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used inputDecoratorUnfocusedHasBorder setting in example 5.
   @override
-  Future<bool> inputDecoratorUnfocusedHasBorder() async =>
-      ThemeService.defaultInputDecoratorUnfocusedHasBorder;
+  Future<bool> inputDecoratorUnfocusedHasBorder() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyInputDecoratorUnfocusedHasBorder) ??
+              ThemeService.defaultInputDecoratorUnfocusedHasBorder;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultInputDecoratorUnfocusedHasBorder;
+    }
+  }
 
   /// Persists used inputDecoratorUnfocusedHasBorder setting in example 5.
   @override
-  Future<void> saveInputDecoratorUnfocusedHasBorder(bool value) async {}
+  Future<void> saveInputDecoratorUnfocusedHasBorder(bool value) async {
+    try {
+      await _prefs.setBool(
+          ThemeService.keyInputDecoratorUnfocusedHasBorder, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used surface mode setting in example 5.
   @override
-  Future<FlexSurfaceMode> surfaceMode() async =>
-      ThemeService.defaultSurfaceMode;
+  Future<FlexSurfaceMode> surfaceMode() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keySurfaceMode) ??
+          ThemeService.defaultSurfaceMode.index;
+      return FlexSurfaceMode.values[value];
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultSurfaceMode;
+    }
+  }
 
   /// Persists the used surface mode setting in example 5.
   @override
-  Future<void> saveSurfaceMode(FlexSurfaceMode value) async {}
+  Future<void> saveSurfaceMode(FlexSurfaceMode value) async {
+    try {
+      await _prefs.setInt(ThemeService.keySurfaceMode, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used surface blend level setting in example 5.
 
   @override
-  Future<int> blendLevel() async => ThemeService.defaultBlendLevel;
+  Future<int> blendLevel() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyBlendLevel) ??
+          ThemeService.defaultBlendLevel;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBlendLevel;
+    }
+  }
 
   /// Persists the used surface blend level setting in example 5.
   @override
-  Future<void> saveBlendLevel(int value) async {}
+  Future<void> saveBlendLevel(int value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyBlendLevel, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used app bar style for light theme setting in example 5.
   @override
-  Future<FlexAppBarStyle> lightAppBarStyle() async =>
-      ThemeService.defaultLightAppBarStyle;
+  Future<FlexAppBarStyle> lightAppBarStyle() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyLightAppBarStyle) ??
+          ThemeService.defaultLightAppBarStyle.index;
+      return FlexAppBarStyle.values[value];
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultLightAppBarStyle;
+    }
+  }
 
   /// Persists the used app bar style for light theme setting in example 5.
   @override
-  Future<void> saveLightAppBarStyle(FlexAppBarStyle value) async {}
+  Future<void> saveLightAppBarStyle(FlexAppBarStyle value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyLightAppBarStyle, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used app bar style for dark theme setting in example 5.
   @override
-  Future<FlexAppBarStyle> darkAppBarStyle() async =>
-      ThemeService.defaultDarkAppBarStyle;
+  Future<FlexAppBarStyle> darkAppBarStyle() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyDarkAppBarStyle) ??
+          ThemeService.defaultDarkAppBarStyle.index;
+      return FlexAppBarStyle.values[value];
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultDarkAppBarStyle;
+    }
+  }
 
   /// Persists the used app bar style for dark theme setting in example 5.
   @override
-  Future<void> saveDarkAppBarStyle(FlexAppBarStyle value) async {}
+  Future<void> saveDarkAppBarStyle(FlexAppBarStyle value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyDarkAppBarStyle, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used app bar opacity setting in example 5.
   @override
-  Future<double> appBarOpacity() async => ThemeService.defaultAppBarOpacity;
+  Future<double> appBarOpacity() async {
+    try {
+      final double value = _prefs.getDouble(ThemeService.keyAppBarOpacity) ??
+          ThemeService.defaultAppBarOpacity;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultAppBarOpacity;
+    }
+  }
 
   /// Persists the used app bar opacity setting in example 5.
   @override
-  Future<void> saveAppBarOpacity(double value) async {}
+  Future<void> saveAppBarOpacity(double value) async {
+    try {
+      await _prefs.setDouble(ThemeService.keyAppBarOpacity, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used app bar elevation setting in example 5.
   @override
-  Future<double> appBarElevation() async => ThemeService.defaultAppBarElevation;
+  Future<double> appBarElevation() async {
+    try {
+      final double value = _prefs.getDouble(ThemeService.keyAppBarElevation) ??
+          ThemeService.defaultAppBarElevation;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultAppBarElevation;
+    }
+  }
 
   /// Persists the used app bar elevation setting in example 5.
   @override
-  Future<void> saveAppBarElevation(double value) async {}
+  Future<void> saveAppBarElevation(double value) async {
+    try {
+      await _prefs.setDouble(ThemeService.keyAppBarElevation, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used status bar transparency setting in example 5.
   @override
-  Future<bool> transparentStatusBar() async =>
-      ThemeService.defaultTransparentStatusBar;
+  Future<bool> transparentStatusBar() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyTransparentStatusBar) ??
+          ThemeService.defaultTransparentStatusBar;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTransparentStatusBar;
+    }
+  }
 
   /// Persists used status bar transparency setting in example 5.
   @override
-  Future<void> saveTransparentStatusBar(bool value) async {}
+  Future<void> saveTransparentStatusBar(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyTransparentStatusBar, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used tab bar style setting in example 5.
   @override
-  Future<FlexTabBarStyle> tabBarStyle() async =>
-      ThemeService.defaultTabBarStyle;
+  Future<FlexTabBarStyle> tabBarStyle() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyTabBarStyle) ??
+          ThemeService.defaultTabBarStyle.index;
+      return FlexTabBarStyle.values[value];
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTabBarStyle;
+    }
+  }
 
   /// Persists used tab bar style setting in example 5.
   @override
-  Future<void> saveTabBarStyle(FlexTabBarStyle value) async {}
+  Future<void> saveTabBarStyle(FlexTabBarStyle value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyTabBarStyle, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used bottom navigation bar opacity setting in example 5.
   @override
-  Future<double> bottomNavigationBarOpacity() async =>
-      ThemeService.defaultBottomNavigationBarOpacity;
+  Future<double> bottomNavigationBarOpacity() async {
+    try {
+      final double value =
+          _prefs.getDouble(ThemeService.keyBottomNavigationBarOpacity) ??
+              ThemeService.defaultBottomNavigationBarOpacity;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBottomNavigationBarOpacity;
+    }
+  }
 
   /// Persists the used app bar opacity setting in example 5.
   @override
-  Future<void> saveBottomNavigationBarOpacity(double value) async {}
+  Future<void> saveBottomNavigationBarOpacity(double value) async {
+    try {
+      await _prefs.setDouble(ThemeService.keyBottomNavigationBarOpacity, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used bottom navigation bar elevation setting in example 5.
   @override
-  Future<double> bottomNavigationBarElevation() async =>
-      ThemeService.defaultBottomNavigationBarElevation;
+  Future<double> bottomNavigationBarElevation() async {
+    try {
+      final double value =
+          _prefs.getDouble(ThemeService.keyBottomNavigationBarElevation) ??
+              ThemeService.defaultBottomNavigationBarElevation;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBottomNavigationBarElevation;
+    }
+  }
 
   /// Persists the used app bar elevation setting in example 5.
   @override
-  Future<void> saveBottomNavigationBarElevation(double value) async {}
+  Future<void> saveBottomNavigationBarElevation(double value) async {
+    try {
+      await _prefs.setDouble(
+          ThemeService.keyBottomNavigationBarElevation, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used tooltip style setting in example 5.
   @override
-  Future<bool> tooltipsMatchBackground() async =>
-      ThemeService.defaultTooltipsMatchBackground;
+  Future<bool> tooltipsMatchBackground() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyTooltipsMatchBackground) ??
+              ThemeService.defaultTooltipsMatchBackground;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTooltipsMatchBackground;
+    }
+  }
 
   /// Persists used tooltip style setting in example 5.
   @override
-  Future<void> saveTooltipsMatchBackground(bool value) async {}
+  Future<void> saveTooltipsMatchBackground(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyTooltipsMatchBackground, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads swap primary/secondary colors in light mode, in example 5.
   @override
-  Future<bool> swapLightColors() async => ThemeService.defaultSwapLightColors;
+  Future<bool> swapLightColors() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keySwapLightColors) ??
+          ThemeService.defaultSwapLightColors;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultSwapLightColors;
+    }
+  }
 
   /// Persists swap primary/secondary colors in light mode, in example 5.
   @override
-  Future<void> saveSwapLightColors(bool value) async {}
+  Future<void> saveSwapLightColors(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keySwapLightColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads swap primary/secondary colors in dark mode, in example 5.
   @override
-  Future<bool> swapDarkColors() async => ThemeService.defaultSwapDarkColors;
+  Future<bool> swapDarkColors() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keySwapDarkColors) ??
+          ThemeService.defaultSwapDarkColors;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultSwapDarkColors;
+    }
+  }
 
   /// Persists swap primary/secondary colors in dark mode, in example 5.
   @override
-  Future<void> saveSwapDarkColors(bool value) async {}
+  Future<void> saveSwapDarkColors(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keySwapDarkColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads dark uses true black setting in dark mode, in example 5.
   @override
-  Future<bool> darkIsTrueBlack() async => ThemeService.defaultDarkIsTrueBlack;
+  Future<bool> darkIsTrueBlack() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyDarkIsTrueBlack) ??
+          ThemeService.defaultDarkIsTrueBlack;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultDarkIsTrueBlack;
+    }
+  }
 
   /// Persists dark uses true black setting in dark mode, in example 5.
   @override
-  Future<void> saveDarkIsTrueBlack(bool value) async {}
+  Future<void> saveDarkIsTrueBlack(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyDarkIsTrueBlack, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads use computed dark mode setting, in example 5.
   @override
-  Future<bool> useToDarkMethod() async => ThemeService.defaultUseToDarkMethod;
+  Future<bool> useToDarkMethod() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseToDarkMethod) ??
+          ThemeService.defaultUseToDarkMethod;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseToDarkMethod;
+    }
+  }
 
   /// Persists use computed dark mode setting, in example 5.
   @override
-  Future<void> saveUseToDarkMethod(bool value) async {}
+  Future<void> saveUseToDarkMethod(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseToDarkMethod, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads use computed dark mode level setting, in example 5.
   @override
-  Future<int> darkMethodLevel() async => ThemeService.defaultDarkMethodLevel;
+  Future<int> darkMethodLevel() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyDarkMethodLevel) ??
+          ThemeService.defaultDarkMethodLevel;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultDarkMethodLevel;
+    }
+  }
 
   /// Persists use computed dark mode level setting, in example 5.
   @override
-  Future<void> saveDarkMethodLevel(int value) async {}
+  Future<void> saveDarkMethodLevel(int value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyDarkMethodLevel, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that turns ON/OFF FlexColorScheme theme, in example 5.
   @override
-  Future<bool> useFlexColorScheme() async =>
-      ThemeService.defaultUseFlexColorScheme;
+  Future<bool> useFlexColorScheme() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseFlexColorScheme) ??
+          ThemeService.defaultUseFlexColorScheme;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseFlexColorScheme;
+    }
+  }
 
   /// Persists setting that turns ON/OFF FlexColorScheme theme, in example 5.
   @override
-  Future<void> saveUseFlexColorScheme(bool value) async {}
+  Future<void> saveUseFlexColorScheme(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseFlexColorScheme, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that blends light colors, in example 5.
   @override
-  Future<bool> blendLightOnColors() async =>
-      ThemeService.defaultBlendLightOnColors;
+  Future<bool> blendLightOnColors() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyBlendLightOnColors) ??
+          ThemeService.defaultBlendLightOnColors;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBlendLightOnColors;
+    }
+  }
 
   /// Persists setting that blends light colors, in example 5.
   @override
-  Future<void> saveBlendLightOnColors(bool value) async {}
+  Future<void> saveBlendLightOnColors(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyBlendLightOnColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that blends dark colors, in example 5.
   @override
-  Future<bool> blendDarkOnColors() async =>
-      ThemeService.defaultBlendDarkOnColors;
+  Future<bool> blendDarkOnColors() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyBlendDarkOnColors) ??
+          ThemeService.defaultBlendDarkOnColors;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBlendDarkOnColors;
+    }
+  }
 
   /// Persists setting that blends dark colors, in example 5.
   @override
-  Future<void> saveBlendDarkOnColors(bool value) async {}
+  Future<void> saveBlendDarkOnColors(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyBlendDarkOnColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that blends light text theme, in example 5.
   @override
-  Future<bool> blendLightTextTheme() async =>
-      ThemeService.defaultBlendLightTextTheme;
+  Future<bool> blendLightTextTheme() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyBlendLightTextTheme) ??
+          ThemeService.defaultBlendLightTextTheme;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBlendLightTextTheme;
+    }
+  }
 
   /// Persists setting that blends light text theme, in example 5.
   @override
-  Future<void> saveBlendLightTextTheme(bool value) async {}
+  Future<void> saveBlendLightTextTheme(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyBlendLightTextTheme, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that blends dark text theme, in example 5.
   @override
-  Future<bool> blendDarkTextTheme() async =>
-      ThemeService.defaultBlendDarkTextTheme;
+  Future<bool> blendDarkTextTheme() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyBlendDarkTextTheme) ??
+          ThemeService.defaultBlendDarkTextTheme;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBlendDarkTextTheme;
+    }
+  }
 
   /// Persists setting that blends dark text theme, in example 5.
   @override
-  Future<void> saveBlendDarkTextTheme(bool value) async {}
+  Future<void> saveBlendDarkTextTheme(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyBlendDarkTextTheme, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting for fabUseShape, in example 5.
   @override
-  Future<bool> fabUseShape() async => ThemeService.defaultFabUseShape;
+  Future<bool> fabUseShape() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyFabUseShape) ??
+          ThemeService.defaultFabUseShape;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultFabUseShape;
+    }
+  }
 
   /// Persists setting for fabUseShape, in example 5.
   @override
-  Future<void> saveFabUseShape(bool value) async {}
+  Future<void> saveFabUseShape(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyFabUseShape, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

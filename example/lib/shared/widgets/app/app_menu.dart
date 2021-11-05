@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../const/app_data.dart';
+import '../../const/app_data.dart';
 
 /// App side menu and rail, used in default example and example 4 and 5.
 ///

@@ -199,7 +199,7 @@ class _HomePageState extends State<HomePage>
               return const StaggeredTile.fit(1);
             },
             itemBuilder: (BuildContext context, int index) => <Widget>[
-              RevealListTileCard(
+              HeaderCard(
                 isClosed: collapseMain,
                 title: const Text('FlexColorScheme'),
                 child: Padding(
@@ -335,7 +335,7 @@ class _ThemeColors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Theme Colors'),
       child: Column(
@@ -381,7 +381,7 @@ class _ThemeMode extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
 
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Theme Mode'),
       child: Column(
@@ -533,7 +533,7 @@ class _Platform extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Platform'),
       child: Column(
@@ -615,7 +615,7 @@ class _SurfaceBlends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Surface Blends'),
       child: Column(
@@ -697,7 +697,7 @@ class _SubThemes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Sub Theme Settings'),
       child: Column(
@@ -809,7 +809,7 @@ class _TextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('TextField Settings'),
       child: Column(
@@ -902,7 +902,7 @@ class _AppBarSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
 
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('AppBar Settings'),
       child: Column(
@@ -1068,7 +1068,7 @@ class _TabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('TabBar Settings'),
       child: Column(
@@ -1140,7 +1140,7 @@ class _BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Bottom Navigation Settings'),
       child: Column(
@@ -1255,7 +1255,7 @@ class _SubPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Page Examples'),
       child: Column(
@@ -1317,7 +1317,7 @@ class _MaterialButtonsShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Themed Material Buttons'),
       child: Padding(
@@ -1352,7 +1352,7 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Themed Buttons Switches and Chips'),
       child: Padding(
@@ -1380,7 +1380,7 @@ class _ListTileShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Themed ListTile'),
       child: const ListTileShowcase(),
@@ -1397,7 +1397,7 @@ class _TimePickerDialogShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Themed TimePickerDialog'),
       child: const TimePickerDialogShowcase(),
@@ -1414,7 +1414,7 @@ class _DatePickerDialogShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Themed DatePickerDialog'),
       child: const DatePickerDialogShowcase(),
@@ -1431,7 +1431,7 @@ class _AlertDialogShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Themed Dialog'),
       child: const AlertDialogShowcase(),
@@ -1448,7 +1448,7 @@ class _BottomSheetAndMaterialShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Themed Material'),
       child: const Padding(
@@ -1468,7 +1468,7 @@ class _CardShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
         isClosed: isClosed,
         title: const Text('Themed Card'),
         child: const Padding(
@@ -1487,7 +1487,7 @@ class _TextThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       isClosed: isClosed,
       title: const Text('Themed TextTheme'),
       child: const Padding(
@@ -1507,7 +1507,7 @@ class _PrimaryTextThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RevealListTileCard(
+    return HeaderCard(
       color: Theme.of(context).colorScheme.primary,
       isClosed: isClosed,
       title: const Text('Themed PrimaryTextTheme'),

@@ -10,6 +10,13 @@ import 'package:flutter/material.dart';
 ///   the background.
 /// - Center the content and limit the content width when a given max width
 ///   constraint is exceeded.
+///
+///  This implementation has a flaw, you cannot mouse or touch/drag scroll from
+///  expanding margin areas like you could in a Web view. Read more about
+///  this here: https://rydmike.com/blog_layout_and_theming
+///
+/// This is a Flutter "Universal" Widget that only depends on the SDK and
+/// can be dropped into any application.
 class PageBody extends StatelessWidget {
   /// Default constructor for the constrained PageBody.
   const PageBody({

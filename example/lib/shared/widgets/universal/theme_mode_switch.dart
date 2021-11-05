@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-/// Widget used to toggle the theme mode of the default example application.
+/// Widget using [ToggleButtons) that can be used to toggle the theme mode
+/// of an application.
+///
+/// This is a Flutter "Universal" Widget that only depends on the SDK and
+/// can be dropped into any application.
 class ThemeModeSwitch extends StatelessWidget {
   const ThemeModeSwitch({
     Key? key,

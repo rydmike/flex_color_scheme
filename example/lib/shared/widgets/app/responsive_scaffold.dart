@@ -1,20 +1,20 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../const/app_data.dart';
+import '../../const/app_data.dart';
 import 'about.dart';
 import 'app_menu.dart';
 
 /// A simplistic animated responsive Scaffold.
 ///
 /// Q: Is this Flexfold?
-/// A: No, it is not, this is much simpler, but feel free to use it if you like.
+/// A: No, it is not, this is simpler, but feel free to use it if you like it :)
 ///
 /// This is just a straw-man for a "real" responsive animated Scaffold, but it
 /// can give you some ideas and clues about how you can make one or develop it
 /// further.
 ///
-/// (c) BSD 3-clause - Mike Rydstrom (@RydMike )
+/// (c) BSD 3-clause - Mike Rydstrom (@RydMike)
 class ResponsiveScaffold extends StatefulWidget {
   const ResponsiveScaffold({
     Key? key,

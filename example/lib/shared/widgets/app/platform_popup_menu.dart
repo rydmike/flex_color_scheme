@@ -11,7 +11,6 @@ class PlatformPopupMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // const String labelSystem = 'Current platform';
     const String labelAndroid = 'Google Android';
     const String labelApple = 'Apple iOS';
     const String labelWindows = 'Microsoft Windows';

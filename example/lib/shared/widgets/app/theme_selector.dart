@@ -1,8 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../const/app_color.dart';
-import '../controllers/theme_controller.dart';
+import '../../const/app_color.dart';
+import '../../controllers/theme_controller.dart';
 
 // The width size of the scrolling button.
 const double _kWidthOfScrollItem = 67.2;

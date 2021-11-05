@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 ///
 /// It is a simple convenience wrapper for AnimatedSwitcher
 /// where the Widget that it is Switched to is an invisible SizedBox.shrink()
-/// if no other widget is provided, it then effectively removing the child by
+/// if no other widget is provided, it then effectively removes the child by
 /// animation to a zero sized widget instead.
+///
+/// This is a Flutter "Universal" Widget that only depends on the SDK and
+/// can be dropped into any application.
 class AnimatedSwitchHide extends StatelessWidget {
   const AnimatedSwitchHide({
     Key? key,
