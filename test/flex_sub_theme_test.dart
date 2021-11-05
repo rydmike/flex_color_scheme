@@ -60,11 +60,28 @@ void main() {
         'FST1.02: GIVEN a default FlexSubTheme.bottomNavigationBar() '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.bottomNavigationBar(),
+        FlexSubThemes.bottomNavigationBar(
+          colorScheme: colorScheme,
+        ),
         equals(
-          const BottomNavigationBarThemeData(
+          BottomNavigationBarThemeData(
             elevation: 0,
+            backgroundColor: colorScheme.background.withOpacity(1),
+            landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
+            selectedItemColor: colorScheme.primary,
+            selectedIconTheme: IconThemeData(
+              color: colorScheme.primary,
+            ),
+            unselectedItemColor: colorScheme.onBackground
+                .blendAlpha(colorScheme.primary, 0x00)
+                .withAlpha(0xFF),
+            unselectedIconTheme: IconThemeData(
+              color: colorScheme.onBackground
+                  .blendAlpha(colorScheme.primary, 0x00)
+                  .withAlpha(0xFF),
+            ),
           ),
         ),
       );
@@ -73,15 +90,33 @@ void main() {
         'FST1.02custom: GIVEN a custom FlexSubTheme.bottomNavigationBar() '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
       expect(
         FlexSubThemes.bottomNavigationBar(
-          elevation: 10,
-          backgroundColor: const Color(0xF0341287),
+          colorScheme: colorScheme,
+          elevation: 1,
+          landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+          opacity: 0.5,
+          unselectedAlphaBlend: 0xFA,
+          unselectedAlpha: 0x45,
         ),
         equals(
-          const BottomNavigationBarThemeData(
-            elevation: 10,
-            backgroundColor: Color(0xF0341287),
+          BottomNavigationBarThemeData(
+            elevation: 1,
+            backgroundColor: colorScheme.background.withOpacity(0.5),
+            landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+            selectedItemColor: colorScheme.primary,
+            selectedIconTheme: IconThemeData(
+              color: colorScheme.primary,
+            ),
+            unselectedItemColor: colorScheme.onBackground
+                .blendAlpha(colorScheme.primary, 0xFA)
+                .withAlpha(0x45),
+            unselectedIconTheme: IconThemeData(
+              color: colorScheme.onBackground
+                  .blendAlpha(colorScheme.primary, 0xFA)
+                  .withAlpha(0x45),
+            ),
           ),
         ),
       );
@@ -200,7 +235,7 @@ void main() {
         FlexSubThemes.popupMenuTheme(),
         equals(
           const PopupMenuThemeData(
-            elevation: 4,
+            elevation: 3,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
@@ -305,7 +340,7 @@ void main() {
             errorBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide(
-                color: colorScheme.error,
+                color: colorScheme.error.withAlpha(0xA7),
                 width: 1.5,
               ),
             ),
@@ -377,7 +412,7 @@ void main() {
                 topRight: Radius.circular(20),
               ),
               borderSide: BorderSide(
-                color: colorScheme.error,
+                color: colorScheme.error.withAlpha(0xA7),
                 width: 1.5,
               ),
             ),
@@ -407,9 +442,7 @@ void main() {
                   Radius.circular(20),
                 ),
               ), //buttonShape,
-              // TODO(rydmike) padding under review
-              // padding: const EdgeInsets.symmetric(horizontal: 16),
-              elevation: 0,
+              elevation: 1,
             ).copyWith(
               foregroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
@@ -530,7 +563,6 @@ void main() {
                   Radius.circular(20),
                 ),
               ), //buttonShape,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
             ).copyWith(
               foregroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
@@ -604,7 +636,6 @@ void main() {
                   Radius.circular(20),
                 ),
               ), // buttonShape,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
             ).copyWith(
               foregroundColor: MaterialStateProperty.resolveWith<Color>(
                 (Set<MaterialState> states) {
@@ -646,8 +677,7 @@ void main() {
             colorScheme: colorScheme,
             minWidth: 40,
             height: 40,
-            // TODO(rydmike): Review padding!
-            // padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             hoverColor: colorScheme.primary
                 .blendAlpha(Colors.white, 0x40)
                 .withAlpha(0x19),
@@ -669,7 +699,6 @@ void main() {
               ),
             ),
             textTheme: ButtonTextTheme.primary,
-            materialTapTargetSize: MaterialTapTargetSize.padded,
           ),
         ),
       );
@@ -685,23 +714,23 @@ void main() {
         equals(
           ToggleButtonsThemeData(
             borderWidth: 1.5,
-            selectedColor: colorScheme.onPrimary.withAlpha(0xCC),
+            selectedColor: colorScheme.onPrimary.withAlpha(0xE5),
             color: colorScheme.primary,
-            fillColor: colorScheme.primary.blendAlpha(Colors.white, 0x26),
+            fillColor: colorScheme.primary.blendAlpha(Colors.white, 0x19),
             borderColor: colorScheme.primary.withAlpha(0xA7),
             selectedBorderColor:
-                colorScheme.primary.blendAlpha(Colors.white, 0x26),
+                colorScheme.primary.blendAlpha(Colors.white, 0x19),
             hoverColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40 + 0x26)
+                .blendAlpha(Colors.white, 0x40 + 0x19)
                 .withAlpha(0x19),
             focusColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x4C + 0x26)
+                .blendAlpha(Colors.white, 0x4C + 0x19)
                 .withAlpha(0x4C),
             highlightColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40 + 0x26)
+                .blendAlpha(Colors.white, 0x40 + 0x19)
                 .withAlpha(0x19),
             splashColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x1F + 0x26)
+                .blendAlpha(Colors.white, 0x1F + 0x19)
                 .withAlpha(0x33),
             disabledColor: colorScheme.primary
                 .blendAlpha(colorScheme.onSurface, 0x66)

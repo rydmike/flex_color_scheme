@@ -787,10 +787,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.highSurface,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xffe6d7fc),
+          surface: Color(0xffece1fd),
           background: Color(0xfff0e9fb),
           scaffoldBackground: Color(0xfffbf9fe),
-          dialogBackground: Color(0xffe6d7fc),
+          dialogBackground: Color(0xffece1fd),
         )),
       );
     });
@@ -934,10 +934,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.highSurface,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xff46355a),
+          surface: Color(0xff392c48),
           background: Color(0xff2a2235),
           scaffoldBackground: Color(0xff1a171d),
-          dialogBackground: Color(0xff46355a),
+          dialogBackground: Color(0xff392c48),
         )),
       );
     });

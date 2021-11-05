@@ -157,10 +157,10 @@ const double kPopupRadius = 10;
 const double kCardElevation = 0;
 
 /// Default for elevation of [ElevatedButton].
-const double kElevatedButtonElevation = 2;
+const double kElevatedButtonElevation = 1;
 
 /// Default elevation of [PopupMenuButton].
-const double kPopupMenuElevation = 4;
+const double kPopupMenuElevation = 3;
 
 /// Default elevation of [Dialog].
 const double kDialogElevation = 10;
@@ -188,9 +188,12 @@ const double kSnackBarElevation = 4;
 const Size kButtonMinSize =
     Size(kMinInteractiveDimension - 8, kMinInteractiveDimension - 8);
 
-/// Default padding on buttons.
+/// Default padding on legacy buttons.
 ///
-/// Applies to [TextButton], [ElevatedButton] and [OutlinedButton].
+/// This padding is used on [ButtonThemeData] for legacy `RaisedButton`,
+/// `OutlineButton` and `FlatButton` making the look like the default
+/// padding used on [TextButton], [ElevatedButton] and [OutlinedButton]
+/// whe style with `styleFrom`.
 const EdgeInsetsGeometry kButtonPadding = EdgeInsets.symmetric(horizontal: 16);
 
 /// Default width of thick outline borders.
@@ -290,21 +293,21 @@ const int kDisabledAlphaBlend = 0x66;
 /// Used on opt in sub-themes by [InputDecorator], [OutlinedButton] and by
 /// [ToggleButtons].
 ///
-/// Value: 0xA7 = 167 = 65%
+/// Value: 0xE5 = 229 = 90%
 const int kEnabledBorderAlpha = 0xA7;
 
 /// Alpha value, for transparency on selected onPrimary color on
 /// [ToggleButtons].
 ///
 /// Value: 0xCC = 204 = 80%
-const int kSelectedAlpha = 0xCC;
+const int kSelectedAlpha = 0xE5;
 
 /// White alpha blend, for alternative less saturated primary color.
 ///
 /// Used by selected button and selected border color on [ToggleButtons].
 ///
-/// Value: 0x26 = 38 = 15%
-const int kAltPrimaryAlphaBlend = 0x26;
+/// Value: 0x19 = 25 = 10%
+const int kAltPrimaryAlphaBlend = 0x19;
 
 /// White alpha blend, for primary colored hover opt-in effects theming.
 ///
@@ -360,3 +363,15 @@ const int kChipBackgroundAlphaBlend = 0xCC;
 ///
 /// Value: 0x96 = 150 = 59%
 const int kChipSelectedBackgroundAlphaBlend = 0x96;
+
+/// The onBackground primary alpha blend value for an unselected item, typically
+/// an icon in a TabBar or BottomNavigationBar.
+///
+/// Value: 0x66 = 102 = 40%
+const int kUnselectedBackgroundPrimaryAlphaBlend = 0x66;
+
+/// The alpha value for an unselected item, typically
+/// an icon in a TabBar or BottomNavigationBar.
+///
+/// Value: 0xA5 = 165 = 65%
+const int kUnselectedAlphaBlend = 0xA5;

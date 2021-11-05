@@ -60,7 +60,9 @@ Future<void> main() async {
   // build file. If we use SharedPreferences all examples would use the same
   // storage container and share the settings when you build them. By
   // using Hive we can change the storage container name for each example.
-  final ThemeController themeController = ThemeController(ThemeServiceMem());
+  final ThemeService themeService = ThemeServicePrefs();
+  await themeService.init();
+  final ThemeController themeController = ThemeController(themeService);
 
   // Load the the preferred theme while the splash screen is displayed.
   // This prevents a sudden theme change when the app is first displayed.
@@ -119,13 +121,8 @@ class DemoApp extends StatelessWidget {
                     useSubThemes: themeController.useSubThemes,
                     // Modify these const values in the AppData class.
                     visualDensity: AppData.visualDensity,
-                    // Use a custom font from Google fonts.
-                    // fontFamily: AppData.font,
-                    // fontFamily: 'Roboto',
                     // The platform can be toggled in the app, but not saved.
                     platform: themeController.platform,
-                    // TODO: put me back
-                    // textTheme: AppData.textTheme,
                     // primaryTextTheme: AppData.textTheme,
                     // Add some some options to modify the sub-themes, there
                     // are more controls, here we use:
@@ -139,6 +136,10 @@ class DemoApp extends StatelessWidget {
                       defaultRadius: themeController.useDefaultRadius
                           ? null
                           : themeController.cornerRadius,
+                      // Set to false to keep using M2 style FAB and ignore
+                      // M3 typ default and global radius on the FAB, it remains
+                      // circular or stadium shaped in extended mode.
+                      fabUseShape: themeController.fabUseShape,
                       // Want color themed hover, focus, highlight and splash?
                       // Keep this one on.
                       interactionEffects: themeController.themedEffects,
@@ -176,8 +177,9 @@ class DemoApp extends StatelessWidget {
                       // Material3 has containers with matching text color
                       // tints, can't do that yet with only Themes in Flutter.
                       blendTextTheme: themeController.blendLightTextTheme,
-                      // Set some opacity on popup menu.
-                      popupMenuOpacity: 0.97,
+                      // Set some opacity on popup menu, just to show a
+                      // setting not available via themeController in the demo.
+                      popupMenuOpacity: 0.96,
                     ),
                   )
                 // Here we are NOT using FlexThemeData. We use the default
@@ -228,16 +230,13 @@ class DemoApp extends StatelessWidget {
                     darkIsTrueBlack: themeController.darkIsTrueBlack,
                     useSubThemes: themeController.useSubThemes,
                     visualDensity: AppData.visualDensity,
-                    // fontFamily: AppData.font,
-                    // TODO: put me back
-                    // textTheme: AppData.textTheme,
-                    // primaryTextTheme: AppData.textTheme,
                     platform: themeController.platform,
                     subThemesData: FlexSubThemesData(
                       useTextTheme: themeController.useTextTheme,
                       defaultRadius: themeController.useDefaultRadius
                           ? null
                           : themeController.cornerRadius,
+                      fabUseShape: themeController.fabUseShape,
                       interactionEffects: themeController.themedEffects,
                       bottomNavigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,

@@ -59,6 +59,7 @@ class ThemeController with ChangeNotifier {
     _blendDarkOnColors = await _themeService.blendDarkOnColors();
     _blendLightTextTheme = await _themeService.blendLightTextTheme();
     _blendDarkTextTheme = await _themeService.blendDarkTextTheme();
+    _fabUseShape = await _themeService.fabUseShape();
 
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
@@ -95,7 +96,6 @@ class ThemeController with ChangeNotifier {
     await setTransparentStatusBar(
         ThemeService.defaultTransparentStatusBar, false);
     await setTabBarStyle(ThemeService.defaultTabBarStyle, false);
-
     await setBottomNavigationBarOpacity(
         ThemeService.defaultBottomNavigationBarOpacity, false);
     await setBottomNavigationBarElevation(
@@ -114,6 +114,7 @@ class ThemeController with ChangeNotifier {
     await setBlendLightTextTheme(
         ThemeService.defaultBlendLightTextTheme, false);
     await setBlendDarkTextTheme(ThemeService.defaultBlendDarkTextTheme, false);
+    await setFabUseShape(ThemeService.defaultFabUseShape, false);
 
     // Not using ThemeService, just a locally controlled toggle
     await setPlatform(defaultTargetPlatform, false);
@@ -473,6 +474,16 @@ class ThemeController with ChangeNotifier {
     _blendDarkTextTheme = value;
     if (notify) notifyListeners();
     await _themeService.saveBlendDarkTextTheme(value);
+  }
+
+  late bool _fabUseShape;
+  bool get fabUseShape => _fabUseShape;
+  Future<void> setFabUseShape(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _fabUseShape) return;
+    _fabUseShape = value;
+    if (notify) notifyListeners();
+    await _themeService.saveFabUseShape(value);
   }
 
   /// This is just a local controller properties for the Platform menu control.

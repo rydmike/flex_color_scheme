@@ -238,16 +238,24 @@ class _HomePageState extends State<HomePage>
                 controller: widget.controller,
                 isClosed: collapseSettings,
               ),
-              _SubThemes(
-                controller: widget.controller,
-                isClosed: collapseSettings,
-              ),
               _SurfaceBlends(
                 controller: widget.controller,
                 isClosed: collapseSettings,
                 showAllBlends: showAllBlends,
               ),
+              _SubThemes(
+                controller: widget.controller,
+                isClosed: collapseSettings,
+              ),
+              _TextField(
+                controller: widget.controller,
+                isClosed: collapseSettings,
+              ),
               _AppBarSettings(
+                controller: widget.controller,
+                isClosed: collapseSettings,
+              ),
+              _TabBar(
                 controller: widget.controller,
                 isClosed: collapseSettings,
               ),
@@ -270,9 +278,8 @@ class _HomePageState extends State<HomePage>
               _SubPages(isClosed: collapseSettings),
               //
               // The "Themed" results Cards.
-              _ButtonsShowcase(isClosed: collapseThemed),
-              _InputShowcase(isClosed: collapseThemed),
-              _ThemeBarsShowcase(isClosed: collapseThemed),
+              _MaterialButtonsShowcase(isClosed: collapseThemed),
+              _ToggleFabSwitchesChipsShowcase(isClosed: collapseThemed),
               _ListTileShowcase(isClosed: collapseThemed),
               _TimePickerDialogShowcase(isClosed: collapseThemed),
               _DatePickerDialogShowcase(isClosed: collapseThemed),
@@ -282,7 +289,7 @@ class _HomePageState extends State<HomePage>
               _TextThemeShowcase(isClosed: collapseThemed),
               _PrimaryTextThemeShowcase(isClosed: collapseThemed),
             ].elementAt(index),
-            itemCount: 20,
+            itemCount: 21,
           );
         }),
       ),
@@ -420,7 +427,7 @@ class _ThemeMode extends StatelessWidget {
                 if (isLight) ...<Widget>[
                   SwitchListTile.adaptive(
                     title: const Text(
-                        'Light mode TextThemes with a hint of primary color'),
+                        'Light mode TextThemes with some primary color'),
                     value: controller.blendLightTextTheme,
                     onChanged: controller.setBlendLightTextTheme,
                   ),
@@ -433,7 +440,7 @@ class _ThemeMode extends StatelessWidget {
                 ] else ...<Widget>[
                   SwitchListTile.adaptive(
                     title: const Text(
-                        'Dark mode TextThemes with a hint of primary color'),
+                        'Dark mode TextThemes with some primary color'),
                     value: controller.blendDarkTextTheme,
                     onChanged: controller.setBlendDarkTextTheme,
                   ),
@@ -467,7 +474,7 @@ class _ThemeMode extends StatelessWidget {
                   title: const Text('Compute dark theme'),
                   subtitle: const Text(
                     'Calculate from the light scheme, instead '
-                    'of using a predefined dark scheme.',
+                    'of using a predefined dark scheme',
                   ),
                   value: controller.useToDarkMethod,
                   onChanged: controller.setUseToDarkMethod,
@@ -533,159 +540,27 @@ class _Platform extends StatelessWidget {
         children: <Widget>[
           const Padding(
             padding: EdgeInsets.all(16),
-            child: Text('For testing purposes you can change the platform. '
-                'It changes some icons, widgets and platform mechanics, like '
+            child: Text('For testing purposes you can change used platform. '
+                'It changes some icons, widgets e.g. Switches and Sliders, '
+                'font and platform mechanics, like '
                 'scrolling behavior and acceleration. '
-                'This setting is not persisted.'),
+                'This setting is not persisted'),
           ),
           PlatformPopupMenu(
             platform: controller.platform,
             onChanged: controller.setPlatform,
           ),
           ListTile(
-            title: const Text('Reset to actual platform'),
+            title: const Text('Set back to actual platform'),
             trailing: ElevatedButton(
               onPressed: () {
                 controller.setPlatform(defaultTargetPlatform);
               },
-              child: const Text('Reset'),
+              child: const Text('Actual'),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SubThemes extends StatelessWidget {
-  const _SubThemes({
-    Key? key,
-    required this.controller,
-    this.isClosed = false,
-  }) : super(key: key);
-  final ThemeController controller;
-  final bool isClosed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RevealListTileCard(
-      isClosed: isClosed,
-      title: const Text('Sub Theme Settings'),
-      child: Column(
-        children: <Widget>[
-          SwitchListTile.adaptive(
-            title: const Text('Use sub theming'),
-            subtitle: const Text('Enable opinionated widget sub themes'),
-            value: controller.useSubThemes,
-            onChanged: controller.setUseSubThemes,
-          ),
-          AnimatedSwitchHide(
-            showChild: controller.useSubThemes,
-            child: Column(
-              children: <Widget>[
-                SwitchListTile.adaptive(
-                  title: const Text('Use M3 text theme'),
-                  subtitle: const Text('ON to use Material 3 like text styles\n'
-                      'OFF to use Material 2 2018 text styles'),
-                  value: controller.useTextTheme,
-                  onChanged: controller.setUseTextTheme,
-                ),
-                SwitchListTile.adaptive(
-                  title: const Text('Use M3 border radius'),
-                  subtitle: const Text('ON to set Material 3 radius '
-                      'on all widgets\n'
-                      'OFF to manually adjust radius on all widgets'),
-                  value: controller.useDefaultRadius,
-                  onChanged: controller.setUseDefaultRadius,
-                ),
-                AnimatedSwitchHide(
-                  showChild: !controller.useDefaultRadius,
-                  child: ListTile(
-                    title: const Text('Corner border radius'),
-                    subtitle: Slider.adaptive(
-                      max: 30,
-                      divisions: 30,
-                      label: controller.cornerRadius.toStringAsFixed(0),
-                      value: controller.cornerRadius,
-                      onChanged: controller.setCornerRadius,
-                    ),
-                    trailing: Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'dP',
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                          Text(
-                            controller.cornerRadius.toStringAsFixed(0),
-                            style: Theme.of(context)
-                                .textTheme
-                                .caption!
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SwitchListTile.adaptive(
-                  title: const Text('Themed state effects'),
-                  subtitle: const Text('Hover, focus, highlight and '
-                      'splash use primary color'),
-                  value: controller.themedEffects,
-                  onChanged: controller.setInteractionEffects,
-                ),
-                const Divider(height: 1),
-                SwitchListTile.adaptive(
-                  title: const Text(
-                    'Input decorator with fill color',
-                  ),
-                  value: controller.inputDecoratorIsFilled,
-                  onChanged: controller.setInputDecoratorIsFilled,
-                ),
-                SwitchListTile.adaptive(
-                  title: const Text(
-                    'Input decorator border style',
-                  ),
-                  subtitle: const Text(
-                    'ON for outline   OFF for underline',
-                  ),
-                  value: controller.inputDecoratorIsOutlinedBorder ==
-                      FlexInputBorderType.outline,
-                  onChanged: (bool isOn) {
-                    if (isOn) {
-                      controller.setInputDecoratorBorderType(
-                          FlexInputBorderType.outline);
-                    } else {
-                      controller.setInputDecoratorBorderType(
-                          FlexInputBorderType.underline);
-                    }
-                  },
-                ),
-                SwitchListTile.adaptive(
-                  title: const Text('Unfocused decorator has border'),
-                  value: controller.inputDecoratorUnfocusedHasBorder,
-                  onChanged: controller.setInputDecoratorUnfocusedHasBorder,
-                ),
-                const Divider(height: 1),
-              ],
-            ),
-          ),
-          // Tooltip theme style.
-          Tooltip(
-            message: 'A tooltip, on the tooltip style toggle',
-            child: SwitchListTile.adaptive(
-              title: const Text(
-                'Tooltip brightness',
-              ),
-              subtitle: const Text(
-                'ON Normal  OFF Inverted (Material style)',
-              ),
-              value: controller.tooltipsMatchBackground,
-              onChanged: controller.setTooltipsMatchBackground,
-            ),
+            onTap: () {
+              controller.setPlatform(defaultTargetPlatform);
+            },
           ),
         ],
       ),
@@ -710,10 +585,10 @@ class _SurfaceBlends extends StatelessWidget {
         return 'Flat\nAll surface colors at blend level (1x)\n';
       case FlexSurfaceMode.highBackground:
         return 'High background, very low scaffold\n'
-            'Background (2x) Surface (1x) Scaffold (1/3x)\n';
+            'Background (3/2x) Surface (1x) Scaffold (1/3x)\n';
       case FlexSurfaceMode.highSurface:
         return 'High surface, very low scaffold\n'
-            'Surface (2x) Background (1x) Scaffold (1/3x)\n';
+            'Surface (3/2x) Background (1x) Scaffold (1/3x)\n';
       case FlexSurfaceMode.veryLowSurfaceHighScaffold:
         return 'Very low surface, high scaffold\n'
             'Surface & dialog (1/2x) Background (1x) Scaffold (3x)\n';
@@ -749,10 +624,10 @@ class _SurfaceBlends extends StatelessWidget {
             title: Text('Blended surfaces and backgrounds'),
             isThreeLine: true,
             subtitle: Text(
-              'Standard Material design use white and dark surface colors, '
-              'but it also mentions using surfaces with different alpha '
-              'blends. Typically you blend primary color into surface '
-              'colors. This is supported by using blend mode and level',
+              'Default Material 2 design use white and dark surface colors. '
+              'It also mentions using surfaces with different alpha blends. '
+              'Typically you blend primary color into different surfaces. '
+              'This is supported here by using blend mode and level',
             ),
           ),
           ListTile(
@@ -811,6 +686,190 @@ class _SurfaceBlends extends StatelessWidget {
   }
 }
 
+class _SubThemes extends StatelessWidget {
+  const _SubThemes({
+    Key? key,
+    required this.controller,
+    this.isClosed = false,
+  }) : super(key: key);
+  final ThemeController controller;
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: const Text('Sub Theme Settings'),
+      child: Column(
+        children: <Widget>[
+          SwitchListTile.adaptive(
+            title: const Text('Use sub theming'),
+            subtitle: const Text('Enable opinionated widget sub themes'),
+            value: controller.useSubThemes,
+            onChanged: controller.setUseSubThemes,
+          ),
+          AnimatedSwitchHide(
+            showChild: controller.useSubThemes,
+            child: Column(
+              children: <Widget>[
+                SwitchListTile.adaptive(
+                  title: const Text('Use M3 text theme'),
+                  subtitle: const Text('ON to use Material 3 like text styles\n'
+                      'OFF to use Material 2 2018 text styles'),
+                  value: controller.useTextTheme,
+                  onChanged: controller.setUseTextTheme,
+                ),
+                SwitchListTile.adaptive(
+                  title: const Text('Use M3 border radius'),
+                  subtitle: const Text('ON to set Material 3 radius '
+                      'on all widgets\n'
+                      'OFF to manually adjust radius on all widgets'),
+                  value: controller.useDefaultRadius,
+                  onChanged: controller.setUseDefaultRadius,
+                ),
+                AnimatedSwitchHide(
+                  showChild: !controller.useDefaultRadius,
+                  child: ListTile(
+                    title: const Text('Border radius on all widgets'),
+                    subtitle: Slider.adaptive(
+                      max: 30,
+                      divisions: 30,
+                      label: controller.cornerRadius.toStringAsFixed(0),
+                      value: controller.cornerRadius,
+                      onChanged: controller.setCornerRadius,
+                    ),
+                    trailing: Padding(
+                      padding: const EdgeInsetsDirectional.only(end: 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'dP',
+                            style: Theme.of(context).textTheme.caption,
+                          ),
+                          Text(
+                            controller.cornerRadius.toStringAsFixed(0),
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SwitchListTile.adaptive(
+                  title: const Text('Rounded corners on FloatingActionButton'),
+                  subtitle: const Text('OFF removes Shape from FAB theme, '
+                      'making it use M2 default Circular and Stadium style, '
+                      'also with global rounded corners or M3 defaults'),
+                  value: controller.fabUseShape,
+                  onChanged: controller.setFabUseShape,
+                ),
+                SwitchListTile.adaptive(
+                  title: const Text('Themed state effects'),
+                  subtitle: const Text('Hover, focus, highlight and '
+                      'splash use primary color'),
+                  value: controller.themedEffects,
+                  onChanged: controller.setInteractionEffects,
+                ),
+                const Divider(height: 1),
+              ],
+            ),
+          ),
+          // Tooltip theme style.
+          Tooltip(
+            message: 'A tooltip, on the tooltip style toggle',
+            child: SwitchListTile.adaptive(
+              title: const Text(
+                'Tooltip brightness',
+              ),
+              subtitle: const Text(
+                'ON Normal  OFF Inverted (Material style)',
+              ),
+              value: controller.tooltipsMatchBackground,
+              onChanged: controller.setTooltipsMatchBackground,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TextField extends StatelessWidget {
+  const _TextField({
+    Key? key,
+    required this.controller,
+    this.isClosed = false,
+  }) : super(key: key);
+  final ThemeController controller;
+  final bool isClosed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: const Text('TextField Settings'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(height: 8),
+          const ListTile(
+            title: Text('Adjust TextField style'),
+            subtitle: Text('When sub themes are enabled you can adjust the '
+                'style of you TextField input via an easy to use '
+                'InputDecorator theme options'),
+          ),
+          AnimatedSwitchHide(
+            showChild: controller.useSubThemes,
+            child: Column(
+              children: <Widget>[
+                SwitchListTile.adaptive(
+                  title: const Text(
+                    'Input field with fill color',
+                  ),
+                  value: controller.inputDecoratorIsFilled,
+                  onChanged: controller.setInputDecoratorIsFilled,
+                ),
+                SwitchListTile.adaptive(
+                  title: const Text(
+                    'Border style',
+                  ),
+                  subtitle: const Text(
+                    'ON for outline   OFF for underline',
+                  ),
+                  value: controller.inputDecoratorIsOutlinedBorder ==
+                      FlexInputBorderType.outline,
+                  onChanged: (bool isOn) {
+                    if (isOn) {
+                      controller.setInputDecoratorBorderType(
+                          FlexInputBorderType.outline);
+                    } else {
+                      controller.setInputDecoratorBorderType(
+                          FlexInputBorderType.underline);
+                    }
+                  },
+                ),
+                SwitchListTile.adaptive(
+                  title: const Text('Unfocused fields have a border'),
+                  value: controller.inputDecoratorUnfocusedHasBorder,
+                  onChanged: controller.setInputDecoratorUnfocusedHasBorder,
+                ),
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(8),
+            child: TextInputField(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _AppBarSettings extends StatelessWidget {
   const _AppBarSettings({
     Key? key,
@@ -838,27 +897,6 @@ class _AppBarSettings extends StatelessWidget {
     }
   }
 
-  String explainTabStyle(final FlexTabBarStyle style) {
-    switch (style) {
-      case FlexTabBarStyle.forAppBar:
-        return 'Style: forAppbar\n'
-            'Works with used app bar style (Default)';
-      case FlexTabBarStyle.forBackground:
-        return 'Style: forBackground\n'
-            'Works on surface colors, like Scaffold, but '
-            'also works on surface colored app bars';
-      case FlexTabBarStyle.useDefault:
-        return 'Style: useDefault\n'
-            'Works on primary color in light mode, and '
-            'background color in dark mode';
-      case FlexTabBarStyle.universal:
-        return 'Style: universal\n'
-            'Experimental design intended to work anywhere, has '
-            'low contrast in some combinations. This '
-            'style may change in future versions';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -873,10 +911,10 @@ class _AppBarSettings extends StatelessWidget {
           const ListTile(
             subtitle: Text(
               'Default Flutter themes use primary colored AppBar in light '
-              'mode, and almost black in dark mode. Now you can select '
-              'if it should be Primary, Material background, background or '
-              'surface color, with their primary blends or a custom color. '
-              'Predefined themes use their secondary variant color for '
+              'mode, and almost black in dark mode. Here you can select '
+              'Primary, Material background or background and surface color, '
+              'with their primary blends or even a custom color. '
+              'Predefined themes use their secondary variant color as the '
               'custom AppBar color, but you can make it any color',
             ),
           ),
@@ -898,8 +936,9 @@ class _AppBarSettings extends StatelessWidget {
                   // the widget. FlexColorScheme knows the color when
                   // you switch to it. This is just to be able to show the
                   // correct color on the 'custom' toggle button option. In our
-                  // example we only actually have a custom color in the 1st
-                  // custom color example named Toledo.
+                  // example we only actually only have a custom app bar color
+                  // in the 1st custom color example, and we wanted to be
+                  // able to show it on the toggle button.
                   customAppBarColor: AppColor
                       .schemes[controller.schemeIndex].light.appBarColor),
             ),
@@ -920,10 +959,10 @@ class _AppBarSettings extends StatelessWidget {
             ),
           ],
           SwitchListTile.adaptive(
-            title: const Text('One colored app bar on Android'),
+            title: const Text('One colored AppBar on Android'),
             subtitle: const Text(
-              'ON   There is no scrim on the status bar\n'
-              'OFF  Use default two toned style',
+              'ON   There is no scrim on the top status bar\n'
+              'OFF  Use default two toned style status bar',
             ),
             value: controller.transparentStatusBar,
             onChanged: controller.setTransparentStatusBar,
@@ -992,21 +1031,68 @@ class _AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(height: 1),
+        ],
+      ),
+    );
+  }
+}
+
+class _TabBar extends StatelessWidget {
+  const _TabBar({
+    Key? key,
+    required this.controller,
+    this.isClosed = false,
+  }) : super(key: key);
+  final bool isClosed;
+  final ThemeController controller;
+
+  String explainTabStyle(final FlexTabBarStyle style) {
+    switch (style) {
+      case FlexTabBarStyle.forAppBar:
+        return 'Style: forAppbar\n'
+            'Works with used app bar style, usually the one you want (Default)';
+      case FlexTabBarStyle.forBackground:
+        return 'Style: forBackground\n'
+            'Works on surface colors, like Scaffold, but '
+            'also works on surface colored app bars';
+      case FlexTabBarStyle.flutterDefault:
+        return 'Style: useDefault\n'
+            'SDK default. Works on primary color in light mode, and '
+            'background color in dark mode';
+      case FlexTabBarStyle.universal:
+        return 'Style: universal\n'
+            'Experimental universal style, has '
+            'low contrast. May change in future versions';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RevealListTileCard(
+      isClosed: isClosed,
+      title: const Text('TabBar Settings'),
+      child: Column(
+        children: <Widget>[
           const SizedBox(height: 8),
           ListTile(
-            title: const Text('Tab bar'),
-            subtitle: Text(
-              'Choose a style that fits your intend usage.\n'
-              '${explainTabStyle(controller.tabBarStyle)}',
-            ),
+            title: const Text('Choose TabBar style that fits your usage'),
+            subtitle: Text(explainTabStyle(controller.tabBarStyle)),
           ),
-          const SizedBox(height: 4),
+          // const SizedBox(height: 4),
           ListTile(
             trailing: TabBarStyleButtons(
               style: controller.tabBarStyle,
               onChanged: controller.setTabBarStyle,
             ),
+          ),
+          const SizedBox(height: 8),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: TabBarForAppBarShowcase(),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: TabBarForBackgroundShowcase(),
           ),
           const SizedBox(height: 8),
         ],
@@ -1056,7 +1142,7 @@ class _BottomNavigation extends StatelessWidget {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return RevealListTileCard(
       isClosed: isClosed,
-      title: const Text('Bottom Bar Settings'),
+      title: const Text('Bottom Navigation Settings'),
       child: Column(
         children: <Widget>[
           const ListTile(
@@ -1132,6 +1218,11 @@ class _BottomNavigation extends StatelessWidget {
               ),
             ),
           ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: BottomNavigationBarShowcase(),
+          ),
+          const Divider(),
           ListTile(
             title: const Text('Android system navigation bar'),
             subtitle: Text('FlexColorScheme.themedSystemNavigationBar\n'
@@ -1203,7 +1294,7 @@ class _SubPages extends StatelessWidget {
           ListTile(
             title: const Text('Splash page demo 2'),
             subtitle: const Text(
-              'No status icons or navigation bar.\n'
+              'No status icons or navigation bar\n'
               'Using setEnabledSystemUIMode',
             ),
             trailing: const Icon(Icons.arrow_forward_ios),
@@ -1217,8 +1308,8 @@ class _SubPages extends StatelessWidget {
   }
 }
 
-class _ButtonsShowcase extends StatelessWidget {
-  const _ButtonsShowcase({
+class _MaterialButtonsShowcase extends StatelessWidget {
+  const _MaterialButtonsShowcase({
     Key? key,
     this.isClosed = false,
   }) : super(key: key);
@@ -1228,22 +1319,23 @@ class _ButtonsShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: const Text('Themed Buttons'),
+      title: const Text('Themed Material Buttons'),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const IconButtonShowcase(),
-            const ButtonsShowcase(),
-            const ButtonsShowcase(enabled: false),
+            const ButtonShowcase(),
+            const ButtonShowcase(enabled: false),
+            const ButtonIconShowcase(),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: Text('Legacy buttons deprecated',
-                  style: Theme.of(context).textTheme.headline6),
+              child: Text('Legacy buttons, deprecated',
+                  style: Theme.of(context).textTheme.subtitle1),
             ),
             const LegacyButtonShowcase(),
             const LegacyButtonShowcase(enabled: false),
+            const LegacyButtonIconShowcase(),
           ],
         ),
       ),
@@ -1251,8 +1343,8 @@ class _ButtonsShowcase extends StatelessWidget {
   }
 }
 
-class _InputShowcase extends StatelessWidget {
-  const _InputShowcase({
+class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
+  const _ToggleFabSwitchesChipsShowcase({
     Key? key,
     this.isClosed = false,
   }) : super(key: key);
@@ -1262,41 +1354,16 @@ class _InputShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RevealListTileCard(
       isClosed: isClosed,
-      title: const Text('Themed Inputs'),
+      title: const Text('Themed Buttons Switches and Chips'),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const <Widget>[
-            ChipShowcase(),
+            ToggleFabIconButtonsShowcase(),
+            CircleAvataAndTooltipShowcase(),
             CheckboxShowcase(),
-            TextInputField(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ThemeBarsShowcase extends StatelessWidget {
-  const _ThemeBarsShowcase({
-    Key? key,
-    this.isClosed = false,
-  }) : super(key: key);
-  final bool isClosed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RevealListTileCard(
-      isClosed: isClosed,
-      title: const Text('Themed Bars'),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: const <Widget>[
-            TabBarForAppBarShowcase(),
-            TabBarForBackgroundShowcase(),
-            BottomNavigationBarShowcase(),
+            ChipShowcase(),
           ],
         ),
       ),

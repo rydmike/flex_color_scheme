@@ -17,31 +17,34 @@ enum FlexInputBorderType {
   underline,
 }
 
-/// Static helpers for opt in widget theming offered by [FlexColorScheme].
+/// Static helpers for opt-in widget sub theming offered by [FlexColorScheme].
 ///
 /// FlexSubTheme offers opinionated static theme helpers that are opt-in via
 /// FlexColorScheme(subThemesOptIn: true). You can also configure the
-/// default of the opt in setup by defining custom configuration values in the
+/// default of the opt-in setup by defining custom configuration values in the
 /// [FlexSubThemesData] configuration class, and passing it to the
 /// FlexColorScheme(flexThemesData) constructor property.
 ///
 /// The configuration class [FlexSubThemesData] offers simple configuration
-/// properties for using the sub-themes in FlexColorScheme. You can also use
+/// properties for using these sub-themes in FlexColorScheme. You can also use
 /// the static sub-themes without using FlexColorScheme based theming,
 /// however the [FlexSubThemesData] has no impact on the static helpers, it
 /// is [FlexColorScheme] that uses the [FlexSubThemesData] class to configure
-/// the opt in sub-themes. You can do the it too if you use [FlexSubThemesData]
-/// outside of [FlexColorScheme] or in copyWith on each sub-theme in more
-/// custom [ThemeData].
+/// the opt in sub-themes. You can of course also do this if you use
+/// [FlexSubThemesData] outside of [FlexColorScheme] or in copyWith on each
+/// sub-theme with custom [ThemeData].
 ///
-/// Sub-themes for the following widgets are provided via an opt-in flag in
-/// [FlexColorScheme]:
+/// Sub themes for the following widgets are provided and used via opt-in
+/// flag [useSubThemes] in [FlexColorScheme]:
+///
 /// * [TextButton]
 /// * [ElevatedButton]
 /// * [OutlinedButton]
 /// * Older buttons using [ButtonThemeData]
 /// * [ToggleButtons]
 /// * [InputDecoration]
+/// * [FloatingActionButton]
+/// * [Chip]
 /// * [Card]
 /// * [PopupMenuButton]
 /// * [Dialog]
@@ -67,21 +70,22 @@ enum FlexInputBorderType {
 /// styling as the newer buttons. They do follow and match the styling on
 /// [ToggleButtons] when it comes to hover, press, selected and focus.
 ///
-/// The follow Widgets that have rounded corners are on purpose excluded from
-/// these sub-themes:
+/// The following widgets that have rounded corners are on excluded from
+/// sub theming:
 /// * [Tooltip], generally so small that larger prominent rounding this
 ///   opinionated sub-theming is designed for is not a good fit.
 ///   FlexColorScheme does include out of the box theming options for tooltips,
-///   that you can override with [ThemeData.copyWith].
-/// * [Chip], the Chips are designed to primarily use [StadiumBorder], which
-///   fit as they are, also in themes with more rounded corners.
+///   that also adapts to color branding when opting in on sub themes, where
+///   it also gets a bit more rounded than when not opting on sub themes.
 /// * [Scrollbar], rounding on edges of scrollbars are left to platform default.
 /// * [AppBar] and [BottomAppBar] shape properties are left to their defaults.
-/// * [FloatingActionButton], is best kept round or stadium shaped, it is
-///   left to its defaults.
-/// * [SnackBar] the floating snackbar should be sub-themed to include border
-///   more radius via shared default, but the none floating one should not be.
-///   Unclear if it can be done via SDK's current theming featurs.
+/// * [SnackBar] the floating snackbar should be sub-themed to also include
+///   border radius via default, but the none floating one should remain
+///   straight. Unclear if it can be done via SDK's current theming features,
+///   will investigate more in future version.
+/// * [Drawer] should have 16dp default rounding on shown edges, but in current
+///   version of Flutter SDK (2.5.3) it has no theme to enable it. It is coming
+///   in later Flutter version, when it does, it will be added.
 class FlexSubThemes {
   FlexSubThemes._(); // coverage:ignore-line
 
@@ -91,15 +95,8 @@ class FlexSubThemes {
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
   ///
-  /// The adjustable button corner [radius] defaults to [kButtonRadius] 20,
-  /// Flutter SDK to 4.
-  ///
-  /// The button `padding` defaults to: EdgeInsets.symmetric(horizontal: 16).
-  /// It is used to make the buttons more prominent and buttons with
-  /// rounded corners need a bit more padding to look nice.
-  ///
-  /// Buttons also have a default minimum size equal to Size(48, 48) which is
-  /// the recommended minimum Material tap size.
+  /// The adjustable button corner [radius] defaults to 20 this is new
+  /// default in M3, Flutter SDK M2 defaults to 4.
   static TextButtonThemeData textButtonTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -109,12 +106,20 @@ class FlexSubThemes {
     /// Defaults to 20 [kButtonRadius].
     final double? radius,
 
-    /// Padding defaults to EdgeInsets.symmetric(horizontal: 16).
-    final EdgeInsetsGeometry padding = kButtonPadding,
+    /// Padding for the button theme.
+    ///
+    /// Defaults to null and uses `styleFrom` default padding.
+    ///
+    /// M3 has more horizontal padding 24, but this tighter default padding
+    /// in M2 with 16dp looks fine as well using stadium borders as in M3.
+    /// Making the custom scalable padding and separate one for with icon
+    /// versions is rather involved, so sticking to defaults, but exposing the
+    /// padding property for future or external use.
+    final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
-    /// Defaults to Size(48, 48).
+    /// Defaults to Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
   }) =>
       TextButtonThemeData(
@@ -125,7 +130,6 @@ class FlexSubThemes {
               Radius.circular(radius ?? kButtonRadius),
             ),
           ), // buttonShape,
-          // TODO: Review if needed.
           padding: padding,
         ).copyWith(
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -165,15 +169,8 @@ class FlexSubThemes {
   /// the elevated button a bit more flat. Flutter SDK ElevatedButton
   /// defaults to elevation 2.
   ///
-  /// The adjustable button corner [radius] defaults to [kButtonRadius] 20,
-  /// Flutter SDK to 4.
-  ///
-  /// The button `padding` defaults to: EdgeInsets.symmetric(horizontal: 16).
-  /// It is used to make the buttons more prominent and buttons with
-  /// rounded corners need a bit more padding to look nice.
-  ///
-  /// Buttons also have a default minimum size equal to Size(48, 48) which is
-  /// the recommended minimum Material tap size.
+  /// The adjustable button corner [radius] defaults to 20 this is new
+  /// default in M3, Flutter SDK M2 defaults to 4.
   static ElevatedButtonThemeData elevatedButtonTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -185,23 +182,31 @@ class FlexSubThemes {
 
     /// The button elevation
     ///
-    /// Defaults to [kElevatedButtonElevation] 1, making it more flat
-    /// with primary color. Flutter SDK ElevatedButton defaults to 2.
+    /// Defaults to [kElevatedButtonElevation] 1, making it a bit more flat in
+    /// its elevation state than Flutter SDK, that defaults to 2.
+    /// An opinionated choice.
     final double elevation = kElevatedButtonElevation,
 
-    /// Padding defaults to EdgeInsets.symmetric(horizontal: 16).
-    final EdgeInsetsGeometry padding = kButtonPadding,
+    /// Padding for the button theme.
+    ///
+    /// Defaults to null and uses `styleFrom` default padding.
+    ///
+    /// M3 has more horizontal padding 24, but this tighter default padding
+    /// in M2 with 16dp looks fine as well using stadium borders as in M3.
+    /// Making the custom scalable padding and separate one for with icon
+    /// versions is rather involved, so sticking to defaults, but exposing the
+    /// padding property for future or external use.
+    final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
-    /// Defaults to Size(48, 46).
+    /// Defaults to Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
   }) =>
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           minimumSize: minButtonSize,
-          // TODO(rydmike): Review if padding really needed, or use default.
-          // padding: padding,
+          padding: padding,
           elevation: elevation,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
@@ -248,23 +253,16 @@ class FlexSubThemes {
 
   /// An opinionated [OutlinedButtonThemeData] theme.
   ///
-  /// Requires a `ColorScheme`. The color scheme would
-  /// typically be equal the color scheme also used to define the color scheme
-  /// for your app theme.
+  /// Requires a [ColorScheme]. The color scheme would typically be equal the
+  /// color scheme also used to define the color scheme for your app theme.
   ///
-  /// The adjustable button corner [radius] defaults to 20, Flutter SDK to 4.
-  ///
-  /// The button `padding` defaults to: EdgeInsets.symmetric(horizontal: 16).
-  /// It is used to make the buttons more prominent and buttons with
-  /// rounded corners need a bit more padding to look nice.
-  ///
-  /// Buttons also have a default minimum size equal to Size(48, 48) which is
-  /// the recommended minimum Material tap size.
+  /// The adjustable button corner [radius] defaults to 20 this is new
+  /// default in M3, Flutter SDK M2 defaults to 4.
   static OutlinedButtonThemeData outlinedButtonTheme({
-    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
 
-    /// The button corner radius.
+    /// The button corner border radius.
     ///
     /// Defaults to 20 [kButtonRadius].
     final double? radius,
@@ -279,8 +277,16 @@ class FlexSubThemes {
     /// Defaults to 1.5.
     final double outlineWidth = kThinBorderWidth,
 
-    /// Padding defaults to EdgeInsets.symmetric(horizontal: 16).
-    final EdgeInsetsGeometry padding = kButtonPadding,
+    /// Padding for the button theme.
+    ///
+    /// Defaults to null and uses `styleFrom` default padding.
+    ///
+    /// M3 has more horizontal padding 24, but this tighter default padding
+    /// in M2 with 16dp looks fine as well using stadium borders as in M3.
+    /// Making the custom scalable padding and separate one for with icon
+    /// versions is rather involved, so sticking to defaults, but exposing the
+    /// padding property for future or external use.
+    final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
@@ -359,13 +365,13 @@ class FlexSubThemes {
   /// Toggle buttons have more limited theming capability and cannot match
   /// the Material style buttons fully, this is an approximation.
   ///
-  /// The adjustable button corner [radius] defaults to 20, Flutter SDK to 4.
+  /// The adjustable button corner [radius] defaults to 20 this is new
+  /// default in M3, Flutter SDK M2 defaults to 4.
   ///
   /// The button `padding` defaults to: EdgeInsets.symmetric(horizontal: 16).
-  /// It is intended to make the buttons more prominent and buttons with
-  /// rounded corners need a bit more padding to look nice.
+  /// It is used to make the buttons match the padding on the newer buttons.
   static ButtonThemeData buttonTheme({
-    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
 
     /// The button corner radius.
@@ -373,20 +379,22 @@ class FlexSubThemes {
     /// Defaults to 20 [kButtonRadius].
     final double? radius,
 
-    /// Padding defaults to EdgeInsets.symmetric(horizontal: 16).
+    /// Padding for legacy button.
+    ///
+    /// Defaults to EdgeInsets.symmetric(horizontal: 16).
+    /// This makes the legacy buttons same size as default margin on new ones.
     final EdgeInsetsGeometry padding = kButtonPadding,
 
     /// Minimum button size.
     ///
-    /// Defaults to Size(48, 46).
+    /// Defaults to Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
   }) =>
       ButtonThemeData(
         colorScheme: colorScheme,
         minWidth: minButtonSize.width,
         height: minButtonSize.height,
-        // TODO(rydmike): Review padding!
-        // padding: padding,
+        padding: padding,
         hoverColor: colorScheme.primary
             .blendAlpha(Colors.white, kHoverAlphaBlend)
             .withAlpha(kHoverAlpha),
@@ -402,21 +410,20 @@ class FlexSubThemes {
         disabledColor: colorScheme.primary
             .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
             .withAlpha(kDisabledBackgroundAlpha),
-        // colorScheme.onSurface.withAlpha(kDisabledBackgroundOpacity),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(radius ?? kButtonRadius),
           ),
         ),
         textTheme: ButtonTextTheme.primary,
-        materialTapTargetSize: MaterialTapTargetSize.padded,
       );
 
   /// An opinionated [ToggleButtonsThemeData] theme.
   ///
-  /// The adjustable button corner [radius] defaults to 20.
+  /// The adjustable button corner [radius] defaults to 20 this is new
+  /// default in M3, Flutter SDK M2 defaults to 4.
   ///
-  /// Its buttons border width can be adjusted and defaults to same width
+  /// Button border width can be adjusted and defaults to same width
   /// as outline thickness on selected outline button and input decorator.
   ///
   /// Unfortunately [ToggleButtons] cannot be themed to have different border
@@ -425,7 +432,7 @@ class FlexSubThemes {
   /// border width, then keep the thin and thick outlined borders same or
   /// reasonably close to each other.
   static ToggleButtonsThemeData toggleButtonsTheme({
-    /// Typically the same `ColorScheme` that is also use for your `ThemeData`.
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
     /// The button corner radius.
@@ -443,7 +450,7 @@ class FlexSubThemes {
 
     /// Minimum button size.
     ///
-    /// Defaults to Size(48, 46).
+    /// Defaults to Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
 
     /// VisualDensity for ToggleButtons.
@@ -498,8 +505,8 @@ class FlexSubThemes {
         // the border width for every side as well as make the VisualDensity
         // adjustment that the other buttons do via Theme automatically
         // based on theme setting, to do so this theme can accept a
-        // VisualDensity property. Give the the same value that your theme
-        // uses, defaults to ThemeData default.
+        // VisualDensity property. Give it the same value that your theme
+        // uses, defaults to same value that ThemeData default.
         minWidth: minButtonSize.width -
             borderWidth * 2 +
             _visualDensity.baseSizeAdjustment.dx,
@@ -638,7 +645,7 @@ class FlexSubThemes {
             borderRadius:
                 BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
             borderSide: BorderSide(
-              color: colorScheme.error,
+              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
               width: unfocusedBorderWidth,
             ),
           ),
@@ -701,7 +708,7 @@ class FlexSubThemes {
               topRight: Radius.circular(radius ?? kButtonRadius),
             ),
             borderSide: BorderSide(
-              color: colorScheme.error,
+              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
               width: unfocusedBorderWidth,
             ),
           ),
@@ -713,18 +720,33 @@ class FlexSubThemes {
   ///
   /// The border radius default to 16 [kDefaultRadius], new M3 default.
   /// https://m3.material.io/components/floating-action-button/specs
+  ///
+  /// By setting [useShape] to false it is possible to opt out of all
+  /// shape theming on FABs and keep their M2 defaults, while still eg.
+  /// keeping M3 defaults on other widgets or changing their border radius
+  /// with the shared global value.
+  ///
+  /// You may want to continue to keep the FAB round and extended FAB stadium
+  /// shaped as before, despite otherwise using a rounder or M3 design.
+  /// The circular M2 FAB goes well with those designs too.
   static FloatingActionButtonThemeData floatingActionButtonTheme({
     /// Corner radius of FAB.
     ///
     /// Defaults to [kDefaultRadius] 16.
     final double? radius,
+
+    /// Set to false, to not apply Shape theming to the FAB. It will then keep
+    /// using its M2 default round shape and stadium shape for extended FAB.
+    final bool useShape = true,
   }) =>
       FloatingActionButtonThemeData(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kDefaultRadius),
-          ),
-        ),
+        shape: useShape
+            ? RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(radius ?? kDefaultRadius),
+                ),
+              )
+            : null,
       );
 
   /// An opinionated [ChipThemeData] with custom border radius and rather
@@ -792,8 +814,11 @@ class FlexSubThemes {
 
   /// An opinionated [CardTheme] with custom corner radius and elevation.
   ///
-  /// Corner [radius] defaults to [kCardRadius] (16) and [elevation]
+  /// Corner [radius] defaults to [kCardRadius] (12) and [elevation]
   /// defaults to [kCardElevation] (0).
+  ///
+  /// The corner radius 12 is the new default on Cards in M3:
+  /// https://m3.material.io/components/cards/specs
   static CardTheme cardTheme({
     /// Corner radius
     ///
@@ -806,7 +831,7 @@ class FlexSubThemes {
     /// The clipBehaviour of the card theme, defaults to
     /// [Clip.antiAlias] for smooth clipping with rounded corners.
     ///
-    /// Does not have a config property in [FlexSubThemesData].
+    /// There is no config property in [FlexSubThemesData] for [clipBehavior].
     final Clip clipBehavior = Clip.antiAlias,
   }) =>
       CardTheme(
@@ -821,11 +846,11 @@ class FlexSubThemes {
 
   /// An opinionated [PopupMenuThemeData] with custom corner radius.
   ///
-  /// Corner [radius] defaults to [kPopupRadius] (16) and [elevation] to
+  /// Corner [radius] defaults to [kPopupRadius] (10) and [elevation] to
   /// [kPopupMenuElevation] (2), Flutter SDK default is (8).
   ///
   /// When used by [FlexColorScheme] the corner radius of popup menus follows
-  /// the global [FlexSubThemeData.defaultRadius] if defined until and
+  /// the global [FlexSubThemeData.defaultRadius] if defined, until and
   /// including 10 dp. After which it stays at 10 dp. If you need a higher
   /// corner radius on popup menus than 10 dp, with [FlexColorScheme]
   /// you will have to explicitly override
@@ -841,13 +866,19 @@ class FlexSubThemes {
   /// inherited radius values from [FlexSubThemeData.defaultRadius] but to
   /// also stay below the usable max rounding automatically at higher global
   /// border radius values.
+  ///
+  /// The default corner radius in M3 is not yet known, it might be 12  like
+  /// on Card, but with current behaviour on popup menu Overlay in Flutter
+  /// using 12 was not on option, 10 was the highest value that still worked
+  /// OK visually with regards to highlighted item not be clipped on top and
+  /// bottom choice.
   static PopupMenuThemeData popupMenuTheme({
     /// Popup menu corner radius.
     ///
     /// Defaults to [kPopupRadius] 10.
     final double? radius,
 
-    /// Popup menu elevation defaults to 2, making it more subtle.
+    /// Popup menu elevation defaults to 3, making it more subtle.
     final double elevation = kPopupMenuElevation,
 
     /// The background color of the popup menu.
@@ -866,14 +897,17 @@ class FlexSubThemes {
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kDialogRadius] (28) and [elevation] to
-  /// [kDialogElevation] (12).
+  /// [kDialogElevation] (10).
+  ///
+  /// The default radius follows Material M3 guide:
+  /// https://m3.material.io/components/dialogs/specs
   static DialogTheme dialogTheme({
     /// Corner radius.
     ///
     /// Defaults to [kDialogRadius] 28.
     final double? radius,
 
-    /// Dialog elevation defaults to 12.
+    /// Dialog elevation defaults to 10.
     final double? elevation = kDialogElevation,
 
     /// Dialog background color.
@@ -899,12 +933,12 @@ class FlexSubThemes {
   /// An opinionated [TimePickerThemeData] with custom corner radius.
   ///
   /// Corner [radius] defaults to [kDialogRadius]. The internal shapes
-  /// in the picker also have rounding their corner radii are defined by
+  /// in the picker also have rounding, their corner radii are defined by
   /// [elementRadius] that defaults to [kCardRadius] 12.
   ///
   /// In the InputDecorator, if you pass it an input decoration style
   /// that matches the main input decoration style and corner rounding it
-  /// will be used on the data entry elements.
+  /// will be used on the data entry elements in the picker.
   static TimePickerThemeData timePickerTheme({
     /// Pass the value the `theme.dialogColor` that is set to your `ThemeData`
     /// and used by other dialogs.
@@ -932,9 +966,9 @@ class FlexSubThemes {
     /// decoration theme in order to get same input style with possible
     /// rounding used in the app otherwise too on input fields.
     ///
-    /// It adds the custom overrides the passed in decorator that Widget
-    /// does internally to the default InputDecorationTheme, so there is no
-    /// need to add those in the passed in InputDecorationTheme. Just pass
+    /// It adds the custom overrides to the passed in decorator that widget
+    /// does internally to the default null InputDecorationTheme, so there is
+    /// no need to add those in the passed in InputDecorationTheme. Just pass
     /// in your overall used app InputDecorationTheme.
     final InputDecorationTheme? inputDecorationTheme,
   }) =>
@@ -955,6 +989,10 @@ class FlexSubThemes {
             Radius.circular(elementRadius ?? kCardRadius),
           ),
         ),
+        // Custom additions the Widget does internally, but for some reason
+        // only does to null default theme. If you use a custom decorator
+        // you are supposed to know that you have to add these shenanigans
+        // for it to work and look right.
         inputDecorationTheme: inputDecorationTheme?.copyWith(
               contentPadding: EdgeInsets.zero,
               // Prevent the error text from appearing.
@@ -982,7 +1020,7 @@ class FlexSubThemes {
   ///
   /// Its [elevation] defaults to [kSnackBarElevation] (4).
   static SnackBarThemeData snackBarTheme({
-    /// BottomNavigationBar elevation defaults to [kSnackBarElevation] 4.
+    /// SnackBar elevation defaults to [kSnackBarElevation] 4.
     final double? elevation = kSnackBarElevation,
   }) =>
       SnackBarThemeData(
@@ -1002,7 +1040,7 @@ class FlexSubThemes {
     /// The bottom sheet elevation defaults to 4.
     final double elevation = kBottomSheetElevation,
 
-    /// The bottom sheet elevation defaults to 12.
+    /// The bottom sheet elevation defaults to 8.
     final double modalElevation = kBottomSheetModalElevation,
 
     /// The clipBehaviour of the bottom sheet theme, defaults to
@@ -1024,16 +1062,43 @@ class FlexSubThemes {
         ),
       );
 
-  // TODO(rydmike): Review the style, could eg use some blend colors.
   /// An opinionated [BottomNavigationBarThemeData] with custom elevation.
   ///
   /// Its `elevation` defaults to [kBottomNavigationBarElevation] (0).
+  ///
+  /// The bottom navigation bar uses opinionated colors choices for the passed
+  /// in [ColorScheme] in [colorScheme], to style the bottom navigation bar.
+  ///
+  /// Background [opacity] can be set. Unselected items' color, that is
+  /// background based can receive a variable blend of primary color using
+  /// the [unselectedAlphaBlend] property.
   static BottomNavigationBarThemeData bottomNavigationBar({
-    /// BottomNavigationBar elevation defaults to 0.
-    final double? elevation = kBottomNavigationBarElevation,
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
 
-    /// BottomNavigationBar background color.
-    final Color? backgroundColor,
+    /// BottomNavigationBar elevation
+    ///
+    /// Defaults to [kBottomNavigationBarElevation] = 0.
+    final double elevation = kBottomNavigationBarElevation,
+
+    /// BottomNavigationBar background opacity.
+    ///
+    /// Default to 1, fully opaque.
+    final double opacity = 1,
+
+    /// The onBackground primary alpha blend value for unselected item.
+    ///
+    /// Defaults to 0x00, no blend of primary, use onBackground color as is.
+    /// FlexColorScheme uses value [kUnselectedBackgroundPrimaryAlphaBlend] when
+    /// it uses this sub theme.
+    final int unselectedAlphaBlend = 0x00,
+
+    /// The alpha value for unselected item.
+    ///
+    /// Defaults to 0xFF, fully opaque.
+    /// FlexColorScheme uses value [kUnselectedBackgroundPrimaryAlphaBlend] when
+    /// it uses this sub theme.
+    final int unselectedAlpha = 0xFF,
 
     /// The arrangement of the bar's [items] when the enclosing
     /// [MediaQueryData.orientation] is [Orientation.landscape].
@@ -1052,17 +1117,25 @@ class FlexSubThemes {
     ///   evenly spaced and each item's icon and label are lined up in a
     ///   row instead of a column.
     ///
-    /// If this property is null, then the value of the enclosing
-    /// [BottomNavigationBarThemeData.landscapeLayout is used. If that
-    /// property is also null, then
-    /// [BottomNavigationBarLandscapeLayout.spread] is used.
-    ///
-    /// This property is null by default.
-    final BottomNavigationBarLandscapeLayout? landscapeLayout,
+    /// Defaults to [BottomNavigationBarLandscapeLayout.spread].
+    final BottomNavigationBarLandscapeLayout landscapeLayout =
+        BottomNavigationBarLandscapeLayout.spread,
   }) =>
       BottomNavigationBarThemeData(
         elevation: elevation,
-        backgroundColor: backgroundColor,
+        backgroundColor: colorScheme.background.withOpacity(opacity),
         landscapeLayout: landscapeLayout,
+        selectedItemColor: colorScheme.primary,
+        selectedIconTheme: IconThemeData(
+          color: colorScheme.primary,
+        ),
+        unselectedItemColor: colorScheme.onBackground
+            .blendAlpha(colorScheme.primary, unselectedAlphaBlend)
+            .withAlpha(unselectedAlpha),
+        unselectedIconTheme: IconThemeData(
+          color: colorScheme.onBackground
+              .blendAlpha(colorScheme.primary, unselectedAlphaBlend)
+              .withAlpha(unselectedAlpha),
+        ),
       );
 }

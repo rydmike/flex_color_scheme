@@ -83,12 +83,12 @@ class PlatformPopupMenu extends StatelessWidget {
       TargetPlatform.fuchsia: Icon(Icons.laptop_chromebook_rounded),
     };
 
-    String subtitle = 'Current platform: ${platformString[platform]}';
+    String subtitle = 'Now set to ${platformString[platform]}';
 
     return PopupMenuButton<TargetPlatform>(
       padding: const EdgeInsets.all(10),
       onSelected: (TargetPlatform value) {
-        subtitle = 'Current platform: ${platformString[value]}';
+        subtitle = 'Now set to ${platformString[value]}';
         onChanged(value);
       },
       itemBuilder: (BuildContext context) =>

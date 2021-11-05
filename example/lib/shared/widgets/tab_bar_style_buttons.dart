@@ -16,7 +16,7 @@ class TabBarStyleButtons extends StatelessWidget {
     final List<bool> isSelected = <bool>[
       style == FlexTabBarStyle.forAppBar,
       style == FlexTabBarStyle.forBackground,
-      style == FlexTabBarStyle.useDefault,
+      style == FlexTabBarStyle.flutterDefault,
       style == FlexTabBarStyle.universal,
     ];
     return ToggleButtons(

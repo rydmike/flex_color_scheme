@@ -301,4 +301,12 @@ class ThemeServiceMem implements ThemeService {
   /// Persists setting that blends dark text theme, in example 5.
   @override
   Future<void> saveBlendDarkTextTheme(bool value) async {}
+
+  /// Loads setting for fabUseShape, in example 5.
+  @override
+  Future<bool> fabUseShape() async => ThemeService.defaultFabUseShape;
+
+  /// Persists setting for fabUseShape, in example 5.
+  @override
+  Future<void> saveFabUseShape(bool value) async {}
 }

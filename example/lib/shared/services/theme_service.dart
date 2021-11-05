@@ -160,8 +160,8 @@ abstract class ThemeService {
 
   /// Default value for the blendLevel, also used to reset settings.
   ///
-  /// Defaults to 12.
-  static const int defaultBlendLevel = 12;
+  /// Defaults to 7.
+  static const int defaultBlendLevel = 7;
 
   /// Loads used surface blend level setting in example 5.
   Future<int> blendLevel();
@@ -402,4 +402,16 @@ abstract class ThemeService {
 
   /// Persists setting that blends dark text theme, in example 5.
   Future<void> saveBlendDarkTextTheme(bool value);
+
+  /// Key used to read and save the fabUseShape value.
+  static const String keyFabUseShape = 'fabUseShape';
+
+  /// Default value for the fabUseShape, also to reset settings.
+  static const bool defaultFabUseShape = true;
+
+  /// Loads setting for fabUseShape, in example 5.
+  Future<bool> fabUseShape();
+
+  /// Persists setting for fabUseShape, in example 5.
+  Future<void> saveFabUseShape(bool value);
 }

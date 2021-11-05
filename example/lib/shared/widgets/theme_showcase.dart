@@ -15,8 +15,9 @@ class ThemeShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const ButtonsShowcase(),
-        const ButtonsShowcase(enabled: false),
+        const ButtonShowcase(),
+        const ButtonShowcase(enabled: false),
+        const ButtonIconShowcase(),
         Padding(
           padding: const EdgeInsets.all(8),
           child: Text('Legacy buttons deprecated',
@@ -24,9 +25,11 @@ class ThemeShowcase extends StatelessWidget {
         ),
         const LegacyButtonShowcase(),
         const LegacyButtonShowcase(enabled: false),
-        const IconButtonShowcase(),
-        const ChipShowcase(),
+        const LegacyButtonIconShowcase(),
+        const ToggleFabIconButtonsShowcase(),
+        const CircleAvataAndTooltipShowcase(),
         const CheckboxShowcase(),
+        const ChipShowcase(),
         const TextInputField(),
         const TabBarForAppBarShowcase(),
         const TabBarForBackgroundShowcase(),
@@ -38,25 +41,48 @@ class ThemeShowcase extends StatelessWidget {
         const BottomSheetAndMaterialShowcase(),
         const SizedBox(height: 16),
         const CardShowcase(),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Text('Normal TextTheme',
-              style: Theme.of(context).textTheme.subtitle1),
+        const SizedBox(height: 8),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Text('Normal TextTheme',
+                      style: Theme.of(context).textTheme.subtitle1),
+                ),
+                const TextThemeShowcase(),
+              ],
+            ),
+          ),
         ),
-        const TextThemeShowcase(),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Text('Primary TextTheme',
-              style: Theme.of(context).textTheme.subtitle1),
+        const SizedBox(height: 8),
+        Card(
+          color: Theme.of(context).colorScheme.primary,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Text('Primary TextTheme',
+                      style: Theme.of(context).primaryTextTheme.subtitle1),
+                ),
+                const PrimaryTextThemeShowcase(),
+              ],
+            ),
+          ),
         ),
-        const PrimaryTextThemeShowcase(),
       ],
     );
   }
 }
 
-class ButtonsShowcase extends StatelessWidget {
-  const ButtonsShowcase({Key? key, this.enabled = true}) : super(key: key);
+class ButtonShowcase extends StatelessWidget {
+  const ButtonShowcase({Key? key, this.enabled = true}) : super(key: key);
   final bool enabled;
 
   @override
@@ -85,19 +111,44 @@ class ButtonsShowcase extends StatelessWidget {
             child: const Text('Text button'),
           ),
         ),
+      ],
+    );
+  }
+}
+
+class ButtonIconShowcase extends StatelessWidget {
+  const ButtonIconShowcase({Key? key, this.enabled = true}) : super(key: key);
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8),
-          child: ToggleButtons(
-            isSelected: const <bool>[true, false, false],
-            onPressed: enabled ? (int newIndex) {} : null,
-            children: const <Widget>[
-              Icon(Icons.adb),
-              Icon(Icons.phone),
-              Icon(Icons.account_circle),
-            ],
+          child: ElevatedButton.icon(
+            onPressed: enabled ? () {} : null,
+            icon: const Icon(Icons.add),
+            label: const Text('Elevated icon'),
           ),
         ),
-        _PopupMenuButton(enabled: enabled),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: OutlinedButton.icon(
+            onPressed: enabled ? () {} : null,
+            icon: const Icon(Icons.add),
+            label: const Text('Outlined icon'),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: TextButton.icon(
+            onPressed: enabled ? () {} : null,
+            icon: const Icon(Icons.add),
+            label: const Text('Text icon'),
+          ),
+        ),
       ],
     );
   }
@@ -131,6 +182,89 @@ class LegacyButtonShowcase extends StatelessWidget {
           child: FlatButton(
             onPressed: enabled ? () {} : null,
             child: const Text('Flat button'),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class LegacyButtonIconShowcase extends StatelessWidget {
+  const LegacyButtonIconShowcase({Key? key, this.enabled = true})
+      : super(key: key);
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: RaisedButton.icon(
+            onPressed: enabled ? () {} : null,
+            icon: const Icon(Icons.add),
+            label: const Text('Raised icon'),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: OutlineButton.icon(
+            onPressed: enabled ? () {} : null,
+            icon: const Icon(Icons.add),
+            label: const Text('Outline icon'),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: FlatButton.icon(
+            onPressed: enabled ? () {} : null,
+            icon: const Icon(Icons.add),
+            label: const Text('Flat icon'),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ToggleFabIconButtonsShowcase extends StatelessWidget {
+  const ToggleFabIconButtonsShowcase({Key? key, this.enabled = true})
+      : super(key: key);
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: ToggleButtons(
+            isSelected: const <bool>[true, false, false],
+            onPressed: enabled ? (int newIndex) {} : null,
+            children: const <Widget>[
+              Icon(Icons.adb),
+              Icon(Icons.phone),
+              Icon(Icons.account_circle),
+            ],
+          ),
+        ),
+        _PopupMenuButton(enabled: enabled),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: FloatingActionButton(
+            onPressed: () {},
+            tooltip: 'Tooltip on\nFloatingActionButton',
+            child: const Icon(Icons.accessibility),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: IconButton(
+            icon: const Icon(Icons.accessibility),
+            tooltip: 'Tooltip on\nIconButton',
+            onPressed: () {},
           ),
         ),
       ],
@@ -173,35 +307,24 @@ class _PopupMenuButton extends StatelessWidget {
   }
 }
 
-class IconButtonShowcase extends StatelessWidget {
-  const IconButtonShowcase({Key? key}) : super(key: key);
+class CircleAvataAndTooltipShowcase extends StatelessWidget {
+  const CircleAvataAndTooltipShowcase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
+      children: const <Widget>[
         Padding(
-          padding: const EdgeInsets.all(8),
-          child: FloatingActionButton(
-            onPressed: () {},
-            child: const Icon(Icons.accessibility),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: IconButton(
-            icon: const Icon(Icons.accessibility),
-            onPressed: () {},
-          ),
-        ),
-        const Padding(
           padding: EdgeInsets.all(8),
-          child: CircleAvatar(
-            child: Text('AV'),
+          child: Tooltip(
+            message: 'Tooltip on\nCircleAvatar',
+            child: CircleAvatar(
+              child: Text('AV'),
+            ),
           ),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(8),
           child: Tooltip(
               message: 'Current tooltip theme.\nThis a two row tooltip.',

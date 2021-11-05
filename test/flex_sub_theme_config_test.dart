@@ -22,12 +22,13 @@ void main() {
       buttonMinSize: Size(40, 40),
       thickBorderWidth: 2,
       thinBorderWidth: 1.5,
-      elevatedButtonElevation: 2,
+      elevatedButtonElevation: 1,
       inputDecoratorIsFilled: true,
       inputDecoratorBorderType: FlexInputBorderType.outline,
       inputDecoratorUnfocusedHasBorder: true,
+      fabUseShape: true,
       cardElevation: 0,
-      popupMenuElevation: 4,
+      popupMenuElevation: 3,
       dialogElevation: 10,
       snackBarElevation: 4,
       bottomSheetElevation: 4,
@@ -44,12 +45,13 @@ void main() {
       buttonMinSize: Size(40, 40),
       thickBorderWidth: 2,
       thinBorderWidth: 1.5,
-      elevatedButtonElevation: 2,
+      elevatedButtonElevation: 1,
       inputDecoratorIsFilled: true,
       inputDecoratorBorderType: FlexInputBorderType.underline, // <--diff
       inputDecoratorUnfocusedHasBorder: true,
+      fabUseShape: true,
       cardElevation: 0,
-      popupMenuElevation: 4,
+      popupMenuElevation: 3,
       dialogElevation: 10,
       snackBarElevation: 4,
       bottomSheetElevation: 4,
@@ -70,6 +72,7 @@ void main() {
       inputDecoratorIsFilled: false,
       inputDecoratorBorderType: FlexInputBorderType.underline,
       inputDecoratorUnfocusedHasBorder: false,
+      fabUseShape: false,
       cardElevation: 1,
       popupMenuElevation: 5,
       dialogElevation: 10,
@@ -134,15 +137,16 @@ void main() {
           blendTextTheme: true,
           useTextTheme: true,
           defaultRadius: 16,
-          buttonMinSize: Size(40, 40),
+          buttonMinSize: const Size(40, 40),
           thickBorderWidth: 2,
           thinBorderWidth: 1.5,
-          elevatedButtonElevation: 2,
+          elevatedButtonElevation: 1,
           inputDecoratorIsFilled: true,
           inputDecoratorBorderType: FlexInputBorderType.outline,
           inputDecoratorUnfocusedHasBorder: true,
+          fabUseShape: true,
           cardElevation: 0,
-          popupMenuElevation: 4,
+          popupMenuElevation: 3,
           dialogElevation: 10,
           snackBarElevation: 4,
           bottomSheetElevation: 4,
@@ -171,7 +175,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSubThemesData#00000(interactionEffects: true, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: 16.0, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 2.0, outlinedButtonRadius: null, toggleButtonsRadius: null, inputDecorationRadius: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, chipRadius: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 4.0, popupMenuOpacity: null, dialogRadius: null, dialogElevation: 10.0, timePickerDialogRadius: null, snackBarElevation: 4.0, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: null, bottomNavigationBarLandscapeLayout: null)'));
+              'FlexSubThemesData#00000(interactionEffects: true, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: 16.0, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, inputDecorationRadius: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, chipRadius: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, timePickerDialogRadius: null, snackBarElevation: 4.0, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: 1.0, bottomNavigationBarLandscapeLayout: null)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '

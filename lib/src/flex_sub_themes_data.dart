@@ -52,11 +52,12 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorUnfocusedHasBorder = true,
     this.chipRadius,
     this.fabRadius,
+    this.fabUseShape = true,
     this.cardRadius,
     this.cardElevation = kCardElevation,
     this.popupMenuRadius,
     this.popupMenuElevation = kPopupMenuElevation,
-    this.popupMenuOpacity,
+    this.popupMenuOpacity = 1,
     this.dialogRadius,
     this.dialogElevation = kDialogElevation,
     this.timePickerDialogRadius,
@@ -65,7 +66,7 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomSheetElevation = kBottomSheetElevation,
     this.bottomSheetModalElevation = kBottomSheetModalElevation,
     this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
-    this.bottomNavigationBarOpacity,
+    this.bottomNavigationBarOpacity = 1,
     this.bottomNavigationBarLandscapeLayout,
   });
 
@@ -78,7 +79,7 @@ class FlexSubThemesData with Diagnosticable {
   /// To get a color themed effect, set [interactionEffects] to true, and to
   /// false for the Flutter SDK Material 2 default [ThemeData] values.
   ///
-  /// These effects apply to all Widgets that get theme from [ThemeData].
+  /// These effects apply to all Widgets that get them from [ThemeData].
   ///
   /// The buttons [ElevatedButton], [OutlinedButton] and [TextButton] define
   /// theme styles that by default use their own themed Material state
@@ -287,6 +288,20 @@ class FlexSubThemesData with Diagnosticable {
   /// Corner radius override value for [FloatingActionButton].
   final double? fabRadius;
 
+  /// Use shape theming on Floating Action Button (FAB).
+  ///
+  /// By setting [fabUseShape] to false it is possible to opt out of all
+  /// shape theming on FABs and keep their M2 defaults, while still eg.
+  /// keeping M3 defaults on other widgets or changing their border radius
+  /// with the shared global value.
+  ///
+  /// You may want to continue to keep the FAB round and extended FAB stadium
+  /// shaped as before, despite otherwise using a rounder or M3 design.
+  /// The circular M2 FAB goes well with those designs too.
+  ///
+  /// Default to true.
+  final bool fabUseShape;
+
   /// Corner radius override value for [Chip].
   final double? chipRadius;
 
@@ -321,9 +336,7 @@ class FlexSubThemesData with Diagnosticable {
   /// opinionated default value [kPopupMenuElevation].
   final double popupMenuElevation;
 
-  /// Popup menu background opacity
-  ///
-  /// If null, defaults to 1, fully opaque.
+  /// Popup menu background opacity.
   ///
   /// Used by FlexColorScheme to modify the opacity on the effective
   /// colorScheme.surface color used on the themed PopupMenu background color.
@@ -336,6 +349,8 @@ class FlexSubThemesData with Diagnosticable {
   /// and widget then uses its default behavior background color, which also
   /// happens to be to use [ThemeData.colorscheme] and in it
   /// [ColorScheme.surface].
+  ///
+  /// If null, defaults to 1, fully opaque.
   final double? popupMenuOpacity;
 
   /// Corner radius override value for [Dialog].
@@ -378,23 +393,15 @@ class FlexSubThemesData with Diagnosticable {
 
   /// BottomNavigationBar opacity
   ///
-  /// If null, defaults to 1, fully opaque.
-  ///
   /// Used by FlexColorScheme to modify the opacity on the effective
   /// colorScheme.background color on the themed BottomNavigationBar color.
-  ///
-  /// For opacity to be applied to the background a defined color also have
-  /// be passed. If opacity is not null, FlexColorScheme will apply it to its
-  /// [colorScheme.background] and pass it to
-  /// [FlexSubThemes.bottomNavigationBar]'s backgroundColor. If it is null,
-  /// FlexColorScheme will not pass any color the sub-theme background color.
-  /// and widget uses its default behavior background color, which also happens
-  /// to be to use [ThemeData.colorscheme] and in it [ColorScheme.background].
   ///
   /// Typically you would apply some opacity in the range 0.85 to 0.98 if
   /// to show content scrolling behind it when using the Scaffold property
   /// extendBody is used.
-  final double? bottomNavigationBarOpacity;
+  ///
+  /// Defaults to 1, fully opaque.
+  final double bottomNavigationBarOpacity;
 
   /// The arrangement of the bar's [items] when the enclosing
   /// [MediaQueryData.orientation] is [Orientation.landscape].
@@ -443,6 +450,7 @@ class FlexSubThemesData with Diagnosticable {
     final FlexInputBorderType? inputDecoratorBorderType,
     final bool? inputDecoratorUnfocusedHasBorder,
     final double? fabRadius,
+    final bool? fabUseShape,
     final double? chipRadius,
     final double? cardRadius,
     final double? cardElevation,
@@ -488,6 +496,7 @@ class FlexSubThemesData with Diagnosticable {
       inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ??
           this.inputDecoratorUnfocusedHasBorder,
       fabRadius: fabRadius ?? this.fabRadius,
+      fabUseShape: fabUseShape ?? this.fabUseShape,
       chipRadius: chipRadius ?? this.chipRadius,
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
@@ -538,6 +547,7 @@ class FlexSubThemesData with Diagnosticable {
         other.inputDecoratorUnfocusedHasBorder ==
             inputDecoratorUnfocusedHasBorder &&
         other.fabRadius == fabRadius &&
+        other.fabUseShape == fabUseShape &&
         other.chipRadius == chipRadius &&
         other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
@@ -580,6 +590,7 @@ class FlexSubThemesData with Diagnosticable {
       inputDecoratorBorderType,
       inputDecoratorUnfocusedHasBorder,
       fabRadius,
+      fabUseShape,
       chipRadius,
       cardRadius,
       cardElevation,
@@ -637,6 +648,7 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
+    properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
