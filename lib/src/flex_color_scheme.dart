@@ -74,7 +74,7 @@ enum FlexSurfaceMode {
   /// information see issue: https://github.com/flutter/flutter/issues/90353
   flat,
 
-  // TODO(rydmike): Update the matching mode levels below du to 2x->2/3x change.
+  // TODO(rydmike): Update mode levels below due to 2x->2/3x change and docs!
   /// Increasing blend strengths in order scaffold, surface, background.
   ///
   /// The blend strength increases on surfaces in this order:
@@ -1447,6 +1447,8 @@ class FlexColorScheme with Diagnosticable {
     /// If null, the on color is derived from the brightness of the [error]
     /// color, and will be be black if it is light and white if it is dark.
     final Color? onError,
+
+    // TODO(rydmike): Add a lightKeepWhite property, like darkIsTrueBlack.
 
     /// When true, the primary and primaryVariant colors will be swapped with
     /// their secondary counter parts.
@@ -3134,6 +3136,7 @@ class FlexColorScheme with Diagnosticable {
         : nullContextBrightness == Brightness.dark;
 
     // Get the defined effective background color for the used style.
+    // This is not pretty, but wanted a final for the background.
     final Color flexBackground = (context != null)
         ? systemNavBarStyle == FlexSystemNavBarStyle.system
             ? (isDark ? Colors.black : Colors.white)
@@ -3207,7 +3210,7 @@ class FlexColorScheme with Diagnosticable {
     // Like not web and we are on Android, sdk >= 29? Not sure, trying
     // without any checks for now and will test and see what happens on other
     // devices and with different Android SDK levels.
-    // TODO(rydmike): Follow-up on edgeToEdge issue and adjust as it evolves.
+    // TODO(rydmike): Follow-up on edgeToEdge issue and adjust if needed.
     // This is a gold mine: https://github.com/flutter/flutter/issues/90098
     if (_opacity < 1) {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
@@ -3702,7 +3705,7 @@ class FlexColorScheme with Diagnosticable {
         appBarBrightness == Brightness.dark ? Colors.white : Colors.black87;
     // If we are using subThemes and blended TextTheme, we need to apply it to
     // our app bar foreground color as well.
-    // TODO(rydmike): This is messy, maybe cleaner to do in the factories? TBD.
+    // TODO(rydmike): This is messy, maybe cleaner to do in the factories?
     if (useSubThemes && subTheme.blendTextTheme) {
       // Get darker (in dark mode) or lighter (in light mode) color of surface
       // or background color.
@@ -3919,8 +3922,8 @@ class FlexColorScheme with Diagnosticable {
               ? Colors.white38
               : Colors.black38,
 
-      // TODO(rydmike): Check where this color is used in the SDK, just curious.
       // Same as ThemeData SDK.
+      // hintColor is used only by DropdownButton and InputDecorator in SDK.
       hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
 
       // Special theming on hover, focus, highlight and splash, if opting in on
@@ -5348,7 +5351,6 @@ class _AlphaValues {
           backgroundAlpha: blendLevel * modeFactor,
           scaffoldAlpha: blendLevel * modeFactor,
         );
-      // TODO(rydmike): Consider background * 3 ~/ 2 instead => doc updates!
       // Scaffold (1/3x) surface & dialog (1x) background (2x).
       case FlexSurfaceMode.highBackground:
         return _AlphaValues(
@@ -5360,7 +5362,6 @@ class _AlphaValues {
           backgroundAlpha: blendLevel * modeFactor * 3 ~/ 2,
           scaffoldAlpha: blendLevel * modeFactor ~/ 3,
         );
-      // TODO(rydmike): Consider surface * 3 ~/ 2 instead => doc updates!
       // Result: scaffold (1/3x) background (1x) surface & dialog (2/3x).
       case FlexSurfaceMode.highSurface:
         return _AlphaValues(

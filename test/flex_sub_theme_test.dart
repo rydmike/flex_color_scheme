@@ -492,8 +492,7 @@ void main() {
         FlexSubThemes.elevatedButtonTheme(
                 colorScheme: colorScheme,
                 elevation: 1,
-                // TODO(rydmike): Review if padding really needed.
-                // padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 minButtonSize: const Size(50, 50),
                 radius: 10)
             .toString(),
@@ -506,7 +505,7 @@ void main() {
                   Radius.circular(10),
                 ),
               ), //buttonShape,
-              // padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               elevation: 1,
             ).copyWith(
               foregroundColor: MaterialStateProperty.resolveWith<Color>(

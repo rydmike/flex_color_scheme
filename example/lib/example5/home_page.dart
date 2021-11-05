@@ -426,27 +426,25 @@ class _ThemeMode extends StatelessWidget {
               children: <Widget>[
                 if (isLight) ...<Widget>[
                   SwitchListTile.adaptive(
-                    title: const Text(
-                        'Light mode TextThemes with some primary color'),
+                    title: const Text('Light mode TextTheme matches theme'),
                     value: controller.blendLightTextTheme,
                     onChanged: controller.setBlendLightTextTheme,
                   ),
                   SwitchListTile.adaptive(
                     title: const Text(
-                        'Light mode onColors with a hint of primary color'),
+                        'Light mode onColors have a hint of primary color'),
                     value: controller.blendLightOnColors,
                     onChanged: controller.setBlendLightOnColors,
                   )
                 ] else ...<Widget>[
                   SwitchListTile.adaptive(
-                    title: const Text(
-                        'Dark mode TextThemes with some primary color'),
+                    title: const Text('Dark mode TextTheme matches theme'),
                     value: controller.blendDarkTextTheme,
                     onChanged: controller.setBlendDarkTextTheme,
                   ),
                   SwitchListTile.adaptive(
                     title: const Text(
-                        'Dark mode onColors with a hint of primary color'),
+                        'Dark mode onColors have a hint of primary color'),
                     value: controller.blendDarkOnColors,
                     onChanged: controller.setBlendDarkOnColors,
                   )

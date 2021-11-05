@@ -894,6 +894,10 @@ class FlexSubThemes {
         ),
       );
 
+  // TODO(rydmike): DropdownButton, does it need something?
+
+  // TODO(rydmike): M3 dialog content padding? Apply when SDK supports it.
+
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kDialogRadius] (28) and [elevation] to
@@ -1015,6 +1019,8 @@ class FlexSubThemes {
   // Maybe open an issue about the limitation that corner radius on none
   // pinned one cannot be changed via theme while keeping straight one
   // straight.
+
+  // TODO(rydmike): Check snackbar bakground color, can I add a demo of it?
 
   /// An opinionated [SnackBarThemeData] with custom elevation.
   ///
