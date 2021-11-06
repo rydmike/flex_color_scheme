@@ -47,6 +47,16 @@ class _AppMenuState extends State<AppMenu> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final List<IconData> _usedIcons = <IconData>[
+      ..._icons,
+      if (isDark) Icons.wb_sunny else Icons.bedtime,
+    ];
+    final List<String> _usedLabels = <String>[
+      ..._labels,
+      if (isDark) 'Light mode' else 'Dark mode',
+    ];
+
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints size) {
         return OverflowBox(
@@ -87,7 +97,7 @@ class _AppMenuState extends State<AppMenu> {
                           // A dummy user profile on the dummy menu/rail.
                           const _UserProfile(),
                           // Create a list of the menu items
-                          for (int i = 0; i < _icons.length; i++)
+                          for (int i = 0; i < _usedIcons.length; i++)
                             _MenuItem(
                               width: size.maxWidth,
                               menuWidth: widget.maxWidth,
@@ -98,8 +108,8 @@ class _AppMenuState extends State<AppMenu> {
                                 widget.onSelect?.call(i);
                               },
                               selected: selectedItem == i,
-                              icon: _icons[i],
-                              label: _labels[i],
+                              icon: _usedIcons[i],
+                              label: _usedLabels[i],
                               showDivider: i.isEven,
                             ),
                           const Divider(thickness: 1, height: 1),
@@ -142,11 +152,10 @@ class _MenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color itemSelectedColor = isLight
-        ? theme.colorScheme.onBackground.blend(theme.primaryColorDark, 60)
+    final Color iconColor = isLight
+        ? theme.colorScheme.onBackground.blend(theme.colorScheme.primary, 60)
         : theme.colorScheme.onBackground.blend(theme.colorScheme.primary, 50);
-    final Color itemColor =
-        theme.colorScheme.onBackground; //.blend(theme.colorScheme.primary, 20);
+    final Color textColor = theme.colorScheme.onBackground;
     if (width < 5) {
       return const SizedBox.shrink();
     } else {
@@ -183,21 +192,15 @@ class _MenuItem extends StatelessWidget {
                             width: 56,
                             height: 56,
                           ),
-                          child: Icon(icon,
-                              color: selected
-                                  ? itemSelectedColor
-                                  : itemColor.withOpacity(0.8)),
+                          child: Icon(icon, color: iconColor),
                         ),
                         if (width < AppData.railWidth + 10)
                           const SizedBox.shrink()
                         else
                           Text(
                             label,
-                            style: selected
-                                ? theme.textTheme.bodyText1!
-                                    .copyWith(color: itemSelectedColor)
-                                : theme.textTheme.bodyText1!.copyWith(
-                                    color: itemColor.withOpacity(0.8)),
+                            style: theme.textTheme.bodyText1!
+                                .copyWith(color: textColor.withOpacity(0.8)),
                           )
                       ],
                     ),

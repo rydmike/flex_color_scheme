@@ -87,6 +87,8 @@ class _HomePageState extends State<HomePage>
     // Must call super when using AutomaticKeepAliveClientMixin.
     super.build(context);
 
+    // In dark mode?
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     // Short handle to the media query, used to get size and paddings.
     final MediaQueryData media = MediaQuery.of(context);
     // Paddings so content shows up visible area when we use Scaffold props
@@ -170,6 +172,13 @@ class _HomePageState extends State<HomePage>
             );
             if (reset ?? false) {
               await widget.controller.resetAllToDefaults();
+            }
+          }
+          if (index == 7) {
+            if (isDark) {
+              await widget.controller.setThemeMode(ThemeMode.light);
+            } else {
+              await widget.controller.setThemeMode(ThemeMode.dark);
             }
           }
         },
