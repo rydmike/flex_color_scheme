@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 ///
 ///  This implementation has a flaw, you cannot mouse or touch/drag scroll from
 ///  expanding margin areas like you could in a Web view. Read more about
-///  this here: https://rydmike.com/blog_layout_and_theming
+///  it here: https://rydmike.com/blog_layout_and_theming
 ///
 /// This is a Flutter "Universal" Widget that only depends on the SDK and
 /// can be dropped into any application.

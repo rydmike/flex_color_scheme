@@ -32,12 +32,12 @@ class AppBarStyleButtons extends StatelessWidget {
       children: <Widget>[
         Tooltip(
           message: 'Primary colored',
-          child: Icon(Icons.lens, color: scheme.primary),
+          child: Icon(Icons.panorama_wide_angle_select, color: scheme.primary),
         ),
         Tooltip(
           message: 'Material background',
           child: Icon(
-            Icons.lens,
+            Icons.panorama_wide_angle_select,
             color: isLight
                 ? FlexColor.materialLightSurface // Colors.white
                 : FlexColor.materialDarkSurface, // Color(0xFF121212)
@@ -45,15 +45,17 @@ class AppBarStyleButtons extends StatelessWidget {
         ),
         Tooltip(
           message: 'Surface colored',
-          child: Icon(Icons.lens, color: scheme.surface.darken(5)),
+          child: Icon(Icons.panorama_wide_angle_select,
+              color: scheme.surface.darken(5)),
         ),
         Tooltip(
           message: 'Background colored',
-          child: Icon(Icons.lens, color: scheme.background.darken(5)),
+          child: Icon(Icons.panorama_wide_angle_select,
+              color: scheme.background.darken(5)),
         ),
         Tooltip(
           message: 'Custom, typically\nsecondary variant',
-          child: Icon(Icons.lens,
+          child: Icon(Icons.panorama_wide_angle_select,
               color: customAppBarColor ?? scheme.secondaryVariant),
         ),
       ],

@@ -8,11 +8,10 @@ import 'app_menu.dart';
 /// A simplistic animated responsive Scaffold.
 ///
 /// Q: Is this Flexfold?
-/// A: No, it is not, this is simpler, but feel free to use it if you like it :)
+/// A: No, it is not, this is much simpler, but feel free to use it.
 ///
 /// This is just a straw-man for a "real" responsive animated Scaffold, but it
-/// can give you some ideas and clues about how you can make one or develop it
-/// further.
+/// can give you some ideas and clues about how you can make a simple one.
 ///
 /// (c) BSD 3-clause - Mike Rydstrom (@RydMike)
 class ResponsiveScaffold extends StatefulWidget {

@@ -5,6 +5,8 @@ import 'flex_constants.dart';
 import 'flex_extensions.dart';
 import 'flex_scheme.dart';
 
+// ignore_for_file: comment_references
+
 /// Defines colors, names and color schemes used to make maps and a list of
 /// predefined [FlexSchemeData] objects that can be used by FlexColorScheme.
 /// There is also const values for each color value and [FlexSchemeData] of
@@ -1187,11 +1189,11 @@ class FlexColor {
   // The colors are based on image theme nr 19 mix 1 in Flexfold demo app.
 
   /// English name of the blueWhale theme.
-  static const String blueWhaleName = 'Blue whale';
+  static const String blueWhaleName = 'New-1 Blue whale';
 
   /// English description of the blueWhale theme.
   static const String blueWhaleDescription =
-      'Blue whale, jungle green and outrageous tango orange';
+      'Blue whale, jungle green and outrageous tango orange theme';
 
   /// Blue whale theme color for light primary color.
   static const Color blueWhaleLightPrimary = Color(0xFF023047);
@@ -1217,101 +1219,108 @@ class FlexColor {
   /// Blue whale theme color for dark secondary variant color.
   static const Color blueWhaleDarkSecondaryVariant = Color(0xFFED7F29);
 
-  // The New one theme is based on...
+  // San Juan blue and salmon pink.
+  // Colors and scheme named by "name that color" library for the light colors.
 
-  /// English name of the newOne theme.
-  static const String newOneName = 'New1: Roosewod';
+  /// English name of the San Juan blue theme.
+  static const String sanJuanBlueName = 'New-2 San Juan';
 
-  /// English description of the newOne theme.
-  static const String newOneDescription = 'A draft theme..';
+  /// English description of the sanJuanBlue theme.
+  static const String sanJuanBlueDescription =
+      'San Juan blue and pink salmon theme';
 
-  /// Blue whale theme color for light primary color.
-  static const Color newOneLightPrimary = Color(0xFF68000E);
+  /// San Juan blue theme color for light primary color.
+  static const Color sanJuanBlueLightPrimary = Color(0xFF375778);
 
-  /// Blue whale theme color for light primary variant color.
-  static const Color newOneLightPrimaryVariant = Color(0xFFDC7072);
+  /// San Juan blue theme color for light primary variant color.
+  static const Color sanJuanBlueLightPrimaryVariant = Color(0xFF637E9F);
 
-  /// Blue whale theme color for light secondary color.
-  static const Color newOneLightSecondary = Color(0xFFE04B4B);
+  /// San Juan blue theme color for light secondary color.
+  static const Color sanJuanBlueLightSecondary = Color(0xFFFF949B);
 
-  /// Blue whale theme color for light secondary variant color.
-  static const Color newOneLightSecondaryVariant = Color(0xFFFFECEB);
+  /// San Juan blue theme color for light secondary variant color.
+  static const Color sanJuanBlueLightSecondaryVariant = Color(0xFFF2C4C7);
 
-  /// Blue whale theme color for dark primary color.
-  static const Color newOneDarkPrimary = Color(0xFFEA8787);
+  /// San Juan blue theme color for dark primary color.
+  static const Color sanJuanBlueDarkPrimary = Color(0xFF5E7691);
 
-  /// Blue whale theme color for dark primary variant color.
-  static const Color newOneDarkPrimaryVariant = Color(0xFFFFF2F1);
+  /// San Juan blue theme color for dark primary variant color.
+  static const Color sanJuanBlueDarkPrimaryVariant = Color(0xFF8096B1);
 
-  /// Blue whale theme color for dark secondary color.
-  static const Color newOneDarkSecondary = Color(0xFF9A565F);
+  /// San Juan blue theme color for dark secondary color.
+  static const Color sanJuanBlueDarkSecondary = Color(0xFFEBA8AD);
 
-  /// Blue whale theme color for dark secondary variant color.
-  static const Color newOneDarkSecondaryVariant = Color(0xFFE7A0A1);
+  /// San Juan blue theme color for dark secondary variant color.
+  static const Color sanJuanBlueDarkSecondaryVariant = Color(0xFFF4CFD1);
 
-  // The New two theme is based on...
+  // Rosewood red, with horses neck and driftwood theme.
+  // Colors and scheme named by "name that color" library for the light colors.
 
-  /// English name of the newTwo theme.
-  static const String newTwoName = 'New2: Valencia Sands';
+  /// English name of the rosewood theme.
+  static const String rosewoodName = 'New-3 Rosewood';
 
-  /// English description of the newTwo theme.
-  static const String newTwoDescription = 'Another a draft theme..';
+  /// English description of the rosewood theme.
+  static const String rosewoodDescription =
+      'Rosewood red, with horses neck and driftwood theme';
 
-  /// Blue whale theme color for light primary color.
-  static const Color newTwoLightPrimary = Color(0xFFE04B4B);
+  /// Rosewood theme color for light primary color.
+  static const Color rosewoodLightPrimary = Color(0xFF68000E);
 
-  /// Blue whale theme color for light primary variant color.
-  static const Color newTwoLightPrimaryVariant = Color(0xFF8E0013);
+  /// Rosewood theme color for light primary variant color.
+  static const Color rosewoodLightPrimaryVariant = Color(0xFF4F1821);
 
-  /// Blue whale theme color for light secondary color.
-  static const Color newTwoLightSecondary = Color(0xFFE9C281);
+  /// Rosewood theme color for light secondary color.
+  static const Color rosewoodLightSecondary = Color(0xFF664A0E);
 
-  /// Blue whale theme color for light secondary variant color.
-  static const Color newTwoLightSecondaryVariant = Color(0xFFF3D7A7);
+  /// Rosewood theme color for light secondary variant color.
+  static const Color rosewoodLightSecondaryVariant = Color(0xFFAD8845);
 
-  /// Blue whale theme color for dark primary color.
-  static const Color newTwoDarkPrimary = Color(0xFFEDCE9B);
+  /// Rosewood theme color for dark primary color.
+  static const Color rosewoodDarkPrimary = Color(0xFF9C4B5D);
 
-  /// Blue whale theme color for dark primary variant color.
-  static const Color newTwoDarkPrimaryVariant = Color(0xFFF5DFB9);
+  /// Rosewood theme color for dark primary variant color.
+  static const Color rosewoodDarkPrimaryVariant = Color(0xFFEB7685);
 
-  /// Blue whale theme color for dark secondary color.
-  static const Color newTwoDarkSecondary = Color(0xFFEB8D8D);
+  /// Rosewood theme color for dark secondary color.
+  static const Color rosewoodDarkSecondary = Color(0xFFEDCE9B);
 
-  /// Blue whale theme color for dark secondary variant color.
-  static const Color newTwoDarkSecondaryVariant = Color(0xFFEB7685);
+  /// Rosewood theme color for dark secondary variant color.
+  static const Color rosewoodDarkSecondaryVariant = Color(0xFFF5DFB9);
 
-  // The New three theme is based on...
+  // The Blumine theme is based on blumine blue green color, eastern blue,
+  // with saffron mango and mulled wine.
+  // Colors and scheme named by "name that color" library for the light colors.
 
-  /// English name of the newThree theme.
-  static const String newThreeName = 'New3 Blumine';
+  /// English name of the blumineBlue theme.
+  static const String blumineBlueName = 'New-4 Blumine';
 
-  /// English description of the newThree theme.
-  static const String newThreeDescription = 'A thrid draft theme..';
+  /// English description of the blumine blue theme.
+  static const String blumineBlueDescription =
+      'Blue, easter blue and saffron mango theme';
 
-  /// Blue whale theme color for light primary color.
-  static const Color newThreeLightPrimary = Color(0xFF19647E);
+  /// Blumine blue green theme color for light primary color.
+  static const Color blumineBlueLightPrimary = Color(0xFF19647E);
 
-  /// Blue whale theme color for light primary variant color.
-  static const Color newThreeLightPrimaryVariant = Color(0xFF119DA4);
+  /// Blumine blue green theme color for light primary variant color.
+  static const Color blumineBlueLightPrimaryVariant = Color(0xFF119DA4);
 
-  /// Blue whale theme color for light secondary color.
-  static const Color newThreeLightSecondary = Color(0xFFFFC857);
+  /// Blumine blue green theme color for light secondary color.
+  static const Color blumineBlueLightSecondary = Color(0xFFFEC54B);
 
-  /// Blue whale theme color for light secondary variant color.
-  static const Color newThreeLightSecondaryVariant = Color(0xFF4B3F72);
+  /// Blumine blue green theme color for light secondary variant color.
+  static const Color blumineBlueLightSecondaryVariant = Color(0xFF4B3F72);
 
-  /// Blue whale theme color for dark primary color.
-  static const Color newThreeDarkPrimary = Color(0xFF57859D);
+  /// Blumine blue green theme color for dark primary color.
+  static const Color blumineBlueDarkPrimary = Color(0xFF57859D);
 
-  /// Blue whale theme color for dark primary variant color.
-  static const Color newThreeDarkPrimaryVariant = Color(0xFF50A399);
+  /// Blumine blue green theme color for dark primary variant color.
+  static const Color blumineBlueDarkPrimaryVariant = Color(0xFF50A399);
 
-  /// Blue whale theme color for dark secondary color.
-  static const Color newThreeDarkSecondary = Color(0xFFFFD682);
+  /// Blumine blue green theme color for dark secondary color.
+  static const Color blumineBlueDarkSecondary = Color(0xFFFFD682);
 
-  /// Blue whale theme color for dark secondary variant color.
-  static const Color newThreeDarkSecondaryVariant = Color(0xFF797096);
+  /// Blumine blue green theme color for dark secondary variant color.
+  static const Color blumineBlueDarkSecondaryVariant = Color(0xFF797096);
 
   /// English name of the custom theme.
   static const String customName = 'Custom';
@@ -2054,68 +2063,68 @@ class FlexColor {
     ),
   );
 
-  /// New one based FlexSchemeData.
-  static const FlexSchemeData newOne = FlexSchemeData(
-    name: newOneName,
-    description: newOneDescription,
+  /// San Juan blue based FlexSchemeData.
+  static const FlexSchemeData sanJuanBlue = FlexSchemeData(
+    name: sanJuanBlueName,
+    description: sanJuanBlueDescription,
     light: FlexSchemeColor(
-      primary: newOneLightPrimary,
-      primaryVariant: newOneLightPrimaryVariant,
-      secondary: newOneLightSecondary,
-      secondaryVariant: newOneLightSecondaryVariant,
-      appBarColor: newOneLightSecondaryVariant,
+      primary: sanJuanBlueLightPrimary,
+      primaryVariant: sanJuanBlueLightPrimaryVariant,
+      secondary: sanJuanBlueLightSecondary,
+      secondaryVariant: sanJuanBlueLightSecondaryVariant,
+      appBarColor: sanJuanBlueLightSecondaryVariant,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
-      primary: newOneDarkPrimary,
-      primaryVariant: newOneDarkPrimaryVariant,
-      secondary: newOneDarkSecondary,
-      secondaryVariant: newOneDarkSecondaryVariant,
-      appBarColor: newOneDarkSecondaryVariant,
+      primary: sanJuanBlueDarkPrimary,
+      primaryVariant: sanJuanBlueDarkPrimaryVariant,
+      secondary: sanJuanBlueDarkSecondary,
+      secondaryVariant: sanJuanBlueDarkSecondaryVariant,
+      appBarColor: sanJuanBlueDarkSecondaryVariant,
       error: materialDarkError,
     ),
   );
 
-  /// New two based FlexSchemeData.
-  static const FlexSchemeData newTwo = FlexSchemeData(
-    name: newTwoName,
-    description: newTwoDescription,
+  /// Rosewood based FlexSchemeData.
+  static const FlexSchemeData rosewood = FlexSchemeData(
+    name: rosewoodName,
+    description: rosewoodDescription,
     light: FlexSchemeColor(
-      primary: newTwoLightPrimary,
-      primaryVariant: newTwoLightPrimaryVariant,
-      secondary: newTwoLightSecondary,
-      secondaryVariant: newTwoLightSecondaryVariant,
-      appBarColor: newTwoLightSecondaryVariant,
+      primary: rosewoodLightPrimary,
+      primaryVariant: rosewoodLightPrimaryVariant,
+      secondary: rosewoodLightSecondary,
+      secondaryVariant: rosewoodLightSecondaryVariant,
+      appBarColor: rosewoodLightSecondaryVariant,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
-      primary: newTwoDarkPrimary,
-      primaryVariant: newTwoDarkPrimaryVariant,
-      secondary: newTwoDarkSecondary,
-      secondaryVariant: newTwoDarkSecondaryVariant,
-      appBarColor: newTwoDarkSecondaryVariant,
+      primary: rosewoodDarkPrimary,
+      primaryVariant: rosewoodDarkPrimaryVariant,
+      secondary: rosewoodDarkSecondary,
+      secondaryVariant: rosewoodDarkSecondaryVariant,
+      appBarColor: rosewoodDarkSecondaryVariant,
       error: materialDarkError,
     ),
   );
 
-  /// New three based FlexSchemeData.
-  static const FlexSchemeData newThree = FlexSchemeData(
-    name: newThreeName,
-    description: newThreeDescription,
+  /// Blumine blue based FlexSchemeData.
+  static const FlexSchemeData blumineBlue = FlexSchemeData(
+    name: blumineBlueName,
+    description: blumineBlueDescription,
     light: FlexSchemeColor(
-      primary: newThreeLightPrimary,
-      primaryVariant: newThreeLightPrimaryVariant,
-      secondary: newThreeLightSecondary,
-      secondaryVariant: newThreeLightSecondaryVariant,
-      appBarColor: newThreeLightSecondaryVariant,
+      primary: blumineBlueLightPrimary,
+      primaryVariant: blumineBlueLightPrimaryVariant,
+      secondary: blumineBlueLightSecondary,
+      secondaryVariant: blumineBlueLightSecondaryVariant,
+      appBarColor: blumineBlueLightSecondaryVariant,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
-      primary: newThreeDarkPrimary,
-      primaryVariant: newThreeDarkPrimaryVariant,
-      secondary: newThreeDarkSecondary,
-      secondaryVariant: newThreeDarkSecondaryVariant,
-      appBarColor: newThreeDarkSecondaryVariant,
+      primary: blumineBlueDarkPrimary,
+      primaryVariant: blumineBlueDarkPrimaryVariant,
+      secondary: blumineBlueDarkSecondary,
+      secondaryVariant: blumineBlueDarkSecondaryVariant,
+      appBarColor: blumineBlueDarkSecondaryVariant,
       error: materialDarkError,
     ),
   );
@@ -2174,9 +2183,9 @@ class FlexColor {
     FlexScheme.espresso: espresso,
     FlexScheme.outerSpace: outerSpace,
     FlexScheme.blueWhale: blueWhale,
-    FlexScheme.newOne: newOne,
-    FlexScheme.newTwo: newTwo,
-    FlexScheme.newThree: newThree,
+    FlexScheme.sanJuanBlue: sanJuanBlue,
+    FlexScheme.rosewood: rosewood,
+    FlexScheme.blumineBlue: blumineBlue,
   };
 
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
@@ -2262,9 +2271,9 @@ class FlexColor {
     espresso,
     outerSpace,
     blueWhale,
-    newOne,
-    newTwo,
-    newThree
+    sanJuanBlue,
+    rosewood,
+    blumineBlue
   ];
 }
 

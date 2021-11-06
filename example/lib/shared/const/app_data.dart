@@ -16,8 +16,9 @@ class AppData {
   // When I build new public web versions of the demos, I just make sure to
   // update this info before I trigger GitHub actions CI/CD that builds them.
   static const String appName = 'FlexColor\u{00AD}Scheme';
-  static const String version = '4.0.0-dev.1';
-  static const String packageVersion = 'FlexColorScheme package $version';
+  static const String version = '4.0.0-alpha1';
+  static const String packageVersion =
+      'FlexColorScheme package $version (unreleased)';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
   static const String flutterVersion = 'stable v2.5.3';
   static const String copyright = '© 2020, 2021';
@@ -68,10 +69,11 @@ class AppData {
       (context as Element).findAncestorWidgetOfExactType<MaterialApp>()!.title;
 
   // Get the main font used in the examples.
-  static String? get font => GoogleFonts.roboto().fontFamily;
+  static String? get font => GoogleFonts.notoSans().fontFamily;
 
   // Defining the visual density here to so we can change it one spot when
   // we want to try different options.
+  // // VisualDensity.standard;
   static VisualDensity get visualDensity => VisualDensity.standard;
   // FlexColorScheme.comfortablePlatformDensity;
 

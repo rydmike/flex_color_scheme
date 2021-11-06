@@ -109,18 +109,19 @@ enum FlexScheme {
   /// Blue whale, jungle green and outrageous tango orange theme.
   blueWhale,
 
-  /// New one theme
-  newOne,
+  /// San Juan blue and salmon pink theme.
+  sanJuanBlue,
 
-  /// New two theme
-  newTwo,
+  /// Rosewood red, with horses neck and driftwood theme.
+  rosewood,
 
-  /// New three theme
-  newThree,
+  /// Blumine blumine blue green color, eastern blue, with saffron mango
+  /// and mulled wine theme.
+  blumineBlue,
 
   /// Placeholder for adding a custom scheme. When this scheme
-  /// is selected you should provide a `FlexColorScheme` based on a custom
-  /// `FlexSchemeData` object. If not provided, it defaults to the
+  /// is selected you should provide a [FlexColorScheme] based on a custom
+  /// [FlexSchemeData] object. If not provided, it defaults to the
   /// [FlexScheme.material] theme.
   custom,
 }

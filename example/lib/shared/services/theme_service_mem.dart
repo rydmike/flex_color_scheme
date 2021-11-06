@@ -208,6 +208,23 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> saveBottomNavigationBarElevation(double value) async {}
 
+  /// Loads used navBarStyle setting in example 5.
+  @override
+  Future<FlexSystemNavBarStyle> navBarStyle() async =>
+      ThemeService.defaultNavBarStyle;
+
+  /// Persists used navBarStyle setting in example 5.
+  @override
+  Future<void> saveNavBarStyle(FlexSystemNavBarStyle value) async {}
+
+  /// Loads used useNavDivider setting in example 5.
+  @override
+  Future<bool> useNavDivider() async => ThemeService.defaultUseNavDivider;
+
+  /// Persists useNavDivider setting in example 5.
+  @override
+  Future<void> saveUseNavDivider(bool value) async {}
+
   /// Loads used tooltip style setting in example 5.
   @override
   Future<bool> tooltipsMatchBackground() async =>
@@ -232,6 +249,14 @@ class ThemeServiceMem implements ThemeService {
   /// Persists swap primary/secondary colors in dark mode, in example 5.
   @override
   Future<void> saveSwapDarkColors(bool value) async {}
+
+  /// Loads lightIsWhite setting, in example 5.
+  @override
+  Future<bool> lightIsWhite() async => ThemeService.defaultLightIsWhite;
+
+  /// Persists lightIsWhite setting, in example 5.
+  @override
+  Future<void> saveLightIsWhite(bool value) async {}
 
   /// Loads dark uses true black setting in dark mode, in example 5.
   @override

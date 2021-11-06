@@ -531,6 +531,52 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
+  /// Loads used navBarStyle setting in example 5.
+  @override
+  Future<FlexSystemNavBarStyle> navBarStyle() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyNavBarStyle) ??
+          ThemeService.defaultNavBarStyle.index;
+      return FlexSystemNavBarStyle.values[value];
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultNavBarStyle;
+    }
+  }
+
+  /// Persists used navBarStyle setting in example 5.
+  @override
+  Future<void> saveNavBarStyle(FlexSystemNavBarStyle value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyNavBarStyle, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used useNavDivider setting in example 5.
+  @override
+  Future<bool> useNavDivider() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseNavDivider) ??
+          ThemeService.defaultUseNavDivider;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseNavDivider;
+    }
+  }
+
+  /// Persists useNavDivider setting in example 5.
+  @override
+  Future<void> saveUseNavDivider(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseNavDivider, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   /// Loads used tooltip style setting in example 5.
   @override
   Future<bool> tooltipsMatchBackground() async {
@@ -596,6 +642,29 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveSwapDarkColors(bool value) async {
     try {
       await _prefs.setBool(ThemeService.keySwapDarkColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads lightIsWhite setting, in example 5.
+  @override
+  Future<bool> lightIsWhite() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyLightIsWhite) ??
+          ThemeService.defaultLightIsWhite;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultLightIsWhite;
+    }
+  }
+
+  /// Persists lightIsWhite setting, in example 5.
+  @override
+  Future<void> saveLightIsWhite(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyLightIsWhite, value);
     } catch (e) {
       debugPrint(e.toString());
     }

@@ -41,6 +41,8 @@ class ThemeController with ChangeNotifier {
     _darkAppBarStyle = await _themeService.darkAppBarStyle();
     _appBarOpacity = await _themeService.appBarOpacity();
     _appBarElevation = await _themeService.appBarElevation();
+    _navBarStyle = await _themeService.navBarStyle();
+    _useNavDivider = await _themeService.useNavDivider();
     _transparentStatusBar = await _themeService.transparentStatusBar();
     _tabBarStyle = await _themeService.tabBarStyle();
     _bottomNavigationBarOpacity =
@@ -50,11 +52,11 @@ class ThemeController with ChangeNotifier {
     _tooltipsMatchBackground = await _themeService.tooltipsMatchBackground();
     _swapLightColors = await _themeService.swapLightColors();
     _swapDarkColors = await _themeService.swapDarkColors();
+    _lightIsWhite = await _themeService.lightIsWhite();
     _darkIsTrueBlack = await _themeService.darkIsTrueBlack();
     _useToDarkMethod = await _themeService.useToDarkMethod();
     _darkMethodLevel = await _themeService.darkMethodLevel();
     _useFlexColorScheme = await _themeService.useFlexColorScheme();
-
     _blendLightOnColors = await _themeService.blendLightOnColors();
     _blendDarkOnColors = await _themeService.blendDarkOnColors();
     _blendLightTextTheme = await _themeService.blendLightTextTheme();
@@ -100,25 +102,25 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultBottomNavigationBarOpacity, false);
     await setBottomNavigationBarElevation(
         ThemeService.defaultBottomNavigationBarElevation, false);
+    await setNavBarStyle(ThemeService.defaultNavBarStyle, false);
+    await setUseNavDivider(ThemeService.defaultUseNavDivider, false);
     await setTooltipsMatchBackground(
         ThemeService.defaultTooltipsMatchBackground, false);
     await setSwapLightColors(ThemeService.defaultSwapLightColors, false);
     await setSwapDarkColors(ThemeService.defaultSwapDarkColors, false);
+    await setLightIsWhite(ThemeService.defaultLightIsWhite, false);
     await setDarkIsTrueBlack(ThemeService.defaultDarkIsTrueBlack, false);
     await setUseToDarkMethod(ThemeService.defaultUseToDarkMethod, false);
     await setDarkMethodLevel(ThemeService.defaultDarkMethodLevel, false);
     await setUseFlexColorScheme(ThemeService.defaultUseFlexColorScheme, false);
-
     await setBlendLightOnColors(ThemeService.defaultBlendLightOnColors, false);
     await setBlendDarkOnColors(ThemeService.defaultBlendDarkOnColors, false);
     await setBlendLightTextTheme(
         ThemeService.defaultBlendLightTextTheme, false);
     await setBlendDarkTextTheme(ThemeService.defaultBlendDarkTextTheme, false);
     await setFabUseShape(ThemeService.defaultFabUseShape, false);
-
-    // Not using ThemeService, just a locally controlled toggle
+    // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
-
     notifyListeners();
   }
 
@@ -361,6 +363,27 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveBottomNavigationBarElevation(value);
   }
 
+  late FlexSystemNavBarStyle _navBarStyle;
+  FlexSystemNavBarStyle get navBarStyle => _navBarStyle;
+  Future<void> setNavBarStyle(FlexSystemNavBarStyle? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _navBarStyle) return;
+    _navBarStyle = value;
+    if (notify) notifyListeners();
+    await _themeService.saveNavBarStyle(value);
+  }
+
+  late bool _useNavDivider;
+  bool get useNavDivider => _useNavDivider;
+  Future<void> setUseNavDivider(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useNavDivider) return;
+    _useNavDivider = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUseNavDivider(value);
+  }
+
   late bool _tooltipsMatchBackground;
   bool get tooltipsMatchBackground => _tooltipsMatchBackground;
   Future<void> setTooltipsMatchBackground(bool? value,
@@ -390,6 +413,16 @@ class ThemeController with ChangeNotifier {
     _swapDarkColors = value;
     if (notify) notifyListeners();
     await _themeService.saveSwapDarkColors(value);
+  }
+
+  late bool _lightIsWhite;
+  bool get lightIsWhite => _lightIsWhite;
+  Future<void> setLightIsWhite(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _lightIsWhite) return;
+    _lightIsWhite = value;
+    if (notify) notifyListeners();
+    await _themeService.saveLightIsWhite(value);
   }
 
   late bool _darkIsTrueBlack;

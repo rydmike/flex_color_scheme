@@ -7,9 +7,14 @@ import '../../controllers/theme_controller.dart';
 // The width size of the scrolling button.
 const double _kWidthOfScrollItem = 67.2;
 
-/// Horizontal theme selector of themes offered in our AppColor.schemes.
+/// Horizontal theme selector of themes offered in our [AppColor.schemes].
 ///
-/// This example uses a StatefulWidget only for the scroll controller.
+/// This example uses a StatefulWidget only for the scroll controller and and
+/// index to keep track of previously selected color scheme, so we can animate
+/// to the new selection, also when the active scheme controller is changed
+/// via another control, like in the drop box that is also used in this demo
+/// as another way to change the color scheme.
+///
 /// The theme is controlled via the passed in ThemeController.
 class ThemeSelector extends StatefulWidget {
   const ThemeSelector({
@@ -70,7 +75,9 @@ class _ThemeSelectorState extends State<ThemeSelector> {
               itemBuilder: (BuildContext context, int index) {
                 return FlexThemeModeOptionButton(
                   optionButtonBorderRadius: widget.controller.useSubThemes
-                      ? widget.controller.cornerRadius
+                      ? widget.controller.useDefaultRadius
+                          ? 16
+                          : widget.controller.cornerRadius
                       : 4,
                   height: 30,
                   width: 30,

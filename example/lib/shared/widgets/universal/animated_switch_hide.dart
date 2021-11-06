@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// This widget is good for using a boolean condition to show/hide the [child]
-/// widget.
+/// This widget uses a boolean condition to show/hide the [child] widget.
 ///
-/// It is a simple convenience wrapper for AnimatedSwitcher
-/// where the Widget that it is Switched to is an invisible SizedBox.shrink()
-/// if no other widget is provided, it then effectively removes the child by
-/// animation to a zero sized widget instead.
+/// It is a convenience wrapper for AnimatedSwitcher where the Widget that it
+/// is size animated switched to an invisible SizedBox.shrink() if no other
+/// widget is provided, it then effectively removes the child via an animation
+/// to a zero sized widget instead, alternatively it uses the same size
+/// transition so switch to another widget.
 ///
 /// This is a Flutter "Universal" Widget that only depends on the SDK and
 /// can be dropped into any application.

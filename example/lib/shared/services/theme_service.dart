@@ -269,6 +269,31 @@ abstract class ThemeService {
   /// Persists the used app bar elevation setting in example 5.
   Future<void> saveBottomNavigationBarElevation(double value);
 
+  /// Key used to read and save the navBarStyle value.
+  static const String keyNavBarStyle = 'navBarStyle';
+
+  /// Default value for the navBarStyle, also used to reset settings.
+  static const FlexSystemNavBarStyle defaultNavBarStyle =
+      FlexSystemNavBarStyle.background;
+
+  /// Loads used navBarStyle setting in example 5.
+  Future<FlexSystemNavBarStyle> navBarStyle();
+
+  /// Persists used navBarStyle setting in example 5.
+  Future<void> saveNavBarStyle(FlexSystemNavBarStyle value);
+
+  /// Key used to read and save the useNavDivider value.
+  static const String keyUseNavDivider = 'useNavDivider';
+
+  /// Default value for the useNavDivider, also to reset settings.
+  static const bool defaultUseNavDivider = false;
+
+  /// Loads used useNavDivider setting in example 5.
+  Future<bool> useNavDivider();
+
+  /// Persists useNavDivider setting in example 5.
+  Future<void> saveUseNavDivider(bool value);
+
   /// Key used to read and save the tooltipsMatchBackground value.
   static const String keyTooltipsMatchBackground = 'tooltipsMatchBackground';
 
@@ -304,6 +329,18 @@ abstract class ThemeService {
 
   /// Persists swap primary/secondary colors in dark mode, in example 5.
   Future<void> saveSwapDarkColors(bool value);
+
+  /// Key used to read and save the lightIsWhite value.
+  static const String keyLightIsWhite = 'lightIsWhite';
+
+  /// Default value for the lightIsWhite, also to reset settings.
+  static const bool defaultLightIsWhite = false;
+
+  /// Loads lightIsWhite setting, in example 5.
+  Future<bool> lightIsWhite();
+
+  /// Persists lightIsWhite setting, in example 5.
+  Future<void> saveLightIsWhite(bool value);
 
   /// Key used to read and save the darkIsTrueBlack value.
   static const String keyDarkIsTrueBlack = 'darkIsTrueBlack';

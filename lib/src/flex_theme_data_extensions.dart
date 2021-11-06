@@ -45,8 +45,8 @@ extension FlexThemeData on ThemeData {
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.light]
   /// and its `toTheme` method.
   static ThemeData light({
-    /// The [FlexSchemeColor] that we will create the light [FlexColorScheme]
-    /// from.
+    /// The [FlexSchemeColor] that will be used to create the light
+    /// [FlexColorScheme].
     ///
     /// You can use predefined [FlexSchemeColor] values from [FlexColor] or
     /// [FlexColor.schemes] map or define your own colors with
@@ -59,16 +59,15 @@ extension FlexThemeData on ThemeData {
     /// [FlexScheme.material], thus defining the resulting scheme.
     final FlexSchemeColor? colors,
 
-    /// A shortcut to use one of the built-in color schemes defined by
-    /// enum [FlexScheme].
+    /// Use one of the built-in color schemes defined by enum [FlexScheme].
     ///
-    /// Just give it one of the enum values to use the scheme, like eg.
+    /// Give it one of the enum values to use the scheme, like eg.
     /// [FlexScheme.mandyRed].
     ///
-    /// To create custom color schemes use the `colors` property. If both
-    /// `colors`and `scheme` are specified, the scheme defined by
-    /// `colors` is used. If both are null, then `scheme` defaults to
-    /// [FlexScheme.material], thus defining the resulting scheme.
+    /// To create custom color schemes use the [colors] property. If both
+    /// [colors] and [scheme] are specified, the scheme defined by
+    /// [colors] is used. If both are null, then [scheme] defaults to
+    /// [FlexScheme.material].
     final FlexScheme? scheme,
 
     /// The number of the four main scheme colors to be used of the ones
@@ -76,13 +75,15 @@ extension FlexThemeData on ThemeData {
     ///
     /// This is a convenience property that allows you to vary which colors to
     /// use of the primary, secondary and variant colors included in `colors` in
-    /// [FlexSchemeColor]. The integer number corresponds to using:
+    /// `FlexSchemeColor` The integer number corresponds to using:
+    ///
     /// 1 = Only the primary color
     /// 2 = Primary + Secondary colors
     /// 3 = Primary + Primary variant + Secondary colors
     /// 4 = Primary + Primary variant + Secondary + Secondary variant colors
+    ///
     /// By default the value is 4 and all main scheme colors in
-    /// [FlexSchemeColor] are used.
+    /// `FlexSchemeColor` are used.
     ///
     /// When the value is 1, the result is the same as if we would have
     /// created the colors with [FlexSchemeColor.from] by only giving it the
@@ -99,7 +100,7 @@ extension FlexThemeData on ThemeData {
     final int usedColors = 4,
 
     /// Blends theme colors into surfaces and backgrounds. Consider using
-    /// `surfaceStyle` instead.
+    /// [surfaceMode] instead.
     ///
     /// This property was used in FlexColorScheme before v4.0.0, it
     /// has not yet been deprecated, but may be so in future version.
@@ -113,22 +114,19 @@ extension FlexThemeData on ThemeData {
     /// default color scheme in the Material Design guide for light theme found
     /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
     ///
-    /// If values for the properties `surface`, `background`,
-    /// `dialogBackground` or `scaffoldBackground` are given,
+    /// If values for the properties [surface], [background],
+    /// [dialogBackground] or [scaffoldBackground] are given,
     /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via `surfaceMode` or [FlexSurface] in
-    /// this `surfaceStyle`.
+    /// on used [FlexSurfaceMode] via [surfaceMod] or [FlexSurface] in
+    /// this [surfaceStyle].
     final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///
-    /// Prefer using `surfaceMode` over `surfaceStyle`, when making themes
-    /// with color branded surface.
-    ///
-    /// If defined, used mode overrides the older `surfaceStyle`
-    /// property setting. Prefer using `surfaceMode` over `surfaceStyle`,
+    /// If defined, used mode overrides the older [surfaceStyle]
+    /// property setting. Prefer using [surfaceMode] over [surfaceStyle],
     /// it offers more color branded surface modes and separate control over
-    /// the used branding level via the separate `blendLevel` property.
+    /// the used branding level via the separate [blendLevel] property.
     ///
     /// The mode [FlexSurfaceMode.highBackground] can be used to replace the
     /// style that is produced when using [FlexColorScheme.surfaceStyle] enum
@@ -156,11 +154,12 @@ extension FlexThemeData on ThemeData {
     /// * [FlexSurface.strong]  11% : blendLevel = 7
     /// * [FlexSurface.heavy]   14% : blendLevel = 8..9
     ///
-    /// Since there is not an exact 2:1 relationship between background and
-    /// surface, when using the older [FlexSurface] based style, nor is
-    /// scaffoldBackground : surface always a 1 : 3 relationship. The old and
-    /// new designs do never align exactly at any blendLevel, but the above
-    /// values produce visually similar results.
+    /// Since there it is not the same relationship between background and
+    /// surface, when using the older [FlexSurface] based style, that uses
+    /// individually tuned relationships.
+    /// The old and new designs do never align exactly at any blendLevel,
+    /// but the above values produce visually similar results for the
+    /// most prominent background color blend.
     ///
     /// To get elevation overlay color in dark themes on all surfaces used by
     /// [Material], use one of the modes where background and dialog color
@@ -176,21 +175,22 @@ extension FlexThemeData on ThemeData {
     /// another color tint if using e.g. [lowScaffoldVariantDialog] or
     /// [highScaffoldVariantDialog].
     ///
-    /// If values for the properties `surface`, `background`,
-    /// `dialogBackground` or `scaffoldBackground` are given in the constructor,
+    ///
+    /// If values for the properties [surface], [background],
+    /// [dialogBackground] or [scaffoldBackground] are given,
     /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via `surfaceMode` or [FlexSurface] in
-    /// this `surfaceStyle`.
+    /// on used [FlexSurfaceMode] via [surfaceMod] or [FlexSurface] in
+    /// this [surfaceMode].
     final FlexSurfaceMode? surfaceMode,
 
-    /// When `surfaceMode` is used, this defines the blend level strength used
+    /// When [surfaceMode] is defined, this sets the blend level strength used
     /// by the surface mode.
     ///
     /// In light mode the blend level value equals the alpha value in the
     /// alpha blends for the surfaces, in dark mode, 2x the blend value
     /// is used for alpha.
     ///
-    /// Defaults to 10.
+    /// Defaults to 0.
     final int blendLevel = 10,
 
     /// Style used to define the themed color of the [AppBar] background color.
@@ -241,23 +241,23 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     /// The override color is however included and affected by factory
-    /// properties `usedColors` and `swapColors` and included in their behavior.
+    /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? primary,
 
     /// A darker version of the primary color.
     ///
-    /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
+    /// In Flutter SDK the [primaryVariant] color is only used by [SnackBar]
     /// button color in dark theme mode as a part of predefined widget behavior.
     /// If you provide a custom [SnackBarThemeData] where you define
-    /// [SnackBarThemeData.actionTextColor] to `primary` or `secondary`, this
+    /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
     /// color property becomes a good property to use if you need a custom color
     /// for custom widgets accessible via your application's ThemeData, that is
     /// not used as default color by any built-in widgets.
@@ -270,7 +270,7 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     /// The override color is however included and affected by factory
-    /// properties `usedColors` and `swapColors` and included in their behavior.
+    /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? primaryVariant,
@@ -286,14 +286,14 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     /// The override color is however included and affected by factory
-    /// properties `usedColors` and `swapColors` and included in their behavior.
+    /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondary,
 
     /// A darker version of the secondary color.
     ///
-    /// In Flutter SDK the `secondaryVariant` color is not used by in any
+    /// In Flutter SDK the [secondaryVariant] color is not used by in any
     /// built-in widgets default themes or predefined widget behavior.
     /// It is an excellent property to use if you need a custom color for
     /// custom widgets accessible via your application's ThemeData, that is
@@ -307,7 +307,7 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     /// The override color is however included and affected by factory
-    /// properties `usedColors` and `swapColors` and included in their behavior.
+    /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondaryVariant,
@@ -329,10 +329,8 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
-    /// `surfaceMode` [FlexSurfaceMode] enum or `surfaceStyle` enum
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
-    /// In dark mode this override color is also affected by the
-    /// `darkIsTrueBlack` property.
     ///
     /// Defaults to null.
     final Color? surface,
@@ -345,10 +343,8 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
-    /// `surfaceMode` [FlexSurfaceMode] enum or `surfaceStyle` enum
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
-    /// In dark mode this override color is also affected by the
-    /// `darkIsTrueBlack` property.
     ///
     /// Defaults to null.
     final Color? background,
@@ -359,10 +355,8 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
-    /// `surfaceMode` [FlexSurfaceMode] enum or `surfaceStyle` enum
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
-    /// In dark mode this override color is also affected by the
-    /// `darkIsTrueBlack` property.
     ///
     /// Defaults to null.
     final Color? scaffoldBackground,
@@ -371,10 +365,8 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
-    /// `surfaceMode` [FlexSurfaceMode] enum or `surfaceStyle` enum
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
-    /// In dark mode this override color is also affected by the
-    /// `darkIsTrueBlack` property.
     ///
     /// Defaults to null.
     final Color? dialogBackground,
@@ -383,9 +375,9 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
     /// pre-defined color scheme based on [FlexScheme] `scheme` property and
-    /// the [FlexAppBarStyle] `appBarStyle` property.
+    /// the [FlexAppBarStyle] [appBarStyle] property.
     final Color? appBarBackground,
 
     /// A color that is clearly legible when drawn on `primary` color.
@@ -437,6 +429,12 @@ extension FlexThemeData on ThemeData {
     /// If null, the on color is derived from the brightness of the `error`
     /// color, and will be be black if it is light and white if it is dark.
     final Color? onError,
+
+    /// Makes the light theme backgrounds lighter or even white.
+    ///
+    /// Scaffold background will become white, and other surfaces also get
+    /// lighter (8%), if using low blend levels they may become fully white too.
+    final bool lightIsWhite = false,
 
     /// When true, the primary and primaryVariant colors will be swapped with
     /// their secondary counter parts.
@@ -557,19 +555,19 @@ extension FlexThemeData on ThemeData {
     /// [Theme.of]) to determine the current platform for the purpose of
     /// emulating the platform behavior (e.g. scrolling or haptic effects).
     /// Widgets and render objects at lower layers that try to emulate the
-    /// underlying platform platform can depend on `defaultTargetPlatform`
+    /// underlying platform platform can depend on [defaultTargetPlatform]
     /// directly, or may require that the target platform be provided as an
-    /// argument. The [dart.io.Platform] object should only be used directly
-    /// when it's critical to actually know the current platform, without any
-    /// overrides possible, e.g. when a system API is about to be called.
+    /// argument. The `dart.io.Platform` object should only be used directly
+    /// when it's critical to actually know the current platform, without
+    /// any overrides possible, e.g. when a system API is about to be called.
     ///
     /// In a test environment, the platform returned is [TargetPlatform.android]
     /// regardless of the host platform. (Android was chosen because the tests
     /// were originally written assuming Android-like behavior, and we added
     /// platform adaptations for other platforms later). Tests can check
-    /// behavior for other platforms by setting the [platform] of the
-    /// [Theme] explicitly to another [TargetPlatform] value, or by setting
-    /// `debugDefaultTargetPlatformOverride`.
+    /// behavior for other platforms by setting the [platform] of the [Theme]
+    /// explicitly to another [TargetPlatform] value, or by setting
+    /// [debugDefaultTargetPlatformOverride].
     final TargetPlatform? platform,
 
     /// The color and geometry [TextTheme] values use to configure [textTheme].
@@ -652,35 +650,49 @@ extension FlexThemeData on ThemeData {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
-    /// Set to true to opt in on using additional opinionated widget sub-themes.
+    /// Set to true to opt-in on using additional opinionated widget sub themes.
     ///
-    /// By default [FlexThemeData.light] and [FlexColorScheme.toTheme],
-    /// tries to do as little as they need to just provide a consistent color
-    /// schemed theme.
+    /// By default [FlexThemeData.light], [FlexThemeData.dark] and
+    /// [FlexColorScheme.toTheme], tries to do as
+    /// little as they need to just provide a consistent color schemed theme.
     ///
-    /// By opting in via [subThemesData] you get an opinionated set of widget
-    /// sub-themes applied. They can be conveniently customized via the
-    /// [subThemesData] property, that holds quick and easy sub-theme
+    /// By opting in with [useSubThemes] set to true you get an opinionated set
+    /// of widget sub themes applied. They can be conveniently customized via
+    /// the [subThemesData] property, that holds quick and easy sub theme
     /// configuration values in the data class [FlexSubThemesData].
     ///
-    /// Opinionated sub-themes are provided for:
-    /// * [BottomSheet]
-    /// * [BottomNavigationBar]
-    /// * [Card]
-    /// * [Dialog]
-    /// * [PopupMenuButton]
-    /// * [TimePickerDialog]
-    /// * [InputDecoration]
+    /// Opinionated sub themes are provided for:
+    ///
+    /// * [TextButton]
     /// * [ElevatedButton]
     /// * [OutlinedButton]
-    /// * [TextButton]
+    /// * Older buttons using [ButtonThemeData]
     /// * [ToggleButtons]
-    /// * A custom [ButtonTextTheme] still provides matching styling to support
-    ///   the deprecated legacy buttons if they are used.
+    /// * [InputDecoration]
+    /// * [FloatingActionButton]
+    /// * [Chip]
+    /// * [Card]
+    /// * [PopupMenuButton]
+    /// * [Dialog]
+    /// * [TimePickerDialog]
+    /// * [SnackBar]
+    /// * [BottomSheet]
+    /// * [BottomNavigationBar]
     ///
-    /// The sub-themes are e.g. a convenient way to opt-in on customized corner
+    /// * The custom [ButtonTextTheme] even still provides matching styling to
+    ///   for the deprecated legacy buttons if they are used.
+    ///
+    /// The sub themes are a convenient way to opt-in on customized corner
     /// radius on Widgets using above themes. By opting in you can set corner
-    /// radius for all above Widgets to same corner radius in one go.
+    /// radius for all above Widgets to same corner radius in one go. There are
+    /// also properties to override the global default for each widget to set
+    /// different rounding per widget if so desired.
+    ///
+    /// By default each widgets corner radius and some other styling take
+    /// inspiration from the Material 3 (M3) Specification
+    /// https://m3.material.io/ and uses its values as defaults when it is
+    /// possible to do so in Flutter SDK theming within its current
+    /// Material 2 (M2) design limitations.
     ///
     /// Defaults to false.
     final bool useSubThemes = false,
@@ -726,6 +738,7 @@ extension FlexThemeData on ThemeData {
       onSurface: onSurface,
       onBackground: onBackground,
       onError: onError,
+      lightIsWhite: lightIsWhite,
       swapColors: swapColors,
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
@@ -758,16 +771,15 @@ extension FlexThemeData on ThemeData {
     /// [FlexScheme.material], thus defining the resulting scheme.
     final FlexSchemeColor? colors,
 
-    /// A shortcut to use one of the built-in color schemes defined by
-    /// enum [FlexScheme].
+    /// Use one of the built-in color schemes defined by enum [FlexScheme].
     ///
-    /// Just give it one of the enum values to use the scheme, like eg.
+    /// Give it one of the enum values to use the scheme, like eg.
     /// [FlexScheme.mandyRed].
     ///
-    /// To create custom color schemes use the `colors` property. If both
-    /// `colors`and `scheme` are specified, the scheme defined by
-    /// `colors` is used. If both are null, then `scheme` defaults to
-    /// [FlexScheme.material], thus defining the resulting scheme.
+    /// To create custom color schemes use the [colors] property. If both
+    /// [colors] and [scheme] are specified, the scheme defined by
+    /// [colors] is used. If both are null, then [scheme] defaults to
+    /// [FlexScheme.material].
     final FlexScheme? scheme,
 
     /// The number of the four main scheme colors to be used of the ones
@@ -776,10 +788,12 @@ extension FlexThemeData on ThemeData {
     /// This is a convenience property that allows you to vary which colors to
     /// use of the primary, secondary and variant colors included in `colors` in
     /// [FlexSchemeColor]. The integer number corresponds to using:
+    ///
     /// 1 = Only the primary color
     /// 2 = Primary + Secondary colors
     /// 3 = Primary + Primary variant + Secondary colors
     /// 4 = Primary + Primary variant + Secondary + Secondary variant colors
+    ///
     /// By default the value is 4 and all main scheme colors in
     /// [FlexSchemeColor] are used.
     ///
@@ -798,7 +812,7 @@ extension FlexThemeData on ThemeData {
     final int usedColors = 4,
 
     /// Blends theme colors into surfaces and backgrounds. Consider using
-    /// `surfaceStyle` instead.
+    /// [surfaceMode] instead.
     ///
     /// This property was used in FlexColorScheme before v4.0.0, it
     /// has not yet been deprecated, but may be so in future version.
@@ -813,11 +827,11 @@ extension FlexThemeData on ThemeData {
     /// guide for dark theme found here:
     /// https://material.io/design/color/dark-theme.html#ui-application
     ///
-    /// If values for the properties `surface`, `background`,
-    /// `dialogBackground` or `scaffoldBackground` are given,
+    /// If values for the properties [surface], [background],
+    /// [dialogBackground] or [scaffoldBackground] are given,
     /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via `surfaceMode` or [FlexSurface] in
-    /// this `surfaceStyle`.
+    /// on used [FlexSurfaceMode] via [surfaceMode] or [FlexSurface] in
+    /// this [surfaceStyle].
     final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
@@ -876,22 +890,21 @@ extension FlexThemeData on ThemeData {
     /// another color tint if using e.g. [lowScaffoldVariantDialog] or
     /// [highScaffoldVariantDialog].
     ///
-    /// If values for the properties `surface`, `background`,
-    /// `dialogBackground` or `scaffoldBackground` are given in the constructor,
+    /// If values for the properties [surface], [background],
+    /// [dialogBackground] or [scaffoldBackground] are given,
     /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via `surfaceMode` or [FlexSurface] in
-    /// this `surfaceStyle`.
+    /// on used [FlexSurfaceMode] via [FlexSurfaceMode] in this [surfaceMode].
     final FlexSurfaceMode? surfaceMode,
 
-    /// When `surfaceMode` is used, this defines the blend level strength used
+    /// When [surfaceMode] is defined, this sets the blend level strength used
     /// by the surface mode.
     ///
     /// In light mode the blend level value equals the alpha value in the
     /// alpha blends for the surfaces, in dark mode, 2x the blend value
     /// is used for alpha.
     ///
-    /// Defaults to 10.
-    final int blendLevel = 10,
+    /// Defaults to 0.
+    final int blendLevel = 0,
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
@@ -947,17 +960,17 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     /// The override color is however included and affected by factory
-    /// properties `usedColors` and `swapColors` and included in their behavior.
+    /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? primary,
 
     /// A darker version of the primary color.
     ///
-    /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
+    /// In Flutter SDK the [primaryVariant] color is only used by [SnackBar]
     /// button color in dark theme mode as a part of predefined widget behavior.
     /// If you provide a custom [SnackBarThemeData] where you define
-    /// [SnackBarThemeData.actionTextColor] to `primary` or `secondary`, this
+    /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
     /// color property becomes a good property to use if you need a custom color
     /// for custom widgets accessible via your application's ThemeData, that is
     /// not used as default color by any built-in widgets.
@@ -970,7 +983,7 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     /// The override color is however included and affected by factory
-    /// properties `usedColors` and `swapColors` and included in their behavior.
+    /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? primaryVariant,
@@ -986,14 +999,14 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     /// The override color is however included and affected by factory
-    /// properties `usedColors` and `swapColors` and included in their behavior.
+    /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondary,
 
     /// A darker version of the secondary color.
     ///
-    /// In Flutter SDK the `secondaryVariant` color is not used by in any
+    /// In Flutter SDK the [secondaryVariant] color is not used by in any
     /// built-in widgets default themes or predefined widget behavior.
     /// It is an excellent property to use if you need a custom color for
     /// custom widgets accessible via your application's ThemeData, that is
@@ -1007,7 +1020,7 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     /// The override color is however included and affected by factory
-    /// properties `usedColors` and `swapColors` and included in their behavior.
+    /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondaryVariant,
@@ -1027,9 +1040,12 @@ extension FlexThemeData on ThemeData {
     /// [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
     /// by all [Material] of type [MaterialType.card].
     ///
-    /// If null, the color is determined by mode defined by property
-    /// `surfaceMode` [FlexSurfaceMode] enum or `surfaceStyle` enum
+    /// When using the factory this is an override color for the color that
+    /// would be used based on mode defined by property
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
+    ///
+    /// Defaults to null.
     final Color? surface,
 
     /// A color that typically appears behind scrollable content.
@@ -1038,34 +1054,43 @@ extension FlexThemeData on ThemeData {
     /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
     /// [Material] of type [MaterialType.canvas].
     ///
-    /// If null, the color is determined by mode defined by property
-    /// `surfaceMode` [FlexSurfaceMode] enum or `surfaceStyle` enum
+    /// When using the factory this is an override color for the color that
+    /// would be used based on mode defined by property
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
+    ///
+    /// Defaults to null.
     final Color? background,
 
     /// The color of the [Scaffold] background.
     ///
     /// The color is applied to [ThemeData.scaffoldBackgroundColor].
     ///
-    /// If null, the color is determined by mode defined by property
-    /// `surfaceMode` [FlexSurfaceMode] enum or `surfaceStyle` enum
+    /// When using the factory this is an override color for the color that
+    /// would be used based on mode defined by property
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
+    ///
+    /// Defaults to null.
     final Color? scaffoldBackground,
 
     /// The background color of Dialog elements.
     ///
-    /// If null, the color is determined by mode defined by property
-    /// `surfaceMode` [FlexSurfaceMode] enum or `surfaceStyle` enum
+    /// When using the factory this is an override color for the color that
+    /// would be used based on mode defined by property
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
+    ///
+    /// Defaults to null.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property and
-    /// the [FlexAppBarStyle] `appBarStyle` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property and
+    /// the [FlexAppBarStyle] [appBarStyle] property.
     final Color? appBarBackground,
 
     /// A color that is clearly legible when drawn on `primary` color.
@@ -1118,11 +1143,10 @@ extension FlexThemeData on ThemeData {
     /// color, and will be be black if it is light and white if it is dark.
     final Color? onError,
 
-    /// Makes the dark theme even darker.
+    /// Makes the dark theme backgrounds darker or even black.
     ///
-    /// Scaffold background will become fully black, and other surfaces also
-    /// get considerably darker and if only using low blend levels they may
-    /// become fully black too.
+    /// Scaffold background will become fully black, and other surfaces also get
+    /// darker (8%), if using low blend levels they may become fully black too.
     final bool darkIsTrueBlack = false,
 
     /// When true, the primary and primaryVariant colors will be swapped with
@@ -1167,7 +1191,7 @@ extension FlexThemeData on ThemeData {
     /// suitable for multiline tooltips.
     final bool tooltipsMatchBackground = false,
 
-    /// When set to `true`, it makes the status bar on Android the same color as
+    /// When set to true, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
     ///
     /// Defaults to true.
@@ -1256,7 +1280,7 @@ extension FlexThemeData on ThemeData {
     /// platform adaptations for other platforms later). Tests can check
     /// behavior for other platforms by setting the [platform] of the [Theme]
     /// explicitly to another [TargetPlatform] value, or by setting
-    /// `debugDefaultTargetPlatformOverride`.
+    /// [debugDefaultTargetPlatformOverride].
     final TargetPlatform? platform,
 
     /// The color and geometry [TextTheme] values use to configure [textTheme].
@@ -1339,34 +1363,49 @@ extension FlexThemeData on ThemeData {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
-    /// Set to true to opt in on using additional opinionated widget sub-themes.
+    /// Set to true to opt-in on using additional opinionated widget sub themes.
     ///
-    /// By default [FlexThemeData.dark] and [FlexColorScheme.toTheme],
-    /// tries to do as little as they need to just provide a consistent color
-    /// schemed theme.
-    /// By opting in via [useSubThemes] you get an opinionated set of widget
-    /// sub-themes applied. They can be conveniently customized via the
-    /// [subThemesData] property, that holds quick and easy sub-theme
+    /// By default [FlexThemeData.light], [FlexThemeData.dark] and
+    /// [FlexColorScheme.toTheme], tries to do as
+    /// little as they need to just provide a consistent color schemed theme.
+    ///
+    /// By opting in with [useSubThemes] set to true you get an opinionated set
+    /// of widget sub themes applied. They can be conveniently customized via
+    /// the [subThemesData] property, that holds quick and easy sub theme
     /// configuration values in the data class [FlexSubThemesData].
     ///
-    /// Opinionated sub-themes are provided for:
-    /// * [BottomSheet]
-    /// * [BottomNavigationBar]
-    /// * [Card]
-    /// * [Dialog]
-    /// * [PopupMenuButton]
-    /// * [TimePickerDialog]
-    /// * [InputDecoration]
+    /// Opinionated sub themes are provided for:
+    ///
+    /// * [TextButton]
     /// * [ElevatedButton]
     /// * [OutlinedButton]
-    /// * [TextButton]
+    /// * Older buttons using [ButtonThemeData]
     /// * [ToggleButtons]
-    /// * A custom [ButtonTextTheme] still provides matching styling to support
-    ///   the deprecated legacy buttons if they are used.
+    /// * [InputDecoration]
+    /// * [FloatingActionButton]
+    /// * [Chip]
+    /// * [Card]
+    /// * [PopupMenuButton]
+    /// * [Dialog]
+    /// * [TimePickerDialog]
+    /// * [SnackBar]
+    /// * [BottomSheet]
+    /// * [BottomNavigationBar]
     ///
-    /// The sub-themes are e.g. a convenient way to opt-in on customized corner
+    /// * The custom [ButtonTextTheme] even still provides matching styling to
+    ///   for the deprecated legacy buttons if they are used.
+    ///
+    /// The sub themes are a convenient way to opt-in on customized corner
     /// radius on Widgets using above themes. By opting in you can set corner
-    /// radius for all above Widgets to same corner radius in one go.
+    /// radius for all above Widgets to same corner radius in one go. There are
+    /// also properties to override the global default for each widget to set
+    /// different rounding per widget if so desired.
+    ///
+    /// By default each widgets corner radius and some other styling take
+    /// inspiration from the Material 3 (M3) Specification
+    /// https://m3.material.io/ and uses its values as defaults when it is
+    /// possible to do so in Flutter SDK theming within its current
+    /// Material 2 (M2) design limitations.
     ///
     /// Defaults to false.
     final bool useSubThemes = false,
@@ -1791,34 +1830,49 @@ extension FlexThemeData on ThemeData {
     /// https://github.com/flutter/flutter/issues/90353
     bool applyElevationOverlayColor = true,
 
-    /// Set to true to opt in on using additional opinionated widget sub-themes.
+    /// Set to true to opt-in on using additional opinionated widget sub themes.
     ///
-    /// By default [FlexThemeData.raw] and [FlexColorScheme.toTheme],
-    /// tries to do as little as they need to just provide a consistent color
-    /// schemed theme.
-    /// By opting in via [useSubThemes] you get an opinionated set of widget
-    /// sub-themes applied. They can be conveniently customized via the
-    /// [subThemesData] property, that holds quick and easy sub-theme
+    /// By default [FlexThemeData.light], [FlexThemeData.dark] and
+    /// [FlexColorScheme.toTheme], tries to do as
+    /// little as they need to just provide a consistent color schemed theme.
+    ///
+    /// By opting in with [useSubThemes] set to true you get an opinionated set
+    /// of widget sub themes applied. They can be conveniently customized via
+    /// the [subThemesData] property, that holds quick and easy sub theme
     /// configuration values in the data class [FlexSubThemesData].
     ///
-    /// Opinionated sub-themes are provided for:
-    /// * [BottomSheet]
-    /// * [BottomNavigationBar]
-    /// * [Card]
-    /// * [Dialog]
-    /// * [PopupMenuButton]
-    /// * [TimePickerDialog]
-    /// * [InputDecoration]
+    /// Opinionated sub themes are provided for:
+    ///
+    /// * [TextButton]
     /// * [ElevatedButton]
     /// * [OutlinedButton]
-    /// * [TextButton]
+    /// * Older buttons using [ButtonThemeData]
     /// * [ToggleButtons]
-    /// * A custom [ButtonTextTheme] still provides matching styling to support
-    ///   the deprecated legacy buttons if they are used.
+    /// * [InputDecoration]
+    /// * [FloatingActionButton]
+    /// * [Chip]
+    /// * [Card]
+    /// * [PopupMenuButton]
+    /// * [Dialog]
+    /// * [TimePickerDialog]
+    /// * [SnackBar]
+    /// * [BottomSheet]
+    /// * [BottomNavigationBar]
     ///
-    /// The sub-themes are e.g. a convenient way to opt-in on customized corner
+    /// * The custom [ButtonTextTheme] even still provides matching styling to
+    ///   for the deprecated legacy buttons if they are used.
+    ///
+    /// The sub themes are a convenient way to opt-in on customized corner
     /// radius on Widgets using above themes. By opting in you can set corner
-    /// radius for all above Widgets to same corner radius in one go.
+    /// radius for all above Widgets to same corner radius in one go. There are
+    /// also properties to override the global default for each widget to set
+    /// different rounding per widget if so desired.
+    ///
+    /// By default each widgets corner radius and some other styling take
+    /// inspiration from the Material 3 (M3) Specification
+    /// https://m3.material.io/ and uses its values as defaults when it is
+    /// possible to do so in Flutter SDK theming within its current
+    /// Material 2 (M2) design limitations.
     ///
     /// Defaults to false.
     final bool useSubThemes = false,

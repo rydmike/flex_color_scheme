@@ -30,24 +30,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
+  // Scroll controller used to jump to stored scroll position, needed as a
+  // workaround, to a workaround for issue with StaggeredGridView.
   late ScrollController scrollController;
 
-  // Used to control system navbar style via an AnnotatedRegion that uses
-  // FlexColorScheme.themedSystemNavigationBar.
-  FlexSystemNavBarStyle navBarStyle = FlexSystemNavBarStyle.background;
-  // Used to control if we have a top divider on the system navigation bar.
-  bool useNavDivider = false;
-
-  // Previous amount of used columns in the layout, used to auto close when
-  // going one column and open when going multi column.
+  // Used to store listened to scroll position.
+  double scrollPos = 0;
+  // Current amount of shown columns in the grid view.
+  int columns = 1;
+  // Previous columns, when we last stored a scroll position.
   int prevColumns = 0;
 
   // Set expand/collapse state for main Card.
   bool collapseMain = false;
-
   // Set expand/collapse state for all settings Cards.
-  bool collapseSettings = true;
-
+  bool collapseSettings = false;
   // Set expand/collapse state for all themed result Cards.
   bool collapseThemed = false;
 
@@ -55,10 +52,28 @@ class _HomePageState extends State<HomePage>
   @override
   bool get wantKeepAlive => true;
 
+  void _scrollPosition() {
+    scrollPos = scrollController.position.pixels;
+    // debugPrint('ScrollPos listener pos = $scrollPos');
+  }
+
+  @override
+  void didChangeDependencies() {
+    // debugPrint('CALLED: didChangeDependencies');
+    if (prevColumns != columns) {
+      // debugPrint('Columns: $columns Previous: $prevColumns Pos: $scrollPos '
+      //     'hasClients: ${scrollController.hasClients}');
+      prevColumns = columns;
+      if (scrollController.hasClients) scrollController.jumpTo(scrollPos);
+    }
+    super.didChangeDependencies();
+  }
+
   @override
   void initState() {
     super.initState();
     scrollController = ScrollController();
+    scrollController.addListener(_scrollPosition);
   }
 
   @override
@@ -79,9 +94,6 @@ class _HomePageState extends State<HomePage>
     final double topPadding = media.padding.top + kToolbarHeight;
     final double bottomPadding = media.padding.bottom;
 
-    // // We are on desktop width media, based on our definition in this app.
-    // final bool isDesktop = media.size.width >= AppData.desktopBreakpoint;
-
     // We are on phone width media, based on our definition in this app.
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
 
@@ -89,17 +101,17 @@ class _HomePageState extends State<HomePage>
       // FlexColorScheme contains a static helper that can be use to theme
       // the system navigation bar using an AnnotatedRegion. Without this
       // wrapper the system navigation bar in Android will not change
-      // theme color as we change themes for the page. This is normal Flutter
+      // color as we change themes for the page. This is normal Flutter
       // behavior. By using an annotated region with the helper function
       // FlexColorScheme.themedSystemNavigationBar, we can make the
-      // navigation bar follow desired background color and theme-mode.
+      // navigation bar follow desired background color and theme-mode easily.
       // This looks much better and as it should on Android devices.
       // It also supports system navbar with opacity or fully transparent
       // Android system navigation bar on Android SDK >= 29.
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
-        systemNavBarStyle: navBarStyle,
-        useDivider: useNavDivider,
+        systemNavBarStyle: widget.controller.navBarStyle,
+        useDivider: widget.controller.useNavDivider,
         opacity: widget.controller.bottomNavigationBarOpacity,
       ),
       child: ResponsiveScaffold(
@@ -127,6 +139,7 @@ class _HomePageState extends State<HomePage>
           if (index == 2) {
             setState(() {
               collapseSettings = false;
+              collapseMain = false;
             });
           }
           // Collapse settings cards
@@ -164,12 +177,7 @@ class _HomePageState extends State<HomePage>
             builder: (BuildContext context, BoxConstraints constraints) {
           // Just a suitable breakpoint for when we want to have more
           // than one column in the body with this particular content.
-          final int columns = constraints.maxWidth ~/ 820 + 1;
-          if (prevColumns != columns) {
-            if (columns == 1) collapseSettings = true;
-            if (columns >= 2) collapseSettings = false;
-            prevColumns = columns;
-          }
+          columns = constraints.maxWidth ~/ 820 + 1;
 
           // Flag used to hide some blend mode options that wont fit when
           // using toggle buttons on small media.
@@ -180,8 +188,57 @@ class _HomePageState extends State<HomePage>
           if (columns >= 2) margins = AppData.edgeInsetsDesktop;
           if (columns >= 4) margins = AppData.edgeInsetsBigDesktop;
 
+          // Without the value key below that changes when the amount of columns
+          // updates, the StaggeredGridView or also the WaterfallFlow layout
+          // does not work correctly. The issue appears related in both
+          // packages, but end breaking style looks a bit different, but cause
+          // is they, break when resizing media and columns change.
+          // Issue:
+          // https://github.com/letsar/flutter_staggered_grid_view/issues/138
+          // https://github.com/letsar/flutter_staggered_grid_view/issues/167
+          // This key causes another problem as it naturally causes a complete
+          // rebuild when the key changes. Then w also  loose the layout
+          // scroll position even with AutomaticKeepAliveClientMixin, so when
+          // columns change/ we are always back at start of view, not good!
+          // My temp hack for this was to listen to the used scroll controller
+          // position, store its value in local state and jump to position it
+          // last had, when dependencies changes and we also have a different
+          // column count than we had before. It kind of works, but even with
+          // jumpTo position, it is visible that it jumped to start and then
+          // back again to where we were. Scroll position is tricky to keep
+          // logical and right in this kind of layout when columns change.
+          //
+          // Regarding the layout issue, I have not found a Masonry or
+          // Staggered grid lik view package that would be able to handle
+          // this layout correctly. I'm beginning to wonder if the issue
+          // might be at a lower layer in layout widget used by both
+          // StaggeredGridView and WaterfallFlow. Using StaggeredGridView below
+          // the usage with WaterfallFlow is very similar. The WaterfallFlow
+          // seems to be a bit smoother/faster, but I got it to crash when doing
+          // very quick resizing on desktop builds. StaggeredGridView is a tad
+          // choppier, but so far it did not crash.
+          //
+          // For a WaterfallFlow implementation, import it and replace with
+          // this until and including the itemBuilder row:
+          //
+          // return WaterfallFlow.builder(
+          //   key: ValueKey<int>(columns),
+          //   controller: scrollController,
+          //   padding: EdgeInsets.fromLTRB(
+          //     margins,
+          //     topPadding + margins,
+          //     margins,
+          //     bottomPadding + margins,
+          //   ),
+          //   gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+          //     crossAxisCount: columns,
+          //     crossAxisSpacing: margins,
+          //     mainAxisSpacing: margins,
+          //   ),
+          //   itemBuilder: (BuildContext context, int index) => <Widget>[
+          //
           return StaggeredGridView.countBuilder(
-            key: ValueKey<double>(constraints.maxWidth),
+            key: ValueKey<int>(columns),
             controller: scrollController,
             crossAxisCount: columns,
             mainAxisSpacing: margins,
@@ -192,12 +249,7 @@ class _HomePageState extends State<HomePage>
               margins,
               bottomPadding + margins,
             ),
-            staggeredTileBuilder: (int index) {
-              // To make some RevealListTileCard panels below use more columns
-              // we can do this:
-              // if (index == 2) return const StaggeredTile.fit(2);
-              return const StaggeredTile.fit(1);
-            },
+            staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
             itemBuilder: (BuildContext context, int index) => <Widget>[
               HeaderCard(
                 isClosed: collapseMain,
@@ -206,17 +258,34 @@ class _HomePageState extends State<HomePage>
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: <Widget>[
-                      const SizedBox(height: 8),
                       const Text(
-                        'In this example you can try all themes and '
-                        'features. Experiment with surface blends and see '
-                        'how the app bar theme options work. '
+                        'With this demo you can try all features and themes in '
+                        'FlexColorScheme v4 (alpha1). Find a color scheme you '
+                        'like, experiment with the new surface blend modes and '
+                        'levels. See how the AppBar theme options work. '
                         'Try the true black option for dark '
-                        'themes along with computed dark themes.\n\n'
-                        'A responsive side menu/rail is used to visually '
-                        'demonstrate the different surface blends. '
-                        'The impact on Flutter SDK Material widgets is shown '
-                        'in expandable cards with the "Themed" heading.',
+                        'themes, along with computed dark themes.\n'
+                        '\n'
+                        "You can also turn FlexColorScheme's theming OFF "
+                        'and see how a color scheme looks when using '
+                        'standard Flutter ThemeData.from a ColorScheme.\n'
+                        '\n'
+                        'The new opinionated opt-in widget sub '
+                        'theming is ON, you can turn it OFF and see the '
+                        'differences. The sub theming defaults '
+                        'mimics Material 3 (You), mostly on corner radius of '
+                        'Widgets, but also TextTheme and its coloring. All you '
+                        'is just normal Flutter 2.5 theming of its standard '
+                        'Material 2 Flutter widgets.\n'
+                        '\n'
+                        'A responsive menu has commands that opens and closes '
+                        'the settings and themed results cards. '
+                        'The theming result on widgets are shown in expandable '
+                        'cards with the "Themed" heading. The three first '
+                        'themes are custom themes and are not included as '
+                        'built-in theme choices. In the packages tutorial it '
+                        'is shown how you can easily make your own color '
+                        'schemes and Flutter themes with FlexColorScheme',
                       ),
                       const SizedBox(height: 16),
                       ThemeSelector(controller: widget.controller),
@@ -262,18 +331,6 @@ class _HomePageState extends State<HomePage>
               _BottomNavigation(
                 controller: widget.controller,
                 isClosed: collapseSettings,
-                navBarStyle: navBarStyle,
-                onNavBarStyle: (FlexSystemNavBarStyle value) {
-                  setState(() {
-                    navBarStyle = value;
-                  });
-                },
-                hasDivider: useNavDivider,
-                onHasDivider: (bool value) {
-                  setState(() {
-                    useNavDivider = value;
-                  });
-                },
               ),
               _SubPages(isClosed: collapseSettings),
               //
@@ -432,7 +489,7 @@ class _ThemeMode extends StatelessWidget {
                   ),
                   SwitchListTile.adaptive(
                     title: const Text(
-                        'Light mode onColors have a hint of primary color'),
+                        'Light mode onColors have a hint of its color'),
                     value: controller.blendLightOnColors,
                     onChanged: controller.setBlendLightOnColors,
                   )
@@ -444,7 +501,7 @@ class _ThemeMode extends StatelessWidget {
                   ),
                   SwitchListTile.adaptive(
                     title: const Text(
-                        'Dark mode onColors have a hint of primary color'),
+                        'Dark mode onColors have a hint of its color'),
                     value: controller.blendDarkOnColors,
                     onChanged: controller.setBlendDarkOnColors,
                   )
@@ -457,16 +514,6 @@ class _ThemeMode extends StatelessWidget {
             duration: const Duration(milliseconds: 300),
             child: Column(
               children: <Widget>[
-                // Set dark mode to use true black!
-                SwitchListTile.adaptive(
-                  title: const Text('True black'),
-                  subtitle: const Text(
-                    'Ink black scaffold in all blend modes, '
-                    'other backgrounds are darker too',
-                  ),
-                  value: controller.darkIsTrueBlack,
-                  onChanged: controller.setDarkIsTrueBlack,
-                ),
                 // Set to make dark scheme lazily for light theme
                 SwitchListTile.adaptive(
                   title: const Text('Compute dark theme'),
@@ -613,6 +660,7 @@ class _SurfaceBlends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     return HeaderCard(
       isClosed: isClosed,
       title: const Text('Surface Blends'),
@@ -678,6 +726,27 @@ class _SurfaceBlends extends StatelessWidget {
               ),
             ),
           ),
+          // Set dark mode to use true black!
+          if (isLight)
+            SwitchListTile.adaptive(
+              title: const Text('Plain white'),
+              subtitle: const Text(
+                'Plain white Scaffold in all blend modes, '
+                'other surfaces becomes 8% lighter',
+              ),
+              value: controller.lightIsWhite,
+              onChanged: controller.setLightIsWhite,
+            )
+          else
+            SwitchListTile.adaptive(
+              title: const Text('True black'),
+              subtitle: const Text(
+                'True black Scaffold in all blend modes, '
+                'other surfaces becomes 8% darker',
+              ),
+              value: controller.darkIsTrueBlack,
+              onChanged: controller.setDarkIsTrueBlack,
+            ),
         ],
       ),
     );
@@ -711,14 +780,14 @@ class _SubThemes extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 SwitchListTile.adaptive(
-                  title: const Text('Use M3 text theme'),
+                  title: const Text('Use Material 3 TextTheme'),
                   subtitle: const Text('ON to use Material 3 like text styles\n'
                       'OFF to use Material 2 2018 text styles'),
                   value: controller.useTextTheme,
                   onChanged: controller.setUseTextTheme,
                 ),
                 SwitchListTile.adaptive(
-                  title: const Text('Use M3 border radius'),
+                  title: const Text('Use Material 3 rounded corners'),
                   subtitle: const Text('ON to set Material 3 radius '
                       'on all widgets\n'
                       'OFF to manually adjust radius on all widgets'),
@@ -760,8 +829,8 @@ class _SubThemes extends StatelessWidget {
                 SwitchListTile.adaptive(
                   title: const Text('Rounded corners on FloatingActionButton'),
                   subtitle: const Text('OFF removes Shape from FAB theme, '
-                      'making it use M2 default Circular and Stadium style, '
-                      'also with global rounded corners or M3 defaults'),
+                      'making it use M2 circular style, '
+                      'also with rounded corners and M3 defaults'),
                   value: controller.fabUseShape,
                   onChanged: controller.setFabUseShape,
                 ),
@@ -817,7 +886,7 @@ class _TextField extends StatelessWidget {
           const ListTile(
             title: Text('Adjust TextField style'),
             subtitle: Text('When sub themes are enabled you can adjust the '
-                'style of you TextField input via an easy to use '
+                'style of the TextField input via easy to use '
                 'InputDecorator theme options'),
           ),
           AnimatedSwitchHide(
@@ -1103,19 +1172,9 @@ class _BottomNavigation extends StatelessWidget {
   const _BottomNavigation({
     Key? key,
     required this.controller,
-    required this.navBarStyle,
-    required this.onNavBarStyle,
-    required this.hasDivider,
-    required this.onHasDivider,
     this.isClosed = false,
   }) : super(key: key);
   final ThemeController controller;
-
-  final FlexSystemNavBarStyle navBarStyle;
-  final ValueChanged<FlexSystemNavBarStyle> onNavBarStyle;
-
-  final bool hasDivider;
-  final ValueChanged<bool> onHasDivider;
   final bool isClosed;
 
   String explainStyle(final FlexSystemNavBarStyle style, final bool isLight) {
@@ -1180,8 +1239,8 @@ class _BottomNavigation extends StatelessWidget {
           const ListTile(
             title: Text('Opacity'),
             subtitle: Text(
-              'Bottom and system navigation bar opacity. They are separate '
-              'parameters, but share input control value in this example',
+              'Bottom and system navigation bar opacity. These are separate '
+              'parameters, they only share input control in this example',
             ),
           ),
           ListTile(
@@ -1224,19 +1283,20 @@ class _BottomNavigation extends StatelessWidget {
           ListTile(
             title: const Text('Android system navigation bar'),
             subtitle: Text('FlexColorScheme.themedSystemNavigationBar\n'
-                '${explainStyle(navBarStyle, isLight)}'),
+                '${explainStyle(controller.navBarStyle, isLight)}'),
           ),
           ListTile(
             trailing: SystemNavBarStyleButtons(
-              style: navBarStyle,
-              onChanged: onNavBarStyle,
+              style: controller.navBarStyle,
+              onChanged: controller.setNavBarStyle,
             ),
           ),
           SwitchListTile.adaptive(
-            title: const Text('System navigation bar divider'),
-            subtitle: const Text('Recommend OFF, due to extra scrim'),
-            value: hasDivider,
-            onChanged: onHasDivider,
+            title: const Text('Android system navigation bar divider'),
+            subtitle: const Text('There is also an extra system built-in scrim '
+                'on the nav bar when it is enabled'),
+            value: controller.useNavDivider,
+            onChanged: controller.setUseNavDivider,
           ),
         ],
       ),

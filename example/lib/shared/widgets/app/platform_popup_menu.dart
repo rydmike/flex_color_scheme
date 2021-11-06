@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class PlatformPopupMenu extends StatelessWidget {
   const PlatformPopupMenu({
@@ -11,6 +12,7 @@ class PlatformPopupMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color iconColor = Theme.of(context).colorScheme.primary;
     const String labelAndroid = 'Google Android';
     const String labelApple = 'Apple iOS';
     const String labelWindows = 'Microsoft Windows';
@@ -18,48 +20,48 @@ class PlatformPopupMenu extends StatelessWidget {
     const String labelLinux = 'Linux';
     const String labelFuchsia = 'Google Fuchsia';
 
-    const Map<TargetPlatform, PopupMenuItem<TargetPlatform>> platformItems =
+    final Map<TargetPlatform, PopupMenuItem<TargetPlatform>> platformItems =
         <TargetPlatform, PopupMenuItem<TargetPlatform>>{
       TargetPlatform.android: PopupMenuItem<TargetPlatform>(
         value: TargetPlatform.android,
         child: ListTile(
-          leading: Icon(Icons.phone_android_rounded),
-          title: Text(labelAndroid),
+          leading: Icon(Icons.android, color: iconColor),
+          title: const Text(labelAndroid),
         ),
       ),
       TargetPlatform.iOS: PopupMenuItem<TargetPlatform>(
         value: TargetPlatform.iOS,
         child: ListTile(
-          leading: Icon(Icons.phone_iphone_rounded),
-          title: Text(labelApple),
+          leading: Icon(MdiIcons.appleIos, color: iconColor),
+          title: const Text(labelApple),
         ),
       ),
       TargetPlatform.windows: PopupMenuItem<TargetPlatform>(
         value: TargetPlatform.windows,
         child: ListTile(
-          leading: Icon(Icons.desktop_windows_rounded),
-          title: Text(labelWindows),
+          leading: Icon(MdiIcons.microsoftWindows, color: iconColor),
+          title: const Text(labelWindows),
         ),
       ),
       TargetPlatform.macOS: PopupMenuItem<TargetPlatform>(
         value: TargetPlatform.macOS,
         child: ListTile(
-          leading: Icon(Icons.laptop_mac_rounded),
-          title: Text(labelMacOs),
+          leading: Icon(MdiIcons.appleFinder, color: iconColor),
+          title: const Text(labelMacOs),
         ),
       ),
       TargetPlatform.linux: PopupMenuItem<TargetPlatform>(
         value: TargetPlatform.linux,
         child: ListTile(
-          leading: Icon(Icons.desktop_windows_sharp),
-          title: Text(labelLinux),
+          leading: Icon(MdiIcons.linux, color: iconColor),
+          title: const Text(labelLinux),
         ),
       ),
       TargetPlatform.fuchsia: PopupMenuItem<TargetPlatform>(
         value: TargetPlatform.fuchsia,
         child: ListTile(
-          leading: Icon(Icons.laptop_chromebook_rounded),
-          title: Text(labelFuchsia),
+          leading: Icon(MdiIcons.allInclusive, color: iconColor),
+          title: const Text(labelFuchsia),
         ),
       ),
     };
@@ -73,13 +75,14 @@ class PlatformPopupMenu extends StatelessWidget {
       TargetPlatform.fuchsia: labelFuchsia,
     };
 
-    const Map<TargetPlatform, Widget> platformIcon = <TargetPlatform, Widget>{
-      TargetPlatform.android: Icon(Icons.phone_android_rounded),
-      TargetPlatform.iOS: Icon(Icons.phone_iphone_rounded),
-      TargetPlatform.windows: Icon(Icons.desktop_windows_rounded),
-      TargetPlatform.macOS: Icon(Icons.laptop_mac_rounded),
-      TargetPlatform.linux: Icon(Icons.desktop_windows_sharp),
-      TargetPlatform.fuchsia: Icon(Icons.laptop_chromebook_rounded),
+    const Map<TargetPlatform, IconData> platformIcon =
+        <TargetPlatform, IconData>{
+      TargetPlatform.android: Icons.android,
+      TargetPlatform.iOS: MdiIcons.appleIos,
+      TargetPlatform.windows: MdiIcons.microsoftWindows,
+      TargetPlatform.macOS: MdiIcons.appleFinder,
+      TargetPlatform.linux: MdiIcons.linux,
+      TargetPlatform.fuchsia: MdiIcons.allInclusive,
     };
 
     String subtitle = 'Now set to ${platformString[platform]}';
@@ -93,7 +96,14 @@ class PlatformPopupMenu extends StatelessWidget {
       itemBuilder: (BuildContext context) =>
           <PopupMenuItem<TargetPlatform>>[...platformItems.values.toList()],
       child: ListTile(
-        trailing: platformIcon[platform],
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 12),
+          child: Icon(
+            platformIcon[platform],
+            color: iconColor,
+            size: 40,
+          ),
+        ),
         title: const Text('Select platform mechanics'),
         subtitle: Text(subtitle),
       ),

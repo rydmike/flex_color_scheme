@@ -124,6 +124,8 @@ class DemoApp extends StatelessWidget {
                         themeController.tooltipsMatchBackground,
                     // Swap primary and secondary colors
                     swapColors: themeController.swapLightColors,
+                    // Keep scaffold plain white in all blend modes.
+                    lightIsWhite: themeController.lightIsWhite,
                     // Opt in/out of using the new sub v4 sub themes.
                     useSubThemes: themeController.useSubThemes,
                     // Modify these const values in the AppData class.
@@ -137,9 +139,10 @@ class DemoApp extends StatelessWidget {
                       // Opt-in out of ne M3 text theme.
                       useTextTheme: themeController.useTextTheme,
                       // Slider to adjust themed border radius on widgets with
-                      // an adjustable corner rounding, this one is darn handy,
-                      // but if null, it default tho Material3 (You) design
-                      // guide values, when they are known from the new guide.
+                      // an adjustable corner rounding, this one is darn handy.
+                      // If null, it defaults to Material3 (You) design
+                      // guide values, as far as they are given in the new
+                      // guide: https://m3.material.io/
                       defaultRadius: themeController.useDefaultRadius
                           ? null
                           : themeController.cornerRadius,
@@ -194,7 +197,6 @@ class DemoApp extends StatelessWidget {
                 : ThemeData.from(
                     textTheme: ThemeData(
                       brightness: Brightness.light,
-                      fontFamily: AppData.font,
                     ).textTheme,
                     colorScheme: FlexColorScheme.light(
                       colors:
@@ -265,7 +267,6 @@ class DemoApp extends StatelessWidget {
                 : ThemeData.from(
                     textTheme: ThemeData(
                       brightness: Brightness.dark,
-                      fontFamily: AppData.font,
                     ).textTheme,
                     colorScheme: FlexColorScheme.dark(
                       colors: themeController.useToDarkMethod

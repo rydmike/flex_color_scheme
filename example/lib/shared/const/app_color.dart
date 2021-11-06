@@ -13,8 +13,8 @@ class AppColor {
   // Create a custom flex scheme color for a light theme.
   static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
     primary: Color(0xFF00296b),
-    primaryVariant: Color(0xFF003f88),
-    secondary: Color(0xffff8c00),
+    primaryVariant: Color(0xff2f5c91),
+    secondary: Color(0xffff7b00),
     secondaryVariant: Color(0xfffdb100),
     // The built in schemes use their secondary variant color as their
     // custom app bar color, but it can be any color. We use a custom color
@@ -27,7 +27,7 @@ class AppColor {
     primary: Color(0xff6b8bc3),
     primaryVariant: Color(0xff4874aa),
     secondary: Color(0xffff7155),
-    secondaryVariant: Color(0xfff8a844),
+    secondaryVariant: Color(0xfff1cb9d),
     appBarColor: Color(0xff892807),
   );
 
@@ -45,9 +45,9 @@ class AppColor {
 // secondaryVariant color, this is default null behavior for custom app bar
 // color when using this factory.
   static final FlexSchemeColor _myScheme2Light =
-      FlexSchemeColor.from(primary: const Color(0xFF00673C));
+      FlexSchemeColor.from(primary: const Color(0xFF055C34));
   static final FlexSchemeColor _myScheme2Dark =
-      FlexSchemeColor.from(primary: const Color(0xFF46D494));
+      FlexSchemeColor.from(primary: const Color(0xFF629F80));
 
 // For our 3rd custom scheme we will define primary and secondary colors, but no
 // variant colors, we will not make any dark scheme definitions either, all
@@ -70,7 +70,7 @@ class AppColor {
     // to a list of FlexSchemeData, where we can bundle each light and dark
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
-      name: 'Custom 1 Blue',
+      name: 'Tut-1 Midnight',
       description: 'Midnight blue theme, custom definition of all colors',
       // FlexSchemeData holds separate defined color schemes for light and
       // matching dark theme colors. Dark theme colors typically need to be less
@@ -81,7 +81,7 @@ class AppColor {
     ),
     // Do the same for our second custom scheme.
     FlexSchemeData(
-      name: 'Custom 2 Green',
+      name: 'Tut-2 Greens',
       description: 'Vivid green theme, created from only a primary '
           'light and dark color',
       light: _myScheme2Light,
@@ -90,7 +90,7 @@ class AppColor {
     // We also do the same for our 3rd custom scheme, BUT we create its matching
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
-      name: 'Custom 3 Red&Blue',
+      name: 'Tut-3 Red & Blue',
       description: 'Classic read and blue, from only light scheme colors',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.

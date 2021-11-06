@@ -1020,7 +1020,7 @@ class FlexSubThemes {
   // pinned one cannot be changed via theme while keeping straight one
   // straight.
 
-  // TODO(rydmike): Check snackbar bakground color, can I add a demo of it?
+  // TODO(rydmike): Check snackbar background color, can I add a demo of it?
 
   /// An opinionated [SnackBarThemeData] with custom elevation.
   ///

@@ -528,8 +528,10 @@ class TabBarForAppBarShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final ThemeData theme = Theme.of(context);
+    final bool isDark = theme.brightness == Brightness.dark;
+    final ColorScheme colorScheme = theme.colorScheme;
+    final TextStyle textStyle = theme.textTheme.caption!;
 
     final Color effectiveTabBackground =
         Theme.of(context).appBarTheme.backgroundColor ??
@@ -542,34 +544,31 @@ class TabBarForAppBarShowcase extends StatelessWidget {
         children: <Widget>[
           Text(
             'TabBar in an AppBar',
-            style: Theme.of(context)
-                .textTheme
-                .caption!
-                .copyWith(fontWeight: FontWeight.bold),
+            style: textStyle.copyWith(fontWeight: FontWeight.bold),
           ),
           Text(
             'If the TabBar will always be used in an AppBar, then use '
             'style FlexTabBarStyle forAppBar (default), '
             'it will fit contrast wise here',
-            style: Theme.of(context).textTheme.caption,
+            style: textStyle,
           ),
           const SizedBox(height: 8),
-          Container(
+          Material(
             color: effectiveTabBackground,
-            child: const Material(
-              type: MaterialType.transparency,
+            child: const SizedBox(
+              height: 70,
               child: TabBar(
                 tabs: <Widget>[
                   Tab(
-                    text: 'CHAT',
+                    text: 'Chat',
                     icon: Icon(Icons.chat_bubble),
                   ),
                   Tab(
-                    text: 'TASKS',
+                    text: 'Tasks',
                     icon: Icon(Icons.beenhere),
                   ),
                   Tab(
-                    text: 'FOLDER',
+                    text: 'Folder',
                     icon: Icon(Icons.create_new_folder),
                   ),
                 ],
@@ -587,6 +586,8 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle textStyle = theme.textTheme.caption!;
     return DefaultTabController(
       length: 3,
       child: Column(
@@ -595,33 +596,33 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             'TabBar on a surface',
-            style: Theme.of(context)
-                .textTheme
-                .caption!
-                .copyWith(fontWeight: FontWeight.bold),
+            style: textStyle.copyWith(fontWeight: FontWeight.bold),
           ),
           Text(
             'If the TabBar will always be used on background and surface '
             'colors, then use style FlexTabBarStyle forBackground, '
             'it will fit contrast wise here',
-            style: Theme.of(context).textTheme.caption,
+            style: textStyle,
           ),
           const SizedBox(height: 8),
-          const TabBar(
-            tabs: <Widget>[
-              Tab(
-                text: 'CHAT',
-                icon: Icon(Icons.chat_bubble),
-              ),
-              Tab(
-                text: 'TASKS',
-                icon: Icon(Icons.beenhere),
-              ),
-              Tab(
-                text: 'FOLDER',
-                icon: Icon(Icons.create_new_folder),
-              ),
-            ],
+          const SizedBox(
+            height: 70,
+            child: TabBar(
+              tabs: <Widget>[
+                Tab(
+                  text: 'Chat',
+                  icon: Icon(Icons.chat_bubble),
+                ),
+                Tab(
+                  text: 'Tasks',
+                  icon: Icon(Icons.beenhere),
+                ),
+                Tab(
+                  text: 'Folder',
+                  icon: Icon(Icons.create_new_folder),
+                ),
+              ],
+            ),
           ),
         ],
       ),
