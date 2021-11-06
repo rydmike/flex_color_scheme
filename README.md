@@ -17,6 +17,8 @@ This document is still the version 3.0.0 documentation. Depending on when and wh
 you read it, e.g. on GitHub or as a dev release v4.0.0-dev on pub.dev. It may contain
 some updated elements, but the documentation will not be complete until v4.0.0 is released.
 
+A feature demo and theme playground of version 4.0.0 can be tested [**here**](https://rydmike.com/flexcolorschemeV4Tut5/#/).
+
 ## Quick Start Guide
 
 
