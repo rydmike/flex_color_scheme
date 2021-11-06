@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage>
             builder: (BuildContext context, BoxConstraints constraints) {
           // Just a suitable breakpoint for when we want to have more
           // than one column in the body with this particular content.
-          columns = constraints.maxWidth ~/ 820 + 1;
+          columns = constraints.maxWidth ~/ 810 + 1;
 
           // Flag used to hide some blend mode options that wont fit when
           // using toggle buttons on small media.
@@ -274,18 +274,18 @@ class _HomePageState extends State<HomePage>
                         'theming is ON, you can turn it OFF and see the '
                         'differences. The sub theming defaults '
                         'mimics Material 3 (You), mostly on corner radius of '
-                        'Widgets, but also TextTheme and its coloring. All you '
-                        'is just normal Flutter 2.5 theming of its standard '
-                        'Material 2 Flutter widgets.\n'
+                        'Widgets, but also TextTheme and its coloring.\n'
+                        'This demo does not adjust any widget properties, the '
+                        'theme is adjusted interactively and the Flutter '
+                        ' widgets change as the theme is modified '
+                        'via the controls.\n'
                         '\n'
-                        'A responsive menu has commands that opens and closes '
-                        'the settings and themed results cards. '
-                        'The theming result on widgets are shown in expandable '
+                        'The theming impact on widgets are shown in expandable '
                         'cards with the "Themed" heading. The three first '
-                        'themes are custom themes and are not included as '
-                        'built-in theme choices. In the packages tutorial it '
-                        'is shown how you can easily make your own color '
-                        'schemes and Flutter themes with FlexColorScheme',
+                        'themes are custom color schemes and are not built-in '
+                        'choices. In the packages tutorial you learn how to '
+                        'make your own custom Flutter color schemes and make '
+                        'advanced themes with FlexColorScheme',
                       ),
                       const SizedBox(height: 16),
                       ThemeSelector(controller: widget.controller),
@@ -461,7 +461,7 @@ class _ThemeMode extends StatelessWidget {
           ),
           if (isLight)
             SwitchListTile.adaptive(
-              title: const Text('Light mode color swap'),
+              title: const Text('Light mode swap colors'),
               subtitle: const Text(
                 'Swap primary and secondary colors',
               ),
@@ -470,7 +470,7 @@ class _ThemeMode extends StatelessWidget {
             )
           else
             SwitchListTile.adaptive(
-              title: const Text('Dark mode color swap'),
+              title: const Text('Dark mode swap colors'),
               subtitle: const Text(
                 'Swap primary and secondary colors',
               ),
@@ -483,7 +483,7 @@ class _ThemeMode extends StatelessWidget {
               children: <Widget>[
                 if (isLight) ...<Widget>[
                   SwitchListTile.adaptive(
-                    title: const Text('Light mode TextTheme matches theme'),
+                    title: const Text('Light mode TextTheme is colored'),
                     value: controller.blendLightTextTheme,
                     onChanged: controller.setBlendLightTextTheme,
                   ),
@@ -495,7 +495,7 @@ class _ThemeMode extends StatelessWidget {
                   )
                 ] else ...<Widget>[
                   SwitchListTile.adaptive(
-                    title: const Text('Dark mode TextTheme matches theme'),
+                    title: const Text('Dark mode TextTheme is colored'),
                     value: controller.blendDarkTextTheme,
                     onChanged: controller.setBlendDarkTextTheme,
                   ),

@@ -3657,13 +3657,13 @@ class FlexColorScheme with Diagnosticable {
       // strength on colored text in Material 3.
       final Color _head = isDark
           ? _onColor.blend(colorScheme.primary, 50)
-          : _onColor.blend(colorScheme.primary, 60);
+          : _onColor.blend(colorScheme.primary, 50);
       final Color _medium = isDark
           ? _onColor.blend(colorScheme.primary, 25)
-          : _onColor.blend(colorScheme.primary, 50);
+          : _onColor.blend(colorScheme.primary, 40);
       final Color _small = isDark
           ? _onColor.blend(colorScheme.primary, 25)
-          : _onColor.blend(colorScheme.primary, 40);
+          : _onColor.blend(colorScheme.primary, 30);
       // Apply the computed colors. Fonts have no opacity when using this
       // type of styling, they are computed with a color matching their
       // background. This does not work so well if you need to put text on

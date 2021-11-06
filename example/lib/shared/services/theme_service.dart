@@ -147,7 +147,7 @@ abstract class ThemeService {
 
   /// Default value for the surfaceMode, also used to reset settings.
   static const FlexSurfaceMode defaultSurfaceMode =
-      FlexSurfaceMode.highBackground;
+      FlexSurfaceMode.veryLowSurfaceHighScaffold;
 
   /// Loads used surface mode setting in example 5.
   Future<FlexSurfaceMode> surfaceMode();
@@ -161,7 +161,7 @@ abstract class ThemeService {
   /// Default value for the blendLevel, also used to reset settings.
   ///
   /// Defaults to 7.
-  static const int defaultBlendLevel = 7;
+  static const int defaultBlendLevel = 15;
 
   /// Loads used surface blend level setting in example 5.
   Future<int> blendLevel();
@@ -211,7 +211,7 @@ abstract class ThemeService {
   static const String keyAppBarElevation = 'appBarElevation';
 
   /// Default value for the appBarElevation, also used to reset settings.
-  static const double defaultAppBarElevation = 0.5;
+  static const double defaultAppBarElevation = 0;
 
   /// Loads used app bar elevation setting in example 5.
   Future<double> appBarElevation();

@@ -130,6 +130,8 @@ class DemoApp extends StatelessWidget {
                     useSubThemes: themeController.useSubThemes,
                     // Modify these const values in the AppData class.
                     visualDensity: AppData.visualDensity,
+                    // Custom font
+                    fontFamily: AppData.font,
                     // The platform can be toggled in the app, but not saved.
                     platform: themeController.platform,
                     // primaryTextTheme: AppData.textTheme,
@@ -239,6 +241,7 @@ class DemoApp extends StatelessWidget {
                     darkIsTrueBlack: themeController.darkIsTrueBlack,
                     useSubThemes: themeController.useSubThemes,
                     visualDensity: AppData.visualDensity,
+                    fontFamily: AppData.font,
                     platform: themeController.platform,
                     subThemesData: FlexSubThemesData(
                       useTextTheme: themeController.useTextTheme,

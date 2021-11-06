@@ -142,7 +142,7 @@ class _HeaderCardState extends State<HeaderCard>
 
     // Compute a header color with fixed primary blend, make it a stronger tint.
     Color headerColor =
-        Color.alphaBlend(scheme.primary.withAlpha(14 * blendFactor), cardColor);
+        Color.alphaBlend(scheme.primary.withAlpha(7 * blendFactor), cardColor);
 
     // If card or its header color, is equal to scaffold background, we will
     // adjust both and make them more primary tinted.
