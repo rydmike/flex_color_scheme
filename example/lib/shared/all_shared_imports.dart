@@ -7,9 +7,7 @@
 export 'const/app_color.dart';
 export 'const/app_data.dart';
 export 'controllers/theme_controller.dart';
-export 'pages/splash_page_one.dart';
-export 'pages/splash_page_two.dart';
-export 'pages/subpage.dart';
+export 'pages/sub_pages.dart';
 export 'services/theme_service.dart';
 export 'services/theme_service_hive.dart';
 export 'services/theme_service_mem.dart';

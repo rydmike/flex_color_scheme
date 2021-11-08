@@ -104,17 +104,8 @@ class HomePage extends StatelessWidget {
                           value: controller.useSubThemes,
                           onChanged: controller.setUseSubThemes,
                         ),
-                        // Open a sub-page
-                        ListTile(
-                          title: const Text('Sub page demo'),
-                          subtitle:
-                              const Text('Page uses the same color scheme '
-                                  'based theme'),
-                          trailing: const Icon(Icons.arrow_forward_ios),
-                          onTap: () {
-                            Subpage.show(context);
-                          },
-                        ),
+                        // Open some sub-pages
+                        const SubPages(),
                       ],
                     ),
                   ),
