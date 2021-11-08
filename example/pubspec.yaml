@@ -20,9 +20,9 @@ dependencies:
 
   # Masonry grid layout, by Romain Rastel.
   #
-  # Went with waterfall_flow instead of flutter_staggered_grid_view for this
-  # example 5. However, both packages have similar issue.
-  #
+  # Both this and WaterfallFlow  have layout issues when amount of columns
+  # changes due to media resize, had to make workaround for the issues
+  # with both cases. This package felt slower, but was more stable.
   flutter_staggered_grid_view: ^0.4.1
 
   # Google fonts, by Google material.io.
@@ -44,12 +44,14 @@ dependencies:
 
   # Masonry layout like staggered grid, by fluttercandies.com.
   #
-  # Compared this one with Staggered Grid and decided to use this one in this
-  # case. It felt a bit faster, but both are equally bad when it comes
-  # handling varying amount of columns and changes in it due to calculation
-  # of columns to used based on change in media size and resulting layout area.
+  # Compared this one with Staggered Grid. This one felt a bit faster,
+  # but both are equally bad when it comes handling varying amount of columns
+  # and changes in it due to calculation of columns to used based on change in
+  # media size and resulting layout area.
   # Might be a shared underlying issues in the SDK that is causing the problem.
-  waterfall_flow: ^3.0.1
+  # This one crashed in some rapid window resizess so stuck with staggered grid.
+  #
+  # waterfall_flow: ^3.0.1
 
 dev_dependencies:
   flutter_test:

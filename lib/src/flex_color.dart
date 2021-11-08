@@ -1236,7 +1236,7 @@ class FlexColor {
   static const Color sanJuanBlueLightPrimaryVariant = Color(0xFF637E9F);
 
   /// San Juan blue theme color for light secondary color.
-  static const Color sanJuanBlueLightSecondary = Color(0xFFFF949B);
+  static const Color sanJuanBlueLightSecondary = Color(0xFFF98D94);
 
   /// San Juan blue theme color for light secondary variant color.
   static const Color sanJuanBlueLightSecondaryVariant = Color(0xFFF2C4C7);
@@ -1248,7 +1248,7 @@ class FlexColor {
   static const Color sanJuanBlueDarkPrimaryVariant = Color(0xFF8096B1);
 
   /// San Juan blue theme color for dark secondary color.
-  static const Color sanJuanBlueDarkSecondary = Color(0xFFEBA8AD);
+  static const Color sanJuanBlueDarkSecondary = Color(0xFFEBA1A6);
 
   /// San Juan blue theme color for dark secondary variant color.
   static const Color sanJuanBlueDarkSecondaryVariant = Color(0xFFF4CFD1);
@@ -1264,22 +1264,22 @@ class FlexColor {
       'Rosewood red, with horses neck and driftwood theme';
 
   /// Rosewood theme color for light primary color.
-  static const Color rosewoodLightPrimary = Color(0xFF68000E);
+  static const Color rosewoodLightPrimary = Color(0xFF5C000E);
 
   /// Rosewood theme color for light primary variant color.
-  static const Color rosewoodLightPrimaryVariant = Color(0xFF4F1821);
+  static const Color rosewoodLightPrimaryVariant = Color(0xFF9D3E4C);
 
   /// Rosewood theme color for light secondary color.
-  static const Color rosewoodLightSecondary = Color(0xFF664A0E);
+  static const Color rosewoodLightSecondary = Color(0xFF74540E);
 
   /// Rosewood theme color for light secondary variant color.
   static const Color rosewoodLightSecondaryVariant = Color(0xFFAD8845);
 
   /// Rosewood theme color for dark primary color.
-  static const Color rosewoodDarkPrimary = Color(0xFF9C4B5D);
+  static const Color rosewoodDarkPrimary = Color(0xFF9C5A69);
 
   /// Rosewood theme color for dark primary variant color.
-  static const Color rosewoodDarkPrimaryVariant = Color(0xFFEB7685);
+  static const Color rosewoodDarkPrimaryVariant = Color(0xFFB97C88);
 
   /// Rosewood theme color for dark secondary color.
   static const Color rosewoodDarkSecondary = Color(0xFFEDCE9B);
@@ -1288,7 +1288,7 @@ class FlexColor {
   static const Color rosewoodDarkSecondaryVariant = Color(0xFFF5DFB9);
 
   // The Blumine theme is based on blumine blue green color, eastern blue,
-  // with saffron mango and mulled wine.
+  // with saffron mango.
   // Colors and scheme named by "name that color" library for the light colors.
 
   /// English name of the blumineBlue theme.
@@ -1308,7 +1308,7 @@ class FlexColor {
   static const Color blumineBlueLightSecondary = Color(0xFFFEC54B);
 
   /// Blumine blue green theme color for light secondary variant color.
-  static const Color blumineBlueLightSecondaryVariant = Color(0xFF4B3F72);
+  static const Color blumineBlueLightSecondaryVariant = Color(0xFF0093C7);
 
   /// Blumine blue green theme color for dark primary color.
   static const Color blumineBlueDarkPrimary = Color(0xFF57859D);
@@ -1320,7 +1320,7 @@ class FlexColor {
   static const Color blumineBlueDarkSecondary = Color(0xFFFFD682);
 
   /// Blumine blue green theme color for dark secondary variant color.
-  static const Color blumineBlueDarkSecondaryVariant = Color(0xFF797096);
+  static const Color blumineBlueDarkSecondaryVariant = Color(0xFF243E4D);
 
   /// English name of the custom theme.
   static const String customName = 'Custom';

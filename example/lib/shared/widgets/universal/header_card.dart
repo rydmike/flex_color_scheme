@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
 
+enum HeaderCardCommand {
+  /// No command to send.
+  none,
+
+  /// Send command to open the card.
+  open,
+
+  /// Send command to close the card.
+  close,
+}
+
 /// A [Card] with a [ListTile] header that can be toggled via its trailing
 /// widget to open and reveal more content provided via [child] in the card.
 ///
@@ -33,7 +44,8 @@ class HeaderCard extends StatefulWidget {
     this.margin = EdgeInsets.zero,
     this.headerPadding,
     this.enabled = true,
-    this.isClosed = false,
+    this.initialOpen = true,
+    this.command,
     this.onChange,
     this.duration = const Duration(milliseconds: 200),
     this.color,
@@ -72,13 +84,16 @@ class HeaderCard extends StatefulWidget {
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
   final EdgeInsetsGeometry? headerPadding;
 
-  /// Whether this list tile is interactive.
+  /// Whether this list tile and card operation is interactive.
   final bool enabled;
 
-  /// Set to true to close the reveal list tile card and hide the child.
+  /// Initial state of the Card.
   ///
-  /// Defaults to false, the card is open and child is shown.
-  final bool isClosed;
+  /// Defaults to true;
+  final bool initialOpen;
+
+  /// Command to control if Card should Open or Close.
+  final HeaderCardCommand? command;
 
   /// Callback called if the open/close state was changed.
   final ValueChanged<bool>? onChange;
@@ -104,7 +119,7 @@ class HeaderCard extends StatefulWidget {
 
 class _HeaderCardState extends State<HeaderCard>
     with AutomaticKeepAliveClientMixin {
-  bool _closed = true;
+  late bool _open;
 
   // Must override wantKeepAlive, when using AutomaticKeepAliveClientMixin.
   @override
@@ -113,13 +128,20 @@ class _HeaderCardState extends State<HeaderCard>
   @override
   void initState() {
     super.initState();
-    _closed = widget.isClosed;
+    _open = widget.initialOpen;
   }
 
   @override
   void didUpdateWidget(covariant HeaderCard oldWidget) {
-    if (oldWidget.isClosed != widget.isClosed) {
-      _closed = widget.isClosed;
+    if (widget.command == HeaderCardCommand.open && !_open) {
+      // setState(() {
+      _open = true;
+      // });
+    }
+    if (widget.command == HeaderCardCommand.close && _open) {
+      // setState(() {
+      _open = false;
+      // });
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -197,20 +219,20 @@ class _HeaderCardState extends State<HeaderCard>
                 title: _title,
                 trailing: ExpandIcon(
                   size: 32,
-                  isExpanded: !_closed,
+                  isExpanded: _open,
                   padding: EdgeInsets.zero,
                   onPressed: (_) {
                     setState(() {
-                      _closed = !_closed;
+                      _open = !_open;
                     });
-                    widget.onChange?.call(_closed);
+                    widget.onChange?.call(_open);
                   },
                 ),
                 onTap: () {
                   setState(() {
-                    _closed = !_closed;
+                    _open = !_open;
                   });
-                  widget.onChange?.call(_closed);
+                  widget.onChange?.call(_open);
                 },
               ),
             ),
@@ -223,9 +245,9 @@ class _HeaderCardState extends State<HeaderCard>
                 child: child,
               );
             },
-            child: (_closed || widget.child == null)
-                ? const SizedBox.shrink()
-                : widget.child,
+            child: (_open && widget.child != null)
+                ? widget.child
+                : const SizedBox.shrink(),
           ),
         ],
       ),

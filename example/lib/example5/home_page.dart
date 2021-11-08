@@ -41,12 +41,10 @@ class _HomePageState extends State<HomePage>
   // Previous columns, when we last stored a scroll position.
   int prevColumns = 0;
 
-  // Set expand/collapse state for main Card.
-  bool collapseMain = false;
-  // Set expand/collapse state for all settings Cards.
-  bool collapseSettings = false;
-  // Set expand/collapse state for all themed result Cards.
-  bool collapseThemed = false;
+  // Set command for cards open/close to none for all card groups
+  HeaderCardCommand commandMain = HeaderCardCommand.none;
+  HeaderCardCommand commandSettings = HeaderCardCommand.none;
+  HeaderCardCommand commandThemed = HeaderCardCommand.none;
 
   // Must override wantKeepAlive, when using AutomaticKeepAliveClientMixin.
   @override
@@ -83,9 +81,23 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
+  void didUpdateWidget(covariant HomePage oldWidget) {
+    // Set command for cards open/close to none for all card groups
+    commandMain = HeaderCardCommand.none;
+    commandSettings = HeaderCardCommand.none;
+    commandThemed = HeaderCardCommand.none;
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Must call super when using AutomaticKeepAliveClientMixin.
     super.build(context);
+
+    // Set command for cards open/close to none for all card groups
+    // HeaderCardCommand commandMain = HeaderCardCommand.none;
+    // HeaderCardCommand commandSettings = HeaderCardCommand.none;
+    // HeaderCardCommand commandThemed = HeaderCardCommand.none;
 
     // In dark mode?
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
@@ -121,45 +133,44 @@ class _HomePageState extends State<HomePage>
         extendBody: true,
         // Callback from menu, an item was clicked
         onSelect: (int index) async {
-          // Toggle all cards
+          // Open all cards
           if (index == 0) {
             setState(() {
-              collapseMain = false;
-              collapseSettings = false;
-              collapseThemed = false;
+              commandMain = HeaderCardCommand.open;
+              commandSettings = HeaderCardCommand.open;
+              commandThemed = HeaderCardCommand.open;
             });
           }
-          // Collapse all cards
+          // Close all cards
           if (index == 1) {
             setState(() {
-              collapseMain = true;
-              collapseSettings = true;
-              collapseThemed = true;
+              commandMain = HeaderCardCommand.close;
+              commandSettings = HeaderCardCommand.close;
+              commandThemed = HeaderCardCommand.close;
             });
           }
-          // Expand settings cards
+          // Open settings cards
           if (index == 2) {
             setState(() {
-              collapseSettings = false;
-              collapseMain = false;
+              commandSettings = HeaderCardCommand.open;
             });
           }
-          // Collapse settings cards
+          // Close settings cards
           if (index == 3) {
             setState(() {
-              collapseSettings = true;
+              commandSettings = HeaderCardCommand.close;
             });
           }
-          // Expand themed cards
+          // Open themed cards
           if (index == 4) {
             setState(() {
-              collapseThemed = false;
+              commandThemed = HeaderCardCommand.open;
             });
           }
-          // Collapse themed cards
+          // Close themed cards
           if (index == 5) {
             setState(() {
-              collapseThemed = true;
+              commandThemed = HeaderCardCommand.close;
             });
           }
           // Reset theme settings.
@@ -261,13 +272,13 @@ class _HomePageState extends State<HomePage>
             staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
             itemBuilder: (BuildContext context, int index) => <Widget>[
               HeaderCard(
-                isClosed: collapseMain,
-                title: const Text('FlexColorScheme'),
+                command: commandMain,
+                title: const Text('FlexColorScheme Info'),
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
-                    children: <Widget>[
-                      const Text(
+                    children: const <Widget>[
+                      Text(
                         'With this demo you can try all features and themes in '
                         'FlexColorScheme v4 (alpha1). Find a color scheme you '
                         'like, experiment with the new surface blend modes and '
@@ -289,15 +300,14 @@ class _HomePageState extends State<HomePage>
                         ' widgets change as the theme is modified '
                         'via the controls.\n'
                         '\n'
-                        'The theming impact on widgets are shown in expandable '
+                        'The theming impact on widgets is shown in expandable '
                         'cards with the "Themed" heading. The three first '
                         'themes are custom color schemes and are not built-in '
                         'choices. In the packages tutorial you learn how to '
                         'make your own custom Flutter color schemes and make '
                         'advanced themes with FlexColorScheme',
                       ),
-                      const SizedBox(height: 16),
-                      ThemeSelector(controller: widget.controller),
+                      SizedBox(height: 8),
                     ],
                   ),
                 ),
@@ -306,54 +316,54 @@ class _HomePageState extends State<HomePage>
               // The "Settings" Cards.
               _ThemeColors(
                 controller: widget.controller,
-                isClosed: collapseSettings,
+                command: commandSettings,
               ),
               _ThemeMode(
                 controller: widget.controller,
-                isClosed: collapseSettings,
+                command: commandSettings,
               ),
               _Platform(
                 controller: widget.controller,
-                isClosed: collapseSettings,
+                command: commandSettings,
               ),
               _SurfaceBlends(
                 controller: widget.controller,
-                isClosed: collapseSettings,
+                command: commandSettings,
                 showAllBlends: showAllBlends,
               ),
               _SubThemes(
                 controller: widget.controller,
-                isClosed: collapseSettings,
+                command: commandSettings,
               ),
               _TextField(
                 controller: widget.controller,
-                isClosed: collapseSettings,
+                command: commandSettings,
               ),
               _AppBarSettings(
                 controller: widget.controller,
-                isClosed: collapseSettings,
+                command: commandSettings,
               ),
               _TabBar(
                 controller: widget.controller,
-                isClosed: collapseSettings,
+                command: commandSettings,
               ),
               _BottomNavigation(
                 controller: widget.controller,
-                isClosed: collapseSettings,
+                command: commandSettings,
               ),
-              _SubPages(isClosed: collapseSettings),
+              _SubPages(command: commandSettings),
               //
               // The "Themed" results Cards.
-              _MaterialButtonsShowcase(isClosed: collapseThemed),
-              _ToggleFabSwitchesChipsShowcase(isClosed: collapseThemed),
-              _ListTileShowcase(isClosed: collapseThemed),
-              _TimePickerDialogShowcase(isClosed: collapseThemed),
-              _DatePickerDialogShowcase(isClosed: collapseThemed),
-              _AlertDialogShowcase(isClosed: collapseThemed),
-              _BottomSheetAndMaterialShowcase(isClosed: collapseThemed),
-              _CardShowcase(isClosed: collapseThemed),
-              _TextThemeShowcase(isClosed: collapseThemed),
-              _PrimaryTextThemeShowcase(isClosed: collapseThemed),
+              _MaterialButtonsShowcase(command: commandThemed),
+              _ToggleFabSwitchesChipsShowcase(command: commandThemed),
+              _ListTileShowcase(command: commandThemed),
+              _TimePickerDialogShowcase(command: commandThemed),
+              _DatePickerDialogShowcase(command: commandThemed),
+              _DialogShowcase(command: commandThemed),
+              _MaterialAndBottomSheetShowcase(command: commandThemed),
+              _CardShowcase(command: commandThemed),
+              _TextThemeShowcase(command: commandThemed),
+              _PrimaryTextThemeShowcase(command: commandThemed),
             ].elementAt(index),
             itemCount: 21,
           );
@@ -394,25 +404,30 @@ class _ThemeColors extends StatelessWidget {
   const _ThemeColors({
     Key? key,
     required this.controller,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Theme Colors'),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+            child: ThemeSelector(controller: controller),
+          ),
           ThemePopupMenu(
             schemeIndex: controller.schemeIndex,
             onChanged: controller.setSchemeIndex,
           ),
           const SizedBox(height: 8),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: ShowThemeColors(),
           ),
           const SizedBox(height: 8),
@@ -421,8 +436,8 @@ class _ThemeColors extends StatelessWidget {
               'Use FlexColorScheme theming features',
             ),
             subtitle: const Text(
-              'Turn OFF to see Flutter default theming with these colors\n'
-              'Most other settings have no impact when this one is OFF',
+              'Turn OFF to see Flutter default theming using these colors\n'
+              'Most other settings have no impact when this is OFF',
             ),
             value: controller.useFlexColorScheme,
             onChanged: controller.setUseFlexColorScheme,
@@ -437,10 +452,10 @@ class _ThemeMode extends StatelessWidget {
   const _ThemeMode({
     Key? key,
     required this.controller,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
@@ -448,7 +463,7 @@ class _ThemeMode extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Theme Mode'),
       child: Column(
         children: <Widget>[
@@ -498,7 +513,7 @@ class _ThemeMode extends StatelessWidget {
                   ),
                   SwitchListTile.adaptive(
                     title: const Text(
-                        'Light mode onColors have a hint of its color'),
+                        'Light mode onColor have a hint of its color'),
                     value: controller.blendLightOnColors,
                     onChanged: controller.setBlendLightOnColors,
                   )
@@ -510,7 +525,7 @@ class _ThemeMode extends StatelessWidget {
                   ),
                   SwitchListTile.adaptive(
                     title: const Text(
-                        'Dark mode onColors have a hint of its color'),
+                        'Dark mode onColor have a hint of its color'),
                     value: controller.blendDarkOnColors,
                     onChanged: controller.setBlendDarkOnColors,
                   )
@@ -580,23 +595,23 @@ class _Platform extends StatelessWidget {
   const _Platform({
     Key? key,
     required this.controller,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Platform'),
       child: Column(
         children: <Widget>[
           const Padding(
             padding: EdgeInsets.all(16),
-            child: Text('For testing purposes you can change used platform. '
-                'It changes some icons, widgets e.g. Switches and Sliders, '
-                'font and platform mechanics, like '
+            child: Text('For testing you can change used platform. '
+                'It changes some icons and widgets like Switches and Sliders, '
+                'also font and platform mechanics, like '
                 'scrolling behavior and acceleration. '
                 'This setting is not persisted'),
           ),
@@ -605,7 +620,7 @@ class _Platform extends StatelessWidget {
             onChanged: controller.setPlatform,
           ),
           ListTile(
-            title: const Text('Set back to actual platform'),
+            title: const Text('Set to actual platform'),
             trailing: ElevatedButton(
               onPressed: () {
                 controller.setPlatform(defaultTargetPlatform);
@@ -626,11 +641,11 @@ class _SurfaceBlends extends StatelessWidget {
   const _SurfaceBlends({
     Key? key,
     required this.controller,
-    this.isClosed = false,
+    this.command,
     required this.showAllBlends,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isClosed;
+  final HeaderCardCommand? command;
   final bool showAllBlends;
 
   String explainMode(final FlexSurfaceMode mode) {
@@ -671,7 +686,7 @@ class _SurfaceBlends extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Surface Blends'),
       child: Column(
         children: <Widget>[
@@ -679,10 +694,10 @@ class _SurfaceBlends extends StatelessWidget {
             title: Text('Blended surfaces and backgrounds'),
             isThreeLine: true,
             subtitle: Text(
-              'Default Material 2 design use white and dark surface colors. '
-              'It also mentions using surfaces with different alpha blends. '
-              'Typically you blend primary color into different surfaces. '
-              'This is supported here by using blend mode and level',
+              'Material 2 design use white and almost black surface colors. '
+              'The guide mentions using surfaces with different alpha blends, '
+              'by blending primary color into different surfaces. '
+              'Blend mode and level does that',
             ),
           ),
           ListTile(
@@ -766,15 +781,15 @@ class _SubThemes extends StatelessWidget {
   const _SubThemes({
     Key? key,
     required this.controller,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Sub Theme Settings'),
       child: Column(
         children: <Widget>[
@@ -790,16 +805,16 @@ class _SubThemes extends StatelessWidget {
               children: <Widget>[
                 SwitchListTile.adaptive(
                   title: const Text('Use Material 3 TextTheme'),
-                  subtitle: const Text('ON to use Material 3 like text styles\n'
-                      'OFF to use Material 2 2018 text styles'),
+                  subtitle: const Text('ON to use M3 text styles\n'
+                      'OFF to use M2 2018 text styles'),
                   value: controller.useTextTheme,
                   onChanged: controller.setUseTextTheme,
                 ),
                 SwitchListTile.adaptive(
                   title: const Text('Use Material 3 rounded corners'),
-                  subtitle: const Text('ON to set Material 3 radius '
-                      'on all widgets\n'
-                      'OFF to manually adjust radius on all widgets'),
+                  subtitle: const Text('ON to use M3 radius '
+                      'on widgets\n'
+                      'OFF to adjust radius on all widgets'),
                   value: controller.useDefaultRadius,
                   onChanged: controller.setUseDefaultRadius,
                 ),
@@ -838,8 +853,7 @@ class _SubThemes extends StatelessWidget {
                 SwitchListTile.adaptive(
                   title: const Text('Rounded corners on FloatingActionButton'),
                   subtitle: const Text('OFF removes Shape from FAB theme, '
-                      'making it use M2 circular style, '
-                      'also with rounded corners and M3 defaults'),
+                      'making it always use M2 circular style'),
                   value: controller.fabUseShape,
                   onChanged: controller.setFabUseShape,
                 ),
@@ -859,10 +873,10 @@ class _SubThemes extends StatelessWidget {
             message: 'A tooltip, on the tooltip style toggle',
             child: SwitchListTile.adaptive(
               title: const Text(
-                'Tooltip brightness',
+                'Tooltip background',
               ),
               subtitle: const Text(
-                'ON Normal  OFF Inverted (Material style)',
+                'ON Normal  OFF Inverted',
               ),
               value: controller.tooltipsMatchBackground,
               onChanged: controller.setTooltipsMatchBackground,
@@ -878,15 +892,15 @@ class _TextField extends StatelessWidget {
   const _TextField({
     Key? key,
     required this.controller,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('TextField Settings'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -904,7 +918,7 @@ class _TextField extends StatelessWidget {
               children: <Widget>[
                 SwitchListTile.adaptive(
                   title: const Text(
-                    'Input field with fill color',
+                    'Field has fill color',
                   ),
                   value: controller.inputDecoratorIsFilled,
                   onChanged: controller.setInputDecoratorIsFilled,
@@ -914,7 +928,7 @@ class _TextField extends StatelessWidget {
                     'Border style',
                   ),
                   subtitle: const Text(
-                    'ON for outline   OFF for underline',
+                    'ON for outline  OFF for underline',
                   ),
                   value: controller.inputDecoratorIsOutlinedBorder ==
                       FlexInputBorderType.outline,
@@ -929,7 +943,7 @@ class _TextField extends StatelessWidget {
                   },
                 ),
                 SwitchListTile.adaptive(
-                  title: const Text('Unfocused fields have a border'),
+                  title: const Text('Unfocused field has border'),
                   value: controller.inputDecoratorUnfocusedHasBorder,
                   onChanged: controller.setInputDecoratorUnfocusedHasBorder,
                 ),
@@ -950,26 +964,26 @@ class _AppBarSettings extends StatelessWidget {
   const _AppBarSettings({
     Key? key,
     required this.controller,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   String explainAppBarStyle(final FlexAppBarStyle style, final bool isLight) {
     switch (style) {
       case FlexAppBarStyle.primary:
-        return isLight ? 'Primary color (Default)' : 'Primary color';
+        return isLight ? 'Primary color - Default' : 'Primary color';
       case FlexAppBarStyle.material:
         return isLight
-            ? 'Material guide white background color'
-            : 'Material guide dark (#121212) background color (Default)';
+            ? 'White background'
+            : 'Dark background (#121212) - Default';
       case FlexAppBarStyle.surface:
-        return 'Surface, including its primary color alpha blend';
+        return 'Surface, with primary color blend';
       case FlexAppBarStyle.background:
-        return 'Background, including its primary color alpha blend';
+        return 'Background, with primary color blend';
       case FlexAppBarStyle.custom:
-        return 'Built-in schemes use their secondary variant color as '
-            'their custom AppBar color, but you can use any color';
+        return 'Built-in schemes use secondary variant color, '
+            'but you can use any color';
     }
   }
 
@@ -979,24 +993,21 @@ class _AppBarSettings extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('AppBar Settings'),
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),
           const ListTile(
             subtitle: Text(
-              'Default Flutter themes use primary colored AppBar in light '
+              'Material themes favor primary colored AppBar in light '
               'mode, and almost black in dark mode. Here you can select '
               'Primary, Material background or background and surface color, '
-              'with their primary blends or even a custom color. '
-              'Predefined themes use their secondary variant color as the '
-              'custom AppBar color, but you can make it any color',
+              'with their primary blends or even a custom color',
             ),
           ),
           if (isLight) ...<Widget>[
             ListTile(
-              isThreeLine: true,
               title: const Text('Light mode color'),
               subtitle: Text(
                 explainAppBarStyle(controller.lightAppBarStyle, isLight),
@@ -1020,7 +1031,6 @@ class _AppBarSettings extends StatelessWidget {
             ),
           ] else ...<Widget>[
             ListTile(
-              isThreeLine: true,
               title: const Text('Dark mode color'),
               subtitle: Text(
                 explainAppBarStyle(controller.darkAppBarStyle, isLight),
@@ -1037,8 +1047,8 @@ class _AppBarSettings extends StatelessWidget {
           SwitchListTile.adaptive(
             title: const Text('One colored AppBar on Android'),
             subtitle: const Text(
-              'ON   There is no scrim on the top status bar\n'
-              'OFF  Use default two toned style status bar',
+              'ON  No scrim on the top status bar\n'
+              'OFF Default two toned status bar',
             ),
             value: controller.transparentStatusBar,
             onChanged: controller.setTransparentStatusBar,
@@ -1074,7 +1084,7 @@ class _AppBarSettings extends StatelessWidget {
           ),
           const ListTile(
             title: Text('Opacity'),
-            subtitle: Text('Themed opacity. Try 85% to 98%'),
+            subtitle: Text('Themed opacity, try 85% to 98%'),
           ),
           ListTile(
             title: Slider.adaptive(
@@ -1117,9 +1127,9 @@ class _TabBar extends StatelessWidget {
   const _TabBar({
     Key? key,
     required this.controller,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
   final ThemeController controller;
 
   String explainTabStyle(final FlexTabBarStyle style) {
@@ -1145,7 +1155,7 @@ class _TabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('TabBar Settings'),
       child: Column(
         children: <Widget>[
@@ -1181,10 +1191,10 @@ class _BottomNavigation extends StatelessWidget {
   const _BottomNavigation({
     Key? key,
     required this.controller,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   String explainStyle(final FlexSystemNavBarStyle style, final bool isLight) {
     switch (style) {
@@ -1207,7 +1217,7 @@ class _BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Bottom Navigation Settings'),
       child: Column(
         children: <Widget>[
@@ -1248,8 +1258,8 @@ class _BottomNavigation extends StatelessWidget {
           const ListTile(
             title: Text('Opacity'),
             subtitle: Text(
-              'Bottom and system navigation bar opacity. These are separate '
-              'parameters, they only share input control in this example',
+              'Bottom and system navigation bar opacity. Separate '
+              'parameters, they only share input here',
             ),
           ),
           ListTile(
@@ -1291,7 +1301,7 @@ class _BottomNavigation extends StatelessWidget {
           const Divider(),
           ListTile(
             title: const Text('Android system navigation bar'),
-            subtitle: Text('FlexColorScheme.themedSystemNavigationBar\n'
+            subtitle: Text('Using themedSystemNavigationBar:\n'
                 '${explainStyle(controller.navBarStyle, isLight)}'),
           ),
           ListTile(
@@ -1301,7 +1311,7 @@ class _BottomNavigation extends StatelessWidget {
             ),
           ),
           SwitchListTile.adaptive(
-            title: const Text('Android system navigation bar divider'),
+            title: const Text('Android navigation bar divider'),
             subtitle: const Text('There is also an extra system built-in scrim '
                 'on the nav bar when it is enabled'),
             value: controller.useNavDivider,
@@ -1316,20 +1326,20 @@ class _BottomNavigation extends StatelessWidget {
 class _SubPages extends StatelessWidget {
   const _SubPages({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Page Examples'),
       child: Column(
         children: <Widget>[
           ListTile(
             title: const Text('Sub page demo'),
-            subtitle: const Text('Page uses the same color scheme based theme'),
+            subtitle: const Text('Uses the same color scheme and theme'),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               Subpage.show(context);
@@ -1378,14 +1388,14 @@ class _SubPages extends StatelessWidget {
 class _MaterialButtonsShowcase extends StatelessWidget {
   const _MaterialButtonsShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Themed Material Buttons'),
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -1393,7 +1403,9 @@ class _MaterialButtonsShowcase extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const ButtonShowcase(),
+            const SizedBox(height: 8),
             const ButtonShowcase(enabled: false),
+            const SizedBox(height: 8),
             const ButtonIconShowcase(),
             Padding(
               padding: const EdgeInsets.all(8),
@@ -1413,14 +1425,14 @@ class _MaterialButtonsShowcase extends StatelessWidget {
 class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
   const _ToggleFabSwitchesChipsShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Themed Buttons Switches and Chips'),
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -1428,7 +1440,7 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const <Widget>[
             ToggleFabIconButtonsShowcase(),
-            CircleAvataAndTooltipShowcase(),
+            CircleAvatarAndTooltipShowcase(),
             CheckboxShowcase(),
             ChipShowcase(),
           ],
@@ -1441,14 +1453,14 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
 class _ListTileShowcase extends StatelessWidget {
   const _ListTileShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Themed ListTile'),
       child: const ListTileShowcase(),
     );
@@ -1458,14 +1470,14 @@ class _ListTileShowcase extends StatelessWidget {
 class _TimePickerDialogShowcase extends StatelessWidget {
   const _TimePickerDialogShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Themed TimePickerDialog'),
       child: const TimePickerDialogShowcase(),
     );
@@ -1475,52 +1487,52 @@ class _TimePickerDialogShowcase extends StatelessWidget {
 class _DatePickerDialogShowcase extends StatelessWidget {
   const _DatePickerDialogShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Themed DatePickerDialog'),
       child: const DatePickerDialogShowcase(),
     );
   }
 }
 
-class _AlertDialogShowcase extends StatelessWidget {
-  const _AlertDialogShowcase({
+class _DialogShowcase extends StatelessWidget {
+  const _DialogShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Themed Dialog'),
       child: const AlertDialogShowcase(),
     );
   }
 }
 
-class _BottomSheetAndMaterialShowcase extends StatelessWidget {
-  const _BottomSheetAndMaterialShowcase({
+class _MaterialAndBottomSheetShowcase extends StatelessWidget {
+  const _MaterialAndBottomSheetShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Themed Material'),
       child: const Padding(
         padding: EdgeInsets.all(16),
-        child: BottomSheetAndMaterialShowcase(),
+        child: MaterialAndBottomSheetShowcase(),
       ),
     );
   }
@@ -1529,14 +1541,14 @@ class _BottomSheetAndMaterialShowcase extends StatelessWidget {
 class _CardShowcase extends StatelessWidget {
   const _CardShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-        isClosed: isClosed,
+        command: command,
         title: const Text('Themed Card'),
         child: const Padding(
           padding: EdgeInsets.all(16),
@@ -1548,14 +1560,14 @@ class _CardShowcase extends StatelessWidget {
 class _TextThemeShowcase extends StatelessWidget {
   const _TextThemeShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      isClosed: isClosed,
+      command: command,
       title: const Text('Themed TextTheme'),
       child: const Padding(
         padding: EdgeInsets.all(16),
@@ -1568,15 +1580,15 @@ class _TextThemeShowcase extends StatelessWidget {
 class _PrimaryTextThemeShowcase extends StatelessWidget {
   const _PrimaryTextThemeShowcase({
     Key? key,
-    this.isClosed = false,
+    this.command,
   }) : super(key: key);
-  final bool isClosed;
+  final HeaderCardCommand? command;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
       color: Theme.of(context).colorScheme.primary,
-      isClosed: isClosed,
+      command: command,
       title: const Text('Themed PrimaryTextTheme'),
       child: const Padding(
         padding: EdgeInsets.all(16),

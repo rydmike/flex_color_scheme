@@ -21,8 +21,11 @@ class ThemeShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        const SizedBox(height: 8),
         const ButtonShowcase(),
+        const SizedBox(height: 8),
         const ButtonShowcase(enabled: false),
+        const SizedBox(height: 8),
         const ButtonIconShowcase(),
         Padding(
           padding: const EdgeInsets.all(8),
@@ -32,20 +35,27 @@ class ThemeShowcase extends StatelessWidget {
         const LegacyButtonShowcase(),
         const LegacyButtonShowcase(enabled: false),
         const LegacyButtonIconShowcase(),
+        const Divider(),
         const ToggleFabIconButtonsShowcase(),
-        const CircleAvataAndTooltipShowcase(),
+        const CircleAvatarAndTooltipShowcase(),
         const CheckboxShowcase(),
         const ChipShowcase(),
+        const Divider(),
         const TextInputField(),
+        const Divider(),
         const TabBarForAppBarShowcase(),
         const TabBarForBackgroundShowcase(),
+        const Divider(),
         const BottomNavigationBarShowcase(),
+        const Divider(),
         const ListTileShowcase(),
+        const Divider(),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
         const AlertDialogShowcase(),
-        const BottomSheetAndMaterialShowcase(),
-        const SizedBox(height: 16),
+        const Divider(),
+        const MaterialAndBottomSheetShowcase(),
+        const Divider(height: 32),
         const CardShowcase(),
         const SizedBox(height: 8),
         Card(
@@ -93,31 +103,27 @@ class ButtonShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: ElevatedButton(
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 8),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          ElevatedButton(
             onPressed: enabled ? () {} : null,
             child: const Text('Elevated button'),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: OutlinedButton(
+          OutlinedButton(
             onPressed: enabled ? () {} : null,
             child: const Text('Outlined button'),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: TextButton(
+          TextButton(
             onPressed: enabled ? () {} : null,
             child: const Text('Text button'),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -128,34 +134,30 @@ class ButtonIconShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: ElevatedButton.icon(
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 8),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          ElevatedButton.icon(
             onPressed: enabled ? () {} : null,
             icon: const Icon(Icons.add),
             label: const Text('Elevated icon'),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: OutlinedButton.icon(
+          OutlinedButton.icon(
             onPressed: enabled ? () {} : null,
             icon: const Icon(Icons.add),
             label: const Text('Outlined icon'),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: TextButton.icon(
+          TextButton.icon(
             onPressed: enabled ? () {} : null,
             icon: const Icon(Icons.add),
             label: const Text('Text icon'),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -166,31 +168,27 @@ class LegacyButtonShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: RaisedButton(
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 8),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 4,
+        children: <Widget>[
+          RaisedButton(
             onPressed: enabled ? () {} : null,
             child: const Text('Raised button'),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: OutlineButton(
+          OutlineButton(
             onPressed: enabled ? () {} : null,
             child: const Text('Outline button'),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: FlatButton(
+          FlatButton(
             onPressed: enabled ? () {} : null,
             child: const Text('Flat button'),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -202,34 +200,30 @@ class LegacyButtonIconShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: RaisedButton.icon(
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 8),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 4,
+        children: <Widget>[
+          RaisedButton.icon(
             onPressed: enabled ? () {} : null,
             icon: const Icon(Icons.add),
             label: const Text('Raised icon'),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: OutlineButton.icon(
+          OutlineButton.icon(
             onPressed: enabled ? () {} : null,
             icon: const Icon(Icons.add),
             label: const Text('Outline icon'),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: FlatButton.icon(
+          FlatButton.icon(
             onPressed: enabled ? () {} : null,
             icon: const Icon(Icons.add),
             label: const Text('Flat icon'),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -245,7 +239,7 @@ class ToggleFabIconButtonsShowcase extends StatelessWidget {
       crossAxisAlignment: WrapCrossAlignment.center,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: ToggleButtons(
             isSelected: const <bool>[true, false, false],
             onPressed: enabled ? (int newIndex) {} : null,
@@ -258,7 +252,7 @@ class ToggleFabIconButtonsShowcase extends StatelessWidget {
         ),
         _PopupMenuButton(enabled: enabled),
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: FloatingActionButton(
             onPressed: () {},
             tooltip: 'Tooltip on\nFloatingActionButton',
@@ -266,7 +260,7 @@ class ToggleFabIconButtonsShowcase extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: IconButton(
             icon: const Icon(Icons.accessibility),
             tooltip: 'Tooltip on\nIconButton',
@@ -313,8 +307,8 @@ class _PopupMenuButton extends StatelessWidget {
   }
 }
 
-class CircleAvataAndTooltipShowcase extends StatelessWidget {
-  const CircleAvataAndTooltipShowcase({Key? key}) : super(key: key);
+class CircleAvatarAndTooltipShowcase extends StatelessWidget {
+  const CircleAvatarAndTooltipShowcase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -346,63 +340,47 @@ class ChipShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Chip(
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 8),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          Chip(
             label: const Text('Chip'),
             onDeleted: () {},
           ),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(8),
-          child: Chip(
+          const Chip(
             label: Text('Avatar Chip'),
             avatar: FlutterLogo(),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: InputChip(
+          InputChip(
             label: const Text('Input Chip'),
             onSelected: (bool value) {},
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: InputChip(
+          InputChip(
             showCheckmark: true,
             selected: true,
             label: const Text('Chip check'),
             onSelected: (bool value) {},
           ),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(8),
-          child: InputChip(
+          const InputChip(
             label: Text('Disabled Chip'),
             isEnabled: false,
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: ChoiceChip(
+          ChoiceChip(
             label: const Text('Selected Chip'),
             selected: true,
             onSelected: (bool value) {},
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: ChoiceChip(
+          ChoiceChip(
             label: const Text('Not selected Chip'),
             selected: false,
             onSelected: (bool value) {},
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -779,8 +757,8 @@ class AlertDialogShowcase extends StatelessWidget {
   }
 }
 
-class BottomSheetAndMaterialShowcase extends StatelessWidget {
-  const BottomSheetAndMaterialShowcase({Key? key}) : super(key: key);
+class MaterialAndBottomSheetShowcase extends StatelessWidget {
+  const MaterialAndBottomSheetShowcase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -795,8 +773,8 @@ class BottomSheetAndMaterialShowcase extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.bold),
         ),
         Text(
-          'Default background color is theme.canvasColor, and '
-          'theme.canvasColor is set to theme.colorScheme.background. The '
+          'Default background color is theme canvasColor, and '
+          'theme canvasColor is set to theme colorScheme background. The '
           'color canvasColor is going to be deprecated in Flutter SDK',
           style: Theme.of(context).textTheme.caption,
         ),
@@ -835,8 +813,8 @@ class BottomSheetAndMaterialShowcase extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.bold),
         ),
         Text(
-          'Default background color is theme.cardColor, and '
-          'theme.cardColor is set to theme.colorScheme.surface. The '
+          'Default background color is theme cardColor, and '
+          'theme cardColor is set to theme colorScheme surface. The '
           'color cardColor is going to be deprecated in Flutter SDK',
           style: Theme.of(context).textTheme.caption,
         ),

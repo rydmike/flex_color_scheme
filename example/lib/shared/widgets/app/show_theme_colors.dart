@@ -83,18 +83,20 @@ class ShowThemeColors extends StatelessWidget {
         ),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               'ColorScheme Colors',
               style: theme.textTheme.subtitle1,
             ),
           ),
           Wrap(
+            alignment: WrapAlignment.start,
+            crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 6,
             runSpacing: 6,
-            crossAxisAlignment: WrapCrossAlignment.center,
             children: <Widget>[
               ThemeCard(
                 label: 'Primary',
@@ -164,7 +166,7 @@ class ShowThemeColors extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               'ThemeData Colors',
               style: theme.textTheme.subtitle1,
