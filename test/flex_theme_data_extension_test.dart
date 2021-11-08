@@ -16,7 +16,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     // test(
-    //     'FTD1.00RawL: GIVEN FlexThemeData.raw() made with min required light '
+    //     'FTD1.00RawL: GIVEN FlexThemeData.raw() made with m required light '
     //     'params that equals default Material light scheme '
     //     'EXPECT its FlexThemeData to be equal to one made with light scheme '
     //     'with no parameters.', () {
@@ -2101,7 +2101,8 @@ void main() {
     //       primaryTextTheme: _myTextTheme,
     //       fontFamily: 'Roboto',
     //       platform: defaultTargetPlatform,
-    //       typography: Typography.material2018(platform: defaultTargetPlatform),
+    //       typography: Typography.material2018(platform:
+    //       defaultTargetPlatform),
     //       applyElevationOverlayColor: true,
     //     ),
     //     FlexColorScheme(
@@ -2130,7 +2131,8 @@ void main() {
     //       primaryTextTheme: _myTextTheme,
     //       fontFamily: 'Roboto',
     //       platform: defaultTargetPlatform,
-    //       typography: Typography.material2018(platform: defaultTargetPlatform),
+    //       typography: Typography.material2018(platform:
+    //       defaultTargetPlatform),
     //       applyElevationOverlayColor: true,
     //     ).toTheme,
     //   );
@@ -2161,7 +2163,8 @@ void main() {
     //       primaryTextTheme: _myTextTheme,
     //       fontFamily: 'Roboto',
     //       platform: defaultTargetPlatform,
-    //       typography: Typography.material2018(platform: defaultTargetPlatform),
+    //       typography: Typography.material2018(platform:
+    //       defaultTargetPlatform),
     //       applyElevationOverlayColor: true,
     //     ),
     //     FlexColorScheme(
@@ -2190,7 +2193,8 @@ void main() {
     //       primaryTextTheme: _myTextTheme,
     //       fontFamily: 'Roboto',
     //       platform: defaultTargetPlatform,
-    //       typography: Typography.material2018(platform: defaultTargetPlatform),
+    //       typography: Typography.material2018(platform:
+    //       defaultTargetPlatform),
     //       applyElevationOverlayColor: true,
     //     ).toTheme,
     //   );
@@ -2401,8 +2405,8 @@ void main() {
     //
     // test(
     //     'FTD3.00eD: GIVEN a FlexThemeData.raw() made with scheme default '
-    //     'constructor + dark and material EXPECT its ThemeData to be equal to '
-    //     'one made with FlexColorScheme().toTheme.', () {
+    //     'constructor + dark and material EXPECT its ThemeData to be equal to'
+    //     ' one made with FlexColorScheme().toTheme.', () {
     //   expect(
     //     FlexThemeData.raw(
     //       brightness: Brightness.dark,
