@@ -1189,7 +1189,7 @@ class FlexColor {
   // The colors are based on image theme nr 19 mix 1 in Flexfold demo app.
 
   /// English name of the blueWhale theme.
-  static const String blueWhaleName = 'New-1 Blue whale';
+  static const String blueWhaleName = 'Blue whale';
 
   /// English description of the blueWhale theme.
   static const String blueWhaleDescription =
@@ -1223,7 +1223,7 @@ class FlexColor {
   // Colors and scheme named by "name that color" library for the light colors.
 
   /// English name of the San Juan blue theme.
-  static const String sanJuanBlueName = 'New-2 San Juan';
+  static const String sanJuanBlueName = 'San Juan blue';
 
   /// English description of the sanJuanBlue theme.
   static const String sanJuanBlueDescription =
@@ -1257,7 +1257,7 @@ class FlexColor {
   // Colors and scheme named by "name that color" library for the light colors.
 
   /// English name of the rosewood theme.
-  static const String rosewoodName = 'New-3 Rosewood';
+  static const String rosewoodName = 'Rosewood';
 
   /// English description of the rosewood theme.
   static const String rosewoodDescription =
@@ -1292,11 +1292,11 @@ class FlexColor {
   // Colors and scheme named by "name that color" library for the light colors.
 
   /// English name of the blumineBlue theme.
-  static const String blumineBlueName = 'New-4 Blumine';
+  static const String blumineBlueName = 'Blumine';
 
   /// English description of the blumine blue theme.
   static const String blumineBlueDescription =
-      'Blue, easter blue and saffron mango theme';
+      'Blumine, easter blue and saffron mango theme';
 
   /// Blumine blue green theme color for light primary color.
   static const Color blumineBlueLightPrimary = Color(0xFF19647E);

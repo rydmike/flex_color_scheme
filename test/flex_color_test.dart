@@ -1340,7 +1340,7 @@ void main() {
     });
 
     test('FC5 colors', () {
-      expect(FlexColor.blueWhaleName, 'New-1 Blue whale');
+      expect(FlexColor.blueWhaleName, 'Blue whale');
     });
     test('FC5 colors', () {
       expect(

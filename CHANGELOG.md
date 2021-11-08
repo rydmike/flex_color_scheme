@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [WIP 4.0.0] - November 5, 2021
+## [4.0.0-dev1] - November 8, 2021
 
 * The breaking case refer to a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.x.x.
@@ -124,16 +124,17 @@ All notable changes to the **FlexColorScheme** package are documented here.
   efficiency.
 
 
-* **TODO New color schemes:** Added four new built-in color schemes.
+* **New color schemes:** Added four new built-in color schemes.
+  Total number of color schemes is nor 36 matched light and dark pairs.  
   * **Blue whale** - Blue whale, jungle green and outrageous tango orange.
     Use enum value `FlexScheme.blueWhale` for easy access to it.
     This theme is final and selected for inclusion as a new one.
-  * **TODO** - Added draft placeholder 1 theme, nothing decided yet.
-    Use enum value `FlexScheme.nnn` for easy access to it.
-  * **TODO** - Added draft placeholder 2 theme, nothing decided yet.
-    Use enum value `FlexScheme.nnn` for easy access to it.
-  * **TODO** - Added draft placeholder 3 theme, nothing decided yet.
-    Use enum value `FlexScheme.nnn` for easy access to it.
+  * **San Juan blue** - San Juan blue and pink salmon theme.
+    Use enum value `FlexScheme.sanJuanBlue` for easy access to it.
+  * **Rosewood** - Rosewood red, with horses neck and driftwood theme.
+    Use enum value `FlexScheme.rosewood` for easy access to it.
+  * **Blumine** - Blumine, easter blue and saffron mango theme.
+    Use enum value `FlexScheme.blumineBlue` for easy access to it.
   
 
 * **Documentation:** 
@@ -149,21 +150,20 @@ All notable changes to the **FlexColorScheme** package are documented here.
   * Examples 2 to 5 also use the in Flutter 2.5 new skeleton architecture with
     a ChangeNotifier based controller, AnimatedBuilder to listen to it and
     an abstract service to get and persist the theme settings, with a concrete
-    in-memory implementation.
+    in-memory implementation, plus the implementations to persist the theme.
+    * Example 2-4 use Hive (TODO)
+    * Example 5 uses SharedPreferences
 * **TODO Documentation:**
-  * Examples 2 - 5 now also persist their settings with Shared Preferences or
-    Hive. (TODO)
   * Some older documentation that is not relevant was removed, like older APIs
     no longer described in read me, only in API docs.
-  * Almost all screenshot will need to be updated. (sigh)
+  * Almost all screenshots will need to be updated. (sigh)
   * Typo review and corrections.
 
 
 * **TODO Tests:** 
-  * Added tests for the new features.
-  * Total 1037 tests, 
-  * Coverage temporarily down to around 95%. 
-  * More tests to be added before release.
+  * Added tests for the new features, total 1037 tests, 
+  * Coverage temporarily down to around 95%, more tests to be added 
+    before release.
 
 ## [3.0.1] - July 1, 2021
 

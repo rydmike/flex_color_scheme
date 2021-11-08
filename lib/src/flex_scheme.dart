@@ -1,5 +1,7 @@
 /// Enum that can be used to lookup predefined `FlexSchemeData` scheme
 /// definition objects.
+///
+/// Contains 36 ready to use built-in matched light and dark color schemes.
 enum FlexScheme {
   /// The example theme used in the Material Design guide.
   ///
