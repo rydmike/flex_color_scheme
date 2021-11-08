@@ -190,7 +190,8 @@ class _MenuItem extends StatelessWidget {
                       children: <Widget>[
                         MaybeTooltip(
                           condition: width == AppData.railWidth,
-                          tooltip: label,
+                          message: label,
+                          margin: const EdgeInsetsDirectional.only(start: 50),
                           child: ConstrainedBox(
                             constraints: const BoxConstraints.tightFor(
                               width: 56,

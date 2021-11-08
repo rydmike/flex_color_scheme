@@ -22,7 +22,6 @@ import '../shared/widgets/universal/header_card.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 
-
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
 //
@@ -765,31 +764,31 @@ class _SurfaceBlends extends StatelessWidget {
   String explainMode(final FlexSurfaceMode mode) {
     switch (mode) {
       case FlexSurfaceMode.flat:
-        return 'Flat\nAll surface colors at blend level (1x)\n';
-      case FlexSurfaceMode.highBackground:
-        return 'High background, very low scaffold\n'
-            'Background (3/2x) Surface (1x) Scaffold (1/3x)\n';
-      case FlexSurfaceMode.highSurface:
-        return 'High surface, very low scaffold\n'
-            'Surface (3/2x) Background (1x) Scaffold (1/3x)\n';
-      case FlexSurfaceMode.veryLowSurfaceHighScaffold:
-        return 'Very low surface, high scaffold\n'
-            'Surface & dialog (1/2x) Background (1x) Scaffold (3x)\n';
-      case FlexSurfaceMode.lowSurfaceHighScaffold:
-        return 'Low surface, Very high scaffold\n'
-            'Surface (1x) Background (2x) Scaffold (3x)\n';
+        return 'Flat\nAll surfaces at blend level (1x)\n';
+      case FlexSurfaceMode.highBackgroundLowScaffold:
+        return 'High background, low scaffold\n'
+            'Background (3/2x) Surface (1x) Scaffold (1/2x)\n';
+      case FlexSurfaceMode.highSurfaceLowScaffold:
+        return 'High surface, low scaffold\n'
+            'Surface (3/2x) Background (1x) Scaffold (1/2x)\n';
+      case FlexSurfaceMode.highScaffoldLowSurface:
+        return 'High scaffold, low surface\n'
+            'Scaffold (2x) Background (1x) Surface (1/2x)\n';
+      case FlexSurfaceMode.veryHighScaffoldLevelSurface:
+        return 'Very high scaffold, level surface\n'
+            'Scaffold (3x) Background (2x) Surface (1x)\n';
       case FlexSurfaceMode.lowScaffold:
         return 'Low scaffold\n'
-            'Scaffold (1/3x) Surface and Background (1x)\n';
-      case FlexSurfaceMode.highScaffold:
-        return 'High scaffold\n'
+            'Scaffold (1/2x) Surface and Background (1x)\n';
+      case FlexSurfaceMode.veryHighScaffold:
+        return 'Very high scaffold\n'
             'Scaffold (3x) Surface and Background (1x)\n';
       case FlexSurfaceMode.lowScaffoldVariantDialog:
         return 'Low scaffold\n'
-            'Scaffold (1/3x) Surface and Background (1x)\n'
+            'Scaffold (1/2x) Surface and Background (1x)\n'
             'Dialog background (1x) using secondary variant color';
-      case FlexSurfaceMode.highScaffoldVariantDialog:
-        return 'High scaffold\nScaffold (3x) Surface and Background (1x)\n'
+      case FlexSurfaceMode.veryHighScaffoldVariantDialog:
+        return 'Very high scaffold\nScaffold (3x) Surface and Background (1x)\n'
             'Dialog background (1x) using secondary variant color';
       case FlexSurfaceMode.custom:
         return '';

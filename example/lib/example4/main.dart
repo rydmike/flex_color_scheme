@@ -80,7 +80,7 @@ class DemoApp extends StatelessWidget {
             // background gets a strong blend. This type is commonly used
             // on web/desktop when you wrap content on the scaffold in a
             // card that has a darker background.
-            surfaceMode: FlexSurfaceMode.highScaffold,
+            surfaceMode: FlexSurfaceMode.veryHighScaffold,
             // Our content is not all wrapped in cards in this demo, so
             // we keep the blend level fairly low for good contrast.
             blendLevel: 5,
@@ -96,7 +96,7 @@ class DemoApp extends StatelessWidget {
           // AppColor.schemes list instead.
           darkTheme: FlexThemeData.dark(
             colors: AppColor.schemes[themeController.schemeIndex].dark,
-            surfaceMode: FlexSurfaceMode.highScaffold,
+            surfaceMode: FlexSurfaceMode.veryHighScaffold,
             // We go with a slightly stronger blend in dark mode. It is worth
             // noticing, that in light mode, the alpha value used for the blends
             // is the blend level value, but in dark mode it is 2x this value.

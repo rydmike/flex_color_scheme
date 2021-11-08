@@ -18,17 +18,17 @@ class SurfaceModeButtons extends StatelessWidget {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final List<bool> isSelected = <bool>[
       mode == FlexSurfaceMode.flat,
-      mode == FlexSurfaceMode.highBackground,
-      mode == FlexSurfaceMode.highSurface,
-      mode == FlexSurfaceMode.veryLowSurfaceHighScaffold,
+      mode == FlexSurfaceMode.highBackgroundLowScaffold,
+      mode == FlexSurfaceMode.highSurfaceLowScaffold,
+      mode == FlexSurfaceMode.highScaffoldLowSurface,
       // Only show this exotic blend if flag set.
-      if (showAllModes) mode == FlexSurfaceMode.lowSurfaceHighScaffold,
+      if (showAllModes) mode == FlexSurfaceMode.veryHighScaffoldLevelSurface,
       mode == FlexSurfaceMode.lowScaffold,
-      mode == FlexSurfaceMode.highScaffold,
+      mode == FlexSurfaceMode.veryHighScaffold,
       // Only show these exotic blend modes in wider media, there is not
       // enough room for them on phones, and they are not so important.
       if (showAllModes) mode == FlexSurfaceMode.lowScaffoldVariantDialog,
-      if (showAllModes) mode == FlexSurfaceMode.highScaffoldVariantDialog,
+      if (showAllModes) mode == FlexSurfaceMode.veryHighScaffoldVariantDialog,
     ];
     return ToggleButtons(
       isSelected: isSelected,

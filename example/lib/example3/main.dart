@@ -106,7 +106,7 @@ class DemoApp extends StatelessWidget {
             // We don't have to use the same surface mode in dark mode, for an
             // interesting effect here we use a mode where scaffold background
             // color gets a much higher blend value than surface and background.
-            surfaceMode: FlexSurfaceMode.highScaffold,
+            surfaceMode: FlexSurfaceMode.veryHighScaffold,
             // You don't have to use same blend level or mode in light
             // and dark mode, here we use a lower value in dark mode, that
             // goes better together with the highScaffold mode.
