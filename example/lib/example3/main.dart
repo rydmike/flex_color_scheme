@@ -43,19 +43,19 @@ Future<void> main() async {
 // Create a custom FlexSchemeData with name, description and a light and dark
 // FlexSchemeColors. These are the same example colors used in example 2.
 const FlexSchemeData _myFlexScheme = FlexSchemeData(
-  name: 'Toledo purple',
-  description: 'Purple theme created from custom defined colors.',
+  name: 'Midnight blue',
+  description: 'Midnight blue theme, custom definition of all colors',
   light: FlexSchemeColor(
-    primary: Color(0xFF4E0028),
-    primaryVariant: Color(0xFF320019),
-    secondary: Color(0xFF003419),
-    secondaryVariant: Color(0xFF002411),
+    primary: Color(0xFF00296B),
+    primaryVariant: Color(0xFF2F5C91),
+    secondary: Color(0xFFFF7B00),
+    secondaryVariant: Color(0xFFFDB100),
   ),
   dark: FlexSchemeColor(
-    primary: Color(0xFF9E7389),
-    primaryVariant: Color(0xFF775C69),
-    secondary: Color(0xFF738F81),
-    secondaryVariant: Color(0xFF5C7267),
+    primary: Color(0xFF6B8BC3),
+    primaryVariant: Color(0xFF4874AA),
+    secondary: Color(0xffff7155),
+    secondaryVariant: Color(0xFFF1CB9D),
   ),
 );
 
@@ -90,6 +90,8 @@ class DemoApp extends StatelessWidget {
             blendLevel: 20,
             appBarElevation: 0.5,
             useSubThemes: themeController.useSubThemes,
+            // Returns comfortable density on desktops, instead of compact,
+            /// like the `VisualDensity.adaptivePlatformDensity` does.
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
           ),

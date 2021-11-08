@@ -48,11 +48,10 @@ class HomePage extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.all(margins),
                 children: <Widget>[
-                  Text('Theme', style: headline4),
                   const Text(
-                    'This example shows how you can use all the built in '
-                    'color schemes in FlexColorScheme, add 3 custom schemes to '
-                    'it and how to select the used theme.\n\n'
+                    'FlexColorScheme example 4 shows how you can use all the '
+                    'built-in color schemes, add 3 custom schemes to '
+                    'it and how to select the used theme. '
                     'A primary color branding style common on desktop and web '
                     'is used. '
                     'The new opinionated widget theming is ON. You can '
@@ -63,15 +62,17 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 8),
                   // Wrap these in a card for a nice design effect.
                   Card(
-                    child: Column(
-                      children: <Widget>[
-                        // A 3-way theme toggle switch that shows the scheme.
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: margins,
-                            horizontal: margins + 4,
-                          ),
-                          child: FlexThemeModeSwitch(
+                    margin: EdgeInsets.zero,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: margins,
+                        horizontal: margins + 4,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          // A 3-way theme toggle switch that shows the scheme.
+                          FlexThemeModeSwitch(
                             themeMode: controller.themeMode,
                             onThemeModeChanged: controller.setThemeMode,
                             flexSchemeData:
@@ -81,35 +82,34 @@ class HomePage extends StatelessWidget {
                             buttonOrder:
                                 FlexThemeModeButtonOrder.lightSystemDark,
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        // Theme popup menu button to select color scheme.
-                        ThemePopupMenu(
-                          schemeIndex: controller.schemeIndex,
-                          onChanged: controller.setSchemeIndex,
-                        ),
-                        const SizedBox(height: 8),
-                        // Active theme color indicators.
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: margins,
+                          const SizedBox(height: 8),
+                          // Theme popup menu button to select color scheme.
+                          ThemePopupMenu(
+                            contentPadding: EdgeInsets.zero,
+                            schemeIndex: controller.schemeIndex,
+                            onChanged: controller.setSchemeIndex,
                           ),
-                          child: const ShowThemeColors(),
-                        ),
-                        const SizedBox(height: 8),
-                        SwitchListTile.adaptive(
-                          title: const Text('Use sub theming'),
-                          subtitle: const Text(
-                              'Enable opinionated widget sub themes'),
-                          value: controller.useSubThemes,
-                          onChanged: controller.setUseSubThemes,
-                        ),
-                        // Open some sub-pages
-                        const SubPages(),
-                      ],
+                          const SizedBox(height: 8),
+                          // Active theme color indicators.
+                          const ShowThemeColors(),
+                          const SizedBox(height: 8),
+                          SwitchListTile.adaptive(
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text('Use sub theming'),
+                            subtitle: const Text(
+                                'Enable opinionated widget sub themes'),
+                            value: controller.useSubThemes,
+                            onChanged: controller.setUseSubThemes,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
+                  // Open some sub-pages
+                  const SubPages(initialOpen: false),
+                  const SizedBox(height: 8),
+                  const Divider(),
                   Text('Theme Showcase', style: headline4),
                   const ThemeShowcase(),
                 ],

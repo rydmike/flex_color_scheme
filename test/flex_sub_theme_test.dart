@@ -677,6 +677,8 @@ void main() {
             minWidth: 40,
             height: 40,
             padding: const EdgeInsets.symmetric(horizontal: 16),
+            layoutBehavior: ButtonBarLayoutBehavior.constrained,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             hoverColor: colorScheme.primary
                 .blendAlpha(Colors.white, 0x40)
                 .withAlpha(0x19),

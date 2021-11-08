@@ -280,7 +280,7 @@ class _HomePageState extends State<HomePage>
                     children: const <Widget>[
                       Text(
                         'With this demo you can try all features and themes in '
-                        'FlexColorScheme v4 (alpha1). Find a color scheme you '
+                        'FlexColorScheme v4. Find a color scheme you '
                         'like, experiment with the new surface blend modes and '
                         'levels. See how the AppBar theme options work. '
                         'Try the true black option for dark '
@@ -859,7 +859,7 @@ class _SubThemes extends StatelessWidget {
                 ),
                 SwitchListTile.adaptive(
                   title: const Text('Themed state effects'),
-                  subtitle: const Text('Hover, focus, highlight and '
+                  subtitle: const Text('Disable, hover, focus, highlight and '
                       'splash use primary color'),
                   value: controller.themedEffects,
                   onChanged: controller.setInteractionEffects,
@@ -951,7 +951,7 @@ class _TextField extends StatelessWidget {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(16),
             child: TextInputField(),
           ),
         ],
@@ -1336,7 +1336,7 @@ class _MaterialButtonsShowcase extends StatelessWidget {
       command: command,
       title: const Text('Themed Material Buttons'),
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -1351,7 +1351,9 @@ class _MaterialButtonsShowcase extends StatelessWidget {
                   style: Theme.of(context).textTheme.subtitle1),
             ),
             const LegacyButtonShowcase(),
+            const SizedBox(height: 8),
             const LegacyButtonShowcase(enabled: false),
+            const SizedBox(height: 8),
             const LegacyButtonIconShowcase(),
           ],
         ),
@@ -1373,7 +1375,7 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
       command: command,
       title: const Text('Themed Buttons Switches and Chips'),
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const <Widget>[

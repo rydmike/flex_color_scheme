@@ -325,7 +325,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     final bool isDesktop = media.size.width >= AppData.desktopBreakpoint;
     // Secret sauce for a mock responsive toggleable drawer-rail-menu.
     if (!isDesktop) menuWidth = AppData.railWidth;
-    if (!isDesktop && isMenuClosed) menuWidth = 0.1;
+    if (!isDesktop && isMenuClosed) menuWidth = 0;
     if (!isDesktop && !isMenuClosed) menuWidth = AppData.railWidth;
     if (isDesktop && !isMenuExpanded) menuWidth = AppData.railWidth;
     if (isDesktop && isMenuExpanded) menuWidth = AppData.menuWidth;

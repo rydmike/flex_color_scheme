@@ -43,28 +43,22 @@ Future<void> main() async {
 // without the name and description, but in this example we will use
 // the name and description to describe created themes.
 //
-// The example custom colors here are fairly close to the built-in color scheme
-// 'Barossa'. If you like them, you can probably use it instead. It is not
-// exactly the same though. The 'Barossa' variant is tuned a bit differently.
-// The 'Barossa' theme was introduced in version 1.4.1, and was inspired
-// and based on this example.
-//
 // Here we use local const values for our color palette definitions, you may
 // want to bundle your custom color values in a class as static const values.
 const FlexSchemeData _myFlexScheme = FlexSchemeData(
-  name: 'Toledo purple',
-  description: 'Purple theme created from custom defined colors.',
+  name: 'Midnight blue',
+  description: 'Midnight blue theme, custom definition of all colors',
   light: FlexSchemeColor(
-    primary: Color(0xFF4E0028),
-    primaryVariant: Color(0xFF320019),
-    secondary: Color(0xFF003419),
-    secondaryVariant: Color(0xFF002411),
+    primary: Color(0xFF00296B),
+    primaryVariant: Color(0xFF2F5C91),
+    secondary: Color(0xFFFF7B00),
+    secondaryVariant: Color(0xFFFDB100),
   ),
   dark: FlexSchemeColor(
-    primary: Color(0xFF9E7389),
-    primaryVariant: Color(0xFF775C69),
-    secondary: Color(0xFF738F81),
-    secondaryVariant: Color(0xFF5C7267),
+    primary: Color(0xFF6B8BC3),
+    primaryVariant: Color(0xFF4874AA),
+    secondary: Color(0xffff7155),
+    secondaryVariant: Color(0xFFF1CB9D),
   ),
 );
 
@@ -96,7 +90,11 @@ class DemoApp extends StatelessWidget {
               // Toggle using FlexColorScheme sub-themes, via theme controller.
               useSubThemes: themeController.useSubThemes,
               appBarElevation: 1,
-              visualDensity: FlexColorScheme.comfortablePlatformDensity,
+              // Here we want the large default visual density on all platforms.
+              visualDensity: VisualDensity.standard,
+              // You can add a font via just a fontFamily from e.g. GoogleFonts,
+              // but for better results, prefer defining complete TextThemes
+              // and assign them to textTheme and primaryTextTheme.
               fontFamily: GoogleFonts.notoSans().fontFamily,
             ),
             // Same setup for the dark theme, but with FlexThemeData.dark().
@@ -104,7 +102,7 @@ class DemoApp extends StatelessWidget {
               colors: _myFlexScheme.dark,
               useSubThemes: themeController.useSubThemes,
               appBarElevation: 4,
-              visualDensity: FlexColorScheme.comfortablePlatformDensity,
+              visualDensity: VisualDensity.standard,
               fontFamily: GoogleFonts.notoSans().fontFamily,
             ),
             // Use the dark or light theme based on controller setting.

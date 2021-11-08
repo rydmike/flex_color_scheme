@@ -8,9 +8,12 @@ class ThemePopupMenu extends StatelessWidget {
     Key? key,
     required this.schemeIndex,
     required this.onChanged,
+    this.contentPadding,
   }) : super(key: key);
   final int schemeIndex;
   final ValueChanged<int> onChanged;
+  // Defaults to 16, like ListTile does.
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,8 @@ class ThemePopupMenu extends StatelessWidget {
           )
       ],
       child: ListTile(
+        contentPadding:
+            contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
         title: Text(
           '${AppColor.schemes[schemeIndex].name} color scheme',
         ),

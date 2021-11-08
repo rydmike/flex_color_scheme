@@ -2954,21 +2954,18 @@ class FlexColorScheme with Diagnosticable {
     ),
   );
 
-  /// Returns a [VisualDensity] that is adaptive to `comfortable` instead
-  /// of to the default `compact`, based on active [defaultTargetPlatform].
+  /// Returns a [VisualDensity] that is [defaultTargetPlatform] adaptive to
+  /// [VisualDensity.comfortable] instead of to [VisualDensity.compact].
   ///
   /// For desktop platforms, this returns [VisualDensity.comfortable], and
   /// for other platforms, it returns the default [VisualDensity.standard].
   ///
   /// This is a variant of the [VisualDensity.adaptivePlatformDensity] that
-  /// returns [VisualDensity.compact] for desktop platforms. If this seems
-  /// too dense and you prefer `comfortable` on desktop and still like the even
-  /// less dense default on on devices, then use this platform dependent
-  /// [VisualDensity] function as `visualDensity` for your theme.
+  /// returns [VisualDensity.compact] for desktop platforms.
   ///
-  /// The comfortable visual density is nice on desktop and desktop web laptops
-  /// that have touch screens as it keeps touch targets a bit larger than
-  /// when using compact.
+  /// The comfortable visual density is useful on desktop and desktop web
+  /// laptops that have touch screens as it keeps touch targets a bit larger
+  /// than when using compact.
   static VisualDensity get comfortablePlatformDensity {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:

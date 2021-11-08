@@ -395,6 +395,8 @@ class FlexSubThemes {
         minWidth: minButtonSize.width,
         height: minButtonSize.height,
         padding: padding,
+        layoutBehavior: ButtonBarLayoutBehavior.constrained,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         hoverColor: colorScheme.primary
             .blendAlpha(Colors.white, kHoverAlphaBlend)
             .withAlpha(kHoverAlpha),

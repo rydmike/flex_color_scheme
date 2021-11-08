@@ -61,7 +61,7 @@ class ThemeSelectButtons extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(6),
           child: Text(
-            'Custom\npurple',
+            'Custom\nblue',
             textAlign: TextAlign.center,
             style: style,
           ),

@@ -40,39 +40,32 @@ class HomePage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.all(margins),
           children: <Widget>[
-            Text('Theme', style: headline4),
             const Text(
-              'This example shows how to use a selected '
-              'predefined color scheme in FlexColorScheme for '
-              'light and dark theme mode, and switch between the modes. '
-              'A theme showcase displays the resulting theme using '
-              'common Material widgets.',
+              'FlexColorScheme example 1 shows how to use a selected '
+              'predefined color scheme for light and dark theme mode, and '
+              'switch between the modes. A theme showcase displays the '
+              'resulting theme using common Material widgets',
             ),
             const SizedBox(height: 8),
             // A 3-way theme mode toggle switch that shows the color scheme.
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: margins, horizontal: margins + 4),
-              child: FlexThemeModeSwitch(
-                themeMode: themeMode,
-                onThemeModeChanged: onThemeModeChanged,
-                flexSchemeData: flexSchemeData,
-                buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
-              ),
+            FlexThemeModeSwitch(
+              themeMode: themeMode,
+              onThemeModeChanged: onThemeModeChanged,
+              flexSchemeData: flexSchemeData,
+              buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
             ),
             // Show theme name and description.
             ListTile(
+              contentPadding: EdgeInsets.zero,
               title: Text('${flexSchemeData.name} theme'),
               subtitle: Text(flexSchemeData.description),
             ),
             // Show all key active theme colors.
-            const Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
-              child: ShowThemeColors(),
-            ),
-            const SizedBox(height: 16),
+            const ShowThemeColors(),
+            const SizedBox(height: 8),
+            const Divider(),
             Text('Theme Showcase', style: headline4),
+            const SizedBox(height: 8),
             const ThemeShowcase(),
           ],
         ),

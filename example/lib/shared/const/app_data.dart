@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,11 +33,11 @@ class AppData {
   static const double maxBodyWidth = 1000;
 
   // Edge padding insets for page content on the screen.
-  static const double edgeInsetsPhone = 6;
-  static const double edgeInsetsTablet = 12;
-  static const double edgeInsetsDesktop = 16;
+  static const double edgeInsetsPhone = 8;
+  static const double edgeInsetsTablet = 14;
+  static const double edgeInsetsDesktop = 18;
   // Used by grid layout when in >= 4 column layout mode.
-  static const double edgeInsetsBigDesktop = 18;
+  static const double edgeInsetsBigDesktop = 24;
 
   static double responsiveInsets(double width) {
     if (width < phoneBreakpoint) return edgeInsetsPhone;
@@ -70,11 +71,10 @@ class AppData {
   // Get the main font used in the examples.
   static String? get font => GoogleFonts.notoSans().fontFamily;
 
-  // Defining the visual density here to so we can change it one spot when
+  // Defining the visual density here to so we can change it in one spot when
   // we want to try different options.
-  // // VisualDensity.standard;
-  static VisualDensity get visualDensity => VisualDensity.standard;
-  // FlexColorScheme.comfortablePlatformDensity;
+  static VisualDensity get visualDensity =>
+      FlexColorScheme.comfortablePlatformDensity;
 
   // We define a custom text theme for our app. This is just for demo purposes
   // on how to setup a custom text theme. This works just as well with normal
@@ -104,13 +104,7 @@ class AppData {
     headline4: TextStyle(
       fontSize: 28, // Same as M3, defaults to 34 in Material2018 Typography.
     ),
-    // I just thought this looked better on the buttons, make them more
-    // prominent by being bigger, but with a bit tighter text.
-    button: TextStyle(
-      fontSize: 16, // Defaults to 14 in Material2018 Typography.
-      // letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
-    ),
-    // I chose this, by coincidence it happened to match what M3/You uses.
+    // I chose this, by coincidence I later saw it happens to match what M3 too.
     overline: TextStyle(
       fontSize: 11, // Defaults to 10 in Material2018 Typography.
       letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.

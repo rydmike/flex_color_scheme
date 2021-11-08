@@ -42,51 +42,45 @@ class HomePage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.all(margins),
           children: <Widget>[
-            Text('Theme', style: headline4),
             const Text(
-              'This example shows how to define your own '
-              'FlexSchemeData and create a FlexColorScheme based theme '
-              'from it, and toggle between light and dark mode.\n\n'
+              'FlexColorScheme example 2 shows how to define your own '
+              'FlexSchemeData, create a theme '
+              'from it and toggle between light and dark mode. '
               'The new opinionated widget theming is ON. You can '
               'turn it OFF to use default widget themes. '
               'A theme showcase displays the resulting theme using '
-              'common Material widgets.',
+              'common Material widgets',
             ),
             // A 3-way theme mode toggle switch that shows the color scheme.
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: margins,
-                horizontal: margins + 4,
-              ),
-              child: FlexThemeModeSwitch(
-                // Read the selected themeMode from the controller
-                themeMode: controller.themeMode,
-                // Call the updateThemeMode method when user selects a mode.
-                onThemeModeChanged: controller.setThemeMode,
-                flexSchemeData: flexSchemeData,
-                optionButtonBorderRadius: controller.useSubThemes ? 16 : 4,
-                buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
-              ),
+            FlexThemeModeSwitch(
+              // Read the selected themeMode from the controller
+              themeMode: controller.themeMode,
+              // Call the updateThemeMode method when user selects a mode.
+              onThemeModeChanged: controller.setThemeMode,
+              flexSchemeData: flexSchemeData,
+              optionButtonBorderRadius: controller.useSubThemes ? 16 : 4,
+              buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
             ),
             // Show theme name and description.
             ListTile(
+              contentPadding: EdgeInsets.zero,
               title: Text('${flexSchemeData.name} theme'),
               subtitle: Text(flexSchemeData.description),
             ),
             // Show all key active theme colors.
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: margins),
-              child: const ShowThemeColors(),
-            ),
+            const ShowThemeColors(),
             const SizedBox(height: 8),
             SwitchListTile.adaptive(
+              contentPadding: EdgeInsets.zero,
               title: const Text('Use sub theming'),
               subtitle: const Text('Enable opinionated widget sub themes'),
               value: controller.useSubThemes,
               onChanged: controller.setUseSubThemes,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
+            const Divider(),
             Text('Theme Showcase', style: headline4),
+            const SizedBox(height: 8),
             const ThemeShowcase(),
           ],
         ),

@@ -438,7 +438,6 @@ class _HomePageState extends State<HomePage> {
     final double margins = AppData.responsiveInsets(media.size.width);
     final double topPadding = media.padding.top + kToolbarHeight + margins;
     final double bottomPadding = media.padding.bottom + margins;
-
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
@@ -491,15 +490,13 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.fromLTRB(
                 margins, topPadding, margins, bottomPadding),
             children: <Widget>[
-              Text('Theme', style: headline4),
-              const Text('This example shows how you can use custom colors '
-                  'with FlexColorScheme in light and dark mode, '
-                  'just as defined values in a stateless app.\n\n'
-                  'This example function as developers hot reload playground. '
-                  'It has property placeholders for every feature, that '
-                  'you can modify to try different FlexColorScheme features.'),
+              const Text('This is FlexColorScheme V4 developers hot reload '
+                  'playground. '
+                  'With property values that you can modify and hot '
+                  'reload to try different options and features.'),
               const SizedBox(height: 8),
               ListTile(
+                contentPadding: EdgeInsets.zero,
                 title: const Text('Theme mode'),
                 subtitle: Text('Mode '
                     '${widget.themeMode.toString().dotTail}'),
@@ -517,13 +514,12 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 8),
               // Active theme color indicators.
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: margins),
-                child: const ShowThemeColors(),
-              ),
+              const ShowThemeColors(),
               const SizedBox(height: 8),
               const SubPages(initialOpen: false),
+              const Divider(),
               Text('Theme Showcase', style: headline4),
+              const SizedBox(height: 8),
               const ThemeShowcase(),
             ],
           ),

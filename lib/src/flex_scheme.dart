@@ -1,3 +1,5 @@
+// ignore_for_file: comment_references
+
 /// Enum that can be used to lookup predefined `FlexSchemeData` scheme
 /// definition objects.
 ///
