@@ -1,7 +1,11 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../shared/all_shared_imports.dart';
+import '../shared/const/app_data.dart';
+import '../shared/widgets/app/about.dart';
+import '../shared/widgets/app/show_theme_colors.dart';
+import '../shared/widgets/universal/page_body.dart';
+import '../shared/widgets/universal/theme_showcase.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 1 - Basic Theme Usage

@@ -1,7 +1,15 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../shared/all_shared_imports.dart';
+import '../shared/const/app_color.dart';
+import '../shared/const/app_data.dart';
+import '../shared/controllers/theme_controller.dart';
+import '../shared/widgets/app/about.dart';
+import '../shared/widgets/app/show_sub_pages.dart';
+import '../shared/widgets/app/show_theme_colors.dart';
+import '../shared/widgets/app/theme_popup_menu.dart';
+import '../shared/widgets/universal/page_body.dart';
+import '../shared/widgets/universal/theme_showcase.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 4 - All Themes
@@ -107,7 +115,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   // Open some sub-pages
-                  const SubPages(initialOpen: false),
+                  const ShowSubPages(),
                   const SizedBox(height: 8),
                   const Divider(),
                   Text('Theme Showcase', style: headline4),

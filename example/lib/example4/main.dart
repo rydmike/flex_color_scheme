@@ -1,7 +1,11 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../shared/all_shared_imports.dart';
+import '../shared/const/app_color.dart';
+import '../shared/const/app_data.dart';
+import '../shared/controllers/theme_controller.dart';
+import '../shared/services/theme_service_mem.dart';
+import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------

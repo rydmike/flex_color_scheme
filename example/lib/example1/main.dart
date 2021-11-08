@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../shared/all_shared_imports.dart';
+import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------

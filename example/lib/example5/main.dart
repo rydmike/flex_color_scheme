@@ -4,7 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../shared/all_shared_imports.dart';
+import '../shared/const/app_color.dart';
+import '../shared/const/app_data.dart';
+import '../shared/controllers/theme_controller.dart';
+import '../shared/services/theme_service.dart';
+import '../shared/services/theme_service_prefs.dart';
+import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------

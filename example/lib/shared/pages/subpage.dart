@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../all_shared_imports.dart';
+import '../const/app_data.dart';
+import '../widgets/app/about.dart';
+import '../widgets/app/show_theme_colors.dart';
+import '../widgets/universal/page_body.dart';
+import '../widgets/universal/theme_showcase.dart';
+
 // It is not necessary to review or understand the code in this file in order
 // to understand how to use the FlexColorScheme package demonstrated in
 // the examples.

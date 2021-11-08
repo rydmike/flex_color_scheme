@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/app_data.dart';
+import '../universal/maybe_tooltip.dart';
 
 /// App side menu and rail, used in default example and example 4 and 5.
 ///
@@ -187,12 +188,16 @@ class _MenuItem extends StatelessWidget {
                     maxWidth: menuWidth,
                     child: Row(
                       children: <Widget>[
-                        ConstrainedBox(
-                          constraints: const BoxConstraints.tightFor(
-                            width: 56,
-                            height: 56,
+                        MaybeTooltip(
+                          condition: width == AppData.railWidth,
+                          tooltip: label,
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints.tightFor(
+                              width: 56,
+                              height: 56,
+                            ),
+                            child: Icon(icon, color: iconColor),
                           ),
-                          child: Icon(icon, color: iconColor),
                         ),
                         if (width < AppData.railWidth + 10)
                           const SizedBox.shrink()

@@ -9,17 +9,17 @@ import 'subpage.dart';
 class SubPages extends StatelessWidget {
   const SubPages({
     Key? key,
-    this.command,
-    this.initialOpen = true,
+    required this.isOpen,
+    required this.onTap,
   }) : super(key: key);
-  final HeaderCardCommand? command;
-  final bool initialOpen;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
-      initialOpen: initialOpen,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Page Examples'),
       child: Column(
         children: <Widget>[

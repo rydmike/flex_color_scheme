@@ -4,7 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../shared/all_shared_imports.dart';
+import '../shared/const/app_color.dart';
+import '../shared/const/app_data.dart';
+import '../shared/controllers/theme_controller.dart';
+import '../shared/pages/sub_pages.dart';
+import '../shared/widgets/app/app_bar_style_buttons.dart';
+import '../shared/widgets/app/platform_popup_menu.dart';
+import '../shared/widgets/app/responsive_scaffold.dart';
+import '../shared/widgets/app/show_theme_colors.dart';
+import '../shared/widgets/app/surface_mode_buttons.dart';
+import '../shared/widgets/app/system_nav_bar_style_buttons.dart';
+import '../shared/widgets/app/tab_bar_style_buttons.dart';
+import '../shared/widgets/app/theme_popup_menu.dart';
+import '../shared/widgets/app/theme_selector.dart';
+import '../shared/widgets/universal/animated_switch_hide.dart';
+import '../shared/widgets/universal/header_card.dart';
+import '../shared/widgets/universal/theme_mode_switch.dart';
+import '../shared/widgets/universal/theme_showcase.dart';
+
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
@@ -28,27 +45,35 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin {
+class _HomePageState extends State<HomePage> {
   // Scroll controller used to jump to stored scroll position, needed as a
-  // workaround, to a workaround for issue with StaggeredGridView.
+  // workaround, to the workaround, for an issue with StaggeredGridView.
+  // (Added to deal with StaggeredGridView issue.)
   late ScrollController scrollController;
 
+  // Open close/state of each card. Normally we would keep this state in the
+  // the cards to handle it themselves, but due to the way we have to work
+  // around the rebuild issue with the used StaggeredGridView, this state must
+  // be managed here, so we can restore during card rebuilds, when the grid
+  // view is forced to rebuild.
+  // (Added to deal with StaggeredGridView issue.)
+  late List<bool> isCardOpen;
+
+  // The number of cards in the grid, must match the number we add to view!
+  static const int _nrOfCards = 21;
+
   // Used to store listened to scroll position.
+  // (Added to deal with StaggeredGridView issue.)
   double scrollPos = 0;
   // Current amount of shown columns in the grid view.
   int columns = 1;
   // Previous columns, when we last stored a scroll position.
+  // (Added to deal with StaggeredGridView issue.)
   int prevColumns = 0;
 
-  // Set command for cards open/close to none for all card groups
-  HeaderCardCommand commandMain = HeaderCardCommand.none;
-  HeaderCardCommand commandSettings = HeaderCardCommand.none;
-  HeaderCardCommand commandThemed = HeaderCardCommand.none;
-
-  // Must override wantKeepAlive, when using AutomaticKeepAliveClientMixin.
-  @override
-  bool get wantKeepAlive => true;
+  // state that decides id we show all blend options or not,
+  // depending on if it will fit in the layout.
+  bool showAllBlends = false;
 
   void _scrollPosition() {
     scrollPos = scrollController.position.pixels;
@@ -67,11 +92,19 @@ class _HomePageState extends State<HomePage>
     super.didChangeDependencies();
   }
 
+  // Toggle the state of a card as open/closed.
+  void toggleCard(int index) {
+    setState(() {
+      isCardOpen[index] = !isCardOpen[index];
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     scrollController = ScrollController();
     scrollController.addListener(_scrollPosition);
+    isCardOpen = List<bool>.generate(_nrOfCards, (int i) => true);
   }
 
   @override
@@ -81,24 +114,7 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
-  void didUpdateWidget(covariant HomePage oldWidget) {
-    // Set command for cards open/close to none for all card groups
-    commandMain = HeaderCardCommand.none;
-    commandSettings = HeaderCardCommand.none;
-    commandThemed = HeaderCardCommand.none;
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // Must call super when using AutomaticKeepAliveClientMixin.
-    super.build(context);
-
-    // Set command for cards open/close to none for all card groups
-    // HeaderCardCommand commandMain = HeaderCardCommand.none;
-    // HeaderCardCommand commandSettings = HeaderCardCommand.none;
-    // HeaderCardCommand commandThemed = HeaderCardCommand.none;
-
     // In dark mode?
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     // Short handle to the media query, used to get size and paddings.
@@ -107,7 +123,6 @@ class _HomePageState extends State<HomePage>
     // extendBodyBehindAppBar and extendBody.
     final double topPadding = media.padding.top + kToolbarHeight;
     final double bottomPadding = media.padding.bottom;
-
     // We are on phone width media, based on our definition in this app.
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
 
@@ -135,43 +150,45 @@ class _HomePageState extends State<HomePage>
         onSelect: (int index) async {
           // Open all cards
           if (index == 0) {
-            setState(() {
-              commandMain = HeaderCardCommand.open;
-              commandSettings = HeaderCardCommand.open;
-              commandThemed = HeaderCardCommand.open;
-            });
+            for (int i = 0; i < isCardOpen.length; i++) {
+              isCardOpen[i] = true;
+            }
+            setState(() {});
           }
           // Close all cards
           if (index == 1) {
-            setState(() {
-              commandMain = HeaderCardCommand.close;
-              commandSettings = HeaderCardCommand.close;
-              commandThemed = HeaderCardCommand.close;
-            });
+            for (int i = 0; i < isCardOpen.length; i++) {
+              isCardOpen[i] = false;
+            }
+            setState(() {});
           }
           // Open settings cards
           if (index == 2) {
-            setState(() {
-              commandSettings = HeaderCardCommand.open;
-            });
+            for (int i = 1; i < 10; i++) {
+              isCardOpen[i] = true;
+            }
+            setState(() {});
           }
           // Close settings cards
           if (index == 3) {
-            setState(() {
-              commandSettings = HeaderCardCommand.close;
-            });
+            for (int i = 1; i < 10; i++) {
+              isCardOpen[i] = false;
+            }
+            setState(() {});
           }
           // Open themed cards
           if (index == 4) {
-            setState(() {
-              commandThemed = HeaderCardCommand.open;
-            });
+            for (int i = 11; i < isCardOpen.length; i++) {
+              isCardOpen[i] = true;
+            }
+            setState(() {});
           }
           // Close themed cards
           if (index == 5) {
-            setState(() {
-              commandThemed = HeaderCardCommand.close;
-            });
+            for (int i = 11; i < isCardOpen.length; i++) {
+              isCardOpen[i] = false;
+            }
+            setState(() {});
           }
           // Reset theme settings.
           if (index == 6) {
@@ -201,45 +218,47 @@ class _HomePageState extends State<HomePage>
 
           // Flag used to hide some blend mode options that wont fit when
           // using toggle buttons on small media.
-          final bool showAllBlends = constraints.maxWidth / columns > 445;
+          showAllBlends = constraints.maxWidth / columns > 445;
           // Make margins respond to media size and nr of columns.
           double margins = AppData.edgeInsetsPhone;
           if (!isPhone && columns == 1) margins = AppData.edgeInsetsTablet;
           if (columns >= 2) margins = AppData.edgeInsetsDesktop;
           if (columns >= 4) margins = AppData.edgeInsetsBigDesktop;
 
-          // Without the value key below that changes when the amount of columns
-          // updates, the StaggeredGridView or also the WaterfallFlow layout
-          // does not work correctly. The issue appears related in both
+          // Without the value key `key: ValueKey<int>(columns)` further below,
+          // that changes when the amount of columns updates,
+          // the StaggeredGridView and also the WaterfallFlow layouts
+          // do not work correctly. The issue appears related in both
           // packages, but end breaking style looks a bit different, but cause
-          // is they, break when resizing media and columns change.
+          // is they, break when resizing media size and the columns change.
           // Issue:
           // https://github.com/letsar/flutter_staggered_grid_view/issues/138
           // https://github.com/letsar/flutter_staggered_grid_view/issues/167
+          //
           // This key causes another problem as it naturally causes a complete
-          // rebuild when the key changes. Then w also  loose the layout
-          // scroll position even with AutomaticKeepAliveClientMixin, so when
-          // columns change/ we are always back at start of view, not good!
-          // My temp hack for this was to listen to the used scroll controller
+          // rebuild when the key changes. Then we also loose the layout
+          // scroll position even with a AutomaticKeepAliveClientMixin, so when
+          // columns change, we are always back at start of view, not good!
+          // A temp hack for this was to listen to the used scroll controller
           // position, store its value in local state and jump to position it
-          // last had, when dependencies changes and we also have a different
-          // column count than we had before. It kind of works, but even with
+          // last had, when dependencies changes and we also had a different
+          // column count than we had before. It "kind of" works, but even with
           // jumpTo position, it is visible that it jumped to start and then
           // back again to where we were. Scroll position is tricky to keep
-          // logical and right in this kind of layout when columns change.
+          // logical in this kind of layout anyway, when columns change.
           //
           // Regarding the layout issue, I have not found a Masonry or
-          // Staggered grid lik view package that would be able to handle
+          // Staggered grid view like package that would be able to handle
           // this layout correctly. I'm beginning to wonder if the issue
-          // might be at a lower layer in layout widget used by both
-          // StaggeredGridView and WaterfallFlow. Using StaggeredGridView below
-          // the usage with WaterfallFlow is very similar. The WaterfallFlow
+          // might be at a lower layer in widget layout used by both
+          // StaggeredGridView and WaterfallFlow. Using StaggeredGridView below,
+          // but the usage with WaterfallFlow is very similar. The WaterfallFlow
           // seems to be a bit smoother/faster, but I got it to crash when doing
           // very quick resizing on desktop builds. StaggeredGridView is a tad
           // choppier, but so far it did not crash.
           //
           // For a WaterfallFlow implementation, import it and replace with
-          // this until and including the itemBuilder row:
+          // this until, but not including, the itemBuilder row:
           //
           // return WaterfallFlow.builder(
           //   key: ValueKey<int>(columns),
@@ -255,7 +274,6 @@ class _HomePageState extends State<HomePage>
           //     crossAxisSpacing: margins,
           //     mainAxisSpacing: margins,
           //   ),
-          //   itemBuilder: (BuildContext context, int index) => <Widget>[
           //
           return StaggeredGridView.countBuilder(
             key: ValueKey<int>(columns),
@@ -270,9 +288,13 @@ class _HomePageState extends State<HomePage>
               bottomPadding + margins,
             ),
             staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
+            //
             itemBuilder: (BuildContext context, int index) => <Widget>[
               HeaderCard(
-                command: commandMain,
+                isOpen: isCardOpen[0],
+                onTap: () {
+                  toggleCard(0);
+                },
                 title: const Text('FlexColorScheme Info'),
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -316,56 +338,137 @@ class _HomePageState extends State<HomePage>
               // The "Settings" Cards.
               _ThemeColors(
                 controller: widget.controller,
-                command: commandSettings,
+                isOpen: isCardOpen[1],
+                onTap: () {
+                  toggleCard(1);
+                },
               ),
               _ThemeMode(
                 controller: widget.controller,
-                command: commandSettings,
+                isOpen: isCardOpen[2],
+                onTap: () {
+                  toggleCard(2);
+                },
               ),
               _Platform(
                 controller: widget.controller,
-                command: commandSettings,
+                isOpen: isCardOpen[3],
+                onTap: () {
+                  toggleCard(3);
+                },
               ),
               _SurfaceBlends(
                 controller: widget.controller,
-                command: commandSettings,
+                isOpen: isCardOpen[4],
+                onTap: () {
+                  toggleCard(4);
+                },
                 showAllBlends: showAllBlends,
               ),
               _SubThemes(
                 controller: widget.controller,
-                command: commandSettings,
+                isOpen: isCardOpen[5],
+                onTap: () {
+                  toggleCard(5);
+                },
               ),
               _TextField(
                 controller: widget.controller,
-                command: commandSettings,
+                isOpen: isCardOpen[6],
+                onTap: () {
+                  toggleCard(6);
+                },
               ),
               _AppBarSettings(
                 controller: widget.controller,
-                command: commandSettings,
+                isOpen: isCardOpen[7],
+                onTap: () {
+                  toggleCard(7);
+                },
               ),
               _TabBar(
                 controller: widget.controller,
-                command: commandSettings,
+                isOpen: isCardOpen[8],
+                onTap: () {
+                  toggleCard(8);
+                },
               ),
               _BottomNavigation(
                 controller: widget.controller,
-                command: commandSettings,
+                isOpen: isCardOpen[9],
+                onTap: () {
+                  toggleCard(9);
+                },
               ),
-              SubPages(command: commandSettings),
-              //
+              SubPages(
+                isOpen: isCardOpen[10],
+                onTap: () {
+                  toggleCard(10);
+                },
+              ),
               // The "Themed" results Cards.
-              _MaterialButtonsShowcase(command: commandThemed),
-              _ToggleFabSwitchesChipsShowcase(command: commandThemed),
-              _ListTileShowcase(command: commandThemed),
-              _TimePickerDialogShowcase(command: commandThemed),
-              _DatePickerDialogShowcase(command: commandThemed),
-              _DialogShowcase(command: commandThemed),
-              _MaterialAndBottomSheetShowcase(command: commandThemed),
-              _CardShowcase(command: commandThemed),
-              _TextThemeShowcase(command: commandThemed),
-              _PrimaryTextThemeShowcase(command: commandThemed),
+              _MaterialButtonsShowcase(
+                isOpen: isCardOpen[11],
+                onTap: () {
+                  toggleCard(11);
+                },
+              ),
+              _ToggleFabSwitchesChipsShowcase(
+                isOpen: isCardOpen[12],
+                onTap: () {
+                  toggleCard(12);
+                },
+              ),
+              _ListTileShowcase(
+                isOpen: isCardOpen[13],
+                onTap: () {
+                  toggleCard(13);
+                },
+              ),
+              _TimePickerDialogShowcase(
+                isOpen: isCardOpen[14],
+                onTap: () {
+                  toggleCard(14);
+                },
+              ),
+              _DatePickerDialogShowcase(
+                isOpen: isCardOpen[15],
+                onTap: () {
+                  toggleCard(15);
+                },
+              ),
+              _DialogShowcase(
+                isOpen: isCardOpen[16],
+                onTap: () {
+                  toggleCard(16);
+                },
+              ),
+              _MaterialAndBottomSheetShowcase(
+                isOpen: isCardOpen[17],
+                onTap: () {
+                  toggleCard(17);
+                },
+              ),
+              _CardShowcase(
+                isOpen: isCardOpen[18],
+                onTap: () {
+                  toggleCard(18);
+                },
+              ),
+              _TextThemeShowcase(
+                isOpen: isCardOpen[19],
+                onTap: () {
+                  toggleCard(19);
+                },
+              ),
+              _PrimaryTextThemeShowcase(
+                isOpen: isCardOpen[20],
+                onTap: () {
+                  toggleCard(20);
+                },
+              ),
             ].elementAt(index),
-            itemCount: 21,
+            itemCount: _nrOfCards,
           );
         }),
       ),
@@ -404,15 +507,18 @@ class _ThemeColors extends StatelessWidget {
   const _ThemeColors({
     Key? key,
     required this.controller,
-    this.command,
+    required this.isOpen,
+    required this.onTap,
   }) : super(key: key);
   final ThemeController controller;
-  final HeaderCardCommand? command;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Theme Colors'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -452,10 +558,12 @@ class _ThemeMode extends StatelessWidget {
   const _ThemeMode({
     Key? key,
     required this.controller,
-    this.command,
+    required this.isOpen,
+    required this.onTap,
   }) : super(key: key);
   final ThemeController controller;
-  final HeaderCardCommand? command;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -463,7 +571,8 @@ class _ThemeMode extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Theme Mode'),
       child: Column(
         children: <Widget>[
@@ -595,15 +704,18 @@ class _Platform extends StatelessWidget {
   const _Platform({
     Key? key,
     required this.controller,
-    this.command,
+    required this.isOpen,
+    required this.onTap,
   }) : super(key: key);
   final ThemeController controller;
-  final HeaderCardCommand? command;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Platform'),
       child: Column(
         children: <Widget>[
@@ -641,11 +753,13 @@ class _SurfaceBlends extends StatelessWidget {
   const _SurfaceBlends({
     Key? key,
     required this.controller,
-    this.command,
+    required this.isOpen,
+    required this.onTap,
     required this.showAllBlends,
   }) : super(key: key);
   final ThemeController controller;
-  final HeaderCardCommand? command;
+  final bool isOpen;
+  final VoidCallback onTap;
   final bool showAllBlends;
 
   String explainMode(final FlexSurfaceMode mode) {
@@ -686,7 +800,8 @@ class _SurfaceBlends extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Surface Blends'),
       child: Column(
         children: <Widget>[
@@ -778,18 +893,21 @@ class _SurfaceBlends extends StatelessWidget {
 }
 
 class _SubThemes extends StatelessWidget {
-  const _SubThemes({
-    Key? key,
-    required this.controller,
-    this.command,
-  }) : super(key: key);
+  const _SubThemes(
+      {Key? key,
+      required this.controller,
+      required this.isOpen,
+      required this.onTap})
+      : super(key: key);
   final ThemeController controller;
-  final HeaderCardCommand? command;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Sub Theme Settings'),
       child: Column(
         children: <Widget>[
@@ -889,18 +1007,21 @@ class _SubThemes extends StatelessWidget {
 }
 
 class _TextField extends StatelessWidget {
-  const _TextField({
-    Key? key,
-    required this.controller,
-    this.command,
-  }) : super(key: key);
+  const _TextField(
+      {Key? key,
+      required this.controller,
+      required this.isOpen,
+      required this.onTap})
+      : super(key: key);
   final ThemeController controller;
-  final HeaderCardCommand? command;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('TextField Settings'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -961,13 +1082,15 @@ class _TextField extends StatelessWidget {
 }
 
 class _AppBarSettings extends StatelessWidget {
-  const _AppBarSettings({
-    Key? key,
-    required this.controller,
-    this.command,
-  }) : super(key: key);
+  const _AppBarSettings(
+      {Key? key,
+      required this.controller,
+      required this.isOpen,
+      required this.onTap})
+      : super(key: key);
   final ThemeController controller;
-  final HeaderCardCommand? command;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   String explainAppBarStyle(final FlexAppBarStyle style, final bool isLight) {
     switch (style) {
@@ -993,7 +1116,8 @@ class _AppBarSettings extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('AppBar Settings'),
       child: Column(
         children: <Widget>[
@@ -1124,13 +1248,15 @@ class _AppBarSettings extends StatelessWidget {
 }
 
 class _TabBar extends StatelessWidget {
-  const _TabBar({
-    Key? key,
-    required this.controller,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
+  const _TabBar(
+      {Key? key,
+      required this.controller,
+      required this.isOpen,
+      required this.onTap})
+      : super(key: key);
   final ThemeController controller;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   String explainTabStyle(final FlexTabBarStyle style) {
     switch (style) {
@@ -1155,7 +1281,8 @@ class _TabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('TabBar Settings'),
       child: Column(
         children: <Widget>[
@@ -1188,13 +1315,15 @@ class _TabBar extends StatelessWidget {
 }
 
 class _BottomNavigation extends StatelessWidget {
-  const _BottomNavigation({
-    Key? key,
-    required this.controller,
-    this.command,
-  }) : super(key: key);
+  const _BottomNavigation(
+      {Key? key,
+      required this.controller,
+      required this.isOpen,
+      required this.onTap})
+      : super(key: key);
   final ThemeController controller;
-  final HeaderCardCommand? command;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   String explainStyle(final FlexSystemNavBarStyle style, final bool isLight) {
     switch (style) {
@@ -1217,7 +1346,8 @@ class _BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Bottom Navigation Settings'),
       child: Column(
         children: <Widget>[
@@ -1326,14 +1456,17 @@ class _BottomNavigation extends StatelessWidget {
 class _MaterialButtonsShowcase extends StatelessWidget {
   const _MaterialButtonsShowcase({
     Key? key,
-    this.command,
+    required this.isOpen,
+    required this.onTap,
   }) : super(key: key);
-  final HeaderCardCommand? command;
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Themed Material Buttons'),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -1363,16 +1496,17 @@ class _MaterialButtonsShowcase extends StatelessWidget {
 }
 
 class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
-  const _ToggleFabSwitchesChipsShowcase({
-    Key? key,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
+  const _ToggleFabSwitchesChipsShowcase(
+      {Key? key, required this.isOpen, required this.onTap})
+      : super(key: key);
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Themed Buttons Switches and Chips'),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -1391,16 +1525,15 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
 }
 
 class _ListTileShowcase extends StatelessWidget {
-  const _ListTileShowcase({
-    Key? key,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
-
+  const _ListTileShowcase({Key? key, required this.isOpen, required this.onTap})
+      : super(key: key);
+  final bool isOpen;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Themed ListTile'),
       child: const ListTileShowcase(),
     );
@@ -1408,16 +1541,17 @@ class _ListTileShowcase extends StatelessWidget {
 }
 
 class _TimePickerDialogShowcase extends StatelessWidget {
-  const _TimePickerDialogShowcase({
-    Key? key,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
+  const _TimePickerDialogShowcase(
+      {Key? key, required this.isOpen, required this.onTap})
+      : super(key: key);
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Themed TimePickerDialog'),
       child: const TimePickerDialogShowcase(),
     );
@@ -1425,16 +1559,17 @@ class _TimePickerDialogShowcase extends StatelessWidget {
 }
 
 class _DatePickerDialogShowcase extends StatelessWidget {
-  const _DatePickerDialogShowcase({
-    Key? key,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
+  const _DatePickerDialogShowcase(
+      {Key? key, required this.isOpen, required this.onTap})
+      : super(key: key);
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Themed DatePickerDialog'),
       child: const DatePickerDialogShowcase(),
     );
@@ -1442,16 +1577,16 @@ class _DatePickerDialogShowcase extends StatelessWidget {
 }
 
 class _DialogShowcase extends StatelessWidget {
-  const _DialogShowcase({
-    Key? key,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
+  const _DialogShowcase({Key? key, required this.isOpen, required this.onTap})
+      : super(key: key);
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Themed Dialog'),
       child: const AlertDialogShowcase(),
     );
@@ -1459,16 +1594,17 @@ class _DialogShowcase extends StatelessWidget {
 }
 
 class _MaterialAndBottomSheetShowcase extends StatelessWidget {
-  const _MaterialAndBottomSheetShowcase({
-    Key? key,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
+  const _MaterialAndBottomSheetShowcase(
+      {Key? key, required this.isOpen, required this.onTap})
+      : super(key: key);
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Themed Material'),
       child: const Padding(
         padding: EdgeInsets.all(16),
@@ -1479,16 +1615,16 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
 }
 
 class _CardShowcase extends StatelessWidget {
-  const _CardShowcase({
-    Key? key,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
+  const _CardShowcase({Key? key, required this.isOpen, required this.onTap})
+      : super(key: key);
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-        command: command,
+        isOpen: isOpen,
+        onTap: onTap,
         title: const Text('Themed Card'),
         child: const Padding(
           padding: EdgeInsets.all(16),
@@ -1498,16 +1634,17 @@ class _CardShowcase extends StatelessWidget {
 }
 
 class _TextThemeShowcase extends StatelessWidget {
-  const _TextThemeShowcase({
-    Key? key,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
+  const _TextThemeShowcase(
+      {Key? key, required this.isOpen, required this.onTap})
+      : super(key: key);
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Themed TextTheme'),
       child: const Padding(
         padding: EdgeInsets.all(16),
@@ -1518,17 +1655,18 @@ class _TextThemeShowcase extends StatelessWidget {
 }
 
 class _PrimaryTextThemeShowcase extends StatelessWidget {
-  const _PrimaryTextThemeShowcase({
-    Key? key,
-    this.command,
-  }) : super(key: key);
-  final HeaderCardCommand? command;
+  const _PrimaryTextThemeShowcase(
+      {Key? key, required this.isOpen, required this.onTap})
+      : super(key: key);
+  final bool isOpen;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
       color: Theme.of(context).colorScheme.primary,
-      command: command,
+      isOpen: isOpen,
+      onTap: onTap,
       title: const Text('Themed PrimaryTextTheme'),
       child: const Padding(
         padding: EdgeInsets.all(16),

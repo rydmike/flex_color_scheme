@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'shared/all_shared_imports.dart';
+import 'shared/const/app_data.dart';
+import 'shared/widgets/app/responsive_scaffold.dart';
+import 'shared/widgets/app/show_sub_pages.dart';
+import 'shared/widgets/app/show_theme_colors.dart';
+import 'shared/widgets/universal/page_body.dart';
+import 'shared/widgets/universal/theme_mode_switch.dart';
+import 'shared/widgets/universal/theme_showcase.dart';
 
 /// DEFAULT EXAMPLE - Hot Reload Playground
 ///
@@ -516,7 +522,7 @@ class _HomePageState extends State<HomePage> {
               // Active theme color indicators.
               const ShowThemeColors(),
               const SizedBox(height: 8),
-              const SubPages(initialOpen: false),
+              const ShowSubPages(),
               const Divider(),
               Text('Theme Showcase', style: headline4),
               const SizedBox(height: 8),
