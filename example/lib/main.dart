@@ -242,7 +242,7 @@ const bool _tooltipsMatchBackground = true;
 // default `adaptivePlatformDensity`. It makes the density `comfortable` on
 // desktops, instead of `compact` as the `adaptivePlatformDensity` does.
 // This is useful on desktop with touch screens, since it keeps tap targets
-// a bit largerbut not as large as `standard` intended for phones and tablets.
+// a bit larger but not as large as `standard` intended for phones and tablets.
 final VisualDensity _visualDensity = FlexColorScheme.comfortablePlatformDensity;
 
 // This is just standard `platform` property in `ThemeData`, handy to have as

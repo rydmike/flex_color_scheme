@@ -8,7 +8,7 @@ environment:
 dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.3
+  cupertino_icons: ^1.0.4
 
   # Color scheme package, by Mike Rydstrom, rydmike.com, @rydmike.
   flex_color_scheme:
@@ -31,7 +31,8 @@ dependencies:
   # Hive local storage, by Simon Leir.
   hive: ^2.0.4
 
-  # The Material Design Icons designed
+  # The Material Design Icons, community designed, used for nicer
+  # icons to the Platform selection popup menu.
   material_design_icons_flutter: ^5.0.6295
 
   # Store value pair shared preference data, by Google flutter.dev.
