@@ -21,19 +21,31 @@ class SurfaceModeButtons extends StatelessWidget {
       mode == FlexSurfaceMode.highBackgroundLowScaffold,
       mode == FlexSurfaceMode.highSurfaceLowScaffold,
       mode == FlexSurfaceMode.highScaffoldLowSurface,
-      // Only show this exotic blend if flag set.
+      // Only show this blend option if show all set, not enough room.
       if (showAllModes) mode == FlexSurfaceMode.veryHighScaffoldLevelSurface,
       mode == FlexSurfaceMode.lowScaffold,
       mode == FlexSurfaceMode.veryHighScaffold,
-      // Only show these exotic blend modes in wider media, there is not
-      // enough room for them on phones, and they are not so important.
+      // Only have these blend options if show all set, not enough room.
       if (showAllModes) mode == FlexSurfaceMode.lowScaffoldVariantDialog,
       if (showAllModes) mode == FlexSurfaceMode.veryHighScaffoldVariantDialog,
+    ];
+    final List<FlexSurfaceMode> option = <FlexSurfaceMode>[
+      FlexSurfaceMode.flat,
+      FlexSurfaceMode.highBackgroundLowScaffold,
+      FlexSurfaceMode.highSurfaceLowScaffold,
+      FlexSurfaceMode.highScaffoldLowSurface,
+      // Only have this blend option if show all set, not enough room.
+      if (showAllModes) FlexSurfaceMode.veryHighScaffoldLevelSurface,
+      FlexSurfaceMode.lowScaffold,
+      FlexSurfaceMode.veryHighScaffold,
+      // Only have these blend options if show all set, not enough room.
+      if (showAllModes) FlexSurfaceMode.lowScaffoldVariantDialog,
+      if (showAllModes) FlexSurfaceMode.veryHighScaffoldVariantDialog,
     ];
     return ToggleButtons(
       isSelected: isSelected,
       onPressed: (int newIndex) {
-        onChanged(FlexSurfaceMode.values[newIndex]);
+        onChanged(option[newIndex]);
       },
       children: <Widget>[
         const Tooltip(
@@ -41,15 +53,15 @@ class SurfaceModeButtons extends StatelessWidget {
           child: Icon(Icons.check_box_outline_blank),
         ),
         const Tooltip(
-          message: 'High background',
+          message: 'High background\nlow scaffold',
           child: Icon(Icons.layers_outlined),
         ),
         const Tooltip(
-          message: 'High surface',
+          message: 'High surface\nlow scaffold',
           child: Icon(Icons.layers),
         ),
         Tooltip(
-          message: 'Very low surface\nHigh scaffold',
+          message: 'High scaffold\nlow surface',
           child: Stack(
             alignment: Alignment.center,
             children: const <Widget>[
@@ -63,16 +75,16 @@ class SurfaceModeButtons extends StatelessWidget {
         ),
         if (showAllModes)
           const Tooltip(
-            message: 'Low surface\nVery high scaffold',
+            message: 'Very high scaffold\nlevel surface',
             child: Icon(Icons.dynamic_feed_rounded),
           ),
         const Tooltip(
-          message: 'Low scaffold',
+          message: 'Low scaffold\nsurfaces level',
           child:
               RotatedBox(quarterTurns: 2, child: Icon(Icons.horizontal_split)),
         ),
         const Tooltip(
-          message: 'High scaffold',
+          message: 'High scaffold\nsurfaces level',
           child: Icon(Icons.horizontal_split),
         ),
         if (showAllModes)
@@ -89,7 +101,7 @@ class SurfaceModeButtons extends StatelessWidget {
           ),
         if (showAllModes)
           Tooltip(
-            message: 'High scaffold\nVariant dialog',
+            message: 'Very high scaffold\nVariant dialog',
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
