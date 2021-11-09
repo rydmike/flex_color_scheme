@@ -1372,5 +1372,111 @@ void main() {
     test('FC5 colors', () {
       expect(FlexColor.blueWhaleDarkSecondaryVariant, const Color(0xFFED7F29));
     });
+
+    test('FC5 colors', () {
+      expect(FlexColor.sanJuanBlueName, 'San Juan blue');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.sanJuanBlueDescription,
+        'San Juan blue and pink salmon theme',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sanJuanBlueLightPrimary, const Color(0xFF375778));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sanJuanBlueLightPrimaryVariant, const Color(0xFF637E9F));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sanJuanBlueLightSecondary, const Color(0xFFF98D94));
+    });
+    test('FC5 colors', () {
+      expect(
+          FlexColor.sanJuanBlueLightSecondaryVariant, const Color(0xFFF2C4C7));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sanJuanBlueDarkPrimary, const Color(0xFF5E7691));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sanJuanBlueDarkPrimaryVariant, const Color(0xFF8096B1));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.sanJuanBlueDarkSecondary, const Color(0xFFEBA1A6));
+    });
+    test('FC5 colors', () {
+      expect(
+          FlexColor.sanJuanBlueDarkSecondaryVariant, const Color(0xFFF4CFD1));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.rosewoodName, 'Rosewood');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.rosewoodDescription,
+        'Rosewood red, with horses neck and driftwood theme',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.rosewoodLightPrimary, const Color(0xFF5C000E));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.rosewoodLightPrimaryVariant, const Color(0xFF9D3E4C));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.rosewoodLightSecondary, const Color(0xFF74540E));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.rosewoodLightSecondaryVariant, const Color(0xFFAD8845));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.rosewoodDarkPrimary, const Color(0xFF9C5A69));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.rosewoodDarkPrimaryVariant, const Color(0xFFB97C88));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.rosewoodDarkSecondary, const Color(0xFFEDCE9B));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.rosewoodDarkSecondaryVariant, const Color(0xFFF5DFB9));
+    });
+
+    test('FC5 colors', () {
+      expect(FlexColor.blumineBlueName, 'Blumine');
+    });
+    test('FC5 colors', () {
+      expect(
+        FlexColor.blumineBlueDescription,
+        'Blumine, easter blue and saffron mango theme',
+      );
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blumineBlueLightPrimary, const Color(0xFF19647E));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blumineBlueLightPrimaryVariant, const Color(0xFF0B8691));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blumineBlueLightSecondary, const Color(0xFFFEC54B));
+    });
+    test('FC5 colors', () {
+      expect(
+          FlexColor.blumineBlueLightSecondaryVariant, const Color(0xFF0093C7));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blumineBlueDarkPrimary, const Color(0xFF82BACE));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blumineBlueDarkPrimaryVariant, const Color(0xFF569899));
+    });
+    test('FC5 colors', () {
+      expect(FlexColor.blumineBlueDarkSecondary, const Color(0xFFFFD682));
+    });
+    test('FC5 colors', () {
+      expect(
+          FlexColor.blumineBlueDarkSecondaryVariant, const Color(0xFF243E4D));
+    });
   });
 }
