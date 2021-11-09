@@ -102,7 +102,7 @@ const double _appBarElevation = 0.5;
 
 // There is quick setting to put an opacity value on the app bar, so we can
 // see content scroll behind it, if we extend the Scaffold behind the AppBar.
-const double _appBarOpacity = 0.93;
+const double _appBarOpacity = 0.94;
 
 // If you set _computeDarkTheme below to true, the dark scheme will be computed
 // both for the selected scheme and the custom colors, from the light scheme.
@@ -156,11 +156,11 @@ const TextTheme _textTheme = TextTheme(
 // `surfaceStyle` settings, but its blend level is set separately in finer and
 // more increments via `blendLevel`. Additionally there are several new surface
 // blend mode strategies in version 4, instead of just one.
-const FlexSurfaceMode _surfaceMode = FlexSurfaceMode.lowScaffold;
+const FlexSurfaceMode _surfaceMode = FlexSurfaceMode.highBackgroundLowScaffold;
 
 // The alpha blend level strength can be defined separately from the
 // SurfaceMode strategy, and has 40 alpha blend level strengths.
-const int _blendLevel = 20;
+const int _blendLevel = 15;
 
 // The `useSubThemes` sets weather you want to opt-in or not on additional
 // opinionated sub-theming. By default FlexColorScheme as before does very
@@ -474,7 +474,7 @@ class _HomePageState extends State<HomePage> {
         useDivider: false,
         // You can set opacity on the Android system navigation bar, this will
         // result in content being visible behind if Scaffold use extendBody.
-        opacity: 0.95,
+        opacity: 0.60,
       ),
       child: ResponsiveScaffold(
         extendBodyBehindAppBar: true,
