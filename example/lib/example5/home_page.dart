@@ -763,33 +763,34 @@ class _SurfaceBlends extends StatelessWidget {
 
   String explainMode(final FlexSurfaceMode mode) {
     switch (mode) {
-      case FlexSurfaceMode.flat:
-        return 'Flat\nAll surfaces at blend level (1x)\n';
+      case FlexSurfaceMode.level:
+        return 'Flat blend\nAll surfaces at blend level 1x\n';
       case FlexSurfaceMode.highBackgroundLowScaffold:
         return 'High background, low scaffold\n'
-            'Background (3/2x) Surface (1x) Scaffold (1/2x)\n';
+            'Background 3/2x  Surface 1x  Scaffold 1/2x\n';
       case FlexSurfaceMode.highSurfaceLowScaffold:
         return 'High surface, low scaffold\n'
-            'Surface (3/2x) Background (1x) Scaffold (1/2x)\n';
+            'Surface 3/2x  Background 1x  Scaffold 1/2x\n';
       case FlexSurfaceMode.highScaffoldLowSurface:
         return 'High scaffold, low surface\n'
-            'Scaffold (2x) Background (1x) Surface (1/2x)\n';
-      case FlexSurfaceMode.veryHighScaffoldLevelSurface:
-        return 'Very high scaffold, level surface\n'
-            'Scaffold (3x) Background (2x) Surface (1x)\n';
-      case FlexSurfaceMode.lowScaffold:
-        return 'Low scaffold\n'
-            'Scaffold (1/2x) Surface and Background (1x)\n';
-      case FlexSurfaceMode.veryHighScaffold:
-        return 'Very high scaffold\n'
-            'Scaffold (3x) Surface and Background (1x)\n';
-      case FlexSurfaceMode.lowScaffoldVariantDialog:
-        return 'Low scaffold\n'
-            'Scaffold (1/2x) Surface and Background (1x)\n'
-            'Dialog background (1x) using secondary variant color';
-      case FlexSurfaceMode.veryHighScaffoldVariantDialog:
-        return 'Very high scaffold\nScaffold (3x) Surface and Background (1x)\n'
-            'Dialog background (1x) using secondary variant color';
+            'Scaffold 3x  Background 1x  Surface 1/2x\n';
+      case FlexSurfaceMode.highScaffoldLevelSurface:
+        return 'High scaffold, level surface\n'
+            'Scaffold 3x  Background 2x  Surface 1x\n';
+      case FlexSurfaceMode.levelSurfacesLowScaffold:
+        return 'Level surfaces, low scaffold\n'
+            'Surface & Background 1x  Scaffold 1/2x\n';
+      case FlexSurfaceMode.highScaffoldLowSurfaces:
+        return 'High scaffold, low surfaces\n'
+            'Scaffold 3x  Surface and Background 1/2x\n';
+      case FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog:
+        return 'Variant dialog, low scaffold\n'
+            'Surface & Background 1x  Scaffold 1/2x\n'
+            'Dialog 1x blend of secondary variant color';
+      case FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog:
+        return 'High scaffold, variant dialog\n'
+            'Scaffold 3x  Surface and Background 1/2x\n'
+            'Dialog 1/2x blend of secondary variant color';
       case FlexSurfaceMode.custom:
         return '';
     }

@@ -87,7 +87,7 @@ class DemoApp extends StatelessWidget {
             // We use a surface color mode where all Material surfaces use
             // the same primary color branding, but scaffold background
             // uses much less.
-            surfaceMode: FlexSurfaceMode.lowScaffold,
+            surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
             // We set the blend level strength to 20.
             blendLevel: 20,
             appBarElevation: 0.5,
@@ -106,7 +106,7 @@ class DemoApp extends StatelessWidget {
             // We don't have to use the same surface mode in dark mode, for an
             // interesting effect here we use a mode where scaffold background
             // color gets a much higher blend value than surface and background.
-            surfaceMode: FlexSurfaceMode.veryHighScaffold,
+            surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             // You don't have to use same blend level or mode in light
             // and dark mode, here we use a lower value in dark mode, that
             // goes better together with the highScaffold mode.

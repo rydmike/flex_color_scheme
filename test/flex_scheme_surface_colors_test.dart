@@ -508,7 +508,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.veryHighScaffoldLevelSurface,
+          surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
@@ -544,7 +544,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.flat,
+          surfaceMode: FlexSurfaceMode.level,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.lightSurface,
@@ -562,7 +562,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.lowScaffold,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.lightSurface,
@@ -580,7 +580,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.lowScaffoldVariantDialog,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.lightSurface,
@@ -598,7 +598,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.veryHighScaffold,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.lightBackground,
@@ -616,7 +616,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.veryHighScaffoldVariantDialog,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.lightBackground,
@@ -655,7 +655,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.veryHighScaffoldLevelSurface,
+          surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
@@ -691,7 +691,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.flat,
+          surfaceMode: FlexSurfaceMode.level,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.darkSurface,
@@ -709,7 +709,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.lowScaffold,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.darkSurface,
@@ -727,7 +727,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.lowScaffoldVariantDialog,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.darkSurface,
@@ -745,7 +745,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.veryHighScaffold,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.darkBackground,
@@ -763,7 +763,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 0,
-          surfaceMode: FlexSurfaceMode.veryHighScaffoldVariantDialog,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.darkBackground,
@@ -802,7 +802,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.veryHighScaffoldLevelSurface,
+          surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff2ebfd),
@@ -838,7 +838,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.flat,
+          surfaceMode: FlexSurfaceMode.level,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff2ebfd),
@@ -856,7 +856,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.lowScaffold,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff2ebfd),
@@ -874,7 +874,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.lowScaffoldVariantDialog,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff2ebfd),
@@ -892,7 +892,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.veryHighScaffold,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff0e9fb),
@@ -910,7 +910,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.light,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.veryHighScaffoldVariantDialog,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff0e9fb),
@@ -949,7 +949,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.veryHighScaffoldLevelSurface,
+          surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff2b2335),
@@ -985,7 +985,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.flat,
+          surfaceMode: FlexSurfaceMode.level,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff2b2335),
@@ -1003,7 +1003,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.lowScaffold,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff2b2335),
@@ -1021,7 +1021,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.lowScaffoldVariantDialog,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff2b2335),
@@ -1039,7 +1039,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.veryHighScaffold,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff2a2235),
@@ -1057,7 +1057,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(
           brightness: Brightness.dark,
           blendLevel: 20,
-          surfaceMode: FlexSurfaceMode.veryHighScaffoldVariantDialog,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff2a2235),

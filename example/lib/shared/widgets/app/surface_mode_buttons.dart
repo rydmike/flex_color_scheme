@@ -17,30 +17,32 @@ class SurfaceModeButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final List<bool> isSelected = <bool>[
-      mode == FlexSurfaceMode.flat,
+      mode == FlexSurfaceMode.level,
       mode == FlexSurfaceMode.highBackgroundLowScaffold,
       mode == FlexSurfaceMode.highSurfaceLowScaffold,
       mode == FlexSurfaceMode.highScaffoldLowSurface,
       // Only show this blend option if show all set, not enough room.
-      if (showAllModes) mode == FlexSurfaceMode.veryHighScaffoldLevelSurface,
-      mode == FlexSurfaceMode.lowScaffold,
-      mode == FlexSurfaceMode.veryHighScaffold,
+      if (showAllModes) mode == FlexSurfaceMode.highScaffoldLevelSurface,
+      mode == FlexSurfaceMode.levelSurfacesLowScaffold,
+      mode == FlexSurfaceMode.highScaffoldLowSurfaces,
       // Only have these blend options if show all set, not enough room.
-      if (showAllModes) mode == FlexSurfaceMode.lowScaffoldVariantDialog,
-      if (showAllModes) mode == FlexSurfaceMode.veryHighScaffoldVariantDialog,
+      if (showAllModes)
+        mode == FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
+      if (showAllModes)
+        mode == FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
     ];
     final List<FlexSurfaceMode> option = <FlexSurfaceMode>[
-      FlexSurfaceMode.flat,
+      FlexSurfaceMode.level,
       FlexSurfaceMode.highBackgroundLowScaffold,
       FlexSurfaceMode.highSurfaceLowScaffold,
       FlexSurfaceMode.highScaffoldLowSurface,
       // Only have this blend option if show all set, not enough room.
-      if (showAllModes) FlexSurfaceMode.veryHighScaffoldLevelSurface,
-      FlexSurfaceMode.lowScaffold,
-      FlexSurfaceMode.veryHighScaffold,
+      if (showAllModes) FlexSurfaceMode.highScaffoldLevelSurface,
+      FlexSurfaceMode.levelSurfacesLowScaffold,
+      FlexSurfaceMode.highScaffoldLowSurfaces,
       // Only have these blend options if show all set, not enough room.
-      if (showAllModes) FlexSurfaceMode.lowScaffoldVariantDialog,
-      if (showAllModes) FlexSurfaceMode.veryHighScaffoldVariantDialog,
+      if (showAllModes) FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
+      if (showAllModes) FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
     ];
     return ToggleButtons(
       isSelected: isSelected,
@@ -49,7 +51,7 @@ class SurfaceModeButtons extends StatelessWidget {
       },
       children: <Widget>[
         const Tooltip(
-          message: 'Flat',
+          message: 'Flat\nall at same level',
           child: Icon(Icons.check_box_outline_blank),
         ),
         const Tooltip(
@@ -75,21 +77,21 @@ class SurfaceModeButtons extends StatelessWidget {
         ),
         if (showAllModes)
           const Tooltip(
-            message: 'Very high scaffold\nlevel surface',
+            message: 'High scaffold\nlevel surface',
             child: Icon(Icons.dynamic_feed_rounded),
           ),
         const Tooltip(
-          message: 'Low scaffold\nsurfaces level',
+          message: 'Level surfaces\nlow scaffold',
           child:
               RotatedBox(quarterTurns: 2, child: Icon(Icons.horizontal_split)),
         ),
         const Tooltip(
-          message: 'High scaffold\nsurfaces level',
+          message: 'High scaffold\nlow surfaces',
           child: Icon(Icons.horizontal_split),
         ),
         if (showAllModes)
           Tooltip(
-            message: 'Low scaffold\nVariant dialog',
+            message: 'Variant dialog\nlow scaffold',
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
@@ -101,7 +103,7 @@ class SurfaceModeButtons extends StatelessWidget {
           ),
         if (showAllModes)
           Tooltip(
-            message: 'Very high scaffold\nVariant dialog',
+            message: 'High scaffold\nvariant dialog',
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
