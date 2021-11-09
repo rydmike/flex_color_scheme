@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -483,344 +484,457 @@ void main() {
         ),
       );
     });
-    test(
-        'FST1.09custom: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
-        'EXPECT equal to ElevatedButtonThemeData() version with '
-        'same values', () {
+    test('FST1.09-states: Does ElevatedButton work with its states', () {
       const ColorScheme colorScheme = ColorScheme.light();
+
+      // Disabled foreground
       expect(
-        FlexSubThemes.elevatedButtonTheme(
-                colorScheme: colorScheme,
-                elevation: 1,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                minButtonSize: const Size(50, 50),
-                radius: 10)
-            .toString(),
-        equalsIgnoringHashCodes(
-          ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(50, 50),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ), //buttonShape,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.primary
+            .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+            .withAlpha(kDisabledForegroundAlpha)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.onPrimary),
+      );
+
+      // Disabled background
+      expect(
+        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
+            .style!
+            .backgroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.primary
+            .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+            .withAlpha(kDisabledBackgroundAlpha)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
+            .style!
+            .backgroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary),
+      );
+
+      // Overlay color states
+      expect(
+        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
+            .style!
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onPrimary.withAlpha(kHoverBackgroundAlpha)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
+            .style!
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onPrimary.withAlpha(kFocusBackgroundAlpha)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
+            .style!
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onPrimary.withAlpha(kPressedBackgroundAlpha)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
+            .style!
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(Colors.transparent),
+      );
+      //
+    });
+  });
+  test(
+      'FST1.09custom: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+      'EXPECT equal to ElevatedButtonThemeData() version with '
+      'same values', () {
+    const ColorScheme colorScheme = ColorScheme.light();
+    expect(
+      FlexSubThemes.elevatedButtonTheme(
+              colorScheme: colorScheme,
               elevation: 1,
-            ).copyWith(
-              foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.onPrimary;
-                },
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              minButtonSize: const Size(50, 50),
+              radius: 10)
+          .toString(),
+      equalsIgnoringHashCodes(
+        ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(50, 50),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
               ),
-              backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x31);
-                  }
-                  return colorScheme.primary;
-                },
-              ),
-              overlayColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.onPrimary.withAlpha(0x0D);
-                  }
-                  if (states.contains(MaterialState.focused)) {
-                    return colorScheme.onPrimary.withAlpha(0x26);
-                  }
-                  if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.onPrimary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
+            ), //buttonShape,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            elevation: 1,
+          ).copyWith(
+            foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.onPrimary;
+              },
             ),
-          ).toString(),
-        ),
-      );
-    });
-    test(
-        'FST1.10: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
-        'equal to OutlinedButtonThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme).toString(),
-        equalsIgnoringHashCodes(
-          OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ), //buttonShape,
-            ).copyWith(
-              foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.primary;
-                },
-              ),
-              overlayColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primary.withAlpha(0x0D);
-                  }
-                  if (states.contains(MaterialState.focused)) {
-                    return colorScheme.primary.withAlpha(0x26);
-                  }
-                  if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.primary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
-              side: MaterialStateProperty.resolveWith<BorderSide?>(
-                (final Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return BorderSide(
-                      color: colorScheme.primary
-                          .blendAlpha(colorScheme.onSurface, 0x66)
-                          .withAlpha(0x31),
-                      width: 1.5,
-                    );
-                  }
-                  if (states.contains(MaterialState.error)) {
-                    return BorderSide(
-                      color: colorScheme.error,
-                      width: 2,
-                    );
-                  }
-                  if (states.contains(MaterialState.pressed)) {
-                    return BorderSide(
-                      color: colorScheme.primary,
-                      width: 2,
-                    );
-                  }
-                  return BorderSide(
-                    color: colorScheme.primary.withAlpha(0xA7),
-                    width: 1.5,
-                  );
-                },
-              ),
+            backgroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x31);
+                }
+                return colorScheme.primary;
+              },
             ),
-          ).toString(),
-        ),
-      );
-    });
-    test(
-        'FST1.11: GIVEN a default FlexSubTheme.textButtonTheme() '
-        'EXPECT equal to TextButtonThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      expect(
-        FlexSubThemes.textButtonTheme(colorScheme: colorScheme).toString(),
-        equalsIgnoringHashCodes(
-          TextButtonThemeData(
-            style: TextButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ), // buttonShape,
-            ).copyWith(
-              foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.primary;
-                },
-              ),
-              overlayColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primary.withAlpha(0x0D);
-                  }
-                  if (states.contains(MaterialState.focused)) {
-                    return colorScheme.primary.withAlpha(0x26);
-                  }
-                  if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.primary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onPrimary.withAlpha(0x0D);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onPrimary.withAlpha(0x26);
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.onPrimary.withAlpha(0x33);
+                }
+                return Colors.transparent;
+              },
             ),
-          ).toString(),
-        ),
-      );
-    });
-    test(
-        'FST1.12: GIVEN a default FlexSubTheme.buttonTheme() '
-        'EXPECT equal to ButtonThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      expect(
-        FlexSubThemes.buttonTheme(colorScheme: colorScheme),
-        equals(
-          ButtonThemeData(
-            colorScheme: colorScheme,
-            minWidth: 40,
-            height: 40,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            layoutBehavior: ButtonBarLayoutBehavior.constrained,
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            hoverColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40)
-                .withAlpha(0x19),
-            focusColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x4C)
-                .withAlpha(0x4C),
-            highlightColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40)
-                .withAlpha(0x19),
-            splashColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x1F)
-                .withAlpha(0x33),
-            disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0x66)
-                .withAlpha(0x31),
+          ),
+        ).toString(),
+      ),
+    );
+  });
+  test(
+      'FST1.10: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
+      'equal to OutlinedButtonThemeData() version with same values', () {
+    const ColorScheme colorScheme = ColorScheme.light();
+    expect(
+      FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme).toString(),
+      equalsIgnoringHashCodes(
+        OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            minimumSize: const Size(40, 40),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(20),
               ),
+            ), //buttonShape,
+          ).copyWith(
+            foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.primary;
+              },
             ),
-            textTheme: ButtonTextTheme.primary,
-          ),
-        ),
-      );
-    });
-    test(
-        'FST1.12: GIVEN a default FlexSubTheme.toggleButtonsTheme() EXPECT '
-        'equal to ToggleButtonsThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      final VisualDensity _visualDensity =
-          VisualDensity.adaptivePlatformDensity;
-      expect(
-        FlexSubThemes.toggleButtonsTheme(colorScheme: colorScheme),
-        equals(
-          ToggleButtonsThemeData(
-            borderWidth: 1.5,
-            selectedColor: colorScheme.onPrimary.withAlpha(0xE5),
-            color: colorScheme.primary,
-            fillColor: colorScheme.primary.blendAlpha(Colors.white, 0x19),
-            borderColor: colorScheme.primary.withAlpha(0xA7),
-            selectedBorderColor:
-                colorScheme.primary.blendAlpha(Colors.white, 0x19),
-            hoverColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40 + 0x19)
-                .withAlpha(0x19),
-            focusColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x4C + 0x19)
-                .withAlpha(0x4C),
-            highlightColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40 + 0x19)
-                .withAlpha(0x19),
-            splashColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x1F + 0x19)
-                .withAlpha(0x33),
-            disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0x66)
-                .withAlpha(0x5E),
-            disabledBorderColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0x66)
-                .withAlpha(0x31),
-            borderRadius: BorderRadius.circular(20),
-            constraints: BoxConstraints(
-              minWidth: 40 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
-              minHeight: 40 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.primary.withAlpha(0x0D);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.primary.withAlpha(0x26);
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.primary.withAlpha(0x33);
+                }
+                return Colors.transparent;
+              },
             ),
-          ),
-        ),
-      );
-    });
-
-    test(
-        'FST1.14: GIVEN a default FlexSubTheme.floatingActionButtonTheme() '
-        'EXPECT equal to FloatingActionButtonThemeData() version '
-        'with same values', () {
-      expect(
-        FlexSubThemes.floatingActionButtonTheme(),
-        equals(
-          const FloatingActionButtonThemeData(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(16),
-              ),
+            side: MaterialStateProperty.resolveWith<BorderSide?>(
+              (final Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return BorderSide(
+                    color: colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x31),
+                    width: 1.5,
+                  );
+                }
+                if (states.contains(MaterialState.error)) {
+                  return BorderSide(
+                    color: colorScheme.error,
+                    width: 2,
+                  );
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return BorderSide(
+                    color: colorScheme.primary,
+                    width: 2,
+                  );
+                }
+                return BorderSide(
+                  color: colorScheme.primary.withAlpha(0xA7),
+                  width: 1.5,
+                );
+              },
             ),
           ),
-        ),
-      );
-    });
-
-    test(
-        'FST1.14b: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
-        'EXPECT equal to FloatingActionButtonThemeData() version '
-        'with same values', () {
-      expect(
-        FlexSubThemes.floatingActionButtonTheme(
-          radius: 30,
-        ),
-        equals(
-          const FloatingActionButtonThemeData(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-            ),
-          ),
-        ),
-      );
-    });
-
-    test(
-        'FST1.15: GIVEN a default FlexSubTheme.chipTheme() '
-        'EXPECT equal to ChipThemeData() version '
-        'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      final TextTheme textTheme =
-          Typography.material2018(platform: TargetPlatform.android).black;
-      expect(
-        FlexSubThemes.chipTheme(
-          colorScheme: colorScheme,
-          labelStyle: textTheme.button!,
-        ),
-        equals(
-          ChipThemeData(
-            brightness: Brightness.dark,
-            padding: const EdgeInsets.all(4),
-            labelStyle:
-                textTheme.button!.copyWith(color: const Color(0xff310077)),
-            secondaryLabelStyle:
-                textTheme.button!.copyWith(color: const Color(0xff310077)),
-            backgroundColor: const Color(0xffdfccfb),
-            deleteIconColor: const Color(0xff6200ee),
-            disabledColor: const Color(0x313a008e),
-            selectedColor: const Color(0xffbe96f8),
-            secondarySelectedColor: const Color(0xffbe96f8),
-            checkmarkColor: const Color(0xff310077),
+        ).toString(),
+      ),
+    );
+  });
+  test(
+      'FST1.11: GIVEN a default FlexSubTheme.textButtonTheme() '
+      'EXPECT equal to TextButtonThemeData() version with same values', () {
+    const ColorScheme colorScheme = ColorScheme.light();
+    expect(
+      FlexSubThemes.textButtonTheme(colorScheme: colorScheme).toString(),
+      equalsIgnoringHashCodes(
+        TextButtonThemeData(
+          style: TextButton.styleFrom(
+            minimumSize: const Size(40, 40),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(8),
+                Radius.circular(20),
               ),
+            ), // buttonShape,
+          ).copyWith(
+            foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.primary;
+              },
+            ),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.primary.withAlpha(0x0D);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.primary.withAlpha(0x26);
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.primary.withAlpha(0x33);
+                }
+                return Colors.transparent;
+              },
+            ),
+          ),
+        ).toString(),
+      ),
+    );
+  });
+  test(
+      'FST1.12: GIVEN a default FlexSubTheme.buttonTheme() '
+      'EXPECT equal to ButtonThemeData() version with same values', () {
+    const ColorScheme colorScheme = ColorScheme.light();
+    expect(
+      FlexSubThemes.buttonTheme(colorScheme: colorScheme),
+      equals(
+        ButtonThemeData(
+          colorScheme: colorScheme,
+          minWidth: 40,
+          height: 40,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          layoutBehavior: ButtonBarLayoutBehavior.constrained,
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          hoverColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x40)
+              .withAlpha(0x19),
+          focusColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x4C)
+              .withAlpha(0x4C),
+          highlightColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x40)
+              .withAlpha(0x19),
+          splashColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x1F)
+              .withAlpha(0x33),
+          disabledColor: colorScheme.primary
+              .blendAlpha(colorScheme.onSurface, 0x66)
+              .withAlpha(0x31),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+          textTheme: ButtonTextTheme.primary,
+        ),
+      ),
+    );
+  });
+  test(
+      'FST1.12d: GIVEN a custom FlexSubTheme.buttonTheme() '
+      'EXPECT equal to ButtonThemeData() version with same values', () {
+    const ColorScheme colorScheme = ColorScheme.dark();
+    expect(
+      FlexSubThemes.buttonTheme(
+        colorScheme: colorScheme,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        minButtonSize: const Size(45, 44),
+        radius: 10,
+      ),
+      equals(
+        ButtonThemeData(
+          colorScheme: colorScheme,
+          minWidth: 45,
+          height: 44,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          layoutBehavior: ButtonBarLayoutBehavior.constrained,
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          hoverColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x40)
+              .withAlpha(0x19),
+          focusColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x4C)
+              .withAlpha(0x4C),
+          highlightColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x40)
+              .withAlpha(0x19),
+          splashColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x1F)
+              .withAlpha(0x33),
+          disabledColor: colorScheme.primary
+              .blendAlpha(colorScheme.onSurface, 0x66)
+              .withAlpha(0x31),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          textTheme: ButtonTextTheme.primary,
+        ),
+      ),
+    );
+  });
+  test(
+      'FST1.13: GIVEN a default FlexSubTheme.toggleButtonsTheme() EXPECT '
+      'equal to ToggleButtonsThemeData() version with same values', () {
+    const ColorScheme colorScheme = ColorScheme.light();
+    final VisualDensity _visualDensity = VisualDensity.adaptivePlatformDensity;
+    expect(
+      FlexSubThemes.toggleButtonsTheme(colorScheme: colorScheme),
+      equals(
+        ToggleButtonsThemeData(
+          borderWidth: 1.5,
+          selectedColor: colorScheme.onPrimary.withAlpha(0xE5),
+          color: colorScheme.primary,
+          fillColor: colorScheme.primary.blendAlpha(Colors.white, 0x19),
+          borderColor: colorScheme.primary.withAlpha(0xA7),
+          selectedBorderColor:
+              colorScheme.primary.blendAlpha(Colors.white, 0x19),
+          hoverColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x40 + 0x19)
+              .withAlpha(0x19),
+          focusColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x4C + 0x19)
+              .withAlpha(0x4C),
+          highlightColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x40 + 0x19)
+              .withAlpha(0x19),
+          splashColor: colorScheme.primary
+              .blendAlpha(Colors.white, 0x1F + 0x19)
+              .withAlpha(0x33),
+          disabledColor: colorScheme.primary
+              .blendAlpha(colorScheme.onSurface, 0x66)
+              .withAlpha(0x5E),
+          disabledBorderColor: colorScheme.primary
+              .blendAlpha(colorScheme.onSurface, 0x66)
+              .withAlpha(0x31),
+          borderRadius: BorderRadius.circular(20),
+          constraints: BoxConstraints(
+            minWidth: 40 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
+            minHeight: 40 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
+          ),
+        ),
+      ),
+    );
+  });
+
+  test(
+      'FST1.14: GIVEN a default FlexSubTheme.floatingActionButtonTheme() '
+      'EXPECT equal to FloatingActionButtonThemeData() version '
+      'with same values', () {
+    expect(
+      FlexSubThemes.floatingActionButtonTheme(),
+      equals(
+        const FloatingActionButtonThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
             ),
           ),
         ),
-      );
-    });
+      ),
+    );
+  });
+
+  test(
+      'FST1.14b: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+      'EXPECT equal to FloatingActionButtonThemeData() version '
+      'with same values', () {
+    expect(
+      FlexSubThemes.floatingActionButtonTheme(
+        radius: 30,
+      ),
+      equals(
+        const FloatingActionButtonThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          ),
+        ),
+      ),
+    );
+  });
+
+  test(
+      'FST1.15: GIVEN a default FlexSubTheme.chipTheme() '
+      'EXPECT equal to ChipThemeData() version '
+      'with same values', () {
+    const ColorScheme colorScheme = ColorScheme.light();
+    final TextTheme textTheme =
+        Typography.material2018(platform: TargetPlatform.android).black;
+    expect(
+      FlexSubThemes.chipTheme(
+        colorScheme: colorScheme,
+        labelStyle: textTheme.button!,
+      ),
+      equals(
+        ChipThemeData(
+          brightness: Brightness.dark,
+          padding: const EdgeInsets.all(4),
+          labelStyle:
+              textTheme.button!.copyWith(color: const Color(0xff310077)),
+          secondaryLabelStyle:
+              textTheme.button!.copyWith(color: const Color(0xff310077)),
+          backgroundColor: const Color(0xffdfccfb),
+          deleteIconColor: const Color(0xff6200ee),
+          disabledColor: const Color(0x313a008e),
+          selectedColor: const Color(0xffbe96f8),
+          secondarySelectedColor: const Color(0xffbe96f8),
+          checkmarkColor: const Color(0xff310077),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+        ),
+      ),
+    );
   });
 }
