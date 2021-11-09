@@ -143,7 +143,7 @@ extension FlexThemeData on ThemeData {
     /// In light theme mode:
     ///
     /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    2% : blendLevel = 4
+    /// * [FlexSurface.light]    2% : blendLevel = Between 3 & 4
     /// * [FlexSurface.medium]   4% : blendLevel = 7
     /// * [FlexSurface.strong]   6% : blendLevel = 10
     /// * [FlexSurface.heavy]    8% : blendLevel = Between 13 & 14
@@ -859,7 +859,7 @@ extension FlexThemeData on ThemeData {
     /// In light theme mode:
     ///
     /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    2% : blendLevel = 4
+    /// * [FlexSurface.light]    2% : blendLevel = Between 3 & 4
     /// * [FlexSurface.medium]   4% : blendLevel = 7
     /// * [FlexSurface.strong]   6% : blendLevel = 10
     /// * [FlexSurface.heavy]    8% : blendLevel = Between 13 & 14

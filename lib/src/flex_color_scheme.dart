@@ -107,7 +107,7 @@ enum FlexSurfaceMode {
   /// In light theme mode:
   ///
   /// * [FlexSurface.material] 0% : blendLevel = 0
-  /// * [FlexSurface.light]    2% : blendLevel = 4
+  /// * [FlexSurface.light]    2% : blendLevel = Between 3 & 4
   /// * [FlexSurface.medium]   4% : blendLevel = 7
   /// * [FlexSurface.strong]   6% : blendLevel = 10
   /// * [FlexSurface.heavy]    8% : blendLevel = Between 13 & 14
@@ -1164,7 +1164,7 @@ class FlexColorScheme with Diagnosticable {
     /// In light theme mode:
     ///
     /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    2% : blendLevel = 4
+    /// * [FlexSurface.light]    2% : blendLevel = Between 3 & 4
     /// * [FlexSurface.medium]   4% : blendLevel = 7
     /// * [FlexSurface.strong]   6% : blendLevel = 10
     /// * [FlexSurface.heavy]    8% : blendLevel = Between 13 & 14
@@ -1831,8 +1831,8 @@ class FlexColorScheme with Diagnosticable {
 
     // Determine effective surface color.
     // Surface is used e.g. by Card and bottom appbar.
-    // If true black, we make a darker than normal surface. If not
-    // true black, we use provided surface color, or computed one.
+    // If light is white, we make a lighter than normal surface. If not
+    // light is white, we use provided surface color, or computed one.
     Color effectiveSurfaceColor;
     if (lightIsWhite) {
       effectiveSurfaceColor =
@@ -1843,8 +1843,8 @@ class FlexColorScheme with Diagnosticable {
 
     // Determine effective background color.
     // Used e.g. by drawer, nav rail, side menu and bottom bar.
-    // If true black, we use darker then normal background. If not true black,
-    // we use provided background color, or computed one.
+    // If light is white, we make a lighter than normal background. If not
+    // light is white, we use provided background color, or computed one.
     Color effectiveBackgroundColor;
     if (lightIsWhite) {
       effectiveBackgroundColor =
@@ -1854,7 +1854,7 @@ class FlexColorScheme with Diagnosticable {
     }
 
     // Determine effective dialog background color.
-    // If true black, we use darker than normal. If not true black,
+    // If light is white, we use lighter than normal. If not,
     // we use dialog provided background color, or computed one.
     // The provided dialog background color overrides factory surface behavior,
     // but is impacted by true black mode for a darker effect.
@@ -2067,7 +2067,7 @@ class FlexColorScheme with Diagnosticable {
     /// In light theme mode:
     ///
     /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    2% : blendLevel = 4
+    /// * [FlexSurface.light]    2% : blendLevel = Between 3 & 4
     /// * [FlexSurface.medium]   4% : blendLevel = 7
     /// * [FlexSurface.strong]   6% : blendLevel = 10
     /// * [FlexSurface.heavy]    8% : blendLevel = Between 13 & 14

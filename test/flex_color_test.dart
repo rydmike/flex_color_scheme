@@ -1459,7 +1459,7 @@ void main() {
       expect(FlexColor.blumineBlueLightPrimaryVariant, const Color(0xFF0B8691));
     });
     test('FC5 colors', () {
-      expect(FlexColor.blumineBlueLightSecondary, const Color(0xFFFEC54B));
+      expect(FlexColor.blumineBlueLightSecondary, const Color(0xFFFEB716));
     });
     test('FC5 colors', () {
       expect(

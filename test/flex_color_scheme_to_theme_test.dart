@@ -1079,13 +1079,12 @@ void main() {
       expect(tDarkH2, equals(tDarkH2Raw));
     });
 
-    // TODO(rydmike): Set the tests below up as the ones above!
-
     final ThemeData tLightH3 = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
-      tabBarStyle: FlexTabBarStyle.forBackground,
+      tabBarStyle: FlexTabBarStyle.universal,
+      lightIsWhite: true,
       usedColors: 3,
     ).toTheme;
 
@@ -1093,20 +1092,27 @@ void main() {
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
-      tabBarStyle: FlexTabBarStyle.forBackground,
+      tabBarStyle: FlexTabBarStyle.universal,
       darkIsTrueBlack: true,
       usedColors: 3,
     ).toTheme;
 
     test(
         'FCS7.81: GIVEN a FlexColorScheme.light with heavy branding and 3 '
-        'colors EXPECT none null result.', () {
-      expect(tLightH3, isNotNull);
+        'colors and light is white EXPECT equal when copy in same color.', () {
+      expect(
+        tLightH3,
+        tLightH3.copyWith(primaryColor: FlexColor.mandyRedLightPrimary),
+      );
     });
     test(
         'FCS7.82: GIVEN a FlexColorScheme.dark with heavy branding and '
-        '3 colors and true black EXPECT none null result.', () {
-      expect(tDarkH3, isNotNull);
+        '3 colors and true black EXPECT EXPECT equal when copy in same color.',
+        () {
+      expect(
+        tDarkH3,
+        tDarkH3.copyWith(primaryColor: FlexColor.mandyRedDarkPrimary),
+      );
     });
 
     //**************************************************************************
@@ -1122,7 +1128,7 @@ void main() {
       surfaceStyle: FlexSurface.custom,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 2,
-      tabBarStyle: FlexTabBarStyle.forBackground,
+      tabBarStyle: FlexTabBarStyle.flutterDefault,
       tooltipsMatchBackground: true,
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
@@ -1134,7 +1140,7 @@ void main() {
       surfaceStyle: FlexSurface.custom,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,
-      tabBarStyle: FlexTabBarStyle.forBackground,
+      tabBarStyle: FlexTabBarStyle.flutterDefault,
       tooltipsMatchBackground: true,
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
@@ -1153,7 +1159,7 @@ void main() {
       expect(tDarkC, isNotNull);
     });
 
-    // With surface and background colors defined
+    // With surface and background colors defined, and light is white
     final ThemeData tLightC2 = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceStyle: FlexSurface.custom,
@@ -1163,6 +1169,7 @@ void main() {
       tooltipsMatchBackground: true,
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
+      lightIsWhite: true,
       usedColors: 3,
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,

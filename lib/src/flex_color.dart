@@ -1305,7 +1305,7 @@ class FlexColor {
   static const Color blumineBlueLightPrimaryVariant = Color(0xFF0B8691);
 
   /// Blumine blue green theme color for light secondary color.
-  static const Color blumineBlueLightSecondary = Color(0xFFFEC54B);
+  static const Color blumineBlueLightSecondary = Color(0xFFFEB716);
 
   /// Blumine blue green theme color for light secondary variant color.
   static const Color blumineBlueLightSecondaryVariant = Color(0xFF0093C7);

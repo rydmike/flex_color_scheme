@@ -1621,7 +1621,7 @@ void main() {
         onError: Colors.white,
         swapColors: true,
         darkIsTrueBlack: true,
-        tooltipsMatchBackground: true,
+        tooltipsMatchBackground: false,
         transparentStatusBar: true,
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         textTheme: myTextTheme,
@@ -1659,7 +1659,7 @@ void main() {
           onError: Colors.white,
           swapColors: true,
           darkIsTrueBlack: true,
-          tooltipsMatchBackground: true,
+          tooltipsMatchBackground: false,
           transparentStatusBar: true,
           visualDensity: FlexColorScheme.comfortablePlatformDensity,
           textTheme: myTextTheme,
@@ -1822,6 +1822,182 @@ void main() {
         equalsIgnoringHashCodes(
           ftdLight.toString(),
         ),
+      );
+      expect(
+        ftdLight,
+        equals(ftdLight.copyWith(
+          primaryColor: FlexColor.indigo.light.primary,
+          scaffoldBackgroundColor: FlexColor.lightScaffoldBackground,
+          dialogBackgroundColor: FlexColor.lightSurface,
+        )),
+      );
+      // TODO(rydmike): SDK ThemeData operator issue, fix in master!
+      // https://github.com/flutter/flutter/issues/91587
+      // Check object equality
+      // expect(
+      //   ftdLight,
+      //   equals(fcsLightTd),
+      // );
+    });
+
+    test(
+        'FTD2.08-w-sub2: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+        'case with sub-theme and rev tooltip EXPECT equal.', () {
+      const TextTheme myTextTheme = TextTheme(
+        headline1: TextStyle(
+          fontSize: 70, // Defaults to 96 in Material2018 Typography.
+        ),
+        button: TextStyle(
+          fontSize: 16, // Defaults to 14 in Material2018 Typography.
+          letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
+        ),
+        overline: TextStyle(
+          fontSize: 11, // Defaults to 10 in Material2018 Typography.
+          letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
+        ),
+      );
+      // Make a FlexColorScheme.
+      final FlexColorScheme fcsLight1 = FlexColorScheme.light(
+        colors: FlexColor.mandyRed.light,
+        scheme: FlexScheme.bigStone,
+        usedColors: 3,
+        surfaceStyle: FlexSurface.strong,
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+        blendLevel: 0,
+        appBarStyle: FlexAppBarStyle.primary,
+        tabBarStyle: FlexTabBarStyle.universal,
+        appBarElevation: 1,
+        bottomAppBarElevation: 1,
+        primary: FlexColor.indigo.light.primary,
+        primaryVariant: FlexColor.indigo.light.primaryVariant,
+        secondary: FlexColor.indigo.light.secondary,
+        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+        surface: FlexColor.lightSurface,
+        background: FlexColor.lightBackground,
+        scaffoldBackground: FlexColor.lightScaffoldBackground,
+        dialogBackground: FlexColor.lightSurface,
+        appBarBackground: FlexColor.indigo.light.primary,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.black,
+        onBackground: Colors.black,
+        onError: Colors.white,
+        swapColors: false,
+        tooltipsMatchBackground: false,
+        lightIsWhite: true,
+        transparentStatusBar: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
+        fontFamily: 'Roboto',
+        platform: TargetPlatform.android,
+        typography: Typography.material2018(platform: TargetPlatform.android),
+        applyElevationOverlayColor: true,
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(),
+      );
+
+      final FlexColorScheme fcsLight2 = FlexColorScheme.light(
+        colors: FlexColor.mandyRed.light,
+        scheme: FlexScheme.bigStone,
+        usedColors: 3,
+        surfaceStyle: FlexSurface.strong,
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+        blendLevel: 0,
+        appBarStyle: FlexAppBarStyle.primary,
+        tabBarStyle: FlexTabBarStyle.universal,
+        appBarElevation: 1,
+        bottomAppBarElevation: 1,
+        primary: FlexColor.indigo.light.primary,
+        primaryVariant: FlexColor.indigo.light.primaryVariant,
+        secondary: FlexColor.indigo.light.secondary,
+        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+        surface: FlexColor.lightSurface,
+        background: FlexColor.lightBackground,
+        scaffoldBackground: FlexColor.lightScaffoldBackground,
+        dialogBackground: FlexColor.lightSurface,
+        appBarBackground: FlexColor.indigo.light.primary,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.black,
+        onBackground: Colors.black,
+        onError: Colors.white,
+        swapColors: false,
+        tooltipsMatchBackground: false,
+        lightIsWhite: true,
+        transparentStatusBar: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
+        fontFamily: 'Roboto',
+        platform: TargetPlatform.android,
+        typography: Typography.material2018(platform: TargetPlatform.android),
+        applyElevationOverlayColor: true,
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(),
+      );
+
+      // Check FlexColorScheme light object equality - with all props.
+      expect(
+        fcsLight1,
+        equals(fcsLight2),
+      );
+
+      // Turn it into ThemeData.
+      final ThemeData fcsLightTd = fcsLight1.toTheme;
+
+      // Make same ThemeData via extension.
+      final ThemeData ftdLight = FlexThemeData.light(
+        // The manual colors will override commented ones:
+        colors: FlexColor.mandyRed.light,
+        scheme: FlexScheme.bigStone,
+        usedColors: 3,
+        surfaceStyle: FlexSurface.strong,
+        surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
+        blendLevel: 0,
+        appBarStyle: FlexAppBarStyle.primary,
+        tabBarStyle: FlexTabBarStyle.universal,
+        appBarElevation: 1,
+        bottomAppBarElevation: 1,
+        primary: FlexColor.indigo.light.primary,
+        primaryVariant: FlexColor.indigo.light.primaryVariant,
+        secondary: FlexColor.indigo.light.secondary,
+        secondaryVariant: FlexColor.indigo.light.secondaryVariant,
+        surface: FlexColor.lightSurface,
+        background: FlexColor.lightBackground,
+        scaffoldBackground: FlexColor.lightScaffoldBackground,
+        dialogBackground: FlexColor.lightSurface,
+        appBarBackground: FlexColor.indigo.light.primary,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.black,
+        onBackground: Colors.black,
+        onError: Colors.white,
+        swapColors: false,
+        tooltipsMatchBackground: false,
+        lightIsWhite: true,
+        transparentStatusBar: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        textTheme: myTextTheme,
+        primaryTextTheme: myTextTheme,
+        fontFamily: 'Roboto',
+        platform: TargetPlatform.android,
+        typography: Typography.material2018(platform: TargetPlatform.android),
+        applyElevationOverlayColor: true,
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(),
+      );
+      // Check to String equality
+      expect(
+        fcsLightTd.toString(),
+        equalsIgnoringHashCodes(
+          ftdLight.toString(),
+        ),
+      );
+      // TODO(rydmike): Test more color overrides in this copyWith.
+      expect(
+        ftdLight,
+        equals(ftdLight.copyWith(primaryColor: FlexColor.indigo.light.primary)),
       );
       // TODO(rydmike): SDK ThemeData operator issue, fix in master!
       // https://github.com/flutter/flutter/issues/91587
@@ -2003,7 +2179,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     test(
-        'FTD3.00RawL: GIVEN FlexThemeData.raw() made with min required light '
+        'FTD3.00RawL: GIVEN FlexColorScheme() made with min required light '
         'params that equals default Material light scheme '
         'EXPECT its FlexColorScheme to be equal to one made with light scheme '
         'with no parameters.', () {

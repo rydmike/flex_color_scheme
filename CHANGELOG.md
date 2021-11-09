@@ -151,7 +151,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
     a ChangeNotifier based controller, AnimatedBuilder to listen to it and
     an abstract service to get and persist the theme settings, with a concrete
     in-memory implementation, plus the implementations to persist the theme.
-    * Example 2-4 use Hive (TODO)
+    * Example 2 to 4 use Hive (TODO - Add Hive implementation)
     * Example 5 uses SharedPreferences
 * **TODO Documentation:**
   * Some older documentation that is not relevant was removed, like older APIs
@@ -161,7 +161,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 
 * **TODO Tests:** 
-  * Added tests for the new features, total 1065 tests, 
+  * Added tests for the new features, total 1066 tests, 
   * Coverage is 98%, a few more tests to be added before release.
 
 ## [3.0.1] - July 1, 2021
