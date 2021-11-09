@@ -9,7 +9,7 @@ themes, with many additional useful and convenient features.
 
 
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00-new-main-image.gif?raw=true" alt="main_image"/>
 
 # Version 4.0.0 Notice
 
@@ -54,7 +54,7 @@ support it and look well reversed too.
 
 Say hi to the new guys!
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/04-news-themes-gang.png?raw=true" alt="playground_default" width="600"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/04-news-themes-gang.png?raw=true" alt="playground_default"/>
 
 
 # Quick Start Guide
