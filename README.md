@@ -17,6 +17,46 @@ This document is still mainly the version 3.0.0 documentation. Depending on when
 you read it, e.g. on GitHub or as a dev release v4.0.0-dev on pub.dev. It may contain
 some updated elements, but the documentation will not be complete until v4.0.0 is released.
 
+## What is new in version 4?
+
+For a detailed list of what is new in version 4, please refer to the change log.
+
+There are two major new new features. The first one is that FlexColorScheme 
+now comes loaded with opinionated widget sub-themes that you can opt in on. 
+By default, the sub-theme mimic Material 3 (You) styled widgets, as close as 
+easily possible by using the standard Material 2 theming features currently
+available in Flutter 2.5.
+
+The second main new feature is that FlexColorScheme now offers 9 different surface
+color blend modes with 40 different levels each. Version 3 only had one blend
+style with 5 levels, including no blends. The version 3 blend style is still
+available. Despite the major version bump, APIs from version 3 are still
+fully compatible with version 4.
+
+### New Color Schemes
+
+There are of course new built-in color schemes too, four of them
+
+* **Blue whale** - Blue whale, jungle green and outrageous tango orange.
+  Use enum value `FlexScheme.blueWhale` for easy access to it.  
+* **San Juan blue** - San Juan blue and pink salmon theme.
+  Use enum value `FlexScheme.sanJuanBlue` for easy access to it.
+* **Rosewood** - Rosewood red, with horses neck and driftwood theme.
+  Use enum value `FlexScheme.rosewood` for easy access to it.
+* **Blumine** - Blumine, easter blue and saffron mango theme.
+  Use enum value `FlexScheme.blumineBlue` for easy access to it.
+
+Total number of of offered built-in color schemes is now 36 matched light 
+and dark pairs. By using the swap primary and secondary colors, you can double
+the amount of variations with just a boolean toggle. Not all the color 
+schemes are so useful when you swap the colors, but some were designed to
+support it and look well reversed too.
+
+Say hi to the new guys!
+
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/04-news-themes-gang.png?raw=true" alt="playground_default" width="600"/>
+
+
 # Quick Start Guide
 
 The quickest and easiest way to get to know FlexColorScheme V4 is to build the
@@ -40,7 +80,7 @@ colors, and the created theme's impact on common Material UI widgets.
 
 It looks like this:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00_playground_default.jpg?raw=true" alt="playground_default" width="300"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00_playground_default.png?raw=true" alt="playground_default" width="500"/>
 
 The default example comes fully loaded with template settings and thorough 
 comments that explain what to change to produce different results. You
@@ -63,7 +103,7 @@ There are a large amount of other settings you can play with in the default
 example application. The above selected **blue whale** theme is the first one
 show in the image below. 
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/01_playground_options.jpg?raw=true" alt="options" width="400"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/01_playground_options.png?raw=true" alt="options"/>
 
 The other results shown above were also produced by just editing a few 
 properties in the hot reload playground.
@@ -113,11 +153,13 @@ read along.
 
 > ### Updates for Version 4 ends here, the tex below is still V3 docs!
 
-
+----
 
 # Contents
 - [FlexColorScheme](#flexcolorscheme)
 - [Version 4.0.0 Notice](#version-4.0.0-notice)
+- [What is new in version4?](#what-is-new-in-version-4)
+  - [New Color Schemes](#new-color-schemes)
 - [Quick Start Guide](#quick-start-guide)
   - [Default example](#default-example) 
   - [Installing and Using](#installing-and-using)  
@@ -131,7 +173,6 @@ read along.
     - [Design Your Custom Schemes for FlexColorScheme](#design-your-custom-schemes-for-flexcolorscheme)
     - [Can We Change this Predefined Scheme's Colors?](#can-we-change-this-predefined-schemes-colors)
     - [Can We Add This Scheme?](#can-we-add-this-scheme)
-    - [Default Sample Application](#default-sample-application)
     - [Live WEB Demos of the Examples](#live-web-demos-of-the-examples)
 - [Tutorial](#tutorial)
   - [Used HomePage in the Examples](#used-homepage-in-the-examples)

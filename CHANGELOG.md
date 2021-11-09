@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.0.0-dev1] - November 8, 2021
+## [4.0.0-dev1] - November 9, 2021
 
 * The breaking case refer to a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.x.x.
@@ -125,7 +125,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 
 * **New color schemes:** Added four new built-in color schemes.
-  Total number of color schemes is nor 36 matched light and dark pairs.  
+  Total number of color schemes is now 36 matched light and dark pairs.  
   * **Blue whale** - Blue whale, jungle green and outrageous tango orange.
     Use enum value `FlexScheme.blueWhale` for easy access to it.
     This theme is final and selected for inclusion as a new one.
@@ -161,9 +161,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 
 * **TODO Tests:** 
-  * Added tests for the new features, total 1037 tests, 
-  * Coverage temporarily down to around 95%, more tests to be added 
-    before release.
+  * Added tests for the new features, total 1065 tests, 
+  * Coverage is 98%, a few more tests to be added before release.
 
 ## [3.0.1] - July 1, 2021
 
