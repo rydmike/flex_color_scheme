@@ -35,16 +35,17 @@ fully compatible with version 4.
 
 ### New Color Schemes
 
-There are of course new built-in color schemes too, four of them
+There are of course new built-in color schemes too, four of them seems to
+be the standard for new releases. The new color schemes are:
 
 * **Blue whale** - Blue whale, jungle green and outrageous tango orange.
-  Use enum value `FlexScheme.blueWhale` for easy access to it.  
+  Use enum value `FlexScheme.blueWhale` to use it.  
 * **San Juan blue** - San Juan blue and pink salmon theme.
-  Use enum value `FlexScheme.sanJuanBlue` for easy access to it.
+  Use enum value `FlexScheme.sanJuanBlue` to use it.
 * **Rosewood** - Rosewood red, with horses neck and driftwood theme.
-  Use enum value `FlexScheme.rosewood` for easy access to it.
+  Use enum value `FlexScheme.rosewood` to use it.
 * **Blumine** - Blumine, easter blue and saffron mango theme.
-  Use enum value `FlexScheme.blumineBlue` for easy access to it.
+  Use enum value `FlexScheme.blumineBlue` to use it.
 
 Total number of of offered built-in color schemes is now 36 matched light 
 and dark pairs. By using the swap primary and secondary colors, you can double
@@ -162,7 +163,7 @@ Assign `FlexThemeData.light` to the app's `theme`, which is the application's li
 theme definition property and `FlexThemeData.dark` to `darkTheme`.
 For both `FlexThemeData` dark and light we set the `scheme` property to 
 `FlexScheme.mandyRed` to use the "Oh Mandy red" scheme colors and get matching 
-light and dark themes based on its color defintions.
+light and dark themes based on its color definitions.
 
 The three line modified `MaterialApp` of the Flutter default counter app 
 becomes:
