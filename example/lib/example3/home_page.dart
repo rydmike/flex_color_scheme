@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                       // This is not an SDK BorderShape themed widget, but we
                       // can pass it property values to make it match.
                       optionButtonBorderRadius:
-                          controller.useSubThemes ? 16 : 4,
+                          controller.useSubThemes ? 12 : 4,
                       buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
                     ),
                     const SizedBox(height: 8),

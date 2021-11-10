@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
                             flexSchemeData:
                                 AppColor.schemes[controller.schemeIndex],
                             optionButtonBorderRadius:
-                                controller.useSubThemes ? 16 : 4,
+                                controller.useSubThemes ? 12 : 4,
                             buttonOrder:
                                 FlexThemeModeButtonOrder.lightSystemDark,
                           ),
