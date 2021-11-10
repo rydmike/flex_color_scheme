@@ -11,8 +11,8 @@ import 'theme_service.dart';
 /// controller.
 ///
 /// To actually persist the settings locally, use the [ThemeServicePrefs]
-/// implementation that uses package shared_preferences package to persists the
-/// values or the [ThemeServiceHive] that uses the hive packages to accomplish
+/// implementation that uses the shared_preferences package to persists the
+/// values, or the [ThemeServiceHive] that uses the hive package to accomplish
 /// the same thing. You could also make an implementation that stores settings
 /// on a web server, e.g. with the http package.
 ///
@@ -21,7 +21,7 @@ import 'theme_service.dart';
 /// does not really do anything when calling save for each property,
 /// they are all just no-op.
 ///
-/// Loading value from just returns the default value for each settings
+/// Loading values from it just returns the default value for each settings
 /// property.
 class ThemeServiceMem implements ThemeService {
   /// ThemeServiceMem implementations needs no init, it is just a no op.

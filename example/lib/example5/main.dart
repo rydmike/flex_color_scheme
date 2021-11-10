@@ -105,18 +105,18 @@ class DemoApp extends StatelessWidget {
                     colors: AppColor.schemes[themeController.schemeIndex].light,
                     // Use controller to select surface mode
                     surfaceMode: themeController.surfaceMode,
-                    // Enum used to control the level of primary color surface
-                    // branding applied to surfaces and backgrounds.
+                    // Integer used to control the level of primary color
+                    // surface blends applied to surfaces and backgrounds.
                     blendLevel: themeController.blendLevel,
-                    // Enum used to select what app bar style we use.
+                    // Enum used to select what AppBar style we use.
                     appBarStyle: themeController.lightAppBarStyle,
                     // Set background opacity on app bar.
                     appBarOpacity: themeController.appBarOpacity,
-                    // Used to modify the themed app bar elevation.
+                    // Used to modify the themed AppBar elevation.
                     appBarElevation: themeController.appBarElevation,
                     // Used to control if we use one or two toned status bar.
                     transparentStatusBar: themeController.transparentStatusBar,
-                    // Enum used to select what tab bar style we use.
+                    // Enum used to select what TabBar style we use.
                     tabBarStyle: themeController.tabBarStyle,
                     // If true, tooltip theme background will be light in light
                     // theme, and dark in dark themes. The Flutter and Material
@@ -127,11 +127,11 @@ class DemoApp extends StatelessWidget {
                     // have different style of tooltips on different platforms.
                     tooltipsMatchBackground:
                         themeController.tooltipsMatchBackground,
-                    // Swap primary and secondary colors
+                    // Swap primary and secondary colors.
                     swapColors: themeController.swapLightColors,
                     // Keep scaffold plain white in all blend modes.
                     lightIsWhite: themeController.lightIsWhite,
-                    // Opt in/out of using the new sub v4 sub themes.
+                    // Opt in/out of using the new V4 sub-themes.
                     useSubThemes: themeController.useSubThemes,
                     // Modify these const values in the AppData class.
                     visualDensity: AppData.visualDensity,
@@ -139,26 +139,25 @@ class DemoApp extends StatelessWidget {
                     fontFamily: AppData.font,
                     // The platform can be toggled in the app, but not saved.
                     platform: themeController.platform,
-                    // primaryTextTheme: AppData.textTheme,
-                    // Add some some options to modify the sub-themes, there
+                    // Options used to modify the sub-themes, there
                     // are more controls, here we use:
                     subThemesData: FlexSubThemesData(
-                      // Opt-in out of ne M3 text theme.
+                      // Opt in/out of the Material 3 style matched TextTheme.
                       useTextTheme: themeController.useTextTheme,
                       // Slider to adjust themed border radius on widgets with
                       // an adjustable corner rounding, this one is darn handy.
                       // If null, it defaults to Material3 (You) design
                       // guide values, as far as they are given in the new
-                      // guide: https://m3.material.io/
+                      // guide so far: https://m3.material.io/
                       defaultRadius: themeController.useDefaultRadius
                           ? null
                           : themeController.cornerRadius,
                       // Set to false to keep using M2 style FAB and ignore
-                      // M3 typ default and global radius on the FAB, it remains
-                      // circular or stadium shaped in extended mode.
+                      // M3 type default and global radius on the FAB, it thus
+                      // remains circular or stadium shaped in extended mode.
                       fabUseShape: themeController.fabUseShape,
-                      // Want color themed hover, focus, highlight and splash?
-                      // Keep this one on.
+                      // Want color themed disable hover, focus, highlight and
+                      // splash colors? Then keep this one on.
                       interactionEffects: themeController.themedEffects,
                       // Themed opacity of bottom navigation bar.
                       bottomNavigationBarOpacity:
@@ -170,11 +169,11 @@ class DemoApp extends StatelessWidget {
                       inputDecoratorIsFilled:
                           themeController.inputDecoratorIsFilled,
                       // Do you like underline or outline border type?
-                      // We we could add some new styles in a future update.
+                      // We might some new styles in a future update.
                       inputDecoratorBorderType:
                           themeController.inputDecoratorIsOutlinedBorder,
                       // Only want a border when the text input has focus
-                      // or error, set this to false. By default it always
+                      // or error, then set this to false. By default it always
                       // has a border of selected style.
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
@@ -185,22 +184,43 @@ class DemoApp extends StatelessWidget {
                       blendOnColors: themeController.blendLightOnColors,
                       // By default sub themes mode also opts-in for using
                       // colored text for the themed text, like Material3/You.
-                      // These colors will likely change a bit later releases
+                      // These colors will likely change a bit in later releases
                       // when we get Material3 support in Flutter.
                       // This already works very well tough. If you plan to
                       // put text on surfaces that are not primary color tinted
                       // or primary colored, then you may need to turn this
                       // off, or make custom text themes for those surfaces.
                       // Material3 has containers with matching text color
-                      // tints, can't do that yet with only Themes in Flutter.
+                      // tints. Can't do that yet with only Themes in Flutter.
                       blendTextTheme: themeController.blendLightTextTheme,
                       // Set some opacity on popup menu, just to show a
                       // setting not available via themeController in the demo.
                       popupMenuOpacity: 0.96,
                     ),
                   )
-                // Here we are NOT using FlexThemeData. We use the default
-                // ThemeData.from method, just to see the differences.
+                // Do NOT using FlexThemeData. We use the SDK ThemeData.from
+                // factory to make the theme instead. Toggle to see the
+                // differences.
+                // We still keep the selected color scheme by grabbing it from
+                // FlexColorScheme using its toScheme method. Which gives us
+                // a standard ColorScheme that we can use with ThemeData.from
+                // to create the ThemeData from same colors. The color scheme
+                // it creates also contains the blends, but since ColorScheme
+                // only contains surface and background colors and is missing
+                // Scaffold and dialog color, it cannot provide those colors.
+                //
+                // The normal use case for FlexColorScheme.toScheme would be
+                // that you define FlexColorScheme with the
+                // FlexColorScheme.light and dark factories, instead of
+                // FlexThemeData.light/dark, then you extract the ColorSchemes
+                // from it and pass it along or just some colors from it,
+                // to custom sub-theme methods, so they can use the same scheme
+                // colors when needs, many does need them. Then you create
+                // the them from you FlexColorScheme with toTHeme as before in
+                // version before V4 and to the result apply the custom
+                // sub-themes with copyWith on your ThemeData, using the same
+                // same ColorScheme or colors from it, as you ThemeData was
+                // created with.
                 : ThemeData.from(
                     textTheme: ThemeData(
                       brightness: Brightness.light,
@@ -211,6 +231,7 @@ class DemoApp extends StatelessWidget {
                       surfaceMode: themeController.surfaceMode,
                       blendLevel: themeController.blendLevel,
                       swapColors: themeController.swapLightColors,
+                      lightIsWhite: themeController.lightIsWhite,
                     ).toScheme,
                   ).copyWith(
                     visualDensity: AppData.visualDensity,
@@ -220,8 +241,14 @@ class DemoApp extends StatelessWidget {
                   ),
             // We do the exact same definition for the dark theme, but using
             // FlexThemeData.dark() and the dark FlexSchemeColors and we add
-            // the true black option as well and the feature to demonstrate
-            // the usage of computed dark schemes.
+            // use the true black option instead of the in light mode less useful
+            // lightIsWhite option.
+            //
+            // We also add a feature to demonstrate
+            // the usage of computed dark schemes, which we in this setup can
+            // can use with any color scheme, even if it already has nice
+            // matching dark colors, we can try what we get if we compute it
+            // from the light mode color definitions.
             //
             // The level of white blend percentage used when computing dark
             // scheme colors from the light scheme colors with the toDark method
@@ -233,6 +260,11 @@ class DemoApp extends StatelessWidget {
                             .defaultError
                             .toDark(themeController.darkMethodLevel)
                         : AppColor.schemes[themeController.schemeIndex].dark,
+                    // For reduced complexity in this demo, we use the same
+                    // control value for surface mode selection and blend level
+                    // for light and dark mode. They can as shown in earlier
+                    // examples be different and in light and dark mode, you
+                    // can mix and match whatever fits your design goals.
                     surfaceMode: themeController.surfaceMode,
                     blendLevel: themeController.blendLevel,
                     appBarStyle: themeController.darkAppBarStyle,

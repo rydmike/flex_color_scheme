@@ -72,14 +72,14 @@ class DemoApp extends StatelessWidget {
           title: 'All Themes',
           // Define the light theme for the app, using current scheme index.
           theme: FlexThemeData.light(
-            // The definition of the list of color schemes to use we moved into
-            // a separate static class and list, we use the theme controller
-            // to just change the index of the used color scheme.
+            // We moved the definition of the list of color schemes to use into
+            // a separate static class and list. We use the theme controller
+            // to change the index of a used color scheme from the list.
             colors: AppColor.schemes[themeController.schemeIndex].light,
             // Here we use another surface blend mode, where the scaffold
             // background gets a strong blend. This type is commonly used
             // on web/desktop when you wrap content on the scaffold in a
-            // card that has a darker background.
+            // card that has a lighter background.
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             // Our content is not all wrapped in cards in this demo, so
             // we keep the blend level fairly low for good contrast.

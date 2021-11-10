@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
   // (Added to deal with StaggeredGridView issue.)
   late List<bool> isCardOpen;
 
-  // The number of cards in the grid, must match the number we add to view!
+  // The number of cards in the grid, must match the number we add to grid view.
   static const int _nrOfCards = 21;
 
   // Used to store listened to scroll position.
@@ -70,8 +70,8 @@ class _HomePageState extends State<HomePage> {
   // (Added to deal with StaggeredGridView issue.)
   int prevColumns = 0;
 
-  // state that decides id we show all blend options or not,
-  // depending on if it will fit in the layout.
+  // State that decides if we show all blend modes options or not,
+  // depending on if it will fit in the layout, it won't on phones.
   bool showAllBlends = false;
 
   void _scrollPosition() {
@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     // Short handle to the media query, used to get size and paddings.
     final MediaQueryData media = MediaQuery.of(context);
-    // Paddings so content shows up visible area when we use Scaffold props
+    // Paddings so content shows up in visible area when we use Scaffold props
     // extendBodyBehindAppBar and extendBody.
     final double topPadding = media.padding.top + kToolbarHeight;
     final double bottomPadding = media.padding.bottom;
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       // FlexColorScheme contains a static helper that can be use to theme
-      // the system navigation bar using an AnnotatedRegion. Without this
+      // the system navigation bar using the AnnotatedRegion. Without this
       // wrapper the system navigation bar in Android will not change
       // color as we change themes for the page. This is normal Flutter
       // behavior. By using an annotated region with the helper function
@@ -145,7 +145,8 @@ class _HomePageState extends State<HomePage> {
       child: ResponsiveScaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
-        // Callback from menu, an item was clicked
+        // Callback from menu, an item was clicked in the menu, for simplicity
+        // we just use index based actions here.
         onSelect: (int index) async {
           // Open all cards
           if (index == 0) {
@@ -229,7 +230,7 @@ class _HomePageState extends State<HomePage> {
           // the StaggeredGridView and also the WaterfallFlow layouts
           // do not work correctly. The issue appears related in both
           // packages, but end breaking style looks a bit different, but cause
-          // is they, break when resizing media size and the columns change.
+          // is, they break when resizing media size and the columns change.
           // Issue:
           // https://github.com/letsar/flutter_staggered_grid_view/issues/138
           // https://github.com/letsar/flutter_staggered_grid_view/issues/167
@@ -238,23 +239,25 @@ class _HomePageState extends State<HomePage> {
           // rebuild when the key changes. Then we also loose the layout
           // scroll position even with a AutomaticKeepAliveClientMixin, so when
           // columns change, we are always back at start of view, not good!
+          //
           // A temp hack for this was to listen to the used scroll controller
           // position, store its value in local state and jump to position it
           // last had, when dependencies changes and we also had a different
           // column count than we had before. It "kind of" works, but even with
           // jumpTo position, it is visible that it jumped to start and then
           // back again to where we were. Scroll position is tricky to keep
-          // logical in this kind of layout anyway, when columns change.
+          // logical in this kind of layout anyway when columns change, but
+          // is hould be better than this and this hack should not be needed.
           //
           // Regarding the layout issue, I have not found a Masonry or
-          // Staggered grid view like package that would be able to handle
+          // staggered grid view like package that would be able to handle
           // this layout correctly. I'm beginning to wonder if the issue
-          // might be at a lower layer in widget layout used by both
-          // StaggeredGridView and WaterfallFlow. Using StaggeredGridView below,
+          // might be at a lower layer in the widget layout used by both
+          // StaggeredGridView and WaterfallFlow? Using StaggeredGridView below,
           // but the usage with WaterfallFlow is very similar. The WaterfallFlow
           // seems to be a bit smoother/faster, but I got it to crash when doing
           // very quick resizing on desktop builds. StaggeredGridView is a tad
-          // choppier, but so far it did not crash.
+          // choppier, but so far it did at least not crash.
           //
           // For a WaterfallFlow implementation, import it and replace with
           // this until, but not including, the itemBuilder row:
@@ -334,7 +337,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               //
-              // The "Settings" Cards.
+              // All the "Settings" Cards...
               _ThemeColors(
                 controller: widget.controller,
                 isOpen: isCardOpen[1],
@@ -399,13 +402,16 @@ class _HomePageState extends State<HomePage> {
                   toggleCard(9);
                 },
               ),
+              //
+              // The sub pages card, not really a setting.
               SubPages(
                 isOpen: isCardOpen[10],
                 onTap: () {
                   toggleCard(10);
                 },
               ),
-              // The "Themed" results Cards.
+              //
+              // All the "Themed" results Cards...
               _MaterialButtonsShowcase(
                 isOpen: isCardOpen[11],
                 onTap: () {
@@ -475,6 +481,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// The ResetSettings AlertDialog.
 class _RestSettingsDialog extends StatelessWidget {
   const _RestSettingsDialog({Key? key}) : super(key: key);
 
@@ -497,10 +504,24 @@ class _RestSettingsDialog extends StatelessWidget {
             },
             child: const Text('RESET')),
       ],
+      // Add some padding to the action buttons, they are so close the
+      // dialog edge without it.
+      // Can't theme the padding in the dialog to something nicer, not yet!
+      // I've seen it mentioned that it is coming, since M3 has more
+      // default padding in its specs.
       actionsPadding: const EdgeInsets.symmetric(horizontal: 16),
     );
   }
 }
+
+// Each Card shown in the grid view is just its on little widget, typically
+// very simple and basic Column based layouts.
+// They all share a common custom wrapper widget, the HeaderCard.
+//
+// The widgets below are all private classes local to this file, since in this
+// demo they are only intended to be use in HomePage. The could of course be
+// made public widget and put into their own files if there would be a need
+// to use them on other other screens too.
 
 class _ThemeColors extends StatelessWidget {
   const _ThemeColors({
@@ -870,8 +891,8 @@ class _SurfaceBlends extends StatelessWidget {
             SwitchListTile.adaptive(
               title: const Text('Plain white'),
               subtitle: const Text(
-                'Plain white Scaffold in all blend modes, '
-                'other surfaces becomes 8% lighter',
+                'White Scaffold in all blend modes, '
+                'other surfaces get 8% lighter',
               ),
               value: controller.lightIsWhite,
               onChanged: controller.setLightIsWhite,
@@ -880,8 +901,8 @@ class _SurfaceBlends extends StatelessWidget {
             SwitchListTile.adaptive(
               title: const Text('True black'),
               subtitle: const Text(
-                'True black Scaffold in all blend modes, '
-                'other surfaces becomes 8% darker',
+                'Black Scaffold in all blend modes, '
+                'other surfaces get 8% darker',
               ),
               value: controller.darkIsTrueBlack,
               onChanged: controller.setDarkIsTrueBlack,
@@ -1268,7 +1289,7 @@ class _TabBar extends StatelessWidget {
             'Works on surface colors, like Scaffold, but '
             'also works on surface colored app bars';
       case FlexTabBarStyle.flutterDefault:
-        return 'Style: useDefault\n'
+        return 'Style: flutterDefault\n'
             'SDK default. Works on primary color in light mode, and '
             'background color in dark mode';
       case FlexTabBarStyle.universal:
@@ -1288,7 +1309,7 @@ class _TabBar extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: 8),
           ListTile(
-            title: const Text('Choose TabBar style that fits your usage'),
+            title: const Text('Choose TabBar style that fits your use case'),
             subtitle: Text(explainTabStyle(controller.tabBarStyle)),
           ),
           // const SizedBox(height: 4),

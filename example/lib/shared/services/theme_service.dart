@@ -59,8 +59,9 @@ abstract class ThemeService {
   static const String keySchemeIndex = 'schemeIndex';
 
   /// Default value for the schemeIndex, also used to reset settings.
-  /// Defaults to 1, the first custom theme made in example 4 and 5.
-  static const int defaultSchemeIndex = 0;
+  /// Defaults to 35, in examples 4 & 5 where this is used it will make
+  /// the default theme based on the [FlexColor.blueWhale] color scheme.
+  static const int defaultSchemeIndex = 35;
 
   /// Loads used scheme index setting, in examples 4 and 5.
   Future<int> schemeIndex();
@@ -160,8 +161,8 @@ abstract class ThemeService {
 
   /// Default value for the blendLevel, also used to reset settings.
   ///
-  /// Defaults to 20.
-  static const int defaultBlendLevel = 20;
+  /// Defaults to 18.
+  static const int defaultBlendLevel = 18;
 
   /// Loads used surface blend level setting in example 5.
   Future<int> blendLevel();

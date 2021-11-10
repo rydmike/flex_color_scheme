@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
               'FlexSchemeData, create a theme '
               'from it and toggle between light and dark mode. '
               'The new opinionated widget theming is ON. You can '
-              'turn it OFF to use default widget themes. '
+              'turn it OFF to use Flutter default widget themes. '
               'A theme showcase displays the resulting theme using '
               'common Material widgets',
             ),
@@ -63,7 +63,7 @@ class HomePage extends StatelessWidget {
               // Call the updateThemeMode method when user selects a mode.
               onThemeModeChanged: controller.setThemeMode,
               flexSchemeData: flexSchemeData,
-              optionButtonBorderRadius: controller.useSubThemes ? 16 : 4,
+              optionButtonBorderRadius: controller.useSubThemes ? 12 : 4,
               buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
             ),
             // Show theme name and description.

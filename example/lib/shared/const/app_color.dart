@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// Static App color schemes used in examples 4 & 5.
 ///
 /// Putting static const color data in their own class with only color values
-/// and data related to the colors is common useful and convenient practice.
+/// and data related to the colors is a common useful and convenient practice.
 class AppColor {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
@@ -62,16 +62,16 @@ class AppColor {
 
 // Finally we create a list with all color schemes we will use. Starting with
 // our custom schemes, since normally when we make custom schemes, those are
-// probably the ones we want to use primarily. After our custom schemes,
-// we add all the pre-defined built-in ones, offering them as options the users
-// can switch to and use if they like.
+// probably the ones we want to use primarily so we put them first. After our
+// custom schemes, we add all the pre-defined built-in ones, offering them as
+// options users can switch to and use if they like.
   static final List<FlexSchemeData> schemes = <FlexSchemeData>[
     // We add our custom light and dark FlexSchemeColor schemes we defined
     // to a list of FlexSchemeData, where we can bundle each light and dark
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
-      name: 'Tut-1 Midnight',
-      description: 'Midnight blue theme, custom definition of all colors',
+      name: 'C1: Midnight',
+      description: 'Midnight blue theme, used custom definition of all colors',
       // FlexSchemeData holds separate defined color schemes for light and
       // matching dark theme colors. Dark theme colors typically need to be less
       // saturated versions of their than light counter parts. Using the same
@@ -81,7 +81,7 @@ class AppColor {
     ),
     // Do the same for our second custom scheme.
     FlexSchemeData(
-      name: 'Tut-2 Greens',
+      name: 'C2: Greens',
       description: 'Vivid green theme, created from only a primary '
           'light and dark color',
       light: _myScheme2Light,
@@ -90,8 +90,9 @@ class AppColor {
     // We also do the same for our 3rd custom scheme, BUT we create its matching
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
-      name: 'Tut-3 Red & Blue',
-      description: 'Classic read and blue, from only light scheme colors',
+      name: 'C3: Red & Blue',
+      description: 'Classic read and blue, created from only light scheme '
+          'primary and secondary colors',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.
       dark: _myScheme3Light.toDark(),

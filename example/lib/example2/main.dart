@@ -43,10 +43,12 @@ Future<void> main() async {
 // and dark FlexSchemeColor.
 // You can also just create a FlexSchemeColor for light and dark theme,
 // without the name and description, but in this example we will use
-// the name and description to describe created themes.
+// the name and description to also describe created themes.
 //
 // Here we use local const values for our color palette definitions, you may
 // want to bundle your custom color values in a class as static const values.
+// This was just some colors I chose on a whim, but dang this theme actually
+// looks pretty good! :)
 const FlexSchemeData _myFlexScheme = FlexSchemeData(
   name: 'Midnight blue',
   description: 'Midnight blue theme, custom definition of all colors',
@@ -73,6 +75,10 @@ class DemoApp extends StatelessWidget {
     // Glue the ThemeController to the MaterialApp.
     // The AnimatedBuilder Widget listens to the ThemeController for changes.
     // Whenever the user updates theme settings, the MaterialApp is rebuilt.
+    // It rebuilds the entire app when any value in the themeController is
+    // changed, but that is fine, since all property changes in it are of
+    // the nature that te entire App UI needs to be redrawn, so this approach
+    // works well for this use case.
     return AnimatedBuilder(
         animation: themeController,
         builder: (BuildContext context, Widget? child) {
@@ -80,7 +86,7 @@ class DemoApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             scrollBehavior: AppScrollBehavior(),
             title: 'Custom Theme',
-            // Define FlexThemeData.light() theme using custom colors.
+            // Define FlexThemeData.light() theme using above custom colors.
             theme: FlexThemeData.light(
               // You could have stored the light scheme in a FlexSchemeColor
               // and used it for the colors, but we will use both the light and
@@ -89,25 +95,32 @@ class DemoApp extends StatelessWidget {
               // object that contains both the light and dark scheme and its
               // name and description.
               colors: _myFlexScheme.light,
-              // Toggle using FlexColorScheme sub-themes, via theme controller.
+              // Opt in/out on FlexColorScheme sub-themes with theme controller.
               useSubThemes: themeController.useSubThemes,
-              appBarElevation: 1,
+              appBarElevation: 0.5,
               // Here we want the large default visual density on all platforms.
+              // Like Flutter SDK it default to
+              // VisualDensity.adaptivePlatformDensity, which uses standard on
+              // devices, but compact on desktops, compact is very compact,
+              // maybe even a bit too compact
               visualDensity: VisualDensity.standard,
-              // You can add a font via just a fontFamily from e.g. GoogleFonts,
-              // but for better results, prefer defining complete TextThemes
-              // and assign them to textTheme and primaryTextTheme.
+              // You can add a font via just a fontFamily from e.g. GoogleFonts.
+              // For better results, prefer defining complete TextThemes,
+              // using a font and its different styles, potentially even
+              // more then one font, and then assign the TextTheme to the
+              // textTheme and primaryTextTheme in FlexThemeData. This is
+              // just how you would use it with ThemeData too.
               fontFamily: GoogleFonts.notoSans().fontFamily,
             ),
-            // Same setup for the dark theme, but with FlexThemeData.dark().
+            // Same setup for the dark theme, but using FlexThemeData.dark().
             darkTheme: FlexThemeData.dark(
               colors: _myFlexScheme.dark,
               useSubThemes: themeController.useSubThemes,
-              appBarElevation: 4,
+              appBarElevation: 1,
               visualDensity: VisualDensity.standard,
               fontFamily: GoogleFonts.notoSans().fontFamily,
             ),
-            // Use the dark or light theme based on controller setting.
+            // Use the dark or light theme, based on controller setting.
             themeMode: themeController.themeMode,
             home: HomePage(
               // Pass in the FlexSchemeData we used for the active theme. Not

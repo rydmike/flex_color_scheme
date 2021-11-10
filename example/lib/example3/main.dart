@@ -79,7 +79,8 @@ class DemoApp extends StatelessWidget {
           // usedScheme, that contains the value of currently selected
           // FlexScheme enum. If it is the custom scheme, we use the above
           // custom scheme colors, if it is any other scheme, we get the
-          // corresponding colors from the FlexColor.schemes map.
+          // corresponding colors from the FlexColor.schemes map using the
+          // enum value as key.
           theme: FlexThemeData.light(
             colors: themeController.usedScheme == FlexScheme.custom
                 ? _myFlexScheme.light
@@ -92,8 +93,12 @@ class DemoApp extends StatelessWidget {
             blendLevel: 20,
             appBarElevation: 0.5,
             useSubThemes: themeController.useSubThemes,
-            // Returns comfortable density on desktops, instead of compact,
-            /// like the `VisualDensity.adaptivePlatformDensity` does.
+            // Here we use a FlexColorScheme helper comfortablePlatformDensity.
+            // It returns comfortable density on desktops, instead of compact,
+            // like the `VisualDensity.adaptivePlatformDensity` does, it is
+            // good compromise for desktop, especially if they have touch
+            // screens since it keeps buttons and touch targets larger, but
+            // not as large as on hand held devices.
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
           ),
@@ -116,7 +121,7 @@ class DemoApp extends StatelessWidget {
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
           ),
-          // Use the dark or light theme based on controller setting.
+          // Use the dark or light theme, based on controller setting.
           themeMode: themeController.themeMode,
           // This simple example app has only one page.
           home: HomePage(

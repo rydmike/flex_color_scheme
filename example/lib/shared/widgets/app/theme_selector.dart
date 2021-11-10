@@ -76,7 +76,7 @@ class _ThemeSelectorState extends State<ThemeSelector> {
                 return FlexThemeModeOptionButton(
                   optionButtonBorderRadius: widget.controller.useSubThemes
                       ? widget.controller.useDefaultRadius
-                          ? 16
+                          ? 12
                           : widget.controller.cornerRadius
                       : 4,
                   height: 30,

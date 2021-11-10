@@ -55,6 +55,11 @@ class HomePage extends StatelessWidget {
             FlexThemeModeSwitch(
               themeMode: themeMode,
               onThemeModeChanged: onThemeModeChanged,
+              // The `FlexThemeModeSwitch` has a `FlexSchemeData` property that
+              // it uses to set colors on the theme mode buttons and to
+              // display theme name and description. Since we passed in our
+              // custom scheme data, with name and all, from main here to
+              // the HomePage , we just pass it on to the FlexThemeModeSwitch.
               flexSchemeData: flexSchemeData,
               buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
             ),

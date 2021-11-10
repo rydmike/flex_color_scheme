@@ -5,14 +5,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'theme_service.dart';
 // ignore_for_file: comment_references
 
-/// A service that stores and retrieves theme settings locally using
-/// package Shared Preferences: https://pub.dev/packages/shared_preferences
+/// A [ThemeService] implementation that stores and retrieves theme settings
+/// locally using the package Shared Preferences:
+/// https://pub.dev/packages/shared_preferences
 ///
 /// This service on purpose demonstrates persisting each theme setting value as
-/// it own string key and value pair. With this amount of of values,
-/// bundling them all up in a data class an persisting them all is one
-/// serialized JSON string with just one settings key, would be more
-/// convenient, on the other hand it this is probably more resources
+/// its own string key and value pair. With this amount of values,
+/// bundling them all up in a data class and persisting them all as one big
+/// serialized JSON string, with just one settings key, would be more
+/// convenient. On the other hand, this is probably more resources
 /// efficient and gives us faster saves of persisted slider values, that can
 /// be dragged quickly in the UI. Writing this setup for this many properties is
 /// a bit error prone, even if it is simple and very mechanical.
@@ -30,7 +31,7 @@ class ThemeServicePrefs implements ThemeService {
   ///
   /// The application only actually loads settings once when it starts, after
   /// that settings are in kept in memory and saved when changed, but
-  /// never read back.
+  /// never read back before app is started again.
   @override
   Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -50,7 +51,7 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Persists the ThemeMode to mem in examples 2, 3, 4 and 5.
+  /// Persists the ThemeMode used in examples 2, 3, 4 and 5.
   @override
   Future<void> saveThemeMode(ThemeMode value) async {
     // We store enums as their int index value. This breaks if enum definitions
@@ -62,7 +63,7 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Loads the use sub themes setting from mem in examples 2, 3, 4 and 5.
+  /// Loads the use sub themes setting used in examples 2, 3, 4 and 5.
   @override
   Future<bool> useSubThemes() async {
     try {
@@ -75,7 +76,7 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Persists the use sub themes setting to mem in examples 2, 3, 4 and 5.
+  /// Persists the use sub themes setting used in examples 2, 3, 4 and 5.
   @override
   Future<void> saveUseSubThemes(bool value) async {
     try {
@@ -108,7 +109,7 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Loads the used scheme setting from mem in example 3.
+  /// Loads the used scheme setting used in example 3.
   @override
   Future<FlexScheme> usedScheme() async {
     try {
@@ -121,7 +122,7 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Persists the used scheme setting to mem in example 3.
+  /// Persists the used scheme setting used in example 3.
   @override
   Future<void> saveUsedScheme(FlexScheme value) async {
     try {
@@ -131,7 +132,7 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Loads used scheme index setting from mem in examples 4 and 5.
+  /// Loads used scheme index setting used in examples 4 and 5.
   @override
   Future<int> schemeIndex() async {
     try {
@@ -144,7 +145,7 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Persists the used scheme setting to mem in examples 4 and 5.
+  /// Persists the used scheme setting used in examples 4 and 5.
   @override
   Future<void> saveSchemeIndex(int value) async {
     try {

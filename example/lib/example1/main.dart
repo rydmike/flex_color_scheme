@@ -1,6 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
@@ -42,18 +41,12 @@ class _DemoAppState extends State<DemoApp> {
         scheme: usedScheme,
         // Use very subtly themed app bar elevation in light mode.
         appBarElevation: 0.5,
-        // Comfortable density on desktops, devices use default.
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        // We use GoogleFonts NotoSans instead of platform defaults.
-        fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
       // Same definition for the dark theme, using FlexThemeData.dark().
       darkTheme: FlexThemeData.dark(
         scheme: usedScheme,
         // Use stronger app bar elevation in dark mode.
         appBarElevation: 2,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
