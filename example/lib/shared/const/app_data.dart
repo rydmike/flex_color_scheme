@@ -39,6 +39,8 @@ class AppData {
   // Used by grid layout when in >= 4 column layout mode.
   static const double edgeInsetsBigDesktop = 24;
 
+  // Responsive insets based on width. The width may be from LayoutBuilder or
+  // MediaQuery, depending on what is appropriate for the use case.
   static double responsiveInsets(double width) {
     if (width < phoneBreakpoint) return edgeInsetsPhone;
     if (width < desktopBreakpoint) return edgeInsetsTablet;
@@ -48,8 +50,7 @@ class AppData {
   // The minimum media size needed for desktop/large tablet menu view.
   // Only at higher than this breakpoint will the menu open and be possible
   // to toggle between menu and rail. Below this breakpoint it toggles between
-  // hidden in the Drawer and rail, also on phones. In this simple demo there
-  // is no switch to bottom navigation.
+  // hidden in the Drawer and rail, also on phones.
   static const double desktopBreakpoint = 960;
 
   // The minimum media width treated as a phone device in this demo.
@@ -61,14 +62,15 @@ class AppData {
   // The width of the side menu when collapsed to a rail.
   static const double railWidth = 60;
 
-  // Returns the title of the MaterialApp, used to set title on pages to
-  // same as as is set in each example for its app name. Handy as we only
+  // Returns the title of the MaterialApp. Used to set title on pages to
+  // same that is defined in each example as its app name. Handy as we only
   // need to update in one place, where it belongs and no need to put it as
   // a const somewhere and no need to pass it around via a title prop either.
   static String title(BuildContext context) =>
       (context as Element).findAncestorWidgetOfExactType<MaterialApp>()!.title;
 
-  // Get the main font used in the examples.
+  // Get the main font that is used in some of the examples.
+  // Feel free to try different fonts.
   static String? get font => GoogleFonts.notoSans().fontFamily;
 
   // Defining the visual density here to so we can change it in one spot when
@@ -79,8 +81,8 @@ class AppData {
   // We define a custom text theme for our app. This is just for demo purposes
   // on how to setup a custom text theme. This works just as well with normal
   // ThemeData and ThemeData.from btw. FlexColorScheme does the TextTheme
-  // setup same way as ThemeData, but injects the primary color blends
-  // if you use the new blend mode options.
+  // setup same way as ThemeData, but injects the primary color blends if you
+  // use the new text theme blend mode option when you opt in on sub themes.
   //
   // In this example we decided that:
   //
@@ -88,9 +90,8 @@ class AppData {
   // The used sizes for them below are actually from Material Guide M3/You.
   // https://m3.material.io/styles/typography/overview
   //
-  // We also think buttons should have a bit bigger text, tighter letter
-  // spacing, and that overline is a bit too small and have weird letter
-  // spacing, so we change them too.
+  // We also think that overline is a bit too small and have weird letter
+  // spacing, so we change it too.
   static const TextTheme textTheme = TextTheme(
     headline1: TextStyle(
       fontSize: 57, // Same as M3, defaults to 96 in Material2018 Typography.
@@ -104,7 +105,7 @@ class AppData {
     headline4: TextStyle(
       fontSize: 28, // Same as M3, defaults to 34 in Material2018 Typography.
     ),
-    // I chose this, by coincidence I later saw it happens to match what M3 too.
+    // I chose this, I later saw it happened to match new M3 style too - cool!
     overline: TextStyle(
       fontSize: 11, // Defaults to 10 in Material2018 Typography.
       letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.

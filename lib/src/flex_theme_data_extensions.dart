@@ -164,8 +164,9 @@ extension FlexThemeData on ThemeData {
     ///
     /// To get elevation overlay color in dark themes on all surfaces used by
     /// [Material], use one of the modes where background and dialog color
-    /// equals the blend strength on surface color, like [flat], [lowScaffold],
-    /// [veryHighScaffold], [veryHighScaffold]. Other modes will only use
+    /// equals the blend strength on surface color, like [level],
+    /// [levelSurfacesLowScaffold], [highScaffoldLowSurfaces] and
+    /// [highScaffoldLowSurfaces]. Other modes will only use
     /// elevation overlay if their background happens to be equal to resulting
     /// colorScheme.surface color. For more information
     /// see issue: https://github.com/flutter/flutter/issues/90353
@@ -173,9 +174,8 @@ extension FlexThemeData on ThemeData {
     /// When using very strong surface branding in dark mode, having an overlay
     /// elevation color in dark mode is less critical, since the elevation
     /// becomes partially visible via shadows and the surface may even have
-    /// another color tint if using e.g. [lowScaffoldVariantDialog] or
-    /// [veryHighScaffoldVariantDialog].
-    ///
+    /// another color tint if using e.g. [levelSurfacesLowScaffoldVariantDialog]
+    /// or [highScaffoldLowSurfacesVariantDialog].
     ///
     /// If values for the properties [surface], [background],
     /// [dialogBackground] or [scaffoldBackground] are given,
@@ -880,8 +880,9 @@ extension FlexThemeData on ThemeData {
     ///
     /// To get elevation overlay color in dark themes on all surfaces used by
     /// [Material], use one of the modes where background and dialog color
-    /// equals the blend strength on surface color, like [flat], [lowScaffold],
-    /// [veryHighScaffold], [veryHighScaffold]. Other modes will only use
+    /// equals the blend strength on surface color, like [level],
+    /// [levelSurfacesLowScaffold], [highScaffoldLowSurfaces] and
+    /// [highScaffoldLowSurfaces]. Other modes will only use
     /// elevation overlay if their background happens to be equal to resulting
     /// colorScheme.surface color. For more information
     /// see issue: https://github.com/flutter/flutter/issues/90353
@@ -889,8 +890,8 @@ extension FlexThemeData on ThemeData {
     /// When using very strong surface branding in dark mode, having an overlay
     /// elevation color in dark mode is less critical, since the elevation
     /// becomes partially visible via shadows and the surface may even have
-    /// another color tint if using e.g. [lowScaffoldVariantDialog] or
-    /// [veryHighScaffoldVariantDialog].
+    /// another color tint if using e.g. [levelSurfacesLowScaffoldVariantDialog]
+    /// or [highScaffoldLowSurfacesVariantDialog].
     ///
     /// If values for the properties [surface], [background],
     /// [dialogBackground] or [scaffoldBackground] are given,

@@ -1185,8 +1185,9 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// To get elevation overlay color in dark themes on all surfaces used by
     /// [Material], use one of the modes where background and dialog color
-    /// equals the blend strength on surface color, like [flat], [lowScaffold],
-    /// [veryHighScaffold], [veryHighScaffold]. Other modes will only use
+    /// equals the blend strength on surface color, like [level],
+    /// [levelSurfacesLowScaffold], [highScaffoldLowSurfaces] and
+    /// [highScaffoldLowSurfaces]. Other modes will only use
     /// elevation overlay if their background happens to be equal to resulting
     /// colorScheme.surface color. For more information
     /// see issue: https://github.com/flutter/flutter/issues/90353
@@ -1194,8 +1195,8 @@ class FlexColorScheme with Diagnosticable {
     /// When using very strong surface branding in dark mode, having an overlay
     /// elevation color in dark mode is less critical, since the elevation
     /// becomes partially visible via shadows and the surface may even have
-    /// another color tint if using e.g. [lowScaffoldVariantDialog] or
-    /// [veryHighScaffoldVariantDialog].
+    /// another color tint if using e.g. [levelSurfacesLowScaffoldVariantDialog]
+    /// or [highScaffoldLowSurfacesVariantDialog].
     ///
     /// If values for the properties [surface], [background],
     /// [dialogBackground] or [scaffoldBackground] are given,
@@ -2088,8 +2089,9 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// To get elevation overlay color in dark themes on all surfaces used by
     /// [Material], use one of the modes where background and dialog color
-    /// equals the blend strength on surface color, like [flat], [lowScaffold],
-    /// [veryHighScaffold], [veryHighScaffold]. Other modes will only use
+    /// equals the blend strength on surface color, like [level],
+    /// [levelSurfacesLowScaffold], [highScaffoldLowSurfaces] and
+    /// [highScaffoldLowSurfaces]. Other modes will only use
     /// elevation overlay if their background happens to be equal to resulting
     /// colorScheme.surface color. For more information
     /// see issue: https://github.com/flutter/flutter/issues/90353
@@ -2097,8 +2099,8 @@ class FlexColorScheme with Diagnosticable {
     /// When using very strong surface branding in dark mode, having an overlay
     /// elevation color in dark mode is less critical, since the elevation
     /// becomes partially visible via shadows and the surface may even have
-    /// another color tint if using e.g. [lowScaffoldVariantDialog] or
-    /// [veryHighScaffoldVariantDialog].
+    /// another color tint if using e.g. [levelSurfacesLowScaffoldVariantDialog]
+    /// or [highScaffoldLowSurfacesVariantDialog].
     ///
     /// If values for the properties [surface], [background],
     /// [dialogBackground] or [scaffoldBackground] are given,
@@ -4805,8 +4807,9 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
                 dialogBackground: FlexColor.materialDarkSurface,
               ));
-    // If using `highBackground` or `highSurface` or `lowSurfaceHighScaffold`
-    // and `_blendLevel` is zero, we use Material default surfaces.
+    // If using `highBackgroundLowScaffold` or `highSurfaceLowScaffold` or
+    // `highScaffoldLevelSurface` and `_blendLevel` is zero,
+    // we use Material default surfaces.
     // This is the same style as used in versions before 4.0 when using
     // `surfaceStyle` based surfaces and no blends via `FlexSurface.material`.
     if (surfaceMode == FlexSurfaceMode.highBackgroundLowScaffold ||
@@ -4873,7 +4876,8 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         );
       }
     }
-    // In mode `highScaffold` and `highScaffoldVariantDialog`, we use FlexColor
+    // In mode `highScaffoldLowSurfaces` and
+    // `highScaffoldLowSurfacesVariantDialog`, we use FlexColor
     // default background color on all surfaces. The FlexColor background color
     // is slightly darker in dark mode and a bit off white in light mode,
     // as compared to FlexColor.lightSurface and dark surface.
