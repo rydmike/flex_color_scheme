@@ -161,8 +161,7 @@ to try, see and experience what each configuration option in FlexColorScheme
 does when you use large screen with high resolution, so you can see the
 result of all settings at one glance.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/05-web-demo-4k.png?raw=true" alt="options"/>   
-_FlexColorScheme and the **Themes Playground** app at 4k resolution_
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/05-web-demo-4k.png?raw=true" alt="options"/>_FlexColorScheme**Themes Playground** app at 4k resolution_
 
 ## Installing and Using
 
@@ -398,7 +397,7 @@ dark color versions as well. So OK, there are actually "only" 30 new ready-made 
 ### This ColorScheme Should be Different!
 
 The built-in schemes in no way claim to be a "this selection" fits all needs collection, nor do they claim to be 
-more correct than any other color scheme. What fits your needs and looks good to you, is of course the right choice
+more correct than any other color scheme. What fits your needs and looks good to you, is the right choice
 for your application and use case. You can make your own custom scheme totally from scratch, or use these as 
 a starting point. Copy colors from existing schemes or change colors that do not fit your design requirements.
 
@@ -425,12 +424,15 @@ The purposes with the FlexColorScheme package is to:
 * Enable easy switching among multiple color schemes in an app. 
 * Address some gaps in Flutter's default color scheme based themes.
 * Provide an easy way to make themes with primary color branded backgrounds and surfaces, 
-  and to easily vary this branding strength. 
-* Provide an easy toggle for different app bar styles, without the need to manually make a custom theme 
+  and to easily vary the blend level and mode for different surfaces. 
+* Provide an easy toggle for different AppBar styles, without the need to manually make a custom theme 
   for it every time. 
 * Provide optional support for a **true black** mode for dark themes.
 * Be able to quickly swap the primary and secondary color definitions, if you want to try your
   theme the other way around.
+* Opt in on widget sub-themes to get an even more refined look on the widgets and text. The default
+  for the sub-themes are inspired by the new Material 3 guide. Following it when it can be easily
+  accomplished using current Material 2 based theming in Flutter.
 
 Additionally, FlexColorScheme introduces a way to make "lazy" quick toned `ColorScheme` like themes from just a single
 light scheme color. Even its dark scheme counterpart can be made from this single color definition. To understand how
@@ -442,32 +444,23 @@ benefit from FlexColorScheme's capabilities.
 
 ### Can We Change this Predefined Scheme's Colors?
 
-No, current predefined schemes will not be changed. Changing them would be a breaking change to the package
-version promise. Sure, the scheme colors could in theory be changed by releasing a new major version 
-that break past scheme color definitions. 
-
-At the moment, there are no plans to ever add breaking releases to just change a predefined 
-scheme's color(s). All current color definition values are also included in the package tests, and
-a failed color value test is considered a breaking change.
+No, current predefined schemes will not be changed. Changing them would be a breaking change to the 
+package version promise. The scheme colors could in theory be changed by releasing a new major version 
+that break past scheme color definitions. At the moment, there are no plans to ever add breaking 
+releases to just change a predefined scheme's color(s). All current color definition 
+values are also included in the package tests, and a failed color value test is 
+considered a breaking change.
 
 ### Can We Add This Scheme?
 
-To keep things interesting, I do plan to from time to time add new color schemes to the built-in ones.
-
-Inspired by **MaterialYou**, I recently hooked up FlexColorScheme with an algorithm that extracts
-prominent colors from images. Then fed these colors to FlexColorScheme to make themes from them.
-The new color schemes in release 3.0.0 came from these image based theme experiments.
-You can see examples of FlexColorScheme making color schemes and themes from 
-images in my Tweets about it. This was a first [quick test](https://twitter.com/RydMike/status/1399139552200114179?s=20)
-of the idea, later I added some more features to it, [here](https://twitter.com/RydMike/status/1399301081939820545?s=20) and [here](https://twitter.com/RydMike/status/1399933068614504451?s=20). This
-experiment shows that **FlexColorScheme** is very versatile.
+To keep things interesting, we do from time to time add new color schemes to the built-in ones.
 
 If you have a beautiful color scheme with matching light and dark theme mode colors, that you think 
 should be included in the built-in schemes, please post a 
-suggestion as a GitHub issue. No promise is made about its eventual inclusion, but if I also 
+suggestion as a GitHub issue. No promise is made about its eventual inclusion, but if we also 
 think it is a nice, unique and overall a pretty color scheme, it will very likely be included.
-Coming up with nice color schemes is trickier than it seems, so contributions to new ones will 
-certainly be considered.
+Coming up with nice color schemes is trickier than it seems, so contributions to new ones 
+are certainly welcome.
 
 
 ### Can I use different built-in color schemes for my light and dark themes?
@@ -491,18 +484,9 @@ custom color schemes with the `FlexColorScheme.light` and `FlexColorScheme.dark`
 
 ### Sample Applications
 
-> **Building the examples**
-> 
->If you cloned the repository to build the examples, you can open the package `/example` folder with your IDE to build
->the above default example. This example is the same as the example in the `/example/lib/example1` folder.
-> 
->If you want to build the other examples, without setting up different configurations in your IDE for the different
->main files. Copy and paste the wanted example's `main.dart` code, into the `/example/lib/main.dart` file to
->build it from your IDE. After copying the new main example content, change the relative
->import for the "all shared imports" file to:  
->`import 'all_shared_imports.dart';`   
->For examples 4 and 5, also the "sub_page" import to:  
->`import 'shared/sub_page.dart';`
+**Building the examples**
+ 
+
 
 ### Live WEB Demos of the Examples
 

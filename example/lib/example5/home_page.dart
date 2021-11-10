@@ -325,11 +325,11 @@ class _HomePageState extends State<HomePage> {
                         'via the controls.\n'
                         '\n'
                         'The theming impact on widgets is shown in expandable '
-                        'cards with the "Themed" heading. The three first '
+                        'cards with "Themed" headings. The three first '
                         'themes are custom color schemes and are not built-in '
                         'choices. In the packages tutorial you learn how to '
-                        'make your own custom Flutter color schemes and make '
-                        'advanced themes with FlexColorScheme',
+                        'make your own custom color schemes and turn '
+                        'them into advanced themes with FlexColorScheme',
                       ),
                       SizedBox(height: 8),
                     ],
