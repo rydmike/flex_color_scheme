@@ -135,7 +135,7 @@ In the hot reload playground the side menu has no real functionality, it is
 mainly there to present more surface area using the background color. The
 theme toggle in the menu does work though.
 
-##[Themes Playground](https://rydmike.com/flexcolorschemeV4Tut5/#/)
+## Themes Playground
 
 The side menu you saw in the default example is actually made for and used
 in the last step and example in the tutorial. The final example, number 5, 
