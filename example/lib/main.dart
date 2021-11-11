@@ -7,8 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'shared/const/app_data.dart';
 import 'shared/widgets/app/responsive_scaffold.dart';
 import 'shared/widgets/app/show_sub_pages.dart';
-import 'shared/widgets/app/show_theme_colors.dart';
 import 'shared/widgets/universal/page_body.dart';
+import 'shared/widgets/universal/show_theme_colors.dart';
 import 'shared/widgets/universal/theme_mode_switch.dart';
 import 'shared/widgets/universal/theme_showcase.dart';
 
@@ -444,6 +444,9 @@ class _HomePageState extends State<HomePage> {
     final double margins = AppData.responsiveInsets(media.size.width);
     final double topPadding = media.padding.top + kToolbarHeight + margins;
     final double bottomPadding = media.padding.bottom + margins;
+    // We are on phone width media, based on our definition in this app.
+    final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headline4 = textTheme.headline4!;
@@ -477,6 +480,11 @@ class _HomePageState extends State<HomePage> {
         opacity: 0.60,
       ),
       child: ResponsiveScaffold(
+        title: Text(AppData.title(context)),
+        menuTitle: const Text(AppData.appName),
+        // Make Rail width larger when using it on tablet or desktop.
+        railWidth: isPhone ? 52 : 66,
+        breakpointShowFullMenu: AppData.desktopBreakpoint,
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {

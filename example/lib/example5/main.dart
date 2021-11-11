@@ -241,8 +241,8 @@ class DemoApp extends StatelessWidget {
                   ),
             // We do the exact same definition for the dark theme, but using
             // FlexThemeData.dark() and the dark FlexSchemeColors and we add
-            // use the true black option instead of the in light mode less useful
-            // lightIsWhite option.
+            // use the true black option instead of the in light mode less
+            // useful lightIsWhite option.
             //
             // We also add a feature to demonstrate
             // the usage of computed dark schemes, which we in this setup can

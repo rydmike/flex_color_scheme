@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 /// Draw a number of boxes showing the colors of key theme color properties
@@ -7,14 +6,28 @@ import 'package:flutter/material.dart';
 ///
 /// This widget is just used so we can visually see the active theme colors
 /// in the examples and their used FlexColorScheme based themes.
+///
+/// It also show some warning labels when using surface branding that is too
+/// strong and makes the surface require reverse contrasted text in relation to
+/// text normally associated with the active theme mode.
+///
+/// These are all Flutter "Universal" Widgets that only depends on the SDK and
+/// all the Widgets in this file be dropped into any application. They are
+/// however not so generally reusable.
 class ShowThemeColors extends StatelessWidget {
   const ShowThemeColors({Key? key}) : super(key: key);
 
+  // Return true if the color is light, meaning it needs dark text for contrast.
+  static bool _isLight(final Color color) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+
+  // Return true if the color is dark, meaning it needs light text for contrast.
+  static bool _isDark(final Color color) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
+
   // On color used when a theme color property does not have a theme onColor.
   static Color _onColor(final Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light
-          ? Colors.black
-          : Colors.white;
+      _isLight(color) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -49,27 +62,27 @@ class ShowThemeColors extends StatelessWidget {
 
     // Warning label for scaffold background when it uses to much blend.
     final String scaffoldTooHigh = isDark
-        ? theme.scaffoldBackgroundColor.isLight
+        ? _isLight(theme.scaffoldBackgroundColor)
             ? '\nTOO HIGH'
             : ''
-        : theme.scaffoldBackgroundColor.isDark
+        : _isDark(theme.scaffoldBackgroundColor)
             ? '\nTOO HIGH'
             : '';
     // Warning label for scaffold background when it uses to much blend.
     final String surfaceTooHigh = isDark
-        ? theme.colorScheme.surface.isLight
+        ? _isLight(theme.colorScheme.surface)
             ? '\nTOO HIGH'
             : ''
-        : theme.colorScheme.surface.isDark
+        : _isDark(theme.colorScheme.surface)
             ? '\nTOO HIGH'
             : '';
 
     // Warning label for scaffold background when it uses to much blend.
     final String backTooHigh = isDark
-        ? theme.colorScheme.background.isLight
+        ? _isLight(theme.colorScheme.background)
             ? '\nTOO HIGH'
             : ''
-        : theme.colorScheme.background.isDark
+        : _isDark(theme.colorScheme.background)
             ? '\nTOO HIGH'
             : '';
 
@@ -258,17 +271,19 @@ class ThemeCard extends StatelessWidget {
     required this.label,
     required this.color,
     required this.textColor,
+    this.size = const Size(78, 56),
   }) : super(key: key);
 
   final String label;
   final Color color;
   final Color textColor;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 54,
-      width: 80,
+      width: size.width,
+      height: size.height,
       child: Card(
         margin: EdgeInsets.zero,
         color: color,

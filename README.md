@@ -3,38 +3,44 @@
 
 # FlexColorScheme
 
-Use **FlexColorScheme** to make beautiful color scheme based Flutter themes, with optional color 
-branded surfaces. The created themes are based on the same concept as Flutter's ColorScheme based 
-themes, with many additional useful and convenient features. When you color theme a Flutter
-application all built in widgets use the colors in your theme. That is, if you defined your
-Flutter ThemeData the correct way. FlexColorScheme ensures that all Flutter SDK widgets gets 
-themed as intended by the used color scheme or custom colors you provide.
+Use **FlexColorScheme** to make beautiful color scheme based Flutter themes, primary 
+surface color surface blends. The themes are based on the same concept as 
+Flutter's ColorScheme based themes, but with many additional useful and 
+convenient features.
 
+When you color theme a Flutter application, all built in 
+widgets use the colors of your color scheme in your theme. At least in theory, 
+and it is almost so if you defined your Flutter ThemeData the correct way.
+FlexColorScheme ensures that all Flutter SDK widgets gets 
+themed as intended by the used color scheme or custom colors you provide, and 
+you get access to large number of predefined color schemes.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00-new-main-image.gif?raw=true" alt="main_image"/>
 
 You can also opt in on using pre-made opinionated widget sub-themes.
-The most prominent difference is that by using them, you can globally adjust the 
-border radius on all widgets to share same themed common border radius. Current 
-Flutter SDK widgets are based on the Material 2 standard and use 4dp corner 
-radius as default on most built in widgets.
+By using them you can globally adjust the border radius on all widgets, 
+so they use the same themed border radius. Current Flutter SDK widgets are 
+based on the Material 2 standard and use 4dp corner radius as default on 
+most built-in widgets corners.
 
-When you opt in on sub-themes the border radius on widgets default to the 
-new rounded corner as specified by the 
-[Material 3 standard](https://m3.material.io/), where the 
-rounding actually varies by widget type. You can stick with this or set global 
-radius to whatever value you prefer. You can also easily set themed border
-radius per widget to override the global value, via simple property 
-values per widget, without using verbose custom sub-theme definitions.
+When you opt in on sub-themes, the border radius on widgets default to the 
+new rounded corners as specified by the 
+[Material 3 guide](https://m3.material.io/), where the 
+rounding varies by widget type. You can stick with this, or set global 
+radius to a value you prefer. You can also easily set themed border
+radius per widget to override the global value in just a few cases, via 
+simple property values per widget, without using verbose custom sub-theme 
+definitions with Shape definitions.
 
 # Version 4 Notice
 
-This document is still mainly the version 3.0.0 documentation. Depending on when and where
+This readme is still mainly the version 3 documentation. Depending on when and where
 you read it, e.g. on GitHub or as a dev release v4.0.0-dev on pub.dev, it may contain
 some updated elements. The documentation will not be complete until v4.0.0 
 stable is released. The current hold point for going stable is the completion
-of the updated documentation. It is very unlikely that there will be any
-major API changes from the dev releases to stable, unless some typos or 
+of the updated documentation, and some minor TODOs for the examples. 
+It is very unlikely that there will be any
+major API changes from the dev releases to stable version, unless some major 
 issues are discovered before the stable v4 release.
 
 ## What is new in version 4?

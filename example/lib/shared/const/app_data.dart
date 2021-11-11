@@ -32,6 +32,15 @@ class AppData {
   // this demo app, that works pretty well in this use case too.
   static const double maxBodyWidth = 1000;
 
+  // The minimum media size needed for desktop/large tablet menu view.
+  // Only at higher than this breakpoint will the menu open and be possible
+  // to toggle between menu and rail. Below this breakpoint it toggles between
+  // hidden in the Drawer and rail, also on phones.
+  static const double desktopBreakpoint = 1150;
+
+  // The minimum media width treated as a phone device in this demo.
+  static const double phoneBreakpoint = 600;
+
   // Edge padding insets for page content on the screen.
   static const double edgeInsetsPhone = 8;
   static const double edgeInsetsTablet = 14;
@@ -46,21 +55,6 @@ class AppData {
     if (width < desktopBreakpoint) return edgeInsetsTablet;
     return edgeInsetsDesktop;
   }
-
-  // The minimum media size needed for desktop/large tablet menu view.
-  // Only at higher than this breakpoint will the menu open and be possible
-  // to toggle between menu and rail. Below this breakpoint it toggles between
-  // hidden in the Drawer and rail, also on phones.
-  static const double desktopBreakpoint = 960;
-
-  // The minimum media width treated as a phone device in this demo.
-  static const double phoneBreakpoint = 600;
-
-  // The width of the side menu when expanded to full menu.
-  static const double menuWidth = 275;
-
-  // The width of the side menu when collapsed to a rail.
-  static const double railWidth = 60;
 
   // Returns the title of the MaterialApp. Used to set title on pages to
   // same that is defined in each example as its app name. Handy as we only

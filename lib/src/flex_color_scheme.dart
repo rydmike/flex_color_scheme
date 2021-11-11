@@ -75,6 +75,7 @@ enum FlexSurfaceMode {
   /// information see issue: https://github.com/flutter/flutter/issues/90353
   level,
 
+  // TODO(rydmike): The matches to dark mode got changed, update doc again!
   /// Decreasing blend level in order background, surface, scaffold.
   ///
   /// The blend level decreases on surfaces in this order:
@@ -331,21 +332,6 @@ enum FlexSurfaceMode {
   /// to make your custom surface colors using the applied blend levels.
   custom,
 }
-
-/// Light to dark mode alpha blend increase is 2x.
-///
-/// This is needed because dark mode primary and secondary colors are usually
-/// much more desaturated, so dark mode needs higher blend level than light
-/// theme to visually reach a comparable blend effect. The exact level depends
-/// on saturation level of the dark mode color scheme, typically primary color
-/// since that is the one used in most cases. Since the blend level can be
-/// defined separately for dark and light they can of course use different
-/// levels to be visually matched or different on purpose.
-///
-/// The value 2x was found to with most common themes produce effects were the
-/// primary color blends are at an equivalent level between light and dark
-/// mode.
-const int _kLightToDarkFactor = 2;
 
 /// Enum to select the used AppBarTheme style in [FlexColorScheme] based themes
 /// when using its `light` and `dark` factories.
@@ -1208,9 +1194,11 @@ class FlexColorScheme with Diagnosticable {
     /// When [surfaceMode] is defined, this sets the blend level strength used
     /// by the surface mode.
     ///
-    /// In light mode the blend level value equals the alpha value in the
-    /// alpha blends for the surfaces, in dark mode, 2x the blend value
-    /// is used for alpha.
+    /// The blend level is the integer decimal value of the alpha value
+    /// used in the alpha blend function. It mixes one color with another
+    /// by using alpha opacity value in the color of a surface put on top of
+    /// another surface with opaque color and returns the result as one opaque
+    /// color.
     ///
     /// Defaults to 0.
     final int blendLevel = 0,
@@ -2112,9 +2100,11 @@ class FlexColorScheme with Diagnosticable {
     /// When [surfaceMode] is defined, this sets the blend level strength used
     /// by the surface mode.
     ///
-    /// In light mode the blend level value equals the alpha value in the
-    /// alpha blends for the surfaces, in dark mode, 2x the blend value
-    /// is used for alpha.
+    /// The blend level is the integer decimal value of the alpha value
+    /// used in the alpha blend function. It mixes one color with another
+    /// by using alpha opacity value in the color of a surface put on top of
+    /// another surface with opaque color and returns the result as one opaque
+    /// color.
     ///
     /// Defaults to 0.
     final int blendLevel = 0,
@@ -5364,88 +5354,86 @@ class _AlphaValues {
     final int blendLevel,
     final Brightness brightness,
   ) {
-    final int modeFactor =
-        brightness == Brightness.light ? 1 : _kLightToDarkFactor;
     switch (mode) {
       case FlexSurfaceMode.level:
       case FlexSurfaceMode.custom:
         // Result: Background (1x) Surface (1x) Scaffold (1x).
         return _AlphaValues(
-          primaryAlpha: blendLevel * modeFactor,
-          secondaryAlpha: blendLevel * modeFactor,
-          errorAlpha: blendLevel * modeFactor,
-          surfaceAlpha: blendLevel * modeFactor,
-          dialogAlpha: blendLevel * modeFactor,
-          backgroundAlpha: blendLevel * modeFactor,
-          scaffoldAlpha: blendLevel * modeFactor,
+          primaryAlpha: blendLevel,
+          secondaryAlpha: blendLevel,
+          errorAlpha: blendLevel,
+          surfaceAlpha: blendLevel,
+          dialogAlpha: blendLevel,
+          backgroundAlpha: blendLevel,
+          scaffoldAlpha: blendLevel,
         );
       // Result: Background (3/2x) Surface & (1x) Scaffold (1/2x).
       case FlexSurfaceMode.highBackgroundLowScaffold:
         return _AlphaValues(
-          primaryAlpha: blendLevel * modeFactor,
-          secondaryAlpha: blendLevel * modeFactor,
-          errorAlpha: blendLevel * modeFactor,
-          surfaceAlpha: blendLevel * modeFactor,
-          dialogAlpha: blendLevel * modeFactor,
-          backgroundAlpha: blendLevel * modeFactor * 3 ~/ 2,
-          scaffoldAlpha: blendLevel * modeFactor ~/ 2,
+          primaryAlpha: blendLevel,
+          secondaryAlpha: blendLevel,
+          errorAlpha: blendLevel,
+          surfaceAlpha: blendLevel,
+          dialogAlpha: blendLevel,
+          backgroundAlpha: blendLevel * 3 ~/ 2,
+          scaffoldAlpha: blendLevel ~/ 2,
         );
       // Result: Surface (3/2x) Background (1x) Scaffold (1/2x).
       case FlexSurfaceMode.highSurfaceLowScaffold:
         return _AlphaValues(
-          primaryAlpha: blendLevel * modeFactor,
-          secondaryAlpha: blendLevel * modeFactor,
-          errorAlpha: blendLevel * modeFactor,
-          surfaceAlpha: blendLevel * modeFactor * 3 ~/ 2,
-          dialogAlpha: blendLevel * modeFactor * 3 ~/ 2,
-          backgroundAlpha: blendLevel * modeFactor,
-          scaffoldAlpha: blendLevel * modeFactor ~/ 2,
+          primaryAlpha: blendLevel,
+          secondaryAlpha: blendLevel,
+          errorAlpha: blendLevel,
+          surfaceAlpha: blendLevel * 3 ~/ 2,
+          dialogAlpha: blendLevel * 3 ~/ 2,
+          backgroundAlpha: blendLevel,
+          scaffoldAlpha: blendLevel ~/ 2,
         );
       // Result: Scaffold (3x) Background (1x) Surface (1/2x).
       case FlexSurfaceMode.highScaffoldLowSurface:
         return _AlphaValues(
-          primaryAlpha: blendLevel * modeFactor,
-          secondaryAlpha: blendLevel * modeFactor,
-          errorAlpha: blendLevel * modeFactor,
-          surfaceAlpha: blendLevel * modeFactor ~/ 2,
-          dialogAlpha: blendLevel * modeFactor ~/ 2,
-          backgroundAlpha: blendLevel * modeFactor,
-          scaffoldAlpha: blendLevel * modeFactor * 3,
+          primaryAlpha: blendLevel,
+          secondaryAlpha: blendLevel,
+          errorAlpha: blendLevel,
+          surfaceAlpha: blendLevel ~/ 2,
+          dialogAlpha: blendLevel ~/ 2,
+          backgroundAlpha: blendLevel,
+          scaffoldAlpha: blendLevel * 3,
         );
       // Result: Scaffold (3x) background (3/2x) surface (1x).
       case FlexSurfaceMode.highScaffoldLevelSurface:
         return _AlphaValues(
-          primaryAlpha: blendLevel * modeFactor,
-          secondaryAlpha: blendLevel * modeFactor,
-          errorAlpha: blendLevel * modeFactor,
-          surfaceAlpha: blendLevel * modeFactor,
-          dialogAlpha: blendLevel * modeFactor,
-          backgroundAlpha: blendLevel * modeFactor * 3 ~/ 2,
-          scaffoldAlpha: blendLevel * modeFactor * 3,
+          primaryAlpha: blendLevel,
+          secondaryAlpha: blendLevel,
+          errorAlpha: blendLevel,
+          surfaceAlpha: blendLevel,
+          dialogAlpha: blendLevel,
+          backgroundAlpha: blendLevel * 3 ~/ 2,
+          scaffoldAlpha: blendLevel * 3,
         );
       // Result: (1x) Surface and Background (1x) Scaffold (1/2x).
       case FlexSurfaceMode.levelSurfacesLowScaffold:
       case FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog:
         return _AlphaValues(
-          primaryAlpha: blendLevel * modeFactor,
-          secondaryAlpha: blendLevel * modeFactor,
-          errorAlpha: blendLevel * modeFactor,
-          surfaceAlpha: blendLevel * modeFactor,
-          dialogAlpha: blendLevel * modeFactor,
-          backgroundAlpha: blendLevel * modeFactor,
-          scaffoldAlpha: blendLevel * modeFactor ~/ 2,
+          primaryAlpha: blendLevel,
+          secondaryAlpha: blendLevel,
+          errorAlpha: blendLevel,
+          surfaceAlpha: blendLevel,
+          dialogAlpha: blendLevel,
+          backgroundAlpha: blendLevel,
+          scaffoldAlpha: blendLevel ~/ 2,
         );
       // Result: Scaffold (3x) Surface and background (1/2x).
       case FlexSurfaceMode.highScaffoldLowSurfaces:
       case FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog:
         return _AlphaValues(
-          primaryAlpha: blendLevel * modeFactor,
-          secondaryAlpha: blendLevel * modeFactor,
-          errorAlpha: blendLevel * modeFactor,
-          surfaceAlpha: blendLevel * modeFactor ~/ 2,
-          dialogAlpha: blendLevel * modeFactor ~/ 2,
-          backgroundAlpha: blendLevel * modeFactor ~/ 2,
-          scaffoldAlpha: blendLevel * modeFactor * 3,
+          primaryAlpha: blendLevel,
+          secondaryAlpha: blendLevel,
+          errorAlpha: blendLevel,
+          surfaceAlpha: blendLevel ~/ 2,
+          dialogAlpha: blendLevel ~/ 2,
+          backgroundAlpha: blendLevel ~/ 2,
+          scaffoldAlpha: blendLevel * 3,
         );
     }
   }

@@ -934,10 +934,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xff392c48),
-          background: Color(0xff2a2235),
-          scaffoldBackground: Color(0xff1f1b24),
-          dialogBackground: Color(0xff392c48),
+          surface: Color(0xff251e2c),
+          background: Color(0xff1d1922),
+          scaffoldBackground: Color(0xff18161b),
+          dialogBackground: Color(0xff251e2c),
         )),
       );
     });
@@ -952,10 +952,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xff2b2335),
-          background: Color(0xff382b47),
-          scaffoldBackground: Color(0xff614880),
-          dialogBackground: Color(0xff2b2335),
+          surface: Color(0xff1e1a23),
+          background: Color(0xff241d2b),
+          scaffoldBackground: Color(0xff392d49),
+          dialogBackground: Color(0xff1e1a23),
         )),
       );
     });
@@ -970,10 +970,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xff1e1a23),
-          background: Color(0xff2b2335),
-          scaffoldBackground: Color(0xff61487f),
-          dialogBackground: Color(0xff1e1a23),
+          surface: Color(0xff17151a),
+          background: Color(0xff1e1a23),
+          scaffoldBackground: Color(0xff392c48),
+          dialogBackground: Color(0xff17151a),
         )),
       );
     });
@@ -988,10 +988,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.level,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xff2b2335),
-          background: Color(0xff2b2335),
-          scaffoldBackground: Color(0xff2b2335),
-          dialogBackground: Color(0xff2b2335),
+          surface: Color(0xff1e1a23),
+          background: Color(0xff1e1a23),
+          scaffoldBackground: Color(0xff1e1a23),
+          dialogBackground: Color(0xff1e1a23),
         )),
       );
     });
@@ -1006,10 +1006,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xff2b2335),
-          background: Color(0xff2b2335),
-          scaffoldBackground: Color(0xff1e1a23),
-          dialogBackground: Color(0xff2b2335),
+          surface: Color(0xff1e1a23),
+          background: Color(0xff1e1a23),
+          scaffoldBackground: Color(0xff17151a),
+          dialogBackground: Color(0xff1e1a23),
         )),
       );
     });
@@ -1024,10 +1024,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xff2b2335),
-          background: Color(0xff2b2335),
-          scaffoldBackground: Color(0xff1e1a23),
-          dialogBackground: Color(0xff0e302d),
+          surface: Color(0xff1e1a23),
+          background: Color(0xff1e1a23),
+          scaffoldBackground: Color(0xff17151a),
+          dialogBackground: Color(0xff0f201f),
         )),
       );
     });
@@ -1042,10 +1042,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xff1d1922),
-          background: Color(0xff1d1922),
-          scaffoldBackground: Color(0xff60477f),
-          dialogBackground: Color(0xff1d1922),
+          surface: Color(0xff161419),
+          background: Color(0xff161419),
+          scaffoldBackground: Color(0xff382b47),
+          dialogBackground: Color(0xff161419),
         )),
       );
     });
@@ -1060,10 +1060,10 @@ void main() {
           surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
         ),
         equals(const FlexSchemeSurfaceColors(
-          surface: Color(0xff1d1922),
-          background: Color(0xff1d1922),
-          scaffoldBackground: Color(0xff60477f),
-          dialogBackground: Color(0xff0e1f1e),
+          surface: Color(0xff161419),
+          background: Color(0xff161419),
+          scaffoldBackground: Color(0xff382b47),
+          dialogBackground: Color(0xff0f1717),
         )),
       );
     });

@@ -11,7 +11,6 @@ import '../shared/pages/sub_pages.dart';
 import '../shared/widgets/app/app_bar_style_buttons.dart';
 import '../shared/widgets/app/platform_popup_menu.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
-import '../shared/widgets/app/show_theme_colors.dart';
 import '../shared/widgets/app/surface_mode_buttons.dart';
 import '../shared/widgets/app/system_nav_bar_style_buttons.dart';
 import '../shared/widgets/app/tab_bar_style_buttons.dart';
@@ -19,6 +18,7 @@ import '../shared/widgets/app/theme_popup_menu.dart';
 import '../shared/widgets/app/theme_selector.dart';
 import '../shared/widgets/universal/animated_switch_hide.dart';
 import '../shared/widgets/universal/header_card.dart';
+import '../shared/widgets/universal/show_theme_colors.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 
@@ -125,6 +125,8 @@ class _HomePageState extends State<HomePage> {
     // We are on phone width media, based on our definition in this app.
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
 
+    debugPrint('Width = ${media.size.width}');
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       // FlexColorScheme contains a static helper that can be use to theme
       // the system navigation bar using the AnnotatedRegion. Without this
@@ -145,6 +147,11 @@ class _HomePageState extends State<HomePage> {
       child: ResponsiveScaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
+        // Make Rail width larger when using it on tablet or desktop.
+        railWidth: isPhone ? 52 : 66,
+        breakpointShowFullMenu: AppData.desktopBreakpoint,
+        title: Text(AppData.title(context)),
+        menuTitle: const Text(AppData.appName),
         // Callback from menu, an item was clicked in the menu, for simplicity
         // we just use index based actions here.
         onSelect: (int index) async {

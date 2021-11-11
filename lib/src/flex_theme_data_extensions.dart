@@ -187,12 +187,14 @@ extension FlexThemeData on ThemeData {
     /// When [surfaceMode] is defined, this sets the blend level strength used
     /// by the surface mode.
     ///
-    /// In light mode the blend level value equals the alpha value in the
-    /// alpha blends for the surfaces, in dark mode, 2x the blend value
-    /// is used for alpha.
+    /// The blend level is the integer decimal value of the alpha value
+    /// used in the alpha blend function. It mixes one color with another
+    /// by using alpha opacity value in the color of a surface put on top of
+    /// another surface with opaque color and returns the result as one opaque
+    /// color.
     ///
     /// Defaults to 0.
-    final int blendLevel = 10,
+    final int blendLevel = 0,
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
@@ -903,9 +905,11 @@ extension FlexThemeData on ThemeData {
     /// When [surfaceMode] is defined, this sets the blend level strength used
     /// by the surface mode.
     ///
-    /// In light mode the blend level value equals the alpha value in the
-    /// alpha blends for the surfaces, in dark mode, 2x the blend value
-    /// is used for alpha.
+    /// The blend level is the integer decimal value of the alpha value
+    /// used in the alpha blend function. It mixes one color with another
+    /// by using alpha opacity value in the color of a surface put on top of
+    /// another surface with opaque color and returns the result as one opaque
+    /// color.
     ///
     /// Defaults to 0.
     final int blendLevel = 0,

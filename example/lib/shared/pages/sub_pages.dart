@@ -5,7 +5,7 @@ import 'splash_page_one.dart';
 import 'splash_page_two.dart';
 import 'subpage.dart';
 
-/// All the sub pages wrapped in a header card.
+/// All the sub demo pages wrapped in a header card.
 class SubPages extends StatelessWidget {
   const SubPages({
     Key? key,

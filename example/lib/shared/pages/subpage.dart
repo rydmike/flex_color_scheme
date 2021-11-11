@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../const/app_data.dart';
 import '../widgets/app/about.dart';
-import '../widgets/app/show_theme_colors.dart';
 import '../widgets/universal/page_body.dart';
+import '../widgets/universal/show_theme_colors.dart';
 import '../widgets/universal/theme_showcase.dart';
 
-// It is not necessary to review or understand the code in this file in order
-// to understand how to use the FlexColorScheme package demonstrated in
-// the examples.
-
-// This sub page is used as a demo in Examples 4 and 5 to show a sub-page
-// using the same FlexColorScheme based theme.
+// This sub page is used as a demo in the default example and in examples
+// 4 and 5 to show a sub-page using the same FlexColorScheme based theme.
 class Subpage extends StatefulWidget {
   const Subpage({Key? key}) : super(key: key);
 
