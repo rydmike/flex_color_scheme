@@ -109,7 +109,7 @@ colors and the created theme's impact on common Material UI widgets.
 
 The default sample app looks like this:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00_playground_default.png?raw=true" alt="playground_default" width="500"/>
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00_playground_default.png?raw=true" alt="playground_default"/>
 
 It comes fully loaded with template settings and thorough 
 comments that explain what to change to produce different results. You
