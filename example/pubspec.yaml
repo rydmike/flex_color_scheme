@@ -32,7 +32,7 @@ dependencies:
   # and changes in it due to calculation of columns to used based on change in
   # media size and resulting layout area.
   # Might be a shared underlying issues in the SDK that is causing the problem.
-  # This one crashed in some rapid window resizess so stuck with staggered grid.
+  # This one crashed in some rapid window resizes so stuck with staggered grid.
   #
   # waterfall_flow: ^3.0.1
 

@@ -54,6 +54,9 @@ Future<void> main() async {
   // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_2');
   await themeService.init();
   final ThemeController themeController = ThemeController(themeService);
+  // Load the the preferred theme while the splash screen is displayed.
+  // This prevents a sudden theme change when the app is first displayed.
+  await themeController.loadAll();
 
   // Run the app and pass in the ThemeController. The app listens to the
   // ThemeController for changes, then passes it further down to the HomePage.
