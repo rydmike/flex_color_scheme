@@ -228,7 +228,7 @@ becomes:
 
 > **New in version 4:**  
 > The `FlexThemeData.light()` and `FlexThemeData.dark()` APIs are new in 
-> version 4. They are `ThemeData` extensions to  
+> version 4. They are `ThemeData` extensions to 
 > `FlexColorScheme.light().toTheme` and `FlexColorScheme.dark().toTheme` used
 > in version before 4. The old APIs work as before too and will not be 
 > deprecated. They are still needed in more advanced theming use cases

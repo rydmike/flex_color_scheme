@@ -183,268 +183,720 @@ class ThemeServiceHive implements ThemeService {
   /// Loads used themed effects setting in example 5.
   @override
   Future<bool> interactionEffects() async {
-    return ThemeService.defaultInteractionEffects;
+    try {
+      return _hiveBox.get(ThemeService.keyInteractionEffects,
+          defaultValue: ThemeService.defaultInteractionEffects) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultInteractionEffects;
+    }
   }
 
   /// Persists used themed effects setting in example 5.
   @override
-  Future<void> saveInteractionEffects(bool value) async {}
+  Future<void> saveInteractionEffects(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyInteractionEffects, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used useDefaultRadius setting in example 5.
   @override
-  Future<bool> useDefaultRadius() async => ThemeService.defaultUseDefaultRadius;
+  Future<bool> useDefaultRadius() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUseDefaultRadius,
+          defaultValue: ThemeService.defaultUseDefaultRadius) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultUseDefaultRadius;
+    }
+  }
 
   /// Persists the useDefaultRadius setting in example 5.
   @override
-  Future<void> saveUseDefaultRadius(bool value) async {}
+  Future<void> saveUseDefaultRadius(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUseDefaultRadius, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used corner radius setting in example 5.
   @override
-  Future<double> cornerRadius() async => ThemeService.defaultCornerRadius;
+  Future<double> cornerRadius() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUseDefaultRadius,
+          defaultValue: ThemeService.defaultCornerRadius) as double;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultCornerRadius;
+    }
+  }
 
   /// Persists the used corner radius setting in example 5.
   @override
-  Future<void> saveCornerRadius(double value) async {}
+  Future<void> saveCornerRadius(double value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUseDefaultRadius, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used inputDecoratorIsFilled setting in example 5.
   @override
-  Future<bool> inputDecoratorIsFilled() async =>
-      ThemeService.defaultInputDecoratorIsFilled;
+  Future<bool> inputDecoratorIsFilled() async {
+    try {
+      return _hiveBox.get(ThemeService.keyInputDecoratorIsFilled,
+          defaultValue: ThemeService.defaultInputDecoratorIsFilled) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultInputDecoratorIsFilled;
+    }
+  }
 
   /// Persists used inputDecoratorIsFilled setting in example 5.
   @override
-  Future<void> saveInputDecoratorIsFilled(bool value) async {}
+  Future<void> saveInputDecoratorIsFilled(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyInputDecoratorIsFilled, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used inputDecoratorBorderType setting in example 5.
   @override
-  Future<FlexInputBorderType> inputDecoratorBorderType() async =>
-      ThemeService.defaultInputDecoratorBorderType;
+  Future<FlexInputBorderType> inputDecoratorBorderType() async {
+    try {
+      return _hiveBox.get(ThemeService.keyInputDecoratorBorderType,
+              defaultValue: ThemeService.defaultInputDecoratorBorderType)
+          as FlexInputBorderType;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultInputDecoratorBorderType;
+    }
+  }
 
   /// Persists used inputDecoratorBorderType setting in example 5.
   @override
-  Future<void> saveInputDecoratorBorderType(FlexInputBorderType value) async {}
+  Future<void> saveInputDecoratorBorderType(FlexInputBorderType value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyInputDecoratorBorderType, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used inputDecoratorUnfocusedHasBorder setting in example 5.
   @override
-  Future<bool> inputDecoratorUnfocusedHasBorder() async =>
-      ThemeService.defaultInputDecoratorUnfocusedHasBorder;
+  Future<bool> inputDecoratorUnfocusedHasBorder() async {
+    try {
+      return _hiveBox.get(ThemeService.keyInputDecoratorUnfocusedHasBorder,
+          defaultValue:
+              ThemeService.defaultInputDecoratorUnfocusedHasBorder) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultInputDecoratorUnfocusedHasBorder;
+    }
+  }
 
   /// Persists used inputDecoratorUnfocusedHasBorder setting in example 5.
   @override
-  Future<void> saveInputDecoratorUnfocusedHasBorder(bool value) async {}
+  Future<void> saveInputDecoratorUnfocusedHasBorder(bool value) async {
+    try {
+      await _hiveBox.put(
+          ThemeService.keyInputDecoratorUnfocusedHasBorder, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used surface mode setting in example 5.
   @override
-  Future<FlexSurfaceMode> surfaceMode() async =>
-      ThemeService.defaultSurfaceMode;
+  Future<FlexSurfaceMode> surfaceMode() async {
+    try {
+      return _hiveBox.get(ThemeService.keySurfaceMode,
+          defaultValue: ThemeService.defaultSurfaceMode) as FlexSurfaceMode;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSurfaceMode;
+    }
+  }
 
   /// Persists the used surface mode setting in example 5.
   @override
-  Future<void> saveSurfaceMode(FlexSurfaceMode value) async {}
+  Future<void> saveSurfaceMode(FlexSurfaceMode value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySurfaceMode, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used surface blend level setting in example 5.
-
   @override
-  Future<int> blendLevel() async => ThemeService.defaultBlendLevel;
+  Future<int> blendLevel() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBlendLevel,
+          defaultValue: ThemeService.defaultSurfaceMode) as int;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBlendLevel;
+    }
+  }
 
   /// Persists the used surface blend level setting in example 5.
   @override
-  Future<void> saveBlendLevel(int value) async {}
+  Future<void> saveBlendLevel(int value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBlendLevel, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used app bar style for light theme setting in example 5.
   @override
-  Future<FlexAppBarStyle> lightAppBarStyle() async =>
-      ThemeService.defaultLightAppBarStyle;
+  Future<FlexAppBarStyle> lightAppBarStyle() async {
+    try {
+      return _hiveBox.get(ThemeService.keyLightAppBarStyle,
+              defaultValue: ThemeService.defaultLightAppBarStyle)
+          as FlexAppBarStyle;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultLightAppBarStyle;
+    }
+  }
 
   /// Persists the used app bar style for light theme setting in example 5.
   @override
-  Future<void> saveLightAppBarStyle(FlexAppBarStyle value) async {}
+  Future<void> saveLightAppBarStyle(FlexAppBarStyle value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyLightAppBarStyle, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used app bar style for dark theme setting in example 5.
   @override
-  Future<FlexAppBarStyle> darkAppBarStyle() async =>
-      ThemeService.defaultDarkAppBarStyle;
+  Future<FlexAppBarStyle> darkAppBarStyle() async {
+    try {
+      return _hiveBox.get(ThemeService.keyDarkAppBarStyle,
+          defaultValue: ThemeService.defaultDarkAppBarStyle) as FlexAppBarStyle;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultDarkAppBarStyle;
+    }
+  }
 
   /// Persists the used app bar style for dark theme setting in example 5.
   @override
-  Future<void> saveDarkAppBarStyle(FlexAppBarStyle value) async {}
+  Future<void> saveDarkAppBarStyle(FlexAppBarStyle value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyDarkAppBarStyle, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used app bar opacity setting in example 5.
   @override
-  Future<double> appBarOpacity() async => ThemeService.defaultAppBarOpacity;
+  Future<double> appBarOpacity() async {
+    try {
+      return _hiveBox.get(ThemeService.keyAppBarOpacity,
+          defaultValue: ThemeService.defaultAppBarOpacity) as double;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultAppBarOpacity;
+    }
+  }
 
   /// Persists the used app bar opacity setting in example 5.
   @override
-  Future<void> saveAppBarOpacity(double value) async {}
+  Future<void> saveAppBarOpacity(double value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyAppBarOpacity, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used app bar elevation setting in example 5.
   @override
-  Future<double> appBarElevation() async => ThemeService.defaultAppBarElevation;
+  Future<double> appBarElevation() async {
+    try {
+      return _hiveBox.get(ThemeService.keyAppBarElevation,
+          defaultValue: ThemeService.defaultAppBarElevation) as double;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultAppBarElevation;
+    }
+  }
 
   /// Persists the used app bar elevation setting in example 5.
   @override
-  Future<void> saveAppBarElevation(double value) async {}
+  Future<void> saveAppBarElevation(double value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyAppBarElevation, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used status bar transparency setting in example 5.
   @override
-  Future<bool> transparentStatusBar() async =>
-      ThemeService.defaultTransparentStatusBar;
+  Future<bool> transparentStatusBar() async {
+    try {
+      return _hiveBox.get(ThemeService.keyTransparentStatusBar,
+          defaultValue: ThemeService.defaultTransparentStatusBar) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTransparentStatusBar;
+    }
+  }
 
   /// Persists used status bar transparency setting in example 5.
   @override
-  Future<void> saveTransparentStatusBar(bool value) async {}
+  Future<void> saveTransparentStatusBar(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTransparentStatusBar, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used tab bar style setting in example 5.
   @override
-  Future<FlexTabBarStyle> tabBarStyle() async =>
-      ThemeService.defaultTabBarStyle;
+  Future<FlexTabBarStyle> tabBarStyle() async {
+    try {
+      return _hiveBox.get(ThemeService.keyTabBarStyle,
+          defaultValue: ThemeService.defaultTabBarStyle) as FlexTabBarStyle;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTabBarStyle;
+    }
+  }
 
   /// Persists used tab bar style setting in example 5.
   @override
-  Future<void> saveTabBarStyle(FlexTabBarStyle value) async {}
+  Future<void> saveTabBarStyle(FlexTabBarStyle value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTabBarStyle, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used bottom navigation bar opacity setting in example 5.
   @override
-  Future<double> bottomNavigationBarOpacity() async =>
-      ThemeService.defaultBottomNavigationBarOpacity;
+  Future<double> bottomNavigationBarOpacity() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBottomNavigationBarOpacity,
+              defaultValue: ThemeService.defaultBottomNavigationBarOpacity)
+          as double;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBottomNavigationBarOpacity;
+    }
+  }
 
   /// Persists the used app bar opacity setting in example 5.
   @override
-  Future<void> saveBottomNavigationBarOpacity(double value) async {}
+  Future<void> saveBottomNavigationBarOpacity(double value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBottomNavigationBarOpacity, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used bottom navigation bar elevation setting in example 5.
   @override
-  Future<double> bottomNavigationBarElevation() async =>
-      ThemeService.defaultBottomNavigationBarElevation;
+  Future<double> bottomNavigationBarElevation() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBottomNavigationBarElevation,
+              defaultValue: ThemeService.defaultBottomNavigationBarElevation)
+          as double;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBottomNavigationBarElevation;
+    }
+  }
 
   /// Persists the used app bar elevation setting in example 5.
   @override
-  Future<void> saveBottomNavigationBarElevation(double value) async {}
+  Future<void> saveBottomNavigationBarElevation(double value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBottomNavigationBarOpacity, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used navBarStyle setting in example 5.
   @override
-  Future<FlexSystemNavBarStyle> navBarStyle() async =>
-      ThemeService.defaultNavBarStyle;
+  Future<FlexSystemNavBarStyle> navBarStyle() async {
+    try {
+      return _hiveBox.get(ThemeService.keyNavBarStyle,
+              defaultValue: ThemeService.defaultNavBarStyle)
+          as FlexSystemNavBarStyle;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultNavBarStyle;
+    }
+  }
 
   /// Persists used navBarStyle setting in example 5.
   @override
-  Future<void> saveNavBarStyle(FlexSystemNavBarStyle value) async {}
+  Future<void> saveNavBarStyle(FlexSystemNavBarStyle value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyNavBarStyle, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used useNavDivider setting in example 5.
   @override
-  Future<bool> useNavDivider() async => ThemeService.defaultUseNavDivider;
+  Future<bool> useNavDivider() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUseNavDivider,
+          defaultValue: ThemeService.defaultUseNavDivider) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultUseNavDivider;
+    }
+  }
 
   /// Persists useNavDivider setting in example 5.
   @override
-  Future<void> saveUseNavDivider(bool value) async {}
+  Future<void> saveUseNavDivider(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUseNavDivider, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads used tooltip style setting in example 5.
   @override
-  Future<bool> tooltipsMatchBackground() async =>
-      ThemeService.defaultTooltipsMatchBackground;
+  Future<bool> tooltipsMatchBackground() async {
+    try {
+      return _hiveBox.get(ThemeService.keyTooltipsMatchBackground,
+          defaultValue: ThemeService.defaultTooltipsMatchBackground) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTooltipsMatchBackground;
+    }
+  }
 
   /// Persists used tooltip style setting in example 5.
   @override
-  Future<void> saveTooltipsMatchBackground(bool value) async {}
+  Future<void> saveTooltipsMatchBackground(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTooltipsMatchBackground, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads swap primary/secondary colors in light mode, in example 5.
   @override
-  Future<bool> swapLightColors() async => ThemeService.defaultSwapLightColors;
+  Future<bool> swapLightColors() async {
+    try {
+      return _hiveBox.get(ThemeService.keySwapLightColors,
+          defaultValue: ThemeService.defaultSwapLightColors) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSwapLightColors;
+    }
+  }
 
   /// Persists swap primary/secondary colors in light mode, in example 5.
   @override
-  Future<void> saveSwapLightColors(bool value) async {}
+  Future<void> saveSwapLightColors(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySwapLightColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads swap primary/secondary colors in dark mode, in example 5.
   @override
-  Future<bool> swapDarkColors() async => ThemeService.defaultSwapDarkColors;
+  Future<bool> swapDarkColors() async {
+    try {
+      return _hiveBox.get(ThemeService.keySwapDarkColors,
+          defaultValue: ThemeService.defaultSwapDarkColors) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSwapDarkColors;
+    }
+  }
 
   /// Persists swap primary/secondary colors in dark mode, in example 5.
   @override
-  Future<void> saveSwapDarkColors(bool value) async {}
+  Future<void> saveSwapDarkColors(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySwapDarkColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads lightIsWhite setting, in example 5.
   @override
-  Future<bool> lightIsWhite() async => ThemeService.defaultLightIsWhite;
+  Future<bool> lightIsWhite() async {
+    try {
+      return _hiveBox.get(ThemeService.keyLightIsWhite,
+          defaultValue: ThemeService.defaultLightIsWhite) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultLightIsWhite;
+    }
+  }
 
   /// Persists lightIsWhite setting, in example 5.
   @override
-  Future<void> saveLightIsWhite(bool value) async {}
+  Future<void> saveLightIsWhite(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyLightIsWhite, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads dark uses true black setting in dark mode, in example 5.
   @override
-  Future<bool> darkIsTrueBlack() async => ThemeService.defaultDarkIsTrueBlack;
+  Future<bool> darkIsTrueBlack() async {
+    try {
+      return _hiveBox.get(ThemeService.keyDarkIsTrueBlack,
+          defaultValue: ThemeService.defaultDarkIsTrueBlack) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultDarkIsTrueBlack;
+    }
+  }
 
   /// Persists dark uses true black setting in dark mode, in example 5.
   @override
-  Future<void> saveDarkIsTrueBlack(bool value) async {}
+  Future<void> saveDarkIsTrueBlack(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyDarkIsTrueBlack, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads use computed dark mode setting, in example 5.
   @override
-  Future<bool> useToDarkMethod() async => ThemeService.defaultUseToDarkMethod;
+  Future<bool> useToDarkMethod() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUseToDarkMethod,
+          defaultValue: ThemeService.defaultUseToDarkMethod) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultUseToDarkMethod;
+    }
+  }
 
   /// Persists use computed dark mode setting, in example 5.
   @override
-  Future<void> saveUseToDarkMethod(bool value) async {}
+  Future<void> saveUseToDarkMethod(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUseToDarkMethod, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads use computed dark mode level setting, in example 5.
   @override
-  Future<int> darkMethodLevel() async => ThemeService.defaultDarkMethodLevel;
+  Future<int> darkMethodLevel() async {
+    try {
+      return _hiveBox.get(ThemeService.keyDarkMethodLevel,
+          defaultValue: ThemeService.defaultDarkMethodLevel) as int;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultDarkMethodLevel;
+    }
+  }
 
   /// Persists use computed dark mode level setting, in example 5.
   @override
-  Future<void> saveDarkMethodLevel(int value) async {}
+  Future<void> saveDarkMethodLevel(int value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyDarkMethodLevel, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that turns ON/OFF FlexColorScheme theme, in example 5.
   @override
-  Future<bool> useFlexColorScheme() async =>
-      ThemeService.defaultUseFlexColorScheme;
+  Future<bool> useFlexColorScheme() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUseFlexColorScheme,
+          defaultValue: ThemeService.defaultUseFlexColorScheme) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultUseFlexColorScheme;
+    }
+  }
 
   /// Persists setting that turns ON/OFF FlexColorScheme theme, in example 5.
   @override
-  Future<void> saveUseFlexColorScheme(bool value) async {}
+  Future<void> saveUseFlexColorScheme(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUseFlexColorScheme, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that blends light colors, in example 5.
   @override
-  Future<bool> blendLightOnColors() async =>
-      ThemeService.defaultBlendLightOnColors;
+  Future<bool> blendLightOnColors() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBlendLightOnColors,
+          defaultValue: ThemeService.defaultBlendLightOnColors) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBlendLightOnColors;
+    }
+  }
 
   /// Persists setting that blends light colors, in example 5.
   @override
-  Future<void> saveBlendLightOnColors(bool value) async {}
+  Future<void> saveBlendLightOnColors(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBlendLightOnColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that blends dark colors, in example 5.
   @override
-  Future<bool> blendDarkOnColors() async =>
-      ThemeService.defaultBlendDarkOnColors;
+  Future<bool> blendDarkOnColors() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBlendDarkOnColors,
+          defaultValue: ThemeService.defaultBlendDarkOnColors) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBlendDarkOnColors;
+    }
+  }
 
   /// Persists setting that blends dark colors, in example 5.
   @override
-  Future<void> saveBlendDarkOnColors(bool value) async {}
+  Future<void> saveBlendDarkOnColors(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBlendDarkOnColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that blends light text theme, in example 5.
   @override
-  Future<bool> blendLightTextTheme() async =>
-      ThemeService.defaultBlendLightTextTheme;
+  Future<bool> blendLightTextTheme() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBlendLightTextTheme,
+          defaultValue: ThemeService.defaultBlendLightTextTheme) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBlendLightTextTheme;
+    }
+  }
 
   /// Persists setting that blends light text theme, in example 5.
   @override
-  Future<void> saveBlendLightTextTheme(bool value) async {}
+  Future<void> saveBlendLightTextTheme(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBlendLightTextTheme, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting that blends dark text theme, in example 5.
   @override
-  Future<bool> blendDarkTextTheme() async =>
-      ThemeService.defaultBlendDarkTextTheme;
+  Future<bool> blendDarkTextTheme() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBlendDarkTextTheme,
+          defaultValue: ThemeService.defaultBlendDarkTextTheme) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBlendDarkTextTheme;
+    }
+  }
 
   /// Persists setting that blends dark text theme, in example 5.
   @override
-  Future<void> saveBlendDarkTextTheme(bool value) async {}
+  Future<void> saveBlendDarkTextTheme(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBlendDarkTextTheme, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting for fabUseShape, in example 5.
   @override
-  Future<bool> fabUseShape() async => ThemeService.defaultFabUseShape;
+  Future<bool> fabUseShape() async {
+    try {
+      return _hiveBox.get(ThemeService.keyFabUseShape,
+          defaultValue: ThemeService.defaultFabUseShape) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultFabUseShape;
+    }
+  }
 
   /// Persists setting for fabUseShape, in example 5.
   @override
-  Future<void> saveFabUseShape(bool value) async {}
+  Future<void> saveFabUseShape(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyFabUseShape, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }
