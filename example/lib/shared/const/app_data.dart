@@ -35,7 +35,8 @@ class AppData {
   // The minimum media size needed for desktop/large tablet menu view.
   // Only at higher than this breakpoint will the menu open and be possible
   // to toggle between menu and rail. Below this breakpoint it toggles between
-  // hidden in the Drawer and rail, also on phones.
+  // hidden in the Drawer and rail, also on phones. This size was mostly chosen
+  // based on what worked well for the content in the staggered column view.
   static const double desktopBreakpoint = 1150;
 
   // The minimum media width treated as a phone device in this demo.
