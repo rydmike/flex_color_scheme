@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
               'The new opinionated widget theming is ON. You can '
               'turn it OFF to use Flutter default widget themes. '
               'A theme showcase displays the resulting theme using '
-              'common Material widgets',
+              'common Material widgets. Settings are not persisted',
             ),
             // A 3-way theme mode toggle switch that shows the color scheme.
             FlexThemeModeSwitch(

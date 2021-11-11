@@ -336,7 +336,8 @@ class _HomePageState extends State<HomePage> {
                         'themes are custom color schemes and are not built-in '
                         'choices. In the packages tutorial you learn how to '
                         'make your own custom color schemes and turn '
-                        'them into advanced themes with FlexColorScheme',
+                        'them into advanced themes with FlexColorScheme. '
+                        'Settings are persisted',
                       ),
                       SizedBox(height: 8),
                     ],

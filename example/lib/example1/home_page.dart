@@ -48,7 +48,8 @@ class HomePage extends StatelessWidget {
               'FlexColorScheme example 1 shows how to use a selected '
               'predefined color scheme for light and dark theme mode, and '
               'switch between the modes. A theme showcase displays the '
-              'resulting theme using common Material widgets',
+              'resulting theme using common Material widgets. Settings '
+              'are not persisted',
             ),
             const SizedBox(height: 8),
             // A 3-way theme mode toggle switch that shows the color scheme.

@@ -18,7 +18,8 @@ import 'theme_service.dart';
 /// be dragged quickly in the UI. Writing this setup for this many properties is
 /// a bit error prone, even if it is simple and very mechanical.
 class ThemeServicePrefs implements ThemeService {
-  // Create an instance to the shared preferences.
+  // Hold an instance to the SharedPreferences store, must be initialized
+  // by the init call before accessing the stored data.
   late final SharedPreferences _prefs;
 
   /// ThemeServicePrefs initialization.
@@ -34,6 +35,7 @@ class ThemeServicePrefs implements ThemeService {
   /// never read back before app is started again.
   @override
   Future<void> init() async {
+    // Get the SharedPreferences instance and assign it to our instance.
     _prefs = await SharedPreferences.getInstance();
   }
 

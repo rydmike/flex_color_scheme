@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                     'The new opinionated widget theming is ON. You can '
                     'turn it OFF to use default widget themes. '
                     'A theme showcase displays the resulting theme using '
-                    'common Material widgets.',
+                    'common Material widgets. Settings are persisted',
                   ),
                   const SizedBox(height: 8),
                   // Wrap these in a card for a nice design effect.

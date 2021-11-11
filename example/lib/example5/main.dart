@@ -66,10 +66,14 @@ Future<void> main() async {
   // Here we use Shared Preferences. The examples are all built using same
   // "example" app. If we use SharedPreferences in more than one of the apps
   // they would use the same storage container and share the settings when you
-  // build them locally. By using Hive for the other example, we can change
-  // the storage container name for each example. This also demonstrates how
-  // swap used persistence implementation.
+  // build them locally. By using Hive for most examples, we can change
+  // the storage container name for each example. In these demos the
+  // SharedPreferences service is only used for example 5, but you can swap in
+  // the Hive based one here as well if you want to try it.
+  // This also demonstrates how swap used persistence implementation.
   final ThemeService themeService = ThemeServicePrefs();
+  // To swap to hive use this instead:
+  // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_5');
   await themeService.init();
   final ThemeController themeController = ThemeController(themeService);
 

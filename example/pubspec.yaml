@@ -25,24 +25,6 @@ dependencies:
   # with both cases. This package felt slower, but was more stable.
   flutter_staggered_grid_view: ^0.4.1
 
-  # Google fonts, by Google material.io.
-  google_fonts: ^2.1.0
-
-  # Hive local storage, by Simon Leir.
-  hive: ^2.0.4
-
-  # The Material Design Icons, community designed, used for nicer
-  # icons to the Platform selection popup menu.
-  material_design_icons_flutter: ^5.0.6295
-
-  # Store value pair shared preference data, by Google flutter.dev.
-  # Needed some better platform icons for example 5 app.
-  # https://materialdesignicons.com/
-  shared_preferences: ^2.0.8
-
-  # Used for launching a WEB URL, by Google flutter.dev.
-  url_launcher: ^6.0.12
-
   # Masonry layout like staggered grid, by fluttercandies.com.
   #
   # Compared this one with Staggered Grid. This one felt a bit faster,
@@ -53,6 +35,29 @@ dependencies:
   # This one crashed in some rapid window resizess so stuck with staggered grid.
   #
   # waterfall_flow: ^3.0.1
+
+  # Google fonts, by Google material.io.
+  google_fonts: ^2.1.0
+
+  # Hive local storage, by Simon Leir.
+  hive: ^2.0.4
+
+  # The Material Design Icons, community designed. Used for nicer
+  # icons to the Platform selection popup menu.
+  material_design_icons_flutter: ^5.0.6295
+
+  # Commonly used directories on host platform file systems.
+  # https://pub.dev/packages/path_provider (by Google, flutter.dev).
+  # Used to get working storage path for Hive.
+  path_provider: ^2.0.6
+
+  # Store value pair shared preference data, by Google flutter.dev.
+  # Needed some better platform icons for example 5 app.
+  # https://materialdesignicons.com/
+  shared_preferences: ^2.0.8
+
+  # Used for launching a WEB URL, by Google flutter.dev.
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:

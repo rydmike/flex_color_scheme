@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../shared/controllers/theme_controller.dart';
+import '../shared/services/theme_service.dart';
 import '../shared/services/theme_service_mem.dart';
 import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
@@ -28,11 +29,31 @@ import 'home_page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Use a ThemeController, which glues our theme settings to Flutter Widgets.
-  final ThemeController themeController = ThemeController(ThemeServiceMem());
-
-  // Load the preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
-  await themeController.loadAll();
+  //
+  // The controller uses an abstract ThemeService interface to get and save the
+  // settings. There are 3 implementations available to choose from:
+  //
+  // 0. ThemeService      - Abstract interface base class, contains defaults
+  //                        values and shared storage key value strings.
+  // 1. ThemeServiceMem   - Only keeps settings in memory.
+  // 2. ThemeServicePrefs - Persist settings locally using SharedPreferences.
+  // 3. ThemeServiceHive  - Persist settings locally using Hive.
+  //
+  // In this example we just use memory storage no persistence.
+  // The examples are all built using same "example" app. If we use
+  // SharedPreferences in more than one of the apps
+  // they would use the same storage container and share the settings when you
+  // build them locally. By using Hive for most examples, we can change
+  // the storage container name for each example. In these demos the
+  // SharedPreferences service is only used for example 5. You can swap in
+  // the Hive based one here as well, if you want to try it and save settings
+  // for this simple example as well.
+  // This also demonstrates how swap used persistence implementation.
+  final ThemeService themeService = ThemeServiceMem();
+  // To swap to hive use this instead:
+  // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_2');
+  await themeService.init();
+  final ThemeController themeController = ThemeController(themeService);
 
   // Run the app and pass in the ThemeController. The app listens to the
   // ThemeController for changes, then passes it further down to the HomePage.
