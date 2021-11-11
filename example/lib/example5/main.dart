@@ -8,8 +8,8 @@ import '../shared/const/app_color.dart';
 import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
-import '../shared/services/theme_service_hive.dart';
-// import '../shared/services/theme_service_prefs.dart';
+// import '../shared/services/theme_service_hive.dart';
+import '../shared/services/theme_service_prefs.dart';
 import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
@@ -72,9 +72,9 @@ Future<void> main() async {
   // SharedPreferences service is only used for example 5, but you can swap in
   // the Hive based one here as well if you want to try it.
   // This also demonstrates how swap used persistence implementation.
-  // final ThemeService themeService = ThemeServicePrefs();
+  final ThemeService themeService = ThemeServicePrefs();
   // To swap to hive use this instead:
-  final ThemeService themeService = ThemeServiceHive('flex_scheme_box_5');
+  // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_5');
   await themeService.init();
   final ThemeController themeController = ThemeController(themeService);
 
