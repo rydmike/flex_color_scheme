@@ -125,8 +125,6 @@ class _HomePageState extends State<HomePage> {
     // We are on phone width media, based on our definition in this app.
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
 
-    debugPrint('Width = ${media.size.width}');
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       // FlexColorScheme contains a static helper that can be use to theme
       // the system navigation bar using the AnnotatedRegion. Without this

@@ -230,7 +230,7 @@ class ThemeServiceHive implements ThemeService {
   @override
   Future<double> cornerRadius() async {
     try {
-      return _hiveBox.get(ThemeService.keyUseDefaultRadius,
+      return _hiveBox.get(ThemeService.keyCornerRadius,
           defaultValue: ThemeService.defaultCornerRadius) as double;
     } catch (e) {
       debugPrint(e.toString());
@@ -243,7 +243,7 @@ class ThemeServiceHive implements ThemeService {
   @override
   Future<void> saveCornerRadius(double value) async {
     try {
-      await _hiveBox.put(ThemeService.keyUseDefaultRadius, value);
+      await _hiveBox.put(ThemeService.keyCornerRadius, value);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -349,7 +349,7 @@ class ThemeServiceHive implements ThemeService {
   Future<int> blendLevel() async {
     try {
       return _hiveBox.get(ThemeService.keyBlendLevel,
-          defaultValue: ThemeService.defaultSurfaceMode) as int;
+          defaultValue: ThemeService.defaultBlendLevel) as int;
     } catch (e) {
       debugPrint(e.toString());
       // If something goes wrong we return the default value.
@@ -548,7 +548,7 @@ class ThemeServiceHive implements ThemeService {
   @override
   Future<void> saveBottomNavigationBarElevation(double value) async {
     try {
-      await _hiveBox.put(ThemeService.keyBottomNavigationBarOpacity, value);
+      await _hiveBox.put(ThemeService.keyBottomNavigationBarElevation, value);
     } catch (e) {
       debugPrint(e.toString());
     }
