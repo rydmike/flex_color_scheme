@@ -259,11 +259,11 @@ to using FlexColorScheme and only there to better illustrate the results.
   - [Installing and Using](#installing-and-using)  
   - [Themes Playground](#themes-playground)
 - [Introduction](#introduction)
-  - [Color Branded Backgrounds and Surfaces](#color-branded-backgrounds-and-surfaces)
-  - [Nuanced Scheme Set from One Color](#nuanced-scheme-set-from-one-color)
-  - [What About My Own Theme Additions?](#what-about-my-own-theme-additions)
+  - [Color Blended Surfaces](#color-blended-surfaces)
+  - [Custom Color Schemes](#custom-color-schemes)
+  - [What About Custom Sub Themes?](#what-about-custom-sub-themes)
   - [Built-in Color Schemes](#built-in-color-schemes)
-    - [This ColorScheme Should be Different](#this-colorscheme-should-be-different)
+    - [Color Scheme Designs](#color_scheme_designs)
     - [If I don't Use the Predefined Schemes, Why Should I Use FlexColorScheme?](#if-i-dont-use-the-predefined-schemes-why-should-i-use-flexcolorscheme)
     - [Design Your Custom Schemes for FlexColorScheme](#design-your-custom-schemes-for-flexcolorscheme)
     - [Can We Change this Predefined Scheme's Colors?](#can-we-change-this-predefined-schemes-colors)
@@ -312,68 +312,108 @@ the used color scheme is not consistently applied to **all** standard Material U
 To get it right you also have to assign the colors from your `ColorScheme` to a number
 of color properties that still exist in `ThemeData`. 
 
-FlexColorScheme takes care of these minor inconsistencies and gaps that exist 
-in current version of Flutter's `ThemeData.from` factory. 
+FlexColorScheme fixes these minor inconsistencies and gaps that exist 
+Flutter's `ThemeData.from` factory and handles the complexity
+of using the `ThemeData` factory and releases you from the burden of knowing 
+what colors in it affects which widgets. 
 It also makes a few opinionated, but subtle theme modifications compared to the
 `ThemeData.from` themes created from a `ColorScheme`. These topics are covered 
 in detail in the [last chapter](#behind-the-scenes).
 
-It is worth noticing that there is a plan to deprecate, most if not all the
+There is a plan to deprecate, most if not all the
 direct color properties in `ThemeData` and only use `ColorSceheme` based colors
 that are in the `colorScheme` property. This design 
 [document](https://flutter.dev/go/material-theme-system-updates)
 describes the plan. There is also deprecation check list
 [issue 91772](https://github.com/flutter/flutter/issues/91772) to mirror the 
-plan. For FlexColorScheme we monitor these actions closely, and implement needed
-changes as they reach the Flutter stable channel.
-
-FlexColorScheme also does some other nice theme design tricks. If you have seen the Flutter
-[**Flexfold web demo**](https://rydmike.com/demoflexfold) application, then you
-have seen **FlexColorScheme** in action. The Flexfold demo app uses this package for its fancy theming and to
-enable effortless switching between all the themes it uses. The included examples in this package, show you how 
-the Flexfold demo app theming is done. The [tutorial chapter](#tutorial) walks through and explains
-each example in detail.
-
-For some additional information about **FlexColorScheme** and its background see this 
-[**blog**](https://rydmike.com/colorscheme).
+plan. We monitor these actions closely, and implement needed changes as they 
+reach the Flutter stable channel to continue to make Flutter theming easy
 
 
-## Color Branded Backgrounds and Surfaces
+## Color Blended Surfaces
 
 The Material Guide briefly mentions
-[color branded surfaces](https://material.io/design/color/dark-theme.html#properties). 
-In the next version of Material Design called **MaterialYou**, color branded surfaces are 
-used extensively.
-With **FlexColorScheme** you can easily create such primary color branded themes. 
-This is done by using the four built-in strengths for blending in
-primary color into surface and background colors. Color branding of the scaffold background color,
-is only done very slightly at the highest strength. 
-It is quite interesting what a bit of extra flair and purposefully designed feeling it
-can result in when used appropriately.
+[color branded and blended surfaces](https://material.io/design/color/dark-theme.html#properties). 
+In the next version of Material Design called [Material You and also known as
+Material 3](https://m3.material.io/), color branded and blended 
+surfaces are used extensively. It is done in more flexible ways than can be done 
+with theming alone in current version of Flutter. We look forward to seeing those 
+features soon in Flutter too. 
 
-## Nuanced Scheme Set from One Color
+With **FlexColorScheme** you can already in current version of Flutter SDK 
+create very fancy looking primary color branded and alpha blended themes, 
+that work natively with the Material 2 design based themes and widgets in 
+Flutter now.
+
+This is done by using different blend modes and blend level strengths
+for blending in primary color into surface and background colors. It brings
+different nuances to your application theme. Here are some example of the
+same theme but using different blend modes and levels.
+
+<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/06-blend-examples.png?raw=true" alt="bledn examples"/>_FlexColorScheme using the same theme, but with different blend modes and levels_
+
+The first light and dark image pair show the theme using blend level 0, no blends at that
+level there are no alpha blends in any surfaces, so they all look the same. The next
+six image use the same blend level strength 18, but show 6 different blend modes.
+Next one of the modes is repeated, but s blend level 33. Last we show the theme
+that was used to generate all these different style nuances. There are currently
+9 different blend modes at 40 different levels each, that you can choose from
+to tune your themes to your liking, and you don't have to use the same mode or level
+for your light and dark theme mode. The demo app just does for "simplicity".
+
+The above images were made with the same "Themes Playground" app, example 5 that
+is included as last example in the tutorial and source included on pub.dev and
+GitHub. The **Themes Playground** is also available as a live web demo app 
+[**here**](https://rydmike.com/flexcolorschemeV4Tut5/#/), is an entertaining 
+and useful tool when you want to find fitting blend modes and levels for 
+your application's theme.
+
+## Custom Color Schemes
 
 A `FlexColorScheme` can like Flutter's standard `ColorScheme` be created by specifying all the required
-scheme colors. However, with `FlexColorScheme` you can also specify only the primary color, and 
+scheme colors. However, with `FlexColorScheme` you can also specify only the primary color, and
 get all other colors needed for a complete color scheme computed based the given primary color.
 
-There is a helper class, with a factory called `FlexSchemeColor.from` that can do this for you. The 
+There is a helper class, with a factory called `FlexSchemeColor.from` that can do this for you. The
 `toDark` method on `FlexSchemeColor` can create a computed matching dark scheme from a defined light scheme.
 This works regardless of if you created a fully specified custom light scheme, or one from just a single color.
-These features are presented and explained in tutorial
-[example 4](#example-4---switch-between-built-in-color-schemes-and-custom-ones) and
-[example 5](#example-5---full-featured-demo).
 
 These features are useful when you quickly want to test a single color, or maybe a single
 primary and secondary color for a light theme, and get all other scheme colors computed.
+When you finally figure out the colors you need you can use exact color definitions
+to make your custom color schemes too.
 
-## What About My Own Theme Additions?
+Using different ways to create custom color schemes is presented in detail 
+in the tutorial.
 
-FlexColorScheme does not get in the way of adding your own additional custom theming to your application.
-When you have defined your `FlexColorScheme`, you make a theme based on its color scheme with `FlexColorScheme.toTheme`,
-that returns a `ThemeData` object that you can use like any other `ThemeData` object. You can then 
-override this returned `ThemeData` and add additional custom sub-theming to it with the normal
-ThemeData `copyWith` method, before passing it on to your application's `theme` or `darkTheme` property.
+## What About Custom Sub Themes?
+
+When you make a theme with `FlexThemeData.light` or `dark`, it returns a 
+`ThemeData` object that you can use like any other `ThemeData` object. 
+You can then override this returned `ThemeData` and add 
+additional custom sub theming to it with `ThemeData` and its `copyWith` methods, 
+before passing it on to your application's `theme` or `darkTheme` property.
+
+If you need color values that FlexColorScheme has created, for
+auto created colors, typically for surface and on surface colors, for your 
+sub themes, you can get them too. For this advanced use case, it is then 
+recommended to use FlexColorScheme with the classes `FlexColorScheme.light` 
+and `FlexColorScheme.light` and create 
+these objects first. Then get the `ColorScheme` they define with its `toScheme` 
+method, and use this `ColorScheme` data as input to you sub themes creation. 
+That often need access to the colors their main `ThemeData` is using and storing 
+in its `colorScheme` property. Pass the `ColorScheme`you got or some of its 
+colors along to your methods that define your sub theme data. Turn above 
+FlexColorScheme to `ThemeData` with its `toTheme` mehtos and add you sub 
+themes with `copyWith` to this object in the same go, that uses the
+same `ColorScheme` the ThemeData created with `toTheme` will get as as well.
+
+You can of course create the FlexColorScheme `ThemeData` with the extensions
+`FlexThemeData.light` and `dark`, then get its `ColorScheme` object from the 
+ThemeData `colorScheme` property you get and then use that data to create 
+your sub-themes that need access to those color values, and use finally 
+`copyWith` to create a new `ThemeData` with your custom sub-themes included. 
+This is however one extra step compared to earlier approach.
 
 ## Built-in Color Schemes
 
@@ -383,110 +423,134 @@ use in your applications if you like. Here is a composite image showing them all
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_all_schemes_32_at_100.png?raw=true" alt="ColorScheme all"/>
 
-The above image is an overview of all the color schemes. In the package companion blog post you can
-find [**high resolution images**](https://rydmike.com/colorscheme#built-in-color-schemes) of each one of them.
+The above image is an low resolution image of all the color schemes.
+In [**Appendix A**](#appendix-a---built-in-scheme-reference) you
+can find a table listing all the built-in color schemes, their `FlexScheme` enum value, name 
+and description, plus thumbnail of each color scheme, with a link to its high-resolution images.
 
-Another convenient and recommended way to see and try all the predefined color schemes is by using the live Web
-versions of the package [example 4](https://rydmike.com/flexcolorscheme4) or 
-[example 5](https://rydmike.com/flexcolorscheme4). Using the examples you can try all the built-in color schemes 
+Another convenient and recommended way to see and try all the predefined color 
+schemes is by using the live Web versions of the package 
+[example 4](https://rydmike.com/flexcolorscheme4) and of course  
+[example 5 the Themes Playground](https://rydmike.com/flexcolorschemeV4Tut5/#/). 
+Using the examples you can try all the built-in color schemes 
 and see the impact they have on often used Flutter widgets. 
 
-In [**Appendix A**](#appendix-a---built-in-scheme-reference) you
-can find a table listing all the built-in color schemes, their `FlexScheme` enum value, name and description, plus 
-thumbnail of each color scheme, with a link to its high-resolution images.
+The built-in color schemes are all tuned matching light and dark scheme pairs. 
+Most of them are pretty conservative, but some are intentionally a bit more playful 
+and bold. The first two color schemes are actually the Flutter and Material 2 
+Design Guide examples of light and dark color schemes, and the Flutter 
+high contrast light and dark color versions as well. So OK, there are actually 
+"only" 34 new and different from standard Flutter ready-made light and dark 
+color scheme pairs.
 
-The built-in color schemes are all tuned matching light and dark scheme pairs. Most of them are pretty conservative,
-but some are intentionally a bit more playful and bold. The first two color schemes are actually
-the Flutter and Material Design Guide examples of light and dark color schemes, and the Flutter high contrast light and
-dark color versions as well. So OK, there are actually "only" 30 new ready-made light and dark color scheme pairs.
+### Color Scheme Designs
 
-### This ColorScheme Should be Different!
-
-The built-in schemes in no way claim to be a "this selection" fits all needs collection, nor do they claim to be 
-more correct than any other color scheme. What fits your needs and looks good to you, is the right choice
-for your application and use case. You can make your own custom scheme totally from scratch, or use these as 
-a starting point. Copy colors from existing schemes or change colors that do not fit your design requirements.
+The built-in schemes do not claim to be a "this selection" fits all needs collection. 
+Nor do they claim to be more correct than any other color scheme. What fits your 
+needs and looks good to you, is the right choice for your application and use case. 
+You can make your own custom scheme totally from scratch, or use these as 
+a starting point. Copy colors from existing schemes or change colors that 
+do not fit your design requirements. All the color values in the color schemes
+are available as const values too, so you can easily make new custom combinations
+using existing color schemes and add a few custom ones to the mix as well.
 
 ### Design Your Custom Schemes for FlexColorScheme
 
-The package examples show how you can easily make and use your own custom schemes with FlexColorScheme. Maybe 
-the built-in examples will inspire your creative side to define your own schemes. The tutorial walks you through how
+The package examples show how you can easily make and use your own custom schemes 
+with FlexColorScheme. Maybe the built-in examples will inspire your creative 
+side to define your own schemes. The tutorial walks you through how
 to define your own color schemes and make themes based on them too.
 
-You can even create your own custom list or map of schemes and use all of them, instead of the built-in ones. 
-The built-in schemes implementation can then function as one possible implementation guide on how to do this.
+You can even create your own custom list or map of schemes and use just all of 
+them, instead of the built-in ones. 
 
-While building, testing and using this package over a period of time, a number of color schemes were born as a 
-side product. I decided to include them in FlexColorscheme and offer them for re-use and inspiration as they are.  
-It is however not necessary to use them to get the benefits of FlexColorScheme.
+While building, testing and using this package over a period of time, a number 
+of color schemes were born as a 
+side product. I decided to include them in FlexColorscheme and offer them for 
+re-use and inspiration as they are. It is however not necessary to use them to 
+reap the benefits of FlexColorScheme.
 
-The color and scheme definitions for the built-in color schemes are in their own classes. They will not be included 
-in the release compiled version of your application if you do not use (reference) them in your application, and instead 
+The color and scheme definitions for the built-in color schemes are in their 
+own classes. They will not be included in the release compiled version of your 
+application if you do not use (reference) them in your application, and instead 
 only use your own custom scheme colors.
 
 ### If I don't Use the Predefined Schemes, Why Should I Use FlexColorScheme?
 
 The purposes with the FlexColorScheme package is to: 
 * Enable easy switching among multiple color schemes in an app. 
-* Address some gaps in Flutter's default color scheme based themes.
-* Provide an easy way to make themes with primary color branded backgrounds and surfaces, 
-  and to easily vary the blend level and mode for different surfaces. 
-* Provide an easy toggle for different AppBar styles, without the need to manually make a custom theme 
-  for it every time. 
+* Address some gaps and hurdles in Flutter's default color scheme based theming.
+* Provide an easy way to make themes with primary color branded backgrounds and 
+  surfaces, and to easily vary the blend level and mode for different surfaces. 
+* Provide an easy toggle for different AppBar styles, without the need to 
+  manually make a custom theme for it every time. 
 * Provide optional support for a **true black** mode for dark themes.
-* Be able to quickly swap the primary and secondary color definitions, if you want to try your
-  theme the other way around.
-* Opt in on widget sub-themes to get an even more refined look on the widgets and text. The default
-  for the sub-themes are inspired by the new Material 3 guide. Following it when it can be easily
-  accomplished using current Material 2 based theming in Flutter.
+* Be able to quickly swap the primary and secondary color definitions, if you 
+  want to try your theme the other way around.
+* Theme the Android System navigation bar to match your theme, make it 
+  partially or totally transparent.
+* Opt in on widget sub-themes to get an even more refined look on widgets and 
+  text. The defaults for the new sub-themes are heavily inspired by the new 
+  Material 3 guide. Following it when it can easily be accomplished by using 
+  current Material 2 based theming in Flutter with its limitations.
 
-Additionally, FlexColorScheme introduces a way to make "lazy" quick toned `ColorScheme` like themes from just a single
-light scheme color. Even its dark scheme counterpart can be made from this single color definition. To understand how
+Additionally, FlexColorScheme introduces a way to make "lazy" quick toned 
+`ColorScheme` like themes from just a single light scheme color. Even its dark 
+scheme counterpart can be made from this single color definition. To understand how
 this can be done, it is recommended to go through the tutorial in this readme file.
 
-If you like and need the above features, then FlexColorScheme may fit your theming requirements even if you do not
-use any of its built-in color schemes. There is no need to use any of the built-in color schemes to 
-benefit from FlexColorScheme's capabilities.
+If you like and need the above features, then FlexColorScheme may fit your theming 
+requirements even if you do not use any of its built-in color schemes. There is 
+no need to use any of the built-in color schemes to benefit from 
+FlexColorScheme's capabilities.
 
 ### Can We Change this Predefined Scheme's Colors?
 
-No, current predefined schemes will not be changed. Changing them would be a breaking change to the 
-package version promise. The scheme colors could in theory be changed by releasing a new major version 
-that break past scheme color definitions. At the moment, there are no plans to ever add breaking 
-releases to just change a predefined scheme's color(s). All current color definition 
+No, current predefined schemes will not be changed. Changing them would be a 
+breaking change to the package version promise. The scheme colors could in theory 
+be changed by releasing a new major version that break past scheme color 
+definitions. At the moment, there are no plans to ever add breaking releases 
+to just change a predefined scheme's color(s). All current color definition 
 values are also included in the package tests, and a failed color value test is 
 considered a breaking change.
 
 ### Can We Add This Scheme?
 
-To keep things interesting, we do from time to time add new color schemes to the built-in ones.
+To keep things interesting, we do from time to time add new color schemes to 
+the built-in ones. If you have a beautiful color scheme with matching light and 
+dark theme mode colors, that you think would be perfect to include with the 
+built-in color schemes, then please post a suggestion as a GitHub issue. 
 
-If you have a beautiful color scheme with matching light and dark theme mode colors, that you think 
-should be included in the built-in schemes, please post a 
-suggestion as a GitHub issue. No promise is made about its eventual inclusion, but if we also 
-think it is a nice, unique and overall a pretty color scheme, it will very likely be included.
-Coming up with nice color schemes is trickier than it seems, so contributions to new ones 
-are certainly welcome.
-
+No promise is made about its eventual inclusion, but if we also think it is a 
+nice, unique and overall a pretty color scheme, it will very likely be included.
+Coming up with nice color schemes is trickier than it seems, contributions to 
+new ones are certainly welcome.
 
 ### Can I use different built-in color schemes for my light and dark themes?
 
-Yes this is possible, just use different `FlexScheme` enum values for the light and dark FlexColorScheme factories
-`scheme` property. If the colors used by the selected schemes are a bit related, this
-can be used to create nice and unique light and dark combinations of the predefined schemes.
+Yes this is possible, just use different `FlexScheme` enum values for the light 
+and dark `FlexThemeData.light` and `FlexThemeData.dark` factories' `scheme` 
+property. If the colors used by the selected schemes are a bit related, this
+can be used to create nice and unique light and dark combinations of 
+the predefined schemes.
 
-By using the `colors` property you could even apply a `FlexSchemeColor` that has data that was designed for a light 
-theme to the `FlexColorScheme.dark` factory and wise versa. For example, with the 
-`FlexColorScheme.dark` factory, you could to its `colors` property assign the `FlexSchemeColors` from  
-`FlexColor.schemes[FlexScheme.mandyRed].light` that are designed and intended to be used with the light mode factory.
-The results will typically just not be as useful or pretty.
-The rationale for the slightly involved structure, is to keep it flexible, but at the same time provide self
-documenting API guidance on how the data was designed to be used and consumed. 
+By using the `colors` property you could even apply a `FlexSchemeColor` that 
+has data that was designed for a light theme to the `FlexThemeData.dark` factory,
+and wise versa. For example, with the `FlexThemeData.dark` factory, you could 
+to its `colors` property assign the `FlexSchemeColors` from  
+`FlexColor.schemes[FlexScheme.mandyRed].light` that are designed and intended 
+to be used with the light mode factory.
 
-The new `scheme` property 
-prevents using the light scheme colors for the dark factory and wise versa. It can however still be done if so desired
-with the `colors` property as shown above. The `colors` property is always needed and used when you make 
-custom color schemes with the `FlexColorScheme.light` and `FlexColorScheme.dark` factories.
+The results will typically just not be as useful or pretty. The rationale for 
+the slightly involved structure, is to keep it flexible, but at the same time 
+provide self documenting API guidance on how the data was designed to be used 
+and consumed. 
+
+The `scheme` property prevents using the light scheme colors for the dark 
+factory and wise versa. It can however be done if so desired with the `colors` 
+property as shown above. The `colors` property is always needed and used when 
+you make custom color schemes with the `FlexThemeData.light` and 
+`FlexThemeData.dark` factories.
 
 ### Sample Applications
 
