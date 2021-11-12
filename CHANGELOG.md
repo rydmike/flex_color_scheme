@@ -2,10 +2,10 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.0.0-dev1] - November 9, 2021
+## [4.0.0-dev1] - November 13, 2021
 
 * The breaking case refer to a minor difference in produced style for true
-  black mode. Version 4.0.0 is still fully API compatible with version 3.x.x.
+  black mode. Version 4.0.0 is still fully API compatible with version 3.
   Major version was bumped due to the small change in produced output in some
   rare usage options. Version 4.0.0 does however contain so many new 
   features, that it in itself warrants a new major release bump.
@@ -151,8 +151,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
     a ChangeNotifier based controller, AnimatedBuilder to listen to it and
     an abstract service to get and persist the theme settings, with a concrete
     in-memory implementation, plus the implementations to persist the theme.
-    * Example 2 to 4 use Hive (TODO - Add Hive implementation)
-    * Example 5 uses SharedPreferences
+    * Examples 2 to 4 use the Hive implementation. 
+    * Example 5 uses the SharedPreferences implementation
 * **TODO Documentation:**
   * Some older documentation that is not relevant was removed, like older APIs
     no longer described in read me, only in API docs.
