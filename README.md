@@ -713,7 +713,7 @@ _Example 5) The Themes Playground_
 Another classic example of **FlexColorScheme** usage can be seen in the Flutter 
 web [**Flexfold demo app**](https://rydmike.com/demoflexfold).
 
-<img src="https://rydmike.com/assets_fcsv4/FoldTheme1.gif?raw=true" alt="FlexColorScheme"/>
+<img src="https://rydmike.com/assets/FoldTheme1.gif?raw=true" alt="FlexColorScheme"/>
 
 _Flexfold Demo uses FlexColorScheme for its themes._
 
@@ -1920,8 +1920,6 @@ support it.
 The example below uses the classical system navigation bar with the navigation buttons. It also works when
 the phone settings is changed to use the much smaller gesture bar, or on phones that don't even have a 
 visible gesture bar.
-
-<img src="https://rydmike.com/assets_fcsv4/sysnavbar4.gif?raw=true" alt="System navbar transparent"/>
 
 >Please note that phones with API30 (Android 11) were when this was first written (Jan 16, 2021) still very
 >rare, and at the time did not even register on
