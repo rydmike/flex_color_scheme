@@ -11,55 +11,55 @@ additional features.
 When you color theme a Flutter application, all built in 
 widgets use the colors of your color scheme in your theme. At least in theory, 
 and it is almost so if you defined your Flutter ThemeData the correct way.
-FlexColorScheme goes the extra step to ensure that all Flutter SDK widgets gets 
-themed as intended by the built-in color scheme, or custom colors you provide.
+FlexColorScheme goes the extra mile to ensure that all Flutter SDK widgets gets 
+themed as intended by the built-in color scheme or custom colors you provide.
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00-new-main-image.gif?raw=true" alt="main_image"/>
 
 You can also opt in on using pre-made opinionated widget sub-themes.
 By opting in, you can for example adjust the border radius on all widgets 
-with a single property to set the same themed border radius. Current
-Flutter SDK widgets are based on the Material 2 standard, and use 4dp corner 
-radius as default on most built-in widgets corners.
+with a single property to set the same themed border radius on them. Current
+Flutter SDK widgets are based on the Material 2 guide and use 4dp corner 
+radius as default on most corners.
 
-When you opt in on the sub-themes, the border radius on widgets default to the 
+When you opt in on the sub themes, the border radius on widgets default to the 
 new rounded corners as specified by the 
 [Material 3 guide](https://m3.material.io/), where the 
 rounding varies by widget type. You can stick with this, or set global 
-radius to a value you prefer. You can also easily set themed border
-radius per widget to override the global value in just a few cases, via 
-simple property values per widget, without using verbose custom sub-theme 
+radius to a value you prefer. You can also easily set the themed border
+radius per widget, to override the global value in just a few cases. Use 
+simple property values per widget, no need for verbose custom sub theme 
 Shape definitions.
 
 # Version 4 Notice
 
 This readme is still mainly the version 3 documentation. Depending on when and 
 where you read it, e.g. on GitHub or as a dev release v4.0.0-dev.x on pub.dev, 
-it may contain some updated elements. The documentation will not be complete 
-until v4.0.0 stable is released. The current hold point for going stable is the
-completion of the updated documentation. It is very unlikely that there will be
-any major API changes from the dev releases to stable version, unless some major 
-issues are discovered before stable v4 release.
+it may contain updated elements while others are still at version 3. 
+The current hold point for going stable is the completion of the updated 
+documentation. It is unlikely that there will be any major API changes from 
+the dev releases to stable version, unless some major issues are discovered 
+before the stable V4 release.
 
 ## What is new in version 4?
 
 For a detailed list of what is new in version 4, please refer to the change log.
 
 There are two major new new features. The first one is that FlexColorScheme 
-now comes with opinionated widget sub-themes that you can opt in on. 
-By default, the sub-theme mimic Material 3 (You) styled widgets. This is done
+now comes with opinionated widget sub themes that you can opt in on. 
+By default, the sub theme mimic Material 3 (You) styled widgets. This is done
 as far as reasonably possible when using standard Material 2 theming features
 available in Flutter 2.5. There is a Material 3 TextTheme as well, and by 
-default text is also slightly tinted using the selected color schemes primary
-color. You can adjust and turn these styles on and off as it suits and fits
-your preferences, when you op-in on the sub themes.
+default this text theme is also slightly tinted using the selected color 
+scheme's primary color. You can turn these styles on and off, based on your
+your own preferences when you opt in on the sub themes.
 
 The second main new feature is that FlexColorScheme now offers 9 different surface
 color blend modes, with 40 different blend levels each. Version 3 only had one
 blend style with 5 levels, including no blend.
-The version 3 blend style and is API is still available. Despite the major 
-version bump, APIs from version 3 are fully compatible with version 4. 
-The version was mostly bumped because it contained so many new features 
+The version 3 blend style and its API is still available. Despite the major 
+version bump, all APIs from version 3 are fully compatible with version 4. 
+The version was mostly bumped because it contains so many new features 
 that it made sense.
 
 ### New Color Schemes
@@ -72,7 +72,6 @@ be the standard for new releases. The new color schemes are:
 * **Rosewood** - Rosewood red, with horses neck and driftwood theme
 * **Blumine** - Blumine, easter blue and saffron mango theme
 
-
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/04-news-themes-gang.png?raw=true" alt="playground_default"/>
 
 Total number of offered built-in color schemes is now 36 matched light
@@ -83,14 +82,13 @@ support it and look well with the colors reversed too. You can for example use
 this to present the dark mode with primary and secondary colors swapped
 compared to the light mode.
 
-
 # Quick Start Guide
 
-The quickest and easiest way to try FlexColorScheme V4 is to build the
+The quickest way to try FlexColorScheme V4 is to build the
 default example application and use it as a hot reload playground to get to
 know it.
 
-## Default example
+## Default example - Hot Reload Playground
 
 To try the default **example** on a device or simulator,
 clone the [repository](https://github.com/rydmike/flex_color_scheme) and
@@ -101,19 +99,19 @@ cd example/
 flutter run --release
 ```
 
-The result is a sample app that uses a custom defined color scheme. 
+The result is a demo app that uses a custom defined color scheme. 
 It has a theme mode switch, includes theme colors presentation 
 and Material widget samples. With these you can see the active color scheme's 
 colors and the created theme's impact on common Material UI widgets.
 
-The default sample app looks like this:
+The default sample app, the "Hot Reload Playground", looks like this:
 
 <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00_playground_default.png?raw=true" alt="playground_default"/>
 
 It comes fully loaded with template settings and thorough 
 comments that explain what to change to produce different results. You
 could for example change the `_useScheme` to `true`, as shown below and hot 
-reload to use and the new `FlexScheme.blueWhale` theme.
+reload it, to use and the new `FlexScheme.blueWhale` theme.
 
 ```dart
 // To use a pre-defined color scheme, don't assign any FlexSchemeColor to
@@ -142,7 +140,7 @@ color. The theme toggle in the menu does work though.
 
 ## Themes Playground
 
-The side menu you saw in the default example is actually made for and used
+The side menu in the default example is actually made for and used
 in the last step and example in the tutorial. The final example, number 5, 
 doubles as a complete interactive **Themes Playground** application. There the
 menu options actually have their indicated functionality. 
@@ -152,9 +150,10 @@ prefer, or just use it to figure out everything you can do with
 FlexColorScheme. The playground persists all its settings, and you can also
 reset them all back to their default values.
 
-The **Themes Playground** can be used as a web app 
-[**here**](https://rydmike.com/flexcolorschemeV4Tut5/#/). Its source code
-is also available in the example sub folder in folder `/example5`.
+The **Themes Playground** can be used as a [web app 
+here](https://rydmike.com/flexcolorschemeV4Tut5/#/). Its source code
+is also available in the example sub folder in folder 
+[/example5](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example5).
 
 It is recommended to go through the tutorial further below to get introduced to
 all features step by step. However, feel free to go straight for example 5 if
@@ -226,7 +225,7 @@ becomes:
 
 > **New in version 4:**  
 > The `FlexThemeData.light` and `FlexThemeData.dark` APIs are new in 
-> version 4. They are extensions on `ThemeData` that create  
+> version 4. They are extensions on `ThemeData` that create 
 > `FlexColorScheme.light` and `FlexColorScheme.dark` objects and call their
 > `toTheme` methods in one step. The new syntax is shorter and also look very
 > similar to `ThemeData.light` and `ThemeData.dark` factories. 
@@ -247,7 +246,8 @@ very few features and widgets, so it cannot really illustrate the result very
 well. This is why the included examples contain demo UI, that is not really at 
 all relevant to using FlexColorScheme and only there to better show the results.
 
-> ### Updates for V4 ends here! Documentation below is still WIP and mostly from V3.
+> ### Updates for V4 ends here! 
+> Documentation below is still WIP and partially from V3.
 
 ----
 
@@ -257,7 +257,7 @@ all relevant to using FlexColorScheme and only there to better show the results.
   - [What is new in version4?](#what-is-new-in-version-4)
   - [New Color Schemes](#new-color-schemes)
 - [Quick Start Guide](#quick-start-guide)
-  - [Default example](#default-example) 
+  - [Default example - Hot Reload Playground](#default-example---hot-reload-playground) 
   - [Installing and Using](#installing-and-using)  
   - [Themes Playground](#themes-playground)
 - [Introduction](#introduction)
@@ -304,7 +304,7 @@ and `darkTheme` properties in the `MaterialApp`.
 This gives you an application that uses the defined color schemes on all the 
 Flutter SDK built-in Material UI widgets. Well, on most of them anyway. 
 Flutter's `ThemeData.from` a `ColorScheme` has a few gaps. The used color scheme
-is not consistently applied on **all** standard Material UI Widgets. To get it
+is not consistently applied on all standard Material UI Widgets. To get it
 right you also have to assign the colors from your `ColorScheme` to a number
 of color properties that still only exist in `ThemeData`. 
 
@@ -350,27 +350,26 @@ plan. For FlexColorScheme the progress of these actions are monitored closely.
 Needed changes and updates in FlexColorScheme will be implemented when any 
 related changes in ThemeData reach the Flutter stable channel.
 
-
 ## Color Blended Surfaces
 
-The Material Guide briefly mentions
+The Material 2 Guide briefly mentions
 [color branded and blended surfaces](https://material.io/design/color/dark-theme.html#properties). 
 In the new version of Material Design called [Material You and also known as
-Material 3](https://m3.material.io/), color branded and blended 
-surfaces are used extensively. It is done in more flexible ways than can be done 
-with theming alone in current version of Flutter. We look forward to seeing those 
-features soon in Flutter too. 
+Material 3](https://m3.material.io/), color branded and blended, and  
+just colored surfaces are used extensively. It is done in more flexible ways 
+than can be done with theming alone in current version of Flutter. We look 
+forward to seeing these features soon in Flutter too. 
 
-With **FlexColorScheme** you can already with current version of Flutter SDK 
-easily create very fancy looking primary color branded and alpha blended themes.
-That work natively with the Material 2 design based themes and widgets in
-current version of Flutter.
+With **FlexColorScheme** you can already with current version (2.5) of 
+Flutter SDK easily create fancy looking primary color branded and alpha blended 
+themes. That work natively with the Material 2 design based themes and UI 
+widgets in current version of Flutter.
 
 This is done by using different blend modes and blend level strengths
-for blending in primary color into surface and background colors. It can bring
-different nuances to your application theme. Below some example of the same 
-theme but using different blend modes and levels. The effect can be made very 
-subtle or very bold and impactful.
+for blending in primary color into surface and background colors. This can bring
+different and new nuances to your application theme. Below some example of the 
+same theme, but using different blend modes and levels. The effect can be kept  
+very subtle or made very bold and impactful.
 
 Below the first light and dark image pair show the theme using blend level 0. 
 At level 0 there are no alpha blends in any surfaces, so all modes look the 
@@ -441,7 +440,7 @@ gives you that before even creating the ThemeData object from your
 FlexColorScheme object.
 
 Pass the `ColorScheme` you got from `toScheme` or just one or some of its 
-colors, along to your methods that define your sub theme data. Turn your  
+colors, along to your methods that define your sub theme data. Turn your
 FlexColorScheme to `ThemeData` with its `toTheme` method, and then add your sub 
 themes with `copyWith` to this object in the same go. They now uses the
 same `ColorScheme` colors, that the ThemeData created with `toTheme` will get 
@@ -469,16 +468,16 @@ for hires version)_
 
 The above image is a low resolution image of all the color schemes.
 In the [**scheme reference**](#scheme-reference) you can find a table listing 
-all the built-in color schemes, their `FlexScheme` enum value, name and 
-description, plus a thumbnail of each color scheme, with a link to a 
+all the built-in color schemes, their `FlexScheme` enum values, names and 
+descriptions. Plus a thumbnail of each color scheme, with a link to a 
 high-resolution image of it.
 
-The most convenient and recommended way to see and try all the predefined color 
+Another convenient and recommended way to see and try all the predefined color 
 schemes is by using the Web versions of the package 
-[example 4 "All Themes"](https://rydmike.com/flexcolorschemeV4Tut4) and of course  
+[example 4 "All Themes"](https://rydmike.com/flexcolorschemeV4Tut4) and of course
 [example 5 "Themes Playground"](https://rydmike.com/flexcolorschemeV4Tut5). 
 Using these examples you can try all the built-in color schemes and see the 
-impact they have on often used Flutter widgets. 
+impact they have on often used Flutter UI widgets. 
 
 ### Color Scheme Designs
 
@@ -558,9 +557,7 @@ The purposes with the FlexColorScheme package is to:
   counterpart can be made from this single color definition. 
 
 If you like the above features, then FlexColorScheme may fit your theming 
-requirements, even if you do not use any of its built-in color schemes. There is 
-no need to use any of the built-in color schemes to benefit from 
-FlexColorScheme's capabilities.
+requirements, even if you do not use any of its built-in color schemes. 
 
 ### Can We Change this Predefined Scheme's Colors?
 
@@ -690,9 +687,9 @@ _Example 4) Using custom schemes, plus all the built-in ones as application
 theme options._
 
 [**Example 5**](https://rydmike.com/flexcolorschemeV4Tut5) is the last, and most 
-complex of the examples. It presents pretty all configuration and 
-settings available in FlexColorScheme. You can modify them all interactively
-with the UI and the application changes theme as you modify its settings.
+complex of the examples. It presents all configuration and 
+settings available in FlexColorScheme. You can modify them interactively
+and the application changes theme as you modify any setting.
 
 All the settings are persisted locally, but in this case with another theme
 service, called `ThemeServicePrefs`. This service uses the package 
@@ -924,7 +921,6 @@ colors instead of a built-in scheme.
 
 We glue the `ThemeController` to the MaterialApp. The Flutter standard 
 `AnimatedBuilder` Widget listens to the `ThemeController` for changes.
-
 The Flutter `AnimatedBuilder` is a bit oddly named for this use case. Here 
 it serves the purpose of functioning as a "ChangeNotifierBuilder", 
 that rebuilds its child when its `Listenable`, the `animation` changes.
