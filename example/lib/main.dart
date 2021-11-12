@@ -274,6 +274,10 @@ class _DemoAppState extends State<DemoApp> {
         colors: _useScheme ? null : _schemeLight,
         scheme: _scheme,
         swapColors: _swapColors, // If true, swap primary and secondaries.
+        // For an optional white look set lightIsWhite to true.
+        // This is the counterpart to darkIsTrueBlack mode in dark theme mode,
+        // which is much more useful than this feature.
+        lightIsWhite: false,
 
         // If you provide a color value to a direct color property, the color
         // value will override anything specified via the other properties.
@@ -281,9 +285,9 @@ class _DemoAppState extends State<DemoApp> {
         // 1. scheme 2. colors 3. Individual color values. Normally you would
         // make a custom scheme using the colors property, but if you want to
         // override just one or two colors in a pre-existing scheme, this can
-        // be handy wya to do it. You can uncomment a color property below on
+        // be handy way to do it. Uncomment a color property below on
         // the light theme to try it:
-        //
+
         // primary: FlexColor.indigo.light.primary,
         // primaryVariant: FlexColor.greenLightPrimaryVariant,
         // secondary: FlexColor.indigo.light.secondary,
@@ -297,12 +301,13 @@ class _DemoAppState extends State<DemoApp> {
 
         // The default style of AppBar in Flutter SDK light mode uses scheme
         // primary color as its background color. The appBarStyle
-        // FlexAppBarStyle.primary, results in this too and is the default in
+        // FlexAppBarStyle.primary, results in this too, and is the default in
         // light mode. You can also choose other themed styles. Like
         // FlexAppBarStyle.background, that gets active color blend from used
         // surfaceMode or surfaceStyle, depending on which one is being used.
         // You may often want a different style on the app bar in dark and
-        // light theme mode, therefore it was not set via a shared value here.
+        // light theme mode, therefore it was not set via a shared value
+        // above in this template.
         appBarStyle: FlexAppBarStyle.primary,
         appBarElevation: _appBarElevation,
         appBarOpacity: _appBarOpacity,
@@ -311,10 +316,12 @@ class _DemoAppState extends State<DemoApp> {
         surfaceMode: _surfaceMode,
         blendLevel: _blendLevel,
         tooltipsMatchBackground: _tooltipsMatchBackground,
-        // You can try another font too, not set by default in the demo. Also
-        // prefer using fully defined TextTheme when using fonts rather than
+        // You can try another font too, not set by default in the demo.
+        // Prefer using fully defined TextThemes when using fonts, rather than
         // just setting the fontFamily name, even with GoogleFonts. For
-        // quick tests this is fine too.
+        // quick tests this is fine too, but if the same font style is good
+        // as it is, for all the styles in the TextTheme just the fontFamily
+        // works well too.
         // fontFamily: _fontFamily,
         textTheme: _textTheme,
         primaryTextTheme: _textTheme,
@@ -327,7 +334,7 @@ class _DemoAppState extends State<DemoApp> {
       darkTheme: FlexThemeData.dark(
         // If you want to base the dark scheme on your light colors,
         // you can also compute it from the light theme's FlexSchemeColors.
-        // Here you can do so by setting _computeDarkTheme to true.
+        // Here you can do so by setting _computeDarkTheme above to true.
         // The FlexSchemeColors class has a toDark() method that can convert
         // a color scheme designed for a light theme, to corresponding colors
         // suitable for a dark theme. For the built in themes there is no
@@ -366,7 +373,8 @@ class _DemoAppState extends State<DemoApp> {
         // You can also use other themed styles. Here we use background, that
         // also gets active color blend from used SurfaceMode or SurfaceStyle.
         // You may often want a different style on the AppBar in dark and light
-        // theme mode, therefore it was not set via a shared value here.
+        // theme mode, therefore it was not set via a shared value value
+        // above in this template.
         appBarStyle: FlexAppBarStyle.background,
         appBarElevation: _appBarElevation,
         appBarOpacity: _appBarOpacity,
@@ -398,13 +406,13 @@ class _DemoAppState extends State<DemoApp> {
 
 // The content of HomePage below is not so relevant for using FlexColorScheme
 // based application theming. The critical parts are in the MaterialApp
-// theme definitions above. The HomePage just contains UI to visually show what
+// theme definitions above. The HomePage contains UI to visually show what
 // the defined example looks like in an application and with common Widgets.
 //
 // The AnnotatedRegion using FlexColorScheme.themedSystemNavigationBar demo
 // is however relevant if you want to see something cool on Android.
 //
-// The contents below does make it really handy to see what you theme looks
+// The contents below does make it handy to see what your theme looks
 // like, and the purpose of this demo app is to show that. You can use this
 // example app to experiment with your own themes in code and see the results
 // via this HomePage.
@@ -467,16 +475,16 @@ class _HomePageState extends State<HomePage> {
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
         // On Android SDK >= 29, try changing this to transparent, and the
-        // sub page demo with a bottom navigation bar and some opacity set
-        // you can then have one homogeneously slightly transparent are, shared
-        // with the bottom navigation and system navigation bar.
+        // sub page demo with a bottom navigation bar, and some opacity set.
+        // You then get one homogeneously slightly transparent area, shared
+        // with the bottom navigation bar and system navigation bar.
         systemNavBarStyle: FlexSystemNavBarStyle.background,
         // You can use a top divider on the navigation bar, but it does
-        // add an extra scrim too, which becomes visible when using bars with
-        // opacity os fully transparent.
+        // add an extra scrim, which becomes visible when using bars with
+        // opacity or fully transparent.
         useDivider: false,
         // You can set opacity on the Android system navigation bar, this will
-        // result in content being visible behind if Scaffold use extendBody.
+        // result in content being visible behind it if Scaffold use extendBody.
         opacity: 0.60,
       ),
       child: ResponsiveScaffold(
@@ -505,9 +513,8 @@ class _HomePageState extends State<HomePage> {
                 margins, topPadding, margins, bottomPadding),
             children: <Widget>[
               const Text('This is FlexColorScheme V4 developers hot reload '
-                  'playground. '
-                  'With property values that you can modify and hot '
-                  'reload to try different options and features.'),
+                  'playground. It has property values that you can modify and '
+                  'hot reload the app to try different options and features.'),
               const SizedBox(height: 8),
               ListTile(
                 contentPadding: EdgeInsets.zero,

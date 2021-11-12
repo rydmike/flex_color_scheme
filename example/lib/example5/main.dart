@@ -73,17 +73,18 @@ Future<void> main() async {
   // the Hive based one here as well if you want to try it.
   // This also demonstrates how swap used persistence implementation.
   final ThemeService themeService = ThemeServicePrefs();
-  // To swap to hive use this instead:
+  // To swap to Hive use this instead:
   // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_5');
+  // Initialize the theme service.
   await themeService.init();
+  // Create a ThemeController that uses the ThemeService.
   final ThemeController themeController = ThemeController(themeService);
-
-  // Load the the preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
+  // Load all the preferred theme settings, while the app is loading, before
+  // MaterialApp is created. This prevents a sudden theme change when the app
+  // is first displayed.
   await themeController.loadAll();
-
   // Run the app and pass in the ThemeController. The app listens to the
-  // ThemeController for changes, then passes it further down to the HomePage.
+  // ThemeController for changes.
   // The ThemeController controls all the myriad of Theme settings used
   // in the demo application and also persists settings with injected
   // ThemeService.
@@ -138,9 +139,9 @@ class DemoApp extends StatelessWidget {
                     lightIsWhite: themeController.lightIsWhite,
                     // Opt in/out of using the new V4 sub-themes.
                     useSubThemes: themeController.useSubThemes,
-                    // Modify these const values in the AppData class.
+                    // Modify the value in the AppData class to change it.
                     visualDensity: AppData.visualDensity,
-                    // Custom font
+                    // Custom font, modify in AppData class to change it.
                     fontFamily: AppData.font,
                     // The platform can be toggled in the app, but not saved.
                     platform: themeController.platform,
@@ -152,8 +153,7 @@ class DemoApp extends StatelessWidget {
                       // Slider to adjust themed border radius on widgets with
                       // an adjustable corner rounding, this one is darn handy.
                       // If null, it defaults to Material3 (You) design
-                      // guide values, as far as they are given in the new
-                      // guide so far: https://m3.material.io/
+                      // guide values, when available: https://m3.material.io/
                       defaultRadius: themeController.useDefaultRadius
                           ? null
                           : themeController.cornerRadius,
@@ -174,24 +174,24 @@ class DemoApp extends StatelessWidget {
                       inputDecoratorIsFilled:
                           themeController.inputDecoratorIsFilled,
                       // Do you like underline or outline border type?
-                      // We might some new styles in a future update.
+                      // (Might add some new styles in a future update)
                       inputDecoratorBorderType:
                           themeController.inputDecoratorIsOutlinedBorder,
                       // Only want a border when the text input has focus
                       // or error, then set this to false. By default it always
-                      // has a border of selected style.
+                      // has a border of selected style, but thinner.
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
                       // True gives a very light hint of primary color also to
                       // onColors for onSurface, onBackground and onError.
                       // It is on by default, the chosen effect is very subtle
-                      // even at highest blend levels. On by default.
+                      // even at highest blend levels.
                       blendOnColors: themeController.blendLightOnColors,
-                      // By default sub themes mode also opts-in for using
-                      // colored text for the themed text, like Material3/You.
+                      // By default sub themes mode also opts in on using
+                      // colored text for the themed text, like Material3 uses.
                       // These colors will likely change a bit in later releases
                       // when we get Material3 support in Flutter.
-                      // This already works very well tough. If you plan to
+                      // This already works well enough tough. If you plan to
                       // put text on surfaces that are not primary color tinted
                       // or primary colored, then you may need to turn this
                       // off, or make custom text themes for those surfaces.
@@ -217,14 +217,14 @@ class DemoApp extends StatelessWidget {
                 // The normal use case for FlexColorScheme.toScheme would be
                 // that you define FlexColorScheme with the
                 // FlexColorScheme.light and dark factories, instead of
-                // FlexThemeData.light/dark, then you extract the ColorSchemes
-                // from it and pass it along or just some colors from it,
+                // FlexThemeData.light/dark, then you extract their ColorSchemes
+                // and pass it along, or just some colors from it,
                 // to custom sub-theme methods, so they can use the same scheme
-                // colors when needs, many does need them. Then you create
-                // the them from you FlexColorScheme with toTHeme as before in
-                // version before V4 and to the result apply the custom
-                // sub-themes with copyWith on your ThemeData, using the same
-                // same ColorScheme or colors from it, as you ThemeData was
+                // colors when needed, many does need them. Then you create
+                // the theme from your FlexColorScheme with toTheme, as before
+                // version V4, and to the result apply the custom sub-themes
+                // with copyWith on the resulting ThemeData, using the same
+                // same ColorScheme or colors from it, as you ThemeData is
                 // created with.
                 : ThemeData.from(
                     textTheme: ThemeData(
@@ -246,18 +246,17 @@ class DemoApp extends StatelessWidget {
                   ),
             // We do the exact same definition for the dark theme, but using
             // FlexThemeData.dark() and the dark FlexSchemeColors and we add
-            // use the true black option instead of the in light mode less
+            // use the darkIsTrueBlack option instead of the in light mode less
             // useful lightIsWhite option.
             //
-            // We also add a feature to demonstrate
-            // the usage of computed dark schemes, which we in this setup can
-            // can use with any color scheme, even if it already has nice
-            // matching dark colors, we can try what we get if we compute it
-            // from the light mode color definitions.
+            // We also add a feature to demonstrate the usage of computed dark
+            // schemes. With this setup we can use with any color scheme, even
+            // if it already has nice matching dark colors, we can still try
+            // what we get if we compute it from the light color definitions.
             //
             // The level of white blend percentage used when computing dark
             // scheme colors from the light scheme colors with the toDark method
-            // is determined by `darkMethodLevel`.
+            // is determined by darkMethodLevel.
             darkTheme: themeController.useFlexColorScheme
                 ? FlexThemeData.dark(
                     colors: themeController.useToDarkMethod

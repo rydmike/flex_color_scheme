@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 /// stable 2.2.x and earlier, also on desktop and web we can use this scroll
 /// behaviour for the entire application.
 ///
+/// Normally you would probably not use this scroll behavior in real
+/// desktop/web apps, but I like it, so I use it when I can choose! :)
+///
 /// This is a Flutter class that only depends on the SDK and can be dropped
-/// into any application. This is actually not a Widget, but it was
-/// convenient to drop it into this folder in these example applications.
+/// into any application.
 class AppScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override

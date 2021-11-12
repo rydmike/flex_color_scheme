@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../services/theme_service.dart';
 
 /// The ThemeController is used by many Widgets that users can interact with.
-/// Widgets can read user theme settings, save user theme settings and listen
+/// Widgets can read user theme settings, set user theme settings and listen
 /// to user's theme changes.
 ///
 /// The controller glues data Services to Flutter Widgets. The ThemeController

@@ -52,14 +52,16 @@ Future<void> main() async {
   final ThemeService themeService = ThemeServiceMem();
   // To swap to hive use this instead:
   // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_2');
+  // Initialize the theme service.
   await themeService.init();
+  // Create a ThemeController that uses the ThemeService.
   final ThemeController themeController = ThemeController(themeService);
-  // Load the the preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
+  // Load all the preferred theme settings, while the app is loading, before
+  // MaterialApp is created. This prevents a sudden theme change when the app
+  // is first displayed.
   await themeController.loadAll();
-
   // Run the app and pass in the ThemeController. The app listens to the
-  // ThemeController for changes, then passes it further down to the HomePage.
+  // ThemeController for changes.
   runApp(DemoApp(themeController: themeController));
 }
 
@@ -71,8 +73,10 @@ Future<void> main() async {
 //
 // Here we use local const values for our color palette definitions, you may
 // want to bundle your custom color values in a class as static const values.
-// This was just some colors I chose on a whim, but dang this theme actually
-// looks pretty good! :)
+// In later examples 4 and 5 we do so.
+//
+// These colors were was just some colors I chose on a whim, but dang this
+// theme actually looks pretty good! :)
 const FlexSchemeData _myFlexScheme = FlexSchemeData(
   name: 'Midnight blue',
   description: 'Midnight blue theme, custom definition of all colors',
@@ -101,7 +105,7 @@ class DemoApp extends StatelessWidget {
     // Whenever the user updates theme settings, the MaterialApp is rebuilt.
     // It rebuilds the entire app when any value in the themeController is
     // changed, but that is fine, since all property changes in it are of
-    // the nature that te entire App UI needs to be redrawn, so this approach
+    // the nature that the entire App UI needs to be redrawn, so this approach
     // works well for this use case.
     return AnimatedBuilder(
         animation: themeController,
@@ -112,7 +116,7 @@ class DemoApp extends StatelessWidget {
             title: 'Custom Theme',
             // Define FlexThemeData.light() theme using above custom colors.
             theme: FlexThemeData.light(
-              // You could have stored the light scheme in a FlexSchemeColor
+              // We could have stored the light scheme in a FlexSchemeColor
               // and used it for the colors, but we will use both the light and
               // dark colors also on the HomePage for the theme switch widget
               // and to display its name, where we pass it as a FlexSchemeData
@@ -121,6 +125,8 @@ class DemoApp extends StatelessWidget {
               colors: _myFlexScheme.light,
               // Opt in/out on FlexColorScheme sub-themes with theme controller.
               useSubThemes: themeController.useSubThemes,
+              // Use very low elevation light theme mode. On light colored
+              // AppBars this show up as a nice thin underline effect.
               appBarElevation: 0.5,
               // Here we want the large default visual density on all platforms.
               // Like Flutter SDK it default to
@@ -144,13 +150,13 @@ class DemoApp extends StatelessWidget {
               visualDensity: VisualDensity.standard,
               fontFamily: GoogleFonts.notoSans().fontFamily,
             ),
-            // Use the dark or light theme, based on controller setting.
+            // Use the dark or light theme, based on theme controller setting.
             themeMode: themeController.themeMode,
             home: HomePage(
               // Pass in the FlexSchemeData we used for the active theme. Not
-              // really needed to use FlexColorScheme, but we will use it to
+              // needed to use FlexColorScheme, but we use it to
               // show the active theme's name, description and colors in the
-              // demo. It is also used for the theme mode switch that shows the
+              // demo. It is also used by the theme mode switch that shows the
               // theme's colors in the different theme modes.
               flexSchemeData: _myFlexScheme,
               // Pass in the theme controller to the home page.

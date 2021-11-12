@@ -10,8 +10,6 @@ import 'home_page.dart';
 // This example shows how to use a selected predefined color scheme in
 // FlexColorScheme to define light and dark themes using the scheme,
 // and then how to switch between the light and dark mode.
-//
-// It uses the Google font Noto Sans to show how to use custom fonts.
 // -----------------------------------------------------------------------------
 void main() => runApp(const DemoApp());
 
@@ -23,7 +21,7 @@ class DemoApp extends StatefulWidget {
 }
 
 class _DemoAppState extends State<DemoApp> {
-  // Used to select if we use the dark or light theme.
+  // Used to select if we use the dark or light theme, start with system mode.
   ThemeMode themeMode = ThemeMode.system;
 
   @override
@@ -42,10 +40,10 @@ class _DemoAppState extends State<DemoApp> {
         // Use very subtly themed app bar elevation in light mode.
         appBarElevation: 0.5,
       ),
-      // Same definition for the dark theme, using FlexThemeData.dark().
+      // Same definition for the dark theme, but using FlexThemeData.dark().
       darkTheme: FlexThemeData.dark(
         scheme: usedScheme,
-        // Use stronger app bar elevation in dark mode.
+        // Use stronger themed app bar elevation in dark mode.
         appBarElevation: 2,
       ),
       // Use the above dark or light theme based on active themeMode.
@@ -59,11 +57,11 @@ class _DemoAppState extends State<DemoApp> {
             themeMode = mode;
           });
         },
-        // Pass in the FlexSchemeData we used for the active theme. Not really
-        // needed to use FlexColorScheme, but we will use it to show the
-        // active theme's name, descriptions and colors in the demo.
-        // We also use it for the theme mode switch that shows the theme's
-        // colors in the different theme modes.
+        // Pass in the FlexSchemeData we used for the active theme. Not
+        // needed to use FlexColorScheme, but we use it to
+        // show the active theme's name, description and colors in the
+        // demo. It is also used by the theme mode switch that shows the
+        // theme's colors in the different theme modes.
         flexSchemeData: FlexColor.schemes[usedScheme]!,
       ),
     );

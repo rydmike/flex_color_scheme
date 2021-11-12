@@ -1,7 +1,11 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-/// Interface for ThemeService used to read and save theme properties.
+/// Abstract interface for the ThemeService used to read and save theme
+/// properties.
+///
+/// Also holds the key values used to persist the data and the default values
+/// for each property.
 abstract class ThemeService {
   /// ThemeService implementations may override this method to perform needed
   /// initialization and setup work.

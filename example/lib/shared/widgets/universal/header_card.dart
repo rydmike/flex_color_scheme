@@ -103,6 +103,7 @@ class HeaderCard extends StatelessWidget {
     // Dark mode needs stronger blends to be visible.
     final int blendFactor = isDark ? 3 : 2;
 
+    // TODO(rydmike): Make this happen only if same as scaffold background!
     // Make card slightly more colored than card background is
     Color cardColor = Color.alphaBlend(
         scheme.primary.withAlpha(2 * blendFactor), theme.cardColor);

@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-/// Widget used to change the used FlexScheme in example 3.
+// Widget used to change the used FlexScheme in example 3.
 class ThemeSelectButtons extends StatelessWidget {
   const ThemeSelectButtons({
     Key? key,

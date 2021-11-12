@@ -55,19 +55,21 @@ Future<void> main() async {
   // The ThemeServiceHive constructor requires a box name, the others do not.
   // The box name is just a file name for the file that stores the settings.
   final ThemeService themeService = ThemeServiceHive('flex_scheme_box_3');
+  // Initialize the theme service.
   await themeService.init();
+  // Create a ThemeController that uses the ThemeService.
   final ThemeController themeController = ThemeController(themeService);
-  // Load the the preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
+  // Load all the preferred theme settings, while the app is loading, before
+  // MaterialApp is created. This prevents a sudden theme change when the app
+  // is first displayed.
   await themeController.loadAll();
-
   // Run the app and pass in the ThemeController. The app listens to the
-  // ThemeController for changes, then passes it further down to the HomePage.
+  // ThemeController for changes.
   runApp(DemoApp(themeController: themeController));
 }
 
 // Create a custom FlexSchemeData with name, description and a light and dark
-// FlexSchemeColors. These are the same example colors used in example 2.
+// FlexSchemeColors. Same example colors as those used in example 2.
 const FlexSchemeData _myFlexScheme = FlexSchemeData(
   name: 'Midnight blue',
   description: 'Midnight blue theme, custom definition of all colors',

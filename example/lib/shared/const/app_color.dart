@@ -18,7 +18,7 @@ class AppColor {
     secondaryVariant: Color(0xFFFDB100),
     // The built in schemes use their secondary variant color as their
     // custom app bar color, but it can be any color. We use a custom color
-    // here. We will see this in example 5 when using this theme and selecting
+    // here. We will see this in example 5 when using the theme and selecting
     // the custom app bar style.
     appBarColor: Color(0xFFf95738),
   );
@@ -62,7 +62,7 @@ class AppColor {
 
 // Finally we create a list with all color schemes we will use. Starting with
 // our custom schemes, since normally when we make custom schemes, those are
-// probably the ones we want to use primarily so we put them first. After our
+// probably the ones we want to use primarily, so we put them first. After our
 // custom schemes, we add all the pre-defined built-in ones, offering them as
 // options users can switch to and use if they like.
   static final List<FlexSchemeData> schemes = <FlexSchemeData>[
@@ -71,7 +71,8 @@ class AppColor {
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
       name: 'C1: Midnight',
-      description: 'Midnight blue theme, used custom definition of all colors',
+      description: 'Midnight blue theme, created by using custom color values '
+          'for all colors in the scheme',
       // FlexSchemeData holds separate defined color schemes for light and
       // matching dark theme colors. Dark theme colors typically need to be less
       // saturated versions of their than light counter parts. Using the same
@@ -82,8 +83,8 @@ class AppColor {
     // Do the same for our second custom scheme.
     FlexSchemeData(
       name: 'C2: Greens',
-      description: 'Vivid green theme, created from only a primary '
-          'light and dark color',
+      description: 'Vivid green theme, created from one primary color in light '
+          'mode and another primary for dark mode',
       light: _myScheme2Light,
       dark: _myScheme2Dark,
     ),
@@ -91,7 +92,7 @@ class AppColor {
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
       name: 'C3: Red & Blue',
-      description: 'Classic read and blue, created from only light scheme '
+      description: 'Classic read and blue, created from only light theme mode '
           'primary and secondary colors',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.

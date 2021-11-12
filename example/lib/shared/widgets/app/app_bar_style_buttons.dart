@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-/// Widget used to change the used app bar style mode in example 5.
+// Widget used to change the used app bar style mode in example 5.
 class AppBarStyleButtons extends StatelessWidget {
   const AppBarStyleButtons({
     Key? key,

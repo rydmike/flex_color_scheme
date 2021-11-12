@@ -6,45 +6,64 @@ import '../utils/app_data_dir/app_data_dir.dart';
 import 'theme_service.dart';
 import 'theme_service_hive_adapters.dart';
 
-// TODO(rydmike): Implement HIVE based persistence - WIP.
-/// A themes service that stores and retrieves theme settings locally using
-/// package Hive.
+/// A [ThemeService] implementation that stores and retrieves theme settings
+/// locally using the package Hive:
+/// https://pub.dev/packages/hive
+///
+/// This service on purpose demonstrates persisting each theme setting value as
+/// its own string key and value pair. With this amount of values,
+/// bundling them all up in a data class and persisting them all as one big
+/// serialized JSON string, with just one settings key, would be more
+/// convenient. On the other hand, this is probably more resource
+/// efficient and gives us faster saves of persisted slider values, that can
+/// be dragged quickly in the UI. Writing this setup for this many properties is
+/// a bit error prone, even if it is simple and very mechanical.
+///
+/// Normally your would probably not have this many settings properties you
+/// want to persist locally (or remotely), in that case this approach is also
+/// the simpler and more convenient one. In this particular case though, well
+/// maybe not with this amount of props.
 class ThemeServiceHive implements ThemeService {
   ThemeServiceHive(this.boxName);
 
-  /// The name of the have storage box.
+  /// The name of the Hive storage box.
   ///
-  /// This is the filename without any extension or path, that you want to
-  /// use for your Hive storage box. Fore example: 'my_app_settings'
+  /// This is the filename without any extension or path, to use for
+  /// the Hive storage box, for example: 'my_app_settings'
   final String boxName;
 
-  /// Hold an instance to Hive box, must be initialized
-  // by the init call before accessing the stored data.
-
+  // Holds an instance to Hive box, must be initialized
+  // by the init call before accessing the storage box.
   late final Box<dynamic> _hiveBox;
 
-  /// ThemeServiceMem implementations needs no init, it is just a no op.
+  /// ThemeServiceHive's init implementation. Must call be before accessing
+  /// the storage box.
+  ///
+  /// - Registers Hive data type adapters for our enum values
+  /// - Gets a usable platform appropriate folder where data can be stored.
+  /// - Open the box in the folder with name given via class constructor.
+  /// - Assign box to local Hive box instance.
   @override
   Future<void> init() async {
     // First register all Hive data type adapters. Used for our enum values.
     registerHiveAdapters();
     // Get platform compatible storage folder for the Hive box,
-    // this setup should work on all Flutter platforms, Hive does not do this
-    // right, the folder we got with it did not work on Windows, this
-    // implementation work and it uses the same folder that SharedPreferences
-    // does, well at least on Windows.
+    // this setup should work on all Flutter platforms. Hive does not do this
+    // right, the folder we got with it did not work on Windows. This
+    // implementation works and it uses the same folder that SharedPreferences
+    // does.
     final String appDataDir = await getAppDataDir();
     // To make it easier to find the files on your device, this should help.
     // Usually you find the "shared_preferences.json" file in the same folder
     // that the ThemeServicePref creates with SharedPreferences. You cannot
     // set the name on that file so all examples would have shared the same
-    // settings on local builds SharedPreferences would have been used for all
-    // examples. Wanted to avoid that, which we can do with Hive. Sure we
+    // settings on local builds if SharedPreferences would have been used for
+    // all examples. Wanted to avoid that, which we can do with Hive. Sure we
     // could have used only Hive too, but SharedPreferences is a very popular
-    // and sensible choice for this feature, so we wanted to show how it may
-    // be used as well.
+    // and sensible choice for this feature, wanted to show how it can be
+    // used as well.
     debugPrint('Hive using storage path: $appDataDir and file name: $boxName');
-    // Init the Hive box box giving it its platform usable folder.
+    // Init the Hive box box giving it the platform usable folder.
     Hive.init(appDataDir);
     // Open the Hive box with passed in name, we just keep it open all the
     // time in this demo app.

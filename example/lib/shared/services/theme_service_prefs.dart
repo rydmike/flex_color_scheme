@@ -13,10 +13,15 @@ import 'theme_service.dart';
 /// its own string key and value pair. With this amount of values,
 /// bundling them all up in a data class and persisting them all as one big
 /// serialized JSON string, with just one settings key, would be more
-/// convenient. On the other hand, this is probably more resources
+/// convenient. On the other hand, this is probably more resource
 /// efficient and gives us faster saves of persisted slider values, that can
 /// be dragged quickly in the UI. Writing this setup for this many properties is
 /// a bit error prone, even if it is simple and very mechanical.
+///
+/// Normally your would probably not have this many settings properties you
+/// want to persist locally (or remotely), in that case this approach is also
+/// the simpler and more convenient one. In this particular case though, well
+/// maybe not with this amount of props.
 class ThemeServicePrefs implements ThemeService {
   // Hold an instance to the SharedPreferences store, must be initialized
   // by the init call before accessing the stored data.

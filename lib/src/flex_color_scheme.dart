@@ -3919,9 +3919,6 @@ class FlexColorScheme with Diagnosticable {
       // course, but color scheme based themes in Flutter cannot specify it
       // separately. We need to be able to do so/ in order to make elegantly
       // nuanced primary color branded themes.
-      // TODO(rydmike): Follow-up with issue about need to keep it around.
-      // Could be in a proper new sub-theme and prop in ThemeData can migrate
-      // to it. Need to find the Flutter issues for it.
       scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.background,
       // Card, divider and background colors are same as in ThemeData.from.
       cardColor: colorScheme.surface,

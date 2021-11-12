@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+// A popup menu that allows us to select the Flutter platform we want to use.
+//
+// Does not actually change the platform, only the UI for the selection.
+// The actual selection is done via platform property in ThemeData.
 class PlatformPopupMenu extends StatelessWidget {
   const PlatformPopupMenu({
     Key? key,

@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 
 /// SplashPageTwo represents a splash page that uses native full screen mode
 /// by using [SystemChrome.setEnabledSystemUIMode].
+///
+/// It would be nice if it work perfectly, but it only works so, so. Meaning it
+/// seems to work on some Android SDK levels, but not all.
 class SplashPageTwo extends StatefulWidget {
   /// Default const constructor.
   const SplashPageTwo({
@@ -64,6 +67,15 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     // Set the UI overlays back when we dispose this screen.
     // This screen needs to be stateful so we can correctly manage the
     // life-cycle of the removed overlay and putting them back.
+    //
+    // Another challenge with this approach is that we do not actually know
+    // which overlays were in use when we removed them. There is
+    // no way to query it, so we could restore the same ones. Best we can do
+    // is put them all back. If we control the parent it is not a problem,
+    // because then we know and can but back what it had, but if we use this
+    // in a package, it is a not possible.
+    //
+    // TODO(rydmike): Raise issue in SDK to request a way to query UiMode.
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
     super.dispose();

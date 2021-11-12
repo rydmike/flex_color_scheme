@@ -6,13 +6,13 @@ import 'about.dart';
 
 // ignore_for_file: comment_references
 
-// The width of the side menu when expanded to full menu.
+// The default width of the side menu when expanded to full menu.
 const double _kMenuWidth = 275;
 
 // The default width of the side menu when collapsed to a rail.
 // We make it extra compact to not be so intrusive on phones. It looks a bit
 // silly on desktop. But parent can vary it based on media size if so desired.
-// The default example and example 5 apps do so.
+// The default example and example 5 do so.
 const double _kRailWidth = 52;
 
 // The minimum media size needed for desktop/large tablet menu view.
@@ -30,16 +30,16 @@ const Duration _kMenuAnimationDuration = Duration(milliseconds: 246);
 /// A simplistic animated responsive Scaffold.
 ///
 /// Q: Is this Flexfold?
-/// A: No, it is not, this is way simpler, but feel free to use it.
+/// A: No, it is not, this is simpler, but feel free to use it.
 ///
 /// This is just a straw-man for a "real" responsive animated Scaffold. It
 /// can give you some ideas about how you can make a simple one. It
-/// has hard coded menu items, but you could easily make them and many
+/// has hard coded menu and items, but you could easily make them and many
 /// other things configurable properties too.
 ///
 /// About the animated menu solution for this menu. I wanted to test if it could
 /// be built with just one single implicit AnimatedContainer. As can be seen
-/// it can. I thought it would be simpler than using one or more explicit
+/// it can. I thought it would be simpler than using more explicit
 /// animation controllers. Turned out getting hold of widths and states got
 /// very cumbersome and complex, not really an approach I recommend, but
 /// an interesting experiment.
@@ -79,29 +79,26 @@ class ResponsiveScaffold extends StatefulWidget {
     this.restorationId,
   }) : super(key: key);
 
-  /// The primary widget displayed in the app bar.
+  /// The primary widget displayed in the app bar, just you normal AppBar title.
   ///
-  /// Goes into the title of the AppBar that is not directly accessible.
-  ///
-  /// Becomes the middle component of the [NavigationToolbar] built by this
-  /// widget.
+  /// Goes into the title of the AppBar, that is not directly accessible as a
+  /// property when using the ResponsiveScaffold.
   ///
   /// Typically a [Text] widget that contains a description of the current
   /// contents of the page.
   final Widget? title;
 
-  /// The widget displayed in the app bar on the menu as app title or logo.
+  /// The widget displayed in the app bar on the menu as app title or a logo.
   ///
-  /// Typically a [Text] widget that contains a description of the current
-  /// contents of the app, but it could also be small company logo that fits
-  /// in an AppBar.
+  /// Typically a [Text] widget that contains a description of the name of the
+  /// app, but it could also be small company logo that fits in an AppBar.
   final Widget? menuTitle;
 
-  /// The width of the rail menu when it is rail sized.
+  /// The width of the menu when it is rail sized.
   ///
   /// Values from 48...60 work well. You can vary the size depending on
   /// if the rail is shown on larger media and have a wider rail then,
-  /// but make it really tight if the rail is used on a phone.
+  /// and then make it really tight if the rail is used on a phone.
   ///
   /// Defaults to [_kRailWidth] 50.
   final double railWidth;
@@ -113,7 +110,7 @@ class ResponsiveScaffold extends StatefulWidget {
   ///
   /// Defaults to [_kMenuWidth] 275.
   ///
-  /// Standard Drawer in Flutter is 304dp dp. If you make the menu
+  /// Standard Drawer in Flutter is 304 dp. If you make the menu
   /// wider than Flutter's default drawer size 304dp, the menu will be
   /// constrained to 304dp by Flutter SDK when used in the Drawer, it will
   /// however still shrink to the width provided here when smaller than 304dp.
@@ -133,6 +130,9 @@ class ResponsiveScaffold extends StatefulWidget {
 
   /// Callback called with menu index when user taps on a menu item.
   final ValueChanged<int>? onSelect;
+
+  // Rest of the properties are just standard Scaffold properties that
+  // are passed along to it.
 
   /// If true, and [bottomNavigationBar] or [persistentFooterButtons]
   /// is specified, then the [body] extends to the bottom of the Scaffold,
@@ -351,8 +351,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   @override
   void initState() {
     super.initState();
-    // Not set again if changed in the app, only on init,
-    // you can make it do that too if you need it.
+    // Not set again if changed in the app, only on init,  you can make it do
+    // that too if you need it, which you do if want to change the expanded
+    // menu max width dynamically while running app.
     activeMenuWidth = widget.menuWidth;
     previousMenuWidth = activeMenuWidth;
   }
@@ -365,17 +366,17 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     // we are just going to call that isDesktop, but it could be large tablet
     // or tablet in landscape, or even phone in landscape.
     final bool isDesktop = media.size.width >= widget.breakpointShowFullMenu;
-    // Secret sauce for a simple responsive toggleable drawer-rail-menu.
+    // Secret sauce for a simple auto responsive & toggleable drawer-rail-menu.
     if (!isDesktop) activeMenuWidth = widget.railWidth;
     if (!isDesktop && isMenuClosed) activeMenuWidth = 0;
     if (!isDesktop && !isMenuClosed) activeMenuWidth = widget.railWidth;
     if (isDesktop && !isMenuExpanded) activeMenuWidth = widget.railWidth;
     if (isDesktop && isMenuExpanded) activeMenuWidth = widget.menuWidth;
 
-    // The entire layout is a, surprise just a Row!
+    // The entire layout is just a Row!
     return Row(
       children: <Widget>[
-        // The menu content when used as a menu or rail, is in a constrained
+        // The menu content when used as a menu or rail is in a constrained
         // box set to the maximum width of the menu.
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: widget.menuWidth),
@@ -442,12 +443,16 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
             appBar: AppBar(
               title: widget.title,
               actions: const <Widget>[AboutIconButton()],
+              // Some logic to show the implicit menu button on AppBar when
+              // there is no rail or menu.
               automaticallyImplyLeading:
                   !isDesktop && isMenuClosed && menuDoneClosing,
             ),
             // The menu content when used in the Drawer.
             drawer: ConstrainedBox(
               // We use the same size on the drawer that we have on our menu.
+              // We can do that by constraining the drawer een if it does not
+              // have a width size property.
               constraints: BoxConstraints.expand(width: widget.menuWidth),
               child: Drawer(
                 child: _AppMenu(
@@ -682,10 +687,10 @@ class _MenuItem extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     // Just some colors for the menu items, based on the current color schemes.
-    // Always when you can use colors from the theme.colorScheme to make
-    // custom elements in your app react to theme changes and use the theme
-    // colors. You can make elaborate hues and opacities or even of the colors
-    // in the theme's color schemes.
+    // Always when you can, use colors from the theme.colorScheme to make
+    // custom elements in your app they react to theme changes and use the theme
+    // colors. You can make elaborate hues and opacities of the colors in the
+    // theme's color schemes, like here:
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
             theme.colorScheme.onBackground)
@@ -696,16 +701,15 @@ class _MenuItem extends StatelessWidget {
 
     // The M3 guide calls for 12dp padding after the selection indicator on
     // the menu highlight in a Drawer or side menu. We can do that, but we
-    // have such a narrow rail for phone size so at rail size we will make it
-    // much smaller, using 5, let's swap to new size a bit after it transits
-    // to menu width.
+    // have such a narrow rail for phone size, so at rail sizes we will make it
+    // much smaller, even 2 different sizes.
     final double endPadding = (width > railWidth + 10)
         ? 12
         // If we use a really narrow rail rail, make padding even smaller-
         : railWidth < 60
             ? 5
             : 8;
-    // Remove the menu when it gets smaller than 4dp during anim.
+    // Remove the menu when it gets smaller than 4dp during animation.
     if (width < 4) {
       return const SizedBox.shrink();
     } else {
@@ -721,7 +725,7 @@ class _MenuItem extends StatelessWidget {
                 topRight: Radius.circular(_itemHeight / 2),
                 bottomRight: Radius.circular(_itemHeight / 2),
               ),
-              // This is just tap command menu so we keep selected item
+              // This is a tap command menu, so we keep selected item
               // transparent. We still get desktop/web hover and tap splash.
               // However, you can do this on a menu that selects an item that
               // should remain highlighted and show last selected item:
@@ -778,7 +782,7 @@ class _MenuItem extends StatelessWidget {
 
 /// A user profile widget that we use as leading widget in the menu.
 ///
-/// Just mock UI for the demo app, it does not do anything.
+/// Mock UI for the demo app, it does not do anything.
 class _UserProfile extends StatefulWidget {
   const _UserProfile({
     Key? key,
@@ -801,7 +805,7 @@ class _UserProfileState extends State<_UserProfile> {
     const double hPadding = 5;
 
     return Material(
-      // Just as an effect for theme demos, we put themed surface color on
+      // As an effect for theme demos, we put themed surface color on
       // Material used as background for the user profile widget. This gives
       // a it a slightly different tone for the background with themes that use
       // a blend mode where the blend strength is different for background
@@ -847,6 +851,7 @@ class _UserProfileState extends State<_UserProfile> {
               });
             },
           ),
+          // Add some expand actions for access to mock functionality.
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             transitionBuilder: (Widget child, Animation<double> animation) {
@@ -876,8 +881,8 @@ class _UserProfileState extends State<_UserProfile> {
                           onPressed: () {},
                           child: Column(
                             children: <Widget>[
-                              const Icon(Icons.exit_to_app),
-                              Text('Sign in', style: textTheme.overline),
+                              const Icon(Icons.logout),
+                              Text('Sign out', style: textTheme.overline),
                             ],
                           ),
                         ),

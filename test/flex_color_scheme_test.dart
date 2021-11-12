@@ -70,7 +70,7 @@ void main() {
         'scheme EXPECT FlexColorScheme.light with colors sc and null scheme.',
         () {
       expect(fc2, equals(fc2i));
-      // Expect toTheme from them to full-fill same condition.
+      // Expect toTheme from theme to full-fill same condition.
       // TODO(rydmike): SDK ThemeData operator issue, fix in master!
       // https://github.com/flutter/flutter/issues/91587
       // If we run this test with just equals on the two objects, it fails!

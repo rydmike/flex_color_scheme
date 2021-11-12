@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../const/app_data.dart';
 import '../../utils/link_text_span.dart';
 
-/// An about icon button used on the example's app app bar.
+// An about icon button used on the example's app app bar.
 class AboutIconButton extends StatelessWidget {
   const AboutIconButton({Key? key}) : super(key: key);
 
@@ -20,8 +20,8 @@ class AboutIconButton extends StatelessWidget {
   }
 }
 
-/// This [showAppAboutDialog] function is based on the [AboutDialog] example
-/// that exist(ed) in the Flutter Gallery App.
+// This [showAppAboutDialog] function is based on the [AboutDialog] example
+// that exist(ed) in the Flutter Gallery App.
 void showAppAboutDialog(BuildContext context) {
   final ThemeData themeData = Theme.of(context);
   final TextStyle aboutTextStyle = themeData.textTheme.bodyText1!;
