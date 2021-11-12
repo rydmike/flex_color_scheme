@@ -14,7 +14,7 @@ and it is almost so if you defined your Flutter ThemeData the correct way.
 FlexColorScheme goes the extra mile to ensure that all Flutter SDK widgets gets 
 themed as intended by the built-in color scheme or custom colors you provide.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00-new-main-image.gif?raw=true" alt="main_image"/>
+<img src="https://rydmike.com/assets_fcsv4/00-new-main-image.gif?raw=true" alt="main_image"/>
 
 You can also opt in on using pre-made opinionated widget sub-themes.
 By opting in, you can for example adjust the border radius on all widgets 
@@ -72,7 +72,7 @@ be the standard for new releases. The new color schemes are:
 * **Rosewood** - Rosewood red, with horses neck and driftwood theme
 * **Blumine** - Blumine, easter blue and saffron mango theme
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/04-news-themes-gang.png?raw=true" alt="playground_default"/>
+<img src="https://rydmike.com/assets_fcsv4/04-news-themes-gang.png?raw=true" alt="playground_default"/>
 
 Total number of offered built-in color schemes is now 36 matched light
 and dark pairs. By using the swap primary and secondary colors, you can double
@@ -106,7 +106,7 @@ colors and the created theme's impact on common Material UI widgets.
 
 The default sample app, the "Hot Reload Playground", looks like this:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/00_playground_default.png?raw=true" alt="playground_default"/>
+<img src="https://rydmike.com/assets_fcsv4/00_playground_default.png?raw=true" alt="playground_default"/>
 
 It comes fully loaded with template settings and thorough 
 comments that explain what to change to produce different results. You
@@ -129,7 +129,7 @@ There are a large amount of other settings you can play with in the default
 example application. The above selected **blue whale** theme is the first one
 shown in the image below. 
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/01_playground_options.png?raw=true" alt="options"/>
+<img src="https://rydmike.com/assets_fcsv4/01_playground_options.png?raw=true" alt="options"/>
 
 The other results shown above were also produced by editing a few 
 properties in this hot reload playground.
@@ -166,7 +166,7 @@ is however easier to see and experience what each configuration option in
 FlexColorScheme does, when you use a large screen with high resolution, then 
 you can see the result of all settings at one glance.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/05-web-demo-4k.png?raw=true" alt="options"/>_FlexColorScheme**Themes Playground** app at 4k resolution_
+<img src="https://rydmike.com/assets_fcsv4/05-web-demo-4k.png?raw=true" alt="options"/>_FlexColorScheme**Themes Playground** app at 4k resolution_
 
 ## Installing and Using
 
@@ -239,7 +239,7 @@ becomes:
 
 The above additions gives us the following look on the familiar counter app:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_counter_app.png?raw=true" alt="counter sample"  width="500"/>
+<img src="https://rydmike.com/assets_fcsv4/fcs_counter_app.png?raw=true" alt="counter sample"  width="500"/>
 
 Not as exciting as the images above. That is because the basic counter app uses 
 very few features and widgets, so it cannot really illustrate the result very 
@@ -378,7 +378,7 @@ different blend modes. Next, one of the modes is repeated, but at blend
 level 33. Last the theme that was used to generate all these 
 different nuances of the same color scheme based theme is shown.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/06-blend-examples.png?raw=true" alt="bledn examples"/>_FlexColorScheme using the same theme, but with
+<img src="https://rydmike.com/assets_fcsv4/06-blend-examples.png?raw=true" alt="bledn examples"/>_FlexColorScheme using the same theme, but with
 different blend modes and levels (click for hires version)_
 
 There are 9 different blend modes at 40 different levels each, that you can
@@ -413,7 +413,7 @@ single or a few more colors.
 These features are useful when you quickly want to test a single color, or maybe 
 only a primary and secondary color for a light theme, and get all other scheme 
 colors computed. When you figured out the colors you want, you can use exactly
-tuned color defintioned and make your custom color schemes from const values
+tuned color definitions and make your custom color schemes from const values
 instead.
 
 Using different ways to create custom color schemes is presented in detail 
@@ -442,7 +442,7 @@ FlexColorScheme object.
 Pass the `ColorScheme` you got from `toScheme` or just one or some of its 
 colors, along to your methods that define your sub theme data. Turn your
 FlexColorScheme to `ThemeData` with its `toTheme` method, and then add your sub 
-themes with `copyWith` to this object in the same go. They now uses the
+themes with `copyWith` to this object in the same go. They then use the
 same `ColorScheme` colors, that the ThemeData created with `toTheme` will get 
 as as well.
 
@@ -463,7 +463,7 @@ Here is a composite image showing them all.
 
 >TODO: Update this image
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_all_schemes_32_at_100.png?raw=true" alt="ColorScheme all"/>_All available color schemes (click 
+<img src="https://rydmike.com/assets_fcsv4/fcs_all_schemes_32_at_100.png?raw=true" alt="ColorScheme all"/>_All available color schemes (click 
 for hires version)_
 
 The above image is a low resolution image of all the color schemes.
@@ -510,7 +510,7 @@ how to define your own color schemes and make themes based on them.
 
 You can create your own custom list of schemes, then use this list with 
 only your own custom color schemes selection. You may also append some, or 
-even all of the built-in schemes after your custom schemes, and thus give your
+even all built-in schemes after your custom schemes, and thus give your
 users a lot of theme options. How to do this is demonstrated in the tutorial
 in examples 4 and 5.
 
@@ -649,7 +649,7 @@ use case. To use one of the built-in color schemes as your application theme.
 You can toggle between its light and dark variant, or allow device system theme 
 mode setting to control if the dark or light theme is used.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/21-example-1-a-small.jpg?raw=true" alt="ColorScheme example 1"/>
+<img src="https://rydmike.com/assets_fcsv4/21-example-1-a-small.jpg?raw=true" alt="ColorScheme example 1"/>
 
 _Example 1) Using a built-in FlexColorScheme color scheme as application theme._
 
@@ -659,7 +659,7 @@ The architecture is also more advanced, it uses the approach introduced with
 Flutter skeleton template, using a theme service and theme controller, 
 keeping settings only in memory using the in memory `ThemeServiceMem`.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/22-example-2-a-small.jpg?raw=true" alt="ColorScheme example 2" />
+<img src="https://rydmike.com/assets_fcsv4/22-example-2-a-small.jpg?raw=true" alt="ColorScheme example 2" />
 
 _Example 2) Using custom colors with FlexColorScheme color scheme as
 application theme._
@@ -671,7 +671,7 @@ The settings are now also persisted to the device, using a theme service
 called `ThemeServiceHive` to persist the settings with package 
 [Hive](https://pub.dev/packages/hive).
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/23-example-3-a-small.jpg?raw=true" alt="ColorScheme example 3" />
+<img src="https://rydmike.com/assets_fcsv4/23-example-3-a-small.jpg?raw=true" alt="ColorScheme example 3" />
 
 _Example 3) Using three built-in schemes, plus a custom color scheme 
 as application theme options._
@@ -681,7 +681,7 @@ of the different built-in color schemes plus three custom ones, and
 use them as the application theme. As in example 3, we persist the theme 
 settings.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/24-example-4-a-small.jpg?raw=true" alt="ColorScheme example 4" />
+<img src="https://rydmike.com/assets_fcsv4/24-example-4-a-small.jpg?raw=true" alt="ColorScheme example 4" />
 
 _Example 4) Using custom schemes, plus all the built-in ones as application 
 theme options._
@@ -704,7 +704,7 @@ overview of all the settings possibilities and their impact on different,
 widgets while changing the settings on the phone UI, since you cannot see 
 everything at the same time.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/25-example-5-a-small.jpg?raw=true" alt="ColorScheme example 5" />
+<img src="https://rydmike.com/assets_fcsv4/25-example-5-a-small.jpg?raw=true" alt="ColorScheme example 5" />
 
 _Example 5) The Themes Playground_
 
@@ -713,7 +713,7 @@ _Example 5) The Themes Playground_
 Another classic example of **FlexColorScheme** usage can be seen in the Flutter 
 web [**Flexfold demo app**](https://rydmike.com/demoflexfold).
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FoldTheme1.gif?raw=true" alt="FlexColorScheme"/>
+<img src="https://rydmike.com/assets_fcsv4/FoldTheme1.gif?raw=true" alt="FlexColorScheme"/>
 
 _Flexfold Demo uses FlexColorScheme for its themes._
 
@@ -823,7 +823,7 @@ name, description and colors in the theme mode switch.
 When you build and run **example 1** you get an application that looks 
 like this in light and dark mode:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/21-example-1-a.png?raw=true" alt="ColorScheme example 1"/>
+<img src="https://rydmike.com/assets_fcsv4/21-example-1-a.png?raw=true" alt="ColorScheme example 1"/>
 
 _Example 1) Using a built-in FlexColorScheme color scheme as application theme._
 
@@ -999,7 +999,7 @@ feature in FlexColorScheme.
 When you build and run **example 2** you get a sample application that looks 
 like this in light and dark mode:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/22-example-2-a.png?raw=true" alt="ColorScheme example 2" />
+<img src="https://rydmike.com/assets_fcsv4/22-example-2-a.png?raw=true" alt="ColorScheme example 2" />
 
 Example 2) Using custom colors with FlexColorScheme color scheme as
 application theme._
@@ -1098,7 +1098,7 @@ to `false`, thus removing this option from the switch.
 These are the four resulting themes with their light and dark modes, that we 
 can select and use in this example.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/23-example-3-a.png?raw=true" alt="ColorScheme example 3" />
+<img src="https://rydmike.com/assets_fcsv4/23-example-3-a.png?raw=true" alt="ColorScheme example 3" />
 
 _Example 3_
 
@@ -1281,7 +1281,7 @@ The setup of the stateful MaterialApp is just as simple as in the previous examp
 When you build **Example 4**, it starts with the **Brand blues** theme. It is based on a scheme that uses blue colors
 found in different well known web brands. The primary blue color in the light scheme might thus look very familiar.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/24-example-4-a.png?raw=true" alt="ColorScheme example 4" />
+<img src="https://rydmike.com/assets_fcsv4/24-example-4-a.png?raw=true" alt="ColorScheme example 4" />
 
 _Example 4_
 
@@ -1572,7 +1572,7 @@ The above concludes the code walk through of example 5. When we build it, the ex
 the **deep blue sea** scheme. In the example below we can also see the correctly
 themed system navigation bar on the Android device.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/25-example-5-a.png?raw=true" alt="ColorScheme example 5" />
+<img src="https://rydmike.com/assets_fcsv4/25-example-5-a.png?raw=true" alt="ColorScheme example 5" />
 
 _Example 5) The Themes Playground_
 
@@ -1623,7 +1623,7 @@ One feature on the `HomePage` of examples 1 to 4 is the `FlexThemeModeSwitch`.
 It is the UI Widget used for the 3-way theme mode switch used in these
 examples to change the active theme mode.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/theme_mode_switch.png?raw=true" alt="theme mode switch" width="350"/>
+<img src="https://rydmike.com/assets_fcsv4/theme_mode_switch.png?raw=true" alt="theme mode switch" width="350"/>
 
 Using the switch is very simple, give it the currently selected and active theme
 mode, the current `FlexSchemeData` scheme, so it can color its buttons correctly.
@@ -1653,14 +1653,14 @@ reference here](https://pub.dev/documentation/flex_color_scheme/latest/flex_colo
 With the API you can customize the look of the `FlexThemeModeSwitch`, 
 here are some examples:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/ThemeSwitchCustomize.png?raw=true" alt="theme mode customize"/>
+<img src="https://rydmike.com/assets_fcsv4/ThemeSwitchCustomize.png?raw=true" alt="theme mode customize"/>
 
 The `FlexThemeModeOptionButton` is typically used by the `FlexThemeModeSwitch`,
 but it can also be used as a part of other theme related indicator widgets. 
 Like for example the scrolling horizontal list used in example 5, where it is 
 used as a theme indicator and selector in a horizontally scrolling list. 
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/ThemeIndicatorList.png?raw=true" alt="theme indicator list"/>
+<img src="https://rydmike.com/assets_fcsv4/ThemeIndicatorList.png?raw=true" alt="theme indicator list"/>
 
 ## Computed Dark Theme
 
@@ -1672,12 +1672,12 @@ When using the **deep blue sea** scheme, the computed dark theme colors ones
 are a bit more dull and muted in this example, the computed dark scheme 
 is on the right.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/>  <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad-to-black.png?raw=true" alt="ColorScheme example 5 dark computed" width="250"/>
+<img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/>  <img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5ad-to-black.png?raw=true" alt="ColorScheme example 5 dark computed" width="250"/>
 
 With some other color schemes, like the **Aqua blue** one, there is only a 
 minor difference, the computed dark scheme is on the right.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5a2d.png?raw=true" alt="ColorScheme example 5a2 dark" width="250"/>  <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5a2d-to-black.png?raw=true" alt="ColorScheme example 5 dark computed" width="250"/>
+<img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5a2d.png?raw=true" alt="ColorScheme example 5a2 dark" width="250"/>  <img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5a2d-to-black.png?raw=true" alt="ColorScheme example 5 dark computed" width="250"/>
 
 The result of the `toDark` method varies depending on how saturated the used 
 light scheme colors are. It is possible to tune the calculated dark scheme by
@@ -1714,7 +1714,7 @@ recording does not use the `defaultError` error color modifier, the changing
 dark error color does not look so nice when tuning the computed scheme colors.
 The bundled example 5 and live web version of it uses the modifier.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_v1-1-0-phone3.gif?raw=true" alt="Dark scheme calc level"/>
+<img src="https://rydmike.com/assets_fcsv4/fcs_v1-1-0-phone3.gif?raw=true" alt="Dark scheme calc level"/>
 
 ## Surface Blends
 
@@ -1734,7 +1734,7 @@ this demo allows you to flip a switch to do just that, so you can see and
 observe the difference between color scheme based themes created 
 by `FlexColorScheme.toTheme` and `ThemeData.from`.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bl.png?raw=true" alt="ColorScheme example 5b light" width="250"/>  <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cl.png?raw=true" alt="ColorScheme example 5c light" width="250"/>
+<img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5bl.png?raw=true" alt="ColorScheme example 5b light" width="250"/>  <img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5cl.png?raw=true" alt="ColorScheme example 5c light" width="250"/>
 
 Feel free to experiment with the live web demo where the differences are 
 even easier to observe since you can have both versions open side by
@@ -1776,12 +1776,12 @@ subtle and nice too. If you want to make a bold statement theme, go with heavy.
 Please note that the visual impact of the branding also depends on how 
 saturated the primary color is.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5dl.png?raw=true" alt="ColorScheme example 5d light" width="250"/>  <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5el.png?raw=true" alt="ColorScheme example 5e light" width="250"/>
+<img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5dl.png?raw=true" alt="ColorScheme example 5d light" width="250"/>  <img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5el.png?raw=true" alt="ColorScheme example 5e light" width="250"/>
 
 Here are few more images of the heavy primary color branded version, when 
 looking at some widgets as well.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="250"/>  <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="250"/>
+<img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5fl.png?raw=true" alt="ColorScheme example 5f light" width="250"/>  <img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5gl.png?raw=true" alt="ColorScheme example 5g light" width="250"/>
 
 ## The TabBar Style
 
@@ -1809,7 +1809,7 @@ an `AppBar`, when the AppBar is using primary color. As can be seen, the tab bar
 theme that goes well in an app bar in such a case, does not fit on the surfaces
 at all, and wise versa.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/TabBar-on-primary.png?raw=true" alt="tab bar on primary"/>
+<img src="https://rydmike.com/assets_fcsv4/TabBar-on-primary.png?raw=true" alt="tab bar on primary"/>
 
 If you plan to use only surface or background (also the branded ones) colored 
 AppBars, you can see that both tab bar styles, and their resulting themes work
@@ -1819,7 +1819,7 @@ app bar color to background colors, or their primary branded variants.
 In such a use case you can get away with using just one of the built-in 
 style options, even if you use tab bars in both app bars and on other surfaces.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/TabBar-on-surface.png?raw=true" alt="tab bar on surface"/>
+<img src="https://rydmike.com/assets_fcsv4/TabBar-on-surface.png?raw=true" alt="tab bar on surface"/>
 
 ## True Black
 
@@ -1840,12 +1840,12 @@ all background colored pixels are not fully off in the strong and heavy branded 
 Here is an example of a branded dark theme with true black OFF (default and standard) and true black ON,
 when using heavy branding with the **Red red wine** color scheme.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5cd.png?raw=true" alt="ColorScheme example 5c dark" width="250"/>  <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5bd.png?raw=true" alt="ColorScheme example 5b dark" width="250"/>
+<img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5cd.png?raw=true" alt="ColorScheme example 5c dark" width="250"/>  <img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5bd.png?raw=true" alt="ColorScheme example 5b dark" width="250"/>
 
 Here is another difference example with the **Deep blue sea** scheme, when using medium strength surface branding, and
 a primary colored app bar in dark-mode.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/>  <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/fcs_phone_ex5ad-true-black.png?raw=true" alt="ColorScheme example 5 true black" width="250"/>
+<img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5ad.png?raw=true" alt="ColorScheme example 5 dark" width="250"/>  <img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5ad-true-black.png?raw=true" alt="ColorScheme example 5 true black" width="250"/>
 
 ## Themed System Navigation Bar in Android
 
@@ -1874,7 +1874,7 @@ home screen and `useSysNavDivider` is local bool state variable. Together with t
 scrim, you can have easy complete control of both the AppBar's status bar, and the system navigation bar look,
 like shown below:
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FlexSchemeAppBar.gif?raw=true" alt="AppBar StatusBar" width="250"/>  <img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FlexSchemeNavBar.gif?raw=true" alt="SysNavBar Style" width="250"/>
+<img src="https://rydmike.com/assets_fcsv4/FlexSchemeAppBar.gif?raw=true" alt="AppBar StatusBar" width="250"/>  <img src="https://rydmike.com/assets_fcsv4/FlexSchemeNavBar.gif?raw=true" alt="SysNavBar Style" width="250"/>
 
 The top status bar scrim toggle, system navigation bar divider and style only have an impact
 on Android builds, they do not have any functionality on the live Web example.
@@ -1896,7 +1896,7 @@ examples, each with their own limitations, read more in the example 5 source cod
 can be used, here what they look like. The last Example SplashPage 2, would be the ideal version, and it
 works well on some versions of Android, but seems to fail on newer ones, so you may prefer 1b instead.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/FlexColorScheme-Splash-half-Size.png?raw=true" alt="ColorScheme Splash pages"/>
+<img src="https://rydmike.com/assets_fcsv4/FlexColorScheme-Splash-half-Size.png?raw=true" alt="ColorScheme Splash pages"/>
 
 ## Android Transparent System Navigation Bar
 
@@ -1921,7 +1921,7 @@ The example below uses the classical system navigation bar with the navigation b
 the phone settings is changed to use the much smaller gesture bar, or on phones that don't even have a 
 visible gesture bar.
 
-<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/sysnavbar4.gif?raw=true" alt="System navbar transparent"/>
+<img src="https://rydmike.com/assets_fcsv4/sysnavbar4.gif?raw=true" alt="System navbar transparent"/>
 
 >Please note that phones with API30 (Android 11) were when this was first written (Jan 16, 2021) still very
 >rare, and at the time did not even register on
@@ -1937,37 +1937,37 @@ high-resolution example phone image of each one.
 
 | FlexScheme   | Name                   | Description | Light___| Dark___|
 | ----         | ----                   | ----        | ----  | ---- |
-| material     | Material default       | Default Material color theme, used in the design guide. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb01.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme001.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb01.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme001.png?raw=true) |
-| materialHc   | Material high contrast | High contrast Material design guide theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb02.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme002.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb02.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme002.png?raw=true) |
-| blue         | Blue delight           | Blue color theme, based on Material blue and light blue colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb03.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme003.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb03.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme003.png?raw=true) |
-| indigo       | Indigo nights          | Indigo color theme, based on Material indigo and deep purple colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb04.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme004.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb04.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme004.png?raw=true) |
-| hippieBlue   | Hippie blue            | Hippie blue with surfie green and chock coral pink theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb05.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme005.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb05.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme005.png?raw=true) |
-| aquaBlue     | Aqua blue              | Aqua tropical ocean blue theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb06.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme006.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb06.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme006.png?raw=true) |
-| brandBlue    | Brand blues            | A mixture of blue colors from well known web brands. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb07.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme007.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb07.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme007.png?raw=true) |
-| deepBlue     | Deep blue sea          | Dark deep blue sea color theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb08.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme008.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb08.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme008.png?raw=true) |
-| sakura       | Pink sakura            | Pink color theme, based on sakura cherry blossom like colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb09.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme009.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb09.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme009.png?raw=true) |
-| mandyRed     | Oh Mandy red           | Mandy red and Viking blue colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb10.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme010.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb10.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme010.png?raw=true) |
-| red          | Red tornado            | Red color theme, based on Material red and pink colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb11.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme011.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb11.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme011.png?raw=true) |
-| redWine      | Red red wine           | Red color theme, based on red wine like colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb12.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme012.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb12.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme012.png?raw=true) |
-| purpleBrown  | Purple brown           | Purple brown tinted aubergine and eggplant colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb13.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme013.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb13.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme013.png?raw=true) |
-| green        | Green forest           | Green color theme, based on Material green and cyan colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb14.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme014.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb14.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme014.png?raw=true) |
-| money        | Green money            | Green money and finance style color theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb15.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme015.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb15.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme015.png?raw=true) |
-| jungle       | Green jungle           | Green jungle and rain forest color theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb16.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme016.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb16.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme016.png?raw=true) |
-| greyLaw      | Grey law               | Material blue grey and ultra dark purple color theme. Colors suitable for law firms.  | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb17.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme017.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb17.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme017.png?raw=true) |
-| wasabi       | Willow and wasabi      | Wild Willow and wasabi green with orchid purple inspired colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb18.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme018.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb18.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme018.png?raw=true) |
-| gold         | Gold sunset            | Gold sunset color theme, based on orange like colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb19.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme019.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb19.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme019.png?raw=true) |
-| mango        | Mango mojito           | Orange and green Mango mojito color theme.  | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb20.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme020.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb20.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme020.png?raw=true) |
-| amber        | Amber blue             | Amber blaze and blue color theme, based on Material amber and blue accent colors, a high-contrast theme. An alternative to the default Material high contrast theme.| [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb21.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme021.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb21.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme021.png?raw=true)|
-| vesuviusBurn | Vesuvius burned        | Vesuvius burned orange and eden green theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb22.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme022.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb22.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme022.png?raw=true) |
-| deepPurple   | Deep purple            | Deep purple daisy bush theme, based on Material deepPurple and lightBlueAccent colors. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb23.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme023.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb23.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme023.png?raw=true)|
-| ebonyClay    | Ebony clay             | Ebony clay dark blue-grey and watercourse green colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb24.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme024.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb24.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme024.png?raw=true) |
-| barossa      | Barossa                | Barossa red and cardin green colored theme. A somber color set suited for courts and law firms. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb25.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme025.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb25.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme025.png?raw=true) |
-| shark        | Shark and orange       | Shark grey and orange ecstasy colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb26.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme026.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb26.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme026.png?raw=true) |
-| bigStone     | Big stone tulip        | Big stone blue and tulip tree yellow colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb27.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme027.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb27.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme027.png?raw=true) |
-| damask       | Damask and lunar       | Damask red and lunar green colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb28.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme028.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb28.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme028.png?raw=true) |
-| bahamaBlue       |Bahama and trinidad | Bahama blue and trinidad orange colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb29.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme029.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb29.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme029.png?raw=true) |
-| mallardGreen       | Mallard and valencia | Mallard green and Valencia pink colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb30.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme030.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb30.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme030.png?raw=true) |
-| espresso       | Espresso and crema   | Espresso dark brown and crema colored theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb31.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme031.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb31.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme031.png?raw=true) |
-| outerSpace       | Outer space stage  | Outer space dark blue-grey and stage red theme. | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/LightSchemeThumb32.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme032.png?raw=true) | [<img src="https://github.com/rydmike/flex_color_scheme/blob/master/resources/DarkSchemeThumb32.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme032.png?raw=true) |
+| material     | Material default       | Default Material color theme, used in the design guide. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb01.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme001.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb01.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme001.png?raw=true) |
+| materialHc   | Material high contrast | High contrast Material design guide theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb02.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme002.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb02.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme002.png?raw=true) |
+| blue         | Blue delight           | Blue color theme, based on Material blue and light blue colors. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb03.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme003.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb03.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme003.png?raw=true) |
+| indigo       | Indigo nights          | Indigo color theme, based on Material indigo and deep purple colors. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb04.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme004.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb04.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme004.png?raw=true) |
+| hippieBlue   | Hippie blue            | Hippie blue with surfie green and chock coral pink theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb05.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme005.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb05.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme005.png?raw=true) |
+| aquaBlue     | Aqua blue              | Aqua tropical ocean blue theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb06.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme006.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb06.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme006.png?raw=true) |
+| brandBlue    | Brand blues            | A mixture of blue colors from well known web brands. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb07.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme007.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb07.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme007.png?raw=true) |
+| deepBlue     | Deep blue sea          | Dark deep blue sea color theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb08.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme008.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb08.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme008.png?raw=true) |
+| sakura       | Pink sakura            | Pink color theme, based on sakura cherry blossom like colors. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb09.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme009.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb09.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme009.png?raw=true) |
+| mandyRed     | Oh Mandy red           | Mandy red and Viking blue colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb10.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme010.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb10.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme010.png?raw=true) |
+| red          | Red tornado            | Red color theme, based on Material red and pink colors. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb11.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme011.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb11.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme011.png?raw=true) |
+| redWine      | Red red wine           | Red color theme, based on red wine like colors. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb12.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme012.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb12.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme012.png?raw=true) |
+| purpleBrown  | Purple brown           | Purple brown tinted aubergine and eggplant colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb13.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme013.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb13.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme013.png?raw=true) |
+| green        | Green forest           | Green color theme, based on Material green and cyan colors. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb14.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme014.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb14.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme014.png?raw=true) |
+| money        | Green money            | Green money and finance style color theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb15.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme015.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb15.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme015.png?raw=true) |
+| jungle       | Green jungle           | Green jungle and rain forest color theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb16.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme016.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb16.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme016.png?raw=true) |
+| greyLaw      | Grey law               | Material blue grey and ultra dark purple color theme. Colors suitable for law firms.  | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb17.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme017.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb17.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme017.png?raw=true) |
+| wasabi       | Willow and wasabi      | Wild Willow and wasabi green with orchid purple inspired colors. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb18.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme018.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb18.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme018.png?raw=true) |
+| gold         | Gold sunset            | Gold sunset color theme, based on orange like colors. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb19.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme019.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb19.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme019.png?raw=true) |
+| mango        | Mango mojito           | Orange and green Mango mojito color theme.  | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb20.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme020.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb20.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme020.png?raw=true) |
+| amber        | Amber blue             | Amber blaze and blue color theme, based on Material amber and blue accent colors, a high-contrast theme. An alternative to the default Material high contrast theme.| [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb21.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme021.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb21.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme021.png?raw=true)|
+| vesuviusBurn | Vesuvius burned        | Vesuvius burned orange and eden green theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb22.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme022.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb22.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme022.png?raw=true) |
+| deepPurple   | Deep purple            | Deep purple daisy bush theme, based on Material deepPurple and lightBlueAccent colors. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb23.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme023.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb23.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme023.png?raw=true)|
+| ebonyClay    | Ebony clay             | Ebony clay dark blue-grey and watercourse green colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb24.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme024.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb24.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme024.png?raw=true) |
+| barossa      | Barossa                | Barossa red and cardin green colored theme. A somber color set suited for courts and law firms. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb25.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme025.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb25.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme025.png?raw=true) |
+| shark        | Shark and orange       | Shark grey and orange ecstasy colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb26.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme026.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb26.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme026.png?raw=true) |
+| bigStone     | Big stone tulip        | Big stone blue and tulip tree yellow colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb27.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme027.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb27.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme027.png?raw=true) |
+| damask       | Damask and lunar       | Damask red and lunar green colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb28.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme028.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb28.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme028.png?raw=true) |
+| bahamaBlue       |Bahama and trinidad | Bahama blue and trinidad orange colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb29.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme029.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb29.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme029.png?raw=true) |
+| mallardGreen       | Mallard and valencia | Mallard green and Valencia pink colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb30.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme030.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb30.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme030.png?raw=true) |
+| espresso       | Espresso and crema   | Espresso dark brown and crema colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb31.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme031.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb31.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme031.png?raw=true) |
+| outerSpace       | Outer space stage  | Outer space dark blue-grey and stage red theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb32.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme032.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb32.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme032.png?raw=true) |
 
 
