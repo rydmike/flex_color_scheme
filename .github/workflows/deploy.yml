@@ -22,7 +22,7 @@
 name: Deploy Web
 on:
   release:
-    types: [published]
+    types: [none]
 #   types: [published, created, edited, prereleased]
 jobs:
   flutter_tests:
