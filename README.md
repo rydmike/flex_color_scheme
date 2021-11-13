@@ -171,14 +171,14 @@ color. The theme toggle in the menu does work though.
 ## Themes Playground
 
 The side menu in the default example is actually made for and used
-in the last step and example in the tutorial. The final example, number 5, 
-doubles as a complete interactive **Themes Playground** application. There the
+in the last step and example 5 in the tutorial. The final example 
+doubles as an interactive **Themes Playground** application. There the
 menu options actually have their indicated functionality. 
 
 The **Themes Playground** is useful as a tool to find themes and settings you 
-prefer, or just use it to figure out everything you can do with 
-FlexColorScheme. The playground persists all its settings, and you can also
-reset them all back to their default values.
+prefer, or just use it to figure out what you can do with 
+FlexColorScheme. The playground persists all its settings, and you can 
+reset them back to their default values.
 
 The **Themes Playground** can be used as a [web app 
 here](https://rydmike.com/flexcolorschemeV4Tut5/#/). Its source code
@@ -206,7 +206,7 @@ In the `pubspec.yaml` of your **Flutter** project, add the following dependency:
 
 ```yaml
 dependencies:
-  flex_color_scheme: ^4.0.0-dev.2
+  flex_color_scheme: ^4.0.0
 ```
 
 In your library file add the following import:
@@ -608,7 +608,7 @@ used when you make custom color schemes with the `FlexThemeData.light` and
 FlexColorScheme comes bundled with six different examples. Earlier we already
 saw how you can build the default example, and use it as a 
 "Hot Reload Playground". You can use it to experiment and learn on your own a
-bout FlexColorSchemes features and how to use them. 
+bout FlexColorScheme's features and how to use them. 
 
 The default example is a template that is heavily commented to guide
 you and encourage you to play around with different options in code, then use 
@@ -624,7 +624,7 @@ You can build the examples by using preconfigured launch and run config files fo
 VS-Code (.vscode -> launch.json) and Android Studio/IntelliJ 
 (.run -> *.xml files). When you have cloned the package repo and open the
 project in VS-Code or Android Studio/IntelliJ the configurations should be 
-available for you so you can easily build the examples.
+available for you, so you can easily build all the examples.
 
 In Android Studio you can use: 
 
@@ -633,7 +633,6 @@ In Android Studio you can use:
 _IntelliJ has ready to run configs that can be used to run the examples_
 
 In VS-Code you can use:
-
 
 <img src="https://rydmike.com/assets_fcsv4/vscode-run-file.png?raw=true" alt="vscode-run"/>  
 

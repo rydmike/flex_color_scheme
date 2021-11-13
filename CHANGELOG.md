@@ -2,18 +2,16 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.0.0-dev.2] - November 13, 2021
+## [4.0.0] - November 13, 2021
 
- * Only doc updates prior to launch.
+* The new V4 docs are still a bit lacking and will be improved in docs
+  updates later.
 
-## [4.0.0-dev.1] - November 13, 2021
-
-* The breaking case refer to a minor difference in produced style for true
+* The breaking case is a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.
-  Major version was bumped due to the small change in produced output in some
-  rare usage options. Version 4.0.0 does however contain so many new 
+  Version 4.0.0 does however contain so many new 
   features, that it in itself warrants a new major release bump.
-
+* 
 
 * **Breaking:** In dark mode, the `darkIsTrueBlack` now makes `surface` color
   8% darker instead of 6%. This change was needed to support overlay color
@@ -158,10 +156,15 @@ All notable changes to the **FlexColorScheme** package are documented here.
     * Examples 2 to 4 use the Hive implementation. 
     * Example 5 uses the SharedPreferences implementation
 
-* **TODO Tests:** 
+* **Tests:** 
   * Added tests for the new features, total 1066 tests, 
-  * Coverage is 98%, a few more tests to be added before release.
+  * Coverage 99%, will improve them more later.
+   
+## [4.0.0-dev.1] - November 13, 2021
 
+* See change log for stable 4.0.0, it was the same for the dev release.
+  the text is just not repeated here anymore.
+   
 ## [3.0.1] - July 1, 2021
 
 * **Fix:** The internal order of swapping primary and secondary colors and reducing 
