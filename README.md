@@ -10,9 +10,10 @@ additional features.
 
 When you color theme a Flutter application, all built in 
 widgets use the colors of your color scheme in your theme. At least in theory, 
-and it is almost so if you defined your Flutter ThemeData the correct way.
+and it is almost so if you defined your Flutter ThemeData by using the 
+`ThemeData.from` factory, but even it misses some details.
 FlexColorScheme goes the extra mile to ensure that all Flutter SDK widgets gets 
-themed as intended by the built-in color scheme or custom colors you provide.
+themed completely by its built-in color schemes, or custom colors you provide.
 
 <img src="https://rydmike.com/assets_fcsv4/00-new-main-image.gif?raw=true" alt="main_image"/>
 
