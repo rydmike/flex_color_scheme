@@ -9,7 +9,7 @@ concept as Flutter's ColorScheme based themes, but with many
 additional features.
 
 [<img src="https://rydmike.com/assets_fcsv4/00-main-image.jpg?raw=true?" alt="main_image"/>](https://rydmike.com/assets_fcsv4/00-main-image.png?raw=true>)  
-_FlexColorScheme V4 theme examples (Click for HiRes)_
+_FlexColorScheme theme examples (Click for HiRes)_
 
 When you color theme a Flutter application, all built in 
 widgets use the colors of your color scheme in your theme. At least in theory, 
