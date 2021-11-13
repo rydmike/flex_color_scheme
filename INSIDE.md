@@ -11,7 +11,7 @@ documentation updates.
 ## Version 4 Notice
 
 This document is still mainly from the version 3 documentation.
-While 90% of it still applies to version 4, it will be updated
+While 90% of it still applies to version 4, it will be updated with new information
 during the next month.
 
 # Contents
