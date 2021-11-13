@@ -11,7 +11,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   black mode. Version 4.0.0 is still fully API compatible with version 3.
   Version 4.0.0 does however contain so many new 
   features, that it in itself warrants a new major release bump.
-* 
+
 
 * **Breaking:** In dark mode, the `darkIsTrueBlack` now makes `surface` color
   8% darker instead of 6%. This change was needed to support overlay color
