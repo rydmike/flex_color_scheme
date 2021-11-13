@@ -8,7 +8,7 @@ with optional primary color surface blends. The themes are based on the same
 concept as Flutter's ColorScheme based themes, but with many 
 additional features.
 
-[<img src="https://rydmike.com/assets_fcsv4/00-main-image.jpg?raw=true?" alt="main_image"/>](<img src="https://rydmike.com/assets_fcsv4/00-main-image.png?raw=true"/>)  
+[<img src="https://rydmike.com/assets_fcsv4/00-main-image.jpg?raw=true?" alt="main_image"/>](https://rydmike.com/assets_fcsv4/00-main-image.png?raw=true>)  
 _FlexColorScheme V4 theme examples (Click for HiRes)_
 
 When you color theme a Flutter application, all built in 
@@ -97,7 +97,7 @@ be the standard for new releases. The new color schemes are:
 * **Rosewood** - Rosewood red, with horses neck and driftwood theme
 * **Blumine** - Blumine, easter blue and saffron mango theme
 
-[<img src="https://rydmike.com/assets_fcsv4/04-news-themes-gang.jpg?raw=true" alt="new_themes"/>](<img src="https://rydmike.com/assets_fcsv4/04-news-themes-gang.png?raw=true" />)  
+[<img src="https://rydmike.com/assets_fcsv4/04-news-themes-gang.jpg?raw=true" alt="new_themes"/>](https://rydmike.com/assets_fcsv4/04-news-themes-gang.png?raw=true)  
 _FlexColorScheme new V4 themes (Click for HiRes)_
 
 Total number of offered built-in color schemes is now 36 matched light
@@ -133,7 +133,7 @@ colors and the created theme's impact on common Material UI widgets.
 The default sample app, the "Hot Reload Playground", looks like this:
 
 [<img src="https://rydmike.com/assets_fcsv4/00_playground_default.jpg?raw=true" alt="playground_default"/>](
-<img src="https://rydmike.com/assets_fcsv4/00_playground_default.png?raw=true"/>)   
+https://rydmike.com/assets_fcsv4/00_playground_default.png?raw=true)   
 _Hot Reload Playground the Default Example App (Click for HiRes)_ 
 
 It comes fully loaded with template settings and thorough 
@@ -158,7 +158,7 @@ example application. The above selected **blue whale** theme is the first one
 shown in the image below. 
 
 [<img src="https://rydmike.com/assets_fcsv4/01_playground_options.jpg?raw=true" alt="options"/>](
-<img src="https://rydmike.com/assets_fcsv4/01_playground_options.png?raw=true" alt="options"/>)   
+https://rydmike.com/assets_fcsv4/01_playground_options.png?raw=true)   
 _Hot Reload Playground (Click for HiRes)_
 
 The other results shown above were also produced by editing a few 
@@ -197,7 +197,7 @@ FlexColorScheme does, when you use a large screen with high resolution, then
 you can see the result of all settings at one glance.
 
 [<img src="https://rydmike.com/assets_fcsv4/05-web-demo-4k.jpg?raw=true" alt="playground-4k"/>](
-<img src="https://rydmike.com/assets_fcsv4/05-web-demo-4k.png?raw=true"/>)  
+https://rydmike.com/assets_fcsv4/05-web-demo-4k.png?raw=true)  
 _FlexColorScheme **Themes Playground** app at 4k resolution (Click for HiRes)_
 
 ## Installing and Using
@@ -366,7 +366,7 @@ level 33. Last the theme that was used to generate all these
 different nuances of the same color scheme based theme is shown.
 
 [<img src="https://rydmike.com/assets_fcsv4/06-blend-examples.jpg?raw=true" alt="blend examples"/>](
-<img src="https://rydmike.com/assets_fcsv4/06-blend-examples.png?raw=true" alt="blend examples"/>)   
+https://rydmike.com/assets_fcsv4/06-blend-examples.png?raw=true)   
 _FlexColorScheme using same theme, but with
 different blend modes and levels (Click for HiRes)_
 
@@ -635,7 +635,7 @@ use case. To use one of the built-in color schemes as your application theme.
 You can toggle between its light and dark variant, or allow device system theme 
 mode setting to control if the dark or light theme is used.
 
-[<img src="https://rydmike.com/assets_fcsv4/21-example-1-a-small.jpg?raw=true" alt="ColorScheme example 1"/>](<img src="https://rydmike.com/assets_fcsv4/21-example-1-a.png?raw=true" alt="ColorScheme example 1" />)   
+[<img src="https://rydmike.com/assets_fcsv4/21-example-1-a-small.jpg?raw=true" alt="ColorScheme example 1"/>](https://rydmike.com/assets_fcsv4/21-example-1-a.png?raw=true)   
 _Example 1) Using a built-in FlexColorScheme color scheme as application 
 theme. (Click for HiRes)_
 
@@ -645,7 +645,7 @@ The architecture is also more advanced, it uses the approach introduced with
 Flutter skeleton template, using a theme service and theme controller, 
 keeping settings only in memory using the in memory `ThemeServiceMem`.
 
-[<img src="https://rydmike.com/assets_fcsv4/22-example-2-a-small.jpg?raw=true" alt="ColorScheme example 2" />](<img src="https://rydmike.com/assets_fcsv4/22-example-2-a.png?raw=true" alt="ColorScheme example 2" />)   
+[<img src="https://rydmike.com/assets_fcsv4/22-example-2-a-small.jpg?raw=true" alt="ColorScheme example 2" />](https://rydmike.com/assets_fcsv4/22-example-2-a.png?raw=true)   
 _Example 2) Using custom colors with FlexColorScheme color scheme as
 application theme. (Click for HiRes)_
 
@@ -656,7 +656,7 @@ The settings are now also persisted to the device, using a theme service
 called `ThemeServiceHive` to persist the settings with package 
 [Hive](https://pub.dev/packages/hive).
 
-[<img src="https://rydmike.com/assets_fcsv4/23-example-3-a-small.jpg?raw=true" alt="ColorScheme example 3" />](<img src="https://rydmike.com/assets_fcsv4/23-example-3-a.png?raw=true" alt="ColorScheme example 3" />)  
+[<img src="https://rydmike.com/assets_fcsv4/23-example-3-a-small.jpg?raw=true" alt="ColorScheme example 3" />](https://rydmike.com/assets_fcsv4/23-example-3-a.png?raw=true)  
 _Example 3) Using three built-in schemes, plus a custom color scheme 
 as application theme options. (Click for HiRes)_
 
@@ -665,7 +665,7 @@ of the different built-in color schemes plus three custom ones, and
 use them as the application theme. As in example 3, we persist the theme 
 settings.
 
-[<img src="https://rydmike.com/assets_fcsv4/24-example-4-a-small.jpg?raw=true" alt="ColorScheme example 4" />](<img src="https://rydmike.com/assets_fcsv4/24-example-4-a.png?raw=true" alt="ColorScheme example 4" />)   
+[<img src="https://rydmike.com/assets_fcsv4/24-example-4-a-small.jpg?raw=true" alt="ColorScheme example 4" />](https://rydmike.com/assets_fcsv4/24-example-4-a.png?raw=true)   
 _Example 4) Using custom schemes, plus all the built-in ones as application 
 theme options. (Click for HiRes)_
 
@@ -687,7 +687,7 @@ overview of all the settings possibilities and their impact on different,
 widgets while changing the settings on the phone UI, since you cannot see 
 everything at the same time.
 
-[<img src="https://rydmike.com/assets_fcsv4/25-example-5-a-small.jpg?raw=true" alt="ColorScheme example 5" />](<img src="https://rydmike.com/assets_fcsv4/25-example-5-a.png?raw=true" alt="ColorScheme example 4" />)   
+[<img src="https://rydmike.com/assets_fcsv4/25-example-5-a-small.jpg?raw=true" alt="ColorScheme example 5" />](https://rydmike.com/assets_fcsv4/25-example-5-a.png?raw=true)   
 _Example 5) The Themes Playground. (Click for HiRes)_
 
 
@@ -806,8 +806,8 @@ name, description and colors in the theme mode switch.
 When you build and run **example 1** you get an application that looks 
 like this in light and dark mode:
 
-[<img src="https://rydmike.com/assets_fcsv4/21-example-1-a-small.jpg?raw=true" alt="ColorScheme example 1 light"/>](<img src="https://rydmike.com/assets_fcsv4/21-example-1-a.png?raw=true" />)
-[<img src="https://rydmike.com/assets_fcsv4/21-example-1-b-small.jpg?raw=true" alt="ColorScheme example 1 dark"/>](<img src="https://rydmike.com/assets_fcsv4/21-example-1-b.png?raw=true" />)   
+[<img src="https://rydmike.com/assets_fcsv4/21-example-1-a-small.jpg?raw=true" alt="ColorScheme example 1 light"/>](https://rydmike.com/assets_fcsv4/21-example-1-a.png?raw=true)
+[<img src="https://rydmike.com/assets_fcsv4/21-example-1-b-small.jpg?raw=true" alt="ColorScheme example 1 dark"/>](https://rydmike.com/assets_fcsv4/21-example-1-b.png?raw=true)   
 _Example 1) Using a built-in FlexColorScheme color scheme as application
 theme. (Click for HiRes)_
 
@@ -982,8 +982,8 @@ feature in FlexColorScheme.
 
 When you build and run **example 2** you get a sample application that looks 
 like this in light and dark mode:
-[<img src="https://rydmike.com/assets_fcsv4/22-example-2-a-small.jpg?raw=true" alt="ColorScheme example 2 light" />](<img src="https://rydmike.com/assets_fcsv4/22-example-2-a.png?raw=true" />)
-[<img src="https://rydmike.com/assets_fcsv4/22-example-2-b-small.jpg?raw=true" alt="ColorScheme example 2 dark" />](<img src="https://rydmike.com/assets_fcsv4/22-example-2-b.png?raw=true" />)   
+[<img src="https://rydmike.com/assets_fcsv4/22-example-2-a-small.jpg?raw=true" alt="ColorScheme example 2 light" />](https://rydmike.com/assets_fcsv4/22-example-2-a.png?raw=true)
+[<img src="https://rydmike.com/assets_fcsv4/22-example-2-b-small.jpg?raw=true" alt="ColorScheme example 2 dark" />](https://rydmike.com/assets_fcsv4/22-example-2-b.png?raw=true)   
 _Example 2) Using custom colors with FlexColorScheme color scheme as
 application theme. (Click for HiRes)_
 
@@ -1122,8 +1122,8 @@ the usage of new FlexColorScheme sub themes feature.
 Below are the four resulting themes with their light and dark modes, that we 
 can select and use in this example.
 
-[<img src="https://rydmike.com/assets_fcsv4/23-example-3-a-small.jpg?raw=true" alt="ColorScheme example 3 light" />](<img src="https://rydmike.com/assets_fcsv4/23-example-3-a.png?raw=true" />)
-[<img src="https://rydmike.com/assets_fcsv4/23-example-3-b-small.jpg?raw=true" alt="ColorScheme example 3 dark" />](<img src="https://rydmike.com/assets_fcsv4/23-example-3-b.png?raw=true" />)  
+[<img src="https://rydmike.com/assets_fcsv4/23-example-3-a-small.jpg?raw=true" alt="ColorScheme example 3 light" />](https://rydmike.com/assets_fcsv4/23-example-3-a.png?raw=true)
+[<img src="https://rydmike.com/assets_fcsv4/23-example-3-b-small.jpg?raw=true" alt="ColorScheme example 3 dark" />](https://rydmike.com/assets_fcsv4/23-example-3-b.png?raw=true)  
 _Example 3) Using three built-in schemes, plus a custom color scheme
 as application theme options. (Click for HiRes)_
 
@@ -1359,8 +1359,8 @@ Material applications.
 
 When you build **Example 4**, it starts with the **Bue whale** theme.
 
-[<img src="https://rydmike.com/assets_fcsv4/24-example-4-a-small.jpg?raw=true" alt="ColorScheme example 4 light" />](<img src="https://rydmike.com/assets_fcsv4/24-example-4-a.png?raw=true" />)
-[<img src="https://rydmike.com/assets_fcsv4/24-example-4-b-small.jpg?raw=true" alt="ColorScheme example 4 dark" />](<img src="https://rydmike.com/assets_fcsv4/24-example-4-b.png?raw=true" />)   
+[<img src="https://rydmike.com/assets_fcsv4/24-example-4-a-small.jpg?raw=true" alt="ColorScheme example 4 light" />](https://rydmike.com/assets_fcsv4/24-example-4-a.png?raw=true)
+[<img src="https://rydmike.com/assets_fcsv4/24-example-4-b-small.jpg?raw=true" alt="ColorScheme example 4 dark" />](https://rydmike.com/assets_fcsv4/24-example-4-b.png?raw=true)   
 _Example 4) Using custom schemes, plus all the built-in ones as application
 theme options. (Click for HiRes)_
 
@@ -1501,8 +1501,8 @@ not related to FlexColorScheme.
 The concludes the walk through of example 5. When we build it, 
 the example starts with the **blue whale** color scheme. 
 
-[<img src="https://rydmike.com/assets_fcsv4/25-example-5-a-small.jpg?raw=true" alt="ColorScheme example 5 light" />](<img src="https://rydmike.com/assets_fcsv4/25-example-5-a.png?raw=true" />)
-[<img src="https://rydmike.com/assets_fcsv4/25-example-5-b-small.jpg?raw=true" alt="ColorScheme example 5 dark" />](<img src="https://rydmike.com/assets_fcsv4/25-example-5-b.png?raw=true" />)   
+[<img src="https://rydmike.com/assets_fcsv4/25-example-5-a-small.jpg?raw=true" alt="ColorScheme example 5 light" />](https://rydmike.com/assets_fcsv4/25-example-5-a.png?raw=true)
+[<img src="https://rydmike.com/assets_fcsv4/25-example-5-b-small.jpg?raw=true" alt="ColorScheme example 5 dark" />](https://rydmike.com/assets_fcsv4/25-example-5-b.png?raw=true)   
 _Example 5) The Themes Playground (Click for HiRes)_
 
 You can try the **FlexColorScheme Themes Playground** example as a Flutter
@@ -1547,5 +1547,8 @@ high-resolution example phone image of each one.
 | mallardGreen       | Mallard and valencia | Mallard green and Valencia pink colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb30.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme030.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb30.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme030.png?raw=true) |
 | espresso       | Espresso and crema   | Espresso dark brown and crema colored theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb31.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme031.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb31.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme031.png?raw=true) |
 | outerSpace       | Outer space stage  | Outer space dark blue-grey and stage red theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb32.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme032.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb32.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme032.png?raw=true) |
-
+| blueWhale       |Blue whale | Blue whale, jungle green and outrageous tango orange theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb33.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme033.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb33.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme029.png?raw=true) |
+| sanJuanBlue       | San Juan blue | San Juan blue and pink salmon theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb34.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme034.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb34.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme030.png?raw=true) |
+| rosewood       | Rosewood   | Rosewood red, with horses neck and driftwood theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb35.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme035.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb35.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme031.png?raw=true) |
+| blumineBlue       | Blumine  | Blumine, easter blue and saffron mango theme. | [<img src="https://rydmike.com/assets_fcsv4/LightSchemeThumb36.jpg?raw=true" width="120"/>](https://rydmike.com/assets/LightScheme036.png?raw=true) | [<img src="https://rydmike.com/assets_fcsv4/DarkSchemeThumb36.jpg?raw=true" width="120"/>](https://rydmike.com/assets/DarkScheme032.png?raw=true) |
 
