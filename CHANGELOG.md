@@ -2,6 +2,10 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
+## [4.0.0-dev.2] - November 13, 2021
+
+ * Only doc updates prior to launch.
+
 ## [4.0.0-dev.1] - November 13, 2021
 
 * The breaking case refer to a minor difference in produced style for true
@@ -153,12 +157,6 @@ All notable changes to the **FlexColorScheme** package are documented here.
     in-memory implementation, plus the implementations to persist the theme.
     * Examples 2 to 4 use the Hive implementation. 
     * Example 5 uses the SharedPreferences implementation
-* **TODO Documentation:**
-  * Some older documentation that is not relevant was removed, like older APIs
-    no longer described in read me, only in API docs.
-  * Almost all screenshots will need to be updated. (sigh)
-  * Typo review and corrections.
-
 
 * **TODO Tests:** 
   * Added tests for the new features, total 1066 tests, 
