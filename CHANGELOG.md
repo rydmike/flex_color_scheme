@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.0.0-dev1] - November 13, 2021
+## [4.0.0-dev.1] - November 13, 2021
 
 * The breaking case refer to a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.
