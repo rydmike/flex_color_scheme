@@ -1,12 +1,34 @@
 # Inside FlexColorScheme
 
+
+This document provides more details and explanations
+of the inner workings of FlexColorScheme V4. The reason for keeping it in
+a separate file from the package readme is that the package readme is
+already very long, and keeping it separate document allows it to be updated and
+complemented more freely without updating the package due to complementary
+documentation updates.
+
+## Version 4 Notice
+
+This document is still mainly from the version 3 documentation.
+While 90% of it still applies to version 4, it will be updated
+during the next month.
+
+# Contents
+- [Introduction](#introduction)
+  - [None Null Sub-Themes](#none-null-sub-themes)
+  - [ThemeData Default Modifications](#themedata-default-modifications)
+
+
+# Introduction 
+
 **FlexColorScheme** does not actually use the `ThemeData.from` factory with a passed
 in `ColorScheme` to make its `ThemeData` object. It uses the `ThemeData` factory directly, with
 some additional custom theming.  It does of course define a `ColorScheme` that it uses in its `ThemeData`.
 FlexColorScheme uses color calculations for the primary color branded/blended surfaces, and
 for the lazy schemes that do not specify all colors in a color scheme.
 
-## None Null Sub-Themes
+## None Null Sub Themes
 
 Flutter's default Theme and its ThemeData is moving towards a design where all the sub-theme's in the default
 ThemeData are NULL. It is always the widget that defines the default behavior and look when its sub-theme and its

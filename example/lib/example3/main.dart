@@ -140,7 +140,7 @@ class DemoApp extends StatelessWidget {
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             // You don't have to use same blend level or mode in light
             // and dark mode, here we use a lower value in dark mode, that
-            // goes better together with the highScaffold mode.
+            // goes better together with the highScaffoldLowSurfaces mode.
             blendLevel: 15,
             appBarElevation: 1,
             useSubThemes: themeController.useSubThemes,

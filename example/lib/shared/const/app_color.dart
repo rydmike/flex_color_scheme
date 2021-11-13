@@ -99,7 +99,7 @@ class AppColor {
       dark: _myScheme3Light.toDark(),
     ),
 
-    // Use all the built in FlexColor schemes.
+    // Use all the built-in FlexColor schemes.
     ...FlexColor.schemesList,
   ];
 }

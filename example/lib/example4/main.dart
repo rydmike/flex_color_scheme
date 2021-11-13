@@ -99,7 +99,7 @@ class DemoApp extends StatelessWidget {
           theme: FlexThemeData.light(
             // We moved the definition of the list of color schemes to use into
             // a separate static class and list. We use the theme controller
-            // to change the index of a used color scheme from the list.
+            // to change the index of used color scheme from the list.
             colors: AppColor.schemes[themeController.schemeIndex].light,
             // Here we use another surface blend mode, where the scaffold
             // background gets a strong blend. This type is commonly used
