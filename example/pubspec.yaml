@@ -49,7 +49,7 @@ dependencies:
   # Commonly used directories on host platform file systems.
   # https://pub.dev/packages/path_provider (by Google, flutter.dev).
   # Used to get working storage path for Hive.
-  path_provider: ^2.0.6
+  path_provider: ^2.0.7
 
   # Store value pair shared preference data, by Google flutter.dev.
   # Needed some better platform icons for example 5 app.
