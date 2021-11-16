@@ -78,6 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  flex_color_picker:
+    dependency: "direct main"
+    description:
+      path: "../../flex_color_picker"
+      relative: true
+    source: path
+    version: "2.2.0"
   flex_color_scheme:
     dependency: "direct main"
     description:

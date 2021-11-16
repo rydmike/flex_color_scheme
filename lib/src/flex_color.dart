@@ -1326,8 +1326,7 @@ class FlexColor {
   static const String customName = 'Custom';
 
   /// English description of the custom theme.
-  static const String customDescription = 'Define your own custom theme by '
-      'selecting color scheme and surface colors';
+  static const String customDescription = 'Define a custom color scheme';
 
   // Define private FlexSchemeData objects for all color schemes, so we can use
   // them as const in both a map and list, without repeating them.
@@ -2129,6 +2128,31 @@ class FlexColor {
     ),
   );
 
+  /// Starting values for custom color data.
+  ///
+  /// These can serve as fallback data to custom color values
+  /// in a map or list with FlexSchemeData.
+  static const FlexSchemeData customColors = FlexSchemeData(
+    name: customName,
+    description: customDescription,
+    light: FlexSchemeColor(
+      primary: materialLightPrimary,
+      primaryVariant: materialLightPrimaryVariant,
+      secondary: materialLightSecondary,
+      secondaryVariant: materialLightSecondaryVariant,
+      appBarColor: materialLightSecondaryVariant,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: materialDarkPrimary,
+      primaryVariant: materialDarkPrimaryVariant,
+      secondary: materialDarkSecondary,
+      secondaryVariant: materialDarkSecondaryVariant,
+      appBarColor: materialDarkSecondaryVariant,
+      error: materialDarkError,
+    ),
+  );
+
   /// A [FlexScheme] enum to [FlexSchemeData] constant map.
   ///
   /// Contains pre-made ready to go nice dark and light [FlexSchemeColor]
@@ -2211,26 +2235,7 @@ class FlexColor {
     // might allow users to copy a pre-made theme's colors as a starting point
     // to this enum theme choice and allow customizations of its colors with a
     // color picker.
-    FlexScheme.custom: FlexSchemeData(
-      name: customName,
-      description: customDescription,
-      light: FlexSchemeColor(
-        primary: materialLightPrimary,
-        primaryVariant: materialLightPrimaryVariant,
-        secondary: materialLightSecondary,
-        secondaryVariant: materialLightSecondaryVariant,
-        appBarColor: materialLightSecondaryVariant,
-        error: materialLightError,
-      ),
-      dark: FlexSchemeColor(
-        primary: materialDarkPrimary,
-        primaryVariant: materialDarkPrimaryVariant,
-        secondary: materialDarkSecondary,
-        secondaryVariant: materialDarkSecondaryVariant,
-        appBarColor: materialDarkSecondaryVariant,
-        error: materialDarkError,
-      ),
-    ),
+    FlexScheme.custom: customColors,
   };
 
   /// Returns a list with all the predefined [FlexSchemeData] objects.

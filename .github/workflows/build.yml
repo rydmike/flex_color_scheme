@@ -25,6 +25,8 @@ name: Build Web
 on:
   push:
     branches: [none]
+    paths-ignore:
+      - "**.md"
 jobs:
   flutter_tests:
     name: "Analyze and test package, then build 5 web example apps"

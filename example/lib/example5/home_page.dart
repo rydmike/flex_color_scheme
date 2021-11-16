@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +22,7 @@ import '../shared/widgets/universal/header_card.dart';
 import '../shared/widgets/universal/show_theme_colors.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
+import 'theme_colors.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
   late List<bool> isCardOpen;
 
   // The number of cards in the grid, must match the number we add to grid view.
-  static const int _nrOfCards = 21;
+  static const int _nrOfCards = 22;
 
   // Used to store listened to scroll position.
   // (Added to deal with StaggeredGridView issue.)
@@ -169,28 +171,28 @@ class _HomePageState extends State<HomePage> {
           }
           // Open settings cards
           if (index == 2) {
-            for (int i = 1; i < 10; i++) {
+            for (int i = 1; i < 11; i++) {
               isCardOpen[i] = true;
             }
             setState(() {});
           }
           // Close settings cards
           if (index == 3) {
-            for (int i = 1; i < 10; i++) {
+            for (int i = 1; i < 11; i++) {
               isCardOpen[i] = false;
             }
             setState(() {});
           }
           // Open themed cards
           if (index == 4) {
-            for (int i = 11; i < isCardOpen.length; i++) {
+            for (int i = 12; i < isCardOpen.length; i++) {
               isCardOpen[i] = true;
             }
             setState(() {});
           }
           // Close themed cards
           if (index == 5) {
-            for (int i = 11; i < isCardOpen.length; i++) {
+            for (int i = 12; i < isCardOpen.length; i++) {
               isCardOpen[i] = false;
             }
             setState(() {});
@@ -351,40 +353,47 @@ class _HomePageState extends State<HomePage> {
                   toggleCard(1);
                 },
               ),
-              _ThemeMode(
+              _ColorScheme(
                 controller: widget.controller,
                 isOpen: isCardOpen[2],
                 onTap: () {
                   toggleCard(2);
                 },
               ),
-              _Platform(
+              _ThemeMode(
                 controller: widget.controller,
                 isOpen: isCardOpen[3],
                 onTap: () {
                   toggleCard(3);
                 },
               ),
-              _SurfaceBlends(
+              _Platform(
                 controller: widget.controller,
                 isOpen: isCardOpen[4],
                 onTap: () {
                   toggleCard(4);
                 },
-                showAllBlends: showAllBlends,
               ),
-              _SubThemes(
+              _SurfaceBlends(
                 controller: widget.controller,
                 isOpen: isCardOpen[5],
                 onTap: () {
                   toggleCard(5);
                 },
+                showAllBlends: showAllBlends,
               ),
-              _TextField(
+              _SubThemes(
                 controller: widget.controller,
                 isOpen: isCardOpen[6],
                 onTap: () {
                   toggleCard(6);
+                },
+              ),
+              _TextField(
+                controller: widget.controller,
+                isOpen: isCardOpen[7],
+                onTap: () {
+                  toggleCard(7);
                 },
               ),
               _AppBarSettings(
@@ -396,86 +405,86 @@ class _HomePageState extends State<HomePage> {
               ),
               _TabBar(
                 controller: widget.controller,
-                isOpen: isCardOpen[8],
-                onTap: () {
-                  toggleCard(8);
-                },
-              ),
-              _BottomNavigation(
-                controller: widget.controller,
                 isOpen: isCardOpen[9],
                 onTap: () {
                   toggleCard(9);
                 },
               ),
-              //
-              // The sub pages card, not really a setting.
-              SubPages(
+              _BottomNavigation(
+                controller: widget.controller,
                 isOpen: isCardOpen[10],
                 onTap: () {
                   toggleCard(10);
                 },
               ),
               //
-              // All the "Themed" results Cards...
-              _MaterialButtonsShowcase(
+              // The sub pages card, not really a setting.
+              SubPages(
                 isOpen: isCardOpen[11],
                 onTap: () {
                   toggleCard(11);
                 },
               ),
-              _ToggleFabSwitchesChipsShowcase(
+              //
+              // All the "Themed" results Cards...
+              _MaterialButtonsShowcase(
                 isOpen: isCardOpen[12],
                 onTap: () {
                   toggleCard(12);
                 },
               ),
-              _ListTileShowcase(
+              _ToggleFabSwitchesChipsShowcase(
                 isOpen: isCardOpen[13],
                 onTap: () {
                   toggleCard(13);
                 },
               ),
-              _TimePickerDialogShowcase(
+              _ListTileShowcase(
                 isOpen: isCardOpen[14],
                 onTap: () {
                   toggleCard(14);
                 },
               ),
-              _DatePickerDialogShowcase(
+              _TimePickerDialogShowcase(
                 isOpen: isCardOpen[15],
                 onTap: () {
                   toggleCard(15);
                 },
               ),
-              _DialogShowcase(
+              _DatePickerDialogShowcase(
                 isOpen: isCardOpen[16],
                 onTap: () {
                   toggleCard(16);
                 },
               ),
-              _MaterialAndBottomSheetShowcase(
+              _DialogShowcase(
                 isOpen: isCardOpen[17],
                 onTap: () {
                   toggleCard(17);
                 },
               ),
-              _CardShowcase(
+              _MaterialAndBottomSheetShowcase(
                 isOpen: isCardOpen[18],
                 onTap: () {
                   toggleCard(18);
                 },
               ),
-              _TextThemeShowcase(
+              _CardShowcase(
                 isOpen: isCardOpen[19],
                 onTap: () {
                   toggleCard(19);
                 },
               ),
-              _PrimaryTextThemeShowcase(
+              _TextThemeShowcase(
                 isOpen: isCardOpen[20],
                 onTap: () {
                   toggleCard(20);
+                },
+              ),
+              _PrimaryTextThemeShowcase(
+                isOpen: isCardOpen[21],
+                onTap: () {
+                  toggleCard(21);
                 },
               ),
             ].elementAt(index),
@@ -509,6 +518,41 @@ class _RestSettingsDialog extends StatelessWidget {
               Navigator.of(context).pop(true);
             },
             child: const Text('RESET')),
+      ],
+      // Add some padding to the action buttons, they are so close the
+      // dialog edge without it.
+      // Can't theme the padding in the dialog to something nicer, not yet!
+      // I've seen it mentioned that it is coming, since M3 has more
+      // default padding in its specs.
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 16),
+    );
+  }
+}
+
+// The CopySchemeToCustom AlertDialog.
+class _CopySchemeToCustomDialog extends StatelessWidget {
+  const _CopySchemeToCustomDialog({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Copy to Custom Scheme'),
+      content: const Text('Copy this colors scheme to the custom scheme?\n\n'
+          'The current light and dark custom color scheme will be '
+          'overwritten and set to the colors of this scheme.\n'
+          'You will be able edit and make a custom scheme with these colors '
+          'as a starting point.'),
+      actions: <Widget>[
+        TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: const Text('CANCEL')),
+        TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: const Text('COPY')),
       ],
       // Add some padding to the action buttons, they are so close the
       // dialog edge without it.
@@ -555,6 +599,7 @@ class _ThemeColors extends StatelessWidget {
           ),
           ThemePopupMenu(
             schemeIndex: controller.schemeIndex,
+            schemes: AppColor.schemesCustom(controller),
             onChanged: controller.setSchemeIndex,
           ),
           const SizedBox(height: 8),
@@ -573,6 +618,67 @@ class _ThemeColors extends StatelessWidget {
             ),
             value: controller.useFlexColorScheme,
             onChanged: controller.setUseFlexColorScheme,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ColorScheme extends StatelessWidget {
+  const _ColorScheme({
+    Key? key,
+    required this.controller,
+    required this.isOpen,
+    required this.onTap,
+  }) : super(key: key);
+  final ThemeController controller;
+  final bool isOpen;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return HeaderCard(
+      isOpen: isOpen,
+      onTap: onTap,
+      title: const Text('Color Scheme'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(height: 8),
+          if (controller.schemeIndex !=
+              (AppColor.schemesCustom(controller).length - 1))
+            ListTile(
+              title: const Text('Copy current scheme to custom colors?'),
+              subtitle: const Text('Set custom colors to this scheme '
+                  'and edit them'),
+              onTap: () async {
+                final bool? copy = await showDialog<bool?>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const _CopySchemeToCustomDialog();
+                  },
+                );
+                if (copy ?? false) {
+                  // Copy scheme to custom scheme, by setting custom scheme
+                  // to scheme of current scheme index.
+                  await controller.setCustomScheme(AppColor.schemesCustom(
+                      controller)[controller.schemeIndex]);
+                  // After copy, set theme to the custom theme so
+                  // user can edit it
+                  await controller.setSchemeIndex(
+                      AppColor.schemesCustom(controller).length - 1);
+                }
+              },
+            )
+          else
+            const ListTile(
+              title: Text('Custom color scheme'),
+              subtitle: Text('Tap to edit colors'),
+            ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
+            child: ThemeColors(controller: controller),
           ),
         ],
       ),
@@ -1177,8 +1283,10 @@ class _AppBarSettings extends StatelessWidget {
                   // example we only actually only have a custom app bar color
                   // in the 1st custom color example, and we wanted to be
                   // able to show it on the toggle button.
-                  customAppBarColor: AppColor
-                      .schemes[controller.schemeIndex].light.appBarColor),
+                  customAppBarColor:
+                      AppColor.schemesCustom(controller)[controller.schemeIndex]
+                          .light
+                          .appBarColor),
             ),
           ] else ...<Widget>[
             ListTile(
@@ -1191,8 +1299,10 @@ class _AppBarSettings extends StatelessWidget {
               trailing: AppBarStyleButtons(
                   style: controller.darkAppBarStyle,
                   onChanged: controller.setDarkAppBarStyle,
-                  customAppBarColor: AppColor
-                      .schemes[controller.schemeIndex].dark.appBarColor),
+                  customAppBarColor:
+                      AppColor.schemesCustom(controller)[controller.schemeIndex]
+                          .dark
+                          .appBarColor),
             ),
           ],
           SwitchListTile.adaptive(

@@ -71,7 +71,7 @@ class _ThemeSelectorState extends State<ThemeSelector> {
               controller: scrollController,
               physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: AppColor.schemes.length,
+              itemCount: AppColor.schemesCustom(widget.controller).length,
               itemBuilder: (BuildContext context, int index) {
                 return FlexThemeModeOptionButton(
                   optionButtonBorderRadius: widget.controller.useSubThemes
@@ -99,8 +99,8 @@ class _ThemeSelectorState extends State<ThemeSelector> {
                   selected: widget.controller.schemeIndex == index,
                   backgroundColor: Theme.of(context).colorScheme.surface,
                   flexSchemeColor: isLight
-                      ? AppColor.schemes[index].light
-                      : AppColor.schemes[index].dark,
+                      ? AppColor.schemesCustom(widget.controller)[index].light
+                      : AppColor.schemesCustom(widget.controller)[index].dark,
                 );
               },
             ),

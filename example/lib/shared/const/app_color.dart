@@ -1,6 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../controllers/theme_controller.dart';
+
 /// Static App color schemes used in examples 4 & 5.
 ///
 /// Putting static const color data in their own class with only color values
@@ -60,6 +62,7 @@ class AppColor {
     secondary: const Color(0xFFA00505),
   );
 
+// For example 4.
 // Finally we create a list with all color schemes we will use. Starting with
 // our custom schemes, since normally when we make custom schemes, those are
 // probably the ones we want to use primarily, so we put them first. After our
@@ -98,8 +101,23 @@ class AppColor {
       // We create the dark desaturated colors from the light scheme.
       dark: _myScheme3Light.toDark(),
     ),
-
     // Use all the built-in FlexColor schemes.
     ...FlexColor.schemesList,
   ];
+
+// For example 5.
+// We add all schemes from example 4 and a placeholder for the custom data.
+// This is a static getter that requires the ThemeController so we can use
+// use it the return the custom it defines as the last FlexSchemeData.
+// This might be a bit resource heavy when a lot of things changes, but for
+// the purposes of this demo, I'm going to be lazy and do this anyway.
+  static List<FlexSchemeData> schemesCustom(ThemeController controller) =>
+      <FlexSchemeData>[
+        // Use all the built-in FlexColor schemes we setup for example 4
+        ...schemes,
+        // and...
+        // Return the custom colors, defined by the controller as our last
+        // color scheme.
+        controller.customScheme,
+      ];
 }

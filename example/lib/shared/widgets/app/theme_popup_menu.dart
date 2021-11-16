@@ -1,16 +1,17 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-
-import '../../const/app_color.dart';
 
 // Widget used to change the used FlexSchemeData index in example 4 & 5.
 class ThemePopupMenu extends StatelessWidget {
   const ThemePopupMenu({
     Key? key,
     required this.schemeIndex,
+    required this.schemes,
     required this.onChanged,
     this.contentPadding,
   }) : super(key: key);
   final int schemeIndex;
+  final List<FlexSchemeData> schemes;
   final ValueChanged<int> onChanged;
   // Defaults to 16, like ListTile does.
   final EdgeInsetsGeometry? contentPadding;
@@ -25,16 +26,16 @@ class ThemePopupMenu extends StatelessWidget {
       padding: EdgeInsets.zero,
       onSelected: onChanged,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i < AppColor.schemes.length; i++)
+        for (int i = 0; i < schemes.length; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
               leading: Icon(Icons.lens,
                   color: isLight
-                      ? AppColor.schemes[i].light.primary
-                      : AppColor.schemes[i].dark.primary,
+                      ? schemes[i].light.primary
+                      : schemes[i].dark.primary,
                   size: 35),
-              title: Text(AppColor.schemes[i].name),
+              title: Text(schemes[i].name),
             ),
           )
       ],
@@ -42,9 +43,9 @@ class ThemePopupMenu extends StatelessWidget {
         contentPadding:
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
         title: Text(
-          '${AppColor.schemes[schemeIndex].name} color scheme',
+          '${schemes[schemeIndex].name} color scheme',
         ),
-        subtitle: Text(AppColor.schemes[schemeIndex].description),
+        subtitle: Text(schemes[schemeIndex].description),
         trailing: Icon(
           Icons.lens,
           color: colorScheme.primary,

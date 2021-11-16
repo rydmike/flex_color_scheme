@@ -456,4 +456,104 @@ abstract class ThemeService {
 
   /// Persists setting for fabUseShape, in example 5.
   Future<void> saveFabUseShape(bool value);
+
+  /// Key used to read and save the primaryLight color value.
+  static const String keyPrimaryLight = 'primaryLight';
+
+  /// Default value for the primaryLight color, also to reset settings.
+  static const Color defaultPrimaryLight = FlexColor.materialLightPrimary;
+
+  /// Loads setting for primaryLight color, in example 5.
+  Future<Color> primaryLight();
+
+  /// Persists setting for primaryLight color, in example 5.
+  Future<void> savePrimaryLight(Color value);
+
+  /// Key used to read and save the primaryVariantLight color value.
+  static const String keyPrimaryVariantLight = 'primaryVariantLight';
+
+  /// Default value for the primaryLight color, also to reset settings.
+  static const Color defaultPrimaryVariantLight =
+      FlexColor.materialLightPrimaryVariant;
+
+  /// Loads setting for primaryVariantLight color, in example 5.
+  Future<Color> primaryVariantLight();
+
+  /// Persists setting for primaryVariantLight color, in example 5.
+  Future<void> savePrimaryVariantLight(Color value);
+
+  /// Key used to read and save the secondaryLight color value.
+  static const String keySecondaryLight = 'secondaryLight';
+
+  /// Default value for the secondaryLight color, also to reset settings.
+  static const Color defaultSecondaryLight = FlexColor.materialLightSecondary;
+
+  /// Loads setting for secondaryLight color, in example 5.
+  Future<Color> secondaryLight();
+
+  /// Persists setting for secondaryLight color, in example 5.
+  Future<void> saveSecondaryLight(Color value);
+
+  /// Key used to read and save the secondaryVariantLight color value.
+  static const String keySecondaryVariantLight = 'secondaryVariantLight';
+
+  /// Default value for the secondaryLight color, also to reset settings.
+  static const Color defaultSecondaryVariantLight =
+      FlexColor.materialLightSecondaryVariant;
+
+  /// Loads setting for secondaryVariantLight color, in example 5.
+  Future<Color> secondaryVariantLight();
+
+  /// Persists setting for secondaryVariantLight color, in example 5.
+  Future<void> saveSecondaryVariantLight(Color value);
+
+  /// Key used to read and save the primaryDark color value.
+  static const String keyPrimaryDark = 'primaryDark';
+
+  /// Default value for the primaryDark color, also to reset settings.
+  static const Color defaultPrimaryDark = FlexColor.materialDarkPrimary;
+
+  /// Loads setting for primaryDark color, in example 5.
+  Future<Color> primaryDark();
+
+  /// Persists setting for primaryDark color, in example 5.
+  Future<void> savePrimaryDark(Color value);
+
+  /// Key used to read and save the primaryVariantDark color value.
+  static const String keyPrimaryVariantDark = 'primaryVariantDark';
+
+  /// Default value for the primaryDark color, also to reset settings.
+  static const Color defaultPrimaryVariantDark =
+      FlexColor.materialDarkPrimaryVariant;
+
+  /// Loads setting for primaryVariantDark color, in example 5.
+  Future<Color> primaryVariantDark();
+
+  /// Persists setting for primaryVariantDark color, in example 5.
+  Future<void> savePrimaryVariantDark(Color value);
+
+  /// Key used to read and save the secondaryDark color value.
+  static const String keySecondaryDark = 'secondaryDark';
+
+  /// Default value for the secondaryDark color, also to reset settings.
+  static const Color defaultSecondaryDark = FlexColor.materialDarkSecondary;
+
+  /// Loads setting for secondaryDark color, in example 5.
+  Future<Color> secondaryDark();
+
+  /// Persists setting for secondaryDark color, in example 5.
+  Future<void> saveSecondaryDark(Color value);
+
+  /// Key used to read and save the secondaryVariantDark color value.
+  static const String keySecondaryVariantDark = 'secondaryVariantDark';
+
+  /// Default value for the secondaryDark color, also to reset settings.
+  static const Color defaultSecondaryVariantDark =
+      FlexColor.materialDarkSecondaryVariant;
+
+  /// Loads setting for secondaryVariantDark color, in example 5.
+  Future<Color> secondaryVariantDark();
+
+  /// Persists setting for secondaryVariantDark color, in example 5.
+  Future<void> saveSecondaryVariantDark(Color value);
 }

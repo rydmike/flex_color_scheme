@@ -23,6 +23,8 @@ name: Deploy Web
 on:
   release:
     types: [none]
+    paths-ignore:
+      - "**.md"
 #   types: [published, created, edited, prereleased]
 jobs:
   flutter_tests:

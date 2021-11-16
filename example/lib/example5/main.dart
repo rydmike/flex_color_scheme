@@ -35,7 +35,7 @@ import 'home_page.dart';
 // the surface branding looks like.
 //
 // The color value definition and list of FlexSchemeData is tucked into
-// a static class as AppColor.schemes.
+// a static class as AppColor.schemesCustom.
 //
 // The Google font Noto Sans is used to show how to use custom fonts.
 //
@@ -48,7 +48,7 @@ import 'home_page.dart';
 // The theme controller is used to change the theme mode, to toggle
 // opting in and out of FlexColorScheme's opinionated sub-themes, and to
 // change the index value of the used colors from the list of FlexSchemeData
-// in AppColor.schemes and many other options.
+// in AppColor.schemesCustom and many other options.
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {
@@ -108,7 +108,9 @@ class DemoApp extends StatelessWidget {
             theme: themeController.useFlexColorScheme
                 ? FlexThemeData.light(
                     // Use controller to select color scheme from our list.
-                    colors: AppColor.schemes[themeController.schemeIndex].light,
+                    colors: AppColor.schemesCustom(
+                            themeController)[themeController.schemeIndex]
+                        .light,
                     // Use controller to select surface mode
                     surfaceMode: themeController.surfaceMode,
                     // Integer used to control the level of primary color
@@ -231,8 +233,9 @@ class DemoApp extends StatelessWidget {
                       brightness: Brightness.light,
                     ).textTheme,
                     colorScheme: FlexColorScheme.light(
-                      colors:
-                          AppColor.schemes[themeController.schemeIndex].light,
+                      colors: AppColor.schemesCustom(
+                              themeController)[themeController.schemeIndex]
+                          .light,
                       surfaceMode: themeController.surfaceMode,
                       blendLevel: themeController.blendLevel,
                       swapColors: themeController.swapLightColors,
@@ -260,10 +263,14 @@ class DemoApp extends StatelessWidget {
             darkTheme: themeController.useFlexColorScheme
                 ? FlexThemeData.dark(
                     colors: themeController.useToDarkMethod
-                        ? AppColor.schemes[themeController.schemeIndex].light
+                        ? AppColor.schemesCustom(
+                                themeController)[themeController.schemeIndex]
+                            .light
                             .defaultError
                             .toDark(themeController.darkMethodLevel)
-                        : AppColor.schemes[themeController.schemeIndex].dark,
+                        : AppColor.schemesCustom(
+                                themeController)[themeController.schemeIndex]
+                            .dark,
                     // For reduced complexity in this demo, we use the same
                     // control value for surface mode selection and blend level
                     // for light and dark mode. They can as shown in earlier
@@ -314,10 +321,14 @@ class DemoApp extends StatelessWidget {
                     ).textTheme,
                     colorScheme: FlexColorScheme.dark(
                       colors: themeController.useToDarkMethod
-                          ? AppColor.schemes[themeController.schemeIndex].light
+                          ? AppColor.schemesCustom(
+                                  themeController)[themeController.schemeIndex]
+                              .light
                               .defaultError
                               .toDark(themeController.darkMethodLevel)
-                          : AppColor.schemes[themeController.schemeIndex].dark,
+                          : AppColor.schemesCustom(
+                                  themeController)[themeController.schemeIndex]
+                              .dark,
                       surfaceMode: themeController.surfaceMode,
                       blendLevel: themeController.blendLevel,
                       swapColors: themeController.swapDarkColors,

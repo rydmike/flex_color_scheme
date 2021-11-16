@@ -10,6 +10,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.4
 
+  # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
+  flex_color_picker: #^2.1.2
+    path: ../../flex_color_picker
+
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   flex_color_scheme:
     path: ../
