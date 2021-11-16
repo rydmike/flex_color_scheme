@@ -334,4 +334,72 @@ class ThemeServiceMem implements ThemeService {
   /// Persists setting for fabUseShape, in example 5.
   @override
   Future<void> saveFabUseShape(bool value) async {}
+
+  /// Loads setting for primaryLight color, in example 5.
+  @override
+  Future<Color> primaryLight() async => ThemeService.defaultPrimaryLight;
+
+  /// Persists setting for primaryLight color, in example 5.
+  @override
+  Future<void> savePrimaryLight(Color value) async {}
+
+  /// Loads setting for primaryVariantLight color, in example 5.
+  @override
+  Future<Color> primaryVariantLight() async =>
+      ThemeService.defaultPrimaryVariantLight;
+
+  /// Persists setting for primaryVariantLight color, in example 5.
+  @override
+  Future<void> savePrimaryVariantLight(Color value) async {}
+
+  /// Loads setting for secondaryLight color, in example 5.
+  @override
+  Future<Color> secondaryLight() async => ThemeService.defaultSecondaryLight;
+
+  /// Persists setting for secondaryLight color, in example 5.
+  @override
+  Future<void> saveSecondaryLight(Color value) async {}
+
+  /// Loads setting for secondaryVariantLight color, in example 5.
+  @override
+  Future<Color> secondaryVariantLight() async =>
+      ThemeService.defaultSecondaryVariantLight;
+
+  /// Persists setting for secondaryVariantLight color, in example 5.
+  @override
+  Future<void> saveSecondaryVariantLight(Color value) async {}
+
+  /// Loads setting for primaryDark color, in example 5.
+  @override
+  Future<Color> primaryDark() async => ThemeService.defaultPrimaryDark;
+
+  /// Persists setting for primaryDark color, in example 5.
+  @override
+  Future<void> savePrimaryDark(Color value) async {}
+
+  /// Loads setting for primaryVariantDark color, in example 5.
+  @override
+  Future<Color> primaryVariantDark() async =>
+      ThemeService.defaultPrimaryVariantDark;
+
+  /// Persists setting for primaryVariantDark color, in example 5.
+  @override
+  Future<void> savePrimaryVariantDark(Color value) async {}
+
+  /// Loads setting for secondaryDark color, in example 5.
+  @override
+  Future<Color> secondaryDark() async => ThemeService.defaultSecondaryDark;
+
+  /// Persists setting for secondaryDark color, in example 5.
+  @override
+  Future<void> saveSecondaryDark(Color value) async {}
+
+  /// Loads setting for secondaryVariantDark color, in example 5.
+  @override
+  Future<Color> secondaryVariantDark() async =>
+      ThemeService.defaultSecondaryVariantDark;
+
+  /// Persists setting for secondaryVariantDark color, in example 5.
+  @override
+  Future<void> saveSecondaryVariantDark(Color value) async {}
 }

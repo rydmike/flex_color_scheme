@@ -62,7 +62,15 @@ class ThemeController with ChangeNotifier {
     _blendLightTextTheme = await _themeService.blendLightTextTheme();
     _blendDarkTextTheme = await _themeService.blendDarkTextTheme();
     _fabUseShape = await _themeService.fabUseShape();
-
+    // Custom colors
+    _primaryLight = await _themeService.primaryLight();
+    _primaryVariantLight = await _themeService.primaryVariantLight();
+    _secondaryLight = await _themeService.secondaryLight();
+    _secondaryVariantLight = await _themeService.secondaryVariantLight();
+    _primaryDark = await _themeService.primaryDark();
+    _primaryVariantDark = await _themeService.primaryVariantDark();
+    _secondaryDark = await _themeService.secondaryDark();
+    _secondaryVariantDark = await _themeService.secondaryVariantDark();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -119,6 +127,18 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultBlendLightTextTheme, false);
     await setBlendDarkTextTheme(ThemeService.defaultBlendDarkTextTheme, false);
     await setFabUseShape(ThemeService.defaultFabUseShape, false);
+    // Custom colors
+    await setPrimaryLight(ThemeService.defaultPrimaryLight, false);
+    await setPrimaryVariantLight(
+        ThemeService.defaultPrimaryVariantLight, false);
+    await setSecondaryLight(ThemeService.defaultSecondaryLight, false);
+    await setSecondaryVariantLight(
+        ThemeService.defaultSecondaryVariantLight, false);
+    await setPrimaryDark(ThemeService.defaultPrimaryDark, false);
+    await setPrimaryVariantDark(ThemeService.defaultPrimaryVariantDark, false);
+    await setSecondaryDark(ThemeService.defaultSecondaryDark, false);
+    await setSecondaryVariantDark(
+        ThemeService.defaultSecondaryVariantDark, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -517,6 +537,126 @@ class ThemeController with ChangeNotifier {
     _fabUseShape = value;
     if (notify) notifyListeners();
     await _themeService.saveFabUseShape(value);
+  }
+
+  late Color _primaryLight;
+  Color get primaryLight => _primaryLight;
+  Future<void> setPrimaryLight(Color? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _primaryLight) return;
+    _primaryLight = value;
+    if (notify) notifyListeners();
+    await _themeService.savePrimaryLight(value);
+  }
+
+  late Color _primaryVariantLight;
+  Color get primaryVariantLight => _primaryVariantLight;
+  Future<void> setPrimaryVariantLight(Color? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _primaryVariantLight) return;
+    _primaryVariantLight = value;
+    if (notify) notifyListeners();
+    await _themeService.savePrimaryVariantLight(value);
+  }
+
+  late Color _secondaryLight;
+  Color get secondaryLight => _secondaryLight;
+  Future<void> setSecondaryLight(Color? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _secondaryLight) return;
+    _secondaryLight = value;
+    if (notify) notifyListeners();
+    await _themeService.saveSecondaryLight(value);
+  }
+
+  late Color _secondaryVariantLight;
+  Color get secondaryVariantLight => _secondaryVariantLight;
+  Future<void> setSecondaryVariantLight(Color? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _secondaryVariantLight) return;
+    _secondaryVariantLight = value;
+    if (notify) notifyListeners();
+    await _themeService.saveSecondaryVariantLight(value);
+  }
+
+  late Color _primaryDark;
+  Color get primaryDark => _primaryDark;
+  Future<void> setPrimaryDark(Color? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _primaryDark) return;
+    _primaryDark = value;
+    if (notify) notifyListeners();
+    await _themeService.savePrimaryDark(value);
+  }
+
+  late Color _primaryVariantDark;
+  Color get primaryVariantDark => _primaryVariantDark;
+  Future<void> setPrimaryVariantDark(Color? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _primaryVariantDark) return;
+    _primaryVariantDark = value;
+    if (notify) notifyListeners();
+    await _themeService.savePrimaryVariantDark(value);
+  }
+
+  late Color _secondaryDark;
+  Color get secondaryDark => _secondaryDark;
+  Future<void> setSecondaryDark(Color? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _secondaryDark) return;
+    _secondaryDark = value;
+    if (notify) notifyListeners();
+    await _themeService.saveSecondaryDark(value);
+  }
+
+  late Color _secondaryVariantDark;
+  Color get secondaryVariantDark => _secondaryVariantDark;
+  Future<void> setSecondaryVariantDark(Color? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _secondaryVariantDark) return;
+    _secondaryVariantDark = value;
+    if (notify) notifyListeners();
+    await _themeService.saveSecondaryVariantDark(value);
+  }
+
+  // Get custom scheme data based on currently defined scheme colors.
+  FlexSchemeData get customScheme => FlexSchemeData(
+        name: FlexColor.customName,
+        description: FlexColor.customDescription,
+        light: FlexSchemeColor(
+          primary: primaryLight,
+          primaryVariant: primaryVariantLight,
+          secondary: secondaryLight,
+          secondaryVariant: secondaryVariantLight,
+          appBarColor: secondaryVariantLight,
+          error: FlexColor.materialLightError,
+        ),
+        dark: FlexSchemeColor(
+          primary: primaryDark,
+          primaryVariant: primaryVariantDark,
+          secondary: secondaryDark,
+          secondaryVariant: secondaryVariantDark,
+          appBarColor: secondaryVariantDark,
+          error: FlexColor.materialDarkError,
+        ),
+      );
+
+  // Set the custom scheme colors to scheme.
+  Future<void> setCustomScheme(FlexSchemeData scheme) async {
+    // Don't notify listeners while setting new values for each value.
+    await setPrimaryLight(scheme.light.primary, false);
+    await setPrimaryVariantLight(scheme.light.primaryVariant, false);
+    await setSecondaryLight(scheme.light.secondary, false);
+    await setSecondaryVariantLight(scheme.light.secondaryVariant, false);
+    await setPrimaryDark(scheme.dark.primary, false);
+    await setPrimaryVariantDark(scheme.dark.primaryVariant, false);
+    await setSecondaryDark(scheme.dark.secondary, false);
+    await setSecondaryVariantDark(scheme.dark.secondaryVariant, false);
+    // Notify listeners, after all individual values have been set.
+    notifyListeners();
   }
 
   /// This is just a local controller properties for the Platform menu control.

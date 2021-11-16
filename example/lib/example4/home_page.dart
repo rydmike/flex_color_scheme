@@ -95,6 +95,7 @@ class HomePage extends StatelessWidget {
                           ThemePopupMenu(
                             contentPadding: EdgeInsets.zero,
                             schemeIndex: controller.schemeIndex,
+                            schemes: AppColor.schemes,
                             onChanged: controller.setSchemeIndex,
                           ),
                           const SizedBox(height: 8),
