@@ -1,6 +1,7 @@
 name: Validate
 on:
   pull_request:
+    branches: [none]
   push:
     branches: [none]
     paths-ignore:

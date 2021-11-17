@@ -274,8 +274,7 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexInputBorderType _inputDecoratorBorderType;
-  FlexInputBorderType get inputDecoratorBorderType =>
-      _inputDecoratorBorderType;
+  FlexInputBorderType get inputDecoratorBorderType => _inputDecoratorBorderType;
   Future<void> setInputDecoratorBorderType(FlexInputBorderType? value,
       [bool notify = true]) async {
     if (value == null) return;
