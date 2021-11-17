@@ -131,7 +131,26 @@ class AppColor {
     // Use all the built-in FlexColor schemes we setup for example 4
     ...schemes,
     // and a placeholder for the custom colors
-    FlexColor.customColors,
+    const FlexSchemeData(
+      name: FlexColor.customName,
+      description: FlexColor.customDescription,
+      light: FlexSchemeColor(
+        primary: FlexColor.materialLightPrimary,
+        primaryVariant: FlexColor.materialLightPrimaryVariant,
+        secondary: FlexColor.materialLightSecondary,
+        secondaryVariant: FlexColor.materialLightSecondaryVariant,
+        appBarColor: FlexColor.materialLightSecondaryVariant,
+        error: FlexColor.materialLightError,
+      ),
+      dark: FlexSchemeColor(
+        primary: FlexColor.materialDarkPrimary,
+        primaryVariant: FlexColor.materialDarkPrimaryVariant,
+        secondary: FlexColor.materialDarkSecondary,
+        secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+        appBarColor: FlexColor.materialDarkSecondaryVariant,
+        error: FlexColor.materialDarkError,
+      ),
+    ),
   ];
 
   // For example 5.
