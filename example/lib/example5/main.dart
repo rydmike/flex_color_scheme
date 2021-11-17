@@ -9,7 +9,6 @@ import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
 import '../shared/services/theme_service_hive.dart';
-// import '../shared/services/theme_service_prefs.dart';
 import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
@@ -64,16 +63,16 @@ Future<void> main() async {
   // 2. ThemeServicePrefs - Persist settings locally using SharedPreferences.
   // 3. ThemeServiceHive  - Persist settings locally using Hive.
   //
-  // Here we use Shared Preferences. The examples are all built using same
+  // Here we use Hive. The examples are all built using same
   // "example" app. If we use SharedPreferences in more than one of the apps
   // they would use the same storage container and share the settings when you
   // build them locally. By using Hive for most examples, we can change
   // the storage container name for each example. In these demos the
-  // SharedPreferences service is only used for example 5, but you can swap in
-  // the Hive based one here as well if you want to try it.
-  // This also demonstrates how swap used persistence implementation.
-  // final ThemeService themeService = ThemeServicePrefs();
-  // To swap to Hive use this instead:
+  // SharedPreferences service is only used for example 3, but you can swap in
+  // the Hive based one for it as well.
+
+  // The ThemeServiceHive constructor requires a box name, the others do not.
+  // The box name is just a file name for the file that stores the settings.
   final ThemeService themeService = ThemeServiceHive('flex_scheme_box_5');
   // Initialize the theme service.
   await themeService.init();

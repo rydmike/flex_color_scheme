@@ -59,8 +59,12 @@ dependencies:
   # https://materialdesignicons.com/
   shared_preferences: ^2.0.8
 
+  # A class for parsing strings using a sequence of patterns.
+  # By the Dart team, tools.dart.dev
+  string_scanner: ^1.1.0
+
   # Used for launching a WEB URL, by Google flutter.dev.
-  url_launcher: ^6.0.12
+  url_launcher: ^6.0.13
 
 dev_dependencies:
   flutter_test:

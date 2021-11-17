@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
-import '../shared/services/theme_service_hive.dart';
+// import '../shared/services/theme_service_hive.dart';
+import '../shared/services/theme_service_prefs.dart';
 import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
@@ -31,7 +32,6 @@ import 'home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   // Use a ThemeController, which glues our theme settings to Flutter Widgets.
   //
   // The controller uses an abstract ThemeService interface to get and save the
@@ -43,18 +43,24 @@ Future<void> main() async {
   // 2. ThemeServicePrefs - Persist settings locally using SharedPreferences.
   // 3. ThemeServiceHive  - Persist settings locally using Hive.
   //
-  // Here we use Hive. The examples are all built using same
+  // Here we can use Shared Preferences. The examples are all built using same
   // "example" app. If we use SharedPreferences in more than one of the apps
   // they would use the same storage container and share the settings when you
   // build them locally. By using Hive for most examples, we can change
   // the storage container name for each example. In these demos the
-  // SharedPreferences service is only used for example 5, but you can swap in
-  // the Hive based one for it as well.
+  // SharedPreferences service is only used for this example, but you can swap
+  // in the Hive based one here as well if you want to try it.
   // This also demonstrates how swap used persistence implementation.
-
-  // The ThemeServiceHive constructor requires a box name, the others do not.
-  // The box name is just a file name for the file that stores the settings.
-  final ThemeService themeService = ThemeServiceHive('flex_scheme_box_3');
+  //
+  // NOTE:
+  // Earlier we used Hive here and SharedPrefs only for example 5. We switched
+  // 3 and 5 for shared prefs example. Hive is faster and example 5 needs the
+  // performance more than this example. The slower speed for shared prefs was
+  // noticeable in Windows desktop builds when changing custom theme color
+  // with the wheel picker for primary color.
+  final ThemeService themeService = ThemeServicePrefs();
+  // To swap to Hive use this instead:
+  // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_3');
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.

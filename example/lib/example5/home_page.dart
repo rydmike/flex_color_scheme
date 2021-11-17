@@ -12,10 +12,12 @@ import '../shared/pages/sub_pages.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
 import '../shared/widgets/universal/animated_switch_hide.dart';
 import '../shared/widgets/universal/header_card.dart';
+import '../shared/widgets/universal/responsive_dialog.dart';
 import '../shared/widgets/universal/show_theme_colors.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 import 'widgets/app_bar_style_buttons.dart';
+import 'widgets/dart_code_dialog_screen.dart';
 import 'widgets/platform_popup_menu.dart';
 import 'widgets/surface_mode_buttons.dart';
 import 'widgets/system_nav_bar_style_buttons.dart';
@@ -336,8 +338,12 @@ class _HomePageState extends State<HomePage> {
                         'themes are custom color schemes and are not built-in '
                         'choices. In the packages tutorial you learn how to '
                         'make your own custom color schemes and turn '
-                        'them into advanced themes with FlexColorScheme. '
-                        'Settings are persisted',
+                        'them into advanced themes with FlexColorScheme.\n'
+                        '\n'
+                        'You can copy existing color schemes and make a custom '
+                        'version of it. Want to use a theme you configured? '
+                        'Copy setup code for active settings and paste it '
+                        'into your IDE. Settings in the demo are persisted.',
                       ),
                       SizedBox(height: 8),
                     ],
@@ -632,135 +638,10 @@ class _ColorScheme extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
-  String get dartCode {
-    final FlexSchemeData scheme = AppColor.scheme(controller);
-    // Get the enum index of scheme
-    final int flexScheme = controller.schemeIndex - 3;
-    // Using a built-in scheme or one of the custom colors in the demo?
-    final bool useBuiltIn = controller.schemeIndex > 2 &&
-        controller.schemeIndex < AppColor.schemesCustom.length - 1;
-    final String lightScheme = useBuiltIn
-        ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
-        : '  colors: const FlexSchemeColor(\n'
-            '    primary: ${scheme.light.primary},\n'
-            '    primaryVariant: ${scheme.light.primaryVariant},\n'
-            '    secondary: ${scheme.light.secondary},\n'
-            '    secondaryVariant: ${scheme.light.secondaryVariant},\n'
-            '    appBarColor: ${scheme.light.appBarColor},\n'
-            '    error: ${scheme.light.error},\n'
-            '  ),\n';
-    String darkScheme = useBuiltIn
-        ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
-        : '  colors: const FlexSchemeColor(\n'
-            '    primary: ${scheme.dark.primary},\n'
-            '    primaryVariant: ${scheme.dark.primaryVariant},\n'
-            '    secondary: ${scheme.dark.secondary},\n'
-            '    secondaryVariant: ${scheme.dark.secondaryVariant},\n'
-            '    appBarColor: ${scheme.dark.appBarColor},\n'
-            '    error: ${scheme.dark.error},\n'
-            '  ),\n';
-
-    if (controller.useToDarkMethod) {
-      darkScheme = '  colors: const FlexSchemeColor(\n'
-          '    primary: ${scheme.light.primary},\n'
-          '    primaryVariant: ${scheme.light.primaryVariant},\n'
-          '    secondary: ${scheme.light.secondary},\n'
-          '    secondaryVariant: ${scheme.light.secondaryVariant},\n'
-          '    appBarColor: ${scheme.light.appBarColor},\n'
-          '    error: ${scheme.light.error},\n'
-          '  ).defaultError.toDark(${controller.darkMethodLevel}),\n';
-    }
-
-    final String defRadius = controller.useDefaultRadius
-        ? ''
-        : '    defaultRadius: ${controller.cornerRadius},\n';
-    final String lightSubThemeCode = controller.useSubThemes
-        ? '  subThemesData: const FlexSubThemesData(\n'
-            '    useTextTheme: ${controller.useTextTheme},\n'
-            '$defRadius'
-            '    fabUseShape: ${controller.fabUseShape},\n'
-            '    interactionEffects: ${controller.interactionEffects},\n'
-            '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
-            '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
-            '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n'
-            '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n'
-            '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n'
-            '    blendOnColors: ${controller.blendLightOnColors},\n'
-            '    blendTextTheme: ${controller.blendLightTextTheme},\n'
-            '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
-            '  ),\n'
-        : '';
-    final String darkSubThemeCode = controller.useSubThemes
-        ? '  subThemesData: const FlexSubThemesData(\n'
-            '    useTextTheme: ${controller.useTextTheme},\n'
-            '$defRadius'
-            '    fabUseShape: ${controller.fabUseShape},\n'
-            '    interactionEffects: ${controller.interactionEffects},\n'
-            '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
-            '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
-            '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n'
-            '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n'
-            '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n'
-            '    blendOnColors: ${controller.blendDarkOnColors},\n'
-            '    blendTextTheme: ${controller.blendDarkTextTheme},\n'
-            '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
-            '  ),\n'
-        : '';
-    final String code = 'theme: FlexThemeData.light(\n'
-        '$lightScheme'
-        '  surfaceMode: ${controller.surfaceMode},\n'
-        '  blendLevel: ${controller.blendLevel},\n'
-        '  appBarStyle: ${controller.lightAppBarStyle},\n'
-        '  appBarOpacity: ${controller.appBarOpacity},\n'
-        '  appBarElevation: ${controller.appBarElevation},\n'
-        '  transparentStatusBar: ${controller.transparentStatusBar},\n'
-        '  tabBarStyle: ${controller.tabBarStyle},\n'
-        '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
-        '  swapColors: ${controller.swapLightColors},\n'
-        '  lightIsWhite: ${controller.lightIsWhite},\n'
-        '  useSubThemes: ${controller.useSubThemes},\n'
-        '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
-        '  // To use this font, add GoogleFonts package and uncomment:\n'
-        '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
-        '$lightSubThemeCode'
-        '),\n'
-        'darkTheme: FlexThemeData.dark(\n'
-        '$darkScheme'
-        '  surfaceMode: ${controller.surfaceMode},\n'
-        '  blendLevel: ${controller.blendLevel},\n'
-        '  appBarStyle: ${controller.darkAppBarStyle},\n'
-        '  appBarOpacity: ${controller.appBarOpacity},\n'
-        '  appBarElevation: ${controller.appBarElevation},\n'
-        '  transparentStatusBar: ${controller.transparentStatusBar},\n'
-        '  tabBarStyle: ${controller.tabBarStyle},\n'
-        '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
-        '  swapColors: ${controller.swapDarkColors},\n'
-        '  darkIsTrueBlack: ${controller.darkIsTrueBlack},\n'
-        '  useSubThemes: ${controller.useSubThemes},\n'
-        '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
-        '  // To use this font, add GoogleFonts package and uncomment:\n'
-        '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
-        '$darkSubThemeCode'
-        '),\n'
-        '// Set themeMode to system if you do not have other control method\n'
-        '// for it, if you do, then delete these lines.\n'
-        'themeMode: ThemeMode.system,\n';
-
-    return code;
-  }
-
-  // Set current selected color value as a String on the Clipboard in
-  // currently configured format, notify with snackbar that it was copied.
-  Future<void> _setClipboard(BuildContext context) async {
-    final ClipboardData data = ClipboardData(text: dartCode);
-    await Clipboard.setData(data);
-    // Show a snack bar with copy message.
-    // ignore: use_build_context_synchronously
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Generated FlexColorScheme code to the clipboard!'),
-        duration: Duration(milliseconds: 2000),
-      ),
+  void _handleCodeTap(BuildContext context) {
+    showResponsiveDialog<void>(
+      context: context,
+      child: DartCodeDialogScreen(controller: controller),
     );
   }
 
@@ -807,41 +688,20 @@ class _ColorScheme extends StatelessWidget {
             child: ThemeColors(controller: controller),
           ),
           ListTile(
-            title: const Text('Get the FlexColorScheme code for this theme'),
+            title: const Text('Get the code for this theme'),
             trailing: ElevatedButton(
-              onPressed: () async {
-                debugPrint(dartCode);
-                await _setClipboard(context);
+              onPressed: () {
+                _handleCodeTap(context);
               },
               child: const Text('Code'),
             ),
-            onTap: () async {
-              debugPrint(dartCode);
-              await _setClipboard(context);
+            onTap: () {
+              _handleCodeTap(context);
             },
           ),
         ],
       ),
     );
-  }
-}
-
-class _ThemeDartCode extends StatelessWidget {
-  const _ThemeDartCode({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
-  final ThemeController controller;
-  @override
-  Widget build(BuildContext context) {
-    // Start composing a String that contains the dart code for current theme.
-    final String code = 'theme: FlexThemeData.light(\n'
-        '  colors: ${AppColor.scheme(controller).light},'
-        '  surfaceMode: ${controller.surfaceMode}\n';
-
-    debugPrint(code);
-
-    return Container();
   }
 }
 
