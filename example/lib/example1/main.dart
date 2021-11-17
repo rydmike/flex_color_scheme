@@ -35,85 +35,17 @@ class _DemoAppState extends State<DemoApp> {
       scrollBehavior: AppScrollBehavior(),
       title: 'Basic Theme Usage',
       // Use a predefined FlexThemeData.light() theme for the light theme.
-      //
-      // theme: FlexThemeData.light(
-      //   scheme: usedScheme,
-      //   // Use very subtly themed app bar elevation in light mode.
-      //   appBarElevation: 0.5,
-      // ),
-      // // Same definition for the dark theme, but using FlexThemeData.dark().
-      // darkTheme: FlexThemeData.dark(
-      //   scheme: usedScheme,
-      //   // Use stronger themed app bar elevation in dark mode.
-      //   appBarElevation: 2,
-      // ),
-      //
       theme: FlexThemeData.light(
-        scheme: FlexScheme.redWine,
-        surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
-        blendLevel: 16,
-        appBarStyle: FlexAppBarStyle.primary,
-        appBarOpacity: 0.95,
-        appBarElevation: 0.0,
-        transparentStatusBar: true,
-        tabBarStyle: FlexTabBarStyle.forAppBar,
-        tooltipsMatchBackground: true,
-        swapColors: false,
-        lightIsWhite: false,
-        useSubThemes: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        // To use this font, add GoogleFonts package and uncomment:
-        // fontFamily: GoogleFonts.notoSans().fontFamily,
-        subThemesData: const FlexSubThemesData(
-          useTextTheme: true,
-          defaultRadius: 10.0,
-          fabUseShape: true,
-          interactionEffects: true,
-          bottomNavigationBarOpacity: 0.95,
-          bottomNavigationBarElevation: 0.0,
-          inputDecoratorIsFilled: true,
-          inputDecoratorBorderType: FlexInputBorderType.outline,
-          inputDecoratorUnfocusedHasBorder: true,
-          blendOnColors: true,
-          blendTextTheme: true,
-          popupMenuOpacity: 0.95,
-        ),
+        scheme: usedScheme,
+        // Use very subtly themed app bar elevation in light mode.
+        appBarElevation: 0.5,
       ),
+      // Same definition for the dark theme, but using FlexThemeData.dark().
       darkTheme: FlexThemeData.dark(
-        scheme: FlexScheme.redWine,
-        surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
-        blendLevel: 16,
-        appBarStyle: FlexAppBarStyle.background,
-        appBarOpacity: 0.95,
-        appBarElevation: 0.0,
-        transparentStatusBar: true,
-        tabBarStyle: FlexTabBarStyle.forAppBar,
-        tooltipsMatchBackground: true,
-        swapColors: false,
-        darkIsTrueBlack: false,
-        useSubThemes: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        // To use this font, add GoogleFonts package and uncomment:
-        // fontFamily: GoogleFonts.notoSans().fontFamily,
-        subThemesData: const FlexSubThemesData(
-          useTextTheme: true,
-          defaultRadius: 10.0,
-          fabUseShape: true,
-          interactionEffects: true,
-          bottomNavigationBarOpacity: 0.95,
-          bottomNavigationBarElevation: 0.0,
-          inputDecoratorIsFilled: true,
-          inputDecoratorBorderType: FlexInputBorderType.outline,
-          inputDecoratorUnfocusedHasBorder: true,
-          blendOnColors: true,
-          blendTextTheme: true,
-          popupMenuOpacity: 0.95,
-        ),
+        scheme: usedScheme,
+        // Use stronger themed app bar elevation in dark mode.
+        appBarElevation: 2,
       ),
-// Set themeMode to system if you do not have other control method
-// for it, if you do, then delete these lines.
-//       themeMode: ThemeMode.system,
-
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
       home: HomePage(

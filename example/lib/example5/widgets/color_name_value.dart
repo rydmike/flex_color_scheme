@@ -29,8 +29,12 @@ class _ColorNameValueState extends State<ColorNameValue> {
   late String materialName;
   late String nameThatColor;
 
-  // This widget is stateful is because the ColorTools methods may be a bit
-  // expensive so we are try to avoid calling them when not needed.
+  // This widget is stateful because the ColorTools methods may be a bit
+  // expensive so we try to avoid calling them when not needed, by keeping
+  // their values in state and only updating them when the Material they
+  // describe actually changes color. Which happens quite a bit still during
+  // theme changes when the theme change goes through its color lerp to new
+  // theme colors.
   @override
   void initState() {
     materialName = ColorTools.materialName(widget.color);

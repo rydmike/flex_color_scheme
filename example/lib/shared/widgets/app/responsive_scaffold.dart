@@ -44,6 +44,12 @@ const Duration _kMenuAnimationDuration = Duration(milliseconds: 246);
 /// very cumbersome and complex, not really an approach I recommend, but
 /// an interesting experiment.
 ///
+/// This is not really a Flutter "Universal" Widget that only depends on the
+/// SDK, it also depends on another widget in the project the universal
+/// `MaybeTooltip`. It of course also contains code that is not reusable since
+/// it is app specific. Hence the 'app' level widget classification. This
+/// widget could however easily be made "universal" and become quite useful.
+///
 /// (c) BSD 3-clause - Mike Rydstrom (@RydMike)
 class ResponsiveScaffold extends StatefulWidget {
   const ResponsiveScaffold({

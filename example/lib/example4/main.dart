@@ -61,9 +61,8 @@ Future<void> main() async {
   // they would use the same storage container and share the settings when you
   // build them locally. By using Hive for most examples, we can change
   // the storage container name for each example. In these demos the
-  // SharedPreferences service is only used for example 5, but you can swap in
+  // SharedPreferences service is only used for example 3, but you can swap in
   // the Hive based one for it as well.
-  // This also demonstrates how swap used persistence implementation.
 
   // The ThemeServiceHive constructor requires a box name, the others do not.
   // The box name is just a file name for the file that stores the settings.

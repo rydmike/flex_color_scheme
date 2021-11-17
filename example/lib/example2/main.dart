@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
+// import '../shared/services/theme_service_hive.dart';
 import '../shared/services/theme_service_mem.dart';
 import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
@@ -45,7 +46,7 @@ Future<void> main() async {
   // they would use the same storage container and share the settings when you
   // build them locally. By using Hive for most examples, we can change
   // the storage container name for each example. In these demos the
-  // SharedPreferences service is only used for example 5. You can swap in
+  // SharedPreferences service is only used for example 3. You can swap in
   // the Hive based one here as well, if you want to try it and save settings
   // for this simple example as well.
   // This also demonstrates how swap used persistence implementation.
