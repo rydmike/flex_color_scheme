@@ -6,10 +6,10 @@ import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
-import '../shared/widgets/app/theme_popup_menu.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/show_theme_colors.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
+import 'widgets/theme_popup_menu.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 4 - All Themes
@@ -95,7 +95,6 @@ class HomePage extends StatelessWidget {
                           ThemePopupMenu(
                             contentPadding: EdgeInsets.zero,
                             schemeIndex: controller.schemeIndex,
-                            schemes: AppColor.schemes,
                             onChanged: controller.setSchemeIndex,
                           ),
                           const SizedBox(height: 8),

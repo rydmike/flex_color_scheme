@@ -9,20 +9,20 @@ import '../shared/const/app_color.dart';
 import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/pages/sub_pages.dart';
-import '../shared/widgets/app/app_bar_style_buttons.dart';
-import '../shared/widgets/app/platform_popup_menu.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
-import '../shared/widgets/app/surface_mode_buttons.dart';
-import '../shared/widgets/app/system_nav_bar_style_buttons.dart';
-import '../shared/widgets/app/tab_bar_style_buttons.dart';
-import '../shared/widgets/app/theme_popup_menu.dart';
-import '../shared/widgets/app/theme_selector.dart';
 import '../shared/widgets/universal/animated_switch_hide.dart';
 import '../shared/widgets/universal/header_card.dart';
 import '../shared/widgets/universal/show_theme_colors.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
-import 'theme_colors.dart';
+import 'widgets/app_bar_style_buttons.dart';
+import 'widgets/platform_popup_menu.dart';
+import 'widgets/surface_mode_buttons.dart';
+import 'widgets/system_nav_bar_style_buttons.dart';
+import 'widgets/tab_bar_style_buttons.dart';
+import 'widgets/theme_colors.dart';
+import 'widgets/theme_popup_menu.dart';
+import 'widgets/theme_selector.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
@@ -311,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                     children: const <Widget>[
                       Text(
                         'With this demo you can try all features and themes in '
-                        'FlexColorScheme v4. Find a color scheme you '
+                        'FlexColorScheme V4. Find a color scheme you '
                         'like, experiment with the new surface blend modes and '
                         'levels. See how the AppBar theme options work. '
                         'Try the true black option for dark '
@@ -325,7 +325,7 @@ class _HomePageState extends State<HomePage> {
                         'theming is ON, you can turn it OFF and see the '
                         'differences. The sub theming defaults '
                         'mimics Material 3 (You), mostly on corner radius of '
-                        'Widgets, but also TextTheme and its coloring.\n'
+                        'Widgets, but also TextTheme and its coloring. '
                         'This demo does not adjust any widget properties, the '
                         'theme is adjusted interactively and the Flutter '
                         ' widgets change as the theme is modified '
@@ -537,8 +537,8 @@ class _CopySchemeToCustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Copy to Custom Scheme'),
-      content: const Text('Copy this colors scheme to the custom scheme?\n\n'
-          'The current light and dark custom color scheme will be '
+      content: const Text('Copy this color scheme to the custom scheme?\n\n'
+          'Current custom light and dark color scheme will be '
           'overwritten and set to the colors of this scheme.\n'
           'You will be able edit and make a custom scheme with these colors '
           'as a starting point.'),
@@ -597,11 +597,7 @@ class _ThemeColors extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
             child: ThemeSelector(controller: controller),
           ),
-          ThemePopupMenu(
-            schemeIndex: controller.schemeIndex,
-            schemes: AppColor.schemesCustom(controller),
-            onChanged: controller.setSchemeIndex,
-          ),
+          ThemePopupMenu(controller: controller),
           const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -636,6 +632,138 @@ class _ColorScheme extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
+  String get dartCode {
+    final FlexSchemeData scheme = AppColor.scheme(controller);
+    // Get the enum index of scheme
+    final int flexScheme = controller.schemeIndex - 3;
+    // Using a built-in scheme or one of the custom colors in the demo?
+    final bool useBuiltIn = controller.schemeIndex > 2 &&
+        controller.schemeIndex < AppColor.schemesCustom.length - 1;
+    final String lightScheme = useBuiltIn
+        ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
+        : '  colors: const FlexSchemeColor(\n'
+            '    primary: ${scheme.light.primary},\n'
+            '    primaryVariant: ${scheme.light.primaryVariant},\n'
+            '    secondary: ${scheme.light.secondary},\n'
+            '    secondaryVariant: ${scheme.light.secondaryVariant},\n'
+            '    appBarColor: ${scheme.light.appBarColor},\n'
+            '    error: ${scheme.light.error},\n'
+            '  ),\n';
+    String darkScheme = useBuiltIn
+        ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
+        : '  colors: const FlexSchemeColor(\n'
+            '    primary: ${scheme.dark.primary},\n'
+            '    primaryVariant: ${scheme.dark.primaryVariant},\n'
+            '    secondary: ${scheme.dark.secondary},\n'
+            '    secondaryVariant: ${scheme.dark.secondaryVariant},\n'
+            '    appBarColor: ${scheme.dark.appBarColor},\n'
+            '    error: ${scheme.dark.error},\n'
+            '  ),\n';
+
+    if (controller.useToDarkMethod) {
+      darkScheme = '  colors: const FlexSchemeColor(\n'
+          '    primary: ${scheme.light.primary},\n'
+          '    primaryVariant: ${scheme.light.primaryVariant},\n'
+          '    secondary: ${scheme.light.secondary},\n'
+          '    secondaryVariant: ${scheme.light.secondaryVariant},\n'
+          '    appBarColor: ${scheme.light.appBarColor},\n'
+          '    error: ${scheme.light.error},\n'
+          '  ).defaultError.toDark(${controller.darkMethodLevel}),\n';
+    }
+
+    final String defRadius = controller.useDefaultRadius
+        ? ''
+        : '    defaultRadius: ${controller.cornerRadius},\n';
+    final String lightSubThemeCode = controller.useSubThemes
+        ? '  subThemesData: const FlexSubThemesData(\n'
+            '    useTextTheme: ${controller.useTextTheme},\n'
+            '$defRadius'
+            '    fabUseShape: ${controller.fabUseShape},\n'
+            '    interactionEffects: ${controller.interactionEffects},\n'
+            '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+            '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
+            '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n'
+            '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n'
+            '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n'
+            '    blendOnColors: ${controller.blendLightOnColors},\n'
+            '    blendTextTheme: ${controller.blendLightTextTheme},\n'
+            '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
+            '  ),\n'
+        : '';
+    final String darkSubThemeCode = controller.useSubThemes
+        ? '  subThemesData: const FlexSubThemesData(\n'
+            '    useTextTheme: ${controller.useTextTheme},\n'
+            '$defRadius'
+            '    fabUseShape: ${controller.fabUseShape},\n'
+            '    interactionEffects: ${controller.interactionEffects},\n'
+            '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+            '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
+            '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n'
+            '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n'
+            '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n'
+            '    blendOnColors: ${controller.blendDarkOnColors},\n'
+            '    blendTextTheme: ${controller.blendDarkTextTheme},\n'
+            '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
+            '  ),\n'
+        : '';
+    final String code = 'theme: FlexThemeData.light(\n'
+        '$lightScheme'
+        '  surfaceMode: ${controller.surfaceMode},\n'
+        '  blendLevel: ${controller.blendLevel},\n'
+        '  appBarStyle: ${controller.lightAppBarStyle},\n'
+        '  appBarOpacity: ${controller.appBarOpacity},\n'
+        '  appBarElevation: ${controller.appBarElevation},\n'
+        '  transparentStatusBar: ${controller.transparentStatusBar},\n'
+        '  tabBarStyle: ${controller.tabBarStyle},\n'
+        '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
+        '  swapColors: ${controller.swapLightColors},\n'
+        '  lightIsWhite: ${controller.lightIsWhite},\n'
+        '  useSubThemes: ${controller.useSubThemes},\n'
+        '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
+        '  // To use this font, add GoogleFonts package and uncomment:\n'
+        '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
+        '$lightSubThemeCode'
+        '),\n'
+        'darkTheme: FlexThemeData.dark(\n'
+        '$darkScheme'
+        '  surfaceMode: ${controller.surfaceMode},\n'
+        '  blendLevel: ${controller.blendLevel},\n'
+        '  appBarStyle: ${controller.darkAppBarStyle},\n'
+        '  appBarOpacity: ${controller.appBarOpacity},\n'
+        '  appBarElevation: ${controller.appBarElevation},\n'
+        '  transparentStatusBar: ${controller.transparentStatusBar},\n'
+        '  tabBarStyle: ${controller.tabBarStyle},\n'
+        '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
+        '  swapColors: ${controller.swapDarkColors},\n'
+        '  darkIsTrueBlack: ${controller.darkIsTrueBlack},\n'
+        '  useSubThemes: ${controller.useSubThemes},\n'
+        '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
+        '  // To use this font, add GoogleFonts package and uncomment:\n'
+        '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
+        '$darkSubThemeCode'
+        '),\n'
+        '// Set themeMode to system if you do not have other control method\n'
+        '// for it, if you do, then delete these lines.\n'
+        'themeMode: ThemeMode.system,\n';
+
+    return code;
+  }
+
+  // Set current selected color value as a String on the Clipboard in
+  // currently configured format, notify with snackbar that it was copied.
+  Future<void> _setClipboard(BuildContext context) async {
+    final ClipboardData data = ClipboardData(text: dartCode);
+    await Clipboard.setData(data);
+    // Show a snack bar with copy message.
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Generated FlexColorScheme code to the clipboard!'),
+        duration: Duration(milliseconds: 2000),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
@@ -646,12 +774,11 @@ class _ColorScheme extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const SizedBox(height: 8),
-          if (controller.schemeIndex !=
-              (AppColor.schemesCustom(controller).length - 1))
+          if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
             ListTile(
               title: const Text('Copy current scheme to custom colors?'),
               subtitle: const Text('Set custom colors to this scheme '
-                  'and edit them'),
+                  'and change it. Tap color code to copy it'),
               onTap: () async {
                 final bool? copy = await showDialog<bool?>(
                   context: context,
@@ -662,27 +789,59 @@ class _ColorScheme extends StatelessWidget {
                 if (copy ?? false) {
                   // Copy scheme to custom scheme, by setting custom scheme
                   // to scheme of current scheme index.
-                  await controller.setCustomScheme(AppColor.schemesCustom(
-                      controller)[controller.schemeIndex]);
+                  await controller.setCustomScheme(AppColor.scheme(controller));
                   // After copy, set theme to the custom theme so
                   // user can edit it
-                  await controller.setSchemeIndex(
-                      AppColor.schemesCustom(controller).length - 1);
+                  await controller
+                      .setSchemeIndex(AppColor.schemesCustom.length - 1);
                 }
               },
             )
           else
             const ListTile(
               title: Text('Custom color scheme'),
-              subtitle: Text('Tap to edit colors'),
+              subtitle: Text('Tap color to change it. Tap code to copy value'),
             ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
             child: ThemeColors(controller: controller),
+          ),
+          ListTile(
+            title: const Text('Get the FlexColorScheme code for this theme'),
+            trailing: ElevatedButton(
+              onPressed: () async {
+                debugPrint(dartCode);
+                await _setClipboard(context);
+              },
+              child: const Text('Code'),
+            ),
+            onTap: () async {
+              debugPrint(dartCode);
+              await _setClipboard(context);
+            },
           ),
         ],
       ),
     );
+  }
+}
+
+class _ThemeDartCode extends StatelessWidget {
+  const _ThemeDartCode({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+  final ThemeController controller;
+  @override
+  Widget build(BuildContext context) {
+    // Start composing a String that contains the dart code for current theme.
+    final String code = 'theme: FlexThemeData.light(\n'
+        '  colors: ${AppColor.scheme(controller).light},'
+        '  surfaceMode: ${controller.surfaceMode}\n';
+
+    debugPrint(code);
+
+    return Container();
   }
 }
 
@@ -1112,7 +1271,7 @@ class _SubThemes extends StatelessWidget {
                   title: const Text('Themed state effects'),
                   subtitle: const Text('Disable, hover, focus, highlight and '
                       'splash use primary color'),
-                  value: controller.themedEffects,
+                  value: controller.interactionEffects,
                   onChanged: controller.setInteractionEffects,
                 ),
                 const Divider(height: 1),
@@ -1184,7 +1343,7 @@ class _TextField extends StatelessWidget {
                   subtitle: const Text(
                     'ON for outline  OFF for underline',
                   ),
-                  value: controller.inputDecoratorIsOutlinedBorder ==
+                  value: controller.inputDecoratorBorderType ==
                       FlexInputBorderType.outline,
                   onChanged: (bool isOn) {
                     if (isOn) {
@@ -1284,9 +1443,7 @@ class _AppBarSettings extends StatelessWidget {
                   // in the 1st custom color example, and we wanted to be
                   // able to show it on the toggle button.
                   customAppBarColor:
-                      AppColor.schemesCustom(controller)[controller.schemeIndex]
-                          .light
-                          .appBarColor),
+                      AppColor.scheme(controller).light.appBarColor),
             ),
           ] else ...<Widget>[
             ListTile(
@@ -1300,9 +1457,7 @@ class _AppBarSettings extends StatelessWidget {
                   style: controller.darkAppBarStyle,
                   onChanged: controller.setDarkAppBarStyle,
                   customAppBarColor:
-                      AppColor.schemesCustom(controller)[controller.schemeIndex]
-                          .dark
-                          .appBarColor),
+                      AppColor.scheme(controller).dark.appBarColor),
             ),
           ],
           SwitchListTile.adaptive(

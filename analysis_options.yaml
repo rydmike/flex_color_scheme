@@ -1,4 +1,4 @@
-# RydMike LINTER Preferences v1.2.5
+# RydMike LINTER Preferences v1.2.6
 # This gist: https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 # Include and activate all lint rules, later below we disable the not used or desired ones.
 # You can find a list of all lint rules to put in your all_lint_rules.yaml file here:
@@ -686,6 +686,29 @@ linter:
     # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     prefer_final_parameters: false
+
+    # DO use int literals rather than the corresponding double literal.
+    #
+    # https://dart-lang.github.io/linter/lints/prefer_int_literals.html
+    #
+    # This rule goes against the preferred style of being explicit with
+    # declarations and hides when a number is double, since we cannot declare it
+    # as 0.0 or 1.0 when it is double, it has to be 0 or 1, making it look
+    # like an integer, even if it is not. Sometimes doing that is OK, but let's
+    # not enforce it.
+    #
+    # Other known linters use:
+    #
+    # Core           disabled : https://pub.dev/packages/lints
+    # Recommended    disabled : https://pub.dev/packages/lints
+    # Flutter Lints  disabled : https://pub.dev/packages/flutter_lints
+    # Pedantic       disabled : https://pub.dev/packages/pedantic
+    # Effective Dart disabled : https://pub.dev/packages/effective_dart
+    # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    # Lint           disabled : https://pub.dev/packages/lint
+    # VG Analysis    enabled  : https://pub.dev/packages/very_good_analysis
+    # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+    prefer_int_literals: false
 
     # DO document all public members.
     #

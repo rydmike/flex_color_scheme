@@ -46,6 +46,11 @@ class AppColor {
 // receive the same color value as the one that is computed for
 // secondaryVariant color, this is default null behavior for custom app bar
 // color when using this factory.
+//
+// When you figure out the actual colors you want, it might be a good idea to
+// use the method in the above case for the custom _myScheme1Light and dark,
+// since that can be const and you can then make your entire list
+// of color schemes a const.
   static final FlexSchemeColor _myScheme2Light =
       FlexSchemeColor.from(primary: const Color(0xFF055C34));
   static final FlexSchemeColor _myScheme2Dark =
@@ -57,6 +62,11 @@ class AppColor {
 // get computed by the factory `FlexSchemeColor.from` when it creates the
 // `FlexSchemeColor` object. To make our dark colors for this light scheme, we
 // use the method `toDark` further below with the `_myScheme3Light` instance.
+//
+// Same comment as above, when you do figure out the actual colors you want,
+// it might be a good idea to use the method in the above case for the custom
+// _myScheme1Light and dark, since that can be const and you can then make
+// your entire list of color schemes a const.
   static final FlexSchemeColor _myScheme3Light = FlexSchemeColor.from(
     primary: const Color(0xFF04368E),
     secondary: const Color(0xFFA00505),
@@ -101,23 +111,65 @@ class AppColor {
       // We create the dark desaturated colors from the light scheme.
       dark: _myScheme3Light.toDark(),
     ),
-    // Use all the built-in FlexColor schemes.
+    // Use all the built-in FlexColor schemes. This list is a const.
     ...FlexColor.schemesList,
   ];
 
-// For example 5.
-// We add all schemes from example 4 and a placeholder for the custom data.
-// This is a static getter that requires the ThemeController so we can use
-// use it the return the custom it defines as the last FlexSchemeData.
-// This might be a bit resource heavy when a lot of things changes, but for
-// the purposes of this demo, I'm going to be lazy and do this anyway.
-  static List<FlexSchemeData> schemesCustom(ThemeController controller) =>
-      <FlexSchemeData>[
-        // Use all the built-in FlexColor schemes we setup for example 4
-        ...schemes,
-        // and...
-        // Return the custom colors, defined by the controller as our last
-        // color scheme.
-        controller.customScheme,
-      ];
+  // For example 5.
+  // We add all schemes from example 4 and a placeholder for the custom data.
+  //
+  // We could also make this a static getter that requires the ThemeController,
+  // so we can use it to return a list where the last item is the FlexSchemeData
+  // it defines (controller.customScheme). I tried it, and it felt sluggish and
+  // heavy. It results in creating a new list very frequently, which was a bit
+  // too inefficient.
+  //
+  // Instead we are making it a final and will add a const placeholder for the
+  // last index for the customized colors and use another static helper function
+  // to get right colors see next step.
+  static final List<FlexSchemeData> schemesCustom = <FlexSchemeData>[
+    // Use all the built-in FlexColor schemes we setup for example 4
+    ...schemes,
+    // and a placeholder for the custom colors
+    FlexColor.customColors,
+  ];
+
+  // For example 5.
+  // Helper function to return current FlexSchemeData at controller index.
+  //
+  // Instead of getting the colors directly from a list that changes frequently
+  // we make a separate helper function that takes a ThemeController and returns
+  // the right FlexSchemeData from the list, but returning the
+  // `ThemeController.customScheme` for the last item, when the controllers
+  // index  is last item in list, otherwise it returns FlexSchemeData at index,
+  // well almost, we include also the logic for computed dark mode colors, in
+  // next helper.
+  static FlexSchemeData scheme(final ThemeController controller) =>
+      schemeAtIndex(controller.schemeIndex, controller);
+
+  // For example 5.
+  // Helper function to return current FlexSchemeData at given index, also
+  // needed this functionality in theme selector and popup menu, so made
+  // it a sub function to getting the FlexSchemeData at its current index.
+  // We go a bit further and have it help us return the computed dark scheme
+  // when controller says we are using that as well, instead of the defined
+  // dark mode scheme. This simplifies our logic in the MaterialApp
+  // of example 5 and we get right dark colors in ThemeSelector and Popup too.
+  static FlexSchemeData schemeAtIndex(
+      final int index, final ThemeController controller) {
+    if (index == schemesCustom.length - 1) {
+      return controller.customScheme.copyWith(
+          dark: controller.useToDarkMethod
+              ? controller.customScheme.light.defaultError
+                  .toDark(controller.darkMethodLevel)
+              : null);
+    }
+    return schemesCustom[index].copyWith(
+        dark: controller.useToDarkMethod
+            ? schemesCustom[index]
+                .light
+                .defaultError
+                .toDark(controller.darkMethodLevel)
+            : null);
+  }
 }

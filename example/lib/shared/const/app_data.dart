@@ -49,6 +49,10 @@ class AppData {
   // Used by grid layout when in >= 4 column layout mode.
   static const double edgeInsetsBigDesktop = 24;
 
+  // Opacity of the popup menu in example 5, just set via a const to
+  // show and use a property not in the controller.
+  static const double popupMenuOpacity = 0.95;
+
   // Responsive insets based on width. The width may be from LayoutBuilder or
   // MediaQuery, depending on what is appropriate for the use case.
   static double responsiveInsets(double width) {

@@ -921,69 +921,185 @@ class ThemeServiceHive implements ThemeService {
 
   /// Loads setting for primaryLight color, in example 5.
   @override
-  Future<Color> primaryLight() async => ThemeService.defaultPrimaryLight;
+  Future<Color> primaryLight() async {
+    try {
+      return _hiveBox.get(ThemeService.keyPrimaryLight,
+          defaultValue: ThemeService.defaultPrimaryLight) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultPrimaryLight;
+    }
+  }
 
   /// Persists setting for primaryLight color, in example 5.
   @override
-  Future<void> savePrimaryLight(Color value) async {}
+  Future<void> savePrimaryLight(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyPrimaryLight, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting for primaryVariantLight color, in example 5.
   @override
-  Future<Color> primaryVariantLight() async =>
-      ThemeService.defaultPrimaryVariantLight;
+  Future<Color> primaryVariantLight() async {
+    try {
+      return _hiveBox.get(ThemeService.keyPrimaryVariantLight,
+          defaultValue: ThemeService.defaultPrimaryVariantLight) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultPrimaryVariantLight;
+    }
+  }
 
   /// Persists setting for primaryVariantLight color, in example 5.
   @override
-  Future<void> savePrimaryVariantLight(Color value) async {}
+  Future<void> savePrimaryVariantLight(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyPrimaryVariantLight, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting for secondaryLight color, in example 5.
   @override
-  Future<Color> secondaryLight() async => ThemeService.defaultSecondaryLight;
+  Future<Color> secondaryLight() async {
+    try {
+      return _hiveBox.get(ThemeService.keySecondaryLight,
+          defaultValue: ThemeService.defaultSecondaryLight) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSecondaryLight;
+    }
+  }
 
   /// Persists setting for secondaryLight color, in example 5.
   @override
-  Future<void> saveSecondaryLight(Color value) async {}
+  Future<void> saveSecondaryLight(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySecondaryLight, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting for secondaryVariantLight color, in example 5.
   @override
-  Future<Color> secondaryVariantLight() async =>
-      ThemeService.defaultSecondaryVariantLight;
+  Future<Color> secondaryVariantLight() async {
+    try {
+      return _hiveBox.get(ThemeService.keySecondaryVariantLight,
+          defaultValue: ThemeService.defaultSecondaryVariantLight) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSecondaryVariantLight;
+    }
+  }
 
   /// Persists setting for secondaryVariantLight color, in example 5.
   @override
-  Future<void> saveSecondaryVariantLight(Color value) async {}
+  Future<void> saveSecondaryVariantLight(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySecondaryVariantLight, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting for primaryDark color, in example 5.
   @override
-  Future<Color> primaryDark() async => ThemeService.defaultPrimaryDark;
+  Future<Color> primaryDark() async {
+    try {
+      return _hiveBox.get(ThemeService.keyPrimaryDark,
+          defaultValue: ThemeService.defaultPrimaryDark) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultPrimaryDark;
+    }
+  }
 
   /// Persists setting for primaryDark color, in example 5.
   @override
-  Future<void> savePrimaryDark(Color value) async {}
+  Future<void> savePrimaryDark(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyPrimaryDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting for primaryVariantDark color, in example 5.
   @override
-  Future<Color> primaryVariantDark() async =>
-      ThemeService.defaultPrimaryVariantDark;
+  Future<Color> primaryVariantDark() async {
+    try {
+      return _hiveBox.get(ThemeService.keyPrimaryVariantDark,
+          defaultValue: ThemeService.defaultPrimaryVariantDark) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultPrimaryVariantDark;
+    }
+  }
 
   /// Persists setting for primaryVariantDark color, in example 5.
   @override
-  Future<void> savePrimaryVariantDark(Color value) async {}
+  Future<void> savePrimaryVariantDark(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyPrimaryVariantDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting for secondaryDark color, in example 5.
   @override
-  Future<Color> secondaryDark() async => ThemeService.defaultSecondaryDark;
+  Future<Color> secondaryDark() async {
+    try {
+      return _hiveBox.get(ThemeService.keySecondaryDark,
+          defaultValue: ThemeService.defaultSecondaryDark) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSecondaryDark;
+    }
+  }
 
   /// Persists setting for secondaryDark color, in example 5.
   @override
-  Future<void> saveSecondaryDark(Color value) async {}
+  Future<void> saveSecondaryDark(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySecondaryDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   /// Loads setting for secondaryVariantDark color, in example 5.
   @override
-  Future<Color> secondaryVariantDark() async =>
-      ThemeService.defaultSecondaryVariantDark;
+  Future<Color> secondaryVariantDark() async {
+    try {
+      return _hiveBox.get(ThemeService.keySecondaryVariantDark,
+          defaultValue: ThemeService.defaultSecondaryVariantDark) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSecondaryVariantDark;
+    }
+  }
 
   /// Persists setting for secondaryVariantDark color, in example 5.
   @override
-  Future<void> saveSecondaryVariantDark(Color value) async {}
+  Future<void> saveSecondaryVariantDark(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySecondaryVariantDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }
