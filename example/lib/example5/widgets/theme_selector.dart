@@ -1,8 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../const/app_color.dart';
-import '../../controllers/theme_controller.dart';
+import '../../shared/const/app_color.dart';
+import '../../shared/controllers/theme_controller.dart';
 
 // The width size of the scrolling button.
 const double _kWidthOfScrollItem = 67.2;
@@ -71,7 +71,7 @@ class _ThemeSelectorState extends State<ThemeSelector> {
               controller: scrollController,
               physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: AppColor.schemesCustom(widget.controller).length,
+              itemCount: AppColor.schemesCustom.length,
               itemBuilder: (BuildContext context, int index) {
                 return FlexThemeModeOptionButton(
                   optionButtonBorderRadius: widget.controller.useSubThemes
@@ -99,8 +99,8 @@ class _ThemeSelectorState extends State<ThemeSelector> {
                   selected: widget.controller.schemeIndex == index,
                   backgroundColor: Theme.of(context).colorScheme.surface,
                   flexSchemeColor: isLight
-                      ? AppColor.schemesCustom(widget.controller)[index].light
-                      : AppColor.schemesCustom(widget.controller)[index].dark,
+                      ? AppColor.schemeAtIndex(index, widget.controller).light
+                      : AppColor.schemeAtIndex(index, widget.controller).dark,
                 );
               },
             ),

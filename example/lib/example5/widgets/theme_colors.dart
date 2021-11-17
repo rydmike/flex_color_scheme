@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '../shared/const/app_color.dart';
-import '../shared/controllers/theme_controller.dart';
+import '../../shared/const/app_color.dart';
+import '../../shared/controllers/theme_controller.dart';
 import 'color_name_value.dart';
 import 'color_picker_inkwell.dart';
 
@@ -25,8 +25,7 @@ class ThemeColors extends StatelessWidget {
     // We can only pick colors when custom theme is selected, which is
     // last index in out list of color schemes.
     final bool isCustomTheme =
-        (AppColor.schemesCustom(controller).length - 1) ==
-            controller.schemeIndex;
+        (AppColor.schemesCustom.length - 1) == controller.schemeIndex;
     // Are colors swapped?
     final bool swapLight = controller.swapLightColors;
     final bool swapDark = controller.swapDarkColors;
@@ -34,8 +33,8 @@ class ThemeColors extends StatelessWidget {
     // some widgets needs a specific radius, not everything has to be theme
     // driven! :)
     const double _width = 140;
-    const double _height = 100;
-    const double _radius = 8;
+    const double _height = 105;
+    const double _radius = 12;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -88,6 +87,8 @@ class ThemeColors extends StatelessWidget {
                       : controller.setPrimaryDark(color);
                 }
               },
+              recentColors: controller.recentColors,
+              onRecentColorsChanged: controller.setRecentColors,
               wasCancelled: (bool cancelled) {
                 if (cancelled) {
                   if (isLight) {
@@ -135,6 +136,8 @@ class ThemeColors extends StatelessWidget {
                       : controller.setPrimaryVariantDark(color);
                 }
               },
+              recentColors: controller.recentColors,
+              onRecentColorsChanged: controller.setRecentColors,
               wasCancelled: (bool cancelled) {
                 if (cancelled) {
                   if (isLight) {
@@ -182,6 +185,8 @@ class ThemeColors extends StatelessWidget {
                       : controller.setSecondaryDark(color);
                 }
               },
+              recentColors: controller.recentColors,
+              onRecentColorsChanged: controller.setRecentColors,
               wasCancelled: (bool cancelled) {
                 if (cancelled) {
                   if (isLight) {
@@ -229,6 +234,8 @@ class ThemeColors extends StatelessWidget {
                       : controller.setSecondaryVariantDark(color);
                 }
               },
+              recentColors: controller.recentColors,
+              onRecentColorsChanged: controller.setRecentColors,
               wasCancelled: (bool cancelled) {
                 if (cancelled) {
                   if (isLight) {

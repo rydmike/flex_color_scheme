@@ -28,7 +28,7 @@ class ThemeController with ChangeNotifier {
     _useTextTheme = await _themeService.useTextTheme();
     _usedScheme = await _themeService.usedScheme();
     _schemeIndex = await _themeService.schemeIndex();
-    _themedEffects = await _themeService.interactionEffects();
+    _interactionEffects = await _themeService.interactionEffects();
     _useDefaultRadius = await _themeService.useDefaultRadius();
     _cornerRadius = await _themeService.cornerRadius();
     _inputDecoratorIsFilled = await _themeService.inputDecoratorIsFilled();
@@ -78,9 +78,9 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
-  /// Reset all values to default and save as current settings.
+  /// Reset all values to default values and save as current settings.
   ///
-  /// Calls setters with notify = false, and just calls notifyListeners, once
+  /// Calls setters with notify = false, and calls notifyListeners once
   /// after all values have been reset and persisted.
   Future<void> resetAllToDefaults() async {
     await setThemeMode(ThemeService.defaultThemeMode, false);
@@ -144,8 +144,8 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
-  // Make all ThemeController properties private so they cannot be saved
-  // directly without also persisting the changes with the ThemeService,
+  // Make all ThemeController properties private so they cannot be used
+  // directly without also persisting the changes using the ThemeService,
   // by making a setter and getter for each property.
 
   // Private value, getter and setter for the ThemeMode
@@ -232,12 +232,12 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveBlendLevel(value);
   }
 
-  late bool _themedEffects;
-  bool get themedEffects => _themedEffects;
+  late bool _interactionEffects;
+  bool get interactionEffects => _interactionEffects;
   Future<void> setInteractionEffects(bool? value, [bool notify = true]) async {
     if (value == null) return;
-    if (value == _themedEffects) return;
-    _themedEffects = value;
+    if (value == _interactionEffects) return;
+    _interactionEffects = value;
     if (notify) notifyListeners();
     await _themeService.saveInteractionEffects(value);
   }
@@ -274,7 +274,7 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexInputBorderType _inputDecoratorBorderType;
-  FlexInputBorderType get inputDecoratorIsOutlinedBorder =>
+  FlexInputBorderType get inputDecoratorBorderType =>
       _inputDecoratorBorderType;
   Future<void> setInputDecoratorBorderType(FlexInputBorderType? value,
       [bool notify = true]) async {
@@ -644,7 +644,7 @@ class ThemeController with ChangeNotifier {
         ),
       );
 
-  // Set the custom scheme colors to scheme.
+  // Set the custom scheme colors to the colors scheme FlexSchemeData.
   Future<void> setCustomScheme(FlexSchemeData scheme) async {
     // Don't notify listeners while setting new values for each value.
     await setPrimaryLight(scheme.light.primary, false);
@@ -670,5 +670,15 @@ class ThemeController with ChangeNotifier {
     if (value == _platform) return;
     _platform = value;
     if (notify) notifyListeners();
+  }
+
+  // Recently used colors, we keep the list of recently used colors in the
+  // color picker for custom colors only during the session we don't persist.
+  // It is of course possible to persist, but not needed in ths demo.
+  List<Color> _recentColors = <Color>[];
+  List<Color> get recentColors => _recentColors;
+  // ignore: use_setters_to_change_properties
+  void setRecentColors(final List<Color> colors) {
+    _recentColors = colors;
   }
 }

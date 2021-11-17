@@ -8,8 +8,8 @@ import '../shared/const/app_color.dart';
 import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
-// import '../shared/services/theme_service_hive.dart';
-import '../shared/services/theme_service_prefs.dart';
+import '../shared/services/theme_service_hive.dart';
+// import '../shared/services/theme_service_prefs.dart';
 import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
@@ -72,9 +72,9 @@ Future<void> main() async {
   // SharedPreferences service is only used for example 5, but you can swap in
   // the Hive based one here as well if you want to try it.
   // This also demonstrates how swap used persistence implementation.
-  final ThemeService themeService = ThemeServicePrefs();
+  // final ThemeService themeService = ThemeServicePrefs();
   // To swap to Hive use this instead:
-  // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_5');
+  final ThemeService themeService = ThemeServiceHive('flex_scheme_box_5');
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.
@@ -107,10 +107,8 @@ class DemoApp extends StatelessWidget {
             title: 'Themes Playground',
             theme: themeController.useFlexColorScheme
                 ? FlexThemeData.light(
-                    // Use controller to select color scheme from our list.
-                    colors: AppColor.schemesCustom(
-                            themeController)[themeController.schemeIndex]
-                        .light,
+                    // Use controller to get current scheme colors.
+                    colors: AppColor.scheme(themeController).light,
                     // Use controller to select surface mode
                     surfaceMode: themeController.surfaceMode,
                     // Integer used to control the level of primary color
@@ -165,7 +163,7 @@ class DemoApp extends StatelessWidget {
                       fabUseShape: themeController.fabUseShape,
                       // Want color themed disable hover, focus, highlight and
                       // splash colors? Then keep this one on.
-                      interactionEffects: themeController.themedEffects,
+                      interactionEffects: themeController.interactionEffects,
                       // Themed opacity of bottom navigation bar.
                       bottomNavigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
@@ -178,7 +176,7 @@ class DemoApp extends StatelessWidget {
                       // Do you like underline or outline border type?
                       // (Might add some new styles in a future update)
                       inputDecoratorBorderType:
-                          themeController.inputDecoratorIsOutlinedBorder,
+                          themeController.inputDecoratorBorderType,
                       // Only want a border when the text input has focus
                       // or error, then set this to false. By default it always
                       // has a border of selected style, but thinner.
@@ -233,9 +231,7 @@ class DemoApp extends StatelessWidget {
                       brightness: Brightness.light,
                     ).textTheme,
                     colorScheme: FlexColorScheme.light(
-                      colors: AppColor.schemesCustom(
-                              themeController)[themeController.schemeIndex]
-                          .light,
+                      colors: AppColor.scheme(themeController).light,
                       surfaceMode: themeController.surfaceMode,
                       blendLevel: themeController.blendLevel,
                       swapColors: themeController.swapLightColors,
@@ -251,26 +247,9 @@ class DemoApp extends StatelessWidget {
             // FlexThemeData.dark() and the dark FlexSchemeColors and we add
             // use the darkIsTrueBlack option instead of the in light mode less
             // useful lightIsWhite option.
-            //
-            // We also add a feature to demonstrate the usage of computed dark
-            // schemes. With this setup we can use with any color scheme, even
-            // if it already has nice matching dark colors, we can still try
-            // what we get if we compute it from the light color definitions.
-            //
-            // The level of white blend percentage used when computing dark
-            // scheme colors from the light scheme colors with the toDark method
-            // is determined by darkMethodLevel.
             darkTheme: themeController.useFlexColorScheme
                 ? FlexThemeData.dark(
-                    colors: themeController.useToDarkMethod
-                        ? AppColor.schemesCustom(
-                                themeController)[themeController.schemeIndex]
-                            .light
-                            .defaultError
-                            .toDark(themeController.darkMethodLevel)
-                        : AppColor.schemesCustom(
-                                themeController)[themeController.schemeIndex]
-                            .dark,
+                    colors: AppColor.scheme(themeController).dark,
                     // For reduced complexity in this demo, we use the same
                     // control value for surface mode selection and blend level
                     // for light and dark mode. They can as shown in earlier
@@ -297,7 +276,7 @@ class DemoApp extends StatelessWidget {
                           ? null
                           : themeController.cornerRadius,
                       fabUseShape: themeController.fabUseShape,
-                      interactionEffects: themeController.themedEffects,
+                      interactionEffects: themeController.interactionEffects,
                       bottomNavigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
                       bottomNavigationBarElevation:
@@ -305,7 +284,7 @@ class DemoApp extends StatelessWidget {
                       inputDecoratorIsFilled:
                           themeController.inputDecoratorIsFilled,
                       inputDecoratorBorderType:
-                          themeController.inputDecoratorIsOutlinedBorder,
+                          themeController.inputDecoratorBorderType,
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
                       blendOnColors: themeController.blendDarkOnColors,
@@ -320,15 +299,7 @@ class DemoApp extends StatelessWidget {
                       brightness: Brightness.dark,
                     ).textTheme,
                     colorScheme: FlexColorScheme.dark(
-                      colors: themeController.useToDarkMethod
-                          ? AppColor.schemesCustom(
-                                  themeController)[themeController.schemeIndex]
-                              .light
-                              .defaultError
-                              .toDark(themeController.darkMethodLevel)
-                          : AppColor.schemesCustom(
-                                  themeController)[themeController.schemeIndex]
-                              .dark,
+                      colors: AppColor.scheme(themeController).dark,
                       surfaceMode: themeController.surfaceMode,
                       blendLevel: themeController.blendLevel,
                       swapColors: themeController.swapDarkColors,

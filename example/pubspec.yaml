@@ -11,8 +11,7 @@ dependencies:
   cupertino_icons: ^1.0.4
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
-  flex_color_picker: #^2.1.2
-    path: ../../flex_color_picker
+  flex_color_picker: ^2.2.0
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   flex_color_scheme:

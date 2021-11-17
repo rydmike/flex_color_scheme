@@ -1,6 +1,7 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// This widget is intended to be wrapped in material with [color].
 /// It shows a [label] describing the theme property name of the [color] and
@@ -47,9 +48,26 @@ class _ColorNameValueState extends State<ColorNameValue> {
     super.didUpdateWidget(oldWidget);
   }
 
+  // Set current selected color value as a String on the Clipboard in
+  // currently configured format, notify with snackbar that it was copied.
+  Future<void> _setClipboard() async {
+    final ClipboardData data = ClipboardData(text: widget.color.hexCode);
+    await Clipboard.setData(data);
+    final String space = materialName == '' ? '' : ' ';
+    if (!mounted) return;
+    // Show a snack bar with the paste error message.
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Copied color code ${widget.color.hexCode} for color '
+            '$nameThatColor $materialName${space}to the clipboard!'),
+        duration: const Duration(milliseconds: 2000),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    // treeDepthInfo(context, 'ColorNameValue ${widget.label}');
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Column(
@@ -68,7 +86,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
               Expanded(
                 child: Text(
                   nameThatColor,
-                  overflow: TextOverflow.clip,
+                  overflow: TextOverflow.fade,
                   textAlign: TextAlign.end,
                   style: TextStyle(
                       color: widget.textColor,
@@ -86,7 +104,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                 Expanded(
                   child: Text(
                     materialName,
-                    overflow: TextOverflow.clip,
+                    overflow: TextOverflow.fade,
                     textAlign: TextAlign.end,
                     maxLines: 1,
                     style: TextStyle(
@@ -101,15 +119,32 @@ class _ColorNameValueState extends State<ColorNameValue> {
           Row(
             children: <Widget>[
               Expanded(
-                child: SelectableText(
-                  '#${widget.color.hexCode}',
-                  // overflow: TextOverflow.fade,
-                  textAlign: TextAlign.end,
-                  maxLines: 1,
-                  style: TextStyle(
-                      color: widget.textColor,
-                      fontSize: widget.fontSize,
-                      fontWeight: FontWeight.w600),
+                child: InkWell(
+                  hoverColor: isLight
+                      ? const Color(0x40BCBCBC)
+                      : const Color(0x30FFFFFF),
+                  splashColor: isLight
+                      ? const Color(0x40BCBCBC)
+                      : const Color(0x30FFFFFF),
+                  focusColor: isLight
+                      ? const Color(0x40BCBCBC)
+                      : const Color(0x30FFFFFF),
+                  highlightColor: isLight
+                      ? const Color(0x40BCBCBC)
+                      : const Color(0x30FFFFFF),
+                  child: Text(
+                    '#${widget.color.hexCode}',
+                    textAlign: TextAlign.end,
+                    overflow: TextOverflow.fade,
+                    maxLines: 1,
+                    style: TextStyle(
+                        color: widget.textColor,
+                        fontSize: widget.fontSize,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  onTap: () async {
+                    await _setClipboard();
+                  },
                 ),
               ),
             ],
