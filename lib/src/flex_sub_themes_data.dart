@@ -35,7 +35,7 @@ class FlexSubThemesData with Diagnosticable {
     this.blendOnColors = true,
     this.blendTextTheme = true,
     this.useTextTheme = true,
-    this.defaultRadius = kDefaultRadius,
+    this.defaultRadius,
     this.buttonMinSize = kButtonMinSize,
     this.buttonPadding = kButtonPadding,
     this.thickBorderWidth = kThickBorderWidth,
