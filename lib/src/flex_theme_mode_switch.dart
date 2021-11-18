@@ -5,9 +5,16 @@ import 'flex_color.dart';
 /// Enum used to define the order, from left to right, of the theme mode
 /// selection buttons on the [FlexThemeModeSwitch].
 enum FlexThemeModeButtonOrder {
+  /// The theme mode buttons are in order: Light, Dark, System.
   lightDarkSystem,
+
+  /// The theme mode buttons are in order: Light, System, Dark.
   lightSystemDark,
+
+  /// The theme mode buttons are in order: Dark, System, Light.
   darkSystemLight,
+
+  /// The theme mode buttons are in order: Dark, Light, System.
   darkLightSystem,
 }
 

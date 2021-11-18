@@ -738,7 +738,7 @@ linter:
     # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     #   PACKAGE:     enabled  : By commenting it out. (My default, I start with this)
     #   APPLICATION: disabled : With false value. (But usually uncomment the false value if it is an app)
-    public_member_api_docs: false
+    # public_member_api_docs: false
 
     # DO use trailing commas for all function calls and declarations unless the function call or
     # definition, from the start of the function name up to the closing parenthesis,
