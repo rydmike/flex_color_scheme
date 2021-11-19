@@ -758,7 +758,7 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 12),
         Text(
           'Material type canvas',
           style: Theme.of(context)
@@ -838,7 +838,7 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
             child: Center(child: Text('Material type card, elevation 4')),
           ),
         ),
-        const SizedBox(height: 32),
+        const SizedBox(height: 24),
         AbsorbPointer(
           child: BottomSheet(
             enableDrag: false,
@@ -868,11 +868,6 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
             ),
           ),
         ),
-
-        // SnackBar(
-        //   content: Text('This is a snack bar'),
-        //   animation: Animation,
-        // ),
       ],
     );
   }
