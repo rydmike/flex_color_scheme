@@ -32,8 +32,8 @@ class ThemeColors extends StatelessWidget {
     // Size of the tappable color named boxes and its border radius,
     // some widgets needs a specific radius, not everything has to be theme
     // driven! :)
-    const double _width = 140;
-    const double _height = 105;
+    const double _width = 125;
+    const double _height = 100;
     const double _radius = 12;
 
     // Theme values...
