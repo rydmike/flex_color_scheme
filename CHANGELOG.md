@@ -4,15 +4,17 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 ## [4.0.1] - November 19, 2021
 
-* **Fix:** The defaultRadius in FlexSubThemesDaa should default to null so all
+* **Fix:** The defaultRadius in FlexSubThemesData should default to null so all
   sub-themes border radius will default to M3 default border radius per widget.
 * Updated and tuned examples. Example 5, "Themes Playground" now 
   includes capability to define custom color schemes starting from built-in ones.
   It can also generate the FlexColorScheme setup code needed for any defined 
   viewed theme setup. You can then copy/paste the setup into your app and use 
   it as the theme for your app.
-* Updated readme, plus typo corrections. 
-* **Tests:** Fixed tests to catch the fixed bug. 
+* **Style:** Added missing themed background color for SnackBarThemeData when 
+  using opt in opinionated sub themes.
+* Major updates to readme doc, plus typo corrections. 
+* **Tests:** Modified tests to catch the fixed defaultRadius bug. 
 
 ## [4.0.0] - November 13, 2021
 

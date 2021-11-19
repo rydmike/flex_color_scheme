@@ -50,6 +50,7 @@ enum FlexInputBorderType {
 /// * [Dialog]
 /// * [TimePickerDialog]
 /// * [SnackBar]
+/// * [Tooltip]
 /// * [BottomSheet]
 /// * [BottomNavigationBar]
 ///
@@ -903,6 +904,7 @@ class FlexSubThemes {
   // TODO(rydmike): Slider, value popups background should get primary blends.
 
   // TODO(rydmike): M3 dialog content padding? Apply when SDK supports it.
+
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kDialogRadius] (28) and [elevation] to
@@ -1018,22 +1020,18 @@ class FlexSubThemes {
 
   // TODO(rydmike): SnackBar needs two corner radius versions, but how?
   //   The pinned one should not have a shape, but the floating one should.
-  //   Doable via themes? Might not be, if it can be then the floating one.
-  //   should follow the globally themed corner radius setting and pinned one
-  //   remain straight. The widget implements different shape for the two
-  //   SnackBar enum version [SnackBarBehavior], but only if the [Shape]
-  //   property is null, in docs:
-  //   If null, [SnackBar] provides different defaults depending on the
-  //   [SnackBarBehavior]. For [SnackBarBehavior.fixed], no overriding shape is
-  //   specified, so the [SnackBar] is rectangular. For
-  //   [SnackBarBehavior.floating], it uses a [RoundedRectangleBorder] with a
-  //   circular corner radius of 4.0.
+  //   Not possible to do via theme, if it could be then the floating one
+  //   should follow the themed corner radius setting and pinned one
+  //   remain straight. The SnackBar implements different shape for the two
+  //   enum based [SnackBarBehavior], but only if [Shape] property is null:
+  //     If null, [SnackBar] provides different defaults depending on the
+  //     [SnackBarBehavior]. For [SnackBarBehavior.fixed], no overriding shape
+  //     is specified, so the [SnackBar] is rectangular. For
+  //     [SnackBarBehavior.floating], it uses a [RoundedRectangleBorder] with a
+  //     circular corner radius of 4.0.
   //   Maybe open an issue about the limitation that corner radius on none
   //   pinned one cannot be changed via theme while keeping straight one
-  //   straight.
-
-  // TODO(rydmike): Check snackbar background color!
-  //   Add to sub-theme and check if can be added to theme showcase.
+  //   straight. However; I think M3 will need it too, so it will come then.
 
   /// An opinionated [SnackBarThemeData] with custom elevation.
   ///
@@ -1041,9 +1039,18 @@ class FlexSubThemes {
   static SnackBarThemeData snackBarTheme({
     /// SnackBar elevation defaults to [kSnackBarElevation] 4.
     final double? elevation = kSnackBarElevation,
+
+    /// Default value for [backgroundColor].
+    ///
+    /// If null, [SnackBar] defaults to dark grey: `Color(0xFF323232)`.
+    ///
+    /// FlexColorScheme set a dark primary tinted color instead when it uses
+    /// this helper.
+    final Color? backgroundColor,
   }) =>
       SnackBarThemeData(
         elevation: elevation,
+        backgroundColor: backgroundColor,
       );
 
   /// An opinionated [BottomSheetThemeData] with custom top corner

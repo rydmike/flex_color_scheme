@@ -3732,8 +3732,6 @@ class FlexColorScheme with Diagnosticable {
     // To be able to make these colors we compute a complete material like
     // color swatch from the provided primary color, using the primary color
     // as the MaterialColor's mid [500] index color.
-    // TODO(rydmike): Find a better or actual Material algorithm for swatch.
-    //   Might come in Material3, but have an idea with alphaBlends too!
     final MaterialColor primarySwatch =
         createPrimarySwatch(colorScheme.primary);
     // We now have a swatch of the primary color provided via a color scheme,
@@ -4182,7 +4180,7 @@ class FlexColorScheme with Diagnosticable {
                 ? BoxDecoration(
                     color: isDark
                         ? FlexColor.darkSurface
-                            .blendAlpha(colorScheme.primary, 0x1E) // 12%
+                            .blendAlpha(colorScheme.primary, 0x28) // 16%
                             .withAlpha(0xF2) // 95%
                         : FlexColor.lightSurface
                             .blendAlpha(colorScheme.primary, 0x0A) // 4%
@@ -4196,7 +4194,7 @@ class FlexColorScheme with Diagnosticable {
                             .blendAlpha(colorScheme.primary, 0x63) // 39%
                             .withAlpha(0xF2) // 95%
                         : FlexColor.darkSurface
-                            .blendAlpha(colorScheme.primary, 0x7F) // 50%
+                            .blendAlpha(colorScheme.primary, 0x72) // 45%
                             .withAlpha(0xF2), // 95%
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     border: Border.all(color: dividerColor),
@@ -4337,7 +4335,14 @@ class FlexColorScheme with Diagnosticable {
       snackBarTheme: useSubThemes
           ? FlexSubThemes.snackBarTheme(
               elevation: subTheme.snackBarElevation,
-            )
+              backgroundColor: isDark
+                  ? colorScheme.onSurface
+                      .blendAlpha(colorScheme.primary, 0x63) // 39%
+                      .withAlpha(0xF2) // 95%
+                  : colorScheme.onSurface
+                      .blendAlpha(colorScheme.primary, 0x72) // 45%
+                      .withAlpha(0xED) // 93%
+              )
           : null,
       bottomSheetTheme: useSubThemes
           ? FlexSubThemes.bottomSheetTheme(
