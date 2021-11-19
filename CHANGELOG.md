@@ -2,10 +2,21 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.0.0] - November 13, 2021
+## [4.0.1] - November 19, 2021
 
-* The new V4 docs are still a bit lacking and will be improved in docs
-  updates later.
+* **Fix:** The defaultRadius in FlexSubThemesDaa should default to null so all
+  sub-themes border radius will default to M3 default border radius per widget.
+* Updated and tuned examples.
+  * Example 5, the "Themes Playground" now includes capability to defines
+    custom themes starting from built-in ones. It can also generate the 
+    FlexColorScheme setup code needed for any defined viewed theme setup.
+    You can then copy/paste the setup into your app and use it as the app theme.
+* Update docs. Decided to eventually migrate the package docs to only have
+  the brief summary embedded with the package and make a separate documentation
+  site, that is easier to red and maintain.
+* Test: Fix tests to catch fixed bug. 
+
+## [4.0.0] - November 13, 2021
 
 * The breaking case is a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.
