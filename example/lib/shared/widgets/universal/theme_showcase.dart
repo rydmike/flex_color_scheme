@@ -743,6 +743,22 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        MaterialBanner(
+          padding: const EdgeInsets.all(20),
+          content: const Text('Hello, I am a Material Banner'),
+          leading: const Icon(Icons.agriculture_outlined),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OPEN'),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: const Text('DISMISS'),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
         Text(
           'Material type canvas',
           style: Theme.of(context)
@@ -852,6 +868,11 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
             ),
           ),
         ),
+
+        // SnackBar(
+        //   content: Text('This is a snack bar'),
+        //   animation: Animation,
+        // ),
       ],
     );
   }

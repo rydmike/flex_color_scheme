@@ -98,22 +98,23 @@ class HeaderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
-    final bool isDark = theme.brightness == Brightness.dark;
 
-    // Dark mode needs stronger blends to be visible.
-    final int blendFactor = isDark ? 3 : 2;
+    // SCaling for the blend value, used to tune the look a bit.
+    const int blendFactor = 3;
 
-    // TODO(rydmike): Make this happen only if same as scaffold background!
-    // Make card slightly more colored than card background is
-    Color cardColor = Color.alphaBlend(
-        scheme.primary.withAlpha(2 * blendFactor), theme.cardColor);
-
-    // Compute a header color with fixed primary blend, make it a stronger tint.
+    // start with no extra blend on card, assume it is bit different from
+    // scaffold background where this Card is designed to be placed.
+    Color cardColor = theme.cardColor;
+    // Compute a header color with fixed primary blend, make a stronger tint
+    // of current blended on card color using same primary as card has, if any.
     Color headerColor =
-        Color.alphaBlend(scheme.primary.withAlpha(7 * blendFactor), cardColor);
-
+        Color.alphaBlend(scheme.primary.withAlpha(5 * blendFactor), cardColor);
     // If card or its header color, is equal to scaffold background, we will
-    // adjust both and make them more primary tinted.
+    // adjust both and make them more primary tinted. This happens e.g. when we
+    // use not blend level, or with the all level blend mode. In this
+    // design we want the Card on the scaffold to always have a slightly
+    // different background color from scaffold background where it is placed,
+    // not necessarily a lot, but always a bit at least.
     if (cardColor == theme.scaffoldBackgroundColor ||
         headerColor == theme.scaffoldBackgroundColor) {
       cardColor = Color.alphaBlend(
@@ -121,7 +122,7 @@ class HeaderCard extends StatelessWidget {
       headerColor = Color.alphaBlend(
           scheme.primary.withAlpha(4 * blendFactor), headerColor);
     }
-    // If it was header color that was equal, the same adjustment on card, may
+    // If it was header color that was equal, the adjustment on card, may
     // have caused card body to become equal to scaffold background, let's
     // check for it and adjust only it once again if it happened. Very unlikely
     // that this happens, but it is possible.
@@ -144,10 +145,10 @@ class HeaderCard extends StatelessWidget {
       );
     }
 
-    // If in rare occasion we had passed a background card color, we just
+    // If in rare occasions, we had passed a background card color, we just
     // use that as color. This is intended to be an exception when we need
     // to present something in the card that must be on a certain color.
-    // Like primary text theme, text must be on primary color.
+    // Like primary text theme, its text must be on primary color.
     if (color != null) cardColor = color!;
 
     return Card(

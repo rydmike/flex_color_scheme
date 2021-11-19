@@ -3544,17 +3544,17 @@ class FlexColorScheme with Diagnosticable {
     // A convenience bool to check if this theme is for light or dark mode
     final bool isDark = brightness == Brightness.dark;
 
-    // Use passed in sub-theme config data, or a default one, if none given.
+    // Use passed in sub-theme config data or a default one if none given.
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
 
     // Check brightness of primary, secondary, error, surface and background
-    // colors, and then calculate appropriate colors for their onColors, if an
+    // colors, and then calculate appropriate colors for their onColors if an
     // "on" color was not passed in. For each onColor that is not null
     // in FlexColorScheme, the FlexSchemeOnColors.from just returns the onColor.
     // This fills in the blanks when using the raw default constructor.
     // The factories .light and .dark do their own complex onColor calculations
-    // that are already defined at this point if FlexColorScheme was created
+    // that are already defined at this point, if FlexColorScheme was created
     // with them.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: primary,
@@ -3607,12 +3607,13 @@ class FlexColorScheme with Diagnosticable {
     // TODO(rydmike): Remove when default in Flutter, still 2014 in Flutter 2.5.
     // Used Typography deviates from the Flutter standard that _still_ uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
-    // as default, if one is not provided.
+    // as default, if one is not provided, we want the Material 2 correct 2018
+    // version to be the default.
     final Typography effectiveTypography =
         typography ?? Typography.material2018(platform: effectivePlatform);
 
     // We need the text themes locally for the theming, so we must form them
-    // fully using the same process that ThemeData() factory uses.
+    // fully using the same process that the ThemeData() factory uses.
     TextTheme defTextTheme =
         isDark ? effectiveTypography.white : effectiveTypography.black;
 
@@ -3627,8 +3628,8 @@ class FlexColorScheme with Diagnosticable {
       // it resets all typography and it uses regular style and weight
       // for all styles in the text theme. Consider defining the text theme
       // explicitly via textTheme and primaryTextTheme with the custom
-      // font applied, if you want to use custom fonts and keep the standard
-      // typography, or supply your own complete typography with your
+      // font applied, at least if you want to use custom fonts and keep the
+      // standard  typography, or supply your own complete typography with your
       // custom text theme.
       defTextTheme = defTextTheme.apply(fontFamily: fontFamily);
       defPrimaryTextTheme = defPrimaryTextTheme.apply(fontFamily: fontFamily);
@@ -3637,10 +3638,10 @@ class FlexColorScheme with Diagnosticable {
     // TODO(rydmike): Use real Material3 and new Flutter APIs when available.
     // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
-    // different, a bit more muted, but only very marginally.
+    // different, a bit less colorful, but only very marginally.
     if (useSubThemes && subTheme.blendTextTheme) {
       // Use the on color for surface or background that gives us better
-      // contrast. Finding the right one by comparing with red value seemed
+      // contrast. Finding the right one by comparing red values seemed
       // to work well enough.
       final Color _onColor = isDark
           ? (colorScheme.onBackground.red < colorScheme.onSurface.red)
@@ -3650,10 +3651,13 @@ class FlexColorScheme with Diagnosticable {
               ? colorScheme.onSurface
               : colorScheme.onBackground;
 
-      // Calculate colors for the different TextStyle, these ar just best
+      // Calculate colors for the different TextStyles, these are just best
       // approximations, color blend strength is a bit inline with opacities on
       // the 2018 typography, but that might not match what is used for color
-      // strength on colored text in Material 3.
+      // strength on colored text in Material 3. I could not find definitions
+      // for that in the Material 3 guide yet. They might also be just flat
+      // one color tone for all sizes. That would be simpler, but event that
+      // color is not know yet.
       final Color _head = isDark
           ? _onColor.blend(colorScheme.primary, 50)
           : _onColor.blend(colorScheme.primary, 50);
@@ -3666,9 +3670,10 @@ class FlexColorScheme with Diagnosticable {
       // Apply the computed colors. Fonts have no opacity when using this
       // type of styling, they are computed with a color matching their
       // background. This does not work so well if you need to put text on
-      // completely different colored container that the background color.
+      // a completely different colored container than the background color.
       // Which is why this feature can be opted out of.
       // M3 has separate colored text for different colored containers.
+      // Can't match that with M2 themes.
       defTextTheme = defTextTheme.copyWith(
         headline1: defTextTheme.headline1!.copyWith(color: _head),
         headline2: defTextTheme.headline2!.copyWith(color: _head),
@@ -3728,7 +3733,7 @@ class FlexColorScheme with Diagnosticable {
     // color swatch from the provided primary color, using the primary color
     // as the MaterialColor's mid [500] index color.
     // TODO(rydmike): Find a better or actual Material algorithm for swatch.
-    // Might come in Material3, but have an idea with alphaBlends too!
+    //   Might come in Material3, but have an idea with alphaBlends too!
     final MaterialColor primarySwatch =
         createPrimarySwatch(colorScheme.primary);
     // We now have a swatch of the primary color provided via a color scheme,
@@ -3744,14 +3749,20 @@ class FlexColorScheme with Diagnosticable {
     // AppBar background color: If a custom color for the AppBar was
     // passed in, we use that. If not, we use the surface color in dark mode and
     // primary color in light mode. Which is the same logic that the
-    // Flutter SDK ThemeData.from factory sets the AppBar background color to.
+    // Flutter SDK ThemeData.from factory sets the AppBar background color to,
+    // but via a convoluted ThemeData.primaryColor modification, causing
+    // primaryColor to be almost black in dark mode, which is weird, but since
+    // it was only used in the AppBar in the past, it kind of works, but now it
+    // still lingers there be almost black and not primary colored, which makes
+    // no sense at all. It will eventually be cleaned away when `primaryColor`
+    // is deprecated though.
     final Color effectiveAppBarColor = appBarBackground ??
         (isDark ? colorScheme.surface : colorScheme.primary);
     final Brightness appBarBrightness =
         ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
     Color appBarForeground =
         appBarBrightness == Brightness.dark ? Colors.white : Colors.black;
-    // Icons are slightly transparent in light mode! Follows SDK design.
+    // Icons are slightly transparent in light mode! This follows SDK standard.
     Color appBarIconColor =
         appBarBrightness == Brightness.dark ? Colors.white : Colors.black87;
     // If we are using subThemes, use blend for foreground color.
@@ -3766,7 +3777,9 @@ class FlexColorScheme with Diagnosticable {
       appBarIconColor = appBarForeground;
     }
     // Selected TabBar color is based on FlexTabBarStyle tabBarStyle.
-    // The `flutterDefault` sets values corresponding to SDK Default behavior.
+    // The `flutterDefault` sets values corresponding to SDK Default behavior,
+    // it can be used, but is not as useful as the `forAppBar` version which
+    // is the default here.
     Color selectedTabColor() {
       switch (tabBarStyle) {
         case FlexTabBarStyle.flutterDefault:
@@ -3832,7 +3845,7 @@ class FlexColorScheme with Diagnosticable {
     }
 
     // This padding on tooltips fixes that default tooltips do not work well if
-    // multi-row tooltips are used, with the default fixed sized behavior.
+    // multi-row tooltips are used with the default fixed sized behavior.
     EdgeInsets tooltipPadding() {
       switch (effectivePlatform) {
         case TargetPlatform.macOS:
@@ -3853,7 +3866,7 @@ class FlexColorScheme with Diagnosticable {
     // Make the effective input decoration theme, by using FCS v4 sub themes
     // if opted in, otherwise use pre-v4 version as before. This decoration
     // theme is also passed into the TimePickerTheme, so we get the same
-    // custom style used there too.
+    // style used there too.
     final InputDecorationTheme effectiveInputDecorationTheme = useSubThemes
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
@@ -3873,8 +3886,11 @@ class FlexColorScheme with Diagnosticable {
         // Default one is also a bit opinionated, this is the default from
         // all previous versions before version 4.0.0.
         : InputDecorationTheme(
+            // TODO(rydmike): Document inputDecoratorIsFilled via not opt-in.
             // Extend filled property to previous always filled ones, defaults
-            // to filled as before, but can now also be unfilled.
+            // to filled as before, but can now also be unfilled even if not
+            // opted in on sub themes, by setting the property for it
+            // FlexSubThemesData.
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: isDark
                 ? colorScheme.primary.withAlpha(0x0F) // 6%

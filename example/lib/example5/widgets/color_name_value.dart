@@ -79,6 +79,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
         children: <Widget>[
           Text(widget.label,
               textAlign: TextAlign.start,
+              overflow: TextOverflow.clip,
               style: TextStyle(
                   color: widget.textColor,
                   fontSize: widget.fontSize,
@@ -90,7 +91,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
               Expanded(
                 child: Text(
                   nameThatColor,
-                  overflow: TextOverflow.fade,
+                  overflow: TextOverflow.clip,
                   textAlign: TextAlign.end,
                   style: TextStyle(
                       color: widget.textColor,
@@ -108,7 +109,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                 Expanded(
                   child: Text(
                     materialName,
-                    overflow: TextOverflow.fade,
+                    overflow: TextOverflow.clip,
                     textAlign: TextAlign.end,
                     maxLines: 1,
                     style: TextStyle(
@@ -139,7 +140,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                   child: Text(
                     '#${widget.color.hexCode}',
                     textAlign: TextAlign.end,
-                    overflow: TextOverflow.fade,
+                    overflow: TextOverflow.clip,
                     maxLines: 1,
                     style: TextStyle(
                         color: widget.textColor,

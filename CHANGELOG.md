@@ -6,15 +6,13 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 * **Fix:** The defaultRadius in FlexSubThemesDaa should default to null so all
   sub-themes border radius will default to M3 default border radius per widget.
-* Updated and tuned examples.
-  * Example 5, the "Themes Playground" now includes capability to defines
-    custom themes starting from built-in ones. It can also generate the 
-    FlexColorScheme setup code needed for any defined viewed theme setup.
-    You can then copy/paste the setup into your app and use it as the app theme.
-* Update docs. Decided to eventually migrate the package docs to only have
-  the brief summary embedded with the package and make a separate documentation
-  site, that is easier to red and maintain.
-* Test: Fix tests to catch fixed bug. 
+* Updated and tuned examples. Example 5, "Themes Playground" now 
+  includes capability to define custom color schemes starting from built-in ones.
+  It can also generate the FlexColorScheme setup code needed for any defined 
+  viewed theme setup. You can then copy/paste the setup into your app and use 
+  it as the theme for your app.
+* Updated readme, plus typo corrections. 
+* **Tests:** Fixed tests to catch the fixed bug. 
 
 ## [4.0.0] - November 13, 2021
 
