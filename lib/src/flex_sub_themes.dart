@@ -899,9 +899,10 @@ class FlexSubThemes {
         ),
       );
 
-  // TODO(rydmike): Slider, value popups background should get primary blends.
+  // TODO(rydmike): Consider for Slider value popup background primary blend.
+  //  The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp
 
-  // TODO(rydmike): M3 dialog content padding? Apply when SDK supports it.
+  // TODO(rydmike): M3 dialog content no padding. Apply when SDK supports it.
 
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///
@@ -952,8 +953,8 @@ class FlexSubThemes {
     /// Pass the value the `theme.dialogColor` that is set to your `ThemeData`
     /// and used by other dialogs.
     ///
-    /// If null, this dialog defaults to using to surface color and it may
-    /// not match dialogColor used by other dialogs.
+    /// If null, this dialog defaults to using surface color and it may
+    /// not match dialogColor used by other dialogs unless kept in sync.
     ///
     /// FlexColorScheme sub-theming uses this property to match the background
     /// color to other dialogs.
@@ -1016,11 +1017,11 @@ class FlexSubThemes {
             ),
       );
 
-  // TODO(rydmike): SnackBar needs two corner radius versions, but how?
+  // TODO(rydmike): SnackBar needs two corner radius versions.
   //   The pinned one should not have a shape, but the floating one should.
-  //   Not possible to do via theme, if it could be then the floating one
+  //   Not possible to do via its theme, if it could be then the floating one
   //   should follow the themed corner radius setting and pinned one
-  //   remain straight. The SnackBar implements different shape for the two
+  //   remain straight. The SnackBar implements different shape for its
   //   enum based [SnackBarBehavior], but only if [Shape] property is null:
   //     If null, [SnackBar] provides different defaults depending on the
   //     [SnackBarBehavior]. For [SnackBarBehavior.fixed], no overriding shape
@@ -1029,7 +1030,7 @@ class FlexSubThemes {
   //     circular corner radius of 4.0.
   //   Maybe open an issue about the limitation that corner radius on none
   //   pinned one cannot be changed via theme while keeping straight one
-  //   straight. However; I think M3 will need it too, so it will come then.
+  //   straight. However, I think M3 will need it too, so it will come then.
 
   /// An opinionated [SnackBarThemeData] with custom elevation.
   ///
@@ -1090,11 +1091,11 @@ class FlexSubThemes {
   ///
   /// Its `elevation` defaults to [kBottomNavigationBarElevation] (0).
   ///
-  /// The bottom navigation bar uses opinionated colors choices for the passed
-  /// in [ColorScheme] in [colorScheme], to style the bottom navigation bar.
+  /// The bottom navigation bar uses opinionated colors choices from the passed
+  /// [colorScheme] to style the bottom navigation bar.
   ///
   /// Background [opacity] can be set. Unselected items' color, that is
-  /// background based can receive a variable blend of primary color using
+  /// background based, can receive a variable blend of primary color using
   /// the [unselectedAlphaBlend] property.
   static BottomNavigationBarThemeData bottomNavigationBar({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].

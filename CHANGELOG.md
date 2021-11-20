@@ -2,19 +2,51 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.0.1] - November 19, 2021
+## [4.1.0] - November 20, 2021
 
-* **Fix:** The defaultRadius in FlexSubThemesData should default to null so all
-  sub-themes border radius will default to M3 default border radius per widget.
-* Updated and tuned examples. Example 5, "Themes Playground" now 
-  includes capability to define custom color schemes starting from built-in ones.
+* **Fix:** The `defaultRadius` in `FlexSubThemesData` now defaults to null 
+  so all sub-themes border radius will default to M3 default border 
+  radius per widget. The const default value it had was a remnant from early 
+  dev phase when widgets all defaulted to single shared radius and not M3 
+  defaults per widget type. If you explicitly passed in null, you did also in
+  previous version get the M3 defaults. Older tests did that, now they expect
+  same result when no value is assigned, as it should have been.
+
+
+* **Examples:** Updated and tuned the examples. Example 5 "Themes Playground" 
+  now includes capability to define custom color schemes starting from built-in ones.
   It can also generate the FlexColorScheme setup code needed for any defined 
-  viewed theme setup. You can copy/paste the setup into your app and use 
-  it as the theme for your app.
-* **Style:** Added missing themed background color for SnackBarThemeData when 
-  using opt in opinionated sub themes.
-* Major updates to readme doc, plus typo corrections. 
-* **Tests:** Modified tests to catch the fixed defaultRadius bug. 
+  viewed theme setup. You can copy/paste a theme's Flutter Dart code,
+  from the Themes Playground to your app and use it as its theme. This is a very
+  quick and convenient way to try a theme you made and see in the Themes 
+  Playground in your own app.
+
+
+* **Opt in opinionated sub themes minor style changes:**  
+   * Added missing themed background color for `SnackBarThemeData` when 
+     using opt in opinionated sub themes.
+   * Tuned the colored text theme on the sub themes that is applied when 
+     using the optional colored text themes. The text styles now better match
+     the regular none colored style, 
+     and they are a bit more subtle. Text style `caption` got a bit 
+     of opacity. M2 designed widgets like `ListTile`, depend on it for 
+     making more muted subtitles by default for `ListTile` via the heading level 
+     opacity on `caption` text style. The opacity on it is lower though, to 
+     retain a bit more contrast on blended surfaces, while still adhering to
+     the style intent.
+     >Minor details on the opinionated sub themes may still be tuned and 
+     changed slightly as a part of improving them and their appeal. For the 
+     text theme coloring future version may expose parameter(s) that can be 
+     used to adjust the color tint effect on text theme when colored 
+     text theme is enabled.
+      
+   
+* Major updates to readme doc, and typo corrections. 
+
+ 
+* **Tests:**
+  * Modified tests to catch the fixed `defaultRadius` issue.
+  * Added more tests, now total 1069 tests.
 
 ## [4.0.0] - November 13, 2021
 
@@ -168,7 +200,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
     * Example 5 uses the SharedPreferences implementation
 
 * **Tests:** 
-  * Added tests for the new features, total 1066 tests, 
+  * Added tests for the new features, total 1066 tests. 
   * Coverage 99%, will improve them more later.
    
 ## [4.0.0-dev.1] - November 13, 2021

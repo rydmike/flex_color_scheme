@@ -1,6 +1,6 @@
 name: flex_color_scheme
 description: A Flutter package to make and use beautiful color scheme based MaterialApp themes.
-version: 4.0.1
+version: 4.1.0
 homepage: https://github.com/rydmike/flex_color_scheme
 
 environment:

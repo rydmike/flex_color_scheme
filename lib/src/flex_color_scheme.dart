@@ -3658,15 +3658,15 @@ class FlexColorScheme with Diagnosticable {
       // one color tone for all sizes. That would be simpler, but event that
       // color is not know yet.
       final Color _head = isDark
-          ? _onColor.blend(colorScheme.primary, 50)
+          ? _onColor.blend(colorScheme.primary, 40)
           : _onColor.blend(colorScheme.primary, 50);
       final Color _medium = isDark
-          ? _onColor.blend(colorScheme.primary, 25)
+          ? _onColor.blend(colorScheme.primary, 22)
           : _onColor.blend(colorScheme.primary, 40);
       final Color _small = isDark
-          ? _onColor.blend(colorScheme.primary, 25)
+          ? _onColor.blend(colorScheme.primary, 20)
           : _onColor.blend(colorScheme.primary, 30);
-      // Apply the computed colors. Fonts have no opacity when using this
+      // Apply the computed colors. Most fonts have no opacity when using this
       // type of styling, they are computed with a color matching their
       // background. This does not work so well if you need to put text on
       // a completely different colored container than the background color.
@@ -3680,12 +3680,19 @@ class FlexColorScheme with Diagnosticable {
         headline4: defTextTheme.headline4!.copyWith(color: _head),
         headline5: defTextTheme.headline5!.copyWith(color: _medium),
         headline6: defTextTheme.headline6!.copyWith(color: _medium),
-        bodyText1: defTextTheme.bodyText1!.copyWith(color: _medium),
-        bodyText2: defTextTheme.bodyText2!.copyWith(color: _medium),
         subtitle1: defTextTheme.subtitle1!.copyWith(color: _medium),
         subtitle2: defTextTheme.subtitle2!.copyWith(color: _small),
-        caption: defTextTheme.caption!.copyWith(color: _head),
+        bodyText1: defTextTheme.bodyText1!.copyWith(color: _medium),
+        bodyText2: defTextTheme.bodyText2!.copyWith(color: _medium),
         button: defTextTheme.button!.copyWith(color: _medium),
+        // Caption in English2018 has heading level opacity in Material2.
+        // I noticed it still needs some, eg ListTile uses the color from
+        // caption, with its opacity, to make the subtitles more muted, this
+        // is an important design effect that we get automatically if we give
+        // it some opacity, just not going to give it as much since we also
+        // have colors and it is imo a bit too low contrast in M2.
+        caption: defTextTheme.caption!
+            .copyWith(color: _medium.withAlpha(isDark ? 0xCC : 0xBF)), //80,75%
         overline: defTextTheme.overline!.copyWith(color: _small),
       );
       // Equivalent color blend calculations for primary text theme.
@@ -3696,8 +3703,8 @@ class FlexColorScheme with Diagnosticable {
           ? colorScheme.onPrimary.blend(colorScheme.primary, 8)
           : colorScheme.onPrimary.blend(colorScheme.primary, 5);
       final Color _smallP = primaryIsDark
-          ? colorScheme.onPrimary.blend(colorScheme.primary, 8)
-          : colorScheme.onPrimary.blend(colorScheme.primary, 5);
+          ? colorScheme.onPrimary.blend(colorScheme.primary, 7)
+          : colorScheme.onPrimary.blend(colorScheme.primary, 4);
       defPrimaryTextTheme = defPrimaryTextTheme.copyWith(
         headline1: defPrimaryTextTheme.headline1!.copyWith(color: _headP),
         headline2: defPrimaryTextTheme.headline2!.copyWith(color: _headP),
@@ -3705,12 +3712,13 @@ class FlexColorScheme with Diagnosticable {
         headline4: defPrimaryTextTheme.headline4!.copyWith(color: _headP),
         headline5: defPrimaryTextTheme.headline5!.copyWith(color: _mediumP),
         headline6: defPrimaryTextTheme.headline6!.copyWith(color: _mediumP),
-        bodyText1: defPrimaryTextTheme.bodyText1!.copyWith(color: _mediumP),
-        bodyText2: defPrimaryTextTheme.bodyText2!.copyWith(color: _mediumP),
         subtitle1: defPrimaryTextTheme.subtitle1!.copyWith(color: _mediumP),
         subtitle2: defPrimaryTextTheme.subtitle2!.copyWith(color: _smallP),
-        caption: defPrimaryTextTheme.caption!.copyWith(color: _headP),
+        bodyText1: defPrimaryTextTheme.bodyText1!.copyWith(color: _mediumP),
+        bodyText2: defPrimaryTextTheme.bodyText2!.copyWith(color: _mediumP),
         button: defPrimaryTextTheme.button!.copyWith(color: _mediumP),
+        caption: defPrimaryTextTheme.caption!.copyWith(
+            color: _mediumP.withAlpha(primaryIsDark ? 0xD8 : 0xCC)), //85,70%)
         overline: defPrimaryTextTheme.overline!.copyWith(color: _smallP),
       );
     }

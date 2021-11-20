@@ -12,7 +12,9 @@ import 'flex_scheme.dart';
 /// There is also const values for each color value and [FlexSchemeData] of
 /// of each scheme.
 class FlexColor {
+  // coverage:ignore-start
   FlexColor._(); // coverage:ignore-line
+  // coverage:ignore-end
 
   /// Material standard color for light surface.
   static const Color materialLightSurface = Colors.white;

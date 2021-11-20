@@ -1,6 +1,6 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 4.0.1
+version: 4.1.0
 publish_to: 'none'
 environment:
   sdk: '>=2.14.0 <3.0.0'
@@ -57,7 +57,7 @@ dependencies:
   # Store value pair shared preference data, by Google flutter.dev.
   # Needed some better platform icons for example 5 app.
   # https://materialdesignicons.com/
-  shared_preferences: ^2.0.8
+  shared_preferences: ^2.0.9
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev

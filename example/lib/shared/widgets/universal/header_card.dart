@@ -99,8 +99,9 @@ class HeaderCard extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
 
-    // SCaling for the blend value, used to tune the look a bit.
-    const int blendFactor = 3;
+    final bool isDark = theme.brightness == Brightness.dark;
+    // Scaling for the blend value, used to tune the look a bit.
+    final int blendFactor = isDark ? 3 : 2;
 
     // start with no extra blend on card, assume it is bit different from
     // scaffold background where this Card is designed to be placed.

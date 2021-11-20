@@ -1116,11 +1116,64 @@ void main() {
     });
 
     //**************************************************************************
+    // FlexColorScheme.light & dark factory tests. With
+    // highBackgroundLowScaffold to hit background red color less than surface.
+    // Coverage hit test.
+    // TODO(rydmike): Improve the tests.
+    //**************************************************************************
+
+    final ThemeData tLightHB = FlexColorScheme.light(
+      scheme: FlexScheme.red,
+      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
+      blendLevel: 30,
+      appBarStyle: FlexAppBarStyle.background,
+      appBarElevation: 2,
+      tabBarStyle: FlexTabBarStyle.universal,
+      tooltipsMatchBackground: false,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
+      useSubThemes: true,
+      subThemesData: const FlexSubThemesData(defaultRadius: 8),
+    ).toTheme;
+
+    final ThemeData tDarkHb = FlexColorScheme.dark(
+      scheme: FlexScheme.red,
+      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
+      blendLevel: 30,
+      appBarStyle: FlexAppBarStyle.background,
+      appBarElevation: 2,
+      tabBarStyle: FlexTabBarStyle.universal,
+      tooltipsMatchBackground: false,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
+      useSubThemes: true,
+      subThemesData: const FlexSubThemesData(defaultRadius: 8),
+    ).toTheme;
+
+    test(
+        'FCS7.82-1L: GIVEN a FlexColorScheme.light with more options '
+        'EXPECT none null result.', () {
+      expect(tLightHB, isNotNull);
+    });
+
+    final RoundedRectangleBorder shape =
+        tLightHB.popupMenuTheme.shape! as RoundedRectangleBorder;
+
+    test('FCS7.82-1L shape: Expect border radius 8', () {
+      expect(shape.borderRadius, BorderRadius.circular(8.0));
+    });
+    test(
+        'FCS7.82-1D: GIVEN a FlexColorScheme.dark with more options '
+        'EXPECT none null result.', () {
+      expect(tDarkHb, isNotNull);
+    });
+
+    //**************************************************************************
     // FlexColorScheme.light & dark factory tests. With CUSTOM surface branding.
     //
     // Test result with custom features like surface, appbar, tab bar options.
     // Just verify not failing (coverage), should check result as well later.
-    // TODO(rydmike): Improve these tests to verify the results too.
+    // TODO(rydmike): Improve the tests.
     //**************************************************************************
 
     final ThemeData tLightC = FlexColorScheme.light(
