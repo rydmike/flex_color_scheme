@@ -21,9 +21,9 @@
 name: Deploy Web
 on:
   push:
-    branches: [ master ]
-    # paths-ignore:
-    #  - "**.md"
+    branches: [ none ]
+    paths-ignore:
+      - "**.md"
   pull_request:
     branches: [ none ]
     paths-ignore:
@@ -64,36 +64,28 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: coverage/lcov.info
-      #- name: "Install rpl (Eliminated need with: --base-href "/flexcolorschemeV4Tut1/")"
-      #  run: sudo apt-get install rpl
 
       # Example 1 Build and deploy
-      #- name: "EXAMPLE-1 START BUILD - Flutter clean before build"
-      #  run: flutter clean && cd example && flutter clean
-      #- name: "EXAMPLE-1 WEB release build"
-      #  run: cd example && flutter build web --base-href "/flexcolorschemeV4Tut1/" --release -t lib/example1/main.dart
-        # run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example1/main.dart
-      #- name: "EXAMPLE-1 FIX href URL reference before publish"
-      #  run: rpl '<base href="/">' '<base href="/flexcolorscheme1/">' example/build/web/index.html
-      #- name: "EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit."
-      #  uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-      #  env:
-      #    API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      #  with:
-      #    source_file: 'example/build/web/.'
-      #    destination_folder: 'flexcolorschemeV4Tut1'
-      #    destination_repo: 'rydmike/rydmike.github.io'
-      #    user_email: 'm.rydstrom@gmail.com'
-      #    user_name: 'rydmike'
+      - name: "EXAMPLE-1 START BUILD - Flutter clean before build"
+        run: flutter clean && cd example && flutter clean
+      - name: "EXAMPLE-1 WEB release build"
+        run: cd example && flutter build web --base-href "/flexcolorschemeV4Tut1/" --release -t lib/example1/main.dart
+      - name: "EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit."
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'example/build/web/.'
+          destination_folder: 'flexcolorschemeV4Tut1'
+          destination_repo: 'rydmike/rydmike.github.io'
+          user_email: 'm.rydstrom@gmail.com'
+          user_name: 'rydmike'
 
       # Example 2 Build and deploy
       - name: "EXAMPLE-2 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-2 WEB release build"
         run: cd example && flutter build web --base-href "/flexcolorschemeV4Tut2/" --release -t lib/example2/main.dart
-        # run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example2/main.dart
-      #- name: "EXAMPLE-2 FIX href URL reference before publish"
-      #  run: rpl '<base href="/">' '<base href="/flexcolorscheme2/">' example/build/web/index.html
       - name: "EXAMPLE-2 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
@@ -110,9 +102,6 @@ jobs:
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-3 WEB release build"
         run: cd example && flutter build web --base-href "/flexcolorschemeV4Tut3/" --release -t lib/example3/main.dart
-        # run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example3/main.dart
-      #- name: "EXAMPLE-3 FIX href URL reference before publish"
-      #  run: rpl '<base href="/">' '<base href="/flexcolorscheme3/">' example/build/web/index.html
       - name: "EXAMPLE-3 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
@@ -129,9 +118,6 @@ jobs:
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-4 WEB release build"
         run: cd example && flutter build web --base-href "/flexcolorschemeV4Tut4/" --release -t lib/example4/main.dart
-        # run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example4/main.dart
-      # - name: "EXAMPLE-4 FIX href URL reference before publish"
-      #  run: rpl '<base href="/">' '<base href="/flexcolorscheme4/">' example/build/web/index.html
       - name: "EXAMPLE-4 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
@@ -148,9 +134,6 @@ jobs:
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-5 WEB release build"
         run: cd example && flutter build web --base-href "/flexcolorschemeV4Tut5/" --release -t lib/example5/main.dart
-        # run: cd example && flutter build web --web-renderer canvaskit --release -t lib/example5/main.dart
-      #- name: "EXAMPLE-5 FIX href URL reference before publish"
-      #  run: rpl '<base href="/">' '<base href="/flexcolorscheme5/">' example/build/web/index.html
       - name: "EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
