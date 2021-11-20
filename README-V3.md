@@ -367,7 +367,7 @@ certainly works on a phone sized canvas too. This example is explained in more d
 
 A fancier example of **FlexColorScheme** usage can be seen in the [**Flexfold demo app**](https://rydmike.com/demoflexfold).
 
-<img src="https://rydmike.com/assets_fcsv4/FoldTheme1.gif?raw=true" alt="FlexColorScheme" width="650"/>
+<img src="https://rydmike.com/assets/FoldTheme1.gif?raw=true" alt="FlexFold Demo" width="800"/>
 
 It might look and feel complicated, but it is actually only slightly more involved than above example nr 5, that
 has almost all the same theming features as the Flexfold demo app.

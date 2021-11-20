@@ -143,18 +143,18 @@ extension FlexThemeData on ThemeData {
     /// In light theme mode:
     ///
     /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    2% : blendLevel = Between 3 & 4
+    /// * [FlexSurface.light]    2% : blendLevel = 3...4
     /// * [FlexSurface.medium]   4% : blendLevel = 7
     /// * [FlexSurface.strong]   6% : blendLevel = 10
-    /// * [FlexSurface.heavy]    8% : blendLevel = Between 13 & 14
+    /// * [FlexSurface.heavy]    8% : blendLevel = 13...14
     ///
     /// In dark theme mode:
     ///
     /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    5% : blendLevel = 4
-    /// * [FlexSurface.medium]   8% : blendLevel = Between 7 & 8
-    /// * [FlexSurface.strong]  11% : blendLevel = 9
-    /// * [FlexSurface.heavy]   14% : blendLevel = Between 11 & 12
+    /// * [FlexSurface.light]    5% : blendLevel = 8
+    /// * [FlexSurface.medium]   8% : blendLevel = 13...14
+    /// * [FlexSurface.strong]  11% : blendLevel = 19
+    /// * [FlexSurface.heavy]   14% : blendLevel = 23
     ///
     /// Since there it is not the same relationship between background and
     /// surface, when using the older [FlexSurface] based style, that uses
@@ -861,18 +861,18 @@ extension FlexThemeData on ThemeData {
     /// In light theme mode:
     ///
     /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    2% : blendLevel = Between 3 & 4
+    /// * [FlexSurface.light]    2% : blendLevel = 3...4
     /// * [FlexSurface.medium]   4% : blendLevel = 7
     /// * [FlexSurface.strong]   6% : blendLevel = 10
-    /// * [FlexSurface.heavy]    8% : blendLevel = Between 13 & 14
+    /// * [FlexSurface.heavy]    8% : blendLevel = 13...14
     ///
     /// In dark theme mode:
     ///
     /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    5% : blendLevel = 4
-    /// * [FlexSurface.medium]   8% : blendLevel = Between 7 & 8
-    /// * [FlexSurface.strong]  11% : blendLevel = 9
-    /// * [FlexSurface.heavy]   14% : blendLevel = Between 11 & 12
+    /// * [FlexSurface.light]    5% : blendLevel = 8
+    /// * [FlexSurface.medium]   8% : blendLevel = 13...14
+    /// * [FlexSurface.strong]  11% : blendLevel = 19
+    /// * [FlexSurface.heavy]   14% : blendLevel = 23
     ///
     /// Since there it is not the same relationship between background and
     /// surface, when using the older [FlexSurface] based style, that uses

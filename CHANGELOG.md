@@ -9,7 +9,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 * Updated and tuned examples. Example 5, "Themes Playground" now 
   includes capability to define custom color schemes starting from built-in ones.
   It can also generate the FlexColorScheme setup code needed for any defined 
-  viewed theme setup. You can then copy/paste the setup into your app and use 
+  viewed theme setup. You can copy/paste the setup into your app and use 
   it as the theme for your app.
 * **Style:** Added missing themed background color for SnackBarThemeData when 
   using opt in opinionated sub themes.

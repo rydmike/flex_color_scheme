@@ -899,8 +899,6 @@ class FlexSubThemes {
         ),
       );
 
-  // TODO(rydmike): DropdownButton, does it need something?
-
   // TODO(rydmike): Slider, value popups background should get primary blends.
 
   // TODO(rydmike): M3 dialog content padding? Apply when SDK supports it.

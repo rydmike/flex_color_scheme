@@ -491,23 +491,23 @@ _Example 5) The Themes Playground (click image to open hires version)_
 Another classic example of **FlexColorScheme** usage can be seen in the Flutter
 web [**Flexfold demo app**](https://rydmike.com/demoflexfold).
 
-<img src="https://rydmike.com/assets/FoldTheme1.gif?raw=true" alt="FlexColorScheme"/>
+<img src="https://rydmike.com/assets/FoldTheme1.gif?raw=true" alt="Flexfold demo"/>
 
 _Flexfold Demo uses FlexColorScheme for its themes._
 
 The live version of the Flexfold demo is still using FlexColorScheme version 3.
-So example 5 above, the **Themes Playground** actually has even more theming
-features than the Flexfold demo does.
+Example 5, the **Themes Playground** now has even more theming features
+than the Flexfold demo does.
 
 # Flutter Theming Introduction
 
-When you make themed Flutter applications you base the colors of your 
+When you make themed Flutter applications you should base the colors of your 
 application on a light theme mode suitable `ColorScheme`, and a dark theme mode 
 `ColorScheme`. Then create your light and dark `ThemeData` using these color 
 schemes, by assigning the `ColorScheme` for each mode to the `colorScheme` 
 property in `ThemeData`. In your `MaterialApp` you then assign the `ThemeData` 
-for your light, and dark theme respectively to the `theme` 
-and `darkTheme` properties in the `MaterialApp`. 
+for your light, and dark theme to the `theme` and `darkTheme` properties 
+in the `MaterialApp`. 
 
 This gives you an application that uses the defined color schemes on all the 
 Flutter SDK built-in Material UI widgets. Well, on most of them anyway. 
