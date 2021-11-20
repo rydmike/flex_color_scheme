@@ -192,7 +192,7 @@ FlexColorScheme. The playground persists all its settings, and you can
 reset them back to their default values.
 
 The **Themes Playground** can be used as a [web app 
-here](https://rydmike.com/flexcolorschemeV4Tut5/#/). Its source code
+here](https://rydmike.com/flexcolorschemeV4Tut5). Its source code
 is also available in the example sub folder in folder 
 [/example5](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example5).
 
@@ -634,13 +634,14 @@ a more balanced or more impactful result, depending on your design goal.
 
 The above images were made with the **Themes Playground** (example 5) app 
 running as a phone app, instead of using the 
-[web demo](https://rydmike.com/flexcolorschemeV4Tut5/#/).
-The application is opn source is included as the last example in the 
+[web demo](https://rydmike.com/flexcolorschemeV4Tut5).
+The application is open source, and is included as the last example in the 
 pub.dev bundled examples and on 
 [GitHub here](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example5).
 The **Themes Playground** is an interesting and useful tool when you want to 
-find fitting themes, blend modes and levels to use for your application's 
-FlexColorScheme based theme.
+find fitting themes, blend modes and levels to use as your application's 
+FlexColorScheme based theme. It even allows you to copy/paste the code needed
+to make the Flutter theme you are looking at.
 
 # Frequently Asked Questions
 
@@ -666,7 +667,7 @@ instead. Using different ways to create custom color schemes is presented in
 detail in the tutorial examples 2, 3 and 4.
 
 And you can also use the live version of example 5, the 
-[Themes Playground](https://rydmike.com/flexcolorschemeV4Tut5/#/) to copy 
+[Themes Playground](https://rydmike.com/flexcolorschemeV4Tut5) to copy 
 existing color schemes and modify them 
 interactively and copy the code for a theme, either custom one or all
 the setups you made for a built-in one.
@@ -1709,9 +1710,9 @@ to make custom theme setups with totally custom colors, and get the colors and
 theme you see, in use in your app with just a few clicks and a bit of 
 code copy/paste action.
 
-With the latest version of example 5 published as the 
-[Themes Playground]((https://rydmike.com/flexcolorschemeV4Tut5).), you have these 
-new feature and tools available:
+In the updated version of example 5, published as the 
+[Themes Playground](https://rydmike.com/flexcolorschemeV4Tut5), these 
+new features and tools are available:
 
 **Custom color scheme**   
 Copy an existing color scheme's colors to a custom scheme, that can then 

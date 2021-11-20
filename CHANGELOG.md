@@ -2,6 +2,10 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
+## [4.1.1] - November 20, 2021
+
+* **Documentation:** Fixed a broken link in the readme that pub.dev analyser found.
+
 ## [4.1.0] - November 20, 2021
 
 * **Fix:** The `defaultRadius` in `FlexSubThemesData` now defaults to null 
