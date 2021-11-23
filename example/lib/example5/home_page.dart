@@ -330,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                         'Widgets, but also TextTheme and its coloring. '
                         'This demo does not adjust any widget properties, the '
                         'theme is adjusted interactively and the Flutter '
-                        ' widgets change as the theme is modified '
+                        'widgets change as the theme is modified '
                         'via the controls.\n'
                         '\n'
                         'The theming impact on widgets is shown in expandable '

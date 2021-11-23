@@ -10,6 +10,7 @@
 .svn/
 **.fvm/
 .fvm
+.fvm/
 example/.fvm
 coverage/lcov.info
 
