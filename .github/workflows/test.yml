@@ -17,7 +17,7 @@ on:
   pull_request:
   push:
     branches:
-      - master
+      - none
     paths-ignore:
       - "**.md"
 jobs:

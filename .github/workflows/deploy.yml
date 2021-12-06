@@ -29,7 +29,7 @@ on:
     paths-ignore:
       - "**.md"
   release:
-    types: [published]
+    types: [none]
     paths-ignore:
       - "**.md"
 #   types: [published, created, edited, prereleased]
