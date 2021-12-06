@@ -404,9 +404,9 @@ class _HomePageState extends State<HomePage> {
               ),
               _AppBarSettings(
                 controller: widget.controller,
-                isOpen: isCardOpen[7],
+                isOpen: isCardOpen[8],
                 onTap: () {
-                  toggleCard(7);
+                  toggleCard(8);
                 },
               ),
               _TabBar(
