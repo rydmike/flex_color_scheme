@@ -2,22 +2,26 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.2.0] - December nn, 2021
+## [4.2.0] - December nn, 2021 (WORK IN PROGRESS)
 
 Planned new features when opting in on sub themes:
-* Add ColorScheme selection to TextField
-* Add ColorScheme selection to TabBar
-* Will restriction selections to primary and secondary color in ColorScheme
-  because the variant colors are being deprecated. Will add support for new
-  colors in ColorScheme when they land in stable, 
-  see [#93427](https://github.com/flutter/flutter/pull/93427)
+* Add ColorScheme selection to TextField.
+* Add ColorScheme selection to TabBar.
+* Will restrict selections to primary and secondary color in ColorScheme
+  because the variant colors are being deprecated, 
+  see [#93427](https://github.com/flutter/flutter/pull/93427). 
+  Later add support for new
+  colors in ColorScheme when they land in stable channel.
 
 * Themes Playground Improvements:
-  * Fix onColor for primaryColor in ThemeData, when it differs from colorScheme.primary.
-  * Fix index on _AppBarSettings card
-  * Add button to copy theme, to make the function more obvious
-  * New version of StaggeredGridview and remove used bug work around(s)
-  * Add the new feature in version 4.2.0
+  * (DONE) Fix onColor for some colors in ThemeData color presentation for cases
+    when it might differ from colorScheme onColors. This could happen when 
+    disabling FlexColorScheme and the onColor do not match its onColors.
+  * (DONE) Fix index on _AppBarSettings card.
+  * (DONE) Add button to copy theme, and improve the explanations to make the 
+    functionality more obvious and accessible.
+  * New version of StaggeredGridview and remove used bug work around(s).
+  * Add the new feature in version 4.2.0.
 
 ## [4.1.1] - November 20, 2021
 
