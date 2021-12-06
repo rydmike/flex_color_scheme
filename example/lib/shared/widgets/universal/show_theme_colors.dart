@@ -193,12 +193,12 @@ class ShowThemeColors extends StatelessWidget {
               ThemeCard(
                 label: 'Primary\nColor',
                 color: theme.primaryColor,
-                textColor: colorScheme.onPrimary,
+                textColor: _onColor(theme.primaryColor),
               ),
               ThemeCard(
                 label: 'Primary\nDark',
                 color: theme.primaryColorDark,
-                textColor: colorScheme.onPrimary,
+                textColor: _onColor(theme.primaryColorDark),
               ),
               ThemeCard(
                 label: 'Primary\nLight',
@@ -213,7 +213,7 @@ class ShowThemeColors extends StatelessWidget {
               ThemeCard(
                 label: 'Toggleable\nActive',
                 color: theme.toggleableActiveColor,
-                textColor: colorScheme.onSecondary,
+                textColor: _onColor(theme.toggleableActiveColor),
               ),
               ThemeCard(
                 label: 'Bottom\nAppBar',
