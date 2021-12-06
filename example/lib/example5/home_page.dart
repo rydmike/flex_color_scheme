@@ -645,6 +645,23 @@ class _ColorScheme extends StatelessWidget {
     );
   }
 
+  Future<void> _handleCopySchemeTap(BuildContext context) async {
+    final bool? copy = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const _CopySchemeToCustomDialog();
+      },
+    );
+    if (copy ?? false) {
+      // Copy scheme to custom scheme, by setting custom scheme
+      // to scheme of current scheme index.
+      await controller.setCustomScheme(AppColor.scheme(controller));
+      // After copy, set theme to the custom theme so
+      // user can edit it
+      await controller.setSchemeIndex(AppColor.schemesCustom.length - 1);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
@@ -657,47 +674,46 @@ class _ColorScheme extends StatelessWidget {
           const SizedBox(height: 8),
           if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
             ListTile(
-              title: const Text('Copy current scheme to custom colors?'),
-              subtitle: const Text('Set custom colors to this scheme '
-                  'and change it. Tap color code to copy it'),
+              title: const Text('Copy this scheme to custom colors?'),
+              subtitle: const Text('Sets custom colors to these scheme. '
+                  'You can then modify these colors'),
+              trailing: ElevatedButton(
+                onPressed: () async {
+                  await _handleCopySchemeTap(context);
+                },
+                child: const Text('Copy'),
+              ),
               onTap: () async {
-                final bool? copy = await showDialog<bool?>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const _CopySchemeToCustomDialog();
-                  },
-                );
-                if (copy ?? false) {
-                  // Copy scheme to custom scheme, by setting custom scheme
-                  // to scheme of current scheme index.
-                  await controller.setCustomScheme(AppColor.scheme(controller));
-                  // After copy, set theme to the custom theme so
-                  // user can edit it
-                  await controller
-                      .setSchemeIndex(AppColor.schemesCustom.length - 1);
-                }
+                await _handleCopySchemeTap(context);
               },
             )
           else
             const ListTile(
               title: Text('Custom color scheme'),
-              subtitle: Text('Tap color to change it. Tap code to copy value'),
+              subtitle: Text('Tap the color to change it'),
             ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
             child: ThemeColors(controller: controller),
           ),
-          ListTile(
-            title: const Text('Get the code for this theme'),
-            trailing: ElevatedButton(
-              onPressed: () {
+          const ListTile(
+            title: Text('Tap color code to copy it to the clipboard'),
+          ),
+          AnimatedSwitchHide(
+            showChild: controller.useFlexColorScheme,
+            child: ListTile(
+              title: const Text('Get the FlexColorScheme setup code for '
+                  'this theme'),
+              trailing: ElevatedButton(
+                onPressed: () {
+                  _handleCodeTap(context);
+                },
+                child: const Text('Code'),
+              ),
+              onTap: () {
                 _handleCodeTap(context);
               },
-              child: const Text('Code'),
             ),
-            onTap: () {
-              _handleCodeTap(context);
-            },
           ),
         ],
       ),

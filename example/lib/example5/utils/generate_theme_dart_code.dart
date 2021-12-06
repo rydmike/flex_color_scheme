@@ -94,7 +94,7 @@ String generateThemeDartCode(ThemeController controller) {
       '  lightIsWhite: ${controller.lightIsWhite},\n'
       '  useSubThemes: ${controller.useSubThemes},\n'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
-      '  // To use this font, add GoogleFonts package and uncomment:\n'
+      '  // To use playground font, add GoogleFonts package and uncomment:\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '$lightSubThemeCode'
       '),\n'
@@ -112,12 +112,12 @@ String generateThemeDartCode(ThemeController controller) {
       '  darkIsTrueBlack: ${controller.darkIsTrueBlack},\n'
       '  useSubThemes: ${controller.useSubThemes},\n'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
-      '  // To use this font, add GoogleFonts package and uncomment:\n'
+      '  // To use playground font, add GoogleFonts package and uncomment:\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '$darkSubThemeCode'
       '),\n'
-      '// Set themeMode to system. If you have another theme mode\n'
-      '// control, then delete this line.\n'
-      'themeMode: ThemeMode.system,\n';
+      '// If you do not have a themeMode switch, uncomment this line\n'
+      '// to let the device system mode control the theme mode:\n'
+      '// themeMode: ThemeMode.system,\n';
   return code;
 }
