@@ -47,24 +47,24 @@ dependencies:
 
   # Material Design Icons, community designed. Used for nicer
   # icons to the Platform selection popup menu.
-  material_design_icons_flutter: ^5.0.6295
+  # https://materialdesignicons.com/
+  material_design_icons_flutter: ^5.0.6595
 
   # Commonly used directories on host platform file systems.
   # https://pub.dev/packages/path_provider (by Google, flutter.dev).
-  # Used to get working storage path for Hive.
-  path_provider: ^2.0.7
+  # Used to get a working storage path for Hive on Windows.
+  path_provider: ^2.0.8
 
   # Store value pair shared preference data, by Google flutter.dev.
-  # Needed some better platform icons for example 5 app.
-  # https://materialdesignicons.com/
-  shared_preferences: ^2.0.9
+  # https://pub.dev/packages/shared_preferences
+  shared_preferences: ^2.0.10
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
   string_scanner: ^1.1.0
 
   # Used for launching a WEB URL, by Google flutter.dev.
-  url_launcher: ^6.0.13
+  url_launcher: ^6.0.17
 
 dev_dependencies:
   flutter_test:
