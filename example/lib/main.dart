@@ -26,7 +26,6 @@ import 'shared/widgets/universal/theme_showcase.dart';
 /// To learn more about how to use [FlexColorScheme] and all its features,
 /// please go through the five tutorial examples in the readme documentation.
 void main() => runApp(const DemoApp());
-
 // This default example contains a long list of const and final property values
 // that are just passed in to the corresponding properties in
 // FlexThemeData.light() and FlexThemeData.dark() convenience extension on
@@ -40,11 +39,12 @@ void main() => runApp(const DemoApp());
 // long documentation.
 //
 // This setup is convenient since you can edit the values for both the light
-// and dark theme mode via shared property values on observer the changes
-// in the built via hot reload.
+// and dark theme mode via shared property, values and observe the changes
+// in the built app via hot reload.
+//
 // In a real app you might tuck away your color definitions and FlexColorScheme
-// settings in a static class with const and final values and static functions
-// as required. The other tutorials show one possible example of this as well.
+// settings in a static class with const and final values, and static functions
+// as required. The other tutorials show an example of this as well.
 //
 // To learn more about using FlexColorScheme, it is recommended to go through
 // the step-by-step tutorial that uses examples 1 to 5 to explain and
@@ -92,27 +92,27 @@ const FlexScheme _scheme = FlexScheme.blueWhale;
 
 // To make it easy to toggle between using the above custom colors, or the
 // selected predefined scheme in this example, set _useScheme to true to use the
-// selected predefined scheme above, change to false to use the custom colors.
+// selected predefined scheme above, set it to false to use the custom colors.
 const bool _useScheme = false;
 
 // A quick setting for the themed app bar elevation, it defaults to 0.
 // A very low, like 0.5 is pretty nice too, since it gives an underline effect
-// visible with e.g. white or light app bars.
+// visible with e.g. white or light colored app bars.
 const double _appBarElevation = 0.5;
 
-// There is quick setting to put an opacity value on the app bar, so we can
+// There is quick setting to put an opacity value on the app bar. If used we can
 // see content scroll behind it, if we extend the Scaffold behind the AppBar.
 const double _appBarOpacity = 0.94;
 
 // If you set _computeDarkTheme below to true, the dark scheme will be computed
 // both for the selected scheme and the custom colors, from the light scheme.
-// There is a bit of logic hoops below to make it happen via these bool toggles.
+// There is a bit of logic hoops below to make it happen via this bool toggle.
 //
 // Going "toDark()" on your light FlexSchemeColor definition is just a quick
 // way you can make a dark scheme from a light color scheme definition, without
-// figuring out usable color values yourself. Useful during development, when
-// you test custom colors, but usually you probably want to fine tune your
-// final custom dark color scheme colors to const values.
+// figuring out usable color values yourself. This is useful during development,
+// when you test custom colors. For production and final colors you probably
+// want to fine tune your custom dark color scheme colors and use const values.
 const bool _computeDarkTheme = true;
 
 // When you use _computeDarkTheme, use this desaturation % level to calculate
@@ -123,14 +123,14 @@ const bool _computeDarkTheme = true;
 // theme error color value, by using 40% with the same algorithm used here.
 const int _toDarkLevel = 30;
 
-// To swap primaries and secondaries, set to true. With some color schemes
+// To swap primary and secondary colors, set to true. With some color schemes
 // interesting and even useful inverted primary-secondary themes can be obtained
-// by only swapping the colors on your dark scheme, some where even designed
-// with this usage in mind, but not all look so well when using it.
+// by only swapping the colors on your dark scheme. Some schemes where even
+// designed with this usage in mind, but not all look so well when using it.
 const bool _swapColors = false;
 
-// Use a GoogleFonts, font as default font for your theme.  Not used by default
-// in the demo setup, but you can uncomment its usage, further below.
+// Use a GoogleFonts font as default font for your theme. Not used by default
+// in the demo setup, but you can uncomment _fontFamily further below to use it.
 // ignore: unused_element
 late String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 
