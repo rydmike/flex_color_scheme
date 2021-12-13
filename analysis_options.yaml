@@ -1,4 +1,4 @@
-# RydMike LINTER Preferences v1.2.7
+# RydMike LINTER Preferences v1.2.8
 #
 # Get this file here: https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
@@ -269,6 +269,29 @@ linter:
     # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     avoid_classes_with_only_static_members: false
+
+    # AVOID declaring parameters as final.
+    #
+    # https://dart-lang.github.io/linter/lints/avoid_final_parameters.html
+    #
+    # Declaring parameters as final can lead to unnecessarily verbose code,
+    # especially when using the "parameter_assignments" rule.
+    #
+    # This rule is turned off, so we can define final parameters when it makes
+    # sense to do so without triggering a lint rule.
+    #
+    # Other known linters use:
+    #
+    # Core           disabled : https://pub.dev/packages/lints
+    # Recommended    disabled : https://pub.dev/packages/lints
+    # Flutter Lints  disabled : https://pub.dev/packages/flutter_lints
+    # Pedantic       disabled : https://pub.dev/packages/pedantic
+    # Effective Dart disabled : https://pub.dev/packages/effective_dart
+    # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    # Lint           disabled : https://pub.dev/packages/lint
+    # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
+    # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+    avoid_final_parameters: false
 
     # AVOID positional boolean parameters.
     #
