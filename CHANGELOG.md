@@ -5,12 +5,18 @@ All notable changes to the **FlexColorScheme** package are documented here.
 ## [4.2.0] - December nn, 2021 (WORK IN PROGRESS)
 
 Planned new features when opting in on sub themes:
+* (DONE) Update Dart SDK to min 2.15 that Flutter 2.8.0 uses, thus requiring at
+  least Flutter 2.8.0 for this release.
+* Add support and opinionated sub-theme for Material 3 bottom bar `NavigationBar`.
+  Flutter version 2.8.0 is the first stable version that includes the new
+  Material 3 design based `NavigationBar`, hence the need to upgrade SDK to
+  version to support it.
 * Add ColorScheme selection to TextField.
 * Add ColorScheme selection to TabBar.
-* Will restrict selections to primary and secondary color in ColorScheme
-  because the variant colors are being deprecated, 
+* ColorScheme color selections will be limited to primary and secondary colors 
+  in ColorScheme, because the variant colors are being deprecated, 
   see [#93427](https://github.com/flutter/flutter/pull/93427). 
-  Later add support for new
+  A later FlexColorScheme version will add support for the new
   colors in ColorScheme when they land in stable channel.
 
 * Themes Playground Improvements:
@@ -20,8 +26,9 @@ Planned new features when opting in on sub themes:
   * (DONE) Fix index on _AppBarSettings card.
   * (DONE) Add button to copy theme, and improve the explanations to make the 
     functionality more obvious and accessible.
-  * New version of StaggeredGridview and remove used bug work around(s).
-  * Add the new feature in version 4.2.0.
+  * (DONE) New version of StaggeredGridview 0.5.0-dev.1 that no longer requires 
+    previously used bug work around(s) for an issue it had since 2019.
+  * Add the new features in version 4.2.0 to the Themes Playground app.
 
 ## [4.1.1] - November 20, 2021
 
@@ -31,7 +38,7 @@ Planned new features when opting in on sub themes:
 
 * **Fix:** The `defaultRadius` in `FlexSubThemesData` now defaults to null 
   so all sub-themes border radius will default to M3 default border 
-  radius per widget. The const default value it had was a remnant from early 
+  radius per widget. The const default value it had, was a remnant from early 
   dev phase when widgets all defaulted to single shared radius and not M3 
   defaults per widget type. If you explicitly passed in null, you did also in
   previous version get the M3 defaults. Older tests did that, now they expect

@@ -48,51 +48,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Scroll controller used to jump to stored scroll position, needed as a
-  // workaround, to the workaround, for an issue with StaggeredGridView.
-  // (Added to deal with StaggeredGridView issue.)
-  late ScrollController scrollController;
-
-  // Open close/state of each card. Normally we would keep this state in the
-  // the cards to handle it themselves, but due to the way we have to work
-  // around the rebuild issue with the used StaggeredGridView, this state must
-  // be managed here, so we can restore during card rebuilds, when the grid
-  // view is forced to rebuild.
-  // (Added to deal with StaggeredGridView issue.)
+  // Open close/state of each card.
   late List<bool> isCardOpen;
 
   // The number of cards in the grid, must match the number we add to grid view.
   static const int _nrOfCards = 22;
 
-  // Used to store listened to scroll position.
-  // (Added to deal with StaggeredGridView issue.)
-  double scrollPos = 0;
   // Current amount of shown columns in the grid view.
   int columns = 1;
-  // Previous columns, when we last stored a scroll position.
-  // (Added to deal with StaggeredGridView issue.)
-  int prevColumns = 0;
 
-  // State that decides if we show all blend modes options or not,
-  // depending on if it will fit in the layout, it won't on phones.
+  // State that decides if we show all blend modes options or not, it
+  // depends on if it will fit in the layout, it won't on phones.
   bool showAllBlends = false;
-
-  void _scrollPosition() {
-    scrollPos = scrollController.position.pixels;
-    // debugPrint('ScrollPos listener pos = $scrollPos');
-  }
-
-  @override
-  void didChangeDependencies() {
-    // debugPrint('CALLED: didChangeDependencies');
-    if (prevColumns != columns) {
-      // debugPrint('Columns: $columns Previous: $prevColumns Pos: $scrollPos '
-      //     'hasClients: ${scrollController.hasClients}');
-      prevColumns = columns;
-      if (scrollController.hasClients) scrollController.jumpTo(scrollPos);
-    }
-    super.didChangeDependencies();
-  }
 
   // Toggle the state of a card as open/closed.
   void toggleCard(int index) {
@@ -104,15 +71,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController();
-    scrollController.addListener(_scrollPosition);
     isCardOpen = List<bool>.generate(_nrOfCards, (int i) => true);
-  }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -233,61 +192,7 @@ class _HomePageState extends State<HomePage> {
           if (columns >= 2) margins = AppData.edgeInsetsDesktop;
           if (columns >= 4) margins = AppData.edgeInsetsBigDesktop;
 
-          // Without the value key `key: ValueKey<int>(columns)` further below,
-          // that changes when the amount of columns updates,
-          // the StaggeredGridView and also the WaterfallFlow layouts
-          // do not work correctly. The issue appears related in both
-          // packages, but end breaking style looks a bit different, but cause
-          // is, they break when resizing media size and the columns change.
-          // Issue:
-          // https://github.com/letsar/flutter_staggered_grid_view/issues/138
-          // https://github.com/letsar/flutter_staggered_grid_view/issues/167
-          //
-          // This key causes another problem as it naturally causes a complete
-          // rebuild when the key changes. Then we also loose the layout
-          // scroll position even with a AutomaticKeepAliveClientMixin, so when
-          // columns change, we are always back at start of view, not good!
-          //
-          // A temp hack for this was to listen to the used scroll controller
-          // position, store its value in local state and jump to position it
-          // last had, when dependencies changes and we also had a different
-          // column count than we had before. It "kind of" works, but even with
-          // jumpTo position, it is visible that it jumped to start and then
-          // back again to where we were. Scroll position is tricky to keep
-          // logical in this kind of layout anyway when columns change, but
-          // is hould be better than this and this hack should not be needed.
-          //
-          // Regarding the layout issue, I have not found a Masonry or
-          // staggered grid view like package that would be able to handle
-          // this layout correctly. I'm beginning to wonder if the issue
-          // might be at a lower layer in the widget layout used by both
-          // StaggeredGridView and WaterfallFlow? Using StaggeredGridView below,
-          // but the usage with WaterfallFlow is very similar. The WaterfallFlow
-          // seems to be a bit smoother/faster, but I got it to crash when doing
-          // very quick resizing on desktop builds. StaggeredGridView is a tad
-          // choppier, but so far it did at least not crash.
-          //
-          // For a WaterfallFlow implementation, import it and replace with
-          // this until, but not including, the itemBuilder row:
-          //
-          // return WaterfallFlow.builder(
-          //   key: ValueKey<int>(columns),
-          //   controller: scrollController,
-          //   padding: EdgeInsets.fromLTRB(
-          //     margins,
-          //     topPadding + margins,
-          //     margins,
-          //     bottomPadding + margins,
-          //   ),
-          //   gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
-          //     crossAxisCount: columns,
-          //     crossAxisSpacing: margins,
-          //     mainAxisSpacing: margins,
-          //   ),
-          //
-          return StaggeredGridView.countBuilder(
-            key: ValueKey<int>(columns),
-            controller: scrollController,
+          return MasonryGridView.count(
             crossAxisCount: columns,
             mainAxisSpacing: margins,
             crossAxisSpacing: margins,
@@ -297,8 +202,6 @@ class _HomePageState extends State<HomePage> {
               margins,
               bottomPadding + margins,
             ),
-            staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
-            //
             itemBuilder: (BuildContext context, int index) => <Widget>[
               HeaderCard(
                 isOpen: isCardOpen[0],
