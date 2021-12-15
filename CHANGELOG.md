@@ -26,8 +26,10 @@ Planned new features when opting in on sub themes:
   * (DONE) Fix index on _AppBarSettings card.
   * (DONE) Add button to copy theme, and improve the explanations to make the 
     functionality more obvious and accessible.
+  * (DONE) Add updated icon resources to the example apps.
   * (DONE) New version of StaggeredGridview 0.5.0-dev.1 that no longer requires 
-    previously used bug work around(s) for an issue it had since 2019.
+    previously used bug work around(s) for resize issue it had since 2019.
+    For more info on this issue, see this [article](https://rydmike.com/gridview).
   * Add the new features in version 4.2.0 to the Themes Playground app.
 
 ## [4.1.1] - November 20, 2021
