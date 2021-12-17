@@ -18,7 +18,7 @@ Planned new features when opting in on sub themes:
   see [#93427](https://github.com/flutter/flutter/pull/93427). 
   A later FlexColorScheme version will add support for the new
   colors in ColorScheme when they land in stable channel.
-* Removed `uses-material-design: true` from library pubspec.yaml file.
+* (DONE) Removed `uses-material-design: true` from library pubspec.yaml file.
 
 * Themes Playground Improvements:
   * (DONE) Fix onColor for some colors in ThemeData color presentation for cases
