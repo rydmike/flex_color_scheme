@@ -16,7 +16,7 @@ name: Test
 on:
   pull_request:
   push:
-    branches: [version-4-2-0, master]
+    branches: [none]
     paths-ignore:
       - "**.md"
 jobs:

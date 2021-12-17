@@ -9,7 +9,7 @@ Planned new features when opting in on sub themes:
   least Flutter 2.8.0 for this release.
 * Add support and opinionated sub-theme for Material 3 bottom bar `NavigationBar`.
   Flutter version 2.8.0 is the first stable version that includes the new
-  Material 3 design based `NavigationBar`, hence the need to upgrade SDK to
+  Material 3 design based `NavigationBar`, hence the need to upgrade SDK
   version to support it.
 * Add ColorScheme selection to TextField.
 * Add ColorScheme selection to TabBar.
@@ -18,6 +18,7 @@ Planned new features when opting in on sub themes:
   see [#93427](https://github.com/flutter/flutter/pull/93427). 
   A later FlexColorScheme version will add support for the new
   colors in ColorScheme when they land in stable channel.
+* Removed `uses-material-design: true` from library pubspec.yaml file.
 
 * Themes Playground Improvements:
   * (DONE) Fix onColor for some colors in ThemeData color presentation for cases
