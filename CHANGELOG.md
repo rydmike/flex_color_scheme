@@ -20,7 +20,7 @@ Planned new features when opting in on sub themes:
   colors in ColorScheme when they land in stable channel.
 * (DONE) Removed `uses-material-design: true` from library pubspec.yaml file.
 
-* Themes Playground Improvements:
+* Themes Playground (Example 5) Improvements:
   * (DONE) Fix onColor for some colors in ThemeData color presentation for cases
     when it might differ from colorScheme onColors. This could happen when 
     disabling FlexColorScheme and the onColor do not match its onColors.
@@ -28,7 +28,7 @@ Planned new features when opting in on sub themes:
   * (DONE) Add button to copy theme, and improve the explanations to make the 
     functionality more obvious and accessible.
   * (DONE) Add updated icon resources to the example apps.
-  * (DONE) New version of StaggeredGridview 0.5.0-dev.1 that no longer requires 
+  * (DONE) Use new version of StaggeredGridview 0.6.0 that no longer requires 
     previously used bug work around(s) for resize issue it had since 2019.
     For more info on this issue, see this [article](https://rydmike.com/gridview).
   * Add the new features in version 4.2.0 to the Themes Playground app.
