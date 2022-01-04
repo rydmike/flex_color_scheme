@@ -3287,10 +3287,10 @@ class FlexColorScheme with Diagnosticable {
       dividerColor = background.withOpacity(_opacity);
     }
     // If opacity is specified, we need to enable SystemUiMode.edgeToEdge to
-    // be able to see content scrolling behind the transparent. We only do so
-    // when we have any opacity specified.
+    // be able to see content scrolling behind the transparent bar. We only do
+    // so when we have any opacity specified.
     // TODO(rydmike): Follow-up on edgeToEdge issue and adjust if needed.
-    // This is a gold mine: https://github.com/flutter/flutter/issues/90098
+    //   This is a gold mine: https://github.com/flutter/flutter/issues/90098
     if (_opacity < 1) {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
@@ -3334,9 +3334,9 @@ class FlexColorScheme with Diagnosticable {
   // TODO(rydmike): Find the algorithm that produces the Material Colors.
   // Having access to the actual algorithm that produces the Material color
   // swatches would be even better than the above approach.
-  // Not bothering with it now, wait and see what Material You brings to
+  // Not bothering with it now, wait and see what Material 3 brings to
   // Flutter. Also have an idea on how to approach it with alpha blends that
-  // I think will produce nice looking swatches than the algorithm below.
+  // I think will produce nicer looking swatches than the algorithm below.
 
   /// Create a primary Material color swatch from a given [color].
   ///
@@ -3750,7 +3750,7 @@ class FlexColorScheme with Diagnosticable {
         overline: defPrimaryTextTheme.overline!.copyWith(color: _smallP),
       );
     }
-    // Use M3 text theme was when sub themes enabled, and M3 text themes opt-in.
+    // Use M3 text theme when sub themes enabled, and M3 text themes opt-in.
     if (useSubThemes && subTheme.useTextTheme) {
       defTextTheme = defTextTheme.merge(m3TextTheme);
       defPrimaryTextTheme = defPrimaryTextTheme.merge(m3TextTheme);
@@ -3786,9 +3786,9 @@ class FlexColorScheme with Diagnosticable {
     // but via a convoluted ThemeData.primaryColor modification, causing
     // primaryColor to be almost black in dark mode, which is weird, but since
     // it was only used in the AppBar in the past, it kind of works, but now it
-    // still lingers there be almost black and not primary colored, which makes
-    // no sense at all. It will eventually be cleaned away when `primaryColor`
-    // is deprecated though.
+    // still lingers there being almost black and not primary colored, which
+    // makes no sense at all. It will eventually be cleaned away when
+    // `primaryColor` is deprecated though.
     final Color effectiveAppBarColor = appBarBackground ??
         (isDark ? colorScheme.surface : colorScheme.primary);
     final Brightness appBarBrightness =
