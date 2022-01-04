@@ -17,10 +17,10 @@ class AppData {
   // When I build new public web versions of the demos, I just make sure to
   // update this info before I trigger GitHub actions CI/CD that builds them.
   static const String appName = 'FlexColor\u{00AD}Scheme';
-  static const String version = '4.1.1';
+  static const String version = '4.2.0';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
-  static const String flutterVersion = 'stable v2.8.0';
+  static const String flutterVersion = 'stable v2.8.1';
   static const String copyright = '© 2020, 2021';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
