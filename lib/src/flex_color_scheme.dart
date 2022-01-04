@@ -120,7 +120,7 @@ enum FlexSurfaceMode {
   /// * [FlexSurface.strong]  11% : blendLevel = 19
   /// * [FlexSurface.heavy]   14% : blendLevel = 23
   ///
-  /// Since there it is not the same relationship between background and
+  /// Since there is not the same relationship between background and
   /// surface, when using the older [FlexSurface] based style, that uses
   /// individually tuned relationships. The old and new designs do never
   /// align exactly at any blendLevel. The above values produce visually

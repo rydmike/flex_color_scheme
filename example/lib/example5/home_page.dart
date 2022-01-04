@@ -577,7 +577,7 @@ class _ColorScheme extends StatelessWidget {
           if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
             ListTile(
               title: const Text('Copy this scheme to custom colors?'),
-              subtitle: const Text('Sets custom colors to these scheme. '
+              subtitle: const Text('Sets custom colors to this scheme. '
                   'You can then modify these colors'),
               trailing: ElevatedButton(
                 onPressed: () async {
