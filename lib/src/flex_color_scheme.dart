@@ -473,6 +473,34 @@ enum FlexTabBarStyle {
   universal,
 }
 
+/// Enum used to described which color from FlexColorScheme's active
+/// [ColorScheme] should be used by certain widget sub-themes.
+///
+/// This is used by widget sub-themes for:
+///
+/// - TextField
+/// - TabBar for the indicator color
+///
+/// It is used when opting in on opinionated sub-themes. The opinionated
+/// sub-theme for these widgets implements a property called `useSchemeColor` to
+/// select which of the ColorScheme colors it should use. If not set the
+/// property is null and the default behavior of the sub-theme will be used.
+///
+/// The enum currently only gives access to primary and secondary color as
+/// ColorScheme choices. This was done because the variant version are being
+/// deprecated and replaced with new M3 based color properties.
+///
+/// This enum to select and override default Widget colors when using
+/// opinionated sub-themes may be applied to more widgets in later release
+/// if so requested and desired.
+enum FlexUsedColor {
+  /// The color scheme primary color will be used to theme the widget.
+  primary,
+
+  /// The color scheme secondary color will be used to theme the widget.
+  secondary
+}
+
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
 /// colors. Get the resulting [ThemeData] with the [toTheme] method.
 ///
