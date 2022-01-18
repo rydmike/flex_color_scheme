@@ -86,8 +86,8 @@ class ShowThemeColors extends StatelessWidget {
             ? '\nTOO HIGH'
             : '';
 
-    // A Wrap widget is just the right handy widget for this type of
-    // widget to make it responsive.
+    // Wrap this widget branch in a custom theme where card has a border outline
+    // if it did not have one, but retains in ambient themed border radius.
     return Theme(
       data: Theme.of(context).copyWith(
         cardTheme: CardTheme.of(context).copyWith(
@@ -105,6 +105,8 @@ class ShowThemeColors extends StatelessWidget {
               style: theme.textTheme.subtitle1,
             ),
           ),
+          // A Wrap widget is just the right handy widget for this type of
+          // widget to make it responsive.
           Wrap(
             alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.center,

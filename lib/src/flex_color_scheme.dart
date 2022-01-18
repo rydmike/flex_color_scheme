@@ -479,7 +479,9 @@ enum FlexTabBarStyle {
 /// This is used by widget sub-themes for:
 ///
 /// - TextField
-/// - TabBar for the indicator color
+/// - TabBar indicator color
+/// - BottomNavigationBar
+/// - NavigationBar
 ///
 /// It is used when opting in on opinionated sub-themes. The opinionated
 /// sub-theme for these widgets implements a property called `useSchemeColor` to
@@ -497,8 +499,20 @@ enum FlexUsedColor {
   /// The color scheme primary color will be used to theme the widget.
   primary,
 
+  /// The color scheme onPrimary color will be used to theme the widget.
+  onPrimary,
+
   /// The color scheme secondary color will be used to theme the widget.
-  secondary
+  secondary,
+
+  /// The color scheme onSecondary color will be used to theme the widget.
+  onSecondary,
+
+  /// The color scheme surface color will be used to theme the widget.
+  surface,
+
+  /// The color scheme background color will be used to theme the widget.
+  background,
 }
 
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
@@ -1022,9 +1036,12 @@ class FlexColorScheme with Diagnosticable {
   /// * [SnackBar]
   /// * [BottomSheet]
   /// * [BottomNavigationBar]
+  /// * [NavigationBar]
   ///
-  /// * The custom [ButtonTextTheme] even still provides matching styling to
-  ///   for the deprecated legacy buttons if they are used.
+  /// * The [ButtonThemeData] still provides matching themed styling
+  ///   for the deprecated legacy buttons if they are used. Please consider
+  ///   phasing them out though, as the are deprecated and may soon be
+  ///   removed from the SDK.
   ///
   /// The sub themes are a convenient way to opt-in on customized corner
   /// radius on Widgets using above themes. By opting in you can set corner
@@ -4562,6 +4579,26 @@ class FlexColorScheme with Diagnosticable {
     );
   }
 
+  /// Returns the [FlexColorScheme] based color value for the active
+  /// FlexColorScheme based when given.
+  Color flexUsedColor(FlexUsedColor color) {
+    switch (color) {
+      case FlexUsedColor.primary:
+        return primary;
+      case FlexUsedColor.onPrimary:
+        return onPrimary!;
+      case FlexUsedColor.secondary:
+        return secondary;
+      case FlexUsedColor.onSecondary:
+        return onSecondary!;
+      case FlexUsedColor.surface:
+        return surface!;
+      case FlexUsedColor.background:
+        return background!;
+    }
+  }
+
+  /// Equality operator override for the FlexColorScheme object.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -4599,7 +4636,9 @@ class FlexColorScheme with Diagnosticable {
         other.subThemesData == subThemesData;
   }
 
-  // Using Jenkins list hashCode algorithm used by ThemeData in Flutter SDK.
+  /// Hashcode override for the FlexColorScheme object.
+  ///
+  /// Using Jenkins list hashCode algorithm used by ThemeData in Flutter SDK.
   @override
   int get hashCode {
     final List<Object?> values = <Object?>[
@@ -4637,6 +4676,7 @@ class FlexColorScheme with Diagnosticable {
     return hashList(values);
   }
 
+  /// Flutter debug properties override for FlexColorScheme object.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
