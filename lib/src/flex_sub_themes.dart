@@ -53,6 +53,7 @@ enum FlexInputBorderType {
 /// * [Tooltip]
 /// * [BottomSheet]
 /// * [BottomNavigationBar]
+/// * [NavigationBar]
 ///
 /// In [ToggleButtons] hover, press, selected and focus states are not
 /// an exact match for the main buttons. It does not have as flexible styling
@@ -71,6 +72,8 @@ enum FlexInputBorderType {
 /// an exact match, since the legacy buttons do not offer as flexible
 /// styling as the newer buttons. They do follow and match the styling on
 /// [ToggleButtons] when it comes to hover, press, selected and focus.
+/// Please consider phasing out the legacy though, as the are deprecated and
+/// may soon be removed from the SDK.
 ///
 /// The following widgets that have rounded corners are excluded from the
 /// sub theming:
@@ -89,6 +92,8 @@ enum FlexInputBorderType {
 ///   version of Flutter SDK (2.5.3) it has no theme to enable this. It is
 ///   coming in later Flutter version. When it does, it will be added.
 class FlexSubThemes {
+  /// Private constructor for the FlexSubThemes static class to prevent it from
+  /// being instantiated or extended.
   FlexSubThemes._(); // coverage:ignore-line
 
   /// An opinionated [TextButtonThemeData] theme.
@@ -1162,5 +1167,55 @@ class FlexSubThemes {
               .blendAlpha(colorScheme.primary, unselectedAlphaBlend)
               .withAlpha(unselectedAlpha),
         ),
+      );
+
+  // TODO(rydmike): Complete this sub-theme.
+  /// An opinionated [NavigationBarThemeData] with custom elevation.
+  ///
+  /// The navigation bar uses opinionated colors choices from the passed
+  /// [colorScheme] to style the bottom navigation bar.
+  ///
+  /// Background [opacity] can be set. Unselected items' color, that is
+  /// background based, can receive a variable blend of primary color using
+  /// the [unselectedAlphaBlend] property.
+  static NavigationBarThemeData navigationBar({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// NavigationBar height
+    ///
+    /// Defaults to null.
+    final double? height,
+
+    /// Specifies when each [NavigationDestination]'s label should appear.
+    ///
+    /// This is used to determine the behavior of NavigationBar's destinations.
+    final NavigationDestinationLabelBehavior labelBehavior =
+        NavigationDestinationLabelBehavior.alwaysShow,
+
+    /// BottomNavigationBar background opacity.
+    ///
+    /// Default to 1, fully opaque.
+    final double opacity = 1,
+
+    /// The onBackground primary alpha blend value for unselected item.
+    ///
+    /// Defaults to 0x00, no blend of primary, use onBackground color as is.
+    /// FlexColorScheme uses value [kUnselectedBackgroundPrimaryAlphaBlend] when
+    /// it uses this sub theme.
+    final int unselectedAlphaBlend = 0x00,
+
+    /// The alpha value for unselected item.
+    ///
+    /// Defaults to 0xFF, fully opaque.
+    /// FlexColorScheme uses value [kUnselectedBackgroundPrimaryAlphaBlend] when
+    /// it uses this sub theme.
+    final int unselectedAlpha = 0xFF,
+  }) =>
+      NavigationBarThemeData(
+        height: height,
+        labelBehavior: labelBehavior,
+        backgroundColor: colorScheme.background.withOpacity(opacity),
+        indicatorColor: colorScheme.primary,
       );
 }

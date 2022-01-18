@@ -55,209 +55,235 @@ class ThemeColors extends StatelessWidget {
             ? Colors.white
             : Colors.black;
 
-    return Wrap(
-      alignment: WrapAlignment.start,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 6,
-      runSpacing: 6,
-      children: <Widget>[
-        //
-        // PICK Primary color
-        SizedBox(
-          width: _width,
-          height: _height,
-          child: Material(
-            elevation: isCustomTheme ? 2 : 0,
-            clipBehavior: Clip.antiAlias,
-            color: primary,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(_radius),
-                side: BorderSide(color: dividerColor)),
-            child: ColorPickerInkWell(
+    // Grab the card border from the theme card shape
+    ShapeBorder? border = theme.cardTheme.shape;
+    // If we had one, copy in a border side to it.
+    if (border is RoundedRectangleBorder) {
+      border = border.copyWith(
+        side: BorderSide(
+          color: theme.dividerColor,
+          width: 1,
+        ),
+      );
+      // If
+    } else {
+      // If border was null, make one matching Card default, but with border
+      // side, if it was not null, we leave it as it was.
+      border ??= RoundedRectangleBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
+        side: BorderSide(
+          color: theme.dividerColor,
+          width: 1,
+        ),
+      );
+    }
+    // Wrap this widget branch in a custom theme where card has a border outline
+    // if it did not have one, but retains in ambient themed border radius.
+    return Theme(
+      data: Theme.of(context).copyWith(
+        cardTheme: CardTheme.of(context).copyWith(
+          elevation: 0,
+          shape: border,
+        ),
+      ),
+      child: Wrap(
+        alignment: WrapAlignment.start,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 6,
+        runSpacing: 6,
+        children: <Widget>[
+          //
+          // PICK Primary color
+          SizedBox(
+            width: _width,
+            height: _height,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
               color: primary,
-              onChanged: (Color color) {
-                if (isLight) {
-                  swapLight
-                      ? controller.setSecondaryLight(color)
-                      : controller.setPrimaryLight(color);
-                } else {
-                  swapDark
-                      ? controller.setSecondaryDark(color)
-                      : controller.setPrimaryDark(color);
-                }
-              },
-              recentColors: controller.recentColors,
-              onRecentColorsChanged: controller.setRecentColors,
-              wasCancelled: (bool cancelled) {
-                if (cancelled) {
-                  if (isLight) {
-                    swapLight
-                        ? controller.setSecondaryLight(primary)
-                        : controller.setPrimaryLight(primary);
-                  } else {
-                    swapDark
-                        ? controller.setSecondaryDark(primary)
-                        : controller.setPrimaryDark(primary);
-                  }
-                }
-              },
-              enabled: isCustomTheme,
-              child: ColorNameValue(
+              child: ColorPickerInkWell(
                 color: primary,
-                textColor: colorScheme.onPrimary,
-                label: 'primary',
+                onChanged: (Color color) {
+                  if (isLight) {
+                    swapLight
+                        ? controller.setSecondaryLight(color)
+                        : controller.setPrimaryLight(color);
+                  } else {
+                    swapDark
+                        ? controller.setSecondaryDark(color)
+                        : controller.setPrimaryDark(color);
+                  }
+                },
+                recentColors: controller.recentColors,
+                onRecentColorsChanged: controller.setRecentColors,
+                wasCancelled: (bool cancelled) {
+                  if (cancelled) {
+                    if (isLight) {
+                      swapLight
+                          ? controller.setSecondaryLight(primary)
+                          : controller.setPrimaryLight(primary);
+                    } else {
+                      swapDark
+                          ? controller.setSecondaryDark(primary)
+                          : controller.setPrimaryDark(primary);
+                    }
+                  }
+                },
+                enabled: isCustomTheme,
+                child: ColorNameValue(
+                  color: primary,
+                  textColor: colorScheme.onPrimary,
+                  label: 'primary',
+                ),
               ),
             ),
           ),
-        ),
-        //
-        // PICK Primary variant color
-        SizedBox(
-          width: _width,
-          height: _height,
-          child: Material(
-            elevation: isCustomTheme ? 2 : 0,
-            clipBehavior: Clip.antiAlias,
-            color: primaryVariant,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(_radius),
-                side: BorderSide(color: dividerColor)),
-            child: ColorPickerInkWell(
+          //
+          // PICK Primary variant color
+          SizedBox(
+            width: _width,
+            height: _height,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
               color: primaryVariant,
-              onChanged: (Color color) {
-                if (isLight) {
-                  swapLight
-                      ? controller.setSecondaryVariantLight(color)
-                      : controller.setPrimaryVariantLight(color);
-                } else {
-                  swapDark
-                      ? controller.setSecondaryVariantDark(color)
-                      : controller.setPrimaryVariantDark(color);
-                }
-              },
-              recentColors: controller.recentColors,
-              onRecentColorsChanged: controller.setRecentColors,
-              wasCancelled: (bool cancelled) {
-                if (cancelled) {
-                  if (isLight) {
-                    swapLight
-                        ? controller.setSecondaryVariantLight(primaryVariant)
-                        : controller.setPrimaryVariantLight(primaryVariant);
-                  } else {
-                    swapDark
-                        ? controller.setSecondaryVariantDark(primaryVariant)
-                        : controller.setPrimaryVariantDark(primaryVariant);
-                  }
-                }
-              },
-              enabled: isCustomTheme,
-              child: ColorNameValue(
+              child: ColorPickerInkWell(
                 color: primaryVariant,
-                textColor: onPrimaryVariant,
-                label: 'primary\nVariant',
+                onChanged: (Color color) {
+                  if (isLight) {
+                    swapLight
+                        ? controller.setSecondaryVariantLight(color)
+                        : controller.setPrimaryVariantLight(color);
+                  } else {
+                    swapDark
+                        ? controller.setSecondaryVariantDark(color)
+                        : controller.setPrimaryVariantDark(color);
+                  }
+                },
+                recentColors: controller.recentColors,
+                onRecentColorsChanged: controller.setRecentColors,
+                wasCancelled: (bool cancelled) {
+                  if (cancelled) {
+                    if (isLight) {
+                      swapLight
+                          ? controller.setSecondaryVariantLight(primaryVariant)
+                          : controller.setPrimaryVariantLight(primaryVariant);
+                    } else {
+                      swapDark
+                          ? controller.setSecondaryVariantDark(primaryVariant)
+                          : controller.setPrimaryVariantDark(primaryVariant);
+                    }
+                  }
+                },
+                enabled: isCustomTheme,
+                child: ColorNameValue(
+                  color: primaryVariant,
+                  textColor: onPrimaryVariant,
+                  label: 'primary\nVariant',
+                ),
               ),
             ),
           ),
-        ),
-        //
-        // PICK Secondary color
-        SizedBox(
-          width: _width,
-          height: _height,
-          child: Material(
-            elevation: isCustomTheme ? 2 : 0,
-            clipBehavior: Clip.antiAlias,
-            color: secondary,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(_radius),
-                side: BorderSide(color: dividerColor)),
-            child: ColorPickerInkWell(
+          //
+          // PICK Secondary color
+          SizedBox(
+            width: _width,
+            height: _height,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
               color: secondary,
-              onChanged: (Color color) {
-                if (isLight) {
-                  swapLight
-                      ? controller.setPrimaryLight(color)
-                      : controller.setSecondaryLight(color);
-                } else {
-                  swapDark
-                      ? controller.setPrimaryDark(color)
-                      : controller.setSecondaryDark(color);
-                }
-              },
-              recentColors: controller.recentColors,
-              onRecentColorsChanged: controller.setRecentColors,
-              wasCancelled: (bool cancelled) {
-                if (cancelled) {
-                  if (isLight) {
-                    swapLight
-                        ? controller.setPrimaryLight(secondary)
-                        : controller.setSecondaryLight(secondary);
-                  } else {
-                    swapDark
-                        ? controller.setPrimaryDark(secondary)
-                        : controller.setSecondaryDark(secondary);
-                  }
-                }
-              },
-              enabled: isCustomTheme,
-              child: ColorNameValue(
+              child: ColorPickerInkWell(
                 color: secondary,
-                textColor: colorScheme.onSecondary,
-                label: 'secondary',
-              ),
-            ),
-          ),
-        ),
-        //
-        // PICK Secondary variant color
-        SizedBox(
-          width: _width,
-          height: _height,
-          child: Material(
-            elevation: isCustomTheme ? 2 : 0,
-            clipBehavior: Clip.antiAlias,
-            color: secondaryVariant,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(_radius),
-                side: BorderSide(color: dividerColor)),
-            child: ColorPickerInkWell(
-              color: secondaryVariant,
-              onChanged: (Color color) {
-                if (isLight) {
-                  swapLight
-                      ? controller.setPrimaryVariantLight(color)
-                      : controller.setSecondaryVariantLight(color);
-                } else {
-                  swapDark
-                      ? controller.setPrimaryVariantDark(color)
-                      : controller.setSecondaryVariantDark(color);
-                }
-              },
-              recentColors: controller.recentColors,
-              onRecentColorsChanged: controller.setRecentColors,
-              wasCancelled: (bool cancelled) {
-                if (cancelled) {
+                onChanged: (Color color) {
                   if (isLight) {
                     swapLight
-                        ? controller.setPrimaryVariantLight(secondaryVariant)
-                        : controller.setSecondaryVariantLight(secondaryVariant);
+                        ? controller.setPrimaryLight(color)
+                        : controller.setSecondaryLight(color);
                   } else {
                     swapDark
-                        ? controller.setPrimaryVariantDark(secondaryVariant)
-                        : controller.setSecondaryVariantDark(secondaryVariant);
+                        ? controller.setPrimaryDark(color)
+                        : controller.setSecondaryDark(color);
                   }
-                }
-              },
-              enabled: isCustomTheme,
-              child: ColorNameValue(
-                color: secondaryVariant,
-                textColor: onSecondaryVariant,
-                label: 'secondary\nVariant',
+                },
+                recentColors: controller.recentColors,
+                onRecentColorsChanged: controller.setRecentColors,
+                wasCancelled: (bool cancelled) {
+                  if (cancelled) {
+                    if (isLight) {
+                      swapLight
+                          ? controller.setPrimaryLight(secondary)
+                          : controller.setSecondaryLight(secondary);
+                    } else {
+                      swapDark
+                          ? controller.setPrimaryDark(secondary)
+                          : controller.setSecondaryDark(secondary);
+                    }
+                  }
+                },
+                enabled: isCustomTheme,
+                child: ColorNameValue(
+                  color: secondary,
+                  textColor: colorScheme.onSecondary,
+                  label: 'secondary',
+                ),
               ),
             ),
           ),
-        ),
-      ],
+          //
+          // PICK Secondary variant color
+          SizedBox(
+            width: _width,
+            height: _height,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
+              color: secondaryVariant,
+              child: ColorPickerInkWell(
+                color: secondaryVariant,
+                onChanged: (Color color) {
+                  if (isLight) {
+                    swapLight
+                        ? controller.setPrimaryVariantLight(color)
+                        : controller.setSecondaryVariantLight(color);
+                  } else {
+                    swapDark
+                        ? controller.setPrimaryVariantDark(color)
+                        : controller.setSecondaryVariantDark(color);
+                  }
+                },
+                recentColors: controller.recentColors,
+                onRecentColorsChanged: controller.setRecentColors,
+                wasCancelled: (bool cancelled) {
+                  if (cancelled) {
+                    if (isLight) {
+                      swapLight
+                          ? controller.setPrimaryVariantLight(secondaryVariant)
+                          : controller
+                              .setSecondaryVariantLight(secondaryVariant);
+                    } else {
+                      swapDark
+                          ? controller.setPrimaryVariantDark(secondaryVariant)
+                          : controller
+                              .setSecondaryVariantDark(secondaryVariant);
+                    }
+                  }
+                },
+                enabled: isCustomTheme,
+                child: ColorNameValue(
+                  color: secondaryVariant,
+                  textColor: onSecondaryVariant,
+                  label: 'secondary\nVariant',
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

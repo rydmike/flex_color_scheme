@@ -42,14 +42,14 @@ dependencies:
 
   # Store value pair shared preference data, by Google flutter.dev.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.0.11
+  shared_preferences: ^2.0.12
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
   string_scanner: ^1.1.0
 
   # Used for launching a WEB URL, by Google flutter.dev.
-  url_launcher: ^6.0.17
+  url_launcher: ^6.0.18
 
 dev_dependencies:
   flutter_test:
