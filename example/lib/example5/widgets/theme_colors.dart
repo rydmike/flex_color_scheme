@@ -28,18 +28,14 @@ class ThemeColors extends StatelessWidget {
     // Are colors swapped?
     final bool swapLight = controller.swapLightColors;
     final bool swapDark = controller.swapDarkColors;
-    // Size of the tappable color named boxes and its border radius,
-    // some widgets needs a specific radius, not everything has to be theme
-    // driven! :)
+    // Size of the tappable color named boxes
     const double _width = 125;
     const double _height = 100;
-    const double _radius = 12;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
-    final Color dividerColor = theme.dividerColor;
     final Color primary = colorScheme.primary;
     final Color primaryVariant = colorScheme.primaryVariant;
     final Color onPrimaryVariant =
