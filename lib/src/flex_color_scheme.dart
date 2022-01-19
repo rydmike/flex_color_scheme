@@ -473,48 +473,6 @@ enum FlexTabBarStyle {
   universal,
 }
 
-/// Enum used to described which color from FlexColorScheme's active
-/// [ColorScheme] should be used by certain widget sub-themes.
-///
-/// This is used by widget sub-themes for:
-///
-/// - TextField
-/// - TabBar indicator color
-/// - BottomNavigationBar
-/// - NavigationBar
-///
-/// It is used when opting in on opinionated sub-themes. The opinionated
-/// sub-theme for these widgets implements a property called `useSchemeColor` to
-/// select which of the ColorScheme colors it should use. If not set the
-/// property is null and the default behavior of the sub-theme will be used.
-///
-/// The enum currently only gives access to primary and secondary color as
-/// ColorScheme choices. This was done because the variant version are being
-/// deprecated and replaced with new M3 based color properties.
-///
-/// This enum to select and override default Widget colors when using
-/// opinionated sub-themes may be applied to more widgets in later release
-/// if so requested and desired.
-enum FlexUsedColor {
-  /// The color scheme primary color will be used to theme the widget.
-  primary,
-
-  /// The color scheme onPrimary color will be used to theme the widget.
-  onPrimary,
-
-  /// The color scheme secondary color will be used to theme the widget.
-  secondary,
-
-  /// The color scheme onSecondary color will be used to theme the widget.
-  onSecondary,
-
-  /// The color scheme surface color will be used to theme the widget.
-  surface,
-
-  /// The color scheme background color will be used to theme the widget.
-  background,
-}
-
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
 /// colors. Get the resulting [ThemeData] with the [toTheme] method.
 ///
@@ -3920,15 +3878,13 @@ class FlexColorScheme with Diagnosticable {
     final InputDecorationTheme effectiveInputDecorationTheme = useSubThemes
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
+            usedSchemeColor: subTheme.inputDecoratorUsedColor,
             radius: subTheme.inputDecorationRadius ??
                 subTheme.defaultRadius ??
                 kButtonRadius,
             borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
-            fillColor: subTheme.inputDecoratorFillColor ??
-                (isDark
-                    ? colorScheme.primary.withAlpha(kFillColorAlphaDark)
-                    : colorScheme.primary.withAlpha(kFillColorAlphaLight)),
+            fillColor: subTheme.inputDecoratorFillColor,
             focusedBorderWidth: subTheme.thickBorderWidth,
             unfocusedBorderWidth: subTheme.thinBorderWidth,
             unfocusedHasBorder: subTheme.inputDecoratorUnfocusedHasBorder,
@@ -4046,8 +4002,12 @@ class FlexColorScheme with Diagnosticable {
       // Define errorColor via color scheme error color.
       errorColor: colorScheme.error,
 
-      // Use TabBar style dependent function for selected Tab as indicatorColor.
-      indicatorColor: selectedTabColor(),
+      // Use TabBar style dependent function for selected Tab as indicatorColor
+      // if no color scheme selection for it is made.
+      indicatorColor: subTheme.tabBarIndicatorUsedColor == null
+          ? selectedTabColor()
+          : FlexSubThemes.usedColor(
+              subTheme.tabBarIndicatorUsedColor!, colorScheme),
 
       // Elevation overlay on dark material elevation is used on dark themes
       // on surfaces when so requested, applyElevationOverlayColor defaults
@@ -4344,6 +4304,7 @@ class FlexColorScheme with Diagnosticable {
       chipTheme: useSubThemes
           ? FlexSubThemes.chipTheme(
               colorScheme: colorScheme,
+              usedSchemeColor: subTheme.chipUsedColor,
               labelStyle: effectiveTextTheme.button!,
               radius: subTheme.chipRadius ?? subTheme.defaultRadius,
             )
@@ -4411,6 +4372,7 @@ class FlexColorScheme with Diagnosticable {
       bottomNavigationBarTheme: useSubThemes
           ? FlexSubThemes.bottomNavigationBar(
               colorScheme: colorScheme,
+              usedSchemeColor: subTheme.bottomNavigationBarUsedColor,
               elevation: subTheme.bottomNavigationBarElevation,
               opacity: subTheme.bottomNavigationBarOpacity,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
@@ -4422,6 +4384,20 @@ class FlexColorScheme with Diagnosticable {
               ),
               selectedItemColor: colorScheme.primary,
             ),
+      // Opinionated sub theme for Material 3 based Navigation Bar
+      navigationBarTheme: useSubThemes
+          ? FlexSubThemes.navigationBarTheme(
+              colorScheme: colorScheme,
+              usedSchemeColor: subTheme.navigationBarUsedColor,
+              highlightSchemeColor: subTheme.navigationBarHighlightColor,
+              height: subTheme.navigationBarHeight,
+              opacity: subTheme.navigationBarOpacity,
+              labelBehavior: subTheme.navigationBarLabelBehavior,
+              mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon,
+              unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
+              unselectedAlpha: kUnselectedAlphaBlend,
+            )
+          : null,
     );
   }
 
@@ -4577,25 +4553,6 @@ class FlexColorScheme with Diagnosticable {
       useSubThemes: useSubThemes ?? this.useSubThemes,
       subThemesData: subThemesData ?? this.subThemesData,
     );
-  }
-
-  /// Returns the [FlexColorScheme] based color value for the active
-  /// FlexColorScheme based when given.
-  Color flexUsedColor(FlexUsedColor color) {
-    switch (color) {
-      case FlexUsedColor.primary:
-        return primary;
-      case FlexUsedColor.onPrimary:
-        return onPrimary!;
-      case FlexUsedColor.secondary:
-        return secondary;
-      case FlexUsedColor.onSecondary:
-        return onSecondary!;
-      case FlexUsedColor.surface:
-        return surface!;
-      case FlexUsedColor.background:
-        return background!;
-    }
   }
 
   /// Equality operator override for the FlexColorScheme object.

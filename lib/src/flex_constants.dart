@@ -174,6 +174,17 @@ const double kBottomSheetModalElevation = 8;
 /// Default for elevation of [BottomNavigationBar].
 const double kBottomNavigationBarElevation = 0;
 
+/// Default height of [NavigationBar].
+///
+/// The Material 3 default design is 80dp, this is an opinionated reduced
+/// container height default.
+const double kNavigationBarHeight = 62;
+
+/// Alpha value for the indicator color on the [NavigationBar]
+///
+/// Value: 0x3D = 61 = 24%
+const int kNavigationBarIndicatorAlpha = 0x3D;
+
 /// Default for elevation of [SnackBar].
 const double kSnackBarElevation = 4;
 
@@ -214,12 +225,6 @@ const double kThinBorderWidth = 1.5;
 // The values below for all the effects opacities and alpha blends are tricky.
 // Getting them just right is magic and dark arts plus some pixie dust.
 // These are the values I settled on for the opinionated themes.
-
-/// Fill color alpha value for [InputDecorator] when fill
-/// color is not specified.
-///
-/// Value: 0x0F = 15 = 6%
-const int kFillColorAlphaDefault = 0x0F;
 
 /// Fill color alpha value for [InputDecorator] used by FlexColorScheme
 /// in light theme.

@@ -2,36 +2,60 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.2.0] - December nn, 2021 (WORK IN PROGRESS)
+## [4.2.0] - January 20, 2022 (WORK IN PROGRESS)
 
 Planned new features when opting in on sub themes:
-* (DONE) Update Dart SDK to min 2.15 that Flutter 2.8.0 uses, thus requiring at
+* Update Dart SDK to min 2.15 that Flutter 2.8.0 uses, thus requiring at
   least Flutter 2.8.0 for this release.
 * Add support and opinionated sub-theme for Material 3 bottom bar `NavigationBar`.
   Flutter version 2.8.0 is the first stable version that includes the new
-  Material 3 design based `NavigationBar`, hence the need to upgrade SDK
-  version to support it.
-* Add ColorScheme selection to TextField.
-* Add ColorScheme selection to TabBar.
-* ColorScheme color selections will be limited to primary and secondary colors 
-  in ColorScheme, because the variant colors are being deprecated, 
+  Material 3 design based `NavigationBar`, it was therefore required to upgrade 
+  minimum SDK version to support it.
+* Add ColorScheme color selection to selected opinionated sub-themes. The
+  sub-themes that support changing their ColorScheme based color selection, 
+  implement a `usedSchemeColor` property that is a `FlexUsedColor` enum used to
+  select the enum value that corresponds to same named a color property value 
+  in `theme.colorScheme`. This `FlexUsedColor` property has been added to:
+  - `TextField` in `FlexSubThemes.inputDecorationTheme`
+  - `TabBar` indicator color
+  - `BottomNavigationBar` in `FlexSubThemes.bottomNavigationBar`
+  - `NavigationBar` in `FlexSubThemes.navigationBarTheme`
+  - `ChipThemeData` from `FlexSubThemes.chipTheme`   
+* The `FlexUsedColor` for the above sub-themes have same default `ColorScheme` 
+  values as before and the additional configuration options are none breaking.
+  The properties can be set and modified via the
+  configuration class `FlexSubThemesData` using properties:
+  - `inputDecoratorUsedColor`
+  - `tabBarIndicatorUsedColor`
+  - `bottomNavigationBarUsedColor`
+  - `navigationBarUsedColor`
+  - `navigationBarHighlightColor`
+  - `chipUsedColor`
+* Usage examples of the above new configuration possibilities have been added to
+  the default example, the hot reload playground.
+* The ColorScheme color selection in `FlexUsedColor` includes all colors in 
+  `ColorScheme` supported by Flutter 2.8. It is recommended to avoid using the
+  two "Variant" colors, because the variant colors are being deprecated soon. 
   see [#93427](https://github.com/flutter/flutter/pull/93427). 
-  A later FlexColorScheme version will add support for the new
-  colors in ColorScheme when they land in stable channel.
-* (DONE) Removed `uses-material-design: true` from library pubspec.yaml file.
+  A later FlexColorScheme version will add support for the new Material 3
+  colors in `ColorScheme` when they land in stable channel.
+* Removed `uses-material-design: true` from library pubspec.yaml file.
 
 * Themes Playground (Example 5) Improvements:
-  * (DONE) Fix onColor for some colors in ThemeData color presentation for cases
+  * Fix onColor for some colors in ThemeData color presentation for cases
     when it might differ from colorScheme onColors. This could happen when 
     disabling FlexColorScheme and the onColor do not match its onColors.
-  * (DONE) Fix index on _AppBarSettings card.
-  * (DONE) Add button to copy theme, and improve the explanations to make the 
+  * Fix index on _AppBarSettings card.
+  * Changed ColorScheme indicators to use the themed border radius.
+  * Add button to copy theme, and improve the explanations to make the 
     functionality more obvious and accessible.
-  * (DONE) Add updated icon resources to the example apps.
-  * (DONE) Use new version of StaggeredGridview 0.6.0 that no longer requires 
+  * Add updated icon resources to the example apps.
+  * Use new version of StaggeredGridview 0.6.0 that no longer requires 
     previously used bug work around(s) for resize issue it had since 2019.
     For more info on this issue, see this [article](https://rydmike.com/gridview).
-  * Add the new features in version 4.2.0 to the Themes Playground app.
+  * (WIP) Add the new features in version 4.2.0 to the Themes Playground app.
+ 
+* Add tests to cover the new features, now total 1086 tests.  
 
 ## [4.1.1] - November 20, 2021
 

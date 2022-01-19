@@ -28,11 +28,16 @@ void main() {
       fabUseShape: true,
       cardElevation: 0,
       popupMenuElevation: 3,
+      popupMenuOpacity: 1,
       dialogElevation: 10,
       snackBarElevation: 4,
       bottomSheetElevation: 4,
       bottomSheetModalElevation: 8,
       bottomNavigationBarElevation: 0,
+      bottomNavigationBarOpacity: 1,
+      navigationBarHeight: 62,
+      navigationBarOpacity: 1,
+      navigationBarMutedUnselectedIcon: true,
     );
     // m3, one different values than m1 and m2.
     const FlexSubThemesData m3 = FlexSubThemesData(
@@ -50,11 +55,16 @@ void main() {
       fabUseShape: true,
       cardElevation: 0,
       popupMenuElevation: 3,
+      popupMenuOpacity: 1,
       dialogElevation: 10,
       snackBarElevation: 4,
       bottomSheetElevation: 4,
       bottomSheetModalElevation: 8,
       bottomNavigationBarElevation: 0,
+      bottomNavigationBarOpacity: 1,
+      navigationBarHeight: 62,
+      navigationBarOpacity: 1,
+      navigationBarMutedUnselectedIcon: true,
     );
     // m4, all values different from m1 and m2.
     const FlexSubThemesData m4 = FlexSubThemesData(
@@ -72,11 +82,16 @@ void main() {
       fabUseShape: false,
       cardElevation: 1,
       popupMenuElevation: 5,
+      popupMenuOpacity: 0.95,
       dialogElevation: 10,
       snackBarElevation: 5,
       bottomSheetElevation: 3,
       bottomSheetModalElevation: 10,
       bottomNavigationBarElevation: 1,
+      bottomNavigationBarOpacity: 0.96,
+      navigationBarHeight: 60,
+      navigationBarOpacity: 0.98,
+      navigationBarMutedUnselectedIcon: false,
     );
     // Identity and quality tests
     test(
@@ -143,11 +158,16 @@ void main() {
           fabUseShape: true,
           cardElevation: 0,
           popupMenuElevation: 3,
+          popupMenuOpacity: 1,
           dialogElevation: 10,
           snackBarElevation: 4,
           bottomSheetElevation: 4,
           bottomSheetModalElevation: 8,
           bottomNavigationBarElevation: 0,
+          bottomNavigationBarOpacity: 1,
+          navigationBarHeight: 62,
+          navigationBarOpacity: 1,
+          navigationBarMutedUnselectedIcon: true,
         ),
         equals(m1),
       );
@@ -171,7 +191,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSubThemesData#00000(interactionEffects: true, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, inputDecorationRadius: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, chipRadius: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, timePickerDialogRadius: null, snackBarElevation: 4.0, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: 1.0, bottomNavigationBarLandscapeLayout: null)'));
+              'FlexSubThemesData#00000(interactionEffects: true, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, inputDecorationRadius: null, inputDecoratorUsedColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, chipRadius: null, chipUsedColor: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, timePickerDialogRadius: null, snackBarElevation: 4.0, tabBarIndicatorUsedColor: null, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: 1.0, bottomNavigationBarUsedColor: null, bottomNavigationBarLandscapeLayout: null, navigationBarHeight: 62.0, navigationBarOpacity: 1.0, navigationBarUsedColor: null, navigationBarHighlightColor: null, navigationBarMutedUnselectedIcon: true, navigationBarLabelBehavior: null)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '
@@ -183,7 +203,7 @@ void main() {
       expect(m1.hashCode, isNotNull);
     });
     // This weird hashcode madness happens here and on few other cases,
-    // to coe changes from run to run. I have observed this to happen with
+    // the code changes from run to run. I have observed this to happen with
     // classes with a lot of properties, with smaller classes it does not happen
     // it remains the same from run to run. But this is one more case where
     // it changes from run to run, so we cannot expect same hashCode as below:
