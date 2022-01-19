@@ -163,9 +163,12 @@ class DemoApp extends StatelessWidget {
                       // Themed opacity of bottom navigation bar.
                       bottomNavigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
-                      // Elevation of bottom navigation bar.
+                      // Elevation of BottomNavigationBar.
                       bottomNavigationBarElevation:
                           themeController.bottomNavigationBarElevation,
+                      // Themed opacity of NavigationBar.
+                      navigationBarOpacity:
+                          themeController.bottomNavigationBarOpacity,
                       // Text input field uses a themed fill color.
                       inputDecoratorIsFilled:
                           themeController.inputDecoratorIsFilled,

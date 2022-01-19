@@ -93,7 +93,7 @@ const FlexScheme _scheme = FlexScheme.blueWhale;
 // To make it easy to toggle between using the above custom colors, or the
 // selected predefined scheme in this example, set _useScheme to true to use the
 // selected predefined scheme above, set it to false to use the custom colors.
-const bool _useScheme = false;
+const bool _useScheme = true;
 
 // A quick setting for the themed app bar elevation, it defaults to 0.
 // A very low, like 0.5 is pretty nice too, since it gives an underline effect
@@ -203,6 +203,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // it different from the global `cornerRadius`. Here eg. the bottom sheet
   // radius is defined to always be 24:
   bottomSheetRadius: 24,
+
   // Select input decorator type, only SDK options outline and underline
   // supported no, but custom ones may be added later.
   inputDecoratorBorderType: FlexInputBorderType.outline,
@@ -211,6 +212,16 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // If you do not want any underline/outline on the input decorator when it is
   // not in focus, then set this to false.
   inputDecoratorUnfocusedHasBorder: true,
+  // Select the ColorScheme color used for input decoration border.
+  // Primary is default so no need to set that, used here as placeholder to
+  // enable easy selection of other options.
+  inputDecoratorUsedColor: FlexUsedColor.primary,
+
+  // Select the ColorScheme color used by Chips as their base color
+  // Primary is default so no need to set that, used here as placeholder to
+  // enable easy selection of other options.
+  chipUsedColor: FlexUsedColor.secondaryVariant,
+
   // Elevations have easy override values as well.
   elevatedButtonElevation: 1,
   // Widgets that use outline borders can be easily adjusted via these
@@ -218,6 +229,28 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // toggle buttons.
   thickBorderWidth: 2, // Default is 2.0.
   thinBorderWidth: 1.5, // Default is 1.5.
+  // Select the ColorScheme color used for selected tab bar indicator.
+  // Defaults to same color as selected tab if not defined.
+  // tabBarIndicatorUsedColor: FlexUsedColor.secondary,
+
+  // Select the ColorScheme color used for selected bottom navigation bar item.
+  // Primary is default so no need to set that, used here as placeholder to
+  // enable easy selection of other options.
+  bottomNavigationBarUsedColor: FlexUsedColor.primary,
+
+  // Select the ColorScheme color used for M3 [NavigationBar] icons.
+  // Primary is default so no need to set that, used here as placeholder to
+  // enable easy selection of other options.
+  navigationBarUsedColor: FlexUsedColor.primary,
+
+  // When set to true [NavigationBar] unselected icons use a more muted version
+  // of the color defined by [navigationBarUsedColor]. Defaults to true.
+  navigationBarMutedUnselectedIcon: true,
+
+  // Select the ColorScheme base color used to highlight selected item.
+  // Primary is default so no need to set that, used here as placeholder to
+  // enable easy selection of other options.
+  navigationBarHighlightColor: FlexUsedColor.primary,
 );
 
 // If true, the top part of the Android AppBar has no scrim, it then becomes

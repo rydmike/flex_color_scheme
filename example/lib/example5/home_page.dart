@@ -27,13 +27,6 @@ import 'widgets/theme_selector.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
-//
-// The content of the HomePage below is not relevant for using FlexColorScheme
-// based application theming. The critical parts are in the above MaterialApp
-// theme definitions. The HomePage contains UI to visually show what the
-// defined example looks like in an application and with commonly used Widgets.
-//
-// That said there is some interesting stuff going one here! :)
 // -----------------------------------------------------------------------------
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -1418,7 +1411,7 @@ class _BottomNavigation extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Bottom Navigation Settings'),
+      title: const Text('Navigation Bar Settings'),
       child: Column(
         children: <Widget>[
           const ListTile(
@@ -1458,7 +1451,7 @@ class _BottomNavigation extends StatelessWidget {
           const ListTile(
             title: Text('Opacity'),
             subtitle: Text(
-              'Bottom and system navigation bar opacity. Separate '
+              "All navigation bars' opacity. Separate "
               'parameters, they only share input here',
             ),
           ),
@@ -1497,6 +1490,10 @@ class _BottomNavigation extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: BottomNavigationBarShowcase(),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: NavigationBarShowcase(),
           ),
           const Divider(),
           ListTile(

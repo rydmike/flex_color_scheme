@@ -95,6 +95,7 @@ void main() {
       expect(
         FlexSubThemes.bottomNavigationBar(
           colorScheme: colorScheme,
+          usedSchemeColor: FlexUsedColor.secondary,
           elevation: 1,
           landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
           opacity: 0.5,
@@ -106,16 +107,16 @@ void main() {
             elevation: 1,
             backgroundColor: colorScheme.background.withOpacity(0.5),
             landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-            selectedItemColor: colorScheme.primary,
+            selectedItemColor: colorScheme.secondary,
             selectedIconTheme: IconThemeData(
-              color: colorScheme.primary,
+              color: colorScheme.secondary,
             ),
             unselectedItemColor: colorScheme.onBackground
-                .blendAlpha(colorScheme.primary, 0xFA)
+                .blendAlpha(colorScheme.secondary, 0xFA)
                 .withAlpha(0x45),
             unselectedIconTheme: IconThemeData(
               color: colorScheme.onBackground
-                  .blendAlpha(colorScheme.primary, 0xFA)
+                  .blendAlpha(colorScheme.secondary, 0xFA)
                   .withAlpha(0x45),
             ),
           ),
@@ -305,7 +306,7 @@ void main() {
         equals(
           InputDecorationTheme(
             filled: true,
-            fillColor: colorScheme.primary.withAlpha(0x0F),
+            fillColor: colorScheme.primary.withAlpha(0x0D),
             hoverColor: colorScheme.primary.withAlpha(0x0D),
             focusColor: colorScheme.primary.withAlpha(0x26),
             focusedBorder: OutlineInputBorder(
@@ -351,27 +352,30 @@ void main() {
     });
     test(
         'FST1.08b: GIVEN a default '
-        'FlexSubTheme.inputDecorationTheme(useOutlinedBorder: false) '
+        'FlexSubTheme.inputDecorationTheme(borderType: '
+        'FlexInputBorderType.underline, usedSchemeColor: '
+        'FlexUsedColor.secondary) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
+          usedSchemeColor: FlexUsedColor.secondary,
           borderType: FlexInputBorderType.underline,
         ),
         equals(
           InputDecorationTheme(
             filled: true,
-            fillColor: colorScheme.primary.withAlpha(0x0F),
-            hoverColor: colorScheme.primary.withAlpha(0x0D),
-            focusColor: colorScheme.primary.withAlpha(0x26),
+            fillColor: colorScheme.secondary.withAlpha(0x0D),
+            hoverColor: colorScheme.secondary.withAlpha(0x0D),
+            focusColor: colorScheme.secondary.withAlpha(0x26),
             focusedBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
               ),
               borderSide: BorderSide(
-                color: colorScheme.primary,
+                color: colorScheme.secondary,
                 width: 2,
               ),
             ),
@@ -381,7 +385,7 @@ void main() {
                 topRight: Radius.circular(20),
               ),
               borderSide: BorderSide(
-                color: colorScheme.primary.withAlpha(0xA7),
+                color: colorScheme.secondary.withAlpha(0xA7),
                 width: 1.5,
               ),
             ),
@@ -391,7 +395,7 @@ void main() {
                 topRight: Radius.circular(16),
               ),
               borderSide: BorderSide(
-                color: colorScheme.primary
+                color: colorScheme.secondary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
                 width: 1.5,
@@ -1088,6 +1092,216 @@ void main() {
               ),
             ),
           ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.16: GIVEN a FlexSubTheme.chipTheme() with usedSchemeColor '
+        'Secondary EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final TextTheme textTheme =
+          Typography.material2018(platform: TargetPlatform.android).black;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          usedSchemeColor: FlexUsedColor.secondary,
+          labelStyle: textTheme.button!,
+        ),
+        equals(
+          ChipThemeData(
+            brightness: Brightness.dark,
+            padding: const EdgeInsets.all(4),
+            labelStyle:
+                textTheme.button!.copyWith(color: const Color(0xff016d63)),
+            secondaryLabelStyle:
+                textTheme.button!.copyWith(color: const Color(0xff016d63)),
+            backgroundColor: const Color(0xffccf7f3),
+            deleteIconColor: const Color(0xff03dac6),
+            disabledColor: const Color(0x31018276),
+            selectedColor: const Color(0xff97efe7),
+            secondarySelectedColor: const Color(0xff97efe7),
+            checkmarkColor: const Color(0xff016d63),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.17: GIVEN a default FlexSubTheme.navigationBarTheme() '
+        'EXPECT equal to NavigationBarThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.navigationBarTheme(
+          colorScheme: colorScheme,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          NavigationBarThemeData(
+            height: 62,
+            labelBehavior: null,
+            backgroundColor: colorScheme.background.withOpacity(1),
+            indicatorColor: colorScheme.primary.withAlpha(0x3D),
+            iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return IconThemeData(
+                    size: 24,
+                    color: colorScheme.primary,
+                  );
+                }
+                return IconThemeData(
+                    size: 24,
+                    color: colorScheme.primary
+                        .blendAlpha(colorScheme.primary, 0x00)
+                        .withAlpha(0xFF));
+              },
+            ),
+          ).toString(),
+        ),
+      );
+    });
+
+    //
+    test('FST1.17-states: Does navigationBarTheme have right material states',
+        () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
+            .iconTheme!
+            .resolve(<MaterialState>{MaterialState.selected})?.color,
+        equals(colorScheme.primary),
+      );
+      expect(
+        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
+            .iconTheme!
+            .resolve(<MaterialState>{})?.color,
+        equals(
+          colorScheme.primary
+              .blendAlpha(colorScheme.primary, 0x00)
+              .withAlpha(0xFF),
+        ),
+      );
+      //
+    });
+
+    test(
+        'FST1.18custom1: GIVEN a custom1 FlexSubTheme.navigationBarTheme() '
+        'EXPECT equal to NavigationBarThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final NavigationBarThemeData navBarTheme =
+          FlexSubThemes.navigationBarTheme(
+        colorScheme: colorScheme,
+        usedSchemeColor: FlexUsedColor.secondary,
+        highlightSchemeColor: FlexUsedColor.secondaryVariant,
+        height: 80,
+        opacity: 0.9,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        mutedUnselectedIcon: true,
+        indicatorAlpha: 0x3D,
+        unselectedAlphaBlend: 0x66,
+        unselectedAlpha: 0xA5,
+      );
+      expect(
+        navBarTheme.toString(),
+        equalsIgnoringHashCodes(
+          NavigationBarThemeData(
+            height: 80,
+            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+            backgroundColor: colorScheme.background.withOpacity(0.9),
+            indicatorColor: colorScheme.secondaryVariant.withAlpha(0x3D),
+            iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return IconThemeData(
+                    size: 24,
+                    color: colorScheme.secondary,
+                  );
+                }
+                return IconThemeData(
+                    size: 24,
+                    color: colorScheme.secondary
+                        .blendAlpha(colorScheme.secondary, 0x66)
+                        .withAlpha(0xA5));
+              },
+            ),
+          ).toString(),
+        ),
+      );
+      // Does it have the right states?
+      expect(
+        navBarTheme.iconTheme!
+            .resolve(<MaterialState>{MaterialState.selected})?.color,
+        equals(colorScheme.secondary),
+      );
+      expect(
+        navBarTheme.iconTheme!.resolve(<MaterialState>{})?.color,
+        equals(
+          colorScheme.secondary
+              .blendAlpha(colorScheme.secondary, 0x66)
+              .withAlpha(0xA5),
+        ),
+      );
+    });
+
+    test(
+        'FST1.18custom2: GIVEN a custom1 FlexSubTheme.navigationBarTheme() '
+        'EXPECT equal to NavigationBarThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final NavigationBarThemeData navBarTheme =
+          FlexSubThemes.navigationBarTheme(
+        colorScheme: colorScheme,
+        usedSchemeColor: FlexUsedColor.secondaryVariant,
+        highlightSchemeColor: FlexUsedColor.secondary,
+        height: 80,
+        opacity: 0.9,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        mutedUnselectedIcon: false,
+        indicatorAlpha: 0x3D,
+        unselectedAlphaBlend: 0x66,
+        unselectedAlpha: 0xA5,
+      );
+      expect(
+        navBarTheme.toString(),
+        equalsIgnoringHashCodes(
+          NavigationBarThemeData(
+            height: 80,
+            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+            backgroundColor: colorScheme.background.withOpacity(0.9),
+            indicatorColor: colorScheme.secondary.withAlpha(0x3D),
+            iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return IconThemeData(
+                    size: 24,
+                    color: colorScheme.secondaryVariant,
+                  );
+                }
+                return IconThemeData(
+                    size: 24, color: colorScheme.secondaryVariant);
+              },
+            ),
+          ).toString(),
+        ),
+      );
+      // Does it have the right states?
+      expect(
+        navBarTheme.iconTheme!
+            .resolve(<MaterialState>{MaterialState.selected})?.color,
+        equals(colorScheme.secondaryVariant),
+      );
+      expect(
+        navBarTheme.iconTheme!.resolve(<MaterialState>{})?.color,
+        equals(
+          colorScheme.secondaryVariant,
         ),
       );
     });

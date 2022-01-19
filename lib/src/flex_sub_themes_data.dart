@@ -46,11 +46,13 @@ class FlexSubThemesData with Diagnosticable {
     this.outlinedButtonRadius,
     this.toggleButtonsRadius,
     this.inputDecorationRadius,
+    this.inputDecoratorUsedColor,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
     this.inputDecoratorBorderType = FlexInputBorderType.outline,
     this.inputDecoratorUnfocusedHasBorder = true,
     this.chipRadius,
+    this.chipUsedColor,
     this.fabRadius,
     this.fabUseShape = true,
     this.cardRadius,
@@ -62,12 +64,20 @@ class FlexSubThemesData with Diagnosticable {
     this.dialogElevation = kDialogElevation,
     this.timePickerDialogRadius,
     this.snackBarElevation = kSnackBarElevation,
+    this.tabBarIndicatorUsedColor,
     this.bottomSheetRadius,
     this.bottomSheetElevation = kBottomSheetElevation,
     this.bottomSheetModalElevation = kBottomSheetModalElevation,
     this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
     this.bottomNavigationBarOpacity = 1,
+    this.bottomNavigationBarUsedColor,
     this.bottomNavigationBarLandscapeLayout,
+    this.navigationBarHeight = kNavigationBarHeight,
+    this.navigationBarOpacity = 1,
+    this.navigationBarUsedColor,
+    this.navigationBarHighlightColor,
+    this.navigationBarMutedUnselectedIcon = true,
+    this.navigationBarLabelBehavior,
   });
 
   /// Opt-in on using color branded hover, focus, highlight and splash
@@ -241,6 +251,12 @@ class FlexSubThemesData with Diagnosticable {
   /// Corner radius override value for [InputDecoration].
   final double? inputDecorationRadius;
 
+  /// Defines which [Theme] based [ColorScheme] based color the input decorator
+  /// uses as color for the border and fill color when they are used.
+  ///
+  /// If not defined it defaults to primary color.
+  final FlexUsedColor? inputDecoratorUsedColor;
+
   /// Determines if the [InputDecorator] is filled with a color.
   ///
   /// This property also affects if the fill color is used when not opting in
@@ -252,7 +268,9 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Determines if the color of the filled [InputDecorator].
   ///
-  /// Defaults to colorScheme.primary.withOpacity(0.06) if null.
+  /// If null, defaults to theme color scheme color defined by
+  /// `inputDecoratorUsedColor` withAlpha(0x0F)`, where
+  /// `inputDecoratorUsedColor` will result in primary color if null.
   final Color? inputDecoratorFillColor;
 
   // TODO(rydmike): Consider ContinuousRectangleBorder and beveled as new types.
@@ -304,6 +322,12 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Corner radius override value for [Chip].
   final double? chipRadius;
+
+  /// Defines which [Theme] based [ColorScheme] based color the Chip's
+  /// use as their base color.
+  ///
+  /// If not defined it defaults to primary color.
+  final FlexUsedColor? chipUsedColor;
 
   /// Corner radius override value for [Card].
   final double? cardRadius;
@@ -373,6 +397,12 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to [kSnackBarElevation].
   final double snackBarElevation;
 
+  /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
+  /// indicator uses.
+  ///
+  /// If not defined it defaults to same color as selected tab.
+  final FlexUsedColor? tabBarIndicatorUsedColor;
+
   /// Corner radius override value for [BottomSheet].
   final double? bottomSheetRadius;
 
@@ -391,7 +421,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to [kBottomNavigationBarElevation].
   final double bottomNavigationBarElevation;
 
-  /// BottomNavigationBar opacity
+  /// BottomNavigationBar opacity.
   ///
   /// Used by FlexColorScheme to modify the opacity on the effective
   /// colorScheme.background color on the themed BottomNavigationBar color.
@@ -402,6 +432,14 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Defaults to 1, fully opaque.
   final double bottomNavigationBarOpacity;
+
+  /// Defines which [Theme] based [ColorScheme] based color the bottom
+  /// navigation bar selected icon and text uses.
+  ///
+  /// If not defined it defaults to primary color. This differs from the
+  /// [BottomNavigationBar]'s default theme that uses secondary color.
+  /// If you use [FlexUsedColor.secondary] you get the default design back.
+  final FlexUsedColor? bottomNavigationBarUsedColor;
 
   /// The arrangement of the bar's [items] when the enclosing
   /// [MediaQueryData.orientation] is [Orientation.landscape].
@@ -428,6 +466,50 @@ class FlexSubThemesData with Diagnosticable {
   /// This property is null by default.
   final BottomNavigationBarLandscapeLayout? bottomNavigationBarLandscapeLayout;
 
+  /// NavigationBar height.
+  ///
+  /// Defaults to [kNavigationBarHeight] = 70.
+  ///
+  /// The Material 3 default design is 80dp, this is an opinionated reduced
+  /// container height default.
+  final double navigationBarHeight;
+
+  /// NavigationBar background opacity.
+  ///
+  /// Default to 1, fully opaque.
+  final double navigationBarOpacity;
+
+  /// Select which color from the theme [ColorScheme] to use as base for
+  /// the navigation bar's icon and text color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// If not defined it defaults to using primary color. This differs from the
+  /// NavigationBar's default theme that uses onSurface color.
+  /// If you use value [FlexUsedColor.onSurface] you get the default design.
+  final FlexUsedColor? navigationBarUsedColor;
+
+  /// Select which color from the theme [ColorScheme] to use as base for
+  /// the selected navigation bar's highlighted item.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// If not defined it defaults to using primary color. This differs from the
+  /// NavigationBar's default theme that uses secondary color.
+  /// If you use value [FlexUsedColor.secondary] you get the default design.
+  final FlexUsedColor? navigationBarHighlightColor;
+
+  /// If true, the unselected icons in the [NavigationBar] use a more muted
+  /// color version of the color defined by [navigationBarUsedColor].
+  ///
+  /// Defaults to true.
+  final bool navigationBarMutedUnselectedIcon;
+
+  /// Specifies when each [NavigationDestination]'s label should appear.
+  ///
+  /// This is used to determine the behavior of NavigationBar's destinations.
+  final NavigationDestinationLabelBehavior? navigationBarLabelBehavior;
+
   /// Copy the object with one or more provided properties changed.
   FlexSubThemesData copyWith({
     final bool? interactionEffects,
@@ -445,6 +527,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? outlinedButtonRadius,
     final double? toggleButtonsRadius,
     final double? inputDecorationRadius,
+    final FlexUsedColor? inputDecoratorUsedColor,
     final bool? inputDecoratorIsFilled,
     final Color? inputDecoratorFillColor,
     final FlexInputBorderType? inputDecoratorBorderType,
@@ -452,6 +535,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? fabRadius,
     final bool? fabUseShape,
     final double? chipRadius,
+    final FlexUsedColor? chipUsedColor,
     final double? cardRadius,
     final double? cardElevation,
     final double? popupMenuRadius,
@@ -461,13 +545,21 @@ class FlexSubThemesData with Diagnosticable {
     final double? dialogRadius,
     final double? timePickerDialogRadius,
     final double? snackBarElevation,
+    final FlexUsedColor? tabBarIndicatorUsedColor,
     final double? bottomSheetRadius,
     final double? bottomSheetElevation,
     final double? bottomSheetModalElevation,
     final double? bottomNavigationBarElevation,
     final double? bottomNavigationBarOpacity,
+    final FlexUsedColor? bottomNavigationBarUsedColor,
     final BottomNavigationBarLandscapeLayout?
         bottomNavigationBarLandscapeLayout,
+    final double? navigationBarHeight,
+    final double? navigationBarOpacity,
+    final FlexUsedColor? navigationBarUsedColor,
+    final FlexUsedColor? navigationBarHighlightColor,
+    final bool? navigationBarMutedUnselectedIcon,
+    final NavigationDestinationLabelBehavior? navigationBarLabelBehavior,
   }) {
     return FlexSubThemesData(
       interactionEffects: interactionEffects ?? this.interactionEffects,
@@ -487,6 +579,8 @@ class FlexSubThemesData with Diagnosticable {
       toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
       inputDecorationRadius:
           inputDecorationRadius ?? this.inputDecorationRadius,
+      inputDecoratorUsedColor:
+          inputDecoratorUsedColor ?? this.inputDecoratorUsedColor,
       inputDecoratorIsFilled:
           inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
       inputDecoratorFillColor:
@@ -498,6 +592,7 @@ class FlexSubThemesData with Diagnosticable {
       fabRadius: fabRadius ?? this.fabRadius,
       fabUseShape: fabUseShape ?? this.fabUseShape,
       chipRadius: chipRadius ?? this.chipRadius,
+      chipUsedColor: chipUsedColor ?? this.chipUsedColor,
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
       dialogRadius: dialogRadius ?? this.dialogRadius,
@@ -508,6 +603,8 @@ class FlexSubThemesData with Diagnosticable {
       timePickerDialogRadius:
           timePickerDialogRadius ?? this.timePickerDialogRadius,
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
+      tabBarIndicatorUsedColor:
+          tabBarIndicatorUsedColor ?? this.tabBarIndicatorUsedColor,
       bottomSheetRadius: bottomSheetRadius ?? this.bottomSheetRadius,
       bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
       bottomSheetModalElevation:
@@ -516,8 +613,20 @@ class FlexSubThemesData with Diagnosticable {
           bottomNavigationBarElevation ?? this.bottomNavigationBarElevation,
       bottomNavigationBarOpacity:
           bottomNavigationBarOpacity ?? this.bottomNavigationBarOpacity,
+      bottomNavigationBarUsedColor:
+          bottomNavigationBarUsedColor ?? this.bottomNavigationBarUsedColor,
       bottomNavigationBarLandscapeLayout: bottomNavigationBarLandscapeLayout ??
           this.bottomNavigationBarLandscapeLayout,
+      navigationBarHeight: navigationBarHeight ?? this.navigationBarHeight,
+      navigationBarOpacity: navigationBarOpacity ?? this.navigationBarOpacity,
+      navigationBarUsedColor:
+          navigationBarUsedColor ?? this.navigationBarUsedColor,
+      navigationBarHighlightColor:
+          navigationBarHighlightColor ?? this.navigationBarHighlightColor,
+      navigationBarMutedUnselectedIcon: navigationBarMutedUnselectedIcon ??
+          this.navigationBarMutedUnselectedIcon,
+      navigationBarLabelBehavior:
+          navigationBarLabelBehavior ?? this.navigationBarLabelBehavior,
     );
   }
 
@@ -541,6 +650,7 @@ class FlexSubThemesData with Diagnosticable {
         other.outlinedButtonRadius == outlinedButtonRadius &&
         other.toggleButtonsRadius == toggleButtonsRadius &&
         other.inputDecorationRadius == inputDecorationRadius &&
+        other.inputDecoratorUsedColor == inputDecoratorUsedColor &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
         other.inputDecoratorBorderType == inputDecoratorBorderType &&
@@ -549,6 +659,7 @@ class FlexSubThemesData with Diagnosticable {
         other.fabRadius == fabRadius &&
         other.fabUseShape == fabUseShape &&
         other.chipRadius == chipRadius &&
+        other.chipUsedColor == chipUsedColor &&
         other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
         other.popupMenuRadius == popupMenuRadius &&
@@ -558,13 +669,22 @@ class FlexSubThemesData with Diagnosticable {
         other.dialogElevation == dialogElevation &&
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.snackBarElevation == snackBarElevation &&
+        other.tabBarIndicatorUsedColor == tabBarIndicatorUsedColor &&
         other.bottomSheetRadius == bottomSheetRadius &&
         other.bottomSheetElevation == bottomSheetElevation &&
         other.bottomSheetModalElevation == bottomSheetModalElevation &&
         other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
         other.bottomNavigationBarOpacity == bottomNavigationBarOpacity &&
+        other.bottomNavigationBarUsedColor == bottomNavigationBarUsedColor &&
         other.bottomNavigationBarLandscapeLayout ==
-            bottomNavigationBarLandscapeLayout;
+            bottomNavigationBarLandscapeLayout &&
+        other.navigationBarHeight == navigationBarHeight &&
+        other.navigationBarOpacity == navigationBarOpacity &&
+        other.navigationBarUsedColor == navigationBarUsedColor &&
+        other.navigationBarHighlightColor == navigationBarHighlightColor &&
+        other.navigationBarMutedUnselectedIcon ==
+            navigationBarMutedUnselectedIcon &&
+        other.navigationBarLabelBehavior == navigationBarLabelBehavior;
   }
 
   @override
@@ -585,6 +705,7 @@ class FlexSubThemesData with Diagnosticable {
       outlinedButtonRadius,
       toggleButtonsRadius,
       inputDecorationRadius,
+      inputDecoratorUsedColor,
       inputDecoratorIsFilled,
       inputDecoratorFillColor,
       inputDecoratorBorderType,
@@ -592,6 +713,7 @@ class FlexSubThemesData with Diagnosticable {
       fabRadius,
       fabUseShape,
       chipRadius,
+      chipUsedColor,
       cardRadius,
       cardElevation,
       popupMenuRadius,
@@ -601,12 +723,20 @@ class FlexSubThemesData with Diagnosticable {
       dialogElevation,
       timePickerDialogRadius,
       snackBarElevation,
+      tabBarIndicatorUsedColor,
       bottomSheetRadius,
       bottomSheetElevation,
       bottomSheetModalElevation,
       bottomNavigationBarElevation,
       bottomNavigationBarOpacity,
+      bottomNavigationBarUsedColor,
       bottomNavigationBarLandscapeLayout,
+      navigationBarHeight,
+      navigationBarOpacity,
+      navigationBarUsedColor,
+      navigationBarHighlightColor,
+      navigationBarMutedUnselectedIcon,
+      navigationBarLabelBehavior,
     ];
     return hashList(values);
   }
@@ -639,6 +769,8 @@ class FlexSubThemesData with Diagnosticable {
         'toggleButtonsRadius', toggleButtonsRadius));
     properties.add(DiagnosticsProperty<double>(
         'inputDecorationRadius', inputDecorationRadius));
+    properties.add(EnumProperty<FlexUsedColor>(
+        'inputDecoratorUsedColor', inputDecoratorUsedColor));
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorIsFilled', inputDecoratorIsFilled));
     properties
@@ -650,6 +782,7 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
+    properties.add(EnumProperty<FlexUsedColor>('chipUsedColor', chipUsedColor));
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
     properties
@@ -665,6 +798,8 @@ class FlexSubThemesData with Diagnosticable {
         'timePickerDialogRadius', timePickerDialogRadius));
     properties.add(
         DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
+    properties.add(EnumProperty<FlexUsedColor>(
+        'tabBarIndicatorUsedColor', tabBarIndicatorUsedColor));
     properties.add(
         DiagnosticsProperty<double>('bottomSheetRadius', bottomSheetRadius));
     properties.add(DiagnosticsProperty<double>(
@@ -675,8 +810,22 @@ class FlexSubThemesData with Diagnosticable {
         'bottomNavigationBarElevation', bottomNavigationBarElevation));
     properties.add(DiagnosticsProperty<double>(
         'bottomNavigationBarOpacity', bottomNavigationBarOpacity));
+    properties.add(EnumProperty<FlexUsedColor>(
+        'bottomNavigationBarUsedColor', bottomNavigationBarUsedColor));
     properties.add(EnumProperty<BottomNavigationBarLandscapeLayout>(
         'bottomNavigationBarLandscapeLayout',
         bottomNavigationBarLandscapeLayout));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarHeight', navigationBarHeight));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarOpacity', navigationBarOpacity));
+    properties.add(EnumProperty<FlexUsedColor>(
+        'navigationBarUsedColor', navigationBarUsedColor));
+    properties.add(EnumProperty<FlexUsedColor>(
+        'navigationBarHighlightColor', navigationBarHighlightColor));
+    properties.add(DiagnosticsProperty<bool>(
+        'navigationBarMutedUnselectedIcon', navigationBarMutedUnselectedIcon));
+    properties.add(EnumProperty<NavigationDestinationLabelBehavior>(
+        'navigationBarLabelBehavior', navigationBarLabelBehavior));
   }
 }

@@ -50,6 +50,7 @@ class ThemeShowcase extends StatelessWidget {
         const SizedBox(height: 8),
         const Divider(),
         const BottomNavigationBarShowcase(),
+        const NavigationBarShowcase(),
         const SizedBox(height: 8),
         const Divider(),
         const ListTileShowcase(),
@@ -606,7 +607,7 @@ class _BottomNavigationBarShowcaseState
         children: <Widget>[
           const SizedBox(height: 16),
           Text(
-            'BottomNavigationBar',
+            'BottomNavigationBar (Material 2)',
             style: Theme.of(context)
                 .textTheme
                 .caption!
@@ -641,6 +642,64 @@ class _BottomNavigationBarShowcaseState
                 icon: Icon(Icons.create_new_folder),
                 label: 'Folder',
                 // title: Text('Item 3'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class NavigationBarShowcase extends StatefulWidget {
+  const NavigationBarShowcase({Key? key}) : super(key: key);
+
+  @override
+  State<NavigationBarShowcase> createState() => _NavigationBarShowcaseState();
+}
+
+class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
+  int buttonIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(height: 16),
+          Text(
+            'NavigationBar (Material 3)',
+            style: Theme.of(context)
+                .textTheme
+                .caption!
+                .copyWith(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'Default background color is theme colorScheme surface with an '
+            'onSurface overlay color with elevation 3',
+            style: Theme.of(context).textTheme.caption,
+          ),
+          const SizedBox(height: 8),
+          NavigationBar(
+            selectedIndex: buttonIndex,
+            onDestinationSelected: (int value) {
+              setState(() {
+                buttonIndex = value;
+              });
+            },
+            destinations: const <NavigationDestination>[
+              NavigationDestination(
+                icon: Icon(Icons.chat_bubble),
+                label: 'Chat',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.beenhere),
+                label: 'Tasks',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.create_new_folder),
+                label: 'Folder',
               ),
             ],
           ),
