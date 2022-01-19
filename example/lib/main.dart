@@ -93,7 +93,7 @@ const FlexScheme _scheme = FlexScheme.blueWhale;
 // To make it easy to toggle between using the above custom colors, or the
 // selected predefined scheme in this example, set _useScheme to true to use the
 // selected predefined scheme above, set it to false to use the custom colors.
-const bool _useScheme = true;
+const bool _useScheme = false;
 
 // A quick setting for the themed app bar elevation, it defaults to 0.
 // A very low, like 0.5 is pretty nice too, since it gives an underline effect
