@@ -44,26 +44,6 @@ void main() {
       onBackground: Colors.white,
       onError: Colors.black,
     );
-    final FlexSchemeOnColors m5 = FlexSchemeOnColors.from(
-      primary: FlexColor.materialLightPrimary,
-      secondary: FlexColor.materialLightSecondary,
-      surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
-      error: FlexColor.materialLightError,
-    );
-    final FlexSchemeOnColors m6 = FlexSchemeOnColors.from(
-      primary: FlexColor.materialLightPrimary,
-      secondary: FlexColor.materialLightSecondary,
-      surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
-      error: FlexColor.materialLightError,
-      onPrimary: const Color(0xFF121212),
-      onSecondary: const Color(0xFFEEEEEE),
-      onSurface: const Color(0xFFCCCCCC),
-      onBackground: const Color(0xFFDDDDDD),
-      onError: const Color(0xFFAAAAAA),
-    );
-
     // Identity and quality tests
     test(
         'FSOC1.01a: GIVEN the same FlexSchemeOnColor object '
@@ -119,6 +99,14 @@ void main() {
         'unchanged after and empty copyWith.', () {
       expect(m4.copyWith(), m4);
     });
+
+    final FlexSchemeOnColors m5 = FlexSchemeOnColors.from(
+      primary: FlexColor.materialLightPrimary,
+      secondary: FlexColor.materialLightSecondary,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: FlexColor.materialLightError,
+    );
     test(
         'FSOC1.04: GIVEN a FlexSchemeOnColors created from default Material '
         'light surface colors EXPECT correctly computed "onColors".', () {
@@ -133,8 +121,22 @@ void main() {
         ),
       );
     });
+
+    final FlexSchemeOnColors m6 = FlexSchemeOnColors.from(
+      primary: FlexColor.materialLightPrimary,
+      secondary: FlexColor.materialLightSecondary,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: FlexColor.materialLightError,
+      onPrimary: const Color(0xFF121212),
+      onSecondary: const Color(0xFFEEEEEE),
+      onSurface: const Color(0xFFCCCCCC),
+      onBackground: const Color(0xFFDDDDDD),
+      onError: const Color(0xFFAAAAAA),
+    );
+
     test(
-        'FSOC1.05: GIVEN a FlexSchemeOnColors created from default Material '
+        'FSOC1.05a: GIVEN a FlexSchemeOnColors created from default Material '
         'surface colors with OnColors specified EXPECT provided onColors to '
         'be used.', () {
       expect(
@@ -145,6 +147,30 @@ void main() {
           onSurface: Color(0xFFCCCCCC),
           onBackground: Color(0xFFDDDDDD),
           onError: Color(0xFFAAAAAA),
+        ),
+      );
+    });
+
+    final FlexSchemeOnColors m7 = FlexSchemeOnColors.from(
+      primary: FlexColor.materialLightPrimary,
+      secondary: FlexColor.materialLightSecondary,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: const Color(0xffedb4b4),
+    );
+
+    test(
+        'FSOC1.05b: GIVEN a FlexSchemeOnColors created from default Material '
+        'surface colors with OnColors specified EXPECT provided onColors to '
+        'be used.', () {
+      expect(
+        m7,
+        const FlexSchemeOnColors(
+          onPrimary: Color(0xffffffff),
+          onSecondary: Color(0xff000000),
+          onSurface: Color(0xff000000),
+          onBackground: Color(0xff000000),
+          onError: Color(0xff000000),
         ),
       );
     });

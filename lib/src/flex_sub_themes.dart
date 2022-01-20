@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
 
@@ -17,77 +18,85 @@ enum FlexInputBorderType {
   underline,
 }
 
-/// Enum used to described which color from FlexColorScheme's active
+/// Enum used to described which color from the active theme's
 /// [ColorScheme] should be used by certain widget sub-themes.
 ///
-/// This enum is used by widget sub-themes for:
+/// This enum can be used for quick color scheme based customization
+/// of sub-themes for:
 ///
 /// - [TextField] in [FlexSubThemes.inputDecorationTheme].
 /// - [TabBar] indicator color.
 /// - [BottomNavigationBar] in [FlexSubThemes.bottomNavigationBar].
-/// - [NavigationBar] in [FlexSubThemes.navigationBar].
+/// - [NavigationBar] in [FlexSubThemes.navigationBarTheme].
 /// - [ChipThemeData] from [FlexSubThemes.chipTheme].
 ///
-/// It is used when opting in on opinionated sub-themes. The opinionated
-/// sub-theme for these widgets implements a property called `usedSchemeColor`
-/// to select which of the ColorScheme colors it should use. If not set the
-/// property is null and the default behavior of the sub-theme will be used.
+/// It can be used when opting in on opinionated sub-themes. The opinionated
+/// sub-theme for these widgets have one or more properties called
+/// `nnnSchemeColor` where `nnn` describes the color feature that can be set
+/// to a none standard [ColorScheme] based color.
+/// If not set the property is null and the default [ColorScheme] based
+/// color behavior of the opinionated sub-theme will be used. This may differ
+/// from the corresponding Widget's SDK default un-themed color behavior.
 ///
-/// The enum selection Variant colors might be best to avoid for now since they
-/// will deprecated in Flutter SDK soon and replaced with new M3 based color
-/// properties. All the new color properties in the new M3 based ColorScheme
-/// will be added when they reach the stable channel.
+/// The enum selection [primaryVariant] and [secondaryVariant] colors might be
+/// best to avoid since they will deprecated in Flutter SDK soon and replaced
+/// with new Material 3 based color properties. All the new color properties in
+/// the new M3 based [ColorScheme] will be added when they reach the
+/// Flutter stable channel.
 ///
 /// This enum to select and override default Widget colors when using
 /// opinionated sub-themes might be applied to more widgets in later release
-/// if so requested and desired.
-enum FlexUsedColor {
-  /// The color scheme primary color will be used to theme the widget.
+/// if so requested and desired. It should be noted though all will not be since
+/// you can still customize FlexColorScheme themes and its sub-themes
+/// totally [ThemeData.copyWith] methods.
+enum SchemeColor {
+  /// The active theme's color scheme primary color will be used.
   primary,
 
-  /// The color scheme onPrimary color will be used to theme the widget.
+  /// The active theme's color scheme  onPrimary color will be used.
   onPrimary,
 
-  /// The color scheme primaryVariant color will be used to theme the widget.
+  /// The active theme's color scheme primaryVariant color will be used.
   primaryVariant,
 
-  /// The color scheme secondary color will be used to theme the widget.
+  /// The active theme's color scheme secondary color will be used.
   secondary,
 
-  /// The color scheme onSecondary color will be used to theme the widget.
+  /// The active theme's color scheme onSecondary color will be used.
   onSecondary,
 
-  /// The color scheme secondaryVariant color will be used to theme the widget.
+  /// The active theme's color scheme secondaryVariant color will be used.
   secondaryVariant,
 
-  /// The color scheme surface color will be used to theme the widget.
+  /// The active theme's color scheme surface color will be used.
   surface,
 
-  /// The color scheme onSurface color will be used to theme the widget.
+  /// The active theme's color scheme  onSurface color will be used.
   onSurface,
 
-  /// The color scheme background color will be used to theme the widget.
+  /// The active theme's color scheme background color will be used.
   background,
 
-  /// The color scheme onBackground color will be used to theme the widget.
+  /// The active theme's color scheme onBackground color will be used.
   onBackground,
 
-  /// The color scheme error color will be used to theme the widget.
+  /// The active theme's color scheme error color will be used.
   error,
 
-  /// The color scheme onError color will be used to theme the widget.
+  /// The active theme's color scheme onError color will be used.
   onError,
 }
 
-/// Static helpers for opt-in widget sub theming offered by [FlexColorScheme].
+/// Static sub-theme helpers used by opt-in widget sub theming
+/// in [FlexColorScheme].
 ///
 /// FlexSubTheme offers opinionated static theme helpers that are opt-in via
-/// FlexColorScheme(subThemesOptIn: true). You can also configure the
-/// default of the opt-in setup by defining custom configuration values in the
+/// [FlexColorScheme.subThemesOptIn]. You can also change many properties of the
+/// the opt-in setup by defining custom configuration values in the
 /// [FlexSubThemesData] configuration class, and passing it to the
-/// FlexColorScheme(flexThemesData) constructor property.
+/// [FlexColorScheme.flexThemesData] property.
 ///
-/// The configuration class [FlexSubThemesData] offers simple configuration
+/// The configuration class [FlexSubThemesData] offers easy to use configuration
 /// properties for using these sub-themes in FlexColorScheme. You can also use
 /// the static sub-themes without using FlexColorScheme based theming,
 /// however the [FlexSubThemesData] has no impact on the static helpers, it
@@ -97,7 +106,7 @@ enum FlexUsedColor {
 /// sub-theme with custom [ThemeData].
 ///
 /// Sub themes for the following widgets are provided and used via opt-in
-/// flag [useSubThemes] in [FlexColorScheme]:
+/// flag [useSubThemes] in [FlexColorScheme] :
 ///
 /// * [TextButton]
 /// * [ElevatedButton]
@@ -123,19 +132,19 @@ enum FlexUsedColor {
 /// not selected buttons and the style of [ElevatedButton] for selected
 /// button. It does not support [MaterialStateProperty] and has only
 /// one state for different parts of the button. The selected and not selected,
-/// would need different property values to be able to match the general
+/// states would need different property values to be able to match the general
 /// buttons. It can therefore not fully match the same theme style as the
-/// Material states used on two different
-/// [ButtonStyleButton] buttons that it should match.
+/// Material states used on two different [ButtonStyleButton] buttons that
+/// it should match.
 ///
-/// The theme [ButtonThemeData] is also included to provide a very similar
+/// The theme [ButtonThemeData] is included to provide a very similar
 /// theme style on the deprecated legacy buttons `RaisedButton`,
 /// `OutlineButton` and `FlatButton` as on the current main buttons. It is not
 /// an exact match, since the legacy buttons do not offer as flexible
 /// styling as the newer buttons. They do follow and match the styling on
 /// [ToggleButtons] when it comes to hover, press, selected and focus.
-/// Please consider phasing out the legacy though, as the are deprecated and
-/// may soon be removed from the SDK.
+/// Please consider phasing out the legacy buttons, as they are deprecated and
+/// may soon be removed from the Flutter SDK.
 ///
 /// The following widgets that have rounded corners are excluded from the
 /// sub theming:
@@ -150,52 +159,98 @@ enum FlexUsedColor {
 ///   border radius, but the none floating one should remain
 ///   straight. Unclear if it can be done via SDK's current theming features,
 ///   will investigate more in future version.
-/// * [Drawer] should have 16dp default rounding on shown edges, but in current
-///   version of Flutter SDK (2.5.3) it has no theme to enable this. It is
-///   coming in later Flutter version. When it does, it will be added.
+/// * [Drawer] should have 16dp default rounding on shown side edge, but in
+///   current version of Flutter SDK (2.8.1) it has no theme property to enable
+///   this. It is coming in later Flutter version since it is requird by the
+///   Material 3 design. When it is available, it will be added.
 class FlexSubThemes {
   /// Private constructor for the FlexSubThemes static class to prevent it from
   /// being instantiated or extended.
   FlexSubThemes._(); // coverage:ignore-line
 
-  // TODO(rydmike): Add M3 colors when they reach stable.
+  // TODO(rydmike): Add M3 ColorScheme colors when they reach stable.
   /// Returns the [Color] from passed in [ColorScheme] in [colorScheme]
-  /// corresponding to the [FlexUsedColor] enum selection in [useColor].
+  /// corresponding to the [SchemeColor] enum selection in [value].
   ///
-  /// This function is used set a none default color available in the theme
-  /// [ColorScheme] on sub-themes:
+  /// This function is used to select a none default color available in the
+  /// theme's [ColorScheme] in opinionated sub-themes:
   ///
   /// - [TextField] in [FlexSubThemes.inputDecorationTheme]
   /// - [TabBar] indicator color
   /// - [BottomNavigationBar] in [FlexSubThemes.bottomNavigationBar]
-  /// - [NavigationBar] in [FlexSubThemes.navigationBar]
+  /// - [NavigationBar] in [FlexSubThemes.navigationBarTheme]
   /// - [ChipThemeData] from [FlexSubThemes.chipTheme].
-  static Color usedColor(FlexUsedColor useColor, ColorScheme colorScheme) {
-    switch (useColor) {
-      case FlexUsedColor.primary:
+  static Color schemeColor(SchemeColor value, ColorScheme colorScheme) {
+    switch (value) {
+      case SchemeColor.primary:
         return colorScheme.primary;
-      case FlexUsedColor.onPrimary:
+      case SchemeColor.onPrimary:
         return colorScheme.onPrimary;
-      case FlexUsedColor.primaryVariant:
+      case SchemeColor.primaryVariant:
         return colorScheme.primaryVariant;
-      case FlexUsedColor.secondary:
+      case SchemeColor.secondary:
         return colorScheme.secondary;
-      case FlexUsedColor.onSecondary:
+      case SchemeColor.onSecondary:
         return colorScheme.onSecondary;
-      case FlexUsedColor.secondaryVariant:
+      case SchemeColor.secondaryVariant:
         return colorScheme.secondaryVariant;
-      case FlexUsedColor.surface:
+      case SchemeColor.surface:
         return colorScheme.surface;
-      case FlexUsedColor.onSurface:
+      case SchemeColor.onSurface:
         return colorScheme.onSurface;
-      case FlexUsedColor.background:
+      case SchemeColor.background:
         return colorScheme.background;
-      case FlexUsedColor.onBackground:
+      case SchemeColor.onBackground:
         return colorScheme.onBackground;
-      case FlexUsedColor.error:
+      case SchemeColor.error:
         return colorScheme.error;
-      case FlexUsedColor.onError:
+      case SchemeColor.onError:
         return colorScheme.onError;
+    }
+  }
+
+  /// Returns the [Color] from passed in [ColorScheme] in [colorScheme]
+  /// that is the color pair corresponding to the [SchemeColor] enum
+  /// value passed in via [value].
+  ///
+  /// This function is used to get the color value for the color pair to the
+  /// passed in scheme enum value, thus giving the correct Colorscheme based
+  /// contrast color for the provided [SchemeColor]. For example passing in
+  /// [SchemeColor.primary] enum value, will return the [ColorScheme.onPrimary].
+  /// Wise versa, passing in [SchemeColor.onPrimary] will return the color
+  /// [ColorScheme.primary].
+  static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) {
+    switch (value) {
+      case SchemeColor.primary:
+        return colorScheme.onPrimary;
+      case SchemeColor.onPrimary:
+        return colorScheme.primary;
+      // There is no onColor pair for primaryVariant, we return onPrimary,
+      // this issue will go away when primaryVariant is deprecated and
+      // replaced with new container color that has a defined onColor pair.
+      case SchemeColor.primaryVariant:
+        return colorScheme.onPrimary;
+      case SchemeColor.secondary:
+        return colorScheme.onSecondary;
+      case SchemeColor.onSecondary:
+        return colorScheme.secondary;
+      // There is no onColor pair for secondaryVariant, we return onSecondary,
+      // this issue will go away when secondaryVariant is deprecated and
+      // replaced with new container color that has a defined onColor pair.
+      case SchemeColor.secondaryVariant:
+        return colorScheme.onSecondary;
+      case SchemeColor.surface:
+        return colorScheme.onSurface;
+      case SchemeColor.onSurface:
+        return colorScheme.surface;
+      case SchemeColor.background:
+        return colorScheme.onBackground;
+      case SchemeColor.onBackground:
+        return colorScheme.background;
+      case SchemeColor.error:
+        return colorScheme.onError;
+      case SchemeColor.onError:
+        return colorScheme.error;
     }
   }
 
@@ -633,7 +688,7 @@ class FlexSubThemes {
   /// [InputDecorationTheme], with optional fill color and adjustable
   /// corner radius.
   ///
-  /// Requires the [fillColor] and a [ColorScheme] in [colorScheme]. The color
+  /// Requires a [ColorScheme] in [colorScheme]. The color
   /// scheme would typically be equal the color scheme also used to define the
   /// color scheme for your app theme.
   ///
@@ -642,13 +697,13 @@ class FlexSubThemes {
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
-    /// Select which color from the passed in colorScheme to use for the border
+    /// Selects which color from the passed in colorScheme to use for the border
     /// and fill color of the input decorator.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined it defaults to primary color.
-    final FlexUsedColor? usedSchemeColor,
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
 
     /// The button corner radius.
     ///
@@ -672,13 +727,12 @@ class FlexSubThemes {
     /// Defaults to true.
     final bool filled = true,
 
-    /// Fill color used to fill the `InputDecorator` background with, when
-    /// `filled` is true.
+    /// An optional totally custom fill color used to fill the
+    /// `InputDecorator` background with, when `filled` is true.
     ///
-    /// If null, defaults to color scheme color defined by `usedSchemeColor`
+    /// If null, defaults to color scheme color defined by `baseColor`
     /// withAlpha(0x0D) (5%) if color scheme is light and withAlpha(0x14) (8%)
-    /// if color scheme is dark. The `usedSchemeColor` will result in primary
-    /// color being used if it is null.
+    /// if color scheme is dark.
     final Color? fillColor,
 
     /// The border width when the input is selected.
@@ -694,7 +748,7 @@ class FlexSubThemes {
     /// Horizontal padding on either side of the border's
     /// [InputDecoration.labelText] width gap.
     ///
-    /// Defaults to 4, also default in SDK, no major reason to change it.
+    /// Defaults to 4, which is also the default in SDK default input decorator.
     final double gapPadding = 4,
 
     /// Unfocused input decoration has a border.
@@ -712,9 +766,9 @@ class FlexSubThemes {
     final bool unfocusedHasBorder = true,
   }) {
     // Get selected color, defaults to primary.
-    final Color _baseColor = usedSchemeColor == null
+    final Color _baseColor = baseSchemeColor == null
         ? colorScheme.primary
-        : usedColor(usedSchemeColor, colorScheme);
+        : schemeColor(baseSchemeColor, colorScheme);
 
     final Color _fillColor = fillColor ??
         (colorScheme.brightness == Brightness.dark
@@ -848,21 +902,21 @@ class FlexSubThemes {
 
   /// An opinionated [FloatingActionButtonThemeData] with custom border radius.
   ///
-  /// The border radius default to 16 [kDefaultRadius], new M3 default.
+  /// The border radius defaults to [kDefaultRadius] = 16, the new M3 default.
   /// https://m3.material.io/components/floating-action-button/specs
   ///
-  /// By setting [useShape] to false it is possible to opt out of all
+  /// By setting [useShape] to false, it is possible to opt out of all
   /// shape theming on FABs and keep their M2 defaults, while still eg.
   /// keeping M3 defaults on other widgets or changing their border radius
   /// with the shared global value.
   ///
-  /// You may want to continue to keep the FAB round and extended FAB stadium
-  /// shaped as before, despite otherwise using a rounder or M3 design.
-  /// The circular M2 FAB goes well with those designs too.
+  /// You may want to continue to keep the FAB circular and extended FAB stadium
+  /// (pill) shaped as before, despite otherwise using a rounder or M3 design.
+  /// The circular M2 FAB goes well with those designs too and is more familiar.
   static FloatingActionButtonThemeData floatingActionButtonTheme({
     /// Corner radius of FAB.
     ///
-    /// Defaults to [kDefaultRadius] 16.
+    /// Defaults to [kDefaultRadius] = 16.
     final double? radius,
 
     /// Set to false, to not apply Shape theming to the FAB. It will then keep
@@ -898,8 +952,8 @@ class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined it defaults to primary color.
-    final FlexUsedColor? usedSchemeColor,
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
 
     /// The style to be applied to the chip's label.
     ///
@@ -909,13 +963,13 @@ class FlexSubThemes {
 
     /// Corner radius of the Chip.
     ///
-    /// Defaults to [kChipRadius] 8.
+    /// Defaults to [kChipRadius] = 8, M3 defaults for Chips.
     final double? radius,
   }) {
     // Get base color, defaults to primary.
-    final Color _baseColor = usedSchemeColor == null
+    final Color _baseColor = baseSchemeColor == null
         ? colorScheme.primary
-        : usedColor(usedSchemeColor, colorScheme);
+        : schemeColor(baseSchemeColor, colorScheme);
 
     // For all Chips  except disabled Chip.
     final Color foreground =
@@ -957,22 +1011,22 @@ class FlexSubThemes {
 
   /// An opinionated [CardTheme] with custom corner radius and elevation.
   ///
-  /// Corner [radius] defaults to [kCardRadius] (12) and [elevation]
-  /// defaults to [kCardElevation] (0).
+  /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
+  /// defaults to [kCardElevation] = 0.
   ///
   /// The corner radius 12 is the new default on Cards in M3:
   /// https://m3.material.io/components/cards/specs
   static CardTheme cardTheme({
     /// Corner radius
     ///
-    /// Defaults to [kCardRadius] 12.
+    /// Defaults to [kCardRadius] = 12, M3 defaults for Cards.
     final double? radius,
 
-    /// Card elevation defaults to 0.
+    /// Card elevation defaults to [kCardElevation] = 0.
     final double elevation = kCardElevation,
 
     /// The clipBehaviour of the card theme, defaults to
-    /// [Clip.antiAlias] for smooth clipping with rounded corners.
+    /// [Clip.antiAlias] for smooth clipping when using rounded corners.
     ///
     /// There is no config property in [FlexSubThemesData] for [clipBehavior],
     /// if needed it can be exposed. Feel free to make a PR or submit an issue.
@@ -1041,19 +1095,19 @@ class FlexSubThemes {
   // TODO(rydmike): Consider for Slider value popup background primary blend.
   //  The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp
 
-  // TODO(rydmike): M3 dialog content no padding. Apply when SDK supports it.
+  // TODO(rydmike): Dialog content has no padding property, add when supported.
 
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///
-  /// Corner [radius] defaults to [kDialogRadius] (28) and [elevation] to
-  /// [kDialogElevation] (10).
+  /// Corner [radius] defaults to [kDialogRadius] = 28 and [elevation] to
+  /// [kDialogElevation] = 10.
   ///
   /// The default radius follows Material M3 guide:
   /// https://m3.material.io/components/dialogs/specs
   static DialogTheme dialogTheme({
     /// Corner radius.
     ///
-    /// Defaults to 28 [kDialogRadius].
+    /// Defaults to [kDialogRadius] = 28.
     final double? radius,
 
     /// Dialog elevation defaults to 10 [kDialogElevation].
@@ -1066,7 +1120,7 @@ class FlexSubThemes {
     ///
     /// This property is here so we can provide a custom themed dialog
     /// background color when the ThemeData property dialogBackgroundColor
-    /// is deprecated in Flutter SDK.
+    /// is deprecated in Flutter SDK, which it will be in 2022.
     final Color? backgroundColor,
   }) =>
       DialogTheme(
@@ -1093,7 +1147,7 @@ class FlexSubThemes {
     /// and used by other dialogs.
     ///
     /// If null, this dialog defaults to using surface color and it may
-    /// not match dialogColor used by other dialogs unless kept in sync.
+    /// not match dialogColor used by other dialogs.
     ///
     /// FlexColorScheme sub-theming uses this property to match the background
     /// color to other dialogs.
@@ -1101,12 +1155,12 @@ class FlexSubThemes {
 
     /// Outer corner radius.
     ///
-    /// Defaults to [kDialogRadius] 28.
+    /// Defaults to [kDialogRadius] = 28.
     final double? radius,
 
     /// Elements corner radius.
     ///
-    /// Defaults to [kCardRadius] 12.
+    /// Defaults to [kCardRadius] = 12.
     final double? elementRadius,
 
     /// An input decoration theme, for the time picker.
@@ -1156,11 +1210,11 @@ class FlexSubThemes {
             ),
       );
 
-  // TODO(rydmike): SnackBar needs two corner radius versions.
+  // TODO(rydmike): SnackBar needs two different corner radius versions.
   //   The pinned one should not have a shape, but the floating one should.
   //   Not possible to do via its theme, if it could be then the floating one
   //   should follow the themed corner radius setting and pinned one
-  //   remain straight. The SnackBar implements different shape for its
+  //   remain straight. The SnackBar implements different shapes for its
   //   enum based [SnackBarBehavior], but only if [Shape] property is null:
   //     If null, [SnackBar] provides different defaults depending on the
   //     [SnackBarBehavior]. For [SnackBarBehavior.fixed], no overriding shape
@@ -1194,23 +1248,23 @@ class FlexSubThemes {
   /// An opinionated [BottomSheetThemeData] with custom top corner
   /// radius.
   ///
-  /// Corner `radius` defaults to [kDefaultRadius] (16), `elevation` to
-  /// [kBottomSheetElevation] (4) and `modalElevation` to
-  /// [kBottomSheetModalElevation] (12).
+  /// Corner [radius] defaults to [kDefaultRadius] = 16, [elevation] to
+  /// [kBottomSheetElevation] = 4 and [modalElevation] to
+  /// [kBottomSheetModalElevation] = 8.
   static BottomSheetThemeData bottomSheetTheme({
     /// The corner radius defaults to 16 for the top corners.
     final double? radius,
 
-    /// The bottom sheet elevation defaults to 4.
+    /// The bottom sheet elevation defaults to [kBottomSheetElevation] = 4.
     final double elevation = kBottomSheetElevation,
 
-    /// The bottom sheet elevation defaults to 8.
+    /// The bottom sheet elevation defaults to [kBottomSheetModalElevation] = 8.
     final double modalElevation = kBottomSheetModalElevation,
 
     /// The clipBehaviour of the bottom sheet theme, defaults to
-    /// [Clip.antiAlias] for smooth clipping with rounded corners.
+    /// [Clip.antiAlias] for smoother clipping when using rounded corners.
     ///
-    /// This property is no available in [FlexSubThemeData] but you can use
+    /// This property is not available in [FlexSubThemeData] but you can use
     /// it if you otherwise use this as theme helper.
     final Clip clipBehavior = Clip.antiAlias,
   }) =>
@@ -1228,7 +1282,7 @@ class FlexSubThemes {
 
   /// An opinionated [BottomNavigationBarThemeData] with custom elevation.
   ///
-  /// Its `elevation` defaults to [kBottomNavigationBarElevation] (0).
+  /// Its [elevation] defaults to [kBottomNavigationBarElevation] = 0.
   ///
   /// The bottom navigation bar uses opinionated colors choices from the passed
   /// [colorScheme] to style the bottom navigation bar.
@@ -1241,17 +1295,26 @@ class FlexSubThemes {
     /// your [ThemeData] definition.
     required final ColorScheme colorScheme,
 
-    /// Select which color from the passed in [ColorScheme] to use for the
-    /// selected bottom navigation bar text and icon.
+    /// Select which color from the passed in [ColorScheme] to use as base
+    /// for the bottom navigation bar's text and icon.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
     /// If not defined it defaults to primary color. This differs from the
     /// BottomNavigationBar's default theme that uses secondary color.
     /// If you use value [FlexUsedColor.secondary] you get the default design.
-    final FlexUsedColor? usedSchemeColor,
+    final SchemeColor? baseSchemeColor,
 
-    /// BottomNavigationBar elevation
+    /// Select which color from the passed in [ColorScheme] to use as background
+    /// color for the bottom navigation bar.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined it defaults to colorScheme.background color, same as
+    /// Flutter default theme.
+    final SchemeColor? backgroundSchemeColor,
+
+    /// BottomNavigationBar container elevation.
     ///
     /// Defaults to [kBottomNavigationBarElevation] = 0.
     final double elevation = kBottomNavigationBarElevation,
@@ -1264,14 +1327,16 @@ class FlexSubThemes {
     /// The onBackground alpha blend value for unselected item.
     ///
     /// Defaults to 0x00, no blend of primary, use onBackground color as is.
-    /// FlexColorScheme uses value [kUnselectedBackgroundPrimaryAlphaBlend] when
-    /// it uses this sub theme.
+    ///
+    /// FlexColorScheme uses value [kUnselectedBackgroundPrimaryAlphaBlend]
+    /// = 0x66 when it uses this sub theme.
     final int unselectedAlphaBlend = 0x00,
 
     /// The alpha value for unselected item.
     ///
     /// Defaults to 0xFF, fully opaque.
-    /// FlexColorScheme uses value [kUnselectedBackgroundPrimaryAlphaBlend] when
+    ///
+    /// FlexColorScheme uses value [kUnselectedAlphaBlend] = 0xA5 when
     /// it uses this sub theme.
     final int unselectedAlpha = 0xFF,
 
@@ -1296,24 +1361,31 @@ class FlexSubThemes {
     final BottomNavigationBarLandscapeLayout landscapeLayout =
         BottomNavigationBarLandscapeLayout.spread,
   }) {
-    // Get selected color, defaults to primary.
-    final Color _selectedColor = usedSchemeColor == null
+    // Get item base color, defaults to primary.
+    final Color _baseColor = baseSchemeColor == null
         ? colorScheme.primary
-        : usedColor(usedSchemeColor, colorScheme);
+        : schemeColor(baseSchemeColor, colorScheme);
+    // Get bottom bar background, defaults to background.
+    final Color _backgroundColor = backgroundSchemeColor == null
+        ? colorScheme.background
+        : schemeColor(backgroundSchemeColor, colorScheme);
+    // Get the on color pair for the chosen background color.
+    final Color _backgroundOnColor = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.background, colorScheme);
     return BottomNavigationBarThemeData(
       elevation: elevation,
-      backgroundColor: colorScheme.background.withOpacity(opacity),
+      backgroundColor: _backgroundColor.withOpacity(opacity),
       landscapeLayout: landscapeLayout,
-      selectedItemColor: _selectedColor,
+      selectedItemColor: _baseColor,
       selectedIconTheme: IconThemeData(
-        color: _selectedColor,
+        color: _baseColor,
       ),
-      unselectedItemColor: colorScheme.onBackground
-          .blendAlpha(_selectedColor, unselectedAlphaBlend)
+      unselectedItemColor: _backgroundOnColor
+          .blendAlpha(_baseColor, unselectedAlphaBlend)
           .withAlpha(unselectedAlpha),
       unselectedIconTheme: IconThemeData(
-        color: colorScheme.onBackground
-            .blendAlpha(_selectedColor, unselectedAlphaBlend)
+        color: _backgroundOnColor
+            .blendAlpha(_baseColor, unselectedAlphaBlend)
             .withAlpha(unselectedAlpha),
       ),
     );
@@ -1328,21 +1400,44 @@ class FlexSubThemes {
   /// [colorScheme.surface] like the default theme uses. It also uses
   /// no elevation overlay color. This makes the background of the
   /// [NavigationBar] match the themed background of the [BottomNavigationBar].
+  /// To get Flutter SDK default background back, you can pass in [null]
+  /// to [backgroundSchemeColor].
   ///
   /// Background [opacity] can be set.
   static NavigationBarThemeData navigationBarTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
+    /// Optional base text style for the labels without complicated
+    /// MaterialState. If null, it defaults to
+    /// [FlexColorScheme.m3TextTheme.overline] with color defined by
+    /// [textSchemeColor] and MaterialState added via [mutedUnselectedText] if
+    /// it is true.
+    ///
+    /// FlexColorScheme passes in theme.textTheme.overline, when it defines
+    /// this subTheme to get the correctly themed version of the style used
+    /// by this widget.
+    final TextStyle? labelTextStyle,
+
     /// Select which color from the passed in [ColorScheme] to use as base for
-    /// the navigation bar's icon and text colors.
+    /// the navigation bar's icon color.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
     /// If not defined it defaults to using primary color. This differs
     /// from the NavigationBar's default theme that uses onSurface color.
-    /// If you use value [FlexUsedColor.onSurface] you get the default design.
-    final FlexUsedColor? usedSchemeColor,
+    /// If you use value [SchemeColor.onSurface] you get the default design.
+    final SchemeColor? iconSchemeColor,
+
+    /// Select which color from the passed in [ColorScheme] to use as base for
+    /// the navigation bar's text color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined it defaults to using primary color. This differs
+    /// from the NavigationBar's default theme that uses onSurface color.
+    /// If you use value [SchemeColor.onSurface] you get the default design.
+    final SchemeColor? textSchemeColor,
 
     /// Select which color from the passed in [ColorScheme] to use as base for
     /// the selected navigation bar's highlighted item highlight color.
@@ -1352,7 +1447,26 @@ class FlexSubThemes {
     /// If not defined it defaults to using primary color. This differs from the
     /// NavigationBar's default theme that uses secondary color.
     /// If you use value [FlexUsedColor.secondary] you get the default design.
-    final FlexUsedColor? highlightSchemeColor,
+    final SchemeColor? highlightSchemeColor,
+
+    /// Select which color from the passed in [ColorScheme] to use as background
+    /// color for the navigation bar.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// Defaults to [SchemeColor.background] selection.
+    /// This differs from the Flutter default theme that uses
+    /// [colorScheme.surface] and hard coded elevation overlay color in both
+    /// light and dark theme mode. The different choice of default makes the
+    /// background of the [NavigationBar] match the themed and default
+    /// background of the [BottomNavigationBar]. This default works well with
+    /// color branded surfaces and with other color scheme container colors
+    /// selections that will be available in M3 based ColorScheme when it
+    /// reaches stable  channel.
+    /// To get Flutter SDK default background back, you can pass in [null]
+    /// to [backgroundColor], it will then use widget default behavior
+    /// background.
+    final SchemeColor? backgroundSchemeColor = SchemeColor.background,
 
     /// NavigationBar height.
     ///
@@ -1363,6 +1477,10 @@ class FlexSubThemes {
     final double height = kNavigationBarHeight,
 
     /// NavigationBar background opacity.
+    ///
+    /// The opacity value is only applied when a none null value is passed
+    /// in [backgroundColor], it cannot be applied to the default Flutter SDK
+    /// background color.
     ///
     /// Default to 1, fully opaque.
     final double opacity = 1,
@@ -1387,6 +1505,12 @@ class FlexSubThemes {
     /// Defaults to true.
     final bool mutedUnselectedIcon = true,
 
+    /// If true, the unselected text in the [NavigationBar] use a more muted
+    /// color version of the color defined by [iconSchemeColor].
+    ///
+    /// Defaults to true.
+    final bool mutedUnselectedText = true,
+
     /// The icon color alpha blend value for unselected item.
     ///
     /// Defaults to 0x00, no blend of primary, use onBackground color as is.
@@ -1406,32 +1530,59 @@ class FlexSubThemes {
     // Get defined indicator color, defaults to primary.
     final Color _indicatorColor = highlightSchemeColor == null
         ? colorScheme.primary
-        : usedColor(highlightSchemeColor, colorScheme);
+        : schemeColor(highlightSchemeColor, colorScheme);
 
-    // Get selected color, defaults to primary.
-    final Color _itemColor = usedSchemeColor == null
+    // Get icon color, defaults to primary.
+    final Color _iconColor = iconSchemeColor == null
         ? colorScheme.primary
-        : usedColor(usedSchemeColor, colorScheme);
+        : schemeColor(iconSchemeColor, colorScheme);
+
+    // Get text color, defaults to primary.
+    final Color _textColor = textSchemeColor == null
+        ? colorScheme.primary
+        : schemeColor(textSchemeColor, colorScheme);
+
+    // Get selected text style, defaults to FlexColorScheme.m3TextTheme.overline
+    // if not defined.
+    final TextStyle _textStyle =
+        labelTextStyle ?? FlexColorScheme.m3TextTheme.overline!;
+
     return NavigationBarThemeData(
       height: height,
       labelBehavior: labelBehavior,
-      backgroundColor: colorScheme.background.withOpacity(opacity),
+      backgroundColor: backgroundSchemeColor != null
+          ? schemeColor(backgroundSchemeColor, colorScheme).withOpacity(opacity)
+          : null,
       indicatorColor: _indicatorColor.withAlpha(indicatorAlpha),
+      labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return _textStyle.copyWith(color: _textColor);
+          }
+          return _textStyle.copyWith(
+            color: mutedUnselectedText
+                ? _textColor
+                    .blendAlpha(_textColor, unselectedAlphaBlend)
+                    .withAlpha(unselectedAlpha)
+                : _textColor,
+          );
+        },
+      ),
       iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
         (Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
             return IconThemeData(
               size: 24,
-              color: _itemColor,
+              color: _iconColor,
             );
           }
           return IconThemeData(
             size: 24,
             color: mutedUnselectedIcon
-                ? _itemColor
-                    .blendAlpha(_itemColor, unselectedAlphaBlend)
+                ? _iconColor
+                    .blendAlpha(_iconColor, unselectedAlphaBlend)
                     .withAlpha(unselectedAlpha)
-                : _itemColor,
+                : _iconColor,
           );
         },
       ),

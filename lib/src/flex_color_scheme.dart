@@ -3878,7 +3878,7 @@ class FlexColorScheme with Diagnosticable {
     final InputDecorationTheme effectiveInputDecorationTheme = useSubThemes
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
-            usedSchemeColor: subTheme.inputDecoratorUsedColor,
+            baseSchemeColor: subTheme.inputDecoratorSchemeColor,
             radius: subTheme.inputDecorationRadius ??
                 subTheme.defaultRadius ??
                 kButtonRadius,
@@ -3892,7 +3892,6 @@ class FlexColorScheme with Diagnosticable {
         // Default one is also a bit opinionated, this is the default from
         // all previous versions before version 4.0.0.
         : InputDecorationTheme(
-            // TODO(rydmike): Document inputDecoratorIsFilled via not opt-in.
             // Extend filled property to previous always filled ones, defaults
             // to filled as before, but can now also be unfilled even if not
             // opted in on sub themes, by setting the property for it
@@ -4004,10 +4003,10 @@ class FlexColorScheme with Diagnosticable {
 
       // Use TabBar style dependent function for selected Tab as indicatorColor
       // if no color scheme selection for it is made.
-      indicatorColor: subTheme.tabBarIndicatorUsedColor == null
+      indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
           ? selectedTabColor()
-          : FlexSubThemes.usedColor(
-              subTheme.tabBarIndicatorUsedColor!, colorScheme),
+          : FlexSubThemes.schemeColor(
+              subTheme.tabBarIndicatorSchemeColor!, colorScheme),
 
       // Elevation overlay on dark material elevation is used on dark themes
       // on surfaces when so requested, applyElevationOverlayColor defaults
@@ -4304,7 +4303,7 @@ class FlexColorScheme with Diagnosticable {
       chipTheme: useSubThemes
           ? FlexSubThemes.chipTheme(
               colorScheme: colorScheme,
-              usedSchemeColor: subTheme.chipUsedColor,
+              baseSchemeColor: subTheme.chipSchemeColor,
               labelStyle: effectiveTextTheme.button!,
               radius: subTheme.chipRadius ?? subTheme.defaultRadius,
             )
@@ -4372,7 +4371,9 @@ class FlexColorScheme with Diagnosticable {
       bottomNavigationBarTheme: useSubThemes
           ? FlexSubThemes.bottomNavigationBar(
               colorScheme: colorScheme,
-              usedSchemeColor: subTheme.bottomNavigationBarUsedColor,
+              baseSchemeColor: subTheme.bottomNavigationBarSchemeColor,
+              backgroundSchemeColor:
+                  subTheme.bottomNavigationBarBackgroundSchemeColor,
               elevation: subTheme.bottomNavigationBarElevation,
               opacity: subTheme.bottomNavigationBarOpacity,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
@@ -4388,12 +4389,17 @@ class FlexColorScheme with Diagnosticable {
       navigationBarTheme: useSubThemes
           ? FlexSubThemes.navigationBarTheme(
               colorScheme: colorScheme,
-              usedSchemeColor: subTheme.navigationBarUsedColor,
-              highlightSchemeColor: subTheme.navigationBarHighlightColor,
+              labelTextStyle: effectiveTextTheme.overline,
+              iconSchemeColor: subTheme.navigationBarIconSchemeColor,
+              textSchemeColor: subTheme.navigationBarTextSchemeColor,
+              highlightSchemeColor: subTheme.navigationBarHighlightSchemeColor,
+              backgroundSchemeColor:
+                  subTheme.navigationBarBackgroundSchemeColor,
               height: subTheme.navigationBarHeight,
               opacity: subTheme.navigationBarOpacity,
               labelBehavior: subTheme.navigationBarLabelBehavior,
               mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon,
+              mutedUnselectedText: subTheme.navigationBarMutedUnselectedText,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
             )

@@ -33,18 +33,18 @@ void main() => runApp(const DemoApp());
 // FlexColorScheme.dark().toTheme.
 //
 // The purpose is to provide any easy to use in-code based playground that
-// you can experiment with and use as quick starter template to start using
+// you can experiment with and use as a quick starter template to start using
 // FlexColorScheme to make beautiful Flutter themes for your applications.
 // It is also a code and comment based quick guide for devs that don't read
 // long documentation.
 //
 // This setup is convenient since you can edit the values for both the light
-// and dark theme mode via shared property, values and observe the changes
-// in the built app via hot reload.
+// and dark theme mode via shared property values and observe the changes
+// in the built app using hot reload.
 //
 // In a real app you might tuck away your color definitions and FlexColorScheme
 // settings in a static class with const and final values, and static functions
-// as required. The other tutorials show an example of this as well.
+// as required. The other tutorials show examples of this as well.
 //
 // To learn more about using FlexColorScheme, it is recommended to go through
 // the step-by-step tutorial that uses examples 1 to 5 to explain and
@@ -100,8 +100,8 @@ const bool _useScheme = false;
 // visible with e.g. white or light colored app bars.
 const double _appBarElevation = 0.5;
 
-// There is quick setting to put an opacity value on the app bar. If used we can
-// see content scroll behind it, if we extend the Scaffold behind the AppBar.
+// There is setting to put an opacity value on the app bar. If used, we can see
+// content scroll behind it, if we extend the Scaffold behind the AppBar.
 const double _appBarOpacity = 0.94;
 
 // If you set _computeDarkTheme below to true, the dark scheme will be computed
@@ -204,6 +204,9 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // radius is defined to always be 24:
   bottomSheetRadius: 24,
 
+  // Use the Material 3 like text theme. Defaults to true.
+  useTextTheme: true,
+
   // Select input decorator type, only SDK options outline and underline
   // supported no, but custom ones may be added later.
   inputDecoratorBorderType: FlexInputBorderType.outline,
@@ -215,12 +218,12 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // Select the ColorScheme color used for input decoration border.
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.
-  inputDecoratorUsedColor: FlexUsedColor.primary,
+  inputDecoratorSchemeColor: SchemeColor.primary,
 
   // Select the ColorScheme color used by Chips as their base color
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.
-  chipUsedColor: FlexUsedColor.secondaryVariant,
+  chipSchemeColor: SchemeColor.primary,
 
   // Elevations have easy override values as well.
   elevatedButtonElevation: 1,
@@ -229,28 +232,49 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // toggle buttons.
   thickBorderWidth: 2, // Default is 2.0.
   thinBorderWidth: 1.5, // Default is 1.5.
-  // Select the ColorScheme color used for selected tab bar indicator.
+
+  // Select the ColorScheme color used for selected TabBar indicator.
   // Defaults to same color as selected tab if not defined.
-  // tabBarIndicatorUsedColor: FlexUsedColor.secondary,
+  // tabBarIndicatorSchemeColor: SchemeColor.secondary,
 
   // Select the ColorScheme color used for selected bottom navigation bar item.
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.
-  bottomNavigationBarUsedColor: FlexUsedColor.primary,
+  bottomNavigationBarSchemeColor: SchemeColor.primary,
 
-  // Select the ColorScheme color used for M3 [NavigationBar] icons.
+  // Select the ColorScheme color used for bottom navigation bar background.
+  // Background is default so no need to set that, provided here as placeholder
+  // to enable easy selection of other options.
+  bottomNavigationBarBackgroundSchemeColor: SchemeColor.background,
+
+  // Select the ColorScheme color used for M3 based [NavigationBar] icons.
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.
-  navigationBarUsedColor: FlexUsedColor.primary,
+  navigationBarIconSchemeColor: SchemeColor.primary,
+
+  // Select the ColorScheme color used for M3 based [NavigationBar] icons.
+  // Primary is default so no need to set that, used here as placeholder to
+  // enable easy selection of other options.
+  navigationBarTextSchemeColor: SchemeColor.onSurface,
 
   // When set to true [NavigationBar] unselected icons use a more muted version
-  // of the color defined by [navigationBarUsedColor]. Defaults to true.
+  // of the color defined by [navigationBarIconSchemeColor]. Defaults to true.
   navigationBarMutedUnselectedIcon: true,
+
+  // When set to true [NavigationBar] unselected text use a more muted version
+  // of the color defined by [navigationBarTextSchemeColor]. Defaults to true.
+  navigationBarMutedUnselectedText: true,
 
   // Select the ColorScheme base color used to highlight selected item.
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.
-  navigationBarHighlightColor: FlexUsedColor.primary,
+  navigationBarHighlightSchemeColor: SchemeColor.primary,
+
+  // Select the ColorScheme color used for navigation bar background.
+  // Background is default so no need to set that, provided here as placeholder
+  // to enable easy selection of other options.
+  // You can force pass in [null] to use Widget default M3 based background.
+  navigationBarBackgroundSchemeColor: SchemeColor.background,
 );
 
 // If true, the top part of the Android AppBar has no scrim, it then becomes
@@ -501,14 +525,15 @@ class _HomePageState extends State<HomePage> {
       // theme color as we change themes for the page. This is normal Flutter
       // behavior. By using an annotated region with the helper function
       // FlexColorScheme.themedSystemNavigationBar, we can make the
-      // navigation bar follow desired background color and theme-mode.
+      // navigation bar follow desired background color and theme mode.
       // This looks much better and as it should on Android devices.
       // It also supports system navbar with opacity or fully transparent
       // Android system navigation bar on Android SDK >= 29.
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
-        // On Android SDK >= 29, try changing this to transparent, and the
-        // sub page demo with a bottom navigation bar, and some opacity set.
+        // On Android SDK >= 29, try changing this to transparent, then on the
+        // sub page demo with a bottom navigation bar and some opacity set
+        // further below in [opacity].
         // You then get one homogeneously slightly transparent area, shared
         // with the bottom navigation bar and system navigation bar.
         systemNavBarStyle: FlexSystemNavBarStyle.background,
@@ -517,7 +542,8 @@ class _HomePageState extends State<HomePage> {
         // opacity or fully transparent.
         useDivider: false,
         // You can set opacity on the Android system navigation bar, this will
-        // result in content being visible behind it if Scaffold use extendBody.
+        // result in content being visible behind it if Scaffold uses
+        // extendBody.
         opacity: 0.60,
       ),
       child: ResponsiveScaffold(
