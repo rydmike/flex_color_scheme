@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_sub_themes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -1119,10 +1120,10 @@ void main() {
     // FlexColorScheme.light & dark factory tests. With
     // highBackgroundLowScaffold to hit background red color less than surface.
     // Coverage hit test.
-    // TODO(rydmike): Improve the tests.
+    // TODO(rydmike): Improve tests by adding more results verification checks.
     //**************************************************************************
 
-    final ThemeData tLightHB = FlexColorScheme.light(
+    final ThemeData tLightHb = FlexColorScheme.light(
       scheme: FlexScheme.red,
       surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
       blendLevel: 30,
@@ -1133,8 +1134,31 @@ void main() {
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
       useSubThemes: true,
-      subThemesData: const FlexSubThemesData(defaultRadius: 8),
+      subThemesData: const FlexSubThemesData(
+        defaultRadius: 8,
+        tabBarIndicatorSchemeColor: SchemeColor.secondary,
+      ),
     ).toTheme;
+
+    test(
+        'FCS7.82-1L: GIVEN a FlexColorScheme.light with more options '
+        'EXPECT none null result.', () {
+      expect(tLightHb, isNotNull);
+    });
+
+    test(
+        'FCS7.82-2L indicator: GIVEN tabBarIndicatorUsedColor: '
+        'FlexUsedColor.secondary '
+        'EXPECT indicator color to be theme.scheme.secondary', () {
+      expect(tLightHb.indicatorColor, tLightHb.colorScheme.secondary);
+    });
+
+    final RoundedRectangleBorder shapeL =
+        tLightHb.popupMenuTheme.shape! as RoundedRectangleBorder;
+
+    test('FCS7.82-3L shape: Expect border radius 8', () {
+      expect(shapeL.borderRadius, BorderRadius.circular(8.0));
+    });
 
     final ThemeData tDarkHb = FlexColorScheme.dark(
       scheme: FlexScheme.red,
@@ -1147,25 +1171,37 @@ void main() {
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
       useSubThemes: true,
-      subThemesData: const FlexSubThemesData(defaultRadius: 8),
+      subThemesData: const FlexSubThemesData(
+        defaultRadius: 12,
+        tabBarIndicatorSchemeColor: SchemeColor.error,
+      ),
     ).toTheme;
 
-    test(
-        'FCS7.82-1L: GIVEN a FlexColorScheme.light with more options '
-        'EXPECT none null result.', () {
-      expect(tLightHB, isNotNull);
-    });
-
-    final RoundedRectangleBorder shape =
-        tLightHB.popupMenuTheme.shape! as RoundedRectangleBorder;
-
-    test('FCS7.82-1L shape: Expect border radius 8', () {
-      expect(shape.borderRadius, BorderRadius.circular(8.0));
-    });
     test(
         'FCS7.82-1D: GIVEN a FlexColorScheme.dark with more options '
         'EXPECT none null result.', () {
       expect(tDarkHb, isNotNull);
+    });
+
+    test(
+        'FCS7.82-2D indicator: GIVEN tabBarIndicatorUsedColor: '
+        'FlexUsedColor.error '
+        'EXPECT indicator color to be theme.scheme.secondary', () {
+      expect(tDarkHb.indicatorColor, tDarkHb.colorScheme.error);
+    });
+
+    final RoundedRectangleBorder shapeD =
+        tDarkHb.popupMenuTheme.shape! as RoundedRectangleBorder;
+    final RoundedRectangleBorder shapeD2 =
+        tDarkHb.cardTheme.shape! as RoundedRectangleBorder;
+
+    test(
+        'FCS7.82-3D shape: Expect border radius 10 on popup, it '
+        'does not higher via default parameter', () {
+      expect(shapeD.borderRadius, BorderRadius.circular(10.0));
+    });
+    test('FCS7.82-4D shape: Expect border radius 12 on card', () {
+      expect(shapeD2.borderRadius, BorderRadius.circular(12.0));
     });
 
     //**************************************************************************

@@ -5,8 +5,8 @@ import 'flex_color_scheme.dart';
 import 'flex_scheme.dart';
 import 'flex_sub_themes_data.dart';
 
-/// Convenience extensions on ThemeData to return a ThemeData object defined
-/// by [FlexColorScheme.toTheme] method.
+/// Convenience extensions on [ThemeData] to return a ThemeData object defined
+/// by the [FlexColorScheme.toTheme] method.
 ///
 /// Provided convenience extensions are:
 ///
@@ -24,8 +24,8 @@ import 'flex_sub_themes_data.dart';
 ///
 /// Using these static extension with the Extension name does not yet add as
 /// much familiarity as being able to use it on ThemeData directly would do.
-/// It was anyway added as an option, hopefully pending delivery on above
-/// mentioned issue will allow for the 2nd mentioned syntax as well some day.
+/// It was anyway added as an option, if the above mentioned issue leads to
+/// support the 2nd mentioned syntax as well some day it will be added then.
 ///
 /// Using FlexThemeData.light() is still a bit shorter
 /// than FlexColorScheme.light().toTheme, and it may feel more familiar.

@@ -44,6 +44,8 @@ class _HomePageState extends State<HomePage> {
   // Open close/state of each card.
   late List<bool> isCardOpen;
 
+  final ScrollController scrollController = ScrollController();
+
   // The number of cards in the grid, must match the number we add to grid view.
   static const int _nrOfCards = 22;
 
@@ -186,6 +188,7 @@ class _HomePageState extends State<HomePage> {
           if (columns >= 4) margins = AppData.edgeInsetsBigDesktop;
 
           return MasonryGridView.count(
+            controller: scrollController,
             crossAxisCount: columns,
             mainAxisSpacing: margins,
             crossAxisSpacing: margins,

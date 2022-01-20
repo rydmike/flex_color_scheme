@@ -1684,7 +1684,7 @@ rebuilds the UI to reflect our new theme settings.
 It gets repetitive and rather long to show the details here. It is easier to 
 read `main` and `MaterialApp` StatelessWidget code [here](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/example5/main.dart).
 It is well commented and explains all its parts well. You can certainly
-examine the `HomePage`, I recommend doing that with and IDE though.
+examine the `HomePage`, I recommend doing that with an IDE though.
 It is beyond the scope of this tutorial to explain all its details,
 but mostly it is just simple UI layout code and dealing with some issues
 not related to FlexColorScheme.

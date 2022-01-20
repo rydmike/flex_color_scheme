@@ -95,7 +95,8 @@ void main() {
       expect(
         FlexSubThemes.bottomNavigationBar(
           colorScheme: colorScheme,
-          usedSchemeColor: FlexUsedColor.secondary,
+          baseSchemeColor: SchemeColor.secondary,
+          backgroundSchemeColor: SchemeColor.error,
           elevation: 1,
           landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
           opacity: 0.5,
@@ -105,17 +106,17 @@ void main() {
         equals(
           BottomNavigationBarThemeData(
             elevation: 1,
-            backgroundColor: colorScheme.background.withOpacity(0.5),
+            backgroundColor: colorScheme.error.withOpacity(0.5),
             landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
             selectedItemColor: colorScheme.secondary,
             selectedIconTheme: IconThemeData(
               color: colorScheme.secondary,
             ),
-            unselectedItemColor: colorScheme.onBackground
+            unselectedItemColor: colorScheme.onError
                 .blendAlpha(colorScheme.secondary, 0xFA)
                 .withAlpha(0x45),
             unselectedIconTheme: IconThemeData(
-              color: colorScheme.onBackground
+              color: colorScheme.onError
                   .blendAlpha(colorScheme.secondary, 0xFA)
                   .withAlpha(0x45),
             ),
@@ -360,7 +361,7 @@ void main() {
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
-          usedSchemeColor: FlexUsedColor.secondary,
+          baseSchemeColor: SchemeColor.secondary,
           borderType: FlexInputBorderType.underline,
         ),
         equals(
@@ -1106,7 +1107,7 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          usedSchemeColor: FlexUsedColor.secondary,
+          baseSchemeColor: SchemeColor.secondary,
           labelStyle: textTheme.button!,
         ),
         equals(
@@ -1148,6 +1149,19 @@ void main() {
             labelBehavior: null,
             backgroundColor: colorScheme.background.withOpacity(1),
             indicatorColor: colorScheme.primary.withAlpha(0x3D),
+            labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return FlexColorScheme.m3TextTheme.overline!
+                      .copyWith(color: colorScheme.primary);
+                }
+                return FlexColorScheme.m3TextTheme.overline!.copyWith(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.primary, 0x00)
+                      .withAlpha(0xFF),
+                );
+              },
+            ),
             iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
@@ -1169,8 +1183,9 @@ void main() {
     });
 
     //
-    test('FST1.17-states: Does navigationBarTheme have right material states',
-        () {
+    test(
+        'FST1.17-states1: Does navigationBarTheme have right material '
+        'icon states', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
@@ -1188,7 +1203,27 @@ void main() {
               .withAlpha(0xFF),
         ),
       );
-      //
+    });
+    test(
+        'FST1.17-states2: Does navigationBarTheme have right material '
+        'text label states', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
+            .labelTextStyle!
+            .resolve(<MaterialState>{MaterialState.selected})?.color,
+        equals(colorScheme.primary),
+      );
+      expect(
+        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
+            .labelTextStyle!
+            .resolve(<MaterialState>{})?.color,
+        equals(
+          colorScheme.primary
+              .blendAlpha(colorScheme.primary, 0x00)
+              .withAlpha(0xFF),
+        ),
+      );
     });
 
     test(
@@ -1199,12 +1234,15 @@ void main() {
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
-        usedSchemeColor: FlexUsedColor.secondary,
-        highlightSchemeColor: FlexUsedColor.secondaryVariant,
+        iconSchemeColor: SchemeColor.secondary,
+        textSchemeColor: SchemeColor.error,
+        backgroundSchemeColor: null,
+        highlightSchemeColor: SchemeColor.secondaryVariant,
         height: 80,
         opacity: 0.9,
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         mutedUnselectedIcon: true,
+        mutedUnselectedText: true,
         indicatorAlpha: 0x3D,
         unselectedAlphaBlend: 0x66,
         unselectedAlpha: 0xA5,
@@ -1215,8 +1253,20 @@ void main() {
           NavigationBarThemeData(
             height: 80,
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            backgroundColor: colorScheme.background.withOpacity(0.9),
             indicatorColor: colorScheme.secondaryVariant.withAlpha(0x3D),
+            labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return FlexColorScheme.m3TextTheme.overline!
+                      .copyWith(color: colorScheme.error);
+                }
+                return FlexColorScheme.m3TextTheme.overline!.copyWith(
+                  color: colorScheme.error
+                      .blendAlpha(colorScheme.error, 0x66)
+                      .withAlpha(0xA5),
+                );
+              },
+            ),
             iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
@@ -1249,6 +1299,17 @@ void main() {
               .withAlpha(0xA5),
         ),
       );
+      expect(
+        navBarTheme.labelTextStyle!
+            .resolve(<MaterialState>{MaterialState.selected})?.color,
+        equals(colorScheme.error),
+      );
+      expect(
+        navBarTheme.labelTextStyle!.resolve(<MaterialState>{})?.color,
+        equals(
+          colorScheme.error.blendAlpha(colorScheme.error, 0x66).withAlpha(0xA5),
+        ),
+      );
     });
 
     test(
@@ -1259,12 +1320,16 @@ void main() {
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
-        usedSchemeColor: FlexUsedColor.secondaryVariant,
-        highlightSchemeColor: FlexUsedColor.secondary,
+        labelTextStyle: FlexColorScheme.m3TextTheme.caption,
+        iconSchemeColor: SchemeColor.secondaryVariant,
+        textSchemeColor: SchemeColor.primaryVariant,
+        highlightSchemeColor: SchemeColor.secondary,
+        backgroundSchemeColor: SchemeColor.error,
         height: 80,
         opacity: 0.9,
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         mutedUnselectedIcon: false,
+        mutedUnselectedText: false,
         indicatorAlpha: 0x3D,
         unselectedAlphaBlend: 0x66,
         unselectedAlpha: 0xA5,
@@ -1275,8 +1340,18 @@ void main() {
           NavigationBarThemeData(
             height: 80,
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            backgroundColor: colorScheme.background.withOpacity(0.9),
+            backgroundColor: colorScheme.error.withOpacity(0.9),
             indicatorColor: colorScheme.secondary.withAlpha(0x3D),
+            labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return FlexColorScheme.m3TextTheme.caption!
+                      .copyWith(color: colorScheme.primaryVariant);
+                }
+                return FlexColorScheme.m3TextTheme.caption!
+                    .copyWith(color: colorScheme.primaryVariant);
+              },
+            ),
             iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
@@ -1302,6 +1377,17 @@ void main() {
         navBarTheme.iconTheme!.resolve(<MaterialState>{})?.color,
         equals(
           colorScheme.secondaryVariant,
+        ),
+      );
+      expect(
+        navBarTheme.labelTextStyle!
+            .resolve(<MaterialState>{MaterialState.selected})?.color,
+        equals(colorScheme.primaryVariant),
+      );
+      expect(
+        navBarTheme.labelTextStyle!.resolve(<MaterialState>{})?.color,
+        equals(
+          colorScheme.primaryVariant,
         ),
       );
     });

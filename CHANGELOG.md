@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.2.0] - January 19, 2022 (WORK IN PROGRESS)
+## [4.2.0] - January 20, 2022 (WORK IN PROGRESS)
 
 * Updated required Dart SDK to minimum 2.15 that Flutter 2.8.0 uses. Thus, 
   to use this release at least Flutter 2.8.0 is required.
@@ -13,71 +13,89 @@ All notable changes to the **FlexColorScheme** package are documented here.
   Flutter 2.8.0 and later.
 
 
-* Add `ColorScheme` color selection option to selected opinionated sub-themes. The
+* Added a `ColorScheme` color selection option to selected opinionated sub-themes. The
   sub-themes that support changing their `ColorScheme` based themed color 
-  selection, have a `usedSchemeColor` property. It is a `FlexUsedColor` enum 
-  property used to select the enum value that corresponds to same named color 
-  property value in `theme.colorScheme`. This `FlexUsedColor` property color 
+  selection, have one or more properties called
+  `nnnSchemeColor` where `nnn` describes the color feature that can be set
+  to an alternative `ColorScheme` based color and not just its pre-defined
+  `ColorScheme` color property.
+  The color selector is a `SchemeColor` enum property that is used to select 
+  the enum value that corresponds to same named color 
+  property value in `theme.colorScheme`. This `SchemeColor` property color 
   quick selection option has been added to:
-  - `TextField` in `FlexSubThemes.inputDecorationTheme` to select base color for 
-    the border and and fill color.
+  - Style `TextField` in `FlexSubThemes.inputDecorationTheme` to select a base 
+    color for the border and fill color.
   - `TabBar` theming to select its indicator color, when you want it to be a 
-    different color than the color of the `TabBar` icon and text as 
-    controlled via `FlexTabBarStyle` in the `FlexColorScheme.tabBarStyle` property.
+    different color than the color of the `TabBar` icon and text, which are 
+    controlled via `FlexTabBarStyle` in the `FlexColorScheme.tabBarStyle` 
+    property as before. It gives you an easy option to override the indicator
+    color with any of the theme's color scheme colors.
   - `BottomNavigationBar` in `FlexSubThemes.bottomNavigationBar` to set the 
     preferred color of the icon and label text in the Material 2 based 
-    `BottomNavigationBar`.
+    `BottomNavigationBar` as well as its background color.
   - `NavigationBar` in `FlexSubThemes.navigationBarTheme` to set the
-    preferred `ColorScheme` color of the icon in the Material 3 based 
+    preferred `ColorScheme` color of the text, icon in the Material 3 based 
     `NavigationBar`, as well as the pill shaped highlight color separately that
-    surrounds the selected icon.
+    surrounds the selected icon and the background color.
   - `ChipThemeData` from `FlexSubThemes.chipTheme` to change the used `ColorScheme`
     base color of Chips.  
 * The `FlexUsedColor` properties for the above sub-themes have same default 
   `ColorScheme` color values as they did before. The additional configuration options
   are none breaking. The enum properties to modify the used `ColorScheme` color 
-  can be defined in configuration class `FlexSubThemesData` using its new properties:
-  - `inputDecoratorUsedColor`
-  - `tabBarIndicatorUsedColor`
+  can be defined in the configuration class `FlexSubThemesData` using its 
+  new properties:
+  - `inputDecoratorSchemeColor`
+  - `chipSchemeColor`
+  - `tabBarIndicatorSchemeColor`
   - `bottomNavigationBarUsedColor`
-  - `navigationBarUsedColor`
-  - `navigationBarHighlightColor`
-  - `chipUsedColor`
+  - `bottomNavigationBarSchemeColor`
+  - `bottomNavigationBarBackgroundSchemeColor`
+  - `navigationBarIconSchemeColor`
+  - `navigationBarTextSchemeColor`
+  - `navigationBarHighlightSchemeColor`
+  - `navigationBarBackgroundSchemeColor`
+  
 * Usage examples of the above new configuration possibilities have been added to
   the default example, the hot reload playground.
-* The ColorScheme color selection in `FlexUsedColor` includes all colors in 
+* The ColorScheme color selection in `SchemeColor` includes all colors in 
   `ColorScheme` supported by Flutter 2.8. It is recommended to avoid using the
-  two "Variant" colors, because the variant colors are being deprecated soon. 
+  `primaryVariant` and `secondaryVariant` colors if you want to avoid later
+  migrations, because these variant colors are being deprecated, 
   see [#93427](https://github.com/flutter/flutter/pull/93427). 
 * A later FlexColorScheme version will add support for the new Material 3
-  colors in `ColorScheme` when they land in stable channel.
+  colors in `ColorScheme` when they land in the stable channel.
 * This quick selection of `ColorScheme` based colors as none standard themed
-  colors of widget sub-themes will/may be extended to other sub-themes as well
-  if it is deemed as practical quick way to customize widget sub-theme colors
-  within the constraints of colors in the `theme.colorScheme`. As before you
+  colors of widget sub-themes may be extended to a few more sub-themes in 
+  future versions, if it is seen as a practical and quick way to customize 
+  widget sub-theme colors within the constraints of colors in 
+  the `theme.colorScheme`. As before you
   can still apply your own total custom sub-themes to the `ThemeData` created
-  with with `FlexColorScheme` using `copyWith`. FlexColorScheme is just a way 
-  to easily make fancy `ThemeData` objects.
+  with `FlexColorScheme` by using `copyWith`. FlexColorScheme is just a way 
+  to easily make fancy and color wise consistent and balanced `ThemeData` 
+  objects using convenience shortcut properties and methods.
 
 
 * Removed `uses-material-design: true` from library pubspec.yaml file.
 
 
 * Themes Playground (Example 5) Improvements:
-  * Fix onColor for some colors in ThemeData color presentation for cases
-    when it might differ from colorScheme onColors. This could happen when 
-    disabling FlexColorScheme and the onColor do not match its onColors.
-  * Fix index on _AppBarSettings card.
-  * Changed ColorScheme indicators to use the themed border radius.
-  * Add button to copy theme, and improve the explanations to make the 
-    functionality more obvious and accessible.
-  * Add updated icon resources to the example apps.
+  * Fixed onColor for a few colors in the ThemeData color presentation for cases
+    where it might differ from colorScheme onColors. This could happen when 
+    disabling FlexColorScheme and when some colors do not match its onColors.
+  * Fixed index on _AppBarSettings card.
+  * Changed ColorScheme indicator boxes to use the themed border radius.
+  * Added a button to copy theme, and improved the explanations to make the 
+    functionality more obvious and accessible. Previously only the entire
+    ListTile was the button, this UI with no button was not so clear. Now 
+    there is also a button that says COPY. Clicking on the ListTile still 
+    works as well.
+  * Add and updated app icon resources to the example apps.
   * Use new version of StaggeredGridview 0.6.0 that no longer requires 
-    previously used bug work around(s) for resize issue it had since 2019.
+    previously used bug work around(s) for window resize issue it had since 2019.
     For more info on this solved issue, see this [article](https://rydmike.com/gridview).
   * **TODO:** Add the new features in version 4.2.0 to the Themes Playground app.
  
-* Added tests to cover the new features, now total 1086 tests.  
+* Added tests to cover the new features, now total 1104 tests.  
 
 ## [4.1.1] - November 20, 2021
 
