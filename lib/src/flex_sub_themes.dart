@@ -97,7 +97,7 @@ enum SchemeColor {
 /// [FlexColorScheme.subThemesData] property.
 ///
 /// The configuration class [FlexSubThemesData] offers easy to use configuration
-/// properties for using these sub-themes in FlexColorScheme. You can also use
+/// properties for using these sub-themes in FlexColorScheme. You can also
 /// the static sub-themes without using FlexColorScheme based theming.
 /// However, the [FlexSubThemesData] has no impact on the static helpers, it
 /// is [FlexColorScheme] that uses the [FlexSubThemesData] class to configure
