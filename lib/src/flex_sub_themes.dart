@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import 'flex_color_scheme.dart';
@@ -1391,99 +1392,148 @@ class FlexSubThemes {
     );
   }
 
-  /// An opinionated [NavigationBarThemeData] with custom height.
+  /// An opinionated [NavigationBarThemeData] with simpler API.
   ///
-  /// The navigation bar uses opinionated colors choices from the passed
+  /// The navigation bar can use opinionated color choices from the passed
   /// [colorScheme] to style the bottom navigation bar.
   ///
-  /// The background color defaults to [colorScheme.background] and not to
-  /// [colorScheme.surface] like the default theme uses. It also uses
-  /// no elevation overlay color. This makes the background of the
-  /// [NavigationBar] match the themed background of the [BottomNavigationBar].
-  /// To get Flutter SDK default background back, you can pass in [null]
-  /// to [backgroundSchemeColor].
+  /// [FlexColorScheme] uses this sub theme based on a large number of
+  /// properties in [FlexSubThemesData] to make custom default styled sub-theme
+  /// that matches its other themes, it can also use a config that uses the
+  /// M3 defaults as starting point. In both cases overridden value can
+  /// be applied as well.
   ///
-  /// Background [opacity] can be set.
+  /// You can also use the sub-theme helper as an alternative API for creating
+  /// a custom sub-theme for [NavigationBarThemeData] as it does not need
+  /// the complicated [MaterialStateProperty] which can be difficult to use. It
+  /// instead exposes properties for the usable states.
+  ///
+  /// It can also set an [opacity] on the background color.
   static NavigationBarThemeData navigationBarTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
-    /// Optional base text style for the labels without complicated
-    /// MaterialState. If null, it defaults to
-    /// [FlexColorScheme.m3TextTheme.overline] with color defined by
-    /// [textSchemeColor] and MaterialState added via [mutedUnselectedText] if
-    /// it is true.
+    /// Optional text style for the labels without complicated MaterialState.
     ///
-    /// FlexColorScheme passes in theme.textTheme.overline, when it defines
-    /// this subTheme to get the correctly themed version of the style used
-    /// by this widget.
+    /// If null, it is kept as null if all other text styling properties are
+    /// also null, resulting in default built text style being used by the
+    /// [NavigationBar] widget.
+    ///
+    /// If null, but if any of the text styling properties are defined, the text
+    /// style [FlexColorScheme.m3TextTheme.overline] will be used as base style
+    /// for the sub-theme text style, but with any none null values defined
+    /// in labelTextStyle, selectedLabelSize or textSchemeColor applied as
+    /// overrides on it. If a labelTextStyle is provided the same overrides
+    /// are applied on it.
     final TextStyle? labelTextStyle,
 
-    /// Select which color from the passed in [ColorScheme] to use as base for
-    /// the navigation bar's icon color.
+    /// The size of the text label on selected item.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// If defined, it overrides the font size on effective label TextStyle
+    /// on selected item.
+    final double? selectedLabelSize,
+
+    /// The size of the text label on unselected items.
     ///
-    /// If not defined it defaults to using primary color. This differs
-    /// from the NavigationBar's default theme that uses onSurface color.
-    /// If you use value [SchemeColor.onSurface] you get the default design.
-    final SchemeColor? iconSchemeColor,
+    /// If defined, it overrides the font size on effective label TextStyle
+    /// on unselected items.
+    final double? unselectedLabelSize,
 
     /// Select which color from the passed in [ColorScheme] to use as base for
     /// the navigation bar's text color.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined it defaults to using primary color. This differs
-    /// from the NavigationBar's default theme that uses onSurface color.
-    /// If you use value [SchemeColor.onSurface] you get the default design.
+    /// If null, it defaults to using onSurface color via default widget
+    /// behavior, or sets it to onSurface color if null and other properties
+    /// dictate that we need to assign a color to the none null labelTextStyle.
     final SchemeColor? textSchemeColor,
+
+    /// If true, the unselected text in the [NavigationBar] use a more muted
+    /// color version of the color defined by [textSchemeColor].
+    ///
+    /// This feature only works when there is a textSchemeColor defined, if it
+    /// is also null, and all other text settings are also null, then setting
+    /// this property to true has no effect since it has no color value to
+    /// operate on.
+    ///
+    /// Defaults to false.
+    final bool mutedUnselectedText = false,
+
+    /// The size of the text label on selected item.
+    ///
+    /// If null, it defaults to 24.
+    final double? selectedIconSize,
+
+    /// The size of the text label on unselected items.
+    ///
+    /// If null, it defaults to 24.
+    final double? unselectedIconSize,
+
+    /// Select which color from the passed in [ColorScheme] to use as base for
+    /// the navigation bar's icon color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If null, it defaults to using onSurface color via default widget
+    /// behavior, or sets it to onSurface color if null and icon size properties
+    /// dictate that we need to assign a color to the iconTheme created.
+    final SchemeColor? iconSchemeColor,
+
+    /// If true, the unselected icon in the [NavigationBar] use a more muted
+    /// color version of the color defined by [iconSchemeColor].
+    ///
+    /// This feature only works when there is a iconSchemeColor defined, if it
+    /// is also null, and all other all icon size settings are also null,
+    /// then setting this property to true has no effect since it has no color
+    /// value to operate on.
+    ///
+    /// Defaults to false.
+    final bool mutedUnselectedIcon = false,
 
     /// Select which color from the passed in [ColorScheme] to use as base for
     /// the selected navigation bar's highlighted item highlight color.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined it defaults to using primary color. This differs from the
-    /// NavigationBar's default theme that uses secondary color.
-    /// If you use value [FlexUsedColor.secondary] you get the default design.
+    /// If not defined it defaults to using secondary color via [NavigationBar]
+    /// widgets default highlight color.
     final SchemeColor? highlightSchemeColor,
+
+    /// The alpha value used on selection color of the selected indicator.
+    ///
+    /// Defaults to [kNavigationBarIndicatorAlpha] = 0x3D = 61 = 24%.
+    /// The default is the same value as Widget default behavior uses on its
+    /// used secondary color on its indicator color.
+    final int indicatorAlpha = kNavigationBarIndicatorAlpha,
 
     /// Select which color from the passed in [ColorScheme] to use as background
     /// color for the navigation bar.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// Defaults to [SchemeColor.background] selection.
-    /// This differs from the Flutter default theme that uses
-    /// [colorScheme.surface] and hard coded elevation overlay color in both
-    /// light and dark theme mode. The different choice of default makes the
-    /// background of the [NavigationBar] match the themed and default
-    /// background of the [BottomNavigationBar]. This default works well with
-    /// color branded surfaces and with other color scheme container colors
-    /// selections that will be available in M3 based ColorScheme when it
-    /// reaches stable  channel.
-    /// To get Flutter SDK default background back, you can pass in [null]
-    /// to [backgroundColor], it will then use widget default behavior
-    /// background.
-    final SchemeColor? backgroundSchemeColor = SchemeColor.background,
-
-    /// NavigationBar height.
-    ///
-    /// Defaults to kNavigationBarHeight, 62.
-    ///
-    /// The Material 3 default design is 80dp, this is an opinionated reduced
-    /// container height default.
-    final double height = kNavigationBarHeight,
+    /// Defaults to null, if null the result is [NavigationBar]'s default
+    /// background which is surface color with a hard coded elevation overlay
+    /// color of elevation 3 in both light and dark theme mode.
+    final SchemeColor? backgroundSchemeColor,
 
     /// NavigationBar background opacity.
     ///
-    /// The opacity value is only applied when a none null value is passed
-    /// in [backgroundColor], it cannot be applied to the default Flutter SDK
-    /// background color.
+    /// The opacity value is only applied when a none null value is selected
+    /// in [backgroundSchemeColor], it cannot be applied to the default
+    /// Flutter SDK background color available when backgroundSchemeColor is
+    /// null.
     ///
-    /// Default to 1, fully opaque.
+    /// Defaults to 1, fully opaque.
     final double opacity = 1,
+
+    /// NavigationBar height.
+    ///
+    /// If null, defaults to 80 dp via widget default height design.
+    ///
+    /// The styled opinionated reduced height is kNavigationBarHeight = 62 dp
+    /// which is assigned by FlexColorScheme when it makes th style theme.
+    final double? height,
 
     /// Specifies when each [NavigationDestination]'s label should appear.
     ///
@@ -1493,27 +1543,10 @@ class FlexSubThemes {
     /// `NavigationDestinationLabelBehavior.alwaysShow`
     final NavigationDestinationLabelBehavior? labelBehavior,
 
-    /// The alpha value used on selection color of the selected indicator.
-    ///
-    /// Defaults to [kNavigationBarIndicatorAlpha] = 0x3D = 61 = 24%.
-    /// The default uses same value as Widget default behavior.
-    final int indicatorAlpha = kNavigationBarIndicatorAlpha,
-
-    /// If true, the unselected icons in the [NavigationBar] use a more muted
-    /// color version of the color defined by [usedSchemeColor].
-    ///
-    /// Defaults to true.
-    final bool mutedUnselectedIcon = true,
-
-    /// If true, the unselected text in the [NavigationBar] use a more muted
-    /// color version of the color defined by [iconSchemeColor].
-    ///
-    /// Defaults to true.
-    final bool mutedUnselectedText = true,
-
     /// The icon color alpha blend value for unselected item.
     ///
-    /// Defaults to 0x00, no blend of primary, use onBackground color as is.
+    /// Defaults to 0x00, no blend of unselected color, use color as is.
+    ///
     /// FlexColorScheme uses value [kUnselectedBackgroundPrimaryAlphaBlend] when
     /// it uses this sub theme, if defined to use muted unselected icon via
     /// `FlexSubThemesData.navigationBarMutedUnselectedIcon`.
@@ -1522,24 +1555,15 @@ class FlexSubThemes {
     /// The icon alpha value for unselected item.
     ///
     /// Defaults to 0xFF, fully opaque.
+    ///
     /// FlexColorScheme uses value [kUnselectedAlphaBlend] when
     /// it uses this sub theme, if defined to use muted unselected icon via
     /// `FlexSubThemesData.navigationBarMutedUnselectedIcon`.
     final int unselectedAlpha = 0xFF,
   }) {
-    // Get defined indicator color, defaults to primary.
-    final Color _indicatorColor = highlightSchemeColor == null
-        ? colorScheme.primary
-        : schemeColor(highlightSchemeColor, colorScheme);
-
-    // Get icon color, defaults to primary.
-    final Color _iconColor = iconSchemeColor == null
-        ? colorScheme.primary
-        : schemeColor(iconSchemeColor, colorScheme);
-
-    // Get text color, defaults to primary.
+    // Get text color, defaults to onSurface.
     final Color _textColor = textSchemeColor == null
-        ? colorScheme.primary
+        ? colorScheme.onSurface
         : schemeColor(textSchemeColor, colorScheme);
 
     // Get selected text style, defaults to FlexColorScheme.m3TextTheme.overline
@@ -1547,45 +1571,80 @@ class FlexSubThemes {
     final TextStyle _textStyle =
         labelTextStyle ?? FlexColorScheme.m3TextTheme.overline!;
 
+    // Get effective text sizes.
+    final double _selectedLabelSize =
+        selectedLabelSize ?? _textStyle.fontSize ?? 11;
+    final double _unselectedLabelSize =
+        unselectedLabelSize ?? _textStyle.fontSize ?? 11;
+
+    // Determine if we should use a custom text style at all, if these props
+    // are null, we should not and just fall back to widget defaults.
+    final bool _useTextStyle = labelTextStyle != null ||
+        selectedLabelSize != null ||
+        unselectedLabelSize != null ||
+        textSchemeColor != null;
+
+    // Get icon color, defaults to onSurface.
+    final Color _iconColor = iconSchemeColor == null
+        ? colorScheme.onSurface
+        : schemeColor(iconSchemeColor, colorScheme);
+
+    // Determine if we should use a custom icon theme at all, if these props
+    // are null, we should not and just fall back to widget defaults.
+    final bool _useIconTheme = selectedIconSize != null ||
+        unselectedIconSize != null ||
+        iconSchemeColor != null;
+
     return NavigationBarThemeData(
       height: height,
       labelBehavior: labelBehavior,
       backgroundColor: backgroundSchemeColor != null
           ? schemeColor(backgroundSchemeColor, colorScheme).withOpacity(opacity)
           : null,
-      indicatorColor: _indicatorColor.withAlpha(indicatorAlpha),
-      labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            return _textStyle.copyWith(color: _textColor);
-          }
-          return _textStyle.copyWith(
-            color: mutedUnselectedText
-                ? _textColor
-                    .blendAlpha(_textColor, unselectedAlphaBlend)
-                    .withAlpha(unselectedAlpha)
-                : _textColor,
-          );
-        },
-      ),
-      iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            return IconThemeData(
-              size: 24,
-              color: _iconColor,
-            );
-          }
-          return IconThemeData(
-            size: 24,
-            color: mutedUnselectedIcon
-                ? _iconColor
-                    .blendAlpha(_iconColor, unselectedAlphaBlend)
-                    .withAlpha(unselectedAlpha)
-                : _iconColor,
-          );
-        },
-      ),
+      indicatorColor: highlightSchemeColor != null
+          ? schemeColor(highlightSchemeColor, colorScheme)
+              .withAlpha(indicatorAlpha)
+          : null,
+      labelTextStyle: _useTextStyle
+          ? MaterialStateProperty.resolveWith<TextStyle>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return _textStyle.copyWith(
+                    fontSize: _selectedLabelSize,
+                    color: _textColor,
+                  );
+                }
+                return _textStyle.copyWith(
+                  fontSize: _unselectedLabelSize,
+                  color: mutedUnselectedText
+                      ? _textColor
+                          .blendAlpha(_textColor, unselectedAlphaBlend)
+                          .withAlpha(unselectedAlpha)
+                      : _textColor,
+                );
+              },
+            )
+          : null,
+      iconTheme: _useIconTheme
+          ? MaterialStateProperty.resolveWith<IconThemeData>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return IconThemeData(
+                    size: selectedIconSize ?? 24,
+                    color: _iconColor,
+                  );
+                }
+                return IconThemeData(
+                  size: unselectedIconSize ?? 24,
+                  color: mutedUnselectedIcon
+                      ? _iconColor
+                          .blendAlpha(_iconColor, unselectedAlphaBlend)
+                          .withAlpha(unselectedAlpha)
+                      : _iconColor,
+                );
+              },
+            )
+          : null,
     );
   }
 }

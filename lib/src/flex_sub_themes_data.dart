@@ -89,14 +89,19 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarSchemeColor,
     this.bottomNavigationBarBackgroundSchemeColor,
     this.bottomNavigationBarLandscapeLayout,
-    this.navigationBarHeight = kNavigationBarHeight,
+    this.navigationBarIsStyled = true,
+    this.navigationBarHeight,
     this.navigationBarOpacity = 1,
     this.navigationBarIconSchemeColor,
     this.navigationBarTextSchemeColor,
     this.navigationBarHighlightSchemeColor,
-    this.navigationBarBackgroundSchemeColor = SchemeColor.background,
-    this.navigationBarMutedUnselectedIcon = true,
-    this.navigationBarMutedUnselectedText = true,
+    this.navigationBarBackgroundSchemeColor,
+    this.navigationBarMutedUnselectedIcon,
+    this.navigationBarMutedUnselectedText,
+    this.navigationBarSelectedLabelSize,
+    this.navigationBarUnselectedLabelSize,
+    this.navigationBarSelectedIconSize,
+    this.navigationBarUnselectedIconSize,
     this.navigationBarLabelBehavior,
   });
 
@@ -502,28 +507,56 @@ class FlexSubThemesData with Diagnosticable {
   /// [BottomNavigationBarLandscapeLayout.spread] is used.
   final BottomNavigationBarLandscapeLayout? bottomNavigationBarLandscapeLayout;
 
+  /// When true, the [NavigationBarThemeData] theme created will be opinionated
+  /// and styled to match the rest of the FlexColorScheme opinionated sub
+  /// themes.
+  ///
+  /// Defaults to true.
+  ///
+  /// Regardless of if this is property is true or false, setting the other
+  /// navigationBar properties in FlexSubThemesData overrides the defaults,
+  /// the difference is the starting point. If true the starting point is the
+  /// styled version, if false, the starting point are the defaults of the
+  /// un-themed default Widget behavior of the M3 based [NavigationBar].
+  /// Depending on the end result you want to achieve, starting with
+  /// [navigationBarIsStyled] as true or false may give you a starting point
+  /// that is closer to your target style requiring you to define fever of
+  /// the other properties.
+  ///
+  /// The [NavigationBar] sub-theme styling offered is extensive. Other
+  /// sub-themes will not be this extensive. This is added as trial to how it
+  /// is received. Styling the [NavigationBar] with its raw sub-theme data can
+  /// be a bit tricky as it uses [MaterialStateProperty] for its icon and text
+  /// theme styling. This provides a more "flat" API for modifying it further
+  /// and a default that matches the rest of defaults for FlexColorScheme
+  /// styles. You can also use the [FlexSubThemes.navigationBarTheme] as
+  /// helper for making you custom [NavigationBarThemeData] it exposes a few
+  /// more properties and options than available here in a more convenient
+  /// API format than [NavigationBarThemeData].
+  final bool navigationBarIsStyled;
+
   /// Height of the container for Material 3 type [NavigationBar].
   ///
-  /// Defaults to [kNavigationBarHeight] = 62dp.
-  ///
-  /// The Material 3 default design is 80dp, this is an opinionated reduced
-  /// container height default.
-  final double navigationBarHeight;
+  /// If [navigationBarIsStyled] is true it defaults to [kNavigationBarHeight]
+  /// = 62dp, else to 80dp, same as the the Material 3 default design and
+  /// specification for its height.
+  final double? navigationBarHeight;
 
   /// NavigationBar background opacity.
   ///
   /// Defaults to 1, fully opaque.
   final double navigationBarOpacity;
 
-  /// Select which color from the theme [ColorScheme] to use as base for
-  /// the navigation bar's icon and text color.
+  /// Select which color from the passed in [ColorScheme] to use as base for
+  /// the navigation bar's icon color.
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If not defined it defaults to using primary color. This differs from the
-  /// NavigationBar's default theme that uses onSurface color with
-  /// overlay color.
-  /// If you use value [SchemeColor.onSurface] you get the default theme design.
+  /// If null, the default value depends on the [navigationBarIsStyled] value,
+  /// if it is true, resulting color is primary, if false, onSurface
+  /// via [NavigationBar] widget default behavior.
+  /// If the property is defined, the resulting ColorScheme color is always
+  /// the color selected by this property.
   final SchemeColor? navigationBarIconSchemeColor;
 
   /// Select which color from the passed in [ColorScheme] to use as base for
@@ -531,9 +564,11 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If not defined it defaults to using primary color. This differs
-  /// from the NavigationBar's default theme that uses onSurface color.
-  /// If you use value [SchemeColor.onSurface] you get the default design.
+  /// If null, the default value depends on the [navigationBarIsStyled] value,
+  /// if it is true, resulting color is primary, if false, onSurface
+  /// via [NavigationBar] widget default behavior.
+  /// If the property is defined, the resulting ColorScheme color is always
+  /// the color selected by this property.
   final SchemeColor? navigationBarTextSchemeColor;
 
   /// Select which color from the theme [ColorScheme] to use as base for
@@ -541,9 +576,11 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If not defined it defaults to using primary color. This differs from the
-  /// NavigationBar's default theme that uses secondary color.
-  /// If you use value [SchemeColor.secondary] you get the default design.
+  /// If null, the default value depends on the [navigationBarIsStyled] value,
+  /// if it is true, resulting color is primary, if false, secondary
+  /// via [NavigationBar] widget default behavior.
+  /// If the property is defined, the resulting ColorScheme color is always
+  /// the color selected by this property.
   final SchemeColor? navigationBarHighlightSchemeColor;
 
   /// Select which color from the passed in [ColorScheme] to use as background
@@ -551,33 +588,95 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.background] selection.
-  /// This differs from the Flutter default theme that uses
-  /// [colorScheme.surface] and hard coded elevation overlay color in both
-  /// light and dark theme mode. The different choice of default makes the
-  /// background of the [NavigationBar] match the themed and default
-  /// background of the [BottomNavigationBar]. This default works well with
-  /// color branded surfaces and with other color scheme container colors
-  /// selections that will be available in M3 based ColorScheme when it
-  /// reaches stable  channel.
-  ///
-  /// To get Flutter SDK default background back, you can pass in null
-  /// to [backgroundColor], it will then use widget default behavior
-  /// background style.
+  /// If null, the default value depends on the [navigationBarIsStyled] value,
+  /// if it is true, resulting color is background, if false, then
+  /// surface color with a hard coded elevation overlay color of elevation 3
+  /// used in both light and dark theme mode, this via [NavigationBar]
+  /// widget default behavior.
   final SchemeColor? navigationBarBackgroundSchemeColor;
 
   /// If true, the unselected icons in the [NavigationBar] use a more muted
   /// color version of the color defined by [navigationBarIconSchemeColor].
   ///
-  /// Defaults to true.
-  final bool navigationBarMutedUnselectedIcon;
+  /// If null, the default value depends on the [navigationBarIsStyled] value,
+  /// if it is true, this property defaults to true, otherwise to false.
+  /// If the property is defined, the defined value is used.
+  /// A muted unselected icon can only be applied when a defined icon color
+  /// has been selected. When [navigationBarIsStyled] this is always the case,
+  /// but if it is false, you also have to assign a value to
+  /// [navigationBarIconSchemeColor] or [navigationBarSelectedIconSize] or
+  /// [navigationBarUnselectedIconSize] so the none standard IconTheme
+  /// must be created that can be muted. If none of those properties are defined
+  /// the widget default behavior for icon style is used, and unselected
+  /// icon cannot be muted since all properties are null.
+  final bool? navigationBarMutedUnselectedIcon;
 
   /// If true, the unselected text labels in the [NavigationBar] use a more
   /// muted color version of the color defined by
   /// [navigationBarTextSchemeColor].
   ///
-  /// Defaults to true.
-  final bool navigationBarMutedUnselectedText;
+  /// If null, the default value depends on the [navigationBarIsStyled] value,
+  /// if it is true, this property defaults to true, otherwise to false.
+  /// If the property is defined, the defined value is used.
+  /// A muted unselected text color can only be applied when a defined text
+  /// color has been selected. When [navigationBarIsStyled] this is always the
+  /// case, but if it is false, you also have to assign a value to
+  /// [navigationBarTextSchemeColor] or [navigationBarSelectedLabelSize] or
+  /// [navigationBarUnselectedLabelSize] so the none standard TextStyle
+  /// must be created that can be muted. If none of those properties are defined
+  /// the widget default behavior for label text style is used, and unselected
+  /// text cannot be muted since all properties are null.
+  final bool? navigationBarMutedUnselectedText;
+
+  /// The size of the text label on selected item.
+  ///
+  /// If null, the default value depends on the [navigationBarIsStyled] value,
+  /// if it is true, resulting size is 11 dp, coming from the custom
+  /// TextStyle in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
+  /// text style, which defines the size to 11 dp in accordance to M3 text
+  /// styles.
+  ///
+  /// If [navigationBarIsStyled] is false and all other text theming options
+  /// are also null, the default size will depend on ambient text size of
+  /// [TextTheme.overline] as will it other style options. What size this is
+  /// will depend on used [Typography] which may be impacted by locale and
+  /// Flutter version, typically it will be 10dp with a very wide letter
+  /// spacing.
+  ///
+  /// If size is defined, it overrides the font size on effective label
+  /// TextStyle on selected item. A fallback value of 11 dp is also applied
+  /// should the geometry in passed in used TextStyle be missing.
+  final double? navigationBarSelectedLabelSize;
+
+  /// The size of the text label on unselected items.
+  ///
+  /// If null, the default value depends on the [navigationBarIsStyled] value,
+  /// if it is true, resulting size is 11 dp, coming from the custom
+  /// TextStyle in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
+  /// text style, which defines the size to 11 dp in accordance to M3 text
+  /// styles.
+  ///
+  /// If [navigationBarIsStyled] is false and all other text theming options
+  /// are also null, the default size will depend on ambient text size of
+  /// [TextTheme.overline] as will it other style options. What size this is
+  /// will depend on used [Typography] which may be impacted by locale and
+  /// Flutter version, typically it will be 10dp with a very wide letter
+  /// spacing.
+  ///
+  /// If size is defined, it overrides the font size on effective label
+  /// TextStyle on selected item. A fallback value of 11 dp is also applied
+  /// should the geometry in passed in used TextStyle be missing.
+  final double? navigationBarUnselectedLabelSize;
+
+  /// The size of the text label on selected item.
+  ///
+  /// If null, it defaults to 24.
+  final double? navigationBarSelectedIconSize;
+
+  /// The size of the text label on unselected items.
+  ///
+  /// If null, it defaults to 24.
+  final double? navigationBarUnselectedIconSize;
 
   /// Specifies when each [NavigationDestination]'s label should appear.
   ///
@@ -629,6 +728,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? bottomNavigationBarBackgroundSchemeColor,
     final BottomNavigationBarLandscapeLayout?
         bottomNavigationBarLandscapeLayout,
+    final bool? navigationBarIsStyled,
     final double? navigationBarHeight,
     final double? navigationBarOpacity,
     final SchemeColor? navigationBarIconSchemeColor,
@@ -637,6 +737,10 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? navigationBarBackgroundSchemeColor,
     final bool? navigationBarMutedUnselectedIcon,
     final bool? navigationBarMutedUnselectedText,
+    final double? navigationBarSelectedLabelSize,
+    final double? navigationBarUnselectedLabelSize,
+    final double? navigationBarSelectedIconSize,
+    final double? navigationBarUnselectedIconSize,
     final NavigationDestinationLabelBehavior? navigationBarLabelBehavior,
   }) {
     return FlexSubThemesData(
@@ -698,6 +802,8 @@ class FlexSubThemesData with Diagnosticable {
               this.bottomNavigationBarBackgroundSchemeColor,
       bottomNavigationBarLandscapeLayout: bottomNavigationBarLandscapeLayout ??
           this.bottomNavigationBarLandscapeLayout,
+      navigationBarIsStyled:
+          navigationBarIsStyled ?? this.navigationBarIsStyled,
       navigationBarHeight: navigationBarHeight ?? this.navigationBarHeight,
       navigationBarOpacity: navigationBarOpacity ?? this.navigationBarOpacity,
       navigationBarIconSchemeColor:
@@ -712,6 +818,14 @@ class FlexSubThemesData with Diagnosticable {
           this.navigationBarMutedUnselectedIcon,
       navigationBarMutedUnselectedText: navigationBarMutedUnselectedText ??
           this.navigationBarMutedUnselectedText,
+      navigationBarSelectedLabelSize:
+          navigationBarSelectedLabelSize ?? this.navigationBarSelectedLabelSize,
+      navigationBarUnselectedLabelSize: navigationBarUnselectedLabelSize ??
+          this.navigationBarUnselectedLabelSize,
+      navigationBarSelectedIconSize:
+          navigationBarSelectedIconSize ?? this.navigationBarSelectedIconSize,
+      navigationBarUnselectedIconSize: navigationBarUnselectedIconSize ??
+          this.navigationBarUnselectedIconSize,
       navigationBarLabelBehavior:
           navigationBarLabelBehavior ?? this.navigationBarLabelBehavior,
     );
@@ -768,6 +882,7 @@ class FlexSubThemesData with Diagnosticable {
             bottomNavigationBarBackgroundSchemeColor &&
         other.bottomNavigationBarLandscapeLayout ==
             bottomNavigationBarLandscapeLayout &&
+        other.navigationBarIsStyled == navigationBarIsStyled &&
         other.navigationBarHeight == navigationBarHeight &&
         other.navigationBarOpacity == navigationBarOpacity &&
         other.navigationBarIconSchemeColor == navigationBarIconSchemeColor &&
@@ -780,6 +895,13 @@ class FlexSubThemesData with Diagnosticable {
             navigationBarMutedUnselectedIcon &&
         other.navigationBarMutedUnselectedText ==
             navigationBarMutedUnselectedText &&
+        other.navigationBarSelectedLabelSize ==
+            navigationBarSelectedLabelSize &&
+        other.navigationBarUnselectedLabelSize ==
+            navigationBarUnselectedLabelSize &&
+        other.navigationBarSelectedIconSize == navigationBarSelectedIconSize &&
+        other.navigationBarUnselectedIconSize ==
+            navigationBarUnselectedIconSize &&
         other.navigationBarLabelBehavior == navigationBarLabelBehavior;
   }
 
@@ -828,6 +950,7 @@ class FlexSubThemesData with Diagnosticable {
       bottomNavigationBarSchemeColor,
       bottomNavigationBarBackgroundSchemeColor,
       bottomNavigationBarLandscapeLayout,
+      navigationBarIsStyled,
       navigationBarHeight,
       navigationBarOpacity,
       navigationBarIconSchemeColor,
@@ -836,6 +959,10 @@ class FlexSubThemesData with Diagnosticable {
       navigationBarBackgroundSchemeColor,
       navigationBarMutedUnselectedIcon,
       navigationBarMutedUnselectedText,
+      navigationBarSelectedLabelSize,
+      navigationBarUnselectedLabelSize,
+      navigationBarSelectedIconSize,
+      navigationBarUnselectedIconSize,
       navigationBarLabelBehavior,
     ];
     return hashList(values);
@@ -919,6 +1046,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<BottomNavigationBarLandscapeLayout>(
         'bottomNavigationBarLandscapeLayout',
         bottomNavigationBarLandscapeLayout));
+    properties.add(DiagnosticsProperty<bool>(
+        'navigationBarIsStyled', navigationBarIsStyled));
     properties.add(DiagnosticsProperty<double>(
         'navigationBarHeight', navigationBarHeight));
     properties.add(DiagnosticsProperty<double>(
@@ -937,6 +1066,14 @@ class FlexSubThemesData with Diagnosticable {
         'navigationBarMutedUnselectedIcon', navigationBarMutedUnselectedIcon));
     properties.add(DiagnosticsProperty<bool>(
         'navigationBarMutedUnselectedText', navigationBarMutedUnselectedText));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarSelectedLabelSize', navigationBarSelectedLabelSize));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarUnselectedLabelSize', navigationBarUnselectedLabelSize));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarSelectedIconSize', navigationBarSelectedIconSize));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarUnselectedIconSize', navigationBarUnselectedIconSize));
     properties.add(EnumProperty<NavigationDestinationLabelBehavior>(
         'navigationBarLabelBehavior', navigationBarLabelBehavior));
   }

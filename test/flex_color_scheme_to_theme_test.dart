@@ -1204,6 +1204,70 @@ void main() {
       expect(shapeD2.borderRadius, BorderRadius.circular(12.0));
     });
 
+    final ThemeData tLightM3Bar1 = FlexColorScheme.light(
+      scheme: FlexScheme.red,
+      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
+      blendLevel: 30,
+      appBarStyle: FlexAppBarStyle.background,
+      appBarElevation: 2,
+      tabBarStyle: FlexTabBarStyle.universal,
+      tooltipsMatchBackground: false,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
+      useSubThemes: true,
+      subThemesData: const FlexSubThemesData(
+        defaultRadius: 8,
+        tabBarIndicatorSchemeColor: SchemeColor.secondary,
+        navigationBarIsStyled: false,
+      ),
+    ).toTheme;
+
+    test(
+        'FCS7.82-M3Bar1: GIVEN a FlexColorScheme.light with more options '
+        'setting navigationBarIsStyled '
+        'EXPECT none null result.', () {
+      expect(tLightM3Bar1, isNotNull);
+    });
+
+    final ThemeData tLightM3Bar2 = FlexColorScheme.light(
+      scheme: FlexScheme.red,
+      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
+      blendLevel: 30,
+      appBarStyle: FlexAppBarStyle.background,
+      appBarElevation: 2,
+      tabBarStyle: FlexTabBarStyle.universal,
+      tooltipsMatchBackground: false,
+      transparentStatusBar: false,
+      bottomAppBarElevation: 1,
+      useSubThemes: true,
+      subThemesData: const FlexSubThemesData(
+        defaultRadius: 8,
+        tabBarIndicatorSchemeColor: SchemeColor.secondary,
+        navigationBarIsStyled: false,
+        navigationBarHeight: 70,
+        navigationBarOpacity: 0.95,
+        navigationBarIconSchemeColor: SchemeColor.primary,
+        navigationBarTextSchemeColor: SchemeColor.onSurface,
+        navigationBarHighlightSchemeColor: SchemeColor.primaryVariant,
+        navigationBarBackgroundSchemeColor: SchemeColor.background,
+        navigationBarMutedUnselectedIcon: true,
+        navigationBarMutedUnselectedText: true,
+        navigationBarSelectedLabelSize: 12,
+        navigationBarUnselectedLabelSize: 10,
+        navigationBarSelectedIconSize: 26,
+        navigationBarUnselectedIconSize: 24,
+        navigationBarLabelBehavior:
+            NavigationDestinationLabelBehavior.onlyShowSelected,
+      ),
+    ).toTheme;
+
+    test(
+        'FCS7.82-M3Bar2: GIVEN a FlexColorScheme.light with more options '
+        'setting navigationBarIsStyled '
+        'EXPECT none null result.', () {
+      expect(tLightM3Bar2, isNotNull);
+    });
+
     //**************************************************************************
     // FlexColorScheme.light & dark factory tests. With CUSTOM surface branding.
     //

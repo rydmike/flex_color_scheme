@@ -1142,89 +1142,63 @@ void main() {
       expect(
         FlexSubThemes.navigationBarTheme(
           colorScheme: colorScheme,
-        ).toString(),
-        equalsIgnoringHashCodes(
-          NavigationBarThemeData(
-            height: 62,
+        ),
+        equals(
+          const NavigationBarThemeData(
+            height: null,
             labelBehavior: null,
-            backgroundColor: colorScheme.background.withOpacity(1),
-            indicatorColor: colorScheme.primary.withAlpha(0x3D),
-            labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
-                  return FlexColorScheme.m3TextTheme.overline!
-                      .copyWith(color: colorScheme.primary);
-                }
-                return FlexColorScheme.m3TextTheme.overline!.copyWith(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.primary, 0x00)
-                      .withAlpha(0xFF),
-                );
-              },
-            ),
-            iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
-                  return IconThemeData(
-                    size: 24,
-                    color: colorScheme.primary,
-                  );
-                }
-                return IconThemeData(
-                    size: 24,
-                    color: colorScheme.primary
-                        .blendAlpha(colorScheme.primary, 0x00)
-                        .withAlpha(0xFF));
-              },
-            ),
-          ).toString(),
+            backgroundColor: null,
+            indicatorColor: null,
+            labelTextStyle: null,
+            iconTheme: null,
+          ),
         ),
       );
     });
 
-    //
-    test(
-        'FST1.17-states1: Does navigationBarTheme have right material '
-        'icon states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      expect(
-        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
-            .iconTheme!
-            .resolve(<MaterialState>{MaterialState.selected})?.color,
-        equals(colorScheme.primary),
-      );
-      expect(
-        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
-            .iconTheme!
-            .resolve(<MaterialState>{})?.color,
-        equals(
-          colorScheme.primary
-              .blendAlpha(colorScheme.primary, 0x00)
-              .withAlpha(0xFF),
-        ),
-      );
-    });
-    test(
-        'FST1.17-states2: Does navigationBarTheme have right material '
-        'text label states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      expect(
-        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
-            .labelTextStyle!
-            .resolve(<MaterialState>{MaterialState.selected})?.color,
-        equals(colorScheme.primary),
-      );
-      expect(
-        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
-            .labelTextStyle!
-            .resolve(<MaterialState>{})?.color,
-        equals(
-          colorScheme.primary
-              .blendAlpha(colorScheme.primary, 0x00)
-              .withAlpha(0xFF),
-        ),
-      );
-    });
+    // TODO(rydmike): Remove commented tests.
+    // test(
+    //     'FST1.17-states1: Does navigationBarTheme have right material '
+    //     'icon states', () {
+    //   const ColorScheme colorScheme = ColorScheme.light();
+    //   expect(
+    //     FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
+    //         .iconTheme!
+    //         .resolve(<MaterialState>{MaterialState.selected})?.color,
+    //     equals(colorScheme.primary),
+    //   );
+    //   expect(
+    //     FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
+    //         .iconTheme!
+    //         .resolve(<MaterialState>{})?.color,
+    //     equals(
+    //       colorScheme.primary
+    //           .blendAlpha(colorScheme.primary, 0x00)
+    //           .withAlpha(0xFF),
+    //     ),
+    //   );
+    // });
+    // test(
+    //     'FST1.17-states2: Does navigationBarTheme have right material '
+    //     'text label states', () {
+    //   const ColorScheme colorScheme = ColorScheme.light();
+    //   expect(
+    //     FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
+    //         .labelTextStyle!
+    //         .resolve(<MaterialState>{MaterialState.selected})?.color,
+    //     equals(colorScheme.primary),
+    //   );
+    //   expect(
+    //     FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
+    //         .labelTextStyle!
+    //         .resolve(<MaterialState>{})?.color,
+    //     equals(
+    //       colorScheme.primary
+    //           .blendAlpha(colorScheme.primary, 0x00)
+    //           .withAlpha(0xFF),
+    //     ),
+    //   );
+    // });
 
     test(
         'FST1.18custom1: GIVEN a custom1 FlexSubTheme.navigationBarTheme() '
