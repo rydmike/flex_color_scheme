@@ -16,9 +16,9 @@ added when this document is merged and included in a separate documentation site
 
 # Contents
 - [Introduction](#introduction)
-  - [None Null Sub-Themes](#none-null-sub-themes)
-  - [ThemeData Default Modifications](#themedata-default-modifications)
-
+- [None null sub-themes](#none-null-sub-themes)
+- [ThemeData modifications](#themedata-modifications)
+- [Additional optional widget sub-theming](#additional-optional-widget-sub-theming)
 
 # Introduction 
 
@@ -28,7 +28,7 @@ some additional custom theming.  It does of course define a `ColorScheme` that i
 FlexColorScheme uses color calculations for the primary color branded/blended surfaces, and
 for the lazy schemes that do not specify all colors in a color scheme.
 
-## None Null Sub Themes
+# None Null Sub Themes
 
 Flutter's default Theme and its ThemeData is moving towards a design where all the sub-theme's in the default
 ThemeData are NULL. It is always the widget that defines the default behavior and look when its sub-theme and its
@@ -177,7 +177,7 @@ change lands in stable.
        : null // Use default Flutter SDK decoration.
       ```
 
-## ThemeData Default Modifications
+# ThemeData Modifications
 
 In addition to the primary color branded surfaces, full shaded schemes from just one primary color, true
 black and app bar convenience tricks. The returned `ThemeData` contains some opinionated modifications and theme
@@ -387,3 +387,110 @@ are, as well as the rationale behind the made design choices and changes to the 
 * The property `transparentStatusBar` is set to true by default. It is
   used to make to the AppBar one-toned on Android devices, like on iOS devices.
   Set it to `false` if you want to restore the default Android two toned design.
+
+# Additional Optional Widget Sub-Theming
+
+FlexColorScheme V4 also offers opinionated widget sub-theming that enables you to get
+heavier themed widgets automatically, that you can customize further via
+[FlexSubThemesData](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSubThemesData-class.html).
+To use the option sub-theming feature in `FlexColorScheme` use the following
+properties:
+
+* [`useSubTheme`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme/useSubThemes.html)
+  when `true` activates the opinionated sub theming, it is `false` by default.
+* `subThemesData` is a
+  [`FlexSubThemesData`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSubThemesData-class.html)
+  data class that contain many optional quick configuration parameters
+  for the opt-in widget sub-themes. For example, one of its parameters gives you
+  access to easy use customization of default corner radius on all Flutter SDK
+  UI widgets and elements that supports corner radius either via
+  ShapeBorder or BorderRadiusGeometry. See its
+  [`defaultRadius`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSubThemesData/defaultRadius.html)
+  property for more information.
+
+When you opt in on using sub-themes, the `FlexColorScheme.toTheme` method uses
+the passed in `FlexSubThemesData` configuration data object, passed in via
+`FlexColorScheme.subThemesData`, or a default one if one is not provided.
+
+The property values in this `FlexSubThemesData` are used to define the created
+opinionated sub-themes. In some simple cases the sub-themes are created
+directly with the Flutter SDK widget sub-theme in question, in the `toTheme`
+method. But in most cases it uses separate static sub-theme helper functions
+from the `FlexSubThemes` class. 
+
+The configuration class `FlexSubThemesData` offers easy to use configuration
+properties for using these sub-themes in FlexColorScheme. You can also use
+the static sub-themes without using FlexColorScheme based theming.
+However, the `FlexSubThemesData` has no impact on the static helpers, it
+is the `FlexColorScheme.toTheme` that uses the `FlexSubThemesData` 
+class to configure
+the opt-in sub-themes. 
+
+You can of course also do this if you use `FlexSubThemesData` outside of 
+`FlexColorScheme` or in `copyWith` on each sub-theme with custom ThemeData.
+
+Sub themes for the following widgets are provided and used via opt-in
+property the `FlexColorScheme.useSubThemes`:
+* `TextButton`
+* `ElevatedButton`
+* `OutlinedButton`
+* Older buttons using `ButtonThemeData`
+* `ToggleButtons`
+* `InputDecoration`
+* `FloatingActionButton`
+* `Chip`
+* `Card`
+* `PopupMenuButton`
+* `Dialog`
+* `TimePickerDialog`
+* `SnackBar`
+* `Tooltip`
+* `BottomSheet`
+* `BottomNavigationBar`
+* `NavigationBar`
+
+In `ToggleButtons` hover, press, selected and focus states are not
+an exact match for the main buttons. It does not have as flexible styling
+as the main buttons. The theme mimics the style of the `OutlinedButton` for
+not selected buttons and the style of `ElevatedButton` for selected
+button. It does not support `MaterialStateProperty` and has only
+one state for different parts of the button. The selected and not selected,
+states would need different property values to be able to match the general
+buttons. It can therefore not fully match the same theme style as the
+Material states used on two different `ButtonStyleButton` buttons that
+it should match.
+
+The theme `ButtonThemeData` is included to provide a very similar
+theme style on the deprecated legacy buttons `RaisedButton`,
+`OutlineButton` and `FlatButton` as on the current main buttons. It is not
+an exact match, since the legacy buttons do not offer as flexible
+styling as the newer buttons. They do follow and match the styling on
+`ToggleButtons` when it comes to hover, press, selected and focus.
+Please consider phasing out the legacy buttons, as they are deprecated and
+may soon be removed from the Flutter SDK.
+
+The following widgets that have rounded corners are excluded from the
+sub-theming:
+* `Tooltip`, generally so small that larger prominent rounding the
+  opinionated sub-theming is designed for, is not a good fit.
+  FlexColorScheme does include out of the box theming options for tooltips,
+  that also adapts to color branding when opting in on sub themes,
+  it also gets a bit more rounded than when not opting in on sub themes.
+* `Scrollbar`, rounding on edges of scrollbars are left to platform default.
+* `AppBar` and `BottomAppBar` shape properties are left to their defaults.
+* `SnackBar` the floating snackbar should be sub themed to also include
+  border radius, but the none floating one should remain
+  straight. Unclear if it can be done via SDK's current theming features,
+  will investigate more in future version.
+* `Drawer` should have 16dp default rounding on shown side edge, but in
+  current version of Flutter SDK (2.8.1 when this was written) it has
+  no theme property to enable
+  this. It is coming in later Flutter version since it is required by the
+  Material 3 design. When it is available, it will be added.
+
+
+You can find more information about available sub-theme
+helpers
+[here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSubThemes-class.html).
+You can also use these static sub-theme helpers to manually define widget
+sub-theme and even modify them using `copywith`.

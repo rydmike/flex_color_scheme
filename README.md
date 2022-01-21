@@ -1960,7 +1960,7 @@ from the `FlexSubThemes` class. You can find more information about available
 helpers
 [here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSubThemes-class.html).
 You can also use these static sub-theme helpers to manually define widget 
-sub-theme and even modify them `opywith` too.
+sub-theme and even modify them using `copywith`.
 
 # Scheme Reference
 
