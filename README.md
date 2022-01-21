@@ -1,7 +1,9 @@
 [![Pub Version](https://img.shields.io/pub/v/flex_color_scheme?label=flex_color_scheme&labelColor=333940&logo=dart)](https://pub.dev/packages/flex_color_scheme) ![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/rydmike/flex_color_scheme/Test?event=push)
 ![Test](https://github.com/rydmike/flex_color_scheme/workflows/Test/badge.svg) [![codecov](https://codecov.io/gh/rydmike/flex_color_scheme/branch/master/graph/badge.svg?token=4XJU30IGO3)](https://codecov.io/gh/rydmike/flex_color_scheme) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-# FlexColorScheme
+# FlexColorScheme 
+
+[<img src="https://rydmike.com/assets_fcsv4/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites) 
 
 Use **FlexColorScheme** to make beautiful color scheme based Flutter themes, 
 with optional primary color surface blends. The themes are based on the same 
@@ -11,8 +13,6 @@ additional features.
 [<img src="https://rydmike.com/assets_fcsv4/00-main-image.jpg?raw=true?" alt="main_image"/>](https://rydmike.com/assets_fcsv4/00-main-image.png?raw=true>)  
 _FlexColorScheme theme examples (click image to open hires version)_
 
-[<img src="https://rydmike.com/assets_fcsv4/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="400"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
-
 When you color theme a Flutter application, all built in 
 widgets use the colors of the `ColorScheme` in your theme. At least in theory, 
 and it is almost so if you defined your Flutter ThemeData by using the 
@@ -20,7 +20,7 @@ and it is almost so if you defined your Flutter ThemeData by using the
 **FlexColorScheme** goes the extra mile to ensure that all Flutter SDK widgets gets 
 themed completely by its built-in color schemes, or custom colors you provide.
 
-You can opt in on using pre-made opinionated widget sub-themes.
+You can also opt in on using pre-made opinionated widget sub-themes.
 By opting in, you can for example adjust the border radius on all widgets 
 with a single property to set the same themed border radius on all of them with
 one property. Current Flutter SDK widgets are based on the Material 2 guide 
