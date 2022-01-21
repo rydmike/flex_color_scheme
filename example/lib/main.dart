@@ -407,8 +407,8 @@ class _DemoAppState extends State<DemoApp> {
         // as it is, for all the styles in the TextTheme just the fontFamily
         // works well too.
         // fontFamily: _fontFamily,
-        // textTheme: _textTheme,
-        // primaryTextTheme: _textTheme,
+        textTheme: _textTheme,
+        primaryTextTheme: _textTheme,
         useSubThemes: _useSubThemes,
         subThemesData: _subThemesData,
         visualDensity: _visualDensity,
@@ -470,8 +470,8 @@ class _DemoAppState extends State<DemoApp> {
         blendLevel: _blendLevel,
         tooltipsMatchBackground: _tooltipsMatchBackground,
         // fontFamily: _fontFamily,
-        // textTheme: _textTheme,
-        // primaryTextTheme: _textTheme,
+        textTheme: _textTheme,
+        primaryTextTheme: _textTheme,
         useSubThemes: _useSubThemes,
         subThemesData: _subThemesData,
         visualDensity: _visualDensity,
