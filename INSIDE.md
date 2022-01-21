@@ -28,7 +28,7 @@ some additional custom theming.  It does of course define a `ColorScheme` that i
 FlexColorScheme uses color calculations for the primary color branded/blended surfaces, and
 for the lazy schemes that do not specify all colors in a color scheme.
 
-# None Null Sub Themes
+# None Null Sub-Themes
 
 Flutter's default Theme and its ThemeData is moving towards a design where all the sub-theme's in the default
 ThemeData are NULL. It is always the widget that defines the default behavior and look when its sub-theme and its
@@ -391,9 +391,31 @@ are, as well as the rationale behind the made design choices and changes to the 
 # Additional Optional Widget Sub-Theming
 
 FlexColorScheme V4 also offers opinionated widget sub-theming that enables you to get
-heavier themed widgets automatically, that you can customize further via
+more heavily styled and themed widgets automatically. You can customize the
+styles further via
 [FlexSubThemesData](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSubThemesData-class.html).
-To use the option sub-theming feature in `FlexColorScheme` use the following
+
+These sub-themes are as the heading states **opinionated** design choices.
+You may or may not like them. They can be modified and tuned, some of them only
+a bit, while some offer quite extensive quick configuration options. The intent
+is to keep the sub-themes visual results consistent from version to version.
+However, changes in the SDK and supporting new features may require minor
+visual breaking changes to them from time to time.
+
+The defaults for these
+Flutter Material 2 based theming features, draw inspiration from Material 3,
+and their defaults follow the [Material 3 Design Guide](https://m3.material.io/), 
+within reasonable limits of current Flutter Material 2 based theming capabilities.
+
+The sub-themes will be modified and extended when Material 3 features reaches
+Flutter stable channel, to use actual Material 3 implementations in Flutter.
+This may modify the design of some sub-themes. These changes
+are planned to be included in FlexColorScheme v5, that will be released after
+enough Material 3 features have reached Flutter stable channel. A dev version
+of the package may be released before that, that requires using Flutter
+master channel.
+
+To use the optional sub-theming feature in `FlexColorScheme` use the following
 properties:
 
 * [`useSubTheme`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme/useSubThemes.html)
@@ -478,7 +500,7 @@ sub-theming:
   it also gets a bit more rounded than when not opting in on sub themes.
 * `Scrollbar`, rounding on edges of scrollbars are left to platform default.
 * `AppBar` and `BottomAppBar` shape properties are left to their defaults.
-* `SnackBar` the floating snackbar should be sub themed to also include
+* `SnackBar` the floating snackbar should be sub-themed to also include
   border radius, but the none floating one should remain
   straight. Unclear if it can be done via SDK's current theming features,
   will investigate more in future version.
