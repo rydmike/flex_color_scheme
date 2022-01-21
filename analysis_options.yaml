@@ -47,6 +47,10 @@ analyzer:
     # Treat missing returns as an error, not as a hint or a warning.
     missing_return: error
 
+    # Allow self-reference to deprecated members. This is done because otherwise we have
+    # to annotate every member in every test, assert, etc., when we deprecate something.
+    deprecated_member_use_from_same_package: ignore
+
     # DON'T assign new values to parameters of methods or functions.
     #
     # https://dart-lang.github.io/linter/lints/parameter_assignments.html

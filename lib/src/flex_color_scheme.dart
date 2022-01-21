@@ -15,11 +15,11 @@ import 'flex_sub_themes_data.dart';
 /// based themes.
 ///
 /// This enum was used in [FlexColorScheme] versions before 4.0.0 in factory
-/// constructors [FlexColorScheme.light] and [FlexColorScheme.dark]. It
-/// has not yet been deprecated, but will be so in a future version.
+/// constructors [FlexColorScheme.light] and [FlexColorScheme.dark].
 ///
-/// It is recommended to migrate to using the enum [FlexSurfaceMode]
-/// parameter `surfaceMode` instead that replaces `surfaceStyle` and
+/// The properties using this enum are deprecated since version 4.2.0.
+/// Migrate to using the enum [FlexSurfaceMode]
+/// parameter `surfaceMode` instead, that replaces `surfaceStyle` and
 /// offers more surface color blend modes and levels.
 enum FlexSurface {
   /// Use Material design default light and dark surface and background colors.
@@ -1106,15 +1106,13 @@ class FlexColorScheme with Diagnosticable {
     /// color values.
     final int usedColors = 4,
 
-    /// Blends theme colors into surfaces and backgrounds. Consider using
-    /// [surfaceMode] instead.
+    /// Blends theme colors into surfaces and backgrounds. Deprecated use
+    /// [surfaceMode] in combination with [blendLevel] instead.
     ///
-    /// This property was used in FlexColorScheme before v4.0.0, it
-    /// has not yet been deprecated, but may be so in future version.
-    /// It is available for backwards compatibility.
-    /// It is recommended to migrate to use `surfaceMode` instead, that replaces
-    /// `surfaceStyle` and offers more surface color configuration options
-    /// and choices.
+    /// This property was used in FlexColorScheme before v4.0.0.
+    /// It is is still available for backwards compatibility.
+    /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
+    /// and offers more surface color configuration options and choices.
     ///
     /// Defaults to [FlexSurface.material] which results in Flutter
     /// standard [ColorScheme.light] surface colors, which follows the
@@ -1124,9 +1122,10 @@ class FlexColorScheme with Diagnosticable {
     /// If values for the properties [surface], [background],
     /// [dialogBackground] or [scaffoldBackground] are given,
     /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via [surfaceMod] or [FlexSurface] in
+    /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
     /// this [surfaceStyle].
-    final FlexSurface surfaceStyle = FlexSurface.material,
+    @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
+        final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///
@@ -2011,28 +2010,26 @@ class FlexColorScheme with Diagnosticable {
     /// color values.
     final int usedColors = 4,
 
-    /// Blends theme colors into surfaces and backgrounds. Consider using
-    /// [surfaceMode] instead.
+    /// Blends theme colors into surfaces and backgrounds. Deprecated use
+    /// [surfaceMode] in combination with [blendLevel] instead.
     ///
-    /// This property was used in FlexColorScheme before v4.0.0, it
-    /// has not yet been deprecated, but may be so in future version.
-    /// It is available for backwards compatibility.
-    /// It is recommended to migrate to use `surfaceMode` instead, that replaces
-    /// `surfaceStyle` and offers more surface color configuration options
-    /// and choices.
+    /// This property was used in FlexColorScheme before v4.0.0.
+    /// It is is still available for backwards compatibility.
+    /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
+    /// and offers more surface color configuration options and choices.
     ///
     /// Defaults to [FlexSurface.material] which results in Flutter
-    /// standard [ColorScheme.dark] surface colors, which follows the
-    /// default color scheme in the Material Design
-    /// guide for dark theme found here:
-    /// https://material.io/design/color/dark-theme.html#ui-application
+    /// standard [ColorScheme.light] surface colors, which follows the
+    /// default color scheme in the Material Design guide for light theme found
+    /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
     ///
     /// If values for the properties [surface], [background],
     /// [dialogBackground] or [scaffoldBackground] are given,
     /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via [surfaceMode] or [FlexSurface] in
+    /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
     /// this [surfaceStyle].
-    final FlexSurface surfaceStyle = FlexSurface.material,
+    @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
+        final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///
@@ -2855,7 +2852,7 @@ class FlexColorScheme with Diagnosticable {
   //
   //****************************************************************************
 
-  /// A Material 3 (m3) like [TextTheme] for Material 2 (M2).
+  /// A Material 3 (M3) like and inspired [TextTheme] for Material 2 (M2).
   ///
   /// This is used by the sub themes opt-in toggle to by default make the
   /// TextTheme match Material 3 phone size text theme. This is done as far as
