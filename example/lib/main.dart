@@ -247,34 +247,61 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // to enable easy selection of other options.
   bottomNavigationBarBackgroundSchemeColor: SchemeColor.background,
 
-  // Select the ColorScheme color used for M3 based [NavigationBar] icons.
-  // Primary is default so no need to set that, used here as placeholder to
-  // enable easy selection of other options.
-  navigationBarIconSchemeColor: SchemeColor.primary,
+  // Define if the M3 NavigationBar should be styled to match FlexColorScheme
+  // opinionated defaults as a starting point before additional properties are
+  // defined. If false, the starting point is the default M3 style for the
+  // widget. The default value is true, using the opinionated values
+  // as starting point.
+  navigationBarIsStyled: true,
+
+  // Below are some of the quick override properties that you can use on the
+  // M3 based NavigationBar. They are commented out, so remove comments to
+  // try them. They come into effect regardless of if [navigationBarIsStyled] is
+  // true or false, unless otherwise mentioned in the comments and docs.
 
   // Select the ColorScheme color used for M3 based [NavigationBar] icons.
-  // Primary is default so no need to set that, used here as placeholder to
-  // enable easy selection of other options.
-  navigationBarTextSchemeColor: SchemeColor.onSurface,
+  // navigationBarIconSchemeColor: SchemeColor.primary,
 
-  // When set to true [NavigationBar] unselected icons use a more muted version
-  // of the color defined by [navigationBarIconSchemeColor]. Defaults to true.
-  navigationBarMutedUnselectedIcon: true,
-
-  // When set to true [NavigationBar] unselected text use a more muted version
-  // of the color defined by [navigationBarTextSchemeColor]. Defaults to true.
-  navigationBarMutedUnselectedText: true,
+  // Select the ColorScheme color used for M3 based [NavigationBar] label text.
+  // navigationBarTextSchemeColor: SchemeColor.onSurface,
 
   // Select the ColorScheme base color used to highlight selected item.
-  // Primary is default so no need to set that, used here as placeholder to
-  // enable easy selection of other options.
-  navigationBarHighlightSchemeColor: SchemeColor.primary,
+  // navigationBarHighlightSchemeColor: SchemeColor.primaryVariant,
 
   // Select the ColorScheme color used for navigation bar background.
-  // Background is default so no need to set that, provided here as placeholder
-  // to enable easy selection of other options.
-  // You can force pass in [null] to use Widget default M3 based background.
-  navigationBarBackgroundSchemeColor: SchemeColor.background,
+  // navigationBarBackgroundSchemeColor: SchemeColor.background,
+
+  // When set to true [NavigationBar] unselected icons use a more muted version
+  // of the color defined by [navigationBarIconSchemeColor].
+  // If [navigationBarIsStyled] is false, you also have to assign a value to
+  // [navigationBarIconSchemeColor] or [navigationBarSelectedIconSize] or
+  // [navigationBarUnselectedIconSize] so the none standard IconTheme
+  // must be created that can be muted. If none of those properties are defined
+  // the widget default behavior for icon style is used, and unselected
+  // icon cannot be muted since all properties are null.
+  //
+  // navigationBarMutedUnselectedIcon: true,
+
+  // When set to true [NavigationBar] unselected text use a more muted version
+  // of the color defined by [navigationBarTextSchemeColor].
+  // If [navigationBarIsStyled] is false, you also have to assign a value to
+  // [navigationBarTextSchemeColor] or [navigationBarSelectedLabelSize] or
+  // [navigationBarUnselectedLabelSize] so the none standard TextStyle
+  // must be created that can be muted, if none of those properties are defined
+  // the widget default behavior for label text style is used and unselected
+  // text cannot be muted.
+  //
+  // navigationBarMutedUnselectedText: true,
+
+  // Set size of labels.
+  //
+  // navigationBarSelectedLabelSize: 12,
+  // navigationBarUnselectedLabelSize: 10,
+
+  // Set the size of icons icons.
+  //
+  // navigationBarSelectedIconSize: 26,
+  // navigationBarUnselectedIconSize: 22,
 );
 
 // If true, the top part of the Android AppBar has no scrim, it then becomes
@@ -380,8 +407,8 @@ class _DemoAppState extends State<DemoApp> {
         // as it is, for all the styles in the TextTheme just the fontFamily
         // works well too.
         // fontFamily: _fontFamily,
-        textTheme: _textTheme,
-        primaryTextTheme: _textTheme,
+        // textTheme: _textTheme,
+        // primaryTextTheme: _textTheme,
         useSubThemes: _useSubThemes,
         subThemesData: _subThemesData,
         visualDensity: _visualDensity,
@@ -398,8 +425,10 @@ class _DemoAppState extends State<DemoApp> {
         // need to do so, they all have hand tuned dark scheme colors.
         // Regardless, below we anyway demonstrate how you can do that too.
         //
-        // Normally you would not do things like this logic, this is just here
-        // so you can toggle the two booleans earlier above to try the options.
+        // Normally you would not do things like this complicated logic, you
+        // would just use the colors or scheme property based on what you want.
+        // This logic is just here so you can toggle the two booleans earlier
+        // above to try the options without commenting any code.
         colors: (_useScheme && _computeDarkTheme)
             // If we use predefined schemes and want to compute a dark
             // theme from its light colors, we can grab the light scheme colors
@@ -441,8 +470,8 @@ class _DemoAppState extends State<DemoApp> {
         blendLevel: _blendLevel,
         tooltipsMatchBackground: _tooltipsMatchBackground,
         // fontFamily: _fontFamily,
-        textTheme: _textTheme,
-        primaryTextTheme: _textTheme,
+        // textTheme: _textTheme,
+        // primaryTextTheme: _textTheme,
         useSubThemes: _useSubThemes,
         subThemesData: _subThemesData,
         visualDensity: _visualDensity,

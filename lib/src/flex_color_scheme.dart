@@ -4389,17 +4389,36 @@ class FlexColorScheme with Diagnosticable {
       navigationBarTheme: useSubThemes
           ? FlexSubThemes.navigationBarTheme(
               colorScheme: colorScheme,
-              labelTextStyle: effectiveTextTheme.overline,
-              iconSchemeColor: subTheme.navigationBarIconSchemeColor,
-              textSchemeColor: subTheme.navigationBarTextSchemeColor,
-              highlightSchemeColor: subTheme.navigationBarHighlightSchemeColor,
+              labelTextStyle: subTheme.navigationBarIsStyled
+                  ? effectiveTextTheme.overline
+                  : null,
+              selectedLabelSize: subTheme.navigationBarSelectedLabelSize,
+              unselectedLabelSize: subTheme.navigationBarUnselectedLabelSize,
+              textSchemeColor: subTheme.navigationBarTextSchemeColor ??
+                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
+              mutedUnselectedText: subTheme.navigationBarMutedUnselectedText ??
+                  subTheme.navigationBarIsStyled,
+              selectedIconSize: subTheme.navigationBarSelectedIconSize,
+              unselectedIconSize: subTheme.navigationBarUnselectedIconSize,
+              iconSchemeColor: subTheme.navigationBarIconSchemeColor ??
+                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
+              mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon ??
+                  subTheme.navigationBarIsStyled,
+              highlightSchemeColor: subTheme
+                      .navigationBarHighlightSchemeColor ??
+                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
+              indicatorAlpha: kNavigationBarIndicatorAlpha,
               backgroundSchemeColor:
-                  subTheme.navigationBarBackgroundSchemeColor,
-              height: subTheme.navigationBarHeight,
+                  subTheme.navigationBarBackgroundSchemeColor ??
+                      (subTheme.navigationBarIsStyled
+                          ? SchemeColor.background
+                          : null),
               opacity: subTheme.navigationBarOpacity,
+              height: subTheme.navigationBarHeight ??
+                  (subTheme.navigationBarIsStyled
+                      ? kNavigationBarHeight
+                      : null),
               labelBehavior: subTheme.navigationBarLabelBehavior,
-              mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon,
-              mutedUnselectedText: subTheme.navigationBarMutedUnselectedText,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
             )

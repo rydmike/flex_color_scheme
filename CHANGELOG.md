@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.2.0] - January 20, 2022 (WORK IN PROGRESS)
+## [4.2.0] - January 21, 2022 (WORK IN PROGRESS)
 
 * Updated required Dart SDK to minimum 2.15 that Flutter 2.8.0 uses. Thus, 
   to use this release at least Flutter 2.8.0 is required.
@@ -39,7 +39,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
     surrounds the selected icon and the background color.
   - `ChipThemeData` from `FlexSubThemes.chipTheme` to change the used `ColorScheme`
     base color of Chips.  
-* The `FlexUsedColor` properties for the above sub-themes have same default 
+* The `SchemeColor` properties for the above sub-themes have same default 
   `ColorScheme` color values as they did before. The additional configuration options
   are none breaking. The enum properties to modify the used `ColorScheme` color 
   can be defined in the configuration class `FlexSubThemesData` using its 

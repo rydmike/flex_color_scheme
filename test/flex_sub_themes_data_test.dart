@@ -35,10 +35,8 @@ void main() {
       bottomSheetModalElevation: 8,
       bottomNavigationBarElevation: 0,
       bottomNavigationBarOpacity: 1,
-      navigationBarHeight: 62,
+      navigationBarIsStyled: true,
       navigationBarOpacity: 1,
-      navigationBarBackgroundSchemeColor: SchemeColor.background,
-      navigationBarMutedUnselectedIcon: true,
     );
     // m3, one different values than m1 and m2.
     const FlexSubThemesData m3 = FlexSubThemesData(
@@ -63,10 +61,8 @@ void main() {
       bottomSheetModalElevation: 8,
       bottomNavigationBarElevation: 0,
       bottomNavigationBarOpacity: 1,
-      navigationBarHeight: 62,
+      navigationBarIsStyled: true,
       navigationBarOpacity: 1,
-      navigationBarBackgroundSchemeColor: SchemeColor.background,
-      navigationBarMutedUnselectedIcon: true,
     );
     // m4, all values different from m1 and m2.
     const FlexSubThemesData m4 = FlexSubThemesData(
@@ -91,10 +87,8 @@ void main() {
       bottomSheetModalElevation: 10,
       bottomNavigationBarElevation: 1,
       bottomNavigationBarOpacity: 0.96,
-      navigationBarHeight: 60,
-      navigationBarOpacity: 0.98,
-      navigationBarBackgroundSchemeColor: SchemeColor.surface,
-      navigationBarMutedUnselectedIcon: false,
+      navigationBarIsStyled: false,
+      navigationBarOpacity: 0.55,
     );
     // Identity and quality tests
     test(
@@ -168,10 +162,8 @@ void main() {
           bottomSheetModalElevation: 8,
           bottomNavigationBarElevation: 0,
           bottomNavigationBarOpacity: 1,
-          navigationBarHeight: 62,
+          navigationBarIsStyled: true,
           navigationBarOpacity: 1,
-          navigationBarBackgroundSchemeColor: SchemeColor.background,
-          navigationBarMutedUnselectedIcon: true,
         ),
         equals(m1),
       );
@@ -195,7 +187,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSubThemesData#00000(interactionEffects: true, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, inputDecorationRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, timePickerDialogRadius: null, snackBarElevation: 4.0, tabBarIndicatorSchemeColor: null, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: 1.0, bottomNavigationBarSchemeColor: null, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarLandscapeLayout: null, navigationBarHeight: 62.0, navigationBarOpacity: 1.0, navigationBarIconSchemeColor: null, navigationBarIconSchemeColor: null, navigationBarHighlightSchemeColor: null, navigationBarBackgroundSchemeColor: background, navigationBarMutedUnselectedIcon: true, navigationBarMutedUnselectedText: true, navigationBarLabelBehavior: null)'));
+              'FlexSubThemesData#00000(interactionEffects: true, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, inputDecorationRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, timePickerDialogRadius: null, snackBarElevation: 4.0, tabBarIndicatorSchemeColor: null, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: 1.0, bottomNavigationBarSchemeColor: null, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarLandscapeLayout: null, navigationBarIsStyled: true, navigationBarHeight: null, navigationBarOpacity: 1.0, navigationBarIconSchemeColor: null, navigationBarIconSchemeColor: null, navigationBarHighlightSchemeColor: null, navigationBarBackgroundSchemeColor: null, navigationBarMutedUnselectedIcon: null, navigationBarMutedUnselectedText: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarLabelBehavior: null)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '
