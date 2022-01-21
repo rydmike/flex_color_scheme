@@ -1,7 +1,7 @@
 # FlexColorScheme Feature Details
 
 This feature details document provides more details and explanations
-of features in FlexColorScheme V4. The reason for keeping it in
+of some features in FlexColorScheme V4. The reason for keeping it in
 a separate file from the package readme is that the package readme is 
 already very long, and keeping it separate document allows it to be updated and 
 complemented more freely without updating the package due to complementary
@@ -9,16 +9,15 @@ documentation updates.
 
 ## Version 4 Notice
 
-This document is still mainly from the version 3 documentation. 
-While 90% of it still applies to version 4, it will be updated 
-during the next month.
+This document is ported from the version 3 readme documentation. 
+It still applies to version 4, it will be updated and more feature documentation 
+added when this document is merged and included in a separate documentation site. 
 
 # Contents
 
 - [Visual Density](#visual-density)
 - [Optional FlexThemeModeSwitch](#optional-flexthememodeswitch)
 - [Computed Dark Theme](#computed-dark-theme)
-- [Surface Blends](#surface-blends)
 - [Convenient AppBar Theming](#convenient-appbar-theming)
 - [The TabBar Style](#the-tabbar-style)
 - [True Black](#true-black)
@@ -155,32 +154,7 @@ recording does not use the `defaultError` error color modifier, the changing
 dark error color does not look so nice when tuning the computed scheme colors.
 The bundled example 5 and live web version of it uses the modifier.
 
-<img src="https://rydmike.com/assets_fcsv4/fcs_v1-1-0-phone3.gif?raw=true" alt="Dark scheme calc level"/>
-
-## Surface Blends
-
-Let us now explore the effect of branded surface colors. Branded surfaces are
-often associated with dark mode, but it works well with light mode too when
-applied delicately. Below you can see how the primary color gets blended
-into Material surface and even stronger so, into Material background colors.
-The screenshots below are using the medium branding strength.
-
-You can use the toggle in the example to change from standard no branded
-surfaces colors, to light, medium, strong and heavy.
-
-The scaffold background does not receive any branding until the heavy mode.
-You might think that this and all the other theming can be done by just
-passing the same scheme colors to the `ThemeData.from` factory. That is why
-this demo allows you to flip a switch to do just that, so you can see and
-observe the difference between color scheme based themes created
-by `FlexColorScheme.toTheme` and `ThemeData.from`.
-
-<img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5bl.png?raw=true" alt="ColorScheme example 5b light" width="250"/>  <img src="https://rydmike.com/assets_fcsv4/fcs_phone_ex5cl.png?raw=true" alt="ColorScheme example 5c light" width="250"/>
-
-Feel free to experiment with the live web demo where the differences are
-even easier to observe since you can have both versions open side by
-side, in a large browser windows. A ready-made example comparison can be
-found [here](https://rydmike.com/colorscheme#the-difference).
+<img src="https://rydmike.com/assets/fcs_v1-1-0-phone1.gif?raw=true" alt="Dark scheme calc level"/>
 
 ## Convenient AppBar Theming
 
@@ -341,30 +315,18 @@ works well on some versions of Android, but seems to fail on newer ones, so you 
 
 ## Android Transparent System Navigation Bar
 
-Version 1.4.0 adds experimental support for transparent system navigation bar for Android for SDK >= 30 (Android 11).
-The support is added via the new `opacity` property in `FlexColorScheme.themedSystemNavigationBar`.
-A separate example, that builds on example 5 for this more advanced use case, shows and explains how and when
-transparent system navigation bar can be used in Android.
+Version 4 added full support for transparent system navigation bar for Android 
+SDK >= 29 (Android 10). The support is added via the
+[opacity](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme/themedSystemNavigationBar.html)
+property in `FlexColorScheme.themedSystemNavigationBar`.
 
-The example also shows how to set it up so that it always looks as nice as possible. This is done by using a
-primary color branded background color applied to the system navigation bar in Android, when
-transparency is not supported. While still using a transparent system navigation bar,
-when running on an API level that supports it.
+Use and support for the opacity
+value on the system navigation bar is supported 
+starting from Flutter 2.5. The [PR 28616](https://github.com/flutter/engine/pull/28616) will 
+once it lands in stable also result in more predictable
+and consistent behavior, and limit its functionality to SDK >= 29. 
 
-Please see the separate small stand-alone example Android project called
-[**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for full details.
-
-With this experimental feature you can make an Android system navigation that looks like the left one below when
-it is supported. It then falls back to just being theme color branded, like the right one, on API levels that do not
-support it.
-
-The example below uses the classical system navigation bar with the navigation buttons. It also works when
-the phone settings is changed to use the much smaller gesture bar, or on phones that don't even have a
-visible gesture bar.
-
->Please note that phones with API30 (Android 11) were when this was first written (Jan 16, 2021) still very
->rare, and at the time did not even register on
->[**stats counter**](https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide).
-> When this update was made (June 26, 2021) the share of Android 11 phones had risen to 15%.
-
+If you build example 5 on an Android device you can try and see the partially and even 
+fully transparent Android system navigation bar in action, by using its interactive
+"Navigation Bar Settings" panel.
 

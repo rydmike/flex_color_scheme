@@ -10,9 +10,9 @@ documentation updates.
 
 ## Version 4 Notice
 
-This document is still mainly from the version 3 documentation.
-While 90% of it still applies to version 4, it will be updated with new information
-during the next month.
+This document is ported from the version 3 readme documentation.
+It still applies to version 4, it will be updated and more inside documentation
+added when this document is merged and included in a separate documentation site.
 
 # Contents
 - [Introduction](#introduction)
