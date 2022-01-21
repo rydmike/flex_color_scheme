@@ -91,22 +91,22 @@ enum SchemeColor {
 /// in [FlexColorScheme].
 ///
 /// FlexSubTheme offers opinionated static theme helpers that are opt-in via
-/// [FlexColorScheme.subThemesOptIn]. You can also change many properties of the
+/// [FlexColorScheme.useSubThemes]. You can also change many properties of the
 /// the opt-in setup by defining custom configuration values in the
 /// [FlexSubThemesData] configuration class, and passing it to the
-/// [FlexColorScheme.flexThemesData] property.
+/// [FlexColorScheme.subThemesData] property.
 ///
 /// The configuration class [FlexSubThemesData] offers easy to use configuration
 /// properties for using these sub-themes in FlexColorScheme. You can also use
-/// the static sub-themes without using FlexColorScheme based theming,
-/// however the [FlexSubThemesData] has no impact on the static helpers, it
+/// the static sub-themes without using FlexColorScheme based theming.
+/// However, the [FlexSubThemesData] has no impact on the static helpers, it
 /// is [FlexColorScheme] that uses the [FlexSubThemesData] class to configure
 /// the opt in sub-themes. You can of course also do this if you use
-/// [FlexSubThemesData] outside of [FlexColorScheme] or in copyWith on each
+/// [FlexSubThemesData] outside of [FlexColorScheme] or in `copyWith` on each
 /// sub-theme with custom [ThemeData].
 ///
 /// Sub themes for the following widgets are provided and used via opt-in
-/// flag [useSubThemes] in [FlexColorScheme] :
+/// property [FlexColorScheme.useSubThemes] :
 ///
 /// * [TextButton]
 /// * [ElevatedButton]
@@ -160,8 +160,9 @@ enum SchemeColor {
 ///   straight. Unclear if it can be done via SDK's current theming features,
 ///   will investigate more in future version.
 /// * [Drawer] should have 16dp default rounding on shown side edge, but in
-///   current version of Flutter SDK (2.8.1) it has no theme property to enable
-///   this. It is coming in later Flutter version since it is requird by the
+///   current version of Flutter SDK (2.8.1 when this was written) it has
+///   no theme property to enable
+///   this. It is coming in later Flutter version since it is required by the
 ///   Material 3 design. When it is available, it will be added.
 class FlexSubThemes {
   /// Private constructor for the FlexSubThemes static class to prevent it from
@@ -256,7 +257,7 @@ class FlexSubThemes {
 
   /// An opinionated [TextButtonThemeData] theme.
   ///
-  /// Requires a `ColorScheme`. The color scheme would
+  /// Requires a [ColorScheme], the color scheme would
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
   ///
@@ -268,15 +269,16 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// Defaults to 20 [kButtonRadius].
+    /// Defaults to `kButtonRadius` = 20.
     final double? radius,
 
     /// Padding for the button theme.
     ///
-    /// Defaults to null and uses `styleFrom` default padding.
+    /// Defaults to null and uses `styleFrom` constructors default padding.
     ///
-    /// M3 has more horizontal padding 24, but this tighter default padding
-    /// in M2 with 16dp looks fine as well using stadium borders as in M3.
+    /// M3 has more horizontal padding 24dp, but the tighter default padding
+    /// in M2 that is 16dp looks fine as well when using stadium borders
+    /// as in M3.
     /// Making the custom scalable padding and separate one for icon
     /// versions is rather involved, so sticking to defaults, but exposing the
     /// padding property for future or external use.
@@ -284,7 +286,7 @@ class FlexSubThemes {
 
     /// Minimum button size.
     ///
-    /// Defaults to Size(40, 40).
+    /// Defaults to `kButtonMinSize` = Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
   }) =>
       TextButtonThemeData(
@@ -354,18 +356,19 @@ class FlexSubThemes {
 
     /// Padding for the button theme.
     ///
-    /// Defaults to null and uses `styleFrom` default padding.
+    /// Defaults to null and uses `styleFrom` constructors default padding.
     ///
-    /// M3 has more horizontal padding 24, but this tighter default padding
-    /// in M2 with 16dp looks fine as well using stadium borders as in M3.
-    /// Making the custom scalable padding and separate one for with icon
+    /// M3 has more horizontal padding 24dp, but the tighter default padding
+    /// in M2 that is 16dp looks fine as well when using stadium borders
+    /// as in M3.
+    /// Making the custom scalable padding and separate one for icon
     /// versions is rather involved, so sticking to defaults, but exposing the
     /// padding property for future or external use.
     final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
-    /// Defaults to Size(40, 40).
+    /// Defaults to `kButtonMinSize` = Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
   }) =>
       ElevatedButtonThemeData(
@@ -444,18 +447,19 @@ class FlexSubThemes {
 
     /// Padding for the button theme.
     ///
-    /// Defaults to null and uses `styleFrom` default padding.
+    /// Defaults to null and uses `styleFrom` constructors default padding.
     ///
-    /// M3 has more horizontal padding 24, but this tighter default padding
-    /// in M2 with 16dp looks fine as well using stadium borders as in M3.
-    /// Making the custom scalable padding and separate one for with icon
+    /// M3 has more horizontal padding 24dp, but the tighter default padding
+    /// in M2 that is 16dp looks fine as well when using stadium borders
+    /// as in M3.
+    /// Making the custom scalable padding and separate one for icon
     /// versions is rather involved, so sticking to defaults, but exposing the
     /// padding property for future or external use.
     final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
-    /// Defaults to Size(40, 40).
+    /// Defaults to `kButtonMinSize` = Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
   }) =>
       OutlinedButtonThemeData(
@@ -552,7 +556,7 @@ class FlexSubThemes {
 
     /// Minimum button size.
     ///
-    /// Defaults to Size(40, 40).
+    /// Defaults to `kButtonMinSize` = Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
   }) =>
       ButtonThemeData(

@@ -1,3 +1,5 @@
+// ignore_for_file: comment_references
+
 import 'package:flutter/material.dart';
 
 import 'flex_color.dart';
@@ -5,15 +7,16 @@ import 'flex_color_scheme.dart';
 import 'flex_scheme.dart';
 import 'flex_sub_themes_data.dart';
 
-/// Convenience extensions on [ThemeData] to return a ThemeData object defined
-/// by the [FlexColorScheme.toTheme] method.
+/// A convenience extension on [ThemeData] to define a
+/// [FlexColorScheme] object and return the [ThemeData] object defined by
+/// its instance, using its [FlexColorScheme.toTheme] method in one go.
 ///
 /// Provided convenience extensions are:
 ///
 /// * FlexThemeData.light(), based on FlexColorScheme.light().toTheme
 /// * FlexThemeData.dark(), based on FlexColorScheme.dark().toTheme
 ///
-/// The goal is to eventually be able to provide these as static extensions
+/// The goal is to be able to provide these as static extensions
 /// on ThemeData, so it would be possible to say:
 ///
 /// * ThemeData.flexLight(), based on FlexColorScheme.light().toTheme
@@ -22,13 +25,11 @@ import 'flex_sub_themes_data.dart';
 /// Dart does not yet support such extensions, see:
 /// https://github.com/dart-lang/language/issues/723
 ///
-/// Using these static extension with the Extension name does not yet add as
-/// much familiarity as being able to use it on ThemeData directly would do.
-/// It was anyway added as an option, if the above mentioned issue leads to
-/// support the 2nd mentioned syntax as well some day it will be added then.
-///
-/// Using FlexThemeData.light() is still a bit shorter
-/// than FlexColorScheme.light().toTheme, and it may feel more familiar.
+/// Using e.g. [FlexThemeData.light] is a bit shorter than
+/// [FlexColorScheme.light]`.toTheme`, and it may feel more familiar since
+/// you get a [ThemeData] object directly that you can use just like any
+/// other ThemeData object produced by Flutter SDK built in ThemeData factory
+/// constructors.
 ///
 /// For advanced theming, when constructing elaborate themes where sub themes
 /// need access to the [ColorScheme] as defined by your [FlexColorScheme].
@@ -101,15 +102,13 @@ extension FlexThemeData on ThemeData {
     /// color values.
     final int usedColors = 4,
 
-    /// Blends theme colors into surfaces and backgrounds. Consider using
-    /// [surfaceMode] instead.
+    /// Blends theme colors into surfaces and backgrounds. Deprecated use
+    /// [surfaceMode] in combination with [blendLevel] instead.
     ///
-    /// This property was used in FlexColorScheme before v4.0.0, it
-    /// has not yet been deprecated, but may be so in future version.
-    /// It is available for backwards compatibility.
-    /// It is recommended to migrate to use `surfaceMode` instead, that replaces
-    /// `surfaceStyle` and offers more surface color configuration options
-    /// and choices.
+    /// This property was used in FlexColorScheme before v4.0.0.
+    /// It is is still available for backwards compatibility.
+    /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
+    /// and offers more surface color configuration options and choices.
     ///
     /// Defaults to [FlexSurface.material] which results in Flutter
     /// standard [ColorScheme.light] surface colors, which follows the
@@ -119,9 +118,10 @@ extension FlexThemeData on ThemeData {
     /// If values for the properties [surface], [background],
     /// [dialogBackground] or [scaffoldBackground] are given,
     /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via [surfaceMod] or [FlexSurface] in
+    /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
     /// this [surfaceStyle].
-    final FlexSurface surfaceStyle = FlexSurface.material,
+    @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
+        final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///
@@ -822,28 +822,26 @@ extension FlexThemeData on ThemeData {
     /// color values.
     final int usedColors = 4,
 
-    /// Blends theme colors into surfaces and backgrounds. Consider using
-    /// [surfaceMode] instead.
+    /// Blends theme colors into surfaces and backgrounds. Deprecated use
+    /// [surfaceMode] in combination with [blendLevel] instead.
     ///
-    /// This property was used in FlexColorScheme before v4.0.0, it
-    /// has not yet been deprecated, but may be so in future version.
-    /// It is available for backwards compatibility.
-    /// It is recommended to migrate to use `surfaceMode` instead, that replaces
-    /// `surfaceStyle` and offers more surface color configuration options
-    /// and choices.
+    /// This property was used in FlexColorScheme before v4.0.0.
+    /// It is is still available for backwards compatibility.
+    /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
+    /// and offers more surface color configuration options and choices.
     ///
     /// Defaults to [FlexSurface.material] which results in Flutter
-    /// standard [ColorScheme.dark] surface colors, which follows the
-    /// default color scheme in the Material Design
-    /// guide for dark theme found here:
-    /// https://material.io/design/color/dark-theme.html#ui-application
+    /// standard [ColorScheme.light] surface colors, which follows the
+    /// default color scheme in the Material Design guide for light theme found
+    /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
     ///
     /// If values for the properties [surface], [background],
     /// [dialogBackground] or [scaffoldBackground] are given,
     /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via [surfaceMode] or [FlexSurface] in
+    /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
     /// this [surfaceStyle].
-    final FlexSurface surfaceStyle = FlexSurface.material,
+    @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
+        final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///

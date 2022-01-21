@@ -2,48 +2,52 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.2.0] - January 21, 2022 (WORK IN PROGRESS)
+## [4.2.0] - January 22, 2022 (WORK IN PROGRESS)
 
-* Updated required Dart SDK to minimum 2.15 that Flutter 2.8.0 uses. Thus, 
-  to use this release at least Flutter 2.8.0 is required.
-* Add support for, and an opinionated sub-theme for the new Material 3 based
+* **New:** Updated required Dart SDK to minimum 2.15 that Flutter 2.8.0 uses.  
+  To use this release at least Flutter 2.8.0 is required.
+* **New:** Added support for opinionated sub-theme for the new Material 3 based
   `NavigationBar`. Flutter version 2.8.0 is the first stable version that 
-  includes the new Material 3 design based `NavigationBar`. To support it, it 
-  was required to upgrade the minimum Dart SDK version that is bundled with 
-  Flutter 2.8.0 and later.
+  includes the new Material 3 design based `NavigationBar`. 
+* **Deprecated:** The property `surfaceStyle` has been deprecated. In
+  version 4.0.0 it was already recommended to use, the then introduced more
+  powerful surface branding properties `surfaceMode` and `blendLevel` instead.
+  The `surfaceStyle` property is still available and works as before, but you 
+  now get a deprecation warning if it is used. The property and all its related features 
+  will be completely removed in version 5.0.
 
-
-* Added a `ColorScheme` color selection option to selected opinionated sub-themes. The
-  sub-themes that support changing their `ColorScheme` based themed color 
-  selection, have one or more properties called
+* **New:** Added a `ColorScheme` color selection option to selected opinionated 
+  sub-themes configuration class `FlexSubThemesData`. The sub-themes that 
+  support changing their `ColorScheme` based 
+  used theme color selection, have one or more properties called
   `nnnSchemeColor` where `nnn` describes the color feature that can be set
   to an alternative `ColorScheme` based color and not just its pre-defined
-  `ColorScheme` color property.
-  The color selector is a `SchemeColor` enum property that is used to select 
-  the enum value that corresponds to same named color 
-  property value in `theme.colorScheme`. This `SchemeColor` property color 
-  quick selection option has been added to:
-  - Style `TextField` in `FlexSubThemes.inputDecorationTheme` to select a base 
-    color for the border and fill color.
-  - `TabBar` theming to select its indicator color, when you want it to be a 
+  `ColorScheme` based color property.
+  The color selector is a `SchemeColor` enum property value that is used to 
+  select the enum value that corresponds to same named color 
+  property value in `theme.colorScheme`. This `SchemeColor` color quick 
+  selection option has been added to:
+  - Theming `TextField` via `FlexSubThemes.inputDecorationTheme` to select a 
+    base color for the border and fill color.
+  - `TabBar` sub-theming to select its indicator color, when you want it to be a 
     different color than the color of the `TabBar` icon and text, which are 
     controlled via `FlexTabBarStyle` in the `FlexColorScheme.tabBarStyle` 
     property as before. It gives you an easy option to override the indicator
-    color with any of the theme's color scheme colors.
-  - `BottomNavigationBar` in `FlexSubThemes.bottomNavigationBar` to set the 
+    color with any of the theme's `colorScheme` colors.
+  - To `BottomNavigationBar` via `FlexSubThemes.bottomNavigationBar` to set the 
     preferred color of the icon and label text in the Material 2 based 
-    `BottomNavigationBar` as well as its background color.
+    `BottomNavigationBar`, as well as used container background color.
   - `NavigationBar` in `FlexSubThemes.navigationBarTheme` to set the
     preferred `ColorScheme` color of the text, icon in the Material 3 based 
     `NavigationBar`, as well as the pill shaped highlight color separately that
-    surrounds the selected icon and the background color.
-  - `ChipThemeData` from `FlexSubThemes.chipTheme` to change the used `ColorScheme`
-    base color of Chips.  
-* The `SchemeColor` properties for the above sub-themes have same default 
-  `ColorScheme` color values as they did before. The additional configuration options
-  are none breaking. The enum properties to modify the used `ColorScheme` color 
-  can be defined in the configuration class `FlexSubThemesData` using its 
-  new properties:
+    surrounds the selected icon and its container background color.
+  - `ChipThemeData` from `FlexSubThemes.chipTheme` to change the used 
+    `ColorScheme` based base color of Chips.  
+* The `SchemeColor` properties for the above sub-themes have a default selection 
+  that results oin same `ColorScheme` color values being used as they had 
+  before. The additional configuration options are none breaking. The enum 
+  properties to modify the used `ColorScheme` color can be defined in the 
+  configuration class `FlexSubThemesData` using its new properties:
   - `inputDecoratorSchemeColor`
   - `chipSchemeColor`
   - `tabBarIndicatorSchemeColor`
@@ -56,7 +60,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   - `navigationBarBackgroundSchemeColor`
   
 * Usage examples of the above new configuration possibilities have been added to
-  the default example, the hot reload playground.
+  the default example, the so-called developers hot reload playground.
 * The ColorScheme color selection in `SchemeColor` includes all colors in 
   `ColorScheme` supported by Flutter 2.8. It is recommended to avoid using the
   `primaryVariant` and `secondaryVariant` colors if you want to avoid later
@@ -65,20 +69,24 @@ All notable changes to the **FlexColorScheme** package are documented here.
 * A later FlexColorScheme version will add support for the new Material 3
   colors in `ColorScheme` when they land in the stable channel.
 * This quick selection of `ColorScheme` based colors as none standard themed
-  colors of widget sub-themes may be extended to a few more sub-themes in 
+  colors of widget sub-themes, may be extended to a few more sub-themes in 
   future versions, if it is seen as a practical and quick way to customize 
   widget sub-theme colors within the constraints of colors in 
-  the `theme.colorScheme`. As before you
-  can still apply your own total custom sub-themes to the `ThemeData` created
-  with `FlexColorScheme` by using `copyWith`. FlexColorScheme is just a way 
-  to easily make fancy and color wise consistent and balanced `ThemeData` 
-  objects using convenience shortcut properties and methods.
+  the `theme.colorScheme`. 
+* As before you can still apply your own total custom sub-themes to the 
+  `ThemeData` created with `FlexColorScheme` by using `copyWith`. 
+  FlexColorScheme is a way to easily make fancy and color wise consistent and 
+  balanced `ThemeData` objects using convenience shortcut properties and 
+  methods, it does not prevent you from further modifying and tuning the 
+  produced `ThemeData` with with standard Flutter SDK features.
 
 
-* Removed `uses-material-design: true` from library pubspec.yaml file.
+* **Removed:** Removed the `uses-material-design: true` line from library 
+  `pubspec.yaml` file. It is not needed since Material icon features are not 
+  used by this package.
 
 
-* Themes Playground (Example 5) Improvements:
+* **Examples:** Themes Playground (Example 5) Improvements:
   * Fixed onColor for a few colors in the ThemeData color presentation for cases
     where it might differ from colorScheme onColors. This could happen when 
     disabling FlexColorScheme and when some colors do not match its onColors.
@@ -89,13 +97,20 @@ All notable changes to the **FlexColorScheme** package are documented here.
     ListTile was the button, this UI with no button was not so clear. Now 
     there is also a button that says COPY. Clicking on the ListTile still 
     works as well.
-  * Add and updated app icon resources to the example apps.
+  * Add and updated app icon resources used by all the example apps.
   * Use new version of StaggeredGridview 0.6.0 that no longer requires 
-    previously used bug work around(s) for window resize issue it had since 2019.
-    For more info on this solved issue, see this [article](https://rydmike.com/gridview).
+    previously used bug work around(s) for a window resize issue it had 
+    since 2019. For more info on this solved issue, see this
+    [article](https://rydmike.com/gridview).
   * **TODO:** Add the new features in version 4.2.0 to the Themes Playground app.
- 
-* Added tests to cover the new features, now total 1104 tests.  
+
+
+* **Documentation:** Reviewed and corrected many API docs. The API docs are 
+  very thorough and complete. They usually cover any question you might have and
+  more. Added an API Intro and Guide chapter to the readme.
+
+
+* **Tests:** Added tests to cover the new features, now total 1104 tests.  
 
 ## [4.1.1] - November 20, 2021
 
