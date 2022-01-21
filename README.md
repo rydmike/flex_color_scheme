@@ -11,6 +11,8 @@ additional features.
 [<img src="https://rydmike.com/assets_fcsv4/00-main-image.jpg?raw=true?" alt="main_image"/>](https://rydmike.com/assets_fcsv4/00-main-image.png?raw=true>)  
 _FlexColorScheme theme examples (click image to open hires version)_
 
+[<img src="https://rydmike.com/assets_fcsv4/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="400"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
+
 When you color theme a Flutter application, all built in 
 widgets use the colors of the `ColorScheme` in your theme. At least in theory, 
 and it is almost so if you defined your Flutter ThemeData by using the 
@@ -63,7 +65,7 @@ Shape definitions.
   - [Example 4 - All themes](#example-4---all-themes)
   - [Example 5 - Themes playground](#example-5---themes-playground)
     - [Custom themes and automatic Flutter source code](#custom-themes-and-automatic-flutter-source-code)
-- [API Intro and Guide](#api-intro-and-guide)
+- [API Intro and guide](#api-intro-and-guide)
 - [Scheme reference](#scheme-reference)
 - [Feature details (external link)](https://github.com/rydmike/flex_color_scheme/blob/master/FEATURES.md)
 - [Inside FlexColorScheme (external link)](https://github.com/rydmike/flex_color_scheme/blob/master/INSIDE.md)
