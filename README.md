@@ -204,11 +204,11 @@ there to be able to properly demonstrate and show the results.
 > often need the colors in this `ColorSchene` when you create widget sub-themes
 > that use matching colors.
 
-## Default example - Hot Reload Playground
+## Default Example - Hot Reload Playground
 
 A quick and simple way to try FlexColorScheme V4 is to build the
-default example application and use it as a hot reload playground to get to
-know it.
+default example application. You can then use it as a hot reload playground to
+experiment with and test all the different theming and configuration options.
 
 To try the default **example** on a device or simulator,
 clone the [repository](https://github.com/rydmike/flex_color_scheme) and
@@ -259,8 +259,8 @@ The other results shown above were also produced by editing a few
 properties in this hot reload playground.
 
 In the hot reload playground the side menu has no real functionality, it is 
-mainly there to present more surface area using the theme colorscheme background
-color. The theme toggle in the menu does work though.
+only there to present more surface area using the `theme.colorScheme` 
+background color. The theme toggle in the menu does work though.
 
 ## Themes Playground
 
