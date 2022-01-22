@@ -10,13 +10,14 @@ import 'flex_sub_themes.dart';
 /// [FlexColorScheme.useSubThemes] is true.
 ///
 /// The main use case for [FlexSubThemes] and the [FlexSubThemesData] is for
-/// easy to use customization of default corner radius on all Flutter SDK
-/// Widgets and elements that supports corner radius either via [ShapeBorder]
+/// easy to use customization of default border radius on all Flutter SDK
+/// Widgets and elements that supports border radius either via [ShapeBorder]
 /// or [BorderRadiusGeometry].
 ///
-/// By default the shape corner border radius rounding on included and
-/// supported sub-themes that use shapes, defaults to the corner radius
-/// defined by the Material 3 guide per widget, see https://m3.material.io/
+/// By design the shape border radius rounding on included and
+/// supported sub-themes that use shapes, default to the border radius
+/// defined by the Material 3 guide per widget,
+/// [see Material 3 Design guide](https://m3.material.io).
 ///
 /// Additionally the sub-theming offers a consistent button design on all
 /// buttons, including [ToggleButtons] that is style to match size of
@@ -28,8 +29,8 @@ import 'flex_sub_themes.dart';
 /// in the SDK.
 ///
 /// On select sub-themes the used default color from the theme's colorScheme
-/// can be changed with an enum colorscheme selection value. This is currently
-/// supported by sub-themes:
+/// can be changed with an enum color scheme selection value. This is currently
+/// supported by these sub-themes:
 ///
 /// - [TextField] in [FlexSubThemes.inputDecorationTheme].
 /// - The [TabBar]'s indicator color.
@@ -39,10 +40,10 @@ import 'flex_sub_themes.dart';
 ///
 /// Future versions may extend these quick color selection options to other
 /// sub-themes where there is a high demand to change the used base color
-/// from their default ColorScheme based color to another ColorScheme based
+/// from their default [ColorScheme] based color to another color scheme based
 /// color. As before you can also modify FlexColorScheme produced ThemeData
-/// objects with copyWith just as you can with normal ThemeData to make
-/// and custom sub-themes designs that FlexColorScheme does not include.
+/// object with copyWith, just as you can with normal ThemeData, to make
+/// and add custom sub-themes designs that FlexColorScheme does not include.
 @immutable
 class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.
@@ -172,29 +173,42 @@ class FlexSubThemesData with Diagnosticable {
   /// available.
   ///
   /// Expect minor changes to the visual result when using this option in
-  /// future versions.
+  /// future versions when actual Material 3 text themes become available.
   ///
   /// Defaults to true.
   final bool blendTextTheme;
 
-  /// Use a Material 3 like text theme.
+  /// Use a Material 3 like and inspired text theme.
   ///
-  /// When opting in on using the sub theming, this flag controls if the
-  /// text theme that uses Material 3 like font sizes as specified for phones,
+  /// When opting in on using the sub-theming, this flag controls if the
+  /// text theme that uses Material 3 like font sizes and letter spacing,
+  /// as specified for phones in the
+  /// [Material 3 Design Guide](https://m3.material.io),
   /// is also used.
   ///
   /// The text theme is defined in [FlexColorScheme.m3TextTheme]. When the
   /// actual M3 based text themes are defined in Flutter SDK stable release
   /// they will be used instead.
   ///
+  /// If you need to use none EnglishLike typography for you locale, then
+  /// using this text theme might not be ideal. It only provides
+  /// the EnglishLike geometry, not the dense and tall ones that some locales
+  /// prefer or need. This limitation will be removed when the M3 geometry is
+  /// supported in Flutter SDK. If this text theme causes issues with your
+  /// locale or it otherwise does not suite your design, then set this to false.
+  ///
+  /// FlexColorScheme fully supports using any custom TextTheme and fonts, just
+  /// like ThemeData. That you apply and use just as you would with ThemeData.
+  /// This text theme is just a custom predefined TextTheme.
+  ///
   /// Defaults to true.
   final bool useTextTheme;
 
-  /// Corner radius used on all widgets when [FlexColorScheme] use its
-  /// [FlexSubThemesData] to configure sub themes with [FlexSubThemes].
+  /// Border radius used on all widgets when [FlexColorScheme] use its
+  /// [FlexSubThemesData] to configure sub-themes with [FlexSubThemes].
   ///
-  /// These widgets will get their shape corner rounding from [defaultRadius]
-  /// when it is defined.
+  /// These widgets will get their shape border radius from [defaultRadius]
+  /// when it is defined:
   ///
   /// * [TextButton]
   /// * [ElevatedButton]
@@ -211,24 +225,26 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Defaults to null.
   ///
-  /// When it is null, the sub themes will use their null defaults that aim
+  /// When it is null, the sub-themes will use their null defaults that aim
   /// to follow Material 3 standard for all widgets it includes.
   ///
-  /// When you set [defaultRadius] to a value, it will override these defaults
+  /// When you set [defaultRadius] to a value, it will override the defaults
   /// with this global default. You can still set and lock each individual
-  /// border radius back for these widget sub themes to some specific value, or
-  /// to its Material 3 standard, which is mentioned in each theme as the used
-  /// default when its value is null.
+  /// border radius back for individual widget sub-themes to some specific
+  /// value, or set it back to its Material 3 standard, which is mentioned
+  /// in each theme as the used default when its value is null.
   ///
-  /// Flutter current SDK general corner radius is 4, as defined by the
+  /// Flutter current SDK general border radius is 4, as defined by the
   /// Material 2 design guide. Material 3 (You) uses much
-  /// higher corner radius, but it varies by widget in Flutter.
+  /// higher border radius, but it varies by UI widget. You can find the
+  /// specifications [here](https://m3.material.io).
   final double? defaultRadius;
 
   /// Minimum button size for all buttons.
   ///
   /// Applies to [TextButton], [ElevatedButton], [OutlinedButton] and
-  /// [ToggleButtons] and legacy deprecated buttons.
+  /// [ToggleButtons], and the legacy deprecated buttons
+  /// `RaisedButton`, `OutlineButton` and `FlatButton`.
   ///
   /// Defaults to [kButtonMinSize].
   final Size buttonMinSize;
@@ -257,10 +273,10 @@ class FlexSubThemesData with Diagnosticable {
   /// Default to [kThinBorderWidth].
   final double thinBorderWidth;
 
-  /// Corner radius override value for [TextButton].
+  /// Border radius override value for [TextButton].
   final double? textButtonRadius;
 
-  /// Corner radius override value for [ElevatedButton].
+  /// Border radius override value for [ElevatedButton].
   final double? elevatedButtonRadius;
 
   /// Default elevation of [ElevatedButton].
@@ -270,13 +286,13 @@ class FlexSubThemesData with Diagnosticable {
   /// and defaults to [kElevatedButtonElevation] elevation on [ElevatedButton].
   final double elevatedButtonElevation;
 
-  /// Corner radius override value for [OutlinedButton].
+  /// Border radius override value for [OutlinedButton].
   final double? outlinedButtonRadius;
 
-  /// Corner radius override value for [ToggleButtons].
+  /// Border radius override value for [ToggleButtons].
   final double? toggleButtonsRadius;
 
-  /// Corner radius override value for [InputDecoration].
+  /// Border radius override value for [InputDecoration].
   final double? inputDecorationRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the input decorator
@@ -291,7 +307,7 @@ class FlexSubThemesData with Diagnosticable {
   /// on sub-themes. Giving an opportunity to make the past always filled input
   /// decorator even less opinionated.
   ///
-  /// Defaults to true;
+  /// Defaults to true.
   final bool inputDecoratorIsFilled;
 
   /// Determines the color of the filled [InputDecorator].
@@ -303,17 +319,15 @@ class FlexSubThemesData with Diagnosticable {
   /// [inputDecoratorSchemeColor].withAlpha(0x0F).
   final Color? inputDecoratorFillColor;
 
-  // TODO(rydmike): Consider ContinuousRectangleBorder and beveled as new types.
-
   /// Determines the type of border [InputDecorator] uses.
   ///
   /// Defaults to [FlexInputBorderType.outline] to prefer the outline style.
   ///
-  /// To use the underline style set it to [FlexInputBorderType.underline].  ///
+  /// To use the underline style set it to [FlexInputBorderType.underline].
   /// The top of the decorator is still rounded according to overall
   /// [defaultRadius] also with underline borer type.
   ///
-  /// To change input decorator's corner radius separately define
+  /// To change input decorator's border radius separately define
   /// [inputDecorationRadius] that will then override [defaultRadius].
   final FlexInputBorderType inputDecoratorBorderType;
 
@@ -323,17 +337,19 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Applies to both outline and underline mode.
   ///
-  /// You would typically
-  /// use this in a design where you use a fill color and want unfocused
+  /// You can use this in a design where you use a fill color and want unfocused
   /// input fields to only be highlighted by the fill color and not have any
   /// unfocused input border style.
   ///
   /// When set to false, there is no border bored on states enabledBorder and
-  /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
-  /// and errorBorder, so error thus has a border also when it is not focused.
+  /// disabledBorder. There is a border on focusedBorder, focusedErrorBorder
+  /// and errorBorder. Error state thus has a border also when it is not
+  /// focused, even when this is set to false. This is a design choice to
+  /// continue to emphasize error state with an error border even when
+  /// this property is set to false.
   final bool inputDecoratorUnfocusedHasBorder;
 
-  /// Corner radius override value for [FloatingActionButton].
+  /// Border radius override value for [FloatingActionButton].
   final double? fabRadius;
 
   /// Use shape theming on Floating Action Button (FAB).
@@ -347,10 +363,10 @@ class FlexSubThemesData with Diagnosticable {
   /// shaped as before, despite otherwise using a rounder or M3 design.
   /// The circular M2 FAB goes well with those designs too.
   ///
-  /// Default to true.
+  /// Defaults to true.
   final bool fabUseShape;
 
-  /// Corner radius override value for [Chip] widgets.
+  /// Border radius override value for [Chip] widgets.
   final double? chipRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the Chip's
@@ -359,7 +375,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined it defaults to theme.colorScheme.primary color.
   final SchemeColor? chipSchemeColor;
 
-  /// Corner radius override value for [Card].
+  /// Border radius override value for [Card].
   final double? cardRadius;
 
   /// Elevation of [Card].
@@ -369,11 +385,11 @@ class FlexSubThemesData with Diagnosticable {
   /// themed elevation on [Card] widgets.
   final double cardElevation;
 
-  /// Corner radius override value for the menu on [PopupMenuButton].
+  /// Border radius override value for the menu on [PopupMenuButton].
   ///
-  /// When used by [FlexColorScheme] the corner radius of popup menus follows
+  /// When used by [FlexColorScheme] the boroder radius of popup menus follows
   /// the [defaultRadius] until and including 10 dp. After which it stays at
-  /// 10 dp. If you need a higher corner radius on popup menus than 10 dp,
+  /// 10 dp. If you need a higher border radius on popup menus than 10 dp,
   /// you will have to explicitly override it here. It will not look very
   /// good, the highlight inside the menu will start to overflow the corners and
   /// it is not clipped along the border radius. The underlying Widget is not
@@ -407,7 +423,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If null, defaults to 1, fully opaque.
   final double? popupMenuOpacity;
 
-  /// Corner radius override value for [Dialog].
+  /// Border radius override value for [Dialog].
   final double? dialogRadius;
 
   /// Elevation of [Dialog].
@@ -421,23 +437,24 @@ class FlexSubThemesData with Diagnosticable {
   /// light and contrast poorly with primary color.
   final double dialogElevation;
 
-  /// Corner radius override value for [TimePickerDialog].
+  /// Border radius override value for [TimePickerDialog].
   final double? timePickerDialogRadius;
 
   /// Elevation of [SnackBar].
   ///
-  /// Defaults to [kSnackBarElevation].
+  /// Defaults to [kSnackBarElevation] = 4.
   final double snackBarElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// indicator uses.
   ///
-  /// If not defined it defaults to same color as selected tab icon and text.
+  /// If not defined ,it defaults to the same color as selected tab icon and
+  /// text.
   /// The themed icon color and label color of tabs are defined by the
   /// [FlexColorScheme.tabBarStyle] property.
   final SchemeColor? tabBarIndicatorSchemeColor;
 
-  /// Corner radius override value for [BottomSheet].
+  /// Border radius override value for [BottomSheet].
   final double? bottomSheetRadius;
 
   /// Elevation of none modal [BottomSheet].
@@ -480,11 +497,12 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If not defined it defaults to theme.colorScheme.background color, same as
-  /// Flutter default theme.
+  /// If not defined it defaults to `theme.colorScheme.background` color,
+  /// same as Flutter SDK default un-themed [BottomNavigationBar] widget
+  /// behavior.
   final SchemeColor? bottomNavigationBarBackgroundSchemeColor;
 
-  /// The arrangement of the bar's [items] when the enclosing
+  /// The arrangement of the bottom navigation bar's [items] when the enclosing
   /// [MediaQueryData.orientation] is [Orientation.landscape].
   ///
   /// The following alternatives are supported:
@@ -502,44 +520,48 @@ class FlexSubThemesData with Diagnosticable {
   ///   row instead of a column.
   ///
   /// Defaults to null, if this property is null, then the value of the
-  /// enclosing [BottomNavigationBarThemeData.landscapeLayout is used. If that
+  /// enclosing [BottomNavigationBarThemeData.landscapeLayout] is used. If that
   /// property is also null, then
   /// [BottomNavigationBarLandscapeLayout.spread] is used.
   final BottomNavigationBarLandscapeLayout? bottomNavigationBarLandscapeLayout;
 
-  /// When true, the [NavigationBarThemeData] theme created will be opinionated
-  /// and styled to match the rest of the FlexColorScheme opinionated sub
-  /// themes.
+  /// When true, the [NavigationBarThemeData] theme for the M3 [NavigationBar]
+  /// created will be opinionated and styled to match the rest of the
+  /// FlexColorScheme opinionated sub-themes.
   ///
   /// Defaults to true.
   ///
   /// Regardless of if this is property is true or false, setting the other
-  /// navigationBar properties in FlexSubThemesData overrides the defaults,
-  /// the difference is the starting point. If true the starting point is the
+  /// navigationBar properties in [FlexSubThemesData] overrides the defaults.
+  /// The difference is the starting point. If true the starting point is the
   /// styled version, if false, the starting point are the defaults of the
   /// un-themed default Widget behavior of the M3 based [NavigationBar].
   /// Depending on the end result you want to achieve, starting with
   /// [navigationBarIsStyled] as true or false may give you a starting point
-  /// that is closer to your target style requiring you to define fever of
-  /// the other properties.
+  /// that is closer to your target style, requiring you to define fever of
+  /// the other properties offered here.
   ///
   /// The [NavigationBar] sub-theme styling offered is extensive. Other
-  /// sub-themes will not be this extensive. This is added as trial to how it
-  /// is received. Styling the [NavigationBar] with its raw sub-theme data can
-  /// be a bit tricky as it uses [MaterialStateProperty] for its icon and text
-  /// theme styling. This provides a more "flat" API for modifying it further
+  /// sub-themes configurations and options are not and will not be this
+  /// extensive. This is added as a trial to see how it is received. It was
+  /// also added because styling the [NavigationBar] with its raw sub-theme
+  /// class [NavigationBarThemeData] can be a bit tricky as it uses
+  /// [MaterialStateProperty] for its icon and text
+  /// theme styling. Here we provide a more "flat" API for modifying it further,
   /// and a default that matches the rest of defaults for FlexColorScheme
-  /// styles. You can also use the [FlexSubThemes.navigationBarTheme] as
-  /// helper for making you custom [NavigationBarThemeData] it exposes a few
-  /// more properties and options than available here in a more convenient
-  /// API format than [NavigationBarThemeData].
+  /// styles.
+  ///
+  /// You can also use the [FlexSubThemes.navigationBarTheme] as
+  /// helper for making your custom [NavigationBarThemeData]. It exposes a few
+  /// more properties and options than available here, in a more convenient
+  /// API format than the [NavigationBarThemeData] class.
   final bool navigationBarIsStyled;
 
-  /// Height of the container for Material 3 type [NavigationBar].
+  /// Height of the container for the Material 3 [NavigationBar].
   ///
   /// If [navigationBarIsStyled] is true it defaults to [kNavigationBarHeight]
-  /// = 62dp, else to 80dp, same as the the Material 3 default design and
-  /// specification for its height.
+  /// = 62 dp, otherwise it is 80 dp. This is the same as the the Material 3
+  /// default design and specification for its height.
   final double? navigationBarHeight;
 
   /// NavigationBar background opacity.
@@ -552,8 +574,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value,
-  /// if it is true, resulting color is primary, if false, onSurface
+  /// If null, the default value depends on the [navigationBarIsStyled] value.
+  /// If it is true, resulting color is primary, if false, onSurface
   /// via [NavigationBar] widget default behavior.
   /// If the property is defined, the resulting ColorScheme color is always
   /// the color selected by this property.
@@ -564,9 +586,9 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value,
-  /// if it is true, resulting color is primary, if false, onSurface
-  /// via [NavigationBar] widget default behavior.
+  /// If null, the default value depends on the [navigationBarIsStyled] value.
+  /// If it is true, resulting color is primary, if false, onSurface
+  /// via [NavigationBar] widget's default behavior.
   /// If the property is defined, the resulting ColorScheme color is always
   /// the color selected by this property.
   final SchemeColor? navigationBarTextSchemeColor;
@@ -576,9 +598,9 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value,
-  /// if it is true, resulting color is primary, if false, secondary
-  /// via [NavigationBar] widget default behavior.
+  /// If null, the default value depends on the [navigationBarIsStyled] value.
+  /// If it is true, resulting color is primary, if false, secondary
+  /// via [NavigationBar] widget's default behavior.
   /// If the property is defined, the resulting ColorScheme color is always
   /// the color selected by this property.
   final SchemeColor? navigationBarHighlightSchemeColor;
@@ -588,26 +610,27 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value,
-  /// if it is true, resulting color is background, if false, then
-  /// surface color with a hard coded elevation overlay color of elevation 3
+  /// If null, the default value depends on the [navigationBarIsStyled] value.
+  /// If it is true, resulting color is background, if false, then
+  /// surface color with a hard coded elevation overlay color of elevation 3,
   /// used in both light and dark theme mode, this via [NavigationBar]
-  /// widget default behavior.
+  /// widget's default behavior.
   final SchemeColor? navigationBarBackgroundSchemeColor;
 
   /// If true, the unselected icons in the [NavigationBar] use a more muted
   /// color version of the color defined by [navigationBarIconSchemeColor].
   ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value,
-  /// if it is true, this property defaults to true, otherwise to false.
+  /// If null, the default value depends on the [navigationBarIsStyled] value.
+  /// If it is true, this property defaults to true, otherwise to false.
   /// If the property is defined, the defined value is used.
+  ///
   /// A muted unselected icon can only be applied when a defined icon color
   /// has been selected. When [navigationBarIsStyled] this is always the case,
   /// but if it is false, you also have to assign a value to
   /// [navigationBarIconSchemeColor] or [navigationBarSelectedIconSize] or
-  /// [navigationBarUnselectedIconSize] so the none standard IconTheme
+  /// [navigationBarUnselectedIconSize], so a none standard [IconTheme]
   /// must be created that can be muted. If none of those properties are defined
-  /// the widget default behavior for icon style is used, and unselected
+  /// the widget default behavior for icon style is used, and the unselected
   /// icon cannot be muted since all properties are null.
   final bool? navigationBarMutedUnselectedIcon;
 
@@ -615,14 +638,15 @@ class FlexSubThemesData with Diagnosticable {
   /// muted color version of the color defined by
   /// [navigationBarTextSchemeColor].
   ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value,
-  /// if it is true, this property defaults to true, otherwise to false.
+  /// If null, the default value depends on the [navigationBarIsStyled] value.
+  /// If it is true, this property defaults to true, otherwise to false.
   /// If the property is defined, the defined value is used.
+  ///
   /// A muted unselected text color can only be applied when a defined text
   /// color has been selected. When [navigationBarIsStyled] this is always the
   /// case, but if it is false, you also have to assign a value to
   /// [navigationBarTextSchemeColor] or [navigationBarSelectedLabelSize] or
-  /// [navigationBarUnselectedLabelSize] so the none standard TextStyle
+  /// [navigationBarUnselectedLabelSize] so a none standard [TextStyle]
   /// must be created that can be muted. If none of those properties are defined
   /// the widget default behavior for label text style is used, and unselected
   /// text cannot be muted since all properties are null.
@@ -630,29 +654,29 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The size of the text label on selected item.
   ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value,
-  /// if it is true, resulting size is 11 dp, coming from the custom
-  /// TextStyle in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
+  /// If null, the default value depends on the [navigationBarIsStyled] value.
+  /// If it is true, resulting size is 11 dp, coming from the custom
+  /// [TextStyle] in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
   /// text style, which defines the size to 11 dp in accordance to M3 text
   /// styles.
   ///
   /// If [navigationBarIsStyled] is false and all other text theming options
   /// are also null, the default size will depend on ambient text size of
-  /// [TextTheme.overline] as will it other style options. What size this is
+  /// [TextTheme.overline], as will it other style options. What size this is
   /// will depend on used [Typography] which may be impacted by locale and
   /// Flutter version, typically it will be 10dp with a very wide letter
   /// spacing.
   ///
   /// If size is defined, it overrides the font size on effective label
-  /// TextStyle on selected item. A fallback value of 11 dp is also applied
+  /// TextStyle on the selected item. A fallback value of 11 dp is also applied
   /// should the geometry in passed in used TextStyle be missing.
   final double? navigationBarSelectedLabelSize;
 
   /// The size of the text label on unselected items.
   ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value,
-  /// if it is true, resulting size is 11 dp, coming from the custom
-  /// TextStyle in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
+  /// If null, the default value depends on the [navigationBarIsStyled] value.
+  /// If it is true, resulting size is 11 dp, coming from the custom
+  /// [TextStyle] in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
   /// text style, which defines the size to 11 dp in accordance to M3 text
   /// styles.
   ///
@@ -668,12 +692,12 @@ class FlexSubThemesData with Diagnosticable {
   /// should the geometry in passed in used TextStyle be missing.
   final double? navigationBarUnselectedLabelSize;
 
-  /// The size of the text label on selected item.
+  /// The size of the icon on selected item.
   ///
   /// If null, it defaults to 24.
   final double? navigationBarSelectedIconSize;
 
-  /// The size of the text label on unselected items.
+  /// The size of the icon on unselected items.
   ///
   /// If null, it defaults to 24.
   final double? navigationBarUnselectedIconSize;

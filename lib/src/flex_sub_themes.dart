@@ -167,7 +167,7 @@ enum SchemeColor {
 class FlexSubThemes {
   /// Private constructor for the FlexSubThemes static class to prevent it from
   /// being instantiated or extended.
-  FlexSubThemes._(); // coverage:ignore-line
+  FlexSubThemes._(); //coverage:ignore-line
 
   // TODO(rydmike): Add M3 ColorScheme colors when they reach stable.
   /// Returns the [Color] from passed in [ColorScheme] in [colorScheme]
