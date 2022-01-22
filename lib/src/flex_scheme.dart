@@ -7,17 +7,17 @@
 enum FlexScheme {
   /// The example theme used in the Material Design guide.
   ///
-  /// Light scheme version, in Flutter SDK known as `ColorScheme.light`.
+  /// Light scheme version, in Flutter SDK known as `[ColorScheme.light].
   /// https://material.io/design/color/the-color-system.html#color-usage-and-palettes
   ///
-  /// Dark scheme version, in Flutter SDK known as `ColorScheme.dark`.
+  /// Dark scheme version, in Flutter SDK known as [ColorScheme.dark].
   /// https://material.io/design/color/dark-theme.html#ui-application
   material,
 
   /// Material high contrast theme.
   ///
   /// Same as Flutter
-  /// `ColorScheme.highContrastLight` and `ColorScheme.highContrastDark.
+  /// [ColorScheme.highContrastLight] and [ColorScheme.highContrastDark].
   materialHc,
 
   /// Material blue and Material light blue based theme.
