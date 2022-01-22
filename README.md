@@ -174,33 +174,35 @@ becomes:
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
 ```
-
-> **New in version 4:**  
-> The `FlexThemeData.light` and `FlexThemeData.dark` APIs are new in
-> version 4. They are extensions on `ThemeData` that create
-> `FlexColorScheme.light` and `FlexColorScheme.dark` objects and call their
-> `toTheme` method in one step. The new syntax is shorter and also look very
-> similar to `ThemeData.light` and `ThemeData.dark` factories.
->
-> The old APIs work as before and will not be deprecated, they implement
-> the actual functionality and are also needed in more advanced theming use
-> cases. They can for example be useful and preferred when you add your own
-> custom widget sub-themes to FlexColorScheme themes. With FlexColorScheme
-> you can then extract the `ColorScheme` it will use for its ThemeData. You
-> often need the colors in this `ColorSchene` when you create widget sub-themes
-> that use matching colors.
-
-The above additions gives us the following look on the familiar counter app:
+The above additions to the Flutter default counter application, gives us the 
+following look on the familiar counter app:
 
 <img src="https://rydmike.com/assets_fcsv4/fcs_counter_app.png?raw=true" alt="counter sample" width="500"/>
 
 _FlexColorScheme applied on the standard Flutter Counter Template_
 
 Not as exciting as the earlier theme images above. That is because the basic 
-counter app uses very few features and widgets, so it cannot demonstrate the
-result. This is why the included examples contain a lot of demo UI code, that
-is not really at all relevant to using FlexColorScheme, it is only there to be 
-able to properly demonstrate and show the results.
+counter app uses very few features and widgets, therefore it cannot fully 
+demonstrate the results. This is why the included examples contain a lot of 
+demo UI code, that is not really relevant to using FlexColorScheme and is only 
+there to be able to properly demonstrate and show the results.
+
+> **New in version 4:**  
+> The `FlexThemeData.light()` and `FlexThemeData.dark()` APIs used above are 
+> new in version 4. They are extensions on `ThemeData` that create
+> `FlexColorScheme.light()` and `FlexColorScheme.dark()` objects and call their
+> `toTheme` method in one step. The new syntax is shorter and also look very
+> similar to Flutter SDK `ThemeData.light` and `ThemeData.dark` factories.
+>
+> The original APIs `FlexColorScheme.light().toTheme` and 
+> `FlexColorScheme.light().toTheme` do the same thing and still work. 
+> They will not be deprecated, they implement
+> the actual functionality and are useful in more advanced theming use
+> cases. They can for example be useful and preferred when you add your own
+> custom widget sub-themes to FlexColorScheme themes. With FlexColorScheme
+> you can then extract the `ColorScheme` it will use for its ThemeData. You
+> often need the colors in this `ColorSchene` when you create widget sub-themes
+> that use matching colors.
 
 ## Default example - Hot Reload Playground
 
