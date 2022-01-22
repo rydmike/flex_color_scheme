@@ -38,10 +38,9 @@ Shape definitions.
 # Contents
 - [What is new in version 4?](#what-is-new-in-version-4)
   - [New color schemes](#new-color-schemes)
-- [Quick Start Guide](#quick-start-guide)  
-  - [Default example - Hot Reload Playground](#default-example---hot-reload-playground)
+- [Installing and using](#installing-and-using)
+  - [Default example - Hot reload playground](#default-example---hot-reload-playground)
   - [Themes playground](#themes-playground)
-  - [Installing and using](#installing-and-using)
 - [All Color Schemes](#all-color-schemes)
   - [Built-in color scheme designs](#built-in-color-scheme-designs)
   - [Use your own color schemes with FlexColorScheme](#use-your-own-color-schemes-with-flexcolorscheme)
@@ -121,13 +120,93 @@ You can check out this Tweet and its thread
 [here](https://twitter.com/RydMike/status/1459984929631215618) to see a visual
 presentation of FlexColorScheme's features.
 
-# Quick Start Guide
+# Installing and Using
 
-The quickest way to try FlexColorScheme V4 is to build the
-default example application and use it as a hot reload playground to get to
-know it.
+In the `pubspec.yaml` of your **Flutter** project, add the following dependency:
+
+```yaml
+dependencies:
+  flex_color_scheme: ^4.2.0
+```
+
+In your library file add the following import:
+
+```dart
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+```
+
+You can now start using `FlexColorScheme` V4 based color schemes and theming
+in your application. A quick way to do so is to try one of the 36 built-in
+color schemes. The schemes have enums that you can use to refer to them with.
+
+Please study the default example for a thorough guide on how to use almost
+**all** properties in FlexColorScheme. To try it on your own from scratch,
+create a default Flutter counter app. Add the FlexColorScheme import and modify
+one line of code and add two lines as shown below.
+
+Here we use the  **"Oh Mandy red"** color scheme that is represented by `enum`
+value `FlexScheme.mandyRed`. We set the `MaterialApp.themeMode` to
+`ThemeMode.system`, so that the device can control if the app uses its light
+or dark theme mode, based on the device theme mode system setting. You can
+toggle theme mode by changing theme mode on the device.
+
+Assign `FlexThemeData.light` to the app's `theme`, which is the application's
+light theme definition property, and `FlexThemeData.dark` to `darkTheme`.
+For both `FlexThemeData` dark and light we set the `scheme` property to
+`FlexScheme.mandyRed` to use the "Oh Mandy red" predefined `scheme` colors, and
+get matching light and dark themes based on the scheme's color definitions.
+
+The three line modified `MaterialApp` of the Flutter default counter app
+becomes:
+
+```dart
+  class MyApp extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      // The Mandy red, light theme.
+      theme: FlexThemeData.light(scheme: FlexScheme.mandyRed),
+      // The Mandy red, dark theme.
+      darkTheme: FlexThemeData.dark(scheme: FlexScheme.mandyRed),
+      // Use dark or light theme based on system setting.
+      themeMode: ThemeMode.system,
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+```
+
+> **New in version 4:**  
+> The `FlexThemeData.light` and `FlexThemeData.dark` APIs are new in
+> version 4. They are extensions on `ThemeData` that create
+> `FlexColorScheme.light` and `FlexColorScheme.dark` objects and call their
+> `toTheme` method in one step. The new syntax is shorter and also look very
+> similar to `ThemeData.light` and `ThemeData.dark` factories.
+>
+> The old APIs work as before and will not be deprecated, they implement
+> the actual functionality and are also needed in more advanced theming use
+> cases. They can for example be useful and preferred when you add your own
+> custom widget sub-themes to FlexColorScheme themes. With FlexColorScheme
+> you can then extract the `ColorScheme` it will use for its ThemeData. You
+> often need the colors in this `ColorSchene` when you create widget sub-themes
+> that use matching colors.
+
+The above additions gives us the following look on the familiar counter app:
+
+<img src="https://rydmike.com/assets_fcsv4/fcs_counter_app.png?raw=true" alt="counter sample" width="500"/>
+
+_FlexColorScheme applied on the standard Flutter Counter Template_
+
+Not as exciting as the earlier theme images above. That is because the basic 
+counter app uses very few features and widgets, so it cannot demonstrate the
+result. This is why the included examples contain a lot of demo UI code, that
+is not really at all relevant to using FlexColorScheme, it is only there to be 
+able to properly demonstrate and show the results.
 
 ## Default example - Hot Reload Playground
+
+A quick and simple way to try FlexColorScheme V4 is to build the
+default example application and use it as a hot reload playground to get to
+know it.
 
 To try the default **example** on a device or simulator,
 clone the [repository](https://github.com/rydmike/flex_color_scheme) and
@@ -184,9 +263,8 @@ color. The theme toggle in the menu does work though.
 ## Themes Playground
 
 The side menu in the default example is actually made for and used
-in the last example 5 in the tutorial. The final example 
-doubles as an interactive **Themes Playground** application. There the
-menu options actually have their indicated functionality. 
+in the last example in the tutorial. The final example 
+doubles as an interactive **Themes Playground** application. 
 
 The **Themes Playground** is useful as a tool to find themes and settings you 
 prefer, or just use it to figure out what you can do with 
@@ -222,89 +300,6 @@ can also generate FlexColorScheme setup code that will create the same
 color scheme and theme that you are looking. All you have to do is copy the
 code and paste it into your app. You can find an example in this
 [tweet and referenced thread](https://twitter.com/RydMike/status/1461381878494150659)
-
-## Installing and Using
-
-In the `pubspec.yaml` of your **Flutter** project, add the following dependency:
-
-```yaml
-dependencies:
-  flex_color_scheme: ^4.2.0
-```
-
-In your library file add the following import:
-
-```dart
-import 'package:flex_color_scheme/flex_color_scheme.dart';
-```
-
-You can now start using `FlexColorScheme` V4 based color schemes and theming 
-in your application. A quick way to do so is to try one of the 36 built-in 
-color schemes. The schemes have enums that you can use to refer to them with. 
-
-Please study the default example for a thorough guide on how to use almost
-**all** properties in FlexColorScheme. To try it on your own from scratch,
-create a default Flutter counter app. Add the FlexColorScheme import and modify 
-one line of code and add two lines as shown below.
-
-Here we use the  **"Oh Mandy red"** color scheme that is represented by `enum` 
-value `FlexScheme.mandyRed`. We set the `MaterialApp.themeMode` to 
-`ThemeMode.system`, so that the device can control if the app uses its light 
-or dark theme mode, based on the device theme mode system setting. You can 
-toggle theme mode by changing theme mode on the device.
-
-Assign `FlexThemeData.light` to the app's `theme`, which is the application's 
-light theme definition property, and `FlexThemeData.dark` to `darkTheme`.
-For both `FlexThemeData` dark and light we set the `scheme` property to 
-`FlexScheme.mandyRed` to use the "Oh Mandy red" predefined `scheme` colors, and 
-get matching light and dark themes based on the scheme's color definitions.
-
-The three line modified `MaterialApp` of the Flutter default counter app 
-becomes:
-
-```dart
-  class MyApp extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      // The Mandy red, light theme.
-      theme: FlexThemeData.light(scheme: FlexScheme.mandyRed),
-      // The Mandy red, dark theme.
-      darkTheme: FlexThemeData.dark(scheme: FlexScheme.mandyRed),
-      // Use dark or light theme based on system setting.
-      themeMode: ThemeMode.system,
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-```
-
-> **New in version 4:**  
-> The `FlexThemeData.light` and `FlexThemeData.dark` APIs are new in 
-> version 4. They are extensions on `ThemeData` that create 
-> `FlexColorScheme.light` and `FlexColorScheme.dark` objects and call their
-> `toTheme` method in one step. The new syntax is shorter and also look very
-> similar to `ThemeData.light` and `ThemeData.dark` factories. 
-> 
-> The old APIs work as before and will not be deprecated, they implement
-> the actual functionality and are also needed in more advanced theming use 
-> cases. They can for example be useful and preferred when you add your own 
-> custom widget sub-themes to FlexColorScheme themes. With FlexColorScheme
-> you can then extract the `ColorScheme` it will use for its ThemeData. You 
-> often need the colors in this `ColorSchene` when you create widget sub-themes
-> that use matching colors.
-
-The above additions gives us the following look on the familiar counter app:
-
-<img src="https://rydmike.com/assets_fcsv4/fcs_counter_app.png?raw=true" alt="counter sample" width="500"/>
-
-_FlexColorScheme applied on the standard Flutter Counter Template_
-
-
-Not as exciting as the earlier images above. That is because the basic counter app 
-uses very few features and widgets, so it cannot really illustrate the result very 
-well. This is why the included examples contain demo UI, that is not really at 
-all relevant to using FlexColorScheme, it is mainly there to be able to
-properly demonstrate the results.
 
 # All Color Schemes
 
@@ -398,8 +393,8 @@ The default example is a template that is heavily commented to guide
 you and encourage you to play around with different options in code, then use
 Flutter's hot reload feature and see the results at once.
 
-The other five examples are a part of a tutorial path, with increasing complexity,
-that we walk through in the tutorial. It ends with the complete
+The other five examples are a part of a tutorial path, with increasing 
+complexity, that we walk through in the tutorial. It ends with the complete
 **Themes Playground** demo app included as example 5.
 
 ## Building the Examples
