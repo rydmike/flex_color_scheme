@@ -1040,8 +1040,6 @@ class FlexColorScheme with Diagnosticable {
   //
   //****************************************************************************
 
-  // coverage:ignore-start
-
   /// Creates a [FlexColorScheme] for light theme mode.
   ///
   /// The factory has no required [FlexSchemeColor] properties, but typically
@@ -1054,8 +1052,6 @@ class FlexColorScheme with Diagnosticable {
   /// The factory contains a large number of other properties that can be used
   /// to create beautiful themes by just adjusting a few behavior properties.
   factory FlexColorScheme.light({
-    // coverage:ignore-end
-
     /// The [FlexSchemeColor] that will be used to create the light
     /// [FlexColorScheme].
     ///
@@ -1949,8 +1945,6 @@ class FlexColorScheme with Diagnosticable {
   //
   //****************************************************************************
 
-  // coverage:ignore-start
-
   /// Creates a [FlexColorScheme] for dark theme mode.
   ///
   /// The factory has no required [FlexSchemeColor] properties, but typically
@@ -1963,8 +1957,6 @@ class FlexColorScheme with Diagnosticable {
   /// The factory contains a large number of other properties that can be used
   /// to create beautiful themes by just adjusting a few behavior properties.
   factory FlexColorScheme.dark({
-    // coverage:ignore-end
-
     /// The [FlexSchemeColor] used to create the dark [FlexColorScheme] from.
     ///
     /// You can use predefined [FlexSchemeColor] values from [FlexColor] or
@@ -3547,8 +3539,7 @@ class FlexColorScheme with Diagnosticable {
   ///   > make it at least use a correctly colored theme colored background
   ///   > for the active theme.
   ///   > See example 5 for a demo on how to use this.
-  ThemeData get toTheme // coverage:ignore-line
-  {
+  ThemeData get toTheme {
     // A convenience bool to check if this theme is for light or dark mode
     final bool isDark = brightness == Brightness.dark;
 

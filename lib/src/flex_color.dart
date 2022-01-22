@@ -9,15 +9,14 @@ import 'flex_scheme.dart';
 
 /// Defines colors, names and color schemes used to make maps and a list of
 /// predefined [FlexSchemeData] objects that can be used by FlexColorScheme.
-/// There is also const values for each color value and [FlexSchemeData] of
-/// of each scheme.
+///
+/// There are also const values for every color value and FlexSchemeData of
+/// of every scheme.
 class FlexColor {
-  // coverage:ignore-start
-
   /// Private constructor for the FlexColor static class to prevent it from
   /// being instantiated or extended.
   FlexColor._(); // coverage:ignore-line
-  // coverage:ignore-end
+  // TODO(rydmike): Above line is not ignored, but similar FlexSubThemes._() is!
 
   /// Material standard color for light surface.
   static const Color materialLightSurface = Colors.white;
@@ -1333,9 +1332,6 @@ class FlexColor {
   /// English description of the custom theme.
   static const String customDescription = 'Define a custom color scheme';
 
-  // Define private FlexSchemeData objects for all color schemes, so we can use
-  // them as const in both a map and list, without repeating them.
-
   /// Material default color scheme based FlexSchemeData.
   static const FlexSchemeData material = FlexSchemeData(
     name: materialName,
@@ -1780,7 +1776,6 @@ class FlexColor {
   ///
   /// This is a high contrast color scheme, an alternative to the Material
   /// design hih contrast color scheme set [FlexColor.materialHc].
-  ///
   static const FlexSchemeData amber = FlexSchemeData(
     name: amberName,
     description: amberDescription,
