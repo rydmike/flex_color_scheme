@@ -9,7 +9,6 @@ import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/pages/sub_pages.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
-import '../shared/widgets/universal/animated_switch_hide.dart';
 import '../shared/widgets/universal/header_card.dart';
 import '../shared/widgets/universal/responsive_dialog.dart';
 import '../shared/widgets/universal/show_theme_colors.dart';
@@ -597,21 +596,22 @@ class _ColorScheme extends StatelessWidget {
           const ListTile(
             title: Text('Tap color code to copy it to the clipboard'),
           ),
-          AnimatedSwitchHide(
-            showChild: controller.useFlexColorScheme,
-            child: ListTile(
-              title: const Text('Get the FlexColorScheme setup code for '
-                  'this theme'),
-              trailing: ElevatedButton(
-                onPressed: () {
-                  _handleCodeTap(context);
-                },
-                child: const Text('Code'),
-              ),
-              onTap: () {
-                _handleCodeTap(context);
-              },
+          ListTile(
+            title: const Text('Get the FlexColorScheme setup code for '
+                'this theme'),
+            trailing: ElevatedButton(
+              onPressed: controller.useFlexColorScheme
+                  ? () {
+                      _handleCodeTap(context);
+                    }
+                  : null,
+              child: const Text('Code'),
             ),
+            onTap: controller.useFlexColorScheme
+                ? () {
+                    _handleCodeTap(context);
+                  }
+                : null,
           ),
         ],
       ),
@@ -657,7 +657,7 @@ class _ThemeMode extends StatelessWidget {
               }
             },
           ),
-          if (isLight)
+          if (isLight) ...<Widget>[
             SwitchListTile.adaptive(
               title: const Text('Light mode swap colors'),
               subtitle: const Text(
@@ -665,8 +665,28 @@ class _ThemeMode extends StatelessWidget {
               ),
               value: controller.swapLightColors,
               onChanged: controller.setSwapLightColors,
-            )
-          else
+            ),
+            SwitchListTile.adaptive(
+              title: const Text('Light mode TextTheme is colored'),
+              value: controller.blendLightTextTheme &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBlendLightTextTheme
+                      : null,
+            ),
+            SwitchListTile.adaptive(
+              title: const Text('Light mode onColor have a hint of its color'),
+              value: controller.blendLightOnColors &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBlendLightOnColors
+                      : null,
+            ),
+          ] else ...<Widget>[
             SwitchListTile.adaptive(
               title: const Text('Dark mode swap colors'),
               subtitle: const Text(
@@ -675,88 +695,85 @@ class _ThemeMode extends StatelessWidget {
               value: controller.swapDarkColors,
               onChanged: controller.setSwapDarkColors,
             ),
-          AnimatedSwitchHide(
-            showChild: controller.useSubThemes && controller.useFlexColorScheme,
-            child: Column(
-              children: <Widget>[
-                if (isLight) ...<Widget>[
-                  SwitchListTile.adaptive(
-                    title: const Text('Light mode TextTheme is colored'),
-                    value: controller.blendLightTextTheme,
-                    onChanged: controller.setBlendLightTextTheme,
-                  ),
-                  SwitchListTile.adaptive(
-                    title: const Text(
-                        'Light mode onColor have a hint of its color'),
-                    value: controller.blendLightOnColors,
-                    onChanged: controller.setBlendLightOnColors,
-                  )
-                ] else ...<Widget>[
-                  SwitchListTile.adaptive(
-                    title: const Text('Dark mode TextTheme is colored'),
-                    value: controller.blendDarkTextTheme,
-                    onChanged: controller.setBlendDarkTextTheme,
-                  ),
-                  SwitchListTile.adaptive(
-                    title: const Text(
-                        'Dark mode onColor have a hint of its color'),
-                    value: controller.blendDarkOnColors,
-                    onChanged: controller.setBlendDarkOnColors,
-                  )
-                ],
-              ],
+            SwitchListTile.adaptive(
+              title: const Text('Dark mode TextTheme is colored'),
+              value: controller.blendDarkTextTheme &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBlendDarkTextTheme
+                      : null,
+            ),
+            SwitchListTile.adaptive(
+              title: const Text('Dark mode onColor have a hint of its color'),
+              value: controller.blendDarkOnColors &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBlendDarkOnColors
+                      : null,
+            ),
+          ],
+          Visibility(
+            visible: !isLight,
+            maintainSize: true,
+            maintainAnimation: true,
+            maintainState: true,
+            child: SwitchListTile.adaptive(
+              title: const Text('Compute dark theme'),
+              subtitle: const Text(
+                'Calculate from the light scheme, instead '
+                'of using a predefined dark scheme',
+              ),
+              value: controller.useToDarkMethod &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setUseToDarkMethod
+                      : null,
             ),
           ),
-          AnimatedSwitchHide(
-            showChild: !isLight,
-            duration: const Duration(milliseconds: 300),
-            child: Column(
-              children: <Widget>[
-                // Set to make dark scheme lazily for light theme
-                SwitchListTile.adaptive(
-                  title: const Text('Compute dark theme'),
-                  subtitle: const Text(
-                    'Calculate from the light scheme, instead '
-                    'of using a predefined dark scheme',
-                  ),
-                  value: controller.useToDarkMethod,
-                  onChanged: controller.setUseToDarkMethod,
-                ),
-                // White blend slider in a ListTile.
-                AnimatedSwitchHide(
-                  showChild: controller.useToDarkMethod,
-                  child: ListTile(
-                    title: Slider.adaptive(
-                      max: 100,
-                      divisions: 100,
-                      label: controller.darkMethodLevel.toString(),
-                      value: controller.darkMethodLevel.toDouble(),
-                      onChanged: (double value) {
+          Visibility(
+            visible: !isLight,
+            maintainSize: true,
+            maintainAnimation: true,
+            maintainState: true,
+            child: ListTile(
+              title: Slider.adaptive(
+                max: 100,
+                divisions: 100,
+                label: controller.darkMethodLevel.toString(),
+                value: controller.darkMethodLevel.toDouble(),
+                onChanged: controller.useToDarkMethod &&
+                        controller.useSubThemes &&
+                        controller.useFlexColorScheme
+                    ? (double value) {
                         controller.setDarkMethodLevel(value.floor());
-                      },
+                      }
+                    : null,
+              ),
+              trailing: Padding(
+                padding: const EdgeInsetsDirectional.only(end: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      'LEVEL',
+                      style: Theme.of(context).textTheme.caption,
                     ),
-                    trailing: Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          Text(
-                            'LEVEL',
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                          Text(
-                            '${controller.darkMethodLevel} %',
-                            style: Theme.of(context)
-                                .textTheme
-                                .caption!
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
+                    Text(
+                      '${controller.darkMethodLevel} %',
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ],
@@ -980,78 +997,94 @@ class _SubThemes extends StatelessWidget {
           SwitchListTile.adaptive(
             title: const Text('Use sub theming'),
             subtitle: const Text('Enable opinionated widget sub themes'),
-            value: controller.useSubThemes,
-            onChanged: controller.setUseSubThemes,
+            value: controller.useSubThemes && controller.useFlexColorScheme,
+            onChanged: controller.useFlexColorScheme
+                ? controller.setUseSubThemes
+                : null,
           ),
-          AnimatedSwitchHide(
-            showChild: controller.useSubThemes,
-            child: Column(
-              children: <Widget>[
-                SwitchListTile.adaptive(
-                  title: const Text('Use Material 3 TextTheme'),
-                  subtitle: const Text('ON to use M3 text styles\n'
-                      'OFF to use M2 2018 text styles'),
-                  value: controller.useTextTheme,
-                  onChanged: controller.setUseTextTheme,
-                ),
-                SwitchListTile.adaptive(
-                  title: const Text('Use Material 3 rounded corners'),
-                  subtitle: const Text('ON to use M3 radius '
-                      'on widgets\n'
-                      'OFF to adjust radius on all widgets'),
-                  value: controller.useDefaultRadius,
-                  onChanged: controller.setUseDefaultRadius,
-                ),
-                AnimatedSwitchHide(
-                  showChild: !controller.useDefaultRadius,
-                  child: ListTile(
-                    title: const Text('Border radius on all widgets'),
-                    subtitle: Slider.adaptive(
-                      max: 30,
-                      divisions: 30,
-                      label: controller.cornerRadius.toStringAsFixed(0),
-                      value: controller.cornerRadius,
-                      onChanged: controller.setCornerRadius,
+          SwitchListTile.adaptive(
+            title: const Text('Use Material 3 TextTheme'),
+            subtitle: const Text('ON to use M3 text styles\n'
+                'OFF to use M2 2018 text styles'),
+            value: controller.useTextTheme &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setUseTextTheme
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Use Material 3 rounded corners'),
+            subtitle: const Text('ON to use M3 radius '
+                'on widgets\n'
+                'OFF to adjust radius on all widgets'),
+            value: controller.useDefaultRadius &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setUseDefaultRadius
+                : null,
+          ),
+          Visibility(
+            visible: !controller.useDefaultRadius &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            maintainSize: true,
+            maintainAnimation: true,
+            maintainState: true,
+            child: ListTile(
+              title: const Text('Border radius on all widgets'),
+              subtitle: Slider.adaptive(
+                max: 30,
+                divisions: 30,
+                label: controller.cornerRadius.toStringAsFixed(0),
+                value: controller.cornerRadius,
+                onChanged: controller.setCornerRadius,
+              ),
+              trailing: Padding(
+                padding: const EdgeInsetsDirectional.only(end: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'dP',
+                      style: Theme.of(context).textTheme.caption,
                     ),
-                    trailing: Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'dP',
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                          Text(
-                            controller.cornerRadius.toStringAsFixed(0),
-                            style: Theme.of(context)
-                                .textTheme
-                                .caption!
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
+                    Text(
+                      controller.cornerRadius.toStringAsFixed(0),
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
-                  ),
+                  ],
                 ),
-                SwitchListTile.adaptive(
-                  title: const Text('Rounded corners on FloatingActionButton'),
-                  subtitle: const Text('OFF removes Shape from FAB theme, '
-                      'making it always use M2 circular style'),
-                  value: controller.fabUseShape,
-                  onChanged: controller.setFabUseShape,
-                ),
-                SwitchListTile.adaptive(
-                  title: const Text('Themed state effects'),
-                  subtitle: const Text('Disable, hover, focus, highlight and '
-                      'splash use primary color'),
-                  value: controller.interactionEffects,
-                  onChanged: controller.setInteractionEffects,
-                ),
-                const Divider(height: 1),
-              ],
+              ),
             ),
           ),
+          SwitchListTile.adaptive(
+            title: const Text('Rounded corners on FloatingActionButton'),
+            subtitle: const Text('OFF removes Shape from FAB theme, '
+                'making it always use M2 circular style'),
+            value: controller.fabUseShape &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setFabUseShape
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Themed state effects'),
+            subtitle: const Text('Disable, hover, focus, highlight and '
+                'splash use primary color'),
+            value: controller.interactionEffects &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setInteractionEffects
+                : null,
+          ),
+          const Divider(height: 1),
           // Tooltip theme style.
           Tooltip(
             message: 'A tooltip, on the tooltip style toggle',
@@ -1062,8 +1095,11 @@ class _SubThemes extends StatelessWidget {
               subtitle: const Text(
                 'ON Normal  OFF Inverted',
               ),
-              value: controller.tooltipsMatchBackground,
-              onChanged: controller.setTooltipsMatchBackground,
+              value: controller.tooltipsMatchBackground &&
+                  controller.useFlexColorScheme,
+              onChanged: controller.useFlexColorScheme
+                  ? controller.setTooltipsMatchBackground
+                  : null,
             ),
           ),
         ],
@@ -1099,27 +1135,30 @@ class _TextField extends StatelessWidget {
                 'style of the TextField input via easy to use '
                 'InputDecorator theme options'),
           ),
-          AnimatedSwitchHide(
-            showChild: controller.useSubThemes,
-            child: Column(
-              children: <Widget>[
-                SwitchListTile.adaptive(
-                  title: const Text(
-                    'Field has fill color',
-                  ),
-                  value: controller.inputDecoratorIsFilled,
-                  onChanged: controller.setInputDecoratorIsFilled,
-                ),
-                SwitchListTile.adaptive(
-                  title: const Text(
-                    'Border style',
-                  ),
-                  subtitle: const Text(
-                    'ON for outline  OFF for underline',
-                  ),
-                  value: controller.inputDecoratorBorderType ==
-                      FlexInputBorderType.outline,
-                  onChanged: (bool isOn) {
+          SwitchListTile.adaptive(
+            title: const Text(
+              'Field has fill color',
+            ),
+            value: controller.inputDecoratorIsFilled &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setInputDecoratorIsFilled
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text(
+              'Border style',
+            ),
+            subtitle: const Text(
+              'ON for outline  OFF for underline',
+            ),
+            value: controller.inputDecoratorBorderType ==
+                    FlexInputBorderType.outline &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (bool isOn) {
                     if (isOn) {
                       controller.setInputDecoratorBorderType(
                           FlexInputBorderType.outline);
@@ -1127,15 +1166,17 @@ class _TextField extends StatelessWidget {
                       controller.setInputDecoratorBorderType(
                           FlexInputBorderType.underline);
                     }
-                  },
-                ),
-                SwitchListTile.adaptive(
-                  title: const Text('Unfocused field has border'),
-                  value: controller.inputDecoratorUnfocusedHasBorder,
-                  onChanged: controller.setInputDecoratorUnfocusedHasBorder,
-                ),
-              ],
-            ),
+                  }
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Unfocused field has border'),
+            value: controller.inputDecoratorUnfocusedHasBorder &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setInputDecoratorUnfocusedHasBorder
+                : null,
           ),
           const Padding(
             padding: EdgeInsets.all(16),
