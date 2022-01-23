@@ -116,6 +116,15 @@ All notable changes to the **FlexColorScheme** package are documented here.
     where it might differ from colorScheme onColors. This could happen when 
     disabling FlexColorScheme and when some colors do not match its onColors.
   * Fixed index on _AppBarSettings card.
+  * Changed the feature that animate hides not available options based on selections
+    to a version that disables them and resets their state while disabled. 
+    Plus a few controls are hidden but take up same space.
+    Hiding the controls caused the panels to change size, often causing relayout 
+    of the masonry grid layout. This was confusing UX, as entire panels might
+    move into new places. While the UI hide animations were cool, this keeps
+    the panels in same place in the grid, which is less confusing to use.
+    Panels can still be closed and it of course causes relayout of the grid too,
+    but in that use case it is expected.
   * Changed ColorScheme indicator boxes to use the themed border radius.
   * Added a button to copy theme, and improved the explanations to make the 
     functionality more obvious and accessible. Previously only the entire
