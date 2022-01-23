@@ -41,13 +41,9 @@ import 'flex_sub_themes_data.dart';
 /// this with these extensions too, but in that case you will need to store
 /// the theme in an intermediate [ThemeData] object.
 extension FlexThemeData on ThemeData {
-  // coverage:ignore-start
-
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.light]
   /// and its [FlexColorScheme.toTheme] method.
   static ThemeData light({
-    // coverage:ignore-end
-
     /// The [FlexSchemeColor] that will be used to create the light
     /// [FlexColorScheme].
     ///
@@ -55,10 +51,10 @@ extension FlexThemeData on ThemeData {
     /// [FlexColor.schemes] map or define your own colors with
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
     ///
-    /// For using built-in color schemed, the convenience shortcut to select
-    /// it with the `scheme` property is recommended and leaving `colors`
-    /// undefined. If both are specified the scheme colors defined by `colors`
-    /// are used. If both are null then `scheme` defaults to
+    /// For using built-in color schemes, the convenience shortcut to select
+    /// it with the [scheme] property is recommended and leaving [colors]
+    /// undefined. If both are specified the scheme colors defined by [colors]
+    /// are used. If both are null then [scheme] defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
     final FlexSchemeColor? colors,
 
@@ -72,6 +68,55 @@ extension FlexThemeData on ThemeData {
     /// [colors] is used. If both are null, then [scheme] defaults to
     /// [FlexScheme.material].
     final FlexScheme? scheme,
+
+    /// The overall [ColorScheme] based colors for the theme.
+    ///
+    /// This property provides a new way to define custom colors for
+    /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+    /// you already have a custom [ColorScheme] based color definition that
+    /// you want to use with FlexColorScheme theming and its sub-theming
+    /// capabilities. This will become particularly useful when using Material 3
+    /// based design and its seed generated color schemes.
+    ///
+    /// If you provide both a [ColorScheme] and some individual direct property
+    /// values that also exist in a [ColorScheme], the individual property
+    /// values will override the corresponding ones in your [ColorScheme].
+    ///
+    /// If you do not define a [colorScheme], the used colors will be determined
+    /// by the [colors] and [scheme] properties. However, when a [colorScheme]
+    /// is defined it takes precedence. The [brightness] in the provided
+    /// [colorScheme] is always ignored and set to [Brightness.light] since this
+    /// is the light theme mode factory. Make sure the colors used in your color
+    /// scheme are intended for a light theme.
+    ///
+    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
+    /// and [background] colors in the provided [colorScheme] will be overridden
+    /// by the computed color branded surfaces. If your [colorScheme] already
+    /// contains branded surface colors, then keep [blendLevel] = 0 to continue
+    /// using them.
+    ///
+    /// If you use [lightIsWhite] factory feature, it will also override your
+    /// [colorScheme] based [surface] and [background] properties and make them
+    /// 8% lighter.
+    ///
+    /// If you opt in on using sub themes with [useSubThemes] and have set
+    /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
+    /// and set [blendLevel] > 0, then the effective color scheme based on
+    /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
+    /// be changed accordingly too.
+    ///
+    /// The [colorScheme] colors are also included and affected by factory
+    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
+    /// [toScheme]. This will always get you a complete color scheme, including
+    /// calculated and derived color values, which is particularly useful when
+    /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
+    /// to compute color scheme branded surface colors for you. The effective
+    /// [ColorScheme] for your theme is often needed if you want to create
+    /// custom sub-themes that should use the colors from the scheme using none
+    /// default color assignments from the color scheme.
+    final ColorScheme? colorScheme,
 
     /// The number of the four main scheme colors to be used of the ones
     /// passed in via the required colors [FlexSchemeColor] property.
@@ -184,7 +229,7 @@ extension FlexThemeData on ThemeData {
     /// If values for the properties [surface], [background],
     /// [dialogBackground] or [scaffoldBackground] are given,
     /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via [surfaceMod] or [FlexSurface] in
+    /// on used [FlexSurfaceMode] via [surfaceMode] or [FlexSurface] in
     /// this [surfaceMode].
     final FlexSurfaceMode? surfaceMode,
 
@@ -249,11 +294,14 @@ extension FlexThemeData on ThemeData {
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
     /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property.
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
+    ///
+    /// This override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
@@ -267,16 +315,25 @@ extension FlexThemeData on ThemeData {
     /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
     /// color property becomes a good property to use if you need a custom color
     /// for custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any built-in widgets.
+    /// not used as default color by any other built-in widgets. This applies
+    /// to Flutter 2.8.1 and earlier versions.
+    ///
+    /// The property is being deprecated in Flutter SDK and will be replaced
+    /// by a new property called primaryContainer. It is deprecated from
+    /// master v2.6.0-0.0.pre, but has not yet reached stable (2.8.1).
+    /// See https://github.com/flutter/flutter/issues/89852.
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
+    ///
+    /// The override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
@@ -287,13 +344,16 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondary,
@@ -308,13 +368,16 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondaryVariant,
@@ -322,9 +385,15 @@ extension FlexThemeData on ThemeData {
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
     ///
-    /// If no value is given defaults to [FlexColor.materialLightError] if
-    /// brightness is light and to [FlexColor.materialDarkError] if brightness
-    /// is dark.
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? error,
 
     /// The surface (background) color for widgets like [Card] and
@@ -337,7 +406,8 @@ extension FlexThemeData on ThemeData {
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
     ///
     /// Defaults to null.
     final Color? surface,
@@ -387,54 +457,64 @@ extension FlexThemeData on ThemeData {
     /// the [FlexAppBarStyle] [appBarStyle] property.
     final Color? appBarBackground,
 
-    /// A color that is clearly legible when drawn on `primary` color.
+    /// A color that is clearly legible when drawn on [primary] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `primary` and `onPrimary` is recommended. See
+    /// [primary] and [onPrimary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `primary`
+    /// If null, the on color is derived from the brightness of the [primary]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onPrimary,
 
-    /// A color that is clearly legible when drawn on `secondary` color.
+    /// A color that is clearly legible when drawn on [secondary] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `secondary` and `onSecondary` is recommended. See
+    /// [secondary] and [onSecondary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `secondary`
+    /// If null, the on color is derived from the brightness of the [secondary]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onSecondary,
 
-    /// A color that is clearly legible when drawn on `surface` color.
+    /// A color that is clearly legible when drawn on [surface] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `surface` and `onSurface` is recommended. See
+    /// [surface] and [onSurface] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `surface`
+    /// If null, the on color is derived from the brightness of the [surface]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onSurface,
 
-    /// A color that is clearly legible when drawn on `background` color.
+    /// A color that is clearly legible when drawn on [background] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `background` and `onBackground` is recommended. See
+    /// [background] and [onBackground] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `background`
+    /// If null, the on color is derived from the brightness of the [background]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onBackground,
 
-    /// A color that is clearly legible when drawn on `error` color.
+    /// A color that is clearly legible when drawn on [error] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `error` and `onError` is recommended. See
+    /// [error] and [onError] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `error`
+    /// If null, the on color is derived from the brightness of the [error]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onError,
 
     /// Makes the light theme backgrounds lighter or even white.
@@ -721,6 +801,7 @@ extension FlexThemeData on ThemeData {
     return FlexColorScheme.light(
       colors: colors,
       scheme: scheme,
+      colorScheme: colorScheme,
       usedColors: usedColors,
       surfaceStyle: surfaceStyle,
       surfaceMode: surfaceMode,
@@ -761,13 +842,9 @@ extension FlexThemeData on ThemeData {
     ).toTheme;
   }
 
-  // coverage:ignore-start
-
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.dark]
   /// and its [FlexColorScheme.toTheme] method.
   static ThemeData dark({
-    // coverage:ignore-end
-
     /// The [FlexSchemeColor] that we will create the dark [FlexColorScheme]
     /// from.
     ///
@@ -776,9 +853,9 @@ extension FlexThemeData on ThemeData {
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
     ///
     /// For using built-in color schemes, the convenience shortcut to select
-    /// it with the `scheme` property is recommended and leaving `colors`
-    /// undefined. If both are specified the scheme colors defined by `colors`
-    /// are used. If both are null then `scheme` defaults to
+    /// it with the [scheme] property is recommended and leaving [colors]
+    /// undefined. If both are specified the scheme colors defined by [colors]
+    /// are used. If both are null then [scheme] defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
     final FlexSchemeColor? colors,
 
@@ -792,6 +869,55 @@ extension FlexThemeData on ThemeData {
     /// [colors] is used. If both are null, then [scheme] defaults to
     /// [FlexScheme.material].
     final FlexScheme? scheme,
+
+    /// The overall [ColorScheme] based colors for the theme.
+    ///
+    /// This property provides a new way to define custom colors for
+    /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+    /// you already have a custom [ColorScheme] based color definition that
+    /// you want to use with FlexColorScheme theming and its sub-theming
+    /// capabilities. This will become particularly useful when using Material 3
+    /// based design and its seed generated color schemes.
+    ///
+    /// If you provide both a [ColorScheme] and some individual direct property
+    /// values that also exist in a [ColorScheme], the individual property
+    /// values will override the corresponding ones in your [ColorScheme].
+    ///
+    /// If you do not define a [colorScheme], the used colors will be determined
+    /// by the [colors] and [scheme] properties. However, when a [colorScheme]
+    /// is defined it takes precedence. The [brightness] in the provided
+    /// [colorScheme] is always ignored and set to [Brightness.light] since this
+    /// is the light theme mode factory. Make sure the colors used in your color
+    /// scheme are intended for a light theme.
+    ///
+    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
+    /// and [background] colors in the provided [colorScheme] will be overridden
+    /// by the computed color branded surfaces. If your [colorScheme] already
+    /// contains branded surface colors, then keep [blendLevel] = 0 to continue
+    /// using them.
+    ///
+    /// If you use [lightIsWhite] factory feature, it will also override your
+    /// [colorScheme] based [surface] and [background] properties and make them
+    /// 8% lighter.
+    ///
+    /// If you opt in on using sub themes with [useSubThemes] and have set
+    /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
+    /// and set [blendLevel] > 0, then the effective color scheme based on
+    /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
+    /// be changed accordingly too.
+    ///
+    /// The [colorScheme] colors are also included and affected by factory
+    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
+    /// [toScheme]. This will always get you a complete color scheme, including
+    /// calculated and derived color values, which is particularly useful when
+    /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
+    /// to compute color scheme branded surface colors for you. The effective
+    /// [ColorScheme] for your theme is often needed if you want to create
+    /// custom sub-themes that should use the colors from the scheme using none
+    /// default color assignments from the color scheme.
+    final ColorScheme? colorScheme,
 
     /// The number of the four main scheme colors to be used of the ones
     /// passed in via the required colors [FlexSchemeColor] property.
@@ -968,12 +1094,15 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
+    ///
+    /// This override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
@@ -987,16 +1116,25 @@ extension FlexThemeData on ThemeData {
     /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
     /// color property becomes a good property to use if you need a custom color
     /// for custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any built-in widgets.
+    /// not used as default color by any other built-in widgets. This applies
+    /// to Flutter 2.8.1 and earlier versions.
+    ///
+    /// The property is being deprecated in Flutter SDK and will be replaced
+    /// by a new property called primaryContainer. It is deprecated from
+    /// master v2.6.0-0.0.pre, but has not yet reached stable (2.8.1).
+    /// See https://github.com/flutter/flutter/issues/89852.
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
+    ///
+    /// The override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
@@ -1007,13 +1145,16 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondary,
@@ -1028,13 +1169,16 @@ extension FlexThemeData on ThemeData {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondaryVariant,
@@ -1042,9 +1186,15 @@ extension FlexThemeData on ThemeData {
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
     ///
-    /// If no value is given defaults to [FlexColor.materialLightError] if
-    /// brightness is light and to [FlexColor.materialDarkError] if brightness
-    /// is dark.
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? error,
 
     /// The surface (background) color for widgets like [Card] and
@@ -1057,7 +1207,8 @@ extension FlexThemeData on ThemeData {
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
     ///
     /// Defaults to null.
     final Color? surface,
@@ -1071,7 +1222,8 @@ extension FlexThemeData on ThemeData {
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
     ///
     /// Defaults to null.
     final Color? background,
@@ -1107,54 +1259,64 @@ extension FlexThemeData on ThemeData {
     /// the [FlexAppBarStyle] [appBarStyle] property.
     final Color? appBarBackground,
 
-    /// A color that is clearly legible when drawn on `primary` color.
+    /// A color that is clearly legible when drawn on [primary] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `primary` and `onPrimary` is recommended. See
+    /// [primary] and [onPrimary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `primary`
+    /// If null, the on color is derived from the brightness of the [primary]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onPrimary,
 
-    /// A color that is clearly legible when drawn on `secondary` color.
+    /// A color that is clearly legible when drawn on [secondary] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `secondary` and `onSecondary` is recommended. See
+    /// [secondary] and [onSecondary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `secondary`
+    /// If null, the on color is derived from the brightness of the [secondary]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onSecondary,
 
-    /// A color that is clearly legible when drawn on `surface` color.
+    /// A color that is clearly legible when drawn on [surface] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `surface` and `onSurface` is recommended. See
+    /// [surface] and [onSurface] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `surface`
+    /// If null, the on color is derived from the brightness of the [surface]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onSurface,
 
-    /// A color that is clearly legible when drawn on `background` color.
+    /// A color that is clearly legible when drawn on [background] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `background` and `onBackground` is recommended. See
+    /// [background] and [onBackground] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `background`
+    /// If null, the on color is derived from the brightness of the [background]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onBackground,
 
-    /// A color that is clearly legible when drawn on `error` color.
+    /// A color that is clearly legible when drawn on [error] color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `error` and `onError` is recommended. See
+    /// [error] and [onError] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the `error`
+    /// If null, the on color is derived from the brightness of the [error]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onError,
 
     /// Makes the dark theme backgrounds darker or even black.
@@ -1181,7 +1343,7 @@ extension FlexThemeData on ThemeData {
     /// scheme the other way around only in dark mode.
     final bool swapColors = false,
 
-    /// When `true`, tooltip background color will match the brightness of the
+    /// When true, tooltip background color will match the brightness of the
     /// theme's background color.
     ///
     /// By default Flutter's Material tooltips use a theme where the tooltip
@@ -1439,6 +1601,7 @@ extension FlexThemeData on ThemeData {
     final FlexSubThemesData? subThemesData,
   }) {
     return FlexColorScheme.dark(
+      colorScheme: colorScheme,
       colors: colors,
       scheme: scheme,
       usedColors: usedColors,

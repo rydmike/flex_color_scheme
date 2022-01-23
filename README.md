@@ -1793,8 +1793,8 @@ please open an issue in the repo.
 
 # API Intro and Guide
 
-The API documentation for FlexColorScheme is very thorough and complete. 
-It usually covers any question you might have and more. Automatically 
+The API reference documentation for FlexColorScheme is very thorough and complete. 
+It usually covers any question you might have, and more. The automatically 
 generated API docs from source code document comments are available
 [here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/flex_color_scheme-library.html). 
 
@@ -1804,9 +1804,10 @@ readme is larger it rejects the packages.
 
 To make the documentation more accessible and easier to read, and to 
 also make it possible to extend it further and update it without publishing
-a new package version. There is a plan to migrate this readme file to use
-a markup generated documentation site based on [docs.page](https://docs.page/homepage).
-When that is done this chapter will be further extended.
+a new package version, this readme will later be migrated to use
+a markup generated documentation site. It will be based on
+[docs.page](https://docs.page/homepage). When that is done, this chapter can
+be further extended with more examples and screenshots.
 
 ## Main Setup
 
@@ -1818,19 +1819,20 @@ extension.
 
 API reference: [FlexColorScheme](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme-class.html)
 
-The original way is to use the main 
+The original way to create FlexColorScheme based `ThemeData` objects is to use
+the package namesake  
 [`FlexColorScheme`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme-class.html)
 class and then use the `toTheme` getter to produce and get the `ThemeData` 
 object specified by your immutable `FlexColorScheme` configuration.
 
 Typically, you would not use the default `FlexColorScheme()` constructor to
-make your setup. Instead, you would use
+create your `FlexColorScheme` object. Instead, you would use
 [`FlexColorScheme.light()`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme/FlexColorScheme.light.html) 
 and
 [`FlexColorScheme.dark()`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme/FlexColorScheme.dark.html) factory 
 constructors to make definitions for light and dark theme modes. The
-factory constructors also offer many more properties that give you
-access to more nuanced color schemes definitions.
+factory constructors also offer many additional parameters that give you
+the capability to easily create more nuanced color schemes definitions.
 
 **Example:**
 ```dart
@@ -1893,7 +1895,7 @@ The `light` and `dark` parameters differ slightly due to a few different feature
 
 Key setup parameters for `FlexColorScheme.light()` and 
 `FlexThemedata.light()` as well as for `FlexColorScheme.dark()` and
-`FlexThemedata.dark()` are listed below.
+`FlexThemedata.dark()` are listed below. The two most important ones are:
 
 * `scheme` a [`FlexScheme`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexScheme.html) 
   enum value used to select which predefined color scheme to use for the theme.
@@ -1904,6 +1906,24 @@ If you specify both `scheme` and `colors` the custom colors have higher preceden
 and are used, the `scheme` property is ignored. If you specify neither, then
 `scheme` defaults to `FlexScheme.material`.
 
+Starting from version 4.2.0 you also have the possibility of creating your custom 
+`FlexColorScheme` based theme from a Flutter SDK standard `ColorScheme` object.
+Use the property:
+
+* `colorScheme` a 
+  [`ColorScheme`](https://api.flutter.dev/flutter/material/ColorScheme-class.html) 
+  object used to create a custom `FlexColorScheme` based theme from custom color
+  definitions you may have in a standard color scheme
+  object. This property also exist in the default constructor. When you use it 
+  with the factory constructors `light` and `dark` the colors in the provided
+  `colorScheme` will override any value you have given in the `scheme` or `colors`
+  properties. The individual direct color properties available in the constructors,
+  will override any corresponding color values that would be set via other 
+  properties, also the ones you in your `colorScheme` if it is provided.
+
+FlexColorScheme has shortcut enum properties that you can use to quickly adjust
+the theme design for your AppBar and TabBar:
+
 * `appBarStyle`
   a [`FlexAppBarStyle`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexAppBarStyle.html)
   enum value used to define the themed color of the AppBar background color.
@@ -1913,15 +1933,16 @@ and are used, the `scheme` property is ignored. If you specify neither, then
 
 An interesting and unique feature of FlexColorScheme is its capability to 
 automatically create color schemes and resulting themes that blend in the primary
-color of into different surfaces. And to vary this blending depending 
-on surface type and use different blend strengths. This feature is offered
-only via the factory constructors and their extension, not via the default
-`FlexColorscheme` constructor.
+color into different surfaces. You can also vary this blending depending 
+on surface type and use different blend strengths. This feature is only available 
+via the factory constructors and their `ThemeData`extensions, not via the 
+default `FlexColorscheme` constructor. To use the surface blending features use 
+the properties: 
 
 * `surfaceMode` a [`FlexSurfaceMode`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSurfaceMode.html)
   enum value used to select the mode for blending in primary color into
   surface, background, scaffoldBackground and dialogBackground colors.
-* `blendLevel` when `surfaceMode` is defined, this sets the blend level strength
+* `blendLevel`, when `surfaceMode` is defined, this sets the blend level strength
    used by the selected surface mode.
    The blend level is the integer decimal value of the alpha value
    used in the alpha blend function. It mixes one color with another
@@ -1939,8 +1960,8 @@ more snazzy looking widgets automatically that you can customize further via
   [`FlexSubThemesData`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSubThemesData-class.html)
   data class that contain many optional quick configuration parameters 
   for the opt-in widget sub-themes. For example, one of its parameters gives you 
-  access to easy use customization of default corner radius on all Flutter SDK 
-  UI widgets and elements that supports corner radius either via 
+  access to easy use customization of default border radius on all Flutter SDK 
+  UI widgets and elements that supports border radius, either via 
   ShapeBorder or BorderRadiusGeometry. See its 
   [`defaultRadius`](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSubThemesData/defaultRadius.html)
   property for more information.
@@ -1949,7 +1970,7 @@ When you opt in on using sub-themes, the `FlexColorScheme.toTheme` method uses
 the passed in `FlexSubThemesData` configuration data object, passed in via
 `FlexColorScheme.subThemesData`, or a default one if one is not provided.
 
-The property values in this `FlexSubThemesData` are used to define the created 
+The property values in `FlexSubThemesData` are used to define the created 
 opinionated sub-themes. In some simple cases the sub-themes are created
 directly with the Flutter SDK widget sub-theme in question, in the `toTheme` 
 method. But in most cases it uses separate static sub-theme helper functions 
