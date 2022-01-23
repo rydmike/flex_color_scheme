@@ -706,30 +706,22 @@ All notable changes to the **FlexColorScheme** package are documented here.
 These are the topics I currently have on the TODO list for this package. 
 Have a new suggestion and idea? Feel free to open a 
 [suggestion or issue](https://github.com/rydmike/flex_color_scheme/issues) 
-in the repo. 
+in the repo. There is also a project where active and recent TODOs are
+tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
 
 ### TODO
 
-- Add a property option to use actual Material color shades when a Material 
-  color is selected as primary color, for its light/dark shade. 
-  
-- For color swatch calculations, find and use the color algorithm Google uses on its 
-  Material colors site [here](https://material.io/design/color/the-color-system.html#tools-for-picking-colors) and [here](https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=582aed&secondary.color=00B0FF).
-- The algorithms for them are actually a bit different. The second link also 
-  seems to imply that ColorScheme's should have primary and secondary colors, 
-  with light and dark variants. Instead of using just one variant color like 
-  current `ColorScheme` class in Flutter. Maybe this is a coming change 
-  with Material 3 (You) or perhaps an older design? Status currently unknown.
-  
-  - Starting points for the Dart Material color swatch algorithm could be ports
-    of [this](https://stackoverflow.com/questions/32942503/material-design-color-palette) 
-    and/or [this](https://github.com/Hammwerk/material-color-palette)
-  - Wait and see if Google might make their Material color swatch algorithm 
-    available in Dart/Flutter with MaterialYou.  
-  - Interesting and simpler [Ant design](https://2x.ant.design/docs/spec/colors) color swatches.
-  - Color palette [tools](https://onextrapixel.com/best-tools-generate-color-palettes/) as info.
+- Version 5 will add support for Material 3 and will be released when a required
+  level of M3 features have reached the Flutter stable channel. At minimum, it 
+  will probably be visually breaking to some extent, when it starts using 
+  SDK implementation of M3 design guide. Simple because its current own 
+  M3 "like" M2 based implementation of existing theming and text capabilities
+  cannot always match the M3 designs especially on color usage.
 
 ### COMPLETED
+- Version 4.2.0 support making themes from standard ColorScheme. More 
+  customization of sub-themes. Support for M3 NavigationBar and sub-theming it,
+  and a default that matches FlexColorScheme styles.
 - Version 4.0.0 Docs with quick start example first. 
 - Version 4.0.0 Added a more complex example that also persists theme.
 - Version 4.0.0 Added API offering more flexibility and customization 
@@ -767,7 +759,32 @@ in the repo.
 
 ### MAYBE
 
-All TODOs and features that were on my original "maybe" list have been completed.
+The maybe issues below were on the TODO agenda earlier, however it looks a 
+better alternative going forward is to replace them with the Material 3 design
+based color utilities called 
+[material_color_utilities](https://pub.dev/packages/material_color_utilities)
+that the Flutter SDK master channel also depends on.
+While I don't like adding a none SDK library to the package, if Flutter SDK
+uses it as well, then why not.
+
+- Add a property option to use actual Material color shades when a Material
+  color is selected as primary color, for its light/dark shade.
+
+- For color swatch calculations, find and use the color algorithm Google uses on its
+  Material colors site [here](https://material.io/design/color/the-color-system.html#tools-for-picking-colors) and [here](https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=582aed&secondary.color=00B0FF).
+- The algorithms for them are actually a bit different. The second link also
+  seems to imply that ColorScheme's should have primary and secondary colors,
+  with light and dark variants. Instead of using just one variant color like
+  current `ColorScheme` class in Flutter. Maybe this is a coming change
+  with Material 3 (You) or perhaps an older design? Status currently unknown.
+
+  - Starting points for the Dart Material color swatch algorithm could be ports
+    of [this](https://stackoverflow.com/questions/32942503/material-design-color-palette)
+    and/or [this](https://github.com/Hammwerk/material-color-palette)
+  - Wait and see if Google might make their Material color swatch algorithm
+    available in Dart/Flutter with MaterialYou.
+  - Interesting and simpler [Ant design](https://2x.ant.design/docs/spec/colors) color swatches.
+  - Color palette [tools](https://onextrapixel.com/best-tools-generate-color-palettes/) as info.
 
 
 ### OUT OF SCOPE
@@ -794,7 +811,7 @@ to store and restore.
   
 From version 4.0.0 a simple approach using the architecture introduced via the
 Flutter "skeleton" template in Flutter version 2.5 was used together with 
-Shared Preferences and Hive, to persist and load FlexColorScheme on start.
+Shared Preferences and Hive to persist and load FlexColorScheme on start.
 This is just one example, other implementations together with Riverpod, Provider, 
 Flutter Bloc, GetX etc., and completely different local persistence packages 
 work well too. 
