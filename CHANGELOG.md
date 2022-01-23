@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.2.0] - January 22, 2022 (WORK IN PROGRESS)
+## [4.2.0] - January 23, 2022 (WORK IN PROGRESS)
 
 * **New:** Updated required Dart SDK to minimum 2.15 that Flutter 2.8.0 uses.  
   To use this release at least Flutter 2.8.0 is required.
@@ -15,6 +15,31 @@ All notable changes to the **FlexColorScheme** package are documented here.
   The `surfaceStyle` property is still available and works as before, but you 
   now get a deprecation warning if it is used. The property and all its related features 
   will be completely removed in version 5.0.
+
+
+* **New:** Custom `FlexColorScheme` based themes can now also be defined by
+  alternatively passing in a `ColorScheme` object to the `colorScheme`
+  property in default the constructor, as well as in `FlexColorScheme.light` and
+  `FlexColorScheme.dark` factories. When used it overrides the `scheme` and 
+  `colors` properties in the factories. Same color property in any constructor
+  that exist as direct property in the constructors, still have the highest 
+  priority and will also override corresponding color properties in passed in 
+  `colorScheme`. The capability to make custom FlexColorScheme based themes from
+  standard Flutter color schemes is useful if you already have a predefined
+  elaborate `ColorScheme` definition. You can now use it directly and still 
+  use FlexColorScheme for its surface color branding and easy sub-theming. 
+  This capability will also be very useful when Material 3 based `ColorScheme`
+  in Flutter SDK arrives in the stable channel. With Material 3, color schemes 
+  may be created using new Material 3 design based color tools, e.g. from
+  seed color(s) or using dynamic colors extracted from system wallpaper colors.
+  With this feature will then be able to feed those colors directly into 
+  FlexColorScheme and use them there too to create your `ThemeData`. 
+
+
+* **Changed:** All properties in all `FlexColorScheme` constructors are now
+  optional. The change is none breaking, and uses Material 2 based
+  design guide example theme light and dark as defaults for undefined values. 
+
 
 * **New:** Added a `ColorScheme` color selection option to selected opinionated 
   sub-themes configuration class `FlexSubThemesData`. The sub-themes that 
@@ -110,7 +135,10 @@ All notable changes to the **FlexColorScheme** package are documented here.
   more. Added an API Intro and Guide chapter to the readme.
 
 
-* **Tests:** Added tests to cover the new features, now total 1104 tests.  
+* **TODO WIP** **Tests:** Added tests to cover the new features, 
+  now total 1104 tests. Test for the new `colorScheme` based feature are still
+  missing and must be added before release.
+  
 
 ## [4.1.1] - November 20, 2021
 

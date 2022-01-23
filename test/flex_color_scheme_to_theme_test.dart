@@ -16,6 +16,24 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     test(
+        'FCS7.00RawL String: GIVEN FlexColorScheme() made with min required '
+        'light params that equals default Material light scheme '
+        'EXPECT its ThemeData to be equal to one made with light scheme with '
+        'no parameters.', () {
+      expect(
+          const FlexColorScheme(
+            brightness: Brightness.light,
+            primary: FlexColor.materialLightPrimary,
+            primaryVariant: FlexColor.materialLightPrimaryVariant,
+            secondary: FlexColor.materialLightSecondary,
+            secondaryVariant: FlexColor.materialLightSecondaryVariant,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(FlexColorScheme.light()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine)));
+    });
+
+    test(
         'FCS7.00RawL: GIVEN FlexColorScheme() made with min required light '
         'params that equals default Material light scheme '
         'EXPECT its ThemeData to be equal to one made with light scheme with '
@@ -264,6 +282,17 @@ void main() {
     ).toTheme;
 
     test(
+        'FCS7.01 string: GIVEN a FlexColorScheme theme with Material scheme '
+        'light colors EXPECT .colorScheme equality with ColorScheme.light().',
+        () {
+      expect(
+        themeLight.colorScheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+            const ColorScheme.light().toString(minLevel: DiagnosticLevel.fine)),
+      );
+    });
+
+    test(
         'FCS7.01: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT .colorScheme equality with ColorScheme.light().', () {
       expect(
@@ -271,6 +300,7 @@ void main() {
         equals(const ColorScheme.light()),
       );
     });
+
     test(
         'FCS7.02: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT .colorScheme equality with ColorScheme.dark().', () {

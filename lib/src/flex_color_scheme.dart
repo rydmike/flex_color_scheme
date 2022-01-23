@@ -483,21 +483,27 @@ enum FlexTabBarStyle {
 /// in dark mode themes. [FlexColorScheme] fixes these gaps and makes it much
 /// easier to create themes using the color scheme concept.
 ///
+/// You can create the theme using a standard [ColorScheme], but you can also
+/// create a theme by just providing a few selected color values, or
+/// no color values at all and get defaults. If you provide both a [ColorScheme]
+/// and some individual property values that also exist in a [ColorScheme], the
+/// individual property values will override the corresponding ones in your
+/// [ColorScheme].
+///
 /// [FlexColorScheme] does not rely on [ThemeData.from] a [ColorScheme] for
-/// its implementation. It uses the [ThemeData] factory directly under the hood
-/// to create the [ThemeData] object
-/// from [FlexColorScheme] and a [ColorScheme] that is used to return a
-/// theme with the [toTheme] getter.
+/// its implementation. It uses the [ThemeData] factory directly to create the
+/// [ThemeData] object from its [FlexColorScheme] data, that is then returned
+/// with the [FlexColorScheme.toTheme] getter.
 ///
 /// A more opinionated theme and style can be returned by setting
 /// [FlexColorScheme.useSubThemes] to true.
 ///
-/// By default the sub themes take inspiration from the Material 3 (M3)
-/// specification https://m3.material.io/ and uses its values as defaults
-/// when it is possible to do so in Flutter
-/// SDK theming within its current Material 2 (M2) design limitations.
+/// By default the sub themes take inspiration from the Material 3 (M3) Design
+/// guide [specification](https://m3.material.io) and uses its values as
+/// defaults when it is possible to do so in Flutter
+/// SDK theming, within its current Material 2 (M2) design limitations.
 ///
-/// The sub themes can configured further by passing a custom
+/// The sub-themes can configured further by passing a custom
 /// [FlexSubThemesData] to [FlexColorScheme.subThemesData]. The main sub theme
 /// feature is an easy way to adjust the default corner radius on
 /// all sub themes for widgets that supports it. The design is also a bit more
@@ -507,9 +513,10 @@ enum FlexTabBarStyle {
 /// default constructor. [FlexColorScheme] is primarily intended to be used
 /// with its two factory constructors [FlexColorScheme.light] and
 /// [FlexColorScheme.dark], that create nice schemes using defaults and
-/// computed color values.
+/// computed color values. The light and dark schemes also give you easy access
+/// to many predefined color schemes that you can use and easily modify.
 ///
-/// With the light and dark factories you can create
+/// With the light and dark factories you can also create
 /// beautiful toned themes from just a single color. The light and dark
 /// factories also provide properties that enables you to create themes with
 /// primary color alpha blended surfaces automatically. You can customize all
@@ -552,11 +559,12 @@ class FlexColorScheme with Diagnosticable {
   /// styles, and to make dark themes that use true black backgrounds and
   /// surfaces.
   const FlexColorScheme({
-    required final this.brightness,
-    required final this.primary,
-    required final this.primaryVariant,
-    required final this.secondary,
-    required final this.secondaryVariant,
+    final this.colorScheme,
+    final this.brightness,
+    final this.primary,
+    final this.primaryVariant,
+    final this.secondary,
+    final this.secondaryVariant,
     final this.error,
     final this.surface,
     final this.background,
@@ -586,19 +594,50 @@ class FlexColorScheme with Diagnosticable {
         assert(bottomAppBarElevation >= 0.0,
             'Bottom AppBar elevation must be >= 0.');
 
+  /// The overall [ColorScheme] based colors for the theme.
+  ///
+  /// This property provides a new way to define custom colors for
+  /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+  /// you already have a custom [ColorScheme] based color definition that
+  /// you want to use with FlexColorScheme theming and its sub-theming
+  /// capabilities. This will become particularly useful when using Material 3
+  /// based design and its seed generated color schemes.
+  ///
+  /// If you provide both a [ColorScheme] and some individual direct property
+  /// values that also exist in a [ColorScheme], the individual property values
+  /// will override the corresponding ones in your [ColorScheme].
+  ///
+  /// If you do not define a color scheme, the individual color value properties
+  /// and their defaults are used to define your effective color scheme.
+  ///
+  /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
+  /// [toScheme]. This will always get you a complete color scheme, including
+  /// calculated and derived color values, which is particularly useful when
+  /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
+  /// to compute color scheme branded surface colors for you. The effective
+  /// [ColorScheme] for your theme is often needed if you want to create custom
+  /// sub-themes that should use the colors from the scheme using none default
+  /// color assignments from the color scheme.
+  final ColorScheme? colorScheme;
+
   /// The overall brightness of this color scheme.
   ///
   /// The [Brightness.light] denotes a theme for light theme mode and
-  /// [Brightness.dark] a dark theme mode.
+  /// [Brightness.dark] a dark theme mode. The colors you define should match
+  /// the used [brightness] value in order for the theme to make visual sense.
   ///
-  /// The brightness value is required and cannot be null.
-  final Brightness brightness;
+  /// If not defined, and if there is no [colorScheme] defined, it defaults
+  /// to [Brightness.light].
+  final Brightness? brightness;
 
   /// The color displayed most frequently across your application’s screens and
   /// components.
   ///
-  /// The color value is required and cannot be null.
-  final Color primary;
+  /// If not defined and if there is no [colorScheme] defined, and [brightness]
+  /// is [Brightness.light] it defaults to [FlexColor.materialLightPrimary].
+  /// If not defined and if there is no [colorScheme] defined, and [brightness]
+  /// is [Brightness.dark] it defaults to [FlexColor.materialDarkPrimary].
+  final Color? primary;
 
   /// A darker version of the primary color.
   ///
@@ -609,16 +648,23 @@ class FlexColorScheme with Diagnosticable {
   /// color property becomes a good property to use if you need a custom color
   /// for custom widgets accessible via your application's ThemeData, that is
   /// not used as default color by any other built-in widgets. This applies
-  /// to Flutter 2.5.2 and earlier versions.
+  /// to Flutter 2.8.1 and earlier versions.
   ///
-  /// The color value is required and cannot be null.
-  final Color primaryVariant;
+  /// The property is being deprecated in Flutter SDK and will be replaced
+  /// by a new property called primaryContainer. It is deprecated from
+  /// master v2.6.0-0.0.pre, but has not yet reached stable (2.8.1).
+  /// See https://github.com/flutter/flutter/issues/89852.
+  ///
+  /// If not defined, and if there is no [colorScheme] defined, it will be
+  /// computed from [primary] color.
+  final Color? primaryVariant;
 
   /// An accent color that, when used sparingly, calls attention to parts
   /// of your application.
   ///
-  /// The color value is required and cannot be null.
-  final Color secondary;
+  /// If not defined, and if there is no [colorScheme] defined, it will be
+  /// computed from [primary] color.
+  final Color? secondary;
 
   /// A darker version of the secondary color.
   ///
@@ -630,13 +676,21 @@ class FlexColorScheme with Diagnosticable {
   /// Flutter 2.5.2 and earlier version free to set it to whatever color you
   /// need and not affect any built-in widgets theme based colors.
   ///
-  /// The color value is required and cannot be null.
-  final Color secondaryVariant;
+  /// The property is being deprecated in Flutter SDK and will be replaced
+  /// by a new property called secondaryContainer. It is deprecated from
+  /// master v2.6.0-0.0.pre, but has not yet reached stable (2.8.1).
+  /// See https://github.com/flutter/flutter/issues/89852.
+  ///
+  /// If not defined, and if there is no [colorScheme] defined, it will be
+  /// computed from [secondary] color, and if it
+  /// is not defined either then from [primary] color.
+  final Color? secondaryVariant;
 
   /// The color to use for input validation errors, e.g. for
   /// [InputDecoration.errorText].
   ///
-  /// If no value is given defaults to [FlexColor.materialLightError] if
+  /// If no value is given, and if there is no [colorScheme] defined, it
+  /// defaults to [FlexColor.materialLightError] if
   /// brightness is light and to [FlexColor.materialDarkError] if brightness
   /// is dark.
   final Color? error;
@@ -648,7 +702,8 @@ class FlexColorScheme with Diagnosticable {
   /// [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
   /// by all [Material] of type [MaterialType.card].
   ///
-  /// If no value is given, it defaults to [FlexColor.materialLightSurface] if
+  /// If no value is given, and if there is no [colorScheme] defined, it
+  /// defaults to [FlexColor.materialLightSurface] if
   /// brightness is light and to [FlexColor.materialDarkSurface] if
   /// brightness is dark.
   final Color? surface;
@@ -659,7 +714,8 @@ class FlexColorScheme with Diagnosticable {
   /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
   /// [Material] of type [MaterialType.canvas].
   ///
-  /// If no value is given, it defaults to [FlexColor.materialLightBackground]
+  /// If no value is given, and if there is no [colorScheme] defined, it
+  /// defaults to [FlexColor.materialLightBackground]
   /// if brightness is light and to [FlexColor.materialDarkBackground] if
   /// brightness is dark.
   final Color? background;
@@ -1043,11 +1099,26 @@ class FlexColorScheme with Diagnosticable {
   /// Creates a [FlexColorScheme] for light theme mode.
   ///
   /// The factory has no required [FlexSchemeColor] properties, but typically
-  /// a [FlexScheme] `scheme` value would be provided to use a pre-defined color
-  /// scheme or alternatively the [FlexSchemeColor] `colors` property would be
-  /// used to define custom scheme colors. That can be created with just one
-  /// color property by using the factory [FlexSchemeColor.from], more
-  /// detailed color schemes can also be created with the factory.
+  /// a [FlexScheme] enum [scheme] value would be provided to use a pre-defined
+  /// color scheme.
+  ///
+  /// As a second alternative the [FlexSchemeColor] class [colors] property
+  /// can be used to define custom scheme colors, that can be created with just
+  /// one color property by using the factory [FlexSchemeColor.from].
+  ///
+  /// As a third option you can provide a complete [ColorScheme] in
+  /// [colorScheme] and the custom colors for the theme will be based on that
+  /// scheme. Since this is the light theme factory the brightness value in used
+  /// [colorScheme] is ignored and resulting effective theme and color scheme
+  /// will always be light. Make sure you use colors in your color scheme that
+  /// are actually colors for a light theme.
+  ///
+  /// The factory can produce blended surface colors, and also has other
+  /// parameters that may impact the effective color scheme used by final theme,
+  /// even when a [colorScheme] are provided. The [FlexColorScheme.toScheme]
+  /// will give you the effective color scheme that will also be used
+  /// when producing [ThemeData] from [FlexColorScheme] and its factories
+  /// with [FlexColorScheme.toTheme].
   ///
   /// The factory contains a large number of other properties that can be used
   /// to create beautiful themes by just adjusting a few behavior properties.
@@ -1059,10 +1130,10 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexColor.schemes] map or define your own colors with
     /// [FlexSchemeColor] or [FlexSchemeColor.from].
     ///
-    /// For using built-in color schemed, the convenience shortcut to select
-    /// it with the `scheme` property is recommended and leaving `colors`
-    /// undefined. If both are specified the scheme colors defined by `colors`
-    /// are used. If both are null then `scheme` defaults to
+    /// For using built-in color schemes, the convenience shortcut to select
+    /// it with the [scheme] property is recommended and leaving [colors]
+    /// undefined. If both are specified the scheme colors defined by [colors]
+    /// are used. If both are null then [scheme] defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
     final FlexSchemeColor? colors,
 
@@ -1076,6 +1147,55 @@ class FlexColorScheme with Diagnosticable {
     /// [colors] is used. If both are null, then [scheme] defaults to
     /// [FlexScheme.material].
     final FlexScheme? scheme,
+
+    /// The overall [ColorScheme] based colors for the theme.
+    ///
+    /// This property provides a new way to define custom colors for
+    /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+    /// you already have a custom [ColorScheme] based color definition that
+    /// you want to use with FlexColorScheme theming and its sub-theming
+    /// capabilities. This will become particularly useful when using Material 3
+    /// based design and its seed generated color schemes.
+    ///
+    /// If you provide both a [ColorScheme] and some individual direct property
+    /// values that also exist in a [ColorScheme], the individual property
+    /// values will override the corresponding ones in your [ColorScheme].
+    ///
+    /// If you do not define a [colorScheme], the used colors will be determined
+    /// by the [colors] and [scheme] properties. However, when a [colorScheme]
+    /// is defined it takes precedence. The [brightness] in the provided
+    /// [colorScheme] is always ignored and set to [Brightness.light] since this
+    /// is the light theme mode factory. Make sure the colors used in your color
+    /// scheme are intended for a light theme.
+    ///
+    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
+    /// and [background] colors in the provided [colorScheme] will be overridden
+    /// by the computed color branded surfaces. If your [colorScheme] already
+    /// contains branded surface colors, then keep [blendLevel] = 0 to continue
+    /// using them.
+    ///
+    /// If you use [lightIsWhite] factory feature, it will also override your
+    /// [colorScheme] based [surface] and [background] properties and make them
+    /// 8% lighter.
+    ///
+    /// If you opt in on using sub themes with [useSubThemes] and have set
+    /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
+    /// and set [blendLevel] > 0, then the effective color scheme based on
+    /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
+    /// be changed accordingly too.
+    ///
+    /// The [colorScheme] colors are also included and affected by factory
+    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
+    /// [toScheme]. This will always get you a complete color scheme, including
+    /// calculated and derived color values, which is particularly useful when
+    /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
+    /// to compute color scheme branded surface colors for you. The effective
+    /// [ColorScheme] for your theme is often needed if you want to create
+    /// custom sub-themes that should use the colors from the scheme using none
+    /// default color assignments from the color scheme.
+    final ColorScheme? colorScheme,
 
     /// The number of the four main scheme colors to be used of the ones
     /// passed in via the required colors [FlexSchemeColor] property.
@@ -1253,11 +1373,14 @@ class FlexColorScheme with Diagnosticable {
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
     /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property.
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
+    ///
+    /// This override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
@@ -1271,16 +1394,25 @@ class FlexColorScheme with Diagnosticable {
     /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
     /// color property becomes a good property to use if you need a custom color
     /// for custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any built-in widgets.
+    /// not used as default color by any other built-in widgets. This applies
+    /// to Flutter 2.8.1 and earlier versions.
+    ///
+    /// The property is being deprecated in Flutter SDK and will be replaced
+    /// by a new property called primaryContainer. It is deprecated from
+    /// master v2.6.0-0.0.pre, but has not yet reached stable (2.8.1).
+    /// See https://github.com/flutter/flutter/issues/89852.
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
+    ///
+    /// The override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
@@ -1291,13 +1423,16 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondary,
@@ -1312,13 +1447,16 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondaryVariant,
@@ -1326,9 +1464,15 @@ class FlexColorScheme with Diagnosticable {
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
     ///
-    /// If no value is given defaults to [FlexColor.materialLightError] if
-    /// brightness is light and to [FlexColor.materialDarkError] if brightness
-    /// is dark.
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? error,
 
     /// The surface (background) color for widgets like [Card] and
@@ -1341,7 +1485,8 @@ class FlexColorScheme with Diagnosticable {
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
     ///
     /// Defaults to null.
     final Color? surface,
@@ -1355,7 +1500,8 @@ class FlexColorScheme with Diagnosticable {
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
     ///
     /// Defaults to null.
     final Color? background,
@@ -1401,6 +1547,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [primary]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onPrimary,
 
     /// A color that is clearly legible when drawn on [secondary] color.
@@ -1411,6 +1559,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [secondary]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onSecondary,
 
     /// A color that is clearly legible when drawn on [surface] color.
@@ -1421,6 +1571,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [surface]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onSurface,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -1431,6 +1583,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [background]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
@@ -1441,6 +1595,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [error]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onError,
 
     /// Makes the light theme backgrounds lighter or even white.
@@ -1746,15 +1902,16 @@ class FlexColorScheme with Diagnosticable {
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor _colors =
         colors ?? FlexColor.schemesWithCustom[_scheme]!.light;
-    // If the passed in property values are not null, we will override colors
-    // properties with them, this gets us also correct effective and swap
-    // behavior on directly passed in property values.
+    // If the passed in property values are not null, or there was a colorScheme
+    // provided, we will override the colors properties with them, this gets
+    // us also correct effective and swap behavior on directly passed in
+    // property values or colorScheme based colors.
     final FlexSchemeColor withPassedColors = _colors.copyWith(
-      primary: primary,
-      primaryVariant: primaryVariant,
-      secondary: secondary,
-      secondaryVariant: secondaryVariant,
-      error: error,
+      primary: primary ?? colorScheme?.primary,
+      primaryVariant: primaryVariant ?? colorScheme?.primaryVariant,
+      secondary: secondary ?? colorScheme?.secondary,
+      secondaryVariant: secondaryVariant ?? colorScheme?.secondaryVariant,
+      error: error ?? colorScheme?.error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
     final FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
@@ -1766,7 +1923,7 @@ class FlexColorScheme with Diagnosticable {
     // different result surface colors must be been passed in to
     // FlexColorScheme.light. It is up to the implementation using
     // [FlexSurface.custom] to do so. The returned surfaceSchemeColors
-    // will NEVER be null, it always has colors.
+    // will never be null, it always has colors.
     //
     // If surfaceMode is not null we use the never blend mode and level via
     // factory FlexSchemeSurfaceColors.flexBlend otherwise we use the one
@@ -1796,6 +1953,24 @@ class FlexColorScheme with Diagnosticable {
             ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.light)
             : const _AlphaValues();
 
+    // Determine the input surface and background colors.
+    // The logic is that if they were passed via properties, those colors
+    // are used, if not then colorScheme based colors are used, if they
+    // were provided and we are not using blended surface and surface mode,
+    // if we are, then we use the computed surfaces.
+    // The final fallback is always the computed surface
+    final bool _overrideScheme = blendLevel > 0 && surfaceMode != null;
+    final Color _inputSurface = surface ??
+        (_overrideScheme
+            ? surfaceSchemeColors.surface
+            : colorScheme?.surface) ??
+        surfaceSchemeColors.surface;
+    final Color _inputBackground = background ??
+        (_overrideScheme
+            ? surfaceSchemeColors.background
+            : colorScheme?.background) ??
+        surfaceSchemeColors.background;
+
     // For the on colors we pass in the primary, secondary and surface colors to
     // calculate onColors for. If some onColors were passed in, we give
     // that value to it, if it was not null it will be used instead of the
@@ -1804,8 +1979,8 @@ class FlexColorScheme with Diagnosticable {
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       secondary: effectiveColors.secondary,
-      surface: surface ?? surfaceSchemeColors.surface,
-      background: background ?? surfaceSchemeColors.background,
+      surface: _inputSurface,
+      background: _inputBackground,
       error: effectiveColors.error ?? FlexColor.materialLightError,
       onPrimary: onPrimary,
       onSecondary: onSecondary,
@@ -1823,39 +1998,25 @@ class FlexColorScheme with Diagnosticable {
     // Surface is used e.g. by Card and bottom appbar.
     // If light is white, we make a lighter than normal surface. If not
     // light is white, we use provided surface color, or computed one.
-    Color effectiveSurfaceColor;
-    if (lightIsWhite) {
-      effectiveSurfaceColor =
-          surface?.lighten(8) ?? surfaceSchemeColors.surface.lighten(8);
-    } else {
-      effectiveSurfaceColor = surface ?? surfaceSchemeColors.surface;
-    }
+    final Color effectiveSurfaceColor =
+        lightIsWhite ? _inputSurface.lighten(8) : _inputSurface;
 
     // Determine effective background color.
     // Used e.g. by drawer, nav rail, side menu and bottom bar.
     // If light is white, we make a lighter than normal background. If not
     // light is white, we use provided background color, or computed one.
-    Color effectiveBackgroundColor;
-    if (lightIsWhite) {
-      effectiveBackgroundColor =
-          background?.lighten(8) ?? surfaceSchemeColors.background.lighten(8);
-    } else {
-      effectiveBackgroundColor = background ?? surfaceSchemeColors.background;
-    }
+    final Color effectiveBackgroundColor =
+        lightIsWhite ? _inputBackground.lighten(8) : _inputBackground;
 
     // Determine effective dialog background color.
     // If light is white, we use lighter than normal. If not,
     // we use dialog provided background color, or computed one.
     // The provided dialog background color overrides factory surface behavior,
     // but is impacted by true black mode for a darker effect.
-    Color effectiveDialogBackground;
-    if (lightIsWhite) {
-      effectiveDialogBackground = dialogBackground?.lighten(8) ??
-          surfaceSchemeColors.dialogBackground.lighten(8);
-    } else {
-      effectiveDialogBackground =
-          dialogBackground ?? surfaceSchemeColors.dialogBackground;
-    }
+    final Color effectiveDialogBackground = lightIsWhite
+        ? dialogBackground?.lighten(8) ??
+            surfaceSchemeColors.dialogBackground.lighten(8)
+        : dialogBackground ?? surfaceSchemeColors.dialogBackground;
 
     // Get the effective app bar color based on the style and opacity.
     Color? effectiveAppBarColor;
@@ -1867,10 +2028,10 @@ class FlexColorScheme with Diagnosticable {
         effectiveAppBarColor = FlexColor.materialLightSurface;
         break;
       case FlexAppBarStyle.background:
-        effectiveAppBarColor = background ?? surfaceSchemeColors.background;
+        effectiveAppBarColor = effectiveBackgroundColor;
         break;
       case FlexAppBarStyle.surface:
-        effectiveAppBarColor = surface ?? surfaceSchemeColors.surface;
+        effectiveAppBarColor = effectiveSurfaceColor;
         break;
       case FlexAppBarStyle.custom:
         effectiveAppBarColor =
@@ -1881,6 +2042,14 @@ class FlexColorScheme with Diagnosticable {
         appBarBackground ?? effectiveAppBarColor.withOpacity(appBarOpacity);
 
     return FlexColorScheme(
+      // We pass along the original colorScheme too, but mostly its properties
+      // will not be used as they have been used and potentially redefined by
+      // the factory and are defined via other properties in the constructor.
+      // Passing it along will however let us keep property values it may
+      // have that we are not dealing with in FlexColorScheme when it returns
+      // its [ColorScheme].
+      colorScheme: colorScheme,
+      // This is the light theme factory so we always set brightness to light.
       brightness: Brightness.light,
       // Primary color for the application
       primary: effectiveColors.primary,
@@ -1948,11 +2117,26 @@ class FlexColorScheme with Diagnosticable {
   /// Creates a [FlexColorScheme] for dark theme mode.
   ///
   /// The factory has no required [FlexSchemeColor] properties, but typically
-  /// a [FlexScheme] `scheme` value would be provided to use a pre-defined color
-  /// scheme or alternatively the [FlexSchemeColor] `colors` property would be
-  /// used to define custom scheme colors. That can be created with just one
-  /// color property by using the factory [FlexSchemeColor.from], more
-  /// detailed color schemes can also be crated with the factory.
+  /// a [FlexScheme] enum [scheme] value would be provided to use a pre-defined
+  /// color scheme.
+  ///
+  /// As a second alternative the [FlexSchemeColor] class [colors] property
+  /// can be used to define custom scheme colors, that can be created with just
+  /// one color property by using the factory [FlexSchemeColor.from].
+  ///
+  /// As a third option you can provide a complete [ColorScheme] in
+  /// [colorScheme] and the custom colors for the theme will be based on that
+  /// scheme. Since this is the light theme factory the brightness value in used
+  /// [colorScheme] is ignored and resulting effective theme and color scheme
+  /// will always be light. Make sure you use colors in your color scheme that
+  /// are actually colors for a light theme.
+  ///
+  /// The factory can produce blended surface colors, and also has other
+  /// parameters that may impact the effective color scheme used by final theme,
+  /// even when a [colorScheme] are provided. The [FlexColorScheme.toScheme]
+  /// will give you the effective color scheme that will also be used
+  /// when producing [ThemeData] from [FlexColorScheme] and its factories
+  /// with [FlexColorScheme.toTheme].
   ///
   /// The factory contains a large number of other properties that can be used
   /// to create beautiful themes by just adjusting a few behavior properties.
@@ -1967,7 +2151,7 @@ class FlexColorScheme with Diagnosticable {
     /// it with the [scheme] property is recommended and leaving [colors]
     /// undefined. If both are specified the scheme colors defined by [colors]
     /// are used. If both are null then [scheme] defaults to
-    /// [FlexScheme.material].
+    /// [FlexScheme.material], thus defining the resulting scheme.
     final FlexSchemeColor? colors,
 
     /// Use one of the built-in color schemes defined by enum [FlexScheme].
@@ -1980,6 +2164,55 @@ class FlexColorScheme with Diagnosticable {
     /// [colors] is used. If both are null, then [scheme] defaults to
     /// [FlexScheme.material].
     final FlexScheme? scheme,
+
+    /// The overall [ColorScheme] based colors for the theme.
+    ///
+    /// This property provides a new way to define custom colors for
+    /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+    /// you already have a custom [ColorScheme] based color definition that
+    /// you want to use with FlexColorScheme theming and its sub-theming
+    /// capabilities. This will become particularly useful when using Material 3
+    /// based design and its seed generated color schemes.
+    ///
+    /// If you provide both a [ColorScheme] and some individual direct property
+    /// values that also exist in a [ColorScheme], the individual property
+    /// values will override the corresponding ones in your [ColorScheme].
+    ///
+    /// If you do not define a [colorScheme], the used colors will be determined
+    /// by the [colors] and [scheme] properties. However, when a [colorScheme]
+    /// is defined it takes precedence. The [brightness] in the provided
+    /// [colorScheme] is always ignored and set to [Brightness.light] since this
+    /// is the light theme mode factory. Make sure the colors used in your color
+    /// scheme are intended for a light theme.
+    ///
+    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
+    /// and [background] colors in the provided [colorScheme] will be overridden
+    /// by the computed color branded surfaces. If your [colorScheme] already
+    /// contains branded surface colors, then keep [blendLevel] = 0 to continue
+    /// using them.
+    ///
+    /// If you use [lightIsWhite] factory feature, it will also override your
+    /// [colorScheme] based [surface] and [background] properties and make them
+    /// 8% lighter.
+    ///
+    /// If you opt in on using sub themes with [useSubThemes] and have set
+    /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
+    /// and set [blendLevel] > 0, then the effective color scheme based on
+    /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
+    /// be changed accordingly too.
+    ///
+    /// The [colorScheme] colors are also included and affected by factory
+    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
+    /// [toScheme]. This will always get you a complete color scheme, including
+    /// calculated and derived color values, which is particularly useful when
+    /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
+    /// to compute color scheme branded surface colors for you. The effective
+    /// [ColorScheme] for your theme is often needed if you want to create
+    /// custom sub-themes that should use the colors from the scheme using none
+    /// default color assignments from the color scheme.
+    final ColorScheme? colorScheme,
 
     /// The number of the four main scheme colors to be used of the ones
     /// passed in via the required colors [FlexSchemeColor] property.
@@ -2156,12 +2389,15 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
+    ///
+    /// This override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
@@ -2175,16 +2411,25 @@ class FlexColorScheme with Diagnosticable {
     /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
     /// color property becomes a good property to use if you need a custom color
     /// for custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any built-in widgets.
+    /// not used as default color by any other built-in widgets. This applies
+    /// to Flutter 2.8.1 and earlier versions.
+    ///
+    /// The property is being deprecated in Flutter SDK and will be replaced
+    /// by a new property called primaryContainer. It is deprecated from
+    /// master v2.6.0-0.0.pre, but has not yet reached stable (2.8.1).
+    /// See https://github.com/flutter/flutter/issues/89852.
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
+    ///
+    /// The override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
@@ -2195,13 +2440,16 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondary,
@@ -2216,13 +2464,16 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] `colors` or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property.
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    /// The override color is however included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
     final Color? secondaryVariant,
@@ -2230,9 +2481,15 @@ class FlexColorScheme with Diagnosticable {
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
     ///
-    /// If no value is given defaults to [FlexColor.materialLightError] if
-    /// brightness is light and to [FlexColor.materialDarkError] if brightness
-    /// is dark.
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? error,
 
     /// The surface (background) color for widgets like [Card] and
@@ -2245,7 +2502,8 @@ class FlexColorScheme with Diagnosticable {
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
     ///
     /// Defaults to null.
     final Color? surface,
@@ -2259,7 +2517,8 @@ class FlexColorScheme with Diagnosticable {
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
     ///
     /// Defaults to null.
     final Color? background,
@@ -2303,6 +2562,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [primary]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onPrimary,
 
     /// A color that is clearly legible when drawn on [secondary] color.
@@ -2313,6 +2574,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [secondary]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onSecondary,
 
     /// A color that is clearly legible when drawn on [surface] color.
@@ -2323,6 +2586,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [surface]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onSurface,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -2333,6 +2598,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [background]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
@@ -2343,6 +2610,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If null, the on color is derived from the brightness of the [error]
     /// color, and will be be black if it is light and white if it is dark.
+    /// If a [colorScheme] is provided and this color is provided, it will
+    /// override the corresponding color in the color scheme.
     final Color? onError,
 
     /// Makes the dark theme backgrounds darker or even black.
@@ -2647,15 +2916,16 @@ class FlexColorScheme with Diagnosticable {
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor _colors =
         colors ?? FlexColor.schemesWithCustom[_scheme]!.dark;
-    // If the passed in property values are not null, we will override colors
-    // properties with them, this gets us also correct effective and swap
-    // behavior on directly passed in property values.
+    // If the passed in property values are not null, or there was a colorScheme
+    // provided, we will override the colors properties with them, this gets
+    // us also correct effective and swap behavior on directly passed in
+    // property values or colorScheme based colors.
     final FlexSchemeColor withPassedColors = _colors.copyWith(
-      primary: primary,
-      primaryVariant: primaryVariant,
-      secondary: secondary,
-      secondaryVariant: secondaryVariant,
-      error: error,
+      primary: primary ?? colorScheme?.primary,
+      primaryVariant: primaryVariant ?? colorScheme?.primaryVariant,
+      secondary: secondary ?? colorScheme?.secondary,
+      secondaryVariant: secondaryVariant ?? colorScheme?.secondaryVariant,
+      error: error ?? colorScheme?.error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
     final FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
@@ -2669,7 +2939,7 @@ class FlexColorScheme with Diagnosticable {
     // different result surface colors must be passed in to
     // FlexColorScheme.dark. It is up to the implementation using
     // [FlexSurface.custom] to do so. The returned surfaceSchemeColors
-    // will NEVER be null, it always has colors.
+    // will never be null, it always has colors.
     //
     // If surfaceMode is not null, we use the never blend mode and level via
     // factory FlexSchemeSurfaceColors.flexBlend, otherwise we use the one
@@ -2692,12 +2962,30 @@ class FlexColorScheme with Diagnosticable {
         subThemesData ?? const FlexSubThemesData();
 
     // Get alpha blend values corresponding to used mode, level and brightness,
-    // if using surfaceMode, opted in to use sub themes and in them opted
+    // if using surfaceMode, opted in to use sub themes and in theme opted
     // in to also blend the on colors.
     final _AlphaValues _blend =
         surfaceMode != null && useSubThemes && subTheme.blendOnColors
             ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.dark)
             : const _AlphaValues();
+
+    // Determine the input surface and background colors.
+    // The logic is that if they were passed via properties, those colors
+    // are used, if not then colorScheme based colors are used, if they
+    // were provided and we are not using blended surface and surface mode,
+    // if we are, then we use the computed surfaces.
+    // The final fallback is always the computed surface
+    final bool _overrideScheme = blendLevel > 0 && surfaceMode != null;
+    final Color _inputSurface = surface ??
+        (_overrideScheme
+            ? surfaceSchemeColors.surface
+            : colorScheme?.surface) ??
+        surfaceSchemeColors.surface;
+    final Color _inputBackground = background ??
+        (_overrideScheme
+            ? surfaceSchemeColors.background
+            : colorScheme?.background) ??
+        surfaceSchemeColors.background;
 
     // For the on colors we pass in the primary, secondary and surface colors to
     // calculate onColors for. If some onColors were passed in, we give
@@ -2707,8 +2995,8 @@ class FlexColorScheme with Diagnosticable {
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       secondary: effectiveColors.secondary,
-      surface: surface ?? surfaceSchemeColors.surface,
-      background: background ?? surfaceSchemeColors.background,
+      surface: _inputSurface,
+      background: _inputBackground,
       error: effectiveColors.error ?? FlexColor.materialDarkError,
       onPrimary: onPrimary,
       onSecondary: onSecondary,
@@ -2726,39 +3014,25 @@ class FlexColorScheme with Diagnosticable {
     // Surface is used e.g. by Card and bottom appbar.
     // If true black, we make a darker than normal surface. If not
     // true black, we use provided surface color, or computed one.
-    Color effectiveSurfaceColor;
-    if (darkIsTrueBlack) {
-      effectiveSurfaceColor =
-          surface?.darken(8) ?? surfaceSchemeColors.surface.darken(8);
-    } else {
-      effectiveSurfaceColor = surface ?? surfaceSchemeColors.surface;
-    }
+    final Color effectiveSurfaceColor =
+        darkIsTrueBlack ? _inputSurface.darken(8) : _inputSurface;
 
     // Determine effective background color.
     // Used e.g. by drawer, nav rail, side menu and bottom bar.
     // If true black, we use darker then normal background. If not true black,
     // we use provided background color, or computed one.
-    Color effectiveBackgroundColor;
-    if (darkIsTrueBlack) {
-      effectiveBackgroundColor =
-          background?.darken(8) ?? surfaceSchemeColors.background.darken(8);
-    } else {
-      effectiveBackgroundColor = background ?? surfaceSchemeColors.background;
-    }
+    final Color effectiveBackgroundColor =
+        darkIsTrueBlack ? _inputBackground.darken(8) : _inputBackground;
 
     // Determine effective dialog background color.
     // If true black, we use darker than normal. If not true black,
     // we use dialog provided background color, or computed one.
     // The provided dialog background color overrides factory surface behavior,
     // but is impacted by true black mode for a darker effect.
-    Color effectiveDialogBackground;
-    if (darkIsTrueBlack) {
-      effectiveDialogBackground = dialogBackground?.darken(8) ??
-          surfaceSchemeColors.dialogBackground.darken(8);
-    } else {
-      effectiveDialogBackground =
-          dialogBackground ?? surfaceSchemeColors.dialogBackground;
-    }
+    final Color effectiveDialogBackground = darkIsTrueBlack
+        ? dialogBackground?.darken(8) ??
+            surfaceSchemeColors.dialogBackground.darken(8)
+        : dialogBackground ?? surfaceSchemeColors.dialogBackground;
 
     // Get the effective app bar color based on the style and opacity.
     Color? effectiveAppBarColor;
@@ -2785,6 +3059,14 @@ class FlexColorScheme with Diagnosticable {
         appBarBackground ?? effectiveAppBarColor.withOpacity(appBarOpacity);
 
     return FlexColorScheme(
+      // We pass along the original colorScheme too, but mostly its properties
+      // will not be used as they have been used and potentially redefined by
+      // the factory and are defined via other properties in the constructor.
+      // Passing it along will however let us keep property values it may
+      // have that we are not dealing with in FlexColorScheme when it returns
+      // its [ColorScheme].
+      colorScheme: colorScheme,
+      // This is the dark theme factory so we always set brightness to dark.
       brightness: Brightness.dark,
       // Primary color for the application.
       primary: effectiveColors.primary,
@@ -3540,65 +3822,16 @@ class FlexColorScheme with Diagnosticable {
   ///   > for the active theme.
   ///   > See example 5 for a demo on how to use this.
   ThemeData get toTheme {
-    // A convenience bool to check if this theme is for light or dark mode
-    final bool isDark = brightness == Brightness.dark;
-
     // Use passed in sub-theme config data or a default one if none given.
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
 
-    // Check brightness of primary, secondary, error, surface and background
-    // colors, and then calculate appropriate colors for their onColors if an
-    // "on" color was not passed in. For each onColor that is not null
-    // in FlexColorScheme, the FlexSchemeOnColors.from just returns the onColor.
-    // This fills in the blanks when using the raw default constructor.
-    // The factories .light and .dark do their own complex onColor calculations
-    // that are already defined at this point, if FlexColorScheme was created
-    // with them.
-    final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
-      primary: primary,
-      secondary: secondary,
-      surface: surface ??
-          (isDark
-              ? FlexColor.materialDarkSurface
-              : FlexColor.materialLightSurface),
-      background: background ??
-          (isDark
-              ? FlexColor.materialDarkBackground
-              : FlexColor.materialLightBackground),
-      error: error ??
-          (isDark ? FlexColor.materialDarkError : FlexColor.materialLightError),
-      onPrimary: onPrimary,
-      onSecondary: onSecondary,
-      onSurface: onSurface,
-      onBackground: onBackground,
-      onError: onError,
-    );
+    // Get the effective standard Flutter ColorScheme from the provided
+    // brightness and provided or computed or default colors.
+    final ColorScheme colorScheme = toScheme;
 
-    // Define a standard Flutter ColorScheme from the provided brightness and
-    // provided/computed/default colors.
-    final ColorScheme colorScheme = ColorScheme(
-      primary: primary,
-      primaryVariant: primaryVariant,
-      secondary: secondary,
-      secondaryVariant: secondaryVariant,
-      surface: surface ??
-          (isDark
-              ? FlexColor.materialDarkSurface
-              : FlexColor.materialLightSurface),
-      background: background ??
-          (isDark
-              ? FlexColor.materialDarkBackground
-              : FlexColor.materialLightBackground),
-      error: error ??
-          (isDark ? FlexColor.materialDarkError : FlexColor.materialLightError),
-      onBackground: onColors.onBackground,
-      onSurface: onColors.onSurface,
-      onError: onColors.onError,
-      onPrimary: onColors.onPrimary,
-      onSecondary: onColors.onSecondary,
-      brightness: brightness,
-    );
+    // A convenience bool to check if this theme is for light or dark mode
+    final bool isDark = colorScheme.brightness == Brightness.dark;
 
     // Use passed in target platform, else actual host platform.
     final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
@@ -3634,7 +3867,8 @@ class FlexColorScheme with Diagnosticable {
       defPrimaryTextTheme = defPrimaryTextTheme.apply(fontFamily: fontFamily);
     }
 
-    // TODO(rydmike): Use real Material3 and new Flutter APIs when available.
+    // TODO(rydmike): Use SDK Material3 and new Flutter APIs when available.
+    // TODO(rydmike): Use SDK Material3 TextTheme when available.
     // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
     // different, a bit less colorful, but only very marginally.
@@ -3797,8 +4031,8 @@ class FlexColorScheme with Diagnosticable {
               : Colors.white;
         case FlexTabBarStyle.universal:
           return isDark
-              ? primary.blendAlpha(Colors.white, 0xE6) // 90%
-              : primary.blendAlpha(Colors.white, 0xB2); // 50%
+              ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
+              : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
       }
     }
 
@@ -3810,24 +4044,26 @@ class FlexColorScheme with Diagnosticable {
           return selectedTabColor().withAlpha(0xB2); // 70%
         case FlexTabBarStyle.forBackground:
           return useSubThemes
-              ? onColors.onSurface
+              ? colorScheme.onSurface
                   .blendAlpha(colorScheme.primary,
                       kUnselectedBackgroundPrimaryAlphaBlend)
                   .withAlpha(kUnselectedAlphaBlend)
-              : onColors.onSurface.withAlpha(0x99); // 60%
+              : colorScheme.onSurface.withAlpha(0x99); // 60%
         case FlexTabBarStyle.forAppBar:
           return (appBarBrightness == Brightness.light &&
                   (effectiveAppBarColor == Colors.white ||
                       effectiveAppBarColor == colorScheme.surface ||
                       effectiveAppBarColor == colorScheme.background))
-              ? onColors.onSurface.withAlpha(0x99) // 60%
+              ? colorScheme.onSurface.withAlpha(0x99) // 60%
               : selectedTabColor().withAlpha(0xB2); // 70% alpha
         case FlexTabBarStyle.universal:
           return isDark
-              ? primary
+              ? colorScheme.primary
                   .blendAlpha(Colors.white, 0xE6) // 90%
                   .withAlpha(0xB2) // 70% alpha
-              : primary.blendAlpha(Colors.white, 0x7F).withAlpha(0x7F); // 50%a
+              : colorScheme.primary
+                  .blendAlpha(Colors.white, 0x7F)
+                  .withAlpha(0x7F); // 50%a
       }
     }
 
@@ -4423,11 +4659,11 @@ class FlexColorScheme with Diagnosticable {
     );
   }
 
-  /// Returns the [ColorScheme] defined by [FlexColorScheme] properties.
+  /// Returns the effective [ColorScheme] defined by your [FlexColorScheme].
   ///
   /// After you have defined your scheme with [FlexColorScheme] or one of its
   /// recommended factories [FlexColorScheme.light], [FlexColorScheme.dark],
-  /// you can use the [toScheme] method to get the resulting standard Flutter
+  /// you can use the [toScheme] method to get the effective standard Flutter
   /// [ColorScheme] object defined by your [FlexColorScheme] definition.
   ///
   /// While you can use use this returned color scheme in a standard
@@ -4447,8 +4683,8 @@ class FlexColorScheme with Diagnosticable {
   /// [FlexColorScheme.toScheme] to create tour theme, this will work and
   /// result in a theme that is based on
   /// the color scheme defined in [FlexColorScheme], including the surface and
-  /// background color branding, and true black for dark mode, if those were
-  /// used in its creation via the light and dark factories. **The** big
+  /// background color branding, and e.g. true black for dark mode, if those
+  /// were used in its creation via the light and dark factories. **The** big
   /// difference will be that Flutter's [ThemeData.from] theme creation
   /// from this scheme will not include any of the theme fixes, included
   /// in the [FlexColorScheme.toTheme] method. The AppBar theme options
@@ -4456,59 +4692,109 @@ class FlexColorScheme with Diagnosticable {
   /// will be equal to background, which might not be the design you intended.
   ///
   /// The sub-theming is of course also not available, unless you apply them
-  /// all with `copyWith` to the produced `ThemeData`.
+  /// all with `copyWith` to the produced ThemeData.
   ColorScheme get toScheme {
-    final bool isDark = brightness == Brightness.dark;
+    // Get effective brightness.
+    final Brightness _brightness =
+        brightness ?? colorScheme?.brightness ?? Brightness.light;
+    final bool isDark = _brightness == Brightness.dark;
 
-    // Checks brightness of primary, secondary, error, surface and background
-    // colors, and returns appropriate colors for their onColors, if an
-    // onColor for it was was not passed in.
-    final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
-      primary: primary,
-      secondary: secondary,
-      surface: surface ??
-          (isDark
-              ? FlexColor.materialDarkSurface
-              : FlexColor.materialLightSurface),
-      background: background ??
-          (isDark
-              ? FlexColor.materialDarkBackground
-              : FlexColor.materialLightBackground),
-      error: error ??
-          (isDark ? FlexColor.materialDarkError : FlexColor.materialLightError),
-      onPrimary: onPrimary,
-      onSecondary: onSecondary,
-      onSurface: onSurface,
-      onBackground: onBackground,
-      onError: onError,
-    );
+    // Get effective primary color.
+    final Color _primary = primary ??
+        colorScheme?.primary ??
+        (isDark
+            ? FlexColor.materialDarkPrimary
+            : FlexColor.materialLightPrimary);
 
-    return ColorScheme(
-      primary: primary,
+    // Calculate default fallback colors from primary color.
+    final FlexSchemeColor _fallbacks = FlexSchemeColor.from(
+      primary: _primary,
       primaryVariant: primaryVariant,
       secondary: secondary,
       secondaryVariant: secondaryVariant,
-      surface: surface ??
-          (isDark
-              ? FlexColor.materialDarkSurface
-              : FlexColor.materialLightSurface),
-      background: background ??
-          (isDark
-              ? FlexColor.materialDarkBackground
-              : FlexColor.materialLightBackground),
-      error: error ??
-          (isDark ? FlexColor.materialDarkError : FlexColor.materialLightError),
-      onBackground: onColors.onBackground,
-      onSurface: onColors.onSurface,
-      onError: onColors.onError,
-      onPrimary: onColors.onPrimary,
-      onSecondary: onColors.onSecondary,
-      brightness: brightness,
     );
+
+    // Determine effective main colors
+    final Color _primaryVariant = primaryVariant ??
+        colorScheme?.primaryVariant ??
+        _fallbacks.primaryVariant;
+    final Color _secondary =
+        secondary ?? colorScheme?.secondary ?? _fallbacks.secondary;
+    final Color _secondaryVariant = secondaryVariant ??
+        colorScheme?.secondaryVariant ??
+        _fallbacks.secondaryVariant;
+
+    // Determine effective surface, background and error colors.
+    final Color _surface = surface ??
+        colorScheme?.surface ??
+        (isDark
+            ? FlexColor.materialDarkSurface
+            : FlexColor.materialLightSurface);
+    final Color _background = background ??
+        colorScheme?.background ??
+        (isDark
+            ? FlexColor.materialDarkBackground
+            : FlexColor.materialLightBackground);
+    final Color _error = error ??
+        colorScheme?.error ??
+        (isDark ? FlexColor.materialDarkError : FlexColor.materialLightError);
+
+    // Checks brightness of primary, secondary, error, surface and background
+    // colors, and returns appropriate colors for their onColors, if an
+    // onColor for it was was not passed in or no colorScheme with them given.
+    final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
+      primary: _primary,
+      secondary: _secondary,
+      surface: _surface,
+      background: _background,
+      error: _error,
+      onPrimary: onPrimary ?? colorScheme?.onPrimary,
+      onSecondary: onSecondary ?? colorScheme?.onSecondary,
+      onSurface: onSurface ?? colorScheme?.onSurface,
+      onBackground: onBackground ?? colorScheme?.onBackground,
+      onError: onError ?? colorScheme?.onError,
+    );
+
+    // Return the [ColorScheme] as a copyWith on original passed in colorScheme
+    // if one was passed in, with all the new effective properties. This will
+    // keep new M3 properties intact (on master channel) that we are not yet
+    // dealing with. If there was no colorScheme passed in, we create one
+    // with the effective properties.
+    return colorScheme?.copyWith(
+          primary: _primary,
+          primaryVariant: _primaryVariant,
+          secondary: _secondary,
+          secondaryVariant: _secondaryVariant,
+          surface: _surface,
+          background: _background,
+          error: _error,
+          onPrimary: onColors.onPrimary,
+          onSecondary: onColors.onSecondary,
+          onSurface: onColors.onSurface,
+          onBackground: onColors.onBackground,
+          onError: onColors.onError,
+          brightness: _brightness,
+        ) ??
+        ColorScheme(
+          primary: _primary,
+          primaryVariant: _primaryVariant,
+          secondary: _secondary,
+          secondaryVariant: _secondaryVariant,
+          surface: _surface,
+          background: _background,
+          error: _error,
+          onPrimary: onColors.onPrimary,
+          onSecondary: onColors.onSecondary,
+          onSurface: onColors.onSurface,
+          onBackground: onColors.onBackground,
+          onError: onColors.onError,
+          brightness: _brightness,
+        );
   }
 
   /// Copy the object with one or more provided properties changed.
   FlexColorScheme copyWith({
+    ColorScheme? colorScheme,
     Brightness? brightness,
     Color? primary,
     Color? primaryVariant,
@@ -4541,6 +4827,7 @@ class FlexColorScheme with Diagnosticable {
     FlexSubThemesData? subThemesData,
   }) {
     return FlexColorScheme(
+      colorScheme: colorScheme ?? this.colorScheme,
       brightness: brightness ?? this.brightness,
       primary: primary ?? this.primary,
       primaryVariant: primaryVariant ?? this.primaryVariant,
@@ -4583,6 +4870,7 @@ class FlexColorScheme with Diagnosticable {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
     return other is FlexColorScheme &&
+        other.colorScheme == colorScheme &&
         other.brightness == brightness &&
         other.primary == primary &&
         other.primaryVariant == primaryVariant &&
@@ -4621,6 +4909,7 @@ class FlexColorScheme with Diagnosticable {
   @override
   int get hashCode {
     final List<Object?> values = <Object?>[
+      colorScheme,
       brightness,
       primary,
       primaryVariant,
@@ -4659,6 +4948,8 @@ class FlexColorScheme with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty<ColorScheme>('colorScheme', colorScheme));
     properties.add(EnumProperty<Brightness>('brightness', brightness));
     properties.add(ColorProperty('primary', primary));
     properties.add(ColorProperty('primaryVariant', primaryVariant));
@@ -4703,12 +4994,12 @@ class FlexColorScheme with Diagnosticable {
 /// [FlexColorScheme].
 ///
 /// [FlexSchemeSurfaceColors] is used primarily via the
-/// [FlexSchemeSurfaceColors.from] factory that returns
-/// [FlexSchemeSurfaceColors] object with defined surface
-/// colors based on enum property [FlexSurface] and [Brightness]. Included
-/// colors are [surface] and [background],
-/// plus an own surface colors for [scaffoldBackground] and [dialogBackground],
-/// which are not a part of Flutter's standard [ColorScheme].
+/// [FlexSchemeSurfaceColors.blend] factory. Before version 4.0 the
+/// [FlexSchemeSurfaceColors.from] factory was used.
+///
+/// Included colors are [surface] and [background], plus blended surface colors
+/// for [scaffoldBackground] and [dialogBackground], which are not a part
+/// of Flutter's standard [ColorScheme].
 ///
 /// This class, and its factory are only used by the
 /// [FlexColorScheme.light] and [FlexColorScheme.dark] factories. You normally
