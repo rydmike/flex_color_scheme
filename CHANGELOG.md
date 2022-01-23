@@ -144,9 +144,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   more. Added an API Intro and Guide chapter to the readme.
 
 
-* **TODO WIP** **Tests:** Added tests to cover the new features, 
-  now total 1104 tests. Test for the new `colorScheme` based feature are still
-  missing and must be added before release.
+* **Tests:** Added tests to cover the new features, now total 1123 tests. 
   
 
 ## [4.1.1] - November 20, 2021
