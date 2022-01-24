@@ -147,6 +147,35 @@ abstract class ThemeService {
   /// Persists used inputDecoratorUnfocusedHasBorder setting in example 5.
   Future<void> saveInputDecoratorUnfocusedHasBorder(bool value);
 
+  /// Key used to read and save the inputDecoratorSchemeColor value.
+  static const String keyInputDecoratorSchemeColor =
+      'inputDecoratorSchemeColor';
+
+  /// Default value for the inputDecoratorSchemeColor, reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorSchemeColor = null;
+
+  /// Loads used inputDecoratorSchemeColor setting in example 5.
+  Future<SchemeColor?> inputDecoratorSchemeColor();
+
+  /// Persists used inputDecoratorSchemeColor setting in example 5.
+  Future<void> saveInputDecoratorSchemeColor(SchemeColor? value);
+
+  /// Key used to read and save the chipSchemeColor value.
+  static const String keyChipSchemeColor = 'chipSchemeColor';
+
+  /// Default value for the chipSchemeColor, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultChipSchemeColor = null;
+
+  /// Loads used chipSchemeColor setting in example 5.
+  Future<SchemeColor?> chipSchemeColor();
+
+  /// Persists used chipSchemeColor setting in example 5.
+  Future<void> saveChipSchemeColor(SchemeColor? value);
+
   /// Key used to read and save the surfaceMode value.
   static const String keySurfaceMode = 'surfaceMode';
 
@@ -248,6 +277,20 @@ abstract class ThemeService {
   /// Persists used tab bar style setting in example 5.
   Future<void> saveTabBarStyle(FlexTabBarStyle value);
 
+  /// Key used to read and save the tabBarIndicator value.
+  static const String keyTabBarIndicator = 'tabBarIndicator';
+
+  /// Default value for the tabBarIndicator, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultTabBarIndicator = null;
+
+  /// Loads used tabBarIndicator setting in example 5.
+  Future<SchemeColor?> tabBarIndicator();
+
+  /// Persists used tabBarIndicator setting in example 5.
+  Future<void> saveTabBarIndicator(SchemeColor? value);
+
   /// Key used to read and save the bottomNavigationBarOpacity value.
   static const String keyBottomNavigationBarOpacity =
       'bottomNavigationBarOpacity';
@@ -286,6 +329,46 @@ abstract class ThemeService {
 
   /// Persists used navBarStyle setting in example 5.
   Future<void> saveNavBarStyle(FlexSystemNavBarStyle value);
+
+  /// Key used to read and save the navBarScheme value.
+  static const String keyNavBarScheme = 'navBarScheme';
+
+  /// Default value for the navBarScheme, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultNavBarScheme = null;
+
+  /// Loads used navBarScheme setting in example 5.
+  Future<SchemeColor?> navBarScheme();
+
+  /// Persists used navBarScheme setting in example 5.
+  Future<void> saveNavBarScheme(SchemeColor? value);
+
+  /// Key used to read and save the navBarHighlight value.
+  static const String keyNavBarHighlight = 'navBarHighlight';
+
+  /// Default value for the navBarHighlight, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultNavBarHighlight = null;
+
+  /// Loads used navBarHighlight setting in example 5.
+  Future<SchemeColor?> navBarHighlight();
+
+  /// Persists used navBarHighlight setting in example 5.
+  Future<void> saveNavBarHighlight(SchemeColor? value);
+
+  /// Key used to read and save the navBarMuteUnselected value.
+  static const String keyNavBarMuteUnselected = 'navBarMuteUnselected';
+
+  /// Default value for the navBarMuteUnselected, also used to reset settings.
+  static const bool defaultNavBarMuteUnselected = true;
+
+  /// Loads used navBarMuteUnselected setting in example 5.
+  Future<bool> navBarMuteUnselected();
+
+  /// Persists the navBarMuteUnselected setting in example 5.
+  Future<void> saveNavBarMuteUnselected(bool value);
 
   /// Key used to read and save the useNavDivider value.
   static const String keyUseNavDivider = 'useNavDivider';

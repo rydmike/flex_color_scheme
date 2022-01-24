@@ -120,6 +120,24 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> saveInputDecoratorUnfocusedHasBorder(bool value) async {}
 
+  /// Loads used inputDecoratorSchemeColor setting in example 5.
+  @override
+  Future<SchemeColor?> inputDecoratorSchemeColor() async =>
+      ThemeService.defaultInputDecoratorSchemeColor;
+
+  /// Persists used inputDecoratorSchemeColor setting in example 5.
+  @override
+  Future<void> saveInputDecoratorSchemeColor(SchemeColor? value) async {}
+
+  /// Loads used chipSchemeColor setting in example 5.
+  @override
+  Future<SchemeColor?> chipSchemeColor() async =>
+      ThemeService.defaultChipSchemeColor;
+
+  /// Persists used chipSchemeColor setting in example 5.
+  @override
+  Future<void> saveChipSchemeColor(SchemeColor? value) async {}
+
   /// Loads used surface mode setting in example 5.
   @override
   Future<FlexSurfaceMode> surfaceMode() async =>
@@ -190,6 +208,15 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> saveTabBarStyle(FlexTabBarStyle value) async {}
 
+  /// Loads used tabBarIndicator setting in example 5.
+  @override
+  Future<SchemeColor?> tabBarIndicator() async =>
+      ThemeService.defaultTabBarIndicator;
+
+  /// Persists used tabBarIndicator setting in example 5.
+  @override
+  Future<void> saveTabBarIndicator(SchemeColor? value) async {}
+
   /// Loads used bottom navigation bar opacity setting in example 5.
   @override
   Future<double> bottomNavigationBarOpacity() async =>
@@ -216,6 +243,32 @@ class ThemeServiceMem implements ThemeService {
   /// Persists used navBarStyle setting in example 5.
   @override
   Future<void> saveNavBarStyle(FlexSystemNavBarStyle value) async {}
+
+  /// Loads used navBarScheme setting in example 5.
+  @override
+  Future<SchemeColor?> navBarScheme() async => ThemeService.defaultNavBarScheme;
+
+  /// Persists used navBarScheme setting in example 5.
+  @override
+  Future<void> saveNavBarScheme(SchemeColor? value) async {}
+
+  /// Loads used navBarHighlight setting in example 5.
+  @override
+  Future<SchemeColor?> navBarHighlight() async =>
+      ThemeService.defaultNavBarHighlight;
+
+  /// Persists used navBarHighlight setting in example 5.
+  @override
+  Future<void> saveNavBarHighlight(SchemeColor? value) async {}
+
+  /// Loads used navBarMuteUnselected setting in example 5.
+  @override
+  Future<bool> navBarMuteUnselected() async =>
+      ThemeService.defaultNavBarMuteUnselected;
+
+  /// Persists the navBarMuteUnselected setting in example 5.
+  @override
+  Future<void> saveNavBarMuteUnselected(bool value) async {}
 
   /// Loads used useNavDivider setting in example 5.
   @override

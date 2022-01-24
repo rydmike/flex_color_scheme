@@ -139,3 +139,27 @@ class FlexSystemNavBarStyleAdapter extends TypeAdapter<FlexSystemNavBarStyle> {
   @override
   int get typeId => 157;
 }
+
+/// A Hive data type adapter for enum SchemeColor, nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class FlexSchemeColorAdapter extends TypeAdapter<SchemeColor?> {
+  @override
+  SchemeColor? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= SchemeColor.values.length) {
+      return null;
+    } else {
+      return SchemeColor.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, SchemeColor? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 158;
+}

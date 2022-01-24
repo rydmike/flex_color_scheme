@@ -160,15 +160,38 @@ class DemoApp extends StatelessWidget {
                       // Want color themed disable hover, focus, highlight and
                       // splash colors? Then keep this one on.
                       interactionEffects: themeController.interactionEffects,
-                      // Themed opacity of bottom navigation bar.
-                      bottomNavigationBarOpacity:
-                          themeController.bottomNavigationBarOpacity,
+                      // ColorScheme used on TabBar indicator.
+                      tabBarIndicatorSchemeColor:
+                          themeController.tabBarIndicator,
+                      // Base ColorScheme used on Chips.
+                      chipSchemeColor: themeController.chipSchemeColor,
                       // Elevation of BottomNavigationBar.
                       bottomNavigationBarElevation:
                           themeController.bottomNavigationBarElevation,
-                      // Themed opacity of NavigationBar.
+                      // Themed opacity of bottom navigation bar.
+                      bottomNavigationBarOpacity:
+                          themeController.bottomNavigationBarOpacity,
+                      // Themed opacity of NavigationBar, shares input with
+                      // bottom navigation bar.
                       navigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
+                      // Themed item color on navigation bar, in this app it
+                      // shares input with icon, text and bottom navbar color,
+                      // but they are different props so they don't have to.
+                      bottomNavigationBarSchemeColor:
+                          themeController.navBarScheme,
+                      navigationBarIconSchemeColor:
+                          themeController.navBarScheme,
+                      navigationBarTextSchemeColor:
+                          themeController.navBarScheme,
+                      // The item highlight color of the M3 Navbar.
+                      navigationBarHighlightSchemeColor:
+                          themeController.navBarHighlight,
+                      // Mute unselected icon and text color on NavigationBar.
+                      navigationBarMutedUnselectedText:
+                          themeController.navBarMuteUnselected,
+                      navigationBarMutedUnselectedIcon:
+                          themeController.navBarMuteUnselected,
                       // Text input field uses a themed fill color.
                       inputDecoratorIsFilled:
                           themeController.inputDecoratorIsFilled,
@@ -181,6 +204,9 @@ class DemoApp extends StatelessWidget {
                       // has a border of selected style, but thinner.
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
+                      // Base ColorScheme used by TextField InputDecorator.
+                      inputDecoratorSchemeColor:
+                          themeController.inputDecoratorSchemeColor,
                       // True gives a very light hint of primary color also to
                       // onColors for onSurface, onBackground and onError.
                       // It is on by default, the chosen effect is very subtle
@@ -276,16 +302,35 @@ class DemoApp extends StatelessWidget {
                           : themeController.cornerRadius,
                       fabUseShape: themeController.fabUseShape,
                       interactionEffects: themeController.interactionEffects,
-                      bottomNavigationBarOpacity:
-                          themeController.bottomNavigationBarOpacity,
+                      tabBarIndicatorSchemeColor:
+                          themeController.tabBarIndicator,
+                      chipSchemeColor: themeController.chipSchemeColor,
                       bottomNavigationBarElevation:
                           themeController.bottomNavigationBarElevation,
+                      bottomNavigationBarOpacity:
+                          themeController.bottomNavigationBarOpacity,
+                      navigationBarOpacity:
+                          themeController.bottomNavigationBarOpacity,
+                      bottomNavigationBarSchemeColor:
+                          themeController.navBarScheme,
+                      navigationBarIconSchemeColor:
+                          themeController.navBarScheme,
+                      navigationBarTextSchemeColor:
+                          themeController.navBarScheme,
+                      navigationBarHighlightSchemeColor:
+                          themeController.navBarHighlight,
+                      navigationBarMutedUnselectedText:
+                          themeController.navBarMuteUnselected,
+                      navigationBarMutedUnselectedIcon:
+                          themeController.navBarMuteUnselected,
                       inputDecoratorIsFilled:
                           themeController.inputDecoratorIsFilled,
                       inputDecoratorBorderType:
                           themeController.inputDecoratorBorderType,
                       inputDecoratorUnfocusedHasBorder:
                           themeController.inputDecoratorUnfocusedHasBorder,
+                      inputDecoratorSchemeColor:
+                          themeController.inputDecoratorSchemeColor,
                       blendOnColors: themeController.blendDarkOnColors,
                       blendTextTheme: themeController.blendDarkTextTheme,
                       popupMenuOpacity: 0.95,

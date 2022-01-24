@@ -15,6 +15,7 @@ import '../shared/widgets/universal/show_theme_colors.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 import 'widgets/app_bar_style_buttons.dart';
+import 'widgets/color_scheme_popup_menu.dart';
 import 'widgets/dart_code_dialog_screen.dart';
 import 'widgets/platform_popup_menu.dart';
 import 'widgets/surface_mode_buttons.dart';
@@ -337,6 +338,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               _ToggleFabSwitchesChipsShowcase(
+                controller: widget.controller,
                 isOpen: isCardOpen[13],
                 onTap: () {
                   toggleCard(13);
@@ -1135,6 +1137,20 @@ class _TextField extends StatelessWidget {
                 'style of the TextField input via easy to use '
                 'InputDecorator theme options'),
           ),
+          ColorSchemePopupMenu(
+            title: const Text('Base color of text field'),
+            index: controller.inputDecoratorSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorSchemeColor(null);
+                    } else {
+                      controller.setInputDecoratorSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
           SwitchListTile.adaptive(
             title: const Text(
               'Field has fill color',
@@ -1405,6 +1421,19 @@ class _TabBar extends StatelessWidget {
               onChanged: controller.setTabBarStyle,
             ),
           ),
+          ColorSchemePopupMenu(
+            title: const Text('Color used by tab indicator'),
+            index: controller.tabBarIndicator?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setTabBarIndicator(null);
+                    } else {
+                      controller.setTabBarIndicator(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
           const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -1451,7 +1480,15 @@ class _BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final bool _isLight = Theme.of(context).brightness == Brightness.light;
+    final double _navBarOpacity =
+        controller.useSubThemes && controller.useFlexColorScheme
+            ? controller.bottomNavigationBarOpacity
+            : 1;
+    final double _navBarElevation =
+        controller.useSubThemes && controller.useFlexColorScheme
+            ? controller.bottomNavigationBarElevation
+            : 8;
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
@@ -1459,56 +1496,24 @@ class _BottomNavigation extends StatelessWidget {
       child: Column(
         children: <Widget>[
           const ListTile(
-            title: Text('Elevation'),
-            subtitle: Text(
-              'Bottom navigation bar elevation',
-            ),
-          ),
-          ListTile(
-            title: Slider.adaptive(
-              max: 24,
-              divisions: 48,
-              label: controller.bottomNavigationBarElevation.toStringAsFixed(1),
-              value: controller.bottomNavigationBarElevation,
-              onChanged: controller.setBottomNavigationBarElevation,
-            ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    'ELEV',
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                  Text(
-                    controller.bottomNavigationBarElevation.toStringAsFixed(1),
-                    style: Theme.of(context)
-                        .textTheme
-                        .caption!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const ListTile(
             title: Text('Opacity'),
             subtitle: Text(
-              "All navigation bars' opacity. Separate "
-              'parameters, they only share input here',
+              'Opacity on all bars. Separate '
+              'parameters, but use shared input here',
             ),
           ),
           ListTile(
             title: Slider.adaptive(
               max: 100,
               divisions: 100,
-              label: (controller.bottomNavigationBarOpacity * 100)
-                  .toStringAsFixed(0),
-              value: controller.bottomNavigationBarOpacity * 100,
-              onChanged: (double value) {
-                controller.setBottomNavigationBarOpacity(value / 100);
-              },
+              label: (_navBarOpacity * 100).toStringAsFixed(0),
+              value: _navBarOpacity * 100,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setBottomNavigationBarOpacity(value / 100);
+                        }
+                      : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
@@ -1521,7 +1526,7 @@ class _BottomNavigation extends StatelessWidget {
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
-                    '${(controller.bottomNavigationBarOpacity * 100).toStringAsFixed(0)} %',
+                    '${(_navBarOpacity * 100).toStringAsFixed(0)} %',
                     style: Theme.of(context)
                         .textTheme
                         .caption!
@@ -1531,19 +1536,94 @@ class _BottomNavigation extends StatelessWidget {
               ),
             ),
           ),
+          const Divider(),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: BottomNavigationBarShowcase(),
+          ),
+          const ListTile(
+            title: Text('M2 bottom navigation bar elevation'),
+            // subtitle: Text(
+            //   'Bottom navigation bar elevation',
+            // ),
+          ),
+          ListTile(
+            title: Slider.adaptive(
+              max: 24,
+              divisions: 48,
+              label: _navBarElevation.toStringAsFixed(1),
+              value: _navBarElevation,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBottomNavigationBarElevation
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    _navBarElevation.toStringAsFixed(1),
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('M2 and M3 navigation bar item color'),
+            index: controller.navBarScheme?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setNavBarScheme(null);
+                    } else {
+                      controller.setNavBarScheme(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: NavigationBarShowcase(),
           ),
+          const SizedBox(height: 8),
+          ColorSchemePopupMenu(
+            title: const Text('M3 navigation bar highlight color'),
+            index: controller.navBarHighlight?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setNavBarHighlight(null);
+                    } else {
+                      controller.setNavBarHighlight(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('M3 navigation bar mute unselected item'),
+            subtitle: const Text('Unselected icon and text are less bright'),
+            value: controller.navBarMuteUnselected &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setNavBarMuteUnselected
+                : null,
+          ),
           const Divider(),
           ListTile(
             title: const Text('Android system navigation bar'),
             subtitle: Text('Using themedSystemNavigationBar:\n'
-                '${explainStyle(controller.navBarStyle, isLight)}'),
+                '${explainStyle(controller.navBarStyle, _isLight)}'),
           ),
           ListTile(
             trailing: SystemNavBarStyleButtons(
@@ -1607,9 +1687,13 @@ class _MaterialButtonsShowcase extends StatelessWidget {
 }
 
 class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
-  const _ToggleFabSwitchesChipsShowcase(
-      {Key? key, required this.isOpen, required this.onTap})
-      : super(key: key);
+  const _ToggleFabSwitchesChipsShowcase({
+    Key? key,
+    required this.controller,
+    required this.isOpen,
+    required this.onTap,
+  }) : super(key: key);
+  final ThemeController controller;
   final bool isOpen;
   final VoidCallback onTap;
 
@@ -1619,17 +1703,40 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
       isOpen: isOpen,
       onTap: onTap,
       title: const Text('Themed Buttons Switches and Chips'),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
-            ToggleFabIconButtonsShowcase(),
-            CircleAvatarAndTooltipShowcase(),
-            CheckboxShowcase(),
-            ChipShowcase(),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: ToggleFabIconButtonsShowcase(),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: CircleAvatarAndTooltipShowcase(),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: CheckboxShowcase(),
+          ),
+          const Divider(),
+          ColorSchemePopupMenu(
+            title: const Text('Base color used on Chips'),
+            index: controller.chipSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setChipSchemeColor(null);
+                    } else {
+                      controller.setChipSchemeColor(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+            child: ChipShowcase(),
+          ),
+        ],
       ),
     );
   }

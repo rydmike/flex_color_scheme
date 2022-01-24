@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 ///
 /// The sub widgets used in this theme show case can also be used on their
 /// own, for example combined in smaller panels instead of in on big column
-/// like here. Using the individual elemts is done in example 5 where they are
-/// put in seprate cards.
+/// like here. Using the individual elements is done in example 5 where they
+/// are put in separate cards.
 ///
 /// These are all Flutter "Universal" Widgets that only depends on the SDK and
 /// all the Widgets in this file be dropped into any application. They are

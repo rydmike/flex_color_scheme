@@ -82,6 +82,7 @@ class ThemeServiceHive implements ThemeService {
     Hive.registerAdapter(FlexTabBarStyleAdapter());
     Hive.registerAdapter(FlexAppBarStyleAdapter());
     Hive.registerAdapter(FlexSystemNavBarStyleAdapter());
+    Hive.registerAdapter(FlexSchemeColorAdapter());
   }
 
   /// Loads the ThemeMode from the Hive Storage box.
@@ -340,6 +341,70 @@ class ThemeServiceHive implements ThemeService {
     }
   }
 
+  /// Loads used inputDecoratorSchemeColor setting in example 5.
+  @override
+  Future<SchemeColor?> inputDecoratorSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyInputDecoratorSchemeColor,
+          defaultValue: ThemeService.defaultInputDecoratorSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyInputDecoratorSchemeColor,
+                defaultValue: ThemeService.defaultInputDecoratorSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultInputDecoratorSchemeColor;
+    }
+  }
+
+  /// Persists used inputDecoratorSchemeColor setting in example 5.
+  @override
+  Future<void> saveInputDecoratorSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyInputDecoratorSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used chipSchemeColor setting in example 5.
+  @override
+  Future<SchemeColor?> chipSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyChipSchemeColor,
+          defaultValue: ThemeService.defaultChipSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyChipSchemeColor,
+            defaultValue: ThemeService.defaultChipSchemeColor) as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultChipSchemeColor;
+    }
+  }
+
+  /// Persists used chipSchemeColor setting in example 5.
+  @override
+  Future<void> saveChipSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyNavBarHighlight, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   /// Loads used surface mode setting in example 5.
   @override
   Future<FlexSurfaceMode> surfaceMode() async {
@@ -525,6 +590,37 @@ class ThemeServiceHive implements ThemeService {
     }
   }
 
+  /// Loads used tabBarIndicator setting in example 5.
+  @override
+  Future<SchemeColor?> tabBarIndicator() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyTabBarIndicator,
+          defaultValue: ThemeService.defaultTabBarIndicator);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyTabBarIndicator,
+            defaultValue: ThemeService.defaultTabBarIndicator) as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTabBarIndicator;
+    }
+  }
+
+  /// Persists used tabBarIndicator setting in example 5.
+  @override
+  Future<void> saveTabBarIndicator(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTabBarIndicator, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   /// Loads used bottom navigation bar opacity setting in example 5.
   @override
   Future<double> bottomNavigationBarOpacity() async {
@@ -592,6 +688,91 @@ class ThemeServiceHive implements ThemeService {
   Future<void> saveNavBarStyle(FlexSystemNavBarStyle value) async {
     try {
       await _hiveBox.put(ThemeService.keyNavBarStyle, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used navBarScheme setting in example 5.
+  @override
+  Future<SchemeColor?> navBarScheme() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyNavBarScheme,
+          defaultValue: ThemeService.defaultNavBarScheme);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyNavBarScheme,
+            defaultValue: ThemeService.defaultNavBarScheme) as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultNavBarScheme;
+    }
+  }
+
+  /// Persists used navBarScheme setting in example 5.
+  @override
+  Future<void> saveNavBarScheme(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyNavBarScheme, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used navBarHighlight setting in example 5.
+  @override
+  Future<SchemeColor?> navBarHighlight() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyNavBarHighlight,
+          defaultValue: ThemeService.defaultNavBarHighlight);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyNavBarHighlight,
+            defaultValue: ThemeService.defaultNavBarHighlight) as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultNavBarHighlight;
+    }
+  }
+
+  /// Persists used navBarHighlight setting in example 5.
+  @override
+  Future<void> saveNavBarHighlight(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyNavBarHighlight, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used navBarMuteUnselected setting in example 5.
+  @override
+  Future<bool> navBarMuteUnselected() async {
+    try {
+      return _hiveBox.get(ThemeService.keyNavBarMuteUnselected,
+          defaultValue: ThemeService.defaultNavBarMuteUnselected) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultNavBarMuteUnselected;
+    }
+  }
+
+  /// Persists navBarMuteUnselected setting in example 5.
+  @override
+  Future<void> saveNavBarMuteUnselected(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyNavBarMuteUnselected, value);
     } catch (e) {
       debugPrint(e.toString());
     }
