@@ -358,9 +358,11 @@ are, as well as the rationale behind the made design choices and changes to the 
 
 
 * The `BottomNavigationBarThemeData` uses color scheme primary color for
-  the selected item. Flutter defaults to secondary color. Primary color
-  is a design used on iOS by default for the bottom navigation bar. We
-  agree and think it looks better as the default choice for apps.
+  the selected item in both light and dark theme mode. Flutter default uses
+  primary in light mode, but default to secondary color in dark mode. Primary
+  color is a design used on iOS by default for the bottom navigation bar in
+  both theme modes. We agree and think it looks better as the default 
+  choice for apps in both theme modes.
 
 
 * Default `tooltipTheme` in Flutter is currently a bit flawed on desktop
