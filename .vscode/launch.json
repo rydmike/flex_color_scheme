@@ -9,11 +9,18 @@
             "type": "dart"
         },
         {
-            "name": "Default example - Hot Reload Playground",
+            "name": "Example default - Hot Reload Playground",
             "cwd": "example",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart"
+        },
+        {
+            "name": "Example theme - Copy Playground Theme",
+            "cwd": "example",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/example_copy_paste/main.dart"
         },
         {
             "name": "Example 1 - Basic Theme Usage",
