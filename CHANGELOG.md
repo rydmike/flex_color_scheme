@@ -150,7 +150,15 @@ All notable changes to the **FlexColorScheme** package are documented here.
   more. Added an API Intro and Guide chapter to the readme.
 
 
-* **Tests:** Added tests to cover the new features, now total 1123 tests. 
+* **Tests:** Added tests to cover the new features, now total 1123 tests.
+
+
+### What is next?
+
+Curious about what will is planned next for FlexColorScheme? Head over
+to the TODO section at the end of this page and read more 
+[here](#planned-updates-and-new-features).
+
   
 
 ## [4.1.1] - November 20, 2021
@@ -724,17 +732,17 @@ tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
 
 ### TODO
 
-- Add a sub-theme for the NavigationRail.
+- Add a sub-theme for the `NavigationRail`.
 - Add `SchemeColor` color selection for the Floating Action Button sub-theme.
 - Consider adding `SchemeColor` color selection to buttons and toggle buttons.
 - Version 5 will add support for Material 3 and will be released when a required
   level of M3 features have reached the Flutter stable channel. At minimum, it 
-  will probably be visually breaking to some extent, when it starts using 
-  SDK implementation of M3 design guide. Simple because its current own 
+  will probably be visually breaking to some extent when it starts using 
+  SDK implementation of M3 design guide. Simply because its current own 
   M3 "like" M2 based implementation of existing theming and text capabilities
-  cannot always match the M3 designs especially on color usage.
-- Version 5 will be breaking, so in it consider moving AppBar background to 
-  sub-theme and use the full `SchemeColor` based color selection. This would
+  cannot always match the M3 designs, especially on color usage.
+- Version 5 will be breaking, so in it we may consider moving AppBar background 
+  to sub-theme and use the full `SchemeColor` based color selection. This would
   be another breaking change in V5. It might be possible to also add it
   as a none breaking new feature.
 - For version 5 also consider adding `SchemeColor` selection to TabBar, it might
