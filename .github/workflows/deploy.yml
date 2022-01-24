@@ -22,17 +22,16 @@ name: Deploy Web
 on:
   push:
     branches: [none]
-    # paths-ignore:
-    #  - "**.md"
+    paths-ignore:
+     - "**.md"
   pull_request:
     branches: [none]
     paths-ignore:
       - "**.md"
   release:
-    types: [none]
+    #types: [published, created, edited, prereleased]
     paths-ignore:
       - "**.md"
-#   types: [published, created, edited, prereleased]
 jobs:
   flutter_tests:
     name: "Analyze and test package, then build and deploy 5 web apps"
