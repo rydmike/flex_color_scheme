@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## [4.2.0] - January 24, 2022
+## v4.2.0 - January 24, 2022
 
 * **New:** Updated required Dart SDK to minimum 2.15 that Flutter 2.8.0 uses.  
   To use this release at least Flutter 2.8.0 is required.
@@ -32,8 +32,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
   in Flutter SDK arrives in the stable channel. With Material 3, color schemes 
   may be created using new Material 3 design based color tools, e.g. from
   seed color(s) or using dynamic colors extracted from system wallpaper colors.
-  With this feature will then be able to feed those colors directly into 
-  FlexColorScheme and use them there too to create your `ThemeData`. 
+  With this feature it will then be able to feed those colors directly into 
+  FlexColorScheme, and use them as colors to create your `ThemeData`. 
 
 
 * **Changed:** All properties in all `FlexColorScheme` constructors are now
@@ -69,7 +69,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   - `ChipThemeData` from `FlexSubThemes.chipTheme` to change the used 
     `ColorScheme` based base color of Chips.  
 * The `SchemeColor` properties for the above sub-themes have a default selection 
-  that results oin same `ColorScheme` color values being used as they had 
+  that results in same `ColorScheme` color values being used as they had 
   before. The additional configuration options are none breaking. The enum 
   properties to modify the used `ColorScheme` color can be defined in the 
   configuration class `FlexSubThemesData` using its new properties:
@@ -87,23 +87,23 @@ All notable changes to the **FlexColorScheme** package are documented here.
 * Usage examples of the above new configuration possibilities have been added to
   the default example, the so-called developers hot reload playground.
 * The ColorScheme color selection in `SchemeColor` includes all colors in 
-  `ColorScheme` supported by Flutter 2.8. It is recommended to avoid using the
+  `ColorScheme` supported by Flutter 2.8. You may want to avoid using the
   `primaryVariant` and `secondaryVariant` colors if you want to avoid later
-  migrations, because these variant colors are being deprecated, 
+  migrations. These variant colors are being deprecated in Flutter SDK, 
   see [#93427](https://github.com/flutter/flutter/pull/93427). 
 * A later FlexColorScheme version will add support for the new Material 3
   colors in `ColorScheme` when they land in the stable channel.
 * This quick selection of `ColorScheme` based colors as none standard themed
   colors of widget sub-themes, may be extended to a few more sub-themes in 
-  future versions, if it is seen as a practical and quick way to customize 
-  widget sub-theme colors within the constraints of colors in 
+  future versions. At least if it is seen as a practical and quick way to 
+  customize widget sub-theme colors within the constraints of colors in 
   the `theme.colorScheme`. 
 * As before you can still apply your own total custom sub-themes to the 
   `ThemeData` created with `FlexColorScheme` by using `copyWith`. 
   FlexColorScheme is a way to easily make fancy and color wise consistent and 
   balanced `ThemeData` objects using convenience shortcut properties and 
-  methods, it does not prevent you from further modifying and tuning the 
-  produced `ThemeData` with with standard Flutter SDK features.
+  methods. It does not prevent you from further modifying and tuning the 
+  produced `ThemeData` with standard Flutter SDK features.
 
 
 * **Removed:** The `uses-material-design: true` line from library 
@@ -112,9 +112,9 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 
 * **Example 5 - Themes Playground**
-  * Fixed onColor for a few colors in the ThemeData color presentation for cases
-    where it might differ from colorScheme onColors. This could happen when 
-    disabling FlexColorScheme and when some colors do not match its onColors.
+  * Fixed onColor for a few colors in the ThemeData color presentation boxes 
+    for cases where it might differ from colorScheme onColors. This could happen 
+    when disabling FlexColorScheme.
   * Fixed index on _AppBarSettings card.
   * Changed the feature that animate hides not available options based on selections
     to a version that disables them and resets their state while disabled. 
@@ -132,40 +132,40 @@ All notable changes to the **FlexColorScheme** package are documented here.
     there is also a button that says COPY. Clicking on the ListTile still 
     works as well.
   * Add and updated app icon resources used by all the example apps.
-  * Use new version of StaggeredGridview 0.6.0 that no longer requires 
-    previously used bug work around(s) for a window resize issue it had 
-    since 2019. For more info on this solved issue, see this
+  * Update to new breaking version of StaggeredGridview 0.6.0. It no longer 
+    requires previously used bug work around(s) for a window resize issue that 
+    had existed since 2019. For more info on this solved issue, see this
     [article](https://rydmike.com/gridview).
-  * Added key new features in version 4.2.0 to the Themes Playground app and its
-    code generation.
+  * Added most new features in version 4.2.0 to the Themes Playground app and 
+    its theme code generation.
   
 
 * **Example theme - Copy Playground Theme**
-  * Added a new simple template example that is handy for trying copy-pasted
-    theme code generated by the Themes Playground example 5. 
+  * Added a new simple template example, that is handy for trying copy-pasted
+    theme setup code, generated by the Themes Playground example 5. 
   
 
 * **Documentation:** Reviewed and corrected many API docs. The API docs are 
   very thorough and complete. They usually cover any question you might have and
-  more. Added an API Intro and Guide chapter to the readme.
+  more. Added a brief "API Intro and Guide" chapter to the readme.
 
 
 * **Tests:** Added tests to cover the new features, now total 1123 tests.
 
 
-### What is next?
+### What is Next?
 
-Curious about what will is planned next for FlexColorScheme? Head over
+Curious about what is planned next for FlexColorScheme? Head over
 to the TODO section at the end of this page and read more 
 [here](#planned-updates-and-new-features).
 
   
 
-## [4.1.1] - November 20, 2021
+## v4.1.1 - November 20, 2021
 
 * **Documentation:** Fixed a broken link in the readme that pub.dev analyser found.
 
-## [4.1.0] - November 20, 2021
+## v4.1.0 - November 20, 2021
 
 * **Fix:** The `defaultRadius` in `FlexSubThemesData` now defaults to null 
   so all sub-themes border radius will default to M3 default border 
@@ -211,7 +211,7 @@ to the TODO section at the end of this page and read more
   * Modified tests to catch the fixed `defaultRadius` issue.
   * Added more tests, now total 1069 tests.
 
-## [4.0.0] - November 13, 2021
+## v4.0.0 - November 13, 2021
 
 * The breaking case is a minor difference in produced style for true
   black mode. Version 4.0.0 is still fully API compatible with version 3.
@@ -366,12 +366,12 @@ to the TODO section at the end of this page and read more
   * Added tests for the new features, total 1066 tests. 
   * Coverage 99%, will improve them more later.
    
-## [4.0.0-dev.1] - November 13, 2021
+## v4.0.0-dev.1 - November 13, 2021
 
 * See change log for stable 4.0.0, it was the same for the dev release.
   the text is just not repeated here anymore.
    
-## [3.0.1] - July 1, 2021
+## v3.0.1 - July 1, 2021
 
 * **Fix:** The internal order of swapping primary and secondary colors and reducing 
   used colors in static function `FlexSchemeColor.effective(FlexSchemeColor colors,
@@ -382,7 +382,7 @@ to the TODO section at the end of this page and read more
   in version 3.0.0. Total 741 tests, coverage 99.75%.
 * Documentation and typo fixes.
 
-## [3.0.0] - June 25, 2021
+## v3.0.0 - June 25, 2021
 
 * **Breaking:** The color `accentColor` is being deprecated in Flutter SDK `ThemeData` starting
   from version v2.3.0-0.1.pre. For more info see 
@@ -463,7 +463,7 @@ to the TODO section at the end of this page and read more
   Android 12 like image color branded themes, by wiring extracted image
   colors, to colors in a FlexColorScheme based theme.
 
-## [2.1.1] - March 30, 2021
+## v2.1.1 - March 30, 2021
 
 * **Change:** Made the VoidCallback `onSelect` in `FlexThemeModeOptionButton` nullable.
   The optional callback allows for the button to be used for example as a trailing
@@ -472,7 +472,7 @@ to the TODO section at the end of this page and read more
   normally want to use this callback, but not if you want the parent to handle it, that use case was
   not allowed with previous version. 
 
-## [2.1.0] - March 22, 2021
+## v2.1.0 - March 22, 2021
 
 * **Fix:** Toggling `FlexColorScheme(transparentStatusBar)` from true to false, did not restore the
   Android default status bar scrim, unless the app was completely rebuilt. This has been fixed.
@@ -500,7 +500,7 @@ to the TODO section at the end of this page and read more
   These only work on Android builds and do not have any functionality on the live Web builds.
 * **Tests:** Added tests for the new features. Total 690 tests, coverage 99.75%.
 
-## [2.0.0] - March 15, 2021
+## v2.0.0 - March 15, 2021
 
 * **First** stable release of FlexColorScheme with sound null safety.
 * Includes the changes from [2.0.0-nullsafety.1] and [2.0.0-nullsafety.2].
@@ -508,7 +508,7 @@ to the TODO section at the end of this page and read more
   revised to be disabled by default. To use a divider on the top of the system navigation bar on Android, 
   you have to enabled it manually. This is more in line with expected default behaviour. 
   
-## [2.0.0-nullsafety.2] - March 15, 2021
+## v2.0.0-nullsafety.2 - March 15, 2021
 
 * **Breaking** Minor change to the none default `tooltipsMatchBackground: true` border style, it now uses
   the theme divider color as its default outline color.
@@ -526,14 +526,14 @@ to the TODO section at the end of this page and read more
   thumbnails work and how they look on pub.dev before stable 2.0.0 release.
      
 
-## [2.0.0-nullsafety.1] - February 4, 2021
+## v2.0.0-nullsafety.1 - February 4, 2021
 
 * **First** version with null-safety.
 * **Breaking:** Removed the in version 1.3.0 deprecated `FlexSchemeSurfaceColors.themeSurface`, use
   `FlexSchemeSurfaceColors.surfaceStyle` instead.
 * **Tests:** Number of tests were reduced from 723 to 639, when all null related tests were removed.  
 
-## [1.4.1] - January 31, 2021
+## v1.4.1 - January 31, 2021
 
 * **New color schemes:** Added four new built-in color schemes.
   * **Barossa** - Barossa red and cardin green theme.
@@ -555,7 +555,7 @@ to the TODO section at the end of this page and read more
   * Added the new color schemes to the documentation.
   * Minor typo corrections. 
   
-## [1.4.0] - January 18, 2021
+## v1.4.0 - January 18, 2021
 
 * **Feature:** Added convenience property `scheme` to FlexColorScheme factories light and dark. This a shortcut for
   using the built-in color schemes. The `colors` property can still be used as before. The `.light` and
@@ -584,7 +584,7 @@ to the TODO section at the end of this page and read more
   * Tried finding and adding comments for the 3 missing API comments needed to reach 100% API
     documentation comments, not sure if it succeeded. I will see when the update is published.
 
-## [1.3.0] - January 7, 2021
+## v1.3.0 - January 7, 2021
 
 * Marked `FlexSchemeSurfaceColors.themeSurface` as deprecated in favor of the correctly named
   `FlexSchemeSurfaceColors.surfaceStyle` version. The older `themeSurface` will be removed when
@@ -602,7 +602,7 @@ to the TODO section at the end of this page and read more
   The result from this update will only be seen after it has been uploaded, but I doubt it will change much. If
   somebody happens to find the missing doc comments let my know, the IDE analyser does not find them either.
     
-## [1.2.0] - January 4, 2021
+## v1.2.0 - January 4, 2021
 
 * Added four new built-in color schemes. 
   * **Amber blue** - Amber blaze and blue color theme, based on Material amber and blue accent colors.
@@ -642,7 +642,7 @@ to the TODO section at the end of this page and read more
   `FlexColorScheme.toTheme` used Roboto. This was modified so that the resulting themes use the 
   same font and are thus more comparable.
 
-## [1.1.1] - December 31, 2020
+## v1.1.1 - December 31, 2020
 
 * Updated example 5 to include UI that can be used to vary the computed dark themes white blend percentage level.
   This was added to better demonstrate the `toDark` feature.
@@ -656,7 +656,7 @@ to the TODO section at the end of this page and read more
   the fix is not needed. Example 5 demonstrates the use case of `defaultError` as well.
 * Major documentation review and updates.
 
-## [1.1.0] - December 29, 2020
+## v1.1.0 - December 29, 2020
 
 * Added API to make a matching dark scheme from a light scheme. See
   [FlexSchemeColor.toDark](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSchemeColor/toDark.html).
@@ -682,12 +682,12 @@ to the TODO section at the end of this page and read more
     method `FlexColorScheme.themedSystemNavigationBar`.
 * Documentation updates and typo corrections.
 
-## [1.0.0] - December 21, 2020
+## v1.0.0 - December 21, 2020
 
 * Version 1.0.0 released
 * Documentation layout updates and typo corrections. 
   
-## [1.0.0-dev.2] - December 21, 2020
+## v1.0.0-dev.2 - December 21, 2020
 
 * Made planned API name changes, SchemeOnColors -> FlexSchemeOnColors and 
   SchemeSurfaceColors -> FlexSchemeSurfaceColors. These are lower level APIs that are 
@@ -703,7 +703,7 @@ to the TODO section at the end of this page and read more
   useful earlier but not anymore, using only TextSelectionThemeData is 
   enough in the latest stable version.     
 
-## [1.0.0-dev.1] - December 17, 2020
+## v1.0.0-dev.1 - December 17, 2020
 
 * First development pre-release on pub.dev.
 
