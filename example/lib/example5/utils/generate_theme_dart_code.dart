@@ -48,17 +48,44 @@ String generateThemeDartCode(ThemeController controller) {
   final String defRadius = controller.useDefaultRadius
       ? ''
       : '    defaultRadius: ${controller.cornerRadius},\n';
+  final String navBarColorCode = controller.navBarScheme == null
+      ? ''
+      : '    bottomNavigationBarSchemeColor: ${controller.navBarScheme},\n'
+          '    navigationBarIconSchemeColor: ${controller.navBarScheme},\n'
+          '    navigationBarTextSchemeColor: ${controller.navBarScheme},\n';
+  final String navBarHighLightCode = controller.navBarHighlight == null
+      ? ''
+      : '    navigationBarHighlightSchemeColor: ${controller.navBarHighlight},\n';
+  final String tabBarIndicatorCode = controller.tabBarIndicator == null
+      ? ''
+      : '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicator},\n';
+  final String chipSchemeColorCode = controller.chipSchemeColor == null
+      ? ''
+      : '    chipSchemeColor: ${controller.chipSchemeColor},\n';
+  final String inputDecoratorSchemeColorCode = controller
+              .inputDecoratorSchemeColor ==
+          null
+      ? ''
+      : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColor},\n';
   final String lightSubThemeCode = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
           '    useTextTheme: ${controller.useTextTheme},\n'
           '$defRadius'
           '    fabUseShape: ${controller.fabUseShape},\n'
           '    interactionEffects: ${controller.interactionEffects},\n'
-          '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+          '$tabBarIndicatorCode'
+          '$chipSchemeColorCode'
           '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
+          '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+          '    navigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+          '$navBarColorCode'
+          '$navBarHighLightCode'
+          '    navigationBarMutedUnselectedText: ${controller.navBarMuteUnselected},\n'
+          '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n'
           '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n'
           '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n'
           '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n'
+          '$inputDecoratorSchemeColorCode'
           '    blendOnColors: ${controller.blendLightOnColors},\n'
           '    blendTextTheme: ${controller.blendLightTextTheme},\n'
           '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
@@ -70,11 +97,19 @@ String generateThemeDartCode(ThemeController controller) {
           '$defRadius'
           '    fabUseShape: ${controller.fabUseShape},\n'
           '    interactionEffects: ${controller.interactionEffects},\n'
-          '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+          '$tabBarIndicatorCode'
+          '$chipSchemeColorCode'
           '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
+          '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+          '    navigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+          '$navBarColorCode'
+          '$navBarHighLightCode'
+          '    navigationBarMutedUnselectedText: ${controller.navBarMuteUnselected},\n'
+          '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n'
           '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n'
           '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n'
           '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n'
+          '$inputDecoratorSchemeColorCode'
           '    blendOnColors: ${controller.blendDarkOnColors},\n'
           '    blendTextTheme: ${controller.blendDarkTextTheme},\n'
           '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'

@@ -251,7 +251,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // opinionated defaults as a starting point before additional properties are
   // defined. If false, the starting point is the default M3 style for the
   // widget. The default value is true, using the opinionated values
-  // as starting point.
+  // as a starting point.
   navigationBarIsStyled: true,
 
   // Below are some of the quick override properties that you can use on the

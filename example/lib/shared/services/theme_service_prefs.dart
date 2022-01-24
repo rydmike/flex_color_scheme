@@ -305,6 +305,72 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
+  /// Loads used inputDecoratorSchemeColor setting in example 5.
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> inputDecoratorSchemeColor() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyInputDecoratorSchemeColor) ??
+              ThemeService.defaultInputDecoratorSchemeColor?.index ??
+              -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultInputDecoratorSchemeColor;
+    }
+  }
+
+  /// Persists used inputDecoratorSchemeColor setting in example 5.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveInputDecoratorSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyInputDecoratorSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used chipSchemeColor setting in example 5.
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> chipSchemeColor() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyChipSchemeColor) ??
+          ThemeService.defaultChipSchemeColor?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultChipSchemeColor;
+    }
+  }
+
+  /// Persists used chipSchemeColor setting in example 5.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveChipSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyChipSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   /// Loads used surface mode setting in example 5.
   @override
   Future<FlexSurfaceMode> surfaceMode() async {
@@ -490,6 +556,38 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
+  /// Loads used navBarHighlight setting in example 5.
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> navBarHighlight() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyNavBarHighlight) ??
+          ThemeService.defaultNavBarHighlight?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultNavBarHighlight;
+    }
+  }
+
+  /// Persists used navBarHighlight setting in example 5.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveNavBarHighlight(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyNavBarHighlight, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   /// Loads used bottom navigation bar opacity setting in example 5.
   @override
   Future<double> bottomNavigationBarOpacity() async {
@@ -557,6 +655,93 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveNavBarStyle(FlexSystemNavBarStyle value) async {
     try {
       await _prefs.setInt(ThemeService.keyNavBarStyle, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used navBarScheme setting in example 5.
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> navBarScheme() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyNavBarScheme) ??
+          ThemeService.defaultNavBarScheme?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultNavBarScheme;
+    }
+  }
+
+  /// Persists used navBarScheme setting in example 5.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveNavBarScheme(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyNavBarScheme, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used tabBarIndicator setting in example 5.
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> tabBarIndicator() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyTabBarIndicator) ??
+          ThemeService.defaultTabBarIndicator?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTabBarIndicator;
+    }
+  }
+
+  /// Persists used tabBarIndicator setting in example 5.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveTabBarIndicator(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyTabBarIndicator, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used navBarMuteUnselected setting in example 5.
+  @override
+  Future<bool> navBarMuteUnselected() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyNavBarMuteUnselected) ??
+          ThemeService.defaultNavBarMuteUnselected;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultNavBarMuteUnselected;
+    }
+  }
+
+  /// Persists navBarMuteUnselected setting in example 5.
+  @override
+  Future<void> saveNavBarMuteUnselected(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyNavBarMuteUnselected, value);
     } catch (e) {
       debugPrint(e.toString());
     }

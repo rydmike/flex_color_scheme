@@ -136,7 +136,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
     previously used bug work around(s) for a window resize issue it had 
     since 2019. For more info on this solved issue, see this
     [article](https://rydmike.com/gridview).
-  * **TODO:** Add the new features in version 4.2.0 to the Themes Playground app.
+  * Added key new features in version 4.2.0 to the Themes Playground app and its
+    code generation.
 
 
 * **Documentation:** Reviewed and corrected many API docs. The API docs are 

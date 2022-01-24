@@ -34,6 +34,9 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorBorderType = await _themeService.inputDecoratorBorderType();
     _inputDecoratorUnfocusedHasBorder =
         await _themeService.inputDecoratorUnfocusedHasBorder();
+    _inputDecoratorSchemeColor =
+        await _themeService.inputDecoratorSchemeColor();
+    _chipSchemeColor = await _themeService.chipSchemeColor();
     _surfaceMode = await _themeService.surfaceMode();
     _blendLevel = await _themeService.blendLevel();
     _lightAppBarStyle = await _themeService.lightAppBarStyle();
@@ -41,9 +44,13 @@ class ThemeController with ChangeNotifier {
     _appBarOpacity = await _themeService.appBarOpacity();
     _appBarElevation = await _themeService.appBarElevation();
     _navBarStyle = await _themeService.navBarStyle();
+    _navBarScheme = await _themeService.navBarScheme();
+    _navBarHighlight = await _themeService.navBarHighlight();
+    _navBarMuteUnselected = await _themeService.navBarMuteUnselected();
     _useNavDivider = await _themeService.useNavDivider();
     _transparentStatusBar = await _themeService.transparentStatusBar();
     _tabBarStyle = await _themeService.tabBarStyle();
+    _tabBarIndicator = await _themeService.tabBarIndicator();
     _bottomNavigationBarOpacity =
         await _themeService.bottomNavigationBarOpacity();
     _bottomNavigationBarElevation =
@@ -96,6 +103,9 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultInputDecoratorBorderType, false);
     await setInputDecoratorUnfocusedHasBorder(
         ThemeService.defaultInputDecoratorUnfocusedHasBorder, false);
+    await setInputDecoratorSchemeColor(
+        ThemeService.defaultInputDecoratorSchemeColor, false);
+    await setChipSchemeColor(ThemeService.defaultChipSchemeColor, false);
     await setSurfaceMode(ThemeService.defaultSurfaceMode, false);
     await setBlendLevel(ThemeService.defaultBlendLevel, false);
     await setLightAppBarStyle(ThemeService.defaultLightAppBarStyle, false);
@@ -105,11 +115,16 @@ class ThemeController with ChangeNotifier {
     await setTransparentStatusBar(
         ThemeService.defaultTransparentStatusBar, false);
     await setTabBarStyle(ThemeService.defaultTabBarStyle, false);
+    await setTabBarIndicator(ThemeService.defaultTabBarIndicator, false);
     await setBottomNavigationBarOpacity(
         ThemeService.defaultBottomNavigationBarOpacity, false);
     await setBottomNavigationBarElevation(
         ThemeService.defaultBottomNavigationBarElevation, false);
     await setNavBarStyle(ThemeService.defaultNavBarStyle, false);
+    await setNavBarScheme(ThemeService.defaultNavBarScheme, false);
+    await setNavBarHighlight(ThemeService.defaultNavBarHighlight, false);
+    await setNavBarMuteUnselected(
+        ThemeService.defaultNavBarMuteUnselected, false);
     await setUseNavDivider(ThemeService.defaultUseNavDivider, false);
     await setTooltipsMatchBackground(
         ThemeService.defaultTooltipsMatchBackground, false);
@@ -295,6 +310,26 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveInputDecoratorUnfocusedHasBorder(value);
   }
 
+  late SchemeColor? _inputDecoratorSchemeColor;
+  SchemeColor? get inputDecoratorSchemeColor => _inputDecoratorSchemeColor;
+  Future<void> setInputDecoratorSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _inputDecoratorSchemeColor) return;
+    _inputDecoratorSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveInputDecoratorSchemeColor(value);
+  }
+
+  late SchemeColor? _chipSchemeColor;
+  SchemeColor? get chipSchemeColor => _chipSchemeColor;
+  Future<void> setChipSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _chipSchemeColor) return;
+    _chipSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveChipSchemeColor(value);
+  }
+
   late FlexAppBarStyle _lightAppBarStyle;
   FlexAppBarStyle get lightAppBarStyle => _lightAppBarStyle;
   Future<void> setLightAppBarStyle(FlexAppBarStyle? value,
@@ -359,6 +394,16 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveTabBarStyle(value);
   }
 
+  late SchemeColor? _tabBarIndicator;
+  SchemeColor? get tabBarIndicator => _tabBarIndicator;
+  Future<void> setTabBarIndicator(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _tabBarIndicator) return;
+    _tabBarIndicator = value;
+    if (notify) notifyListeners();
+    await _themeService.saveTabBarIndicator(value);
+  }
+
   late double _bottomNavigationBarOpacity;
   double get bottomNavigationBarOpacity => _bottomNavigationBarOpacity;
   Future<void> setBottomNavigationBarOpacity(double? value,
@@ -390,6 +435,36 @@ class ThemeController with ChangeNotifier {
     _navBarStyle = value;
     if (notify) notifyListeners();
     await _themeService.saveNavBarStyle(value);
+  }
+
+  late SchemeColor? _navBarScheme;
+  SchemeColor? get navBarScheme => _navBarScheme;
+  Future<void> setNavBarScheme(SchemeColor? value, [bool notify = true]) async {
+    if (value == _navBarScheme) return;
+    _navBarScheme = value;
+    if (notify) notifyListeners();
+    await _themeService.saveNavBarScheme(value);
+  }
+
+  late SchemeColor? _navBarHighlight;
+  SchemeColor? get navBarHighlight => _navBarHighlight;
+  Future<void> setNavBarHighlight(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _navBarHighlight) return;
+    _navBarHighlight = value;
+    if (notify) notifyListeners();
+    await _themeService.saveNavBarHighlight(value);
+  }
+
+  late bool _navBarMuteUnselected;
+  bool get navBarMuteUnselected => _navBarMuteUnselected;
+  Future<void> setNavBarMuteUnselected(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _navBarMuteUnselected) return;
+    _navBarMuteUnselected = value;
+    if (notify) notifyListeners();
+    await _themeService.saveNavBarMuteUnselected(value);
   }
 
   late bool _useNavDivider;
