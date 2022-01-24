@@ -730,7 +730,7 @@ Have a new suggestion and idea? Feel free to open a
 in the repo. There is also a project where active and recent TODOs are
 tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
 
-### TODO
+## TODO
 
 - Add a sub-theme for the `NavigationRail`.
 - Add `SchemeColor` color selection for the Floating Action Button sub-theme.
@@ -748,7 +748,8 @@ tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
 - For version 5 also consider adding `SchemeColor` selection to TabBar, it might
   be possible to implement is an additional none-breaking feature.
 
-### COMPLETED
+## DONE
+
 - Version 4.2.0 support making themes from standard ColorScheme. More 
   customization of sub-themes. Support for M3 NavigationBar and sub-theming it,
   and a default that matches FlexColorScheme styles.
@@ -787,7 +788,7 @@ tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
 - Complete the documentation.
 - Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
 
-### MAYBE
+## MAYBE
 
 The maybe issues below were on the TODO agenda earlier, however it looks a 
 better alternative going forward is to replace them with the Material 3 design
@@ -817,9 +818,9 @@ uses it as well, then why not.
   - Color palette [tools](https://onextrapixel.com/best-tools-generate-color-palettes/) as info.
 
 
-### OUT OF SCOPE
+## OUT OF SCOPE
 
-#### Serialization of FlexColorScheme  
+### Serialization of FlexColorScheme  
   
 Including built-in serialization of FlexColorScheme, and its key classes has 
 been suggested. I consider `FlexColorScheme` to be functionally on a level 
