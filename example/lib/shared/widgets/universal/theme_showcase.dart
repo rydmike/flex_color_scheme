@@ -37,9 +37,9 @@ class ThemeShowcase extends StatelessWidget {
         const SizedBox(height: 8),
         const LegacyButtonIconShowcase(),
         const Divider(),
-        const ToggleFabIconButtonsShowcase(),
+        const TogglePopupDropdownButtonsShowcase(),
         const SizedBox(height: 8),
-        const CircleAvatarAndTooltipShowcase(),
+        const FabCircleAvatarAndTooltipShowcase(),
         const CheckboxShowcase(),
         const ChipShowcase(),
         const Divider(),
@@ -221,8 +221,8 @@ class LegacyButtonIconShowcase extends StatelessWidget {
   }
 }
 
-class ToggleFabIconButtonsShowcase extends StatelessWidget {
-  const ToggleFabIconButtonsShowcase({Key? key, this.enabled = true})
+class TogglePopupDropdownButtonsShowcase extends StatelessWidget {
+  const TogglePopupDropdownButtonsShowcase({Key? key, this.enabled = true})
       : super(key: key);
   final bool enabled;
 
@@ -243,19 +243,7 @@ class ToggleFabIconButtonsShowcase extends StatelessWidget {
           ],
         ),
         _PopupMenuButton(enabled: enabled),
-        FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Tooltip on\nFloatingActionButton',
-          child: const Icon(Icons.accessibility),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: IconButton(
-            icon: const Icon(Icons.accessibility),
-            tooltip: 'Tooltip on\nIconButton',
-            onPressed: () {},
-          ),
-        ),
+        const _DropDownButton(),
       ],
     );
   }
@@ -279,7 +267,7 @@ class _PopupMenuButton extends StatelessWidget {
           PopupMenuItem<int>(value: 2, child: Text('Option 2')),
           PopupMenuItem<int>(value: 3, child: Text('Option 3')),
           PopupMenuItem<int>(value: 4, child: Text('Option 4')),
-          PopupMenuItem<int>(value: 4, child: Text('Option 5')),
+          PopupMenuItem<int>(value: 5, child: Text('Option 5')),
         ],
         child: AbsorbPointer(
           child: TextButton(
@@ -296,8 +284,77 @@ class _PopupMenuButton extends StatelessWidget {
   }
 }
 
-class CircleAvatarAndTooltipShowcase extends StatelessWidget {
-  const CircleAvatarAndTooltipShowcase({Key? key}) : super(key: key);
+class _DropDownButton extends StatefulWidget {
+  const _DropDownButton({Key? key}) : super(key: key);
+
+  @override
+  State<_DropDownButton> createState() => _DropDownButtonState();
+}
+
+class _DropDownButtonState extends State<_DropDownButton> {
+  String selectedItem = 'Dropdown button 1';
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: selectedItem,
+      onChanged: (String? value) {
+        setState(() {
+          selectedItem = value ?? 'Dropdown button 1';
+        });
+      },
+      items: <String>[
+        'Dropdown button 1',
+        'Dropdown button 2',
+        'Dropdown button 3',
+        'Dropdown button 4',
+        'Dropdown button 5'
+      ].map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
+
+class _DropDownButtonFormField extends StatefulWidget {
+  const _DropDownButtonFormField({Key? key}) : super(key: key);
+
+  @override
+  State<_DropDownButtonFormField> createState() =>
+      _DropDownButtonFormFieldState();
+}
+
+class _DropDownButtonFormFieldState extends State<_DropDownButtonFormField> {
+  String selectedItem = 'Dropdown button form field 1';
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<String>(
+      value: selectedItem,
+      onChanged: (String? value) {
+        setState(() {
+          selectedItem = value ?? 'Dropdown button form field 1';
+        });
+      },
+      items: <String>[
+        'Dropdown button form field 1',
+        'Dropdown button form field 2',
+        'Dropdown button form field 3',
+        'Dropdown button form field 4',
+        'Dropdown button form field 5'
+      ].map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
+
+class FabCircleAvatarAndTooltipShowcase extends StatelessWidget {
+  const FabCircleAvatarAndTooltipShowcase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -305,16 +362,30 @@ class CircleAvatarAndTooltipShowcase extends StatelessWidget {
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 8,
       runSpacing: 4,
-      children: const <Widget>[
-        Tooltip(
+      children: <Widget>[
+        FloatingActionButton(
+          onPressed: () {},
+          tooltip: 'Tooltip on\nFloatingActionButton',
+          child: const Icon(Icons.accessibility),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: IconButton(
+            icon: const Icon(Icons.accessibility),
+            tooltip: 'Tooltip on\nIconButton',
+            onPressed: () {},
+          ),
+        ),
+        const Tooltip(
           message: 'Tooltip on\nCircleAvatar',
           child: CircleAvatar(
             child: Text('AV'),
           ),
         ),
-        Tooltip(
-            message: 'Current tooltip theme.\nThis a two row tooltip.',
-            child: Text('Text with tooltip')),
+        const Tooltip(
+          message: 'Current tooltip theme.\nThis a two row tooltip.',
+          child: Text('Text with tooltip'),
+        ),
       ],
     );
   }
@@ -468,13 +539,15 @@ class _TextInputFieldState extends State<TextInputField> {
                 : null,
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         const TextField(
           enabled: false,
           decoration: InputDecoration(
             labelText: 'Disabled text input',
           ),
         ),
+        const SizedBox(height: 8),
+        const _DropDownButtonFormField(),
       ],
     );
   }
