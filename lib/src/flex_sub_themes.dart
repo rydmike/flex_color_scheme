@@ -159,11 +159,16 @@ enum SchemeColor {
 ///   border radius, but the none floating one should remain
 ///   straight. Unclear if it can be done via SDK's current theming features,
 ///   will investigate more in future version.
-/// * [Drawer] should have 16dp default rounding on shown side edge, but in
-///   current version of Flutter SDK (2.8.1 when this was written) it has
-///   no theme property to enable
-///   this. It is coming in later Flutter version since it is required by the
-///   Material 3 design. When it is available, it will be added.
+/// * [Drawer] should have have rounding on shown side edge, it is in recent
+///   version (2.8.0) now possible to assign a Shape in drawer theme. But
+///   Drawer uses same theme when used as Drawer and EndDrawer and the rounding
+///   should be on end edge on Drawer and start edge in EndDrawer, we cannot do
+///   that without having two Shapes in its theme or other usage behaviour
+///   modifying. A default behaviour in SDK can implement by looking up
+///   if Drawer is being used in Scaffold as Drawer or EndDrawer, but still
+///   messy and has limitations. Also the M3 16dp rounding on visible edge was
+///   no longer mentioned in M3 guide. Will still have to wait and see with
+///   this one.
 class FlexSubThemes {
   /// Private constructor for the FlexSubThemes static class to prevent it from
   /// being instantiated or extended.
