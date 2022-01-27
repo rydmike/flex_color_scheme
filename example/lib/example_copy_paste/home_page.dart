@@ -227,8 +227,8 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const <Widget>[
-            ToggleFabIconButtonsShowcase(),
-            CircleAvatarAndTooltipShowcase(),
+            TogglePopupDropdownButtonsShowcase(),
+            FabCircleAvatarAndTooltipShowcase(),
             CheckboxShowcase(),
             ChipShowcase(),
           ],

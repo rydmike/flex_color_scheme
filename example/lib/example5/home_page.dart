@@ -1708,11 +1708,11 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
         children: <Widget>[
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: ToggleFabIconButtonsShowcase(),
+            child: TogglePopupDropdownButtonsShowcase(),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            child: CircleAvatarAndTooltipShowcase(),
+            child: FabCircleAvatarAndTooltipShowcase(),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
