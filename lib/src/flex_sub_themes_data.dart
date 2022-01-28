@@ -68,10 +68,11 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorFillColor,
     this.inputDecoratorBorderType = FlexInputBorderType.outline,
     this.inputDecoratorUnfocusedHasBorder = true,
-    this.chipRadius,
-    this.chipSchemeColor,
     this.fabRadius,
     this.fabUseShape = true,
+    this.fabSchemeColor,
+    this.chipRadius,
+    this.chipSchemeColor,
     this.cardRadius,
     this.cardElevation = kCardElevation,
     this.popupMenuRadius,
@@ -365,6 +366,13 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Defaults to true.
   final bool fabUseShape;
+
+  /// Defines which [Theme] based [ColorScheme] based color the FAB's (Floating
+  /// Action Buttons) use as their base color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.secondary color via
+  /// theme defaults.
+  final SchemeColor? fabSchemeColor;
 
   /// Border radius override value for [Chip] widgets.
   final double? chipRadius;
@@ -731,6 +739,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? inputDecoratorUnfocusedHasBorder,
     final double? fabRadius,
     final bool? fabUseShape,
+    final SchemeColor? fabSchemeColor,
     final double? chipRadius,
     final SchemeColor? chipSchemeColor,
     final double? cardRadius,
@@ -797,6 +806,7 @@ class FlexSubThemesData with Diagnosticable {
           this.inputDecoratorUnfocusedHasBorder,
       fabRadius: fabRadius ?? this.fabRadius,
       fabUseShape: fabUseShape ?? this.fabUseShape,
+      fabSchemeColor: fabSchemeColor ?? this.fabSchemeColor,
       chipRadius: chipRadius ?? this.chipRadius,
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
       cardRadius: cardRadius ?? this.cardRadius,
@@ -883,6 +893,7 @@ class FlexSubThemesData with Diagnosticable {
             inputDecoratorUnfocusedHasBorder &&
         other.fabRadius == fabRadius &&
         other.fabUseShape == fabUseShape &&
+        other.fabSchemeColor == fabSchemeColor &&
         other.chipRadius == chipRadius &&
         other.chipSchemeColor == chipSchemeColor &&
         other.cardRadius == cardRadius &&
@@ -954,6 +965,7 @@ class FlexSubThemesData with Diagnosticable {
       inputDecoratorUnfocusedHasBorder,
       fabRadius,
       fabUseShape,
+      fabSchemeColor,
       chipRadius,
       chipSchemeColor,
       cardRadius,
@@ -1032,6 +1044,7 @@ class FlexSubThemesData with Diagnosticable {
         'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
+    properties.add(EnumProperty<SchemeColor>('fabSchemeColor', fabSchemeColor));
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
     properties
         .add(EnumProperty<SchemeColor>('chipSchemeColor', chipSchemeColor));
