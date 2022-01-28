@@ -2,6 +2,17 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
+
+## v4.3.0 - January 29, 2022 - WORK IN PROGRESS
+
+* **New:** Added additional `ColorScheme` color selection options to 
+  sub-themes configuration class `FlexSubThemesData`. The feature
+  introduced in version 4.2.0 is now also supported by sub themes for
+  - Floating Action Button, via `FlexSubThemesData.fabSchemeColor`
+
+
+* **TODO:** Add tests for new prop `fabSchemeColor` and its features.
+
 ## v4.2.0 - January 24, 2022
 
 * **New:** Updated required Dart SDK to minimum 2.15 that Flutter 2.8.0 uses.  
