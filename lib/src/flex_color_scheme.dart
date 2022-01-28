@@ -4522,14 +4522,17 @@ class FlexColorScheme with Diagnosticable {
               visualDensity: visualDensity,
             )
           : null,
+      // Input decorator theme.
       inputDecorationTheme: effectiveInputDecorationTheme,
+      // FAB, floating action button theme.
       floatingActionButtonTheme: useSubThemes
           ? FlexSubThemes.floatingActionButtonTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.fabSchemeColor,
               radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
               useShape: subTheme.fabUseShape,
             )
           : null,
-
       // The default chip theme in Flutter does not work correctly with dark
       // themes. See issue: https://github.com/flutter/flutter/issues/65663
       // The chip theme below fixes it by using the colorScheme.primary color.
