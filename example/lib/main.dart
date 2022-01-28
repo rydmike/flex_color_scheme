@@ -220,6 +220,19 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // enable easy selection of other options.
   inputDecoratorSchemeColor: SchemeColor.primary,
 
+  // Some FAB (Floating Action Button) settings.
+  //
+  // If fabUseShape is false, no shape will be added to FAB theme, it will get
+  // whatever default shape the widget default behavior applies.
+  //
+  // fabUseShape: false,
+  //
+  // Select the ColorScheme color used by FABs as their base/background color
+  // Secondary is default so no need to set that, used here as placeholder to
+  // enable easy selection of other options.
+  //
+  // fabSchemeColor: SchemeColor.secondary,
+
   // Select the ColorScheme color used by Chips as their base color
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.
