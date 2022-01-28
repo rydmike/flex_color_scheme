@@ -923,24 +923,62 @@ class FlexSubThemes {
   /// (pill) shaped as before, despite otherwise using a rounder or M3 design.
   /// The circular M2 FAB goes well with those designs too and is more familiar.
   static FloatingActionButtonThemeData floatingActionButtonTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    ///
+    /// Unlike most other sub-themes that can use a passed in [ColorScheme],
+    /// this one is optional. If not provided, the FABs default themed
+    /// foreground and background colors are used. If a [colorScheme] is given,
+    /// the color to use as FAB background color can be selected with the
+    /// [backgroundSchemeColor] parameter.
+    final ColorScheme? colorScheme,
+
+    /// Select which color from the passed in [colorScheme] parameter to use as
+    /// the FAB's background color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined or if passed in [colorScheme] is null, then
+    /// [theme.colorScheme.secondary] will be used via FAB widget's default
+    /// un-themed color behavior.
+    ///
+    /// The foreground color automatically uses the selected background
+    /// color's contrast color pair in the passed in [colorScheme] property.
+    final SchemeColor? backgroundSchemeColor,
+
     /// Corner radius of FAB.
     ///
     /// Defaults to [kDefaultRadius] = 16.
     final double? radius,
 
-    /// Set to false, to not apply Shape theming to the FAB. It will then keep
-    /// using its M2 default round shape and stadium shape for extended FAB.
+    /// Set to false, to not apply Shape theming to the FAB.
+    ///
+    /// If set to false, the Shape property will be kept null, regardless
+    /// of what border radius was given. This results in that the FAB
+    /// using fab theme data, will use and implement its SDK default
+    /// shape behavior.
     final bool useShape = true,
-  }) =>
-      FloatingActionButtonThemeData(
-        shape: useShape
-            ? RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(radius ?? kDefaultRadius),
-                ),
-              )
-            : null,
-      );
+  }) {
+    final Color? bgColor = colorScheme == null
+        ? null
+        : backgroundSchemeColor == null
+            ? null
+            : schemeColor(backgroundSchemeColor, colorScheme);
+    final Color? fgColor =
+        bgColor == null || colorScheme == null || backgroundSchemeColor == null
+            ? null
+            : schemeColorPair(backgroundSchemeColor, colorScheme);
+    return FloatingActionButtonThemeData(
+      foregroundColor: fgColor,
+      backgroundColor: bgColor,
+      shape: useShape
+          ? RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kDefaultRadius),
+              ),
+            )
+          : null,
+    );
+  }
 
   /// An opinionated [ChipThemeData] with custom border radius and rather
   /// involved theme.
