@@ -16,7 +16,16 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     test(
-        'FTD1.00DefL: GIVEN FlexThemeData.light made with no parameters '
+        'FTD1.00DefL1: GIVEN FFlexColorScheme.light().toTheme '
+        'EXPECT its ThemeData to be equal to FlexThemeData.light().', () {
+      expect(
+        FlexColorScheme.light().toTheme,
+        equals(FlexThemeData.light()),
+      );
+    });
+
+    test(
+        'FTD1.00DefL2: GIVEN FlexThemeData.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
           FlexThemeData.light(),
@@ -116,7 +125,16 @@ void main() {
     });
 
     test(
-        'FTD1.00DefL: GIVEN FlexThemeData.dark made with no parameters '
+        'FTD1.00DefD1: GIVEN FFlexColorScheme.dark().toTheme '
+        'EXPECT its ThemeData to be equal to FlexThemeData.dark().', () {
+      expect(
+        FlexColorScheme.dark().toTheme,
+        equals(FlexThemeData.dark()),
+      );
+    });
+
+    test(
+        'FTD1.00DefD2: GIVEN FlexThemeData.dark made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
           FlexThemeData.dark(),

@@ -930,14 +930,17 @@ class FlexSubThemes {
     /// foreground and background colors are used. If a [colorScheme] is given,
     /// the color to use as FAB background color can be selected with the
     /// [backgroundSchemeColor] parameter.
+    ///
+    /// The optional colorScheme and its behavior was used to keep the API of
+    /// this function backwards compatible with previous versions.
     final ColorScheme? colorScheme,
 
     /// Select which color from the passed in [colorScheme] parameter to use as
-    /// the FAB's background color.
+    /// the floating action button background color.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined or if passed in [colorScheme] is null, then
+    /// If not defined, or if passed in [colorScheme] is null, then
     /// [theme.colorScheme.secondary] will be used via FAB widget's default
     /// un-themed color behavior.
     ///

@@ -1062,6 +1062,74 @@ void main() {
     });
 
     test(
+        'FST1.14c: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same values', () {
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          radius: 30,
+          backgroundSchemeColor: SchemeColor.primaryVariant,
+        ),
+        equals(
+          const FloatingActionButtonThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(30),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.14d: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
+          radius: 32,
+        ),
+        equals(
+          const FloatingActionButtonThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(32),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.14e: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
+          radius: 32,
+          backgroundSchemeColor: SchemeColor.onPrimary,
+        ),
+        equals(
+          FloatingActionButtonThemeData(
+            backgroundColor: colorScheme.onPrimary,
+            foregroundColor: colorScheme.primary,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(32),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
         'FST1.15: GIVEN a default FlexSubTheme.chipTheme() '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
