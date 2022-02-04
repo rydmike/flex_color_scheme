@@ -1480,12 +1480,12 @@ class _BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool _isLight = Theme.of(context).brightness == Brightness.light;
-    final double _navBarOpacity =
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final double navBarOpacity =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.bottomNavigationBarOpacity
             : 1;
-    final double _navBarElevation =
+    final double navBarElevation =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.bottomNavigationBarElevation
             : 8;
@@ -1506,8 +1506,8 @@ class _BottomNavigation extends StatelessWidget {
             title: Slider.adaptive(
               max: 100,
               divisions: 100,
-              label: (_navBarOpacity * 100).toStringAsFixed(0),
-              value: _navBarOpacity * 100,
+              label: (navBarOpacity * 100).toStringAsFixed(0),
+              value: navBarOpacity * 100,
               onChanged:
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? (double value) {
@@ -1526,7 +1526,7 @@ class _BottomNavigation extends StatelessWidget {
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
-                    '${(_navBarOpacity * 100).toStringAsFixed(0)} %',
+                    '${(navBarOpacity * 100).toStringAsFixed(0)} %',
                     style: Theme.of(context)
                         .textTheme
                         .caption!
@@ -1551,8 +1551,8 @@ class _BottomNavigation extends StatelessWidget {
             title: Slider.adaptive(
               max: 24,
               divisions: 48,
-              label: _navBarElevation.toStringAsFixed(1),
-              value: _navBarElevation,
+              label: navBarElevation.toStringAsFixed(1),
+              value: navBarElevation,
               onChanged:
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.setBottomNavigationBarElevation
@@ -1568,7 +1568,7 @@ class _BottomNavigation extends StatelessWidget {
                     style: Theme.of(context).textTheme.caption,
                   ),
                   Text(
-                    _navBarElevation.toStringAsFixed(1),
+                    navBarElevation.toStringAsFixed(1),
                     style: Theme.of(context)
                         .textTheme
                         .caption!
@@ -1623,7 +1623,7 @@ class _BottomNavigation extends StatelessWidget {
           ListTile(
             title: const Text('Android system navigation bar'),
             subtitle: Text('Using themedSystemNavigationBar:\n'
-                '${explainStyle(controller.navBarStyle, _isLight)}'),
+                '${explainStyle(controller.navBarStyle, isLight)}'),
           ),
           ListTile(
             trailing: SystemNavBarStyleButtons(

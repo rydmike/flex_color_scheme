@@ -77,12 +77,12 @@ abstract class SyntaxHighlighter {
 }
 
 class DartSyntaxHighlighter extends SyntaxHighlighter {
-  DartSyntaxHighlighter([this._style]) {
+  DartSyntaxHighlighter([this.style]) {
     _spans = <_HighlightSpan>[];
-    _style ??= SyntaxHighlighterStyle.darkThemeStyle();
+    style ??= SyntaxHighlighterStyle.darkThemeStyle();
   }
 
-  SyntaxHighlighterStyle? _style;
+  SyntaxHighlighterStyle? style;
 
   static const List<String> _keywords = <String>[
     'abstract',
@@ -169,7 +169,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
         }
 
         formattedText.add(TextSpan(
-            style: span.textStyle(_style), text: span.textForSpan(_src)));
+            style: span.textStyle(style), text: span.textForSpan(_src)));
 
         currentPosition = span.end;
       }
@@ -179,10 +179,10 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
             .add(TextSpan(text: _src.substring(currentPosition, _src.length)));
       }
 
-      return TextSpan(style: _style!.baseStyle, children: formattedText);
+      return TextSpan(style: style!.baseStyle, children: formattedText);
     } else {
       // Parsing failed, return with only basic formatting
-      return TextSpan(style: _style!.baseStyle, text: src);
+      return TextSpan(style: style!.baseStyle, text: src);
     }
   }
 

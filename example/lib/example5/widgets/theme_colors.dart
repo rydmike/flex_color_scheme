@@ -29,8 +29,8 @@ class ThemeColors extends StatelessWidget {
     final bool swapLight = controller.swapLightColors;
     final bool swapDark = controller.swapDarkColors;
     // Size of the tappable color named boxes
-    const double _width = 125;
-    const double _height = 100;
+    const double colorTapWidth = 125;
+    const double colorTapHeight = 100;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -91,8 +91,8 @@ class ThemeColors extends StatelessWidget {
           //
           // PICK Primary color
           SizedBox(
-            width: _width,
-            height: _height,
+            width: colorTapWidth,
+            height: colorTapHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
@@ -138,8 +138,8 @@ class ThemeColors extends StatelessWidget {
           //
           // PICK Primary variant color
           SizedBox(
-            width: _width,
-            height: _height,
+            width: colorTapWidth,
+            height: colorTapHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
@@ -185,8 +185,8 @@ class ThemeColors extends StatelessWidget {
           //
           // PICK Secondary color
           SizedBox(
-            width: _width,
-            height: _height,
+            width: colorTapWidth,
+            height: colorTapHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
@@ -232,8 +232,8 @@ class ThemeColors extends StatelessWidget {
           //
           // PICK Secondary variant color
           SizedBox(
-            width: _width,
-            height: _height,
+            width: colorTapWidth,
+            height: colorTapHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,

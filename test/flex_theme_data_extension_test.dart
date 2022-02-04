@@ -1612,7 +1612,7 @@ void main() {
         equals(fcsLightTd),
       );
       // Same test for dark mode
-      final FlexColorScheme _fcsDark = FlexColorScheme.dark(
+      final FlexColorScheme fcsDark = FlexColorScheme.dark(
         colors: FlexColor.mandyRed.dark,
         scheme: FlexScheme.bigStone,
         usedColors: 3,
@@ -1687,7 +1687,7 @@ void main() {
           typography: Typography.material2018(platform: TargetPlatform.android),
           applyElevationOverlayColor: true,
         ),
-        _fcsDark.toTheme,
+        fcsDark.toTheme,
       );
     });
     test(

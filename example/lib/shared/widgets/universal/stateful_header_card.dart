@@ -150,14 +150,14 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
 
     // Force title widget for Card header to use opinionated bold style,
     // if we have a title, boldTitle is true and title was a Text.
-    Widget? _title = widget.title;
-    if (_title != null && _title is Text && widget.boldTitle) {
-      final Text textTitle = _title;
-      final TextStyle? _style = _title.style;
-      final String _text = textTitle.data ?? '';
-      _title = Text(
-        _text,
-        style: _style?.copyWith(fontWeight: FontWeight.bold) ??
+    Widget? usedTitle = widget.title;
+    if (usedTitle != null && usedTitle is Text && widget.boldTitle) {
+      final Text textTitle = usedTitle;
+      final TextStyle? usedTitleStyle = usedTitle.style;
+      final String useText = textTitle.data ?? '';
+      usedTitle = Text(
+        useText,
+        style: usedTitleStyle?.copyWith(fontWeight: FontWeight.bold) ??
             const TextStyle(fontWeight: FontWeight.bold),
       );
     }
@@ -180,7 +180,7 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
               child: ListTile(
                 contentPadding: widget.headerPadding,
                 leading: widget.leading,
-                title: _title,
+                title: usedTitle,
                 trailing: ExpandIcon(
                   size: 32,
                   isExpanded: _isOpen,

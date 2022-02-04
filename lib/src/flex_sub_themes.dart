@@ -642,7 +642,7 @@ class FlexSubThemes {
     /// being used, which is same as null default in ThemeData.
     final VisualDensity? visualDensity,
   }) {
-    final VisualDensity _visualDensity =
+    final VisualDensity usedVisualDensity =
         visualDensity ?? VisualDensity.adaptivePlatformDensity;
     return ToggleButtonsThemeData(
       borderWidth: borderWidth,
@@ -685,10 +685,10 @@ class FlexSubThemes {
         // uses, defaults to same value that ThemeData default.
         minWidth: minButtonSize.width -
             borderWidth * 2 +
-            _visualDensity.baseSizeAdjustment.dx,
+            usedVisualDensity.baseSizeAdjustment.dx,
         minHeight: minButtonSize.height -
             borderWidth * 2 +
-            _visualDensity.baseSizeAdjustment.dy,
+            usedVisualDensity.baseSizeAdjustment.dy,
       ),
     );
   }
@@ -775,28 +775,28 @@ class FlexSubThemes {
     final bool unfocusedHasBorder = true,
   }) {
     // Get selected color, defaults to primary.
-    final Color _baseColor = baseSchemeColor == null
+    final Color baseColor = baseSchemeColor == null
         ? colorScheme.primary
         : schemeColor(baseSchemeColor, colorScheme);
 
-    final Color _fillColor = fillColor ??
+    final Color usedFillColor = fillColor ??
         (colorScheme.brightness == Brightness.dark
-            ? _baseColor.withAlpha(kFillColorAlphaDark)
-            : _baseColor.withAlpha(kFillColorAlphaLight));
+            ? baseColor.withAlpha(kFillColorAlphaDark)
+            : baseColor.withAlpha(kFillColorAlphaLight));
 
     switch (borderType) {
       case FlexInputBorderType.outline:
         return InputDecorationTheme(
           filled: filled,
-          fillColor: _fillColor,
-          hoverColor: _baseColor.withAlpha(kHoverBackgroundAlpha),
-          focusColor: _baseColor.withAlpha(kFocusBackgroundAlpha),
+          fillColor: usedFillColor,
+          hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
+          focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
           focusedBorder: OutlineInputBorder(
             gapPadding: gapPadding,
             borderRadius:
                 BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
             borderSide: BorderSide(
-              color: _baseColor,
+              color: baseColor,
               width: focusedBorderWidth,
             ),
           ),
@@ -806,7 +806,7 @@ class FlexSubThemes {
                 BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
-                    color: _baseColor.withAlpha(kEnabledBorderAlpha),
+                    color: baseColor.withAlpha(kEnabledBorderAlpha),
                     width: unfocusedBorderWidth,
                   )
                 : BorderSide.none,
@@ -817,7 +817,7 @@ class FlexSubThemes {
                 BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
-                    color: _baseColor
+                    color: baseColor
                         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                         .withAlpha(kDisabledBackgroundAlpha),
                     width: unfocusedBorderWidth,
@@ -846,16 +846,16 @@ class FlexSubThemes {
       case FlexInputBorderType.underline:
         return InputDecorationTheme(
           filled: filled,
-          fillColor: _fillColor,
-          hoverColor: _baseColor.withAlpha(kHoverBackgroundAlpha),
-          focusColor: _baseColor.withAlpha(kFocusBackgroundAlpha),
+          fillColor: usedFillColor,
+          hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
+          focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
           focusedBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(radius ?? kButtonRadius),
               topRight: Radius.circular(radius ?? kButtonRadius),
             ),
             borderSide: BorderSide(
-              color: _baseColor,
+              color: baseColor,
               width: focusedBorderWidth,
             ),
           ),
@@ -866,7 +866,7 @@ class FlexSubThemes {
             ),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
-                    color: _baseColor.withAlpha(kEnabledBorderAlpha),
+                    color: baseColor.withAlpha(kEnabledBorderAlpha),
                     width: unfocusedBorderWidth,
                   )
                 : BorderSide.none,
@@ -878,7 +878,7 @@ class FlexSubThemes {
             ),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
-                    color: _baseColor
+                    color: baseColor
                         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                         .withAlpha(kDisabledBackgroundAlpha),
                     width: unfocusedBorderWidth,
@@ -1017,15 +1017,15 @@ class FlexSubThemes {
     final double? radius,
   }) {
     // Get base color, defaults to primary.
-    final Color _baseColor = baseSchemeColor == null
+    final Color usedBaseColor = baseSchemeColor == null
         ? colorScheme.primary
         : schemeColor(baseSchemeColor, colorScheme);
 
     // For all Chips  except disabled Chip.
-    final Color foreground =
-        _baseColor.blendAlpha(colorScheme.onSurface, kChipForegroundAlphaBlend);
+    final Color foreground = usedBaseColor.blendAlpha(
+        colorScheme.onSurface, kChipForegroundAlphaBlend);
     // For selected InputChip & ChoiceChip.
-    final Color selectedBackgroundColor = _baseColor.blendAlpha(
+    final Color selectedBackgroundColor = usedBaseColor.blendAlpha(
         colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
     // Text color, uses the foreground color for all chip style.
     final TextStyle effectiveLabelStyle =
@@ -1035,16 +1035,16 @@ class FlexSubThemes {
       brightness: ThemeData.estimateBrightnessForColor(colorScheme.primary),
       padding: const EdgeInsets.all(4),
       // For all Chip types, except disabled, InputChip & ChoiceChip.
-      backgroundColor:
-          _baseColor.blendAlpha(colorScheme.surface, kChipBackgroundAlphaBlend),
+      backgroundColor: usedBaseColor.blendAlpha(
+          colorScheme.surface, kChipBackgroundAlphaBlend),
       selectedColor: selectedBackgroundColor, // Selected InputChip
       secondarySelectedColor: selectedBackgroundColor, // Selected ChoiceChip
       checkmarkColor: foreground,
-      deleteIconColor: _baseColor,
+      deleteIconColor: usedBaseColor,
       // Same formula as on Elevated button and ToggleButtons. The Chip has
       // a built in scrim for disabled state, making it look a bit different
       // but it is pretty close.
-      disabledColor: _baseColor
+      disabledColor: usedBaseColor
           .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
           .withAlpha(kDisabledBackgroundAlpha),
       // Same label style on selected and not selected chips, their different
@@ -1412,30 +1412,30 @@ class FlexSubThemes {
         BottomNavigationBarLandscapeLayout.spread,
   }) {
     // Get item base color, defaults to primary.
-    final Color _baseColor = baseSchemeColor == null
+    final Color usedBaseColor = baseSchemeColor == null
         ? colorScheme.primary
         : schemeColor(baseSchemeColor, colorScheme);
     // Get bottom bar background, defaults to background.
-    final Color _backgroundColor = backgroundSchemeColor == null
+    final Color backgroundColor = backgroundSchemeColor == null
         ? colorScheme.background
         : schemeColor(backgroundSchemeColor, colorScheme);
     // Get the on color pair for the chosen background color.
-    final Color _backgroundOnColor = schemeColorPair(
+    final Color backgroundOnColor = schemeColorPair(
         backgroundSchemeColor ?? SchemeColor.background, colorScheme);
     return BottomNavigationBarThemeData(
       elevation: elevation,
-      backgroundColor: _backgroundColor.withOpacity(opacity),
+      backgroundColor: backgroundColor.withOpacity(opacity),
       landscapeLayout: landscapeLayout,
-      selectedItemColor: _baseColor,
+      selectedItemColor: usedBaseColor,
       selectedIconTheme: IconThemeData(
-        color: _baseColor,
+        color: usedBaseColor,
       ),
-      unselectedItemColor: _backgroundOnColor
-          .blendAlpha(_baseColor, unselectedAlphaBlend)
+      unselectedItemColor: backgroundOnColor
+          .blendAlpha(usedBaseColor, unselectedAlphaBlend)
           .withAlpha(unselectedAlpha),
       unselectedIconTheme: IconThemeData(
-        color: _backgroundOnColor
-            .blendAlpha(_baseColor, unselectedAlphaBlend)
+        color: backgroundOnColor
+            .blendAlpha(usedBaseColor, unselectedAlphaBlend)
             .withAlpha(unselectedAlpha),
       ),
     );
@@ -1611,36 +1611,36 @@ class FlexSubThemes {
     final int unselectedAlpha = 0xFF,
   }) {
     // Get text color, defaults to onSurface.
-    final Color _textColor = textSchemeColor == null
+    final Color textColor = textSchemeColor == null
         ? colorScheme.onSurface
         : schemeColor(textSchemeColor, colorScheme);
 
     // Get selected text style, defaults to FlexColorScheme.m3TextTheme.overline
     // if not defined.
-    final TextStyle _textStyle =
+    final TextStyle usedTextStyle =
         labelTextStyle ?? FlexColorScheme.m3TextTheme.overline!;
 
     // Get effective text sizes.
-    final double _selectedLabelSize =
-        selectedLabelSize ?? _textStyle.fontSize ?? 11;
-    final double _unselectedLabelSize =
-        unselectedLabelSize ?? _textStyle.fontSize ?? 11;
+    final double usedSelectedLabelSize =
+        selectedLabelSize ?? usedTextStyle.fontSize ?? 11;
+    final double usedUnselectedLabelSize =
+        unselectedLabelSize ?? usedTextStyle.fontSize ?? 11;
 
     // Determine if we should use a custom text style at all, if these props
     // are null, we should not and just fall back to widget defaults.
-    final bool _useTextStyle = labelTextStyle != null ||
+    final bool useTextStyle = labelTextStyle != null ||
         selectedLabelSize != null ||
         unselectedLabelSize != null ||
         textSchemeColor != null;
 
     // Get icon color, defaults to onSurface.
-    final Color _iconColor = iconSchemeColor == null
+    final Color usedIconColor = iconSchemeColor == null
         ? colorScheme.onSurface
         : schemeColor(iconSchemeColor, colorScheme);
 
     // Determine if we should use a custom icon theme at all, if these props
     // are null, we should not and just fall back to widget defaults.
-    final bool _useIconTheme = selectedIconSize != null ||
+    final bool useIconTheme = selectedIconSize != null ||
         unselectedIconSize != null ||
         iconSchemeColor != null;
 
@@ -1654,42 +1654,42 @@ class FlexSubThemes {
           ? schemeColor(highlightSchemeColor, colorScheme)
               .withAlpha(indicatorAlpha)
           : null,
-      labelTextStyle: _useTextStyle
+      labelTextStyle: useTextStyle
           ? MaterialStateProperty.resolveWith<TextStyle>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
-                  return _textStyle.copyWith(
-                    fontSize: _selectedLabelSize,
-                    color: _textColor,
+                  return usedTextStyle.copyWith(
+                    fontSize: usedSelectedLabelSize,
+                    color: textColor,
                   );
                 }
-                return _textStyle.copyWith(
-                  fontSize: _unselectedLabelSize,
+                return usedTextStyle.copyWith(
+                  fontSize: usedUnselectedLabelSize,
                   color: mutedUnselectedText
-                      ? _textColor
-                          .blendAlpha(_textColor, unselectedAlphaBlend)
+                      ? textColor
+                          .blendAlpha(textColor, unselectedAlphaBlend)
                           .withAlpha(unselectedAlpha)
-                      : _textColor,
+                      : textColor,
                 );
               },
             )
           : null,
-      iconTheme: _useIconTheme
+      iconTheme: useIconTheme
           ? MaterialStateProperty.resolveWith<IconThemeData>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
                   return IconThemeData(
                     size: selectedIconSize ?? 24,
-                    color: _iconColor,
+                    color: usedIconColor,
                   );
                 }
                 return IconThemeData(
                   size: unselectedIconSize ?? 24,
                   color: mutedUnselectedIcon
-                      ? _iconColor
-                          .blendAlpha(_iconColor, unselectedAlphaBlend)
+                      ? usedIconColor
+                          .blendAlpha(usedIconColor, unselectedAlphaBlend)
                           .withAlpha(unselectedAlpha)
-                      : _iconColor,
+                      : usedIconColor,
                 );
               },
             )
