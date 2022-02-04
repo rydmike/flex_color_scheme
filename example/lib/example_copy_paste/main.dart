@@ -13,8 +13,6 @@ import 'home_page.dart';
 // the Themes PlayGround https://rydmike.com/flexcolorschemeV4Tut5
 // -----------------------------------------------------------------------------
 void main() => runApp(const DemoApp());
-// ignore: unused_element
-late String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 
 class DemoApp extends StatefulWidget {
   const DemoApp({Key? key}) : super(key: key);
@@ -25,6 +23,9 @@ class DemoApp extends StatefulWidget {
 
 class _DemoAppState extends State<DemoApp> {
   ThemeMode themeMode = ThemeMode.system;
+
+  // ignore: unused_field
+  late final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 
   @override
   Widget build(BuildContext context) {
