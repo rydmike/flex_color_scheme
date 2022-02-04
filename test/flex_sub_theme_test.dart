@@ -982,8 +982,7 @@ void main() {
         'FST1.13: GIVEN a default FlexSubTheme.toggleButtonsTheme() EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
-      final VisualDensity _visualDensity =
-          VisualDensity.adaptivePlatformDensity;
+      final VisualDensity visualDensity = VisualDensity.adaptivePlatformDensity;
       expect(
         FlexSubThemes.toggleButtonsTheme(colorScheme: colorScheme),
         equals(
@@ -1015,8 +1014,8 @@ void main() {
                 .withAlpha(0x31),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
-              minWidth: 40 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dx,
-              minHeight: 40 - 1.5 * 2 + _visualDensity.baseSizeAdjustment.dy,
+              minWidth: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dx,
+              minHeight: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dy,
             ),
           ),
         ),

@@ -151,28 +151,28 @@ extension FlexColorExtensions on Color {
     final bool keepWhite = true,
   }) {
     if (shadeValue <= 0) return this;
-    int _shadeValue = shadeValue;
-    if (_shadeValue > 100) _shadeValue = 100;
+    int usedShadeValue = shadeValue;
+    if (usedShadeValue > 100) usedShadeValue = 100;
 
     // Trying to make black darker, just return black
     if (this == Colors.black && !lighten) return this;
     // Black is defined to be kept as black.
     if (this == Colors.black && keepBlack) return this;
     // Make black lighter as lighten was set and we do not keepBlack
-    if (this == Colors.black) return this.lighten(_shadeValue);
+    if (this == Colors.black) return this.lighten(usedShadeValue);
 
     // Trying to make white lighter, just return white
     if (this == Colors.white && lighten) return this;
     // White is defined to be kept as white.
     if (this == Colors.white && keepWhite) return this;
     // Make white darker as we do not keep white.
-    if (this == Colors.white) return darken(_shadeValue);
+    if (this == Colors.white) return darken(usedShadeValue);
     // We are dealing with some other color than white or black, so we
     // make it lighter or darker based on flag and requested shade %
     if (lighten) {
-      return this.lighten(_shadeValue);
+      return this.lighten(usedShadeValue);
     } else {
-      return darken(_shadeValue);
+      return darken(usedShadeValue);
     }
   }
 

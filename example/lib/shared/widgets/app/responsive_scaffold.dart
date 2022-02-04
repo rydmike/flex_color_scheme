@@ -576,11 +576,11 @@ class _AppMenuState extends State<_AppMenu> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
-    final List<IconData> _usedIcons = <IconData>[
+    final List<IconData> usedIcons = <IconData>[
       ..._icons,
       if (isDark) Icons.wb_sunny else Icons.bedtime,
     ];
-    final List<String> _usedLabels = <String>[
+    final List<String> usedLabels = <String>[
       ..._labels,
       if (isDark) 'Light mode' else 'Dark mode',
     ];
@@ -631,7 +631,7 @@ class _AppMenuState extends State<_AppMenu> {
                           // A mock user profile on the menu/rail.
                           _UserProfile(railWidth: widget.railWidth),
                           // Add all the menu items.
-                          for (int i = 0; i < _usedIcons.length; i++)
+                          for (int i = 0; i < usedIcons.length; i++)
                             _MenuItem(
                               width: size.maxWidth,
                               menuWidth: widget.maxWidth,
@@ -642,8 +642,8 @@ class _AppMenuState extends State<_AppMenu> {
                                 widget.onSelect?.call(i);
                               },
                               selected: selectedItem == i,
-                              icon: _usedIcons[i],
-                              label: _usedLabels[i],
+                              icon: usedIcons[i],
+                              label: usedLabels[i],
                               showDivider: i.isEven,
                               railWidth: widget.railWidth,
                             ),
