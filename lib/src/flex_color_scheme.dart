@@ -590,6 +590,7 @@ class FlexColorScheme with Diagnosticable {
     final this.applyElevationOverlayColor = true,
     final this.useSubThemes = false,
     final this.subThemesData,
+    final this.useMaterial3 = false,
   })  : assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.'),
         assert(bottomAppBarElevation >= 0.0,
             'Bottom AppBar elevation must be >= 0.');
@@ -1087,6 +1088,31 @@ class FlexColorScheme with Diagnosticable {
   /// Defaults to null, resulting in a default [FlexSubThemesData] being used
   /// when [useSubThemes] is set to true.
   final FlexSubThemesData? subThemesData;
+
+  /// A temporary flag used to opt-in to new Material 3 features.
+  ///
+  /// If true, then components that have been migrated to Material 3 will
+  /// start using new colors, typography and other features of Material 3.
+  /// If false, they will use the Material 2 look and feel.
+  ///
+  /// Currently no components have been migrated to support Material 3.
+  /// As they are updated to include Material 3 support this documentation
+  /// will be modified to indicate exactly what widgets this flag will affect.
+  ///
+  /// During the migration to Material 3, turning this on may yield
+  /// inconsistent look and feel in your app. Some components will be migrated
+  /// before others and typography changes will be coming in stages.
+  ///
+  /// [useMaterial3] defaults to false. After all the migrated components
+  /// have landed on stable, we will change this to be true by default. After
+  /// that change has landed on stable, we will deprecate this flag and remove
+  /// all uses of it. Everything will use the Material 3 look and feel at
+  /// that point.
+  ///
+  /// See also:
+  ///
+  ///   * [Material Design 3](https://m3.material.io/).
+  final bool useMaterial3;
 
   //****************************************************************************
   //

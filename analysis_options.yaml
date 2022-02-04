@@ -606,7 +606,7 @@ linter:
     # Lint           disabled : https://pub.dev/packages/lint
     # VG Analysis    enabled  : https://pub.dev/packages/very_good_analysis
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
-    no_leading_underscores_for_local_identifiers: false
+    # no_leading_underscores_for_local_identifiers: false
 
     # CONSIDER omitting type annotations for local variables.
     #
