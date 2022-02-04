@@ -131,8 +131,8 @@ const bool _swapColors = false;
 
 // Use a GoogleFonts font as default font for your theme. Not used by default
 // in the demo setup, but you can uncomment _fontFamily further below to use it.
-// ignore: unused_element
-late String? _fontFamily = GoogleFonts.notoSans().fontFamily;
+// ignore: use_late_for_private_fields_and_variables, unused_element
+final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 
 // Define a custom text theme for the app. Here we have decided that
 // Headline1..3 are too big to be useful for us, so we make them a bit smaller
