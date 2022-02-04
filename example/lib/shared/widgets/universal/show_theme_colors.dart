@@ -124,9 +124,14 @@ class ShowThemeColors extends StatelessWidget {
                 textColor: colorScheme.primary,
               ),
               ThemeCard(
-                label: 'Primary\nVariant',
-                color: colorScheme.primaryVariant,
-                textColor: _onColor(colorScheme.primaryVariant),
+                label: 'Primary\nContainer',
+                color: colorScheme.primaryContainer,
+                textColor: colorScheme.onPrimaryContainer,
+              ),
+              ThemeCard(
+                label: 'onPrimary\nContainer',
+                color: colorScheme.onPrimaryContainer,
+                textColor: colorScheme.primaryContainer,
               ),
               ThemeCard(
                 label: 'Secondary',
@@ -139,9 +144,54 @@ class ShowThemeColors extends StatelessWidget {
                 textColor: colorScheme.secondary,
               ),
               ThemeCard(
-                label: 'Secondary\nVariant',
-                color: colorScheme.secondaryVariant,
-                textColor: _onColor(colorScheme.secondaryVariant),
+                label: 'Secondary\nContainer',
+                color: colorScheme.secondaryContainer,
+                textColor: colorScheme.onSecondaryContainer,
+              ),
+              ThemeCard(
+                label: 'on\nSecondary\nContainer',
+                color: colorScheme.onSecondaryContainer,
+                textColor: colorScheme.secondaryContainer,
+              ),
+              ThemeCard(
+                label: 'Tertiary',
+                color: colorScheme.tertiary,
+                textColor: colorScheme.onTertiary,
+              ),
+              ThemeCard(
+                label: 'on\nTertiary',
+                color: colorScheme.onTertiary,
+                textColor: colorScheme.tertiary,
+              ),
+              ThemeCard(
+                label: 'Tertiary\nContainer',
+                color: colorScheme.tertiaryContainer,
+                textColor: colorScheme.onTertiaryContainer,
+              ),
+              ThemeCard(
+                label: 'on\nTertiary\nContainer',
+                color: colorScheme.onTertiaryContainer,
+                textColor: colorScheme.tertiaryContainer,
+              ),
+              ThemeCard(
+                label: 'Error',
+                color: colorScheme.error,
+                textColor: colorScheme.onError,
+              ),
+              ThemeCard(
+                label: 'on\nError',
+                color: colorScheme.onError,
+                textColor: colorScheme.error,
+              ),
+              ThemeCard(
+                label: 'Error\nContainer',
+                color: colorScheme.errorContainer,
+                textColor: colorScheme.onErrorContainer,
+              ),
+              ThemeCard(
+                label: 'onError\nContainer',
+                color: colorScheme.onErrorContainer,
+                textColor: colorScheme.errorContainer,
               ),
               ThemeCard(
                 label: 'Background$backTooHigh',
@@ -164,29 +214,60 @@ class ShowThemeColors extends StatelessWidget {
                 textColor: colorScheme.surface,
               ),
               ThemeCard(
-                label: 'Error',
-                color: colorScheme.error,
-                textColor: colorScheme.onError,
+                label: 'Surface\nVariant',
+                color: colorScheme.surfaceVariant,
+                textColor: colorScheme.onSurfaceVariant,
               ),
               ThemeCard(
-                label: 'on\nError',
-                color: colorScheme.onError,
-                textColor: colorScheme.error,
+                label: 'onSurface\nVariant',
+                color: colorScheme.onSurfaceVariant,
+                textColor: colorScheme.surfaceVariant,
               ),
               ThemeCard(
-                label: 'Themed\nAppBar',
-                color: appBarColor,
-                textColor: _onColor(appBarColor),
+                label: 'Outline',
+                color: colorScheme.outline,
+                textColor: colorScheme.background,
+              ),
+              ThemeCard(
+                label: 'Shadow',
+                color: colorScheme.shadow,
+                textColor: colorScheme.background,
+              ),
+              ThemeCard(
+                label: 'Inverse\nSurface',
+                color: colorScheme.inverseSurface,
+                textColor: colorScheme.onInverseSurface,
+              ),
+              ThemeCard(
+                label: 'onInverse\nSurface',
+                color: colorScheme.onInverseSurface,
+                textColor: colorScheme.inverseSurface,
+              ),
+              ThemeCard(
+                label: 'Inverse\nPrimary',
+                color: colorScheme.inversePrimary,
+                textColor: colorScheme.inverseSurface,
+              ),
+              ThemeCard(
+                label: 'Primary\nVariant\n(deprecated)',
+                color: colorScheme.primaryVariant,
+                textColor: _onColor(colorScheme.primaryVariant),
+              ),
+              ThemeCard(
+                label: 'Secondary\nVariant\n(deprecated)',
+                color: colorScheme.secondaryVariant,
+                textColor: _onColor(colorScheme.secondaryVariant),
               ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.only(top: 8),
             child: Text(
               'ThemeData Colors',
               style: theme.textTheme.subtitle1,
             ),
           ),
+          const Text('(To be deprecated in Flutter SDK)'),
           Wrap(
             spacing: 6,
             runSpacing: 6,
@@ -248,7 +329,7 @@ class ShowThemeColors extends StatelessWidget {
                 textColor: colorScheme.onSurface,
               ),
               ThemeCard(
-                label: 'Scaffold$scaffoldTooHigh',
+                label: 'Scaffold\nBackground$scaffoldTooHigh',
                 color: theme.scaffoldBackgroundColor,
                 textColor: colorScheme.onBackground,
               ),
@@ -256,6 +337,26 @@ class ShowThemeColors extends StatelessWidget {
                 label: 'Error\nColor',
                 color: theme.errorColor,
                 textColor: colorScheme.onError,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              'Sub-themed colors',
+              style: theme.textTheme.subtitle1,
+            ),
+          ),
+
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: <Widget>[
+              ThemeCard(
+                label: 'Themed\nAppBar',
+                color: appBarColor,
+                textColor: _onColor(appBarColor),
               ),
             ],
           ),

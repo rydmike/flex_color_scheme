@@ -146,7 +146,7 @@ void main() {
     });
 
     test(
-        'FCS7.00-Scheme-hc-light: GIVEN FlexColorScheme() made with '
+        'FCS7.00-Scheme-hc-dark: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
         'EXPECT its ThemeData to be equal to one made with light factory '
         'and color overrides. v4.2.0 test case.', () {
@@ -181,6 +181,44 @@ void main() {
             onBackground: Colors.black,
             onError: Colors.white,
           ).toTheme));
+    });
+
+    test(
+        'FCS7.00-Scheme-hc-light.toString: GIVEN FlexColorScheme() made with '
+        'override colors despite conflicting colorscheme given '
+        'EXPECT its ThemeData to be equal to one made with light factory '
+        'and color overrides. v4.2.0 test case.', () {
+      expect(
+          const FlexColorScheme(
+            colorScheme: ColorScheme.highContrastDark(),
+            brightness: Brightness.light,
+            primary: Color(0xff0000ba),
+            primaryVariant: Color(0xff000088),
+            secondary: Color(0xff66fff9),
+            secondaryVariant: Color(0xff018786),
+            surface: Colors.white,
+            background: Colors.white,
+            error: Color(0xff790000),
+            onPrimary: Colors.white,
+            onSecondary: Colors.black,
+            onSurface: Colors.black,
+            onBackground: Colors.black,
+            onError: Colors.white,
+          ).toTheme.toString(minLevel: DiagnosticLevel.debug),
+          equalsIgnoringHashCodes(FlexColorScheme.light(
+            primary: const Color(0xff0000ba),
+            primaryVariant: const Color(0xff000088),
+            secondary: const Color(0xff66fff9),
+            secondaryVariant: const Color(0xff018786),
+            surface: Colors.white,
+            background: Colors.white,
+            error: const Color(0xff790000),
+            onPrimary: Colors.white,
+            onSecondary: Colors.black,
+            onSurface: Colors.black,
+            onBackground: Colors.black,
+            onError: Colors.white,
+          ).toTheme.toString(minLevel: DiagnosticLevel.debug)));
     });
 
     test(
