@@ -264,13 +264,13 @@ enum FlexSurfaceMode {
   /// * Scaffold (1/2x)
   ///
   /// Theme colorScheme.primary color is used as blend color, but dialog
-  /// background color uses theme colorScheme.secondaryVariant as its
+  /// background color uses theme colorScheme.secondaryContainer as its
   /// blend color.
   ///
   /// This modes results in elevation overlay color on all Material types and
   /// background colors in dark theme mode, except dialogs that do NOT get any
   /// elevation overlay color. This happens because Dialogs use the
-  /// colorScheme.secondaryVariant color for their blend color which typically
+  /// colorScheme.secondaryContainer color for their blend color which typically
   /// differs from the primary color used on surface color.
   ///
   /// To get elevation overlay color in dark themes on all surfaces used by
@@ -299,12 +299,12 @@ enum FlexSurfaceMode {
   /// * Surface, background, dialogs (1/2x)
   ///
   /// Theme colorScheme.primary color is used as blend color, but dialog
-  /// background uses theme colorScheme.secondaryVariant as its blend color.
+  /// background uses theme colorScheme.secondaryContainer as its blend color.
   ///
   /// This modes results in elevation overlay color on all Material types and
   /// background colors in dark theme mode, except dialogs that do NOT get any
   /// elevation overlay color. This happens because Dialogs use the
-  /// colorScheme.secondaryVariant color for their blend color which typically
+  /// colorScheme.secondaryContainer color for their blend color which typically
   /// differs from the primary color used on surface color.
   ///
   /// To get elevation overlay color in dark themes on all surfaces used by
