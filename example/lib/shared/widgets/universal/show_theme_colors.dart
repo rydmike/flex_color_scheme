@@ -246,7 +246,7 @@ class ShowThemeColors extends StatelessWidget {
               ThemeCard(
                 label: 'Inverse\nPrimary',
                 color: colorScheme.inversePrimary,
-                textColor: colorScheme.inverseSurface,
+                textColor: colorScheme.primary,
               ),
               ThemeCard(
                 label: 'Primary\nVariant\n(deprecated)',
