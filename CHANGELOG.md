@@ -3,7 +3,7 @@
 All notable changes to the **FlexColorScheme** package are documented here.
 
 
-## v5.0.0-dev.1 - February 7, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - February 8, 2022 - WORK IN PROGRESS
 
 This release is big refactor with substantial deprecation of previous
 `variant` based names in favor of `container` ones that were added to updated M3
@@ -72,9 +72,20 @@ via deprecation warnings.
   Flutter 2.10 M3 base `ColorScheme`.
   The previous names are still available as deprecated names and will remain
   available until version 6.0.0.
+* **Change:** The opt-in, custom M3 like `TextTheme` is now defined using the
+  new actual M3 `TextStyle` names available in Flutter 2.10.0. The change is 
+  none breaking thanks to underlying implementation in Flutter SDK 2.10.0. 
+  It includes also the new styles `headlineMedium` and `labelMedium` that do 
+  not directly map to any previous M2 text styles. Flutter SDK automatically 
+  maps the new `TextTheme` and its `TextStyles` to corresponding M2 text style 
+  names, so they work and can be used as before. This opt-in TextTheme includes 
+  the new M3 typography (text size and letter spacing), for what presumably will 
+  become `EnglishLike2021` type of  `Typography` when it is included in Flutter. 
+  This typography is not yet available in Flutter 2.10.0 and not even in master
+  at the time when when Flutter 2.10.0 was released. 
 
-* **TODO:** Migrate the custom M3 like text theme to be defined using in Flutter 
-  2.10.0 new M3 text style names.
+
+* **TODO:** Add M3 Seed color theme support.
 * **TODO:** Add tests for new prop `fabSchemeColor` and its features.
 * **TODO:** Add tests for new prop `useMaterial3`.
 * **TODO:** Add more tests for legacy fallbacks when using old deprecated 

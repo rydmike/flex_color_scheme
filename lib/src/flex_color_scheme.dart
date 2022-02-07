@@ -685,7 +685,7 @@ class FlexColorScheme with Diagnosticable {
 
   /// A color used for elements needing less emphasis than [secondary].
   ///
-  /// If not defined, and if there is no [colorScheme] defining, scheme reasult
+  /// If not defined, and if there is no [colorScheme] defining, scheme result
   /// will be [secondary] color, and if it is not defined either then
   /// [primary] color.
   final Color? secondaryContainer;
@@ -3524,103 +3524,130 @@ class FlexColorScheme with Diagnosticable {
   //
   //****************************************************************************
 
-  /// A Material 3 (M3) like and inspired [TextTheme] for Material 2 (M2).
+  /// A Material 3 (M3) like and inspired [TextTheme].
   ///
   /// This is used by the sub themes opt-in toggle to by default make the
-  /// TextTheme match Material 3 phone size text theme. This is done as far as
-  /// it can easily be defined within the constraint of Flutter SDK and its set
-  /// of Material 1 and Material 2 typography.
+  /// TextTheme match Material 3 phone size text theme.
   ///
+  /// See also:
   /// https://m3.material.io/styles/typography/overview
-  /// Also see:
+  /// and:
   /// https://github.com/flutter/flutter/issues/89853
   ///
   /// This default [m3TextTheme] when opting in on sub themes, can also be
   /// turned off by setting [FlexSubThemesData.useTextTheme] to false.
-  /// This reverts the text theme back M2 2018 Typography
+  /// This reverts the text theme back M2 2018 Typography, later it may revart
+  /// to M3 2021 Typography when it is default in Flutter SDK.
   ///
-  /// The mapping of M3 styles to M2 styles were made based on this:
+  ///
+  /// The geometry of M3 styles were made based on this:
   /// https://github.com/flutter/flutter/issues/89853
-  /// M3 has more text styles than those that can be represented by the
-  /// M2 [TextTheme], those are excluded.
+  ///
+  /// M3 has 2 more text styles than M3, those are [headlineLarge] and
+  /// [labelMedium]. Starting from Flutter stable 2.10.0 the new TextStyle names
+  /// in M3 are included in Flutter and can be used. Same TextTheme can however
+  /// not mix the two name spaces. When creating a [TextTheme] with either
+  /// M2 or M3 [TextStyle] names, the names are automatically mapped by Flutter
+  /// to the other names.
+  ///
+  /// This creates a TextTheme based on the M3 names and assigns the
+  /// EnglishLike2021 new Typography (Geometry) to it. This M3 based Typography
+  /// is not available in Flutter stable (2.10.0), or even master when
+  /// Flutter stable (2.10.0) was released. These sizes are mapped to old M2
+  /// names automatically by Flutter SDK from version 2.10.0 in apps that use
+  /// this optional theme.
+  ///
+  /// The usage of this custom TextTheme will
   static const TextTheme m3TextTheme = TextTheme(
-    // M3 Display Large. In Material2018 Typography: 96, w300, -1.5
-    headline1: TextStyle(
+    // M3 displayLarge, M2 headline1. Material2018 Typography: 96, w300, -1.5
+    displayLarge: TextStyle(
       fontSize: 57,
       fontWeight: FontWeight.w400,
       letterSpacing: 0,
     ),
-    // M3 Display Medium. In Material2018 Typography: 60, w300, -0.5
-    headline2: TextStyle(
+    // M3 displayMedium, M2 headline2. In 2018 Typography: 60, w300, -0.5
+    displayMedium: TextStyle(
       fontSize: 45,
       fontWeight: FontWeight.w400,
       letterSpacing: 0,
     ),
-    // M3 Display Small. In Material2018 Typography: 48, w400, 0
-    headline3: TextStyle(
+    // M3 displaySmall, M2 headline2. In Material2018 Typography: 48, w400, 0
+    displaySmall: TextStyle(
       fontSize: 36,
       fontWeight: FontWeight.w400,
       letterSpacing: 0,
     ),
-    // M3 Headline Medium. In Material2018 Typography: 34, w400, 0.25
-    headline4: TextStyle(
+    // M3 headlineMedium, M2 <none>. In Material2018 no equivalent exists.
+    headlineLarge: TextStyle(
+      fontSize: 32,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0,
+    ),
+    // M3 headlineMedium, M2 headline4. In 2018 Typography: 34, w400, 0.25
+    headlineMedium: TextStyle(
       fontSize: 28,
       fontWeight: FontWeight.w400,
       letterSpacing: 0,
     ),
-    // M3 Headline Small. In Material2018 Typography: 24, w400, 0
-    headline5: TextStyle(
+    // M3 headlineSmall, M2 headline5. In Material2018 Typography: 24, w400, 0
+    headlineSmall: TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.w400,
       letterSpacing: 0,
     ),
-    // M3 Title Large. In Material2018 Typography: 20, w500, 0.15
-    headline6: TextStyle(
+    // M3 titleLarge, M2 headline6. In Material2018 Typography: 20, w500, 0.15
+    titleLarge: TextStyle(
       fontSize: 22,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
       letterSpacing: 0,
     ),
-    // M3 Title Medium. In Material2018 Typography: 16, w400, 0.15
-    subtitle1: TextStyle(
+    // M3 titleMedium, M2 subtitle1. In Material2018 Typography: 16, w400, 0.15
+    titleMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.15,
     ),
-    // M3 Title Small. In Material2018 Typography: 14, w500, 0.1
-    subtitle2: TextStyle(
+    // M3 titleSmall, M2 subtitle2. In Material2018 Typography: 14, w500, 0.1
+    titleSmall: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.1,
     ),
-    // M3 Body Large. In Material2018 Typography: 16, w400, 0.5
-    bodyText1: TextStyle(
+    // M3 bodyLarge, M2 bodyText1. In Material2018 Typography: 16, w400, 0.5
+    bodyLarge: TextStyle(
       fontSize: 16,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
       // M3 Guide says 0.15: https://m3.material.io/styles/typography/tokens
       // Table here said 0.5: https://github.com/flutter/flutter/issues/89853
       // Went with M3 Guide value, reported discrepancy.
       letterSpacing: 0.15,
     ),
-    // M3 Body Medium. In Material2018 Typography: 14, w400, 0.25
-    bodyText2: TextStyle(
+    // M3 bodyMedium, M2 bodyText2. In Material2018 Typography: 14, w400, 0.25
+    bodyMedium: TextStyle(
       fontSize: 14,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
       letterSpacing: 0.25,
     ),
-    // M3 Body Small. In Material2018 Typography: 12, w400, 0.4
-    caption: TextStyle(
+    // M3 bodySmall, M2 caption. In Material2018 Typography: 12, w400, 0.4
+    bodySmall: TextStyle(
       fontSize: 12,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
       letterSpacing: 0.4,
     ),
-    // M3 Label Large. In Material2018 Typography: 14, w500, 1.25
-    button: TextStyle(
+    // M3 labelLarge, M2 button. In Material2018 Typography: 14, w500, 1.25
+    labelLarge: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.1,
     ),
-    // M3 Label Small. In Material2018 Typography: 10, w400, 1.5
-    overline: TextStyle(
+    // M3 labelMedium, M2 <none>. In Material2018 no equivalent exists.
+    labelMedium: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.5,
+    ),
+    // M3 labelSmall, M2 overline. In Material2018 Typography: 10, w400, 1.5
+    labelSmall: TextStyle(
       fontSize: 11,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.5,
@@ -4298,26 +4325,28 @@ class FlexColorScheme with Diagnosticable {
       // M3 has separate colored text for different colored containers.
       // Can't match that with M2 themes.
       defText = defText.copyWith(
-        headline1: defText.headline1!.copyWith(color: headerColor),
-        headline2: defText.headline2!.copyWith(color: headerColor),
-        headline3: defText.headline3!.copyWith(color: headerColor),
-        headline4: defText.headline4!.copyWith(color: headerColor),
-        headline5: defText.headline5!.copyWith(color: mediumColor),
-        headline6: defText.headline6!.copyWith(color: mediumColor),
-        subtitle1: defText.subtitle1!.copyWith(color: mediumColor),
-        subtitle2: defText.subtitle2!.copyWith(color: smallColor),
-        bodyText1: defText.bodyText1!.copyWith(color: mediumColor),
-        bodyText2: defText.bodyText2!.copyWith(color: mediumColor),
-        button: defText.button!.copyWith(color: mediumColor),
+        displayLarge: defText.displayLarge!.copyWith(color: headerColor),
+        displayMedium: defText.displayMedium!.copyWith(color: headerColor),
+        displaySmall: defText.displaySmall!.copyWith(color: headerColor),
+        headlineLarge: defText.headlineLarge!.copyWith(color: headerColor),
+        headlineMedium: defText.headlineMedium!.copyWith(color: headerColor),
+        headlineSmall: defText.headlineSmall!.copyWith(color: mediumColor),
+        titleLarge: defText.titleLarge!.copyWith(color: mediumColor),
+        titleMedium: defText.titleMedium!.copyWith(color: mediumColor),
+        titleSmall: defText.titleSmall!.copyWith(color: smallColor),
+        bodyLarge: defText.bodyLarge!.copyWith(color: mediumColor),
+        bodyMedium: defText.bodyMedium!.copyWith(color: mediumColor),
         // Caption in English2018 has heading level opacity in Material2.
         // I noticed it still needs some, eg ListTile uses the color from
         // caption, with its opacity, to make the subtitles more muted, this
         // is an important design effect that we get automatically if we give
         // it some opacity, just not going to give it as much since we also
         // have colors and it is imo a bit too low contrast in M2.
-        caption: defText.caption!.copyWith(
+        bodySmall: defText.bodySmall!.copyWith(
             color: mediumColor.withAlpha(isDark ? 0xCC : 0xBF)), //80,75%
-        overline: defText.overline!.copyWith(color: smallColor),
+        labelLarge: defText.labelLarge!.copyWith(color: mediumColor),
+        labelMedium: defText.labelMedium!.copyWith(color: smallColor),
+        labelSmall: defText.labelSmall!.copyWith(color: smallColor),
       );
       // Equivalent color blend calculations for primary text theme.
       final Color headerPrimary = primaryIsDark
@@ -4330,21 +4359,29 @@ class FlexColorScheme with Diagnosticable {
           ? colorScheme.onPrimary.blend(colorScheme.primary, 7)
           : colorScheme.onPrimary.blend(colorScheme.primary, 4);
       defPrimaryText = defPrimaryText.copyWith(
-        headline1: defPrimaryText.headline1!.copyWith(color: headerPrimary),
-        headline2: defPrimaryText.headline2!.copyWith(color: headerPrimary),
-        headline3: defPrimaryText.headline3!.copyWith(color: headerPrimary),
-        headline4: defPrimaryText.headline4!.copyWith(color: headerPrimary),
-        headline5: defPrimaryText.headline5!.copyWith(color: mediumPrimary),
-        headline6: defPrimaryText.headline6!.copyWith(color: mediumPrimary),
-        subtitle1: defPrimaryText.subtitle1!.copyWith(color: mediumPrimary),
-        subtitle2: defPrimaryText.subtitle2!.copyWith(color: smallPrimary),
-        bodyText1: defPrimaryText.bodyText1!.copyWith(color: mediumPrimary),
-        bodyText2: defPrimaryText.bodyText2!.copyWith(color: mediumPrimary),
-        button: defPrimaryText.button!.copyWith(color: mediumPrimary),
-        caption: defPrimaryText.caption!.copyWith(
+        displayLarge:
+            defPrimaryText.displayLarge!.copyWith(color: headerPrimary),
+        displayMedium:
+            defPrimaryText.displayMedium!.copyWith(color: headerPrimary),
+        displaySmall:
+            defPrimaryText.displaySmall!.copyWith(color: headerPrimary),
+        headlineLarge:
+            defPrimaryText.headlineLarge!.copyWith(color: headerPrimary),
+        headlineMedium:
+            defPrimaryText.headlineMedium!.copyWith(color: mediumPrimary),
+        headlineSmall:
+            defPrimaryText.headlineSmall!.copyWith(color: mediumPrimary),
+        titleLarge: defPrimaryText.titleLarge!.copyWith(color: mediumPrimary),
+        titleMedium: defPrimaryText.titleMedium!.copyWith(color: mediumPrimary),
+        titleSmall: defPrimaryText.titleSmall!.copyWith(color: smallPrimary),
+        bodyLarge: defPrimaryText.bodyLarge!.copyWith(color: mediumPrimary),
+        bodyMedium: defPrimaryText.bodyMedium!.copyWith(color: mediumPrimary),
+        bodySmall: defPrimaryText.bodySmall!.copyWith(
             color:
                 mediumPrimary.withAlpha(primaryIsDark ? 0xD8 : 0xCC)), //85,70%)
-        overline: defPrimaryText.overline!.copyWith(color: smallPrimary),
+        labelLarge: defPrimaryText.labelLarge!.copyWith(color: mediumPrimary),
+        labelMedium: defPrimaryText.labelMedium!.copyWith(color: smallPrimary),
+        labelSmall: defPrimaryText.labelSmall!.copyWith(color: smallPrimary),
       );
     }
     // Use M3 text theme when sub themes enabled, and M3 text themes opt-in.
