@@ -6,54 +6,88 @@ All notable changes to the **FlexColorScheme** package are documented here.
 ## v5.0.0-dev.1 - February 7, 2022 - WORK IN PROGRESS
 
 This release is big refactor with substantial deprecation of previous
-`variant` based names in favor of `container` that was added to updated M3
-based `Colorcheme` in Flutter 2.10.0.
+`variant` based names in favor of `container` ones that were added to updated M3
+based `Colorcheme` in Flutter 2.10.0. The same naming change is also introduced
+in FlexColorScheme after version 4.2.0. The changes are none breaking in
+with past behavior, and old property names will remain available until 
+FlexColorScheme version 6.0.0. Prefer migrating to the new names you will see
+via deprecation warnings.
 
-* **Breaking**: Requires min Dart SDK 2.16, bundled with Flutter 2.10.0. Uses
-  new M3 `ColorScheme` properties that are not included before Flutter version
-  2.10.0.
-* **Breaking**: Removed parameter `surfaceStyle` from `FlexSubThemesData`
+* **Breaking:** Require at least Dart SDK 2.16, bundled with Flutter 2.10.0. 
+  This release uses new M3 `ColorScheme` properties that are not included 
+  before Flutter version 2.10.0.
+* **Breaking:** Removed parameter `surfaceStyle` from `FlexThemeData`
   extensions `FlexThemeData.light` and `FlexThemeData.dark` that uses
   in version 4.2.0 deprecated property `surfaceStyle` in `FlexColorScheme` 
   class. To ease transition for past usage, the deprecated property
-  `surfaceStyle` in `FlexColorScheme`, will remain available until version 6.0.0.
-* **Breaking**: The enum `SchemeColor` has new values and the values are in new
-  order to be in same order as its corresponding order as the color properties
-  in `ColorScheme`. The change of order is potentially breaking, but very 
-  unlikely to break anything. In the examples you might see wrong color selection
+  `surfaceStyle` in `FlexColorScheme` class, will however remain available 
+  until version 6.0.0. They were also scheduled for deprecation in version 
+  5.0.0, but we decided to keep them around a bit longer. 
+* **Breaking:** The enum `SchemeColor` has new values and the values are in a 
+  new order, so they can be in same order as corresponding color properties
+  in M3 `ColorScheme`. The change of order is potentially breaking, but unlikely 
+  to break anything, other than possibly local storage of selected enum values.
+  In the bundled samples you might for example see wrong color selections
   loaded from local storage, just reset or select correct value to fix it.
-* **Change:** Add all new `ColorScheme` M3 color properties to `SchemeColor` 
-  enum and its static functions `schemeColor` and `schemeColorPair`.
-  Deprecated the enum values `primaryVariant` and `secondaryVariant`. They
-  are still available but return correct replacement M3 color values from in
-  Flutter 2.10.0 updated `ColorScheme`.
 * **New:** Added `onPrimaryContainer` and `onSecondaryContainer` to all theme 
   constructors and factories.
 * **New:** Added `useMaterial3` to all theme constructors and factories. This is
-  the same flag us in `ThemeData`, it does not have any impact on
+  the same flag as in `ThemeData`, it does not have any impact on
   default themed widgets yet in Flutter 2.10.0. Opting in on opinionated 
   sub-themes, will however as before give opinionated default sub-themes that 
-  result in M3 like style. Similar look will become default widget design in 
+  result in M3 like styles. Similar look will become default widget design in 
   later Flutter SDK versions when using the flag `useMaterial3` set to true.
 * **New:** Added additional `ColorScheme` color selection options to 
   sub-themes configuration class `FlexSubThemesData`. The feature
   introduced in version 4.2.0 is now also supported by sub themes for:
   - Floating Action Button, via `FlexSubThemesData.fabSchemeColor`
-* **Change:** In `FlexColor` renamed all color values with `variant` in their
-  name to `container`, to match new SDK names for colors intended for 
-  corresponding container color property in Flutter 2.10 M3 base `ColorScheme`.
-  The previous names are still available as deprecated names and will remain
-  available until version 6.0.0.
-* **Change:** In `FlexSchemeColor` added properties `primaryContainer` and
- `secondaryContainer` the replace deprecated properties `primaryVariant`
-  `secondaryVariant`. The old properties still work and map to the new ones.
+* **Change:** Add all new `ColorScheme` M3 color properties to `SchemeColor`
+  enum and its static functions `schemeColor` and `schemeColorPair`.
+  Deprecated the enum values `primaryVariant` and `secondaryVariant`. They
+  are still available but return correct replacement M3 color values from in
+  Flutter 2.10.0 updated `ColorScheme`.
+* **Change:** To class `FlexColorScheme` default constructor, `light` and 
+  `dark` factories, added properties `primaryContainer` and
+  `secondaryContainer`. They replace deprecated properties `primaryVariant`
+  `secondaryVariant`. The old properties still work and used as fallback to the
+  new ones, if the new ones are not provided.
   The previous properties are still available as deprecated and will remain
   available until version 6.0.0.
+* **Change:** In extension `FlexThemeData` to extensions `FlexThemeData.light` 
+  and `FlexThemeData.dark` added properties `primaryContainer` and
+  `secondaryContainer`. They replace deprecated properties `primaryVariant`
+  `secondaryVariant`. The old properties still work and used as fallback to the
+  new ones, if the new ones are not provided.
+  The previous properties are still available as deprecated and will remain
+  available until version 6.0.0.
+* **Change:** In class `FlexSchemeColor` added properties `primaryContainer` and
+  `secondaryContainer` they replace deprecated properties `primaryVariant`
+  `secondaryVariant`. The old properties still work and used as fallback to the
+  new ones, if the new ones are not provided.
+  The previous properties are still available as deprecated and will remain
+  available until version 6.0.0.
+* **Change:** In `FlexColor` renamed all color values with `variant` in their
+  name to `container`, to match the new Flutter SDK color property names 
+  for all colors intended for corresponding container color property in 
+  Flutter 2.10 M3 base `ColorScheme`.
+  The previous names are still available as deprecated names and will remain
+  available until version 6.0.0.
 
-* **TODO:** Migrate all other `variant` named properties to `container` named ones,
-  keeping the `variant` named deprecated ones around until version 6.0.0. 
+* **TODO:** Migrate the custom M3 like text theme to be defined using in Flutter 
+  2.10.0 new M3 text style names.
 * **TODO:** Add tests for new prop `fabSchemeColor` and its features.
+* **TODO:** Add tests for new prop `useMaterial3`.
+* **TODO:** Add more tests for legacy fallbacks when using old deprecated 
+  `primaryVariant` and `secondaryVariant` properties.
+
+**MAYBE:** (Might be pushed to 5.x.0).
 * **TODO:** Add main `SchemeColor` enum color selection to all buttons.
+* **TODO:** Add main `SchemeColor` enum color selection to switch buttons.
+* **TODO:** Add main `SchemeColor` enum color selection to ToggleButton.
+* **TODO:** Add main `SchemeColor` enum color selection to TabBar, 
+  overriding its none sub-theme older enum definition.
+* **TODO:** Add main `SchemeColor` enum color selection to AppBar,
+  overriding its none sub-theme older enum definition. 
 
 
 ## v4.2.0 - January 24, 2022
@@ -787,7 +821,6 @@ tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
 ## TODO
 
 - Add a sub-theme for the `NavigationRail`.
-- Add `SchemeColor` color selection for the Floating Action Button sub-theme.
 - Consider adding `SchemeColor` color selection to buttons and toggle buttons.
 - Version 5 will add support for Material 3 and will be released when a required
   level of M3 features have reached the Flutter stable channel. At minimum, it 
@@ -795,7 +828,7 @@ tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
   SDK implementation of M3 design guide. Simply because its current own 
   M3 "like" M2 based implementation of existing theming and text capabilities
   cannot always match the M3 designs, especially on color usage.
-- Version 5 will be breaking, so in it we may consider moving AppBar background 
+- Version 5 will be breaking, in it, we may consider moving AppBar background 
   to sub-theme and use the full `SchemeColor` based color selection. This would
   be another breaking change in V5. It might be possible to also add it
   as a none breaking new feature.
@@ -804,6 +837,8 @@ tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
 
 ## DONE
 
+- Version 5.0.0 Added `SchemeColor` color selection to 
+  the Floating Action Button sub-theme.
 - Version 4.2.0 support making themes from standard ColorScheme. More 
   customization of sub-themes. Support for M3 NavigationBar and sub-theming it,
   and a default that matches FlexColorScheme styles.
