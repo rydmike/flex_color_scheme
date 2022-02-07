@@ -23,7 +23,9 @@ class ColorSchemePopupMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
+    final TextStyle txtStyle = theme.textTheme.button!;
     final bool enabled = onChanged != null;
     final bool useDefault = index < 0 || index >= SchemeColor.values.length;
     final String colorName =
@@ -47,8 +49,8 @@ class ColorSchemePopupMenu extends StatelessWidget {
                         ),
                   size: 35),
               title: i >= SchemeColor.values.length
-                  ? const Text('default')
-                  : Text(SchemeColor.values[i].name),
+                  ? Text('default', style: txtStyle)
+                  : Text(SchemeColor.values[i].name, style: txtStyle),
             ),
           )
       ],

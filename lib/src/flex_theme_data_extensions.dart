@@ -147,26 +147,27 @@ extension FlexThemeData on ThemeData {
     /// color values.
     final int usedColors = 4,
 
-    /// Blends theme colors into surfaces and backgrounds. Deprecated use
-    /// [surfaceMode] in combination with [blendLevel] instead.
-    ///
-    /// This property was used in FlexColorScheme before v4.0.0.
-    /// It is is still available for backwards compatibility.
-    /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
-    /// and offers more surface color configuration options and choices.
-    ///
-    /// Defaults to [FlexSurface.material] which results in Flutter
-    /// standard [ColorScheme.light] surface colors, which follows the
-    /// default color scheme in the Material Design guide for light theme found
-    /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
-    ///
-    /// If values for the properties [surface], [background],
-    /// [dialogBackground] or [scaffoldBackground] are given,
-    /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
-    /// this [surfaceStyle].
-    @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
-        final FlexSurface surfaceStyle = FlexSurface.material,
+    // TODO(rydmike): Removed commented deprecated code.
+    // /// Blends theme colors into surfaces and backgrounds. Deprecated use
+    // /// [surfaceMode] in combination with [blendLevel] instead.
+    // ///
+    // /// This property was used in FlexColorScheme before v4.0.0.
+    // /// It is is still available for backwards compatibility.
+    // /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
+    // /// and offers more surface color configuration options and choices.
+    // ///
+    // /// Defaults to [FlexSurface.material] which results in Flutter
+    // /// standard [ColorScheme.light] surface colors, which follows the
+    // /// default color scheme in the Material Design guide for light theme found
+    // /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
+    // ///
+    // /// If values for the properties [surface], [background],
+    // /// [dialogBackground] or [scaffoldBackground] are given,
+    // /// they are used instead of values that would be assigned based
+    // /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
+    // /// this [surfaceStyle].
+    // @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
+    //     final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///
@@ -896,7 +897,8 @@ extension FlexThemeData on ThemeData {
       scheme: scheme,
       colorScheme: colorScheme,
       usedColors: usedColors,
-      surfaceStyle: surfaceStyle,
+      // TODO(rydmike): Removed commented deprecated code.
+      // surfaceStyle: surfaceStyle,
       surfaceMode: surfaceMode,
       blendLevel: blendLevel,
       appBarStyle: appBarStyle,
@@ -1044,26 +1046,27 @@ extension FlexThemeData on ThemeData {
     /// color values.
     final int usedColors = 4,
 
-    /// Blends theme colors into surfaces and backgrounds. Deprecated use
-    /// [surfaceMode] in combination with [blendLevel] instead.
-    ///
-    /// This property was used in FlexColorScheme before v4.0.0.
-    /// It is is still available for backwards compatibility.
-    /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
-    /// and offers more surface color configuration options and choices.
-    ///
-    /// Defaults to [FlexSurface.material] which results in Flutter
-    /// standard [ColorScheme.light] surface colors, which follows the
-    /// default color scheme in the Material Design guide for light theme found
-    /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
-    ///
-    /// If values for the properties [surface], [background],
-    /// [dialogBackground] or [scaffoldBackground] are given,
-    /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
-    /// this [surfaceStyle].
-    @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
-        final FlexSurface surfaceStyle = FlexSurface.material,
+    // TODO(rydmike): Removed commented deprecated code.
+    // /// Blends theme colors into surfaces and backgrounds. Deprecated use
+    // /// [surfaceMode] in combination with [blendLevel] instead.
+    // ///
+    // /// This property was used in FlexColorScheme before v4.0.0.
+    // /// It is is still available for backwards compatibility.
+    // /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
+    // /// and offers more surface color configuration options and choices.
+    // ///
+    // /// Defaults to [FlexSurface.material] which results in Flutter
+    // /// standard [ColorScheme.light] surface colors, which follows the
+    // /// default color scheme in the Material Design guide for light theme found
+    // /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
+    // ///
+    // /// If values for the properties [surface], [background],
+    // /// [dialogBackground] or [scaffoldBackground] are given,
+    // /// they are used instead of values that would be assigned based
+    // /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
+    // /// this [surfaceStyle].
+    // @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
+    //     final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///
@@ -1794,7 +1797,8 @@ extension FlexThemeData on ThemeData {
       colors: colors,
       scheme: scheme,
       usedColors: usedColors,
-      surfaceStyle: surfaceStyle,
+      // TODO(rydmike): Removed commented deprecated code.
+      // surfaceStyle: surfaceStyle,
       surfaceMode: surfaceMode,
       blendLevel: blendLevel,
       appBarStyle: appBarStyle,

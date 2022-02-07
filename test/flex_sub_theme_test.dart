@@ -1223,50 +1223,6 @@ void main() {
       );
     });
 
-    // TODO(rydmike): Remove commented tests.
-    // test(
-    //     'FST1.17-states1: Does navigationBarTheme have right material '
-    //     'icon states', () {
-    //   const ColorScheme colorScheme = ColorScheme.light();
-    //   expect(
-    //     FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
-    //         .iconTheme!
-    //         .resolve(<MaterialState>{MaterialState.selected})?.color,
-    //     equals(colorScheme.primary),
-    //   );
-    //   expect(
-    //     FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
-    //         .iconTheme!
-    //         .resolve(<MaterialState>{})?.color,
-    //     equals(
-    //       colorScheme.primary
-    //           .blendAlpha(colorScheme.primary, 0x00)
-    //           .withAlpha(0xFF),
-    //     ),
-    //   );
-    // });
-    // test(
-    //     'FST1.17-states2: Does navigationBarTheme have right material '
-    //     'text label states', () {
-    //   const ColorScheme colorScheme = ColorScheme.light();
-    //   expect(
-    //     FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
-    //         .labelTextStyle!
-    //         .resolve(<MaterialState>{MaterialState.selected})?.color,
-    //     equals(colorScheme.primary),
-    //   );
-    //   expect(
-    //     FlexSubThemes.navigationBarTheme(colorScheme: colorScheme)
-    //         .labelTextStyle!
-    //         .resolve(<MaterialState>{})?.color,
-    //     equals(
-    //       colorScheme.primary
-    //           .blendAlpha(colorScheme.primary, 0x00)
-    //           .withAlpha(0xFF),
-    //     ),
-    //   );
-    // });
-
     test(
         'FST1.18custom1: GIVEN a custom1 FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
@@ -1278,7 +1234,7 @@ void main() {
         iconSchemeColor: SchemeColor.secondary,
         textSchemeColor: SchemeColor.error,
         backgroundSchemeColor: null,
-        highlightSchemeColor: SchemeColor.secondaryVariant,
+        highlightSchemeColor: SchemeColor.secondaryContainer,
         height: 80,
         opacity: 0.9,
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
@@ -1362,8 +1318,8 @@ void main() {
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
         labelTextStyle: FlexColorScheme.m3TextTheme.caption,
-        iconSchemeColor: SchemeColor.secondaryVariant,
-        textSchemeColor: SchemeColor.primaryVariant,
+        iconSchemeColor: SchemeColor.secondaryContainer,
+        textSchemeColor: SchemeColor.primaryContainer,
         highlightSchemeColor: SchemeColor.secondary,
         backgroundSchemeColor: SchemeColor.error,
         height: 80,

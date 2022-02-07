@@ -12,6 +12,21 @@ based `Colorcheme` in Flutter 2.10.0.
 * **Breaking**: Requires min Dart SDK 2.16, bundled with Flutter 2.10.0. Uses
   new M3 `ColorScheme` properties that are not included before Flutter version
   2.10.0.
+* **Breaking**: Removed parameter `surfaceStyle` from `FlexSubThemesData`
+  extensions `FlexThemeData.light` and `FlexThemeData.dark` that uses
+  in version 4.2.0 deprecated property `surfaceStyle` in `FlexColorScheme` 
+  class. To ease transition for past usage, the deprecated property
+  `surfaceStyle` in `FlexColorScheme`, will remain available until version 6.0.0.
+* **Breaking**: The enum `SchemeColor` has new values and the values are in new
+  order to be in same order as its corresponding order as the color properties
+  in `ColorScheme`. The change of order is potentially breaking, but very 
+  unlikely to break anything. In the examples you might see wrong color selection
+  loaded from local storage, just reset or select correct value to fix it.
+* **Change:** Add all new `ColorScheme` M3 color properties to `SchemeColor` 
+  enum and its static functions `schemeColor` and `schemeColorPair`.
+  Deprecated the enum values `primaryVariant` and `secondaryVariant`. They
+  are still available but return correct replacement M3 color values from in
+  Flutter 2.10.0 updated `ColorScheme`.
 * **New:** Added `onPrimaryContainer` and `onSecondaryContainer` to all theme 
   constructors and factories.
 * **New:** Added `useMaterial3` to all theme constructors and factories. This is
@@ -34,12 +49,12 @@ based `Colorcheme` in Flutter 2.10.0.
   `secondaryVariant`. The old properties still work and map to the new ones.
   The previous properties are still available as deprecated and will remain
   available until version 6.0.0.
+
 * **TODO:** Migrate all other `variant` named properties to `container` named ones,
   keeping the `variant` named deprecated ones around until version 6.0.0. 
 * **TODO:** Add tests for new prop `fabSchemeColor` and its features.
 * **TODO:** Add main `SchemeColor` enum color selection to all buttons.
-* **TODO:** Add all new `ColorScheme` properties to `SchemeColor` enum and its
-  static functions `schemeColor` and `schemeColorPair`.
+
 
 ## v4.2.0 - January 24, 2022
 
