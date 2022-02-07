@@ -3,7 +3,7 @@
 All notable changes to the **FlexColorScheme** package are documented here.
 
 
-## v5.0.0-dev1 - February 7, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - February 7, 2022 - WORK IN PROGRESS
 
 * **Breaking**: Require min Dart SDK 2.16, bundled with Flutter 2.10.0. Uses
   new M3 `ColorScheme` properties that are not included before Flutter version
