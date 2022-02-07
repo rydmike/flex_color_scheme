@@ -1228,7 +1228,7 @@ class _AppBarSettings extends StatelessWidget {
       case FlexAppBarStyle.background:
         return 'Background, with primary color blend';
       case FlexAppBarStyle.custom:
-        return 'Built-in schemes use secondary variant color, '
+        return 'Built-in schemes use secondary container color, '
             'but you can use any color';
     }
   }

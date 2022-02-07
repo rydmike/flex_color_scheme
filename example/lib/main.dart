@@ -53,7 +53,7 @@ void main() => runApp(const DemoApp());
 // while running the app.
 
 // For our custom color scheme we define primary and secondary colors,
-// but no variant or other colors.
+// but no container or other colors.
 final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   primary: const Color(0xFF00296B),
   // If you do not want to define secondary, primaryVariant and
@@ -70,7 +70,7 @@ final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   //
   // Here we define a secondary color, but if you don't it will get a
   // default shade based on the primary color. When you do define a secondary
-  // color, but not a secondaryVariant color, the secondary variant will get
+  // color, but not a secondaryVariant color, the secondary container will get
   // derived from the secondary color, instead of from the primary color.
   secondary: const Color(0xFFFF7B00),
 );
@@ -279,7 +279,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // navigationBarTextSchemeColor: SchemeColor.onSurface,
 
   // Select the ColorScheme base color used to highlight selected item.
-  // navigationBarHighlightSchemeColor: SchemeColor.primaryVariant,
+  // navigationBarHighlightSchemeColor: SchemeColor.primaryContainer,
 
   // Select the ColorScheme color used for navigation bar background.
   // navigationBarBackgroundSchemeColor: SchemeColor.background,
