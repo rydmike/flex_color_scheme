@@ -1071,79 +1071,7 @@ class TextThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme text = Theme.of(context).textTheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('Font: ${text.subtitle2!.fontFamily}',
-            style: text.subtitle1!.copyWith(fontWeight: FontWeight.w600)),
-        Text(
-          'Headline 1 '
-          '(${text.headline1!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline1,
-        ),
-        Text(
-          'Headline 2 '
-          '(${text.headline2!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline2,
-        ),
-        Text(
-          'Headline 3 '
-          '(${text.headline3!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline3,
-        ),
-        Text(
-          'Headline 4 '
-          '(${text.headline4!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline4,
-        ),
-        Text(
-          'Headline 5 '
-          '(${text.headline5!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline5,
-        ),
-        Text(
-          'Headline 6 '
-          '(${text.headline6!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline6,
-        ),
-        Text(
-          'Subtitle 1 '
-          '(${text.subtitle1!.fontSize!.toStringAsFixed(0)})',
-          style: text.subtitle1,
-        ),
-        Text(
-          'Subtitle 2 '
-          '(${text.subtitle2!.fontSize!.toStringAsFixed(0)})',
-          style: text.subtitle2,
-        ),
-        Text(
-          'Body Text 1 '
-          '(${text.bodyText1!.fontSize!.toStringAsFixed(0)})',
-          style: text.bodyText1,
-        ),
-        Text(
-          'Body Text 2 '
-          '(${text.bodyText2!.fontSize!.toStringAsFixed(0)})',
-          style: text.bodyText2,
-        ),
-        Text(
-          'Button '
-          '(${text.button!.fontSize!.toStringAsFixed(0)})',
-          style: text.button,
-        ),
-        Text(
-          'Caption '
-          '(${text.caption!.fontSize!.toStringAsFixed(0)})',
-          style: text.caption,
-        ),
-        Text(
-          'Overline '
-          '(${text.overline!.fontSize!.toStringAsFixed(0)})',
-          style: text.overline,
-        ),
-      ],
-    );
+    return TextThemeColumnShowcase(textTheme: Theme.of(context).textTheme);
   }
 }
 
@@ -1152,76 +1080,101 @@ class PrimaryTextThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme text = Theme.of(context).primaryTextTheme;
+    return TextThemeColumnShowcase(
+        textTheme: Theme.of(context).primaryTextTheme);
+  }
+}
+
+class TextThemeColumnShowcase extends StatelessWidget {
+  const TextThemeColumnShowcase({Key? key, required this.textTheme})
+      : super(key: key);
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('Font: ${text.subtitle2!.fontFamily}',
-            style: text.subtitle1!.copyWith(fontWeight: FontWeight.w600)),
+        Text('Font: ${textTheme.subtitle2!.fontFamily}',
+            style: textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w600)),
         Text(
-          'Headline 1 '
-          '(${text.headline1!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline1,
+          'Display Large '
+          '(${textTheme.displayLarge!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.displayLarge,
         ),
         Text(
-          'Headline 2 '
-          '(${text.headline2!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline2,
+          'Display Medium '
+          '(${textTheme.displayMedium!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.displayMedium,
         ),
         Text(
-          'Headline 3 '
-          '(${text.headline3!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline3,
+          'Display Small '
+          '(${textTheme.displaySmall!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.displaySmall,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Headline Large '
+          '(${textTheme.headlineLarge!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.headlineLarge,
         ),
         Text(
-          'Headline 4 '
-          '(${text.headline4!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline4,
+          'Headline Medium '
+          '(${textTheme.headlineMedium!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.headlineMedium,
         ),
         Text(
-          'Headline 5 '
-          '(${text.headline5!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline5,
+          'Headline Small '
+          '(${textTheme.headlineSmall!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.headlineSmall,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Title Large '
+          '(${textTheme.titleLarge!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.titleLarge,
         ),
         Text(
-          'Headline 6 '
-          '(${text.headline6!.fontSize!.toStringAsFixed(0)})',
-          style: text.headline6,
+          'Title Medium '
+          '(${textTheme.titleMedium!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.titleMedium,
         ),
         Text(
-          'Subtitle 1 '
-          '(${text.subtitle1!.fontSize!.toStringAsFixed(0)})',
-          style: text.subtitle1,
+          'Title Small '
+          '(${textTheme.titleSmall!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.titleSmall,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Body Large '
+          '(${textTheme.bodyLarge!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.bodyLarge,
         ),
         Text(
-          'Subtitle 2 '
-          '(${text.subtitle2!.fontSize!.toStringAsFixed(0)})',
-          style: text.subtitle2,
+          'Body Medium '
+          '(${textTheme.bodyMedium!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.bodyMedium,
         ),
         Text(
-          'Body Text 1 '
-          '(${text.bodyText1!.fontSize!.toStringAsFixed(0)})',
-          style: text.bodyText1,
+          'Body Small '
+          '(${textTheme.bodySmall!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.bodySmall,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Label Large '
+          '(${textTheme.labelLarge!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.labelLarge,
         ),
         Text(
-          'Body Text 2 '
-          '(${text.bodyText2!.fontSize!.toStringAsFixed(0)})',
-          style: text.bodyText2,
+          'Label Medium '
+          '(${textTheme.labelMedium!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.labelMedium,
         ),
         Text(
-          'Button '
-          '(${text.button!.fontSize!.toStringAsFixed(0)})',
-          style: text.button,
-        ),
-        Text(
-          'Caption '
-          '(${text.caption!.fontSize!.toStringAsFixed(0)})',
-          style: text.caption,
-        ),
-        Text(
-          'Overline '
-          '(${text.overline!.fontSize!.toStringAsFixed(0)})',
-          style: text.overline,
+          'Label Small '
+          '(${textTheme.labelSmall!.fontSize!.toStringAsFixed(0)})',
+          style: textTheme.labelSmall,
         ),
       ],
     );
