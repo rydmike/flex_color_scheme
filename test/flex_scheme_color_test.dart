@@ -322,6 +322,8 @@ void main() {
       );
     });
 
+    // TODO(rydmike): Add tests to verify Variant <-> Container equality.
+
     //**************************************************************************
     // FlexSchemeColor unit tests.
     //
