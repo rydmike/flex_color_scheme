@@ -36,13 +36,11 @@ enum FlexInputBorderType {
 /// to a none standard [ColorScheme] based color.
 /// If not set the property is null and the default [ColorScheme] based
 /// color behavior of the opinionated sub-theme will be used. This may differ
-/// from the corresponding Widget's SDK default un-themed color behavior.
+/// from the corresponding Widget's SDK default un-themed color behavior, but
+/// is mostly the same if defined at all.
 ///
-/// The enum selection [primaryVariant] and [secondaryVariant] colors might be
-/// best to avoid since they will deprecated in Flutter SDK soon and replaced
-/// with new Material 3 based color properties. All the new color properties in
-/// the new M3 based [ColorScheme] will be added when they reach the
-/// Flutter stable channel.
+/// The enum selection [primaryVariant] and [secondaryVariant] colors have been
+/// deprecated in Flutter SDK 2.1.0 master after after v2.6.0-0.0.pre landed.
 ///
 /// This enum to select and override default Widget colors when using
 /// opinionated sub-themes might be applied to more widgets in later release
@@ -56,12 +54,11 @@ enum SchemeColor {
   /// The active theme's color scheme  onPrimary color will be used.
   onPrimary,
 
-  /// The active theme's color scheme primaryVariant color will be used.
-  @Deprecated('Use primaryContainer instead. Deprecated after version 4.2.0')
-  primaryVariant,
-
   /// The active theme's color scheme primaryContainer color will be used.
   primaryContainer,
+
+  /// The active theme's color scheme onPrimaryContainer color will be used.
+  onPrimaryContainer,
 
   /// The active theme's color scheme secondary color will be used.
   secondary,
@@ -69,18 +66,35 @@ enum SchemeColor {
   /// The active theme's color scheme onSecondary color will be used.
   onSecondary,
 
-  /// The active theme's color scheme secondaryVariant color will be used.
-  @Deprecated('Use secondaryContainer instead. Deprecated after version 4.2.0')
-  secondaryVariant,
-
   /// The active theme's color scheme secondaryContainer color will be used.
   secondaryContainer,
 
-  /// The active theme's color scheme surface color will be used.
-  surface,
+  /// The active theme's color scheme onSecondaryContainer color will be used.
+  onSecondaryContainer,
 
-  /// The active theme's color scheme  onSurface color will be used.
-  onSurface,
+  /// The active theme's color scheme tertiary color will be used.
+  tertiary,
+
+  /// The active theme's color scheme onTertiary color will be used.
+  onTertiary,
+
+  /// The active theme's color scheme tertiaryContainer color will be used.
+  tertiaryContainer,
+
+  /// The active theme's color scheme onTertiaryContainer color will be used.
+  onTertiaryContainer,
+
+  /// The active theme's color scheme error color will be used.
+  error,
+
+  /// The active theme's color scheme onError color will be used.
+  onError,
+
+  /// The active theme's color scheme errorContainer color will be used.
+  errorContainer,
+
+  /// The active theme's color scheme onErrorContainer color will be used.
+  onErrorContainer,
 
   /// The active theme's color scheme background color will be used.
   background,
@@ -88,11 +102,40 @@ enum SchemeColor {
   /// The active theme's color scheme onBackground color will be used.
   onBackground,
 
-  /// The active theme's color scheme error color will be used.
-  error,
+  /// The active theme's color scheme surface color will be used.
+  surface,
 
-  /// The active theme's color scheme onError color will be used.
-  onError,
+  /// The active theme's color scheme outline color will be used.
+  outline,
+
+  /// The active theme's color scheme shadow color will be used.
+  shadow,
+
+  /// The active theme's color scheme  onSurface color will be used.
+  onSurface,
+
+  /// The active theme's color scheme surfaceVariant color will be used.
+  surfaceVariant,
+
+  /// The active theme's color scheme onSurfaceVariant color will be used.
+  onSurfaceVariant,
+
+  /// The active theme's color scheme inverseSurface color will be used.
+  inverseSurface,
+
+  /// The active theme's color scheme onInverseSurface color will be used.
+  onInverseSurface,
+
+  /// The active theme's color scheme inversePrimary color will be used.
+  inversePrimary,
+
+  /// The active theme's color scheme primaryVariant color will be used.
+  @Deprecated('Use primaryContainer instead. Deprecated after version 4.2.0')
+  primaryVariant,
+
+  /// The active theme's color scheme secondaryVariant color will be used.
+  @Deprecated('Use secondaryContainer instead. Deprecated after version 4.2.0')
+  secondaryVariant,
 }
 
 /// Static sub-theme helpers used by opt-in widget sub theming
@@ -187,13 +230,16 @@ class FlexSubThemes {
   /// corresponding to the [SchemeColor] enum selection in [value].
   ///
   /// This function is used to select a none default color available in the
-  /// theme's [ColorScheme] in opinionated sub-themes:
+  /// theme's [ColorScheme] in opinionated sub-themes for:
   ///
   /// - [TextField] in [FlexSubThemes.inputDecorationTheme]
   /// - [TabBar] indicator color
   /// - [BottomNavigationBar] in [FlexSubThemes.bottomNavigationBar]
   /// - [NavigationBar] in [FlexSubThemes.navigationBarTheme]
   /// - [ChipThemeData] from [FlexSubThemes.chipTheme].
+  /// - [FloatingActionButton] from [FlexSubThemes.floatingActionButtonTheme]
+  ///
+  /// More adjustable color properties may be added in later versions.
   static Color schemeColor(SchemeColor value, ColorScheme colorScheme) {
     switch (value) {
       case SchemeColor.primary:
@@ -201,27 +247,59 @@ class FlexSubThemes {
       case SchemeColor.onPrimary:
         return colorScheme.onPrimary;
       case SchemeColor.primaryContainer:
-      case SchemeColor.primaryVariant:
         return colorScheme.primaryContainer;
+      case SchemeColor.onPrimaryContainer:
+        return colorScheme.onPrimaryContainer;
       case SchemeColor.secondary:
         return colorScheme.secondary;
       case SchemeColor.onSecondary:
         return colorScheme.onSecondary;
       case SchemeColor.secondaryContainer:
-      case SchemeColor.secondaryVariant:
         return colorScheme.secondaryContainer;
-      case SchemeColor.surface:
-        return colorScheme.surface;
-      case SchemeColor.onSurface:
-        return colorScheme.onSurface;
-      case SchemeColor.background:
-        return colorScheme.background;
-      case SchemeColor.onBackground:
-        return colorScheme.onBackground;
+      case SchemeColor.onSecondaryContainer:
+        return colorScheme.onSecondaryContainer;
+      case SchemeColor.tertiary:
+        return colorScheme.tertiary;
+      case SchemeColor.onTertiary:
+        return colorScheme.onTertiary;
+      case SchemeColor.tertiaryContainer:
+        return colorScheme.tertiaryContainer;
+      case SchemeColor.onTertiaryContainer:
+        return colorScheme.onTertiaryContainer;
       case SchemeColor.error:
         return colorScheme.error;
       case SchemeColor.onError:
         return colorScheme.onError;
+      case SchemeColor.errorContainer:
+        return colorScheme.errorContainer;
+      case SchemeColor.onErrorContainer:
+        return colorScheme.onErrorContainer;
+      case SchemeColor.background:
+        return colorScheme.background;
+      case SchemeColor.onBackground:
+        return colorScheme.onBackground;
+      case SchemeColor.surface:
+        return colorScheme.surface;
+      case SchemeColor.onSurface:
+        return colorScheme.onSurface;
+      case SchemeColor.surfaceVariant:
+        return colorScheme.surfaceVariant;
+      case SchemeColor.onSurfaceVariant:
+        return colorScheme.onSurfaceVariant;
+      case SchemeColor.outline:
+        return colorScheme.outline;
+      case SchemeColor.shadow:
+        return colorScheme.shadow;
+      case SchemeColor.inverseSurface:
+        return colorScheme.inverseSurface;
+      case SchemeColor.onInverseSurface:
+        return colorScheme.onInverseSurface;
+      case SchemeColor.inversePrimary:
+        return colorScheme.inversePrimary;
+      case SchemeColor.primaryVariant:
+        return colorScheme.primaryVariant;
+      case SchemeColor.secondaryVariant:
+        return colorScheme.secondaryVariant;
     }
   }
 
@@ -244,6 +322,8 @@ class FlexSubThemes {
       case SchemeColor.primaryContainer:
       case SchemeColor.primaryVariant:
         return colorScheme.onPrimaryContainer;
+      case SchemeColor.onPrimaryContainer:
+        return colorScheme.primaryContainer;
       case SchemeColor.secondary:
         return colorScheme.onSecondary;
       case SchemeColor.onSecondary:
@@ -251,18 +331,46 @@ class FlexSubThemes {
       case SchemeColor.secondaryContainer:
       case SchemeColor.secondaryVariant:
         return colorScheme.onSecondaryContainer;
-      case SchemeColor.surface:
-        return colorScheme.onSurface;
-      case SchemeColor.onSurface:
-        return colorScheme.surface;
-      case SchemeColor.background:
-        return colorScheme.onBackground;
-      case SchemeColor.onBackground:
-        return colorScheme.background;
+      case SchemeColor.onSecondaryContainer:
+        return colorScheme.secondaryContainer;
+      case SchemeColor.tertiary:
+        return colorScheme.onTertiary;
+      case SchemeColor.onTertiary:
+        return colorScheme.tertiary;
+      case SchemeColor.tertiaryContainer:
+        return colorScheme.onTertiaryContainer;
+      case SchemeColor.onTertiaryContainer:
+        return colorScheme.tertiaryContainer;
       case SchemeColor.error:
         return colorScheme.onError;
       case SchemeColor.onError:
         return colorScheme.error;
+      case SchemeColor.errorContainer:
+        return colorScheme.onErrorContainer;
+      case SchemeColor.onErrorContainer:
+        return colorScheme.errorContainer;
+      case SchemeColor.background:
+        return colorScheme.onBackground;
+      case SchemeColor.onBackground:
+        return colorScheme.background;
+      case SchemeColor.surface:
+        return colorScheme.onSurface;
+      case SchemeColor.onSurface:
+        return colorScheme.surface;
+      case SchemeColor.surfaceVariant:
+        return colorScheme.onSurfaceVariant;
+      case SchemeColor.onSurfaceVariant:
+        return colorScheme.surfaceVariant;
+      case SchemeColor.outline:
+        return colorScheme.background;
+      case SchemeColor.shadow:
+        return colorScheme.background;
+      case SchemeColor.inverseSurface:
+        return colorScheme.onInverseSurface;
+      case SchemeColor.onInverseSurface:
+        return colorScheme.inverseSurface;
+      case SchemeColor.inversePrimary:
+        return colorScheme.primary;
     }
   }
 

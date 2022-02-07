@@ -6,93 +6,246 @@ void main() {
   //****************************************************************************
   // FlexSubThemes.schemeColor static function unit tests.
   //****************************************************************************
-  group('FST.sC: FlexSubThemes.schemeColor WITH ColorScheme ', () {
-    const ColorScheme scheme = ColorScheme.light(
-      primary: FlexColor.materialLightPrimary,
-      primaryContainer: FlexColor.materialLightPrimaryContainer,
-      secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.materialLightSecondaryContainer,
-      surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
-      error: FlexColor.materialLightError,
-      onPrimary: Color(0xFF121212),
-      onSecondary: Color(0xFFEEEEEE),
-      onSurface: Color(0xFFCCCCCC),
-      onBackground: Color(0xFFDDDDDD),
-      onError: Color(0xFFAAAAAA),
-    );
+  const Color primary = Color(0xFF2765CE);
+  const Color onPrimary = Color(0xFFD6D2D2);
+  const Color primaryContainer = Color(0xFF5A83C6);
+  const Color onPrimaryContainer = Color(0xFFE0E9F4);
+  const Color secondary = Color(0xFFDF813E);
+  const Color onSecondary = Color(0xFF5A3112);
+  const Color secondaryContainer = Color(0xFFDF813E);
+  const Color onSecondaryContainer = Color(0xFF301D0F);
+  const Color tertiary = Color(0xFF390A73);
+  const Color onTertiary = Color(0xFFD0BEEA);
+  const Color tertiaryContainer = Color(0xFF583F6A);
+  const Color onTertiaryContainer = Color(0xFFCFBEE3);
+  const Color error = Color(0xFFAC0808);
+  const Color onError = Color(0xFFE2CFCF);
+  const Color errorContainer = Color(0xFFD68888);
+  const Color onErrorContainer = Color(0xFF422626);
+  const Color background = Color(0xFFE4E5E9);
+  const Color onBackground = Color(0xFF2B2B2D);
+  const Color surface = Color(0xFFD0D7F2);
+  const Color onSurface = Color(0xFF26282D);
+  const Color surfaceVariant = Color(0xFFB9C4F1);
+  const Color onSurfaceVariant = Color(0xFF22252D);
+  const Color outline = Color(0xFF020F34);
+  const Color shadow = Color(0xFF060B20);
+  const Color inverseSurface = Color(0xFFBCCBED);
+  const Color onInverseSurface = Color(0xFF2A303C);
+  const Color inversePrimary = Color(0xFF333333);
+  const Color primaryVariant = Color(0xFF456497);
+  const Color secondaryVariant = Color(0xFFE0905F);
 
+  const ColorScheme scheme = ColorScheme.light(
+    primary: primary,
+    onPrimary: onPrimary,
+    primaryContainer: primaryContainer,
+    onPrimaryContainer: onPrimaryContainer,
+    secondary: secondary,
+    onSecondary: onSecondary,
+    secondaryContainer: secondaryContainer,
+    onSecondaryContainer: onSecondaryContainer,
+    tertiary: tertiary,
+    onTertiary: onTertiary,
+    tertiaryContainer: tertiaryContainer,
+    onTertiaryContainer: onTertiaryContainer,
+    error: error,
+    onError: onError,
+    errorContainer: errorContainer,
+    onErrorContainer: onErrorContainer,
+    background: background,
+    onBackground: onBackground,
+    surface: surface,
+    onSurface: onSurface,
+    surfaceVariant: surfaceVariant,
+    onSurfaceVariant: onSurfaceVariant,
+    outline: outline,
+    shadow: shadow,
+    inverseSurface: inverseSurface,
+    onInverseSurface: onInverseSurface,
+    inversePrimary: inversePrimary,
+    primaryVariant: primaryVariant,
+    secondaryVariant: secondaryVariant,
+  );
+
+  // TODO(rydmike): Add M3 colorscheme test to this unit test.
+  group('FST.sC: FlexSubThemes.schemeColor WITH ColorScheme ', () {
     test(
         'FST.sC-01: GIVEN SchemeColor.primary '
         'EXPECT primary color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.primary, scheme),
-          equals(FlexColor.materialLightPrimary));
+          equals(primary));
     });
     test(
         'FST.sC-02: GIVEN SchemeColor.onPrimary '
         'EXPECT onPrimary color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.onPrimary, scheme),
-          equals(const Color(0xFF121212)));
+          equals(onPrimary));
     });
     test(
-        'FST.sC-03: GIVEN SchemeColor.primaryVariant '
-        'EXPECT primaryVariant color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.primaryVariant, scheme),
-          equals(FlexColor.materialLightPrimaryContainer));
+        'FST.sC-03: GIVEN SchemeColor.primaryContainer '
+        'EXPECT primaryContainer color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.primaryContainer, scheme),
+          equals(primaryContainer));
     });
+
     test(
-        'FST.sC-04: GIVEN SchemeColor.secondary '
+        'FST.sC-04: GIVEN SchemeColor.onPrimaryContainer '
+        'EXPECT onPrimaryContainer color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.onPrimaryContainer, scheme),
+          equals(onPrimaryContainer));
+    });
+
+    test(
+        'FST.sC-05: GIVEN SchemeColor.secondary '
         'EXPECT secondary color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.secondary, scheme),
-          equals(FlexColor.materialLightSecondary));
+          equals(secondary));
     });
     test(
-        'FST.sC-05: GIVEN SchemeColor.onSecondary '
+        'FST.sC-06: GIVEN SchemeColor.onSecondary '
         'EXPECT onSecondary color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.onSecondary, scheme),
-          equals(const Color(0xFFEEEEEE)));
+          equals(onSecondary));
     });
     test(
-        'FST.sC-06: GIVEN SchemeColor.secondaryVariant '
-        'EXPECT secondaryVariant color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.secondaryVariant, scheme),
-          equals(FlexColor.materialLightSecondaryContainer));
+        'FST.sC-07: GIVEN SchemeColor.secondaryContainer '
+        'EXPECT secondaryContainer color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.secondaryContainer, scheme),
+          equals(secondaryContainer));
     });
     test(
-        'FST.sC-07: GIVEN SchemeColor.surface '
-        'EXPECT surface color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.surface, scheme),
-          equals(FlexColor.materialLightSurface));
+        'FST.sC-08: GIVEN SchemeColor.onSecondaryContainer '
+        'EXPECT onSecondaryContainer color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColor(SchemeColor.onSecondaryContainer, scheme),
+          equals(onSecondaryContainer));
     });
     test(
-        'FST.sC-08: GIVEN SchemeColor.onSurface '
-        'EXPECT onSurface color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.onSurface, scheme),
-          equals(const Color(0xFFCCCCCC)));
+        'FST.sC-09: GIVEN SchemeColor.tertiary '
+        'EXPECT tertiary color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.tertiary, scheme),
+          equals(tertiary));
     });
     test(
-        'FST.sC-09: GIVEN SchemeColor.background '
-        'EXPECT background color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.background, scheme),
-          equals(FlexColor.materialLightBackground));
+        'FST.sC-10: GIVEN SchemeColor.onTertiary '
+        'EXPECT onTertiary color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.onTertiary, scheme),
+          equals(onTertiary));
     });
     test(
-        'FST.sC-10: GIVEN SchemeColor.onBackground '
-        'EXPECT onBackground color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.onBackground, scheme),
-          equals(const Color(0xFFDDDDDD)));
+        'FST.sC-11: GIVEN SchemeColor.tertiaryContainer '
+        'EXPECT tertiaryContainer color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.tertiaryContainer, scheme),
+          equals(tertiaryContainer));
     });
     test(
-        'FST.sC-11: GIVEN SchemeColor.error '
+        'FST.sC-12: GIVEN SchemeColor.onTertiaryContainer '
+        'EXPECT onTertiaryContainer color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.onTertiaryContainer, scheme),
+          equals(onTertiaryContainer));
+    });
+    test(
+        'FST.sC-13: GIVEN SchemeColor.error '
         'EXPECT error color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.error, scheme),
-          equals(FlexColor.materialLightError));
+      expect(
+          FlexSubThemes.schemeColor(SchemeColor.error, scheme), equals(error));
     });
     test(
-        'FST.sC-12: GIVEN SchemeColor.onError '
+        'FST.sC-14: GIVEN SchemeColor.onError '
         'EXPECT onError color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.onError, scheme),
-          equals(const Color(0xFFAAAAAA)));
+          equals(onError));
+    });
+    test(
+        'FST.sC-15: GIVEN SchemeColor.errorContainer '
+        'EXPECT errorContainer color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.errorContainer, scheme),
+          equals(errorContainer));
+    });
+    test(
+        'FST.sC-16: GIVEN SchemeColor.onErrorContainer '
+        'EXPECT onErrorContainer color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.onErrorContainer, scheme),
+          equals(onErrorContainer));
+    });
+    test(
+        'FST.sC-17: GIVEN SchemeColor.background '
+        'EXPECT background color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.background, scheme),
+          equals(background));
+    });
+    test(
+        'FST.sC-18: GIVEN SchemeColor.onBackground '
+        'EXPECT onBackground color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.onBackground, scheme),
+          equals(onBackground));
+    });
+    test(
+        'FST.sC-19: GIVEN SchemeColor.surface '
+        'EXPECT surface color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.surface, scheme),
+          equals(surface));
+    });
+    test(
+        'FST.sC-20: GIVEN SchemeColor.onSurface '
+        'EXPECT onSurface color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.onSurface, scheme),
+          equals(onSurface));
+    });
+    test(
+        'FST.sC-21: GIVEN SchemeColor.surfaceVariant '
+        'EXPECT surfaceVariant color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.surfaceVariant, scheme),
+          equals(surfaceVariant));
+    });
+    test(
+        'FST.sC-22: GIVEN SchemeColor.onSurfaceVariant '
+        'EXPECT onSurfaceVariant color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.onSurfaceVariant, scheme),
+          equals(onSurfaceVariant));
+    });
+    test(
+        'FST.sC-23: GIVEN SchemeColor.outline '
+        'EXPECT outline color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.outline, scheme),
+          equals(outline));
+    });
+    test(
+        'FST.sC-24: GIVEN SchemeColor.shadow '
+        'EXPECT shadow color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.shadow, scheme),
+          equals(shadow));
+    });
+    test(
+        'FST.sC-25: GIVEN SchemeColor.inverseSurface '
+        'EXPECT inverseSurface color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.inverseSurface, scheme),
+          equals(inverseSurface));
+    });
+    test(
+        'FST.sC-26: GIVEN SchemeColor.onInverseSurface '
+        'EXPECT onInverseSurface color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.onInverseSurface, scheme),
+          equals(onInverseSurface));
+    });
+    test(
+        'FST.sC-27: GIVEN SchemeColor.inversePrimary '
+        'EXPECT inversePrimary color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.inversePrimary, scheme),
+          equals(inversePrimary));
+    });
+    test(
+        'FST.sC-28: GIVEN SchemeColor.primaryVariant '
+        'EXPECT primaryVariant color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.primaryVariant, scheme),
+          equals(primaryVariant));
+    });
+    test(
+        'FST.sC-29: GIVEN SchemeColor.secondaryVariant '
+        'EXPECT secondaryVariant color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.secondaryVariant, scheme),
+          equals(secondaryVariant));
     });
   });
 
@@ -100,93 +253,191 @@ void main() {
   // FlexSubThemes.schemeColorPair static function unit tests.
   //****************************************************************************
   group('FST.sCP: FlexSubThemes.schemeColorPair WITH ColorScheme ', () {
-    const ColorScheme scheme = ColorScheme.light(
-      primary: FlexColor.materialLightPrimary,
-      primaryContainer: FlexColor.materialLightPrimaryContainer,
-      secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.materialLightSecondaryContainer,
-      surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
-      error: FlexColor.materialLightError,
-      onPrimary: Color(0xFF121212),
-      onSecondary: Color(0xFFEEEEEE),
-      onSurface: Color(0xFFCCCCCC),
-      onBackground: Color(0xFFDDDDDD),
-      onError: Color(0xFFAAAAAA),
-    );
-
     test(
         'FST.sCP-01: GIVEN SchemeColor.primary '
         'EXPECT onPrimary color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.primary, scheme),
-          equals(const Color(0xFF121212)));
+          equals(onPrimary));
     });
     test(
         'FST.sCP-02: GIVEN SchemeColor.onPrimary '
         'EXPECT primary color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.onPrimary, scheme),
-          equals(FlexColor.materialLightPrimary));
+          equals(primary));
     });
     test(
-        'FST.sCP-03: GIVEN SchemeColor.primaryVariant '
-        'EXPECT onPrimary color to be returned', () {
-      expect(FlexSubThemes.schemeColorPair(SchemeColor.primaryVariant, scheme),
-          equals(const Color(0xFF121212)));
+        'FST.sCP-03: GIVEN SchemeColor.primaryContainer '
+        'EXPECT onPrimaryContainer color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColorPair(SchemeColor.primaryContainer, scheme),
+          equals(onPrimaryContainer));
     });
     test(
-        'FST.sCP-04: GIVEN SchemeColor.secondary '
+        'FST.sCP-04: GIVEN SchemeColor.onPrimaryContainer '
+        'EXPECT primaryContainer color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColorPair(SchemeColor.onPrimaryContainer, scheme),
+          equals(primaryContainer));
+    });
+    test(
+        'FST.sCP-05: GIVEN SchemeColor.secondary '
         'EXPECT onSecondary color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.secondary, scheme),
-          equals(const Color(0xFFEEEEEE)));
+          equals(onSecondary));
     });
     test(
-        'FST.sCP-05: GIVEN SchemeColor.onSecondary '
+        'FST.sCP-06: GIVEN SchemeColor.onSecondary '
         'EXPECT secondary color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.onSecondary, scheme),
-          equals(FlexColor.materialLightSecondary));
+          equals(secondary));
     });
     test(
-        'FST.sCP-06: GIVEN SchemeColor.secondaryVariant '
-        'EXPECT onSecondary color to be returned', () {
+        'FST.sCP-07: GIVEN SchemeColor.secondaryContainer '
+        'EXPECT onSecondaryContainer color to be returned', () {
       expect(
-          FlexSubThemes.schemeColorPair(SchemeColor.secondaryVariant, scheme),
-          equals(const Color(0xFFEEEEEE)));
+          FlexSubThemes.schemeColorPair(SchemeColor.secondaryContainer, scheme),
+          equals(onSecondaryContainer));
     });
     test(
-        'FST.sCP-07: GIVEN SchemeColor.surface '
-        'EXPECT onSurface color to be returned', () {
-      expect(FlexSubThemes.schemeColorPair(SchemeColor.surface, scheme),
-          equals(const Color(0xFFCCCCCC)));
+        'FST.sCP-08: GIVEN SchemeColor.onSecondaryContainer '
+        'EXPECT secondaryContainer color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColorPair(
+              SchemeColor.onSecondaryContainer, scheme),
+          equals(secondaryContainer));
     });
     test(
-        'FST.sCP-08: GIVEN SchemeColor.onSurface '
-        'EXPECT surface color to be returned', () {
-      expect(FlexSubThemes.schemeColorPair(SchemeColor.onSurface, scheme),
-          equals(FlexColor.materialLightSurface));
+        'FST.sCP-09: GIVEN SchemeColor.tertiary '
+        'EXPECT onTertiary color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.tertiary, scheme),
+          equals(onTertiary));
     });
     test(
-        'FST.sCP-09: GIVEN SchemeColor.background '
-        'EXPECT onBackground color to be returned', () {
-      expect(FlexSubThemes.schemeColorPair(SchemeColor.background, scheme),
-          equals(const Color(0xFFDDDDDD)));
+        'FST.sCP-10: GIVEN SchemeColor.onTertiary '
+        'EXPECT tertiary color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.onTertiary, scheme),
+          equals(tertiary));
     });
     test(
-        'FST.sCP-10: GIVEN SchemeColor.onBackground '
-        'EXPECT background color to be returned', () {
-      expect(FlexSubThemes.schemeColorPair(SchemeColor.onBackground, scheme),
-          equals(FlexColor.materialLightBackground));
+        'FST.sCP-11: GIVEN SchemeColor.tertiaryContainer '
+        'EXPECT onTertiaryContainer color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColorPair(SchemeColor.tertiaryContainer, scheme),
+          equals(onTertiaryContainer));
     });
     test(
-        'FST.sCP-11: GIVEN SchemeColor.error '
+        'FST.sCP-12: GIVEN SchemeColor.onTertiaryContainer '
+        'EXPECT tertiaryContainer color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColorPair(
+              SchemeColor.onTertiaryContainer, scheme),
+          equals(tertiaryContainer));
+    });
+    test(
+        'FST.sCP-13: GIVEN SchemeColor.error '
         'EXPECT onError color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.error, scheme),
-          equals(const Color(0xFFAAAAAA)));
+          equals(onError));
     });
     test(
-        'FST.sCP-12: GIVEN SchemeColor.onError '
+        'FST.sCP-14: GIVEN SchemeColor.onError '
         'EXPECT error color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.onError, scheme),
-          equals(FlexColor.materialLightError));
+          equals(error));
+    });
+    test(
+        'FST.sCP-15: GIVEN SchemeColor.errorContainer '
+        'EXPECT onErrorContainer color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.errorContainer, scheme),
+          equals(onErrorContainer));
+    });
+    test(
+        'FST.sCP-16: GIVEN SchemeColor.onErrorContainer '
+        'EXPECT errorContainer color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColorPair(SchemeColor.onErrorContainer, scheme),
+          equals(errorContainer));
+    });
+    test(
+        'FST.sCP-17: GIVEN SchemeColor.background '
+        'EXPECT onBackground color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.background, scheme),
+          equals(onBackground));
+    });
+    test(
+        'FST.sCP-18: GIVEN SchemeColor.onBackground '
+        'EXPECT background color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.onBackground, scheme),
+          equals(background));
+    });
+    test(
+        'FST.sCP-19: GIVEN SchemeColor.surface '
+        'EXPECT onSurface color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.surface, scheme),
+          equals(onSurface));
+    });
+    test(
+        'FST.sCP-20: GIVEN SchemeColor.onSurface '
+        'EXPECT surface color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.onSurface, scheme),
+          equals(surface));
+    });
+    test(
+        'FST.sCP-21: GIVEN SchemeColor.surfaceVariant '
+        'EXPECT onSurfaceVariant color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.surfaceVariant, scheme),
+          equals(onSurfaceVariant));
+    });
+    test(
+        'FST.sCP-22: GIVEN SchemeColor.onSurfaceVariant '
+        'EXPECT surfaceVariant color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColorPair(SchemeColor.onSurfaceVariant, scheme),
+          equals(surfaceVariant));
+    });
+    test(
+        'FST.sCP-23: GIVEN SchemeColor.outline '
+        'EXPECT background color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.outline, scheme),
+          equals(background));
+    });
+    test(
+        'FST.sCP-24: GIVEN SchemeColor.shadow '
+        'EXPECT background color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.shadow, scheme),
+          equals(background));
+    });
+    test(
+        'FST.sCP-25: GIVEN SchemeColor.inverseSurface '
+        'EXPECT onInverseSurface color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.inverseSurface, scheme),
+          equals(onInverseSurface));
+    });
+    test(
+        'FST.sCP-26: GIVEN SchemeColor.onInverseSurface '
+        'EXPECT inverseSurface color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColorPair(SchemeColor.onInverseSurface, scheme),
+          equals(inverseSurface));
+    });
+    test(
+        'FST.sCP-27: GIVEN SchemeColor.inversePrimary '
+        'EXPECT primary color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.inversePrimary, scheme),
+          equals(primary));
+    });
+    test(
+        'FST.sCP-28: GIVEN SchemeColor.primaryVariant '
+        'EXPECT onPrimaryContainer color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.primaryVariant, scheme),
+          equals(onPrimaryContainer));
+    });
+    test(
+        'FST.sCP-29: GIVEN SchemeColor.secondaryVariant '
+        'EXPECT onSecondaryContainer color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColorPair(SchemeColor.secondaryVariant, scheme),
+          equals(onSecondaryContainer));
     });
   });
 }

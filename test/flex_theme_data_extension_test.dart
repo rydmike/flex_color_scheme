@@ -382,114 +382,129 @@ void main() {
 
     final ThemeData tLightL = FlexThemeData.light(
       colors: FlexColor.schemes[FlexScheme.material]!.light,
-      surfaceStyle: FlexSurface.light,
+      surfaceMode: FlexSurfaceMode.level,
+      blendLevel: 4,
       appBarStyle: FlexAppBarStyle.surface,
       tabBarStyle: FlexTabBarStyle.forBackground,
     );
 
     final ThemeData tDarkL = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
-      surfaceStyle: FlexSurface.light,
+      surfaceMode: FlexSurfaceMode.level,
+      blendLevel: 4,
       appBarStyle: FlexAppBarStyle.surface,
       tabBarStyle: FlexTabBarStyle.forBackground,
     );
-
     test(
         'FTD1.16: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexAppBarStyle.surface EXPECT appbar theme color '
-        'colorScheme.surface.', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT appbar theme color colorScheme.surface.', () {
       expect(tLightL.appBarTheme.backgroundColor, tLightL.colorScheme.surface);
     });
     test(
         'FTD1.17: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexAppBarStyle.surface EXPECT appbar theme color '
-        'colorScheme.surface.', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT appbar theme color colorScheme.surface.', () {
       expect(tDarkL.appBarTheme.backgroundColor, tDarkL.colorScheme.surface);
     });
 
     test(
         'FTD1.18: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH appBarElevation: default EXPECT appbar theme elevation 0.', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT appbar theme elevation 0.', () {
       expect(tLightL.appBarTheme.elevation, 0);
     });
     test(
         'FTD1.19: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH appBarElevation: default EXPECT appbar theme elevation 0.', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT appbar theme elevation 0.', () {
       expect(tDarkL.appBarTheme.elevation, 0);
     });
 
     test(
         'FTD1.2: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT surface Color(0xffffffff).', () {
-      expect(tLightL.colorScheme.surface, const Color(0xffffffff));
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT surface Color(0xfffcfbfe).', () {
+      expect(tLightL.colorScheme.surface, const Color(0xfffcfbfe));
     });
     test(
         'FTD1.21: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT surface Color(0xff141315).', () {
-      expect(tDarkL.colorScheme.surface, const Color(0xff141315));
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT surface Color(0xff131214).', () {
+      expect(tDarkL.colorScheme.surface, const Color(0xff131214));
     });
 
     test(
         'FTD1.22: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT background Color(0xfff9f8fc).', () {
-      expect(tLightL.colorScheme.background, const Color(0xfff9f8fc));
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT background Color(0xfffcfbfe).', () {
+      expect(tLightL.colorScheme.background, const Color(0xfffcfbfe));
     });
     test(
         'FTD1.23: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT background Color(0xff18151b).', () {
-      expect(tDarkL.colorScheme.background, const Color(0xff18151b));
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT background Color(0xff131214).', () {
+      expect(tDarkL.colorScheme.background, const Color(0xff131214));
     });
 
     test(
         'FTD1.24: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT scaffold '
-        'background Color(0xffffffff).', () {
-      expect(tLightL.scaffoldBackgroundColor, const Color(0xffffffff));
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT scaffold background Color(0xfffcfbfe).', () {
+      expect(tLightL.scaffoldBackgroundColor, const Color(0xfffcfbfe));
     });
     test(
         'FTD1.25: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT scaffold '
-        'background Color(0xff121212).', () {
-      expect(tDarkL.scaffoldBackgroundColor, const Color(0xff121212));
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'EXPECT scaffold background Color(0xff131214).', () {
+      expect(tDarkL.scaffoldBackgroundColor, const Color(0xff131214));
     });
 
     test(
         'FTD1.26: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'indicator color primary.', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'FlexTabBarStyle.forAppBar and FlexAppBarStyle.material '
+        'EXPECT indicator color primary.', () {
       expect(tLightL.indicatorColor, tLightL.colorScheme.primary);
     });
     test(
         'FTD1.27: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'indicator color primary.', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary '
+        'EXPECT indicator color primary.', () {
       expect(tDarkL.indicatorColor, tDarkL.colorScheme.primary);
     });
 
     test(
         'FTD1.28: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.labelColor primary.', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'FlexTabBarStyle.forAppBar and FlexAppBarStyle.material '
+        'EXPECT TabBarTheme.labelColor primary.', () {
       expect(tLightL.tabBarTheme.labelColor, tLightL.colorScheme.primary);
     });
     test(
         'FTD1.296: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.labelColor primary.', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary '
+        'EXPECT TabBarTheme.labelColor primary.', () {
       expect(tDarkL.tabBarTheme.labelColor, tDarkL.colorScheme.primary);
     });
 
     test(
         'FTD1.30: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'FlexTabBarStyle.forAppBar and FlexAppBarStyle.material '
+        'EXPECT TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).',
+        () {
       expect(tLightL.tabBarTheme.unselectedLabelColor,
           tLightL.colorScheme.onSurface.withOpacity(0.6));
     });
     test(
         'FTD1.31: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6)', () {
+        'WITH FlexSurfaceMode.level blendLevel: 4 '
+        'FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary '
+        'EXPECT TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6)',
+        () {
       expect(tDarkL.tabBarTheme.unselectedLabelColor,
           tDarkL.colorScheme.onSurface.withOpacity(0.6));
     });
@@ -502,22 +517,22 @@ void main() {
 
     final ThemeData tLightM = FlexThemeData.light(
       colors: FlexColor.schemes[FlexScheme.material]!.light,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
+      blendLevel: 10,
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 1,
       // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     );
-
     final ThemeData tDarkM = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
+      blendLevel: 10,
       appBarStyle: FlexAppBarStyle.primary,
       appBarElevation: 3,
       // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     );
-
     test(
         'FTD1.32: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.material EXPECT appbar theme color '
@@ -531,7 +546,6 @@ void main() {
         'colorScheme.primary.', () {
       expect(tDarkM.appBarTheme.backgroundColor, tDarkM.colorScheme.primary);
     });
-
     test(
         'FTD1.34: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH appBarElevation: 1 EXPECT appbar theme elevation 1.', () {
@@ -542,40 +556,42 @@ void main() {
         'WITH appBarElevation: 3 EXPECT appbar theme elevation 3.', () {
       expect(tDarkM.appBarTheme.elevation, 3);
     });
-
     test(
         'FTD1.36: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT surface Color(0xfffdfdfe).', () {
-      expect(tLightM.colorScheme.surface, const Color(0xfffdfdfe));
+        'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
+        'EXPECT surface Color(0xfff8f5fe).', () {
+      expect(tLightM.colorScheme.surface, const Color(0xfff8f5fe));
     });
     test(
         'FTD1.37: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurface.medium EXPECT surface Color(0xff17151a).', () {
       expect(tDarkM.colorScheme.surface, const Color(0xff17151a));
     });
-
     test(
         'FTD1.38: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT background Color(0xfff6f3fc).', () {
-      expect(tLightM.colorScheme.background, const Color(0xfff6f3fc));
+        'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
+        'EXPECT background Color(0xfff3eefc).', () {
+      expect(tLightM.colorScheme.background, const Color(0xfff3eefc));
     });
     test(
         'FTD1.24: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT background Color(0xff1d1922).', () {
-      expect(tDarkM.colorScheme.background, const Color(0xff1d1922));
+        'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
+        'EXPECT background Color(0xff1a161d).', () {
+      expect(tDarkM.colorScheme.background, const Color(0xff1a161d));
     });
 
     test(
         'FTD1.39: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT scaffold '
-        'background Color(0xffffffff).', () {
-      expect(tLightM.scaffoldBackgroundColor, const Color(0xffffffff));
+        'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
+        'EXPECT scaffold '
+        'background Color(0xfffbfafe).', () {
+      expect(tLightM.scaffoldBackgroundColor, const Color(0xfffbfafe));
     });
     test(
         'FTD1.40: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT scaffold '
-        'background Color(0xff121212).', () {
-      expect(tDarkM.scaffoldBackgroundColor, const Color(0xff121212));
+        'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
+        'background Color(0xff151416).', () {
+      expect(tDarkM.scaffoldBackgroundColor, const Color(0xff151416));
     });
 
     test(
@@ -603,7 +619,6 @@ void main() {
         'TabBarTheme.labelColor black87.', () {
       expect(tDarkM.tabBarTheme.labelColor, Colors.black87);
     });
-
     test(
         'FTD1.45: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
@@ -627,23 +642,23 @@ void main() {
 
     final ThemeData tLightS = FlexThemeData.light(
       colors: FlexColor.schemes[FlexScheme.material]!.light,
-      surfaceStyle: FlexSurface.strong,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 30,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 6,
       // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     );
-
     final ThemeData tDarkS = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
-      surfaceStyle: FlexSurface.strong,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 30,
       // ignore: avoid_redundant_argument_values
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 6,
       // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     );
-
     test(
         'FTD1.47: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.material EXPECT appbar theme color '
@@ -657,7 +672,6 @@ void main() {
         'colorScheme.primary.', () {
       expect(tDarkS.appBarTheme.backgroundColor, FlexColor.materialDarkSurface);
     });
-
     test(
         'FTD1.49: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH appBarElevation: 6 EXPECT appbar theme elevation 6.', () {
@@ -671,39 +685,40 @@ void main() {
 
     test(
         'FTD1.51: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT surface Color(0xfffbfafe).', () {
-      expect(tLightS.colorScheme.surface, const Color(0xfffbfafe));
+        'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
+        'EXPECT surface Color(0xfff3eefc).', () {
+      expect(tLightS.colorScheme.surface, const Color(0xfff3eefc));
     });
     test(
         'FTD1.52: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT surface Color(0xff1b171e).', () {
-      expect(tDarkS.colorScheme.surface, const Color(0xff1b171e));
+        'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
+        'EXPECT surface Color(0xff1a161d).', () {
+      expect(tDarkS.colorScheme.surface, const Color(0xff1a161d));
     });
-
     test(
         'FTD1.53: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT background Color(0xfff3eefc).', () {
+        'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
+        'EXPECT background Color(0xfff3eefc).', () {
       expect(tLightS.colorScheme.background, const Color(0xfff3eefc));
     });
     test(
         'FTD1.54: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT background Color(0xff221c29).', () {
-      expect(tDarkS.colorScheme.background, const Color(0xff221c29));
+        'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
+        'EXPECT background Color(0xff1a161d).', () {
+      expect(tDarkS.colorScheme.background, const Color(0xff1a161d));
     });
-
     test(
         'FTD1.55: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT scaffold '
-        'background Color(0xffffffff).', () {
-      expect(tLightS.scaffoldBackgroundColor, const Color(0xffffffff));
+        'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
+        'EXPECT scaffold background Color(0xffc6a3f7).', () {
+      expect(tLightS.scaffoldBackgroundColor, const Color(0xffc6a3f7));
     });
     test(
         'FTD1.56: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT scaffold '
-        'background Color(0xff121212).', () {
-      expect(tDarkS.scaffoldBackgroundColor, const Color(0xff121212));
+        'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
+        'EXPECT scaffold background Color(0xff4c3963).', () {
+      expect(tDarkS.scaffoldBackgroundColor, const Color(0xff4c3963));
     });
-
     test(
         'FTD1.57: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
@@ -716,7 +731,6 @@ void main() {
         'indicator color white.', () {
       expect(tDarkS.indicatorColor, Colors.white);
     });
-
     test(
         'FTD1.59: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
@@ -729,7 +743,6 @@ void main() {
         'TabBarTheme.labelColor white.', () {
       expect(tDarkS.tabBarTheme.labelColor, Colors.white);
     });
-
     test(
         'FTD1.61: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
@@ -753,7 +766,8 @@ void main() {
 
     final ThemeData tLightH = FlexThemeData.light(
       colors: FlexColor.schemes[FlexScheme.material]!.light,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
+      blendLevel: 40,
       appBarStyle: FlexAppBarStyle.background,
       appBarElevation: 2,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -761,10 +775,10 @@ void main() {
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
     );
-
     final ThemeData tDarkH = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
+      blendLevel: 40,
       appBarStyle: FlexAppBarStyle.background,
       appBarElevation: 4,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -772,7 +786,6 @@ void main() {
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
     );
-
     test(
         'FTD1.63: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
@@ -786,7 +799,6 @@ void main() {
         'colorScheme.background.', () {
       expect(tDarkH.appBarTheme.backgroundColor, tDarkH.colorScheme.background);
     });
-
     test(
         'FTD1.65: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH appBarElevation: 2 EXPECT appbar theme elevation 2.', () {
@@ -797,42 +809,42 @@ void main() {
         'WITH appBarElevation: 4 EXPECT appbar theme elevation 4.', () {
       expect(tDarkH.appBarTheme.elevation, 4);
     });
-
     test(
         'FTD1.67: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT surface Color(0xfffaf8fe).', () {
-      expect(tLightH.colorScheme.surface, const Color(0xfffaf8fe));
+        'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
+        'EXPECT surface Color(0xfff0e9fb).', () {
+      expect(tLightH.colorScheme.surface, const Color(0xfff0e9fb));
     });
     test(
         'FTD1.68: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT surface Color(0xff1e1a23).', () {
-      expect(tDarkH.colorScheme.surface, const Color(0xff1e1a23));
+        'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
+        'EXPECT surface Color(0xff1d1922).', () {
+      expect(tDarkH.colorScheme.surface, const Color(0xff1d1922));
     });
-
     test(
         'FTD1.69: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT background Color(0xfff0e9fb).', () {
+        'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
+        'EXPECT background Color(0xfff0e9fb).', () {
       expect(tLightH.colorScheme.background, const Color(0xfff0e9fb));
     });
     test(
         'FTD1.70: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT background Color(0xff272030).', () {
-      expect(tDarkH.colorScheme.background, const Color(0xff272030));
+        'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
+        'EXPECT background Color(0xff1d1922).', () {
+      expect(tDarkH.colorScheme.background, const Color(0xff1d1922));
     });
-
     test(
         'FTD1.71: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT scaffold '
-        'background Color(0xfffdfdfe).', () {
-      expect(tLightH.scaffoldBackgroundColor, const Color(0xfffdfdfe));
+        'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
+        'EXPECT scaffold background Color(0xffb485f5).', () {
+      expect(tLightH.scaffoldBackgroundColor, const Color(0xffb485f5));
     });
     test(
         'FTD1.72: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT scaffold '
-        'background Color(0xff151416).', () {
-      expect(tDarkH.scaffoldBackgroundColor, const Color(0xff151416));
+        'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
+        'EXPECT scaffold background Color(0xff60477f).', () {
+      expect(tDarkH.scaffoldBackgroundColor, const Color(0xff60477f));
     });
-
     test(
         'FTD1.73: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
@@ -845,7 +857,6 @@ void main() {
         'indicator color primary.', () {
       expect(tDarkH.indicatorColor, tDarkH.colorScheme.primary);
     });
-
     test(
         'FTD1.75: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
@@ -858,7 +869,6 @@ void main() {
         'TabBarTheme.labelColor primary.', () {
       expect(tDarkH.tabBarTheme.labelColor, tDarkH.colorScheme.primary);
     });
-
     test(
         'FTD1.77: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
@@ -883,21 +893,21 @@ void main() {
 
     final ThemeData tLightH2 = FlexThemeData.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 32,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       usedColors: 2,
     );
-
     final ThemeData tDarkH2 = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 32,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       darkIsTrueBlack: true,
       usedColors: 2,
     );
-
     test(
         'FTD1.79: GIVEN a FlexThemeData.light with heavy branding and 2 '
         'colors EXPECT none null result.', () {
@@ -908,24 +918,23 @@ void main() {
         '2 colors and true black EXPECT none null result.', () {
       expect(tDarkH2, isNotNull);
     });
-
     final ThemeData tLightH3 = FlexThemeData.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 32,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       usedColors: 3,
     );
-
     final ThemeData tDarkH3 = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 32,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       darkIsTrueBlack: true,
       usedColors: 3,
     );
-
     test(
         'FTD1.79: GIVEN a FlexThemeData.light with heavy branding and 3 '
         'colors EXPECT none null result.', () {
@@ -946,7 +955,8 @@ void main() {
 
     final ThemeData tLightC = FlexThemeData.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 2,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 2,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -955,10 +965,10 @@ void main() {
       bottomAppBarElevation: 1,
       usedColors: 1,
     );
-
     final ThemeData tDarkC = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 2,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -968,7 +978,6 @@ void main() {
       darkIsTrueBlack: true,
       usedColors: 1,
     );
-
     test(
         'FTD1.81: GIVEN a FlexThemeData.light with more options '
         'EXPECT none null result.', () {
@@ -979,11 +988,11 @@ void main() {
         'EXPECT none null result.', () {
       expect(tDarkC, isNotNull);
     });
-
     // With surface and background colors defined
     final ThemeData tLightC2 = FlexThemeData.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 10,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 2,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -995,10 +1004,10 @@ void main() {
       background: FlexColor.materialLightBackground,
       scaffoldBackground: FlexColor.materialLightBackground,
     );
-
     final ThemeData tDarkC2 = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 10,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1011,10 +1020,10 @@ void main() {
       background: FlexColor.materialDarkBackground,
       scaffoldBackground: FlexColor.materialDarkBackground,
     );
-
     final ThemeData tDarkC2tb = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 10,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1026,7 +1035,6 @@ void main() {
       background: FlexColor.materialDarkBackground,
       scaffoldBackground: FlexColor.materialDarkBackground,
     );
-
     test(
         'FTD1.81: GIVEN a FlexThemeData.light with more options '
         'like custom surface and background '
@@ -1045,7 +1053,6 @@ void main() {
         'EXPECT OK and identical to copy.', () {
       expect(tDarkC2tb, tDarkC2tb.copyWith());
     });
-
     // Default light TextTheme equality verification.
     //
     // Flex default TextTheme light
@@ -1059,7 +1066,6 @@ void main() {
         'ThemeData(typography: Typography.material2018()).textTheme.', () {
       expect(fLightT, equals(nLightT));
     });
-
     // Default light Primary TextTheme equality verification.
     //
     // Flex default TextTheme light
@@ -1074,7 +1080,6 @@ void main() {
         () {
       expect(fLightP, equals(nLightP));
     });
-
     // Default dark TextTheme equality verification.
     final TextTheme fDarkT = FlexThemeData.dark().textTheme;
     final TextTheme nDarkT = ThemeData(
@@ -1086,7 +1091,6 @@ void main() {
         'EXPECT equal to default dark with Typography 2018.', () {
       expect(fDarkT, equals(nDarkT));
     });
-
     // Primary dark text theme verification, this is not equal to default
     // ThemeData primary text theme, it is so by design, we have to also
     // set the primaryColor to the color used by FlexColorScheme.dark, otherwise
@@ -1107,7 +1111,6 @@ void main() {
         'primaryColor set as in FlexColorScheme.light.', () {
       expect(fDarkP, equals(nDarkP));
     });
-
     // Next let's test som crazy themes, make one for TextTheme
     const TextTheme customText = TextTheme(
       headline6: TextStyle(
@@ -1283,14 +1286,16 @@ void main() {
       expect(
         FlexThemeData.light(
           scheme: FlexScheme.bigStone,
-          surfaceStyle: FlexSurface.heavy,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+          blendLevel: 10,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
           usedColors: 2,
         ),
         FlexColorScheme.light(
           scheme: FlexScheme.bigStone,
-          surfaceStyle: FlexSurface.heavy,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+          blendLevel: 10,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
           usedColors: 2,
@@ -1299,14 +1304,16 @@ void main() {
       expect(
         FlexThemeData.dark(
           scheme: FlexScheme.bigStone,
-          surfaceStyle: FlexSurface.heavy,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+          blendLevel: 12,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
           usedColors: 2,
         ),
         FlexColorScheme.dark(
           scheme: FlexScheme.bigStone,
-          surfaceStyle: FlexSurface.heavy,
+          surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+          blendLevel: 12,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
           usedColors: 2,
@@ -1321,7 +1328,6 @@ void main() {
           colors: FlexColor.mandyRed.light,
           scheme: FlexScheme.bigStone,
           usedColors: 3,
-          surfaceStyle: FlexSurface.strong,
           surfaceMode: FlexSurfaceMode.level,
           blendLevel: 0,
           appBarStyle: FlexAppBarStyle.background,
@@ -1375,7 +1381,6 @@ void main() {
           colors: FlexColor.mandyRed.dark,
           scheme: FlexScheme.bigStone,
           usedColors: 3,
-          surfaceStyle: FlexSurface.strong,
           surfaceMode: FlexSurfaceMode.level,
           blendLevel: 0,
           appBarStyle: FlexAppBarStyle.background,
@@ -1433,7 +1438,6 @@ void main() {
           colors: FlexColor.mandyRed.light,
           scheme: FlexScheme.bigStone,
           usedColors: 3,
-          surfaceStyle: FlexSurface.strong,
           surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
           blendLevel: 0,
           appBarStyle: FlexAppBarStyle.background,
@@ -1489,7 +1493,6 @@ void main() {
           colors: FlexColor.mandyRed.dark,
           scheme: FlexScheme.bigStone,
           usedColors: 3,
-          surfaceStyle: FlexSurface.strong,
           surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
           blendLevel: 0,
           appBarStyle: FlexAppBarStyle.background,
@@ -1604,7 +1607,6 @@ void main() {
         colors: FlexColor.mandyRed.light,
         scheme: FlexScheme.bigStone,
         usedColors: 2,
-        surfaceStyle: FlexSurface.strong,
         surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
         blendLevel: 0,
         appBarStyle: FlexAppBarStyle.primary,
@@ -1691,7 +1693,6 @@ void main() {
           colors: FlexColor.mandyRed.dark,
           scheme: FlexScheme.bigStone,
           usedColors: 3,
-          surfaceStyle: FlexSurface.strong,
           surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
           blendLevel: 0,
           appBarStyle: FlexAppBarStyle.background,
@@ -1837,7 +1838,6 @@ void main() {
         colors: FlexColor.mandyRed.light,
         scheme: FlexScheme.bigStone,
         usedColors: 3,
-        surfaceStyle: FlexSurface.strong,
         surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
         blendLevel: 0,
         appBarStyle: FlexAppBarStyle.primary,
@@ -2011,7 +2011,6 @@ void main() {
         colors: FlexColor.mandyRed.light,
         scheme: FlexScheme.bigStone,
         usedColors: 3,
-        surfaceStyle: FlexSurface.strong,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 0,
         appBarStyle: FlexAppBarStyle.primary,
@@ -2184,7 +2183,6 @@ void main() {
         colors: FlexColor.mandyRed.dark,
         scheme: FlexScheme.bigStone,
         usedColors: 3,
-        surfaceStyle: FlexSurface.strong,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 20,
         appBarStyle: FlexAppBarStyle.background,
