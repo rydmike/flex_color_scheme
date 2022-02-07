@@ -371,8 +371,8 @@ enum FlexAppBarStyle {
   /// [FlexSchemeColor.secondaryContainer] also assigned to
   /// [FlexSchemeColor.appBarColor], so with them, the custom choice always
   /// results in the [FlexSchemeColor.secondaryContainer] color, which is same
-  /// as output [ColorScheme.secondaryContainer], being used as the [AppBar] color
-  /// when using the [custom] choice with them.
+  /// as output [ColorScheme.secondaryContainer], being used as the [AppBar]
+  /// color when using the [custom] choice with them.
   ///
   /// FlexColorSchemes using custom [FlexSchemeColor] can assign any color
   /// to their [FlexSchemeColor.appBarColor] color. It does not have to be

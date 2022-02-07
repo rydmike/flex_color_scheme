@@ -1065,15 +1065,15 @@ const FlexSchemeData _myFlexScheme = FlexSchemeData(
   description: 'Midnight blue theme, custom definition of all colors',
   light: FlexSchemeColor(
     primary: Color(0xFF00296B),
-    primaryVariant: Color(0xFF2F5C91),
+    primaryContainer: Color(0xFF2F5C91),
     secondary: Color(0xFFFF7B00),
-    secondaryVariant: Color(0xFFFDB100),
+    secondaryContainer: Color(0xFFFDB100),
   ),
   dark: FlexSchemeColor(
     primary: Color(0xFF6B8BC3),
-    primaryVariant: Color(0xFF4874AA),
+    primaryContainer: Color(0xFF4874AA),
     secondary: Color(0xffff7155),
-    secondaryVariant: Color(0xFFF1CB9D),
+    secondaryContainer: Color(0xFFF1CB9D),
   ),
 );
 ```
@@ -1409,10 +1409,10 @@ to the optional `appBarColor`.
 // Create a custom flex scheme color for a light theme.
 static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
   primary: Color(0xFF00296B),
-  primaryVariant: Color(0xFF2F5C91),
+  primaryContainer: Color(0xFF2F5C91),
   secondary: Color(0xFFFF7B00),
-  secondaryVariant: Color(0xFFFDB100),
-  // The built in schemes use their secondary variant color as their
+  secondaryContainer: Color(0xFFFDB100),
+  // The built in schemes use their secondary container color as their
   // custom app bar color, but it can be any color. We use a custom color
   // here. We will see this in example 5 when using the theme and selecting
   // the custom app bar style.
@@ -1421,9 +1421,9 @@ static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
 // Create a corresponding custom flex scheme color for a dark theme.
 static const FlexSchemeColor _myScheme1Dark = FlexSchemeColor(
   primary: Color(0xFF6B8BC3),
-  primaryVariant: Color(0xFF4874AA),
+  primaryContainer: Color(0xFF4874AA),
   secondary: Color(0xffff7155),
-  secondaryVariant: Color(0xFFF1CB9D),
+  secondaryContainer: Color(0xFFF1CB9D),
   appBarColor: Color(0xFF892807),
 );
 ```
@@ -1432,13 +1432,13 @@ You can build a scheme the long way, by specifying all the required
 scheme colors, like above, or you can also build schemes from a
 single primary color. With the `FlexSchemeColor.from` factory. When doing so
 the only required color is the primary color, the other colors will be
-computed. You can optionally also provide the `primaryVariant`, `secondary` and
-`secondaryVariant` colors with the factory, but any color that is not provided
+computed. You can optionally also provide the `primaryContainer`, `secondary` and
+`secondaryContainer` colors with the factory, but any color that is not provided
 will always be computed to get all the required colors in `FlexSchemeColor`.
 
 In this example we create our 2nd scheme from just a primary color for the 
 light and dark schemes. The custom `appBarColor` does in this case also receive
-the same color value as the one that is computed for `secondaryVariant`
+the same color value as the one that is computed for `secondaryContainer`
 color. This is its default with the `FlexSchemeColor.from` factory if the 
 color is not specified.
 
@@ -1451,7 +1451,7 @@ FlexSchemeColor.from(primary: const Color(0xFF629F80));
 ```
 
 For our 3rd custom color scheme we define primary and secondary colors, 
-but no variant colors, we will not make any dark scheme definitions either, all
+but no container colors, we will not make any dark scheme definitions either, all
 these missing colors will be computed. The missing color definitions will
 get computed by the factory `FlexSchemeColor.from` when it creates the
 `FlexSchemeColor` object. To make our dark colors for this light scheme, we
