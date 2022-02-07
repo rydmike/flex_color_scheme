@@ -147,28 +147,6 @@ extension FlexThemeData on ThemeData {
     /// color values.
     final int usedColors = 4,
 
-    // TODO(rydmike): Removed commented deprecated code.
-    // /// Blends theme colors into surfaces and backgrounds. Deprecated use
-    // /// [surfaceMode] in combination with [blendLevel] instead.
-    // ///
-    // /// This property was used in FlexColorScheme before v4.0.0.
-    // /// It is is still available for backwards compatibility.
-    // /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
-    // /// and offers more surface color configuration options and choices.
-    // ///
-    // /// Defaults to [FlexSurface.material] which results in Flutter
-    // /// standard [ColorScheme.light] surface colors, which follows the
-    // /// default color scheme in the Material Design guide for light theme found
-    // /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
-    // ///
-    // /// If values for the properties [surface], [background],
-    // /// [dialogBackground] or [scaffoldBackground] are given,
-    // /// they are used instead of values that would be assigned based
-    // /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
-    // /// this [surfaceStyle].
-    // @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
-    //     final FlexSurface surfaceStyle = FlexSurface.material,
-
     /// Blends theme colors into surfaces and backgrounds.
     ///
     /// If defined, used mode overrides the older [surfaceStyle]
@@ -308,6 +286,24 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? primary,
 
+    /// A color used for elements needing less emphasis than [primary].
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    ///
+    /// The override color is included and affected by factory
+    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// Defaults to null.
+    final Color? primaryContainer,
+
     /// A darker version of the primary color.
     ///
     /// In Flutter SDK the [primaryVariant] color is only used by [SnackBar]
@@ -319,9 +315,9 @@ extension FlexThemeData on ThemeData {
     /// not used as default color by any other built-in widgets. This applies
     /// to Flutter 2.8.1 and earlier versions.
     ///
-    /// The property is being deprecated in Flutter SDK and will be replaced
-    /// by a new property called primaryContainer. It is deprecated from
-    /// master v2.6.0-0.0.pre, but has not yet reached stable (2.8.1).
+    /// The property is deprecated in Flutter SDK and was replaced
+    /// by a new property called [primaryContainer]. It is deprecated from
+    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
     /// See https://github.com/flutter/flutter/issues/89852.
     ///
     /// When using the factory this is an override color for the color that
@@ -338,7 +334,9 @@ extension FlexThemeData on ThemeData {
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? primaryVariant,
+    @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
+        'due to deprecation in Flutter master from 2.10.0')
+        final Color? primaryVariant,
 
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
@@ -359,13 +357,7 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? secondary,
 
-    /// A darker version of the secondary color.
-    ///
-    /// In Flutter SDK the [secondaryVariant] color is not used by in any
-    /// built-in widgets default themes or predefined widget behavior.
-    /// It is an excellent property to use if you need a custom color for
-    /// custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any built-in widgets.
+    /// A color used for elements needing less emphasis than [secondary].
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
@@ -381,7 +373,40 @@ extension FlexThemeData on ThemeData {
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? secondaryVariant,
+    final Color? secondaryContainer,
+
+    /// A darker version of the secondary color.
+    ///
+    /// In Flutter SDK the [secondaryVariant] color is not used by in any
+    /// built-in widgets default themes or predefined widget behavior.
+    /// It is an excellent property to use if you need a custom color for
+    /// custom widgets accessible via your application's ThemeData, and that is
+    /// not used as default color by any built-in widgets. So you are in
+    /// Flutter 2.8.1 and earlier version free to set it to whatever color you
+    /// need and not affect any built-in widgets theme based colors.
+    ///
+    /// The property is deprecated in Flutter SDK and was replaced
+    /// by a new property called [secondaryContainer]. It is deprecated from
+    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
+    /// See https://github.com/flutter/flutter/issues/89852.
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// Defaults to null.
+    @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
+        'due to deprecation in Flutter master from 2.10.0')
+        final Color? secondaryVariant,
 
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
@@ -476,10 +501,10 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onPrimary,
 
-    /// A color that's clearly legible when drawn on [primaryVariant].
+    /// A color that's clearly legible when drawn on [primaryContainer].
     ///
     /// To ensure that an app is accessible, a contrast ratio between
-    /// [primaryVariant] and [onPrimaryContainer] of at least 4.5:1
+    /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
     /// is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
@@ -513,10 +538,10 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onSecondary,
 
-    /// A color that's clearly legible when drawn on [secondaryVariant].
+    /// A color that's clearly legible when drawn on [secondaryContainer].
     ///
     /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryVariant] and [onSecondaryContainer] of at least 4.5:1
+    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
     /// is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
@@ -592,7 +617,7 @@ extension FlexThemeData on ThemeData {
     /// lighter (8%), if using low blend levels they may become fully white too.
     final bool lightIsWhite = false,
 
-    /// When true, the primary and primaryVariant colors will be swapped with
+    /// When true, the primary and primaryContainer colors will be swapped with
     /// their secondary counter parts.
     ///
     /// Set this flag to true if you want to make a theme where
@@ -897,8 +922,6 @@ extension FlexThemeData on ThemeData {
       scheme: scheme,
       colorScheme: colorScheme,
       usedColors: usedColors,
-      // TODO(rydmike): Removed commented deprecated code.
-      // surfaceStyle: surfaceStyle,
       surfaceMode: surfaceMode,
       blendLevel: blendLevel,
       appBarStyle: appBarStyle,
@@ -907,9 +930,9 @@ extension FlexThemeData on ThemeData {
       bottomAppBarElevation: bottomAppBarElevation,
       tabBarStyle: tabBarStyle,
       primary: primary,
-      primaryVariant: primaryVariant,
+      primaryContainer: primaryContainer ?? primaryVariant,
       secondary: secondary,
-      secondaryVariant: secondaryVariant,
+      secondaryContainer: secondaryContainer ?? secondaryVariant,
       error: error,
       surface: surface,
       background: background,
@@ -1045,28 +1068,6 @@ extension FlexThemeData on ThemeData {
     /// [FlexSchemeColor.from] is using to compute any main missing scheme
     /// color values.
     final int usedColors = 4,
-
-    // TODO(rydmike): Removed commented deprecated code.
-    // /// Blends theme colors into surfaces and backgrounds. Deprecated use
-    // /// [surfaceMode] in combination with [blendLevel] instead.
-    // ///
-    // /// This property was used in FlexColorScheme before v4.0.0.
-    // /// It is is still available for backwards compatibility.
-    // /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
-    // /// and offers more surface color configuration options and choices.
-    // ///
-    // /// Defaults to [FlexSurface.material] which results in Flutter
-    // /// standard [ColorScheme.light] surface colors, which follows the
-    // /// default color scheme in the Material Design guide for light theme found
-    // /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
-    // ///
-    // /// If values for the properties [surface], [background],
-    // /// [dialogBackground] or [scaffoldBackground] are given,
-    // /// they are used instead of values that would be assigned based
-    // /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
-    // /// this [surfaceStyle].
-    // @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
-    //     final FlexSurface surfaceStyle = FlexSurface.material,
 
     /// Blends theme colors into surfaces and backgrounds.
     ///
@@ -1207,6 +1208,24 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? primary,
 
+    /// A color used for elements needing less emphasis than [primary].
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    ///
+    /// The override color is included and affected by factory
+    /// properties [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// Defaults to null.
+    final Color? primaryContainer,
+
     /// A darker version of the primary color.
     ///
     /// In Flutter SDK the [primaryVariant] color is only used by [SnackBar]
@@ -1218,9 +1237,9 @@ extension FlexThemeData on ThemeData {
     /// not used as default color by any other built-in widgets. This applies
     /// to Flutter 2.8.1 and earlier versions.
     ///
-    /// The property is being deprecated in Flutter SDK and will be replaced
-    /// by a new property called primaryContainer. It is deprecated from
-    /// master v2.6.0-0.0.pre, but has not yet reached stable (2.8.1).
+    /// The property is deprecated in Flutter SDK and was replaced
+    /// by a new property called [primaryContainer]. It is deprecated from
+    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
     /// See https://github.com/flutter/flutter/issues/89852.
     ///
     /// When using the factory this is an override color for the color that
@@ -1237,7 +1256,9 @@ extension FlexThemeData on ThemeData {
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? primaryVariant,
+    @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
+        'due to deprecation in Flutter master from 2.10.0')
+        final Color? primaryVariant,
 
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
@@ -1258,13 +1279,7 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? secondary,
 
-    /// A darker version of the secondary color.
-    ///
-    /// In Flutter SDK the [secondaryVariant] color is not used by in any
-    /// built-in widgets default themes or predefined widget behavior.
-    /// It is an excellent property to use if you need a custom color for
-    /// custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any built-in widgets.
+    /// A color used for elements needing less emphasis than [secondary].
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
@@ -1280,7 +1295,40 @@ extension FlexThemeData on ThemeData {
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? secondaryVariant,
+    final Color? secondaryContainer,
+
+    /// A darker version of the secondary color.
+    ///
+    /// In Flutter SDK the [secondaryVariant] color is not used by in any
+    /// built-in widgets default themes or predefined widget behavior.
+    /// It is an excellent property to use if you need a custom color for
+    /// custom widgets accessible via your application's ThemeData, and that is
+    /// not used as default color by any built-in widgets. So you are in
+    /// Flutter 2.8.1 and earlier version free to set it to whatever color you
+    /// need and not affect any built-in widgets theme based colors.
+    ///
+    /// The property is deprecated in Flutter SDK and was replaced
+    /// by a new property called [secondaryContainer]. It is deprecated from
+    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
+    /// See https://github.com/flutter/flutter/issues/89852.
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// Defaults to null.
+    @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
+        'due to deprecation in Flutter master from 2.10.0')
+        final Color? secondaryVariant,
 
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
@@ -1376,10 +1424,10 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onPrimary,
 
-    /// A color that's clearly legible when drawn on [primaryVariant].
+    /// A color that's clearly legible when drawn on [primaryContainer].
     ///
     /// To ensure that an app is accessible, a contrast ratio between
-    /// [primaryVariant] and [onPrimaryContainer] of at least 4.5:1
+    /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
     /// is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
@@ -1413,10 +1461,10 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onSecondary,
 
-    /// A color that's clearly legible when drawn on [secondaryVariant].
+    /// A color that's clearly legible when drawn on [secondaryContainer].
     ///
     /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryVariant] and [onSecondaryContainer] of at least 4.5:1
+    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
     /// is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
@@ -1492,7 +1540,7 @@ extension FlexThemeData on ThemeData {
     /// darker (8%), if using low blend levels they may become fully black too.
     final bool darkIsTrueBlack = false,
 
-    /// When true, the primary and primaryVariant colors will be swapped with
+    /// When true, the primary and primaryContainer colors will be swapped with
     /// their secondary counter parts.
     ///
     /// Set this flag to true if you want to make a theme where
@@ -1797,8 +1845,6 @@ extension FlexThemeData on ThemeData {
       colors: colors,
       scheme: scheme,
       usedColors: usedColors,
-      // TODO(rydmike): Removed commented deprecated code.
-      // surfaceStyle: surfaceStyle,
       surfaceMode: surfaceMode,
       blendLevel: blendLevel,
       appBarStyle: appBarStyle,
@@ -1807,9 +1853,9 @@ extension FlexThemeData on ThemeData {
       bottomAppBarElevation: bottomAppBarElevation,
       tabBarStyle: tabBarStyle,
       primary: primary,
-      primaryVariant: primaryVariant,
+      primaryContainer: primaryContainer ?? primaryVariant,
       secondary: secondary,
-      secondaryVariant: secondaryVariant,
+      secondaryContainer: secondaryContainer ?? secondaryVariant,
       error: error,
       surface: surface,
       background: background,

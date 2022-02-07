@@ -179,9 +179,9 @@ void main() {
           const FlexColorScheme(
             brightness: Brightness.light,
             primary: Color(0xff0000ba),
-            primaryVariant: Color(0xff000088),
+            primaryContainer: Color(0xff000088),
             secondary: Color(0xff66fff9),
-            secondaryVariant: Color(0xff018786),
+            secondaryContainer: Color(0xff018786),
             error: Color(0xff790000),
             surface: Colors.white,
             background: Colors.white,
@@ -195,9 +195,9 @@ void main() {
           ).toTheme,
           equals(FlexColorScheme.light(
             primary: const Color(0xff0000ba),
-            primaryVariant: const Color(0xff000088),
+            primaryContainer: const Color(0xff000088),
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff018786),
+            secondaryContainer: const Color(0xff018786),
             error: const Color(0xff790000),
             // These will be computed results with the .light factory
             // with above inputs, that should match manual assignments.
@@ -261,11 +261,11 @@ void main() {
             brightness: Brightness.light,
             primary: Color(0xff0000ba),
             onPrimary: Colors.white,
-            primaryVariant: Color(0xff000088),
+            primaryContainer: Color(0xff000088),
             onPrimaryContainer: Colors.white,
             secondary: Color(0xff66fff9),
             onSecondary: Colors.black,
-            secondaryVariant: Color(0xff018786),
+            secondaryContainer: Color(0xff018786),
             onSecondaryContainer: Colors.white,
             error: Color(0xff790000),
             onError: Colors.white,
@@ -320,10 +320,10 @@ void main() {
             colorScheme: hcDarkWithLight,
             brightness: Brightness.light,
             primary: const Color(0xff0000ba),
-            primaryVariant: const Color(0xff000088),
+            primaryContainer: const Color(0xff000088),
             onPrimaryContainer: Colors.white,
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff018786),
+            secondaryContainer: const Color(0xff018786),
             onSecondaryContainer: Colors.white,
             surface: Colors.white,
             background: Colors.white,
@@ -336,10 +336,10 @@ void main() {
           ).toScheme.toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(FlexColorScheme.light(
             primary: const Color(0xff0000ba),
-            primaryVariant: const Color(0xff000088),
+            primaryContainer: const Color(0xff000088),
             onPrimaryContainer: Colors.white,
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff018786),
+            secondaryContainer: const Color(0xff018786),
             onSecondaryContainer: Colors.white,
             surface: Colors.white,
             background: Colors.white,
@@ -363,10 +363,10 @@ void main() {
             colorScheme: hcDarkWithLight,
             brightness: Brightness.light,
             primary: const Color(0xff0000ba),
-            primaryVariant: const Color(0xff000088),
+            primaryContainer: const Color(0xff000088),
             onPrimaryContainer: Colors.white,
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff018786),
+            secondaryContainer: const Color(0xff018786),
             onSecondaryContainer: Colors.white,
             surface: Colors.white,
             background: Colors.white,
@@ -379,10 +379,10 @@ void main() {
           ).toTheme,
           equals(FlexColorScheme.light(
             primary: const Color(0xff0000ba),
-            primaryVariant: const Color(0xff000088),
+            primaryContainer: const Color(0xff000088),
             onPrimaryContainer: Colors.white,
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff018786),
+            secondaryContainer: const Color(0xff018786),
             onSecondaryContainer: Colors.white,
             surface: Colors.white,
             background: Colors.white,
@@ -406,10 +406,10 @@ void main() {
             colorScheme: hcDarkWithLight,
             brightness: Brightness.light,
             primary: const Color(0xff0000ba),
-            primaryVariant: const Color(0xff000088),
+            primaryContainer: const Color(0xff000088),
             onPrimaryContainer: Colors.white,
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff018786),
+            secondaryContainer: const Color(0xff018786),
             onSecondaryContainer: Colors.white,
             surface: Colors.white,
             background: Colors.white,
@@ -423,10 +423,10 @@ void main() {
           equals(FlexColorScheme.light(
             colors: FlexColor.ebonyClay.light,
             primary: const Color(0xff0000ba),
-            primaryVariant: const Color(0xff000088),
+            primaryContainer: const Color(0xff000088),
             onPrimaryContainer: Colors.white,
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff018786),
+            secondaryContainer: const Color(0xff018786),
             onSecondaryContainer: Colors.white,
             surface: Colors.white,
             background: Colors.white,
@@ -467,11 +467,11 @@ void main() {
           equals(FlexColorScheme.dark(
             primary: const Color(0xffefb7ff),
             onPrimary: Colors.black,
-            primaryVariant: const Color(0xffbe9eff),
+            primaryContainer: const Color(0xffbe9eff),
             onPrimaryContainer: Colors.black,
             secondary: const Color(0xff66fff9),
             onSecondary: Colors.black,
-            secondaryVariant: const Color(0xff66fff9),
+            secondaryContainer: const Color(0xff66fff9),
             onSecondaryContainer: Colors.black,
             error: const Color(0xff9b374d),
             onError: Colors.black,
@@ -491,9 +491,9 @@ void main() {
           const FlexColorScheme(
             brightness: Brightness.dark,
             primary: Color(0xffefb7ff),
-            primaryVariant: Color(0xffbe9eff),
+            primaryContainer: Color(0xffbe9eff),
             secondary: Color(0xff66fff9),
-            secondaryVariant: Color(0xff66fff9),
+            secondaryContainer: Color(0xff66fff9),
             surface: Color(0xff121212),
             background: Color(0xff121212),
             error: Color(0xff9b374d),
@@ -507,9 +507,9 @@ void main() {
           ).toTheme,
           equals(FlexColorScheme.dark(
             primary: const Color(0xffefb7ff),
-            primaryVariant: const Color(0xffbe9eff),
+            primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff66fff9),
+            secondaryContainer: const Color(0xff66fff9),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
@@ -567,9 +567,9 @@ void main() {
             colorScheme: hcLightWithDark,
             brightness: Brightness.dark,
             primary: const Color(0xffefb7ff),
-            primaryVariant: const Color(0xffbe9eff),
+            primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff66fff9),
+            secondaryContainer: const Color(0xff66fff9),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
@@ -583,9 +583,9 @@ void main() {
           ).toTheme,
           equals(FlexColorScheme.dark(
             primary: const Color(0xffefb7ff),
-            primaryVariant: const Color(0xffbe9eff),
+            primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff66fff9),
+            secondaryContainer: const Color(0xff66fff9),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
@@ -613,9 +613,9 @@ void main() {
             colorScheme: hcLightWithDark,
             brightness: Brightness.dark,
             primary: const Color(0xffefb7ff),
-            primaryVariant: const Color(0xffbe9eff),
+            primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff66fff9),
+            secondaryContainer: const Color(0xff66fff9),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
@@ -630,9 +630,9 @@ void main() {
           equals(FlexColorScheme.dark(
             scheme: FlexScheme.amber,
             primary: const Color(0xffefb7ff),
-            primaryVariant: const Color(0xffbe9eff),
+            primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff66fff9),
+            secondaryContainer: const Color(0xff66fff9),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
@@ -657,9 +657,9 @@ void main() {
             colorScheme: hcLightWithDark,
             brightness: Brightness.dark,
             primary: const Color(0xffefb7ff),
-            primaryVariant: const Color(0xffbe9eff),
+            primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff66fff9),
+            secondaryContainer: const Color(0xff66fff9),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
@@ -674,9 +674,9 @@ void main() {
           equals(FlexColorScheme.dark(
             colors: FlexColor.ebonyClay.light,
             primary: const Color(0xffefb7ff),
-            primaryVariant: const Color(0xffbe9eff),
+            primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff66fff9),
+            secondaryContainer: const Color(0xff66fff9),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
@@ -715,9 +715,9 @@ void main() {
           ).toTheme,
           equals(FlexColorScheme.dark(
             primary: const Color(0xffefb7ff),
-            primaryVariant: const Color(0xffbe9eff),
+            primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
-            secondaryVariant: const Color(0xff66fff9),
+            secondaryContainer: const Color(0xff66fff9),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
@@ -738,9 +738,9 @@ void main() {
           const FlexColorScheme(
             brightness: Brightness.light,
             primary: FlexColor.materialLightPrimary,
-            primaryVariant: FlexColor.materialLightPrimaryContainer,
+            primaryContainer: FlexColor.materialLightPrimaryContainer,
             secondary: FlexColor.materialLightSecondary,
-            secondaryVariant: FlexColor.materialLightSecondaryContainer,
+            secondaryContainer: FlexColor.materialLightSecondaryContainer,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(FlexColorScheme.light()
               .toTheme
@@ -756,9 +756,9 @@ void main() {
           const FlexColorScheme(
             brightness: Brightness.light,
             primary: FlexColor.materialLightPrimary,
-            primaryVariant: FlexColor.materialLightPrimaryContainer,
+            primaryContainer: FlexColor.materialLightPrimaryContainer,
             secondary: FlexColor.materialLightSecondary,
-            secondaryVariant: FlexColor.materialLightSecondaryContainer,
+            secondaryContainer: FlexColor.materialLightSecondaryContainer,
           ).toTheme,
           equals(FlexColorScheme.light().toTheme));
     });
@@ -825,9 +825,9 @@ void main() {
           const FlexColorScheme(
             brightness: Brightness.dark,
             primary: FlexColor.materialDarkPrimary,
-            primaryVariant: FlexColor.materialDarkPrimaryContainer,
+            primaryContainer: FlexColor.materialDarkPrimaryContainer,
             secondary: FlexColor.materialDarkSecondary,
-            secondaryVariant: FlexColor.materialDarkSecondaryContainer,
+            secondaryContainer: FlexColor.materialDarkSecondaryContainer,
           ).toTheme,
           equals(FlexColorScheme.dark().toTheme));
     });
@@ -843,9 +843,9 @@ void main() {
         equals(const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightSecondary,
-          primaryVariant: FlexColor.materialLightSecondaryContainer,
+          primaryContainer: FlexColor.materialLightSecondaryContainer,
           secondary: FlexColor.materialLightPrimary,
-          secondaryVariant: FlexColor.materialLightPrimaryContainer,
+          secondaryContainer: FlexColor.materialLightPrimaryContainer,
         ).toTheme),
       );
     });
@@ -861,9 +861,9 @@ void main() {
         equals(const FlexColorScheme(
           brightness: Brightness.dark,
           primary: FlexColor.materialDarkSecondary,
-          primaryVariant: FlexColor.materialDarkSecondaryContainer,
+          primaryContainer: FlexColor.materialDarkSecondaryContainer,
           secondary: FlexColor.materialDarkPrimary,
-          secondaryVariant: FlexColor.materialDarkPrimaryContainer,
+          secondaryContainer: FlexColor.materialDarkPrimaryContainer,
         ).toTheme),
       );
     });
@@ -930,16 +930,16 @@ void main() {
         const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightPrimary,
-          primaryVariant: FlexColor.materialLightPrimaryContainer,
+          primaryContainer: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
-          secondaryVariant: FlexColor.materialLightSecondaryContainer,
+          secondaryContainer: FlexColor.materialLightSecondaryContainer,
         ).toTheme,
         equals(const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightPrimary,
-          primaryVariant: FlexColor.materialLightPrimaryContainer,
+          primaryContainer: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
-          secondaryVariant: FlexColor.materialLightSecondaryContainer,
+          secondaryContainer: FlexColor.materialLightSecondaryContainer,
         ).toTheme),
       );
     });
@@ -952,16 +952,16 @@ void main() {
         const FlexColorScheme(
           brightness: Brightness.dark,
           primary: FlexColor.materialDarkPrimary,
-          primaryVariant: FlexColor.materialDarkPrimaryContainer,
+          primaryContainer: FlexColor.materialDarkPrimaryContainer,
           secondary: FlexColor.materialDarkSecondary,
-          secondaryVariant: FlexColor.materialDarkSecondaryContainer,
+          secondaryContainer: FlexColor.materialDarkSecondaryContainer,
         ).toTheme,
         equals(const FlexColorScheme(
           brightness: Brightness.dark,
           primary: FlexColor.materialDarkPrimary,
-          primaryVariant: FlexColor.materialDarkPrimaryContainer,
+          primaryContainer: FlexColor.materialDarkPrimaryContainer,
           secondary: FlexColor.materialDarkSecondary,
-          secondaryVariant: FlexColor.materialDarkSecondaryContainer,
+          secondaryContainer: FlexColor.materialDarkSecondaryContainer,
         ).toTheme),
       );
     });
@@ -970,17 +970,17 @@ void main() {
     final ThemeData themeLight = const FlexColorScheme(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryContainer,
+      primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryContainer,
+      secondaryContainer: FlexColor.materialLightSecondaryContainer,
     ).toTheme;
     // themeDark = Default material dark scheme colors.
     final ThemeData themeDark = const FlexColorScheme(
       brightness: Brightness.dark,
       primary: FlexColor.materialDarkPrimary,
-      primaryVariant: FlexColor.materialDarkPrimaryContainer,
+      primaryContainer: FlexColor.materialDarkPrimaryContainer,
       secondary: FlexColor.materialDarkSecondary,
-      secondaryVariant: FlexColor.materialDarkSecondaryContainer,
+      secondaryContainer: FlexColor.materialDarkSecondaryContainer,
       // For the dark theme to be equal to ThemeData.from colorscheme dark we
       // have to override the computed onError color for the standard Material
       // dark error color. This is because the Material standard defines
@@ -1768,9 +1768,9 @@ void main() {
 
     final FlexColorScheme sLightH2Raw = FlexColorScheme.light(
         primary: const Color(0xffcd5758),
-        primaryVariant: const Color(0xffba3738),
+        primaryContainer: const Color(0xffba3738),
         secondary: const Color(0xff57c8d3),
-        secondaryVariant: const Color(0xff33b7c4),
+        secondaryContainer: const Color(0xff33b7c4),
         surface: const Color(0xfffdfafa),
         background: const Color(0xfff9eff0),
         error: const Color(0xff790000),
@@ -1826,9 +1826,9 @@ void main() {
 
     final FlexColorScheme sDarkH2Raw = FlexColorScheme.dark(
         primary: const Color(0xffda8585),
-        primaryVariant: const Color(0xffce5e5e),
+        primaryContainer: const Color(0xffce5e5e),
         secondary: const Color(0xff68cdd7),
-        secondaryVariant: const Color(0xff40c0cc),
+        secondaryContainer: const Color(0xff40c0cc),
         surface: const Color(0xff090808),
         background: const Color(0xff140f0f),
         error: const Color(0xffcf6679),

@@ -239,13 +239,13 @@ void main() {
         'FST.sC-28: GIVEN SchemeColor.primaryVariant '
         'EXPECT primaryVariant color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.primaryVariant, scheme),
-          equals(primaryVariant));
+          equals(primaryContainer));
     });
     test(
         'FST.sC-29: GIVEN SchemeColor.secondaryVariant '
         'EXPECT secondaryVariant color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.secondaryVariant, scheme),
-          equals(secondaryVariant));
+          equals(secondaryContainer));
     });
   });
 

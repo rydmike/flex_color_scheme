@@ -297,9 +297,9 @@ class FlexSubThemes {
       case SchemeColor.inversePrimary:
         return colorScheme.inversePrimary;
       case SchemeColor.primaryVariant:
-        return colorScheme.primaryVariant;
+        return colorScheme.primaryContainer;
       case SchemeColor.secondaryVariant:
-        return colorScheme.secondaryVariant;
+        return colorScheme.secondaryContainer;
     }
   }
 
