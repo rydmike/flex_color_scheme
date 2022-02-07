@@ -14,18 +14,18 @@ void main() {
       description: FlexColor.materialDescription,
       light: FlexSchemeColor(
         primary: FlexColor.materialLightPrimary,
-        primaryVariant: FlexColor.materialLightPrimaryContainer,
+        primaryContainer: FlexColor.materialLightPrimaryContainer,
         secondary: FlexColor.materialLightSecondary,
-        secondaryVariant: FlexColor.materialLightSecondaryVariant,
-        appBarColor: FlexColor.materialLightSecondaryVariant,
+        secondaryContainer: FlexColor.materialLightSecondaryContainer,
+        appBarColor: FlexColor.materialLightSecondaryContainer,
         error: FlexColor.materialLightError,
       ),
       dark: FlexSchemeColor(
         primary: FlexColor.materialDarkPrimary,
-        primaryVariant: FlexColor.materialDarkPrimaryVariant,
+        primaryContainer: FlexColor.materialDarkPrimaryContainer,
         secondary: FlexColor.materialDarkSecondary,
-        secondaryVariant: FlexColor.materialDarkSecondaryVariant,
-        appBarColor: FlexColor.materialDarkSecondaryVariant,
+        secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+        appBarColor: FlexColor.materialDarkSecondaryContainer,
         error: FlexColor.materialDarkError,
       ),
     );
@@ -35,18 +35,18 @@ void main() {
       description: FlexColor.materialDescription,
       light: FlexSchemeColor(
         primary: FlexColor.materialLightPrimary,
-        primaryVariant: FlexColor.materialLightPrimaryContainer,
+        primaryContainer: FlexColor.materialLightPrimaryContainer,
         secondary: FlexColor.materialLightSecondary,
-        secondaryVariant: FlexColor.materialLightSecondaryVariant,
-        appBarColor: FlexColor.materialLightSecondaryVariant,
+        secondaryContainer: FlexColor.materialLightSecondaryContainer,
+        appBarColor: FlexColor.materialLightSecondaryContainer,
         error: FlexColor.materialLightError,
       ),
       dark: FlexSchemeColor(
         primary: FlexColor.materialDarkPrimary,
-        primaryVariant: FlexColor.materialDarkPrimaryVariant,
+        primaryContainer: FlexColor.materialDarkPrimaryContainer,
         secondary: FlexColor.materialDarkSecondary,
-        secondaryVariant: FlexColor.materialDarkSecondaryVariant,
-        appBarColor: FlexColor.materialDarkSecondaryVariant,
+        secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+        appBarColor: FlexColor.materialDarkSecondaryContainer,
         error: FlexColor.materialDarkError,
       ),
     );
@@ -55,18 +55,18 @@ void main() {
       description: FlexColor.materialDescription,
       light: FlexSchemeColor(
         primary: FlexColor.materialLightPrimary,
-        primaryVariant: FlexColor.materialLightPrimaryContainer,
+        primaryContainer: FlexColor.materialLightPrimaryContainer,
         secondary: FlexColor.materialLightSecondary,
-        secondaryVariant: FlexColor.materialLightSecondaryVariant,
-        appBarColor: FlexColor.materialLightSecondaryVariant,
+        secondaryContainer: FlexColor.materialLightSecondaryContainer,
+        appBarColor: FlexColor.materialLightSecondaryContainer,
         error: FlexColor.materialLightError,
       ),
       dark: FlexSchemeColor(
         primary: FlexColor.materialDarkPrimary,
-        primaryVariant: FlexColor.materialDarkPrimaryVariant,
+        primaryContainer: FlexColor.materialDarkPrimaryContainer,
         secondary: FlexColor.materialDarkSecondary,
-        secondaryVariant: FlexColor.materialDarkSecondaryVariant,
-        appBarColor: FlexColor.materialDarkSecondaryVariant,
+        secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+        appBarColor: FlexColor.materialDarkSecondaryContainer,
         error: FlexColor.materialDarkError,
       ),
     );
@@ -139,18 +139,18 @@ void main() {
       description: FlexColor.materialHcDescription,
       light: FlexSchemeColor(
         primary: FlexColor.materialLightPrimaryHc,
-        primaryVariant: FlexColor.materialLightPrimaryVariantHc,
+        primaryContainer: FlexColor.materialLightPrimaryContainerHc,
         secondary: FlexColor.materialLightSecondaryHc,
-        secondaryVariant: FlexColor.materialLightSecondaryVariantHc,
-        appBarColor: FlexColor.materialLightSecondaryVariantHc,
+        secondaryContainer: FlexColor.materialLightSecondaryContainerHc,
+        appBarColor: FlexColor.materialLightSecondaryContainerHc,
         error: FlexColor.materialLightErrorHc,
       ),
       dark: FlexSchemeColor(
         primary: FlexColor.materialDarkPrimaryHc,
-        primaryVariant: FlexColor.materialDarkPrimaryVariantHc,
+        primaryContainer: FlexColor.materialDarkPrimaryContainerHc,
         secondary: FlexColor.materialDarkSecondaryHc,
-        secondaryVariant: FlexColor.materialDarkSecondaryVariantHc,
-        appBarColor: FlexColor.materialDarkSecondaryVariantHc,
+        secondaryContainer: FlexColor.materialDarkSecondaryContainerHc,
+        appBarColor: FlexColor.materialDarkSecondaryContainerHc,
         error: FlexColor.materialDarkErrorHc,
       ),
     );
@@ -184,18 +184,18 @@ void main() {
           description: FlexColor.materialDescription,
           light: const FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
-            primaryVariant: FlexColor.materialLightPrimaryContainer,
+            primaryContainer: FlexColor.materialLightPrimaryContainer,
             secondary: FlexColor.materialLightSecondary,
-            secondaryVariant: FlexColor.materialLightSecondaryVariant,
-            appBarColor: FlexColor.materialLightSecondaryVariant,
+            secondaryContainer: FlexColor.materialLightSecondaryContainer,
+            appBarColor: FlexColor.materialLightSecondaryContainer,
             error: FlexColor.materialLightError,
           ),
           dark: const FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
-            primaryVariant: FlexColor.materialDarkPrimaryVariant,
+            primaryContainer: FlexColor.materialDarkPrimaryContainer,
             secondary: FlexColor.materialDarkSecondary,
-            secondaryVariant: FlexColor.materialDarkSecondaryVariant,
-            appBarColor: FlexColor.materialDarkSecondaryVariant,
+            secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            appBarColor: FlexColor.materialDarkSecondaryContainer,
             error: FlexColor.materialDarkError,
           ),
         ),
@@ -222,7 +222,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeData#00000(name: "Material default", description: "Default Material color theme, used in the design guide", light: FlexSchemeColor#1b048(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020)), dark: FlexSchemeColor#74195(primary: Color(0xffbb86fc), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff03dac6), appBarColor: Color(0xff03dac6), error: Color(0xffcf6679)))'));
+              'FlexSchemeData#00000(name: "Material default", description: "Default Material color theme, used in the design guide", light: FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020), primaryVariant: Color(0xff3700b3), secondaryVariant: Color(0xff018786)), dark: FlexSchemeColor#00000(primary: Color(0xffbb86fc), primaryContainer: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff03dac6), appBarColor: Color(0xff03dac6), error: Color(0xffcf6679), primaryVariant: Color(0xff3700b3), secondaryVariant: Color(0xff03dac6)))'));
     });
     test(
         'FSD1.12: Test toStringShort implemented via debugFillProperties '
@@ -236,7 +236,7 @@ void main() {
     // This happens to always equal now in tests, if it start failing, test
     // 13c is actually enough.
     test('FSD1.13b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 275401919);
+      expect(m1.hashCode, 161134515);
     });
     test('FSD1.13c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));

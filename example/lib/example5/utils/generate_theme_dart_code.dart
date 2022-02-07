@@ -18,9 +18,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
       : '  colors: const FlexSchemeColor(\n'
           '    primary: ${scheme.light.primary},\n'
-          '    primaryVariant: ${scheme.light.primaryVariant},\n'
+          '    primaryContainer: ${scheme.light.primaryContainer},\n'
           '    secondary: ${scheme.light.secondary},\n'
-          '    secondaryVariant: ${scheme.light.secondaryVariant},\n'
+          '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
           '    appBarColor: ${scheme.light.appBarColor},\n'
           '    error: ${scheme.light.error},\n'
           '  ),\n';
@@ -28,9 +28,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
       : '  colors: const FlexSchemeColor(\n'
           '    primary: ${scheme.dark.primary},\n'
-          '    primaryVariant: ${scheme.dark.primaryVariant},\n'
+          '    primaryContainer: ${scheme.dark.primaryContainer},\n'
           '    secondary: ${scheme.dark.secondary},\n'
-          '    secondaryVariant: ${scheme.dark.secondaryVariant},\n'
+          '    secondaryContainer: ${scheme.dark.secondaryContainer},\n'
           '    appBarColor: ${scheme.dark.appBarColor},\n'
           '    error: ${scheme.dark.error},\n'
           '  ),\n';
@@ -38,9 +38,9 @@ String generateThemeDartCode(ThemeController controller) {
   if (controller.useToDarkMethod) {
     darkScheme = '  colors: const FlexSchemeColor(\n'
         '    primary: ${scheme.light.primary},\n'
-        '    primaryVariant: ${scheme.light.primaryVariant},\n'
+        '    primaryContainer: ${scheme.light.primaryContainer},\n'
         '    secondary: ${scheme.light.secondary},\n'
-        '    secondaryVariant: ${scheme.light.secondaryVariant},\n'
+        '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
         '    appBarColor: ${scheme.light.appBarColor},\n'
         '    error: ${scheme.light.error},\n'
         '  ).defaultError.toDark(${controller.darkMethodLevel}),\n';

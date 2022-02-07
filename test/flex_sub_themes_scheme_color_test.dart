@@ -11,7 +11,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.materialLightSecondaryVariant,
+      secondaryContainer: FlexColor.materialLightSecondaryContainer,
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
@@ -56,7 +56,7 @@ void main() {
         'FST.sC-06: GIVEN SchemeColor.secondaryVariant '
         'EXPECT secondaryVariant color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.secondaryVariant, scheme),
-          equals(FlexColor.materialLightSecondaryVariant));
+          equals(FlexColor.materialLightSecondaryContainer));
     });
     test(
         'FST.sC-07: GIVEN SchemeColor.surface '
@@ -104,7 +104,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.materialLightSecondaryVariant,
+      secondaryContainer: FlexColor.materialLightSecondaryContainer,
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,

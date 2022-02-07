@@ -1093,25 +1093,25 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Loads setting for primaryVariantLight color, in example 5.
+  /// Loads setting for primaryContainerLight color, in example 5.
   @override
-  Future<Color> primaryVariantLight() async {
+  Future<Color> primaryContainerLight() async {
     try {
       final Color value = Color(
-          _prefs.getInt(ThemeService.keyPrimaryVariantLight) ??
-              ThemeService.defaultPrimaryVariantLight.value);
+          _prefs.getInt(ThemeService.keyPrimaryContainerLight) ??
+              ThemeService.defaultPrimaryContainerLight.value);
       return value;
     } catch (e) {
       debugPrint(e.toString());
-      return ThemeService.defaultPrimaryVariantLight;
+      return ThemeService.defaultPrimaryContainerLight;
     }
   }
 
-  /// Persists setting for primaryVariantLight color, in example 5.
+  /// Persists setting for primaryContainerLight color, in example 5.
   @override
-  Future<void> savePrimaryVariantLight(Color value) async {
+  Future<void> savePrimaryContainerLight(Color value) async {
     try {
-      await _prefs.setInt(ThemeService.keyPrimaryVariantLight, value.value);
+      await _prefs.setInt(ThemeService.keyPrimaryContainerLight, value.value);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -1140,25 +1140,25 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Loads setting for secondaryVariantLight color, in example 5.
+  /// Loads setting for secondaryContainerLight color, in example 5.
   @override
-  Future<Color> secondaryVariantLight() async {
+  Future<Color> secondaryContainerLight() async {
     try {
       final Color value = Color(
-          _prefs.getInt(ThemeService.keySecondaryVariantLight) ??
-              ThemeService.defaultSecondaryVariantLight.value);
+          _prefs.getInt(ThemeService.keySecondaryContainerLight) ??
+              ThemeService.defaultSecondaryContainerLight.value);
       return value;
     } catch (e) {
       debugPrint(e.toString());
-      return ThemeService.defaultSecondaryVariantLight;
+      return ThemeService.defaultSecondaryContainerLight;
     }
   }
 
-  /// Persists setting for secondaryVariantLight color, in example 5.
+  /// Persists setting for secondaryContainerLight color, in example 5.
   @override
-  Future<void> saveSecondaryVariantLight(Color value) async {
+  Future<void> saveSecondaryContainerLight(Color value) async {
     try {
-      await _prefs.setInt(ThemeService.keySecondaryVariantLight, value.value);
+      await _prefs.setInt(ThemeService.keySecondaryContainerLight, value.value);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -1187,25 +1187,25 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Loads setting for primaryVariantDark color, in example 5.
+  /// Loads setting for primaryContainerDark color, in example 5.
   @override
-  Future<Color> primaryVariantDark() async {
+  Future<Color> primaryContainerDark() async {
     try {
       final Color value = Color(
-          _prefs.getInt(ThemeService.keyPrimaryVariantDark) ??
-              ThemeService.defaultPrimaryVariantDark.value);
+          _prefs.getInt(ThemeService.keyPrimaryContainerDark) ??
+              ThemeService.defaultPrimaryContainerDark.value);
       return value;
     } catch (e) {
       debugPrint(e.toString());
-      return ThemeService.defaultPrimaryVariantDark;
+      return ThemeService.defaultPrimaryContainerDark;
     }
   }
 
-  /// Persists setting for primaryVariantDark color, in example 5.
+  /// Persists setting for primaryContainerDark color, in example 5.
   @override
-  Future<void> savePrimaryVariantDark(Color value) async {
+  Future<void> savePrimaryContainerDark(Color value) async {
     try {
-      await _prefs.setInt(ThemeService.keyPrimaryVariantDark, value.value);
+      await _prefs.setInt(ThemeService.keyPrimaryContainerDark, value.value);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -1234,25 +1234,25 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Loads setting for secondaryVariantDark color, in example 5.
+  /// Loads setting for secondaryContainerDark color, in example 5.
   @override
-  Future<Color> secondaryVariantDark() async {
+  Future<Color> secondaryContainerDark() async {
     try {
       final Color value = Color(
-          _prefs.getInt(ThemeService.keySecondaryVariantDark) ??
-              ThemeService.defaultSecondaryVariantDark.value);
+          _prefs.getInt(ThemeService.keySecondaryContainerDark) ??
+              ThemeService.defaultSecondaryContainerDark.value);
       return value;
     } catch (e) {
       debugPrint(e.toString());
-      return ThemeService.defaultSecondaryVariantDark;
+      return ThemeService.defaultSecondaryContainerDark;
     }
   }
 
-  /// Persists setting for secondaryVariantDark color, in example 5.
+  /// Persists setting for secondaryContainerDark color, in example 5.
   @override
-  Future<void> saveSecondaryVariantDark(Color value) async {
+  Future<void> saveSecondaryContainerDark(Color value) async {
     try {
-      await _prefs.setInt(ThemeService.keySecondaryVariantDark, value.value);
+      await _prefs.setInt(ThemeService.keySecondaryContainerDark, value.value);
     } catch (e) {
       debugPrint(e.toString());
     }

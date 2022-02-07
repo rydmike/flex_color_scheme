@@ -17,28 +17,28 @@ void main() {
     // m1 = Basic flex scheme color .
     const FlexSchemeColor m1 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryContainer,
+      primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
-      appBarColor: FlexColor.materialLightSecondaryVariant,
+      secondaryContainer: FlexColor.materialLightSecondaryContainer,
+      appBarColor: FlexColor.materialLightSecondaryContainer,
       error: FlexColor.materialLightError,
     );
     // m2, same definition as m1.
     const FlexSchemeColor m2 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryContainer,
+      primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
-      appBarColor: FlexColor.materialLightSecondaryVariant,
+      secondaryContainer: FlexColor.materialLightSecondaryContainer,
+      appBarColor: FlexColor.materialLightSecondaryContainer,
       error: FlexColor.materialLightError,
     );
     // m3, different values than m1 and m2.
     const FlexSchemeColor m3 = FlexSchemeColor(
       primary: FlexColor.materialDarkPrimary,
-      primaryVariant: FlexColor.materialDarkPrimaryVariant,
+      primaryContainer: FlexColor.materialDarkPrimaryContainer,
       secondary: FlexColor.materialDarkSecondary,
-      secondaryVariant: FlexColor.materialDarkSecondaryVariant,
-      appBarColor: FlexColor.materialDarkSecondaryVariant,
+      secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+      appBarColor: FlexColor.materialDarkSecondaryContainer,
       error: FlexColor.materialDarkError,
     );
     // mFrom, create from just a primary color.
@@ -87,11 +87,13 @@ void main() {
       expect(
         m3.copyWith(
           primary: FlexColor.materialLightPrimary,
-          primaryVariant: FlexColor.materialLightPrimaryContainer,
+          primaryContainer: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
-          secondaryVariant: FlexColor.materialLightSecondaryVariant,
-          appBarColor: FlexColor.materialLightSecondaryVariant,
+          secondaryContainer: FlexColor.materialLightSecondaryContainer,
+          appBarColor: FlexColor.materialLightSecondaryContainer,
           error: FlexColor.materialLightError,
+          primaryVariant: FlexColor.materialLightPrimaryContainer,
+          secondaryVariant: FlexColor.materialLightSecondaryContainer,
         ),
         m1,
       );
@@ -109,9 +111,9 @@ void main() {
           mFrom,
           const FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
-            primaryVariant: Color(0xff4d00bb),
+            primaryContainer: Color(0xff4d00bb),
             secondary: Color(0xff5800d5),
-            secondaryVariant: Color(0xff4500a7),
+            secondaryContainer: Color(0xff4500a7),
             appBarColor: Color(0xff4500a7),
           ));
     });
@@ -138,11 +140,13 @@ void main() {
           m1.toDark(100),
           m1.copyWith(
             primary: Colors.white,
-            primaryVariant: Colors.white,
+            primaryContainer: Colors.white,
             secondary: Colors.white,
-            secondaryVariant: Colors.white,
+            secondaryContainer: Colors.white,
             appBarColor: Colors.white,
             error: Colors.white,
+            primaryVariant: Colors.white,
+            secondaryVariant: Colors.white,
           ));
     });
     test(
@@ -171,9 +175,9 @@ void main() {
               secondary: FlexColor.materialLightSecondary),
           const FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
-            primaryVariant: Color(0xff4d00bb),
+            primaryContainer: Color(0xff4d00bb),
             secondary: FlexColor.materialLightSecondary,
-            secondaryVariant: Color(0xff02a898),
+            secondaryContainer: Color(0xff02a898),
             appBarColor: Color(0xff02a898),
           ));
     });
@@ -190,8 +194,10 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1, 3),
         m1.copyWith(
+          secondaryContainer:
+              m1.secondary.darken(kDarkenSecondaryContainerFromSecondary),
           secondaryVariant:
-              m1.secondary.darken(kDarkenSecondaryVariantFromSecondary),
+              m1.secondary.darken(kDarkenSecondaryContainerFromSecondary),
         ),
       );
     });
@@ -203,9 +209,12 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1, 2),
         m1.copyWith(
-          primaryVariant: m1.primary.darken(kDarkenPrimaryVariant),
+          primaryContainer: m1.primary.darken(kDarkenPrimaryContainer),
+          secondaryContainer:
+              m1.secondary.darken(kDarkenSecondaryContainerFromSecondary),
+          primaryVariant: m1.primary.darken(kDarkenPrimaryContainer),
           secondaryVariant:
-              m1.secondary.darken(kDarkenSecondaryVariantFromSecondary),
+              m1.secondary.darken(kDarkenSecondaryContainerFromSecondary),
         ),
       );
     });
@@ -217,9 +226,11 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1, 1),
         m1.copyWith(
-          primaryVariant: m1.primary.darken(kDarkenPrimaryVariant),
+          primaryContainer: m1.primary.darken(kDarkenPrimaryContainer),
           secondary: m1.primary.darken(kDarkenSecondary),
-          secondaryVariant: m1.primary.darken(kDarkenSecondaryVariant),
+          secondaryContainer: m1.primary.darken(kDarkenSecondaryContainer),
+          primaryVariant: m1.primary.darken(kDarkenPrimaryContainer),
+          secondaryVariant: m1.primary.darken(kDarkenSecondaryContainer),
         ),
       );
     });
@@ -231,18 +242,21 @@ void main() {
       expect(
           FlexSchemeColor.effective(m1, 4, swapColors: true),
           m1.copyWith(
-              primary: m1.secondary,
-              primaryVariant: m1.secondaryVariant,
-              secondary: m1.primary,
-              secondaryVariant: m1.primaryVariant));
+            primary: m1.secondary,
+            primaryContainer: m1.secondaryContainer,
+            secondary: m1.primary,
+            secondaryContainer: m1.primaryContainer,
+            primaryVariant: m1.secondaryVariant,
+            secondaryVariant: m1.primaryVariant,
+          ));
     });
 
     const FlexSchemeColor m1Swap = FlexSchemeColor(
       primary: FlexColor.materialLightSecondary,
-      primaryVariant: FlexColor.materialLightSecondaryVariant,
+      primaryContainer: FlexColor.materialLightSecondaryContainer,
       secondary: FlexColor.materialLightPrimary,
-      secondaryVariant: FlexColor.materialLightPrimaryContainer,
-      appBarColor: FlexColor.materialLightSecondaryVariant,
+      secondaryContainer: FlexColor.materialLightPrimaryContainer,
+      appBarColor: FlexColor.materialLightSecondaryContainer,
       error: FlexColor.materialLightError,
     );
 
@@ -262,8 +276,10 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1, 3, swapColors: true),
         m1Swap.copyWith(
+          secondaryContainer:
+              m1Swap.secondary.darken(kDarkenSecondaryContainerFromSecondary),
           secondaryVariant:
-              m1Swap.secondary.darken(kDarkenSecondaryVariantFromSecondary),
+              m1Swap.secondary.darken(kDarkenSecondaryContainerFromSecondary),
         ),
       );
     });
@@ -277,9 +293,12 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1, 2, swapColors: true),
         m1Swap.copyWith(
-          primaryVariant: m1Swap.primary.darken(kDarkenPrimaryVariant),
+          primaryContainer: m1Swap.primary.darken(kDarkenPrimaryContainer),
+          secondaryContainer:
+              m1Swap.secondary.darken(kDarkenSecondaryContainerFromSecondary),
+          primaryVariant: m1Swap.primary.darken(kDarkenPrimaryContainer),
           secondaryVariant:
-              m1Swap.secondary.darken(kDarkenSecondaryVariantFromSecondary),
+              m1Swap.secondary.darken(kDarkenSecondaryContainerFromSecondary),
         ),
       );
     });
@@ -294,9 +313,11 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1, 1, swapColors: true),
         m1Swap.copyWith(
-          primaryVariant: m1Swap.primary.darken(kDarkenPrimaryVariant),
+          primaryContainer: m1Swap.primary.darken(kDarkenPrimaryContainer),
           secondary: m1Swap.primary.darken(kDarkenSecondary),
-          secondaryVariant: m1Swap.primary.darken(kDarkenSecondaryVariant),
+          secondaryContainer: m1Swap.primary.darken(kDarkenSecondaryContainer),
+          primaryVariant: m1Swap.primary.darken(kDarkenPrimaryContainer),
+          secondaryVariant: m1Swap.primary.darken(kDarkenSecondaryContainer),
         ),
       );
     });
@@ -315,7 +336,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020))'));
+              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020), primaryVariant: Color(0xff3700b3), secondaryVariant: Color(0xff018786))'));
     });
     test(
         'FSC1.18: Test toStringShort implemented via debugFillProperties '
@@ -331,7 +352,7 @@ void main() {
     // This happens to be always equal now in tests, if it start failing, test
     // 14c is actually enough.
     test('FSC1.19b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 416146294);
+      expect(m1.hashCode, 324383957);
     });
     test('FSC1.19c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));

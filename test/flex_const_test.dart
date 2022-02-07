@@ -21,16 +21,16 @@ void main() {
   //****************************************************************************
   group('FCT: Test that const value definitions are as specified', () {
     test('FCT kDarkenPrimaryVariant is 10', () {
-      expect(kDarkenPrimaryVariant, 10);
+      expect(kDarkenPrimaryContainer, 10);
     });
     test('FCT kDarkenSecondary is 5', () {
       expect(kDarkenSecondary, 5);
     });
     test('FCT kDarkenSecondaryVariantFromSecondary is 10', () {
-      expect(kDarkenSecondaryVariantFromSecondary, 10);
+      expect(kDarkenSecondaryContainerFromSecondary, 10);
     });
     test('FCT kDarkenSecondaryVariant is 14', () {
-      expect(kDarkenSecondaryVariant, 14);
+      expect(kDarkenSecondaryContainer, 14);
     });
     test('FCT kLightBlendSurfaceLight is 0', () {
       expect(kLightBlendSurfaceLight, 0);
