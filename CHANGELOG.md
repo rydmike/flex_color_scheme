@@ -5,25 +5,41 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 ## v5.0.0-dev.1 - February 7, 2022 - WORK IN PROGRESS
 
-* **Breaking**: Require min Dart SDK 2.16, bundled with Flutter 2.10.0. Uses
+This release is big refactor with substantial deprecation of previous
+`variant` based names in favor of `container` that was added to updated M3
+based `Colorcheme` in Flutter 2.10.0.
+
+* **Breaking**: Requires min Dart SDK 2.16, bundled with Flutter 2.10.0. Uses
   new M3 `ColorScheme` properties that are not included before Flutter version
   2.10.0.
-* **New:** Added `onPrimaryContainer` and `onSecondaryContainer` to theme 
+* **New:** Added `onPrimaryContainer` and `onSecondaryContainer` to all theme 
   constructors and factories.
-* **New:** Added `useMaterial3` theme constructors and factories. This is the
-  same flag us in `ThemeData`, it does not really have any major impact on
-  default themed widgets. Opting in on opinionated sub-themes, will however
-  as before give opinionated default sub-themes that results in M3 like style
-  that will become default widget design later when using the flag 
-  `useMaterial3` set to true.
+* **New:** Added `useMaterial3` to all theme constructors and factories. This is
+  the same flag us in `ThemeData`, it does not have any impact on
+  default themed widgets yet in Flutter 2.10.0. Opting in on opinionated 
+  sub-themes, will however as before give opinionated default sub-themes that 
+  result in M3 like style. Similar look will become default widget design in 
+  later Flutter SDK versions when using the flag `useMaterial3` set to true.
 * **New:** Added additional `ColorScheme` color selection options to 
   sub-themes configuration class `FlexSubThemesData`. The feature
   introduced in version 4.2.0 is now also supported by sub themes for:
   - Floating Action Button, via `FlexSubThemesData.fabSchemeColor`
-
-* **TODO:** Migrate all `variant` named properties to `container` named ones,
+* **Change:** In `FlexColor` renamed all color values with `variant` in their
+  name to `container`, to match new SDK names for colors intended for 
+  corresponding container color property in Flutter 2.10 M3 base `ColorScheme`.
+  The previous names are still available as deprecated names and will remain
+  available until version 6.0.0.
+* **Change:** In `FlexSchemeColor` added properties `primaryContainer` and
+ `secondaryContainer` the replace deprecated properties `primaryVariant`
+  `secondaryVariant`. The old properties still work and map to the new ones.
+  The previous properties are still available as deprecated and will remain
+  available until version 6.0.0.
+* **TODO:** Migrate all other `variant` named properties to `container` named ones,
   keeping the `variant` named deprecated ones around until version 6.0.0. 
 * **TODO:** Add tests for new prop `fabSchemeColor` and its features.
+* **TODO:** Add main `SchemeColor` enum color selection to all buttons.
+* **TODO:** Add all new `ColorScheme` properties to `SchemeColor` enum and its
+  static functions `schemeColor` and `schemeColorPair`.
 
 ## v4.2.0 - January 24, 2022
 

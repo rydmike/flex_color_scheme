@@ -552,18 +552,18 @@ abstract class ThemeService {
   /// Persists setting for primaryLight color, in example 5.
   Future<void> savePrimaryLight(Color value);
 
-  /// Key used to read and save the primaryVariantLight color value.
-  static const String keyPrimaryVariantLight = 'primaryVariantLight';
+  /// Key used to read and save the primaryContainerLight color value.
+  static const String keyPrimaryContainerLight = 'primaryContainerLight';
 
   /// Default value for the primaryLight color, also to reset settings.
-  static const Color defaultPrimaryVariantLight =
+  static const Color defaultPrimaryContainerLight =
       FlexColor.materialLightPrimaryContainer;
 
-  /// Loads setting for primaryVariantLight color, in example 5.
-  Future<Color> primaryVariantLight();
+  /// Loads setting for primaryContainerLight color, in example 5.
+  Future<Color> primaryContainerLight();
 
-  /// Persists setting for primaryVariantLight color, in example 5.
-  Future<void> savePrimaryVariantLight(Color value);
+  /// Persists setting for primaryContainerLight color, in example 5.
+  Future<void> savePrimaryContainerLight(Color value);
 
   /// Key used to read and save the secondaryLight color value.
   static const String keySecondaryLight = 'secondaryLight';
@@ -577,18 +577,18 @@ abstract class ThemeService {
   /// Persists setting for secondaryLight color, in example 5.
   Future<void> saveSecondaryLight(Color value);
 
-  /// Key used to read and save the secondaryVariantLight color value.
-  static const String keySecondaryVariantLight = 'secondaryVariantLight';
+  /// Key used to read and save the secondaryContainerLight color value.
+  static const String keySecondaryContainerLight = 'secondaryContainerLight';
 
   /// Default value for the secondaryLight color, also to reset settings.
-  static const Color defaultSecondaryVariantLight =
-      FlexColor.materialLightSecondaryVariant;
+  static const Color defaultSecondaryContainerLight =
+      FlexColor.materialLightSecondaryContainer;
 
-  /// Loads setting for secondaryVariantLight color, in example 5.
-  Future<Color> secondaryVariantLight();
+  /// Loads setting for secondaryContainerLight color, in example 5.
+  Future<Color> secondaryContainerLight();
 
-  /// Persists setting for secondaryVariantLight color, in example 5.
-  Future<void> saveSecondaryVariantLight(Color value);
+  /// Persists setting for secondaryContainerLight color, in example 5.
+  Future<void> saveSecondaryContainerLight(Color value);
 
   /// Key used to read and save the primaryDark color value.
   static const String keyPrimaryDark = 'primaryDark';
@@ -602,18 +602,18 @@ abstract class ThemeService {
   /// Persists setting for primaryDark color, in example 5.
   Future<void> savePrimaryDark(Color value);
 
-  /// Key used to read and save the primaryVariantDark color value.
-  static const String keyPrimaryVariantDark = 'primaryVariantDark';
+  /// Key used to read and save the primaryContainerDark color value.
+  static const String keyPrimaryContainerDark = 'primaryContainerDark';
 
   /// Default value for the primaryDark color, also to reset settings.
-  static const Color defaultPrimaryVariantDark =
-      FlexColor.materialDarkPrimaryVariant;
+  static const Color defaultPrimaryContainerDark =
+      FlexColor.materialDarkPrimaryContainer;
 
-  /// Loads setting for primaryVariantDark color, in example 5.
-  Future<Color> primaryVariantDark();
+  /// Loads setting for primaryContainerDark color, in example 5.
+  Future<Color> primaryContainerDark();
 
-  /// Persists setting for primaryVariantDark color, in example 5.
-  Future<void> savePrimaryVariantDark(Color value);
+  /// Persists setting for primaryContainerDark color, in example 5.
+  Future<void> savePrimaryContainerDark(Color value);
 
   /// Key used to read and save the secondaryDark color value.
   static const String keySecondaryDark = 'secondaryDark';
@@ -627,16 +627,16 @@ abstract class ThemeService {
   /// Persists setting for secondaryDark color, in example 5.
   Future<void> saveSecondaryDark(Color value);
 
-  /// Key used to read and save the secondaryVariantDark color value.
-  static const String keySecondaryVariantDark = 'secondaryVariantDark';
+  /// Key used to read and save the secondaryContainerDark color value.
+  static const String keySecondaryContainerDark = 'secondaryContainerDark';
 
   /// Default value for the secondaryDark color, also to reset settings.
-  static const Color defaultSecondaryVariantDark =
-      FlexColor.materialDarkSecondaryVariant;
+  static const Color defaultSecondaryContainerDark =
+      FlexColor.materialDarkSecondaryContainer;
 
-  /// Loads setting for secondaryVariantDark color, in example 5.
-  Future<Color> secondaryVariantDark();
+  /// Loads setting for secondaryContainerDark color, in example 5.
+  Future<Color> secondaryContainerDark();
 
-  /// Persists setting for secondaryVariantDark color, in example 5.
-  Future<void> saveSecondaryVariantDark(Color value);
+  /// Persists setting for secondaryContainerDark color, in example 5.
+  Future<void> saveSecondaryContainerDark(Color value);
 }

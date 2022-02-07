@@ -368,9 +368,9 @@ enum FlexAppBarStyle {
   /// custom color for the [AppBar] theme.
   ///
   /// The built-in color schemes have the same color value that is assigned to
-  /// [FlexSchemeColor.secondaryVariant] also assigned to
+  /// [FlexSchemeColor.secondaryContainer] also assigned to
   /// [FlexSchemeColor.appBarColor], so with them, the custom choice always
-  /// results in the [FlexSchemeColor.secondaryVariant] color, which is same
+  /// results in the [FlexSchemeColor.secondaryContainer] color, which is same
   /// as output [ColorScheme.secondaryContainer], being used as the [AppBar] color
   /// when using the [custom] choice with them.
   ///
@@ -2054,9 +2054,9 @@ class FlexColorScheme with Diagnosticable {
     // property values or colorScheme based colors.
     final FlexSchemeColor withPassedColors = flexColors.copyWith(
       primary: primary ?? colorScheme?.primary,
-      primaryVariant: primaryVariant ?? colorScheme?.primaryContainer,
+      primaryContainer: primaryVariant ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
-      secondaryVariant: secondaryVariant ?? colorScheme?.secondaryContainer,
+      secondaryContainer: secondaryVariant ?? colorScheme?.secondaryContainer,
       error: error ?? colorScheme?.error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
@@ -2122,9 +2122,9 @@ class FlexColorScheme with Diagnosticable {
     const int divN = 3; // Tuned for less blend of color into its onColor.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
-      primaryContainer: effectiveColors.primaryVariant,
+      primaryContainer: effectiveColors.primaryContainer,
       secondary: effectiveColors.secondary,
-      secondaryContainer: effectiveColors.secondaryVariant,
+      secondaryContainer: effectiveColors.secondaryContainer,
       surface: inputSurface,
       background: inputBackground,
       error: effectiveColors.error ?? FlexColor.materialLightError,
@@ -2207,7 +2207,7 @@ class FlexColorScheme with Diagnosticable {
       // The primary variant should generally be a bit darker color than
       // primary, preferably of a color like it or darker hue of primary.
       // If no value was provided we use a hue that is 10% darker.
-      primaryVariant: effectiveColors.primaryVariant,
+      primaryVariant: effectiveColors.primaryContainer,
       // The secondary color for the application. If you do not want
       // to use it set it to the same color as primary. For a subtle
       // one color based theme you can use a hue of the primary.
@@ -2217,7 +2217,7 @@ class FlexColorScheme with Diagnosticable {
       // secondary, preferably of a color like it or darker hue of secondary.
       // We use any provided value, if none darken the secondary and if no
       // secondary was provided we darken the primary 15%.
-      secondaryVariant: effectiveColors.secondaryVariant,
+      secondaryVariant: effectiveColors.secondaryContainer,
       // Surface is used e.g. by Card and bottom appbar.
       surface: effectiveSurfaceColor,
       // Background is used e.g. by drawer and bottom nav bar.
@@ -3169,9 +3169,9 @@ class FlexColorScheme with Diagnosticable {
     // property values or colorScheme based colors.
     final FlexSchemeColor withPassedColors = flexColors.copyWith(
       primary: primary ?? colorScheme?.primary,
-      primaryVariant: primaryVariant ?? colorScheme?.primaryContainer,
+      primaryContainer: primaryVariant ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
-      secondaryVariant: secondaryVariant ?? colorScheme?.secondaryContainer,
+      secondaryContainer: secondaryVariant ?? colorScheme?.secondaryContainer,
       error: error ?? colorScheme?.error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
@@ -3239,9 +3239,9 @@ class FlexColorScheme with Diagnosticable {
     const int divN = 3; // Tuned for less blend of color into its onColor.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
-      primaryContainer: effectiveColors.primaryVariant,
+      primaryContainer: effectiveColors.primaryContainer,
       secondary: effectiveColors.secondary,
-      secondaryContainer: effectiveColors.secondaryVariant,
+      secondaryContainer: effectiveColors.secondaryContainer,
       surface: inputSurface,
       background: inputBackground,
       error: effectiveColors.error ?? FlexColor.materialDarkError,
@@ -3325,7 +3325,7 @@ class FlexColorScheme with Diagnosticable {
       // The primary variant should generally be a bit darker color than
       // primary, preferably of a color like it or darker hue of primary.
       // If no value was provided we make a hue that is 10% darker.
-      primaryVariant: effectiveColors.primaryVariant,
+      primaryVariant: effectiveColors.primaryContainer,
       // The secondary color for the application. If you do not want
       // to use it set it to the same color as primary. For a subtle
       // one color based theme you can use a hue of the primary.
@@ -3335,7 +3335,7 @@ class FlexColorScheme with Diagnosticable {
       // secondary, preferably of a color like it or darker hue of secondary.
       // We us any provided value, if none darken the secondary and if no
       // secondary was provided we darken the primary 15%
-      secondaryVariant: effectiveColors.secondaryVariant,
+      secondaryVariant: effectiveColors.secondaryContainer,
       // Surface is used e.g. by Card and bottom appbar and in this
       // implementation also by dialogs.
       surface: effectiveSurfaceColor,
@@ -4969,20 +4969,20 @@ class FlexColorScheme with Diagnosticable {
     // Calculate default fallback colors from primary color.
     final FlexSchemeColor flexFallback = FlexSchemeColor.from(
       primary: usedPrimary,
-      primaryVariant: primaryVariant,
+      primaryContainer: primaryVariant,
       secondary: secondary,
-      secondaryVariant: secondaryVariant,
+      secondaryContainer: secondaryVariant,
     );
 
     // Determine effective main colors
     final Color usedPrimaryContainer = primaryVariant ??
         colorScheme?.primaryContainer ??
-        flexFallback.primaryVariant;
+        flexFallback.primaryContainer;
     final Color usedSecondary =
         secondary ?? colorScheme?.secondary ?? flexFallback.secondary;
     final Color usedSecondaryContainer = secondaryVariant ??
         colorScheme?.secondaryContainer ??
-        flexFallback.secondaryVariant;
+        flexFallback.secondaryContainer;
 
     // Determine effective surface, background and error colors.
     final Color usedSurface = surface ??
@@ -5424,7 +5424,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     if (surfaceMode == FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog ||
         surfaceMode == FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog) {
       blendColor =
-          blendColor.copyWith(dialogBackground: scheme.secondaryVariant);
+          blendColor.copyWith(dialogBackground: scheme.secondaryContainer);
     }
     // We get surface starting default colors via brightness and Material
     // default colors if it was not provided. It is normally provided when

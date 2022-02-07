@@ -57,7 +57,11 @@ enum SchemeColor {
   onPrimary,
 
   /// The active theme's color scheme primaryVariant color will be used.
+  @Deprecated('Use primaryContainer instead. Deprecated after version 4.2.0')
   primaryVariant,
+
+  /// The active theme's color scheme primaryContainer color will be used.
+  primaryContainer,
 
   /// The active theme's color scheme secondary color will be used.
   secondary,
@@ -66,7 +70,11 @@ enum SchemeColor {
   onSecondary,
 
   /// The active theme's color scheme secondaryVariant color will be used.
+  @Deprecated('Use secondaryContainer instead. Deprecated after version 4.2.0')
   secondaryVariant,
+
+  /// The active theme's color scheme secondaryContainer color will be used.
+  secondaryContainer,
 
   /// The active theme's color scheme surface color will be used.
   surface,
@@ -192,12 +200,14 @@ class FlexSubThemes {
         return colorScheme.primary;
       case SchemeColor.onPrimary:
         return colorScheme.onPrimary;
+      case SchemeColor.primaryContainer:
       case SchemeColor.primaryVariant:
         return colorScheme.primaryContainer;
       case SchemeColor.secondary:
         return colorScheme.secondary;
       case SchemeColor.onSecondary:
         return colorScheme.onSecondary;
+      case SchemeColor.secondaryContainer:
       case SchemeColor.secondaryVariant:
         return colorScheme.secondaryContainer;
       case SchemeColor.surface:
@@ -231,16 +241,14 @@ class FlexSubThemes {
         return colorScheme.onPrimary;
       case SchemeColor.onPrimary:
         return colorScheme.primary;
-      // There is no onColor pair for primaryVariant, we return new
-      // in Flutter 2.10.0 onPrimaryContainer.
+      case SchemeColor.primaryContainer:
       case SchemeColor.primaryVariant:
-        return colorScheme.onPrimary;
+        return colorScheme.onPrimaryContainer;
       case SchemeColor.secondary:
         return colorScheme.onSecondary;
       case SchemeColor.onSecondary:
         return colorScheme.secondary;
-      // There is no onColor pair for secondaryVariant, we return new
-      // in Flutter 2.10.0 onSecondaryContainer.
+      case SchemeColor.secondaryContainer:
       case SchemeColor.secondaryVariant:
         return colorScheme.onSecondaryContainer;
       case SchemeColor.surface:

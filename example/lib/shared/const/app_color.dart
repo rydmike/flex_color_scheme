@@ -15,9 +15,9 @@ class AppColor {
   // Create a custom flex scheme color for a light theme.
   static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
     primary: Color(0xFF00296B),
-    primaryVariant: Color(0xFF2F5C91),
+    primaryContainer: Color(0xFF2F5C91),
     secondary: Color(0xFFFF7B00),
-    secondaryVariant: Color(0xFFFDB100),
+    secondaryContainer: Color(0xFFFDB100),
     // The built in schemes use their secondary variant color as their
     // custom app bar color, but it can be any color. We use a custom color
     // here. We will see this in example 5 when using the theme and selecting
@@ -27,9 +27,9 @@ class AppColor {
 // Create a corresponding custom flex scheme color for a dark theme.
   static const FlexSchemeColor _myScheme1Dark = FlexSchemeColor(
     primary: Color(0xFF6B8BC3),
-    primaryVariant: Color(0xFF4874AA),
+    primaryContainer: Color(0xFF4874AA),
     secondary: Color(0xffff7155),
-    secondaryVariant: Color(0xFFF1CB9D),
+    secondaryContainer: Color(0xFFF1CB9D),
     appBarColor: Color(0xFF892807),
   );
 

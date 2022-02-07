@@ -154,7 +154,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondaryVariant: FlexColor.materialLightSecondaryContainer,
     );
     // m2, same definition as m1.
     const FlexColorScheme m2 = FlexColorScheme(
@@ -162,7 +162,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondaryVariant: FlexColor.materialLightSecondaryContainer,
     );
     // m3, one different values than m1 and m2.
     const FlexColorScheme m3 = FlexColorScheme(
@@ -170,15 +170,15 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimary, // Differs from m1 and m2.
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondaryVariant: FlexColor.materialLightSecondaryContainer,
     );
     // m4, all values different from m1 and m2.
     const FlexColorScheme m4 = FlexColorScheme(
       brightness: Brightness.dark,
       primary: FlexColor.materialDarkPrimary,
-      primaryVariant: FlexColor.materialDarkPrimaryVariant,
+      primaryVariant: FlexColor.materialDarkPrimaryContainer,
       secondary: FlexColor.materialDarkSecondary,
-      secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+      secondaryVariant: FlexColor.materialDarkSecondaryContainer,
     );
 
     // Identity and equality tests
@@ -234,7 +234,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondaryVariant: FlexColor.materialLightSecondaryContainer,
     );
     test(
         'FCS1.03a: GIVEN a FlexColorScheme object EXPECT it to be '
@@ -256,7 +256,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondaryVariant: FlexColor.materialLightSecondaryContainer,
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
@@ -336,9 +336,9 @@ void main() {
     const FlexColorScheme m1e3 = FlexColorScheme(
       brightness: Brightness.dark,
       primary: FlexColor.materialDarkPrimary,
-      primaryVariant: FlexColor.materialDarkPrimaryVariant,
+      primaryVariant: FlexColor.materialDarkPrimaryContainer,
       secondary: FlexColor.materialDarkSecondary,
-      secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+      secondaryVariant: FlexColor.materialDarkSecondaryContainer,
       surface: FlexColor.materialDarkSurface,
       background: FlexColor.materialDarkBackground,
       error: FlexColor.materialDarkError,
@@ -431,7 +431,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondaryVariant: FlexColor.materialLightSecondaryContainer,
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
@@ -466,7 +466,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondaryVariant: FlexColor.materialLightSecondaryContainer,
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
@@ -559,7 +559,7 @@ void main() {
           primary: FlexColor.materialLightPrimary,
           primaryVariant: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
-          secondaryVariant: FlexColor.materialLightSecondaryVariant,
+          secondaryVariant: FlexColor.materialLightSecondaryContainer,
           surface: FlexColor.materialLightSurface,
           background: FlexColor.materialLightBackground,
           error: FlexColor.materialLightError,
@@ -601,7 +601,7 @@ void main() {
           primary: FlexColor.materialLightPrimary,
           primaryVariant: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
-          secondaryVariant: FlexColor.materialLightSecondaryVariant,
+          secondaryVariant: FlexColor.materialLightSecondaryContainer,
           surface: FlexColor.materialLightSurface,
           background: FlexColor.materialLightBackground,
           error: FlexColor.materialLightError,
@@ -641,9 +641,9 @@ void main() {
         const FlexColorScheme(
           brightness: Brightness.dark,
           primary: FlexColor.materialDarkPrimary,
-          primaryVariant: FlexColor.materialDarkPrimaryVariant,
+          primaryVariant: FlexColor.materialDarkPrimaryContainer,
           secondary: FlexColor.materialDarkSecondary,
-          secondaryVariant: FlexColor.materialDarkSecondaryVariant,
+          secondaryVariant: FlexColor.materialDarkSecondaryContainer,
           surface: FlexColor.materialDarkSurface,
           background: FlexColor.materialDarkBackground,
           error: FlexColor.materialDarkError,
@@ -682,9 +682,9 @@ void main() {
         const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightPrimaryHc,
-          primaryVariant: FlexColor.materialLightPrimaryVariantHc,
+          primaryVariant: FlexColor.materialLightPrimaryContainerHc,
           secondary: FlexColor.materialLightSecondaryHc,
-          secondaryVariant: FlexColor.materialLightSecondaryVariantHc,
+          secondaryVariant: FlexColor.materialLightSecondaryContainerHc,
           surface: FlexColor.materialLightSurface,
           background: FlexColor.materialLightBackground,
           error: FlexColor.materialLightErrorHc,
@@ -723,9 +723,9 @@ void main() {
         const FlexColorScheme(
           brightness: Brightness.dark,
           primary: FlexColor.materialDarkPrimaryHc,
-          primaryVariant: FlexColor.materialDarkPrimaryVariantHc,
+          primaryVariant: FlexColor.materialDarkPrimaryContainerHc,
           secondary: FlexColor.materialDarkSecondaryHc,
-          secondaryVariant: FlexColor.materialDarkSecondaryVariantHc,
+          secondaryVariant: FlexColor.materialDarkSecondaryContainerHc,
           surface: FlexColor.materialDarkSurface,
           background: FlexColor.materialDarkBackground,
           error: FlexColor.materialDarkErrorHc,

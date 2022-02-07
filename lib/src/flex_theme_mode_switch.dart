@@ -259,9 +259,9 @@ class FlexThemeModeSwitch extends StatelessWidget {
     final FlexThemeModeOptionButton systemButton = FlexThemeModeOptionButton(
       flexSchemeColor: FlexSchemeColor(
         primary: flexSchemeData.light.primary,
-        primaryVariant: flexSchemeData.dark.primary,
+        primaryContainer: flexSchemeData.dark.primary,
         secondary: flexSchemeData.light.secondary,
-        secondaryVariant: flexSchemeData.dark.secondary,
+        secondaryContainer: flexSchemeData.dark.secondary,
       ),
       backgroundColor: backgroundSystem ?? Colors.grey[500]!,
       label: labelSystem,
@@ -500,7 +500,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                                 padding: padding,
                               ),
                               _SchemeColorBox(
-                                color: flexSchemeColor.primaryVariant,
+                                color: flexSchemeColor.primaryContainer,
                                 height: height,
                                 width: width,
                                 borderRadius: borderRadius,
@@ -518,7 +518,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                                 padding: padding,
                               ),
                               _SchemeColorBox(
-                                color: flexSchemeColor.secondaryVariant,
+                                color: flexSchemeColor.secondaryContainer,
                                 height: height,
                                 width: width,
                                 borderRadius: borderRadius,
