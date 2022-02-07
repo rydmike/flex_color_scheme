@@ -1294,7 +1294,7 @@ void main() {
           NavigationBarThemeData(
             height: 80,
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            indicatorColor: colorScheme.secondaryVariant.withAlpha(0x3D),
+            indicatorColor: colorScheme.secondaryContainer.withAlpha(0x3D),
             labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
@@ -1387,10 +1387,10 @@ void main() {
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
                   return FlexColorScheme.m3TextTheme.caption!
-                      .copyWith(color: colorScheme.primaryVariant);
+                      .copyWith(color: colorScheme.primaryContainer);
                 }
                 return FlexColorScheme.m3TextTheme.caption!
-                    .copyWith(color: colorScheme.primaryVariant);
+                    .copyWith(color: colorScheme.primaryContainer);
               },
             ),
             iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
@@ -1398,11 +1398,11 @@ void main() {
                 if (states.contains(MaterialState.selected)) {
                   return IconThemeData(
                     size: 24,
-                    color: colorScheme.secondaryVariant,
+                    color: colorScheme.secondaryContainer,
                   );
                 }
                 return IconThemeData(
-                    size: 24, color: colorScheme.secondaryVariant);
+                    size: 24, color: colorScheme.secondaryContainer);
               },
             ),
           ).toString(),
@@ -1412,23 +1412,23 @@ void main() {
       expect(
         navBarTheme.iconTheme!
             .resolve(<MaterialState>{MaterialState.selected})?.color,
-        equals(colorScheme.secondaryVariant),
+        equals(colorScheme.secondaryContainer),
       );
       expect(
         navBarTheme.iconTheme!.resolve(<MaterialState>{})?.color,
         equals(
-          colorScheme.secondaryVariant,
+          colorScheme.secondaryContainer,
         ),
       );
       expect(
         navBarTheme.labelTextStyle!
             .resolve(<MaterialState>{MaterialState.selected})?.color,
-        equals(colorScheme.primaryVariant),
+        equals(colorScheme.primaryContainer),
       );
       expect(
         navBarTheme.labelTextStyle!.resolve(<MaterialState>{})?.color,
         equals(
-          colorScheme.primaryVariant,
+          colorScheme.primaryContainer,
         ),
       );
     });

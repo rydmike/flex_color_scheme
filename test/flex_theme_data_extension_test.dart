@@ -103,7 +103,7 @@ void main() {
             primary: FlexColor.materialLightSecondary,
             primaryVariant: FlexColor.materialLightSecondaryVariant,
             secondary: FlexColor.materialLightPrimary,
-            secondaryVariant: FlexColor.materialLightPrimaryVariant,
+            secondaryVariant: FlexColor.materialLightPrimaryContainer,
           ).toTheme));
     });
 
@@ -187,7 +187,7 @@ void main() {
     final ThemeData themeLight = const FlexColorScheme(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
     ).toTheme;
@@ -214,13 +214,50 @@ void main() {
 
     test(
         'FTD1.01: GIVEN a FlexThemeData.raw theme with Material scheme light '
-        'colors EXPECT .colorScheme equality with ColorScheme.light().', () {
-      expect(themeLight.colorScheme, const ColorScheme.light());
+        'colors EXPECT .colorScheme equality with raw ColorScheme light().',
+        () {
+      expect(
+          themeLight.colorScheme,
+          const ColorScheme(
+            brightness: Brightness.light,
+            primary: Color(0xff6200ee),
+            onPrimary: Colors.white,
+            primaryContainer: Color(0xff3700b3),
+            onPrimaryContainer: Colors.white,
+            secondary: Color(0xff03dac6),
+            onSecondary: Colors.black,
+            secondaryContainer: Color(0xff018786),
+            onSecondaryContainer: Colors.white,
+            error: Color(0xffb00020),
+            onError: Colors.white,
+            background: Colors.white,
+            onBackground: Colors.black,
+            surface: Colors.white,
+            onSurface: Colors.black,
+          ));
     });
     test(
         'FTD1.02: GIVEN a FlexColorScheme theme with Material scheme dark '
-        'colors EXPECT .colorScheme equality with ColorScheme.dark().', () {
-      expect(themeDark.colorScheme, const ColorScheme.dark());
+        'colors EXPECT .colorScheme equality with raw ColorScheme dark().', () {
+      expect(
+          themeDark.colorScheme,
+          const ColorScheme(
+            brightness: Brightness.dark,
+            primary: Color(0xffbb86fc),
+            onPrimary: Colors.black,
+            primaryContainer: Color(0xff3700B3),
+            onPrimaryContainer: Colors.white,
+            secondary: Color(0xff03dac6),
+            onSecondary: Colors.black,
+            secondaryContainer: Color(0xff03dac6),
+            onSecondaryContainer: Colors.black,
+            error: Color(0xffcf6679),
+            onError: Colors.black,
+            background: Color(0xff121212),
+            onBackground: Colors.white,
+            surface: Color(0xff121212),
+            onSurface: Colors.white,
+          ));
     });
 
     //**************************************************************************
@@ -612,7 +649,7 @@ void main() {
         'WITH FlexAppBarStyle.material EXPECT appbar theme color '
         'FlexColor.materialLightSurface.', () {
       expect(tLightS.appBarTheme.backgroundColor,
-          tLightS.colorScheme.secondaryVariant);
+          tLightS.colorScheme.secondaryContainer);
     });
     test(
         'FTD1.48: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
@@ -2217,7 +2254,7 @@ void main() {
         const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightPrimary,
-          primaryVariant: FlexColor.materialLightPrimaryVariant,
+          primaryVariant: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
           secondaryVariant: FlexColor.materialLightSecondaryVariant,
         ).toTheme,
@@ -2304,7 +2341,7 @@ void main() {
           primary: FlexColor.materialLightSecondary,
           primaryVariant: FlexColor.materialLightSecondaryVariant,
           secondary: FlexColor.materialLightPrimary,
-          secondaryVariant: FlexColor.materialLightPrimaryVariant,
+          secondaryVariant: FlexColor.materialLightPrimaryContainer,
         ).toTheme),
       );
     });

@@ -97,7 +97,7 @@ class SurfaceModeButtons extends StatelessWidget {
               children: <Widget>[
                 const RotatedBox(
                     quarterTurns: 2, child: Icon(Icons.horizontal_split)),
-                Icon(Icons.stop, color: scheme.secondaryVariant, size: 18),
+                Icon(Icons.stop, color: scheme.secondaryContainer, size: 18),
               ],
             ),
           ),
@@ -108,7 +108,7 @@ class SurfaceModeButtons extends StatelessWidget {
               alignment: Alignment.center,
               children: <Widget>[
                 const Icon(Icons.horizontal_split),
-                Icon(Icons.stop, color: scheme.secondaryVariant, size: 18),
+                Icon(Icons.stop, color: scheme.secondaryContainer, size: 18),
               ],
             ),
           ),

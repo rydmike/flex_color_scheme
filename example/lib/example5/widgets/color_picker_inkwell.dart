@@ -49,7 +49,7 @@ class ColorPickerInkWell extends StatelessWidget {
     // COLORS: Purple and blue like colors
     ColorTools.createPrimarySwatch(FlexColor.materialLightPrimary):
         'Purple M2 guide Prim',
-    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimaryVariant):
+    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimaryContainer):
         'Purple M2 guide Sec',
     ColorTools.createPrimarySwatch(FlexColor.materialLightPrimaryHc):
         'Blue Flutter HiC Prim',

@@ -36,20 +36,12 @@ class ThemeColors extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
+    // These color values are also used if picking is cancelled to restore
+    // previous color selection.
     final Color primary = colorScheme.primary;
-    final Color primaryVariant = colorScheme.primaryVariant;
-    final Color onPrimaryVariant =
-        ThemeData.estimateBrightnessForColor(colorScheme.primaryVariant) ==
-                Brightness.dark
-            ? Colors.white
-            : Colors.black;
+    final Color primaryContainer = colorScheme.primaryContainer;
     final Color secondary = colorScheme.secondary;
-    final Color secondaryVariant = colorScheme.secondaryVariant;
-    final Color onSecondaryVariant =
-        ThemeData.estimateBrightnessForColor(colorScheme.secondaryVariant) ==
-                Brightness.dark
-            ? Colors.white
-            : Colors.black;
+    final Color secondaryContainer = colorScheme.secondaryContainer;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -144,9 +136,9 @@ class ThemeColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              color: primaryVariant,
+              color: primaryContainer,
               child: ColorPickerInkWell(
-                color: primaryVariant,
+                color: primaryContainer,
                 onChanged: (Color color) {
                   if (isLight) {
                     swapLight
@@ -164,20 +156,21 @@ class ThemeColors extends StatelessWidget {
                   if (cancelled) {
                     if (isLight) {
                       swapLight
-                          ? controller.setSecondaryVariantLight(primaryVariant)
-                          : controller.setPrimaryVariantLight(primaryVariant);
+                          ? controller
+                              .setSecondaryVariantLight(primaryContainer)
+                          : controller.setPrimaryVariantLight(primaryContainer);
                     } else {
                       swapDark
-                          ? controller.setSecondaryVariantDark(primaryVariant)
-                          : controller.setPrimaryVariantDark(primaryVariant);
+                          ? controller.setSecondaryVariantDark(primaryContainer)
+                          : controller.setPrimaryVariantDark(primaryContainer);
                     }
                   }
                 },
                 enabled: isCustomTheme,
                 child: ColorNameValue(
-                  color: primaryVariant,
-                  textColor: onPrimaryVariant,
-                  label: 'primary\nVariant',
+                  color: primaryContainer,
+                  textColor: colorScheme.onPrimaryContainer,
+                  label: 'primary\nContainer',
                 ),
               ),
             ),
@@ -238,9 +231,9 @@ class ThemeColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              color: secondaryVariant,
+              color: secondaryContainer,
               child: ColorPickerInkWell(
-                color: secondaryVariant,
+                color: secondaryContainer,
                 onChanged: (Color color) {
                   if (isLight) {
                     swapLight
@@ -258,22 +251,23 @@ class ThemeColors extends StatelessWidget {
                   if (cancelled) {
                     if (isLight) {
                       swapLight
-                          ? controller.setPrimaryVariantLight(secondaryVariant)
+                          ? controller
+                              .setPrimaryVariantLight(secondaryContainer)
                           : controller
-                              .setSecondaryVariantLight(secondaryVariant);
+                              .setSecondaryVariantLight(secondaryContainer);
                     } else {
                       swapDark
-                          ? controller.setPrimaryVariantDark(secondaryVariant)
+                          ? controller.setPrimaryVariantDark(secondaryContainer)
                           : controller
-                              .setSecondaryVariantDark(secondaryVariant);
+                              .setSecondaryVariantDark(secondaryContainer);
                     }
                   }
                 },
                 enabled: isCustomTheme,
                 child: ColorNameValue(
-                  color: secondaryVariant,
-                  textColor: onSecondaryVariant,
-                  label: 'secondary\nVariant',
+                  color: secondaryContainer,
+                  textColor: colorScheme.onSecondaryContainer,
+                  label: 'secondary\nContainer',
                 ),
               ),
             ),

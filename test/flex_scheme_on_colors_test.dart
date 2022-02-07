@@ -151,6 +151,41 @@ void main() {
       );
     });
 
+    final FlexSchemeOnColors m6b = FlexSchemeOnColors.from(
+      primary: FlexColor.materialLightPrimary,
+      primaryContainer: FlexColor.materialLightPrimary,
+      secondary: FlexColor.materialLightSecondary,
+      secondaryContainer: FlexColor.materialLightSecondary,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: FlexColor.materialLightError,
+      onPrimary: const Color(0xFF121212),
+      onPrimaryContainer: const Color(0xFF132423),
+      onSecondary: const Color(0xFFEEEEEE),
+      onSecondaryContainer: const Color(0xFF888888),
+      onSurface: const Color(0xFFCCCCCC),
+      onBackground: const Color(0xFFDDDDDD),
+      onError: const Color(0xFFAAAAAA),
+    );
+
+    test(
+        'FSOC1.05b: GIVEN a FlexSchemeOnColors created from default Material '
+        'surface colors with OnColors specified EXPECT provided onColors to '
+        'be used.', () {
+      expect(
+        m6b,
+        const FlexSchemeOnColors(
+          onPrimary: Color(0xFF121212),
+          onPrimaryContainer: Color(0xFF132423),
+          onSecondary: Color(0xFFEEEEEE),
+          onSecondaryContainer: Color(0xFF888888),
+          onSurface: Color(0xFFCCCCCC),
+          onBackground: Color(0xFFDDDDDD),
+          onError: Color(0xFFAAAAAA),
+        ),
+      );
+    });
+
     final FlexSchemeOnColors m7 = FlexSchemeOnColors.from(
       primary: FlexColor.materialLightPrimary,
       secondary: FlexColor.materialLightSecondary,
@@ -160,7 +195,7 @@ void main() {
     );
 
     test(
-        'FSOC1.05b: GIVEN a FlexSchemeOnColors created from default Material '
+        'FSOC1.05c: GIVEN a FlexSchemeOnColors created from default Material '
         'surface colors with OnColors specified EXPECT provided onColors to '
         'be used.', () {
       expect(
@@ -168,6 +203,34 @@ void main() {
         const FlexSchemeOnColors(
           onPrimary: Color(0xffffffff),
           onSecondary: Color(0xff000000),
+          onSurface: Color(0xff000000),
+          onBackground: Color(0xff000000),
+          onError: Color(0xff000000),
+        ),
+      );
+    });
+
+    final FlexSchemeOnColors m7a = FlexSchemeOnColors.from(
+      primary: FlexColor.materialLightPrimary,
+      primaryContainer: const Color(0xff000000),
+      secondary: FlexColor.materialLightSecondary,
+      secondaryContainer: const Color(0xffffffff),
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: const Color(0xffedb4b4),
+    );
+
+    test(
+        'FSOC1.05d: GIVEN a FlexSchemeOnColors created from default Material '
+        'surface colors with OnColors specified EXPECT provided onColors to '
+        'be used.', () {
+      expect(
+        m7a,
+        const FlexSchemeOnColors(
+          onPrimary: Color(0xffffffff),
+          onPrimaryContainer: Color(0xffffffff),
+          onSecondary: Color(0xff000000),
+          onSecondaryContainer: Color(0xff000000),
           onSurface: Color(0xff000000),
           onBackground: Color(0xff000000),
           onError: Color(0xff000000),
@@ -189,7 +252,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeOnColors#00000(onPrimary: Color(0xffffffff), onSecondary: Color(0xffffffff), onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff))'));
+              'FlexSchemeOnColors#00000(onPrimary: Color(0xffffffff), onPrimaryContainer: null, onSecondary: Color(0xffffffff), onSecondaryContainer: null, onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff))'));
     });
     test(
         'FSOC1.07: Test toStringShort implemented via debugFillProperties '
@@ -203,7 +266,7 @@ void main() {
     // This happens to always equal now in tests, if it start failing, test
     // 08c is actually enough.
     test('FSOC1.08b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 440932933);
+      expect(m1.hashCode, 254953885);
     });
     test('FSOC1.08c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));

@@ -371,7 +371,7 @@ enum FlexAppBarStyle {
   /// [FlexSchemeColor.secondaryVariant] also assigned to
   /// [FlexSchemeColor.appBarColor], so with them, the custom choice always
   /// results in the [FlexSchemeColor.secondaryVariant] color, which is same
-  /// as output [ColorScheme.secondaryVariant], being used as the [AppBar] color
+  /// as output [ColorScheme.secondaryContainer], being used as the [AppBar] color
   /// when using the [custom] choice with them.
   ///
   /// FlexColorSchemes using custom [FlexSchemeColor] can assign any color
@@ -572,7 +572,9 @@ class FlexColorScheme with Diagnosticable {
     final this.dialogBackground,
     final this.appBarBackground,
     final this.onPrimary,
+    final this.onPrimaryContainer,
     final this.onSecondary,
+    final this.onSecondaryContainer,
     final this.onSurface,
     final this.onBackground,
     final this.onError,
@@ -756,9 +758,22 @@ class FlexColorScheme with Diagnosticable {
   /// [primary] and [onPrimary] is recommended. See
   /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
   ///
-  /// If null, the on color is derived from the brightness of the [primary]
-  /// color, and will be be black if it is light and white if it is dark.
+  /// If null, and if [colorScheme.onPrimary] is null, the color is derived
+  /// from the brightness of the effective primary color, and will be be black
+  /// if it is light and white if it is dark.
   final Color? onPrimary;
+
+  /// A color that's clearly legible when drawn on [primaryVariant].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [primaryVariant] and [onPrimaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, and if [colorScheme.onPrimaryContainer] is null, the color
+  /// will via [ColorScheme] default be equal to resulting color scheme
+  /// [ColorScheme.onPrimary].
+  final Color? onPrimaryContainer;
 
   /// A color that is clearly legible when drawn on [secondary] color.
   ///
@@ -769,6 +784,18 @@ class FlexColorScheme with Diagnosticable {
   /// If null, the on color is derived from the brightness of the [secondary]
   /// color, and will be be black if it is light and white if it is dark.
   final Color? onSecondary;
+
+  /// A color that's clearly legible when drawn on [secondaryVariant].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [secondaryVariant] and [onSecondaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, and if [colorScheme.onSecondaryContainer] is null, the color
+  /// will via [ColorScheme] default be equal to resulting color scheme
+  /// [ColorScheme.onSecondary].
+  final Color? onSecondaryContainer;
 
   /// A color that is clearly legible when drawn on [surface] color.
   ///
@@ -1571,11 +1598,36 @@ class FlexColorScheme with Diagnosticable {
     /// [primary] and [onPrimary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [primary]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onPrimary,
+
+    /// A color that's clearly legible when drawn on [primaryVariant].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [primaryVariant] and [onPrimaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onPrimaryContainer,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -1583,11 +1635,36 @@ class FlexColorScheme with Diagnosticable {
     /// [secondary] and [onSecondary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [secondary]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onSecondary,
+
+    /// A color that's clearly legible when drawn on [secondaryVariant].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryVariant] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onSecondaryContainer,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -1595,10 +1672,16 @@ class FlexColorScheme with Diagnosticable {
     /// [surface] and [onSurface] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [surface]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onSurface,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -1607,10 +1690,16 @@ class FlexColorScheme with Diagnosticable {
     /// [background] and [onBackground] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [background]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
@@ -1619,10 +1708,16 @@ class FlexColorScheme with Diagnosticable {
     /// [error] and [onError] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [error]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onError,
 
     /// Makes the light theme backgrounds lighter or even white.
@@ -1905,6 +2000,31 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null, resulting in a default [FlexSubThemesData] being used
     /// when [useSubThemes] is set to true.
     final FlexSubThemesData? subThemesData,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
+    /// If true, then components that have been migrated to Material 3 will
+    /// start using new colors, typography and other features of Material 3.
+    /// If false, they will use the Material 2 look and feel.
+    ///
+    /// Currently no components have been migrated to support Material 3.
+    /// As they are updated to include Material 3 support this documentation
+    /// will be modified to indicate exactly what widgets this flag will affect.
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app. Some components will be migrated
+    /// before others and typography changes will be coming in stages.
+    ///
+    /// [useMaterial3] defaults to false. After all the migrated components
+    /// have landed on stable, we will change this to be true by default. After
+    /// that change has landed on stable, we will deprecate this flag and remove
+    /// all uses of it. Everything will use the Material 3 look and feel at
+    /// that point.
+    ///
+    /// See also:
+    ///
+    ///   * [Material Design 3](https://m3.material.io/).
+    final bool useMaterial3 = false,
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4');
@@ -1934,9 +2054,9 @@ class FlexColorScheme with Diagnosticable {
     // property values or colorScheme based colors.
     final FlexSchemeColor withPassedColors = flexColors.copyWith(
       primary: primary ?? colorScheme?.primary,
-      primaryVariant: primaryVariant ?? colorScheme?.primaryVariant,
+      primaryVariant: primaryVariant ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
-      secondaryVariant: secondaryVariant ?? colorScheme?.secondaryVariant,
+      secondaryVariant: secondaryVariant ?? colorScheme?.secondaryContainer,
       error: error ?? colorScheme?.error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
@@ -1974,7 +2094,7 @@ class FlexColorScheme with Diagnosticable {
     // Get alpha blend values corresponding to used mode, level and brightness,
     // if using surfaceMode, opted in to use sub themes and in them opted
     // in to also blend the on colors.
-    final _AlphaValues alphaBlend =
+    final _AlphaValues alphaValue =
         surfaceMode != null && useSubThemes && subTheme.blendOnColors
             ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.light)
             : const _AlphaValues();
@@ -2002,20 +2122,27 @@ class FlexColorScheme with Diagnosticable {
     const int divN = 3; // Tuned for less blend of color into its onColor.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
+      primaryContainer: effectiveColors.primaryVariant,
       secondary: effectiveColors.secondary,
+      secondaryContainer: effectiveColors.secondaryVariant,
       surface: inputSurface,
       background: inputBackground,
       error: effectiveColors.error ?? FlexColor.materialLightError,
       onPrimary: onPrimary ?? colorScheme?.onPrimary,
+      onPrimaryContainer: onPrimaryContainer ?? colorScheme?.onPrimaryContainer,
       onSecondary: onSecondary ?? colorScheme?.onSecondary,
+      onSecondaryContainer:
+          onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
       onSurface: onSurface ?? colorScheme?.onSurface,
       onBackground: onBackground ?? colorScheme?.onBackground,
       onError: onError ?? colorScheme?.onError,
-      primaryAlpha: alphaBlend.primaryAlpha * 2 ~/ divN,
-      secondaryAlpha: alphaBlend.secondaryAlpha * 2 ~/ divN,
-      surfaceAlpha: alphaBlend.surfaceAlpha * 2 ~/ divN,
-      backgroundAlpha: alphaBlend.backgroundAlpha * 2 ~/ divN,
-      errorAlpha: alphaBlend.errorAlpha * 2 ~/ divN,
+      primaryAlpha: alphaValue.primaryAlpha * 2 ~/ divN,
+      primaryContainerAlpha: alphaValue.primaryContainerAlpha * 2 ~/ divN,
+      secondaryAlpha: alphaValue.secondaryAlpha * 2 ~/ divN,
+      secondaryContainerAlpha: alphaValue.secondaryContainerAlpha * 2 ~/ divN,
+      surfaceAlpha: alphaValue.surfaceAlpha * 2 ~/ divN,
+      backgroundAlpha: alphaValue.backgroundAlpha * 2 ~/ divN,
+      errorAlpha: alphaValue.errorAlpha * 2 ~/ divN,
     );
 
     // Determine effective surface color.
@@ -2109,7 +2236,9 @@ class FlexColorScheme with Diagnosticable {
       // Effective error color and null fallback.
       error: effectiveColors.error ?? FlexColor.materialLightError,
       onPrimary: onColors.onPrimary,
+      onPrimaryContainer: onColors.onPrimaryContainer,
       onSecondary: onColors.onSecondary,
+      onSecondaryContainer: onColors.onSecondaryContainer,
       onSurface: onColors.onSurface,
       onBackground: onColors.onBackground,
       onError: onColors.onError,
@@ -2127,6 +2256,7 @@ class FlexColorScheme with Diagnosticable {
       applyElevationOverlayColor: applyElevationOverlayColor,
       useSubThemes: useSubThemes,
       subThemesData: subThemesData,
+      useMaterial3: useMaterial3,
     );
   }
 
@@ -2584,11 +2714,36 @@ class FlexColorScheme with Diagnosticable {
     /// [primary] and [onPrimary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [primary]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onPrimary,
+
+    /// A color that's clearly legible when drawn on [primaryVariant].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [primaryVariant] and [onPrimaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onPrimaryContainer,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -2596,11 +2751,36 @@ class FlexColorScheme with Diagnosticable {
     /// [secondary] and [onSecondary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [secondary]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onSecondary,
+
+    /// A color that's clearly legible when drawn on [secondaryVariant].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryVariant] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onSecondaryContainer,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -2608,10 +2788,16 @@ class FlexColorScheme with Diagnosticable {
     /// [surface] and [onSurface] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [surface]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onSurface,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -2620,10 +2806,16 @@ class FlexColorScheme with Diagnosticable {
     /// [background] and [onBackground] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [background]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
@@ -2632,10 +2824,16 @@ class FlexColorScheme with Diagnosticable {
     /// [error] and [onError] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [error]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     final Color? onError,
 
     /// Makes the dark theme backgrounds darker or even black.
@@ -2918,6 +3116,31 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null, resulting in a default [FlexSubThemesData] being used
     /// when [useSubThemes] is set to true.
     final FlexSubThemesData? subThemesData,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
+    /// If true, then components that have been migrated to Material 3 will
+    /// start using new colors, typography and other features of Material 3.
+    /// If false, they will use the Material 2 look and feel.
+    ///
+    /// Currently no components have been migrated to support Material 3.
+    /// As they are updated to include Material 3 support this documentation
+    /// will be modified to indicate exactly what widgets this flag will affect.
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app. Some components will be migrated
+    /// before others and typography changes will be coming in stages.
+    ///
+    /// [useMaterial3] defaults to false. After all the migrated components
+    /// have landed on stable, we will change this to be true by default. After
+    /// that change has landed on stable, we will deprecate this flag and remove
+    /// all uses of it. Everything will use the Material 3 look and feel at
+    /// that point.
+    ///
+    /// See also:
+    ///
+    ///   * [Material Design 3](https://m3.material.io/).
+    final bool useMaterial3 = false,
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
@@ -2946,9 +3169,9 @@ class FlexColorScheme with Diagnosticable {
     // property values or colorScheme based colors.
     final FlexSchemeColor withPassedColors = flexColors.copyWith(
       primary: primary ?? colorScheme?.primary,
-      primaryVariant: primaryVariant ?? colorScheme?.primaryVariant,
+      primaryVariant: primaryVariant ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
-      secondaryVariant: secondaryVariant ?? colorScheme?.secondaryVariant,
+      secondaryVariant: secondaryVariant ?? colorScheme?.secondaryContainer,
       error: error ?? colorScheme?.error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
@@ -3016,17 +3239,24 @@ class FlexColorScheme with Diagnosticable {
     const int divN = 3; // Tuned for less blend of color into its onColor.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
+      primaryContainer: effectiveColors.primaryVariant,
       secondary: effectiveColors.secondary,
+      secondaryContainer: effectiveColors.secondaryVariant,
       surface: inputSurface,
       background: inputBackground,
       error: effectiveColors.error ?? FlexColor.materialDarkError,
       onPrimary: onPrimary ?? colorScheme?.onPrimary,
+      onPrimaryContainer: onPrimaryContainer ?? colorScheme?.onPrimaryContainer,
       onSecondary: onSecondary ?? colorScheme?.onSecondary,
+      onSecondaryContainer:
+          onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
       onSurface: onSurface ?? colorScheme?.onSurface,
       onBackground: onBackground ?? colorScheme?.onBackground,
       onError: onError ?? colorScheme?.onError,
       primaryAlpha: alphaValue.primaryAlpha * 2 ~/ divN,
+      primaryContainerAlpha: alphaValue.primaryContainerAlpha * 2 ~/ divN,
       secondaryAlpha: alphaValue.secondaryAlpha * 2 ~/ divN,
+      secondaryContainerAlpha: alphaValue.secondaryContainerAlpha * 2 ~/ divN,
       surfaceAlpha: alphaValue.surfaceAlpha * 2 ~/ divN,
       backgroundAlpha: alphaValue.backgroundAlpha * 2 ~/ divN,
       errorAlpha: alphaValue.errorAlpha * 2 ~/ divN,
@@ -3124,7 +3354,9 @@ class FlexColorScheme with Diagnosticable {
       // Effective error color and fallback.
       error: effectiveColors.error ?? FlexColor.materialDarkError,
       onPrimary: onColors.onPrimary,
+      onPrimaryContainer: onColors.onPrimaryContainer,
       onSecondary: onColors.onSecondary,
+      onSecondaryContainer: onColors.onSecondaryContainer,
       onSurface: onColors.onSurface,
       onBackground: onColors.onBackground,
       onError: onColors.onError,
@@ -3142,6 +3374,7 @@ class FlexColorScheme with Diagnosticable {
       applyElevationOverlayColor: applyElevationOverlayColor,
       useSubThemes: useSubThemes,
       subThemesData: subThemesData,
+      useMaterial3: useMaterial3,
     );
   }
 
@@ -4184,8 +4417,9 @@ class FlexColorScheme with Diagnosticable {
       // text theme.
       brightness: colorScheme.brightness,
       primaryColor: colorScheme.primary,
-      primaryColorBrightness:
-          ThemeData.estimateBrightnessForColor(colorScheme.primary),
+      // TODO(rydmike): This is deprecated, commenting it out should be OK.
+      // primaryColorBrightness:
+      //     ThemeData.estimateBrightnessForColor(colorScheme.primary),
       canvasColor: colorScheme.background,
 
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
@@ -4741,13 +4975,13 @@ class FlexColorScheme with Diagnosticable {
     );
 
     // Determine effective main colors
-    final Color usedPrimaryVariant = primaryVariant ??
-        colorScheme?.primaryVariant ??
+    final Color usedPrimaryContainer = primaryVariant ??
+        colorScheme?.primaryContainer ??
         flexFallback.primaryVariant;
     final Color usedSecondary =
         secondary ?? colorScheme?.secondary ?? flexFallback.secondary;
-    final Color usedSecondaryVariant = secondaryVariant ??
-        colorScheme?.secondaryVariant ??
+    final Color usedSecondaryContainer = secondaryVariant ??
+        colorScheme?.secondaryContainer ??
         flexFallback.secondaryVariant;
 
     // Determine effective surface, background and error colors.
@@ -4770,12 +5004,17 @@ class FlexColorScheme with Diagnosticable {
     // onColor for it was was not passed in or no colorScheme with them given.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: usedPrimary,
+      primaryContainer: usedPrimaryContainer,
       secondary: usedSecondary,
+      secondaryContainer: usedSecondaryContainer,
       surface: usedSurface,
       background: usedBackground,
       error: usedError,
       onPrimary: onPrimary ?? colorScheme?.onPrimary,
+      onPrimaryContainer: onPrimaryContainer ?? colorScheme?.onPrimaryContainer,
       onSecondary: onSecondary ?? colorScheme?.onSecondary,
+      onSecondaryContainer:
+          onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
       onSurface: onSurface ?? colorScheme?.onSurface,
       onBackground: onBackground ?? colorScheme?.onBackground,
       onError: onError ?? colorScheme?.onError,
@@ -4787,34 +5026,38 @@ class FlexColorScheme with Diagnosticable {
     // dealing with. If there was no colorScheme passed in, we create one
     // with the effective properties.
     return colorScheme?.copyWith(
+          brightness: usedBrightness,
           primary: usedPrimary,
-          primaryVariant: usedPrimaryVariant,
+          primaryContainer: usedPrimaryContainer,
           secondary: usedSecondary,
-          secondaryVariant: usedSecondaryVariant,
+          secondaryContainer: usedSecondaryContainer,
           surface: usedSurface,
           background: usedBackground,
           error: usedError,
           onPrimary: onColors.onPrimary,
+          onPrimaryContainer: onColors.onPrimaryContainer,
           onSecondary: onColors.onSecondary,
+          onSecondaryContainer: onColors.onSecondaryContainer,
           onSurface: onColors.onSurface,
           onBackground: onColors.onBackground,
           onError: onColors.onError,
-          brightness: usedBrightness,
         ) ??
         ColorScheme(
+          brightness: usedBrightness,
           primary: usedPrimary,
-          primaryVariant: usedPrimaryVariant,
+          primaryContainer: usedPrimaryContainer,
           secondary: usedSecondary,
-          secondaryVariant: usedSecondaryVariant,
+          secondaryContainer: usedSecondaryContainer,
           surface: usedSurface,
           background: usedBackground,
           error: usedError,
           onPrimary: onColors.onPrimary,
+          onPrimaryContainer: onColors.onPrimaryContainer,
           onSecondary: onColors.onSecondary,
+          onSecondaryContainer: onColors.onSecondaryContainer,
           onSurface: onColors.onSurface,
           onBackground: onColors.onBackground,
           onError: onColors.onError,
-          brightness: usedBrightness,
         );
   }
 
@@ -4833,7 +5076,9 @@ class FlexColorScheme with Diagnosticable {
     Color? dialogBackground,
     Color? appBarBackground,
     Color? onPrimary,
+    Color? onPrimaryContainer,
     Color? onSecondary,
+    Color? onSecondaryContainer,
     Color? onSurface,
     Color? onBackground,
     Color? onError,
@@ -4851,6 +5096,7 @@ class FlexColorScheme with Diagnosticable {
     bool? applyElevationOverlayColor,
     bool? useSubThemes,
     FlexSubThemesData? subThemesData,
+    bool? useMaterial3,
   }) {
     return FlexColorScheme(
       colorScheme: colorScheme ?? this.colorScheme,
@@ -4866,7 +5112,9 @@ class FlexColorScheme with Diagnosticable {
       appBarBackground: appBarBackground ?? this.appBarBackground,
       dialogBackground: dialogBackground ?? this.dialogBackground,
       onPrimary: onPrimary ?? this.onPrimary,
+      onPrimaryContainer: onPrimaryContainer ?? this.onPrimaryContainer,
       onSecondary: onSecondary ?? this.onSecondary,
+      onSecondaryContainer: onSecondaryContainer ?? this.onSecondaryContainer,
       onSurface: onSurface ?? this.onSurface,
       onBackground: onBackground ?? this.onBackground,
       onError: onError ?? this.onError,
@@ -4887,6 +5135,7 @@ class FlexColorScheme with Diagnosticable {
           applyElevationOverlayColor ?? this.applyElevationOverlayColor,
       useSubThemes: useSubThemes ?? this.useSubThemes,
       subThemesData: subThemesData ?? this.subThemesData,
+      useMaterial3: useMaterial3 ?? this.useMaterial3,
     );
   }
 
@@ -4909,7 +5158,9 @@ class FlexColorScheme with Diagnosticable {
         other.appBarBackground == appBarBackground &&
         other.dialogBackground == dialogBackground &&
         other.onPrimary == onPrimary &&
+        other.onPrimaryContainer == onPrimaryContainer &&
         other.onSecondary == onSecondary &&
+        other.onSecondaryContainer == onSecondaryContainer &&
         other.onSurface == onSurface &&
         other.onBackground == onBackground &&
         other.onError == onError &&
@@ -4926,7 +5177,8 @@ class FlexColorScheme with Diagnosticable {
         other.typography == typography &&
         other.applyElevationOverlayColor == applyElevationOverlayColor &&
         other.useSubThemes == useSubThemes &&
-        other.subThemesData == subThemesData;
+        other.subThemesData == subThemesData &&
+        other.useMaterial3 == useMaterial3;
   }
 
   /// Hashcode override for the FlexColorScheme object.
@@ -4948,7 +5200,9 @@ class FlexColorScheme with Diagnosticable {
       appBarBackground,
       dialogBackground,
       onPrimary,
+      onPrimaryContainer,
       onSecondary,
+      onSecondaryContainer,
       onSurface,
       onBackground,
       onError,
@@ -4966,6 +5220,7 @@ class FlexColorScheme with Diagnosticable {
       applyElevationOverlayColor,
       useSubThemes,
       subThemesData,
+      useMaterial3,
     ];
     return hashList(values);
   }
@@ -4988,7 +5243,9 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('appBarBackground', appBarBackground));
     properties.add(ColorProperty('dialogBackground', dialogBackground));
     properties.add(ColorProperty('onPrimary', onPrimary));
+    properties.add(ColorProperty('onPrimaryContainer', onPrimaryContainer));
     properties.add(ColorProperty('onSecondary', onSecondary));
+    properties.add(ColorProperty('onSecondaryContainer', onSecondaryContainer));
     properties.add(ColorProperty('onSurface', onSurface));
     properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
@@ -5013,6 +5270,7 @@ class FlexColorScheme with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>('useSubThemes', useSubThemes));
     properties.add(
         DiagnosticsProperty<FlexSubThemesData>('subThemesData', subThemesData));
+    properties.add(DiagnosticsProperty<bool>('useMaterial3', useMaterial3));
   }
 }
 
@@ -5569,7 +5827,9 @@ class FlexSchemeOnColors with Diagnosticable {
   /// [FlexSchemeOnColors.from] is the preferred way to create the onColors.
   const FlexSchemeOnColors({
     required this.onPrimary,
+    this.onPrimaryContainer,
     required this.onSecondary,
+    this.onSecondaryContainer,
     required this.onSurface,
     required this.onBackground,
     required this.onError,
@@ -5578,8 +5838,14 @@ class FlexSchemeOnColors with Diagnosticable {
   /// A color that is clearly legible when drawn on primary color.
   final Color onPrimary;
 
+  /// A color that is clearly legible when drawn on primaryContainer color.
+  final Color? onPrimaryContainer;
+
   /// A color that is clearly legible when drawn on secondary color.
   final Color onSecondary;
+
+  /// A color that is clearly legible when drawn on secondaryContainer color.
+  final Color? onSecondaryContainer;
 
   /// A color that is clearly legible when drawn on surface color.
   final Color onSurface;
@@ -5603,17 +5869,23 @@ class FlexSchemeOnColors with Diagnosticable {
   /// optionally provided alpha blend level, that defaults to 0.
   factory FlexSchemeOnColors.from({
     required Color primary,
+    Color? primaryContainer,
     required Color secondary,
+    Color? secondaryContainer,
     required Color surface,
     required Color background,
     required Color error,
     Color? onPrimary,
+    Color? onPrimaryContainer,
     Color? onSecondary,
+    Color? onSecondaryContainer,
     Color? onSurface,
     Color? onBackground,
     Color? onError,
     int primaryAlpha = 0,
+    int primaryContainerAlpha = 0,
     int secondaryAlpha = 0,
+    int secondaryContainerAlpha = 0,
     int surfaceAlpha = 0,
     int backgroundAlpha = 0,
     int errorAlpha = 0,
@@ -5625,10 +5897,29 @@ class FlexSchemeOnColors with Diagnosticable {
         (ThemeData.estimateBrightnessForColor(primary) == Brightness.dark
             ? Colors.white.blendAlpha(primary, primaryAlpha)
             : Colors.black.blendAlpha(primary, primaryAlpha));
+    final Color? usedOnPrimaryContainer = onPrimaryContainer ??
+        (primaryContainer == null
+            ? null
+            : (ThemeData.estimateBrightnessForColor(primaryContainer) ==
+                    Brightness.dark
+                ? Colors.white
+                    .blendAlpha(primaryContainer, primaryContainerAlpha)
+                : Colors.black
+                    .blendAlpha(primaryContainer, primaryContainerAlpha)));
+
     final Color usedOnSecondary = onSecondary ??
         (ThemeData.estimateBrightnessForColor(secondary) == Brightness.dark
             ? Colors.white.blendAlpha(secondary, secondaryAlpha)
             : Colors.black.blendAlpha(secondary, secondaryAlpha));
+    final Color? usedOnSecondaryContainer = onSecondaryContainer ??
+        (secondaryContainer == null
+            ? null
+            : (ThemeData.estimateBrightnessForColor(secondaryContainer) ==
+                    Brightness.dark
+                ? Colors.white
+                    .blendAlpha(secondaryContainer, secondaryContainerAlpha)
+                : Colors.black
+                    .blendAlpha(secondaryContainer, secondaryContainerAlpha)));
     final Color usedOnSurface = onSurface ??
         (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
             ? Colors.white.blendAlpha(surface, surfaceAlpha)
@@ -5644,7 +5935,9 @@ class FlexSchemeOnColors with Diagnosticable {
 
     return FlexSchemeOnColors(
       onPrimary: usedOnPrimary,
+      onPrimaryContainer: usedOnPrimaryContainer,
       onSecondary: usedOnSecondary,
+      onSecondaryContainer: usedOnSecondaryContainer,
       onSurface: usedOnSurface,
       onBackground: usedOnBackground,
       onError: usedOnError,
@@ -5654,14 +5947,18 @@ class FlexSchemeOnColors with Diagnosticable {
   /// Copy the object with one or more provided properties changed.
   FlexSchemeOnColors copyWith({
     Color? onPrimary,
+    Color? onPrimaryContainer,
     Color? onSecondary,
+    Color? onSecondaryContainer,
     Color? onSurface,
     Color? onBackground,
     Color? onError,
   }) {
     return FlexSchemeOnColors(
       onPrimary: onPrimary ?? this.onPrimary,
+      onPrimaryContainer: onPrimaryContainer ?? this.onPrimaryContainer,
       onSecondary: onSecondary ?? this.onSecondary,
+      onSecondaryContainer: onSecondaryContainer ?? this.onSecondaryContainer,
       onSurface: onSurface ?? this.onSurface,
       onBackground: onBackground ?? this.onBackground,
       onError: onError ?? this.onError,
@@ -5674,7 +5971,9 @@ class FlexSchemeOnColors with Diagnosticable {
     if (other.runtimeType != runtimeType) return false;
     return other is FlexSchemeOnColors &&
         other.onPrimary == onPrimary &&
+        other.onPrimaryContainer == onPrimaryContainer &&
         other.onSecondary == onSecondary &&
+        other.onSecondaryContainer == onSecondaryContainer &&
         other.onSurface == onSurface &&
         other.onBackground == onBackground &&
         other.onError == onError;
@@ -5684,7 +5983,9 @@ class FlexSchemeOnColors with Diagnosticable {
   int get hashCode {
     return hashValues(
       onPrimary,
+      onPrimaryContainer,
       onSecondary,
+      onSecondaryContainer,
       onSurface,
       onBackground,
       onError,
@@ -5695,7 +5996,9 @@ class FlexSchemeOnColors with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(ColorProperty('onPrimary', onPrimary));
+    properties.add(ColorProperty('onPrimaryContainer', onPrimaryContainer));
     properties.add(ColorProperty('onSecondary', onSecondary));
+    properties.add(ColorProperty('onSecondaryContainer', onSecondaryContainer));
     properties.add(ColorProperty('onSurface', onSurface));
     properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
@@ -5708,7 +6011,9 @@ class FlexSchemeOnColors with Diagnosticable {
 class _AlphaValues {
   const _AlphaValues({
     this.primaryAlpha = 0,
+    this.primaryContainerAlpha = 0,
     this.secondaryAlpha = 0,
+    this.secondaryContainerAlpha = 0,
     this.errorAlpha = 0,
     this.surfaceAlpha = 0,
     this.dialogAlpha = 0,
@@ -5719,22 +6024,28 @@ class _AlphaValues {
   /// Alpha blend value for primary color.
   final int primaryAlpha;
 
-  /// Alpha blend value for primary color.
+  /// Alpha blend value for primaryContainer color.
+  final int primaryContainerAlpha;
+
+  /// Alpha blend value for secondary color.
   final int secondaryAlpha;
 
-  /// as on color for scaffold background color.
+  /// Alpha blend value for secondaryContainer color.
+  final int secondaryContainerAlpha;
+
+  /// Alpha blend value for error color.
   final int errorAlpha;
 
-  /// Alpha blend value for primary color.
+  /// Alpha blend value for surface color.
   final int surfaceAlpha;
 
-  /// Alpha blend value for primary color.
+  /// Alpha blend value for dialog color.
   final int dialogAlpha;
 
-  /// Alpha blend value for primary color.
+  /// Alpha blend value for background color.
   final int backgroundAlpha;
 
-  /// Alpha blend value for primary color.
+  /// Alpha blend value for scaffold background color.
   final int scaffoldAlpha;
 
   // Returns alpha values for a given blend level and blend mode and brightness.
@@ -5749,7 +6060,9 @@ class _AlphaValues {
         // Result: Background (1x) Surface (1x) Scaffold (1x).
         return _AlphaValues(
           primaryAlpha: blendLevel,
+          primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
+          secondaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel,
           dialogAlpha: blendLevel,
@@ -5760,7 +6073,9 @@ class _AlphaValues {
       case FlexSurfaceMode.highBackgroundLowScaffold:
         return _AlphaValues(
           primaryAlpha: blendLevel,
+          primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
+          secondaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel,
           dialogAlpha: blendLevel,
@@ -5771,7 +6086,9 @@ class _AlphaValues {
       case FlexSurfaceMode.highSurfaceLowScaffold:
         return _AlphaValues(
           primaryAlpha: blendLevel,
+          primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
+          secondaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel * 3 ~/ 2,
           dialogAlpha: blendLevel * 3 ~/ 2,
@@ -5782,7 +6099,9 @@ class _AlphaValues {
       case FlexSurfaceMode.highScaffoldLowSurface:
         return _AlphaValues(
           primaryAlpha: blendLevel,
+          primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
+          secondaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel ~/ 2,
           dialogAlpha: blendLevel ~/ 2,
@@ -5793,7 +6112,9 @@ class _AlphaValues {
       case FlexSurfaceMode.highScaffoldLevelSurface:
         return _AlphaValues(
           primaryAlpha: blendLevel,
+          primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
+          secondaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel,
           dialogAlpha: blendLevel,
@@ -5805,7 +6126,9 @@ class _AlphaValues {
       case FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog:
         return _AlphaValues(
           primaryAlpha: blendLevel,
+          primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
+          secondaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel,
           dialogAlpha: blendLevel,
@@ -5817,7 +6140,9 @@ class _AlphaValues {
       case FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog:
         return _AlphaValues(
           primaryAlpha: blendLevel,
+          primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
+          secondaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel ~/ 2,
           dialogAlpha: blendLevel ~/ 2,

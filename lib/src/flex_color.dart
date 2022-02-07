@@ -105,8 +105,13 @@ class FlexColor {
   /// Material standard default color for light primary color.
   static const Color materialLightPrimary = Color(0xff6200ee);
 
+  /// Material standard default color for light primary container color.
+  static const Color materialLightPrimaryContainer = Color(0xff3700b3);
+
   /// Material standard default color for light primary variant color.
-  static const Color materialLightPrimaryVariant = Color(0xff3700b3);
+  @Deprecated('Deprecated use materialLightPrimaryContainer instead.')
+  static const Color materialLightPrimaryVariant =
+      materialLightPrimaryContainer;
 
   /// Material standard default color for light secondary color.
   static const Color materialLightSecondary = Color(0xff03dac6);
@@ -595,6 +600,7 @@ class FlexColor {
 
   /// Money green theme color for dark primary variant color.
   static const Color moneyDarkPrimaryVariant = Color(0xFF6AAF85);
+  //static const Color moneyDarkPrimaryVariant = Color(0xFF6AAF85);
 
   /// Money green theme color for dark secondary color.
   static const Color moneyDarkSecondary = Color(0xFFd5d6a8); // Guacamole 75%
@@ -1338,7 +1344,7 @@ class FlexColor {
     description: materialDescription,
     light: FlexSchemeColor(
       primary: materialLightPrimary,
-      primaryVariant: materialLightPrimaryVariant,
+      primaryVariant: materialLightPrimaryContainer,
       secondary: materialLightSecondary,
       secondaryVariant: materialLightSecondaryVariant,
       appBarColor: materialLightSecondaryVariant,
@@ -2137,7 +2143,7 @@ class FlexColor {
     description: customDescription,
     light: FlexSchemeColor(
       primary: materialLightPrimary,
-      primaryVariant: materialLightPrimaryVariant,
+      primaryVariant: materialLightPrimaryContainer,
       secondary: materialLightSecondary,
       secondaryVariant: materialLightSecondaryVariant,
       appBarColor: materialLightSecondaryVariant,
@@ -2444,19 +2450,24 @@ class FlexSchemeColor with Diagnosticable {
   /// [InputDecoration.errorText].
   final Color? error;
 
+  // TODO(rydmike): Figure out how to migrate this and entire class.
   /// Make a [FlexSchemeColor] from just one primary color or possible also
   /// from a more complete color scheme set. This is a convenience factory that
   /// can create nice toned color schemes based on only the primary color.
   factory FlexSchemeColor.from({
     required Color primary,
+    // Color? primaryContainer,
     Color? primaryVariant,
     Color? secondary,
+    // Color? secondaryContainer,
     Color? secondaryVariant,
     Color? appBarColor,
     Color? error,
   }) {
     return FlexSchemeColor(
       primary: primary,
+      // primaryContainer:
+      //     primaryContainer ?? primary.darken(kDarkenPrimaryVariant),
       primaryVariant: primaryVariant ?? primary.darken(kDarkenPrimaryVariant),
       secondary: secondary ?? primary.darken(kDarkenSecondary),
       secondaryVariant: secondaryVariant ??

@@ -41,9 +41,9 @@ void showAppAboutDialog(BuildContext context) {
           height: 30,
           flexSchemeColor: FlexSchemeColor(
             primary: themeData.colorScheme.primary,
-            primaryVariant: themeData.colorScheme.primaryVariant,
+            primaryVariant: themeData.colorScheme.primaryContainer,
             secondary: themeData.colorScheme.secondary,
-            secondaryVariant: themeData.colorScheme.secondaryVariant,
+            secondaryVariant: themeData.colorScheme.secondaryContainer,
           ),
         ),
       ],
