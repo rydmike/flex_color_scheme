@@ -463,11 +463,36 @@ extension FlexThemeData on ThemeData {
     /// [primary] and [onPrimary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [primary]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onPrimary,
+
+    /// A color that's clearly legible when drawn on [primaryVariant].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [primaryVariant] and [onPrimaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
+    final Color? onPrimaryContainer,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -475,11 +500,36 @@ extension FlexThemeData on ThemeData {
     /// [secondary] and [onSecondary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [secondary]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onSecondary,
+
+    /// A color that's clearly legible when drawn on [secondaryVariant].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryVariant] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
+    final Color? onSecondaryContainer,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -487,10 +537,16 @@ extension FlexThemeData on ThemeData {
     /// [surface] and [onSurface] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [surface]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onSurface,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -499,10 +555,16 @@ extension FlexThemeData on ThemeData {
     /// [background] and [onBackground] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [background]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
@@ -511,10 +573,16 @@ extension FlexThemeData on ThemeData {
     /// [error] and [onError] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [error]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
 
     /// Makes the light theme backgrounds lighter or even white.
@@ -797,6 +865,31 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null, resulting in a default [FlexSubThemesData] being used
     /// when [useSubThemes] is set to true.
     final FlexSubThemesData? subThemesData,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
+    /// If true, then components that have been migrated to Material 3 will
+    /// start using new colors, typography and other features of Material 3.
+    /// If false, they will use the Material 2 look and feel.
+    ///
+    /// Currently no components have been migrated to support Material 3.
+    /// As they are updated to include Material 3 support this documentation
+    /// will be modified to indicate exactly what widgets this flag will affect.
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app. Some components will be migrated
+    /// before others and typography changes will be coming in stages.
+    ///
+    /// [useMaterial3] defaults to false. After all the migrated components
+    /// have landed on stable, we will change this to be true by default. After
+    /// that change has landed on stable, we will deprecate this flag and remove
+    /// all uses of it. Everything will use the Material 3 look and feel at
+    /// that point.
+    ///
+    /// See also:
+    ///
+    ///   * [Material Design 3](https://m3.material.io/).
+    final bool useMaterial3 = false,
   }) {
     return FlexColorScheme.light(
       colors: colors,
@@ -822,7 +915,9 @@ extension FlexThemeData on ThemeData {
       dialogBackground: dialogBackground,
       appBarBackground: appBarBackground,
       onPrimary: onPrimary,
+      onPrimaryContainer: onPrimaryContainer,
       onSecondary: onSecondary,
+      onSecondaryContainer: onSecondaryContainer,
       onSurface: onSurface,
       onBackground: onBackground,
       onError: onError,
@@ -839,6 +934,7 @@ extension FlexThemeData on ThemeData {
       applyElevationOverlayColor: applyElevationOverlayColor,
       useSubThemes: useSubThemes,
       subThemesData: subThemesData,
+      useMaterial3: useMaterial3,
     ).toTheme;
   }
 
@@ -1265,11 +1361,36 @@ extension FlexThemeData on ThemeData {
     /// [primary] and [onPrimary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [primary]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onPrimary,
+
+    /// A color that's clearly legible when drawn on [primaryVariant].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [primaryVariant] and [onPrimaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
+    final Color? onPrimaryContainer,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -1277,11 +1398,36 @@ extension FlexThemeData on ThemeData {
     /// [secondary] and [onSecondary] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [secondary]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onSecondary,
+
+    /// A color that's clearly legible when drawn on [secondaryVariant].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryVariant] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
+    final Color? onSecondaryContainer,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -1289,10 +1435,16 @@ extension FlexThemeData on ThemeData {
     /// [surface] and [onSurface] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [surface]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onSurface,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -1301,10 +1453,16 @@ extension FlexThemeData on ThemeData {
     /// [background] and [onBackground] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [background]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
@@ -1313,10 +1471,16 @@ extension FlexThemeData on ThemeData {
     /// [error] and [onError] is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
-    /// If null, the on color is derived from the brightness of the [error]
-    /// color, and will be be black if it is light and white if it is dark.
-    /// If a [colorScheme] is provided and this color is provided, it will
-    /// override the corresponding color in the color scheme.
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
 
     /// Makes the dark theme backgrounds darker or even black.
@@ -1599,6 +1763,31 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null, resulting in a default [FlexSubThemesData] being used
     /// when [useSubThemes] is set to true.
     final FlexSubThemesData? subThemesData,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
+    /// If true, then components that have been migrated to Material 3 will
+    /// start using new colors, typography and other features of Material 3.
+    /// If false, they will use the Material 2 look and feel.
+    ///
+    /// Currently no components have been migrated to support Material 3.
+    /// As they are updated to include Material 3 support this documentation
+    /// will be modified to indicate exactly what widgets this flag will affect.
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app. Some components will be migrated
+    /// before others and typography changes will be coming in stages.
+    ///
+    /// [useMaterial3] defaults to false. After all the migrated components
+    /// have landed on stable, we will change this to be true by default. After
+    /// that change has landed on stable, we will deprecate this flag and remove
+    /// all uses of it. Everything will use the Material 3 look and feel at
+    /// that point.
+    ///
+    /// See also:
+    ///
+    ///   * [Material Design 3](https://m3.material.io/).
+    final bool useMaterial3 = false,
   }) {
     return FlexColorScheme.dark(
       colorScheme: colorScheme,
@@ -1624,7 +1813,9 @@ extension FlexThemeData on ThemeData {
       dialogBackground: dialogBackground,
       appBarBackground: appBarBackground,
       onPrimary: onPrimary,
+      onPrimaryContainer: onPrimaryContainer,
       onSecondary: onSecondary,
+      onSecondaryContainer: onSecondaryContainer,
       onSurface: onSurface,
       onBackground: onBackground,
       onError: onError,
@@ -1641,6 +1832,7 @@ extension FlexThemeData on ThemeData {
       applyElevationOverlayColor: applyElevationOverlayColor,
       useSubThemes: useSubThemes,
       subThemesData: subThemesData,
+      useMaterial3: useMaterial3,
     ).toTheme;
   }
 }

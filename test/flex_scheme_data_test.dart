@@ -14,7 +14,7 @@ void main() {
       description: FlexColor.materialDescription,
       light: FlexSchemeColor(
         primary: FlexColor.materialLightPrimary,
-        primaryVariant: FlexColor.materialLightPrimaryVariant,
+        primaryVariant: FlexColor.materialLightPrimaryContainer,
         secondary: FlexColor.materialLightSecondary,
         secondaryVariant: FlexColor.materialLightSecondaryVariant,
         appBarColor: FlexColor.materialLightSecondaryVariant,
@@ -35,7 +35,7 @@ void main() {
       description: FlexColor.materialDescription,
       light: FlexSchemeColor(
         primary: FlexColor.materialLightPrimary,
-        primaryVariant: FlexColor.materialLightPrimaryVariant,
+        primaryVariant: FlexColor.materialLightPrimaryContainer,
         secondary: FlexColor.materialLightSecondary,
         secondaryVariant: FlexColor.materialLightSecondaryVariant,
         appBarColor: FlexColor.materialLightSecondaryVariant,
@@ -55,7 +55,7 @@ void main() {
       description: FlexColor.materialDescription,
       light: FlexSchemeColor(
         primary: FlexColor.materialLightPrimary,
-        primaryVariant: FlexColor.materialLightPrimaryVariant,
+        primaryVariant: FlexColor.materialLightPrimaryContainer,
         secondary: FlexColor.materialLightSecondary,
         secondaryVariant: FlexColor.materialLightSecondaryVariant,
         appBarColor: FlexColor.materialLightSecondaryVariant,
@@ -184,7 +184,7 @@ void main() {
           description: FlexColor.materialDescription,
           light: const FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
-            primaryVariant: FlexColor.materialLightPrimaryVariant,
+            primaryVariant: FlexColor.materialLightPrimaryContainer,
             secondary: FlexColor.materialLightSecondary,
             secondaryVariant: FlexColor.materialLightSecondaryVariant,
             appBarColor: FlexColor.materialLightSecondaryVariant,

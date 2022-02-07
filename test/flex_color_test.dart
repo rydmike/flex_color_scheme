@@ -17,7 +17,10 @@ void main() {
   //****************************************************************************
   group('FC1: WITH FlexColor material light colors ', () {
     // ml, is a reference SDK ColorScheme.light.
-    const ColorScheme ml = ColorScheme.light();
+    const ColorScheme ml = ColorScheme.light(
+      primaryContainer: Color(0xff3700b3),
+      secondaryContainer: Color(0xff018786),
+    );
     test(
         'FC1.01: GIVEN FlexColor is materialLightPrimary '
         'EXPECT color is ColorScheme.light().primary', () {
@@ -25,8 +28,8 @@ void main() {
     });
     test(
         'FC1.02: GIVEN FlexColor is materialLightPrimaryVariant '
-        'EXPECT color is ColorScheme.light().primaryVariant', () {
-      expect(FlexColor.materialLightPrimaryVariant, ml.primaryVariant);
+        'EXPECT color is ColorScheme.light().primaryContainer', () {
+      expect(FlexColor.materialLightPrimaryContainer, ml.primaryContainer);
     });
     test(
         'FC1.03: GIVEN FlexColor is materialLightSecondary '
@@ -36,7 +39,7 @@ void main() {
     test(
         'FC1.04: GIVEN FlexColor is materialLightSecondaryVariant '
         'EXPECT color is ColorScheme.light().primaryVariant', () {
-      expect(FlexColor.materialLightSecondaryVariant, ml.secondaryVariant);
+      expect(FlexColor.materialLightSecondaryVariant, ml.secondaryContainer);
     });
     test(
         'FC1.05: GIVEN FlexColor is materialLightSurface '
@@ -62,7 +65,10 @@ void main() {
   //****************************************************************************
   group('FC2: WITH FlexColor material dark colors ', () {
     // md, is a reference SDK ColorScheme.dark.
-    const ColorScheme md = ColorScheme.dark();
+    const ColorScheme md = ColorScheme.dark(
+      primaryContainer: Color(0xff3700b3),
+      secondaryContainer: Color(0xff03dac6),
+    );
     test(
         'FC2.01: GIVEN FlexColor is materialDarkPrimary '
         'EXPECT color is ColorScheme.dark().primary', () {
@@ -71,7 +77,7 @@ void main() {
     test(
         'FC2.02: GIVEN FlexColor is materialDarkPrimaryVariant '
         'EXPECT color is ColorScheme.dark().primaryVariant', () {
-      expect(FlexColor.materialDarkPrimaryVariant, md.primaryVariant);
+      expect(FlexColor.materialDarkPrimaryVariant, md.primaryContainer);
     });
     test(
         'FC2.03: GIVEN FlexColor is materialDarkSecondary '
@@ -81,7 +87,7 @@ void main() {
     test(
         'FC2.04: GIVEN FlexColor is materialDarkSecondaryVariant '
         'EXPECT color is ColorScheme.dark().primaryVariant', () {
-      expect(FlexColor.materialDarkSecondaryVariant, md.secondaryVariant);
+      expect(FlexColor.materialDarkSecondaryVariant, md.secondaryContainer);
     });
     test(
         'FC2.05: GIVEN FlexColor is materialDarkSurface '
@@ -108,7 +114,10 @@ void main() {
   //****************************************************************************
   group('FC3: WITH FlexColor material light high-contrast colors ', () {
     // ml, is a reference SDK ColorScheme.highContrastLight.
-    const ColorScheme ml = ColorScheme.highContrastLight();
+    const ColorScheme ml = ColorScheme.highContrastLight(
+      primaryContainer: Color(0xff000088),
+      secondaryContainer: Color(0xff018786),
+    );
     test(
         'FC3.01: GIVEN FlexColor is materialLightPrimaryHc '
         'EXPECT color is ColorScheme.highContrastLight().primary', () {
@@ -117,7 +126,7 @@ void main() {
     test(
         'FC3.02: GIVEN FlexColor is materialLightPrimaryVariantHc '
         'EXPECT color is ColorScheme.highContrastLight().primaryVariant', () {
-      expect(FlexColor.materialLightPrimaryVariantHc, ml.primaryVariant);
+      expect(FlexColor.materialLightPrimaryVariantHc, ml.primaryContainer);
     });
     test(
         'FC3.03: GIVEN FlexColor is materialLightSecondaryHc '
@@ -127,7 +136,7 @@ void main() {
     test(
         'FC3.04: GIVEN FlexColor is materialLightSecondaryVariantHc '
         'EXPECT color is ColorScheme.highContrastLight().primaryVariant', () {
-      expect(FlexColor.materialLightSecondaryVariantHc, ml.secondaryVariant);
+      expect(FlexColor.materialLightSecondaryVariantHc, ml.secondaryContainer);
     });
     test(
         'FC3.05: GIVEN FlexColor is materialLightSurface '
@@ -154,7 +163,10 @@ void main() {
   //****************************************************************************
   group('FC4: WITH FlexColor material dark high-contrast colors', () {
     // md, is a reference SDK ColorScheme.highContrastDark.
-    const ColorScheme md = ColorScheme.highContrastDark();
+    const ColorScheme md = ColorScheme.highContrastDark(
+      primaryContainer: Color(0xffbe9eff),
+      secondaryContainer: Color(0xff66fff9),
+    );
     test(
         'FC4.01: GIVEN FlexColor is materialDarkPrimaryHc '
         'EXPECT color is ColorScheme.highContrastDark().primary', () {
@@ -163,7 +175,7 @@ void main() {
     test(
         'FC4.02: GIVEN FlexColor is materialDarkPrimaryVariantHc '
         'EXPECT color is ColorScheme.highContrastDark().primaryVariant', () {
-      expect(FlexColor.materialDarkPrimaryVariantHc, md.primaryVariant);
+      expect(FlexColor.materialDarkPrimaryVariantHc, md.primaryContainer);
     });
     test(
         'FC4.03: GIVEN FlexColor is materialDarkSecondaryHc '
@@ -173,7 +185,7 @@ void main() {
     test(
         'FC4.04: GIVEN FlexColor is materialDarkSecondaryVariantHc '
         'EXPECT color is ColorScheme.highContrastDark().primaryVariant', () {
-      expect(FlexColor.materialDarkSecondaryVariantHc, md.secondaryVariant);
+      expect(FlexColor.materialDarkSecondaryVariantHc, md.secondaryContainer);
     });
     test(
         'FC4.05: GIVEN FlexColor is materialDarkSurface '
@@ -266,7 +278,7 @@ void main() {
       expect(FlexColor.materialLightPrimary, const Color(0xff6200ee));
     });
     test('FC5 colors Material default', () {
-      expect(FlexColor.materialLightPrimaryVariant, const Color(0xff3700b3));
+      expect(FlexColor.materialLightPrimaryContainer, const Color(0xff3700b3));
     });
     test('FC5 colors Material default', () {
       expect(FlexColor.materialLightSecondary, const Color(0xff03dac6));

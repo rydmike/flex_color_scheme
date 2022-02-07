@@ -152,7 +152,7 @@ void main() {
     const FlexColorScheme m1 = FlexColorScheme(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
     );
@@ -160,7 +160,7 @@ void main() {
     const FlexColorScheme m2 = FlexColorScheme(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
     );
@@ -232,7 +232,7 @@ void main() {
     final FlexColorScheme m1e1 = m4.copyWith(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
     );
@@ -254,7 +254,7 @@ void main() {
     const FlexColorScheme m1e2 = FlexColorScheme(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
       surface: FlexColor.materialLightSurface,
@@ -264,7 +264,9 @@ void main() {
       appBarBackground: FlexColor.materialLightPrimary,
       dialogBackground: FlexColor.materialLightBackground,
       onPrimary: Colors.white,
+      onPrimaryContainer: Colors.white,
       onSecondary: Colors.black,
+      onSecondaryContainer: Colors.white,
       onSurface: Colors.black,
       onBackground: Colors.black,
       onError: Colors.white,
@@ -344,7 +346,9 @@ void main() {
       appBarBackground: FlexColor.materialDarkSurface,
       dialogBackground: FlexColor.materialDarkBackground,
       onPrimary: Colors.black,
+      onPrimaryContainer: Colors.white,
       onSecondary: Colors.black,
+      onSecondaryContainer: Colors.black,
       onSurface: Colors.white,
       onBackground: Colors.white,
       onError: Colors.white,
@@ -425,7 +429,7 @@ void main() {
     final FlexColorScheme m5 = FlexColorScheme(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
       surface: FlexColor.materialLightSurface,
@@ -435,7 +439,9 @@ void main() {
       appBarBackground: FlexColor.materialLightPrimary,
       dialogBackground: FlexColor.materialLightBackground,
       onPrimary: Colors.white,
+      onPrimaryContainer: Colors.white,
       onSecondary: Colors.black,
+      onSecondaryContainer: Colors.black,
       onSurface: Colors.black,
       onBackground: Colors.black,
       onError: Colors.white,
@@ -458,7 +464,7 @@ void main() {
     final FlexColorScheme m5copy = FlexColorScheme(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
       surface: FlexColor.materialLightSurface,
@@ -468,7 +474,9 @@ void main() {
       appBarBackground: FlexColor.materialLightPrimary,
       dialogBackground: FlexColor.materialLightBackground,
       onPrimary: Colors.white,
+      onPrimaryContainer: Colors.white,
       onSecondary: Colors.black,
+      onSecondaryContainer: Colors.black,
       onSurface: Colors.black,
       onBackground: Colors.black,
       onError: Colors.white,
@@ -508,7 +516,7 @@ void main() {
           // ignore: lines_longer_than_80_chars
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexColorScheme#00000(colorScheme: null, brightness: light, primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), surface: Color(0xffffffff), background: Color(0xffffffff), error: Color(0xffb00020), scaffoldBackground: Color(0xffffffff), appBarBackground: Color(0xff6200ee), dialogBackground: Color(0xffffffff), onPrimary: Color(0xffffffff), onSecondary: Color(0xff000000), onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff), tabBarStyle: forAppBar, appBarElevation: 1.0, bottomAppBarElevation: 2.0, tooltipsMatchBackground: true, transparentStatusBar: false, visualDensity: 0, v: 0.0), textTheme: TextTheme#00000(displayLarge: TextStyle(inherit: true, size: 80.0), displayMedium: null, displaySmall: null, headlineLarge: null, headlineMedium: null, headlineSmall: null, titleLarge: null, titleMedium: null, titleSmall: null, bodyLarge: null, bodyMedium: null, bodySmall: null, labelLarge: null, labelMedium: null, labelSmall: null), primaryTextTheme: TextTheme#00000(displayLarge: TextStyle(inherit: true, size: 80.0), displayMedium: null, displaySmall: null, headlineLarge: null, headlineMedium: null, headlineSmall: null, titleLarge: null, titleMedium: null, titleSmall: null, bodyLarge: null, bodyMedium: null, bodySmall: null, labelLarge: null, labelMedium: null, labelSmall: null), fontFamily: Roboto, platform: android, typography: Typography#00000(englishLike: TextTheme#00000(displayLarge: TextStyle(debugLabel: englishLike displayLarge 2018, inherit: true, size: 96.0, weight: 300, letterSpacing: -1.5, baseline: alphabetic), displayMedium: TextStyle(debugLabel: englishLike displayMedium 2018, inherit: true, size: 60.0, weight: 300, letterSpacing: -0.5, baseline: alphabetic), displaySmall: TextStyle(debugLabel: englishLike displaySmall 2018, inherit: true, size: 48.0, weight: 400, letterSpacing: 0.0, baseline: alphabetic), headlineLarge: TextStyle(debugLabel: englishLike headlineLarge 2018, inherit: true, size: 40.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), headlineMedium: TextStyle(debugLabel: englishLike headlineMedium 2018, inherit: true, size: 34.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), headlineSmall: TextStyle(debugLabel: englishLike headlineSmall 2018, inherit: true, size: 24.0, weight: 400, letterSpacing: 0.0, baseline: alphabetic), titleLarge: TextStyle(debugLabel: englishLike titleLarge 2018, inherit: true, size: 20.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic), titleMedium: TextStyle(debugLabel: englishLike titleMedium 2018, inherit: true, size: 16.0, weight: 400, letterSpacing: 0.1, baseline: alphabetic), titleSmall: TextStyle(debugLabel: englishLike titleSmall 2018, inherit: true, size: 14.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic), bodyLarge: TextStyle(debugLabel: englishLike bodyLarge 2018, inherit: true, size: 16.0, weight: 400, letterSpacing: 0.5, baseline: alphabetic), bodyMedium: TextStyle(debugLabel: englishLike bodyMedium 2018, inherit: true, size: 14.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), bodySmall: TextStyle(debugLabel: englishLike bodySmall 2018, inherit: true, size: 12.0, weight: 400, letterSpacing: 0.4, baseline: alphabetic), labelLarge: TextStyle(debugLabel: englishLike labelLarge 2018, inherit: true, size: 14.0, weight: 500, letterSpacing: 1.3, baseline: alphabetic), labelMedium: TextStyle(debugLabel: englishLike labelMedium 2018, inherit: true, size: 11.0, weight: 400, letterSpacing: 1.5, baseline: alphabetic), labelSmall: TextStyle(debugLabel: englishLike labelSmall 2018, inherit: true, size: 10.0, weight: 400, letterSpacing: 1.5, baseline: alphabetic)), dense: TextTheme#00000(displayLarge: TextStyle(debugLabel: dense displayLarge 2018, inherit: true, size: 96.0, weight: 100, baseline: ideographic), displayMedium: TextStyle(debugLabel: dense displayMedium 2018, inherit: true, size: 60.0, weight: 100, baseline: ideographic), displaySmall: TextStyle(debugLabel: dense displaySmall 2018, inherit: true, size: 48.0, weight: 400, baseline: ideographic), headlineLarge: TextStyle(debugLabel: dense headlineLarge 2018, inherit: true, size: 40.0, weight: 400, baseline: ideographic), headlineMedium: TextStyle(debugLabel: dense headlineMedium 2018, inherit: true, size: 34.0, weight: 400, baseline: ideographic), headlineSmall: TextStyle(debugLabel: dense headlineSmall 2018, inherit: true, size: 24.0, weight: 400, baseline: ideographic), titleLarge: TextStyle(debugLabel: dense titleLarge 2018, inherit: true, size: 21.0, weight: 500, baseline: ideographic), titleMedium: TextStyle(debugLabel: dense titleMedium 2018, inherit: true, size: 17.0, weight: 400, baseline: ideographic), titleSmall: TextStyle(debugLabel: dense titleSmall 2018, inherit: true, size: 15.0, weight: 500, baseline: ideographic), bodyLarge: TextStyle(debugLabel: dense bodyLarge 2018, inherit: true, size: 17.0, weight: 400, baseline: ideographic), bodyMedium: TextStyle(debugLabel: dense bodyMedium 2018, inherit: true, size: 15.0, weight: 400, baseline: ideographic), bodySmall: TextStyle(debugLabel: dense bodySmall 2018, inherit: true, size: 13.0, weight: 400, baseline: ideographic), labelLarge: TextStyle(debugLabel: dense labelLarge 2018, inherit: true, size: 15.0, weight: 500, baseline: ideographic), labelMedium: TextStyle(debugLabel: dense labelMedium 2018, inherit: true, size: 12.0, weight: 400, baseline: ideographic), labelSmall: TextStyle(debugLabel: dense labelSmall 2018, inherit: true, size: 11.0, weight: 400, baseline: ideographic)), tall: TextTheme#00000(displayLarge: TextStyle(debugLabel: tall displayLarge 2018, inherit: true, size: 96.0, weight: 400, baseline: alphabetic), displayMedium: TextStyle(debugLabel: tall displayMedium 2018, inherit: true, size: 60.0, weight: 400, baseline: alphabetic), displaySmall: TextStyle(debugLabel: tall displaySmall 2018, inherit: true, size: 48.0, weight: 400, baseline: alphabetic), headlineLarge: TextStyle(debugLabel: tall headlineLarge 2018, inherit: true, size: 40.0, weight: 400, baseline: alphabetic), headlineMedium: TextStyle(debugLabel: tall headlineMedium 2018, inherit: true, size: 34.0, weight: 400, baseline: alphabetic), headlineSmall: TextStyle(debugLabel: tall headlineSmall 2018, inherit: true, size: 24.0, weight: 400, baseline: alphabetic), titleLarge: TextStyle(debugLabel: tall titleLarge 2018, inherit: true, size: 21.0, weight: 700, baseline: alphabetic), titleMedium: TextStyle(debugLabel: tall titleMedium 2018, inherit: true, size: 17.0, weight: 400, baseline: alphabetic), titleSmall: TextStyle(debugLabel: tall titleSmall 2018, inherit: true, size: 15.0, weight: 500, baseline: alphabetic), bodyLarge: TextStyle(debugLabel: tall bodyLarge 2018, inherit: true, size: 17.0, weight: 700, baseline: alphabetic), bodyMedium: TextStyle(debugLabel: tall bodyMedium 2018, inherit: true, size: 15.0, weight: 400, baseline: alphabetic), bodySmall: TextStyle(debugLabel: tall bodySmall 2018, inherit: true, size: 13.0, weight: 400, baseline: alphabetic), labelLarge: TextStyle(debugLabel: tall labelLarge 2018, inherit: true, size: 15.0, weight: 700, baseline: alphabetic), labelMedium: TextStyle(debugLabel: tall labelMedium 2018, inherit: true, size: 12.0, weight: 400, baseline: alphabetic), labelSmall: TextStyle(debugLabel: tall labelSmall 2018, inherit: true, size: 11.0, weight: 400, baseline: alphabetic))), applyElevationOverlayColor: false, useSubThemes: true, subThemesData: FlexSubThemesData#00000(interactionEffects: true, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: 20.0, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, inputDecorationRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, timePickerDialogRadius: null, snackBarElevation: 4.0, tabBarIndicatorSchemeColor: null, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: 1.0, bottomNavigationBarSchemeColor: null, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarLandscapeLayout: null, navigationBarIsStyled: true, navigationBarHeight: null, navigationBarOpacity: 1.0, navigationBarIconSchemeColor: null, navigationBarIconSchemeColor: null, navigationBarHighlightSchemeColor: null, navigationBarBackgroundSchemeColor: null, navigationBarMutedUnselectedIcon: null, navigationBarMutedUnselectedText: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarLabelBehavior: null))'));
+              'FlexColorScheme#00000(colorScheme: null, brightness: light, primary: Color(0xff6200ee), primaryVariant: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryVariant: Color(0xff018786), surface: Color(0xffffffff), background: Color(0xffffffff), error: Color(0xffb00020), scaffoldBackground: Color(0xffffffff), appBarBackground: Color(0xff6200ee), dialogBackground: Color(0xffffffff), onPrimary: Color(0xffffffff), onPrimaryContainer: Color(0xffffffff), onSecondary: Color(0xff000000), onSecondaryContainer: Color(0xff000000), onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff), tabBarStyle: forAppBar, appBarElevation: 1.0, bottomAppBarElevation: 2.0, tooltipsMatchBackground: true, transparentStatusBar: false, visualDensity: 0, v: 0.0), textTheme: TextTheme#00000(displayLarge: TextStyle(inherit: true, size: 80.0), displayMedium: null, displaySmall: null, headlineLarge: null, headlineMedium: null, headlineSmall: null, titleLarge: null, titleMedium: null, titleSmall: null, bodyLarge: null, bodyMedium: null, bodySmall: null, labelLarge: null, labelMedium: null, labelSmall: null), primaryTextTheme: TextTheme#00000(displayLarge: TextStyle(inherit: true, size: 80.0), displayMedium: null, displaySmall: null, headlineLarge: null, headlineMedium: null, headlineSmall: null, titleLarge: null, titleMedium: null, titleSmall: null, bodyLarge: null, bodyMedium: null, bodySmall: null, labelLarge: null, labelMedium: null, labelSmall: null), fontFamily: Roboto, platform: android, typography: Typography#00000(englishLike: TextTheme#00000(displayLarge: TextStyle(debugLabel: englishLike displayLarge 2018, inherit: true, size: 96.0, weight: 300, letterSpacing: -1.5, baseline: alphabetic), displayMedium: TextStyle(debugLabel: englishLike displayMedium 2018, inherit: true, size: 60.0, weight: 300, letterSpacing: -0.5, baseline: alphabetic), displaySmall: TextStyle(debugLabel: englishLike displaySmall 2018, inherit: true, size: 48.0, weight: 400, letterSpacing: 0.0, baseline: alphabetic), headlineLarge: TextStyle(debugLabel: englishLike headlineLarge 2018, inherit: true, size: 40.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), headlineMedium: TextStyle(debugLabel: englishLike headlineMedium 2018, inherit: true, size: 34.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), headlineSmall: TextStyle(debugLabel: englishLike headlineSmall 2018, inherit: true, size: 24.0, weight: 400, letterSpacing: 0.0, baseline: alphabetic), titleLarge: TextStyle(debugLabel: englishLike titleLarge 2018, inherit: true, size: 20.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic), titleMedium: TextStyle(debugLabel: englishLike titleMedium 2018, inherit: true, size: 16.0, weight: 400, letterSpacing: 0.1, baseline: alphabetic), titleSmall: TextStyle(debugLabel: englishLike titleSmall 2018, inherit: true, size: 14.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic), bodyLarge: TextStyle(debugLabel: englishLike bodyLarge 2018, inherit: true, size: 16.0, weight: 400, letterSpacing: 0.5, baseline: alphabetic), bodyMedium: TextStyle(debugLabel: englishLike bodyMedium 2018, inherit: true, size: 14.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), bodySmall: TextStyle(debugLabel: englishLike bodySmall 2018, inherit: true, size: 12.0, weight: 400, letterSpacing: 0.4, baseline: alphabetic), labelLarge: TextStyle(debugLabel: englishLike labelLarge 2018, inherit: true, size: 14.0, weight: 500, letterSpacing: 1.3, baseline: alphabetic), labelMedium: TextStyle(debugLabel: englishLike labelMedium 2018, inherit: true, size: 11.0, weight: 400, letterSpacing: 1.5, baseline: alphabetic), labelSmall: TextStyle(debugLabel: englishLike labelSmall 2018, inherit: true, size: 10.0, weight: 400, letterSpacing: 1.5, baseline: alphabetic)), dense: TextTheme#00000(displayLarge: TextStyle(debugLabel: dense displayLarge 2018, inherit: true, size: 96.0, weight: 100, baseline: ideographic), displayMedium: TextStyle(debugLabel: dense displayMedium 2018, inherit: true, size: 60.0, weight: 100, baseline: ideographic), displaySmall: TextStyle(debugLabel: dense displaySmall 2018, inherit: true, size: 48.0, weight: 400, baseline: ideographic), headlineLarge: TextStyle(debugLabel: dense headlineLarge 2018, inherit: true, size: 40.0, weight: 400, baseline: ideographic), headlineMedium: TextStyle(debugLabel: dense headlineMedium 2018, inherit: true, size: 34.0, weight: 400, baseline: ideographic), headlineSmall: TextStyle(debugLabel: dense headlineSmall 2018, inherit: true, size: 24.0, weight: 400, baseline: ideographic), titleLarge: TextStyle(debugLabel: dense titleLarge 2018, inherit: true, size: 21.0, weight: 500, baseline: ideographic), titleMedium: TextStyle(debugLabel: dense titleMedium 2018, inherit: true, size: 17.0, weight: 400, baseline: ideographic), titleSmall: TextStyle(debugLabel: dense titleSmall 2018, inherit: true, size: 15.0, weight: 500, baseline: ideographic), bodyLarge: TextStyle(debugLabel: dense bodyLarge 2018, inherit: true, size: 17.0, weight: 400, baseline: ideographic), bodyMedium: TextStyle(debugLabel: dense bodyMedium 2018, inherit: true, size: 15.0, weight: 400, baseline: ideographic), bodySmall: TextStyle(debugLabel: dense bodySmall 2018, inherit: true, size: 13.0, weight: 400, baseline: ideographic), labelLarge: TextStyle(debugLabel: dense labelLarge 2018, inherit: true, size: 15.0, weight: 500, baseline: ideographic), labelMedium: TextStyle(debugLabel: dense labelMedium 2018, inherit: true, size: 12.0, weight: 400, baseline: ideographic), labelSmall: TextStyle(debugLabel: dense labelSmall 2018, inherit: true, size: 11.0, weight: 400, baseline: ideographic)), tall: TextTheme#00000(displayLarge: TextStyle(debugLabel: tall displayLarge 2018, inherit: true, size: 96.0, weight: 400, baseline: alphabetic), displayMedium: TextStyle(debugLabel: tall displayMedium 2018, inherit: true, size: 60.0, weight: 400, baseline: alphabetic), displaySmall: TextStyle(debugLabel: tall displaySmall 2018, inherit: true, size: 48.0, weight: 400, baseline: alphabetic), headlineLarge: TextStyle(debugLabel: tall headlineLarge 2018, inherit: true, size: 40.0, weight: 400, baseline: alphabetic), headlineMedium: TextStyle(debugLabel: tall headlineMedium 2018, inherit: true, size: 34.0, weight: 400, baseline: alphabetic), headlineSmall: TextStyle(debugLabel: tall headlineSmall 2018, inherit: true, size: 24.0, weight: 400, baseline: alphabetic), titleLarge: TextStyle(debugLabel: tall titleLarge 2018, inherit: true, size: 21.0, weight: 700, baseline: alphabetic), titleMedium: TextStyle(debugLabel: tall titleMedium 2018, inherit: true, size: 17.0, weight: 400, baseline: alphabetic), titleSmall: TextStyle(debugLabel: tall titleSmall 2018, inherit: true, size: 15.0, weight: 500, baseline: alphabetic), bodyLarge: TextStyle(debugLabel: tall bodyLarge 2018, inherit: true, size: 17.0, weight: 700, baseline: alphabetic), bodyMedium: TextStyle(debugLabel: tall bodyMedium 2018, inherit: true, size: 15.0, weight: 400, baseline: alphabetic), bodySmall: TextStyle(debugLabel: tall bodySmall 2018, inherit: true, size: 13.0, weight: 400, baseline: alphabetic), labelLarge: TextStyle(debugLabel: tall labelLarge 2018, inherit: true, size: 15.0, weight: 700, baseline: alphabetic), labelMedium: TextStyle(debugLabel: tall labelMedium 2018, inherit: true, size: 12.0, weight: 400, baseline: alphabetic), labelSmall: TextStyle(debugLabel: tall labelSmall 2018, inherit: true, size: 11.0, weight: 400, baseline: alphabetic))), applyElevationOverlayColor: false, useSubThemes: true, subThemesData: FlexSubThemesData#00000(interactionEffects: true, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: 20.0, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, inputDecorationRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, timePickerDialogRadius: null, snackBarElevation: 4.0, tabBarIndicatorSchemeColor: null, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: 1.0, bottomNavigationBarSchemeColor: null, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarLandscapeLayout: null, navigationBarIsStyled: true, navigationBarHeight: null, navigationBarOpacity: 1.0, navigationBarIconSchemeColor: null, navigationBarIconSchemeColor: null, navigationBarHighlightSchemeColor: null, navigationBarBackgroundSchemeColor: null, navigationBarMutedUnselectedIcon: null, navigationBarMutedUnselectedText: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarLabelBehavior: null), useMaterial3: false)'));
     });
 
     test(
@@ -543,32 +551,92 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
 
     test(
-        'FCS2.01: GIVEN a Material light FlexColorScheme object '
-        'EXPECT toScheme to be equal to ColorScheme.light', () {
+        'FCS2.01string: GIVEN a Material light FlexColorScheme object '
+        'EXPECT toScheme to be equal to raw ColorScheme light', () {
       expect(
         const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightPrimary,
-          primaryVariant: FlexColor.materialLightPrimaryVariant,
+          primaryVariant: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
           secondaryVariant: FlexColor.materialLightSecondaryVariant,
           surface: FlexColor.materialLightSurface,
           background: FlexColor.materialLightBackground,
           error: FlexColor.materialLightError,
-          scaffoldBackground: FlexColor.materialLightBackground,
-          appBarBackground: FlexColor.materialLightPrimary,
+          // TODO(rydmike): Remove commented code
+          // scaffoldBackground: FlexColor.materialLightBackground,
+          // appBarBackground: FlexColor.materialLightPrimary,
+          // onPrimary: Colors.white,
+          // onSecondary: Colors.black,
+          // onSurface: Colors.black,
+          // onBackground: Colors.black,
+          // onError: Colors.white,
+        ).toScheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(const ColorScheme(
+          brightness: Brightness.light,
+          primary: Color(0xff6200ee),
           onPrimary: Colors.white,
+          primaryContainer: Color(0xff3700b3),
+          onPrimaryContainer: Colors.white,
+          secondary: Color(0xff03dac6),
           onSecondary: Colors.black,
-          onSurface: Colors.black,
-          onBackground: Colors.black,
+          secondaryContainer: Color(0xff018786),
+          onSecondaryContainer: Colors.white,
+          error: Color(0xffb00020),
           onError: Colors.white,
-        ).toScheme,
-        equals(const ColorScheme.light()),
+          background: Colors.white,
+          onBackground: Colors.black,
+          surface: Colors.white,
+          onSurface: Colors.black,
+        ).toString(minLevel: DiagnosticLevel.fine)),
       );
     });
+
+    test(
+        'FCS2.01: GIVEN a Material light FlexColorScheme object '
+        'EXPECT toScheme to be equal to raw ColorScheme light', () {
+      expect(
+        const FlexColorScheme(
+          brightness: Brightness.light,
+          primary: FlexColor.materialLightPrimary,
+          primaryVariant: FlexColor.materialLightPrimaryContainer,
+          secondary: FlexColor.materialLightSecondary,
+          secondaryVariant: FlexColor.materialLightSecondaryVariant,
+          surface: FlexColor.materialLightSurface,
+          background: FlexColor.materialLightBackground,
+          error: FlexColor.materialLightError,
+          // TODO(rydmike): Remove commented code
+          // scaffoldBackground: FlexColor.materialLightBackground,
+          // appBarBackground: FlexColor.materialLightPrimary,
+          // onPrimary: Colors.white,
+          // onSecondary: Colors.black,
+          // onSurface: Colors.black,
+          // onBackground: Colors.black,
+          // onError: Colors.white,
+        ).toScheme,
+        equals(const ColorScheme(
+          brightness: Brightness.light,
+          primary: Color(0xff6200ee),
+          onPrimary: Colors.white,
+          primaryContainer: Color(0xff3700b3),
+          onPrimaryContainer: Colors.white,
+          secondary: Color(0xff03dac6),
+          onSecondary: Colors.black,
+          secondaryContainer: Color(0xff018786),
+          onSecondaryContainer: Colors.white,
+          error: Color(0xffb00020),
+          onError: Colors.white,
+          background: Colors.white,
+          onBackground: Colors.black,
+          surface: Colors.white,
+          onSurface: Colors.black,
+        )),
+      );
+    });
+
     test(
         'FCS2.02: GIVEN a Material dark FlexColorScheme object '
-        'EXPECT toScheme to be equal to ColorScheme.dark', () {
+        'EXPECT toScheme to be equal to raw ColorScheme dark', () {
       expect(
         const FlexColorScheme(
           brightness: Brightness.dark,
@@ -579,20 +647,37 @@ void main() {
           surface: FlexColor.materialDarkSurface,
           background: FlexColor.materialDarkBackground,
           error: FlexColor.materialDarkError,
-          scaffoldBackground: FlexColor.materialDarkBackground,
-          appBarBackground: FlexColor.materialDarkSurface,
-          onPrimary: Colors.black,
-          onSecondary: Colors.black,
-          onSurface: Colors.white,
-          onBackground: Colors.white,
+          // TODO(rydmike): Remove commented code
+          // scaffoldBackground: FlexColor.materialDarkBackground,
+          // appBarBackground: FlexColor.materialDarkSurface,
+          // onPrimary: Colors.black,
+          // onSecondary: Colors.black,
+          // onSurface: Colors.white,
+          // onBackground: Colors.white,
           onError: Colors.black,
         ).toScheme,
-        equals(const ColorScheme.dark()),
+        equals(const ColorScheme(
+          brightness: Brightness.dark,
+          primary: Color(0xffbb86fc),
+          onPrimary: Colors.black,
+          primaryContainer: Color(0xff3700B3),
+          onPrimaryContainer: Colors.white,
+          secondary: Color(0xff03dac6),
+          onSecondary: Colors.black,
+          secondaryContainer: Color(0xff03dac6),
+          onSecondaryContainer: Colors.black,
+          error: Color(0xffcf6679),
+          onError: Colors.black,
+          background: Color(0xff121212),
+          onBackground: Colors.white,
+          surface: Color(0xff121212),
+          onSurface: Colors.white,
+        )),
       );
     });
     test(
         'FCS2.03: GIVEN a Material Hc light FlexColorScheme object '
-        'EXPECT toScheme to be equal to ColorScheme.highContrastLight', () {
+        'EXPECT toScheme to be equal to raw ColorScheme highContrastLight', () {
       expect(
         const FlexColorScheme(
           brightness: Brightness.light,
@@ -603,20 +688,37 @@ void main() {
           surface: FlexColor.materialLightSurface,
           background: FlexColor.materialLightBackground,
           error: FlexColor.materialLightErrorHc,
-          scaffoldBackground: FlexColor.materialLightBackground,
-          appBarBackground: FlexColor.materialLightPrimaryHc,
-          onPrimary: Colors.white,
-          onSecondary: Colors.black,
-          onSurface: Colors.black,
-          onBackground: Colors.black,
-          onError: Colors.white,
+          // TODO(rydmike): Remove commented code
+          // scaffoldBackground: FlexColor.materialLightBackground,
+          // appBarBackground: FlexColor.materialLightPrimaryHc,
+          // onPrimary: Colors.white,
+          // onSecondary: Colors.black,
+          // onSurface: Colors.black,
+          // onBackground: Colors.black,
+          // onError: Colors.white,
         ).toScheme,
-        equals(const ColorScheme.highContrastLight()),
+        equals(const ColorScheme(
+          brightness: Brightness.light,
+          primary: Color(0xff0000ba),
+          onPrimary: Colors.white,
+          primaryContainer: Color(0xff000088),
+          onPrimaryContainer: Colors.white,
+          secondary: Color(0xff66fff9),
+          onSecondary: Colors.black,
+          secondaryContainer: Color(0xff018786),
+          onSecondaryContainer: Colors.white,
+          error: Color(0xff790000),
+          onError: Colors.white,
+          background: Colors.white,
+          onBackground: Colors.black,
+          surface: Colors.white,
+          onSurface: Colors.black,
+        )),
       );
     });
     test(
         'FCS2.04: GIVEN a Material Hc dark FlexColorScheme object '
-        'EXPECT toScheme to be equal to ColorScheme.highContrastDark', () {
+        'EXPECT toScheme to be equal to raw ColorScheme highContrastDark', () {
       expect(
         const FlexColorScheme(
           brightness: Brightness.dark,
@@ -627,15 +729,32 @@ void main() {
           surface: FlexColor.materialDarkSurface,
           background: FlexColor.materialDarkBackground,
           error: FlexColor.materialDarkErrorHc,
-          scaffoldBackground: FlexColor.materialDarkBackground,
-          appBarBackground: FlexColor.materialDarkSurface,
-          onPrimary: Colors.black,
-          onSecondary: Colors.black,
-          onSurface: Colors.white,
-          onBackground: Colors.white,
+          // TODO(rydmike): Remove commented code
+          // scaffoldBackground: FlexColor.materialDarkBackground,
+          // appBarBackground: FlexColor.materialDarkSurface,
+          // onPrimary: Colors.black,
+          // onSecondary: Colors.black,
+          // onSurface: Colors.white,
+          // onBackground: Colors.white,
           onError: Colors.black,
         ).toScheme,
-        equals(const ColorScheme.highContrastDark()),
+        equals(const ColorScheme(
+          brightness: Brightness.dark,
+          primary: Color(0xffefb7ff),
+          onPrimary: Colors.black,
+          primaryContainer: Color(0xffbe9eff),
+          onPrimaryContainer: Colors.black,
+          secondary: Color(0xff66fff9),
+          onSecondary: Colors.black,
+          secondaryContainer: Color(0xff66fff9),
+          onSecondaryContainer: Colors.black,
+          error: Color(0xff9b374d),
+          onError: Colors.black,
+          background: Color(0xff121212),
+          onBackground: Colors.white,
+          surface: Color(0xff121212),
+          onSurface: Colors.white,
+        )),
       );
     });
   });

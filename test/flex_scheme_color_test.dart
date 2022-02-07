@@ -17,7 +17,7 @@ void main() {
     // m1 = Basic flex scheme color .
     const FlexSchemeColor m1 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
       appBarColor: FlexColor.materialLightSecondaryVariant,
@@ -26,7 +26,7 @@ void main() {
     // m2, same definition as m1.
     const FlexSchemeColor m2 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryVariant: FlexColor.materialLightSecondaryVariant,
       appBarColor: FlexColor.materialLightSecondaryVariant,
@@ -87,7 +87,7 @@ void main() {
       expect(
         m3.copyWith(
           primary: FlexColor.materialLightPrimary,
-          primaryVariant: FlexColor.materialLightPrimaryVariant,
+          primaryVariant: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
           secondaryVariant: FlexColor.materialLightSecondaryVariant,
           appBarColor: FlexColor.materialLightSecondaryVariant,
@@ -241,7 +241,7 @@ void main() {
       primary: FlexColor.materialLightSecondary,
       primaryVariant: FlexColor.materialLightSecondaryVariant,
       secondary: FlexColor.materialLightPrimary,
-      secondaryVariant: FlexColor.materialLightPrimaryVariant,
+      secondaryVariant: FlexColor.materialLightPrimaryContainer,
       appBarColor: FlexColor.materialLightSecondaryVariant,
       error: FlexColor.materialLightError,
     );

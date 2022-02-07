@@ -9,9 +9,9 @@ void main() {
   group('FST.sC: FlexSubThemes.schemeColor WITH ColorScheme ', () {
     const ColorScheme scheme = ColorScheme.light(
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondaryContainer: FlexColor.materialLightSecondaryVariant,
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
@@ -38,7 +38,7 @@ void main() {
         'FST.sC-03: GIVEN SchemeColor.primaryVariant '
         'EXPECT primaryVariant color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.primaryVariant, scheme),
-          equals(FlexColor.materialLightPrimaryVariant));
+          equals(FlexColor.materialLightPrimaryContainer));
     });
     test(
         'FST.sC-04: GIVEN SchemeColor.secondary '
@@ -102,9 +102,9 @@ void main() {
   group('FST.sCP: FlexSubThemes.schemeColorPair WITH ColorScheme ', () {
     const ColorScheme scheme = ColorScheme.light(
       primary: FlexColor.materialLightPrimary,
-      primaryVariant: FlexColor.materialLightPrimaryVariant,
+      primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryVariant,
+      secondaryContainer: FlexColor.materialLightSecondaryVariant,
       surface: FlexColor.materialLightSurface,
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,

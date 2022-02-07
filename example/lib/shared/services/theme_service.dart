@@ -557,7 +557,7 @@ abstract class ThemeService {
 
   /// Default value for the primaryLight color, also to reset settings.
   static const Color defaultPrimaryVariantLight =
-      FlexColor.materialLightPrimaryVariant;
+      FlexColor.materialLightPrimaryContainer;
 
   /// Loads setting for primaryVariantLight color, in example 5.
   Future<Color> primaryVariantLight();

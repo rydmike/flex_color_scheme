@@ -193,13 +193,13 @@ class FlexSubThemes {
       case SchemeColor.onPrimary:
         return colorScheme.onPrimary;
       case SchemeColor.primaryVariant:
-        return colorScheme.primaryVariant;
+        return colorScheme.primaryContainer;
       case SchemeColor.secondary:
         return colorScheme.secondary;
       case SchemeColor.onSecondary:
         return colorScheme.onSecondary;
       case SchemeColor.secondaryVariant:
-        return colorScheme.secondaryVariant;
+        return colorScheme.secondaryContainer;
       case SchemeColor.surface:
         return colorScheme.surface;
       case SchemeColor.onSurface:
@@ -231,20 +231,18 @@ class FlexSubThemes {
         return colorScheme.onPrimary;
       case SchemeColor.onPrimary:
         return colorScheme.primary;
-      // There is no onColor pair for primaryVariant, we return onPrimary,
-      // this issue will go away when primaryVariant is deprecated and
-      // replaced with new container color that has a defined onColor pair.
+      // There is no onColor pair for primaryVariant, we return new
+      // in Flutter 2.10.0 onPrimaryContainer.
       case SchemeColor.primaryVariant:
         return colorScheme.onPrimary;
       case SchemeColor.secondary:
         return colorScheme.onSecondary;
       case SchemeColor.onSecondary:
         return colorScheme.secondary;
-      // There is no onColor pair for secondaryVariant, we return onSecondary,
-      // this issue will go away when secondaryVariant is deprecated and
-      // replaced with new container color that has a defined onColor pair.
+      // There is no onColor pair for secondaryVariant, we return new
+      // in Flutter 2.10.0 onSecondaryContainer.
       case SchemeColor.secondaryVariant:
-        return colorScheme.onSecondary;
+        return colorScheme.onSecondaryContainer;
       case SchemeColor.surface:
         return colorScheme.onSurface;
       case SchemeColor.onSurface:
