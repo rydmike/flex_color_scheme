@@ -3,14 +3,26 @@
 All notable changes to the **FlexColorScheme** package are documented here.
 
 
-## v4.3.0 - January 29, 2022 - WORK IN PROGRESS
+## v5.0.0-dev1 - February 7, 2022 - WORK IN PROGRESS
 
+* **Breaking**: Require min Dart SDK 2.16, bundled with Flutter 2.10.0. Uses
+  new M3 `ColorScheme` properties that are not included before Flutter version
+  2.10.0.
+* **New:** Added `onPrimaryContainer` and `onSecondaryContainer` to theme 
+  constructors and factories.
+* **New:** Added `useMaterial3` theme constructors and factories. This is the
+  same flag us in `ThemeData`, it does not really have any major impact on
+  default themed widgets. Opting in on opinionated sub-themes, will however
+  as before give opinionated default sub-themes that results in M3 like style
+  that will become default widget design later when using the flag 
+  `useMaterial3` set to true.
 * **New:** Added additional `ColorScheme` color selection options to 
   sub-themes configuration class `FlexSubThemesData`. The feature
-  introduced in version 4.2.0 is now also supported by sub themes for
+  introduced in version 4.2.0 is now also supported by sub themes for:
   - Floating Action Button, via `FlexSubThemesData.fabSchemeColor`
 
-
+* **TODO:** Migrate all `variant` named properties to `container` named ones,
+  keeping the `variant` named deprecated ones around until version 6.0.0. 
 * **TODO:** Add tests for new prop `fabSchemeColor` and its features.
 
 ## v4.2.0 - January 24, 2022
