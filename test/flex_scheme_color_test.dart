@@ -23,6 +23,18 @@ void main() {
       appBarColor: FlexColor.materialLightSecondaryContainer,
       error: FlexColor.materialLightError,
     );
+    const FlexSchemeColor m1v = FlexSchemeColor(
+      primary: FlexColor.materialLightPrimary,
+      primaryVariant: FlexColor.materialLightPrimaryContainer,
+      secondary: FlexColor.materialLightSecondary,
+      secondaryVariant: FlexColor.materialLightSecondaryContainer,
+      appBarColor: FlexColor.materialLightSecondaryContainer,
+      error: FlexColor.materialLightError,
+    );
+    const FlexSchemeColor m1no = FlexSchemeColor(
+      primary: FlexColor.materialLightPrimary,
+      secondary: FlexColor.materialLightSecondary,
+    );
     // m2, same definition as m1.
     const FlexSchemeColor m2 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
@@ -70,6 +82,36 @@ void main() {
         'FSC1.01e: GIVEN two identical FlexSchemeColor objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
+    });
+    test(
+        'FSC1.01f: GIVEN a FlexSchemeColor object with container but no '
+        'variant colors defined '
+        'EXPECT variant to be equal to container colors. v5.0.0 test', () {
+      expect(m1.primaryVariant, equals(m1.primaryContainer));
+      expect(m1.secondaryVariant, equals(m1.secondaryContainer));
+    });
+    test(
+        'FSC1.01g: GIVEN a FlexSchemeColor object with variant but no '
+        'container colors defined '
+        'EXPECT container to be equal to variant colors. v5.0.0 test', () {
+      expect(m1v.primaryContainer, equals(m1v.primaryVariant));
+      expect(m1v.secondaryContainer, equals(m1v.secondaryVariant));
+    });
+    test(
+        'FSC1.01h: GIVEN a FlexSchemeColor object with no primary variant or '
+        'primary container colors defined '
+        'EXPECT them to be equal to be equal to primary color. v5.0.0 test',
+        () {
+      expect(m1no.primaryContainer, equals(m1v.primary));
+      expect(m1no.primaryVariant, equals(m1v.primary));
+    });
+    test(
+        'FSC1.01h: GIVEN a FlexSchemeColor object with no secondary variant or '
+        'primary container colors defined '
+        'EXPECT them to be equal to be equal to secondary color. '
+        'v5.0.0 test', () {
+      expect(m1no.secondaryContainer, equals(m1v.secondary));
+      expect(m1no.secondaryVariant, equals(m1v.secondary));
     });
     test(
         'FSC1.02a: GIVEN none identical FlexSchemeColor objects '
@@ -303,7 +345,8 @@ void main() {
       );
     });
 
-    // This test fails in version 3.0.0, fix released in 3.0.1.
+    // This test failed in version 3.0.0, fix added in release in 3.0.1
+    // Test now passes.
     test(
         'FSC1.20: GIVEN a FlexSchemeColor.effective(SchemeColors, 1), '
         'swapColors: true) EXPECT it '
@@ -321,8 +364,6 @@ void main() {
         ),
       );
     });
-
-    // TODO(rydmike): Add tests to verify Variant <-> Container equality.
 
     //**************************************************************************
     // FlexSchemeColor unit tests.
