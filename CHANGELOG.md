@@ -3,7 +3,7 @@
 All notable changes to the **FlexColorScheme** package are documented here.
 
 
-## v5.0.0-dev.1 - February 11, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - February 12, 2022 - WORK IN PROGRESS
 
 This release is big refactor with deprecation of previous `variant` based 
 names in favor of `container` ones that were added to updated M3
@@ -43,6 +43,14 @@ as old property names will remain available until FlexColorScheme version
   sub-themes, will however as before give opinionated default sub-themes that 
   result in M3 like styles. Similar look will become default widget design in 
   later Flutter SDK versions when using the flag `useMaterial3` set to true.
+* **New:** Added a `FlexKeyColorSetup` configuration class that can be used
+  with the `FlexColorScheme.keyColorSetup` to enable and configure tonal palette
+  key color based `ColorScheme`'s generated using existing built-in or custom
+  colors as key colors for its generated `ColorScheme`. The method can completely
+  mimic the `ColorScheme.fromSeed` Flutter SDK feature, but offers more
+  configuration and flexibility while still using key colors as seed colors, 
+  without the need to go to lower API levels to produce custom tonal palettes 
+  and use them manually in the `ColorScheme` definition.
 * **New:** Added additional `ColorScheme` color selection options to 
   sub-themes configuration class `FlexSubThemesData`. The feature
   introduced in version 4.2.0 is now also supported by sub themes for:
@@ -97,12 +105,10 @@ as old property names will remain available until FlexColorScheme version
   available in Flutter 2.10.0.
 
 
-* **TODO:** Add M3 seed color theme support, using 1, 2 or 3 seed colors, 
-  instead of just one, like ThemeData does. Consider config option to use input
-  colors as given for selected props of primary, secondary and tertiary in
-  FlexSchemeColor. This will require a seed config class as property input to 
-  `FlexColorScheme` to keep the property amounts manageable.
-* **TODO:** Move built in color definitions values for 
+* **TODO:** Add M3 seed color theme support, using 1, 2 or 3 key colors as seed, 
+  instead of just one, like ThemeData does. The behavior is controlled via the
+  `FlexSeedColorSetup` class passed in to `FlexColorScheme.seedColorSetup`.
+* **TODO:** Refactor built in color definitions values for 
   `FlexSchemeColor.secondaryContainer` to become the predefined value for
   `FlexSchemeColor.tertiary`.
 * **TODO:** Add **new** color definitions for 
@@ -118,12 +124,13 @@ as old property names will remain available until FlexColorScheme version
   computed from the seed values from primary, secondary and tertiary.
 * **TODO:** Add tests for new prop `fabSchemeColor` and its features.
 * **TODO:** Add tests for new prop `useMaterial3`.
+* **DONE:** Add unit tests for `FlexKeyColorSetup`.
 * **TODO:** Add more tests for legacy fallbacks when using old deprecated 
   `primaryVariant` and `secondaryVariant` properties.
 
 
 * **TODO:** Update all examples, in particular example 5, the Themes Playground
-  to include support for new features.
+  to include support for the new features.
 
 **MAYBE:** (Might be pushed to 5.x.0).
 * **TODO:** Add main `SchemeColor` enum color selection to all buttons.
@@ -135,6 +142,12 @@ as old property names will remain available until FlexColorScheme version
   overriding its none sub-theme older enum definition. 
 * **TODO:** Add sub-theming support for `NavigationRailThemeData`.
 
+
+### What is Next?
+
+Curious about what is planned next for FlexColorScheme? Head over
+to the TODO section at the end of this page and read more
+[here](#planned-updates-and-new-features).
 
 ## v4.2.0 - January 24, 2022
 
@@ -153,7 +166,7 @@ as old property names will remain available until FlexColorScheme version
 
 * **New:** Custom `FlexColorScheme` based themes can now also be defined by
   alternatively passing in a `ColorScheme` object to the `colorScheme`
-  property in default the constructor, as well as in `FlexColorScheme.light` and
+  property in the constructor, as well as in `FlexColorScheme.light` and
   `FlexColorScheme.dark` factories. When used it overrides the `scheme` and 
   `colors` properties in the factories. Same color property in any constructor
   that exist as direct property in the constructors, still have the highest 
@@ -286,14 +299,6 @@ as old property names will remain available until FlexColorScheme version
 
 * **Tests:** Added tests to cover the new features, now total 1123 tests.
 
-
-### What is Next?
-
-Curious about what is planned next for FlexColorScheme? Head over
-to the TODO section at the end of this page and read more 
-[here](#planned-updates-and-new-features).
-
-  
 
 ## v4.1.1 - November 20, 2021
 
