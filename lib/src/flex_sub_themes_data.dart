@@ -226,8 +226,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Defaults to null.
   ///
-  /// When it is null, the sub-themes will use their null defaults that aim
-  /// to follow Material 3 standard for all widgets it includes.
+  /// When it is null, the sub-themes will use their null default behavior
+  /// that aim to follow Material 3 standard for all widgets it includes.
   ///
   /// When you set [defaultRadius] to a value, it will override the defaults
   /// with this global default. You can still set and lock each individual
@@ -237,7 +237,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Flutter current SDK general border radius is 4, as defined by the
   /// Material 2 design guide. Material 3 (You) uses much
-  /// higher border radius, but it varies by UI widget. You can find the
+  /// higher border radius, but it varies by UI widget type. You can find the
   /// specifications [here](https://m3.material.io).
   final double? defaultRadius;
 

@@ -136,23 +136,25 @@ class DemoApp extends StatelessWidget {
                     swapColors: themeController.swapLightColors,
                     // Keep scaffold plain white in all blend modes.
                     lightIsWhite: themeController.lightIsWhite,
-                    // Opt in/out of using the new V4 sub-themes.
-                    useSubThemes: themeController.useSubThemes,
                     // Modify the value in the AppData class to change it.
                     visualDensity: AppData.visualDensity,
                     // Custom font, modify in AppData class to change it.
                     fontFamily: AppData.font,
                     // The platform can be toggled in the app, but not saved.
                     platform: themeController.platform,
-                    // Options used to modify the sub-themes, there
-                    // are more controls, here we use:
+                    // Opt in/out of using opinionated sub-themes.
+                    useSubThemes: themeController.useSubThemes,
+                    // Options used to modify the sub-themes, there are more
+                    // properties than this, but here we use:
                     subThemesData: FlexSubThemesData(
                       // Opt in/out of the Material 3 style matched TextTheme.
                       useTextTheme: themeController.useTextTheme,
                       // Slider to adjust themed border radius on widgets with
-                      // an adjustable corner rounding, this one is darn handy.
+                      // an adjustable corner rounding, this one is very handy.
                       // If null, it defaults to Material3 (You) design
                       // guide values, when available: https://m3.material.io/
+                      // If you give it value, "all" Flutter built-in widgets
+                      // supporting border radius will use the give radius.
                       defaultRadius: themeController.useDefaultRadius
                           ? null
                           : themeController.cornerRadius,
@@ -297,10 +299,10 @@ class DemoApp extends StatelessWidget {
                         themeController.tooltipsMatchBackground,
                     swapColors: themeController.swapDarkColors,
                     darkIsTrueBlack: themeController.darkIsTrueBlack,
-                    useSubThemes: themeController.useSubThemes,
                     visualDensity: AppData.visualDensity,
                     fontFamily: AppData.font,
                     platform: themeController.platform,
+                    useSubThemes: themeController.useSubThemes,
                     subThemesData: FlexSubThemesData(
                       useTextTheme: themeController.useTextTheme,
                       defaultRadius: themeController.useDefaultRadius
