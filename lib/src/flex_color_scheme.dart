@@ -7019,6 +7019,7 @@ class _Scheme {
   }
 }
 
+// TODO(rydmike): Decide if to the CorePalette inherited version or own class.
 /// An intermediate concept between the key color for a UI theme, and a full
 /// color scheme. 5 tonal palettes are generated + fixed error palette.
 ///
@@ -7104,6 +7105,7 @@ class _FlexCorePalette extends CorePalette {
   }
 }
 
+// TODO(rydmike): Decide if to the CorePalette inherited version or own class.
 /// An intermediate concept between the key color for a UI theme, and a full
 /// color scheme. 5 tonal palettes are generated + fixed error palette.
 ///
