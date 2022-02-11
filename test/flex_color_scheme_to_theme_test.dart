@@ -20,10 +20,12 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with light factory with '
         'just using one color. v4.2.0 test case', () {
       expect(
-          const FlexColorScheme().toTheme,
-          equals(FlexColorScheme.light(
+          const FlexColorScheme()
+              .toScheme
+              .toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(FlexColorScheme.light(
             usedColors: 1,
-          ).toTheme));
+          ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
     });
 
     test(
