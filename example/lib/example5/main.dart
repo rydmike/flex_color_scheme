@@ -105,6 +105,9 @@ class DemoApp extends StatelessWidget {
                 ? FlexThemeData.light(
                     // Use controller to get current scheme colors.
                     colors: AppColor.scheme(themeController).light,
+                    // TODO(rydmike): Make this a controller property.
+                    // Used number of colors
+                    usedColors: 4,
                     // Use controller to select surface mode
                     surfaceMode: themeController.surfaceMode,
                     // Integer used to control the level of primary color
@@ -275,6 +278,9 @@ class DemoApp extends StatelessWidget {
             darkTheme: themeController.useFlexColorScheme
                 ? FlexThemeData.dark(
                     colors: AppColor.scheme(themeController).dark,
+                    // TODO(rydmike): Make this a controller property.
+                    // Used number of colors
+                    usedColors: 4,
                     // For reduced complexity in this demo, we use the same
                     // control value for surface mode selection and blend level
                     // for light and dark mode. They can as shown in earlier

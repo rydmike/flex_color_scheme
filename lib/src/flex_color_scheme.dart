@@ -1,6 +1,9 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_color_utilities/material_color_utilities.dart';
 
 import 'flex_color.dart';
 import 'flex_constants.dart';
@@ -571,6 +574,8 @@ class FlexColorScheme with Diagnosticable {
     @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
         'due to deprecation in Flutter master from 2.10.0')
         final this.secondaryVariant,
+    final this.tertiary,
+    final this.tertiaryContainer,
     final this.error,
     final this.surface,
     final this.background,
@@ -581,6 +586,8 @@ class FlexColorScheme with Diagnosticable {
     final this.onPrimaryContainer,
     final this.onSecondary,
     final this.onSecondaryContainer,
+    final this.onTertiary,
+    final this.onTertiaryContainer,
     final this.onSurface,
     final this.onBackground,
     final this.onError,
@@ -605,12 +612,15 @@ class FlexColorScheme with Diagnosticable {
 
   /// The overall [ColorScheme] based colors for the theme.
   ///
-  /// This property provides a new way to define custom colors for
+  /// This property provides an alternative way to define custom colors for
   /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
   /// you already have a custom [ColorScheme] based color definition that
   /// you want to use with FlexColorScheme theming and its sub-theming
-  /// capabilities. This will become particularly useful when using Material 3
-  /// based design and its seed generated color schemes.
+  /// capabilities. This useful when using fully custom scheme or using the
+  /// Material 3 based design and its seed generated color schemes.
+  /// The factories [FlexColorScheme.light] and [FlexColorScheme.dark] provide
+  /// convenience factories for also generating M3 based seeded themes using
+  /// the built in [ColorSchemes] as seed colors.
   ///
   /// If you provide both a [ColorScheme] and some individual direct property
   /// values that also exist in a [ColorScheme], the individual property values
@@ -685,8 +695,9 @@ class FlexColorScheme with Diagnosticable {
 
   /// A color used for elements needing less emphasis than [secondary].
   ///
-  /// If not defined, and if there is no [colorScheme] defining, scheme result
-  /// will be [secondary] color, and if it is not defined either then
+  ///
+  /// If not defined, and if there is no [colorScheme] defining it, scheme
+  /// result will be [secondary] color, and if it is not defined either, then
   /// [primary] color.
   final Color? secondaryContainer;
 
@@ -711,6 +722,22 @@ class FlexColorScheme with Diagnosticable {
   @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
       'due to deprecation in Flutter master from 2.10.0')
   final Color? secondaryVariant;
+
+  /// A color used as a contrasting accent that can balance [primary]
+  /// and [secondary] colors or bring heightened attention to an element,
+  /// such as an input field.
+  ///
+  /// If not defined, and if there is no [colorScheme] defining it, scheme
+  /// result will be [secondary] color, and if it is not defined either, then
+  /// [primary] color.
+  final Color? tertiary;
+
+  /// A color used for elements needing less emphasis than [tertiary].
+  ///
+  /// If not defined, and if there is no [colorScheme] defining it, scheme
+  /// result will be [secondary] color, and if it is not defined either, then
+  /// [primary] color.
+  final Color? tertiaryContainer;
 
   /// The color to use for input validation errors, e.g. for
   /// [InputDecoration.errorText].
@@ -819,6 +846,29 @@ class FlexColorScheme with Diagnosticable {
   /// will via [ColorScheme] default be equal to resulting color scheme
   /// [ColorScheme.onSecondary].
   final Color? onSecondaryContainer;
+
+  /// A color that's clearly legible when drawn on [tertiary].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [tertiary] and [onTertiary] of at least 4.5:1 is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, and if [colorScheme.onTertiary] is null, the color
+  /// will via [ColorScheme] default be equal to resulting color scheme
+  /// [ColorScheme.onSecondary].
+  final Color? onTertiary;
+
+  /// A color that's clearly legible when drawn on [tertiaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [tertiaryContainer] and [onTertiaryContainer] of at least 4.5:1 is
+  /// recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, and if [colorScheme.onTertiaryContainer] and [onTertiary) is
+  /// null, the color will via [ColorScheme] default be equal to resulting
+  /// color scheme [ColorScheme.onSecondary].
+  final Color? onTertiaryContainer;
 
   /// A color that is clearly legible when drawn on [surface] color.
   ///
@@ -1584,6 +1634,44 @@ class FlexColorScheme with Diagnosticable {
         'due to deprecation in Flutter master from 2.10.0')
         final Color? secondaryVariant,
 
+    /// A color used as a contrasting accent that can balance [primary]
+    /// and [secondary] colors or bring heightened attention to an element,
+    /// such as an input field.
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// Defaults to null.
+    final Color? tertiary,
+
+    /// A color used for elements needing less emphasis than [tertiary].
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// Defaults to null.
+    final Color? tertiaryContainer,
+
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
     ///
@@ -1735,6 +1823,43 @@ class FlexColorScheme with Diagnosticable {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     final Color? onSecondaryContainer,
+
+    /// A color that's clearly legible when drawn on [tertiary].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [secondary] and [onSecondary] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onTertiary,
+
+    /// A color that's clearly legible when drawn on [tertiaryContainer].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onTertiaryContainer,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -2118,6 +2243,7 @@ class FlexColorScheme with Diagnosticable {
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
         colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
+
     // If the passed in property values are not null, or there was a colorScheme
     // provided, we will override the colors properties with them, this gets
     // us also correct effective and swap behavior on directly passed in
@@ -2126,22 +2252,55 @@ class FlexColorScheme with Diagnosticable {
       primary: primary ?? colorScheme?.primary,
       // Use old primaryVariant also as potential passed in override for
       // container, for backwards behavior compatibility.
-      // TODO(rydmike): Check if needed and maybe remove.
       primaryContainer:
           primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
       // Use old secondaryVariant also as potential passed in override for
       // container, for backwards behavior compatibility.
-      // TODO(rydmike): Check if needed and maybe remove.
       secondaryContainer: secondaryContainer ??
           secondaryVariant ??
           colorScheme?.secondaryContainer,
+      // TODO(rydmike): add tertiary and tertiaryContainer
+      tertiary: tertiary ?? colorScheme?.tertiary,
+      tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
       error: error ?? colorScheme?.error,
     );
-    // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
-    final FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
+
+    // First effective FlexSchemeColor depends on colors, usedColors and swap.
+    FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
         withPassedColors, usedColors,
         swapColors: swapColors);
+
+    // Experimental in code props to figure out seed color usage
+    const bool useSeeds = false;
+    const bool usePrimarySeed = true;
+    const bool useSecondarySeed = true;
+    const bool useTertiarySeed = true;
+
+    // Create theme from seed colors
+    final ColorScheme seedScheme = _Scheme.fromSeeds(
+      brightness: Brightness.light,
+      argbPrimary: effectiveColors.primary,
+      argbSecondary: usedColors < 2 ? null : effectiveColors.secondary,
+      argbTertiary: usedColors < 4 ? null : effectiveColors.secondaryContainer,
+    );
+
+    // If seed color is active we apply the seeded colors to effective colors.
+    if (useSeeds) {
+      effectiveColors = FlexSchemeColor(
+        primary: usePrimarySeed ? seedScheme.primary : effectiveColors.primary,
+        primaryContainer: usePrimarySeed
+            ? seedScheme.primaryContainer
+            : effectiveColors.primaryContainer,
+        secondary:
+            useSecondarySeed ? seedScheme.secondary : effectiveColors.secondary,
+        secondaryContainer: useTertiarySeed
+            ? seedScheme.secondaryContainer
+            : effectiveColors.secondaryContainer,
+        appBarColor: effectiveColors.appBarColor,
+        error: seedScheme.error,
+      );
+    }
 
     // If [surfaceStyle] is [FlexSurface.custom] then the returned
     // surfaceSchemeColors will be same as [FlexSurface.material], to get a
@@ -2159,6 +2318,16 @@ class FlexColorScheme with Diagnosticable {
             surfaceMode: surfaceMode,
             blendLevel: blendLevel,
             schemeColors: effectiveColors,
+            surfaceColors: useSeeds
+                // If we use seed colors, the surface colors are given by
+                // seed generated scheme.
+                ? FlexSchemeSurfaceColors(
+                    surface: seedScheme.surface,
+                    dialogBackground: seedScheme.surfaceVariant,
+                    background: seedScheme.background,
+                    scaffoldBackground: seedScheme.surface,
+                  )
+                : null,
           )
         : FlexSchemeSurfaceColors.from(
             brightness: Brightness.light,
@@ -2171,7 +2340,7 @@ class FlexColorScheme with Diagnosticable {
         subThemesData ?? const FlexSubThemesData();
 
     // Get alpha blend values corresponding to used mode, level and brightness,
-    // if using surfaceMode, opted in to use sub themes and in them opted
+    // if using surfaceMode, and opted in to use sub themes and in them opted
     // in to also blend the on colors.
     final _AlphaValues alphaValue =
         surfaceMode != null && useSubThemes && subTheme.blendOnColors
@@ -2183,7 +2352,8 @@ class FlexColorScheme with Diagnosticable {
     // are used, if not then colorScheme based colors are used, if they
     // were provided and we are not using blended surface and surface mode,
     // if we are, then we use the computed surfaces.
-    // The final fallback is always the computed surface
+    // The final fallback is always the computed surface.
+    // Seeded color
     final bool overrideScheme = blendLevel > 0 && surfaceMode != null;
     final Color inputSurface = surface ??
         (overrideScheme ? surfaceSchemeColors.surface : colorScheme?.surface) ??
@@ -2204,6 +2374,8 @@ class FlexColorScheme with Diagnosticable {
       primaryContainer: effectiveColors.primaryContainer,
       secondary: effectiveColors.secondary,
       secondaryContainer: effectiveColors.secondaryContainer,
+      tertiary: effectiveColors.tertiary,
+      tertiaryContainer: effectiveColors.tertiaryContainer,
       surface: inputSurface,
       background: inputBackground,
       error: effectiveColors.error ?? FlexColor.materialLightError,
@@ -2212,6 +2384,9 @@ class FlexColorScheme with Diagnosticable {
       onSecondary: onSecondary ?? colorScheme?.onSecondary,
       onSecondaryContainer:
           onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
+      onTertiary: onTertiary ?? colorScheme?.onTertiary,
+      onTertiaryContainer:
+          onTertiaryContainer ?? colorScheme?.onTertiaryContainer,
       onSurface: onSurface ?? colorScheme?.onSurface,
       onBackground: onBackground ?? colorScheme?.onBackground,
       onError: onError ?? colorScheme?.onError,
@@ -2219,6 +2394,8 @@ class FlexColorScheme with Diagnosticable {
       primaryContainerAlpha: alphaValue.primaryContainerAlpha * 2 ~/ divN,
       secondaryAlpha: alphaValue.secondaryAlpha * 2 ~/ divN,
       secondaryContainerAlpha: alphaValue.secondaryContainerAlpha * 2 ~/ divN,
+      tertiaryAlpha: alphaValue.tertiaryAlpha * 2 ~/ divN,
+      tertiaryContainerAlpha: alphaValue.tertiaryContainerAlpha * 2 ~/ divN,
       surfaceAlpha: alphaValue.surfaceAlpha * 2 ~/ divN,
       backgroundAlpha: alphaValue.backgroundAlpha * 2 ~/ divN,
       errorAlpha: alphaValue.errorAlpha * 2 ~/ divN,
@@ -2278,7 +2455,7 @@ class FlexColorScheme with Diagnosticable {
       // Passing it along will however let us keep property values it may
       // have that we are not dealing with in FlexColorScheme when it returns
       // its [ColorScheme].
-      colorScheme: colorScheme,
+      colorScheme: colorScheme, // seedScheme,
       // This is the light theme factory so we always set brightness to light.
       brightness: Brightness.light,
       // Primary color for the application
@@ -2297,6 +2474,9 @@ class FlexColorScheme with Diagnosticable {
       // We use any provided value, if none darken the secondary and if no
       // secondary was provided we darken the primary 15%.
       secondaryContainer: effectiveColors.secondaryContainer,
+      // Tertiary colors
+      tertiary: effectiveColors.tertiary,
+      tertiaryContainer: effectiveColors.tertiaryContainer,
       // Surface is used e.g. by Card and bottom appbar.
       surface: effectiveSurfaceColor,
       // Background is used e.g. by drawer and bottom nav bar.
@@ -2318,6 +2498,8 @@ class FlexColorScheme with Diagnosticable {
       onPrimaryContainer: onColors.onPrimaryContainer,
       onSecondary: onColors.onSecondary,
       onSecondaryContainer: onColors.onSecondaryContainer,
+      onTertiary: onColors.onTertiary,
+      onTertiaryContainer: onColors.onTertiaryContainer,
       onSurface: onColors.onSurface,
       onBackground: onColors.onBackground,
       onError: onColors.onError,
@@ -2758,6 +2940,44 @@ class FlexColorScheme with Diagnosticable {
         'due to deprecation in Flutter master from 2.10.0')
         final Color? secondaryVariant,
 
+    /// A color used as a contrasting accent that can balance [primary]
+    /// and [secondary] colors or bring heightened attention to an element,
+    /// such as an input field.
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// Defaults to null.
+    final Color? tertiary,
+
+    /// A color used for elements needing less emphasis than [tertiary].
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    ///
+    /// The override color is included and affected by factory properties
+    /// [usedColors] and [swapColors] and included in their behavior.
+    ///
+    /// Defaults to null.
+    final Color? tertiaryContainer,
+
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
     ///
@@ -2907,6 +3127,43 @@ class FlexColorScheme with Diagnosticable {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     final Color? onSecondaryContainer,
+
+    /// A color that's clearly legible when drawn on [tertiary].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [secondary] and [onSecondary] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onTertiary,
+
+    /// A color that's clearly legible when drawn on [tertiaryContainer].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onTertiaryContainer,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -3297,16 +3554,16 @@ class FlexColorScheme with Diagnosticable {
       primary: primary ?? colorScheme?.primary,
       // Use old primaryVariant also as potential passed in override for
       // container, for backwards behavior compatibility.
-      // TODO(rydmike): Check if needed and maybe remove.
       primaryContainer:
           primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
       // Use old secondaryVariant also as potential passed in override for
       // container, for backwards behavior compatibility.
-      // TODO(rydmike): Check if needed and maybe remove.
       secondaryContainer: secondaryContainer ??
           secondaryVariant ??
           colorScheme?.secondaryContainer,
+      tertiary: tertiary ?? colorScheme?.tertiary,
+      tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
       error: error ?? colorScheme?.error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
@@ -3377,6 +3634,8 @@ class FlexColorScheme with Diagnosticable {
       primaryContainer: effectiveColors.primaryContainer,
       secondary: effectiveColors.secondary,
       secondaryContainer: effectiveColors.secondaryContainer,
+      tertiary: effectiveColors.tertiary,
+      tertiaryContainer: effectiveColors.tertiaryContainer,
       surface: inputSurface,
       background: inputBackground,
       error: effectiveColors.error ?? FlexColor.materialDarkError,
@@ -3385,6 +3644,9 @@ class FlexColorScheme with Diagnosticable {
       onSecondary: onSecondary ?? colorScheme?.onSecondary,
       onSecondaryContainer:
           onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
+      onTertiary: onTertiary ?? colorScheme?.onTertiary,
+      onTertiaryContainer:
+          onTertiaryContainer ?? colorScheme?.onTertiaryContainer,
       onSurface: onSurface ?? colorScheme?.onSurface,
       onBackground: onBackground ?? colorScheme?.onBackground,
       onError: onError ?? colorScheme?.onError,
@@ -3471,6 +3733,9 @@ class FlexColorScheme with Diagnosticable {
       // We us any provided value, if none darken the secondary and if no
       // secondary was provided we darken the primary 15%
       secondaryContainer: effectiveColors.secondaryContainer,
+      // Tertiary colors
+      tertiary: effectiveColors.tertiary,
+      tertiaryContainer: effectiveColors.tertiaryContainer,
       // Surface is used e.g. by Card and bottom appbar and in this
       // implementation also by dialogs.
       surface: effectiveSurfaceColor,
@@ -3492,6 +3757,8 @@ class FlexColorScheme with Diagnosticable {
       onPrimaryContainer: onColors.onPrimaryContainer,
       onSecondary: onColors.onSecondary,
       onSecondaryContainer: onColors.onSecondaryContainer,
+      onTertiary: onColors.onTertiary,
+      onTertiaryContainer: onColors.onTertiaryContainer,
       onSurface: onColors.onSurface,
       onBackground: onColors.onBackground,
       onError: onColors.onError,
@@ -4285,7 +4552,6 @@ class FlexColorScheme with Diagnosticable {
     }
 
     // TODO(rydmike): Use SDK Material3 and new Flutter APIs when available.
-    // TODO(rydmike): Use SDK Material3 TextTheme when available.
     // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
     // different, a bit less colorful, but only very marginally.
@@ -4530,6 +4796,7 @@ class FlexColorScheme with Diagnosticable {
 
     // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
     // If our onSurface is primary tinted it has an effect on this divider too.
+    // TODO(rydmike): When using seed, this should be: colorScheme.outline;
     final Color dividerColor = colorScheme.onSurface.withAlpha(0x1E); // 12%
 
     // Make the effective input decoration theme, by using FCS v4 sub themes
@@ -4589,9 +4856,6 @@ class FlexColorScheme with Diagnosticable {
       // text theme.
       brightness: colorScheme.brightness,
       primaryColor: colorScheme.primary,
-      // TODO(rydmike): This is deprecated, commenting it out should be OK.
-      // primaryColorBrightness:
-      //     ThemeData.estimateBrightnessForColor(colorScheme.primary),
       canvasColor: colorScheme.background,
 
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
@@ -5103,7 +5367,8 @@ class FlexColorScheme with Diagnosticable {
   /// [FlexColorScheme], this is **NOT** the recommended way to make a
   /// fully [FlexColorScheme] based theme. Normally you want to use
   /// [FlexColorScheme.toTheme] to make your ThemeData when using
-  /// FlexColorScheme.
+  /// FlexColorScheme. The [toTheme] method uses [toScheme] internally when it
+  /// it creates its [ThemeData] object as well.
   ///
   /// The main usage of this method is to get the effective resulting
   /// [ColorScheme] from [FlexColorScheme) and use it when making sub-themes
@@ -5112,7 +5377,7 @@ class FlexColorScheme with Diagnosticable {
   /// definitions. This is e.g. needed on custom hover, ink and splash effects.
   ///
   /// If you use [ThemeData.from] and the [ColorScheme] returned by
-  /// [FlexColorScheme.toScheme] to create tour theme, this will work and
+  /// [FlexColorScheme.toScheme] to create your theme, this will work and
   /// result in a theme that is based on
   /// the color scheme defined in [FlexColorScheme], including the surface and
   /// background color branding, and e.g. true black for dark mode, if those
@@ -5139,22 +5404,34 @@ class FlexColorScheme with Diagnosticable {
             : FlexColor.materialLightPrimary);
 
     // Calculate default fallback colors from primary color.
-    final FlexSchemeColor flexFallback = FlexSchemeColor.from(
+    final FlexSchemeColor used = FlexSchemeColor.from(
       primary: usedPrimary,
-      primaryContainer: primaryContainer ?? primaryVariant,
-      secondary: secondary,
-      secondaryContainer: secondaryContainer ?? secondaryVariant,
+      primaryContainer:
+          primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
+      secondary: secondary ?? colorScheme?.secondary,
+      secondaryContainer: secondaryContainer ??
+          secondaryVariant ??
+          colorScheme?.secondaryContainer,
+      tertiary: tertiary ?? colorScheme?.tertiary,
+      tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
     );
 
-    // Determine effective main colors
-    final Color usedPrimaryContainer = primaryContainer ??
-        colorScheme?.primaryContainer ??
-        flexFallback.primaryContainer;
-    final Color usedSecondary =
-        secondary ?? colorScheme?.secondary ?? flexFallback.secondary;
-    final Color usedSecondaryContainer = secondaryContainer ??
-        colorScheme?.secondaryContainer ??
-        flexFallback.secondaryContainer;
+    // // Determine effective main colors
+    // final Color usedPrimaryContainer = primaryContainer ??
+    //     colorScheme?.primaryContainer ??
+    //     used.primaryContainer;
+    // final Color usedSecondary =
+    //     secondary ?? colorScheme?.secondary ?? used.secondary;
+    // final Color usedSecondaryContainer = secondaryContainer ??
+    //     colorScheme?.secondaryContainer ??
+    //     used.secondaryContainer;
+    // // The default theme fallbacks for tertiaries are secondary, maybe keep that
+    // // in .from too.
+    // final Color usedTertiary =
+    //     tertiary ?? colorScheme?.tertiary ?? used.tertiary;
+    // final Color usedTertiaryContainer = tertiaryContainer ??
+    //     colorScheme?.tertiaryContainer ??
+    //     used.tertiaryContainer;
 
     // Determine effective surface, background and error colors.
     final Color usedSurface = surface ??
@@ -5173,12 +5450,17 @@ class FlexColorScheme with Diagnosticable {
 
     // Checks brightness of primary, secondary, error, surface and background
     // colors, and returns appropriate colors for their onColors, if an
-    // onColor for it was was not passed in or no colorScheme with them given.
+    // onColor for it was was not passed in or no colorScheme with them were
+    // passed in. If they were, the passed in direct value has highest
+    // priority, then value in given color scheme, and last a value
+    // computed from it main color pair.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
-      primary: usedPrimary,
-      primaryContainer: usedPrimaryContainer,
-      secondary: usedSecondary,
-      secondaryContainer: usedSecondaryContainer,
+      primary: used.primary,
+      primaryContainer: used.primaryContainer,
+      secondary: used.secondary,
+      secondaryContainer: used.secondaryContainer,
+      tertiary: used.tertiary,
+      tertiaryContainer: used.tertiaryContainer,
       surface: usedSurface,
       background: usedBackground,
       error: usedError,
@@ -5187,22 +5469,28 @@ class FlexColorScheme with Diagnosticable {
       onSecondary: onSecondary ?? colorScheme?.onSecondary,
       onSecondaryContainer:
           onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
+      onTertiary: onTertiary ?? colorScheme?.onTertiary,
+      onTertiaryContainer:
+          onTertiaryContainer ?? colorScheme?.onTertiaryContainer,
       onSurface: onSurface ?? colorScheme?.onSurface,
       onBackground: onBackground ?? colorScheme?.onBackground,
       onError: onError ?? colorScheme?.onError,
     );
 
     // Return the [ColorScheme] as a copyWith on original passed in colorScheme
-    // if one was passed in, with all the new effective properties. This will
-    // keep new M3 properties intact (on master channel) that we are not yet
-    // dealing with. If there was no colorScheme passed in, we create one
-    // with the effective properties.
+    // if one was passed in, with all the effective properties. This will
+    // keep properties not handled by FlexColorScheme as they were in passed via
+    // given [colorScheme] in the returned color scheme.
+    // If there was no [colorScheme] passed in, we create one with the effective
+    // override properties plus [ColorScheme] defaults.
     return colorScheme?.copyWith(
           brightness: usedBrightness,
-          primary: usedPrimary,
-          primaryContainer: usedPrimaryContainer,
-          secondary: usedSecondary,
-          secondaryContainer: usedSecondaryContainer,
+          primary: used.primary,
+          primaryContainer: used.primaryContainer,
+          secondary: used.secondary,
+          secondaryContainer: used.secondaryContainer,
+          tertiary: used.tertiary,
+          tertiaryContainer: used.tertiaryContainer,
           surface: usedSurface,
           background: usedBackground,
           error: usedError,
@@ -5210,6 +5498,8 @@ class FlexColorScheme with Diagnosticable {
           onPrimaryContainer: onColors.onPrimaryContainer,
           onSecondary: onColors.onSecondary,
           onSecondaryContainer: onColors.onSecondaryContainer,
+          onTertiary: onColors.onTertiary,
+          onTertiaryContainer: onColors.onTertiaryContainer,
           onSurface: onColors.onSurface,
           onBackground: onColors.onBackground,
           onError: onColors.onError,
@@ -5217,9 +5507,11 @@ class FlexColorScheme with Diagnosticable {
         ColorScheme(
           brightness: usedBrightness,
           primary: usedPrimary,
-          primaryContainer: usedPrimaryContainer,
-          secondary: usedSecondary,
-          secondaryContainer: usedSecondaryContainer,
+          primaryContainer: used.primaryContainer,
+          secondary: used.secondary,
+          secondaryContainer: used.secondaryContainer,
+          tertiary: used.tertiary,
+          tertiaryContainer: used.tertiaryContainer,
           surface: usedSurface,
           background: usedBackground,
           error: usedError,
@@ -5227,6 +5519,8 @@ class FlexColorScheme with Diagnosticable {
           onPrimaryContainer: onColors.onPrimaryContainer,
           onSecondary: onColors.onSecondary,
           onSecondaryContainer: onColors.onSecondaryContainer,
+          onTertiary: onColors.onTertiary,
+          onTertiaryContainer: onColors.onTertiaryContainer,
           onSurface: onColors.onSurface,
           onBackground: onColors.onBackground,
           onError: onColors.onError,
@@ -5243,6 +5537,8 @@ class FlexColorScheme with Diagnosticable {
     Color? secondary,
     Color? secondaryContainer,
     Color? secondaryVariant,
+    Color? tertiary,
+    Color? tertiaryContainer,
     Color? surface,
     Color? background,
     Color? error,
@@ -5253,6 +5549,8 @@ class FlexColorScheme with Diagnosticable {
     Color? onPrimaryContainer,
     Color? onSecondary,
     Color? onSecondaryContainer,
+    Color? onTertiary,
+    Color? onTertiaryContainer,
     Color? onSurface,
     Color? onBackground,
     Color? onError,
@@ -5280,6 +5578,8 @@ class FlexColorScheme with Diagnosticable {
       primaryVariant: primaryVariant ?? this.primaryVariant,
       secondary: secondary ?? this.secondary,
       secondaryContainer: secondaryContainer ?? this.secondaryContainer,
+      tertiary: tertiary ?? this.tertiary,
+      tertiaryContainer: tertiaryContainer ?? this.tertiaryContainer,
       secondaryVariant: secondaryVariant ?? this.secondaryVariant,
       surface: surface ?? this.surface,
       background: background ?? this.background,
@@ -5291,6 +5591,8 @@ class FlexColorScheme with Diagnosticable {
       onPrimaryContainer: onPrimaryContainer ?? this.onPrimaryContainer,
       onSecondary: onSecondary ?? this.onSecondary,
       onSecondaryContainer: onSecondaryContainer ?? this.onSecondaryContainer,
+      onTertiary: onTertiary ?? this.onTertiary,
+      onTertiaryContainer: onTertiaryContainer ?? this.onTertiaryContainer,
       onSurface: onSurface ?? this.onSurface,
       onBackground: onBackground ?? this.onBackground,
       onError: onError ?? this.onError,
@@ -5329,6 +5631,8 @@ class FlexColorScheme with Diagnosticable {
         other.secondary == secondary &&
         other.secondaryContainer == secondaryContainer &&
         other.secondaryVariant == secondaryVariant &&
+        other.tertiary == tertiary &&
+        other.tertiaryContainer == tertiaryContainer &&
         other.surface == surface &&
         other.background == background &&
         other.error == error &&
@@ -5339,6 +5643,8 @@ class FlexColorScheme with Diagnosticable {
         other.onPrimaryContainer == onPrimaryContainer &&
         other.onSecondary == onSecondary &&
         other.onSecondaryContainer == onSecondaryContainer &&
+        other.onTertiary == onTertiary &&
+        other.onTertiaryContainer == onTertiaryContainer &&
         other.onSurface == onSurface &&
         other.onBackground == onBackground &&
         other.onError == onError &&
@@ -5373,6 +5679,8 @@ class FlexColorScheme with Diagnosticable {
       secondary,
       secondaryContainer,
       secondaryVariant,
+      tertiary,
+      tertiaryContainer,
       surface,
       background,
       error,
@@ -5383,6 +5691,8 @@ class FlexColorScheme with Diagnosticable {
       onPrimaryContainer,
       onSecondary,
       onSecondaryContainer,
+      onTertiary,
+      onTertiaryContainer,
       onSurface,
       onBackground,
       onError,
@@ -5418,6 +5728,8 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('secondary', secondary));
     properties.add(ColorProperty('secondaryContainer', secondaryContainer));
     properties.add(ColorProperty('secondaryVariant', secondaryVariant));
+    properties.add(ColorProperty('tertiary', tertiary));
+    properties.add(ColorProperty('tertiaryContainer', tertiaryContainer));
     properties.add(ColorProperty('surface', surface));
     properties.add(ColorProperty('background', background));
     properties.add(ColorProperty('error', error));
@@ -5428,6 +5740,8 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('onPrimaryContainer', onPrimaryContainer));
     properties.add(ColorProperty('onSecondary', onSecondary));
     properties.add(ColorProperty('onSecondaryContainer', onSecondaryContainer));
+    properties.add(ColorProperty('onTertiary', onTertiary));
+    properties.add(ColorProperty('onTertiaryContainer', onTertiaryContainer));
     properties.add(ColorProperty('onSurface', onSurface));
     properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
@@ -5636,19 +5950,21 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         surfaceMode == FlexSurfaceMode.highScaffoldLevelSurface) {
       if (usedBlendLevel == 0) {
         if (isLight) {
-          surface = const FlexSchemeSurfaceColors(
-            surface: FlexColor.materialLightSurface,
-            background: FlexColor.materialLightBackground,
-            scaffoldBackground: FlexColor.materialLightScaffoldBackground,
-            dialogBackground: FlexColor.materialLightSurface,
-          );
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialLightSurface,
+                background: FlexColor.materialLightBackground,
+                scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+                dialogBackground: FlexColor.materialLightSurface,
+              );
         } else {
-          surface = const FlexSchemeSurfaceColors(
-            surface: FlexColor.materialDarkSurface,
-            background: FlexColor.materialDarkBackground,
-            scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
-            dialogBackground: FlexColor.materialDarkSurface,
-          );
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialDarkSurface,
+                background: FlexColor.materialDarkBackground,
+                scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
+                dialogBackground: FlexColor.materialDarkSurface,
+              );
         }
       } else {
         // For other `_blendLevel` values than `0` we use the
@@ -5658,19 +5974,21 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         // surface is slightly darker and background even darker, while
         // scaffold background matches the Material design background.
         if (isLight) {
-          surface = const FlexSchemeSurfaceColors(
-            surface: FlexColor.lightSurface,
-            background: FlexColor.lightBackground,
-            scaffoldBackground: FlexColor.lightScaffoldBackground,
-            dialogBackground: FlexColor.lightSurface,
-          );
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.lightSurface,
+                background: FlexColor.lightBackground,
+                scaffoldBackground: FlexColor.lightScaffoldBackground,
+                dialogBackground: FlexColor.lightSurface,
+              );
         } else {
-          surface = const FlexSchemeSurfaceColors(
-            surface: FlexColor.darkSurface,
-            background: FlexColor.darkBackground,
-            scaffoldBackground: FlexColor.darkScaffoldBackground,
-            dialogBackground: FlexColor.darkSurface,
-          );
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.darkSurface,
+                background: FlexColor.darkBackground,
+                scaffoldBackground: FlexColor.darkScaffoldBackground,
+                dialogBackground: FlexColor.darkSurface,
+              );
         }
       }
     }
@@ -5680,19 +5998,21 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         surfaceMode == FlexSurfaceMode.levelSurfacesLowScaffold ||
         surfaceMode == FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog) {
       if (isLight) {
-        surface = const FlexSchemeSurfaceColors(
-          surface: FlexColor.lightSurface,
-          background: FlexColor.lightSurface,
-          scaffoldBackground: FlexColor.lightSurface,
-          dialogBackground: FlexColor.lightSurface,
-        );
+        surface = surfaceColors ??
+            const FlexSchemeSurfaceColors(
+              surface: FlexColor.lightSurface,
+              background: FlexColor.lightSurface,
+              scaffoldBackground: FlexColor.lightSurface,
+              dialogBackground: FlexColor.lightSurface,
+            );
       } else {
-        surface = const FlexSchemeSurfaceColors(
-          surface: FlexColor.darkSurface,
-          background: FlexColor.darkSurface,
-          scaffoldBackground: FlexColor.darkSurface,
-          dialogBackground: FlexColor.darkSurface,
-        );
+        surface = surfaceColors ??
+            const FlexSchemeSurfaceColors(
+              surface: FlexColor.darkSurface,
+              background: FlexColor.darkSurface,
+              scaffoldBackground: FlexColor.darkSurface,
+              dialogBackground: FlexColor.darkSurface,
+            );
       }
     }
     // In mode `highScaffoldLowSurfaces` and
@@ -5703,19 +6023,21 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     if (surfaceMode == FlexSurfaceMode.highScaffoldLowSurfaces ||
         surfaceMode == FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog) {
       if (isLight) {
-        surface = const FlexSchemeSurfaceColors(
-          surface: FlexColor.lightBackground,
-          background: FlexColor.lightBackground,
-          scaffoldBackground: FlexColor.lightBackground,
-          dialogBackground: FlexColor.lightBackground,
-        );
+        surface = surfaceColors ??
+            const FlexSchemeSurfaceColors(
+              surface: FlexColor.lightBackground,
+              background: FlexColor.lightBackground,
+              scaffoldBackground: FlexColor.lightBackground,
+              dialogBackground: FlexColor.lightBackground,
+            );
       } else {
-        surface = const FlexSchemeSurfaceColors(
-          surface: FlexColor.darkBackground,
-          background: FlexColor.darkBackground,
-          scaffoldBackground: FlexColor.darkBackground,
-          dialogBackground: FlexColor.darkBackground,
-        );
+        surface = surfaceColors ??
+            const FlexSchemeSurfaceColors(
+              surface: FlexColor.darkBackground,
+              background: FlexColor.darkBackground,
+              scaffoldBackground: FlexColor.darkBackground,
+              dialogBackground: FlexColor.darkBackground,
+            );
       }
     }
     // Get alpha blend values corresponding to used mode, level and brightness.
@@ -6012,6 +6334,8 @@ class FlexSchemeOnColors with Diagnosticable {
     this.onPrimaryContainer,
     required this.onSecondary,
     this.onSecondaryContainer,
+    this.onTertiary,
+    this.onTertiaryContainer,
     required this.onSurface,
     required this.onBackground,
     required this.onError,
@@ -6028,6 +6352,12 @@ class FlexSchemeOnColors with Diagnosticable {
 
   /// A color that is clearly legible when drawn on secondaryContainer color.
   final Color? onSecondaryContainer;
+
+  /// A color that is clearly legible when drawn on tertiary color.
+  final Color? onTertiary;
+
+  /// A color that is clearly legible when drawn on tertiaryContainer color.
+  final Color? onTertiaryContainer;
 
   /// A color that is clearly legible when drawn on surface color.
   final Color onSurface;
@@ -6054,6 +6384,8 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? primaryContainer,
     required Color secondary,
     Color? secondaryContainer,
+    Color? tertiary,
+    Color? tertiaryContainer,
     required Color surface,
     required Color background,
     required Color error,
@@ -6061,6 +6393,8 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? onPrimaryContainer,
     Color? onSecondary,
     Color? onSecondaryContainer,
+    Color? onTertiary,
+    Color? onTertiaryContainer,
     Color? onSurface,
     Color? onBackground,
     Color? onError,
@@ -6068,6 +6402,8 @@ class FlexSchemeOnColors with Diagnosticable {
     int primaryContainerAlpha = 0,
     int secondaryAlpha = 0,
     int secondaryContainerAlpha = 0,
+    int tertiaryAlpha = 0,
+    int tertiaryContainerAlpha = 0,
     int surfaceAlpha = 0,
     int backgroundAlpha = 0,
     int errorAlpha = 0,
@@ -6102,6 +6438,21 @@ class FlexSchemeOnColors with Diagnosticable {
                     .blendAlpha(secondaryContainer, secondaryContainerAlpha)
                 : Colors.black
                     .blendAlpha(secondaryContainer, secondaryContainerAlpha)));
+    final Color? usedOnTertiary = onTertiary ??
+        (tertiary == null
+            ? null
+            : (ThemeData.estimateBrightnessForColor(tertiary) == Brightness.dark
+                ? Colors.white.blendAlpha(tertiary, tertiaryAlpha)
+                : Colors.black.blendAlpha(tertiary, tertiaryAlpha)));
+    final Color? usedOnTertiaryContainer = onTertiaryContainer ??
+        (tertiaryContainer == null
+            ? null
+            : (ThemeData.estimateBrightnessForColor(tertiaryContainer) ==
+                    Brightness.dark
+                ? Colors.white
+                    .blendAlpha(tertiaryContainer, tertiaryContainerAlpha)
+                : Colors.black
+                    .blendAlpha(tertiaryContainer, tertiaryContainerAlpha)));
     final Color usedOnSurface = onSurface ??
         (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
             ? Colors.white.blendAlpha(surface, surfaceAlpha)
@@ -6120,6 +6471,8 @@ class FlexSchemeOnColors with Diagnosticable {
       onPrimaryContainer: usedOnPrimaryContainer,
       onSecondary: usedOnSecondary,
       onSecondaryContainer: usedOnSecondaryContainer,
+      onTertiary: usedOnTertiary,
+      onTertiaryContainer: usedOnTertiaryContainer,
       onSurface: usedOnSurface,
       onBackground: usedOnBackground,
       onError: usedOnError,
@@ -6132,6 +6485,8 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? onPrimaryContainer,
     Color? onSecondary,
     Color? onSecondaryContainer,
+    Color? onTertiary,
+    Color? onTertiaryContainer,
     Color? onSurface,
     Color? onBackground,
     Color? onError,
@@ -6141,6 +6496,8 @@ class FlexSchemeOnColors with Diagnosticable {
       onPrimaryContainer: onPrimaryContainer ?? this.onPrimaryContainer,
       onSecondary: onSecondary ?? this.onSecondary,
       onSecondaryContainer: onSecondaryContainer ?? this.onSecondaryContainer,
+      onTertiary: onTertiary ?? this.onTertiary,
+      onTertiaryContainer: onTertiaryContainer ?? this.onTertiaryContainer,
       onSurface: onSurface ?? this.onSurface,
       onBackground: onBackground ?? this.onBackground,
       onError: onError ?? this.onError,
@@ -6156,6 +6513,8 @@ class FlexSchemeOnColors with Diagnosticable {
         other.onPrimaryContainer == onPrimaryContainer &&
         other.onSecondary == onSecondary &&
         other.onSecondaryContainer == onSecondaryContainer &&
+        other.onTertiary == onTertiary &&
+        other.onTertiaryContainer == onTertiaryContainer &&
         other.onSurface == onSurface &&
         other.onBackground == onBackground &&
         other.onError == onError;
@@ -6168,6 +6527,8 @@ class FlexSchemeOnColors with Diagnosticable {
       onPrimaryContainer,
       onSecondary,
       onSecondaryContainer,
+      onTertiary,
+      onTertiaryContainer,
       onSurface,
       onBackground,
       onError,
@@ -6181,6 +6542,8 @@ class FlexSchemeOnColors with Diagnosticable {
     properties.add(ColorProperty('onPrimaryContainer', onPrimaryContainer));
     properties.add(ColorProperty('onSecondary', onSecondary));
     properties.add(ColorProperty('onSecondaryContainer', onSecondaryContainer));
+    properties.add(ColorProperty('onTertiary', onTertiary));
+    properties.add(ColorProperty('onTertiaryContainer', onTertiaryContainer));
     properties.add(ColorProperty('onSurface', onSurface));
     properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
@@ -6196,6 +6559,8 @@ class _AlphaValues {
     this.primaryContainerAlpha = 0,
     this.secondaryAlpha = 0,
     this.secondaryContainerAlpha = 0,
+    this.tertiaryAlpha = 0,
+    this.tertiaryContainerAlpha = 0,
     this.errorAlpha = 0,
     this.surfaceAlpha = 0,
     this.dialogAlpha = 0,
@@ -6214,6 +6579,12 @@ class _AlphaValues {
 
   /// Alpha blend value for secondaryContainer color.
   final int secondaryContainerAlpha;
+
+  /// Alpha blend value for tertiary color.
+  final int tertiaryAlpha;
+
+  /// Alpha blend value for tertiaryContainer color.
+  final int tertiaryContainerAlpha;
 
   /// Alpha blend value for error color.
   final int errorAlpha;
@@ -6245,6 +6616,8 @@ class _AlphaValues {
           primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
           secondaryContainerAlpha: blendLevel,
+          tertiaryAlpha: blendLevel,
+          tertiaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel,
           dialogAlpha: blendLevel,
@@ -6258,6 +6631,8 @@ class _AlphaValues {
           primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
           secondaryContainerAlpha: blendLevel,
+          tertiaryAlpha: blendLevel,
+          tertiaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel,
           dialogAlpha: blendLevel,
@@ -6271,6 +6646,8 @@ class _AlphaValues {
           primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
           secondaryContainerAlpha: blendLevel,
+          tertiaryAlpha: blendLevel,
+          tertiaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel * 3 ~/ 2,
           dialogAlpha: blendLevel * 3 ~/ 2,
@@ -6284,6 +6661,8 @@ class _AlphaValues {
           primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
           secondaryContainerAlpha: blendLevel,
+          tertiaryAlpha: blendLevel,
+          tertiaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel ~/ 2,
           dialogAlpha: blendLevel ~/ 2,
@@ -6297,6 +6676,8 @@ class _AlphaValues {
           primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
           secondaryContainerAlpha: blendLevel,
+          tertiaryAlpha: blendLevel,
+          tertiaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel,
           dialogAlpha: blendLevel,
@@ -6311,6 +6692,8 @@ class _AlphaValues {
           primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
           secondaryContainerAlpha: blendLevel,
+          tertiaryAlpha: blendLevel,
+          tertiaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel,
           dialogAlpha: blendLevel,
@@ -6325,6 +6708,8 @@ class _AlphaValues {
           primaryContainerAlpha: blendLevel,
           secondaryAlpha: blendLevel,
           secondaryContainerAlpha: blendLevel,
+          tertiaryAlpha: blendLevel,
+          tertiaryContainerAlpha: blendLevel,
           errorAlpha: blendLevel,
           surfaceAlpha: blendLevel ~/ 2,
           dialogAlpha: blendLevel ~/ 2,
@@ -6332,5 +6717,504 @@ class _AlphaValues {
           scaffoldAlpha: blendLevel * 3,
         );
     }
+  }
+}
+
+/// This class is the same concept as Flutter's [ColorScheme] class.
+///
+/// It is used used to generate a scheme based on a modified version of
+/// [CorePalette] found in package "material_color_utilities". It is a simple
+/// modification of [Scheme] found in same "material_color_utilities" package,
+/// with the only chnage made to instead use the custom version of
+/// [CorePalette] that enables using 1, 2 or 3 seed colors for more degrees
+/// of freedom in seeded ColorScheme, using defined seed colors for
+/// primary, secondary and tertiary colors.
+class _Scheme {
+  final int primary;
+  final int onPrimary;
+  final int primaryContainer;
+  final int onPrimaryContainer;
+  final int secondary;
+  final int onSecondary;
+  final int secondaryContainer;
+  final int onSecondaryContainer;
+  final int tertiary;
+  final int onTertiary;
+  final int tertiaryContainer;
+  final int onTertiaryContainer;
+  final int error;
+  final int onError;
+  final int errorContainer;
+  final int onErrorContainer;
+  final int background;
+  final int onBackground;
+  final int surface;
+  final int onSurface;
+  final int surfaceVariant;
+  final int onSurfaceVariant;
+  final int outline;
+  final int shadow;
+  final int inverseSurface;
+  final int inverseOnSurface;
+  final int inversePrimary;
+
+  const _Scheme({
+    required this.primary,
+    required this.onPrimary,
+    required this.primaryContainer,
+    required this.onPrimaryContainer,
+    required this.secondary,
+    required this.onSecondary,
+    required this.secondaryContainer,
+    required this.onSecondaryContainer,
+    required this.tertiary,
+    required this.onTertiary,
+    required this.tertiaryContainer,
+    required this.onTertiaryContainer,
+    required this.error,
+    required this.onError,
+    required this.errorContainer,
+    required this.onErrorContainer,
+    required this.background,
+    required this.onBackground,
+    required this.surface,
+    required this.onSurface,
+    required this.surfaceVariant,
+    required this.onSurfaceVariant,
+    required this.outline,
+    required this.shadow,
+    required this.inverseSurface,
+    required this.inverseOnSurface,
+    required this.inversePrimary,
+  });
+
+  static _Scheme light(
+    int argbPrimary, [
+    int? argbSecondary,
+    int? argbTertiary,
+  ]) {
+    final _FlexCorePalette core = _FlexCorePalette.fromSeeds(
+      argbPrimary: argbPrimary,
+      argbSecondary: argbSecondary,
+      argbTertiary: argbTertiary,
+    );
+    return _Scheme(
+      primary: core.primary.get(40),
+      onPrimary: core.primary.get(100),
+      primaryContainer: core.primary.get(90),
+      onPrimaryContainer: core.primary.get(10),
+      secondary: core.secondary.get(40),
+      onSecondary: core.secondary.get(100),
+      secondaryContainer: core.secondary.get(90),
+      onSecondaryContainer: core.secondary.get(10),
+      tertiary: core.tertiary.get(40),
+      onTertiary: core.tertiary.get(100),
+      tertiaryContainer: core.tertiary.get(90),
+      onTertiaryContainer: core.tertiary.get(10),
+      error: core.error.get(40),
+      onError: core.error.get(100),
+      errorContainer: core.error.get(90),
+      onErrorContainer: core.error.get(10),
+      background: core.neutral.get(99),
+      onBackground: core.neutral.get(10),
+      surface: core.neutral.get(99),
+      onSurface: core.neutral.get(10),
+      surfaceVariant: core.neutralVariant.get(90),
+      onSurfaceVariant: core.neutralVariant.get(30),
+      outline: core.neutralVariant.get(50),
+      shadow: core.neutral.get(0),
+      inverseSurface: core.neutral.get(20),
+      inverseOnSurface: core.neutral.get(95),
+      inversePrimary: core.primary.get(80),
+    );
+  }
+
+  static _Scheme dark(
+    int argbPrimary, [
+    int? argbSecondary,
+    int? argbTertiary,
+  ]) {
+    final _FlexCorePalette core = _FlexCorePalette.fromSeeds(
+      argbPrimary: argbPrimary,
+      argbSecondary: argbSecondary,
+      argbTertiary: argbTertiary,
+    );
+    return _Scheme(
+      primary: core.primary.get(80),
+      onPrimary: core.primary.get(20),
+      primaryContainer: core.primary.get(30),
+      onPrimaryContainer: core.primary.get(90),
+      secondary: core.secondary.get(80),
+      onSecondary: core.secondary.get(20),
+      secondaryContainer: core.secondary.get(30),
+      onSecondaryContainer: core.secondary.get(90),
+      tertiary: core.tertiary.get(80),
+      onTertiary: core.tertiary.get(20),
+      tertiaryContainer: core.tertiary.get(30),
+      onTertiaryContainer: core.tertiary.get(90),
+      error: core.error.get(80),
+      onError: core.error.get(20),
+      errorContainer: core.error.get(30),
+      onErrorContainer: core.error.get(80),
+      background: core.neutral.get(10),
+      onBackground: core.neutral.get(90),
+      surface: core.neutral.get(10),
+      onSurface: core.neutral.get(90),
+      surfaceVariant: core.neutralVariant.get(30),
+      onSurfaceVariant: core.neutralVariant.get(80),
+      outline: core.neutralVariant.get(60),
+      shadow: core.neutral.get(0),
+      inverseSurface: core.neutral.get(90),
+      inverseOnSurface: core.neutral.get(20),
+      inversePrimary: core.primary.get(40),
+    );
+  }
+
+  static ColorScheme fromSeeds({
+    required Color argbPrimary,
+    Color? argbSecondary,
+    Color? argbTertiary,
+    Brightness brightness = Brightness.light,
+    Color? primary,
+    Color? onPrimary,
+    Color? primaryContainer,
+    Color? onPrimaryContainer,
+    Color? secondary,
+    Color? onSecondary,
+    Color? secondaryContainer,
+    Color? onSecondaryContainer,
+    Color? tertiary,
+    Color? onTertiary,
+    Color? tertiaryContainer,
+    Color? onTertiaryContainer,
+    Color? error,
+    Color? onError,
+    Color? errorContainer,
+    Color? onErrorContainer,
+    Color? outline,
+    Color? background,
+    Color? onBackground,
+    Color? surface,
+    Color? onSurface,
+    Color? surfaceVariant,
+    Color? onSurfaceVariant,
+    Color? inverseSurface,
+    Color? onInverseSurface,
+    Color? inversePrimary,
+    Color? shadow,
+  }) {
+    final _Scheme scheme;
+    switch (brightness) {
+      case Brightness.light:
+        scheme = _Scheme.light(
+          argbPrimary.value,
+          argbSecondary?.value,
+          argbTertiary?.value,
+        );
+        break;
+      case Brightness.dark:
+        scheme = _Scheme.dark(
+          argbPrimary.value,
+          argbSecondary?.value,
+          argbTertiary?.value,
+        );
+        break;
+    }
+    return ColorScheme(
+      primary: primary ?? Color(scheme.primary),
+      onPrimary: onPrimary ?? Color(scheme.onPrimary),
+      primaryContainer: primaryContainer ?? Color(scheme.primaryContainer),
+      onPrimaryContainer:
+          onPrimaryContainer ?? Color(scheme.onPrimaryContainer),
+      secondary: secondary ?? Color(scheme.secondary),
+      onSecondary: onSecondary ?? Color(scheme.onSecondary),
+      secondaryContainer:
+          secondaryContainer ?? Color(scheme.secondaryContainer),
+      onSecondaryContainer:
+          onSecondaryContainer ?? Color(scheme.onSecondaryContainer),
+      tertiary: tertiary ?? Color(scheme.tertiary),
+      onTertiary: onTertiary ?? Color(scheme.onTertiary),
+      tertiaryContainer: tertiaryContainer ?? Color(scheme.tertiaryContainer),
+      onTertiaryContainer:
+          onTertiaryContainer ?? Color(scheme.onTertiaryContainer),
+      error: error ?? Color(scheme.error),
+      onError: onError ?? Color(scheme.onError),
+      errorContainer: errorContainer ?? Color(scheme.errorContainer),
+      onErrorContainer: onErrorContainer ?? Color(scheme.onErrorContainer),
+      outline: outline ?? Color(scheme.outline),
+      background: background ?? Color(scheme.background),
+      onBackground: onBackground ?? Color(scheme.onBackground),
+      surface: surface ?? Color(scheme.surface),
+      onSurface: onSurface ?? Color(scheme.onSurface),
+      surfaceVariant: surfaceVariant ?? Color(scheme.surfaceVariant),
+      onSurfaceVariant: onSurfaceVariant ?? Color(scheme.onSurfaceVariant),
+      inverseSurface: inverseSurface ?? Color(scheme.inverseSurface),
+      onInverseSurface: onInverseSurface ?? Color(scheme.inverseOnSurface),
+      inversePrimary: inversePrimary ?? Color(scheme.inversePrimary),
+      shadow: shadow ?? Color(scheme.shadow),
+      brightness: brightness,
+    );
+  }
+}
+
+/// An intermediate concept between the key color for a UI theme, and a full
+/// color scheme. 5 tonal palettes are generated + fixed error palette.
+///
+/// This extends the Google Material team's [CorePalette] with the capability
+/// to create the M3 ColorScheme needed palettes from 3 different ARGB seed
+/// colors instead of just one as provided via [CorePalette.of].
+class _FlexCorePalette extends CorePalette {
+  /// Create a [CorePalette] from a fixed-size list of ARGB color ints
+  /// representing concatenated tonal palettes.
+  ///
+  /// Inverse of [asList].
+  ///
+  /// This is the only interface into the parent class. It would have
+  /// been cleaner if parent also had normal unnamed constructor with setters
+  /// for final properties, but it does not, the default constructor is private
+  /// and using class initializer lists. Clearly the super class is not intended
+  /// to be very extension friendly.
+  _FlexCorePalette.fromList(List<int> colors) : super.fromList(colors);
+
+  /// Create a [_FlexCorePalette] from one to three seed colors.
+  ///
+  /// If only [argbPrimary] is provided, it the same as using the super
+  /// [CorePalette.of] static that returns an instance of
+  /// [CorePalette] created from a single ARGB seed color.
+  ///
+  /// When using optional [argbSecondary] and [argbTertiary] the same max
+  /// chroma of 48 limitation is placed on them as on primary [TonalPalette]
+  /// when using [CorePalette.of]. If [argbSecondary] or [argbTertiary] are
+  /// not provided the [TonalPalette] creation for them falls back to same
+  /// values as used for the corresponding palette when using
+  /// [CorePalette.of].
+  ///
+  /// The conversion of [TonalPalette]es to a list of ints and having super
+  /// create the CorePalette from the list has unneeded extra overhead that
+  /// I don't like. It is a bit more efficient to make own implementation
+  /// of this simple mid layer that has the needed constructors directly.
+  /// Keeping both versions as small private classes around so I can later
+  /// benchmark and see if it makes a difference, perhaps it does not matter,
+  /// in that case extending the parent [CorePalette] is a bit briefer.
+  ///
+  /// The [CorePalette] in Material Color Utilities is just a convenience
+  /// wrapper for the needed [TonalPalette]s, that are used by an additional
+  /// upper layer called [Scheme] that [ColorScheme.fromSeed] uses to create
+  /// a [ColorScheme] from a seed color. To make a [ColorScheme.fromSeeds]
+  /// versions of it, we need to make a slightly modified version of it anyway.
+  /// The usage of [CorePalette.of] is hard coded into the upper layer, so we
+  /// cannot plug-in our extended version of it anyway.
+  ///
+  /// Perhaps it is better to just make our own slightly modified version of
+  /// [CorePalette] instead and make it available also as static
+  /// [FlexColorScheme.fromSeeds] that return a [ColorScheme], or maybe be we
+  /// keep it private.
+  factory _FlexCorePalette.fromSeeds({
+    required int argbPrimary,
+    int? argbSecondary,
+    int? argbTertiary,
+  }) {
+    final Cam16 camPrimary = Cam16.fromInt(argbPrimary);
+    final Cam16 camSecondary =
+        argbSecondary == null ? camPrimary : Cam16.fromInt(argbSecondary);
+    final Cam16 camTertiary =
+        argbTertiary == null ? camPrimary : Cam16.fromInt(argbTertiary);
+
+    final TonalPalette tonalPrimary =
+        TonalPalette.of(camPrimary.hue, math.max(48, camPrimary.chroma));
+    final TonalPalette tonalSecondary = argbSecondary == null
+        ? TonalPalette.of(camPrimary.hue, 16)
+        : TonalPalette.of(camSecondary.hue, math.max(48, camSecondary.chroma));
+    final TonalPalette tonalTertiary = argbTertiary == null
+        ? TonalPalette.of(camPrimary.hue + 60, 24)
+        : TonalPalette.of(camTertiary.hue, math.max(48, camTertiary.chroma));
+    final TonalPalette tonalNeutral = TonalPalette.of(camPrimary.hue, 4);
+    final TonalPalette tonalNeutralVariant = TonalPalette.of(camPrimary.hue, 8);
+
+    final List<int> tonalPalettes = <int>[
+      ...tonalPrimary.asList,
+      ...tonalSecondary.asList,
+      ...tonalTertiary.asList,
+      ...tonalNeutral.asList,
+      ...tonalNeutralVariant.asList,
+    ];
+    return _FlexCorePalette.fromList(tonalPalettes);
+  }
+}
+
+/// An intermediate concept between the key color for a UI theme, and a full
+/// color scheme. 5 tonal palettes are generated + fixed error palette.
+///
+/// This is a modification of package:material_color_utilities [CorePalette]
+/// to provide capability to create the M3 ColorScheme needed tonal palettes
+/// from 3 different ARGB seed colors, where 2 are optional, instead of just
+/// one as provided via package version [CorePalette.of] and here also
+/// via [_CorePalette.of].
+///
+/// This version has an unnamed constructor for the five main final
+/// [TonalPalette] properties. Exposes the original version's private
+/// constructor as [_CorePalette.fromHueChroma] that is used by
+/// [_CorePalette.of]. It then also adds a [_CorePalette.fromSeeds] to create
+/// the [TonalPalette]s for [primary], [secondary] and [tertiary] from optional
+/// ARGB seed colors also for secondary and tertiary [TonalPalette], instead of
+/// tying them down to same seed ARGB colors as used for primary color.
+@immutable
+class _CorePalette {
+  /// Default constructor.
+  _CorePalette({
+    required this.primary,
+    required this.secondary,
+    required this.tertiary,
+    required this.neutral,
+    required this.neutralVariant,
+  });
+
+  /// The number of generated tonal palettes.
+  static const int size = 5;
+
+  /// TonalPalette for primary colors.
+  final TonalPalette primary;
+
+  /// TonalPalette for secondary colors.
+  final TonalPalette secondary;
+
+  /// TonalPalette for tertiary colors.
+  final TonalPalette tertiary;
+
+  /// TonalPalette for neutral colors. Typically hues of primary.
+  final TonalPalette neutral;
+
+  /// TonalPalette for neutralVariant colors. Typically hues of primary.
+  final TonalPalette neutralVariant;
+
+  /// TonalPalette for error colors. Fixed to given Hue and Chroma.
+  final TonalPalette error = TonalPalette.of(25, 84);
+
+  /// Create a [_CorePalette] from a source ARGB color.
+  static _CorePalette of(int argb) {
+    final Cam16 cam = Cam16.fromInt(argb);
+    return _CorePalette.fromHueChroma(cam.hue, cam.chroma);
+  }
+
+  /// Create a CorePalette from Hue and Chrome.
+  _CorePalette.fromHueChroma(double hue, double chroma)
+      : primary = TonalPalette.of(hue, math.max(48, chroma)),
+        secondary = TonalPalette.of(hue, 16),
+        tertiary = TonalPalette.of(hue + 60, 24),
+        neutral = TonalPalette.of(hue, 4),
+        neutralVariant = TonalPalette.of(hue, 8);
+
+  /// Create a [_CorePalette] from one to three seed colors.
+  ///
+  /// If only [argbPrimary] is provided, it the same as using the
+  /// [_CorePalette.of] static that returns an instance of
+  /// [_CorePalette] created from a single ARGB seed color.
+  ///
+  /// When using optional [argbSecondary] and [argbTertiary] the same max
+  /// chroma of 48 limitation is placed on them as on primary [TonalPalette]
+  /// when using [_CorePalette.of]. If [argbSecondary] or [argbTertiary] are
+  /// not provided the [TonalPalette] creation for them falls back to same
+  /// values as used for the corresponding palette when using
+  /// [_CorePalette.of].
+  factory _CorePalette.fromSeeds({
+    required int argbPrimary,
+    int? argbSecondary,
+    int? argbTertiary,
+  }) {
+    final Cam16 camPrimary = Cam16.fromInt(argbPrimary);
+    final Cam16 camSecondary =
+        argbSecondary == null ? camPrimary : Cam16.fromInt(argbSecondary);
+    final Cam16 camTertiary =
+        argbTertiary == null ? camPrimary : Cam16.fromInt(argbTertiary);
+
+    final TonalPalette tonalPrimary =
+        TonalPalette.of(camPrimary.hue, math.max(48, camPrimary.chroma));
+    final TonalPalette tonalSecondary = argbSecondary == null
+        ? TonalPalette.of(camPrimary.hue, 16)
+        : TonalPalette.of(camSecondary.hue, math.max(48, camSecondary.chroma));
+    final TonalPalette tonalTertiary = argbTertiary == null
+        ? TonalPalette.of(camPrimary.hue + 60, 24)
+        : TonalPalette.of(camTertiary.hue, math.max(48, camTertiary.chroma));
+    return _CorePalette(
+      primary: tonalPrimary,
+      secondary: tonalSecondary,
+      tertiary: tonalTertiary,
+      neutral: TonalPalette.of(camPrimary.hue, 4),
+      neutralVariant: TonalPalette.of(camPrimary.hue, 8),
+    );
+  }
+
+  /// Create a [_CorePalette] from a fixed-size list of ARGB color ints
+  /// representing concatenated tonal palettes.
+  ///
+  /// Inverse of [asList].
+  _CorePalette.fromList(List<int> colors)
+      : assert(
+            colors.length == size * TonalPalette.commonSize, 'Incorrect size.'),
+        primary = TonalPalette.fromList(
+            _getPartition(colors, 0, TonalPalette.commonSize)),
+        secondary = TonalPalette.fromList(
+            _getPartition(colors, 1, TonalPalette.commonSize)),
+        tertiary = TonalPalette.fromList(
+            _getPartition(colors, 2, TonalPalette.commonSize)),
+        neutral = TonalPalette.fromList(
+            _getPartition(colors, 3, TonalPalette.commonSize)),
+        neutralVariant = TonalPalette.fromList(
+            _getPartition(colors, 4, TonalPalette.commonSize));
+
+  /// Returns a list of ARGB color [int]s from concatenated tonal palettes.
+  ///
+  /// Inverse of [FlexCorePalette.fromList].
+  List<int> asList() => <int>[
+        ...primary.asList,
+        ...secondary.asList,
+        ...tertiary.asList,
+        ...neutral.asList,
+        ...neutralVariant.asList,
+      ];
+
+  @override
+  bool operator ==(Object other) =>
+      other is _CorePalette &&
+      primary == other.primary &&
+      secondary == other.secondary &&
+      tertiary == other.tertiary &&
+      neutral == other.neutral &&
+      neutralVariant == other.neutralVariant &&
+      error == other.error;
+
+  @override
+  int get hashCode => Object.hash(
+        primary,
+        secondary,
+        tertiary,
+        neutral,
+        neutralVariant,
+        error,
+      );
+
+  @override
+  String toString() {
+    return 'primary: $primary\n'
+        'secondary: $secondary\n'
+        'tertiary: $tertiary\n'
+        'neutral: $neutral\n'
+        'neutralVariant: $neutralVariant\n'
+        'error: $error\n';
+  }
+
+  // Returns a partition from a list.
+  //
+  // For example, given a list with 2 partitions of size 3.
+  // range = [1, 2, 3, 4, 5, 6];
+  //
+  // range.getPartition(0, 3) // [1, 2, 3]
+  // range.getPartition(1, 3) // [4, 5, 6]
+  static List<int> _getPartition(
+      List<int> list, int partitionNumber, int partitionSize) {
+    return list.sublist(
+      partitionNumber * partitionSize,
+      (partitionNumber + 1) * partitionSize,
+    );
   }
 }

@@ -156,6 +156,8 @@ void main() {
             primaryContainer: Color(0xff4d00bb),
             secondary: Color(0xff5800d5),
             secondaryContainer: Color(0xff4500a7),
+            tertiary: Color(0xff7d22ff),
+            tertiaryContainer: Color(0xff8936ff),
             appBarColor: Color(0xff4500a7),
           ));
     });
@@ -185,6 +187,8 @@ void main() {
             primaryContainer: Colors.white,
             secondary: Colors.white,
             secondaryContainer: Colors.white,
+            tertiary: Colors.white,
+            tertiaryContainer: Colors.white,
             appBarColor: Colors.white,
             error: Colors.white,
             primaryVariant: Colors.white,
@@ -210,7 +214,8 @@ void main() {
 
     test(
         'FSC1.11: GIVEN a FlexSchemeColor.from primary and secondary '
-        'EXPECT primary and secondary as given other computed.', () {
+        'EXPECT primary and secondary as given, tertiaries as secondary '
+        'others computed.', () {
       expect(
           FlexSchemeColor.from(
               primary: FlexColor.materialLightPrimary,
@@ -220,6 +225,8 @@ void main() {
             primaryContainer: Color(0xff4d00bb),
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: Color(0xff02a898),
+            tertiary: FlexColor.materialLightSecondary,
+            tertiaryContainer: FlexColor.materialLightSecondary,
             appBarColor: Color(0xff02a898),
           ));
     });
@@ -271,6 +278,8 @@ void main() {
           primaryContainer: m1.primary.darken(kDarkenPrimaryContainer),
           secondary: m1.primary.darken(kDarkenSecondary),
           secondaryContainer: m1.primary.darken(kDarkenSecondaryContainer),
+          tertiary: m1.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryContainer: m1.primary.lighten(kDarkenSecondaryContainer),
           primaryVariant: m1.primary.darken(kDarkenPrimaryContainer),
           secondaryVariant: m1.primary.darken(kDarkenSecondaryContainer),
         ),
@@ -288,6 +297,8 @@ void main() {
             primaryContainer: m1.secondaryContainer,
             secondary: m1.primary,
             secondaryContainer: m1.primaryContainer,
+            tertiary: m1.primary,
+            tertiaryContainer: m1.primary,
             primaryVariant: m1.secondaryVariant,
             secondaryVariant: m1.primaryVariant,
           ));
@@ -298,6 +309,8 @@ void main() {
       primaryContainer: FlexColor.materialLightSecondaryContainer,
       secondary: FlexColor.materialLightPrimary,
       secondaryContainer: FlexColor.materialLightPrimaryContainer,
+      tertiary: FlexColor.materialLightPrimary,
+      tertiaryContainer: FlexColor.materialLightPrimary,
       appBarColor: FlexColor.materialLightSecondaryContainer,
       error: FlexColor.materialLightError,
     );
@@ -352,13 +365,15 @@ void main() {
         'swapColors: true) EXPECT it '
         'to be equal to SchemeColor made with colors swapped, '
         'with primary variant, secondary '
-        'and Secondary variant computed.', () {
+        'and Secondary container, variant and tertiary computed.', () {
       expect(
         FlexSchemeColor.effective(m1, 1, swapColors: true),
         m1Swap.copyWith(
           primaryContainer: m1Swap.primary.darken(kDarkenPrimaryContainer),
           secondary: m1Swap.primary.darken(kDarkenSecondary),
           secondaryContainer: m1Swap.primary.darken(kDarkenSecondaryContainer),
+          tertiary: m1Swap.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryContainer: m1Swap.primary.lighten(kDarkenSecondaryContainer),
           primaryVariant: m1Swap.primary.darken(kDarkenPrimaryContainer),
           secondaryVariant: m1Swap.primary.darken(kDarkenSecondaryContainer),
         ),
@@ -379,7 +394,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020), primaryVariant: Color(0xff3700b3), secondaryVariant: Color(0xff018786))'));
+              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff018786), tertiary: Color(0xff03dac6), tertiaryContainer: Color(0xff03dac6), appBarColor: Color(0xff018786), error: Color(0xffb00020), primaryVariant: Color(0xff3700b3), secondaryVariant: Color(0xff018786))'));
     });
     test(
         'FSC1.18: Test toStringShort implemented via debugFillProperties '
@@ -395,7 +410,7 @@ void main() {
     // This happens to be always equal now in tests, if it start failing, test
     // 14c is actually enough.
     test('FSC1.19b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 324383957);
+      expect(m1.hashCode, 438130890);
     });
     test('FSC1.19c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));

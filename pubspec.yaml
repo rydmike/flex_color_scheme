@@ -9,6 +9,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Color utilities by Google (material.io).
+  # Use to compute and create theme colors.
+  # Flutter SDK from 2.10.0 stable also uses and depends on this package.
+  # Using ^0.1.3 because Flutter stable 2.10.0 uses it, master is on ^0.1.4
+  material_color_utilities: ^0.1.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
