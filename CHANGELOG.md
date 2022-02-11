@@ -121,6 +121,10 @@ as old property names will remain available until FlexColorScheme version
 * **TODO:** Add more tests for legacy fallbacks when using old deprecated 
   `primaryVariant` and `secondaryVariant` properties.
 
+
+* **TODO:** Update all examples, in particular example 5, the Themes Playground
+  to include support for new features.
+
 **MAYBE:** (Might be pushed to 5.x.0).
 * **TODO:** Add main `SchemeColor` enum color selection to all buttons.
 * **TODO:** Add main `SchemeColor` enum color selection to switch buttons.
