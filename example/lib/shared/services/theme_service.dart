@@ -582,7 +582,7 @@ abstract class ThemeService {
 
   /// Default value for the secondaryLight color, also to reset settings.
   static const Color defaultSecondaryContainerLight =
-      FlexColor.materialLightSecondaryContainer;
+      FlexColor.materialLightTertiary;
 
   /// Loads setting for secondaryContainerLight color, in example 5.
   Future<Color> secondaryContainerLight();
@@ -632,7 +632,7 @@ abstract class ThemeService {
 
   /// Default value for the secondaryDark color, also to reset settings.
   static const Color defaultSecondaryContainerDark =
-      FlexColor.materialDarkSecondaryContainer;
+      FlexColor.materialDarkTertiary;
 
   /// Loads setting for secondaryContainerDark color, in example 5.
   Future<Color> secondaryContainerDark();

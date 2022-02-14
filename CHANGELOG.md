@@ -3,7 +3,7 @@
 All notable changes to the **FlexColorScheme** package are documented here.
 
 
-## v5.0.0-dev.1 - February 12, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - February 14, 2022 - WORK IN PROGRESS
 
 This release is big refactor with deprecation of previous `variant` based 
 names in favor of `container` ones that were added to updated M3
@@ -55,7 +55,26 @@ as old property names will remain available until FlexColorScheme version
   sub-themes configuration class `FlexSubThemesData`. The feature
   introduced in version 4.2.0 is now also supported by sub themes for:
   - Floating Action Button, via `FlexSubThemesData.fabSchemeColor`
-  
+
+* **New:** In class `FlexSchemeColor` added **new** color properties
+  `primaryContainer` and `secondaryContainer` they replace deprecated properties
+  `primaryVariant`and `secondaryVariant`. The old properties still work and are 
+  used as fallback to the new ones, if the new ones are not provided.
+  The previous properties are still available as deprecated, and will remain
+  available until version 6.0.0.
+* **New:** In class `FlexSchemeColor` added **new** color definitions for
+  `FlexSchemeColor.tertiary` and `FlexSchemeColor.tertiaryContainer`.
+  The current colors used in FlexColorScheme as predefined values for
+  `secondaryContainer` matches the M3 need better for color
+  `FlexSchemeColor.tertiary`. The `FlexSchemeColor.secondaryContainer`
+  and `FlexSchemeColor.tertiaryContainer` should be brighter versions of their
+  none container parent. Refactored built in color definitions values for
+  `FlexSchemeColor.secondaryContainer` to become the predefined value for
+  `FlexSchemeColor.tertiary`. It is done with logic that keeps color results
+  as before when using the old property values as input. 
+  (**TODO** Tests and demo verification of this).
+
+
 
 * **Change:** Added all the new `ColorScheme` M3 color properties to `SchemeColor`
   enum and its static functions `schemeColor` and `schemeColorPair`.
@@ -77,12 +96,7 @@ as old property names will remain available until FlexColorScheme version
   the new ones, if the new ones are not provided.
   The previous properties are still available as deprecated, and will remain
   available until version 6.0.0.
-* **Change:** In class `FlexSchemeColor` added properties `primaryContainer` and
-  `secondaryContainer` they replace deprecated properties `primaryVariant`
-  `secondaryVariant`. The old properties still work and are used as fallback to
-  the new ones, if the new ones are not provided.
-  The previous properties are still available as deprecated, and will remain
-  available until version 6.0.0.
+
 * **Change:** In `FlexColor` renamed all color values with `variant` in their
   name to `container`, to match the new Flutter SDK color property names 
   for all colors intended for corresponding container color property in 
@@ -104,24 +118,21 @@ as old property names will remain available until FlexColorScheme version
   4.0.0 not it can also use the correct `TextStyle` names since they became
   available in Flutter 2.10.0.
 
+* **TODO** need to define values for new `FlexSchemeColor.secondaryContainer`
+  and `FlexSchemeColor.tertiaryContainer`. This is a big task to add, also color
+  design wise, but needed for the built-in themes to also be nice in both M2
+  and M3 world when not using seed features. If the container values are not
+  gives, like it still is for now, they get computed values when
+  `FlexSchemeColor.from` is used, or fallback to corresponding none container
+  value or eventually even primary when using the main constructor or factories.
+  When using the seed features, container values will typically be overridden
+  by colors computed from the seed values from primary, secondary and tertiary.
 
 * **TODO:** Add M3 seed color theme support, using 1, 2 or 3 key colors as seed, 
   instead of just one, like ThemeData does. The behavior is controlled via the
   `FlexSeedColorSetup` class passed in to `FlexColorScheme.seedColorSetup`.
-* **TODO:** Refactor built in color definitions values for 
-  `FlexSchemeColor.secondaryContainer` to become the predefined value for
-  `FlexSchemeColor.tertiary`.
-* **TODO:** Add **new** color definitions for 
-  `FlexSchemeColor.secondaryContainer` and `FlexSchemeColor.tertiaryContainer`.
-  The current colors used in FlexColorScheme as predefined values for
-  `secondaryContainer` matches the M3 need better for color
-  `FlexSchemeColor.tertiary`. The `FlexSchemeColor.secondaryContainer` 
-  and `FlexSchemeColor.tertiaryContainer` should be brighter versions of their
-  none container parent, so we need defined values for them too. This is a big
-  task to add, also color design wise, but needed for the built-in 
-  themes to also be nice in both M2 and M3 world when not using seed features.
-  When using the seed features to container values will be overridden by colors
-  computed from the seed values from primary, secondary and tertiary.
+
+
 * **TODO:** Add tests for new prop `fabSchemeColor` and its features.
 * **TODO:** Add tests for new prop `useMaterial3`.
 * **DONE:** Add unit tests for `FlexKeyColorSetup`.

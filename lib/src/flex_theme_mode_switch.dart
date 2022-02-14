@@ -518,7 +518,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                                 padding: padding,
                               ),
                               _SchemeColorBox(
-                                color: flexSchemeColor.secondaryContainer,
+                                color: flexSchemeColor.tertiary,
                                 height: height,
                                 width: width,
                                 borderRadius: borderRadius,

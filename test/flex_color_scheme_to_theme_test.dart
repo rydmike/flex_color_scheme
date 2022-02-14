@@ -18,46 +18,59 @@ void main() {
     test(
         'FCS7.00-Default: GIVEN FlexColorScheme() made with default '
         'EXPECT its ThemeData to be equal to one made with light factory with '
-        'just using one color. v4.2.0 test case', () {
+        'only primary color. v5.0.0 test case', () {
       expect(
           const FlexColorScheme()
               .toScheme
               .toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(FlexColorScheme.light(
-            usedColors: 1,
+            primaryContainer: FlexColor.materialLightPrimary,
+            secondary: FlexColor.materialLightPrimary,
+            secondaryContainer: FlexColor.materialLightPrimary,
+            tertiary: FlexColor.materialLightPrimary,
+            tertiaryContainer: FlexColor.materialLightPrimary,
+            // usedColors: 1,
           ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
     });
 
     test(
-        'FCS7.00-Default-Light: GIVEN FlexColorScheme() made with light '
+        'FCS7.01-Default-Light: GIVEN FlexColorScheme() made with light '
         'brightness '
         'EXPECT its ThemeData to be equal to one made with light factory '
-        'with just using one color. v4.2.0 test case', () {
+        'only primary color. v5.0.0 test case', () {
       expect(
           const FlexColorScheme(
             brightness: Brightness.light,
           ).toTheme,
           equals(FlexColorScheme.light(
-            usedColors: 1,
+            primaryContainer: FlexColor.materialLightPrimary,
+            secondary: FlexColor.materialLightPrimary,
+            secondaryContainer: FlexColor.materialLightPrimary,
+            tertiary: FlexColor.materialLightPrimary,
+            tertiaryContainer: FlexColor.materialLightPrimary,
           ).toTheme));
     });
 
     test(
-        'FCS7.00-Default-Dark: GIVEN FlexColorScheme() made with dark '
+        'FCS7.02-Default-Dark: GIVEN FlexColorScheme() made with dark '
         'brightness '
         'EXPECT its ThemeData to be equal to one made with dark factory '
-        'with just using one color. v4.2.0 test case', () {
+        'only primary color. v5.0.0 test case', () {
       expect(
           const FlexColorScheme(
             brightness: Brightness.dark,
           ).toTheme,
           equals(FlexColorScheme.dark(
-            usedColors: 1,
+            primaryContainer: FlexColor.materialDarkPrimary,
+            secondary: FlexColor.materialDarkPrimary,
+            secondaryContainer: FlexColor.materialDarkPrimary,
+            tertiary: FlexColor.materialDarkPrimary,
+            tertiaryContainer: FlexColor.materialDarkPrimary,
           ).toTheme));
     });
 
     test(
-        'FCS7.00-Raw-scheme-light: GIVEN FlexColorScheme() made with '
+        'FCS7.03-Raw-scheme-light: GIVEN FlexColorScheme() made with '
         'raw light color scheme '
         'EXPECT its ColorScheme to be equal to one made with light '
         'factory toString compare. v4.2.0 test case.', () {
@@ -71,8 +84,10 @@ void main() {
               onPrimaryContainer: Colors.white,
               secondary: Color(0xff03dac6),
               onSecondary: Colors.black,
-              secondaryContainer: Color(0xff018786),
-              onSecondaryContainer: Colors.white,
+              secondaryContainer: Color(0xff03dac6),
+              onSecondaryContainer: Colors.black,
+              tertiary: Color(0xff018786),
+              onTertiary: Colors.white,
               error: Color(0xffb00020),
               onError: Colors.white,
               background: Colors.white,
@@ -87,7 +102,7 @@ void main() {
     });
 
     test(
-        'FCS7.00-Raw-scheme-light: GIVEN FlexColorScheme() made with '
+        'FCS7.04-Raw-scheme-light: GIVEN FlexColorScheme() made with '
         'raw light color scheme '
         'EXPECT its ThemeData to be equal to one made with light factory. '
         ' v4.2.0 test case.', () {
@@ -101,8 +116,10 @@ void main() {
               onPrimaryContainer: Colors.white,
               secondary: Color(0xff03dac6),
               onSecondary: Colors.black,
-              secondaryContainer: Color(0xff018786),
-              onSecondaryContainer: Colors.white,
+              secondaryContainer: Color(0xff03dac6),
+              onSecondaryContainer: Colors.black,
+              tertiary: Color(0xff018786),
+              onTertiary: Colors.white,
               error: Color(0xffb00020),
               onError: Colors.white,
               background: Colors.white,
@@ -115,7 +132,7 @@ void main() {
     });
 
     test(
-        'FCS7.00-Default-scheme-light: GIVEN FlexColorScheme() made with '
+        'FCS7.05-Default-scheme-light: GIVEN FlexColorScheme() made with '
         'default light color scheme '
         'EXPECT its ThemeData to be equal to one made with light factory '
         'and ColorScheme.light v4.2.0 test case.', () {
@@ -129,7 +146,7 @@ void main() {
     });
 
     test(
-        'FCS7.00-Raw-scheme-dark: GIVEN FlexColorScheme() made with '
+        'FCS7.06-Raw-scheme-dark: GIVEN FlexColorScheme() made with '
         'default dark color scheme '
         'EXPECT its ThemeData to be equal to one made with dark factory '
         'correcting on error. v4.2.0 test case', () {
@@ -159,7 +176,7 @@ void main() {
     });
 
     test(
-        'FCS7.00-Default-scheme-dark: GIVEN FlexColorScheme() made with '
+        'FCS7.07-Default-scheme-dark: GIVEN FlexColorScheme() made with '
         'default dark color scheme '
         'EXPECT its ThemeData to be equal to one made with dark factory '
         'and ColorScheme.dark v4.2.0 test case.', () {
@@ -173,47 +190,58 @@ void main() {
     });
 
     test(
-        'FCS7.00-Scheme-hc-light: GIVEN FlexColorScheme() made with '
+        'FCS7.08-Scheme-hc-light: GIVEN FlexColorScheme() raw made with '
         'override colors '
-        'EXPECT its ThemeData to be equal to one made with light factory '
-        'and color overrides. v4.2.0 test case.', () {
+        'EXPECT its ColorScheme to be equal to one made FlexScheme.materialHc.',
+        () {
       expect(
           const FlexColorScheme(
             brightness: Brightness.light,
             primary: Color(0xff0000ba),
+            onPrimary: Colors.white,
             primaryContainer: Color(0xff000088),
+            onPrimaryContainer: Colors.white,
             secondary: Color(0xff66fff9),
-            secondaryContainer: Color(0xff018786),
+            onSecondary: Colors.black,
+            tertiary: Color(0xff018786),
+            onTertiary: Colors.white,
             error: Color(0xff790000),
             surface: Colors.white,
             background: Colors.white,
+            onSurface: Colors.black,
+            onBackground: Colors.black,
+            onError: Colors.white,
+          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(
+            FlexColorScheme.light(
+              scheme: FlexScheme.materialHc,
+            ).toScheme.toString(minLevel: DiagnosticLevel.fine),
+          ));
+    });
+
+    test(
+        'FCS7.09-Scheme-hc-light: GIVEN FlexColorScheme() made with '
+        'override colors '
+        'EXPECT its ThemeData to be equal to one made with light scheme', () {
+      expect(
+          const FlexColorScheme(
+            brightness: Brightness.light,
+            primary: Color(0xff0000ba),
             onPrimary: Colors.white,
+            primaryContainer: Color(0xff000088),
             onPrimaryContainer: Colors.white,
+            secondary: Color(0xff66fff9),
             onSecondary: Colors.black,
-            onSecondaryContainer: Colors.white,
+            tertiary: Color(0xff018786),
+            onTertiary: Colors.white,
+            error: Color(0xff790000),
+            surface: Colors.white,
+            background: Colors.white,
             onSurface: Colors.black,
             onBackground: Colors.black,
             onError: Colors.white,
           ).toTheme,
-          equals(FlexColorScheme.light(
-            primary: const Color(0xff0000ba),
-            primaryContainer: const Color(0xff000088),
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff018786),
-            error: const Color(0xff790000),
-            // These will be computed results with the .light factory
-            // with above inputs, that should match manual assignments.
-            //
-            // surface: Colors.white,
-            // background: Colors.white,
-            // onPrimary: Colors.white,
-            // onPrimaryContainer: Colors.white,
-            // onSecondary: Colors.black,
-            // onSecondaryContainer: Colors.white,
-            // onSurface: Colors.black,
-            // onBackground: Colors.black,
-            // onError: Colors.white,
-          ).toTheme));
+          equals(FlexColorScheme.light(scheme: FlexScheme.materialHc).toTheme));
     });
 
     const ColorScheme hcDarkScheme = ColorScheme(
@@ -253,7 +281,7 @@ void main() {
     );
 
     test(
-        'FCS7.00-Scheme-hc-light: GIVEN FlexColorScheme() made with '
+        'FCS7.10-Scheme-hc-light: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
         'EXPECT its ThemeData to be equal to one made with light factory '
         'and same sum color scheme. v4.2.0 test case.', () {
@@ -285,20 +313,21 @@ void main() {
       brightness: Brightness.dark,
       primary: Color(0xff0000ba),
       onPrimary: Colors.black,
-      primaryContainer: Color(0xffbe9eff),
+      primaryContainer: Color(0xff7a6a9c),
       onPrimaryContainer: Colors.black,
       secondary: Color(0xff66fff9),
-      onSecondary: Colors.black,
-      secondaryContainer: Color(0xff66fff9),
-      onSecondaryContainer: Colors.black,
+      onSecondary: Colors.white,
+      tertiary: Color(0xffb2dfdd),
+      onTertiary: Colors.black,
       error: Color(0xff790000),
       onError: Colors.white,
       background: Color(0xff121212),
       onBackground: Colors.white,
       surface: Color(0xff121212),
       onSurface: Colors.white,
-      // Light colors that will be created be light scheme defaults
-      // but cannot be overridden form passed in scheme.
+      // Light colors that will be created by dark scheme defaults
+      // but cannot be overridden via passed in properties to raw constructor.
+      // So we set them manually to what they should be in light mode
       surfaceVariant: Color(0xffffffff),
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xff000000),
@@ -308,244 +337,236 @@ void main() {
       inversePrimary: Color(0xffffffff),
     ).copyWith(
       primary: const Color(0xffefb7ff),
+      secondary: const Color(0xff075c52),
       error: const Color(0xff9b374d),
       onError: Colors.black,
     );
 
+    final FlexColorScheme hcLightWithLight = FlexColorScheme(
+      colorScheme: hcDarkWithLight,
+      brightness: Brightness.light,
+      primary: const Color(0xff0000ba),
+      onPrimary: Colors.white,
+      primaryContainer: const Color(0xff000088),
+      onPrimaryContainer: Colors.white,
+      secondary: const Color(0xff66fff9),
+      secondaryContainer: const Color(0xff66fff9),
+      onSecondary: Colors.black,
+      onSecondaryContainer: Colors.white,
+      tertiary: const Color(0xff018786),
+      onTertiary: Colors.white,
+      tertiaryContainer: const Color(0xff018786),
+      onTertiaryContainer: Colors.white,
+      error: const Color(0xff790000),
+      onError: Colors.white,
+      surface: Colors.white,
+      background: Colors.white,
+      onBackground: Colors.black,
+      onSurface: Colors.black,
+    );
+
+    final FlexColorScheme hcLight = FlexColorScheme.light(
+      primary: const Color(0xff0000ba),
+      onPrimary: Colors.white,
+      primaryContainer: const Color(0xff000088),
+      onPrimaryContainer: Colors.white,
+      secondary: const Color(0xff66fff9),
+      secondaryContainer: const Color(0xff66fff9),
+      onSecondary: Colors.black,
+      onSecondaryContainer: Colors.white,
+      tertiary: const Color(0xff018786),
+      onTertiary: Colors.white,
+      tertiaryContainer: const Color(0xff018786),
+      onTertiaryContainer: Colors.white,
+      error: const Color(0xff790000),
+      onError: Colors.white,
+      background: Colors.white,
+      onBackground: Colors.black,
+      surface: Colors.white,
+      onSurface: Colors.black,
+    );
+
     test(
-        'FCS7.00-Scheme-hc-light.toString: GIVEN FlexColorScheme() made with '
+        'FCS7.11-Scheme-hc-light.toString: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
-        'EXPECT its ThemeData to be equal to one made with light factory '
+        'EXPECT its ColorScheme to be equal to one made with light factory '
         'and color overrides. v4.2.0 test case.', () {
       expect(
-          FlexColorScheme(
-            colorScheme: hcDarkWithLight,
-            brightness: Brightness.light,
-            primary: const Color(0xff0000ba),
-            primaryContainer: const Color(0xff000088),
-            onPrimaryContainer: Colors.white,
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff018786),
-            onSecondaryContainer: Colors.white,
-            surface: Colors.white,
-            background: Colors.white,
-            error: const Color(0xff790000),
-            onPrimary: Colors.white,
-            onSecondary: Colors.black,
-            onSurface: Colors.black,
-            onBackground: Colors.black,
-            onError: Colors.white,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(FlexColorScheme.light(
-            primary: const Color(0xff0000ba),
-            primaryContainer: const Color(0xff000088),
-            onPrimaryContainer: Colors.white,
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff018786),
-            onSecondaryContainer: Colors.white,
-            surface: Colors.white,
-            background: Colors.white,
-            error: const Color(0xff790000),
-            onPrimary: Colors.white,
-            onSecondary: Colors.black,
-            onSurface: Colors.black,
-            onBackground: Colors.black,
-            onError: Colors.white,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
+          hcLightWithLight.toScheme.toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(
+              hcLight.toScheme.toString(minLevel: DiagnosticLevel.fine)));
     });
 
     test(
-        'FCS7.00-Scheme-hc-light: GIVEN FlexColorScheme() made with '
+        'FCS7.12-Scheme-hc-light: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
-        'EXPECT its ThemeData to be equal to one made with light factory '
+        'EXPECT its ColorScheme to be equal to one made with light factory '
         'and color overrides despite conflicting scheme given. '
         'v4.2.0 test case.', () {
-      expect(
-          FlexColorScheme(
-            colorScheme: hcDarkWithLight,
-            brightness: Brightness.light,
-            primary: const Color(0xff0000ba),
-            primaryContainer: const Color(0xff000088),
-            onPrimaryContainer: Colors.white,
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff018786),
-            onSecondaryContainer: Colors.white,
-            surface: Colors.white,
-            background: Colors.white,
-            error: const Color(0xff790000),
-            onPrimary: Colors.white,
-            onSecondary: Colors.black,
-            onSurface: Colors.black,
-            onBackground: Colors.black,
-            onError: Colors.white,
-          ).toTheme,
-          equals(FlexColorScheme.light(
-            primary: const Color(0xff0000ba),
-            primaryContainer: const Color(0xff000088),
-            onPrimaryContainer: Colors.white,
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff018786),
-            onSecondaryContainer: Colors.white,
-            surface: Colors.white,
-            background: Colors.white,
-            error: const Color(0xff790000),
-            onPrimary: Colors.white,
-            onSecondary: Colors.black,
-            onSurface: Colors.black,
-            onBackground: Colors.black,
-            onError: Colors.white,
-          ).toTheme));
+      expect(hcLightWithLight.toScheme, equals(hcLight.toScheme));
     });
 
     test(
-        'FCS7.00-Scheme-hc-light: GIVEN FlexColorScheme() made with '
+        'FCS7.13-Scheme-hc-light: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
         'EXPECT its ThemeData to be equal to one made with light factory '
         'and color overrides despite conflicting colors given. '
         'v4.2.0 test case.', () {
-      expect(
-          FlexColorScheme(
-            colorScheme: hcDarkWithLight,
-            brightness: Brightness.light,
-            primary: const Color(0xff0000ba),
-            primaryContainer: const Color(0xff000088),
-            onPrimaryContainer: Colors.white,
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff018786),
-            onSecondaryContainer: Colors.white,
-            surface: Colors.white,
-            background: Colors.white,
-            error: const Color(0xff790000),
-            onPrimary: Colors.white,
-            onSecondary: Colors.black,
-            onSurface: Colors.black,
-            onBackground: Colors.black,
-            onError: Colors.white,
-          ).toTheme,
-          equals(FlexColorScheme.light(
-            colors: FlexColor.ebonyClay.light,
-            primary: const Color(0xff0000ba),
-            primaryContainer: const Color(0xff000088),
-            onPrimaryContainer: Colors.white,
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff018786),
-            onSecondaryContainer: Colors.white,
-            surface: Colors.white,
-            background: Colors.white,
-            error: const Color(0xff790000),
-            onPrimary: Colors.white,
-            onSecondary: Colors.black,
-            onSurface: Colors.black,
-            onBackground: Colors.black,
-            onError: Colors.white,
-          ).toTheme));
+      expect(hcLightWithLight.toTheme, equals(hcLight.toTheme));
     });
 
-    test(
-        'FCS7.00-Scheme-hc-dark: GIVEN FlexColorScheme() made with '
-        'raw high contrast dark color scheme '
-        'EXPECT its ThemeData to be equal to one made with dark factory '
-        'and color overrides. v4.2.0 test case.', () {
-      expect(
-          const FlexColorScheme(
-            colorScheme: ColorScheme(
-              brightness: Brightness.dark,
-              primary: Color(0xffefb7ff),
-              onPrimary: Colors.black,
-              primaryContainer: Color(0xffbe9eff),
-              onPrimaryContainer: Colors.black,
-              secondary: Color(0xff66fff9),
-              onSecondary: Colors.black,
-              secondaryContainer: Color(0xff66fff9),
-              onSecondaryContainer: Colors.black,
-              error: Color(0xff9b374d),
-              onError: Colors.black,
-              background: Color(0xff121212),
-              onBackground: Colors.white,
-              surface: Color(0xff121212),
-              onSurface: Colors.white,
-            ),
-          ).toTheme,
-          equals(FlexColorScheme.dark(
-            primary: const Color(0xffefb7ff),
-            onPrimary: Colors.black,
-            primaryContainer: const Color(0xffbe9eff),
-            onPrimaryContainer: Colors.black,
-            secondary: const Color(0xff66fff9),
-            onSecondary: Colors.black,
-            secondaryContainer: const Color(0xff66fff9),
-            onSecondaryContainer: Colors.black,
-            error: const Color(0xff9b374d),
-            onError: Colors.black,
-            background: const Color(0xff121212),
-            onBackground: Colors.white,
-            surface: const Color(0xff121212),
-            onSurface: Colors.white,
-          ).toTheme));
-    });
-
-    test(
-        'FCS7.00-Scheme-hc-dark: GIVEN FlexColorScheme() made with '
-        'override colors '
-        'EXPECT its ThemeData to be equal to one made with dark factory '
-        'and color overrides. v4.2.0 test case.', () {
-      expect(
-          const FlexColorScheme(
-            brightness: Brightness.dark,
-            primary: Color(0xffefb7ff),
-            primaryContainer: Color(0xffbe9eff),
-            secondary: Color(0xff66fff9),
-            secondaryContainer: Color(0xff66fff9),
-            surface: Color(0xff121212),
-            background: Color(0xff121212),
-            error: Color(0xff9b374d),
-            onPrimary: Colors.black,
-            onPrimaryContainer: Colors.black,
-            onSecondary: Colors.black,
-            onSecondaryContainer: Colors.black,
-            onSurface: Colors.white,
-            onBackground: Colors.white,
-            onError: Colors.white,
-          ).toTheme,
-          equals(FlexColorScheme.dark(
-            primary: const Color(0xffefb7ff),
-            primaryContainer: const Color(0xffbe9eff),
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff66fff9),
-            surface: const Color(0xff121212),
-            background: const Color(0xff121212),
-            error: const Color(0xff9b374d),
-            // These will be computed results with the .dark factory
-            // with above inputs, that should match manual assignments.
-            //
-            // onPrimary: Colors.black,
-            // onPrimaryContainer: Colors.black,
-            // onSecondary: Colors.black,
-            // onSecondaryContainer: Colors.black,
-            // onSurface: Colors.white,
-            // onBackground: Colors.white,
-            // onError: Colors.white,
-          ).toTheme));
-    });
-
-    final ColorScheme hcLightWithDark = const ColorScheme(
+    // Dark default color scheme
+    const FlexColorScheme darkDefault = FlexColorScheme(
+        colorScheme: ColorScheme(
       brightness: Brightness.dark,
       primary: Color(0xffefb7ff),
-      primaryContainer: Color(0xff000088),
-      onPrimaryContainer: Colors.white,
+      onPrimary: Colors.black,
+      primaryContainer: Color(0xffbe9eff),
+      onPrimaryContainer: Colors.black,
       secondary: Color(0xff66fff9),
-      secondaryContainer: Color(0xff018786),
-      onSecondaryContainer: Colors.white,
-      surface: Colors.white,
-      background: Colors.white,
-      error: Color(0xff9b374d),
-      onPrimary: Colors.white,
       onSecondary: Colors.black,
-      onSurface: Colors.black,
-      onBackground: Colors.black,
+      secondaryContainer: Color(0xff66fff9),
+      onSecondaryContainer: Colors.black,
+      error: Color(0xff9b374d),
+      onError: Colors.black,
+      background: Color(0xff121212),
+      onBackground: Colors.white,
+      surface: Color(0xff121212),
+      onSurface: Colors.white,
+    ));
+
+    final FlexColorScheme darkFactoryDefault = FlexColorScheme.dark(
+      primary: const Color(0xffefb7ff),
+      onPrimary: Colors.black,
+      primaryContainer: const Color(0xffbe9eff),
+      onPrimaryContainer: Colors.black,
+      secondary: const Color(0xff66fff9),
+      onSecondary: Colors.black,
+      secondaryContainer: const Color(0xff66fff9),
+      onSecondaryContainer: Colors.black,
+      tertiary: const Color(0xff66fff9),
+      onTertiary: Colors.black,
+      tertiaryContainer: const Color(0xff66fff9),
+      onTertiaryContainer: Colors.black,
+      error: const Color(0xff9b374d),
+      onError: Colors.black,
+      background: const Color(0xff121212),
+      onBackground: Colors.white,
+      surface: const Color(0xff121212),
+      onSurface: Colors.white,
+    );
+
+    test(
+        'FCS7.14a-Scheme-hc-dark: GIVEN FlexColorScheme() made with '
+        'raw high contrast dark color scheme '
+        'EXPECT its ColorScheme string to be equal to one made with dark '
+        'factory and minimal color inputs.', () {
+      expect(
+          darkDefault.toScheme.toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(
+            darkFactoryDefault.toScheme
+                .toString(minLevel: DiagnosticLevel.fine),
+          ));
+    });
+
+    test(
+        'FCS7.14b-Theme-hc-dark: GIVEN FlexColorScheme() made with '
+        'raw high contrast dark color scheme '
+        'EXPECT its ThemeData to be equal to one made with dark factory '
+        'and minimal color inputs.', () {
+      expect(
+        darkDefault.toTheme,
+        equals(darkFactoryDefault.toTheme),
+      );
+    });
+
+    // Raw High contrast dark scheme
+    const FlexColorScheme hcDarkDefault = FlexColorScheme(
+        colorScheme: ColorScheme(
+      brightness: Brightness.dark,
+      primary: Color(0xffefb7ff),
+      primaryContainer: Color(0xffbe9eff),
+      secondary: Color(0xff66fff9),
+      secondaryContainer: Color(0xff66fff9),
+      tertiary: Color(0xff03dac6),
+      tertiaryContainer: Color(0xff03dac6),
+      surface: Color(0xff121212),
+      background: Color(0xff121212),
+      error: Color(0xff9b374d),
+      onPrimary: Colors.black,
+      onPrimaryContainer: Colors.black,
+      onSecondary: Colors.black,
+      onSecondaryContainer: Colors.black,
+      onSurface: Colors.white,
+      onBackground: Colors.white,
       onError: Colors.white,
+    ));
+
+    // Dark factory based high contrast dark scheme
+    final FlexColorScheme hcDarkFactoryDefault = FlexColorScheme.dark(
+      primary: const Color(0xffefb7ff),
+      primaryContainer: const Color(0xffbe9eff),
+      secondary: const Color(0xff66fff9),
+      secondaryContainer: const Color(0xff66fff9),
+      error: const Color(0xff9b374d),
+    );
+
+    test(
+        'FCS7.15a-Scheme-hc-dark: GIVEN Raw FlexColorScheme() made with '
+        'given high contrast colors '
+        'EXPECT its Scheme string to be equal to one made with dark '
+        'factory and minimal colors inputs.', () {
+      expect(
+        hcDarkDefault.toScheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          hcDarkFactoryDefault.toScheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
+
+    test(
+        'FCS7.15b-Scheme-hc-dark: GIVEN Raw FlexColorScheme() made with '
+        'given high contrast colors '
+        'EXPECT its toScheme to be equal to one made with dark '
+        'factory and minimal color inputs.', () {
+      expect(
+        hcDarkDefault.toScheme,
+        equals(hcDarkFactoryDefault.toScheme),
+      );
+    });
+
+    test(
+        'FCS7.15b-Theme-hc-dark: GIVEN GIVEN Raw FlexColorScheme() made with '
+        'given high contrast colors '
+        'EXPECT its ThemeData to be equal to one made with dark factory '
+        'and minimal color inputs.', () {
+      expect(
+        hcDarkDefault.toTheme,
+        equals(hcDarkFactoryDefault.toTheme),
+      );
+    });
+
+    // An opposite color scheme that, that we will use as "wrong" input
+    // to override and expect correct result via overrides.
+    final ColorScheme hcLightWithDark = const ColorScheme(
+      brightness: Brightness.light,
+      primary: Color(0xffefb7ff),
+      onPrimary: Colors.black,
+      primaryContainer: Color(0xff7a6a9c),
+      onPrimaryContainer: Colors.black,
+      secondary: Color(0xff66fff9),
+      onSecondary: Colors.white,
+      tertiary: Color(0xffb2dfdd),
+      onTertiary: Colors.black,
+      error: Color(0xff9b374d),
+      onError: Colors.white,
+      background: Color(0xff121212),
+      onBackground: Colors.white,
+      surface: Color(0xff121212),
+      onSurface: Colors.white,
       // Light colors that will be created be light scheme defaults
-      // but cannot be overridden form passed in scheme.
+      // but cannot be overridden via passed in properties to raw constructor.
       surfaceVariant: Color(0xff121212),
       onSurfaceVariant: Colors.white,
       outline: Colors.white,
@@ -560,10 +581,10 @@ void main() {
     );
 
     test(
-        'FCS7.00-Scheme-hc-dark: GIVEN FlexColorScheme() made with '
+        'FCS7.16-toScheme-string-hc-dark: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
-        'EXPECT its ThemeData to be equal to one made with dark factory '
-        'and color overrides. v4.2.0 test case.', () {
+        'EXPECT its toScheme to be equal to one made with dark factory '
+        'and minimal colors', () {
       expect(
           FlexColorScheme(
             colorScheme: hcLightWithDark,
@@ -572,6 +593,8 @@ void main() {
             primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
             secondaryContainer: const Color(0xff66fff9),
+            tertiary: const Color(0xff03dac6),
+            tertiaryContainer: const Color(0xff03dac6),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
@@ -582,34 +605,48 @@ void main() {
             onSurface: Colors.white,
             onBackground: Colors.white,
             onError: Colors.white,
-          ).toTheme,
-          equals(FlexColorScheme.dark(
-            primary: const Color(0xffefb7ff),
-            primaryContainer: const Color(0xffbe9eff),
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff66fff9),
-            surface: const Color(0xff121212),
-            background: const Color(0xff121212),
-            error: const Color(0xff9b374d),
-            // These will be computed results with the .dark factory
-            // with above inputs, that should match manual assignments.
-            //
-            // onPrimary: Colors.black,
-            // onPrimaryContainer: Colors.black,
-            // onSecondary: Colors.black,
-            // onSecondaryContainer: Colors.black,
-            // onSurface: Colors.white,
-            // onBackground: Colors.white,
-            // onError: Colors.white,
-          ).toTheme));
+          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(
+            hcDarkFactoryDefault.toScheme
+                .toString(minLevel: DiagnosticLevel.fine),
+          ));
     });
 
     test(
-        'FCS7.00-Scheme-hc-dark: GIVEN FlexColorScheme() made with '
+        'FCS7.17-toScheme-hc-dark: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
-        'EXPECT its ThemeData to be equal to one made with dark factory '
-        'and color overrides despite conflicting scheme given. '
-        'v4.2.0 test case.', () {
+        'EXPECT its toScheme to be equal to one made with dark factory '
+        'and minimal colors', () {
+      expect(
+        FlexColorScheme(
+          colorScheme: hcLightWithDark,
+          brightness: Brightness.dark,
+          primary: const Color(0xffefb7ff),
+          primaryContainer: const Color(0xffbe9eff),
+          secondary: const Color(0xff66fff9),
+          secondaryContainer: const Color(0xff66fff9),
+          tertiary: const Color(0xff03dac6),
+          tertiaryContainer: const Color(0xff03dac6),
+          surface: const Color(0xff121212),
+          background: const Color(0xff121212),
+          error: const Color(0xff9b374d),
+          onPrimary: Colors.black,
+          onPrimaryContainer: Colors.black,
+          onSecondary: Colors.black,
+          onSecondaryContainer: Colors.black,
+          onSurface: Colors.white,
+          onBackground: Colors.white,
+          onError: Colors.white,
+        ).toTheme,
+        equals(hcDarkFactoryDefault.toTheme),
+      );
+    });
+
+    test(
+        'FCS7.18-toTheme-hc-dark: GIVEN FlexColorScheme() made with '
+        'override colors despite conflicting colorscheme given '
+        'EXPECT its toScheme to be equal to one made with dark factory '
+        'and minimal colors', () {
       expect(
           FlexColorScheme(
             colorScheme: hcLightWithDark,
@@ -618,9 +655,11 @@ void main() {
             primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
             secondaryContainer: const Color(0xff66fff9),
-            surface: const Color(0xff121212),
-            background: const Color(0xff121212),
+            tertiary: const Color(0xff03dac6),
+            tertiaryContainer: const Color(0xff03dac6),
             error: const Color(0xff9b374d),
+            background: const Color(0xff121212),
+            surface: const Color(0xff121212),
             onPrimary: Colors.black,
             onPrimaryContainer: Colors.black,
             onSecondary: Colors.black,
@@ -629,71 +668,11 @@ void main() {
             onBackground: Colors.white,
             onError: Colors.white,
           ).toTheme,
-          equals(FlexColorScheme.dark(
-            scheme: FlexScheme.amber,
-            primary: const Color(0xffefb7ff),
-            primaryContainer: const Color(0xffbe9eff),
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff66fff9),
-            surface: const Color(0xff121212),
-            background: const Color(0xff121212),
-            error: const Color(0xff9b374d),
-            onPrimary: Colors.black,
-            onPrimaryContainer: Colors.black,
-            onSecondary: Colors.black,
-            onSecondaryContainer: Colors.black,
-            onSurface: Colors.white,
-            onBackground: Colors.white,
-            onError: Colors.white,
-          ).toTheme));
+          equals(hcDarkFactoryDefault.toTheme));
     });
 
     test(
-        'FCS7.00-Scheme-hc-dark: GIVEN FlexColorScheme() made with '
-        'override colors despite conflicting colorscheme given '
-        'EXPECT its ThemeData to be equal to one made with dark factory '
-        'and color overrides despite conflicting colors given. '
-        'v4.2.0 test case.', () {
-      expect(
-          FlexColorScheme(
-            colorScheme: hcLightWithDark,
-            brightness: Brightness.dark,
-            primary: const Color(0xffefb7ff),
-            primaryContainer: const Color(0xffbe9eff),
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff66fff9),
-            surface: const Color(0xff121212),
-            background: const Color(0xff121212),
-            error: const Color(0xff9b374d),
-            onPrimary: Colors.black,
-            onPrimaryContainer: Colors.black,
-            onSecondary: Colors.black,
-            onSecondaryContainer: Colors.black,
-            onSurface: Colors.white,
-            onBackground: Colors.white,
-            onError: Colors.white,
-          ).toTheme,
-          equals(FlexColorScheme.dark(
-            colors: FlexColor.ebonyClay.light,
-            primary: const Color(0xffefb7ff),
-            primaryContainer: const Color(0xffbe9eff),
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff66fff9),
-            surface: const Color(0xff121212),
-            background: const Color(0xff121212),
-            error: const Color(0xff9b374d),
-            onPrimary: Colors.black,
-            onPrimaryContainer: Colors.black,
-            onSecondary: Colors.black,
-            onSecondaryContainer: Colors.black,
-            onSurface: Colors.white,
-            onBackground: Colors.white,
-            onError: Colors.white,
-          ).toTheme));
-    });
-
-    test(
-        'FCS7.00-Scheme-hc-dark: GIVEN FlexColorScheme() made with '
+        'FCS7.19-Scheme-hc-dark: GIVEN FlexColorScheme() made with '
         'raw high contrast dark color scheme '
         'EXPECT its ThemeData to be equal to one made with dark factory '
         'and color overrides. v4.2.0 test case.', () {
@@ -702,17 +681,21 @@ void main() {
             colorScheme: ColorScheme(
               brightness: Brightness.dark,
               primary: Color(0xffefb7ff),
-              onPrimary: Colors.black,
               primaryContainer: Color(0xffbe9eff),
               secondary: Color(0xff66fff9),
-              onSecondary: Colors.black,
               secondaryContainer: Color(0xff66fff9),
-              error: Color(0xff9b374d),
-              onError: Colors.black,
-              background: Color(0xff121212),
-              onBackground: Colors.white,
+              tertiary: Color(0xff03dac6),
+              tertiaryContainer: Color(0xff03dac6),
               surface: Color(0xff121212),
+              background: Color(0xff121212),
+              error: Color(0xff9b374d),
+              onPrimary: Colors.black,
+              onPrimaryContainer: Colors.black,
+              onSecondary: Colors.black,
+              onSecondaryContainer: Colors.black,
               onSurface: Colors.white,
+              onBackground: Colors.white,
+              onError: Colors.white,
             ),
           ).toTheme,
           equals(FlexColorScheme.dark(
@@ -720,19 +703,23 @@ void main() {
             primaryContainer: const Color(0xffbe9eff),
             secondary: const Color(0xff66fff9),
             secondaryContainer: const Color(0xff66fff9),
+            tertiary: const Color(0xff03dac6),
+            tertiaryContainer: const Color(0xff03dac6),
             surface: const Color(0xff121212),
             background: const Color(0xff121212),
             error: const Color(0xff9b374d),
             onPrimary: Colors.black,
+            onPrimaryContainer: Colors.black,
             onSecondary: Colors.black,
+            onSecondaryContainer: Colors.black,
             onSurface: Colors.white,
             onBackground: Colors.white,
-            onError: Colors.black,
+            onError: Colors.white,
           ).toTheme));
     });
 
     test(
-        'FCS7.00RawL String: GIVEN FlexColorScheme() made with min required '
+        'FCS7.20RawL String: GIVEN FlexColorScheme() made with min required '
         'light params that equals default Material light scheme '
         'EXPECT its ThemeData to be equal to one made with light scheme with '
         'no parameters.', () {
@@ -742,7 +729,7 @@ void main() {
             primary: FlexColor.materialLightPrimary,
             primaryContainer: FlexColor.materialLightPrimaryContainer,
             secondary: FlexColor.materialLightSecondary,
-            secondaryContainer: FlexColor.materialLightSecondaryContainer,
+            tertiary: FlexColor.materialLightTertiary,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(FlexColorScheme.light()
               .toTheme
@@ -750,7 +737,7 @@ void main() {
     });
 
     test(
-        'FCS7.00RawL: GIVEN FlexColorScheme() made with min required light '
+        'FCS7.21RawL: GIVEN FlexColorScheme() made with min required light '
         'params that equals default Material light scheme '
         'EXPECT its ThemeData to be equal to one made with light scheme with '
         'no parameters.', () {
@@ -760,12 +747,12 @@ void main() {
             primary: FlexColor.materialLightPrimary,
             primaryContainer: FlexColor.materialLightPrimaryContainer,
             secondary: FlexColor.materialLightSecondary,
-            secondaryContainer: FlexColor.materialLightSecondaryContainer,
+            tertiary: FlexColor.materialLightTertiary,
           ).toTheme,
           equals(FlexColorScheme.light().toTheme));
     });
     test(
-        'FCS7.00DefL: GIVEN FlexColorScheme.light made with no parameters '
+        'FCS7.22DefL: GIVEN FlexColorScheme.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
         FlexColorScheme.light().toTheme,
@@ -775,7 +762,7 @@ void main() {
       );
     });
     test(
-        'FCS7.00aL: GIVEN two FlexColorScheme.light made with identical '
+        'FCS7.23L: GIVEN two FlexColorScheme.light made with identical '
         'parameters EXPECT their ThemeData to be equal.', () {
       expect(
         FlexColorScheme.light(
@@ -787,7 +774,7 @@ void main() {
       );
     });
     test(
-        'FCS7.00bL: GIVEN a FlexColorScheme.light made with no '
+        'FCS7.24L: GIVEN a FlexColorScheme.light made with no '
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(
@@ -796,7 +783,7 @@ void main() {
       );
     });
     test(
-        'FCS7.00cL: GIVEN a FlexColorScheme.light made with colors '
+        'FCS7.25L: GIVEN a FlexColorScheme.light made with colors '
         'material EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(
@@ -807,7 +794,7 @@ void main() {
       );
     });
     test(
-        'FCS7.00dL: GIVEN a FlexColorScheme.light made with scheme '
+        'FCS7.26L: GIVEN a FlexColorScheme.light made with scheme '
         'material EXPECT ThemeData to be equal to one made with '
         'no params.', () {
       expect(
@@ -819,7 +806,7 @@ void main() {
     });
 
     test(
-        'FCS7.00RawD: GIVEN FlexColorScheme() made with min required dark '
+        'FCS7.27RawD: GIVEN FlexColorScheme() made with min required dark '
         'params that equals default Material dark scheme '
         'EXPECT its ThemeData to be equal to one made with dark scheme with '
         'no parameters.', () {
@@ -829,14 +816,14 @@ void main() {
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
             secondary: FlexColor.materialDarkSecondary,
-            secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            tertiary: FlexColor.materialDarkTertiary,
           ).toTheme,
           equals(FlexColorScheme.dark().toTheme));
     });
 
     // themeDark = Default material dark scheme colors.
     test(
-        'FCS7.00SwapL: GIVEN FlexColorScheme.light(swapColors: true) EXPECT it '
+        'FCS7.28SwapL: GIVEN FlexColorScheme.light(swapColors: true) EXPECT it '
         'to be equal to one made with light scheme colors swapped ', () {
       expect(
         FlexColorScheme.light(
@@ -845,16 +832,17 @@ void main() {
         equals(const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightSecondary,
-          primaryContainer: FlexColor.materialLightSecondaryContainer,
+          primaryContainer: FlexColor.materialLightSecondary,
           secondary: FlexColor.materialLightPrimary,
           secondaryContainer: FlexColor.materialLightPrimaryContainer,
+          tertiary: FlexColor.materialLightTertiary,
         ).toTheme),
       );
     });
 
     // themeDark = Default material dark scheme colors.
     test(
-        'FCS7.00SwapD: GIVEN FlexColorScheme.dark(swapColors: true) EXPECT it '
+        'FCS7.29SwapD: GIVEN FlexColorScheme.dark(swapColors: true) EXPECT it '
         'to be equal to one made with dark scheme colors swapped ', () {
       expect(
         FlexColorScheme.dark(
@@ -863,15 +851,16 @@ void main() {
         equals(const FlexColorScheme(
           brightness: Brightness.dark,
           primary: FlexColor.materialDarkSecondary,
-          primaryContainer: FlexColor.materialDarkSecondaryContainer,
+          primaryContainer: FlexColor.materialDarkSecondary,
           secondary: FlexColor.materialDarkPrimary,
           secondaryContainer: FlexColor.materialDarkPrimaryContainer,
+          tertiary: FlexColor.materialDarkTertiary,
         ).toTheme),
       );
     });
 
     test(
-        'FCS7.00DefL: GIVEN FlexColorScheme.dark made with no parameters '
+        'FCS7.30DefL: GIVEN FlexColorScheme.dark made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
         FlexColorScheme.dark().toTheme,
@@ -881,7 +870,7 @@ void main() {
       );
     });
     test(
-        'FCS7.00aD: GIVEN two FlexColorScheme.dark made with identical '
+        'FCS7.31D: GIVEN two FlexColorScheme.dark made with identical '
         'parameters EXPECT their ThemeData to be equal.', () {
       expect(
         FlexColorScheme.dark(
@@ -893,14 +882,14 @@ void main() {
       );
     });
     test(
-        'FCS7.00bD: GIVEN a FlexColorScheme.dark made with no '
+        'FCS7.32D: GIVEN a FlexColorScheme.dark made with no '
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(FlexColorScheme.dark().toTheme,
           FlexColorScheme.dark(scheme: FlexScheme.material).toTheme);
     });
     test(
-        'FCS7.00cD: GIVEN a FlexColorScheme.dark made with colors '
+        'FCS7.33D: GIVEN a FlexColorScheme.dark made with colors '
         'material EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(
@@ -913,7 +902,7 @@ void main() {
       );
     });
     test(
-        'FCS7.00dD: GIVEN a FlexColorScheme.dark made with scheme '
+        'FCS7.34D: GIVEN a FlexColorScheme.dark made with scheme '
         'material EXPECT ThemeData to be equal to one made with '
         'no params.', () {
       expect(
@@ -925,7 +914,7 @@ void main() {
     });
 
     test(
-        'FCS7.00eL: GIVEN a FlexColorScheme() made with scheme default '
+        'FCS7.35L: GIVEN a FlexColorScheme() made with scheme default '
         'constructor + light and '
         'material EXPECT ThemeData to be equal to an identical one.', () {
       expect(
@@ -934,20 +923,20 @@ void main() {
           primary: FlexColor.materialLightPrimary,
           primaryContainer: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
-          secondaryContainer: FlexColor.materialLightSecondaryContainer,
+          secondaryContainer: FlexColor.materialLightTertiary,
         ).toTheme,
         equals(const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightPrimary,
           primaryContainer: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
-          secondaryContainer: FlexColor.materialLightSecondaryContainer,
+          secondaryContainer: FlexColor.materialLightTertiary,
         ).toTheme),
       );
     });
 
     test(
-        'FCS7.00eD: GIVEN a FlexColorScheme() made with scheme default '
+        'FCS7.36D: GIVEN a FlexColorScheme() made with scheme default '
         'constructor + dark and '
         'material EXPECT ThemeData to be equal to an identical one.', () {
       expect(
@@ -956,14 +945,14 @@ void main() {
           primary: FlexColor.materialDarkPrimary,
           primaryContainer: FlexColor.materialDarkPrimaryContainer,
           secondary: FlexColor.materialDarkSecondary,
-          secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+          secondaryContainer: FlexColor.materialDarkTertiary,
         ).toTheme,
         equals(const FlexColorScheme(
           brightness: Brightness.dark,
           primary: FlexColor.materialDarkPrimary,
           primaryContainer: FlexColor.materialDarkPrimaryContainer,
           secondary: FlexColor.materialDarkSecondary,
-          secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+          secondaryContainer: FlexColor.materialDarkTertiary,
         ).toTheme),
       );
     });
@@ -974,7 +963,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.materialLightSecondaryContainer,
+      secondaryContainer: FlexColor.materialLightTertiary,
     ).toTheme;
     // themeDark = Default material dark scheme colors.
     final ThemeData themeDark = const FlexColorScheme(
@@ -982,7 +971,7 @@ void main() {
       primary: FlexColor.materialDarkPrimary,
       primaryContainer: FlexColor.materialDarkPrimaryContainer,
       secondary: FlexColor.materialDarkSecondary,
-      secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+      secondaryContainer: FlexColor.materialDarkTertiary,
       // For the dark theme to be equal to ThemeData.from colorscheme dark we
       // have to override the computed onError color for the standard Material
       // dark error color. This is because the Material standard defines
@@ -1307,7 +1296,7 @@ void main() {
       );
     });
     test(
-        'FCS7.296: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
+        'FCS7.29: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.labelColor primary.', () {
       expect(
@@ -1497,17 +1486,17 @@ void main() {
 
     test(
         'FCS7.47: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexAppBarStyle.material EXPECT appbar theme color '
-        'FlexColor.materialLightSurface.', () {
+        'WITH FlexAppBarStyle.custom EXPECT appbar theme color '
+        'colorScheme.tertiary.', () {
       expect(
         tLightS.appBarTheme.backgroundColor,
-        equals(tLightS.colorScheme.secondaryContainer),
+        equals(tLightS.colorScheme.tertiary),
       );
     });
     test(
         'FCS7.48: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexAppBarStyle.primary EXPECT appbar theme color '
-        'colorScheme.primary.', () {
+        'WITH FlexAppBarStyle.material EXPECT appbar theme color '
+        'default material dark surface.', () {
       expect(
         tDarkS.appBarTheme.backgroundColor,
         equals(FlexColor.materialDarkSurface),
@@ -1759,31 +1748,35 @@ void main() {
     // Test result with 2...3 colors and true black.
     //**************************************************************************
 
-    final FlexColorScheme sLightH2 = FlexColorScheme.light(
+    final FlexColorScheme fcsLightH2 = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       usedColors: 2,
     );
-    final ThemeData tLightH2 = sLightH2.toTheme;
-
-    final FlexColorScheme sLightH2Raw = FlexColorScheme.light(
+    final FlexColorScheme fcsLightH2Raw = FlexColorScheme.light(
         primary: const Color(0xffcd5758),
         primaryContainer: const Color(0xffba3738),
         secondary: const Color(0xff57c8d3),
         secondaryContainer: const Color(0xff33b7c4),
+        tertiary: const Color(0xffd97e7f),
+        tertiaryContainer: const Color(0xffdd8e8f),
         surface: const Color(0xfffdfafa),
         background: const Color(0xfff9eff0),
         error: const Color(0xff790000),
         scaffoldBackground: const Color(0xfffefdfd),
         appBarBackground: const Color(0xfff9eff0),
         dialogBackground: const Color(0xfffdfafa),
+        // These on colors can be left out and we still get correct match,
+        // maybe add test for it it too
+        // TODO(rydmike): Add test for overriding all onColors and not, compare.
         onPrimary: const Color(0xffffffff),
         onSecondary: const Color(0xff000000),
         onSurface: const Color(0xff000000),
         onBackground: const Color(0xff000000),
         onError: const Color(0xffffffff),
+        //
         tabBarStyle: FlexTabBarStyle.forBackground,
         appBarElevation: 0,
         bottomAppBarElevation: 0,
@@ -1798,25 +1791,56 @@ void main() {
         applyElevationOverlayColor: true,
         useSubThemes: false,
         subThemesData: null);
-    final ThemeData tLightH2Raw = sLightH2Raw.toTheme;
+
+    // Doing a string version for easy comparions.
+    test(
+        'FCS7.79a-scheme-toString: GIVEN a Equal Raw and FlexColorScheme.light '
+        'with heavy branding and 2 colors EXPECT equal ColorScheme string.',
+        () {
+      expect(
+        fcsLightH2.toScheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          fcsLightH2Raw.toScheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
 
     test(
-        'FCS7.79raw: GIVEN a Equal Raw and FlexColorScheme.light with '
-        'heavy branding and 2 colors EXPECT equal schemes.', () {
-      expect(sLightH2Raw, equals(sLightH2));
+        'FCS7.79b-scheme: GIVEN a Equal Raw and FlexColorScheme.light with '
+        'heavy branding and 2 colors EXPECT equal ColorScheme.toScheme.', () {
+      expect(
+        fcsLightH2.toScheme,
+        equals(
+          fcsLightH2Raw.toScheme,
+        ),
+      );
     });
     test(
-        'FCS7.79a: GIVEN a Equal Raw and FlexColorScheme.light with heavy '
-        'branding and 2 colors EXPECT equal strings.', () {
-      expect(sLightH2.toString(), equalsIgnoringHashCodes(sLightH2.toString()));
+        'FCS7.79c-string: GIVEN a Equal Raw and FlexColorScheme.light with '
+        'heavy branding and 2 colors EXPECT equal toStrings.', () {
+      expect(
+        fcsLightH2.toString(),
+        equalsIgnoringHashCodes(fcsLightH2Raw.toString()),
+      );
     });
     test(
-        'FCS7.79b: GIVEN a Equal Raw and FlexColorScheme.light with heavy '
-        'branding and 2 colors EXPECT toTheme equals.', () {
-      expect(tLightH2, equals(tLightH2Raw));
+        'FCS7.79d-object: GIVEN a Equal Raw and FlexColorScheme.light with '
+        'heavy branding and 2 colors EXPECT equal objects.', () {
+      expect(
+        fcsLightH2,
+        equals(fcsLightH2Raw),
+      );
+    });
+    test(
+        'FCS7.79e-theme: GIVEN a Equal Raw and FlexColorScheme.light with '
+        'heavy branding and 2 colors EXPECT toTheme equals.', () {
+      expect(
+        fcsLightH2.toTheme,
+        equals(fcsLightH2Raw.toTheme),
+      );
     });
 
-    final FlexColorScheme sDarkH2 = FlexColorScheme.dark(
+    final FlexColorScheme fcsDarkH2 = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
       surfaceStyle: FlexSurface.heavy,
       appBarStyle: FlexAppBarStyle.background,
@@ -1824,13 +1848,14 @@ void main() {
       darkIsTrueBlack: true,
       usedColors: 2,
     );
-    final ThemeData tDarkH2 = sDarkH2.toTheme;
 
-    final FlexColorScheme sDarkH2Raw = FlexColorScheme.dark(
+    final FlexColorScheme fcsDarkH2Raw = FlexColorScheme.dark(
         primary: const Color(0xffda8585),
         primaryContainer: const Color(0xffce5e5e),
         secondary: const Color(0xff68cdd7),
         secondaryContainer: const Color(0xff40c0cc),
+        tertiary: const Color(0xffe6acac),
+        tertiaryContainer: const Color(0xffebbcbc),
         surface: const Color(0xff090808),
         background: const Color(0xff140f0f),
         error: const Color(0xffcf6679),
@@ -1856,23 +1881,51 @@ void main() {
         applyElevationOverlayColor: true,
         useSubThemes: false,
         subThemesData: null);
-    final ThemeData tDarkH2Raw = sDarkH2Raw.toTheme;
 
     test(
-        'FCS7.80raw: GIVEN a Equal Raw and FlexColorScheme.dark with heavy '
-        'branding and 2 colors and true black EXPECT equals schemes.', () {
-      expect(sDarkH2, equals(sDarkH2Raw));
-    });
-    test(
-        'FCS7.80a: GIVEN a Equal Raw and FlexColorScheme.dark with heavy '
-        'branding and 2 colors and true black EXPECT equals strings.', () {
+        'FCS7.80a-scheme: GIVEN a Equal Raw and FlexColorScheme.dark with '
+        'heavy branding and 2 colors and true black '
+        'EXPECT equals scheme strings.', () {
       expect(
-          sDarkH2.toString(), equalsIgnoringHashCodes(sDarkH2Raw.toString()));
+        fcsDarkH2.toScheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          fcsDarkH2Raw.toScheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
-        'FCS7.80b: GIVEN a Equal Raw and FlexColorScheme.dark with heavy '
+        'FCS7.80b-scheme: GIVEN a Equal Raw and FlexColorScheme.dark with '
+        'heavy branding and 2 colors and true black EXPECT equal objects.', () {
+      expect(
+        fcsDarkH2.toScheme,
+        equals(fcsDarkH2Raw.toScheme),
+      );
+    });
+    test(
+        'FCS7.80c-string: GIVEN a Equal Raw and FlexColorScheme.dark with '
+        'heavy branding and 2 colors and true black '
+        'EXPECT equal object strings.', () {
+      expect(
+        fcsDarkH2.toString(),
+        equalsIgnoringHashCodes(fcsDarkH2Raw.toString()),
+      );
+    });
+    test(
+        'FCS7.80d-string: GIVEN a Equal Raw and FlexColorScheme.dark with '
+        'heavy branding and 2 colors and true black '
+        'EXPECT equal object strings.', () {
+      expect(
+        fcsDarkH2,
+        equals(fcsDarkH2Raw),
+      );
+    });
+    test(
+        'FCS7.80e: GIVEN a Equal Raw and FlexColorScheme.dark with heavy '
         'branding and 2 colors and true black EXPECT equals toTheme.', () {
-      expect(tDarkH2, equals(tDarkH2Raw));
+      expect(
+        fcsDarkH2.toTheme,
+        equals(fcsDarkH2Raw.toTheme),
+      );
     });
 
     final ThemeData tLightH3 = FlexColorScheme.light(

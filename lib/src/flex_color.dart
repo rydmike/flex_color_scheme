@@ -116,13 +116,12 @@ class FlexColor {
   /// Material standard default color for light secondary color.
   static const Color materialLightSecondary = Color(0xff03dac6);
 
-  /// Material standard default color for light secondary container color.
-  static const Color materialLightSecondaryContainer = Color(0xff018786);
+  /// Material standard default color for light tertiary color.
+  static const Color materialLightTertiary = Color(0xff018786);
 
   /// Material standard default color for light secondary variant color.
-  @Deprecated('Deprecated use materialLightSecondaryContainer instead.')
-  static const Color materialLightSecondaryVariant =
-      materialLightSecondaryContainer;
+  @Deprecated('Deprecated use materialLightTertiary instead.')
+  static const Color materialLightSecondaryVariant = materialLightTertiary;
 
   /// Material standard default color for dark primary color.
   static const Color materialDarkPrimary = Color(0xffbb86fc);
@@ -138,15 +137,14 @@ class FlexColor {
   /// color value is same as the light secondary color.
   static const Color materialDarkSecondary = Color(0xff03dac6);
 
-  /// Material standard default color for dark secondary container color, the
+  /// Material standard default color for dark tertiary color, the
   /// color value is same as the light secondary color.
-  static const Color materialDarkSecondaryContainer = Color(0xff03dac6);
+  static const Color materialDarkTertiary = Color(0xff03dac6);
 
   /// Material standard default color for dark secondary variant color, the
   /// color value is same as the light secondary color.
-  @Deprecated('Deprecated use materialDarkSecondaryContainer instead.')
-  static const Color materialDarkSecondaryVariant =
-      materialDarkSecondaryContainer;
+  @Deprecated('Deprecated use materialDarkTertiary instead.')
+  static const Color materialDarkSecondaryVariant = materialDarkTertiary;
 
   // High contrast versions of Material Guide colors as per those used
   // in ColorScheme.highContrastLight and ColorScheme.highContrastDark.
@@ -172,13 +170,12 @@ class FlexColor {
   /// Material high contrast color for light secondary color.
   static const Color materialLightSecondaryHc = Color(0xff66fff9);
 
-  /// Material high contrast color for light secondary container color.
-  static const Color materialLightSecondaryContainerHc = Color(0xff018786);
+  /// Material high contrast color for light tertiary color.
+  static const Color materialLightTertiaryHc = Color(0xff018786);
 
   /// Material high contrast color for light secondary variant color.
-  @Deprecated('Deprecated use materialLightSecondaryContainerHc instead.')
-  static const Color materialLightSecondaryVariantHc =
-      materialLightSecondaryContainerHc;
+  @Deprecated('Deprecated use materialLightTertiaryHc instead.')
+  static const Color materialLightSecondaryVariantHc = materialLightTertiaryHc;
 
   /// Material high contrast color for dark primary color.
   static const Color materialDarkPrimaryHc = Color(0xffefb7ff);
@@ -194,13 +191,12 @@ class FlexColor {
   /// Material high contrast color for dark secondary color.
   static const Color materialDarkSecondaryHc = Color(0xff66fff9);
 
-  /// Material high contrast color for dark secondary container color.
-  static const Color materialDarkSecondaryContainerHc = Color(0xff66fff9);
+  /// Material high contrast color for dark tertiary color.
+  static const Color materialDarkTertiaryHc = Color(0xff66fff9);
 
   /// Material high contrast color for dark secondary variant color.
-  @Deprecated('Deprecated use materialDarkSecondaryContainerHc instead.')
-  static const Color materialDarkSecondaryVariantHc =
-      materialDarkSecondaryContainerHc;
+  @Deprecated('Deprecated use materialDarkTertiaryHc instead.')
+  static const Color materialDarkSecondaryVariantHc = materialDarkTertiaryHc;
 
   // Material blue and light blue colors based scheme.
 
@@ -224,12 +220,12 @@ class FlexColor {
   /// Blue theme color for light secondary color.
   static const Color blueLightSecondary = Color(0xFF039BE5); // lightBlue600
 
-  /// Blue theme color for light secondary container color.
-  static const Color blueLightSecondaryContainer = Color(0xFF0277BD);
+  /// Blue theme color for light tertiary color.
+  static const Color blueLightTertiary = Color(0xFF0277BD);
 
   /// Blue theme color for light secondary variant color.
-  @Deprecated('Deprecated use blueLightSecondaryContainer instead.')
-  static const Color blueLightSecondaryVariant = blueLightSecondaryContainer;
+  @Deprecated('Deprecated use blueLightTertiary instead.')
+  static const Color blueLightSecondaryVariant = blueLightTertiary;
 
   /// Blue theme color for dark primary color.
   static const Color blueDarkPrimary = Color(0xFF90CAF9); // blue200
@@ -244,12 +240,12 @@ class FlexColor {
   /// Blue theme color for dark secondary color.
   static const Color blueDarkSecondary = Color(0xFF81D4FA); // lightBlue200
 
-  /// Blue theme color for dark secondary container color.
-  static const Color blueDarkSecondaryContainer = Color(0xFFE1F5FE); // lBlue50
+  /// Blue theme color for dark tertiary color.
+  static const Color blueDarkTertiary = Color(0xFFE1F5FE); // lBlue50
 
   /// Blue theme color for dark secondary variant color.
-  @Deprecated('Deprecated use blueDarkSecondaryContainer instead.')
-  static const Color blueDarkSecondaryVariant = blueDarkSecondaryContainer;
+  @Deprecated('Deprecated use blueDarkTertiary instead.')
+  static const Color blueDarkSecondaryVariant = blueDarkTertiary;
 
   // Material indigo and deep purple colors based scheme.
 
@@ -273,13 +269,12 @@ class FlexColor {
   /// Indigo theme color for light secondary color.
   static const Color indigoLightSecondary = Color(0xFF512DA8); // deepPurple700
 
-  /// Indigo theme color for light secondary container color.
-  static const Color indigoLightSecondaryContainer = Color(0xFF311B92);
+  /// Indigo theme color for light tertiary color.
+  static const Color indigoLightTertiary = Color(0xFF311B92);
 
   /// Indigo theme color for light secondary variant color.
-  @Deprecated('Deprecated use indigoLightSecondaryContainer instead.')
-  static const Color indigoLightSecondaryVariant =
-      indigoLightSecondaryContainer;
+  @Deprecated('Deprecated use indigoLightTertiary instead.')
+  static const Color indigoLightSecondaryVariant = indigoLightTertiary;
 
   /// Indigo theme color for dark primary color.
   static const Color indigoDarkPrimary = Color(0xFF7986CB); // indigo300
@@ -294,12 +289,12 @@ class FlexColor {
   /// Indigo theme color for dark secondary color.
   static const Color indigoDarkSecondary = Color(0xFF9575CD); // deepPurple300
 
-  /// Indigo theme color for dark secondary container color.
-  static const Color indigoDarkSecondaryContainer = Color(0xFF7E57C2);
+  /// Indigo theme color for dark tertiary color.
+  static const Color indigoDarkTertiary = Color(0xFF7E57C2);
 
   /// Indigo theme color for dark secondary variant color.
-  @Deprecated('Deprecated use indigoDarkSecondaryContainer instead.')
-  static const Color indigoDarkSecondaryVariant = indigoDarkSecondaryContainer;
+  @Deprecated('Deprecated use indigoDarkTertiary instead.')
+  static const Color indigoDarkSecondaryVariant = indigoDarkTertiary;
 
   // Hippie blue colors. Found some of them here:
   // https://www.designwizard.com/blog/design-trends/colour-combination
@@ -326,13 +321,12 @@ class FlexColor {
   /// Hippie blue theme color for light secondary color.
   static const Color hippieBlueLightSecondary = Color(0xFFFF4F58);
 
-  /// Hippie blue theme color for light secondary container color.
-  static const Color hippieBlueLightSecondaryContainer = Color(0xFFBF4A50);
+  /// Hippie blue theme color for light tertiary color.
+  static const Color hippieBlueLightTertiary = Color(0xFFBF4A50);
 
   /// Hippie blue theme color for light secondary variant color.
-  @Deprecated('Deprecated use hippieBlueLightSecondaryContainer instead.')
-  static const Color hippieBlueLightSecondaryVariant =
-      hippieBlueLightSecondaryContainer;
+  @Deprecated('Deprecated use hippieBlueLightTertiary instead.')
+  static const Color hippieBlueLightSecondaryVariant = hippieBlueLightTertiary;
 
   /// Hippie blue theme color for dark primary color.
   static const Color hippieBlueDarkPrimary = Color(0xFF669DB3);
@@ -348,13 +342,12 @@ class FlexColor {
   /// Hippie blue theme color for dark secondary color.
   static const Color hippieBlueDarkSecondary = Color(0xFFFC6E75);
 
-  /// Hippie blue theme color for dark secondary container color.
-  static const Color hippieBlueDarkSecondaryContainer = Color(0xFFF75F67);
+  /// Hippie blue theme color for dark tertiary color.
+  static const Color hippieBlueDarkTertiary = Color(0xFFF75F67);
 
   /// Hippie blue theme color for dark secondary variant color.
-  @Deprecated('Deprecated use hippieBlueDarkSecondaryContainer instead.')
-  static const Color hippieBlueDarkSecondaryVariant =
-      hippieBlueDarkSecondaryContainer;
+  @Deprecated('Deprecated use hippieBlueDarkTertiary instead.')
+  static const Color hippieBlueDarkSecondaryVariant = hippieBlueDarkTertiary;
 
   // Aqua tropical blue ocean scheme.
   // The scheme looks like clear tropical coral waters, hence the name.
@@ -379,13 +372,12 @@ class FlexColor {
   /// Aqua blue theme color for light secondary color.
   static const Color aquaBlueLightSecondary = Color(0xFF89D1C8);
 
-  /// Aqua blue theme color for light secondary container color.
-  static const Color aquaBlueLightSecondaryContainer = Color(0xFF61D4D4);
+  /// Aqua blue theme color for light tertiary color.
+  static const Color aquaBlueLightTertiary = Color(0xFF61D4D4);
 
   /// Aqua blue theme color for light secondary variant color.
-  @Deprecated('Deprecated use aquaBlueLightSecondaryContainer instead.')
-  static const Color aquaBlueLightSecondaryVariant =
-      aquaBlueLightSecondaryContainer;
+  @Deprecated('Deprecated use aquaBlueLightTertiary instead.')
+  static const Color aquaBlueLightSecondaryVariant = aquaBlueLightTertiary;
 
   /// Aqua blue theme color for dark primary color.
   static const Color aquaBlueDarkPrimary = Color(0xFF5DB3D5);
@@ -400,13 +392,12 @@ class FlexColor {
   /// Aqua blue theme color for dark secondary color.
   static const Color aquaBlueDarkSecondary = Color(0xFFA1E9DF);
 
-  /// Aqua blue theme color for dark secondary container color.
-  static const Color aquaBlueDarkSecondaryContainer = Color(0xFFA0E5E5);
+  /// Aqua blue theme color for dark tertiary color.
+  static const Color aquaBlueDarkTertiary = Color(0xFFA0E5E5);
 
   /// Aqua blue theme color for dark secondary variant color.
-  @Deprecated('Deprecated use aquaBlueDarkSecondaryContainer instead.')
-  static const Color aquaBlueDarkSecondaryVariant =
-      aquaBlueDarkSecondaryContainer;
+  @Deprecated('Deprecated use aquaBlueDarkTertiary instead.')
+  static const Color aquaBlueDarkSecondaryVariant = aquaBlueDarkTertiary;
 
   // Blue color scheme based on well known blue web brand colors.
 
@@ -431,13 +422,12 @@ class FlexColor {
   /// Brand blues theme color for light secondary color.
   static const Color brandBlueLightSecondary = Color(0xFF55ACEE); // Twitter
 
-  /// Brand blues theme color for light secondary container color.
-  static const Color brandBlueLightSecondaryContainer = Color(0xFF4285F4); // G
+  /// Brand blues theme color for light tertiary color.
+  static const Color brandBlueLightTertiary = Color(0xFF4285F4); // G
 
   /// Brand blues theme color for light secondary variant color.
-  @Deprecated('Deprecated use brandBlueLightSecondaryContainer instead.')
-  static const Color brandBlueLightSecondaryVariant =
-      brandBlueLightSecondaryContainer;
+  @Deprecated('Deprecated use brandBlueLightTertiary instead.')
+  static const Color brandBlueLightSecondaryVariant = brandBlueLightTertiary;
 
   /// Brand blues theme color for dark primary color.
   static const Color brandBlueDarkPrimary = Color(0xFF8B9DC3); // FB 2nd
@@ -453,13 +443,12 @@ class FlexColor {
   /// Brand blues theme color for dark secondary color.
   static const Color brandBlueDarkSecondary = Color(0xFFA0D1F5);
 
-  /// Brand blues theme color for dark secondary container color.
-  static const Color brandBlueDarkSecondaryContainer = Color(0xFF88B2F8);
+  /// Brand blues theme color for dark tertiary color.
+  static const Color brandBlueDarkTertiary = Color(0xFF88B2F8);
 
   /// Brand blues theme color for dark secondary variant color.
-  @Deprecated('Deprecated use brandBlueDarkSecondaryContainer instead.')
-  static const Color brandBlueDarkSecondaryVariant =
-      brandBlueDarkSecondaryContainer;
+  @Deprecated('Deprecated use brandBlueDarkTertiary instead.')
+  static const Color brandBlueDarkSecondaryVariant = brandBlueDarkTertiary;
 
   // Deep blue sea color scheme.
   // Colors looked like a deep abyss, hence the name.
@@ -484,13 +473,12 @@ class FlexColor {
   /// Deep blue theme color for light secondary color.
   static const Color deepBlueLightSecondary = Color(0xFF144955);
 
-  /// Deep blue theme color for light secondary container color.
-  static const Color deepBlueLightSecondaryContainer = Color(0xFF208399);
+  /// Deep blue theme color for light tertiary color.
+  static const Color deepBlueLightTertiary = Color(0xFF208399);
 
   /// Deep blue theme color for light secondary variant color.
-  @Deprecated('Deprecated use deepBlueLightSecondaryContainer instead.')
-  static const Color deepBlueLightSecondaryVariant =
-      deepBlueLightSecondaryContainer;
+  @Deprecated('Deprecated use deepBlueLightTertiary instead.')
+  static const Color deepBlueLightSecondaryVariant = deepBlueLightTertiary;
 
   /// Deep blue theme color for dark primary color.
   static const Color deepBlueDarkPrimary = Color(0xFF748BAC);
@@ -505,13 +493,12 @@ class FlexColor {
   /// Deep blue theme color for dark secondary color.
   static const Color deepBlueDarkSecondary = Color(0xFF539EAF);
 
-  /// Deep blue theme color for dark secondary container color.
-  static const Color deepBlueDarkSecondaryContainer = Color(0xFF219AB5);
+  /// Deep blue theme color for dark tertiary color.
+  static const Color deepBlueDarkTertiary = Color(0xFF219AB5);
 
   /// Deep blue theme color for dark secondary variant color.
-  @Deprecated('Deprecated use deepBlueDarkSecondaryContainer instead.')
-  static const Color deepBlueDarkSecondaryVariant =
-      deepBlueDarkSecondaryContainer;
+  @Deprecated('Deprecated use deepBlueDarkTertiary instead.')
+  static const Color deepBlueDarkSecondaryVariant = deepBlueDarkTertiary;
 
   // Pink Sakura color scheme.
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
@@ -536,13 +523,12 @@ class FlexColor {
   /// Sakura theme color for light secondary color.
   static const Color sakuraLightSecondary = Color(0xFFfbae9d); // Peach pink 80%
 
-  /// Sakura theme color for light secondary container color.
-  static const Color sakuraLightSecondaryContainer = Color(0xFFF39682); //Peach
+  /// Sakura theme color for light tertiary color.
+  static const Color sakuraLightTertiary = Color(0xFFF39682); //Peach
 
   /// Sakura theme color for light secondary variant color.
-  @Deprecated('Deprecated use sakuraLightSecondaryContainer instead.')
-  static const Color sakuraLightSecondaryVariant =
-      sakuraLightSecondaryContainer;
+  @Deprecated('Deprecated use sakuraLightTertiary instead.')
+  static const Color sakuraLightSecondaryVariant = sakuraLightTertiary;
 
   /// Sakura theme color for dark primary color.
   static const Color sakuraDarkPrimary = Color(0xFFeec4d8); // Peach pink 80%
@@ -558,12 +544,12 @@ class FlexColor {
   /// Sakura theme color for dark secondary color.
   static const Color sakuraDarkSecondary = Color(0xFFF5D6C6); // Peche
 
-  /// Sakura theme color for dark secondary container color.
-  static const Color sakuraDarkSecondaryContainer = Color(0xFFf7e0d4);
+  /// Sakura theme color for dark tertiary color.
+  static const Color sakuraDarkTertiary = Color(0xFFf7e0d4);
 
   /// Sakura theme color for dark secondary variant color.
-  @Deprecated('Deprecated use sakuraDarkSecondaryContainer instead.')
-  static const Color sakuraDarkSecondaryVariant = sakuraDarkSecondaryContainer;
+  @Deprecated('Deprecated use sakuraDarkTertiary instead.')
+  static const Color sakuraDarkSecondaryVariant = sakuraDarkTertiary;
 
   // Mandy Red and Viking blue color scheme.
   // Colors and scheme named by "name that color" library.
@@ -589,13 +575,12 @@ class FlexColor {
   /// Mandy red theme color for light secondary color.
   static const Color mandyRedLightSecondary = Color(0xFF57C8D3);
 
-  /// Mandy red theme color for light secondary container color.
-  static const Color mandyRedLightSecondaryContainer = Color(0xFF69B9CD);
+  /// Mandy red theme color for light tertiary color.
+  static const Color mandyRedLightTertiary = Color(0xFF69B9CD);
 
   /// Mandy red theme color for light secondary variant color.
-  @Deprecated('Deprecated use mandyRedLightSecondaryContainer instead.')
-  static const Color mandyRedLightSecondaryVariant =
-      mandyRedLightSecondaryContainer;
+  @Deprecated('Deprecated use mandyRedLightTertiary instead.')
+  static const Color mandyRedLightSecondaryVariant = mandyRedLightTertiary;
 
   /// Mandy red theme color for dark primary color.
   static const Color mandyRedDarkPrimary = Color(0xFFDA8585);
@@ -610,13 +595,12 @@ class FlexColor {
   /// Mandy red theme color for dark secondary color.
   static const Color mandyRedDarkSecondary = Color(0xFF68CDD7);
 
-  /// Mandy red theme color for dark secondary container color.
-  static const Color mandyRedDarkSecondaryContainer = Color(0xFF85C6D6);
+  /// Mandy red theme color for dark tertiary color.
+  static const Color mandyRedDarkTertiary = Color(0xFF85C6D6);
 
   /// Mandy red theme color for dark secondary variant color.
-  @Deprecated('Deprecated use mandyRedDarkSecondaryContainer instead.')
-  static const Color mandyRedDarkSecondaryVariant =
-      mandyRedDarkSecondaryContainer;
+  @Deprecated('Deprecated use mandyRedDarkTertiary instead.')
+  static const Color mandyRedDarkSecondaryVariant = mandyRedDarkTertiary;
 
   // Material red and pink color scheme.
 
@@ -640,12 +624,12 @@ class FlexColor {
   /// Red theme color for light secondary color.
   static const Color redLightSecondary = Color(0xFFAD1457); // pink800
 
-  /// Red theme color for light secondary container color.
-  static const Color redLightSecondaryContainer = Color(0xFF880E4F); // pink900
+  /// Red theme color for light tertiary color.
+  static const Color redLightTertiary = Color(0xFF880E4F); // pink900
 
   /// Red theme color for light secondary variant color.
-  @Deprecated('Deprecated use redLightSecondaryContainer instead.')
-  static const Color redLightSecondaryVariant = redLightSecondaryContainer;
+  @Deprecated('Deprecated use redLightTertiary instead.')
+  static const Color redLightSecondaryVariant = redLightTertiary;
 
   /// Red theme color for dark primary color.
   static const Color redDarkPrimary = Color(0xFFEF9A9A); // red200
@@ -660,12 +644,12 @@ class FlexColor {
   /// Red theme color for dark secondary color.
   static const Color redDarkSecondary = Color(0xFFF48FB1); // pink200
 
-  /// Red theme color for dark secondary container color.
-  static const Color redDarkSecondaryContainer = Color(0xFFF06292); // pink300
+  /// Red theme color for dark tertiary color.
+  static const Color redDarkTertiary = Color(0xFFF06292); // pink300
 
   /// Red theme color for dark secondary variant color.
-  @Deprecated('Deprecated use redDarkSecondaryContainer instead.')
-  static const Color redDarkSecondaryVariant = redDarkSecondaryContainer;
+  @Deprecated('Deprecated use redDarkTertiary instead.')
+  static const Color redDarkSecondaryVariant = redDarkTertiary;
 
   // Custom red wine palette
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
@@ -692,13 +676,12 @@ class FlexColor {
   /// Red wine theme color for light secondary color.
   static const Color redWineLightSecondary = Color(0xFFA70043);
 
-  /// Red wine theme color for light secondary container color.
-  static const Color redWineLightSecondaryContainer = Color(0xFFA4121C);
+  /// Red wine theme color for light tertiary color.
+  static const Color redWineLightTertiary = Color(0xFFA4121C);
 
   /// Red wine theme color for light secondary variant color.
-  @Deprecated('Deprecated use redWineLightSecondaryContainer instead.')
-  static const Color redWineLightSecondaryVariant =
-      redWineLightSecondaryContainer;
+  @Deprecated('Deprecated use redWineLightTertiary instead.')
+  static const Color redWineLightSecondaryVariant = redWineLightTertiary;
 
   /// Red wine theme color for dark primary color.
   static const Color redWineDarkPrimary = Color(0xFFE4677C); //0xFFe4677c
@@ -713,13 +696,12 @@ class FlexColor {
   /// Red wine theme color for dark secondary color.
   static const Color redWineDarkSecondary = Color(0xFFC87A98); // 0xFFc8374d
 
-  /// Red wine theme color for dark secondary container color.
-  static const Color redWineDarkSecondaryContainer = Color(0xFFBD545B);
+  /// Red wine theme color for dark tertiary color.
+  static const Color redWineDarkTertiary = Color(0xFFBD545B);
 
   /// Red wine theme color for dark secondary variant color.
-  @Deprecated('Deprecated use redWineDarkSecondaryContainer instead.')
-  static const Color redWineDarkSecondaryVariant =
-      redWineDarkSecondaryContainer;
+  @Deprecated('Deprecated use redWineDarkTertiary instead.')
+  static const Color redWineDarkSecondaryVariant = redWineDarkTertiary;
 
   // Purple brown theme.
   // Color sources: https://visme.co/blog/website-color-schemes/
@@ -746,13 +728,13 @@ class FlexColor {
   /// Purple brown theme color for light secondary color.
   static const Color purpleBrownLightSecondary = Color(0xFF60234F);
 
-  /// Purple brown theme color for light secondary container color.
-  static const Color purpleBrownLightSecondaryContainer = Color(0xFF4A0635);
+  /// Purple brown theme color for light tertiary color.
+  static const Color purpleBrownLightTertiary = Color(0xFF4A0635);
 
   /// Purple brown theme color for light secondary variant color.
-  @Deprecated('Deprecated use purpleBrownLightSecondaryContainer instead.')
+  @Deprecated('Deprecated use purpleBrownLightTertiary instead.')
   static const Color purpleBrownLightSecondaryVariant =
-      purpleBrownLightSecondaryContainer;
+      purpleBrownLightTertiary;
 
   /// Purple brown theme color for dark primary color.
   static const Color purpleBrownDarkPrimary = Color(0xFFA98085);
@@ -768,13 +750,12 @@ class FlexColor {
   /// Purple brown theme color for dark secondary color.
   static const Color purpleBrownDarkSecondary = Color(0xFF975384);
 
-  /// Purple brown theme color for dark secondary container color.
-  static const Color purpleBrownDarkSecondaryContainer = Color(0xFF5F4C5A);
+  /// Purple brown theme color for dark tertiary color.
+  static const Color purpleBrownDarkTertiary = Color(0xFF5F4C5A);
 
   /// Purple brown theme color for dark secondary variant color.
-  @Deprecated('Deprecated use purpleBrownDarkSecondaryContainer instead.')
-  static const Color purpleBrownDarkSecondaryVariant =
-      purpleBrownDarkSecondaryContainer;
+  @Deprecated('Deprecated use purpleBrownDarkTertiary instead.')
+  static const Color purpleBrownDarkSecondaryVariant = purpleBrownDarkTertiary;
 
   // Material green and cyan color scheme.
 
@@ -798,12 +779,12 @@ class FlexColor {
   /// Green theme color for light secondary color.
   static const Color greenLightSecondary = Color(0xFF00695C); // cyan800
 
-  /// Green theme color for light secondary container color.
-  static const Color greenLightSecondaryContainer = Color(0xFF004D40);
+  /// Green theme color for light tertiary color.
+  static const Color greenLightTertiary = Color(0xFF004D40);
 
   /// Green theme color for light secondary variant color.
-  @Deprecated('Deprecated use greenLightSecondaryContainer instead.')
-  static const Color greenLightSecondaryVariant = greenLightSecondaryContainer;
+  @Deprecated('Deprecated use greenLightTertiary instead.')
+  static const Color greenLightSecondaryVariant = greenLightTertiary;
 
   /// Green theme color for dark primary color.
   static const Color greenDarkPrimary = Color(0xFFA5D6A7); // green200
@@ -818,12 +799,12 @@ class FlexColor {
   /// Green theme color for dark secondary color.
   static const Color greenDarkSecondary = Color(0xFF80CBC4); // cyan200
 
-  /// Green theme color for dark secondary container color.
-  static const Color greenDarkSecondaryContainer = Color(0xFF4DB6AC); // cyan300
+  /// Green theme color for dark tertiary color.
+  static const Color greenDarkTertiary = Color(0xFF4DB6AC); // cyan300
 
   /// Green theme color for dark secondary variant color.
-  @Deprecated('Deprecated use greenDarkSecondaryContainer instead.')
-  static const Color greenDarkSecondaryVariant = greenDarkSecondaryContainer;
+  @Deprecated('Deprecated use greenDarkTertiary instead.')
+  static const Color greenDarkSecondaryVariant = greenDarkTertiary;
 
   // Custom Eden color scheme.
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
@@ -849,12 +830,12 @@ class FlexColor {
   /// Money green theme color for light secondary color.
   static const Color moneyLightSecondary = Color(0xFF797b3a); // Guacamole 35%
 
-  /// Money green theme color for light secondary container color.
-  static const Color moneyLightSecondaryContainer = Color(0xFF555729);
+  /// Money green theme color for light tertiary color.
+  static const Color moneyLightTertiary = Color(0xFF555729);
 
   /// Money green theme color for light secondary variant color.
-  @Deprecated('Deprecated use moneyLightSecondaryContainer instead.')
-  static const Color moneyLightSecondaryVariant = moneyLightSecondaryContainer;
+  @Deprecated('Deprecated use moneyLightTertiary instead.')
+  static const Color moneyLightSecondaryVariant = moneyLightTertiary;
 
   /// Money green theme color for dark primary color.
   static const Color moneyDarkPrimary = Color(0xFF7AB893);
@@ -869,12 +850,12 @@ class FlexColor {
   /// Money green theme color for dark secondary color.
   static const Color moneyDarkSecondary = Color(0xFFd5d6a8); // Guacamole 75%
 
-  /// Money green theme color for dark secondary container color.
-  static const Color moneyDarkSecondaryContainer = Color(0xFFbbbe74); //Gua. 60%
+  /// Money green theme color for dark tertiary color.
+  static const Color moneyDarkTertiary = Color(0xFFbbbe74); //Gua. 60%
 
   /// Money green theme color for dark secondary variant color.
-  @Deprecated('Deprecated use moneyDarkSecondaryContainer instead.')
-  static const Color moneyDarkSecondaryVariant = moneyDarkSecondaryContainer;
+  @Deprecated('Deprecated use moneyDarkTertiary instead.')
+  static const Color moneyDarkSecondaryVariant = moneyDarkTertiary;
 
   // Jungle green color scheme.
   // Looks like all the green colors in a rain forest, hence the name.
@@ -899,13 +880,12 @@ class FlexColor {
   /// Jungle green theme color for light secondary color.
   static const Color jungleLightSecondary = Color(0xFF007256);
 
-  /// Jungle green theme color for light secondary container color.
-  static const Color jungleLightSecondaryContainer = Color(0xFF295300);
+  /// Jungle green theme color for light tertiary color.
+  static const Color jungleLightTertiary = Color(0xFF295300);
 
   /// Jungle green theme color for light secondary variant color.
-  @Deprecated('Deprecated use jungleLightSecondaryContainer instead.')
-  static const Color jungleLightSecondaryVariant =
-      jungleLightSecondaryContainer;
+  @Deprecated('Deprecated use jungleLightTertiary instead.')
+  static const Color jungleLightSecondaryVariant = jungleLightTertiary;
 
   /// Jungle green theme color for dark primary color.
   static const Color jungleDarkPrimary = Color(0xFF519E67);
@@ -920,12 +900,12 @@ class FlexColor {
   /// Jungle green theme color for dark secondary color.
   static const Color jungleDarkSecondary = Color(0xFF479985);
 
-  /// Jungle green theme color for dark secondary container color.
-  static const Color jungleDarkSecondaryContainer = Color(0xFF73A497);
+  /// Jungle green theme color for dark tertiary color.
+  static const Color jungleDarkTertiary = Color(0xFF73A497);
 
   /// Jungle green theme color for dark secondary variant color.
-  @Deprecated('Deprecated use jungleDarkSecondaryContainer instead.')
-  static const Color jungleDarkSecondaryVariant = jungleDarkSecondaryContainer;
+  @Deprecated('Deprecated use jungleDarkTertiary instead.')
+  static const Color jungleDarkSecondaryVariant = jungleDarkTertiary;
 
   // Custom Legal color scheme.
   // The colors are suitable for a law firm, named it accordingly, with a twist.
@@ -950,13 +930,12 @@ class FlexColor {
   /// Grey law theme color for light secondary color.
   static const Color greyLawLightSecondary = Color(0xFF521D82);
 
-  /// Grey law theme color for light secondary container color.
-  static const Color greyLawLightSecondaryContainer = Color(0xFF2C314F);
+  /// Grey law theme color for light tertiary color.
+  static const Color greyLawLightTertiary = Color(0xFF2C314F);
 
   /// Grey law theme color for light secondary variant color.
-  @Deprecated('Deprecated use greyLawLightSecondaryContainer instead.')
-  static const Color greyLawLightSecondaryVariant =
-      greyLawLightSecondaryContainer;
+  @Deprecated('Deprecated use greyLawLightTertiary instead.')
+  static const Color greyLawLightSecondaryVariant = greyLawLightTertiary;
 
   /// Grey law theme color for dark primary color.
   static const Color greyLawDarkPrimary = Color(0xFF90A4AE); //BlueGrey300
@@ -971,13 +950,12 @@ class FlexColor {
   /// Grey law theme color for dark secondary color.
   static const Color greyLawDarkSecondary = Color(0xFF815AA3);
 
-  /// Grey law theme color for dark secondary container color.
-  static const Color greyLawDarkSecondaryContainer = Color(0xFF373D5C);
+  /// Grey law theme color for dark tertiary color.
+  static const Color greyLawDarkTertiary = Color(0xFF373D5C);
 
   /// Grey law theme color for dark secondary variant color.
-  @Deprecated('Deprecated use greyLawDarkSecondaryContainer instead.')
-  static const Color greyLawDarkSecondaryVariant =
-      greyLawDarkSecondaryContainer;
+  @Deprecated('Deprecated use greyLawDarkTertiary instead.')
+  static const Color greyLawDarkSecondaryVariant = greyLawDarkTertiary;
 
   // Wild willow and wasabi greenish and purple orchid inspired colors.
   // Colors and theme from "name that color" library.
@@ -1002,13 +980,12 @@ class FlexColor {
   /// Wild Willow and wasabi green theme color for light secondary color.
   static const Color wasabiLightSecondary = Color(0xFF893789);
 
-  /// Willow and wasabi green theme color for light secondary container color.
-  static const Color wasabiLightSecondaryContainer = Color(0xFF5E3974);
+  /// Willow and wasabi green theme color for light tertiary color.
+  static const Color wasabiLightTertiary = Color(0xFF5E3974);
 
   /// Willow and wasabi green theme color for light secondary variant color.
-  @Deprecated('Deprecated use wasabiLightSecondaryContainer instead.')
-  static const Color wasabiLightSecondaryVariant =
-      wasabiLightSecondaryContainer;
+  @Deprecated('Deprecated use wasabiLightTertiary instead.')
+  static const Color wasabiLightSecondaryVariant = wasabiLightTertiary;
 
   /// Willow and wasabi green theme color for dark primary color.
   static const Color wasabiDarkPrimary = Color(0xFFC3CB77);
@@ -1023,12 +1000,12 @@ class FlexColor {
   /// Willow and wasabi green theme color for dark secondary color.
   static const Color wasabiDarkSecondary = Color(0xFFDF9ADF);
 
-  /// Willow and wasabi green theme color for dark secondary container color.
-  static const Color wasabiDarkSecondaryContainer = Color(0xFFA664CD);
+  /// Willow and wasabi green theme color for dark tertiary color.
+  static const Color wasabiDarkTertiary = Color(0xFFA664CD);
 
   /// Willow and wasabi green theme color for dark secondary variant color.
-  @Deprecated('Deprecated use wasabiDarkSecondaryContainer instead.')
-  static const Color wasabiDarkSecondaryVariant = wasabiDarkSecondaryContainer;
+  @Deprecated('Deprecated use wasabiDarkTertiary instead.')
+  static const Color wasabiDarkSecondaryVariant = wasabiDarkTertiary;
 
   // Gold orange colors, like a tropical evening sunset.
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
@@ -1053,12 +1030,12 @@ class FlexColor {
   /// Gold sunset theme color for light secondary color.
   static const Color goldLightSecondary = Color(0xFFEF6C00); // Orange800
 
-  /// Gold sunset theme color for light secondary container color.
-  static const Color goldLightSecondaryContainer = Color(0xFFb36832);
+  /// Gold sunset theme color for light tertiary color.
+  static const Color goldLightTertiary = Color(0xFFb36832);
 
   /// Gold sunset theme color for light secondary variant color.
-  @Deprecated('Deprecated use goldLightSecondaryContainer instead.')
-  static const Color goldLightSecondaryVariant = goldLightSecondaryContainer;
+  @Deprecated('Deprecated use goldLightTertiary instead.')
+  static const Color goldLightSecondaryVariant = goldLightTertiary;
 
   /// Gold sunset theme color for dark primary color.
   static const Color goldDarkPrimary = Color(0xFFeda85e); // Dark cheddar L 65%
@@ -1073,12 +1050,12 @@ class FlexColor {
   /// Gold sunset theme color for dark secondary color.
   static const Color goldDarkSecondary = Color(0xFFd28f60); // S.almond L 60%
 
-  /// Gold sunset theme color for dark secondary container color.
-  static const Color goldDarkSecondaryContainer = Color(0xFFddab88);
+  /// Gold sunset theme color for dark tertiary color.
+  static const Color goldDarkTertiary = Color(0xFFddab88);
 
   /// Gold sunset theme color for dark secondary variant color.
-  @Deprecated('Deprecated use goldDarkSecondaryContainer instead.')
-  static const Color goldDarkSecondaryVariant = goldDarkSecondaryContainer;
+  @Deprecated('Deprecated use goldDarkTertiary instead.')
+  static const Color goldDarkSecondaryVariant = goldDarkTertiary;
 
   // Mango mojito colored scheme.
   // Color sources: https://www.w3schools.com/colors/colors_2019.asp
@@ -1104,12 +1081,12 @@ class FlexColor {
   /// Mango mojito theme color for light secondary color.
   static const Color mangoLightSecondary = Color(0xFF8D9440);
 
-  /// Mango mojito theme color for light secondary container color.
-  static const Color mangoLightSecondaryContainer = Color(0xFF616247);
+  /// Mango mojito theme color for light tertiary color.
+  static const Color mangoLightTertiary = Color(0xFF616247);
 
   /// Mango mojito theme color for light secondary variant color.
-  @Deprecated('Deprecated use mangoLightSecondaryContainer instead.')
-  static const Color mangoLightSecondaryVariant = mangoLightSecondaryContainer;
+  @Deprecated('Deprecated use mangoLightTertiary instead.')
+  static const Color mangoLightSecondaryVariant = mangoLightTertiary;
 
   /// Mango mojito theme color for dark primary color.
   static const Color mangoDarkPrimary = Color(0xFFDEB059);
@@ -1124,12 +1101,12 @@ class FlexColor {
   /// Mango mojito theme color for dark secondary color.
   static const Color mangoDarkSecondary = Color(0xFFAFB479);
 
-  /// Mango mojito theme color for dark secondary container color.
-  static const Color mangoDarkSecondaryContainer = Color(0xFF81816C);
+  /// Mango mojito theme color for dark tertiary color.
+  static const Color mangoDarkTertiary = Color(0xFF81816C);
 
   /// Mango mojito theme color for dark secondary variant color.
-  @Deprecated('Deprecated use mangoDarkSecondaryContainer instead.')
-  static const Color mangoDarkSecondaryVariant = mangoDarkSecondaryContainer;
+  @Deprecated('Deprecated use mangoDarkTertiary instead.')
+  static const Color mangoDarkSecondaryVariant = mangoDarkTertiary;
 
   // Material amber and blue accent colors based scheme.
 
@@ -1154,12 +1131,12 @@ class FlexColor {
   /// Amber theme color for light secondary color.
   static const Color amberLightSecondary = Color(0xFF2979FF); // BlueAccent400
 
-  /// Amber theme color for light secondary container color.
-  static const Color amberLightSecondaryContainer = Color(0xFF2962FF);
+  /// Amber theme color for light tertiary color.
+  static const Color amberLightTertiary = Color(0xFF2962FF);
 
   /// Amber theme color for light secondary variant color.
-  @Deprecated('Deprecated use amberLightSecondaryContainer instead.')
-  static const Color amberLightSecondaryVariant = amberLightSecondaryContainer;
+  @Deprecated('Deprecated use amberLightTertiary instead.')
+  static const Color amberLightSecondaryVariant = amberLightTertiary;
 
   /// Amber theme color for dark primary color.
   static const Color amberDarkPrimary = Color(0xFFFFB300); // Amber600
@@ -1174,12 +1151,12 @@ class FlexColor {
   /// Amber theme color for dark secondary color.
   static const Color amberDarkSecondary = Color(0xFF82B1FF); // BlueAccent100
 
-  /// Amber theme color for dark secondary container color.
-  static const Color amberDarkSecondaryContainer = Color(0xFF448AFF);
+  /// Amber theme color for dark tertiary color.
+  static const Color amberDarkTertiary = Color(0xFF448AFF);
 
   /// Amber theme color for dark secondary variant color.
-  @Deprecated('Deprecated use amberDarkSecondaryContainer instead.')
-  static const Color amberDarkSecondaryVariant = amberDarkSecondaryContainer;
+  @Deprecated('Deprecated use amberDarkTertiary instead.')
+  static const Color amberDarkSecondaryVariant = amberDarkTertiary;
 
   // Vesuvius burned and eden green scheme.
   // Colors and scheme named by "name that color" library.
@@ -1205,13 +1182,13 @@ class FlexColor {
   /// Vesuvius burned theme color for light secondary color.
   static const Color vesuviusBurnLightSecondary = Color(0xFF185358);
 
-  /// Vesuvius burned theme color for light secondary container color.
-  static const Color vesuviusBurnLightSecondaryContainer = Color(0xFF144447);
+  /// Vesuvius burned theme color for light tertiary color.
+  static const Color vesuviusBurnLightTertiary = Color(0xFF144447);
 
   /// Vesuvius burned theme color for light secondary variant color.
-  @Deprecated('Deprecated use vesuviusBurnLightSecondaryContainer instead.')
+  @Deprecated('Deprecated use vesuviusBurnLightTertiary instead.')
   static const Color vesuviusBurnLightSecondaryVariant =
-      vesuviusBurnLightSecondaryContainer;
+      vesuviusBurnLightTertiary;
 
   /// Vesuvius burned theme color for dark primary color.
   static const Color vesuviusBurnDarkPrimary = Color(0xFFD17D53);
@@ -1227,13 +1204,13 @@ class FlexColor {
   /// Vesuvius burned theme color for dark secondary color.
   static const Color vesuviusBurnDarkSecondary = Color(0xFF5B8A8E);
 
-  /// Vesuvius burned theme color for dark secondary container color.
-  static const Color vesuviusBurnDarkSecondaryContainer = Color(0xFF3A7175);
+  /// Vesuvius burned theme color for dark tertiary color.
+  static const Color vesuviusBurnDarkTertiary = Color(0xFF3A7175);
 
   /// Vesuvius burned theme color for dark secondary variant color.
-  @Deprecated('Deprecated use vesuviusBurnDarkSecondaryContainer instead.')
+  @Deprecated('Deprecated use vesuviusBurnDarkTertiary instead.')
   static const Color vesuviusBurnDarkSecondaryVariant =
-      vesuviusBurnDarkSecondaryContainer;
+      vesuviusBurnDarkTertiary;
 
   // Material deepPurple and light blue accent colors based scheme.
 
@@ -1258,13 +1235,12 @@ class FlexColor {
   /// Indigo theme color for light secondary color.
   static const Color deepPurpleLightSecondary = Color(0xFF0091EA); // lba700
 
-  /// Indigo theme color for light secondary container color.
-  static const Color deepPurpleLightSecondaryContainer = Color(0xFF00B0FF);
+  /// Indigo theme color for light tertiary color.
+  static const Color deepPurpleLightTertiary = Color(0xFF00B0FF);
 
   /// Indigo theme color for light secondary variant color.
-  @Deprecated('Deprecated use deepPurpleLightSecondaryContainer instead.')
-  static const Color deepPurpleLightSecondaryVariant =
-      deepPurpleLightSecondaryContainer;
+  @Deprecated('Deprecated use deepPurpleLightTertiary instead.')
+  static const Color deepPurpleLightSecondaryVariant = deepPurpleLightTertiary;
 
   /// Indigo theme color for dark primary color.
   static const Color deepPurpleDarkPrimary = Color(0xFFB39DDB); // dp200
@@ -1280,13 +1256,12 @@ class FlexColor {
   /// Indigo theme color for dark secondary color.
   static const Color deepPurpleDarkSecondary = Color(0xFF80D8FF); // lba100
 
-  /// Indigo theme color for dark secondary container color.
-  static const Color deepPurpleDarkSecondaryContainer = Color(0xFF40C4FF);
+  /// Indigo theme color for dark tertiary color.
+  static const Color deepPurpleDarkTertiary = Color(0xFF40C4FF);
 
   /// Indigo theme color for dark secondary variant color.
-  @Deprecated('Deprecated use deepPurpleDarkSecondaryContainer instead.')
-  static const Color deepPurpleDarkSecondaryVariant =
-      deepPurpleDarkSecondaryContainer;
+  @Deprecated('Deprecated use deepPurpleDarkTertiary instead.')
+  static const Color deepPurpleDarkSecondaryVariant = deepPurpleDarkTertiary;
 
   // Ebony Clay super dark blue grey scheme.
   // Colors and scheme named by "name that color" library.
@@ -1312,13 +1287,12 @@ class FlexColor {
   /// Ebony clay theme color for light secondary color.
   static const Color ebonyClayLightSecondary = Color(0xFF006B54);
 
-  /// Ebony clay theme color for light secondary container color.
-  static const Color ebonyClayLightSecondaryContainer = Color(0xFF004B3B);
+  /// Ebony clay theme color for light tertiary color.
+  static const Color ebonyClayLightTertiary = Color(0xFF004B3B);
 
   /// Ebony clay theme color for light secondary variant color.
-  @Deprecated('Deprecated use ebonyClayLightSecondaryContainer instead.')
-  static const Color ebonyClayLightSecondaryVariant =
-      ebonyClayLightSecondaryContainer;
+  @Deprecated('Deprecated use ebonyClayLightTertiary instead.')
+  static const Color ebonyClayLightSecondaryVariant = ebonyClayLightTertiary;
 
   /// Ebony clay theme color for dark primary color.
   static const Color ebonyClayDarkPrimary = Color(0xFF4E597D);
@@ -1334,13 +1308,12 @@ class FlexColor {
   /// Ebony clay theme color for dark secondary color.
   static const Color ebonyClayDarkSecondary = Color(0xFF4BA390);
 
-  /// Ebony clay theme color for dark secondary container color.
-  static const Color ebonyClayDarkSecondaryContainer = Color(0xFF3D8475);
+  /// Ebony clay theme color for dark tertiary color.
+  static const Color ebonyClayDarkTertiary = Color(0xFF3D8475);
 
   /// Ebony clay theme color for dark secondary variant color.
-  @Deprecated('Deprecated use ebonyClayDarkSecondaryContainer instead.')
-  static const Color ebonyClayDarkSecondaryVariant =
-      ebonyClayDarkSecondaryContainer;
+  @Deprecated('Deprecated use ebonyClayDarkTertiary instead.')
+  static const Color ebonyClayDarkSecondaryVariant = ebonyClayDarkTertiary;
 
   // Barossa dark purple and cardin green scheme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1365,13 +1338,12 @@ class FlexColor {
   /// Barossa theme color for light secondary color.
   static const Color barossaLightSecondary = Color(0xFF00341A);
 
-  /// Barossa theme color for light secondary container color.
-  static const Color barossaLightSecondaryContainer = Color(0xFF124C2F);
+  /// Barossa theme color for light tertiary color.
+  static const Color barossaLightTertiary = Color(0xFF124C2F);
 
   /// Barossa theme color for light secondary variant color.
-  @Deprecated('Deprecated use barossaLightSecondaryContainer instead.')
-  static const Color barossaLightSecondaryVariant =
-      barossaLightSecondaryContainer;
+  @Deprecated('Deprecated use barossaLightTertiary instead.')
+  static const Color barossaLightSecondaryVariant = barossaLightTertiary;
 
   /// Barossa theme color for dark primary color.
   static const Color barossaDarkPrimary = Color(0xFF94667E);
@@ -1386,13 +1358,12 @@ class FlexColor {
   /// Barossa theme color for dark secondary color.
   static const Color barossaDarkSecondary = Color(0xFF6B9882);
 
-  /// Barossa theme color for dark secondary container color.
-  static const Color barossaDarkSecondaryContainer = Color(0xFF599B7B);
+  /// Barossa theme color for dark tertiary color.
+  static const Color barossaDarkTertiary = Color(0xFF599B7B);
 
   /// Barossa theme color for dark secondary variant color.
-  @Deprecated('Deprecated use barossaDarkSecondaryContainer instead.')
-  static const Color barossaDarkSecondaryVariant =
-      barossaDarkSecondaryContainer;
+  @Deprecated('Deprecated use barossaDarkTertiary instead.')
+  static const Color barossaDarkSecondaryVariant = barossaDarkTertiary;
 
   // Shark grey and orange ecstasy scheme.
   // Color scheme named by "name that color" library using the light colors.
@@ -1417,12 +1388,12 @@ class FlexColor {
   /// Shark ecstasy theme color for light secondary color.
   static const Color sharkLightSecondary = Color(0xFFFB8122);
 
-  /// Shark ecstasy theme color for light secondary container color.
-  static const Color sharkLightSecondaryContainer = Color(0xFFEA9654);
+  /// Shark ecstasy theme color for light tertiary color.
+  static const Color sharkLightTertiary = Color(0xFFEA9654);
 
   /// Shark ecstasy theme color for light secondary variant color.
-  @Deprecated('Deprecated use sharkLightSecondaryContainer instead.')
-  static const Color sharkLightSecondaryVariant = sharkLightSecondaryContainer;
+  @Deprecated('Deprecated use sharkLightTertiary instead.')
+  static const Color sharkLightSecondaryVariant = sharkLightTertiary;
 
   /// Shark ecstasy theme color for dark primary color.
   static const Color sharkDarkPrimary = Color(0xFF777A7E);
@@ -1437,12 +1408,12 @@ class FlexColor {
   /// Shark ecstasy theme color for dark secondary color.
   static const Color sharkDarkSecondary = Color(0xFFFCB075);
 
-  /// Shark ecstasy theme color for dark secondary container color.
-  static const Color sharkDarkSecondaryContainer = Color(0xFFEFB383);
+  /// Shark ecstasy theme color for dark tertiary color.
+  static const Color sharkDarkTertiary = Color(0xFFEFB383);
 
   /// Shark ecstasy theme color for dark secondary variant color.
-  @Deprecated('Deprecated use sharkDarkSecondaryContainer instead.')
-  static const Color sharkDarkSecondaryVariant = sharkDarkSecondaryContainer;
+  @Deprecated('Deprecated use sharkDarkTertiary instead.')
+  static const Color sharkDarkSecondaryVariant = sharkDarkTertiary;
 
   // Big stone blue and neon tulip-three yellow scheme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1468,13 +1439,12 @@ class FlexColor {
   /// Big stone theme color for light secondary color.
   static const Color bigStoneLightSecondary = Color(0xFFE59A18);
 
-  /// Big stone theme color for light secondary container color.
-  static const Color bigStoneLightSecondaryContainer = Color(0xFFF0B03F);
+  /// Big stone theme color for light tertiary color.
+  static const Color bigStoneLightTertiary = Color(0xFFF0B03F);
 
   /// Big stone theme color for light secondary variant color.
-  @Deprecated('Deprecated use bigStoneLightSecondaryContainer instead.')
-  static const Color bigStoneLightSecondaryVariant =
-      bigStoneLightSecondaryContainer;
+  @Deprecated('Deprecated use bigStoneLightTertiary instead.')
+  static const Color bigStoneLightSecondaryVariant = bigStoneLightTertiary;
 
   /// Big stone theme color for dark primary color.
   static const Color bigStoneDarkPrimary = Color(0xFF60748A);
@@ -1489,13 +1459,12 @@ class FlexColor {
   /// Big stone theme color for dark secondary color.
   static const Color bigStoneDarkSecondary = Color(0xFFEBB251);
 
-  /// Big stone theme color for dark secondary container color.
-  static const Color bigStoneDarkSecondaryContainer = Color(0xFFF4CA7E);
+  /// Big stone theme color for dark tertiary color.
+  static const Color bigStoneDarkTertiary = Color(0xFFF4CA7E);
 
   /// Big stone theme color for dark secondary variant color.
-  @Deprecated('Deprecated use bigStoneDarkSecondaryContainer instead.')
-  static const Color bigStoneDarkSecondaryVariant =
-      bigStoneDarkSecondaryContainer;
+  @Deprecated('Deprecated use bigStoneDarkTertiary instead.')
+  static const Color bigStoneDarkSecondaryVariant = bigStoneDarkTertiary;
 
   // Damask red and lunar green scheme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1520,13 +1489,12 @@ class FlexColor {
   /// Damask theme color for light secondary color.
   static const Color damaskLightSecondary = Color(0xFF373A36);
 
-  /// Damask theme color for light secondary container color.
-  static const Color damaskLightSecondaryContainer = Color(0xFF343E32);
+  /// Damask theme color for light tertiary color.
+  static const Color damaskLightTertiary = Color(0xFF343E32);
 
   /// Damask theme color for light secondary variant color.
-  @Deprecated('Deprecated use damaskLightSecondaryContainer instead.')
-  static const Color damaskLightSecondaryVariant =
-      damaskLightSecondaryContainer;
+  @Deprecated('Deprecated use damaskLightTertiary instead.')
+  static const Color damaskLightSecondaryVariant = damaskLightTertiary;
 
   /// Damask theme color for dark primary color.
   static const Color damaskDarkPrimary = Color(0xFFDA9882);
@@ -1541,12 +1509,12 @@ class FlexColor {
   /// Damask theme color for dark secondary color.
   static const Color damaskDarkSecondary = Color(0xFF767D75);
 
-  /// Damask theme color for dark secondary container color.
-  static const Color damaskDarkSecondaryContainer = Color(0xFF839081);
+  /// Damask theme color for dark tertiary color.
+  static const Color damaskDarkTertiary = Color(0xFF839081);
 
   /// Damask theme color for dark secondary variant color.
-  @Deprecated('Deprecated use damaskDarkSecondaryContainer instead.')
-  static const Color damaskDarkSecondaryVariant = damaskDarkSecondaryContainer;
+  @Deprecated('Deprecated use damaskDarkTertiary instead.')
+  static const Color damaskDarkSecondaryVariant = damaskDarkTertiary;
 
   // Bahama blue red and lunar green scheme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1573,13 +1541,12 @@ class FlexColor {
   /// Bahama blue theme color for light secondary color.
   static const Color bahamaBlueLightSecondary = Color(0xFFDD520F);
 
-  /// Bahama blue theme color for light secondary container color.
-  static const Color bahamaBlueLightSecondaryContainer = Color(0xFF7CC8F8);
+  /// Bahama blue theme color for light tertiary color.
+  static const Color bahamaBlueLightTertiary = Color(0xFF7CC8F8);
 
   /// Bahama blue theme color for light secondary variant color.
-  @Deprecated('Deprecated use bahamaBlueLightSecondaryContainer instead.')
-  static const Color bahamaBlueLightSecondaryVariant =
-      bahamaBlueLightSecondaryContainer;
+  @Deprecated('Deprecated use bahamaBlueLightTertiary instead.')
+  static const Color bahamaBlueLightSecondaryVariant = bahamaBlueLightTertiary;
 
   /// Bahama blue theme color for dark primary color.
   static const Color bahamaBlueDarkPrimary = Color(0xFF4585B5);
@@ -1595,13 +1562,12 @@ class FlexColor {
   /// Bahama blue theme color for dark secondary color.
   static const Color bahamaBlueDarkSecondary = Color(0xFFE57C4A);
 
-  /// Bahama blue theme color for dark secondary container color.
-  static const Color bahamaBlueDarkSecondaryContainer = Color(0xFF9CD5F9);
+  /// Bahama blue theme color for dark tertiary color.
+  static const Color bahamaBlueDarkTertiary = Color(0xFF9CD5F9);
 
   /// Bahama blue theme color for dark secondary variant color.
-  @Deprecated('Deprecated use bahamaBlueDarkSecondaryContainer instead.')
-  static const Color bahamaBlueDarkSecondaryVariant =
-      bahamaBlueDarkSecondaryContainer;
+  @Deprecated('Deprecated use bahamaBlueDarkTertiary instead.')
+  static const Color bahamaBlueDarkSecondaryVariant = bahamaBlueDarkTertiary;
 
   // Mallard green and Valencia pink green scheme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1628,13 +1594,13 @@ class FlexColor {
   /// Mallard green theme color for light secondary color.
   static const Color mallardGreenLightSecondary = Color(0xFFD34B4B);
 
-  /// Mallard green theme color for light secondary container color.
-  static const Color mallardGreenLightSecondaryContainer = Color(0xFF959D33);
+  /// Mallard green theme color for light tertiary color.
+  static const Color mallardGreenLightTertiary = Color(0xFF959D33);
 
   /// Mallard green theme color for light secondary variant color.
-  @Deprecated('Deprecated use mallardGreenLightSecondaryContainer instead.')
+  @Deprecated('Deprecated use mallardGreenLightTertiary instead.')
   static const Color mallardGreenLightSecondaryVariant =
-      mallardGreenLightSecondaryContainer;
+      mallardGreenLightTertiary;
 
   /// Mallard green theme color for dark primary color.
   static const Color mallardGreenDarkPrimary = Color(0xFF808E79);
@@ -1650,13 +1616,13 @@ class FlexColor {
   /// Mallard green theme color for dark secondary color.
   static const Color mallardGreenDarkSecondary = Color(0xFFE18686);
 
-  /// Mallard green theme color for dark secondary container color.
-  static const Color mallardGreenDarkSecondaryContainer = Color(0xFFC3C87A);
+  /// Mallard green theme color for dark tertiary color.
+  static const Color mallardGreenDarkTertiary = Color(0xFFC3C87A);
 
   /// Mallard green theme color for dark secondary variant color.
-  @Deprecated('Deprecated use mallardGreenDarkSecondaryContainer instead.')
+  @Deprecated('Deprecated use mallardGreenDarkTertiary instead.')
   static const Color mallardGreenDarkSecondaryVariant =
-      mallardGreenDarkSecondaryContainer;
+      mallardGreenDarkTertiary;
 
   // Espresso dark brown and crema scheme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1683,13 +1649,12 @@ class FlexColor {
   /// Espresso theme color for light secondary color.
   static const Color espressoLightSecondary = Color(0xFFE3B964);
 
-  /// Espresso theme color for light secondary container color.
-  static const Color espressoLightSecondaryContainer = Color(0xFFF5E9C9);
+  /// Espresso theme color for light tertiary color.
+  static const Color espressoLightTertiary = Color(0xFFF5E9C9);
 
   /// Espresso theme color for light secondary variant color.
-  @Deprecated('Deprecated use espressoLightSecondaryContainer instead.')
-  static const Color espressoLightSecondaryVariant =
-      espressoLightSecondaryContainer;
+  @Deprecated('Deprecated use espressoLightTertiary instead.')
+  static const Color espressoLightSecondaryVariant = espressoLightTertiary;
 
   /// Espresso theme color for dark primary color.
   static const Color espressoDarkPrimary = Color(0xFF8D7F7D);
@@ -1704,13 +1669,12 @@ class FlexColor {
   /// Espresso theme color for dark secondary color.
   static const Color espressoDarkSecondary = Color(0xFFEED6A6);
 
-  /// Espresso theme color for dark secondary container color.
-  static const Color espressoDarkSecondaryContainer = Color(0xFFF8ECD4);
+  /// Espresso theme color for dark tertiary color.
+  static const Color espressoDarkTertiary = Color(0xFFF8ECD4);
 
   /// Espresso theme color for dark secondary variant color.
-  @Deprecated('Deprecated use espressoDarkSecondaryContainer instead.')
-  static const Color espressoDarkSecondaryVariant =
-      espressoDarkSecondaryContainer;
+  @Deprecated('Deprecated use espressoDarkTertiary instead.')
+  static const Color espressoDarkSecondaryVariant = espressoDarkTertiary;
 
   // Outer Space dark blue grey and stage red orange scheme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1737,13 +1701,12 @@ class FlexColor {
   /// Outer Space theme color for light secondary color.
   static const Color outerSpaceLightSecondary = Color(0xFFD2600A);
 
-  /// Outer Space theme color for light secondary container color.
-  static const Color outerSpaceLightSecondaryContainer = Color(0xFF93A0A9);
+  /// Outer Space theme color for light tertiary color.
+  static const Color outerSpaceLightTertiary = Color(0xFF93A0A9);
 
   /// Outer Space theme color for light secondary variant color.
-  @Deprecated('Deprecated use outerSpaceLightSecondaryContainer instead.')
-  static const Color outerSpaceLightSecondaryVariant =
-      outerSpaceLightSecondaryContainer;
+  @Deprecated('Deprecated use outerSpaceLightTertiary instead.')
+  static const Color outerSpaceLightSecondaryVariant = outerSpaceLightTertiary;
 
   /// Outer Space theme color for dark primary color.
   static const Color outerSpaceDarkPrimary = Color(0xFF486A71);
@@ -1759,13 +1722,12 @@ class FlexColor {
   /// Outer Space theme color for dark secondary color.
   static const Color outerSpaceDarkSecondary = Color(0xFFDB823F);
 
-  /// Outer Space theme color for dark secondary container color.
-  static const Color outerSpaceDarkSecondaryContainer = Color(0xFFAAB4BB);
+  /// Outer Space theme color for dark tertiary color.
+  static const Color outerSpaceDarkTertiary = Color(0xFFAAB4BB);
 
   /// Outer Space theme color for dark secondary variant color.
-  @Deprecated('Deprecated use outerSpaceDarkSecondaryContainer instead.')
-  static const Color outerSpaceDarkSecondaryVariant =
-      outerSpaceDarkSecondaryContainer;
+  @Deprecated('Deprecated use outerSpaceDarkTertiary instead.')
+  static const Color outerSpaceDarkSecondaryVariant = outerSpaceDarkTertiary;
 
   // Blue whale dark blue grey and stage red orange scheme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1792,13 +1754,12 @@ class FlexColor {
   /// Blue whale theme color for light secondary color.
   static const Color blueWhaleLightSecondary = Color(0xFFF86541);
 
-  /// Blue whale theme color for light secondary container color.
-  static const Color blueWhaleLightSecondaryContainer = Color(0xFFF07E24);
+  /// Blue whale theme color for light tertiary color.
+  static const Color blueWhaleLightTertiary = Color(0xFFF07E24);
 
   /// Blue whale theme color for light secondary variant color.
-  @Deprecated('Deprecated use blueWhaleLightSecondaryContainer instead.')
-  static const Color blueWhaleLightSecondaryVariant =
-      blueWhaleLightSecondaryContainer;
+  @Deprecated('Deprecated use blueWhaleLightTertiary instead.')
+  static const Color blueWhaleLightSecondaryVariant = blueWhaleLightTertiary;
 
   /// Blue whale theme color for dark primary color.
   static const Color blueWhaleDarkPrimary = Color(0xFF57859D);
@@ -1814,13 +1775,12 @@ class FlexColor {
   /// Blue whale theme color for dark secondary color.
   static const Color blueWhaleDarkSecondary = Color(0xFFFF6E48);
 
-  /// Blue whale theme color for dark secondary container color.
-  static const Color blueWhaleDarkSecondaryContainer = Color(0xFFED7F29);
+  /// Blue whale theme color for dark tertiary color.
+  static const Color blueWhaleDarkTertiary = Color(0xFFED7F29);
 
   /// Blue whale theme color for dark secondary variant color.
-  @Deprecated('Deprecated use blueWhaleDarkSecondaryContainer instead.')
-  static const Color blueWhaleDarkSecondaryVariant =
-      blueWhaleDarkSecondaryContainer;
+  @Deprecated('Deprecated use blueWhaleDarkTertiary instead.')
+  static const Color blueWhaleDarkSecondaryVariant = blueWhaleDarkTertiary;
 
   // San Juan blue and salmon pink.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1846,13 +1806,13 @@ class FlexColor {
   /// San Juan blue theme color for light secondary color.
   static const Color sanJuanBlueLightSecondary = Color(0xFFF98D94);
 
-  /// San Juan blue theme color for light secondary container color.
-  static const Color sanJuanBlueLightSecondaryContainer = Color(0xFFF2C4C7);
+  /// San Juan blue theme color for light tertiary color.
+  static const Color sanJuanBlueLightTertiary = Color(0xFFF2C4C7);
 
   /// San Juan blue theme color for light secondary variant color.
-  @Deprecated('Deprecated use sanJuanBlueLightSecondaryContainer instead.')
+  @Deprecated('Deprecated use sanJuanBlueLightTertiary instead.')
   static const Color sanJuanBlueLightSecondaryVariant =
-      sanJuanBlueLightSecondaryContainer;
+      sanJuanBlueLightTertiary;
 
   /// San Juan blue theme color for dark primary color.
   static const Color sanJuanBlueDarkPrimary = Color(0xFF5E7691);
@@ -1868,13 +1828,12 @@ class FlexColor {
   /// San Juan blue theme color for dark secondary color.
   static const Color sanJuanBlueDarkSecondary = Color(0xFFEBA1A6);
 
-  /// San Juan blue theme color for dark secondary container color.
-  static const Color sanJuanBlueDarkSecondaryContainer = Color(0xFFF4CFD1);
+  /// San Juan blue theme color for dark tertiary color.
+  static const Color sanJuanBlueDarkTertiary = Color(0xFFF4CFD1);
 
   /// San Juan blue theme color for dark secondary variant color.
-  @Deprecated('Deprecated use sanJuanBlueDarkSecondaryContainer instead.')
-  static const Color sanJuanBlueDarkSecondaryVariant =
-      sanJuanBlueDarkSecondaryContainer;
+  @Deprecated('Deprecated use sanJuanBlueDarkTertiary instead.')
+  static const Color sanJuanBlueDarkSecondaryVariant = sanJuanBlueDarkTertiary;
 
   // Rosewood red, with horses neck and driftwood theme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -1900,13 +1859,12 @@ class FlexColor {
   /// Rosewood theme color for light secondary color.
   static const Color rosewoodLightSecondary = Color(0xFF74540E);
 
-  /// Rosewood theme color for light secondary container color.
-  static const Color rosewoodLightSecondaryContainer = Color(0xFFAD8845);
+  /// Rosewood theme color for light tertiary color.
+  static const Color rosewoodLightTertiary = Color(0xFFAD8845);
 
   /// Rosewood theme color for light secondary variant color.
-  @Deprecated('Deprecated use rosewoodLightSecondaryContainer instead.')
-  static const Color rosewoodLightSecondaryVariant =
-      rosewoodLightSecondaryContainer;
+  @Deprecated('Deprecated use rosewoodLightTertiary instead.')
+  static const Color rosewoodLightSecondaryVariant = rosewoodLightTertiary;
 
   /// Rosewood theme color for dark primary color.
   static const Color rosewoodDarkPrimary = Color(0xFF9C5A69);
@@ -1921,13 +1879,12 @@ class FlexColor {
   /// Rosewood theme color for dark secondary color.
   static const Color rosewoodDarkSecondary = Color(0xFFEDCE9B);
 
-  /// Rosewood theme color for dark secondary container color.
-  static const Color rosewoodDarkSecondaryContainer = Color(0xFFF5DFB9);
+  /// Rosewood theme color for dark tertiary color.
+  static const Color rosewoodDarkTertiary = Color(0xFFF5DFB9);
 
   /// Rosewood theme color for dark secondary variant color.
-  @Deprecated('Deprecated use rosewoodDarkSecondaryContainer instead.')
-  static const Color rosewoodDarkSecondaryVariant =
-      rosewoodDarkSecondaryContainer;
+  @Deprecated('Deprecated use rosewoodDarkTertiary instead.')
+  static const Color rosewoodDarkSecondaryVariant = rosewoodDarkTertiary;
 
   // The Blumine theme is based on blumine blue green color, eastern blue,
   // with saffron mango.
@@ -1954,13 +1911,13 @@ class FlexColor {
   /// Blumine blue green theme color for light secondary color.
   static const Color blumineBlueLightSecondary = Color(0xFFFEB716);
 
-  /// Blumine blue green theme color for light secondary container color.
-  static const Color blumineBlueLightSecondaryContainer = Color(0xFF0093C7);
+  /// Blumine blue green theme color for light tertiary color.
+  static const Color blumineBlueLightTertiary = Color(0xFF0093C7);
 
   /// Blumine blue green theme color for light secondary variant color.
-  @Deprecated('Deprecated use blumineBlueLightSecondaryContainer instead.')
+  @Deprecated('Deprecated use blumineBlueLightTertiary instead.')
   static const Color blumineBlueLightSecondaryVariant =
-      blumineBlueLightSecondaryContainer;
+      blumineBlueLightTertiary;
 
   /// Blumine blue green theme color for dark primary color.
   static const Color blumineBlueDarkPrimary = Color(0xFF82BACE);
@@ -1976,13 +1933,12 @@ class FlexColor {
   /// Blumine blue green theme color for dark secondary color.
   static const Color blumineBlueDarkSecondary = Color(0xFFFFD682);
 
-  /// Blumine blue green theme color for dark secondary container color.
-  static const Color blumineBlueDarkSecondaryContainer = Color(0xFF243E4D);
+  /// Blumine blue green theme color for dark tertiary color.
+  static const Color blumineBlueDarkTertiary = Color(0xFF243E4D);
 
   /// Blumine blue green theme color for dark secondary variant color.
-  @Deprecated('Deprecated use blumineBlueDarkSecondaryContainer instead.')
-  static const Color blumineBlueDarkSecondaryVariant =
-      blumineBlueDarkSecondaryContainer;
+  @Deprecated('Deprecated use blumineBlueDarkTertiary instead.')
+  static const Color blumineBlueDarkSecondaryVariant = blumineBlueDarkTertiary;
 
   /// English name of the custom theme.
   static const String customName = 'Custom';
@@ -1998,16 +1954,16 @@ class FlexColor {
       primary: materialLightPrimary,
       primaryContainer: materialLightPrimaryContainer,
       secondary: materialLightSecondary,
-      secondaryContainer: materialLightSecondaryContainer,
-      appBarColor: materialLightSecondaryContainer,
+      tertiary: materialLightTertiary,
+      appBarColor: materialLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: materialDarkPrimary,
       primaryContainer: materialDarkPrimaryContainer,
       secondary: materialDarkSecondary,
-      secondaryContainer: materialDarkSecondaryContainer,
-      appBarColor: materialDarkSecondaryContainer,
+      tertiary: materialDarkTertiary,
+      appBarColor: materialDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2020,16 +1976,16 @@ class FlexColor {
       primary: materialLightPrimaryHc,
       primaryContainer: materialLightPrimaryContainerHc,
       secondary: materialLightSecondaryHc,
-      secondaryContainer: materialLightSecondaryContainerHc,
-      appBarColor: materialLightSecondaryContainerHc,
+      tertiary: materialLightTertiaryHc,
+      appBarColor: materialLightTertiaryHc,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: materialDarkPrimaryHc,
       primaryContainer: materialDarkPrimaryContainerHc,
       secondary: materialDarkSecondaryHc,
-      secondaryContainer: materialDarkSecondaryContainerHc,
-      appBarColor: materialDarkSecondaryContainerHc,
+      tertiary: materialDarkTertiaryHc,
+      appBarColor: materialDarkTertiaryHc,
       error: materialDarkErrorHc,
     ),
   );
@@ -2042,16 +1998,16 @@ class FlexColor {
       primary: blueLightPrimary,
       primaryContainer: blueLightPrimaryContainer,
       secondary: blueLightSecondary,
-      secondaryContainer: blueLightSecondaryContainer,
-      appBarColor: blueLightSecondaryContainer,
+      tertiary: blueLightTertiary,
+      appBarColor: blueLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: blueDarkPrimary,
       primaryContainer: blueDarkPrimaryContainer,
       secondary: blueDarkSecondary,
-      secondaryContainer: blueDarkSecondaryContainer,
-      appBarColor: blueDarkSecondaryContainer,
+      tertiary: blueDarkTertiary,
+      appBarColor: blueDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2064,16 +2020,16 @@ class FlexColor {
       primary: indigoLightPrimary,
       primaryContainer: indigoLightPrimaryContainer,
       secondary: indigoLightSecondary,
-      secondaryContainer: indigoLightSecondaryContainer,
-      appBarColor: indigoLightSecondaryContainer,
+      tertiary: indigoLightTertiary,
+      appBarColor: indigoLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: indigoDarkPrimary,
       primaryContainer: indigoDarkPrimaryContainer,
       secondary: indigoDarkSecondary,
-      secondaryContainer: indigoDarkSecondaryContainer,
-      appBarColor: indigoDarkSecondaryContainer,
+      tertiary: indigoDarkTertiary,
+      appBarColor: indigoDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2086,16 +2042,16 @@ class FlexColor {
       primary: hippieBlueLightPrimary,
       primaryContainer: hippieBlueLightPrimaryContainer,
       secondary: hippieBlueLightSecondary,
-      secondaryContainer: hippieBlueLightSecondaryContainer,
-      appBarColor: hippieBlueLightSecondaryContainer,
+      tertiary: hippieBlueLightTertiary,
+      appBarColor: hippieBlueLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: hippieBlueDarkPrimary,
       primaryContainer: hippieBlueDarkPrimaryContainer,
       secondary: hippieBlueDarkSecondary,
-      secondaryContainer: hippieBlueDarkSecondaryContainer,
-      appBarColor: hippieBlueDarkSecondaryContainer,
+      tertiary: hippieBlueDarkTertiary,
+      appBarColor: hippieBlueDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2108,16 +2064,16 @@ class FlexColor {
       primary: aquaBlueLightPrimary,
       primaryContainer: aquaBlueLightPrimaryContainer,
       secondary: aquaBlueLightSecondary,
-      secondaryContainer: aquaBlueLightSecondaryContainer,
-      appBarColor: aquaBlueLightSecondaryContainer,
+      tertiary: aquaBlueLightTertiary,
+      appBarColor: aquaBlueLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: aquaBlueDarkPrimary,
       primaryContainer: aquaBlueDarkPrimaryContainer,
       secondary: aquaBlueDarkSecondary,
-      secondaryContainer: aquaBlueDarkSecondaryContainer,
-      appBarColor: aquaBlueDarkSecondaryContainer,
+      tertiary: aquaBlueDarkTertiary,
+      appBarColor: aquaBlueDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2130,16 +2086,16 @@ class FlexColor {
       primary: brandBlueLightPrimary,
       primaryContainer: brandBlueLightPrimaryContainer,
       secondary: brandBlueLightSecondary,
-      secondaryContainer: brandBlueLightSecondaryContainer,
-      appBarColor: brandBlueLightSecondaryContainer,
+      tertiary: brandBlueLightTertiary,
+      appBarColor: brandBlueLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: brandBlueDarkPrimary,
       primaryContainer: brandBlueDarkPrimaryContainer,
       secondary: brandBlueDarkSecondary,
-      secondaryContainer: brandBlueDarkSecondaryContainer,
-      appBarColor: brandBlueDarkSecondaryContainer,
+      tertiary: brandBlueDarkTertiary,
+      appBarColor: brandBlueDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2152,16 +2108,16 @@ class FlexColor {
       primary: deepBlueLightPrimary,
       primaryContainer: deepBlueLightPrimaryContainer,
       secondary: deepBlueLightSecondary,
-      secondaryContainer: deepBlueLightSecondaryContainer,
-      appBarColor: deepBlueLightSecondaryContainer,
+      tertiary: deepBlueLightTertiary,
+      appBarColor: deepBlueLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: deepBlueDarkPrimary,
       primaryContainer: deepBlueDarkPrimaryContainer,
       secondary: deepBlueDarkSecondary,
-      secondaryContainer: deepBlueDarkSecondaryContainer,
-      appBarColor: deepBlueDarkSecondaryContainer,
+      tertiary: deepBlueDarkTertiary,
+      appBarColor: deepBlueDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2174,16 +2130,16 @@ class FlexColor {
       primary: sakuraLightPrimary,
       primaryContainer: sakuraLightPrimaryContainer,
       secondary: sakuraLightSecondary,
-      secondaryContainer: sakuraLightSecondaryContainer,
-      appBarColor: sakuraLightSecondaryContainer,
+      tertiary: sakuraLightTertiary,
+      appBarColor: sakuraLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: sakuraDarkPrimary,
       primaryContainer: sakuraDarkPrimaryContainer,
       secondary: sakuraDarkSecondary,
-      secondaryContainer: sakuraDarkSecondaryContainer,
-      appBarColor: sakuraDarkSecondaryContainer,
+      tertiary: sakuraDarkTertiary,
+      appBarColor: sakuraDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2196,16 +2152,16 @@ class FlexColor {
       primary: mandyRedLightPrimary,
       primaryContainer: mandyRedLightPrimaryContainer,
       secondary: mandyRedLightSecondary,
-      secondaryContainer: mandyRedLightSecondaryContainer,
-      appBarColor: mandyRedLightSecondaryContainer,
+      tertiary: mandyRedLightTertiary,
+      appBarColor: mandyRedLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: mandyRedDarkPrimary,
       primaryContainer: mandyRedDarkPrimaryContainer,
       secondary: mandyRedDarkSecondary,
-      secondaryContainer: mandyRedDarkSecondaryContainer,
-      appBarColor: mandyRedDarkSecondaryContainer,
+      tertiary: mandyRedDarkTertiary,
+      appBarColor: mandyRedDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2218,16 +2174,16 @@ class FlexColor {
       primary: redLightPrimary,
       primaryContainer: redLightPrimaryContainer,
       secondary: redLightSecondary,
-      secondaryContainer: redLightSecondaryContainer,
-      appBarColor: redLightSecondaryContainer,
+      tertiary: redLightTertiary,
+      appBarColor: redLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: redDarkPrimary,
       primaryContainer: redDarkPrimaryContainer,
       secondary: redDarkSecondary,
-      secondaryContainer: redDarkSecondaryContainer,
-      appBarColor: redDarkSecondaryContainer,
+      tertiary: redDarkTertiary,
+      appBarColor: redDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2240,16 +2196,16 @@ class FlexColor {
       primary: redWineLightPrimary,
       primaryContainer: redWineLightPrimaryContainer,
       secondary: redWineLightSecondary,
-      secondaryContainer: redWineLightSecondaryContainer,
-      appBarColor: redWineLightSecondaryContainer,
+      tertiary: redWineLightTertiary,
+      appBarColor: redWineLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: redWineDarkPrimary,
       primaryContainer: redWineDarkPrimaryContainer,
       secondary: redWineDarkSecondary,
-      secondaryContainer: redWineDarkSecondaryContainer,
-      appBarColor: redWineDarkSecondaryContainer,
+      tertiary: redWineDarkTertiary,
+      appBarColor: redWineDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2262,16 +2218,16 @@ class FlexColor {
       primary: purpleBrownLightPrimary,
       primaryContainer: purpleBrownLightPrimaryContainer,
       secondary: purpleBrownLightSecondary,
-      secondaryContainer: purpleBrownLightSecondaryContainer,
-      appBarColor: purpleBrownLightSecondaryContainer,
+      tertiary: purpleBrownLightTertiary,
+      appBarColor: purpleBrownLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: purpleBrownDarkPrimary,
       primaryContainer: purpleBrownDarkPrimaryContainer,
       secondary: purpleBrownDarkSecondary,
-      secondaryContainer: purpleBrownDarkSecondaryContainer,
-      appBarColor: purpleBrownDarkSecondaryContainer,
+      tertiary: purpleBrownDarkTertiary,
+      appBarColor: purpleBrownDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2284,16 +2240,16 @@ class FlexColor {
       primary: greenLightPrimary,
       primaryContainer: greenLightPrimaryContainer,
       secondary: greenLightSecondary,
-      secondaryContainer: greenLightSecondaryContainer,
-      appBarColor: greenLightSecondaryContainer,
+      tertiary: greenLightTertiary,
+      appBarColor: greenLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: greenDarkPrimary,
       primaryContainer: greenDarkPrimaryContainer,
       secondary: greenDarkSecondary,
-      secondaryContainer: greenDarkSecondaryContainer,
-      appBarColor: greenDarkSecondaryContainer,
+      tertiary: greenDarkTertiary,
+      appBarColor: greenDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2306,16 +2262,16 @@ class FlexColor {
       primary: moneyLightPrimary,
       primaryContainer: moneyLightPrimaryContainer,
       secondary: moneyLightSecondary,
-      secondaryContainer: moneyLightSecondaryContainer,
-      appBarColor: moneyLightSecondaryContainer,
+      tertiary: moneyLightTertiary,
+      appBarColor: moneyLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: moneyDarkPrimary,
       primaryContainer: moneyDarkPrimaryContainer,
       secondary: moneyDarkSecondary,
-      secondaryContainer: moneyDarkSecondaryContainer,
-      appBarColor: moneyDarkSecondaryContainer,
+      tertiary: moneyDarkTertiary,
+      appBarColor: moneyDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2328,16 +2284,16 @@ class FlexColor {
       primary: jungleLightPrimary,
       primaryContainer: jungleLightPrimaryContainer,
       secondary: jungleLightSecondary,
-      secondaryContainer: jungleLightSecondaryContainer,
-      appBarColor: jungleLightSecondaryContainer,
+      tertiary: jungleLightTertiary,
+      appBarColor: jungleLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: jungleDarkPrimary,
       primaryContainer: jungleDarkPrimaryContainer,
       secondary: jungleDarkSecondary,
-      secondaryContainer: jungleDarkSecondaryContainer,
-      appBarColor: jungleDarkSecondaryContainer,
+      tertiary: jungleDarkTertiary,
+      appBarColor: jungleDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2350,16 +2306,16 @@ class FlexColor {
       primary: greyLawLightPrimary,
       primaryContainer: greyLawLightPrimaryContainer,
       secondary: greyLawLightSecondary,
-      secondaryContainer: greyLawLightSecondaryContainer,
-      appBarColor: greyLawLightSecondaryContainer,
+      tertiary: greyLawLightTertiary,
+      appBarColor: greyLawLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: greyLawDarkPrimary,
       primaryContainer: greyLawDarkPrimaryContainer,
       secondary: greyLawDarkSecondary,
-      secondaryContainer: greyLawDarkSecondaryContainer,
-      appBarColor: greyLawDarkSecondaryContainer,
+      tertiary: greyLawDarkTertiary,
+      appBarColor: greyLawDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2372,16 +2328,16 @@ class FlexColor {
       primary: wasabiLightPrimary,
       primaryContainer: wasabiLightPrimaryContainer,
       secondary: wasabiLightSecondary,
-      secondaryContainer: wasabiLightSecondaryContainer,
-      appBarColor: wasabiLightSecondaryContainer,
+      tertiary: wasabiLightTertiary,
+      appBarColor: wasabiLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: wasabiDarkPrimary,
       primaryContainer: wasabiDarkPrimaryContainer,
       secondary: wasabiDarkSecondary,
-      secondaryContainer: wasabiDarkSecondaryContainer,
-      appBarColor: wasabiDarkSecondaryContainer,
+      tertiary: wasabiDarkTertiary,
+      appBarColor: wasabiDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2394,16 +2350,16 @@ class FlexColor {
       primary: goldLightPrimary,
       primaryContainer: goldLightPrimaryContainer,
       secondary: goldLightSecondary,
-      secondaryContainer: goldLightSecondaryContainer,
-      appBarColor: goldLightSecondaryContainer,
+      tertiary: goldLightTertiary,
+      appBarColor: goldLightTertiary,
       error: materialLightErrorHc,
     ),
     dark: FlexSchemeColor(
       primary: goldDarkPrimary,
       primaryContainer: goldDarkPrimaryContainer,
       secondary: goldDarkSecondary,
-      secondaryContainer: goldDarkSecondaryContainer,
-      appBarColor: goldDarkSecondaryContainer,
+      tertiary: goldDarkTertiary,
+      appBarColor: goldDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2416,16 +2372,16 @@ class FlexColor {
       primary: mangoLightPrimary,
       primaryContainer: mangoLightPrimaryContainer,
       secondary: mangoLightSecondary,
-      secondaryContainer: mangoLightSecondaryContainer,
-      appBarColor: mangoLightSecondaryContainer,
+      tertiary: mangoLightTertiary,
+      appBarColor: mangoLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: mangoDarkPrimary,
       primaryContainer: mangoDarkPrimaryContainer,
       secondary: mangoDarkSecondary,
-      secondaryContainer: mangoDarkSecondaryContainer,
-      appBarColor: mangoDarkSecondaryContainer,
+      tertiary: mangoDarkTertiary,
+      appBarColor: mangoDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2441,16 +2397,16 @@ class FlexColor {
       primary: amberLightPrimary,
       primaryContainer: amberLightPrimaryContainer,
       secondary: amberLightSecondary,
-      secondaryContainer: amberLightSecondaryContainer,
-      appBarColor: amberLightSecondaryContainer,
+      tertiary: amberLightTertiary,
+      appBarColor: amberLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: amberDarkPrimary,
       primaryContainer: amberDarkPrimaryContainer,
       secondary: amberDarkSecondary,
-      secondaryContainer: amberDarkSecondaryContainer,
-      appBarColor: amberDarkSecondaryContainer,
+      tertiary: amberDarkTertiary,
+      appBarColor: amberDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2463,16 +2419,16 @@ class FlexColor {
       primary: vesuviusBurnLightPrimary,
       primaryContainer: vesuviusBurnLightPrimaryContainer,
       secondary: vesuviusBurnLightSecondary,
-      secondaryContainer: vesuviusBurnLightSecondaryContainer,
-      appBarColor: vesuviusBurnLightSecondaryContainer,
+      tertiary: vesuviusBurnLightTertiary,
+      appBarColor: vesuviusBurnLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: vesuviusBurnDarkPrimary,
       primaryContainer: vesuviusBurnDarkPrimaryContainer,
       secondary: vesuviusBurnDarkSecondary,
-      secondaryContainer: vesuviusBurnDarkSecondaryContainer,
-      appBarColor: vesuviusBurnDarkSecondaryContainer,
+      tertiary: vesuviusBurnDarkTertiary,
+      appBarColor: vesuviusBurnDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2485,16 +2441,16 @@ class FlexColor {
       primary: deepPurpleLightPrimary,
       primaryContainer: deepPurpleLightPrimaryContainer,
       secondary: deepPurpleLightSecondary,
-      secondaryContainer: deepPurpleLightSecondaryContainer,
-      appBarColor: deepPurpleLightSecondaryContainer,
+      tertiary: deepPurpleLightTertiary,
+      appBarColor: deepPurpleLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: deepPurpleDarkPrimary,
       primaryContainer: deepPurpleDarkPrimaryContainer,
       secondary: deepPurpleDarkSecondary,
-      secondaryContainer: deepPurpleDarkSecondaryContainer,
-      appBarColor: deepPurpleDarkSecondaryContainer,
+      tertiary: deepPurpleDarkTertiary,
+      appBarColor: deepPurpleDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2508,16 +2464,16 @@ class FlexColor {
       primary: ebonyClayLightPrimary,
       primaryContainer: ebonyClayLightPrimaryContainer,
       secondary: ebonyClayLightSecondary,
-      secondaryContainer: ebonyClayLightSecondaryContainer,
-      appBarColor: ebonyClayLightSecondaryContainer,
+      tertiary: ebonyClayLightTertiary,
+      appBarColor: ebonyClayLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: ebonyClayDarkPrimary,
       primaryContainer: ebonyClayDarkPrimaryContainer,
       secondary: ebonyClayDarkSecondary,
-      secondaryContainer: ebonyClayDarkSecondaryContainer,
-      appBarColor: ebonyClayDarkSecondaryContainer,
+      tertiary: ebonyClayDarkTertiary,
+      appBarColor: ebonyClayDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2530,16 +2486,16 @@ class FlexColor {
       primary: barossaLightPrimary,
       primaryContainer: barossaLightPrimaryContainer,
       secondary: barossaLightSecondary,
-      secondaryContainer: barossaLightSecondaryContainer,
-      appBarColor: barossaLightSecondaryContainer,
+      tertiary: barossaLightTertiary,
+      appBarColor: barossaLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: barossaDarkPrimary,
       primaryContainer: barossaDarkPrimaryContainer,
       secondary: barossaDarkSecondary,
-      secondaryContainer: barossaDarkSecondaryContainer,
-      appBarColor: barossaDarkSecondaryContainer,
+      tertiary: barossaDarkTertiary,
+      appBarColor: barossaDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2552,16 +2508,16 @@ class FlexColor {
       primary: sharkLightPrimary,
       primaryContainer: sharkLightPrimaryContainer,
       secondary: sharkLightSecondary,
-      secondaryContainer: sharkLightSecondaryContainer,
-      appBarColor: sharkLightSecondaryContainer,
+      tertiary: sharkLightTertiary,
+      appBarColor: sharkLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: sharkDarkPrimary,
       primaryContainer: sharkDarkPrimaryContainer,
       secondary: sharkDarkSecondary,
-      secondaryContainer: sharkDarkSecondaryContainer,
-      appBarColor: sharkDarkSecondaryContainer,
+      tertiary: sharkDarkTertiary,
+      appBarColor: sharkDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2574,16 +2530,16 @@ class FlexColor {
       primary: bigStoneLightPrimary,
       primaryContainer: bigStoneLightPrimaryContainer,
       secondary: bigStoneLightSecondary,
-      secondaryContainer: bigStoneLightSecondaryContainer,
-      appBarColor: bigStoneLightSecondaryContainer,
+      tertiary: bigStoneLightTertiary,
+      appBarColor: bigStoneLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: bigStoneDarkPrimary,
       primaryContainer: bigStoneDarkPrimaryContainer,
       secondary: bigStoneDarkSecondary,
-      secondaryContainer: bigStoneDarkSecondaryContainer,
-      appBarColor: bigStoneDarkSecondaryContainer,
+      tertiary: bigStoneDarkTertiary,
+      appBarColor: bigStoneDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2596,16 +2552,16 @@ class FlexColor {
       primary: damaskLightPrimary,
       primaryContainer: damaskLightPrimaryContainer,
       secondary: damaskLightSecondary,
-      secondaryContainer: damaskLightSecondaryContainer,
-      appBarColor: damaskLightSecondaryContainer,
+      tertiary: damaskLightTertiary,
+      appBarColor: damaskLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: damaskDarkPrimary,
       primaryContainer: damaskDarkPrimaryContainer,
       secondary: damaskDarkSecondary,
-      secondaryContainer: damaskDarkSecondaryContainer,
-      appBarColor: damaskDarkSecondaryContainer,
+      tertiary: damaskDarkTertiary,
+      appBarColor: damaskDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2618,16 +2574,16 @@ class FlexColor {
       primary: bahamaBlueLightPrimary,
       primaryContainer: bahamaBlueLightPrimaryContainer,
       secondary: bahamaBlueLightSecondary,
-      secondaryContainer: bahamaBlueLightSecondaryContainer,
-      appBarColor: bahamaBlueLightSecondaryContainer,
+      tertiary: bahamaBlueLightTertiary,
+      appBarColor: bahamaBlueLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: bahamaBlueDarkPrimary,
       primaryContainer: bahamaBlueDarkPrimaryContainer,
       secondary: bahamaBlueDarkSecondary,
-      secondaryContainer: bahamaBlueDarkSecondaryContainer,
-      appBarColor: bahamaBlueDarkSecondaryContainer,
+      tertiary: bahamaBlueDarkTertiary,
+      appBarColor: bahamaBlueDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2640,16 +2596,16 @@ class FlexColor {
       primary: mallardGreenLightPrimary,
       primaryContainer: mallardGreenLightPrimaryContainer,
       secondary: mallardGreenLightSecondary,
-      secondaryContainer: mallardGreenLightSecondaryContainer,
-      appBarColor: mallardGreenLightSecondaryContainer,
+      tertiary: mallardGreenLightTertiary,
+      appBarColor: mallardGreenLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: mallardGreenDarkPrimary,
       primaryContainer: mallardGreenDarkPrimaryContainer,
       secondary: mallardGreenDarkSecondary,
-      secondaryContainer: mallardGreenDarkSecondaryContainer,
-      appBarColor: mallardGreenDarkSecondaryContainer,
+      tertiary: mallardGreenDarkTertiary,
+      appBarColor: mallardGreenDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2662,16 +2618,16 @@ class FlexColor {
       primary: espressoLightPrimary,
       primaryContainer: espressoLightPrimaryContainer,
       secondary: espressoLightSecondary,
-      secondaryContainer: espressoLightSecondaryContainer,
-      appBarColor: espressoLightSecondaryContainer,
+      tertiary: espressoLightTertiary,
+      appBarColor: espressoLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: espressoDarkPrimary,
       primaryContainer: espressoDarkPrimaryContainer,
       secondary: espressoDarkSecondary,
-      secondaryContainer: espressoDarkSecondaryContainer,
-      appBarColor: espressoDarkSecondaryContainer,
+      tertiary: espressoDarkTertiary,
+      appBarColor: espressoDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2684,16 +2640,16 @@ class FlexColor {
       primary: outerSpaceLightPrimary,
       primaryContainer: outerSpaceLightPrimaryContainer,
       secondary: outerSpaceLightSecondary,
-      secondaryContainer: outerSpaceLightSecondaryContainer,
-      appBarColor: outerSpaceLightSecondaryContainer,
+      tertiary: outerSpaceLightTertiary,
+      appBarColor: outerSpaceLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: outerSpaceDarkPrimary,
       primaryContainer: outerSpaceDarkPrimaryContainer,
       secondary: outerSpaceDarkSecondary,
-      secondaryContainer: outerSpaceDarkSecondaryContainer,
-      appBarColor: outerSpaceDarkSecondaryContainer,
+      tertiary: outerSpaceDarkTertiary,
+      appBarColor: outerSpaceDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2706,16 +2662,16 @@ class FlexColor {
       primary: blueWhaleLightPrimary,
       primaryContainer: blueWhaleLightPrimaryContainer,
       secondary: blueWhaleLightSecondary,
-      secondaryContainer: blueWhaleLightSecondaryContainer,
-      appBarColor: blueWhaleLightSecondaryContainer,
+      tertiary: blueWhaleLightTertiary,
+      appBarColor: blueWhaleLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: blueWhaleDarkPrimary,
       primaryContainer: blueWhaleDarkPrimaryContainer,
       secondary: blueWhaleDarkSecondary,
-      secondaryContainer: blueWhaleDarkSecondaryContainer,
-      appBarColor: blueWhaleDarkSecondaryContainer,
+      tertiary: blueWhaleDarkTertiary,
+      appBarColor: blueWhaleDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2728,16 +2684,16 @@ class FlexColor {
       primary: sanJuanBlueLightPrimary,
       primaryContainer: sanJuanBlueLightPrimaryContainer,
       secondary: sanJuanBlueLightSecondary,
-      secondaryContainer: sanJuanBlueLightSecondaryContainer,
-      appBarColor: sanJuanBlueLightSecondaryContainer,
+      tertiary: sanJuanBlueLightTertiary,
+      appBarColor: sanJuanBlueLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: sanJuanBlueDarkPrimary,
       primaryContainer: sanJuanBlueDarkPrimaryContainer,
       secondary: sanJuanBlueDarkSecondary,
-      secondaryContainer: sanJuanBlueDarkSecondaryContainer,
-      appBarColor: sanJuanBlueDarkSecondaryContainer,
+      tertiary: sanJuanBlueDarkTertiary,
+      appBarColor: sanJuanBlueDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2750,16 +2706,16 @@ class FlexColor {
       primary: rosewoodLightPrimary,
       primaryContainer: rosewoodLightPrimaryContainer,
       secondary: rosewoodLightSecondary,
-      secondaryContainer: rosewoodLightSecondaryContainer,
-      appBarColor: rosewoodLightSecondaryContainer,
+      tertiary: rosewoodLightTertiary,
+      appBarColor: rosewoodLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: rosewoodDarkPrimary,
       primaryContainer: rosewoodDarkPrimaryContainer,
       secondary: rosewoodDarkSecondary,
-      secondaryContainer: rosewoodDarkSecondaryContainer,
-      appBarColor: rosewoodDarkSecondaryContainer,
+      tertiary: rosewoodDarkTertiary,
+      appBarColor: rosewoodDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2772,16 +2728,16 @@ class FlexColor {
       primary: blumineBlueLightPrimary,
       primaryContainer: blumineBlueLightPrimaryContainer,
       secondary: blumineBlueLightSecondary,
-      secondaryContainer: blumineBlueLightSecondaryContainer,
-      appBarColor: blumineBlueLightSecondaryContainer,
+      tertiary: blumineBlueLightTertiary,
+      appBarColor: blumineBlueLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: blumineBlueDarkPrimary,
       primaryContainer: blumineBlueDarkPrimaryContainer,
       secondary: blumineBlueDarkSecondary,
-      secondaryContainer: blumineBlueDarkSecondaryContainer,
-      appBarColor: blumineBlueDarkSecondaryContainer,
+      tertiary: blumineBlueDarkTertiary,
+      appBarColor: blumineBlueDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -2797,16 +2753,16 @@ class FlexColor {
       primary: materialLightPrimary,
       primaryContainer: materialLightPrimaryContainer,
       secondary: materialLightSecondary,
-      secondaryContainer: materialLightSecondaryContainer,
-      appBarColor: materialLightSecondaryContainer,
+      tertiary: materialLightTertiary,
+      appBarColor: materialLightTertiary,
       error: materialLightError,
     ),
     dark: FlexSchemeColor(
       primary: materialDarkPrimary,
       primaryContainer: materialDarkPrimaryContainer,
       secondary: materialDarkSecondary,
-      secondaryContainer: materialDarkSecondaryContainer,
-      appBarColor: materialDarkSecondaryContainer,
+      tertiary: materialDarkTertiary,
+      appBarColor: materialDarkTertiary,
       error: materialDarkError,
     ),
   );
@@ -3063,10 +3019,15 @@ class FlexSchemeColor with Diagnosticable {
     final this.appBarColor,
     final this.error,
     @Deprecated('Use primaryContainer instead. '
-        'This feature was deprecated after v4.2.0.')
+        'In FlexSchemeColor old primaryContainer built-in colors were moved to '
+        'the primaryContainer color since their design fitted that role best. '
+        'This property was deprecated after FlexColorScheme v4.2.0.')
         Color? primaryVariant,
-    @Deprecated('Use secondaryContainer instead. '
-        'This feature was deprecated after v4.2.0.')
+    @Deprecated(
+        'Use secondaryContainer, tertiary or tertiaryContainer instead. '
+        'In FlexSchemeColor old secondaryVariant built-in colors were moved to '
+        'the tertiary color since their design fitted that role best. '
+        'This property was deprecated after FlexColorScheme v4.2.0.')
         Color? secondaryVariant,
   })  : _primaryContainer = primaryContainer,
         _secondaryContainer = secondaryContainer,
@@ -3094,6 +3055,8 @@ class FlexSchemeColor with Diagnosticable {
   // set via constructor initializer.
   final Color? _secondaryContainer;
 
+  //  It is only used to keep the old mapping during dev to get old color on
+  //  it in example app before we have defined it.
   /// A color used for elements needing less emphasis than [secondary].
   Color get secondaryContainer =>
       _secondaryContainer ?? _secondaryVariant ?? secondary;
@@ -3113,7 +3076,7 @@ class FlexSchemeColor with Diagnosticable {
   final Color? _tertiaryContainer;
 
   /// A private color used for elements needing less emphasis than [tertiary],
-  Color get tertiaryContainer => _tertiaryContainer ?? secondary;
+  Color get tertiaryContainer => _tertiaryContainer ?? _tertiary ?? secondary;
 
   /// The color of the app bar.
   ///
@@ -3142,7 +3105,9 @@ class FlexSchemeColor with Diagnosticable {
   /// for custom widgets accessible via your application's ThemeData, that is
   /// not used as default color by any built-in widgets.
   @Deprecated('Use primaryContainer instead. '
-      'This feature was deprecated after v4.2.0.')
+      'In FlexSchemeColor old primaryContainer built-in colors were moved to '
+      'the primaryContainer color since their design fitted that role best. '
+      'This property was deprecated after FlexColorScheme v4.2.0.')
   Color get primaryVariant => _primaryVariant ?? _primaryContainer ?? primary;
 
   // A private color, typically a darker version of the secondary color, set via
@@ -3157,10 +3122,11 @@ class FlexSchemeColor with Diagnosticable {
   /// It is an excellent property to use if you need a custom color for
   /// custom widgets accessible via your application's ThemeData, that is
   /// not used as default color by any built-in widgets.
-  @Deprecated('Use secondaryContainer instead. '
-      'This feature was deprecated after v4.2.0.')
-  Color get secondaryVariant =>
-      _secondaryVariant ?? _secondaryContainer ?? secondary;
+  @Deprecated('Use secondaryContainer, tertiary or tertiaryContainer instead. '
+      'In FlexSchemeColor old secondaryVariant built-in colors were moved to '
+      'the tertiary color since their design fitted that role best. '
+      'This property was deprecated after FlexColorScheme v4.2.0.')
+  Color get secondaryVariant => _secondaryVariant ?? _tertiary ?? secondary;
 
   /// Make a [FlexSchemeColor] from just one primary color or possible also
   /// from a more complete color scheme set. This is a convenience factory that
@@ -3175,10 +3141,15 @@ class FlexSchemeColor with Diagnosticable {
     Color? appBarColor,
     Color? error,
     @Deprecated('Use primaryContainer instead. '
-        'This feature was deprecated after v4.2.0.')
+        'In FlexSchemeColor old primaryContainer built-in colors were moved to '
+        'the primaryContainer color since their design fitted that role best. '
+        'This property was deprecated after FlexColorScheme v4.2.0.')
         Color? primaryVariant,
-    @Deprecated('Use secondaryContainer instead. '
-        'This feature was deprecated after v4.2.0.')
+    @Deprecated(
+        'Use secondaryContainer, tertiary or tertiaryContainer instead. '
+        'In FlexSchemeColor old secondaryVariant built-in colors were moved to '
+        'the tertiary color since their design fitted that role best. '
+        'This property was deprecated after FlexColorScheme v4.2.0.')
         Color? secondaryVariant,
   }) {
     return FlexSchemeColor(
@@ -3205,7 +3176,7 @@ class FlexSchemeColor with Diagnosticable {
     );
   }
 
-  /// Make effective [FlexSchemeColor] colors using 1 to 4 of the passed in
+  /// Make effective [FlexSchemeColor] colors using 1 to 6 of the passed in
   /// [colors] based on the [usedColors] property.
   ///
   /// The [usedColors] value corresponds to:
@@ -3214,11 +3185,18 @@ class FlexSchemeColor with Diagnosticable {
   ///   [secondary], [secondaryContainer], [tertiary] and [tertiaryContainer]
   ///   for returned [FlexSchemeColor].
   /// * 2: Use [primary] and [secondary] in [colors] and compute
-  ///   [primaryContainer] and [secondaryContainer] for returned
-  ///   [FlexSchemeColor].
+  ///   [primaryContainer] and [secondaryContainer], [tertiary] and
+  ///   [tertiaryContainer] for returned [FlexSchemeColor].
   /// * 3: Use [primary], [secondary] and [primaryContainer] in [colors] and
-  ///   compute and [secondaryContainer] for returned [FlexSchemeColor].
-  /// * 4: Use all 4 [colors] in passed in FlexColorsScheme as they are.
+  ///   compute [secondaryContainer], [tertiary] and
+  ///   [tertiaryContainer] for returned [FlexSchemeColor].
+  /// * 4: Use [primary], [secondary], [primaryContainer] and
+  ///   [secondaryContainer] in [colors] and compute [tertiary] and
+  ///   [tertiaryContainer] for returned [FlexSchemeColor].
+  /// * 5: Use [primary], [secondary], [primaryContainer], [secondaryContainer]
+  ///   and [tertiary] in [colors] and compute [tertiaryContainer] for returned
+  ///   [FlexSchemeColor].
+  /// * 6: Use all 6 [colors] in passed in FlexColorsScheme as they are.
   ///
   /// If [swapColors] is true, [primary] and [secondary], as well as
   /// [primaryContainer] and [secondaryContainer] are swapped, before being
@@ -3226,7 +3204,7 @@ class FlexSchemeColor with Diagnosticable {
   static FlexSchemeColor effective(
       final FlexSchemeColor colors, final int usedColors,
       {final bool swapColors = false}) {
-    assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
+    assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6.');
 
     // In the swap, tertiary is kept where it is, nothing to swap with.
     final FlexSchemeColor effectiveColors = swapColors
@@ -3254,11 +3232,11 @@ class FlexSchemeColor with Diagnosticable {
               ? effectiveColors.secondary
                   .darken(kDarkenSecondaryContainerFromSecondary)
               : effectiveColors.primary.darken(kDarkenSecondaryContainer),
-      tertiary: usedColors > 1
-          ? effectiveColors.secondary
+      tertiary: usedColors > 4
+          ? effectiveColors.tertiary
           : effectiveColors.primary.lighten(kDarkenPrimaryContainer),
-      tertiaryContainer: usedColors > 1
-          ? effectiveColors.secondary
+      tertiaryContainer: usedColors > 5
+          ? effectiveColors.tertiaryContainer
           : effectiveColors.primary.lighten(kDarkenSecondaryContainer),
       primaryVariant: usedColors > 2
           ? effectiveColors.primaryVariant
