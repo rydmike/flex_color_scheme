@@ -19,16 +19,16 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.materialLightSecondaryContainer,
-      appBarColor: FlexColor.materialLightSecondaryContainer,
+      tertiary: FlexColor.materialLightTertiary,
+      appBarColor: FlexColor.materialLightTertiary,
       error: FlexColor.materialLightError,
     );
     const FlexSchemeColor m1v = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
       primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryVariant: FlexColor.materialLightSecondaryContainer,
-      appBarColor: FlexColor.materialLightSecondaryContainer,
+      secondaryVariant: FlexColor.materialLightTertiary,
+      appBarColor: FlexColor.materialLightTertiary,
       error: FlexColor.materialLightError,
     );
     const FlexSchemeColor m1no = FlexSchemeColor(
@@ -40,18 +40,18 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.materialLightSecondaryContainer,
-      appBarColor: FlexColor.materialLightSecondaryContainer,
+      tertiary: FlexColor.materialLightTertiary,
+      appBarColor: FlexColor.materialLightTertiary,
       error: FlexColor.materialLightError,
     );
     // m3, different values than m1 and m2.
     const FlexSchemeColor m3 = FlexSchemeColor(
-      primary: FlexColor.materialDarkPrimary,
-      primaryContainer: FlexColor.materialDarkPrimaryContainer,
-      secondary: FlexColor.materialDarkSecondary,
-      secondaryContainer: FlexColor.materialDarkSecondaryContainer,
-      appBarColor: FlexColor.materialDarkSecondaryContainer,
-      error: FlexColor.materialDarkError,
+      primary: Color(0xFF342344),
+      primaryContainer: Color(0xFF74578F),
+      secondary: Color(0xFF274423),
+      tertiary: Color(0xFF852185),
+      appBarColor: Color(0xFF72AC6E),
+      error: Color(0xFFC8133A),
     );
     // mFrom, create from just a primary color.
     final FlexSchemeColor mFrom = FlexSchemeColor.from(
@@ -84,11 +84,11 @@ void main() {
       expect(m1 == m2, true);
     });
     test(
-        'FSC1.01f: GIVEN a FlexSchemeColor object with container but no '
-        'variant colors defined '
+        'FSC1.01f: GIVEN a FlexSchemeColor object with container and tertiary '
+        'but no variant colors defined '
         'EXPECT variant to be equal to container colors. v5.0.0 test', () {
       expect(m1.primaryVariant, equals(m1.primaryContainer));
-      expect(m1.secondaryVariant, equals(m1.secondaryContainer));
+      expect(m1.secondaryVariant, equals(m1.tertiary));
     });
     test(
         'FSC1.01g: GIVEN a FlexSchemeColor object with variant but no '
@@ -131,11 +131,13 @@ void main() {
           primary: FlexColor.materialLightPrimary,
           primaryContainer: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
-          secondaryContainer: FlexColor.materialLightSecondaryContainer,
-          appBarColor: FlexColor.materialLightSecondaryContainer,
+          secondaryContainer: FlexColor.materialLightSecondary,
+          tertiary: FlexColor.materialLightTertiary,
+          tertiaryContainer: FlexColor.materialLightTertiary,
+          appBarColor: FlexColor.materialLightTertiary,
           error: FlexColor.materialLightError,
           primaryVariant: FlexColor.materialLightPrimaryContainer,
-          secondaryVariant: FlexColor.materialLightSecondaryContainer,
+          secondaryVariant: FlexColor.materialLightTertiary,
         ),
         m1,
       );
@@ -231,122 +233,179 @@ void main() {
           ));
     });
 
-    test(
-        'FSC1.12: GIVEN a FlexSchemeColor.effective(SchemeColors, 4) EXPECT it '
-        'to be equal to SchemeColors ', () {
-      expect(FlexSchemeColor.effective(m1, 4), m1);
-    });
-
-    test(
-        'FSC1.13: GIVEN a FlexSchemeColor.effective(SchemeColors, 3) EXPECT it '
-        'to be equal to SchemeColors with Secondary variant computed.', () {
-      expect(
-        FlexSchemeColor.effective(m1, 3),
-        m1.copyWith(
-          secondaryContainer:
-              m1.secondary.darken(kDarkenSecondaryContainerFromSecondary),
-          secondaryVariant:
-              m1.secondary.darken(kDarkenSecondaryContainerFromSecondary),
-        ),
-      );
-    });
-
-    test(
-        'FSC1.14: GIVEN a FlexSchemeColor.effective(SchemeColors, 2) EXPECT it '
-        'to be equal to SchemeColors with primary variant and Secondary '
-        'variant computed.', () {
-      expect(
-        FlexSchemeColor.effective(m1, 2),
-        m1.copyWith(
-          primaryContainer: m1.primary.darken(kDarkenPrimaryContainer),
-          secondaryContainer:
-              m1.secondary.darken(kDarkenSecondaryContainerFromSecondary),
-          primaryVariant: m1.primary.darken(kDarkenPrimaryContainer),
-          secondaryVariant:
-              m1.secondary.darken(kDarkenSecondaryContainerFromSecondary),
-        ),
-      );
-    });
-
-    test(
-        'FSC1.15: GIVEN a FlexSchemeColor.effective(SchemeColors, 1) EXPECT it '
-        'to be equal to SchemeColors with primary variant, secondary '
-        'and Secondary variant computed.', () {
-      expect(
-        FlexSchemeColor.effective(m1, 1),
-        m1.copyWith(
-          primaryContainer: m1.primary.darken(kDarkenPrimaryContainer),
-          secondary: m1.primary.darken(kDarkenSecondary),
-          secondaryContainer: m1.primary.darken(kDarkenSecondaryContainer),
-          tertiary: m1.primary.lighten(kDarkenPrimaryContainer),
-          tertiaryContainer: m1.primary.lighten(kDarkenSecondaryContainer),
-          primaryVariant: m1.primary.darken(kDarkenPrimaryContainer),
-          secondaryVariant: m1.primary.darken(kDarkenSecondaryContainer),
-        ),
-      );
-    });
-
-    test(
-        'FSC1.16: GIVEN a FlexSchemeColor.effective(SchemeColors, 4, '
-        'swapColors: true) EXPECT it to be equal to SchemeColors '
-        'with primary and secondary swapped', () {
-      expect(
-          FlexSchemeColor.effective(m1, 4, swapColors: true),
-          m1.copyWith(
-            primary: m1.secondary,
-            primaryContainer: m1.secondaryContainer,
-            secondary: m1.primary,
-            secondaryContainer: m1.primaryContainer,
-            tertiary: m1.primary,
-            tertiaryContainer: m1.primary,
-            primaryVariant: m1.secondaryVariant,
-            secondaryVariant: m1.primaryVariant,
-          ));
-    });
-
-    const FlexSchemeColor m1Swap = FlexSchemeColor(
-      primary: FlexColor.materialLightSecondary,
-      primaryContainer: FlexColor.materialLightSecondaryContainer,
-      secondary: FlexColor.materialLightPrimary,
-      secondaryContainer: FlexColor.materialLightPrimaryContainer,
-      tertiary: FlexColor.materialLightPrimary,
-      tertiaryContainer: FlexColor.materialLightPrimary,
-      appBarColor: FlexColor.materialLightSecondaryContainer,
+    // m1Full = Basic flex scheme color, with full colors .
+    const FlexSchemeColor m1Full = FlexSchemeColor(
+      primary: FlexColor.materialLightPrimary,
+      primaryContainer: FlexColor.materialLightPrimaryContainer,
+      secondary: FlexColor.materialLightSecondary,
+      secondaryContainer: FlexColor.blueLightSecondary,
+      tertiary: FlexColor.materialLightTertiary,
+      tertiaryContainer: FlexColor.blueLightTertiary,
+      appBarColor: FlexColor.materialLightTertiary,
       error: FlexColor.materialLightError,
     );
 
     test(
-        'FSC1.17: GIVEN a FlexSchemeColor.effective(SchemeColors, 4, '
-        'swapColors: true) EXPECT it '
-        'to be equal to SchemeColor made with colors swapped. ', () {
-      expect(FlexSchemeColor.effective(m1, 4, swapColors: true), m1Swap);
+        'FSC1.12: GIVEN a FlexSchemeColor.effective(SchemeColors, 6) '
+        'EXPECT it to be equal to SchemeColors ', () {
+      expect(FlexSchemeColor.effective(m1Full, 6), m1Full);
+    });
+
+    test(
+        'FSC1.13: GIVEN a FlexSchemeColor.effective(SchemeColors, 5) '
+        'EXPECT equal to SchemeColors with tertiaryContainer computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 5),
+        m1Full.copyWith(
+          tertiaryContainer: m1Full.primary.lighten(kDarkenSecondaryContainer),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.14: GIVEN a FlexSchemeColor.effective(SchemeColors, 4) '
+        'EXPECT equal to SchemeColors with tertiary and tertiaryContainer '
+        'computed', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 4),
+        m1Full.copyWith(
+          tertiary: m1Full.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryContainer: m1Full.primary.lighten(kDarkenSecondaryContainer),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.15: GIVEN a FlexSchemeColor.effective(SchemeColors, 3) '
+        'EXPECT equal to SchemeColors with Secondary variant, tertiary and '
+        'tertiaryContainer computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 3),
+        m1Full.copyWith(
+          secondaryContainer:
+              m1Full.secondary.darken(kDarkenSecondaryContainerFromSecondary),
+          secondaryVariant:
+              m1Full.secondary.darken(kDarkenSecondaryContainerFromSecondary),
+          tertiary: m1Full.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryContainer: m1Full.primary.lighten(kDarkenSecondaryContainer),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.16: GIVEN a FlexSchemeColor.effective(SchemeColors, 2) '
+        'EXPECT equal to SchemeColors with primary variant, Secondary '
+        'variant, tertiary and tertiaryContainer computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 2),
+        m1Full.copyWith(
+          primaryContainer: m1Full.primary.darken(kDarkenPrimaryContainer),
+          secondaryContainer:
+              m1Full.secondary.darken(kDarkenSecondaryContainerFromSecondary),
+          tertiary: m1Full.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryContainer: m1Full.primary.lighten(kDarkenSecondaryContainer),
+          primaryVariant: m1Full.primary.darken(kDarkenPrimaryContainer),
+          secondaryVariant:
+              m1Full.secondary.darken(kDarkenSecondaryContainerFromSecondary),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.17: GIVEN a FlexSchemeColor.effective(SchemeColors, 1) '
+        'EXPECT equal to SchemeColors with primary variant, secondary, '
+        'Secondary variant, tertiary and tertiaryContainer computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 1),
+        m1Full.copyWith(
+          primaryContainer: m1Full.primary.darken(kDarkenPrimaryContainer),
+          secondary: m1Full.primary.darken(kDarkenSecondary),
+          secondaryContainer: m1Full.primary.darken(kDarkenSecondaryContainer),
+          tertiary: m1Full.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryContainer: m1Full.primary.lighten(kDarkenSecondaryContainer),
+          primaryVariant: m1Full.primary.darken(kDarkenPrimaryContainer),
+          secondaryVariant: m1Full.primary.darken(kDarkenSecondaryContainer),
+        ),
+      );
+    });
+
+    const FlexSchemeColor m1Swap = FlexSchemeColor(
+      primary: FlexColor.materialLightSecondary,
+      primaryContainer: FlexColor.blueLightSecondary,
+      secondary: FlexColor.materialLightPrimary,
+      secondaryContainer: FlexColor.materialLightPrimaryContainer, // -> SecVar
+      tertiary: FlexColor.materialLightTertiary, // -> primVar
+      tertiaryContainer: FlexColor.blueLightTertiary,
+      primaryVariant: FlexColor.materialLightTertiary,
+      secondaryVariant: FlexColor.materialLightPrimaryContainer,
+      appBarColor: FlexColor.materialLightTertiary,
+      error: FlexColor.materialLightError,
+    );
+
+    test(
+        'FSC1.18: GIVEN a FlexSchemeColor.effective(SchemeColors, 6, '
+        'swapColors: true) '
+        'EXPECT it equal to SchemeColor made with colors swapped. ', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 6, swapColors: true),
+        equals(m1Swap),
+      );
+    });
+
+    test(
+        'FSC1.19: GIVEN a FlexSchemeColor.effective(SchemeColors, 5, '
+        'swapColors: true) '
+        'EXPECT equal to SchemeColor made with colors swapped and '
+        'with tertiaryContainer computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 5, swapColors: true),
+        m1Swap.copyWith(
+          tertiaryContainer: m1Swap.primary.lighten(kDarkenSecondaryContainer),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.20: GIVEN a FlexSchemeColor.effective(SchemeColors, 4, '
+        'swapColors: true) '
+        'EXPECT equal to SchemeColor made with colors swapped '
+        'with tertiary and tertiaryContainer computed. ', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 4, swapColors: true),
+        m1Swap.copyWith(
+          tertiary: m1Swap.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryContainer: m1Swap.primary.lighten(kDarkenSecondaryContainer),
+        ),
+      );
     });
 
     // This test fails in version 3.0.0, fix released in 3.0.1.
     test(
-        'FSC1.18: GIVEN a FlexSchemeColor.effective(SchemeColors, 3, '
-        'swapColors: true) EXPECT it '
-        'to be equal to SchemeColor made with colors swapped,'
-        ' with Secondary variant computed.', () {
+        'FSC1.21: GIVEN a FlexSchemeColor.effective(SchemeColors, 3, '
+        'swapColors: true) '
+        'EXPECT equal to SchemeColor made with colors swapped, '
+        'with Secondary variant, tertiary and tertiaryContainer computed.', () {
       expect(
-        FlexSchemeColor.effective(m1, 3, swapColors: true),
+        FlexSchemeColor.effective(m1Full, 3, swapColors: true),
         m1Swap.copyWith(
           secondaryContainer:
               m1Swap.secondary.darken(kDarkenSecondaryContainerFromSecondary),
           secondaryVariant:
               m1Swap.secondary.darken(kDarkenSecondaryContainerFromSecondary),
+          tertiary: m1Swap.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryContainer: m1Swap.primary.lighten(kDarkenSecondaryContainer),
         ),
       );
     });
 
     test(
-        'FSC1.19: GIVEN a FlexSchemeColor.effective(SchemeColors, 2, '
-        'swapColors: true) EXPECT it '
-        'to be equal to SchemeColor made with colors swapped, '
-        'with primary variant and Secondary variant '
-        'computed.', () {
+        'FSC1.22: GIVEN a FlexSchemeColor.effective(SchemeColors, 2, '
+        'swapColors: true) '
+        'EXPECT equal to SchemeColor made with colors swapped, '
+        'with primary variant, Secondary variant, tertiary and '
+        'tertiaryContainer computed.', () {
       expect(
-        FlexSchemeColor.effective(m1, 2, swapColors: true),
+        FlexSchemeColor.effective(m1Full, 2, swapColors: true),
         m1Swap.copyWith(
           primaryContainer: m1Swap.primary.darken(kDarkenPrimaryContainer),
           secondaryContainer:
@@ -354,6 +413,8 @@ void main() {
           primaryVariant: m1Swap.primary.darken(kDarkenPrimaryContainer),
           secondaryVariant:
               m1Swap.secondary.darken(kDarkenSecondaryContainerFromSecondary),
+          tertiary: m1Swap.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryContainer: m1Swap.primary.lighten(kDarkenSecondaryContainer),
         ),
       );
     });
@@ -361,13 +422,13 @@ void main() {
     // This test failed in version 3.0.0, fix added in release in 3.0.1
     // Test now passes.
     test(
-        'FSC1.20: GIVEN a FlexSchemeColor.effective(SchemeColors, 1), '
+        'FSC1.23: GIVEN a FlexSchemeColor.effective(SchemeColors, 1), '
         'swapColors: true) EXPECT it '
         'to be equal to SchemeColor made with colors swapped, '
-        'with primary variant, secondary '
-        'and Secondary container, variant and tertiary computed.', () {
+        'with primary variant, secondary, secondary variant, tertiary and '
+        'tertiaryContainer computed.', () {
       expect(
-        FlexSchemeColor.effective(m1, 1, swapColors: true),
+        FlexSchemeColor.effective(m1Full, 1, swapColors: true),
         m1Swap.copyWith(
           primaryContainer: m1Swap.primary.darken(kDarkenPrimaryContainer),
           secondary: m1Swap.primary.darken(kDarkenSecondary),
@@ -387,32 +448,32 @@ void main() {
     //**************************************************************************
 
     test(
-        'FSC1.18: Test toString implemented via debugFillProperties '
+        'FSC1.24: Test toString implemented via debugFillProperties '
         'EXPECT exact print string', () {
       expect(
           m1.toString(),
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff018786), tertiary: Color(0xff03dac6), tertiaryContainer: Color(0xff03dac6), appBarColor: Color(0xff018786), error: Color(0xffb00020), primaryVariant: Color(0xff3700b3), secondaryVariant: Color(0xff018786))'));
+              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xff3700b3), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff03dac6), tertiary: Color(0xff018786), tertiaryContainer: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020), primaryVariant: Color(0xff3700b3), secondaryVariant: Color(0xff018786))'));
     });
     test(
-        'FSC1.18: Test toStringShort implemented via debugFillProperties '
+        'FSC1.25: Test toStringShort implemented via debugFillProperties '
         'EXPECT exact short printout string.', () {
       expect(
         m1.toStringShort(),
         equalsIgnoringHashCodes('FlexSchemeColor#00000'),
       );
     });
-    test('FSC1.19a: Test hashCode has value.', () {
+    test('FSC1.26: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
     });
     // This happens to be always equal now in tests, if it start failing, test
-    // 14c is actually enough.
-    test('FSC1.19b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 438130890);
+    // 28 is actually enough.
+    test('FSC1.27: Test hashCode exact value.', () {
+      expect(m1.hashCode, 35722478);
     });
-    test('FSC1.19c: Test hashCode copyWith has same exact value.', () {
+    test('FSC1.28: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));
     });
   });

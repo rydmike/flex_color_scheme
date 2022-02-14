@@ -142,6 +142,9 @@ class DemoApp extends StatelessWidget {
                     fontFamily: AppData.font,
                     // The platform can be toggled in the app, but not saved.
                     platform: themeController.platform,
+                    // TODO(rydmike): Make controller props for this setup.
+                    // Define key color based scheme setup value
+                    keyColorSetup: const FlexKeyColorSetup(),
                     // Opt in/out of using opinionated sub-themes.
                     useSubThemes: themeController.useSubThemes,
                     // Options used to modify the sub-themes, there are more

@@ -274,7 +274,7 @@ enum FlexSurfaceMode {
   /// This modes results in elevation overlay color on all Material types and
   /// background colors in dark theme mode, except dialogs that do NOT get any
   /// elevation overlay color. This happens because Dialogs use the
-  /// colorScheme.secondaryContainer color for their blend color which typically
+  /// colorScheme.tertiary color for their blend color which typically
   /// differs from the primary color used on surface color.
   ///
   /// To get elevation overlay color in dark themes on all surfaces used by
@@ -308,7 +308,7 @@ enum FlexSurfaceMode {
   /// This modes results in elevation overlay color on all Material types and
   /// background colors in dark theme mode, except dialogs that do NOT get any
   /// elevation overlay color. This happens because Dialogs use the
-  /// colorScheme.secondaryContainer color for their blend color which typically
+  /// colorScheme.tertiary color for their blend color which typically
   /// differs from the primary color used on surface color.
   ///
   /// To get elevation overlay color in dark themes on all surfaces used by
@@ -1350,12 +1350,14 @@ class FlexColorScheme with Diagnosticable {
     /// use of the primary, secondary and variant colors included in `colors` in
     /// `FlexSchemeColor` The integer number corresponds to using:
     ///
-    /// 1 = Only the primary color
-    /// 2 = Primary + Secondary colors
-    /// 3 = Primary + Primary variant + Secondary colors
-    /// 4 = Primary + Primary variant + Secondary + Secondary variant colors
+    /// * 1 = Only the primary color
+    /// * 2 = Primary & Secondary colors
+    /// * 3 = Primary + container & Secondary colors
+    /// * 4 = Primary + container & Secondary + container
+    /// * 5 = Primary + container & Secondary + container & tertiary colors
+    /// * 6 = Primary + container & Secondary + container & tertiary + container
     ///
-    /// By default the value is 4 and all main scheme colors in
+    /// By default the value is 6 and all main scheme colors in
     /// `FlexSchemeColor` are used.
     ///
     /// When the value is 1, the result is the same as if we would have
@@ -1363,14 +1365,14 @@ class FlexColorScheme with Diagnosticable {
     /// required primary color. With 2, it is equivalent to as if we would have
     /// given it only the primary and secondary colors, and so on.
     /// This property makes it possible to simulate and change the resulting
-    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 or 4 of
+    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 6 of
     /// the colors. If your used [FlexColorScheme] `colors` was actually created
     /// with [FlexSchemeColor.from] with only the primary color defined, then
-    /// changing the value from 4 to 3, 2 or 1, will all produce the same
+    /// changing the value from 6 ... 3, 2 or 1, will all produce the same
     /// effective scheme as the computed values will be the same as the
     /// [FlexSchemeColor.from] is using to compute any main missing scheme
     /// color values.
-    final int usedColors = 4,
+    final int usedColors = 6,
 
     /// Blends theme colors into surfaces and backgrounds. Deprecated use
     /// [surfaceMode] in combination with [blendLevel] instead.
@@ -2260,7 +2262,7 @@ class FlexColorScheme with Diagnosticable {
     final FlexKeyColorSetup? keyColorSetup,
   }) {
     // LIGHT: Check valid inputs
-    assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4');
+    assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6');
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
     assert(
@@ -2672,29 +2674,31 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// This is a convenience property that allows you to vary which colors to
     /// use of the primary, secondary and variant colors included in `colors` in
-    /// [FlexSchemeColor]. The integer number corresponds to using:
+    /// `FlexSchemeColor` The integer number corresponds to using:
     ///
-    /// 1 = Only the primary color
-    /// 2 = Primary + Secondary colors
-    /// 3 = Primary + Primary variant + Secondary colors
-    /// 4 = Primary + Primary variant + Secondary + Secondary variant colors
+    /// * 1 = Only the primary color
+    /// * 2 = Primary & Secondary colors
+    /// * 3 = Primary + container & Secondary colors
+    /// * 4 = Primary + container & Secondary + container
+    /// * 5 = Primary + container & Secondary + container & tertiary colors
+    /// * 6 = Primary + container & Secondary + container & tertiary + container
     ///
-    /// By default the value is 4 and all main scheme colors in
-    /// [FlexSchemeColor] are used.
+    /// By default the value is 6 and all main scheme colors in
+    /// `FlexSchemeColor` are used.
     ///
     /// When the value is 1, the result is the same as if we would have
     /// created the colors with [FlexSchemeColor.from] by only giving it the
     /// required primary color. With 2, it is equivalent to as if we would have
     /// given it only the primary and secondary colors, and so on.
     /// This property makes it possible to simulate and change the resulting
-    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 or 4 of
+    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 6 of
     /// the colors. If your used [FlexColorScheme] `colors` was actually created
     /// with [FlexSchemeColor.from] with only the primary color defined, then
-    /// changing the value from 4 to 3, 2 or 1, will all produce the same
+    /// changing the value from 6 ... 3, 2 or 1, will all produce the same
     /// effective scheme as the computed values will be the same as the
     /// [FlexSchemeColor.from] is using to compute any main missing scheme
     /// color values.
-    final int usedColors = 4,
+    final int usedColors = 6,
 
     /// Blends theme colors into surfaces and backgrounds. Deprecated use
     /// [surfaceMode] in combination with [blendLevel] instead.
@@ -3582,7 +3586,7 @@ class FlexColorScheme with Diagnosticable {
     final FlexKeyColorSetup? keyColorSetup,
   }) {
     // DARK: Check valid inputs
-    assert(usedColors >= 1 && usedColors <= 4, 'usedColors must be 1 to 4.');
+    assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6.');
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
     assert(
@@ -5460,16 +5464,45 @@ class FlexColorScheme with Diagnosticable {
             : FlexColor.materialLightPrimary);
 
     // Calculate default fallback colors from primary color.
-    final FlexSchemeColor used = FlexSchemeColor.from(
+
+    // final FlexSchemeColor used = FlexSchemeColor.from(
+    //   primary: usedPrimary,
+    //   primaryContainer:
+    //       primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
+    //   secondary: secondary ?? colorScheme?.secondary,
+    //   secondaryContainer: secondaryContainer ??
+    //       secondaryVariant ??
+    //       colorScheme?.secondaryContainer,
+    //   tertiary: tertiary ?? colorScheme?.tertiary,
+    //   tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
+    // );
+
+    // TODO(rydmike): IMPORTANT - see if this is BETTER and OK
+    final FlexSchemeColor used = FlexSchemeColor(
       primary: usedPrimary,
-      primaryContainer:
-          primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
-      secondary: secondary ?? colorScheme?.secondary,
+      primaryContainer: primaryContainer ??
+          primaryVariant ??
+          colorScheme?.primaryContainer ??
+          usedPrimary,
+      secondary: secondary ?? colorScheme?.secondary ?? usedPrimary,
       secondaryContainer: secondaryContainer ??
           secondaryVariant ??
-          colorScheme?.secondaryContainer,
-      tertiary: tertiary ?? colorScheme?.tertiary,
-      tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
+          colorScheme?.secondaryContainer ??
+          secondary ??
+          colorScheme?.secondary ??
+          usedPrimary,
+      tertiary: tertiary ??
+          colorScheme?.tertiary ??
+          secondary ??
+          colorScheme?.secondary ??
+          usedPrimary,
+      tertiaryContainer: tertiaryContainer ??
+          colorScheme?.tertiaryContainer ??
+          tertiary ??
+          colorScheme?.tertiary ??
+          secondary ??
+          colorScheme?.secondary ??
+          usedPrimary,
     );
 
     // // Determine effective main colors
@@ -5981,8 +6014,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     // Set dialog blend colors to secondary variant color for modes using it.
     if (surfaceMode == FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog ||
         surfaceMode == FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog) {
-      blendColor =
-          blendColor.copyWith(dialogBackground: scheme.secondaryContainer);
+      blendColor = blendColor.copyWith(dialogBackground: scheme.tertiary);
     }
     // We get surface starting default colors via brightness and Material
     // default colors if it was not provided. It is normally provided when

@@ -73,8 +73,8 @@ class ColorPickerInkWell extends StatelessWidget {
         'Brand blue TW Sec',
     ColorTools.createPrimarySwatch(FlexColor.ebonyClayLightPrimary):
         'Ebony clay Prim',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightSecondaryContainer):
-        'Brand blue G SecVar',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightTertiary):
+        'Brand blue G Tert',
     ColorTools.createPrimarySwatch(FlexColor.deepBlueLightPrimary):
         'Deep blue sea Prim',
     ColorTools.createPrimarySwatch(FlexColor.deepBlueLightSecondary):
@@ -88,8 +88,8 @@ class ColorPickerInkWell extends StatelessWidget {
     ColorTools.createPrimarySwatch(FlexColor.mallardGreenLightPrimaryContainer):
         'Mallard PrimVar',
     ColorTools.createPrimarySwatch(FlexColor.wasabiLightPrimary): 'Wasabi Prim',
-    ColorTools.createPrimarySwatch(FlexColor.materialLightSecondaryContainer):
-        'Teal M2 guide SecVar',
+    ColorTools.createPrimarySwatch(FlexColor.materialLightTertiary):
+        'Teal M2 guide Tert',
     // COLORS: Red like
     ColorTools.createPrimarySwatch(FlexColor.materialLightError):
         'Error M2 guide',
@@ -120,8 +120,7 @@ class ColorPickerInkWell extends StatelessWidget {
     ColorTools.createPrimarySwatch(FlexColor.bahamaBlueLightSecondary):
         'Bahama Sec',
     ColorTools.createPrimarySwatch(FlexColor.sharkLightSecondary): 'Shark Sec',
-    ColorTools.createPrimarySwatch(FlexColor.sharkLightSecondaryContainer):
-        'Shark SecVar',
+    ColorTools.createPrimarySwatch(FlexColor.sharkLightTertiary): 'Shark Tert',
     ColorTools.createPrimarySwatch(FlexColor.outerSpaceLightSecondary):
         'Outer space Sec',
     ColorTools.createPrimarySwatch(FlexColor.blueWhaleLightSecondary):
@@ -162,8 +161,8 @@ class ColorPickerInkWell extends StatelessWidget {
         'Brand blue TW Sec',
     ColorTools.createPrimarySwatch(FlexColor.ebonyClayDarkPrimary):
         'Ebony clay Prim',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkSecondaryContainer):
-        'Brand blue G SecVar',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkTertiary):
+        'Brand blue G Tert',
     ColorTools.createPrimarySwatch(FlexColor.deepBlueDarkPrimary):
         'Deep blue sea Prim',
     ColorTools.createPrimarySwatch(FlexColor.deepBlueDarkSecondary):
@@ -177,8 +176,8 @@ class ColorPickerInkWell extends StatelessWidget {
     ColorTools.createPrimarySwatch(FlexColor.mallardGreenDarkPrimaryContainer):
         'Mallard PrimVar',
     ColorTools.createPrimarySwatch(FlexColor.wasabiDarkPrimary): 'Wasabi Prim',
-    ColorTools.createPrimarySwatch(FlexColor.materialDarkSecondaryContainer):
-        'Teal M2 guide SecVar',
+    ColorTools.createPrimarySwatch(FlexColor.materialDarkTertiary):
+        'Teal M2 guide Tert',
     // COLORS: Red like
     ColorTools.createPrimarySwatch(FlexColor.materialDarkError):
         'Error M2 guide',
@@ -208,8 +207,7 @@ class ColorPickerInkWell extends StatelessWidget {
     ColorTools.createPrimarySwatch(FlexColor.bahamaBlueDarkSecondary):
         'Bahama Sec',
     ColorTools.createPrimarySwatch(FlexColor.sharkDarkSecondary): 'Shark Sec',
-    ColorTools.createPrimarySwatch(FlexColor.sharkDarkSecondaryContainer):
-        'Shark SecVar',
+    ColorTools.createPrimarySwatch(FlexColor.sharkDarkTertiary): 'Shark Tert',
     ColorTools.createPrimarySwatch(FlexColor.outerSpaceDarkSecondary):
         'Outer space Sec',
     ColorTools.createPrimarySwatch(FlexColor.blueWhaleDarkSecondary):

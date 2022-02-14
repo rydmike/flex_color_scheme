@@ -85,7 +85,7 @@ void main() {
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
             secondary: FlexColor.materialDarkSecondary,
-            secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            tertiary: FlexColor.materialDarkTertiary,
           ).toTheme,
           equals(FlexThemeData.dark()));
     });
@@ -101,9 +101,10 @@ void main() {
           equals(const FlexColorScheme(
             brightness: Brightness.light,
             primary: FlexColor.materialLightSecondary,
-            primaryContainer: FlexColor.materialLightSecondaryContainer,
+            primaryContainer: FlexColor.materialLightSecondary,
             secondary: FlexColor.materialLightPrimary,
             secondaryContainer: FlexColor.materialLightPrimaryContainer,
+            tertiary: FlexColor.materialLightTertiary,
           ).toTheme));
     });
 
@@ -118,9 +119,10 @@ void main() {
           equals(const FlexColorScheme(
             brightness: Brightness.dark,
             primary: FlexColor.materialDarkSecondary,
-            primaryContainer: FlexColor.materialDarkSecondaryContainer,
+            primaryContainer: FlexColor.materialDarkSecondary,
             secondary: FlexColor.materialDarkPrimary,
             secondaryContainer: FlexColor.materialDarkPrimaryContainer,
+            tertiary: FlexColor.materialDarkTertiary,
           ).toTheme));
     });
 
@@ -189,7 +191,7 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.materialLightSecondaryContainer,
+      secondaryContainer: FlexColor.materialLightTertiary,
     ).toTheme;
     // themeDark = Default material dark scheme colors.
     final ThemeData themeDark = const FlexColorScheme(
@@ -197,7 +199,7 @@ void main() {
       primary: FlexColor.materialDarkPrimary,
       primaryContainer: FlexColor.materialDarkPrimaryContainer,
       secondary: FlexColor.materialDarkSecondary,
-      secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+      secondaryContainer: FlexColor.materialDarkTertiary,
       // For the dark theme to be equal to ThemeData.from colorscheme dark we
       // have to override the computed onError color for the standard Material
       // dark error color. This is because the Material standard defines
@@ -661,15 +663,14 @@ void main() {
     );
     test(
         'FTD1.47: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexAppBarStyle.material EXPECT appbar theme color '
-        'FlexColor.materialLightSurface.', () {
-      expect(tLightS.appBarTheme.backgroundColor,
-          tLightS.colorScheme.secondaryContainer);
+        'WITH FlexAppBarStyle.custom EXPECT appbar theme color '
+        'scheme.tertiary.', () {
+      expect(tLightS.appBarTheme.backgroundColor, tLightS.colorScheme.tertiary);
     });
     test(
         'FTD1.48: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexAppBarStyle.primary EXPECT appbar theme color '
-        'colorScheme.primary.', () {
+        'WITH FlexAppBarStyle.material EXPECT appbar theme color '
+        'to be default material dark surface.', () {
       expect(tDarkS.appBarTheme.backgroundColor, FlexColor.materialDarkSurface);
     });
     test(
@@ -2254,7 +2255,7 @@ void main() {
           primary: FlexColor.materialLightPrimary,
           primaryContainer: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
-          secondaryContainer: FlexColor.materialLightSecondaryContainer,
+          tertiary: FlexColor.materialLightTertiary,
         ).toTheme,
         equals(FlexColorScheme.light().toTheme),
       );
@@ -2321,7 +2322,7 @@ void main() {
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
             secondary: FlexColor.materialDarkSecondary,
-            secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryContainer: FlexColor.materialDarkTertiary,
           ).toTheme,
           equals(FlexColorScheme.dark().toTheme));
     });
@@ -2337,9 +2338,10 @@ void main() {
         equals(const FlexColorScheme(
           brightness: Brightness.light,
           primary: FlexColor.materialLightSecondary,
-          primaryContainer: FlexColor.materialLightSecondaryContainer,
+          primaryContainer: FlexColor.materialLightSecondary,
           secondary: FlexColor.materialLightPrimary,
           secondaryContainer: FlexColor.materialLightPrimaryContainer,
+          tertiary: FlexColor.materialLightTertiary,
         ).toTheme),
       );
     });
@@ -2356,9 +2358,10 @@ void main() {
         equals(const FlexColorScheme(
           brightness: Brightness.dark,
           primary: FlexColor.materialDarkSecondary,
-          primaryContainer: FlexColor.materialDarkSecondaryContainer,
+          primaryContainer: FlexColor.materialDarkSecondary,
           secondary: FlexColor.materialDarkPrimary,
           secondaryContainer: FlexColor.materialDarkPrimaryContainer,
+          tertiary: FlexColor.materialDarkTertiary,
         ).toTheme),
       );
     });
