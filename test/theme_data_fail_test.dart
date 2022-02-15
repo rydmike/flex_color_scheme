@@ -5,7 +5,7 @@ void main() {
   // These tests are really for the Flutter SDK gap in the
   // ElevationOverlay.applyOverlay function. See issue:
   // https://github.com/flutter/flutter/issues/90353
-  // For more information. Tests are added here to cover them usage gap to
+  // For more information. Tests are added here to cover the usage gap to
   // see if it might change one day.
 
   group('Test ThemeData Equality', () {

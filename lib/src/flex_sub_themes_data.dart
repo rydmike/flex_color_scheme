@@ -367,8 +367,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool fabUseShape;
 
-  /// Defines which [Theme] based [ColorScheme] based color the FAB's (Floating
-  /// Action Buttons) use as their base color.
+  /// Defines which [Theme] based [ColorScheme] based color the Floating
+  /// Action Buttons (FABs) use as their base color.
   ///
   /// If not defined it defaults to theme.colorScheme.secondary color via
   /// theme defaults.
@@ -395,7 +395,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Border radius override value for the menu on [PopupMenuButton].
   ///
-  /// When used by [FlexColorScheme] the boroder radius of popup menus follows
+  /// When used by [FlexColorScheme] the border radius of popup menus follows
   /// the [defaultRadius] until and including 10 dp. After which it stays at
   /// 10 dp. If you need a higher border radius on popup menus than 10 dp,
   /// you will have to explicitly override it here. It will not look very

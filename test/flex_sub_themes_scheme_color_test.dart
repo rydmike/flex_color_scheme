@@ -68,7 +68,6 @@ void main() {
     secondaryVariant: secondaryVariant,
   );
 
-  // TODO(rydmike): Add M3 colorscheme test to this unit test.
   group('FST.sC: FlexSubThemes.schemeColor WITH ColorScheme ', () {
     test(
         'FST.sC-01: GIVEN SchemeColor.primary '

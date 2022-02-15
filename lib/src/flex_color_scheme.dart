@@ -4094,9 +4094,8 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// This default [m3TextTheme] when opting in on sub themes, can also be
   /// turned off by setting [FlexSubThemesData.useTextTheme] to false.
-  /// This reverts the text theme back M2 2018 Typography, later it may revart
+  /// This reverts the text theme back M2 2018 Typography, later it may revert
   /// to M3 2021 Typography when it is default in Flutter SDK.
-  ///
   ///
   /// The geometry of M3 styles were made based on this:
   /// https://github.com/flutter/flutter/issues/89853
@@ -5542,6 +5541,8 @@ class FlexColorScheme with Diagnosticable {
               elementRadius: subTheme.cardRadius ?? subTheme.defaultRadius,
               inputDecorationTheme: effectiveInputDecorationTheme)
           : null,
+      // TODO(rydmike): With new M3 ColorScheme, bg should be InverseSurface.
+      // Consider change or keep this? This looks nicer imo. Add config option?
       snackBarTheme: useSubThemes
           ? FlexSubThemes.snackBarTheme(
               elevation: subTheme.snackBarElevation,
@@ -5751,7 +5752,7 @@ class FlexColorScheme with Diagnosticable {
       onError: onError ?? colorScheme?.onError,
     );
     // Return the [ColorScheme] as a copyWith on original passed in colorScheme
-    // if one was passed in, with all the effective properties overrding its
+    // if one was passed in, with all the effective properties overriding its
     // corresponding properties. This will keep color properties not included in
     // FlexColorScheme as direct properties, as they were in any given
     // colorScheme, in the returned ColorScheme as well.
@@ -7000,7 +7001,7 @@ class _AlphaValues {
 /// It is used used to generate a scheme based on a modified version of
 /// [CorePalette] found in package "material_color_utilities". It is a simple
 /// modification of [Scheme] found in same "material_color_utilities" package,
-/// with the only chnage made to instead use the custom version of
+/// with the only change made to instead use the custom version of
 /// [CorePalette] that enables using 1, 2 or 3 seed colors for more degrees
 /// of freedom in seeded ColorScheme, using defined seed colors for
 /// primary, secondary and tertiary colors.
