@@ -590,6 +590,31 @@ abstract class ThemeService {
   /// Persists setting for secondaryContainerLight color, in example 5.
   Future<void> saveSecondaryContainerLight(Color value);
 
+  /// Key used to read and save the tertiaryLight color value.
+  static const String keyTertiaryLight = 'tertiaryLight';
+
+  /// Default value for the tertiaryLight color, also to reset settings.
+  static const Color defaultTertiaryLight = FlexColor.materialLightTertiary;
+
+  /// Loads setting for tertiaryLight color, in example 5.
+  Future<Color> tertiaryLight();
+
+  /// Persists setting for tertiaryLight color, in example 5.
+  Future<void> saveTertiaryLight(Color value);
+
+  /// Key used to read and save the tertiaryContainerLight color value.
+  static const String keyTertiaryContainerLight = 'tertiaryContainerLight';
+
+  /// Default value for the tertiaryLight color, also to reset settings.
+  static const Color defaultTertiaryContainerLight =
+      FlexColor.materialLightTertiary;
+
+  /// Loads setting for tertiaryContainerLight color, in example 5.
+  Future<Color> tertiaryContainerLight();
+
+  /// Persists setting for tertiaryContainerLight color, in example 5.
+  Future<void> saveTertiaryContainerLight(Color value);
+
   /// Key used to read and save the primaryDark color value.
   static const String keyPrimaryDark = 'primaryDark';
 
@@ -639,4 +664,29 @@ abstract class ThemeService {
 
   /// Persists setting for secondaryContainerDark color, in example 5.
   Future<void> saveSecondaryContainerDark(Color value);
+
+  /// Key used to read and save the tertiaryDark color value.
+  static const String keyTertiaryDark = 'tertiaryDark';
+
+  /// Default value for the tertiaryDark color, also to reset settings.
+  static const Color defaultTertiaryDark = FlexColor.materialDarkTertiary;
+
+  /// Loads setting for tertiaryDark color, in example 5.
+  Future<Color> tertiaryDark();
+
+  /// Persists setting for tertiaryDark color, in example 5.
+  Future<void> saveTertiaryDark(Color value);
+
+  /// Key used to read and save the tertiaryContainerDark color value.
+  static const String keyTertiaryContainerDark = 'tertiaryContainerDark';
+
+  /// Default value for the tertiaryDark color, also to reset settings.
+  static const Color defaultTertiaryContainerDark =
+      FlexColor.materialDarkTertiary;
+
+  /// Loads setting for tertiaryContainerDark color, in example 5.
+  Future<Color> tertiaryContainerDark();
+
+  /// Persists setting for tertiaryContainerDark color, in example 5.
+  Future<void> saveTertiaryContainerDark(Color value);
 }

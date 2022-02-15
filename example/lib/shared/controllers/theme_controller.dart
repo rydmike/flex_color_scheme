@@ -73,10 +73,14 @@ class ThemeController with ChangeNotifier {
     _primaryContainerLight = await _themeService.primaryContainerLight();
     _secondaryLight = await _themeService.secondaryLight();
     _secondaryContainerLight = await _themeService.secondaryContainerLight();
+    _tertiaryLight = await _themeService.tertiaryLight();
+    _tertiaryContainerLight = await _themeService.tertiaryContainerLight();
     _primaryDark = await _themeService.primaryDark();
     _primaryContainerDark = await _themeService.primaryContainerDark();
     _secondaryDark = await _themeService.secondaryDark();
     _secondaryContainerDark = await _themeService.secondaryContainerDark();
+    _tertiaryDark = await _themeService.tertiaryDark();
+    _tertiaryContainerDark = await _themeService.tertiaryContainerDark();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -148,12 +152,18 @@ class ThemeController with ChangeNotifier {
     await setSecondaryLight(ThemeService.defaultSecondaryLight, false);
     await setSecondaryContainerLight(
         ThemeService.defaultSecondaryContainerLight, false);
+    await setTertiaryLight(ThemeService.defaultTertiaryLight, false);
+    await setTertiaryContainerLight(
+        ThemeService.defaultTertiaryContainerLight, false);
     await setPrimaryDark(ThemeService.defaultPrimaryDark, false);
     await setPrimaryContainerDark(
         ThemeService.defaultPrimaryContainerDark, false);
     await setSecondaryDark(ThemeService.defaultSecondaryDark, false);
     await setSecondaryContainerDark(
         ThemeService.defaultSecondaryContainerDark, false);
+    await setTertiaryDark(ThemeService.defaultTertiaryDark, false);
+    await setTertiaryContainerDark(
+        ThemeService.defaultTertiaryContainerDark, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -655,6 +665,27 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveSecondaryContainerLight(value);
   }
 
+  late Color _tertiaryLight;
+  Color get tertiaryLight => _tertiaryLight;
+  Future<void> setTertiaryLight(Color? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _tertiaryLight) return;
+    _tertiaryLight = value;
+    if (notify) notifyListeners();
+    await _themeService.saveTertiaryLight(value);
+  }
+
+  late Color _tertiaryContainerLight;
+  Color get tertiaryContainerLight => _tertiaryContainerLight;
+  Future<void> setTertiaryContainerLight(Color? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _tertiaryContainerLight) return;
+    _tertiaryContainerLight = value;
+    if (notify) notifyListeners();
+    await _themeService.saveTertiaryContainerLight(value);
+  }
+
   late Color _primaryDark;
   Color get primaryDark => _primaryDark;
   Future<void> setPrimaryDark(Color? value, [bool notify = true]) async {
@@ -697,6 +728,27 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveSecondaryContainerDark(value);
   }
 
+  late Color _tertiaryDark;
+  Color get tertiaryDark => _tertiaryDark;
+  Future<void> setTertiaryDark(Color? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _tertiaryDark) return;
+    _tertiaryDark = value;
+    if (notify) notifyListeners();
+    await _themeService.saveTertiaryDark(value);
+  }
+
+  late Color _tertiaryContainerDark;
+  Color get tertiaryContainerDark => _tertiaryContainerDark;
+  Future<void> setTertiaryContainerDark(Color? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _tertiaryContainerDark) return;
+    _tertiaryContainerDark = value;
+    if (notify) notifyListeners();
+    await _themeService.saveTertiaryContainerDark(value);
+  }
+
   // Get custom scheme data based on currently defined scheme colors.
   FlexSchemeData get customScheme => FlexSchemeData(
         name: FlexColor.customName,
@@ -706,6 +758,8 @@ class ThemeController with ChangeNotifier {
           primaryContainer: primaryContainerLight,
           secondary: secondaryLight,
           secondaryContainer: secondaryContainerLight,
+          tertiary: tertiaryLight,
+          tertiaryContainer: tertiaryContainerLight,
           appBarColor: secondaryContainerLight,
           error: FlexColor.materialLightError,
         ),
@@ -714,6 +768,8 @@ class ThemeController with ChangeNotifier {
           primaryContainer: primaryContainerDark,
           secondary: secondaryDark,
           secondaryContainer: secondaryContainerDark,
+          tertiary: tertiaryDark,
+          tertiaryContainer: tertiaryContainerDark,
           appBarColor: secondaryContainerDark,
           error: FlexColor.materialDarkError,
         ),
@@ -726,10 +782,14 @@ class ThemeController with ChangeNotifier {
     await setPrimaryContainerLight(scheme.light.primaryContainer, false);
     await setSecondaryLight(scheme.light.secondary, false);
     await setSecondaryContainerLight(scheme.light.secondaryContainer, false);
+    await setTertiaryLight(scheme.light.tertiary, false);
+    await setTertiaryContainerLight(scheme.light.tertiaryContainer, false);
     await setPrimaryDark(scheme.dark.primary, false);
     await setPrimaryContainerDark(scheme.dark.primaryContainer, false);
     await setSecondaryDark(scheme.dark.secondary, false);
     await setSecondaryContainerDark(scheme.dark.secondaryContainer, false);
+    await setTertiaryDark(scheme.dark.tertiary, false);
+    await setTertiaryContainerDark(scheme.dark.tertiaryContainer, false);
     // Notify listeners, after all individual values have been set.
     notifyListeners();
   }

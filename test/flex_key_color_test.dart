@@ -9,7 +9,7 @@ void main() {
   //****************************************************************************
   group('FKCS1: WITH FlexKeyColorSetup ', () {
     // m1, is the FlexKeyColorSetup with Material standard scheme.
-    const FlexKeyColorSetup m1 = FlexKeyColorSetup(
+    const FlexKeyColor m1 = FlexKeyColor(
       useKeyColors: true,
       useSecondary: true,
       useTertiary: true,
@@ -21,9 +21,9 @@ void main() {
       keepTertiaryContainer: false,
     );
     // m2, has same definition as m1, but via default values
-    const FlexKeyColorSetup m2 = FlexKeyColorSetup();
+    const FlexKeyColor m2 = FlexKeyColor();
     // m3, has same definition as m1, but one value is different.
-    const FlexKeyColorSetup m3 = FlexKeyColorSetup(
+    const FlexKeyColor m3 = FlexKeyColor(
       useKeyColors: false, // <- different value
       useSecondary: true,
       useTertiary: true,
@@ -35,7 +35,7 @@ void main() {
       keepTertiaryContainer: false,
     );
     // m4, has all values different from m1
-    const FlexKeyColorSetup m4 = FlexKeyColorSetup(
+    const FlexKeyColor m4 = FlexKeyColor(
       useKeyColors: false,
       useSecondary: false,
       useTertiary: false,
@@ -138,13 +138,12 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexKeyColorSetup#00000(useKeyColors: true, useSecondary: true, useTertiary: true, keepPrimary: false, keepSecondary: false, keepTertiary: false, keepPrimaryContainer: false, keepSecondaryContainer: false, keepTertiaryContainer: false)'));
+              'FlexKeyColor#00000(useKeyColors: true, useSecondary: true, useTertiary: true, keepPrimary: false, keepSecondary: false, keepTertiary: false, keepPrimaryContainer: false, keepSecondaryContainer: false, keepTertiaryContainer: false)'));
     });
     test(
         'FKCS1.11: Test toStringShort implemented via debugFillProperties '
         'EXPECT exact short printout.', () {
-      expect(m1.toStringShort(),
-          equalsIgnoringHashCodes('FlexKeyColorSetup#00000'));
+      expect(m1.toStringShort(), equalsIgnoringHashCodes('FlexKeyColor#00000'));
     });
     test('FKCS1.12: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);

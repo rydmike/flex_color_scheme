@@ -87,6 +87,19 @@ Future<void> main() async {
   runApp(DemoApp(themeController: themeController));
 }
 
+// TODO(rydmike): Temp keyColors to test the features.
+const FlexKeyColor _keyColors = FlexKeyColor(
+  useKeyColors: false,
+  useSecondary: true,
+  useTertiary: true,
+  keepPrimary: false,
+  keepSecondary: true,
+  keepTertiary: true,
+  keepPrimaryContainer: false,
+  keepSecondaryContainer: false,
+  keepTertiaryContainer: false,
+);
+
 class DemoApp extends StatelessWidget {
   const DemoApp({Key? key, required this.themeController}) : super(key: key);
   final ThemeController themeController;
@@ -97,17 +110,33 @@ class DemoApp extends StatelessWidget {
     return AnimatedBuilder(
         animation: themeController,
         builder: (BuildContext context, Widget? child) {
+          // Using a built-in scheme or one of the custom colors in the demo?
+          final bool useBuiltIn = themeController.schemeIndex > 2 &&
+              themeController.schemeIndex < AppColor.schemesCustom.length - 1;
+          // Get the enum index of scheme
+          final int flexScheme = themeController.schemeIndex - 3;
+
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             scrollBehavior: AppScrollBehavior(),
             title: 'Themes Playground',
             theme: themeController.useFlexColorScheme
                 ? FlexThemeData.light(
-                    // Use controller to get current scheme colors.
-                    colors: AppColor.scheme(themeController).light,
+                    // Use controller to get current scheme colors, use custom
+                    // color param only if we use an index where we have custom
+                    // colors in use.
+                    colors: !useBuiltIn
+                        ? AppColor.scheme(themeController).light
+                        : null,
+                    // Otherwise use built-in scheme based property. We could
+                    // use only the colors property, but then we do no see the
+                    // correct keyColor behavior in dark mode, with built-in.
+                    // Also a good test of that factory works as designed.
+                    // The source code gen also uses this logic.
+                    scheme: useBuiltIn ? FlexScheme.values[flexScheme] : null,
                     // TODO(rydmike): Make this a controller property.
                     // Used number of colors
-                    usedColors: 4,
+                    usedColors: 6,
                     // Use controller to select surface mode
                     surfaceMode: themeController.surfaceMode,
                     // Integer used to control the level of primary color
@@ -144,7 +173,7 @@ class DemoApp extends StatelessWidget {
                     platform: themeController.platform,
                     // TODO(rydmike): Make controller props for this setup.
                     // Define key color based scheme setup value
-                    keyColorSetup: const FlexKeyColorSetup(),
+                    keyColors: _keyColors,
                     // Opt in/out of using opinionated sub-themes.
                     useSubThemes: themeController.useSubThemes,
                     // Options used to modify the sub-themes, there are more
@@ -282,10 +311,24 @@ class DemoApp extends StatelessWidget {
             // useful lightIsWhite option.
             darkTheme: themeController.useFlexColorScheme
                 ? FlexThemeData.dark(
-                    colors: AppColor.scheme(themeController).dark,
+                    // Use controller to get current scheme colors, use custom
+                    // color param only if we use an index where we have custom
+                    // colors in use.
+                    colors: !useBuiltIn
+                        ? AppColor.scheme(themeController).dark
+                        : null,
+                    // Otherwise use built-in scheme based property. We could
+                    // use only the colors property, but then we do no see the
+                    // correct keyColor behavior in dark mode, with built-in.
+                    // Also a good test of that factory works as designed.
+                    // The source code gen also uses this logic.
+                    scheme: useBuiltIn ? FlexScheme.values[flexScheme] : null,
                     // TODO(rydmike): Make this a controller property.
                     // Used number of colors
-                    usedColors: 4,
+                    usedColors: 6,
+                    // TODO(rydmike): Make controller props for this setup.
+                    // Define key color based scheme setup value
+                    keyColors: _keyColors,
                     // For reduced complexity in this demo, we use the same
                     // control value for surface mode selection and blend level
                     // for light and dark mode. They can as shown in earlier

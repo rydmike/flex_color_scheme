@@ -8,7 +8,7 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 import 'flex_color.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
-import 'flex_key_color_setup.dart';
+import 'flex_key_color.dart';
 import 'flex_scheme.dart';
 import 'flex_sub_themes.dart';
 import 'flex_sub_themes_data.dart';
@@ -607,7 +607,6 @@ class FlexColorScheme with Diagnosticable {
     final this.useSubThemes = false,
     final this.subThemesData,
     final this.useMaterial3 = false,
-    final this.keyColorSetup,
   })  : assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.'),
         assert(bottomAppBarElevation >= 0.0,
             'Bottom AppBar elevation must be >= 0.');
@@ -618,18 +617,21 @@ class FlexColorScheme with Diagnosticable {
   /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
   /// you already have a custom [ColorScheme] based color definition that
   /// you want to use with FlexColorScheme theming and its sub-theming
-  /// capabilities. This useful when using fully custom scheme or using the
+  /// capabilities. This is useful when using fully custom scheme or using the
   /// Material 3 based design and its seed generated color schemes.
+  ///
   /// The factories [FlexColorScheme.light] and [FlexColorScheme.dark] provide
   /// convenience factories for also generating M3 based seeded themes using
-  /// the built in [ColorSchemes] as seed colors.
+  /// the built in [ColorSchemes] as seed colors or custom colors you provide
+  /// as seeding colors.
   ///
   /// If you provide both a [ColorScheme] and some individual direct property
   /// values that also exist in a [ColorScheme], the individual property values
   /// will override the corresponding ones in your [ColorScheme].
   ///
-  /// If you do not define a color scheme, the individual color value properties
-  /// and their defaults are used to define your effective color scheme.
+  /// If you do not define a [colorScheme], the individual color value
+  /// properties and their defaults are used to define your effective
+  /// [FlexColorScheme] and its resulting [ColorScheme] and [ThemeData].
   ///
   /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
   /// [toScheme]. This will always get you a complete color scheme, including
@@ -638,7 +640,7 @@ class FlexColorScheme with Diagnosticable {
   /// to compute color scheme branded surface colors for you. The effective
   /// [ColorScheme] for your theme is often needed if you want to create custom
   /// sub-themes that should use the colors from the scheme using none default
-  /// color assignments from the color scheme.
+  /// color assignments computed from the input colors.
   final ColorScheme? colorScheme;
 
   /// The overall brightness of this color scheme.
@@ -662,11 +664,11 @@ class FlexColorScheme with Diagnosticable {
 
   /// A color used for elements needing less emphasis than [primary].
   ///
-  /// If not defined, and if there is no [colorScheme] defined that defines it,
-  /// scheme result will be [primary] color.
+  /// If not defined, and if there is no [colorScheme] defined, the default
+  /// result will be [primary] color.
   final Color? primaryContainer;
 
-  /// A darker version of the primary color.
+  /// (DEPRECATED) A darker version of the primary color.
   ///
   /// In Flutter SDK the [primaryVariant] color is only used by [SnackBar]
   /// button color in dark theme mode as a part of predefined widget behavior.
@@ -682,8 +684,8 @@ class FlexColorScheme with Diagnosticable {
   /// master v2.6.0-0.0.pre, and in stable (2.10.0).
   /// See https://github.com/flutter/flutter/issues/89852.
   ///
-  /// If not defined, and if there is no [colorScheme] defined, it will be
-  /// computed from [primary] color.
+  /// If not defined, and if there is no [colorScheme] defined, it will default
+  /// to [primary] color.
   @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
       'due to deprecation in Flutter master from 2.10.0')
   final Color? primaryVariant;
@@ -691,19 +693,17 @@ class FlexColorScheme with Diagnosticable {
   /// An accent color that, when used sparingly, calls attention to parts
   /// of your application.
   ///
-  /// If not defined, and if there is no [colorScheme] defined that defines it,
-  /// scheme result will be [primary] color.
+  /// If not defined, and if there is no [colorScheme] defined, the default
+  /// result will be [primary] color.
   final Color? secondary;
 
   /// A color used for elements needing less emphasis than [secondary].
   ///
-  ///
-  /// If not defined, and if there is no [colorScheme] defining it, scheme
-  /// result will be [secondary] color, and if it is not defined either, then
-  /// [primary] color.
+  /// If not defined, and if there is no [colorScheme] defined, it will default
+  /// to [secondary] color, and if it is not defined either, then [primary].
   final Color? secondaryContainer;
 
-  /// A darker version of the secondary color.
+  /// (DEPRECATED) A darker version of the secondary color.
   ///
   /// In Flutter SDK the [secondaryVariant] color is not used by in any
   /// built-in widgets default themes or predefined widget behavior.
@@ -729,38 +729,34 @@ class FlexColorScheme with Diagnosticable {
   /// and [secondary] colors or bring heightened attention to an element,
   /// such as an input field.
   ///
-  /// If not defined, and if there is no [colorScheme] defining it, scheme
-  /// result will be [secondary] color, and if it is not defined either, then
-  /// [primary] color.
+  /// If not defined, and if there is no [colorScheme] defined, it will default
+  /// to [secondary] color, and if it is not defined either, then [primary].
   final Color? tertiary;
 
   /// A color used for elements needing less emphasis than [tertiary].
   ///
-  /// If not defined, and if there is no [colorScheme] defining it, scheme
-  /// result will be [secondary] color, and if it is not defined either, then
-  /// [primary] color.
+  /// If not defined, and if there is no [colorScheme] defined, it will default
+  /// to [secondary] color, and if it is not defined either, then [primary].
   final Color? tertiaryContainer;
 
-  /// The color to use for input validation errors, e.g. for
+  /// The color to use for input validation errors, for example on
   /// [InputDecoration.errorText].
   ///
   /// If no value is given, and if there is no [colorScheme] defined, it
-  /// defaults to [FlexColor.materialLightError] if
-  /// brightness is light and to [FlexColor.materialDarkError] if brightness
-  /// is dark.
+  /// defaults to [FlexColor.materialLightError] if brightness is light,
+  /// and to [FlexColor.materialDarkError] if brightness is dark.
   final Color? error;
 
   /// The surface (background) color for widgets like [Card] and
   /// [BottomAppBar].
   ///
-  /// The color is applied to [ThemeData.cardColor] and
-  /// [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
-  /// by all [Material] of type [MaterialType.card].
+  /// The color is applied to [ThemeData.cardColor] and [ColorScheme.surface]
+  /// in [ThemeData.colorScheme], it is also used by all [Material] of type
+  /// [MaterialType.card].
   ///
   /// If no value is given, and if there is no [colorScheme] defined, it
-  /// defaults to [FlexColor.materialLightSurface] if
-  /// brightness is light and to [FlexColor.materialDarkSurface] if
-  /// brightness is dark.
+  /// defaults to [FlexColor.materialLightSurface] if brightness is light,
+  /// and to [FlexColor.materialDarkSurface] if brightness is dark.
   final Color? surface;
 
   /// A color that typically appears behind scrollable content.
@@ -770,9 +766,8 @@ class FlexColorScheme with Diagnosticable {
   /// [Material] of type [MaterialType.canvas].
   ///
   /// If no value is given, and if there is no [colorScheme] defined, it
-  /// defaults to [FlexColor.materialLightBackground]
-  /// if brightness is light and to [FlexColor.materialDarkBackground] if
-  /// brightness is dark.
+  /// defaults to [FlexColor.materialLightBackground] if brightness is light,
+  /// and to [FlexColor.materialDarkBackground] if brightness is dark.
   final Color? background;
 
   /// The color of the [Scaffold] background.
@@ -780,15 +775,16 @@ class FlexColorScheme with Diagnosticable {
   /// The color is applied to [ThemeData.scaffoldBackgroundColor].
   ///
   /// This color cannot be controlled separately with Flutter's standard
-  /// [ColorScheme] based themes. FlexColorScheme brings back the possibility
-  /// to specify it directly when using color scheme based themes.
+  /// [ColorScheme] only based themes. FlexColorScheme brings back the
+  /// possibility to specify it directly when using color scheme based themes.
   ///
   /// If no color is given, it defaults to [background].
   final Color? scaffoldBackground;
 
   /// The background color of [Dialog] elements.
   ///
-  /// The color is applied to [ThemeData.dialogBackgroundColor].
+  /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
+  /// controlled separately with only a [ThemeData.from] a color scheme.
   ///
   /// If no value is given, it defaults to [surface].
   final Color? dialogBackground;
@@ -796,9 +792,12 @@ class FlexColorScheme with Diagnosticable {
   /// Background theme color for the [AppBar].
   ///
   /// This theme color cannot be controlled separately with Flutter's standard
-  /// [ThemeData.from] a [ColorScheme]. FlexColorScheme enables you to specify
+  /// [ThemeData.from] a [ColorScheme]. [FlexColorScheme] enables you to specify
   /// an app bar theme color that is independent of the primary color in light
   /// theme and in dark mode of the dark theme's dark surface color.
+  ///
+  /// If you use it, the correct text and icon contrast color is computed and
+  /// set automatically based on provided color.
   ///
   /// If no color is given it defaults to the Flutter standard color scheme
   /// based light and dark app bar theme colors.
@@ -919,9 +918,8 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// Defaults to 0, cannot be null.
   ///
-  /// The 0 elevation is an iOs style
-  /// influenced opinionated choice, but it can easily be adjusted for the
-  /// theme with this property.
+  /// The 0 elevation is an iOs style influenced opinionated choice, but it
+  /// can easily be adjusted for the theme with this property.
   final double appBarElevation;
 
   /// The themed elevation for the bottom app bar.
@@ -939,21 +937,26 @@ class FlexColorScheme with Diagnosticable {
   /// background color brightness is inverted in relation to the overall
   /// theme's background color.
   ///
-  /// FlexColorScheme allows you to use a single
-  /// toggle to invert this. Light tooltips on light background is e.g. the
-  /// default style on Windows Desktop. You can use this toggle to use this
-  /// style, or as a means to create a platform adaptive
-  /// tooltip style, where the Material/Flutter style is used on devices and
-  /// Web, but the inverted scheme is used on desktop platforms.
+  /// [FlexColorScheme] allows you to use a single toggle to invert this.
+  /// Light tooltips on light background is e.g. the default style on
+  /// Windows Desktop. You can use this toggle to use this style, or use it as
+  /// a means to create a platform adaptive tooltip style, where the
+  /// Material and Flutter style is used on devices and Web, but the inverted
+  /// scheme is used on desktop platforms.
   ///
   /// Defaults to false, and uses same background style as Material Design guide
   /// and Flutter.
   ///
   /// Regardless of value used on this property, the tooltip theme created by
-  /// [FlexColorScheme] does however deviate a bit from the Flutter default
-  /// theme, it has slightly larger font for improved legibility on web and
-  /// desktop with device pixel ratio 1.0 and also use a padding style also
-  /// suitable for multiline tooltips.
+  /// [FlexColorScheme] does deviate a bit from Flutter's default tooltip theme.
+  /// With default Material text theme, it uses a slightly larger font 12dp, for
+  /// improved legibility on web and desktop with device pixel ratio 1.0, and
+  /// it also uses a padding style suitable for multiline tooltips.
+  ///
+  /// Default tooltip theme in Flutter Material 2 is currently a bit flawed on
+  /// desktop and web, because it defaults to using a very small font (10 dp).
+  /// See issue: https:///github.com/flutter/flutter/issues/71429.
+  /// Material 3 changes the default tooltip theme size to 11dp.
   final bool tooltipsMatchBackground;
 
   /// When `true`, the status bar on Android will be the same color as
@@ -963,16 +966,15 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// When true, the AppBar in Android mimics the look of one-toned AppBar's
   /// typically used on iOS. Set it to `false` to revert back and use
-  /// Android's default two-toned look. If true the status bar area is
-  /// actually also transparent, then if the app bar is also translucent,
-  /// content that scrolls behind it is also visible behind the status
-  /// bar area.
+  /// Android's default two-toned look. If true the status bar area is also
+  /// transparent, then if the app bar is also translucent, content that scrolls
+  /// behind it is also visible behind the status bar area.
   final bool transparentStatusBar;
 
   /// The density value for specifying the compactness of various UI components.
   ///
-  /// Consider using [FlexColorScheme.comfortablePlatformDensity],
-  /// it is similar to [VisualDensity.adaptivePlatformDensity], but the
+  /// Consider using [FlexColorScheme.comfortablePlatformDensity].
+  /// It is similar to [VisualDensity.adaptivePlatformDensity], but the
   /// density for desktop and Web is less dense in order to offer a bit larger
   /// touch friendly surfaces, but not quite as large as small touch devices.
   ///
@@ -1112,7 +1114,7 @@ class FlexColorScheme with Diagnosticable {
   /// Because of how the overlay color application is implemented in Flutter
   /// SDK, you will only get overlay color applied in dark mode when this value
   /// is true, if the [Material] surface color being elevated is equal to
-  /// [ThemeData.colorScheme] and its [ColorScheme.surface] color property.
+  /// [ThemeData.colorScheme] and its [ColorScheme.surface] color value.
   ///
   /// Thus when using color branded surfaces, if you want all [Material]
   /// surfaces in your theme to get an overlay color in dark mode, you must for
@@ -1141,7 +1143,7 @@ class FlexColorScheme with Diagnosticable {
   /// * [TextButton]
   /// * [ElevatedButton]
   /// * [OutlinedButton]
-  /// * Older buttons using [ButtonThemeData]
+  /// * Older deprecated legacy buttons using [ButtonThemeData]
   /// * [ToggleButtons]
   /// * [InputDecoration]
   /// * [FloatingActionButton]
@@ -1167,7 +1169,7 @@ class FlexColorScheme with Diagnosticable {
   /// different rounding per widget if so desired.
   ///
   /// By default each widgets corner radius and some other styling take
-  /// inspiration from the Material 3 (M3) Specification https://m3.material.io/
+  /// inspiration from the Material 3 (M3) specification https://m3.material.io
   /// and uses its values as defaults when it is possible to do so in Flutter
   /// SDK theming within its current Material 2 (M2) design limitations.
   ///
@@ -1184,8 +1186,9 @@ class FlexColorScheme with Diagnosticable {
   /// to add themed corner radius to all Widgets that support it, and to
   /// provide a consistent look on all buttons, including [ToggleButtons].
   ///
-  /// The default values is also a way to give your Material 2 themed based
-  /// application a look that to large extents follows the Material3 (M3) guide.
+  /// The default values is also a a quick way to give your Material 2 themed
+  /// based  application a look that to large extents follows the Material3
+  /// (M3) guide before the option is fully implemented in Flutter SDK.
   ///
   /// Defaults to null, resulting in a default [FlexSubThemesData] being used
   /// when [useSubThemes] is set to true.
@@ -1197,9 +1200,13 @@ class FlexColorScheme with Diagnosticable {
   /// start using new colors, typography and other features of Material 3.
   /// If false, they will use the Material 2 look and feel.
   ///
-  /// Currently no components have been migrated to support Material 3.
-  /// As they are updated to include Material 3 support this documentation
-  /// will be modified to indicate exactly what widgets this flag will affect.
+  /// Currently, in Flutter 2.10.x, no components have been migrated to support
+  /// Material 3 fully. In 2.10 only NavigationRail gets a pill shaped selected
+  /// icon highlight, like the NavigationBar has, when [useMaterial3] is true.
+  ///
+  /// As Flutter SDK widgets are updated to include Material 3 support this
+  /// documentation will be modified to indicate exactly what widgets this flag
+  /// will affect.
   ///
   /// During the migration to Material 3, turning this on may yield
   /// inconsistent look and feel in your app. Some components will be migrated
@@ -1213,26 +1220,14 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// See also:
   ///
-  ///   * [Material Design 3](https://m3.material.io/).
+  ///   * [Material Design 3](https://m3.material.io).
+  ///
+  /// While the migration of Flutter SDK to the Material 3 design spec is
+  /// in progress, setting [useSubThemes] in [FlexColorScheme] to true,
+  /// will produce widget sub-themes using current Flutter Material 2 theming
+  /// limitations. By default the opinionated sub-themes implement the
+  /// Material 3 design and look when it is possible within current SDK limits.
   final bool useMaterial3;
-
-  /// To use and activate Material 3 color system based [ColorScheme]
-  /// defined via key colors for primary, secondary and tertiary colors and
-  /// the [TonalPalette] generated by these key color values, pass
-  /// in a [FlexKeyColorSetup] to [keyColorSetup].
-  ///
-  /// By default it is not defined (null), and a traditional manually configured
-  /// color scheme will be created based on input property values or the
-  /// passed in [colorScheme].
-  ///
-  /// If a [FlexKeyColorSetup] instance is passed in, the key color seeding
-  /// behaviour depends on properties defined in the [FlexKeyColorSetup]
-  /// instance.
-  ///
-  /// For more information on Material 3 color system and usage of key colors
-  /// to generate tonal palettes and tones, see:
-  /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
-  final FlexKeyColorSetup? keyColorSetup;
 
   //****************************************************************************
   //
@@ -1268,6 +1263,84 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// The factory contains a large number of other properties that can be used
   /// to create beautiful themes by just adjusting a few behavior properties.
+  ///
+  /// To activate using opinionated sub themes that further refines the produced
+  /// theme, set [useSubThemes] to true and optionally pass in a
+  /// [FlexSubThemesData] to [subThemesData] to use short cut properties to
+  /// setup additional features in the sub-themes.
+  ///
+  /// Material 3 guide introduces a new color system with key colors and tonal
+  /// palettes, see
+  /// https://m3.material.io/styles/color/the-color-system/key-colors-tones.
+  ///
+  /// You can opt-in on using this new M3 color system by creating your tonal
+  /// theme colors using the effective [primary], [secondary] and [tertiary]
+  /// colors in the factory, as key colors to create tonal palettes for
+  /// these main Material 3 color palettes.
+  /// Colors from these key color seed generated palettes will then be used as
+  /// color tones for the produce [ColorScheme], as defined by the Material 3
+  /// design guide. By studying the Flutter SDK [ColorScheme.from] factory you
+  /// can see which color tone from what key color is used where.
+  /// [FlexColorScheme] uses the same assignments for the tones to the
+  /// generated [ColorScheme] when you opt in using Material 3 tonal palettes.
+  ///
+  /// The [FlexColorScheme] light and dark factory offer more control over the
+  /// seed generation setup. With [ColorScheme.from] you can only generate the
+  /// [ColorScheme] from one key color, the primary color. With
+  /// [FlexColorScheme] factories  you can use separate key colors for
+  /// [secondary] and [tertiary] from the [primary] color, to make their
+  /// tonal palettes. The effective colors in your [FlexColorScheme] for these
+  /// color properties are used as key color inputs when you provide a
+  /// [FlexKeyColor] via [keyColors] and enable it by setting
+  /// [FlexKeyColor.useKeyColors] to true, which it is in its default
+  /// constructor, so to enable it you can just pass in a default
+  /// FlexKeyColor() to [keyColors].
+  ///
+  /// By setting [FlexKeyColor.useSecondary] or
+  /// [FlexKeyColor.useTertiary] to false, the corresponding effective colors
+  /// in [FlexColorScheme] will not be used as keys for corresponding
+  /// [TonalPalette]. If one is off, its tonal palette will instead be based on
+  /// the primary color as key. If both are false, the [FlexColorScheme.light]
+  /// seeding algorithm becomes the same as using [ColorScheme.from]. The
+  /// primary color is always used as seed color when key color seeding is
+  /// enabled with [FlexKeyColor.useKeyColors] set to true.
+  ///
+  /// You can also opt to keep selected effective main colors, primary,
+  /// secondary, tertiary and their containers, in your [FlexColorScheme] as
+  /// their effective color, even when you enable key color based
+  /// seeded tonal palette based ColorScheme output. You do this by
+  /// setting [FlexKeyColor.keepPrimary], [FlexKeyColor.keepSecondary] etc to
+  /// true, for each color property where you want to keep its exact color value
+  /// as defined, but otherwise may be OK with using key seeded color values.
+  ///
+  /// You can use this feature if you for example want to use an exact
+  /// predefined primary brand color in light mode, but are OK with all other
+  /// colors using tones derived from its Material 3 tonal palette.
+  ///
+  /// When you use key color based seeded theme generation, the used key inputs
+  /// for primary, secondary and tertiary are only used to set and generate the
+  /// tone of the palette used for each colors tonal palette. You will rarely
+  /// see the same color on that actual, primary, secondary and tertiary color
+  /// in the produced [ColorScheme], unless you lock them down with the "keep"
+  /// properties.
+  ///
+  /// The same tonal palette should typically be used for both
+  /// light and dark mode colors. Under the hood [FlexColorScheme] selects the
+  /// right color tone from the tonal palette, which is different for light and
+  /// dark mode. For a matched light and dark theme, you should use the same
+  /// input key color. When you use [FlexColorScheme.light] and
+  /// [FlexColorScheme.dark] and the [FlexScheme] enum based [scheme] property,
+  /// to use a built-in color scheme, it automatically uses also its
+  /// predefined light theme mode defined colors as the key colors for
+  /// primary, secondary and tertiary in dark mode, to ensure that the produced
+  /// [ColorScheme] is using same tonal palette, but only different tones from
+  /// it  for light and dark mode.
+  ///
+  /// When you use [colors], [colorScheme] or direct override color properties
+  /// [primary], [secondary] or [tertiary] in the factories, the effective
+  /// color is used directly as key input. It is then up to
+  /// you to decide and design if you use the same key color for tonal palette
+  /// generation in light and dark mode.
   factory FlexColorScheme.light({
     /// The [FlexSchemeColor] that will be used to create the light
     /// [FlexColorScheme].
@@ -2246,20 +2319,20 @@ class FlexColorScheme with Diagnosticable {
     /// To use and activate Material 3 color system based [ColorScheme]
     /// defined via key colors for primary, secondary and tertiary colors and
     /// the [TonalPalette] generated by these key color values, pass
-    /// in a [FlexKeyColorSetup] to [keyColorSetup].
+    /// in a [FlexKeyColor] to [keyColors].
     ///
-    /// By default it is not defined (null), and a traditional manually configured
-    /// color scheme will be created based on input property values or the
-    /// passed in [colorScheme].
+    /// By default it is not defined (null), and a traditional manually
+    /// configured color scheme will be created based on input property values
+    /// or the passed in [colorScheme].
     ///
-    /// If a [FlexKeyColorSetup] instance is passed in, the key color seeding
-    /// behaviour depends on properties defined in the [FlexKeyColorSetup]
+    /// If a [FlexKeyColor] instance is passed in, the key color seeding
+    /// behaviour depends on properties defined in the [FlexKeyColor]
     /// instance.
     ///
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
     /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
-    final FlexKeyColorSetup? keyColorSetup,
+    final FlexKeyColor? keyColors,
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6');
@@ -2273,17 +2346,19 @@ class FlexColorScheme with Diagnosticable {
     assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
     assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
         'Bottom AppBar elevation must be null or must be >= 0.');
-
     // If bottomAppBarElevation was null, fallback to appBarElevation.
-    final double bottomAppBarElevation_ =
+    final double effectiveBottomAppBarElevation =
         bottomAppBarElevation ?? appBarElevation;
-
+    // Use color seeding based on passed in keyColors or make one where
+    // it is not used, if one was not defined, since we want that as default
+    // behavior to match past default behavior.
+    final FlexKeyColor seed =
+        keyColors ?? const FlexKeyColor(useKeyColors: false);
     // Fallback value for scheme is default material scheme.
     final FlexScheme flexScheme = scheme ?? FlexScheme.material;
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
         colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
-
     // If the passed in property values are not null, or there was a colorScheme
     // provided, we will override the colors properties with them, this gets
     // us also correct effective and swap behavior on directly passed in
@@ -2300,72 +2375,76 @@ class FlexColorScheme with Diagnosticable {
       secondaryContainer: secondaryContainer ??
           secondaryVariant ??
           colorScheme?.secondaryContainer,
-      // TODO(rydmike): add tertiary and tertiaryContainer
       tertiary: tertiary ?? colorScheme?.tertiary,
       tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
       error: error ?? colorScheme?.error,
     );
-
     // First effective FlexSchemeColor depends on colors, usedColors and swap.
     FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
-        withPassedColors, usedColors,
-        swapColors: swapColors);
-
-    // Experimental in code props to figure out seed color usage
-    const bool useSeeds = false;
-    const bool usePrimarySeed = true;
-    const bool useSecondarySeed = true;
-    const bool useTertiarySeed = true;
-
-    // Create theme from seed colors
-    final ColorScheme seedScheme = _Scheme.fromSeeds(
-      brightness: Brightness.light,
-      argbPrimary: effectiveColors.primary,
-      argbSecondary: usedColors < 2 ? null : effectiveColors.secondary,
-      argbTertiary: usedColors < 4 ? null : effectiveColors.secondaryContainer,
+      withPassedColors,
+      usedColors,
+      swapColors: swapColors,
     );
-
-    // If seed color is active we apply the seeded colors to effective colors.
-    if (useSeeds) {
+    // ColorScheme to hold our seeded scheme colors, it will be kept as null
+    // if we do not use M3 key based seeded tonal palette colors.
+    ColorScheme? seedScheme;
+    // If keyColor seeds is active, apply seeded colors to effective colors.
+    if (seed.useKeyColors) {
+      // Create a complete ColorScheme from active and effective seed colors.
+      seedScheme = _Scheme.fromSeeds(
+        brightness: Brightness.light,
+        argbPrimary: effectiveColors.primary,
+        // If use secondary seed, use it with fromSeeds, otherwise undefined.
+        argbSecondary: seed.useSecondary ? effectiveColors.secondary : null,
+        // If use tertiary seed, use it with fromSeeds, otherwise undefined.
+        argbTertiary: seed.useTertiary ? effectiveColors.tertiary : null,
+      );
+      // Update effective main colors to seed colors, keeping configured
+      // effective main color values when so defined.
       effectiveColors = FlexSchemeColor(
-        primary: usePrimarySeed ? seedScheme.primary : effectiveColors.primary,
-        primaryContainer: usePrimarySeed
-            ? seedScheme.primaryContainer
-            : effectiveColors.primaryContainer,
-        secondary:
-            useSecondarySeed ? seedScheme.secondary : effectiveColors.secondary,
-        secondaryContainer: useTertiarySeed
-            ? seedScheme.secondaryContainer
-            : effectiveColors.secondaryContainer,
+        primary:
+            seed.keepPrimary ? effectiveColors.primary : seedScheme.primary,
+        primaryContainer: seed.keepPrimaryContainer
+            ? effectiveColors.primaryContainer
+            : seedScheme.primaryContainer,
+        secondary: seed.keepSecondary
+            ? effectiveColors.secondary
+            : seedScheme.secondary,
+        secondaryContainer: seed.keepSecondaryContainer
+            ? effectiveColors.secondaryContainer
+            : seedScheme.secondaryContainer,
+        tertiary:
+            seed.keepTertiary ? effectiveColors.tertiary : seedScheme.tertiary,
+        tertiaryContainer: seed.keepTertiaryContainer
+            ? effectiveColors.tertiaryContainer
+            : seedScheme.tertiaryContainer,
         appBarColor: effectiveColors.appBarColor,
         error: seedScheme.error,
       );
     }
-
-    // If [surfaceStyle] is [FlexSurface.custom] then the returned
-    // surfaceSchemeColors will be same as [FlexSurface.material], to get a
-    // different result surface colors must be been passed in to
-    // FlexColorScheme.light. It is up to the implementation using
-    // [FlexSurface.custom] to do so. The returned surfaceSchemeColors
-    // will never be null, it always has colors.
-    //
-    // If surfaceMode is not null we use the never blend mode and level via
-    // factory FlexSchemeSurfaceColors.flexBlend otherwise we use the one
-    // defined by factory FlexSchemeSurfaceColors.from.
+    // If surfaceMode is not null we use the newer blend mode and level via
+    // factory FlexSchemeSurfaceColors.flexBlend otherwise we use the older
+    // deprecated one defined by factory FlexSchemeSurfaceColors.from.
+    // Only the newer surface mode, will respect the seed color based surfaces
+    // and use them as input to additional primary color blending.
     final FlexSchemeSurfaceColors surfaceSchemeColors = surfaceMode != null
         ? FlexSchemeSurfaceColors.blend(
             brightness: Brightness.light,
             surfaceMode: surfaceMode,
             blendLevel: blendLevel,
             schemeColors: effectiveColors,
-            surfaceColors: useSeeds
-                // If we use seed colors, the surface colors are given by
+            surfaceColors: seed.useKeyColors
+                // If we use seed colors, the surface colors are given by the
                 // seed generated scheme.
                 ? FlexSchemeSurfaceColors(
-                    surface: seedScheme.surface,
-                    dialogBackground: seedScheme.surfaceVariant,
-                    background: seedScheme.background,
-                    scaffoldBackground: seedScheme.surface,
+                    surface:
+                        seedScheme?.surface ?? FlexColor.materialLightSurface,
+                    dialogBackground: seedScheme?.surfaceVariant ??
+                        FlexColor.materialLightSurface,
+                    background: seedScheme?.background ??
+                        FlexColor.materialLightBackground,
+                    scaffoldBackground: seedScheme?.surface ??
+                        FlexColor.materialLightScaffoldBackground,
                   )
                 : null,
           )
@@ -2374,11 +2453,9 @@ class FlexColorScheme with Diagnosticable {
             surfaceStyle: surfaceStyle,
             primary: effectiveColors.primary,
           );
-
     // Use passed in sub-theme config data, or a default one, if none given.
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
-
     // Get alpha blend values corresponding to used mode, level and brightness,
     // if using surfaceMode, and opted in to use sub themes and in them opted
     // in to also blend the on colors.
@@ -2386,14 +2463,12 @@ class FlexColorScheme with Diagnosticable {
         surfaceMode != null && useSubThemes && subTheme.blendOnColors
             ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.light)
             : const _AlphaValues();
-
     // Determine the input surface and background colors.
     // The logic is that if they were passed via properties, those colors
     // are used, if not then colorScheme based colors are used, if they
     // were provided and we are not using blended surface and surface mode,
-    // if we are, then we use the computed surfaces.
-    // The final fallback is always the computed surface.
-    // Seeded color
+    // if we are, then we use the computed surfaces. The final fallback is
+    // always the computed surface, potentially also including the seeded color.
     final bool overrideScheme = blendLevel > 0 && surfaceMode != null;
     final Color inputSurface = surface ??
         (overrideScheme ? surfaceSchemeColors.surface : colorScheme?.surface) ??
@@ -2403,11 +2478,9 @@ class FlexColorScheme with Diagnosticable {
             ? surfaceSchemeColors.background
             : colorScheme?.background) ??
         surfaceSchemeColors.background;
-
     // For the on colors we pass in the primary, secondary and surface colors to
-    // calculate onColors for. If some onColors were passed in, we give
-    // that value to it, if it was not null it will be used instead of the
-    // calculated on color.
+    // calculate onColors for. If some onColors were passed in, we give that
+    // value to it, if not null, it will be used instead of calculated on color.
     const int divN = 3; // Tuned for less blend of color into its onColor.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
@@ -2419,17 +2492,30 @@ class FlexColorScheme with Diagnosticable {
       surface: inputSurface,
       background: inputBackground,
       error: effectiveColors.error ?? FlexColor.materialLightError,
-      onPrimary: onPrimary ?? colorScheme?.onPrimary,
-      onPrimaryContainer: onPrimaryContainer ?? colorScheme?.onPrimaryContainer,
-      onSecondary: onSecondary ?? colorScheme?.onSecondary,
-      onSecondaryContainer:
-          onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
-      onTertiary: onTertiary ?? colorScheme?.onTertiary,
-      onTertiaryContainer:
-          onTertiaryContainer ?? colorScheme?.onTertiaryContainer,
-      onSurface: onSurface ?? colorScheme?.onSurface,
-      onBackground: onBackground ?? colorScheme?.onBackground,
-      onError: onError ?? colorScheme?.onError,
+      onPrimary: onPrimary ??
+          colorScheme?.onPrimary ??
+          (seed.keepPrimary ? null : seedScheme?.onPrimary),
+      onPrimaryContainer: onPrimaryContainer ??
+          colorScheme?.onPrimaryContainer ??
+          (seed.keepPrimaryContainer ? null : seedScheme?.onPrimaryContainer),
+      onSecondary: onSecondary ??
+          colorScheme?.onSecondary ??
+          (seed.keepSecondary ? null : seedScheme?.onSecondary),
+      onSecondaryContainer: onSecondaryContainer ??
+          colorScheme?.onSecondaryContainer ??
+          (seed.keepSecondaryContainer
+              ? null
+              : seedScheme?.onSecondaryContainer),
+      onTertiary: onTertiary ??
+          colorScheme?.onTertiary ??
+          (seed.keepTertiary ? null : seedScheme?.onTertiary),
+      onTertiaryContainer: onTertiaryContainer ??
+          colorScheme?.onTertiaryContainer ??
+          (seed.keepTertiaryContainer ? null : seedScheme?.onTertiaryContainer),
+      onSurface: onSurface ?? colorScheme?.onSurface ?? seedScheme?.onSurface,
+      onBackground:
+          onBackground ?? colorScheme?.onBackground ?? seedScheme?.onBackground,
+      onError: onError ?? colorScheme?.onError ?? seedScheme?.onError,
       primaryAlpha: alphaValue.primaryAlpha * 2 ~/ divN,
       primaryContainerAlpha: alphaValue.primaryContainerAlpha * 2 ~/ divN,
       secondaryAlpha: alphaValue.secondaryAlpha * 2 ~/ divN,
@@ -2440,21 +2526,18 @@ class FlexColorScheme with Diagnosticable {
       backgroundAlpha: alphaValue.backgroundAlpha * 2 ~/ divN,
       errorAlpha: alphaValue.errorAlpha * 2 ~/ divN,
     );
-
     // Determine effective surface color.
     // Surface is used e.g. by Card and bottom appbar.
     // If light is white, we make a lighter than normal surface. If not
     // light is white, we use provided surface color, or computed one.
     final Color effectiveSurfaceColor =
         lightIsWhite ? inputSurface.lighten(8) : inputSurface;
-
     // Determine effective background color.
     // Used e.g. by drawer, nav rail, side menu and bottom bar.
     // If light is white, we make a lighter than normal background. If not
     // light is white, we use provided background color, or computed one.
     final Color effectiveBackgroundColor =
         lightIsWhite ? inputBackground.lighten(8) : inputBackground;
-
     // Determine effective dialog background color.
     // If light is white, we use lighter than normal. If not,
     // we use dialog provided background color, or computed one.
@@ -2464,7 +2547,6 @@ class FlexColorScheme with Diagnosticable {
         ? dialogBackground?.lighten(8) ??
             surfaceSchemeColors.dialogBackground.lighten(8)
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
-
     // Get the effective app bar color based on the style and opacity.
     Color? effectiveAppBarColor;
     switch (appBarStyle) {
@@ -2490,31 +2572,25 @@ class FlexColorScheme with Diagnosticable {
 
     return FlexColorScheme(
       // We pass along the original colorScheme too, but mostly its properties
-      // will not be used as they have been used and potentially redefined by
-      // the factory and are defined via other properties in the constructor.
+      // will not be used, since as they have potentially been redefined by
+      // the factory based on properties in the factory constructor.
       // Passing it along will however let us keep property values it may
       // have that we are not dealing with in FlexColorScheme when it returns
-      // its [ColorScheme].
-      colorScheme: colorScheme, // seedScheme,
+      // its [ColorScheme]. When using color key color based seeding and a
+      // custom color scheme, the custom colorScheme has higher priority over
+      // color properties in the seed based colorScheme when it comes to color
+      // properties not included in [FlexColorScheme] directly. Direct
+      // properties may however be overridden by seeded and/or blended values.
+      colorScheme: colorScheme ?? seedScheme,
       // This is the light theme factory so we always set brightness to light.
       brightness: Brightness.light,
-      // Primary color for the application
+      // Primary colors for the application
       primary: effectiveColors.primary,
-      // The primary variant should generally be a bit darker color than
-      // primary, preferably of a color like it or darker hue of primary.
-      // If no value was provided we use a hue that is 10% darker.
       primaryContainer: effectiveColors.primaryContainer,
-      // The secondary color for the application. If you do not want
-      // to use it set it to the same color as primary. For a subtle
-      // one color based theme you can use a hue of the primary.
-      // We use one that is 5% darker than primary, if not given.
+      // The secondary colors for the application.
       secondary: effectiveColors.secondary,
-      // The secondary variant should generally be a bit darker color than
-      // secondary, preferably of a color like it or darker hue of secondary.
-      // We use any provided value, if none darken the secondary and if no
-      // secondary was provided we darken the primary 15%.
       secondaryContainer: effectiveColors.secondaryContainer,
-      // Tertiary colors
+      // The tertiary colors for the application.
       tertiary: effectiveColors.tertiary,
       tertiaryContainer: effectiveColors.tertiaryContainer,
       // Surface is used e.g. by Card and bottom appbar.
@@ -2545,7 +2621,7 @@ class FlexColorScheme with Diagnosticable {
       onError: onColors.onError,
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
-      bottomAppBarElevation: bottomAppBarElevation_,
+      bottomAppBarElevation: effectiveBottomAppBarElevation,
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
       visualDensity: visualDensity,
@@ -2595,6 +2671,84 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// The factory contains a large number of other properties that can be used
   /// to create beautiful themes by just adjusting a few behavior properties.
+  ///
+  /// To activate using opinionated sub themes that further refines the produced
+  /// theme, set [useSubThemes] to true and optionally pass in a
+  /// [FlexSubThemesData] to [subThemesData] to use short cut properties to
+  /// setup additional features in the sub-themes.
+  ///
+  /// Material 3 guide introduces a new color system with key colors and tonal
+  /// palettes, see
+  /// https://m3.material.io/styles/color/the-color-system/key-colors-tones.
+  ///
+  /// You can opt-in on using this new M3 color system by creating your tonal
+  /// theme colors using the effective [primary], [secondary] and [tertiary]
+  /// colors in the factory, as key colors to create tonal palettes for
+  /// these main Material 3 color palettes.
+  /// Colors from these key color seed generated palettes will then be used as
+  /// color tones for the produce [ColorScheme], as defined by the Material 3
+  /// design guide. By studying the Flutter SDK [ColorScheme.from] factory you
+  /// can see which color tone from what key color is used where.
+  /// [FlexColorScheme] uses the same assignments for the tones to the
+  /// generated [ColorScheme] when you opt in using Material 3 tonal palettes.
+  ///
+  /// The [FlexColorScheme] light and dark factory offer more control over the
+  /// seed generation setup. With [ColorScheme.from] you can only generate the
+  /// [ColorScheme] from one key color, the primary color. With
+  /// [FlexColorScheme] factories  you can use separate key colors for
+  /// [secondary] and [tertiary] from the [primary] color, to make their
+  /// tonal palettes. The effective colors in your [FlexColorScheme] for these
+  /// color properties are used as key color inputs when you provide a
+  /// [FlexKeyColor] via [keyColors] and enable it by setting
+  /// [FlexKeyColor.useKeyColors] to true, which it is in its default
+  /// constructor, so to enable it you can just pass in a default
+  /// FlexKeyColor() to [keyColors].
+  ///
+  /// By setting [FlexKeyColor.useSecondary] or
+  /// [FlexKeyColor.useTertiary] to false, the corresponding effective colors
+  /// in [FlexColorScheme] will not be used as keys for corresponding
+  /// [TonalPalette]. If one is off, its tonal palette will instead be based on
+  /// the primary color as key. If both are false, the [FlexColorScheme.light]
+  /// seeding algorithm becomes the same as using [ColorScheme.from]. The
+  /// primary color is always used as seed color when key color seeding is
+  /// enabled with [FlexKeyColor.useKeyColors] set to true.
+  ///
+  /// You can also opt to keep selected effective main colors, primary,
+  /// secondary, tertiary and their containers, in your [FlexColorScheme] as
+  /// their effective color, even when you enable key color based
+  /// seeded tonal palette based ColorScheme output. You do this by
+  /// setting [FlexKeyColor.keepPrimary], [FlexKeyColor.keepSecondary] etc to
+  /// true, for each color property where you want to keep its exact color value
+  /// as defined, but otherwise may be OK with using key seeded color values.
+  ///
+  /// You can use this feature if you for example want to use an exact
+  /// predefined primary brand color in light mode, but are OK with all other
+  /// colors using tones derived from its Material 3 tonal palette.
+  ///
+  /// When you use key color based seeded theme generation, the used key inputs
+  /// for primary, secondary and tertiary are only used to set and generate the
+  /// tone of the palette used for each colors tonal palette. You will rarely
+  /// see the same color on that actual, primary, secondary and tertiary color
+  /// in the produced [ColorScheme], unless you lock them down with the "keep"
+  /// properties.
+  ///
+  /// The same tonal palette should typically be used for both
+  /// light and dark mode colors. Under the hood [FlexColorScheme] selects the
+  /// right color tone from the tonal palette, which is different for light and
+  /// dark mode. For a matched light and dark theme, you should use the same
+  /// input key color. When you use [FlexColorScheme.light] and
+  /// [FlexColorScheme.dark] and the [FlexScheme] enum based [scheme] property,
+  /// to use a built-in color scheme, it automatically uses also its
+  /// predefined light theme mode defined colors as the key colors for
+  /// primary, secondary and tertiary in dark mode, to ensure that the produced
+  /// [ColorScheme] is using same tonal palette, but only different tones from
+  /// it  for light and dark mode.
+  ///
+  /// When you use [colors], [colorScheme] or direct override color properties
+  /// [primary], [secondary] or [tertiary] in the factories, the effective
+  /// color is used directly as key input. It is then up to
+  /// you to decide and design if you use the same key color for tonal palette
+  /// generation in light and dark mode.
   factory FlexColorScheme.dark({
     /// The [FlexSchemeColor] used to create the dark [FlexColorScheme] from.
     ///
@@ -3570,20 +3724,20 @@ class FlexColorScheme with Diagnosticable {
     /// To use and activate Material 3 color system based [ColorScheme]
     /// defined via key colors for primary, secondary and tertiary colors and
     /// the [TonalPalette] generated by these key color values, pass
-    /// in a [FlexKeyColorSetup] to [keyColorSetup].
+    /// in a [FlexKeyColor] to [keyColors].
     ///
-    /// By default it is not defined (null), and a traditional manually configured
-    /// color scheme will be created based on input property values or the
-    /// passed in [colorScheme].
+    /// By default it is not defined (null), and a traditional manually
+    /// configured color scheme will be created based on input property values
+    /// or the passed in [colorScheme].
     ///
-    /// If a [FlexKeyColorSetup] instance is passed in, the key color seeding
-    /// behaviour depends on properties defined in the [FlexKeyColorSetup]
+    /// If a [FlexKeyColor] instance is passed in, the key color seeding
+    /// behaviour depends on properties defined in the [FlexKeyColor]
     /// instance.
     ///
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
     /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
-    final FlexKeyColorSetup? keyColorSetup,
+    final FlexKeyColor? keyColors,
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6.');
@@ -3600,12 +3754,17 @@ class FlexColorScheme with Diagnosticable {
     // If bottomAppBarElevation is null, fallback to appBarElevation.
     final double effectiveBottomAppBarElevation =
         bottomAppBarElevation ?? appBarElevation;
-
+    // Use color seeding based on passed in keyColors or make one where
+    // it is not used, if one was not defined, since we want that as default
+    // behavior to match past default behavior.
+    final FlexKeyColor seed =
+        keyColors ?? const FlexKeyColor(useKeyColors: false);
     // Fallback value for scheme is default material scheme.
     final FlexScheme flexScheme = scheme ?? FlexScheme.material;
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
         colors ?? FlexColor.schemesWithCustom[flexScheme]!.dark;
+
     // If the passed in property values are not null, or there was a colorScheme
     // provided, we will override the colors properties with them, this gets
     // us also correct effective and swap behavior on directly passed in
@@ -3627,39 +3786,106 @@ class FlexColorScheme with Diagnosticable {
       error: error ?? colorScheme?.error,
     );
     // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
-    final FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
+    FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
       withPassedColors,
       usedColors,
       swapColors: swapColors,
     );
-
-    // If [surfaceStyle] is [FlexSurface.custom] then the returned
-    // surfaceSchemeColors will be same as [FlexSurface.material], to get a
-    // different result surface colors must be passed in to
-    // FlexColorScheme.dark. It is up to the implementation using
-    // [FlexSurface.custom] to do so. The returned surfaceSchemeColors
-    // will never be null, it always has colors.
-    //
-    // If surfaceMode is not null, we use the never blend mode and level via
-    // factory FlexSchemeSurfaceColors.flexBlend, otherwise we use the one
-    // defined by factory FlexSchemeSurfaceColors.from used before version 4.
+    // ColorScheme to hold our seeded scheme colors, it will be kept as null
+    // if we do not use M3 key based seeded tonal palette colors.
+    ColorScheme? seedScheme;
+    // If keyColor seeds is active, apply seeded colors to effective colors.
+    if (seed.useKeyColors) {
+      // Build effective input key seed colors as we built the normal colors.
+      // We will need the scheme enum light color as input, for dark tonal when
+      // we use seed with built in schemes in dark mode.
+      final FlexSchemeColor flexKeyColors =
+          colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
+      // Get effective light color with same rules as the dark colors.
+      final FlexSchemeColor withPassedColors = flexKeyColors.copyWith(
+        primary: primary ?? colorScheme?.primary,
+        primaryContainer:
+            primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
+        secondary: secondary ?? colorScheme?.secondary,
+        secondaryContainer: secondaryContainer ??
+            secondaryVariant ??
+            colorScheme?.secondaryContainer,
+        tertiary: tertiary ?? colorScheme?.tertiary,
+        tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
+        error: error ?? colorScheme?.error,
+      );
+      final FlexSchemeColor effectiveKeyColors = FlexSchemeColor.effective(
+        withPassedColors,
+        usedColors,
+        swapColors: swapColors,
+      );
+      // Create a ColorScheme from active and effective seed key colors.
+      seedScheme = _Scheme.fromSeeds(
+        brightness: Brightness.dark,
+        argbPrimary: effectiveKeyColors.primary,
+        // If use secondary seed, use it with fromSeeds, otherwise undefined.
+        argbSecondary: seed.useSecondary ? effectiveKeyColors.secondary : null,
+        // If use tertiary seed, use it with fromSeeds, otherwise undefined.
+        argbTertiary: seed.useTertiary ? effectiveKeyColors.tertiary : null,
+      );
+      // Update effective main colors to seed colors, keeping configured
+      // effective main color values when so defined. The main colors to keep
+      // are the ones from the effective normal dark scheme, not the key colors.
+      effectiveColors = FlexSchemeColor(
+        primary:
+            seed.keepPrimary ? effectiveColors.primary : seedScheme.primary,
+        primaryContainer: seed.keepPrimaryContainer
+            ? effectiveColors.primaryContainer
+            : seedScheme.primaryContainer,
+        secondary: seed.keepSecondary
+            ? effectiveColors.secondary
+            : seedScheme.secondary,
+        secondaryContainer: seed.keepSecondaryContainer
+            ? effectiveColors.secondaryContainer
+            : seedScheme.secondaryContainer,
+        tertiary:
+            seed.keepTertiary ? effectiveColors.tertiary : seedScheme.tertiary,
+        tertiaryContainer: seed.keepTertiaryContainer
+            ? effectiveColors.tertiaryContainer
+            : seedScheme.tertiaryContainer,
+        appBarColor: effectiveColors.appBarColor,
+        error: seedScheme.error,
+      );
+    }
+    // If surfaceMode is not null we use the newer blend mode and level via
+    // factory FlexSchemeSurfaceColors.flexBlend otherwise we use the older
+    // deprecated one defined by factory FlexSchemeSurfaceColors.from.
+    // Only the newer surface mode, will respect the seed color based surfaces
+    // and use them as input to additional primary color blending.
     final FlexSchemeSurfaceColors surfaceSchemeColors = surfaceMode != null
         ? FlexSchemeSurfaceColors.blend(
             brightness: Brightness.dark,
             surfaceMode: surfaceMode,
             blendLevel: blendLevel,
             schemeColors: effectiveColors,
+            surfaceColors: seed.useKeyColors
+                // If we use seed colors, the surface colors are given by the
+                // seed generated scheme.
+                ? FlexSchemeSurfaceColors(
+                    surface:
+                        seedScheme?.surface ?? FlexColor.materialDarkSurface,
+                    dialogBackground: seedScheme?.surfaceVariant ??
+                        FlexColor.materialDarkSurface,
+                    background: seedScheme?.background ??
+                        FlexColor.materialDarkBackground,
+                    scaffoldBackground: seedScheme?.surface ??
+                        FlexColor.materialDarkScaffoldBackground,
+                  )
+                : null,
           )
         : FlexSchemeSurfaceColors.from(
             brightness: Brightness.dark,
             surfaceStyle: surfaceStyle,
             primary: effectiveColors.primary,
           );
-
     // Use passed in sub-theme config data, or a default one, if none given.
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
-
     // Get alpha blend values corresponding to used mode, level and brightness,
     // if using surfaceMode, opted in to use sub themes and in theme opted
     // in to also blend the on colors.
@@ -3667,12 +3893,12 @@ class FlexColorScheme with Diagnosticable {
         surfaceMode != null && useSubThemes && subTheme.blendOnColors
             ? _AlphaValues.getAlphas(surfaceMode, blendLevel, Brightness.dark)
             : const _AlphaValues();
-
     // Determine the input surface and background colors.
     // The logic is that if they were passed via properties, those colors
     // are used, if not then colorScheme based colors are used, if they
     // were provided and we are not using blended surface and surface mode,
-    // if we are, then we use the computed surfaces.
+    // if we are, then we use the computed surfaces. The final fallback is
+    // always the computed surface, potentially also including the seeded color.
     // The final fallback is always the computed surface
     final bool overrideScheme = blendLevel > 0 && surfaceMode != null;
     final Color inputSurface = surface ??
@@ -3683,11 +3909,9 @@ class FlexColorScheme with Diagnosticable {
             ? surfaceSchemeColors.background
             : colorScheme?.background) ??
         surfaceSchemeColors.background;
-
     // For the on colors we pass in the primary, secondary and surface colors to
-    // calculate onColors for. If some onColors were passed in, we give
-    // that value to it, if it was not null it will be used instead of the
-    // calculated onColor.
+    // calculate onColors for. If some onColors were passed in, we give that
+    // value to it, if not null, it will be used instead of calculated on color.
     const int divN = 3; // Tuned for less blend of color into its onColor.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
@@ -3699,40 +3923,52 @@ class FlexColorScheme with Diagnosticable {
       surface: inputSurface,
       background: inputBackground,
       error: effectiveColors.error ?? FlexColor.materialDarkError,
-      onPrimary: onPrimary ?? colorScheme?.onPrimary,
-      onPrimaryContainer: onPrimaryContainer ?? colorScheme?.onPrimaryContainer,
-      onSecondary: onSecondary ?? colorScheme?.onSecondary,
-      onSecondaryContainer:
-          onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
-      onTertiary: onTertiary ?? colorScheme?.onTertiary,
-      onTertiaryContainer:
-          onTertiaryContainer ?? colorScheme?.onTertiaryContainer,
-      onSurface: onSurface ?? colorScheme?.onSurface,
-      onBackground: onBackground ?? colorScheme?.onBackground,
-      onError: onError ?? colorScheme?.onError,
+      onPrimary: onPrimary ??
+          colorScheme?.onPrimary ??
+          (seed.keepPrimary ? null : seedScheme?.onPrimary),
+      onPrimaryContainer: onPrimaryContainer ??
+          colorScheme?.onPrimaryContainer ??
+          (seed.keepPrimaryContainer ? null : seedScheme?.onPrimaryContainer),
+      onSecondary: onSecondary ??
+          colorScheme?.onSecondary ??
+          (seed.keepSecondary ? null : seedScheme?.onSecondary),
+      onSecondaryContainer: onSecondaryContainer ??
+          colorScheme?.onSecondaryContainer ??
+          (seed.keepSecondaryContainer
+              ? null
+              : seedScheme?.onSecondaryContainer),
+      onTertiary: onTertiary ??
+          colorScheme?.onTertiary ??
+          (seed.keepTertiary ? null : seedScheme?.onTertiary),
+      onTertiaryContainer: onTertiaryContainer ??
+          colorScheme?.onTertiaryContainer ??
+          (seed.keepTertiaryContainer ? null : seedScheme?.onTertiaryContainer),
+      onSurface: onSurface ?? colorScheme?.onSurface ?? seedScheme?.onSurface,
+      onBackground:
+          onBackground ?? colorScheme?.onBackground ?? seedScheme?.onBackground,
+      onError: onError ?? colorScheme?.onError ?? seedScheme?.onError,
       primaryAlpha: alphaValue.primaryAlpha * 2 ~/ divN,
       primaryContainerAlpha: alphaValue.primaryContainerAlpha * 2 ~/ divN,
       secondaryAlpha: alphaValue.secondaryAlpha * 2 ~/ divN,
       secondaryContainerAlpha: alphaValue.secondaryContainerAlpha * 2 ~/ divN,
+      tertiaryAlpha: alphaValue.tertiaryAlpha * 2 ~/ divN,
+      tertiaryContainerAlpha: alphaValue.tertiaryContainerAlpha * 2 ~/ divN,
       surfaceAlpha: alphaValue.surfaceAlpha * 2 ~/ divN,
       backgroundAlpha: alphaValue.backgroundAlpha * 2 ~/ divN,
       errorAlpha: alphaValue.errorAlpha * 2 ~/ divN,
     );
-
     // Determine effective surface color.
     // Surface is used e.g. by Card and bottom appbar.
     // If true black, we make a darker than normal surface. If not
     // true black, we use provided surface color, or computed one.
     final Color effectiveSurfaceColor =
         darkIsTrueBlack ? inputSurface.darken(8) : inputSurface;
-
     // Determine effective background color.
     // Used e.g. by drawer, nav rail, side menu and bottom bar.
     // If true black, we use darker then normal background. If not true black,
     // we use provided background color, or computed one.
     final Color effectiveBackgroundColor =
         darkIsTrueBlack ? inputBackground.darken(8) : inputBackground;
-
     // Determine effective dialog background color.
     // If true black, we use darker than normal. If not true black,
     // we use dialog provided background color, or computed one.
@@ -3742,7 +3978,6 @@ class FlexColorScheme with Diagnosticable {
         ? dialogBackground?.darken(8) ??
             surfaceSchemeColors.dialogBackground.darken(8)
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
-
     // Get the effective app bar color based on the style and opacity.
     Color? effectiveAppBarColor;
     switch (appBarStyle) {
@@ -3769,31 +4004,25 @@ class FlexColorScheme with Diagnosticable {
 
     return FlexColorScheme(
       // We pass along the original colorScheme too, but mostly its properties
-      // will not be used as they have been used and potentially redefined by
-      // the factory and are defined via other properties in the constructor.
+      // will not be used, since as they have potentially been redefined by
+      // the factory based on properties in the factory constructor.
       // Passing it along will however let us keep property values it may
       // have that we are not dealing with in FlexColorScheme when it returns
-      // its [ColorScheme].
-      colorScheme: colorScheme,
+      // its [ColorScheme]. When using color key color based seeding and a
+      // custom color scheme, the custom colorScheme has higher priority over
+      // color properties in the seed based colorScheme when it comes to color
+      // properties not included in [FlexColorScheme] directly. Direct
+      // properties may however be overridden by seeded and/or blended values.
+      colorScheme: colorScheme ?? seedScheme,
       // This is the dark theme factory so we always set brightness to dark.
       brightness: Brightness.dark,
-      // Primary color for the application.
+      // Primary colors for the application
       primary: effectiveColors.primary,
-      // The primary variant should generally be a bit darker color than
-      // primary, preferably of a color like it or darker hue of primary.
-      // If no value was provided we make a hue that is 10% darker.
       primaryContainer: effectiveColors.primaryContainer,
-      // The secondary color for the application. If you do not want
-      // to use it set it to the same color as primary. For a subtle
-      // one color based theme you can use a hue of the primary.
-      // This creates one that is 5% darker than primary, if not given.
+      // The secondary colors for the application.
       secondary: effectiveColors.secondary,
-      // The secondary variant should generally be a bit darker color than
-      // secondary, preferably of a color like it or darker hue of secondary.
-      // We us any provided value, if none darken the secondary and if no
-      // secondary was provided we darken the primary 15%
       secondaryContainer: effectiveColors.secondaryContainer,
-      // Tertiary colors
+      // Tertiary colors for the application.
       tertiary: effectiveColors.tertiary,
       tertiaryContainer: effectiveColors.tertiaryContainer,
       // Surface is used e.g. by Card and bottom appbar and in this
@@ -3807,11 +4036,13 @@ class FlexColorScheme with Diagnosticable {
           (darkIsTrueBlack
               ? Colors.black
               : surfaceSchemeColors.scaffoldBackground),
-      // Color of dialog background elements.
+      // Color of dialog background elements, a passed in dialogBackground
+      // color will override the factory style, if provided.
       dialogBackground: effectiveDialogBackground,
-      // Set app bar background to effective background color.
+      // Set app bar background to effective background color, but a passed
+      // in appBarBackground will override it if provided.
       appBarBackground: effectiveAppBarColor,
-      // Effective error color and fallback.
+      // Effective error color and null fallback.
       error: effectiveColors.error ?? FlexColor.materialDarkError,
       onPrimary: onColors.onPrimary,
       onPrimaryContainer: onColors.onPrimaryContainer,
@@ -3844,7 +4075,7 @@ class FlexColorScheme with Diagnosticable {
   //
   // STATIC HELPER FUNCTIONS AND CONSTANTS
   //
-  //  * flexTextTheme - M3 like text theme, font size wise.
+  //  * m3TextTheme - A static const M3 like text theme, font size wise.
   //  * comfortablePlatformDensity
   //  * themedSystemNavigationBar
   //  * createPrimarySwatch
@@ -3991,7 +4222,7 @@ class FlexColorScheme with Diagnosticable {
   /// returns [VisualDensity.compact] for desktop platforms.
   ///
   /// The comfortable visual density is useful on desktop and desktop web
-  /// laptops that have touch screens as it keeps touch targets a bit larger
+  /// laptops that have touch screens, as it keeps touch targets a bit larger
   /// than when using compact.
   static VisualDensity get comfortablePlatformDensity {
     switch (defaultTargetPlatform) {
@@ -4313,28 +4544,6 @@ class FlexColorScheme with Diagnosticable {
           isDark ? Brightness.light : Brightness.dark,
     );
   }
-
-  // TODO(rydmike): Consider the FlexColorPicker approach to find MaterialColor.
-  // If the passed in color is from any MaterialColor swatch, the solution
-  // used in FlexColorPicker could be used to find it and for such a case
-  // instead return the actual related MaterialColor swatch.
-  // Introducing it now for existing schemes would be breaking changes for the
-  // colors they get for primaryColorDark, primaryColoLight and
-  // secondaryHeaderColor. It could however be introduced as an optional toggle
-  // for schemes when using a color from any MaterialColor swatch. This way
-  // these rarely used supporting colors would get and use actual colors from
-  // the corresponding MaterialColor swatch and not computed
-  // approximations, in cases where a Material Swatch is used as the
-  // 'primary' scheme color. For cases when the primary scheme color is not a
-  // MaterialSwatch color, the toggle would have no impact, the colors would
-  // be computed same way as now.
-
-  // TODO(rydmike): Find the algorithm that produces the Material Colors.
-  // Having access to the actual algorithm that produces the Material color
-  // swatches would be even better than the above approach.
-  // Not bothering with it now, wait and see what Material 3 brings to
-  // Flutter. Also have an idea on how to approach it with alpha blends that
-  // I think will produce nicer looking swatches than the algorithm below.
 
   /// Create a primary Material color swatch from a given [color].
   ///
@@ -5417,29 +5626,32 @@ class FlexColorScheme with Diagnosticable {
 
   /// Returns the effective [ColorScheme] defined by your [FlexColorScheme].
   ///
-  /// After you have defined your scheme with [FlexColorScheme] or one of its
-  /// recommended factories [FlexColorScheme.light], [FlexColorScheme.dark],
+  /// After you have defined your Flex scheme with [FlexColorScheme] or one of
+  /// its recommended factories [FlexColorScheme.light], [FlexColorScheme.dark],
   /// you can use the [toScheme] method to get the effective standard Flutter
   /// [ColorScheme] object defined by your [FlexColorScheme] definition.
   ///
   /// While you can use use this returned color scheme in a standard
   /// [ThemeData.from] color scheme based theme factory to create a theme from
-  /// [FlexColorScheme], this is **NOT** the recommended way to make a
+  /// [FlexColorScheme], this is NOT the recommended way to make a
   /// fully [FlexColorScheme] based theme. Normally you want to use
   /// [FlexColorScheme.toTheme] to make your ThemeData when using
-  /// FlexColorScheme. The [toTheme] method uses [toScheme] internally when it
-  /// it creates its [ThemeData] object as well.
+  /// FlexColorScheme. The [FlexColorScheme.toTheme] method uses
+  /// [FlexColorScheme.toScheme] internally when it creates its [ThemeData]
+  /// object as well. It does however also apply a number of additional
+  /// theme properties as well, that you loos if you extract the [ColorScheme]
+  /// with [toScheme] and use it in a [ThemeData.from] from factory.
   ///
   /// The main usage of this method is to get the effective resulting
-  /// [ColorScheme] from [FlexColorScheme) and use it when making sub-themes
-  /// that need access to the resulting color definitions so you can use
-  /// them in custom sub-themes to use the same color scheme for their
+  /// [ColorScheme] from [FlexColorScheme] and use it when making sub-themes
+  /// that need access to the resulting color definitions, so you can use
+  /// them in custom sub-themes in order to use the same color scheme for their
   /// definitions. This is e.g. needed on custom hover, ink and splash effects.
   ///
   /// If you use [ThemeData.from] and the [ColorScheme] returned by
   /// [FlexColorScheme.toScheme] to create your theme, this will work and
-  /// result in a theme that is based on
-  /// the color scheme defined in [FlexColorScheme], including the surface and
+  /// result in a theme that is based on the color scheme defined in
+  /// [FlexColorScheme], including the surface and
   /// background color branding, and e.g. true black for dark mode, if those
   /// were used in its creation via the light and dark factories. **The** big
   /// difference will be that Flutter's [ThemeData.from] theme creation
@@ -5451,40 +5663,32 @@ class FlexColorScheme with Diagnosticable {
   /// The sub-theming is of course also not available, unless you apply them
   /// all with `copyWith` to the produced ThemeData.
   ColorScheme get toScheme {
-    // Get effective brightness.
+    // Get effective scheme brightness. Passed in as a property value, or from
+    // passed in [ColorScheme] if neither given, light is default fallback.
     final Brightness usedBrightness =
         brightness ?? colorScheme?.brightness ?? Brightness.light;
     final bool isDark = usedBrightness == Brightness.dark;
-
-    // Get effective primary color.
+    // Get effective primary color. Passed in a as property, if not, then maybe
+    // from [ColorScheme] if neither fallback color is light or dark mode
+    // Material 2 guide default light and dark primary color.
     final Color usedPrimary = primary ??
         colorScheme?.primary ??
         (isDark
             ? FlexColor.materialDarkPrimary
             : FlexColor.materialLightPrimary);
-
-    // Calculate default fallback colors from primary color.
-
-    // final FlexSchemeColor used = FlexSchemeColor.from(
-    //   primary: usedPrimary,
-    //   primaryContainer:
-    //       primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
-    //   secondary: secondary ?? colorScheme?.secondary,
-    //   secondaryContainer: secondaryContainer ??
-    //       secondaryVariant ??
-    //       colorScheme?.secondaryContainer,
-    //   tertiary: tertiary ?? colorScheme?.tertiary,
-    //   tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
-    // );
-
-    // TODO(rydmike): IMPORTANT - see if this is BETTER and OK
+    // Determine effective primary, secondary and tertiary colors, depending
+    // passed in properties as highest priority, then [ColorScheme] values.
+    // Container falls back via none container value, tertiary via secondary.
+    // All falls back to primary if nothing available before that.
     final FlexSchemeColor used = FlexSchemeColor(
       primary: usedPrimary,
+      // TODO(rydmike): Later remove fallback via deprecated variant color.
       primaryContainer: primaryContainer ??
           primaryVariant ??
           colorScheme?.primaryContainer ??
           usedPrimary,
       secondary: secondary ?? colorScheme?.secondary ?? usedPrimary,
+      // TODO(rydmike): Later remove fallback via deprecated variant color.
       secondaryContainer: secondaryContainer ??
           secondaryVariant ??
           colorScheme?.secondaryContainer ??
@@ -5504,24 +5708,6 @@ class FlexColorScheme with Diagnosticable {
           colorScheme?.secondary ??
           usedPrimary,
     );
-
-    // // Determine effective main colors
-    // final Color usedPrimaryContainer = primaryContainer ??
-    //     colorScheme?.primaryContainer ??
-    //     used.primaryContainer;
-    // final Color usedSecondary =
-    //     secondary ?? colorScheme?.secondary ?? used.secondary;
-    // final Color usedSecondaryContainer = secondaryContainer ??
-    //     colorScheme?.secondaryContainer ??
-    //     used.secondaryContainer;
-    // // The default theme fallbacks for tertiaries are secondary, maybe keep that
-    // // in .from too.
-    // final Color usedTertiary =
-    //     tertiary ?? colorScheme?.tertiary ?? used.tertiary;
-    // final Color usedTertiaryContainer = tertiaryContainer ??
-    //     colorScheme?.tertiaryContainer ??
-    //     used.tertiaryContainer;
-
     // Determine effective surface, background and error colors.
     final Color usedSurface = surface ??
         colorScheme?.surface ??
@@ -5536,13 +5722,12 @@ class FlexColorScheme with Diagnosticable {
     final Color usedError = error ??
         colorScheme?.error ??
         (isDark ? FlexColor.materialDarkError : FlexColor.materialLightError);
-
-    // Checks brightness of primary, secondary, error, surface and background
-    // colors, and returns appropriate colors for their onColors, if an
-    // onColor for it was was not passed in or no colorScheme with them were
-    // passed in. If they were, the passed in direct value has highest
-    // priority, then value in given color scheme, and last a value
-    // computed from it main color pair.
+    // Check brightness of primary, secondary, error, surface and background
+    // colors, and returns appropriate computed colors for their onColors if an
+    // onColor for it was was not passed in, or no colorScheme with them were
+    // passed in. If they were, the passed in direct values have highest
+    // priority, then the values in a given colorScheme, and last a value
+    // computed from its main color pair is used.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: used.primary,
       primaryContainer: used.primaryContainer,
@@ -5565,13 +5750,15 @@ class FlexColorScheme with Diagnosticable {
       onBackground: onBackground ?? colorScheme?.onBackground,
       onError: onError ?? colorScheme?.onError,
     );
-
     // Return the [ColorScheme] as a copyWith on original passed in colorScheme
-    // if one was passed in, with all the effective properties. This will
-    // keep properties not handled by FlexColorScheme as they were in passed via
-    // given [colorScheme] in the returned color scheme.
-    // If there was no [colorScheme] passed in, we create one with the effective
-    // override properties plus [ColorScheme] defaults.
+    // if one was passed in, with all the effective properties overrding its
+    // corresponding properties. This will keep color properties not included in
+    // FlexColorScheme as direct properties, as they were in any given
+    // colorScheme, in the returned ColorScheme as well.
+    // If there was no colorScheme passed in, we create one with the effective
+    // override properties, plus [ColorScheme] constructor defaults. The default
+    // [ColorScheme] constructor will then fill in the blanks based on the
+    // provided effective values.
     return colorScheme?.copyWith(
           brightness: usedBrightness,
           primary: used.primary,
@@ -5658,7 +5845,6 @@ class FlexColorScheme with Diagnosticable {
     bool? useSubThemes,
     FlexSubThemesData? subThemesData,
     bool? useMaterial3,
-    FlexKeyColorSetup? keyColorSetup,
   }) {
     return FlexColorScheme(
       colorScheme: colorScheme ?? this.colorScheme,
@@ -5704,7 +5890,6 @@ class FlexColorScheme with Diagnosticable {
       useSubThemes: useSubThemes ?? this.useSubThemes,
       subThemesData: subThemesData ?? this.subThemesData,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
-      keyColorSetup: keyColorSetup ?? this.keyColorSetup,
     );
   }
 
@@ -5753,8 +5938,7 @@ class FlexColorScheme with Diagnosticable {
         other.applyElevationOverlayColor == applyElevationOverlayColor &&
         other.useSubThemes == useSubThemes &&
         other.subThemesData == subThemesData &&
-        other.useMaterial3 == useMaterial3 &&
-        other.keyColorSetup == keyColorSetup;
+        other.useMaterial3 == useMaterial3;
   }
 
   /// Hashcode override for the FlexColorScheme object.
@@ -5803,7 +5987,6 @@ class FlexColorScheme with Diagnosticable {
       useSubThemes,
       subThemesData,
       useMaterial3,
-      keyColorSetup,
     ];
     return hashList(values);
   }
@@ -5860,8 +6043,6 @@ class FlexColorScheme with Diagnosticable {
     properties.add(
         DiagnosticsProperty<FlexSubThemesData>('subThemesData', subThemesData));
     properties.add(DiagnosticsProperty<bool>('useMaterial3', useMaterial3));
-    properties.add(
-        DiagnosticsProperty<FlexKeyColorSetup>('keyColorSetup', keyColorSetup));
   }
 }
 
@@ -7051,13 +7232,15 @@ class _Scheme {
   }
 }
 
-// TODO(rydmike): Decide if to use CorePalette inherited version or own class.
+// TODO(rydmike): Decide if we use CorePalette inherited version or own class?
+//   using this inherited version for now. See custom version further below.
+
 /// An intermediate concept between the key color for a UI theme, and a full
-/// color scheme. 5 tonal palettes are generated + fixed error palette.
+/// color scheme. Totally 5 tonal palettes are generated + fixed error palette.
 ///
 /// This extends the Google Material team's [CorePalette] with the capability
 /// to create the M3 ColorScheme needed palettes from 3 different ARGB seed
-/// colors instead of just one as provided via [CorePalette.of].
+/// colors, instead of just one as provided via [CorePalette.of].
 class _FlexCorePalette extends CorePalette {
   /// Create a [CorePalette] from a fixed-size list of ARGB color ints
   /// representing concatenated tonal palettes.
@@ -7066,31 +7249,32 @@ class _FlexCorePalette extends CorePalette {
   ///
   /// This is the only interface into the parent class. It would have
   /// been cleaner if parent also had normal unnamed constructor with setters
-  /// for final properties, but it does not, the default constructor is private
+  /// for final properties, but it does not. The default constructor is private
   /// and using class initializer lists. Clearly the super class is not intended
   /// to be very extension friendly.
   _FlexCorePalette.fromList(List<int> colors) : super.fromList(colors);
 
   /// Create a [_FlexCorePalette] from one to three seed colors.
   ///
-  /// If only [argbPrimary] is provided, it the same as using the super
-  /// [CorePalette.of] static that returns an instance of
-  /// [CorePalette] created from a single ARGB seed color.
+  /// If only [argbPrimary] is provided, this is the same as using the super
+  /// [CorePalette.of] static, that returns an instance of [CorePalette]
+  /// created from a single ARGB seed color.
   ///
-  /// When using optional [argbSecondary] and [argbTertiary] the same max
-  /// chroma of 48 limitation is placed on them as on primary [TonalPalette]
-  /// when using [CorePalette.of]. If [argbSecondary] or [argbTertiary] are
-  /// not provided the [TonalPalette] creation for them falls back to same
-  /// values as used for the corresponding palette when using
+  /// When using optional [argbSecondary] and [argbTertiary] parameters, the
+  /// same max chroma of 48 limitation is placed on them as on primary
+  /// [TonalPalette] when using [CorePalette.of]. If [argbSecondary] or
+  /// [argbTertiary] are not provided the [TonalPalette] creation for them falls
+  /// back to same values as used for the corresponding palette when using
   /// [CorePalette.of].
   ///
   /// The conversion of [TonalPalette]es to a list of ints and having super
-  /// create the CorePalette from the list has unneeded extra overhead that
+  /// create the CorePalette from this list, has unneeded extra overhead that
   /// I don't like. It is a bit more efficient to make own implementation
-  /// of this simple mid layer that has the needed constructors directly.
+  /// of this simple mid-layer that has the needed constructors directly.
   /// Keeping both versions as small private classes around so I can later
-  /// benchmark and see if it makes a difference, perhaps it does not matter,
+  /// benchmark and see if it makes a difference. Perhaps it does not matter,
   /// in that case extending the parent [CorePalette] is a bit briefer.
+  /// This interface feels a bit like using a FFI.
   ///
   /// The [CorePalette] in Material Color Utilities is just a convenience
   /// wrapper for the needed [TonalPalette]s, that are used by an additional
@@ -7101,12 +7285,25 @@ class _FlexCorePalette extends CorePalette {
   /// cannot plug-in our extended version of it anyway.
   ///
   /// Perhaps it is better to just make our own slightly modified version of
-  /// [CorePalette] instead and make it available also as static
-  /// [FlexColorScheme.fromSeeds] that return a [ColorScheme], or maybe be we
-  /// keep it private.
+  /// [CorePalette] instead, and make it available also as static
+  /// [FlexColorScheme.fromSeeds] that return a [ColorScheme]? Or maybe we
+  /// keep it private anyway, even if we do that, depends on if the [fromSeeds]
+  /// factory is useful more generally usage too.
+  /// If needed this function can be exposed as a static on [FlexColorScheme]
+  /// and use this or the custom implementation.
   factory _FlexCorePalette.fromSeeds({
+    /// Integer ARGB value of seed color used for primary tonal palette.
+    /// Cam 16 chroma is capped at 48.
     required int argbPrimary,
+
+    /// Integer ARGB value of seed color used for secondary tonal palette.
+    /// Cam16 chroma is capped at 48 if provided. If not provided, the palette
+    /// is based on argbPrimary with Cam16 chroma at 16.
     int? argbSecondary,
+
+    /// Integer ARGB value of seed color used for tertiary tonal palette.
+    /// Cam16 chroma is capped at 48 if provided. If not provided, the palette
+    /// is based on argbPrimary with Cam16 hue+60 and chroma at 24.
     int? argbTertiary,
   }) {
     final Cam16 camPrimary = Cam16.fromInt(argbPrimary);
@@ -7137,180 +7334,187 @@ class _FlexCorePalette extends CorePalette {
   }
 }
 
-// TODO(rydmike): Decide if to use CorePalette inherited version or own class.
-/// An intermediate concept between the key color for a UI theme, and a full
-/// color scheme. 5 tonal palettes are generated + fixed error palette.
-///
-/// This is a modification of package:material_color_utilities [CorePalette]
-/// to provide capability to create the M3 ColorScheme needed tonal palettes
-/// from 3 different ARGB seed colors, where 2 are optional, instead of just
-/// one as provided via package version [CorePalette.of] and here also
-/// via [_CorePalette.of].
-///
-/// This version has an unnamed constructor for the five main final
-/// [TonalPalette] properties. Exposes the original version's private
-/// constructor as [_CorePalette.fromHueChroma] that is used by
-/// [_CorePalette.of]. It then also adds a [_CorePalette.fromSeeds] to create
-/// the [TonalPalette]s for [primary], [secondary] and [tertiary] from optional
-/// ARGB seed colors also for secondary and tertiary [TonalPalette], instead of
-/// tying them down to same seed ARGB colors as used for primary color.
-@immutable
-class _CorePalette {
-  /// Default constructor.
-  _CorePalette({
-    required this.primary,
-    required this.secondary,
-    required this.tertiary,
-    required this.neutral,
-    required this.neutralVariant,
-  });
-
-  /// The number of generated tonal palettes.
-  static const int size = 5;
-
-  /// TonalPalette for primary colors.
-  final TonalPalette primary;
-
-  /// TonalPalette for secondary colors.
-  final TonalPalette secondary;
-
-  /// TonalPalette for tertiary colors.
-  final TonalPalette tertiary;
-
-  /// TonalPalette for neutral colors. Typically hues of primary.
-  final TonalPalette neutral;
-
-  /// TonalPalette for neutralVariant colors. Typically hues of primary.
-  final TonalPalette neutralVariant;
-
-  /// TonalPalette for error colors. Fixed to given Hue and Chroma.
-  final TonalPalette error = TonalPalette.of(25, 84);
-
-  /// Create a [_CorePalette] from a source ARGB color.
-  static _CorePalette of(int argb) {
-    final Cam16 cam = Cam16.fromInt(argb);
-    return _CorePalette.fromHueChroma(cam.hue, cam.chroma);
-  }
-
-  /// Create a CorePalette from Hue and Chrome.
-  _CorePalette.fromHueChroma(double hue, double chroma)
-      : primary = TonalPalette.of(hue, math.max(48, chroma)),
-        secondary = TonalPalette.of(hue, 16),
-        tertiary = TonalPalette.of(hue + 60, 24),
-        neutral = TonalPalette.of(hue, 4),
-        neutralVariant = TonalPalette.of(hue, 8);
-
-  /// Create a [_CorePalette] from one to three seed colors.
-  ///
-  /// If only [argbPrimary] is provided, it the same as using the
-  /// [_CorePalette.of] static that returns an instance of
-  /// [_CorePalette] created from a single ARGB seed color.
-  ///
-  /// When using optional [argbSecondary] and [argbTertiary] the same max
-  /// chroma of 48 limitation is placed on them as on primary [TonalPalette]
-  /// when using [_CorePalette.of]. If [argbSecondary] or [argbTertiary] are
-  /// not provided the [TonalPalette] creation for them falls back to same
-  /// values as used for the corresponding palette when using
-  /// [_CorePalette.of].
-  factory _CorePalette.fromSeeds({
-    required int argbPrimary,
-    int? argbSecondary,
-    int? argbTertiary,
-  }) {
-    final Cam16 camPrimary = Cam16.fromInt(argbPrimary);
-    final Cam16 camSecondary =
-        argbSecondary == null ? camPrimary : Cam16.fromInt(argbSecondary);
-    final Cam16 camTertiary =
-        argbTertiary == null ? camPrimary : Cam16.fromInt(argbTertiary);
-
-    final TonalPalette tonalPrimary =
-        TonalPalette.of(camPrimary.hue, math.max(48, camPrimary.chroma));
-    final TonalPalette tonalSecondary = argbSecondary == null
-        ? TonalPalette.of(camPrimary.hue, 16)
-        : TonalPalette.of(camSecondary.hue, math.max(48, camSecondary.chroma));
-    final TonalPalette tonalTertiary = argbTertiary == null
-        ? TonalPalette.of(camPrimary.hue + 60, 24)
-        : TonalPalette.of(camTertiary.hue, math.max(48, camTertiary.chroma));
-    return _CorePalette(
-      primary: tonalPrimary,
-      secondary: tonalSecondary,
-      tertiary: tonalTertiary,
-      neutral: TonalPalette.of(camPrimary.hue, 4),
-      neutralVariant: TonalPalette.of(camPrimary.hue, 8),
-    );
-  }
-
-  /// Create a [_CorePalette] from a fixed-size list of ARGB color ints
-  /// representing concatenated tonal palettes.
-  ///
-  /// Inverse of [asList].
-  _CorePalette.fromList(List<int> colors)
-      : assert(
-            colors.length == size * TonalPalette.commonSize, 'Incorrect size.'),
-        primary = TonalPalette.fromList(
-            _getPartition(colors, 0, TonalPalette.commonSize)),
-        secondary = TonalPalette.fromList(
-            _getPartition(colors, 1, TonalPalette.commonSize)),
-        tertiary = TonalPalette.fromList(
-            _getPartition(colors, 2, TonalPalette.commonSize)),
-        neutral = TonalPalette.fromList(
-            _getPartition(colors, 3, TonalPalette.commonSize)),
-        neutralVariant = TonalPalette.fromList(
-            _getPartition(colors, 4, TonalPalette.commonSize));
-
-  /// Returns a list of ARGB color [int]s from concatenated tonal palettes.
-  ///
-  /// Inverse of [FlexCorePalette.fromList].
-  List<int> asList() => <int>[
-        ...primary.asList,
-        ...secondary.asList,
-        ...tertiary.asList,
-        ...neutral.asList,
-        ...neutralVariant.asList,
-      ];
-
-  @override
-  bool operator ==(Object other) =>
-      other is _CorePalette &&
-      primary == other.primary &&
-      secondary == other.secondary &&
-      tertiary == other.tertiary &&
-      neutral == other.neutral &&
-      neutralVariant == other.neutralVariant &&
-      error == other.error;
-
-  @override
-  int get hashCode => Object.hash(
-        primary,
-        secondary,
-        tertiary,
-        neutral,
-        neutralVariant,
-        error,
-      );
-
-  @override
-  String toString() {
-    return 'primary: $primary\n'
-        'secondary: $secondary\n'
-        'tertiary: $tertiary\n'
-        'neutral: $neutral\n'
-        'neutralVariant: $neutralVariant\n'
-        'error: $error\n';
-  }
-
-  // Returns a partition from a list.
-  //
-  // For example, given a list with 2 partitions of size 3.
-  // range = [1, 2, 3, 4, 5, 6];
-  //
-  // range.getPartition(0, 3) // [1, 2, 3]
-  // range.getPartition(1, 3) // [4, 5, 6]
-  static List<int> _getPartition(
-      List<int> list, int partitionNumber, int partitionSize) {
-    return list.sublist(
-      partitionNumber * partitionSize,
-      (partitionNumber + 1) * partitionSize,
-    );
-  }
-}
+// TODO(rydmike): Decide if we use CorePalette inherited version or own class.
+//
+// This entire commented private _CorePalette class can be used to create a
+// custom version of CorePalette with the needed [fromSeeds] factory that is
+// a bit more efficient than the extended version above thanks to reduced
+// interface overhead. Keeping it around if it is needed for efficiency later.
+//
+// /// An intermediate concept between the key color for a UI theme, and a full
+// /// color scheme. 5 tonal palettes are generated + fixed error palette.
+// ///
+// /// This is a modification of package:material_color_utilities [CorePalette]
+// /// to provide capability to create the M3 ColorScheme needed tonal palettes
+// /// from 3 different ARGB seed colors, where 2 are optional, instead of just
+// /// one as provided via package version [CorePalette.of] and here also
+// /// via [_CorePalette.of].
+// ///
+// /// This version has an unnamed constructor for the five main final
+// /// [TonalPalette] properties. Exposes the original version's private
+// /// constructor as [_CorePalette.fromHueChroma] that is used by
+// /// [_CorePalette.of]. It then also adds a [_CorePalette.fromSeeds] to create
+// /// the [TonalPalette]s for [primary], [secondary] and [tertiary] from
+// /// optional ARGB seed colors also for secondary and tertiary [TonalPalette],
+// /// instead of tying them down to same seed ARGB colors as used for
+// /// primary color.
+// @immutable
+// class _CorePalette {
+//   /// Default constructor.
+//   _CorePalette({
+//     required this.primary,
+//     required this.secondary,
+//     required this.tertiary,
+//     required this.neutral,
+//     required this.neutralVariant,
+//   });
+//
+//   /// The number of generated tonal palettes.
+//   static const int size = 5;
+//
+//   /// TonalPalette for primary colors.
+//   final TonalPalette primary;
+//
+//   /// TonalPalette for secondary colors.
+//   final TonalPalette secondary;
+//
+//   /// TonalPalette for tertiary colors.
+//   final TonalPalette tertiary;
+//
+//   /// TonalPalette for neutral colors. Typically hues of primary.
+//   final TonalPalette neutral;
+//
+//   /// TonalPalette for neutralVariant colors. Typically hues of primary.
+//   final TonalPalette neutralVariant;
+//
+//   /// TonalPalette for error colors. Fixed to given Hue and Chroma.
+//   final TonalPalette error = TonalPalette.of(25, 84);
+//
+//   /// Create a [_CorePalette] from a source ARGB color.
+//   static _CorePalette of(int argb) {
+//     final Cam16 cam = Cam16.fromInt(argb);
+//     return _CorePalette.fromHueChroma(cam.hue, cam.chroma);
+//   }
+//
+//   /// Create a CorePalette from Hue and Chrome.
+//   _CorePalette.fromHueChroma(double hue, double chroma)
+//       : primary = TonalPalette.of(hue, math.max(48, chroma)),
+//         secondary = TonalPalette.of(hue, 16),
+//         tertiary = TonalPalette.of(hue + 60, 24),
+//         neutral = TonalPalette.of(hue, 4),
+//         neutralVariant = TonalPalette.of(hue, 8);
+//
+//   /// Create a [_CorePalette] from one to three seed colors.
+//   ///
+//   /// If only [argbPrimary] is provided, it the same as using the
+//   /// [_CorePalette.of] static that returns an instance of
+//   /// [_CorePalette] created from a single ARGB seed color.
+//   ///
+//   /// When using optional [argbSecondary] and [argbTertiary] the same max
+//   /// chroma of 48 limitation is placed on them as on primary [TonalPalette]
+//   /// when using [_CorePalette.of]. If [argbSecondary] or [argbTertiary] are
+//   /// not provided the [TonalPalette] creation for them falls back to same
+//   /// values as used for the corresponding palette when using
+//   /// [_CorePalette.of].
+//   factory _CorePalette.fromSeeds({
+//     required int argbPrimary,
+//     int? argbSecondary,
+//     int? argbTertiary,
+//   }) {
+//     final Cam16 camPrimary = Cam16.fromInt(argbPrimary);
+//     final Cam16 camSecondary =
+//         argbSecondary == null ? camPrimary : Cam16.fromInt(argbSecondary);
+//     final Cam16 camTertiary =
+//         argbTertiary == null ? camPrimary : Cam16.fromInt(argbTertiary);
+//
+//     final TonalPalette tonalPrimary =
+//         TonalPalette.of(camPrimary.hue, math.max(48, camPrimary.chroma));
+//     final TonalPalette tonalSecondary = argbSecondary == null
+//         ? TonalPalette.of(camPrimary.hue, 16)
+//       : TonalPalette.of(camSecondary.hue, math.max(48, camSecondary.chroma));
+//     final TonalPalette tonalTertiary = argbTertiary == null
+//         ? TonalPalette.of(camPrimary.hue + 60, 24)
+//         : TonalPalette.of(camTertiary.hue, math.max(48, camTertiary.chroma));
+//     return _CorePalette(
+//       primary: tonalPrimary,
+//       secondary: tonalSecondary,
+//       tertiary: tonalTertiary,
+//       neutral: TonalPalette.of(camPrimary.hue, 4),
+//       neutralVariant: TonalPalette.of(camPrimary.hue, 8),
+//     );
+//   }
+//
+//   /// Create a [_CorePalette] from a fixed-size list of ARGB color ints
+//   /// representing concatenated tonal palettes.
+//   ///
+//   /// Inverse of [asList].
+//   _CorePalette.fromList(List<int> colors)
+//       : assert(
+//          colors.length == size * TonalPalette.commonSize, 'Incorrect size.'),
+//         primary = TonalPalette.fromList(
+//             _getPartition(colors, 0, TonalPalette.commonSize)),
+//         secondary = TonalPalette.fromList(
+//             _getPartition(colors, 1, TonalPalette.commonSize)),
+//         tertiary = TonalPalette.fromList(
+//             _getPartition(colors, 2, TonalPalette.commonSize)),
+//         neutral = TonalPalette.fromList(
+//             _getPartition(colors, 3, TonalPalette.commonSize)),
+//         neutralVariant = TonalPalette.fromList(
+//             _getPartition(colors, 4, TonalPalette.commonSize));
+//
+//   /// Returns a list of ARGB color [int]s from concatenated tonal palettes.
+//   ///
+//   /// Inverse of [FlexCorePalette.fromList].
+//   List<int> asList() => <int>[
+//         ...primary.asList,
+//         ...secondary.asList,
+//         ...tertiary.asList,
+//         ...neutral.asList,
+//         ...neutralVariant.asList,
+//       ];
+//
+//   @override
+//   bool operator ==(Object other) =>
+//       other is _CorePalette &&
+//       primary == other.primary &&
+//       secondary == other.secondary &&
+//       tertiary == other.tertiary &&
+//       neutral == other.neutral &&
+//       neutralVariant == other.neutralVariant &&
+//       error == other.error;
+//
+//   @override
+//   int get hashCode => Object.hash(
+//         primary,
+//         secondary,
+//         tertiary,
+//         neutral,
+//         neutralVariant,
+//         error,
+//       );
+//
+//   @override
+//   String toString() {
+//     return 'primary: $primary\n'
+//         'secondary: $secondary\n'
+//         'tertiary: $tertiary\n'
+//         'neutral: $neutral\n'
+//         'neutralVariant: $neutralVariant\n'
+//         'error: $error\n';
+//   }
+//
+//   // Returns a partition from a list.
+//   //
+//   // For example, given a list with 2 partitions of size 3.
+//   // range = [1, 2, 3, 4, 5, 6];
+//   //
+//   // range.getPartition(0, 3) // [1, 2, 3]
+//   // range.getPartition(1, 3) // [4, 5, 6]
+//   static List<int> _getPartition(
+//       List<int> list, int partitionNumber, int partitionSize) {
+//     return list.sublist(
+//       partitionNumber * partitionSize,
+//       (partitionNumber + 1) * partitionSize,
+//     );
+//   }
+// }

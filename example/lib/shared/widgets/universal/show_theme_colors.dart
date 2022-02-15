@@ -15,7 +15,16 @@ import 'package:flutter/material.dart';
 /// all the Widgets in this file be dropped into any application. They are
 /// however not so generally reusable.
 class ShowThemeColors extends StatelessWidget {
-  const ShowThemeColors({Key? key}) : super(key: key);
+  const ShowThemeColors({Key? key, this.onBackgroundColor}) : super(key: key);
+
+  /// The color of the background the color widget are being drawn on.
+  ///
+  /// Some of the theme colors have semi transparent fill color. To compute a
+  /// legible text color for the sum when it shown on a background color, we
+  /// need to alpha merge it with background and we need the exact background
+  /// color it is drawn on for that. If not passed in from parent, it is
+  /// assumed to be drawn on card color, which usually is close enough.
+  final Color? onBackgroundColor;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
   static bool _isLight(final Color color) =>
@@ -26,8 +35,8 @@ class ShowThemeColors extends StatelessWidget {
       ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
 
   // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(final Color color) =>
-      _isLight(color) ? Colors.black : Colors.white;
+  static Color _onColor(final Color color, final Color bg) =>
+      _isLight(Color.alphaBlend(color, bg)) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +68,10 @@ class ShowThemeColors extends StatelessWidget {
         ),
       );
     }
+
+    // Get effective background color.
+    final Color bg =
+        onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
 
     // Warning label for scaffold background when it uses to much blend.
     final String scaffoldTooHigh = isDark
@@ -231,7 +244,7 @@ class ShowThemeColors extends StatelessWidget {
               ThemeCard(
                 label: 'Shadow',
                 color: colorScheme.shadow,
-                textColor: colorScheme.background,
+                textColor: _onColor(colorScheme.shadow, bg),
               ),
               ThemeCard(
                 label: 'Inverse\nSurface',
@@ -251,12 +264,12 @@ class ShowThemeColors extends StatelessWidget {
               ThemeCard(
                 label: 'Primary\nVariant\n(deprecated)',
                 color: colorScheme.primaryVariant,
-                textColor: _onColor(colorScheme.primaryVariant),
+                textColor: _onColor(colorScheme.primaryVariant, bg),
               ),
               ThemeCard(
                 label: 'Secondary\nVariant\n(deprecated)',
                 color: colorScheme.secondaryVariant,
-                textColor: _onColor(colorScheme.secondaryVariant),
+                textColor: _onColor(colorScheme.secondaryVariant, bg),
               ),
             ],
           ),
@@ -267,7 +280,7 @@ class ShowThemeColors extends StatelessWidget {
               style: theme.textTheme.subtitle1,
             ),
           ),
-          const Text('(To be deprecated in Flutter SDK)'),
+          const Text('Will be deprecated in Flutter SDK'),
           Wrap(
             spacing: 6,
             runSpacing: 6,
@@ -276,42 +289,37 @@ class ShowThemeColors extends StatelessWidget {
               ThemeCard(
                 label: 'Primary\nColor',
                 color: theme.primaryColor,
-                textColor: _onColor(theme.primaryColor),
+                textColor: _onColor(theme.primaryColor, bg),
               ),
               ThemeCard(
                 label: 'Primary\nDark',
                 color: theme.primaryColorDark,
-                textColor: _onColor(theme.primaryColorDark),
+                textColor: _onColor(theme.primaryColorDark, bg),
               ),
               ThemeCard(
                 label: 'Primary\nLight',
                 color: theme.primaryColorLight,
-                textColor: _onColor(theme.primaryColorLight),
+                textColor: _onColor(theme.primaryColorLight, bg),
               ),
               ThemeCard(
                 label: 'Secondary\nHeader',
                 color: theme.secondaryHeaderColor,
-                textColor: _onColor(theme.secondaryHeaderColor),
+                textColor: _onColor(theme.secondaryHeaderColor, bg),
               ),
               ThemeCard(
                 label: 'Toggleable\nActive',
                 color: theme.toggleableActiveColor,
-                textColor: _onColor(theme.toggleableActiveColor),
+                textColor: _onColor(theme.toggleableActiveColor, bg),
               ),
               ThemeCard(
                 label: 'Bottom\nAppBar',
                 color: theme.bottomAppBarColor,
-                textColor: _onColor(theme.bottomAppBarColor),
+                textColor: _onColor(theme.bottomAppBarColor, bg),
               ),
               ThemeCard(
-                label: 'Divider',
-                color: theme.dividerColor,
-                textColor: colorScheme.onBackground,
-              ),
-              ThemeCard(
-                label: 'Disabled',
-                color: theme.disabledColor,
-                textColor: colorScheme.onBackground,
+                label: 'Error\nColor',
+                color: theme.errorColor,
+                textColor: colorScheme.onError,
               ),
               ThemeCard(
                 label: 'Canvas$backTooHigh',
@@ -324,19 +332,69 @@ class ShowThemeColors extends StatelessWidget {
                 textColor: colorScheme.onSurface,
               ),
               ThemeCard(
-                label: 'Dialog',
-                color: theme.dialogBackgroundColor,
-                textColor: colorScheme.onSurface,
-              ),
-              ThemeCard(
                 label: 'Scaffold\nBackground$scaffoldTooHigh',
                 color: theme.scaffoldBackgroundColor,
-                textColor: colorScheme.onBackground,
+                textColor: _onColor(theme.scaffoldBackgroundColor, bg),
               ),
               ThemeCard(
-                label: 'Error\nColor',
-                color: theme.errorColor,
-                textColor: colorScheme.onError,
+                label: 'Dialog',
+                color: theme.dialogBackgroundColor,
+                textColor: _onColor(theme.dialogBackgroundColor, bg),
+              ),
+              ThemeCard(
+                label: 'Indicator\nColor',
+                color: theme.indicatorColor,
+                textColor: _onColor(theme.indicatorColor, bg),
+              ),
+              ThemeCard(
+                label: 'Divider\nColor',
+                color: theme.dividerColor,
+                textColor: _onColor(theme.dividerColor, bg),
+              ),
+              ThemeCard(
+                label: 'Disabled\nColor',
+                color: theme.disabledColor,
+                textColor: _onColor(theme.disabledColor, bg),
+              ),
+              ThemeCard(
+                label: 'Hover\nColor',
+                color: theme.hoverColor,
+                textColor: _onColor(theme.hoverColor, bg),
+              ),
+              ThemeCard(
+                label: 'Focus\nColor',
+                color: theme.focusColor,
+                textColor: _onColor(theme.focusColor, bg),
+              ),
+              ThemeCard(
+                label: 'Highlight\nColor',
+                color: theme.highlightColor,
+                textColor: _onColor(theme.highlightColor, bg),
+              ),
+              ThemeCard(
+                label: 'Splash\nColor',
+                color: theme.splashColor,
+                textColor: _onColor(theme.splashColor, bg),
+              ),
+              ThemeCard(
+                label: 'Shadow\nColor',
+                color: theme.shadowColor,
+                textColor: _onColor(theme.shadowColor, bg),
+              ),
+              ThemeCard(
+                label: 'Hint\nColor',
+                color: theme.hintColor,
+                textColor: _onColor(theme.hintColor, bg),
+              ),
+              ThemeCard(
+                label: 'Selected\nRow',
+                color: theme.selectedRowColor,
+                textColor: _onColor(theme.selectedRowColor, bg),
+              ),
+              ThemeCard(
+                label: 'Unselected\nWidget',
+                color: theme.unselectedWidgetColor,
+                textColor: _onColor(theme.unselectedWidgetColor, bg),
               ),
             ],
           ),
@@ -356,7 +414,7 @@ class ShowThemeColors extends StatelessWidget {
               ThemeCard(
                 label: 'Themed\nAppBar',
                 color: appBarColor,
-                textColor: _onColor(appBarColor),
+                textColor: _onColor(appBarColor, bg),
               ),
             ],
           ),

@@ -1929,6 +1929,8 @@ void main() {
         primaryContainer: FlexColor.indigo.light.primaryContainer,
         secondary: FlexColor.indigo.light.secondary,
         secondaryContainer: FlexColor.indigo.light.secondaryContainer,
+        tertiary: FlexColor.indigo.light.tertiary,
+        tertiaryContainer: FlexColor.indigo.light.tertiaryContainer,
         error: FlexColor.indigo.light.error,
         surface: FlexColor.lightSurface,
         background: FlexColor.lightBackground,
@@ -1971,6 +1973,8 @@ void main() {
         primaryContainer: FlexColor.indigo.light.primaryContainer,
         secondary: FlexColor.indigo.light.secondary,
         secondaryContainer: FlexColor.indigo.light.secondaryContainer,
+        tertiary: FlexColor.indigo.light.tertiary,
+        tertiaryContainer: FlexColor.indigo.light.tertiaryContainer,
         error: FlexColor.indigo.light.error,
         surface: FlexColor.lightSurface,
         background: FlexColor.lightBackground,
@@ -2023,6 +2027,8 @@ void main() {
         primaryContainer: FlexColor.indigo.light.primaryContainer,
         secondary: FlexColor.indigo.light.secondary,
         secondaryContainer: FlexColor.indigo.light.secondaryContainer,
+        tertiary: FlexColor.indigo.light.tertiary,
+        tertiaryContainer: FlexColor.indigo.light.tertiaryContainer,
         error: FlexColor.indigo.light.error,
         surface: FlexColor.lightSurface,
         background: FlexColor.lightBackground,
@@ -2060,6 +2066,31 @@ void main() {
         ftdLight,
         equals(ftdLight.copyWith(primaryColor: FlexColor.indigo.light.primary)),
       );
+      expect(
+        ftdLight.colorScheme,
+        equals(ftdLight.colorScheme.copyWith(
+            primaryContainer: FlexColor.indigo.light.primaryContainer)),
+      );
+      expect(
+        ftdLight.colorScheme,
+        equals(ftdLight.colorScheme
+            .copyWith(secondary: FlexColor.indigo.light.secondary)),
+      );
+      // Used colors is 3, we should NOT get tertiary, but computed value
+      expect(
+        ftdLight.colorScheme,
+        isNot(ftdLight.colorScheme
+            .copyWith(tertiary: FlexColor.indigo.light.tertiary)),
+      );
+      // But we should get this color on tertiary with this setup.
+      // TODO(rydmike): Figure out this new actual test for above case.
+      // expect(
+      //   ftdLight.colorScheme,
+      //   isNot(ftdLight.colorScheme.copyWith(
+      //     tertiary:
+      //       FlexColor.indigo.light.primary.lighten(kDarkenPrimaryContainer),
+      //   )),
+      // );
       // TODO(rydmike): SDK ThemeData operator issue, fix in master!
       // https://github.com/flutter/flutter/issues/91587
       // Check object equality

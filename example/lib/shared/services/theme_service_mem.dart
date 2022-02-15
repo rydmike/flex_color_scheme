@@ -422,6 +422,23 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> saveSecondaryContainerLight(Color value) async {}
 
+  /// Loads setting for tertiaryLight color, in example 5.
+  @override
+  Future<Color> tertiaryLight() async => ThemeService.defaultTertiaryLight;
+
+  /// Persists setting for tertiaryLight color, in example 5.
+  @override
+  Future<void> saveTertiaryLight(Color value) async {}
+
+  /// Loads setting for tertiaryContainerLight color, in example 5.
+  @override
+  Future<Color> tertiaryContainerLight() async =>
+      ThemeService.defaultTertiaryContainerLight;
+
+  /// Persists setting for tertiaryContainerLight color, in example 5.
+  @override
+  Future<void> saveTertiaryContainerLight(Color value) async {}
+
   /// Loads setting for primaryDark color, in example 5.
   @override
   Future<Color> primaryDark() async => ThemeService.defaultPrimaryDark;
@@ -455,4 +472,21 @@ class ThemeServiceMem implements ThemeService {
   /// Persists setting for secondaryContainerDark color, in example 5.
   @override
   Future<void> saveSecondaryContainerDark(Color value) async {}
+
+  /// Loads setting for tertiaryDark color, in example 5.
+  @override
+  Future<Color> tertiaryDark() async => ThemeService.defaultTertiaryDark;
+
+  /// Persists setting for tertiaryDark color, in example 5.
+  @override
+  Future<void> saveTertiaryDark(Color value) async {}
+
+  /// Loads setting for tertiaryContainerDark color, in example 5.
+  @override
+  Future<Color> tertiaryContainerDark() async =>
+      ThemeService.defaultTertiaryContainerDark;
+
+  /// Persists setting for tertiaryContainerDark color, in example 5.
+  @override
+  Future<void> saveTertiaryContainerDark(Color value) async {}
 }

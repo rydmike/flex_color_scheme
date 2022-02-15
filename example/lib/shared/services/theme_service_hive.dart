@@ -1192,6 +1192,52 @@ class ThemeServiceHive implements ThemeService {
     }
   }
 
+  /// Loads setting for tertiaryLight color, in example 5.
+  @override
+  Future<Color> tertiaryLight() async {
+    try {
+      return _hiveBox.get(ThemeService.keyTertiaryLight,
+          defaultValue: ThemeService.defaultTertiaryLight) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTertiaryLight;
+    }
+  }
+
+  /// Persists setting for tertiaryLight color, in example 5.
+  @override
+  Future<void> saveTertiaryLight(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTertiaryLight, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads setting for tertiaryContainerLight color, in example 5.
+  @override
+  Future<Color> tertiaryContainerLight() async {
+    try {
+      return _hiveBox.get(ThemeService.keyTertiaryContainerLight,
+          defaultValue: ThemeService.defaultTertiaryContainerLight) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTertiaryContainerLight;
+    }
+  }
+
+  /// Persists setting for tertiaryContainerLight color, in example 5.
+  @override
+  Future<void> saveTertiaryContainerLight(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTertiaryContainerLight, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   /// Loads setting for primaryDark color, in example 5.
   @override
   Future<Color> primaryDark() async {
@@ -1279,6 +1325,52 @@ class ThemeServiceHive implements ThemeService {
   Future<void> saveSecondaryContainerDark(Color value) async {
     try {
       await _hiveBox.put(ThemeService.keySecondaryContainerDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads setting for tertiaryDark color, in example 5.
+  @override
+  Future<Color> tertiaryDark() async {
+    try {
+      return _hiveBox.get(ThemeService.keyTertiaryDark,
+          defaultValue: ThemeService.defaultTertiaryDark) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTertiaryDark;
+    }
+  }
+
+  /// Persists setting for tertiaryDark color, in example 5.
+  @override
+  Future<void> saveTertiaryDark(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTertiaryDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads setting for tertiaryContainerDark color, in example 5.
+  @override
+  Future<Color> tertiaryContainerDark() async {
+    try {
+      return _hiveBox.get(ThemeService.keyTertiaryContainerDark,
+          defaultValue: ThemeService.defaultTertiaryContainerDark) as Color;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTertiaryContainerDark;
+    }
+  }
+
+  /// Persists setting for tertiaryContainerDark color, in example 5.
+  @override
+  Future<void> saveTertiaryContainerDark(Color value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTertiaryContainerDark, value);
     } catch (e) {
       debugPrint(e.toString());
     }

@@ -30,7 +30,7 @@ class ThemeColors extends StatelessWidget {
     final bool swapDark = controller.swapDarkColors;
     // Size of the tappable color named boxes
     const double colorTapWidth = 125;
-    const double colorTapHeight = 100;
+    const double colorTapHeight = 95;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -42,6 +42,8 @@ class ThemeColors extends StatelessWidget {
     final Color primaryContainer = colorScheme.primaryContainer;
     final Color secondary = colorScheme.secondary;
     final Color secondaryContainer = colorScheme.secondaryContainer;
+    final Color tertiary = colorScheme.tertiary;
+    final Color tertiaryContainer = colorScheme.tertiaryContainer;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -226,7 +228,7 @@ class ThemeColors extends StatelessWidget {
             ),
           ),
           //
-          // PICK Secondary variant color
+          // PICK Secondary container color
           SizedBox(
             width: colorTapWidth,
             height: colorTapHeight,
@@ -272,6 +274,84 @@ class ThemeColors extends StatelessWidget {
                   color: secondaryContainer,
                   textColor: colorScheme.onSecondaryContainer,
                   label: 'secondary\nContainer',
+                ),
+              ),
+            ),
+          ),
+          //
+          // PICK Tertiary color
+          SizedBox(
+            width: colorTapWidth,
+            height: colorTapHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
+              color: tertiary,
+              child: ColorPickerInkWell(
+                color: tertiary,
+                onChanged: (Color color) {
+                  if (isLight) {
+                    controller.setTertiaryLight(color);
+                  } else {
+                    controller.setTertiaryDark(color);
+                  }
+                },
+                recentColors: controller.recentColors,
+                onRecentColorsChanged: controller.setRecentColors,
+                wasCancelled: (bool cancelled) {
+                  if (cancelled) {
+                    if (isLight) {
+                      controller.setTertiaryLight(tertiary);
+                    } else {
+                      controller.setTertiaryDark(tertiary);
+                    }
+                  }
+                },
+                enabled: isCustomTheme,
+                child: ColorNameValue(
+                  color: tertiary,
+                  textColor: colorScheme.onTertiary,
+                  label: 'tertiary',
+                ),
+              ),
+            ),
+          ),
+          //
+          // PICK Tertiary container color
+          SizedBox(
+            width: colorTapWidth,
+            height: colorTapHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
+              color: tertiaryContainer,
+              child: ColorPickerInkWell(
+                color: tertiaryContainer,
+                onChanged: (Color color) {
+                  if (isLight) {
+                    controller.setTertiaryContainerLight(color);
+                  } else {
+                    controller.setTertiaryContainerDark(color);
+                  }
+                },
+                recentColors: controller.recentColors,
+                onRecentColorsChanged: controller.setRecentColors,
+                wasCancelled: (bool cancelled) {
+                  if (cancelled) {
+                    if (isLight) {
+                      controller.setTertiaryContainerLight(tertiaryContainer);
+                    } else {
+                      controller.setTertiaryContainerDark(tertiaryContainer);
+                    }
+                  }
+                },
+                enabled: isCustomTheme,
+                child: ColorNameValue(
+                  color: tertiaryContainer,
+                  textColor: colorScheme.onTertiaryContainer,
+                  label: 'tertiary\nContainer',
                 ),
               ),
             ),
