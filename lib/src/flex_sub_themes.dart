@@ -225,7 +225,6 @@ class FlexSubThemes {
   /// being instantiated or extended.
   FlexSubThemes._(); // coverage:ignore-line
 
-  // TODO(rydmike): Add M3 ColorScheme colors when they reach stable.
   /// Returns the [Color] from passed in [ColorScheme] in [colorScheme]
   /// corresponding to the [SchemeColor] enum selection in [value].
   ///

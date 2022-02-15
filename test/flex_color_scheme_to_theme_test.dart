@@ -1792,7 +1792,7 @@ void main() {
         useSubThemes: false,
         subThemesData: null);
 
-    // Doing a string version for easy comparions.
+    // Doing a string version for easy comparisons.
     test(
         'FCS7.79a-scheme-toString: GIVEN a Equal Raw and FlexColorScheme.light '
         'with heavy branding and 2 colors EXPECT equal ColorScheme string.',
@@ -2121,7 +2121,7 @@ void main() {
     //
     // Test result with custom features like surface, appbar, tab bar options.
     // Just verify not failing (coverage), should check result as well later.
-    // TODO(rydmike): Improve the tests.
+    // TODO(rydmike): Improve these dummy tests.
     //**************************************************************************
 
     final ThemeData tLightC = FlexColorScheme.light(

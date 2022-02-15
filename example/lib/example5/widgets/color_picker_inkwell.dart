@@ -276,6 +276,7 @@ class ColorPickerInkWell extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyText2),
                 recentColorsSubheading: Text('Recent colors',
                     style: Theme.of(context).textTheme.bodyText2),
+                selectedPickerTypeColor: Theme.of(context).colorScheme.primary,
                 showMaterialName: true,
                 showColorName: true,
                 showColorCode: true,

@@ -20,7 +20,7 @@ export 'src/flex_color_scheme.dart';
 export 'src/flex_extensions.dart';
 
 /// Configuration class for using seed color generated themes.
-export 'src/flex_key_color_setup.dart';
+export 'src/flex_key_color.dart';
 
 /// Enum that can be used to lookup predefined `FlexSchemeData` color scheme
 /// definition objects.

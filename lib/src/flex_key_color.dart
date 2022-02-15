@@ -8,14 +8,18 @@ import 'package:flutter/foundation.dart';
 /// key colors to populate the Material 3 [ColorScheme] it creates and uses
 /// to generate its [ThemeData] object.
 ///
-/// A key based [ColorScheme] will be generated if a [FlexKeyColorSetup]
-/// instance is passed to [FlexColorScheme.keyColorSetup] with [useKeyColors]
-/// set to true, in its [FlexKeyColorSetup] configuration input. By default
-/// [keyColorSetup] is null and key colors are not used. To activate the
-/// feature pass in a default [FlexKeyColorSetup] instance, its [useKeyColors]
-/// defaults to true. If the default setup is suitable, no further configuration
-/// is required. You can however customize its behaviour by adjusting the values
-/// in [FlexKeyColorSetup].
+/// A key based [ColorScheme] will be generated if a [FlexKeyColor]
+/// instance is passed to [FlexColorScheme.light] or [FlexColorScheme.dark]
+/// parameter [keyColorSetup] with [useKeyColors] set to true, in its
+/// [FlexKeyColor] configuration input.
+///
+/// By default [keyColorSetup] is null and key colors are not used. To activate
+/// the feature pass in a default [FlexKeyColor] instance,
+/// its [useKeyColors] defaults to true.
+///
+/// If the default setup is suitable, no further configuration is required.
+/// You can however further customize its behaviour by adjusting the properties
+/// in [FlexKeyColor].
 ///
 /// For more information on Material 3 color system and usage of key colors
 /// to generate tonal palettes and tones, see:
@@ -56,19 +60,19 @@ import 'package:flutter/foundation.dart';
 /// The neutral tonal palette and its variant are used as inputs to
 /// [ColorScheme] colors in the same way as in [ColorScheme.fromSeed] and are
 /// produced with a slight hint of [primary] key color in them using same
-/// algorithm as fromSeed too. This color branding is bit equivalent to using
-/// primary color surface blends, or primary branding in [FlexColorScheme]. The
-/// surface mode and blend levels can even be combined with M3 based key color
-/// branding, for a bit different and stronger effects from key color
-/// generated themes too.
+/// algorithm as [ColorScheme.fromSeed] too. This color branding is bit
+/// equivalent to using primary color surface blends, or so called primary
+/// color branding in [FlexColorScheme]. The surface mode and blend levels can
+/// even be combined with M3 based key color branding, for a bit different and
+/// stronger effects from key color generated themes too.
 @immutable
-class FlexKeyColorSetup with Diagnosticable {
-  /// Default constructor, used to make an immutable [FlexKeyColorSetup]
+class FlexKeyColor with Diagnosticable {
+  /// Default constructor, used to make an immutable [FlexKeyColor]
   /// object.
   ///
   /// Uses [useKeyColors], [useSecondary] and [useTertiary] to define if and
   /// how key color seeding is used.
-  const FlexKeyColorSetup({
+  const FlexKeyColor({
     final this.useKeyColors = true,
     final this.useSecondary = true,
     final this.useTertiary = true,
@@ -252,7 +256,7 @@ class FlexKeyColorSetup with Diagnosticable {
   final bool keepTertiaryContainer;
 
   /// Copy the object with one or more provided properties changed.
-  FlexKeyColorSetup copyWith({
+  FlexKeyColor copyWith({
     final bool? useKeyColors,
     final bool? useSecondary,
     final bool? useTertiary,
@@ -263,7 +267,7 @@ class FlexKeyColorSetup with Diagnosticable {
     final bool? keepSecondaryContainer,
     final bool? keepTertiaryContainer,
   }) {
-    return FlexKeyColorSetup(
+    return FlexKeyColor(
       useKeyColors: useKeyColors ?? this.useKeyColors,
       useSecondary: useSecondary ?? this.useSecondary,
       useTertiary: useTertiary ?? this.useTertiary,
@@ -282,7 +286,7 @@ class FlexKeyColorSetup with Diagnosticable {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
-    return other is FlexKeyColorSetup &&
+    return other is FlexKeyColor &&
         other.useKeyColors == useKeyColors &&
         other.useSecondary == useSecondary &&
         other.useTertiary == useTertiary &&

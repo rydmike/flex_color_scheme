@@ -1164,6 +1164,53 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
+  /// Loads setting for tertiaryLight color, in example 5.
+  @override
+  Future<Color> tertiaryLight() async {
+    try {
+      final Color value = Color(_prefs.getInt(ThemeService.keyTertiaryLight) ??
+          ThemeService.defaultTertiaryLight.value);
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTertiaryLight;
+    }
+  }
+
+  /// Persists setting for tertiaryLight color, in example 5.
+  @override
+  Future<void> saveTertiaryLight(Color value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyTertiaryLight, value.value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads setting for tertiaryContainerLight color, in example 5.
+  @override
+  Future<Color> tertiaryContainerLight() async {
+    try {
+      final Color value = Color(
+          _prefs.getInt(ThemeService.keyTertiaryContainerLight) ??
+              ThemeService.defaultTertiaryContainerLight.value);
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTertiaryContainerLight;
+    }
+  }
+
+  /// Persists setting for tertiaryContainerLight color, in example 5.
+  @override
+  Future<void> saveTertiaryContainerLight(Color value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyTertiaryContainerLight, value.value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   /// Loads setting for primaryDark color, in example 5.
   @override
   Future<Color> primaryDark() async {
@@ -1253,6 +1300,53 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveSecondaryContainerDark(Color value) async {
     try {
       await _prefs.setInt(ThemeService.keySecondaryContainerDark, value.value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads setting for tertiaryDark color, in example 5.
+  @override
+  Future<Color> tertiaryDark() async {
+    try {
+      final Color value = Color(_prefs.getInt(ThemeService.keyTertiaryDark) ??
+          ThemeService.defaultTertiaryDark.value);
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTertiaryDark;
+    }
+  }
+
+  /// Persists setting for tertiaryDark color, in example 5.
+  @override
+  Future<void> saveTertiaryDark(Color value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyTertiaryDark, value.value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads setting for tertiaryContainerDark color, in example 5.
+  @override
+  Future<Color> tertiaryContainerDark() async {
+    try {
+      final Color value = Color(
+          _prefs.getInt(ThemeService.keyTertiaryContainerDark) ??
+              ThemeService.defaultTertiaryContainerDark.value);
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTertiaryContainerDark;
+    }
+  }
+
+  /// Persists setting for tertiaryContainerDark color, in example 5.
+  @override
+  Future<void> saveTertiaryContainerDark(Color value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyTertiaryContainerDark, value.value);
     } catch (e) {
       debugPrint(e.toString());
     }

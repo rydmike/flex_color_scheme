@@ -21,6 +21,8 @@ String generateThemeDartCode(ThemeController controller) {
           '    primaryContainer: ${scheme.light.primaryContainer},\n'
           '    secondary: ${scheme.light.secondary},\n'
           '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
+          '    tertiary: ${scheme.light.tertiary},\n'
+          '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
           '    appBarColor: ${scheme.light.appBarColor},\n'
           '    error: ${scheme.light.error},\n'
           '  ),\n';
@@ -31,6 +33,8 @@ String generateThemeDartCode(ThemeController controller) {
           '    primaryContainer: ${scheme.dark.primaryContainer},\n'
           '    secondary: ${scheme.dark.secondary},\n'
           '    secondaryContainer: ${scheme.dark.secondaryContainer},\n'
+          '    tertiary: ${scheme.dark.tertiary},\n'
+          '    tertiaryContainer: ${scheme.dark.tertiaryContainer},\n'
           '    appBarColor: ${scheme.dark.appBarColor},\n'
           '    error: ${scheme.dark.error},\n'
           '  ),\n';
@@ -41,6 +45,8 @@ String generateThemeDartCode(ThemeController controller) {
         '    primaryContainer: ${scheme.light.primaryContainer},\n'
         '    secondary: ${scheme.light.secondary},\n'
         '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
+        '    tertiary: ${scheme.light.tertiary},\n'
+        '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
         '    appBarColor: ${scheme.light.appBarColor},\n'
         '    error: ${scheme.light.error},\n'
         '  ).defaultError.toDark(${controller.darkMethodLevel}),\n';

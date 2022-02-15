@@ -205,11 +205,11 @@ class _HomePageState extends State<HomePage> {
                   toggleCard(0);
                 },
                 title: const Text('FlexColorScheme Info'),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: const <Widget>[
-                      Text(
+                child: Column(
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(
                         'With this demo you can try all features and themes in '
                         'FlexColorScheme V4. Find a color scheme you '
                         'like, experiment with the new surface blend modes and '
@@ -243,9 +243,21 @@ class _HomePageState extends State<HomePage> {
                         'Copy setup code for active settings and paste it '
                         'into your IDE. Settings in the demo are persisted.',
                       ),
-                      SizedBox(height: 8),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 8),
+                    SwitchListTile.adaptive(
+                      title: const Text(
+                        'Use FlexColorScheme theming features',
+                      ),
+                      subtitle: const Text(
+                        'Turn OFF to see Flutter default theming using '
+                        'its features\n'
+                        'Most settings have no impact when this is OFF',
+                      ),
+                      value: widget.controller.useFlexColorScheme,
+                      onChanged: widget.controller.setUseFlexColorScheme,
+                    ),
+                  ],
                 ),
               ),
               //
@@ -509,17 +521,6 @@ class _ThemeColors extends StatelessWidget {
             child: ShowThemeColors(),
           ),
           const SizedBox(height: 8),
-          SwitchListTile.adaptive(
-            title: const Text(
-              'Use FlexColorScheme theming features',
-            ),
-            subtitle: const Text(
-              'Turn OFF to see Flutter default theming using these colors\n'
-              'Most other settings have no impact when this is OFF',
-            ),
-            value: controller.useFlexColorScheme,
-            onChanged: controller.setUseFlexColorScheme,
-          ),
         ],
       ),
     );
