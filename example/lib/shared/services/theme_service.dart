@@ -689,4 +689,144 @@ abstract class ThemeService {
 
   /// Persists setting for tertiaryContainerDark color, in example 5.
   Future<void> saveTertiaryContainerDark(Color value);
+
+  // ********* Version 5 new config options
+
+  /// Key used to read and save the useMaterial3 value.
+  static const String keyUseMaterial3 = 'useMaterial3';
+
+  /// Default value for the useMaterial3, also to reset settings.
+  static const bool defaultUseMaterial3 = false;
+
+  /// Loads used useMaterial3 setting in example 5.
+  Future<bool> useMaterial3();
+
+  /// Persists useMaterial3 setting in example 5.
+  Future<void> saveUseMaterial3(bool value);
+
+  // ---------
+
+  /// Key used to read and save the useKeyColors value.
+  static const String keyUseKeyColors = 'useKeyColors';
+
+  /// Default value for the useKeyColors, also to reset settings.
+  static const bool defaultUseKeyColors = false;
+
+  /// Loads used useKeyColors setting in example 5.
+  Future<bool> useKeyColors();
+
+  /// Persists useKeyColors setting in example 5.
+  Future<void> saveUseKeyColors(bool value);
+
+  // ---------
+
+  /// Key used to read and save the useSecondary value.
+  static const String keyUseSecondary = 'useSecondary';
+
+  /// Default value for the useSecondary, also to reset settings.
+  static const bool defaultUseSecondary = true;
+
+  /// Loads used useSecondary setting in example 5.
+  Future<bool> useSecondary();
+
+  /// Persists useSecondary setting in example 5.
+  Future<void> saveUseSecondary(bool value);
+
+  // ---------
+
+  /// Key used to read and save the useTertiary value.
+  static const String keyUseTertiary = 'useTertiary';
+
+  /// Default value for the useTertiary, also to reset settings.
+  static const bool defaultUseTertiary = true;
+
+  /// Loads used useTertiary setting in example 5.
+  Future<bool> useTertiary();
+
+  /// Persists useTertiary setting in example 5.
+  Future<void> saveUseTertiary(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepPrimary value.
+  static const String keyKeepPrimary = 'keepPrimary';
+
+  /// Default value for the keepPrimary, also to reset settings.
+  static const bool defaultKeepPrimary = false;
+
+  /// Loads used keepPrimary setting in example 5.
+  Future<bool> keepPrimary();
+
+  /// Persists keepPrimary setting in example 5.
+  Future<void> saveKeepPrimary(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepSecondary value.
+  static const String keyKeepSecondary = 'keepSecondary';
+
+  /// Default value for the keepSecondary, also to reset settings.
+  static const bool defaultKeepSecondary = false;
+
+  /// Loads used keepSecondary setting in example 5.
+  Future<bool> keepSecondary();
+
+  /// Persists keepSecondary setting in example 5.
+  Future<void> saveKeepSecondary(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepTertiary value.
+  static const String keyKeepTertiary = 'keepTertiary';
+
+  /// Default value for the keepTertiary, also to reset settings.
+  static const bool defaultKeepTertiary = false;
+
+  /// Loads used keepTertiary setting in example 5.
+  Future<bool> keepTertiary();
+
+  /// Persists keepTertiary setting in example 5.
+  Future<void> saveKeepTertiary(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepPrimaryContainer value.
+  static const String keyKeepPrimaryContainer = 'keepPrimaryContainer';
+
+  /// Default value for the keepPrimaryContainer, also to reset settings.
+  static const bool defaultKeepPrimaryContainer = false;
+
+  /// Loads used keepPrimaryContainer setting in example 5.
+  Future<bool> keepPrimaryContainer();
+
+  /// Persists keepPrimaryContainer setting in example 5.
+  Future<void> saveKeepPrimaryContainer(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepSecondaryContainer value.
+  static const String keyKeepSecondaryContainer = 'keepSecondaryContainer';
+
+  /// Default value for the keepSecondaryContainer, also to reset settings.
+  static const bool defaultKeepSecondaryContainer = false;
+
+  /// Loads used keepSecondaryContainer setting in example 5.
+  Future<bool> keepSecondaryContainer();
+
+  /// Persists keepSecondaryContainer setting in example 5.
+  Future<void> saveKeepSecondaryContainer(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepTertiaryContainer value.
+  static const String keyKeepTertiaryContainer = 'keepTertiaryContainer';
+
+  /// Default value for the keepTertiaryContainer, also to reset settings.
+  static const bool defaultKeepTertiaryContainer = false;
+
+  /// Loads used keepTertiaryContainer setting in example 5.
+  Future<bool> keepTertiaryContainer();
+
+  /// Persists keepTertiaryContainer setting in example 5.
+  Future<void> saveKeepTertiaryContainer(bool value);
 }

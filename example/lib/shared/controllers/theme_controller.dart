@@ -81,6 +81,17 @@ class ThemeController with ChangeNotifier {
     _secondaryContainerDark = await _themeService.secondaryContainerDark();
     _tertiaryDark = await _themeService.tertiaryDark();
     _tertiaryContainerDark = await _themeService.tertiaryContainerDark();
+    // New props for v5 in addition to above tertiary colors
+    _useMaterial3 = await _themeService.useMaterial3();
+    _useKeyColors = await _themeService.useKeyColors();
+    _useSecondary = await _themeService.useSecondary();
+    _useTertiary = await _themeService.useTertiary();
+    _keepPrimary = await _themeService.keepPrimary();
+    _keepSecondary = await _themeService.keepSecondary();
+    _keepTertiary = await _themeService.keepTertiary();
+    _keepPrimaryContainer = await _themeService.keepPrimaryContainer();
+    _keepSecondaryContainer = await _themeService.keepSecondaryContainer();
+    _keepTertiaryContainer = await _themeService.keepTertiaryContainer();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -164,6 +175,20 @@ class ThemeController with ChangeNotifier {
     await setTertiaryDark(ThemeService.defaultTertiaryDark, false);
     await setTertiaryContainerDark(
         ThemeService.defaultTertiaryContainerDark, false);
+    // New props for v5 in addition to above tertiary colors
+    await setUseMaterial3(ThemeService.defaultUseMaterial3, false);
+    await setUseKeyColors(ThemeService.defaultUseKeyColors, false);
+    await setUseSecondary(ThemeService.defaultUseSecondary, false);
+    await setUseTertiary(ThemeService.defaultUseTertiary, false);
+    await setKeepPrimary(ThemeService.defaultKeepPrimary, false);
+    await setKeepSecondary(ThemeService.defaultKeepSecondary, false);
+    await setKeepTertiary(ThemeService.defaultKeepTertiary, false);
+    await setKeepPrimaryContainer(
+        ThemeService.defaultKeepPrimaryContainer, false);
+    await setKeepSecondaryContainer(
+        ThemeService.defaultKeepSecondaryContainer, false);
+    await setKeepTertiaryContainer(
+        ThemeService.defaultKeepTertiaryContainer, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -815,5 +840,110 @@ class ThemeController with ChangeNotifier {
   // ignore: use_setters_to_change_properties
   void setRecentColors(final List<Color> colors) {
     _recentColors = colors;
+  }
+
+  // Version 5 new controllers
+
+  late bool _useMaterial3;
+  bool get useMaterial3 => _useMaterial3;
+  Future<void> setUseMaterial3(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useMaterial3) return;
+    _useMaterial3 = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUseMaterial3(value);
+  }
+
+  late bool _useKeyColors;
+  bool get useKeyColors => _useKeyColors;
+  Future<void> setUseKeyColors(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useKeyColors) return;
+    _useKeyColors = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUseKeyColors(value);
+  }
+
+  late bool _useSecondary;
+  bool get useSecondary => _useSecondary;
+  Future<void> setUseSecondary(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useSecondary) return;
+    _useSecondary = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUseSecondary(value);
+  }
+
+  late bool _useTertiary;
+  bool get useTertiary => _useTertiary;
+  Future<void> setUseTertiary(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useTertiary) return;
+    _useTertiary = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUseTertiary(value);
+  }
+
+  late bool _keepPrimary;
+  bool get keepPrimary => _keepPrimary;
+  Future<void> setKeepPrimary(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepPrimary) return;
+    _keepPrimary = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepPrimary(value);
+  }
+
+  late bool _keepSecondary;
+  bool get keepSecondary => _keepSecondary;
+  Future<void> setKeepSecondary(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepSecondary) return;
+    _keepSecondary = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepSecondary(value);
+  }
+
+  late bool _keepTertiary;
+  bool get keepTertiary => _keepTertiary;
+  Future<void> setKeepTertiary(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepTertiary) return;
+    _keepTertiary = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepTertiary(value);
+  }
+
+  late bool _keepPrimaryContainer;
+  bool get keepPrimaryContainer => _keepPrimaryContainer;
+  Future<void> setKeepPrimaryContainer(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepPrimaryContainer) return;
+    _keepPrimaryContainer = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepPrimaryContainer(value);
+  }
+
+  late bool _keepSecondaryContainer;
+  bool get keepSecondaryContainer => _keepSecondaryContainer;
+  Future<void> setKeepSecondaryContainer(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepSecondaryContainer) return;
+    _keepSecondaryContainer = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepSecondaryContainer(value);
+  }
+
+  late bool _keepTertiaryContainer;
+  bool get keepTertiaryContainer => _keepTertiaryContainer;
+  Future<void> setKeepTertiaryContainer(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepTertiaryContainer) return;
+    _keepTertiaryContainer = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepTertiaryContainer(value);
   }
 }
