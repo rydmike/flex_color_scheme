@@ -489,4 +489,107 @@ class ThemeServiceMem implements ThemeService {
   /// Persists setting for tertiaryContainerDark color, in example 5.
   @override
   Future<void> saveTertiaryContainerDark(Color value) async {}
+
+  // ********* Version 5 new config options
+
+  /// Loads used useMaterial3 setting in example 5.
+  @override
+  Future<bool> useMaterial3() async => ThemeService.defaultUseMaterial3;
+
+  /// Persists useMaterial3 setting in example 5.
+  @override
+  Future<void> saveUseMaterial3(bool value) async {}
+
+  //----
+
+  /// Loads used useKeyColors setting in example 5.
+  @override
+  Future<bool> useKeyColors() async => ThemeService.defaultUseKeyColors;
+
+  /// Persists useKeyColors setting in example 5.
+  @override
+  Future<void> saveUseKeyColors(bool value) async {}
+
+  //----
+
+  /// Loads used useSecondary setting in example 5.
+  @override
+  Future<bool> useSecondary() async => ThemeService.defaultUseSecondary;
+
+  /// Persists useSecondary setting in example 5.
+  @override
+  Future<void> saveUseSecondary(bool value) async {}
+
+  //----
+
+  /// Loads used useTertiary setting in example 5.
+  @override
+  Future<bool> useTertiary() async => ThemeService.defaultUseTertiary;
+
+  /// Persists useTertiary setting in example 5.
+  @override
+  Future<void> saveUseTertiary(bool value) async {}
+
+  //----
+
+  /// Loads used keepPrimary setting in example 5.
+  @override
+  Future<bool> keepPrimary() async => ThemeService.defaultKeepPrimary;
+
+  /// Persists keepPrimary setting in example 5.
+  @override
+  Future<void> saveKeepPrimary(bool value) async {}
+
+  //----
+
+  /// Loads used keepSecondary setting in example 5.
+  @override
+  Future<bool> keepSecondary() async => ThemeService.defaultKeepSecondary;
+
+  /// Persists keepSecondary setting in example 5.
+  @override
+  Future<void> saveKeepSecondary(bool value) async {}
+
+  //----
+
+  /// Loads used keepTertiary setting in example 5.
+  @override
+  Future<bool> keepTertiary() async => ThemeService.defaultKeepTertiary;
+
+  /// Persists keepTertiary setting in example 5.
+  @override
+  Future<void> saveKeepTertiary(bool value) async {}
+
+  //----
+
+  /// Loads used keepNavDivider setting in example 5.
+  @override
+  Future<bool> keepPrimaryContainer() async =>
+      ThemeService.defaultKeepPrimaryContainer;
+
+  /// Persists keepPrimaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepPrimaryContainer(bool value) async {}
+
+  //----
+
+  /// Loads used keepSecondaryContainer setting in example 5.
+  @override
+  Future<bool> keepSecondaryContainer() async =>
+      ThemeService.defaultKeepSecondaryContainer;
+
+  /// Persists keepSecondaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepSecondaryContainer(bool value) async {}
+
+  //----
+
+  /// Loads used keepTertiaryContainer setting in example 5.
+  @override
+  Future<bool> keepTertiaryContainer() async =>
+      ThemeService.defaultKeepTertiaryContainer;
+
+  /// Persists keepTertiaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepTertiaryContainer(bool value) async {}
 }

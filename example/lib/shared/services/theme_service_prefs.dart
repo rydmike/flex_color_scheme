@@ -1351,4 +1351,258 @@ class ThemeServicePrefs implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  // ********* Version 5 new config options
+
+  // ----
+
+  /// Loads used useMaterial3 setting in example 5.
+  @override
+  Future<bool> useMaterial3() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseMaterial3) ??
+          ThemeService.defaultUseMaterial3;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseMaterial3;
+    }
+  }
+
+  /// Persists useMaterial3 setting in example 5.
+  @override
+  Future<void> saveUseMaterial3(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseMaterial3, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used useKeyColors setting in example 5.
+  @override
+  Future<bool> useKeyColors() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseKeyColors) ??
+          ThemeService.defaultUseKeyColors;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseKeyColors;
+    }
+  }
+
+  /// Persists useKeyColors setting in example 5.
+  @override
+  Future<void> saveUseKeyColors(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseKeyColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used useSecondary setting in example 5.
+  @override
+  Future<bool> useSecondary() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseSecondary) ??
+          ThemeService.defaultUseSecondary;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseSecondary;
+    }
+  }
+
+  /// Persists useSecondary setting in example 5.
+  @override
+  Future<void> saveUseSecondary(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseSecondary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used useTertiary setting in example 5.
+  @override
+  Future<bool> useTertiary() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseTertiary) ??
+          ThemeService.defaultUseTertiary;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseTertiary;
+    }
+  }
+
+  /// Persists useTertiary setting in example 5.
+  @override
+  Future<void> saveUseTertiary(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseTertiary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepPrimary setting in example 5.
+  @override
+  Future<bool> keepPrimary() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyKeepPrimary) ??
+          ThemeService.defaultKeepPrimary;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepPrimary;
+    }
+  }
+
+  /// Persists keepPrimary setting in example 5.
+  @override
+  Future<void> saveKeepPrimary(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepPrimary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepSecondary setting in example 5.
+  @override
+  Future<bool> keepSecondary() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyKeepSecondary) ??
+          ThemeService.defaultKeepSecondary;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepSecondary;
+    }
+  }
+
+  /// Persists keepSecondary setting in example 5.
+  @override
+  Future<void> saveKeepSecondary(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepSecondary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepTertiary setting in example 5.
+  @override
+  Future<bool> keepTertiary() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyKeepTertiary) ??
+          ThemeService.defaultKeepTertiary;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepTertiary;
+    }
+  }
+
+  /// Persists keepTertiary setting in example 5.
+  @override
+  Future<void> saveKeepTertiary(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepTertiary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepPrimaryContainer setting in example 5.
+  @override
+  Future<bool> keepPrimaryContainer() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyKeepPrimaryContainer) ??
+          ThemeService.defaultKeepPrimaryContainer;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepPrimaryContainer;
+    }
+  }
+
+  /// Persists keepPrimaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepPrimaryContainer(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepPrimaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepSecondaryContainer setting in example 5.
+  @override
+  Future<bool> keepSecondaryContainer() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyKeepSecondaryContainer) ??
+              ThemeService.defaultKeepSecondaryContainer;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepSecondaryContainer;
+    }
+  }
+
+  /// Persists keepSecondaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepSecondaryContainer(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepSecondaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepTertiaryContainer setting in example 5.
+  @override
+  Future<bool> keepTertiaryContainer() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyKeepTertiaryContainer) ??
+              ThemeService.defaultKeepTertiaryContainer;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepTertiaryContainer;
+    }
+  }
+
+  /// Persists keepTertiaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepTertiaryContainer(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepTertiaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }
