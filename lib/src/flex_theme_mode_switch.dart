@@ -31,8 +31,8 @@ enum FlexThemeModeButtonOrder {
 ///
 /// They scheme colors for each button will be in the order:
 /// ```
-/// | Primary    | Primary variant   |
-/// | Secondary  | Secondary variant |
+/// | Primary    | Primary container |
+/// | Secondary  | Tertiary          |
 /// ```
 /// In the option button. In the system choice the 2nd column will instead
 /// contain the dark mode primary and secondary colors, thus combining both

@@ -89,12 +89,12 @@ Future<void> main() async {
 
 // TODO(rydmike): Temp keyColors to test the features.
 const FlexKeyColor _keyColors = FlexKeyColor(
-  useKeyColors: false,
-  useSecondary: true,
-  useTertiary: true,
+  useKeyColors: true,
+  useSecondary: false,
+  useTertiary: false,
   keepPrimary: false,
-  keepSecondary: true,
-  keepTertiary: true,
+  keepSecondary: false,
+  keepTertiary: false,
   keepPrimaryContainer: false,
   keepSecondaryContainer: false,
   keepTertiaryContainer: false,
