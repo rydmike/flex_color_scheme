@@ -150,10 +150,13 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool interactionEffects;
 
+  // TODO(rydmike): This API doc comments needs updates.
   /// Use selected [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend in each corresponding
   /// [ColorScheme] color property's color into their onColors [onSurface],
-  /// [onBackGround], [onError], [onPrimary] and [onSecondary].
+  /// [onBackGround], [onError], [onPrimary], [onSecondary] and [onTertiary]
+  /// as well as [onPrimaryContainer], [onSecondaryContainer] and
+  /// [onTertiaryContainer].
   ///
   /// Blending the on colors results in lower contrast than when not doing so,
   /// but it still works well on lower blend levels. The effect is
@@ -161,6 +164,20 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Defaults to true.
   final bool blendOnColors;
+
+  // TODO(rydmike): Implement this.
+  /// When [blendOnColors] is true, this sets the blend level strength used
+  /// of the onColor's the color pair, into the onColor, for none
+  /// surface onColors.
+  ///
+  /// The blend level is the integer decimal value of the alpha value
+  /// used in the alpha blend function. It mixes one color with another
+  /// by using alpha opacity value in the color of a surface put on top of
+  /// another surface with opaque color and returns the result as one opaque
+  /// color.
+  ///
+  /// Defaults to 0.
+  /// final int blendOnLevel;
 
   /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend primary color into text themes
@@ -293,6 +310,38 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius override value for [ToggleButtons].
   final double? toggleButtonsRadius;
 
+  // TODO(rydmike): Add this feature
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [TextButton] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// Flutter theme defaults.
+  // final SchemeColor? textButtonColor;
+
+  // TODO(rydmike): Add this feature
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [ElevatedButton] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// Flutter theme defaults.
+  // final SchemeColor? elevatedButtonColor;
+
+  // TODO(rydmike): Add this feature
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [OutlinedButton] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// Flutter theme defaults.
+  // final SchemeColor? outlinedButtonColor;
+
+  // TODO(rydmike): Add this feature
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [ToggleButtons] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults.
+  // final SchemeColor? toggleButtonsColor;
+
   /// Border radius override value for [InputDecoration].
   final double? inputDecorationRadius;
 
@@ -371,7 +420,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Action Buttons (FABs) use as their base color.
   ///
   /// If not defined it defaults to theme.colorScheme.secondary color via
-  /// theme defaults.
+  /// Flutter theme defaults.
   final SchemeColor? fabSchemeColor;
 
   /// Border radius override value for [Chip] widgets.
