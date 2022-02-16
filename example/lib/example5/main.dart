@@ -319,7 +319,7 @@ class DemoApp extends StatelessWidget {
                     // Use controller to get current scheme colors, use custom
                     // color param only if we use an index where we have custom
                     // colors in use.
-                    colors: !useBuiltIn
+                    colors: !useBuiltIn || themeController.useToDarkMethod
                         ? AppColor.scheme(themeController).dark
                         : null,
                     // Otherwise use built-in scheme based property. We could
@@ -327,7 +327,9 @@ class DemoApp extends StatelessWidget {
                     // correct keyColor behavior in dark mode, with built-in.
                     // Also a good test of that factory works as designed.
                     // The source code gen also uses this logic.
-                    scheme: useBuiltIn ? FlexScheme.values[flexScheme] : null,
+                    scheme: useBuiltIn && !themeController.useToDarkMethod
+                        ? FlexScheme.values[flexScheme]
+                        : null,
                     // TODO(rydmike): Make this a controller property.
                     // Used number of colors
                     usedColors: 6,
