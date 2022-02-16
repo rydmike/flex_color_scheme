@@ -2478,10 +2478,11 @@ class FlexColorScheme with Diagnosticable {
             ? surfaceSchemeColors.background
             : colorScheme?.background) ??
         surfaceSchemeColors.background;
+    // TODO(rydmike): Make the onColor blend a level parameter 0...20?
+    const int divN = 2; // Tuned for less blend of color into its onColor.
     // For the on colors we pass in the primary, secondary and surface colors to
     // calculate onColors for. If some onColors were passed in, we give that
     // value to it, if not null, it will be used instead of calculated on color.
-    const int divN = 3; // Tuned for less blend of color into its onColor.
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       primaryContainer: effectiveColors.primaryContainer,
@@ -2492,39 +2493,43 @@ class FlexColorScheme with Diagnosticable {
       surface: inputSurface,
       background: inputBackground,
       error: effectiveColors.error ?? FlexColor.materialLightError,
-      onPrimary: onPrimary ??
-          colorScheme?.onPrimary ??
-          (seed.keepPrimary ? null : seedScheme?.onPrimary),
+      // TODO(rydmike): Experiment with keeping seed colors for onColors.
+      //    when using seed color even if we keep source color.
+      onPrimary: onPrimary ?? colorScheme?.onPrimary ?? seedScheme?.onPrimary,
+      // (seed.keepPrimary ? null : seedScheme?.onPrimary),
       onPrimaryContainer: onPrimaryContainer ??
           colorScheme?.onPrimaryContainer ??
-          (seed.keepPrimaryContainer ? null : seedScheme?.onPrimaryContainer),
-      onSecondary: onSecondary ??
-          colorScheme?.onSecondary ??
-          (seed.keepSecondary ? null : seedScheme?.onSecondary),
+          seedScheme?.onPrimaryContainer,
+      // (seed.keepPrimaryContainer ? null : seedScheme?.onPrimaryContainer),
+      onSecondary:
+          onSecondary ?? colorScheme?.onSecondary ?? seedScheme?.onSecondary,
+      // (seed.keepSecondary ? null : seedScheme?.onSecondary),
       onSecondaryContainer: onSecondaryContainer ??
           colorScheme?.onSecondaryContainer ??
-          (seed.keepSecondaryContainer
-              ? null
-              : seedScheme?.onSecondaryContainer),
-      onTertiary: onTertiary ??
-          colorScheme?.onTertiary ??
-          (seed.keepTertiary ? null : seedScheme?.onTertiary),
+          seedScheme?.onSecondaryContainer,
+      // (seed.keepSecondaryContainer
+      //     ? null
+      //     : seedScheme?.onSecondaryContainer),
+      onTertiary:
+          onTertiary ?? colorScheme?.onTertiary ?? seedScheme?.onTertiary,
+      // (seed.keepTertiary ? null : seedScheme?.onTertiary),
       onTertiaryContainer: onTertiaryContainer ??
           colorScheme?.onTertiaryContainer ??
-          (seed.keepTertiaryContainer ? null : seedScheme?.onTertiaryContainer),
+          seedScheme?.onTertiaryContainer,
+      // (seed.keepTertiaryContainer ? null : seedScheme?.onTertiaryContainer),
       onSurface: onSurface ?? colorScheme?.onSurface ?? seedScheme?.onSurface,
       onBackground:
           onBackground ?? colorScheme?.onBackground ?? seedScheme?.onBackground,
       onError: onError ?? colorScheme?.onError ?? seedScheme?.onError,
-      primaryAlpha: alphaValue.primaryAlpha * 2 ~/ divN,
-      primaryContainerAlpha: alphaValue.primaryContainerAlpha * 2 ~/ divN,
-      secondaryAlpha: alphaValue.secondaryAlpha * 2 ~/ divN,
-      secondaryContainerAlpha: alphaValue.secondaryContainerAlpha * 2 ~/ divN,
-      tertiaryAlpha: alphaValue.tertiaryAlpha * 2 ~/ divN,
-      tertiaryContainerAlpha: alphaValue.tertiaryContainerAlpha * 2 ~/ divN,
-      surfaceAlpha: alphaValue.surfaceAlpha * 2 ~/ divN,
-      backgroundAlpha: alphaValue.backgroundAlpha * 2 ~/ divN,
-      errorAlpha: alphaValue.errorAlpha * 2 ~/ divN,
+      primaryAlpha: alphaValue.primaryAlpha * 4 ~/ divN,
+      primaryContainerAlpha: alphaValue.primaryContainerAlpha * 4 ~/ divN,
+      secondaryAlpha: alphaValue.secondaryAlpha * 4 ~/ divN,
+      secondaryContainerAlpha: alphaValue.secondaryContainerAlpha * 4 ~/ divN,
+      tertiaryAlpha: alphaValue.tertiaryAlpha * 4 ~/ divN,
+      tertiaryContainerAlpha: alphaValue.tertiaryContainerAlpha * 4 ~/ divN,
+      surfaceAlpha: alphaValue.surfaceAlpha * 4 ~/ divN,
+      backgroundAlpha: alphaValue.backgroundAlpha * 4 ~/ divN,
+      errorAlpha: alphaValue.errorAlpha * 4 ~/ divN,
     );
     // Determine effective surface color.
     // Surface is used e.g. by Card and bottom appbar.

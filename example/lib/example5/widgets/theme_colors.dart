@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/const/app_color.dart';
@@ -18,6 +19,14 @@ class ThemeColors extends StatelessWidget {
 
   final ThemeController controller;
 
+  // Return true if the color is light, meaning it needs dark text for contrast.
+  static bool _isLight(final Color color) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+
+  // On color used when a theme color property does not have a theme onColor.
+  static Color _onColor(final Color color) =>
+      _isLight(color) ? Colors.black : Colors.white;
+
   @override
   Widget build(BuildContext context) {
     // Used to enable & disable color selection on the color boxes.
@@ -29,8 +38,8 @@ class ThemeColors extends StatelessWidget {
     final bool swapLight = controller.swapLightColors;
     final bool swapDark = controller.swapDarkColors;
     // Size of the tappable color named boxes
-    const double colorTapWidth = 125;
-    const double colorTapHeight = 95;
+    const double colorTapWidth = 155;
+    const double colorTapHeight = 145;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -44,6 +53,20 @@ class ThemeColors extends StatelessWidget {
     final Color secondaryContainer = colorScheme.secondaryContainer;
     final Color tertiary = colorScheme.tertiary;
     final Color tertiaryContainer = colorScheme.tertiaryContainer;
+
+    // Get controller input colors
+    FlexSchemeColor inputColor = isLight
+        ? AppColor.scheme(controller).light
+        : AppColor.scheme(controller).dark;
+
+    // Swap the input colors when we are using color swapping.
+    if ((isLight && swapLight) || (!isLight && swapDark)) {
+      inputColor = inputColor.copyWith(
+          primary: inputColor.secondary,
+          primaryContainer: inputColor.secondaryContainer,
+          secondary: inputColor.primary,
+          secondaryContainer: inputColor.primaryContainer);
+    }
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -125,6 +148,8 @@ class ThemeColors extends StatelessWidget {
                   color: primary,
                   textColor: colorScheme.onPrimary,
                   label: 'primary',
+                  inputColor: inputColor.primary,
+                  inputTextColor: _onColor(inputColor.primary),
                 ),
               ),
             ),
@@ -176,6 +201,8 @@ class ThemeColors extends StatelessWidget {
                   color: primaryContainer,
                   textColor: colorScheme.onPrimaryContainer,
                   label: 'primary\nContainer',
+                  inputColor: inputColor.primaryContainer,
+                  inputTextColor: _onColor(inputColor.primaryContainer),
                 ),
               ),
             ),
@@ -223,6 +250,8 @@ class ThemeColors extends StatelessWidget {
                   color: secondary,
                   textColor: colorScheme.onSecondary,
                   label: 'secondary',
+                  inputColor: inputColor.secondary,
+                  inputTextColor: _onColor(inputColor.secondary),
                 ),
               ),
             ),
@@ -274,6 +303,8 @@ class ThemeColors extends StatelessWidget {
                   color: secondaryContainer,
                   textColor: colorScheme.onSecondaryContainer,
                   label: 'secondary\nContainer',
+                  inputColor: inputColor.secondaryContainer,
+                  inputTextColor: _onColor(inputColor.secondaryContainer),
                 ),
               ),
             ),
@@ -313,6 +344,8 @@ class ThemeColors extends StatelessWidget {
                   color: tertiary,
                   textColor: colorScheme.onTertiary,
                   label: 'tertiary',
+                  inputColor: inputColor.tertiary,
+                  inputTextColor: _onColor(inputColor.tertiary),
                 ),
               ),
             ),
@@ -352,6 +385,8 @@ class ThemeColors extends StatelessWidget {
                   color: tertiaryContainer,
                   textColor: colorScheme.onTertiaryContainer,
                   label: 'tertiary\nContainer',
+                  inputColor: inputColor.tertiaryContainer,
+                  inputTextColor: _onColor(inputColor.tertiaryContainer),
                 ),
               ),
             ),

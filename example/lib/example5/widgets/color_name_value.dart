@@ -14,12 +14,16 @@ class ColorNameValue extends StatefulWidget {
     required this.textColor,
     required this.label,
     this.fontSize = 12.0,
+    required this.inputColor,
+    required this.inputTextColor,
   }) : super(key: key);
 
   final Color color;
   final Color textColor;
   final String label;
   final double fontSize;
+  final Color inputColor;
+  final Color inputTextColor;
 
   @override
   _ColorNameValueState createState() => _ColorNameValueState();
@@ -47,7 +51,6 @@ class _ColorNameValueState extends State<ColorNameValue> {
     if (widget.color != oldWidget.color) {
       materialName = ColorTools.materialName(widget.color);
       nameThatColor = ColorTools.nameThatColor(widget.color);
-      // debugPrint('ColorNameValue: didUpdateWidget() called names changed');
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -59,7 +62,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
     await Clipboard.setData(data);
     final String space = materialName == '' ? '' : ' ';
     if (!mounted) return;
-    // Show a snack bar with the paste error message.
+    // Show a snack bar with the copy message.
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Copied color code ${widget.color.hexCode} for color '
@@ -71,7 +74,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Column(
@@ -154,6 +158,63 @@ class _ColorNameValueState extends State<ColorNameValue> {
               ),
             ],
           ),
+          Card(
+            margin: const EdgeInsets.only(top: 8.0),
+            color: widget.inputColor,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              side: BorderSide(color: theme.dividerColor, width: 1),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Input color',
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                          color: widget.inputTextColor,
+                          fontSize: widget.fontSize - 1,
+                          fontWeight: FontWeight.w500)),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: InkWell(
+                          hoverColor: isLight
+                              ? const Color(0x40BCBCBC)
+                              : const Color(0x30FFFFFF),
+                          splashColor: isLight
+                              ? const Color(0x40BCBCBC)
+                              : const Color(0x30FFFFFF),
+                          focusColor: isLight
+                              ? const Color(0x40BCBCBC)
+                              : const Color(0x30FFFFFF),
+                          highlightColor: isLight
+                              ? const Color(0x40BCBCBC)
+                              : const Color(0x30FFFFFF),
+                          child: Text(
+                            '#${widget.inputColor.hexCode}',
+                            textAlign: TextAlign.end,
+                            overflow: TextOverflow.clip,
+                            maxLines: 1,
+                            style: TextStyle(
+                                color: widget.inputTextColor,
+                                fontSize: widget.fontSize - 1,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          onTap: () async {
+                            await _setClipboard();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
