@@ -5,6 +5,12 @@
 
 [<img src="https://rydmike.com/assets_fcsv4/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites) 
 
+> ### Version 5.0.0-dev.1 Release Notice
+> * This is a minor breaking release with many new Material 3 ColorScheme features. 
+> * The documentation below for version 5.0.0 has not yet been added to this dev release.  
+> * See the change log for all change information.  
+> * Generated API docs are available, they include all changes.
+
 Use **FlexColorScheme** to make beautiful color scheme based Flutter themes, 
 with optional primary color surface blends. The themes are based on the same 
 concept as Flutter's ColorScheme based themes, but with many 

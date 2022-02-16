@@ -87,19 +87,6 @@ Future<void> main() async {
   runApp(DemoApp(themeController: themeController));
 }
 
-// TODO(rydmike): Temp keyColors to test the features.
-const FlexKeyColor _keyColors = FlexKeyColor(
-  useKeyColors: true,
-  useSecondary: false,
-  useTertiary: false,
-  keepPrimary: false,
-  keepSecondary: false,
-  keepTertiary: false,
-  keepPrimaryContainer: false,
-  keepSecondaryContainer: false,
-  keepTertiaryContainer: false,
-);
-
 class DemoApp extends StatelessWidget {
   const DemoApp({Key? key, required this.themeController}) : super(key: key);
   final ThemeController themeController;
@@ -171,9 +158,27 @@ class DemoApp extends StatelessWidget {
                     fontFamily: AppData.font,
                     // The platform can be toggled in the app, but not saved.
                     platform: themeController.platform,
-                    // TODO(rydmike): Make controller props for this setup.
-                    // Define key color based scheme setup value
-                    keyColors: _keyColors,
+                    // Use key color based M3 ColorScheme.
+                    keyColors: FlexKeyColor(
+                      useKeyColors: themeController.useKeyColors,
+                      useSecondary: themeController.useSecondary,
+                      useTertiary: themeController.useTertiary,
+                      keepPrimary: themeController.keepPrimary,
+                      keepSecondary: themeController.keepSecondary,
+                      keepTertiary: themeController.keepTertiary,
+                      keepPrimaryContainer:
+                          themeController.keepPrimaryContainer,
+                      keepSecondaryContainer:
+                          themeController.keepSecondaryContainer,
+                      keepTertiaryContainer:
+                          themeController.keepTertiaryContainer,
+                    ),
+                    // Opt-in/out of using Flutter SDK Material3 based theming
+                    // features. In Flutter SDK 2.10.1 and earlier it has no
+                    // effect, but it will later and then we can use this toggle
+                    // with FlexColorScheme too, and in this demo we can see its
+                    // impact easily.
+                    useMaterial3: themeController.useMaterial3,
                     // Opt in/out of using opinionated sub-themes.
                     useSubThemes: themeController.useSubThemes,
                     // Options used to modify the sub-themes, there are more
@@ -326,9 +331,21 @@ class DemoApp extends StatelessWidget {
                     // TODO(rydmike): Make this a controller property.
                     // Used number of colors
                     usedColors: 6,
-                    // TODO(rydmike): Make controller props for this setup.
-                    // Define key color based scheme setup value
-                    keyColors: _keyColors,
+                    // Use key color based M3 ColorScheme.
+                    keyColors: FlexKeyColor(
+                      useKeyColors: themeController.useKeyColors,
+                      useSecondary: themeController.useSecondary,
+                      useTertiary: themeController.useTertiary,
+                      keepPrimary: themeController.keepPrimary,
+                      keepSecondary: themeController.keepSecondary,
+                      keepTertiary: themeController.keepTertiary,
+                      keepPrimaryContainer:
+                          themeController.keepPrimaryContainer,
+                      keepSecondaryContainer:
+                          themeController.keepSecondaryContainer,
+                      keepTertiaryContainer:
+                          themeController.keepTertiaryContainer,
+                    ),
                     // For reduced complexity in this demo, we use the same
                     // control value for surface mode selection and blend level
                     // for light and dark mode. They can as shown in earlier
@@ -348,6 +365,7 @@ class DemoApp extends StatelessWidget {
                     visualDensity: AppData.visualDensity,
                     fontFamily: AppData.font,
                     platform: themeController.platform,
+                    useMaterial3: themeController.useMaterial3,
                     useSubThemes: themeController.useSubThemes,
                     subThemesData: FlexSubThemesData(
                       useTextTheme: themeController.useTextTheme,

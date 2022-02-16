@@ -24,6 +24,7 @@ import 'widgets/tab_bar_style_buttons.dart';
 import 'widgets/theme_colors.dart';
 import 'widgets/theme_popup_menu.dart';
 import 'widgets/theme_selector.dart';
+import 'widgets/use_key_colors_buttons.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
@@ -199,69 +200,16 @@ class _HomePageState extends State<HomePage> {
               bottomPadding + margins,
             ),
             itemBuilder: (BuildContext context, int index) => <Widget>[
-              HeaderCard(
+              // The main info Card.
+              _Info(
+                controller: widget.controller,
                 isOpen: isCardOpen[0],
                 onTap: () {
                   toggleCard(0);
                 },
-                title: const Text('FlexColorScheme Info'),
-                child: Column(
-                  children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text(
-                        'With this demo you can try all features and themes in '
-                        'FlexColorScheme V4. Find a color scheme you '
-                        'like, experiment with the new surface blend modes and '
-                        'levels. See how the AppBar theme options work. '
-                        'Try the true black option for dark '
-                        'themes, along with computed dark themes.\n'
-                        '\n'
-                        "You can also turn FlexColorScheme's theming OFF "
-                        'and see how a color scheme looks when using '
-                        'standard Flutter ThemeData.from a ColorScheme.\n'
-                        '\n'
-                        'The new opinionated opt-in widget sub '
-                        'theming is ON, you can turn it OFF and see the '
-                        'differences. The sub theming defaults '
-                        'mimics Material 3 (You), mostly on corner radius of '
-                        'Widgets, but also TextTheme and its coloring. '
-                        'This demo does not adjust any widget properties, the '
-                        'theme is adjusted interactively and the Flutter '
-                        'widgets change as the theme is modified '
-                        'via the controls.\n'
-                        '\n'
-                        'The theming impact on widgets is shown in expandable '
-                        'cards with "Themed" headings. The three first '
-                        'themes are custom color schemes and are not built-in '
-                        'choices. In the packages tutorial you learn how to '
-                        'make your own custom color schemes and turn '
-                        'them into advanced themes with FlexColorScheme.\n'
-                        '\n'
-                        'You can copy existing color schemes and make a custom '
-                        'version of it. Want to use a theme you configured? '
-                        'Copy setup code for active settings and paste it '
-                        'into your IDE. Settings in the demo are persisted.',
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    SwitchListTile.adaptive(
-                      title: const Text(
-                        'Use FlexColorScheme theming features',
-                      ),
-                      subtitle: const Text(
-                        'Turn OFF to see Flutter default theming using '
-                        'its features\n'
-                        'Most settings have no impact when this is OFF',
-                      ),
-                      value: widget.controller.useFlexColorScheme,
-                      onChanged: widget.controller.setUseFlexColorScheme,
-                    ),
-                  ],
-                ),
               ),
               //
-              // All the "Settings" Cards...
+              // All the "Settings" Cards.
               _ThemeColors(
                 controller: widget.controller,
                 isOpen: isCardOpen[1],
@@ -342,7 +290,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               //
-              // All the "Themed" results Cards...
+              // All the "Themed" results Cards.
               _MaterialButtonsShowcase(
                 isOpen: isCardOpen[12],
                 onTap: () {
@@ -490,6 +438,147 @@ class _CopySchemeToCustomDialog extends StatelessWidget {
 // made public widget and put into their own files if there would be a need
 // to use them on other other screens too.
 
+class _Info extends StatelessWidget {
+  const _Info({
+    Key? key,
+    required this.controller,
+    required this.isOpen,
+    required this.onTap,
+  }) : super(key: key);
+  final ThemeController controller;
+  final bool isOpen;
+  final VoidCallback onTap;
+
+  void _handleCodeTap(BuildContext context) {
+    showResponsiveDialog<void>(
+      context: context,
+      child: DartCodeDialogScreen(controller: controller),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return HeaderCard(
+      isOpen: isOpen,
+      onTap: onTap,
+      title: const Text('FlexColorScheme Info'),
+      child: Column(
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text('With this demo you can try all features and themes in '
+                'FlexColorScheme V5. Find a color scheme you '
+                'like, experiment with the new surface blend modes and '
+                'levels. See how the AppBar theme options work. '
+                'Try the true black option for dark '
+                'themes, along with computed dark themes. In version 5 the new '
+                'Material 3 based ColorScheme is used, and can it also be '
+                'generated using main colors as M3 tonal palette keys.\n'
+                '\n'
+                'This demo does not adjust any individual widget properties, '
+                'the application theme is adjusted interactively and all the '
+                'Flutter widgets change as the theme is modified interactively '
+                'via the controls.\n'
+                '\n'
+                'The theming impact on widgets is shown in expandable '
+                'cards with "Themed" headings. The three first '
+                'themes are custom color schemes and are not built-in '
+                'choices. In the packages tutorial you learn how to '
+                'make your own custom color schemes and turn '
+                'them into advanced themes with FlexColorScheme. '
+                'All settings in this demo are persisted locally.\n'
+                '\n'
+                "You can turn FlexColorScheme's theming OFF "
+                'to see how a color scheme looks when using standard '
+                'Flutter ThemeData.from same active ColorScheme.'),
+          ),
+          SwitchListTile.adaptive(
+            title: const Text(
+              'Use FlexColorScheme theming features',
+            ),
+            subtitle: const Text(
+              "Turn OFF to use Flutter's default theming.\n"
+              'Most settings have no impact when this is OFF',
+            ),
+            value: controller.useFlexColorScheme,
+            onChanged: controller.setUseFlexColorScheme,
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text('The opinionated opt-in widget sub '
+                'theming is ON by default. You can turn it OFF and see the '
+                'differences. The sub theming defaults mimic the Material 3 '
+                'style, mostly on corner radius of Widgets, but also '
+                'TextTheme size and its optional coloring. '),
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Use sub theming'),
+            subtitle: const Text('Enable opinionated widget sub themes'),
+            value: controller.useSubThemes && controller.useFlexColorScheme,
+            onChanged: controller.useFlexColorScheme
+                ? controller.setUseSubThemes
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Want to use a theme you configured here in a Flutter app? '
+              'Just copy the setup code for your active settings and paste it '
+              'into your Flutter app with your IDE.',
+            ),
+          ),
+          ListTile(
+            title: const Text('Get the FlexColorScheme setup code for '
+                'this theme'),
+            trailing: ElevatedButton(
+              onPressed: controller.useFlexColorScheme
+                  ? () {
+                      _handleCodeTap(context);
+                    }
+                  : null,
+              child: const Text('Code'),
+            ),
+            onTap: controller.useFlexColorScheme
+                ? () {
+                    _handleCodeTap(context);
+                  }
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text('Very few M3 widgets and styles are available in '
+                'Flutter 2.10 and earlier. There is a toggle in ThemeData '
+                'that you can turn on to enable M3 styles, but it has no '
+                'effect on Widgets yet in Flutter.'),
+          ),
+          SwitchListTile.adaptive(
+            title: const Text(
+              "Use Flutter's Material 3 based themes",
+            ),
+            subtitle: const Text(
+              'Toggles useMaterial3 in ThemeData ON/OFF. '
+              'Has no effect in Flutter <= 2.10.1, it will in future '
+              'versions, we can then visually observe its effect here',
+            ),
+            value: controller.useMaterial3,
+            onChanged: controller.setUseMaterial3,
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text('Material 3 colors are '
+                'available, but Widgets do not use them correctly '
+                'yet nor do they yet implement M3 style when the '
+                'above toggle is used in ThemeData. You can use '
+                "FlexColorScheme's opinionated sub-themes to get styles "
+                'that are very close to Material 3 and you can use the new '
+                "colors in widgets' sub-theme configuration."),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _ThemeColors extends StatelessWidget {
   const _ThemeColors({
     Key? key,
@@ -538,13 +627,6 @@ class _ColorScheme extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
-  void _handleCodeTap(BuildContext context) {
-    showResponsiveDialog<void>(
-      context: context,
-      child: DartCodeDialogScreen(controller: controller),
-    );
-  }
-
   Future<void> _handleCopySchemeTap(BuildContext context) async {
     final bool? copy = await showDialog<bool?>(
       context: context,
@@ -562,8 +644,32 @@ class _ColorScheme extends StatelessWidget {
     }
   }
 
+  String _explainUsedColors() {
+    if (!controller.useKeyColors) {
+      return 'Material 3 ColorScheme seeding from key colors is NOT used.\n'
+          'The M3 ColorScheme is based on the input colors';
+    }
+    if (!controller.useSecondary && !controller.useTertiary) {
+      return 'Only Primary input color is used to generate the M3 Colorscheme, '
+          'this is like using ColorScheme.fromSeed with Primary color';
+    }
+    if (controller.useSecondary && !controller.useTertiary) {
+      return 'To make tonal palettes for the M3 ColorScheme, Primary and '
+          'Secondary colors are used as keys, Tertiary is computed '
+          'from Primary';
+    }
+    if (!controller.useSecondary && controller.useTertiary) {
+      return 'To make tonal palettes for the M3 ColorScheme, Primary and '
+          'Tertiary colors are used as keys, Secondary is computed '
+          'from Primary';
+    }
+    return 'Input Primary, Secondary and Tertiary colors are all used as own '
+        'keys to generate tonal palettes to make the M3 ColorScheme';
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
@@ -596,24 +702,103 @@ class _ColorScheme extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
             child: ThemeColors(controller: controller),
           ),
-          const ListTile(
-            title: Text('Tap color code to copy it to the clipboard'),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text('Tap a color code to copy it to the clipboard'),
+          ),
+          if (isLight)
+            SwitchListTile.adaptive(
+              title: const Text('Light mode swap colors'),
+              subtitle: const Text(
+                'Swap primary and secondary colors',
+              ),
+              value: controller.swapLightColors,
+              onChanged: controller.setSwapLightColors,
+            )
+          else
+            SwitchListTile.adaptive(
+              title: const Text('Dark mode swap colors'),
+              subtitle: const Text(
+                'Swap primary and secondary colors',
+              ),
+              value: controller.swapDarkColors,
+              onChanged: controller.setSwapDarkColors,
+            ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text('Dynamic Material 3 ColorScheme',
+                style: Theme.of(context).textTheme.titleLarge),
           ),
           ListTile(
-            title: const Text('Get the FlexColorScheme setup code for '
-                'this theme'),
-            trailing: ElevatedButton(
-              onPressed: controller.useFlexColorScheme
-                  ? () {
-                      _handleCodeTap(context);
-                    }
-                  : null,
-              child: const Text('Code'),
+            title: const Text('Use input colors as key to make '
+                'a dynamic ColorScheme'),
+            subtitle: Text(_explainUsedColors()),
+          ),
+          // const SizedBox(height: 4),
+          ListTile(
+            trailing: UseKeyColorsButtons(
+              controller: controller,
             ),
-            onTap: controller.useFlexColorScheme
-                ? () {
-                    _handleCodeTap(context);
-                  }
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text('When using dynamic themes, you can also lock the '
+                'main colors to their actual input value, instead of '
+                'letting it be replaced by a computed tone.'),
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Keep primary locked at input value'),
+            value: controller.useKeyColors &&
+                controller.useFlexColorScheme &&
+                controller.keepPrimary,
+            onChanged: controller.useKeyColors && controller.useFlexColorScheme
+                ? controller.setKeepPrimary
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Keep primary container locked at input value'),
+            value: controller.useKeyColors &&
+                controller.useFlexColorScheme &&
+                controller.keepPrimaryContainer,
+            onChanged: controller.useKeyColors && controller.useFlexColorScheme
+                ? controller.setKeepPrimaryContainer
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Keep secondary locked at input value'),
+            value: controller.useKeyColors &&
+                controller.useFlexColorScheme &&
+                controller.keepSecondary,
+            onChanged: controller.useKeyColors && controller.useFlexColorScheme
+                ? controller.setKeepSecondary
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Keep secondary container locked at input value'),
+            value: controller.useKeyColors &&
+                controller.useFlexColorScheme &&
+                controller.keepSecondaryContainer,
+            onChanged: controller.useKeyColors && controller.useFlexColorScheme
+                ? controller.setKeepSecondaryContainer
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Keep tertiary locked at input value'),
+            value: controller.useKeyColors &&
+                controller.useFlexColorScheme &&
+                controller.keepTertiary,
+            onChanged: controller.useKeyColors && controller.useFlexColorScheme
+                ? controller.setKeepTertiary
+                : null,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Keep tertiary container locked at input value'),
+            value: controller.useKeyColors &&
+                controller.useFlexColorScheme &&
+                controller.keepTertiaryContainer,
+            onChanged: controller.useKeyColors && controller.useFlexColorScheme
+                ? controller.setKeepTertiaryContainer
                 : null,
           ),
         ],
@@ -662,14 +847,6 @@ class _ThemeMode extends StatelessWidget {
           ),
           if (isLight) ...<Widget>[
             SwitchListTile.adaptive(
-              title: const Text('Light mode swap colors'),
-              subtitle: const Text(
-                'Swap primary and secondary colors',
-              ),
-              value: controller.swapLightColors,
-              onChanged: controller.setSwapLightColors,
-            ),
-            SwitchListTile.adaptive(
               title: const Text('Light mode TextTheme is colored'),
               value: controller.blendLightTextTheme &&
                   controller.useSubThemes &&
@@ -690,14 +867,6 @@ class _ThemeMode extends StatelessWidget {
                       : null,
             ),
           ] else ...<Widget>[
-            SwitchListTile.adaptive(
-              title: const Text('Dark mode swap colors'),
-              subtitle: const Text(
-                'Swap primary and secondary colors',
-              ),
-              value: controller.swapDarkColors,
-              onChanged: controller.setSwapDarkColors,
-            ),
             SwitchListTile.adaptive(
               title: const Text('Dark mode TextTheme is colored'),
               value: controller.blendDarkTextTheme &&
@@ -997,14 +1166,6 @@ class _SubThemes extends StatelessWidget {
       title: const Text('Sub Theme Settings'),
       child: Column(
         children: <Widget>[
-          SwitchListTile.adaptive(
-            title: const Text('Use sub theming'),
-            subtitle: const Text('Enable opinionated widget sub themes'),
-            value: controller.useSubThemes && controller.useFlexColorScheme,
-            onChanged: controller.useFlexColorScheme
-                ? controller.setUseSubThemes
-                : null,
-          ),
           SwitchListTile.adaptive(
             title: const Text('Use Material 3 TextTheme'),
             subtitle: const Text('ON to use M3 text styles\n'
