@@ -787,6 +787,11 @@ class FlexColorScheme with Diagnosticable {
   /// controlled separately with only a [ThemeData.from] a color scheme.
   ///
   /// If no value is given, it defaults to [surface].
+  ///
+  /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
+  /// [FlexSubThemesData] and you have opted in on using component sub themes
+  /// with [useSubThemes], then its selected scheme color will override this
+  /// value.
   final Color? dialogBackground;
 
   /// Background theme color for the [AppBar].
@@ -1832,6 +1837,11 @@ class FlexColorScheme with Diagnosticable {
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
+    ///
+    /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
+    /// [FlexSubThemesData] and you have opted in on using component sub themes
+    /// with [useSubThemes], then its selected scheme color will override this
+    /// value.
     ///
     /// Defaults to null.
     final Color? dialogBackground,
@@ -3242,6 +3252,11 @@ class FlexColorScheme with Diagnosticable {
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
+    ///
+    /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
+    /// [FlexSubThemesData] and you have opted in on using component sub themes
+    /// with [useSubThemes], then its selected scheme color will override this
+    /// value.
     ///
     /// Defaults to null.
     final Color? dialogBackground,
@@ -5424,6 +5439,7 @@ class FlexColorScheme with Diagnosticable {
       textButtonTheme: useSubThemes
           ? FlexSubThemes.textButtonTheme(
               colorScheme: colorScheme,
+              baseSchemeColor: subTheme.textButtonColor,
               radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
@@ -5432,6 +5448,7 @@ class FlexColorScheme with Diagnosticable {
       elevatedButtonTheme: useSubThemes
           ? FlexSubThemes.elevatedButtonTheme(
               colorScheme: colorScheme,
+              baseSchemeColor: subTheme.elevatedButtonColor,
               radius: subTheme.elevatedButtonRadius ?? subTheme.defaultRadius,
               elevation: subTheme.elevatedButtonElevation,
               padding: subTheme.buttonPadding,
@@ -5441,6 +5458,7 @@ class FlexColorScheme with Diagnosticable {
       outlinedButtonTheme: useSubThemes
           ? FlexSubThemes.outlinedButtonTheme(
               colorScheme: colorScheme,
+              baseSchemeColor: subTheme.outlinedButtonColor,
               radius: subTheme.outlinedButtonRadius ?? subTheme.defaultRadius,
               pressedOutlineWidth: subTheme.thickBorderWidth,
               outlineWidth: subTheme.thinBorderWidth,
@@ -5467,6 +5485,7 @@ class FlexColorScheme with Diagnosticable {
       buttonTheme: useSubThemes
           ? FlexSubThemes.buttonTheme(
               colorScheme: colorScheme,
+              baseSchemeColor: subTheme.materialButtonColor,
               radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
@@ -5482,6 +5501,7 @@ class FlexColorScheme with Diagnosticable {
       toggleButtonsTheme: useSubThemes
           ? FlexSubThemes.toggleButtonsTheme(
               colorScheme: colorScheme,
+              baseSchemeColor: subTheme.toggleButtonsColor,
               borderWidth: subTheme.thinBorderWidth,
               radius: subTheme.toggleButtonsRadius ?? subTheme.defaultRadius,
               minButtonSize: subTheme.buttonMinSize,
@@ -5534,14 +5554,18 @@ class FlexColorScheme with Diagnosticable {
           : null,
       dialogTheme: useSubThemes
           ? FlexSubThemes.dialogTheme(
+              backgroundColor: dialogBackground ?? colorScheme.background,
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.dialogBackgroundColor,
               radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
               elevation: subTheme.dialogElevation,
-              backgroundColor: dialogBackground ?? colorScheme.background,
             )
           : null,
       timePickerTheme: useSubThemes
           ? FlexSubThemes.timePickerTheme(
               backgroundColor: dialogBackground ?? colorScheme.background,
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.dialogBackgroundColor,
               radius: subTheme.timePickerDialogRadius ?? subTheme.defaultRadius,
               elementRadius: subTheme.cardRadius ?? subTheme.defaultRadius,
               inputDecorationTheme: effectiveInputDecorationTheme)
@@ -7341,7 +7365,6 @@ class _FlexCorePalette extends CorePalette {
 }
 
 // TODO(rydmike): Decide if we use CorePalette inherited version or own class.
-//
 // This entire commented private _CorePalette class can be used to create a
 // custom version of CorePalette with the needed [fromSeeds] factory that is
 // a bit more efficient than the extended version above thanks to reduced

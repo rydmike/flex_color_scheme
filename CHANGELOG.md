@@ -19,7 +19,8 @@ old property names will remain available until FlexColorScheme version
 6.0.0. Prefer migrating to the new names you will see via deprecation warnings.
 
 **BREAKING**  
-* Requires at least Flutter stable 2.10.0.This release uses new M3 `ColorScheme` properties that are not included 
+* Requires at least Flutter stable 2.10.0.This release uses new M3 `ColorScheme` 
+  properties that are not included 
   before Flutter version 2.10.0, as well as the ThemeData flag `useMaterial3`.
 * Removed parameter `surfaceStyle` from `FlexThemeData`
   extensions `FlexThemeData.light` and `FlexThemeData.dark` that uses
@@ -93,8 +94,17 @@ old property names will remain available until FlexColorScheme version
 * Added additional `ColorScheme` color selection options to
   sub-themes configuration class `FlexSubThemesData`. The feature
   introduced in version 4.2.0 is now also supported by sub themes for:
-  - Floating Action Button, via `FlexSubThemesData.fabSchemeColor`
-  - **TODO:** More to be added before release, see list below.
+  - `FloatingActionButton`, via `FlexSubThemesData.fabSchemeColor`
+  - `TextButton`, via `FlexSubThemesData.textButtonColor`
+  - `ElevatedButton`, via `FlexSubThemesData.elevatedButtonColor`
+  - `OutlinedButton`, via `FlexSubThemesData.outlinedButtonColor`
+  - `MaterialButton`, via `FlexSubThemesData.materialButtonColor`
+  - `ToggleButtons`, via `FlexSubThemesData.toggleButtonsColor`
+  - Dialog backgrounds, affects `DialogTheme` and `TimePickerThemeData`
+    via `FlexSubThemesData.dialogBackgroundColor`. If used this property
+    overrides color property `dialogBackground` in all FlexColorScheme 
+    constructors, factories and theme data extensions.
+  - **TODO:** More of these to add before release, see list further below.
 
 
 **CHANGE**
@@ -140,12 +150,20 @@ old property names will remain available until FlexColorScheme version
   become `EnglishLike2021` as `Typography` when it is included in Flutter. 
   This typography (font geometry) is not yet available in Flutter 2.10.0 and 
   was not even in master at the time when when Flutter 2.10.0 was released. 
-  FlexColorScheme has included this EnglishLike2021 typography since version
+  FlexColorScheme has included a EnglishLike2021 geometry since version
   4.0.0, now it also uses the correct `TextStyle` names since they became
-  available in Flutter 2.10.0.
+  available in Flutter 2.10.0. The actual `EnglishLike2021` will arrive in
+  the Flutter stable release after 2.10.x. The current custom version of it
+  will be removed then.
 
 **TODO**
 
+* Add main `SchemeColor` enum color selection to TabBar,
+  overriding its none sub-theme older enum definition.
+* Add main `SchemeColor` enum color selection to AppBar,
+  overriding its none sub-theme older enum definition.
+
+ 
 * Define values for new `FlexSchemeColor.secondaryContainer`
   and `FlexSchemeColor.tertiaryContainer`. This is a big task to add, also color
   design wise, but needed for the built-in themes to also be nice in both M2
@@ -162,24 +180,11 @@ old property names will remain available until FlexColorScheme version
   their blend level. Currently, this is turned on via `blendOnColors` toggle
   that will remain. It does however introduce blend level for onColor that is
   tied to used blend level on surfaces. This makes it at a separate value that
-  can be adjusted when the property old property is on. A default value that
-  introduce a minor blend when it is turned on will be added. It will not be 
-  an exact match with value tied to surface blend level since it is independent
-  of it,
-* 
+  can be adjusted when the property old property is on. A default value of zero, 
+  just like `blendLevel` will be used. It will not be an exact behavior match 
+  with the value tied to surface blend level since it is independent of it.
 
-* Consider removal or at least deprecation of the `buttonTheme` sub theme
-  and its properties in `FlexSubThemesData`. The old in Flutter v1.26 deprecated
-  buttons `RaisedButton`, `OutlineButton` and `FlatButton` are going away in
-  next stable release of Flutter as per [this notice #98537](https://github.com/flutter/flutter/issues/98537). A pity, since the sub theming in
-  FlexColorScheme actually make them look pretty good too and match current 
-  styles pretty well, despite their theming limitations. Their only issues is
-  that their interaction effects is a bit off, and they don't have as much config 
-  freedom as the new buttons. They are much simpler to theme though. The
-  new, current and correct, buttons are tricky to deal with with their complicated
-  MaterialState properties. FlexColorScheme sub themes already helps with that
-  too though.
-
+ 
 * Add tests for new prop `fabSchemeColor` and its features.
 * Add tests for new prop `useMaterial3`.
 * Add unit tests for `FlexKeyColorSetup`.
@@ -188,26 +193,37 @@ old property names will remain available until FlexColorScheme version
 * Tests and verification of old color def backward equality.
 
 
-* Update all examples, in particular example 5, the Themes Playground
+* Update all examples, in particular example 5 the Themes Playground,
   to include support for the new features.
   - **TODO:** Add color scheme color selection to all sub themes that have it.
   - **TODO:** Playground add color limit input `usedColors`, it is a very old
     API in FlexColorScheme, it has just never been featured much.
   - **DONE:** Playground add `useMaterial3` toggle
   - **DONE:** Playground add controls for using key colors dynamic ColorScheme.
-  
+  - **DONE:** Removed showing the old in Flutter v1.26 deprecated
+    buttons `RaisedButton`, `OutlineButton` and `FlatButton` in the examples.
+    They are going away in next stable release of Flutter after 2.10.x, as 
+    per this notice [#98537](https://github.com/flutter/flutter/issues/98537). 
+
+
 **TODO MAYBE** Might be pushed to 5.1.0.
 
-* Add main `SchemeColor` enum color selection to all buttons. Expect then
-  the sub theme for the old `buttonTheme` that should be deprecated or even 
-  removed since their APIs are going away in next Flutter stable release.
 * Add main `SchemeColor` enum color selection to switch buttons.
-* Add main `SchemeColor` enum color selection to ToggleButton.
-* Add main `SchemeColor` enum color selection to dialog background.
-* Add main `SchemeColor` enum color selection to TabBar, 
-  overriding its none sub-theme older enum definition.
-* Add main `SchemeColor` enum color selection to AppBar,
-  overriding its none sub-theme older enum definition. 
+* Add main `SchemeColor` enum color selection to check buttons
+* Add main `SchemeColor` enum color selection to radio buttons
+* The above colors are all today in Flutter stable 2.10.1 controlled via
+  `ThemeData.toggleableActiveColor`. An ongoing change in master chanel is
+  deprecating this color property, and introducing own sub-themes for each of
+  switch, check and radio button. New default, potentially breaking too,
+  appears to be `ColorScheme.secondary`. Adding configurability to
+  `ThemeData.toggleableActiveColor` via a selectable `SchemeColor` is doable,
+  but maybe wait until the changes lands. The property 
+  `ThemeData.toggleableActiveColor` already defaults to 
+  `ColorScheme.secondary` in FlexColorScheme themes now. The easy way to 
+  override for noe is with `copyWith(toggleableActiveColor: myColor)`, as it 
+  has always been so far. It is currently not possible to theme the switch, check
+  and radio buttons to different colors, but it will be so when the changes
+  in  master, lands in stable.
 * Add sub-theming support for `NavigationRailThemeData`.
 
 
