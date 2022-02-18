@@ -1825,22 +1825,36 @@ class _MaterialButtonsShowcase extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const ButtonShowcase(),
-            const SizedBox(height: 8),
-            const ButtonShowcase(enabled: false),
-            const SizedBox(height: 8),
-            const ButtonIconShowcase(),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Text('Legacy buttons, deprecated',
-                  style: Theme.of(context).textTheme.subtitle1),
-            ),
-            const LegacyButtonShowcase(),
-            const SizedBox(height: 8),
-            const LegacyButtonShowcase(enabled: false),
-            const SizedBox(height: 8),
-            const LegacyButtonIconShowcase(),
+          children: const <Widget>[
+            ButtonShowcase(),
+            SizedBox(height: 8),
+            ButtonShowcase(enabled: false),
+            SizedBox(height: 8),
+            ButtonIconShowcase(),
+
+            /// Showing the legacy buttons is removed from the sample.
+            ///
+            /// The deprecated legacy buttons weill be removed in next stable
+            /// release after Flutter 2.10.x. For more info see:
+            /// https://github.com/flutter/flutter/issues/98537
+            ///
+            /// The sub themes that style them will be kept available since it
+            /// is not going away and may be useful to the theme ButtonBar and
+            /// dropdown. button style. As long as the buttons are actually
+            /// available in the SDK, the comment code to show will be kept
+            /// around in the samples, should anybody want to uncomment it to
+            /// see what their style with sub themes applied looks like.
+
+            // Padding(
+            //   padding: const EdgeInsets.all(8),
+            //   child: Text('Legacy buttons, deprecated',
+            //       style: Theme.of(context).textTheme.subtitle1),
+            // ),
+            // const LegacyButtonShowcase(),
+            // const SizedBox(height: 8),
+            // const LegacyButtonShowcase(enabled: false),
+            // const SizedBox(height: 8),
+            // const LegacyButtonIconShowcase(),
           ],
         ),
       ),

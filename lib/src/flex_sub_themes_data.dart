@@ -49,7 +49,10 @@ class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.
   const FlexSubThemesData({
     this.interactionEffects = true,
-    this.blendOnColors = true,
+    @Deprecated('This property no longer has any function, it '
+        'has been replaced by blendOnLevel.')
+        this.blendOnColors = true,
+    this.blendOnLevel = 0,
     this.blendTextTheme = true,
     this.useTextTheme = true,
     this.defaultRadius,
@@ -62,6 +65,11 @@ class FlexSubThemesData with Diagnosticable {
     this.elevatedButtonElevation = kElevatedButtonElevation,
     this.outlinedButtonRadius,
     this.toggleButtonsRadius,
+    this.textButtonColor,
+    this.elevatedButtonColor,
+    this.outlinedButtonColor,
+    this.materialButtonColor,
+    this.toggleButtonsColor,
     this.inputDecorationRadius,
     this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
@@ -80,8 +88,11 @@ class FlexSubThemesData with Diagnosticable {
     this.popupMenuOpacity = 1,
     this.dialogRadius,
     this.dialogElevation = kDialogElevation,
+    this.dialogBackgroundColor,
     this.timePickerDialogRadius,
     this.snackBarElevation = kSnackBarElevation,
+    this.appBarBackgroundColor,
+    this.tabBarBackgroundColor,
     this.tabBarIndicatorSchemeColor,
     this.bottomSheetRadius,
     this.bottomSheetElevation = kBottomSheetElevation,
@@ -150,7 +161,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool interactionEffects;
 
-  // TODO(rydmike): This API doc comments needs updates.
+  /// This feature has been deprecated and replaced by [blendOnLevel].
+  ///
   /// Use selected [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend in each corresponding
   /// [ColorScheme] color property's color into their onColors [onSurface],
@@ -163,12 +175,18 @@ class FlexSubThemesData with Diagnosticable {
   /// subtle and can be turned off by setting [blendOnColors] to false.
   ///
   /// Defaults to true.
+  @Deprecated('This property no longer has any function, it has been replaced '
+      'by blendOnLevel.')
   final bool blendOnColors;
 
-  // TODO(rydmike): Implement this.
-  /// When [blendOnColors] is true, this sets the blend level strength used
-  /// of the onColor's the color pair, into the onColor, for none
-  /// surface onColors.
+  // TODO(rydmike): Implement this + review other onColors to get it.
+  /// Sets the blend level strength used of the onColor's color pair's color,
+  /// into the onColor color, for none surface onColors.
+  ///
+  /// The setting applies to [onSurface], [onBackGround],
+  /// [onPrimary], [onSecondary] and [onTertiary],
+  /// as well as [onPrimaryContainer], [onSecondaryContainer] and
+  /// [onTertiaryContainer] and [onError].
   ///
   /// The blend level is the integer decimal value of the alpha value
   /// used in the alpha blend function. It mixes one color with another
@@ -176,8 +194,16 @@ class FlexSubThemesData with Diagnosticable {
   /// another surface with opaque color and returns the result as one opaque
   /// color.
   ///
+  /// Blending the on colors results in lower contrast than when not doing so,
+  /// but it still works well on lower blend levels. This design is in line
+  /// with the look one gets when use key color seeded based [ColorScheme]s
+  /// vie
+  ///
+  /// The effect is
+  /// subtle and can be turned off by setting [blendOnColors] to false.
+  ///
   /// Defaults to 0.
-  /// final int blendOnLevel;
+  final int blendOnLevel;
 
   /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend primary color into text themes
@@ -206,14 +232,22 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// The text theme is defined in [FlexColorScheme.m3TextTheme]. When the
   /// actual M3 based text themes are defined in Flutter SDK stable release
-  /// they will be used instead.
+  /// they will be used instead. When that happens this style will be deprecated
+  /// and removed. It will likely happen in next stable release. The one
+  /// after Flutter 2.10.x.
   ///
   /// If you need to use none EnglishLike typography for you locale, then
   /// using this text theme might not be ideal. It only provides
   /// the EnglishLike geometry, not the dense and tall ones that some locales
-  /// prefer or need. This limitation will be removed when the M3 geometry is
+  /// prefer or need. This limitation will be removed when the M3 Typography is
   /// supported in Flutter SDK. If this text theme causes issues with your
   /// locale or it otherwise does not suite your design, then set this to false.
+  ///
+  /// After the new M3 Typography becomes available, this toggle we be used to
+  /// opt-in on using it, without need to also set `FlexColorScheme` and via it
+  /// `ThemeData` property `useMaterial3` to true to get the typography.
+  /// Optionally you will then also just be able ot configure the Typography
+  /// to the 2021 variant without using Material3 flag too.
   ///
   /// FlexColorScheme fully supports using any custom TextTheme and fonts, just
   /// like ThemeData. That you apply and use just as you would with ThemeData.
@@ -261,7 +295,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Minimum button size for all buttons.
   ///
   /// Applies to [TextButton], [ElevatedButton], [OutlinedButton] and
-  /// [ToggleButtons], and the legacy deprecated buttons
+  /// [ToggleButtons], and the legacy deprecated/removed buttons
   /// `RaisedButton`, `OutlineButton` and `FlatButton`.
   ///
   /// Defaults to [kButtonMinSize].
@@ -310,36 +344,53 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius override value for [ToggleButtons].
   final double? toggleButtonsRadius;
 
-  // TODO(rydmike): Add this feature
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [TextButton] use as its base theme color.
   ///
   /// If not defined it defaults to theme.colorScheme.primary color via
-  /// Flutter theme defaults.
-  // final SchemeColor? textButtonColor;
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? textButtonColor;
 
-  // TODO(rydmike): Add this feature
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [ElevatedButton] use as its base theme color.
   ///
   /// If not defined it defaults to theme.colorScheme.primary color via
-  /// Flutter theme defaults.
-  // final SchemeColor? elevatedButtonColor;
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? elevatedButtonColor;
 
-  // TODO(rydmike): Add this feature
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [OutlinedButton] use as its base theme color.
   ///
   /// If not defined it defaults to theme.colorScheme.primary color via
-  /// Flutter theme defaults.
-  // final SchemeColor? outlinedButtonColor;
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? outlinedButtonColor;
 
-  // TODO(rydmike): Add this feature
+  /// Defines which [Theme] based [ColorScheme] based color the old
+  /// [MaterialButton] use as its base theme color.
+  ///
+  /// The [MaterialButton] is the parent class of old deprecated and removed
+  /// buttons `RaisedButton`, `OutlineButton` and `FlatButton`. The theme
+  /// [ButtonThemeData] it affects, is also used by [ButtonBar] and
+  /// [DropdownButton] and it may still be useful to theme to same style
+  /// as the theme used by the other buttons.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? materialButtonColor;
+
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [ToggleButtons] use as its base theme color.
   ///
   /// If not defined it defaults to theme.colorScheme.primary color via
-  /// FlexColorScheme sub-theme defaults.
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? toggleButtonsColor;
+
+  // TODO(rydmike): Postpone this config until we have separate themes for it.
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [ToggleButtons] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
   // final SchemeColor? toggleButtonsColor;
 
   /// Border radius override value for [InputDecoration].
@@ -494,6 +545,13 @@ class FlexSubThemesData with Diagnosticable {
   /// light and contrast poorly with primary color.
   final double dialogElevation;
 
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [ToggleButtons] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? dialogBackgroundColor;
+
   /// Border radius override value for [TimePickerDialog].
   final double? timePickerDialogRadius;
 
@@ -502,13 +560,46 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to [kSnackBarElevation] = 4.
   final double snackBarElevation;
 
+  /// Defines which [Theme] based [ColorScheme] based color the [AppBar]
+  /// background uses.
+  ///
+  /// If not defined, [AppBar] uses the color defined in
+  /// [FlexColorScheme.appBarBackground], or made with [FlexColorScheme.light]
+  /// or [FlexColorScheme.dark], and the enum [FlexAppBarStyle] in property
+  /// [appBarStyle] to determine thh [AppBar] color and background
+  ///
+  /// The themed [AppBar] background color is typically determined by defined
+  /// [FlexAppBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
+  /// This property is an override that offers more quick config options by
+  /// allowing picking a color from the effective [ColorScheme] different from
+  /// options offered via [FlexColorScheme.light] and [FlexColorScheme.dark]
+  /// ([appBarStyle) factory parameter.
+  final SchemeColor? appBarBackgroundColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
+  /// background uses.
+  ///
+  /// If not defined, TabBar used the factories
+  /// [FlexColorScheme.light] or [FlexColorScheme.dark] with the enum value
+  /// [FlexTabBarStyle] with property [tabBarStyle], to determine
+  /// the [TabBar] color and background.
+  ///
+  /// The themed [TabBar] background color is typically determined by defining
+  /// [FlexTabBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
+  /// This property is an override that offers more quick config options by
+  /// allowing picking any color from the effective [ColorScheme], instead of
+  /// just the options in the [FlexColorScheme.light] and [FlexColorScheme.dark]
+  /// (tabBarStyle) factory parameter.
+  final SchemeColor? tabBarBackgroundColor;
+
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// indicator uses.
   ///
-  /// If not defined ,it defaults to the same color as selected tab icon and
-  /// text.
-  /// The themed icon color and label color of tabs are defined by the
-  /// [FlexColorScheme.tabBarStyle] property.
+  /// If not defined, it defaults to the same color as selected tab icon and
+  /// text. The themed icon color and label color of tabs are typically defined
+  /// by the [FlexColorScheme.tabBarStyle] property. This property is an
+  /// override that offers more quick config options by allowing picking
+  /// a color from the effective [ColorScheme].
   final SchemeColor? tabBarIndicatorSchemeColor;
 
   /// Border radius override value for [BottomSheet].
@@ -768,6 +859,7 @@ class FlexSubThemesData with Diagnosticable {
   FlexSubThemesData copyWith({
     final bool? interactionEffects,
     final bool? blendOnColors,
+    final int? blendOnLevel,
     final bool? blendTextTheme,
     final bool? useTextTheme,
     final double? defaultRadius,
@@ -780,6 +872,11 @@ class FlexSubThemesData with Diagnosticable {
     final double? elevatedButtonElevation,
     final double? outlinedButtonRadius,
     final double? toggleButtonsRadius,
+    final SchemeColor? textButtonColor,
+    final SchemeColor? elevatedButtonColor,
+    final SchemeColor? outlinedButtonColor,
+    final SchemeColor? materialButtonColor,
+    final SchemeColor? toggleButtonsColor,
     final double? inputDecorationRadius,
     final SchemeColor? inputDecoratorSchemeColor,
     final bool? inputDecoratorIsFilled,
@@ -796,10 +893,13 @@ class FlexSubThemesData with Diagnosticable {
     final double? popupMenuRadius,
     final double? popupMenuElevation,
     final double? popupMenuOpacity,
+    final SchemeColor? dialogBackgroundColor,
     final double? dialogElevation,
     final double? dialogRadius,
     final double? timePickerDialogRadius,
     final double? snackBarElevation,
+    final SchemeColor? appBarBackgroundColor,
+    final SchemeColor? tabBarBackgroundColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
     final double? bottomSheetRadius,
     final double? bottomSheetElevation,
@@ -828,6 +928,7 @@ class FlexSubThemesData with Diagnosticable {
     return FlexSubThemesData(
       interactionEffects: interactionEffects ?? this.interactionEffects,
       blendOnColors: blendOnColors ?? this.blendOnColors,
+      blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
       defaultRadius: defaultRadius ?? this.defaultRadius,
@@ -841,6 +942,11 @@ class FlexSubThemesData with Diagnosticable {
           elevatedButtonElevation ?? this.elevatedButtonElevation,
       outlinedButtonRadius: outlinedButtonRadius ?? this.outlinedButtonRadius,
       toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
+      textButtonColor: textButtonColor ?? this.textButtonColor,
+      elevatedButtonColor: elevatedButtonColor ?? this.elevatedButtonColor,
+      outlinedButtonColor: outlinedButtonColor ?? this.outlinedButtonColor,
+      materialButtonColor: materialButtonColor ?? this.materialButtonColor,
+      toggleButtonsColor: toggleButtonsColor ?? this.toggleButtonsColor,
       inputDecorationRadius:
           inputDecorationRadius ?? this.inputDecorationRadius,
       inputDecoratorSchemeColor:
@@ -862,12 +968,18 @@ class FlexSubThemesData with Diagnosticable {
       cardElevation: cardElevation ?? this.cardElevation,
       dialogRadius: dialogRadius ?? this.dialogRadius,
       dialogElevation: dialogElevation ?? this.dialogElevation,
+      dialogBackgroundColor:
+          dialogBackgroundColor ?? this.dialogBackgroundColor,
       popupMenuRadius: popupMenuRadius ?? this.popupMenuRadius,
       popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
       popupMenuOpacity: popupMenuOpacity ?? this.popupMenuOpacity,
       timePickerDialogRadius:
           timePickerDialogRadius ?? this.timePickerDialogRadius,
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
+      appBarBackgroundColor:
+          appBarBackgroundColor ?? this.appBarBackgroundColor,
+      tabBarBackgroundColor:
+          tabBarBackgroundColor ?? this.tabBarBackgroundColor,
       tabBarIndicatorSchemeColor:
           tabBarIndicatorSchemeColor ?? this.tabBarIndicatorSchemeColor,
       bottomSheetRadius: bottomSheetRadius ?? this.bottomSheetRadius,
@@ -921,6 +1033,7 @@ class FlexSubThemesData with Diagnosticable {
     return other is FlexSubThemesData &&
         other.interactionEffects == interactionEffects &&
         other.blendOnColors == blendOnColors &&
+        other.blendOnLevel == blendOnLevel &&
         other.blendTextTheme == blendTextTheme &&
         other.useTextTheme == useTextTheme &&
         other.defaultRadius == defaultRadius &&
@@ -933,6 +1046,11 @@ class FlexSubThemesData with Diagnosticable {
         other.elevatedButtonElevation == elevatedButtonElevation &&
         other.outlinedButtonRadius == outlinedButtonRadius &&
         other.toggleButtonsRadius == toggleButtonsRadius &&
+        other.textButtonColor == textButtonColor &&
+        other.elevatedButtonColor == elevatedButtonColor &&
+        other.outlinedButtonColor == outlinedButtonColor &&
+        other.materialButtonColor == materialButtonColor &&
+        other.toggleButtonsColor == toggleButtonsColor &&
         other.inputDecorationRadius == inputDecorationRadius &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
@@ -952,8 +1070,11 @@ class FlexSubThemesData with Diagnosticable {
         other.popupMenuOpacity == popupMenuOpacity &&
         other.dialogRadius == dialogRadius &&
         other.dialogElevation == dialogElevation &&
+        other.dialogElevation == dialogElevation &&
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.snackBarElevation == snackBarElevation &&
+        other.appBarBackgroundColor == appBarBackgroundColor &&
+        other.tabBarBackgroundColor == tabBarBackgroundColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
         other.bottomSheetRadius == bottomSheetRadius &&
         other.bottomSheetElevation == bottomSheetElevation &&
@@ -994,6 +1115,7 @@ class FlexSubThemesData with Diagnosticable {
     final List<Object?> values = <Object?>[
       interactionEffects,
       blendOnColors,
+      blendOnLevel,
       blendTextTheme,
       useTextTheme,
       defaultRadius,
@@ -1006,6 +1128,11 @@ class FlexSubThemesData with Diagnosticable {
       elevatedButtonElevation,
       outlinedButtonRadius,
       toggleButtonsRadius,
+      textButtonColor,
+      elevatedButtonColor,
+      outlinedButtonColor,
+      materialButtonColor,
+      toggleButtonsColor,
       inputDecorationRadius,
       inputDecoratorSchemeColor,
       inputDecoratorIsFilled,
@@ -1024,8 +1151,11 @@ class FlexSubThemesData with Diagnosticable {
       popupMenuOpacity,
       dialogRadius,
       dialogElevation,
+      dialogBackgroundColor,
       timePickerDialogRadius,
       snackBarElevation,
+      appBarBackgroundColor,
+      tabBarBackgroundColor,
       tabBarIndicatorSchemeColor,
       bottomSheetRadius,
       bottomSheetElevation,
@@ -1059,6 +1189,7 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(
         DiagnosticsProperty<bool>('interactionEffects', interactionEffects));
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
+    properties.add(DiagnosticsProperty<int>('blendOnLevel ', blendOnLevel));
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
     properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));
@@ -1079,6 +1210,16 @@ class FlexSubThemesData with Diagnosticable {
         'outlinedButtonRadius', outlinedButtonRadius));
     properties.add(DiagnosticsProperty<double>(
         'toggleButtonsRadius', toggleButtonsRadius));
+    properties
+        .add(EnumProperty<SchemeColor>('textButtonColor', textButtonColor));
+    properties.add(
+        EnumProperty<SchemeColor>('elevatedButtonColor', elevatedButtonColor));
+    properties.add(
+        EnumProperty<SchemeColor>('outlinedButtonColor', outlinedButtonColor));
+    properties.add(
+        EnumProperty<SchemeColor>('outlinedButtonColor', outlinedButtonColor));
+    properties.add(
+        EnumProperty<SchemeColor>('toggleButtonsColor', toggleButtonsColor));
     properties.add(DiagnosticsProperty<double>(
         'inputDecorationRadius', inputDecorationRadius));
     properties.add(EnumProperty<SchemeColor>(
@@ -1108,10 +1249,16 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>('dialogRadius', dialogRadius));
     properties
         .add(DiagnosticsProperty<double>('dialogElevation', dialogElevation));
+    properties.add(EnumProperty<SchemeColor>(
+        'dialogBackgroundColor', dialogBackgroundColor));
     properties.add(DiagnosticsProperty<double>(
         'timePickerDialogRadius', timePickerDialogRadius));
     properties.add(
         DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
+    properties.add(EnumProperty<SchemeColor>(
+        'appBarBackgroundColor', appBarBackgroundColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'tabBarBackgroundColor', tabBarBackgroundColor));
     properties.add(EnumProperty<SchemeColor>(
         'tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
     properties.add(

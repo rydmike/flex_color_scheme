@@ -385,6 +385,14 @@ class FlexSubThemes {
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
 
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the button.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
     /// The button corner radius.
     ///
     /// Defaults to `kButtonRadius` = 20.
@@ -406,43 +414,49 @@ class FlexSubThemes {
     ///
     /// Defaults to `kButtonMinSize` = Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
-  }) =>
-      TextButtonThemeData(
-        style: TextButton.styleFrom(
-          minimumSize: minButtonSize,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? kButtonRadius),
-            ),
-          ), // buttonShape,
-          padding: padding,
-        ).copyWith(
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledForegroundAlpha);
-              }
-              return colorScheme.primary;
-            },
+  }) {
+    // Get selected color, defaults to primary.
+    final Color baseColor = baseSchemeColor == null
+        ? colorScheme.primary
+        : schemeColor(baseSchemeColor, colorScheme);
+
+    return TextButtonThemeData(
+      style: TextButton.styleFrom(
+        minimumSize: minButtonSize,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? kButtonRadius),
           ),
-          overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.hovered)) {
-                return colorScheme.primary.withAlpha(kHoverBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.focused)) {
-                return colorScheme.primary.withAlpha(kFocusBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.pressed)) {
-                return colorScheme.primary.withAlpha(kPressedBackgroundAlpha);
-              }
-              return Colors.transparent;
-            },
-          ),
+        ), // buttonShape,
+        padding: padding,
+      ).copyWith(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledForegroundAlpha);
+            }
+            return baseColor;
+          },
         ),
-      );
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered)) {
+              return baseColor.withAlpha(kHoverBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return baseColor.withAlpha(kFocusBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return baseColor.withAlpha(kPressedBackgroundAlpha);
+            }
+            return Colors.transparent;
+          },
+        ),
+      ),
+    );
+  }
 
   /// An opinionated [ElevatedButtonThemeData] theme.
   ///
@@ -459,6 +473,14 @@ class FlexSubThemes {
   static ElevatedButtonThemeData elevatedButtonTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the button.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
 
     /// The button corner radius.
     ///
@@ -488,54 +510,60 @@ class FlexSubThemes {
     ///
     /// Defaults to `kButtonMinSize` = Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
-  }) =>
-      ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          minimumSize: minButtonSize,
-          padding: padding,
-          elevation: elevation,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? kButtonRadius),
-            ),
-          ), //buttonShape,
-        ).copyWith(
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledForegroundAlpha);
-              }
-              return colorScheme.onPrimary;
-            },
+  }) {
+    // Get selected color, defaults to primary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+
+    return ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        minimumSize: minButtonSize,
+        padding: padding,
+        elevation: elevation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? kButtonRadius),
           ),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
-              }
-              return colorScheme.primary;
-            },
-          ),
-          overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.hovered)) {
-                return colorScheme.onPrimary.withAlpha(kHoverBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.focused)) {
-                return colorScheme.onPrimary.withAlpha(kFocusBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.pressed)) {
-                return colorScheme.onPrimary.withAlpha(kPressedBackgroundAlpha);
-              }
-              return Colors.transparent;
-            },
-          ),
+        ), //buttonShape,
+      ).copyWith(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledForegroundAlpha);
+            }
+            return onBaseColor;
+          },
         ),
-      );
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledBackgroundAlpha);
+            }
+            return baseColor;
+          },
+        ),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered)) {
+              return onBaseColor.withAlpha(kHoverBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return onBaseColor.withAlpha(kFocusBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return onBaseColor.withAlpha(kPressedBackgroundAlpha);
+            }
+            return Colors.transparent;
+          },
+        ),
+      ),
+    );
+  }
 
   /// An opinionated [OutlinedButtonThemeData] theme.
   ///
@@ -547,6 +575,14 @@ class FlexSubThemes {
   static OutlinedButtonThemeData outlinedButtonTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the button.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
 
     /// The button corner border radius.
     ///
@@ -579,71 +615,77 @@ class FlexSubThemes {
     ///
     /// Defaults to `kButtonMinSize` = Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
-  }) =>
-      OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          minimumSize: minButtonSize,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? kButtonRadius),
-            ),
-          ), //buttonShape,
-          padding: padding,
-        ).copyWith(
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledForegroundAlpha);
-              }
-              return colorScheme.primary;
-            },
+  }) {
+    // Get selected color, defaults to primary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    // final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+
+    return OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        minimumSize: minButtonSize,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? kButtonRadius),
           ),
-          overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.hovered)) {
-                return colorScheme.primary.withAlpha(kHoverBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.focused)) {
-                return colorScheme.primary.withAlpha(kFocusBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.pressed)) {
-                return colorScheme.primary.withAlpha(kPressedBackgroundAlpha);
-              }
-              return Colors.transparent;
-            },
-          ),
-          side: MaterialStateProperty.resolveWith<BorderSide?>(
-            (final Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return BorderSide(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                  width: outlineWidth,
-                );
-              }
-              if (states.contains(MaterialState.error)) {
-                return BorderSide(
-                  color: colorScheme.error,
-                  width: pressedOutlineWidth,
-                );
-              }
-              if (states.contains(MaterialState.pressed)) {
-                return BorderSide(
-                  color: colorScheme.primary,
-                  width: pressedOutlineWidth,
-                );
-              }
+        ), //buttonShape,
+        padding: padding,
+      ).copyWith(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledForegroundAlpha);
+            }
+            return baseColor;
+          },
+        ),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered)) {
+              return baseColor.withAlpha(kHoverBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return baseColor.withAlpha(kFocusBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return baseColor.withAlpha(kPressedBackgroundAlpha);
+            }
+            return Colors.transparent;
+          },
+        ),
+        side: MaterialStateProperty.resolveWith<BorderSide?>(
+          (final Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
               return BorderSide(
-                color: colorScheme.primary.withAlpha(kEnabledBorderAlpha),
+                color: baseColor
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha),
                 width: outlineWidth,
               );
-            },
-          ),
+            }
+            if (states.contains(MaterialState.error)) {
+              return BorderSide(
+                color: colorScheme.error,
+                width: pressedOutlineWidth,
+              );
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return BorderSide(
+                color: baseColor,
+                width: pressedOutlineWidth,
+              );
+            }
+            return BorderSide(
+              color: baseColor.withAlpha(kEnabledBorderAlpha),
+              width: outlineWidth,
+            );
+          },
         ),
-      );
+      ),
+    );
+  }
 
   /// An opinionated [ButtonThemeData] theme.
   ///
@@ -657,9 +699,24 @@ class FlexSubThemes {
   ///
   /// The button `padding` defaults to: EdgeInsets.symmetric(horizontal: 16).
   /// It is used to make the buttons match the padding on the newer buttons.
+  ///
+  /// The above legacy buttons this sub theme is primary for, will be completely
+  /// removed in Flutter stable version after 2.10.x. The [ButtonThemeData]
+  /// this helper uses will however remain available after that, because widgets
+  /// [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
+  /// obsolete in SDK docs though) still use this theme. It is thus kept around
+  /// in FlexColorScheme package as lon as it might still have some use.
   static ButtonThemeData buttonTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the button.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
 
     /// The button corner radius.
     ///
@@ -676,36 +733,42 @@ class FlexSubThemes {
     ///
     /// Defaults to `kButtonMinSize` = Size(40, 40).
     final Size minButtonSize = kButtonMinSize,
-  }) =>
-      ButtonThemeData(
-        colorScheme: colorScheme,
-        minWidth: minButtonSize.width,
-        height: minButtonSize.height,
-        padding: padding,
-        layoutBehavior: ButtonBarLayoutBehavior.constrained,
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        hoverColor: colorScheme.primary
-            .blendAlpha(Colors.white, kHoverAlphaBlend)
-            .withAlpha(kHoverAlpha),
-        focusColor: colorScheme.primary
-            .blendAlpha(Colors.white, kFocusAlphaBlend)
-            .withAlpha(kFocusAlpha),
-        highlightColor: colorScheme.primary
-            .blendAlpha(Colors.white, kHighlightAlphaBlend)
-            .withAlpha(kHighlightAlpha),
-        splashColor: colorScheme.primary
-            .blendAlpha(Colors.white, kSplashAlphaBlend)
-            .withAlpha(kSplashAlpha),
-        disabledColor: colorScheme.primary
-            .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-            .withAlpha(kDisabledBackgroundAlpha),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kButtonRadius),
-          ),
+  }) {
+    // Get selected color, defaults to primary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    // final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+
+    return ButtonThemeData(
+      colorScheme: colorScheme,
+      minWidth: minButtonSize.width,
+      height: minButtonSize.height,
+      padding: padding,
+      layoutBehavior: ButtonBarLayoutBehavior.constrained,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      hoverColor: baseColor
+          .blendAlpha(Colors.white, kHoverAlphaBlend)
+          .withAlpha(kHoverAlpha),
+      focusColor: baseColor
+          .blendAlpha(Colors.white, kFocusAlphaBlend)
+          .withAlpha(kFocusAlpha),
+      highlightColor: baseColor
+          .blendAlpha(Colors.white, kHighlightAlphaBlend)
+          .withAlpha(kHighlightAlpha),
+      splashColor: baseColor
+          .blendAlpha(Colors.white, kSplashAlphaBlend)
+          .withAlpha(kSplashAlpha),
+      disabledColor: baseColor
+          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+          .withAlpha(kDisabledBackgroundAlpha),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kButtonRadius),
         ),
-        textTheme: ButtonTextTheme.primary,
-      );
+      ),
+      textTheme: ButtonTextTheme.primary,
+    );
+  }
 
   /// An opinionated [ToggleButtonsThemeData] theme.
   ///
@@ -723,6 +786,14 @@ class FlexSubThemes {
   static ToggleButtonsThemeData toggleButtonsTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the toggle buttons.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
 
     /// The button corner radius.
     ///
@@ -755,34 +826,38 @@ class FlexSubThemes {
     /// being used, which is same as null default in ThemeData.
     final VisualDensity? visualDensity,
   }) {
+    // Get selected color, defaults to primary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+
     final VisualDensity usedVisualDensity =
         visualDensity ?? VisualDensity.adaptivePlatformDensity;
     return ToggleButtonsThemeData(
       borderWidth: borderWidth,
-      selectedColor: colorScheme.onPrimary.withAlpha(kSelectedAlpha),
-      color: colorScheme.primary,
-      fillColor:
-          colorScheme.primary.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
+      selectedColor: onBaseColor.withAlpha(kSelectedAlpha),
+      color: baseColor,
+      fillColor: baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
       borderColor: colorScheme.primary.withAlpha(kEnabledBorderAlpha),
       selectedBorderColor:
-          colorScheme.primary.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
-      hoverColor: colorScheme.primary
+          baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
+      hoverColor: baseColor
           .blendAlpha(Colors.white, kHoverAlphaBlend + kAltPrimaryAlphaBlend)
           .withAlpha(kHoverAlpha),
-      focusColor: colorScheme.primary
+      focusColor: baseColor
           .blendAlpha(Colors.white, kFocusAlphaBlend + kAltPrimaryAlphaBlend)
           .withAlpha(kFocusAlpha),
-      highlightColor: colorScheme.primary
+      highlightColor: baseColor
           .blendAlpha(
               Colors.white, kHighlightAlphaBlend + kAltPrimaryAlphaBlend)
           .withAlpha(kHighlightAlpha),
-      splashColor: colorScheme.primary
+      splashColor: baseColor
           .blendAlpha(Colors.white, kSplashAlphaBlend + kAltPrimaryAlphaBlend)
           .withAlpha(kSplashAlpha),
-      disabledColor: colorScheme.primary
+      disabledColor: baseColor
           .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
           .withAlpha(kDisabledForegroundAlpha),
-      disabledBorderColor: colorScheme.primary
+      disabledBorderColor: baseColor
           .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
           .withAlpha(kDisabledBackgroundAlpha),
       borderRadius: BorderRadius.circular(radius ?? kButtonRadius),
@@ -1268,14 +1343,6 @@ class FlexSubThemes {
   /// The default radius follows Material M3 guide:
   /// https://m3.material.io/components/dialogs/specs
   static DialogTheme dialogTheme({
-    /// Corner radius.
-    ///
-    /// Defaults to [kDialogRadius] = 28.
-    final double? radius,
-
-    /// Dialog elevation defaults to 10 [kDialogElevation].
-    final double? elevation = kDialogElevation,
-
     /// Dialog background color.
     ///
     /// Defaults to null and gets default via Dialog's default null theme
@@ -1285,16 +1352,44 @@ class FlexSubThemes {
     /// background color when the ThemeData property dialogBackgroundColor
     /// is deprecated in Flutter SDK, which it will be in 2022.
     final Color? backgroundColor,
-  }) =>
-      DialogTheme(
-        elevation: elevation,
-        backgroundColor: backgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kDialogRadius),
-          ),
+
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    final ColorScheme? colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the dialog
+    /// background color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined or [colorScheme] is not defined, then the passed in
+    /// [backgroundColor] will be used, which may be null too and dialog then
+    /// falls back to Flutter SDK dialog background color (colorScheme.surface).
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Corner radius.
+    ///
+    /// Defaults to [kDialogRadius] = 28.
+    final double? radius,
+
+    /// Dialog elevation defaults to 10 [kDialogElevation].
+    final double? elevation = kDialogElevation,
+  }) {
+    final Color? bgColor = colorScheme == null
+        ? backgroundColor // might be null, then SDK theme defaults.
+        : backgroundSchemeColor == null
+            ? null
+            : schemeColor(backgroundSchemeColor, colorScheme);
+
+    return DialogTheme(
+      elevation: elevation,
+      backgroundColor: bgColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kDialogRadius),
         ),
-      );
+      ),
+    );
+  }
 
   /// An opinionated [TimePickerThemeData] with custom corner radius.
   ///
@@ -1309,12 +1404,27 @@ class FlexSubThemes {
     /// Pass the value the `theme.dialogColor` that is set to your `ThemeData`
     /// and used by other dialogs.
     ///
-    /// If null, this dialog defaults to using surface color and it may
-    /// not match dialogColor used by other dialogs.
+    /// If null and [colorScheme] and [backgroundSchemeColor] are also not
+    /// defined, this dialog defaults to using colorScheme.surface color and
+    /// it may not match dialogColor used by other dialogs that use
+    /// colorScheme.background by default.
+    final Color? backgroundColor,
+
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    final ColorScheme? colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the dialog
+    /// background color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined or [colorScheme] is not defined, then the passed in
+    /// [backgroundColor] will be used, which may be null too and dialog then
+    /// falls back to Flutter SDK dialog background color (colorScheme.surface).
     ///
     /// FlexColorScheme sub-theming uses this property to match the background
-    /// color to other dialogs.
-    final Color? backgroundColor,
+    /// color of this dialog to other dialogs.
+    final SchemeColor? backgroundSchemeColor,
 
     /// Outer corner radius.
     ///
@@ -1337,41 +1447,48 @@ class FlexSubThemes {
     /// no need to add those in the passed in InputDecorationTheme. Just pass
     /// in your overall used app InputDecorationTheme.
     final InputDecorationTheme? inputDecorationTheme,
-  }) =>
-      TimePickerThemeData(
-        backgroundColor: backgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kDialogRadius),
-          ),
+  }) {
+    final Color? bgColor = colorScheme == null
+        ? backgroundColor // might be null, then SDK theme defaults.
+        : backgroundSchemeColor == null
+            ? null
+            : schemeColor(backgroundSchemeColor, colorScheme);
+
+    return TimePickerThemeData(
+      backgroundColor: bgColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kDialogRadius),
         ),
-        hourMinuteShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(elementRadius ?? kCardRadius),
-          ),
+      ),
+      hourMinuteShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(elementRadius ?? kCardRadius),
         ),
-        dayPeriodShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(elementRadius ?? kCardRadius),
-          ),
+      ),
+      dayPeriodShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(elementRadius ?? kCardRadius),
         ),
-        // Custom additions the Widget does internally, but for some reason
-        // only does to null default theme. If you use a custom decorator
-        // you are supposed to know that you have to add these shenanigans
-        // for it to work and look right.
-        inputDecorationTheme: inputDecorationTheme?.copyWith(
-              contentPadding: EdgeInsets.zero,
-              // Prevent the error text from appearing.
-              // See https://github.com/flutter/flutter/issues/54104
-              errorStyle: const TextStyle(fontSize: 0, height: 0),
-            ) ??
-            const InputDecorationTheme().copyWith(
-              contentPadding: EdgeInsets.zero,
-              // Prevent the error text from appearing.
-              // See https://github.com/flutter/flutter/issues/54104
-              errorStyle: const TextStyle(fontSize: 0, height: 0),
-            ),
-      );
+      ),
+      // Custom additions the Widget does internally, but for some reason
+      // only does to null default theme. If you use a custom decorator
+      // you are supposed to know that you have to add these shenanigans
+      // for it to work and look right.
+      inputDecorationTheme: inputDecorationTheme?.copyWith(
+            contentPadding: EdgeInsets.zero,
+            // Prevent the error text from appearing.
+            // See https://github.com/flutter/flutter/issues/54104
+            errorStyle: const TextStyle(fontSize: 0, height: 0),
+          ) ??
+          const InputDecorationTheme().copyWith(
+            contentPadding: EdgeInsets.zero,
+            // Prevent the error text from appearing.
+            // See https://github.com/flutter/flutter/issues/54104
+            errorStyle: const TextStyle(fontSize: 0, height: 0),
+          ),
+    );
+  }
 
   // TODO(rydmike): SnackBar needs two different corner radius versions.
   //   The pinned one should not have a shape, but the floating one should.
@@ -1395,6 +1512,7 @@ class FlexSubThemes {
     /// SnackBar elevation defaults to [kSnackBarElevation] 4.
     final double? elevation = kSnackBarElevation,
 
+    // TODO(rydmike): SnackBar has a theme defined background in M3 schemes.
     /// Default value for [backgroundColor].
     ///
     /// If null, [SnackBar] defaults to dark grey: `Color(0xFF323232)`.

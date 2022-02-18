@@ -512,6 +512,11 @@ extension FlexThemeData on ThemeData {
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
     ///
+    /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
+    /// [FlexSubThemesData] and you have opted in on using component sub themes
+    /// with [useSubThemes], then its selected scheme color will override this
+    /// value.
+    ///
     /// Defaults to null.
     final Color? dialogBackground,
 
@@ -1534,6 +1539,11 @@ extension FlexThemeData on ThemeData {
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
+    ///
+    /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
+    /// [FlexSubThemesData] and you have opted in on using component sub themes
+    /// with [useSubThemes], then its selected scheme color will override this
+    /// value.
     ///
     /// Defaults to null.
     final Color? dialogBackground,

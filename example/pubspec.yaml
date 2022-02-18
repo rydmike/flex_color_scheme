@@ -4,17 +4,20 @@ version: 5.0.0-dev.1
 publish_to: 'none'
 environment:
   sdk: '>=2.12.0 <3.0.0'
-  flutter: '>=2.10.0-0.3.pre'
+  flutter: '>=2.10.0'
 
 dependencies:
   # Adds the Cupertino Icons font to your application. Used by the
   # CupertinoIcons class for iOS style icons, by Google flutter.dev.
+  # https://pub.dev/packages/cupertino_icons
   cupertino_icons: ^1.0.4
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
-  flex_color_picker: ^2.2.0
+  # https://pub.dev/packages/flex_color_picker
+  flex_color_picker: ^2.3.0
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
+  # https://pub.dev/packages/flex_color_scheme
   flex_color_scheme:
     path: ../
 
@@ -23,12 +26,15 @@ dependencies:
     sdk: flutter
 
   # Masonry grid layout, by Romain Rastel.
+  # https://pub.dev/packages/flutter_staggered_grid_view
   flutter_staggered_grid_view: ^0.6.1
 
   # Google fonts, by Google material.io.
-  google_fonts: ^2.2.0
+  # https://pub.dev/packages/google_fonts
+  google_fonts: ^2.3.1
 
   # Hive local storage, by Simon Leir.
+  # https://pub.dev/packages/hive
   hive: ^2.0.5
 
   # Material Design Icons, community designed. Used for
@@ -37,20 +43,22 @@ dependencies:
   material_design_icons_flutter: ^5.0.6595
 
   # Commonly used directories on host platform file systems.
-  # https://pub.dev/packages/path_provider (by Google, flutter.dev).
   # Used to get a working storage path for Hive on Windows.
-  path_provider: ^2.0.8
+  # https://pub.dev/packages/path_provider (by Google, flutter.dev).
+  path_provider: ^2.0.9
 
   # Store value pair shared preference data, by Google flutter.dev.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.0.12
+  shared_preferences: ^2.0.13
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
+  # https://pub.dev/packages/string_scanner
   string_scanner: ^1.1.0
 
   # Used for launching a WEB URL, by Google flutter.dev.
-  url_launcher: ^6.0.18
+  # https://pub.dev/packages/url_launcher
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:

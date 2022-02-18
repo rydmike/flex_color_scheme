@@ -12,7 +12,7 @@
 .fvm
 .fvm/
 example/.fvm
-coverage/lcov.info
+/coverage/lcov.info
 
 # IntelliJ related
 *.iml
