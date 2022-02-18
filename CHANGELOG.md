@@ -3,7 +3,7 @@
 All notable changes to the **FlexColorScheme** package are documented here.
 
 
-## v5.0.0-dev.1 - February 16, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - February 18, 2022 - WORK IN PROGRESS
 
 The commit now contains a working version of the key color seed usage intended
 for the final target design. Much work on tests, docs and sample app updates
