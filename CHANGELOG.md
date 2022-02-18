@@ -44,9 +44,10 @@ old property names will remain available until FlexColorScheme version
 * Added `useMaterial3` to all theme constructors and factories. This is
   the same flag as in `ThemeData`, it does not have any impact on
   default themed widgets in Flutter 2.10.0 yet. Opting in on opinionated
-  sub-themes, will however as before give opinionated default sub-themes that
-  result in M3 like styles. Similar look will become default widget design in
-  later Flutter SDK versions when using the flag `useMaterial3` set to true.
+  sub-themes, will however as before give opinionated component sub-themes that
+  result in Material 3 like styles. Similar look will become default widget 
+  design in later Flutter SDK versions when using the flag `useMaterial3`
+  set to true.
 
 * Added new properties `onPrimaryContainer`, `onSecondaryContainer`, 
   `tertiary`, `tertiaryContainer`, `onTertiary` and  `onTertiaryContainer` to 
@@ -57,11 +58,11 @@ old property names will remain available until FlexColorScheme version
 
 * Added a `FlexKeyColor` configuration class that can be used with 
   the `FlexColorScheme.keyColors` to enable and configure Material 3 based 
-  key color based Tonal Palettes used to generate the `ColorScheme`'s. Where
-  the tonal palettes are generated using existing built-in or custom scheme 
-  colors, as key colors for generated palettes that are used to define the
+  key color based Tonal Palettes used to generate the `ColorScheme`s. Where
+  the tonal palettes are generated using existing built-in or custom  
+  colors, as key colors for generated palettes, that are then used to define the
   resulting `ColorScheme`.     
-  The method can completely mimic the `ColorScheme.fromSeed` Flutter SDK 
+  The method matches the `ColorScheme.fromSeed` Flutter SDK 
   feature if you only use primary color as input, but offers more
   configuration and flexibility while still using key colors as seed colors. It
   does so without the need to go to lower API levels to produce custom tonal 
@@ -76,9 +77,10 @@ old property names will remain available until FlexColorScheme version
 * In class `FlexSchemeColor` added **new** color properties
   `primaryContainer` and `secondaryContainer` they replace deprecated properties
   `primaryVariant`and `secondaryVariant`. The old properties still work and are 
-  used as fallback to the new ones, if the new ones are not provided.
+  used as fallback to the new ones when the new ones are not provided.
   The previous properties are still available as deprecated, and will remain
-  available until version 6.0.0.
+  available until version 6.0.0, or until they are removed from the Flutter
+  stable channel, whichever comes first.
 
 * In class `FlexSchemeColor` added **new** color definitions for
   `FlexSchemeColor.tertiary` and `FlexSchemeColor.tertiaryContainer`.
