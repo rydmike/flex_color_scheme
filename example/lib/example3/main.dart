@@ -81,15 +81,19 @@ const FlexSchemeData _myFlexScheme = FlexSchemeData(
   description: 'Midnight blue theme, custom definition of all colors',
   light: FlexSchemeColor(
     primary: Color(0xFF00296B),
-    primaryContainer: Color(0xFF2F5C91),
-    secondary: Color(0xFFFF7B00),
-    secondaryContainer: Color(0xFFFDB100),
+    primaryContainer: Color(0xFFA0C2ED),
+    secondary: Color(0xFFD26900),
+    secondaryContainer: Color(0xFFFFD270),
+    tertiary: Color(0xFF5C5C95),
+    tertiaryContainer: Color(0xFFC8DBF8),
   ),
   dark: FlexSchemeColor(
-    primary: Color(0xFF6B8BC3),
-    primaryContainer: Color(0xFF4874AA),
-    secondary: Color(0xffff7155),
-    secondaryContainer: Color(0xFFF1CB9D),
+    primary: Color(0xFFB1CFF5),
+    primaryContainer: Color(0xFF3873BA),
+    secondary: Color(0xFFFFD270),
+    secondaryContainer: Color(0xFFD26900),
+    tertiary: Color(0xFFC9CBFC),
+    tertiaryContainer: Color(0xFF535393),
   ),
 );
 
@@ -117,14 +121,47 @@ class DemoApp extends StatelessWidget {
             colors: themeController.usedScheme == FlexScheme.custom
                 ? _myFlexScheme.light
                 : FlexColor.schemes[themeController.usedScheme]!.light,
-            // We use a surface color mode where all Material surfaces use
-            // the same primary color branding, but scaffold background
-            // uses much less.
-            surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-            // We set the blend level strength to 20.
-            blendLevel: 20,
+            // We use a surface color mode where Material surfaces use
+            // more primary color branding than background, and scaffold uses
+            // even less.
+            surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
+            // We set the blend level strength to 10.
+            blendLevel: 10,
             appBarElevation: 0.5,
+            // Opt-in/out on using the additional opinionated
+            // component sub-themes. You ca also use property `subThemesData`
+            // to pass in a `FlexSubThemesData()` data object that contains a
+            // large number of easy to use configuration parameters that you
+            // can use for quick styling of the sub-themes per component.
             useSubThemes: themeController.useSubThemes,
+            // Passing in `FlexKeyColor()` to `keyColors` activates Material 3
+            // key color seed based schemes. The primary color in your
+            // active theme is always used as main "primary" key for the
+            // generated color scheme when it is activated. This is the same
+            // as using the Flutter SDK `ColorScheme.fromSeed()` and passing it
+            // the primary color.
+            // Flutter SDK only makes seed ColorSchemes where the entire scheme
+            // is generated from only one color. In FlexColorScheme, you
+            // can also use the secondary and tertiary colors, as input keys to
+            // seeds their colors.
+            // Please note that the key color is used as seed to generate a
+            // Material 3 Tonal Palette, and the colors, or tones from the same
+            // palette, is used as input to colors in the ColorScheme in both
+            // dark and light color scheme. The key color itself is seldom
+            // included as a color in the generated ColorScheme. This can be
+            // problematic if you want to use that specific color in your
+            // custom scheme for branding purposes. The `FlexKeyColor`
+            // configuration data class contains additional properties where you
+            // can instruct it to keep a color defined in FlexColorScheme at
+            // its defined input value. Set e.g. `keepPrimary: true` to ensure
+            // that the actual primary color you used to seed your color scheme,
+            // is also used as the primary color in the otherwise seed
+            // generated ColorScheme from the used color.
+            keyColors: FlexKeyColor(
+              useKeyColors: themeController.useKeyColors,
+              useSecondary: themeController.useSecondary,
+              useTertiary: themeController.useTertiary,
+            ),
             // Here we use a FlexColorScheme helper comfortablePlatformDensity.
             // It returns comfortable density on desktops, instead of compact,
             // like the `VisualDensity.adaptivePlatformDensity` does, it is
@@ -147,9 +184,14 @@ class DemoApp extends StatelessWidget {
             // You don't have to use same blend level or mode in light
             // and dark mode, here we use a lower value in dark mode, that
             // goes better together with the highScaffoldLowSurfaces mode.
-            blendLevel: 15,
+            blendLevel: 12,
             appBarElevation: 1,
             useSubThemes: themeController.useSubThemes,
+            keyColors: FlexKeyColor(
+              useKeyColors: themeController.useKeyColors,
+              useSecondary: themeController.useSecondary,
+              useTertiary: themeController.useTertiary,
+            ),
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
           ),

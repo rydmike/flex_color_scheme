@@ -1,11 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../example5/widgets/use_key_colors_buttons.dart';
+import '../shared/const/app_color.dart';
 import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/widgets/app/about.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/show_color_scheme_colors.dart';
+import '../shared/widgets/universal/show_theme_data_colors.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 import 'widgets/theme_select_buttons.dart';
 
@@ -96,13 +99,29 @@ class HomePage extends StatelessWidget {
                     // Show all key active theme colors.
                     const ShowColorSchemeColors(),
                     const SizedBox(height: 8),
+                    // Show all active colors in ThemeData, these will all be
+                    // deprecated in Flutter SDK, for more info see
+                    // https://github.com/flutter/flutter/issues/91772
+                    const ShowThemeDataColors(),
+                    const SizedBox(height: 8),
                     SwitchListTile.adaptive(
-                      contentPadding: EdgeInsets.zero,
-                      title: const Text('Use sub theming'),
+                      title: const Text('Use component sub themes'),
                       subtitle:
                           const Text('Enable opinionated widget sub themes'),
                       value: controller.useSubThemes,
                       onChanged: controller.setUseSubThemes,
+                    ),
+                    const SizedBox(height: 8),
+                    ListTile(
+                      title: const Text('Use input colors as seed keys '
+                          'for the ColorScheme'),
+                      subtitle: Text(AppColor.explainUsedColors(controller)),
+                    ),
+                    // const SizedBox(height: 4),
+                    ListTile(
+                      trailing: UseKeyColorsButtons(
+                        controller: controller,
+                      ),
                     ),
                   ],
                 ),

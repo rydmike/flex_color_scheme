@@ -5310,6 +5310,7 @@ class FlexColorScheme with Diagnosticable {
       // of the values may be null and get defaults via the ThemeData() factory.
       fontFamily: fontFamily,
       visualDensity: visualDensity,
+      useMaterial3: useMaterial3,
       // TextTheme properties use the same logic as in ThemeData, allowing us
       // to optionally define them. AccentTextTheme is omitted since it has
       // been deprecated in Flutter 2.5.0.

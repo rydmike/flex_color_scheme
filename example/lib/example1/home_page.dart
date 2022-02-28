@@ -5,6 +5,7 @@ import '../shared/const/app_data.dart';
 import '../shared/widgets/app/about.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/show_color_scheme_colors.dart';
+import '../shared/widgets/universal/show_theme_data_colors.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 
 // -----------------------------------------------------------------------------
@@ -70,8 +71,13 @@ class HomePage extends StatelessWidget {
               title: Text('${flexSchemeData.name} theme'),
               subtitle: Text(flexSchemeData.description),
             ),
-            // Show all key active theme colors.
+            // Show all active ColorScheme colors.
             const ShowColorSchemeColors(),
+            const SizedBox(height: 8),
+            // Show all active colors in ThemeData, these will all be
+            // deprecated in Flutter SDK, for more info see
+            // https://github.com/flutter/flutter/issues/91772
+            const ShowThemeDataColors(),
             const SizedBox(height: 8),
             const Divider(),
             Text('Theme Showcase', style: headline4),

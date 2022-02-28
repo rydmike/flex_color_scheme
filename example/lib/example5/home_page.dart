@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
   final ScrollController scrollController = ScrollController();
 
   // The number of cards in the grid, must match the number we add to grid view.
-  static const int _nrOfCards = 23;
+  static const int _nrOfCards = 24;
 
   // Current amount of shown columns in the grid view.
   int columns = 1;
@@ -267,41 +267,48 @@ class _HomePageState extends State<HomePage> {
               ),
               _SurfaceBlends(
                 controller: widget.controller,
-                isOpen: isCardOpen[6],
+                isOpen: isCardOpen[5],
                 onTap: () {
-                  toggleCard(6);
+                  toggleCard(5);
                 },
                 showAllBlends: showAllBlends,
               ),
               _ComponentThemes(
+                controller: widget.controller,
+                isOpen: isCardOpen[6],
+                onTap: () {
+                  toggleCard(6);
+                },
+              ),
+              _TextField(
                 controller: widget.controller,
                 isOpen: isCardOpen[7],
                 onTap: () {
                   toggleCard(7);
                 },
               ),
-              _TextField(
+              _AppBar(
                 controller: widget.controller,
                 isOpen: isCardOpen[8],
                 onTap: () {
                   toggleCard(8);
                 },
               ),
-              _AppBar(
+              _TabBar(
                 controller: widget.controller,
                 isOpen: isCardOpen[9],
                 onTap: () {
                   toggleCard(9);
                 },
               ),
-              _TabBar(
+              _BottomNavigation(
                 controller: widget.controller,
                 isOpen: isCardOpen[10],
                 onTap: () {
                   toggleCard(10);
                 },
               ),
-              _BottomNavigation(
+              _NavigationRail(
                 controller: widget.controller,
                 isOpen: isCardOpen[11],
                 onTap: () {
@@ -334,58 +341,58 @@ class _HomePageState extends State<HomePage> {
               ),
               _SwitchesShowcase(
                 controller: widget.controller,
-                isOpen: isCardOpen[14],
-                onTap: () {
-                  toggleCard(14);
-                },
-              ),
-              _ListTileShowcase(
                 isOpen: isCardOpen[15],
                 onTap: () {
                   toggleCard(15);
                 },
               ),
-              _TimePickerDialogShowcase(
+              _ListTileShowcase(
                 isOpen: isCardOpen[16],
                 onTap: () {
                   toggleCard(16);
                 },
               ),
-              _DatePickerDialogShowcase(
+              _TimePickerDialogShowcase(
                 isOpen: isCardOpen[17],
                 onTap: () {
                   toggleCard(17);
                 },
               ),
-              _DialogShowcase(
-                controller: widget.controller,
+              _DatePickerDialogShowcase(
                 isOpen: isCardOpen[18],
                 onTap: () {
                   toggleCard(18);
                 },
               ),
-              _MaterialAndBottomSheetShowcase(
+              _DialogShowcase(
+                controller: widget.controller,
                 isOpen: isCardOpen[19],
                 onTap: () {
                   toggleCard(19);
                 },
               ),
-              _CardShowcase(
+              _MaterialAndBottomSheetShowcase(
                 isOpen: isCardOpen[20],
                 onTap: () {
                   toggleCard(20);
                 },
               ),
-              _TextThemeShowcase(
+              _CardShowcase(
                 isOpen: isCardOpen[21],
                 onTap: () {
                   toggleCard(21);
                 },
               ),
-              _PrimaryTextThemeShowcase(
+              _TextThemeShowcase(
                 isOpen: isCardOpen[22],
                 onTap: () {
                   toggleCard(22);
+                },
+              ),
+              _PrimaryTextThemeShowcase(
+                isOpen: isCardOpen[23],
+                onTap: () {
+                  toggleCard(23);
                 },
               ),
             ].elementAt(index),
@@ -939,30 +946,6 @@ class _SeededColorScheme extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
-  String _explainUsedColors() {
-    if (!controller.useKeyColors) {
-      return 'Material 3 ColorScheme seeding from key colors is OFF and not '
-          'used.\n'
-          'The ColorScheme is based directly on the input colors';
-    }
-    if (!controller.useSecondary && !controller.useTertiary) {
-      return 'Only Primary input color is used to generate the Colorscheme. '
-          'This is like using ColorScheme.fromSeed with Primary color';
-    }
-    if (controller.useSecondary && !controller.useTertiary) {
-      return 'To make tonal palettes for the ColorScheme, Primary and '
-          'Secondary colors are used as keys, Tertiary is computed '
-          'from Primary';
-    }
-    if (!controller.useSecondary && controller.useTertiary) {
-      return 'To make tonal palettes for the ColorScheme, Primary and '
-          'Tertiary colors are used as keys, Secondary is computed '
-          'from Primary';
-    }
-    return 'Input Primary, Secondary and Tertiary colors are used as '
-        'keys to generate tonal palettes that define the ColorScheme';
-  }
-
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
@@ -976,7 +959,7 @@ class _SeededColorScheme extends StatelessWidget {
           ListTile(
             title: const Text('Use input colors as seed keys '
                 'for the ColorScheme'),
-            subtitle: Text(_explainUsedColors()),
+            subtitle: Text(AppColor.explainUsedColors(controller)),
           ),
           // const SizedBox(height: 4),
           ListTile(
@@ -2042,14 +2025,8 @@ class _BottomNavigation extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: BottomNavigationBarShowcase(),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: NavigationBarShowcase(),
-          ),
+          const BottomNavigationBarShowcase(),
+          const NavigationBarShowcase(),
           ColorSchemePopupMenu(
             title: const Text('Background color on M2 and M3 navigation bars'),
             index: controller.navBarBackgroundSchemeColor?.index ?? -1,
@@ -2120,6 +2097,174 @@ class _BottomNavigation extends StatelessWidget {
             value: controller.useNavDivider,
             onChanged: controller.setUseNavDivider,
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NavigationRail extends StatelessWidget {
+  const _NavigationRail(
+      {Key? key,
+      required this.controller,
+      required this.isOpen,
+      required this.onTap})
+      : super(key: key);
+  final ThemeController controller;
+  final bool isOpen;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final double navBarOpacity =
+        controller.useSubThemes && controller.useFlexColorScheme
+            ? controller.bottomNavigationBarOpacity
+            : 1;
+    final double navBarElevation =
+        controller.useSubThemes && controller.useFlexColorScheme
+            ? controller.bottomNavigationBarElevation
+            : 8;
+    return HeaderCard(
+      isOpen: isOpen,
+      onTap: onTap,
+      title: const Text('Navigation Rail Settings'),
+      child: Column(
+        children: <Widget>[
+          const NavigationRailShowcase(),
+          // const ListTile(
+          //   title: Text('Opacity'),
+          //   subtitle: Text(
+          //     'Opacity on all bars. Separate '
+          //     'parameters, but use shared input here',
+          //   ),
+          // ),
+          // ListTile(
+          //   title: Slider.adaptive(
+          //     max: 100,
+          //     divisions: 100,
+          //     label: (navBarOpacity * 100).toStringAsFixed(0),
+          //     value: navBarOpacity * 100,
+          //     onChanged:
+          //         controller.useSubThemes && controller.useFlexColorScheme
+          //             ? (double value) {
+          //                 controller.setBottomNavigationBarOpacity(value / 100);
+          //               }
+          //             : null,
+          //   ),
+          //   trailing: Padding(
+          //     padding: const EdgeInsetsDirectional.only(end: 12),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.end,
+          //       children: <Widget>[
+          //         Text(
+          //           'OPACITY',
+          //           style: Theme.of(context).textTheme.caption,
+          //         ),
+          //         Text(
+          //           // ignore: lines_longer_than_80_chars
+          //           '${(navBarOpacity * 100).toStringAsFixed(0)} %',
+          //           style: Theme.of(context)
+          //               .textTheme
+          //               .caption!
+          //               .copyWith(fontWeight: FontWeight.bold),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // const Divider(),
+          const ListTile(
+              subtitle: Text('In this demo these settings are shared with the '
+                  'navigation bars, but they are separate properties '
+                  'in the API. You can modify generated code to edit and quick '
+                  'theme them separately.')),
+          const ListTile(
+              title: Text('NavigationRail elevation'),
+              subtitle: Text('Setting shared with M2 BottomNavigationBar')),
+          ListTile(
+            title: Slider.adaptive(
+              max: 24,
+              divisions: 48,
+              label: navBarElevation.toStringAsFixed(1),
+              value: navBarElevation,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBottomNavigationBarElevation
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    navBarElevation.toStringAsFixed(1),
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Background color on navigation rail and bars'),
+            index: controller.navBarBackgroundSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setNavBarBackgroundSchemeColor(null);
+                    } else {
+                      controller.setNavBarBackgroundSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Item color on rail and navigation bars'),
+            index: controller.navBarScheme?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setNavBarScheme(null);
+                    } else {
+                      controller.setNavBarScheme(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const SizedBox(height: 8),
+          ColorSchemePopupMenu(
+            title: const Text(
+                'Item highlight color on rail and M3 navigation bar'),
+            index: controller.navBarHighlight?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setNavBarHighlight(null);
+                    } else {
+                      controller.setNavBarHighlight(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          // SwitchListTile.adaptive(
+          //   title: const Text('Mute unselected item on M3 navigation bar'),
+          //   subtitle: const Text('Unselected icon and text are less bright'),
+          //   value: controller.navBarMuteUnselected &&
+          //       controller.useSubThemes &&
+          //       controller.useFlexColorScheme,
+          //   onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          //       ? controller.setNavBarMuteUnselected
+          //       : null,
+          // ),
         ],
       ),
     );
