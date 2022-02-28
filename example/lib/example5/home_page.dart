@@ -8,23 +8,30 @@ import '../shared/const/app_color.dart';
 import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/pages/sub_pages.dart';
+import '../shared/utils/link_text_span.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
 import '../shared/widgets/universal/header_card.dart';
 import '../shared/widgets/universal/responsive_dialog.dart';
-import '../shared/widgets/universal/show_theme_colors.dart';
+import '../shared/widgets/universal/show_color_scheme_colors.dart';
+import '../shared/widgets/universal/show_sub_theme_colors.dart';
+import '../shared/widgets/universal/show_theme_data_colors.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
+import 'utils/generate_colorscheme_dart_code.dart';
+import 'utils/generate_theme_dart_code.dart';
 import 'widgets/app_bar_style_buttons.dart';
 import 'widgets/color_scheme_popup_menu.dart';
 import 'widgets/dart_code_dialog_screen.dart';
 import 'widgets/platform_popup_menu.dart';
+import 'widgets/scheme_colors.dart';
 import 'widgets/surface_mode_buttons.dart';
 import 'widgets/system_nav_bar_style_buttons.dart';
 import 'widgets/tab_bar_style_buttons.dart';
-import 'widgets/theme_colors.dart';
+import 'widgets/theme_input_colors.dart';
 import 'widgets/theme_popup_menu.dart';
 import 'widgets/theme_selector.dart';
 import 'widgets/use_key_colors_buttons.dart';
+import 'widgets/used_colors_popup_menu.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
@@ -48,7 +55,7 @@ class _HomePageState extends State<HomePage> {
   final ScrollController scrollController = ScrollController();
 
   // The number of cards in the grid, must match the number we add to grid view.
-  static const int _nrOfCards = 22;
+  static const int _nrOfCards = 23;
 
   // Current amount of shown columns in the grid view.
   int columns = 1;
@@ -74,6 +81,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // In dark mode?
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     // Short handle to the media query, used to get size and paddings.
     final MediaQueryData media = MediaQuery.of(context);
     // Paddings so content shows up in visible area when we use Scaffold props
@@ -127,34 +135,52 @@ class _HomePageState extends State<HomePage> {
           }
           // Open settings cards
           if (index == 2) {
-            for (int i = 1; i < 11; i++) {
+            for (int i = 1; i < 12; i++) {
               isCardOpen[i] = true;
             }
             setState(() {});
           }
           // Close settings cards
           if (index == 3) {
-            for (int i = 1; i < 11; i++) {
+            for (int i = 1; i < 12; i++) {
               isCardOpen[i] = false;
             }
             setState(() {});
           }
           // Open themed cards
           if (index == 4) {
-            for (int i = 12; i < isCardOpen.length; i++) {
+            for (int i = 13; i < isCardOpen.length; i++) {
               isCardOpen[i] = true;
             }
             setState(() {});
           }
           // Close themed cards
           if (index == 5) {
-            for (int i = 12; i < isCardOpen.length; i++) {
+            for (int i = 13; i < isCardOpen.length; i++) {
               isCardOpen[i] = false;
             }
             setState(() {});
           }
-          // Reset theme settings.
+          // Copy theme setup code
           if (index == 6) {
+            // Get the theme's Dart and Flutter setup code.
+            await _handleCodeTap(context, widget.controller);
+          }
+          // Copy ColorScheme code
+          if (index == 7) {
+            final String code = generateColorSchemeDartCode(colorScheme);
+            await showResponsiveDialog<void>(
+              context: context,
+              child: DartCodeDialogScreen(
+                dialogHeader: 'Active ${isDark ? 'Dark' : 'Light'} '
+                    'ColorScheme Code',
+                copyMessage: 'ColorScheme code copied clipboard!',
+                code: code,
+              ),
+            );
+          }
+          // Reset theme settings.
+          if (index == 8) {
             final bool? reset = await showDialog<bool?>(
               context: context,
               builder: (BuildContext context) {
@@ -165,7 +191,8 @@ class _HomePageState extends State<HomePage> {
               await widget.controller.resetAllToDefaults();
             }
           }
-          if (index == 7) {
+          // Set theme-mode light/dark
+          if (index == 9) {
             if (isDark) {
               await widget.controller.setThemeMode(ThemeMode.light);
             } else {
@@ -210,28 +237,28 @@ class _HomePageState extends State<HomePage> {
               ),
               //
               // All the "Settings" Cards.
-              _ThemeColors(
+              _SelectTheme(
                 controller: widget.controller,
                 isOpen: isCardOpen[1],
                 onTap: () {
                   toggleCard(1);
                 },
               ),
-              _ColorScheme(
+              _SeededColorScheme(
                 controller: widget.controller,
                 isOpen: isCardOpen[2],
                 onTap: () {
                   toggleCard(2);
                 },
               ),
-              _ThemeMode(
+              _ColorScheme(
                 controller: widget.controller,
                 isOpen: isCardOpen[3],
                 onTap: () {
                   toggleCard(3);
                 },
               ),
-              _Platform(
+              _ThemeDataColors(
                 controller: widget.controller,
                 isOpen: isCardOpen[4],
                 onTap: () {
@@ -240,116 +267,125 @@ class _HomePageState extends State<HomePage> {
               ),
               _SurfaceBlends(
                 controller: widget.controller,
-                isOpen: isCardOpen[5],
-                onTap: () {
-                  toggleCard(5);
-                },
-                showAllBlends: showAllBlends,
-              ),
-              _SubThemes(
-                controller: widget.controller,
                 isOpen: isCardOpen[6],
                 onTap: () {
                   toggleCard(6);
                 },
+                showAllBlends: showAllBlends,
               ),
-              _TextField(
+              _ComponentThemes(
                 controller: widget.controller,
                 isOpen: isCardOpen[7],
                 onTap: () {
                   toggleCard(7);
                 },
               ),
-              _AppBarSettings(
+              _TextField(
                 controller: widget.controller,
                 isOpen: isCardOpen[8],
                 onTap: () {
                   toggleCard(8);
                 },
               ),
-              _TabBar(
+              _AppBar(
                 controller: widget.controller,
                 isOpen: isCardOpen[9],
                 onTap: () {
                   toggleCard(9);
                 },
               ),
-              _BottomNavigation(
+              _TabBar(
                 controller: widget.controller,
                 isOpen: isCardOpen[10],
                 onTap: () {
                   toggleCard(10);
                 },
               ),
-              //
-              // The sub pages card, not really a setting.
-              SubPages(
+              _BottomNavigation(
+                controller: widget.controller,
                 isOpen: isCardOpen[11],
                 onTap: () {
                   toggleCard(11);
                 },
               ),
               //
-              // All the "Themed" results Cards.
-              _MaterialButtonsShowcase(
+              // The sub pages card, not really a setting.
+              SubPages(
                 isOpen: isCardOpen[12],
                 onTap: () {
                   toggleCard(12);
                 },
               ),
-              _ToggleFabSwitchesChipsShowcase(
+              //
+              // All the "Themed" results Cards.
+              _ButtonsShowcase(
                 controller: widget.controller,
                 isOpen: isCardOpen[13],
                 onTap: () {
                   toggleCard(13);
                 },
               ),
-              _ListTileShowcase(
+              _ToggleFabChipsShowcase(
+                controller: widget.controller,
                 isOpen: isCardOpen[14],
                 onTap: () {
                   toggleCard(14);
                 },
               ),
-              _TimePickerDialogShowcase(
+              _SwitchesShowcase(
+                controller: widget.controller,
+                isOpen: isCardOpen[14],
+                onTap: () {
+                  toggleCard(14);
+                },
+              ),
+              _ListTileShowcase(
                 isOpen: isCardOpen[15],
                 onTap: () {
                   toggleCard(15);
                 },
               ),
-              _DatePickerDialogShowcase(
+              _TimePickerDialogShowcase(
                 isOpen: isCardOpen[16],
                 onTap: () {
                   toggleCard(16);
                 },
               ),
-              _DialogShowcase(
+              _DatePickerDialogShowcase(
                 isOpen: isCardOpen[17],
                 onTap: () {
                   toggleCard(17);
                 },
               ),
-              _MaterialAndBottomSheetShowcase(
+              _DialogShowcase(
+                controller: widget.controller,
                 isOpen: isCardOpen[18],
                 onTap: () {
                   toggleCard(18);
                 },
               ),
-              _CardShowcase(
+              _MaterialAndBottomSheetShowcase(
                 isOpen: isCardOpen[19],
                 onTap: () {
                   toggleCard(19);
                 },
               ),
-              _TextThemeShowcase(
+              _CardShowcase(
                 isOpen: isCardOpen[20],
                 onTap: () {
                   toggleCard(20);
                 },
               ),
-              _PrimaryTextThemeShowcase(
+              _TextThemeShowcase(
                 isOpen: isCardOpen[21],
                 onTap: () {
                   toggleCard(21);
+                },
+              ),
+              _PrimaryTextThemeShowcase(
+                isOpen: isCardOpen[22],
+                onTap: () {
+                  toggleCard(22);
                 },
               ),
             ].elementAt(index),
@@ -359,6 +395,19 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+// Top level function to handle Theme code tap and get the code to clipboard.
+Future<void> _handleCodeTap(
+    BuildContext context, ThemeController controller) async {
+  final String code = generateThemeDartCode(controller);
+  await showResponsiveDialog<void>(
+    context: context,
+    child: DartCodeDialogScreen(
+        dialogHeader: 'Active FlexColorScheme Setup',
+        copyMessage: 'FlexColorScheme setup code copied clipboard!',
+        code: code),
+  );
 }
 
 // The ResetSettings AlertDialog.
@@ -449,13 +498,6 @@ class _Info extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
-  void _handleCodeTap(BuildContext context) {
-    showResponsiveDialog<void>(
-      context: context,
-      child: DartCodeDialogScreen(controller: controller),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
@@ -464,16 +506,24 @@ class _Info extends StatelessWidget {
       title: const Text('FlexColorScheme Info'),
       child: Column(
         children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text('With this demo you can try all features and themes in '
+          const SizedBox(height: 8),
+          const ListTile(
+            title: Text('FlexColorScheme v5 Themes Playground'),
+            subtitle: Text(
+                'With this app you can try all features and themes in '
                 'FlexColorScheme V5. Find a color scheme you '
                 'like, experiment with the new surface blend modes and '
                 'levels. See how the AppBar theme options work. '
                 'Try the true black option for dark '
-                'themes, along with computed dark themes. In version 5 the new '
-                'Material 3 based ColorScheme is used, and can it also be '
-                'generated using main colors as M3 tonal palette keys.\n'
+                'themes, along with computed dark themes.\n'
+                '\n'
+                'In version 5 the new '
+                'Material 3 based ColorScheme is used. It can also be '
+                'generated using the main colors as color seed keys. You '
+                'can use primary, secondary and tertiary colors as seed keys '
+                'or just primary, like in ColorScheme.fromSeed. For branding '
+                'needs you can also lock selected ColorScheme colors to their '
+                'key value while other colors are still seed generated.\n'
                 '\n'
                 'This demo does not adjust any individual widget properties, '
                 'the application theme is adjusted interactively and all the '
@@ -486,46 +536,49 @@ class _Info extends StatelessWidget {
                 'choices. In the packages tutorial you learn how to '
                 'make your own custom color schemes and turn '
                 'them into advanced themes with FlexColorScheme. '
-                'All settings in this demo are persisted locally.\n'
-                '\n'
-                "You can turn FlexColorScheme's theming OFF "
-                'to see how a color scheme looks when using standard '
-                'Flutter ThemeData.from same active ColorScheme.'),
+                'All settings in this demo are persisted locally.'),
+          ),
+          const ListTile(
+            title: Text('Use FlexColorScheme Theming Features'),
+            subtitle: Text("You can turn FlexColorScheme's theming OFF "
+                'to see what a theme looks like when using standard Flutter '
+                'ThemeData.from(colorScheme) using same active ColorScheme '
+                'as shown when FlexColorScheme is active.'),
           ),
           SwitchListTile.adaptive(
-            title: const Text(
-              'Use FlexColorScheme theming features',
-            ),
             subtitle: const Text(
-              "Turn OFF to use Flutter's default theming.\n"
-              'Most settings have no impact when this is OFF',
+              "Turn OFF to see Flutter's default theming with active colors.\n"
+              'Most settings are disabled or have no impact when turned OFF.',
             ),
             value: controller.useFlexColorScheme,
             onChanged: controller.setUseFlexColorScheme,
           ),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text('The opinionated opt-in widget sub '
-                'theming is ON by default. You can turn it OFF and see the '
-                'differences. The sub theming defaults mimic the Material 3 '
-                'style, mostly on corner radius of Widgets, but also '
+          const ListTile(
+            title: Text('Component Themes'),
+            subtitle: Text('The opinionated opt-in component widget sub '
+                'theming is ON by default in this app, but off in the API. '
+                'Turn it OFF to see the differences. The component themes '
+                'follow Material Design 3 as far as possible '
+                'while still being based on and limited by Material 2 themes. '
+                'Mostly this affects corner radius of Widgets, but also '
                 'TextTheme size and its optional coloring. '),
           ),
           SwitchListTile.adaptive(
-            title: const Text('Use sub theming'),
-            subtitle: const Text('Enable opinionated widget sub themes'),
+            subtitle: const Text('Use opinionated widget sub themes.\n'
+                'When ON you can configure additional settings on components, '
+                'that is on Flutter built-in Material UI widgets.'),
             value: controller.useSubThemes && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
                 ? controller.setUseSubThemes
                 : null,
           ),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Want to use a theme you configured here in a Flutter app? '
-              'Just copy the setup code for your active settings and paste it '
-              'into your Flutter app with your IDE.',
-            ),
+          const ListTile(
+            title: Text('Get Setup Code'),
+            subtitle: Text(
+                'Want to use a theme you configured here in your Flutter app? '
+                'Just copy the setup code for your active settings and paste '
+                'it into your Flutter app iny our IDE, import FlexColorScheme '
+                'and you are good to go.'),
           ),
           ListTile(
             title: const Text('Get the FlexColorScheme setup code for '
@@ -533,45 +586,79 @@ class _Info extends StatelessWidget {
             trailing: ElevatedButton(
               onPressed: controller.useFlexColorScheme
                   ? () {
-                      _handleCodeTap(context);
+                      _handleCodeTap(context, controller);
                     }
                   : null,
               child: const Text('Code'),
             ),
             onTap: controller.useFlexColorScheme
                 ? () {
-                    _handleCodeTap(context);
+                    _handleCodeTap(context, controller);
                   }
                 : null,
           ),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text('Very few M3 widgets and styles are available in '
-                'Flutter 2.10 and earlier. There is a toggle in ThemeData '
-                'that you can turn on to enable M3 styles, but it has no '
-                'effect on Widgets yet in Flutter.'),
+          const ListTile(
+            title: Text('Material Design 3'),
+            subtitle: Text('Only a few Material 3 widgets and styles are '
+                'available in Flutter 2.10 and earlier. There is a toggle in '
+                'ThemeData that you can turn on to enable M3 styles, but it '
+                'still has no effect on Widgets in Flutter.'),
           ),
           SwitchListTile.adaptive(
             title: const Text(
-              "Use Flutter's Material 3 based themes",
+              "Use Flutter's Material 3 based ThemeData defaults",
             ),
             subtitle: const Text(
-              'Toggles useMaterial3 in ThemeData ON/OFF. '
-              'Has no effect in Flutter <= 2.10.1, it will in future '
-              'versions, we can then visually observe its effect here',
+              'Toggles ThemeData.useMaterial3 true/false. '
+              'Has no effect in Flutter 2.10.2 or earlier. It will in future '
+              'versions. When it does, use this toggle to see what it does.',
             ),
             value: controller.useMaterial3,
             onChanged: controller.setUseMaterial3,
           ),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text('Material 3 colors are '
-                'available, but Widgets do not use them correctly '
-                'yet nor do they yet implement M3 style when the '
-                'above toggle is used in ThemeData. You can use '
-                "FlexColorScheme's opinionated sub-themes to get styles "
-                'that are very close to Material 3 and you can use the new '
-                "colors in widgets' sub-theme configuration."),
+          const ListTile(
+            title: Text('New ColorScheme in Flutter 2.10 and '
+                'FlexColorScheme v5'),
+            subtitle: Text('The Material 3 ColorScheme is used in '
+                'FlexColorScheme v5. However, '
+                'widgets in Flutter 2.10 do not utilize any of its colors '
+                'yet by default. Nor do they implement other M3 styles, even '
+                'if the useMaterial3:true flag is set in ThemeData.\n'
+                '\n'
+                'You can use '
+                "FlexColorScheme's opinionated component sub-themes to get "
+                'a theme that is close to M3 styles already now. You can also '
+                'customize it, and '
+                'define which scheme colors are used by which widgets via '
+                'sub-theme configuration. '
+                'This feature will also work well when Material 3 styles '
+                'become available in Flutter. It works as a quick and '
+                'convenient way to select non standard color, from the '
+                'ColorScheme for built-in Material UI components.'),
+          ),
+          const ListTile(
+            title: Text('Platform'),
+            subtitle: Text('For testing purposes you can change used platform. '
+                'It changes some icons and widgets like Switches and Sliders, '
+                'also font and platform mechanics, like '
+                'scrolling behavior and acceleration. '
+                'This setting is not persisted.'),
+          ),
+          PlatformPopupMenu(
+            platform: controller.platform,
+            onChanged: controller.setPlatform,
+          ),
+          ListTile(
+            title: const Text('Set to actual platform'),
+            trailing: ElevatedButton(
+              onPressed: () {
+                controller.setPlatform(defaultTargetPlatform);
+              },
+              child: const Text('Actual'),
+            ),
+            onTap: () {
+              controller.setPlatform(defaultTargetPlatform);
+            },
           ),
         ],
       ),
@@ -579,45 +666,8 @@ class _Info extends StatelessWidget {
   }
 }
 
-class _ThemeColors extends StatelessWidget {
-  const _ThemeColors({
-    Key? key,
-    required this.controller,
-    required this.isOpen,
-    required this.onTap,
-  }) : super(key: key);
-  final ThemeController controller;
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Theme Colors'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-            child: ThemeSelector(controller: controller),
-          ),
-          ThemePopupMenu(controller: controller),
-          const SizedBox(height: 8),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: ShowThemeColors(),
-          ),
-          const SizedBox(height: 8),
-        ],
-      ),
-    );
-  }
-}
-
-class _ColorScheme extends StatelessWidget {
-  const _ColorScheme({
+class _SelectTheme extends StatelessWidget {
+  const _SelectTheme({
     Key? key,
     required this.controller,
     required this.isOpen,
@@ -644,44 +694,42 @@ class _ColorScheme extends StatelessWidget {
     }
   }
 
-  String _explainUsedColors() {
-    if (!controller.useKeyColors) {
-      return 'Material 3 ColorScheme seeding from key colors is NOT used.\n'
-          'The M3 ColorScheme is based on the input colors';
-    }
-    if (!controller.useSecondary && !controller.useTertiary) {
-      return 'Only Primary input color is used to generate the M3 Colorscheme, '
-          'this is like using ColorScheme.fromSeed with Primary color';
-    }
-    if (controller.useSecondary && !controller.useTertiary) {
-      return 'To make tonal palettes for the M3 ColorScheme, Primary and '
-          'Secondary colors are used as keys, Tertiary is computed '
-          'from Primary';
-    }
-    if (!controller.useSecondary && controller.useTertiary) {
-      return 'To make tonal palettes for the M3 ColorScheme, Primary and '
-          'Tertiary colors are used as keys, Secondary is computed '
-          'from Primary';
-    }
-    return 'Input Primary, Secondary and Tertiary colors are all used as own '
-        'keys to generate tonal palettes to make the M3 ColorScheme';
-  }
-
   @override
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Color Scheme'),
+      title: const Text('Select Theme'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          ListTile(
+            title: const Text('Theme mode'),
+            subtitle: Text('Mode ${controller.themeMode.toString().dotTail}'),
+            trailing: ThemeModeSwitch(
+              themeMode: controller.themeMode,
+              onChanged: controller.setThemeMode,
+            ),
+            // Toggle theme mode also via the ListTile tap.
+            onTap: () {
+              if (Theme.of(context).brightness == Brightness.light) {
+                controller.setThemeMode(ThemeMode.dark);
+              } else {
+                controller.setThemeMode(ThemeMode.light);
+              }
+            },
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+            child: ThemeSelector(controller: controller),
+          ),
+          ThemePopupMenu(controller: controller),
           const SizedBox(height: 8),
           if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
             ListTile(
-              title: const Text('Copy this scheme to custom colors?'),
-              subtitle: const Text('Sets custom colors to this scheme. '
+              title: const Text('Copy these input colors to custom colors?'),
+              subtitle: const Text('Sets custom colors to this input scheme. '
                   'You can then modify these colors'),
               trailing: ElevatedButton(
                 onPressed: () async {
@@ -696,15 +744,30 @@ class _ColorScheme extends StatelessWidget {
           else
             const ListTile(
               title: Text('Custom color scheme'),
-              subtitle: Text('Tap the color to change it'),
+              subtitle: Text('Tap the primary, secondary or tertiary and their '
+                  'container colors to customize them'),
             ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
-            child: ThemeColors(controller: controller),
+            child: ThemeInputColors(controller: controller),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Text('Tap a color code to copy it to the clipboard'),
+          ),
+          const SizedBox(height: 8),
+          const Divider(),
+          const ListTile(
+            title: Text('Input color modifiers'),
+            subtitle: Text('You can use the input color modifiers below to '
+                'change the input colors before they are used to define '
+                'the ColorScheme'),
+          ),
+          UsedColorsPopupMenu(
+            title: const Text('Input limiter, use fewer of the six '
+                'predefined color values'),
+            index: controller.usedColors,
+            onChanged: controller.setUsedColors,
           ),
           if (isLight)
             SwitchListTile.adaptive(
@@ -724,170 +787,6 @@ class _ColorScheme extends StatelessWidget {
               value: controller.swapDarkColors,
               onChanged: controller.setSwapDarkColors,
             ),
-          const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text('Dynamic Material 3 ColorScheme',
-                style: Theme.of(context).textTheme.titleLarge),
-          ),
-          ListTile(
-            title: const Text('Use input colors as key to make '
-                'a dynamic ColorScheme'),
-            subtitle: Text(_explainUsedColors()),
-          ),
-          // const SizedBox(height: 4),
-          ListTile(
-            trailing: UseKeyColorsButtons(
-              controller: controller,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text('When using dynamic themes, you can also lock the '
-                'main colors to their actual input value, instead of '
-                'letting it be replaced by a computed tone.'),
-          ),
-          SwitchListTile.adaptive(
-            title: const Text('Keep primary locked at input value'),
-            value: controller.useKeyColors &&
-                controller.useFlexColorScheme &&
-                controller.keepPrimary,
-            onChanged: controller.useKeyColors && controller.useFlexColorScheme
-                ? controller.setKeepPrimary
-                : null,
-          ),
-          SwitchListTile.adaptive(
-            title: const Text('Keep primary container locked at input value'),
-            value: controller.useKeyColors &&
-                controller.useFlexColorScheme &&
-                controller.keepPrimaryContainer,
-            onChanged: controller.useKeyColors && controller.useFlexColorScheme
-                ? controller.setKeepPrimaryContainer
-                : null,
-          ),
-          SwitchListTile.adaptive(
-            title: const Text('Keep secondary locked at input value'),
-            value: controller.useKeyColors &&
-                controller.useFlexColorScheme &&
-                controller.keepSecondary,
-            onChanged: controller.useKeyColors && controller.useFlexColorScheme
-                ? controller.setKeepSecondary
-                : null,
-          ),
-          SwitchListTile.adaptive(
-            title: const Text('Keep secondary container locked at input value'),
-            value: controller.useKeyColors &&
-                controller.useFlexColorScheme &&
-                controller.keepSecondaryContainer,
-            onChanged: controller.useKeyColors && controller.useFlexColorScheme
-                ? controller.setKeepSecondaryContainer
-                : null,
-          ),
-          SwitchListTile.adaptive(
-            title: const Text('Keep tertiary locked at input value'),
-            value: controller.useKeyColors &&
-                controller.useFlexColorScheme &&
-                controller.keepTertiary,
-            onChanged: controller.useKeyColors && controller.useFlexColorScheme
-                ? controller.setKeepTertiary
-                : null,
-          ),
-          SwitchListTile.adaptive(
-            title: const Text('Keep tertiary container locked at input value'),
-            value: controller.useKeyColors &&
-                controller.useFlexColorScheme &&
-                controller.keepTertiaryContainer,
-            onChanged: controller.useKeyColors && controller.useFlexColorScheme
-                ? controller.setKeepTertiaryContainer
-                : null,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ThemeMode extends StatelessWidget {
-  const _ThemeMode({
-    Key? key,
-    required this.controller,
-    required this.isOpen,
-    required this.onTap,
-  }) : super(key: key);
-  final ThemeController controller;
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
-
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Theme Mode'),
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            title: const Text('Theme mode'),
-            subtitle: Text('Mode ${controller.themeMode.toString().dotTail}'),
-            trailing: ThemeModeSwitch(
-              themeMode: controller.themeMode,
-              onChanged: controller.setThemeMode,
-            ),
-            // Toggle theme mode also via the ListTile tap.
-            onTap: () {
-              if (Theme.of(context).brightness == Brightness.light) {
-                controller.setThemeMode(ThemeMode.dark);
-              } else {
-                controller.setThemeMode(ThemeMode.light);
-              }
-            },
-          ),
-          if (isLight) ...<Widget>[
-            SwitchListTile.adaptive(
-              title: const Text('Light mode TextTheme is colored'),
-              value: controller.blendLightTextTheme &&
-                  controller.useSubThemes &&
-                  controller.useFlexColorScheme,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setBlendLightTextTheme
-                      : null,
-            ),
-            SwitchListTile.adaptive(
-              title: const Text('Light mode onColor have a hint of its color'),
-              value: controller.blendLightOnColors &&
-                  controller.useSubThemes &&
-                  controller.useFlexColorScheme,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setBlendLightOnColors
-                      : null,
-            ),
-          ] else ...<Widget>[
-            SwitchListTile.adaptive(
-              title: const Text('Dark mode TextTheme is colored'),
-              value: controller.blendDarkTextTheme &&
-                  controller.useSubThemes &&
-                  controller.useFlexColorScheme,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setBlendDarkTextTheme
-                      : null,
-            ),
-            SwitchListTile.adaptive(
-              title: const Text('Dark mode onColor have a hint of its color'),
-              value: controller.blendDarkOnColors &&
-                  controller.useSubThemes &&
-                  controller.useFlexColorScheme,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setBlendDarkOnColors
-                      : null,
-            ),
-          ],
           Visibility(
             visible: !isLight,
             maintainSize: true,
@@ -896,8 +795,8 @@ class _ThemeMode extends StatelessWidget {
             child: SwitchListTile.adaptive(
               title: const Text('Compute dark theme'),
               subtitle: const Text(
-                'Calculate from the light scheme, instead '
-                'of using a predefined dark scheme',
+                'Calculate from light scheme color values, instead '
+                'of using the predefined dark ones',
               ),
               value: controller.useToDarkMethod &&
                   controller.useSubThemes &&
@@ -954,8 +853,174 @@ class _ThemeMode extends StatelessWidget {
   }
 }
 
-class _Platform extends StatelessWidget {
-  const _Platform({
+class _ThemeDataColors extends StatelessWidget {
+  const _ThemeDataColors({
+    Key? key,
+    required this.controller,
+    required this.isOpen,
+    required this.onTap,
+  }) : super(key: key);
+  final ThemeController controller;
+  final bool isOpen;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle spanTextStyle = theme.textTheme.bodyText2!
+        .copyWith(color: theme.textTheme.caption!.color);
+    final TextStyle linkStyle =
+        theme.textTheme.bodyText2!.copyWith(color: theme.colorScheme.primary);
+
+    return HeaderCard(
+      isOpen: isOpen,
+      onTap: onTap,
+      title: const Text('ThemeData Colors'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: RichText(
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    style: spanTextStyle,
+                    text:
+                        'The effective color properties in your ThemeData are '
+                        'shown below. All direct color properties in '
+                        'ThemeData are planned to be deprecated and eventually '
+                        'removed from Flutter. More info can be found here ',
+                  ),
+                  LinkTextSpan(
+                    style: linkStyle,
+                    url: 'https://github.com/flutter/flutter/issues/91772',
+                    text: 'in issue #91772',
+                  ),
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: '.\n\n'
+                        'These colors are still critical in Flutter 2.10.x and '
+                        'earlier. Many UI Widgets still use them for their '
+                        'default colors. FlexColorScheme has since its first '
+                        'version kept all of them in sync with provided '
+                        'ColorScheme, to produce an app with a consistent '
+                        'ColorScheme based look on all widgets. It will '
+                        'continue to do so as long as the colors exist in '
+                        'ThemeData.\n'
+                        '\n'
+                        'Migration to replacement colors in ColorScheme only '
+                        'or needed component sub-themes is added changes in '
+                        'Flutter SDK stable version proceeds.',
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: ShowThemeDataColors(),
+          ),
+          const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
+class _SeededColorScheme extends StatelessWidget {
+  const _SeededColorScheme({
+    Key? key,
+    required this.controller,
+    required this.isOpen,
+    required this.onTap,
+  }) : super(key: key);
+  final ThemeController controller;
+  final bool isOpen;
+  final VoidCallback onTap;
+
+  String _explainUsedColors() {
+    if (!controller.useKeyColors) {
+      return 'Material 3 ColorScheme seeding from key colors is OFF and not '
+          'used.\n'
+          'The ColorScheme is based directly on the input colors';
+    }
+    if (!controller.useSecondary && !controller.useTertiary) {
+      return 'Only Primary input color is used to generate the Colorscheme. '
+          'This is like using ColorScheme.fromSeed with Primary color';
+    }
+    if (controller.useSecondary && !controller.useTertiary) {
+      return 'To make tonal palettes for the ColorScheme, Primary and '
+          'Secondary colors are used as keys, Tertiary is computed '
+          'from Primary';
+    }
+    if (!controller.useSecondary && controller.useTertiary) {
+      return 'To make tonal palettes for the ColorScheme, Primary and '
+          'Tertiary colors are used as keys, Secondary is computed '
+          'from Primary';
+    }
+    return 'Input Primary, Secondary and Tertiary colors are used as '
+        'keys to generate tonal palettes that define the ColorScheme';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return HeaderCard(
+      isOpen: isOpen,
+      onTap: onTap,
+      title: const Text('Seeded ColorScheme'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(height: 8),
+          ListTile(
+            title: const Text('Use input colors as seed keys '
+                'for the ColorScheme'),
+            subtitle: Text(_explainUsedColors()),
+          ),
+          // const SizedBox(height: 4),
+          ListTile(
+            trailing: UseKeyColorsButtons(
+              controller: controller,
+            ),
+          ),
+          const ListTile(
+            title: Text('Keep selected input colors'),
+            subtitle: Text('When using a FlexColorScheme seeded ColorScheme, '
+                'you can also lock primary, secondary, tertiary and their '
+                'container colors to their key input color, instead of '
+                'letting it be replaced by a seed computed tone. Toggle the '
+                'switch below for each color to keep its input color. When '
+                'ON you can see that the locked color keeps it input value. '
+                'The lock switches are only available when seed colors '
+                'are used.'),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+            child: SchemeColors(controller: controller),
+          ),
+          if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text('Tap a color code to copy it to the clipboard.'),
+            )
+          else
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text('Tap a color code to copy it to the clipboard. '
+                  'This is the custom color theme, you can tap primary, '
+                  'secondary or tertiary and their container colors to '
+                  'customize them.'),
+            ),
+          const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
+class _ColorScheme extends StatelessWidget {
+  const _ColorScheme({
     Key? key,
     required this.controller,
     required this.isOpen,
@@ -970,33 +1035,21 @@ class _Platform extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Platform'),
+      title: const Text('ColorScheme Colors'),
       child: Column(
-        children: <Widget>[
-          const Padding(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
+          Padding(
             padding: EdgeInsets.all(16),
-            child: Text('For testing you can change used platform. '
-                'It changes some icons and widgets like Switches and Sliders, '
-                'also font and platform mechanics, like '
-                'scrolling behavior and acceleration. '
-                'This setting is not persisted'),
+            child: Text('This shows all the effective ColorScheme colors. '
+                'They are presented in the same order as they appear in the '
+                'ColorScheme class.'),
           ),
-          PlatformPopupMenu(
-            platform: controller.platform,
-            onChanged: controller.setPlatform,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: ShowColorSchemeColors(),
           ),
-          ListTile(
-            title: const Text('Set to actual platform'),
-            trailing: ElevatedButton(
-              onPressed: () {
-                controller.setPlatform(defaultTargetPlatform);
-              },
-              child: const Text('Actual'),
-            ),
-            onTap: () {
-              controller.setPlatform(defaultTargetPlatform);
-            },
-          ),
+          SizedBox(height: 8),
         ],
       ),
     );
@@ -1039,13 +1092,13 @@ class _SurfaceBlends extends StatelessWidget {
         return 'High scaffold, low surfaces\n'
             'Scaffold 3x  Surface and Background 1/2x\n';
       case FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog:
-        return 'Variant dialog, low scaffold\n'
+        return 'Tertiary container dialog, low scaffold\n'
             'Surface & Background 1x  Scaffold 1/2x\n'
-            'Dialog 1x blend of secondary variant color';
+            'Dialog 1x blend of tertiary container color';
       case FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog:
-        return 'High scaffold, variant dialog\n'
+        return 'High scaffold, tertiary container dialog\n'
             'Scaffold 3x  Surface and Background 1/2x\n'
-            'Dialog 1/2x blend of secondary variant color';
+            'Dialog 1/2x blend of tertiary container color';
       case FlexSurfaceMode.custom:
         return '';
     }
@@ -1060,14 +1113,23 @@ class _SurfaceBlends extends StatelessWidget {
       title: const Text('Surface Blends'),
       child: Column(
         children: <Widget>[
+          const SizedBox(height: 8),
           const ListTile(
             title: Text('Blended surfaces and backgrounds'),
             isThreeLine: true,
             subtitle: Text(
               'Material 2 design use white and almost black surface colors. '
-              'The guide mentions using surfaces with different alpha blends, '
-              'by blending primary color into different surfaces. '
-              'Blend mode and level does that',
+              'The M2 guide mentions using surfaces with different alpha '
+              'blends, by blending primary color into different surfaces. '
+              'Blend mode and level does that.\n'
+              '\n'
+              'Material Design 3 introduces a new color system, where a hint '
+              'of primary color is also used on surfaces via neutral tonal '
+              'palettes, shifted slightly towards the primary color. If you '
+              'use key color seeded ColorScheme and set blend level to zero, '
+              'you get the pure M3 design. When you use it with blends, you '
+              'can further strengthen the surface blends and also vary '
+              'blend strength by surface type.',
             ),
           ),
           ListTile(
@@ -1085,48 +1147,201 @@ class _SurfaceBlends extends StatelessWidget {
               const SizedBox(width: 16),
             ],
           ),
-          const ListTile(
-            title: Text('Blend level'),
-            subtitle: Text('Adjust the blend strength'),
-          ),
-          ListTile(
-            title: Slider.adaptive(
-              min: 0,
-              max: 40,
-              divisions: 40,
-              label: controller.blendLevel.toString(),
-              value: controller.blendLevel.toDouble(),
-              onChanged: (double value) {
-                controller.setBlendLevel(value.toInt());
-              },
+          if (isLight) ...<Widget>[
+            const ListTile(
+              title: Text('Light mode blend level'),
+              subtitle: Text('Adjust the surface, background, scaffold and '
+                  'dialog blend level. Also impacts surfaces when '
+                  'seed colors are used. Seed based surfaces already include '
+                  'a touch of primary, but you can make it stronger with '
+                  'surface blends'),
             ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'LEVEL',
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                  Text(
-                    '${controller.blendLevel}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .caption!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
+            ListTile(
+              title: Slider.adaptive(
+                min: 0,
+                max: 40,
+                divisions: 40,
+                label: controller.blendLevel.toString(),
+                value: controller.blendLevel.toDouble(),
+                onChanged: (double value) {
+                  controller.setBlendLevel(value.toInt());
+                },
+              ),
+              trailing: Padding(
+                padding: const EdgeInsetsDirectional.only(end: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'LEVEL',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    Text(
+                      '${controller.blendLevel}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
+            const ListTile(
+              title: Text('Light mode onColors blend level'),
+              subtitle: Text('When seed colors are not used, this affects '
+                  'onContainers, onSurface and onBackground, plus main '
+                  'onColors when the onColor blending switch is ON'),
+            ),
+            ListTile(
+              title: Slider.adaptive(
+                min: 0,
+                max: 40,
+                divisions: 40,
+                label: controller.blendOnLevel.toString(),
+                value: controller.blendOnLevel.toDouble(),
+                onChanged: (double value) {
+                  controller.setBlendOnLevel(value.toInt());
+                },
+              ),
+              trailing: Padding(
+                padding: const EdgeInsetsDirectional.only(end: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'LEVEL',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    Text(
+                      '${controller.blendOnLevel}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SwitchListTile.adaptive(
+              title: const Text('Light mode main colors use onColor blending'),
+              subtitle: const Text(
+                  'In M3 seeded light design only container colors use color '
+                  'pair tinted onColor, main colors use black or white. '
+                  'Keep this OFF to do so, or ON to also use it with '
+                  'onPrimary, onSecondary, onTertiary and onError, in light '
+                  'mode when seed colors are not used. Recommend OFF, but a '
+                  'low onColor blend level is fine too'),
+              value: controller.blendLightOnColors &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBlendLightOnColors
+                      : null,
+            ),
+          ] else ...<Widget>[
+            const ListTile(
+              title: Text('Dark mode blend level'),
+              subtitle: Text('Adjust the surface, background, scaffold and '
+                  'dialog blend level. Also impacts surfaces when '
+                  'seed colors are used. Seed based surfaces already include '
+                  'a touch of primary, but you can make it stronger with '
+                  'surface blends'),
+            ),
+            ListTile(
+              title: Slider.adaptive(
+                min: 0,
+                max: 40,
+                divisions: 40,
+                label: controller.blendLevelDark.toString(),
+                value: controller.blendLevelDark.toDouble(),
+                onChanged: (double value) {
+                  controller.setBlendLevelDark(value.toInt());
+                },
+              ),
+              trailing: Padding(
+                padding: const EdgeInsetsDirectional.only(end: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'LEVEL',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    Text(
+                      '${controller.blendLevelDark}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const ListTile(
+              title: Text('Dark mode onColors blend level'),
+              subtitle: Text('When seed colors are not used, this affects '
+                  'onContainers, onSurface and onBackground, plus main '
+                  'onColors when the onColor blending switch is ON'),
+            ),
+            ListTile(
+              title: Slider.adaptive(
+                min: 0,
+                max: 40,
+                divisions: 40,
+                label: controller.blendOnLevelDark.toString(),
+                value: controller.blendOnLevelDark.toDouble(),
+                onChanged: (double value) {
+                  controller.setBlendOnLevelDark(value.toInt());
+                },
+              ),
+              trailing: Padding(
+                padding: const EdgeInsetsDirectional.only(end: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'LEVEL',
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    Text(
+                      '${controller.blendOnLevelDark}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SwitchListTile.adaptive(
+              title: const Text('Dark mode main colors use onColor blending'),
+              subtitle: const Text(
+                  'In M3 seeded dark design, not only container colors use '
+                  'color pair tinted onColor, but also the main colors do. '
+                  'Keep this ON to also use it with onPrimary, onSecondary, '
+                  'onTertiary and onError colors in dark mode when seed colors '
+                  'are not used'),
+              value: controller.blendDarkOnColors &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBlendDarkOnColors
+                      : null,
+            ),
+          ],
           // Set dark mode to use true black!
           if (isLight)
             SwitchListTile.adaptive(
               title: const Text('Plain white'),
               subtitle: const Text(
                 'White Scaffold in all blend modes, '
-                'other surfaces get 8% lighter',
+                'other surfaces become 5% lighter',
               ),
               value: controller.lightIsWhite,
               onChanged: controller.setLightIsWhite,
@@ -1136,7 +1351,7 @@ class _SurfaceBlends extends StatelessWidget {
               title: const Text('True black'),
               subtitle: const Text(
                 'Black Scaffold in all blend modes, '
-                'other surfaces get 8% darker',
+                'other surfaces become 5% darker',
               ),
               value: controller.darkIsTrueBlack,
               onChanged: controller.setDarkIsTrueBlack,
@@ -1147,8 +1362,8 @@ class _SurfaceBlends extends StatelessWidget {
   }
 }
 
-class _SubThemes extends StatelessWidget {
-  const _SubThemes(
+class _ComponentThemes extends StatelessWidget {
+  const _ComponentThemes(
       {Key? key,
       required this.controller,
       required this.isOpen,
@@ -1160,16 +1375,26 @@ class _SubThemes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Sub Theme Settings'),
+      title: const Text('Component Themes'),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SwitchListTile.adaptive(
+            title: const Text('Use component themes'),
+            subtitle: const Text('Enable opinionated widget sub themes'),
+            value: controller.useSubThemes && controller.useFlexColorScheme,
+            onChanged: controller.useFlexColorScheme
+                ? controller.setUseSubThemes
+                : null,
+          ),
+          SwitchListTile.adaptive(
             title: const Text('Use Material 3 TextTheme'),
-            subtitle: const Text('ON to use M3 text styles\n'
-                'OFF to use M2 2018 text styles'),
+            subtitle: const Text('ON to use FCS M3 text styles and geometry\n'
+                'OFF to use SDK M2 2018 text styles and geometry'),
             value: controller.useTextTheme &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -1177,11 +1402,38 @@ class _SubThemes extends StatelessWidget {
                 ? controller.setUseTextTheme
                 : null,
           ),
+          if (isLight)
+            SwitchListTile.adaptive(
+              title: const Text('Light mode TextTheme is primary colored'),
+              subtitle: const Text('A hint of primary color is mixed into '
+                  'main text theme'),
+              value: controller.blendLightTextTheme &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBlendLightTextTheme
+                      : null,
+            )
+          else
+            SwitchListTile.adaptive(
+              title: const Text('Dark mode TextTheme is primary colored'),
+              subtitle: const Text('A hint of primary color is mixed into '
+                  'main text theme'),
+              value: controller.blendDarkTextTheme &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBlendDarkTextTheme
+                      : null,
+            ),
           SwitchListTile.adaptive(
-            title: const Text('Use Material 3 rounded corners'),
-            subtitle: const Text('ON to use M3 radius '
-                'on widgets\n'
-                'OFF to adjust radius on all widgets'),
+            title: const Text('Use Material 3 rounded corners on UI elements'),
+            subtitle: const Text('ON to use M3 spec border radius, varies '
+                'per component\n'
+                'OFF to set same radius on all widgets, M2 spec is 4\n'
+                'With API you can adjust it per widget with a double value'),
             value: controller.useDefaultRadius &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -1228,8 +1480,8 @@ class _SubThemes extends StatelessWidget {
           ),
           SwitchListTile.adaptive(
             title: const Text('Rounded corners on FloatingActionButton'),
-            subtitle: const Text('OFF removes Shape from FAB theme, '
-                'making it always use M2 circular style'),
+            subtitle: const Text('OFF removes Shape from custom FAB sub-theme, '
+                'making it use M2 circular style.'),
             value: controller.fabUseShape &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -1257,7 +1509,7 @@ class _SubThemes extends StatelessWidget {
                 'Tooltip background',
               ),
               subtitle: const Text(
-                'ON Normal  OFF Inverted',
+                'ON Normal   OFF Inverted',
               ),
               value: controller.tooltipsMatchBackground &&
                   controller.useFlexColorScheme,
@@ -1265,6 +1517,11 @@ class _SubThemes extends StatelessWidget {
                   ? controller.setTooltipsMatchBackground
                   : null,
             ),
+          ),
+          const Divider(height: 1),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: ShowSubThemeColors(),
           ),
         ],
       ),
@@ -1366,8 +1623,8 @@ class _TextField extends StatelessWidget {
   }
 }
 
-class _AppBarSettings extends StatelessWidget {
-  const _AppBarSettings(
+class _AppBar extends StatelessWidget {
+  const _AppBar(
       {Key? key,
       required this.controller,
       required this.isOpen,
@@ -1380,17 +1637,17 @@ class _AppBarSettings extends StatelessWidget {
   String explainAppBarStyle(final FlexAppBarStyle style, final bool isLight) {
     switch (style) {
       case FlexAppBarStyle.primary:
-        return isLight ? 'Primary color - Default' : 'Primary color';
+        return isLight ? 'Primary color - M2 default' : 'Primary color';
       case FlexAppBarStyle.material:
         return isLight
             ? 'White background'
-            : 'Dark background (#121212) - Default';
+            : 'Dark background (#121212) - M2 default';
       case FlexAppBarStyle.surface:
         return 'Surface, with primary color blend';
       case FlexAppBarStyle.background:
         return 'Background, with primary color blend';
       case FlexAppBarStyle.custom:
-        return 'Built-in schemes use secondary container color, '
+        return 'Custom, built-in schemes use tertiary color, '
             'but you can use any color';
     }
   }
@@ -1526,6 +1783,32 @@ class _AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
+          const Divider(),
+          const ListTile(
+            title: Text('Custom color'),
+            subtitle: Text('With sub-themes you can set scheme color for the '
+                'AppBar background color. '
+                'Using AppBarStyle is easier, but this offers more colors. '
+                'This overrides used AppBarStyle and passed in color, set them '
+                'back to default to use AppBarStyle again. '
+                'With API you can set different color in light and dark '
+                'mode. This app shares same input for both modes, but you '
+                'can easily modify the generated setup code.'),
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('AppBar background color'),
+            index: controller.appBarBackgroundSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setAppBarBackgroundSchemeColor(null);
+                    } else {
+                      controller.setAppBarBackgroundSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
         ],
       ),
     );
@@ -1583,8 +1866,44 @@ class _TabBar extends StatelessWidget {
               onChanged: controller.setTabBarStyle,
             ),
           ),
+          const SizedBox(height: 8),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: TabBarForAppBarShowcase(),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: TabBarForBackgroundShowcase(),
+          ),
+          const SizedBox(height: 8),
+          const Divider(),
+          const ListTile(
+            title: Text('Custom colors'),
+            subtitle: Text('With sub-themes you can select scheme color for '
+                'the items and indicator separately. '
+                'Using TabBarStyle is easier, but this offers more control. '
+                'These settings overrides used TabBarStyle, set them '
+                'back to default to use TabBarStyle again. '
+                'With API you can set different color in light and dark '
+                'mode. This app shares same input for both modes, but you '
+                'can easily modify the generated setup code.'),
+          ),
           ColorSchemePopupMenu(
-            title: const Text('Color used by tab indicator'),
+            title: const Text('TabBar items color'),
+            index: controller.tabBarItemSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setTabBarItemSchemeColor(null);
+                    } else {
+                      controller
+                          .setTabBarItemSchemeColor(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('TabBar indicator color'),
             index: controller.tabBarIndicator?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -1596,16 +1915,6 @@ class _TabBar extends StatelessWidget {
                   }
                 : null,
           ),
-          const SizedBox(height: 8),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: TabBarForAppBarShowcase(),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: TabBarForBackgroundShowcase(),
-          ),
-          const SizedBox(height: 8),
         ],
       ),
     );
@@ -1699,15 +2008,8 @@ class _BottomNavigation extends StatelessWidget {
             ),
           ),
           const Divider(),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: BottomNavigationBarShowcase(),
-          ),
           const ListTile(
             title: Text('M2 bottom navigation bar elevation'),
-            // subtitle: Text(
-            //   'Bottom navigation bar elevation',
-            // ),
           ),
           ListTile(
             title: Slider.adaptive(
@@ -1740,8 +2042,30 @@ class _BottomNavigation extends StatelessWidget {
               ),
             ),
           ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: BottomNavigationBarShowcase(),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: NavigationBarShowcase(),
+          ),
           ColorSchemePopupMenu(
-            title: const Text('M2 and M3 navigation bar item color'),
+            title: const Text('Background color on M2 and M3 navigation bars'),
+            index: controller.navBarBackgroundSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setNavBarBackgroundSchemeColor(null);
+                    } else {
+                      controller.setNavBarBackgroundSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Item color on M2 and M3 navigation bars'),
             index: controller.navBarScheme?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -1753,13 +2077,9 @@ class _BottomNavigation extends StatelessWidget {
                   }
                 : null,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: NavigationBarShowcase(),
-          ),
           const SizedBox(height: 8),
           ColorSchemePopupMenu(
-            title: const Text('M3 navigation bar highlight color'),
+            title: const Text('Item highlight color on M3 navigation bar'),
             index: controller.navBarHighlight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -1772,7 +2092,7 @@ class _BottomNavigation extends StatelessWidget {
                 : null,
           ),
           SwitchListTile.adaptive(
-            title: const Text('M3 navigation bar mute unselected item'),
+            title: const Text('Mute unselected item on M3 navigation bar'),
             subtitle: const Text('Unselected icon and text are less bright'),
             value: controller.navBarMuteUnselected &&
                 controller.useSubThemes &&
@@ -1806,64 +2126,8 @@ class _BottomNavigation extends StatelessWidget {
   }
 }
 
-class _MaterialButtonsShowcase extends StatelessWidget {
-  const _MaterialButtonsShowcase({
-    Key? key,
-    required this.isOpen,
-    required this.onTap,
-  }) : super(key: key);
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Themed Material Buttons'),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
-            ButtonShowcase(),
-            SizedBox(height: 8),
-            ButtonShowcase(enabled: false),
-            SizedBox(height: 8),
-            ButtonIconShowcase(),
-
-            /// Showing the legacy buttons is removed from the sample.
-            ///
-            /// The deprecated legacy buttons weill be removed in next stable
-            /// release after Flutter 2.10.x. For more info see:
-            /// https://github.com/flutter/flutter/issues/98537
-            ///
-            /// The sub themes that style them will be kept available since it
-            /// is not going away and may be useful to the theme ButtonBar and
-            /// dropdown. button style. As long as the buttons are actually
-            /// available in the SDK, the comment code to show will be kept
-            /// around in the samples, should anybody want to uncomment it to
-            /// see what their style with sub themes applied looks like.
-
-            // Padding(
-            //   padding: const EdgeInsets.all(8),
-            //   child: Text('Legacy buttons, deprecated',
-            //       style: Theme.of(context).textTheme.subtitle1),
-            // ),
-            // const LegacyButtonShowcase(),
-            // const SizedBox(height: 8),
-            // const LegacyButtonShowcase(enabled: false),
-            // const SizedBox(height: 8),
-            // const LegacyButtonIconShowcase(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
-  const _ToggleFabSwitchesChipsShowcase({
+class _ButtonsShowcase extends StatelessWidget {
+  const _ButtonsShowcase({
     Key? key,
     required this.controller,
     required this.isOpen,
@@ -1878,25 +2142,162 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Themed Buttons Switches and Chips'),
+      title: const Text('Themed Material Buttons'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          const SizedBox(height: 8),
+          const ListTile(
+            title: Text('Themed button colors'),
+            subtitle: Text('Change theme color, default is primary via '
+                'SDK default and component sub-theme defaults. '
+                'With API you can set different color in light and dark '
+                'mode. This app shares same input for both modes, but you '
+                'can easily modify the generated setup code.'),
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('ElevatedButton color'),
+            index: controller.elevatedButtonSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setElevatedButtonSchemeColor(null);
+                    } else {
+                      controller.setElevatedButtonSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: ElevatedButtonShowcase(),
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('OutlinedButton color'),
+            index: controller.outlinedButtonSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setOutlinedButtonSchemeColor(null);
+                    } else {
+                      controller.setOutlinedButtonSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: OutlinedButtonShowcase(),
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('TextButton color'),
+            index: controller.textButtonSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setTextButtonSchemeColor(null);
+                    } else {
+                      controller
+                          .setTextButtonSchemeColor(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: TextButtonShowcase(),
+          ),
+
+          /// Showing the legacy buttons is removed from the sample.
+          ///
+          /// The deprecated legacy buttons weill be removed in next stable
+          /// release after Flutter 2.10.x. For more info see:
+          /// https://github.com/flutter/flutter/issues/98537
+          ///
+          /// The sub themes that style them will be kept available since it
+          /// is not going away and may be useful to the theme ButtonBar and
+          /// dropdown. button style. As long as the buttons are actually
+          /// available in the SDK, the comment code to show will be kept
+          /// around in the samples, should anybody want to uncomment it to
+          /// see what their style with sub themes applied looks like.
+
+          // Padding(
+          //   padding: const EdgeInsets.all(8),
+          //   child: Text('Legacy buttons, deprecated',
+          //       style: Theme.of(context).textTheme.subtitle1),
+          // ),
+          // const LegacyButtonShowcase(),
+          // const SizedBox(height: 8),
+          // const LegacyButtonShowcase(enabled: false),
+          // const SizedBox(height: 8),
+          // const LegacyButtonIconShowcase(),
+        ],
+      ),
+    );
+  }
+}
+
+class _ToggleFabChipsShowcase extends StatelessWidget {
+  const _ToggleFabChipsShowcase({
+    Key? key,
+    required this.controller,
+    required this.isOpen,
+    required this.onTap,
+  }) : super(key: key);
+  final ThemeController controller;
+  final bool isOpen;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return HeaderCard(
+      isOpen: isOpen,
+      onTap: onTap,
+      title: const Text('Themed Buttons, Switches and Chips'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          ColorSchemePopupMenu(
+            title: const Text('ToggleButtons color'),
+            index: controller.toggleButtonsSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setToggleButtonsSchemeColor(null);
+                    } else {
+                      controller.setToggleButtonsSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: TogglePopupDropdownButtonsShowcase(),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: FabCircleAvatarAndTooltipShowcase(),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: CheckboxShowcase(),
+            child: ToggleButtonsShowcase(),
           ),
           const Divider(),
           ColorSchemePopupMenu(
-            title: const Text('Base color used on Chips'),
+            title: const Text('FloatingActionButton color'),
+            index: controller.fabSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setFabSchemeColor(null);
+                    } else {
+                      controller.setFabSchemeColor(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: FabShowcase(),
+          ),
+          const Divider(),
+          ColorSchemePopupMenu(
+            title: const Text('Chip color'),
             index: controller.chipSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -1911,6 +2312,116 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
             child: ChipShowcase(),
+          ),
+          const Divider(),
+          // TODO(rydmike): Keeping this setting out of the demo, no impact.
+          //  This setting has no impact on anything in the demo so taking it
+          //  away for now.
+          //
+          // ColorSchemePopupMenu(
+          //   title: const Text('Old ButtonTheme color'),
+          //   index: controller.materialButtonSchemeColor?.index ?? -1,
+          //   onChanged: controller.useSubThemes &&
+          //      controller.useFlexColorScheme
+          //       ? (int index) {
+          //           if (index < 0 || index >= SchemeColor.values.length) {
+          //             controller.setMaterialButtonSchemeColor(null);
+          //           } else {
+          //             controller.setMaterialButtonSchemeColor(
+          //                 SchemeColor.values[index]);
+          //           }
+          //         }
+          //       : null,
+          // ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: PopupDropdownButtonsShowcase(),
+          ),
+          const Divider(),
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: CircleAvatarAndTooltipShowcase(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SwitchesShowcase extends StatelessWidget {
+  const _SwitchesShowcase({
+    Key? key,
+    required this.controller,
+    required this.isOpen,
+    required this.onTap,
+  }) : super(key: key);
+  final ThemeController controller;
+  final bool isOpen;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return HeaderCard(
+      isOpen: isOpen,
+      onTap: onTap,
+      title: const Text('Themed Switches'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          ColorSchemePopupMenu(
+            title: const Text('Switch color'),
+            index: controller.switchSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setSwitchSchemeColor(null);
+                    } else {
+                      controller
+                          .setSwitchSchemeColor(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: SwitchShowcase(),
+          ),
+          const Divider(),
+          ColorSchemePopupMenu(
+            title: const Text('Checkbox color'),
+            index: controller.checkboxSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setCheckboxSchemeColor(null);
+                    } else {
+                      controller
+                          .setCheckboxSchemeColor(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: CheckboxShowcase(),
+          ),
+          const Divider(),
+          ColorSchemePopupMenu(
+            title: const Text('Radio color'),
+            index: controller.radioSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setRadioSchemeColor(null);
+                    } else {
+                      controller.setRadioSchemeColor(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: RadioShowcase(),
           ),
         ],
       ),
@@ -1971,8 +2482,13 @@ class _DatePickerDialogShowcase extends StatelessWidget {
 }
 
 class _DialogShowcase extends StatelessWidget {
-  const _DialogShowcase({Key? key, required this.isOpen, required this.onTap})
-      : super(key: key);
+  const _DialogShowcase({
+    Key? key,
+    required this.controller,
+    required this.isOpen,
+    required this.onTap,
+  }) : super(key: key);
+  final ThemeController controller;
   final bool isOpen;
   final VoidCallback onTap;
 
@@ -1982,7 +2498,33 @@ class _DialogShowcase extends StatelessWidget {
       isOpen: isOpen,
       onTap: onTap,
       title: const Text('Themed Dialog'),
-      child: const AlertDialogShowcase(),
+      child: Column(
+        children: <Widget>[
+          const ListTile(
+            title: Text('Themed dialog'),
+            subtitle: Text('Flutter SDK default background is '
+                'colorScheme.background for Dialog and DatePickerDialog, but '
+                'colorScheme.surface for TimePickerDialog. FlexColorScheme '
+                'sub-themes use surface as default for all dialogs, to ensure '
+                'that elevation overlay color works in dark mode.'),
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Background color'),
+            index: controller.dialogBackgroundSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setDialogBackgroundSchemeColor(null);
+                    } else {
+                      controller.setDialogBackgroundSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          const AlertDialogShowcase(),
+        ],
+      ),
     );
   }
 }

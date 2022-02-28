@@ -39,6 +39,10 @@ class ThemeController with ChangeNotifier {
     _chipSchemeColor = await _themeService.chipSchemeColor();
     _surfaceMode = await _themeService.surfaceMode();
     _blendLevel = await _themeService.blendLevel();
+    _blendLevelDark = await _themeService.blendLevelDark();
+    _blendOnLevel = await _themeService.blendOnLevel();
+    _blendOnLevelDark = await _themeService.blendOnLevelDark();
+    _usedColors = await _themeService.usedColors();
     _lightAppBarStyle = await _themeService.lightAppBarStyle();
     _darkAppBarStyle = await _themeService.darkAppBarStyle();
     _appBarOpacity = await _themeService.appBarOpacity();
@@ -92,6 +96,26 @@ class ThemeController with ChangeNotifier {
     _keepPrimaryContainer = await _themeService.keepPrimaryContainer();
     _keepSecondaryContainer = await _themeService.keepSecondaryContainer();
     _keepTertiaryContainer = await _themeService.keepTertiaryContainer();
+    // New props for v5, more theme scheme colors.
+    _textButtonSchemeColor = await _themeService.textButtonSchemeColor();
+    _elevatedButtonSchemeColor =
+        await _themeService.elevatedButtonSchemeColor();
+    _outlinedButtonSchemeColor =
+        await _themeService.outlinedButtonSchemeColor();
+    _materialButtonSchemeColor =
+        await _themeService.materialButtonSchemeColor();
+    _toggleButtonsSchemeColor = await _themeService.toggleButtonsSchemeColor();
+    _switchSchemeColor = await _themeService.switchSchemeColor();
+    _checkboxSchemeColor = await _themeService.checkboxSchemeColor();
+    _radioSchemeColor = await _themeService.radioSchemeColor();
+    _dialogBackgroundSchemeColor =
+        await _themeService.dialogBackgroundSchemeColor();
+    _tabBarItemSchemeColor = await _themeService.tabBarItemSchemeColor();
+    _appBarBackgroundSchemeColor =
+        await _themeService.appBarBackgroundSchemeColor();
+    _fabSchemeColor = await _themeService.fabSchemeColor();
+    _navBarBackgroundSchemeColor =
+        await _themeService.navBarBackgroundSchemeColor();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -122,7 +146,13 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultInputDecoratorSchemeColor, false);
     await setChipSchemeColor(ThemeService.defaultChipSchemeColor, false);
     await setSurfaceMode(ThemeService.defaultSurfaceMode, false);
+
     await setBlendLevel(ThemeService.defaultBlendLevel, false);
+    await setBlendLevelDark(ThemeService.defaultBlendLevelDark, false);
+    await setBlendOnLevel(ThemeService.defaultBlendOnLevel, false);
+    await setBlendOnLevelDark(ThemeService.defaultBlendOnLevelDark, false);
+    await setUsedColors(ThemeService.defaultUsedColors, false);
+
     await setLightAppBarStyle(ThemeService.defaultLightAppBarStyle, false);
     await setDarkAppBarStyle(ThemeService.defaultDarkAppBarStyle, false);
     await setAppBarOpacity(ThemeService.defaultAppBarOpacity, false);
@@ -189,6 +219,30 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultKeepSecondaryContainer, false);
     await setKeepTertiaryContainer(
         ThemeService.defaultKeepTertiaryContainer, false);
+    // More props for V5 custom scheme colrs.
+    await setTextButtonSchemeColor(
+        ThemeService.defaultTextButtonSchemeColor, false);
+    await setElevatedButtonSchemeColor(
+        ThemeService.defaultElevatedButtonSchemeColor, false);
+    await setOutlinedButtonSchemeColor(
+        ThemeService.defaultOutlinedButtonSchemeColor, false);
+    await setMaterialButtonSchemeColor(
+        ThemeService.defaultMaterialButtonSchemeColor, false);
+    await setToggleButtonsSchemeColor(
+        ThemeService.defaultToggleButtonsSchemeColor, false);
+    await setSwitchSchemeColor(ThemeService.defaultSwitchSchemeColor, false);
+    await setCheckboxSchemeColor(
+        ThemeService.defaultCheckboxSchemeColor, false);
+    await setRadioSchemeColor(ThemeService.defaultRadioSchemeColor, false);
+    await setDialogBackgroundSchemeColor(
+        ThemeService.defaultDialogBackgroundSchemeColor, false);
+    await setTabBarItemSchemeColor(
+        ThemeService.defaultTabBarItemSchemeColor, false);
+    await setAppBarBackgroundSchemeColor(
+        ThemeService.defaultAppBarBackgroundSchemeColor, false);
+    await setFabSchemeColor(ThemeService.defaultFabSchemeColor, false);
+    await setNavBarBackgroundSchemeColor(
+        ThemeService.defaultNavBarBackgroundSchemeColor, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -280,6 +334,46 @@ class ThemeController with ChangeNotifier {
     _blendLevel = value;
     if (notify) notifyListeners();
     await _themeService.saveBlendLevel(value);
+  }
+
+  late int _blendLevelDark;
+  int get blendLevelDark => _blendLevelDark;
+  Future<void> setBlendLevelDark(int? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _blendLevelDark) return;
+    _blendLevelDark = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBlendLevelDark(value);
+  }
+
+  late int _blendOnLevel;
+  int get blendOnLevel => _blendOnLevel;
+  Future<void> setBlendOnLevel(int? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _blendOnLevel) return;
+    _blendOnLevel = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBlendOnLevel(value);
+  }
+
+  late int _blendOnLevelDark;
+  int get blendOnLevelDark => _blendOnLevelDark;
+  Future<void> setBlendOnLevelDark(int? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _blendOnLevelDark) return;
+    _blendOnLevelDark = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBlendOnLevelDark(value);
+  }
+
+  late int _usedColors;
+  int get usedColors => _usedColors;
+  Future<void> setUsedColors(int? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _usedColors) return;
+    _usedColors = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUsedColors(value);
   }
 
   late bool _interactionEffects;
@@ -772,6 +866,136 @@ class ThemeController with ChangeNotifier {
     _tertiaryContainerDark = value;
     if (notify) notifyListeners();
     await _themeService.saveTertiaryContainerDark(value);
+  }
+
+  late SchemeColor? _textButtonSchemeColor;
+  SchemeColor? get textButtonSchemeColor => _textButtonSchemeColor;
+  Future<void> setTextButtonSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _textButtonSchemeColor) return;
+    _textButtonSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveTextButtonSchemeColor(value);
+  }
+
+  late SchemeColor? _elevatedButtonSchemeColor;
+  SchemeColor? get elevatedButtonSchemeColor => _elevatedButtonSchemeColor;
+  Future<void> setElevatedButtonSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _elevatedButtonSchemeColor) return;
+    _elevatedButtonSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveElevatedButtonSchemeColor(value);
+  }
+
+  late SchemeColor? _outlinedButtonSchemeColor;
+  SchemeColor? get outlinedButtonSchemeColor => _outlinedButtonSchemeColor;
+  Future<void> setOutlinedButtonSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _outlinedButtonSchemeColor) return;
+    _outlinedButtonSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveOutlinedButtonSchemeColor(value);
+  }
+
+  late SchemeColor? _materialButtonSchemeColor;
+  SchemeColor? get materialButtonSchemeColor => _materialButtonSchemeColor;
+  Future<void> setMaterialButtonSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _materialButtonSchemeColor) return;
+    _materialButtonSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveMaterialButtonSchemeColor(value);
+  }
+
+  late SchemeColor? _toggleButtonsSchemeColor;
+  SchemeColor? get toggleButtonsSchemeColor => _toggleButtonsSchemeColor;
+  Future<void> setToggleButtonsSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _toggleButtonsSchemeColor) return;
+    _toggleButtonsSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveToggleButtonsSchemeColor(value);
+  }
+
+  late SchemeColor? _switchSchemeColor;
+  SchemeColor? get switchSchemeColor => _switchSchemeColor;
+  Future<void> setSwitchSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _switchSchemeColor) return;
+    _switchSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveSwitchSchemeColor(value);
+  }
+
+  late SchemeColor? _checkboxSchemeColor;
+  SchemeColor? get checkboxSchemeColor => _checkboxSchemeColor;
+  Future<void> setCheckboxSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _checkboxSchemeColor) return;
+    _checkboxSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveCheckboxSchemeColor(value);
+  }
+
+  late SchemeColor? _radioSchemeColor;
+  SchemeColor? get radioSchemeColor => _radioSchemeColor;
+  Future<void> setRadioSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _radioSchemeColor) return;
+    _radioSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveRadioSchemeColor(value);
+  }
+
+  late SchemeColor? _dialogBackgroundSchemeColor;
+  SchemeColor? get dialogBackgroundSchemeColor => _dialogBackgroundSchemeColor;
+  Future<void> setDialogBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _dialogBackgroundSchemeColor) return;
+    _dialogBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveDialogBackgroundSchemeColor(value);
+  }
+
+  late SchemeColor? _tabBarItemSchemeColor;
+  SchemeColor? get tabBarItemSchemeColor => _tabBarItemSchemeColor;
+  Future<void> setTabBarItemSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _tabBarItemSchemeColor) return;
+    _tabBarItemSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveTabBarItemSchemeColor(value);
+  }
+
+  late SchemeColor? _appBarBackgroundSchemeColor;
+  SchemeColor? get appBarBackgroundSchemeColor => _appBarBackgroundSchemeColor;
+  Future<void> setAppBarBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _appBarBackgroundSchemeColor) return;
+    _appBarBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveAppBarBackgroundSchemeColor(value);
+  }
+
+  late SchemeColor? _fabSchemeColor;
+  SchemeColor? get fabSchemeColor => _fabSchemeColor;
+  Future<void> setFabSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _fabSchemeColor) return;
+    _fabSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveFabSchemeColor(value);
+  }
+
+  late SchemeColor? _navBarBackgroundSchemeColor;
+  SchemeColor? get navBarBackgroundSchemeColor => _navBarBackgroundSchemeColor;
+  Future<void> setNavBarBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _navBarBackgroundSchemeColor) return;
+    _navBarBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveNavBarBackgroundSchemeColor(value);
   }
 
   // Get custom scheme data based on currently defined scheme colors.

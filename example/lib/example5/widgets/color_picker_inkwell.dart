@@ -289,6 +289,7 @@ class ColorPickerInkWell extends StatelessWidget {
                   editUsesParsedPaste: true,
                   copyButton: true,
                   pasteButton: true,
+                  copyFormat: ColorPickerCopyFormat.dartCode,
                 ),
                 actionButtons: const ColorPickerActionButtons(
                   closeButton: true,

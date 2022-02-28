@@ -306,6 +306,26 @@ void main() {
         FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme),
         equals(
           InputDecorationTheme(
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error) &&
+                  states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.error)) {
+                return TextStyle(
+                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                );
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: colorScheme.primary);
+            }),
             filled: true,
             fillColor: colorScheme.primary.withAlpha(0x0D),
             hoverColor: colorScheme.primary.withAlpha(0x0D),
@@ -366,6 +386,26 @@ void main() {
         ),
         equals(
           InputDecorationTheme(
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error) &&
+                  states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.error)) {
+                return TextStyle(
+                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                );
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: colorScheme.primary);
+            }),
             filled: true,
             fillColor: colorScheme.secondary.withAlpha(0x0D),
             hoverColor: colorScheme.secondary.withAlpha(0x0D),

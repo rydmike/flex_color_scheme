@@ -60,8 +60,8 @@ import 'package:flutter/foundation.dart';
 /// The neutral tonal palette and its variant are used as inputs to
 /// [ColorScheme] colors in the same way as in [ColorScheme.fromSeed] and are
 /// produced with a slight hint of [primary] key color in them using same
-/// algorithm as [ColorScheme.fromSeed] too. This color branding is bit
-/// equivalent to using primary color surface blends, or so called primary
+/// algorithm as [ColorScheme.fromSeed] too. This color branding is a bit
+/// equivalent to using primary color alpha surface blends, or so called primary
 /// color branding in [FlexColorScheme]. The surface mode and blend levels can
 /// even be combined with M3 based key color branding, for a bit different and
 /// stronger effects from key color generated themes too.

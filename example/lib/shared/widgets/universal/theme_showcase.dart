@@ -22,39 +22,23 @@ class ThemeShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const ButtonShowcase(),
+        const ElevatedButtonShowcase(),
         const SizedBox(height: 8),
-        const ButtonShowcase(enabled: false),
+        const OutlinedButtonShowcase(),
         const SizedBox(height: 8),
-        const ButtonIconShowcase(),
-
-        /// Showing the legacy buttons is removed from the sample.
-        ///
-        /// The deprecated legacy buttons weill be removed in next stable
-        /// release after Flutter 2.10.x. For more info see:
-        /// https://github.com/flutter/flutter/issues/98537
-        ///
-        /// The sub themes that style them will be kept available since it is
-        /// not going away and may be useful to the theme ButtonBar and
-        /// dropdown. button style. As long as the buttons are actually
-        /// available in the SDK, the comment code to show will be kept around
-        /// in the samples, should anybody want to uncomment it to see what
-        /// their style with FlexColorScheme sub themes applied looks like.
-        //
-        // const SizedBox(height: 8),
-        // Text('Legacy buttons (deprecated)',
-        //     style: Theme.of(context).textTheme.subtitle1),
-        // const SizedBox(height: 8),
-        // const LegacyButtonShowcase(),
-        // const SizedBox(height: 8),
-        // const LegacyButtonShowcase(enabled: false),
-        // const SizedBox(height: 8),
-        // const LegacyButtonIconShowcase(),
+        const TextButtonShowcase(),
+        const SizedBox(height: 8),
         const Divider(),
-        const TogglePopupDropdownButtonsShowcase(),
+        const ToggleButtonsShowcase(),
         const SizedBox(height: 8),
-        const FabCircleAvatarAndTooltipShowcase(),
+        const FabShowcase(),
+        const SwitchShowcase(),
         const CheckboxShowcase(),
+        const RadioShowcase(),
+        const PopupDropdownButtonsShowcase(),
+        const SizedBox(height: 8),
+        const CircleAvatarAndTooltipShowcase(),
+        const SizedBox(height: 8),
         const ChipShowcase(),
         const Divider(),
         const TextInputField(),
@@ -116,9 +100,8 @@ class ThemeShowcase extends StatelessWidget {
   }
 }
 
-class ButtonShowcase extends StatelessWidget {
-  const ButtonShowcase({Key? key, this.enabled = true}) : super(key: key);
-  final bool enabled;
+class ElevatedButtonShowcase extends StatelessWidget {
+  const ElevatedButtonShowcase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -128,25 +111,25 @@ class ButtonShowcase extends StatelessWidget {
       runSpacing: 8,
       children: <Widget>[
         ElevatedButton(
-          onPressed: enabled ? () {} : null,
+          onPressed: () {},
           child: const Text('Elevated button'),
         ),
-        OutlinedButton(
-          onPressed: enabled ? () {} : null,
-          child: const Text('Outlined button'),
+        ElevatedButton.icon(
+          onPressed: () {},
+          icon: const Icon(Icons.add),
+          label: const Text('Elevated icon'),
         ),
-        TextButton(
-          onPressed: enabled ? () {} : null,
-          child: const Text('Text button'),
+        const ElevatedButton(
+          onPressed: null,
+          child: Text('Elevated button'),
         ),
       ],
     );
   }
 }
 
-class ButtonIconShowcase extends StatelessWidget {
-  const ButtonIconShowcase({Key? key, this.enabled = true}) : super(key: key);
-  final bool enabled;
+class OutlinedButtonShowcase extends StatelessWidget {
+  const OutlinedButtonShowcase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -155,128 +138,54 @@ class ButtonIconShowcase extends StatelessWidget {
       spacing: 8,
       runSpacing: 8,
       children: <Widget>[
-        ElevatedButton.icon(
-          onPressed: enabled ? () {} : null,
-          icon: const Icon(Icons.add),
-          label: const Text('Elevated icon'),
+        OutlinedButton(
+          onPressed: () {},
+          child: const Text('Outlined button'),
         ),
         OutlinedButton.icon(
-          onPressed: enabled ? () {} : null,
+          onPressed: () {},
           icon: const Icon(Icons.add),
           label: const Text('Outlined icon'),
         ),
-        TextButton.icon(
-          onPressed: enabled ? () {} : null,
-          icon: const Icon(Icons.add),
-          label: const Text('Text icon'),
+        const OutlinedButton(
+          onPressed: null,
+          child: Text('Outlined button'),
         ),
       ],
     );
   }
 }
 
-// TODO(rydmike): Remove this commented code when legacy buttons are not in SDK.
-/// Showing the legacy buttons is removed from the sample.
-///
-/// The deprecated legacy buttons weill be removed in next stable
-/// release after Flutter 2.10.x. For more info see:
-/// https://github.com/flutter/flutter/issues/98537
-///
-/// The sub themes that style them will be kept available since it is
-/// not going away and may be useful to the theme ButtonBar and
-/// dropdown. button style. As long as the buttons are actually
-/// available in the SDK, the comment code to show will be kept around
-/// in the samples, should anybody want to uncomment it to see what
-/// their style with FlexColorScheme sub themes applied looks like.
+class TextButtonShowcase extends StatelessWidget {
+  const TextButtonShowcase({Key? key}) : super(key: key);
 
-// class LegacyButtonShowcase extends StatelessWidget {
-//   const LegacyButtonShowcase({Key? key, this.enabled = true})
-//     : super(key: key);
-//   final bool enabled;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Wrap(
-//       crossAxisAlignment: WrapCrossAlignment.center,
-//       spacing: 8,
-//       runSpacing: 4,
-//       children: <Widget>[
-//         RaisedButton(
-//           onPressed: enabled ? () {} : null,
-//           child: const Text('Raised button'),
-//         ),
-//         OutlineButton(
-//           onPressed: enabled ? () {} : null,
-//           child: const Text('Outline button'),
-//         ),
-//         FlatButton(
-//           onPressed: enabled ? () {} : null,
-//           child: const Text('Flat button'),
-//         ),
-//       ],
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 8,
+      children: <Widget>[
+        TextButton(
+          onPressed: () {},
+          child: const Text('Text button'),
+        ),
+        TextButton.icon(
+          onPressed: () {},
+          icon: const Icon(Icons.add),
+          label: const Text('Text icon'),
+        ),
+        const TextButton(
+          onPressed: null,
+          child: Text('Text button'),
+        ),
+      ],
+    );
+  }
+}
 
-// TODO(rydmike): Remove this commented code when legacy buttons are not in SDK.
-/// Showing the legacy buttons is removed from the sample.
-///
-/// The deprecated legacy buttons weill be removed in next stable
-/// release after Flutter 2.10.x. For more info see:
-/// https://github.com/flutter/flutter/issues/98537
-///
-/// The sub themes that style them will be kept available since it is
-/// not going away and may be useful to the theme ButtonBar and
-/// dropdown. button style. As long as the buttons are actually
-/// available in the SDK, the comment code to show will be kept around
-/// in the samples, should anybody want to uncomment it to see what
-/// their style with FlexColorScheme sub themes applied looks like.
-
-// const SizedBox(height: 8),
-// Text('Legacy buttons (deprecated)',
-//     style: Theme.of(context).textTheme.subtitle1),
-// const SizedBox(height: 8),
-// const LegacyButtonShowcase(),
-// const SizedBox(height: 8),
-// const LegacyButtonShowcase(enabled: false),
-// const SizedBox(height: 8),
-// const LegacyButtonIconShowcase(),
-// class LegacyButtonIconShowcase extends StatelessWidget {
-//   const LegacyButtonIconShowcase({Key? key, this.enabled = true})
-//       : super(key: key);
-//   final bool enabled;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Wrap(
-//       crossAxisAlignment: WrapCrossAlignment.center,
-//       spacing: 8,
-//       runSpacing: 4,
-//       children: <Widget>[
-//         RaisedButton.icon(
-//           onPressed: enabled ? () {} : null,
-//           icon: const Icon(Icons.add),
-//           label: const Text('Raised icon'),
-//         ),
-//         OutlineButton.icon(
-//           onPressed: enabled ? () {} : null,
-//           icon: const Icon(Icons.add),
-//           label: const Text('Outline icon'),
-//         ),
-//         FlatButton.icon(
-//           onPressed: enabled ? () {} : null,
-//           icon: const Icon(Icons.add),
-//           label: const Text('Flat icon'),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-class TogglePopupDropdownButtonsShowcase extends StatelessWidget {
-  const TogglePopupDropdownButtonsShowcase({Key? key, this.enabled = true})
-      : super(key: key);
-  final bool enabled;
+class ToggleButtonsShowcase extends StatelessWidget {
+  const ToggleButtonsShowcase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -287,13 +196,176 @@ class TogglePopupDropdownButtonsShowcase extends StatelessWidget {
       children: <Widget>[
         ToggleButtons(
           isSelected: const <bool>[true, false, false],
-          onPressed: enabled ? (int newIndex) {} : null,
+          onPressed: (int newIndex) {},
           children: const <Widget>[
             Icon(Icons.adb),
             Icon(Icons.phone),
             Icon(Icons.account_circle),
           ],
         ),
+        ToggleButtons(
+          isSelected: const <bool>[true, false, false],
+          onPressed: null,
+          children: const <Widget>[
+            Icon(Icons.adb),
+            Icon(Icons.phone),
+            Icon(Icons.account_circle),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class FabShowcase extends StatelessWidget {
+  const FabShowcase({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 4,
+      children: <Widget>[
+        FloatingActionButton(
+          onPressed: () {},
+          mini: true,
+          tooltip: 'Tooltip on mini\nFloatingActionButton',
+          child: const Icon(Icons.accessibility),
+        ),
+        FloatingActionButton.extended(
+          isExtended: false,
+          onPressed: () {},
+          tooltip: 'Tooltip on extended:false\nFloatingActionButton.extended',
+          icon: const Icon(Icons.accessibility),
+          label: const Text('Extended'),
+        ),
+        FloatingActionButton.extended(
+          isExtended: true,
+          onPressed: () {},
+          tooltip: 'Tooltip on extended:true\nFloatingActionButton.extended',
+          icon: const Icon(Icons.accessibility),
+          label: const Text('Extended'),
+        ),
+        FloatingActionButton(
+          onPressed: () {},
+          tooltip: 'Tooltip on default\nFloatingActionButton',
+          child: const Icon(Icons.accessibility),
+        ),
+      ],
+    );
+  }
+}
+
+class SwitchShowcase extends StatelessWidget {
+  const SwitchShowcase({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 4,
+      children: <Widget>[
+        Switch(
+          value: true,
+          onChanged: (bool value) {},
+        ),
+        Switch(
+          value: false,
+          onChanged: (bool value) {},
+        ),
+        const Switch(
+          value: true,
+          onChanged: null,
+        ),
+        const Switch(
+          value: false,
+          onChanged: null,
+        ),
+      ],
+    );
+  }
+}
+
+class CheckboxShowcase extends StatelessWidget {
+  const CheckboxShowcase({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 4,
+      children: <Widget>[
+        Checkbox(
+          value: true,
+          onChanged: (bool? value) {},
+        ),
+        Checkbox(
+          value: false,
+          onChanged: (bool? value) {},
+        ),
+        const Checkbox(
+          value: true,
+          onChanged: null,
+        ),
+        const Checkbox(
+          value: false,
+          onChanged: null,
+        ),
+      ],
+    );
+  }
+}
+
+class RadioShowcase extends StatelessWidget {
+  const RadioShowcase({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 4,
+      children: <Widget>[
+        Radio<bool>(
+          value: true,
+          groupValue: true,
+          onChanged: (bool? value) {},
+        ),
+        Radio<bool>(
+          value: false,
+          groupValue: true,
+          onChanged: (bool? value) {},
+        ),
+        const Radio<bool>(
+          value: true,
+          groupValue: true,
+          onChanged: null,
+        ),
+        const Radio<bool>(
+          value: false,
+          groupValue: true,
+          onChanged: null,
+        ),
+      ],
+    );
+  }
+}
+
+class PopupDropdownButtonsShowcase extends StatelessWidget {
+  const PopupDropdownButtonsShowcase({Key? key, this.enabled = true})
+      : super(key: key);
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 4,
+      children: <Widget>[
         _PopupMenuButton(enabled: enabled),
         const _DropDownButton(),
       ],
@@ -405,8 +477,8 @@ class _DropDownButtonFormFieldState extends State<_DropDownButtonFormField> {
   }
 }
 
-class FabCircleAvatarAndTooltipShowcase extends StatelessWidget {
-  const FabCircleAvatarAndTooltipShowcase({Key? key}) : super(key: key);
+class CircleAvatarAndTooltipShowcase extends StatelessWidget {
+  const CircleAvatarAndTooltipShowcase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -415,11 +487,6 @@ class FabCircleAvatarAndTooltipShowcase extends StatelessWidget {
       spacing: 8,
       runSpacing: 4,
       children: <Widget>[
-        FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Tooltip on\nFloatingActionButton',
-          child: const Icon(Icons.accessibility),
-        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: IconButton(
@@ -484,60 +551,6 @@ class ChipShowcase extends StatelessWidget {
           label: const Text('Not selected Chip'),
           selected: false,
           onSelected: (bool value) {},
-        ),
-      ],
-    );
-  }
-}
-
-class CheckboxShowcase extends StatelessWidget {
-  const CheckboxShowcase({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 4,
-      children: <Widget>[
-        Checkbox(
-          value: true,
-          onChanged: (bool? value) {},
-        ),
-        Checkbox(
-          value: false,
-          onChanged: (bool? value) {},
-        ),
-        const Checkbox(
-          value: false,
-          onChanged: null,
-        ),
-        Radio<bool>(
-          value: true,
-          groupValue: true,
-          onChanged: (bool? value) {},
-        ),
-        Radio<bool>(
-          value: false,
-          groupValue: true,
-          onChanged: (bool? value) {},
-        ),
-        const Radio<bool>(
-          value: false,
-          groupValue: true,
-          onChanged: null,
-        ),
-        Switch(
-          value: true,
-          onChanged: (bool value) {},
-        ),
-        Switch(
-          value: false,
-          onChanged: (bool value) {},
-        ),
-        const Switch(
-          value: false,
-          onChanged: null,
         ),
       ],
     );
@@ -739,9 +752,10 @@ class _BottomNavigationBarShowcaseState
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           Text(
-            'Default background color is theme canvasColor via Material, and '
-            'theme canvasColor is set to theme colorScheme and its background '
-            'color',
+            'Default SDK background color is theme canvasColor via Material, '
+            'and theme.canvasColor is set to theme.colorScheme.background, '
+            'elevation is 8. FlexColorScheme sub-theme default is '
+            'colorScheme.background and elevation 0.',
             style: Theme.of(context).textTheme.caption,
           ),
           const SizedBox(height: 8),
@@ -801,8 +815,9 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           Text(
-            'Default background color is theme colorScheme surface with an '
-            'onSurface overlay color with elevation 3',
+            'Default SDK background color is theme.colorScheme.surface with an '
+            'onSurface overlay color with elevation 3. FlexColorScheme '
+            'sub-theme default is colorScheme.background and elevation 0.',
             style: Theme.of(context).textTheme.caption,
           ),
           const SizedBox(height: 8),

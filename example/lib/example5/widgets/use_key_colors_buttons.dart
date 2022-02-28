@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared/controllers/theme_controller.dart';
 
-// Widget used to change used of key colors for colorscheme generation
+// Widget used to change usage of key colors for colorscheme generation
 // in example 5.
 class UseKeyColorsButtons extends StatelessWidget {
   const UseKeyColorsButtons({
@@ -20,16 +20,19 @@ class UseKeyColorsButtons extends StatelessWidget {
     ];
     return ToggleButtons(
       isSelected: isSelected,
-      onPressed: controller.useFlexColorScheme ?
-          (int index) {
-        if (index == 0) controller.setUseKeyColors(!controller.useKeyColors);
-        if (index == 1 && controller.useKeyColors) {
-          controller.setUseSecondary(!controller.useSecondary);
-        }
-        if (index == 2 && controller.useKeyColors) {
-          controller.setUseTertiary(!controller.useTertiary);
-        }
-      } : null,
+      onPressed: controller.useFlexColorScheme
+          ? (int index) {
+              if (index == 0) {
+                controller.setUseKeyColors(!controller.useKeyColors);
+              }
+              if (index == 1 && controller.useKeyColors) {
+                controller.setUseSecondary(!controller.useSecondary);
+              }
+              if (index == 2 && controller.useKeyColors) {
+                controller.setUseTertiary(!controller.useTertiary);
+              }
+            }
+          : null,
       children: <Widget>[
         const Tooltip(
           message: 'Use input Primary color\n'

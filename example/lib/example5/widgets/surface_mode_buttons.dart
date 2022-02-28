@@ -91,24 +91,24 @@ class SurfaceModeButtons extends StatelessWidget {
         ),
         if (showAllModes)
           Tooltip(
-            message: 'Variant dialog\nlow scaffold',
+            message: 'Tertiary container dialog\nlow scaffold',
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
                 const RotatedBox(
                     quarterTurns: 2, child: Icon(Icons.horizontal_split)),
-                Icon(Icons.stop, color: scheme.secondaryContainer, size: 18),
+                Icon(Icons.stop, color: scheme.tertiary, size: 18),
               ],
             ),
           ),
         if (showAllModes)
           Tooltip(
-            message: 'High scaffold\nvariant dialog',
+            message: 'High scaffold\ntertiary container dialog',
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
                 const Icon(Icons.horizontal_split),
-                Icon(Icons.stop, color: scheme.secondaryContainer, size: 18),
+                Icon(Icons.stop, color: scheme.tertiary, size: 18),
               ],
             ),
           ),

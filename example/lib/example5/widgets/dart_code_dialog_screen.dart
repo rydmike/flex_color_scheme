@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../shared/controllers/theme_controller.dart';
 import '../../shared/widgets/universal/syntax_highlighter.dart';
-import '../utils/generate_theme_dart_code.dart';
 
 /// Show the code for the Theme in a Dialog screen.
 class DartCodeDialogScreen extends StatelessWidget {
   const DartCodeDialogScreen({
     Key? key,
-    required this.controller,
+    required this.dialogHeader,
+    required this.copyMessage,
+    required this.code,
   }) : super(key: key);
-  final ThemeController controller;
+  final String dialogHeader;
+  final String copyMessage;
+  final String code;
 
   // Set the passed in text to the clipboard.
   Future<void> copyToClipBoard(String text) async {
@@ -30,9 +32,6 @@ class DartCodeDialogScreen extends StatelessWidget {
     final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
         GlobalKey<ScaffoldMessengerState>();
 
-    // Get the theme's Dart and Flutter setup code.
-    final String themeDartCode = generateThemeDartCode(controller);
-
     final SyntaxHighlighterStyle style =
         Theme.of(context).brightness == Brightness.dark
             ? SyntaxHighlighterStyle.darkThemeStyle()
@@ -42,19 +41,18 @@ class DartCodeDialogScreen extends StatelessWidget {
       key: scaffoldMessengerKey,
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Theme Setup Code'),
+            title: Text(dialogHeader),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.copy),
                 tooltip: 'Copy code\nto clipboard',
                 onPressed: () {
-                  copyToClipBoard(themeDartCode);
+                  copyToClipBoard(code);
                   // Show a snack bar with copy message.
                   scaffoldMessengerKey.currentState!.showSnackBar(
-                    const SnackBar(
-                      content:
-                          Text('FlexColorScheme setup code copied clipboard!'),
-                      duration: Duration(milliseconds: 2000),
+                    SnackBar(
+                      content: Text(copyMessage),
+                      duration: const Duration(milliseconds: 2000),
                     ),
                   );
                 },
@@ -71,7 +69,7 @@ class DartCodeDialogScreen extends StatelessWidget {
                   TextSpan(
                     style: GoogleFonts.droidSansMono(fontSize: 12),
                     children: <TextSpan>[
-                      DartSyntaxHighlighter(style).format(themeDartCode)
+                      DartSyntaxHighlighter(style).format(code)
                     ],
                   ),
                 ),

@@ -203,6 +203,62 @@ abstract class ThemeService {
   /// Persists the used surface blend level setting in example 5.
   Future<void> saveBlendLevel(int value);
 
+  /// Key used to read and save the blendLevelDark value.
+  static const String keyBlendLevelDark = 'blendLevelDark';
+
+  /// Default value for the blendLevelDark, also used to reset settings.
+  ///
+  /// Defaults to 18.
+  static const int defaultBlendLevelDark = 18;
+
+  /// Loads used surface blend level dark setting in example 5.
+  Future<int> blendLevelDark();
+
+  /// Persists the used surface blend level dark setting in example 5.
+  Future<void> saveBlendLevelDark(int value);
+
+  /// Key used to read and save the onBlendLevel value.
+  static const String keyOnBlendLevel = 'blendOnLevel';
+
+  /// Default value for the onBlendLevel, also used to reset settings.
+  ///
+  /// Defaults to 40.
+  static const int defaultBlendOnLevel = 40;
+
+  /// Loads used blendOnLevel setting in example 5.
+  Future<int> blendOnLevel();
+
+  /// Persists the used surface on blend level setting in example 5.
+  Future<void> saveBlendOnLevel(int value);
+
+  /// Key used to read and save the blendOnLevelDark value.
+  static const String keyBlendOnLevelDark = 'blendOnLevelDark';
+
+  /// Default value for the blendOnLevelDark, also used to reset settings.
+  ///
+  /// Defaults to 30.
+  static const int defaultBlendOnLevelDark = 30;
+
+  /// Loads used blendOnLevelDark setting in example 5.
+  Future<int> blendOnLevelDark();
+
+  /// Persists the used saveBlendOnLevelDark setting in example 5.
+  Future<void> saveBlendOnLevelDark(int value);
+
+  /// Key used to read and save the usedColors value.
+  static const String keyUsedColors = 'usedColors';
+
+  /// Default value for the usedColorsLevel, also used to reset settings.
+  ///
+  /// Defaults to 6.
+  static const int defaultUsedColors = 6;
+
+  /// Loads used surface usedColors level setting in example 5.
+  Future<int> usedColors();
+
+  /// Persists the used surface usedColors level setting in example 5.
+  Future<void> saveUsedColors(int value);
+
   /// Key used to read and save the lightAppBarStyle value.
   static const String keyLightAppBarStyle = 'lightAppBarStyle';
 
@@ -484,7 +540,7 @@ abstract class ThemeService {
   static const String keyBlendLightOnColors = 'blendLightOnColors';
 
   /// Default value for the blendLightOnColors, also to reset settings.
-  static const bool defaultBlendLightOnColors = true;
+  static const bool defaultBlendLightOnColors = false;
 
   /// Loads setting that blends light colors, in example 5.
   Future<bool> blendLightOnColors();
@@ -829,4 +885,225 @@ abstract class ThemeService {
 
   /// Persists keepTertiaryContainer setting in example 5.
   Future<void> saveKeepTertiaryContainer(bool value);
+
+  // ---------
+
+  /// Key used to read and save the textButtonSchemeColor value.
+  static const String keyTextButtonSchemeColor = 'textButtonSchemeColor';
+
+  /// Default value for the textButtonSchemeColor, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultTextButtonSchemeColor = null;
+
+  /// Loads used textButtonSchemeColor setting.
+  Future<SchemeColor?> textButtonSchemeColor();
+
+  /// Persists used textButtonSchemeColor setting.
+  Future<void> saveTextButtonSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the elevatedButtonSchemeColor value.
+  static const String keyElevatedButtonSchemeColor =
+      'elevatedButtonSchemeColor';
+
+  /// Default value for the elevatedButtonSchemeColor, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultElevatedButtonSchemeColor = null;
+
+  /// Loads used elevatedButtonSchemeColor setting.
+  Future<SchemeColor?> elevatedButtonSchemeColor();
+
+  /// Persists used elevatedButtonSchemeColor setting.
+  Future<void> saveElevatedButtonSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the outlinedButtonSchemeColor value.
+  static const String keyOutlinedButtonSchemeColor =
+      'outlinedButtonSchemeColor';
+
+  /// Default value for the outlinedButtonSchemeColor, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultOutlinedButtonSchemeColor = null;
+
+  /// Loads used outlinedButtonSchemeColor setting.
+  Future<SchemeColor?> outlinedButtonSchemeColor();
+
+  /// Persists used outlinedButtonSchemeColor setting.
+  Future<void> saveOutlinedButtonSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the materialButtonSchemeColor value.
+  static const String keyMaterialButtonSchemeColor =
+      'materialButtonSchemeColor';
+
+  /// Default value for the materialButtonSchemeColor, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultMaterialButtonSchemeColor = null;
+
+  /// Loads used materialButtonSchemeColor setting.
+  Future<SchemeColor?> materialButtonSchemeColor();
+
+  /// Persists used materialButtonSchemeColor setting.
+  Future<void> saveMaterialButtonSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the toggleButtonsSchemeColor value.
+  static const String keyToggleButtonsSchemeColor = 'toggleButtonsSchemeColor';
+
+  /// Default value for the toggleButtonsSchemeColor, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultToggleButtonsSchemeColor = null;
+
+  /// Loads used toggleButtonsSchemeColor setting.
+  Future<SchemeColor?> toggleButtonsSchemeColor();
+
+  /// Persists used toggleButtonsSchemeColor setting.
+  Future<void> saveToggleButtonsSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the switchSchemeColor value.
+  static const String keySwitchSchemeColor = 'switchSchemeColor';
+
+  /// Default value for the switchSchemeColor, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSwitchSchemeColor = null;
+
+  /// Loads used switchSchemeColor setting.
+  Future<SchemeColor?> switchSchemeColor();
+
+  /// Persists used switchSchemeColor setting.
+  Future<void> saveSwitchSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the checkboxSchemeColor value.
+  static const String keyCheckboxSchemeColor = 'checkboxSchemeColor';
+
+  /// Default value for the checkboxSchemeColor, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultCheckboxSchemeColor = null;
+
+  /// Loads used checkboxSchemeColor setting.
+  Future<SchemeColor?> checkboxSchemeColor();
+
+  /// Persists used checkboxSchemeColor setting.
+  Future<void> saveCheckboxSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the radioSchemeColor value.
+  static const String keyRadioSchemeColor = 'radioSchemeColor';
+
+  /// Default value for the radioSchemeColor, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultRadioSchemeColor = null;
+
+  /// Loads used radioSchemeColor setting.
+  Future<SchemeColor?> radioSchemeColor();
+
+  /// Persists used radioSchemeColor setting.
+  Future<void> saveRadioSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the dialogBackgroundSchemeColor value.
+  static const String keyDialogBackgroundSchemeColor =
+      'dialogBackgroundSchemeColor';
+
+  /// Default value for the dialogBackgroundSchemeColor, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultDialogBackgroundSchemeColor = null;
+
+  /// Loads used dialogBackgroundSchemeColor setting.
+  Future<SchemeColor?> dialogBackgroundSchemeColor();
+
+  /// Persists used dialogBackgroundSchemeColor setting.
+  Future<void> saveDialogBackgroundSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the tabBarItemSchemeColor value.
+  static const String keyTabBarItemSchemeColor = 'tabBarItemSchemeColor';
+
+  /// Default value for the tabBarItemSchemeColor, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultTabBarItemSchemeColor = null;
+
+  /// Loads used tabBarItemSchemeColor setting.
+  Future<SchemeColor?> tabBarItemSchemeColor();
+
+  /// Persists used tabBarItemSchemeColor setting.
+  Future<void> saveTabBarItemSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the appBarBackgroundSchemeColor value.
+  static const String keyAppBarBackgroundSchemeColor =
+      'appBarBackgroundSchemeColor';
+
+  /// Default value for the appBarBackgroundSchemeColor, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultAppBarBackgroundSchemeColor = null;
+
+  /// Loads used appBarBackgroundSchemeColor setting.
+  Future<SchemeColor?> appBarBackgroundSchemeColor();
+
+  /// Persists used appBarBackgroundSchemeColor setting.
+  Future<void> saveAppBarBackgroundSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the fabSchemeColor value.
+  static const String keyFabSchemeColor = 'fabSchemeColor';
+
+  /// Default value for the fabSchemeColor, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultFabSchemeColor = null;
+
+  /// Loads used fabSchemeColor setting.
+  Future<SchemeColor?> fabSchemeColor();
+
+  /// Persists used fabSchemeColor setting.
+  Future<void> saveFabSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the navBarBackgroundSchemeColor value.
+  static const String keyNavBarBackgroundSchemeColor =
+      'navBarBackgroundSchemeColor';
+
+  /// Default value for the navBarBackgroundSchemeColor, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultNavBarBackgroundSchemeColor = null;
+
+  /// Loads used navBarBackgroundSchemeColor setting.
+  Future<SchemeColor?> navBarBackgroundSchemeColor();
+
+  /// Persists used navBarBackgroundSchemeColor setting.
+  Future<void> saveNavBarBackgroundSchemeColor(SchemeColor? value);
 }

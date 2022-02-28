@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 /// https://pub.dev/packages/tinycolor. The TinyColor algorithms have also
 /// been modified to use Flutter's HSLColor class instead of the custom one in
 /// the TinyColor lib. The functions from TinyColor reimplemented as Color
-/// extensions here are, [brighten], [lighten] and [darken]. They are used
-/// for color calculations in FlexColorScheme but also exposed for reuse.
+/// extensions here are [brighten], [lighten] and [darken]. They are used
+/// for color calculations in FlexColorScheme, but also exposed for reuse.
 ///
 /// Another frequently used extension is [blend] and [blendAlpha] used to blend
 /// two colors using alpha as a percentage or as an 8-bit int alpha value.
