@@ -187,7 +187,7 @@ class DemoApp extends StatelessWidget {
                     subThemesData: FlexSubThemesData(
                       // Opt in/out of the Material 3 style matched TextTheme.
                       useTextTheme: themeController.useTextTheme,
-                      // Slider to adjust themed border radius on widgets with
+                      // Value to adjust themed border radius on widgets with
                       // an adjustable corner rounding, this one is very handy.
                       // If null, it defaults to Material3 (You) design
                       // guide values, when available: https://m3.material.io/

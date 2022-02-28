@@ -20,10 +20,11 @@ class AppColor {
     secondaryContainer: Color(0xFFFFD270),
     tertiary: Color(0xFF5C5C95),
     tertiaryContainer: Color(0xFFC8DBF8),
-    // The built in schemes use their secondary variant color as their
+    // The built in schemes use their tertiary color as their default
     // custom app bar color, but it can be any color. We use a custom color
     // here. We will see this in example 5 when using the theme and selecting
-    // the custom app bar style.
+    // the custom app bar style. We use a light blue that matches branded
+    // surface colors, but is a bit stronger than most surface branding.
     appBarColor: Color(0xFFC8DCF8),
   );
 // Create a corresponding custom flex scheme color for a dark theme.
@@ -34,6 +35,7 @@ class AppColor {
     secondaryContainer: Color(0xFFD26900),
     tertiary: Color(0xFFC9CBFC),
     tertiaryContainer: Color(0xFF535393),
+    // A custom very dark blue, to match the dark theme mode
     appBarColor: Color(0xFF00102B),
   );
 
@@ -125,18 +127,18 @@ class AppColor {
     ...FlexColor.schemesList,
   ];
 
-  // For example 5.
-  // We add all schemes from example 4 and a placeholder for the custom data.
-  //
-  // We could also make this a static getter that requires the ThemeController,
-  // so we can use it to return a list where the last item is the FlexSchemeData
-  // it defines (controller.customScheme). I tried it, and it felt sluggish and
-  // heavy. It results in creating a new list very frequently, which was a bit
-  // too inefficient.
-  //
-  // Instead we are making it a final and will add a const placeholder for the
-  // last index for the customized colors and use another static helper function
-  // to get right colors see next step.
+  /// For example 5.
+  /// We add all schemes from example 4 and a placeholder for the custom data.
+  ///
+  /// We could also make this a static getter that requires the ThemeController,
+  /// so we can use it to return a list where the last item is the
+  /// FlexSchemeData it defines (controller.customScheme). I tried it, and it
+  /// felt sluggish and heavy. It results in creating a new list very
+  /// frequently, which was a bit too inefficient.
+  ///
+  /// Instead we are making it a final and will add a const placeholder for the
+  /// last index for the customized colors and use another static helper function
+  /// to get right colors see next step.
   static final List<FlexSchemeData> schemesCustom = <FlexSchemeData>[
     // Use all the built-in FlexColor schemes we setup for example 4
     ...schemes,
@@ -144,27 +146,27 @@ class AppColor {
     FlexColor.customColors,
   ];
 
-  // For example 5.
-  // Helper function to return current FlexSchemeData at controller index.
-  //
-  // Instead of getting the colors directly from a list that changes frequently
-  // we make a separate helper function that takes a ThemeController and returns
-  // the right FlexSchemeData from the list, but returning the
-  // `ThemeController.customScheme` for the last item, when the controllers
-  // index  is last item in list, otherwise it returns FlexSchemeData at index,
-  // well almost, we include also the logic for computed dark mode colors, in
-  // next helper.
+  /// For example 5.
+  /// Helper function to return current FlexSchemeData at controller index.
+  ///
+  /// Instead of getting the colors directly from a list that changes frequently
+  /// we make a separate helper function that takes a ThemeController and
+  /// returns the right FlexSchemeData from the list, but returning the
+  /// `ThemeController.customScheme` for the last item, when the controllers
+  /// index  is last item in list, otherwise it returns FlexSchemeData at index,
+  /// well almost, we include also the logic for computed dark mode colors, in
+  /// next helper.
   static FlexSchemeData scheme(final ThemeController controller) =>
       schemeAtIndex(controller.schemeIndex, controller);
 
-  // For example 5.
-  // Helper function to return current FlexSchemeData at given index, also
-  // needed this functionality in theme selector and popup menu, so made
-  // it a sub function to getting the FlexSchemeData at its current index.
-  // We go a bit further and have it help us return the computed dark scheme
-  // when controller says we are using that as well, instead of the defined
-  // dark mode scheme. This simplifies our logic in the MaterialApp
-  // of example 5 and we get right dark colors in ThemeSelector and Popup too.
+  /// For example 5.
+  /// Helper function to return current FlexSchemeData at given index, also
+  /// needed this functionality in theme selector and popup menu, so made
+  /// it a sub function to getting the FlexSchemeData at its current index.
+  /// We go a bit further and have it help us return the computed dark scheme
+  /// when controller says we are using that as well, instead of the defined
+  /// dark mode scheme. This simplifies our logic in the MaterialApp
+  /// of example 5 and we get right dark colors in ThemeSelector and Popup too.
   static FlexSchemeData schemeAtIndex(
       final int index, final ThemeController controller) {
     if (index == schemesCustom.length - 1) {
@@ -181,5 +183,30 @@ class AppColor {
                 .defaultError
                 .toDark(controller.darkMethodLevel, true)
             : null);
+  }
+
+  /// Used to explain the current selection of key colors used to
+  /// generate the ColorScheme, when it is activated.
+  static String explainUsedColors(ThemeController controller) {
+    if (!controller.useKeyColors) {
+      return 'Material 3 ColorScheme seeding from key colors is OFF and not '
+          'used. The ColorScheme is based directly on the input colors';
+    }
+    if (!controller.useSecondary && !controller.useTertiary) {
+      return 'Only Primary input color is used to generate the Colorscheme. '
+          'This is like using ColorScheme.fromSeed with Primary color';
+    }
+    if (controller.useSecondary && !controller.useTertiary) {
+      return 'To make tonal palettes for the ColorScheme, Primary and '
+          'Secondary colors are used as keys, Tertiary is computed '
+          'from Primary';
+    }
+    if (!controller.useSecondary && controller.useTertiary) {
+      return 'To make tonal palettes for the ColorScheme, Primary and '
+          'Tertiary colors are used as keys, Secondary is computed '
+          'from Primary';
+    }
+    return 'Input Primary, Secondary and Tertiary colors are used as '
+        'keys to generate tonal palettes that define the ColorScheme';
   }
 }

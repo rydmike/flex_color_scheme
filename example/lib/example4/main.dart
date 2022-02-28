@@ -109,7 +109,57 @@ class DemoApp extends StatelessWidget {
             // we keep the blend level fairly low for good contrast.
             blendLevel: 5,
             appBarElevation: 0.5,
+            // Opt-in/out on using the additional opinionated
+            // component sub-themes. You ca also use property `subThemesData`
+            // to pass in a `FlexSubThemesData()` data object that contains a
+            // large number of easy to use configuration parameters that you
+            // can use for quick styling of the sub-themes per component.
             useSubThemes: themeController.useSubThemes,
+            // Below we show one example for configuring the component
+            // sub-themes. In example 5 we will use many more of them, but not
+            // even there all of them.
+            subThemesData: FlexSubThemesData(
+              // Value to adjust themed border radius on widgets with
+              // an adjustable corner rounding, this one is very handy.
+              // If null, it defaults to Material3 (You) design
+              // guide values, when available: https://m3.material.io/
+              // If you give it value, "all" Flutter built-in widgets
+              // supporting border radius will use the give radius.
+              defaultRadius: themeController.useDefaultRadius
+                  ? null
+                  : themeController.cornerRadius,
+            ),
+            // Passing in `FlexKeyColor()` to `keyColors` activates Material 3
+            // key color seed based schemes. The primary color in your
+            // active theme is always used as main "primary" key for the
+            // generated color scheme when it is activated. This is the same
+            // as using the Flutter SDK `ColorScheme.fromSeed()` and passing it
+            // the primary color.
+            // Flutter SDK only makes seed ColorSchemes where the entire scheme
+            // is generated from only one color. In FlexColorScheme, you
+            // can also use the secondary and tertiary colors, as input keys to
+            // seeds their colors.
+            // Please note that the key color is used as seed to generate a
+            // Material 3 Tonal Palette, and the colors, or tones from the same
+            // palette, is used as input to colors in the ColorScheme in both
+            // dark and light color scheme. The key color itself is seldom
+            // included as a color in the generated ColorScheme. This can be
+            // problematic if you want to use that specific color in your
+            // custom scheme for branding purposes. The `FlexKeyColor`
+            // configuration data class contains additional properties where you
+            // can instruct it to keep a color defined in FlexColorScheme at
+            // its defined input value. Set e.g. `keepPrimary: true` to ensure
+            // that the actual primary color you used to seed your color scheme,
+            // is also used as the primary color in the otherwise seed
+            // generated ColorScheme from the used color. This is used below.
+            keyColors: FlexKeyColor(
+              useKeyColors: themeController.useKeyColors,
+              useSecondary: themeController.useSecondary,
+              useTertiary: themeController.useTertiary,
+              keepPrimary: themeController.keepPrimary,
+              keepSecondary: themeController.keepSecondary,
+              keepTertiary: themeController.keepTertiary,
+            ),
             // In this example we use the values for visual density and font
             // from a single static source, so we can change it easily there.
             visualDensity: AppData.visualDensity,
@@ -121,14 +171,23 @@ class DemoApp extends StatelessWidget {
           darkTheme: FlexThemeData.dark(
             colors: AppColor.schemes[themeController.schemeIndex].dark,
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
-            // We go with a slightly stronger blend in dark mode. It is worth
-            // noticing, that in light mode, the alpha value used for the blends
-            // is the blend level value, but in dark mode it is 2x this value.
-            // Visually they match fairly well, but it depends on how saturated
-            // your dark mode primary color is.
+            // We go with a slightly stronger blend in dark mode.
             blendLevel: 7,
             appBarElevation: 0.5,
+            keyColors: FlexKeyColor(
+              useKeyColors: themeController.useKeyColors,
+              useSecondary: themeController.useSecondary,
+              useTertiary: themeController.useTertiary,
+              keepPrimary: themeController.keepPrimary,
+              keepSecondary: themeController.keepSecondary,
+              keepTertiary: themeController.keepTertiary,
+            ),
             useSubThemes: themeController.useSubThemes,
+            subThemesData: FlexSubThemesData(
+              defaultRadius: themeController.useDefaultRadius
+                  ? null
+                  : themeController.cornerRadius,
+            ),
             visualDensity: AppData.visualDensity,
             fontFamily: AppData.font,
           ),

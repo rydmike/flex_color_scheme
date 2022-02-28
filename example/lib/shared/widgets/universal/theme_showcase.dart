@@ -49,6 +49,7 @@ class ThemeShowcase extends StatelessWidget {
         const Divider(),
         const BottomNavigationBarShowcase(),
         const NavigationBarShowcase(),
+        const NavigationRailShowcase(),
         const SizedBox(height: 8),
         const Divider(),
         const ListTileShowcase(),
@@ -743,22 +744,26 @@ class _BottomNavigationBarShowcaseState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 16),
-          Text(
-            'BottomNavigationBar (Material 2)',
-            style: Theme.of(context)
-                .textTheme
-                .caption!
-                .copyWith(fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'BottomNavigationBar (Material 2)',
+              style: Theme.of(context)
+                  .textTheme
+                  .caption!
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
-          Text(
-            'Default SDK background color is theme canvasColor via Material, '
-            'and theme.canvasColor is set to theme.colorScheme.background, '
-            'elevation is 8. FlexColorScheme sub-theme default is '
-            'colorScheme.background and elevation 0.',
-            style: Theme.of(context).textTheme.caption,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Default SDK background color is theme canvasColor via Material, '
+              'and theme.canvasColor is set to theme.colorScheme.background, '
+              'elevation is 8. FlexColorScheme sub-theme default is '
+              'colorScheme.background and elevation 0.',
+              style: Theme.of(context).textTheme.caption,
+            ),
           ),
-          const SizedBox(height: 8),
           BottomNavigationBar(
             currentIndex: buttonIndex,
             onTap: (int value) {
@@ -806,21 +811,25 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 16),
-          Text(
-            'NavigationBar (Material 3)',
-            style: Theme.of(context)
-                .textTheme
-                .caption!
-                .copyWith(fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'NavigationBar (Material 3)',
+              style: Theme.of(context)
+                  .textTheme
+                  .caption!
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
-          Text(
-            'Default SDK background color is theme.colorScheme.surface with an '
-            'onSurface overlay color with elevation 3. FlexColorScheme '
-            'sub-theme default is colorScheme.background and elevation 0.',
-            style: Theme.of(context).textTheme.caption,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Default SDK background color is theme.colorScheme.surface with an '
+              'onSurface overlay color with elevation 3. FlexColorScheme '
+              'sub-theme default is colorScheme.background and elevation 0.',
+              style: Theme.of(context).textTheme.caption,
+            ),
           ),
-          const SizedBox(height: 8),
           NavigationBar(
             selectedIndex: buttonIndex,
             onDestinationSelected: (int value) {
@@ -843,6 +852,146 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class NavigationRailShowcase extends StatefulWidget {
+  const NavigationRailShowcase({
+    Key? key,
+    this.child,
+  }) : super(key: key);
+
+  /// A child widget that we can use to place controls to the right
+  /// side of the NavigationRail in the show case widget.
+  final Widget? child;
+
+  @override
+  State<NavigationRailShowcase> createState() => _NavigationRailShowcaseState();
+}
+
+class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
+  int buttonIndex = 0;
+  bool isExtended = true;
+  bool useIndicator = false;
+  bool allLabels = true;
+  NavigationRailLabelType railType = NavigationRailLabelType.all;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: Text(
+              'NavigationRail',
+              style: Theme.of(context)
+                  .textTheme
+                  .caption!
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Default SDK background color is theme.colorScheme.surface. '
+              'FlexColorScheme sub-theme default is colorScheme.background.',
+              style: Theme.of(context).textTheme.caption,
+            ),
+          ),
+          const Divider(height: 1),
+          SizedBox(
+            height: 420,
+            child: Row(
+              children: <Widget>[
+                NavigationRail(
+                  extended: isExtended,
+                  useIndicator: useIndicator ? true : null,
+                  minExtendedWidth: 150,
+                  labelType:
+                      isExtended ? NavigationRailLabelType.none : railType,
+                  selectedIndex: buttonIndex,
+                  onDestinationSelected: (int value) {
+                    setState(() {
+                      buttonIndex = value;
+                    });
+                  },
+                  destinations: const <NavigationRailDestination>[
+                    NavigationRailDestination(
+                      icon: Icon(Icons.chat_bubble),
+                      label: Text('Chat'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.beenhere),
+                      label: Text('Tasks'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.create_new_folder),
+                      label: Text('Folder'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.logout),
+                      label: Text('Logout'),
+                    ),
+                  ],
+                ),
+                const VerticalDivider(width: 1),
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      const ListTile(
+                        title: Text('Showcase controls'),
+                        subtitle: Text('Local controls to rail presentation, '
+                            'not a part of the theming setup.'),
+                      ),
+                      SwitchListTile.adaptive(
+                        title: const Text('Expand and collapse'),
+                        subtitle: const Text('ON to expand  OFF to collapse'),
+                        value: isExtended,
+                        onChanged: (bool value) {
+                          setState(() {
+                            isExtended = value;
+                          });
+                        },
+                      ),
+                      SwitchListTile.adaptive(
+                        title: const Text('Labels when collapsed'),
+                        subtitle: const Text('ON all  OFF only selected'),
+                        value: allLabels,
+                        onChanged: (bool value) {
+                          setState(() {
+                            allLabels = value;
+                            railType = allLabels
+                                ? NavigationRailLabelType.all
+                                : NavigationRailLabelType.selected;
+                          });
+                        },
+                      ),
+                      SwitchListTile.adaptive(
+                        title: const Text('Selection indicator'),
+                        subtitle: const Text('Also ON when '
+                            'useMaterial3 is true, only thing the toggle does '
+                            'in Flutter 2.10. Turning this '
+                            'OFF, inputs "null" to widget to show this.'),
+                        value: useIndicator,
+                        onChanged: (bool value) {
+                          setState(() {
+                            useIndicator = value;
+                          });
+                        },
+                      ),
+                      widget.child ?? const SizedBox.shrink(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(height: 1),
         ],
       ),
     );

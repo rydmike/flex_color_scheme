@@ -8,7 +8,7 @@ import 'home_page.dart';
 // EXAMPLE 1 - Basic Theme Usage
 //
 // This example shows how to use a selected predefined color scheme in
-// FlexColorScheme to define light and dark themes using the scheme,
+// FlexColorScheme, to define light and dark themes using the scheme,
 // and then how to switch between the light and dark mode.
 // -----------------------------------------------------------------------------
 void main() => runApp(const DemoApp());
@@ -43,7 +43,7 @@ class _DemoAppState extends State<DemoApp> {
       // Same definition for the dark theme, but using FlexThemeData.dark().
       darkTheme: FlexThemeData.dark(
         scheme: usedScheme,
-        // Use stronger themed app bar elevation in dark mode.
+        // Use a bit stronger themed app bar elevation in dark mode.
         appBarElevation: 2,
       ),
       // Use the above dark or light theme based on active themeMode.
