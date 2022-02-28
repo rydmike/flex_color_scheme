@@ -148,13 +148,44 @@ class ThemeServiceMem implements ThemeService {
   Future<void> saveSurfaceMode(FlexSurfaceMode value) async {}
 
   /// Loads used surface blend level setting in example 5.
-
   @override
   Future<int> blendLevel() async => ThemeService.defaultBlendLevel;
 
   /// Persists the used surface blend level setting in example 5.
   @override
   Future<void> saveBlendLevel(int value) async {}
+
+  /// Loads used surface blend level dark setting in example 5.
+  @override
+  Future<int> blendLevelDark() async => ThemeService.defaultBlendLevelDark;
+
+  /// Persists the used surface blend level dark setting in example 5.
+  @override
+  Future<void> saveBlendLevelDark(int value) async {}
+
+  /// Loads used onBlend level setting in example 5.
+  @override
+  Future<int> blendOnLevel() async => ThemeService.defaultBlendOnLevel;
+
+  /// Persists the onBlend level setting in example 5.
+  @override
+  Future<void> saveBlendOnLevel(int value) async {}
+
+  /// Loads used onBlend level dark setting in example 5.
+  @override
+  Future<int> blendOnLevelDark() async => ThemeService.defaultBlendOnLevelDark;
+
+  /// Persists the used onBlend level dark setting in example 5.
+  @override
+  Future<void> saveBlendOnLevelDark(int value) async {}
+
+  /// Loads used usedColors setting in example 5.
+  @override
+  Future<int> usedColors() async => ThemeService.defaultUsedColors;
+
+  /// Persists the usedColors setting in example 5.
+  @override
+  Future<void> saveUsedColors(int value) async {}
 
   /// Loads used app bar style for light theme setting in example 5.
   @override
@@ -592,4 +623,147 @@ class ThemeServiceMem implements ThemeService {
   /// Persists keepTertiaryContainer setting in example 5.
   @override
   Future<void> saveKeepTertiaryContainer(bool value) async {}
+
+  //----
+
+  /// Loads used textButtonSchemeColor setting.
+  @override
+  Future<SchemeColor?> textButtonSchemeColor() async =>
+      ThemeService.defaultTextButtonSchemeColor;
+
+  /// Persists used textButtonSchemeColor setting.
+  @override
+  Future<void> saveTextButtonSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used elevatedButtonSchemeColor setting.
+  @override
+  Future<SchemeColor?> elevatedButtonSchemeColor() async =>
+      ThemeService.defaultElevatedButtonSchemeColor;
+
+  /// Persists used elevatedButtonSchemeColor setting.
+  @override
+  Future<void> saveElevatedButtonSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used outlinedButtonSchemeColor setting.
+  @override
+  Future<SchemeColor?> outlinedButtonSchemeColor() async =>
+      ThemeService.defaultOutlinedButtonSchemeColor;
+
+  /// Persists used outlinedButtonSchemeColor setting.
+  @override
+  Future<void> saveOutlinedButtonSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used materialButtonSchemeColor setting.
+  @override
+  Future<SchemeColor?> materialButtonSchemeColor() async =>
+      ThemeService.defaultMaterialButtonSchemeColor;
+
+  /// Persists used materialButtonSchemeColor setting.
+  @override
+  Future<void> saveMaterialButtonSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used toggleButtonsSchemeColor setting.
+  @override
+  Future<SchemeColor?> toggleButtonsSchemeColor() async =>
+      ThemeService.defaultToggleButtonsSchemeColor;
+
+  /// Persists used toggleButtonsSchemeColor setting.
+  @override
+  Future<void> saveToggleButtonsSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used switchSchemeColor setting.
+  @override
+  Future<SchemeColor?> switchSchemeColor() async =>
+      ThemeService.defaultSwitchSchemeColor;
+
+  /// Persists used switchSchemeColor setting.
+  @override
+  Future<void> saveSwitchSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used checkboxSchemeColor setting.
+  @override
+  Future<SchemeColor?> checkboxSchemeColor() async =>
+      ThemeService.defaultCheckboxSchemeColor;
+
+  /// Persists used checkboxSchemeColor setting.
+  @override
+  Future<void> saveCheckboxSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used radioSchemeColor setting.
+  @override
+  Future<SchemeColor?> radioSchemeColor() async =>
+      ThemeService.defaultRadioSchemeColor;
+
+  /// Persists used radioSchemeColor setting.
+  @override
+  Future<void> saveRadioSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used dialogBackgroundSchemeColor setting.
+  @override
+  Future<SchemeColor?> dialogBackgroundSchemeColor() async =>
+      ThemeService.defaultDialogBackgroundSchemeColor;
+
+  /// Persists used dialogBackgroundSchemeColor setting.
+  @override
+  Future<void> saveDialogBackgroundSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used tabBarItemSchemeColor setting.
+  @override
+  Future<SchemeColor?> tabBarItemSchemeColor() async =>
+      ThemeService.defaultTabBarItemSchemeColor;
+
+  /// Persists used tabBarItemSchemeColor setting.
+  @override
+  Future<void> saveTabBarItemSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used appBarBackgroundSchemeColor setting.
+  @override
+  Future<SchemeColor?> appBarBackgroundSchemeColor() async =>
+      ThemeService.defaultAppBarBackgroundSchemeColor;
+
+  /// Persists used appBarBackgroundSchemeColor setting.
+  @override
+  Future<void> saveAppBarBackgroundSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used fabSchemeColor setting.
+  @override
+  Future<SchemeColor?> fabSchemeColor() async =>
+      ThemeService.defaultFabSchemeColor;
+
+  /// Persists used fabSchemeColor setting.
+  @override
+  Future<void> saveFabSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used navBarBackgroundSchemeColor setting.
+  @override
+  Future<SchemeColor?> navBarBackgroundSchemeColor() async =>
+      ThemeService.defaultNavBarBackgroundSchemeColor;
+
+  /// Persists used navBarBackgroundSchemeColor setting.
+  @override
+  Future<void> saveNavBarBackgroundSchemeColor(SchemeColor? value) async {}
 }

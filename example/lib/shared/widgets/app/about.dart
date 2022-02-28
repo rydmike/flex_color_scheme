@@ -25,8 +25,8 @@ void showAppAboutDialog(BuildContext context) {
   final ThemeData themeData = Theme.of(context);
   final TextStyle aboutTextStyle = themeData.textTheme.bodyText1!;
   final TextStyle footerStyle = themeData.textTheme.caption!;
-  final TextStyle linkStyle =
-      themeData.textTheme.bodyText1!.copyWith(color: themeData.primaryColor);
+  final TextStyle linkStyle = themeData.textTheme.bodyText1!
+      .copyWith(color: themeData.colorScheme.primary);
 
   showAboutDialog(
     context: context,

@@ -164,6 +164,9 @@ enum SchemeColor {
 /// * [OutlinedButton]
 /// * Older buttons using [ButtonThemeData]
 /// * [ToggleButtons]
+/// * [Switch]
+/// * [Checkbox]
+/// * [Radio]
 /// * [InputDecoration]
 /// * [FloatingActionButton]
 /// * [Chip]
@@ -705,7 +708,7 @@ class FlexSubThemes {
   /// this helper uses will however remain available after that, because widgets
   /// [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
   /// obsolete in SDK docs though) still use this theme. It is thus kept around
-  /// in FlexColorScheme package as lon as it might still have some use.
+  /// in FlexColorScheme package as long as it might have some use.
   static ButtonThemeData buttonTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -767,6 +770,169 @@ class FlexSubThemes {
         ),
       ),
       textTheme: ButtonTextTheme.primary,
+    );
+  }
+
+  /// An opinionated [SwitchThemeData] theme.
+  ///
+  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The splashRadius is not used by FlexColorScheme sub-themes.
+  static SwitchThemeData switchTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the switch.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.secondary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The splash radius of the circular Material ink response.
+    ///
+    /// Defaults to kRadialReactionRadius = 20.
+    final double? splashRadius,
+  }) {
+    // Get selected color, defaults to secondary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final bool isLight = colorScheme.brightness == Brightness.light;
+
+    return SwitchThemeData(
+      splashRadius: splashRadius,
+      thumbColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return baseColor;
+          }
+          return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
+        },
+      ),
+      trackColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.black12 : Colors.white10;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return baseColor.withAlpha(0x70);
+          }
+          // This is SDK default.
+          // isLight ? const Color(0x52000000) : Colors.white30;
+          // But here we use
+          return isLight
+              ? baseColor.withAlpha(0x30)
+              : baseColor.withAlpha(0x25);
+        },
+      ),
+    );
+  }
+
+  /// An opinionated [CheckboxThemeData] theme.
+  ///
+  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The splashRadius is not used by FlexColorScheme sub-themes.
+  static CheckboxThemeData checkboxTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the checkbox.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.secondary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The splash radius of the circular Material ink response.
+    ///
+    /// Defaults to kRadialReactionRadius = 20.
+    final double? splashRadius,
+  }) {
+    // Get selected color, defaults to secondary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+    final bool isLight = colorScheme.brightness == Brightness.light;
+
+    return CheckboxThemeData(
+      splashRadius: splashRadius,
+      checkColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.grey.shade200 : Colors.grey.shade600;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return onBaseColor;
+          }
+          return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
+        },
+      ),
+      fillColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return baseColor;
+          }
+          return baseColor.withAlpha(0xDD);
+        },
+      ),
+    );
+  }
+
+  /// An opinionated [RadioThemeData] theme.
+  ///
+  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The splashRadius is not used by FlexColorScheme sub-themes.
+  static RadioThemeData radioTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the switch.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.secondary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The splash radius of the circular Material ink response.
+    ///
+    /// Defaults to kRadialReactionRadius = 20.
+    final double? splashRadius,
+  }) {
+    // Get selected color, defaults to secondary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final bool isLight = colorScheme.brightness == Brightness.light;
+
+    return RadioThemeData(
+      splashRadius: splashRadius,
+      fillColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return baseColor;
+          }
+          return baseColor.withAlpha(0xDD);
+        },
+      ),
     );
   }
 
@@ -838,7 +1004,7 @@ class FlexSubThemes {
       selectedColor: onBaseColor.withAlpha(kSelectedAlpha),
       color: baseColor,
       fillColor: baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
-      borderColor: colorScheme.primary.withAlpha(kEnabledBorderAlpha),
+      borderColor: baseColor.withAlpha(kEnabledBorderAlpha),
       selectedBorderColor:
           baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
       hoverColor: baseColor
@@ -975,6 +1141,26 @@ class FlexSubThemes {
     switch (borderType) {
       case FlexInputBorderType.outline:
         return InputDecorationTheme(
+          floatingLabelStyle:
+              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.error) &&
+                states.contains(MaterialState.focused)) {
+              return TextStyle(color: colorScheme.error);
+            }
+            if (states.contains(MaterialState.error)) {
+              return TextStyle(
+                color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              );
+            }
+            if (states.contains(MaterialState.disabled)) {
+              return TextStyle(
+                color: baseColor
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha),
+              );
+            }
+            return TextStyle(color: baseColor);
+          }),
           filled: filled,
           fillColor: usedFillColor,
           hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
@@ -1033,6 +1219,26 @@ class FlexSubThemes {
         );
       case FlexInputBorderType.underline:
         return InputDecorationTheme(
+          floatingLabelStyle:
+              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.error) &&
+                states.contains(MaterialState.focused)) {
+              return TextStyle(color: colorScheme.error);
+            }
+            if (states.contains(MaterialState.error)) {
+              return TextStyle(
+                color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              );
+            }
+            if (states.contains(MaterialState.disabled)) {
+              return TextStyle(
+                color: baseColor
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha),
+              );
+            }
+            return TextStyle(color: baseColor);
+          }),
           filled: filled,
           fillColor: usedFillColor,
           hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
@@ -1149,18 +1355,19 @@ class FlexSubThemes {
     /// shape behavior.
     final bool useShape = true,
   }) {
-    final Color? bgColor = colorScheme == null
+    final Color? background = colorScheme == null
         ? null
         : backgroundSchemeColor == null
             ? null
             : schemeColor(backgroundSchemeColor, colorScheme);
-    final Color? fgColor =
-        bgColor == null || colorScheme == null || backgroundSchemeColor == null
-            ? null
-            : schemeColorPair(backgroundSchemeColor, colorScheme);
+    final Color? foreground = background == null ||
+            colorScheme == null ||
+            backgroundSchemeColor == null
+        ? null
+        : schemeColorPair(backgroundSchemeColor, colorScheme);
     return FloatingActionButtonThemeData(
-      foregroundColor: fgColor,
-      backgroundColor: bgColor,
+      foregroundColor: foreground,
+      backgroundColor: background,
       shape: useShape
           ? RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -1181,6 +1388,10 @@ class FlexSubThemes {
   /// features for old M2 chips, to some extent. Tricky to get this one
   /// to play nicely, but this setup is pretty ok and fits well with the
   /// color blended themes.
+  ///
+  /// It is possible that there will be new Chips entirely for
+  /// Material 3. This theme brings the M2 Chips look closer to M3 design, but
+  /// cannot reach all the way.
   static ChipThemeData chipTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -1374,15 +1585,14 @@ class FlexSubThemes {
     /// Dialog elevation defaults to 10 [kDialogElevation].
     final double? elevation = kDialogElevation,
   }) {
-    final Color? bgColor = colorScheme == null
-        ? backgroundColor // might be null, then SDK theme defaults.
-        : backgroundSchemeColor == null
-            ? null
+    final Color? background =
+        (colorScheme == null || backgroundSchemeColor == null)
+            ? backgroundColor // might be null, then SDK theme defaults.
             : schemeColor(backgroundSchemeColor, colorScheme);
 
     return DialogTheme(
       elevation: elevation,
-      backgroundColor: bgColor,
+      backgroundColor: background,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kDialogRadius),
@@ -1448,14 +1658,13 @@ class FlexSubThemes {
     /// in your overall used app InputDecorationTheme.
     final InputDecorationTheme? inputDecorationTheme,
   }) {
-    final Color? bgColor = colorScheme == null
-        ? backgroundColor // might be null, then SDK theme defaults.
-        : backgroundSchemeColor == null
-            ? null
+    final Color? background =
+        (colorScheme == null || backgroundSchemeColor == null)
+            ? backgroundColor // might be null, then SDK theme defaults.
             : schemeColor(backgroundSchemeColor, colorScheme);
 
     return TimePickerThemeData(
-      backgroundColor: bgColor,
+      backgroundColor: background,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kDialogRadius),
@@ -1512,12 +1721,15 @@ class FlexSubThemes {
     /// SnackBar elevation defaults to [kSnackBarElevation] 4.
     final double? elevation = kSnackBarElevation,
 
-    // TODO(rydmike): SnackBar has a theme defined background in M3 schemes.
+    // TODO(rydmike): SnackBar to use ColorScheme.inverseSurface in M3 schemes.
+    //   For now keeping FlexColorScheme own dark primary as snackbar color.
+
     /// Default value for [backgroundColor].
     ///
-    /// If null, [SnackBar] defaults to dark grey: `Color(0xFF323232)`.
+    /// If null, [SnackBar] defaults to dark grey: `Color(0xFF323232)`, via
+    /// M2 Flutter SDK defaults.
     ///
-    /// FlexColorScheme set a dark primary tinted color instead when it uses
+    /// FlexColorScheme sets a dark primary tinted color instead when it uses
     /// this helper.
     final Color? backgroundColor,
   }) =>

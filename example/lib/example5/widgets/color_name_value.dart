@@ -13,17 +13,23 @@ class ColorNameValue extends StatefulWidget {
     required this.color,
     required this.textColor,
     required this.label,
-    this.fontSize = 12.0,
-    required this.inputColor,
-    required this.inputTextColor,
+    this.fontSize = 12,
+    this.inputColor,
+    this.inputTextColor,
+    this.showMaterialName = false,
+    this.isLocked,
+    this.onLocked,
   }) : super(key: key);
 
   final Color color;
   final Color textColor;
   final String label;
   final double fontSize;
-  final Color inputColor;
-  final Color inputTextColor;
+  final Color? inputColor;
+  final Color? inputTextColor;
+  final bool showMaterialName;
+  final bool? isLocked;
+  final ValueChanged<bool?>? onLocked;
 
   @override
   _ColorNameValueState createState() => _ColorNameValueState();
@@ -36,7 +42,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
   // This widget is stateful because the ColorTools methods may be a bit
   // expensive so we try to avoid calling them when not needed, by keeping
   // their values in state and only updating them when the Material they
-  // describe actually changes color. Which happens quite a bit still during
+  // describe actually change color. Which happens quite a bit still during
   // theme changes when the theme change goes through its color lerp to new
   // theme colors.
   @override
@@ -58,7 +64,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
   // Set current selected color value as a String on the Clipboard in
   // currently configured format, notify with snackbar that it was copied.
   Future<void> _setClipboard() async {
-    final ClipboardData data = ClipboardData(text: widget.color.hexCode);
+    final ClipboardData data =
+        ClipboardData(text: '0x${widget.color.hexAlpha}');
     await Clipboard.setData(data);
     final String space = materialName == '' ? '' : ' ';
     if (!mounted) return;
@@ -78,8 +85,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
     final bool isLight = theme.brightness == Brightness.light;
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
           Text(widget.label,
               textAlign: TextAlign.start,
@@ -87,134 +94,157 @@ class _ColorNameValueState extends State<ColorNameValue> {
               style: TextStyle(
                   color: widget.textColor,
                   fontSize: widget.fontSize,
-                  fontWeight: FontWeight.w500)),
-          const Spacer(),
-          // Nearest name match from a list of 1566 color names
-          Row(
+                  fontWeight: FontWeight.w600)),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Expanded(
-                child: Text(
-                  nameThatColor,
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                      color: widget.textColor,
-                      fontSize: widget.fontSize - 1,
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-            ],
-          ),
-          // Name match and shade from Material colors.
-          if (materialName != '')
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    materialName,
-                    overflow: TextOverflow.clip,
-                    textAlign: TextAlign.end,
-                    maxLines: 1,
-                    style: TextStyle(
-                        color: widget.textColor,
-                        fontSize: widget.fontSize - 1,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ],
-            ),
-          // Hex code of the color, with alpha
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: InkWell(
-                  hoverColor: isLight
-                      ? const Color(0x40BCBCBC)
-                      : const Color(0x30FFFFFF),
-                  splashColor: isLight
-                      ? const Color(0x40BCBCBC)
-                      : const Color(0x30FFFFFF),
-                  focusColor: isLight
-                      ? const Color(0x40BCBCBC)
-                      : const Color(0x30FFFFFF),
-                  highlightColor: isLight
-                      ? const Color(0x40BCBCBC)
-                      : const Color(0x30FFFFFF),
-                  child: Text(
-                    '#${widget.color.hexCode}',
-                    textAlign: TextAlign.end,
-                    overflow: TextOverflow.clip,
-                    maxLines: 1,
-                    style: TextStyle(
-                        color: widget.textColor,
-                        fontSize: widget.fontSize,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  onTap: () async {
-                    await _setClipboard();
-                  },
-                ),
-              ),
-            ],
-          ),
-          Card(
-            margin: const EdgeInsets.only(top: 8.0),
-            color: widget.inputColor,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              side: BorderSide(color: theme.dividerColor, width: 1),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              // Nearest name match from a list of 1566 color names
+              Row(
                 children: <Widget>[
-                  Text('Input color',
-                      textAlign: TextAlign.start,
+                  Expanded(
+                    child: Text(
+                      nameThatColor,
                       overflow: TextOverflow.clip,
+                      textAlign: TextAlign.end,
                       style: TextStyle(
-                          color: widget.inputTextColor,
+                          color: widget.textColor,
                           fontSize: widget.fontSize - 1,
-                          fontWeight: FontWeight.w500)),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: InkWell(
-                          hoverColor: isLight
-                              ? const Color(0x40BCBCBC)
-                              : const Color(0x30FFFFFF),
-                          splashColor: isLight
-                              ? const Color(0x40BCBCBC)
-                              : const Color(0x30FFFFFF),
-                          focusColor: isLight
-                              ? const Color(0x40BCBCBC)
-                              : const Color(0x30FFFFFF),
-                          highlightColor: isLight
-                              ? const Color(0x40BCBCBC)
-                              : const Color(0x30FFFFFF),
-                          child: Text(
-                            '#${widget.inputColor.hexCode}',
-                            textAlign: TextAlign.end,
-                            overflow: TextOverflow.clip,
-                            maxLines: 1,
-                            style: TextStyle(
-                                color: widget.inputTextColor,
-                                fontSize: widget.fontSize - 1,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          onTap: () async {
-                            await _setClipboard();
-                          },
-                        ),
-                      ),
-                    ],
+                          fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ],
               ),
+              // Name match and shade from Material colors.
+              if (materialName != '' && widget.showMaterialName)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        materialName,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.end,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: widget.textColor,
+                            fontSize: widget.fontSize - 1,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ],
+                ),
+              // Hex code of the color, with alpha
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: InkWell(
+                      hoverColor: isLight
+                          ? const Color(0x40BCBCBC)
+                          : const Color(0x30FFFFFF),
+                      splashColor: isLight
+                          ? const Color(0x40BCBCBC)
+                          : const Color(0x30FFFFFF),
+                      focusColor: isLight
+                          ? const Color(0x40BCBCBC)
+                          : const Color(0x30FFFFFF),
+                      highlightColor: isLight
+                          ? const Color(0x40BCBCBC)
+                          : const Color(0x30FFFFFF),
+                      child: Text(
+                        '#${widget.color.hexCode}',
+                        textAlign: TextAlign.end,
+                        overflow: TextOverflow.clip,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: widget.textColor,
+                            fontSize: widget.fontSize,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      onTap: () async {
+                        await _setClipboard();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              // Show input color only if both are defined
+              if (widget.inputColor != null && widget.inputTextColor != null)
+                Card(
+                  margin: const EdgeInsets.only(top: 8.0),
+                  color: widget.inputColor,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    side: BorderSide(color: theme.dividerColor, width: 1),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('Input color',
+                            textAlign: TextAlign.start,
+                            overflow: TextOverflow.clip,
+                            style: TextStyle(
+                                color: widget.inputTextColor,
+                                fontSize: widget.fontSize - 1,
+                                fontWeight: FontWeight.w500)),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: InkWell(
+                                hoverColor: isLight
+                                    ? const Color(0x40BCBCBC)
+                                    : const Color(0x30FFFFFF),
+                                splashColor: isLight
+                                    ? const Color(0x40BCBCBC)
+                                    : const Color(0x30FFFFFF),
+                                focusColor: isLight
+                                    ? const Color(0x40BCBCBC)
+                                    : const Color(0x30FFFFFF),
+                                highlightColor: isLight
+                                    ? const Color(0x40BCBCBC)
+                                    : const Color(0x30FFFFFF),
+                                child: Text(
+                                  '#${widget.inputColor!.hexCode}',
+                                  textAlign: TextAlign.end,
+                                  overflow: TextOverflow.clip,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      color: widget.inputTextColor,
+                                      fontSize: widget.fontSize - 1,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                onTap: () async {
+                                  await _setClipboard();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+            ],
+          ),
+          if (widget.isLocked != null && widget.onLocked != null)
+            Positioned.directional(
+              textDirection: Directionality.of(context),
+              top: 14,
+              start: 0,
+              child: Switch(
+                value: widget.isLocked!,
+                activeColor: Color.alphaBlend(
+                    widget.color.withAlpha(0x25), widget.textColor),
+                activeTrackColor: Color.alphaBlend(
+                    widget.color.withAlpha(0x60), widget.textColor),
+                inactiveThumbColor: Color.alphaBlend(
+                    widget.color.withAlpha(0xDD), widget.textColor),
+                onChanged: widget.onLocked?.call,
+                // materialTapTargetSize: MaterialTapTargetSize.padded,
+              ),
             ),
-          )
         ],
       ),
     );

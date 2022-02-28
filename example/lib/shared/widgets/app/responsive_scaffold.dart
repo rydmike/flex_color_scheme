@@ -559,6 +559,8 @@ class _AppMenuState extends State<_AppMenu> {
     Icons.expand_less_outlined,
     Icons.unfold_more_outlined,
     Icons.unfold_less_outlined,
+    Icons.integration_instructions_outlined,
+    Icons.palette_outlined,
     Icons.replay_outlined,
   ];
 
@@ -569,6 +571,8 @@ class _AppMenuState extends State<_AppMenu> {
     'Close settings',
     'Expand themed',
     'Close themed',
+    'Copy theme code',
+    'Copy ColorScheme',
     'Reset settings',
   ];
 

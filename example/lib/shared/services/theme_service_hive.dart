@@ -399,7 +399,7 @@ class ThemeServiceHive implements ThemeService {
   @override
   Future<void> saveChipSchemeColor(SchemeColor? value) async {
     try {
-      await _hiveBox.put(ThemeService.keyNavBarHighlight, value);
+      await _hiveBox.put(ThemeService.keyChipSchemeColor, value);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -446,6 +446,98 @@ class ThemeServiceHive implements ThemeService {
   Future<void> saveBlendLevel(int value) async {
     try {
       await _hiveBox.put(ThemeService.keyBlendLevel, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used surface blend level dark setting in example 5.
+  @override
+  Future<int> blendLevelDark() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBlendLevelDark,
+          defaultValue: ThemeService.defaultBlendLevelDark) as int;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBlendLevelDark;
+    }
+  }
+
+  /// Persists the used surface blend level dark setting in example 5.
+  @override
+  Future<void> saveBlendLevelDark(int value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBlendLevelDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used onBlend level setting in example 5.
+  @override
+  Future<int> blendOnLevel() async {
+    try {
+      return _hiveBox.get(ThemeService.keyOnBlendLevel,
+          defaultValue: ThemeService.defaultBlendOnLevel) as int;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBlendOnLevel;
+    }
+  }
+
+  /// Persists the used onBlend level setting in example 5.
+  @override
+  Future<void> saveBlendOnLevel(int value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyOnBlendLevel, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used onBlend level dark setting in example 5.
+  @override
+  Future<int> blendOnLevelDark() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBlendOnLevelDark,
+          defaultValue: ThemeService.defaultBlendOnLevelDark) as int;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBlendOnLevelDark;
+    }
+  }
+
+  /// Persists the used surface blend level dark setting in example 5.
+  @override
+  Future<void> saveBlendOnLevelDark(int value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBlendOnLevelDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads usedColors setting in example 5.
+  @override
+  Future<int> usedColors() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUsedColors,
+          defaultValue: ThemeService.defaultUsedColors) as int;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultUsedColors;
+    }
+  }
+
+  /// Persists the usedColors setting in example 5.
+  @override
+  Future<void> saveUsedColors(int value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUsedColors, value);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -1621,6 +1713,452 @@ class ThemeServiceHive implements ThemeService {
   Future<void> saveKeepTertiaryContainer(bool value) async {
     try {
       await _hiveBox.put(ThemeService.keyKeepTertiaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used textButtonSchemeColor setting.
+  @override
+  Future<SchemeColor?> textButtonSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyTextButtonSchemeColor,
+          defaultValue: ThemeService.defaultTextButtonSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyTextButtonSchemeColor,
+                defaultValue: ThemeService.defaultTextButtonSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTextButtonSchemeColor;
+    }
+  }
+
+  /// Persists used textButtonSchemeColor setting.
+  @override
+  Future<void> saveTextButtonSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTextButtonSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used elevatedButtonSchemeColor setting.
+  @override
+  Future<SchemeColor?> elevatedButtonSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyElevatedButtonSchemeColor,
+          defaultValue: ThemeService.defaultElevatedButtonSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyElevatedButtonSchemeColor,
+                defaultValue: ThemeService.defaultElevatedButtonSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultElevatedButtonSchemeColor;
+    }
+  }
+
+  /// Persists used elevatedButtonSchemeColor setting.
+  @override
+  Future<void> saveElevatedButtonSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyElevatedButtonSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used outlinedButtonSchemeColor setting.
+  @override
+  Future<SchemeColor?> outlinedButtonSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyOutlinedButtonSchemeColor,
+          defaultValue: ThemeService.defaultOutlinedButtonSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyOutlinedButtonSchemeColor,
+                defaultValue: ThemeService.defaultOutlinedButtonSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultOutlinedButtonSchemeColor;
+    }
+  }
+
+  /// Persists used outlinedButtonSchemeColor setting.
+  @override
+  Future<void> saveOutlinedButtonSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyOutlinedButtonSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used materialButtonSchemeColor setting.
+  @override
+  Future<SchemeColor?> materialButtonSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyMaterialButtonSchemeColor,
+          defaultValue: ThemeService.defaultMaterialButtonSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyMaterialButtonSchemeColor,
+                defaultValue: ThemeService.defaultMaterialButtonSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultMaterialButtonSchemeColor;
+    }
+  }
+
+  /// Persists used materialButtonSchemeColor setting.
+  @override
+  Future<void> saveMaterialButtonSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyMaterialButtonSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used toggleButtonsSchemeColor setting.
+  @override
+  Future<SchemeColor?> toggleButtonsSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyToggleButtonsSchemeColor,
+          defaultValue: ThemeService.defaultToggleButtonsSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyToggleButtonsSchemeColor,
+                defaultValue: ThemeService.defaultToggleButtonsSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultToggleButtonsSchemeColor;
+    }
+  }
+
+  /// Persists used toggleButtonsSchemeColor setting.
+  @override
+  Future<void> saveToggleButtonsSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyToggleButtonsSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used switchSchemeColor setting.
+  @override
+  Future<SchemeColor?> switchSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keySwitchSchemeColor,
+          defaultValue: ThemeService.defaultSwitchSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keySwitchSchemeColor,
+            defaultValue: ThemeService.defaultSwitchSchemeColor) as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSwitchSchemeColor;
+    }
+  }
+
+  /// Persists used switchSchemeColor setting.
+  @override
+  Future<void> saveSwitchSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySwitchSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used checkboxSchemeColor setting.
+  @override
+  Future<SchemeColor?> checkboxSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyCheckboxSchemeColor,
+          defaultValue: ThemeService.defaultCheckboxSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyCheckboxSchemeColor,
+                defaultValue: ThemeService.defaultCheckboxSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultCheckboxSchemeColor;
+    }
+  }
+
+  /// Persists used checkboxSchemeColor setting.
+  @override
+  Future<void> saveCheckboxSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyCheckboxSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used radioSchemeColor setting.
+  @override
+  Future<SchemeColor?> radioSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyRadioSchemeColor,
+          defaultValue: ThemeService.defaultRadioSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyRadioSchemeColor,
+            defaultValue: ThemeService.defaultRadioSchemeColor) as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultRadioSchemeColor;
+    }
+  }
+
+  /// Persists used radioSchemeColor setting.
+  @override
+  Future<void> saveRadioSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyRadioSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used dialogBackgroundSchemeColor setting.
+  @override
+  Future<SchemeColor?> dialogBackgroundSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyDialogBackgroundSchemeColor,
+          defaultValue: ThemeService.defaultDialogBackgroundSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyDialogBackgroundSchemeColor,
+                defaultValue: ThemeService.defaultDialogBackgroundSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultDialogBackgroundSchemeColor;
+    }
+  }
+
+  /// Persists used dialogBackgroundSchemeColor setting.
+  @override
+  Future<void> saveDialogBackgroundSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyDialogBackgroundSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used tabBarItemSchemeColor setting.
+  @override
+  Future<SchemeColor?> tabBarItemSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyTabBarItemSchemeColor,
+          defaultValue: ThemeService.defaultTabBarItemSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyTabBarItemSchemeColor,
+                defaultValue: ThemeService.defaultTabBarItemSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTabBarItemSchemeColor;
+    }
+  }
+
+  /// Persists used tabBarItemSchemeColor setting.
+  @override
+  Future<void> saveTabBarItemSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTabBarItemSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used appBarBackgroundSchemeColor setting.
+  @override
+  Future<SchemeColor?> appBarBackgroundSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyAppBarBackgroundSchemeColor,
+          defaultValue: ThemeService.defaultAppBarBackgroundSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyAppBarBackgroundSchemeColor,
+                defaultValue: ThemeService.defaultAppBarBackgroundSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultAppBarBackgroundSchemeColor;
+    }
+  }
+
+  /// Persists used appBarBackgroundSchemeColor setting.
+  @override
+  Future<void> saveAppBarBackgroundSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyAppBarBackgroundSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used fabSchemeColor setting.
+  @override
+  Future<SchemeColor?> fabSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyFabSchemeColor,
+          defaultValue: ThemeService.defaultFabSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyFabSchemeColor,
+            defaultValue: ThemeService.defaultFabSchemeColor) as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultFabSchemeColor;
+    }
+  }
+
+  /// Persists used fabSchemeColor setting.
+  @override
+  Future<void> saveFabSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyFabSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used navBarBackgroundSchemeColor setting.
+  @override
+  Future<SchemeColor?> navBarBackgroundSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyNavBarBackgroundSchemeColor,
+          defaultValue: ThemeService.defaultNavBarBackgroundSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyNavBarBackgroundSchemeColor,
+                defaultValue: ThemeService.defaultNavBarBackgroundSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultNavBarBackgroundSchemeColor;
+    }
+  }
+
+  /// Persists used navBarBackgroundSchemeColor setting.
+  @override
+  Future<void> saveNavBarBackgroundSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyNavBarBackgroundSchemeColor, value);
     } catch (e) {
       debugPrint(e.toString());
     }

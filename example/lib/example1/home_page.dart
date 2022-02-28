@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../shared/const/app_data.dart';
 import '../shared/widgets/app/about.dart';
 import '../shared/widgets/universal/page_body.dart';
-import '../shared/widgets/universal/show_theme_colors.dart';
+import '../shared/widgets/universal/show_color_scheme_colors.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 
 // -----------------------------------------------------------------------------
@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
               subtitle: Text(flexSchemeData.description),
             ),
             // Show all key active theme colors.
-            const ShowThemeColors(),
+            const ShowColorSchemeColors(),
             const SizedBox(height: 8),
             const Divider(),
             Text('Theme Showcase', style: headline4),

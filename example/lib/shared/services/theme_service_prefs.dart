@@ -395,7 +395,6 @@ class ThemeServicePrefs implements ThemeService {
   }
 
   /// Loads used surface blend level setting in example 5.
-
   @override
   Future<int> blendLevel() async {
     try {
@@ -413,6 +412,98 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveBlendLevel(int value) async {
     try {
       await _prefs.setInt(ThemeService.keyBlendLevel, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used surface blend level dark setting in example 5.
+  @override
+  Future<int> blendLevelDark() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyBlendLevelDark) ??
+          ThemeService.defaultBlendLevelDark;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBlendLevelDark;
+    }
+  }
+
+  /// Persists the used surface blend level dark setting in example 5.
+  @override
+  Future<void> saveBlendLevelDark(int value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyBlendLevelDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used onBlend level setting in example 5.
+  @override
+  Future<int> blendOnLevel() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyOnBlendLevel) ??
+          ThemeService.defaultBlendOnLevel;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBlendOnLevel;
+    }
+  }
+
+  /// Persists the used onBlend level setting in example 5.
+  @override
+  Future<void> saveBlendOnLevel(int value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyOnBlendLevel, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used onBlend level dark setting in example 5.
+  @override
+  Future<int> blendOnLevelDark() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyBlendOnLevelDark) ??
+          ThemeService.defaultBlendOnLevelDark;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBlendOnLevelDark;
+    }
+  }
+
+  /// Persists the usedColors setting in example 5.
+  @override
+  Future<void> saveBlendOnLevelDark(int value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyBlendOnLevelDark, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads usedColors setting in example 5.
+  @override
+  Future<int> usedColors() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyUsedColors) ??
+          ThemeService.defaultUsedColors;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUsedColors;
+    }
+  }
+
+  /// Persists the used surface blend level setting in example 5.
+  @override
+  Future<void> saveUsedColors(int value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyUsedColors, value);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -1601,6 +1692,466 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveKeepTertiaryContainer(bool value) async {
     try {
       await _prefs.setBool(ThemeService.keyKeepTertiaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used textButtonSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> textButtonSchemeColor() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyTextButtonSchemeColor) ??
+          ThemeService.defaultTextButtonSchemeColor?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTextButtonSchemeColor;
+    }
+  }
+
+  /// Persists used textButtonSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveTextButtonSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyTextButtonSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used elevatedButtonSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> elevatedButtonSchemeColor() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyElevatedButtonSchemeColor) ??
+              ThemeService.defaultElevatedButtonSchemeColor?.index ??
+              -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultElevatedButtonSchemeColor;
+    }
+  }
+
+  /// Persists used elevatedButtonSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveElevatedButtonSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyElevatedButtonSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used outlinedButtonSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> outlinedButtonSchemeColor() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyOutlinedButtonSchemeColor) ??
+              ThemeService.defaultOutlinedButtonSchemeColor?.index ??
+              -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultOutlinedButtonSchemeColor;
+    }
+  }
+
+  /// Persists used outlinedButtonSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveOutlinedButtonSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyOutlinedButtonSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used materialButtonSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> materialButtonSchemeColor() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyMaterialButtonSchemeColor) ??
+              ThemeService.defaultMaterialButtonSchemeColor?.index ??
+              -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultMaterialButtonSchemeColor;
+    }
+  }
+
+  /// Persists used materialButtonSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveMaterialButtonSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyMaterialButtonSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used toggleButtonsSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> toggleButtonsSchemeColor() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyToggleButtonsSchemeColor) ??
+              ThemeService.defaultToggleButtonsSchemeColor?.index ??
+              -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultToggleButtonsSchemeColor;
+    }
+  }
+
+  /// Persists used toggleButtonsSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveToggleButtonsSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyToggleButtonsSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used switchSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> switchSchemeColor() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keySwitchSchemeColor) ??
+          ThemeService.defaultSwitchSchemeColor?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultSwitchSchemeColor;
+    }
+  }
+
+  /// Persists used switchSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveSwitchSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keySwitchSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used checkboxSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> checkboxSchemeColor() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyCheckboxSchemeColor) ??
+          ThemeService.defaultCheckboxSchemeColor?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultCheckboxSchemeColor;
+    }
+  }
+
+  /// Persists used checkboxSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveCheckboxSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyCheckboxSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used radioSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> radioSchemeColor() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyRadioSchemeColor) ??
+          ThemeService.defaultRadioSchemeColor?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultRadioSchemeColor;
+    }
+  }
+
+  /// Persists used radioSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveRadioSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyRadioSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used dialogBackgroundSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> dialogBackgroundSchemeColor() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyDialogBackgroundSchemeColor) ??
+              ThemeService.defaultDialogBackgroundSchemeColor?.index ??
+              -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultDialogBackgroundSchemeColor;
+    }
+  }
+
+  /// Persists used dialogBackgroundSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveDialogBackgroundSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyDialogBackgroundSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used tabBarItemSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> tabBarItemSchemeColor() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyTabBarItemSchemeColor) ??
+          ThemeService.defaultTabBarItemSchemeColor?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTabBarItemSchemeColor;
+    }
+  }
+
+  /// Persists used tabBarItemSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveTabBarItemSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyTabBarItemSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used appBarBackgroundSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> appBarBackgroundSchemeColor() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyAppBarBackgroundSchemeColor) ??
+              ThemeService.defaultAppBarBackgroundSchemeColor?.index ??
+              -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultAppBarBackgroundSchemeColor;
+    }
+  }
+
+  /// Persists used appBarBackgroundSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveAppBarBackgroundSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyAppBarBackgroundSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used fabSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> fabSchemeColor() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyFabSchemeColor) ??
+          ThemeService.defaultFabSchemeColor?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultFabSchemeColor;
+    }
+  }
+
+  /// Persists used fabSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveFabSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyFabSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used navBarBackgroundSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> navBarBackgroundSchemeColor() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyNavBarBackgroundSchemeColor) ??
+              ThemeService.defaultNavBarBackgroundSchemeColor?.index ??
+              -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultNavBarBackgroundSchemeColor;
+    }
+  }
+
+  /// Persists used navBarBackgroundSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveNavBarBackgroundSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyNavBarBackgroundSchemeColor, value?.index ?? -1);
     } catch (e) {
       debugPrint(e.toString());
     }

@@ -7,7 +7,7 @@ import '../shared/const/app_data.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
 import '../shared/widgets/universal/page_body.dart';
-import '../shared/widgets/universal/show_theme_colors.dart';
+import '../shared/widgets/universal/show_color_scheme_colors.dart';
 import '../shared/widgets/universal/stateful_header_card.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
@@ -173,7 +173,7 @@ class _MainPanelState extends State<_MainPanel> {
             ),
             const SizedBox(height: 8),
             // Active theme color indicators.
-            const ShowThemeColors(),
+            const ShowColorSchemeColors(),
           ],
         ),
       ),
@@ -193,11 +193,11 @@ class _MaterialButtonsShowcase extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const <Widget>[
-            ButtonShowcase(),
+            ElevatedButtonShowcase(),
             SizedBox(height: 8),
-            ButtonShowcase(enabled: false),
+            OutlinedButtonShowcase(),
             SizedBox(height: 8),
-            ButtonIconShowcase(),
+            TextButtonShowcase(),
 
             /// Showing the legacy buttons is removed from the sample.
             ///
@@ -211,7 +211,7 @@ class _MaterialButtonsShowcase extends StatelessWidget {
             /// available in the SDK, the comment code to show will be kept
             /// around in the samples, should anybody want to uncomment it to
             /// see what their style with sub themes applied looks like.
-
+            //
             // Padding(
             //   padding: const EdgeInsets.all(8),
             //   child: Text('Legacy buttons, deprecated',
@@ -241,9 +241,16 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const <Widget>[
-            TogglePopupDropdownButtonsShowcase(),
-            FabCircleAvatarAndTooltipShowcase(),
+            ToggleButtonsShowcase(),
+            SizedBox(height: 8),
+            FabShowcase(),
+            SwitchShowcase(),
             CheckboxShowcase(),
+            RadioShowcase(),
+            PopupDropdownButtonsShowcase(),
+            SizedBox(height: 8),
+            CircleAvatarAndTooltipShowcase(),
+            SizedBox(height: 8),
             ChipShowcase(),
           ],
         ),

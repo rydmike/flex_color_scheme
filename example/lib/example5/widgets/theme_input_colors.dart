@@ -6,13 +6,13 @@ import '../../shared/controllers/theme_controller.dart';
 import 'color_name_value.dart';
 import 'color_picker_inkwell.dart';
 
-// Display the 4 main colors in currently selected color scheme, including
+// Display the colors in currently selected input color scheme, including
 // their name and color code.
 //
 // Allow user to edit the colors, if we are we are viewing the last color
 // scheme, which is the custom color scheme.
-class ThemeColors extends StatelessWidget {
-  const ThemeColors({
+class ThemeInputColors extends StatelessWidget {
+  const ThemeInputColors({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -54,19 +54,10 @@ class ThemeColors extends StatelessWidget {
     final Color tertiary = colorScheme.tertiary;
     final Color tertiaryContainer = colorScheme.tertiaryContainer;
 
-    // Get controller input colors
-    FlexSchemeColor inputColor = isLight
+    // Get controller input colors, if we are using the the to dark
+    final FlexSchemeColor inputColor = isLight || controller.useToDarkMethod
         ? AppColor.scheme(controller).light
         : AppColor.scheme(controller).dark;
-
-    // Swap the input colors when we are using color swapping.
-    if ((isLight && swapLight) || (!isLight && swapDark)) {
-      inputColor = inputColor.copyWith(
-          primary: inputColor.secondary,
-          primaryContainer: inputColor.secondaryContainer,
-          secondary: inputColor.primary,
-          secondaryContainer: inputColor.primaryContainer);
-    }
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -150,6 +141,7 @@ class ThemeColors extends StatelessWidget {
                   label: 'primary',
                   inputColor: inputColor.primary,
                   inputTextColor: _onColor(inputColor.primary),
+                  showMaterialName: true,
                 ),
               ),
             ),
@@ -203,6 +195,7 @@ class ThemeColors extends StatelessWidget {
                   label: 'primary\nContainer',
                   inputColor: inputColor.primaryContainer,
                   inputTextColor: _onColor(inputColor.primaryContainer),
+                  showMaterialName: true,
                 ),
               ),
             ),
@@ -252,6 +245,7 @@ class ThemeColors extends StatelessWidget {
                   label: 'secondary',
                   inputColor: inputColor.secondary,
                   inputTextColor: _onColor(inputColor.secondary),
+                  showMaterialName: true,
                 ),
               ),
             ),
@@ -305,6 +299,7 @@ class ThemeColors extends StatelessWidget {
                   label: 'secondary\nContainer',
                   inputColor: inputColor.secondaryContainer,
                   inputTextColor: _onColor(inputColor.secondaryContainer),
+                  showMaterialName: true,
                 ),
               ),
             ),
@@ -346,6 +341,7 @@ class ThemeColors extends StatelessWidget {
                   label: 'tertiary',
                   inputColor: inputColor.tertiary,
                   inputTextColor: _onColor(inputColor.tertiary),
+                  showMaterialName: true,
                 ),
               ),
             ),
@@ -387,6 +383,7 @@ class ThemeColors extends StatelessWidget {
                   label: 'tertiary\nContainer',
                   inputColor: inputColor.tertiaryContainer,
                   inputTextColor: _onColor(inputColor.tertiaryContainer),
+                  showMaterialName: true,
                 ),
               ),
             ),

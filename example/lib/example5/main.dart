@@ -109,6 +109,8 @@ class DemoApp extends StatelessWidget {
             title: 'Themes Playground',
             theme: themeController.useFlexColorScheme
                 ? FlexThemeData.light(
+                    // dialogBackground: const Color(0xFFD69090),
+                    // appBarBackground: const Color(0xFFAC52C3),
                     // Use controller to get current scheme colors, use custom
                     // color param only if we use an index where we have custom
                     // colors in use.
@@ -121,9 +123,8 @@ class DemoApp extends StatelessWidget {
                     // Also a good test of that factory works as designed.
                     // The source code gen also uses this logic.
                     scheme: useBuiltIn ? FlexScheme.values[flexScheme] : null,
-                    // TODO(rydmike): Make this a controller property.
                     // Used number of colors
-                    usedColors: 6,
+                    usedColors: themeController.usedColors,
                     // Use controller to select surface mode
                     surfaceMode: themeController.surfaceMode,
                     // Integer used to control the level of primary color
@@ -199,14 +200,35 @@ class DemoApp extends StatelessWidget {
                       // M3 type default and global radius on the FAB, it thus
                       // remains circular or stadium shaped in extended mode.
                       fabUseShape: themeController.fabUseShape,
+                      // FAB color
+                      fabSchemeColor: themeController.fabSchemeColor,
                       // Want color themed disable hover, focus, highlight and
                       // splash colors? Then keep this one on.
                       interactionEffects: themeController.interactionEffects,
-                      // ColorScheme used on TabBar indicator.
+                      // ColorScheme used on various widgets.
                       tabBarIndicatorSchemeColor:
                           themeController.tabBarIndicator,
-                      // Base ColorScheme used on Chips.
                       chipSchemeColor: themeController.chipSchemeColor,
+                      textButtonSchemeColor:
+                          themeController.textButtonSchemeColor,
+                      elevatedButtonSchemeColor:
+                          themeController.elevatedButtonSchemeColor,
+                      outlinedButtonSchemeColor:
+                          themeController.outlinedButtonSchemeColor,
+                      materialButtonSchemeColor:
+                          themeController.materialButtonSchemeColor,
+                      toggleButtonsSchemeColor:
+                          themeController.toggleButtonsSchemeColor,
+                      switchSchemeColor: themeController.switchSchemeColor,
+                      checkboxSchemeColor: themeController.checkboxSchemeColor,
+                      radioSchemeColor: themeController.radioSchemeColor,
+                      dialogBackgroundSchemeColor:
+                          themeController.dialogBackgroundSchemeColor,
+                      tabBarItemSchemeColor:
+                          themeController.tabBarItemSchemeColor,
+                      appBarBackgroundSchemeColor:
+                          themeController.appBarBackgroundSchemeColor,
+
                       // Elevation of BottomNavigationBar.
                       bottomNavigationBarElevation:
                           themeController.bottomNavigationBarElevation,
@@ -217,11 +239,16 @@ class DemoApp extends StatelessWidget {
                       // bottom navigation bar.
                       navigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
-                      // Themed item color on navigation bar, in this app it
-                      // shares input with icon, text and bottom navbar color,
-                      // but they are different props so they don't have to.
+                      // Themed item color on navigation bar, in this app the
+                      // M2 and M3 navbars share input on background, icon,
+                      // text, but they are different props so they don't
+                      // have to API wise.
+                      bottomNavigationBarBackgroundSchemeColor:
+                          themeController.navBarBackgroundSchemeColor,
                       bottomNavigationBarSchemeColor:
                           themeController.navBarScheme,
+                      navigationBarBackgroundSchemeColor:
+                          themeController.navBarBackgroundSchemeColor,
                       navigationBarIconSchemeColor:
                           themeController.navBarScheme,
                       navigationBarTextSchemeColor:
@@ -249,10 +276,11 @@ class DemoApp extends StatelessWidget {
                       // Base ColorScheme used by TextField InputDecorator.
                       inputDecoratorSchemeColor:
                           themeController.inputDecoratorSchemeColor,
-                      // True gives a very light hint of primary color also to
-                      // onColors for onSurface, onBackground and onError.
-                      // It is on by default, the chosen effect is very subtle
-                      // even at highest blend levels.
+                      // Blend level for on colors for on colors, primary
+                      // secondary and tertiary and their containers.
+                      blendOnLevel: themeController.blendOnLevel,
+                      // Use blend level values also with main on colors, not
+                      // only with container and on surfaces.
                       blendOnColors: themeController.blendLightOnColors,
                       // By default sub themes mode also opts in on using
                       // colored text for the themed text, like Material3 uses.
@@ -264,13 +292,14 @@ class DemoApp extends StatelessWidget {
                       // off, or make custom text themes for those surfaces.
                       // Material3 has containers with matching text color
                       // tints. Can't do that yet with only Themes in Flutter.
+
                       blendTextTheme: themeController.blendLightTextTheme,
                       // Set some opacity on popup menu, just to show a
                       // setting not available via themeController in the demo.
                       popupMenuOpacity: 0.96,
                     ),
                   )
-                // Do NOT using FlexThemeData. We use the SDK ThemeData.from
+                // Do NOT use FlexThemeData. We use the SDK ThemeData.from
                 // factory to make the theme instead. Toggle to see the
                 // differences.
                 // We still keep the selected color scheme by grabbing it from
@@ -330,9 +359,8 @@ class DemoApp extends StatelessWidget {
                     scheme: useBuiltIn && !themeController.useToDarkMethod
                         ? FlexScheme.values[flexScheme]
                         : null,
-                    // TODO(rydmike): Make this a controller property.
                     // Used number of colors
-                    usedColors: 6,
+                    usedColors: themeController.usedColors,
                     // Use key color based M3 ColorScheme.
                     keyColors: FlexKeyColor(
                       useKeyColors: themeController.useKeyColors,
@@ -354,7 +382,7 @@ class DemoApp extends StatelessWidget {
                     // examples be different and in light and dark mode, you
                     // can mix and match whatever fits your design goals.
                     surfaceMode: themeController.surfaceMode,
-                    blendLevel: themeController.blendLevel,
+                    blendLevel: themeController.blendLevelDark,
                     appBarStyle: themeController.darkAppBarStyle,
                     appBarOpacity: themeController.appBarOpacity,
                     appBarElevation: themeController.appBarElevation,
@@ -375,18 +403,42 @@ class DemoApp extends StatelessWidget {
                           ? null
                           : themeController.cornerRadius,
                       fabUseShape: themeController.fabUseShape,
+                      fabSchemeColor: themeController.fabSchemeColor,
                       interactionEffects: themeController.interactionEffects,
                       tabBarIndicatorSchemeColor:
                           themeController.tabBarIndicator,
                       chipSchemeColor: themeController.chipSchemeColor,
+                      textButtonSchemeColor:
+                          themeController.textButtonSchemeColor,
+                      elevatedButtonSchemeColor:
+                          themeController.elevatedButtonSchemeColor,
+                      outlinedButtonSchemeColor:
+                          themeController.outlinedButtonSchemeColor,
+                      materialButtonSchemeColor:
+                          themeController.materialButtonSchemeColor,
+                      toggleButtonsSchemeColor:
+                          themeController.toggleButtonsSchemeColor,
+                      switchSchemeColor: themeController.switchSchemeColor,
+                      checkboxSchemeColor: themeController.checkboxSchemeColor,
+                      radioSchemeColor: themeController.radioSchemeColor,
+                      dialogBackgroundSchemeColor:
+                          themeController.dialogBackgroundSchemeColor,
+                      tabBarItemSchemeColor:
+                          themeController.tabBarItemSchemeColor,
+                      appBarBackgroundSchemeColor:
+                          themeController.appBarBackgroundSchemeColor,
                       bottomNavigationBarElevation:
                           themeController.bottomNavigationBarElevation,
                       bottomNavigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
                       navigationBarOpacity:
                           themeController.bottomNavigationBarOpacity,
+                      bottomNavigationBarBackgroundSchemeColor:
+                          themeController.navBarBackgroundSchemeColor,
                       bottomNavigationBarSchemeColor:
                           themeController.navBarScheme,
+                      navigationBarBackgroundSchemeColor:
+                          themeController.navBarBackgroundSchemeColor,
                       navigationBarIconSchemeColor:
                           themeController.navBarScheme,
                       navigationBarTextSchemeColor:
@@ -405,6 +457,7 @@ class DemoApp extends StatelessWidget {
                           themeController.inputDecoratorUnfocusedHasBorder,
                       inputDecoratorSchemeColor:
                           themeController.inputDecoratorSchemeColor,
+                      blendOnLevel: themeController.blendOnLevelDark,
                       blendOnColors: themeController.blendDarkOnColors,
                       blendTextTheme: themeController.blendDarkTextTheme,
                       popupMenuOpacity: 0.95,

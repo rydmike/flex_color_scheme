@@ -7,7 +7,7 @@ import '../shared/controllers/theme_controller.dart';
 import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
 import '../shared/widgets/universal/page_body.dart';
-import '../shared/widgets/universal/show_theme_colors.dart';
+import '../shared/widgets/universal/show_color_scheme_colors.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 import 'widgets/theme_popup_menu.dart';
 
@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           // Active theme color indicators.
-                          const ShowThemeColors(),
+                          const ShowColorSchemeColors(),
                           const SizedBox(height: 8),
                           SwitchListTile.adaptive(
                             contentPadding: EdgeInsets.zero,

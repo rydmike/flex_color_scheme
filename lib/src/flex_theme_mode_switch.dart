@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'flex_color.dart';
+import 'flex_scheme_color.dart';
+import 'flex_scheme_data.dart';
 
 /// Enum used to define the order, from left to right, of the theme mode
 /// selection buttons on the [FlexThemeModeSwitch].

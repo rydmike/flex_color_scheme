@@ -75,17 +75,21 @@ void main() {
     });
 
     test(
-        'FTD1.00RawD: GIVEN FlexThemeData.raw() made with min required dark '
+        'FTD1.00RawD: GIVEN FlexThemeData.dark(colors) made with colors '
         'params that equals default Material dark scheme '
         'EXPECT its ThemeData to be equal to one made with dark scheme with '
         'no parameters.', () {
       expect(
-          const FlexColorScheme(
-            brightness: Brightness.dark,
-            primary: FlexColor.materialDarkPrimary,
-            primaryContainer: FlexColor.materialDarkPrimaryContainer,
-            secondary: FlexColor.materialDarkSecondary,
-            tertiary: FlexColor.materialDarkTertiary,
+          FlexColorScheme.dark(
+            colors: const FlexSchemeColor(
+              primary: FlexColor.materialDarkPrimary,
+              primaryContainer: FlexColor.materialDarkPrimaryContainer,
+              secondary: FlexColor.materialDarkSecondary,
+              secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+              tertiary: FlexColor.materialDarkTertiary,
+              tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+              appBarColor: FlexColor.materialDarkTertiary,
+            ),
           ).toTheme,
           equals(FlexThemeData.dark()));
     });
@@ -98,13 +102,16 @@ void main() {
           FlexThemeData.light(
             swapColors: true,
           ),
-          equals(const FlexColorScheme(
-            brightness: Brightness.light,
-            primary: FlexColor.materialLightSecondary,
-            primaryContainer: FlexColor.materialLightSecondary,
-            secondary: FlexColor.materialLightPrimary,
-            secondaryContainer: FlexColor.materialLightPrimaryContainer,
-            tertiary: FlexColor.materialLightTertiary,
+          equals(FlexColorScheme.light(
+            colors: const FlexSchemeColor(
+              primary: FlexColor.materialLightSecondary,
+              primaryContainer: FlexColor.materialLightSecondaryContainer,
+              secondary: FlexColor.materialLightPrimary,
+              secondaryContainer: FlexColor.materialLightPrimaryContainer,
+              tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+              tertiary: FlexColor.materialLightTertiary,
+              appBarColor: FlexColor.materialDarkTertiary,
+            ),
           ).toTheme));
     });
 
@@ -116,13 +123,16 @@ void main() {
           FlexThemeData.dark(
             swapColors: true,
           ),
-          equals(const FlexColorScheme(
-            brightness: Brightness.dark,
-            primary: FlexColor.materialDarkSecondary,
-            primaryContainer: FlexColor.materialDarkSecondary,
-            secondary: FlexColor.materialDarkPrimary,
-            secondaryContainer: FlexColor.materialDarkPrimaryContainer,
-            tertiary: FlexColor.materialDarkTertiary,
+          equals(FlexColorScheme.dark(
+            colors: const FlexSchemeColor(
+              primary: FlexColor.materialDarkSecondary,
+              primaryContainer: FlexColor.materialDarkSecondaryContainer,
+              secondary: FlexColor.materialDarkPrimary,
+              secondaryContainer: FlexColor.materialDarkPrimaryContainer,
+              tertiary: FlexColor.materialDarkTertiary,
+              tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+              appBarColor: FlexColor.materialDarkTertiary,
+            ),
           ).toTheme));
     });
 
@@ -191,7 +201,12 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.materialLightTertiary,
+      secondaryContainer: FlexColor.materialLightSecondaryContainer,
+      tertiary: FlexColor.materialLightTertiary,
+      tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: FlexColor.materialLightError,
     ).toTheme;
     // themeDark = Default material dark scheme colors.
     final ThemeData themeDark = const FlexColorScheme(
@@ -199,19 +214,12 @@ void main() {
       primary: FlexColor.materialDarkPrimary,
       primaryContainer: FlexColor.materialDarkPrimaryContainer,
       secondary: FlexColor.materialDarkSecondary,
-      secondaryContainer: FlexColor.materialDarkTertiary,
-      // For the dark theme to be equal to ThemeData.from colorscheme dark we
-      // have to override the computed onError color for the standard Material
-      // dark error color. This is because the Material standard defines
-      // the onColor for the used error color in the dark theme to Black instead
-      // of white, which the Flutter brightness calculation algorithm says
-      // it should use and that FlexColorScheme uses by default.
-      // I don't know why they chose black for the text on the error color in
-      // ColorScheme.dark, the white color that gets chosen based on their
-      // own algorithm actually looks better. In Any case we just have to
-      // specify the onError color then FlexColorScheme.toTheme uses that
-      // instead of calculating from its default dark scheme error color.
-      onError: Colors.black,
+      secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+      tertiary: FlexColor.materialDarkTertiary,
+      tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+      surface: FlexColor.materialDarkSurface,
+      background: FlexColor.materialDarkBackground,
+      error: FlexColor.materialDarkError,
     ).toTheme;
 
     test(
@@ -223,19 +231,32 @@ void main() {
           const ColorScheme(
             brightness: Brightness.light,
             primary: Color(0xff6200ee),
-            onPrimary: Colors.white,
-            primaryContainer: Color(0xff3700b3),
-            onPrimaryContainer: Colors.white,
+            onPrimary: Color(0xffffffff),
+            primaryContainer: Color(0xffbb86fc),
+            onPrimaryContainer: Color(0xff000000),
             secondary: Color(0xff03dac6),
-            onSecondary: Colors.black,
-            secondaryContainer: Color(0xff018786),
-            onSecondaryContainer: Colors.white,
+            onSecondary: Color(0xff000000),
+            secondaryContainer: Color(0xff92f4e5),
+            onSecondaryContainer: Color(0xff000000),
+            tertiary: Color(0xff018786),
+            onTertiary: Color(0xffffffff),
+            tertiaryContainer: Color(0xffa4f1ef),
+            onTertiaryContainer: Color(0xff000000),
             error: Color(0xffb00020),
-            onError: Colors.white,
-            background: Colors.white,
-            onBackground: Colors.black,
-            surface: Colors.white,
-            onSurface: Colors.black,
+            onError: Color(0xffffffff),
+            errorContainer: Color(0xfffcd8df),
+            onErrorContainer: Color(0xff000000),
+            background: Color(0xffffffff),
+            onBackground: Color(0xff000000),
+            surface: Color(0xffffffff),
+            onSurface: Color(0xff000000),
+            surfaceVariant: Color(0xffffffff),
+            onSurfaceVariant: Color(0xff000000),
+            outline: Color(0xff4d4d4d),
+            shadow: Color(0xff000000),
+            inverseSurface: Color(0xff121212),
+            onInverseSurface: Color(0xffffffff),
+            inversePrimary: Color(0xffda99ff),
           ));
     });
     test(
@@ -246,19 +267,32 @@ void main() {
           const ColorScheme(
             brightness: Brightness.dark,
             primary: Color(0xffbb86fc),
-            onPrimary: Colors.black,
-            primaryContainer: Color(0xff3700B3),
-            onPrimaryContainer: Colors.white,
+            onPrimary: Color(0xff000000),
+            primaryContainer: Color(0xff6200ee),
+            onPrimaryContainer: Color(0xffffffff),
             secondary: Color(0xff03dac6),
-            onSecondary: Colors.black,
-            secondaryContainer: Color(0xff03dac6),
-            onSecondaryContainer: Colors.black,
+            onSecondary: Color(0xff000000),
+            secondaryContainer: Color(0xff005047),
+            onSecondaryContainer: Color(0xffffffff),
+            tertiary: Color(0xff03dac6),
+            onTertiary: Color(0xff000000),
+            tertiaryContainer: Color(0xff003e3e),
+            onTertiaryContainer: Color(0xffffffff),
             error: Color(0xffcf6679),
-            onError: Colors.black,
+            onError: Color(0xff000000),
+            errorContainer: Color(0xffb1384e),
+            onErrorContainer: Color(0xffffffff),
             background: Color(0xff121212),
-            onBackground: Colors.white,
+            onBackground: Color(0xffffffff),
             surface: Color(0xff121212),
-            onSurface: Colors.white,
+            onSurface: Color(0xffffffff),
+            surfaceVariant: Color(0xff121212),
+            onSurfaceVariant: Color(0xffffffff),
+            outline: Color(0xffb3b3b3),
+            shadow: Color(0xff000000),
+            inverseSurface: Color(0xffffffff),
+            onInverseSurface: Color(0xff000000),
+            inversePrimary: Color(0xff5a4570),
           ));
     });
 
@@ -1230,7 +1264,7 @@ void main() {
   // TESTS to ensure we have matching results between
   // FlexThemeData and FlexColorScheme.toTheme.
   //****************************************************************************
-  group('FTD2: TEST FlexThemeData and FlexColorScheme.toTHeme equality', () {
+  group('FTD2: TEST FlexThemeData and FlexColorScheme.toTheme equality', () {
     test(
         'FTD2.01: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
@@ -1566,7 +1600,6 @@ void main() {
         colors: FlexColor.mandyRed.light,
         scheme: FlexScheme.bigStone,
         usedColors: 2,
-        surfaceStyle: FlexSurface.strong,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 0,
         appBarStyle: FlexAppBarStyle.primary,
@@ -1608,7 +1641,7 @@ void main() {
         colors: FlexColor.mandyRed.light,
         scheme: FlexScheme.bigStone,
         usedColors: 2,
-        surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 0,
         appBarStyle: FlexAppBarStyle.primary,
         tabBarStyle: FlexTabBarStyle.forAppBar,
@@ -1648,15 +1681,14 @@ void main() {
       );
       // Check object equality
       expect(
-        ftdLight,
-        equals(fcsLightTd),
+        fcsLightTd,
+        equals(ftdLight),
       );
       // Same test for dark mode
       final FlexColorScheme fcsDark = FlexColorScheme.dark(
         colors: FlexColor.mandyRed.dark,
         scheme: FlexScheme.bigStone,
         usedColors: 3,
-        surfaceStyle: FlexSurface.strong,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 0,
         appBarStyle: FlexAppBarStyle.background,
@@ -1694,7 +1726,7 @@ void main() {
           colors: FlexColor.mandyRed.dark,
           scheme: FlexScheme.bigStone,
           usedColors: 3,
-          surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
           blendLevel: 0,
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
@@ -2275,22 +2307,24 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
     TestWidgetsFlutterBinding.ensureInitialized();
 
-    test(
-        'FTD3.00RawL: GIVEN FlexColorScheme() made with min required light '
-        'params that equals default Material light scheme '
-        'EXPECT its FlexColorScheme to be equal to one made with light scheme '
-        'with no parameters.', () {
-      expect(
-        const FlexColorScheme(
-          brightness: Brightness.light,
-          primary: FlexColor.materialLightPrimary,
-          primaryContainer: FlexColor.materialLightPrimaryContainer,
-          secondary: FlexColor.materialLightSecondary,
-          tertiary: FlexColor.materialLightTertiary,
-        ).toTheme,
-        equals(FlexColorScheme.light().toTheme),
-      );
-    });
+    // TODO(rydmike): This kind of test can no longer work with new themes.
+    // TODO(rydmike): Should the default constructor behave like the .light ?
+    // test(
+    //     'FTD3.00RawL: GIVEN FlexColorScheme() made with min required light '
+    //     'params that equals default Material light scheme '
+    //   'EXPECT its FlexColorScheme to be equal to one made with light scheme '
+    //     'with no parameters.', () {
+    //   expect(
+    //     const FlexColorScheme(
+    //       brightness: Brightness.light,
+    //       primary: FlexColor.materialLightPrimary,
+    //       primaryContainer: FlexColor.materialLightPrimaryContainer,
+    //       secondary: FlexColor.materialLightSecondary,
+    //       tertiary: FlexColor.materialLightTertiary,
+    //     ).toTheme,
+    //     equals(FlexColorScheme.light().toTheme),
+    //   );
+    // });
     test(
         'FTD3.00DefL: GIVEN FlexThemeData.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
@@ -2343,56 +2377,67 @@ void main() {
     });
 
     test(
-        'FTD3.00RawD: GIVEN FlexThemeData.raw() made with min required dark '
+        'FTD3.00RawD: GIVEN FlexThemeData.dark() made with min required dark '
         'params that equals default Material dark scheme '
         'EXPECT its ThemeData to be equal to one made with FlexColorScheme '
         'dark scheme with no parameters.', () {
       expect(
-          const FlexColorScheme(
-            brightness: Brightness.dark,
-            primary: FlexColor.materialDarkPrimary,
-            primaryContainer: FlexColor.materialDarkPrimaryContainer,
-            secondary: FlexColor.materialDarkSecondary,
-            secondaryContainer: FlexColor.materialDarkTertiary,
-          ).toTheme,
+          FlexThemeData.dark(
+            colors: const FlexSchemeColor(
+              primary: FlexColor.materialDarkPrimary,
+              primaryContainer: FlexColor.materialDarkPrimaryContainer,
+              secondary: FlexColor.materialDarkSecondary,
+              secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+              tertiary: FlexColor.materialDarkTertiary,
+              tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+              appBarColor: FlexColor.materialDarkTertiary,
+            ),
+          ),
           equals(FlexColorScheme.dark().toTheme));
     });
 
     // themeDark = Default material dark scheme colors.
     test(
-        'FTD3.00SwapL: GIVEN FlexThemeData.light(swapColors: true) EXPECT it '
-        'to be equal to one made with FlexColorScheme() colors swapped ', () {
+        'FTD3.00SwapL: GIVEN FlexThemeData.light(light colors swapped) '
+        'EXPECT it to be equal to one made with '
+        'FlexColorScheme.light(swapColors: true)', () {
       expect(
         FlexThemeData.light(
-          swapColors: true,
+          colors: const FlexSchemeColor(
+            primary: FlexColor.materialLightSecondary,
+            primaryContainer: FlexColor.materialLightSecondaryContainer,
+            secondary: FlexColor.materialLightPrimary,
+            secondaryContainer: FlexColor.materialLightPrimaryContainer,
+            tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+            tertiary: FlexColor.materialLightTertiary,
+            appBarColor: FlexColor.materialDarkTertiary,
+          ),
         ),
-        equals(const FlexColorScheme(
-          brightness: Brightness.light,
-          primary: FlexColor.materialLightSecondary,
-          primaryContainer: FlexColor.materialLightSecondary,
-          secondary: FlexColor.materialLightPrimary,
-          secondaryContainer: FlexColor.materialLightPrimaryContainer,
-          tertiary: FlexColor.materialLightTertiary,
+        equals(FlexColorScheme.light(
+          swapColors: true,
         ).toTheme),
       );
     });
 
     // themeDark = Default material dark scheme colors.
     test(
-        'FTD3.00SwapD: GIVEN FlexColorScheme.dark(swapColors: true) EXPECT it '
-        'to be equal to one made with FlexThemeData.raw and dark scheme '
-        'colors swapped ', () {
+        'FTD3.00SwapD: GIVEN FlexThemeData.dark(dark colors swapped) '
+        'EXPECT it to be equal to one made with '
+        'FlexThemeData.dark(swapColors: true)', () {
       expect(
-        FlexColorScheme.dark(
+        FlexThemeData.dark(
+          colors: const FlexSchemeColor(
+            primary: FlexColor.materialDarkSecondary,
+            primaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondary: FlexColor.materialDarkPrimary,
+            secondaryContainer: FlexColor.materialDarkPrimaryContainer,
+            tertiary: FlexColor.materialDarkTertiary,
+            tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            appBarColor: FlexColor.materialDarkTertiary,
+          ),
+        ),
+        equals(FlexColorScheme.dark(
           swapColors: true,
-        ).toTheme,
-        equals(const FlexColorScheme(
-          brightness: Brightness.dark,
-          primary: FlexColor.materialDarkSecondary,
-          primaryContainer: FlexColor.materialDarkSecondary,
-          secondary: FlexColor.materialDarkPrimary,
-          secondaryContainer: FlexColor.materialDarkPrimaryContainer,
-          tertiary: FlexColor.materialDarkTertiary,
         ).toTheme),
       );
     });
