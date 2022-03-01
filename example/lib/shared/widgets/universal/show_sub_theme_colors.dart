@@ -102,6 +102,11 @@ class ShowSubThemeColors extends StatelessWidget {
         theme.inputDecorationTheme.focusColor?.withAlpha(0xFF) ??
             colorScheme.primary;
 
+    final Decoration? tooltipDecoration = theme.tooltipTheme.decoration;
+    final Color tooltipColor = tooltipDecoration is BoxDecoration
+        ? tooltipDecoration.color ?? colorScheme.surface
+        : colorScheme.surface;
+
     final Color appBarColor = theme.appBarTheme.backgroundColor ??
         (isDark ? colorScheme.surface : colorScheme.primary);
     final Color tabBarColor = theme.tabBarTheme.labelColor ??
@@ -144,8 +149,9 @@ class ShowSubThemeColors extends StatelessWidget {
           const ListTile(
             contentPadding: EdgeInsets.zero,
             title: Text('Component sub-theme colors'),
-            subtitle: Text('The themed settings are in component settings '
-                'panels. Control of the colors might be added later here too.'),
+            subtitle: Text('Settings are controlled in each component '
+                'panel. This shows active ColorScheme based color for '
+                'each component'),
           ),
           // A Wrap widget is just the right handy widget for this type of
           // widget to make it responsive.
@@ -203,6 +209,11 @@ class ShowSubThemeColors extends StatelessWidget {
                 label: 'Input\nDecorator',
                 color: inputDecoratorColor,
                 textColor: _onColor(inputDecoratorColor, background),
+              ),
+              ColorCard(
+                label: 'Tooltip',
+                color: tooltipColor,
+                textColor: _onColor(tooltipColor, background),
               ),
               ColorCard(
                 label: 'AppBar',

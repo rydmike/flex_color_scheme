@@ -777,4 +777,15 @@ class ThemeServiceMem implements ThemeService {
   /// Persists unselectedIsColored setting in example 5.
   @override
   Future<void> saveUnselectedIsColored(bool value) async {}
+
+  //----
+
+  /// Loads used usedFlexTonesSetup setting in example 5.
+  @override
+  Future<int> usedFlexTonesSetup() async =>
+      ThemeService.defaultUsedFlexTonesSetup;
+
+  /// Persists the usedFlexTonesSetup setting in example 5.
+  @override
+  Future<void> saveUsedFlexTonesSetup(int value) async {}
 }

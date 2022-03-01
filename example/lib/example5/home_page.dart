@@ -22,6 +22,7 @@ import 'utils/generate_theme_dart_code.dart';
 import 'widgets/app_bar_style_buttons.dart';
 import 'widgets/color_scheme_popup_menu.dart';
 import 'widgets/dart_code_dialog_screen.dart';
+import 'widgets/flex_tone_config_buttons.dart';
 import 'widgets/platform_popup_menu.dart';
 import 'widgets/scheme_colors.dart';
 import 'widgets/surface_mode_buttons.dart';
@@ -946,6 +947,21 @@ class _SeededColorScheme extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
+  String _describeFlexTones(int colors) {
+    if (colors == 2) {
+      return 'Primary light tone is 30 instead 40, and dark 80 instead of '
+          '70. Chroma is input key color based for primary and tertiary.';
+    }
+    if (colors == 3) {
+      return 'Default copy';
+    }
+    if (colors == 4) {
+      return 'Default copy';
+    }
+    return 'Default TonalPalette config and chroma usage setup, matches M3 '
+        'Flutter SDK values.';
+  }
+
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
@@ -995,6 +1011,34 @@ class _SeededColorScheme extends StatelessWidget {
                   'secondary or tertiary and their container colors to '
                   'customize them.'),
             ),
+          const SizedBox(height: 8),
+          const Divider(),
+          const ListTile(
+            title: Text('Advanced tonal palette configuration'),
+            subtitle: Text(
+              'Using [FlexTones] config class, you can configure '
+              'for each [ColorScheme] color which tone from '
+              'generated [TonalPalette] it should use. You can also set '
+              'limits on the used Cam16 chroma value from the three key '
+              'colors used for primary, secondary and  tertiary '
+              'TonalPalette generation.\n'
+              '\n'
+              'In this app version you can only select between the default '
+              'and three different pre-made FlexTones setups. Future version '
+              'of the app may add interactive configuration of it. With the '
+              'API you have full configuration freedom already now. You '
+              'can use the built in ones as starting point via the generated '
+              'code',
+            ),
+          ),
+          ListTile(
+            title: const Text('Select FlexTones configuration'),
+            subtitle: Text(_describeFlexTones(controller.usedFlexTonesSetup)),
+          ),
+          // const SizedBox(height: 4),
+          ListTile(
+            trailing: FlexToneConfigButtons(controller: controller),
+          ),
           const SizedBox(height: 8),
         ],
       ),
@@ -1489,10 +1533,10 @@ class _ComponentThemes extends StatelessWidget {
             message: 'A tooltip, on the tooltip style toggle',
             child: SwitchListTile.adaptive(
               title: const Text(
-                'Tooltip background',
+                'Tooltip background brightness',
               ),
               subtitle: const Text(
-                'ON Normal   OFF Inverted',
+                'OFF Theme mode inverted    ON Theme mode brightness',
               ),
               value: controller.tooltipsMatchBackground &&
                   controller.useFlexColorScheme,

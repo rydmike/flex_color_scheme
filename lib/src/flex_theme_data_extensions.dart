@@ -7,6 +7,7 @@ import 'flex_key_color.dart';
 import 'flex_scheme.dart';
 import 'flex_scheme_color.dart';
 import 'flex_sub_themes_data.dart';
+import 'flex_tones.dart';
 
 /// A convenience extension on [ThemeData] to define a
 /// [FlexColorScheme] object and return the [ThemeData] object defined by
@@ -1017,6 +1018,16 @@ extension FlexThemeData on ThemeData {
     /// to generate tonal palettes and tones, see:
     /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
     final FlexKeyColor? keyColors,
+
+    /// An advanced configuration class enabling complete customization of
+    /// used chroma for [TonalPalette] generation for the used seed [keyColors],
+    /// as well as changing which tone in the tonal palettes is used
+    /// for which [ColorScheme] color.
+    ///
+    /// If null [FlexTones.light] will be used, resulting in a default
+    /// Material Design 3 based usage of tones and CAM16 chroma for the
+    /// seed generated light [ColorScheme].
+    final FlexTones? tones,
   }) {
     return FlexColorScheme.light(
       colors: colors,
@@ -1066,6 +1077,7 @@ extension FlexThemeData on ThemeData {
       subThemesData: subThemesData,
       useMaterial3: useMaterial3,
       keyColors: keyColors,
+      tones: tones,
     ).toTheme;
   }
 
@@ -2045,6 +2057,16 @@ extension FlexThemeData on ThemeData {
     /// to generate tonal palettes and tones, see:
     /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
     final FlexKeyColor? keyColors,
+
+    /// An advanced configuration class enabling complete customization of
+    /// used chroma for [TonalPalette] generation for the used seed [keyColors],
+    /// as well as changing which tone in the tonal palettes is used
+    /// for which [ColorScheme] color.
+    ///
+    /// If null [FlexTones.dark] will be used, resulting in a default
+    /// Material Design 3 based usage of tones and CAM16 chroma for the
+    /// seed generated dark [ColorScheme].
+    final FlexTones? tones,
   }) {
     return FlexColorScheme.dark(
       colorScheme: colorScheme,
@@ -2094,6 +2116,7 @@ extension FlexThemeData on ThemeData {
       subThemesData: subThemesData,
       useMaterial3: useMaterial3,
       keyColors: keyColors,
+      tones: tones,
     ).toTheme;
   }
 }
