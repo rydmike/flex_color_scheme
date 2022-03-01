@@ -14,6 +14,7 @@ import 'flex_scheme_color.dart';
 import 'flex_scheme_on_colors.dart';
 import 'flex_sub_themes.dart';
 import 'flex_sub_themes_data.dart';
+import 'flex_tones.dart';
 
 // ignore_for_file: comment_references
 
@@ -2345,6 +2346,16 @@ class FlexColorScheme with Diagnosticable {
     /// to generate tonal palettes and tones, see:
     /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
     final FlexKeyColor? keyColors,
+
+    /// An advanced configuration class enabling complete customization of
+    /// used chroma for [TonalPalette] generation for the used seed [keyColors],
+    /// as well as changing which tone in the tonal palettes is used
+    /// for which [ColorScheme] color.
+    ///
+    /// If null [FlexTones.light] will be used, resulting in a default
+    /// Material Design 3 based usage of tones and CAM16 chroma for the
+    /// seed generated light [ColorScheme].
+    final FlexTones? tones,
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6');
@@ -2407,11 +2418,13 @@ class FlexColorScheme with Diagnosticable {
       // Create a complete ColorScheme from active and effective seed colors.
       seedScheme = _Scheme.fromSeeds(
         brightness: Brightness.light,
-        argbPrimary: effectiveColors.primary,
+        primaryKey: effectiveColors.primary,
         // If use secondary seed, use it with fromSeeds, otherwise undefined.
-        argbSecondary: seed.useSecondary ? effectiveColors.secondary : null,
+        secondaryKey: seed.useSecondary ? effectiveColors.secondary : null,
         // If use tertiary seed, use it with fromSeeds, otherwise undefined.
-        argbTertiary: seed.useTertiary ? effectiveColors.tertiary : null,
+        tertiaryKey: seed.useTertiary ? effectiveColors.tertiary : null,
+        // Use provided tones configuration or default one.
+        tones: tones ?? const FlexTones.light(),
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined.
@@ -3845,6 +3858,16 @@ class FlexColorScheme with Diagnosticable {
     /// to generate tonal palettes and tones, see:
     /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
     final FlexKeyColor? keyColors,
+
+    /// An advanced configuration class enabling complete customization of
+    /// used chroma for [TonalPalette] generation for the used seed [keyColors],
+    /// as well as changing which tone in the tonal palettes is used
+    /// for which [ColorScheme] color.
+    ///
+    /// If null [FlexTones.dark] will be used, resulting in a default
+    /// Material Design 3 based usage of tones and CAM16 chroma for the
+    /// seed generated dark [ColorScheme].
+    final FlexTones? tones,
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6.');
@@ -3931,11 +3954,13 @@ class FlexColorScheme with Diagnosticable {
       // Create a ColorScheme from active and effective seed key colors.
       seedScheme = _Scheme.fromSeeds(
         brightness: Brightness.dark,
-        argbPrimary: effectiveKeyColors.primary,
+        primaryKey: effectiveKeyColors.primary,
         // If use secondary seed, use it with fromSeeds, otherwise undefined.
-        argbSecondary: seed.useSecondary ? effectiveKeyColors.secondary : null,
+        secondaryKey: seed.useSecondary ? effectiveKeyColors.secondary : null,
         // If use tertiary seed, use it with fromSeeds, otherwise undefined.
-        argbTertiary: seed.useTertiary ? effectiveKeyColors.tertiary : null,
+        tertiaryKey: seed.useTertiary ? effectiveKeyColors.tertiary : null,
+        // Use provided tones configuration or default one.
+        tones: tones ?? const FlexTones.dark(),
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined. The main colors to keep
@@ -5720,6 +5745,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.switchTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.switchSchemeColor,
+              unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
           : null,
       // Checkbox theme.
@@ -5727,6 +5753,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.checkboxTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.checkboxSchemeColor,
+              unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
           : null,
       // Radio theme.
@@ -5734,6 +5761,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.radioTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.radioSchemeColor,
+              unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
           : null,
       // Input decorator theme.
@@ -5879,6 +5907,48 @@ class FlexColorScheme with Diagnosticable {
                       ? kNavigationBarHeight
                       : null),
               labelBehavior: subTheme.navigationBarLabelBehavior,
+              unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
+              unselectedAlpha: kUnselectedAlphaBlend,
+            )
+          : null,
+      // Opinionated sub theme for Material 3 based Navigation Bar
+      navigationRailTheme: useSubThemes
+          ? FlexSubThemes.navigationRailTheme(
+              colorScheme: colorScheme,
+              labelTextStyle: subTheme.navigationBarIsStyled
+                  ? effectiveTextTheme.overline
+                  : null,
+              selectedLabelSize: subTheme.navigationBarSelectedLabelSize,
+              unselectedLabelSize: subTheme.navigationBarUnselectedLabelSize,
+              textSchemeColor: subTheme.navigationBarTextSchemeColor ??
+                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
+              mutedUnselectedText: subTheme.navigationBarMutedUnselectedText ??
+                  subTheme.navigationBarIsStyled,
+              selectedIconSize: subTheme.navigationBarSelectedIconSize,
+              unselectedIconSize: subTheme.navigationBarUnselectedIconSize,
+              iconSchemeColor: subTheme.navigationBarIconSchemeColor ??
+                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
+              mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon ??
+                  subTheme.navigationBarIsStyled,
+              highlightSchemeColor: subTheme
+                      .navigationBarHighlightSchemeColor ??
+                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
+              indicatorAlpha: kNavigationBarIndicatorAlpha,
+              backgroundSchemeColor:
+                  subTheme.navigationBarBackgroundSchemeColor ??
+                      (subTheme.navigationBarIsStyled
+                          ? SchemeColor.background
+                          : null),
+              opacity: subTheme.navigationBarOpacity,
+              useIndicator: true,
+              groupAlignment: -1,
+              elevation: subTheme.bottomNavigationBarElevation,
+              labelType: NavigationRailLabelType.all,
+              // elevation: subTheme.navigationBarHeight ??
+              //     (subTheme.navigationBarIsStyled
+              //         ? kNavigationBarHeight
+              //         : null),
+              // labelType: subTheme.navigationBarLabelBehavior,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
             )
@@ -7320,92 +7390,98 @@ class _Scheme {
     required this.inversePrimary,
   });
 
-  static _Scheme light(
-    int argbPrimary, [
-    int? argbSecondary,
-    int? argbTertiary,
-  ]) {
+  static _Scheme tones({
+    required int primaryKey,
+    int? secondaryKey,
+    int? tertiaryKey,
+    required FlexTones tones,
+  }) {
     final _FlexCorePalette core = _FlexCorePalette.fromSeeds(
-      argbPrimary: argbPrimary,
-      argbSecondary: argbSecondary,
-      argbTertiary: argbTertiary,
+      primary: primaryKey,
+      secondary: secondaryKey,
+      tertiary: tertiaryKey,
+      primaryChroma: tones.primaryChroma,
+      secondaryChroma: tones.secondaryChroma,
+      tertiaryChroma: tones.tertiaryChroma,
     );
     return _Scheme(
-      primary: core.primary.get(40),
-      onPrimary: core.primary.get(100),
-      primaryContainer: core.primary.get(90),
-      onPrimaryContainer: core.primary.get(10),
-      secondary: core.secondary.get(40),
-      onSecondary: core.secondary.get(100),
-      secondaryContainer: core.secondary.get(90),
-      onSecondaryContainer: core.secondary.get(10),
-      tertiary: core.tertiary.get(40),
-      onTertiary: core.tertiary.get(100),
-      tertiaryContainer: core.tertiary.get(90),
-      onTertiaryContainer: core.tertiary.get(10),
-      error: core.error.get(40),
-      onError: core.error.get(100),
-      errorContainer: core.error.get(90),
-      onErrorContainer: core.error.get(10),
-      background: core.neutral.get(99),
-      onBackground: core.neutral.get(10),
-      surface: core.neutral.get(99),
-      onSurface: core.neutral.get(10),
-      surfaceVariant: core.neutralVariant.get(90),
-      onSurfaceVariant: core.neutralVariant.get(30),
-      outline: core.neutralVariant.get(50),
-      shadow: core.neutral.get(0),
-      inverseSurface: core.neutral.get(20),
-      inverseOnSurface: core.neutral.get(95),
-      inversePrimary: core.primary.get(80),
+      primary: core.primary.get(tones.primaryTone),
+      onPrimary: core.primary.get(tones.onPrimaryTone),
+      primaryContainer: core.primary.get(tones.primaryContainerTone),
+      onPrimaryContainer: core.primary.get(tones.onPrimaryContainerTone),
+      secondary: core.secondary.get(tones.secondaryTone),
+      onSecondary: core.secondary.get(tones.onSecondaryTone),
+      secondaryContainer: core.secondary.get(tones.secondaryContainerTone),
+      onSecondaryContainer: core.secondary.get(tones.onSecondaryContainerTone),
+      tertiary: core.tertiary.get(tones.tertiaryTone),
+      onTertiary: core.tertiary.get(tones.onTertiaryTone),
+      tertiaryContainer: core.tertiary.get(tones.tertiaryContainerTone),
+      onTertiaryContainer: core.tertiary.get(tones.onTertiaryContainerTone),
+      error: core.error.get(tones.errorTone),
+      onError: core.error.get(tones.onErrorTone),
+      errorContainer: core.error.get(tones.errorContainerTone),
+      onErrorContainer: core.error.get(tones.onErrorContainerTone),
+      background: core.neutral.get(tones.backgroundTone),
+      onBackground: core.neutral.get(tones.onBackgroundTone),
+      surface: core.neutral.get(tones.surfaceTone),
+      onSurface: core.neutral.get(tones.onSurfaceTone),
+      surfaceVariant: core.neutralVariant.get(tones.surfaceVariantTone),
+      onSurfaceVariant: core.neutralVariant.get(tones.onSurfaceVariantTone),
+      outline: core.neutralVariant.get(tones.outlineTone),
+      shadow: core.neutral.get(tones.shadowTone),
+      inverseSurface: core.neutral.get(tones.inverseSurfaceTone),
+      inverseOnSurface: core.neutral.get(tones.onInverseSurfaceTone),
+      inversePrimary: core.primary.get(tones.inversePrimaryTone),
     );
   }
 
-  static _Scheme dark(
-    int argbPrimary, [
-    int? argbSecondary,
-    int? argbTertiary,
-  ]) {
-    final _FlexCorePalette core = _FlexCorePalette.fromSeeds(
-      argbPrimary: argbPrimary,
-      argbSecondary: argbSecondary,
-      argbTertiary: argbTertiary,
-    );
-    return _Scheme(
-      primary: core.primary.get(80),
-      onPrimary: core.primary.get(20),
-      primaryContainer: core.primary.get(30),
-      onPrimaryContainer: core.primary.get(90),
-      secondary: core.secondary.get(80),
-      onSecondary: core.secondary.get(20),
-      secondaryContainer: core.secondary.get(30),
-      onSecondaryContainer: core.secondary.get(90),
-      tertiary: core.tertiary.get(80),
-      onTertiary: core.tertiary.get(20),
-      tertiaryContainer: core.tertiary.get(30),
-      onTertiaryContainer: core.tertiary.get(90),
-      error: core.error.get(80),
-      onError: core.error.get(20),
-      errorContainer: core.error.get(30),
-      onErrorContainer: core.error.get(80),
-      background: core.neutral.get(10),
-      onBackground: core.neutral.get(90),
-      surface: core.neutral.get(10),
-      onSurface: core.neutral.get(90),
-      surfaceVariant: core.neutralVariant.get(30),
-      onSurfaceVariant: core.neutralVariant.get(80),
-      outline: core.neutralVariant.get(60),
-      shadow: core.neutral.get(0),
-      inverseSurface: core.neutral.get(90),
-      inverseOnSurface: core.neutral.get(20),
-      inversePrimary: core.primary.get(40),
-    );
-  }
+  // static _Scheme dark({
+  //   required int primaryKey,
+  //   int? secondaryKey,
+  //   int? tertiaryKey,
+  //   required FlexTones tones,
+  // }) {
+  //   final _FlexCorePalette core = _FlexCorePalette.fromSeeds(
+  //     primary: primaryKey,
+  //     secondary: secondaryKey,
+  //     tertiary: tertiaryKey,
+  //   );
+  //   return _Scheme(
+  //     primary: core.primary.get(80),
+  //     onPrimary: core.primary.get(20),
+  //     primaryContainer: core.primary.get(30),
+  //     onPrimaryContainer: core.primary.get(90),
+  //     secondary: core.secondary.get(80),
+  //     onSecondary: core.secondary.get(20),
+  //     secondaryContainer: core.secondary.get(30),
+  //     onSecondaryContainer: core.secondary.get(90),
+  //     tertiary: core.tertiary.get(80),
+  //     onTertiary: core.tertiary.get(20),
+  //     tertiaryContainer: core.tertiary.get(30),
+  //     onTertiaryContainer: core.tertiary.get(90),
+  //     error: core.error.get(80),
+  //     onError: core.error.get(20),
+  //     errorContainer: core.error.get(30),
+  //     onErrorContainer: core.error.get(80),
+  //     background: core.neutral.get(10),
+  //     onBackground: core.neutral.get(90),
+  //     surface: core.neutral.get(10),
+  //     onSurface: core.neutral.get(90),
+  //     surfaceVariant: core.neutralVariant.get(30),
+  //     onSurfaceVariant: core.neutralVariant.get(80),
+  //     outline: core.neutralVariant.get(60),
+  //     shadow: core.neutral.get(0),
+  //     inverseSurface: core.neutral.get(90),
+  //     inverseOnSurface: core.neutral.get(20),
+  //     inversePrimary: core.primary.get(40),
+  //   );
+  // }
 
   static ColorScheme fromSeeds({
-    required Color argbPrimary,
-    Color? argbSecondary,
-    Color? argbTertiary,
+    required Color primaryKey,
+    Color? secondaryKey,
+    Color? tertiaryKey,
+    FlexTones? tones,
     Brightness brightness = Brightness.light,
     Color? primary,
     Color? onPrimary,
@@ -7438,17 +7514,19 @@ class _Scheme {
     final _Scheme scheme;
     switch (brightness) {
       case Brightness.light:
-        scheme = _Scheme.light(
-          argbPrimary.value,
-          argbSecondary?.value,
-          argbTertiary?.value,
+        scheme = _Scheme.tones(
+          primaryKey: primaryKey.value,
+          secondaryKey: secondaryKey?.value,
+          tertiaryKey: tertiaryKey?.value,
+          tones: tones ?? const FlexTones.light(),
         );
         break;
       case Brightness.dark:
-        scheme = _Scheme.dark(
-          argbPrimary.value,
-          argbSecondary?.value,
-          argbTertiary?.value,
+        scheme = _Scheme.tones(
+          primaryKey: primaryKey.value,
+          secondaryKey: secondaryKey?.value,
+          tertiaryKey: tertiaryKey?.value,
+          tones: tones ?? const FlexTones.dark(),
         );
         break;
     }
@@ -7513,16 +7591,16 @@ class _FlexCorePalette extends CorePalette {
 
   /// Create a [_FlexCorePalette] from one to three seed colors.
   ///
-  /// If only [argbPrimary] is provided, this is the same as using the super
+  /// If only [primary] is provided, this is the same as using the super
   /// [CorePalette.of] static, that returns an instance of [CorePalette]
   /// created from a single ARGB seed color.
   ///
-  /// When using optional [argbSecondary] and [argbTertiary] parameters, the
-  /// same max chroma of 48 limitation is placed on them as on primary
-  /// [TonalPalette] when using [CorePalette.of]. If [argbSecondary] or
-  /// [argbTertiary] are not provided the [TonalPalette] creation for them falls
-  /// back to same values as used for the corresponding palette when using
-  /// [CorePalette.of].
+  /// When using optional [secondary] and [tertiary] parameters, the
+  /// same chroma is used as in Flutter SDK [ColorScheme.fromSeed] when it
+  /// uses [CorePalette.of], but they all use their own hue value.
+  /// If [secondary] or [tertiary] are not provided, the [TonalPalette]
+  /// creation for them falls back to same values as used for the
+  /// corresponding palette when using [CorePalette.of].
   ///
   /// The conversion of [TonalPalette]es to a list of ints and having super
   /// create the CorePalette from this list, has unneeded extra overhead that
@@ -7550,36 +7628,83 @@ class _FlexCorePalette extends CorePalette {
   /// and we can use this or the custom implementation.
   factory _FlexCorePalette.fromSeeds({
     /// Integer ARGB value of seed color used for primary tonal palette.
-    /// Cam 16 chroma is capped at 48.
-    required int argbPrimary,
+    ///
+    /// By default a minimum of Cam16 chroma 48 is used to ensure a bright
+    /// palette. If chroma of the provided color is higher than 48, it is
+    /// used. A chroma value can also be specified via [primaryChroma],
+    /// if it, then the passed chroma value is used.
+    required int primary,
 
     /// Integer ARGB value of seed color used for secondary tonal palette.
-    /// Cam16 chroma is capped at 48 if provided. If not provided, the palette
-    /// is based on argbPrimary with Cam16 chroma at 16.
-    int? argbSecondary,
+    /// If not provided, the palette is based on [primary] with Cam16 chroma
+    /// at 16.
+    ///
+    /// A chroma value can also be specified via [secondaryChroma].
+    int? secondary,
 
     /// Integer ARGB value of seed color used for tertiary tonal palette.
     /// Cam16 chroma is capped at 48 if provided. If not provided, the palette
-    /// is based on argbPrimary with Cam16 hue+60 and chroma at 24.
-    int? argbTertiary,
-  }) {
-    final Cam16 camPrimary = Cam16.fromInt(argbPrimary);
-    final Cam16 camSecondary =
-        argbSecondary == null ? camPrimary : Cam16.fromInt(argbSecondary);
-    final Cam16 camTertiary =
-        argbTertiary == null ? camPrimary : Cam16.fromInt(argbTertiary);
+    /// is based on [primary] with Cam16 hue+60 and chroma at 24.
+    ///
+    /// A chroma value can also be specified via [tertiaryChroma].
+    int? tertiary,
 
-    final TonalPalette tonalPrimary =
-        TonalPalette.of(camPrimary.hue, math.max(48, camPrimary.chroma));
-    final TonalPalette tonalSecondary = argbSecondary == null
-        ? TonalPalette.of(camPrimary.hue, 16)
-        : TonalPalette.of(camSecondary.hue, math.max(48, camSecondary.chroma));
-    final TonalPalette tonalTertiary = argbTertiary == null
-        ? TonalPalette.of(camPrimary.hue + 60, 24)
-        : TonalPalette.of(camTertiary.hue, math.max(48, camTertiary.chroma));
+    /// The chroma value to use for primary TonalPalette.
+    ///
+    /// If null, the chroma value from [primary] is used if higher than 48, if
+    /// lower then 48 is used.
+    ///
+    /// Flutter SDK [ColorScheme.fromSeed] uses the "null" config equivalent,
+    /// i.e. a chroma value of at least 48.
+    double? primaryChroma,
+
+    /// The chroma value to use for secondary TonalPalette.
+    ///
+    /// If null, the chroma value from [secondary] is used.
+    ///
+    /// Flutter SDK [ColorScheme.fromSeed] uses 16 as secondary chroma value.
+    /// Uses fallback to 16, when a [secondary] color is not provided, but can
+    /// be provided also when secondary is not provided, it then uses given
+    /// chroma on provided primary color's hue.
+    double? secondaryChroma,
+
+    /// The chroma value to use for tertiary TonalPalette.
+    ///
+    /// If null, the chroma value from [tertiary] is used.
+    /// Flutter SDK [ColorScheme.fromSeed] uses 24 as tertiary chroma value.
+    /// Uses fallback to 24, when a [tertiary] color is not provided, but can
+    /// be provided also when secondary is not provided, it then uses given
+    /// chroma on provided primary color's hue.
+    double? tertiaryChroma,
+  }) {
+    // Primary TonalPalette calculation.
+    final Cam16 camPrimary = Cam16.fromInt(primary);
+    final TonalPalette tonalPrimary = TonalPalette.of(
+        camPrimary.hue, primaryChroma ?? math.max(48, camPrimary.chroma));
+
+    // Secondary TonalPalette calculation.
+    final Cam16 camSecondary =
+        secondary == null ? camPrimary : Cam16.fromInt(secondary);
+    final TonalPalette tonalSecondary = secondary == null
+        ? TonalPalette.of(camPrimary.hue, secondaryChroma ?? 16)
+        : TonalPalette.of(camSecondary.hue,
+            secondaryChroma ?? math.max(48, camSecondary.chroma));
+
+    // Tertiary TonalPalette calculation.
+    final Cam16 camTertiary =
+        tertiary == null ? camPrimary : Cam16.fromInt(tertiary);
+    final TonalPalette tonalTertiary = tertiary == null
+        ? TonalPalette.of(camPrimary.hue + 60, tertiaryChroma ?? 24)
+        : TonalPalette.of(camTertiary.hue,
+            tertiaryChroma ?? math.max(48, camTertiary.chroma));
+
+    // Neutral TonalPalettes from primary. The TonalPalette for error color
+    // is hard coded into parent class.
     final TonalPalette tonalNeutral = TonalPalette.of(camPrimary.hue, 4);
     final TonalPalette tonalNeutralVariant = TonalPalette.of(camPrimary.hue, 8);
-
+    // Dump all colors for the tonal palettes into an integer list.
+    // This is only interface into parent class to create the instance. Feels
+    // like it is made as an FFI interface, works but odd in a pure Dart class.
     final List<int> tonalPalettes = <int>[
       ...tonalPrimary.asList,
       ...tonalSecondary.asList,

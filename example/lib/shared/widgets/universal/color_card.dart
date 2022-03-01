@@ -12,7 +12,7 @@ class ColorCard extends StatelessWidget {
     required this.label,
     required this.color,
     required this.textColor,
-    this.size = const Size(78, 56),
+    this.size = const Size(80, 56),
   }) : super(key: key);
 
   final String label;

@@ -796,6 +796,11 @@ class FlexSubThemes {
     ///
     /// Defaults to kRadialReactionRadius = 20.
     final double? splashRadius,
+
+    /// Defines if unselected [Switch] is also themed to be [baseSchemeColor].
+    ///
+    /// If false, it is grey like in Flutter SDK. Defaults to true.
+    final bool unselectedIsColored = true,
   }) {
     // Get selected color, defaults to secondary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
@@ -823,12 +828,14 @@ class FlexSubThemes {
           if (states.contains(MaterialState.selected)) {
             return baseColor.withAlpha(0x70);
           }
+          // Opinionated color on track when not selected
+          if (unselectedIsColored) {
+            return isLight
+                ? baseColor.withAlpha(0x30)
+                : baseColor.withAlpha(0x25);
+          }
           // This is SDK default.
-          // isLight ? const Color(0x52000000) : Colors.white30;
-          // But here we use
-          return isLight
-              ? baseColor.withAlpha(0x30)
-              : baseColor.withAlpha(0x25);
+          return isLight ? const Color(0x52000000) : Colors.white30;
         },
       ),
     );
@@ -857,6 +864,11 @@ class FlexSubThemes {
     ///
     /// Defaults to kRadialReactionRadius = 20.
     final double? splashRadius,
+
+    /// Defines if unselected [Checkbox] is also themed to be [baseSchemeColor].
+    ///
+    /// If false, it is grey like in Flutter SDK. Defaults to true.
+    final bool unselectedIsColored = true,
   }) {
     // Get selected color, defaults to secondary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
@@ -885,7 +897,12 @@ class FlexSubThemes {
           if (states.contains(MaterialState.selected)) {
             return baseColor;
           }
-          return baseColor.withAlpha(0xDD);
+          // Opinionated color on unselected checkbox.
+          if (unselectedIsColored) {
+            return baseColor.withAlpha(0xDD);
+          }
+          // This is SDK default.
+          return isLight ? Colors.black54 : Colors.white70;
         },
       ),
     );
@@ -914,6 +931,11 @@ class FlexSubThemes {
     ///
     /// Defaults to kRadialReactionRadius = 20.
     final double? splashRadius,
+
+    /// Defines if unselected [Radio] is also themed to be [baseSchemeColor].
+    ///
+    /// If false, it is grey like in Flutter SDK. Defaults to true.
+    final bool unselectedIsColored = true,
   }) {
     // Get selected color, defaults to secondary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
@@ -930,7 +952,12 @@ class FlexSubThemes {
           if (states.contains(MaterialState.selected)) {
             return baseColor;
           }
-          return baseColor.withAlpha(0xDD);
+          // Opinionated color on unselected checkbox.
+          if (unselectedIsColored) {
+            return baseColor.withAlpha(0xDD);
+          }
+          // This is SDK default.
+          return isLight ? Colors.black54 : Colors.white70;
         },
       ),
     );
@@ -2136,6 +2163,276 @@ class FlexSubThemes {
                 );
               },
             )
+          : null,
+    );
+  }
+
+  /// An opinionated [NavigationRailThemeData] with simpler API.
+  ///
+  /// The navigation rail can use opinionated color choices from the passed
+  /// [colorScheme] to style the navigation rail.
+  ///
+  /// [FlexColorScheme] uses this sub theme based on a large number of
+  /// properties in [FlexSubThemesData] to make custom default styled sub-theme
+  /// that matches its other themes, it can also use a config that uses the
+  /// M3 defaults as starting point. In both cases overridden value can
+  /// be applied as well.
+  ///
+  /// You can also use the sub-theme helper as an alternative API for creating
+  /// a custom sub-theme for [NavigationRailThemeData].
+  /// It can also set an [opacity] on the background color, although the use
+  /// case for it is not as common as on bottom navigation bars.
+  static NavigationRailThemeData navigationRailTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Optional text style for the labels.
+    ///
+    /// If null, it is kept as null if all other text styling properties are
+    /// also null, resulting in default built text style being used by the
+    /// [NavigationRail] widget.
+    ///
+    /// If null, but if any of the text styling properties are defined, the text
+    /// style [FlexColorScheme.m3TextTheme.labelSmall] will be used as base
+    /// style for the sub-theme text style, but with any none null values
+    /// defined in labelTextStyle, selectedLabelSize or textSchemeColor applied
+    /// as/ overrides on it. If a labelTextStyle is provided the same overrides
+    /// are applied on it.
+    final TextStyle? labelTextStyle,
+
+    /// The size of the text label on selected item.
+    ///
+    /// If defined, it overrides the font size on effective label TextStyle
+    /// on selected item.
+    final double? selectedLabelSize,
+
+    /// The size of the text label on unselected items.
+    ///
+    /// If defined, it overrides the font size on effective label TextStyle
+    /// on unselected items.
+    final double? unselectedLabelSize,
+
+    /// Select which color from the passed in [ColorScheme] to use as base for
+    /// the navigation rail's text color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If null, it defaults to using onSurface color via default widget
+    /// behavior, or sets it to onSurface color if null and other properties
+    /// dictate that we need to assign a color to the none null labelTextStyle.
+    final SchemeColor? textSchemeColor,
+
+    /// If true, the unselected text in the [NavigationRail] use a more muted
+    /// color version of the color defined by [textSchemeColor].
+    ///
+    /// This feature only works when there is a textSchemeColor defined, if it
+    /// is also null, and all other text settings are also null, then setting
+    /// this property to true has no effect since it has no color value to
+    /// operate on.
+    ///
+    /// Defaults to false.
+    final bool mutedUnselectedText = false,
+
+    /// The size of the text label on selected item.
+    ///
+    /// If null, it defaults to 24.
+    final double? selectedIconSize,
+
+    /// The size of the text label on unselected items.
+    ///
+    /// If null, it defaults to 24.
+    final double? unselectedIconSize,
+
+    /// Select which color from the passed in [ColorScheme] to use as base for
+    /// the navigation rail's icon color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If null, it defaults to using onSurface color via default widget
+    /// behavior, or sets it to onSurface color if null and icon size properties
+    /// dictate that we need to assign a color to the iconTheme created.
+    final SchemeColor? iconSchemeColor,
+
+    /// If true, the unselected icon in the [NavigationRail] use a more muted
+    /// color version of the color defined by [iconSchemeColor].
+    ///
+    /// This feature only works when there is a iconSchemeColor defined, if it
+    /// is also null, and all other all icon size settings are also null,
+    /// then setting this property to true has no effect since it has no color
+    /// value to operate on.
+    ///
+    /// Defaults to false.
+    final bool mutedUnselectedIcon = false,
+
+    /// Select which color from the passed in [ColorScheme] to use as base for
+    /// the selected navigation bar's highlighted item highlight color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined it defaults to using secondary color via [NavigationBar]
+    /// widgets default highlight color.
+    final SchemeColor? highlightSchemeColor,
+
+    /// The alpha value used on selection color of the selected indicator.
+    ///
+    /// Defaults to [kNavigationBarIndicatorAlpha] = 0x3D = 61 = 24%.
+    /// The default is the same value as Widget default behavior uses on its
+    /// used secondary color on its indicator color.
+    final int indicatorAlpha = kNavigationBarIndicatorAlpha,
+
+    /// Whether or not the selected [NavigationRailDestination] should include a
+    /// [NavigationIndicator].
+    final bool? useIndicator,
+
+    /// Select which color from the passed in [ColorScheme] to use as background
+    /// color for the navigation bar.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// Defaults to null, if null the result is [NavigationBar]'s default
+    /// background which is surface color with a hard coded elevation overlay
+    /// color of elevation 3 in both light and dark theme mode.
+    final SchemeColor? backgroundSchemeColor,
+
+    /// NavigationRail background opacity.
+    ///
+    /// The opacity value is only applied when a none null value is selected
+    /// in [backgroundSchemeColor], it cannot be applied to the default
+    /// Flutter SDK background color available when backgroundSchemeColor is
+    /// null.
+    ///
+    /// Defaults to 1, fully opaque.
+    final double opacity = 1,
+
+    /// NavigationRail elevation.
+    ///
+    /// Defaults to [kNavigationRailElevation] = 0.
+    final double elevation = kNavigationRailElevation,
+
+    /// Specifies when each [NavigationRailDestination]'s label should appear.
+    ///
+    /// This is used to determine the behavior of NavigationBar's destinations.
+    ///
+    /// If null, theme behavior defaults to
+    /// `NavigationDestinationLabelBehavior.alwaysShow`
+    final NavigationRailLabelType? labelType,
+
+    /// The vertical alignment for the group of [destinations] within the rail.
+    ///
+    /// The [NavigationRailDestination]s are grouped together with the
+    /// [trailing] widget, between the [leading] widget and the bottom
+    /// of the rail.
+    ///
+    /// The value must be between -1.0 and 1.0.
+    ///
+    /// If [groupAlignment] is -1.0, then the items are aligned to the top. If
+    /// [groupAlignment] is 0.0, then the items are aligned to the center. If
+    /// [groupAlignment] is 1.0, then the items are aligned to the bottom.
+    ///
+    /// The default is -1.0.
+    ///
+    /// See also:
+    ///   * [Alignment.y]
+    ///
+    final double? groupAlignment,
+
+    /// The icon color alpha blend value for unselected item.
+    ///
+    /// Defaults to 0x00, no blend of unselected color, use color as is.
+    ///
+    /// FlexColorScheme uses value [kUnselectedBackgroundPrimaryAlphaBlend]
+    ///  0x66 = 102 = 40%, when/ it uses this sub theme, if defined to use
+    ///  muted unselected icon via
+    /// `FlexSubThemesData.navigationRailMutedUnselectedIcon`.
+    final int unselectedAlphaBlend = 0x00,
+
+    /// The icon alpha value for unselected item.
+    ///
+    /// Defaults to 0xFF, fully opaque.
+    ///
+    /// FlexColorScheme uses value [kUnselectedAlphaBlend] which is
+    /// 0xA5 = 165 = 65% when it uses this sub theme, if defined to use muted
+    /// unselected icon via
+    /// `FlexSubThemesData.navigationRailMutedUnselectedIcon`.
+    final int unselectedAlpha = 0xFF,
+  }) {
+    // Get text color, defaults to onSurface.
+    final Color textColor = textSchemeColor == null
+        ? colorScheme.onSurface
+        : schemeColor(textSchemeColor, colorScheme);
+
+    // Get selected text style, defaults to
+    // FlexColorScheme.m3TextTheme.labelSmall if not defined.
+    final TextStyle usedTextStyle =
+        labelTextStyle ?? FlexColorScheme.m3TextTheme.bodyMedium!;
+
+    // Get effective text sizes.
+    final double usedSelectedLabelSize =
+        selectedLabelSize ?? usedTextStyle.fontSize ?? 11;
+    final double usedUnselectedLabelSize =
+        unselectedLabelSize ?? usedTextStyle.fontSize ?? 11;
+
+    // Determine if we should use a custom text style at all, if these props
+    // are null, we should not and just fall back to widget defaults.
+    final bool useTextStyle = labelTextStyle != null ||
+        selectedLabelSize != null ||
+        unselectedLabelSize != null ||
+        textSchemeColor != null;
+
+    // Get icon color, defaults to onSurface.
+    final Color usedIconColor = iconSchemeColor == null
+        ? colorScheme.onSurface
+        : schemeColor(iconSchemeColor, colorScheme);
+
+    // Determine if we should use a custom icon theme at all, if these props
+    // are null, we should not and just fall back to widget defaults.
+    final bool useIconTheme = selectedIconSize != null ||
+        unselectedIconSize != null ||
+        iconSchemeColor != null;
+
+    return NavigationRailThemeData(
+      backgroundColor: backgroundSchemeColor != null
+          ? schemeColor(backgroundSchemeColor, colorScheme).withOpacity(opacity)
+          : null,
+      elevation: elevation,
+      unselectedLabelTextStyle: useTextStyle
+          ? usedTextStyle.copyWith(
+              fontSize: usedUnselectedLabelSize,
+              color: mutedUnselectedText
+                  ? textColor
+                      .blendAlpha(textColor, unselectedAlphaBlend)
+                      .withAlpha(unselectedAlpha)
+                  : textColor,
+            )
+          : null,
+      selectedLabelTextStyle: useTextStyle
+          ? usedTextStyle.copyWith(
+              fontSize: usedSelectedLabelSize,
+              color: textColor,
+            )
+          : null,
+      unselectedIconTheme: useIconTheme
+          ? IconThemeData(
+              size: unselectedIconSize ?? 24,
+              color: mutedUnselectedIcon
+                  ? usedIconColor
+                      .blendAlpha(usedIconColor, unselectedAlphaBlend)
+                      .withAlpha(unselectedAlpha)
+                  : usedIconColor,
+            )
+          : null,
+      selectedIconTheme: useIconTheme
+          ? IconThemeData(
+              size: selectedIconSize ?? 24,
+              color: usedIconColor,
+            )
+          : null,
+      groupAlignment: groupAlignment,
+      labelType: labelType,
+      useIndicator: useIndicator,
+      indicatorColor: highlightSchemeColor != null
+          ? schemeColor(highlightSchemeColor, colorScheme)
+              .withAlpha(indicatorAlpha)
           : null,
     );
   }

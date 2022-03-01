@@ -41,15 +41,10 @@ class ShowSubThemeColors extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isDark = colorScheme.brightness == Brightness.dark;
-    final Color appBarColor = theme.appBarTheme.backgroundColor ??
-        (isDark ? colorScheme.surface : colorScheme.primary);
-    final Color tabBarColor = theme.tabBarTheme.labelColor ??
-        (isDark ? colorScheme.onSurface : colorScheme.onPrimary);
-    final Color chipColor =
-        theme.chipTheme.backgroundColor ?? colorScheme.primary;
-    final Color inputDecorator =
-        theme.inputDecorationTheme.focusColor ?? colorScheme.primary;
 
+    // Get effective background color.
+    final Color background =
+        onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
     // If we had one, copy in a border side to it.
@@ -73,9 +68,66 @@ class ShowSubThemeColors extends StatelessWidget {
       );
     }
 
-    // Get effective background color.
-    final Color bg =
-        onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
+    // Get the colors of all shown component theme colors.
+
+    final Color elevatedButtonColor = theme
+            .elevatedButtonTheme.style?.backgroundColor
+            ?.resolve(<MaterialState>{}) ??
+        colorScheme.primary;
+    final Color outlinedButtonColor = theme
+            .outlinedButtonTheme.style?.foregroundColor
+            ?.resolve(<MaterialState>{}) ??
+        colorScheme.primary;
+    final Color textButtonColor = theme.textButtonTheme.style?.foregroundColor
+            ?.resolve(<MaterialState>{}) ??
+        colorScheme.primary;
+    final Color toggleButtonsColor =
+        theme.toggleButtonsTheme.color ?? colorScheme.primary;
+    final Color floatingActionButtonColor =
+        theme.floatingActionButtonTheme.backgroundColor ??
+            colorScheme.secondary;
+    final Color switchColor = theme.switchTheme.thumbColor
+            ?.resolve(<MaterialState>{MaterialState.selected}) ??
+        theme.toggleableActiveColor;
+    final Color checkboxColor = theme.checkboxTheme.fillColor
+            ?.resolve(<MaterialState>{MaterialState.selected}) ??
+        theme.toggleableActiveColor;
+    final Color radioColor = theme.radioTheme.fillColor
+            ?.resolve(<MaterialState>{MaterialState.selected}) ??
+        theme.toggleableActiveColor;
+    final Color chipColor =
+        theme.chipTheme.backgroundColor ?? colorScheme.primary;
+
+    final Color inputDecoratorColor =
+        theme.inputDecorationTheme.focusColor?.withAlpha(0xFF) ??
+            colorScheme.primary;
+
+    final Color appBarColor = theme.appBarTheme.backgroundColor ??
+        (isDark ? colorScheme.surface : colorScheme.primary);
+    final Color tabBarColor = theme.tabBarTheme.labelColor ??
+        (isDark ? colorScheme.onSurface : colorScheme.onPrimary);
+    final Color dialogColor =
+        theme.dialogTheme.backgroundColor ?? theme.dialogBackgroundColor;
+
+    final Color bottomNavBarColor =
+        theme.bottomNavigationBarTheme.backgroundColor ??
+            colorScheme.background;
+    final Color bottomNavBarItemColor =
+        theme.bottomNavigationBarTheme.selectedItemColor ?? colorScheme.primary;
+    final Color navigationBarColor =
+        theme.navigationBarTheme.backgroundColor ?? colorScheme.background;
+    final Color navigationBarItemColor = theme.navigationBarTheme.iconTheme
+            ?.resolve(<MaterialState>{MaterialState.selected})?.color ??
+        colorScheme.primary;
+    final Color navigationBarIndicatorColor =
+        theme.navigationBarTheme.indicatorColor ?? colorScheme.primary;
+    final Color navigationRailColor =
+        theme.navigationRailTheme.backgroundColor ?? colorScheme.background;
+    final Color navigationRailItemColor =
+        theme.navigationRailTheme.selectedIconTheme?.color ??
+            colorScheme.primary;
+    final Color navigationRailIndicatorColor =
+        theme.navigationRailTheme.indicatorColor ?? colorScheme.primary;
 
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.
@@ -89,12 +141,11 @@ class ShowSubThemeColors extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              'Component sub-theme colors',
-              style: theme.textTheme.subtitle1,
-            ),
+          const ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text('Component sub-theme colors'),
+            subtitle: Text('The themed settings are in component settings '
+                'panels. Control of the colors might be added later here too.'),
           ),
           // A Wrap widget is just the right handy widget for this type of
           // widget to make it responsive.
@@ -104,29 +155,114 @@ class ShowSubThemeColors extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: <Widget>[
               ColorCard(
-                label: 'AppBar',
-                color: appBarColor,
-                textColor: _onColor(appBarColor, bg),
+                label: 'Elevated\nButton',
+                color: elevatedButtonColor,
+                textColor: _onColor(elevatedButtonColor, background),
               ),
               ColorCard(
-                label: 'TabBar',
-                color: tabBarColor,
-                textColor: _onColor(tabBarColor, bg),
+                label: 'Outlined\nButton',
+                color: outlinedButtonColor,
+                textColor: _onColor(elevatedButtonColor, background),
               ),
               ColorCard(
-                label: 'TabBar\nIndicator',
-                color: theme.indicatorColor,
-                textColor: _onColor(theme.indicatorColor, bg),
+                label: 'Text\nButton',
+                color: textButtonColor,
+                textColor: _onColor(textButtonColor, background),
+              ),
+              ColorCard(
+                label: 'Toggle\nButtons',
+                color: toggleButtonsColor,
+                textColor: _onColor(toggleButtonsColor, background),
+              ),
+              ColorCard(
+                label: 'Switch',
+                color: switchColor,
+                textColor: _onColor(switchColor, background),
+              ),
+              ColorCard(
+                label: 'Checkbox',
+                color: checkboxColor,
+                textColor: _onColor(checkboxColor, background),
+              ),
+              ColorCard(
+                label: 'Radio',
+                color: radioColor,
+                textColor: _onColor(radioColor, background),
+              ),
+              ColorCard(
+                label: 'Floating\nAction\nButton',
+                color: floatingActionButtonColor,
+                textColor: _onColor(floatingActionButtonColor, background),
               ),
               ColorCard(
                 label: 'Chips',
                 color: chipColor,
-                textColor: _onColor(chipColor, bg),
+                textColor: _onColor(chipColor, background),
               ),
               ColorCard(
                 label: 'Input\nDecorator',
-                color: inputDecorator,
-                textColor: _onColor(inputDecorator, bg),
+                color: inputDecoratorColor,
+                textColor: _onColor(inputDecoratorColor, background),
+              ),
+              ColorCard(
+                label: 'AppBar',
+                color: appBarColor,
+                textColor: _onColor(appBarColor, background),
+              ),
+              ColorCard(
+                label: 'TabBar\nitem',
+                color: tabBarColor,
+                textColor: _onColor(tabBarColor, background),
+              ),
+              ColorCard(
+                label: 'TabBar\nIndicator',
+                color: theme.indicatorColor,
+                textColor: _onColor(theme.indicatorColor, background),
+              ),
+              ColorCard(
+                label: 'Dialog\nBackground',
+                color: dialogColor,
+                textColor: _onColor(dialogColor, background),
+              ),
+              ColorCard(
+                label: 'Bottom\nNavigationBar\nbackground',
+                color: bottomNavBarColor,
+                textColor: _onColor(bottomNavBarColor, background),
+              ),
+              ColorCard(
+                label: 'Bottom\nNavigationBar\nselected',
+                color: bottomNavBarItemColor,
+                textColor: _onColor(bottomNavBarItemColor, background),
+              ),
+              ColorCard(
+                label: 'Navigation\nBar\nbackground',
+                color: navigationBarColor,
+                textColor: _onColor(navigationBarColor, background),
+              ),
+              ColorCard(
+                label: 'Navigation\nBar\nselected',
+                color: navigationBarItemColor,
+                textColor: _onColor(navigationBarItemColor, background),
+              ),
+              ColorCard(
+                label: 'Navigation\nBar\nindicator',
+                color: navigationBarIndicatorColor,
+                textColor: _onColor(navigationBarIndicatorColor, background),
+              ),
+              ColorCard(
+                label: 'Navigation\nRail\nbackground',
+                color: navigationRailColor,
+                textColor: _onColor(navigationRailColor, background),
+              ),
+              ColorCard(
+                label: 'Navigation\nRail\nselected',
+                color: navigationRailItemColor,
+                textColor: _onColor(navigationRailItemColor, background),
+              ),
+              ColorCard(
+                label: 'Navigation\nRail\nindicator',
+                color: navigationRailIndicatorColor,
+                textColor: _onColor(navigationRailIndicatorColor, background),
               ),
             ],
           ),

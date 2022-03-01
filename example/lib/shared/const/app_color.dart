@@ -137,8 +137,8 @@ class AppColor {
   /// frequently, which was a bit too inefficient.
   ///
   /// Instead we are making it a final and will add a const placeholder for the
-  /// last index for the customized colors and use another static helper function
-  /// to get right colors see next step.
+  /// last index for the customized colors and use another static helper
+  /// function to get right colors see next step.
   static final List<FlexSchemeData> schemesCustom = <FlexSchemeData>[
     // Use all the built-in FlexColor schemes we setup for example 4
     ...schemes,

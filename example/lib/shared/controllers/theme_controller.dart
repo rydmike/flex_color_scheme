@@ -116,6 +116,7 @@ class ThemeController with ChangeNotifier {
     _fabSchemeColor = await _themeService.fabSchemeColor();
     _navBarBackgroundSchemeColor =
         await _themeService.navBarBackgroundSchemeColor();
+    _unselectedIsColored = await _themeService.unselectedIsColored();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -219,7 +220,7 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultKeepSecondaryContainer, false);
     await setKeepTertiaryContainer(
         ThemeService.defaultKeepTertiaryContainer, false);
-    // More props for V5 custom scheme colrs.
+    // More props for V5 custom scheme colors.
     await setTextButtonSchemeColor(
         ThemeService.defaultTextButtonSchemeColor, false);
     await setElevatedButtonSchemeColor(
@@ -243,6 +244,8 @@ class ThemeController with ChangeNotifier {
     await setFabSchemeColor(ThemeService.defaultFabSchemeColor, false);
     await setNavBarBackgroundSchemeColor(
         ThemeService.defaultNavBarBackgroundSchemeColor, false);
+    await setUnselectedIsColored(
+        ThemeService.defaultUnselectedIsColored, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -1169,5 +1172,15 @@ class ThemeController with ChangeNotifier {
     _keepTertiaryContainer = value;
     if (notify) notifyListeners();
     await _themeService.saveKeepTertiaryContainer(value);
+  }
+
+  late bool _unselectedIsColored;
+  bool get unselectedIsColored => _unselectedIsColored;
+  Future<void> setUnselectedIsColored(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _unselectedIsColored) return;
+    _unselectedIsColored = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUnselectedIsColored(value);
   }
 }

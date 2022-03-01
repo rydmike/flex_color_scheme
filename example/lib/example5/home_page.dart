@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
               child: DartCodeDialogScreen(
                 dialogHeader: 'Active ${isDark ? 'Dark' : 'Light'} '
                     'ColorScheme Code',
-                copyMessage: 'ColorScheme code copied clipboard!',
+                copyMessage: 'ColorScheme code copied to the clipboard!',
                 code: code,
               ),
             );
@@ -412,7 +412,7 @@ Future<void> _handleCodeTap(
     context: context,
     child: DartCodeDialogScreen(
         dialogHeader: 'Active FlexColorScheme Setup',
-        copyMessage: 'FlexColorScheme setup code copied clipboard!',
+        copyMessage: 'FlexColorScheme setup code copied to the clipboard!',
         code: code),
   );
 }
@@ -2116,11 +2116,11 @@ class _NavigationRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
-    final double navBarOpacity =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.bottomNavigationBarOpacity
-            : 1;
+    // final bool isLight = Theme.of(context).brightness == Brightness.light;
+    // final double navBarOpacity =
+    //     controller.useSubThemes && controller.useFlexColorScheme
+    //         ? controller.bottomNavigationBarOpacity
+    //         : 1;
     final double navBarElevation =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.bottomNavigationBarElevation
@@ -2261,7 +2261,7 @@ class _NavigationRail extends StatelessWidget {
           //   value: controller.navBarMuteUnselected &&
           //       controller.useSubThemes &&
           //       controller.useFlexColorScheme,
-          //   onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          // onChanged: controller.useSubThemes && controller.useFlexColorScheme
           //       ? controller.setNavBarMuteUnselected
           //       : null,
           // ),
@@ -2513,6 +2513,17 @@ class _SwitchesShowcase extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SwitchListTile.adaptive(
+            title: const Text('Unselected toggle color'),
+            subtitle: const Text('ON: Use theme color   OFF: SDK neutral'),
+            value: controller.unselectedIsColored &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setUnselectedIsColored
+                : null,
+          ),
+          const Divider(),
           ColorSchemePopupMenu(
             title: const Text('Switch color'),
             index: controller.switchSchemeColor?.index ?? -1,

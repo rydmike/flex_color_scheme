@@ -203,6 +203,9 @@ const double kNavigationBarHeight = 62;
 /// Value: 0x3D = 61 = 24%
 const int kNavigationBarIndicatorAlpha = 0x3D;
 
+/// Default for elevation of [NavigationRail].
+const double kNavigationRailElevation = 0;
+
 /// Default for elevation of [SnackBar].
 const double kSnackBarElevation = 4;
 
@@ -388,13 +391,13 @@ const int kChipBackgroundAlphaBlend = 0xCC;
 const int kChipSelectedBackgroundAlphaBlend = 0x96;
 
 /// The onBackground primary alpha blend value for an unselected item, typically
-/// an icon in a TabBar or BottomNavigationBar.
+/// an icon in a TabBar, BottomNavigationBar, NavigationBar or NavigationRail.
 ///
 /// Value: 0x66 = 102 = 40%
 const int kUnselectedBackgroundPrimaryAlphaBlend = 0x66;
 
 /// The alpha value for an unselected item, typically
-/// an icon in a TabBar or BottomNavigationBar.
+/// an icon in a TabBar, BottomNavigationBar, NavigationBar or NavigationRail.
 ///
 /// Value: 0xA5 = 165 = 65%
 const int kUnselectedAlphaBlend = 0xA5;

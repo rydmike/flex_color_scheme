@@ -467,11 +467,11 @@ class FlexColor {
   /// Aqua blue theme color for light secondary color.
   static const Color aquaBlueLightSecondary = Color(0xFF89D1C8);
 
-  /// Aqua blue theme color for light tertiary color.
-  static const Color aquaBlueLightTertiary = Color(0xFF61D4D4);
-
   /// Aqua blue theme color for light secondary container color.
   static const Color aquaBlueLightSecondaryContainer = Color(0xFF91F4E8);
+
+  /// Aqua blue theme color for light tertiary color.
+  static const Color aquaBlueLightTertiary = Color(0xFF61D4D4);
 
   /// Aqua blue theme color for light tertiary container color.
   static const Color aquaBlueLightTertiaryContainer = Color(0xFF8FF3F2);
@@ -493,11 +493,11 @@ class FlexColor {
   /// Aqua blue theme color for dark secondary color.
   static const Color aquaBlueDarkSecondary = Color(0xFFA1E9DF);
 
-  /// Aqua blue theme color for dark tertiary color.
-  static const Color aquaBlueDarkTertiary = Color(0xFFA0E5E5);
-
   /// Aqua blue theme color for dark secondary container color.
   static const Color aquaBlueDarkSecondaryContainer = Color(0xFF005049);
+
+  /// Aqua blue theme color for dark tertiary color.
+  static const Color aquaBlueDarkTertiary = Color(0xFFA0E5E5);
 
   /// Aqua blue theme color for dark tertiary container color.
   static const Color aquaBlueDarkTertiaryContainer = Color(0xFF004F50);
@@ -528,11 +528,11 @@ class FlexColor {
   /// Brand blues theme color for light secondary color.
   static const Color brandBlueLightSecondary = Color(0xFF55ACEE); // Twitter
 
-  /// Brand blues theme color for light tertiary color.
-  static const Color brandBlueLightTertiary = Color(0xFF4285F4); // Google
-
   /// Brand blues theme color for light secondary container color.
   static const Color brandBlueLightSecondaryContainer = Color(0xFFCBE5FF);
+
+  /// Brand blues theme color for light tertiary color.
+  static const Color brandBlueLightTertiary = Color(0xFF4285F4); // Google
 
   /// Brand blues theme color for light tertiary container color.
   static const Color brandBlueLightTertiaryContainer = Color(0xFFD6E2FF);
@@ -554,11 +554,11 @@ class FlexColor {
   /// Brand blues theme color for dark secondary color.
   static const Color brandBlueDarkSecondary = Color(0xFFA0D1F5);
 
-  /// Brand blues theme color for dark tertiary color.
-  static const Color brandBlueDarkTertiary = Color(0xFF88B2F8);
-
   /// Brand blues theme color for dark secondary container color.
   static const Color brandBlueDarkSecondaryContainer = Color(0xFF004B75);
+
+  /// Brand blues theme color for dark tertiary color.
+  static const Color brandBlueDarkTertiary = Color(0xFF88B2F8);
 
   /// Brand blues theme color for dark tertiary container color.
   static const Color brandBlueDarkTertiaryContainer = Color(0xFF004397);
@@ -589,11 +589,11 @@ class FlexColor {
   /// Deep blue theme color for light secondary color.
   static const Color deepBlueLightSecondary = Color(0xFF144955);
 
-  /// Deep blue theme color for light tertiary color.
-  static const Color deepBlueLightTertiary = Color(0xFF208399);
-
   /// Deep blue theme color for light secondary container color.
   static const Color deepBlueLightSecondaryContainer = Color(0xFFA9EDFF);
+
+  /// Deep blue theme color for light tertiary color.
+  static const Color deepBlueLightTertiary = Color(0xFF208399);
 
   /// Deep blue theme color for light tertiary container color.
   static const Color deepBlueLightTertiaryContainer = Color(0xFFCCF3FF);
@@ -615,11 +615,11 @@ class FlexColor {
   /// Deep blue theme color for dark secondary color.
   static const Color deepBlueDarkSecondary = Color(0xFF539EAF);
 
-  /// Deep blue theme color for dark tertiary color.
-  static const Color deepBlueDarkTertiary = Color(0xFF219AB5);
-
   /// Deep blue theme color for dark secondary container color.
   static const Color deepBlueDarkSecondaryContainer = Color(0xFF004E5D);
+
+  /// Deep blue theme color for dark tertiary color.
+  static const Color deepBlueDarkTertiary = Color(0xFF219AB5);
 
   /// Deep blue theme color for dark tertiary container color.
   static const Color deepBlueDarkTertiaryContainer = Color(0xFF0F5B6A);
@@ -651,11 +651,11 @@ class FlexColor {
   /// Sakura theme color for light secondary color.
   static const Color sakuraLightSecondary = Color(0xFFfbae9d); // Peach pink 80%
 
-  /// Sakura theme color for light tertiary color.
-  static const Color sakuraLightTertiary = Color(0xFFF39682); //Peach
-
   /// Sakura theme color for light secondary container color.
   static const Color sakuraLightSecondaryContainer = Color(0xFFFFDAD1);
+
+  /// Sakura theme color for light tertiary color.
+  static const Color sakuraLightTertiary = Color(0xFFF39682); //Peach
 
   /// Sakura theme color for light tertiary container color.
   static const Color sakuraLightTertiaryContainer = Color(0xFFFFCFC3);
@@ -677,11 +677,11 @@ class FlexColor {
   /// Sakura theme color for dark secondary color.
   static const Color sakuraDarkSecondary = Color(0xFFF5D6C6); // Peche
 
-  /// Sakura theme color for dark tertiary color.
-  static const Color sakuraDarkTertiary = Color(0xFFf7e0d4);
-
   /// Sakura theme color for dark secondary container color.
   static const Color sakuraDarkSecondaryContainer = Color(0xFFEBA689);
+
+  /// Sakura theme color for dark tertiary color.
+  static const Color sakuraDarkTertiary = Color(0xFFf7e0d4);
 
   /// Sakura theme color for dark tertiary container color.
   static const Color sakuraDarkTertiaryContainer = Color(0xFFEEBDA8);
@@ -713,11 +713,11 @@ class FlexColor {
   /// Mandy red theme color for light secondary color.
   static const Color mandyRedLightSecondary = Color(0xFF57C8D3);
 
-  /// Mandy red theme color for light tertiary color.
-  static const Color mandyRedLightTertiary = Color(0xFF69B9CD);
-
   /// Mandy red theme color for light secondary container color.
   static const Color mandyRedLightSecondaryContainer = Color(0xFF90F2FC);
+
+  /// Mandy red theme color for light tertiary color.
+  static const Color mandyRedLightTertiary = Color(0xFF69B9CD);
 
   /// Mandy red theme color for light tertiary container color.
   static const Color mandyRedLightTertiaryContainer = Color(0xFFA6EDFF);
@@ -739,11 +739,11 @@ class FlexColor {
   /// Mandy red theme color for dark secondary color.
   static const Color mandyRedDarkSecondary = Color(0xFF68CDD7);
 
-  /// Mandy red theme color for dark tertiary color.
-  static const Color mandyRedDarkTertiary = Color(0xFF85C6D6);
-
   /// Mandy red theme color for dark secondary container color.
   static const Color mandyRedDarkSecondaryContainer = Color(0xFF037481);
+
+  /// Mandy red theme color for dark tertiary color.
+  static const Color mandyRedDarkTertiary = Color(0xFF85C6D6);
 
   /// Mandy red theme color for dark tertiary container color.
   static const Color mandyRedDarkTertiaryContainer = Color(0xFF21859E);
@@ -774,11 +774,11 @@ class FlexColor {
   /// Red theme color for light secondary color.
   static const Color redLightSecondary = Color(0xFFAD1457); // pink800
 
-  /// Red theme color for light tertiary color.
-  static const Color redLightTertiary = Color(0xFFC2185B); // pink700
-
   /// Red theme color for light secondary container color.
   static const Color redLightSecondaryContainer = Color(0xFFF8BBD0); // pink50
+
+  /// Red theme color for light tertiary color.
+  static const Color redLightTertiary = Color(0xFFC2185B); // pink700
 
   /// Red theme color for light tertiary container color.
   static const Color redLightTertiaryContainer = Color(0xFFFCE4EC); // pink100
@@ -800,11 +800,11 @@ class FlexColor {
   /// Red theme color for dark secondary color.
   static const Color redDarkSecondary = Color(0xFFF8BBD0); // pink100
 
-  /// Red theme color for dark tertiary color.
-  static const Color redDarkTertiary = Color(0xFFFCE4EC); // pink50
-
   /// Red theme color for dark secondary container color.
   static const Color redDarkSecondaryContainer = Color(0xFFAD1457); // pink800
+
+  /// Red theme color for dark tertiary color.
+  static const Color redDarkTertiary = Color(0xFFFCE4EC); // pink50
 
   /// Red theme color for dark tertiary container color.
   static const Color redDarkTertiaryContainer = Color(0xFFC2185B); //pink 900
@@ -838,11 +838,11 @@ class FlexColor {
   /// Red wine theme color for light secondary color.
   static const Color redWineLightSecondary = Color(0xFFA70043);
 
-  /// Red wine theme color for light tertiary color.
-  static const Color redWineLightTertiary = Color(0xFFA4121C);
-
   /// Red wine theme color for light secondary container color.
   static const Color redWineLightSecondaryContainer = Color(0xFFFFD9DF);
+
+  /// Red wine theme color for light tertiary color.
+  static const Color redWineLightTertiary = Color(0xFFA4121C);
 
   /// Red wine theme color for light tertiary container color.
   static const Color redWineLightTertiaryContainer = Color(0xFFFFDAD5);
@@ -864,11 +864,11 @@ class FlexColor {
   /// Red wine theme color for dark secondary color.
   static const Color redWineDarkSecondary = Color(0xFFC87A98); // 0xFFc8374d
 
-  /// Red wine theme color for dark tertiary color.
-  static const Color redWineDarkTertiary = Color(0xFFBD545B);
-
   /// Red wine theme color for dark secondary container color.
   static const Color redWineDarkSecondaryContainer = Color(0xFF910037);
+
+  /// Red wine theme color for dark tertiary color.
+  static const Color redWineDarkTertiary = Color(0xFFBD545B);
 
   /// Red wine theme color for dark tertiary container color.
   static const Color redWineDarkTertiaryContainer = Color(0xFF930012);
@@ -901,11 +901,11 @@ class FlexColor {
   /// Purple brown theme color for light secondary color.
   static const Color purpleBrownLightSecondary = Color(0xFF60234F);
 
-  /// Purple brown theme color for light tertiary color.
-  static const Color purpleBrownLightTertiary = Color(0xFF4A0635);
-
   /// Purple brown theme color for light secondary container color.
   static const Color purpleBrownLightSecondaryContainer = Color(0xFFE9CEDD);
+
+  /// Purple brown theme color for light tertiary color.
+  static const Color purpleBrownLightTertiary = Color(0xFF4A0635);
 
   /// Purple brown theme color for light tertiary container color.
   static const Color purpleBrownLightTertiaryContainer = Color(0xFFE3B0C5);
@@ -928,11 +928,11 @@ class FlexColor {
   /// Purple brown theme color for dark secondary color.
   static const Color purpleBrownDarkSecondary = Color(0xFF975384);
 
-  /// Purple brown theme color for dark tertiary color.
-  static const Color purpleBrownDarkTertiary = Color(0xFF5F4C5A);
-
   /// Purple brown theme color for dark secondary container color.
   static const Color purpleBrownDarkSecondaryContainer = Color(0xFF6A2357);
+
+  /// Purple brown theme color for dark tertiary color.
+  static const Color purpleBrownDarkTertiary = Color(0xFF5F4C5A);
 
   /// Purple brown theme color for dark tertiary container color.
   static const Color purpleBrownDarkTertiaryContainer = Color(0xFF501A3C);
@@ -963,11 +963,11 @@ class FlexColor {
   /// Green theme color for light secondary color.
   static const Color greenLightSecondary = Color(0xFF00695C); // cyan800
 
-  /// Green theme color for light tertiary color.
-  static const Color greenLightTertiary = Color(0xFF004D40);
-
   /// Green theme color for light secondary container color.
   static const Color greenLightSecondaryContainer = Color(0xFF7DCEC4);
+
+  /// Green theme color for light tertiary color.
+  static const Color greenLightTertiary = Color(0xFF004D40);
 
   /// Green theme color for light tertiary container color.
   static const Color greenLightTertiaryContainer = Color(0xFF59B1A1);
@@ -989,11 +989,11 @@ class FlexColor {
   /// Green theme color for dark secondary color.
   static const Color greenDarkSecondary = Color(0xFF80CBC4); // cyan200
 
-  /// Green theme color for dark tertiary color.
-  static const Color greenDarkTertiary = Color(0xFF4DB6AC); // cyan300
-
   /// Green theme color for dark secondary container color.
   static const Color greenDarkSecondaryContainer = Color(0xFF00695C); // cyan800
+
+  /// Green theme color for dark tertiary color.
+  static const Color greenDarkTertiary = Color(0xFF4DB6AC); // cyan300
 
   /// Green theme color for dark tertiary container color.
   static const Color greenDarkTertiaryContainer = Color(0xFF05514A);
@@ -1026,11 +1026,11 @@ class FlexColor {
   /// Money green theme color for light secondary color.
   static const Color moneyLightSecondary = Color(0xFF797b3a); // Guacamole 35%
 
-  /// Money green theme color for light tertiary color.
-  static const Color moneyLightTertiary = Color(0xFF555729);
-
   /// Money green theme color for light secondary container color.
   static const Color moneyLightSecondaryContainer = Color(0xffbfc0a0);
+
+  /// Money green theme color for light tertiary color.
+  static const Color moneyLightTertiary = Color(0xFF555729);
 
   /// Money green theme color for light tertiary container color.
   static const Color moneyLightTertiaryContainer = Color(0xFF9EA089);
@@ -1052,11 +1052,11 @@ class FlexColor {
   /// Money green theme color for dark secondary color.
   static const Color moneyDarkSecondary = Color(0xFFd5d6a8); // Guacamole 75%
 
-  /// Money green theme color for dark tertiary color.
-  static const Color moneyDarkTertiary = Color(0xFFbbbe74); //Gua. 60%
-
   /// Money green theme color for dark secondary container color.
   static const Color moneyDarkSecondaryContainer = Color(0xFF515402);
+
+  /// Money green theme color for dark tertiary color.
+  static const Color moneyDarkTertiary = Color(0xFFbbbe74); //Gua. 60%
 
   /// Money green theme color for dark tertiary container color.
   static const Color moneyDarkTertiaryContainer = Color(0xFF404204);
@@ -1088,11 +1088,11 @@ class FlexColor {
   /// Jungle green theme color for light secondary color.
   static const Color jungleLightSecondary = Color(0xFF007256);
 
-  /// Jungle green theme color for light tertiary color.
-  static const Color jungleLightTertiary = Color(0xFF295300);
-
   /// Jungle green theme color for light secondary container color.
   static const Color jungleLightSecondaryContainer = Color(0xFF83BCAD);
+
+  /// Jungle green theme color for light tertiary color.
+  static const Color jungleLightTertiary = Color(0xFF295300);
 
   /// Jungle green theme color for light tertiary container color.
   static const Color jungleLightTertiaryContainer = Color(0xFF8FAA78);
@@ -1114,11 +1114,11 @@ class FlexColor {
   /// Jungle green theme color for dark secondary color.
   static const Color jungleDarkSecondary = Color(0xFF479985);
 
-  /// Jungle green theme color for dark tertiary color.
-  static const Color jungleDarkTertiary = Color(0xFF73A497);
-
   /// Jungle green theme color for dark secondary container color.
   static const Color jungleDarkSecondaryContainer = Color(0xFF00513B);
+
+  /// Jungle green theme color for dark tertiary color.
+  static const Color jungleDarkTertiary = Color(0xFF73A497);
 
   /// Jungle green theme color for dark tertiary container color.
   static const Color jungleDarkTertiaryContainer = Color(0xFF275000);
@@ -1150,11 +1150,11 @@ class FlexColor {
   /// Grey law theme color for light secondary color.
   static const Color greyLawLightSecondary = Color(0xFF521D82);
 
-  /// Grey law theme color for light tertiary color.
-  static const Color greyLawLightTertiary = Color(0xFF2C314F);
-
   /// Grey law theme color for light secondary container color.
   static const Color greyLawLightSecondaryContainer = Color(0xFFF1DAFF);
+
+  /// Grey law theme color for light tertiary color.
+  static const Color greyLawLightTertiary = Color(0xFF2C314F);
 
   /// Grey law theme color for light tertiary container color.
   static const Color greyLawLightTertiaryContainer = Color(0xFFDDE0FF);
@@ -1176,11 +1176,11 @@ class FlexColor {
   /// Grey law theme color for dark secondary color.
   static const Color greyLawDarkSecondary = Color(0xFF815AA3);
 
-  /// Grey law theme color for dark tertiary color.
-  static const Color greyLawDarkTertiary = Color(0xFF373D5C);
-
   /// Grey law theme color for dark secondary container color.
   static const Color greyLawDarkSecondaryContainer = Color(0xFF421F62);
+
+  /// Grey law theme color for dark tertiary color.
+  static const Color greyLawDarkTertiary = Color(0xFF373D5C);
 
   /// Grey law theme color for dark tertiary container color.
   static const Color greyLawDarkTertiaryContainer = Color(0xFF1D2449);
@@ -1212,12 +1212,12 @@ class FlexColor {
   /// Wild Willow and wasabi green theme color for light secondary color.
   static const Color wasabiLightSecondary = Color(0xFF893789);
 
-  /// Willow and wasabi green theme color for light tertiary color.
-  static const Color wasabiLightTertiary = Color(0xFF5E3974);
-
   /// Wild Willow and wasabi green theme color for light secondary container
   /// color.
   static const Color wasabiLightSecondaryContainer = Color(0xFFFFD6F9);
+
+  /// Willow and wasabi green theme color for light tertiary color.
+  static const Color wasabiLightTertiary = Color(0xFF5E3974);
 
   /// Willow and wasabi green theme color for light tertiary container color.
   static const Color wasabiLightTertiaryContainer = Color(0xFFF6D8FF);
@@ -1239,11 +1239,11 @@ class FlexColor {
   /// Willow and wasabi green theme color for dark secondary color.
   static const Color wasabiDarkSecondary = Color(0xFFDF9ADF);
 
-  /// Willow and wasabi green theme color for dark tertiary color.
-  static const Color wasabiDarkTertiary = Color(0xFFA664CD);
-
   /// Willow and wasabi green theme color for dark secondary container color.
   static const Color wasabiDarkSecondaryContainer = Color(0xFF742375);
+
+  /// Willow and wasabi green theme color for dark tertiary color.
+  static const Color wasabiDarkTertiary = Color(0xFFA664CD);
 
   /// Willow and wasabi green theme color for dark tertiary container color.
   static const Color wasabiDarkTertiaryContainer = Color(0xFF61317E);
@@ -1275,11 +1275,11 @@ class FlexColor {
   /// Gold sunset theme color for light secondary color.
   static const Color goldLightSecondary = Color(0xFFEF6C00); // Orange800
 
-  /// Gold sunset theme color for light tertiary color.
-  static const Color goldLightTertiary = Color(0xFFb36832);
-
   /// Gold sunset theme color for light secondary container color.
   static const Color goldLightSecondaryContainer = Color(0xFFFFBE93);
+
+  /// Gold sunset theme color for light tertiary color.
+  static const Color goldLightTertiary = Color(0xFFb36832);
 
   /// Gold sunset theme color for light tertiary container color.
   static const Color goldLightTertiaryContainer = Color(0xffca9d7c);
@@ -1301,11 +1301,11 @@ class FlexColor {
   /// Gold sunset theme color for dark secondary color.
   static const Color goldDarkSecondary = Color(0xFFd28f60); // S.almond L 60%
 
-  /// Gold sunset theme color for dark tertiary color.
-  static const Color goldDarkTertiary = Color(0xFFddab88);
-
   /// Gold sunset theme color for dark secondary container color.
   static const Color goldDarkSecondaryContainer = Color(0xffb5642c);
+
+  /// Gold sunset theme color for dark tertiary color.
+  static const Color goldDarkTertiary = Color(0xFFddab88);
 
   /// Gold sunset theme color for dark tertiary container color.
   static const Color goldDarkTertiaryContainer = Color(0xffbf7d4e);
@@ -1338,11 +1338,11 @@ class FlexColor {
   /// Mango mojito theme color for light secondary color.
   static const Color mangoLightSecondary = Color(0xFF8D9440);
 
-  /// Mango mojito theme color for light tertiary color.
-  static const Color mangoLightTertiary = Color(0xFF616247);
-
   /// Mango mojito theme color for light secondary container color.
   static const Color mangoLightSecondaryContainer = Color(0xFFBFC39B);
+
+  /// Mango mojito theme color for light tertiary color.
+  static const Color mangoLightTertiary = Color(0xFF616247);
 
   /// Mango mojito theme color for light tertiary container color.
   static const Color mangoLightTertiaryContainer = Color(0xFFBCBCA8);
@@ -1364,11 +1364,11 @@ class FlexColor {
   /// Mango mojito theme color for dark secondary color.
   static const Color mangoDarkSecondary = Color(0xFFAFB479);
 
-  /// Mango mojito theme color for dark tertiary color.
-  static const Color mangoDarkTertiary = Color(0xFF81816C);
-
   /// Mango mojito theme color for dark secondary container color.
   static const Color mangoDarkSecondaryContainer = Color(0xFF82883D);
+
+  /// Mango mojito theme color for dark tertiary color.
+  static const Color mangoDarkTertiary = Color(0xFF81816C);
 
   /// Mango mojito theme color for dark tertiary container color.
   static const Color mangoDarkTertiaryContainer = Color(0xFF5A5A35);
@@ -1400,11 +1400,11 @@ class FlexColor {
   /// Amber theme color for light secondary color.
   static const Color amberLightSecondary = Color(0xFF2979FF); // BlueAccent400
 
-  /// Amber theme color for light tertiary color.
-  static const Color amberLightTertiary = Color(0xFF2962FF);
-
   /// Amber theme color for light secondary container color.
   static const Color amberLightSecondaryContainer = Color(0xFFE4EAFF);
+
+  /// Amber theme color for light tertiary color.
+  static const Color amberLightTertiary = Color(0xFF2962FF);
 
   /// Amber theme color for light tertiary container color.
   static const Color amberLightTertiaryContainer = Color(0xFFCBD6FF);
@@ -1426,11 +1426,11 @@ class FlexColor {
   /// Amber theme color for dark secondary color.
   static const Color amberDarkSecondary = Color(0xFF82B1FF); // BlueAccent100
 
-  /// Amber theme color for dark tertiary color.
-  static const Color amberDarkTertiary = Color(0xFF448AFF);
-
   /// Amber theme color for dark secondary container color.
   static const Color amberDarkSecondaryContainer = Color(0xFF3770CF);
+
+  /// Amber theme color for dark tertiary color.
+  static const Color amberDarkTertiary = Color(0xFF448AFF);
 
   /// Amber theme color for dark tertiary container color.
   static const Color amberDarkTertiaryContainer = Color(0xFF0B429C);
@@ -1462,11 +1462,11 @@ class FlexColor {
   /// Vesuvius burned theme color for light secondary color.
   static const Color vesuviusBurnLightSecondary = Color(0xFF185358);
 
-  /// Vesuvius burned theme color for light tertiary color.
-  static const Color vesuviusBurnLightTertiary = Color(0xFF144447);
-
   /// Vesuvius burned theme color for light secondary container color.
   static const Color vesuviusBurnLightSecondaryContainer = Color(0xFFA3C4C7);
+
+  /// Vesuvius burned theme color for light tertiary color.
+  static const Color vesuviusBurnLightTertiary = Color(0xFF144447);
 
   /// Vesuvius burned theme color for light tertiary container color.
   static const Color vesuviusBurnLightTertiaryContainer = Color(0xFF7FC0C4);
@@ -1489,11 +1489,11 @@ class FlexColor {
   /// Vesuvius burned theme color for dark secondary color.
   static const Color vesuviusBurnDarkSecondary = Color(0xFF5B8A8E);
 
-  /// Vesuvius burned theme color for dark tertiary color.
-  static const Color vesuviusBurnDarkTertiary = Color(0xFF3A7175);
-
   /// Vesuvius burned theme color for dark secondary container color.
   static const Color vesuviusBurnDarkSecondaryContainer = Color(0xFF0D494D);
+
+  /// Vesuvius burned theme color for dark tertiary color.
+  static const Color vesuviusBurnDarkTertiary = Color(0xFF3A7175);
 
   /// Vesuvius burned theme color for dark tertiary container color.
   static const Color vesuviusBurnDarkTertiaryContainer = Color(0xFF023639);
@@ -1526,11 +1526,11 @@ class FlexColor {
   /// Indigo theme color for light secondary color.
   static const Color deepPurpleLightSecondary = Color(0xFF0091EA); // lba700
 
-  /// Indigo theme color for light tertiary color.
-  static const Color deepPurpleLightTertiary = Color(0xFF00B0FF);
-
   /// Indigo theme color for light secondary container color.
   static const Color deepPurpleLightSecondaryContainer = Color(0xFFCFE4FF);
+
+  /// Indigo theme color for light tertiary color.
+  static const Color deepPurpleLightTertiary = Color(0xFF00B0FF);
 
   /// Indigo theme color for light tertiary container color.
   static const Color deepPurpleLightTertiaryContainer = Color(0xFF9FCBF1);
@@ -1552,11 +1552,11 @@ class FlexColor {
   /// Indigo theme color for dark secondary color.
   static const Color deepPurpleDarkSecondary = Color(0xFF80D8FF); // lba100
 
-  /// Indigo theme color for dark tertiary color.
-  static const Color deepPurpleDarkTertiary = Color(0xFF40C4FF);
-
   /// Indigo theme color for dark secondary container color.
   static const Color deepPurpleDarkSecondaryContainer = Color(0xFF00497B);
+
+  /// Indigo theme color for dark tertiary color.
+  static const Color deepPurpleDarkTertiary = Color(0xFF40C4FF);
 
   /// Indigo theme color for dark tertiary container color.
   static const Color deepPurpleDarkTertiaryContainer = Color(0xFF0179B6);
@@ -1588,11 +1588,11 @@ class FlexColor {
   /// Ebony clay theme color for light secondary color.
   static const Color ebonyClayLightSecondary = Color(0xFF006B54);
 
-  /// Ebony clay theme color for light tertiary color.
-  static const Color ebonyClayLightTertiary = Color(0xFF004B3B);
-
   /// Ebony clay theme color for light secondary container color.
   static const Color ebonyClayLightSecondaryContainer = Color(0xFF8FC3AD);
+
+  /// Ebony clay theme color for light tertiary color.
+  static const Color ebonyClayLightTertiary = Color(0xFF004B3B);
 
   /// Ebony clay theme color for light tertiary container color.
   static const Color ebonyClayLightTertiaryContainer = Color(0xFF82BCB5);
@@ -1614,11 +1614,11 @@ class FlexColor {
   /// Ebony clay theme color for dark secondary color.
   static const Color ebonyClayDarkSecondary = Color(0xFF4BA390);
 
-  /// Ebony clay theme color for dark tertiary color.
-  static const Color ebonyClayDarkTertiary = Color(0xFF3D8475);
-
   /// Ebony clay theme color for dark secondary container color.
   static const Color ebonyClayDarkSecondaryContainer = Color(0xFF0B5341);
+
+  /// Ebony clay theme color for dark tertiary color.
+  static const Color ebonyClayDarkTertiary = Color(0xFF3D8475);
 
   /// Ebony clay theme color for dark tertiary container color.
   static const Color ebonyClayDarkTertiaryContainer = Color(0xFF063F36);
@@ -1650,11 +1650,11 @@ class FlexColor {
   /// Barossa theme color for light secondary color.
   static const Color barossaLightSecondary = Color(0xFF00341A);
 
-  /// Barossa theme color for light tertiary color.
-  static const Color barossaLightTertiary = Color(0xFF124C2F);
-
   /// Barossa theme color for light secondary container color.
   static const Color barossaLightSecondaryContainer = Color(0xFF8DC1A8);
+
+  /// Barossa theme color for light tertiary color.
+  static const Color barossaLightTertiary = Color(0xFF124C2F);
 
   /// Barossa theme color for light tertiary container color.
   static const Color barossaLightTertiaryContainer = Color(0xFFA4D9BF);
@@ -1676,11 +1676,11 @@ class FlexColor {
   /// Barossa theme color for dark secondary color.
   static const Color barossaDarkSecondary = Color(0xFF6B9882);
 
-  /// Barossa theme color for dark tertiary color.
-  static const Color barossaDarkTertiary = Color(0xFF599B7B);
-
   /// Barossa theme color for dark secondary container color.
   static const Color barossaDarkSecondaryContainer = Color(0xFF21614C);
+
+  /// Barossa theme color for dark tertiary color.
+  static const Color barossaDarkTertiary = Color(0xFF599B7B);
 
   /// Barossa theme color for dark tertiary container color.
   static const Color barossaDarkTertiaryContainer = Color(0xFF1D5330);
@@ -1712,11 +1712,11 @@ class FlexColor {
   /// Shark ecstasy theme color for light secondary color.
   static const Color sharkLightSecondary = Color(0xFFFB8122);
 
-  /// Shark ecstasy theme color for light tertiary color.
-  static const Color sharkLightTertiary = Color(0xFFEA9654);
-
   /// Shark ecstasy theme color for light secondary container color.
   static const Color sharkLightSecondaryContainer = Color(0xFFFFB680);
+
+  /// Shark ecstasy theme color for light tertiary color.
+  static const Color sharkLightTertiary = Color(0xFFEA9654);
 
   /// Shark ecstasy theme color for light tertiary container color.
   static const Color sharkLightTertiaryContainer = Color(0xFFE9CBAB);
@@ -1738,11 +1738,11 @@ class FlexColor {
   /// Shark ecstasy theme color for dark secondary color.
   static const Color sharkDarkSecondary = Color(0xFFFCB075);
 
-  /// Shark ecstasy theme color for dark tertiary color.
-  static const Color sharkDarkTertiary = Color(0xFFEFB383);
-
   /// Shark ecstasy theme color for dark secondary container color.
   static const Color sharkDarkSecondaryContainer = Color(0xFFD97B18);
+
+  /// Shark ecstasy theme color for dark tertiary color.
+  static const Color sharkDarkTertiary = Color(0xFFEFB383);
 
   /// Shark ecstasy theme color for dark tertiary container color.
   static const Color sharkDarkTertiaryContainer = Color(0xFFA75F27);
@@ -1774,11 +1774,11 @@ class FlexColor {
   /// Big stone theme color for light secondary color.
   static const Color bigStoneLightSecondary = Color(0xFFE59A18);
 
-  /// Big stone theme color for light tertiary color.
-  static const Color bigStoneLightTertiary = Color(0xFFF0B03F);
-
   /// Big stone theme color for light secondary container color.
   static const Color bigStoneLightSecondaryContainer = Color(0xFFE0BD80);
+
+  /// Big stone theme color for light tertiary color.
+  static const Color bigStoneLightTertiary = Color(0xFFF0B03F);
 
   /// Big stone theme color for light tertiary container color.
   static const Color bigStoneLightTertiaryContainer = Color(0xFFE9CFA1);
@@ -1800,11 +1800,11 @@ class FlexColor {
   /// Big stone theme color for dark secondary color.
   static const Color bigStoneDarkSecondary = Color(0xFFEBB251);
 
-  /// Big stone theme color for dark tertiary color.
-  static const Color bigStoneDarkTertiary = Color(0xFFF4CA7E);
-
   /// Big stone theme color for dark secondary container color.
   static const Color bigStoneDarkSecondaryContainer = Color(0xFFD48608);
+
+  /// Big stone theme color for dark tertiary color.
+  static const Color bigStoneDarkTertiary = Color(0xFFF4CA7E);
 
   /// Big stone theme color for dark tertiary container color.
   static const Color bigStoneDarkTertiaryContainer = Color(0xFFC68E2D);
@@ -1836,11 +1836,11 @@ class FlexColor {
   /// Damask theme color for light secondary color.
   static const Color damaskLightSecondary = Color(0xFF373A36);
 
-  /// Damask theme color for light tertiary color.
-  static const Color damaskLightTertiary = Color(0xFF343E32);
-
   /// Damask theme color for light secondary container color.
   static const Color damaskLightSecondaryContainer = Color(0xFF9EAB9F);
+
+  /// Damask theme color for light tertiary color.
+  static const Color damaskLightTertiary = Color(0xFF343E32);
 
   /// Damask theme color for light tertiary container color.
   static const Color damaskLightTertiaryContainer = Color(0xFF94B291);
@@ -1862,11 +1862,11 @@ class FlexColor {
   /// Damask theme color for dark secondary color.
   static const Color damaskDarkSecondary = Color(0xFF767D75);
 
-  /// Damask theme color for dark tertiary color.
-  static const Color damaskDarkTertiary = Color(0xFF839081);
-
   /// Damask theme color for dark secondary container color.
   static const Color damaskDarkSecondaryContainer = Color(0xFF3A5444);
+
+  /// Damask theme color for dark tertiary color.
+  static const Color damaskDarkTertiary = Color(0xFF839081);
 
   /// Damask theme color for dark tertiary container color.
   static const Color damaskDarkTertiaryContainer = Color(0xFF34553E);
@@ -1899,11 +1899,11 @@ class FlexColor {
   /// Bahama blue theme color for light secondary color.
   static const Color bahamaBlueLightSecondary = Color(0xFFDD520F);
 
-  /// Bahama blue theme color for light tertiary color.
-  static const Color bahamaBlueLightTertiary = Color(0xFF7CC8F8);
-
   /// Bahama blue theme color for light secondary container color.
   static const Color bahamaBlueLightSecondaryContainer = Color(0xFFFFDBCD);
+
+  /// Bahama blue theme color for light tertiary color.
+  static const Color bahamaBlueLightTertiary = Color(0xFF7CC8F8);
 
   /// Bahama blue theme color for light tertiary container color.
   static const Color bahamaBlueLightTertiaryContainer = Color(0xFFC5E7FF);
@@ -1925,11 +1925,11 @@ class FlexColor {
   /// Bahama blue theme color for dark secondary color.
   static const Color bahamaBlueDarkSecondary = Color(0xFFE57C4A);
 
-  /// Bahama blue theme color for dark tertiary color.
-  static const Color bahamaBlueDarkTertiary = Color(0xFF9CD5F9);
-
   /// Bahama blue theme color for dark secondary container color.
   static const Color bahamaBlueDarkSecondaryContainer = Color(0xFFDD520F);
+
+  /// Bahama blue theme color for dark tertiary color.
+  static const Color bahamaBlueDarkTertiary = Color(0xFF9CD5F9);
 
   /// Bahama blue theme color for dark tertiary container color.
   static const Color bahamaBlueDarkTertiaryContainer = Color(0xFF3A7292);
@@ -1962,11 +1962,11 @@ class FlexColor {
   /// Mallard green theme color for light secondary color.
   static const Color mallardGreenLightSecondary = Color(0xFFD34B4B);
 
-  /// Mallard green theme color for light tertiary color.
-  static const Color mallardGreenLightTertiary = Color(0xFF959D33);
-
   /// Mallard green theme color for light secondary container color.
   static const Color mallardGreenLightSecondaryContainer = Color(0xFFFFDAD6);
+
+  /// Mallard green theme color for light tertiary color.
+  static const Color mallardGreenLightTertiary = Color(0xFF959D33);
 
   /// Mallard green theme color for light tertiary container color.
   static const Color mallardGreenLightTertiaryContainer = Color(0xFFE2E989);
@@ -1989,11 +1989,11 @@ class FlexColor {
   /// Mallard green theme color for dark secondary color.
   static const Color mallardGreenDarkSecondary = Color(0xFFE18686);
 
-  /// Mallard green theme color for dark tertiary color.
-  static const Color mallardGreenDarkTertiary = Color(0xFFC3C87A);
-
   /// Mallard green theme color for dark secondary container color.
   static const Color mallardGreenDarkSecondaryContainer = Color(0xFF501116);
+
+  /// Mallard green theme color for dark tertiary color.
+  static const Color mallardGreenDarkTertiary = Color(0xFFC3C87A);
 
   /// Mallard green theme color for dark tertiary container color.
   static const Color mallardGreenDarkTertiaryContainer = Color(0xFF454B00);
@@ -2027,11 +2027,11 @@ class FlexColor {
   /// Espresso theme color for light secondary color.
   static const Color espressoLightSecondary = Color(0xFFE3B964);
 
-  /// Espresso theme color for light tertiary color.
-  static const Color espressoLightTertiary = Color(0xFFF5E9C9);
-
   /// Espresso theme color for light secondary container color.
   static const Color espressoLightSecondaryContainer = Color(0xFFFFDE9C);
+
+  /// Espresso theme color for light tertiary color.
+  static const Color espressoLightTertiary = Color(0xFFF5E9C9);
 
   /// Espresso theme color for light tertiary container color.
   static const Color espressoLightTertiaryContainer = Color(0xFFFEE7AD);
@@ -2053,11 +2053,11 @@ class FlexColor {
   /// Espresso theme color for dark secondary color.
   static const Color espressoDarkSecondary = Color(0xFFEED6A6);
 
-  /// Espresso theme color for dark tertiary color.
-  static const Color espressoDarkTertiary = Color(0xFFF8ECD4);
-
   /// Espresso theme color for dark secondary container color.
   static const Color espressoDarkSecondaryContainer = Color(0xFF8E774F);
+
+  /// Espresso theme color for dark tertiary color.
+  static const Color espressoDarkTertiary = Color(0xFFF8ECD4);
 
   /// Espresso theme color for dark tertiary container color.
   static const Color espressoDarkTertiaryContainer = Color(0xFF705D49);
@@ -2090,11 +2090,11 @@ class FlexColor {
   /// Outer Space theme color for light secondary color.
   static const Color outerSpaceLightSecondary = Color(0xFFD2600A);
 
-  /// Outer Space theme color for light tertiary color.
-  static const Color outerSpaceLightTertiary = Color(0xFF93A0A9);
-
   /// Outer Space theme color for light secondary container color.
   static const Color outerSpaceLightSecondaryContainer = Color(0xFFFFDBC8);
+
+  /// Outer Space theme color for light tertiary color.
+  static const Color outerSpaceLightTertiary = Color(0xFF93A0A9);
 
   /// Outer Space theme color for light tertiary container color.
   static const Color outerSpaceLightTertiaryContainer = Color(0xFFB5CDDB);
@@ -2116,11 +2116,11 @@ class FlexColor {
   /// Outer Space theme color for dark secondary color.
   static const Color outerSpaceDarkSecondary = Color(0xFFDB823F);
 
-  /// Outer Space theme color for dark tertiary color.
-  static const Color outerSpaceDarkTertiary = Color(0xFFAAB4BB);
-
   /// Outer Space theme color for dark secondary container color.
   static const Color outerSpaceDarkSecondaryContainer = Color(0xFFC05402);
+
+  /// Outer Space theme color for dark tertiary color.
+  static const Color outerSpaceDarkTertiary = Color(0xFFAAB4BB);
 
   /// Outer Space theme color for dark tertiary container color.
   static const Color outerSpaceDarkTertiaryContainer = Color(0xFF285C71);
@@ -2153,11 +2153,11 @@ class FlexColor {
   /// Blue whale theme color for light secondary color.
   static const Color blueWhaleLightSecondary = Color(0xFFF86541);
 
-  /// Blue whale theme color for light tertiary color.
-  static const Color blueWhaleLightTertiary = Color(0xFFF07E24);
-
   /// Blue whale theme color for light secondary container color.
   static const Color blueWhaleLightSecondaryContainer = Color(0xFFFFAD91);
+
+  /// Blue whale theme color for light tertiary color.
+  static const Color blueWhaleLightTertiary = Color(0xFFF07E24);
 
   /// Blue whale theme color for light tertiary container color.
   static const Color blueWhaleLightTertiaryContainer = Color(0xFFFFBF93);
@@ -2179,11 +2179,11 @@ class FlexColor {
   /// Blue whale theme color for dark secondary color.
   static const Color blueWhaleDarkSecondary = Color(0xFFFF6E48);
 
-  /// Blue whale theme color for dark tertiary color.
-  static const Color blueWhaleDarkTertiary = Color(0xFFED7F29);
-
   /// Blue whale theme color for dark secondary container color.
   static const Color blueWhaleDarkSecondaryContainer = Color(0xFFA3290F);
+
+  /// Blue whale theme color for dark tertiary color.
+  static const Color blueWhaleDarkTertiary = Color(0xFFED7F29);
 
   /// Blue whale theme color for dark tertiary container color.
   static const Color blueWhaleDarkTertiaryContainer = Color(0xFF994600);
@@ -2215,11 +2215,11 @@ class FlexColor {
   /// San Juan blue theme color for light secondary color.
   static const Color sanJuanBlueLightSecondary = Color(0xFFF98D94);
 
-  /// San Juan blue theme color for light tertiary color.
-  static const Color sanJuanBlueLightTertiary = Color(0xFFF2C4C7);
-
   /// San Juan blue theme color for light secondary container color.
   static const Color sanJuanBlueLightSecondaryContainer = Color(0xFFFFC4C6);
+
+  /// San Juan blue theme color for light tertiary color.
+  static const Color sanJuanBlueLightTertiary = Color(0xFFF2C4C7);
 
   /// San Juan blue theme color for light tertiary container color.
   static const Color sanJuanBlueLightTertiaryContainer = Color(0xFFFFE3E5);
@@ -2242,11 +2242,11 @@ class FlexColor {
   /// San Juan blue theme color for dark secondary color.
   static const Color sanJuanBlueDarkSecondary = Color(0xFFEBA1A6);
 
-  /// San Juan blue theme color for dark tertiary color.
-  static const Color sanJuanBlueDarkTertiary = Color(0xFFF4CFD1);
-
   /// San Juan blue theme color for dark secondary container color.
   static const Color sanJuanBlueDarkSecondaryContainer = Color(0xFFAE424F);
+
+  /// San Juan blue theme color for dark tertiary color.
+  static const Color sanJuanBlueDarkTertiary = Color(0xFFF4CFD1);
 
   /// San Juan blue theme color for dark tertiary container color.
   static const Color sanJuanBlueDarkTertiaryContainer = Color(0xFF96434F);
@@ -2278,11 +2278,11 @@ class FlexColor {
   /// Rosewood theme color for light secondary color.
   static const Color rosewoodLightSecondary = Color(0xFF74540E);
 
-  /// Rosewood theme color for light tertiary color.
-  static const Color rosewoodLightTertiary = Color(0xFFAD8845);
-
   /// Rosewood theme color for light secondary container color.
   static const Color rosewoodLightSecondaryContainer = Color(0xFFFFDEA3);
+
+  /// Rosewood theme color for light tertiary color.
+  static const Color rosewoodLightTertiary = Color(0xFFAD8845);
 
   /// Rosewood theme color for light tertiary container color.
   static const Color rosewoodLightTertiaryContainer = Color(0xFFFFE8C0);
@@ -2304,11 +2304,11 @@ class FlexColor {
   /// Rosewood theme color for dark secondary color.
   static const Color rosewoodDarkSecondary = Color(0xFFEDCE9B);
 
-  /// Rosewood theme color for dark tertiary color.
-  static const Color rosewoodDarkTertiary = Color(0xFFF5DFB9);
-
   /// Rosewood theme color for dark secondary container color.
   static const Color rosewoodDarkSecondaryContainer = Color(0xFF805E23);
+
+  /// Rosewood theme color for dark tertiary color.
+  static const Color rosewoodDarkTertiary = Color(0xFFF5DFB9);
 
   /// Rosewood theme color for dark tertiary container color.
   static const Color rosewoodDarkTertiaryContainer = Color(0xFF8E6E3C);
@@ -2341,11 +2341,11 @@ class FlexColor {
   /// Blumine blue green theme color for light secondary color.
   static const Color blumineBlueLightSecondary = Color(0xFFFEB716);
 
-  /// Blumine blue green theme color for light tertiary color.
-  static const Color blumineBlueLightTertiary = Color(0xFF0093C7);
-
   /// Blumine blue green theme color for light secondary container color.
   static const Color blumineBlueLightSecondaryContainer = Color(0xFFFFDEA5);
+
+  /// Blumine blue green theme color for light tertiary color.
+  static const Color blumineBlueLightTertiary = Color(0xFF0093C7);
 
   /// Blumine blue green theme color for light tertiary container color.
   static const Color blumineBlueLightTertiaryContainer = Color(0xFFC3E7FF);
@@ -2368,11 +2368,11 @@ class FlexColor {
   /// Blumine blue green theme color for dark secondary color.
   static const Color blumineBlueDarkSecondary = Color(0xFFFFD682);
 
-  /// Blumine blue green theme color for dark tertiary color.
-  static const Color blumineBlueDarkTertiary = Color(0xFF243E4D);
-
   /// Blumine blue green theme color for dark secondary container color.
   static const Color blumineBlueDarkSecondaryContainer = Color(0xFF9E7910);
+
+  /// Blumine blue green theme color for dark tertiary color.
+  static const Color blumineBlueDarkTertiary = Color(0xFF243E4D);
 
   /// Blumine blue green theme color for dark tertiary container color.
   static const Color blumineBlueDarkTertiaryContainer = Color(0xFF426173);
@@ -2380,6 +2380,101 @@ class FlexColor {
   /// Blumine blue green theme color for dark secondary variant color.
   @Deprecated('Deprecated use blumineBlueDarkTertiary instead.')
   static const Color blumineBlueDarkSecondaryVariant = blumineBlueDarkTertiary;
+
+  // The Dash theme is based on the colors in the Flutter Dash mascot found in
+  // the 4k wallpaper from Google that was shared before the Flutter 2.10
+  // release.
+
+  /// English name of the dashBlue theme.
+  static const String dashBlueName = 'Flutter Dash';
+
+  /// English description of the dash blue theme.
+  static const String dashBlueDescription =
+      'Flutter Dash wallpaper based theme';
+
+  /// Dash blue theme color for light primary color.
+  static const Color dashBlueLightPrimary = Color(0xFF4496E0);
+
+  /// Dash blue theme color for light primary container color.
+  static const Color dashBlueLightPrimaryContainer = Color(0xFFB1E2FF);
+
+  /// Dash blue theme color for light secondary color.
+  static const Color dashBlueLightSecondary = Color(0xFF202B6D);
+
+  /// Dash blue theme color for light secondary container color.
+  static const Color dashBlueLightSecondaryContainer = Color(0xFF2BFDFE);
+
+  /// Dash blue theme color for light tertiary color.
+  static const Color dashBlueLightTertiary = Color(0xFF514239);
+
+  /// Dash blue theme color for light tertiary container color.
+  static const Color dashBlueLightTertiaryContainer = Color(0xFFBAA99D);
+
+  /// Dash blue theme color for dark primary color.
+  static const Color dashBlueDarkPrimary = Color(0xFFB1E2FF);
+
+  /// Dash blue theme color for dark primary container color.
+  static const Color dashBlueDarkPrimaryContainer = Color(0xFF4496E0);
+
+  /// Dash blue theme color for dark secondary color.
+  static const Color dashBlueDarkSecondary = Color(0xFF2BFDFE);
+
+  /// Dash blue theme color for dark secondary container color.
+  static const Color dashBlueDarkSecondaryContainer = Color(0xFF202B6D);
+
+  /// Dash blue theme color for dark tertiary color.
+  static const Color dashBlueDarkTertiary = Color(0xFFBAA99D);
+
+  /// Dash blue theme color for dark tertiary container color.
+  static const Color dashBlueDarkTertiaryContainer = Color(0xFF514239);
+
+  // The Dash theme is based on the colors in the Flutter Dash mascot found in
+  // the 4k wallpaper from Google that was shared before the Flutter 2.10
+  // release.
+
+  /// English name of the materialBaseline theme.
+  static const String materialBaselineName = 'Material 3 baseline';
+
+  /// English description of the dash blue theme.
+  static const String materialBaselineDescription =
+      'Material 3 baseline wallpaper based theme';
+
+  /// MaterialBaseline theme color for light primary color.
+  static const Color materialBaselineLightPrimary = Color(0xFF6750A4);
+
+  /// MaterialBaseline theme color for light primary container color.
+  static const Color materialBaselineLightPrimaryContainer = Color(0xFFEADDFF);
+
+  /// MaterialBaseline theme color for light secondary color.
+  static const Color materialBaselineLightSecondary = Color(0xFF625B71);
+
+  /// MaterialBaseline theme color for light secondary container color.
+  static const Color materialBaselineLightSecondaryContainer =
+      Color(0xFFE8DEF8);
+
+  /// MaterialBaseline theme color for light tertiary color.
+  static const Color materialBaselineLightTertiary = Color(0xFF7D5260);
+
+  /// MaterialBaseline theme color for light tertiary container color.
+  static const Color materialBaselineLightTertiaryContainer = Color(0xFFFFD8E4);
+
+  /// MaterialBaseline theme color for dark primary color.
+  static const Color materialBaselineDarkPrimary = Color(0xFFD0BCFF);
+
+  /// MaterialBaseline theme color for dark primary container color.
+  static const Color materialBaselineDarkPrimaryContainer = Color(0xFF4F378B);
+
+  /// MaterialBaseline theme color for dark secondary color.
+  static const Color materialBaselineDarkSecondary = Color(0xFFCCC2DC);
+
+  /// MaterialBaseline theme color for dark secondary container color.
+  static const Color materialBaselineDarkSecondaryContainer = Color(0xFF4A4458);
+
+  /// MaterialBaseline theme color for dark tertiary color.
+  static const Color materialBaselineDarkTertiary = Color(0xFFEFB8C8);
+
+  /// MaterialBaseline theme color for dark tertiary container color.
+  static const Color materialBaselineDarkTertiaryContainer = Color(0xFF633B48);
 
   /// English name of the custom theme.
   static const String customName = 'Custom';
@@ -3327,6 +3422,59 @@ class FlexColor {
     ),
   );
 
+  /// A Flutter Dash bird mascot blue toned FlexSchemeData.
+  static const FlexSchemeData flutterDash = FlexSchemeData(
+    name: dashBlueName,
+    description: dashBlueDescription,
+    light: FlexSchemeColor(
+      primary: dashBlueLightPrimary,
+      primaryContainer: dashBlueLightPrimaryContainer,
+      secondary: dashBlueLightSecondary,
+      secondaryContainer: dashBlueLightSecondaryContainer,
+      tertiary: dashBlueLightTertiary,
+      tertiaryContainer: dashBlueLightTertiaryContainer,
+      appBarColor: dashBlueLightTertiary,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: dashBlueDarkPrimary,
+      primaryContainer: dashBlueDarkPrimaryContainer,
+      secondary: dashBlueDarkSecondary,
+      secondaryContainer: dashBlueDarkSecondaryContainer,
+      tertiary: dashBlueDarkTertiary,
+      tertiaryContainer: dashBlueDarkTertiaryContainer,
+      appBarColor: dashBlueDarkTertiary,
+      error: materialDarkError,
+    ),
+  );
+
+  /// The Material 3 Design Guide material baseline primary, secondary and
+  /// tertiary colors as a FlexSchemeData.
+  static const FlexSchemeData materialBaseline = FlexSchemeData(
+    name: materialBaselineName,
+    description: materialBaselineDescription,
+    light: FlexSchemeColor(
+      primary: materialBaselineLightPrimary,
+      primaryContainer: materialBaselineLightPrimaryContainer,
+      secondary: materialBaselineLightSecondary,
+      secondaryContainer: materialBaselineLightSecondaryContainer,
+      tertiary: materialBaselineLightTertiary,
+      tertiaryContainer: materialBaselineLightTertiaryContainer,
+      appBarColor: materialBaselineLightTertiary,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: materialBaselineDarkPrimary,
+      primaryContainer: materialBaselineDarkPrimaryContainer,
+      secondary: materialBaselineDarkSecondary,
+      secondaryContainer: materialBaselineDarkSecondaryContainer,
+      tertiary: materialBaselineDarkTertiary,
+      tertiaryContainer: materialBaselineDarkTertiaryContainer,
+      appBarColor: materialBaselineDarkTertiary,
+      error: materialDarkError,
+    ),
+  );
+
   /// Starting values for custom color data.
   ///
   /// These can serve as fallback data to custom color values
@@ -3413,6 +3561,8 @@ class FlexColor {
     FlexScheme.sanJuanBlue: sanJuanBlue,
     FlexScheme.rosewood: rosewood,
     FlexScheme.blumineBlue: blumineBlue,
+    FlexScheme.flutterDash: flutterDash,
+    FlexScheme.materialBaseline: materialBaseline,
   };
 
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
@@ -3481,6 +3631,8 @@ class FlexColor {
     blueWhale,
     sanJuanBlue,
     rosewood,
-    blumineBlue
+    blumineBlue,
+    flutterDash,
+    materialBaseline,
   ];
 }
