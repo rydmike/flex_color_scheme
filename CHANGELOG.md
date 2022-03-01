@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.1 - February 28, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - March 1, 2022 - WORK IN PROGRESS
 
 The commit contains the version of the key color seeded M3 `ColorScheme`
 usage intended for the final design. The feature supports seeding by not only
@@ -65,6 +65,7 @@ up-to-date.
   to fix it.
 
 **NEW**
+
 * Added `useMaterial3` to all theme constructors and factories. This is
   the same flag as in `ThemeData`, it does not have any impact on
   default themed widgets in Flutter 2.10.0 yet. Opting in on opinionated
@@ -184,7 +185,40 @@ up-to-date.
   desaturating them with an adjustable white alpha blend, we can achieve
   this design goal as well, when computed dark theme mode colors from a set
   of provided light theme mode input colors.
+
+
+* Added additional opinionated sub-themes for:
+  - `SwitchThemeData` via `FlexSubThemes.switchTheme`.
+  - `CheckboxTHemeData` via `FlexSubThemes.checkboxTheme`.
+  - `Radio` via `FlexSubThemes.radioTheme`.
+  - `NavigationRailThemeData` via `FlexSubThemes.navigationRailTheme`.  
   
+  With many quick and easy configuration parameters added 
+  to `FlexSubThemesData`. Component sub themes, when opting in to use 
+  opinionated themes, that can be easily configured are now available
+  for these components:
+
+  * `TextButton`
+  * `ElevatedButton`
+  * `OutlinedButton`
+  * Older buttons using `ButtonThemeData`
+  * `ToggleButtons`
+  * `Switch`
+  * `Checkbox`
+  * `Radio`
+  * `InputDecoration`
+  * `FloatingActionButton`
+  * `Chip`
+  * `Card`
+  * `PopupMenuButton`
+  * `Dialog`
+  * `TimePickerDialog`
+  * `SnackBar`
+  * `Tooltip`
+  * `BottomSheet`
+  * `BottomNavigationBar`
+  * `NavigationBar`
+  * `NavigationRail`
 
 * Added additional `ColorScheme` color selection options to component
   sub-themes configuration class `FlexSubThemesData`. The feature
@@ -198,6 +232,7 @@ up-to-date.
   - `Switch` via `FlexSubThemes.switchTheme`.
   - `Checkbox` via `FlexSubThemes.checkboxTheme`.
   - `Radio` via `FlexSubThemes.radioTheme`.
+  - `NavigationRail` via `FlexSubThemes.navigationRailTheme`.
   - Dialog backgrounds, affects `DialogTheme` and `TimePickerThemeData`
     via `FlexSubThemesData.dialogBackgroundColor`. If used this property
     overrides color property `dialogBackground` in all FlexColorScheme 
@@ -227,6 +262,25 @@ up-to-date.
   primary color is locked to a given brand or design color value, but
   other colors in the ColorScheme are less critical, and it is more important
   that they match the tone of the over all theme.
+ 
+* Added custom tone configuration for seeded `ColorScheme`. M3 color design
+  has it own fixed defaults for which tone from the relevant `TonalPalette`
+  is used as input on each color property in the light and corresponding dark
+  `ColorScheme`. By configuring and passing in a `FlexTones` to `tones` in 
+  `FlexColorScheme.light` and `FlexColorScheme.dark` it is possible
+  to control which color tone from the relevant `TonalPalette` is used for 
+  each color property in generated `ColorScheme`.
+  Obviously making poor selection produces bad results, but there are some
+  tuning that work very well, e.g. primary could be assigned a one step lower
+  value in light mode, to produce seeded color schemes that are more vivid or
+  saturated.
+
+* The M3 based seeded `ColorScheme` also locks down the chroma level of
+  seed color for secondary colors to 16 and to 24 for tertiary colors, and keeps
+  it at min 48 for primary color. The `FlexTones` configuration makes it
+  possible to change these restrictions to get more vivid tonal palettes also
+  for secondary and tertiary `TonalPalettes` when using the individual key
+  color inputs that can be enabled via `FlexKeyColor`
 
 * Add new alpha blend control `blendOnLevel` value for onColors to class
   `FlexSubThemesData`. It will be used to produce onColors for main colors that
@@ -239,6 +293,15 @@ up-to-date.
 * Defined matching color values for new `FlexSchemeColor.secondaryContainer`
   and `FlexSchemeColor.tertiaryContainer` as for existing built-in 
   color schemes.
+
+
+* **New color schemes:** Added two new built-in color schemes.
+  Total number of color schemes is now 38 matched light and dark pairs.
+  * **Flutter Dash** - Flutter Dash wallpaper based theme.
+    Use enum value `FlexScheme.flutterDash` for easy access to it.
+    This theme is final and selected for inclusion as a new one.
+  * **M3 baseline** - Material guide 3 baseline based theme.
+    Use enum value `FlexScheme.materialBaseline` for easy access to it.
 
 **CHANGE**
 
@@ -331,13 +394,15 @@ up-to-date.
 
 **EXAMPLES and Themes Playground**
 * Update examples 1...4
-  - **TODO:** Review and add a few of the new features to examples 3 and 4.
+  - **DONE:** Review and add a few of the new features to examples 3 and 4.
   - **DONE:** Removed showing the old, already in Flutter v1.26 deprecated
     buttons `RaisedButton`, `OutlineButton` and `FlatButton` in ALL the examples.
     They are going away in next stable release of Flutter after 2.10.x, as
     per this notice [#98537](https://github.com/flutter/flutter/issues/98537).
 * Major update for "example 5" the **Themes Playground**
   to include support for the new features.
+  
+  - **DONE:** Added config for selecting unselected toggleable style.
   - **DONE:** Added feature to export the code for the active `ColorScheme`. 
   - **DONE:** Added color scheme color configuration to all opinionated component
     sub-themes that have it.
@@ -349,19 +414,20 @@ up-to-date.
 
 
 
-**TODO MAYBE** 
+**TODO** 
 
-These new features might be pushed to 5.1.0 stable or later.
-* Add sub-theming support for `NavigationRailThemeData`.
-* Add custom tone configuration for seeded `ColorScheme`. M3 color design
-  has it own fixed default for which tone from the relevant `TonalPalette`
-  is used as input on each color property in the light and corresponding dark
-  `ColorScheme`. An interesting customization feature would be to enable
-  changing what tone is used for each color property in the `ColorScheme`.
-  Obviously making poor selection produces bad results, but there are some
-  tuning that would work well, eg primary could be assigned a one step lower
-  value in light mode produce seeded color schemes that are more vivid or 
-  saturated.
+* Review and manual testing of all things above.
+* New NavigationRail sub theme still has no `FlexSubThemesData` config
+  properties. Still in review.
+* Add two more new color scheme to make it 4 new ones.
+* To the playground app, add a config setup that demonstrates the usage 
+  of `FlexTones`. Making a simple one with 3 or 4 pre-configured selectable 
+  choices. May make fancier and more flexible one later with fully interactive
+  configs for all its props, including pickling tones from a visual of the
+  `TonalPalette` and sliders to adjust chroma.
+* Add loading animation to Themes Playground web build.
+* Cupertino Switches to follow theme via custom adaptive ListTile, the green 
+  ones are an eyesore imo.
 
 
 ### What is Next?

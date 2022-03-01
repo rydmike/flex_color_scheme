@@ -179,6 +179,7 @@ enum SchemeColor {
 /// * [BottomSheet]
 /// * [BottomNavigationBar]
 /// * [NavigationBar]
+/// * [NavigationRail]
 ///
 /// In [ToggleButtons] hover, press, selected and focus states are not
 /// an exact match for the main buttons. It does not have as flexible styling
