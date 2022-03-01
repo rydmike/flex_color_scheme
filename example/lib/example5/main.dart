@@ -205,6 +205,9 @@ class DemoApp extends StatelessWidget {
                       // Want color themed disable hover, focus, highlight and
                       // splash colors? Then keep this one on.
                       interactionEffects: themeController.interactionEffects,
+                      // Style of unselected switch/checkbox/radio.
+                      unselectedToggleIsColored:
+                          themeController.unselectedIsColored,
                       // ColorScheme used on various widgets.
                       tabBarIndicatorSchemeColor:
                           themeController.tabBarIndicator,
@@ -228,7 +231,6 @@ class DemoApp extends StatelessWidget {
                           themeController.tabBarItemSchemeColor,
                       appBarBackgroundSchemeColor:
                           themeController.appBarBackgroundSchemeColor,
-
                       // Elevation of BottomNavigationBar.
                       bottomNavigationBarElevation:
                           themeController.bottomNavigationBarElevation,
@@ -405,6 +407,8 @@ class DemoApp extends StatelessWidget {
                       fabUseShape: themeController.fabUseShape,
                       fabSchemeColor: themeController.fabSchemeColor,
                       interactionEffects: themeController.interactionEffects,
+                      unselectedToggleIsColored:
+                          themeController.unselectedIsColored,
                       tabBarIndicatorSchemeColor:
                           themeController.tabBarIndicator,
                       chipSchemeColor: themeController.chipSchemeColor,

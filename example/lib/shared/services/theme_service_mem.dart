@@ -766,4 +766,15 @@ class ThemeServiceMem implements ThemeService {
   /// Persists used navBarBackgroundSchemeColor setting.
   @override
   Future<void> saveNavBarBackgroundSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used unselectedIsColored setting in example 5.
+  @override
+  Future<bool> unselectedIsColored() async =>
+      ThemeService.defaultUnselectedIsColored;
+
+  /// Persists unselectedIsColored setting in example 5.
+  @override
+  Future<void> saveUnselectedIsColored(bool value) async {}
 }

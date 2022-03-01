@@ -1106,4 +1106,18 @@ abstract class ThemeService {
 
   /// Persists used navBarBackgroundSchemeColor setting.
   Future<void> saveNavBarBackgroundSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the unselectedIsColored value.
+  static const String keyUnselectedIsColored = 'unselectedIsColored';
+
+  /// Default value for the unselectedIsColored, also to reset settings.
+  static const bool defaultUnselectedIsColored = false;
+
+  /// Loads used unselectedIsColored setting in example 5.
+  Future<bool> unselectedIsColored();
+
+  /// Persists unselectedIsColored setting in example 5.
+  Future<void> saveUnselectedIsColored(bool value);
 }

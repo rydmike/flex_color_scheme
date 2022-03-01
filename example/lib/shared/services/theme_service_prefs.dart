@@ -2156,4 +2156,29 @@ class ThemeServicePrefs implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  // ----
+
+  /// Loads used unselectedIsColored setting in example 5.
+  @override
+  Future<bool> unselectedIsColored() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUnselectedIsColored) ??
+          ThemeService.defaultUnselectedIsColored;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUnselectedIsColored;
+    }
+  }
+
+  /// Persists unselectedIsColored setting in example 5.
+  @override
+  Future<void> saveUnselectedIsColored(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUnselectedIsColored, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

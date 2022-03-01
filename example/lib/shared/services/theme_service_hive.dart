@@ -2163,4 +2163,29 @@ class ThemeServiceHive implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  // ----
+
+  /// Loads used unselectedIsColored setting in example 5.
+  @override
+  Future<bool> unselectedIsColored() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUnselectedIsColored,
+          defaultValue: ThemeService.defaultUnselectedIsColored) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultUnselectedIsColored;
+    }
+  }
+
+  /// Persists unselectedIsColored setting in example 5.
+  @override
+  Future<void> saveUnselectedIsColored(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUnselectedIsColored, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

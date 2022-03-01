@@ -90,6 +90,7 @@ class FlexSubThemesData with Diagnosticable {
     this.switchSchemeColor,
     this.checkboxSchemeColor,
     this.radioSchemeColor,
+    this.unselectedToggleIsColored = true,
     this.inputDecorationRadius,
     this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
@@ -469,6 +470,19 @@ class FlexSubThemesData with Diagnosticable {
   /// also the default when when opting on its sub themes, but can be modified
   /// with this property.
   final SchemeColor? radioSchemeColor;
+
+  /// Defines is unselected [Switch], [Checkbox] and [Radio] also use their
+  /// themed color.
+  ///
+  /// Flutter SDK use neutral grey for switches, checkboxes and radio buttons
+  /// when they are not selected. To some this may even look like it is
+  /// disabled. By setting [unselectedSwitchesIsColored] to true, they
+  /// use their themed color also in the unselected state. The [Checkbox] and
+  /// [Radio] use their theme color in the outline. The [Switch] has just a hint
+  /// of its themed color in it inactive track.
+  ///
+  /// Defaults to true, set it to false to use Flutter SDK style again.
+  final bool unselectedToggleIsColored;
 
   /// Border radius override value for [InputDecoration].
   final double? inputDecorationRadius;
@@ -957,6 +971,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? switchSchemeColor,
     final SchemeColor? checkboxSchemeColor,
     final SchemeColor? radioSchemeColor,
+    final bool? unselectedToggleIsColored,
     final double? inputDecorationRadius,
     final SchemeColor? inputDecoratorSchemeColor,
     final bool? inputDecoratorIsFilled,
@@ -1035,6 +1050,8 @@ class FlexSubThemesData with Diagnosticable {
       switchSchemeColor: switchSchemeColor ?? this.switchSchemeColor,
       checkboxSchemeColor: checkboxSchemeColor ?? this.checkboxSchemeColor,
       radioSchemeColor: radioSchemeColor ?? this.radioSchemeColor,
+      unselectedToggleIsColored:
+          unselectedToggleIsColored ?? this.unselectedToggleIsColored,
       inputDecorationRadius:
           inputDecorationRadius ?? this.inputDecorationRadius,
       inputDecoratorSchemeColor:
@@ -1114,6 +1131,7 @@ class FlexSubThemesData with Diagnosticable {
     );
   }
 
+  /// Override for equality operator.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -1142,6 +1160,7 @@ class FlexSubThemesData with Diagnosticable {
         other.switchSchemeColor == switchSchemeColor &&
         other.checkboxSchemeColor == checkboxSchemeColor &&
         other.radioSchemeColor == radioSchemeColor &&
+        other.unselectedToggleIsColored == unselectedToggleIsColored &&
         other.inputDecorationRadius == inputDecorationRadius &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
@@ -1201,9 +1220,10 @@ class FlexSubThemesData with Diagnosticable {
         other.navigationBarLabelBehavior == navigationBarLabelBehavior;
   }
 
+  /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode {
-    final List<Object?> values = <Object?>[
+    return hashList(<Object?>[
       interactionEffects,
       blendOnLevel,
       blendOnColors,
@@ -1227,6 +1247,7 @@ class FlexSubThemesData with Diagnosticable {
       switchSchemeColor,
       checkboxSchemeColor,
       radioSchemeColor,
+      unselectedToggleIsColored,
       inputDecorationRadius,
       inputDecoratorSchemeColor,
       inputDecoratorIsFilled,
@@ -1273,8 +1294,7 @@ class FlexSubThemesData with Diagnosticable {
       navigationBarSelectedIconSize,
       navigationBarUnselectedIconSize,
       navigationBarLabelBehavior,
-    ];
-    return hashList(values);
+    ]);
   }
 
   @override
@@ -1320,6 +1340,8 @@ class FlexSubThemesData with Diagnosticable {
         EnumProperty<SchemeColor>('checkboxSchemeColor', checkboxSchemeColor));
     properties
         .add(EnumProperty<SchemeColor>('radioSchemeColor', radioSchemeColor));
+    properties.add(DiagnosticsProperty<bool>(
+        'unselectedToggleIsColored', unselectedToggleIsColored));
     properties.add(DiagnosticsProperty<double>(
         'inputDecorationRadius', inputDecorationRadius));
     properties.add(EnumProperty<SchemeColor>(

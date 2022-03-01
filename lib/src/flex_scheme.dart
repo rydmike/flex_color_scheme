@@ -123,6 +123,15 @@ enum FlexScheme {
   /// and mulled wine theme.
   blumineBlue,
 
+  /// A color scheme based on the Flutter Dash mascot 4k wallpaper shared
+  /// by Google before the launch of Flutter 2.10.
+  flutterDash,
+
+  /// The Material 3 color scheme baseline for primary, secondary and tertiary
+  /// colors, used as an example in in the Material 3 design guide.
+  /// https://m3.material.io/styles/color/the-color-system/tokens
+  materialBaseline,
+
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a [FlexColorScheme] based on a custom
   /// [FlexSchemeData] object. If not provided, it defaults to the
