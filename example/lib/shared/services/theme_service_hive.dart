@@ -2188,4 +2188,29 @@ class ThemeServiceHive implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  // ----
+
+  /// Loads usedFlexTonesSetup setting in example 5.
+  @override
+  Future<int> usedFlexTonesSetup() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUsedFlexTonesSetup,
+          defaultValue: ThemeService.defaultUsedFlexTonesSetup) as int;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultUsedFlexTonesSetup;
+    }
+  }
+
+  /// Persists the usedFlexTonesSetup setting in example 5.
+  @override
+  Future<void> saveUsedFlexTonesSetup(int value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUsedFlexTonesSetup, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

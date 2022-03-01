@@ -463,7 +463,7 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Loads used onBlend level dark setting in example 5.
+  /// Loads used Blend On level dark setting in example 5.
   @override
   Future<int> blendOnLevelDark() async {
     try {
@@ -476,7 +476,7 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Persists the usedColors setting in example 5.
+  /// Persists the blend On level setting in example 5.
   @override
   Future<void> saveBlendOnLevelDark(int value) async {
     try {
@@ -2177,6 +2177,31 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveUnselectedIsColored(bool value) async {
     try {
       await _prefs.setBool(ThemeService.keyUnselectedIsColored, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads usedFlexTonesSetup setting in example 5.
+  @override
+  Future<int> usedFlexTonesSetup() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyUsedFlexTonesSetup) ??
+          ThemeService.defaultUsedFlexTonesSetup;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUsedFlexTonesSetup;
+    }
+  }
+
+  /// Persists the usedFlexTonesSetup setting in example 5.
+  @override
+  Future<void> saveUsedFlexTonesSetup(int value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyUsedFlexTonesSetup, value);
     } catch (e) {
       debugPrint(e.toString());
     }

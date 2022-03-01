@@ -4,10 +4,34 @@ import 'package:flutter/foundation.dart';
 
 // ignore_for_file: comment_references
 
-/// Configuration data class that defines which tone we should use for each
-/// [TonalPalette] to extract the used color for each [ColorScheme] color.
+/// Configuration data class that defines which tone to use for each
+/// [TonalPalette] to extract the used color by each [ColorScheme] color.
 ///
-/// and what color tones are used for each [ColorScheme] color.
+/// It is also possible to define how Cam16 chroma is used and limited when
+/// generating the tonal palette.
+///
+/// When [TonalPalette]s are generated from key color(s) and used to define
+/// a [ColorScheme], it is recommended to use the same key colors and
+/// [FlexTones] setup for both the light and dark theme. By doing so the
+/// same [TonalPalette] is used to assign suitable tones from the same
+/// [TonalPalette] bu using different tones.
+///
+/// When you use [FlexColorScheme.dark] and its built in schemes via [scheme]
+/// enum property, it automatically uses the light mode [primary],
+/// [secondary] and [tertiary] color definitions as seed keys for their
+/// respective tonal palette generation. Thus creating identical [TonalPalettes]
+/// for dark mode as for light mode and using the tones based and chroma setup
+/// from provided or default [FlexTones].
+///
+/// If you make custom color schemes using [FlexColorScheme] it is up to you
+/// to define what colors you use when you use key colors to seed
+/// [ColorScheme]s.
+///
+/// The used default [FlexTones.light] and [FlexTones.dark] match the definition
+/// Flutter SDK uses for its Material Design 3 based seed generated tones.
+/// In Flutter it has corded values. You have to go to lower APIs and open them
+/// up a bit to offer the possibilities and flexibility FlexColorScheme
+/// provides.
 @immutable
 class FlexTones with Diagnosticable {
   /// Default constructor requiring all properties.
@@ -42,8 +66,11 @@ class FlexTones with Diagnosticable {
     required this.onInverseSurfaceTone,
     required this.inversePrimaryTone,
     this.primaryChroma,
+    required this.primaryMinChroma,
     this.secondaryChroma,
+    required this.secondaryMinChroma,
     this.tertiaryChroma,
+    required this.tertiaryMinChroma,
   });
 
   // TODO(rydmike): Double check all tone values before release!
@@ -77,9 +104,12 @@ class FlexTones with Diagnosticable {
     this.inverseSurfaceTone = 20,
     this.onInverseSurfaceTone = 95,
     this.inversePrimaryTone = 80,
-    this.primaryChroma,
+    this.primaryChroma, // Defaults to null, chroma in key is used.
+    this.primaryMinChroma = 48,
     this.secondaryChroma = 16,
+    this.secondaryMinChroma = 0,
     this.tertiaryChroma = 24,
+    this.tertiaryMinChroma = 0,
   });
 
   /// Create a dark tonal palette tone extraction and CAM16 chroma setup.
@@ -111,9 +141,12 @@ class FlexTones with Diagnosticable {
     this.inverseSurfaceTone = 90,
     this.onInverseSurfaceTone = 20,
     this.inversePrimaryTone = 40,
-    this.primaryChroma,
+    this.primaryChroma, // Defaults to null, chroma in key is used.
+    this.primaryMinChroma = 48,
     this.secondaryChroma = 16,
+    this.secondaryMinChroma = 0,
     this.tertiaryChroma = 24,
+    this.tertiaryMinChroma = 0,
   });
 
   /// Tone used for [ColorScheme.primary] from primary [TonalPalette].
@@ -204,29 +237,91 @@ class FlexTones with Diagnosticable {
   /// Tone used for [ColorScheme.inversePrimary] from primary [TonalPalette].
   final int inversePrimaryTone;
 
-  /// The chroma value to use for primary TonalPalette.
+  /// Cam16 chroma value to use for primary colors [TonalPalette} generation.
   ///
-  /// If null, the chroma value from [primary]] is used.
-  /// Flutter SDK [ColorScheme.fromSeed] uses "null", i.e. the chroma value.
+  /// If null, the chroma value from the used primary seed key color is used,
+  /// if it is larger than [primaryMinChroma].
+  ///
+  /// Flutter SDK [ColorScheme.fromSeed] uses "null", with a [primaryMinChroma]
+  /// set to 48, so the chroma from the key color is used when above 48, but
+  /// never lower than 48. This keeps primary color at the used tonal values
+  /// reasonably vivid and usable regardless of uses primary key color.
+  ///
+  /// To use chroma value from the primary key color, pass in null and keep
+  /// min chroma below  desired threshold for required colorfulness.
   final double? primaryChroma;
 
-  /// The chroma value to use for secondary TonalPalette.
+  /// The minimum used chroma value.
   ///
-  /// If null, the chroma value from [secondary] used.
-  /// Flutter SDK [ColorScheme.fromSeed] uses 16 as secondary chroma value.
-  /// Uses fallback to 16, when a [secondary] color is not provided, but can
-  /// be provided also when secondary is not provided, it then uses given
-  /// chroma on provided primary color's hue.
+  /// If chroma in provided primary key color is below this value, or if a
+  /// fixed [primaryChroma] is provided that is lower than [primaryMinChroma]
+  /// then the [primaryMinChroma] value is used.
+  ///
+  /// Defaults to 48.
+  ///
+  /// Flutter SDK uses 48 via a hard coded value and design.
+  final double primaryMinChroma;
+
+  /// Cam16 chroma value to use for secondary colors [TonalPalette} generation.
+  ///
+  /// If null, the chroma value from the used secondary seed key color is used,
+  /// if it is larger than [secondaryMinChroma].
+  ///
+  /// Flutter SDK [ColorScheme.fromSeed] uses [secondaryChroma] hard coded
+  /// and locked to 16.
+  ///
+  /// Defaults to 16.
+  ///
+  /// The default produces quite soft and muted tones as secondary tonal palette
+  /// at the mid-point tones of the palette.
+  ///
+  /// To use chroma value from the primary key color, pass in null and keep
+  /// min chroma below  desired threshold for required colorfulness.
   final double? secondaryChroma;
 
-  /// The chroma value to use for tertiary TonalPalette.
+  /// The minimum used chroma value.
   ///
-  /// If null, the chroma value from [tertiary] is used.
-  /// Flutter SDK [ColorScheme.fromSeed] uses 24 as tertiary chroma value.
-  /// Uses fallback to 24, when a [tertiary] color is not provided, but can
-  /// be provided also when secondary is not provided, it then uses given
-  /// chroma on provided primary color's hue.
+  /// If chroma in provided secondary key color is below this value, or if a
+  /// fixed [secondaryChroma] is provided that is lower than
+  /// [secondaryMinChroma] then the [secondaryMinChroma] value is used.
+  ///
+  /// Defaults to 0.
+  ///
+  /// Flutter SDK only uses [secondaryChroma] hard coded to 16, and has no
+  /// concept of minimum level for secondary tonal palettes as its value is
+  /// always locked to 16.
+  final double secondaryMinChroma;
+
+  /// Cam16 chroma value to use for tertiary colors [TonalPalette} generation.
+  ///
+  /// If null, the chroma value from the used tertiary seed key color is used,
+  /// if it is larger than [tertiaryMinChroma].
+  ///
+  /// Flutter SDK [ColorScheme.fromSeed] uses [tertiaryChroma] hard coded
+  /// and locked to 24.
+  ///
+  /// Defaults to 24.
+  ///
+  /// The default produces soft and muted tones as tertiary tonal palette
+  /// at the mid-point tones of the palette, that are bit less muted than
+  /// the default secondary tonal palette.
+  ///
+  /// To use chroma value from the primary key color, pass in null and keep
+  /// min chroma below  desired threshold for required colorfulness.
   final double? tertiaryChroma;
+
+  /// The minimum used chroma value.
+  ///
+  /// If chroma in provided tertiary key color is below this value, or if a
+  /// fixed [tertiaryChroma] is provided that is lower than
+  /// [tertiaryMinChroma] then the [tertiaryMinChroma] value is used.
+  ///
+  /// Defaults to 0.
+  ///
+  /// Flutter SDK only uses [tertiaryChroma] hard coded to 24, and has no
+  /// concept of minimum level for tertiary tonal palettes as its value is
+  /// always locked to 24.
+  final double tertiaryMinChroma;
 
   /// Copy the object with one or more provided properties changed.
   FlexTones copyWith({
@@ -258,8 +353,11 @@ class FlexTones with Diagnosticable {
     int? onInverseSurfaceTone,
     int? inversePrimaryTone,
     double? primaryChroma,
+    double? primaryMinChroma,
     double? secondaryChroma,
+    double? secondaryMinChroma,
     double? tertiaryChroma,
+    double? tertiaryMinChroma,
   }) {
     return FlexTones(
       primaryTone: primaryTone ?? this.primaryTone,
@@ -295,8 +393,11 @@ class FlexTones with Diagnosticable {
       onInverseSurfaceTone: onInverseSurfaceTone ?? this.onInverseSurfaceTone,
       inversePrimaryTone: inversePrimaryTone ?? this.inversePrimaryTone,
       primaryChroma: primaryChroma ?? this.primaryChroma,
+      primaryMinChroma: primaryMinChroma ?? this.primaryMinChroma,
       secondaryChroma: secondaryChroma ?? this.secondaryChroma,
+      secondaryMinChroma: secondaryMinChroma ?? this.secondaryMinChroma,
       tertiaryChroma: tertiaryChroma ?? this.tertiaryChroma,
+      tertiaryMinChroma: tertiaryMinChroma ?? this.tertiaryMinChroma,
     );
   }
 
@@ -334,8 +435,11 @@ class FlexTones with Diagnosticable {
         other.onInverseSurfaceTone == onInverseSurfaceTone &&
         other.inversePrimaryTone == inversePrimaryTone &&
         other.primaryChroma == primaryChroma &&
+        other.primaryMinChroma == primaryMinChroma &&
         other.secondaryChroma == secondaryChroma &&
-        other.tertiaryChroma == tertiaryChroma;
+        other.secondaryMinChroma == secondaryMinChroma &&
+        other.tertiaryChroma == tertiaryChroma &&
+        other.tertiaryMinChroma == tertiaryMinChroma;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -370,8 +474,11 @@ class FlexTones with Diagnosticable {
       onInverseSurfaceTone,
       inversePrimaryTone,
       primaryChroma,
+      primaryMinChroma,
       secondaryChroma,
+      secondaryMinChroma,
       tertiaryChroma,
+      tertiaryMinChroma,
     ]);
   }
 
@@ -422,8 +529,14 @@ class FlexTones with Diagnosticable {
         DiagnosticsProperty<int>('inversePrimaryTone', inversePrimaryTone));
     properties.add(DiagnosticsProperty<double>('primaryChroma', primaryChroma));
     properties
+        .add(DiagnosticsProperty<double>('primaryMinChroma', primaryMinChroma));
+    properties
         .add(DiagnosticsProperty<double>('secondaryChroma', secondaryChroma));
+    properties.add(
+        DiagnosticsProperty<double>('secondaryMinChroma', secondaryMinChroma));
     properties
         .add(DiagnosticsProperty<double>('tertiaryChroma', tertiaryChroma));
+    properties.add(
+        DiagnosticsProperty<double>('tertiaryMinChroma', tertiaryMinChroma));
   }
 }

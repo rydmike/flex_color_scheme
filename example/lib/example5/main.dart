@@ -174,6 +174,14 @@ class DemoApp extends StatelessWidget {
                       keepTertiaryContainer:
                           themeController.keepTertiaryContainer,
                     ),
+
+                    // Use predefined [FlexTones] setups for the generated
+                    // [TonalPalette] and it's usage in [ColorScheme] config.
+                    // You can make your custom [FlexTones] object right here
+                    // and apps it it, this just uses an int value to select
+                    // between a few preconfigured ones.
+                    tones: AppColor.flexTonesConfig(
+                        Brightness.light, themeController.usedFlexTonesSetup),
                     // Opt-in/out of using Flutter SDK Material3 based theming
                     // features. In Flutter SDK 2.10.1 and earlier it has no
                     // effect, but it will later and then we can use this toggle
@@ -294,17 +302,16 @@ class DemoApp extends StatelessWidget {
                       // off, or make custom text themes for those surfaces.
                       // Material3 has containers with matching text color
                       // tints. Can't do that yet with only Themes in Flutter.
-
                       blendTextTheme: themeController.blendLightTextTheme,
                       // Set some opacity on popup menu, just to show a
                       // setting not available via themeController in the demo.
                       popupMenuOpacity: 0.96,
                     ),
                   )
-                // Do NOT use FlexThemeData. We use the SDK ThemeData.from
-                // factory to make the theme instead. Toggle to see the
-                // differences.
-                // We still keep the selected color scheme by grabbing it from
+                // Here we do NOT use FlexThemeData. We use the SDK
+                // ThemeData.from factory to make the theme instead.
+                // Toggle to see the differences.
+                // We use active [ColorScheme] by grabbing it from
                 // FlexColorScheme using its toScheme method. Which gives us
                 // a standard ColorScheme that we can use with ThemeData.from
                 // to create the ThemeData from same colors. The color scheme
@@ -378,6 +385,9 @@ class DemoApp extends StatelessWidget {
                       keepTertiaryContainer:
                           themeController.keepTertiaryContainer,
                     ),
+                    // Dark custom tones configs.
+                    tones: AppColor.flexTonesConfig(
+                        Brightness.dark, themeController.usedFlexTonesSetup),
                     // For reduced complexity in this demo, we use the same
                     // control value for surface mode selection and blend level
                     // for light and dark mode. They can as shown in earlier

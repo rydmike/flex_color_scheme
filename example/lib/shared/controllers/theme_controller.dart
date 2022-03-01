@@ -117,6 +117,7 @@ class ThemeController with ChangeNotifier {
     _navBarBackgroundSchemeColor =
         await _themeService.navBarBackgroundSchemeColor();
     _unselectedIsColored = await _themeService.unselectedIsColored();
+    _usedFlexTonesSetup = await _themeService.usedFlexTonesSetup();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -246,6 +247,7 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultNavBarBackgroundSchemeColor, false);
     await setUnselectedIsColored(
         ThemeService.defaultUnselectedIsColored, false);
+    await setUsedFlexTonesSetup(ThemeService.defaultUsedFlexTonesSetup, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -1182,5 +1184,15 @@ class ThemeController with ChangeNotifier {
     _unselectedIsColored = value;
     if (notify) notifyListeners();
     await _themeService.saveUnselectedIsColored(value);
+  }
+
+  late int _usedFlexTonesSetup;
+  int get usedFlexTonesSetup => _usedFlexTonesSetup;
+  Future<void> setUsedFlexTonesSetup(int? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _usedFlexTonesSetup) return;
+    _usedFlexTonesSetup = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUsedFlexTonesSetup(value);
   }
 }

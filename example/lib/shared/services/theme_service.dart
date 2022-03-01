@@ -1113,11 +1113,31 @@ abstract class ThemeService {
   static const String keyUnselectedIsColored = 'unselectedIsColored';
 
   /// Default value for the unselectedIsColored, also to reset settings.
-  static const bool defaultUnselectedIsColored = false;
+  static const bool defaultUnselectedIsColored = true;
 
   /// Loads used unselectedIsColored setting in example 5.
   Future<bool> unselectedIsColored();
 
   /// Persists unselectedIsColored setting in example 5.
   Future<void> saveUnselectedIsColored(bool value);
+
+  // ---------
+
+  /// Key used to read and save the usedFlexTonesSetup value.
+  ///
+  /// It is used to select different pre-made FlexTones configurations used
+  /// to configure how the seeded [ColorScheme]s behave.
+  static const String keyUsedFlexTonesSetup = 'usedFlexTonesSetup';
+
+  /// Default value for the usedFlexTonesSetupLevel, also used to reset
+  /// settings.
+  ///
+  /// Defaults to 1 - Flutter SDK default confi
+  static const int defaultUsedFlexTonesSetup = 1;
+
+  /// Loads used surface usedFlexTonesSetup level setting in example 5.
+  Future<int> usedFlexTonesSetup();
+
+  /// Persists the used surface usedFlexTonesSetup level setting in example 5.
+  Future<void> saveUsedFlexTonesSetup(int value);
 }

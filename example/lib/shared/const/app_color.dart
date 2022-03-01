@@ -39,24 +39,34 @@ class AppColor {
     appBarColor: Color(0xFF00102B),
   );
 
-// You can build a scheme the long way, by specifying all the required hand
-// picked scheme colors, like above, or you can also build schemes from a
-// single primary color. With the `FlexSchemeColor.from` factory. When doing so
-// the only required color is the primary color, the other colors will be
-// computed. You can optionally also provide the primaryVariant, secondary and
-// secondaryVariant colors with the factory, but any color that is not provided
-// will always be computed to get all the required colors in `FlexSchemeColor`.
+  // You can build a scheme the long way, by specifying all the required hand
+  // picked scheme colors, like above, or you can also build schemes from a
+  // single primary color. With the `FlexSchemeColor.from` factory. When doing
+  // so the only required color is the primary color, the other colors will be
+  // computed. You can optionally also provide the primaryVariant, secondary and
+  // secondaryVariant colors with the factory, but any color that is not
+  // provided will always be computed to get all the required colors in
+  // `FlexSchemeColor`.
 
-// In this example we create our 2nd color scheme from just a primary color
-// for the light and dark schemes. The custom app bar color will also
-// receive the same color value as the one that is computed for
-// secondaryVariant color, this is default null behavior for custom app bar
-// color when using this factory.
-//
-// When you figure out the actual colors you want, it might be a good idea to
-// use the method in the above case for the custom _myScheme1Light and dark,
-// since that can be const and you can then make your entire list
-// of color schemes a const.
+  // In this example we create our 2nd color scheme from just a primary color
+  // for the light and dark schemes. The custom app bar color will also
+  // receive the same color value as the one that is computed for
+  // secondaryVariant color, this is default null behavior for custom app bar
+  // color when using this factory.
+
+  // When you figure out the actual colors you want, it might be a good idea to
+  // use the method in the above case for the custom _myScheme1Light and dark,
+  // since that can be const and you can then make your entire list
+  // of color schemes a const.
+
+  // The `brightness` parameter in the FlexSchemeColor.from factory is new
+  // from version 5. If brightness is specified the factory computes missing
+  // colors that are better suited for an M3 based ColorScheme, of the given
+  // brightness. If brightness is not specified the algorithm is same as before
+  // version 5, but with two more colors. Such colors schemes fits better for
+  // M2 specification, but they do also work in M3, they just don't follow
+  // the guidelines with respect to the brightness of the color and container
+  // pair color,
   static final FlexSchemeColor _myScheme2Light = FlexSchemeColor.from(
     primary: const Color(0xFF065808),
     brightness: Brightness.light,
@@ -66,29 +76,29 @@ class AppColor {
     brightness: Brightness.dark,
   );
 
-// For our 3rd custom scheme we will define primary and secondary colors, but no
-// variant colors, we will not make any dark scheme definitions either, all
-// these missing colors will be computed, the missing color definitions will
-// get computed by the factory `FlexSchemeColor.from` when it creates the
-// `FlexSchemeColor` object. To make our dark colors for this light scheme, we
-// use the method `toDark` further below with the `_myScheme3Light` instance.
-//
-// Same comment as above, when you do figure out the actual colors you want,
-// it might be a good idea to use the method in the above case for the custom
-// _myScheme1Light and dark, since that can be const and you can then make
-// your entire list of color schemes a const.
+  // For our 3rd custom scheme we will define primary and secondary colors, but
+  // no container colors, we will not make any dark scheme definitions either.
+  // All these missing colors will be computed, the missing color definitions
+  // will get computed by the factory `FlexSchemeColor.from` when it creates the
+  // `FlexSchemeColor` object. To make our dark colors for this light scheme, we
+  // use the method `toDark` further below with the `_myScheme3Light` instance.
+  //
+  // Same comment as above, when you do figure out the actual colors you want,
+  // it might be a good idea to use the method in the above case for the custom
+  // _myScheme1Light and dark, since that can be const and you can then make
+  // your entire list of color schemes a const.
   static final FlexSchemeColor _myScheme3Light = FlexSchemeColor.from(
     primary: const Color(0xFF1145A4),
     secondary: const Color(0xFFB61D1D),
     brightness: Brightness.light,
   );
 
-// For example 4.
-// Finally we create a list with all color schemes we will use. Starting with
-// our custom schemes, since normally when we make custom schemes, those are
-// probably the ones we want to use primarily, so we put them first. After our
-// custom schemes, we add all the pre-defined built-in ones, offering them as
-// options users can switch to and use if they like.
+  // For example 4, all themes.
+  // Finally we create a list with all color schemes we will use. Starting with
+  // our custom schemes, since normally when we make custom schemes, those are
+  // probably the ones we want to use primarily, so we put them first. After our
+  // custom schemes, we add all the pre-defined built-in ones, offering them as
+  // options users can switch to and use if they like.
   static final List<FlexSchemeData> schemes = <FlexSchemeData>[
     // We add our custom light and dark FlexSchemeColor schemes we defined
     // to a list of FlexSchemeData, where we can bundle each light and dark
@@ -120,14 +130,23 @@ class AppColor {
           'primary and secondary colors',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.
-      // and swap main and container colors form the definition.
+      // The `swapColors`parameter is `true` here. It is new in version 5. It
+      // swaps main and container colors values
+      // for the primary its container, likewise for secondary and tertiary and
+      // their containers.
+      //
+      // This is done because in M3 light mode, the main color should be darker
+      // or more saturated than the container, but in dark mode it should be
+      // the other way around. By setting the flag to true, this is done
+      // before the light theme mode colors are reused as dark theme and
+      // desaturated using `whiteBlend` level value.
       dark: _myScheme3Light.defaultError.toDark(30, true),
     ),
     // Use all the built-in FlexColor schemes. This list is a const.
     ...FlexColor.schemesList,
   ];
 
-  /// For example 5.
+  /// For example 5, the Themes Playground.
   /// We add all schemes from example 4 and a placeholder for the custom data.
   ///
   /// We could also make this a static getter that requires the ThemeController,
@@ -146,7 +165,7 @@ class AppColor {
     FlexColor.customColors,
   ];
 
-  /// For example 5.
+  /// For example 5, the Themes Playground.
   /// Helper function to return current FlexSchemeData at controller index.
   ///
   /// Instead of getting the colors directly from a list that changes frequently
@@ -159,7 +178,7 @@ class AppColor {
   static FlexSchemeData scheme(final ThemeController controller) =>
       schemeAtIndex(controller.schemeIndex, controller);
 
-  /// For example 5.
+  /// For example 5, the Themes Playground.
   /// Helper function to return current FlexSchemeData at given index, also
   /// needed this functionality in theme selector and popup menu, so made
   /// it a sub function to getting the FlexSchemeData at its current index.
@@ -185,8 +204,92 @@ class AppColor {
             : null);
   }
 
+  /// Return a [FlexTones] based on passed in [brightness] and
+  /// configuration index.
+  ///
+  static FlexTones flexTonesConfig(Brightness brightness, int flexToneConfig) {
+    if (brightness == Brightness.light) {
+      if (flexToneConfig == 2) {
+        // A config with tertiary using its actual key color Cam16 chroma
+        // and primary color tone is darker.
+        // More vivid than the default config, and generated palettes
+        // remain closer to they key color values.
+        // Primary color uses tone 30, instead of default 40.
+        return const FlexTones.light(
+          primaryTone: 30,
+          primaryChroma: null,
+          secondaryChroma: null,
+          tertiaryChroma: null,
+        );
+      } else if (flexToneConfig == 3) {
+        // A config with tertiary using its actual key color Cam16 chroma
+        // and primary color tone is darker.
+        return const FlexTones.light(
+          primaryTone: 30,
+          primaryChroma: null,
+          secondaryChroma: null,
+          tertiaryChroma: null,
+        );
+      } else if (flexToneConfig == 4) {
+        // A config with tertiary using its actual key color Cam16 chroma
+        // and primary color tone is darker.
+        return const FlexTones.light(
+          primaryTone: 30,
+          primaryChroma: null,
+          secondaryChroma: null,
+          tertiaryChroma: null,
+        );
+      } else {
+        // Default Material 3 muted soft tones for secondary and tertiary,
+        // and M3 standard tones used for dark mode.
+        return const FlexTones.light();
+      }
+    } else {
+      if (flexToneConfig == 2) {
+        // A config with tertiary using its actual key color Cam16 chroma
+        // and primary color tone is darker.
+        // More vivid than the default config, and generated palettes
+        // remain closer to they key color values.
+        // Primary color uses tone 70, instead of default 80.
+        return const FlexTones.dark(
+          primaryTone: 70,
+          primaryChroma: null,
+          secondaryChroma: null,
+          tertiaryChroma: null,
+        );
+      } else if (flexToneConfig == 3) {
+        // A config with tertiary using its actual key color Cam16 chroma
+        // and primary color tone is darker.
+        return const FlexTones.dark(
+          primaryTone: 70,
+          primaryChroma: null,
+          secondaryChroma: null,
+          tertiaryChroma: null,
+        );
+      } else if (flexToneConfig == 4) {
+        // A config with tertiary using its actual key color Cam16 chroma
+        // and primary color tone is darker.
+        return const FlexTones.dark(
+          primaryTone: 70,
+          primaryChroma: null,
+          secondaryChroma: null,
+          tertiaryChroma: null,
+        );
+      } else {
+        // Default Material 3 muted soft tones for secondary and tertiary,
+        // and M3 standard tones used for dark mode.
+        return const FlexTones.dark();
+      }
+    }
+  }
+
+  /// For example 5, the Themes Playground.
   /// Used to explain the current selection of key colors used to
   /// generate the ColorScheme, when it is activated.
+  ///
+  /// Normally this is local to the widget where it is used, but I needed
+  /// this explanation in different places so I tucked it in here.
+  /// It could be placed anywhere as simple top level function too.
   static String explainUsedColors(ThemeController controller) {
     if (!controller.useKeyColors) {
       return 'Material 3 ColorScheme seeding from key colors is OFF and not '

@@ -3959,7 +3959,9 @@ class FlexColorScheme with Diagnosticable {
         secondaryKey: seed.useSecondary ? effectiveKeyColors.secondary : null,
         // If use tertiary seed, use it with fromSeeds, otherwise undefined.
         tertiaryKey: seed.useTertiary ? effectiveKeyColors.tertiary : null,
-        // Use provided tones configuration or default one.
+        // Use provided tones configuration or the default one, which uses
+        // defaults that can produce same results as Flutter SDK,
+        // ColorScheme.fromSeed(color), when only primary color is used as key.
         tones: tones ?? const FlexTones.dark(),
       );
       // Update effective main colors to seed colors, keeping configured
