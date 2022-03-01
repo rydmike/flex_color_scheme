@@ -2433,11 +2433,11 @@ class FlexColor {
   // release.
 
   /// English name of the materialBaseline theme.
-  static const String materialBaselineName = 'Material 3 baseline';
+  static const String materialBaselineName = 'M3 baseline';
 
   /// English description of the dash blue theme.
   static const String materialBaselineDescription =
-      'Material 3 baseline wallpaper based theme';
+      'Material guide 3 baseline based theme';
 
   /// MaterialBaseline theme color for light primary color.
   static const Color materialBaselineLightPrimary = Color(0xFF6750A4);
