@@ -2184,24 +2184,24 @@ class ThemeServicePrefs implements ThemeService {
 
   // ----
 
-  /// Loads usedFlexTonesSetup setting in example 5.
+  /// Loads usedFlexToneSetup setting in example 5.
   @override
-  Future<int> usedFlexTonesSetup() async {
+  Future<int> usedFlexToneSetup() async {
     try {
-      final int value = _prefs.getInt(ThemeService.keyUsedFlexTonesSetup) ??
-          ThemeService.defaultUsedFlexTonesSetup;
+      final int value = _prefs.getInt(ThemeService.keyUsedFlexToneSetup) ??
+          ThemeService.defaultUsedFlexToneSetup;
       return value;
     } catch (e) {
       debugPrint(e.toString());
-      return ThemeService.defaultUsedFlexTonesSetup;
+      return ThemeService.defaultUsedFlexToneSetup;
     }
   }
 
-  /// Persists the usedFlexTonesSetup setting in example 5.
+  /// Persists the usedFlexToneSetup setting in example 5.
   @override
-  Future<void> saveUsedFlexTonesSetup(int value) async {
+  Future<void> saveUsedFlexToneSetup(int value) async {
     try {
-      await _prefs.setInt(ThemeService.keyUsedFlexTonesSetup, value);
+      await _prefs.setInt(ThemeService.keyUsedFlexToneSetup, value);
     } catch (e) {
       debugPrint(e.toString());
     }

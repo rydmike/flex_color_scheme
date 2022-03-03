@@ -14,10 +14,10 @@ class FlexToneConfigButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<bool> isSelected = <bool>[
-      controller.usedFlexTonesSetup == 1,
-      controller.usedFlexTonesSetup == 2,
-      controller.usedFlexTonesSetup == 3,
-      controller.usedFlexTonesSetup == 4,
+      controller.usedFlexToneSetup == 1,
+      controller.usedFlexToneSetup == 2,
+      controller.usedFlexToneSetup == 3,
+      controller.usedFlexToneSetup == 4,
     ];
     return ToggleButtons(
       isSelected: isSelected,
@@ -25,7 +25,7 @@ class FlexToneConfigButtons extends StatelessWidget {
               controller.useSubThemes &&
               controller.useKeyColors
           ? (int index) {
-              controller.setUsedFlexTonesSetup(index + 1);
+              controller.setUsedFlexToneSetup(index + 1);
             }
           : null,
       children: const <Widget>[

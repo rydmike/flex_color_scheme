@@ -225,17 +225,17 @@ String generateThemeDartCode(ThemeController controller) {
   String flexTonesLight = '';
   String flexTonesDark = '';
   if (controller.useKeyColors) {
-    if (controller.usedFlexTonesSetup == 2) {
-      flexTonesLight = '  tones: FlexTones.soft(Brightness.light),\n';
-      flexTonesDark = '  tones: FlexTones.soft(Brightness.dark),\n';
+    if (controller.usedFlexToneSetup == 2) {
+      flexTonesLight = '  tones: FlexTone.soft(Brightness.light),\n';
+      flexTonesDark = '  tones: FlexTone.soft(Brightness.dark),\n';
     }
-    if (controller.usedFlexTonesSetup == 3) {
-      flexTonesLight = '  tones: FlexTones.vivid(Brightness.light),\n';
-      flexTonesDark = '  tones: FlexTones.vivid(Brightness.dark),\n';
+    if (controller.usedFlexToneSetup == 3) {
+      flexTonesLight = '  tones: FlexTone.vivid(Brightness.light),\n';
+      flexTonesDark = '  tones: FlexTone.vivid(Brightness.dark),\n';
     }
-    if (controller.usedFlexTonesSetup == 4) {
-      flexTonesLight = '  tones: FlexTones.highContrast(Brightness.light),\n';
-      flexTonesDark = '  tones: FlexTones.highContrast(Brightness.dark),\n';
+    if (controller.usedFlexToneSetup == 4) {
+      flexTonesLight = '  tones: FlexTone.highContrast(Brightness.light),\n';
+      flexTonesDark = '  tones: FlexTone.highContrast(Brightness.dark),\n';
     }
   }
   final String code = 'theme: FlexThemeData.light(\n'

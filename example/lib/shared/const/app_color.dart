@@ -204,17 +204,17 @@ class AppColor {
             : null);
   }
 
-  /// Return a [FlexTones] based on passed in [brightness] and
+  /// Return a [FlexTone] based on passed in [brightness] and
   /// configuration value.
-  static FlexTones flexTonesConfig(Brightness brightness, int flexToneConfig) {
+  static FlexTone flexTonesConfig(Brightness brightness, int flexToneConfig) {
     if (flexToneConfig == 2) {
-      return FlexTones.soft(brightness);
+      return FlexTone.soft(brightness);
     } else if (flexToneConfig == 3) {
-      return FlexTones.vivid(brightness);
+      return FlexTone.vivid(brightness);
     } else if (flexToneConfig == 4) {
-      return FlexTones.highContrast(brightness);
+      return FlexTone.highContrast(brightness);
     } else {
-      return FlexTones.material(brightness);
+      return FlexTone.material(brightness);
     }
   }
 
@@ -228,7 +228,8 @@ class AppColor {
   static String explainUsedColors(ThemeController controller) {
     if (!controller.useKeyColors) {
       return 'Material 3 ColorScheme seeding from key colors is OFF and not '
-          'used. The ColorScheme is based directly on the input colors';
+          'used. The ColorScheme is based directly on the effective '
+          'input colors';
     }
     if (!controller.useSecondary && !controller.useTertiary) {
       return 'Only Primary input color is used to generate the Colorscheme. '

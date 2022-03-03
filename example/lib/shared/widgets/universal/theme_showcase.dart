@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'switch_list_tile_adaptive.dart';
+
 /// Theme showcase for the current theme.
 ///
 /// Use this widget to review your theme's impact on [ThemeData] and see
@@ -874,7 +876,7 @@ class NavigationRailShowcase extends StatefulWidget {
 
 class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
   int buttonIndex = 0;
-  bool isExtended = true;
+  bool isExtended = false;
   bool useIndicator = false;
   bool allLabels = true;
   NavigationRailLabelType railType = NavigationRailLabelType.all;
@@ -908,6 +910,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
             height: 420,
             child: Row(
               children: <Widget>[
+                const VerticalDivider(width: 1),
                 NavigationRail(
                   extended: isExtended,
                   useIndicator: useIndicator ? true : null,
@@ -948,7 +951,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                         subtitle: Text('Local controls to rail presentation, '
                             'not a part of the theming setup.'),
                       ),
-                      SwitchListTile.adaptive(
+                      SwitchListTileAdaptive(
                         title: const Text('Expand and collapse'),
                         subtitle: const Text('ON to expand  OFF to collapse'),
                         value: isExtended,
@@ -958,7 +961,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                           });
                         },
                       ),
-                      SwitchListTile.adaptive(
+                      SwitchListTileAdaptive(
                         title: const Text('Labels when collapsed'),
                         subtitle: const Text('ON all  OFF only selected'),
                         value: allLabels,
@@ -971,7 +974,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                           });
                         },
                       ),
-                      SwitchListTile.adaptive(
+                      SwitchListTileAdaptive(
                         title: const Text('Selection indicator'),
                         subtitle: const Text('Also ON when '
                             'useMaterial3 is true, only thing the toggle does '

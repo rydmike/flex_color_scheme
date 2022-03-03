@@ -15,6 +15,7 @@ import '../shared/widgets/universal/responsive_dialog.dart';
 import '../shared/widgets/universal/show_color_scheme_colors.dart';
 import '../shared/widgets/universal/show_sub_theme_colors.dart';
 import '../shared/widgets/universal/show_theme_data_colors.dart';
+import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 import 'utils/generate_colorscheme_dart_code.dart';
@@ -554,7 +555,7 @@ class _Info extends StatelessWidget {
                 'ThemeData.from(colorScheme) using same active ColorScheme '
                 'as shown when FlexColorScheme is active.'),
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             subtitle: const Text(
               "Turn OFF to see Flutter's default theming with active colors.\n"
               'Most settings are disabled or have no impact when turned OFF.',
@@ -572,7 +573,7 @@ class _Info extends StatelessWidget {
                 'Mostly this affects corner radius of Widgets, but also '
                 'TextTheme size and its optional coloring. '),
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             subtitle: const Text('Use opinionated widget sub themes.\n'
                 'When ON you can configure additional settings on components, '
                 'that is on Flutter built-in Material UI widgets.'),
@@ -613,7 +614,7 @@ class _Info extends StatelessWidget {
                 'ThemeData that you can turn on to enable M3 styles, but it '
                 'still has no effect on Widgets in Flutter.'),
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text(
               "Use Flutter's Material 3 based ThemeData defaults",
             ),
@@ -737,9 +738,10 @@ class _SelectTheme extends StatelessWidget {
           const SizedBox(height: 8),
           if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
             ListTile(
-              title: const Text('Copy these input colors to custom colors?'),
-              subtitle: const Text('Sets custom colors to this input scheme. '
-                  'You can then modify these colors'),
+              title: const Text('Copy effective input colors to the custom '
+                  'scheme?'),
+              subtitle: const Text('Applies effective input color value to '
+                  'the last scheme, the custom one that you can modify'),
               trailing: ElevatedButton(
                 onPressed: () async {
                   await _handleCopySchemeTap(context);
@@ -753,8 +755,8 @@ class _SelectTheme extends StatelessWidget {
           else
             const ListTile(
               title: Text('Custom color scheme'),
-              subtitle: Text('Tap the primary, secondary or tertiary and their '
-                  'container colors to customize them'),
+              subtitle: Text('Tap the primary, secondary, tertiary color or '
+                  ' their container colors to change the colors'),
             ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
@@ -765,33 +767,34 @@ class _SelectTheme extends StatelessWidget {
             child: Text('Tap a color code to copy it to the clipboard'),
           ),
           const SizedBox(height: 8),
-          const Divider(),
           const ListTile(
             title: Text('Input color modifiers'),
             subtitle: Text('You can use the input color modifiers below to '
-                'change the input colors before they are used to define '
-                'the ColorScheme'),
+                'change the effective input colors that are used to define '
+                'the ColorScheme. The input color values show the color before '
+                'input modifiers, the surrounding color is the effective input '
+                'color.'),
           ),
           UsedColorsPopupMenu(
             title: const Text('Input limiter, use fewer of the six '
-                'predefined color values'),
+                'predefined input color values'),
             index: controller.usedColors,
             onChanged: controller.setUsedColors,
           ),
           if (isLight)
-            SwitchListTile.adaptive(
+            SwitchListTileAdaptive(
               title: const Text('Light mode swap colors'),
               subtitle: const Text(
-                'Swap primary and secondary colors',
+                'Swap primary, secondary and their container colors',
               ),
               value: controller.swapLightColors,
               onChanged: controller.setSwapLightColors,
             )
           else
-            SwitchListTile.adaptive(
+            SwitchListTileAdaptive(
               title: const Text('Dark mode swap colors'),
               subtitle: const Text(
-                'Swap primary and secondary colors',
+                'Swap primary, secondary and their container colors',
               ),
               value: controller.swapDarkColors,
               onChanged: controller.setSwapDarkColors,
@@ -801,11 +804,14 @@ class _SelectTheme extends StatelessWidget {
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,
-            child: SwitchListTile.adaptive(
+            child: SwitchListTileAdaptive(
               title: const Text('Compute dark theme'),
               subtitle: const Text(
-                'Calculate from light scheme color values, instead '
-                'of using the predefined dark ones',
+                'Calculate dark mode colors from light scheme color values, '
+                'instead of using the predefined dark ones. Using M3 seed key '
+                'colors does this too, using a more involved and expensive '
+                'algorithm. This option has no effect if seed colors '
+                'are used, it is kept disabled then.',
               ),
               value: controller.useToDarkMethod &&
                   controller.useSubThemes &&
@@ -951,20 +957,20 @@ class _SeededColorScheme extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
-  String _describeFlexTonesShort(int colors) {
+  String _describeFlexToneShort(int colors) {
     if (colors == 1) {
-      return 'Default Material 3 design tonal setup and extraction';
+      return 'Default Material 3 design tone map and chroma setup';
     } else if (colors == 2) {
       return 'Softer and more earth like tones than Material 3 defaults';
     } else if (colors == 3) {
       return 'More vivid colors than Material 3 defaults';
     } else if (colors == 4) {
-      return 'High contrast setup';
+      return 'High contrast version, may be useful for accessibility';
     }
     return 'Disabled';
   }
 
-  String _describeFlexTonesLong(int colors) {
+  String _describeFlexToneLong(int colors) {
     if (colors == 1) {
       return 'Primary - Chroma from key color, but min 48\n'
           'Secondary - Chroma set to 16\n'
@@ -998,8 +1004,8 @@ class _SeededColorScheme extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: 8),
           ListTile(
-            title: const Text('Use input colors as seed keys '
-                'for the ColorScheme'),
+            title: const Text('Use effective input colors as keys to seed '
+                'the ColorScheme'),
             subtitle: Text(AppColor.explainUsedColors(controller)),
           ),
           // const SizedBox(height: 4),
@@ -1009,14 +1015,14 @@ class _SeededColorScheme extends StatelessWidget {
             ),
           ),
           const ListTile(
-            title: Text('Keep input color'),
+            title: Text('Keep effective input color'),
             subtitle: Text('When using a seeded ColorScheme, '
                 'you can lock primary, secondary, tertiary and their '
-                'container colors to their input colors, instead of '
-                'using the tone from the tonal palette. Toggle '
-                'switches below for each color to keep its input color. '
-                'The lock switches are only available when key color based '
-                'seeded scheme is used.'),
+                'container colors to their effective input color value, '
+                'instead of using the tone from the computed tonal palette. '
+                'Toggle switches below for each color to keep its effective '
+                'input color. The lock switches are only available when the '
+                'key color based seeded scheme is used.'),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
@@ -1027,9 +1033,9 @@ class _SeededColorScheme extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text('Tap a color code to copy it to the clipboard. '
                   // ignore: lines_longer_than_80_chars
-                  "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source. ' : ''}"
+                  "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color. ' : ''}"
                   // ignore: lines_longer_than_80_chars
-                  "${controller.blendLevel > 0 ? 'Blend level > 0 modifies surface and background colors, they may no longer be found in generated palettes when hovered.' : ''}"),
+                  "${controller.blendLevel > 0 ? 'Surface blends modifies surface and background colors, they may not be found in generated palettes when hovered.' : ''}"),
             ),
 
           if (controller.schemeIndex == (AppColor.schemesCustom.length - 1))
@@ -1037,11 +1043,10 @@ class _SeededColorScheme extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child:
                   Text('This is the custom color theme, you can tap primary, '
-                      'secondary or tertiary, plus their containers to '
-                      'change their colors.'),
+                      'secondary or tertiary, plus their container colors to '
+                      'change them.'),
             ),
           const SizedBox(height: 8),
-          const Divider(),
           const ListTile(
             title: Text('Generated tonal palettes'),
           ),
@@ -1051,18 +1056,18 @@ class _SeededColorScheme extends StatelessWidget {
           ),
           const ListTile(
             subtitle: Text(
-              'Using FlexTones, you can configure which tone from the '
-              'generated tonal palettes, each color in the ColorScheme use. '
-              'You can also set limits on the used Cam16 chroma values '
-              'for the three key colors used for primary, secondary and '
-              'tertiary TonalPalette generation.',
+              'With FlexTone you can configure which tone from '
+              'generated tonal palettes each color in the ColorScheme use. '
+              'You can also set limits on used CAM16 chroma values '
+              'for the three color values used as keys to seed the M3 primary, '
+              'secondary and tertiary TonalPalette.',
             ),
           ),
           ListTile(
-            title: const Text('Select FlexTones setup'),
+            title: const Text('Select FlexTone setup'),
             subtitle: Text(
-              _describeFlexTonesShort(
-                  controller.useKeyColors ? controller.usedFlexTonesSetup : 0),
+              _describeFlexToneShort(
+                  controller.useKeyColors ? controller.usedFlexToneSetup : 0),
             ),
             trailing: FlexToneConfigButtons(controller: controller),
           ),
@@ -1070,11 +1075,12 @@ class _SeededColorScheme extends StatelessWidget {
             title: const Text('Used CAM16 chroma configuration'),
             subtitle: Text(
               // ignore: lines_longer_than_80_chars
-              '${_describeFlexTonesLong(controller.useKeyColors ? controller.usedFlexTonesSetup : 0)}\n'
-              'In this app version you can choose between the default M3 '
-              'tones and three pre-defined FlexTones. With the API you can '
-              'make your own FlexTones configurations. A future version '
-              'of this app may add interactive configuration of tones too.',
+              '${_describeFlexToneLong(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}\n'
+              'In this version you can choose between the default Material 3 '
+              'tone mapping and three pre-defined custom FlexTone setup. With '
+              'the API you can make your own FlexTone configurations. A future '
+              'version of this app may add interactive configuration of tone '
+              'to ColorScheme color mapping.',
             ),
           ),
           const SizedBox(height: 8),
@@ -1106,15 +1112,17 @@ class _ColorScheme extends StatelessWidget {
         children: const <Widget>[
           Padding(
             padding: EdgeInsets.all(16),
-            child: Text('This shows all the effective ColorScheme colors. '
+            child: Text('This shows all the effective ColorScheme colors in '
+                'a compact form. '
                 'They are presented in the same order as they appear in the '
-                'ColorScheme class.'),
+                'ColorScheme class. The deprecated colors primaryVariant and '
+                'secondaryVariant are excluded.'),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: ShowColorSchemeColors(),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 16),
         ],
       ),
     );
@@ -1289,7 +1297,7 @@ class _SurfaceBlends extends StatelessWidget {
                 ),
               ),
             ),
-            SwitchListTile.adaptive(
+            SwitchListTileAdaptive(
               title: const Text('Light mode main colors use onColor blending'),
               subtitle: const Text(
                   'In M3 seeded light design only container colors use color '
@@ -1383,7 +1391,7 @@ class _SurfaceBlends extends StatelessWidget {
                 ),
               ),
             ),
-            SwitchListTile.adaptive(
+            SwitchListTileAdaptive(
               title: const Text('Dark mode main colors use onColor blending'),
               subtitle: const Text(
                   'In M3 seeded dark design, not only container colors use '
@@ -1402,7 +1410,7 @@ class _SurfaceBlends extends StatelessWidget {
           ],
           // Set dark mode to use true black!
           if (isLight)
-            SwitchListTile.adaptive(
+            SwitchListTileAdaptive(
               title: const Text('Plain white'),
               subtitle: const Text(
                 'White Scaffold in all blend modes, '
@@ -1412,7 +1420,7 @@ class _SurfaceBlends extends StatelessWidget {
               onChanged: controller.setLightIsWhite,
             )
           else
-            SwitchListTile.adaptive(
+            SwitchListTileAdaptive(
               title: const Text('True black'),
               subtitle: const Text(
                 'Black Scaffold in all blend modes, '
@@ -1448,7 +1456,7 @@ class _ComponentThemes extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('Use component themes'),
             subtitle: const Text('Enable opinionated widget sub themes'),
             value: controller.useSubThemes && controller.useFlexColorScheme,
@@ -1456,7 +1464,7 @@ class _ComponentThemes extends StatelessWidget {
                 ? controller.setUseSubThemes
                 : null,
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('Use Material 3 TextTheme'),
             subtitle: const Text('ON to use FCS M3 text styles and geometry\n'
                 'OFF to use SDK M2 2018 text styles and geometry'),
@@ -1468,7 +1476,7 @@ class _ComponentThemes extends StatelessWidget {
                 : null,
           ),
           if (isLight)
-            SwitchListTile.adaptive(
+            SwitchListTileAdaptive(
               title: const Text('Light mode TextTheme is primary colored'),
               subtitle: const Text('A hint of primary color is mixed into '
                   'main text theme'),
@@ -1481,7 +1489,7 @@ class _ComponentThemes extends StatelessWidget {
                       : null,
             )
           else
-            SwitchListTile.adaptive(
+            SwitchListTileAdaptive(
               title: const Text('Dark mode TextTheme is primary colored'),
               subtitle: const Text('A hint of primary color is mixed into '
                   'main text theme'),
@@ -1493,7 +1501,7 @@ class _ComponentThemes extends StatelessWidget {
                       ? controller.setBlendDarkTextTheme
                       : null,
             ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('Use Material 3 rounded corners on UI elements'),
             subtitle: const Text('ON to use M3 spec border radius, varies '
                 'per component\n'
@@ -1543,7 +1551,7 @@ class _ComponentThemes extends StatelessWidget {
               ),
             ),
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('Rounded corners on FloatingActionButton'),
             subtitle: const Text('OFF removes Shape from custom FAB sub-theme, '
                 'making it use M2 circular style.'),
@@ -1554,7 +1562,7 @@ class _ComponentThemes extends StatelessWidget {
                 ? controller.setFabUseShape
                 : null,
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('Themed state effects'),
             subtitle: const Text('Disable, hover, focus, highlight and '
                 'splash use primary color'),
@@ -1569,7 +1577,7 @@ class _ComponentThemes extends StatelessWidget {
           // Tooltip theme style.
           Tooltip(
             message: 'A tooltip, on the tooltip style toggle',
-            child: SwitchListTile.adaptive(
+            child: SwitchListTileAdaptive(
               title: const Text(
                 'Tooltip background brightness',
               ),
@@ -1635,7 +1643,7 @@ class _TextField extends StatelessWidget {
                   }
                 : null,
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text(
               'Field has fill color',
             ),
@@ -1646,7 +1654,7 @@ class _TextField extends StatelessWidget {
                 ? controller.setInputDecoratorIsFilled
                 : null,
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text(
               'Border style',
             ),
@@ -1669,7 +1677,7 @@ class _TextField extends StatelessWidget {
                   }
                 : null,
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('Unfocused field has border'),
             value: controller.inputDecoratorUnfocusedHasBorder &&
                 controller.useSubThemes &&
@@ -1775,7 +1783,7 @@ class _AppBar extends StatelessWidget {
                       AppColor.scheme(controller).dark.appBarColor),
             ),
           ],
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('One colored AppBar on Android'),
             subtitle: const Text(
               'ON  No scrim on the top status bar\n'
@@ -2150,7 +2158,7 @@ class _BottomNavigation extends StatelessWidget {
                   }
                 : null,
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('Mute unselected item on M3 navigation bar'),
             subtitle: const Text('Unselected icon and text are less bright'),
             value: controller.navBarMuteUnselected &&
@@ -2172,7 +2180,7 @@ class _BottomNavigation extends StatelessWidget {
               onChanged: controller.setNavBarStyle,
             ),
           ),
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('Android navigation bar divider'),
             subtitle: const Text('There is also an extra system built-in scrim '
                 'on the nav bar when it is enabled'),
@@ -2337,7 +2345,7 @@ class _NavigationRail extends StatelessWidget {
                   }
                 : null,
           ),
-          // SwitchListTile.adaptive(
+          // SwitchListTileAdaptive(
           //   title: const Text('Mute unselected item on M3 navigation bar'),
           //   subtitle: const Text('Unselected icon and text are less bright'),
           //   value: controller.navBarMuteUnselected &&
@@ -2595,7 +2603,7 @@ class _SwitchesShowcase extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SwitchListTile.adaptive(
+          SwitchListTileAdaptive(
             title: const Text('Unselected toggle color'),
             subtitle: const Text('ON: Use theme color   OFF: SDK neutral'),
             value: controller.unselectedIsColored &&

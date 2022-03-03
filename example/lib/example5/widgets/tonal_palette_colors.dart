@@ -1,9 +1,8 @@
-import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'color_indicator.dart';
+import 'copy_color_to_clipboard.dart';
 
 /// TonalPaletteColors widget.
 ///
@@ -53,25 +52,6 @@ class TonalPaletteColors extends StatelessWidget {
         : Colors.white;
   }
 
-  // Set the color value as a String on the Clipboard in
-  // currently configured format, notify with snackbar that it was copied.
-  Future<void> _setClipboard(BuildContext context, Color color) async {
-    final ClipboardData data = ClipboardData(text: '0x${color.hexAlpha}');
-    await Clipboard.setData(data);
-    final String materialName = ColorTools.materialName(color);
-    final String nameThatColor = ColorTools.nameThatColor(color);
-    final String space = materialName == '' ? '' : ' ';
-    // Show a snack bar with the copy message.
-    // ignore: use_build_context_synchronously
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Copied color code ${color.hexCode} for color '
-            '$nameThatColor $materialName${space}to the clipboard!'),
-        duration: const Duration(milliseconds: 2000),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -82,7 +62,7 @@ class TonalPaletteColors extends StatelessWidget {
               color: Color(tonalPalette[i]),
               height: height,
               onTap: () {
-                _setClipboard(context, Color(tonalPalette[i]));
+                copyColorToClipboard(context, Color(tonalPalette[i]));
               },
               child: Center(
                 child: Stack(
@@ -92,6 +72,7 @@ class TonalPaletteColors extends StatelessWidget {
                         _toneLabel(i),
                         style: TextStyle(
                           fontSize: 11,
+                          fontWeight: FontWeight.w600,
                           color: _onColor(Color(tonalPalette[i])),
                         ),
                       ),

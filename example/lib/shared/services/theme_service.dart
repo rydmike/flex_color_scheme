@@ -1123,21 +1123,21 @@ abstract class ThemeService {
 
   // ---------
 
-  /// Key used to read and save the usedFlexTonesSetup value.
+  /// Key used to read and save the usedFlexToneSetup value.
   ///
-  /// It is used to select different pre-made FlexTones configurations used
+  /// It is used to select different pre-made FlexTone configurations used
   /// to configure how the seeded [ColorScheme]s behave.
-  static const String keyUsedFlexTonesSetup = 'usedFlexTonesSetup';
+  static const String keyUsedFlexToneSetup = 'usedFlexToneSetup';
 
-  /// Default value for the usedFlexTonesSetupLevel, also used to reset
+  /// Default value for the usedFlexToneSetupLevel, also used to reset
   /// settings.
   ///
   /// Defaults to 1 - Flutter SDK default confi
-  static const int defaultUsedFlexTonesSetup = 1;
+  static const int defaultUsedFlexToneSetup = 1;
 
-  /// Loads used surface usedFlexTonesSetup level setting in example 5.
-  Future<int> usedFlexTonesSetup();
+  /// Loads used surface usedFlexToneSetup level setting in example 5.
+  Future<int> usedFlexToneSetup();
 
-  /// Persists the used surface usedFlexTonesSetup level setting in example 5.
-  Future<void> saveUsedFlexTonesSetup(int value);
+  /// Persists the used surface usedFlexToneSetup level setting in example 5.
+  Future<void> saveUsedFlexToneSetup(int value);
 }

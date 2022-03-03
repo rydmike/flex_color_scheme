@@ -10,6 +10,7 @@ import '../shared/widgets/app/show_sub_pages.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/show_color_scheme_colors.dart';
 import '../shared/widgets/universal/show_theme_data_colors.dart';
+import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 import 'widgets/theme_popup_menu.dart';
 
@@ -120,7 +121,7 @@ class HomePage extends StatelessWidget {
                               controller: controller,
                             ),
                           ),
-                          SwitchListTile.adaptive(
+                          SwitchListTileAdaptive(
                             title: const Text('Keep primary color'),
                             subtitle: const Text(
                                 'When using seeded schemes, keep primary color '
@@ -131,7 +132,7 @@ class HomePage extends StatelessWidget {
                                 ? controller.setKeepPrimary
                                 : null,
                           ),
-                          SwitchListTile.adaptive(
+                          SwitchListTileAdaptive(
                             title: const Text('Keep secondary color'),
                             subtitle: const Text(
                                 'When using seeded schemes, keep secondary '
@@ -142,7 +143,7 @@ class HomePage extends StatelessWidget {
                                 ? controller.setKeepSecondary
                                 : null,
                           ),
-                          SwitchListTile.adaptive(
+                          SwitchListTileAdaptive(
                             title: const Text('Keep tertiary color'),
                             subtitle: const Text(
                                 'When using seeded schemes, keep tertiary '
@@ -153,14 +154,14 @@ class HomePage extends StatelessWidget {
                                 ? controller.setKeepTertiary
                                 : null,
                           ),
-                          SwitchListTile.adaptive(
+                          SwitchListTileAdaptive(
                             title: const Text('Use component sub themes'),
                             subtitle: const Text(
                                 'Enable opinionated widget sub themes'),
                             value: controller.useSubThemes,
                             onChanged: controller.setUseSubThemes,
                           ),
-                          SwitchListTile.adaptive(
+                          SwitchListTileAdaptive(
                             title: const Text(
                               'Use Material 3 rounded corners on UI elements',
                             ),
