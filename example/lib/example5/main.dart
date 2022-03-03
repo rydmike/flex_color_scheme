@@ -175,13 +175,13 @@ class DemoApp extends StatelessWidget {
                           themeController.keepTertiaryContainer,
                     ),
 
-                    // Use predefined [FlexTones] setups for the generated
+                    // Use predefined [FlexTone] setups for the generated
                     // [TonalPalette] and it's usage in [ColorScheme] config.
-                    // You can make your custom [FlexTones] object right here
+                    // You can make your custom [FlexTone] object right here
                     // and apps it it, this just uses an int value to select
                     // between a few preconfigured ones.
                     tones: AppColor.flexTonesConfig(
-                        Brightness.light, themeController.usedFlexTonesSetup),
+                        Brightness.light, themeController.usedFlexToneSetup),
                     // Opt-in/out of using Flutter SDK Material3 based theming
                     // features. In Flutter SDK 2.10.1 and earlier it has no
                     // effect, but it will later and then we can use this toggle
@@ -347,6 +347,7 @@ class DemoApp extends StatelessWidget {
                     typography: Typography.material2018(
                       platform: themeController.platform,
                     ),
+                    platform: themeController.platform,
                   ),
             // We do the exact same definition for the dark theme, but using
             // FlexThemeData.dark() and the dark FlexSchemeColors and we add
@@ -387,7 +388,7 @@ class DemoApp extends StatelessWidget {
                     ),
                     // Dark custom tones configs.
                     tones: AppColor.flexTonesConfig(
-                        Brightness.dark, themeController.usedFlexTonesSetup),
+                        Brightness.dark, themeController.usedFlexToneSetup),
                     // For reduced complexity in this demo, we use the same
                     // control value for surface mode selection and blend level
                     // for light and dark mode. They can as shown in earlier
@@ -495,6 +496,7 @@ class DemoApp extends StatelessWidget {
                     typography: Typography.material2018(
                       platform: themeController.platform,
                     ),
+                    platform: themeController.platform,
                   ),
             // Use the dark or light theme based on controller setting.
             themeMode: themeController.themeMode,

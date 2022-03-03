@@ -266,7 +266,7 @@ up-to-date.
 * Added custom tone configuration for seeded `ColorScheme`. M3 color design
   has it own fixed defaults for which tone from the relevant `TonalPalette`
   is used as input on each color property in the light and corresponding dark
-  `ColorScheme`. By configuring and passing in a `FlexTones` to `tones` in 
+  `ColorScheme`. By configuring and passing in a `FlexTone` to `tones` in 
   `FlexColorScheme.light` and `FlexColorScheme.dark` it is possible
   to control which color tone from the relevant `TonalPalette` is used for 
   each color property in generated `ColorScheme`.
@@ -277,25 +277,25 @@ up-to-date.
 
 * The Material 3 based seeded `ColorScheme` also locks down the chroma level of
   seed color for secondary colors to 16 and to 24 for tertiary colors, and keeps
-  it at min 48 for primary color. The `FlexTones` configuration makes it
+  it at min 48 for primary color. The `FlexTone` configuration makes it
   possible to change these restrictions, to get a more vivid tonal palettes also
   for secondary and tertiary `TonalPalettes`, when using the individual key
-  color inputs that can be enabled via `FlexKeyColor`. FlexTones has a 
-  `FlexTones.light` and `FlexTones.dark` constructor that have default values
+  color inputs that can be enabled via `FlexKeyColor`. FlexTone has a 
+  `FlexTone.light` and `FlexTone.dark` constructor that have default values
   that gives the same result as using the hard coded `ColorScheme.fromSeed`
   tone mapping and chroma limits behavior on `TonalPalette`. These constructors
-  are also convenient to use when making custom `FlexTones` setups. To show 
+  are also convenient to use when making custom `FlexTone` setups. To show 
   how, it comes with four built in examples. They take a `Brightness` value
-  as input, and return `FlexTones` configs with different design goals suitable 
-  for dark or light mode brightness themes. There is `FlexTones.material`, it is 
-  an alternative `Brightness` input based API for `FlexTones.light` and 
- `FlexTones.dark` to get the default Material 3 design guide config. 
+  as input, and return `FlexTone` configs with different design goals suitable 
+  for dark or light mode brightness themes. There is `FlexTone.material`, it is 
+  an alternative `Brightness` input based API for `FlexTone.light` and 
+ `FlexTone.dark` to get the default Material 3 design guide config. 
   In a similar fashion there are 3 alternative  
-  configurations. `FlexTones.soft`, for even softer and more earthy tones than 
+  configurations. `FlexTone.soft`, for even softer and more earthy tones than 
   M3 defaults, that are pretty soft and pastel like to begin with. If you prefer
-  more vivid tones to be generated, try `FlexTones.vivid`. If you like or need
+  more vivid tones to be generated, try `FlexTone.vivid`. If you like or need
   more contrast differences between your colors, you can try 
-  `FlexTones.highContrast`. It is easy to make your own configs with the API.
+  `FlexTone.highContrast`. It is easy to make your own configs with the API.
   The setup of the these built-in examples shows how.
 
 * Add new alpha blend control `blendOnLevel` value for onColors to class
@@ -445,16 +445,16 @@ up-to-date.
   - **DONE:** Added controls for using key color dynamic seeded ColorScheme, using
     the predefined colors primary, secondary and tertiary as seed colors.
   - **DONE:** * To the playground app, added a setup that demonstrates the usage
-    of `FlexTones`. Made some useful setups as preconfigured FlexTones, and the
-    playground uses demo. Now comes with `FlexTones.material` for the default
-    Material 3 design guide config, and `FlexTones.soft`, `FlexTones.vivid` 
-    and `FlexTones.highContrast` as built-in preconfigured options. It is easy
+    of `FlexTone`. Made some useful setups as preconfigured FlexTone, and the
+    playground uses demo. Now comes with `FlexTone.material` for the default
+    Material 3 design guide config, and `FlexTone.soft`, `FlexTone.vivid` 
+    and `FlexTone.highContrast` as built-in preconfigured options. It is easy
     to make your own configs with the API.
   - The ThemesPlayground paints active TonalPalettes and highlights selected
     tones in the palettes when you have on a ColorScheme color. May extend this 
     to make an interactively configurable tonal setup by pickling tones from
     the `TonalPalette` and sliders to adjust chroma. this could be used to 
-    create `FlexTones` config and get it as part of setup code too. 
+    create `FlexTone` config and get it as part of setup code too. 
 
 
 

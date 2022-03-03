@@ -3,6 +3,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'copy_color_to_clipboard.dart';
+
 /// This widget is intended to be wrapped in material with [color].
 /// It shows a [label] describing the theme property name of the [color] and
 /// color code name as a Material color, if it is a Material color and a common
@@ -65,27 +67,12 @@ class _ColorNameValueState extends State<ColorNameValue> {
     super.didUpdateWidget(oldWidget);
   }
 
-  // Set current selected color value as a String on the Clipboard in
-  // currently configured format, notify with snackbar that it was copied.
-  Future<void> _setClipboard() async {
-    final ClipboardData data =
-        ClipboardData(text: '0x${widget.color.hexAlpha}');
-    await Clipboard.setData(data);
-    final String space = materialName == '' ? '' : ' ';
-    if (!mounted) return;
-    // Show a snack bar with the copy message.
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Copied color code ${widget.color.hexCode} for color '
-            '$nameThatColor $materialName${space}to the clipboard!'),
-        duration: const Duration(milliseconds: 2000),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    // Alpha value for opacity on some text further below.
+    // Alpha value for opacity on some text further below. Experimented with
+    // the look of some opacity on the text on the color code values and names.
+    // Decided it was better to just use the actual on colors to better show
+    // what they actually look like.
     const int alpha = 0xFF;
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
@@ -188,7 +175,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                             fontWeight: FontWeight.w600),
                       ),
                       onTap: () async {
-                        await _setClipboard();
+                        await copyColorToClipboard(context, widget.color);
                       },
                     ),
                   ),
@@ -244,7 +231,10 @@ class _ColorNameValueState extends State<ColorNameValue> {
                                       fontWeight: FontWeight.w600),
                                 ),
                                 onTap: () async {
-                                  await _setClipboard();
+                                  await copyColorToClipboard(
+                                    context,
+                                    widget.color,
+                                  );
                                 },
                               ),
                             ),

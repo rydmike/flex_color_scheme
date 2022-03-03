@@ -54,24 +54,9 @@ class SchemeColors extends StatelessWidget {
     final Color tertiary = colorScheme.tertiary;
     final Color tertiaryContainer = colorScheme.tertiaryContainer;
 
-    // TODO(rydmike): Remove this unused code.
-    // // Get controller input colors
-    // FlexSchemeColor inputColor = isLight
-    //     ? AppColor.scheme(controller).light
-    //     : AppColor.scheme(controller).dark;
-
-    // // Swap the input colors when we are using color swapping.
-    // if ((isLight && swapLight) || (!isLight && swapDark)) {
-    //   inputColor = inputColor.copyWith(
-    //       primary: inputColor.secondary,
-    //       primaryContainer: inputColor.secondaryContainer,
-    //       secondary: inputColor.primary,
-    //       secondaryContainer: inputColor.primaryContainer);
-    // }
-
     // Grab active tons and chroma setup.
-    final FlexTones tones = AppColor.flexTonesConfig(
-        theme.brightness, controller.usedFlexTonesSetup);
+    final FlexTone tones = AppColor.flexTonesConfig(
+        theme.brightness, controller.usedFlexToneSetup);
     // Should we even show the tone? We show them only when, seeding is on.
     final bool showTones =
         controller.useKeyColors && controller.useFlexColorScheme;

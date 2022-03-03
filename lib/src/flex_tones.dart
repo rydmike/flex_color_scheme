@@ -12,7 +12,7 @@ import 'package:flutter/foundation.dart';
 ///
 /// When [TonalPalette]s are generated from key color(s) and used to define
 /// a [ColorScheme], it is recommended to use the same key colors and
-/// [FlexTones] setup for both the light and dark theme. By doing so the
+/// [FlexTone] setup for both the light and dark theme. By doing so the
 /// same [TonalPalette] is used to assign suitable tones from the same
 /// [TonalPalette] bu using different tones.
 ///
@@ -21,23 +21,23 @@ import 'package:flutter/foundation.dart';
 /// [secondary] and [tertiary] color definitions as seed keys for their
 /// respective tonal palette generation. Thus creating identical [TonalPalettes]
 /// for dark mode as for light mode and using the tones based and chroma setup
-/// from provided or default [FlexTones].
+/// from provided or default [FlexTone].
 ///
 /// If you make custom color schemes using [FlexColorScheme] it is up to you
 /// to define what colors you use when you use key colors to seed
 /// [ColorScheme]s.
 ///
-/// The used default [FlexTones.light] and [FlexTones.dark] match the definition
+/// The used default [FlexTone.light] and [FlexTone.dark] match the definition
 /// Flutter SDK uses for its Material Design 3 based seed generated tones.
 /// In Flutter it has corded values. You have to go to lower APIs and open them
 /// up a bit to offer the possibilities and flexibility FlexColorScheme
 /// provides.
 @immutable
-class FlexTones with Diagnosticable {
+class FlexTone with Diagnosticable {
   /// Default constructor requiring all properties.
   ///
-  /// Prefer using [FlexTones.light] or [FlexTones.dark].
-  const FlexTones({
+  /// Prefer using [FlexTone.light] or [FlexTone.dark].
+  const FlexTone({
     required this.primaryTone,
     required this.onPrimaryTone,
     required this.primaryContainerTone,
@@ -79,7 +79,7 @@ class FlexTones with Diagnosticable {
   /// This setup will if only one seed color is used, produce the same result
   /// with [FlexColorPalette] as [Scheme.light] using [ColorPalette.of] as
   /// used by Flutter SDK does.
-  const FlexTones.light({
+  const FlexTone.light({
     this.primaryTone = 40,
     this.onPrimaryTone = 100,
     this.primaryContainerTone = 90,
@@ -121,7 +121,7 @@ class FlexTones with Diagnosticable {
   /// This setup will if only one seed color is used, produce the same result
   /// with [FlexColorPalette] as [Scheme.dark] using [ColorPalette.of] as
   /// used by Flutter SDK does.
-  const FlexTones.dark({
+  const FlexTone.dark({
     this.primaryTone = 80,
     this.onPrimaryTone = 20,
     this.primaryContainerTone = 30,
@@ -159,24 +159,24 @@ class FlexTones with Diagnosticable {
 
   /// Alternative static constructor with brightness as input to create
   /// a tonal palette extraction setup matching the Material Design 3 setup.
-  static FlexTones material(Brightness brightness) =>
+  static FlexTone material(Brightness brightness) =>
       brightness == Brightness.light
-          ? const FlexTones.light()
-          : const FlexTones.dark();
+          ? const FlexTone.light()
+          : const FlexTone.dark();
 
   /// Creates a tonal palette extraction setup that results in M3 like
   /// ColorsSchemes with softer colors than Material 3 defaults.
   ///
   /// Primary chroma is 30, secondary 14 and tertiary 20. Tones are same as
   /// in Material 3 default setup.
-  static FlexTones soft(Brightness brightness) => brightness == Brightness.light
-      ? const FlexTones.light(
+  static FlexTone soft(Brightness brightness) => brightness == Brightness.light
+      ? const FlexTone.light(
           primaryChroma: 30,
           primaryMinChroma: 0,
           secondaryChroma: 14,
           tertiaryChroma: 20,
         )
-      : const FlexTones.dark(
+      : const FlexTone.dark(
           primaryChroma: 30,
           primaryMinChroma: 0,
           secondaryChroma: 14,
@@ -191,23 +191,22 @@ class FlexTones with Diagnosticable {
   /// value of 50. Secondary and tertiary key colors use their own chroma
   /// with no min limits, making the secondary and tertiary mid tones closer
   /// to their used key colors.
-  static FlexTones vivid(Brightness brightness) =>
-      brightness == Brightness.light
-          ? const FlexTones.light(
-              primaryTone: 30,
-              primaryChroma: null,
-              secondaryChroma: null,
-              tertiaryChroma: null,
-              primaryMinChroma: 50,
-            )
-          : const FlexTones.dark(
-              onPrimaryTone: 10,
-              primaryContainerTone: 20,
-              onErrorContainerTone: 90,
-              primaryChroma: null,
-              secondaryChroma: null,
-              tertiaryChroma: null,
-              primaryMinChroma: 50);
+  static FlexTone vivid(Brightness brightness) => brightness == Brightness.light
+      ? const FlexTone.light(
+          primaryTone: 30,
+          primaryChroma: null,
+          secondaryChroma: null,
+          tertiaryChroma: null,
+          primaryMinChroma: 50,
+        )
+      : const FlexTone.dark(
+          onPrimaryTone: 10,
+          primaryContainerTone: 20,
+          onErrorContainerTone: 90,
+          primaryChroma: null,
+          secondaryChroma: null,
+          tertiaryChroma: null,
+          primaryMinChroma: 50);
 
   /// Creates a tonal palette extraction setup that results in M3 like
   /// ColorsSchemes with high contrast between color versus its on-color and
@@ -215,9 +214,19 @@ class FlexTones with Diagnosticable {
   ///
   /// Primary, Secondary and tertiary key colors use their own chroma, but
   /// with minimum limit of 65 on primary and 55 on secondary and tertiary.
-  static FlexTones highContrast(Brightness brightness) =>
+  ///
+  /// Used tones are also modified from defaults for increased contrast.
+  ///
+  /// This tonal configuration can be used to turn any M3 theme into one
+  /// that may be more accessibility since it offers increased contrast.
+  /// You could apply a variant of the active theme with this tonal map to
+  /// the high contrast theme data, thus providing increased contrast, but in
+  /// the spirit of the original theme. It may still be useful to also
+  /// provide purposefully designed optional extremely high contrast
+  /// themes as options for the high contrast accessibility themes.
+  static FlexTone highContrast(Brightness brightness) =>
       brightness == Brightness.light
-          ? const FlexTones.light(
+          ? const FlexTone.light(
               primaryTone: 30,
               secondaryTone: 30,
               tertiaryTone: 30,
@@ -233,7 +242,7 @@ class FlexTones with Diagnosticable {
               secondaryMinChroma: 55,
               tertiaryMinChroma: 55,
             )
-          : const FlexTones.dark(
+          : const FlexTone.dark(
               primaryTone: 80,
               secondaryTone: 80,
               tertiaryTone: 80,
@@ -430,7 +439,7 @@ class FlexTones with Diagnosticable {
   final double tertiaryMinChroma;
 
   /// Copy the object with one or more provided properties changed.
-  FlexTones copyWith({
+  FlexTone copyWith({
     int? primaryTone,
     int? onPrimaryTone,
     int? primaryContainerTone,
@@ -465,7 +474,7 @@ class FlexTones with Diagnosticable {
     double? tertiaryChroma,
     double? tertiaryMinChroma,
   }) {
-    return FlexTones(
+    return FlexTone(
       primaryTone: primaryTone ?? this.primaryTone,
       onPrimaryTone: onPrimaryTone ?? this.onPrimaryTone,
       primaryContainerTone: primaryContainerTone ?? this.primaryContainerTone,
@@ -512,7 +521,7 @@ class FlexTones with Diagnosticable {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
-    return other is FlexTones &&
+    return other is FlexTone &&
         other.primaryTone == primaryTone &&
         other.onPrimaryTone == onPrimaryTone &&
         other.primaryContainerTone == primaryContainerTone &&
