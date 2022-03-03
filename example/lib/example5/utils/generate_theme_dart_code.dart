@@ -222,10 +222,26 @@ String generateThemeDartCode(ThemeController controller) {
           '    keepTertiaryContainer: ${controller.keepTertiaryContainer},\n'
           '  ),\n'
       : '';
+  String flexTonesLight = '';
+  String flexTonesDark = '';
+  if (controller.useKeyColors) {
+    if (controller.usedFlexTonesSetup == 2) {
+      flexTonesLight = '  tones: FlexTones.soft(Brightness.light),\n';
+      flexTonesDark = '  tones: FlexTones.soft(Brightness.dark),\n';
+    }
+    if (controller.usedFlexTonesSetup == 3) {
+      flexTonesLight = '  tones: FlexTones.vivid(Brightness.light),\n';
+      flexTonesDark = '  tones: FlexTones.vivid(Brightness.dark),\n';
+    }
+    if (controller.usedFlexTonesSetup == 4) {
+      flexTonesLight = '  tones: FlexTones.highContrast(Brightness.light),\n';
+      flexTonesDark = '  tones: FlexTones.highContrast(Brightness.dark),\n';
+    }
+  }
   final String code = 'theme: FlexThemeData.light(\n'
       '$lightScheme'
       '  surfaceMode: ${controller.surfaceMode},\n'
-      '  blendLevel: ${controller.blendLevelDark},\n'
+      '  blendLevel: ${controller.blendLevel},\n'
       '  usedColors: ${controller.usedColors},\n'
       '  appBarStyle: ${controller.lightAppBarStyle},\n'
       '  appBarOpacity: ${controller.appBarOpacity},\n'
@@ -238,6 +254,7 @@ String generateThemeDartCode(ThemeController controller) {
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '  useMaterial3: ${controller.useMaterial3},\n'
       '$useKeyColors'
+      '$flexTonesLight'
       '  useSubThemes: ${controller.useSubThemes},\n'
       '$lightSubThemeCode'
       '  // To use the playground font, add GoogleFonts package and uncomment:\n'
@@ -259,6 +276,7 @@ String generateThemeDartCode(ThemeController controller) {
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '  useMaterial3: ${controller.useMaterial3},\n'
       '$useKeyColors'
+      '$flexTonesDark'
       '  useSubThemes: ${controller.useSubThemes},\n'
       '$darkSubThemeCode'
       '  // To use the playground font, add GoogleFonts package and uncomment:\n'

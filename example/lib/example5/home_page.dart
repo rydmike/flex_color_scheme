@@ -25,6 +25,7 @@ import 'widgets/dart_code_dialog_screen.dart';
 import 'widgets/flex_tone_config_buttons.dart';
 import 'widgets/platform_popup_menu.dart';
 import 'widgets/scheme_colors.dart';
+import 'widgets/show_tonal_palette.dart';
 import 'widgets/surface_mode_buttons.dart';
 import 'widgets/system_nav_bar_style_buttons.dart';
 import 'widgets/tab_bar_style_buttons.dart';
@@ -520,18 +521,18 @@ class _Info extends StatelessWidget {
             subtitle: Text(
                 'With this app you can try all features and themes in '
                 'FlexColorScheme V5. Find a color scheme you '
-                'like, experiment with the new surface blend modes and '
+                'like, experiment with surface blend modes and '
                 'levels. See how the AppBar theme options work. '
                 'Try the true black option for dark '
                 'themes, along with computed dark themes.\n'
                 '\n'
-                'In version 5 the new '
+                'In version 5, the new '
                 'Material 3 based ColorScheme is used. It can also be '
                 'generated using the main colors as color seed keys. You '
                 'can use primary, secondary and tertiary colors as seed keys '
                 'or just primary, like in ColorScheme.fromSeed. For branding '
                 'needs you can also lock selected ColorScheme colors to their '
-                'key value while other colors are still seed generated.\n'
+                'input value, while other colors are still seed generated.\n'
                 '\n'
                 'This demo does not adjust any individual widget properties, '
                 'the application theme is adjusted interactively and all the '
@@ -539,10 +540,10 @@ class _Info extends StatelessWidget {
                 'via the controls.\n'
                 '\n'
                 'The theming impact on widgets is shown in expandable '
-                'cards with "Themed" headings. The three first '
-                'themes are custom color schemes and are not built-in '
-                'choices. In the packages tutorial you learn how to '
-                'make your own custom color schemes and turn '
+                'cards with "Themed" headings. The three first themes are '
+                'example custom color schemes made with the API, and are not '
+                'built-in choices in the package. In the packages tutorial '
+                'you learn how to make your own custom color schemes and turn '
                 'them into advanced themes with FlexColorScheme. '
                 'All settings in this demo are persisted locally.'),
           ),
@@ -808,11 +809,13 @@ class _SelectTheme extends StatelessWidget {
               ),
               value: controller.useToDarkMethod &&
                   controller.useSubThemes &&
-                  controller.useFlexColorScheme,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setUseToDarkMethod
-                      : null,
+                  controller.useFlexColorScheme &&
+                  !controller.useKeyColors,
+              onChanged: controller.useSubThemes &&
+                      controller.useFlexColorScheme &&
+                      !controller.useKeyColors
+                  ? controller.setUseToDarkMethod
+                  : null,
             ),
           ),
           Visibility(
@@ -828,7 +831,8 @@ class _SelectTheme extends StatelessWidget {
                 value: controller.darkMethodLevel.toDouble(),
                 onChanged: controller.useToDarkMethod &&
                         controller.useSubThemes &&
-                        controller.useFlexColorScheme
+                        controller.useFlexColorScheme &&
+                        !controller.useKeyColors
                     ? (double value) {
                         controller.setDarkMethodLevel(value.floor());
                       }
@@ -947,19 +951,40 @@ class _SeededColorScheme extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
-  String _describeFlexTones(int colors) {
-    if (colors == 2) {
-      return 'Primary light tone is 30 instead 40, and dark 80 instead of '
-          '70. Chroma is input key color based for primary and tertiary.';
+  String _describeFlexTonesShort(int colors) {
+    if (colors == 1) {
+      return 'Default Material 3 design tonal setup and extraction';
+    } else if (colors == 2) {
+      return 'Softer and more earth like tones than Material 3 defaults';
+    } else if (colors == 3) {
+      return 'More vivid colors than Material 3 defaults';
+    } else if (colors == 4) {
+      return 'High contrast setup';
     }
-    if (colors == 3) {
-      return 'Default copy';
+    return 'Disabled';
+  }
+
+  String _describeFlexTonesLong(int colors) {
+    if (colors == 1) {
+      return 'Primary - Chroma from key color, but min 48\n'
+          'Secondary - Chroma set to 16\n'
+          'Tertiary - Chroma set to 24\n';
+    } else if (colors == 2) {
+      return 'Primary - Chroma set to 30\n'
+          'Secondary - Chroma set to 14\n'
+          'Tertiary - Chroma set to 20\n';
+    } else if (colors == 3) {
+      return 'Primary - Chroma from key color, but min 50\n'
+          'Secondary - Chroma from key color\n'
+          'Tertiary - Chroma from key color\n';
+    } else if (colors == 4) {
+      return 'Primary - Chroma from key color, but min 65\n'
+          'Secondary - Chroma from key color, but min 55\n'
+          'Tertiary - Chroma from key color, but min 55\n';
     }
-    if (colors == 4) {
-      return 'Default copy';
-    }
-    return 'Default TonalPalette config and chroma usage setup, matches M3 '
-        'Flutter SDK values.';
+    return 'Key color based tonal palettes are not used.\n'
+        'Enable at least one key color to seed the palettes.\n'
+        'Primary color must always be included as a key color.\n';
   }
 
   @override
@@ -984,60 +1009,73 @@ class _SeededColorScheme extends StatelessWidget {
             ),
           ),
           const ListTile(
-            title: Text('Keep selected input colors'),
-            subtitle: Text('When using a FlexColorScheme seeded ColorScheme, '
-                'you can also lock primary, secondary, tertiary and their '
-                'container colors to their key input color, instead of '
-                'letting it be replaced by a seed computed tone. Toggle the '
-                'switch below for each color to keep its input color. When '
-                'ON you can see that the locked color keeps it input value. '
-                'The lock switches are only available when seed colors '
-                'are used.'),
+            title: Text('Keep input color'),
+            subtitle: Text('When using a seeded ColorScheme, '
+                'you can lock primary, secondary, tertiary and their '
+                'container colors to their input colors, instead of '
+                'using the tone from the tonal palette. Toggle '
+                'switches below for each color to keep its input color. '
+                'The lock switches are only available when key color based '
+                'seeded scheme is used.'),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
             child: SchemeColors(controller: controller),
           ),
           if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text('Tap a color code to copy it to the clipboard.'),
-            )
-          else
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text('Tap a color code to copy it to the clipboard. '
-                  'This is the custom color theme, you can tap primary, '
-                  'secondary or tertiary and their container colors to '
-                  'customize them.'),
+                  // ignore: lines_longer_than_80_chars
+                  "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source. ' : ''}"
+                  // ignore: lines_longer_than_80_chars
+                  "${controller.blendLevel > 0 ? 'Blend level > 0 modifies surface and background colors, they may no longer be found in generated palettes when hovered.' : ''}"),
+            ),
+
+          if (controller.schemeIndex == (AppColor.schemesCustom.length - 1))
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child:
+                  Text('This is the custom color theme, you can tap primary, '
+                      'secondary or tertiary, plus their containers to '
+                      'change their colors.'),
             ),
           const SizedBox(height: 8),
           const Divider(),
           const ListTile(
-            title: Text('Advanced tonal palette configuration'),
+            title: Text('Generated tonal palettes'),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ShowTonalPalette(controller: controller),
+          ),
+          const ListTile(
             subtitle: Text(
-              'Using [FlexTones] config class, you can configure '
-              'for each [ColorScheme] color which tone from '
-              'generated [TonalPalette] it should use. You can also set '
-              'limits on the used Cam16 chroma value from the three key '
-              'colors used for primary, secondary and  tertiary '
-              'TonalPalette generation.\n'
-              '\n'
-              'In this app version you can only select between the default '
-              'and three different pre-made FlexTones setups. Future version '
-              'of the app may add interactive configuration of it. With the '
-              'API you have full configuration freedom already now. You '
-              'can use the built in ones as starting point via the generated '
-              'code',
+              'Using FlexTones, you can configure which tone from the '
+              'generated tonal palettes, each color in the ColorScheme use. '
+              'You can also set limits on the used Cam16 chroma values '
+              'for the three key colors used for primary, secondary and '
+              'tertiary TonalPalette generation.',
             ),
           ),
           ListTile(
-            title: const Text('Select FlexTones configuration'),
-            subtitle: Text(_describeFlexTones(controller.usedFlexTonesSetup)),
-          ),
-          // const SizedBox(height: 4),
-          ListTile(
+            title: const Text('Select FlexTones setup'),
+            subtitle: Text(
+              _describeFlexTonesShort(
+                  controller.useKeyColors ? controller.usedFlexTonesSetup : 0),
+            ),
             trailing: FlexToneConfigButtons(controller: controller),
+          ),
+          ListTile(
+            title: const Text('Used CAM16 chroma configuration'),
+            subtitle: Text(
+              // ignore: lines_longer_than_80_chars
+              '${_describeFlexTonesLong(controller.useKeyColors ? controller.usedFlexTonesSetup : 0)}\n'
+              'In this app version you can choose between the default M3 '
+              'tones and three pre-defined FlexTones. With the API you can '
+              'make your own FlexTones configurations. A future version '
+              'of this app may add interactive configuration of tones too.',
+            ),
           ),
           const SizedBox(height: 8),
         ],

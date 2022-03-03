@@ -25,6 +25,7 @@ class ColorPickerInkWell extends StatelessWidget {
     Key? key,
     required this.color,
     required this.onChanged,
+    this.onHover,
     required this.wasCancelled,
     required this.recentColors,
     required this.onRecentColorsChanged,
@@ -35,6 +36,7 @@ class ColorPickerInkWell extends StatelessWidget {
 
   final Color color;
   final ValueChanged<Color> onChanged;
+  final ValueChanged<bool>? onHover;
   final ValueChanged<bool> wasCancelled;
   final List<Color> recentColors;
   final ValueChanged<List<Color>>? onRecentColorsChanged;
@@ -229,6 +231,9 @@ class ColorPickerInkWell extends StatelessWidget {
       focusColor: isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
       highlightColor:
           isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
+      onHover: (bool value) {
+        onHover?.call(value);
+      },
       onTap: enabled
           ? () async {
               if (await ColorPicker(

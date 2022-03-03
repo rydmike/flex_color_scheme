@@ -14,6 +14,8 @@ class ColorNameValue extends StatefulWidget {
     required this.textColor,
     required this.label,
     this.fontSize = 12,
+    this.tone,
+    this.showTone = false,
     this.inputColor,
     this.inputTextColor,
     this.showMaterialName = false,
@@ -25,6 +27,8 @@ class ColorNameValue extends StatefulWidget {
   final Color textColor;
   final String label;
   final double fontSize;
+  final int? tone;
+  final bool showTone;
   final Color? inputColor;
   final Color? inputTextColor;
   final bool showMaterialName;
@@ -81,6 +85,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
 
   @override
   Widget build(BuildContext context) {
+    // Alpha value for opacity on some text further below.
+    const int alpha = 0xFF;
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     return Padding(
@@ -88,16 +94,37 @@ class _ColorNameValueState extends State<ColorNameValue> {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Text(widget.label,
-              textAlign: TextAlign.start,
-              overflow: TextOverflow.clip,
-              style: TextStyle(
-                  color: widget.textColor,
-                  fontSize: widget.fontSize,
-                  fontWeight: FontWeight.w600)),
+          Text(
+            widget.label,
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.clip,
+            style: TextStyle(
+                color: widget.textColor,
+                fontSize: widget.fontSize,
+                fontWeight: FontWeight.w600),
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
+              // Tone heading and value
+              if (widget.tone != null && widget.showTone)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Tone ${widget.tone.toString()}',
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.end,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: widget.textColor.withAlpha(alpha),
+                            fontSize: widget.fontSize - 1,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ],
+                ),
               // Nearest name match from a list of 1566 color names
               Row(
                 children: <Widget>[
@@ -107,7 +134,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                       overflow: TextOverflow.clip,
                       textAlign: TextAlign.end,
                       style: TextStyle(
-                          color: widget.textColor,
+                          color: widget.textColor.withAlpha(alpha),
                           fontSize: widget.fontSize - 1,
                           fontWeight: FontWeight.w400),
                     ),
@@ -126,7 +153,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         textAlign: TextAlign.end,
                         maxLines: 1,
                         style: TextStyle(
-                            color: widget.textColor,
+                            color: widget.textColor.withAlpha(alpha),
                             fontSize: widget.fontSize - 1,
                             fontWeight: FontWeight.w400),
                       ),
@@ -156,7 +183,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         overflow: TextOverflow.clip,
                         maxLines: 1,
                         style: TextStyle(
-                            color: widget.textColor,
+                            color: widget.textColor.withAlpha(alpha),
                             fontSize: widget.fontSize,
                             fontWeight: FontWeight.w600),
                       ),
@@ -211,7 +238,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                                   overflow: TextOverflow.clip,
                                   maxLines: 1,
                                   style: TextStyle(
-                                      color: widget.inputTextColor,
+                                      color: widget.inputTextColor
+                                          ?.withAlpha(alpha),
                                       fontSize: widget.fontSize - 1,
                                       fontWeight: FontWeight.w600),
                                 ),

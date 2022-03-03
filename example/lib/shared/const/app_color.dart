@@ -205,81 +205,16 @@ class AppColor {
   }
 
   /// Return a [FlexTones] based on passed in [brightness] and
-  /// configuration index.
-  ///
+  /// configuration value.
   static FlexTones flexTonesConfig(Brightness brightness, int flexToneConfig) {
-    if (brightness == Brightness.light) {
-      if (flexToneConfig == 2) {
-        // A config with tertiary using its actual key color Cam16 chroma
-        // and primary color tone is darker.
-        // More vivid than the default config, and generated palettes
-        // remain closer to they key color values.
-        // Primary color uses tone 30, instead of default 40.
-        return const FlexTones.light(
-          primaryTone: 30,
-          primaryChroma: null,
-          secondaryChroma: null,
-          tertiaryChroma: null,
-        );
-      } else if (flexToneConfig == 3) {
-        // A config with tertiary using its actual key color Cam16 chroma
-        // and primary color tone is darker.
-        return const FlexTones.light(
-          primaryTone: 30,
-          primaryChroma: null,
-          secondaryChroma: null,
-          tertiaryChroma: null,
-        );
-      } else if (flexToneConfig == 4) {
-        // A config with tertiary using its actual key color Cam16 chroma
-        // and primary color tone is darker.
-        return const FlexTones.light(
-          primaryTone: 30,
-          primaryChroma: null,
-          secondaryChroma: null,
-          tertiaryChroma: null,
-        );
-      } else {
-        // Default Material 3 muted soft tones for secondary and tertiary,
-        // and M3 standard tones used for dark mode.
-        return const FlexTones.light();
-      }
+    if (flexToneConfig == 2) {
+      return FlexTones.soft(brightness);
+    } else if (flexToneConfig == 3) {
+      return FlexTones.vivid(brightness);
+    } else if (flexToneConfig == 4) {
+      return FlexTones.highContrast(brightness);
     } else {
-      if (flexToneConfig == 2) {
-        // A config with tertiary using its actual key color Cam16 chroma
-        // and primary color tone is darker.
-        // More vivid than the default config, and generated palettes
-        // remain closer to they key color values.
-        // Primary color uses tone 70, instead of default 80.
-        return const FlexTones.dark(
-          primaryTone: 70,
-          primaryChroma: null,
-          secondaryChroma: null,
-          tertiaryChroma: null,
-        );
-      } else if (flexToneConfig == 3) {
-        // A config with tertiary using its actual key color Cam16 chroma
-        // and primary color tone is darker.
-        return const FlexTones.dark(
-          primaryTone: 70,
-          primaryChroma: null,
-          secondaryChroma: null,
-          tertiaryChroma: null,
-        );
-      } else if (flexToneConfig == 4) {
-        // A config with tertiary using its actual key color Cam16 chroma
-        // and primary color tone is darker.
-        return const FlexTones.dark(
-          primaryTone: 70,
-          primaryChroma: null,
-          secondaryChroma: null,
-          tertiaryChroma: null,
-        );
-      } else {
-        // Default Material 3 muted soft tones for secondary and tertiary,
-        // and M3 standard tones used for dark mode.
-        return const FlexTones.dark();
-      }
+      return FlexTones.material(brightness);
     }
   }
 

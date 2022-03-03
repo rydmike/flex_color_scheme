@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +5,7 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 
 import 'flex_color.dart';
 import 'flex_constants.dart';
+import 'flex_core_palette.dart';
 import 'flex_extensions.dart';
 import 'flex_key_color.dart';
 import 'flex_scheme.dart';
@@ -7326,13 +7325,33 @@ class _AlphaValues {
 /// This class is the same concept as Flutter's [ColorScheme] class.
 ///
 /// It is used used to generate a scheme based on a modified version of
-/// [CorePalette] found in package "material_color_utilities". It is a simple
-/// modification of [Scheme] found in same "material_color_utilities" package,
-/// with the only change made to instead use the custom version of
-/// [CorePalette] that enables using 1, 2 or 3 seed colors for more degrees
-/// of freedom in seeded ColorScheme, using defined seed colors for
-/// primary, secondary and tertiary colors.
+/// [CorePalette] found in package material_color_utilities. It is a simple
+/// modification of [Scheme] found in same "material_color_utilities" package.
 ///
+/// It uses two changes that makes it more flexible:
+///
+/// 1) Three seed colors instead of just one.
+///
+/// Instead of [CorePalette] it uses inherited version called [FlexCorePalette]
+/// that enables using 1, 2 or 3 seed colors for more degrees
+/// of freedom in seeded ColorScheme, using defined seed colors for
+/// primary, secondary and tertiary colors. The extended [FlexCorePalette]
+/// version also allows for adjusting chroma usage and levels that are
+/// hard coded into M3 design [CorePalette]. With default values
+///
+/// 2) Configurable tone to ColorScheme mapping.
+///
+/// Which tones to use for what color in the [ColorScheme] is not hard coded
+/// like it is in material_color_utilities [Scheme] class. It also
+/// accepts an optional [FlexTones] class that can be used to configure
+/// all the tone mapping from [TonalPalette] to [ColorScheme], including
+/// passing all the extra min chroma and fixed level parameters it should
+/// use when it makes the [FlexCorePalette] that is maps color from to
+/// the [ColorScheme].
+///
+/// Keeping this helper class private for now in [FlexColorScheme], if there
+/// ever is a request for making it available directly via the library,
+/// post an issue and we can can consider it.
 class _Scheme {
   final int primary;
   final int onPrimary;
@@ -7398,13 +7417,16 @@ class _Scheme {
     int? tertiaryKey,
     required FlexTones tones,
   }) {
-    final _FlexCorePalette core = _FlexCorePalette.fromSeeds(
+    final FlexCorePalette core = FlexCorePalette.fromSeeds(
       primary: primaryKey,
       secondary: secondaryKey,
       tertiary: tertiaryKey,
       primaryChroma: tones.primaryChroma,
+      primaryMinChroma: tones.primaryMinChroma,
       secondaryChroma: tones.secondaryChroma,
+      secondaryMinChroma: tones.secondaryMinChroma,
       tertiaryChroma: tones.tertiaryChroma,
+      tertiaryMinChroma: tones.tertiaryMinChroma,
     );
     return _Scheme(
       primary: core.primary.get(tones.primaryTone),
@@ -7436,48 +7458,6 @@ class _Scheme {
       inversePrimary: core.primary.get(tones.inversePrimaryTone),
     );
   }
-
-  // static _Scheme dark({
-  //   required int primaryKey,
-  //   int? secondaryKey,
-  //   int? tertiaryKey,
-  //   required FlexTones tones,
-  // }) {
-  //   final _FlexCorePalette core = _FlexCorePalette.fromSeeds(
-  //     primary: primaryKey,
-  //     secondary: secondaryKey,
-  //     tertiary: tertiaryKey,
-  //   );
-  //   return _Scheme(
-  //     primary: core.primary.get(80),
-  //     onPrimary: core.primary.get(20),
-  //     primaryContainer: core.primary.get(30),
-  //     onPrimaryContainer: core.primary.get(90),
-  //     secondary: core.secondary.get(80),
-  //     onSecondary: core.secondary.get(20),
-  //     secondaryContainer: core.secondary.get(30),
-  //     onSecondaryContainer: core.secondary.get(90),
-  //     tertiary: core.tertiary.get(80),
-  //     onTertiary: core.tertiary.get(20),
-  //     tertiaryContainer: core.tertiary.get(30),
-  //     onTertiaryContainer: core.tertiary.get(90),
-  //     error: core.error.get(80),
-  //     onError: core.error.get(20),
-  //     errorContainer: core.error.get(30),
-  //     onErrorContainer: core.error.get(80),
-  //     background: core.neutral.get(10),
-  //     onBackground: core.neutral.get(90),
-  //     surface: core.neutral.get(10),
-  //     onSurface: core.neutral.get(90),
-  //     surfaceVariant: core.neutralVariant.get(30),
-  //     onSurfaceVariant: core.neutralVariant.get(80),
-  //     outline: core.neutralVariant.get(60),
-  //     shadow: core.neutral.get(0),
-  //     inverseSurface: core.neutral.get(90),
-  //     inverseOnSurface: core.neutral.get(20),
-  //     inversePrimary: core.primary.get(40),
-  //   );
-  // }
 
   static ColorScheme fromSeeds({
     required Color primaryKey,
@@ -7568,336 +7548,3 @@ class _Scheme {
     );
   }
 }
-
-// TODO(rydmike): Decide if we use CorePalette inherited version or own class?
-//   using this inherited version for now. See custom version further below.
-
-/// An intermediate concept between the key color for a UI theme, and a full
-/// color scheme. Totally 5 tonal palettes are generated + fixed error palette.
-///
-/// This extends the Google Material team's [CorePalette] with the capability
-/// to create the M3 ColorScheme needed palettes from 3 different ARGB seed
-/// colors, instead of just one, as provided via [CorePalette.of].
-class _FlexCorePalette extends CorePalette {
-  /// Create a [CorePalette] from a fixed-size list of ARGB color ints
-  /// representing concatenated tonal palettes.
-  ///
-  /// Inverse of [asList].
-  ///
-  /// This is the only interface into the parent class. It would have
-  /// been cleaner if parent also had normal unnamed constructor with setters
-  /// for final properties, but it does not. The default constructor is private
-  /// and using class initializer lists. Clearly the super class is not intended
-  /// to be very extension friendly.
-  _FlexCorePalette.fromList(List<int> colors) : super.fromList(colors);
-
-  /// Create a [_FlexCorePalette] from one to three seed colors.
-  ///
-  /// If only [primary] is provided, this is the same as using the super
-  /// [CorePalette.of] static, that returns an instance of [CorePalette]
-  /// created from a single ARGB seed color.
-  ///
-  /// When using optional [secondary] and [tertiary] parameters, the
-  /// same chroma is used as in Flutter SDK [ColorScheme.fromSeed] when it
-  /// uses [CorePalette.of], but they all use their own hue value.
-  /// If [secondary] or [tertiary] are not provided, the [TonalPalette]
-  /// creation for them falls back to same values as used for the
-  /// corresponding palette when using [CorePalette.of].
-  ///
-  /// The conversion of [TonalPalette]es to a list of ints and having super
-  /// create the CorePalette from this list, has unneeded extra overhead that
-  /// I don't like. It is a bit more efficient to make own implementation
-  /// of this simple mid-layer that has the needed constructors directly.
-  /// Keeping both versions as small private classes around so I can later
-  /// benchmark and see if it makes a difference. Perhaps it does not matter,
-  /// in that case extending the parent [CorePalette] is a bit prettier.
-  /// This interface feels a bit like using a FFI.
-  ///
-  /// The [CorePalette] in Material Color Utilities is just a convenience
-  /// wrapper for the needed [TonalPalette]s, that are used by an additional
-  /// upper layer called [Scheme] that [ColorScheme.fromSeed] uses to create
-  /// a [ColorScheme] from a seed color. To make a [ColorScheme.fromSeeds]
-  /// versions of it, we need to make a slightly modified version of it anyway.
-  /// The usage of [CorePalette.of] is hard coded into the upper layer, so we
-  /// cannot plug-in our extended version of it anyway.
-  ///
-  /// Perhaps it is better to just make our own slightly modified version of
-  /// [CorePalette] instead, and make it available also as static
-  /// [FlexColorScheme.fromSeeds] that return a [ColorScheme]? Or maybe we
-  /// keep it private anyway, even if we do that, depends on if the [fromSeeds]
-  /// factory is useful more generally too.
-  /// If needed this function can be exposed as a static on [FlexColorScheme]
-  /// and we can use this or the custom implementation.
-  factory _FlexCorePalette.fromSeeds({
-    /// Integer ARGB value of seed color used for primary tonal palette.
-    ///
-    /// By default a minimum of Cam16 chroma 48 is used to ensure a bright
-    /// palette. If chroma of the provided color is higher than 48, it is
-    /// used. A chroma value can also be specified via [primaryChroma],
-    /// if it, then the passed chroma value is used.
-    required int primary,
-
-    /// Integer ARGB value of seed color used for secondary tonal palette.
-    /// If not provided, the palette is based on [primary] with Cam16 chroma
-    /// at 16.
-    ///
-    /// A chroma value can also be specified via [secondaryChroma].
-    int? secondary,
-
-    /// Integer ARGB value of seed color used for tertiary tonal palette.
-    /// Cam16 chroma is capped at 48 if provided. If not provided, the palette
-    /// is based on [primary] with Cam16 hue+60 and chroma at 24.
-    ///
-    /// A chroma value can also be specified via [tertiaryChroma].
-    int? tertiary,
-
-    /// The chroma value to use for primary TonalPalette.
-    ///
-    /// If null, the chroma value from [primary] is used if higher than 48, if
-    /// lower then 48 is used.
-    ///
-    /// Flutter SDK [ColorScheme.fromSeed] uses the "null" config equivalent,
-    /// i.e. a chroma value of at least 48.
-    double? primaryChroma,
-
-    /// The chroma value to use for secondary TonalPalette.
-    ///
-    /// If null, the chroma value from [secondary] is used.
-    ///
-    /// Flutter SDK [ColorScheme.fromSeed] uses 16 as secondary chroma value.
-    /// Uses fallback to 16, when a [secondary] color is not provided, but can
-    /// be provided also when secondary is not provided, it then uses given
-    /// chroma on provided primary color's hue.
-    double? secondaryChroma,
-
-    /// The chroma value to use for tertiary TonalPalette.
-    ///
-    /// If null, the chroma value from [tertiary] is used.
-    /// Flutter SDK [ColorScheme.fromSeed] uses 24 as tertiary chroma value.
-    /// Uses fallback to 24, when a [tertiary] color is not provided, but can
-    /// be provided also when secondary is not provided, it then uses given
-    /// chroma on provided primary color's hue.
-    double? tertiaryChroma,
-  }) {
-    // Primary TonalPalette calculation.
-    final Cam16 camPrimary = Cam16.fromInt(primary);
-    final TonalPalette tonalPrimary = TonalPalette.of(
-        camPrimary.hue, primaryChroma ?? math.max(48, camPrimary.chroma));
-
-    // Secondary TonalPalette calculation.
-    final Cam16 camSecondary =
-        secondary == null ? camPrimary : Cam16.fromInt(secondary);
-    final TonalPalette tonalSecondary = secondary == null
-        ? TonalPalette.of(camPrimary.hue, secondaryChroma ?? 16)
-        : TonalPalette.of(camSecondary.hue,
-            secondaryChroma ?? math.max(48, camSecondary.chroma));
-
-    // Tertiary TonalPalette calculation.
-    final Cam16 camTertiary =
-        tertiary == null ? camPrimary : Cam16.fromInt(tertiary);
-    final TonalPalette tonalTertiary = tertiary == null
-        ? TonalPalette.of(camPrimary.hue + 60, tertiaryChroma ?? 24)
-        : TonalPalette.of(camTertiary.hue,
-            tertiaryChroma ?? math.max(48, camTertiary.chroma));
-
-    // Neutral TonalPalettes from primary. The TonalPalette for error color
-    // is hard coded into parent class.
-    final TonalPalette tonalNeutral = TonalPalette.of(camPrimary.hue, 4);
-    final TonalPalette tonalNeutralVariant = TonalPalette.of(camPrimary.hue, 8);
-    // Dump all colors for the tonal palettes into an integer list.
-    // This is only interface into parent class to create the instance. Feels
-    // like it is made as an FFI interface, works but odd in a pure Dart class.
-    final List<int> tonalPalettes = <int>[
-      ...tonalPrimary.asList,
-      ...tonalSecondary.asList,
-      ...tonalTertiary.asList,
-      ...tonalNeutral.asList,
-      ...tonalNeutralVariant.asList,
-    ];
-    return _FlexCorePalette.fromList(tonalPalettes);
-  }
-}
-
-// TODO(rydmike): Decide if we use CorePalette inherited version or own class.
-// This entire commented private _CorePalette class can be used to create a
-// custom version of CorePalette with the needed [fromSeeds] factory that is
-// a bit more efficient than the extended version above thanks to reduced
-// interface overhead. Keeping it around if it is needed for efficiency later.
-//
-// /// An intermediate concept between the key color for a UI theme, and a full
-// /// color scheme. 5 tonal palettes are generated + fixed error palette.
-// ///
-// /// This is a modification of package:material_color_utilities [CorePalette]
-// /// to provide capability to create the M3 ColorScheme needed tonal palettes
-// /// from 3 different ARGB seed colors, where 2 are optional, instead of just
-// /// one as provided via package version [CorePalette.of] and here also
-// /// via [_CorePalette.of].
-// ///
-// /// This version has an unnamed constructor for the five main final
-// /// [TonalPalette] properties. Exposes the original version's private
-// /// constructor as [_CorePalette.fromHueChroma] that is used by
-// /// [_CorePalette.of]. It then also adds a [_CorePalette.fromSeeds] to create
-// /// the [TonalPalette]s for [primary], [secondary] and [tertiary] from
-// /// optional ARGB seed colors also for secondary and tertiary [TonalPalette],
-// /// instead of tying them down to same seed ARGB colors as used for
-// /// primary color.
-// @immutable
-// class _CorePalette {
-//   /// Default constructor.
-//   _CorePalette({
-//     required this.primary,
-//     required this.secondary,
-//     required this.tertiary,
-//     required this.neutral,
-//     required this.neutralVariant,
-//   });
-//
-//   /// The number of generated tonal palettes.
-//   static const int size = 5;
-//
-//   /// TonalPalette for primary colors.
-//   final TonalPalette primary;
-//
-//   /// TonalPalette for secondary colors.
-//   final TonalPalette secondary;
-//
-//   /// TonalPalette for tertiary colors.
-//   final TonalPalette tertiary;
-//
-//   /// TonalPalette for neutral colors. Typically hues of primary.
-//   final TonalPalette neutral;
-//
-//   /// TonalPalette for neutralVariant colors. Typically hues of primary.
-//   final TonalPalette neutralVariant;
-//
-//   /// TonalPalette for error colors. Fixed to given Hue and Chroma.
-//   final TonalPalette error = TonalPalette.of(25, 84);
-//
-//   /// Create a [_CorePalette] from a source ARGB color.
-//   static _CorePalette of(int argb) {
-//     final Cam16 cam = Cam16.fromInt(argb);
-//     return _CorePalette.fromHueChroma(cam.hue, cam.chroma);
-//   }
-//
-//   /// Create a CorePalette from Hue and Chrome.
-//   _CorePalette.fromHueChroma(double hue, double chroma)
-//       : primary = TonalPalette.of(hue, math.max(48, chroma)),
-//         secondary = TonalPalette.of(hue, 16),
-//         tertiary = TonalPalette.of(hue + 60, 24),
-//         neutral = TonalPalette.of(hue, 4),
-//         neutralVariant = TonalPalette.of(hue, 8);
-//
-//   /// Create a [_CorePalette] from one to three seed colors.
-//   ///
-//   /// If only [argbPrimary] is provided, it the same as using the
-//   /// [_CorePalette.of] static that returns an instance of
-//   /// [_CorePalette] created from a single ARGB seed color.
-//   ///
-//   /// When using optional [argbSecondary] and [argbTertiary] the same max
-//   /// chroma of 48 limitation is placed on them as on primary [TonalPalette]
-//   /// when using [_CorePalette.of]. If [argbSecondary] or [argbTertiary] are
-//   /// not provided the [TonalPalette] creation for them falls back to same
-//   /// values as used for the corresponding palette when using
-//   /// [_CorePalette.of].
-//   factory _CorePalette.fromSeeds({
-//     required int argbPrimary,
-//     int? argbSecondary,
-//     int? argbTertiary,
-//   }) {
-//     final Cam16 camPrimary = Cam16.fromInt(argbPrimary);
-//     final Cam16 camSecondary =
-//         argbSecondary == null ? camPrimary : Cam16.fromInt(argbSecondary);
-//     final Cam16 camTertiary =
-//         argbTertiary == null ? camPrimary : Cam16.fromInt(argbTertiary);
-//
-//     final TonalPalette tonalPrimary =
-//         TonalPalette.of(camPrimary.hue, math.max(48, camPrimary.chroma));
-//     final TonalPalette tonalSecondary = argbSecondary == null
-//         ? TonalPalette.of(camPrimary.hue, 16)
-//       : TonalPalette.of(camSecondary.hue, math.max(48, camSecondary.chroma));
-//     final TonalPalette tonalTertiary = argbTertiary == null
-//         ? TonalPalette.of(camPrimary.hue + 60, 24)
-//         : TonalPalette.of(camTertiary.hue, math.max(48, camTertiary.chroma));
-//     return _CorePalette(
-//       primary: tonalPrimary,
-//       secondary: tonalSecondary,
-//       tertiary: tonalTertiary,
-//       neutral: TonalPalette.of(camPrimary.hue, 4),
-//       neutralVariant: TonalPalette.of(camPrimary.hue, 8),
-//     );
-//   }
-//
-//   /// Create a [_CorePalette] from a fixed-size list of ARGB color ints
-//   /// representing concatenated tonal palettes.
-//   ///
-//   /// Inverse of [asList].
-//   _CorePalette.fromList(List<int> colors)
-//       : assert(
-//          colors.length == size * TonalPalette.commonSize, 'Incorrect size.'),
-//         primary = TonalPalette.fromList(
-//             _getPartition(colors, 0, TonalPalette.commonSize)),
-//         secondary = TonalPalette.fromList(
-//             _getPartition(colors, 1, TonalPalette.commonSize)),
-//         tertiary = TonalPalette.fromList(
-//             _getPartition(colors, 2, TonalPalette.commonSize)),
-//         neutral = TonalPalette.fromList(
-//             _getPartition(colors, 3, TonalPalette.commonSize)),
-//         neutralVariant = TonalPalette.fromList(
-//             _getPartition(colors, 4, TonalPalette.commonSize));
-//
-//   /// Returns a list of ARGB color [int]s from concatenated tonal palettes.
-//   ///
-//   /// Inverse of [FlexCorePalette.fromList].
-//   List<int> asList() => <int>[
-//         ...primary.asList,
-//         ...secondary.asList,
-//         ...tertiary.asList,
-//         ...neutral.asList,
-//         ...neutralVariant.asList,
-//       ];
-//
-//   @override
-//   bool operator ==(Object other) =>
-//       other is _CorePalette &&
-//       primary == other.primary &&
-//       secondary == other.secondary &&
-//       tertiary == other.tertiary &&
-//       neutral == other.neutral &&
-//       neutralVariant == other.neutralVariant &&
-//       error == other.error;
-//
-//   @override
-//   int get hashCode => Object.hash(
-//         primary,
-//         secondary,
-//         tertiary,
-//         neutral,
-//         neutralVariant,
-//         error,
-//       );
-//
-//   @override
-//   String toString() {
-//     return 'primary: $primary\n'
-//         'secondary: $secondary\n'
-//         'tertiary: $tertiary\n'
-//         'neutral: $neutral\n'
-//         'neutralVariant: $neutralVariant\n'
-//         'error: $error\n';
-//   }
-//
-//   // Returns a partition from a list.
-//   //
-//   // For example, given a list with 2 partitions of size 3.
-//   // range = [1, 2, 3, 4, 5, 6];
-//   //
-//   // range.getPartition(0, 3) // [1, 2, 3]
-//   // range.getPartition(1, 3) // [4, 5, 6]
-//   static List<int> _getPartition(
-//       List<int> list, int partitionNumber, int partitionSize) {
-//     return list.sublist(
-//       partitionNumber * partitionSize,
-//       (partitionNumber + 1) * partitionSize,
-//     );
-//   }
-// }
