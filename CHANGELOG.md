@@ -38,7 +38,9 @@ based `Colorcheme` in Flutter 2.10.0. The same additions and changes is also
 introduced in FlexColorScheme after version 4.2.0. 
 
 Much work on tests, and readme documentation updates remain, but API docs are 
-up-to-date.
+up-to-date. And this book long change log should help. THere are hardly any 
+breaking changes, so migration should be relatively easy, despite the long
+list of changes and new features.
 
 **BREAKING**  
 * Requires at least Flutter stable 2.10.0.This release uses new M3 `ColorScheme` 
@@ -53,7 +55,7 @@ up-to-date.
   be removed as well. They were all scheduled for deprecation in version 5.0.0,
   but keeping it around a bit longer in the main class in 5.0.0-dev releases 
   to prolong backwards API compatibility during development. Maybe I will keep 
-  it in the release too, many tests need to be rewritten when they are removed too.
+  it in the release too, many tests need to be rewritten when they are removed.
 
 * The enum `SchemeColor` has new values and past values are in a 
   new order. The **order was changed** to accommodate new color values and to 
@@ -67,8 +69,8 @@ up-to-date.
 **NEW**
 
 * Added `useMaterial3` to all theme constructors and factories. This is
-  the same flag as in `ThemeData`, it does not have any impact on
-  default themed widgets in Flutter 2.10.0 yet. Opting in on opinionated
+  the same flag as in `ThemeData`, it does not have any major impact on
+  default themed widgets in Flutter 2.10.x. Opting in on opinionated
   sub-themes, will however as before give opinionated component sub-themes that
   result in Material 3 like styles. Similar look will become default widget
   design in later Flutter SDK versions when using the flag `useMaterial3` is
@@ -82,7 +84,7 @@ up-to-date.
   on `ThemeData`.
 
 * In `FlexColor` added new color properties for all color values to cover the
-  new "`Container`" color properties in Flutter 2.10's new M3 `ColorScheme`. 
+  new "`Container`" color properties in Flutter 2.10 new M3 `ColorScheme`. 
   For every built-in `FlexColor`, there are now also these new color properties:
    - `primaryContainer`
    - `secondaryContainer`
@@ -97,20 +99,20 @@ up-to-date.
    The "variant" colors are still available as deprecated properties, and will 
    remain available until version 6.0.0. The old color properties and their values 
    still work as inputs, and they produce same equivalent `ColorScheme` results 
-   as before. This is done by the values being assigned as fallback value in custom
-   schemes so that new:  
-   - `primaryContainer`, if not assigned, falls via old `primaryVariant`. 
-   - `secondaryContainer`, if not assigned, falls via old `secondaryVariant`.
+   as before. This is done by the values still being assigned as fallback value 
+   in custom schemes so that new:  
+   - `primaryContainer`, if not assigned, falls back via old `primaryVariant`. 
+   - `secondaryContainer`, if not assigned, falls back via old `secondaryVariant`.
 
    When it comes to the new built-in scheme designs, the color used on past: 
    - `secondaryVariant` was a reasonable fit for new M3 `tertiary` color property
      and was used as its value. 
    - The new properties `secondaryContainer` and
      `tertiaryContainer`, had to get new built-in color values that fit with
-     the M3 design intent for those color properties, considering the value
-     `secondary` already had, and the value `tertiary` got by being assigned the 
-     color value of past `secondaryVariant`. 
-   - The new color property `primaryContainer` also needs a new color value. The
+     the M3 design intent for those color properties. This while considering the
+     value `secondary` already had, and the value `tertiary` got by being 
+     assigned the color value of past `secondaryVariant`. 
+   - The new color property `primaryContainer` also needed a new color value. The
      past `primaryVariant` is not the correct design fit for how the color
      value is intended to be used in M3 Color design. 
    - In many cases it was possible to make nice color schemes, by reshuffling 
@@ -119,12 +121,12 @@ up-to-date.
      color values were used. In all events all `Container` color properties
      are **new** features in this release, so they are considered "new" even 
      if their color value might have been recycled from previous properties
-     in some case. The `Container` color values **might** still be fine-tuned
-     before final 5.0.0 release.
+     in some cases. Some `Container` color values **may** still be fine-tuned
+     before final 5.0.0 release, but it is unlikely.
   
      
 * In class `FlexSchemeColor` added **new** color properties
-  `primaryContainer` and `secondaryContainer` they kind of replace 
+  `primaryContainer` and `secondaryContainer` they replace 
   deprecated properties `primaryVariant`and `secondaryVariant`. The old 
   properties still work and are 
   used as fallback to the new ones when the new ones are not provided.
@@ -154,7 +156,7 @@ up-to-date.
   and `errorContaier` is a FlexColorScheme definition as it has no M2 value.
   Seed based new M3 error colors are used when using key based seeded M3 
   ColorScheme. An option to also use M3 based error colors when not using
-  seeded ColorScheme, may be added in future version.
+  seeded ColorScheme, may be added in a future version.
   
 
 * Factory `FlexSchemeColor.effective` got the same nullable and optional 
@@ -177,7 +179,7 @@ up-to-date.
   `FlexSchemeColor` are swapped before producing the output `FlexSchemeColor` 
   suitable for a dark theme mode. This is useful if the input  
   `FlexSchemeColor` is designed for a light M3 based `ColorScheme`. If it is
-  then to get a more appropriately M3 designed output and via `whiteBlend` value 
+  then, to get a correct M3 designed output and via `whiteBlend` value 
   desaturated colors, the main and container values of the light mode colors 
   should be swapped in the result. In light mode, M3 main is darker than
   container, but in M3 dark mode it should be the other way around so that 
@@ -187,16 +189,15 @@ up-to-date.
   of provided light theme mode input colors.
 
 
-* Added additional opinionated sub-themes for:
+* Added additional opinionated component sub-themes for:
   - `SwitchThemeData` via `FlexSubThemes.switchTheme`.
   - `CheckboxTHemeData` via `FlexSubThemes.checkboxTheme`.
   - `Radio` via `FlexSubThemes.radioTheme`.
   - `NavigationRailThemeData` via `FlexSubThemes.navigationRailTheme`.  
   
-  With many quick and easy configuration parameters added 
-  to `FlexSubThemesData`. Component sub themes, when opting in to use 
-  opinionated themes, that can be easily configured are now available
-  for these components:
+  There are many quick and easy configuration parameters added 
+  to `FlexSubThemesData`. There following built in widgets hnow ave quick and
+  easy custom theming option via sub-themes opt-in.
 
   * `TextButton`
   * `ElevatedButton`
@@ -242,18 +243,17 @@ up-to-date.
     May migrate its implementation to own `FlexSubThemes` sub-theme later.
   - `TabBar` for indicator and item color. The TabBar sub-theme definition
      is currently built into the `FlexColorScheme.toTheme` method (legacy).
-     May migrate its implementation to own [FlexSubThemes] sub-theme later.
+     May migrate its implementation to own `FlexSubThemes` sub-theme later.
 
 
 * Added a `FlexKeyColor` configuration class that can be used with
   the `FlexColorScheme.keyColors` to enable and configure Material 3 based
-  key color based Tonal Palettes used to generate the `ColorScheme`s. Where
-  the tonal palettes are generated using existing built-in or custom  
-  colors, as key colors for generated palettes, that are then used to define the
-  resulting `ColorScheme`.     
+  key color based tonal palettes' generation that are then used to define 
+  the `ColorScheme`. The tonal palettes are generated using existing 
+  built-in or custom colors, as key colors for generating palettes.
   The method matches the `ColorScheme.fromSeed` Flutter SDK
-  feature if you only use primary color as input, but offers more
-  configuration and flexibility while still using key colors as seed colors. It
+  feature if you only use primary color as input. However, it also offers more
+  configuration and flexibility on how to use key colors as seed colors. It
   does so without the need to go to lower API levels to produce custom tonal
   palettes and use them manually in the `ColorScheme` definition. The
   implementation makes it easy to use use a combination of key seeded colors and
@@ -270,20 +270,19 @@ up-to-date.
   `FlexColorScheme.light` and `FlexColorScheme.dark` it is possible
   to control which color tone from the relevant `TonalPalette` is used for 
   each color property in generated `ColorScheme`.
-  Obviously making poor selection produces bad results, but there are some
-  tuning that work very well, e.g. primary could be assigned a one step lower
-  value in light mode, to produce seeded color schemes that are more vivid or
-  saturated.
+  Obviously making poor selections produces bad results, but there are some
+  tuning that works very well for different needs, e.g. primary could 
+  be assigned a one step lower value in light mode, to produce seeded color
+  schemes that are more vivid or saturated.
 
 * The Material 3 based seeded `ColorScheme` also locks down the chroma level of
   seed color for secondary colors to 16 and to 24 for tertiary colors, and keeps
   it at min 48 for primary color. The `FlexTone` configuration makes it
-  possible to change these restrictions, to get a more vivid tonal palettes also
-  for secondary and tertiary `TonalPalettes`, when using the individual key
-  color inputs that can be enabled via `FlexKeyColor`. FlexTone has a 
+  possible to change these restrictions. You can then get more vivid tonal 
+  palettes also for secondary and tertiary `TonalPalettes`. FlexTone has a 
   `FlexTone.light` and `FlexTone.dark` constructor that have default values
   that gives the same result as using the hard coded `ColorScheme.fromSeed`
-  tone mapping and chroma limits behavior on `TonalPalette`. These constructors
+  tone mapping and chroma limit behavior on `TonalPalette`. These constructors
   are also convenient to use when making custom `FlexTone` setups. To show 
   how, it comes with four built in examples. They take a `Brightness` value
   as input, and return `FlexTone` configs with different design goals suitable 
@@ -298,26 +297,26 @@ up-to-date.
   `FlexTone.highContrast`. It is easy to make your own configs with the API.
   The setup of the these built-in examples shows how.
 
-* Add new alpha blend control `blendOnLevel` value for onColors to class
-  `FlexSubThemesData`. It will be used to produce onColors for main colors that
-  can be adjusted and be more in-line with M3 seed color usage design, by tuning
+* Added new alpha blend control `blendOnLevel` value for onColors to class
+  `FlexSubThemesData`. It is used to produce onColors for main colors that
+  can be adjusted and be more in-line with M3 seed color usage design by tuning
   their blend level. Before, this was turned on via `blendOnColors` toggle
-  that will remain but has a slightly modified new function. 
+  that will remain, but has a slightly modified new function. 
   The `blendOnLevel` introduces a new blend level value for onColor that is not
   tied to used blend level on surfaces. 
 
-* Defined matching color values for new `FlexSchemeColor.secondaryContainer`
-  and `FlexSchemeColor.tertiaryContainer` as for existing built-in 
-  color schemes.
 
+* Defined matching color values for new `FlexSchemeColor.secondaryContainer`
+  and `FlexSchemeColor.tertiaryContainer` for all existing built-in 
+  color schemes. This was surprisingly tedious task.
 
 * **New color schemes:** Added four new built-in color schemes.
   Total number of color schemes is now 40 matched light and dark pairs.
-  * **Flutter Dash** - Flutter Dash wallpaper based theme.
+  * **Flutter Dash** - A Flutter Dash 4k desktop wallpaper colors based theme.
     Use enum value `FlexScheme.flutterDash` for easy access to it.
   * **M3 baseline** - Material guide 3 baseline based theme.
     Use enum value `FlexScheme.materialBaseline` for easy access to it.
-  * **Verdun green** - Material guide 3 verdun, and mineral green with hemlock.
+  * **Verdun green** - Material guide 3 verdun and mineral green with hemlock.
     Use enum value `FlexScheme.verdunHemlock` for easy access to it.
   * **Dell genoa green** - Material guide 3 theme with dell, axolotl 
    and genoa greens.
@@ -369,9 +368,9 @@ up-to-date.
   will be removed then.
 
 * The feature of `blendOnColors` has changed design wise slightly, it is now
-  used as a toggle to indicate that also on colors for the main colors, 
+  used as a toggle to indicate that on colors for the main colors, 
   that is onPrimary, onSecondary, onTertiary and onError should also receive
-  an alpha bland of its color pair, of strength `blendOnLevel` when
+  an alpha bland of its color pair, of strength `blendOnLevel`/2 when
   `blendOnColors` is true. If `blendOnColors` is false, they use white or
   black contrast color as appropriate for their main color pair. The
   blending of onColor only occurs when their main color is not using seed
@@ -403,27 +402,32 @@ up-to-date.
   it also keeps the correct error color behavior. Tricky bugger to define this
   one by the way.
 
-* **GUIDE FIX** and **STYLE BREAKING**: In **all** previous versions the Flutter
+* **FIX TO MATCH M2 SPEC** and **STYLE BREAKING**: In **all** previous versions 
+   of FlexColorScheme, the Flutter
   `ThemeData.estimateBrightnessForColor` was used to calculate if black or white
   on color should be used on the `error` colors. In dark mode for the default
   error `FlexColor.materialDarkError` and the high contrast dark mode error
-  color `FlexColor.materialDarkErrorHc`, this resulted in correct computed
+  color `FlexColor.materialDarkErrorHc`, this resulted in correctly computed
   contrast color value **white** being used on them. Regardless of this the
   Material 2 guide specifies and Flutter SDK uses the on color for these 
   colors as **black**. These two cases were added as special considerations
   to return black color for these two particular cases, even if the Flutter 
-  contrast color computation says it should be white.
+  contrast color computation says it should be white, but M2 spec is black.
 
 **TESTS TODO**
-* Tests are still incomplete and currently down to about 86%, but at least all 
-  existing (1275) ones are passing and behave as expected.
-* Add tests for all new SchemeColor properties.
+* Tests are still incomplete and currently down to about 86% coverage, 
+  but at least all existing (1275) ones are passing and behave as expected.
+* Add tests for new `SchemeColor` properties.
+* Add tests for `FlexTone`.
+* Add tests for `FlexKeyColorSetup`.
+* Add tests for `FlexCorePalette`.
 * Add test for all new sub-themes in `FlexSubThemes`.
-* Add tests for new prop `useMaterial3`.
-* Add unit tests for `FlexKeyColorSetup`.
+* Add tests for new `useMaterial3` property.
+* Add tests for all new sub themes `FlexSubThemes` and its config data 
+  in `FlexSubThemesData`.
 * Add more tests for legacy fallbacks when using old deprecated 
   `primaryVariant` and `secondaryVariant` properties.
-* Proper tests and verification of old color def backwards behavior.
+* Add tests and verification of old colors definition backwards behavior.
 
 **EXAMPLES and Themes Playground**
 * Update examples 1...4
@@ -432,10 +436,11 @@ up-to-date.
     buttons `RaisedButton`, `OutlineButton` and `FlatButton` in ALL the examples.
     They are going away in next stable release of Flutter after 2.10.x, as
     per this notice [#98537](https://github.com/flutter/flutter/issues/98537).
+  
 * Major update for "example 5" the **Themes Playground**
   to include support for the new features.
   
-  - **DONE:** Added config for selecting unselected toggleable style.
+  - **DONE:** Added config for unselected toggleable style.
   - **DONE:** Added feature to export the code for the active `ColorScheme`. 
   - **DONE:** Added color scheme color configuration to all opinionated component
     sub-themes that have it.
@@ -450,11 +455,16 @@ up-to-date.
     Material 3 design guide config, and `FlexTone.soft`, `FlexTone.vivid` 
     and `FlexTone.highContrast` as built-in preconfigured options. It is easy
     to make your own configs with the API.
-  - The ThemesPlayground paints active TonalPalettes and highlights selected
+  - **DONE:** The ThemesPlayground paints active TonalPalettes and highlights selected
     tones in the palettes when you have on a ColorScheme color. May extend this 
     to make an interactively configurable tonal setup by pickling tones from
-    the `TonalPalette` and sliders to adjust chroma. this could be used to 
-    create `FlexTone` config and get it as part of setup code too. 
+    the `TonalPalette` and sliders to adjust chroma. this could later be used to 
+    create a custom `FlexTone` config and get it as part of setup code too. 
+  - **DONE:** Playground Cupertino adaptive switches now also follow theme via 
+    a custom SwitchListTileAdaptive wrapper. The iOS green switches are an 
+    eyesore imo, but the SDK adaptive switch cannot be changed via a theme 
+    alone. Needed to make a custom  widget where active thumb,
+    explicitly uses switch theme color as thumb color, sigh.
 
 
 
@@ -463,13 +473,8 @@ up-to-date.
 * Review and manual testing of all things above.
 * New NavigationRail sub theme still has no `FlexSubThemesData` config
   properties. Still in review.
-* Add two more new color scheme to make it 4 new ones.
-
-* Add loading animation to Themes Playground web build.
-* Themes Playground Cupertino Switches to follow theme via custom adaptive 
-  ListTile, the green ones are an eyesore imo, but the adaptive switch cannot
-  be changed via a theme. Must make a custom widget where active thumb, 
-  explicitly uses switch theme color as thumb color - sigh!
+* Add loading animation to Themes Playground web build. Might be pushed to
+  when Flutter SDK supports it out of the box, seemed a bit tedious to do still.
 
 
 ### What is Next?

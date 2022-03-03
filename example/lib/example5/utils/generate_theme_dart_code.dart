@@ -222,20 +222,20 @@ String generateThemeDartCode(ThemeController controller) {
           '    keepTertiaryContainer: ${controller.keepTertiaryContainer},\n'
           '  ),\n'
       : '';
-  String flexTonesLight = '';
-  String flexTonesDark = '';
+  String flexToneLight = '';
+  String flexToneDark = '';
   if (controller.useKeyColors) {
     if (controller.usedFlexToneSetup == 2) {
-      flexTonesLight = '  tones: FlexTone.soft(Brightness.light),\n';
-      flexTonesDark = '  tones: FlexTone.soft(Brightness.dark),\n';
+      flexToneLight = '  tones: FlexTone.soft(Brightness.light),\n';
+      flexToneDark = '  tones: FlexTone.soft(Brightness.dark),\n';
     }
     if (controller.usedFlexToneSetup == 3) {
-      flexTonesLight = '  tones: FlexTone.vivid(Brightness.light),\n';
-      flexTonesDark = '  tones: FlexTone.vivid(Brightness.dark),\n';
+      flexToneLight = '  tones: FlexTone.vivid(Brightness.light),\n';
+      flexToneDark = '  tones: FlexTone.vivid(Brightness.dark),\n';
     }
     if (controller.usedFlexToneSetup == 4) {
-      flexTonesLight = '  tones: FlexTone.highContrast(Brightness.light),\n';
-      flexTonesDark = '  tones: FlexTone.highContrast(Brightness.dark),\n';
+      flexToneLight = '  tones: FlexTone.highContrast(Brightness.light),\n';
+      flexToneDark = '  tones: FlexTone.highContrast(Brightness.dark),\n';
     }
   }
   final String code = 'theme: FlexThemeData.light(\n'
@@ -254,7 +254,7 @@ String generateThemeDartCode(ThemeController controller) {
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '  useMaterial3: ${controller.useMaterial3},\n'
       '$useKeyColors'
-      '$flexTonesLight'
+      '$flexToneLight'
       '  useSubThemes: ${controller.useSubThemes},\n'
       '$lightSubThemeCode'
       '  // To use the playground font, add GoogleFonts package and uncomment:\n'
@@ -276,7 +276,7 @@ String generateThemeDartCode(ThemeController controller) {
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '  useMaterial3: ${controller.useMaterial3},\n'
       '$useKeyColors'
-      '$flexTonesDark'
+      '$flexToneDark'
       '  useSubThemes: ${controller.useSubThemes},\n'
       '$darkSubThemeCode'
       '  // To use the playground font, add GoogleFonts package and uncomment:\n'
