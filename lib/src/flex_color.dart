@@ -141,7 +141,7 @@ class FlexColor {
 
   /// English description of the standard Material theme.
   static const String materialDescription =
-      'Default Material color theme, used in the design guide';
+      'Default Material 2 color theme, used in the design guide';
 
   /// Material standard default color for light primary color.
   static const Color materialLightPrimary = Color(0xff6200ee);
@@ -206,7 +206,7 @@ class FlexColor {
 
   /// English description of the material high contrast theme.
   static const String materialHcDescription =
-      'High contrast Material design guide theme';
+      'High contrast Material 2 design guide theme';
 
   /// Material high contrast color for light primary color.
   static const Color materialLightPrimaryHc = Color(0xff0000ba);
@@ -2431,9 +2431,7 @@ class FlexColor {
   /// Dash blue theme color for dark tertiary container color.
   static const Color dashBlueDarkTertiaryContainer = Color(0xFF514239);
 
-  // The Dash theme is based on the colors in the Flutter Dash mascot found in
-  // the 4k wallpaper from Google that was shared before the Flutter 2.10
-  // release.
+  // This is the Material 3 baseline color scheme used in the M3 guide.
 
   /// English name of the materialBaseline theme.
   static const String materialBaselineName = 'M3 baseline';
@@ -2478,6 +2476,100 @@ class FlexColor {
 
   /// MaterialBaseline theme color for dark tertiary container color.
   static const Color materialBaselineDarkTertiaryContainer = Color(0xFF633B48);
+
+  // This is a Material 3 design guide color scheme found in an image
+  // the M3 guide here
+  // https://m3.material.io/styles/color/dynamic-color/overview)
+
+  /// English name of the verdunHemlock theme.
+  static const String verdunHemlockName = 'Verdun green';
+
+  /// English description of the VerdunHemlock green theme.
+  static const String verdunHemlockDescription =
+      'Material guide 3 verdun and mineral green with hemlock';
+
+  /// VerdunHemlock theme color for light primary color.
+  static const Color verdunHemlockLightPrimary = Color(0xFF616200);
+
+  /// VerdunHemlock theme color for light primary container color.
+  static const Color verdunHemlockLightPrimaryContainer = Color(0xFFE7E885);
+
+  /// VerdunHemlock theme color for light secondary color.
+  static const Color verdunHemlockLightSecondary = Color(0xFF606042);
+
+  /// VerdunHemlock theme color for light secondary container color.
+  static const Color verdunHemlockLightSecondaryContainer = Color(0xFFE6E4C0);
+
+  /// VerdunHemlock theme color for light tertiary color.
+  static const Color verdunHemlockLightTertiary = Color(0xFF3D6657);
+
+  /// VerdunHemlock theme color for light tertiary container color.
+  static const Color verdunHemlockLightTertiaryContainer = Color(0xFFBFECD9);
+
+  /// VerdunHemlock theme color for dark primary color.
+  static const Color verdunHemlockDarkPrimary = Color(0xFFCBCC58);
+
+  /// VerdunHemlock theme color for dark primary container color.
+  static const Color verdunHemlockDarkPrimaryContainer = Color(0xFF494A00);
+
+  /// VerdunHemlock theme color for dark secondary color.
+  static const Color verdunHemlockDarkSecondary = Color(0xFFC9C8A4);
+
+  /// VerdunHemlock theme color for dark secondary container color.
+  static const Color verdunHemlockDarkSecondaryContainer = Color(0xFF48482D);
+
+  /// VerdunHemlock theme color for dark tertiary color.
+  static const Color verdunHemlockDarkTertiary = Color(0xFFA4D0BE);
+
+  /// VerdunHemlock theme color for dark tertiary container color.
+  static const Color verdunHemlockDarkTertiaryContainer = Color(0xFF254E40);
+
+  // This is a Material 3 design guide color scheme found in an image
+  // the M3 guide here
+  // https://m3.material.io/styles/color/the-color-system/color-roles
+
+  /// English name of the dellGenoaGreen theme.
+  static const String dellGenoaGreenName = 'Dell genoa green';
+
+  /// English description of the DellGenoaGreen green theme.
+  static const String dellGenoaGreenDescription =
+      'Material guide 3 theme with dell, axolotl and genoa greens';
+
+  /// DellGenoaGreen theme color for light primary color.
+  static const Color dellGenoaGreenLightPrimary = Color(0xFF386A20);
+
+  /// DellGenoaGreen theme color for light primary container color.
+  static const Color dellGenoaGreenLightPrimaryContainer = Color(0xFFB7F397);
+
+  /// DellGenoaGreen theme color for light secondary color.
+  static const Color dellGenoaGreenLightSecondary = Color(0xFF55624C);
+
+  /// DellGenoaGreen theme color for light secondary container color.
+  static const Color dellGenoaGreenLightSecondaryContainer = Color(0xFFD9E7CB);
+
+  /// DellGenoaGreen theme color for light tertiary color.
+  static const Color dellGenoaGreenLightTertiary = Color(0xFF19686A);
+
+  /// DellGenoaGreen theme color for light tertiary container color.
+  static const Color dellGenoaGreenLightTertiaryContainer = Color(0xFFA8EFF0);
+
+  /// DellGenoaGreen theme color for dark primary color.
+  static const Color dellGenoaGreenDarkPrimary = Color(0xFF9CD67D);
+
+  /// DellGenoaGreen theme color for dark primary container color.
+  static const Color dellGenoaGreenDarkPrimaryContainer = Color(0xFF205107);
+
+  /// DellGenoaGreen theme color for dark secondary color.
+  static const Color dellGenoaGreenDarkSecondary = Color(0xFFBDCBB0);
+
+  /// DellGenoaGreen theme color for dark secondary container color.
+  static const Color dellGenoaGreenDarkSecondaryContainer = Color(0xFF3E4A36);
+
+  /// DellGenoaGreen theme color for dark tertiary color.
+  static const Color dellGenoaGreenDarkTertiary = Color(0xFFA0CFD0);
+
+  /// DellGenoaGreen theme color for dark tertiary container color.
+  static const Color dellGenoaGreenDarkTertiaryContainer = Color(0xFF1E4E4F);
 
   /// English name of the custom theme.
   static const String customName = 'Custom';
@@ -3478,6 +3570,62 @@ class FlexColor {
     ),
   );
 
+  /// A verdun and mineral green with hemlock grey-greens color scheme set
+  /// found in an image in the Material 3 design guide
+  /// [here](https://m3.material.io/styles/color/dynamic-color/overview).
+  static const FlexSchemeData verdunHemlock = FlexSchemeData(
+    name: verdunHemlockName,
+    description: verdunHemlockDescription,
+    light: FlexSchemeColor(
+      primary: verdunHemlockLightPrimary,
+      primaryContainer: verdunHemlockLightPrimaryContainer,
+      secondary: verdunHemlockLightSecondary,
+      secondaryContainer: verdunHemlockLightSecondaryContainer,
+      tertiary: verdunHemlockLightTertiary,
+      tertiaryContainer: verdunHemlockLightTertiaryContainer,
+      appBarColor: verdunHemlockLightTertiary,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: verdunHemlockDarkPrimary,
+      primaryContainer: verdunHemlockDarkPrimaryContainer,
+      secondary: verdunHemlockDarkSecondary,
+      secondaryContainer: verdunHemlockDarkSecondaryContainer,
+      tertiary: verdunHemlockDarkTertiary,
+      tertiaryContainer: verdunHemlockDarkTertiaryContainer,
+      appBarColor: verdunHemlockDarkTertiary,
+      error: materialDarkError,
+    ),
+  );
+
+  /// A dell, axolotl and genoa greens color scheme set
+  /// found in an image in the Material 3 design guide
+  /// [here](https://m3.material.io/styles/color/the-color-system/color-roles).
+  static const FlexSchemeData dellGenoa = FlexSchemeData(
+    name: dellGenoaGreenName,
+    description: dellGenoaGreenDescription,
+    light: FlexSchemeColor(
+      primary: dellGenoaGreenLightPrimary,
+      primaryContainer: dellGenoaGreenLightPrimaryContainer,
+      secondary: dellGenoaGreenLightSecondary,
+      secondaryContainer: dellGenoaGreenLightSecondaryContainer,
+      tertiary: dellGenoaGreenLightTertiary,
+      tertiaryContainer: dellGenoaGreenLightTertiaryContainer,
+      appBarColor: dellGenoaGreenLightTertiary,
+      error: materialLightError,
+    ),
+    dark: FlexSchemeColor(
+      primary: dellGenoaGreenDarkPrimary,
+      primaryContainer: dellGenoaGreenDarkPrimaryContainer,
+      secondary: dellGenoaGreenDarkSecondary,
+      secondaryContainer: dellGenoaGreenDarkSecondaryContainer,
+      tertiary: dellGenoaGreenDarkTertiary,
+      tertiaryContainer: dellGenoaGreenDarkTertiaryContainer,
+      appBarColor: dellGenoaGreenDarkTertiary,
+      error: materialDarkError,
+    ),
+  );
+
   /// Starting values for custom color data.
   ///
   /// These can serve as fallback data to custom color values
@@ -3566,6 +3714,8 @@ class FlexColor {
     FlexScheme.blumineBlue: blumineBlue,
     FlexScheme.flutterDash: flutterDash,
     FlexScheme.materialBaseline: materialBaseline,
+    FlexScheme.verdunHemlock: verdunHemlock,
+    FlexScheme.dellGenoa: dellGenoa,
   };
 
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
@@ -3637,5 +3787,7 @@ class FlexColor {
     blumineBlue,
     flutterDash,
     materialBaseline,
+    verdunHemlock,
+    dellGenoa,
   ];
 }

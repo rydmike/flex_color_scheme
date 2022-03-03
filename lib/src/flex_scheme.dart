@@ -132,6 +132,16 @@ enum FlexScheme {
   /// https://m3.material.io/styles/color/the-color-system/tokens
   materialBaseline,
 
+  /// A verdun and mineral green with hemlock grey-greens color scheme set
+  /// found in an image in the Material 3 design guide
+  /// [here](https://m3.material.io/styles/color/dynamic-color/overview).
+  verdunHemlock,
+
+  /// A dell, axolotl and genoa greens color scheme set
+  /// found in an image in the Material 3 design guide
+  /// [here](https://m3.material.io/styles/color/the-color-system/color-roles).
+  dellGenoa,
+
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a [FlexColorScheme] based on a custom
   /// [FlexSchemeData] object. If not provided, it defaults to the

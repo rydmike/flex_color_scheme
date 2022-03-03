@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.1 - March 1, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - March 3, 2022 - WORK IN PROGRESS
 
 The commit contains the version of the key color seeded M3 `ColorScheme`
 usage intended for the final design. The feature supports seeding by not only
@@ -275,12 +275,28 @@ up-to-date.
   value in light mode, to produce seeded color schemes that are more vivid or
   saturated.
 
-* The M3 based seeded `ColorScheme` also locks down the chroma level of
+* The Material 3 based seeded `ColorScheme` also locks down the chroma level of
   seed color for secondary colors to 16 and to 24 for tertiary colors, and keeps
   it at min 48 for primary color. The `FlexTones` configuration makes it
-  possible to change these restrictions to get more vivid tonal palettes also
-  for secondary and tertiary `TonalPalettes` when using the individual key
-  color inputs that can be enabled via `FlexKeyColor`
+  possible to change these restrictions, to get a more vivid tonal palettes also
+  for secondary and tertiary `TonalPalettes`, when using the individual key
+  color inputs that can be enabled via `FlexKeyColor`. FlexTones has a 
+  `FlexTones.light` and `FlexTones.dark` constructor that have default values
+  that gives the same result as using the hard coded `ColorScheme.fromSeed`
+  tone mapping and chroma limits behavior on `TonalPalette`. These constructors
+  are also convenient to use when making custom `FlexTones` setups. To show 
+  how, it comes with four built in examples. They take a `Brightness` value
+  as input, and return `FlexTones` configs with different design goals suitable 
+  for dark or light mode brightness themes. There is `FlexTones.material`, it is 
+  an alternative `Brightness` input based API for `FlexTones.light` and 
+ `FlexTones.dark` to get the default Material 3 design guide config. 
+  In a similar fashion there are 3 alternative  
+  configurations. `FlexTones.soft`, for even softer and more earthy tones than 
+  M3 defaults, that are pretty soft and pastel like to begin with. If you prefer
+  more vivid tones to be generated, try `FlexTones.vivid`. If you like or need
+  more contrast differences between your colors, you can try 
+  `FlexTones.highContrast`. It is easy to make your own configs with the API.
+  The setup of the these built-in examples shows how.
 
 * Add new alpha blend control `blendOnLevel` value for onColors to class
   `FlexSubThemesData`. It will be used to produce onColors for main colors that
@@ -295,13 +311,19 @@ up-to-date.
   color schemes.
 
 
-* **New color schemes:** Added two new built-in color schemes.
-  Total number of color schemes is now 38 matched light and dark pairs.
+* **New color schemes:** Added four new built-in color schemes.
+  Total number of color schemes is now 40 matched light and dark pairs.
   * **Flutter Dash** - Flutter Dash wallpaper based theme.
     Use enum value `FlexScheme.flutterDash` for easy access to it.
-    This theme is final and selected for inclusion as a new one.
   * **M3 baseline** - Material guide 3 baseline based theme.
     Use enum value `FlexScheme.materialBaseline` for easy access to it.
+  * **Verdun green** - Material guide 3 verdun, and mineral green with hemlock.
+    Use enum value `FlexScheme.verdunHemlock` for easy access to it.
+  * **Dell genoa green** - Material guide 3 theme with dell, axolotl 
+   and genoa greens.
+   Use enum value `FlexScheme.dellGenoa` for easy access to it.
+
+
 
 **CHANGE**
 
@@ -363,6 +385,17 @@ up-to-date.
   scaffold background fully white, now makes other blended surfaces 5% lighter
   instead of 8%, scaffold remains white.
 
+* The built-in description for `FlexScheme.material` was changed to
+  "Default Material 2 color theme, used in the design guide" from
+  "Default Material color theme, used in the design guide", to make it clear
+  it came from the M2 guide.
+
+* The built-in description for `FlexScheme.materialHc` was changed to
+  "High contrast Material 2 design guide theme" from
+  "High contrast Material design guide theme", to make it clear it came
+  from the M2 guide.
+
+
 **FIXED**
 
 * When using `FlexSubThemesData.inputDecoratorSchemeColor` the floating label
@@ -382,8 +415,8 @@ up-to-date.
   contrast color computation says it should be white.
 
 **TESTS TODO**
-* Tests are still incomplete and down to about 90%, but at least all 
-  existing (1275) ones are passing again and behaves as expected.
+* Tests are still incomplete and currently down to about 86%, but at least all 
+  existing (1275) ones are passing and behave as expected.
 * Add tests for all new SchemeColor properties.
 * Add test for all new sub-themes in `FlexSubThemes`.
 * Add tests for new prop `useMaterial3`.
@@ -411,6 +444,17 @@ up-to-date.
   - **DONE:** Added `useMaterial3` toggle.
   - **DONE:** Added controls for using key color dynamic seeded ColorScheme, using
     the predefined colors primary, secondary and tertiary as seed colors.
+  - **DONE:** * To the playground app, added a setup that demonstrates the usage
+    of `FlexTones`. Made some useful setups as preconfigured FlexTones, and the
+    playground uses demo. Now comes with `FlexTones.material` for the default
+    Material 3 design guide config, and `FlexTones.soft`, `FlexTones.vivid` 
+    and `FlexTones.highContrast` as built-in preconfigured options. It is easy
+    to make your own configs with the API.
+  - The ThemesPlayground paints active TonalPalettes and highlights selected
+    tones in the palettes when you have on a ColorScheme color. May extend this 
+    to make an interactively configurable tonal setup by pickling tones from
+    the `TonalPalette` and sliders to adjust chroma. this could be used to 
+    create `FlexTones` config and get it as part of setup code too. 
 
 
 
@@ -420,14 +464,12 @@ up-to-date.
 * New NavigationRail sub theme still has no `FlexSubThemesData` config
   properties. Still in review.
 * Add two more new color scheme to make it 4 new ones.
-* To the playground app, add a config setup that demonstrates the usage 
-  of `FlexTones`. Making a simple one with 3 or 4 pre-configured selectable 
-  choices. May make fancier and more flexible one later with fully interactive
-  configs for all its props, including pickling tones from a visual of the
-  `TonalPalette` and sliders to adjust chroma.
+
 * Add loading animation to Themes Playground web build.
-* Cupertino Switches to follow theme via custom adaptive ListTile, the green 
-  ones are an eyesore imo.
+* Themes Playground Cupertino Switches to follow theme via custom adaptive 
+  ListTile, the green ones are an eyesore imo, but the adaptive switch cannot
+  be changed via a theme. Must make a custom widget where active thumb, 
+  explicitly uses switch theme color as thumb color - sigh!
 
 
 ### What is Next?

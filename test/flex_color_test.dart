@@ -365,7 +365,7 @@ void main() {
     });
     test('FC5 colors Material default', () {
       expect(FlexColor.materialDescription,
-          'Default Material color theme, used in the design guide');
+          'Default Material 2 color theme, used in the design guide');
     });
     test('FC5 colors Material 2 default light', () {
       expect(FlexColor.materialLightPrimary, const Color(0xff6200ee));
@@ -421,7 +421,7 @@ void main() {
     });
     test('FC5 colors Material 2 high contrast', () {
       expect(FlexColor.materialHcDescription,
-          'High contrast Material design guide theme');
+          'High contrast Material 2 design guide theme');
     });
     test('FC5 colors Material 2 high contrast light', () {
       expect(FlexColor.materialLightPrimaryHc, const Color(0xff0000ba));

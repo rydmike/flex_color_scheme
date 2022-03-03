@@ -242,7 +242,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeData#00000(name: "Material default", description: "Default Material color theme, used in the design guide", light: FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff92f4e5), tertiary: Color(0xff018786), tertiaryContainer: Color(0xffa4f1ef), appBarColor: Color(0xff018786), error: Color(0xffb00020), errorContainer: null, primaryVariant: Color(0xffbb86fc), secondaryVariant: Color(0xff018786)), dark: FlexSchemeColor#00000(primary: Color(0xffbb86fc), primaryContainer: Color(0xff6200ee), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff005047), tertiary: Color(0xff03dac6), tertiaryContainer: Color(0xff003e3e), appBarColor: Color(0xff03dac6), error: Color(0xffcf6679), errorContainer: null, primaryVariant: Color(0xff6200ee), secondaryVariant: Color(0xff03dac6)))'));
+              'FlexSchemeData#00000(name: "Material default", description: "Default Material 2 color theme, used in the design guide", light: FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff92f4e5), tertiary: Color(0xff018786), tertiaryContainer: Color(0xffa4f1ef), appBarColor: Color(0xff018786), error: Color(0xffb00020), errorContainer: null, primaryVariant: Color(0xffbb86fc), secondaryVariant: Color(0xff018786)), dark: FlexSchemeColor#00000(primary: Color(0xffbb86fc), primaryContainer: Color(0xff6200ee), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff005047), tertiary: Color(0xff03dac6), tertiaryContainer: Color(0xff003e3e), appBarColor: Color(0xff03dac6), error: Color(0xffcf6679), errorContainer: null, primaryVariant: Color(0xff6200ee), secondaryVariant: Color(0xff03dac6)))'));
     });
     test(
         'FSD1.12: Test toStringShort implemented via debugFillProperties '
@@ -256,7 +256,7 @@ void main() {
     // This happens to always equal now in tests, if it start failing, test
     // 13c is actually enough.
     test('FSD1.13b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 267278750);
+      expect(m1.hashCode, 242491101);
     });
     test('FSD1.13c: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));
