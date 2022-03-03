@@ -64,8 +64,8 @@ abstract class ThemeService {
 
   /// Default value for the schemeIndex, also used to reset settings.
   /// Defaults to 35, in examples 4 & 5 where this is used it will make
-  /// the default theme based on the [FlexColor.blueWhale] color scheme.
-  static const int defaultSchemeIndex = 35;
+  /// the default theme based on the [FlexColor.flutterDash] color scheme.
+  static const int defaultSchemeIndex = 39;
 
   /// Loads used scheme index setting, in examples 4 and 5.
   Future<int> schemeIndex();
