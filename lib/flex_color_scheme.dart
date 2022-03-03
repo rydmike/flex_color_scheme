@@ -11,6 +11,11 @@ export 'src/flex_color.dart';
 /// Includes helpers for surface styles and on color calculations.
 export 'src/flex_color_scheme.dart';
 
+/// An intermediate concept between the key color for a UI theme, and a full
+/// color scheme. Totally 5 tonal palettes are generated, plus a fixed error
+/// palette.
+export 'src/flex_core_palette.dart';
+
 /// Extensions for `Color` and `String` to assist with color
 /// manipulation and information.
 ///

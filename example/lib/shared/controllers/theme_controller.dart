@@ -4,6 +4,17 @@ import 'package:flutter/material.dart';
 
 import '../services/theme_service.dart';
 
+/// Enum to indicate which palette we are suing.
+/// Used to which TonalPalette a hovered color belongs to.
+enum TonalPalettes {
+  primary,
+  secondary,
+  tertiary,
+  error,
+  neutral,
+  neutralVariant,
+}
+
 /// The ThemeController is used by many Widgets that users can interact with.
 /// Widgets can read user theme settings, set user theme settings and listen
 /// to user's theme changes.
@@ -1048,7 +1059,7 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
-  /// This is just a local controller properties for the Platform menu control.
+  /// This is just a local controller prop for the Platform menu control.
   /// It is used as input to the theme, but never persisted so it always
   /// defaults to the actual target platform when starting the app.
   /// Being able to toggle it during demos and development is a handy feature.
@@ -1058,6 +1069,25 @@ class ThemeController with ChangeNotifier {
     if (value == null) return;
     if (value == _platform) return;
     _platform = value;
+    if (notify) notifyListeners();
+  }
+
+  /// This is just a local controller prop for hovered color on Colorscheme.
+  Color? _hoverColor;
+  Color? get hoverColor => _hoverColor;
+  Future<void> setHoverColor(Color? value, [bool notify = true]) async {
+    if (value == _hoverColor) return;
+    _hoverColor = value;
+    if (notify) notifyListeners();
+  }
+
+  /// This is just a local controller prop for hovered palette on Colorscheme.
+  TonalPalettes? _hoverTonalPalette;
+  TonalPalettes? get hoverTonalPalette => _hoverTonalPalette;
+  Future<void> setHoverTonalPalette(TonalPalettes? value,
+      [bool notify = true]) async {
+    if (value == _hoverTonalPalette) return;
+    _hoverTonalPalette = value;
     if (notify) notifyListeners();
   }
 

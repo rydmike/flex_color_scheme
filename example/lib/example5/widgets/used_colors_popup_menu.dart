@@ -13,8 +13,9 @@ class UsedColorsPopupMenu extends StatelessWidget {
   final int index;
   final ValueChanged<int>? onChanged;
   final Widget? title;
+
+  /// Defaults to 16.
   final EdgeInsetsGeometry? contentPadding;
-  // Defaults to 16.
 
   String _describeUsedColors(int colors) {
     if (colors == 1) {

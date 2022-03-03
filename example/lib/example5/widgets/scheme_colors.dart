@@ -54,19 +54,27 @@ class SchemeColors extends StatelessWidget {
     final Color tertiary = colorScheme.tertiary;
     final Color tertiaryContainer = colorScheme.tertiaryContainer;
 
-    // Get controller input colors
-    FlexSchemeColor inputColor = isLight
-        ? AppColor.scheme(controller).light
-        : AppColor.scheme(controller).dark;
+    // TODO(rydmike): Remove this unused code.
+    // // Get controller input colors
+    // FlexSchemeColor inputColor = isLight
+    //     ? AppColor.scheme(controller).light
+    //     : AppColor.scheme(controller).dark;
 
-    // Swap the input colors when we are using color swapping.
-    if ((isLight && swapLight) || (!isLight && swapDark)) {
-      inputColor = inputColor.copyWith(
-          primary: inputColor.secondary,
-          primaryContainer: inputColor.secondaryContainer,
-          secondary: inputColor.primary,
-          secondaryContainer: inputColor.primaryContainer);
-    }
+    // // Swap the input colors when we are using color swapping.
+    // if ((isLight && swapLight) || (!isLight && swapDark)) {
+    //   inputColor = inputColor.copyWith(
+    //       primary: inputColor.secondary,
+    //       primaryContainer: inputColor.secondaryContainer,
+    //       secondary: inputColor.primary,
+    //       secondaryContainer: inputColor.primaryContainer);
+    // }
+
+    // Grab active tons and chroma setup.
+    final FlexTones tones = AppColor.flexTonesConfig(
+        theme.brightness, controller.usedFlexTonesSetup);
+    // Should we even show the tone? We show them only when, seeding is on.
+    final bool showTones =
+        controller.useKeyColors && controller.useFlexColorScheme;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -91,7 +99,7 @@ class SchemeColors extends StatelessWidget {
       );
     }
     // Wrap this widget branch in a custom theme where card has a border outline
-    // if it did not have one, but retains in ambient themed border radius.
+    // if it did not have one, but retains the ambient themed border radius.
     return Theme(
       data: Theme.of(context).copyWith(
         cardTheme: CardTheme.of(context).copyWith(
@@ -117,123 +125,174 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    child: Material(
-                      color: primary,
-                      child: ColorPickerInkWell(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(primary);
+                        controller.setHoverTonalPalette(TonalPalettes.primary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: primary,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            swapLight
-                                ? controller.setSecondaryLight(color)
-                                : controller.setPrimaryLight(color);
-                          } else {
-                            swapDark
-                                ? controller.setSecondaryDark(color)
-                                : controller.setPrimaryDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
-                            if (isLight) {
-                              swapLight
-                                  ? controller.setSecondaryLight(primary)
-                                  : controller.setPrimaryLight(primary);
-                            } else {
-                              swapDark
-                                  ? controller.setSecondaryDark(primary)
-                                  : controller.setPrimaryDark(primary);
-                            }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
+                        child: ColorPickerInkWell(
                           color: primary,
-                          textColor: colorScheme.onPrimary,
-                          label: 'primary',
-                          isLocked: controller.useKeyColors &&
-                              controller.useFlexColorScheme &&
-                              controller.keepPrimary,
-                          onLocked: controller.useKeyColors &&
-                                  controller.useFlexColorScheme
-                              ? controller.setKeepPrimary
-                              : null,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: Material(
-                      color: colorScheme.onPrimary,
-                      child: ColorNameValue(
-                        color: colorScheme.onPrimary,
-                        textColor: colorScheme.primary,
-                        label: 'onPrimary',
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: Material(
-                      color: primaryContainer,
-                      child: ColorPickerInkWell(
-                        color: primaryContainer,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            swapLight
-                                ? controller.setSecondaryContainerLight(color)
-                                : controller.setPrimaryContainerLight(color);
-                          } else {
-                            swapDark
-                                ? controller.setSecondaryContainerDark(color)
-                                : controller.setPrimaryContainerDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
+                          onChanged: (Color color) {
                             if (isLight) {
                               swapLight
-                                  ? controller.setSecondaryContainerLight(
-                                      primaryContainer)
-                                  : controller.setPrimaryContainerLight(
-                                      primaryContainer);
+                                  ? controller.setSecondaryLight(color)
+                                  : controller.setPrimaryLight(color);
                             } else {
                               swapDark
-                                  ? controller.setSecondaryContainerDark(
-                                      primaryContainer)
-                                  : controller.setPrimaryContainerDark(
-                                      primaryContainer);
+                                  ? controller.setSecondaryDark(color)
+                                  : controller.setPrimaryDark(color);
                             }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
-                          color: primaryContainer,
-                          textColor: colorScheme.onPrimaryContainer,
-                          label: 'primaryContainer',
-                          isLocked: controller.useKeyColors &&
-                              controller.useFlexColorScheme &&
-                              controller.keepPrimaryContainer,
-                          onLocked: controller.useKeyColors &&
-                                  controller.useFlexColorScheme
-                              ? controller.setKeepPrimaryContainer
-                              : null,
+                          },
+                          recentColors: controller.recentColors,
+                          onRecentColorsChanged: controller.setRecentColors,
+                          wasCancelled: (bool cancelled) {
+                            if (cancelled) {
+                              if (isLight) {
+                                swapLight
+                                    ? controller.setSecondaryLight(primary)
+                                    : controller.setPrimaryLight(primary);
+                              } else {
+                                swapDark
+                                    ? controller.setSecondaryDark(primary)
+                                    : controller.setPrimaryDark(primary);
+                              }
+                            }
+                          },
+                          enabled: isCustomTheme,
+                          child: ColorNameValue(
+                            color: primary,
+                            textColor: colorScheme.onPrimary,
+                            label: 'primary',
+                            tone: tones.primaryTone,
+                            showTone: showTones && !controller.keepPrimary,
+                            isLocked: controller.useKeyColors &&
+                                controller.useFlexColorScheme &&
+                                controller.keepPrimary,
+                            onLocked: controller.useKeyColors &&
+                                    controller.useFlexColorScheme
+                                ? controller.setKeepPrimary
+                                : null,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.onPrimaryContainer,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.onPrimary);
+                        controller.setHoverTonalPalette(TonalPalettes.primary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.onPrimary,
+                        child: ColorNameValue(
+                          color: colorScheme.onPrimary,
+                          textColor: colorScheme.primary,
+                          label: 'onPrimary',
+                          showTone: showTones && !controller.keepPrimary,
+                          tone: tones.onPrimaryTone,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Divider(height: 1, thickness: 1),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(primaryContainer);
+                        controller.setHoverTonalPalette(TonalPalettes.primary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: primaryContainer,
+                        child: ColorPickerInkWell(
+                          color: primaryContainer,
+                          onChanged: (Color color) {
+                            if (isLight) {
+                              swapLight
+                                  ? controller.setSecondaryContainerLight(color)
+                                  : controller.setPrimaryContainerLight(color);
+                            } else {
+                              swapDark
+                                  ? controller.setSecondaryContainerDark(color)
+                                  : controller.setPrimaryContainerDark(color);
+                            }
+                          },
+                          recentColors: controller.recentColors,
+                          onRecentColorsChanged: controller.setRecentColors,
+                          wasCancelled: (bool cancelled) {
+                            if (cancelled) {
+                              if (isLight) {
+                                swapLight
+                                    ? controller.setSecondaryContainerLight(
+                                        primaryContainer)
+                                    : controller.setPrimaryContainerLight(
+                                        primaryContainer);
+                              } else {
+                                swapDark
+                                    ? controller.setSecondaryContainerDark(
+                                        primaryContainer)
+                                    : controller.setPrimaryContainerDark(
+                                        primaryContainer);
+                              }
+                            }
+                          },
+                          enabled: isCustomTheme,
+                          child: ColorNameValue(
+                            color: primaryContainer,
+                            textColor: colorScheme.onPrimaryContainer,
+                            label: 'primaryContainer',
+                            tone: tones.primaryContainerTone,
+                            showTone:
+                                showTones && !controller.keepPrimaryContainer,
+                            isLocked: controller.useKeyColors &&
+                                controller.useFlexColorScheme &&
+                                controller.keepPrimaryContainer,
+                            onLocked: controller.useKeyColors &&
+                                    controller.useFlexColorScheme
+                                ? controller.setKeepPrimaryContainer
+                                : null,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Divider(height: 1, thickness: 1),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller
+                            .setHoverColor(colorScheme.onPrimaryContainer);
+                        controller.setHoverTonalPalette(TonalPalettes.primary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.onPrimaryContainer,
-                        textColor: colorScheme.primaryContainer,
-                        label: 'onPrimaryContainer',
+                        child: ColorNameValue(
+                          color: colorScheme.onPrimaryContainer,
+                          textColor: colorScheme.primaryContainer,
+                          label: 'onPrimaryContainer',
+                          tone: tones.onPrimaryContainerTone,
+                          showTone:
+                              showTones && !controller.keepPrimaryContainer,
+                        ),
                       ),
                     ),
                   ),
@@ -253,123 +312,179 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    child: Material(
-                      color: secondary,
-                      child: ColorPickerInkWell(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(secondary);
+                        controller
+                            .setHoverTonalPalette(TonalPalettes.secondary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: secondary,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            swapLight
-                                ? controller.setPrimaryLight(color)
-                                : controller.setSecondaryLight(color);
-                          } else {
-                            swapDark
-                                ? controller.setPrimaryDark(color)
-                                : controller.setSecondaryDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
-                            if (isLight) {
-                              swapLight
-                                  ? controller.setPrimaryLight(secondary)
-                                  : controller.setSecondaryLight(secondary);
-                            } else {
-                              swapDark
-                                  ? controller.setPrimaryDark(secondary)
-                                  : controller.setSecondaryDark(secondary);
-                            }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
+                        child: ColorPickerInkWell(
                           color: secondary,
-                          textColor: colorScheme.onSecondary,
-                          label: 'secondary',
-                          isLocked: controller.useKeyColors &&
-                              controller.useFlexColorScheme &&
-                              controller.keepSecondary,
-                          onLocked: controller.useKeyColors &&
-                                  controller.useFlexColorScheme
-                              ? controller.setKeepSecondary
-                              : null,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: Material(
-                      color: colorScheme.onSecondary,
-                      child: ColorNameValue(
-                        color: colorScheme.onSecondary,
-                        textColor: colorScheme.secondary,
-                        label: 'onSecondary',
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: Material(
-                      color: secondaryContainer,
-                      child: ColorPickerInkWell(
-                        color: secondaryContainer,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            swapLight
-                                ? controller.setPrimaryContainerLight(color)
-                                : controller.setSecondaryContainerLight(color);
-                          } else {
-                            swapDark
-                                ? controller.setPrimaryContainerDark(color)
-                                : controller.setSecondaryContainerDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
+                          onChanged: (Color color) {
                             if (isLight) {
                               swapLight
-                                  ? controller.setPrimaryContainerLight(
-                                      secondaryContainer)
-                                  : controller.setSecondaryContainerLight(
-                                      secondaryContainer);
+                                  ? controller.setPrimaryLight(color)
+                                  : controller.setSecondaryLight(color);
                             } else {
                               swapDark
-                                  ? controller.setPrimaryContainerDark(
-                                      secondaryContainer)
-                                  : controller.setSecondaryContainerDark(
-                                      secondaryContainer);
+                                  ? controller.setPrimaryDark(color)
+                                  : controller.setSecondaryDark(color);
                             }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
-                          color: secondaryContainer,
-                          textColor: colorScheme.onSecondaryContainer,
-                          label: 'secondaryContainer',
-                          isLocked: controller.useKeyColors &&
-                              controller.useFlexColorScheme &&
-                              controller.keepSecondaryContainer,
-                          onLocked: controller.useKeyColors &&
-                                  controller.useFlexColorScheme
-                              ? controller.setKeepSecondaryContainer
-                              : null,
+                          },
+                          recentColors: controller.recentColors,
+                          onRecentColorsChanged: controller.setRecentColors,
+                          wasCancelled: (bool cancelled) {
+                            if (cancelled) {
+                              if (isLight) {
+                                swapLight
+                                    ? controller.setPrimaryLight(secondary)
+                                    : controller.setSecondaryLight(secondary);
+                              } else {
+                                swapDark
+                                    ? controller.setPrimaryDark(secondary)
+                                    : controller.setSecondaryDark(secondary);
+                              }
+                            }
+                          },
+                          enabled: isCustomTheme,
+                          child: ColorNameValue(
+                            color: secondary,
+                            textColor: colorScheme.onSecondary,
+                            label: 'secondary',
+                            tone: tones.secondaryTone,
+                            showTone: showTones && !controller.keepSecondary,
+                            isLocked: controller.useKeyColors &&
+                                controller.useFlexColorScheme &&
+                                controller.keepSecondary,
+                            onLocked: controller.useKeyColors &&
+                                    controller.useFlexColorScheme
+                                ? controller.setKeepSecondary
+                                : null,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.onSecondaryContainer,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.onSecondary);
+                        controller
+                            .setHoverTonalPalette(TonalPalettes.secondary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.onSecondary,
+                        child: ColorNameValue(
+                          color: colorScheme.onSecondary,
+                          textColor: colorScheme.secondary,
+                          label: 'onSecondary',
+                          tone: tones.onSecondaryTone,
+                          showTone: showTones && !controller.keepSecondary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Divider(height: 1, thickness: 1),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(secondaryContainer);
+                        controller
+                            .setHoverTonalPalette(TonalPalettes.secondary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: secondaryContainer,
+                        child: ColorPickerInkWell(
+                          color: secondaryContainer,
+                          onChanged: (Color color) {
+                            if (isLight) {
+                              swapLight
+                                  ? controller.setPrimaryContainerLight(color)
+                                  : controller
+                                      .setSecondaryContainerLight(color);
+                            } else {
+                              swapDark
+                                  ? controller.setPrimaryContainerDark(color)
+                                  : controller.setSecondaryContainerDark(color);
+                            }
+                          },
+                          recentColors: controller.recentColors,
+                          onRecentColorsChanged: controller.setRecentColors,
+                          wasCancelled: (bool cancelled) {
+                            if (cancelled) {
+                              if (isLight) {
+                                swapLight
+                                    ? controller.setPrimaryContainerLight(
+                                        secondaryContainer)
+                                    : controller.setSecondaryContainerLight(
+                                        secondaryContainer);
+                              } else {
+                                swapDark
+                                    ? controller.setPrimaryContainerDark(
+                                        secondaryContainer)
+                                    : controller.setSecondaryContainerDark(
+                                        secondaryContainer);
+                              }
+                            }
+                          },
+                          enabled: isCustomTheme,
+                          child: ColorNameValue(
+                            color: secondaryContainer,
+                            textColor: colorScheme.onSecondaryContainer,
+                            label: 'secondaryContainer',
+                            tone: tones.secondaryContainerTone,
+                            showTone:
+                                showTones && !controller.keepSecondaryContainer,
+                            isLocked: controller.useKeyColors &&
+                                controller.useFlexColorScheme &&
+                                controller.keepSecondaryContainer,
+                            onLocked: controller.useKeyColors &&
+                                    controller.useFlexColorScheme
+                                ? controller.setKeepSecondaryContainer
+                                : null,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Divider(height: 1, thickness: 1),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller
+                            .setHoverColor(colorScheme.onSecondaryContainer);
+                        controller
+                            .setHoverTonalPalette(TonalPalettes.secondary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.onSecondaryContainer,
-                        textColor: secondaryContainer,
-                        label: 'onSecondaryContainer',
+                        child: ColorNameValue(
+                          color: colorScheme.onSecondaryContainer,
+                          textColor: secondaryContainer,
+                          label: 'onSecondaryContainer',
+                          tone: tones.onSecondaryContainerTone,
+                          showTone:
+                              showTones && !controller.keepSecondaryContainer,
+                        ),
                       ),
                     ),
                   ),
@@ -389,105 +504,156 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    child: Material(
-                      color: tertiary,
-                      child: ColorPickerInkWell(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(tertiary);
+                        controller.setHoverTonalPalette(TonalPalettes.tertiary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: tertiary,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            controller.setTertiaryLight(color);
-                          } else {
-                            controller.setTertiaryDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
-                            if (isLight) {
-                              controller.setTertiaryLight(tertiary);
-                            } else {
-                              controller.setTertiaryDark(tertiary);
-                            }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
+                        child: ColorPickerInkWell(
                           color: tertiary,
-                          textColor: colorScheme.onTertiary,
-                          label: 'tertiary',
-                          isLocked: controller.useKeyColors &&
-                              controller.useFlexColorScheme &&
-                              controller.keepTertiary,
-                          onLocked: controller.useKeyColors &&
-                                  controller.useFlexColorScheme
-                              ? controller.setKeepTertiary
-                              : null,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: Material(
-                      color: colorScheme.onTertiary,
-                      child: ColorNameValue(
-                        color: colorScheme.onTertiary,
-                        textColor: tertiary,
-                        label: 'onTertiary',
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: Material(
-                      color: tertiaryContainer,
-                      child: ColorPickerInkWell(
-                        color: tertiaryContainer,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            controller.setTertiaryContainerLight(color);
-                          } else {
-                            controller.setTertiaryContainerDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
+                          onChanged: (Color color) {
                             if (isLight) {
-                              controller
-                                  .setTertiaryContainerLight(tertiaryContainer);
+                              controller.setTertiaryLight(color);
                             } else {
-                              controller
-                                  .setTertiaryContainerDark(tertiaryContainer);
+                              controller.setTertiaryDark(color);
                             }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
-                          color: tertiaryContainer,
-                          textColor: colorScheme.onTertiaryContainer,
-                          label: 'tertiaryContainer',
-                          isLocked: controller.useKeyColors &&
-                              controller.useFlexColorScheme &&
-                              controller.keepTertiaryContainer,
-                          onLocked: controller.useKeyColors &&
-                                  controller.useFlexColorScheme
-                              ? controller.setKeepTertiaryContainer
-                              : null,
+                          },
+                          recentColors: controller.recentColors,
+                          onRecentColorsChanged: controller.setRecentColors,
+                          wasCancelled: (bool cancelled) {
+                            if (cancelled) {
+                              if (isLight) {
+                                controller.setTertiaryLight(tertiary);
+                              } else {
+                                controller.setTertiaryDark(tertiary);
+                              }
+                            }
+                          },
+                          enabled: isCustomTheme,
+                          child: ColorNameValue(
+                            color: tertiary,
+                            textColor: colorScheme.onTertiary,
+                            label: 'tertiary',
+                            tone: tones.tertiaryTone,
+                            showTone: showTones && !controller.keepTertiary,
+                            isLocked: controller.useKeyColors &&
+                                controller.useFlexColorScheme &&
+                                controller.keepTertiary,
+                            onLocked: controller.useKeyColors &&
+                                    controller.useFlexColorScheme
+                                ? controller.setKeepTertiary
+                                : null,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.onTertiaryContainer,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.onTertiary);
+                        controller.setHoverTonalPalette(TonalPalettes.tertiary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.onTertiary,
+                        child: ColorNameValue(
+                          color: colorScheme.onTertiary,
+                          textColor: tertiary,
+                          label: 'onTertiary',
+                          tone: tones.onTertiaryTone,
+                          showTone: showTones && !controller.keepTertiary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Divider(height: 1, thickness: 1),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(tertiaryContainer);
+                        controller.setHoverTonalPalette(TonalPalettes.tertiary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: tertiaryContainer,
+                        child: ColorPickerInkWell(
+                          color: tertiaryContainer,
+                          onChanged: (Color color) {
+                            if (isLight) {
+                              controller.setTertiaryContainerLight(color);
+                            } else {
+                              controller.setTertiaryContainerDark(color);
+                            }
+                          },
+                          recentColors: controller.recentColors,
+                          onRecentColorsChanged: controller.setRecentColors,
+                          wasCancelled: (bool cancelled) {
+                            if (cancelled) {
+                              if (isLight) {
+                                controller.setTertiaryContainerLight(
+                                    tertiaryContainer);
+                              } else {
+                                controller.setTertiaryContainerDark(
+                                    tertiaryContainer);
+                              }
+                            }
+                          },
+                          enabled: isCustomTheme,
+                          child: ColorNameValue(
+                            color: tertiaryContainer,
+                            textColor: colorScheme.onTertiaryContainer,
+                            label: 'tertiaryContainer',
+                            tone: tones.tertiaryContainerTone,
+                            showTone:
+                                showTones && !controller.keepTertiaryContainer,
+                            isLocked: controller.useKeyColors &&
+                                controller.useFlexColorScheme &&
+                                controller.keepTertiaryContainer,
+                            onLocked: controller.useKeyColors &&
+                                    controller.useFlexColorScheme
+                                ? controller.setKeepTertiaryContainer
+                                : null,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Divider(height: 1, thickness: 1),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller
+                            .setHoverColor(colorScheme.onTertiaryContainer);
+                        controller.setHoverTonalPalette(TonalPalettes.tertiary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.onTertiaryContainer,
-                        textColor: tertiaryContainer,
-                        label: 'onTertiaryContainer',
+                        child: ColorNameValue(
+                          color: colorScheme.onTertiaryContainer,
+                          textColor: tertiaryContainer,
+                          label: 'onTertiaryContainer',
+                          tone: tones.onTertiaryContainerTone,
+                          showTone:
+                              showTones && !controller.keepTertiaryContainer,
+                        ),
                       ),
                     ),
                   ),
@@ -507,45 +673,93 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    child: Material(
-                      color: colorScheme.error,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.error);
+                        controller.setHoverTonalPalette(TonalPalettes.error);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.error,
-                        textColor: colorScheme.onError,
-                        label: 'error',
+                        child: ColorNameValue(
+                          color: colorScheme.error,
+                          textColor: colorScheme.onError,
+                          label: 'error',
+                          tone: tones.errorTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.onError,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.onError);
+                        controller.setHoverTonalPalette(TonalPalettes.error);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.onError,
-                        textColor: colorScheme.error,
-                        label: 'onError',
+                        child: ColorNameValue(
+                          color: colorScheme.onError,
+                          textColor: colorScheme.error,
+                          label: 'onError',
+                          tone: tones.onErrorTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.errorContainer,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.errorContainer);
+                        controller.setHoverTonalPalette(TonalPalettes.error);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.errorContainer,
-                        textColor: colorScheme.onErrorContainer,
-                        label: 'errorContainer',
+                        child: ColorNameValue(
+                          color: colorScheme.errorContainer,
+                          textColor: colorScheme.onErrorContainer,
+                          label: 'errorContainer',
+                          tone: tones.errorContainerTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.onErrorContainer,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.onErrorContainer);
+                        controller.setHoverTonalPalette(TonalPalettes.error);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.onErrorContainer,
-                        textColor: colorScheme.errorContainer,
-                        label: 'onErrorContainer',
+                        child: ColorNameValue(
+                          color: colorScheme.onErrorContainer,
+                          textColor: colorScheme.errorContainer,
+                          label: 'onErrorContainer',
+                          tone: tones.onErrorContainerTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
@@ -565,45 +779,94 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    child: Material(
-                      color: colorScheme.background,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.background);
+                        controller.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.background,
-                        textColor: colorScheme.onBackground,
-                        label: 'background',
+                        child: ColorNameValue(
+                          color: colorScheme.background,
+                          textColor: colorScheme.onBackground,
+                          label: 'background',
+                          tone: tones.backgroundTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.onBackground,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.onBackground);
+                        controller.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.onBackground,
-                        textColor: colorScheme.background,
-                        label: 'onBackground',
+                        child: ColorNameValue(
+                          color: colorScheme.onBackground,
+                          textColor: colorScheme.background,
+                          label: 'onBackground',
+                          tone: tones.onBackgroundTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.outline,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.outline);
+                        controller
+                            .setHoverTonalPalette(TonalPalettes.neutralVariant);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.outline,
-                        textColor: _onColor(colorScheme.outline),
-                        label: 'outline',
+                        child: ColorNameValue(
+                          color: colorScheme.outline,
+                          textColor: _onColor(colorScheme.outline),
+                          label: 'outline',
+                          tone: tones.outlineTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.shadow,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.shadow);
+                        controller.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.shadow,
-                        textColor: _onColor(colorScheme.shadow),
-                        label: 'shadow',
+                        child: ColorNameValue(
+                          color: colorScheme.shadow,
+                          textColor: _onColor(colorScheme.shadow),
+                          label: 'shadow',
+                          tone: tones.shadowTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
@@ -623,45 +886,95 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    child: Material(
-                      color: colorScheme.surface,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.surface);
+                        controller.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.surface,
-                        textColor: colorScheme.onSurface,
-                        label: 'surface',
+                        child: ColorNameValue(
+                          color: colorScheme.surface,
+                          textColor: colorScheme.onSurface,
+                          label: 'surface',
+                          tone: tones.surfaceTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.onSurface,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.onSurface);
+                        controller.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.onSurface,
-                        textColor: colorScheme.surface,
-                        label: 'onSurface',
+                        child: ColorNameValue(
+                          color: colorScheme.onSurface,
+                          textColor: colorScheme.surface,
+                          label: 'onSurface',
+                          tone: tones.onSurfaceTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.surfaceVariant,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.surfaceVariant);
+                        controller
+                            .setHoverTonalPalette(TonalPalettes.neutralVariant);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.surfaceVariant,
-                        textColor: colorScheme.onSurfaceVariant,
-                        label: 'surfaceVariant',
+                        child: ColorNameValue(
+                          color: colorScheme.surfaceVariant,
+                          textColor: colorScheme.onSurfaceVariant,
+                          label: 'surfaceVariant',
+                          tone: tones.surfaceVariantTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.onSurfaceVariant,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.onSurfaceVariant);
+                        controller
+                            .setHoverTonalPalette(TonalPalettes.neutralVariant);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.onSurfaceVariant,
-                        textColor: colorScheme.surfaceVariant,
-                        label: 'onSurfaceVariant',
+                        child: ColorNameValue(
+                          color: colorScheme.onSurfaceVariant,
+                          textColor: colorScheme.surfaceVariant,
+                          label: 'onSurfaceVariant',
+                          tone: tones.onSurfaceVariantTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
@@ -681,34 +994,70 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    child: Material(
-                      color: colorScheme.inverseSurface,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.inverseSurface);
+                        controller.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.inverseSurface,
-                        textColor: colorScheme.onInverseSurface,
-                        label: 'inverseSurface',
+                        child: ColorNameValue(
+                          color: colorScheme.inverseSurface,
+                          textColor: colorScheme.onInverseSurface,
+                          label: 'inverseSurface',
+                          tone: tones.inverseSurfaceTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.onInverseSurface,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.onInverseSurface);
+                        controller.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.onInverseSurface,
-                        textColor: colorScheme.inverseSurface,
-                        label: 'onInverseSurface',
+                        child: ColorNameValue(
+                          color: colorScheme.onInverseSurface,
+                          textColor: colorScheme.inverseSurface,
+                          label: 'onInverseSurface',
+                          tone: tones.onInverseSurfaceTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),
                   const Divider(height: 1, thickness: 1),
                   Expanded(
-                    child: Material(
-                      color: colorScheme.inversePrimary,
-                      child: ColorNameValue(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        controller.setHoverColor(colorScheme.inversePrimary);
+                        controller.setHoverTonalPalette(TonalPalettes.primary);
+                      },
+                      onExit: (PointerEvent details) {
+                        controller.setHoverColor(null);
+                        controller.setHoverTonalPalette(null);
+                      },
+                      child: Material(
                         color: colorScheme.inversePrimary,
-                        textColor: primary,
-                        label: 'inversePrimary',
+                        child: ColorNameValue(
+                          color: colorScheme.inversePrimary,
+                          textColor: primary,
+                          label: 'inversePrimary',
+                          tone: tones.inversePrimaryTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
                   ),

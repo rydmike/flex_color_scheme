@@ -2396,13 +2396,15 @@ class FlexColor {
   static const Color dashBlueLightPrimary = Color(0xFF4496E0);
 
   /// Dash blue theme color for light primary container color.
-  static const Color dashBlueLightPrimaryContainer = Color(0xFFB1E2FF);
+  static const Color dashBlueLightPrimaryContainer =
+      Color(0xFFB4E6FF); //Color(0xFFB1E2FF);
 
   /// Dash blue theme color for light secondary color.
   static const Color dashBlueLightSecondary = Color(0xFF202B6D);
 
   /// Dash blue theme color for light secondary container color.
-  static const Color dashBlueLightSecondaryContainer = Color(0xFF2BFDFE);
+  static const Color dashBlueLightSecondaryContainer =
+      Color(0xFF99CCF9); //Color(0xFF2BFDFE);
 
   /// Dash blue theme color for light tertiary color.
   static const Color dashBlueLightTertiary = Color(0xFF514239);
@@ -2411,13 +2413,14 @@ class FlexColor {
   static const Color dashBlueLightTertiaryContainer = Color(0xFFBAA99D);
 
   /// Dash blue theme color for dark primary color.
-  static const Color dashBlueDarkPrimary = Color(0xFFB1E2FF);
+  static const Color dashBlueDarkPrimary = Color(0xFFB4E6FF);
 
   /// Dash blue theme color for dark primary container color.
-  static const Color dashBlueDarkPrimaryContainer = Color(0xFF4496E0);
+  static const Color dashBlueDarkPrimaryContainer = Color(0xFF1E8FDB);
 
   /// Dash blue theme color for dark secondary color.
-  static const Color dashBlueDarkSecondary = Color(0xFF2BFDFE);
+  static const Color dashBlueDarkSecondary =
+      Color(0xFF99CCF9); //Color(0xFF2BFDFE);
 
   /// Dash blue theme color for dark secondary container color.
   static const Color dashBlueDarkSecondaryContainer = Color(0xFF202B6D);

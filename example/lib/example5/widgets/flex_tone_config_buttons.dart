@@ -21,26 +21,28 @@ class FlexToneConfigButtons extends StatelessWidget {
     ];
     return ToggleButtons(
       isSelected: isSelected,
-      onPressed: controller.useFlexColorScheme && controller.useSubThemes
+      onPressed: controller.useFlexColorScheme &&
+              controller.useSubThemes &&
+              controller.useKeyColors
           ? (int index) {
               controller.setUsedFlexTonesSetup(index + 1);
             }
           : null,
       children: const <Widget>[
         Tooltip(
-          message: 'Default Material 3 muted soft tones',
+          message: 'Material 3 tones',
           child: Icon(Icons.looks_one),
         ),
         Tooltip(
-          message: 'Darker primary and more vivid secondary and tertiary',
+          message: 'Soft tones',
           child: Icon(Icons.looks_two),
         ),
         Tooltip(
-          message: 'Message',
+          message: 'Vivid tones',
           child: Icon(Icons.looks_3),
         ),
         Tooltip(
-          message: 'Message',
+          message: 'High contrast tones',
           child: Icon(Icons.looks_4),
         ),
       ],

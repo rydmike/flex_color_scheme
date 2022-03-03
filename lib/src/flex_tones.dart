@@ -73,9 +73,12 @@ class FlexTones with Diagnosticable {
     required this.tertiaryMinChroma,
   });
 
-  // TODO(rydmike): Double check all tone values before release!
-
-  /// Create a light tonal palette tone extraction and CAM16 chroma setup.
+  /// Create a M3 standard light tonal palette tones extraction and
+  /// CAM16 chroma setup.
+  ///
+  /// This setup will if only one seed color is used, produce the same result
+  /// with [FlexColorPalette] as [Scheme.light] using [ColorPalette.of] as
+  /// used by Flutter SDK does.
   const FlexTones.light({
     this.primaryTone = 40,
     this.onPrimaryTone = 100,
@@ -104,7 +107,7 @@ class FlexTones with Diagnosticable {
     this.inverseSurfaceTone = 20,
     this.onInverseSurfaceTone = 95,
     this.inversePrimaryTone = 80,
-    this.primaryChroma, // Defaults to null, chroma in key is used.
+    this.primaryChroma, // Defaults to null, chroma in key color is used.
     this.primaryMinChroma = 48,
     this.secondaryChroma = 16,
     this.secondaryMinChroma = 0,
@@ -112,7 +115,12 @@ class FlexTones with Diagnosticable {
     this.tertiaryMinChroma = 0,
   });
 
-  /// Create a dark tonal palette tone extraction and CAM16 chroma setup.
+  /// Create a M3 standard dark tonal palette tones extraction and
+  /// CAM16 chroma setup.
+  ///
+  /// This setup will if only one seed color is used, produce the same result
+  /// with [FlexColorPalette] as [Scheme.dark] using [ColorPalette.of] as
+  /// used by Flutter SDK does.
   const FlexTones.dark({
     this.primaryTone = 80,
     this.onPrimaryTone = 20,
@@ -141,13 +149,111 @@ class FlexTones with Diagnosticable {
     this.inverseSurfaceTone = 90,
     this.onInverseSurfaceTone = 20,
     this.inversePrimaryTone = 40,
-    this.primaryChroma, // Defaults to null, chroma in key is used.
+    this.primaryChroma, // Defaults to null, chroma in key color is used.
     this.primaryMinChroma = 48,
     this.secondaryChroma = 16,
     this.secondaryMinChroma = 0,
     this.tertiaryChroma = 24,
     this.tertiaryMinChroma = 0,
   });
+
+  /// Alternative static constructor with brightness as input to create
+  /// a tonal palette extraction setup matching the Material Design 3 setup.
+  static FlexTones material(Brightness brightness) =>
+      brightness == Brightness.light
+          ? const FlexTones.light()
+          : const FlexTones.dark();
+
+  /// Creates a tonal palette extraction setup that results in M3 like
+  /// ColorsSchemes with softer colors than Material 3 defaults.
+  ///
+  /// Primary chroma is 30, secondary 14 and tertiary 20. Tones are same as
+  /// in Material 3 default setup.
+  static FlexTones soft(Brightness brightness) => brightness == Brightness.light
+      ? const FlexTones.light(
+          primaryChroma: 30,
+          primaryMinChroma: 0,
+          secondaryChroma: 14,
+          tertiaryChroma: 20,
+        )
+      : const FlexTones.dark(
+          primaryChroma: 30,
+          primaryMinChroma: 0,
+          secondaryChroma: 14,
+          tertiaryChroma: 20,
+        );
+
+  /// Creates a tonal palette extraction setup that results in M3 like
+  /// ColorsSchemes with more vivid colors.
+  ///
+  /// Primary tone is one tone darker than in Material 3 standard setup in light
+  /// mode. As in M3 default, primary uses its own chroma, but with a minimum
+  /// value of 50. Secondary and tertiary key colors use their own chroma
+  /// with no min limits, making the secondary and tertiary mid tones closer
+  /// to their used key colors.
+  static FlexTones vivid(Brightness brightness) =>
+      brightness == Brightness.light
+          ? const FlexTones.light(
+              primaryTone: 30,
+              primaryChroma: null,
+              secondaryChroma: null,
+              tertiaryChroma: null,
+              primaryMinChroma: 50,
+            )
+          : const FlexTones.dark(
+              onPrimaryTone: 10,
+              primaryContainerTone: 20,
+              onErrorContainerTone: 90,
+              primaryChroma: null,
+              secondaryChroma: null,
+              tertiaryChroma: null,
+              primaryMinChroma: 50);
+
+  /// Creates a tonal palette extraction setup that results in M3 like
+  /// ColorsSchemes with high contrast between color versus its on-color and
+  /// main contra its container color.
+  ///
+  /// Primary, Secondary and tertiary key colors use their own chroma, but
+  /// with minimum limit of 65 on primary and 55 on secondary and tertiary.
+  static FlexTones highContrast(Brightness brightness) =>
+      brightness == Brightness.light
+          ? const FlexTones.light(
+              primaryTone: 30,
+              secondaryTone: 30,
+              tertiaryTone: 30,
+              errorTone: 30,
+              primaryContainerTone: 95,
+              secondaryContainerTone: 95,
+              tertiaryContainerTone: 95,
+              errorContainerTone: 95,
+              primaryChroma: null,
+              secondaryChroma: null,
+              tertiaryChroma: null,
+              primaryMinChroma: 65,
+              secondaryMinChroma: 55,
+              tertiaryMinChroma: 55,
+            )
+          : const FlexTones.dark(
+              primaryTone: 80,
+              secondaryTone: 80,
+              tertiaryTone: 80,
+              errorTone: 80,
+              onPrimaryTone: 10,
+              onSecondaryTone: 10,
+              onTertiaryTone: 10,
+              onErrorTone: 10,
+              primaryContainerTone: 20,
+              secondaryContainerTone: 20,
+              tertiaryContainerTone: 20,
+              errorContainerTone: 20,
+              onErrorContainerTone: 90,
+              primaryChroma: null,
+              secondaryChroma: null,
+              tertiaryChroma: null,
+              primaryMinChroma: 65,
+              secondaryMinChroma: 55,
+              tertiaryMinChroma: 55,
+            );
 
   /// Tone used for [ColorScheme.primary] from primary [TonalPalette].
   final int primaryTone;
