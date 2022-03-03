@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'color_indicator.dart';
 import 'copy_color_to_clipboard.dart';

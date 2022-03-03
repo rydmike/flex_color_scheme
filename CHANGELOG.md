@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.1 - March 3, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - March 4, 2022 - WORK IN PROGRESS
 
 The commit contains the version of the key color seeded M3 `ColorScheme`
 usage intended for the final design. The feature supports seeding by not only
@@ -437,8 +437,9 @@ list of changes and new features.
     They are going away in next stable release of Flutter after 2.10.x, as
     per this notice [#98537](https://github.com/flutter/flutter/issues/98537).
   
+* Update default example app, the **Hot Reload Playground**.
 * Major update for "example 5" the **Themes Playground**
-  to include support for the new features.
+  to include support for all the new features. Updates listed below:
   
   - **DONE:** Added config for unselected toggleable style.
   - **DONE:** Added feature to export the code for the active `ColorScheme`. 
@@ -467,12 +468,14 @@ list of changes and new features.
     explicitly uses switch theme color as thumb color, sigh.
 
 
+**IN PROGRESS**
+  Added the `FlexSubThemesData` properties for using 
+  `FlexSubThemes.navigationRailTheme`. It still needd doc comments review plus
+   updates and connection setup to FlexColorScheme theme config. The 
+   implmentation in ThemesPlayground needs to be updated too.
 
 **TODO** 
-
 * Review and manual testing of all things above.
-* New NavigationRail sub theme still has no `FlexSubThemesData` config
-  properties. Still in review.
 * Add loading animation to Themes Playground web build. Might be pushed to
   when Flutter SDK supports it out of the box, seemed a bit tedious to do still.
 
