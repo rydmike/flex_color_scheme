@@ -22,7 +22,7 @@ void main() {
       thickBorderWidth: 2,
       thinBorderWidth: 1.5,
       elevatedButtonElevation: 1,
-      unselectedToggleIsColored: true,
+      unselectedToggleIsColored: false,
       inputDecoratorIsFilled: true,
       inputDecoratorBorderType: FlexInputBorderType.outline,
       inputDecoratorUnfocusedHasBorder: true,
@@ -38,6 +38,8 @@ void main() {
       bottomNavigationBarOpacity: 1,
       navigationBarIsStyled: true,
       navigationBarOpacity: 1,
+      navigationRailOpacity: 1,
+      navigationRailElevation: 0,
     );
     // m3, one different values than m1 and m2.
     const FlexSubThemesData m3 = FlexSubThemesData(
@@ -49,7 +51,7 @@ void main() {
       thickBorderWidth: 2,
       thinBorderWidth: 1.5,
       elevatedButtonElevation: 1,
-      unselectedToggleIsColored: true,
+      unselectedToggleIsColored: false,
       inputDecoratorIsFilled: true,
       inputDecoratorBorderType: FlexInputBorderType.underline, // <--diff
       inputDecoratorUnfocusedHasBorder: true,
@@ -65,6 +67,8 @@ void main() {
       bottomNavigationBarOpacity: 1,
       navigationBarIsStyled: true,
       navigationBarOpacity: 1,
+      navigationRailOpacity: 1,
+      navigationRailElevation: 0,
     );
     // m4, all values different from m1 and m2.
     const FlexSubThemesData m4 = FlexSubThemesData(
@@ -92,6 +96,8 @@ void main() {
       bottomNavigationBarOpacity: 0.96,
       navigationBarIsStyled: false,
       navigationBarOpacity: 0.55,
+      navigationRailOpacity: 0.43,
+      navigationRailElevation: 7,
     );
     // Identity and quality tests
     test(
@@ -152,7 +158,7 @@ void main() {
           thickBorderWidth: 2,
           thinBorderWidth: 1.5,
           elevatedButtonElevation: 1,
-          unselectedToggleIsColored: true,
+          unselectedToggleIsColored: false,
           inputDecoratorIsFilled: true,
           inputDecoratorBorderType: FlexInputBorderType.outline,
           inputDecoratorUnfocusedHasBorder: true,
@@ -168,6 +174,8 @@ void main() {
           bottomNavigationBarOpacity: 1,
           navigationBarIsStyled: true,
           navigationBarOpacity: 1,
+          navigationRailOpacity: 1,
+          navigationRailElevation: 0,
         ),
         equals(m1),
       );
@@ -204,7 +212,7 @@ void main() {
       fabUseShape: true,
       fabSchemeColor: SchemeColor.primary,
       chipRadius: 20,
-      chipSchemeColor: SchemeColor.secondaryVariant,
+      chipSchemeColor: SchemeColor.secondaryContainer,
       unselectedToggleIsColored: true,
       cardRadius: 20,
       cardElevation: 2,
@@ -240,6 +248,22 @@ void main() {
       navigationBarUnselectedIconSize: 38,
       navigationBarLabelBehavior:
           NavigationDestinationLabelBehavior.onlyShowSelected,
+      //
+      navigationRailBackgroundSchemeColor: SchemeColor.secondaryContainer,
+      navigationRailOpacity: 1,
+      navigationRailElevation: 2,
+      navigationRailIconSchemeColor: SchemeColor.secondaryContainer,
+      navigationRailUseIndicator: true,
+      navigationRailIndicatorSchemeColor: SchemeColor.secondaryContainer,
+      navigationRailTextSchemeColor: SchemeColor.secondaryContainer,
+      navigationRailMutedUnselectedIcon: true,
+      navigationRailMutedUnselectedText: true,
+      navigationRailSelectedLabelSize: 12,
+      navigationRailUnselectedLabelSize: 11,
+      navigationRailSelectedIconSize: 40,
+      navigationRailUnselectedIconSize: 41,
+      navigationRailLabelType: NavigationRailLabelType.all,
+      navigationRailGroupAlignment: -1,
     );
 
     test(
@@ -272,7 +296,7 @@ void main() {
           fabUseShape: true,
           fabSchemeColor: SchemeColor.primary,
           chipRadius: 20,
-          chipSchemeColor: SchemeColor.secondaryVariant,
+          chipSchemeColor: SchemeColor.secondaryContainer,
           unselectedToggleIsColored: true,
           cardRadius: 20,
           cardElevation: 2,
@@ -308,6 +332,22 @@ void main() {
           navigationBarUnselectedIconSize: 38,
           navigationBarLabelBehavior:
               NavigationDestinationLabelBehavior.onlyShowSelected,
+          //
+          navigationRailBackgroundSchemeColor: SchemeColor.secondaryContainer,
+          navigationRailOpacity: 1,
+          navigationRailElevation: 2,
+          navigationRailIconSchemeColor: SchemeColor.secondaryContainer,
+          navigationRailUseIndicator: true,
+          navigationRailIndicatorSchemeColor: SchemeColor.secondaryContainer,
+          navigationRailTextSchemeColor: SchemeColor.secondaryContainer,
+          navigationRailMutedUnselectedIcon: true,
+          navigationRailMutedUnselectedText: true,
+          navigationRailSelectedLabelSize: 12,
+          navigationRailUnselectedLabelSize: 11,
+          navigationRailSelectedIconSize: 40,
+          navigationRailUnselectedIconSize: 41,
+          navigationRailLabelType: NavigationRailLabelType.all,
+          navigationRailGroupAlignment: -1,
         )),
       );
     });
@@ -325,7 +365,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSubThemesData#00000(interactionEffects: true, blendOnLevel : 0, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, textButtonSchemeColor: null, elevatedButtonSchemeColor: null, outlinedButtonSchemeColor: null, materialButtonSchemeColor: null, toggleButtonsSchemeColor: null, switchSchemeColor: null, checkboxSchemeColor: null, radioSchemeColor: null, unselectedToggleIsColored: true, inputDecorationRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, dialogBackgroundSchemeColor: null, timePickerDialogRadius: null, snackBarElevation: 4.0, appBarBackgroundSchemeColor: null, tabBarItemSchemeColor: null, tabBarIndicatorSchemeColor: null, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: 1.0, bottomNavigationBarSchemeColor: null, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarLandscapeLayout: null, navigationBarIsStyled: true, navigationBarHeight: null, navigationBarOpacity: 1.0, navigationBarIconSchemeColor: null, navigationBarIconSchemeColor: null, navigationBarHighlightSchemeColor: null, navigationBarBackgroundSchemeColor: null, navigationBarMutedUnselectedIcon: null, navigationBarMutedUnselectedText: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarLabelBehavior: null)'));
+              'FlexSubThemesData#00000(interactionEffects: true, blendOnLevel : 0, blendOnColors: true, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, textButtonSchemeColor: null, elevatedButtonSchemeColor: null, outlinedButtonSchemeColor: null, materialButtonSchemeColor: null, toggleButtonsSchemeColor: null, switchSchemeColor: null, checkboxSchemeColor: null, radioSchemeColor: null, unselectedToggleIsColored: false, inputDecorationRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, dialogBackgroundSchemeColor: null, timePickerDialogRadius: null, snackBarElevation: 4.0, appBarBackgroundSchemeColor: null, tabBarItemSchemeColor: null, tabBarIndicatorSchemeColor: null, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarOpacity: 1.0, bottomNavigationBarSchemeColor: null, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarLandscapeLayout: null, navigationBarIsStyled: true, navigationBarHeight: null, navigationBarOpacity: 1.0, navigationBarIconSchemeColor: null, navigationBarIconSchemeColor: null, navigationBarHighlightSchemeColor: null, navigationBarBackgroundSchemeColor: null, navigationBarMutedUnselectedIcon: null, navigationBarMutedUnselectedText: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarLabelBehavior: null, navigationRailBackgroundSchemeColor: null, navigationRailOpacity: 1.0, navigationRailElevation: 0.0, navigationRailIconSchemeColor: null, navigationRailUseIndicator: null, navigationRailIndicatorSchemeColor: null, navigationRailTextSchemeColor: null, navigationRailMutedUnselectedIcon: null, navigationRailMutedUnselectedText: null, navigationRailSelectedLabelSize: null, navigationRailUnselectedLabelSize: null, navigationRailSelectedIconSize: null, navigationRailUnselectedIconSize: null, navigationRailGroupAlignment: null, navigationRailGroupAlignment: null)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '
