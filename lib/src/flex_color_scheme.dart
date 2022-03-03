@@ -5407,6 +5407,7 @@ class FlexColorScheme with Diagnosticable {
               .withAlpha(kSplashAlpha)
           : null,
 
+      // TODO(rydmike): Follow-up coming deprecation of dialogBackgroundColor.
       // Flutter standard dialogBackgroundColor for color scheme based themes
       // uses colorScheme.background.
       // The FlexColorScheme.from() factory constructor uses passed in dialog
@@ -5573,8 +5574,8 @@ class FlexColorScheme with Diagnosticable {
         selectionHandleColor: primaryColorDark,
       ),
 
-      // TODO(rydmike): Tech debt => Move sub-themes opt-in to FlexSubThemes.
-      // Define the TabBar theme that will fit nicely in an AppBar
+      // TODO(rydmike): Tech debt => Move sub-themes opt-in to a FlexSubThemes.
+      // Defines the TabBar theme that will fit nicely in an AppBar
       // (default) or on background color for use eg in a Scaffold, the choice
       // depends on tabBarStyle `FlexTabBarStyle`, that defaults to
       // `FlexTabBarStyle.forAppBar`. Using different theme styles for intended

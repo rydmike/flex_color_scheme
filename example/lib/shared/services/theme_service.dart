@@ -194,8 +194,8 @@ abstract class ThemeService {
 
   /// Default value for the blendLevel, also used to reset settings.
   ///
-  /// Defaults to 18.
-  static const int defaultBlendLevel = 18;
+  /// Defaults to 15.
+  static const int defaultBlendLevel = 15;
 
   /// Loads used surface blend level setting in example 5.
   Future<int> blendLevel();
@@ -208,8 +208,8 @@ abstract class ThemeService {
 
   /// Default value for the blendLevelDark, also used to reset settings.
   ///
-  /// Defaults to 18.
-  static const int defaultBlendLevelDark = 18;
+  /// Defaults to 15.
+  static const int defaultBlendLevelDark = 15;
 
   /// Loads used surface blend level dark setting in example 5.
   Future<int> blendLevelDark();
@@ -222,7 +222,7 @@ abstract class ThemeService {
 
   /// Default value for the onBlendLevel, also used to reset settings.
   ///
-  /// Defaults to 40.
+  /// Defaults to 20.
   static const int defaultBlendOnLevel = 40;
 
   /// Loads used blendOnLevel setting in example 5.
@@ -1113,7 +1113,7 @@ abstract class ThemeService {
   static const String keyUnselectedIsColored = 'unselectedIsColored';
 
   /// Default value for the unselectedIsColored, also to reset settings.
-  static const bool defaultUnselectedIsColored = true;
+  static const bool defaultUnselectedIsColored = false;
 
   /// Loads used unselectedIsColored setting in example 5.
   Future<bool> unselectedIsColored();
@@ -1132,7 +1132,7 @@ abstract class ThemeService {
   /// Default value for the usedFlexToneSetupLevel, also used to reset
   /// settings.
   ///
-  /// Defaults to 1 - Flutter SDK default confi
+  /// Defaults to 1 - Flutter SDK default configuration
   static const int defaultUsedFlexToneSetup = 1;
 
   /// Loads used surface usedFlexToneSetup level setting in example 5.

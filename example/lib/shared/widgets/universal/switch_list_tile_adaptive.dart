@@ -30,6 +30,7 @@ class SwitchListTileAdaptive extends StatelessWidget {
     Key? key,
     required this.value,
     required this.onChanged,
+    this.activeColor,
     this.title,
     this.subtitle,
     this.secondary,
@@ -51,6 +52,19 @@ class SwitchListTileAdaptive extends StatelessWidget {
   ///
   /// If null, the switch will be displayed as disabled.
   final ValueChanged<bool>? onChanged;
+
+  /// The color to use when this switch is on.
+  ///
+  /// Defaults to selected thumb color of SwitchTheme, and if not defined to
+  /// [Colorscheme.secondary] color of the current [Theme].
+  ///
+  /// The Material mode of this switch does this by default, but the iOS remain
+  /// iOS active green despite the theme, unless explicitly set via the
+  /// active color. We make custom version to make it behave as we want it to.
+  ///
+  /// NOTE: It is not really an SDK themed widget, but our custom wrapped
+  /// version now follow effective theme in the desired way.
+  final Color? activeColor;
 
   /// The primary content of the list tile.
   ///
@@ -91,7 +105,8 @@ class SwitchListTileAdaptive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile.adaptive(
-      activeColor: Theme.of(context)
+      activeColor: activeColor ??
+          Theme.of(context)
               .switchTheme
               .thumbColor
               ?.resolve(<MaterialState>{MaterialState.selected}) ??
