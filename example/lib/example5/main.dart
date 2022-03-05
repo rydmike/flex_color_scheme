@@ -163,7 +163,7 @@ class DemoApp extends StatelessWidget {
                     // The platform can be toggled in the app, but not saved.
                     platform: themeController.platform,
                     // Use key color based M3 ColorScheme.
-                    keyColors: FlexKeyColor(
+                    keyColors: FlexKeyColors(
                       useKeyColors: themeController.useKeyColors,
                       useSecondary: themeController.useSecondary,
                       useTertiary: themeController.useTertiary,
@@ -409,7 +409,7 @@ class DemoApp extends StatelessWidget {
                     // Used number of colors
                     usedColors: themeController.usedColors,
                     // Use key color based M3 ColorScheme.
-                    keyColors: FlexKeyColor(
+                    keyColors: FlexKeyColors(
                       useKeyColors: themeController.useKeyColors,
                       useSecondary: themeController.useSecondary,
                       useTertiary: themeController.useTertiary,

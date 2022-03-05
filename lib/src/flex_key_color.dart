@@ -9,18 +9,18 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 /// key colors to populate the Material 3 [ColorScheme] it creates and uses
 /// to generate its [ThemeData] object.
 ///
-/// A key based [ColorScheme] will be generated if a [FlexKeyColor]
+/// A key based [ColorScheme] will be generated if a [FlexKeyColors]
 /// instance is passed to [FlexColorScheme.light] or [FlexColorScheme.dark]
 /// parameter [keyColorSetup] with [useKeyColors] set to true, in its
-/// [FlexKeyColor] configuration input.
+/// [FlexKeyColors] configuration input.
 ///
 /// By default [keyColorSetup] is null and key colors are not used. To activate
-/// the feature pass in a default [FlexKeyColor] instance,
+/// the feature pass in a default [FlexKeyColors] instance,
 /// its [useKeyColors] defaults to true.
 ///
 /// If the default setup is suitable, no further configuration is required.
 /// You can however further customize its behaviour by adjusting the properties
-/// in [FlexKeyColor].
+/// in [FlexKeyColors].
 ///
 /// For more information on Material 3 color system and usage of key colors
 /// to generate tonal palettes and tones, see:
@@ -67,13 +67,13 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 /// even be combined with M3 based key color branding, for a bit different and
 /// stronger effects from key color generated themes too.
 @immutable
-class FlexKeyColor with Diagnosticable {
-  /// Default constructor, used to make an immutable [FlexKeyColor]
+class FlexKeyColors with Diagnosticable {
+  /// Default constructor, used to make an immutable [FlexKeyColors]
   /// object.
   ///
   /// Uses [useKeyColors], [useSecondary] and [useTertiary] to define if and
   /// how key color seeding is used.
-  const FlexKeyColor({
+  const FlexKeyColors({
     final this.useKeyColors = true,
     final this.useSecondary = true,
     final this.useTertiary = true,
@@ -257,7 +257,7 @@ class FlexKeyColor with Diagnosticable {
   final bool keepTertiaryContainer;
 
   /// Copy the object with one or more provided properties changed.
-  FlexKeyColor copyWith({
+  FlexKeyColors copyWith({
     final bool? useKeyColors,
     final bool? useSecondary,
     final bool? useTertiary,
@@ -268,7 +268,7 @@ class FlexKeyColor with Diagnosticable {
     final bool? keepSecondaryContainer,
     final bool? keepTertiaryContainer,
   }) {
-    return FlexKeyColor(
+    return FlexKeyColors(
       useKeyColors: useKeyColors ?? this.useKeyColors,
       useSecondary: useSecondary ?? this.useSecondary,
       useTertiary: useTertiary ?? this.useTertiary,
@@ -287,7 +287,7 @@ class FlexKeyColor with Diagnosticable {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
-    return other is FlexKeyColor &&
+    return other is FlexKeyColors &&
         other.useKeyColors == useKeyColors &&
         other.useSecondary == useSecondary &&
         other.useTertiary == useTertiary &&

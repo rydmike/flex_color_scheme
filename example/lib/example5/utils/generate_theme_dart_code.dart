@@ -210,7 +210,7 @@ String generateThemeDartCode(ThemeController controller) {
           '  ),\n'
       : '';
   final String useKeyColors = controller.useKeyColors
-      ? '  keyColors: const FlexKeyColor(\n'
+      ? '  keyColors: const FlexKeyColors(\n'
           '    useKeyColors: ${controller.useKeyColors},\n'
           '    useSecondary: ${controller.useSecondary},\n'
           '    useTertiary: ${controller.useTertiary},\n'

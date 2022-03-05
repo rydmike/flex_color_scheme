@@ -137,7 +137,7 @@ class DemoApp extends StatelessWidget {
             // large number of easy to use configuration parameters that you
             // can use for quick styling of the sub-themes per component.
             useSubThemes: themeController.useSubThemes,
-            // Passing in `FlexKeyColor()` to `keyColors` activates Material 3
+            // Passing in `FlexKeyColors()` to `keyColors` activates Material 3
             // key color seed based schemes. The primary color in your
             // active theme is always used as main "primary" key for the
             // generated color scheme when it is activated. This is the same
@@ -153,14 +153,14 @@ class DemoApp extends StatelessWidget {
             // dark and light color scheme. The key color itself is seldom
             // included as a color in the generated ColorScheme. This can be
             // problematic if you want to use that specific color in your
-            // custom scheme for branding purposes. The `FlexKeyColor`
+            // custom scheme for branding purposes. The `FlexKeyColors`
             // configuration data class contains additional properties where you
             // can instruct it to keep a color defined in FlexColorScheme at
             // its defined input value. Set e.g. `keepPrimary: true` to ensure
             // that the actual primary color you used to seed your color scheme,
             // is also used as the primary color in the otherwise seed
             // generated ColorScheme from the used color.
-            keyColors: FlexKeyColor(
+            keyColors: FlexKeyColors(
               useKeyColors: themeController.useKeyColors,
               useSecondary: themeController.useSecondary,
               useTertiary: themeController.useTertiary,
@@ -190,7 +190,7 @@ class DemoApp extends StatelessWidget {
             blendLevel: 12,
             appBarElevation: 1,
             useSubThemes: themeController.useSubThemes,
-            keyColors: FlexKeyColor(
+            keyColors: FlexKeyColors(
               useKeyColors: themeController.useKeyColors,
               useSecondary: themeController.useSecondary,
               useTertiary: themeController.useTertiary,
