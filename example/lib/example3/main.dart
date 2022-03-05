@@ -28,6 +28,9 @@ import 'home_page.dart';
 // opting in and out of FlexColorScheme's opinionated sub-themes, and to
 // change the enum value of the used FlexScheme that creates a new theme
 // with the enum related color scheme.
+//
+// You can try this app as a web app at:
+// https://rydmike.com/flexcolorscheme/fourthemes-v5
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {
