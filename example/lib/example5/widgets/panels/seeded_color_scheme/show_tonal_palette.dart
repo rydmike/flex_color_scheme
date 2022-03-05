@@ -30,8 +30,8 @@ class ShowTonalPalette extends StatelessWidget {
       brightness: Brightness.light,
     );
 
-    // Get the FlexTone setup
-    final FlexTone tones = AppColor.flexTonesConfig(
+    // Get the FlexTones setup
+    final FlexTones tones = AppColor.flexTonesConfig(
       brightness,
       controller.usedFlexToneSetup,
     );
@@ -41,7 +41,7 @@ class ShowTonalPalette extends StatelessWidget {
       // Pass in null if set to not secondary or tertiary colors seed keys.
       secondary: controller.useSecondary ? colors.secondary.value : null,
       tertiary: controller.useTertiary ? colors.tertiary.value : null,
-      // Tone config details we get from active FlexTone.
+      // Tone config details we get from active FlexTones.
       primaryChroma: controller.useKeyColors ? tones.primaryChroma : 0,
       primaryMinChroma: controller.useKeyColors ? tones.primaryMinChroma : 0,
       secondaryChroma: controller.useKeyColors ? tones.secondaryChroma : 0,

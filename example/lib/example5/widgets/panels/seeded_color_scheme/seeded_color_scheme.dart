@@ -120,7 +120,7 @@ class SeededColorScheme extends StatelessWidget {
           ),
           const ListTile(
             subtitle: Text(
-              'With FlexTone you can configure which tone from '
+              'With FlexTones you can configure which tone from '
               'generated tonal palettes each color in the ColorScheme use. '
               'You can also set limits on used CAM16 chroma values '
               'for the three color values used as keys to seed the M3 primary, '
@@ -128,7 +128,7 @@ class SeededColorScheme extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Select FlexTone setup'),
+            title: const Text('Select FlexTones setup'),
             subtitle: Text(
               _describeFlexToneShort(
                   controller.useKeyColors ? controller.usedFlexToneSetup : 0),
@@ -141,8 +141,8 @@ class SeededColorScheme extends StatelessWidget {
               // ignore: lines_longer_than_80_chars
               '${_describeFlexToneLong(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}\n'
               'In this version you can choose between the default Material 3 '
-              'tone mapping and three pre-defined custom FlexTone setup. With '
-              'the API you can make your own FlexTone configurations. A future '
+              'tone mapping and three pre-defined custom FlexTones setup. With '
+              'the API you can make your own FlexTones configurations. A future '
               'version of this app may add interactive configuration of tone '
               'to ColorScheme color mapping.',
             ),

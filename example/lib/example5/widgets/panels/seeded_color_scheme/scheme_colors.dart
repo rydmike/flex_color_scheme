@@ -55,7 +55,7 @@ class SchemeColors extends StatelessWidget {
     final Color tertiaryContainer = colorScheme.tertiaryContainer;
 
     // Grab active tons and chroma setup.
-    final FlexTone tones = AppColor.flexTonesConfig(
+    final FlexTones tones = AppColor.flexTonesConfig(
         theme.brightness, controller.usedFlexToneSetup);
     // Should we even show the tone? We show them only when, seeding is on.
     final bool showTones =

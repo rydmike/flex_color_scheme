@@ -2352,10 +2352,10 @@ class FlexColorScheme with Diagnosticable {
     /// as well as changing which tone in the tonal palettes is used
     /// for which [ColorScheme] color.
     ///
-    /// If null [FlexTone.light] will be used, resulting in a default
+    /// If null [FlexTones.light] will be used, resulting in a default
     /// Material Design 3 based usage of tones and CAM16 chroma for the
     /// seed generated light [ColorScheme].
-    final FlexTone? tones,
+    final FlexTones? tones,
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6');
@@ -2424,7 +2424,7 @@ class FlexColorScheme with Diagnosticable {
         // If use tertiary seed, use it with fromSeeds, otherwise undefined.
         tertiaryKey: seed.useTertiary ? effectiveColors.tertiary : null,
         // Use provided tones configuration or default one.
-        tones: tones ?? const FlexTone.light(),
+        tones: tones ?? const FlexTones.light(),
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined.
@@ -3864,10 +3864,10 @@ class FlexColorScheme with Diagnosticable {
     /// as well as changing which tone in the tonal palettes is used
     /// for which [ColorScheme] color.
     ///
-    /// If null [FlexTone.dark] will be used, resulting in a default
+    /// If null [FlexTones.dark] will be used, resulting in a default
     /// Material Design 3 based usage of tones and CAM16 chroma for the
     /// seed generated dark [ColorScheme].
-    final FlexTone? tones,
+    final FlexTones? tones,
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6.');
@@ -3962,7 +3962,7 @@ class FlexColorScheme with Diagnosticable {
         // Use provided tones configuration or the default one, which uses
         // defaults that can produce same results as Flutter SDK,
         // ColorScheme.fromSeed(color), when only primary color is used as key.
-        tones: tones ?? const FlexTone.dark(),
+        tones: tones ?? const FlexTones.dark(),
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined. The main colors to keep
@@ -7331,7 +7331,7 @@ class _AlphaValues {
 ///
 /// Which tones to use for what color in the [ColorScheme] is not hard coded
 /// like it is in material_color_utilities [Scheme] class. It also
-/// accepts an optional [FlexTone] class that can be used to configure
+/// accepts an optional [FlexTones] class that can be used to configure
 /// all the tone mapping from [TonalPalette] to [ColorScheme], including
 /// passing all the extra min chroma and fixed level parameters it should
 /// use when it makes the [FlexCorePalette] that is maps color from to
@@ -7403,7 +7403,7 @@ class _Scheme {
     required int primaryKey,
     int? secondaryKey,
     int? tertiaryKey,
-    required FlexTone tones,
+    required FlexTones tones,
   }) {
     final FlexCorePalette core = FlexCorePalette.fromSeeds(
       primary: primaryKey,
@@ -7451,7 +7451,7 @@ class _Scheme {
     required Color primaryKey,
     Color? secondaryKey,
     Color? tertiaryKey,
-    FlexTone? tones,
+    FlexTones? tones,
     Brightness brightness = Brightness.light,
     Color? primary,
     Color? onPrimary,
@@ -7488,7 +7488,7 @@ class _Scheme {
           primaryKey: primaryKey.value,
           secondaryKey: secondaryKey?.value,
           tertiaryKey: tertiaryKey?.value,
-          tones: tones ?? const FlexTone.light(),
+          tones: tones ?? const FlexTones.light(),
         );
         break;
       case Brightness.dark:
@@ -7496,7 +7496,7 @@ class _Scheme {
           primaryKey: primaryKey.value,
           secondaryKey: secondaryKey?.value,
           tertiaryKey: tertiaryKey?.value,
-          tones: tones ?? const FlexTone.dark(),
+          tones: tones ?? const FlexTones.dark(),
         );
         break;
     }

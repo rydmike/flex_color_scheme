@@ -1029,10 +1029,10 @@ extension FlexThemeData on ThemeData {
     /// as well as changing which tone in the tonal palettes is used
     /// for which [ColorScheme] color.
     ///
-    /// If null [FlexTone.light] will be used, resulting in a default
+    /// If null [FlexTones.light] will be used, resulting in a default
     /// Material Design 3 based usage of tones and CAM16 chroma for the
     /// seed generated light [ColorScheme].
-    final FlexTone? tones,
+    final FlexTones? tones,
   }) {
     return FlexColorScheme.light(
       colors: colors,
@@ -2068,10 +2068,10 @@ extension FlexThemeData on ThemeData {
     /// as well as changing which tone in the tonal palettes is used
     /// for which [ColorScheme] color.
     ///
-    /// If null [FlexTone.dark] will be used, resulting in a default
+    /// If null [FlexTones.dark] will be used, resulting in a default
     /// Material Design 3 based usage of tones and CAM16 chroma for the
     /// seed generated dark [ColorScheme].
-    final FlexTone? tones,
+    final FlexTones? tones,
   }) {
     return FlexColorScheme.dark(
       colorScheme: colorScheme,

@@ -1125,7 +1125,7 @@ abstract class ThemeService {
 
   /// Key used to read and save the usedFlexToneSetup value.
   ///
-  /// It is used to select different pre-made FlexTone configurations used
+  /// It is used to select different pre-made FlexTones configurations used
   /// to configure how the seeded [ColorScheme]s behave.
   static const String keyUsedFlexToneSetup = 'usedFlexToneSetup';
 
