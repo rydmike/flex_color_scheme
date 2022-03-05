@@ -12,7 +12,7 @@ import 'home_page.dart';
 // and then how to switch between the light and dark mode.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/basic-v5
+// https://rydmike.com/flexcolorscheme/basictheme-v5
 // -----------------------------------------------------------------------------
 void main() => runApp(const DemoApp());
 
