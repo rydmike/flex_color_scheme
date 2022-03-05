@@ -139,11 +139,16 @@ extension FlexThemeData on ThemeData {
     ///
     /// When the value is 1, the result is the same as if we would have
     /// created the colors with [FlexSchemeColor.from] by only giving it the
-    /// required primary color. With 2, it is equivalent to as if we would have
+    /// required primary color.
+    ///
+    /// With 2, it is equivalent to as if we would have
     /// given it only the primary and secondary colors, and so on.
+    ///
     /// This property makes it possible to simulate and change the resulting
     /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 6 of
-    /// the colors. If your used [FlexColorScheme] `colors` was actually created
+    /// the colors in a [FlexSchemeColor.from].
+    ///
+    /// If your used [FlexColorScheme] `colors` was actually created
     /// with [FlexSchemeColor.from] with only the primary color defined, then
     /// changing the value from 6 ... 3, 2 or 1, will all produce the same
     /// effective scheme as the computed values will be the same as the

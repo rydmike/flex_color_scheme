@@ -135,8 +135,9 @@ enum FlexSurfaceMode {
   /// To get elevation overlay color in dark themes on all surfaces used by
   /// [Material], use one of the modes where background and dialog color equals
   /// the blend strength on surface color, like [level],
-  /// [levelSurfacesLowScaffold], [highScaffoldLowSurfaces] and
-  /// [highScaffoldLowSurfaces]. Other modes will only use
+  /// [levelSurfacesLowScaffold], [highScaffoldLowSurfaces],
+  /// [levelSurfacesLowScaffoldVariantDialog] and
+  /// [highScaffoldLowSurfacesVariantDialog]. Other modes will only use
   /// elevation overlay if their background happens to be equal to resulting
   /// colorScheme.surface color. For more information
   /// see issue: https://github.com/flutter/flutter/issues/90353
