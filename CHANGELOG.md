@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.1 - March 4, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - March 5, 2022 - WORK IN PROGRESS
 
 The commit contains the version of the key color seeded M3 `ColorScheme`
 usage intended for the final design. The feature supports seeding by not only
@@ -246,7 +246,7 @@ list of changes and new features.
      May migrate its implementation to own `FlexSubThemes` sub-theme later.
 
 
-* Added a `FlexKeyColor` configuration class that can be used with
+* Added a `FlexKeyColors` configuration class that can be used with
   the `FlexColorScheme.keyColors` to enable and configure Material 3 based
   key color based tonal palettes' generation that are then used to define 
   the `ColorScheme`. The tonal palettes are generated using existing 
@@ -266,7 +266,7 @@ list of changes and new features.
 * Added custom tone configuration for seeded `ColorScheme`. M3 color design
   has it own fixed defaults for which tone from the relevant `TonalPalette`
   is used as input on each color property in the light and corresponding dark
-  `ColorScheme`. By configuring and passing in a `FlexTone` to `tones` in 
+  `ColorScheme`. By configuring and passing in a `FlexTones` to `tones` in 
   `FlexColorScheme.light` and `FlexColorScheme.dark` it is possible
   to control which color tone from the relevant `TonalPalette` is used for 
   each color property in generated `ColorScheme`.
@@ -277,24 +277,24 @@ list of changes and new features.
 
 * The Material 3 based seeded `ColorScheme` also locks down the chroma level of
   seed color for secondary colors to 16 and to 24 for tertiary colors, and keeps
-  it at min 48 for primary color. The `FlexTone` configuration makes it
+  it at min 48 for primary color. The `FlexTones` configuration makes it
   possible to change these restrictions. You can then get more vivid tonal 
-  palettes also for secondary and tertiary `TonalPalettes`. FlexTone has a 
-  `FlexTone.light` and `FlexTone.dark` constructor that have default values
+  palettes also for secondary and tertiary `TonalPalettes`. FlexTones has a 
+  `FlexTones.light` and `FlexTones.dark` constructor that have default values
   that gives the same result as using the hard coded `ColorScheme.fromSeed`
   tone mapping and chroma limit behavior on `TonalPalette`. These constructors
-  are also convenient to use when making custom `FlexTone` setups. To show 
+  are also convenient to use when making custom `FlexTones` setups. To show 
   how, it comes with four built in examples. They take a `Brightness` value
-  as input, and return `FlexTone` configs with different design goals suitable 
-  for dark or light mode brightness themes. There is `FlexTone.material`, it is 
-  an alternative `Brightness` input based API for `FlexTone.light` and 
- `FlexTone.dark` to get the default Material 3 design guide config. 
+  as input, and return `FlexTones` configs with different design goals suitable 
+  for dark or light mode brightness themes. There is `FlexTones.material`, it is 
+  an alternative `Brightness` input based API for `FlexTones.light` and 
+ `FlexTones.dark` to get the default Material 3 design guide config. 
   In a similar fashion there are 3 alternative  
-  configurations. `FlexTone.soft`, for even softer and more earthy tones than 
+  configurations. `FlexTones.soft`, for even softer and more earthy tones than 
   M3 defaults, that are pretty soft and pastel like to begin with. If you prefer
-  more vivid tones to be generated, try `FlexTone.vivid`. If you like or need
+  more vivid tones to be generated, try `FlexTones.vivid`. If you like or need
   more contrast differences between your colors, you can try 
-  `FlexTone.highContrast`. It is easy to make your own configs with the API.
+  `FlexTones.highContrast`. It is easy to make your own configs with the API.
   The setup of the these built-in examples shows how.
 
 * Added new alpha blend control `blendOnLevel` value for onColors to class
@@ -418,8 +418,8 @@ list of changes and new features.
 * Tests are still incomplete and currently down to about 86% coverage, 
   but at least all existing (1275) ones are passing and behave as expected.
 * Add tests for new `SchemeColor` properties.
-* Add tests for `FlexTone`.
-* Add tests for `FlexKeyColorSetup`.
+* Add tests for `FlexTones`.
+* Add tests for `FlexKeyColors`.
 * Add tests for `FlexCorePalette`.
 * Add test for all new sub-themes in `FlexSubThemes`.
 * Add tests for new `useMaterial3` property.
@@ -451,16 +451,16 @@ list of changes and new features.
   - **DONE:** Added controls for using key color dynamic seeded ColorScheme, using
     the predefined colors primary, secondary and tertiary as seed colors.
   - **DONE:** * To the playground app, added a setup that demonstrates the usage
-    of `FlexTone`. Made some useful setups as preconfigured FlexTone, and the
-    playground uses demo. Now comes with `FlexTone.material` for the default
-    Material 3 design guide config, and `FlexTone.soft`, `FlexTone.vivid` 
-    and `FlexTone.highContrast` as built-in preconfigured options. It is easy
+    of `FlexTones`. Made some useful setups as preconfigured FlexTones, and the
+    playground uses demo. Now comes with `FlexTones.material` for the default
+    Material 3 design guide config, and `FlexTones.soft`, `FlexTones.vivid` 
+    and `FlexTones.highContrast` as built-in preconfigured options. It is easy
     to make your own configs with the API.
   - **DONE:** The ThemesPlayground paints active TonalPalettes and highlights selected
     tones in the palettes when you have on a ColorScheme color. May extend this 
     to make an interactively configurable tonal setup by pickling tones from
     the `TonalPalette` and sliders to adjust chroma. this could later be used to 
-    create a custom `FlexTone` config and get it as part of setup code too. 
+    create a custom `FlexTones` config and get it as part of setup code too. 
   - **DONE:** Playground Cupertino adaptive switches now also follow theme via 
     a custom SwitchListTileAdaptive wrapper. The iOS green switches are an 
     eyesore imo, but the SDK adaptive switch cannot be changed via a theme 
