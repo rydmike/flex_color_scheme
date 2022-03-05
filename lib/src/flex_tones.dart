@@ -210,12 +210,12 @@ class FlexTone with Diagnosticable {
 
   /// Creates a tonal palette extraction setup that results in M3 like
   /// ColorsSchemes with high contrast between color versus its on-color and
-  /// main contra its container color.
+  /// main color, versus its container color.
   ///
   /// Primary, Secondary and tertiary key colors use their own chroma, but
   /// with minimum limit of 65 on primary and 55 on secondary and tertiary.
   ///
-  /// Used tones are also modified from defaults for increased contrast.
+  /// Used tones are also modified from M3 defaults for increased contrast.
   ///
   /// This tonal configuration can be used to turn any M3 theme into one
   /// that may be more accessibility since it offers increased contrast.

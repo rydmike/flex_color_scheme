@@ -9,6 +9,7 @@ import 'shared/widgets/app/responsive_scaffold.dart';
 import 'shared/widgets/app/show_sub_pages.dart';
 import 'shared/widgets/universal/page_body.dart';
 import 'shared/widgets/universal/show_color_scheme_colors.dart';
+import 'shared/widgets/universal/show_theme_data_colors.dart';
 import 'shared/widgets/universal/theme_mode_switch.dart';
 import 'shared/widgets/universal/theme_showcase.dart';
 
@@ -26,13 +27,14 @@ import 'shared/widgets/universal/theme_showcase.dart';
 /// To learn more about how to use [FlexColorScheme] and all its features,
 /// please go through the five tutorial examples in the readme documentation.
 void main() => runApp(const DemoApp());
+//
 // This default example contains a long list of const and final property values
 // that are just passed in to the corresponding properties in
 // FlexThemeData.light() and FlexThemeData.dark() convenience extension on
 // ThemeData to FlexColorScheme.light().toTheme and
 // FlexColorScheme.dark().toTheme.
 //
-// The purpose is to provide any easy to use in-code based playground that
+// The purpose is to provide an easy to use in-code based playground that
 // you can experiment with and use as a quick starter template to start using
 // FlexColorScheme to make beautiful Flutter themes for your applications.
 // It is also a code and comment based quick guide for devs that don't read
@@ -47,10 +49,13 @@ void main() => runApp(const DemoApp());
 // as required. The other tutorials show examples of this as well.
 //
 // To learn more about using FlexColorScheme, it is recommended to go through
-// the step-by-step tutorial that uses examples 1 to 5 to explain and
+// the step-by-step tutorial that uses examples 1 to 5 that explain and
 // demonstrate the features with increasing complexity. Example 5 represents
 // the full bonanza where pretty much everything can be changed dynamically
-// while running the app.
+// while running the app. It doubles as the web online Themes Playground app
+// that can also generate FlexColorScheme setup code for the theme you have
+// configured. Using it and studying the setup code it generates is another
+// quick way to learn about the different APIs and features it provides.
 
 // For our custom color scheme we define primary and secondary colors,
 // but no container or other colors.
@@ -73,6 +78,20 @@ final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   // color, but not a secondaryVariant color, the secondary container will get
   // derived from the secondary color, instead of from the primary color.
   secondary: const Color(0xFFFF7B00),
+  // New in version 5.
+  //
+  // Specifying a brightness value computes missing colors based on given colors
+  // using a strategy that is compatible with Material3 based ColorScheme
+  // introduced in Flutter SDK in version 2.10.0. If you don't specify a
+  // brightness value, you still get all needed colors computed, but the used
+  // strategy for missing colors is more inline with the usage as it was
+  // in Material 2 design. The new M3 colors primary.container and
+  // secondary.container receives the color values that would have been given to
+  // deprecated colors primary.variant and secondary.variant, the color values
+  // are OK for using them as variant colors in an M2 based app, but the values
+  // are not ideal for an M3 design. For better M3 results, prefer giving also
+  // the brightness you are targeting.
+  brightness: Brightness.light,
 );
 
 // These are custom defined matching dark mode colors. Further below we show
@@ -83,16 +102,19 @@ final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
 final FlexSchemeColor _schemeDark = FlexSchemeColor.from(
   primary: const Color(0xFF6B8BC3),
   secondary: const Color(0xffff7155),
+  brightness: Brightness.dark,
 );
 
 // To use a pre-defined color scheme, don't assign any FlexSchemeColor to
-// `colors` instead, just pick a FlexScheme and assign it to the `scheme`.
-// Try eg the new "Blue Whale" color scheme.
-const FlexScheme _scheme = FlexScheme.materialHc;
+// `colors` instead, just pick a FlexScheme enum based value and assign it
+// to the `scheme`. Try eg the new "flutterDash" color scheme, based on colors
+// found in the 4k wallpaper Google shared before the Flutter 2.10.0 release.
+const FlexScheme _scheme = FlexScheme.flutterDash;
 
 // To make it easy to toggle between using the above custom colors, or the
 // selected predefined scheme in this example, set _useScheme to true to use the
-// selected predefined scheme above, set it to false to use the custom colors.
+// selected predefined scheme above, set it to false to use the custom colors
+// defined earlier above.
 const bool _useScheme = true;
 
 // A quick setting for the themed app bar elevation, it defaults to 0.
@@ -101,7 +123,7 @@ const bool _useScheme = true;
 const double _appBarElevation = 0.5;
 
 // There is setting to put an opacity value on the app bar. If used, we can see
-// content scroll behind it, if we extend the Scaffold behind the AppBar.
+// content scroll behind it, if we also extend the Scaffold behind the AppBar.
 const double _appBarOpacity = 0.94;
 
 // If you set _computeDarkTheme below to true, the dark scheme will be computed
@@ -113,7 +135,7 @@ const double _appBarOpacity = 0.94;
 // figuring out usable color values yourself. This is useful during development,
 // when you test custom colors. For production and final colors you probably
 // want to fine tune your custom dark color scheme colors and use const values.
-const bool _computeDarkTheme = true;
+const bool _computeDarkTheme = false;
 
 // When you use _computeDarkTheme, use this desaturation % level to calculate
 // the dark scheme from the light scheme colors. The default is 35%, but values
@@ -129,38 +151,191 @@ const int _toDarkLevel = 30;
 // designed with this usage in mind, but not all look so well when using it.
 const bool _swapColors = false;
 
-// Use a GoogleFonts font as default font for your theme. Not used by default
-// in the demo setup, but you can uncomment _fontFamily further below to use it.
-// ignore: use_late_for_private_fields_and_variables, unused_element
+// The `usedColors` is a convenience property that allows you to vary which
+// colors to use of the primary, secondary and variant colors included in
+// `colors` in `FlexSchemeColor`, or the `FlexSchemeColor` the enum based
+// selection specifies. The integer number corresponds to using:
+//
+// * 1 = Only the primary color
+// * 2 = Primary & Secondary colors
+// * 3 = Primary + container & Secondary colors
+// * 4 = Primary + container & Secondary + container
+// * 5 = Primary + container & Secondary + container & tertiary colors
+// * 6 = Primary + container & Secondary + container & tertiary + container
+//
+// This can be a quick way to try what you theme looks like when using less
+// source colors and just different shades of the same color, that are still
+// correctly tuned for their ColorScheme color values.
+//
+// The values default to 6, so that any color values that are defined are always
+// used as defined and given.
+const int _usedColors = 6;
+
+// New in version 5: Key color seed based theming.
+//
+// If you want to use Material 3 based seed generated color schemes, using
+// the current FlexColorScheme's colors as input to the seed generation. You
+// can do so by passing in just a default `FlexKeyColor()` object to the
+// `keyColors` property in FlexColorScheme.light and .dark factories.
+//
+// FlexKeyColor can be also configured, if its `useKeyColors` is false it is
+// no being used, likewise it is not if the property `keyColors` is null.
+//
+// The default constructor `FlexKeyColor()` has the properties `useKeyColors`,
+// `useSecondary` and `useTertiary` defaulting to true. This means the primary,
+// secondary and tertiary colors from your active FlexColorScheme's colors will
+// all be used as key colors to generate the theme's ColorScheme.
+//
+// The primary color is always using useKeyColors is true, but using secondary
+// and tertiary colors to generate the ColorScheme are optional.
+// They are on by default in the default constructor, to omit them set any
+// of them to false.
+//
+// Flutter SDK `ColorScheme.fromSeed` only accepts a/ single color,
+// the main/primary color as a seed color for the Material 3 ColorScheme
+// it generates from a seed color. If you set both `useSecondary`
+// and `useTertiary` to false, the result is the same as if you would have
+// provided the current primary color value from the active FlexColorScheme
+// to `ColorScheme.fromSeed` to generate the theme used `ColorScheme`.
+// When you also use secondary and tertiary colors as input to generate the
+// ColorScheme, their color values are based on them, instead of being sourced
+// in fixed manner from the single primary color. This makes the generated
+// ColorScheme follow the colors in your specified keys to a larger degree
+// than Flutter SDK `ColorScheme.fromSeed` does.
+//
+// When you use seeded ColorSchemes, the key color used as seed color as primary
+// color, secondary and tertiary usually do not end up in the resulting
+// ColorScheme. This can be problematic when your spec calls for a specific
+// specific e.g. brand color for certain color properties.
+//
+// With FlexColorscheme you can, for e.g. branding or other purposes, decide to
+// keep one or more of the defined color values in your FlexColorScheme at its
+// defined color value, despite otherwise using seeded color values to produce
+// the resulting `ColorScheme`from them. There is a `keep` toggle in
+// `FlexKeyColor` for all the six main colors in a `ColorScheme`, you can
+// set any of them to true, to keep the color in question it has as input
+// in your FlexColorScheme.
+const FlexKeyColor _keyColors = FlexKeyColor(
+  useKeyColors: true, // <-- set to true enable M3 seeded ColorScheme.
+  useSecondary: true,
+  useTertiary: true,
+  keepPrimary: false, // <-- Keep defined value, do not use the seeded result.
+  keepPrimaryContainer: false,
+  keepSecondary: false,
+  keepSecondaryContainer: false,
+  keepTertiary: false,
+  keepTertiaryContainer: false,
+);
+
+// New in version 5: Custom configuration for seed color calculations.
+//
+// Not only does FlexColorScheme enable using more than one seed color, you
+// can also completely customize the tone mapping and CAM16 chroma limits
+// imposed on used seed generation algorithm.
+//
+// When using Material 3 design and key colors, it generates 6 different tonal
+// palettes `TonalPalette` for the colors in a M3 ColorScheme:
+//
+// * Primary tonal palette
+// * Secondary tonal palette
+// * Tertiary tonal palette
+// * Error tonal palette
+// * Neutral tonal palette
+// * Neutral variant tonal palette
+//
+// Each palette contains 13 colors starting from black and ending in white, with
+// different "tones" in-between of the color used for the palette.
+// ColorScheme.from generates all the palettes from a single input color, and
+// a hard coded value for the error palettes. FlexColorScheme allows you to as
+// seen also specify the input colors for secondary and tertiary tonal palette.
+// The neutral palettes are also generated from the input primary color, but
+// with very little chroma of it left it, a bit more in the variant palette.
+// this is a bit like the surface alpha blend that FlexColorScheme has
+// been using since its first version.
+//
+// The algorithm used by ColorScheme.from also lock chroma for secondary and
+// tertiary to a given value, and primary is min 48, after tha it uses
+// chroma from the provided color. When tonal palettes have been created, it
+// uses fixed tones (indexes) from relevant tonal palette and assigns them
+// to given color properties in the ColorScheme. It is also worth noticing
+// to you should use the same key color for both dark and light theme mode.
+// the algorithm uses the same tonal palette for light and dark modes, but
+// different tones from same palette.
+//
+// FlexColorScheme opens up this algorithm and logic and enables you to
+// modify the color seed logic and behavior. The used algorithm is really
+// fascinating, and the M3 usage of it is fine too. But maybe you want to it
+// produce colors that are even more earthy and softer than M3, that is pretty
+// soft already. Maybe your want more vivid tones, more in classic M2 style, or
+// perhaps you need to seed schemes with much higher contrast for accessibility
+// reasons. With FlexColorScheme you can. You do this by making a custom
+// FlexTone data class to configure how the seeding engine maps palette colors
+// the ColorScheme and how it uses chroma values in the key colors.
+//
+// The `FlexTone` has a `FlexTone.light` and `FlexTone.dark` factory, that
+// are used for respective theme mode when using key colors in FlexColorScheme
+// by default.
+//
+// The `FlexTone.light` factory by default provides the same chroma limits and
+// tone mappings as used by:
+// `ColorScheme.fromSeed(seedColor: color, brightness: Brightness.light)`
+//
+// Likewise the `FlexTone.dark` corresponds to same chroma limits and tone
+// mappings as used by:
+// `ColorScheme.fromSeed(seedColor: color, brightness: Brightness.dark)`.
+//
+// However, with the factories you can customize which tone each ColorScheme
+// color properties uses as its color from its corresponding tonal palette.
+// You can also change if primary, secondary and tertiary colors use the
+// chroma in their key color value, if it should have a at least a given
+// minimum chroma value, and after that use the key color's chroma value,
+// or if it should be locked to a given chroma value.
+//
+// There is also a static that returns a default FlexTone.light or FlexTone.dark
+// when you pass it a brightness, called FlexTone.material, to indicate that it
+// is using the default Material 3 specification.
+//
+// There are few more pre-made static configurations:
+//
+// * FlexTone.soft
+// * FlexTone.vivid
+// * FlexTone.highContrast
+//
+// You can swap in them in below to try slightly different styles on generated
+// seeded ColorScheme. The `FlexTone.vivid` for example, keeps the chroma as is
+// in key colors for secondary and tertiary, and will thus produce a seeded
+// ColorScheme that is closer to the provided key/seed colors, than the Flutter
+// SDK M3 spec version does.
+final FlexTone _flexTonesLight = FlexTone.material(Brightness.light);
+final FlexTone _flexTonesDark = FlexTone.material(Brightness.dark);
+
+// Use a GoogleFonts font as default font for your theme.
 final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 
 // Define a custom text theme for the app. Here we have decided that
-// Headline1..3 are too big to be useful for us, so we make them a bit smaller
-// and that overline is a bit too small and have weird letter spacing.
+// display fonts are too big to be useful for us, so we make them a bit smaller
+// and that labelSmall is a bit too small and has weird letter spacing, so we
+// make it bigger and change its letter spacing.
 const TextTheme _textTheme = TextTheme(
-  headline1: TextStyle(fontSize: 57),
-  headline2: TextStyle(fontSize: 45),
-  headline3: TextStyle(fontSize: 36),
-  overline: TextStyle(fontSize: 11, letterSpacing: 0.5),
+  displayLarge: TextStyle(fontSize: 53),
+  displayMedium: TextStyle(fontSize: 41),
+  displaySmall: TextStyle(fontSize: 36),
+  labelSmall: TextStyle(fontSize: 11, letterSpacing: 0.5),
 );
 
-// FlexColorScheme before version 4 used the `surfaceStyle` property to
-// define the surface color blend mode. If you are migrating from an earlier
-// version, no worries it still works as before, but we won't be using it in
-// this example anymore.
-// When you define a value for the new `surfaceMode` property used below,
-// it will also override any defined `surfaceStyle`.
-// It is recommended to use this method to make alpha blended surfaces
-// starting with version 4.
-// The mode `scaffoldSurfaceBackground` is similar to all the previous
-// `surfaceStyle` settings, but its blend level is set separately in finer and
-// more increments via `blendLevel`. Additionally there are several new surface
-// blend mode strategies in version 4, instead of just one.
+// FlexColorScheme before version 4 used a `surfaceStyle` property to
+// define the surface color blend mode. Version 4, deprecated `surfaceStyle`
+// and introduced `surfaceMode` and `blendLevel`. In version 5 the old
+// `surfaceStyle` has been removed, thus in version 5 you have to change to
+// using `surfaceMode` and `blendLevel` if you have not done so already.
+//
+// The `surfaceMode` takes `FlexSurfaceMode` that is used to select the used
+// strategy for blending primary color into different surface colors.
 const FlexSurfaceMode _surfaceMode = FlexSurfaceMode.highBackgroundLowScaffold;
 
 // The alpha blend level strength can be defined separately from the
 // SurfaceMode strategy, and has 40 alpha blend level strengths.
-const int _blendLevel = 15;
+const int _blendLevel = 20;
 
 // The `useSubThemes` sets weather you want to opt-in or not on additional
 // opinionated sub-theming. By default FlexColorScheme as before does very
@@ -168,14 +343,15 @@ const int _blendLevel = 15;
 // in detail in the readme. By using the sub-theme opt-in, it now also offers
 // easy to use additional out-of the box opinionated styling of SDK UI Widgets.
 // One key feature is the rounded corners on Widgets that support it.
-const bool _useSubThemes = false;
+const bool _useSubThemes = true;
 
 // The opt-in opinionated sub-theming offers easy to use consistent corner
 // radius rounding setting on all sub-themes and a ToggleButtons design that
 // matches the normal buttons style and size.
-// It comes with Material You like rounded defaults, but you can adjust
+// It comes with Material 3 like rounded defaults, but you can adjust
 // its configuration via simple parameters in a passed in configuration class
 // called FlexSubThemesData.
+//
 // Here are some some configuration examples:
 const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // Opt in for themed hover, focus, highlight and splash effects.
@@ -371,19 +547,35 @@ class _DemoAppState extends State<DemoApp> {
         colors: _useScheme ? null : _schemeLight,
         scheme: _scheme,
         swapColors: _swapColors, // If true, swap primary and secondaries.
+        usedColors: _usedColors,
+
         // For an optional white look set lightIsWhite to true.
         // This is the counterpart to darkIsTrueBlack mode in dark theme mode,
         // which is much more useful than this feature.
         lightIsWhite: false,
 
+        // If you want to use an existing fully specified `ColorScheme` that
+        // your designer or you yourself made, you can do so too. This is
+        // useful e.g. if you want the use FlexColorScheme for its component
+        // sub-theming with an existing `ColorScheme`. To use a`ColorScheme`
+        // object as color sources for your `FlexColorscheme` just pass it to
+        // the `colorScheme` property. The `surfaceMode` and `blendLevel` will
+        // still adjust surface and background colors on surfaces in passed
+        // `ColorScheme` if they are used. This can be demonstrated here with
+        // the default Flutter M2 based light ColorScheme set, if uncommented
+        // below.
+
+        // colorScheme: const ColorScheme.light(),
+
         // If you provide a color value to a direct color property, the color
         // value will override anything specified via the other properties.
-        // The priority from lowest to highest order is:
-        // 1. scheme 2. colors 3. Individual color values. Normally you would
-        // make a custom scheme using the colors property, but if you want to
-        // override just one or two colors in a pre-existing scheme, this can
-        // be handy way to do it. Uncomment a color property below on
-        // the light theme to try it:
+        // The order from lowest to highest color property priority, to
+        // determine effective colors are:
+        // 1. scheme 2. colors 3. colorScheme 4. individual color values.
+        // Normally you would make a custom scheme using the colors property,
+        // but if you want to override just one or two colors in a pre-existing
+        // scheme, this can be handy way to do it.
+        // Uncomment a color property below on the light theme to try it:
 
         // primary: FlexColor.indigo.light.primary,
         // primaryContainer: FlexColor.greenLightPrimaryContainer,
@@ -413,16 +605,18 @@ class _DemoAppState extends State<DemoApp> {
         surfaceMode: _surfaceMode,
         blendLevel: _blendLevel,
         tooltipsMatchBackground: _tooltipsMatchBackground,
-        // You can try another font too, not set by default in the demo.
+        // You can try another font too.
         // Prefer using fully defined TextThemes when using fonts, rather than
         // just setting the fontFamily name, even with GoogleFonts. For
-        // quick tests this is fine too, but if the same font style is good
-        // as it is, for all the styles in the TextTheme just the fontFamily
+        // quick tests this is fine if the same font style is good
+        // as is for all the styles in the TextTheme, then just the fontFamily
         // works well too.
-        // fontFamily: _fontFamily,
+        fontFamily: _fontFamily,
         textTheme: _textTheme,
         primaryTextTheme: _textTheme,
         useSubThemes: _useSubThemes,
+        keyColors: _keyColors,
+        tones: _flexTonesLight,
         subThemesData: _subThemesData,
         visualDensity: _visualDensity,
         platform: _platform,
@@ -456,16 +650,20 @@ class _DemoAppState extends State<DemoApp> {
                 ? null
                 // If we compute a scheme from our custom data, then use the
                 // toDark() method on our custom light FlexSchemeColor data.
+                // New in version 5:
+                // For better dark mapping of the light color
+                // based values, set parameter swapColor to true in toDark.
                 : _computeDarkTheme
-                    ? _schemeLight.toDark(_toDarkLevel)
+                    ? _schemeLight.toDark(_toDarkLevel, true)
                     // And finally, use the defined custom dark colors.
                     : _schemeDark,
         // To use a built-in scheme based on enum, don't assign colors above.
         scheme: _scheme,
         swapColors: _swapColors,
+        usedColors: _usedColors,
         // For an optional ink black dark mode, set darkIsTrueBlack to true.
         darkIsTrueBlack: false,
-
+        //
         // The SDK default style of the AppBar in dark mode uses a fixed dark
         // background color, defined via colorScheme.surface color. The
         // appBarStyle FlexAppBarStyle.material results in the same color value.
@@ -483,10 +681,12 @@ class _DemoAppState extends State<DemoApp> {
         surfaceMode: _surfaceMode,
         blendLevel: _blendLevel,
         tooltipsMatchBackground: _tooltipsMatchBackground,
-        // fontFamily: _fontFamily,
+        fontFamily: _fontFamily,
         textTheme: _textTheme,
         primaryTextTheme: _textTheme,
         useSubThemes: _useSubThemes,
+        keyColors: _keyColors,
+        tones: _flexTonesDark,
         subThemesData: _subThemesData,
         visualDensity: _visualDensity,
         platform: _platform,
@@ -636,8 +836,9 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const SizedBox(height: 8),
-              // Active theme color indicators.
               const ShowColorSchemeColors(),
+              const SizedBox(height: 8),
+              const ShowThemeDataColors(),
               const SizedBox(height: 8),
               const ShowSubPages(),
               const Divider(),
