@@ -131,7 +131,7 @@ class NavigationRailSettings extends StatelessWidget {
             useIndicator: controller.useIndicator,
             onChangedUseIndicator: controller.setUseIndicator,
             child: Column(
-              children: [
+              children: <Widget>[
                 ColorSchemePopupMenu(
                   title: const Text('Item color'),
                   subtitle:
