@@ -6,10 +6,42 @@
 [<img src="https://rydmike.com/assets_fcsv4/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites) 
 
 > ### Version 5.0.0-dev.1 Release Notice
-> * This is a minor breaking release with many new Material 3 ColorScheme features. 
-> * The documentation below for version 5.0.0 has not yet been added to this dev release.  
-> * See the change log for all change information.  
-> * Generated API docs are available, they include all changes.
+> 
+> Version 5 is a big refactor with deprecation of previous `variant` based
+> color names in favor of `container` ones that were added to updated M3
+> based `Colorcheme` in Flutter 2.10.0. The same additions and changes are now
+> also introduced in FlexColorScheme. Despite being a very big release, with
+> many new features, actual breaking changes are very few and mostly concerns
+> in version 4 deprecated members and of course requiring minimum Flutter
+> 2.10.0 to work.
+> 
+> ### Summary 
+>* This is a minor breaking release with many major new Material 3 ColorScheme features. 
+>* The documentation below has not yet been updated to version 5.  
+>* See change log for all change information.  
+>* Generated API docs are available and up to date with version 5.
+>* The samples have also been updated, the live web builds of them are avaialable here:
+>  * Example 1 [Basic Theme](https://rydmike.com/flexcolorscheme/basictheme-v5)
+>  * Example 2 [Custom Theme](https://rydmike.com/flexcolorscheme/customtheme-v5)
+>  * Example 3 [Four Themes](https://rydmike.com/flexcolorscheme/fourthemes-v5)
+>  * Example 4 [All Themes](https://rydmike.com/flexcolorscheme/allthemes-v5)
+>  * Example 5 [Themes Playground](https://rydmike.com/flexcolorscheme/themesplayground-v5)  
+>    The new version 5 of the **Themes Playground** demonstrates all the new features, 
+>    including using Material 3 key color based seeded ColorSchemes.  
+>  * The default bundled example **Hot Reload Playground** has also been updated.
+>    Its comments contain a lot of documentation that will end up in the docs later.  
+>  * The sample with the **Copy Playground Theme** template that can be used to test themes 
+>    using copy-pasted theme setup code from the Themes Playground is also up-to-date.
+>
+> **Q:** Will there be significant changes from 5.0.0-dev.1 to 5.0.0?  
+> **A:** Most likely none, other than potential fixes.
+> 
+> **Q:** What remains to be done before stable 5.0.0 release?  
+> **A:** Documentation, either in this readme or as own docs site. Plus adding many still missing tests.
+> 
+> **Q:** When will stable 5.0.0 be released?  
+> **A:** When tasks in previous answer are done :)
+----
 
 Use **FlexColorScheme** to make beautiful color scheme based Flutter themes, 
 with optional primary color surface blends. The themes are based on the same 

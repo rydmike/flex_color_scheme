@@ -4,7 +4,15 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 ## v5.0.0-dev.1 - March 5, 2022 - WORK IN PROGRESS
 
-The commit contains the version of the key color seeded M3 `ColorScheme`
+Version 5 is a big refactor with deprecation of previous `variant` based
+color names in favor of `container` ones that were added to updated M3
+based `Colorcheme` in Flutter 2.10.0. The same additions and changes are now 
+also introduced in FlexColorScheme. Despite being a very big release, with
+many new features, actual breaking changes are very few and mostly concerns
+in version 4 deprecated members and of course requiring minimum Flutter
+2.10.0 to work.
+
+The WIP updates now includes the version of the key color seeded M3 `ColorScheme`
 usage intended for the final design. The feature supports seeding by not only
 using a single `primary` key color, but also using separate key colors for
 `secondary` and `tertiary` colors. The Flutter SDK `ColorScheme.fromSeed` only
@@ -32,20 +40,15 @@ There are also now in Flutter master channel more actual
 M3 impacts and ThemeData color property deprecations commits landed in Flutter 
 master channel that I reviewed and prepared for in advance when possible.
 
-Version 5 release is big refactor with deprecation of previous `variant` based 
-color names in favor of `container` ones that were added to updated M3
-based `Colorcheme` in Flutter 2.10.0. The same additions and changes is also
-introduced in FlexColorScheme after version 4.2.0. 
-
 Much work on tests, and readme documentation updates remain, but API docs are 
-up-to-date. And this book long change log should help. THere are hardly any 
+up-to-date. And this book long change log should help. There are hardly any 
 breaking changes, so migration should be relatively easy, despite the long
 list of changes and new features.
 
 **BREAKING**  
 * Requires at least Flutter stable 2.10.0.This release uses new M3 `ColorScheme` 
-  properties that are not included 
-  before Flutter version 2.10.0, as well as the `ThemeData` flag `useMaterial3`.
+  properties that are not included before Flutter version 2.10.0, as well 
+  as the `ThemeData` flag `useMaterial3`.
 
 * Removed parameter `surfaceStyle` from `FlexThemeData`
   extensions `FlexThemeData.light` and `FlexThemeData.dark` that uses
