@@ -175,13 +175,13 @@ const int _usedColors = 6;
 //
 // If you want to use Material 3 based seed generated color schemes, using
 // the current FlexColorScheme's colors as input to the seed generation. You
-// can do so by passing in just a default `FlexKeyColor()` object to the
+// can do so by passing in just a default `FlexKeyColors()` object to the
 // `keyColors` property in FlexColorScheme.light and .dark factories.
 //
-// FlexKeyColor can be also configured, if its `useKeyColors` is false it is
+// FlexKeyColors can be also configured, if its `useKeyColors` is false it is
 // no being used, likewise it is not if the property `keyColors` is null.
 //
-// The default constructor `FlexKeyColor()` has the properties `useKeyColors`,
+// The default constructor `FlexKeyColors()` has the properties `useKeyColors`,
 // `useSecondary` and `useTertiary` defaulting to true. This means the primary,
 // secondary and tertiary colors from your active FlexColorScheme's colors will
 // all be used as key colors to generate the theme's ColorScheme.
@@ -212,10 +212,10 @@ const int _usedColors = 6;
 // keep one or more of the defined color values in your FlexColorScheme at its
 // defined color value, despite otherwise using seeded color values to produce
 // the resulting `ColorScheme`from them. There is a `keep` toggle in
-// `FlexKeyColor` for all the six main colors in a `ColorScheme`, you can
+// `FlexKeyColors` for all the six main colors in a `ColorScheme`, you can
 // set any of them to true, to keep the color in question it has as input
 // in your FlexColorScheme.
-const FlexKeyColor _keyColors = FlexKeyColor(
+const FlexKeyColors _keyColors = FlexKeyColors(
   useKeyColors: true, // <-- set to true enable M3 seeded ColorScheme.
   useSecondary: true,
   useTertiary: true,
