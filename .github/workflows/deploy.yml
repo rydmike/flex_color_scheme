@@ -68,14 +68,14 @@ jobs:
       - name: "EXAMPLE-1 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-1 WEB release build"
-        run: cd example && flutter build web --base-href "/flexcolorscheme/basic-v5/" --release -t lib/example1/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/basictheme-v5/" --release -t lib/example1/main.dart
       - name: "EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/basic-v5'
+          destination_folder: 'flexcolorscheme/basictheme-v5'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
