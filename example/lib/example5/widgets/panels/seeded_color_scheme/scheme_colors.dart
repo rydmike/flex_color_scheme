@@ -1,15 +1,15 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/const/app_color.dart';
-import '../../shared/controllers/theme_controller.dart';
-import 'color_name_value.dart';
-import 'color_picker_inkwell.dart';
+import '../../../../shared/const/app_color.dart';
+import '../../../../shared/controllers/theme_controller.dart';
+import '../../shared/color_name_value.dart';
+import '../../shared/color_picker_inkwell.dart';
 
 // Display the all scheme colors in currently selected color scheme, including
 // their name and color code.
 //
-// Allow user to edit the colors, if we are we are viewing the last color
+// Allows user to edit the colors, if we are we are viewing the last color
 // scheme, which is the custom color scheme.
 class SchemeColors extends StatelessWidget {
   const SchemeColors({

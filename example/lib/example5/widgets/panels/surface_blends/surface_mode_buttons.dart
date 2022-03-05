@@ -1,7 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-// Widget used to change the used surface mode in example 5.
+// ToggleButtons used to change the used surface mode when blending in
+// primary color into surfaces.
 class SurfaceModeButtons extends StatelessWidget {
   const SurfaceModeButtons({
     Key? key,

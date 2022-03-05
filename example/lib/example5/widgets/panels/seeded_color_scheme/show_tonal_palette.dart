@@ -1,8 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/const/app_color.dart';
-import '../../shared/controllers/theme_controller.dart';
+import '../../../../shared/const/app_color.dart';
+import '../../../../shared/controllers/theme_controller.dart';
 import 'tonal_palette_colors.dart';
 
 class ShowTonalPalette extends StatelessWidget {

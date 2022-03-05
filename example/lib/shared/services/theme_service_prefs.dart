@@ -2206,4 +2206,27 @@ class ThemeServicePrefs implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  /// Loads used useIndicator setting in example 5.
+  @override
+  Future<bool> useIndicator() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseIndicator) ??
+          ThemeService.defaultUseIndicator;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseIndicator;
+    }
+  }
+
+  /// Persists useIndicator setting in example 5.
+  @override
+  Future<void> saveUseIndicator(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseIndicator, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

@@ -103,33 +103,42 @@ class HeaderCard extends StatelessWidget {
     // Scaling for the blend value, used to tune the look a bit.
     final int blendFactor = isDark ? 3 : 2;
 
-    // start with no extra blend on card, assume it is bit different from
-    // scaffold background where this Card is designed to be placed.
-    Color cardColor = theme.cardColor;
+    // Use passed in color for the Card, or default themed Card theme color.
+    final Color cardColor = color ?? theme.cardColor;
     // Compute a header color with fixed primary blend, make a stronger tint
     // of current blended on card color using same primary as card has, if any.
-    Color headerColor =
-        Color.alphaBlend(scheme.primary.withAlpha(5 * blendFactor), cardColor);
-    // If card or its header color, is equal to scaffold background, we will
-    // adjust both and make them more primary tinted. This happens e.g. when we
-    // use not blend level, or with the all level blend mode. In this
-    // design we want the Card on the scaffold to always have a slightly
-    // different background color from scaffold background where it is placed,
-    // not necessarily a lot, but always a bit at least.
+    final Color headerColor = Color.alphaBlend(
+        scheme.primary.withAlpha(5 * blendFactor), theme.cardColor);
+
+    // Get the card's ShapeBorder from the theme card shape
+    ShapeBorder? shapeBorder = theme.cardTheme.shape;
+    // Make a shape border if card or its header color is equal to scaffold
+    // background color, because if we have a theme where that happens
+    // we want to separate the header card from the background with a border.
     if (cardColor == theme.scaffoldBackgroundColor ||
         headerColor == theme.scaffoldBackgroundColor) {
-      cardColor = Color.alphaBlend(
-          scheme.primary.withAlpha(4 * blendFactor), cardColor);
-      headerColor = Color.alphaBlend(
-          scheme.primary.withAlpha(4 * blendFactor), headerColor);
-    }
-    // If it was header color that was equal, the adjustment on card, may
-    // have caused card body to become equal to scaffold background, let's
-    // check for it and adjust only it once again if it happened. Very unlikely
-    // that this happens, but it is possible.
-    if (cardColor == theme.scaffoldBackgroundColor) {
-      cardColor = Color.alphaBlend(
-          scheme.primary.withAlpha(2 * blendFactor), cardColor);
+      // If we had one shape, copy in a border side to it.
+      if (shapeBorder is RoundedRectangleBorder) {
+        shapeBorder = shapeBorder.copyWith(
+          side: BorderSide(
+            color: theme.dividerColor,
+            width: 1,
+          ),
+        );
+        // If
+      } else {
+        // If border was null, make one matching Card default, but with a
+        // BorderSide, if it was not null, we leave it as it was, it means it
+        // has some other preexisting ShapeBorder, but it was not a
+        // RoundedRectangleBorder, we don't know what it was, just let it be.
+        shapeBorder ??= RoundedRectangleBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(4)),
+          side: BorderSide(
+            color: theme.dividerColor,
+            width: 1,
+          ),
+        );
+      }
     }
 
     // Force title widget for Card header to use opinionated bold style,
@@ -146,15 +155,10 @@ class HeaderCard extends StatelessWidget {
       );
     }
 
-    // If in rare occasions, we had passed a background card color, we just
-    // use that as color. This is intended to be an exception when we need
-    // to present something in the card that must be on a certain color.
-    // Like primary text theme, its text must be on primary color.
-    if (color != null) cardColor = color!;
-
     return Card(
       margin: margin,
       color: cardColor,
+      shape: shapeBorder,
       child: Column(
         children: <Widget>[
           Theme(

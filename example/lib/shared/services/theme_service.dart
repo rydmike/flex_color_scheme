@@ -418,7 +418,7 @@ abstract class ThemeService {
   static const String keyNavBarMuteUnselected = 'navBarMuteUnselected';
 
   /// Default value for the navBarMuteUnselected, also used to reset settings.
-  static const bool defaultNavBarMuteUnselected = true;
+  static const bool defaultNavBarMuteUnselected = false;
 
   /// Loads used navBarMuteUnselected setting in example 5.
   Future<bool> navBarMuteUnselected();
@@ -1140,4 +1140,18 @@ abstract class ThemeService {
 
   /// Persists the used surface usedFlexToneSetup level setting in example 5.
   Future<void> saveUsedFlexToneSetup(int value);
+
+  // ---------
+
+  /// Key used to read and save the useIndicator value.
+  static const String keyUseIndicator = 'useIndicator';
+
+  /// Default value for the useIndicator, also to reset settings.
+  static const bool defaultUseIndicator = false;
+
+  /// Loads used useIndicator setting in example 5.
+  Future<bool> useIndicator();
+
+  /// Persists useIndicator setting in example 5.
+  Future<void> saveUseIndicator(bool value);
 }

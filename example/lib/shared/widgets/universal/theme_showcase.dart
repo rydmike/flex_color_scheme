@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'navigation_rail_label_type_buttons.dart';
 import 'switch_list_tile_adaptive.dart';
 
 /// Theme showcase for the current theme.
@@ -864,11 +865,23 @@ class NavigationRailShowcase extends StatefulWidget {
   const NavigationRailShowcase({
     Key? key,
     this.child,
+    this.height = 420,
+    this.useIndicator,
+    this.onChangedUseIndicator,
+    this.railType,
+    this.onChangedRailType,
   }) : super(key: key);
 
-  /// A child widget that we can use to place controls to the right
+  /// A child widget that we can use to place controls on the
   /// side of the NavigationRail in the show case widget.
   final Widget? child;
+
+  /// Height
+  final double height;
+  final bool? useIndicator;
+  final ValueChanged<bool>? onChangedUseIndicator;
+  final NavigationRailLabelType? railType;
+  final ValueChanged<NavigationRailLabelType>? onChangedRailType;
 
   @override
   State<NavigationRailShowcase> createState() => _NavigationRailShowcaseState();
@@ -877,126 +890,180 @@ class NavigationRailShowcase extends StatefulWidget {
 class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
   int buttonIndex = 0;
   bool isExtended = false;
-  bool useIndicator = false;
-  bool allLabels = true;
-  NavigationRailLabelType railType = NavigationRailLabelType.all;
+  bool useIndicator = true;
+  NavigationRailLabelType labelType = NavigationRailLabelType.all;
+  NavigationRailLabelType effectiveLabelType = NavigationRailLabelType.all;
+
+  String explainLabelStyle(final NavigationRailLabelType style) {
+    switch (style) {
+      case NavigationRailLabelType.none:
+        return 'Items have no labels';
+      case NavigationRailLabelType.selected:
+        return 'Only selected item has a label';
+      case NavigationRailLabelType.all:
+        return 'All items have labels';
+    }
+  }
+
+  void afterBuild(BuildContext context) {
+    if (!isExtended && effectiveLabelType != labelType) {
+      setState(() {
+        effectiveLabelType = labelType;
+      });
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant NavigationRailShowcase oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.useIndicator != oldWidget.useIndicator) {
+      useIndicator = widget.useIndicator ?? useIndicator;
+    }
+    if (widget.railType != oldWidget.railType) {
+      labelType = widget.railType ?? labelType;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            child: Text(
-              'NavigationRail',
-              style: Theme.of(context)
-                  .textTheme
-                  .caption!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
+    // TODO(rydmike): Study the NavigationRail issue found and maybe report it.
+    // The reason for this hack with a addPostFrameCallback is af follows:
+    //
+    // 1. If you in extended state use a `labelType` that is not none or null
+    //    it throws an assertion error.
+    // 2. If you in a conditional expr. assign `NavigationRailLabelType.none`
+    //    in extended state and the actual `labelType` in not extended state to
+    //    `labelType`, it works BUT there is no animation when it closes
+    //    when you toggle to not extended state. We want the animation too!
+    // 3. If you instead use `null` in the expression for the extended state,
+    //    it blows up badly, even though null should be supported based on docs.
+    // 4. Open/close animation works correctly when both extended and not
+    //    extended states uses `NavigationRailLabelType.none`.
+    // 5. The workaround:
+    //    Have a `labelType` state that can be freely toggled. Also have an
+    //    `effectiveLabelType` that is used as input state to `labelType`.
+    //    The `effectiveLabelType` is only toggled directly when we are in
+    //    not extended state.
+    //    When `extended` state is toggled, we always also set
+    //    `effectiveLabelType` to `NavigationRailLabelType.none`. To ensure
+    //    we only so extended transition with the `NavigationRailLabelType.none`
+    //    that works. Finally we add this addPostFrameCallback that we do after
+    //    every build, in it, if we are in note extended state and if the
+    //    `effectiveLabelType` and `labelType` are unequal, we use setState
+    //    to set the `effectiveLabelType` to `labelType` so we get the set and
+    //    desired `labelType` on the Rail after it hs collapsed from extended
+    //    mode. What a load of crap to have to do all this to get it work as
+    //    it should in the first place.
+    WidgetsBinding.instance?.addPostFrameCallback((_) => afterBuild(context));
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          child: Text(
+            'NavigationRail',
+            style: Theme.of(context)
+                .textTheme
+                .caption!
+                .copyWith(fontWeight: FontWeight.bold),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Default SDK background color is theme.colorScheme.surface. '
-              'FlexColorScheme sub-theme default is colorScheme.background.',
-              style: Theme.of(context).textTheme.caption,
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Text(
+            'Default SDK background color is theme.colorScheme.surface. '
+            'FlexColorScheme sub-theme default is colorScheme.background.',
+            style: Theme.of(context).textTheme.caption,
           ),
-          const Divider(height: 1),
-          SizedBox(
-            height: 420,
-            child: Row(
-              children: <Widget>[
-                const VerticalDivider(width: 1),
-                NavigationRail(
-                  extended: isExtended,
-                  useIndicator: useIndicator ? true : null,
-                  minExtendedWidth: 150,
-                  labelType:
-                      isExtended ? NavigationRailLabelType.none : railType,
-                  selectedIndex: buttonIndex,
-                  onDestinationSelected: (int value) {
-                    setState(() {
-                      buttonIndex = value;
-                    });
-                  },
-                  destinations: const <NavigationRailDestination>[
-                    NavigationRailDestination(
-                      icon: Icon(Icons.chat_bubble),
-                      label: Text('Chat'),
+        ),
+        const Divider(height: 1),
+        SizedBox(
+          height: widget.height,
+          child: Row(
+            children: <Widget>[
+              NavigationRail(
+                extended: isExtended,
+                useIndicator: useIndicator ? true : null,
+                minExtendedWidth: 150,
+                labelType: effectiveLabelType,
+                selectedIndex: buttonIndex,
+                onDestinationSelected: (int value) {
+                  setState(() {
+                    buttonIndex = value;
+                  });
+                },
+                destinations: const <NavigationRailDestination>[
+                  NavigationRailDestination(
+                    icon: Icon(Icons.chat_bubble),
+                    label: Text('Chat'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.beenhere),
+                    label: Text('Tasks'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.create_new_folder),
+                    label: Text('Folder'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.logout),
+                    label: Text('Logout'),
+                  ),
+                ],
+              ),
+              const VerticalDivider(width: 1),
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    SwitchListTileAdaptive(
+                      title: const Text('Expand and collapse'),
+                      subtitle: const Text('ON to expand  OFF to collapse\n'
+                          'Only used for local control of rail presentation.'),
+                      value: isExtended,
+                      onChanged: (bool value) {
+                        setState(() {
+                          isExtended = value;
+                          effectiveLabelType = NavigationRailLabelType.none;
+                        });
+                      },
                     ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.beenhere),
-                      label: Text('Tasks'),
+                    ListTile(
+                      title: const Text('Labels when rail is collapsed'),
+                      subtitle: Text(explainLabelStyle(labelType)),
+                      trailing: NavigationRailLabelTypeButtons(
+                        style: labelType,
+                        onChanged: (NavigationRailLabelType value) {
+                          setState(() {
+                            labelType = value;
+                            if (!isExtended) effectiveLabelType = labelType;
+                          });
+                          widget.onChangedRailType?.call(value);
+                        },
+                      ),
                     ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.create_new_folder),
-                      label: Text('Folder'),
+                    SwitchListTileAdaptive(
+                      title: const Text('Selection indicator'),
+                      subtitle: const Text('Also ON when '
+                          'useMaterial3 is true, only thing the toggle does '
+                          'in Flutter 2.10. Turning this '
+                          'OFF, inputs "null" to widget to show this.'),
+                      value: useIndicator,
+                      onChanged: (bool value) {
+                        setState(() {
+                          useIndicator = value;
+                          widget.onChangedUseIndicator?.call(value);
+                        });
+                      },
                     ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.logout),
-                      label: Text('Logout'),
-                    ),
+                    widget.child ?? const SizedBox.shrink(),
                   ],
                 ),
-                const VerticalDivider(width: 1),
-                Expanded(
-                  child: Column(
-                    children: <Widget>[
-                      const ListTile(
-                        title: Text('Showcase controls'),
-                        subtitle: Text('Local controls to rail presentation, '
-                            'not a part of the theming setup.'),
-                      ),
-                      SwitchListTileAdaptive(
-                        title: const Text('Expand and collapse'),
-                        subtitle: const Text('ON to expand  OFF to collapse'),
-                        value: isExtended,
-                        onChanged: (bool value) {
-                          setState(() {
-                            isExtended = value;
-                          });
-                        },
-                      ),
-                      SwitchListTileAdaptive(
-                        title: const Text('Labels when collapsed'),
-                        subtitle: const Text('ON all  OFF only selected'),
-                        value: allLabels,
-                        onChanged: (bool value) {
-                          setState(() {
-                            allLabels = value;
-                            railType = allLabels
-                                ? NavigationRailLabelType.all
-                                : NavigationRailLabelType.selected;
-                          });
-                        },
-                      ),
-                      SwitchListTileAdaptive(
-                        title: const Text('Selection indicator'),
-                        subtitle: const Text('Also ON when '
-                            'useMaterial3 is true, only thing the toggle does '
-                            'in Flutter 2.10. Turning this '
-                            'OFF, inputs "null" to widget to show this.'),
-                        value: useIndicator,
-                        onChanged: (bool value) {
-                          setState(() {
-                            useIndicator = value;
-                          });
-                        },
-                      ),
-                      widget.child ?? const SizedBox.shrink(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const Divider(height: 1),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

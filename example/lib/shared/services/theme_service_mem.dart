@@ -788,4 +788,12 @@ class ThemeServiceMem implements ThemeService {
   /// Persists the usedFlexToneSetup setting in example 5.
   @override
   Future<void> saveUsedFlexToneSetup(int value) async {}
+
+  /// Loads used useIndicator setting in example 5.
+  @override
+  Future<bool> useIndicator() async => ThemeService.defaultUseIndicator;
+
+  /// Persists useIndicator setting in example 5.
+  @override
+  Future<void> saveUseIndicator(bool value) async {}
 }

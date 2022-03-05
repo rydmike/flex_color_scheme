@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/controllers/theme_controller.dart';
+import '../../../../shared/controllers/theme_controller.dart';
 
 // Widget used to change usage of flex tones configuration for
 // color scheme generation in example 5.

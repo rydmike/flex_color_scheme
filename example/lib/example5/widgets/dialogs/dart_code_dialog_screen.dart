@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../shared/widgets/universal/syntax_highlighter.dart';
+import '../../../shared/widgets/universal/syntax_highlighter.dart';
 
 /// Show the code for the Theme in a Dialog screen.
 class DartCodeDialogScreen extends StatelessWidget {

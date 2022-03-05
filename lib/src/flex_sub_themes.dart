@@ -1977,8 +1977,8 @@ class FlexSubThemes {
     /// this property to true has no effect since it has no color value to
     /// operate on.
     ///
-    /// Defaults to false.
-    final bool mutedUnselectedText = false,
+    /// If null, defaults to false.
+    final bool? mutedUnselectedText,
 
     /// The size of the text label on selected item.
     ///
@@ -2008,8 +2008,8 @@ class FlexSubThemes {
     /// then setting this property to true has no effect since it has no color
     /// value to operate on.
     ///
-    /// Defaults to false.
-    final bool mutedUnselectedIcon = false,
+    /// If null, defaults to false.
+    final bool? mutedUnselectedIcon,
 
     /// Select which color from the passed in [ColorScheme] to use as base for
     /// the selected navigation bar's highlighted item highlight color.
@@ -2136,7 +2136,7 @@ class FlexSubThemes {
                 }
                 return usedTextStyle.copyWith(
                   fontSize: usedUnselectedLabelSize,
-                  color: mutedUnselectedText
+                  color: (mutedUnselectedText ?? false)
                       ? textColor
                           .blendAlpha(textColor, unselectedAlphaBlend)
                           .withAlpha(unselectedAlpha)
@@ -2156,7 +2156,7 @@ class FlexSubThemes {
                 }
                 return IconThemeData(
                   size: unselectedIconSize ?? 24,
-                  color: mutedUnselectedIcon
+                  color: (mutedUnselectedIcon ?? false)
                       ? usedIconColor
                           .blendAlpha(usedIconColor, unselectedAlphaBlend)
                           .withAlpha(unselectedAlpha)
@@ -2231,8 +2231,8 @@ class FlexSubThemes {
     /// this property to true has no effect since it has no color value to
     /// operate on.
     ///
-    /// Defaults to false.
-    final bool mutedUnselectedText = false,
+    /// If null, defaults to false.
+    final bool? mutedUnselectedText,
 
     /// The size of the text label on selected item.
     ///
@@ -2262,17 +2262,18 @@ class FlexSubThemes {
     /// then setting this property to true has no effect since it has no color
     /// value to operate on.
     ///
-    /// Defaults to false.
-    final bool mutedUnselectedIcon = false,
+    /// If null, defaults to false.
+    final bool? mutedUnselectedIcon,
 
+    // TODO(rydmike): Check docs for what rails indicator default is.
     /// Select which color from the passed in [ColorScheme] to use as base for
-    /// the selected navigation bar's highlighted item highlight color.
+    /// the selected navigation rail's highlighted item's indicator color.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined it defaults to using secondary color via [NavigationBar]
-    /// widgets default highlight color.
-    final SchemeColor? highlightSchemeColor,
+    /// If not defined it defaults to using secondary color via [NavigationRail]
+    /// widgets default indicator color.
+    final SchemeColor? indicatorSchemeColor,
 
     /// The alpha value used on selection color of the selected indicator.
     ///
@@ -2286,11 +2287,11 @@ class FlexSubThemes {
     final bool? useIndicator,
 
     /// Select which color from the passed in [ColorScheme] to use as background
-    /// color for the navigation bar.
+    /// color for the navigation rail.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// Defaults to null, if null the result is [NavigationBar]'s default
+    /// Defaults to null, if null the result is [NavigationRail]'s default
     /// background which is surface color with a hard coded elevation overlay
     /// color of elevation 3 in both light and dark theme mode.
     final SchemeColor? backgroundSchemeColor,
@@ -2310,12 +2311,14 @@ class FlexSubThemes {
     /// Defaults to [kNavigationRailElevation] = 0.
     final double elevation = kNavigationRailElevation,
 
-    /// Specifies when each [NavigationRailDestination]'s label should appear.
+    /// Defines the layout and behavior of the labels for the default,
+    /// un-extended [NavigationRail].
     ///
-    /// This is used to determine the behavior of NavigationBar's destinations.
+    /// When a navigation rail is [extended], the labels are always shown.
     ///
-    /// If null, theme behavior defaults to
-    /// `NavigationDestinationLabelBehavior.alwaysShow`
+    /// The default value is [NavigationRailThemeData.labelType]. If
+    /// [NavigationRailThemeData.labelType] is null, then the default value is
+    /// [NavigationRailLabelType.none].
     final NavigationRailLabelType? labelType,
 
     /// The vertical alignment for the group of [destinations] within the rail.
@@ -2331,10 +2334,6 @@ class FlexSubThemes {
     /// [groupAlignment] is 1.0, then the items are aligned to the bottom.
     ///
     /// The default is -1.0.
-    ///
-    /// See also:
-    ///   * [Alignment.y]
-    ///
     final double? groupAlignment,
 
     /// The icon color alpha blend value for unselected item.
@@ -2399,7 +2398,7 @@ class FlexSubThemes {
       unselectedLabelTextStyle: useTextStyle
           ? usedTextStyle.copyWith(
               fontSize: usedUnselectedLabelSize,
-              color: mutedUnselectedText
+              color: (mutedUnselectedText ?? false)
                   ? textColor
                       .blendAlpha(textColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
@@ -2415,7 +2414,7 @@ class FlexSubThemes {
       unselectedIconTheme: useIconTheme
           ? IconThemeData(
               size: unselectedIconSize ?? 24,
-              color: mutedUnselectedIcon
+              color: (mutedUnselectedIcon ?? false)
                   ? usedIconColor
                       .blendAlpha(usedIconColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
@@ -2430,10 +2429,14 @@ class FlexSubThemes {
           : null,
       groupAlignment: groupAlignment,
       labelType: labelType,
-      useIndicator: useIndicator,
-      indicatorColor: highlightSchemeColor != null
-          ? schemeColor(highlightSchemeColor, colorScheme)
-              .withAlpha(indicatorAlpha)
+      useIndicator: (useIndicator == null) && (indicatorSchemeColor == null)
+          ? null
+          : useIndicator,
+      indicatorColor: (useIndicator ?? false)
+          ? indicatorSchemeColor != null
+              ? schemeColor(indicatorSchemeColor, colorScheme)
+                  .withAlpha(indicatorAlpha)
+              : null
           : null,
     );
   }

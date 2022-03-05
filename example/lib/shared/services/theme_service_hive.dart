@@ -2213,4 +2213,27 @@ class ThemeServiceHive implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  /// Loads used useIndicator setting in example 5.
+  @override
+  Future<bool> useIndicator() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUseIndicator,
+          defaultValue: ThemeService.defaultUseIndicator) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultUseIndicator;
+    }
+  }
+
+  /// Persists useIndicator setting in example 5.
+  @override
+  Future<void> saveUseIndicator(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUseIndicator, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }
