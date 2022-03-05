@@ -269,18 +269,18 @@ const FlexKeyColor _keyColors = FlexKeyColor(
 // soft already. Maybe your want more vivid tones, more in classic M2 style, or
 // perhaps you need to seed schemes with much higher contrast for accessibility
 // reasons. With FlexColorScheme you can. You do this by making a custom
-// FlexTone data class to configure how the seeding engine maps palette colors
+// FlexTones data class to configure how the seeding engine maps palette colors
 // the ColorScheme and how it uses chroma values in the key colors.
 //
-// The `FlexTone` has a `FlexTone.light` and `FlexTone.dark` factory, that
+// The `FlexTones` has a `FlexTones.light` and `FlexTones.dark` factory, that
 // are used for respective theme mode when using key colors in FlexColorScheme
 // by default.
 //
-// The `FlexTone.light` factory by default provides the same chroma limits and
+// The `FlexTones.light` factory by default provides the same chroma limits and
 // tone mappings as used by:
 // `ColorScheme.fromSeed(seedColor: color, brightness: Brightness.light)`
 //
-// Likewise the `FlexTone.dark` corresponds to same chroma limits and tone
+// Likewise the `FlexTones.dark` corresponds to same chroma limits and tone
 // mappings as used by:
 // `ColorScheme.fromSeed(seedColor: color, brightness: Brightness.dark)`.
 //
@@ -291,23 +291,23 @@ const FlexKeyColor _keyColors = FlexKeyColor(
 // minimum chroma value, and after that use the key color's chroma value,
 // or if it should be locked to a given chroma value.
 //
-// There is also a static that returns a default FlexTone.light or FlexTone.dark
-// when you pass it a brightness, called FlexTone.material, to indicate that it
+// There is also a static that returns a default FlexTones.light or FlexTones.dark
+// when you pass it a brightness, called FlexTones.material, to indicate that it
 // is using the default Material 3 specification.
 //
 // There are few more pre-made static configurations:
 //
-// * FlexTone.soft
-// * FlexTone.vivid
-// * FlexTone.highContrast
+// * FlexTones.soft
+// * FlexTones.vivid
+// * FlexTones.highContrast
 //
 // You can swap in them in below to try slightly different styles on generated
-// seeded ColorScheme. The `FlexTone.vivid` for example, keeps the chroma as is
+// seeded ColorScheme. The `FlexTones.vivid` for example, keeps the chroma as is
 // in key colors for secondary and tertiary, and will thus produce a seeded
 // ColorScheme that is closer to the provided key/seed colors, than the Flutter
 // SDK M3 spec version does.
-final FlexTone _flexTonesLight = FlexTone.material(Brightness.light);
-final FlexTone _flexTonesDark = FlexTone.material(Brightness.dark);
+final FlexTones _flexTonesLight = FlexTones.material(Brightness.light);
+final FlexTones _flexTonesDark = FlexTones.material(Brightness.dark);
 
 // Use a GoogleFonts font as default font for your theme.
 final String? _fontFamily = GoogleFonts.notoSans().fontFamily;

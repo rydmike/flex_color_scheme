@@ -178,9 +178,9 @@ class DemoApp extends StatelessWidget {
                           themeController.keepTertiaryContainer,
                     ),
 
-                    // Use predefined [FlexTone] setups for the generated
+                    // Use predefined [FlexTones] setups for the generated
                     // [TonalPalette] and it's usage in [ColorScheme] config.
-                    // You can make your custom [FlexTone] object right here
+                    // You can make your custom [FlexTones] object right here
                     // and apps it it, this just uses an int value to select
                     // between a few preconfigured ones.
                     tones: AppColor.flexTonesConfig(
