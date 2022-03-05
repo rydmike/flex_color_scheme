@@ -7,9 +7,7 @@ import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/pages/sub_pages.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
-import '../shared/widgets/universal/header_card.dart';
 import '../shared/widgets/universal/responsive_dialog.dart';
-import '../shared/widgets/universal/theme_showcase.dart';
 import 'utils/generate_colorscheme_dart_code.dart';
 import 'widgets/dialogs/dart_code_dialog_screen.dart';
 import 'widgets/dialogs/reset_settings_dialog.dart';
@@ -17,6 +15,7 @@ import 'widgets/dialogs/show_copy_setup_code_dialog.dart';
 import 'widgets/panels/app_bar_settings/app_bar_settings.dart';
 import 'widgets/panels/buttons_settings/buttons_settings.dart';
 import 'widgets/panels/component_themes/component_themes.dart';
+import 'widgets/panels/dialog_settings/dialog_settings.dart';
 import 'widgets/panels/info/info_panel.dart';
 import 'widgets/panels/navigation_bar_settings/navigation_bar_settings.dart';
 import 'widgets/panels/navigation_rail_settings/navigation_rail_settings.dart';
@@ -28,8 +27,14 @@ import 'widgets/panels/switch_settings/switch_settings.dart';
 import 'widgets/panels/tab_bar_settings/tab_bar_settings.dart';
 import 'widgets/panels/text_field_settings/text_field_settings.dart';
 import 'widgets/panels/theme_data_colors/theme_data_colors.dart';
+import 'widgets/panels/themed_card.dart';
+import 'widgets/panels/themed_date_picker_dialog.dart';
+import 'widgets/panels/themed_list_tile.dart';
+import 'widgets/panels/themed_material_and_bottom_sheet.dart';
+import 'widgets/panels/themed_primary_text_theme.dart';
+import 'widgets/panels/themed_text_theme.dart';
+import 'widgets/panels/themed_time_picker_dialog.dart';
 import 'widgets/panels/toggle_fab_chip_settings/toggle_fab_chip_settings.dart';
-import 'widgets/shared/color_scheme_popup_menu.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
@@ -228,6 +233,7 @@ class _HomePageState extends State<HomePage> {
               margins,
               bottomPadding + margins,
             ),
+            itemCount: _nrOfCards,
             itemBuilder: (BuildContext context, int index) => <Widget>[
               // The main info Card.
               InfoPanel(
@@ -348,26 +354,26 @@ class _HomePageState extends State<HomePage> {
                   toggleCard(15);
                 },
               ),
-              ThemedListTile(
+              DialogSettings(
+                controller: widget.controller,
                 isOpen: isCardOpen[16],
                 onTap: () {
                   toggleCard(16);
                 },
               ),
-              ThemedTimePickerDialog(
+              ThemedListTile(
                 isOpen: isCardOpen[17],
                 onTap: () {
                   toggleCard(17);
                 },
               ),
-              ThemedDatePickerDialog(
+              ThemedTimePickerDialog(
                 isOpen: isCardOpen[18],
                 onTap: () {
                   toggleCard(18);
                 },
               ),
-              ThemedDialog(
-                controller: widget.controller,
+              ThemedDatePickerDialog(
                 isOpen: isCardOpen[19],
                 onTap: () {
                   toggleCard(19);
@@ -398,191 +404,8 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ].elementAt(index),
-            itemCount: _nrOfCards,
           );
         }),
-      ),
-    );
-  }
-}
-
-class ThemedListTile extends StatelessWidget {
-  const ThemedListTile({Key? key, required this.isOpen, required this.onTap})
-      : super(key: key);
-  final bool isOpen;
-  final VoidCallback onTap;
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Themed ListTile'),
-      child: const ListTileShowcase(),
-    );
-  }
-}
-
-class ThemedTimePickerDialog extends StatelessWidget {
-  const ThemedTimePickerDialog(
-      {Key? key, required this.isOpen, required this.onTap})
-      : super(key: key);
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Themed TimePickerDialog'),
-      child: const TimePickerDialogShowcase(),
-    );
-  }
-}
-
-class ThemedDatePickerDialog extends StatelessWidget {
-  const ThemedDatePickerDialog(
-      {Key? key, required this.isOpen, required this.onTap})
-      : super(key: key);
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Themed DatePickerDialog'),
-      child: const DatePickerDialogShowcase(),
-    );
-  }
-}
-
-class ThemedDialog extends StatelessWidget {
-  const ThemedDialog({
-    Key? key,
-    required this.controller,
-    required this.isOpen,
-    required this.onTap,
-  }) : super(key: key);
-  final ThemeController controller;
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Themed Dialog'),
-      child: Column(
-        children: <Widget>[
-          const ListTile(
-            title: Text('Themed dialog'),
-            subtitle: Text('Flutter SDK default background is '
-                'colorScheme.background for Dialog and DatePickerDialog, but '
-                'colorScheme.surface for TimePickerDialog. FlexColorScheme '
-                'sub-themes use surface as default for all dialogs, to ensure '
-                'that elevation overlay color works in dark mode.'),
-          ),
-          ColorSchemePopupMenu(
-            title: const Text('Background color'),
-            index: controller.dialogBackgroundSchemeColor?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setDialogBackgroundSchemeColor(null);
-                    } else {
-                      controller.setDialogBackgroundSchemeColor(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
-          ),
-          const AlertDialogShowcase(),
-        ],
-      ),
-    );
-  }
-}
-
-class ThemedMaterialAndBottomSheet extends StatelessWidget {
-  const ThemedMaterialAndBottomSheet(
-      {Key? key, required this.isOpen, required this.onTap})
-      : super(key: key);
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Themed Material'),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: MaterialAndBottomSheetShowcase(),
-      ),
-    );
-  }
-}
-
-class ThemedCard extends StatelessWidget {
-  const ThemedCard({Key? key, required this.isOpen, required this.onTap})
-      : super(key: key);
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-        isOpen: isOpen,
-        onTap: onTap,
-        title: const Text('Themed Card'),
-        child: const Padding(
-          padding: EdgeInsets.all(16),
-          child: CardShowcase(),
-        ));
-  }
-}
-
-class ThemedTextTheme extends StatelessWidget {
-  const ThemedTextTheme({Key? key, required this.isOpen, required this.onTap})
-      : super(key: key);
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Themed TextTheme'),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: TextThemeShowcase(),
-      ),
-    );
-  }
-}
-
-class ThemedPrimaryTextTheme extends StatelessWidget {
-  const ThemedPrimaryTextTheme(
-      {Key? key, required this.isOpen, required this.onTap})
-      : super(key: key);
-  final bool isOpen;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return HeaderCard(
-      color: Theme.of(context).colorScheme.primary,
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Themed PrimaryTextTheme'),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: PrimaryTextThemeShowcase(),
       ),
     );
   }

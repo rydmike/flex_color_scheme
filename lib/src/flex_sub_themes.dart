@@ -2291,9 +2291,9 @@ class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// Defaults to null, if null the result is [NavigationRail]'s default
-    /// background which is surface color with a hard coded elevation overlay
-    /// color of elevation 3 in both light and dark theme mode.
+    /// Defaults to null, if null the resulting background color defaults
+    /// [ColorScheme.background] of theme. Flutter SDK default is
+    /// [ColorScheme.surface].
     final SchemeColor? backgroundSchemeColor,
 
     /// NavigationRail background opacity.
@@ -2393,7 +2393,7 @@ class FlexSubThemes {
     return NavigationRailThemeData(
       backgroundColor: backgroundSchemeColor != null
           ? schemeColor(backgroundSchemeColor, colorScheme).withOpacity(opacity)
-          : null,
+          : colorScheme.background.withOpacity(opacity),
       elevation: elevation,
       unselectedLabelTextStyle: useTextStyle
           ? usedTextStyle.copyWith(

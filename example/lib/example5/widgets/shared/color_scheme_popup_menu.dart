@@ -42,14 +42,14 @@ class ColorSchemePopupMenu extends StatelessWidget {
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
-              leading: Icon(Icons.lens,
-                  color: i >= SchemeColor.values.length
-                      ? colorScheme.surface
-                      : FlexSubThemes.schemeColor(
-                          SchemeColor.values[i],
-                          colorScheme,
-                        ),
-                  size: 35),
+              leading: ColorSchemeBox(
+                color: i >= SchemeColor.values.length
+                    ? colorScheme.surface
+                    : FlexSubThemes.schemeColor(
+                        SchemeColor.values[i],
+                        colorScheme,
+                      ),
+              ),
               title: i >= SchemeColor.values.length
                   ? Text('default', style: txtStyle)
                   : Text(SchemeColor.values[i].name, style: txtStyle),
@@ -68,15 +68,45 @@ class ColorSchemePopupMenu extends StatelessWidget {
             Text('ColorScheme color: $colorName'),
           ],
         ),
-        trailing: Icon(
-          Icons.lens,
+        trailing: ColorSchemeBox(
           color: enabled && !useDefault
               ? FlexSubThemes.schemeColor(
                   SchemeColor.values[index],
                   colorScheme,
                 )
               : colorScheme.surface,
-          size: 40,
+        ),
+      ),
+    );
+  }
+}
+
+class ColorSchemeBox extends StatelessWidget {
+  const ColorSchemeBox({
+    Key? key,
+    this.color = Colors.white,
+    this.size = const Size(45, 35),
+  }) : super(key: key);
+
+  final Color color;
+  final Size size;
+
+  // =
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: size.width,
+      height: size.height,
+      child: Material(
+        color: color,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          side: BorderSide(
+            color: Theme.of(context).dividerColor,
+            width: 1,
+          ),
         ),
       ),
     );
