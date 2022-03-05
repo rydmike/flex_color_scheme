@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/const/app_color.dart';
-import '../../shared/controllers/theme_controller.dart';
+import '../../../../shared/const/app_color.dart';
+import '../../../../shared/controllers/theme_controller.dart';
 
-// Widget used to change the used FlexSchemeData index in example 5.
+/// Popup used to change the used FlexSchemeData index in the theme controller
+/// and via that the selected active theme.
 class ThemePopupMenu extends StatelessWidget {
   const ThemePopupMenu({
     Key? key,

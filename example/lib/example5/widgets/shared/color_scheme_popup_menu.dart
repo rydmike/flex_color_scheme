@@ -14,11 +14,13 @@ class ColorSchemePopupMenu extends StatelessWidget {
     required this.index,
     this.onChanged,
     this.title,
+    this.subtitle,
     this.contentPadding,
   }) : super(key: key);
   final int index;
   final ValueChanged<int>? onChanged;
   final Widget? title;
+  final Widget? subtitle;
   final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
 
   @override
@@ -59,7 +61,13 @@ class ColorSchemePopupMenu extends StatelessWidget {
         contentPadding:
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
         title: title,
-        subtitle: Text('ColorScheme color: $colorName'),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            if (subtitle != null) subtitle!,
+            Text('ColorScheme color: $colorName'),
+          ],
+        ),
         trailing: Icon(
           Icons.lens,
           color: enabled && !useDefault

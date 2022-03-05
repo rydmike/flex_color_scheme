@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'color_indicator.dart';
-import 'copy_color_to_clipboard.dart';
+import '../../shared/copy_color_to_clipboard.dart';
+import '../../shared/palette_color_box.dart';
 
 /// TonalPaletteColors widget.
 ///

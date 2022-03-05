@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-/// Widget used to select a and limit the number of used theme colors from
-/// the selected FlexSchemeColor, used in example 5.
+/// Popup used to select the number of input colors to use when making
+/// the FlexColorScheme.
+///
+/// This is just a popup with current selected value given in index
+/// and onChanged  callback with index of selected item in the popup.
 class UsedColorsPopupMenu extends StatelessWidget {
   const UsedColorsPopupMenu({
     Key? key,

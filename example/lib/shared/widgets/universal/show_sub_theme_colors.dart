@@ -148,10 +148,10 @@ class ShowSubThemeColors extends StatelessWidget {
         children: <Widget>[
           const ListTile(
             contentPadding: EdgeInsets.zero,
-            title: Text('Component sub-theme colors'),
-            subtitle: Text('Settings are controlled in each component '
-                'panel. This shows active ColorScheme based color for '
-                'each component'),
+            title: Text('Component sub-themes color overview'),
+            subtitle: Text("Color settings are controlled in each component's "
+                'settings panel. This shows default or selected ColorScheme '
+                'based used themed color for each component.'),
           ),
           // A Wrap widget is just the right handy widget for this type of
           // widget to make it responsive.

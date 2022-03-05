@@ -129,6 +129,7 @@ class ThemeController with ChangeNotifier {
         await _themeService.navBarBackgroundSchemeColor();
     _unselectedIsColored = await _themeService.unselectedIsColored();
     _usedFlexToneSetup = await _themeService.usedFlexToneSetup();
+    _useIndicator = await _themeService.useIndicator();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -259,6 +260,7 @@ class ThemeController with ChangeNotifier {
     await setUnselectedIsColored(
         ThemeService.defaultUnselectedIsColored, false);
     await setUsedFlexToneSetup(ThemeService.defaultUsedFlexToneSetup, false);
+    await setUseIndicator(ThemeService.defaultUseIndicator, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -1224,5 +1226,15 @@ class ThemeController with ChangeNotifier {
     _usedFlexToneSetup = value;
     if (notify) notifyListeners();
     await _themeService.saveUsedFlexToneSetup(value);
+  }
+
+  late bool _useIndicator;
+  bool get useIndicator => _useIndicator;
+  Future<void> setUseIndicator(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useIndicator) return;
+    _useIndicator = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUseIndicator(value);
   }
 }

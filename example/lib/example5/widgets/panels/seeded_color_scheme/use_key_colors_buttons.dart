@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/controllers/theme_controller.dart';
+import '../../../../shared/controllers/theme_controller.dart';
 
-// Widget used to change usage of key colors for colorscheme generation
-// in example 5.
+// ToggleButtons used to change usage of key colors for color scheme generation.
+//
+// ToggleButtons are great since you can easily implement totally
+// custom toggle logic with them, like used here to fulfill a custom toggling
+// need, where first button turns off all, but 2nd and 3rd button can be toggled
+// individually.
 class UseKeyColorsButtons extends StatelessWidget {
   const UseKeyColorsButtons({
     Key? key,

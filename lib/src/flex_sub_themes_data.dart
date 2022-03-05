@@ -901,7 +901,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [navigationBarUnselectedIconSize], so a none standard [IconTheme]
   /// must be created that can be muted. If none of those properties are defined
   /// the widget default behavior for icon style is used, and the unselected
-  /// icon cannot be muted since all properties are null.
+  /// icon will not be muted since all properties are null.
   final bool? navigationBarMutedUnselectedIcon;
 
   /// If true, the unselected text labels in the [NavigationBar] use a more
@@ -919,7 +919,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [navigationBarUnselectedLabelSize] so a none standard [TextStyle]
   /// must be created that can be muted. If none of those properties are defined
   /// the widget default behavior for label text style is used, and unselected
-  /// text cannot be muted since all properties are null.
+  /// text will not be muted since all properties are null.
   final bool? navigationBarMutedUnselectedText;
 
   /// The size of the text label on selected item.

@@ -1,21 +1,26 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/const/app_color.dart';
-import '../../shared/controllers/theme_controller.dart';
+import '../../../../shared/const/app_color.dart';
+import '../../../../shared/controllers/theme_controller.dart';
 
 // The width size of the scrolling button.
 const double _kWidthOfScrollItem = 67.2;
 
-// Horizontal theme selector of themes offered in our [AppColor.schemes].
-//
-// This example uses a StatefulWidget for the scroll controller and
-// index to keep track of previously selected color scheme, so we can animate
-// to the new selection, also done when the themeController schemeIndex is
-// changed via other UI controls, like in the drop box that is also used in
-// this demo as another way to change the color scheme.
-//
-// The theme is controlled via the passed in ThemeController.
+/// Horizontal theme selector of themes offered in our [AppColor.schemes].
+///
+/// This example uses a StatefulWidget for the scroll controller and
+/// index to keep track of previously selected color scheme, so we can animate
+/// to the new selection, also done when the themeController schemeIndex is
+/// changed via other UI controls, like in the drop box that is also used in
+/// this demo as another way to change the color scheme.
+///
+/// The theme is controlled via the passed in ThemeController.
+///
+/// This offers a cooler and more visually interactive way of selecting the
+/// active theme. The one via the popup menu buttons does te same thing, but
+/// this version is kind of cooler. Just to show different ways of doing the
+/// same things. This is of course a bit more complicated to build.
 class ThemeSelector extends StatefulWidget {
   const ThemeSelector({
     Key? key,

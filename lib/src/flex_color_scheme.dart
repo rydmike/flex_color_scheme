@@ -5917,40 +5917,26 @@ class FlexColorScheme with Diagnosticable {
       navigationRailTheme: useSubThemes
           ? FlexSubThemes.navigationRailTheme(
               colorScheme: colorScheme,
-              labelTextStyle: subTheme.navigationBarIsStyled
-                  ? effectiveTextTheme.overline
-                  : null,
+              // labelTextStyle: subTheme.navigationBarIsStyled
+              //     ? effectiveTextTheme.overline
+              //     : null,
               selectedLabelSize: subTheme.navigationBarSelectedLabelSize,
-              unselectedLabelSize: subTheme.navigationBarUnselectedLabelSize,
-              textSchemeColor: subTheme.navigationBarTextSchemeColor ??
-                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
-              mutedUnselectedText: subTheme.navigationBarMutedUnselectedText ??
-                  subTheme.navigationBarIsStyled,
-              selectedIconSize: subTheme.navigationBarSelectedIconSize,
-              unselectedIconSize: subTheme.navigationBarUnselectedIconSize,
-              iconSchemeColor: subTheme.navigationBarIconSchemeColor ??
-                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
-              mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon ??
-                  subTheme.navigationBarIsStyled,
-              highlightSchemeColor: subTheme
-                      .navigationBarHighlightSchemeColor ??
-                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
+              unselectedLabelSize: subTheme.navigationRailUnselectedLabelSize,
+              textSchemeColor: subTheme.navigationRailTextSchemeColor,
+              mutedUnselectedText: subTheme.navigationRailMutedUnselectedText,
+              selectedIconSize: subTheme.navigationRailSelectedIconSize,
+              unselectedIconSize: subTheme.navigationRailUnselectedIconSize,
+              iconSchemeColor: subTheme.navigationRailIconSchemeColor,
+              mutedUnselectedIcon: subTheme.navigationRailMutedUnselectedIcon,
+              indicatorSchemeColor: subTheme.navigationRailIndicatorSchemeColor,
               indicatorAlpha: kNavigationBarIndicatorAlpha,
               backgroundSchemeColor:
-                  subTheme.navigationBarBackgroundSchemeColor ??
-                      (subTheme.navigationBarIsStyled
-                          ? SchemeColor.background
-                          : null),
-              opacity: subTheme.navigationBarOpacity,
-              useIndicator: true,
-              groupAlignment: -1,
-              elevation: subTheme.bottomNavigationBarElevation,
-              labelType: NavigationRailLabelType.all,
-              // elevation: subTheme.navigationBarHeight ??
-              //     (subTheme.navigationBarIsStyled
-              //         ? kNavigationBarHeight
-              //         : null),
-              // labelType: subTheme.navigationBarLabelBehavior,
+                  subTheme.navigationRailBackgroundSchemeColor,
+              opacity: subTheme.navigationRailOpacity,
+              useIndicator: subTheme.navigationRailUseIndicator,
+              groupAlignment: subTheme.navigationRailGroupAlignment,
+              elevation: subTheme.navigationRailElevation,
+              labelType: subTheme.navigationRailLabelType,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
             )
