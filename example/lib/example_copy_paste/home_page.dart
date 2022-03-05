@@ -8,6 +8,7 @@ import '../shared/widgets/app/responsive_scaffold.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/show_color_scheme_colors.dart';
+import '../shared/widgets/universal/show_theme_data_colors.dart';
 import '../shared/widgets/universal/stateful_header_card.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
-          if (index == 7) {
+          if (index == 9) {
             if (isDark) {
               widget.onThemeModeChanged(ThemeMode.light);
             } else {
@@ -102,11 +103,13 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 8),
               const _TabBarAndBottomBarShowCase(),
               const SizedBox(height: 8),
+              const _NavigationRailShowCase(),
+              const SizedBox(height: 8),
+              const _DialogShowcase(),
+              const SizedBox(height: 8),
               const _TimePickerDialogShowcase(),
               const SizedBox(height: 8),
               const _DatePickerDialogShowcase(),
-              const SizedBox(height: 8),
-              const _DialogShowcase(),
               const SizedBox(height: 8),
               const _MaterialAndBottomSheetShowcase(),
               const SizedBox(height: 8),
@@ -146,36 +149,39 @@ class _MainPanelState extends State<_MainPanel> {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return StatefulHeaderCard(
       title: const Text('Theme'),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const Text('Copy a FlexColorScheme V4 '
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text('Copy a FlexColorScheme V5 '
                 'theme, from the Themes Playground'),
-            const SizedBox(height: 8),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('Theme mode'),
-              subtitle: Text('Mode '
-                  '${widget.themeMode.toString().dotTail}'),
-              trailing: ThemeModeSwitch(
-                themeMode: widget.themeMode,
-                onChanged: widget.onThemeModeChanged,
-              ),
-              onTap: () {
-                if (isDark) {
-                  widget.onThemeModeChanged(ThemeMode.light);
-                } else {
-                  widget.onThemeModeChanged(ThemeMode.dark);
-                }
-              },
+          ),
+          ListTile(
+            title: const Text('Theme mode'),
+            subtitle: Text('Mode '
+                '${widget.themeMode.toString().dotTail}'),
+            trailing: ThemeModeSwitch(
+              themeMode: widget.themeMode,
+              onChanged: widget.onThemeModeChanged,
             ),
-            const SizedBox(height: 8),
-            // Active theme color indicators.
-            const ShowColorSchemeColors(),
-          ],
-        ),
+            onTap: () {
+              if (isDark) {
+                widget.onThemeModeChanged(ThemeMode.light);
+              } else {
+                widget.onThemeModeChanged(ThemeMode.dark);
+              }
+            },
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: ShowColorSchemeColors(),
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: ShowThemeDataColors(),
+          ),
+        ],
       ),
     );
   }
@@ -198,30 +204,6 @@ class _MaterialButtonsShowcase extends StatelessWidget {
             OutlinedButtonShowcase(),
             SizedBox(height: 8),
             TextButtonShowcase(),
-
-            /// Showing the legacy buttons is removed from the sample.
-            ///
-            /// The deprecated legacy buttons weill be removed in next stable
-            /// release after Flutter 2.10.x. For more info see:
-            /// https://github.com/flutter/flutter/issues/98537
-            ///
-            /// The sub themes that style them will be kept available since it
-            /// is not going away and may be useful to the theme ButtonBar and
-            /// dropdown. button style. As long as the buttons are actually
-            /// available in the SDK, the comment code to show will be kept
-            /// around in the samples, should anybody want to uncomment it to
-            /// see what their style with sub themes applied looks like.
-            //
-            // Padding(
-            //   padding: const EdgeInsets.all(8),
-            //   child: Text('Legacy buttons, deprecated',
-            //       style: Theme.of(context).textTheme.subtitle1),
-            // ),
-            // const LegacyButtonShowcase(),
-            // const SizedBox(height: 8),
-            // const LegacyButtonShowcase(enabled: false),
-            // const SizedBox(height: 8),
-            // const LegacyButtonIconShowcase(),
           ],
         ),
       ),
@@ -259,6 +241,20 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
   }
 }
 
+class _TextInputFieldShowcase extends StatelessWidget {
+  const _TextInputFieldShowcase({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return const StatefulHeaderCard(
+      title: Text('Themed TextInput'),
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: TextInputField(),
+      ),
+    );
+  }
+}
+
 class _ListTileShowcase extends StatelessWidget {
   const _ListTileShowcase({Key? key}) : super(key: key);
   @override
@@ -277,44 +273,31 @@ class _TabBarAndBottomBarShowCase extends StatelessWidget {
   Widget build(BuildContext context) {
     return StatefulHeaderCard(
       title: const Text('TabBar and BottomNavigationBar'),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: TabBarForAppBarShowcase(),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: TabBarForBackgroundShowcase(),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: BottomNavigationBarShowcase(),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: NavigationBarShowcase(),
-            ),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
+          SizedBox(height: 8),
+          TabBarForAppBarShowcase(),
+          SizedBox(height: 8),
+          TabBarForBackgroundShowcase(),
+          SizedBox(height: 8),
+          BottomNavigationBarShowcase(),
+          SizedBox(height: 8),
+          NavigationBarShowcase(),
+        ],
       ),
     );
   }
 }
 
-class _TextInputFieldShowcase extends StatelessWidget {
-  const _TextInputFieldShowcase({Key? key}) : super(key: key);
+class _NavigationRailShowCase extends StatelessWidget {
+  const _NavigationRailShowCase({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return const StatefulHeaderCard(
-      title: Text('Themed TextInput'),
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: TextInputField(),
-      ),
+      title: Text('NavigationRail'),
+      child: NavigationRailShowcase(),
     );
   }
 }

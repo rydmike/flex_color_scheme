@@ -46,6 +46,8 @@ class ThemeShowcase extends StatelessWidget {
         const Divider(),
         const TextInputField(),
         const Divider(),
+        const ListTileShowcase(),
+        const Divider(),
         const TabBarForAppBarShowcase(),
         const TabBarForBackgroundShowcase(),
         const SizedBox(height: 8),
@@ -54,8 +56,6 @@ class ThemeShowcase extends StatelessWidget {
         const NavigationBarShowcase(),
         const NavigationRailShowcase(),
         const SizedBox(height: 8),
-        const Divider(),
-        const ListTileShowcase(),
         const Divider(),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
@@ -641,17 +641,22 @@ class TabBarForAppBarShowcase extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            'TabBar in an AppBar',
-            style: textStyle.copyWith(fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'TabBar in an AppBar',
+              style: textStyle.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
-          Text(
-            'If the TabBar will always be used in an AppBar, then use '
-            'style FlexTabBarStyle forAppBar (default), '
-            'it will fit contrast wise here',
-            style: textStyle,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'If the TabBar will always be used in an AppBar, then use '
+              'style FlexTabBarStyle forAppBar (default), '
+              'it will fit contrast wise here',
+              style: textStyle,
+            ),
           ),
-          const SizedBox(height: 8),
           Material(
             color: effectiveTabBackground,
             child: const SizedBox(
@@ -692,18 +697,22 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 16),
-          Text(
-            'TabBar on a surface',
-            style: textStyle.copyWith(fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'TabBar on a surface',
+              style: textStyle.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
-          Text(
-            'If the TabBar will always be used on background and surface '
-            'colors, then use style FlexTabBarStyle forBackground, '
-            'it will fit contrast wise here',
-            style: textStyle,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'If the TabBar will always be used on background and surface '
+              'colors, then use style FlexTabBarStyle forBackground, '
+              'it will fit contrast wise here',
+              style: textStyle,
+            ),
           ),
-          const SizedBox(height: 8),
           const SizedBox(
             height: 70,
             child: TabBar(

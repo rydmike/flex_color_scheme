@@ -45,6 +45,9 @@ import 'home_page.dart';
 // opting in and out of FlexColorScheme's opinionated sub-themes, and to
 // change the index value of the used colors from the list of FlexSchemeData
 // in AppColor.schemesCustom and many other options.
+//
+// You can try this app as a web app at:
+// https://rydmike.com/flexcolorscheme/themesplayground-v5
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {

@@ -72,8 +72,8 @@ class _SubpageState extends State<Subpage> {
               Text('Subpage Demo', style: headline4),
               const Text(
                 'This screen shows an example page with the same '
-                'FlexColorScheme based inherited theme being used. '
-                'It also has a BottomNavigationBar and TabBar in the AppBar.',
+                'FlexColorScheme based ThemeData inherited theme being used. '
+                'It also has a NavigationBar and TabBar in the AppBar.',
               ),
               const Divider(),
               // Show all key active theme colors.
@@ -94,31 +94,28 @@ class _SubpageState extends State<Subpage> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (int value) {
+        bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int value) {
             setState(() {
               _buttonIndex = value;
             });
           },
-          currentIndex: _buttonIndex,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
+          selectedIndex: _buttonIndex,
+          destinations: const <NavigationDestination>[
+            NavigationDestination(
               icon: Icon(Icons.chat_bubble),
               label: 'Chat',
-              // API still only on Master channel
-              // tooltip: '',
+              tooltip: '',
             ),
-            BottomNavigationBarItem(
+            NavigationDestination(
               icon: Icon(Icons.beenhere),
               label: 'Tasks',
-              // API still only on Master channel
-              // tooltip: '',
+              tooltip: '',
             ),
-            BottomNavigationBarItem(
+            NavigationDestination(
               icon: Icon(Icons.create_new_folder),
               label: 'Archive',
-              // API still only on Master channel
-              // tooltip: '',
+              tooltip: '',
             ),
           ],
         ),

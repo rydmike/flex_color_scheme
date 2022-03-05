@@ -25,6 +25,9 @@ import 'home_page.dart';
 //
 // The theme controller is used to change the theme mode and to toggle
 // opting in and out of FlexColorScheme's opinionated sub-themes.
+//
+// You can try this app as a web app at:
+// https://rydmike.com/flexcolorscheme/customtheme-v5
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {

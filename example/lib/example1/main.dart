@@ -10,6 +10,9 @@ import 'home_page.dart';
 // This example shows how to use a selected predefined color scheme in
 // FlexColorScheme, to define light and dark themes using the scheme,
 // and then how to switch between the light and dark mode.
+//
+// You can try this app as a web app at:
+// https://rydmike.com/flexcolorscheme/basicthemeusage-v5
 // -----------------------------------------------------------------------------
 void main() => runApp(const DemoApp());
 
