@@ -142,9 +142,9 @@ class SeededColorScheme extends StatelessWidget {
               '${_describeFlexToneLong(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}\n'
               'In this version you can choose between the default Material 3 '
               'tone mapping and three pre-defined custom FlexTones setup. With '
-              'the API you can make your own FlexTones configurations. A future '
-              'version of this app may add interactive configuration of tone '
-              'to ColorScheme color mapping.',
+              'the API you can make your own FlexTones configurations. A '
+              'future version of this app may add interactive configuration of '
+              'tone to ColorScheme color mapping.',
             ),
           ),
           const SizedBox(height: 8),

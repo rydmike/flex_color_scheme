@@ -163,3 +163,39 @@ class FlexSchemeColorAdapter extends TypeAdapter<SchemeColor?> {
   @override
   int get typeId => 158;
 }
+
+/// A Hive data type adapter for enum NavigationDestinationLabelBehavior.
+class NavigationDestinationLabelBehaviorAdapter
+    extends TypeAdapter<NavigationDestinationLabelBehavior> {
+  @override
+  NavigationDestinationLabelBehavior read(BinaryReader reader) {
+    final int index = reader.readInt();
+    return NavigationDestinationLabelBehavior.values[index];
+  }
+
+  @override
+  void write(BinaryWriter writer, NavigationDestinationLabelBehavior obj) {
+    writer.writeInt(obj.index);
+  }
+
+  @override
+  int get typeId => 159;
+}
+
+/// A Hive data type adapter for enum NavigationRailLabelType.
+class NavigationRailLabelTypeAdapter
+    extends TypeAdapter<NavigationRailLabelType> {
+  @override
+  NavigationRailLabelType read(BinaryReader reader) {
+    final int index = reader.readInt();
+    return NavigationRailLabelType.values[index];
+  }
+
+  @override
+  void write(BinaryWriter writer, NavigationRailLabelType obj) {
+    writer.writeInt(obj.index);
+  }
+
+  @override
+  int get typeId => 160;
+}

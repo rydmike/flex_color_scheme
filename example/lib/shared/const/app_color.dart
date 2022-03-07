@@ -204,14 +204,13 @@ class AppColor {
             : null);
   }
 
-  /// Return a [FlexTones] based on passed in [brightness] and
-  /// configuration value.
-  static FlexTones flexTonesConfig(Brightness brightness, int flexToneConfig) {
-    if (flexTonesConfig == 2) {
+  /// Return a [FlexTones] based on passed in [brightness] and [tones] value.
+  static FlexTones flexTonesConfig(Brightness brightness, int tones) {
+    if (tones == 2) {
       return FlexTones.soft(brightness);
-    } else if (flexTonesConfig == 3) {
+    } else if (tones == 3) {
       return FlexTones.vivid(brightness);
-    } else if (flexTonesConfig == 4) {
+    } else if (tones == 4) {
       return FlexTones.highContrast(brightness);
     } else {
       return FlexTones.material(brightness);

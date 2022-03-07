@@ -147,25 +147,8 @@ class NavigationBarSettings extends StatelessWidget {
             ),
           ),
           ColorSchemePopupMenu(
-            title: const Text('Item color on navigation bars'),
-            subtitle: const Text('Shared setting with NavigationRail. APIs '
-                'have own properties'),
-            index: controller.navBarScheme?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setNavBarScheme(null);
-                    } else {
-                      controller.setNavBarScheme(SchemeColor.values[index]);
-                    }
-                  }
-                : null,
-          ),
-          const SizedBox(height: 8),
-          const BottomNavigationBarShowcase(),
-          const NavigationBarShowcase(),
-          ColorSchemePopupMenu(
-            title: const Text('Item indicator color on NavigationBar'),
+            title: const Text('Item selection indicator color on '
+                'NavigationBar'),
             subtitle: const Text('Shared setting with NavigationRail. APIs '
                 'have own properties'),
             index: controller.navBarHighlight?.index ?? -1,
@@ -179,13 +162,45 @@ class NavigationBarSettings extends StatelessWidget {
                   }
                 : null,
           ),
+          ColorSchemePopupMenu(
+            title: const Text('Item color on navigation bars'),
+            subtitle: const Text('Shared setting with NavigationRail. APIs '
+                'have own properties'),
+            index: controller.navBarSelectedSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setNavBarSelectedSchemeColor(null);
+                    } else {
+                      controller.setNavBarSelectedSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Unselected item color on navigation bars'),
+            subtitle: const Text('Shared setting with NavigationRail. APIs '
+                'have own properties'),
+            index: controller.navUnselectedSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setNavUnselectedSchemeColor(null);
+                    } else {
+                      controller.setNavUnselectedSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
           SwitchListTileAdaptive(
-            title: const Text('Slight opacity on unselected items on '
-                'NavigationBar'),
-            subtitle: const Text('Unselected icon and text are less bright. '
-                'The M2 BottomNavigationBar uses this by default. ON '
-                'makes M3 NavigationBar do it too. Keep OFF for M3 design '
-                'where all icons and labels use the same color and shade'),
+            title: const Text('Mute unselected items on '
+                'navigation bars'),
+            subtitle: const Text('Unselected icon and text are less bright.\n'
+                'BottomNavigationBar will also use muted unselected items '
+                'as SDK default when this is OFF, if all item colors and '
+                'sizes are also at their default values'),
             value: controller.navBarMuteUnselected &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -193,6 +208,8 @@ class NavigationBarSettings extends StatelessWidget {
                 ? controller.setNavBarMuteUnselected
                 : null,
           ),
+          const BottomNavigationBarShowcase(),
+          const NavigationBarShowcase(),
           const Divider(),
           ListTile(
             title: const Text('Android system navigation bar'),

@@ -59,7 +59,8 @@ class ThemeController with ChangeNotifier {
     _appBarOpacity = await _themeService.appBarOpacity();
     _appBarElevation = await _themeService.appBarElevation();
     _navBarStyle = await _themeService.navBarStyle();
-    _navBarScheme = await _themeService.navBarScheme();
+    _navBarSelectedSchemeColor = await _themeService.navSelectedSchemeColor();
+    _navUnselectedSchemeColor = await _themeService.navUnselectedSchemeColor();
     _navBarHighlight = await _themeService.navBarHighlight();
     _navBarMuteUnselected = await _themeService.navBarMuteUnselected();
     _useNavDivider = await _themeService.useNavDivider();
@@ -180,7 +181,10 @@ class ThemeController with ChangeNotifier {
     await setBottomNavigationBarElevation(
         ThemeService.defaultBottomNavigationBarElevation, false);
     await setNavBarStyle(ThemeService.defaultNavBarStyle, false);
-    await setNavBarScheme(ThemeService.defaultNavBarScheme, false);
+    await setNavBarSelectedSchemeColor(
+        ThemeService.defaultNavSelectedSchemeColor, false);
+    await setNavUnselectedSchemeColor(
+        ThemeService.defaultNavUnselectedSchemeColor, false);
     await setNavBarHighlight(ThemeService.defaultNavBarHighlight, false);
     await setNavBarMuteUnselected(
         ThemeService.defaultNavBarMuteUnselected, false);
@@ -585,13 +589,14 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveNavBarStyle(value);
   }
 
-  late SchemeColor? _navBarScheme;
-  SchemeColor? get navBarScheme => _navBarScheme;
-  Future<void> setNavBarScheme(SchemeColor? value, [bool notify = true]) async {
-    if (value == _navBarScheme) return;
-    _navBarScheme = value;
+  late SchemeColor? _navBarSelectedSchemeColor;
+  SchemeColor? get navBarSelectedSchemeColor => _navBarSelectedSchemeColor;
+  Future<void> setNavBarSelectedSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _navBarSelectedSchemeColor) return;
+    _navBarSelectedSchemeColor = value;
     if (notify) notifyListeners();
-    await _themeService.saveNavBarScheme(value);
+    await _themeService.saveNavSelectedSchemeColor(value);
   }
 
   late SchemeColor? _navBarHighlight;
@@ -1236,5 +1241,15 @@ class ThemeController with ChangeNotifier {
     _useIndicator = value;
     if (notify) notifyListeners();
     await _themeService.saveUseIndicator(value);
+  }
+
+  late SchemeColor? _navUnselectedSchemeColor;
+  SchemeColor? get navUnselectedSchemeColor => _navUnselectedSchemeColor;
+  Future<void> setNavUnselectedSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _navUnselectedSchemeColor) return;
+    _navUnselectedSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveNavUnselectedSchemeColor(value);
   }
 }

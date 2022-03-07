@@ -332,7 +332,14 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               //
-              // All the "Themed" results Cards.
+              // All the "Themed" results Card panels.
+              //
+              // TODO(rydmike): Consider changing open/close action.
+              // Although technically buttons, Toggles, FAB, Switches and
+              // Dialog panels are now also settings screens, may I should
+              // change the groups they belong with regards to what the
+              // open clos side buttons act on.
+              //
               ButtonsSettings(
                 controller: widget.controller,
                 isOpen: isCardOpen[13],

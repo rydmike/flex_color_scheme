@@ -54,11 +54,11 @@ String generateThemeDartCode(ThemeController controller) {
   final String defRadius = controller.useDefaultRadius
       ? ''
       : '    defaultRadius: ${controller.cornerRadius},\n';
-  final String navBarColorCode = controller.navBarScheme == null
+  final String navBarColorCode = controller.navBarSelectedSchemeColor == null
       ? ''
-      : '    bottomNavigationBarSchemeColor: ${controller.navBarScheme},\n'
-          '    navigationBarIconSchemeColor: ${controller.navBarScheme},\n'
-          '    navigationBarTextSchemeColor: ${controller.navBarScheme},\n';
+      : '    bottomNavigationBarSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+          '    navigationBarIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+          '    navigationBarTextSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
   final String navBarBackgroundSchemeColorCode = controller
               .navBarBackgroundSchemeColor ==
           null

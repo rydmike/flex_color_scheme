@@ -1052,7 +1052,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                       ),
                     ),
                     SwitchListTileAdaptive(
-                      title: const Text('Selection indicator'),
+                      title: const Text('Item selection indicator'),
                       subtitle: const Text('Also ON when '
                           'useMaterial3 is true, only thing the toggle does '
                           'in Flutter 2.10. Turning this '
