@@ -808,4 +808,14 @@ class ThemeServiceMem implements ThemeService {
   /// Persists used navUnselectedSchemeColor setting.
   @override
   Future<void> saveNavUnselectedSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used useM3ErrorColor setting in example 5.
+  @override
+  Future<bool> useM3ErrorColor() async => ThemeService.defaultUseM3ErrorColor;
+
+  /// Persists useM3ErrorColor setting in example 5.
+  @override
+  Future<void> saveUseM3ErrorColor(bool value) async {}
 }

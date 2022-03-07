@@ -84,23 +84,17 @@ class FlexColor {
   static Color lightErrorContainer(Color lightError) =>
       lightError.brighten(25).blend(const Color(0xFFFFFFFF), 80);
 
-  // /// Material 2 standard light error color.
-  // static const Color materialLightOnError = Color(0xFFFFFFFF);
+  /// Material 3 standard light error color.
+  static const Color material3LightError = Color(0xFFBA1B1B);
 
-  /// Material 2 light error color.
-  // static const Color materialLightErrorContainer = Color(0xFFB57D87);
+  /// Material 3 standard light onError color.
+  static const Color material3LightOnError = Color(0xFFFFFFFF);
 
-  // /// Material 3 standard light error color.
-  // static const Color material3LightError = Color(0xFFBA1B1B);
-  //
-  // /// Material 3 standard light onError color.
-  // static const Color material3LightOnError = Color(0xFFFFFFFF);
-  //
-  // /// Material 3 standard light error container color.
-  // static const Color material3LightErrorContainer = Color(0xFFFFDAD4);
-  //
-  // /// Material 3 standard light on error container color.
-  // static const Color material3LightOnErrorContainer = Color(0xFF410001);
+  /// Material 3 standard light error container color.
+  static const Color material3LightErrorContainer = Color(0xFFFFDAD4);
+
+  /// Material 3 standard light on error container color.
+  static const Color material3LightOnErrorContainer = Color(0xFF410001);
 
   /// Material 2 standard dark error color.
   static const Color materialDarkError = Color(0xFFCF6679);
@@ -109,20 +103,17 @@ class FlexColor {
   static Color darkErrorContainer(Color darkError) =>
       darkError.darken(15); //.blend(const Color(0xFF000000), 30);
 
-  // /// Material 2 dark error container color.
-  // static const Color materialDarkErrorContainer = Color(0xFFCF6679);
-  //
-  // /// Material 3 standard dark error color.
-  // static const Color material3DarkError = Color(0xFFFFB4A9);
-  //
-  // /// Material 3 standard dark onError color.
-  // static const Color material3DarkOnError = Color(0xFF680003);
-  //
-  // /// Material 3 standard dark error container color.
-  // static const Color material3DarkErrorContainer = Color(0xFF930006);
-  //
-  // /// Material 3 standard dark on error container color.
-  // static const Color material3DarkOnErrorContainer = Color(0xFFFFB4A9);
+  /// Material 3 standard dark error color.
+  static const Color material3DarkError = Color(0xFFFFB4A9);
+
+  /// Material 3 standard dark onError color.
+  static const Color material3DarkOnError = Color(0xFF680003);
+
+  /// Material 3 standard dark error container color.
+  static const Color material3DarkErrorContainer = Color(0xFF930006);
+
+  /// Material 3 standard dark on error container color.
+  static const Color material3DarkOnErrorContainer = Color(0xFFFFB4A9);
 
   // High contrast Material 2 standard error color as per those used in Flutter
   // ColorScheme.highContrastLight and ColorScheme.highContrastDark
@@ -2269,7 +2260,7 @@ class FlexColor {
   static const Color rosewoodLightPrimary = Color(0xFF5C000E);
 
   /// Rosewood theme color for light primary container color.
-  static const Color rosewoodLightPrimaryContainer = Color(0xFFD9C5C7);
+  static const Color rosewoodLightPrimaryContainer = Color(0xFFF4CACE);
 
   /// Rosewood theme color for light primary variant color.
   @Deprecated('Deprecated use rosewoodLightPrimaryContainer instead.')

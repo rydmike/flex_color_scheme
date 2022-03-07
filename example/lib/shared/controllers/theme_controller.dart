@@ -131,6 +131,7 @@ class ThemeController with ChangeNotifier {
     _unselectedIsColored = await _themeService.unselectedIsColored();
     _usedFlexToneSetup = await _themeService.usedFlexToneSetup();
     _useIndicator = await _themeService.useIndicator();
+    _useM3ErrorColor = await _themeService.useM3ErrorColor();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -265,6 +266,7 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultUnselectedIsColored, false);
     await setUsedFlexToneSetup(ThemeService.defaultUsedFlexToneSetup, false);
     await setUseIndicator(ThemeService.defaultUseIndicator, false);
+    await setUseM3ErrorColor(ThemeService.defaultUseM3ErrorColor, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -1251,5 +1253,15 @@ class ThemeController with ChangeNotifier {
     _navUnselectedSchemeColor = value;
     if (notify) notifyListeners();
     await _themeService.saveNavUnselectedSchemeColor(value);
+  }
+
+  late bool _useM3ErrorColor;
+  bool get useM3ErrorColor => _useM3ErrorColor;
+  Future<void> setUseM3ErrorColor(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useM3ErrorColor) return;
+    _useM3ErrorColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveUseM3ErrorColor(value);
   }
 }

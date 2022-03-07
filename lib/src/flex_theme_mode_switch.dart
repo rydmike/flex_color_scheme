@@ -32,8 +32,8 @@ enum FlexThemeModeButtonOrder {
 ///
 /// They scheme colors for each button will be in the order:
 /// ```
-/// | Primary    | Primary container |
-/// | Secondary  | Tertiary          |
+/// | Primary          | Secondary   |
+/// |Primary container | Tertiary    |
 /// ```
 /// In the option button. In the system choice the 2nd column will instead
 /// contain the dark mode primary and secondary colors, thus combining both
@@ -501,7 +501,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                                 padding: padding,
                               ),
                               _SchemeColorBox(
-                                color: flexSchemeColor.primaryContainer,
+                                color: flexSchemeColor.secondary,
                                 height: height,
                                 width: width,
                                 borderRadius: borderRadius,
@@ -512,7 +512,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                           Row(
                             children: <Widget>[
                               _SchemeColorBox(
-                                color: flexSchemeColor.secondary,
+                                color: flexSchemeColor.primaryContainer,
                                 height: height,
                                 width: width,
                                 borderRadius: borderRadius,

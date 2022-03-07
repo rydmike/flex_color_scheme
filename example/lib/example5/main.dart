@@ -191,6 +191,8 @@ class DemoApp extends StatelessWidget {
                     // with FlexColorScheme too, and in this demo we can see its
                     // impact easily.
                     useMaterial3: themeController.useMaterial3,
+                    // Use Material3 error colors with Material2 themes.
+                    useMaterial3ErrorColors: themeController.useM3ErrorColor,
                     // Opt in/out of using opinionated sub-themes.
                     useSubThemes: themeController.useSubThemes,
                     // Options used to modify the sub-themes, there are more
@@ -447,6 +449,7 @@ class DemoApp extends StatelessWidget {
                     fontFamily: AppData.font,
                     platform: themeController.platform,
                     useMaterial3: themeController.useMaterial3,
+                    useMaterial3ErrorColors: themeController.useM3ErrorColor,
                     useSubThemes: themeController.useSubThemes,
                     subThemesData: FlexSubThemesData(
                       useTextTheme: themeController.useTextTheme,
