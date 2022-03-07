@@ -67,22 +67,8 @@ void main() {
           colorScheme: colorScheme,
         ),
         equals(
-          BottomNavigationBarThemeData(
+          const BottomNavigationBarThemeData(
             elevation: 0,
-            backgroundColor: colorScheme.background.withOpacity(1),
-            landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
-            selectedItemColor: colorScheme.primary,
-            selectedIconTheme: IconThemeData(
-              color: colorScheme.primary,
-            ),
-            unselectedItemColor: colorScheme.onBackground
-                .blendAlpha(colorScheme.primary, 0x00)
-                .withAlpha(0xFF),
-            unselectedIconTheme: IconThemeData(
-              color: colorScheme.onBackground
-                  .blendAlpha(colorScheme.primary, 0x00)
-                  .withAlpha(0xFF),
-            ),
           ),
         ),
       );
@@ -95,8 +81,13 @@ void main() {
       expect(
         FlexSubThemes.bottomNavigationBar(
           colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.secondary,
-          backgroundSchemeColor: SchemeColor.error,
+          selectedLabelSchemeColor: SchemeColor.secondary,
+          selectedIconSchemeColor: SchemeColor.secondaryContainer,
+          unselectedLabelSchemeColor: SchemeColor.onSurface,
+          unselectedIconSchemeColor: SchemeColor.tertiary,
+          backgroundSchemeColor: SchemeColor.surface,
+          mutedUnselectedIcon: true,
+          mutedUnselectedLabel: true,
           elevation: 1,
           landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
           opacity: 0.5,
@@ -106,19 +97,33 @@ void main() {
         equals(
           BottomNavigationBarThemeData(
             elevation: 1,
-            backgroundColor: colorScheme.error.withOpacity(0.5),
+            backgroundColor: colorScheme.surface.withOpacity(0.5),
             landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
             selectedItemColor: colorScheme.secondary,
             selectedIconTheme: IconThemeData(
-              color: colorScheme.secondary,
+              color: colorScheme.secondaryContainer,
+              size: 24,
+              opacity: 1,
             ),
-            unselectedItemColor: colorScheme.onError
-                .blendAlpha(colorScheme.secondary, 0xFA)
+            selectedLabelStyle: TextStyle(
+              color: colorScheme.secondary,
+              fontSize: 14,
+            ),
+            unselectedLabelStyle: TextStyle(
+              color: colorScheme.onSurface
+                  .blendAlpha(colorScheme.onSurface, 0xFA)
+                  .withAlpha(0x45),
+              fontSize: 12,
+            ),
+            unselectedItemColor: colorScheme.onSurface
+                .blendAlpha(colorScheme.onSurface, 0xFA)
                 .withAlpha(0x45),
             unselectedIconTheme: IconThemeData(
-              color: colorScheme.onError
-                  .blendAlpha(colorScheme.secondary, 0xFA)
+              color: colorScheme.tertiary
+                  .blendAlpha(colorScheme.tertiary, 0xFA)
                   .withAlpha(0x45),
+              size: 24,
+              opacity: 1,
             ),
           ),
         ),

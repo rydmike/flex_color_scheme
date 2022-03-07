@@ -78,7 +78,8 @@ should be relatively easy, despite the long list of changes and new features.
   * `navigationBarTextSchemeColor` -> `navigationBarSelectedLabelSchemeColor`
   * `navigationBarMutedUnselectedText` -> `navigationBarMutedUnselectedLabel`
   * `navigationBarIconSchemeColor` -> `navigationBarSelectedIconSchemeColor`
-  
+  * `bottomNavigationBarSchemeColor` -> `bottomNavigationBarSelectedLabelSchemeColor`
+
   In `FlexThemeData` the property `navigationBarIsStyled` was removed. It is 
   no longer needed. The same end result it enabled can be achieved by
   by setting all NavigationBar related properties in `FlexSubThemesData` that 
@@ -89,6 +90,9 @@ should be relatively easy, despite the long list of changes and new features.
   * `unselectedTextSchemeColor` -> `unselectedLabelSchemeColor`
   * `iconSchemeColor` -> `selectedIconSchemeColor`
   * `mutedUnselectedText` -> `mutedUnselectedLabel`
+
+  The following parameter wa renamed in `FlexSubThemes.bottomNavigationBarTheme`:
+  * `baseSchemeColor ` -> `selectedLabelSchemeColor`
 
 
 **NEW**
@@ -429,6 +433,25 @@ should be relatively easy, despite the long list of changes and new features.
   "High contrast Material design guide theme", to make it clear it came
   from the M2 guide.
 
+* The order of the colors, in the rarely outside FlexColorScheme 
+  used demo apps, theme presentation/switch button `FlexThemeModeSwitch` was 
+  changed for bettr placement of new color `primaryContainer` and `tertiary`.
+  The Colors `primaryVAriant` and `secondaryVariant` were removed from it
+  since the colors are depreceted in Flutter SDK. The change was from:
+
+   | Before           | Before            |
+   |-------------------|-----------------|
+   | Primary          | Primary variant   |
+   | Secondary        | Secondary variant |
+
+   to:
+
+  | After              | After           |
+  |--------------------|-----------------| 
+  | Primary            | Secondary       |
+  | Primary container  | Tertiary        |
+
+ 
 
 **FIXED**
 
@@ -503,8 +526,6 @@ should be relatively easy, despite the long list of changes and new features.
     explicitly uses switch theme color as thumb color, sigh.
 
 **TODO**
-* Update the `BottomNavigationBar` subTheme to be in same style and feature 
-  level `NavigationBar` and `NavigationRail`.
 * Review and manual testing of all things above.
 * Add loading animation to Themes Playground web build. Might be pushed to
   when Flutter SDK supports it out of the box, seemed a bit tedious to do still.

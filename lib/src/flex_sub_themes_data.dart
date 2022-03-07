@@ -9,6 +9,11 @@ import 'flex_sub_themes.dart';
 /// Parameters used by [FlexColorScheme] to configure [FlexSubThemes] when
 /// [FlexColorScheme.useSubThemes] is true.
 ///
+/// The list of properties in the flat configuration class has grown to insane
+/// size, while it can be a bit tricky to maintain, using it is easy and quite
+/// a convenient way to adjust commonly used properties on UI component
+/// widgets' sub-themes.
+///
 /// The main use case for [FlexSubThemes] and the [FlexSubThemesData] is for
 /// easy to use customization of default border radius on all Flutter SDK
 /// Widgets and elements that supports border radius either via [ShapeBorder]
@@ -132,10 +137,26 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomSheetElevation = kBottomSheetElevation,
     this.bottomSheetModalElevation = kBottomSheetModalElevation,
     //
-    this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
-    this.bottomNavigationBarOpacity = 1,
-    this.bottomNavigationBarSchemeColor = SchemeColor.primary,
+    this.bottomNavigationBarLabelTextStyle,
+    this.bottomNavigationBarSelectedLabelSize,
+    this.bottomNavigationBarUnselectedLabelSize,
+    this.bottomNavigationBarSelectedLabelSchemeColor = SchemeColor.primary,
+    @Deprecated('This property has no function after 4.2.0. To harmonize '
+        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+        'version 5 and later this property has been replaced by: '
+        'bottomNavigationBarSelectedLabelSchemeColor.')
+        this.bottomNavigationBarSchemeColor,
+    this.bottomNavigationBarUnselectedLabelSchemeColor = SchemeColor.onSurface,
+    this.bottomNavigationBarMutedUnselectedLabel = true,
+    this.bottomNavigationBarSelectedIconSize,
+    this.bottomNavigationBarUnselectedIconSize,
+    this.bottomNavigationBarSelectedIconSchemeColor = SchemeColor.primary,
+    this.bottomNavigationBarUnselectedIconSchemeColor = SchemeColor.onSurface,
+    this.bottomNavigationBarMutedUnselectedIcon = true,
     this.bottomNavigationBarBackgroundSchemeColor = SchemeColor.background,
+    this.bottomNavigationBarOpacity = 1,
+    this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
+    this.bottomNavigationBarType,
     this.bottomNavigationBarLandscapeLayout,
     //
     @Deprecated('This property has no function after 4.2.0. To harmonize '
@@ -539,7 +560,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [Radio] use their theme color in the outline. The [Switch] has just a hint
   /// of its themed color in it inactive track.
   ///
-  /// Defaults to false, set it to for slighlty different style.
+  /// Defaults to false, set it to for slightly different style.
   final bool unselectedToggleIsColored;
 
   /// Border radius override value for [InputDecoration].
@@ -784,40 +805,153 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to [kBottomSheetModalElevation] = 8.
   final double bottomSheetModalElevation;
 
+  // ---------------------------------------------------------------------------
+  //
+  // BottomNavigationBar Properties
+  //
+  // ---------------------------------------------------------------------------
+
+  /// Optional text style for the [BottomNavigationBar] labels.
+  ///
+  /// If null, it is kept as null if all text styling properties are
+  /// also null, resulting in default SDK text style being used by the
+  /// [BottomNavigationBar] widget.
+  ///
+  /// If null, but if any of the text styling properties for size and colors
+  /// are defined, the text style [FlexColorScheme.m3TextTheme.bodyMedium]
+  /// will be used as base style for the text style.
+  ///
+  /// Flutter SDK defaults to using the theme's [TextTheme.bodyText1] which
+  /// is size 16dp, the FlexColorScheme bodyMedium size is 14dp, which is
+  /// a more appropriate size for the rail's text.
+  ///
+  /// The size and colors defined in any of the text size and color properties
+  /// are applied as overrides on the effective text style.
+  final TextStyle? bottomNavigationBarLabelTextStyle;
+
+  /// The size of the text label on selected [BottomNavigationBar] item.
+  ///
+  /// If defined, it overrides the font size on effective label TextStyle
+  /// on selected item, 14 is used as fallback if needed.
+  final double? bottomNavigationBarSelectedLabelSize;
+
+  /// The size of the text label on unselected [BottomNavigationBar] items.
+  ///
+  /// If defined, it overrides the font size on effective label TextStyle
+  /// on unselected items, 14 is used as fallback if needed.
+  final double? bottomNavigationBarUnselectedLabelSize;
+
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [BottomNavigationBar]'s selected label text color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the
+  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.primary].
+  final SchemeColor? bottomNavigationBarSelectedLabelSchemeColor;
+
+  /// Deprecated and replaced by [bottomNavigationBarSelectedLabelSchemeColor].
+  @Deprecated('This property has no function after 4.2.0. To harmonize '
+      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+      'version 5 and later this property has been replaced by: '
+      'bottomNavigationBarSelectedLabelSchemeColor.')
+  final SchemeColor? bottomNavigationBarSchemeColor;
+
+  /// Select which color from the theme's [ColorScheme] to use for
+  /// the [BottomNavigationBar]'s unselected items text color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the
+  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.onSurface].
+  final SchemeColor? bottomNavigationBarUnselectedLabelSchemeColor;
+
+  /// If true, the unselected labels in the [BottomNavigationBar] use a more
+  /// muted color version of the color defined by
+  /// [bottomNavigationBarUnselectedLabelSchemeColor].
+  ///
+  /// If null, defaults to false.
+  final bool? bottomNavigationBarMutedUnselectedLabel;
+
+  /// The size of the icon on selected [BottomNavigationBar] item.
+  ///
+  /// If null, it defaults to 24.
+  final double? bottomNavigationBarSelectedIconSize;
+
+  /// The size of the icon on unselected [BottomNavigationBar] items.
+  ///
+  /// If null, defaults to [bottomNavigationBarSelectedIconSize].
+  final double? bottomNavigationBarUnselectedIconSize;
+
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [BottomNavigationBar]'s selected item icon color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the
+  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.primary].
+  final SchemeColor? bottomNavigationBarSelectedIconSchemeColor;
+
+  /// Select which color from the passed in [ColorScheme] to use as base for
+  /// the [BottomNavigationBar]'s unselected items icon color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the
+  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.onSurface].
+  final SchemeColor? bottomNavigationBarUnselectedIconSchemeColor;
+
+  /// If true, the unselected icon in the [BottomNavigationBar] use a more muted
+  /// color version of the color defined by
+  /// [bottomNavigationBarUnselectedIconSchemeColor].
+  ///
+  /// The [BottomNavigationBar] also defaults via Flutter SDK default to a more
+  /// muted unselected color when it uses its defaults, which will happen here
+  /// too when all item colors and sizes are set to their null default,
+  /// even if [bottomNavigationBarMutedUnselectedIcon] is set to false.
+  ///
+  /// If null, defaults to false.
+  final bool? bottomNavigationBarMutedUnselectedIcon;
+
+  /// Select which color from the theme's [ColorScheme] to use as background
+  /// color for the [BottomNavigationBar].
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.background]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the
+  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.surface].
+  ///
+  /// NOTE:
+  /// FlexColorScheme sets background defaults of [BottomNavigationBar],
+  /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
+  /// when it is using component sub-themes.
+  /// Flutter SDK uses different colors on all three widgets. Our opinion is
+  /// that they should all default to using the same [ColorScheme] based
+  /// color. FlexColorScheme uses the background color as that default.
+  final SchemeColor? bottomNavigationBarBackgroundSchemeColor;
+
+  /// BottomNavigationBar background opacity.
+  ///
+  /// Defaults to 1, fully opaque.
+  final double bottomNavigationBarOpacity;
+
   /// Elevation of [BottomNavigationBar].
   ///
   /// Defaults to [kBottomNavigationBarElevation] = 0.
   final double bottomNavigationBarElevation;
 
-  /// BottomNavigationBar opacity.
+  /// Defines the layout and behavior of a [BottomNavigationBar].
   ///
-  /// Used by FlexColorScheme to modify the opacity on the effective
-  /// colorScheme.background color on the themed BottomNavigationBar color.
-  ///
-  /// Typically you would apply some opacity in the range 0.85 to 0.98 if
-  /// to show content scrolling behind it when using the Scaffold property
-  /// extendBody is used.
-  ///
-  /// Defaults to 1, fully opaque.
-  final double bottomNavigationBarOpacity;
-
-  /// Defines which [Theme] based [ColorScheme] based color the bottom
-  /// navigation bar selected icon and text uses.
-  ///
-  /// If not defined it defaults to primary color. This differs from the
-  /// [BottomNavigationBar]'s default theme that uses secondary color.
-  /// If you use [SchemeColor.secondary] you get the default design back.
-  final SchemeColor? bottomNavigationBarSchemeColor;
-
-  /// Select which color from the passed in [ColorScheme] to use as background
-  /// color for the bottom navigation bar.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If not defined it defaults to `theme.colorScheme.background` color,
-  /// same as Flutter SDK default un-themed [BottomNavigationBar] widget
-  /// behavior.
-  final SchemeColor? bottomNavigationBarBackgroundSchemeColor;
+  /// The enum [BottomNavigationBarType] can be
+  /// * [BottomNavigationBarType.fixed], where items have fixed width.
+  /// * [BottomNavigationBarType.shifting], where location and size of the
+  ///   items animate and labels fade in when they are tapped.
+  final BottomNavigationBarType? bottomNavigationBarType;
 
   /// The arrangement of the bottom navigation bar's [items] when the enclosing
   /// [MediaQueryData.orientation] is [Orientation.landscape].
@@ -1216,7 +1350,7 @@ class FlexSubThemesData with Diagnosticable {
   /// When a navigation rail is [extended], the labels are always shown.
   ///
   /// Default to [NavigationRailLabelType.all]. FlexColorScheme uses all so that
-  /// it by default will matach the behavior on [NavigationBar].
+  /// it by default will match the behavior on [NavigationBar].
   ///
   /// If set to null it will default Flutter SDK default
   /// behavior [NavigationRailLabelType.none].
@@ -1292,10 +1426,22 @@ class FlexSubThemesData with Diagnosticable {
     final double? bottomSheetRadius,
     final double? bottomSheetElevation,
     final double? bottomSheetModalElevation,
-    final double? bottomNavigationBarElevation,
-    final double? bottomNavigationBarOpacity,
-    final SchemeColor? bottomNavigationBarSchemeColor,
+    //
+    final TextStyle? bottomNavigationBarLabelTextStyle,
+    final double? bottomNavigationBarSelectedLabelSize,
+    final double? bottomNavigationBarUnselectedLabelSize,
+    final SchemeColor? bottomNavigationBarSelectedLabelSchemeColor,
+    final SchemeColor? bottomNavigationBarUnselectedLabelSchemeColor,
+    final bool? bottomNavigationBarMutedUnselectedLabel,
+    final double? bottomNavigationBarSelectedIconSize,
+    final double? bottomNavigationBarUnselectedIconSize,
+    final SchemeColor? bottomNavigationBarSelectedIconSchemeColor,
+    final SchemeColor? bottomNavigationBarUnselectedIconSchemeColor,
+    final bool? bottomNavigationBarMutedUnselectedIcon,
     final SchemeColor? bottomNavigationBarBackgroundSchemeColor,
+    final double? bottomNavigationBarOpacity,
+    final double? bottomNavigationBarElevation,
+    final BottomNavigationBarType? bottomNavigationBarType,
     final BottomNavigationBarLandscapeLayout?
         bottomNavigationBarLandscapeLayout,
     //
@@ -1406,15 +1552,48 @@ class FlexSubThemesData with Diagnosticable {
       bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
       bottomSheetModalElevation:
           bottomSheetModalElevation ?? this.bottomSheetModalElevation,
-      bottomNavigationBarElevation:
-          bottomNavigationBarElevation ?? this.bottomNavigationBarElevation,
-      bottomNavigationBarOpacity:
-          bottomNavigationBarOpacity ?? this.bottomNavigationBarOpacity,
-      bottomNavigationBarSchemeColor:
-          bottomNavigationBarSchemeColor ?? this.bottomNavigationBarSchemeColor,
+      //
+      bottomNavigationBarLabelTextStyle: bottomNavigationBarLabelTextStyle ??
+          this.bottomNavigationBarLabelTextStyle,
+      bottomNavigationBarSelectedLabelSize:
+          bottomNavigationBarSelectedLabelSize ??
+              this.bottomNavigationBarSelectedLabelSize,
+      bottomNavigationBarUnselectedLabelSize:
+          bottomNavigationBarUnselectedLabelSize ??
+              this.bottomNavigationBarUnselectedLabelSize,
+      bottomNavigationBarSelectedLabelSchemeColor:
+          bottomNavigationBarSelectedLabelSchemeColor ??
+              this.bottomNavigationBarSelectedLabelSchemeColor,
+      bottomNavigationBarUnselectedLabelSchemeColor:
+          bottomNavigationBarUnselectedLabelSchemeColor ??
+              this.bottomNavigationBarUnselectedLabelSchemeColor,
+      bottomNavigationBarMutedUnselectedLabel:
+          bottomNavigationBarMutedUnselectedLabel ??
+              this.bottomNavigationBarMutedUnselectedLabel,
+      bottomNavigationBarSelectedIconSize:
+          bottomNavigationBarSelectedIconSize ??
+              this.bottomNavigationBarSelectedIconSize,
+      bottomNavigationBarUnselectedIconSize:
+          bottomNavigationBarUnselectedIconSize ??
+              this.bottomNavigationBarUnselectedIconSize,
+      bottomNavigationBarSelectedIconSchemeColor:
+          bottomNavigationBarSelectedIconSchemeColor ??
+              this.bottomNavigationBarSelectedIconSchemeColor,
+      bottomNavigationBarUnselectedIconSchemeColor:
+          bottomNavigationBarUnselectedIconSchemeColor ??
+              this.bottomNavigationBarUnselectedIconSchemeColor,
+      bottomNavigationBarMutedUnselectedIcon:
+          bottomNavigationBarMutedUnselectedIcon ??
+              this.bottomNavigationBarMutedUnselectedIcon,
       bottomNavigationBarBackgroundSchemeColor:
           bottomNavigationBarBackgroundSchemeColor ??
               this.bottomNavigationBarBackgroundSchemeColor,
+      bottomNavigationBarOpacity:
+          bottomNavigationBarOpacity ?? this.bottomNavigationBarOpacity,
+      bottomNavigationBarElevation:
+          bottomNavigationBarElevation ?? this.bottomNavigationBarElevation,
+      bottomNavigationBarType:
+          bottomNavigationBarType ?? this.bottomNavigationBarType,
       bottomNavigationBarLandscapeLayout: bottomNavigationBarLandscapeLayout ??
           this.bottomNavigationBarLandscapeLayout,
       //
@@ -1555,12 +1734,34 @@ class FlexSubThemesData with Diagnosticable {
         other.bottomSheetRadius == bottomSheetRadius &&
         other.bottomSheetElevation == bottomSheetElevation &&
         other.bottomSheetModalElevation == bottomSheetModalElevation &&
-        other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
-        other.bottomNavigationBarOpacity == bottomNavigationBarOpacity &&
-        other.bottomNavigationBarSchemeColor ==
-            bottomNavigationBarSchemeColor &&
+        //
+        other.bottomNavigationBarLabelTextStyle ==
+            bottomNavigationBarLabelTextStyle &&
+        other.bottomNavigationBarSelectedLabelSize ==
+            bottomNavigationBarSelectedLabelSize &&
+        other.bottomNavigationBarUnselectedLabelSize ==
+            bottomNavigationBarUnselectedLabelSize &&
+        other.bottomNavigationBarSelectedLabelSchemeColor ==
+            bottomNavigationBarSelectedLabelSchemeColor &&
+        other.bottomNavigationBarUnselectedLabelSchemeColor ==
+            bottomNavigationBarUnselectedLabelSchemeColor &&
+        other.bottomNavigationBarMutedUnselectedLabel ==
+            bottomNavigationBarMutedUnselectedLabel &&
+        other.bottomNavigationBarSelectedIconSize ==
+            bottomNavigationBarSelectedIconSize &&
+        other.bottomNavigationBarUnselectedIconSize ==
+            bottomNavigationBarUnselectedIconSize &&
+        other.bottomNavigationBarSelectedIconSchemeColor ==
+            bottomNavigationBarSelectedIconSchemeColor &&
+        other.bottomNavigationBarUnselectedIconSchemeColor ==
+            bottomNavigationBarUnselectedIconSchemeColor &&
+        other.bottomNavigationBarMutedUnselectedIcon ==
+            bottomNavigationBarMutedUnselectedIcon &&
         other.bottomNavigationBarBackgroundSchemeColor ==
             bottomNavigationBarBackgroundSchemeColor &&
+        other.bottomNavigationBarOpacity == bottomNavigationBarOpacity &&
+        other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
+        other.bottomNavigationBarType == bottomNavigationBarType &&
         other.bottomNavigationBarLandscapeLayout ==
             bottomNavigationBarLandscapeLayout &&
         //
@@ -1693,10 +1894,21 @@ class FlexSubThemesData with Diagnosticable {
       bottomSheetElevation,
       bottomSheetModalElevation,
       //
-      bottomNavigationBarElevation,
-      bottomNavigationBarOpacity,
-      bottomNavigationBarSchemeColor,
+      bottomNavigationBarLabelTextStyle,
+      bottomNavigationBarSelectedLabelSize,
+      bottomNavigationBarUnselectedLabelSize,
+      bottomNavigationBarSelectedLabelSchemeColor,
+      bottomNavigationBarUnselectedLabelSchemeColor,
+      bottomNavigationBarMutedUnselectedLabel,
+      bottomNavigationBarSelectedIconSize,
+      bottomNavigationBarUnselectedIconSize,
+      bottomNavigationBarSelectedIconSchemeColor,
+      bottomNavigationBarUnselectedIconSchemeColor,
+      bottomNavigationBarMutedUnselectedIcon,
       bottomNavigationBarBackgroundSchemeColor,
+      bottomNavigationBarOpacity,
+      bottomNavigationBarElevation,
+      bottomNavigationBarType,
       bottomNavigationBarLandscapeLayout,
       //
       navigationBarLabelTextStyle,
@@ -1829,15 +2041,47 @@ class FlexSubThemesData with Diagnosticable {
         'bottomSheetElevation', bottomSheetElevation));
     properties.add(DiagnosticsProperty<double>(
         'bottomSheetModalElevation', bottomSheetModalElevation));
+    //
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'bottomNavigationBarLabelTextStyle',
+        bottomNavigationBarLabelTextStyle));
     properties.add(DiagnosticsProperty<double>(
-        'bottomNavigationBarElevation', bottomNavigationBarElevation));
+        'bottomNavigationBarSelectedLabelSize',
+        bottomNavigationBarSelectedLabelSize));
     properties.add(DiagnosticsProperty<double>(
-        'bottomNavigationBarOpacity', bottomNavigationBarOpacity));
+        'bottomNavigationBarUnselectedLabelSize',
+        bottomNavigationBarUnselectedLabelSize));
+    properties.add(DiagnosticsProperty<SchemeColor>(
+        'bottomNavigationBarSelectedLabelSchemeColor',
+        bottomNavigationBarSelectedLabelSchemeColor));
+    properties.add(DiagnosticsProperty<SchemeColor>(
+        'bottomNavigationBarUnselectedLabelSchemeColor',
+        bottomNavigationBarUnselectedLabelSchemeColor));
+    properties.add(DiagnosticsProperty<bool>(
+        'bottomNavigationBarMutedUnselectedLabel',
+        bottomNavigationBarMutedUnselectedLabel));
+    properties.add(EnumProperty<double>('bottomNavigationBarSelectedIconSize',
+        bottomNavigationBarSelectedIconSize));
+    properties.add(EnumProperty<double>('bottomNavigationBarUnselectedIconSize',
+        bottomNavigationBarUnselectedIconSize));
     properties.add(EnumProperty<SchemeColor>(
-        'bottomNavigationBarSchemeColor', bottomNavigationBarSchemeColor));
+        'bottomNavigationBarSelectedIconSchemeColor',
+        bottomNavigationBarSelectedIconSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
+        'bottomNavigationBarUnselectedIconSchemeColor',
+        bottomNavigationBarUnselectedIconSchemeColor));
+    properties.add(DiagnosticsProperty<bool>(
+        'bottomNavigationBarMutedUnselectedIcon',
+        bottomNavigationBarMutedUnselectedIcon));
+    properties.add(DiagnosticsProperty<SchemeColor>(
         'bottomNavigationBarBackgroundSchemeColor',
         bottomNavigationBarBackgroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'bottomNavigationBarOpacity', bottomNavigationBarOpacity));
+    properties.add(DiagnosticsProperty<double>(
+        'bottomNavigationBarElevation', bottomNavigationBarElevation));
+    properties.add(EnumProperty<BottomNavigationBarType>(
+        'bottomNavigationBarType', bottomNavigationBarType));
     properties.add(EnumProperty<BottomNavigationBarLandscapeLayout>(
         'bottomNavigationBarLandscapeLayout',
         bottomNavigationBarLandscapeLayout));

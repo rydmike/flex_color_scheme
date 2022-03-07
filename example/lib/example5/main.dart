@@ -282,20 +282,30 @@ class DemoApp extends StatelessWidget {
                       //
                       // BottomNavigationBar settings
                       // Shares input with BottomNavigationBar.
-                      //
-                      // Elevation of BottomNavigationBar.
-                      bottomNavigationBarElevation:
-                          themeController.bottomNavigationBarElevation,
-                      // Themed opacity of bottom navigation bar.
-                      bottomNavigationBarOpacity:
-                          themeController.bottomNavigationBarOpacity,
-                      //
-                      // Colors.
+                      bottomNavigationBarSelectedLabelSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      bottomNavigationBarUnselectedLabelSchemeColor:
+                          themeController.navUnselectedSchemeColor,
+                      bottomNavigationBarMutedUnselectedLabel:
+                          themeController.navBarMuteUnselected,
+                      bottomNavigationBarSelectedIconSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      bottomNavigationBarUnselectedIconSchemeColor:
+                          themeController.navUnselectedSchemeColor,
+                      bottomNavigationBarMutedUnselectedIcon:
+                          themeController.navBarMuteUnselected,
                       bottomNavigationBarBackgroundSchemeColor:
                           themeController.navBarBackgroundSchemeColor,
-                      bottomNavigationBarSchemeColor:
-                          themeController.navBarSelectedSchemeColor,
-                      //
+                      bottomNavigationBarOpacity:
+                          themeController.bottomNavigationBarOpacity,
+                      bottomNavigationBarElevation:
+                          themeController.bottomNavigationBarElevation,
+                      // Test inputs:
+                      // bottomNavigationBarSelectedIconSize: 24,
+                      // bottomNavigationBarUnselectedIconSize: 24,
+                      // bottomNavigationBarUnselectedLabelSize: null,
+                      // bottomNavigationBarSelectedLabelSize: 20,
+
                       // NavigationBar settings
                       // Shares input with BottomNavigationBar and Rail.
                       navigationBarSelectedLabelSchemeColor:
@@ -496,14 +506,24 @@ class DemoApp extends StatelessWidget {
                       blendTextTheme: themeController.blendDarkTextTheme,
                       popupMenuOpacity: 0.95,
                       // BottomNavigationBar settings
-                      bottomNavigationBarElevation:
-                          themeController.bottomNavigationBarElevation,
-                      bottomNavigationBarOpacity:
-                          themeController.bottomNavigationBarOpacity,
+                      bottomNavigationBarSelectedLabelSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      bottomNavigationBarUnselectedLabelSchemeColor:
+                          themeController.navUnselectedSchemeColor,
+                      bottomNavigationBarMutedUnselectedLabel:
+                          themeController.navBarMuteUnselected,
+                      bottomNavigationBarSelectedIconSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      bottomNavigationBarUnselectedIconSchemeColor:
+                          themeController.navUnselectedSchemeColor,
+                      bottomNavigationBarMutedUnselectedIcon:
+                          themeController.navBarMuteUnselected,
                       bottomNavigationBarBackgroundSchemeColor:
                           themeController.navBarBackgroundSchemeColor,
-                      bottomNavigationBarSchemeColor:
-                          themeController.navBarSelectedSchemeColor,
+                      bottomNavigationBarOpacity:
+                          themeController.bottomNavigationBarOpacity,
+                      bottomNavigationBarElevation:
+                          themeController.bottomNavigationBarElevation,
                       // NavigationBar settings
                       navigationBarSelectedLabelSchemeColor:
                           themeController.navBarSelectedSchemeColor,

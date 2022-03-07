@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Function that returns the passed in Flutter ColorScheme object as Dart code
 String generateColorSchemeDartCode(ColorScheme scheme) {
   final String code = '''
-const ColorScheme(
+const ColorScheme myFlexColorScheme = ColorScheme(
   brightness: ${scheme.brightness},
   primary: ${scheme.primary},
   onPrimary: ${scheme.onPrimary},
@@ -21,7 +21,7 @@ const ColorScheme(
   onError: ${scheme.onError},
   errorContainer: ${scheme.errorContainer},
   onErrorContainer: ${scheme.onErrorContainer},
-  outline: scheme.outline},
+  outline: ${scheme.outline},
   background: ${scheme.background},
   onBackground: ${scheme.onBackground},
   surface: ${scheme.surface},

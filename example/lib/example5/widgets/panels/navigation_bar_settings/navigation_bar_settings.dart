@@ -112,7 +112,7 @@ class NavigationBarSettings extends StatelessWidget {
           ),
           const ListTile(
             title: Text('BottomNavigationBar elevation'),
-            subtitle: Text('Shared setting with NavigationRail. APIs '
+            subtitle: Text('Shared setting with NavigationRail, APIs '
                 'have own properties'),
           ),
           ListTile(
@@ -149,7 +149,7 @@ class NavigationBarSettings extends StatelessWidget {
           ColorSchemePopupMenu(
             title: const Text('Item selection indicator color on '
                 'NavigationBar'),
-            subtitle: const Text('Shared setting with NavigationRail. APIs '
+            subtitle: const Text('Shared setting with NavigationRail, APIs '
                 'have own properties'),
             index: controller.navBarHighlight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -163,8 +163,8 @@ class NavigationBarSettings extends StatelessWidget {
                 : null,
           ),
           ColorSchemePopupMenu(
-            title: const Text('Item color on navigation bars'),
-            subtitle: const Text('Shared setting with NavigationRail. APIs '
+            title: const Text('Selected item color on navigation bars'),
+            subtitle: const Text('Shared setting with NavigationRail, APIs '
                 'have own properties'),
             index: controller.navBarSelectedSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -180,7 +180,7 @@ class NavigationBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('Unselected item color on navigation bars'),
-            subtitle: const Text('Shared setting with NavigationRail. APIs '
+            subtitle: const Text('Shared setting with NavigationRail, APIs '
                 'have own properties'),
             index: controller.navUnselectedSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -200,7 +200,8 @@ class NavigationBarSettings extends StatelessWidget {
             subtitle: const Text('Unselected icon and text are less bright.\n'
                 'BottomNavigationBar will also use muted unselected items '
                 'as SDK default when this is OFF, if all item colors and '
-                'sizes are also at their default values'),
+                'sizes are also at their default values. Shared setting with '
+                'NavigationRail, APIs have own properties'),
             value: controller.navBarMuteUnselected &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -209,8 +210,10 @@ class NavigationBarSettings extends StatelessWidget {
                 : null,
           ),
           const BottomNavigationBarShowcase(),
+          const Divider(height: 1),
           const NavigationBarShowcase(),
-          const Divider(),
+          const Divider(height: 1),
+          const SizedBox(height: 8),
           ListTile(
             title: const Text('Android system navigation bar'),
             subtitle: Text('Using FlexColorScheme.themedSystemNavigationBar.\n'
