@@ -5918,11 +5918,32 @@ class FlexColorScheme with Diagnosticable {
       bottomNavigationBarTheme: useSubThemes
           ? FlexSubThemes.bottomNavigationBar(
               colorScheme: colorScheme,
-              baseSchemeColor: subTheme.bottomNavigationBarSchemeColor,
+              labelTextStyle: subTheme.bottomNavigationBarLabelTextStyle ??
+                  effectiveTextTheme.bodyMedium,
+              selectedLabelSize: subTheme.bottomNavigationBarSelectedLabelSize,
+              unselectedLabelSize:
+                  subTheme.bottomNavigationBarUnselectedLabelSize,
+              selectedLabelSchemeColor:
+                  subTheme.bottomNavigationBarSelectedLabelSchemeColor,
+              unselectedLabelSchemeColor:
+                  subTheme.bottomNavigationBarUnselectedLabelSchemeColor,
+              mutedUnselectedLabel:
+                  subTheme.bottomNavigationBarMutedUnselectedLabel,
+              selectedIconSize: subTheme.bottomNavigationBarSelectedIconSize,
+              unselectedIconSize:
+                  subTheme.bottomNavigationBarUnselectedIconSize,
+              selectedIconSchemeColor:
+                  subTheme.bottomNavigationBarSelectedIconSchemeColor,
+              unselectedIconSchemeColor:
+                  subTheme.bottomNavigationBarUnselectedIconSchemeColor,
+              mutedUnselectedIcon:
+                  subTheme.bottomNavigationBarMutedUnselectedIcon,
               backgroundSchemeColor:
                   subTheme.bottomNavigationBarBackgroundSchemeColor,
-              elevation: subTheme.bottomNavigationBarElevation,
               opacity: subTheme.bottomNavigationBarOpacity,
+              elevation: subTheme.bottomNavigationBarElevation,
+              type: subTheme.bottomNavigationBarType,
+              landscapeLayout: subTheme.bottomNavigationBarLandscapeLayout,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
             )

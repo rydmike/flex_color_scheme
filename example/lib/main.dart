@@ -429,7 +429,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // Select the ColorScheme color used for selected bottom navigation bar item.
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.
-  bottomNavigationBarSchemeColor: SchemeColor.primary,
+  bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.primary,
 
   // Select the ColorScheme color used for bottom navigation bar background.
   // Background is default so no need to set that, provided here as placeholder
