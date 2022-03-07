@@ -21,6 +21,19 @@ class SeededColorScheme extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
+  String _describeFlexToneLabel(int colors) {
+    if (colors == 1) {
+      return 'Material 3';
+    } else if (colors == 2) {
+      return 'Soft';
+    } else if (colors == 3) {
+      return 'Vivid';
+    } else if (colors == 4) {
+      return 'High contrast';
+    }
+    return 'Disabled';
+  }
+
   String _describeFlexToneShort(int colors) {
     if (colors == 1) {
       return 'Default Material 3 design tone map and chroma setup';
@@ -128,7 +141,9 @@ class SeededColorScheme extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Select FlexTones setup'),
+            title: Text('Used FlexTones setup: '
+                // ignore: lines_longer_than_80_chars
+                '${_describeFlexToneLabel(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}'),
             subtitle: Text(
               _describeFlexToneShort(
                   controller.useKeyColors ? controller.usedFlexToneSetup : 0),
@@ -136,7 +151,10 @@ class SeededColorScheme extends StatelessWidget {
             trailing: FlexToneConfigButtons(controller: controller),
           ),
           ListTile(
-            title: const Text('Used CAM16 chroma configuration'),
+            title: Text(
+                // ignore: lines_longer_than_80_chars
+                '${_describeFlexToneLabel(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}'
+                ' FlexTones setup has CAM16 chroma:'),
             subtitle: Text(
               // ignore: lines_longer_than_80_chars
               '${_describeFlexToneLong(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}\n'

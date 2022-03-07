@@ -436,59 +436,32 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // to enable easy selection of other options.
   bottomNavigationBarBackgroundSchemeColor: SchemeColor.background,
 
-  // Define if the M3 NavigationBar should be styled to match FlexColorScheme
-  // opinionated defaults as a starting point before additional properties are
-  // defined. If false, the starting point is the default M3 style for the
-  // widget. The default value is true, using the opinionated values
-  // as a starting point.
-  navigationBarIsStyled: true,
-
-  // Below are some of the quick override properties that you can use on the
-  // M3 based NavigationBar. They are commented out, so remove comments to
-  // try them. They come into effect regardless of if [navigationBarIsStyled] is
-  // true or false, unless otherwise mentioned in the comments and docs.
-
-  // Select the ColorScheme color used for M3 based [NavigationBar] icons.
-  // navigationBarIconSchemeColor: SchemeColor.primary,
-
-  // Select the ColorScheme color used for M3 based [NavigationBar] label text.
-  // navigationBarTextSchemeColor: SchemeColor.onSurface,
-
-  // Select the ColorScheme base color used to highlight selected item.
+  // Below are some example quick override properties that you can use on the
+  // M3 based NavigationBar. They are double commented out, so it its easy to
+  // remove the comments to try them.
+  //
+  // // SchemeColor based color for [NavigationBar]'s selected item icon.
+  // navigationBarSelectedIconSchemeColor: SchemeColor.primary,
+  // // SchemeColor based color for [NavigationBar]'s selected item label.
+  // navigationBarSelectedLabelSchemeColor: SchemeColor.primary,
+  // // SchemeColor based color for [NavigationBar]'s unselected item icons.
+  // navigationBarUnselectedIconSchemeColor: SchemeColor.onSurface,
+  // // SchemeColor based color for [NavigationBar]'s unselected item icons.
+  // navigationBarUnselectedLabelSchemeColor: SchemeColor.onSurface,
+  // // SchemeColor based color for [NavigationBar]'s selected item highlight.
   // navigationBarHighlightSchemeColor: SchemeColor.primaryContainer,
-
-  // Select the ColorScheme color used for navigation bar background.
+  // // Select the ColorScheme color used for [NavigationBar]'s background.
   // navigationBarBackgroundSchemeColor: SchemeColor.background,
-
-  // When set to true [NavigationBar] unselected icons use a more muted version
-  // of the color defined by [navigationBarIconSchemeColor].
-  // If [navigationBarIsStyled] is false, you also have to assign a value to
-  // [navigationBarIconSchemeColor] or [navigationBarSelectedIconSize] or
-  // [navigationBarUnselectedIconSize] so the none standard IconTheme
-  // must be created that can be muted. If none of those properties are defined
-  // the widget default behavior for icon style is used, and unselected
-  // icon cannot be muted since all properties are null.
-  //
+  // // When set to true [NavigationBar] unselected icons use a more muted
+  // // version of color defined by [navigationBarUnselectedIconSchemeColor].
   // navigationBarMutedUnselectedIcon: true,
-
-  // When set to true [NavigationBar] unselected text use a more muted version
-  // of the color defined by [navigationBarTextSchemeColor].
-  // If [navigationBarIsStyled] is false, you also have to assign a value to
-  // [navigationBarTextSchemeColor] or [navigationBarSelectedLabelSize] or
-  // [navigationBarUnselectedLabelSize] so the none standard TextStyle
-  // must be created that can be muted, if none of those properties are defined
-  // the widget default behavior for label text style is used and unselected
-  // text cannot be muted.
-  //
-  // navigationBarMutedUnselectedText: true,
-
-  // Set size of labels.
-  //
+  // // When set to true [NavigationBar] unselected labels use a more muted
+  // // version of color defined by [navigationBarUnselectedLabelSchemeColor].
+  // navigationBarMutedUnselectedLabel: true,
+  // // Set size of labels.
   // navigationBarSelectedLabelSize: 12,
   // navigationBarUnselectedLabelSize: 10,
-
-  // Set the size of icons icons.
-  //
+  // // Set the size of icons icons.
   // navigationBarSelectedIconSize: 26,
   // navigationBarUnselectedIconSize: 22,
 );

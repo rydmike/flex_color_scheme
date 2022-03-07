@@ -287,7 +287,13 @@ should be relatively easy, despite the long list of changes and new features.
   primary color is locked to a given brand or design color value, but
   other colors in the ColorScheme are less critical, and it is more important
   that they match the tone of the over all theme.
- 
+
+* Added bool property `useMaterial3ErrorColors` to `FlexColorScheme.light` and
+  `FlexColorScheme.dark`. Set to true, to use the new Material 3 error colors,
+  instead of past Material2 based ones, which are still default. When using key
+  color seed generated [ColorScheme]s always use the Material 3 based error
+  colors.
+
 * Added custom tone configuration for seeded `ColorScheme`. M3 color design
   has it own fixed defaults for which tone from the relevant `TonalPalette`
   is used as input on each color property in the light and corresponding dark
@@ -299,6 +305,7 @@ should be relatively easy, despite the long list of changes and new features.
   tuning that works very well for different needs, e.g. primary could 
   be assigned a one step lower value in light mode, to produce seeded color
   schemes that are more vivid or saturated.
+
 
 * The Material 3 based seeded `ColorScheme` also locks down the chroma level of
   seed color for secondary colors to 16 and to 24 for tertiary colors, and keeps
@@ -314,13 +321,16 @@ should be relatively easy, despite the long list of changes and new features.
   for dark or light mode brightness themes. There is `FlexTones.material`, it is 
   an alternative `Brightness` input based API for `FlexTones.light` and 
  `FlexTones.dark` to get the default Material 3 design guide config. 
-  In a similar fashion there are 3 alternative  
-  configurations. `FlexTones.soft`, for even softer and more earthy tones than 
-  M3 defaults, that are pretty soft and pastel like to begin with. If you prefer
-  more vivid tones to be generated, try `FlexTones.vivid`. If you like or need
-  more contrast differences between your colors, you can try 
-  `FlexTones.highContrast`. It is easy to make your own configs with the API.
-  The setup of the these built-in examples shows how.
+  In a similar fashion there are 3 alternative configurations.
+  * `FlexTones.soft`, for even softer and more earthy tones than 
+     M3 defaults, that are pretty soft and pastel like to begin with. 
+  * If you prefer more vivid tones to be generated, try `FlexTones.vivid`.
+  * If you like or need more contrast differences between your colors, you can 
+    try `FlexTones.highContrast`.
+  
+  It is easy to make your own configs with the API. The setup of the 
+  these built-in examples shows how.
+
 
 * Added new alpha blend control `blendOnLevel` value for onColors to class
   `FlexSubThemesData`. It is used to produce onColors for main colors that
@@ -492,14 +502,9 @@ should be relatively easy, despite the long list of changes and new features.
     alone. Needed to make a custom  widget where active thumb,
     explicitly uses switch theme color as thumb color, sigh.
 
-
-**IN PROGRESS**
-  Added the `FlexSubThemesData` properties for using 
-  `FlexSubThemes.navigationRailTheme`. It still needd doc comments review plus
-   updates and connection setup to FlexColorScheme theme config. The 
-   implmentation in ThemesPlayground needs to be updated too.
-
-**TODO** 
+**TODO**
+* Update the `BottomNavigationBar` subTheme to be in same style and feature 
+  level `NavigationBar` and `NavigationRail`.
 * Review and manual testing of all things above.
 * Add loading animation to Themes Playground web build. Might be pushed to
   when Flutter SDK supports it out of the box, seemed a bit tedious to do still.

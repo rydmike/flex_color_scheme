@@ -654,8 +654,7 @@ class ThemeServicePrefs implements ThemeService {
   Future<SchemeColor?> navBarHighlight() async {
     try {
       final int value = _prefs.getInt(ThemeService.keyNavBarHighlight) ??
-          ThemeService.defaultNavBarHighlight?.index ??
-          -1;
+          ThemeService.defaultNavBarHighlight.index;
       if (value < 0 || value >= SchemeColor.values.length) {
         return null;
       } else {
@@ -758,8 +757,7 @@ class ThemeServicePrefs implements ThemeService {
   Future<SchemeColor?> navSelectedSchemeColor() async {
     try {
       final int value = _prefs.getInt(ThemeService.keyNavSelectedSchemeColor) ??
-          ThemeService.defaultNavSelectedSchemeColor?.index ??
-          -1;
+          ThemeService.defaultNavSelectedSchemeColor.index;
       if (value < 0 || value >= SchemeColor.values.length) {
         return null;
       } else {
@@ -1991,8 +1989,7 @@ class ThemeServicePrefs implements ThemeService {
     try {
       final int value =
           _prefs.getInt(ThemeService.keyDialogBackgroundSchemeColor) ??
-              ThemeService.defaultDialogBackgroundSchemeColor?.index ??
-              -1;
+              ThemeService.defaultDialogBackgroundSchemeColor.index;
       if (value < 0 || value >= SchemeColor.values.length) {
         return null;
       } else {
@@ -2132,8 +2129,7 @@ class ThemeServicePrefs implements ThemeService {
     try {
       final int value =
           _prefs.getInt(ThemeService.keyNavBarBackgroundSchemeColor) ??
-              ThemeService.defaultNavBarBackgroundSchemeColor?.index ??
-              -1;
+              ThemeService.defaultNavBarBackgroundSchemeColor.index;
       if (value < 0 || value >= SchemeColor.values.length) {
         return null;
       } else {
@@ -2241,8 +2237,7 @@ class ThemeServicePrefs implements ThemeService {
     try {
       final int value =
           _prefs.getInt(ThemeService.keyNavUnselectedSchemeColor) ??
-              ThemeService.defaultNavUnselectedSchemeColor?.index ??
-              -1;
+              ThemeService.defaultNavUnselectedSchemeColor.index;
       if (value < 0 || value >= SchemeColor.values.length) {
         return null;
       } else {
@@ -2262,6 +2257,31 @@ class ThemeServicePrefs implements ThemeService {
     try {
       await _prefs.setInt(
           ThemeService.keyNavUnselectedSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used useM3ErrorColor setting in example 5.
+  @override
+  Future<bool> useM3ErrorColor() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyUseM3ErrorColor) ??
+          ThemeService.defaultUseM3ErrorColor;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultUseM3ErrorColor;
+    }
+  }
+
+  /// Persists useM3ErrorColor setting in example 5.
+  @override
+  Future<void> saveUseM3ErrorColor(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyUseM3ErrorColor, value);
     } catch (e) {
       debugPrint(e.toString());
     }

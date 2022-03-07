@@ -2274,4 +2274,29 @@ class ThemeServiceHive implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  // ----
+
+  /// Loads used useM3ErrorColor setting in example 5.
+  @override
+  Future<bool> useM3ErrorColor() async {
+    try {
+      return _hiveBox.get(ThemeService.keyUseM3ErrorColor,
+          defaultValue: ThemeService.defaultUseM3ErrorColor) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultUseM3ErrorColor;
+    }
+  }
+
+  /// Persists useM3ErrorColor setting in example 5.
+  @override
+  Future<void> saveUseM3ErrorColor(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyUseM3ErrorColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

@@ -110,6 +110,15 @@ class SelectTheme extends StatelessWidget {
                 'input modifiers, the surrounding color is the effective input '
                 'color.'),
           ),
+          SwitchListTileAdaptive(
+            title: const Text('Use Material 3 error colors'),
+            subtitle: const Text('Override defined M2 error colors and use M3 '
+                'error colors also when not using seeded ColorScheme'),
+            value: controller.useM3ErrorColor && controller.useFlexColorScheme,
+            onChanged: controller.useFlexColorScheme
+                ? controller.setUseM3ErrorColor
+                : null,
+          ),
           UsedColorsPopupMenu(
             title: const Text('Input limiter, use fewer of the six '
                 'predefined input color values'),

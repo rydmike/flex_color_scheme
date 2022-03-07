@@ -20,7 +20,7 @@ import 'flex_extensions.dart';
 /// will also work OK for their variants. This is usually correct if the
 /// variant colors are close in brightness to their none variant
 /// versions. In Material 3 design, with updated [ColorScheme] in Flutter
-/// starting wite version 2.10, all main colors have their own onColor.
+/// starting with version 2.10, all main colors have their own onColor.
 ///
 /// Scaffold and dialog background colors that FlexColorScheme allows us to
 /// define separately, do not have their own "on" color, it is assumed that they
@@ -200,12 +200,12 @@ class FlexSchemeOnColors with Diagnosticable {
             ? Colors.white.blendAlpha(background, backgroundAlpha)
             : Colors.black.blendAlpha(background, backgroundAlpha));
     final Color usedOnError = onError ??
-        (_estimateErrorBrightness(error) == Brightness.dark
+        (estimateErrorBrightness(error) == Brightness.dark
             ? Colors.white.blendAlpha(error, errorAlpha)
             : Colors.black.blendAlpha(error, errorAlpha));
 
     final Color usedOnErrorContainer = onErrorContainer ??
-        (_estimateErrorBrightness(errorContainer ?? error) == Brightness.dark
+        (estimateErrorBrightness(errorContainer ?? error) == Brightness.dark
             ? Colors.white
                 .blendAlpha(errorContainer ?? error, errorContainerAlpha)
             : Colors.black
@@ -227,9 +227,9 @@ class FlexSchemeOnColors with Diagnosticable {
     );
   }
 
-  /// Brightness estimation for error colors that includes fix to conisder
+  /// Brightness estimation for error colors that includes fix to consider
   /// M2 spec for on M2 dark error color.
-  static Brightness _estimateErrorBrightness(Color color) {
+  static Brightness estimateErrorBrightness(Color color) {
     // The ThemeData.estimateBrightnessForColor returns dark on the M2
     // Material dark mode error colors, but M2 spec uses black onColor on it
     // so we should return light to get the correct on color for

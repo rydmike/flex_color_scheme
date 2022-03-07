@@ -1631,7 +1631,7 @@ void main() {
       expect(FlexColor.rosewoodLightPrimary, const Color(0xFF5C000E));
     });
     test('FC5 colors', () {
-      expect(FlexColor.rosewoodLightPrimaryContainer, const Color(0xFFD9C5C7));
+      expect(FlexColor.rosewoodLightPrimaryContainer, const Color(0xFFF4CACE));
     });
     test('FC5 colors', () {
       expect(FlexColor.rosewoodLightSecondary, const Color(0xFF74540E));

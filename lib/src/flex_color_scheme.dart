@@ -2323,11 +2323,22 @@ class FlexColorScheme with Diagnosticable {
     /// that change has landed on stable, we will deprecate this flag and remove
     /// all uses of it. Everything will use the Material 3 look and feel at
     /// that point.
-    ///
-    /// See also:
-    ///
-    ///   * [Material Design 3](https://m3.material.io/).
     final bool useMaterial3 = false,
+
+    /// Set to true, to use the new Material 3 error colors.
+    ///
+    /// If [useMaterial3ErrorColors] is false, the generated [ColorScheme]
+    /// and [ThemeData] will use Material 2 default error colors or
+    /// error colors as defined by the built in color schemes. Thus using same
+    /// error colors as in FlexColorScheme versions before version 5.
+    ///
+    /// If [useMaterial3ErrorColors] is true, the resulting [ColorScheme]
+    /// and [ThemeData] will use the Material 3 design guide error colors.
+    ///
+    /// Key color seed generated [ColorScheme]s always use the Material 3
+    /// design guide error colors, or error colors from its customized
+    /// [TonalPalette] generation setup.
+    final bool useMaterial3ErrorColors = false,
 
     /// To use and activate Material 3 color system based [ColorScheme]
     /// defined via key colors for primary, secondary and tertiary colors and
@@ -2340,7 +2351,9 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
     /// behaviour depends on properties defined in the [FlexKeyColors]
-    /// instance.
+    /// instance. The default constructor makes one where
+    /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
+    /// of key colors and from them generated color scheme.
     ///
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
@@ -2679,11 +2692,20 @@ class FlexColorScheme with Diagnosticable {
                 onTertiary: onColors.onTertiary,
                 tertiaryContainer: effectiveColors.tertiaryContainer,
                 onTertiaryContainer: onColors.onTertiaryContainer,
-                error: effectiveColors.error ?? FlexColor.materialLightError,
-                onError: onColors.onError,
-                errorContainer: effectiveColors.errorContainer ??
-                    FlexColor.lightErrorContainer(FlexColor.materialLightError),
-                onErrorContainer: onColors.onErrorContainer,
+                error: useMaterial3ErrorColors && !seed.useKeyColors
+                    ? FlexColor.material3LightError
+                    : effectiveColors.error ?? FlexColor.materialLightError,
+                onError: useMaterial3ErrorColors && !seed.useKeyColors
+                    ? FlexColor.material3LightOnError
+                    : onColors.onError,
+                errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+                    ? FlexColor.material3LightErrorContainer
+                    : effectiveColors.errorContainer ??
+                        FlexColor.lightErrorContainer(
+                            FlexColor.materialLightError),
+                onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+                    ? FlexColor.material3LightOnErrorContainer
+                    : onColors.onErrorContainer,
                 background: effectiveBackgroundColor,
                 onBackground: onColors.onBackground,
                 surface: effectiveSurfaceColor,
@@ -2724,7 +2746,9 @@ class FlexColorScheme with Diagnosticable {
       // in appBarBackground will override it if provided.
       appBarBackground: effectiveAppBarColor,
       // Effective error color and null fallback.
-      error: effectiveColors.error ?? FlexColor.materialLightError,
+      error: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3LightError
+          : effectiveColors.error ?? FlexColor.materialLightError,
       onPrimary: onColors.onPrimary,
       onPrimaryContainer: onColors.onPrimaryContainer,
       onSecondary: onColors.onSecondary,
@@ -2733,7 +2757,9 @@ class FlexColorScheme with Diagnosticable {
       onTertiaryContainer: onColors.onTertiaryContainer,
       onSurface: onColors.onSurface,
       onBackground: onColors.onBackground,
-      onError: onColors.onError,
+      onError: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3LightOnError
+          : onColors.onError,
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: effectiveBottomAppBarElevation,
@@ -3841,6 +3867,21 @@ class FlexColorScheme with Diagnosticable {
     ///   * [Material Design 3](https://m3.material.io/).
     final bool useMaterial3 = false,
 
+    /// Set to true, to use the new Material 3 error colors.
+    ///
+    /// If [useMaterial3ErrorColors] is false, the generated [ColorScheme]
+    /// and [ThemeData] will use Material 2 default error colors or
+    /// error colors as defined by the built in color schemes. Thus using same
+    /// error colors as in FlexColorScheme versions before version 5.
+    ///
+    /// If [useMaterial3ErrorColors] is true, the resulting [ColorScheme]
+    /// and [ThemeData] will use the Material 3 design guide error colors.
+    ///
+    /// Key color seed generated [ColorScheme]s always use the Material 3
+    /// design guide error colors, or error colors from its customized
+    /// [TonalPalette] generation setup.
+    final bool useMaterial3ErrorColors = false,
+
     /// To use and activate Material 3 color system based [ColorScheme]
     /// defined via key colors for primary, secondary and tertiary colors and
     /// the [TonalPalette] generated by these key color values, pass
@@ -3852,7 +3893,9 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
     /// behaviour depends on properties defined in the [FlexKeyColors]
-    /// instance.
+    /// instance. The default constructor makes one where
+    /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
+    /// of key colors and from them generated color scheme.
     ///
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
@@ -4219,11 +4262,20 @@ class FlexColorScheme with Diagnosticable {
                 onTertiary: onColors.onTertiary,
                 tertiaryContainer: effectiveColors.tertiaryContainer,
                 onTertiaryContainer: onColors.onTertiaryContainer,
-                error: effectiveColors.error ?? FlexColor.materialDarkError,
-                onError: onColors.onError,
-                errorContainer: effectiveColors.errorContainer ??
-                    FlexColor.darkErrorContainer(FlexColor.materialDarkError),
-                onErrorContainer: onColors.onErrorContainer,
+                error: useMaterial3ErrorColors && !seed.useKeyColors
+                    ? FlexColor.material3DarkError
+                    : effectiveColors.error ?? FlexColor.materialDarkError,
+                onError: useMaterial3ErrorColors && !seed.useKeyColors
+                    ? FlexColor.material3DarkOnError
+                    : onColors.onError,
+                errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+                    ? FlexColor.material3DarkErrorContainer
+                    : effectiveColors.errorContainer ??
+                        FlexColor.darkErrorContainer(
+                            FlexColor.materialDarkError),
+                onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+                    ? FlexColor.material3DarkOnErrorContainer
+                    : onColors.onErrorContainer,
                 background: effectiveBackgroundColor,
                 onBackground: onColors.onBackground,
                 surface: effectiveSurfaceColor,
@@ -4266,7 +4318,9 @@ class FlexColorScheme with Diagnosticable {
       // in appBarBackground will override it if provided.
       appBarBackground: effectiveAppBarColor,
       // Effective error color and null fallback.
-      error: effectiveColors.error ?? FlexColor.materialDarkError,
+      error: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3DarkError
+          : effectiveColors.error ?? FlexColor.materialDarkError,
       onPrimary: onColors.onPrimary,
       onPrimaryContainer: onColors.onPrimaryContainer,
       onSecondary: onColors.onSecondary,
@@ -4275,7 +4329,9 @@ class FlexColorScheme with Diagnosticable {
       onTertiaryContainer: onColors.onTertiaryContainer,
       onSurface: onColors.onSurface,
       onBackground: onColors.onBackground,
-      onError: onColors.onError,
+      onError: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3DarkOnError
+          : onColors.onError,
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: effectiveBottomAppBarElevation,

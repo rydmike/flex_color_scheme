@@ -932,7 +932,7 @@ class FlexSubThemesData with Diagnosticable {
       'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
       'version 5 and later this property has been replaced by: '
       'navigationBarMutedUnselectedLabel.')
-  final SchemeColor? navigationBarMutedUnselectedText;
+  final bool? navigationBarMutedUnselectedText;
 
   /// The size of the icon on selected [NavigationBar] item.
   ///
