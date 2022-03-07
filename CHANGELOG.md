@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.1 - March 5, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - March 7, 2022 - WORK IN PROGRESS
 
 Version 5 is a big refactor with deprecation of previous `variant` based
 color names in favor of `container` ones that were added to updated M3
@@ -41,9 +41,9 @@ M3 impacts and ThemeData color property deprecations commits landed in Flutter
 master channel that I reviewed and prepared for in advance when possible.
 
 Much work on tests, and readme documentation updates remain, but API docs are 
-up-to-date. And this book long change log should help. There are hardly any 
-breaking changes, so migration should be relatively easy, despite the long
-list of changes and new features.
+up-to-date. And this book long change log should help. There are only a few 
+breaking changes, and most of them are rarely used properties, so migration 
+should be relatively easy, despite the long list of changes and new features.
 
 **BREAKING**  
 * Requires at least Flutter stable 2.10.0.This release uses new M3 `ColorScheme` 
@@ -68,6 +68,28 @@ list of changes and new features.
   enum values. In the bundled samples you might for example see wrong color 
   selections loaded from local storage, just reset or select correct value 
   to fix it.
+
+* To get more harmonized setup on opt-in sub themes for `NavigationBar`,
+  `BottomNavigationBar` and `NaivgationRail` a few properties in 
+  `FlexSubThemesData` and `FlexSubThemes` had to be modified and broken.
+  Impact is estimated to be low for most users. 
+  
+  The following properties were renamed in `FlexSubThemesData`:
+  * `navigationBarTextSchemeColor` -> `navigationBarSelectedLabelSchemeColor`
+  * `navigationBarMutedUnselectedText` -> `navigationBarMutedUnselectedLabel`
+  * `navigationBarIconSchemeColor` -> `navigationBarSelectedIconSchemeColor`
+  
+  In `FlexThemeData` the property `navigationBarIsStyled` was removed. It is 
+  no longer needed. The same end result it enabled can be achieved by
+  by setting all NavigationBar related properties in `FlexSubThemesData` that 
+  have a none null default value to null.
+
+  The following parameters were renamed in `FlexSubThemes.navigationBarTheme`:
+  * `textSchemeColor` -> `selectedLabelSchemeColor`
+  * `unselectedTextSchemeColor` -> `unselectedLabelSchemeColor`
+  * `iconSchemeColor` -> `selectedIconSchemeColor`
+  * `mutedUnselectedText` -> `mutedUnselectedLabel`
+
 
 **NEW**
 

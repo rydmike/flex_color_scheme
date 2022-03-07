@@ -874,7 +874,7 @@ class NavigationRailShowcase extends StatefulWidget {
   const NavigationRailShowcase({
     Key? key,
     this.child,
-    this.height = 420,
+    this.height = 450,
     this.useIndicator,
     this.onChangedUseIndicator,
     this.railType,
@@ -989,87 +989,92 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
         const Divider(height: 1),
         SizedBox(
           height: widget.height,
-          child: Row(
-            children: <Widget>[
-              NavigationRail(
-                extended: isExtended,
-                useIndicator: useIndicator ? true : null,
-                minExtendedWidth: 150,
-                labelType: effectiveLabelType,
-                selectedIndex: buttonIndex,
-                onDestinationSelected: (int value) {
-                  setState(() {
-                    buttonIndex = value;
-                  });
-                },
-                destinations: const <NavigationRailDestination>[
-                  NavigationRailDestination(
-                    icon: Icon(Icons.chat_bubble),
-                    label: Text('Chat'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.beenhere),
-                    label: Text('Tasks'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.create_new_folder),
-                    label: Text('Folder'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.logout),
-                    label: Text('Logout'),
-                  ),
-                ],
-              ),
-              const VerticalDivider(width: 1),
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    SwitchListTileAdaptive(
-                      title: const Text('Expand and collapse'),
-                      subtitle: const Text('ON to expand  OFF to collapse\n'
-                          'Only used for local control of rail presentation.'),
-                      value: isExtended,
-                      onChanged: (bool value) {
-                        setState(() {
-                          isExtended = value;
-                          effectiveLabelType = NavigationRailLabelType.none;
-                        });
-                      },
+          child: OverflowBox(
+            alignment: AlignmentDirectional.topStart,
+            maxHeight: 1200,
+            child: Row(
+              children: <Widget>[
+                NavigationRail(
+                  extended: isExtended,
+                  useIndicator: useIndicator ? true : null,
+                  minExtendedWidth: 150,
+                  labelType: effectiveLabelType,
+                  selectedIndex: buttonIndex,
+                  onDestinationSelected: (int value) {
+                    setState(() {
+                      buttonIndex = value;
+                    });
+                  },
+                  destinations: const <NavigationRailDestination>[
+                    NavigationRailDestination(
+                      icon: Icon(Icons.chat_bubble),
+                      label: Text('Chat'),
                     ),
-                    ListTile(
-                      title: const Text('Labels when rail is collapsed'),
-                      subtitle: Text(explainLabelStyle(labelType)),
-                      trailing: NavigationRailLabelTypeButtons(
-                        style: labelType,
-                        onChanged: (NavigationRailLabelType value) {
-                          setState(() {
-                            labelType = value;
-                            if (!isExtended) effectiveLabelType = labelType;
-                          });
-                          widget.onChangedRailType?.call(value);
-                        },
-                      ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.beenhere),
+                      label: Text('Tasks'),
                     ),
-                    SwitchListTileAdaptive(
-                      title: const Text('Item selection indicator'),
-                      subtitle: const Text('Also ON when '
-                          'useMaterial3 is true, only thing the toggle does '
-                          'in Flutter 2.10. Turning this '
-                          'OFF, inputs "null" to widget to show this.'),
-                      value: useIndicator,
-                      onChanged: (bool value) {
-                        setState(() {
-                          useIndicator = value;
-                          widget.onChangedUseIndicator?.call(value);
-                        });
-                      },
+                    NavigationRailDestination(
+                      icon: Icon(Icons.create_new_folder),
+                      label: Text('Folder'),
                     ),
-                    widget.child ?? const SizedBox.shrink(),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.logout),
+                      label: Text('Logout'),
+                    ),
                   ],
                 ),
-              ),
-            ],
+                const VerticalDivider(width: 1),
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      SwitchListTileAdaptive(
+                        title: const Text('Expand and collapse'),
+                        subtitle: const Text('ON to expand  OFF to collapse\n'
+                            'Only used for local control of rail '
+                            'presentation.'),
+                        value: isExtended,
+                        onChanged: (bool value) {
+                          setState(() {
+                            isExtended = value;
+                            effectiveLabelType = NavigationRailLabelType.none;
+                          });
+                        },
+                      ),
+                      ListTile(
+                        title: const Text('Labels when rail is collapsed'),
+                        subtitle: Text(explainLabelStyle(labelType)),
+                        trailing: NavigationRailLabelTypeButtons(
+                          style: labelType,
+                          onChanged: (NavigationRailLabelType value) {
+                            setState(() {
+                              labelType = value;
+                              if (!isExtended) effectiveLabelType = labelType;
+                            });
+                            widget.onChangedRailType?.call(value);
+                          },
+                        ),
+                      ),
+                      SwitchListTileAdaptive(
+                        title: const Text('Item selection indicator'),
+                        subtitle: const Text('Also ON when '
+                            'useMaterial3 is true, only thing the toggle does '
+                            'in Flutter 2.10. Turning this '
+                            'OFF, inputs "null" to widget to show this.'),
+                        value: useIndicator,
+                        onChanged: (bool value) {
+                          setState(() {
+                            useIndicator = value;
+                            widget.onChangedUseIndicator?.call(value);
+                          });
+                        },
+                      ),
+                      widget.child ?? const SizedBox.shrink(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
