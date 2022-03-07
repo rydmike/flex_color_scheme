@@ -755,10 +755,10 @@ class ThemeServicePrefs implements ThemeService {
   ///
   /// Nullable, out of range read enum index returned as null.
   @override
-  Future<SchemeColor?> navBarScheme() async {
+  Future<SchemeColor?> navSelectedSchemeColor() async {
     try {
-      final int value = _prefs.getInt(ThemeService.keyNavBarScheme) ??
-          ThemeService.defaultNavBarScheme?.index ??
+      final int value = _prefs.getInt(ThemeService.keyNavSelectedSchemeColor) ??
+          ThemeService.defaultNavSelectedSchemeColor?.index ??
           -1;
       if (value < 0 || value >= SchemeColor.values.length) {
         return null;
@@ -767,7 +767,7 @@ class ThemeServicePrefs implements ThemeService {
       }
     } catch (e) {
       debugPrint(e.toString());
-      return ThemeService.defaultNavBarScheme;
+      return ThemeService.defaultNavSelectedSchemeColor;
     }
   }
 
@@ -775,9 +775,10 @@ class ThemeServicePrefs implements ThemeService {
   ///
   /// Nullable, null stored as -1.
   @override
-  Future<void> saveNavBarScheme(SchemeColor? value) async {
+  Future<void> saveNavSelectedSchemeColor(SchemeColor? value) async {
     try {
-      await _prefs.setInt(ThemeService.keyNavBarScheme, value?.index ?? -1);
+      await _prefs.setInt(
+          ThemeService.keyNavSelectedSchemeColor, value?.index ?? -1);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -2225,6 +2226,42 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveUseIndicator(bool value) async {
     try {
       await _prefs.setBool(ThemeService.keyUseIndicator, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used navUnselectedSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> navUnselectedSchemeColor() async {
+    try {
+      final int value =
+          _prefs.getInt(ThemeService.keyNavUnselectedSchemeColor) ??
+              ThemeService.defaultNavUnselectedSchemeColor?.index ??
+              -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultNavUnselectedSchemeColor;
+    }
+  }
+
+  /// Persists used navUnselectedSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveNavUnselectedSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keyNavUnselectedSchemeColor, value?.index ?? -1);
     } catch (e) {
       debugPrint(e.toString());
     }

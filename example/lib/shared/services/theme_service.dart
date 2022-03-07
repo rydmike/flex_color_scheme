@@ -386,19 +386,17 @@ abstract class ThemeService {
   /// Persists used navBarStyle setting in example 5.
   Future<void> saveNavBarStyle(FlexSystemNavBarStyle value);
 
-  /// Key used to read and save the navBarScheme value.
-  static const String keyNavBarScheme = 'navBarScheme';
+  /// Key used to read and save the navSelectedSchemeColor value.
+  static const String keyNavSelectedSchemeColor = 'navSelectedSchemeColor';
 
-  /// Default value for the navBarScheme, also used to reset settings.
-  ///
-  /// We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultNavBarScheme = null;
+  /// Default value for the navSelectedSchemeColor, also used to reset settings.
+  static const SchemeColor defaultNavSelectedSchemeColor = SchemeColor.primary;
 
-  /// Loads used navBarScheme setting in example 5.
-  Future<SchemeColor?> navBarScheme();
+  /// Loads used navSelectedSchemeColor setting in example 5.
+  Future<SchemeColor?> navSelectedSchemeColor();
 
-  /// Persists used navBarScheme setting in example 5.
-  Future<void> saveNavBarScheme(SchemeColor? value);
+  /// Persists used navSelectedSchemeColor setting in example 5.
+  Future<void> saveNavSelectedSchemeColor(SchemeColor? value);
 
   /// Key used to read and save the navBarHighlight value.
   static const String keyNavBarHighlight = 'navBarHighlight';
@@ -406,7 +404,7 @@ abstract class ThemeService {
   /// Default value for the navBarHighlight, also used to reset settings.
   ///
   /// We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultNavBarHighlight = null;
+  static const SchemeColor defaultNavBarHighlight = SchemeColor.primary;
 
   /// Loads used navBarHighlight setting in example 5.
   Future<SchemeColor?> navBarHighlight();
@@ -418,7 +416,7 @@ abstract class ThemeService {
   static const String keyNavBarMuteUnselected = 'navBarMuteUnselected';
 
   /// Default value for the navBarMuteUnselected, also used to reset settings.
-  static const bool defaultNavBarMuteUnselected = false;
+  static const bool defaultNavBarMuteUnselected = true;
 
   /// Loads used navBarMuteUnselected setting in example 5.
   Future<bool> navBarMuteUnselected();
@@ -1029,9 +1027,8 @@ abstract class ThemeService {
 
   /// Default value for the dialogBackgroundSchemeColor, also used to
   /// reset settings.
-  ///
-  /// We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultDialogBackgroundSchemeColor = null;
+  static const SchemeColor defaultDialogBackgroundSchemeColor =
+      SchemeColor.surface;
 
   /// Loads used dialogBackgroundSchemeColor setting.
   Future<SchemeColor?> dialogBackgroundSchemeColor();
@@ -1097,9 +1094,8 @@ abstract class ThemeService {
 
   /// Default value for the navBarBackgroundSchemeColor, also used to
   /// reset settings.
-  ///
-  /// We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultNavBarBackgroundSchemeColor = null;
+  static const SchemeColor defaultNavBarBackgroundSchemeColor =
+      SchemeColor.background;
 
   /// Loads used navBarBackgroundSchemeColor setting.
   Future<SchemeColor?> navBarBackgroundSchemeColor();
@@ -1147,11 +1143,27 @@ abstract class ThemeService {
   static const String keyUseIndicator = 'useIndicator';
 
   /// Default value for the useIndicator, also to reset settings.
-  static const bool defaultUseIndicator = false;
+  static const bool defaultUseIndicator = true;
 
   /// Loads used useIndicator setting in example 5.
   Future<bool> useIndicator();
 
   /// Persists useIndicator setting in example 5.
   Future<void> saveUseIndicator(bool value);
+
+  // ---------
+
+  /// Key used to read and save the navUnselectedSchemeColor value.
+  static const String keyNavUnselectedSchemeColor = 'navUnselectedSchemeColor';
+
+  /// Default value for the navUnselectedSchemeColor, also used to
+  /// reset settings.
+  static const SchemeColor defaultNavUnselectedSchemeColor =
+      SchemeColor.onSurface;
+
+  /// Loads used navUnselectedSchemeColor setting.
+  Future<SchemeColor?> navUnselectedSchemeColor();
+
+  /// Persists used navUnselectedSchemeColor setting.
+  Future<void> saveNavUnselectedSchemeColor(SchemeColor? value);
 }

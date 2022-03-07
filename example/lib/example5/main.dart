@@ -292,57 +292,57 @@ class DemoApp extends StatelessWidget {
                       bottomNavigationBarBackgroundSchemeColor:
                           themeController.navBarBackgroundSchemeColor,
                       bottomNavigationBarSchemeColor:
-                          themeController.navBarScheme,
+                          themeController.navBarSelectedSchemeColor,
                       //
                       // NavigationBar settings
-                      // Shares input with BottomNavigationBar.
-                      //
-                      // Themed opacity of NavigationBar
-                      navigationBarOpacity:
-                          themeController.bottomNavigationBarOpacity,
-                      // Colors
-                      navigationBarBackgroundSchemeColor:
-                          themeController.navBarBackgroundSchemeColor,
-                      navigationBarIconSchemeColor:
-                          themeController.navBarScheme,
-                      navigationBarTextSchemeColor:
-                          themeController.navBarScheme,
-                      // The item highlight color of the M3 Navbar.
-                      navigationBarHighlightSchemeColor:
-                          themeController.navBarHighlight,
-                      // Mute unselected icon and text color on NavigationBar.
-                      navigationBarMutedUnselectedText:
+                      // Shares input with BottomNavigationBar and Rail.
+                      navigationBarSelectedLabelSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      navigationBarUnselectedLabelSchemeColor:
+                          themeController.navUnselectedSchemeColor,
+                      navigationBarMutedUnselectedLabel:
                           themeController.navBarMuteUnselected,
+                      navigationBarSelectedIconSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      navigationBarUnselectedIconSchemeColor:
+                          themeController.navUnselectedSchemeColor,
                       navigationBarMutedUnselectedIcon:
                           themeController.navBarMuteUnselected,
+                      navigationBarHighlightSchemeColor:
+                          themeController.navBarHighlight,
+                      navigationBarBackgroundSchemeColor:
+                          themeController.navBarBackgroundSchemeColor,
+                      navigationBarOpacity:
+                          themeController.bottomNavigationBarOpacity,
                       //
                       // NavigationRail settings
-                      //
-                      // Shares controller inputs with navigation bars in
-                      // this demo.
-                      //
-                      // Elevation of BottomNavigationBar.
-                      navigationRailElevation:
-                          themeController.bottomNavigationBarElevation,
-                      // Themed opacity of bottom navigation bar.
-                      navigationRailOpacity:
-                          themeController.bottomNavigationBarOpacity,
-                      // Colors.
-                      navigationRailBackgroundSchemeColor:
-                          themeController.navBarBackgroundSchemeColor,
-                      navigationRailIconSchemeColor:
-                          themeController.navBarScheme,
-                      navigationRailTextSchemeColor:
-                          themeController.navBarScheme,
-                      navigationRailIndicatorSchemeColor:
-                          themeController.navBarHighlight,
-                      // Do we have an indicator or not
-                      navigationRailUseIndicator: themeController.useIndicator,
-                      // Mute unselected icon and text color on NavigationBar.
-                      navigationRailMutedUnselectedText:
+                      // Shares controller values with nav bars in this demo.
+                      navigationRailSelectedLabelSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      navigationRailUnselectedLabelSchemeColor:
+                          themeController.navUnselectedSchemeColor,
+                      navigationRailMutedUnselectedLabel:
                           themeController.navBarMuteUnselected,
+                      navigationRailSelectedIconSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      navigationRailUnselectedIconSchemeColor:
+                          themeController.navUnselectedSchemeColor,
                       navigationRailMutedUnselectedIcon:
                           themeController.navBarMuteUnselected,
+                      navigationRailUseIndicator: themeController.useIndicator,
+                      navigationRailIndicatorSchemeColor:
+                          themeController.navBarHighlight,
+                      navigationRailBackgroundSchemeColor:
+                          themeController.navBarBackgroundSchemeColor,
+                      navigationRailOpacity:
+                          themeController.bottomNavigationBarOpacity,
+                      navigationRailElevation:
+                          themeController.bottomNavigationBarElevation,
+                      // Test inputs:
+                      // navigationRailSelectedIconSize: 24,
+                      // navigationRailUnselectedIconSize: 20,
+                      // navigationRailUnselectedLabelSize: 12,
+                      // navigationRailSelectedLabelSize: 16,
                     ),
                   )
                 // Here we do NOT use FlexThemeData. We use the SDK
@@ -385,6 +385,7 @@ class DemoApp extends StatelessWidget {
                       platform: themeController.platform,
                     ),
                     platform: themeController.platform,
+                    useMaterial3: themeController.useMaterial3,
                   ),
             // We do the exact same definition for the dark theme, but using
             // FlexThemeData.dark() and the dark FlexSchemeColors and we add
@@ -499,42 +500,50 @@ class DemoApp extends StatelessWidget {
                       bottomNavigationBarBackgroundSchemeColor:
                           themeController.navBarBackgroundSchemeColor,
                       bottomNavigationBarSchemeColor:
-                          themeController.navBarScheme,
+                          themeController.navBarSelectedSchemeColor,
                       // NavigationBar settings
-                      navigationBarOpacity:
-                          themeController.bottomNavigationBarOpacity,
-                      navigationBarBackgroundSchemeColor:
-                          themeController.navBarBackgroundSchemeColor,
-                      navigationBarIconSchemeColor:
-                          themeController.navBarScheme,
-                      navigationBarTextSchemeColor:
-                          themeController.navBarScheme,
-                      // The item highlight color of the M3 Navbar.
-                      navigationBarHighlightSchemeColor:
-                          themeController.navBarHighlight,
-                      // Mute unselected icon and text color on NavigationBar.
-                      navigationBarMutedUnselectedText:
+                      navigationBarSelectedLabelSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      navigationBarUnselectedLabelSchemeColor:
+                          themeController.navUnselectedSchemeColor,
+                      navigationBarMutedUnselectedLabel:
                           themeController.navBarMuteUnselected,
+                      navigationBarSelectedIconSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      navigationBarUnselectedIconSchemeColor:
+                          themeController.navUnselectedSchemeColor,
                       navigationBarMutedUnselectedIcon:
                           themeController.navBarMuteUnselected,
-                      // NavigationRail settings
-                      navigationRailElevation:
-                          themeController.bottomNavigationBarElevation,
-                      navigationRailOpacity:
-                          themeController.bottomNavigationBarOpacity,
-                      navigationRailBackgroundSchemeColor:
-                          themeController.navBarBackgroundSchemeColor,
-                      navigationRailIconSchemeColor:
-                          themeController.navBarScheme,
-                      navigationRailTextSchemeColor:
-                          themeController.navBarScheme,
-                      navigationRailIndicatorSchemeColor:
+                      navigationBarHighlightSchemeColor:
                           themeController.navBarHighlight,
-                      navigationRailUseIndicator: themeController.useIndicator,
-                      navigationRailMutedUnselectedText:
+                      navigationBarBackgroundSchemeColor:
+                          themeController.navBarBackgroundSchemeColor,
+                      navigationBarOpacity:
+                          themeController.bottomNavigationBarOpacity,
+                      //
+                      // NavigationRail settings
+                      // Shares controller values with nav bars in this demo.
+                      navigationRailSelectedLabelSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      navigationRailUnselectedLabelSchemeColor:
+                          themeController.navUnselectedSchemeColor,
+                      navigationRailMutedUnselectedLabel:
                           themeController.navBarMuteUnselected,
+                      navigationRailSelectedIconSchemeColor:
+                          themeController.navBarSelectedSchemeColor,
+                      navigationRailUnselectedIconSchemeColor:
+                          themeController.navUnselectedSchemeColor,
                       navigationRailMutedUnselectedIcon:
                           themeController.navBarMuteUnselected,
+                      navigationRailUseIndicator: themeController.useIndicator,
+                      navigationRailIndicatorSchemeColor:
+                          themeController.navBarHighlight,
+                      navigationRailBackgroundSchemeColor:
+                          themeController.navBarBackgroundSchemeColor,
+                      navigationRailOpacity:
+                          themeController.bottomNavigationBarOpacity,
+                      navigationRailElevation:
+                          themeController.bottomNavigationBarElevation,
                     ),
                   )
                 // Here we are NOT using FlexThemeData. We use the default
@@ -556,6 +565,7 @@ class DemoApp extends StatelessWidget {
                       platform: themeController.platform,
                     ),
                     platform: themeController.platform,
+                    useMaterial3: themeController.useMaterial3,
                   ),
             // Use the dark or light theme based on controller setting.
             themeMode: themeController.themeMode,

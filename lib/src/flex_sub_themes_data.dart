@@ -87,20 +87,20 @@ class FlexSubThemesData with Diagnosticable {
     this.outlinedButtonRadius,
     this.toggleButtonsRadius,
     //
-    this.textButtonSchemeColor,
-    this.elevatedButtonSchemeColor,
-    this.outlinedButtonSchemeColor,
+    this.textButtonSchemeColor = SchemeColor.primary,
+    this.elevatedButtonSchemeColor = SchemeColor.primary,
+    this.outlinedButtonSchemeColor = SchemeColor.primary,
     //
-    this.materialButtonSchemeColor,
-    this.toggleButtonsSchemeColor,
+    this.materialButtonSchemeColor = SchemeColor.primary,
+    this.toggleButtonsSchemeColor = SchemeColor.primary,
     //
-    this.switchSchemeColor,
-    this.checkboxSchemeColor,
-    this.radioSchemeColor,
+    this.switchSchemeColor = SchemeColor.secondary,
+    this.checkboxSchemeColor = SchemeColor.secondary,
+    this.radioSchemeColor = SchemeColor.secondary,
     this.unselectedToggleIsColored = false,
     //
     this.inputDecorationRadius,
-    this.inputDecoratorSchemeColor,
+    this.inputDecoratorSchemeColor = SchemeColor.primary,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
     this.inputDecoratorBorderType = FlexInputBorderType.outline,
@@ -108,9 +108,9 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.fabRadius,
     this.fabUseShape = true,
-    this.fabSchemeColor,
+    this.fabSchemeColor = SchemeColor.secondary,
     this.chipRadius,
-    this.chipSchemeColor,
+    this.chipSchemeColor = SchemeColor.primary,
     //
     this.cardRadius,
     this.cardElevation = kCardElevation,
@@ -120,7 +120,7 @@ class FlexSubThemesData with Diagnosticable {
     this.popupMenuOpacity = 1,
     this.dialogRadius,
     this.dialogElevation = kDialogElevation,
-    this.dialogBackgroundSchemeColor,
+    this.dialogBackgroundSchemeColor = SchemeColor.surface,
     this.timePickerDialogRadius,
     this.snackBarElevation = kSnackBarElevation,
     //
@@ -134,39 +134,66 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
     this.bottomNavigationBarOpacity = 1,
-    this.bottomNavigationBarSchemeColor,
-    this.bottomNavigationBarBackgroundSchemeColor,
+    this.bottomNavigationBarSchemeColor = SchemeColor.primary,
+    this.bottomNavigationBarBackgroundSchemeColor = SchemeColor.background,
     this.bottomNavigationBarLandscapeLayout,
     //
-    this.navigationBarIsStyled = true,
-    this.navigationBarHeight,
-    this.navigationBarOpacity = 1,
-    this.navigationBarIconSchemeColor,
-    this.navigationBarTextSchemeColor,
-    this.navigationBarHighlightSchemeColor,
-    this.navigationBarBackgroundSchemeColor,
-    this.navigationBarMutedUnselectedIcon,
-    this.navigationBarMutedUnselectedText,
+    @Deprecated('This property has no function after 4.2.0. To harmonize '
+        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+        'version 5 and later. The feature no longer exists, but same effect '
+        'can be reached by setting all NavigationBar properties in '
+        'FlexSubThemesData that have a none null default value to null.')
+        this.navigationBarIsStyled = true,
+    this.navigationBarLabelTextStyle,
     this.navigationBarSelectedLabelSize,
     this.navigationBarUnselectedLabelSize,
+    this.navigationBarSelectedLabelSchemeColor = SchemeColor.primary,
+    @Deprecated('This property has no function after 4.2.0. To harmonize '
+        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+        'version 5 and later this property has been replaced by: '
+        'navigationBarSelectedLabelSchemeColor.')
+        this.navigationBarTextSchemeColor,
+    this.navigationBarUnselectedLabelSchemeColor = SchemeColor.onSurface,
+    this.navigationBarMutedUnselectedLabel = true,
+    @Deprecated('This property has no function after 4.2.0. To harmonize '
+        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+        'version 5 and later this property has been replaced by: '
+        'navigationBarMutedUnselectedLabel.')
+        this.navigationBarMutedUnselectedText,
     this.navigationBarSelectedIconSize,
     this.navigationBarUnselectedIconSize,
-    this.navigationBarLabelBehavior,
+    this.navigationBarSelectedIconSchemeColor = SchemeColor.primary,
+    @Deprecated('This property has no function after 4.2.0. To harmonize '
+        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+        'version 5 and later this property has been replaced by: '
+        'navigationBarSelectedIconSchemeColor.')
+        this.navigationBarIconSchemeColor,
+    this.navigationBarUnselectedIconSchemeColor = SchemeColor.onSurface,
+    this.navigationBarMutedUnselectedIcon = true,
+    this.navigationBarHighlightSchemeColor = SchemeColor.primary,
+    this.navigationBarBackgroundSchemeColor = SchemeColor.background,
+    this.navigationBarOpacity = 1,
+    this.navigationBarHeight = 62,
+    this.navigationBarLabelBehavior =
+        NavigationDestinationLabelBehavior.alwaysShow,
     //
-    this.navigationRailBackgroundSchemeColor,
-    this.navigationRailOpacity = 1,
-    this.navigationRailElevation = kNavigationRailElevation,
-    this.navigationRailIconSchemeColor,
-    this.navigationRailUseIndicator,
-    this.navigationRailIndicatorSchemeColor,
-    this.navigationRailTextSchemeColor,
-    this.navigationRailMutedUnselectedIcon,
-    this.navigationRailMutedUnselectedText,
+    this.navigationRailLabelTextStyle,
     this.navigationRailSelectedLabelSize,
     this.navigationRailUnselectedLabelSize,
+    this.navigationRailSelectedLabelSchemeColor = SchemeColor.primary,
+    this.navigationRailUnselectedLabelSchemeColor = SchemeColor.onSurface,
+    this.navigationRailMutedUnselectedLabel = true,
     this.navigationRailSelectedIconSize,
     this.navigationRailUnselectedIconSize,
-    this.navigationRailLabelType,
+    this.navigationRailSelectedIconSchemeColor = SchemeColor.primary,
+    this.navigationRailUnselectedIconSchemeColor = SchemeColor.onSurface,
+    this.navigationRailMutedUnselectedIcon = true,
+    this.navigationRailUseIndicator = true,
+    this.navigationRailIndicatorSchemeColor = SchemeColor.primary,
+    this.navigationRailBackgroundSchemeColor = SchemeColor.background,
+    this.navigationRailOpacity = 1,
+    this.navigationRailElevation = kNavigationRailElevation,
+    this.navigationRailLabelType = NavigationRailLabelType.all,
     this.navigationRailGroupAlignment,
   });
 
@@ -667,11 +694,31 @@ class FlexSubThemesData with Diagnosticable {
   /// light and contrast poorly with primary color.
   final double dialogElevation;
 
-  /// Defines which [Theme] based [ColorScheme] based color the
-  /// [ToggleButtons] use as its base theme color.
+  /// Defines which [Theme] based [ColorScheme] based color the dialogs use as
+  /// as their background color.
   ///
-  /// If not defined it defaults to theme.colorScheme.primary color via
-  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  /// This will affect both background in [DialogTheme] and
+  /// [TimePickerThemeData].
+  ///
+  /// Defaults to [SchemeColor.surface].
+  ///
+  /// If set to null [Dialog] will use its Flutter SDK default, which is
+  /// [ThemeData.dialogBackgroundColor] which again is [ColorScheme.background].
+  /// [TimePickerDialog] dialogs will use their own Flutter SDK default,
+  /// which is [ColorScheme.surface].
+  ///
+  /// Since FlexColorScheme also sets [ThemeData.dialogBackgroundColor] to
+  /// [ColorScheme.surface], there is no difference when using FlexColorscheme
+  /// and setting [dialogBackgroundSchemeColor] to null versus keeping it
+  /// at its default value SchemeColor.surface]. This is valid as long as
+  /// [ThemeData.dialogBackgroundColor] exists, but it will be in deprecated,
+  /// see issue https://github.com/flutter/flutter/issues/91772.
+  /// After that there will be a difference.
+  ///
+  /// Using surface color as default instead of background,
+  /// ensures that dark mode dialogs will get elevation overlay
+  /// color, also when surface and background color are not equal.
+  /// See issue: https://github.com/flutter/flutter/issues/90353
   final SchemeColor? dialogBackgroundSchemeColor;
 
   /// Border radius override value for [TimePickerDialog].
@@ -795,43 +842,185 @@ class FlexSubThemesData with Diagnosticable {
   /// [BottomNavigationBarLandscapeLayout.spread] is used.
   final BottomNavigationBarLandscapeLayout? bottomNavigationBarLandscapeLayout;
 
-  /// When true, the [NavigationBarThemeData] theme for the M3 [NavigationBar]
-  /// created will be opinionated and styled to match the rest of the
-  /// FlexColorScheme opinionated sub-themes.
+  // ---------------------------------------------------------------------------
+  //
+  // NavigationBar Properties
+  //
+  // ---------------------------------------------------------------------------
+
+  /// This property has no function after version 4.2.0.
   ///
-  /// Defaults to true.
+  /// To harmonize [NavigationBar], [BottomNavigationBar] and
+  /// [NavigationRail] [FlexSubThemes] this property in [FlexSubThemesData]
+  /// no longer has any use in version 5 and later.
   ///
-  /// Regardless of if this property is true or false, setting the other
-  /// navigationBar properties in [FlexSubThemesData] overrides the defaults.
-  /// The difference is the starting point. If true the starting point is the
-  /// styled version, if false, the starting point are the defaults of the
-  /// un-themed default Widget behavior of the M3 based [NavigationBar].
-  /// Depending on the end result you want to achieve, starting with
-  /// [navigationBarIsStyled] as true or false may give you a starting point
-  /// that is closer to your target style, requiring you to define fever of
-  /// the other properties offered here.
+  /// This past feature feature no longer exists, but the same effect can be
+  /// reached by setting all NavigationBar properties in [FlexSubThemesData]
+  /// that have a none null default value to null.
+  @Deprecated('This property has no function after 4.2.0. To harmonize '
+      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+      'version 5 and later. The feature no longer exists, but same effect '
+      'can be reached by setting all NavigationBar properties in '
+      'FlexSubThemesData that have a none null default value to null.')
+  final bool? navigationBarIsStyled;
+
+  /// Optional text style for the [NavigationBar] labels.
   ///
-  /// The [NavigationBar] sub-theme styling offered here is too extensive. Other
-  /// sub-themes configurations and options are not and will not be this
-  /// extensive. This is added as a trial to see how it is received. It was
-  /// also added because styling the [NavigationBar] with its raw sub-theme
-  /// class [NavigationBarThemeData] can be a bit tricky as it uses
-  /// [MaterialStateProperty] for its icon and text
-  /// theme styling. Here we provide a more "flat" API for modifying it further,
-  /// and a default that matches the rest of defaults for FlexColorScheme
-  /// styles.
+  /// If null, it is kept as null if all text styling properties are
+  /// also null, resulting in default SDK text style being used by the
+  /// [NavigationBar] widget.
   ///
-  /// You can also use the [FlexSubThemes.navigationBarTheme] as
-  /// helper for making your custom [NavigationBarThemeData]. It exposes a few
-  /// more properties and options than available here, all in a more convenient
-  /// API format than the [NavigationBarThemeData] class.
-  final bool navigationBarIsStyled;
+  /// If null, but if any of the text styling properties for size and colors
+  /// are defined, the text style [FlexColorScheme.m3TextTheme.labelSmall]
+  /// will be used as base style for the text style.
+  ///
+  /// Flutter SDK defaults to using the theme's [TextTheme.bodyText1] which
+  /// is size 16dp, the FlexColorScheme bodyMedium size is 14dp, which is
+  /// a more appropriate size for the rail's text.
+  ///
+  /// The size and colors defined in any of the text size and color properties
+  /// are applied as overrides on the effective text style.
+  final TextStyle? navigationBarLabelTextStyle;
+
+  /// The size of the text label on selected [NavigationBar] item.
+  ///
+  /// If defined, it overrides the font size on effective label TextStyle
+  /// on selected item, 11 is used as fallback if needed.
+  final double? navigationBarSelectedLabelSize;
+
+  /// The size of the text label on unselected [NavigationBar] items.
+  ///
+  /// If defined, it overrides the font size on effective label TextStyle
+  /// on unselected items, 11 is used as fallback if needed.
+  final double? navigationBarUnselectedLabelSize;
+
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [NavigationBar]'s selected label text color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
+  /// which is [Theme]'s [ColorScheme.onSurface].
+  final SchemeColor? navigationBarSelectedLabelSchemeColor;
+
+  /// Deprecated and replaced by [navigationBarSelectedLabelSchemeColor].
+  @Deprecated('This property has no function after 4.2.0. To harmonize '
+      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+      'version 5 and later this property has been replaced by: '
+      'navigationBarSelectedLabelSchemeColor.')
+  final SchemeColor? navigationBarTextSchemeColor;
+
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [NavigationBar]'s unselected label text color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
+  /// which is [Theme]'s [ColorScheme.onSurface].
+  final SchemeColor? navigationBarUnselectedLabelSchemeColor;
+
+  /// If true, the unselected labels in the [NavigationBar] use a more muted
+  /// color version of the color defined by [unselectedLabelSchemeColor].
+  ///
+  /// If null, defaults to false.
+  final bool? navigationBarMutedUnselectedLabel;
+
+  /// Deprecated and replaced by [navigationBarMutedUnselectedLabel].
+  @Deprecated('This property has no function after 4.2.0. To harmonize '
+      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+      'version 5 and later this property has been replaced by: '
+      'navigationBarMutedUnselectedLabel.')
+  final SchemeColor? navigationBarMutedUnselectedText;
+
+  /// The size of the icon on selected [NavigationBar] item.
+  ///
+  /// If null, it defaults to 24.
+  final double? navigationBarSelectedIconSize;
+
+  /// The size of the icon on unselected [NavigationBar] items.
+  ///
+  /// If null, defaults to [navigationBarSelectedIconSize].
+  final double? navigationBarUnselectedIconSize;
+
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [NavigationBar]'s selected item icon color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
+  /// which is [Theme]'s [ColorScheme.onSurface].
+  final SchemeColor? navigationBarSelectedIconSchemeColor;
+
+  /// Deprecated and replaced by [navigationBarSelectedIconSchemeColor].
+  @Deprecated('This property has no function after 4.2.0. To harmonize '
+      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
+      'version 5 and later this property has been replaced by: '
+      'navigationBarSelectedIconSchemeColor.')
+  final SchemeColor? navigationBarIconSchemeColor;
+
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [NavigationBar]'s unselected item icon color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
+  /// which is [Theme]'s [ColorScheme.onSurface].
+  final SchemeColor? navigationBarUnselectedIconSchemeColor;
+
+  /// If true, the unselected icon in the [NavigationBar] use a more muted
+  /// color version of the color defined by
+  /// [navigationBarUnselectedIconSchemeColor].
+  ///
+  /// If null, defaults to false.
+  final bool? navigationBarMutedUnselectedIcon;
+
+  /// Select which color from the theme [ColorScheme] to use as base for
+  /// the selected [NavigationBar]'s highlighted item.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
+  /// which is [Theme]'s [ColorScheme.secondary].
+  ///
+  /// NOTE:
+  /// The "Highlight" Color is same concept as "Indicator" color on the
+  /// [NavigationRail], but for some ood reason it is called "Highlight" on the
+  /// [NavigationBar] in the SDK, so the name was used here too. Had
+  /// navigation bar followed prior art, then this should be called indicator
+  /// color too.
+  final SchemeColor? navigationBarHighlightSchemeColor;
+
+  /// Select which color from the theme's [ColorScheme] to use as background
+  /// color for the [NavigationBar].
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.background]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
+  /// which is [Theme]'s [ColorScheme.surface], with an [ColorScheme.onSurface]
+  /// used as overlay color with hard coded overlay elevation 3. The actual
+  /// elevation is hard coded to 0.
+  ///
+  /// NOTE:
+  /// FlexColorScheme sets background defaults of [NavigationRail],
+  /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
+  /// when it is using component sub-themes.
+  /// Flutter SDK uses different colors on all three widgets. Our opinion is
+  /// that they should all default to using the same [ColorScheme] based
+  /// color. FlexColorScheme uses the background color as that default.
+  final SchemeColor? navigationBarBackgroundSchemeColor;
 
   /// Height of the container for the Material 3 [NavigationBar].
   ///
-  /// If [navigationBarIsStyled] is true it defaults to [kNavigationBarHeight]
-  /// = 62 dp, otherwise it is 80 dp. This is the same as the the Material 3
-  /// default design and specification for its height.
+  /// Defaults to [kNavigationBarHeight] which is 62 dp
+  ///
+  /// If set to null, it will default to the widgets un-themed default height
+  /// which is 80 dp.
   final double? navigationBarHeight;
 
   /// NavigationBar background opacity.
@@ -839,155 +1028,169 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to 1, fully opaque.
   final double navigationBarOpacity;
 
-  /// Select which color from the passed in [ColorScheme] to use as base for
-  /// the navigation bar's icon color.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value.
-  /// If it is true, resulting color is primary, if false, onSurface
-  /// via [NavigationBar] widget default behavior.
-  /// If the property is defined, the resulting ColorScheme color is always
-  /// the color selected by this property.
-  final SchemeColor? navigationBarIconSchemeColor;
-
-  /// Select which color from the passed in [ColorScheme] to use as base for
-  /// the navigation bar's text color.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value.
-  /// If it is true, resulting color is primary, if false, onSurface
-  /// via [NavigationBar] widget's default behavior.
-  /// If the property is defined, the resulting ColorScheme color is always
-  /// the color selected by this property.
-  final SchemeColor? navigationBarTextSchemeColor;
-
-  /// Select which color from the theme [ColorScheme] to use as base for
-  /// the selected navigation bar's highlighted item.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value.
-  /// If it is true, resulting color is primary, if false, secondary
-  /// via [NavigationBar] widget's default behavior.
-  /// If the property is defined, the resulting ColorScheme color is always
-  /// the color selected by this property.
-  final SchemeColor? navigationBarHighlightSchemeColor;
-
-  /// Select which color from the passed in [ColorScheme] to use as background
-  /// color for the navigation bar.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value.
-  /// If it is true, resulting color is background, if false, then
-  /// surface color with a hard coded elevation overlay color of elevation 3,
-  /// used in both light and dark theme mode, this via [NavigationBar]
-  /// widget's default behavior.
-  final SchemeColor? navigationBarBackgroundSchemeColor;
-
-  /// If true, the unselected icons in the [NavigationBar] use a more muted
-  /// color version of the color defined by [navigationBarIconSchemeColor].
-  ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value.
-  /// If it is true, this property defaults to true, otherwise to false.
-  /// If the property is defined, the defined value is used.
-  ///
-  /// A muted unselected icon can only be applied when a defined icon color
-  /// has been selected. When [navigationBarIsStyled] this is always the case,
-  /// but if it is false, you also have to assign a value to
-  /// [navigationBarIconSchemeColor] or [navigationBarSelectedIconSize] or
-  /// [navigationBarUnselectedIconSize], so a none standard [IconTheme]
-  /// must be created that can be muted. If none of those properties are defined
-  /// the widget default behavior for icon style is used, and the unselected
-  /// icon will not be muted since all properties are null.
-  final bool? navigationBarMutedUnselectedIcon;
-
-  /// If true, the unselected text labels in the [NavigationBar] use a more
-  /// muted color version of the color defined by
-  /// [navigationBarTextSchemeColor].
-  ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value.
-  /// If it is true, this property defaults to true, otherwise to false.
-  /// If the property is defined, the defined value is used.
-  ///
-  /// A muted unselected text color can only be applied when a defined text
-  /// color has been selected. When [navigationBarIsStyled] this is always the
-  /// case, but if it is false, you also have to assign a value to
-  /// [navigationBarTextSchemeColor] or [navigationBarSelectedLabelSize] or
-  /// [navigationBarUnselectedLabelSize] so a none standard [TextStyle]
-  /// must be created that can be muted. If none of those properties are defined
-  /// the widget default behavior for label text style is used, and unselected
-  /// text will not be muted since all properties are null.
-  final bool? navigationBarMutedUnselectedText;
-
-  /// The size of the text label on selected item.
-  ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value.
-  /// If it is true, resulting size is 11 dp, coming from the custom
-  /// [TextStyle] in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
-  /// text style, which defines the size to 11 dp in accordance to M3 text
-  /// styles.
-  ///
-  /// If [navigationBarIsStyled] is false and all other text theming options
-  /// are also null, the default size will depend on ambient text size of
-  /// [TextTheme.overline], as will it other style options. What size this is
-  /// will depend on used [Typography] which may be impacted by locale and
-  /// Flutter version, typically it will be 10dp with a very wide letter
-  /// spacing.
-  ///
-  /// If size is defined, it overrides the font size on effective label
-  /// TextStyle on the selected item. A fallback value of 11 dp is also applied
-  /// should the geometry in passed in used TextStyle be missing.
-  final double? navigationBarSelectedLabelSize;
-
-  /// The size of the text label on unselected items.
-  ///
-  /// If null, the default value depends on the [navigationBarIsStyled] value.
-  /// If it is true, resulting size is 11 dp, coming from the custom
-  /// [TextStyle] in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
-  /// text style, which defines the size to 11 dp in accordance to M3 text
-  /// styles.
-  ///
-  /// If [navigationBarIsStyled] is false and all other text theming options
-  /// are also null, the default size will depend on ambient text size of
-  /// [TextTheme.overline] as will it other style options. What size this is
-  /// will depend on used [Typography] which may be impacted by locale and
-  /// Flutter version, typically it will be 10dp with a very wide letter
-  /// spacing.
-  ///
-  /// If size is defined, it overrides the font size on effective label
-  /// TextStyle on selected item. A fallback value of 11 dp is also applied
-  /// should the geometry in passed in used TextStyle be missing.
-  final double? navigationBarUnselectedLabelSize;
-
-  /// The size of the icon on selected item.
-  ///
-  /// If null, it defaults to 24.
-  final double? navigationBarSelectedIconSize;
-
-  /// The size of the icon on unselected items.
-  ///
-  /// If null, it defaults to 24.
-  final double? navigationBarUnselectedIconSize;
-
   /// Specifies when each [NavigationDestination]'s label should appear.
   ///
-  /// This is used to determine the behavior of NavigationBar's destinations.
+  /// Default to [NavigationDestinationLabelBehavior.alwaysShow].
+  /// If set to null, it will also default to
+  /// [NavigationDestinationLabelBehavior.alwaysShow] as that is the Flutter
+  /// SDK default behavior for it.
   final NavigationDestinationLabelBehavior? navigationBarLabelBehavior;
 
-  /// Select which color from the passed in [ColorScheme] to use as background
-  /// color for the NavigationRail.
+  // ---------------------------------------------------------------------------
+  //
+  // Navigation Rail Properties
+  //
+  // ---------------------------------------------------------------------------
+
+  /// Optional text style for the [NavigationRail] labels.
+  ///
+  /// If null, it is kept as null if all text styling properties are
+  /// also null, resulting in default SDK text style being used by the
+  /// [NavigationRail] widget.
+  ///
+  /// If null, but if any of the text styling properties for size and colors
+  /// are defined, the text style [FlexColorScheme.m3TextTheme.bodyMedium]
+  /// will be used as base style for the text style.
+  ///
+  /// Flutter SDK defaults to using the theme's [TextTheme.bodyText1] which
+  /// is size 16dp, the FlexColorScheme bodyMedium size is 14dp, which is
+  /// a more appropriate size for the rail's text.
+  ///
+  /// The size and colors defined in any of the text size and color properties
+  /// are applied as overrides on the effective text style.
+  final TextStyle? navigationRailLabelTextStyle;
+
+  /// The size of the text label on selected [NavigationRail] item.
+  ///
+  /// If defined, it overrides the font size on effective label TextStyle
+  /// on selected item, 14 is used as fallback if needed.
+  final double? navigationRailSelectedLabelSize;
+
+  /// The size of the text label on unselected [NavigationRail] items.
+  ///
+  /// If defined, it overrides the font size on effective label TextStyle
+  /// on unselected items, 14 is used as fallback if needed.
+  final double? navigationRailUnselectedLabelSize;
+
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [NavigationRail]'s selected label text color.
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If null, defaults to [define_me] his via [NavigationRail] widget's default
-  /// behavior.
+  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
+  /// which is [Theme]'s [ColorScheme.primary].
+  final SchemeColor? navigationRailSelectedLabelSchemeColor;
+
+  /// Select which color from the theme's [ColorScheme] to use for
+  /// the [NavigationRail]'s unselected items text color.
   ///
-  /// The SDK default widget behavior is Theme's on [ColorScheme.surface], but
-  /// FlexColorscheme default to [ColorScheme.background], same as it uses as
-  /// default on [BottomNavigationBar] and [NavigationBar].
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
+  /// which is [Theme]'s [ColorScheme.onSurface].
+  final SchemeColor? navigationRailUnselectedLabelSchemeColor;
+
+  /// If true, the unselected labels in the [NavigationRail] use a more muted
+  /// color version of the color defined by
+  /// [navigationRailUnselectedLabelSchemeColor].
+  ///
+  /// If null, defaults to false.
+  final bool? navigationRailMutedUnselectedLabel;
+
+  /// The size of the icon on selected [NavigationRail] item.
+  ///
+  /// If null, it defaults to 24.
+  final double? navigationRailSelectedIconSize;
+
+  /// The size of the icon on unselected [NavigationRail] items.
+  ///
+  /// If null, defaults to [navigationRailSelectedIconSize].
+  final double? navigationRailUnselectedIconSize;
+
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [NavigationRail]'s selected item icon color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
+  /// which is [Theme]'s [ColorScheme.primary].
+  final SchemeColor? navigationRailSelectedIconSchemeColor;
+
+  /// Select which color from the passed in [ColorScheme] to use as base for
+  /// the [NavigationRail]'s unselected items icon color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
+  /// which is [Theme]'s [ColorScheme.onSurface].
+  final SchemeColor? navigationRailUnselectedIconSchemeColor;
+
+  /// If true, the unselected icon in the [NavigationRail] use a more muted
+  /// color version of the color defined by
+  /// [navigationRailUnselectedIconSchemeColor].
+  ///
+  /// The [NavigationRail] also defaults via Flutter SDK default to a more
+  /// muted unselected color when it uses its defaults, which will happen here
+  /// too when all item colors and sizes are set to their null default,
+  /// even if [navigationRailMutedUnselectedIcon] is set to false.
+  ///
+  /// If null, defaults to false.
+  final bool? navigationRailMutedUnselectedIcon;
+
+  /// Whether or not the selected [NavigationRail] item should include a
+  /// [NavigationIndicator].
+  ///
+  /// If `true`, adds a rounded [NavigationIndicator] behind the selected
+  /// destination's icon.
+  ///
+  /// The indicator's shape will be circular if [labelType] is
+  /// [NavigationRailLabelType.none], or a [StadiumBorder] if [labelType] is
+  /// [NavigationRailLabelType.all] or [NavigationRailLabelType.selected].
+  ///
+  /// If `null`, defaults to [NavigationRailThemeData.useIndicator]. If that is
+  /// `null`, defaults to [ThemeData.useMaterial3].
+  ///
+  /// Defaults to true. Can be set to null and then uses above default
+  /// widget behavior.
+  final bool? navigationRailUseIndicator;
+
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the selected [NavigationRail]'s selected item's pill shaped highlight
+  /// indicator color.
+  ///
+  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
+  /// which is [Theme]'s [ColorScheme.secondary].
+  ///
+  /// NOTE:
+  /// The "Indicator" color is same concept as "Highlight" color on the
+  /// [NavigationBar], but for some ood reason it is called "Indicator" on the
+  /// [NavigationRail] in the SDK, so the name was used here too. Navigation
+  /// rail existed before navigation bar, so it is the navigation bar that
+  /// for some reason deviates from established name for no reason
+  /// in Flutter API.
+  final SchemeColor? navigationRailIndicatorSchemeColor;
+
+  /// Select which color from the theme's [ColorScheme] to use as background
+  /// color for the [NavigationRail].
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// Defaults to [SchemeColor.background]. If set to null, the effective value
+  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
+  /// which is [Theme]'s [ColorScheme.surface].
+  ///
+  /// NOTE:
+  /// FlexColorScheme sets background defaults of [NavigationRail],
+  /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
+  /// when it is using component sub-themes.
+  /// Flutter SDK uses different colors on all three widgets. Our opinion is
+  /// that they should all default to using the same [ColorScheme] based
+  /// color. FlexColorScheme uses the background color as that default.
   final SchemeColor? navigationRailBackgroundSchemeColor;
 
   /// NavigationRail background opacity.
@@ -1000,135 +1203,27 @@ class FlexSubThemesData with Diagnosticable {
   /// Default is [kNavigationRailElevation] = 0.
   final double navigationRailElevation;
 
-  /// Select which color from the passed in [ColorScheme] to use as base for
-  /// the NavigationRail's icon color.
+  /// Defines the layout and behavior of the labels for the un-extended
+  /// [NavigationRail].
   ///
-  /// All colors in the color scheme are not good choices, but some work well.
+  /// The type are:
   ///
-  /// If null, the default is via [NavigationRail] widget default behavior.
-  final SchemeColor? navigationRailIconSchemeColor;
-
-  /// If `true`, adds a rounded [NavigationIndicator] behind the selected
-  /// destination's icon.
+  /// * [NavigationRailLabelType.none] labels on rail items are never shown.
+  /// * [NavigationRailLabelType.selected] label is only shown on selected
+  ///   rail item.
+  /// * [NavigationRailLabelType.all] label is shown on all rail items.
   ///
-  /// The indicator's shape will be circular if [labelType] is
-  /// [NavigationRailLabelType.none], or a [StadiumBorder] if [labelType] is
-  /// [NavigationRailLabelType.all] or [NavigationRailLabelType.selected].
+  /// When a navigation rail is [extended], the labels are always shown.
   ///
-  /// If `null`, defaults to [NavigationRailThemeData.useIndicator]. If that is
-  /// `null`, defaults to [ThemeData.useMaterial3].
+  /// Default to [NavigationRailLabelType.all]. FlexColorScheme uses all so that
+  /// it by default will matach the behavior on [NavigationBar].
   ///
-  /// Defaults to true in FlexColorScheme. Can be set to null and then uses
-  /// above default widget behavior.
-  final bool? navigationRailUseIndicator;
-
-  /// Select which color from the theme [ColorScheme] to use as base for
-  /// the selected NavigationRail's highlighted item's pill shaped indicator
-  /// color.
-  ///
-  ///  Has no default color in Flutter SDK. However when...
-  ///  Default to Theme's [ColorScheme.primary] here if not defined.
-  final SchemeColor? navigationRailIndicatorSchemeColor;
-
-  /// Select which color from the passed in [ColorScheme] to use as base for
-  /// the NavigationRail's text color.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If null, the default is via [NavigationRail] widget default behavior.
-  final SchemeColor? navigationRailTextSchemeColor;
-
-  /// If true, the unselected icons in the [NavigationRail] use a more muted
-  /// color version of the color defined by [navigationRailIconSchemeColor].
-  ///
-  /// A muted unselected icon can only be applied when a defined icon color
-  /// has been selected. A
-  /// [navigationRailIconSchemeColor] or [navigationRailSelectedIconSize] or
-  /// [navigationRailUnselectedIconSize] must be defined so a none standard
-  /// none null [IconTheme] must be created that can be muted.
-  ///
-  /// If none of those properties are defined
-  /// the widget default behavior for icon style is used, and the unselected
-  /// icon cannot be muted since all properties are null.
-  final bool? navigationRailMutedUnselectedIcon;
-
-  /// If true, the unselected text labels in the [NavigationRail] use a more
-  /// muted color version of the color defined by
-  /// [navigationRailTextSchemeColor].
-  ///
-  /// If null, defaults to [define_me] via [NavigationRail] widget's default
-  /// behavior.
-  ///
-  /// A muted unselected text color can only be applied when a defined text
-  /// color has been selected. You also have to assign a value to
-  /// [navigationRailTextSchemeColor] or [navigationRailSelectedLabelSize] or
-  /// [navigationRailUnselectedLabelSize] so a none standard [TextStyle]
-  /// must be created that can be muted.
-  ///
-  /// If none of those properties are defined the widget default behavior for
-  /// label text style is used, and unselected text cannot be muted since
-  /// all properties are null.
-  final bool? navigationRailMutedUnselectedText;
-
-  /// The size of the text label on selected item.
-  ///
-  /// If it is true, resulting size is 11 dp, coming from the custom
-  /// [TextStyle] in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
-  /// text style, which defines the size to 11 dp in accordance to M3 text
-  /// styles.
-  ///
-  /// If [navigationRailIsStyled] is false and all other text theming options
-  /// are also null, the default size will depend on ambient text size of
-  /// [TextTheme.overline], as will it other style options. What size this is
-  /// will depend on used [Typography] which may be impacted by locale and
-  /// Flutter version, typically it will be 10dp with a very wide letter
-  /// spacing.
-  ///
-  /// If size is defined, it overrides the font size on effective label
-  /// TextStyle on the selected item. A fallback value of 11 dp is also applied
-  /// should the geometry in passed in used TextStyle be missing.
-  final double? navigationRailSelectedLabelSize;
-
-  /// The size of the text label on unselected items.
-  ///
-  /// If null, the default value depends on the [navigationRailIsStyled] value.
-  /// If it is true, resulting size is 11 dp, coming from the custom
-  /// [TextStyle] in TextTheme [FlexColorScheme.m3TextTheme] and its [overline]
-  /// text style, which defines the size to 11 dp in accordance to M3 text
-  /// styles.
-  ///
-  /// If [navigationRailIsStyled] is false and all other text theming options
-  /// are also null, the default size will depend on ambient text size of
-  /// [TextTheme.overline] as will it other style options. What size this is
-  /// will depend on used [Typography] which may be impacted by locale and
-  /// Flutter version, typically it will be 10dp with a very wide letter
-  /// spacing.
-  ///
-  /// If size is defined, it overrides the font size on effective label
-  /// TextStyle on selected item. A fallback value of 11 dp is also applied
-  /// should the geometry in passed in used TextStyle be missing.
-  final double? navigationRailUnselectedLabelSize;
-
-  /// The size of the icon on selected item.
-  ///
-  /// If null, it defaults to 24.
-  final double? navigationRailSelectedIconSize;
-
-  /// The size of the icon on unselected items.
-  ///
-  /// If null, it defaults to 24.
-  final double? navigationRailUnselectedIconSize;
-
-  /// Specifies when each [NavigationRailDestination]'s label should appear.
-  ///
-  /// This is used to determine the behavior of NavigationBar's destinations.
-  ///
-  /// If null, theme behavior defaults to
-  /// `NavigationDestinationLabelBehavior.alwaysShow`
+  /// If set to null it will default Flutter SDK default
+  /// behavior [NavigationRailLabelType.none].
   final NavigationRailLabelType? navigationRailLabelType;
 
   /// The vertical alignment for the group of [destinations] within a
-  /// NavigationRail.
+  /// [NavigationRail].
   ///
   /// The [NavigationRailDestination]s are grouped together with the
   /// [trailing] widget, between the [leading] widget and the bottom
@@ -1141,7 +1236,6 @@ class FlexSubThemesData with Diagnosticable {
   /// [groupAlignment] is 1.0, then the items are aligned to the bottom.
   ///
   /// The default is -1.0.
-  ///
   final double? navigationRailGroupAlignment;
 
   /// Copy the object with one or more provided properties changed.
@@ -1205,34 +1299,39 @@ class FlexSubThemesData with Diagnosticable {
     final BottomNavigationBarLandscapeLayout?
         bottomNavigationBarLandscapeLayout,
     //
-    final bool? navigationBarIsStyled,
-    final double? navigationBarHeight,
-    final double? navigationBarOpacity,
-    final SchemeColor? navigationBarIconSchemeColor,
-    final SchemeColor? navigationBarTextSchemeColor,
-    final SchemeColor? navigationBarHighlightSchemeColor,
-    final SchemeColor? navigationBarBackgroundSchemeColor,
-    final bool? navigationBarMutedUnselectedIcon,
-    final bool? navigationBarMutedUnselectedText,
+    final TextStyle? navigationBarLabelTextStyle,
     final double? navigationBarSelectedLabelSize,
     final double? navigationBarUnselectedLabelSize,
+    final SchemeColor? navigationBarSelectedLabelSchemeColor,
+    final SchemeColor? navigationBarUnselectedLabelSchemeColor,
+    final bool? navigationBarMutedUnselectedLabel,
     final double? navigationBarSelectedIconSize,
     final double? navigationBarUnselectedIconSize,
+    final SchemeColor? navigationBarSelectedIconSchemeColor,
+    final SchemeColor? navigationBarUnselectedIconSchemeColor,
+    final bool? navigationBarMutedUnselectedIcon,
+    final SchemeColor? navigationBarHighlightSchemeColor,
+    final SchemeColor? navigationBarBackgroundSchemeColor,
+    final double? navigationBarOpacity,
+    final double? navigationBarHeight,
     final NavigationDestinationLabelBehavior? navigationBarLabelBehavior,
     //
+    final TextStyle? navigationRailLabelTextStyle,
+    final double? navigationRailSelectedLabelSize,
+    final double? navigationRailUnselectedLabelSize,
+    final SchemeColor? navigationRailSelectedLabelSchemeColor,
+    final SchemeColor? navigationRailUnselectedLabelSchemeColor,
+    final bool? navigationRailMutedUnselectedLabel,
+    final double? navigationRailSelectedIconSize,
+    final double? navigationRailUnselectedIconSize,
+    final SchemeColor? navigationRailSelectedIconSchemeColor,
+    final SchemeColor? navigationRailUnselectedIconSchemeColor,
+    final bool? navigationRailMutedUnselectedIcon,
+    final bool? navigationRailUseIndicator,
+    final SchemeColor? navigationRailIndicatorSchemeColor,
     final SchemeColor? navigationRailBackgroundSchemeColor,
     final double? navigationRailOpacity,
     final double? navigationRailElevation,
-    final SchemeColor? navigationRailIconSchemeColor,
-    final bool? navigationRailUseIndicator,
-    final SchemeColor? navigationRailIndicatorSchemeColor,
-    final SchemeColor? navigationRailTextSchemeColor,
-    final bool? navigationRailMutedUnselectedIcon,
-    final bool? navigationRailMutedUnselectedText,
-    final double? navigationRailSelectedLabelSize,
-    final double? navigationRailUnselectedLabelSize,
-    final double? navigationRailSelectedIconSize,
-    final double? navigationRailUnselectedIconSize,
     final NavigationRailLabelType? navigationRailLabelType,
     final double? navigationRailGroupAlignment,
   }) {
@@ -1319,34 +1418,71 @@ class FlexSubThemesData with Diagnosticable {
       bottomNavigationBarLandscapeLayout: bottomNavigationBarLandscapeLayout ??
           this.bottomNavigationBarLandscapeLayout,
       //
-      navigationBarIsStyled:
-          navigationBarIsStyled ?? this.navigationBarIsStyled,
-      navigationBarHeight: navigationBarHeight ?? this.navigationBarHeight,
-      navigationBarOpacity: navigationBarOpacity ?? this.navigationBarOpacity,
-      navigationBarIconSchemeColor:
-          navigationBarIconSchemeColor ?? this.navigationBarIconSchemeColor,
-      //
-      navigationBarTextSchemeColor:
-          navigationBarTextSchemeColor ?? this.navigationBarTextSchemeColor,
-      navigationBarHighlightSchemeColor: navigationBarHighlightSchemeColor ??
-          this.navigationBarHighlightSchemeColor,
-      navigationBarBackgroundSchemeColor: navigationBarBackgroundSchemeColor ??
-          this.navigationBarBackgroundSchemeColor,
-      navigationBarMutedUnselectedIcon: navigationBarMutedUnselectedIcon ??
-          this.navigationBarMutedUnselectedIcon,
-      navigationBarMutedUnselectedText: navigationBarMutedUnselectedText ??
-          this.navigationBarMutedUnselectedText,
+      navigationBarLabelTextStyle:
+          navigationBarLabelTextStyle ?? this.navigationBarLabelTextStyle,
       navigationBarSelectedLabelSize:
           navigationBarSelectedLabelSize ?? this.navigationBarSelectedLabelSize,
       navigationBarUnselectedLabelSize: navigationBarUnselectedLabelSize ??
           this.navigationBarUnselectedLabelSize,
+      navigationBarSelectedLabelSchemeColor:
+          navigationBarSelectedLabelSchemeColor ??
+              this.navigationBarSelectedLabelSchemeColor,
+      navigationBarUnselectedLabelSchemeColor:
+          navigationBarUnselectedLabelSchemeColor ??
+              this.navigationBarUnselectedLabelSchemeColor,
+      navigationBarMutedUnselectedLabel: navigationBarMutedUnselectedLabel ??
+          this.navigationBarMutedUnselectedLabel,
       navigationBarSelectedIconSize:
           navigationBarSelectedIconSize ?? this.navigationBarSelectedIconSize,
       navigationBarUnselectedIconSize: navigationBarUnselectedIconSize ??
           this.navigationBarUnselectedIconSize,
+      navigationBarSelectedIconSchemeColor:
+          navigationBarSelectedIconSchemeColor ??
+              this.navigationBarSelectedIconSchemeColor,
+      navigationBarUnselectedIconSchemeColor:
+          navigationBarUnselectedIconSchemeColor ??
+              this.navigationBarUnselectedIconSchemeColor,
+      navigationBarMutedUnselectedIcon: navigationBarMutedUnselectedIcon ??
+          this.navigationBarMutedUnselectedIcon,
+      navigationBarHighlightSchemeColor: navigationBarHighlightSchemeColor ??
+          this.navigationBarHighlightSchemeColor,
+      navigationBarBackgroundSchemeColor: navigationBarBackgroundSchemeColor ??
+          this.navigationBarBackgroundSchemeColor,
+      navigationBarOpacity: navigationBarOpacity ?? this.navigationBarOpacity,
+      navigationBarHeight: navigationBarHeight ?? this.navigationBarHeight,
       navigationBarLabelBehavior:
           navigationBarLabelBehavior ?? this.navigationBarLabelBehavior,
       //
+      navigationRailLabelTextStyle:
+          navigationRailLabelTextStyle ?? this.navigationRailLabelTextStyle,
+      navigationRailSelectedLabelSize: navigationRailSelectedLabelSize ??
+          this.navigationRailSelectedLabelSize,
+      navigationRailUnselectedLabelSize: navigationRailUnselectedLabelSize ??
+          this.navigationRailUnselectedLabelSize,
+      navigationRailSelectedLabelSchemeColor:
+          navigationRailSelectedLabelSchemeColor ??
+              this.navigationRailSelectedLabelSchemeColor,
+      navigationRailUnselectedLabelSchemeColor:
+          navigationRailUnselectedLabelSchemeColor ??
+              this.navigationRailUnselectedLabelSchemeColor,
+      navigationRailMutedUnselectedLabel: navigationRailMutedUnselectedLabel ??
+          this.navigationRailMutedUnselectedLabel,
+      navigationRailSelectedIconSize:
+          navigationRailSelectedIconSize ?? this.navigationRailSelectedIconSize,
+      navigationRailUnselectedIconSize: navigationRailUnselectedIconSize ??
+          this.navigationRailUnselectedIconSize,
+      navigationRailSelectedIconSchemeColor:
+          navigationRailSelectedIconSchemeColor ??
+              this.navigationRailSelectedIconSchemeColor,
+      navigationRailUnselectedIconSchemeColor:
+          navigationRailUnselectedIconSchemeColor ??
+              this.navigationRailUnselectedIconSchemeColor,
+      navigationRailMutedUnselectedIcon: navigationRailMutedUnselectedIcon ??
+          this.navigationRailMutedUnselectedIcon,
+      navigationRailUseIndicator:
+          navigationRailUseIndicator ?? this.navigationRailUseIndicator,
+      navigationRailIndicatorSchemeColor: navigationRailIndicatorSchemeColor ??
+          this.navigationRailIndicatorSchemeColor,
       navigationRailBackgroundSchemeColor:
           navigationRailBackgroundSchemeColor ??
               this.navigationRailBackgroundSchemeColor,
@@ -1354,26 +1490,6 @@ class FlexSubThemesData with Diagnosticable {
           navigationRailOpacity ?? this.navigationRailOpacity,
       navigationRailElevation:
           navigationRailElevation ?? this.navigationRailElevation,
-      navigationRailIconSchemeColor:
-          navigationRailIconSchemeColor ?? this.navigationRailIconSchemeColor,
-      navigationRailUseIndicator:
-          navigationRailUseIndicator ?? this.navigationRailUseIndicator,
-      navigationRailIndicatorSchemeColor: navigationRailIndicatorSchemeColor ??
-          this.navigationRailIndicatorSchemeColor,
-      navigationRailTextSchemeColor:
-          navigationRailTextSchemeColor ?? this.navigationRailTextSchemeColor,
-      navigationRailMutedUnselectedIcon: navigationRailMutedUnselectedIcon ??
-          this.navigationRailMutedUnselectedIcon,
-      navigationRailMutedUnselectedText: navigationRailMutedUnselectedText ??
-          this.navigationRailMutedUnselectedText,
-      navigationRailSelectedLabelSize: navigationRailSelectedLabelSize ??
-          this.navigationRailSelectedLabelSize,
-      navigationRailUnselectedLabelSize: navigationRailUnselectedLabelSize ??
-          this.navigationRailUnselectedLabelSize,
-      navigationRailSelectedIconSize:
-          navigationRailSelectedIconSize ?? this.navigationRailSelectedIconSize,
-      navigationRailUnselectedIconSize: navigationRailUnselectedIconSize ??
-          this.navigationRailUnselectedIconSize,
       navigationRailLabelType:
           navigationRailLabelType ?? this.navigationRailLabelType,
       navigationRailGroupAlignment:
@@ -1447,48 +1563,63 @@ class FlexSubThemesData with Diagnosticable {
             bottomNavigationBarBackgroundSchemeColor &&
         other.bottomNavigationBarLandscapeLayout ==
             bottomNavigationBarLandscapeLayout &&
-        other.navigationBarIsStyled == navigationBarIsStyled &&
-        other.navigationBarHeight == navigationBarHeight &&
-        other.navigationBarOpacity == navigationBarOpacity &&
-        other.navigationBarIconSchemeColor == navigationBarIconSchemeColor &&
-        other.navigationBarTextSchemeColor == navigationBarTextSchemeColor &&
-        other.navigationBarHighlightSchemeColor ==
-            navigationBarHighlightSchemeColor &&
-        other.navigationBarBackgroundSchemeColor ==
-            navigationBarBackgroundSchemeColor &&
-        other.navigationBarMutedUnselectedIcon ==
-            navigationBarMutedUnselectedIcon &&
-        other.navigationBarMutedUnselectedText ==
-            navigationBarMutedUnselectedText &&
+        //
+        other.navigationBarLabelTextStyle == navigationBarLabelTextStyle &&
         other.navigationBarSelectedLabelSize ==
             navigationBarSelectedLabelSize &&
         other.navigationBarUnselectedLabelSize ==
             navigationBarUnselectedLabelSize &&
+        other.navigationBarSelectedLabelSchemeColor ==
+            navigationBarSelectedLabelSchemeColor &&
+        other.navigationBarUnselectedLabelSchemeColor ==
+            navigationBarUnselectedLabelSchemeColor &&
+        other.navigationBarMutedUnselectedLabel ==
+            navigationBarMutedUnselectedLabel &&
         other.navigationBarSelectedIconSize == navigationBarSelectedIconSize &&
         other.navigationBarUnselectedIconSize ==
             navigationBarUnselectedIconSize &&
+        other.navigationBarSelectedIconSchemeColor ==
+            navigationBarSelectedIconSchemeColor &&
+        other.navigationBarUnselectedIconSchemeColor ==
+            navigationBarUnselectedIconSchemeColor &&
+        other.navigationBarMutedUnselectedIcon ==
+            navigationBarMutedUnselectedIcon &&
+        other.navigationBarHighlightSchemeColor ==
+            navigationBarHighlightSchemeColor &&
+        other.navigationBarBackgroundSchemeColor ==
+            navigationBarBackgroundSchemeColor &&
+        other.navigationBarOpacity == navigationBarOpacity &&
+        other.navigationBarHeight == navigationBarHeight &&
         other.navigationBarLabelBehavior == navigationBarLabelBehavior &&
-        other.navigationRailBackgroundSchemeColor ==
-            navigationRailBackgroundSchemeColor &&
-        other.navigationRailOpacity == navigationRailOpacity &&
-        other.navigationRailElevation == navigationRailElevation &&
-        other.navigationRailIconSchemeColor == navigationRailIconSchemeColor &&
-        other.navigationRailUseIndicator == navigationRailUseIndicator &&
-        other.navigationRailIndicatorSchemeColor ==
-            navigationRailIndicatorSchemeColor &&
-        other.navigationRailTextSchemeColor == navigationRailTextSchemeColor &&
-        other.navigationRailMutedUnselectedIcon ==
-            navigationRailMutedUnselectedIcon &&
-        other.navigationRailMutedUnselectedText ==
-            navigationRailMutedUnselectedText &&
+        //
+        other.navigationRailLabelTextStyle == navigationRailLabelTextStyle &&
         other.navigationRailSelectedLabelSize ==
             navigationRailSelectedLabelSize &&
         other.navigationRailUnselectedLabelSize ==
             navigationRailUnselectedLabelSize &&
+        other.navigationRailSelectedLabelSchemeColor ==
+            navigationRailSelectedLabelSchemeColor &&
+        other.navigationRailUnselectedLabelSchemeColor ==
+            navigationRailUnselectedLabelSchemeColor &&
+        other.navigationRailMutedUnselectedLabel ==
+            navigationRailMutedUnselectedLabel &&
         other.navigationRailSelectedIconSize ==
             navigationRailSelectedIconSize &&
         other.navigationRailUnselectedIconSize ==
             navigationRailUnselectedIconSize &&
+        other.navigationRailSelectedIconSchemeColor ==
+            navigationRailSelectedIconSchemeColor &&
+        other.navigationRailUnselectedIconSchemeColor ==
+            navigationRailUnselectedIconSchemeColor &&
+        other.navigationRailMutedUnselectedIcon ==
+            navigationRailMutedUnselectedIcon &&
+        other.navigationRailUseIndicator == navigationRailUseIndicator &&
+        other.navigationRailIndicatorSchemeColor ==
+            navigationRailIndicatorSchemeColor &&
+        other.navigationRailBackgroundSchemeColor ==
+            navigationRailBackgroundSchemeColor &&
+        other.navigationRailOpacity == navigationRailOpacity &&
+        other.navigationRailElevation == navigationRailElevation &&
         other.navigationRailLabelType == navigationRailLabelType &&
         other.navigationRailGroupAlignment == navigationRailGroupAlignment;
   }
@@ -1568,34 +1699,39 @@ class FlexSubThemesData with Diagnosticable {
       bottomNavigationBarBackgroundSchemeColor,
       bottomNavigationBarLandscapeLayout,
       //
-      navigationBarIsStyled,
-      navigationBarHeight,
-      navigationBarOpacity,
-      navigationBarIconSchemeColor,
-      navigationBarTextSchemeColor,
-      navigationBarHighlightSchemeColor,
-      navigationBarBackgroundSchemeColor,
-      navigationBarMutedUnselectedIcon,
-      navigationBarMutedUnselectedText,
+      navigationBarLabelTextStyle,
       navigationBarSelectedLabelSize,
       navigationBarUnselectedLabelSize,
+      navigationBarSelectedLabelSchemeColor,
+      navigationBarUnselectedLabelSchemeColor,
+      navigationBarMutedUnselectedLabel,
       navigationBarSelectedIconSize,
       navigationBarUnselectedIconSize,
+      navigationBarSelectedIconSchemeColor,
+      navigationBarUnselectedIconSchemeColor,
+      navigationBarMutedUnselectedIcon,
+      navigationBarHighlightSchemeColor,
+      navigationBarBackgroundSchemeColor,
+      navigationBarOpacity,
+      navigationBarHeight,
       navigationBarLabelBehavior,
-      navigationRailBackgroundSchemeColor,
       //
-      navigationRailOpacity,
-      navigationRailElevation,
-      navigationRailIconSchemeColor,
-      navigationRailUseIndicator,
-      navigationRailIndicatorSchemeColor,
-      navigationRailTextSchemeColor,
-      navigationRailMutedUnselectedIcon,
-      navigationRailMutedUnselectedText,
+      navigationRailLabelTextStyle,
       navigationRailSelectedLabelSize,
       navigationRailUnselectedLabelSize,
+      navigationRailSelectedLabelSchemeColor,
+      navigationRailUnselectedLabelSchemeColor,
+      navigationRailMutedUnselectedLabel,
       navigationRailSelectedIconSize,
       navigationRailUnselectedIconSize,
+      navigationRailSelectedIconSchemeColor,
+      navigationRailUnselectedIconSchemeColor,
+      navigationRailMutedUnselectedIcon,
+      navigationRailUseIndicator,
+      navigationRailIndicatorSchemeColor,
+      navigationRailBackgroundSchemeColor,
+      navigationRailOpacity,
+      navigationRailElevation,
       navigationRailLabelType,
       navigationRailGroupAlignment,
     ]);
@@ -1705,37 +1841,81 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<BottomNavigationBarLandscapeLayout>(
         'bottomNavigationBarLandscapeLayout',
         bottomNavigationBarLandscapeLayout));
+    //
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'navigationBarLabelTextStyle', navigationBarLabelTextStyle));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarSelectedLabelSize', navigationBarSelectedLabelSize));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarUnselectedLabelSize', navigationBarUnselectedLabelSize));
+    properties.add(DiagnosticsProperty<SchemeColor>(
+        'navigationBarSelectedLabelSchemeColor',
+        navigationBarSelectedLabelSchemeColor));
+    properties.add(DiagnosticsProperty<SchemeColor>(
+        'navigationBarUnselectedLabelSchemeColor',
+        navigationBarUnselectedLabelSchemeColor));
     properties.add(DiagnosticsProperty<bool>(
-        'navigationBarIsStyled', navigationBarIsStyled));
+        'navigationBarMutedUnselectedLabel',
+        navigationBarMutedUnselectedLabel));
     properties.add(DiagnosticsProperty<double>(
-        'navigationBarHeight', navigationBarHeight));
+        'navigationBarSelectedIconSize', navigationBarSelectedIconSize));
     properties.add(DiagnosticsProperty<double>(
-        'navigationBarOpacity', navigationBarOpacity));
+        'navigationBarUnselectedIconSize', navigationBarUnselectedIconSize));
     properties.add(EnumProperty<SchemeColor>(
-        'navigationBarIconSchemeColor', navigationBarIconSchemeColor));
+        'navigationBarSelectedIconSchemeColor',
+        navigationBarSelectedIconSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
-        'navigationBarIconSchemeColor', navigationBarIconSchemeColor));
+        'navigationBarUnselectedIconSchemeColor',
+        navigationBarUnselectedIconSchemeColor));
+    properties.add(DiagnosticsProperty<bool>(
+        'navigationBarMutedUnselectedIcon', navigationBarMutedUnselectedIcon));
     properties.add(EnumProperty<SchemeColor>(
         'navigationBarHighlightSchemeColor',
         navigationBarHighlightSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'navigationBarBackgroundSchemeColor',
         navigationBarBackgroundSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationBarMutedUnselectedIcon', navigationBarMutedUnselectedIcon));
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationBarMutedUnselectedText', navigationBarMutedUnselectedText));
     properties.add(DiagnosticsProperty<double>(
-        'navigationBarSelectedLabelSize', navigationBarSelectedLabelSize));
+        'navigationBarOpacity', navigationBarOpacity));
     properties.add(DiagnosticsProperty<double>(
-        'navigationBarUnselectedLabelSize', navigationBarUnselectedLabelSize));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarSelectedIconSize', navigationBarSelectedIconSize));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarUnselectedIconSize', navigationBarUnselectedIconSize));
+        'navigationBarHeight', navigationBarHeight));
     properties.add(EnumProperty<NavigationDestinationLabelBehavior>(
         'navigationBarLabelBehavior', navigationBarLabelBehavior));
     //
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'navigationRailLabelTextStyle', navigationRailLabelTextStyle));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationRailSelectedLabelSize', navigationRailSelectedLabelSize));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationRailUnselectedLabelSize',
+        navigationRailUnselectedLabelSize));
+    properties.add(DiagnosticsProperty<SchemeColor>(
+        'navigationRailSelectedLabelSchemeColor',
+        navigationRailSelectedLabelSchemeColor));
+    properties.add(DiagnosticsProperty<SchemeColor>(
+        'navigationRailUnselectedLabelSchemeColor',
+        navigationRailUnselectedLabelSchemeColor));
+    properties.add(DiagnosticsProperty<bool>(
+        'navigationRailMutedUnselectedLabel',
+        navigationRailMutedUnselectedLabel));
+    properties.add(EnumProperty<double>(
+        'navigationRailSelectedIconSize', navigationRailSelectedIconSize));
+    properties.add(EnumProperty<double>(
+        'navigationRailUnselectedIconSize', navigationRailUnselectedIconSize));
+    properties.add(EnumProperty<SchemeColor>(
+        'navigationRailSelectedIconSchemeColor',
+        navigationRailSelectedIconSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'navigationRailUnselectedIconSchemeColor',
+        navigationRailUnselectedIconSchemeColor));
+    properties.add(DiagnosticsProperty<bool>(
+        'navigationRailMutedUnselectedIcon',
+        navigationRailMutedUnselectedIcon));
+    properties.add(DiagnosticsProperty<bool>(
+        'navigationRailUseIndicator', navigationRailUseIndicator));
+    properties.add(DiagnosticsProperty<SchemeColor>(
+        'navigationRailIndicatorSchemeColor',
+        navigationRailIndicatorSchemeColor));
     properties.add(DiagnosticsProperty<SchemeColor>(
         'navigationRailBackgroundSchemeColor',
         navigationRailBackgroundSchemeColor));
@@ -1743,38 +1923,8 @@ class FlexSubThemesData with Diagnosticable {
         'navigationRailOpacity', navigationRailOpacity));
     properties.add(DiagnosticsProperty<double>(
         'navigationRailElevation', navigationRailElevation));
-    //
-    properties.add(EnumProperty<SchemeColor>(
-        'navigationRailIconSchemeColor', navigationRailIconSchemeColor));
-    //
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationRailUseIndicator', navigationRailUseIndicator));
-    properties.add(DiagnosticsProperty<SchemeColor>(
-        'navigationRailIndicatorSchemeColor',
-        navigationRailIndicatorSchemeColor));
-    properties.add(DiagnosticsProperty<SchemeColor>(
-        'navigationRailTextSchemeColor', navigationRailTextSchemeColor));
-    //
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationRailMutedUnselectedIcon',
-        navigationRailMutedUnselectedIcon));
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationRailMutedUnselectedText',
-        navigationRailMutedUnselectedText));
-    //
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailSelectedLabelSize', navigationRailSelectedLabelSize));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailUnselectedLabelSize',
-        navigationRailUnselectedLabelSize));
-    //
-    properties.add(EnumProperty<double>(
-        'navigationRailSelectedIconSize', navigationRailSelectedIconSize));
-    properties.add(EnumProperty<double>(
-        'navigationRailUnselectedIconSize', navigationRailUnselectedIconSize));
-    //
     properties.add(EnumProperty<NavigationRailLabelType>(
-        'navigationRailGroupAlignment', navigationRailLabelType));
+        'navigationRailLabelType', navigationRailLabelType));
     properties.add(DiagnosticsProperty<double>(
         'navigationRailGroupAlignment', navigationRailGroupAlignment));
   }

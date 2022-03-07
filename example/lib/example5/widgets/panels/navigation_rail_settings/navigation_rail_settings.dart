@@ -128,31 +128,13 @@ class NavigationRailSettings extends StatelessWidget {
           ),
           NavigationRailShowcase(
             height: 700,
-            useIndicator: controller.useIndicator,
+            useIndicator:
+                controller.useIndicator ? controller.useIndicator : null,
             onChangedUseIndicator: controller.setUseIndicator,
             child: Column(
               children: <Widget>[
                 ColorSchemePopupMenu(
-                  title: const Text('Item color'),
-                  subtitle:
-                      const Text('Shared setting with navigation bars. APIs '
-                          'have own properties'),
-                  index: controller.navBarScheme?.index ?? -1,
-                  onChanged: controller.useSubThemes &&
-                          controller.useFlexColorScheme
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setNavBarScheme(null);
-                          } else {
-                            controller
-                                .setNavBarScheme(SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
-                ),
-                const SizedBox(height: 8),
-                ColorSchemePopupMenu(
-                  title: const Text('Item indicator color'),
+                  title: const Text('Item selection indicator color'),
                   subtitle:
                       const Text('Shared setting with NavigationBar. APIs '
                           'have own properties'),
@@ -169,12 +151,50 @@ class NavigationRailSettings extends StatelessWidget {
                         }
                       : null,
                 ),
-                SwitchListTileAdaptive(
-                  title: const Text('Slight opacity on unselected items on '
-                      'NavigationRail'),
+                ColorSchemePopupMenu(
+                  title: const Text('Item color'),
                   subtitle:
-                      const Text('Unselected icon and text are less bright. '
-                          'The NavigationRail uses this by default too.'),
+                      const Text('Shared setting with navigation bars. APIs '
+                          'have own properties'),
+                  index: controller.navBarSelectedSchemeColor?.index ?? -1,
+                  onChanged: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller.setNavBarSelectedSchemeColor(null);
+                          } else {
+                            controller.setNavBarSelectedSchemeColor(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+                ColorSchemePopupMenu(
+                  title: const Text('Unselected item color'),
+                  subtitle:
+                      const Text('Shared setting with navigation bars. APIs '
+                          'have own properties'),
+                  index: controller.navUnselectedSchemeColor?.index ?? -1,
+                  onChanged: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller.setNavUnselectedSchemeColor(null);
+                          } else {
+                            controller.setNavUnselectedSchemeColor(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+                SwitchListTileAdaptive(
+                  title: const Text('Mute unselected items on '
+                      'NavigationRail'),
+                  subtitle: const Text(
+                      'Unselected icon and text are less bright.\n'
+                      'Rail will also use muted unselected items as SDK '
+                      'default when this is OFF, if all item colors and sizes '
+                      'are also at their default values'),
                   value: controller.navBarMuteUnselected &&
                       controller.useSubThemes &&
                       controller.useFlexColorScheme,

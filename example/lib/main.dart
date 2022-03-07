@@ -291,9 +291,9 @@ const FlexKeyColors _keyColors = FlexKeyColors(
 // minimum chroma value, and after that use the key color's chroma value,
 // or if it should be locked to a given chroma value.
 //
-// There is also a static that returns a default FlexTones.light or FlexTones.dark
-// when you pass it a brightness, called FlexTones.material, to indicate that it
-// is using the default Material 3 specification.
+// There is also a static that returns a default FlexTones.light and
+// FlexTones.dark, when you pass it a brightness, called FlexTones.material,
+// to indicate that it is using the default Material 3 specification.
 //
 // There are few more pre-made static configurations:
 //

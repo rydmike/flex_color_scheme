@@ -5817,7 +5817,7 @@ class FlexColorScheme with Diagnosticable {
           : null,
       dialogTheme: useSubThemes
           ? FlexSubThemes.dialogTheme(
-              backgroundColor: dialogBackground ?? colorScheme.surface,
+              backgroundColor: dialogBackground,
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
@@ -5826,7 +5826,7 @@ class FlexColorScheme with Diagnosticable {
           : null,
       timePickerTheme: useSubThemes
           ? FlexSubThemes.timePickerTheme(
-              backgroundColor: dialogBackground ?? colorScheme.surface,
+              backgroundColor: dialogBackground,
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               radius: subTheme.timePickerDialogRadius ?? subTheme.defaultRadius,
@@ -5880,36 +5880,29 @@ class FlexColorScheme with Diagnosticable {
       navigationBarTheme: useSubThemes
           ? FlexSubThemes.navigationBarTheme(
               colorScheme: colorScheme,
-              labelTextStyle: subTheme.navigationBarIsStyled
-                  ? effectiveTextTheme.overline
-                  : null,
+              labelTextStyle: subTheme.navigationBarLabelTextStyle ??
+                  effectiveTextTheme.labelSmall,
               selectedLabelSize: subTheme.navigationBarSelectedLabelSize,
               unselectedLabelSize: subTheme.navigationBarUnselectedLabelSize,
-              textSchemeColor: subTheme.navigationBarTextSchemeColor ??
-                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
-              mutedUnselectedText: subTheme.navigationBarMutedUnselectedText ??
-                  subTheme.navigationBarIsStyled,
+              selectedLabelSchemeColor:
+                  subTheme.navigationBarSelectedLabelSchemeColor,
+              unselectedLabelSchemeColor:
+                  subTheme.navigationBarUnselectedLabelSchemeColor,
+              mutedUnselectedLabel: subTheme.navigationBarMutedUnselectedLabel,
               selectedIconSize: subTheme.navigationBarSelectedIconSize,
               unselectedIconSize: subTheme.navigationBarUnselectedIconSize,
-              iconSchemeColor: subTheme.navigationBarIconSchemeColor ??
-                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
-              mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon ??
-                  subTheme.navigationBarIsStyled,
-              highlightSchemeColor: subTheme
-                      .navigationBarHighlightSchemeColor ??
-                  (subTheme.navigationBarIsStyled ? SchemeColor.primary : null),
-              indicatorAlpha: kNavigationBarIndicatorAlpha,
+              selectedIconSchemeColor:
+                  subTheme.navigationBarSelectedIconSchemeColor,
+              unselectedIconSchemeColor:
+                  subTheme.navigationBarUnselectedIconSchemeColor,
+              mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon,
+              highlightSchemeColor: subTheme.navigationBarHighlightSchemeColor,
               backgroundSchemeColor:
-                  subTheme.navigationBarBackgroundSchemeColor ??
-                      (subTheme.navigationBarIsStyled
-                          ? SchemeColor.background
-                          : null),
+                  subTheme.navigationBarBackgroundSchemeColor,
               opacity: subTheme.navigationBarOpacity,
-              height: subTheme.navigationBarHeight ??
-                  (subTheme.navigationBarIsStyled
-                      ? kNavigationBarHeight
-                      : null),
+              height: subTheme.navigationBarHeight,
               labelBehavior: subTheme.navigationBarLabelBehavior,
+              indicatorAlpha: kNavigationBarIndicatorAlpha,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
             )
@@ -5918,28 +5911,34 @@ class FlexColorScheme with Diagnosticable {
       navigationRailTheme: useSubThemes
           ? FlexSubThemes.navigationRailTheme(
               colorScheme: colorScheme,
-              // labelTextStyle: subTheme.navigationBarIsStyled
-              //     ? effectiveTextTheme.overline
-              //     : null,
-              selectedLabelSize: subTheme.navigationBarSelectedLabelSize,
+              labelTextStyle: subTheme.navigationRailLabelTextStyle ??
+                  effectiveTextTheme.bodyMedium,
+              selectedLabelSize: subTheme.navigationRailSelectedLabelSize,
               unselectedLabelSize: subTheme.navigationRailUnselectedLabelSize,
-              textSchemeColor: subTheme.navigationRailTextSchemeColor,
-              mutedUnselectedText: subTheme.navigationRailMutedUnselectedText,
+              selectedLabelSchemeColor:
+                  subTheme.navigationRailSelectedLabelSchemeColor,
+              unselectedLabelSchemeColor:
+                  subTheme.navigationRailUnselectedLabelSchemeColor,
+              mutedUnselectedLabel: subTheme.navigationRailMutedUnselectedLabel,
               selectedIconSize: subTheme.navigationRailSelectedIconSize,
               unselectedIconSize: subTheme.navigationRailUnselectedIconSize,
-              iconSchemeColor: subTheme.navigationRailIconSchemeColor,
+              selectedIconSchemeColor:
+                  subTheme.navigationRailSelectedIconSchemeColor,
+              unselectedIconSchemeColor:
+                  subTheme.navigationRailUnselectedIconSchemeColor,
               mutedUnselectedIcon: subTheme.navigationRailMutedUnselectedIcon,
+              useIndicator: subTheme.navigationRailUseIndicator,
               indicatorSchemeColor: subTheme.navigationRailIndicatorSchemeColor,
-              indicatorAlpha: kNavigationBarIndicatorAlpha,
               backgroundSchemeColor:
                   subTheme.navigationRailBackgroundSchemeColor,
               opacity: subTheme.navigationRailOpacity,
-              useIndicator: subTheme.navigationRailUseIndicator,
-              groupAlignment: subTheme.navigationRailGroupAlignment,
               elevation: subTheme.navigationRailElevation,
               labelType: subTheme.navigationRailLabelType,
+              groupAlignment: subTheme.navigationRailGroupAlignment,
+              indicatorAlpha: kNavigationBarIndicatorAlpha,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
+              useMaterial3: useMaterial3,
             )
           : null,
     );

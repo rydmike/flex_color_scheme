@@ -1271,15 +1271,17 @@ void main() {
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
-        iconSchemeColor: SchemeColor.secondary,
-        textSchemeColor: SchemeColor.error,
+        selectedIconSchemeColor: SchemeColor.secondary,
+        selectedLabelSchemeColor: SchemeColor.error,
+        unselectedIconSchemeColor: SchemeColor.onSurface,
+        unselectedLabelSchemeColor: SchemeColor.onSurface,
         backgroundSchemeColor: null,
         highlightSchemeColor: SchemeColor.secondaryContainer,
         height: 80,
         opacity: 0.9,
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         mutedUnselectedIcon: true,
-        mutedUnselectedText: true,
+        mutedUnselectedLabel: true,
         indicatorAlpha: 0x3D,
         unselectedAlphaBlend: 0x66,
         unselectedAlpha: 0xA5,
@@ -1314,8 +1316,8 @@ void main() {
                 }
                 return IconThemeData(
                     size: 24,
-                    color: colorScheme.secondary
-                        .blendAlpha(colorScheme.secondary, 0x66)
+                    color: colorScheme.onSurface
+                        .blendAlpha(colorScheme.onSurface, 0x66)
                         .withAlpha(0xA5));
               },
             ),
@@ -1331,8 +1333,8 @@ void main() {
       expect(
         navBarTheme.iconTheme!.resolve(<MaterialState>{})?.color,
         equals(
-          colorScheme.secondary
-              .blendAlpha(colorScheme.secondary, 0x66)
+          colorScheme.onSurface
+              .blendAlpha(colorScheme.onSurface, 0x66)
               .withAlpha(0xA5),
         ),
       );
@@ -1344,7 +1346,9 @@ void main() {
       expect(
         navBarTheme.labelTextStyle!.resolve(<MaterialState>{})?.color,
         equals(
-          colorScheme.error.blendAlpha(colorScheme.error, 0x66).withAlpha(0xA5),
+          colorScheme.onSurface
+              .blendAlpha(colorScheme.onSurface, 0x66)
+              .withAlpha(0xA5),
         ),
       );
     });
@@ -1358,15 +1362,17 @@ void main() {
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
         labelTextStyle: FlexColorScheme.m3TextTheme.caption,
-        iconSchemeColor: SchemeColor.secondaryContainer,
-        textSchemeColor: SchemeColor.primaryContainer,
+        selectedIconSchemeColor: SchemeColor.secondaryContainer,
+        selectedLabelSchemeColor: SchemeColor.primaryContainer,
+        unselectedIconSchemeColor: SchemeColor.onSurface,
+        unselectedLabelSchemeColor: SchemeColor.onSurface,
         highlightSchemeColor: SchemeColor.secondary,
         backgroundSchemeColor: SchemeColor.error,
         height: 80,
         opacity: 0.9,
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         mutedUnselectedIcon: false,
-        mutedUnselectedText: false,
+        mutedUnselectedLabel: false,
         indicatorAlpha: 0x3D,
         unselectedAlphaBlend: 0x66,
         unselectedAlpha: 0xA5,
@@ -1386,7 +1392,7 @@ void main() {
                       .copyWith(color: colorScheme.primaryContainer);
                 }
                 return FlexColorScheme.m3TextTheme.caption!
-                    .copyWith(color: colorScheme.primaryContainer);
+                    .copyWith(color: colorScheme.onSurface);
               },
             ),
             iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
@@ -1397,8 +1403,7 @@ void main() {
                     color: colorScheme.secondaryContainer,
                   );
                 }
-                return IconThemeData(
-                    size: 24, color: colorScheme.secondaryContainer);
+                return IconThemeData(size: 24, color: colorScheme.onSurface);
               },
             ),
           ).toString(),
@@ -1413,7 +1418,7 @@ void main() {
       expect(
         navBarTheme.iconTheme!.resolve(<MaterialState>{})?.color,
         equals(
-          colorScheme.secondaryContainer,
+          colorScheme.onSurface,
         ),
       );
       expect(
@@ -1424,7 +1429,7 @@ void main() {
       expect(
         navBarTheme.labelTextStyle!.resolve(<MaterialState>{})?.color,
         equals(
-          colorScheme.primaryContainer,
+          colorScheme.onSurface,
         ),
       );
     });

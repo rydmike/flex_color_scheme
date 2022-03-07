@@ -277,11 +277,12 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used navBarScheme setting in example 5.
   @override
-  Future<SchemeColor?> navBarScheme() async => ThemeService.defaultNavBarScheme;
+  Future<SchemeColor?> navSelectedSchemeColor() async =>
+      ThemeService.defaultNavSelectedSchemeColor;
 
   /// Persists used navBarScheme setting in example 5.
   @override
-  Future<void> saveNavBarScheme(SchemeColor? value) async {}
+  Future<void> saveNavSelectedSchemeColor(SchemeColor? value) async {}
 
   /// Loads used navBarHighlight setting in example 5.
   @override
@@ -796,4 +797,15 @@ class ThemeServiceMem implements ThemeService {
   /// Persists useIndicator setting in example 5.
   @override
   Future<void> saveUseIndicator(bool value) async {}
+
+  //----
+
+  /// Loads used navUnselectedSchemeColor setting.
+  @override
+  Future<SchemeColor?> navUnselectedSchemeColor() async =>
+      ThemeService.defaultNavUnselectedSchemeColor;
+
+  /// Persists used navUnselectedSchemeColor setting.
+  @override
+  Future<void> saveNavUnselectedSchemeColor(SchemeColor? value) async {}
 }
