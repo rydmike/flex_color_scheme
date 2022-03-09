@@ -16,6 +16,7 @@ class FlexToneConfigButtons extends StatelessWidget {
       controller.usedFlexToneSetup == 2,
       controller.usedFlexToneSetup == 3,
       controller.usedFlexToneSetup == 4,
+      controller.usedFlexToneSetup == 5,
     ];
     return ToggleButtons(
       isSelected: isSelected,
@@ -38,8 +39,12 @@ class FlexToneConfigButtons extends StatelessWidget {
           child: Icon(Icons.looks_3),
         ),
         Tooltip(
-          message: 'High contrast tones',
+          message: 'Vivid surfaces tones',
           child: Icon(Icons.looks_4),
+        ),
+        Tooltip(
+          message: 'High contrast tones',
+          child: Icon(Icons.looks_5),
         ),
       ],
     );

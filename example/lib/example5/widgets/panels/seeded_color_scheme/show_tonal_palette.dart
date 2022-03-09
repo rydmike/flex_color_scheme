@@ -49,6 +49,9 @@ class ShowTonalPalette extends StatelessWidget {
           controller.useKeyColors ? tones.secondaryMinChroma : 0,
       tertiaryChroma: controller.useKeyColors ? tones.tertiaryChroma : 0,
       tertiaryMinChroma: controller.useKeyColors ? tones.tertiaryMinChroma : 0,
+      neutralChroma: controller.useKeyColors ? tones.neutralChroma : 0,
+      neutralVariantChroma:
+          controller.useKeyColors ? tones.neutralVariantChroma : 0,
     );
     return Column(
       children: <Widget>[

@@ -35,7 +35,10 @@ import 'flex_theme_dark.dart';
 /// sub-themes.
 ThemeData themeDataFromDark(ThemeController controller) {
   return ThemeData.from(
-    textTheme: ThemeData(brightness: Brightness.dark).textTheme,
+    textTheme: ThemeData(
+      brightness: Brightness.dark,
+      fontFamily: AppData.font,
+    ).textTheme,
     // The [ColorScheme] we get here is the same one you can also generate
     // Copy/paste code for in the ThemesPlayground UI.
     colorScheme: flexColorSchemeDark(controller).toScheme,

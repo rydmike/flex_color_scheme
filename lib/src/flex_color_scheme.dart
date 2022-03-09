@@ -2495,7 +2495,7 @@ class FlexColorScheme with Diagnosticable {
                         seedScheme?.surface ?? FlexColor.materialLightSurface,
                     background: seedScheme?.background ??
                         FlexColor.materialLightBackground,
-                    scaffoldBackground: seedScheme?.surface ??
+                    scaffoldBackground: seedScheme?.background ??
                         FlexColor.materialLightScaffoldBackground,
                   )
                 : null,
@@ -4066,7 +4066,7 @@ class FlexColorScheme with Diagnosticable {
                         seedScheme?.surface ?? FlexColor.materialDarkSurface,
                     background: seedScheme?.background ??
                         FlexColor.materialDarkBackground,
-                    scaffoldBackground: seedScheme?.surface ??
+                    scaffoldBackground: seedScheme?.background ??
                         FlexColor.materialDarkScaffoldBackground,
                   )
                 : null,
@@ -7381,19 +7381,6 @@ class _AlphaValues {
   }
 }
 
-// TODO(rydmike): Make tones configurable.
-// A future extension idea for this class would be to also pass in a
-// [SchemeTones] configuration, that all contains the tonal value to be
-// used for each property. It would have defaults that are equal to the
-// TonalPalette, tone index values below, but it could be configured
-// to use different tones as well. For example primary.get(50) is pretty
-// good too and creates generally brighter colored UIs.
-//
-// In the Themes Playground app we could have a UI where you configure
-// the tone for each ColorScheme property and a you select the used tone
-// from a Popup showing the tonal palette, byt clicking on the a tone
-// index value in the ColorScheme presentation.
-
 /// This class is the same concept as Flutter's [ColorScheme] class.
 ///
 /// It is used used to generate a scheme based on a modified version of
@@ -7499,6 +7486,8 @@ class _Scheme {
       secondaryMinChroma: tones.secondaryMinChroma,
       tertiaryChroma: tones.tertiaryChroma,
       tertiaryMinChroma: tones.tertiaryMinChroma,
+      neutralChroma: tones.neutralChroma,
+      neutralVariantChroma: tones.neutralVariantChroma,
     );
     return _Scheme(
       primary: core.primary.get(tones.primaryTone),

@@ -57,10 +57,14 @@ class ResponsiveScaffold extends StatefulWidget {
     // ResponsiveScaffold properties.
     this.title,
     this.menuTitle,
+    this.menuLeadingTitle,
+    this.menuLeadingSubtitle,
+    this.menuLeadingAvatarLabel = '',
     this.onSelect,
     this.railWidth = _kRailWidth,
     this.menuWidth = _kMenuWidth,
     this.breakpointShowFullMenu = _kBreakpointShowFullMenu,
+
     // Standard Scaffold properties, just passed along to Scaffold.
     this.body,
     this.floatingActionButton,
@@ -100,6 +104,18 @@ class ResponsiveScaffold extends StatefulWidget {
   /// app, but it could also be small company logo that fits in an AppBar.
   final Widget? menuTitle;
 
+  /// A title for leading menu item.
+  final Widget? menuLeadingTitle;
+
+  /// A subtitle for leading menu item.
+  final Widget? menuLeadingSubtitle;
+
+  /// A label for the avatar for the leading menu item.
+  final String menuLeadingAvatarLabel;
+
+  /// Callback called with menu index when user taps on a menu item.
+  final ValueChanged<int>? onSelect;
+
   /// The width of the menu when it is rail sized.
   ///
   /// Values from 48...60 work well. You can vary the size depending on
@@ -133,9 +149,6 @@ class ResponsiveScaffold extends StatefulWidget {
   ///
   /// Defaults to [_kBreakpointShowFullMenu] 900.
   final double breakpointShowFullMenu;
-
-  /// Callback called with menu index when user taps on a menu item.
-  final ValueChanged<int>? onSelect;
 
   // Rest of the properties are just standard Scaffold properties that
   // are passed along to it.
@@ -417,6 +430,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
               // but you could make it something more and configurable.
               child: _AppMenu(
                 title: widget.menuTitle,
+                menuLeadingTitle: widget.menuLeadingTitle,
+                menuLeadingSubtitle: widget.menuLeadingSubtitle,
+                menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
                 maxWidth: widget.menuWidth,
                 railWidth: widget.railWidth,
                 onSelect: widget.onSelect,
@@ -463,6 +479,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
               child: Drawer(
                 child: _AppMenu(
                   title: widget.menuTitle,
+                  menuLeadingTitle: widget.menuLeadingTitle,
+                  menuLeadingSubtitle: widget.menuLeadingSubtitle,
+                  menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
                   maxWidth: widget.menuWidth,
                   railWidth: widget.railWidth,
                   onSelect: (int index) {
@@ -538,12 +557,18 @@ class _AppMenu extends StatefulWidget {
     this.onOperate,
     this.onSelect,
     required this.railWidth,
+    this.menuLeadingTitle,
+    this.menuLeadingSubtitle,
+    this.menuLeadingAvatarLabel = '',
   }) : super(key: key);
   final Widget? title;
   final double maxWidth;
   final VoidCallback? onOperate;
   final ValueChanged<int>? onSelect;
   final double railWidth;
+  final Widget? menuLeadingTitle;
+  final Widget? menuLeadingSubtitle;
+  final String menuLeadingAvatarLabel;
 
   @override
   _AppMenuState createState() => _AppMenuState();
@@ -555,10 +580,6 @@ class _AppMenuState extends State<_AppMenu> {
   static const List<IconData> _icons = <IconData>[
     Icons.open_in_full_outlined,
     Icons.close_fullscreen_outlined,
-    Icons.expand_more_outlined,
-    Icons.expand_less_outlined,
-    Icons.unfold_more_outlined,
-    Icons.unfold_less_outlined,
     Icons.integration_instructions_outlined,
     Icons.palette_outlined,
     Icons.replay_outlined,
@@ -567,11 +588,7 @@ class _AppMenuState extends State<_AppMenu> {
   static const List<String> _labels = <String>[
     'Expand all',
     'Close all',
-    'Expand settings',
-    'Close settings',
-    'Expand themed',
-    'Close themed',
-    'Copy theme code',
+    'Copy theme setup',
     'Copy ColorScheme',
     'Reset settings',
   ];
@@ -632,8 +649,14 @@ class _AppMenuState extends State<_AppMenu> {
                       child: ListView(
                         padding: EdgeInsets.zero, //  Removes all edge insets
                         children: <Widget>[
-                          // A mock user profile on the menu/rail.
-                          _UserProfile(railWidth: widget.railWidth),
+                          // A leading item the menu/rail.
+                          _MenuLeadingItem(
+                            railWidth: widget.railWidth,
+                            menuLeadingTitle: widget.menuLeadingTitle,
+                            menuLeadingSubtitle: widget.menuLeadingSubtitle,
+                            menuLeadingAvatarLabel:
+                                widget.menuLeadingAvatarLabel,
+                          ),
                           // Add all the menu items.
                           for (int i = 0; i < usedIcons.length; i++)
                             _MenuItem(
@@ -790,21 +813,25 @@ class _MenuItem extends StatelessWidget {
   }
 }
 
-/// A user profile widget that we use as leading widget in the menu.
-///
-/// Mock UI for the demo app, it does not do anything.
-class _UserProfile extends StatefulWidget {
-  const _UserProfile({
+/// Example of a leading item for the entire menu.
+class _MenuLeadingItem extends StatefulWidget {
+  const _MenuLeadingItem({
     Key? key,
     required this.railWidth,
+    this.menuLeadingTitle,
+    this.menuLeadingSubtitle,
+    this.menuLeadingAvatarLabel = '',
   }) : super(key: key);
   final double railWidth;
+  final Widget? menuLeadingTitle;
+  final Widget? menuLeadingSubtitle;
+  final String menuLeadingAvatarLabel;
 
   @override
-  _UserProfileState createState() => _UserProfileState();
+  _MenuLeadingItemState createState() => _MenuLeadingItemState();
 }
 
-class _UserProfileState extends State<_UserProfile> {
+class _MenuLeadingItemState extends State<_MenuLeadingItem> {
   bool _collapsed = true;
 
   @override
@@ -816,7 +843,7 @@ class _UserProfileState extends State<_UserProfile> {
 
     return Material(
       // As an effect for theme demos, we put themed surface color on
-      // Material used as background for the user profile widget. This gives
+      // Material used as background for the leading widget. This gives
       // a it a slightly different tone for the background with themes that use
       // a blend mode where the blend strength is different for background
       // and surface, since this widget is placed on Material with background
@@ -834,17 +861,14 @@ class _UserProfileState extends State<_UserProfile> {
               backgroundColor: theme.colorScheme.primary,
               radius: widget.railWidth / 2 - hPadding,
               child: Text(
-                'JS',
+                widget.menuLeadingAvatarLabel,
                 style: primaryTextTheme.subtitle1!.copyWith(
                     color: theme.colorScheme.onPrimary,
                     fontWeight: FontWeight.w600),
               ),
             ),
-            title: Text(
-              'John Smith',
-              style: textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w600),
-            ),
-            subtitle: const Text('Company Inc'),
+            title: widget.menuLeadingTitle,
+            subtitle: widget.menuLeadingSubtitle,
             trailing: ExpandIcon(
               isExpanded: !_collapsed,
               size: 32,
@@ -878,21 +902,13 @@ class _UserProfileState extends State<_UserProfile> {
                       children: <Widget>[
                         const Spacer(),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showAppAboutDialog(context);
+                          },
                           child: Column(
                             children: <Widget>[
-                              const Icon(Icons.person),
-                              Text('Profile', style: textTheme.overline),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        TextButton(
-                          onPressed: () {},
-                          child: Column(
-                            children: <Widget>[
-                              const Icon(Icons.logout),
-                              Text('Sign out', style: textTheme.overline),
+                              const Icon(Icons.info, size: 30),
+                              Text('About', style: textTheme.overline),
                             ],
                           ),
                         ),

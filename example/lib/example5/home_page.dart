@@ -17,7 +17,7 @@ import 'widgets/panels/buttons_settings/buttons_settings.dart';
 import 'widgets/panels/color_scheme_colors/color_scheme_colors.dart';
 import 'widgets/panels/component_themes/component_themes.dart';
 import 'widgets/panels/dialog_settings/dialog_settings.dart';
-import 'widgets/panels/info/info_panel.dart';
+import 'widgets/panels/introduction/introduction_panel.dart';
 import 'widgets/panels/navigation_bar_settings/navigation_bar_settings.dart';
 import 'widgets/panels/navigation_rail_settings/navigation_rail_settings.dart';
 import 'widgets/panels/seeded_color_scheme/seeded_color_scheme.dart';
@@ -82,10 +82,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // In dark mode?
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    // Short handle to the media query, used to get size and paddings.
+    final ThemeData theme = Theme.of(context);
+    final TextTheme textTheme = theme.textTheme;
+    final bool isDark = theme.brightness == Brightness.dark;
+    final ColorScheme colorScheme = theme.colorScheme;
     final MediaQueryData media = MediaQuery.of(context);
     // Paddings so content shows up in visible area when we use Scaffold props
     // extendBodyBehindAppBar and extendBody.
@@ -123,6 +123,12 @@ class _HomePageState extends State<HomePage> {
         breakpointShowFullMenu: AppData.desktopBreakpoint,
         title: Text(AppData.title(context)),
         menuTitle: const Text(AppData.appName),
+        menuLeadingTitle: Text(
+          'Themes Playground',
+          style: textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w600),
+        ),
+        menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
+        menuLeadingAvatarLabel: 'FCS',
         // Callback from menu, an item was clicked in the menu, for simplicity
         // we just use index based actions here.
         onSelect: (int index) async {
@@ -140,46 +146,18 @@ class _HomePageState extends State<HomePage> {
             }
             setState(() {});
           }
-          // Open settings cards
-          if (index == 2) {
-            for (int i = 1; i < 12; i++) {
-              isCardOpen[i] = true;
-            }
-            setState(() {});
-          }
-          // Close settings cards
-          if (index == 3) {
-            for (int i = 1; i < 12; i++) {
-              isCardOpen[i] = false;
-            }
-            setState(() {});
-          }
-          // Open themed cards
-          if (index == 4) {
-            for (int i = 13; i < isCardOpen.length; i++) {
-              isCardOpen[i] = true;
-            }
-            setState(() {});
-          }
-          // Close themed cards
-          if (index == 5) {
-            for (int i = 13; i < isCardOpen.length; i++) {
-              isCardOpen[i] = false;
-            }
-            setState(() {});
-          }
           // Copy theme setup code
-          if (index == 6) {
+          if (index == 2) {
             // Get the theme's Dart and Flutter setup code.
             await showCopySetupCodeDialog(context, widget.controller);
           }
           // Copy ColorScheme code
-          if (index == 7) {
+          if (index == 3) {
             final String code = generateColorSchemeDartCode(colorScheme);
             await showResponsiveDialog<void>(
               context: context,
               child: DartCodeDialogScreen(
-                dialogHeader: 'Active ${isDark ? 'Dark' : 'Light'} '
+                dialogHeader: 'Copy Current ${isDark ? 'Dark' : 'Light'} '
                     'ColorScheme Code',
                 copyMessage: 'ColorScheme code copied to the clipboard!',
                 code: code,
@@ -187,7 +165,7 @@ class _HomePageState extends State<HomePage> {
             );
           }
           // Reset theme settings.
-          if (index == 8) {
+          if (index == 4) {
             final bool? reset = await showDialog<bool?>(
               context: context,
               builder: (BuildContext context) {
@@ -199,7 +177,7 @@ class _HomePageState extends State<HomePage> {
             }
           }
           // Set theme-mode light/dark
-          if (index == 9) {
+          if (index == 5) {
             if (isDark) {
               await widget.controller.setThemeMode(ThemeMode.light);
             } else {
@@ -236,7 +214,7 @@ class _HomePageState extends State<HomePage> {
             itemCount: _nrOfCards,
             itemBuilder: (BuildContext context, int index) => <Widget>[
               // The main info Card.
-              InfoPanel(
+              IntroductionPanel(
                 controller: widget.controller,
                 isOpen: isCardOpen[0],
                 onTap: () {

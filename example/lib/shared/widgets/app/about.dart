@@ -4,14 +4,19 @@ import 'package:flutter/material.dart';
 import '../../const/app_data.dart';
 import '../../utils/link_text_span.dart';
 
-// An about icon button used on the example's app app bar.
+/// An about icon button used on the example's app app bar.
 class AboutIconButton extends StatelessWidget {
-  const AboutIconButton({Key? key}) : super(key: key);
+  const AboutIconButton({Key? key, this.color}) : super(key: key);
+
+  /// The color used on the icon button.
+  ///
+  /// If null, default to Icon() class default color.
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.info),
+      icon: Icon(Icons.info, color: color),
       onPressed: () {
         showAppAboutDialog(context);
       },
@@ -59,8 +64,8 @@ void showAppAboutDialog(BuildContext context) {
               TextSpan(
                 style: aboutTextStyle,
                 text: 'This example shows some features of the '
-                    '${AppData.appName} Flutter theming package. To learn '
-                    'more, check out the package on ',
+                    '${AppData.appName} Flutter theming package.\n'
+                    'To learn more, check out the package on ',
               ),
               LinkTextSpan(
                 style: linkStyle,
@@ -69,8 +74,9 @@ void showAppAboutDialog(BuildContext context) {
               ),
               TextSpan(
                 style: aboutTextStyle,
-                text: '. It is well documented and also includes the source '
-                    'code of this example.\n\n',
+                text: '.\n'
+                    'It is thoroughly documented and includes the source '
+                    'code of this application.\n\n',
               ),
               TextSpan(
                 style: footerStyle,

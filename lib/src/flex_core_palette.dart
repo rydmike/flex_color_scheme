@@ -146,6 +146,31 @@ class FlexCorePalette extends CorePalette {
     /// concept of minimum level for tertiary tonal palettes as its value is
     /// always locked to 24.
     final double tertiaryMinChroma = 0,
+
+    /// Cam16 chroma value to use for neutral colors [TonalPalette} generation.
+    ///
+    /// Always uses chroma from the primary key color, but you can vary the
+    /// amount of chroma from primary key color that is used to generate
+    /// the tonal palette
+    ///
+    /// Flutter SDK [ColorScheme.fromSeed] uses [neutralChroma] hard coded
+    /// and locked to 4.
+    ///
+    /// Defaults to 4.
+    final double neutralChroma = 4,
+
+    /// Cam16 chroma value to use for neutralVariant colors
+    /// [TonalPalette} generation.
+    ///
+    /// Always uses chroma from the primary key color, but you can vary the
+    /// amount of chroma from primary key color that is used to generate
+    /// the tonal palette
+    ///
+    /// Flutter SDK [ColorScheme.fromSeed] uses [neutralVariantChroma] hard
+    /// coded and locked to 8.
+    ///
+    /// Defaults to 8.
+    final double neutralVariantChroma = 8,
   }) {
     // Primary TonalPalette calculation.
     //
@@ -188,8 +213,10 @@ class FlexCorePalette extends CorePalette {
         math.max(tertiaryMinChroma, effectiveTertiaryChroma));
 
     // Neutral TonalPalettes are made from primary, with a bit of its chroma
-    final TonalPalette tonalNeutral = TonalPalette.of(camPrimary.hue, 4);
-    final TonalPalette tonalNeutralVariant = TonalPalette.of(camPrimary.hue, 8);
+    final TonalPalette tonalNeutral =
+        TonalPalette.of(camPrimary.hue, neutralChroma);
+    final TonalPalette tonalNeutralVariant =
+        TonalPalette.of(camPrimary.hue, neutralVariantChroma);
     // The TonalPalette for error color is hard coded into parent class.
     // It is added automatically to created [CorePalette] as:
     // final TonalPalette error = TonalPalette.of(25, 84);
@@ -427,6 +454,32 @@ class FlexCorePalette extends CorePalette {
 //     /// concept of minimum level for tertiary tonal palettes as its value is
 //     /// always locked to 24.
 //     final double tertiaryMinChroma = 0,
+//
+// /// Cam16 chroma value to use for neutral colors [TonalPalette} generation.
+// ///
+// /// Always uses chroma from the primary key color, but you can vary the
+// /// amount of chroma from primary key color that is used to generate
+// /// the tonal palette
+// ///
+// /// Flutter SDK [ColorScheme.fromSeed] uses [neutralChroma] hard coded
+// /// and locked to 4.
+// ///
+// /// Defaults to 4.
+// final double neutralChroma = 4,
+//
+// /// Cam16 chroma value to use for neutralVariant colors
+// /// [TonalPalette} generation.
+// ///
+// /// Always uses chroma from the primary key color, but you can vary the
+// /// amount of chroma from primary key color that is used to generate
+// /// the tonal palette
+// ///
+// /// Flutter SDK [ColorScheme.fromSeed] uses [neutralVariantChroma] hard
+// /// coded and locked to 8.
+// ///
+// /// Defaults to 8.
+//
+// final double neutralVariantChroma = 8,
 //   }) {
 //     // Primary TonalPalette calculation.
 //     //
@@ -470,9 +523,10 @@ class FlexCorePalette extends CorePalette {
 //         math.max(tertiaryMinChroma, effectiveTertiaryChroma));
 //
 //     // Neutral TonalPalettes are made from primary, with a bit of its chroma
-//     final TonalPalette tonalNeutral = TonalPalette.of(camPrimary.hue, 4);
+//     final TonalPalette tonalNeutral =
+//         TonalPalette.of(camPrimary.hue, neutralChroma);
 //     final TonalPalette tonalNeutralVariant =
-//       TonalPalette.of(camPrimary.hue, 8);
+//         TonalPalette.of(camPrimary.hue, neutralVariantChroma);
 //     // The TonalPalette for error color is hard coded into parent class.
 //     // It is added automatically to created [CorePalette] as:
 //     // final TonalPalette error = TonalPalette.of(25, 84);
