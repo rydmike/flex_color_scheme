@@ -29,6 +29,8 @@ class SeededColorScheme extends StatelessWidget {
     } else if (colors == 3) {
       return 'Vivid';
     } else if (colors == 4) {
+      return 'Vivid surfaces';
+    } else if (colors == 5) {
       return 'High contrast';
     }
     return 'Disabled';
@@ -40,8 +42,12 @@ class SeededColorScheme extends StatelessWidget {
     } else if (colors == 2) {
       return 'Softer and more earth like tones than Material 3 defaults';
     } else if (colors == 3) {
-      return 'More vivid colors than Material 3 defaults';
+      return 'More Vivid colors than Material 3 defaults';
     } else if (colors == 4) {
+      return 'Like Vivid, but with more colorful containers, onColors and '
+          'surface tones. Creates alpha blend like effect without '
+          'any blend level';
+    } else if (colors == 5) {
       return 'High contrast version, may be useful for accessibility';
     }
     return 'Disabled';
@@ -51,27 +57,44 @@ class SeededColorScheme extends StatelessWidget {
     if (colors == 1) {
       return 'Primary - Chroma from key color, but min 48\n'
           'Secondary - Chroma set to 16\n'
-          'Tertiary - Chroma set to 24\n';
+          'Tertiary - Chroma set to 24\n'
+          'Neutral - Chroma set to 4\n'
+          'Neutral variant - Chroma set to 8\n';
     } else if (colors == 2) {
       return 'Primary - Chroma set to 30\n'
           'Secondary - Chroma set to 14\n'
-          'Tertiary - Chroma set to 20\n';
+          'Tertiary - Chroma set to 20\n'
+          'Neutral - Chroma set to 4\n'
+          'Neutral variant - Chroma set to 8\n';
     } else if (colors == 3) {
       return 'Primary - Chroma from key color, but min 50\n'
           'Secondary - Chroma from key color\n'
-          'Tertiary - Chroma from key color\n';
+          'Tertiary - Chroma from key color\n'
+          'Neutral - Chroma set to 4\n'
+          'Neutral variant - Chroma set to 8\n';
     } else if (colors == 4) {
+      return 'Primary - Chroma from key color, but min 50\n'
+          'Secondary - Chroma from key color\n'
+          'Tertiary - Chroma from key color\n'
+          'Neutral - Chroma set to 8\n'
+          'Neutral variant - Chroma set to 16\n';
+    } else if (colors == 5) {
       return 'Primary - Chroma from key color, but min 65\n'
           'Secondary - Chroma from key color, but min 55\n'
-          'Tertiary - Chroma from key color, but min 55\n';
+          'Tertiary - Chroma from key color, but min 55\n'
+          'Neutral - Chroma set to 4\n'
+          'Neutral variant - Chroma set to 8\n';
     }
     return 'Key color based tonal palettes are not used.\n'
         'Enable at least one key color to seed the palettes.\n'
-        'Primary color must always be included as a key color.\n';
+        'Primary color must always be included as a key color.\n\n\n';
   }
 
   @override
   Widget build(BuildContext context) {
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final bool showBlendInfo = (isLight && controller.blendLevel > 0) ||
+        (!isLight && controller.blendLevelDark > 0);
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
@@ -104,11 +127,11 @@ class SeededColorScheme extends StatelessWidget {
           if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text('Tap a color code to copy it to the clipboard. '
+              child: Text('Tap a color code to copy it to the clipboard.\n'
                   // ignore: lines_longer_than_80_chars
                   "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color. ' : ''}"
                   // ignore: lines_longer_than_80_chars
-                  "${controller.blendLevel > 0 ? 'Surface blends modifies surface and background colors, they may not be found in generated palettes when hovered.' : ''}"),
+                  "${showBlendInfo ? 'Surface blends modifies surface and background colors, they may not be found in generated palettes when hovered.' : '\n'}"),
             ),
 
           if (controller.schemeIndex == (AppColor.schemesCustom.length - 1))
@@ -155,7 +178,7 @@ class SeededColorScheme extends StatelessWidget {
               // ignore: lines_longer_than_80_chars
               '${_describeFlexToneLong(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}\n'
               'In this version you can choose between the default Material 3 '
-              'tone mapping and three pre-defined custom FlexTones setup. With '
+              'tone mapping and four pre-defined custom FlexTones setups. With '
               'the API you can make your own FlexTones configurations. A '
               'future version of this app may add interactive configuration of '
               'tone to ColorScheme color mapping.',

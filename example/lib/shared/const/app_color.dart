@@ -211,6 +211,8 @@ class AppColor {
     } else if (tones == 3) {
       return FlexTones.vivid(brightness);
     } else if (tones == 4) {
+      return FlexTones.vividSurfaces(brightness);
+    } else if (tones == 5) {
       return FlexTones.highContrast(brightness);
     } else {
       return FlexTones.material(brightness);

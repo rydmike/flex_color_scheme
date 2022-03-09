@@ -49,9 +49,7 @@ class _HomePageState extends State<HomePage> {
     final double margins = AppData.responsiveInsets(media.size.width);
     final double topPadding = media.padding.top + kToolbarHeight + margins;
     final double bottomPadding = media.padding.bottom + margins;
-    // We are on phone width media, based on our definition in this app.
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
-
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -64,6 +62,15 @@ class _HomePageState extends State<HomePage> {
       child: ResponsiveScaffold(
         title: Text(AppData.title(context)),
         menuTitle: const Text(AppData.appName),
+        menuLeadingTitle: Text(
+          'Copy Playground Theme',
+          style: Theme.of(context)
+              .textTheme
+              .titleSmall!
+              .copyWith(fontWeight: FontWeight.w600),
+        ),
+        menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
+        menuLeadingAvatarLabel: 'FCS',
         // Make Rail width larger when using it on tablet or desktop.
         railWidth: isPhone ? 52 : 66,
         breakpointShowFullMenu: AppData.desktopBreakpoint,

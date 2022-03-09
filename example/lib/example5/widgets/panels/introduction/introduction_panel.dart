@@ -16,11 +16,12 @@ import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../dialogs/show_copy_setup_code_dialog.dart';
 import 'platform_popup_menu.dart';
 
-/// Show the main panel with into and information text.
-/// Has the main controls to turn ON/OFF using FlexColorScheme and te sub themes
-/// too.
-class InfoPanel extends StatelessWidget {
-  const InfoPanel({
+/// Show the main panel with introduction information.
+///
+/// Has the main controls to turn ON/OFF using FlexColorScheme and
+/// the sub themes too.
+class IntroductionPanel extends StatelessWidget {
+  const IntroductionPanel({
     Key? key,
     required this.controller,
     required this.isOpen,
@@ -35,12 +36,11 @@ class InfoPanel extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('FlexColorScheme Info'),
+      title: const Text('Introduction'),
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),
           const ListTile(
-            title: Text('FlexColorScheme v5 Themes Playground'),
             subtitle: Text(
                 'With this app you can try all features and themes in '
                 'FlexColorScheme V5. Find a color scheme you '
@@ -75,15 +75,16 @@ class InfoPanel extends StatelessWidget {
             subtitle: Text("You can turn FlexColorScheme's theming OFF "
                 'to see what a theme looks like when using standard Flutter '
                 'ThemeData.from(colorScheme) using same active ColorScheme '
-                'as shown when FlexColorScheme is active.'),
+                'as shown when FlexColorScheme is active. You do not get any '
+                'component theming then, but you can adjust colors. However, '
+                'the Scaffold background color will always be equal to '
+                'background color, since it does not have its '
+                'own value in ColorScheme.'),
           ),
           SwitchListTileAdaptive(
             subtitle: const Text(
               "Turn OFF to see Flutter's default theming with these colors.\n"
-              'Component sub-theme settings are disabled when OFF, but you '
-              'can adjust colors. However, Scaffold background color will '
-              'always be equal to background color, since it does not have is '
-              'own value in ColorScheme.',
+              'Component sub-theme settings are disabled when OFF',
             ),
             value: controller.useFlexColorScheme,
             onChanged: controller.setUseFlexColorScheme,
@@ -91,33 +92,31 @@ class InfoPanel extends StatelessWidget {
           const ListTile(
             title: Text('Component Themes'),
             subtitle: Text('The opinionated component widget sub '
-                'theming is ON by default in this app, but off in the API. '
-                'Turn it OFF to see the differences. The sub-theming '
-                'follows Material Design 3 when possible, but are to some '
-                'extent still limited by Flutter SDK Material 2 based designs. '
-                'This setting affects corner radius on Widgets, but also '
-                'TextTheme size and its optional coloring. '),
+                'theming is ON by default in this app, but off by default in '
+                'the API. Turn it OFF to observe the differences. '
+                'The default sub-theming when ON, follows Material Design 3 '
+                'when possible. It is however to some extent still limited '
+                'by Flutter SDK Material 2 based designs. '
+                'Most visible change is the corner radius on Widgets that '
+                'depends on Widget type, but also TextTheme size.'),
           ),
           SwitchListTileAdaptive(
-            subtitle: const Text('Use opinionated widget sub themes.\n'
-                'When ON you can configure additional settings on components, '
-                'that is on Flutter built-in Material UI widgets.'),
+            subtitle: const Text('Use component widget sub themes.\n'
+                'When ON you can adjust additional settings on component '
+                'themes for Flutter built-in Material UI widgets.'),
             value: controller.useSubThemes && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
                 ? controller.setUseSubThemes
                 : null,
           ),
-          const ListTile(
-            title: Text('Get Setup Code'),
-            subtitle: Text(
-                'Want to use a theme you configured here in your Flutter app? '
-                'Just copy the setup code for your active settings and paste '
-                'it into your Flutter app iny our IDE, import FlexColorScheme '
-                'and you are good to go.'),
-          ),
           ListTile(
-            title: const Text('Get the FlexColorScheme setup code for '
-                'this theme'),
+            title: const Text('Get Theme Setup Code'),
+            subtitle: const Text(
+                'Want to use a FlexColorScheme theme you configured here in '
+                'your Flutter app?\n'
+                'Just copy the setup code for these settings and paste '
+                'it into your Flutter app, import FlexColorScheme '
+                'and you are good to go.'),
             trailing: ElevatedButton(
               onPressed: controller.useFlexColorScheme
                   ? () {
@@ -134,42 +133,43 @@ class InfoPanel extends StatelessWidget {
           ),
           const ListTile(
             title: Text('Material Design 3'),
-            subtitle: Text('Only a few Material 3 widgets and styles are '
-                'available in Flutter 2.10.x and earlier. There is a toggle in '
-                'ThemeData that you can turn on to enable M3 styles, but it '
-                'still has almost no effect on Widgets in Flutter. It will in '
-                'future versions. When it does, we can use this toggle to see '
-                'what it does.'),
+            subtitle: Text(
+              'The updated Material 3 ColorScheme is used in FlexColorScheme '
+              'v5. However, widgets in Flutter 2.10 do not utilize any of its '
+              'new colors by default yet. You can enable '
+              "FlexColorScheme's component sub-themes to get "
+              'a theme that is close to M3 styles already now.\n'
+              '\n'
+              'You can also define which scheme color is used by each widget '
+              'via its sub-theme properties. This feature will also work when '
+              'Material 3 behavior become the default in Flutter. It is '
+              'a convenient way to use a themed, none default ColorScheme '
+              'based color, as the color of choice on built-in Material UI '
+              'widgets.\n'
+              '\n'
+              'Very few Material 3 widgets and styles are available in '
+              'Flutter 2.10.x and earlier. The updated ColorScheme, '
+              'NavigationBar and the flag to use a selection indicator on '
+              'NavigationRail are the only M3 features in the SDK so far.\n'
+              '\n'
+              'There is a toggle in ThemeData that you can turn on to '
+              'enable SDK built-in M3 styles. It still has almost no effect '
+              'on UI widget defaults in Flutter. The indicator on the '
+              'NavigationRail is the only thing it affects so far. It will be '
+              'used more by future Flutter versions. When it is, we can use '
+              'this toggle to see what it does.',
+            ),
           ),
           SwitchListTileAdaptive(
-            title: const Text(
-              "Use Flutter's Material 3 based ThemeData defaults",
-            ),
+            // title: const Text(
+            //   "Use Flutter's Material 3 based ThemeData defaults",
+            // ),
             subtitle: const Text(
+              "Use Flutter's Material 3 based ThemeData defaults\n"
               'Toggles ThemeData.useMaterial3 true/false',
             ),
             value: controller.useMaterial3,
             onChanged: controller.setUseMaterial3,
-          ),
-          const ListTile(
-            title: Text('New ColorScheme in Flutter 2.10 and '
-                'FlexColorScheme v5'),
-            subtitle: Text('The Material 3 ColorScheme is used in '
-                'FlexColorScheme v5. However, '
-                'widgets in Flutter 2.10 do not utilize any of its colors '
-                'yet by default. Nor do they implement other M3 styles, even '
-                'if the useMaterial3:true flag is set in ThemeData.\n'
-                '\n'
-                'You can use '
-                "FlexColorScheme's component sub-themes to get "
-                'a theme that is close to M3 styles already now. You can also '
-                'customize it, and '
-                'define which scheme color is used by each widget via '
-                'sub-theme properties. '
-                'This feature will also work well when Material 3 styles '
-                'become available in Flutter. It is a quick and '
-                'convenient way to use a themed none default ColorScheme '
-                'color, on built-in Material UI widgets.'),
           ),
           const ListTile(
             title: Text('Platform'),

@@ -71,6 +71,8 @@ class FlexTones with Diagnosticable {
     required this.secondaryMinChroma,
     this.tertiaryChroma,
     required this.tertiaryMinChroma,
+    required this.neutralChroma,
+    required this.neutralVariantChroma,
   });
 
   /// Create a M3 standard light tonal palette tones extraction and
@@ -113,6 +115,8 @@ class FlexTones with Diagnosticable {
     this.secondaryMinChroma = 0,
     this.tertiaryChroma = 24,
     this.tertiaryMinChroma = 0,
+    this.neutralChroma = 4,
+    this.neutralVariantChroma = 8,
   });
 
   /// Create a M3 standard dark tonal palette tones extraction and
@@ -155,6 +159,8 @@ class FlexTones with Diagnosticable {
     this.secondaryMinChroma = 0,
     this.tertiaryChroma = 24,
     this.tertiaryMinChroma = 0,
+    this.neutralChroma = 4,
+    this.neutralVariantChroma = 8,
   });
 
   /// Alternative static constructor with brightness as input to create
@@ -207,7 +213,82 @@ class FlexTones with Diagnosticable {
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: null,
-              primaryMinChroma: 50);
+              primaryMinChroma: 50,
+            );
+
+  /// Creates a tonal palette extraction setup that results in M3 like
+  /// ColorsSchemes with chroma like [FlexTones.vivid] on main colors, but
+  /// double chroma on neutrals and more color tinted surfaces and onColors.
+  ///
+  /// Primary tone is one tone darker than in Material 3 standard setup in light
+  /// mode. As in M3 default, primary uses its own chroma, but with a minimum
+  /// value of 50.  Secondary and tertiary key colors use their own chroma
+  /// with no min limits, making the secondary and tertiary mid tones closer
+  /// to their used key colors.
+  /// Chroma for neutral is 8 and neutralVariant 16, doubled from M3 defaults.
+  ///
+  /// The tones are modified for more colorful container, onColors color tones
+  /// and for using higher tones on surfaces and backgrounds. This creates
+  /// an alpha blend like of effect of primary on surfaces, without using any
+  /// blend level in FlexColorScheme. You can apply alpha blends to this tones
+  /// setup too, but it is easy to overdo it with these surfaces and
+  /// backgrounds as starting points.
+  static FlexTones vividSurfaces(Brightness brightness) =>
+      brightness == Brightness.light
+          ? const FlexTones.light(
+              primaryTone: 30,
+              secondaryTone: 40,
+              tertiaryTone: 40,
+              errorTone: 40,
+              onPrimaryTone: 95,
+              onSecondaryTone: 95,
+              onTertiaryTone: 95,
+              onErrorTone: 95,
+              primaryContainerTone: 80,
+              secondaryContainerTone: 80,
+              tertiaryContainerTone: 80,
+              errorContainerTone: 80,
+              surfaceTone: 95,
+              surfaceVariantTone: 80,
+              onSurfaceVariantTone: 20,
+              inverseSurfaceTone: 30,
+              backgroundTone: 90,
+              primaryChroma: null,
+              secondaryChroma: null,
+              tertiaryChroma: null,
+              primaryMinChroma: 50,
+              neutralChroma: 8,
+              neutralVariantChroma: 16,
+            )
+          : const FlexTones.dark(
+              primaryTone: 80,
+              secondaryTone: 80,
+              tertiaryTone: 80,
+              errorTone: 80,
+              onPrimaryTone: 10,
+              onSecondaryTone: 10,
+              onTertiaryTone: 10,
+              onErrorTone: 20,
+              primaryContainerTone: 40,
+              secondaryContainerTone: 40,
+              tertiaryContainerTone: 40,
+              errorContainerTone: 30,
+              onErrorContainerTone: 90,
+              backgroundTone: 20,
+              onBackgroundTone: 90,
+              surfaceTone: 10,
+              onSurfaceTone: 80,
+              onSurfaceVariantTone: 90,
+              inverseSurfaceTone: 95,
+              onInverseSurfaceTone: 30,
+              surfaceVariantTone: 40,
+              primaryChroma: null,
+              secondaryChroma: null,
+              tertiaryChroma: null,
+              primaryMinChroma: 50,
+              neutralChroma: 8,
+              neutralVariantChroma: 16,
+            );
 
   /// Creates a tonal palette extraction setup that results in M3 like
   /// ColorsSchemes with high contrast between color versus its on-color and
@@ -373,8 +454,6 @@ class FlexTones with Diagnosticable {
   /// fixed [primaryChroma] is provided that is lower than [primaryMinChroma]
   /// then the [primaryMinChroma] value is used.
   ///
-  /// Defaults to 48.
-  ///
   /// Flutter SDK uses 48 via a hard coded value and design.
   final double primaryMinChroma;
 
@@ -385,8 +464,6 @@ class FlexTones with Diagnosticable {
   ///
   /// Flutter SDK [ColorScheme.fromSeed] uses [secondaryChroma] hard coded
   /// and locked to 16.
-  ///
-  /// Defaults to 16.
   ///
   /// The default produces quite soft and muted tones as secondary tonal palette
   /// at the mid-point tones of the palette.
@@ -401,8 +478,6 @@ class FlexTones with Diagnosticable {
   /// fixed [secondaryChroma] is provided that is lower than
   /// [secondaryMinChroma] then the [secondaryMinChroma] value is used.
   ///
-  /// Defaults to 0.
-  ///
   /// Flutter SDK only uses [secondaryChroma] hard coded to 16, and has no
   /// concept of minimum level for secondary tonal palettes as its value is
   /// always locked to 16.
@@ -415,8 +490,6 @@ class FlexTones with Diagnosticable {
   ///
   /// Flutter SDK [ColorScheme.fromSeed] uses [tertiaryChroma] hard coded
   /// and locked to 24.
-  ///
-  /// Defaults to 24.
   ///
   /// The default produces soft and muted tones as tertiary tonal palette
   /// at the mid-point tones of the palette, that are bit less muted than
@@ -432,12 +505,31 @@ class FlexTones with Diagnosticable {
   /// fixed [tertiaryChroma] is provided that is lower than
   /// [tertiaryMinChroma] then the [tertiaryMinChroma] value is used.
   ///
-  /// Defaults to 0.
-  ///
   /// Flutter SDK only uses [tertiaryChroma] hard coded to 24, and has no
   /// concept of minimum level for tertiary tonal palettes as its value is
   /// always locked to 24.
   final double tertiaryMinChroma;
+
+  /// Cam16 chroma value to use for neutral colors [TonalPalette} generation.
+  ///
+  /// Always uses chroma from the primary key color, but you can vary the
+  /// amount of chroma from primary key color that is used to generate
+  /// the tonal palette
+  ///
+  /// Flutter SDK [ColorScheme.fromSeed] uses [neutralChroma] hard coded
+  /// and locked to 4.
+  final double neutralChroma;
+
+  /// Cam16 chroma value to use for neutralVariant colors
+  /// [TonalPalette} generation.
+  ///
+  /// Always uses chroma from the primary key color, but you can vary the
+  /// amount of chroma from primary key color that is used to generate
+  /// the tonal palette
+  ///
+  /// Flutter SDK [ColorScheme.fromSeed] uses [neutralVariantChroma] hard
+  /// coded and locked to 8.
+  final double neutralVariantChroma;
 
   /// Copy the object with one or more provided properties changed.
   FlexTones copyWith({
@@ -474,6 +566,8 @@ class FlexTones with Diagnosticable {
     double? secondaryMinChroma,
     double? tertiaryChroma,
     double? tertiaryMinChroma,
+    double? neutralChroma,
+    double? neutralVariantChroma,
   }) {
     return FlexTones(
       primaryTone: primaryTone ?? this.primaryTone,
@@ -514,6 +608,8 @@ class FlexTones with Diagnosticable {
       secondaryMinChroma: secondaryMinChroma ?? this.secondaryMinChroma,
       tertiaryChroma: tertiaryChroma ?? this.tertiaryChroma,
       tertiaryMinChroma: tertiaryMinChroma ?? this.tertiaryMinChroma,
+      neutralChroma: neutralChroma ?? this.neutralChroma,
+      neutralVariantChroma: neutralVariantChroma ?? this.neutralVariantChroma,
     );
   }
 
@@ -555,7 +651,9 @@ class FlexTones with Diagnosticable {
         other.secondaryChroma == secondaryChroma &&
         other.secondaryMinChroma == secondaryMinChroma &&
         other.tertiaryChroma == tertiaryChroma &&
-        other.tertiaryMinChroma == tertiaryMinChroma;
+        other.tertiaryMinChroma == tertiaryMinChroma &&
+        other.neutralChroma == neutralChroma &&
+        other.neutralVariantChroma == neutralVariantChroma;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -595,6 +693,8 @@ class FlexTones with Diagnosticable {
       secondaryMinChroma,
       tertiaryChroma,
       tertiaryMinChroma,
+      neutralChroma,
+      neutralVariantChroma,
     ]);
   }
 
@@ -654,5 +754,8 @@ class FlexTones with Diagnosticable {
         .add(DiagnosticsProperty<double>('tertiaryChroma', tertiaryChroma));
     properties.add(
         DiagnosticsProperty<double>('tertiaryMinChroma', tertiaryMinChroma));
+    properties.add(DiagnosticsProperty<double>('neutralChroma', neutralChroma));
+    properties.add(DiagnosticsProperty<double>(
+        'neutralVariantChroma', neutralVariantChroma));
   }
 }

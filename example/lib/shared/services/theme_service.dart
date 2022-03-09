@@ -208,8 +208,8 @@ abstract class ThemeService {
 
   /// Default value for the blendLevelDark, also used to reset settings.
   ///
-  /// Defaults to 15.
-  static const int defaultBlendLevelDark = 15;
+  /// Defaults to 10.
+  static const int defaultBlendLevelDark = 10;
 
   /// Loads used surface blend level dark setting in example 5.
   Future<int> blendLevelDark();
@@ -223,7 +223,7 @@ abstract class ThemeService {
   /// Default value for the onBlendLevel, also used to reset settings.
   ///
   /// Defaults to 20.
-  static const int defaultBlendOnLevel = 40;
+  static const int defaultBlendOnLevel = 20;
 
   /// Loads used blendOnLevel setting in example 5.
   Future<int> blendOnLevel();
@@ -513,8 +513,8 @@ abstract class ThemeService {
 
   /// Default value for the darkMethodLevel, also used to reset settings.
   ///
-  /// Defaults to 35.
-  static const int defaultDarkMethodLevel = 35;
+  /// Defaults to 10.
+  static const int defaultDarkMethodLevel = 10;
 
   /// Loads use computed dark mode level setting, in example 5.
   Future<int> darkMethodLevel();
@@ -1109,7 +1109,7 @@ abstract class ThemeService {
   static const String keyUnselectedIsColored = 'unselectedIsColored';
 
   /// Default value for the unselectedIsColored, also to reset settings.
-  static const bool defaultUnselectedIsColored = false;
+  static const bool defaultUnselectedIsColored = true;
 
   /// Loads used unselectedIsColored setting in example 5.
   Future<bool> unselectedIsColored();
