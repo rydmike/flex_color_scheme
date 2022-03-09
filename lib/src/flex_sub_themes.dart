@@ -1989,6 +1989,14 @@ class FlexSubThemes {
     /// Defaults to [kBottomNavigationBarElevation] = 0.
     final double elevation = kBottomNavigationBarElevation,
 
+    /// Whether the labels are shown for the selected
+    /// [BottomNavigationBarItem].
+    final bool? showSelectedLabels,
+
+    /// Whether the labels are shown for the unselected
+    /// [BottomNavigationBarItem]s.
+    final bool? showUnselectedLabels,
+
     /// Defines the layout and behavior of a [BottomNavigationBar].
     ///
     /// With [BottomNavigationBarType.fixed] the items have fixed width.
@@ -2138,6 +2146,8 @@ class FlexSubThemes {
               color: labelColor,
             )
           : null,
+      showSelectedLabels: showSelectedLabels,
+      showUnselectedLabels: showUnselectedLabels,
       type: type,
       landscapeLayout: landscapeLayout,
     );
