@@ -24,6 +24,7 @@ class HeaderCard extends StatelessWidget {
     this.subtitle,
     this.margin = EdgeInsets.zero,
     this.headerPadding,
+    this.elevation = 0,
     this.enabled = true,
     this.isOpen = true,
     required this.onTap,
@@ -63,6 +64,11 @@ class HeaderCard extends StatelessWidget {
   ///
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
   final EdgeInsetsGeometry? headerPadding;
+
+  /// Elevation of the header card.
+  ///
+  /// Default to 0.
+  final double elevation;
 
   /// Whether this list tile and card operation is interactive.
   final bool enabled;
@@ -159,6 +165,7 @@ class HeaderCard extends StatelessWidget {
       margin: margin,
       color: cardColor,
       shape: shapeBorder,
+      elevation: elevation,
       child: Column(
         children: <Widget>[
           Theme(

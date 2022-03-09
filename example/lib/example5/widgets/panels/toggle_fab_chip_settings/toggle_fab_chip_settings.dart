@@ -48,6 +48,7 @@ class ToggleFabChipsSettings extends StatelessWidget {
           const Divider(),
           ColorSchemePopupMenu(
             title: const Text('FloatingActionButton color'),
+            labelForDefault: 'null (secondary)',
             index: controller.fabSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {

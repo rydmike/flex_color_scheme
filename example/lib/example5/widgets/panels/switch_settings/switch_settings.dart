@@ -41,6 +41,7 @@ class SwitchesSettings extends StatelessWidget {
           const Divider(),
           ColorSchemePopupMenu(
             title: const Text('Switch color'),
+            labelForDefault: 'null (secondary)',
             index: controller.switchSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -60,6 +61,7 @@ class SwitchesSettings extends StatelessWidget {
           const Divider(),
           ColorSchemePopupMenu(
             title: const Text('Checkbox color'),
+            labelForDefault: 'null (secondary)',
             index: controller.checkboxSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -79,6 +81,7 @@ class SwitchesSettings extends StatelessWidget {
           const Divider(),
           ColorSchemePopupMenu(
             title: const Text('Radio color'),
+            labelForDefault: 'null (secondary)',
             index: controller.radioSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {

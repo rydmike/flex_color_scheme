@@ -24,19 +24,17 @@ class UseKeyColorsButtons extends StatelessWidget {
     ];
     return ToggleButtons(
       isSelected: isSelected,
-      onPressed: controller.useFlexColorScheme
-          ? (int index) {
-              if (index == 0) {
-                controller.setUseKeyColors(!controller.useKeyColors);
-              }
-              if (index == 1 && controller.useKeyColors) {
-                controller.setUseSecondary(!controller.useSecondary);
-              }
-              if (index == 2 && controller.useKeyColors) {
-                controller.setUseTertiary(!controller.useTertiary);
-              }
-            }
-          : null,
+      onPressed: (int index) {
+        if (index == 0) {
+          controller.setUseKeyColors(!controller.useKeyColors);
+        }
+        if (index == 1 && controller.useKeyColors) {
+          controller.setUseSecondary(!controller.useSecondary);
+        }
+        if (index == 2 && controller.useKeyColors) {
+          controller.setUseTertiary(!controller.useTertiary);
+        }
+      },
       children: <Widget>[
         const Tooltip(
           message: 'Use input Primary color\n'

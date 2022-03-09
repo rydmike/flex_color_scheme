@@ -86,11 +86,7 @@ class SeededColorScheme extends StatelessWidget {
             subtitle: Text(AppColor.explainUsedColors(controller)),
           ),
           // const SizedBox(height: 4),
-          ListTile(
-            trailing: UseKeyColorsButtons(
-              controller: controller,
-            ),
-          ),
+          ListTile(trailing: UseKeyColorsButtons(controller: controller)),
           const ListTile(
             title: Text('Keep effective input color'),
             subtitle: Text('When using a seeded ColorScheme, '

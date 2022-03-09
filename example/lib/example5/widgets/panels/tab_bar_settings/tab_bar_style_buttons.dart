@@ -6,10 +6,10 @@ class TabBarStyleButtons extends StatelessWidget {
   const TabBarStyleButtons({
     Key? key,
     required this.style,
-    required this.onChanged,
+    this.onChanged,
   }) : super(key: key);
   final FlexTabBarStyle style;
-  final ValueChanged<FlexTabBarStyle> onChanged;
+  final ValueChanged<FlexTabBarStyle>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class TabBarStyleButtons extends StatelessWidget {
     return ToggleButtons(
       isSelected: isSelected,
       onPressed: (int newIndex) {
-        onChanged(FlexTabBarStyle.values[newIndex]);
+        onChanged?.call(FlexTabBarStyle.values[newIndex]);
       },
       children: const <Widget>[
         Tooltip(

@@ -743,7 +743,6 @@ class FlexSubThemes {
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
-    // final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
 
     return ButtonThemeData(
       colorScheme: colorScheme,
@@ -1572,9 +1571,9 @@ class FlexSubThemes {
       );
 
   // TODO(rydmike): Consider for Slider value popup background primary blend.
-  //  The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp
 
   // TODO(rydmike): Dialog content has no padding property, add when supported.
+  //  The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp
 
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///

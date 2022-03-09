@@ -114,10 +114,8 @@ class SelectTheme extends StatelessWidget {
             title: const Text('Use Material 3 error colors'),
             subtitle: const Text('Override defined M2 error colors and use M3 '
                 'error colors also when not using seeded ColorScheme'),
-            value: controller.useM3ErrorColor && controller.useFlexColorScheme,
-            onChanged: controller.useFlexColorScheme
-                ? controller.setUseM3ErrorColor
-                : null,
+            value: controller.useM3ErrorColors,
+            onChanged: controller.setUseM3ErrorColors,
           ),
           UsedColorsPopupMenu(
             title: const Text('Input limiter, use fewer of the six '
@@ -157,13 +155,8 @@ class SelectTheme extends StatelessWidget {
                 'algorithm. This option has no effect if seed colors '
                 'are used, it is kept disabled then.',
               ),
-              value: controller.useToDarkMethod &&
-                  controller.useSubThemes &&
-                  controller.useFlexColorScheme &&
-                  !controller.useKeyColors,
-              onChanged: controller.useSubThemes &&
-                      controller.useFlexColorScheme &&
-                      !controller.useKeyColors
+              value: controller.useToDarkMethod && !controller.useKeyColors,
+              onChanged: controller.useSubThemes && !controller.useKeyColors
                   ? controller.setUseToDarkMethod
                   : null,
             ),
@@ -179,14 +172,12 @@ class SelectTheme extends StatelessWidget {
                 divisions: 100,
                 label: controller.darkMethodLevel.toString(),
                 value: controller.darkMethodLevel.toDouble(),
-                onChanged: controller.useToDarkMethod &&
-                        controller.useSubThemes &&
-                        controller.useFlexColorScheme &&
-                        !controller.useKeyColors
-                    ? (double value) {
-                        controller.setDarkMethodLevel(value.floor());
-                      }
-                    : null,
+                onChanged:
+                    controller.useToDarkMethod && !controller.useKeyColors
+                        ? (double value) {
+                            controller.setDarkMethodLevel(value.floor());
+                          }
+                        : null,
               ),
               trailing: Padding(
                 padding: const EdgeInsetsDirectional.only(end: 12),

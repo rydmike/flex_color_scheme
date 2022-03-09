@@ -5,9 +5,14 @@ import '../../shared/const/app_color.dart';
 import '../../shared/const/app_data.dart';
 import '../../shared/controllers/theme_controller.dart';
 
-// A function that returns the FlexColorScheme Dart and Flutter setup
-// code for the theme held by ThemeController.
+/// A function that returns the FlexColorScheme Dart and Flutter setup
+/// code for the theme held by ThemeController.
+///
+/// The properties are in the order they are in the classes.
 String generateThemeDartCode(ThemeController controller) {
+  //
+  // Code for main theme setup, the effective colors setup.
+  //
   final FlexSchemeData scheme = AppColor.scheme(controller);
   // Get the enum index of scheme
   final int flexScheme = controller.schemeIndex - 3;
@@ -51,164 +56,475 @@ String generateThemeDartCode(ThemeController controller) {
         '    error: ${scheme.light.error},\n'
         '  ).defaultError.toDark(${controller.darkMethodLevel}, true),\n';
   }
+  //
+  // Code for main theme setup, the other properties 'FlexColorScheme.light' and
+  // 'FlexColorScheme.dark' factories direct parameters.
+  final String surfaceMode = controller.blendLevel > 0
+      ? '  surfaceMode: ${controller.surfaceMode},\n'
+      : '';
+  final String blendLevel = controller.blendLevel > 0
+      ? '  blendLevel: ${controller.blendLevel},\n'
+      : '';
+  final String usedColors = controller.usedColors != 6
+      ? '  usedColors: ${controller.usedColors},\n'
+      : '';
+  final String lightAppBarStyle =
+      controller.lightAppBarStyle != FlexAppBarStyle.primary
+          ? '  appBarStyle: ${controller.lightAppBarStyle},\n'
+          : '';
+  final String darkAppBarStyle =
+      controller.darkAppBarStyle != FlexAppBarStyle.material
+          ? '  appBarStyle: ${controller.darkAppBarStyle},\n'
+          : '';
+  final String appBarOpacity = controller.appBarOpacity != 1
+      ? '  appBarOpacity: ${controller.appBarOpacity},\n'
+      : '';
+  final String transparentStatusBar = controller.transparentStatusBar
+      ? ''
+      : '  transparentStatusBar: ${controller.transparentStatusBar},\n';
+  final String appBarElevation = controller.appBarElevation != 0
+      ? '  appBarElevation: ${controller.appBarElevation},\n'
+      : '';
+  final String tabBarStyle = controller.tabBarStyle != FlexTabBarStyle.forAppBar
+      ? '  tabBarStyle: ${controller.tabBarStyle},\n'
+      : '';
+  final String lightIsWhite = controller.lightIsWhite
+      ? '  lightIsWhite: ${controller.lightIsWhite},\n'
+      : '';
+  final String darkIsTrueBlack = controller.darkIsTrueBlack
+      ? '  darkIsTrueBlack: ${controller.darkIsTrueBlack},\n'
+      : '';
+  final String swapLightColors = controller.swapLightColors
+      ? '  swapColors: ${controller.swapLightColors},\n'
+      : '';
+  final String swapDarkColors = controller.swapDarkColors
+      ? '  swapColors: ${controller.swapDarkColors},\n'
+      : '';
+  final String tooltipsMatchBackground = controller.tooltipsMatchBackground
+      ? '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
+      : '';
+  final String useSubThemes = controller.useSubThemes
+      ? '  useSubThemes: ${controller.useSubThemes},\n'
+      : '';
+  final String useM3ErrorColors = controller.useM3ErrorColors
+      ? '  useMaterial3ErrorColors: ${controller.useM3ErrorColors},\n'
+      : '';
+  final String useMaterial3 = controller.useMaterial3
+      ? '  useMaterial3: ${controller.useMaterial3},\n'
+      : '';
+  //
+  // Code for FlexSubThemesData
+  //
+  final String interactionEffects = controller.interactionEffects
+      ? ''
+      : '    interactionEffects: ${controller.interactionEffects},\n';
+  final String blendOnLevelLight = controller.blendOnLevel > 0
+      ? '    blendOnLevel: ${controller.blendOnLevel},\n'
+      : '';
+  final String blendOnLevelDark = controller.blendOnLevelDark > 0
+      ? '    blendOnLevel: ${controller.blendOnLevelDark},\n'
+      : '';
+  final String blendLightOnColors = controller.blendLightOnColors
+      ? ''
+      : '    blendOnColors: ${controller.blendLightOnColors},\n';
+  final String blendDarkOnColors = controller.blendDarkOnColors
+      ? ''
+      : '    blendOnColors: ${controller.blendDarkOnColors},\n';
+  final String blendLightTextTheme = controller.blendLightTextTheme
+      ? ''
+      : '    blendTextTheme: ${controller.blendLightTextTheme},\n';
+  final String blendDarkTextTheme = controller.blendDarkTextTheme
+      ? ''
+      : '    blendTextTheme: ${controller.blendDarkTextTheme},\n';
+  final String useTextTheme = controller.useTextTheme
+      ? ''
+      : '    useTextTheme: ${controller.useTextTheme},\n';
   final String defRadius = controller.useDefaultRadius
       ? ''
       : '    defaultRadius: ${controller.cornerRadius},\n';
-  final String navBarColorCode = controller.navBarSelectedSchemeColor == null
-      ? ''
-      : '    bottomNavigationBarSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
-          '    navigationBarIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
-          '    navigationBarTextSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
-  final String navBarBackgroundSchemeColorCode = controller
-              .navBarBackgroundSchemeColor ==
-          null
-      ? ''
-      : '    bottomNavigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n'
-          '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
-  final String navBarHighLightCode = controller.navBarHighlight == null
-      ? ''
-      : '    navigationBarHighlightSchemeColor: ${controller.navBarHighlight},\n';
-  final String tabBarIndicatorCode = controller.tabBarIndicator == null
-      ? ''
-      : '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicator},\n';
-  final String chipSchemeColorCode = controller.chipSchemeColor == null
-      ? ''
-      : '    chipSchemeColor: ${controller.chipSchemeColor},\n';
-  final String inputDecoratorSchemeColorCode = controller
-              .inputDecoratorSchemeColor ==
-          null
-      ? ''
-      : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColor},\n';
-  final String textButtonSchemeColorCode =
-      controller.textButtonSchemeColor == null
+  //
+  // Material button sub themes.
+  final String textButtonSchemeColor =
+      controller.textButtonSchemeColor == SchemeColor.primary ||
+              controller.textButtonSchemeColor == null
           ? ''
           : '    textButtonSchemeColor: ${controller.textButtonSchemeColor},\n';
-  final String elevatedButtonSchemeColorCode = controller
-              .elevatedButtonSchemeColor ==
-          null
+  final String elevatedButtonSchemeColor = controller
+                  .elevatedButtonSchemeColor ==
+              SchemeColor.primary ||
+          controller.elevatedButtonSchemeColor == null
       ? ''
       : '    elevatedButtonSchemeColor: ${controller.elevatedButtonSchemeColor},\n';
-  final String outlinedButtonSchemeColorCode = controller
-              .outlinedButtonSchemeColor ==
-          null
+  final String outlinedButtonSchemeColor = controller
+                  .outlinedButtonSchemeColor ==
+              SchemeColor.primary ||
+          controller.outlinedButtonSchemeColor == null
       ? ''
       : '    outlinedButtonSchemeColor: ${controller.outlinedButtonSchemeColor},\n';
-  final String materialButtonSchemeColorCode = controller
-              .materialButtonSchemeColor ==
-          null
+  final String materialButtonSchemeColor = controller
+                  .materialButtonSchemeColor ==
+              SchemeColor.primary ||
+          controller.materialButtonSchemeColor == null
       ? ''
       : '    materialButtonSchemeColor: ${controller.materialButtonSchemeColor},\n';
-  final String toggleButtonsSchemeColorCode = controller
-              .toggleButtonsSchemeColor ==
-          null
+  final String toggleButtonsSchemeColor = controller.toggleButtonsSchemeColor ==
+              SchemeColor.primary ||
+          controller.toggleButtonsSchemeColor == null
       ? ''
       : '    toggleButtonsSchemeColor: ${controller.toggleButtonsSchemeColor},\n';
-  final String switchSchemeColorCode = controller.switchSchemeColor == null
+  //
+  // Toggleable sub themes.
+  final String switchSchemeColor =
+      controller.switchSchemeColor == SchemeColor.secondary ||
+              controller.switchSchemeColor == null
+          ? ''
+          : '    switchSchemeColor: ${controller.switchSchemeColor},\n';
+  final String checkboxSchemeColor =
+      controller.checkboxSchemeColor == SchemeColor.secondary ||
+              controller.checkboxSchemeColor == null
+          ? ''
+          : '    checkboxSchemeColor: ${controller.checkboxSchemeColor},\n';
+  final String radioSchemeColor =
+      controller.radioSchemeColor == SchemeColor.secondary ||
+              controller.radioSchemeColor == null
+          ? ''
+          : '    radioSchemeColor: ${controller.radioSchemeColor},\n';
+  final String unselectedIsColored = controller.unselectedIsColored
+      ? '    unselectedToggleIsColored: ${controller.unselectedIsColored},\n'
+      : '';
+  //
+  // Input decorator
+  final String inputDecoratorSchemeColor = controller
+                  .inputDecoratorSchemeColor ==
+              SchemeColor.primary ||
+          controller.inputDecoratorSchemeColor == null
       ? ''
-      : '    switchSchemeColor: ${controller.switchSchemeColor},\n';
-  final String checkboxSchemeColorCode = controller.checkboxSchemeColor == null
+      : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColor},\n';
+  final String inputDecoratorIsFilled = controller.inputDecoratorIsFilled
       ? ''
-      : '    checkboxSchemeColor: ${controller.checkboxSchemeColor},\n';
-  final String radioSchemeColorCode = controller.radioSchemeColor == null
+      : '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n';
+  final String inputDecoratorBorderType = controller.inputDecoratorBorderType ==
+          FlexInputBorderType.outline
       ? ''
-      : '    radioSchemeColor: ${controller.radioSchemeColor},\n';
-  final String dialogBackgroundSchemeColorCode = controller
+      : '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n';
+  final String inputDecoratorUnfocusedHasBorder = controller
+          .inputDecoratorUnfocusedHasBorder
+      ? ''
+      : '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n';
+  //
+  // Fab and chip
+  final String fabUseShape = controller.fabUseShape
+      ? ''
+      : '    fabUseShape: ${controller.fabUseShape},\n';
+  final String fabSchemeColor =
+      controller.fabSchemeColor == SchemeColor.secondary ||
+              controller.fabSchemeColor == null
+          ? ''
+          : '    fabSchemeColor: ${controller.fabSchemeColor},\n';
+  final String chipSchemeColor =
+      controller.chipSchemeColor == SchemeColor.primary ||
+              controller.chipSchemeColor == null
+          ? ''
+          : '    chipSchemeColor: ${controller.chipSchemeColor},\n';
+  final String dialogBackgroundSchemeColor = controller
               .dialogBackgroundSchemeColor ==
-          null
+          SchemeColor.surface
       ? ''
       : '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundSchemeColor},\n';
-  final String tabBarItemSchemeColorCode =
-      controller.tabBarItemSchemeColor == null
-          ? ''
-          : '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColor},\n';
-  final String appBarBackgroundSchemeColorCode = controller
+  final String appBarBackgroundSchemeColor = controller
               .appBarBackgroundSchemeColor ==
           null
       ? ''
       : '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColor},\n';
-
-  final String fabSchemeColorCode = controller.fabSchemeColor == null
+  final String tabBarItemSchemeColor = controller.tabBarItemSchemeColor == null
       ? ''
-      : '    fabSchemeColor: ${controller.fabSchemeColor},\n';
+      : '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColor},\n';
 
-  final String lightSubThemeCode = controller.useSubThemes
+  final String tabBarIndicatorSchemeColor = controller.tabBarIndicator == null
+      ? ''
+      : '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicator},\n';
+  //
+  //
+  final String bottomNavigationBarSelectedLabelSchemeColor = controller
+              .navBarSelectedSchemeColor ==
+          SchemeColor.primary
+      ? ''
+      : '    bottomNavigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+  final String bottomNavigationBarUnselectedLabelSchemeColor = controller
+              .navUnselectedSchemeColor ==
+          SchemeColor.onSurface
+      ? ''
+      : '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+  final String bottomNavigationBarMutedUnselectedLabel = controller
+          .navBarMuteUnselected
+      ? ''
+      : '    bottomNavigationBarMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
+  final String bottomNavigationBarSelectedIconSchemeColor = controller
+              .navBarSelectedSchemeColor ==
+          SchemeColor.primary
+      ? ''
+      : '    bottomNavigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+  final String bottomNavigationBarUnselectedIconSchemeColor = controller
+              .navUnselectedSchemeColor ==
+          SchemeColor.onSurface
+      ? ''
+      : '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+  final String bottomNavigationBarMutedUnselectedIcon = controller
+          .navBarMuteUnselected
+      ? ''
+      : '    bottomNavigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
+  final String bottomNavigationBarBackgroundSchemeColor = controller
+              .navBarBackgroundSchemeColor ==
+          SchemeColor.background
+      ? ''
+      : '    bottomNavigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
+  final String bottomNavigationBarOpacity = controller
+              .bottomNavigationBarOpacity !=
+          1
+      ? '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+      : '';
+  final String bottomNavigationBarElevation = controller
+              .bottomNavigationBarElevation !=
+          0
+      ? '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
+      : '';
+  //
+  //
+  final String navigationBarSelectedLabelSchemeColor = controller
+              .navBarSelectedSchemeColor ==
+          SchemeColor.primary
+      ? ''
+      : '    navigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+  final String navigationBarUnselectedLabelSchemeColor = controller
+              .navUnselectedSchemeColor ==
+          SchemeColor.onSurface
+      ? ''
+      : '    navigationBarUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+  final String navigationBarMutedUnselectedLabel = controller
+          .navBarMuteUnselected
+      ? ''
+      : '    navigationBarMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
+  final String navigationBarSelectedIconSchemeColor = controller
+              .navBarSelectedSchemeColor ==
+          SchemeColor.primary
+      ? ''
+      : '    navigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+  final String navigationBarUnselectedIconSchemeColor = controller
+              .navUnselectedSchemeColor ==
+          SchemeColor.onSurface
+      ? ''
+      : '    navigationBarUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+  final String navigationBarMutedUnselectedIcon = controller
+          .navBarMuteUnselected
+      ? ''
+      : '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
+  final String navigationBarHighlightSchemeColor = controller.navBarHighlight ==
+          SchemeColor.primary
+      ? ''
+      : '    navigationBarHighlightSchemeColor: ${controller.navBarHighlight},\n';
+  final String navigationBarBackgroundSchemeColor = controller
+              .navBarBackgroundSchemeColor ==
+          SchemeColor.background
+      ? ''
+      : '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
+  final String navigationBarOpacity = controller.bottomNavigationBarOpacity != 1
+      ? '    navigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+      : '';
+  //
+  //
+  final String navigationRailSelectedLabelSchemeColor = controller
+              .navBarSelectedSchemeColor ==
+          SchemeColor.primary
+      ? ''
+      : '    navigationRailSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+  final String navigationRailUnselectedLabelSchemeColor = controller
+              .navUnselectedSchemeColor ==
+          SchemeColor.onSurface
+      ? ''
+      : '    navigationRailUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+  final String navigationRailMutedUnselectedLabel = controller
+          .navBarMuteUnselected
+      ? ''
+      : '    navigationRailMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
+  final String navigationRailSelectedIconSchemeColor = controller
+              .navBarSelectedSchemeColor ==
+          SchemeColor.primary
+      ? ''
+      : '    navigationRailSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+  final String navigationRailUnselectedIconSchemeColor = controller
+              .navUnselectedSchemeColor ==
+          SchemeColor.onSurface
+      ? ''
+      : '    navigationRailUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+  final String navigationRailMutedUnselectedIcon = controller
+          .navBarMuteUnselected
+      ? ''
+      : '    navigationRailMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
+  final String navigationRailUseIndicator = controller.useIndicator
+      ? ''
+      : '    navigationRailUseIndicator: ${controller.useIndicator},\n';
+  final String navigationRailIndicatorSchemeColor = controller
+              .navBarHighlight ==
+          SchemeColor.primary
+      ? ''
+      : '    navigationRailIndicatorSchemeColor: ${controller.navBarHighlight},\n';
+  final String navigationRailBackgroundSchemeColor = controller
+              .navBarBackgroundSchemeColor ==
+          SchemeColor.background
+      ? ''
+      : '    navigationRailBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
+  final String navigationRailOpacity = controller.bottomNavigationBarOpacity !=
+          1
+      ? '    navigationRailOpacity: ${controller.bottomNavigationBarOpacity},\n'
+      : '';
+  final String navigationRailElevation = controller
+              .bottomNavigationBarElevation !=
+          0
+      ? '    navigationRailElevation: ${controller.bottomNavigationBarElevation},\n'
+      : '';
+  //
+  //
+  // Compose the sub themes from above fragments.
+  //
+  final String lightSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
-          '    useTextTheme: ${controller.useTextTheme},\n'
+          '$interactionEffects'
+          '$blendOnLevelLight'
+          '$blendLightOnColors'
+          '$blendLightTextTheme'
+          '$useTextTheme'
           '$defRadius'
-          '    fabUseShape: ${controller.fabUseShape},\n'
-          '$fabSchemeColorCode'
-          '    interactionEffects: ${controller.interactionEffects},\n'
-          '    unselectedToggleIsColored: ${controller.unselectedIsColored},\n'
-          '$tabBarIndicatorCode'
-          '$chipSchemeColorCode'
-          '$textButtonSchemeColorCode'
-          '$elevatedButtonSchemeColorCode'
-          '$outlinedButtonSchemeColorCode'
-          '$materialButtonSchemeColorCode'
-          '$toggleButtonsSchemeColorCode'
-          '$switchSchemeColorCode'
-          '$checkboxSchemeColorCode'
-          '$radioSchemeColorCode'
-          '$dialogBackgroundSchemeColorCode'
-          '$tabBarItemSchemeColorCode'
-          '$appBarBackgroundSchemeColorCode'
-          '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
-          '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
-          '    navigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
-          '$navBarColorCode'
-          '$navBarBackgroundSchemeColorCode'
-          '$navBarHighLightCode'
-          '    navigationBarMutedUnselectedText: ${controller.navBarMuteUnselected},\n'
-          '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n'
-          '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n'
-          '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n'
-          '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n'
-          '$inputDecoratorSchemeColorCode'
-          '    blendOnLevel: ${controller.blendOnLevel},\n'
-          '    blendOnColors: ${controller.blendLightOnColors},\n'
-          '    blendTextTheme: ${controller.blendLightTextTheme},\n'
+          //
+          '$textButtonSchemeColor'
+          '$elevatedButtonSchemeColor'
+          '$outlinedButtonSchemeColor'
+          '$materialButtonSchemeColor'
+          '$toggleButtonsSchemeColor'
+          //
+          '$switchSchemeColor'
+          '$checkboxSchemeColor'
+          '$radioSchemeColor'
+          '$unselectedIsColored'
+          //
+          '$inputDecoratorSchemeColor'
+          '$inputDecoratorIsFilled'
+          '$inputDecoratorBorderType'
+          '$inputDecoratorUnfocusedHasBorder'
+          //
+          '$fabUseShape'
+          '$fabSchemeColor'
+          '$chipSchemeColor'
+          //
           '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
+          '$dialogBackgroundSchemeColor'
+          '$appBarBackgroundSchemeColor'
+          '$tabBarItemSchemeColor'
+          '$tabBarIndicatorSchemeColor'
+          //
+          '$bottomNavigationBarSelectedLabelSchemeColor'
+          '$bottomNavigationBarUnselectedLabelSchemeColor'
+          '$bottomNavigationBarMutedUnselectedLabel'
+          '$bottomNavigationBarSelectedIconSchemeColor'
+          '$bottomNavigationBarUnselectedIconSchemeColor'
+          '$bottomNavigationBarMutedUnselectedIcon'
+          '$bottomNavigationBarBackgroundSchemeColor'
+          '$bottomNavigationBarOpacity'
+          '$bottomNavigationBarElevation'
+          //
+          '$navigationBarSelectedLabelSchemeColor'
+          '$navigationBarUnselectedLabelSchemeColor'
+          '$navigationBarMutedUnselectedLabel'
+          '$navigationBarSelectedIconSchemeColor'
+          '$navigationBarUnselectedIconSchemeColor'
+          '$navigationBarMutedUnselectedIcon'
+          '$navigationBarHighlightSchemeColor'
+          '$navigationBarBackgroundSchemeColor'
+          '$navigationBarOpacity'
+          //
+          '$navigationRailSelectedLabelSchemeColor'
+          '$navigationRailUnselectedLabelSchemeColor'
+          '$navigationRailMutedUnselectedLabel'
+          '$navigationRailSelectedIconSchemeColor'
+          '$navigationRailUnselectedIconSchemeColor'
+          '$navigationRailMutedUnselectedIcon'
+          '$navigationRailUseIndicator'
+          '$navigationRailIndicatorSchemeColor'
+          '$navigationRailBackgroundSchemeColor'
+          '$navigationRailOpacity'
+          '$navigationRailElevation'
+          //
           '  ),\n'
       : '';
-  final String darkSubThemeCode = controller.useSubThemes
+  final String darkSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
-          '    useTextTheme: ${controller.useTextTheme},\n'
+          '$interactionEffects'
+          '$blendOnLevelDark'
+          '$blendDarkOnColors'
+          '$blendDarkTextTheme'
+          '$useTextTheme'
           '$defRadius'
-          '    fabUseShape: ${controller.fabUseShape},\n'
-          '$fabSchemeColorCode'
-          '    interactionEffects: ${controller.interactionEffects},\n'
-          '    unselectedToggleIsColored: ${controller.unselectedIsColored},\n'
-          '$tabBarIndicatorCode'
-          '$chipSchemeColorCode'
-          '$textButtonSchemeColorCode'
-          '$elevatedButtonSchemeColorCode'
-          '$outlinedButtonSchemeColorCode'
-          '$materialButtonSchemeColorCode'
-          '$toggleButtonsSchemeColorCode'
-          '$switchSchemeColorCode'
-          '$checkboxSchemeColorCode'
-          '$radioSchemeColorCode'
-          '$dialogBackgroundSchemeColorCode'
-          '$tabBarItemSchemeColorCode'
-          '$appBarBackgroundSchemeColorCode'
-          '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
-          '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
-          '    navigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
-          '$navBarColorCode'
-          '$navBarBackgroundSchemeColorCode'
-          '$navBarHighLightCode'
-          '    navigationBarMutedUnselectedText: ${controller.navBarMuteUnselected},\n'
-          '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n'
-          '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n'
-          '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n'
-          '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n'
-          '$inputDecoratorSchemeColorCode'
-          '    blendOnLevel: ${controller.blendOnLevelDark},\n'
-          '    blendOnColors: ${controller.blendDarkOnColors},\n'
-          '    blendTextTheme: ${controller.blendDarkTextTheme},\n'
+          //
+          '$textButtonSchemeColor'
+          '$elevatedButtonSchemeColor'
+          '$outlinedButtonSchemeColor'
+          '$materialButtonSchemeColor'
+          '$toggleButtonsSchemeColor'
+          //
+          '$switchSchemeColor'
+          '$checkboxSchemeColor'
+          '$radioSchemeColor'
+          '$unselectedIsColored'
+          //
+          '$inputDecoratorSchemeColor'
+          '$inputDecoratorIsFilled'
+          '$inputDecoratorBorderType'
+          '$inputDecoratorUnfocusedHasBorder'
+          //
+          '$fabUseShape'
+          '$fabSchemeColor'
+          '$chipSchemeColor'
+          //
           '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
+          '$dialogBackgroundSchemeColor'
+          '$appBarBackgroundSchemeColor'
+          '$tabBarItemSchemeColor'
+          '$tabBarIndicatorSchemeColor'
+          //
+          '$bottomNavigationBarSelectedLabelSchemeColor'
+          '$bottomNavigationBarUnselectedLabelSchemeColor'
+          '$bottomNavigationBarMutedUnselectedLabel'
+          '$bottomNavigationBarSelectedIconSchemeColor'
+          '$bottomNavigationBarUnselectedIconSchemeColor'
+          '$bottomNavigationBarMutedUnselectedIcon'
+          '$bottomNavigationBarBackgroundSchemeColor'
+          '$bottomNavigationBarOpacity'
+          '$bottomNavigationBarElevation'
+          //
+          '$navigationBarSelectedLabelSchemeColor'
+          '$navigationBarUnselectedLabelSchemeColor'
+          '$navigationBarMutedUnselectedLabel'
+          '$navigationBarSelectedIconSchemeColor'
+          '$navigationBarUnselectedIconSchemeColor'
+          '$navigationBarMutedUnselectedIcon'
+          '$navigationBarHighlightSchemeColor'
+          '$navigationBarBackgroundSchemeColor'
+          '$navigationBarOpacity'
+          //
+          '$navigationRailSelectedLabelSchemeColor'
+          '$navigationRailUnselectedLabelSchemeColor'
+          '$navigationRailMutedUnselectedLabel'
+          '$navigationRailSelectedIconSchemeColor'
+          '$navigationRailUnselectedIconSchemeColor'
+          '$navigationRailMutedUnselectedIcon'
+          '$navigationRailUseIndicator'
+          '$navigationRailIndicatorSchemeColor'
+          '$navigationRailBackgroundSchemeColor'
+          '$navigationRailOpacity'
+          '$navigationRailElevation'
           '  ),\n'
       : '';
+  //
+  // Define code for key color usage and tones.
   final String useKeyColors = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
           '    useKeyColors: ${controller.useKeyColors},\n'
@@ -238,50 +554,53 @@ String generateThemeDartCode(ThemeController controller) {
       flexTonesDark = '  tones: FlexTones.highContrast(Brightness.dark),\n';
     }
   }
+  //
+  // Compose the final FlexThemeData code string, from above fragments.
+  //
   final String code = 'theme: FlexThemeData.light(\n'
       '$lightScheme'
-      '  surfaceMode: ${controller.surfaceMode},\n'
-      '  blendLevel: ${controller.blendLevel},\n'
-      '  usedColors: ${controller.usedColors},\n'
-      '  appBarStyle: ${controller.lightAppBarStyle},\n'
-      '  appBarOpacity: ${controller.appBarOpacity},\n'
-      '  appBarElevation: ${controller.appBarElevation},\n'
-      '  transparentStatusBar: ${controller.transparentStatusBar},\n'
-      '  tabBarStyle: ${controller.tabBarStyle},\n'
-      '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
-      '  swapColors: ${controller.swapLightColors},\n'
-      '  lightIsWhite: ${controller.lightIsWhite},\n'
-      '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
-      '  useMaterial3: ${controller.useMaterial3},\n'
-      '  useMaterial3ErrorColors: ${controller.useM3ErrorColor},\n'
+      '$usedColors'
+      '$surfaceMode'
+      '$blendLevel'
+      '$lightAppBarStyle'
+      '$appBarOpacity'
+      '$transparentStatusBar'
+      '$appBarElevation'
+      '$tabBarStyle'
+      '$lightIsWhite'
+      '$swapLightColors'
+      '$tooltipsMatchBackground'
+      '$useSubThemes'
+      '$lightSubTheme'
       '$useKeyColors'
+      '$useM3ErrorColors'
       '$flexTonesLight'
-      '  useSubThemes: ${controller.useSubThemes},\n'
-      '$lightSubThemeCode'
-      '  // To use the playground font, add GoogleFonts package and uncomment:\n'
+      '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
+      '$useMaterial3'
+      '  // To use the playground font, add GoogleFonts package and uncomment\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
       'darkTheme: FlexThemeData.dark(\n'
       '$darkScheme'
-      '  surfaceMode: ${controller.surfaceMode},\n'
-      '  blendLevel: ${controller.blendLevelDark},\n'
-      '  usedColors: ${controller.usedColors},\n'
-      '  appBarStyle: ${controller.darkAppBarStyle},\n'
-      '  appBarOpacity: ${controller.appBarOpacity},\n'
-      '  appBarElevation: ${controller.appBarElevation},\n'
-      '  transparentStatusBar: ${controller.transparentStatusBar},\n'
-      '  tabBarStyle: ${controller.tabBarStyle},\n'
-      '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
-      '  swapColors: ${controller.swapDarkColors},\n'
-      '  darkIsTrueBlack: ${controller.darkIsTrueBlack},\n'
-      '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
-      '  useMaterial3: ${controller.useMaterial3},\n'
-      '  useMaterial3ErrorColors: ${controller.useM3ErrorColor},\n'
+      '$usedColors'
+      '$surfaceMode'
+      '$blendLevel'
+      '$darkAppBarStyle'
+      '$appBarOpacity'
+      '$transparentStatusBar'
+      '$appBarElevation'
+      '$tabBarStyle'
+      '$darkIsTrueBlack'
+      '$swapDarkColors'
+      '$tooltipsMatchBackground'
+      '$useSubThemes'
+      '$darkSubTheme'
       '$useKeyColors'
+      '$useM3ErrorColors'
       '$flexTonesDark'
-      '  useSubThemes: ${controller.useSubThemes},\n'
-      '$darkSubThemeCode'
-      '  // To use the playground font, add GoogleFonts package and uncomment:\n'
+      '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
+      '$useMaterial3'
+      '  // To use the playground font, add GoogleFonts package and uncomment\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
       '// If you do not have a themeMode switch, uncomment this line\n'

@@ -1173,11 +1173,11 @@ abstract class ThemeService {
   static const String keyUseM3ErrorColor = 'useM3ErrorColor';
 
   /// Default value for the useM3ErrorColor, also to reset settings.
-  static const bool defaultUseM3ErrorColor = false;
+  static const bool defaultUseM3ErrorColors = false;
 
   /// Loads used useM3ErrorColor setting in example 5.
-  Future<bool> useM3ErrorColor();
+  Future<bool> useM3ErrorColors();
 
   /// Persists useM3ErrorColor setting in example 5.
-  Future<void> saveUseM3ErrorColor(bool value);
+  Future<void> saveUseM3ErrorColors(bool value);
 }

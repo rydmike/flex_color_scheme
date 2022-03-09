@@ -59,15 +59,19 @@ class AppBarSettings extends StatelessWidget {
           ),
           if (isLight) ...<Widget>[
             ListTile(
-              title: const Text('Light mode color'),
+              title: const Text('Light mode AppBarStyle'),
               subtitle: Text(
                 explainAppBarStyle(controller.lightAppBarStyle, isLight),
               ),
             ),
             ListTile(
               trailing: AppBarStyleButtons(
-                  style: controller.lightAppBarStyle,
-                  onChanged: controller.setLightAppBarStyle,
+                  style: controller.useFlexColorScheme
+                      ? controller.lightAppBarStyle
+                      : FlexAppBarStyle.primary,
+                  onChanged: controller.useFlexColorScheme
+                      ? controller.setLightAppBarStyle
+                      : null,
                   // To access the custom color we defined for app bar, in this
                   // toggle buttons widget, we have to pass along, or the
                   // entire controller. Chose the color in this case. It is not
@@ -83,15 +87,19 @@ class AppBarSettings extends StatelessWidget {
             ),
           ] else ...<Widget>[
             ListTile(
-              title: const Text('Dark mode color'),
+              title: const Text('Dark mode AppBarStyle'),
               subtitle: Text(
                 explainAppBarStyle(controller.darkAppBarStyle, isLight),
               ),
             ),
             ListTile(
               trailing: AppBarStyleButtons(
-                  style: controller.darkAppBarStyle,
-                  onChanged: controller.setDarkAppBarStyle,
+                  style: controller.useFlexColorScheme
+                      ? controller.darkAppBarStyle
+                      : FlexAppBarStyle.material,
+                  onChanged: controller.useFlexColorScheme
+                      ? controller.setDarkAppBarStyle
+                      : null,
                   customAppBarColor:
                       AppColor.scheme(controller).dark.appBarColor),
             ),
@@ -102,8 +110,11 @@ class AppBarSettings extends StatelessWidget {
               'ON  No scrim on the top status bar\n'
               'OFF Default two toned status bar',
             ),
-            value: controller.transparentStatusBar,
-            onChanged: controller.setTransparentStatusBar,
+            value: controller.transparentStatusBar &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useFlexColorScheme
+                ? controller.setTransparentStatusBar
+                : null,
           ),
           ListTile(
             title: const Text('Elevation'),
@@ -112,7 +123,9 @@ class AppBarSettings extends StatelessWidget {
               divisions: 48,
               label: controller.appBarElevation.toStringAsFixed(1),
               value: controller.appBarElevation,
-              onChanged: controller.setAppBarElevation,
+              onChanged: controller.useFlexColorScheme
+                  ? controller.setAppBarElevation
+                  : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
@@ -144,9 +157,11 @@ class AppBarSettings extends StatelessWidget {
               divisions: 100,
               label: (controller.appBarOpacity * 100).toStringAsFixed(0),
               value: controller.appBarOpacity * 100,
-              onChanged: (double value) {
-                controller.setAppBarOpacity(value / 100);
-              },
+              onChanged: controller.useFlexColorScheme
+                  ? (double value) {
+                      controller.setAppBarOpacity(value / 100);
+                    }
+                  : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
@@ -175,14 +190,15 @@ class AppBarSettings extends StatelessWidget {
             subtitle: Text('With sub-themes you can set scheme color for the '
                 'AppBar background color. '
                 'Using AppBarStyle is easier, but this offers more colors. '
-                'This overrides used AppBarStyle and passed in color, set them '
-                'back to default to use AppBarStyle again. '
+                'This overrides used AppBarStyle and passed in color, set it '
+                'back to default (null) to use AppBarStyle again. '
                 'With API you can set different color in light and dark '
                 'mode. This app shares same input for both modes, but you '
                 'can easily modify the generated setup code.'),
           ),
           ColorSchemePopupMenu(
             title: const Text('AppBar background color'),
+            labelForDefault: 'null (AppBarStyle)',
             index: controller.appBarBackgroundSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
