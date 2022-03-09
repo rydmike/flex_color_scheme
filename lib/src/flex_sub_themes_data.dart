@@ -155,6 +155,8 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarBackgroundSchemeColor = SchemeColor.background,
     this.bottomNavigationBarOpacity = 1,
     this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
+    this.bottomNavigationShowSelectedLabels,
+    this.bottomNavigationShowUnselectedLabels,
     this.bottomNavigationBarType,
     this.bottomNavigationBarLandscapeLayout,
     //
@@ -944,6 +946,14 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to [kBottomNavigationBarElevation] = 0.
   final double bottomNavigationBarElevation;
 
+  /// Whether the labels are shown for the selected
+  /// [BottomNavigationBarItem].
+  final bool? bottomNavigationShowSelectedLabels;
+
+  /// Whether the labels are shown for the unselected
+  /// [BottomNavigationBarItem]s.
+  final bool? bottomNavigationShowUnselectedLabels;
+
   /// Defines the layout and behavior of a [BottomNavigationBar].
   ///
   /// The enum [BottomNavigationBarType] can be
@@ -1440,6 +1450,8 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? bottomNavigationBarBackgroundSchemeColor,
     final double? bottomNavigationBarOpacity,
     final double? bottomNavigationBarElevation,
+    final bool? bottomNavigationShowSelectedLabels,
+    final bool? bottomNavigationShowUnselectedLabels,
     final BottomNavigationBarType? bottomNavigationBarType,
     final BottomNavigationBarLandscapeLayout?
         bottomNavigationBarLandscapeLayout,
@@ -1591,6 +1603,11 @@ class FlexSubThemesData with Diagnosticable {
           bottomNavigationBarOpacity ?? this.bottomNavigationBarOpacity,
       bottomNavigationBarElevation:
           bottomNavigationBarElevation ?? this.bottomNavigationBarElevation,
+      bottomNavigationShowSelectedLabels: bottomNavigationShowSelectedLabels ??
+          this.bottomNavigationShowSelectedLabels,
+      bottomNavigationShowUnselectedLabels:
+          bottomNavigationShowUnselectedLabels ??
+              this.bottomNavigationShowUnselectedLabels,
       bottomNavigationBarType:
           bottomNavigationBarType ?? this.bottomNavigationBarType,
       bottomNavigationBarLandscapeLayout: bottomNavigationBarLandscapeLayout ??
@@ -1760,6 +1777,10 @@ class FlexSubThemesData with Diagnosticable {
             bottomNavigationBarBackgroundSchemeColor &&
         other.bottomNavigationBarOpacity == bottomNavigationBarOpacity &&
         other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
+        other.bottomNavigationShowSelectedLabels ==
+            bottomNavigationShowSelectedLabels &&
+        other.bottomNavigationShowUnselectedLabels ==
+            bottomNavigationShowUnselectedLabels &&
         other.bottomNavigationBarType == bottomNavigationBarType &&
         other.bottomNavigationBarLandscapeLayout ==
             bottomNavigationBarLandscapeLayout &&
@@ -1907,6 +1928,8 @@ class FlexSubThemesData with Diagnosticable {
       bottomNavigationBarBackgroundSchemeColor,
       bottomNavigationBarOpacity,
       bottomNavigationBarElevation,
+      bottomNavigationShowSelectedLabels,
+      bottomNavigationShowUnselectedLabels,
       bottomNavigationBarType,
       bottomNavigationBarLandscapeLayout,
       //
@@ -2079,6 +2102,12 @@ class FlexSubThemesData with Diagnosticable {
         'bottomNavigationBarOpacity', bottomNavigationBarOpacity));
     properties.add(DiagnosticsProperty<double>(
         'bottomNavigationBarElevation', bottomNavigationBarElevation));
+    properties.add(DiagnosticsProperty<bool>(
+        'bottomNavigationShowSelectedLabels',
+        bottomNavigationShowSelectedLabels));
+    properties.add(DiagnosticsProperty<bool>(
+        'bottomNavigationShowUnselectedLabels',
+        bottomNavigationShowUnselectedLabels));
     properties.add(EnumProperty<BottomNavigationBarType>(
         'bottomNavigationBarType', bottomNavigationBarType));
     properties.add(EnumProperty<BottomNavigationBarLandscapeLayout>(
