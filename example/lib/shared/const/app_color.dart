@@ -93,7 +93,7 @@ class AppColor {
     brightness: Brightness.light,
   );
 
-  // For example 4, all themes.
+  // Used by example 4, the "All themes" dmo.
   // Finally we create a list with all color schemes we will use. Starting with
   // our custom schemes, since normally when we make custom schemes, those are
   // probably the ones we want to use primarily, so we put them first. After our
@@ -146,7 +146,7 @@ class AppColor {
     ...FlexColor.schemesList,
   ];
 
-  /// For example 5, the Themes Playground.
+  /// Used by example 5, the Themes Playground.
   /// We add all schemes from example 4 and a placeholder for the custom data.
   ///
   /// We could also make this a static getter that requires the ThemeController,
@@ -165,7 +165,7 @@ class AppColor {
     FlexColor.customColors,
   ];
 
-  /// For example 5, the Themes Playground.
+  /// Used by example 5, the Themes Playground.
   /// Helper function to return current FlexSchemeData at controller index.
   ///
   /// Instead of getting the colors directly from a list that changes frequently
@@ -178,7 +178,7 @@ class AppColor {
   static FlexSchemeData scheme(final ThemeController controller) =>
       schemeAtIndex(controller.schemeIndex, controller);
 
-  /// For example 5, the Themes Playground.
+  /// Used by example 5, the Themes Playground.
   /// Helper function to return current FlexSchemeData at given index, also
   /// needed this functionality in theme selector and popup menu, so made
   /// it a sub function to getting the FlexSchemeData at its current index.
@@ -204,7 +204,7 @@ class AppColor {
             : null);
   }
 
-  /// Return a [FlexTones] based on passed in [brightness] and [tones] value.
+  /// Return [FlexTones] based on passed in [brightness] and [tones] value.
   static FlexTones flexTonesConfig(Brightness brightness, int tones) {
     if (tones == 2) {
       return FlexTones.soft(brightness);
@@ -217,7 +217,7 @@ class AppColor {
     }
   }
 
-  /// For example 5, the Themes Playground.
+  /// Used by example 5, the Themes Playground.
   /// Used to explain the current selection of key colors used to
   /// generate the ColorScheme, when it is activated.
   ///

@@ -48,14 +48,18 @@ class TabBarSettings extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: 8),
           ListTile(
-            title: const Text('Choose TabBar style that fits your use case'),
+            title: const Text('Choose TabBarStyle that fits your use case'),
             subtitle: Text(explainTabStyle(controller.tabBarStyle)),
           ),
           // const SizedBox(height: 4),
           ListTile(
             trailing: TabBarStyleButtons(
-              style: controller.tabBarStyle,
-              onChanged: controller.setTabBarStyle,
+              style: controller.useFlexColorScheme
+                  ? controller.tabBarStyle
+                  : FlexTabBarStyle.flutterDefault,
+              onChanged: controller.useFlexColorScheme
+                  ? controller.setTabBarStyle
+                  : null,
             ),
           ),
           const SizedBox(height: 8),
@@ -75,13 +79,14 @@ class TabBarSettings extends StatelessWidget {
                 'the items and indicator separately. '
                 'Using TabBarStyle is easier, but this offers more control. '
                 'These settings overrides used TabBarStyle, set them '
-                'back to default to use TabBarStyle again. '
+                'back to default (null) to use TabBarStyle again. '
                 'With API you can set different color in light and dark '
                 'mode. This app shares same input for both modes, but you '
                 'can easily modify the generated setup code.'),
           ),
           ColorSchemePopupMenu(
             title: const Text('TabBar items color'),
+            labelForDefault: 'null (TabBarStyle)',
             index: controller.tabBarItemSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -96,6 +101,7 @@ class TabBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('TabBar indicator color'),
+            labelForDefault: 'null (TabBarStyle)',
             index: controller.tabBarIndicator?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {

@@ -23,7 +23,7 @@ Future<void> copyColorToClipboard(BuildContext context, Color color) async {
             elevation: 0.5,
             child: Padding(
               padding: const EdgeInsets.all(8),
-              child: Text(color.hexCode,
+              child: Text('#${color.hexCode}',
                   style: TextStyle(
                       color: ThemeData.estimateBrightnessForColor(color) ==
                               Brightness.light
@@ -32,8 +32,8 @@ Future<void> copyColorToClipboard(BuildContext context, Color color) async {
             ),
           ),
           const SizedBox(width: 8),
-          Text('Copied color code ${color.hexCode} for color '
-              '$nameThatColor $materialName${space}to the clipboard!'),
+          Text('Copied color $nameThatColor $materialName${space}to '
+              'the clipboard'),
         ],
       ),
       duration: const Duration(milliseconds: 2000),

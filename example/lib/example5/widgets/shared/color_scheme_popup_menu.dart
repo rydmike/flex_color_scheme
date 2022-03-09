@@ -16,12 +16,14 @@ class ColorSchemePopupMenu extends StatelessWidget {
     this.title,
     this.subtitle,
     this.contentPadding,
+    this.labelForDefault = 'null (primary)',
   }) : super(key: key);
   final int index;
   final ValueChanged<int>? onChanged;
   final Widget? title;
   final Widget? subtitle;
   final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
+  final String labelForDefault;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +32,9 @@ class ColorSchemePopupMenu extends StatelessWidget {
     final TextStyle txtStyle = theme.textTheme.button!;
     final bool enabled = onChanged != null;
     final bool useDefault = index < 0 || index >= SchemeColor.values.length;
-    final String colorName =
-        enabled && !useDefault ? SchemeColor.values[index].name : 'default';
+    final String colorName = enabled && !useDefault
+        ? SchemeColor.values[index].name
+        : labelForDefault;
 
     return PopupMenuButton<int>(
       padding: EdgeInsets.zero,
@@ -51,7 +54,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
                       ),
               ),
               title: i >= SchemeColor.values.length
-                  ? Text('default', style: txtStyle)
+                  ? Text(labelForDefault, style: txtStyle)
                   : Text(SchemeColor.values[i].name, style: txtStyle),
             ),
           )

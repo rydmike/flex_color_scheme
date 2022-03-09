@@ -2266,20 +2266,20 @@ class ThemeServicePrefs implements ThemeService {
 
   /// Loads used useM3ErrorColor setting in example 5.
   @override
-  Future<bool> useM3ErrorColor() async {
+  Future<bool> useM3ErrorColors() async {
     try {
       final bool value = _prefs.getBool(ThemeService.keyUseM3ErrorColor) ??
-          ThemeService.defaultUseM3ErrorColor;
+          ThemeService.defaultUseM3ErrorColors;
       return value;
     } catch (e) {
       debugPrint(e.toString());
-      return ThemeService.defaultUseM3ErrorColor;
+      return ThemeService.defaultUseM3ErrorColors;
     }
   }
 
   /// Persists useM3ErrorColor setting in example 5.
   @override
-  Future<void> saveUseM3ErrorColor(bool value) async {
+  Future<void> saveUseM3ErrorColors(bool value) async {
     try {
       await _prefs.setBool(ThemeService.keyUseM3ErrorColor, value);
     } catch (e) {

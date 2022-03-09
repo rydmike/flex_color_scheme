@@ -813,9 +813,9 @@ class ThemeServiceMem implements ThemeService {
 
   /// Loads used useM3ErrorColor setting in example 5.
   @override
-  Future<bool> useM3ErrorColor() async => ThemeService.defaultUseM3ErrorColor;
+  Future<bool> useM3ErrorColors() async => ThemeService.defaultUseM3ErrorColors;
 
   /// Persists useM3ErrorColor setting in example 5.
   @override
-  Future<void> saveUseM3ErrorColor(bool value) async {}
+  Future<void> saveUseM3ErrorColors(bool value) async {}
 }

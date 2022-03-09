@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const Size _kDialogSize = Size(550, 850);
+const Size _kDialogSize = Size(570, 850);
 const double _kWidthForFullScreenDialog = 720;
 
 /// A Widget for a media size responsive dialog.

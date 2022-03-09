@@ -95,7 +95,6 @@ class FlexSubThemesData with Diagnosticable {
     this.textButtonSchemeColor = SchemeColor.primary,
     this.elevatedButtonSchemeColor = SchemeColor.primary,
     this.outlinedButtonSchemeColor = SchemeColor.primary,
-    //
     this.materialButtonSchemeColor = SchemeColor.primary,
     this.toggleButtonsSchemeColor = SchemeColor.primary,
     //

@@ -6,11 +6,11 @@ class AppBarStyleButtons extends StatelessWidget {
   const AppBarStyleButtons({
     Key? key,
     required this.style,
-    required this.onChanged,
+    this.onChanged,
     this.customAppBarColor,
   }) : super(key: key);
   final FlexAppBarStyle style;
-  final ValueChanged<FlexAppBarStyle> onChanged;
+  final ValueChanged<FlexAppBarStyle>? onChanged;
   final Color? customAppBarColor;
 
   @override
@@ -27,7 +27,7 @@ class AppBarStyleButtons extends StatelessWidget {
     return ToggleButtons(
       isSelected: isSelected,
       onPressed: (int newIndex) {
-        onChanged(FlexAppBarStyle.values[newIndex]);
+        onChanged?.call(FlexAppBarStyle.values[newIndex]);
       },
       children: <Widget>[
         Tooltip(
