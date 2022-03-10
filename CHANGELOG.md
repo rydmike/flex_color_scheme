@@ -6,7 +6,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 Version 5 is a big refactor with deprecation of previous `variant` based
 color names in favor of `container` ones that were added to updated M3
-based `Colorcheme` in Flutter 2.10.0. The same additions and changes are now 
+based `ColorScheme` in Flutter 2.10.0. The same additions and changes are now 
 also introduced in FlexColorScheme. Despite being a very big release, with
 many new features, actual breaking changes are very few and mostly concerns
 in version 4 deprecated members and of course requiring minimum Flutter
@@ -225,7 +225,7 @@ should be relatively easy, despite the long list of changes and new features.
   - `NavigationRailThemeData` via `FlexSubThemes.navigationRailTheme`.  
   
   There are many quick and easy configuration parameters added 
-  to `FlexSubThemesData`. There following built in widgets hnow ave quick and
+  to `FlexSubThemesData`. There following built in widgets now have quick and
   easy custom theming option via sub-themes opt-in.
 
   * `TextButton`
@@ -435,9 +435,9 @@ should be relatively easy, despite the long list of changes and new features.
 
 * The order of the colors, in the rarely outside FlexColorScheme 
   used demo apps, theme presentation/switch button `FlexThemeModeSwitch` was 
-  changed for bettr placement of new color `primaryContainer` and `tertiary`.
-  The Colors `primaryVAriant` and `secondaryVariant` were removed from it
-  since the colors are depreceted in Flutter SDK. The change was from:
+  changed for better placement of new color `primaryContainer` and `tertiary`.
+  The Colors `primaryVariant` and `secondaryVariant` were removed from it
+  since the colors are deprecated in Flutter SDK. The change was from:
 
    | Before           | Before            |
    |-------------------|-----------------|
@@ -471,21 +471,6 @@ should be relatively easy, despite the long list of changes and new features.
   colors as **black**. These two cases were added as special considerations
   to return black color for these two particular cases, even if the Flutter 
   contrast color computation says it should be white, but M2 spec is black.
-
-**TESTS TODO**
-* Tests are still incomplete and currently down to about 86% coverage, 
-  but at least all existing (1275) ones are passing and behave as expected.
-* Add tests for new `SchemeColor` properties.
-* Add tests for `FlexTones`.
-* Add tests for `FlexKeyColors`.
-* Add tests for `FlexCorePalette`.
-* Add test for all new sub-themes in `FlexSubThemes`.
-* Add tests for new `useMaterial3` property.
-* Add tests for all new sub themes `FlexSubThemes` and its config data 
-  in `FlexSubThemesData`.
-* Add more tests for legacy fallbacks when using old deprecated 
-  `primaryVariant` and `secondaryVariant` properties.
-* Add tests and verification of old colors definition backwards behavior.
 
 **EXAMPLES and Themes Playground**
 * Update examples 1...4
@@ -532,6 +517,20 @@ should be relatively easy, despite the long list of changes and new features.
     the app.
   - Added NavigationRail Settings panel, with similar settings and NavigationBar.
 
+**TESTS TODO**
+* Tests are still incomplete and currently down to about 86% coverage,
+  but at least all existing (1275) ones are passing and behave as expected.
+* Add tests for new `SchemeColor` properties.
+* Add tests for `FlexTones`.
+* Add tests for `FlexKeyColors`.
+* Add tests for `FlexCorePalette`.
+* Add test for all new sub-themes in `FlexSubThemes`.
+* Add tests for new `useMaterial3` property.
+* Add tests for all new sub themes `FlexSubThemes` and its config data
+  in `FlexSubThemesData`.
+* Add more tests for legacy fallbacks when using old deprecated
+  `primaryVariant` and `secondaryVariant` properties.
+* Add tests and verification of old colors definition backwards behavior.
 
 ### What is Next?
 
