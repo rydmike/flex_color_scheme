@@ -53,7 +53,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Android System Navigation Bar Settings'),
+      title: const Text('Android System Navigation Bar'),
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),

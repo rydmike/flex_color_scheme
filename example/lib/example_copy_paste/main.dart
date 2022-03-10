@@ -1,4 +1,4 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -56,98 +56,54 @@ class _DemoAppState extends State<DemoApp> {
 
       // TODO(rydmike): Add Copy-Paste template for ColorScheme.
 
-      // theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-      //   typography: Typography.material2018(platform: defaultTargetPlatform),
-      // ),
-      // darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-      //   typography: Typography.material2018(platform: defaultTargetPlatform),
-      // ),
+      theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
+        typography: Typography.material2018(platform: defaultTargetPlatform),
+      ),
+      darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
+        typography: Typography.material2018(platform: defaultTargetPlatform),
+      ),
 
       // Delete/comment the theme below and try the standard one above, or
       // copy-paste new setup code from the Themes Playground app at
       // https://rydmike.com/flexcolorscheme/themesplayground-v5
       // over the theme below, to try a new copy-pasted theme.
 
-      theme: FlexThemeData.light(
-        scheme: FlexScheme.blueWhale,
-        surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-        blendLevel: 22,
-        appBarStyle: FlexAppBarStyle.primary,
-        appBarOpacity: 0.95,
-        appBarElevation: 0.0,
-        transparentStatusBar: true,
-        tabBarStyle: FlexTabBarStyle.forAppBar,
-        tooltipsMatchBackground: true,
-        swapColors: false,
-        lightIsWhite: false,
-        useSubThemes: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        fontFamily: GoogleFonts.notoSans().fontFamily,
-        subThemesData: const FlexSubThemesData(
-          useTextTheme: true,
-          defaultRadius: 11.0,
-          fabUseShape: false,
-          interactionEffects: true,
-          tabBarIndicatorSchemeColor: SchemeColor.secondary,
-          chipSchemeColor: SchemeColor.secondary,
-          bottomNavigationBarElevation: 0.0,
-          bottomNavigationBarOpacity: 1.0,
-          navigationBarOpacity: 1.0,
-          bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationBarSelectedIconSchemeColor: SchemeColor.onSurface,
-          navigationBarSelectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationBarHighlightSchemeColor: SchemeColor.primaryContainer,
-          navigationBarMutedUnselectedLabel: true,
-          navigationBarMutedUnselectedIcon: true,
-          inputDecoratorIsFilled: true,
-          inputDecoratorBorderType: FlexInputBorderType.outline,
-          inputDecoratorUnfocusedHasBorder: true,
-          inputDecoratorSchemeColor: SchemeColor.primaryContainer,
-          blendOnColors: true,
-          blendTextTheme: true,
-          popupMenuOpacity: 0.95,
-        ),
-      ),
-      darkTheme: FlexThemeData.dark(
-        scheme: FlexScheme.blueWhale,
-        surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-        blendLevel: 22,
-        appBarStyle: FlexAppBarStyle.background,
-        appBarOpacity: 0.95,
-        appBarElevation: 0.0,
-        transparentStatusBar: true,
-        tabBarStyle: FlexTabBarStyle.forAppBar,
-        tooltipsMatchBackground: true,
-        swapColors: false,
-        darkIsTrueBlack: false,
-        useSubThemes: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        fontFamily: GoogleFonts.notoSans().fontFamily,
-        subThemesData: const FlexSubThemesData(
-          useTextTheme: true,
-          defaultRadius: 11.0,
-          fabUseShape: false,
-          interactionEffects: true,
-          tabBarIndicatorSchemeColor: SchemeColor.secondary,
-          chipSchemeColor: SchemeColor.secondary,
-          bottomNavigationBarElevation: 0.0,
-          bottomNavigationBarOpacity: 1.0,
-          navigationBarOpacity: 1.0,
-          bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationBarSelectedIconSchemeColor: SchemeColor.onSurface,
-          navigationBarSelectedLabelSchemeColor: SchemeColor.onSurface,
-          navigationBarHighlightSchemeColor: SchemeColor.primaryContainer,
-          navigationBarMutedUnselectedLabel: true,
-          navigationBarMutedUnselectedIcon: true,
-          inputDecoratorIsFilled: true,
-          inputDecoratorBorderType: FlexInputBorderType.outline,
-          inputDecoratorUnfocusedHasBorder: true,
-          inputDecoratorSchemeColor: SchemeColor.primaryContainer,
-          blendOnColors: true,
-          blendTextTheme: true,
-          popupMenuOpacity: 0.95,
-        ),
-      ),
+      // theme: FlexThemeData.light(
+      //   scheme: FlexScheme.flutterDash,
+      //   surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      //   blendLevel: 12,
+      //   appBarOpacity: 0.95,
+      //   appBarElevation: 0.5,
+      //   tooltipsMatchBackground: true,
+      //   useSubThemes: true,
+      //   subThemesData: const FlexSubThemesData(
+      //     blendOnLevel: 20,
+      //     blendOnColors: false,
+      //     unselectedToggleIsColored: true,
+      //     popupMenuOpacity: 0.95,
+      //   ),
+      //   useMaterial3ErrorColors: true,
+      //   visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      //   fontFamily: GoogleFonts.notoSans().fontFamily,
+      // ),
+      // darkTheme: FlexThemeData.dark(
+      //   scheme: FlexScheme.flutterDash,
+      //   surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      //   blendLevel: 12,
+      //   appBarStyle: FlexAppBarStyle.background,
+      //   appBarOpacity: 0.95,
+      //   appBarElevation: 0.5,
+      //   tooltipsMatchBackground: true,
+      //   useSubThemes: true,
+      //   subThemesData: const FlexSubThemesData(
+      //     blendOnLevel: 30,
+      //     unselectedToggleIsColored: true,
+      //     popupMenuOpacity: 0.95,
+      //   ),
+      //   useMaterial3ErrorColors: true,
+      //   visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      //   fontFamily: GoogleFonts.notoSans().fontFamily,
+      // ),
 
       // ThemeMode toggle via callback
       themeMode: themeMode,
@@ -162,3 +118,34 @@ class _DemoAppState extends State<DemoApp> {
     );
   }
 }
+
+const ColorScheme myFlexColorScheme = ColorScheme(
+  brightness: Brightness.light,
+  primary: Color(0xff00497c),
+  onPrimary: Color(0xffffffff),
+  primaryContainer: Color(0xffcfe4ff),
+  onPrimaryContainer: Color(0xff001d36),
+  secondary: Color(0xff4f599d),
+  onSecondary: Color(0xffffffff),
+  secondaryContainer: Color(0xffdde0ff),
+  onSecondaryContainer: Color(0xff041157),
+  tertiary: Color(0xff6c5b51),
+  onTertiary: Color(0xffffffff),
+  tertiaryContainer: Color(0xfff5ded1),
+  onTertiaryContainer: Color(0xff251911),
+  error: Color(0xffba1b1b),
+  onError: Color(0xffffffff),
+  errorContainer: Color(0xffffdad4),
+  onErrorContainer: Color(0xff410001),
+  outline: Color(0xff73777f),
+  background: Color(0xfff6f7fb),
+  onBackground: Color(0xff1a1c1e),
+  surface: Color(0xfffaf9fd),
+  onSurface: Color(0xff1a1c1e),
+  surfaceVariant: Color(0xffdce1ea),
+  onSurfaceVariant: Color(0xff42474e),
+  inverseSurface: Color(0xff2e3033),
+  onInverseSurface: Color(0xfff1f0f4),
+  inversePrimary: Color(0xff9acaff),
+  shadow: Color(0xff000000),
+);
