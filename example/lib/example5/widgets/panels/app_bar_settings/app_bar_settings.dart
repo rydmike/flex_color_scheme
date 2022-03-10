@@ -59,12 +59,18 @@ class AppBarSettings extends StatelessWidget {
           ),
           if (isLight) ...<Widget>[
             ListTile(
+              enabled: controller.useFlexColorScheme,
               title: const Text('Light mode AppBarStyle'),
               subtitle: Text(
-                explainAppBarStyle(controller.lightAppBarStyle, isLight),
+                explainAppBarStyle(
+                    controller.useFlexColorScheme
+                        ? controller.lightAppBarStyle
+                        : FlexAppBarStyle.primary,
+                    isLight),
               ),
             ),
             ListTile(
+              enabled: controller.useFlexColorScheme,
               trailing: AppBarStyleButtons(
                   style: controller.useFlexColorScheme
                       ? controller.lightAppBarStyle
@@ -87,12 +93,18 @@ class AppBarSettings extends StatelessWidget {
             ),
           ] else ...<Widget>[
             ListTile(
+              enabled: controller.useFlexColorScheme,
               title: const Text('Dark mode AppBarStyle'),
               subtitle: Text(
-                explainAppBarStyle(controller.darkAppBarStyle, isLight),
+                explainAppBarStyle(
+                    controller.useFlexColorScheme
+                        ? controller.darkAppBarStyle
+                        : FlexAppBarStyle.material,
+                    isLight),
               ),
             ),
             ListTile(
+              enabled: controller.useFlexColorScheme,
               trailing: AppBarStyleButtons(
                   style: controller.useFlexColorScheme
                       ? controller.darkAppBarStyle
@@ -117,6 +129,7 @@ class AppBarSettings extends StatelessWidget {
                 : null,
           ),
           ListTile(
+            enabled: controller.useFlexColorScheme,
             title: const Text('Elevation'),
             subtitle: Slider.adaptive(
               max: 24,
@@ -147,9 +160,10 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
-          const ListTile(
-            title: Text('Opacity'),
-            subtitle: Text('Themed opacity, try 85% to 98%'),
+          ListTile(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Opacity'),
+            subtitle: const Text('Themed opacity, try 85% to 98%'),
           ),
           ListTile(
             title: Slider.adaptive(

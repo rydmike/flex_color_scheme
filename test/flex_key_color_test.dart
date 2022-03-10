@@ -11,8 +11,8 @@ void main() {
     // m1, is the FlexKeyColorSetup with Material standard scheme.
     const FlexKeyColors m1 = FlexKeyColors(
       useKeyColors: true,
-      useSecondary: true,
-      useTertiary: true,
+      useSecondary: false,
+      useTertiary: false,
       keepPrimary: false,
       keepSecondary: false,
       keepTertiary: false,
@@ -25,8 +25,8 @@ void main() {
     // m3, has same definition as m1, but one value is different.
     const FlexKeyColors m3 = FlexKeyColors(
       useKeyColors: false, // <- different value
-      useSecondary: true,
-      useTertiary: true,
+      useSecondary: false,
+      useTertiary: false,
       keepPrimary: false,
       keepSecondary: false,
       keepTertiary: false,
@@ -37,8 +37,8 @@ void main() {
     // m4, has all values different from m1
     const FlexKeyColors m4 = FlexKeyColors(
       useKeyColors: false,
-      useSecondary: false,
-      useTertiary: false,
+      useSecondary: true,
+      useTertiary: true,
       keepPrimary: true,
       keepSecondary: true,
       keepTertiary: true,
@@ -111,8 +111,8 @@ void main() {
       expect(
         m4.copyWith(
           useKeyColors: true,
-          useSecondary: true,
-          useTertiary: true,
+          useSecondary: false,
+          useTertiary: false,
           keepPrimary: false,
           keepSecondary: false,
           keepTertiary: false,
@@ -138,7 +138,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexKeyColors#00000(useKeyColors: true, useSecondary: true, useTertiary: true, keepPrimary: false, keepSecondary: false, keepTertiary: false, keepPrimaryContainer: false, keepSecondaryContainer: false, keepTertiaryContainer: false)'));
+              'FlexKeyColors#00000(useKeyColors: true, useSecondary: false, useTertiary: false, keepPrimary: false, keepSecondary: false, keepTertiary: false, keepPrimaryContainer: false, keepSecondaryContainer: false, keepTertiaryContainer: false)'));
     });
     test(
         'FKCS1.11: Test toStringShort implemented via debugFillProperties '
@@ -152,7 +152,7 @@ void main() {
     // This happens to always equal now in tests, if it start failing, test
     // 14 is actually enough.
     test('FKCS1.13: Test hashCode exact value.', () {
-      expect(m1.hashCode, 438986325);
+      expect(m1.hashCode, 385085668);
     });
     test('FKCS1.14: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));

@@ -2268,7 +2268,7 @@ class ThemeServicePrefs implements ThemeService {
   @override
   Future<bool> useM3ErrorColors() async {
     try {
-      final bool value = _prefs.getBool(ThemeService.keyUseM3ErrorColor) ??
+      final bool value = _prefs.getBool(ThemeService.keyUseM3ErrorColors) ??
           ThemeService.defaultUseM3ErrorColors;
       return value;
     } catch (e) {
@@ -2281,7 +2281,213 @@ class ThemeServicePrefs implements ThemeService {
   @override
   Future<void> saveUseM3ErrorColors(bool value) async {
     try {
-      await _prefs.setBool(ThemeService.keyUseM3ErrorColor, value);
+      await _prefs.setBool(ThemeService.keyUseM3ErrorColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used useM3ErrorColor setting in example 5.
+  @override
+  Future<bool> bottomNavShowSelectedLabels() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyBottomNavShowSelectedLabels) ??
+              ThemeService.defaultBottomNavShowSelectedLabels;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBottomNavShowSelectedLabels;
+    }
+  }
+
+  /// Persists useM3ErrorColor setting in example 5.
+  @override
+  Future<void> saveBottomNavShowSelectedLabels(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyBottomNavShowSelectedLabels, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used useM3ErrorColor setting in example 5.
+  @override
+  Future<bool> bottomNavShowUnselectedLabels() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyBottomNavShowUnselectedLabels) ??
+              ThemeService.defaultBottomNavShowUnselectedLabels;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultBottomNavShowUnselectedLabels;
+    }
+  }
+
+  /// Persists useM3ErrorColor setting in example 5.
+  @override
+  Future<void> saveBottomNavShowUnselectedLabels(bool value) async {
+    try {
+      await _prefs.setBool(
+          ThemeService.keyBottomNavShowUnselectedLabels, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used navBarLabelBehavior setting.
+  @override
+  Future<NavigationDestinationLabelBehavior> navBarLabelBehavior() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyNavBarLabelBehavior) ??
+          ThemeService.defaultNavBarLabelBehavior.index;
+      return NavigationDestinationLabelBehavior.values[value];
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultNavBarLabelBehavior;
+    }
+  }
+
+  /// Persists used navBarLabelBehavior setting.
+  @override
+  Future<void> saveNavBarLabelBehavior(
+      NavigationDestinationLabelBehavior value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyNavBarLabelBehavior, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used navRailLabelType setting.
+  @override
+  Future<NavigationRailLabelType> navRailLabelType() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyNavRailLabelType) ??
+          ThemeService.defaultNavRailLabelType.index;
+      return NavigationRailLabelType.values[value];
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultNavRailLabelType;
+    }
+  }
+
+  /// Persists used navRailLabelType setting.
+  @override
+  Future<void> saveNavRailLabelType(NavigationRailLabelType value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyNavRailLabelType, value.index);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used elevatedButtonBorderRadius setting.
+  ///
+  /// Nullable, Negative value treated as null.
+  @override
+  Future<double?> elevatedButtonBorderRadius() async {
+    try {
+      final double value =
+          _prefs.getDouble(ThemeService.keyElevatedButtonBorderRadius) ?? -1.0;
+      if (value < 0.0) {
+        return null;
+      } else {
+        return value;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultElevatedButtonBorderRadius;
+    }
+  }
+
+  /// Persists used elevatedButtonBorderRadius setting.
+  ///
+  /// Nullable, null stored as -1.0.
+  @override
+  Future<void> saveElevatedButtonBorderRadius(double? value) async {
+    try {
+      await _prefs.setDouble(
+          ThemeService.keyElevatedButtonBorderRadius, value ?? -1.0);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used outlinedButtonBorderRadius setting.
+  ///
+  /// Nullable, Negative value treated as null.
+  @override
+  Future<double?> outlinedButtonBorderRadius() async {
+    try {
+      final double value =
+          _prefs.getDouble(ThemeService.keyOutlinedButtonBorderRadius) ?? -1.0;
+      if (value < 0.0) {
+        return null;
+      } else {
+        return value;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultOutlinedButtonBorderRadius;
+    }
+  }
+
+  /// Persists used outlinedButtonBorderRadius setting.
+  ///
+  /// Nullable, null stored as -1.0.
+  @override
+  Future<void> saveOutlinedButtonBorderRadius(double? value) async {
+    try {
+      await _prefs.setDouble(
+          ThemeService.keyOutlinedButtonBorderRadius, value ?? -1.0);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used textButtonBorderRadius setting.
+  ///
+  /// Nullable, Negative value treated as null.
+  @override
+  Future<double?> textButtonBorderRadius() async {
+    try {
+      final double value =
+          _prefs.getDouble(ThemeService.keyTextButtonBorderRadius) ?? -1.0;
+      if (value < 0.0) {
+        return null;
+      } else {
+        return value;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultTextButtonBorderRadius;
+    }
+  }
+
+  /// Persists used textButtonBorderRadius setting.
+  ///
+  /// Nullable, null stored as -1.0.
+  @override
+  Future<void> saveTextButtonBorderRadius(double? value) async {
+    try {
+      await _prefs.setDouble(
+          ThemeService.keyTextButtonBorderRadius, value ?? -1.0);
     } catch (e) {
       debugPrint(e.toString());
     }

@@ -101,9 +101,9 @@ class IntroductionPanel extends StatelessWidget {
                 'depends on Widget type, but also TextTheme size.'),
           ),
           SwitchListTileAdaptive(
-            subtitle: const Text('Use component widget sub themes.\n'
-                'When ON you can adjust additional settings on component '
-                'themes for Flutter built-in Material UI widgets.'),
+            title: const Text('Use component widget sub themes'),
+            subtitle: const Text('Turn ON to use and adjust available '
+                'opinionated component widget sub themes'),
             value: controller.useSubThemes && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
                 ? controller.setUseSubThemes
@@ -116,7 +116,7 @@ class IntroductionPanel extends StatelessWidget {
                 'your Flutter app?\n'
                 'Just copy the setup code for these settings and paste '
                 'it into your Flutter app, import FlexColorScheme '
-                'and you are good to go.'),
+                'and you are done.'),
             trailing: ElevatedButton(
               onPressed: controller.useFlexColorScheme
                   ? () {
@@ -134,38 +134,38 @@ class IntroductionPanel extends StatelessWidget {
           const ListTile(
             title: Text('Material Design 3'),
             subtitle: Text(
-              'The updated Material 3 ColorScheme is used in FlexColorScheme '
-              'v5. However, widgets in Flutter 2.10 do not utilize any of its '
-              'new colors by default yet. You can enable '
+              'The in Flutter 2.10.0 introduced Material 3 ColorScheme is '
+              'used and fully supported by FlexColorScheme v5. However, '
+              'widgets in Flutter 2.10.x do not yet use any of the '
+              "ColorScheme's new colors by default. You can enable "
               "FlexColorScheme's component sub-themes to get "
-              'a theme that is close to M3 styles already now.\n'
-              '\n'
-              'You can also define which scheme color is used by each widget '
-              'via its sub-theme properties. This feature will also work when '
-              'Material 3 behavior become the default in Flutter. It is '
-              'a convenient way to use a themed, none default ColorScheme '
-              'based color, as the color of choice on built-in Material UI '
-              'widgets.\n'
+              'a theme that is close to the Material 3 style by default. '
+              'With the component sub-themes you can also change which scheme '
+              'color its themed component uses. This is a convenient way to '
+              'use a themed, none default ColorScheme based color, as the '
+              'color of choice on Material UI widgets included in '
+              "FlexColorScheme's supported component theme customization "
+              'capabilities.\n'
               '\n'
               'Very few Material 3 widgets and styles are available in '
               'Flutter 2.10.x and earlier. The updated ColorScheme, '
               'NavigationBar and the flag to use a selection indicator on '
-              'NavigationRail are the only M3 features in the SDK so far.\n'
+              'NavigationRail are the only M3 features in the Flutter SDK '
+              '(applies to stable version 2.10.x).\n'
               '\n'
-              'There is a toggle in ThemeData that you can turn on to '
-              'enable SDK built-in M3 styles. It still has almost no effect '
+              'There is a toggle in ThemeData that you can turn on to enable '
+              'available built-in M3 styles. It still has almost no effect '
               'on UI widget defaults in Flutter. The indicator on the '
               'NavigationRail is the only thing it affects so far. It will be '
-              'used more by future Flutter versions. When it is, we can use '
+              'used more in future Flutter versions. When it is, we can use '
               'this toggle to see what it does.',
             ),
           ),
           SwitchListTileAdaptive(
-            // title: const Text(
-            //   "Use Flutter's Material 3 based ThemeData defaults",
-            // ),
+            title: const Text(
+              "Use Flutter's Material 3 based ThemeData defaults",
+            ),
             subtitle: const Text(
-              "Use Flutter's Material 3 based ThemeData defaults\n"
               'Toggles ThemeData.useMaterial3 true/false',
             ),
             value: controller.useMaterial3,

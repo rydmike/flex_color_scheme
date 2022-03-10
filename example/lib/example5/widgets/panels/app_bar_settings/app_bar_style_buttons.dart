@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 class AppBarStyleButtons extends StatelessWidget {
   const AppBarStyleButtons({
     Key? key,
-    required this.style,
+    this.style,
     this.onChanged,
     this.customAppBarColor,
   }) : super(key: key);
-  final FlexAppBarStyle style;
+  final FlexAppBarStyle? style;
   final ValueChanged<FlexAppBarStyle>? onChanged;
   final Color? customAppBarColor;
 
@@ -26,9 +26,11 @@ class AppBarStyleButtons extends StatelessWidget {
     ];
     return ToggleButtons(
       isSelected: isSelected,
-      onPressed: (int newIndex) {
-        onChanged?.call(FlexAppBarStyle.values[newIndex]);
-      },
+      onPressed: onChanged == null
+          ? null
+          : (int newIndex) {
+              onChanged?.call(FlexAppBarStyle.values[newIndex]);
+            },
       children: <Widget>[
         Tooltip(
           message: 'Primary colored',

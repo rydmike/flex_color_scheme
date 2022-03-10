@@ -119,6 +119,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
           controller.navBarBackgroundSchemeColor,
       bottomNavigationBarOpacity: controller.bottomNavigationBarOpacity,
       bottomNavigationBarElevation: controller.bottomNavigationBarElevation,
+      bottomNavigationBarShowSelectedLabels:
+          controller.bottomNavShowSelectedLabels,
+      bottomNavigationBarShowUnselectedLabels:
+          controller.bottomNavShowUnselectedLabels,
       // NavigationBar settings
       navigationBarSelectedLabelSchemeColor:
           controller.navBarSelectedSchemeColor,
@@ -134,6 +138,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
       navigationBarBackgroundSchemeColor:
           controller.navBarBackgroundSchemeColor,
       navigationBarOpacity: controller.bottomNavigationBarOpacity,
+      navigationBarLabelBehavior: controller.navBarLabelBehavior,
       // NavigationRail settings
       navigationRailSelectedLabelSchemeColor:
           controller.navBarSelectedSchemeColor,
@@ -151,6 +156,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
           controller.navBarBackgroundSchemeColor,
       navigationRailOpacity: controller.bottomNavigationBarOpacity,
       navigationRailElevation: controller.bottomNavigationBarElevation,
+      navigationRailLabelType: controller.navRailLabelType,
     ),
     //
     // Advanced color properties for seed generated ColorScheme's

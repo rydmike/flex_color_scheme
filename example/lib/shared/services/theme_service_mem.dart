@@ -818,4 +818,82 @@ class ThemeServiceMem implements ThemeService {
   /// Persists useM3ErrorColor setting in example 5.
   @override
   Future<void> saveUseM3ErrorColors(bool value) async {}
+
+  //----
+
+  /// Loads used useM3ErrorColor setting in example 5.
+  @override
+  Future<bool> bottomNavShowSelectedLabels() async =>
+      ThemeService.defaultBottomNavShowSelectedLabels;
+
+  /// Persists useM3ErrorColor setting in example 5.
+  @override
+  Future<void> saveBottomNavShowSelectedLabels(bool value) async {}
+
+  //----
+
+  /// Loads used useM3ErrorColor setting in example 5.
+  @override
+  Future<bool> bottomNavShowUnselectedLabels() async =>
+      ThemeService.defaultBottomNavShowUnselectedLabels;
+
+  /// Persists useM3ErrorColor setting in example 5.
+  @override
+  Future<void> saveBottomNavShowUnselectedLabels(bool value) async {}
+
+  //----
+
+  /// Loads used navBarLabelBehavior setting.
+  @override
+  Future<NavigationDestinationLabelBehavior> navBarLabelBehavior() async =>
+      ThemeService.defaultNavBarLabelBehavior;
+
+  /// Persists used navBarLabelBehavior setting.
+  @override
+  Future<void> saveNavBarLabelBehavior(
+      NavigationDestinationLabelBehavior value) async {}
+
+  //----
+
+  /// Loads used navRailLabelType setting.
+  @override
+  Future<NavigationRailLabelType> navRailLabelType() async =>
+      ThemeService.defaultNavRailLabelType;
+
+  /// Persists used navRailLabelType setting.
+  @override
+  Future<void> saveNavRailLabelType(NavigationRailLabelType value) async {}
+
+  //----
+
+  /// Loads used elevatedButtonBorderRadius setting.
+  @override
+  Future<double?> elevatedButtonBorderRadius() async =>
+      ThemeService.defaultElevatedButtonBorderRadius;
+
+  /// Persists used elevatedButtonBorderRadius setting.
+  @override
+  Future<void> saveElevatedButtonBorderRadius(double? value) async {}
+
+  //----
+
+  /// Loads used outlinedButtonBorderRadius setting.
+  @override
+  Future<double?> outlinedButtonBorderRadius() async =>
+      ThemeService.defaultOutlinedButtonBorderRadius;
+
+  /// Persists used outlinedButtonBorderRadius setting.
+  @override
+  Future<void> saveOutlinedButtonBorderRadius(double? value) async {}
+
+  //----
+
+  /// Loads used textButtonBorderRadius setting.
+  @override
+  Future<double?> textButtonBorderRadius() async =>
+      ThemeService.defaultTextButtonBorderRadius;
+
+  /// Persists used textButtonBorderRadius setting.
+  @override
+  Future<void> saveTextButtonBorderRadius(double? value) async {}
 }

@@ -132,6 +132,17 @@ class ThemeController with ChangeNotifier {
     _usedFlexToneSetup = await _themeService.usedFlexToneSetup();
     _useIndicator = await _themeService.useIndicator();
     _useM3ErrorColors = await _themeService.useM3ErrorColors();
+    _bottomNavShowSelectedLabels =
+        await _themeService.bottomNavShowSelectedLabels();
+    _bottomNavShowUnselectedLabels =
+        await _themeService.bottomNavShowUnselectedLabels();
+    _navBarLabelBehavior = await _themeService.navBarLabelBehavior();
+    _navRailLabelType = await _themeService.navRailLabelType();
+    _elevatedButtonBorderRadius =
+        await _themeService.elevatedButtonBorderRadius();
+    _outlinedButtonBorderRadius =
+        await _themeService.outlinedButtonBorderRadius();
+    _textButtonBorderRadius = await _themeService.textButtonBorderRadius();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -267,6 +278,20 @@ class ThemeController with ChangeNotifier {
     await setUsedFlexToneSetup(ThemeService.defaultUsedFlexToneSetup, false);
     await setUseIndicator(ThemeService.defaultUseIndicator, false);
     await setUseM3ErrorColors(ThemeService.defaultUseM3ErrorColors, false);
+    await setBottomNavShowSelectedLabels(
+        ThemeService.defaultBottomNavShowSelectedLabels, false);
+    await setBottomNavShowUnselectedLabels(
+        ThemeService.defaultBottomNavShowUnselectedLabels, false);
+    await setNavBarLabelBehavior(
+        ThemeService.defaultNavBarLabelBehavior, false);
+    await setNavRailLabelType(ThemeService.defaultNavRailLabelType, false);
+    //
+    await setElevatedButtonBorderRadius(
+        ThemeService.defaultElevatedButtonBorderRadius, false);
+    await setOutlinedButtonBorderRadius(
+        ThemeService.defaultOutlinedButtonBorderRadius, false);
+    await setTextButtonBorderRadius(
+        ThemeService.defaultTextButtonBorderRadius, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -1263,5 +1288,78 @@ class ThemeController with ChangeNotifier {
     _useM3ErrorColors = value;
     if (notify) notifyListeners();
     await _themeService.saveUseM3ErrorColors(value);
+  }
+
+  late bool _bottomNavShowSelectedLabels;
+  bool get bottomNavShowSelectedLabels => _bottomNavShowSelectedLabels;
+  Future<void> setBottomNavShowSelectedLabels(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _bottomNavShowSelectedLabels) return;
+    _bottomNavShowSelectedLabels = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBottomNavShowSelectedLabels(value);
+  }
+
+  late bool _bottomNavShowUnselectedLabels;
+  bool get bottomNavShowUnselectedLabels => _bottomNavShowUnselectedLabels;
+  Future<void> setBottomNavShowUnselectedLabels(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _bottomNavShowUnselectedLabels) return;
+    _bottomNavShowUnselectedLabels = value;
+    if (notify) notifyListeners();
+    await _themeService.saveBottomNavShowUnselectedLabels(value);
+  }
+
+  late NavigationDestinationLabelBehavior _navBarLabelBehavior;
+  NavigationDestinationLabelBehavior get navBarLabelBehavior =>
+      _navBarLabelBehavior;
+  Future<void> setNavBarLabelBehavior(NavigationDestinationLabelBehavior value,
+      [bool notify = true]) async {
+    if (value == _navBarLabelBehavior) return;
+    _navBarLabelBehavior = value;
+    if (notify) notifyListeners();
+    await _themeService.saveNavBarLabelBehavior(value);
+  }
+
+  late NavigationRailLabelType _navRailLabelType;
+  NavigationRailLabelType get navRailLabelType => _navRailLabelType;
+  Future<void> setNavRailLabelType(NavigationRailLabelType value,
+      [bool notify = true]) async {
+    if (value == _navRailLabelType) return;
+    _navRailLabelType = value;
+    if (notify) notifyListeners();
+    await _themeService.saveNavRailLabelType(value);
+  }
+
+  late double? _elevatedButtonBorderRadius;
+  double? get elevatedButtonBorderRadius => _elevatedButtonBorderRadius;
+  Future<void> setElevatedButtonBorderRadius(double? value,
+      [bool notify = true]) async {
+    if (value == _elevatedButtonBorderRadius) return;
+    _elevatedButtonBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.saveElevatedButtonBorderRadius(value);
+  }
+
+  late double? _outlinedButtonBorderRadius;
+  double? get outlinedButtonBorderRadius => _outlinedButtonBorderRadius;
+  Future<void> setOutlinedButtonBorderRadius(double? value,
+      [bool notify = true]) async {
+    if (value == _outlinedButtonBorderRadius) return;
+    _outlinedButtonBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.saveOutlinedButtonBorderRadius(value);
+  }
+
+  late double? _textButtonBorderRadius;
+  double? get textButtonBorderRadius => _textButtonBorderRadius;
+  Future<void> setTextButtonBorderRadius(double? value,
+      [bool notify = true]) async {
+    if (value == _textButtonBorderRadius) return;
+    _textButtonBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.saveTextButtonBorderRadius(value);
   }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/material.dart';
 
 import '../../shared/const/app_color.dart';
 import '../../shared/const/app_data.dart';
@@ -288,6 +289,14 @@ String generateThemeDartCode(ThemeController controller) {
           0
       ? '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation},\n'
       : '';
+  final String bottomNavigationBarShowSelectedLabels = controller
+          .bottomNavShowSelectedLabels
+      ? ''
+      : '    bottomNavigationBarShowSelectedLabels: ${controller.bottomNavShowSelectedLabels},\n';
+  final String bottomNavigationBarShowUnselectedLabels = controller
+          .bottomNavShowUnselectedLabels
+      ? ''
+      : '    bottomNavigationBarShowUnselectedLabels: ${controller.bottomNavShowUnselectedLabels},\n';
   //
   //
   final String navigationBarSelectedLabelSchemeColor = controller
@@ -329,6 +338,10 @@ String generateThemeDartCode(ThemeController controller) {
       : '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
   final String navigationBarOpacity = controller.bottomNavigationBarOpacity != 1
       ? '    navigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+      : '';
+  final String navigationBarLabelBehavior = controller.navBarLabelBehavior !=
+          NavigationDestinationLabelBehavior.alwaysShow
+      ? '    navigationBarLabelBehavior: ${controller.navBarLabelBehavior},\n'
       : '';
   //
   //
@@ -382,7 +395,10 @@ String generateThemeDartCode(ThemeController controller) {
           0
       ? '    navigationRailElevation: ${controller.bottomNavigationBarElevation},\n'
       : '';
-  //
+  final String navigationRailLabelType =
+      controller.navRailLabelType != NavigationRailLabelType.all
+          ? '    navigationRailLabelType: ${controller.navRailLabelType},\n'
+          : '';
   //
   // Compose the sub themes from above fragments.
   //
@@ -430,6 +446,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomNavigationBarBackgroundSchemeColor'
           '$bottomNavigationBarOpacity'
           '$bottomNavigationBarElevation'
+          '$bottomNavigationBarShowSelectedLabels'
+          '$bottomNavigationBarShowUnselectedLabels'
           //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
@@ -440,6 +458,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarHighlightSchemeColor'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
+          '$navigationBarLabelBehavior'
           //
           '$navigationRailSelectedLabelSchemeColor'
           '$navigationRailUnselectedLabelSchemeColor'
@@ -452,6 +471,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailBackgroundSchemeColor'
           '$navigationRailOpacity'
           '$navigationRailElevation'
+          '$navigationRailLabelType'
           //
           '  ),\n'
       : '';
@@ -499,6 +519,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomNavigationBarBackgroundSchemeColor'
           '$bottomNavigationBarOpacity'
           '$bottomNavigationBarElevation'
+          '$bottomNavigationBarShowSelectedLabels'
+          '$bottomNavigationBarShowUnselectedLabels'
           //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
@@ -509,6 +531,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarHighlightSchemeColor'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
+          '$navigationBarLabelBehavior'
           //
           '$navigationRailSelectedLabelSchemeColor'
           '$navigationRailUnselectedLabelSchemeColor'
@@ -521,23 +544,52 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailBackgroundSchemeColor'
           '$navigationRailOpacity'
           '$navigationRailElevation'
+          '$navigationRailLabelType'
           '  ),\n'
       : '';
   //
   // Define code for key color usage and tones.
-  final String useKeyColors = controller.useKeyColors
+  final String useSecondary = controller.useSecondary
+      ? ''
+      : '    useSecondary: ${controller.useSecondary},\n';
+  final String useTertiary = controller.useTertiary
+      ? ''
+      : '    useTertiary: ${controller.useTertiary},\n';
+  final String keepPrimary = controller.keepPrimary
+      ? '    keepPrimary: ${controller.keepPrimary},\n'
+      : '';
+  final String keepSecondary = controller.keepSecondary
+      ? '    keepSecondary: ${controller.keepSecondary},\n'
+      : '';
+  final String keepTertiary = controller.keepTertiary
+      ? '    keepTertiary: ${controller.keepTertiary},\n'
+      : '';
+  final String keepPrimaryContainer = controller.keepPrimaryContainer
+      ? '    keepPrimaryContainer: ${controller.keepPrimaryContainer},\n'
+      : '';
+  final String keepSecondaryContainer = controller.keepSecondaryContainer
+      ? '    keepSecondaryContainer: ${controller.keepSecondaryContainer},\n'
+      : '';
+  final String keepTertiaryContainer = controller.keepTertiaryContainer
+      ? '    keepTertiaryContainer: ${controller.keepTertiaryContainer},\n'
+      : '';
+  String useKeyColors = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
-          '    useKeyColors: ${controller.useKeyColors},\n'
-          '    useSecondary: ${controller.useSecondary},\n'
-          '    useTertiary: ${controller.useTertiary},\n'
-          '    keepPrimary: ${controller.keepPrimary},\n'
-          '    keepSecondary: ${controller.keepSecondary},\n'
-          '    keepTertiary: ${controller.keepTertiary},\n'
-          '    keepPrimaryContainer: ${controller.keepPrimaryContainer},\n'
-          '    keepSecondaryContainer: ${controller.keepSecondaryContainer},\n'
-          '    keepTertiaryContainer: ${controller.keepTertiaryContainer},\n'
+          // '    useKeyColors: ${controller.useKeyColors},\n'
+          '$useSecondary'
+          '$useTertiary'
+          '$keepPrimary'
+          '$keepSecondary'
+          '$keepTertiary'
+          '$keepPrimaryContainer'
+          '$keepSecondaryContainer'
+          '$keepTertiaryContainer'
           '  ),\n'
       : '';
+  // Make a prettier version of the constructor if that is all we got.
+  if (useKeyColors == '  keyColors: const FlexKeyColors(\n  ),\n') {
+    useKeyColors = '  keyColors: const FlexKeyColors(),\n';
+  }
   String flexTonesLight = '';
   String flexTonesDark = '';
   if (controller.useKeyColors) {
@@ -550,6 +602,10 @@ String generateThemeDartCode(ThemeController controller) {
       flexTonesDark = '  tones: FlexTones.vivid(Brightness.dark),\n';
     }
     if (controller.usedFlexToneSetup == 4) {
+      flexTonesLight = '  tones: FlexTones.vividSurfaces(Brightness.light),\n';
+      flexTonesDark = '  tones: FlexTones.vividSurfaces(Brightness.dark),\n';
+    }
+    if (controller.usedFlexToneSetup == 5) {
       flexTonesLight = '  tones: FlexTones.highContrast(Brightness.light),\n';
       flexTonesDark = '  tones: FlexTones.highContrast(Brightness.dark),\n';
     }

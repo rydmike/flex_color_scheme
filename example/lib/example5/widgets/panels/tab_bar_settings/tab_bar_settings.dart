@@ -48,11 +48,15 @@ class TabBarSettings extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: 8),
           ListTile(
+            enabled: controller.useFlexColorScheme,
             title: const Text('Choose TabBarStyle that fits your use case'),
-            subtitle: Text(explainTabStyle(controller.tabBarStyle)),
+            subtitle: Text(explainTabStyle(controller.useFlexColorScheme
+                ? controller.tabBarStyle
+                : FlexTabBarStyle.flutterDefault)),
           ),
           // const SizedBox(height: 4),
           ListTile(
+            enabled: controller.useFlexColorScheme,
             trailing: TabBarStyleButtons(
               style: controller.useFlexColorScheme
                   ? controller.tabBarStyle
