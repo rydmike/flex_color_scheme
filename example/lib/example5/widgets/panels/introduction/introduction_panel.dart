@@ -82,9 +82,11 @@ class IntroductionPanel extends StatelessWidget {
                 'own value in ColorScheme.'),
           ),
           SwitchListTileAdaptive(
+            title: const Text('Turn OFF FlexColorScheme theming'),
             subtitle: const Text(
-              "Turn OFF to see Flutter's default theming with these colors.\n"
-              'Component sub-theme settings are disabled when OFF',
+              "With the theming disabled, you can see Flutter's default "
+              'theming using the same colors. Component settings are '
+              'disabled when OFF',
             ),
             value: controller.useFlexColorScheme,
             onChanged: controller.setUseFlexColorScheme,
