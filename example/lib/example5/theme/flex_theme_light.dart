@@ -114,6 +114,11 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
       // supporting border radius will use the give radius.
       defaultRadius:
           controller.useDefaultRadius ? null : controller.cornerRadius,
+      // Border radius can be customized per widget too, here are three
+      // example of that, it overrides M3 default and global default setting.
+      elevatedButtonRadius: controller.elevatedButtonBorderRadius,
+      outlinedButtonRadius: controller.outlinedButtonBorderRadius,
+      textButtonRadius: controller.textButtonBorderRadius,
       // SchemeColor based ColorScheme color used on buttons & toggles.
       textButtonSchemeColor: controller.textButtonSchemeColor,
       elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,

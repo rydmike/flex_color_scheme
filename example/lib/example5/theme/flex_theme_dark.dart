@@ -76,8 +76,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
       blendOnColors: controller.blendDarkOnColors,
       blendTextTheme: controller.blendDarkTextTheme,
       useTextTheme: controller.useTextTheme,
+      //
       defaultRadius:
           controller.useDefaultRadius ? null : controller.cornerRadius,
+      elevatedButtonRadius: controller.elevatedButtonBorderRadius,
+      outlinedButtonRadius: controller.outlinedButtonBorderRadius,
+      textButtonRadius: controller.textButtonBorderRadius,
       //
       textButtonSchemeColor: controller.textButtonSchemeColor,
       elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
