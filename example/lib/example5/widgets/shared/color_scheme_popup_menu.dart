@@ -31,29 +31,44 @@ class ColorSchemePopupMenu extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.button!;
     final bool enabled = onChanged != null;
-    final bool useDefault = index < 0 || index >= SchemeColor.values.length;
+    // Negative value, or index covering the the last two in th enum,
+    // the deprecated primaryVariant and secondaryVariant are considered as
+    // null and default value.
+    final bool useDefault = index < 0 || index >= SchemeColor.values.length - 2;
     final String colorName = enabled && !useDefault
         ? SchemeColor.values[index].name
         : labelForDefault;
 
     return PopupMenuButton<int>(
       padding: EdgeInsets.zero,
-      onSelected: onChanged,
+      onSelected: (int index) {
+        // We return -1 for index that reached first deprecated color.
+        // -1, or any negative value will cause controller for a
+        // SchemeColor to be set to "null", we nd to be able ot do that
+        // to input "null" property value to SchemeColor configs.
+        // To avoid "null" issue with stored values, the services that store
+        // the SchemeColor save it as -1 and returns that as null to
+        // controller too.
+        onChanged?.call(index >= SchemeColor.values.length - 2 ? -1 : index);
+      },
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i < SchemeColor.values.length + 1; i++)
+        // Exclude the last two enums, deprecated primaryVariant and
+        // secondaryVariant.
+        for (int i = 0; i < SchemeColor.values.length - 1; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
               leading: ColorSchemeBox(
-                color: i >= SchemeColor.values.length
+                color: i >= SchemeColor.values.length - 2
                     ? colorScheme.surface
                     : FlexSubThemes.schemeColor(
                         SchemeColor.values[i],
                         colorScheme,
                       ),
               ),
-              title: i >= SchemeColor.values.length
+              title: i >= SchemeColor.values.length - 2
+                  // If we reached first deprecated color, make default label.
                   ? Text(labelForDefault, style: txtStyle)
                   : Text(SchemeColor.values[i].name, style: txtStyle),
             ),
