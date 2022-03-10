@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/header_card.dart';
-import '../../../../shared/widgets/universal/navigation_bar_label_behavior_buttons.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
-// Panel used to control the sub-theme for NavigationBar.
-class NavigationBarSettings extends StatelessWidget {
-  const NavigationBarSettings(
+// Panel used to control the sub-theme for BottomNavigationBar.
+class BottomNavigationBarSettings extends StatelessWidget {
+  const BottomNavigationBarSettings(
       {Key? key,
       required this.controller,
       required this.isOpen,
@@ -20,28 +19,25 @@ class NavigationBarSettings extends StatelessWidget {
   final bool isOpen;
   final VoidCallback onTap;
 
-  String explainLabelStyle(
-      final NavigationDestinationLabelBehavior labelBehavior) {
-    switch (labelBehavior) {
-      case NavigationDestinationLabelBehavior.alwaysHide:
-        return 'Items have no labels';
-      case NavigationDestinationLabelBehavior.onlyShowSelected:
-        return 'Only selected item has a label';
-      case NavigationDestinationLabelBehavior.alwaysShow:
-        return 'All items have labels';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final String labelForDefaultSelectedItem =
+        (isDark && !controller.useFlexColorScheme)
+            ? 'null (secondary)'
+            : 'null (primary)';
     final double navBarOpacity =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.bottomNavigationBarOpacity
             : 1;
+    final double navBarElevation =
+        controller.useSubThemes && controller.useFlexColorScheme
+            ? controller.bottomNavigationBarElevation
+            : 8;
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('NavigationBar Settings'),
+      title: const Text('BottomNavigationBar Settings'),
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),
@@ -49,7 +45,7 @@ class NavigationBarSettings extends StatelessWidget {
             title: const Text('Background color'),
             subtitle: const Text('Shared setting in this app, '
                 'but APIs have own properties'),
-            labelForDefault: 'null (surface with onSurface overlay)',
+            labelForDefault: 'null (background)',
             index: controller.navBarBackgroundSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -103,27 +99,49 @@ class NavigationBarSettings extends StatelessWidget {
               ),
             ),
           ),
-          ColorSchemePopupMenu(
-            title: const Text('Selection indicator color'),
-            subtitle: const Text('Shared setting in this app, but APIs have '
-                'own properties'),
-            labelForDefault: 'null (secondary)',
-            index: controller.navBarHighlight?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setNavBarHighlight(null);
-                    } else {
-                      controller.setNavBarHighlight(SchemeColor.values[index]);
-                    }
-                  }
-                : null,
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Elevation'),
+            subtitle: const Text('Shared setting with NavigationRail, APIs '
+                'have own properties'),
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: Slider.adaptive(
+              max: 24,
+              divisions: 48,
+              label: navBarElevation.toStringAsFixed(1),
+              value: navBarElevation,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setBottomNavigationBarElevation
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    navBarElevation.toStringAsFixed(1),
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
           ),
           ColorSchemePopupMenu(
             title: const Text('Selected item color'),
             subtitle: const Text('Shared setting in this app, but APIs have '
                 'own properties'),
-            labelForDefault: 'null (onSurface)',
+            labelForDefault: labelForDefaultSelectedItem,
             index: controller.navBarSelectedSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -140,7 +158,10 @@ class NavigationBarSettings extends StatelessWidget {
             title: const Text('Unselected item color'),
             subtitle: const Text('Shared setting in this app, but APIs have '
                 'own properties'),
-            labelForDefault: 'null (onSurface)',
+            labelForDefault:
+                controller.useSubThemes && controller.useFlexColorScheme
+                    ? 'null (onSurface)'
+                    : 'null (onSurface with opacity)',
             index: controller.navUnselectedSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -155,8 +176,7 @@ class NavigationBarSettings extends StatelessWidget {
           ),
           SwitchListTileAdaptive(
             title: const Text('Mute unselected items'),
-            subtitle: const Text('Unselected icon and text are less bright.\n'
-                'Shared setting in this app, but APIs have own properties'),
+            subtitle: const Text('Unselected icon and text are less bright.\n'),
             value: controller.navBarMuteUnselected &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -164,25 +184,25 @@ class NavigationBarSettings extends StatelessWidget {
                 ? controller.setNavBarMuteUnselected
                 : null,
           ),
-          ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            title: const Text('Label behavior'),
-            subtitle: Text(explainLabelStyle(
-                controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.navBarLabelBehavior
-                    : NavigationDestinationLabelBehavior.alwaysShow)),
-            trailing: NavigationBarLabelBehaviorButtons(
-              labelBehavior:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.navBarLabelBehavior
-                      : NavigationDestinationLabelBehavior.alwaysShow,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setNavBarLabelBehavior
-                      : null,
-            ),
+          SwitchListTileAdaptive(
+            title: const Text('Show selected labels'),
+            value: controller.bottomNavShowSelectedLabels &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setBottomNavShowSelectedLabels
+                : null,
           ),
-          const NavigationBarShowcase(),
+          SwitchListTileAdaptive(
+            title: const Text('Show unselected labels'),
+            value: controller.bottomNavShowUnselectedLabels &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setBottomNavShowUnselectedLabels
+                : null,
+          ),
+          const BottomNavigationBarShowcase(),
           const Divider(height: 1),
           const SizedBox(height: 16),
         ],

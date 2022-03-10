@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 class TabBarStyleButtons extends StatelessWidget {
   const TabBarStyleButtons({
     Key? key,
-    required this.style,
+    this.style,
     this.onChanged,
   }) : super(key: key);
-  final FlexTabBarStyle style;
+  final FlexTabBarStyle? style;
   final ValueChanged<FlexTabBarStyle>? onChanged;
 
   @override
@@ -21,9 +21,11 @@ class TabBarStyleButtons extends StatelessWidget {
     ];
     return ToggleButtons(
       isSelected: isSelected,
-      onPressed: (int newIndex) {
-        onChanged?.call(FlexTabBarStyle.values[newIndex]);
-      },
+      onPressed: onChanged == null
+          ? null
+          : (int newIndex) {
+              onChanged?.call(FlexTabBarStyle.values[newIndex]);
+            },
       children: const <Widget>[
         Tooltip(
           message: 'To use in AppBar',

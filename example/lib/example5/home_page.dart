@@ -18,6 +18,8 @@ import 'widgets/panels/color_scheme_colors/color_scheme_colors.dart';
 import 'widgets/panels/component_themes/component_themes.dart';
 import 'widgets/panels/dialog_settings/dialog_settings.dart';
 import 'widgets/panels/introduction/introduction_panel.dart';
+import 'widgets/panels/navigation_bar_settings/android_navigation_bar_settings.dart';
+import 'widgets/panels/navigation_bar_settings/bottom_navigation_bar_settings.dart';
 import 'widgets/panels/navigation_bar_settings/navigation_bar_settings.dart';
 import 'widgets/panels/navigation_rail_settings/navigation_rail_settings.dart';
 import 'widgets/panels/seeded_color_scheme/seeded_color_scheme.dart';
@@ -58,7 +60,7 @@ class _HomePageState extends State<HomePage> {
   final ScrollController scrollController = ScrollController();
 
   // The number of cards in the grid, must match the number we add to grid view.
-  static const int _nrOfCards = 24;
+  static const int _nrOfCards = 26;
 
   // Current amount of shown columns in the grid view.
   int columns = 1;
@@ -294,98 +296,101 @@ class _HomePageState extends State<HomePage> {
                   toggleCard(10);
                 },
               ),
-              NavigationRailSettings(
+              BottomNavigationBarSettings(
                 controller: widget.controller,
                 isOpen: isCardOpen[11],
                 onTap: () {
                   toggleCard(11);
                 },
               ),
-              //
-              // The sub pages card, not really a setting.
-              SubPages(
+              NavigationRailSettings(
+                controller: widget.controller,
                 isOpen: isCardOpen[12],
                 onTap: () {
                   toggleCard(12);
                 },
               ),
-              //
-              // All the "Themed" results Card panels.
-              //
-              // TODO(rydmike): Consider changing open/close action.
-              // Although technically buttons, Toggles, FAB, Switches and
-              // Dialog panels are now also settings screens, may I should
-              // change the groups they belong with regards to what the
-              // open clos side buttons act on.
-              //
-              ButtonsSettings(
+              AndroidNavigationBarSettings(
                 controller: widget.controller,
                 isOpen: isCardOpen[13],
                 onTap: () {
                   toggleCard(13);
                 },
               ),
-              ToggleFabChipsSettings(
-                controller: widget.controller,
+              SubPages(
                 isOpen: isCardOpen[14],
                 onTap: () {
                   toggleCard(14);
                 },
               ),
-              SwitchesSettings(
+              ButtonsSettings(
                 controller: widget.controller,
                 isOpen: isCardOpen[15],
                 onTap: () {
                   toggleCard(15);
                 },
               ),
-              DialogSettings(
+              ToggleFabChipsSettings(
                 controller: widget.controller,
                 isOpen: isCardOpen[16],
                 onTap: () {
                   toggleCard(16);
                 },
               ),
-              ThemedListTile(
+              SwitchesSettings(
+                controller: widget.controller,
                 isOpen: isCardOpen[17],
                 onTap: () {
                   toggleCard(17);
                 },
               ),
-              ThemedTimePickerDialog(
+              DialogSettings(
+                controller: widget.controller,
                 isOpen: isCardOpen[18],
                 onTap: () {
                   toggleCard(18);
                 },
               ),
-              ThemedDatePickerDialog(
+              ThemedListTile(
                 isOpen: isCardOpen[19],
                 onTap: () {
                   toggleCard(19);
                 },
               ),
-              ThemedMaterialAndBottomSheet(
+              ThemedTimePickerDialog(
                 isOpen: isCardOpen[20],
                 onTap: () {
                   toggleCard(20);
                 },
               ),
-              ThemedCard(
+              ThemedDatePickerDialog(
                 isOpen: isCardOpen[21],
                 onTap: () {
                   toggleCard(21);
                 },
               ),
-              ThemedTextTheme(
+              ThemedMaterialAndBottomSheet(
                 isOpen: isCardOpen[22],
                 onTap: () {
                   toggleCard(22);
                 },
               ),
-              ThemedPrimaryTextTheme(
+              ThemedCard(
                 isOpen: isCardOpen[23],
                 onTap: () {
                   toggleCard(23);
+                },
+              ),
+              ThemedTextTheme(
+                isOpen: isCardOpen[24],
+                onTap: () {
+                  toggleCard(24);
+                },
+              ),
+              ThemedPrimaryTextTheme(
+                isOpen: isCardOpen[25],
+                onTap: () {
+                  toggleCard(25);
                 },
               ),
             ].elementAt(index),

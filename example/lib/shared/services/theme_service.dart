@@ -301,7 +301,7 @@ abstract class ThemeService {
   static const String keyAppBarElevation = 'appBarElevation';
 
   /// Default value for the appBarElevation, also used to reset settings.
-  static const double defaultAppBarElevation = 0;
+  static const double defaultAppBarElevation = 0.5;
 
   /// Loads used app bar elevation setting in example 5.
   Future<double> appBarElevation();
@@ -1170,7 +1170,7 @@ abstract class ThemeService {
   // ---------
 
   /// Key used to read and save the useM3ErrorColor value.
-  static const String keyUseM3ErrorColor = 'useM3ErrorColor';
+  static const String keyUseM3ErrorColors = 'useM3ErrorColors';
 
   /// Default value for the useM3ErrorColor, also to reset settings.
   static const bool defaultUseM3ErrorColors = false;
@@ -1180,4 +1180,119 @@ abstract class ThemeService {
 
   /// Persists useM3ErrorColor setting in example 5.
   Future<void> saveUseM3ErrorColors(bool value);
+
+  // ---------
+
+  /// Key used to read and save the bottomNavShowSelectedLabels value.
+  static const String keyBottomNavShowSelectedLabels =
+      'bottomNavShowSelectedLabels';
+
+  /// Default value for the bottomNavShowSelectedLabels, also to reset settings.
+  static const bool defaultBottomNavShowSelectedLabels = true;
+
+  /// Loads used bottomNavShowSelectedLabels setting in example 5.
+  Future<bool> bottomNavShowSelectedLabels();
+
+  /// Persists bottomNavShowSelectedLabels setting in example 5.
+  Future<void> saveBottomNavShowSelectedLabels(bool value);
+
+  // ---------
+
+  /// Key used to read and save the useM3ErrorColor value.
+  static const String keyBottomNavShowUnselectedLabels =
+      'bottomNavShowUnselectedLabels';
+
+  /// Default value for the useM3ErrorColor, also to reset settings.
+  static const bool defaultBottomNavShowUnselectedLabels = true;
+
+  /// Loads used useM3ErrorColor setting in example 5.
+  Future<bool> bottomNavShowUnselectedLabels();
+
+  /// Persists useM3ErrorColor setting in example 5.
+  Future<void> saveBottomNavShowUnselectedLabels(bool value);
+
+  // ---------
+
+  /// Key used to read and save the navBarLabelBehavior value.
+  static const String keyNavBarLabelBehavior = 'navBarLabelBehavior';
+
+  /// Default value for the navBarLabelBehavior, also used to
+  /// reset settings.
+  static const NavigationDestinationLabelBehavior defaultNavBarLabelBehavior =
+      NavigationDestinationLabelBehavior.alwaysShow;
+
+  /// Loads used navBarLabelBehavior setting.
+  Future<NavigationDestinationLabelBehavior> navBarLabelBehavior();
+
+  /// Persists used navBarLabelBehavior setting.
+  Future<void> saveNavBarLabelBehavior(
+      NavigationDestinationLabelBehavior value);
+
+  // ---------
+
+  /// Key used to read and save the navRailLabelType value.
+  static const String keyNavRailLabelType = 'navRailLabelType';
+
+  /// Default value for the navRailLabelType, also used to
+  /// reset settings.
+  static const NavigationRailLabelType defaultNavRailLabelType =
+      NavigationRailLabelType.all;
+
+  /// Loads used navRailLabelType setting.
+  Future<NavigationRailLabelType> navRailLabelType();
+
+  /// Persists used navRailLabelType setting.
+  Future<void> saveNavRailLabelType(NavigationRailLabelType value);
+
+  // ---------
+
+  /// Key used to read and save the elevatedButtonBorderRadius value.
+  static const String keyElevatedButtonBorderRadius =
+      'elevatedButtonBorderRadius';
+
+  /// Default value for the elevatedButtonBorderRadius, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const double? defaultElevatedButtonBorderRadius = null;
+
+  /// Loads used elevatedButtonBorderRadius setting.
+  Future<double?> elevatedButtonBorderRadius();
+
+  /// Persists used elevatedButtonBorderRadius setting.
+  Future<void> saveElevatedButtonBorderRadius(double? value);
+
+  // ---------
+
+  /// Key used to read and save the outlinedButtonBorderRadius value.
+  static const String keyOutlinedButtonBorderRadius =
+      'outlinedButtonBorderRadius';
+
+  /// Default value for the outlinedButtonBorderRadius, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const double? defaultOutlinedButtonBorderRadius = null;
+
+  /// Loads used outlinedButtonBorderRadius setting.
+  Future<double?> outlinedButtonBorderRadius();
+
+  /// Persists used outlinedButtonBorderRadius setting.
+  Future<void> saveOutlinedButtonBorderRadius(double? value);
+
+  // ---------
+
+  /// Key used to read and save the textButtonBorderRadius value.
+  static const String keyTextButtonBorderRadius = 'textButtonBorderRadius';
+
+  /// Default value for the textButtonBorderRadius, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const double? defaultTextButtonBorderRadius = null;
+
+  /// Loads used textButtonBorderRadius setting.
+  Future<double?> textButtonBorderRadius();
+
+  /// Persists used textButtonBorderRadius setting.
+  Future<void> saveTextButtonBorderRadius(double? value);
 }

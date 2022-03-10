@@ -5951,6 +5951,10 @@ class FlexColorScheme with Diagnosticable {
               opacity: subTheme.bottomNavigationBarOpacity,
               elevation: subTheme.bottomNavigationBarElevation,
               type: subTheme.bottomNavigationBarType,
+              showSelectedLabels:
+                  subTheme.bottomNavigationBarShowSelectedLabels,
+              showUnselectedLabels:
+                  subTheme.bottomNavigationBarShowUnselectedLabels,
               landscapeLayout: subTheme.bottomNavigationBarLandscapeLayout,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,

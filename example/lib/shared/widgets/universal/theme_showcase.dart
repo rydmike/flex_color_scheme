@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'navigation_rail_label_type_buttons.dart';
 import 'switch_list_tile_adaptive.dart';
 
 /// Theme showcase for the current theme.
@@ -875,22 +874,27 @@ class NavigationRailShowcase extends StatefulWidget {
     Key? key,
     this.child,
     this.height = 450,
-    this.useIndicator,
-    this.onChangedUseIndicator,
-    this.railType,
-    this.onChangedRailType,
+    this.useAssertWorkAround = false,
   }) : super(key: key);
 
   /// A child widget that we can use to place controls on the
   /// side of the NavigationRail in the show case widget.
   final Widget? child;
 
-  /// Height
+  /// The vertical space for the navigation bar.
   final double height;
-  final bool? useIndicator;
-  final ValueChanged<bool>? onChangedUseIndicator;
-  final NavigationRailLabelType? railType;
-  final ValueChanged<NavigationRailLabelType>? onChangedRailType;
+
+  // Flag set to true to make a work around to avoid unnecessarily
+  // eager assert in SDK.
+  //
+  // Assertion: line 562 pos 7: 'useIndicator || indicatorColor == null'
+  // A flag is used to do trickery with transparency for this
+  // assertion that we cannot avoid since the theme controls the
+  // setup and user it. User may enter combo that has no effect, and
+  // triggers the assert.
+  // It should be obvious that if you have no indicator color
+  // you cannot use an indicator, why assert it? Just don't show one!
+  final bool useAssertWorkAround;
 
   @override
   State<NavigationRailShowcase> createState() => _NavigationRailShowcaseState();
@@ -899,72 +903,9 @@ class NavigationRailShowcase extends StatefulWidget {
 class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
   int buttonIndex = 0;
   bool isExtended = false;
-  bool useIndicator = true;
-  NavigationRailLabelType labelType = NavigationRailLabelType.all;
-  NavigationRailLabelType effectiveLabelType = NavigationRailLabelType.all;
-
-  String explainLabelStyle(final NavigationRailLabelType style) {
-    switch (style) {
-      case NavigationRailLabelType.none:
-        return 'Items have no labels';
-      case NavigationRailLabelType.selected:
-        return 'Only selected item has a label';
-      case NavigationRailLabelType.all:
-        return 'All items have labels';
-    }
-  }
-
-  void afterBuild(BuildContext context) {
-    if (!isExtended && effectiveLabelType != labelType) {
-      setState(() {
-        effectiveLabelType = labelType;
-      });
-    }
-  }
-
-  @override
-  void didUpdateWidget(covariant NavigationRailShowcase oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.useIndicator != oldWidget.useIndicator) {
-      useIndicator = widget.useIndicator ?? useIndicator;
-    }
-    if (widget.railType != oldWidget.railType) {
-      labelType = widget.railType ?? labelType;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO(rydmike): Study the NavigationRail issue found and maybe report it.
-    // The reason for this hack with a addPostFrameCallback is af follows:
-    //
-    // 1. If you in extended state use a `labelType` that is not none or null
-    //    it throws an assertion error.
-    // 2. If you in a conditional expr. assign `NavigationRailLabelType.none`
-    //    in extended state and the actual `labelType` in not extended state to
-    //    `labelType`, it works BUT there is no animation when it closes
-    //    when you toggle to not extended state. We want the animation too!
-    // 3. If you instead use `null` in the expression for the extended state,
-    //    it blows up badly, even though null should be supported based on docs.
-    // 4. Open/close animation works correctly when both extended and not
-    //    extended states uses `NavigationRailLabelType.none`.
-    // 5. The workaround:
-    //    Have a `labelType` state that can be freely toggled. Also have an
-    //    `effectiveLabelType` that is used as input state to `labelType`.
-    //    The `effectiveLabelType` is only toggled directly when we are in
-    //    not extended state.
-    //    When `extended` state is toggled, we always also set
-    //    `effectiveLabelType` to `NavigationRailLabelType.none`. To ensure
-    //    we only so extended transition with the `NavigationRailLabelType.none`
-    //    that works. Finally we add this addPostFrameCallback that we do after
-    //    every build, in it, if we are in note extended state and if the
-    //    `effectiveLabelType` and `labelType` are unequal, we use setState
-    //    to set the `effectiveLabelType` to `labelType` so we get the set and
-    //    desired `labelType` on the Rail after it hs collapsed from extended
-    //    mode. What a load of crap to have to do all this to get it work as
-    //    it should in the first place.
-    WidgetsBinding.instance?.addPostFrameCallback((_) => afterBuild(context));
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -989,6 +930,11 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
         const Divider(height: 1),
         SizedBox(
           height: widget.height,
+          // If we expand the rail and have a very narrow screen, it will
+          // take up a lot of height, more than we want to give to the demo
+          // panel, just let it overflow then. This may happen when we place
+          // a lot of widgets in the child that no longer fits on a phone
+          // with expanded rail.
           child: OverflowBox(
             alignment: AlignmentDirectional.topStart,
             maxHeight: 1200,
@@ -996,9 +942,11 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
               children: <Widget>[
                 NavigationRail(
                   extended: isExtended,
-                  useIndicator: useIndicator ? true : null,
+                  useIndicator: widget.useAssertWorkAround ? true : null,
                   minExtendedWidth: 150,
-                  labelType: effectiveLabelType,
+                  indicatorColor:
+                      widget.useAssertWorkAround ? Colors.transparent : null,
+                  labelType: isExtended ? NavigationRailLabelType.none : null,
                   selectedIndex: buttonIndex,
                   onDestinationSelected: (int value) {
                     setState(() {
@@ -1037,35 +985,6 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                         onChanged: (bool value) {
                           setState(() {
                             isExtended = value;
-                            effectiveLabelType = NavigationRailLabelType.none;
-                          });
-                        },
-                      ),
-                      ListTile(
-                        title: const Text('Labels when rail is collapsed'),
-                        subtitle: Text(explainLabelStyle(labelType)),
-                        trailing: NavigationRailLabelTypeButtons(
-                          style: labelType,
-                          onChanged: (NavigationRailLabelType value) {
-                            setState(() {
-                              labelType = value;
-                              if (!isExtended) effectiveLabelType = labelType;
-                            });
-                            widget.onChangedRailType?.call(value);
-                          },
-                        ),
-                      ),
-                      SwitchListTileAdaptive(
-                        title: const Text('Item selection indicator'),
-                        subtitle: const Text('Also ON when '
-                            'useMaterial3 is true, only thing the toggle does '
-                            'in Flutter 2.10. Turning this '
-                            'OFF, inputs "null" to widget to show this.'),
-                        value: useIndicator,
-                        onChanged: (bool value) {
-                          setState(() {
-                            useIndicator = value;
-                            widget.onChangedUseIndicator?.call(value);
                           });
                         },
                       ),

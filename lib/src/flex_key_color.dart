@@ -9,28 +9,34 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 /// key colors to populate the Material 3 [ColorScheme] it creates and uses
 /// to generate its [ThemeData] object.
 ///
+/// For more information on Material 3 color system and usage of key colors
+/// to generate tonal palettes and tones, see:
+/// https://m3.material.io/styles/color/the-color-system/key-colors-tones
+///
 /// A key based [ColorScheme] will be generated if a [FlexKeyColors]
 /// instance is passed to [FlexColorScheme.light] or [FlexColorScheme.dark]
 /// parameter [keyColorSetup] with [useKeyColors] set to true, in its
 /// [FlexKeyColors] configuration input.
 ///
 /// By default [keyColorSetup] is null and key colors are not used. To activate
-/// the feature pass in a default [FlexKeyColors] instance,
+/// the feature pass you can in a default [FlexKeyColors] instance,
 /// its [useKeyColors] defaults to true.
 ///
+/// The default constructor creates a setup that creates
+/// a seeded generated [ColorScheme] for the active [FlexColorScheme] using its
+/// current primary color as key in a [ColorScheme.fromSeed]
 /// If the default setup is suitable, no further configuration is required.
 /// You can however further customize its behaviour by adjusting the properties
 /// in [FlexKeyColors].
-///
-/// For more information on Material 3 color system and usage of key colors
-/// to generate tonal palettes and tones, see:
-/// https://m3.material.io/styles/color/the-color-system/key-colors-tones
 ///
 /// Flutter standard [ColorScheme] only offers color scheme creation from one
 /// single input color using [ColorScheme.fromSeed]. With [FlexColorScheme]
 /// you can use its effective color value for primary, secondary and tertiary
 /// colors to generate the seeded [TonalPalette] for primary, secondary and
-/// tertiary colors in the [ColorScheme] from using these as input colors.
+/// tertiary colors in the [ColorScheme], by using these as input colors.
+/// To do so also set properties [useSecondary] and [useTertiary] to true.
+/// You will then get tonal palette's for secondary and tertiary colors that
+/// depend on these key colors and not on only the primary color.
 ///
 /// If you use factory [FlexColorScheme.light] and [FlexColorScheme.scheme], to
 /// use a built in color [scheme] set, then the primary, secondary and tertiary
@@ -39,7 +45,8 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 ///
 /// When using [FlexColorScheme.dark] and [FlexColorScheme.scheme], the same
 /// colors from the light theme color definitions will be used as key color
-/// inputs. This is because the light and dark theme mode colors should use
+/// inputs to generate the tonal palettes for dark mode ColorScheme. This is
+/// because the light and dark theme mode colors should use
 /// the same [TonalPalette], and only use different in M3 guide standardized
 /// tones from the same [TonalPalette]. Hence the same base color is used to
 /// generate the tonal palette for both light and dark theme to adhere to this
@@ -66,17 +73,42 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 /// color branding in [FlexColorScheme]. The surface mode and blend levels can
 /// even be combined with M3 based key color branding, for a bit different and
 /// stronger effects from key color generated themes too.
+///
+/// To completely customize how the tonal palettes for the seed generated
+/// [ColorScheme] are produced from key colors, and which tones from the
+/// generated tonal palettes are used by which color in the [ColorScheme],
+/// please see [FlexTones]. With [FlexTones] you can completely customize
+/// the tonal palette generation and tone usage in produced [ColorScheme].
 @immutable
 class FlexKeyColors with Diagnosticable {
-  /// Default constructor, used to make an immutable [FlexKeyColors]
-  /// object.
+  /// Used to configure how key colors are used when generating a key color
+  /// seeded [ColorScheme] for FlexColorScheme,
   ///
-  /// Uses [useKeyColors], [useSecondary] and [useTertiary] to define if and
-  /// how key color seeding is used.
+  /// Use [useKeyColors] to enable it (enabled by default), and [useSecondary]
+  /// and [useTertiary] to define if secondary and tertiary colors in
+  /// active FlexColorScheme should be to seed the generated [ColorScheme].
+  ///
+  /// The defaults in the unnamed constructor creates a setup that is
+  /// equivalent to using [ColorScheme.fromSeed] with primary color as key.
+  ///
+  /// Primary color is always used as a key for the seed generate tonal palettes
+  /// when seed generated [ColorScheme] is used in FlexColorScheme.
+  ///
+  /// You can also use the secondary and tertiary colors as key to generate
+  /// their tonal palettes, this is not possible with Flutter SDK's
+  /// [ColorScheme.from] Material Design 3 based constructor.
+  ///
+  /// The property [useKeyColors] will if set to false disable using seed
+  /// generated [ColorScheme], even if you pass a [FlexKeyColors] instance to
+  /// the [keyColors] parameter in [FlexColorScheme.light] or
+  /// [FlexColorScheme.dark] factories. The property is true by default, it
+  /// exists mainly so you can more easily build configurable toggles to enable
+  /// and disable using seed generated FlexColorSchemes, while keeping still
+  /// passing in a configuration object with other properties set.
   const FlexKeyColors({
     final this.useKeyColors = true,
-    final this.useSecondary = true,
-    final this.useTertiary = true,
+    final this.useSecondary = false,
+    final this.useTertiary = false,
     final this.keepPrimary = false,
     final this.keepSecondary = false,
     final this.keepTertiary = false,
@@ -107,7 +139,7 @@ class FlexKeyColors with Diagnosticable {
   /// [ColorScheme.fromSeed], thus the secondary colors will be same as if we
   /// would have used it with the [FlexColorScheme.primary] color as input.
   ///
-  /// Defaults to true.
+  /// Defaults to false.
   final bool useSecondary;
 
   /// Use effective [FlexColorScheme.tertiary] color as key generation
@@ -118,7 +150,7 @@ class FlexKeyColors with Diagnosticable {
   /// [ColorScheme.fromSeed], thus the tertiary colors will be same as if we
   /// would have used it with the [FlexColorScheme.primary] color as input.
   ///
-  /// Defaults to true.
+  /// Defaults to false.
   final bool useTertiary;
 
   /// When using [useKeyColors], set [keepPrimary] to true, to keep the

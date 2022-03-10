@@ -2277,11 +2277,11 @@ class ThemeServiceHive implements ThemeService {
 
   // ----
 
-  /// Loads used useM3ErrorColor setting in example 5.
+  /// Loads used useM3ErrorColors setting in example 5.
   @override
   Future<bool> useM3ErrorColors() async {
     try {
-      return _hiveBox.get(ThemeService.keyUseM3ErrorColor,
+      return _hiveBox.get(ThemeService.keyUseM3ErrorColors,
           defaultValue: ThemeService.defaultUseM3ErrorColors) as bool;
     } catch (e) {
       debugPrint(e.toString());
@@ -2294,7 +2294,211 @@ class ThemeServiceHive implements ThemeService {
   @override
   Future<void> saveUseM3ErrorColors(bool value) async {
     try {
-      await _hiveBox.put(ThemeService.keyUseM3ErrorColor, value);
+      await _hiveBox.put(ThemeService.keyUseM3ErrorColors, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used bottomNavShowSelectedLabels setting in example 5.
+  @override
+  Future<bool> bottomNavShowSelectedLabels() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBottomNavShowSelectedLabels,
+              defaultValue: ThemeService.defaultBottomNavShowSelectedLabels)
+          as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBottomNavShowSelectedLabels;
+    }
+  }
+
+  /// Persists useM3ErrorColor setting in example 5.
+  @override
+  Future<void> saveBottomNavShowSelectedLabels(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBottomNavShowSelectedLabels, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used bottomNavShowUnselectedLabels setting in example 5.
+  @override
+  Future<bool> bottomNavShowUnselectedLabels() async {
+    try {
+      return _hiveBox.get(ThemeService.keyBottomNavShowUnselectedLabels,
+              defaultValue: ThemeService.defaultBottomNavShowUnselectedLabels)
+          as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultBottomNavShowUnselectedLabels;
+    }
+  }
+
+  /// Persists useM3ErrorColor setting in example 5.
+  @override
+  Future<void> saveBottomNavShowUnselectedLabels(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyBottomNavShowUnselectedLabels, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used navBarLabelBehavior setting.
+  @override
+  Future<NavigationDestinationLabelBehavior> navBarLabelBehavior() async {
+    try {
+      return _hiveBox.get(ThemeService.keyNavBarLabelBehavior,
+              defaultValue: ThemeService.defaultNavBarLabelBehavior)
+          as NavigationDestinationLabelBehavior;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultNavBarLabelBehavior;
+    }
+  }
+
+  /// Persists used navBarLabelBehavior setting.
+  @override
+  Future<void> saveNavBarLabelBehavior(
+      NavigationDestinationLabelBehavior value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyNavBarLabelBehavior, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used navRailLabelType setting.
+  @override
+  Future<NavigationRailLabelType> navRailLabelType() async {
+    try {
+      return _hiveBox.get(ThemeService.keyNavRailLabelType,
+              defaultValue: ThemeService.defaultNavRailLabelType)
+          as NavigationRailLabelType;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultNavRailLabelType;
+    }
+  }
+
+  /// Persists used navRailLabelType setting.
+  @override
+  Future<void> saveNavRailLabelType(NavigationRailLabelType value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyNavRailLabelType, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used elevatedButtonBorderRadius setting.
+  @override
+  Future<double?> elevatedButtonBorderRadius() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyElevatedButtonBorderRadius,
+          defaultValue: ThemeService.defaultElevatedButtonBorderRadius);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyElevatedButtonBorderRadius,
+                defaultValue: ThemeService.defaultElevatedButtonBorderRadius)
+            as double;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultElevatedButtonBorderRadius;
+    }
+  }
+
+  /// Persists used elevatedButtonBorderRadius setting.
+  @override
+  Future<void> saveElevatedButtonBorderRadius(double? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyElevatedButtonBorderRadius, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used outlinedButtonBorderRadius setting.
+  @override
+  Future<double?> outlinedButtonBorderRadius() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyOutlinedButtonBorderRadius,
+          defaultValue: ThemeService.defaultOutlinedButtonBorderRadius);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyOutlinedButtonBorderRadius,
+                defaultValue: ThemeService.defaultOutlinedButtonBorderRadius)
+            as double;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultOutlinedButtonBorderRadius;
+    }
+  }
+
+  /// Persists used outlinedButtonBorderRadius setting.
+  @override
+  Future<void> saveOutlinedButtonBorderRadius(double? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyOutlinedButtonBorderRadius, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used textButtonBorderRadius setting.
+  @override
+  Future<double?> textButtonBorderRadius() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyTextButtonBorderRadius,
+          defaultValue: ThemeService.defaultTextButtonBorderRadius);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyTextButtonBorderRadius,
+            defaultValue: ThemeService.defaultTextButtonBorderRadius) as double;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultTextButtonBorderRadius;
+    }
+  }
+
+  /// Persists used textButtonBorderRadius setting.
+  @override
+  Future<void> saveTextButtonBorderRadius(double? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyTextButtonBorderRadius, value);
     } catch (e) {
       debugPrint(e.toString());
     }

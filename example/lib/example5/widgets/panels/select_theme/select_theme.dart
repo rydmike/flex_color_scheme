@@ -119,7 +119,7 @@ class SelectTheme extends StatelessWidget {
           ),
           UsedColorsPopupMenu(
             title: const Text('Input limiter, use fewer of the six '
-                'predefined input color values'),
+                'main input color values'),
             index: controller.usedColors,
             onChanged: controller.setUsedColors,
           ),

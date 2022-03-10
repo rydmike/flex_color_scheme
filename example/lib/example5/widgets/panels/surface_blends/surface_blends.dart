@@ -139,22 +139,30 @@ class SurfaceBlends extends StatelessWidget {
                 ),
               ),
             ),
-            const ListTile(
-              title: Text('Light mode onColors blend level'),
-              subtitle: Text('When seed colors are not used, this affects '
-                  'onContainers, onSurface and onBackground, plus main '
-                  'onColors when the onColor blending switch is ON'),
+            ListTile(
+              enabled: controller.useSubThemes && controller.useFlexColorScheme,
+              title: const Text('Light mode onColors blend level'),
+              subtitle:
+                  const Text('When seed colors are not used, this affects '
+                      'onContainers, onSurface and onBackground, plus main '
+                      'onColors when the onColor blending switch is ON'),
             ),
             ListTile(
+              enabled: controller.useSubThemes && controller.useFlexColorScheme,
               title: Slider.adaptive(
                 min: 0,
                 max: 40,
                 divisions: 40,
                 label: controller.blendOnLevel.toString(),
-                value: controller.blendOnLevel.toDouble(),
-                onChanged: (double value) {
-                  controller.setBlendOnLevel(value.toInt());
-                },
+                value: controller.useSubThemes && controller.useFlexColorScheme
+                    ? controller.blendOnLevel.toDouble()
+                    : 0,
+                onChanged:
+                    controller.useSubThemes && controller.useFlexColorScheme
+                        ? (double value) {
+                            controller.setBlendOnLevel(value.toInt());
+                          }
+                        : null,
               ),
               trailing: Padding(
                 padding: const EdgeInsetsDirectional.only(end: 12),
@@ -166,7 +174,8 @@ class SurfaceBlends extends StatelessWidget {
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
-                      '${controller.blendOnLevel}',
+                      // ignore: lines_longer_than_80_chars
+                      '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevel : ""}',
                       style: Theme.of(context)
                           .textTheme
                           .caption!
@@ -233,22 +242,30 @@ class SurfaceBlends extends StatelessWidget {
                 ),
               ),
             ),
-            const ListTile(
-              title: Text('Dark mode onColors blend level'),
-              subtitle: Text('When seed colors are not used, this affects '
-                  'onContainers, onSurface and onBackground, plus main '
-                  'onColors when the onColor blending switch is ON'),
+            ListTile(
+              enabled: controller.useSubThemes && controller.useFlexColorScheme,
+              title: const Text('Dark mode onColors blend level'),
+              subtitle:
+                  const Text('When seed colors are not used, this affects '
+                      'onContainers, onSurface and onBackground, plus main '
+                      'onColors when the onColor blending switch is ON'),
             ),
             ListTile(
+              enabled: controller.useSubThemes && controller.useFlexColorScheme,
               title: Slider.adaptive(
                 min: 0,
                 max: 40,
                 divisions: 40,
                 label: controller.blendOnLevelDark.toString(),
-                value: controller.blendOnLevelDark.toDouble(),
-                onChanged: (double value) {
-                  controller.setBlendOnLevelDark(value.toInt());
-                },
+                value: controller.useSubThemes && controller.useFlexColorScheme
+                    ? controller.blendOnLevelDark.toDouble()
+                    : 0,
+                onChanged:
+                    controller.useSubThemes && controller.useFlexColorScheme
+                        ? (double value) {
+                            controller.setBlendOnLevelDark(value.toInt());
+                          }
+                        : null,
               ),
               trailing: Padding(
                 padding: const EdgeInsetsDirectional.only(end: 12),
@@ -260,7 +277,8 @@ class SurfaceBlends extends StatelessWidget {
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
-                      '${controller.blendOnLevelDark}',
+                      // ignore: lines_longer_than_80_chars
+                      '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
                       style: Theme.of(context)
                           .textTheme
                           .caption!

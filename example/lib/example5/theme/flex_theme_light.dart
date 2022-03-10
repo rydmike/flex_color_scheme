@@ -169,11 +169,10 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
           controller.navBarBackgroundSchemeColor,
       bottomNavigationBarOpacity: controller.bottomNavigationBarOpacity,
       bottomNavigationBarElevation: controller.bottomNavigationBarElevation,
-      // TODO(rydmike): Remove these dev phase testing commented inputs
-      // bottomNavigationBarSelectedIconSize: 24,
-      // bottomNavigationBarUnselectedIconSize: 24,
-      // bottomNavigationBarUnselectedLabelSize: null,
-      // bottomNavigationBarSelectedLabelSize: 20,
+      bottomNavigationBarShowSelectedLabels:
+          controller.bottomNavShowSelectedLabels,
+      bottomNavigationBarShowUnselectedLabels:
+          controller.bottomNavShowUnselectedLabels,
       //
       // NavigationBar settings
       // Shares input with BottomNavigationBar and Rail.
@@ -191,6 +190,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
       navigationBarBackgroundSchemeColor:
           controller.navBarBackgroundSchemeColor,
       navigationBarOpacity: controller.bottomNavigationBarOpacity,
+      navigationBarLabelBehavior: controller.navBarLabelBehavior,
       //
       // NavigationRail settings
       // Shares controller values with nav bars in this demo.
@@ -210,11 +210,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
           controller.navBarBackgroundSchemeColor,
       navigationRailOpacity: controller.bottomNavigationBarOpacity,
       navigationRailElevation: controller.bottomNavigationBarElevation,
-      // TODO(rydmike): Remove these dev phase testing commented inputs
-      // navigationRailSelectedIconSize: 24,
-      // navigationRailUnselectedIconSize: 20,
-      // navigationRailUnselectedLabelSize: 12,
-      // navigationRailSelectedLabelSize: 16,
+      navigationRailLabelType: controller.navRailLabelType,
     ),
     //
     // Advanced color properties for seed generated ColorScheme's
