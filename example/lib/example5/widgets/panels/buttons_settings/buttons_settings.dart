@@ -22,18 +22,25 @@ class ButtonsSettings extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Themed Material Buttons'),
+      title: const Text('Button Settings'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const SizedBox(height: 8),
           const ListTile(
-            title: Text('Themed button colors'),
-            subtitle: Text('Change theme color, default is primary via '
-                'SDK default and component sub-theme defaults. '
+            // title: Text('Themed button colors'),
+            subtitle: Text('You can change button theme color, default is '
+                'primary via SDK default and component sub-theme defaults. '
                 'With API you can set different color in light and dark '
                 'mode. This app shares same input for both modes, but you '
-                'can easily modify the generated setup code.'),
+                'can easily modify the generated setup code.\n'
+                '\n'
+                'All component themes with border radius can also have their '
+                'radius overridden and changed individually. It then either '
+                'overrides the M3 default or the set global radius default, '
+                'depending on what is in use. This is demonstrated here with '
+                'the standard buttons. Use API to modify radius individually '
+                'on other components.'),
           ),
           ColorSchemePopupMenu(
             title: const Text('ElevatedButton color'),
@@ -53,6 +60,58 @@ class ButtonsSettings extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ElevatedButtonShowcase(),
           ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('ElevatedButton border radius'),
+            subtitle: Slider.adaptive(
+              min: -1,
+              max: 30,
+              divisions: 31,
+              label: controller.elevatedButtonBorderRadius == null ||
+                      (controller.elevatedButtonBorderRadius ?? -1) < 0
+                  ? 'default'
+                  : (controller.elevatedButtonBorderRadius
+                          ?.toStringAsFixed(0) ??
+                      ''),
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.elevatedButtonBorderRadius ?? -1
+                  : 4,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setElevatedButtonBorderRadius(
+                              value < 0 ? null : value);
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'RADIUS',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    controller.useSubThemes && controller.useFlexColorScheme
+                        ? controller.elevatedButtonBorderRadius == null ||
+                                (controller.elevatedButtonBorderRadius ?? -1) <
+                                    0
+                            ? 'default'
+                            : (controller.elevatedButtonBorderRadius
+                                    ?.toStringAsFixed(0) ??
+                                '')
+                        : '4',
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
           ColorSchemePopupMenu(
             title: const Text('OutlinedButton color'),
             index: controller.outlinedButtonSchemeColor?.index ?? -1,
@@ -71,6 +130,58 @@ class ButtonsSettings extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: OutlinedButtonShowcase(),
           ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('OutlinedButton border radius'),
+            subtitle: Slider.adaptive(
+              min: -1,
+              max: 30,
+              divisions: 31,
+              label: controller.outlinedButtonBorderRadius == null ||
+                      (controller.outlinedButtonBorderRadius ?? -1) < 0
+                  ? 'default'
+                  : (controller.outlinedButtonBorderRadius
+                          ?.toStringAsFixed(0) ??
+                      ''),
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.outlinedButtonBorderRadius ?? -1
+                  : 4,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setOutlinedButtonBorderRadius(
+                              value < 0 ? null : value);
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'RADIUS',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    controller.useSubThemes && controller.useFlexColorScheme
+                        ? controller.outlinedButtonBorderRadius == null ||
+                                (controller.outlinedButtonBorderRadius ?? -1) <
+                                    0
+                            ? 'default'
+                            : (controller.outlinedButtonBorderRadius
+                                    ?.toStringAsFixed(0) ??
+                                '')
+                        : '4',
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
           ColorSchemePopupMenu(
             title: const Text('TextButton color'),
             index: controller.textButtonSchemeColor?.index ?? -1,
@@ -88,6 +199,57 @@ class ButtonsSettings extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: TextButtonShowcase(),
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('TextButton border radius'),
+            subtitle: Slider.adaptive(
+              min: -1,
+              max: 30,
+              divisions: 31,
+              label: controller.textButtonBorderRadius == null ||
+                      (controller.textButtonBorderRadius ?? -1) < 0
+                  ? 'default'
+                  : (controller.textButtonBorderRadius?.toStringAsFixed(0) ??
+                      ''),
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.textButtonBorderRadius ?? -1
+                  : 4,
+              onChanged: controller.useSubThemes &&
+                      controller.useFlexColorScheme
+                  ? (double value) {
+                      controller
+                          .setTextButtonBorderRadius(value < 0 ? null : value);
+                    }
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'RADIUS',
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  Text(
+                    controller.useSubThemes && controller.useFlexColorScheme
+                        ? controller.textButtonBorderRadius == null ||
+                                (controller.textButtonBorderRadius ?? -1) < 0
+                            ? 'default'
+                            : (controller.textButtonBorderRadius
+                                    ?.toStringAsFixed(0) ??
+                                '')
+                        : '4',
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
           ),
 
           /// Showing the legacy buttons is removed from the sample.
