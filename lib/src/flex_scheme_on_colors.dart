@@ -135,46 +135,47 @@ class FlexSchemeOnColors with Diagnosticable {
     // "on" color was not passed in, otherwise we just use its given color.
     final Color usedOnPrimary = onPrimary ??
         (ThemeData.estimateBrightnessForColor(primary) == Brightness.dark
-            ? Colors.white.blendAlpha(primary, primaryAlpha)
-            : Colors.black.blendAlpha(primary, primaryAlpha));
+            ? Colors.white.blendAlpha(primary.brighten(20), primaryAlpha)
+            : Colors.black.blendAlpha(primary.brighten(20), primaryAlpha));
     final Color? usedOnPrimaryContainer = onPrimaryContainer ??
         (primaryContainer == null
             ? null
             : (ThemeData.estimateBrightnessForColor(primaryContainer) ==
                     Brightness.dark
-                ? Colors.white
-                    .blendAlpha(primaryContainer, primaryContainerAlpha)
-                : Colors.black
-                    .blendAlpha(primaryContainer, primaryContainerAlpha)));
+                ? Colors.white.blendAlpha(
+                    primaryContainer.brighten(22), primaryContainerAlpha)
+                : Colors.black.blendAlpha(
+                    primaryContainer.brighten(8), primaryContainerAlpha)));
 
     final Color usedOnSecondary = onSecondary ??
         (ThemeData.estimateBrightnessForColor(secondary) == Brightness.dark
-            ? Colors.white.blendAlpha(secondary, secondaryAlpha)
-            : Colors.black.blendAlpha(secondary, secondaryAlpha));
+            ? Colors.white.blendAlpha(secondary.brighten(20), secondaryAlpha)
+            : Colors.black.blendAlpha(secondary.brighten(20), secondaryAlpha));
     final Color? usedOnSecondaryContainer = onSecondaryContainer ??
         (secondaryContainer == null
             ? null
             : (ThemeData.estimateBrightnessForColor(secondaryContainer) ==
                     Brightness.dark
-                ? Colors.white
-                    .blendAlpha(secondaryContainer, secondaryContainerAlpha)
-                : Colors.black
-                    .blendAlpha(secondaryContainer, secondaryContainerAlpha)));
+                ? Colors.white.blendAlpha(
+                    secondaryContainer.brighten(22), secondaryContainerAlpha)
+                : Colors.black.blendAlpha(
+                    secondaryContainer.brighten(8), secondaryContainerAlpha)));
     final Color? usedOnTertiary = onTertiary ??
         (tertiary == null
             ? null
             : (ThemeData.estimateBrightnessForColor(tertiary) == Brightness.dark
-                ? Colors.white.blendAlpha(tertiary, tertiaryAlpha)
-                : Colors.black.blendAlpha(tertiary, tertiaryAlpha)));
+                ? Colors.white.blendAlpha(tertiary.brighten(20), tertiaryAlpha)
+                : Colors.black
+                    .blendAlpha(tertiary.brighten(20), tertiaryAlpha)));
     final Color? usedOnTertiaryContainer = onTertiaryContainer ??
         (tertiaryContainer == null
             ? null
             : (ThemeData.estimateBrightnessForColor(tertiaryContainer) ==
                     Brightness.dark
-                ? Colors.white
-                    .blendAlpha(tertiaryContainer, tertiaryContainerAlpha)
-                : Colors.black
-                    .blendAlpha(tertiaryContainer, tertiaryContainerAlpha)));
+                ? Colors.white.blendAlpha(
+                    tertiaryContainer.brighten(22), tertiaryContainerAlpha)
+                : Colors.black.blendAlpha(
+                    tertiaryContainer.brighten(8), tertiaryContainerAlpha)));
 
     final Color usedOnSurface = onSurface ??
         (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
@@ -201,15 +202,17 @@ class FlexSchemeOnColors with Diagnosticable {
             : Colors.black.blendAlpha(background, backgroundAlpha));
     final Color usedOnError = onError ??
         (estimateErrorBrightness(error) == Brightness.dark
-            ? Colors.white.blendAlpha(error, errorAlpha)
-            : Colors.black.blendAlpha(error, errorAlpha));
+            ? Colors.white.blendAlpha(error.brighten(20), errorAlpha)
+            : Colors.black.blendAlpha(error.brighten(20), errorAlpha));
 
     final Color usedOnErrorContainer = onErrorContainer ??
         (estimateErrorBrightness(errorContainer ?? error) == Brightness.dark
-            ? Colors.white
-                .blendAlpha(errorContainer ?? error, errorContainerAlpha)
-            : Colors.black
-                .blendAlpha(errorContainer ?? error, errorContainerAlpha));
+            ? Colors.white.blendAlpha(
+                errorContainer?.brighten(22) ?? error.brighten(20),
+                errorContainerAlpha)
+            : Colors.black.blendAlpha(
+                errorContainer?.brighten(8) ?? error.brighten(20),
+                errorContainerAlpha));
 
     return FlexSchemeOnColors(
       onPrimary: usedOnPrimary,
