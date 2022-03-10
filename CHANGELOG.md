@@ -489,8 +489,8 @@ should be relatively easy, despite the long list of changes and new features.
 
 **EXAMPLES and Themes Playground**
 * Update examples 1...4
-  - **DONE:** Review and add a few of the new features to examples 3 and 4.
-  - **DONE:** Removed showing the old, already in Flutter v1.26 deprecated
+  - Add a few of the new features to examples 3 and 4.
+  - Removed showing the old, already in Flutter v1.26 deprecated
     buttons `RaisedButton`, `OutlineButton` and `FlatButton` in ALL the examples.
     They are going away in next stable release of Flutter after 2.10.x, as
     per this notice [#98537](https://github.com/flutter/flutter/issues/98537).
@@ -499,36 +499,38 @@ should be relatively easy, despite the long list of changes and new features.
 * Major update for "example 5" the **Themes Playground**
   to include support for all the new features. Updates listed below:
   
-  - **DONE:** Added config for unselected toggleable style.
-  - **DONE:** Added feature to export the code for the active `ColorScheme`. 
-  - **DONE:** Added color scheme color configuration to all opinionated component
+  - Added config for unselected toggleable style.
+  - Added feature to export the code for the active `ColorScheme`. 
+  - Added color scheme color configuration to all opinionated component
     sub-themes that have it.
-  - **DONE:** Added color limit input `usedColors`, it is an old
+  - Added color limit input `usedColors`, it is an old
     API in FlexColorScheme, it has just never been featured much.
-  - **DONE:** Added `useMaterial3` toggle.
-  - **DONE:** Added controls for using key color dynamic seeded ColorScheme, using
+  - Added `useMaterial3` toggle.
+  - Added controls for using key color dynamic seeded ColorScheme, using
     the predefined colors primary, secondary and tertiary as seed colors.
-  - **DONE:** * To the playground app, added a setup that demonstrates the usage
+  - Added a setup that demonstrates the usage
     of `FlexTones`. Made some useful setups as preconfigured FlexTones, and the
     playground uses demo. Now comes with `FlexTones.material` for the default
-    Material 3 design guide config, and `FlexTones.soft`, `FlexTones.vivid` 
-    and `FlexTones.highContrast` as built-in preconfigured options. It is easy
-    to make your own configs with the API.
-  - **DONE:** The ThemesPlayground paints active TonalPalettes and highlights selected
+    Material 3 design guide config, and `FlexTones.soft`, `FlexTones.vivid`,
+    `FlexTones.vividSurfaces` and `FlexTones.highContrast` as built-in 
+    preconfigured options. It is easy to make own configs with the API.
+  - The ThemesPlayground paints active TonalPalettes and highlights selected
     tones in the palettes when you have on a ColorScheme color. May extend this 
     to make an interactively configurable tonal setup by pickling tones from
     the `TonalPalette` and sliders to adjust chroma. this could later be used to 
     create a custom `FlexTones` config and get it as part of setup code too. 
-  - **DONE:** Playground Cupertino adaptive switches now also follow theme via 
+  - Playground Cupertino adaptive switches now also follow theme via 
     a custom SwitchListTileAdaptive wrapper. The iOS green switches are an 
     eyesore imo, but the SDK adaptive switch cannot be changed via a theme 
     alone. Needed to make a custom  widget where active thumb,
     explicitly uses switch theme color as thumb color, sigh.
-
-**TODO**
-* Review and manual testing of all things above.
-* Add loading animation to Themes Playground web build. Might be pushed to
-  when Flutter SDK supports it out of the box, seemed a bit tedious to do still.
+  - Added border radius individual override adjustments on buttons, to demo 
+    that the API can do it too.
+  - NavigationBar, BottomNavigationBar and Android system navigation bar were
+    given separate panels and many new configuration options. They still share
+    some controller values, might separate them in some future version of
+    the app.
+  - Added NavigationRail Settings panel, with similar settings and NavigationBar.
 
 
 ### What is Next?

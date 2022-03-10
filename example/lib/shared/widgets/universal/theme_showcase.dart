@@ -873,7 +873,7 @@ class NavigationRailShowcase extends StatefulWidget {
   const NavigationRailShowcase({
     Key? key,
     this.child,
-    this.height = 450,
+    this.height = 400,
     this.useAssertWorkAround = false,
   }) : super(key: key);
 
@@ -935,64 +935,66 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
           // panel, just let it overflow then. This may happen when we place
           // a lot of widgets in the child that no longer fits on a phone
           // with expanded rail.
-          child: OverflowBox(
-            alignment: AlignmentDirectional.topStart,
-            maxHeight: 1200,
-            child: Row(
-              children: <Widget>[
-                NavigationRail(
-                  extended: isExtended,
-                  useIndicator: widget.useAssertWorkAround ? true : null,
-                  minExtendedWidth: 150,
-                  indicatorColor:
-                      widget.useAssertWorkAround ? Colors.transparent : null,
-                  labelType: isExtended ? NavigationRailLabelType.none : null,
-                  selectedIndex: buttonIndex,
-                  onDestinationSelected: (int value) {
-                    setState(() {
-                      buttonIndex = value;
-                    });
-                  },
-                  destinations: const <NavigationRailDestination>[
-                    NavigationRailDestination(
-                      icon: Icon(Icons.chat_bubble),
-                      label: Text('Chat'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.beenhere),
-                      label: Text('Tasks'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.create_new_folder),
-                      label: Text('Folder'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.logout),
-                      label: Text('Logout'),
-                    ),
-                  ],
-                ),
-                const VerticalDivider(width: 1),
-                Expanded(
-                  child: Column(
-                    children: <Widget>[
-                      SwitchListTileAdaptive(
-                        title: const Text('Expand and collapse'),
-                        subtitle: const Text('ON to expand  OFF to collapse\n'
-                            'Only used for local control of rail '
-                            'presentation.'),
-                        value: isExtended,
-                        onChanged: (bool value) {
-                          setState(() {
-                            isExtended = value;
-                          });
-                        },
+          child: ClipRect(
+            child: OverflowBox(
+              alignment: AlignmentDirectional.topStart,
+              maxHeight: 1200,
+              child: Row(
+                children: <Widget>[
+                  NavigationRail(
+                    extended: isExtended,
+                    useIndicator: widget.useAssertWorkAround ? true : null,
+                    minExtendedWidth: 150,
+                    indicatorColor:
+                        widget.useAssertWorkAround ? Colors.transparent : null,
+                    labelType: isExtended ? NavigationRailLabelType.none : null,
+                    selectedIndex: buttonIndex,
+                    onDestinationSelected: (int value) {
+                      setState(() {
+                        buttonIndex = value;
+                      });
+                    },
+                    destinations: const <NavigationRailDestination>[
+                      NavigationRailDestination(
+                        icon: Icon(Icons.chat_bubble),
+                        label: Text('Chat'),
                       ),
-                      widget.child ?? const SizedBox.shrink(),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.beenhere),
+                        label: Text('Tasks'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.create_new_folder),
+                        label: Text('Folder'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.logout),
+                        label: Text('Logout'),
+                      ),
                     ],
                   ),
-                ),
-              ],
+                  const VerticalDivider(width: 1),
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        SwitchListTileAdaptive(
+                          title: const Text('Expand and collapse'),
+                          subtitle: const Text('ON to expand  OFF to collapse\n'
+                              'Only used for local control of rail '
+                              'presentation.'),
+                          value: isExtended,
+                          onChanged: (bool value) {
+                            setState(() {
+                              isExtended = value;
+                            });
+                          },
+                        ),
+                        widget.child ?? const SizedBox.shrink(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

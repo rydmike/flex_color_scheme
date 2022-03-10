@@ -194,8 +194,8 @@ abstract class ThemeService {
 
   /// Default value for the blendLevel, also used to reset settings.
   ///
-  /// Defaults to 15.
-  static const int defaultBlendLevel = 15;
+  /// Defaults to 20.
+  static const int defaultBlendLevel = 20;
 
   /// Loads used surface blend level setting in example 5.
   Future<int> blendLevel();
@@ -208,8 +208,8 @@ abstract class ThemeService {
 
   /// Default value for the blendLevelDark, also used to reset settings.
   ///
-  /// Defaults to 10.
-  static const int defaultBlendLevelDark = 10;
+  /// Defaults to 15.
+  static const int defaultBlendLevelDark = 15;
 
   /// Loads used surface blend level dark setting in example 5.
   Future<int> blendLevelDark();
