@@ -48,6 +48,7 @@ class SplashPageOne extends StatelessWidget {
         systemNavigationBarColor: isLight ? Colors.white : Colors.black,
         noAppBar: true,
         invertStatusIcons: invertStatusIcons,
+        useDivider: false,
       ),
       child: Scaffold(
         backgroundColor: isLight ? Colors.white : Colors.black,

@@ -896,4 +896,14 @@ class ThemeServiceMem implements ThemeService {
   /// Persists used textButtonBorderRadius setting.
   @override
   Future<void> saveTextButtonBorderRadius(double? value) async {}
+
+  //----
+
+  /// Loads used app bar opacity setting in example 5.
+  @override
+  Future<double> sysBarOpacity() async => ThemeService.defaultSysBarOpacity;
+
+  /// Persists the used app bar opacity setting in example 5.
+  @override
+  Future<void> saveSysBarOpacity(double value) async {}
 }

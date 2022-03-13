@@ -46,7 +46,7 @@ class _DemoAppState extends State<DemoApp> {
       // Same definition for the dark theme, but using FlexThemeData.dark().
       darkTheme: FlexThemeData.dark(
         scheme: usedScheme,
-        // Use a bit stronger themed app bar elevation in dark mode.
+        // Use a bit more themed elevated app bar in dark mode.
         appBarElevation: 2,
       ),
       // Use the above dark or light theme based on active themeMode.

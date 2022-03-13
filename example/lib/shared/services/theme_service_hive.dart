@@ -2503,4 +2503,29 @@ class ThemeServiceHive implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  // ----
+
+  /// Loads used app bar opacity setting in example 5.
+  @override
+  Future<double> sysBarOpacity() async {
+    try {
+      return _hiveBox.get(ThemeService.keySysBarOpacity,
+          defaultValue: ThemeService.defaultSysBarOpacity) as double;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSysBarOpacity;
+    }
+  }
+
+  /// Persists the used app bar opacity setting in example 5.
+  @override
+  Future<void> saveSysBarOpacity(double value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySysBarOpacity, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

@@ -34,7 +34,14 @@
 >    using copy-pasted theme setup code from the Themes Playground is also up-to-date.
 >
 > **Q:** Will there be significant changes from 5.0.0-dev.1 to 5.0.0?  
-> **A:** Most likely none, other than potential fixes.
+> **A:** Most likely none, other than potential fixes. Of course the point with a dev
+> release is also to let the API mature a bit and see if it needs to be tweaked a bit,
+> but I hope not. Some new colors for the M3 scheme might need to be adjusted
+> a bit still before release. I would even like to make minor changes to some 
+> original colors that has been in FlexColorScheme since v1, but since I said 
+> in th docs that I won't touch them ever. I will just have to accept that some 
+> of them are not perfect choices for ColorSchemes considering the way M3 
+> is designed to use its colors.
 > 
 > **Q:** What remains to be done before stable 5.0.0 release?  
 > **A:** Documentation, either in this readme or as own docs site. Plus adding many still missing tests.

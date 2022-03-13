@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.1 - March 10, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.1 - March 14, 2022 - WORK IN PROGRESS
 
 Version 5 is a big refactor with deprecation of previous `variant` based
 color names in favor of `container` ones that were added to updated M3
@@ -471,6 +471,18 @@ should be relatively easy, despite the long list of changes and new features.
   colors as **black**. These two cases were added as special considerations
   to return black color for these two particular cases, even if the Flutter 
   contrast color computation says it should be white, but M2 spec is black.
+
+**KNOWN ISSUES**
+
+* Due to Flutter SDK 
+  [issue #100027](https://github.com/flutter/flutter/issues/100027)
+  "Using systemNavigationBarDividerColor changes statusBarIconBrightness and 
+  systemNavigationBarIconBrightness on Android 11" a number of temporary
+  changes were made to `FlexColorScheme.themedSystemNavigationBar`. The
+  divider feature is disabled until the issue has been resolved. There is
+  also a temporary workaround implemented that attempts to keep system icon 
+  brightness getting the wrong brightness on Android 11, it may not always
+  work.
 
 **EXAMPLES and Themes Playground**
 * Update examples 1...4

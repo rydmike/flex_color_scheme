@@ -2492,4 +2492,29 @@ class ThemeServicePrefs implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  // ----
+
+  /// Loads used app bar opacity setting in example 5.
+  @override
+  Future<double> sysBarOpacity() async {
+    try {
+      final double value = _prefs.getDouble(ThemeService.keySysBarOpacity) ??
+          ThemeService.defaultSysBarOpacity;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultSysBarOpacity;
+    }
+  }
+
+  /// Persists the used app bar opacity setting in example 5.
+  @override
+  Future<void> saveSysBarOpacity(double value) async {
+    try {
+      await _prefs.setDouble(ThemeService.keySysBarOpacity, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

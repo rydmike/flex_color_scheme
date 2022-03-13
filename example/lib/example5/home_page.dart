@@ -111,11 +111,7 @@ class _HomePageState extends State<HomePage> {
         context,
         systemNavBarStyle: widget.controller.navBarStyle,
         useDivider: widget.controller.useNavDivider,
-        // In this demo app we are sharing the same setting as used on the
-        // bottom navigation bars opacity, just to not make another setting
-        // parameter. Normally you would probably hard code this to the
-        // desired design.
-        opacity: widget.controller.bottomNavigationBarOpacity,
+        opacity: widget.controller.sysBarOpacity,
       ),
       child: ResponsiveScaffold(
         extendBodyBehindAppBar: true,
