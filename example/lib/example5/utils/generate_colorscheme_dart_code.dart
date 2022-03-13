@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 // Function that returns the passed in Flutter ColorScheme object as Dart code
 String generateColorSchemeDartCode(ColorScheme scheme) {
+  final String schemeName = scheme.brightness == Brightness.light
+      ? 'flexSchemeLight'
+      : 'flexSchemeDark';
   final String code = '''
-const ColorScheme myFlexColorScheme = ColorScheme(
+const ColorScheme $schemeName = ColorScheme(
   brightness: ${scheme.brightness},
   primary: ${scheme.primary},
   onPrimary: ${scheme.onPrimary},

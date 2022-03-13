@@ -961,6 +961,10 @@ void main() {
   // SystemUiOverlayStyle to be used in an AnnotatedRegion.
   // The test uses null context and run as plain unit tests.
   //****************************************************************************
+
+  // TODO(rydmike): Divider color removed due to issue, put back when resolved.
+  // https://github.com/flutter/flutter/issues/100027
+  //
   group('FCS5: WITH FlexColorScheme.themedSystemNavigationBar ', () {
     debugDefaultTargetPlatformOverride = null;
 
@@ -971,6 +975,7 @@ void main() {
         FlexColorScheme.themedSystemNavigationBar(null),
         equals(
           const SystemUiOverlayStyle(
+              systemStatusBarContrastEnforced: false,
               systemNavigationBarColor: Colors.white,
               systemNavigationBarIconBrightness: Brightness.dark,
               systemNavigationBarContrastEnforced: false),
@@ -987,8 +992,9 @@ void main() {
         ),
         equals(
           const SystemUiOverlayStyle(
+            systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Colors.white,
-            systemNavigationBarDividerColor: Colors.white,
+            // systemNavigationBarDividerColor: Colors.white,
             systemNavigationBarIconBrightness: Brightness.dark,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1008,8 +1014,9 @@ void main() {
         ),
         equals(
           const SystemUiOverlayStyle(
+            systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Color(0xFFCCCCCC),
-            systemNavigationBarDividerColor: Color(0xFFDDDDDD),
+            // systemNavigationBarDividerColor: Color(0xFFDDDDDD),
             systemNavigationBarIconBrightness: Brightness.dark,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1027,8 +1034,9 @@ void main() {
         ),
         equals(
           const SystemUiOverlayStyle(
+            systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Colors.black,
-            systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+            // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
             systemNavigationBarIconBrightness: Brightness.light,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1046,8 +1054,9 @@ void main() {
         ),
         equals(
           const SystemUiOverlayStyle(
+            systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Colors.black,
-            systemNavigationBarDividerColor: Colors.black,
+            // systemNavigationBarDividerColor: Colors.black,
             systemNavigationBarIconBrightness: Brightness.light,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1067,8 +1076,9 @@ void main() {
         ),
         equals(
           const SystemUiOverlayStyle(
+            systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Color(0xFF202020),
-            systemNavigationBarDividerColor: Color(0xFF202020),
+            // systemNavigationBarDividerColor: Color(0xFF202020),
             systemNavigationBarIconBrightness: Brightness.light,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1089,8 +1099,9 @@ void main() {
         ),
         equals(
           const SystemUiOverlayStyle(
+            systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Color(0xFF202020),
-            systemNavigationBarDividerColor: Color(0xFF202020),
+            // systemNavigationBarDividerColor: Color(0xFF202020),
             systemNavigationBarIconBrightness: Brightness.light,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1132,8 +1143,9 @@ void main() {
           nullContextBackground: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF202020),
-          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1154,8 +1166,9 @@ void main() {
           nullContextBackground: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF4545F3),
-          systemNavigationBarDividerColor: Color(0xFF4545F3),
+          // systemNavigationBarDividerColor: Color(0xFF4545F3),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1174,8 +1187,9 @@ void main() {
           systemNavigationBarColor: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF202020),
-          systemNavigationBarDividerColor: Color(0xFF202020),
+          // systemNavigationBarDividerColor: Color(0xFF202020),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1194,8 +1208,9 @@ void main() {
           systemNavigationBarColor: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF202020),
-          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1217,8 +1232,9 @@ void main() {
           nullContextBackground: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF202020),
-          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1237,10 +1253,11 @@ void main() {
           systemNavigationBarColor: const Color(0xFF202020),
         ),
         SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: const Color(0x00202020).withOpacity(0),
           // Divider has opacity 0.8, when there is opacity on navbar.
-          systemNavigationBarDividerColor:
-              const Color(0xFF2C2C2C).withOpacity(0.8),
+          // systemNavigationBarDividerColor:
+          //     const Color(0xFF2C2C2C).withOpacity(0.8),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1261,10 +1278,11 @@ void main() {
           nullContextBackground: const Color(0xFF202020),
         ),
         SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: const Color(0x00202020).withOpacity(0.5),
           // Divider has opacity 0.8, when there is opacity on navbar.
-          systemNavigationBarDividerColor:
-              const Color(0xFF2C2C2C).withOpacity(0.8),
+          // systemNavigationBarDividerColor:
+          //     const Color(0xFF2C2C2C).withOpacity(0.8),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1283,10 +1301,11 @@ void main() {
           systemNavigationBarColor: const Color(0xFF202020),
         ),
         SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: const Color(0x00202020).withOpacity(0),
           // Divider has opacity 0.8, when there is opacity on navbar.
-          systemNavigationBarDividerColor:
-              const Color(0xFF2C2C2C).withOpacity(0.8),
+          // systemNavigationBarDividerColor:
+          //     const Color(0xFF2C2C2C).withOpacity(0.8),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1305,11 +1324,12 @@ void main() {
           nullContextBrightness: Brightness.dark,
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           statusBarColor: Colors.transparent,
           statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarColor: Colors.black,
-          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1320,7 +1340,7 @@ void main() {
         'FCS5.11: GIVEN Brightness.dark divider:true noAppBar: true and '
         'invertStatusIcons: true '
         'EXPECT black system navbar, with divider and transparent status bar '
-        'and black (invisible) status icons.', () {
+        'and black (invisible) system icons.', () {
       expect(
         FlexColorScheme.themedSystemNavigationBar(
           null,
@@ -1330,12 +1350,13 @@ void main() {
           nullContextBrightness: Brightness.dark,
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           statusBarColor: Colors.transparent,
           statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: Colors.black,
-          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
-          systemNavigationBarIconBrightness: Brightness.light,
+          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
         ),
       );
@@ -1353,11 +1374,12 @@ void main() {
           nullContextBrightness: Brightness.light,
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           statusBarColor: Colors.transparent,
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: Colors.white,
-          systemNavigationBarDividerColor: Colors.white,
+          // systemNavigationBarDividerColor: Colors.white,
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1378,12 +1400,13 @@ void main() {
           nullContextBrightness: Brightness.light,
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           statusBarColor: Colors.transparent,
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarColor: Colors.white,
-          systemNavigationBarDividerColor: Colors.white,
-          systemNavigationBarIconBrightness: Brightness.dark,
+          // systemNavigationBarDividerColor: Colors.white,
+          systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
       );
@@ -1406,11 +1429,12 @@ void main() {
           nullContextBrightness: Brightness.light,
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           statusBarColor: Colors.transparent,
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: Color(0xFFF44336),
-          systemNavigationBarDividerColor: Color(0xFFF44336),
+          // systemNavigationBarDividerColor: Color(0xFFF44336),
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1436,13 +1460,14 @@ void main() {
           nullContextBrightness: Brightness.light,
         ),
         SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           statusBarColor: Colors.transparent,
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFFF44336).withOpacity(0.5),
           // Divider has opacity 0.8, when there is opacity on navbar.
-          systemNavigationBarDividerColor:
-              const Color(0xFF2196F3).withOpacity(0.8),
+          // systemNavigationBarDividerColor:
+          //     const Color(0xFF2196F3).withOpacity(0.8),
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1466,10 +1491,11 @@ void main() {
           nullContextBrightness: Brightness.light,
         ),
         const SystemUiOverlayStyle(
+          systemStatusBarContrastEnforced: false,
           statusBarColor: Colors.transparent,
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarDividerColor: Color(0xFF2196F3),
+          // systemNavigationBarDividerColor: Color(0xFF2196F3),
           systemNavigationBarColor: Color(0xFFF44336),
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
@@ -1484,6 +1510,9 @@ void main() {
   // SystemUiOverlayStyle to be used in an AnnotatedRegion, when it is used
   // as a Widget, with a BuildContext and a Theme present.
   //****************************************************************************
+  // TODO(rydmike): Divider color removed due to issue, put back when resolved.
+  // https://github.com/flutter/flutter/issues/100027
+  //
   group('FCS6: WITH FlexColorScheme.themedSystemNavigationBar ', () {
     debugDefaultTargetPlatformOverride = null;
 
@@ -1511,6 +1540,7 @@ void main() {
                   systemNavBarStyle: FlexSystemNavBarStyle.system,
                 ),
                 const SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor: Colors.white,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
@@ -1549,8 +1579,9 @@ void main() {
                   useDivider: false,
                 ),
                 const SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor: Colors.white,
-                  systemNavigationBarDividerColor: Colors.white,
+                  // systemNavigationBarDividerColor: Colors.white,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1587,6 +1618,7 @@ void main() {
                   systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.dark,
@@ -1626,10 +1658,11 @@ void main() {
                   useDivider: false,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
-                  systemNavigationBarDividerColor:
-                      Theme.of(context).scaffoldBackgroundColor,
+                  // systemNavigationBarDividerColor:
+                  //     Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1666,6 +1699,7 @@ void main() {
                   systemNavBarStyle: FlexSystemNavBarStyle.surface,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.dark,
@@ -1705,10 +1739,11 @@ void main() {
                   useDivider: false,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
-                  systemNavigationBarDividerColor:
-                      Theme.of(context).colorScheme.surface,
+                  // systemNavigationBarDividerColor:
+                  //     Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1745,6 +1780,7 @@ void main() {
                   systemNavBarStyle: FlexSystemNavBarStyle.background,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
                   systemNavigationBarIconBrightness: Brightness.dark,
@@ -1784,10 +1820,11 @@ void main() {
                   useDivider: false,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
-                  systemNavigationBarDividerColor:
-                      Theme.of(context).colorScheme.background,
+                  // systemNavigationBarDividerColor:
+                  //     Theme.of(context).colorScheme.background,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1825,9 +1862,10 @@ void main() {
                   useDivider: true,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
-                  systemNavigationBarDividerColor: const Color(0xFFDDDDDD),
+                  // systemNavigationBarDividerColor: const Color(0xFFDDDDDD),
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1866,11 +1904,12 @@ void main() {
                   opacity: 0.5,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
                   // Divider has opacity 0.8, when there is opacity on navbar.
-                  systemNavigationBarDividerColor:
-                      const Color(0xFFDDDDDD).withOpacity(0.8),
+                  // systemNavigationBarDividerColor:
+                  //     const Color(0xFFDDDDDD).withOpacity(0.8),
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1909,10 +1948,11 @@ void main() {
                   opacity: 0.5,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                  systemNavigationBarDividerColor:
-                      Theme.of(context).colorScheme.surface.withOpacity(0.5),
+                  // systemNavigationBarDividerColor:
+                  //     Theme.of(context).colorScheme.surface.withOpacity(0.5),
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1951,12 +1991,13 @@ void main() {
                   opacity: 0.5,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor: Theme.of(context)
                       .scaffoldBackgroundColor
-                      .withOpacity(0.01),
-                  systemNavigationBarDividerColor: Theme.of(context)
-                      .scaffoldBackgroundColor
-                      .withOpacity(0.01),
+                      .withOpacity(0.0),
+                  // systemNavigationBarDividerColor: Theme.of(context)
+                  //     .scaffoldBackgroundColor
+                  //     .withOpacity(0.01),
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1995,6 +2036,7 @@ void main() {
                   systemNavBarStyle: FlexSystemNavBarStyle.system,
                 ),
                 const SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor: Colors.black,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
@@ -2033,8 +2075,9 @@ void main() {
                   useDivider: false,
                 ),
                 const SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor: Colors.black,
-                  systemNavigationBarDividerColor: Colors.black,
+                  // systemNavigationBarDividerColor: Colors.black,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2071,6 +2114,7 @@ void main() {
                   systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.light,
@@ -2110,10 +2154,11 @@ void main() {
                   useDivider: false,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
-                  systemNavigationBarDividerColor:
-                      Theme.of(context).scaffoldBackgroundColor,
+                  // systemNavigationBarDividerColor:
+                  //     Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2150,6 +2195,7 @@ void main() {
                   systemNavBarStyle: FlexSystemNavBarStyle.surface,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.light,
@@ -2189,10 +2235,11 @@ void main() {
                   useDivider: false,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
-                  systemNavigationBarDividerColor:
-                      Theme.of(context).colorScheme.surface,
+                  // systemNavigationBarDividerColor:
+                  //     Theme.of(context).colorScheme.surface,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2229,6 +2276,7 @@ void main() {
                   systemNavBarStyle: FlexSystemNavBarStyle.background,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
                   systemNavigationBarIconBrightness: Brightness.light,
@@ -2268,10 +2316,11 @@ void main() {
                   useDivider: false,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
-                  systemNavigationBarDividerColor:
-                      Theme.of(context).colorScheme.background,
+                  // systemNavigationBarDividerColor:
+                  //     Theme.of(context).colorScheme.background,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2309,9 +2358,10 @@ void main() {
                   useDivider: true,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
-                  systemNavigationBarDividerColor: const Color(0xFF2C2C2C),
+                  // systemNavigationBarDividerColor: const Color(0xFF2C2C2C),
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2350,11 +2400,12 @@ void main() {
                   opacity: 0.5,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
                   // Divider has opacity 0.8, when there is opacity on navbar.
-                  systemNavigationBarDividerColor:
-                      const Color(0xFF2C2C2C).withOpacity(0.8),
+                  // systemNavigationBarDividerColor:
+                  //     const Color(0xFF2C2C2C).withOpacity(0.8),
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2393,10 +2444,11 @@ void main() {
                   opacity: 0.5,
                 ),
                 SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                  systemNavigationBarDividerColor:
-                      Theme.of(context).colorScheme.surface.withOpacity(0.5),
+                  // systemNavigationBarDividerColor:
+                  //     Theme.of(context).colorScheme.surface.withOpacity(0.5),
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2435,12 +2487,12 @@ void main() {
                   opacity: 0.5,
                 ),
                 SystemUiOverlayStyle(
-                  systemNavigationBarColor: Theme.of(context)
-                      .scaffoldBackgroundColor
-                      .withOpacity(0.01),
-                  systemNavigationBarDividerColor: Theme.of(context)
-                      .scaffoldBackgroundColor
-                      .withOpacity(0.01),
+                  systemStatusBarContrastEnforced: false,
+                  systemNavigationBarColor:
+                      Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+                  // systemNavigationBarDividerColor: Theme.of(context)
+                  //     .scaffoldBackgroundColor
+                  //     .withOpacity(0.01),
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),

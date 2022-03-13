@@ -57,7 +57,6 @@ class _HomePageState extends State<HomePage> {
         context,
         systemNavBarStyle: FlexSystemNavBarStyle.transparent,
         useDivider: false,
-        opacity: 0.62,
       ),
       child: ResponsiveScaffold(
         title: Text(AppData.title(context)),
@@ -77,7 +76,7 @@ class _HomePageState extends State<HomePage> {
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
-          if (index == 9) {
+          if (index == 5) {
             if (isDark) {
               widget.onThemeModeChanged(ThemeMode.light);
             } else {
@@ -129,9 +128,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

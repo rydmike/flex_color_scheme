@@ -62,7 +62,7 @@ class SubPages extends StatelessWidget {
             ),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              SplashPageTwo.show(context, true);
+              SplashPageTwo.show(context);
             },
           ),
         ],

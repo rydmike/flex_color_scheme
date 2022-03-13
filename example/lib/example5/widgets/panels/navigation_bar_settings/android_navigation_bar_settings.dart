@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/header_card.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import 'system_nav_bar_style_buttons.dart';
 
 // Panel used to control the themed Android system navigation bar on Android.
@@ -46,10 +45,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
-    final double navBarOpacity =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.bottomNavigationBarOpacity
-            : 1;
+    final double navBarOpacity = controller.sysBarOpacity;
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
@@ -59,30 +55,24 @@ class AndroidNavigationBarSettings extends StatelessWidget {
           const SizedBox(height: 8),
           const ListTile(
             title: Text('Themed Android system navigation bar'),
-            subtitle: Text('This feature is only visible if you '
+            subtitle: Text('This feature only has any effect if you '
                 'build this application for an Android device. It '
                 'demonstrates the usage of the AnnotatedRegion helper '
-                'FlexColorScheme.themedSystemNavigationBar.'),
+                'FlexColorScheme themedSystemNavigationBar.'),
+          ),
+          const ListTile(
+            title: Text('Background opacity'),
+            subtitle: Text('System navigation bar opacity'),
           ),
           ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            title: const Text('Background opacity'),
-            subtitle: const Text('Shared setting in this app, but APIs have '
-                'own properties'),
-          ),
-          ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: Slider.adaptive(
               max: 100,
               divisions: 100,
               label: (navBarOpacity * 100).toStringAsFixed(0),
               value: navBarOpacity * 100,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? (double value) {
-                          controller.setBottomNavigationBarOpacity(value / 100);
-                        }
-                      : null,
+              onChanged: (double value) {
+                controller.setSysBarOpacity(value / 100);
+              },
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
@@ -108,7 +98,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
           const SizedBox(height: 8),
           ListTile(
             title: const Text('Android system navigation bar style'),
-            subtitle: Text('Using FlexColorScheme.themedSystemNavigationBar.\n'
+            subtitle: Text('Using themedSystemNavigationBar\n'
                 '${explainStyle(controller.navBarStyle, isLight)}'),
           ),
           ListTile(
@@ -117,14 +107,19 @@ class AndroidNavigationBarSettings extends StatelessWidget {
               onChanged: controller.setNavBarStyle,
             ),
           ),
-          SwitchListTileAdaptive(
-            title: const Text('Android navigation bar divider'),
-            subtitle: const Text('There is also an extra system built-in scrim '
-                'on the nav bar when it is enabled. Recommend not enabling it '
-                'if using opacity or fully transparent version.'),
-            value: controller.useNavDivider,
-            onChanged: controller.setUseNavDivider,
-          ),
+          // TODO(rydmike): Put back when issue #100027 is resolved.
+          // This switch is removed from demo until issue:
+          // https://github.com/flutter/flutter/issues/100027
+          // Has been resolved and landed in Flutter stable.
+          //
+          // SwitchListTileAdaptive(
+          //   title: const Text('Android navigation bar divider'),
+          //   subtitle: const Text('There is also an extra system built-in scrim '
+          //       'on the nav bar when it is enabled. Recommend not enabling it '
+          //       'if using opacity or fully transparent version.'),
+          //   value: controller.useNavDivider,
+          //   onChanged: controller.setUseNavDivider,
+          // ),
         ],
       ),
     );

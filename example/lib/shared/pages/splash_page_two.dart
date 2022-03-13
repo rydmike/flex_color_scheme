@@ -10,18 +10,13 @@ class SplashPageTwo extends StatefulWidget {
   /// Default const constructor.
   const SplashPageTwo({
     Key? key,
-    this.invertStatusIcons = false,
   }) : super(key: key);
 
-  final bool invertStatusIcons;
-
   /// A static convenience function show this screen.
-  static Future<void> show(
-      BuildContext context, bool invisibleStatusIcons) async {
+  static Future<void> show(BuildContext context) async {
     await Navigator.of(context).push(
       MaterialPageRoute<Widget>(
-        builder: (BuildContext context) =>
-            SplashPageTwo(invertStatusIcons: invisibleStatusIcons),
+        builder: (BuildContext context) => const SplashPageTwo(),
       ),
     );
   }

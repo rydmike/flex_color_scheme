@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,83 +29,92 @@ class _DemoAppState extends State<DemoApp> {
   // ignore: unused_field
   late final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 
+  // To try try this app with the Flutter SDK default theme and default
+  // Material Design 2 color scheme, uncomment the theme setup below
+  // and comment the copy-pasted themes further below,
+  //
+  // theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
+  //   typography: Typography.material2018(platform: defaultTargetPlatform),
+  // ),
+  // darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
+  //   typography: Typography.material2018(platform: defaultTargetPlatform),
+  // ),
+
+  // If you want to use ThemeData.from a ColorScheme based on a ColorScheme
+  // from FlexColorScheme, then comment the other two theme setups and
+  // uncomment the theme setup below, and copy-paste the generated
+  // ColorScheme code from the Themes Playground app at
+  // https://rydmike.com/flexcolorscheme/themesplayground-v5
+  // over the const ColorSchemes further below, with a copy-pasted scheme.
+  // This will give you the same colors as with FlexColorScheme, but no
+  // other theme customizations FlexColorScheme does when it creates
+  // its ThemeData with FlexColorScheme.toTheme or using its
+  // FlexThemeData extensions.
+  //
+  // theme: ThemeData.from(colorScheme: flexSchemeLight).copyWith(
+  //   typography: Typography.material2018(platform: defaultTargetPlatform),
+  // ),
+  // darkTheme: ThemeData.from(colorScheme: flexSchemeDark).copyWith(
+  //   typography: Typography.material2018(platform: defaultTargetPlatform),
+  // ),
+
+  // Delete/comment the theme below and try the standard one above, or
+  // copy-paste new setup code from the Themes Playground app at
+  // https://rydmike.com/flexcolorscheme/themesplayground-v5
+  // over the theme below, to try a new copy-pasted theme.
+  //
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: FlexThemeData.light(
+        scheme: FlexScheme.flutterDash,
+        surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+        blendLevel: 12,
+        appBarStyle: FlexAppBarStyle.background,
+        appBarOpacity: 0.95,
+        appBarElevation: 0.5,
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(
+          blendOnLevel: 25,
+          defaultRadius: 12.0,
+          unselectedToggleIsColored: true,
+          inputDecoratorSchemeColor: SchemeColor.secondary,
+          inputDecoratorUnfocusedHasBorder: false,
+          popupMenuOpacity: 0.95,
+          bottomNavigationBarOpacity: 0.95,
+          navigationBarOpacity: 0.95,
+          navigationRailOpacity: 0.95,
+        ),
+        useMaterial3ErrorColors: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        fontFamily: GoogleFonts.notoSans().fontFamily,
+      ),
+      darkTheme: FlexThemeData.dark(
+        scheme: FlexScheme.flutterDash,
+        surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+        blendLevel: 12,
+        appBarStyle: FlexAppBarStyle.background,
+        appBarOpacity: 0.95,
+        appBarElevation: 0.5,
+        useSubThemes: true,
+        subThemesData: const FlexSubThemesData(
+          blendOnLevel: 30,
+          defaultRadius: 12.0,
+          unselectedToggleIsColored: true,
+          inputDecoratorSchemeColor: SchemeColor.secondary,
+          inputDecoratorUnfocusedHasBorder: false,
+          popupMenuOpacity: 0.95,
+          bottomNavigationBarOpacity: 0.95,
+          navigationBarOpacity: 0.95,
+          navigationRailOpacity: 0.95,
+        ),
+        useMaterial3ErrorColors: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        fontFamily: GoogleFonts.notoSans().fontFamily,
+      ),
       debugShowCheckedModeBanner: false,
       title: 'Copy Playground Theme',
-      // Uncomment the theme setup below and comment the copy-pasted
-      // theme further below, if you want to try this app with a Flutter SDK
-      // default theme, with the Material 2 default color scheme.
-
-      // theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-      //   typography: Typography.material2018(platform: defaultTargetPlatform),
-      // ),
-      // darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-      //   typography: Typography.material2018(platform: defaultTargetPlatform),
-      // ),
-
-      // If you want to use ThemeData.from a ColorScheme based on a ColorScheme
-      // from FlexColorScheme, then comment the other two theme setups and
-      // uncomment the theme setup below, and copy-paste the generated
-      // ColorScheme setup code from the Themes Playground app at
-      // https://rydmike.com/flexcolorscheme/themesplayground-v5
-      // over the ColorScheme, to try a new copy-pasted ColorScheme.
-      // This will give you the same colors, but no other Theme behavior
-      // improvements FlexColorScheme does when it creates its THemeDaya with
-      // FlexColorScheme.toTheme or using extension FlexThemeData
-
-      // TODO(rydmike): Add Copy-Paste template for ColorScheme.
-
-      theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-        typography: Typography.material2018(platform: defaultTargetPlatform),
-      ),
-      darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-        typography: Typography.material2018(platform: defaultTargetPlatform),
-      ),
-
-      // Delete/comment the theme below and try the standard one above, or
-      // copy-paste new setup code from the Themes Playground app at
-      // https://rydmike.com/flexcolorscheme/themesplayground-v5
-      // over the theme below, to try a new copy-pasted theme.
-
-      // theme: FlexThemeData.light(
-      //   scheme: FlexScheme.flutterDash,
-      //   surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-      //   blendLevel: 12,
-      //   appBarOpacity: 0.95,
-      //   appBarElevation: 0.5,
-      //   tooltipsMatchBackground: true,
-      //   useSubThemes: true,
-      //   subThemesData: const FlexSubThemesData(
-      //     blendOnLevel: 20,
-      //     blendOnColors: false,
-      //     unselectedToggleIsColored: true,
-      //     popupMenuOpacity: 0.95,
-      //   ),
-      //   useMaterial3ErrorColors: true,
-      //   visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      //   fontFamily: GoogleFonts.notoSans().fontFamily,
-      // ),
-      // darkTheme: FlexThemeData.dark(
-      //   scheme: FlexScheme.flutterDash,
-      //   surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-      //   blendLevel: 12,
-      //   appBarStyle: FlexAppBarStyle.background,
-      //   appBarOpacity: 0.95,
-      //   appBarElevation: 0.5,
-      //   tooltipsMatchBackground: true,
-      //   useSubThemes: true,
-      //   subThemesData: const FlexSubThemesData(
-      //     blendOnLevel: 30,
-      //     unselectedToggleIsColored: true,
-      //     popupMenuOpacity: 0.95,
-      //   ),
-      //   useMaterial3ErrorColors: true,
-      //   visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      //   fontFamily: GoogleFonts.notoSans().fontFamily,
-      // ),
-
       // ThemeMode toggle via callback
       themeMode: themeMode,
       home: HomePage(
@@ -119,33 +129,75 @@ class _DemoAppState extends State<DemoApp> {
   }
 }
 
-const ColorScheme myFlexColorScheme = ColorScheme(
+// Copy-paste the code for a light ColorScheme you want from from the
+// Themes Playground here and try it with plain vanilla
+// ThemeData.from(colorScheme: flexSchemeLight) light by uncommenting
+// that section above.
+const ColorScheme flexSchemeLight = ColorScheme(
   brightness: Brightness.light,
   primary: Color(0xff00497c),
-  onPrimary: Color(0xffffffff),
-  primaryContainer: Color(0xffcfe4ff),
+  onPrimary: Color(0xffe8f1ff),
+  primaryContainer: Color(0xff9acaff),
   onPrimaryContainer: Color(0xff001d36),
   secondary: Color(0xff4f599d),
-  onSecondary: Color(0xffffffff),
-  secondaryContainer: Color(0xffdde0ff),
+  onSecondary: Color(0xffefefff),
+  secondaryContainer: Color(0xffbac3ff),
   onSecondaryContainer: Color(0xff041157),
   tertiary: Color(0xff6c5b51),
-  onTertiary: Color(0xffffffff),
-  tertiaryContainer: Color(0xfff5ded1),
+  onTertiary: Color(0xffffede2),
+  tertiaryContainer: Color(0xffd8c2b6),
   onTertiaryContainer: Color(0xff251911),
   error: Color(0xffba1b1b),
-  onError: Color(0xffffffff),
-  errorContainer: Color(0xffffdad4),
+  onError: Color(0xffffede9),
+  errorContainer: Color(0xffffb4a9),
   onErrorContainer: Color(0xff410001),
-  outline: Color(0xff73777f),
-  background: Color(0xfff6f7fb),
-  onBackground: Color(0xff1a1c1e),
-  surface: Color(0xfffaf9fd),
-  onSurface: Color(0xff1a1c1e),
-  surfaceVariant: Color(0xffdce1ea),
-  onSurfaceVariant: Color(0xff42474e),
-  inverseSurface: Color(0xff2e3033),
-  onInverseSurface: Color(0xfff1f0f4),
+  outline: Color(0xff6b7889),
+  background: Color(0xffcdd6e3),
+  onBackground: Color(0xff171c22),
+  surface: Color(0xffe3eaf5),
+  onSurface: Color(0xff171c22),
+  surfaceVariant: Color(0xffb2c3d7),
+  onSurfaceVariant: Color(0xff243140),
+  inverseSurface: Color(0xff3f474f),
+  onInverseSurface: Color(0xffedf1fa),
   inversePrimary: Color(0xff9acaff),
+  shadow: Color(0xff000000),
+);
+
+// Copy-paste the code for a dark ColorScheme you want from from the
+// Themes Playground here and try it with plain vanilla
+// ThemeData.from(colorScheme: flexSchemeLight) light by uncommenting
+// that section above.
+// Normally it would be the matching pair to the light one, but it does not
+// have to be. Same applies to when you use FlexColorScheme to make your
+// ThemeData.
+const ColorScheme flexSchemeDark = ColorScheme(
+  brightness: Brightness.dark,
+  primary: Color(0xff9acaff),
+  onPrimary: Color(0xff001d36),
+  primaryContainer: Color(0xff0061a2),
+  onPrimaryContainer: Color(0xffcfe4ff),
+  secondary: Color(0xffbac3ff),
+  onSecondary: Color(0xff041157),
+  secondaryContainer: Color(0xff4f599d),
+  onSecondaryContainer: Color(0xffdde0ff),
+  tertiary: Color(0xffd8c2b6),
+  onTertiary: Color(0xff251911),
+  tertiaryContainer: Color(0xff6c5b51),
+  onTertiaryContainer: Color(0xfff5ded1),
+  error: Color(0xffffb4a9),
+  onError: Color(0xff680003),
+  errorContainer: Color(0xff930006),
+  onErrorContainer: Color(0xffffdad4),
+  outline: Color(0xff8492a4),
+  background: Color(0xff323a42),
+  onBackground: Color(0xffdfe3ec),
+  surface: Color(0xff1a2028),
+  onSurface: Color(0xffc3c7cf),
+  surfaceVariant: Color(0xff536173),
+  onSurfaceVariant: Color(0xffd6e4f7),
+  inverseSurface: Color(0xffeaeffa),
+  onInverseSurface: Color(0xff42474e),
+  inversePrimary: Color(0xff0061a2),
   shadow: Color(0xff000000),
 );

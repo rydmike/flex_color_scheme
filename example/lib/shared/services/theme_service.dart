@@ -1295,4 +1295,18 @@ abstract class ThemeService {
 
   /// Persists used textButtonBorderRadius setting.
   Future<void> saveTextButtonBorderRadius(double? value);
+
+  // ---------
+
+  /// Key used to read and save the sysBarOpacity value.
+  static const String keySysBarOpacity = 'sysBarOpacity';
+
+  /// Default value for the sysBarOpacity, also used to reset settings.
+  static const double defaultSysBarOpacity = 1.0;
+
+  /// Loads used app bar opacity setting in example 5.
+  Future<double> sysBarOpacity();
+
+  /// Persists the used app bar opacity setting in example 5.
+  Future<void> saveSysBarOpacity(double value);
 }

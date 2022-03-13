@@ -109,8 +109,6 @@ class ColorSchemeBox extends StatelessWidget {
   final Color color;
   final Size size;
 
-  // =
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(

@@ -143,6 +143,7 @@ class ThemeController with ChangeNotifier {
     _outlinedButtonBorderRadius =
         await _themeService.outlinedButtonBorderRadius();
     _textButtonBorderRadius = await _themeService.textButtonBorderRadius();
+    _sysBarOpacity = await _themeService.sysBarOpacity();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
     _platform = defaultTargetPlatform;
@@ -292,6 +293,7 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultOutlinedButtonBorderRadius, false);
     await setTextButtonBorderRadius(
         ThemeService.defaultTextButtonBorderRadius, false);
+    await setSysBarOpacity(ThemeService.defaultSysBarOpacity, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
@@ -1361,5 +1363,15 @@ class ThemeController with ChangeNotifier {
     _textButtonBorderRadius = value;
     if (notify) notifyListeners();
     await _themeService.saveTextButtonBorderRadius(value);
+  }
+
+  late double _sysBarOpacity;
+  double get sysBarOpacity => _sysBarOpacity;
+  Future<void> setSysBarOpacity(double? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _sysBarOpacity) return;
+    _sysBarOpacity = value;
+    if (notify) notifyListeners();
+    await _themeService.saveSysBarOpacity(value);
   }
 }
