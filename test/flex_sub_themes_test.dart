@@ -11,6 +11,9 @@ void main() {
   // ThemeData when matching ons, matching with FlexSubTheme defaults.
   //****************************************************************************
   group('FST1: WITH FlexSubTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes BottomSheet tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.01: GIVEN a default FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
@@ -56,7 +59,9 @@ void main() {
         ),
       );
     });
-
+    // -------------------------------------------------------------------------
+    // FlexSubThemes BottomNavigationBar tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.02: GIVEN a default FlexSubTheme.bottomNavigationBar() '
         'EXPECT equal to BottomNavigationBarThemeData() version '
@@ -129,7 +134,9 @@ void main() {
         ),
       );
     });
-
+    // -------------------------------------------------------------------------
+    // FlexSubThemes SnackBar tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.03: GIVEN a default FlexSubTheme.snackBarTheme() '
         'EXPECT equal to SnackBarThemeData() version '
@@ -158,7 +165,9 @@ void main() {
         ),
       );
     });
-
+    // -------------------------------------------------------------------------
+    // FlexSubThemes Card tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.04: GIVEN a default FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
@@ -199,6 +208,9 @@ void main() {
         ),
       );
     });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes Dialog tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.05: GIVEN a default FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
@@ -236,6 +248,9 @@ void main() {
         ),
       );
     });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes PopupMenu tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.06: GIVEN a default FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
@@ -273,6 +288,9 @@ void main() {
         ),
       );
     });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes TimePicker tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.07: GIVEN a default FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
@@ -303,6 +321,9 @@ void main() {
         ),
       );
     });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes InputDecorator tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.08a: GIVEN a default FlexSubTheme.inputDecorationTheme() '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
@@ -375,6 +396,28 @@ void main() {
           ),
         ),
       );
+    });
+    test('FST1.08a-states: Does Decorator have right material states', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+
+      // // Disabled foreground
+      // expect(
+      //   FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme)
+      //       .floatingLabelStyle!
+      //       .resolveWith(<MaterialStateTextStyle>{MaterialState.disabled}),
+      //   equals(colorScheme.primary
+      //       .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+      //       .withAlpha(kDisabledForegroundAlpha)),
+      // );
+      // expect(
+      //   FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
+      //       .style!
+      //       .foregroundColor!
+      //       .resolve(<MaterialState>{MaterialState.selected}),
+      //   equals(colorScheme.onPrimary),
+      // );
+
+      //
     });
     test(
         'FST1.08b: GIVEN a default '
@@ -471,12 +514,9 @@ void main() {
         ),
       );
     });
-    // TODO(rydmike): Figure out why this test fails with object equals!
-    // If we run this test with just equals on the two objects, it fails!
-    // but with this toString comparison and ignoring hashcodes, it works!
-    // Why?
-    // Applies to: tests: FST1.06, FST1.07, FST1.08, all using ButtonStyle.
-    // Same happens if we compare the ButtonStyle object directly too.
+    // -------------------------------------------------------------------------
+    // FlexSubThemes ElevatedButton tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.09: GIVEN a default FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
@@ -1435,6 +1475,580 @@ void main() {
         navBarTheme.labelTextStyle!.resolve(<MaterialState>{})?.color,
         equals(
           colorScheme.onSurface,
+        ),
+      );
+    });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes Switch tests
+    // -------------------------------------------------------------------------
+    test(
+        'FST1.19-light: GIVEN a light default FlexSubTheme.switchTheme() '
+        'EXPECT equal to SwitchThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          SwitchThemeData(
+            thumbColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade400;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.secondary;
+                }
+                return Colors.grey.shade50;
+              },
+            ),
+            trackColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.black12;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.secondary.withAlpha(0x70);
+                }
+                // Opinionated color on track when not selected
+                return colorScheme.secondary.withAlpha(0x30);
+              },
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test('FST1.19-light-states: Does Switch have right material states', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      // Disabled colors
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .thumbColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade400),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.black12),
+      );
+      // Selected background
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .thumbColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary.withAlpha(0x70)),
+      );
+      // Default states
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .thumbColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.grey.shade50),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .trackColor!
+            .resolve(<MaterialState>{}),
+        equals(colorScheme.secondary.withAlpha(0x30)),
+      );
+      // Default state for trackColor when unselectedIsColored, is false
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: false,
+        ).trackColor!.resolve(<MaterialState>{}),
+        equals(const Color(0x52000000)),
+      );
+    });
+
+    test(
+        'FST1.19-dark: GIVEN a dark default FlexSubTheme.switchTheme() '
+        'EXPECT equal to SwitchThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          SwitchThemeData(
+            thumbColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade800;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.secondary;
+                }
+                return Colors.grey.shade400;
+              },
+            ),
+            trackColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.white10;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.secondary.withAlpha(0x70);
+                }
+                // Opinionated color on track when not selected
+                return colorScheme.secondary.withAlpha(0x25);
+              },
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test('FST1.19-dark-states: Does Switch have right material states', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      // Disabled colors
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .thumbColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade800),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.white10),
+      );
+      // Selected background
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .thumbColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary.withAlpha(0x70)),
+      );
+      // Default states
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .thumbColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.grey.shade400),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .trackColor!
+            .resolve(<MaterialState>{}),
+        equals(colorScheme.secondary.withAlpha(0x25)),
+      );
+      // Default state for trackColor when unselectedIsColored, is false
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: false,
+        ).trackColor!.resolve(<MaterialState>{}),
+        equals(Colors.white30),
+      );
+    });
+    test(
+        'FST1.19-custom-light: GIVEN a light custom FlexSubTheme.switchTheme() '
+        'EXPECT equal to SwitchThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          splashRadius: 30,
+          unselectedIsColored: true,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          SwitchThemeData(
+            splashRadius: 30,
+            thumbColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade400;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.tertiary;
+                }
+                return Colors.grey.shade50;
+              },
+            ),
+            trackColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.black12;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.tertiary.withAlpha(0x70);
+                }
+                // Opinionated color on track when not selected
+                return colorScheme.tertiary.withAlpha(0x30);
+              },
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes CheckBox tests
+    // -------------------------------------------------------------------------
+    test(
+        'FST1.20-light: GIVEN a light default FlexSubTheme.checkboxTheme() '
+        'EXPECT equal to CheckboxThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          CheckboxThemeData(
+            checkColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade200;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.onSecondary;
+                }
+                return Colors.grey.shade50;
+              },
+            ),
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade400;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.secondary;
+                }
+                // Opinionated color on track when not selected
+                return colorScheme.secondary.withAlpha(0xDD);
+              },
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test('FST1.20-light-states: Does CheckBox have right material states', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      // Disabled colors
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .checkColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade200),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade400),
+      );
+      // Selected background
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .checkColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.onSecondary),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary),
+      );
+      // Default states
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .checkColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.grey.shade50),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{}),
+        equals(colorScheme.secondary.withAlpha(0xDD)),
+      );
+      // Default state for trackColor when unselectedIsColored, is false
+      expect(
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: false,
+        ).fillColor!.resolve(<MaterialState>{}),
+        equals(Colors.black54),
+      );
+    });
+
+    test(
+        'FST1.20-dark: GIVEN a dark default FlexSubTheme.checkboxTheme() '
+        'EXPECT equal to CheckboxThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          CheckboxThemeData(
+            checkColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade600;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.onSecondary;
+                }
+                return Colors.grey.shade400;
+              },
+            ),
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade800;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.secondary;
+                }
+                // Opinionated color on track when not selected
+                return colorScheme.secondary.withAlpha(0xDD);
+              },
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test('FST1.20-dark-states: Does CheckBox have right material states', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      // Disabled colors
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .checkColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade600),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade800),
+      );
+      // Selected background
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .checkColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.onSecondary),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary),
+      );
+      // Default states
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .checkColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.grey.shade400),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{}),
+        equals(colorScheme.secondary.withAlpha(0xDD)),
+      );
+      // Default state for trackColor when unselectedIsColored, is false
+      expect(
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: false,
+        ).fillColor!.resolve(<MaterialState>{}),
+        equals(Colors.white70),
+      );
+    });
+    test(
+        'FST1.20-custom-light: GIVEN a light custom FlexSubTheme.checkboxTheme '
+        'EXPECT equal to CheckboxThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          splashRadius: 30,
+          unselectedIsColored: false,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          CheckboxThemeData(
+            splashRadius: 30,
+            checkColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade200;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.onTertiary;
+                }
+                return Colors.grey.shade50;
+              },
+            ),
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade400;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.tertiary;
+                }
+                return Colors.black54;
+              },
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes CheckBox tests
+    // -------------------------------------------------------------------------
+    test(
+        'FST1.21-light: GIVEN a light default FlexSubTheme.radioTheme() '
+        'EXPECT equal to RadioThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.radioTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          RadioThemeData(
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade400;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.secondary;
+                }
+                // Opinionated color on track when not selected
+                return colorScheme.secondary.withAlpha(0xDD);
+              },
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test('FST1.21-light-states: Does CheckBox have right material states', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      // Disabled colors
+      expect(
+        FlexSubThemes.radioTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade400),
+      );
+      // Selected radio fill
+      expect(
+        FlexSubThemes.radioTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary),
+      );
+      // Default states
+      expect(
+        FlexSubThemes.radioTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{}),
+        equals(colorScheme.secondary.withAlpha(0xDD)),
+      );
+      // Default state for trackColor when unselectedIsColored, is false
+      expect(
+        FlexSubThemes.radioTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: false,
+        ).fillColor!.resolve(<MaterialState>{}),
+        equals(Colors.black54),
+      );
+    });
+
+    test(
+        'FST1.21-dark: GIVEN a dark default FlexSubTheme.radioTheme() '
+        'EXPECT equal to CheckboxThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.radioTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          RadioThemeData(
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade800;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.secondary;
+                }
+                // Opinionated color on track when not selected
+                return colorScheme.secondary.withAlpha(0xDD);
+              },
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test('FST1.21-dark-states: Does CheckBox have right material states', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      // Disabled colors
+      expect(
+        FlexSubThemes.radioTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade800),
+      );
+      // Selected radio fill
+      expect(
+        FlexSubThemes.radioTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary),
+      );
+      // Default states
+      expect(
+        FlexSubThemes.radioTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{}),
+        equals(colorScheme.secondary.withAlpha(0xDD)),
+      );
+      // Default state for trackColor when unselectedIsColored, is false
+      expect(
+        FlexSubThemes.radioTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: false,
+        ).fillColor!.resolve(<MaterialState>{}),
+        equals(Colors.white70),
+      );
+    });
+    test(
+        'FST1.21-custom-light: GIVEN a light custom FlexSubTheme.radioTheme() '
+        'EXPECT equal to RadioThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.radioTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          splashRadius: 30,
+          unselectedIsColored: false,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          RadioThemeData(
+            splashRadius: 30,
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade400;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.tertiary;
+                }
+                return Colors.black54;
+              },
+            ),
+          ).toString(),
         ),
       );
     });

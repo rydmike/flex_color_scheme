@@ -4,18 +4,22 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 ## v5.0.0-dev.2 - March 14, 2022
 
-The target with this dev release is to contain:
+The target with this dev release is:
 
 * Documentation updates. The bulk of the readme will be migrated to its own site.
 * Minor fixes and cleaning, hopefully only internal.
 * Completion of tests.
+* Improvements to Themes Playground, fewer light/dark and widget coupled 
+  properties.
+* Complete removal of in version 4 deprecated property `surfaceStyle`, as stated
+  in v4.2 to be done in in v5.0.0.
 
 Current changes:
 
 * Pub.dev analysis does no like document references to deprecated Flutter
   properties. Changed the [primaryVariant] and [secondaryVariant] references
   in document comments to `primaryVariant` and `secondaryVariant`.
-* 
+
 ## v5.0.0-dev.1 - March 14, 2022
 
 Version 5 is a big refactor with deprecation of previous `variant` based
