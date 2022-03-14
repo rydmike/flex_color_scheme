@@ -41,7 +41,7 @@ enum FlexInputBorderType {
 /// from the corresponding Widget's SDK default un-themed color behavior, but
 /// is mostly the same if defined at all.
 ///
-/// The enum selection [primaryVariant] and [secondaryVariant] colors have been
+/// The enum selection `primaryVariant` and `secondaryVariant` colors have been
 /// deprecated in Flutter SDK 2.1.0 master after after v2.6.0-0.0.pre landed.
 ///
 /// This enum to select and override default Widget colors when using
