@@ -13,7 +13,7 @@ import 'system_nav_bar_style_buttons.dart';
 // setup of an annotated region to be used in the app. The
 // FlexColorScheme.themedSystemNavigationBar is a static helpers to
 // that can be used to style the Android System navigation bar in a style
-// that matches your used FlexColorScheme baased theme.
+// that matches your used FlexColorScheme based theme.
 class AndroidNavigationBarSettings extends StatelessWidget {
   const AndroidNavigationBarSettings(
       {Key? key,
@@ -114,8 +114,9 @@ class AndroidNavigationBarSettings extends StatelessWidget {
           //
           // SwitchListTileAdaptive(
           //   title: const Text('Android navigation bar divider'),
-          //   subtitle: const Text('There is also an extra system built-in scrim '
-          //       'on the nav bar when it is enabled. Recommend not enabling it '
+          //   subtitle: const Text('There is also an extra system built-in '
+          //       'scrim on the nav bar when it is enabled. Recommend not '
+          //       'enabling it '
           //       'if using opacity or fully transparent version.'),
           //   value: controller.useNavDivider,
           //   onChanged: controller.setUseNavDivider,

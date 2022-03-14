@@ -4851,9 +4851,6 @@ class FlexColorScheme with Diagnosticable {
     }
     final Brightness appBarBrightness =
         ThemeData.estimateBrightnessForColor(appBarColor);
-    final Brightness iconBrightness = appBarBrightness == Brightness.light
-        ? Brightness.dark
-        : Brightness.light;
 
     // First make finals for each property, so we can modify the logic just
     // once when needed. Used this to experiment with work around for:
