@@ -673,7 +673,7 @@ class FlexColorScheme with Diagnosticable {
 
   /// (DEPRECATED) A darker version of the primary color.
   ///
-  /// In Flutter SDK the [primaryVariant] color is only used by [SnackBar]
+  /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
   /// button color in dark theme mode as a part of predefined widget behavior.
   /// If you provide a custom [SnackBarThemeData] where you define
   /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
@@ -708,7 +708,7 @@ class FlexColorScheme with Diagnosticable {
 
   /// (DEPRECATED) A darker version of the secondary color.
   ///
-  /// In Flutter SDK the [secondaryVariant] color is not used by in any
+  /// In Flutter SDK the `secondaryVariant` color is not used by in any
   /// built-in widgets default themes or predefined widget behavior.
   /// It is an excellent property to use if you need a custom color for
   /// custom widgets accessible via your application's ThemeData, and that is
@@ -1648,7 +1648,7 @@ class FlexColorScheme with Diagnosticable {
 
     /// A darker version of the primary color.
     ///
-    /// In Flutter SDK the [primaryVariant] color is only used by [SnackBar]
+    /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
     /// button color in dark theme mode as a part of predefined widget behavior.
     /// If you provide a custom [SnackBarThemeData] where you define
     /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
@@ -1719,7 +1719,7 @@ class FlexColorScheme with Diagnosticable {
 
     /// A darker version of the secondary color.
     ///
-    /// In Flutter SDK the [secondaryVariant] color is not used by in any
+    /// In Flutter SDK the `secondaryVariant` color is not used by in any
     /// built-in widgets default themes or predefined widget behavior.
     /// It is an excellent property to use if you need a custom color for
     /// custom widgets accessible via your application's ThemeData, and that is
@@ -1889,10 +1889,10 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onPrimary,
 
-    /// A color that's clearly legible when drawn on [primaryVariant].
+    /// A color that's clearly legible when drawn on `primaryVariant`.
     ///
     /// To ensure that an app is accessible, a contrast ratio between
-    /// [primaryVariant] and [onPrimaryContainer] of at least 4.5:1
+    /// `primaryVariant` and [onPrimaryContainer] of at least 4.5:1
     /// is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
@@ -3194,7 +3194,7 @@ class FlexColorScheme with Diagnosticable {
 
     /// A darker version of the primary color.
     ///
-    /// In Flutter SDK the [primaryVariant] color is only used by [SnackBar]
+    /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
     /// button color in dark theme mode as a part of predefined widget behavior.
     /// If you provide a custom [SnackBarThemeData] where you define
     /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
@@ -3265,7 +3265,7 @@ class FlexColorScheme with Diagnosticable {
 
     /// A darker version of the secondary color.
     ///
-    /// In Flutter SDK the [secondaryVariant] color is not used by in any
+    /// In Flutter SDK the `secondaryVariant` color is not used by in any
     /// built-in widgets default themes or predefined widget behavior.
     /// It is an excellent property to use if you need a custom color for
     /// custom widgets accessible via your application's ThemeData, and that is

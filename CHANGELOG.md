@@ -10,6 +10,12 @@ The target with this dev release is to contain:
 * Minor fixes and cleaning, hopefully only internal.
 * Completion of tests.
 
+Current changes:
+
+* Pub.dev analysis does no like document references to deprecated Flutter
+  properties. Changed the [primaryVariant] and [secondaryVariant] references
+  in document comments to `primaryVariant` and `secondaryVariant`.
+* 
 ## v5.0.0-dev.1 - March 14, 2022
 
 Version 5 is a big refactor with deprecation of previous `variant` based
