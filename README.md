@@ -20,7 +20,7 @@
 >* The documentation below has not yet been updated to version 5.  
 >* See change log for all change information.  
 >* Generated API docs are available and up to date with version 5.
->* The samples have also been updated, the live web builds of them are avaialable here:
+>* The samples have also been updated, the live web builds of them are available here:
 >  * Example 1 [Basic Theme](https://rydmike.com/flexcolorscheme/basictheme-v5)
 >  * Example 2 [Custom Theme](https://rydmike.com/flexcolorscheme/customtheme-v5)
 >  * Example 3 [Four Themes](https://rydmike.com/flexcolorscheme/fourthemes-v5)
