@@ -550,11 +550,11 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Define code for key color usage and tones.
   final String useSecondary = controller.useSecondary
-      ? ''
-      : '    useSecondary: ${controller.useSecondary},\n';
+      ? '    useSecondary: ${controller.useSecondary},\n'
+      : '';
   final String useTertiary = controller.useTertiary
-      ? ''
-      : '    useTertiary: ${controller.useTertiary},\n';
+      ? '    useTertiary: ${controller.useTertiary},\n'
+      : '';
   final String keepPrimary = controller.keepPrimary
       ? '    keepPrimary: ${controller.keepPrimary},\n'
       : '';
@@ -575,7 +575,6 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   String useKeyColors = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
-          // '    useKeyColors: ${controller.useKeyColors},\n'
           '$useSecondary'
           '$useTertiary'
           '$keepPrimary'

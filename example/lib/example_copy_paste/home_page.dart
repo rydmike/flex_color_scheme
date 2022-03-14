@@ -56,7 +56,6 @@ class _HomePageState extends State<HomePage> {
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
         systemNavBarStyle: FlexSystemNavBarStyle.transparent,
-        useDivider: false,
       ),
       child: ResponsiveScaffold(
         title: Text(AppData.title(context)),
