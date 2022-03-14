@@ -1758,8 +1758,9 @@ class FlexSubThemes {
     /// SnackBar elevation defaults to [kSnackBarElevation] 4.
     final double? elevation = kSnackBarElevation,
 
-    // TODO(rydmike): SnackBar to use ColorScheme.inverseSurface in M3 schemes.
-    //   For now keeping FlexColorScheme own dark primary as snackbar color.
+    // TODO(rydmike): SnackBar uses ColorScheme.inverseSurface in M3 schemes.
+    // For now keeping FlexColorScheme own dark primary as snackbar color.
+    // Consider adding [SchemeColor] for easy customization.
 
     /// Default value for [backgroundColor].
     ///
