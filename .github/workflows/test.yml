@@ -12,6 +12,7 @@
 #    Controversial but pub.dev penalizes you if dart format is not used.
 #  - Run all tests with coverage.
 #  - Upload code coverage output to Codecov for analysis.
+#  - branch: version-5-0-0-dev1
 name: Test
 on:
   pull_request:
