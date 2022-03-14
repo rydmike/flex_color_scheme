@@ -2,7 +2,15 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.1 - March 14, 2022 - WORK IN PROGRESS
+## v5.0.0-dev.2 - March 14, 2022
+
+The target with this dev release is to contain:
+
+* Documentation updates. The bulk of the readme will be migrated to its own site.
+* Minor fixes and cleaning, hopefully only internal.
+* Completion of tests.
+
+## v5.0.0-dev.1 - March 14, 2022
 
 Version 5 is a big refactor with deprecation of previous `variant` based
 color names in favor of `container` ones that were added to updated M3
