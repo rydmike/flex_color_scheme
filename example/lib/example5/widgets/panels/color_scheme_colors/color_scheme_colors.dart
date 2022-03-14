@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../shared/controllers/theme_controller.dart';
 import '../../../../../shared/widgets/universal/header_card.dart';
 import '../../../../../shared/widgets/universal/show_color_scheme_colors.dart';
+import '../select_theme/theme_popup_menu.dart';
 
 // Panel used to show a mor compact view of the ColorScheme colors.
 class ColorSchemeColors extends StatelessWidget {
@@ -24,8 +25,13 @@ class ColorSchemeColors extends StatelessWidget {
       title: const Text('ColorScheme Colors'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
-          Padding(
+        children: <Widget>[
+          ThemePopupMenu(controller: controller),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: ShowColorSchemeColors(),
+          ),
+          const Padding(
             padding: EdgeInsets.all(16),
             child: Text('This shows all the effective ColorScheme colors in '
                 'a compact form. '
@@ -33,11 +39,7 @@ class ColorSchemeColors extends StatelessWidget {
                 'ColorScheme class. The deprecated colors primaryVariant and '
                 'secondaryVariant are excluded.'),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: ShowColorSchemeColors(),
-          ),
-          SizedBox(height: 16),
+          const SizedBox(height: 8),
         ],
       ),
     );
