@@ -5423,7 +5423,6 @@ class FlexColorScheme with Diagnosticable {
       }
     }
 
-    // TODO(rydmike): When using seed, should this be colorScheme.outline?
     // TODO(rydmike): Follow-up what SDK will do with dividerColor deprecation.
     // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
     // If our onSurface is primary tinted it has an effect on this divider too.
