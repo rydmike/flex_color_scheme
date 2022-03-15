@@ -33,11 +33,13 @@ void main() {
         'EXPECT color is ColorScheme.light().primaryContainer', () {
       expect(FlexColor.materialLightPrimaryContainer, ml.primaryContainer);
     });
-    test(
-        'FC1.02-prim-var: GIVEN FlexColor is materialLightPrimaryVariant '
-        'EXPECT color is ColorScheme.light().primaryVariant', () {
-      expect(FlexColor.materialLightPrimaryVariant, ml.primaryVariant);
-    });
+    // TODO(rydmike): Remove commented deprecated test entirely.
+    // Remove deprecated ColorScheme.primaryVariant from test
+    // test(
+    //     'FC1.02-prim-var: GIVEN FlexColor is materialLightPrimaryVariant '
+    //     'EXPECT color is ColorScheme.light().primaryVariant', () {
+    //   expect(FlexColor.materialLightPrimaryVariant, ml.primaryVariant);
+    // });
     test(
         'FC1.03: GIVEN FlexColor is materialLightSecondary '
         'EXPECT color is ColorScheme.light().secondary', () {
@@ -58,11 +60,13 @@ void main() {
         'EXPECT color is ColorScheme.light().tertiary', () {
       expect(FlexColor.materialLightTertiaryContainer, ml.tertiaryContainer);
     });
-    test(
-        'FC1.04-old-sec-var: GIVEN FlexColor is materialLightTertiary '
-        'EXPECT color is ColorScheme.light().secondaryVariant', () {
-      expect(FlexColor.materialLightTertiary, ml.secondaryVariant);
-    });
+    // TODO(rydmike): Remove commented deprecated test entirely.
+    // Remove deprecated ColorScheme.secondaryVariant from test
+    // test(
+    //     'FC1.04-old-sec-var: GIVEN FlexColor is materialLightTertiary '
+    //     'EXPECT color is ColorScheme.light().secondaryVariant', () {
+    //   expect(FlexColor.materialLightTertiary, ml.secondaryVariant);
+    // });
     test(
         'FC1.05: GIVEN FlexColor is materialLightSurface '
         'EXPECT color is ColorScheme.light().surface', () {
@@ -103,11 +107,13 @@ void main() {
         'EXPECT color is ColorScheme.dark().primaryContainer', () {
       expect(FlexColor.materialDarkPrimaryContainer, md.primaryContainer);
     });
-    test(
-        'FC2.02-prim-var: GIVEN FlexColor is materialDarkPrimaryVariant '
-        'EXPECT color is ColorScheme.dark().primaryVariant', () {
-      expect(FlexColor.materialDarkPrimaryVariant, md.primaryVariant);
-    });
+    // TODO(rydmike): Remove commented deprecated test entirely.
+    // Remove deprecated ColorScheme.primaryVariant from test
+    // test(
+    //     'FC2.02-prim-var: GIVEN FlexColor is materialDarkPrimaryVariant '
+    //     'EXPECT color is ColorScheme.dark().primaryVariant', () {
+    //   expect(FlexColor.materialDarkPrimaryVariant, md.primaryVariant);
+    // });
     test(
         'FC2.03: GIVEN FlexColor is materialDarkSecondary '
         'EXPECT color is ColorScheme.dark().secondary', () {
@@ -118,11 +124,13 @@ void main() {
         'EXPECT color is ColorScheme.dark().secondaryContainer', () {
       expect(FlexColor.materialDarkSecondaryContainer, md.secondaryContainer);
     });
-    test(
-        'FC2.04-sec-var: GIVEN FlexColor is materialDarkTertiary '
-        'EXPECT color is ColorScheme.dark().secondaryVariant', () {
-      expect(FlexColor.materialDarkTertiary, md.secondaryVariant);
-    });
+    // TODO(rydmike): Remove commented deprecated test entirely.
+    // Remove deprecated ColorScheme.secondaryVariant from test
+    // test(
+    //     'FC2.04-sec-var: GIVEN FlexColor is materialDarkTertiary '
+    //     'EXPECT color is ColorScheme.dark().secondaryVariant', () {
+    //   expect(FlexColor.materialDarkTertiary, md.secondaryVariant);
+    // });
     test(
         'FC2.04-tert: GIVEN FlexColor is materialDarkTertiary '
         'EXPECT color is ColorScheme.dark().secondaryContainer', () {
@@ -174,11 +182,13 @@ void main() {
         'EXPECT color is ColorScheme.highContrastLight().primaryVariant', () {
       expect(FlexColor.materialLightPrimaryContainerHc, ml.primaryContainer);
     });
-    test(
-        'FC3.02-prim-var: GIVEN FlexColor is materialLightPrimaryVariantHc '
-        'EXPECT color is ColorScheme.highContrastLight().primaryVariant', () {
-      expect(FlexColor.materialLightPrimaryVariantHc, ml.primaryVariant);
-    });
+    // TODO(rydmike): Remove commented deprecated test entirely.
+    // Remove deprecated ColorScheme.primaryVariant from test
+    // test(
+    //  'FC3.02-prim-var: GIVEN FlexColor is materialLightPrimaryVariantHc '
+    //  'EXPECT color is ColorScheme.highContrastLight().primaryVariant', () {
+    //   expect(FlexColor.materialLightPrimaryVariantHc, ml.primaryVariant);
+    // });
     test(
         'FC3.03: GIVEN FlexColor is materialLightSecondaryHc '
         'EXPECT color is ColorScheme.highContrastLight().secondary', () {
@@ -191,11 +201,13 @@ void main() {
       expect(
           FlexColor.materialLightSecondaryContainerHc, ml.secondaryContainer);
     });
-    test(
-        'FC3.04-sec-var: GIVEN FlexColor is materialLightTertiaryHc '
-        'EXPECT color is ColorScheme.highContrastLight().secondaryVariant', () {
-      expect(FlexColor.materialLightTertiaryHc, ml.secondaryVariant);
-    });
+    // TODO(rydmike): Remove commented deprecated test entirely.
+    // Remove deprecated ColorScheme.secondaryVariant from test
+    // test(
+    //  'FC3.04-sec-var: GIVEN FlexColor is materialLightTertiaryHc '
+    //  'EXPECT color is ColorScheme.highContrastLight().secondaryVariant', () {
+    //   expect(FlexColor.materialLightTertiaryHc, ml.secondaryVariant);
+    // });
     test(
         'FC3.04-tert: GIVEN FlexColor is materialLightTertiaryHc '
         'EXPECT color is ColorScheme.highContrastLight().tertiary', () {
@@ -248,11 +260,13 @@ void main() {
         'EXPECT color is ColorScheme.highContrastDark().primaryContainer', () {
       expect(FlexColor.materialDarkPrimaryContainerHc, md.primaryContainer);
     });
-    test(
-        'FC4.02: GIVEN FlexColor is materialDarkPrimaryVariantHc '
-        'EXPECT color is ColorScheme.highContrastDark().primaryVariant', () {
-      expect(FlexColor.materialDarkPrimaryVariantHc, md.primaryVariant);
-    });
+    // TODO(rydmike): Remove commented deprecated test entirely.
+    // Remove deprecated ColorScheme.primaryVariant from test
+    // test(
+    //     'FC4.02: GIVEN FlexColor is materialDarkPrimaryVariantHc '
+    //     'EXPECT color is ColorScheme.highContrastDark().primaryVariant', () {
+    //   expect(FlexColor.materialDarkPrimaryVariantHc, md.primaryVariant);
+    // });
     test(
         'FC4.03: GIVEN FlexColor is materialDarkSecondaryHc '
         'EXPECT color is ColorScheme.highContrastDark().secondary', () {
@@ -264,11 +278,13 @@ void main() {
         () {
       expect(FlexColor.materialDarkSecondaryContainerHc, md.secondaryContainer);
     });
-    test(
-        'FC4.04-sec-var: GIVEN FlexColor is materialDarkTertiaryHc '
-        'EXPECT color is ColorScheme.highContrastDark().secondaryVariant', () {
-      expect(FlexColor.materialDarkTertiaryHc, md.secondaryVariant);
-    });
+    // TODO(rydmike): Remove commented deprecated test entirely.
+    // Remove deprecated ColorScheme.secondaryVariant from test
+    // test(
+    // 'FC4.04-sec-var: GIVEN FlexColor is materialDarkTertiaryHc '
+    // 'EXPECT color is ColorScheme.highContrastDark().secondaryVariant', () {
+    //   expect(FlexColor.materialDarkTertiaryHc, md.secondaryVariant);
+    // });
     test(
         'FC4.04-tert: GIVEN FlexColor is materialDarkTertiaryHc '
         'EXPECT color is ColorScheme.highContrastDark().tertiary', () {

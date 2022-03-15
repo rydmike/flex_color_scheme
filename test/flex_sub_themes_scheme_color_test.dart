@@ -33,8 +33,6 @@ void main() {
   const Color inverseSurface = Color(0xFFBCCBED);
   const Color onInverseSurface = Color(0xFF2A303C);
   const Color inversePrimary = Color(0xFF333333);
-  const Color primaryVariant = Color(0xFF456497);
-  const Color secondaryVariant = Color(0xFFE0905F);
 
   const ColorScheme scheme = ColorScheme.light(
     primary: primary,
@@ -64,8 +62,6 @@ void main() {
     inverseSurface: inverseSurface,
     onInverseSurface: onInverseSurface,
     inversePrimary: inversePrimary,
-    primaryVariant: primaryVariant,
-    secondaryVariant: secondaryVariant,
   );
 
   group('FST.sC: FlexSubThemes.schemeColor WITH ColorScheme ', () {

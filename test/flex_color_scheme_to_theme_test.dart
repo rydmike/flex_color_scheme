@@ -199,7 +199,7 @@ void main() {
     });
 
     const FlexColorScheme rawHcLight = FlexColorScheme(
-      colorScheme: ColorScheme.highContrastLight(
+      colorScheme: ColorScheme(
         errorContainer: Color(0xfff1d8d8),
         onErrorContainer: Color(0xff000000),
         surfaceVariant: Color(0xffffffff),
@@ -209,8 +209,25 @@ void main() {
         inverseSurface: Color(0xff121212),
         onInverseSurface: Color(0xffffffff),
         inversePrimary: Color(0xff9999ff),
-        primaryVariant: Color(0xff0000ba),
-        secondaryVariant: Color(0xff66fff9),
+        brightness: Brightness.light,
+        primary: Color(0xff0000ba),
+        onPrimary: Color(0xffffffff),
+        primaryContainer: Color(0xffb6b6ff),
+        onPrimaryContainer: Color(0xff000000),
+        secondary: Color(0xff66fff9),
+        onSecondary: Color(0xff000000),
+        secondaryContainer: Color(0xff90f3ee),
+        onSecondaryContainer: Color(0xff000000),
+        tertiary: Color(0xff018786),
+        onTertiary: Color(0xffffffff),
+        tertiaryContainer: Color(0xffb3f1f0),
+        onTertiaryContainer: Color(0xff000000),
+        error: Color(0xff790000),
+        onError: Color(0xffffffff),
+        background: Color(0xffffffff),
+        onBackground: Color(0xff000000),
+        surface: Color(0xffffffff),
+        onSurface: Color(0xff000000),
       ),
       brightness: Brightness.light,
       primary: Color(0xff0000ba),
@@ -350,11 +367,11 @@ void main() {
 
     const ColorScheme hcDarkWithLight = ColorScheme(
       brightness: Brightness.dark,
-      primary: Color(0xffaaaaaa),
+      primary: Color(0xff0000ba),
       onPrimary: Color(0xffaaaaaa),
       primaryContainer: Color(0xffaaaaaa),
       onPrimaryContainer: Color(0xffaaaaaa),
-      secondary: Color(0xffaaaaaa),
+      secondary: Color(0xff66fff9),
       onSecondary: Color(0xffaaaaaa),
       tertiary: Color(0xffaaaaaa),
       onTertiary: Color(0xffaaaaaa),
@@ -375,9 +392,6 @@ void main() {
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xff9999ff),
-      // Set the deprecated members to what they will be via defaults.
-      primaryVariant: Color(0xff0000ba),
-      secondaryVariant: Color(0xff66fff9),
     );
 
     const FlexColorScheme hcLightWithLight = FlexColorScheme(
@@ -585,11 +599,11 @@ void main() {
     // to override and expect correct result via the overrides.
     const ColorScheme hcLightWithDark = ColorScheme(
       brightness: Brightness.light,
-      primary: Color(0xffaaaaaa),
+      primary: Color(0xffefb7ff),
       onPrimary: Color(0xffaaaaaa),
       primaryContainer: Color(0xffaaaaaa),
       onPrimaryContainer: Color(0xffaaaaaa),
-      secondary: Color(0xffaaaaaa),
+      secondary: Color(0xff66fff9),
       onSecondary: Color(0xffaaaaaa),
       tertiary: Color(0xffaaaaaa),
       onTertiary: Color(0xffaaaaaa),
@@ -610,9 +624,6 @@ void main() {
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff6f5970),
-      // Set the deprecated members to what they will be via defaults.
-      primaryVariant: Color(0xffefb7ff),
-      secondaryVariant: Color(0xff66fff9),
     );
 
     const FlexColorScheme rawHcFCS = FlexColorScheme(
@@ -1920,7 +1931,26 @@ void main() {
     const FlexColorScheme fcsDarkH2Raw = FlexColorScheme(
         // Override the ones we can set via direct input
         // to be equal to direct inputs
-        colorScheme: ColorScheme.dark(
+        colorScheme: ColorScheme(
+          brightness: Brightness.dark,
+          primary: Color(0xffda8585),
+          onPrimary: Color(0xffffffff),
+          primaryContainer: Color(0xff573535),
+          onPrimaryContainer: Color(0xffffffff),
+          secondary: Color(0xff68cdd7),
+          onSecondary: Color(0xff000000),
+          secondaryContainer: Color(0xff295256),
+          onSecondaryContainer: Color(0xffffffff),
+          tertiary: Color(0xffffabab),
+          onTertiary: Color(0xff000000),
+          tertiaryContainer: Color(0xffb33030),
+          onTertiaryContainer: Color(0xffffffff),
+          error: Color(0xffcf6679),
+          onError: Color(0xff000000),
+          background: Color(0xff1c1515),
+          onBackground: Color(0xffffffff),
+          surface: Color(0xff120f0f),
+          onSurface: Color(0xffffffff),
           errorContainer: Color(0xffb1384e),
           onErrorContainer: Color(0xffffffff),
           surfaceVariant: Color(0xff120f0f),
@@ -1930,8 +1960,6 @@ void main() {
           inverseSurface: Color(0xffffffff),
           onInverseSurface: Color(0xff000000),
           inversePrimary: Color(0xff674343),
-          primaryVariant: Color(0xffda8585),
-          secondaryVariant: Color(0xff68cdd7),
         ),
         primary: Color(0xffda8585),
         onPrimary: Color(0xffffffff),
@@ -2178,7 +2206,7 @@ void main() {
         navigationBarOpacity: 0.95,
         navigationBarSelectedIconSchemeColor: SchemeColor.primary,
         navigationBarSelectedLabelSchemeColor: SchemeColor.onSurface,
-        navigationBarHighlightSchemeColor: SchemeColor.primaryVariant,
+        navigationBarHighlightSchemeColor: SchemeColor.primaryContainer,
         navigationBarBackgroundSchemeColor: SchemeColor.background,
         navigationBarMutedUnselectedIcon: true,
         navigationBarMutedUnselectedLabel: true,
