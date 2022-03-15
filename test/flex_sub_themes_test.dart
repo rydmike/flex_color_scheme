@@ -229,6 +229,71 @@ void main() {
       );
     });
     test(
+        'FST1.05-background-based-a: GIVEN a default FlexSubTheme.dialogTheme '
+        'EXPECT equal to DialogTheme() version with same values', () {
+      expect(
+        FlexSubThemes.dialogTheme(
+            colorScheme: null,
+            backgroundColor: const Color(0xFF343476),
+            backgroundSchemeColor: SchemeColor.tertiary),
+        equals(
+          const DialogTheme(
+            backgroundColor: Color(0xFF343476),
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.05-background-based-b: GIVEN a default FlexSubTheme.dialogTheme '
+        'EXPECT equal to DialogTheme() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.dialogTheme(
+            colorScheme: colorScheme,
+            backgroundColor: const Color(0xFFDDDDDD),
+            backgroundSchemeColor: null),
+        equals(
+          const DialogTheme(
+            backgroundColor: Color(0xFFDDDDDD),
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.05-scheme-based: GIVEN a default FlexSubTheme.dialogTheme() '
+        'EXPECT equal to DialogTheme() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.dialogTheme(
+            colorScheme: colorScheme,
+            backgroundColor: null,
+            backgroundSchemeColor: SchemeColor.tertiary),
+        equals(
+          DialogTheme(
+            backgroundColor: colorScheme.tertiary,
+            elevation: 10,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
         'FST1.05custom: GIVEN a custom FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
@@ -292,7 +357,7 @@ void main() {
     // FlexSubThemes TimePicker tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.07: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'FST1.07-default: GIVEN a default FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       expect(
         FlexSubThemes.timePickerTheme(),
@@ -321,11 +386,125 @@ void main() {
         ),
       );
     });
+
+    test(
+        'FST1.07.scheme-based: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'EXPECT equal to TimePickerThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.timePickerTheme(
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFFDDDDDD),
+          backgroundSchemeColor: SchemeColor.tertiary,
+          inputDecorationTheme: const InputDecorationTheme(),
+        ),
+        equals(
+          TimePickerThemeData(
+            backgroundColor: colorScheme.tertiary,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+            hourMinuteShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            dayPeriodShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            inputDecorationTheme: const InputDecorationTheme().copyWith(
+              contentPadding: EdgeInsets.zero,
+              errorStyle: const TextStyle(fontSize: 0, height: 0),
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.07.background-a: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'EXPECT equal to TimePickerThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.timePickerTheme(
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFFDDDDDD),
+          inputDecorationTheme: const InputDecorationTheme(filled: true),
+        ),
+        equals(
+          TimePickerThemeData(
+            backgroundColor: const Color(0xFFDDDDDD),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+            hourMinuteShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            dayPeriodShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            inputDecorationTheme:
+                const InputDecorationTheme(filled: true).copyWith(
+              contentPadding: EdgeInsets.zero,
+              errorStyle: const TextStyle(fontSize: 0, height: 0),
+            ),
+          ),
+        ),
+      );
+    });
+
+    test(
+        'FST1.07.background-b: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'EXPECT equal to TimePickerThemeData() version with same values', () {
+      expect(
+        FlexSubThemes.timePickerTheme(
+          backgroundColor: const Color(0xFFDDDDDD),
+          backgroundSchemeColor: SchemeColor.tertiary,
+          inputDecorationTheme: const InputDecorationTheme(filled: true),
+        ),
+        equals(
+          TimePickerThemeData(
+            backgroundColor: const Color(0xFFDDDDDD),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+            hourMinuteShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            dayPeriodShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            inputDecorationTheme:
+                const InputDecorationTheme(filled: true).copyWith(
+              contentPadding: EdgeInsets.zero,
+              errorStyle: const TextStyle(fontSize: 0, height: 0),
+            ),
+          ),
+        ),
+      );
+    });
+
     // -------------------------------------------------------------------------
     // FlexSubThemes InputDecorator tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.08a: GIVEN a default FlexSubTheme.inputDecorationTheme() '
+        'FST1.08a.light: GIVEN a default FlexSubTheme.inputDecorationTheme() '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -397,30 +576,130 @@ void main() {
         ),
       );
     });
+    test(
+        'FST1.08a.dark: GIVEN a default FlexSubTheme.inputDecorationTheme() '
+        'EXPECT equal to InputDecorationTheme() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme),
+        equals(
+          InputDecorationTheme(
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error) &&
+                  states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.error)) {
+                return TextStyle(
+                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                );
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: colorScheme.primary);
+            }),
+            filled: true,
+            fillColor: colorScheme.primary.withAlpha(0x14),
+            hoverColor: colorScheme.primary.withAlpha(0x0D),
+            focusColor: colorScheme.primary.withAlpha(0x26),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.primary,
+                width: 2,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.primary.withAlpha(0xA7),
+                width: 1.5,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .withAlpha(0x31),
+                width: 1.5,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.error,
+                width: 2,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.error.withAlpha(0xA7),
+                width: 1.5,
+              ),
+            ),
+          ),
+        ),
+      );
+    });
     test('FST1.08a-states: Does Decorator have right material states', () {
       const ColorScheme colorScheme = ColorScheme.light();
-
-      // // Disabled foreground
-      // expect(
-      //   FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme)
-      //       .floatingLabelStyle!
-      //       .resolveWith(<MaterialStateTextStyle>{MaterialState.disabled}),
-      //   equals(colorScheme.primary
-      //       .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-      //       .withAlpha(kDisabledForegroundAlpha)),
-      // );
-      // expect(
-      //   FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-      //       .style!
-      //       .foregroundColor!
-      //       .resolve(<MaterialState>{MaterialState.selected}),
-      //   equals(colorScheme.onPrimary),
-      // );
-
-      //
+      // Floating label focused error style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{
+            MaterialState.error,
+            MaterialState.focused,
+          }),
+          equals(
+            TextStyle(color: colorScheme.error),
+          ));
+      // Floating label unfocused error style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{
+            MaterialState.error,
+          }),
+          equals(
+            TextStyle(color: colorScheme.error.withAlpha(0xA7)),
+          ));
+      // Floating label disabled style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{
+            MaterialState.disabled,
+          }),
+          equals(
+            TextStyle(
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .withAlpha(0x31)),
+          ));
+      // Floating label default style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{}),
+          equals(
+            TextStyle(color: colorScheme.primary),
+          ));
     });
     test(
-        'FST1.08b: GIVEN a default '
+        'FST1.08b-light: GIVEN a default '
         'FlexSubTheme.inputDecorationTheme(borderType: '
         'FlexInputBorderType.underline, usedSchemeColor: '
         'FlexUsedColor.secondary) '
@@ -514,6 +793,59 @@ void main() {
         ),
       );
     });
+    test('FST1.08b-states: Does Decorator have right material states', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      // Floating label focused error style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+            borderType: FlexInputBorderType.underline,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{
+            MaterialState.error,
+            MaterialState.focused,
+          }),
+          equals(
+            TextStyle(color: colorScheme.error),
+          ));
+      // Floating label unfocused error style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+            borderType: FlexInputBorderType.underline,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{
+            MaterialState.error,
+          }),
+          equals(
+            TextStyle(color: colorScheme.error.withAlpha(0xA7)),
+          ));
+      // Floating label disabled style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+            borderType: FlexInputBorderType.underline,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{
+            MaterialState.disabled,
+          }),
+          equals(
+            TextStyle(
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .withAlpha(0x31)),
+          ));
+      // Floating label default style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+            borderType: FlexInputBorderType.underline,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{}),
+          equals(
+            TextStyle(color: colorScheme.primary),
+          ));
+    });
     // -------------------------------------------------------------------------
     // FlexSubThemes ElevatedButton tests
     // -------------------------------------------------------------------------
@@ -574,10 +906,8 @@ void main() {
         ),
       );
     });
-    //
     test('FST1.09-states: Does ElevatedButton have right material states', () {
       const ColorScheme colorScheme = ColorScheme.light();
-
       // Disabled foreground
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
@@ -595,7 +925,6 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.onPrimary),
       );
-
       // Disabled background
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
@@ -613,7 +942,6 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.primary),
       );
-
       // Overlay color states
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
@@ -643,10 +971,7 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(Colors.transparent),
       );
-      //
     });
-
-    //
     test(
         'FST1.09custom: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
@@ -711,7 +1036,9 @@ void main() {
         ),
       );
     });
-    //
+    // -------------------------------------------------------------------------
+    // FlexSubThemes OutlinedButton tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.10: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
@@ -785,10 +1112,8 @@ void main() {
         ),
       );
     });
-    //
     test('FST1.10-states: Does OutlinedButton have right material states', () {
       const ColorScheme colorScheme = ColorScheme.light();
-
       // Disabled foreground
       expect(
         FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
@@ -806,7 +1131,6 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.primary),
       );
-
       // Overlay color states
       expect(
         FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
@@ -836,7 +1160,6 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(Colors.transparent),
       );
-      //
       // Border side states
       expect(
         FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
@@ -880,7 +1203,9 @@ void main() {
         )),
       );
     });
-    //
+    // -------------------------------------------------------------------------
+    // FlexSubThemes TextButton tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.11: GIVEN a default FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
@@ -926,10 +1251,8 @@ void main() {
         ),
       );
     });
-    //
     test('FST1.11-states: Does TextButton have right material states', () {
       const ColorScheme colorScheme = ColorScheme.light();
-
       // Disabled foreground
       expect(
         FlexSubThemes.textButtonTheme(colorScheme: colorScheme)
@@ -947,7 +1270,6 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.primary),
       );
-
       // Overlay color states
       expect(
         FlexSubThemes.textButtonTheme(colorScheme: colorScheme)
@@ -977,9 +1299,11 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(Colors.transparent),
       );
-      //
     });
-
+    // TODO(rydmike): This theme will be deprecated soon, remove tests then.
+    // -------------------------------------------------------------------------
+    // FlexSubThemes old material buttons theme tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.12: GIVEN a default FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
@@ -1063,6 +1387,9 @@ void main() {
         ),
       );
     });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes ToggleButtons tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.13: GIVEN a default FlexSubTheme.toggleButtonsTheme() EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
@@ -1106,7 +1433,9 @@ void main() {
         ),
       );
     });
-
+    // -------------------------------------------------------------------------
+    // FlexSubThemes FloatingActionButton tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.14: GIVEN a default FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
@@ -1124,7 +1453,6 @@ void main() {
         ),
       );
     });
-
     test(
         'FST1.14b: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
@@ -1144,7 +1472,6 @@ void main() {
         ),
       );
     });
-
     test(
         'FST1.14c: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
@@ -1165,7 +1492,6 @@ void main() {
         ),
       );
     });
-
     test(
         'FST1.14d: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
@@ -1187,7 +1513,6 @@ void main() {
         ),
       );
     });
-
     test(
         'FST1.14e: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
@@ -1212,7 +1537,9 @@ void main() {
         ),
       );
     });
-
+    // -------------------------------------------------------------------------
+    // FlexSubThemes Chip tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.15: GIVEN a default FlexSubTheme.chipTheme() '
         'EXPECT equal to ChipThemeData() version '
@@ -1248,7 +1575,6 @@ void main() {
         ),
       );
     });
-
     test(
         'FST1.16: GIVEN a FlexSubTheme.chipTheme() with usedSchemeColor '
         'Secondary EXPECT equal to ChipThemeData() version '
@@ -1285,7 +1611,9 @@ void main() {
         ),
       );
     });
-
+    // -------------------------------------------------------------------------
+    // FlexSubThemes NavigationBar tests
+    // -------------------------------------------------------------------------
     test(
         'FST1.17: GIVEN a default FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
@@ -1307,7 +1635,6 @@ void main() {
         ),
       );
     });
-
     test(
         'FST1.18custom1: GIVEN a custom1 FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
@@ -1397,7 +1724,6 @@ void main() {
         ),
       );
     });
-
     test(
         'FST1.18custom2: GIVEN a custom1 FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
@@ -2049,6 +2375,83 @@ void main() {
               },
             ),
           ).toString(),
+        ),
+      );
+    });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes NavigationRail tests
+    // -------------------------------------------------------------------------
+    test(
+        'FST1.22: GIVEN a default FlexSubTheme.navigationRailTheme() '
+        'EXPECT equal to NavigationRailThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.navigationRailTheme(
+          colorScheme: colorScheme,
+        ),
+        equals(
+          const NavigationRailThemeData(
+            elevation: 0,
+            useIndicator: true,
+            indicatorColor: Color(0x00000000),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.22custom: GIVEN a custom FlexSubTheme.navigationRailTheme() '
+        'EXPECT equal to NavigationRailThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.navigationRailTheme(
+          colorScheme: colorScheme,
+          selectedLabelSchemeColor: SchemeColor.secondary,
+          selectedIconSchemeColor: SchemeColor.secondaryContainer,
+          unselectedLabelSchemeColor: SchemeColor.onSurface,
+          unselectedIconSchemeColor: SchemeColor.tertiary,
+          backgroundSchemeColor: SchemeColor.surface,
+          mutedUnselectedIcon: true,
+          mutedUnselectedLabel: true,
+          elevation: 1,
+          opacity: 0.5,
+          unselectedAlphaBlend: 0xFA,
+          unselectedAlpha: 0x45,
+          labelType: NavigationRailLabelType.all,
+          groupAlignment: 0,
+        ),
+        equals(
+          NavigationRailThemeData(
+            elevation: 1,
+            backgroundColor: colorScheme.surface.withOpacity(0.5),
+            selectedIconTheme: IconThemeData(
+              color: colorScheme.secondaryContainer,
+              size: 24,
+              opacity: 1,
+            ),
+            selectedLabelTextStyle: TextStyle(
+              color: colorScheme.secondary,
+              fontSize: 14,
+            ),
+            unselectedLabelTextStyle: TextStyle(
+              color: colorScheme.onSurface
+                  .blendAlpha(colorScheme.onSurface, 0xFA)
+                  .withAlpha(0x45),
+              fontSize: 14,
+            ),
+            unselectedIconTheme: IconThemeData(
+              color: colorScheme.tertiary
+                  .blendAlpha(colorScheme.tertiary, 0xFA)
+                  .withAlpha(0x45),
+              size: 24,
+              opacity: 1,
+            ),
+            useIndicator: true,
+            indicatorColor: const Color(0x00000000),
+            labelType: NavigationRailLabelType.all,
+            groupAlignment: 0,
+          ),
         ),
       );
     });

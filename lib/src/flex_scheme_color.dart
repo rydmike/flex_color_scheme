@@ -195,7 +195,7 @@ class FlexSchemeColor with Diagnosticable {
         'In FlexSchemeColor the new primaryContainer use old primaryVariant '
         'as fallback if un-assigned in custom FlexSchemeColor schemes. '
         'An old value for it in a custom scheme, may however not be a perfect '
-        'for primaryContainer in Material 3 color design. '
+        'fit for primaryContainer in Material 3 color design. '
         'This property was deprecated after FlexColorScheme v4.2.0.')
         Color? primaryVariant,
     @Deprecated(

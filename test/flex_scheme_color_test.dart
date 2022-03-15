@@ -238,7 +238,7 @@ void main() {
     });
 
     test(
-        'FSC1.11: GIVEN a FlexSchemeColor.from primary and secondary '
+        'FSC1.11a: GIVEN a FlexSchemeColor.from primary and secondary '
         'EXPECT primary and secondary as given, others computed.', () {
       expect(
           FlexSchemeColor.from(
@@ -257,6 +257,30 @@ void main() {
             errorContainer: null,
             primaryVariant: Color(0xff4d00bb),
             secondaryVariant: Color(0xff7d22ff),
+          ));
+    });
+
+    test(
+        'FSC1.11b: GIVEN a FlexSchemeColor.from primary,secondary and tertiary '
+        'EXPECT primary, secondary and tertiary given, others computed.', () {
+      expect(
+          FlexSchemeColor.from(
+            primary: FlexColor.materialLightPrimary,
+            secondary: FlexColor.materialLightSecondary,
+            tertiary: FlexColor.materialLightTertiary,
+          ),
+          const FlexSchemeColor(
+            primary: FlexColor.materialLightPrimary,
+            primaryContainer: Color(0xff4d00bb),
+            secondary: FlexColor.materialLightSecondary,
+            secondaryContainer: Color(0xff02a898),
+            tertiary: FlexColor.materialLightTertiary,
+            tertiaryContainer: Color(0xff02cecc),
+            appBarColor: FlexColor.materialLightTertiary,
+            error: null,
+            errorContainer: null,
+            primaryVariant: Color(0xff4d00bb),
+            secondaryVariant: FlexColor.materialLightTertiary,
           ));
     });
 

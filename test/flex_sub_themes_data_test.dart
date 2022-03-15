@@ -10,7 +10,7 @@ void main() {
   // same result as matching one with default constructor.
   //****************************************************************************
   group('FSTC1: WITH FlexSubThemesData ', () {
-    // m1 = Default FlexSubThemeConfig
+    // m1 = Default FlexSubThemesData
     const FlexSubThemesData m1 = FlexSubThemesData();
     // m2, same definition as m1, but using default values to create.
     const FlexSubThemesData m2 = FlexSubThemesData(
