@@ -172,7 +172,7 @@ In the `pubspec.yaml` of your **Flutter** project, add the following dependency:
 
 ```yaml
 dependencies:
-  flex_color_scheme: ^4.2.0
+  flex_color_scheme: ^5.0.0-dev.2
 ```
 
 In your library file add the following import:

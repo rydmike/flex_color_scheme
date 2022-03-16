@@ -256,6 +256,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                     widget.color.withAlpha(0x25), widget.textColor),
                 activeTrackColor: Color.alphaBlend(
                     widget.color.withAlpha(0x60), widget.textColor),
+                inactiveTrackColor: Color.alphaBlend(
+                    widget.color.withAlpha(0xAA), widget.textColor),
                 inactiveThumbColor: Color.alphaBlend(
                     widget.color.withAlpha(0xDD), widget.textColor),
                 onChanged: widget.onLocked?.call,

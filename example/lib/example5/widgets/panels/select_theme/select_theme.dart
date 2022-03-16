@@ -45,7 +45,7 @@ class SelectTheme extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Select Theme'),
+      title: const Text('Input Colors'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -76,7 +76,7 @@ class SelectTheme extends StatelessWidget {
               title: const Text('Copy effective input colors to the custom '
                   'scheme?'),
               subtitle: const Text('Applies effective input color value to '
-                  'the last scheme, the custom one that you can modify'),
+                  'the last scheme, the custom one, that you can modify'),
               trailing: ElevatedButton(
                 onPressed: () async {
                   await _handleCopySchemeTap(context);
@@ -97,9 +97,12 @@ class SelectTheme extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
             child: ThemeInputColors(controller: controller),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text('Tap a color code to copy it to the clipboard'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Tap a color code to copy it to the clipboard',
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
           ),
           const SizedBox(height: 8),
           const ListTile(
