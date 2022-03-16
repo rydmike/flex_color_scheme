@@ -9,8 +9,8 @@ Targets with the dev.2 release is:
 * Documentation updates. The bulk of the readme will be migrated to its own site.
 * Minor fixes and cleaning, hopefully only internal.
 * Completion of tests.
-* Complete removal of in version 4 deprecated property `surfaceStyle`, as stated
-  in v4.2 to be done for v5.0.0 stable release.
+* Completion of the removal of in version 4 deprecated property `surfaceStyle`. 
+  As stated in v4.2, this was to be done for v5.0.0 stable release.
 * Improvements to Themes Playground, fewer light/dark and widget coupled
   properties. Maybe image based theme and maybe an alternative UI
 
@@ -18,21 +18,33 @@ Completed changes:
 
 * Pub.dev analysis does not like document references to deprecated Flutter
   properties. Changed the [primaryVariant] and [secondaryVariant] references
-  in document comments to `primaryVariant` and `secondaryVariant`.
+  in document comments to `primaryVariant` and `secondaryVariant`. Nor does it
+  like when you use tests to deprecated Flutter SDK members, removed them too,
+  they were not needed either after some redesign of a few tests.
 
 * Changed the priority in FlexColorScheme when using direct input color 
   properties, `colorScheme` input and using key color seeded ColorScheme
   generation. The new order is that input `colorScheme` is in this rare use case
   always overridden by the seed generate `ColorScheme`. This allows us
-  us to a `colorScheme` as input to seed generation, where this color
+  to use a `colorScheme` as input to seed generation, where this color
   scheme could already have been externally seeded generated, but that we want 
   to modify by using custom FlexTones or surface blends in FleColorScheme.
-  The direct properties overrides the seeded color as before, unless it is 
-  `primary`, `secondary`, `tertiary` or their container colors. In that case
+  The direct properties overrides the seeded color scheme as before, unless it
+  is `primary`, `secondary`, `tertiary` or their container colors. In that case
   the `keyColors`, "keep" property determines if those colors are kept or not.
   This keeps the `keepPrimary`, `keepSecondary` etc. in `FlexKeyColors` behaving
   in a consistent manner when using key color seeded ColorScheme's, regardless
-  of their input source. 
+  of their input source.
+
+* Completely removed deprecated property `surfaceStyle`, including its
+  implementing classes, enums and helpers:
+  - Removed property: `surfaceStyle` in `FlexColorScheme.light`.
+  - Removed property: `surfaceStyle` in `FlexColorScheme.dark`.
+  - Removed: enum `FlexSurface`, that `surfaceStyle` where.
+  - Removed: factory `FlexSchemeSurfaceColors.from` that was used to create
+    surface using the `FlexSurface`. The factory `FlexSchemeSurfaceColors.blend`
+    replaced in version 4.0.0 already when using `surfaceMode` and `blendLevel`.
+  - Removed tests and modified tests needing to consider above removals.
 
 ## v5.0.0-dev.1 - March 14, 2022
 

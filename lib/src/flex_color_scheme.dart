@@ -17,44 +17,6 @@ import 'flex_tones.dart';
 
 // ignore_for_file: comment_references
 
-/// Enum for using predefined surface branding strengths in [FlexColorScheme]
-/// based themes.
-///
-/// This enum was used in [FlexColorScheme] versions before 4.0.0 in factory
-/// constructors [FlexColorScheme.light] and [FlexColorScheme.dark].
-///
-/// The properties using this enum are deprecated since version 4.2.0.
-/// Migrate to using the enum [FlexSurfaceMode]
-/// parameter `surfaceMode` instead, that replaces `surfaceStyle` and
-/// offers more surface color blend modes and levels.
-enum FlexSurface {
-  /// Use Material design default light and dark surface and background colors.
-  ///
-  /// In light theme this is Colors.white and in dark Material 2 theme it is
-  /// Color(0xFF121212) for theme colorsScheme.surface, colorScheme.background
-  /// and all other background colors in [ThemeData] used by Material.
-  material,
-
-  /// Use a light blend of primary color in surface and background colors.
-  light,
-
-  /// Use a medium blend of primary color in surface and background colors.
-  medium,
-
-  /// Use a strong blend of primary color in surface and background colors.
-  strong,
-
-  /// Use a heavy blend of primary color in surface and background colors.
-  heavy,
-
-  /// Use your own custom surface surface and background colors.
-  ///
-  /// If you set this option you can use it as a mode to indicate in your
-  /// theme definition logic that you will provide the surface colors
-  /// separately.
-  custom,
-}
-
 /// Enum for using predefined surface blend modes for surface and background
 /// colors in [FlexColorScheme] based themes.
 ///
@@ -98,12 +60,14 @@ enum FlexSurfaceMode {
   /// background gets 3/2x the blend level value.
   ///
   /// The mode [FlexSurfaceMode.highBackgroundLowScaffold] can be used to
-  /// replace the style that is produced when using
-  /// [FlexColorScheme.surfaceStyle] enum property [FlexSurface] in
-  /// [FlexColorScheme.light] and [FlexColorScheme.dark]. The mode
-  /// [FlexSurfaceMode.highBackgroundLowScaffold] uses the same design concept
-  /// as the only style offered by [FlexSurface] in
-  /// [FlexColorScheme.surfaceStyle] in use before version 4.
+  /// replace the style that was produced when using old and removed
+  /// `FlexColorScheme.surfaceStyle` enum property `FlexSurface` in
+  /// [FlexColorScheme.light] and [FlexColorScheme.dark] before version 4.
+  ///
+  /// The mode [FlexSurfaceMode.highBackgroundLowScaffold] uses the same
+  /// design concept as the only style offered via removed `FlexSurface`
+  /// in `FlexColorScheme.surfaceStyle` that was in use before version 4,
+  /// and deprecated in version 4.2 and removed in version 5.0.0.
   ///
   /// By adjusting the [FlexColorScheme.blendLevel] property and using this
   /// style, you can find a similar visual effect when using
@@ -1485,27 +1449,6 @@ class FlexColorScheme with Diagnosticable {
     /// color values.
     final int usedColors = 6,
 
-    /// Blends theme colors into surfaces and backgrounds. Deprecated use
-    /// [surfaceMode] in combination with [blendLevel] instead.
-    ///
-    /// This property was used in FlexColorScheme before v4.0.0.
-    /// It is is still available for backwards compatibility.
-    /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
-    /// and offers more surface color configuration options and choices.
-    ///
-    /// Defaults to [FlexSurface.material] which results in Flutter
-    /// standard [ColorScheme.light] surface colors, which follows the
-    /// default color scheme in the Material Design guide for light theme found
-    /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
-    ///
-    /// If values for the properties [surface], [background],
-    /// [dialogBackground] or [scaffoldBackground] are given,
-    /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
-    /// this [surfaceStyle].
-    @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
-        final FlexSurface surfaceStyle = FlexSurface.material,
-
     /// Blends theme colors into surfaces and backgrounds.
     ///
     /// If defined, used mode overrides the older [surfaceStyle]
@@ -1514,12 +1457,14 @@ class FlexColorScheme with Diagnosticable {
     /// the used branding level via the separate [blendLevel] property.
     ///
     /// The mode [FlexSurfaceMode.highBackgroundLowScaffold] can be used to
-    /// replace the style that is produced when using
-    /// [FlexColorScheme.surfaceStyle] enum property [FlexSurface] in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark]. The mode
-    /// [FlexSurfaceMode.highBackgroundLowScaffold] uses the same design concept
-    /// as the only style offered by [FlexSurface] in
-    /// [FlexColorScheme.surfaceStyle] in use before version 4.
+    /// replace the style that was produced when using old and removed
+    /// `FlexColorScheme.surfaceStyle` enum property `FlexSurface` in
+    /// [FlexColorScheme.light] and [FlexColorScheme.dark] before version 4.
+    ///
+    /// The mode [FlexSurfaceMode.highBackgroundLowScaffold] uses the same
+    /// design concept as the only style offered via removed `FlexSurface`
+    /// in `FlexColorScheme.surfaceStyle` that was in use before version 4,
+    /// and deprecated in version 4.2 and removed in version 5.0.0.
     ///
     /// By adjusting the [FlexColorScheme.blendLevel] property and using this
     /// style, you can find a similar visual effect when using
@@ -1569,10 +1514,12 @@ class FlexColorScheme with Diagnosticable {
     /// they are used instead of values that would be assigned based
     /// on used [FlexSurfaceMode] via [surfaceMode] or [FlexSurface] in
     /// this [surfaceMode].
+    ///
+    /// Defaults to using [FlexSurfaceMode.highScaffoldLowSurfaces] when
+    /// [blendLevel] > 0.
     final FlexSurfaceMode? surfaceMode,
 
-    /// When [surfaceMode] is defined, this sets the blend level strength used
-    /// by the surface mode.
+    /// Sets the blend level strength used by the surface mode.
     ///
     /// The blend level is the integer decimal value of the alpha value
     /// used in the alpha blend function. It mixes one color with another
@@ -2432,13 +2379,14 @@ class FlexColorScheme with Diagnosticable {
     final FlexSchemeColor flexColors =
         colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
     // If the passed in property values are not null, or there was a colorScheme
-    // provided, we will override the colors properties with them, this gets
-    // us also correct effective and swap behavior on directly passed in
-    // property values or colorScheme based colors.
+    // provided, we will override the colors properties with them. Doing it here
+    // gets also correct effective and swap behavior on directly passed in
+    // property values or colorScheme based colors too.
     final FlexSchemeColor withPassedColors = flexColors.copyWith(
       primary: primary ?? colorScheme?.primary,
-      // Use old primaryVariant also as potential passed in override for
+      // Use primaryVariant also as potential passed in override for
       // container, for backwards behavior compatibility.
+      // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
       primaryContainer:
           primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
@@ -2454,8 +2402,8 @@ class FlexColorScheme with Diagnosticable {
     );
     // First cut of effective FlexSchemeColor depends on colors, usedColors
     // and swap. When we use Brightness.light, we also guarantee that we have
-    // colors on effectiveColors.error and errorContainer, they can no longer be
-    // null further below.
+    // colors on effectiveColors.error and errorContainer, they are guaranteed
+    // to no longer be null after this call.
     FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
       withPassedColors,
       usedColors,
@@ -2463,7 +2411,7 @@ class FlexColorScheme with Diagnosticable {
       brightness: Brightness.light,
     );
     // ColorScheme to hold our seeded scheme colors, it will be kept as null
-    // if we do not use M3 key based seeded tonal palette colors.
+    // if we do not use M3 key based seeded tonal palette ColorScheme.
     ColorScheme? seedScheme;
     // If keyColor seeds is active, apply seeded colors to effective colors.
     if (seed.useKeyColors) {
@@ -2502,36 +2450,27 @@ class FlexColorScheme with Diagnosticable {
         errorContainer: seedScheme.errorContainer,
       );
     }
-    // If surfaceMode is not null we use the newer blend mode and level via
-    // factory FlexSchemeSurfaceColors.flexBlend otherwise we use the older
-    // deprecated one defined by factory FlexSchemeSurfaceColors.from.
-    // Only the newer surface mode, will respect the seed color based surfaces
-    // and use them as input to additional primary color blending.
-    final FlexSchemeSurfaceColors surfaceSchemeColors = surfaceMode != null
-        ? FlexSchemeSurfaceColors.blend(
-            brightness: Brightness.light,
-            surfaceMode: surfaceMode,
-            blendLevel: blendLevel,
-            surfaceVariantBlendDivide: seed.useKeyColors ? 2 : 1,
-            schemeColors: effectiveColors,
-            surfaceColors: seed.useKeyColors
-                // If we use seed colors, the surface colors are given by the
-                // seed generated scheme.
-                ? FlexSchemeSurfaceColors(
-                    surface: seedScheme!.surface,
-                    surfaceVariant: seedScheme.surfaceVariant,
-                    inverseSurface: seedScheme.inverseSurface,
-                    dialogBackground: seedScheme.surface,
-                    background: seedScheme.background,
-                    scaffoldBackground: seedScheme.background,
-                  )
-                : null,
-          )
-        : FlexSchemeSurfaceColors.from(
-            brightness: Brightness.light,
-            surfaceStyle: surfaceStyle,
-            primary: effectiveColors.primary,
-          );
+    // Compute surface blends, they may also be added on seeded surfaces.
+    final FlexSchemeSurfaceColors surfaceSchemeColors =
+        FlexSchemeSurfaceColors.blend(
+      brightness: Brightness.light,
+      surfaceMode: surfaceMode ?? FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: blendLevel,
+      surfaceVariantBlendDivide: seed.useKeyColors ? 2 : 1,
+      schemeColors: effectiveColors,
+      surfaceColors: seed.useKeyColors
+          // Using seed colors, starting surfaces are given by generated scheme.
+          ? FlexSchemeSurfaceColors(
+              surface: seedScheme!.surface,
+              surfaceVariant: seedScheme.surfaceVariant,
+              inverseSurface: seedScheme.inverseSurface,
+              dialogBackground: seedScheme.surface,
+              background: seedScheme.background,
+              scaffoldBackground: seedScheme.background,
+            )
+          // Default surfaces are used as starting point for blended ones.
+          : null,
+    );
     // Use passed in sub-theme config data, or a default one, if none given.
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
@@ -3045,27 +2984,6 @@ class FlexColorScheme with Diagnosticable {
     /// color values.
     final int usedColors = 6,
 
-    /// Blends theme colors into surfaces and backgrounds. Deprecated use
-    /// [surfaceMode] in combination with [blendLevel] instead.
-    ///
-    /// This property was used in FlexColorScheme before v4.0.0.
-    /// It is is still available for backwards compatibility.
-    /// Use [surfaceMode] and [blendLevel] instead, that replace [surfaceStyle]
-    /// and offers more surface color configuration options and choices.
-    ///
-    /// Defaults to [FlexSurface.material] which results in Flutter
-    /// standard [ColorScheme.light] surface colors, which follows the
-    /// default color scheme in the Material Design guide for light theme found
-    /// [here](https://material.io/design/color/the-color-system.html#color-theme-creation).
-    ///
-    /// If values for the properties [surface], [background],
-    /// [dialogBackground] or [scaffoldBackground] are given,
-    /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] in [surfaceMode] or used [FlexSurface] in
-    /// this [surfaceStyle].
-    @Deprecated('Deprecated in v4.2.0, use surfaceMode and blendLevel instead.')
-        final FlexSurface surfaceStyle = FlexSurface.material,
-
     /// Blends theme colors into surfaces and backgrounds.
     ///
     /// If defined, used mode overrides the older [surfaceStyle]
@@ -3074,12 +2992,14 @@ class FlexColorScheme with Diagnosticable {
     /// the used branding level via the separate [blendLevel] property.
     ///
     /// The mode [FlexSurfaceMode.highBackgroundLowScaffold] can be used to
-    /// replace the style that is produced when using
-    /// [FlexColorScheme.surfaceStyle] enum property [FlexSurface] in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark]. The mode
-    /// [FlexSurfaceMode.highBackgroundLowScaffold] uses the same design concept
-    /// as the only style offered by [FlexSurface] in
-    /// [FlexColorScheme.surfaceStyle] in use before version 4.
+    /// replace the style that was produced when using old and removed
+    /// `FlexColorScheme.surfaceStyle` enum property `FlexSurface` in
+    /// [FlexColorScheme.light] and [FlexColorScheme.dark] before version 4.
+    ///
+    /// The mode [FlexSurfaceMode.highBackgroundLowScaffold] uses the same
+    /// design concept as the only style offered via removed `FlexSurface`
+    /// in `FlexColorScheme.surfaceStyle` that was in use before version 4,
+    /// and deprecated in version 4.2 and removed in version 5.0.0.
     ///
     /// By adjusting the [FlexColorScheme.blendLevel] property and using this
     /// style, you can find a similar visual effect when using
@@ -3129,10 +3049,12 @@ class FlexColorScheme with Diagnosticable {
     /// they are used instead of values that would be assigned based
     /// on used [FlexSurfaceMode] via [surfaceMode] or [FlexSurface] in
     /// this [surfaceMode].
+    ///
+    /// Defaults to using [FlexSurfaceMode.highScaffoldLowSurfaces] when
+    /// [blendLevel] > 0.
     final FlexSurfaceMode? surfaceMode,
 
-    /// When [surfaceMode] is defined, this sets the blend level strength used
-    /// by the surface mode.
+    /// Sets the blend level strength used by the surface mode.
     ///
     /// The blend level is the integer decimal value of the alpha value
     /// used in the alpha blend function. It mixes one color with another
@@ -3991,17 +3913,18 @@ class FlexColorScheme with Diagnosticable {
         colors ?? FlexColor.schemesWithCustom[flexScheme]!.dark;
 
     // If the passed in property values are not null, or there was a colorScheme
-    // provided, we will override the colors properties with them, this gets
-    // us also correct effective and swap behavior on directly passed in
-    // property values or colorScheme based colors.
+    // provided, we will override the colors properties with them. Doing it here
+    // gets also correct effective and swap behavior on directly passed in
+    // property values or colorScheme based colors too.
     final FlexSchemeColor withPassedColors = flexColors.copyWith(
       primary: primary ?? colorScheme?.primary,
-      // Use old primaryVariant also as potential passed in override for
+      // Use primaryVariant also as potential passed in override for
       // container, for backwards behavior compatibility.
+      // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
       primaryContainer:
           primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
-      // Use old secondaryVariant also as potential passed in override for
+      // Use old secondaryVariant as potential passed in override for
       // container, for backwards behavior compatibility.
       secondaryContainer: secondaryContainer ??
           secondaryVariant ??
@@ -4011,10 +3934,10 @@ class FlexColorScheme with Diagnosticable {
       error: error ?? colorScheme?.error,
       errorContainer: colorScheme?.errorContainer,
     );
-    // Effective FlexSchemeColor depends on colors, usedColors and swapColors.
-    // When we use Brightness.dark, we also guarantee that we have default
-    // colors on effectiveColors.error and errorContainer, they can no longer be
-    // null further below.
+    // First cut of effective FlexSchemeColor depends on colors, usedColors
+    // and swap. When we use Brightness.dark, we also guarantee that we have
+    // colors on effectiveColors.error and errorContainer, they are guaranteed
+    // to no longer be null after this call.
     FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
       withPassedColors,
       usedColors,
@@ -4022,7 +3945,7 @@ class FlexColorScheme with Diagnosticable {
       brightness: Brightness.dark,
     );
     // ColorScheme to hold our seeded scheme colors, it will be kept as null
-    // if we do not use M3 key based seeded tonal palette colors.
+    // if we do not use M3 key based seeded tonal palette ColorScheme.
     ColorScheme? seedScheme;
     // If keyColor seeds is active, apply seeded colors to effective colors.
     if (seed.useKeyColors) {
@@ -4087,36 +4010,27 @@ class FlexColorScheme with Diagnosticable {
         errorContainer: seedScheme.errorContainer,
       );
     }
-    // If surfaceMode is not null we use the newer blend mode and level via
-    // factory FlexSchemeSurfaceColors.flexBlend otherwise we use the older
-    // deprecated one defined by factory FlexSchemeSurfaceColors.from.
-    // Only the newer surface mode, will respect the seed color based surfaces
-    // and use them as input to additional primary color blending.
-    final FlexSchemeSurfaceColors surfaceSchemeColors = surfaceMode != null
-        ? FlexSchemeSurfaceColors.blend(
-            brightness: Brightness.dark,
-            surfaceMode: surfaceMode,
-            blendLevel: blendLevel,
-            surfaceVariantBlendDivide: seed.useKeyColors ? 2 : 1,
-            schemeColors: effectiveColors,
-            surfaceColors: seed.useKeyColors
-                // If we use seed colors, the surface colors are given by the
-                // seed generated scheme.
-                ? FlexSchemeSurfaceColors(
-                    surface: seedScheme!.surface,
-                    surfaceVariant: seedScheme.surfaceVariant,
-                    inverseSurface: seedScheme.inverseSurface,
-                    dialogBackground: seedScheme.surface,
-                    background: seedScheme.background,
-                    scaffoldBackground: seedScheme.background,
-                  )
-                : null,
-          )
-        : FlexSchemeSurfaceColors.from(
-            brightness: Brightness.dark,
-            surfaceStyle: surfaceStyle,
-            primary: effectiveColors.primary,
-          );
+    // Compute surface blends, they may also be added on seeded surfaces.
+    final FlexSchemeSurfaceColors surfaceSchemeColors =
+        FlexSchemeSurfaceColors.blend(
+      brightness: Brightness.dark,
+      surfaceMode: surfaceMode ?? FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: blendLevel,
+      surfaceVariantBlendDivide: seed.useKeyColors ? 2 : 1,
+      schemeColors: effectiveColors,
+      surfaceColors: seed.useKeyColors
+          // Using seed colors, starting surfaces are given by generated scheme.
+          ? FlexSchemeSurfaceColors(
+              surface: seedScheme!.surface,
+              surfaceVariant: seedScheme.surfaceVariant,
+              inverseSurface: seedScheme.inverseSurface,
+              dialogBackground: seedScheme.surface,
+              background: seedScheme.background,
+              scaffoldBackground: seedScheme.background,
+            )
+          // Default surfaces are used as starting point for blended ones.
+          : null,
+    );
     // Use passed in sub-theme config data, or a default one, if none given.
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
@@ -5179,7 +5093,7 @@ class FlexColorScheme with Diagnosticable {
     // Use passed in target platform, else actual host platform.
     final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
 
-    // TODO(rydmike): Remove when default in SDK, still 2014 in Flutter 2.10.x
+    // TODO(rydmike): Remove when default in SDK, still T2014 in Flutter 2.10.x.
     // Used Typography deviates from the Flutter standard that _still_ uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
     // as default, if one is not provided, we want the Material 2 correct 2018
@@ -5453,7 +5367,7 @@ class FlexColorScheme with Diagnosticable {
       }
     }
 
-    // TODO(rydmike): Follow-up what SDK will do with dividerColor deprecation.
+    // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
     // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
     // If our onSurface is primary tinted it has an effect on this divider too.
     final Color dividerColor = colorScheme.onSurface.withAlpha(0x1E); // 12%
@@ -5520,7 +5434,7 @@ class FlexColorScheme with Diagnosticable {
       primaryColor: colorScheme.primary,
       canvasColor: colorScheme.background,
 
-      // TODO(rydmike): Follow-up coming SDK deprecation of scaffoldBackground.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of scaffoldBackground.
       // See: https://github.com/flutter/flutter/issues/91772
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
       // Here it is replaced with a separate color for the scaffold background,
@@ -5549,7 +5463,7 @@ class FlexColorScheme with Diagnosticable {
       // hintColor is only used by DropdownButton and InputDecorator in SDK.
       hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
 
-      // TODO(rydmike): Follow-up coming SDK deprecation of interaction colors.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of interaction colors.
       // See: https://github.com/flutter/flutter/issues/91772
       // Special theming on hover, focus, highlight and splash, if opting in on
       // themedEffects, otherwise use ThemeData defaults by passing in null
@@ -5575,7 +5489,7 @@ class FlexColorScheme with Diagnosticable {
               .withAlpha(kSplashAlpha)
           : null,
 
-      // TODO(rydmike): Follow-up coming deprecation of dialogBackgroundColor.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of dialogBackgroundColor
       // Flutter standard dialogBackgroundColor for color scheme based themes
       // uses colorScheme.background.
       // The FlexColorScheme.from() factory constructor uses passed in dialog
@@ -5593,7 +5507,7 @@ class FlexColorScheme with Diagnosticable {
       // Define errorColor via color scheme error color.
       errorColor: colorScheme.error,
 
-      // TODO(rydmike): Follow-up coming SDK deprecation of indicatorColor.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
       // Use TabBar style dependent function for selected Tab as indicatorColor
       // if no color scheme selection for it is made.
       indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
@@ -5632,7 +5546,7 @@ class FlexColorScheme with Diagnosticable {
       // ThemeData properties when it is appropriate and timely to do so.
       // ----------------------------------------------------------------------
 
-      // TODO(rydmike): Follow-up coming SDK deprecation of toggleableActive.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of toggleableActive.
       // See: https://github.com/flutter/flutter/pull/95870
       // This color is still important, if it is not set we get a teal color for
       // it in dark mode, and not actually the secondary color that we want for
@@ -5642,7 +5556,7 @@ class FlexColorScheme with Diagnosticable {
       // See issue: https://github.com/flutter/flutter/issues/65782
       toggleableActiveColor: colorScheme.secondary,
 
-      // TODO(rydmike): Follow-up coming SDK deprecation of primaryColorDark.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
       // See: https://github.com/flutter/flutter/issues/91772
       // The primary dark color no longer exists in ColorScheme themes, but
       // it still needs to be set to match the ColorScheme theme, otherwise we
@@ -5654,7 +5568,7 @@ class FlexColorScheme with Diagnosticable {
       // See issue: https://github.com/flutter/flutter/issues/65782
       primaryColorDark: primaryColorDark,
 
-      // TODO(rydmike): Follow-up coming SDK deprecation of primaryColorLight.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorLight.
       // See: https://github.com/flutter/flutter/issues/91772
       // The light primary color no longer exists in ColorScheme themes, but it
       // still needs to be set to match the ColorScheme theme, otherwise we
@@ -5664,7 +5578,7 @@ class FlexColorScheme with Diagnosticable {
       // See issue: https://github.com/flutter/flutter/issues/65782
       primaryColorLight: primaryColorLight,
 
-      // TODO(rydmike): Follow-up coming SDK deprecation of secondaryHeaderColor
+      // TODO(rydmike): Monitor Flutter SDK deprecation of secondaryHeaderColor
       // See: https://github.com/flutter/flutter/issues/91772
       // Define a secondary header color, this property is only used in Flutter
       // SDK by `PaginatedDataTable`. It gets a super light [50] hue of the
@@ -6848,10 +6762,16 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
                 dialogBackground: FlexColor.materialDarkSurface,
               ));
+    // Below, when blendLevel is zero, we use Material default surfaces. We do
+    // that for all cases so that blend level 0 matches Material 2 default
+    // on level 0 for all surfaces modes, for higher than 0 the modes use
+    // different starting points for their surfaces that may be darker than
+    // Material 2 in dark mode, and a bit off white in white mode.
+    // Doing so improves the color blends.
+    //
     // If using `highBackgroundLowScaffold` or `highSurfaceLowScaffold` or
-    // `highScaffoldLevelSurface` and `_blendLevel` is zero,
-    // we use Material default surfaces.
-    // This is the same style as used in versions before 4.0 when using
+    // `highScaffoldLevelSurface` and `_blendLevel` we use the same mix of
+    // starting surfaces as used in versions before 4.0 when using
     // `surfaceStyle` based surfaces and no blends via `FlexSurface.material`.
     if (surfaceMode == FlexSurfaceMode.highBackgroundLowScaffold ||
         surfaceMode == FlexSurfaceMode.highSurfaceLowScaffold ||
@@ -6879,8 +6799,8 @@ class FlexSchemeSurfaceColors with Diagnosticable {
               );
         }
       } else {
-        // For other `_blendLevel` values than `0` we use the
-        // surface color defined by [FlexColor] surfaces. They differ slightly
+        // For `blendLevel` > 0 we use the surface color defined by [FlexColor]
+        // surfaces. They differ slightly
         // from Material starting colors to provide better blend effects.
         // White is slightly off-white for background and in dark mode
         // surface is slightly darker and background even darker, while
@@ -6908,31 +6828,56 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         }
       }
     }
-    // In these modes we use FlexColor default surface color on all surfaces.
+    // In these modes we use FlexColor default surface color on all surfaces,
+    // when blend leve is > 0.
     if (surfaceMode == FlexSurfaceMode.level ||
         surfaceMode == FlexSurfaceMode.highScaffoldLowSurface ||
         surfaceMode == FlexSurfaceMode.levelSurfacesLowScaffold ||
         surfaceMode == FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog) {
-      if (isLight) {
-        surface = surfaceColors ??
-            const FlexSchemeSurfaceColors(
-              surface: FlexColor.lightSurface,
-              surfaceVariant: FlexColor.lightSurface,
-              inverseSurface: FlexColor.darkSurface,
-              background: FlexColor.lightSurface,
-              scaffoldBackground: FlexColor.lightSurface,
-              dialogBackground: FlexColor.lightSurface,
-            );
+      if (usedBlendLevel == 0) {
+        if (isLight) {
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialLightSurface,
+                surfaceVariant: FlexColor.materialLightSurface,
+                inverseSurface: FlexColor.materialDarkSurface,
+                background: FlexColor.materialLightBackground,
+                scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+                dialogBackground: FlexColor.materialLightSurface,
+              );
+        } else {
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialDarkSurface,
+                surfaceVariant: FlexColor.materialDarkSurface,
+                inverseSurface: FlexColor.materialLightSurface,
+                background: FlexColor.materialDarkBackground,
+                scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
+                dialogBackground: FlexColor.materialDarkSurface,
+              );
+        }
       } else {
-        surface = surfaceColors ??
-            const FlexSchemeSurfaceColors(
-              surface: FlexColor.darkSurface,
-              surfaceVariant: FlexColor.darkSurface,
-              inverseSurface: FlexColor.lightSurface,
-              background: FlexColor.darkSurface,
-              scaffoldBackground: FlexColor.darkSurface,
-              dialogBackground: FlexColor.darkSurface,
-            );
+        if (isLight) {
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.lightSurface,
+                surfaceVariant: FlexColor.lightSurface,
+                inverseSurface: FlexColor.darkSurface,
+                background: FlexColor.lightSurface,
+                scaffoldBackground: FlexColor.lightSurface,
+                dialogBackground: FlexColor.lightSurface,
+              );
+        } else {
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.darkSurface,
+                surfaceVariant: FlexColor.darkSurface,
+                inverseSurface: FlexColor.lightSurface,
+                background: FlexColor.darkSurface,
+                scaffoldBackground: FlexColor.darkSurface,
+                dialogBackground: FlexColor.darkSurface,
+              );
+        }
       }
     }
     // In mode `highScaffoldLowSurfaces` and
@@ -6942,26 +6887,50 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     // as compared to FlexColor.lightSurface and dark surface.
     if (surfaceMode == FlexSurfaceMode.highScaffoldLowSurfaces ||
         surfaceMode == FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog) {
-      if (isLight) {
-        surface = surfaceColors ??
-            const FlexSchemeSurfaceColors(
-              surface: FlexColor.lightBackground,
-              surfaceVariant: FlexColor.lightBackground,
-              inverseSurface: FlexColor.darkBackground,
-              background: FlexColor.lightBackground,
-              scaffoldBackground: FlexColor.lightBackground,
-              dialogBackground: FlexColor.lightBackground,
-            );
+      if (usedBlendLevel == 0) {
+        if (isLight) {
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialLightSurface,
+                surfaceVariant: FlexColor.materialLightSurface,
+                inverseSurface: FlexColor.materialDarkSurface,
+                background: FlexColor.materialLightBackground,
+                scaffoldBackground: FlexColor.materialLightScaffoldBackground,
+                dialogBackground: FlexColor.materialLightSurface,
+              );
+        } else {
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.materialDarkSurface,
+                surfaceVariant: FlexColor.materialDarkSurface,
+                inverseSurface: FlexColor.materialLightSurface,
+                background: FlexColor.materialDarkBackground,
+                scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
+                dialogBackground: FlexColor.materialDarkSurface,
+              );
+        }
       } else {
-        surface = surfaceColors ??
-            const FlexSchemeSurfaceColors(
-              surface: FlexColor.darkBackground,
-              surfaceVariant: FlexColor.darkBackground,
-              inverseSurface: FlexColor.lightBackground,
-              background: FlexColor.darkBackground,
-              scaffoldBackground: FlexColor.darkBackground,
-              dialogBackground: FlexColor.darkBackground,
-            );
+        if (isLight) {
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.lightBackground,
+                surfaceVariant: FlexColor.lightBackground,
+                inverseSurface: FlexColor.darkBackground,
+                background: FlexColor.lightBackground,
+                scaffoldBackground: FlexColor.lightBackground,
+                dialogBackground: FlexColor.lightBackground,
+              );
+        } else {
+          surface = surfaceColors ??
+              const FlexSchemeSurfaceColors(
+                surface: FlexColor.darkBackground,
+                surfaceVariant: FlexColor.darkBackground,
+                inverseSurface: FlexColor.lightBackground,
+                background: FlexColor.darkBackground,
+                scaffoldBackground: FlexColor.darkBackground,
+                dialogBackground: FlexColor.darkBackground,
+              );
+        }
       }
     }
     // Get alpha blend values corresponding to used mode, level and brightness.
@@ -6983,251 +6952,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
       scaffoldBackground: surface.scaffoldBackground
           .blendAlpha(blendColor.scaffoldBackground, alphaValue.scaffoldAlpha),
     );
-  }
-
-  /// Returns the surface colors for given [brightness] and [surfaceStyle]
-  /// values.
-  ///
-  /// The [FlexSurface] enum is used to represent surface color schemes.
-  /// [FlexSurface.material] is the surface colors scheme presented
-  /// in Material design guide here for light theme:
-  /// https://material.io/design/color/the-color-system.html#color-theme-creation
-  /// and here for dark theme under "The dark theme baseline palette":
-  /// https://material.io/design/color/dark-theme.html#ui-application
-  ///
-  /// The [FlexSurface.light], [FlexSurface.medium], [FlexSurface.strong]
-  /// and [FlexSurface.heavy] blends in an increasing amount of the provided
-  /// [primary] color into the surface, background and scaffold background
-  /// colors, for a primary color branded look on these background colors.
-  ///
-  /// The [primary] color is not used for for Material or custom surface style.
-  /// If [primary] is not provided it defaults to
-  /// [FlexColor.materialLightPrimary] if brightness is light, and
-  /// otherwise defaults to [FlexColor.materialDarkPrimary]. When creating
-  /// surface colors that fits a given scheme, the scheme's primary color
-  /// should be passed to [primary].
-  ///
-  /// The percentage of blend values for each strength are separate for
-  /// [surface], [background] and [scaffoldBackground]. Scaffold background
-  /// only gets a slight blend in heavy mode. Surface and dialog receive a lower
-  /// percentage blend than background. The blend values are also different for
-  /// light and dark themes, as light themes require less of the typically more
-  /// saturated primary color. Dark themes must use a slightly de-saturated
-  /// primary color, so the blend percentage values for dark surfaces must be
-  /// higher.
-  ///
-  /// This kind of surface branding is based on the Material guide found
-  /// under "Accessibility and contrast"
-  /// https://material.io/design/color/dark-theme.html#properties
-  /// for branded surfaces.
-  ///
-  /// The [brightness] controls if we create surface colors for light or
-  /// dark surfaces.
-  ///
-  /// The surface colors returned by this factory can also be used to make
-  /// branded surface colors for Flutter's standard [ColorScheme], it does
-  /// not have to be used exclusively by [FlexColorScheme].
-  ///
-  /// This factory only gives elevation overlay color in dark mode on Material
-  /// with surface color, and dialogs that uses the same color value.
-  /// To get elevation overlay color in dark themes on all surfaces used by
-  /// [Material], use factory FlexSchemeSurfaceColors.blend and one of the
-  /// modes that start with `equal` in its name.
-  /// Other modes will only use elevation overlay if their background happens to
-  /// be equal to resulting colorScheme.surface color. For more information
-  /// see issue: https://github.com/flutter/flutter/issues/90353
-  factory FlexSchemeSurfaceColors.from({
-    /// Controls if we create surface colors for light or dark surfaces.
-    Brightness brightness = Brightness.light,
-
-    /// The style of the used surfaces colors.
-    FlexSurface surfaceStyle = FlexSurface.material,
-
-    /// Primary color to blend into surface colors when ThemeSurface light,
-    /// medium, strong and heavy are used. Is not used for and not required
-    /// for Material or custom surface style.
-    ///
-    /// Defaults to [FlexColor.materialLightPrimary] if brightness is light,
-    /// otherwise defaults to [FlexColor.materialDarkPrimary].
-    Color? primary,
-  }) {
-    // Primary color gets default via brightness and Material default colors
-    // if it was not provided, should be provided when making branded surfaces.
-    primary ??= brightness == Brightness.light
-        ? FlexColor.materialLightPrimary
-        : FlexColor.materialDarkPrimary;
-
-    switch (brightness) {
-      case Brightness.light:
-        {
-          switch (surfaceStyle) {
-            case FlexSurface.material:
-              return const FlexSchemeSurfaceColors(
-                surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.materialLightSurface,
-                inverseSurface: FlexColor.materialDarkSurface,
-                background: FlexColor.materialLightBackground,
-                scaffoldBackground: FlexColor.materialLightScaffoldBackground,
-                dialogBackground: FlexColor.materialLightSurface,
-              );
-            case FlexSurface.light:
-              return FlexSchemeSurfaceColors(
-                  surface: FlexColor.lightSurface
-                      .blend(primary, kLightBlendSurfaceLight),
-                  surfaceVariant: FlexColor.lightSurface
-                      .blend(primary, kLightBlendSurfaceLight),
-                  inverseSurface: FlexColor.darkSurface
-                      .blend(primary, kDarkBlendSurfaceLight),
-                  background: FlexColor.lightBackground
-                      .blend(primary, kLightBlendBackgroundLight),
-                  scaffoldBackground: FlexColor.lightScaffoldBackground,
-                  dialogBackground: FlexColor.lightSurface);
-            case FlexSurface.medium:
-              return FlexSchemeSurfaceColors(
-                surface: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceMedium),
-                surfaceVariant: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceMedium),
-                inverseSurface: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceMedium),
-                background: FlexColor.lightBackground
-                    .blend(primary, kLightBlendBackgroundMedium),
-                scaffoldBackground: FlexColor.lightScaffoldBackground,
-                dialogBackground: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceMedium),
-              );
-            case FlexSurface.strong:
-              return FlexSchemeSurfaceColors(
-                surface: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceStrong),
-                surfaceVariant: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceStrong),
-                inverseSurface: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceStrong),
-                background: FlexColor.lightBackground
-                    .blend(primary, kLightBlendBackgroundStrong),
-                scaffoldBackground: FlexColor.lightScaffoldBackground,
-                dialogBackground: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceStrong),
-              );
-            case FlexSurface.heavy:
-              return FlexSchemeSurfaceColors(
-                surface: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceHeavy),
-                surfaceVariant: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceHeavy),
-                inverseSurface: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceHeavy),
-                background: FlexColor.lightBackground
-                    .blend(primary, kLightBlendBackgroundHeavy),
-                scaffoldBackground: FlexColor.lightScaffoldBackground
-                    .blend(primary, kLightBlendScaffoldHeavy),
-                dialogBackground: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceHeavy),
-              );
-            case FlexSurface.custom:
-              // Custom surface theme returns same surface as standard
-              // material surface. If surface colors are not overridden by
-              // providing none null custom surface colors values to the
-              // FlexColorScheme, the results is the same as material.
-              return const FlexSchemeSurfaceColors(
-                surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.materialLightSurface,
-                inverseSurface: FlexColor.materialDarkSurface,
-                background: FlexColor.materialLightBackground,
-                scaffoldBackground: FlexColor.materialLightScaffoldBackground,
-                dialogBackground: FlexColor.materialLightSurface,
-              );
-          }
-        }
-      // break;
-      case Brightness.dark:
-        {
-          switch (surfaceStyle) {
-            case FlexSurface.material:
-              return const FlexSchemeSurfaceColors(
-                surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.materialDarkSurface,
-                inverseSurface: FlexColor.materialLightSurface,
-                background: FlexColor.materialDarkBackground,
-                scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
-                dialogBackground: FlexColor.materialDarkSurface,
-              );
-            case FlexSurface.light:
-              return FlexSchemeSurfaceColors(
-                surface: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceLight),
-                surfaceVariant: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceLight),
-                inverseSurface: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceLight),
-                background: FlexColor.darkBackground
-                    .blend(primary, kDarkBlendBackgroundLight),
-                scaffoldBackground: FlexColor.darkScaffoldBackground,
-                dialogBackground: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceLight),
-              );
-            case FlexSurface.medium:
-              return FlexSchemeSurfaceColors(
-                surface: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceMedium),
-                surfaceVariant: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceMedium),
-                inverseSurface: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceMedium),
-                background: FlexColor.darkBackground
-                    .blend(primary, kDarkBlendBackgroundMedium),
-                scaffoldBackground: FlexColor.darkScaffoldBackground,
-                dialogBackground: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceMedium),
-              );
-            case FlexSurface.strong:
-              return FlexSchemeSurfaceColors(
-                surface: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceStrong),
-                surfaceVariant: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceStrong),
-                inverseSurface: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceStrong),
-                background: FlexColor.darkBackground
-                    .blend(primary, kDarkBlendBackgroundStrong),
-                scaffoldBackground: FlexColor.darkScaffoldBackground,
-                dialogBackground: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceStrong),
-              );
-            case FlexSurface.heavy:
-              return FlexSchemeSurfaceColors(
-                surface: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceHeavy),
-                surfaceVariant: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceHeavy),
-                inverseSurface: FlexColor.lightSurface
-                    .blend(primary, kLightBlendSurfaceHeavy),
-                background: FlexColor.darkBackground
-                    .blend(primary, kDarkBlendBackgroundHeavy),
-                scaffoldBackground: FlexColor.darkScaffoldBackground
-                    .blend(primary, kDarkBlendScaffoldHeavy),
-                dialogBackground: FlexColor.darkSurface
-                    .blend(primary, kDarkBlendSurfaceHeavy),
-              );
-            case FlexSurface.custom:
-              // Custom surface theme returns same surface colors as standard
-              // material surface.
-              // It is up to the implementation of creating the scheme
-              // to decide what to do when surfaceStyle [FlexSurface.custom]
-              // is used. If the case is not handled, the custom style
-              // will just result in the same style as [FlexSurface.material].
-              return const FlexSchemeSurfaceColors(
-                surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.materialDarkSurface,
-                inverseSurface: FlexColor.materialLightSurface,
-                background: FlexColor.materialDarkBackground,
-                scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
-                dialogBackground: FlexColor.materialDarkSurface,
-              );
-          }
-        }
-    }
   }
 
   /// Copy the object with one or more provided properties changed.
