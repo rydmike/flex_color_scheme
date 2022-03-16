@@ -46,6 +46,12 @@ Completed changes:
     replaced in version 4.0.0 already when using `surfaceMode` and `blendLevel`.
   - Removed tests and modified tests needing to consider above removals.
 
+* Completed test updates. Now 1377 test, coverage > 99%. Some new color value
+  tests are still missing. Not critical, they are just const values, but the 
+  test are used to make the statement that they are a part of tests and 
+  version promise. Missing ones to be added before stable 5.0.0. release,
+  there is just **a lot** of them to add.
+
 ## v5.0.0-dev.1 - March 14, 2022
 
 Version 5 is a big refactor with deprecation of previous `variant` based
