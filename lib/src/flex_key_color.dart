@@ -315,6 +315,7 @@ class FlexKeyColors with Diagnosticable {
     );
   }
 
+  /// Override the equality operator.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -331,21 +332,21 @@ class FlexKeyColors with Diagnosticable {
         other.keepTertiaryContainer == keepTertiaryContainer;
   }
 
+  /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode {
-    return hashValues(
-      useKeyColors,
-      useSecondary,
-      useTertiary,
-      keepPrimary,
-      keepSecondary,
-      keepTertiary,
-      keepPrimaryContainer,
-      keepSecondaryContainer,
-      keepTertiaryContainer,
-    );
-  }
+  int get hashCode => hashValues(
+        useKeyColors,
+        useSecondary,
+        useTertiary,
+        keepPrimary,
+        keepSecondary,
+        keepTertiary,
+        keepPrimaryContainer,
+        keepSecondaryContainer,
+        keepTertiaryContainer,
+      );
 
+  /// Flutter debug properties override, includes toString.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

@@ -4,8 +4,6 @@ import '../../shared/copy_color_to_clipboard.dart';
 import '../../shared/palette_color_box.dart';
 
 /// TonalPaletteColors widget.
-///
-/// Not library exposed, private to the library.
 class TonalPaletteColors extends StatelessWidget {
   /// Default const constructor.
   const TonalPaletteColors({

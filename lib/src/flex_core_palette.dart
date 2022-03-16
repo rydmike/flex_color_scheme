@@ -571,6 +571,7 @@ class FlexCorePalette extends CorePalette {
 //         ...neutralVariant.asList,
 //       ];
 //
+//   /// Override the equality operator.
 //   @override
 //   bool operator ==(Object other) =>
 //       other is _CorePalette &&
@@ -581,8 +582,9 @@ class FlexCorePalette extends CorePalette {
 //       neutralVariant == other.neutralVariant &&
 //       error == other.error;
 //
+//   /// Override for hashcode, dart.ui Jenkins based.
 //   @override
-//   int get hashCode => Object.hash(
+//   int get hashCode => hashValues(
 //         primary,
 //         secondary,
 //         tertiary,
@@ -591,6 +593,7 @@ class FlexCorePalette extends CorePalette {
 //         error,
 //       );
 //
+//   /// Override toString.
 //   @override
 //   String toString() {
 //     return 'primary: $primary\n'

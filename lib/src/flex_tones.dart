@@ -631,7 +631,7 @@ class FlexTones with Diagnosticable {
     );
   }
 
-  /// Override for equality operator.
+  /// Override the equality operator.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -676,47 +676,45 @@ class FlexTones with Diagnosticable {
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode {
-    return hashList(<Object?>[
-      primaryTone,
-      onPrimaryTone,
-      primaryContainerTone,
-      onPrimaryContainerTone,
-      secondaryTone,
-      onSecondaryTone,
-      secondaryContainerTone,
-      onSecondaryContainerTone,
-      tertiaryTone,
-      onTertiaryTone,
-      tertiaryContainerTone,
-      onTertiaryContainerTone,
-      errorTone,
-      onErrorTone,
-      errorContainerTone,
-      onErrorContainerTone,
-      backgroundTone,
-      onBackgroundTone,
-      surfaceTone,
-      onSurfaceTone,
-      surfaceVariantTone,
-      onSurfaceVariantTone,
-      outlineTone,
-      shadowTone,
-      inverseSurfaceTone,
-      onInverseSurfaceTone,
-      inversePrimaryTone,
-      primaryChroma,
-      primaryMinChroma,
-      secondaryChroma,
-      secondaryMinChroma,
-      tertiaryChroma,
-      tertiaryMinChroma,
-      neutralChroma,
-      neutralVariantChroma,
-    ]);
-  }
+  int get hashCode => hashList(<Object?>[
+        primaryTone,
+        onPrimaryTone,
+        primaryContainerTone,
+        onPrimaryContainerTone,
+        secondaryTone,
+        onSecondaryTone,
+        secondaryContainerTone,
+        onSecondaryContainerTone,
+        tertiaryTone,
+        onTertiaryTone,
+        tertiaryContainerTone,
+        onTertiaryContainerTone,
+        errorTone,
+        onErrorTone,
+        errorContainerTone,
+        onErrorContainerTone,
+        backgroundTone,
+        onBackgroundTone,
+        surfaceTone,
+        onSurfaceTone,
+        surfaceVariantTone,
+        onSurfaceVariantTone,
+        outlineTone,
+        shadowTone,
+        inverseSurfaceTone,
+        onInverseSurfaceTone,
+        inversePrimaryTone,
+        primaryChroma,
+        primaryMinChroma,
+        secondaryChroma,
+        secondaryMinChroma,
+        tertiaryChroma,
+        tertiaryMinChroma,
+        neutralChroma,
+        neutralVariantChroma,
+      ]);
 
-  /// Override Flutter foundation debugFillProperties, also makes toString.
+  /// Flutter debug properties override, includes toString.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
