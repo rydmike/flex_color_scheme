@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 ## v5.0.0-dev.2 - March 16, 2022
 
-Targets with the dev.2 release is:
+###Targets with the dev.2 release are:
 
 * Documentation updates. The bulk of the readme will be migrated to its own site.
 * Minor fixes and cleaning, hopefully only internal.
@@ -14,7 +14,7 @@ Targets with the dev.2 release is:
 * Improvements to Themes Playground, fewer light/dark and widget coupled
   properties. Maybe image based theme and maybe an alternative UI
 
-Completed changes:
+### Completed targets:
 
 * Pub.dev analysis does not like document references to deprecated Flutter
   properties. Changed the [primaryVariant] and [secondaryVariant] references
@@ -46,11 +46,15 @@ Completed changes:
     replaced in version 4.0.0 already when using `surfaceMode` and `blendLevel`.
   - Removed tests and modified tests needing to consider above removals.
 
-* Completed test updates. Now 1377 test, coverage > 99%. Some new color value
-  tests are still missing. Not critical, they are just const values, but the 
+* Added `SchemeColor` based theming of `SnackBar` background color via 
+  `snackBarBackgroundSchemeColor` in `FlexSubThemesData` and support for it 
+  in `FlexSubThemes`.
+
+* Completed test updates. Now 1381 test, coverage > 99.8%. Some new color value
+  tests are still missing. Not critical, they are just const values, but their 
   test are used to make the statement that they are a part of tests and 
   version promise. Missing ones to be added before stable 5.0.0. release,
-  there is just **a lot** of them to add.
+  there are just **a lot** of them to add.
 
 ## v5.0.0-dev.1 - March 14, 2022
 

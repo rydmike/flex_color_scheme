@@ -2149,8 +2149,9 @@ void main() {
     //**************************************************************************
     // FlexColorScheme.light & dark factory tests. With
     // highBackgroundLowScaffold to hit background red color less than surface.
-    // TODO(rydmike): Improve tests by adding more results verification checks.
     //**************************************************************************
+
+    // TODO(rydmike): Improve tests by adding more results verification checks.
 
     final ThemeData tLightHb = FlexColorScheme.light(
       scheme: FlexScheme.red,
@@ -2301,9 +2302,9 @@ void main() {
     // FlexColorScheme.light & dark factory tests. With CUSTOM surface branding.
     //
     // Test result with custom features like surface, appbar, tab bar options.
-    // Just verify not failing (coverage), should check result as well later.
-    // TODO(rydmike): Improve these dummy tests.
     //**************************************************************************
+
+    // TODO(rydmike): Improve tests by adding more results verification checks.
 
     final ThemeData tLightC = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,

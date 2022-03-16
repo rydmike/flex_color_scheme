@@ -5524,7 +5524,7 @@ class FlexColorScheme with Diagnosticable {
 
       // Pass the from FlexColorScheme defined colorScheme to ThemeData
       // colorScheme. Newer standard Flutter sub themes use the colorScheme
-      // for their theming and all sub themes will eventually be converted to
+      // for their theming, and all sub themes will eventually be converted to
       // be based on the defined color scheme colors. FlexColorScheme passes
       // the scheme it has created to the colorScheme property in ThemeData.
       // More info here: https://flutter.dev/go/material-theme-system-updates
@@ -5535,8 +5535,8 @@ class FlexColorScheme with Diagnosticable {
       // standard Theme.from(colorScheme) factory. They are needed because it
       // omits some definitions that will not be aligned with the ColorScheme
       // theme if they are not added to it manually.
-      // This as per the state in master channel December 15, 2020.
-      // This document again relates to the on going transition:
+      //
+      // This document relates to the on going transition:
       // https://flutter.dev/go/material-theme-system-updates
       // This issue explains and demos some of the current gaps:
       // https://github.com/flutter/flutter/issues/65782
@@ -5618,14 +5618,20 @@ class FlexColorScheme with Diagnosticable {
           statusBarIconBrightness: appBarBrightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
-          // TODO(rydmike): Follow-up sys-nav bg via AppBar systemOverlayStyle.
+
+          // TODO(rydmike): Raise sys-nav AppBar systemOverlayStyle SDK issue.
+          //   Would b useful it could set system navbat properties too and not
+          //   only status bar properties. While it might be odd to do so, it
+          //   seems even more odd that a part of the SystemUiOverlayStyle has
+          //   no effect whe used here.
+
           // The systemNavigationBarColor used by default AppBar in SDK is
           // always black, like so:
           // systemNavigationBarColor: const Color(0xFF000000),
           // We try to set it to scheme background instead in AppBar theme,
           // does not do anything, result will be black anyway
           systemNavigationBarColor: colorScheme.background,
-          //
+
           // The systemNavigationBarIconBrightness used by the AppBar in SDK, is
           // always light, for the black background it get, like so:
           // systemNavigationBarIconBrightness: Brightness.light,
@@ -5634,12 +5640,12 @@ class FlexColorScheme with Diagnosticable {
           // system navbar remains black anyway.
           systemNavigationBarIconBrightness:
               isDark ? Brightness.light : Brightness.dark,
+
           // Keeping the above system navbar changes, even if they up to at
           // least Flutter 2.10.3 did not do anything, maybe they start to
           // work one day, then we do not not need an AnnotatedRegion for it
-          // anymore but ca get it via AppBar theme, the way it should be
-          // by default.
-          //
+          // anymore but can get it via AppBar theme, the way it should work.
+
           // The systemNavigationBarDividerColor used by default AppBar in SDK:
           systemNavigationBarDividerColor: null,
           systemNavigationBarContrastEnforced: false,
@@ -5930,6 +5936,7 @@ class FlexColorScheme with Diagnosticable {
       snackBarTheme: useSubThemes
           ? FlexSubThemes.snackBarTheme(
               elevation: subTheme.snackBarElevation,
+              backgroundSchemeColor: subTheme.snackBarBackgroundSchemeColor,
               backgroundColor: isDark
                   ? colorScheme.onSurface
                       .blendAlpha(colorScheme.primary, 0x63) // 39%
@@ -6289,7 +6296,7 @@ class FlexColorScheme with Diagnosticable {
         );
   }
 
-  // TODO(rydmike): Maybe redesign FCS light inversePrimary algo.
+  // TODO(rydmike): Consider improving FCS light inversePrimary algorithm.
   /// FlexColorScheme default for inversePrimary color, when not using seeds.
   ///
   /// Not the best one in the world, but simple and works fairly well for light
