@@ -16,6 +16,19 @@ void main() {
   group('FCS1: WITH FlexColorScheme ', () {
     debugDefaultTargetPlatformOverride = null;
 
+    const FlexColorScheme fcsDefault = FlexColorScheme();
+    const FlexColorScheme fcsMaterialLight = FlexColorScheme(
+        brightness: Brightness.light, primary: FlexColor.materialLightPrimary);
+
+    test(
+        'FCS1.001-00: GIVEN a default FlexColorScheme() '
+        'EXPECT it to use Material 2 default primary and be light', () {
+      // Expect toTheme to be equal
+      expect(fcsDefault.toScheme, equals(fcsMaterialLight.toScheme));
+      // Expect toTheme to be equal
+      expect(fcsDefault.toTheme, equals(fcsMaterialLight.toTheme));
+    });
+
     final FlexSchemeColor sc =
         FlexSchemeColor.from(primary: FlexColor.materialLightPrimary);
 
@@ -38,7 +51,7 @@ void main() {
       transparentStatusBar: false,
     );
     test(
-        'FCS1.00j1: GIVEN a FlexColorScheme.light with null colors and null '
+        'FCS1.001-01: GIVEN a FlexColorScheme.light with null colors and null '
         'blend level 10 and default surfaceMode to be highScaffoldLowSurfaces '
         'EXPECT FlexColorScheme.light with scheme Material.', () {
       expect(fc1, equals(fc1i));
@@ -70,7 +83,7 @@ void main() {
       useSubThemes: true,
     );
     test(
-        'FCS1.00j2: GIVEN a FlexColorScheme.light with colors sc and given '
+        'FCS1.001-02: GIVEN a FlexColorScheme.light with colors sc and given '
         'scheme EXPECT FlexColorScheme.light with colors sc and null scheme.',
         () {
       expect(fc2, equals(fc2i));
@@ -109,7 +122,7 @@ void main() {
       useSubThemes: true,
     );
     test(
-        'FCS1.00j1: GIVEN a FlexColorScheme.dark with null colors and null '
+        'FCS1.001-03: GIVEN a FlexColorScheme.dark with null colors and null '
         'blend level 10 and default surfaceMode to be highScaffoldLowSurfaces '
         'EXPECT FlexColorScheme.dark with scheme Material.', () {
       expect(fc3, equals(fc3i));
@@ -149,7 +162,7 @@ void main() {
       transparentStatusBar: false,
     );
     test(
-        'FCS1.00q2: GIVEN a FlexColorScheme.dark with colors sc and given '
+        'FCS1.001-04: GIVEN a FlexColorScheme.dark with colors sc and given '
         'scheme EXPECT FlexColorScheme.dark with colors sc and null scheme.',
         () {
       expect(fc4, equals(fc4i));

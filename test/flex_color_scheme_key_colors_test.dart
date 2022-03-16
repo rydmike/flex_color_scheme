@@ -654,5 +654,34 @@ void main() {
       );
     });
     //
+    // Test that scheme based seeded DARK color schemes are based on the
+    // light colors when using FlexScheme `scheme`.
+    test(
+        'FCS7.007-dark: GIVEN a FlexColorScheme.dark with keyColors using '
+        'three seed color from used FlexScheme scheme '
+        'EXPECT FlexColorScheme.dark.toScheme to be equal to a '
+        'FlexColorScheme.dark made with same scheme based colors '
+        'FlexSchemeColor', () {
+      expect(
+        FlexColorScheme.dark(
+            scheme: FlexScheme.flutterDash,
+            blendLevel: 2,
+            keyColors: const FlexKeyColors(
+              useSecondary: true,
+              useTertiary: true,
+            )).toScheme,
+        equals(
+          FlexColorScheme.dark(
+            colors: FlexColor.flutterDash.light,
+            blendLevel: 2,
+            keyColors: const FlexKeyColors(
+              useSecondary: true,
+              useTertiary: true,
+            ),
+          ).toScheme,
+        ),
+      );
+    });
+    //
   });
 }
