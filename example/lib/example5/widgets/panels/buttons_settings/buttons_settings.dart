@@ -91,7 +91,7 @@ class ButtonsSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'RADIUS',
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Text(
                     controller.useSubThemes && controller.useFlexColorScheme
@@ -161,7 +161,7 @@ class ButtonsSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'RADIUS',
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Text(
                     controller.useSubThemes && controller.useFlexColorScheme
@@ -230,7 +230,7 @@ class ButtonsSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'RADIUS',
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Text(
                     controller.useSubThemes && controller.useFlexColorScheme
@@ -268,7 +268,7 @@ class ButtonsSettings extends StatelessWidget {
           // Padding(
           //   padding: const EdgeInsets.all(8),
           //   child: Text('Legacy buttons, deprecated',
-          //       style: Theme.of(context).textTheme.subtitle1),
+          //       style: Theme.of(context).textTheme.titleMedium),
           // ),
           // const LegacyButtonShowcase(),
           // const SizedBox(height: 8),

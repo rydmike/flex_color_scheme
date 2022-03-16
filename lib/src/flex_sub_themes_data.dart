@@ -753,17 +753,20 @@ class FlexSubThemesData with Diagnosticable {
   final double snackBarElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color the SnackBars
-  /// use as their base color.
+  /// use as their base color. Typically one of inverse brightness compared
+  /// to theme's surface color brightness.
   ///
-  /// If not defined it defaults to a custom opinionated color that is:
+  /// If not defined it defaults to the opinionated color FlexColorScheme (FCS)
+  /// choice below when used via [FlexSubThemesData].
   ///
   /// * In light theme mode:
-  ///   * onSurface with primary blended at 45% opacity, with total opacity 95%
+  ///   * FCS: onSurface with primary blend at 45% opacity, with tot opacity 95%
+  ///   * Flutter SDK uses: onSurface with surface at opacity 80%, blended on
+  ///     top of surface.
   ///
   /// * In dark theme mode:
-  ///   * onSurface with primary blended at 39% opacity, with total opacity 93%
-  ///
-  /// Flutter SDK M2 uses grey Color(0xFF323232) as default.
+  ///   * FCS: onSurface with primary blend at 39% opacity, with tot opacity 93%
+  ///   * Flutter SDK uses: colorScheme.onSurface
   ///
   /// In M3 design the default will likely be [ColorScheme.inversePrimary],
   /// which you can assign by selecting that as its property here too.

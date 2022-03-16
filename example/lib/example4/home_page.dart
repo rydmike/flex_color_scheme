@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
         AppData.responsiveInsets(MediaQuery.of(context).size.width);
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final TextStyle headline4 = textTheme.headline4!;
+    final TextStyle headlineMedium = textTheme.headlineMedium!;
 
     return Row(
       children: <Widget>[
@@ -206,7 +206,7 @@ class HomePage extends StatelessWidget {
                                     Text(
                                       'dP',
                                       style:
-                                          Theme.of(context).textTheme.caption,
+                                          Theme.of(context).textTheme.bodySmall,
                                     ),
                                     Text(
                                       controller.cornerRadius
@@ -231,7 +231,7 @@ class HomePage extends StatelessWidget {
                   const ShowSubPages(),
                   const SizedBox(height: 8),
                   const Divider(),
-                  Text('Theme Showcase', style: headline4),
+                  Text('Theme Showcase', style: headlineMedium),
                   const ThemeShowcase(),
                 ],
               ),

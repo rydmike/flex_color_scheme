@@ -111,7 +111,7 @@ class ComponentThemes extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       'dP',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
                       controller.cornerRadius.toStringAsFixed(0),

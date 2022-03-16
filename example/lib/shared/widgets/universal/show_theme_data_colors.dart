@@ -117,12 +117,12 @@ class ShowThemeDataColors extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8),
             child: Text(
               'ThemeData Colors',
-              style: theme.textTheme.subtitle1,
+              style: theme.textTheme.titleMedium,
             ),
           ),
           Text('To be deprecated in Flutter SDK',
-              style: theme.textTheme.bodyText2!
-                  .copyWith(color: theme.textTheme.caption!.color)),
+              style: theme.textTheme.bodyMedium!
+                  .copyWith(color: theme.textTheme.bodySmall!.color)),
           const SizedBox(height: 8),
           Wrap(
             spacing: 6,

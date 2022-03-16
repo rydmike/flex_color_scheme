@@ -728,7 +728,7 @@ class _HomePageState extends State<HomePage> {
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final TextStyle headline4 = textTheme.headline4!;
+    final TextStyle headlineMedium = textTheme.headlineMedium!;
     final bool isDark = theme.brightness == Brightness.dark;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -820,7 +820,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 8),
               const ShowSubPages(),
               const Divider(),
-              Text('Theme Showcase', style: headline4),
+              Text('Theme Showcase', style: headlineMedium),
               const SizedBox(height: 8),
               const ThemeShowcase(),
             ],

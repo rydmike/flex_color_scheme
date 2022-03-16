@@ -32,7 +32,7 @@ class _SubpageState extends State<Subpage> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final TextStyle headline4 = textTheme.headline4!;
+    final TextStyle headlineMedium = textTheme.headlineMedium!;
 
     final MediaQueryData media = MediaQuery.of(context);
     final double topPadding = media.padding.top + kToolbarHeight * 2;
@@ -69,7 +69,7 @@ class _SubpageState extends State<Subpage> {
               AppData.edgeInsetsTablet + bottomPadding,
             ),
             children: <Widget>[
-              Text('Subpage Demo', style: headline4),
+              Text('Subpage Demo', style: headlineMedium),
               const Text(
                 'This screen shows an example page with the same '
                 'FlexColorScheme based ThemeData inherited theme being used. '
@@ -77,7 +77,7 @@ class _SubpageState extends State<Subpage> {
               ),
               const Divider(),
               // Show all key active theme colors.
-              Text('Theme Colors', style: headline4),
+              Text('Theme Colors', style: headlineMedium),
               const Padding(
                 padding:
                     EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
@@ -89,7 +89,7 @@ class _SubpageState extends State<Subpage> {
                 child: ShowThemeDataColors(),
               ),
               const Divider(),
-              Text('Theme Showcase', style: headline4),
+              Text('Theme Showcase', style: headlineMedium),
               const ThemeShowcase(),
             ],
           ),

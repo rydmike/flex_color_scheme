@@ -797,7 +797,7 @@ class _MenuItem extends StatelessWidget {
                         else
                           Text(
                             label,
-                            style: theme.textTheme.bodyText1!
+                            style: theme.textTheme.bodyLarge!
                                 .copyWith(color: textColor.withOpacity(0.8)),
                           )
                       ],
@@ -908,7 +908,7 @@ class _MenuLeadingItemState extends State<_MenuLeadingItem> {
                           child: Column(
                             children: <Widget>[
                               const Icon(Icons.info, size: 30),
-                              Text('About', style: textTheme.overline),
+                              Text('About', style: textTheme.labelSmall),
                             ],
                           ),
                         ),

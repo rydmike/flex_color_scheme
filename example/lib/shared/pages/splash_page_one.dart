@@ -63,7 +63,7 @@ class SplashPageOne extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Splash!',
-                  style: theme.textTheme.headline2!
+                  style: theme.textTheme.displayMedium!
                       .copyWith(color: theme.colorScheme.primary),
                 ),
                 const SizedBox(height: 20),
