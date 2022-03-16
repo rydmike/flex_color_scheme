@@ -68,7 +68,7 @@ class UsedColorsPopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle txtStyle = theme.textTheme.button!;
+    final TextStyle txtStyle = theme.textTheme.labelLarge!;
     final bool enabled = onChanged != null;
 
     return PopupMenuButton<int>(

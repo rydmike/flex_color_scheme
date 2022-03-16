@@ -107,7 +107,7 @@ class ShowColorSchemeColors extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               'ColorScheme Colors',
-              style: theme.textTheme.subtitle1,
+              style: theme.textTheme.titleMedium,
             ),
           ),
           // A Wrap widget is just the right handy widget for this type of

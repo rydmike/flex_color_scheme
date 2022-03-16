@@ -147,7 +147,7 @@ class AppBarSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'ELEV',
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Text(
                     controller.appBarElevation.toStringAsFixed(1),
@@ -184,7 +184,7 @@ class AppBarSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'OPACITY',
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Text(
                     '${(controller.appBarOpacity * 100).toStringAsFixed(0)}'

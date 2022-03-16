@@ -73,7 +73,7 @@ class ThemeShowcase extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text('Normal TextTheme',
-                      style: Theme.of(context).textTheme.subtitle1),
+                      style: Theme.of(context).textTheme.titleMedium),
                 ),
                 const TextThemeShowcase(),
               ],
@@ -629,7 +629,7 @@ class TabBarForAppBarShowcase extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextStyle textStyle = theme.textTheme.caption!;
+    final TextStyle textStyle = theme.textTheme.bodySmall!;
 
     final Color effectiveTabBackground =
         Theme.of(context).appBarTheme.backgroundColor ??
@@ -690,7 +690,7 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle textStyle = theme.textTheme.caption!;
+    final TextStyle textStyle = theme.textTheme.bodySmall!;
     return DefaultTabController(
       length: 3,
       child: Column(
@@ -772,7 +772,7 @@ class _BottomNavigationBarShowcaseState
               'and theme.canvasColor is set to theme.colorScheme.background, '
               'elevation is 8. FlexColorScheme sub-theme default is '
               'colorScheme.background and elevation 0.',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
           BottomNavigationBar(
@@ -838,7 +838,7 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
               'Default SDK background color is theme.colorScheme.surface with '
               'an onSurface overlay color with elevation 3. FlexColorScheme '
               'sub-theme default is colorScheme.background and elevation 0.',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
           NavigationBar(
@@ -924,7 +924,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
           child: Text(
             'Default SDK background color is theme.colorScheme.surface. '
             'FlexColorScheme sub-theme default is colorScheme.background.',
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
         const Divider(height: 1),
@@ -1093,6 +1093,27 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
+    final bool isLight = theme.brightness == Brightness.light;
+
+    final Color defaultBackgroundColor = isLight
+        ? Color.alphaBlend(
+            colorScheme.onSurface.withOpacity(0.80), colorScheme.surface)
+        : colorScheme.onSurface;
+    final Color snackBackground =
+        theme.snackBarTheme.backgroundColor ?? defaultBackgroundColor;
+    final Color snackForeground =
+        ThemeData.estimateBrightnessForColor(snackBackground) ==
+                Brightness.light
+            ? Colors.black
+            : Colors.white;
+    final TextStyle snackStyle = theme.snackBarTheme.contentTextStyle ??
+        ThemeData(brightness: Brightness.light)
+            .textTheme
+            .titleMedium!
+            .copyWith(color: snackForeground);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -1123,7 +1144,7 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           'Default background color is theme canvasColor, and '
           'theme canvasColor is set to theme colorScheme background. The '
           'color canvasColor is going to be deprecated in Flutter SDK',
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         const Material(
           type: MaterialType.canvas,
@@ -1163,7 +1184,7 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           'Default background color is theme cardColor, and '
           'theme cardColor is set to theme colorScheme surface. The '
           'color cardColor is going to be deprecated in Flutter SDK',
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         const Material(
           elevation: 0,
@@ -1197,25 +1218,36 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
             enableDrag: false,
             onClosing: () {},
             builder: (final BuildContext context) => SizedBox(
-              height: 100,
+              height: 150,
               child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'A Material BottomSheet',
-                        style: Theme.of(context).textTheme.subtitle1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(height: 20),
+                    Text(
+                      'A Material BottomSheet',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      'Like Drawer it uses Material of type canvas as '
+                      'background.',
+                      style: Theme.of(context).textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                    const Spacer(),
+                    Material(
+                      color: snackBackground,
+                      elevation: 0,
+                      child: SizedBox(
+                        height: 40,
+                        child: Center(
+                          child: Text(
+                              'A Material SnackBar, style simulation only',
+                              style: snackStyle),
+                        ),
                       ),
-                      Text(
-                        'Like Drawer it uses Material of type canvas as '
-                        'background.',
-                        style: Theme.of(context).textTheme.caption,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -1248,7 +1280,7 @@ class CardShowcase extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'Default background color comes from Material of type card',
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
         const Card(
@@ -1316,8 +1348,9 @@ class TextThemeColumnShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('Font: ${textTheme.subtitle2!.fontFamily}',
-            style: textTheme.subtitle1!.copyWith(fontWeight: FontWeight.w600)),
+        Text('Font: ${textTheme.titleSmall!.fontFamily}',
+            style:
+                textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600)),
         Text(
           'Display Large '
           '(${textTheme.displayLarge!.fontSize!.toStringAsFixed(0)})',

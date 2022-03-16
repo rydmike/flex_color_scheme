@@ -189,7 +189,7 @@ class SelectTheme extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       'LEVEL',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
                       '${controller.darkMethodLevel} %',

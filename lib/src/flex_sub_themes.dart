@@ -1758,18 +1758,26 @@ class FlexSubThemes {
     /// SnackBar elevation defaults to [kSnackBarElevation] 4.
     final double? elevation = kSnackBarElevation,
 
-    /// Default value for [backgroundColor].
+    /// The background color of the themed SnackBar. Typically one of inverse
+    /// brightness compared to theme's surface color brightness.
     ///
-    /// If null, [SnackBar] defaults to dark grey: `Color(0xFF323232)`, via
-    /// M2 Flutter SDK defaults.
+    /// If null, then FlexColorScheme (FCS) sets onw default when used via
+    /// FlexSubThemesData as follows, the SDK default is used if this is not
+    /// used via FlexSubThemesData:
     ///
-    /// FlexColorScheme sets a dark primary tinted color instead when it uses
-    /// this helper.
+    /// * In light theme mode:
+    ///   * FCS: onSurface with primary blend at 45% opacity, with tot opacity 95%
+    ///   * Flutter SDK uses: onSurface with surface at opacity 80%, blended on
+    ///     top of surface.
+    ///
+    /// * In dark theme mode:
+    ///   * FCS: onSurface with primary blend at 39% opacity, with tot opacity 93%
+    ///   * Flutter SDK uses: colorScheme.onSurface
     ///
     /// SnackBar uses ColorScheme.inverseSurface in M3 schemes.
-    /// FlexColorScheme has own custom default primary tinted snackbar color.
-    /// But it can be themed also to [ColorScheme.inverseSurface] via its
-    /// backgroundSchemeColor.
+    /// While FlexColorScheme has own custom default primary tinted snackbar
+    /// color, it can also easily be themed also to [ColorScheme.inverseSurface]
+    /// via the [backgroundSchemeColor].
     final Color? backgroundColor,
 
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
@@ -1794,9 +1802,27 @@ class FlexSubThemes {
             ? backgroundColor // might be null, then SDK theme defaults.
             : schemeColor(backgroundSchemeColor, colorScheme);
 
+    final Color? foreground =
+        (colorScheme != null && backgroundSchemeColor != null)
+            ? schemeColorPair(backgroundSchemeColor, colorScheme)
+            : background != null
+                ? ThemeData.estimateBrightnessForColor(background) ==
+                        Brightness.light
+                    ? Colors.black
+                    : Colors.white
+                : null;
+
+    final TextStyle? snackTextStyle = foreground != null
+        ? ThemeData(brightness: Brightness.light)
+            .textTheme
+            .titleMedium!
+            .copyWith(color: foreground)
+        : null;
+
     return SnackBarThemeData(
       elevation: elevation,
       backgroundColor: background,
+      contentTextStyle: snackTextStyle,
     );
   }
 

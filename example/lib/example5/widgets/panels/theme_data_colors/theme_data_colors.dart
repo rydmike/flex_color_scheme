@@ -19,10 +19,10 @@ class ThemeDataColors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle spanTextStyle = theme.textTheme.bodyText2!
-        .copyWith(color: theme.textTheme.caption!.color);
+    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
+        .copyWith(color: theme.textTheme.bodySmall!.color);
     final TextStyle linkStyle =
-        theme.textTheme.bodyText2!.copyWith(color: theme.colorScheme.primary);
+        theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.primary);
 
     return HeaderCard(
       isOpen: isOpen,

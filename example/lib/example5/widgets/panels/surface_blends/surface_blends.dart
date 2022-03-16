@@ -126,7 +126,7 @@ class SurfaceBlends extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       'LEVEL',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
                       '${controller.blendLevel}',
@@ -171,7 +171,7 @@ class SurfaceBlends extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       'LEVEL',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
                       // ignore: lines_longer_than_80_chars
@@ -229,7 +229,7 @@ class SurfaceBlends extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       'LEVEL',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
                       '${controller.blendLevelDark}',
@@ -274,7 +274,7 @@ class SurfaceBlends extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       'LEVEL',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
                       // ignore: lines_longer_than_80_chars

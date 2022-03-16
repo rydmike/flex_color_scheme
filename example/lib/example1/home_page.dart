@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
         AppData.responsiveInsets(MediaQuery.of(context).size.width);
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final TextStyle headline4 = textTheme.headline4!;
+    final TextStyle headlineMedium = textTheme.headlineMedium!;
 
     return Scaffold(
       appBar: AppBar(
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
             const ShowThemeDataColors(),
             const SizedBox(height: 8),
             const Divider(),
-            Text('Theme Showcase', style: headline4),
+            Text('Theme Showcase', style: headlineMedium),
             const SizedBox(height: 8),
             const ThemeShowcase(),
           ],

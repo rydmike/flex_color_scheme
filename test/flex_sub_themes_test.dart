@@ -162,9 +162,12 @@ void main() {
           backgroundSchemeColor: SchemeColor.tertiary,
         ),
         equals(
-          const SnackBarThemeData(
-            backgroundColor: Color(0xFF343476),
+          SnackBarThemeData(
+            backgroundColor: const Color(0xFF343476),
             elevation: 10,
+            contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
+                  color: Colors.white,
+                ),
           ),
         ),
       );
@@ -178,13 +181,16 @@ void main() {
         FlexSubThemes.snackBarTheme(
           elevation: 5,
           colorScheme: colorScheme,
-          backgroundColor: const Color(0xFF334676),
+          backgroundColor: const Color(0xFFBBC2D5),
           backgroundSchemeColor: null,
         ),
         equals(
-          const SnackBarThemeData(
-            backgroundColor: Color(0xFF334676),
+          SnackBarThemeData(
+            backgroundColor: const Color(0xFFBBC2D5),
             elevation: 5,
+            contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
+                  color: Colors.black,
+                ),
           ),
         ),
       );
@@ -198,13 +204,16 @@ void main() {
         FlexSubThemes.snackBarTheme(
           elevation: 0,
           colorScheme: colorScheme,
-          backgroundColor: const Color(0xFF334676),
-          backgroundSchemeColor: SchemeColor.tertiary,
+          backgroundColor: const Color(0xFF763370),
+          backgroundSchemeColor: SchemeColor.error,
         ),
         equals(
           SnackBarThemeData(
-            backgroundColor: colorScheme.tertiary,
+            backgroundColor: colorScheme.error,
             elevation: 0,
+            contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
+                  color: colorScheme.onError,
+                ),
           ),
         ),
       );
