@@ -1758,10 +1758,6 @@ class FlexSubThemes {
     /// SnackBar elevation defaults to [kSnackBarElevation] 4.
     final double? elevation = kSnackBarElevation,
 
-    // TODO(rydmike): SnackBar uses ColorScheme.inverseSurface in M3 schemes.
-    // For now keeping FlexColorScheme own dark primary as snackbar color.
-    // Consider adding [SchemeColor] for easy customization instead.
-
     /// Default value for [backgroundColor].
     ///
     /// If null, [SnackBar] defaults to dark grey: `Color(0xFF323232)`, via
@@ -1769,12 +1765,40 @@ class FlexSubThemes {
     ///
     /// FlexColorScheme sets a dark primary tinted color instead when it uses
     /// this helper.
+    ///
+    /// SnackBar uses ColorScheme.inverseSurface in M3 schemes.
+    /// FlexColorScheme has own custom default primary tinted snackbar color.
+    /// But it can be themed also to [ColorScheme.inverseSurface] via its
+    /// backgroundSchemeColor.
     final Color? backgroundColor,
-  }) =>
-      SnackBarThemeData(
-        elevation: elevation,
-        backgroundColor: backgroundColor,
-      );
+
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    final ColorScheme? colorScheme,
+
+    /// Selects which color from the passed in [colorScheme] to use as
+    /// dialog background color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined or [colorScheme] is not defined, then the passed in
+    /// [backgroundColor] will be used, which may be null too and dialog then
+    /// falls back to to dark grey: `Color(0xFF323232)`, via M2
+    /// Flutter SDK defaults if not defined.
+    ///
+    /// FlexColorScheme uses this property via [FlexSubThemesData] and defines
+    /// its default as [SchemeColor.surface].
+    final SchemeColor? backgroundSchemeColor,
+  }) {
+    final Color? background =
+        (colorScheme == null || backgroundSchemeColor == null)
+            ? backgroundColor // might be null, then SDK theme defaults.
+            : schemeColor(backgroundSchemeColor, colorScheme);
+
+    return SnackBarThemeData(
+      elevation: elevation,
+      backgroundColor: background,
+    );
+  }
 
   /// An opinionated [BottomSheetThemeData] with custom top corner
   /// radius.

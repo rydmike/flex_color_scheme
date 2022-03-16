@@ -138,7 +138,7 @@ void main() {
     // FlexSubThemes SnackBar tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.03: GIVEN a default FlexSubTheme.snackBarTheme() '
+        'FST1.03: GIVEN a default FlexSubTheme.snackBarTheme '
         'EXPECT equal to SnackBarThemeData() version '
         'with same values', () {
       expect(
@@ -151,16 +151,60 @@ void main() {
       );
     });
     test(
-        'FST1.03custom: GIVEN a custom FlexSubTheme.snackBarTheme() '
-        'EXPECT equal to SnackBarThemeData() version '
-        'with same values', () {
+        'FST1.03-background-based-a: GIVEN a FlexSubTheme.snackBarTheme with '
+        'colorScheme, but with backgroundSchemeColor and backgroundColor '
+        'EXPECT equal to SnackBarThemeData with backgroundColor', () {
       expect(
         FlexSubThemes.snackBarTheme(
           elevation: 10,
+          colorScheme: null,
+          backgroundColor: const Color(0xFF343476),
+          backgroundSchemeColor: SchemeColor.tertiary,
         ),
         equals(
           const SnackBarThemeData(
+            backgroundColor: Color(0xFF343476),
             elevation: 10,
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.03-background-based-b: GIVEN a FlexSubTheme.snackBarTheme with '
+        'no colorScheme, no backgroundSchemeColor, but with backgroundColor '
+        'EXPECT equal to SnackBarThemeData with backgroundColor', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.snackBarTheme(
+          elevation: 5,
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFF334676),
+          backgroundSchemeColor: null,
+        ),
+        equals(
+          const SnackBarThemeData(
+            backgroundColor: Color(0xFF334676),
+            elevation: 5,
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.03-scheme-based: GIVEN a FlexSubTheme.snackBarTheme with '
+        'colorScheme, backgroundSchemeColor and backgroundColor '
+        'EXPECT equal to SnackBarThemeData with scheme color.', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.snackBarTheme(
+          elevation: 0,
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFF334676),
+          backgroundSchemeColor: SchemeColor.tertiary,
+        ),
+        equals(
+          SnackBarThemeData(
+            backgroundColor: colorScheme.tertiary,
+            elevation: 0,
           ),
         ),
       );
@@ -229,8 +273,9 @@ void main() {
       );
     });
     test(
-        'FST1.05-background-based-a: GIVEN a default FlexSubTheme.dialogTheme '
-        'EXPECT equal to DialogTheme() version with same values', () {
+        'FST1.05-background-based-a: GIVEN a FlexSubTheme.dialogTheme with no '
+        'colorScheme, but with backgroundSchemeColor and backgroundColor '
+        'EXPECT equal to DialogTheme with backgroundColor', () {
       expect(
         FlexSubThemes.dialogTheme(
             colorScheme: null,
@@ -250,14 +295,16 @@ void main() {
       );
     });
     test(
-        'FST1.05-background-based-b: GIVEN a default FlexSubTheme.dialogTheme '
-        'EXPECT equal to DialogTheme() version with same values', () {
+        'FST1.05-background-based-b: GIVEN a FlexSubTheme.dialogTheme '
+        'with no backgroundSchemeColor and backgroundColor '
+        'EXPECT equal to DialogTheme with backgroundColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.dialogTheme(
-            colorScheme: colorScheme,
-            backgroundColor: const Color(0xFFDDDDDD),
-            backgroundSchemeColor: null),
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFFDDDDDD),
+          backgroundSchemeColor: null,
+        ),
         equals(
           const DialogTheme(
             backgroundColor: Color(0xFFDDDDDD),
@@ -272,14 +319,16 @@ void main() {
       );
     });
     test(
-        'FST1.05-scheme-based: GIVEN a default FlexSubTheme.dialogTheme() '
-        'EXPECT equal to DialogTheme() version with same values', () {
+        'FST1.05-scheme-based: GIVEN a FlexSubTheme.dialogTheme '
+        'with backgroundSchemeColor and no backgroundColor '
+        'EXPECT equal to DialogTheme with backgroundSchemeColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.dialogTheme(
-            colorScheme: colorScheme,
-            backgroundColor: null,
-            backgroundSchemeColor: SchemeColor.tertiary),
+          colorScheme: colorScheme,
+          backgroundColor: null,
+          backgroundSchemeColor: SchemeColor.tertiary,
+        ),
         equals(
           DialogTheme(
             backgroundColor: colorScheme.tertiary,
@@ -1300,7 +1349,7 @@ void main() {
         equals(Colors.transparent),
       );
     });
-    // TODO(rydmike): ButtonThemeData will be deprecated soon, remove tests then.
+    // TODO(rydmike): Monitor Flutter SDK deprecation of ButtonThemeData.
     // -------------------------------------------------------------------------
     // FlexSubThemes old material buttons theme tests
     // -------------------------------------------------------------------------

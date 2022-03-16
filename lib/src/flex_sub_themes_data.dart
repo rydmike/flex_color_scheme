@@ -127,6 +127,7 @@ class FlexSubThemesData with Diagnosticable {
     this.dialogBackgroundSchemeColor = SchemeColor.surface,
     this.timePickerDialogRadius,
     this.snackBarElevation = kSnackBarElevation,
+    this.snackBarBackgroundSchemeColor,
     //
     this.appBarBackgroundSchemeColor,
     this.tabBarItemSchemeColor,
@@ -648,7 +649,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius override value for [Chip] widgets.
   final double? chipRadius;
 
-  /// Defines which [Theme] based [ColorScheme] based color the Chip's
+  /// Defines which [Theme] based [ColorScheme] based color the Chips
   /// use as their base color.
   ///
   /// If not defined it defaults to theme.colorScheme.primary color.
@@ -750,6 +751,23 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Defaults to [kSnackBarElevation] = 4.
   final double snackBarElevation;
+
+  /// Defines which [Theme] based [ColorScheme] based color the SnackBars
+  /// use as their base color.
+  ///
+  /// If not defined it defaults to a custom opinionated color that is:
+  ///
+  /// * In light theme mode:
+  ///   * onSurface with primary blended at 45% opacity, with total opacity 95%
+  ///
+  /// * In dark theme mode:
+  ///   * onSurface with primary blended at 39% opacity, with total opacity 93%
+  ///
+  /// Flutter SDK M2 uses grey Color(0xFF323232) as default.
+  ///
+  /// In M3 design the default will likely be [ColorScheme.inversePrimary],
+  /// which you can assign by selecting that as its property here too.
+  final SchemeColor? snackBarBackgroundSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the [AppBar]
   /// background uses.
@@ -1428,6 +1446,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? dialogRadius,
     final double? timePickerDialogRadius,
     final double? snackBarElevation,
+    final SchemeColor? snackBarBackgroundSchemeColor,
     final SchemeColor? appBarBackgroundSchemeColor,
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
@@ -1553,6 +1572,8 @@ class FlexSubThemesData with Diagnosticable {
       timePickerDialogRadius:
           timePickerDialogRadius ?? this.timePickerDialogRadius,
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
+      snackBarBackgroundSchemeColor:
+          snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
       appBarBackgroundSchemeColor:
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
       tabBarItemSchemeColor:
@@ -1745,6 +1766,7 @@ class FlexSubThemesData with Diagnosticable {
         other.dialogElevation == dialogElevation &&
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.snackBarElevation == snackBarElevation &&
+        other.snackBarBackgroundSchemeColor == snackBarBackgroundSchemeColor &&
         other.appBarBackgroundSchemeColor == appBarBackgroundSchemeColor &&
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
@@ -1906,6 +1928,7 @@ class FlexSubThemesData with Diagnosticable {
         timePickerDialogRadius,
         //
         snackBarElevation,
+        snackBarBackgroundSchemeColor,
         appBarBackgroundSchemeColor,
         tabBarItemSchemeColor,
         tabBarIndicatorSchemeColor,
@@ -2051,6 +2074,8 @@ class FlexSubThemesData with Diagnosticable {
         'timePickerDialogRadius', timePickerDialogRadius));
     properties.add(
         DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
+    properties.add(EnumProperty<SchemeColor>(
+        'snackBarBackgroundSchemeColor', snackBarBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
