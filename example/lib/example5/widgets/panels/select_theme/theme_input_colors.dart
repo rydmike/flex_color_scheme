@@ -39,7 +39,7 @@ class ThemeInputColors extends StatelessWidget {
     final bool swapDark = controller.swapDarkColors;
     // Size of the color boxes
     const double boxWidth = 155;
-    const double boxHeight = 145;
+    const double boxHeight = 140;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);

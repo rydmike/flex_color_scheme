@@ -93,8 +93,9 @@ class SeededColorScheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
-    final bool showBlendInfo = (isLight && controller.blendLevel > 0) ||
-        (!isLight && controller.blendLevelDark > 0);
+    final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
+            (!isLight && controller.blendLevelDark > 0)) &&
+        controller.useKeyColors;
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
@@ -120,32 +121,35 @@ class SeededColorScheme extends StatelessWidget {
                 'input color. The lock switches are only available when the '
                 'key color based seeded scheme is used.'),
           ),
+
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 4),
             child: SchemeColors(controller: controller),
           ),
           if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text('Tap a color code to copy it to the clipboard.\n'
-                  // ignore: lines_longer_than_80_chars
-                  "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color. ' : ''}"
-                  // ignore: lines_longer_than_80_chars
-                  "${showBlendInfo ? 'Surface blends modifies surface and background colors, they may not be found in generated palettes when hovered.' : '\n'}"),
+              child: Text(
+                'Tap a color code to copy it to the clipboard.\n'
+                // ignore: lines_longer_than_80_chars
+                "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color below. ' : ''}"
+                // ignore: lines_longer_than_80_chars
+                "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, that may not be found in palettes when hovered.' : '\n'}",
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
             ),
 
           if (controller.schemeIndex == (AppColor.schemesCustom.length - 1))
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child:
-                  Text('This is the custom color theme, you can tap primary, '
-                      'secondary or tertiary, plus their container colors to '
-                      'change them.'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                'This is the custom color theme, you can tap primary, '
+                'secondary or tertiary, plus their container colors to '
+                'change them.',
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
             ),
-          const SizedBox(height: 8),
-          const ListTile(
-            title: Text('Generated tonal palettes'),
-          ),
+          const ListTile(title: Text('Generated tonal palettes')),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ShowTonalPalette(controller: controller),

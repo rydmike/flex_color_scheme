@@ -18,7 +18,7 @@ class AppData {
   // update this info before I trigger GitHub actions CI/CD that builds them.
   static const String appName = 'FlexColor\u{00AD}Scheme';
   static const String versionMajor = '5';
-  static const String version = '$versionMajor.0.0-dev.1';
+  static const String version = '$versionMajor.0.0-dev.2';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
   static const String flutterVersion = 'stable v2.10.3';

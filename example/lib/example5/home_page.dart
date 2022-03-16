@@ -211,7 +211,6 @@ class _HomePageState extends State<HomePage> {
             ),
             itemCount: _nrOfCards,
             itemBuilder: (BuildContext context, int index) => <Widget>[
-              // The main info Card.
               IntroductionPanel(
                 controller: widget.controller,
                 isOpen: isCardOpen[0],
@@ -219,8 +218,6 @@ class _HomePageState extends State<HomePage> {
                   toggleCard(0);
                 },
               ),
-              //
-              // All the "Settings" Cards.
               SelectTheme(
                 controller: widget.controller,
                 isOpen: isCardOpen[1],

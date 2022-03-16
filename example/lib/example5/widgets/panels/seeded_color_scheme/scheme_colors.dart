@@ -39,7 +39,7 @@ class SchemeColors extends StatelessWidget {
     final bool swapDark = controller.swapDarkColors;
     // Size of the color presentation boxes
     const double boxWidth = 155;
-    const double boxHeight = 370;
+    const double boxHeight = 360;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);

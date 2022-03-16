@@ -12,7 +12,7 @@ class TonalPaletteColors extends StatelessWidget {
     Key? key,
     required this.tonalPalette,
     this.selectedColor,
-    this.height = 40,
+    this.height = 34,
   }) : super(key: key);
 
   /// The tonal palette to draw.
