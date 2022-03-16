@@ -280,6 +280,7 @@ class FlexSchemeOnColors with Diagnosticable {
     );
   }
 
+  /// Override the equality operator.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -299,24 +300,24 @@ class FlexSchemeOnColors with Diagnosticable {
         other.onErrorContainer == onErrorContainer;
   }
 
+  /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode {
-    return hashValues(
-      onPrimary,
-      onPrimaryContainer,
-      onSecondary,
-      onSecondaryContainer,
-      onTertiary,
-      onTertiaryContainer,
-      onSurface,
-      onSurfaceVariant,
-      onInverseSurface,
-      onBackground,
-      onError,
-      onErrorContainer,
-    );
-  }
+  int get hashCode => hashValues(
+        onPrimary,
+        onPrimaryContainer,
+        onSecondary,
+        onSecondaryContainer,
+        onTertiary,
+        onTertiaryContainer,
+        onSurface,
+        onSurfaceVariant,
+        onInverseSurface,
+        onBackground,
+        onError,
+        onErrorContainer,
+      );
 
+  /// Flutter debug properties override, includes toString.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

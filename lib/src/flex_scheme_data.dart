@@ -60,6 +60,7 @@ class FlexSchemeData with Diagnosticable {
     );
   }
 
+  /// Override the equality operator.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -71,16 +72,16 @@ class FlexSchemeData with Diagnosticable {
         other.dark == dark;
   }
 
+  /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode {
-    return hashValues(
-      name,
-      description,
-      light,
-      dark,
-    );
-  }
+  int get hashCode => hashValues(
+        name,
+        description,
+        light,
+        dark,
+      );
 
+  /// Flutter debug properties override, includes toString.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

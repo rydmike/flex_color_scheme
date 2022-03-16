@@ -598,6 +598,7 @@ class FlexSchemeColor with Diagnosticable {
     );
   }
 
+  /// Override the equality operator.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -616,23 +617,23 @@ class FlexSchemeColor with Diagnosticable {
         other.secondaryVariant == secondaryVariant;
   }
 
+  /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode {
-    return hashValues(
-      primary,
-      primaryContainer,
-      secondary,
-      secondaryContainer,
-      tertiary,
-      tertiaryContainer,
-      appBarColor,
-      error,
-      errorContainer,
-      primaryVariant,
-      secondaryVariant,
-    );
-  }
+  int get hashCode => hashValues(
+        primary,
+        primaryContainer,
+        secondary,
+        secondaryContainer,
+        tertiary,
+        tertiaryContainer,
+        appBarColor,
+        error,
+        errorContainer,
+        primaryVariant,
+        secondaryVariant,
+      );
 
+  /// Flutter debug properties override, includes toString.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

@@ -6402,7 +6402,7 @@ class FlexColorScheme with Diagnosticable {
     );
   }
 
-  /// Equality operator override for the FlexColorScheme object.
+  /// Override the equality operator.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -6450,57 +6450,52 @@ class FlexColorScheme with Diagnosticable {
         other.useMaterial3 == useMaterial3;
   }
 
-  /// Hashcode override for the FlexColorScheme object.
-  ///
-  /// Using Jenkins list hashCode algorithm used by ThemeData in Flutter SDK.
+  /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode {
-    final List<Object?> values = <Object?>[
-      colorScheme,
-      brightness,
-      primary,
-      primaryContainer,
-      primaryVariant,
-      secondary,
-      secondaryContainer,
-      secondaryVariant,
-      tertiary,
-      tertiaryContainer,
-      error,
-      surface,
-      background,
-      scaffoldBackground,
-      dialogBackground,
-      appBarBackground,
-      onPrimary,
-      onPrimaryContainer,
-      onSecondary,
-      onSecondaryContainer,
-      onTertiary,
-      onTertiaryContainer,
-      onSurface,
-      onBackground,
-      onError,
-      tabBarStyle,
-      appBarElevation,
-      bottomAppBarElevation,
-      tooltipsMatchBackground,
-      transparentStatusBar,
-      visualDensity,
-      textTheme,
-      primaryTextTheme,
-      fontFamily,
-      platform,
-      typography,
-      applyElevationOverlayColor,
-      useSubThemes,
-      subThemesData,
-      useMaterial3,
-    ];
-    return hashList(values);
-  }
+  int get hashCode => hashList(<Object?>[
+        colorScheme,
+        brightness,
+        primary,
+        primaryContainer,
+        primaryVariant,
+        secondary,
+        secondaryContainer,
+        secondaryVariant,
+        tertiary,
+        tertiaryContainer,
+        error,
+        surface,
+        background,
+        scaffoldBackground,
+        dialogBackground,
+        appBarBackground,
+        onPrimary,
+        onPrimaryContainer,
+        onSecondary,
+        onSecondaryContainer,
+        onTertiary,
+        onTertiaryContainer,
+        onSurface,
+        onBackground,
+        onError,
+        tabBarStyle,
+        appBarElevation,
+        bottomAppBarElevation,
+        tooltipsMatchBackground,
+        transparentStatusBar,
+        visualDensity,
+        textTheme,
+        primaryTextTheme,
+        fontFamily,
+        platform,
+        typography,
+        applyElevationOverlayColor,
+        useSubThemes,
+        subThemesData,
+        useMaterial3,
+      ]);
 
-  /// Flutter debug properties override for FlexColorScheme object.
+  /// Flutter debug properties override, includes toString.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -6973,6 +6968,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     );
   }
 
+  /// Override the equality operator.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -6986,18 +6982,18 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         other.dialogBackground == dialogBackground;
   }
 
+  /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode {
-    return hashValues(
-      surface,
-      surfaceVariant,
-      inverseSurface,
-      background,
-      scaffoldBackground,
-      dialogBackground,
-    );
-  }
+  int get hashCode => hashValues(
+        surface,
+        surfaceVariant,
+        inverseSurface,
+        background,
+        scaffoldBackground,
+        dialogBackground,
+      );
 
+  /// Flutter debug properties override, includes toString.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
