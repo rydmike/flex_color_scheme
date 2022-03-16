@@ -21,7 +21,7 @@ void main() {
 
     final FlexColorScheme fc1 = FlexColorScheme.light(
       usedColors: 1,
-      surfaceStyle: FlexSurface.medium,
+      blendLevel: 10,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,
@@ -30,7 +30,8 @@ void main() {
     final FlexColorScheme fc1i = FlexColorScheme.light(
       scheme: FlexScheme.material,
       usedColors: 1,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 10,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,
@@ -38,7 +39,8 @@ void main() {
     );
     test(
         'FCS1.00j1: GIVEN a FlexColorScheme.light with null colors and null '
-        'scheme EXPECT FlexColorScheme.light with scheme Material.', () {
+        'blend level 10 and default surfaceMode to be highScaffoldLowSurfaces '
+        'EXPECT FlexColorScheme.light with scheme Material.', () {
       expect(fc1, equals(fc1i));
       // Expect toTheme from them to full-fill same condition.
       expect(fc1.toTheme, equals(fc1i.toTheme));
@@ -48,7 +50,8 @@ void main() {
       colors: sc,
       scheme: FlexScheme.materialHc,
       usedColors: 1,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 15,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,
@@ -58,7 +61,8 @@ void main() {
     final FlexColorScheme fc2i = FlexColorScheme.light(
       colors: sc,
       usedColors: 1,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 15,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,
@@ -86,7 +90,7 @@ void main() {
 
     final FlexColorScheme fc3 = FlexColorScheme.dark(
       usedColors: 1,
-      surfaceStyle: FlexSurface.medium,
+      blendLevel: 10,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,
@@ -96,7 +100,8 @@ void main() {
     final FlexColorScheme fc3i = FlexColorScheme.dark(
       scheme: FlexScheme.material,
       usedColors: 1,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 10,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,
@@ -104,8 +109,9 @@ void main() {
       useSubThemes: true,
     );
     test(
-        'FCS1.00q1: GIVEN a FlexColorScheme.dark with null colors and null '
-        'scheme EXPECT FlexColorScheme.dark with scheme Material.', () {
+        'FCS1.00j1: GIVEN a FlexColorScheme.dark with null colors and null '
+        'blend level 10 and default surfaceMode to be highScaffoldLowSurfaces '
+        'EXPECT FlexColorScheme.dark with scheme Material.', () {
       expect(fc3, equals(fc3i));
       // Expect toTheme from them to full-fill same condition.
       // TODO(rydmike): SDK ThemeData operator issue, fix in master!
@@ -125,7 +131,8 @@ void main() {
       colors: sc,
       scheme: FlexScheme.materialHc,
       usedColors: 1,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 15,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,
@@ -134,7 +141,8 @@ void main() {
     final FlexColorScheme fc4i = FlexColorScheme.dark(
       colors: sc,
       usedColors: 1,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 15,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,

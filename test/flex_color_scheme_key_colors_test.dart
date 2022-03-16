@@ -21,10 +21,6 @@ void main() {
 
     final FlexColorScheme m1Light = FlexColorScheme.light(
       colors: m3Baseline,
-      // TODO(rydmike): When SurfaceStyle is removed, mode&level not needed.
-      //  Remove here and other similar usage in these tests.
-      surfaceMode: FlexSurfaceMode.level,
-      blendLevel: 0,
       keyColors: const FlexKeyColors(
         useSecondary: false,
         useTertiary: false,
@@ -32,8 +28,6 @@ void main() {
     );
     final FlexColorScheme m1Dark = FlexColorScheme.dark(
       colors: m3Baseline,
-      surfaceMode: FlexSurfaceMode.level,
-      blendLevel: 0,
       keyColors: const FlexKeyColors(
         useSecondary: false,
         useTertiary: false,

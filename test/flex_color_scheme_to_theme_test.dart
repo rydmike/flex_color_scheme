@@ -1287,14 +1287,16 @@ void main() {
 
     final ThemeData tLightL = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.material]!.light,
-      surfaceStyle: FlexSurface.light,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 2,
       appBarStyle: FlexAppBarStyle.surface,
       tabBarStyle: FlexTabBarStyle.forBackground,
     ).toTheme;
 
     final ThemeData tDarkL = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
-      surfaceStyle: FlexSurface.light,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 2,
       appBarStyle: FlexAppBarStyle.surface,
       tabBarStyle: FlexTabBarStyle.forBackground,
     ).toTheme;
@@ -1331,37 +1333,40 @@ void main() {
 
     test(
         'FCS7.2: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT surface Color(0xffffffff).', () {
-      expect(tLightL.colorScheme.surface, equals(const Color(0xffffffff)));
+        'WITH FlexSurface.light EXPECT surface Color(0xfffcfcfc).', () {
+      expect(tLightL.colorScheme.surface, equals(const Color(0xfffcfcfc)));
     });
     test(
         'FCS7.21: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT surface Color(0xff141315).', () {
-      expect(tDarkL.colorScheme.surface, equals(const Color(0xff141315)));
+        'WITH FlexSurface.light EXPECT surface Color(0xff101010).', () {
+      expect(tDarkL.colorScheme.surface, equals(const Color(0xff101010)));
     });
 
     test(
         'FCS7.22: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT background Color(0xfff9f8fc).', () {
-      expect(tLightL.colorScheme.background, equals(const Color(0xfff9f8fc)));
+        'WITH FlexSurface.light EXPECT background Color(0xfffcfcfc).', () {
+      expect(tLightL.colorScheme.background, equals(const Color(0xfffcfcfc)));
     });
     test(
         'FCS7.23: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT background Color(0xff18151b).', () {
-      expect(tDarkL.colorScheme.background, equals(const Color(0xff18151b)));
+        'WITH highScaffoldLowSurfaces blendLevel=2 '
+        'EXPECT background Color(0xff101010).', () {
+      expect(tDarkL.colorScheme.background, equals(const Color(0xff101010)));
     });
 
     test(
         'FCS7.24: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT scaffold '
-        'background Color(0xffffffff).', () {
-      expect(tLightL.scaffoldBackgroundColor, equals(const Color(0xffffffff)));
+        'WITH highScaffoldLowSurfaces blendLevel=2 '
+        'EXPECT scaffold '
+        'background Color(0xfff9f7fc).', () {
+      expect(tLightL.scaffoldBackgroundColor, equals(const Color(0xfff9f7fc)));
     });
     test(
         'FCS7.25: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT scaffold '
-        'background Color(0xff121212).', () {
-      expect(tDarkL.scaffoldBackgroundColor, equals(const Color(0xff121212)));
+        'WITH highScaffoldLowSurfaces blendLevel=2 '
+        'EXPECT scaffold '
+        'background Color(0xff141215).', () {
+      expect(tDarkL.scaffoldBackgroundColor, equals(const Color(0xff141215)));
     });
 
     test(
@@ -1424,7 +1429,8 @@ void main() {
 
     final ThemeData tLightM = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.material]!.light,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
+      blendLevel: 20,
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 1,
       // ignore: avoid_redundant_argument_values
@@ -1433,7 +1439,8 @@ void main() {
 
     final ThemeData tDarkM = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
-      surfaceStyle: FlexSurface.medium,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
+      blendLevel: 20,
       appBarStyle: FlexAppBarStyle.primary,
       appBarElevation: 3,
       // ignore: avoid_redundant_argument_values
@@ -1472,37 +1479,41 @@ void main() {
 
     test(
         'FCS7.36: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT surface Color(0xfffdfdfe).', () {
-      expect(tLightM.colorScheme.surface, equals(const Color(0xfffdfdfe)));
+        'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
+        'EXPECT surface Color(0xfff6f3fc).', () {
+      expect(tLightM.colorScheme.surface, equals(const Color(0xfff6f3fc)));
     });
     test(
         'FCS7.37: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT surface Color(0xff17151a).', () {
-      expect(tDarkM.colorScheme.surface, equals(const Color(0xff17151a)));
+        'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
+        'EXPECT surface Color(0xff161419).', () {
+      expect(tDarkM.colorScheme.surface, equals(const Color(0xff161419)));
     });
 
     test(
-        'FCS7.38: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT background Color(0xfff6f3fc).', () {
+        'FCS7.38a: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
+        'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
+        'EXPECT background Color(0xfff6f3fc).', () {
       expect(tLightM.colorScheme.background, equals(const Color(0xfff6f3fc)));
     });
     test(
-        'FCS7.24: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT background Color(0xff1d1922).', () {
-      expect(tDarkM.colorScheme.background, equals(const Color(0xff1d1922)));
+        'FCS7.38b: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
+        'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
+        'EXPECT background Color(0xff161419).', () {
+      expect(tDarkM.colorScheme.background, equals(const Color(0xff161419)));
     });
 
     test(
         'FCS7.39: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT scaffold '
-        'background Color(0xffffffff).', () {
-      expect(tLightM.scaffoldBackgroundColor, equals(const Color(0xffffffff)));
+        'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
+        'EXPECT scaffold background Color(0xffd8c1f9).', () {
+      expect(tLightM.scaffoldBackgroundColor, equals(const Color(0xffd8c1f9)));
     });
     test(
         'FCS7.40: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT scaffold '
-        'background Color(0xff121212).', () {
-      expect(tDarkM.scaffoldBackgroundColor, equals(const Color(0xff121212)));
+        'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
+        'EXPECT scaffold background Color(0xff382b47).', () {
+      expect(tDarkM.scaffoldBackgroundColor, equals(const Color(0xff382b47)));
     });
 
     test(
@@ -1558,7 +1569,8 @@ void main() {
 
     final ThemeData tLightS = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.material]!.light,
-      surfaceStyle: FlexSurface.strong,
+      surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
+      blendLevel: 30,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 6,
       // ignore: avoid_redundant_argument_values
@@ -1567,7 +1579,8 @@ void main() {
 
     final ThemeData tDarkS = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
-      surfaceStyle: FlexSurface.strong,
+      surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
+      blendLevel: 30,
       // ignore: avoid_redundant_argument_values
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 6,
@@ -1607,37 +1620,41 @@ void main() {
 
     test(
         'FCS7.51: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT surface Color(0xfffbfafe).', () {
-      expect(tLightS.colorScheme.surface, equals(const Color(0xfffbfafe)));
+        'WITH highSurfaceLowScaffold blendLevel 30 '
+        'EXPECT surface Color(0xffe3d2fc).', () {
+      expect(tLightS.colorScheme.surface, equals(const Color(0xffe3d2fc)));
     });
     test(
         'FCS7.52: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT surface Color(0xff1b171e).', () {
-      expect(tDarkS.colorScheme.surface, equals(const Color(0xff1b171e)));
+        'WITH highSurfaceLowScaffold blendLevel 30 '
+        'EXPECT surface Color(0xff2f253a).', () {
+      expect(tDarkS.colorScheme.surface, equals(const Color(0xff2f253a)));
     });
 
     test(
         'FCS7.53: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT background Color(0xfff3eefc).', () {
-      expect(tLightS.colorScheme.background, equals(const Color(0xfff3eefc)));
+        'WITH highSurfaceLowScaffold blendLevel 30 '
+        'EXPECT background Color(0xffeadffb).', () {
+      expect(tLightS.colorScheme.background, equals(const Color(0xffeadffb)));
     });
     test(
         'FCS7.54: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT background Color(0xff221c29).', () {
-      expect(tDarkS.colorScheme.background, equals(const Color(0xff221c29)));
+        'WITH highSurfaceLowScaffold blendLevel 30 '
+        'EXPECT background Color(0xff241d2b).', () {
+      expect(tDarkS.colorScheme.background, equals(const Color(0xff241d2b)));
     });
 
     test(
         'FCS7.55: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT scaffold '
-        'background Color(0xffffffff).', () {
-      expect(tLightS.scaffoldBackgroundColor, equals(const Color(0xffffffff)));
+        'WITH highSurfaceLowScaffold blendLevel 30 '
+        'EXPECT scaffold background Color(0xfff5f0fe).', () {
+      expect(tLightS.scaffoldBackgroundColor, equals(const Color(0xfff5f0fe)));
     });
     test(
         'FCS7.56: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.strong EXPECT scaffold '
-        'background Color(0xff121212).', () {
-      expect(tDarkS.scaffoldBackgroundColor, equals(const Color(0xff121212)));
+        'WITH highSurfaceLowScaffold blendLevel 30 '
+        'EXPECT scaffold background Color(0xff1b181f).', () {
+      expect(tDarkS.scaffoldBackgroundColor, equals(const Color(0xff1b181f)));
     });
 
     test(
@@ -1693,7 +1710,8 @@ void main() {
 
     final ThemeData tLightH = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.material]!.light,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
+      blendLevel: 40,
       appBarStyle: FlexAppBarStyle.background,
       appBarElevation: 2,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1704,7 +1722,8 @@ void main() {
 
     final ThemeData tDarkH = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
+      blendLevel: 40,
       appBarStyle: FlexAppBarStyle.background,
       appBarElevation: 4,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -1745,37 +1764,40 @@ void main() {
 
     test(
         'FCS7.67: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT surface Color(0xfffaf8fe).', () {
-      expect(tLightH.colorScheme.surface, equals(const Color(0xfffaf8fe)));
+        'WITH highBackgroundLowScaffold blendLevel 40 '
+        'EXPECT surface Color(0xffe6d7fc).', () {
+      expect(tLightH.colorScheme.surface, equals(const Color(0xffe6d7fc)));
     });
     test(
         'FCS7.68: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT surface Color(0xff1e1a23).', () {
-      expect(tDarkH.colorScheme.surface, equals(const Color(0xff1e1a23)));
+        'WITH highBackgroundLowScaffold blendLevel 40 '
+        'EXPECT surface Color(0xff2b2335).', () {
+      expect(tDarkH.colorScheme.surface, equals(const Color(0xff2b2335)));
     });
 
     test(
         'FCS7.69: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT background Color(0xfff0e9fb).', () {
-      expect(tLightH.colorScheme.background, equals(const Color(0xfff0e9fb)));
+        'WITH FlexSurface.heavy EXPECT background Color(0xffd8c1f9).', () {
+      expect(tLightH.colorScheme.background, equals(const Color(0xffd8c1f9)));
     });
     test(
         'FCS7.70: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT background Color(0xff272030).', () {
-      expect(tDarkH.colorScheme.background, equals(const Color(0xff272030)));
+        'WITH highBackgroundLowScaffold blendLevel 40 '
+        'EXPECT background Color(0xff382b47).', () {
+      expect(tDarkH.colorScheme.background, equals(const Color(0xff382b47)));
     });
 
     test(
         'FCS7.71: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT scaffold '
-        'background Color(0xfffdfdfe).', () {
-      expect(tLightH.scaffoldBackgroundColor, equals(const Color(0xfffdfdfe)));
+        'WITH highBackgroundLowScaffold blendLevel 40 '
+        'EXPECT scaffold background Color(0xfff2ebfd).', () {
+      expect(tLightH.scaffoldBackgroundColor, equals(const Color(0xfff2ebfd)));
     });
     test(
         'FCS7.72: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.heavy EXPECT scaffold '
-        'background Color(0xff151416).', () {
-      expect(tDarkH.scaffoldBackgroundColor, equals(const Color(0xff151416)));
+        'WITH highBackgroundLowScaffold blendLevel 40 '
+        'EXPECT scaffold background Color(0xff1f1b24).', () {
+      expect(tDarkH.scaffoldBackgroundColor, equals(const Color(0xff1f1b24)));
     });
 
     test(
@@ -1841,35 +1863,67 @@ void main() {
 
     final FlexColorScheme fcsLightH2 = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 30,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       usedColors: 2,
     );
     final FlexColorScheme fcsLightH2Raw = FlexColorScheme.light(
-        surfaceStyle: FlexSurface.heavy,
+        colorScheme: const ColorScheme(
+          brightness: Brightness.light,
+          primary: Color(0xffcd5758),
+          onPrimary: Color(0xffffffff),
+          primaryContainer: Color(0xffebbbbc),
+          onPrimaryContainer: Color(0xff000000),
+          secondary: Color(0xff57c8d3),
+          onSecondary: Color(0xff000000),
+          secondaryContainer: Color(0xffbbe9ed),
+          onSecondaryContainer: Color(0xff000000),
+          tertiary: Color(0xfff37d7e),
+          onTertiary: Color(0xff000000),
+          tertiaryContainer: Color(0xfffdf0f0),
+          onTertiaryContainer: Color(0xff000000),
+          error: Color(0xff790000),
+          onError: Color(0xffffffff),
+          background: Color(0xfffaf3f3),
+          onBackground: Color(0xff000000),
+          surface: Color(0xfffaf3f3),
+          onSurface: Color(0xff000000),
+          //
+          errorContainer: Color(0xfff1d8d8),
+          onErrorContainer: Color(0xff000000),
+          surfaceVariant: Color(0xfff7e9e9),
+          onSurfaceVariant: Color(0xff000000),
+          outline: Color(0xff4d4d4d),
+          shadow: Color(0xff000000),
+          inverseSurface: Color(0xff1b1414),
+          onInverseSurface: Color(0xffffffff),
+          inversePrimary: Color(0xfffff0f0),
+        ),
+        surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+        blendLevel: 30,
         primary: const Color(0xffcd5758),
-        primaryContainer: const Color(0xffebbbbc),
-        secondary: const Color(0xff57c8d3),
-        secondaryContainer: const Color(0xffbbe9ed),
-        tertiary: const Color(0xfff37d7e),
-        tertiaryContainer: const Color(0xfffdf0f0),
-        surface: const Color(0xfffdfafa),
-        background: const Color(0xfff9eff0),
-        error: const Color(0xff790000),
-        scaffoldBackground: const Color(0xfffefdfd),
-        appBarBackground: const Color(0xfff9eff0),
-        dialogBackground: const Color(0xfffdfafa),
-        // These on colors can be left out and we still get correct match,
-        // maybe add test for it it too
-        // TODO(rydmike): Add test for overriding all onColors and not, compare.
         onPrimary: const Color(0xffffffff),
+        primaryContainer: const Color(0xffebbbbc),
+        onPrimaryContainer: const Color(0xff000000),
+        secondary: const Color(0xff57c8d3),
         onSecondary: const Color(0xff000000),
-        onSurface: const Color(0xff000000),
-        onBackground: const Color(0xff000000),
+        secondaryContainer: const Color(0xffbbe9ed),
+        onSecondaryContainer: const Color(0xff000000),
+        tertiary: const Color(0xfff37d7e),
+        onTertiary: const Color(0xff000000),
+        tertiaryContainer: const Color(0xfffdf0f0),
+        onTertiaryContainer: const Color(0xff000000),
+        error: const Color(0xff790000),
         onError: const Color(0xffffffff),
+        background: const Color(0xfffaf3f3),
+        onBackground: const Color(0xff000000),
+        surface: const Color(0xfffaf3f3),
+        onSurface: const Color(0xff000000),
         //
         tabBarStyle: FlexTabBarStyle.forBackground,
+        appBarBackground: const Color(0xfffaf3f3),
         appBarElevation: 0,
         bottomAppBarElevation: 0,
         tooltipsMatchBackground: false,
@@ -1934,7 +1988,8 @@ void main() {
 
     final FlexColorScheme fcsDarkH2 = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 30,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
       darkIsTrueBlack: true,
@@ -1960,19 +2015,20 @@ void main() {
           onTertiaryContainer: Color(0xffffffff),
           error: Color(0xffcf6679),
           onError: Color(0xff000000),
-          background: Color(0xff1c1515),
+          background: Color(0xff191313),
           onBackground: Color(0xffffffff),
-          surface: Color(0xff120f0f),
+          surface: Color(0xff0e0c0c),
           onSurface: Color(0xffffffff),
+          //
           errorContainer: Color(0xffb1384e),
           onErrorContainer: Color(0xffffffff),
-          surfaceVariant: Color(0xff120f0f),
+          surfaceVariant: Color(0xff191313),
           onSurfaceVariant: Color(0xffffffff),
           outline: Color(0xffb3b3b3),
           shadow: Color(0xff000000),
           inverseSurface: Color(0xffffffff),
           onInverseSurface: Color(0xff000000),
-          inversePrimary: Color(0xff674343),
+          inversePrimary: Color(0xff644141),
         ),
         primary: Color(0xffda8585),
         onPrimary: Color(0xffffffff),
@@ -1988,13 +2044,14 @@ void main() {
         onTertiaryContainer: Color(0xffffffff),
         error: Color(0xffcf6679),
         onError: Color(0xff000000),
-        background: Color(0xff1c1515),
+        background: Color(0xff191313),
         onBackground: Color(0xffffffff),
-        surface: Color(0xff120f0f),
+        surface: Color(0xff0e0c0c),
         onSurface: Color(0xffffffff),
+        //
         scaffoldBackground: Color(0xff000000),
-        appBarBackground: Color(0xff1c1515),
-        dialogBackground: Color(0xff120f0f),
+        appBarBackground: Color(0xff191313),
+        dialogBackground: Color(0xff0e0c0c),
         tabBarStyle: FlexTabBarStyle.forBackground,
         appBarElevation: 0,
         bottomAppBarElevation: 0,
@@ -2053,7 +2110,8 @@ void main() {
 
     final ThemeData tLightH3 = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 35,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.universal,
       lightIsWhite: true,
@@ -2062,7 +2120,8 @@ void main() {
 
     final ThemeData tDarkH3 = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.heavy,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      blendLevel: 35,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.universal,
       darkIsTrueBlack: true,
@@ -2249,7 +2308,8 @@ void main() {
 
     final ThemeData tLightC = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 20,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 2,
       tabBarStyle: FlexTabBarStyle.flutterDefault,
@@ -2261,7 +2321,8 @@ void main() {
 
     final ThemeData tDarkC = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 20,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,
       tabBarStyle: FlexTabBarStyle.flutterDefault,
@@ -2286,7 +2347,8 @@ void main() {
     // With surface and background colors defined, and light is white
     final ThemeData tLightC2 = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 0,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 2,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -2303,7 +2365,8 @@ void main() {
 
     final ThemeData tDarkC2 = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 0,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -2320,7 +2383,8 @@ void main() {
 
     final ThemeData tDarkC2tb = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
-      surfaceStyle: FlexSurface.custom,
+      surfaceMode: FlexSurfaceMode.custom,
+      blendLevel: 0,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 4,
       tabBarStyle: FlexTabBarStyle.forBackground,

@@ -16,7 +16,7 @@ class FlexColor {
   /// Private constructor for the FlexColor static class to prevent it from
   /// being instantiated or extended.
   FlexColor._(); // coverage:ignore-line
-  // TODO(rydmike): Issue line is not ignored, but similar FlexSubThemes._() is!
+  // TODO(rydmike): Issue: Coverage not ignored, but same FlexSubThemes._() is!?
 
   /// Material standard color for light surface.
   static const Color materialLightSurface = Color(0xFFFFFFFF);
@@ -400,15 +400,15 @@ class FlexColor {
   /// Hippie blue theme color for light secondary container color.
   static const Color hippieBlueLightSecondaryContainer = Color(0xFFFFDAD7);
 
+  /// Hippie blue theme color for light secondary variant color.
+  @Deprecated('Deprecated use hippieBlueLightTertiary instead.')
+  static const Color hippieBlueLightSecondaryVariant = hippieBlueLightTertiary;
+
   /// Hippie blue theme color for light tertiary color.
   static const Color hippieBlueLightTertiary = Color(0xFFBF4A50);
 
   /// Hippie blue theme color for light tertiary container color.
   static const Color hippieBlueLightTertiaryContainer = Color(0xFFFCBDBD);
-
-  /// Hippie blue theme color for light secondary variant color.
-  @Deprecated('Deprecated use hippieBlueLightTertiary instead.')
-  static const Color hippieBlueLightSecondaryVariant = hippieBlueLightTertiary;
 
   /// Hippie blue theme color for dark primary color.
   static const Color hippieBlueDarkPrimary = Color(0xFF669DB3);
@@ -461,15 +461,15 @@ class FlexColor {
   /// Aqua blue theme color for light secondary container color.
   static const Color aquaBlueLightSecondaryContainer = Color(0xFF91F4E8);
 
+  /// Aqua blue theme color for light secondary variant color.
+  @Deprecated('Deprecated use aquaBlueLightTertiary instead.')
+  static const Color aquaBlueLightSecondaryVariant = aquaBlueLightTertiary;
+
   /// Aqua blue theme color for light tertiary color.
   static const Color aquaBlueLightTertiary = Color(0xFF61D4D4);
 
   /// Aqua blue theme color for light tertiary container color.
   static const Color aquaBlueLightTertiaryContainer = Color(0xFF8FF3F2);
-
-  /// Aqua blue theme color for light secondary variant color.
-  @Deprecated('Deprecated use aquaBlueLightTertiary instead.')
-  static const Color aquaBlueLightSecondaryVariant = aquaBlueLightTertiary;
 
   /// Aqua blue theme color for dark primary color.
   static const Color aquaBlueDarkPrimary = Color(0xFF5DB3D5);
