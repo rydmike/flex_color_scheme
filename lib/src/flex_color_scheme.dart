@@ -5673,7 +5673,7 @@ class FlexColorScheme with Diagnosticable {
       // See issue: https://github.com/flutter/flutter/issues/65782
       secondaryHeaderColor: secondaryHeaderColor,
 
-      // TODO(rydmike): Tech debt => Move sub-themes opt-in to FlexSubThemes.
+      // TODO(rydmike): Tech debt: Move AppBar themes opt-in to FlexSubThemes.
       // The app bar theme allows us to use a custom colored appbar theme
       // in both light and dark themes that is not dependent on theme primary
       // or surface color, and still gets a correct working text and icon theme.
@@ -5755,7 +5755,7 @@ class FlexColorScheme with Diagnosticable {
         selectionHandleColor: primaryColorDark,
       ),
 
-      // TODO(rydmike): Tech debt => Move sub-themes opt-in to a FlexSubThemes.
+      // TODO(rydmike): Tech debt: Move TabBar themes opt-in to a FlexSubThemes.
       // Defines the TabBar theme that will fit nicely in an AppBar
       // (default) or on background color for use eg in a Scaffold, the choice
       // depends on tabBarStyle `FlexTabBarStyle`, that defaults to
@@ -5787,7 +5787,7 @@ class FlexColorScheme with Diagnosticable {
           ? IconThemeData(color: effectivePrimaryTextTheme.headline6!.color)
           : null,
 
-      // TODO(rydmike): Tech debt => Move sub-themes opt-in to FlexSubThemes.
+      // TODO(rydmike): Tech debt: Move tooltip themes opt-in to FlexSubThemes.
       // Opinionated theming of Tooltips, the default theme for Material
       // themed Tooltips are not ideal design choices on desktop and web
       // https://material.io/components/tooltips#specs.
@@ -6013,8 +6013,6 @@ class FlexColorScheme with Diagnosticable {
               elementRadius: subTheme.cardRadius ?? subTheme.defaultRadius,
               inputDecorationTheme: effectiveInputDecorationTheme)
           : null,
-      // TODO(rydmike): With new M3 ColorScheme, bg should be InverseSurface.
-      // Consider change or keep this? This looks nicer imo. Add config option?
       snackBarTheme: useSubThemes
           ? FlexSubThemes.snackBarTheme(
               elevation: subTheme.snackBarElevation,
