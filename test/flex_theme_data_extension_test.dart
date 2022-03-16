@@ -2307,24 +2307,6 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
     TestWidgetsFlutterBinding.ensureInitialized();
 
-    // TODO(rydmike): This kind of test can no longer work with new themes.
-    // TODO(rydmike): Should the default constructor behave like the .light ?
-    // test(
-    //     'FTD3.00RawL: GIVEN FlexColorScheme() made with min required light '
-    //     'params that equals default Material light scheme '
-    //   'EXPECT its FlexColorScheme to be equal to one made with light scheme '
-    //     'with no parameters.', () {
-    //   expect(
-    //     const FlexColorScheme(
-    //       brightness: Brightness.light,
-    //       primary: FlexColor.materialLightPrimary,
-    //       primaryContainer: FlexColor.materialLightPrimaryContainer,
-    //       secondary: FlexColor.materialLightSecondary,
-    //       tertiary: FlexColor.materialLightTertiary,
-    //     ).toTheme,
-    //     equals(FlexColorScheme.light().toTheme),
-    //   );
-    // });
     test(
         'FTD3.00DefL: GIVEN FlexThemeData.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {

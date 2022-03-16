@@ -963,6 +963,8 @@ void main() {
   //****************************************************************************
 
   // TODO(rydmike): Divider color removed due to issue, put back when resolved.
+  // The commented lines in these are temporary and should be put back when
+  // the issue below is solved and has landed in stable channel.
   // https://github.com/flutter/flutter/issues/100027
   //
   group('FCS5: WITH FlexColorScheme.themedSystemNavigationBar ', () {
@@ -1511,6 +1513,8 @@ void main() {
   // as a Widget, with a BuildContext and a Theme present.
   //****************************************************************************
   // TODO(rydmike): Divider color removed due to issue, put back when resolved.
+  // The commented lines in these are temporary and should be put back when
+  // the issue below is solved and has landed in stable channel.
   // https://github.com/flutter/flutter/issues/100027
   //
   group('FCS6: WITH FlexColorScheme.themedSystemNavigationBar ', () {

@@ -1760,7 +1760,7 @@ class FlexSubThemes {
 
     // TODO(rydmike): SnackBar uses ColorScheme.inverseSurface in M3 schemes.
     // For now keeping FlexColorScheme own dark primary as snackbar color.
-    // Consider adding [SchemeColor] for easy customization.
+    // Consider adding [SchemeColor] for easy customization instead.
 
     /// Default value for [backgroundColor].
     ///

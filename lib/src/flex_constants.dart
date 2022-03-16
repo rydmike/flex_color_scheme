@@ -241,8 +241,6 @@ const double kThickBorderWidth = 2;
 /// [ToggleButtons].
 const double kThinBorderWidth = 1.5;
 
-// TODO(rydmike): For ref, consider adding SDK defaults to doc comments below.
-
 // The values below for all the effects opacities and alpha blends are tricky.
 // Getting them just right is magic and dark arts plus some pixie dust.
 // These are the values I settled on for the opinionated themes.
