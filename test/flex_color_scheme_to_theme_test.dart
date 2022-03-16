@@ -2149,7 +2149,6 @@ void main() {
     //**************************************************************************
     // FlexColorScheme.light & dark factory tests. With
     // highBackgroundLowScaffold to hit background red color less than surface.
-    // Coverage hit test.
     // TODO(rydmike): Improve tests by adding more results verification checks.
     //**************************************************************************
 

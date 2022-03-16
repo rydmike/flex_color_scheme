@@ -16,7 +16,6 @@ class FlexColor {
   /// Private constructor for the FlexColor static class to prevent it from
   /// being instantiated or extended.
   FlexColor._(); // coverage:ignore-line
-  // TODO(rydmike): Issue: Coverage not ignored, but same FlexSubThemes._() is!?
 
   /// Material standard color for light surface.
   static const Color materialLightSurface = Color(0xFFFFFFFF);

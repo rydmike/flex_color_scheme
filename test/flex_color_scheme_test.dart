@@ -87,17 +87,21 @@ void main() {
         'scheme EXPECT FlexColorScheme.light with colors sc and null scheme.',
         () {
       expect(fc2, equals(fc2i));
-      // Expect toTheme from theme to full-fill same condition.
-      // TODO(rydmike): SDK ThemeData operator issue, fix in master!
-      // https://github.com/flutter/flutter/issues/91587
-      // If we run this test with just equals on the two objects, it fails!
-      // but with this toString comparison and ignoring hashcodes, it works!
-      // Why?
+      // Expect toTheme from them to full-fill same condition.
       expect(
         fc2.toTheme.toString(),
-        equalsIgnoringHashCodes(
-          fc2i.toTheme.toString(),
-        ),
+        equalsIgnoringHashCodes(fc2i.toTheme.toString()),
+      );
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // Using isNot to prove that here and get a track on the issue, if it
+      // ever changes and is fixed. Before there was this issue, but it has
+      // been fixed and landed too:
+      // https://github.com/flutter/flutter/issues/91587
+      //
+      // Check ThemeData equality, well checking inequality for now.
+      expect(
+        fc2.toTheme,
+        isNot(fc2i.toTheme),
       );
     });
 
@@ -127,16 +131,20 @@ void main() {
         'EXPECT FlexColorScheme.dark with scheme Material.', () {
       expect(fc3, equals(fc3i));
       // Expect toTheme from them to full-fill same condition.
-      // TODO(rydmike): SDK ThemeData operator issue, fix in master!
-      // https://github.com/flutter/flutter/issues/91587
-      // If we run this test with just equals on the two objects, it fails!
-      // but with this toString comparison and ignoring hashcodes, it works!
-      // Why? ->
       expect(
         fc3.toTheme.toString(),
-        equalsIgnoringHashCodes(
-          fc3i.toTheme.toString(),
-        ),
+        equalsIgnoringHashCodes(fc3i.toTheme.toString()),
+      );
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // Using isNot to prove that here and get a track on the issue, if it
+      // ever changes and is fixed. Before there was this issue, but it has
+      // been fixed and landed too:
+      // https://github.com/flutter/flutter/issues/91587
+      //
+      // Check ThemeData equality, well checking inequality for now.
+      expect(
+        fc3.toTheme,
+        isNot(fc3i.toTheme),
       );
     });
 
