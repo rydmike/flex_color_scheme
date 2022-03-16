@@ -569,45 +569,6 @@ linter:
     # RydMike        enabled  : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     #no_default_cases: false
 
-    # DON’T use a leading underscore for identifiers that aren't private
-    #
-    # https://dart-lang.github.io/linter/lints/no_leading_underscores_for_local_identifiers.html
-    #
-    # DON’T use a leading underscore for identifiers that aren't private.
-    # Dart uses a leading underscore in an identifier to mark members and
-    # top-level declarations as private. This trains users to associate a
-    # leading underscore with one of those kinds of declarations. They see
-    # _ and think "private". There is no concept of "private" for local
-    # variables or parameters. When one of those has a name that starts with
-    # an underscore, it sends a confusing signal to the reader. To avoid that,
-    # don't use leading underscores in those names.
-    #
-    # RydMike: I know this, but as an old practice I use leading underscore also
-    # for local identifiers that shadow a parameter or is a local calc step.
-    # Underscore is a convenient way so I don't have to invent a long new name
-    # for it, and it also tells me when I see it that this is a local variable
-    # in a function/method, and not a passed in parameter. What should I use
-    # instead that tells me the same, that is short and convenient?
-    # Have to think about that, maybe I should append an underscore instead?
-    # It does not change the variable and should work and serve same purpose.
-    # This packages has a lot of leading underscore for local variables in
-    # functions. Disabling this rule for now until I have the energy to refactor
-    # them to something else.
-    #
-    # Other known linters use:
-    # TODO(rydmike): Check status in other linters for this rule.
-    #
-    # Core           disabled : https://pub.dev/packages/lints
-    # Recommended    disabled : https://pub.dev/packages/lints
-    # Flutter Lints  disabled : https://pub.dev/packages/flutter_lints
-    # Pedantic       disabled : https://pub.dev/packages/pedantic
-    # Effective Dart disabled : https://pub.dev/packages/effective_dart
-    # Flutter repo   enabled  : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
-    # Lint           disabled : https://pub.dev/packages/lint
-    # VG Analysis    enabled  : https://pub.dev/packages/very_good_analysis
-    # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
-    # no_leading_underscores_for_local_identifiers: false
-
     # CONSIDER omitting type annotations for local variables.
     #
     # https://dart-lang.github.io/linter/lints/omit_local_variable_types.html

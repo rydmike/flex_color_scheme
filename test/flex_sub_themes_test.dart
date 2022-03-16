@@ -1300,7 +1300,7 @@ void main() {
         equals(Colors.transparent),
       );
     });
-    // TODO(rydmike): This theme will be deprecated soon, remove tests then.
+    // TODO(rydmike): ButtonThemeData will be deprecated soon, remove tests then.
     // -------------------------------------------------------------------------
     // FlexSubThemes old material buttons theme tests
     // -------------------------------------------------------------------------

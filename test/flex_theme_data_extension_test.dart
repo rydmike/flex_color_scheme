@@ -16,7 +16,25 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     test(
-        'FTD1.00DefL1: GIVEN FFlexColorScheme.light().toTheme '
+        'FTD1.00DefLType: GIVEN FlexThemeData.light() '
+        'EXPECT it to be a ThemeData type.', () {
+      expect(
+        FlexThemeData.light().runtimeType,
+        ThemeData,
+      );
+    });
+
+    test(
+        'FTD1.00DefDType: GIVEN FlexThemeData.dark() '
+        'EXPECT it to be a ThemeData type.', () {
+      expect(
+        FlexThemeData.light().runtimeType,
+        ThemeData,
+      );
+    });
+
+    test(
+        'FTD1.00DefL1: GIVEN FlexColorScheme.light().toTheme '
         'EXPECT its ThemeData to be equal to FlexThemeData.light().', () {
       expect(
         FlexColorScheme.light().toTheme,
@@ -1905,6 +1923,17 @@ void main() {
           ftdLight.toString(),
         ),
       );
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // Using isNot to prove that here and get a track on the issue, if it
+      // ever changes and is fixed. Before there was this issue, but it has
+      // been fixed and landed too:
+      // https://github.com/flutter/flutter/issues/91587
+      //
+      // Check ThemeData equality, well checking inequality for now.
+      expect(
+        fcsLightTd,
+        isNot(ftdLight),
+      );
       expect(
         ftdLight,
         equals(ftdLight.copyWith(
@@ -1913,13 +1942,6 @@ void main() {
           dialogBackgroundColor: FlexColor.lightSurface,
         )),
       );
-      // TODO(rydmike): SDK ThemeData operator issue, fix in master!
-      // https://github.com/flutter/flutter/issues/91587
-      // Check object equality
-      // expect(
-      //   ftdLight,
-      //   equals(fcsLightTd),
-      // );
     });
 
     test(
@@ -2085,7 +2107,19 @@ void main() {
           ftdLight.toString(),
         ),
       );
-      // TODO(rydmike): Test more color overrides in this copyWith.
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // Using isNot to prove that here and get a track on the issue, if it
+      // ever changes and is fixed. Before there was this issue, but it has
+      // been fixed and landed too:
+      // https://github.com/flutter/flutter/issues/91587
+      //
+      // Check ThemeData equality, well checking inequality for now.
+      expect(
+        fcsLightTd,
+        isNot(ftdLight),
+      );
+      // Test color override results with this copyWith, copying in expected
+      // results that should not change the ColorScheme.
       expect(
         ftdLight,
         equals(ftdLight.copyWith(primaryColor: FlexColor.indigo.light.primary)),
@@ -2107,21 +2141,12 @@ void main() {
             .copyWith(tertiary: FlexColor.indigo.light.tertiary)),
       );
       // But we should get this color on tertiary with this setup.
-      // TODO(rydmike): Figure out this new actual test for above case.
-      // expect(
-      //   ftdLight.colorScheme,
-      //   isNot(ftdLight.colorScheme.copyWith(
-      //     tertiary:
-      //       FlexColor.indigo.light.primary.lighten(kDarkenPrimaryContainer),
-      //   )),
-      // );
-      // TODO(rydmike): SDK ThemeData operator issue, fix in master!
-      // https://github.com/flutter/flutter/issues/91587
-      // Check object equality
-      // expect(
-      //   ftdLight,
-      //   equals(fcsLightTd),
-      // );
+      expect(
+        ftdLight.colorScheme,
+        equals(ftdLight.colorScheme.copyWith(
+          tertiary: FlexColor.indigo.light.primary.brighten(15),
+        )),
+      );
     });
 
     test(
@@ -2273,21 +2298,24 @@ void main() {
         useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
-
       // Check to String equality
       expect(
-        fcsTdDark.toString(),
+        fcsTdDark.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          fcsDarkTd.toString(),
+          fcsDarkTd.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
-      // TODO(rydmike): SDK ThemeData operator issue, fix in master!
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // Using isNot to prove that here and get a track on the issue, if it
+      // ever changes and is fixed. Before there was this issue, but it has
+      // been fixed and landed too:
       // https://github.com/flutter/flutter/issues/91587
-      // Check object equality
-      // expect(
-      //   fcsTdDark,
-      //   equals(fcsDarkTd),
-      // );
+      //
+      // Check ThemeData equality, well checking inequality for now.
+      expect(
+        fcsTdDark,
+        isNot(fcsDarkTd),
+      );
     });
 
     //**************************************************************************
