@@ -110,7 +110,19 @@ void main() {
           ).toTheme,
           equals(FlexColorScheme.light().toTheme));
     });
-
+    test(
+        'FCS7.05-Default-scheme-light-STING: GIVEN FlexColorScheme() made with '
+        'default light color scheme '
+        'EXPECT its STRING ThemeData to be equal to one made with light '
+        'factory and ColorScheme.light v4.2.0 test case.', () {
+      expect(
+          const FlexColorScheme(
+            colorScheme: ColorScheme.light(inverseSurface: Color(0xff121212)),
+          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(FlexColorScheme.light(
+            colorScheme: const ColorScheme.light(),
+          ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
+    });
     test(
         'FCS7.05-Default-scheme-light: GIVEN FlexColorScheme() made with '
         'default light color scheme '
@@ -118,13 +130,12 @@ void main() {
         'and ColorScheme.light v4.2.0 test case.', () {
       expect(
           const FlexColorScheme(
-            colorScheme: ColorScheme.light(),
+            colorScheme: ColorScheme.light(inverseSurface: Color(0xff121212)),
           ).toTheme,
           equals(FlexColorScheme.light(
             colorScheme: const ColorScheme.light(),
           ).toTheme));
     });
-
     const ColorScheme schemeDark = ColorScheme(
       brightness: Brightness.dark,
       primary: Color(0xffbb86fc),
@@ -155,7 +166,6 @@ void main() {
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff5a4570),
     );
-
     test(
         'FCS7.06s-Raw-scheme-dark: GIVEN FlexColorScheme() made with '
         'default dark color scheme '
@@ -292,7 +302,10 @@ void main() {
       onBackground: Colors.white,
       surface: Color(0xff121212),
       onSurface: Colors.white,
-      onSurfaceVariant: Color(0xffffffff),
+      // Pre-inverted for light to be correct as is.
+      surfaceVariant: Colors.white,
+      inverseSurface: Color(0xff121212),
+      onInverseSurface: Colors.white,
     );
 
     final ColorScheme overrideScheme = hcDarkScheme.copyWith(
@@ -337,7 +350,7 @@ void main() {
             background: Colors.white,
             onBackground: Colors.black,
           ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(FlexColorScheme(
+          equalsIgnoringHashCodes(FlexColorScheme.light(
             colorScheme: overrideScheme,
           ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
 

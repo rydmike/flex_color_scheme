@@ -2,23 +2,37 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.2 - March 14, 2022
+## v5.0.0-dev.2 - March 16, 2022
 
-The target with this dev release is:
+Targets with the dev.2 release is:
 
 * Documentation updates. The bulk of the readme will be migrated to its own site.
 * Minor fixes and cleaning, hopefully only internal.
 * Completion of tests.
-* Improvements to Themes Playground, fewer light/dark and widget coupled 
-  properties.
 * Complete removal of in version 4 deprecated property `surfaceStyle`, as stated
-  in v4.2 to be done in in v5.0.0.
+  in v4.2 to be done for v5.0.0 stable release.
+* Improvements to Themes Playground, fewer light/dark and widget coupled
+  properties. Maybe image based theme and maybe an alternative UI
 
-Current changes:
+Completed changes:
 
-* Pub.dev analysis does no like document references to deprecated Flutter
+* Pub.dev analysis does not like document references to deprecated Flutter
   properties. Changed the [primaryVariant] and [secondaryVariant] references
   in document comments to `primaryVariant` and `secondaryVariant`.
+
+* Changed the priority in FlexColorScheme when using direct input color 
+  properties, `colorScheme` input and using key color seeded ColorScheme
+  generation. The new order is that input `colorScheme` is in this rare use case
+  always overridden by the seed generate `ColorScheme`. This allows us
+  us to a `colorScheme` as input to seed generation, where this color
+  scheme could already have been externally seeded generated, but that we want 
+  to modify by using custom FlexTones or surface blends in FleColorScheme.
+  The direct properties overrides the seeded color as before, unless it is 
+  `primary`, `secondary`, `tertiary` or their container colors. In that case
+  the `keyColors`, "keep" property determines if those colors are kept or not.
+  This keeps the `keepPrimary`, `keepSecondary` etc. in `FlexKeyColors` behaving
+  in a consistent manner when using key color seeded ColorScheme's, regardless
+  of their input source. 
 
 ## v5.0.0-dev.1 - March 14, 2022
 
