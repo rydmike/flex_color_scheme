@@ -51,6 +51,10 @@ All notable changes to the **FlexColorScheme** package are documented here.
   in `FlexSubThemes`.
 
 * Themes Playground improvements:
+  - First version of a new Focused view, versus the previous "advanced", both
+    views can be used and switch to based on what is appropriate when using 
+    different media sizes. More work and tuning remains, but the addition
+    of this new view was fairly simple and straight forward.
   - The switches to keep main input colors for primary, secondary, tertiary
     and their containers, where separated so that their state and code 
     generation for light and dark theme mode are separate. This makes them

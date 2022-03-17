@@ -10,19 +10,19 @@ class DialogSettings extends StatelessWidget {
   const DialogSettings({
     Key? key,
     required this.controller,
-    required this.isOpen,
-    required this.onTap,
+    this.isOpen = true,
+    this.onTap,
   }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Dialog Settings'),
+      title: const Text('Dialog'),
       child: Column(
         children: <Widget>[
           const ListTile(

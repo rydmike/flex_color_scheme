@@ -14,12 +14,14 @@ class SeededColorScheme extends StatelessWidget {
   const SeededColorScheme({
     Key? key,
     required this.controller,
-    required this.isOpen,
-    required this.onTap,
+    this.isOpen = true,
+    this.onTap,
+    this.showKeyButtons = true,
   }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final bool showKeyButtons;
 
   String _describeFlexToneLabel(int colors) {
     if (colors == 1) {
@@ -104,13 +106,14 @@ class SeededColorScheme extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const SizedBox(height: 8),
-          ListTile(
-            title: const Text('Use effective input colors as keys to seed '
-                'the ColorScheme'),
-            subtitle: Text(AppColor.explainUsedColors(controller)),
-          ),
-          // const SizedBox(height: 4),
-          ListTile(trailing: UseKeyColorsButtons(controller: controller)),
+          if (showKeyButtons)
+            ListTile(
+              title: const Text('Use effective input colors as keys to seed '
+                  'the ColorScheme'),
+              subtitle: Text(AppColor.explainUsedColors(controller)),
+            ),
+          if (showKeyButtons)
+            ListTile(trailing: UseKeyColorsButtons(controller: controller)),
           const ListTile(
             title: Text('Keep effective input color'),
             subtitle: Text('When using a seeded ColorScheme, '
@@ -122,7 +125,6 @@ class SeededColorScheme extends StatelessWidget {
                 'key color based seeded scheme is used. They have separate '
                 'state for light and dark theme mode.'),
           ),
-
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 4),
             child: SchemeColors(tc: controller),
@@ -139,7 +141,6 @@ class SeededColorScheme extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
-
           if (controller.schemeIndex == (AppColor.schemesCustom.length - 1))
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

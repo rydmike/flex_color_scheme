@@ -8,15 +8,15 @@ import '../../shared/color_scheme_popup_menu.dart';
 import 'tab_bar_style_buttons.dart';
 
 class TabBarSettings extends StatelessWidget {
-  const TabBarSettings(
-      {Key? key,
-      required this.controller,
-      required this.isOpen,
-      required this.onTap})
-      : super(key: key);
+  const TabBarSettings({
+    Key? key,
+    required this.controller,
+    this.isOpen = true,
+    this.onTap,
+  }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   String explainTabStyle(final FlexTabBarStyle style) {
     switch (style) {
@@ -43,7 +43,7 @@ class TabBarSettings extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('TabBar Settings'),
+      title: const Text('TabBar'),
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),

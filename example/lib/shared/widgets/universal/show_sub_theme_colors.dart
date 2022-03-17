@@ -69,7 +69,6 @@ class ShowSubThemeColors extends StatelessWidget {
     }
 
     // Get the colors of all shown component theme colors.
-
     final Color elevatedButtonColor = theme
             .elevatedButtonTheme.style?.backgroundColor
             ?.resolve(<MaterialState>{}) ??
@@ -113,6 +112,17 @@ class ShowSubThemeColors extends StatelessWidget {
         (isDark ? colorScheme.onSurface : colorScheme.onPrimary);
     final Color dialogColor =
         theme.dialogTheme.backgroundColor ?? theme.dialogBackgroundColor;
+    //
+    final Color defaultSnackBackgroundColor = isDark
+        ? colorScheme.onSurface
+        : Color.alphaBlend(
+            colorScheme.onSurface.withOpacity(0.80), colorScheme.surface);
+    final Color snackBarColor =
+        theme.snackBarTheme.backgroundColor ?? defaultSnackBackgroundColor;
+    final Color snackForeground = theme.snackBarTheme.contentTextStyle?.color ??
+        (ThemeData.estimateBrightnessForColor(snackBarColor) == Brightness.light
+            ? Colors.black
+            : Colors.white);
 
     final Color bottomNavBarColor =
         theme.bottomNavigationBarTheme.backgroundColor ??
@@ -133,6 +143,14 @@ class ShowSubThemeColors extends StatelessWidget {
             colorScheme.primary;
     final Color navigationRailIndicatorColor =
         theme.navigationRailTheme.indicatorColor ?? colorScheme.primary;
+
+    final Color textColor = theme.textTheme.titleMedium?.color ??
+        (isDark ? Colors.white : Colors.black);
+    final Color primTextColor = theme.primaryTextTheme.titleMedium?.color ??
+        (ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
+                Brightness.dark
+            ? Colors.white
+            : Colors.black);
 
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.
@@ -236,6 +254,11 @@ class ShowSubThemeColors extends StatelessWidget {
                 textColor: _onColor(dialogColor, background),
               ),
               ColorCard(
+                label: 'SnackBar\nBackground',
+                color: snackBarColor,
+                textColor: snackForeground,
+              ),
+              ColorCard(
                 label: 'Bottom\nNavigationBar\nbackground',
                 color: bottomNavBarColor,
                 textColor: _onColor(bottomNavBarColor, background),
@@ -274,6 +297,16 @@ class ShowSubThemeColors extends StatelessWidget {
                 label: 'Navigation\nRail\nindicator',
                 color: navigationRailIndicatorColor,
                 textColor: _onColor(navigationRailIndicatorColor, background),
+              ),
+              ColorCard(
+                label: 'Text\nTheme',
+                color: textColor,
+                textColor: _onColor(textColor, background),
+              ),
+              ColorCard(
+                label: 'PrimaryText\nTheme',
+                color: primTextColor,
+                textColor: _onColor(primTextColor, background),
               ),
             ],
           ),

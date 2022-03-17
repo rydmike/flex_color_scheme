@@ -70,6 +70,8 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
+  // -------
+
   /// Loads the use sub themes setting used in examples 2, 3, 4 and 5.
   @override
   Future<bool> useSubThemes() async {
@@ -92,6 +94,58 @@ class ThemeServicePrefs implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  // -------
+
+  /// Loads the advancedView setting used in examples 5.
+  @override
+  Future<bool> advancedView() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyAdvancedView) ??
+          ThemeService.defaultAdvancedView;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultAdvancedView;
+    }
+  }
+
+  /// Persists the saveAdvancedView setting used in examples 5.
+  @override
+  Future<void> saveAdvancedView(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyAdvancedView, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // -------
+
+  /// Loads used viewIndex setting used in example 5.
+  @override
+  Future<int> viewIndex() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keyViewIndex) ??
+          ThemeService.defaultViewIndex;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultViewIndex;
+    }
+  }
+
+  /// Persists the used viewIndex setting used in examples 5.
+  @override
+  Future<void> saveViewIndex(int value) async {
+    try {
+      await _prefs.setInt(ThemeService.keyViewIndex, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // -------
 
   /// Loads the useTextTheme setting in example 5.
   @override

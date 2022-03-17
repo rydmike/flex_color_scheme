@@ -44,6 +44,27 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> saveUseSubThemes(bool value) async {}
 
+  // -----------
+  /// Loads the advancedView setting from mem in example 5.
+  @override
+  Future<bool> advancedView() async => ThemeService.defaultAdvancedView;
+
+  /// Persists the advancedView setting to mem in example 5.
+  @override
+  Future<void> saveAdvancedView(bool value) async {}
+
+  // -----------
+
+  /// Loads used viewIndex setting from mem in example 5.
+  @override
+  Future<int> viewIndex() async => ThemeService.defaultViewIndex;
+
+  /// Persists the used viewIndex setting to mem in examples 5.
+  @override
+  Future<void> saveViewIndex(int value) async {}
+
+  // -----------
+
   /// Loads the useTextTheme setting in example 5.
   @override
   Future<bool> useTextTheme() async => ThemeService.defaultUseTextTheme;

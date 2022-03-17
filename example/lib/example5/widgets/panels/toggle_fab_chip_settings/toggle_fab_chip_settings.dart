@@ -11,19 +11,19 @@ class ToggleFabChipsSettings extends StatelessWidget {
   const ToggleFabChipsSettings({
     Key? key,
     required this.controller,
-    required this.isOpen,
-    required this.onTap,
+    this.isOpen = true,
+    this.onTap,
   }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Themed Buttons, Switches and Chips'),
+      title: const Text('ToggleButtons, FABs and Chips'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

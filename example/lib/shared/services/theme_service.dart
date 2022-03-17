@@ -23,6 +23,8 @@ abstract class ThemeService {
   /// Persists the ThemeMode in examples 2, 3, 4 and 5.
   Future<void> saveThemeMode(ThemeMode value);
 
+  //------
+
   /// Key used to read and save the useSubThemes value.
   static const String keyUseSubThemes = 'useSubThemes';
 
@@ -34,6 +36,36 @@ abstract class ThemeService {
 
   /// Persists the use sub themes setting in examples 2, 3, 4 and 5.
   Future<void> saveUseSubThemes(bool value);
+
+  //------
+
+  /// Key used to read and save the advancedView value.
+  static const String keyAdvancedView = 'advancedView';
+
+  /// Default value for the advancedView, also used to reset settings.
+  static const bool defaultAdvancedView = false;
+
+  /// Loads the advancedView setting in example 5.
+  Future<bool> advancedView();
+
+  /// Persists the advancedView setting in example 5.
+  Future<void> saveAdvancedView(bool value);
+
+  //------
+
+  /// Key used to read and save the viewIndex value.
+  static const String keyViewIndex = 'viewIndex';
+
+  /// Default value for the viewIndex, also used to reset settings.
+  static const int defaultViewIndex = 0;
+
+  /// Loads used viewIndex setting, in example 5.
+  Future<int> viewIndex();
+
+  /// Persists the used viewIndex setting, in example 5.
+  Future<void> saveViewIndex(int value);
+
+  //------
 
   /// Key used to read and save the useTextTheme value.
   static const String keyUseTextTheme = 'useTextTheme';

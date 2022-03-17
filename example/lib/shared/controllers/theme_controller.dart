@@ -35,9 +35,11 @@ class ThemeController with ChangeNotifier {
   Future<void> loadAll() async {
     _themeMode = await _themeService.themeMode();
     _useSubThemes = await _themeService.useSubThemes();
+    _advancedView = await _themeService.advancedView();
     _useTextTheme = await _themeService.useTextTheme();
     _usedScheme = await _themeService.usedScheme();
     _schemeIndex = await _themeService.schemeIndex();
+    _viewIndex = await _themeService.viewIndex();
     _interactionEffects = await _themeService.interactionEffects();
     _useDefaultRadius = await _themeService.useDefaultRadius();
     _cornerRadius = await _themeService.cornerRadius();
@@ -167,9 +169,15 @@ class ThemeController with ChangeNotifier {
   Future<void> resetAllToDefaults() async {
     await setThemeMode(ThemeService.defaultThemeMode, false);
     await setUseSubThemes(ThemeService.defaultUseSubThemes, false);
+    //
+    // We are not going to reset view mode, we will keep what was used last,
+    // it was annoying when it chnaged viewmode wheh you reset the settings.
+    //
+    // await setAdvancedView(ThemeService.defaultAdvancedView, false);
     await setUseTextTheme(ThemeService.defaultUseTextTheme, false);
     await setUsedScheme(ThemeService.defaultUsedScheme, false);
     await setSchemeIndex(ThemeService.defaultSchemeIndex, false);
+    await setViewIndex(ThemeService.defaultViewIndex, false);
     await setInteractionEffects(ThemeService.defaultInteractionEffects, false);
     await setUseDefaultRadius(ThemeService.defaultUseDefaultRadius, false);
     await setCornerRadius(ThemeService.defaultCornerRadius, false);
@@ -354,6 +362,26 @@ class ThemeController with ChangeNotifier {
     _useSubThemes = value;
     if (notify) notifyListeners();
     await _themeService.saveUseSubThemes(value);
+  }
+
+  late bool _advancedView;
+  bool get advancedView => _advancedView;
+  Future<void> setAdvancedView(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _advancedView) return;
+    _advancedView = value;
+    if (notify) notifyListeners();
+    await _themeService.saveAdvancedView(value);
+  }
+
+  late int _viewIndex;
+  int get viewIndex => _viewIndex;
+  Future<void> setViewIndex(int? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _viewIndex) return;
+    _viewIndex = value;
+    notifyListeners();
+    await _themeService.saveViewIndex(value);
   }
 
   late bool _useTextTheme;

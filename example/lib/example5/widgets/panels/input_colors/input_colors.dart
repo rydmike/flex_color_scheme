@@ -11,16 +11,18 @@ import 'theme_popup_menu.dart';
 import 'theme_selector.dart';
 import 'used_colors_popup_menu.dart';
 
-class SelectTheme extends StatelessWidget {
-  const SelectTheme({
+class InputColors extends StatelessWidget {
+  const InputColors({
     Key? key,
     required this.controller,
-    required this.isOpen,
-    required this.onTap,
+    this.isOpen = true,
+    this.onTap,
+    this.showThemeSelector = true,
   }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final bool showThemeSelector;
 
   Future<void> _handleCopySchemeTap(BuildContext context) async {
     final bool? copy = await showDialog<bool?>(
@@ -65,10 +67,11 @@ class SelectTheme extends StatelessWidget {
               }
             },
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-            child: ThemeSelector(controller: controller),
-          ),
+          if (showThemeSelector)
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+              child: ThemeSelector(controller: controller),
+            ),
           ThemePopupMenu(controller: controller),
           const SizedBox(height: 8),
           if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))

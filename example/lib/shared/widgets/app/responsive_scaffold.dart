@@ -600,10 +600,12 @@ class _AppMenuState extends State<_AppMenu> {
     final List<IconData> usedIcons = <IconData>[
       ..._icons,
       if (isDark) Icons.wb_sunny else Icons.bedtime,
+      Icons.calendar_view_month_outlined,
     ];
     final List<String> usedLabels = <String>[
       ..._labels,
       if (isDark) 'Light mode' else 'Dark mode',
+      'View mode',
     ];
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints size) {

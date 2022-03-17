@@ -110,6 +110,8 @@ class ThemeServiceHive implements ThemeService {
     }
   }
 
+  // ----------
+
   /// Loads the useSubThemes from Hive box for examples 2, 3, 4 and 5.
   @override
   Future<bool> useSubThemes() async {
@@ -132,6 +134,58 @@ class ThemeServiceHive implements ThemeService {
       debugPrint(e.toString());
     }
   }
+
+  // ----------
+
+  /// Loads the advancedView from Hive box for example 5.
+  @override
+  Future<bool> advancedView() async {
+    try {
+      return _hiveBox.get(ThemeService.keyAdvancedView,
+          defaultValue: ThemeService.defaultAdvancedView) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultAdvancedView;
+    }
+  }
+
+  /// Persists the advancedView from Hive box for example 5.
+  @override
+  Future<void> saveAdvancedView(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyAdvancedView, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----------
+
+  /// Loads used viewIndex setting for example 5.
+  @override
+  Future<int> viewIndex() async {
+    try {
+      return _hiveBox.get(ThemeService.keyViewIndex,
+          defaultValue: ThemeService.defaultViewIndex) as int;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultViewIndex;
+    }
+  }
+
+  /// Persists the used viewIndex setting for examples 5.
+  @override
+  Future<void> saveViewIndex(int value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyViewIndex, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----------
 
   /// Loads the useTextTheme setting for example 5.
   @override
