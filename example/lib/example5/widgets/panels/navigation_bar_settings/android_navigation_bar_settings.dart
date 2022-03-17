@@ -15,15 +15,15 @@ import 'system_nav_bar_style_buttons.dart';
 // that can be used to style the Android System navigation bar in a style
 // that matches your used FlexColorScheme based theme.
 class AndroidNavigationBarSettings extends StatelessWidget {
-  const AndroidNavigationBarSettings(
-      {Key? key,
-      required this.controller,
-      required this.isOpen,
-      required this.onTap})
-      : super(key: key);
+  const AndroidNavigationBarSettings({
+    Key? key,
+    required this.controller,
+    this.isOpen = true,
+    this.onTap,
+  }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   String explainStyle(final FlexSystemNavBarStyle style, final bool isLight) {
     switch (style) {

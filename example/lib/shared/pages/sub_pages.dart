@@ -6,14 +6,14 @@ import 'splash_page_two.dart';
 import 'subpage.dart';
 
 /// All the sub demo pages wrapped in a header card.
-class SubPages extends StatelessWidget {
-  const SubPages({
+class SubPagesDemo extends StatelessWidget {
+  const SubPagesDemo({
     Key? key,
-    required this.isOpen,
-    required this.onTap,
+    this.isOpen = true,
+    this.onTap,
   }) : super(key: key);
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class SubPages extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
-            title: const Text('Sub page demo'),
+            title: const Text('Sub page example with all widgets'),
             subtitle: const Text('Uses the same color scheme and theme'),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {

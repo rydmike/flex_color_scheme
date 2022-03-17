@@ -12,13 +12,13 @@ class SurfaceBlends extends StatelessWidget {
   const SurfaceBlends({
     Key? key,
     required this.controller,
-    required this.isOpen,
-    required this.onTap,
+    this.isOpen = true,
+    this.onTap,
     required this.showAllBlends,
   }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final bool showAllBlends;
 
   String explainMode(final FlexSurfaceMode mode) {

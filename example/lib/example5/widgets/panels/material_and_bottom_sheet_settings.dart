@@ -6,17 +6,17 @@ import '../../../shared/widgets/universal/header_card.dart';
 import '../../../shared/widgets/universal/theme_showcase.dart';
 import '../shared/color_scheme_popup_menu.dart';
 
-class ThemedMaterialAndBottomSheet extends StatelessWidget {
-  const ThemedMaterialAndBottomSheet({
+class MaterialAndBottomSheetSettings extends StatelessWidget {
+  const MaterialAndBottomSheetSettings({
     Key? key,
     required this.controller,
-    required this.isOpen,
-    required this.onTap,
+    this.isOpen = true,
+    this.onTap,
   }) : super(key: key);
 
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ThemedMaterialAndBottomSheet extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Themed Material'),
+      title: const Text('Material, Banner, Sheet and SnackBar'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

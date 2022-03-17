@@ -19,7 +19,7 @@ class _ShowSubPagesState extends State<ShowSubPages> {
 
   @override
   Widget build(BuildContext context) {
-    return SubPages(
+    return SubPagesDemo(
       isOpen: isOpen,
       onTap: () {
         setState(() {

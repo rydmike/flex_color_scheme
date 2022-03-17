@@ -8,22 +8,22 @@ import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class TextFieldSettings extends StatelessWidget {
-  const TextFieldSettings(
-      {Key? key,
-      required this.controller,
-      required this.isOpen,
-      required this.onTap})
-      : super(key: key);
+  const TextFieldSettings({
+    Key? key,
+    required this.controller,
+    this.isOpen = true,
+    this.onTap,
+  }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('TextField Settings'),
+      title: const Text('TextField'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

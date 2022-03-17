@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import '../../../../../shared/controllers/theme_controller.dart';
 import '../../../../../shared/widgets/universal/header_card.dart';
 import '../../../../../shared/widgets/universal/show_color_scheme_colors.dart';
-import '../select_theme/theme_popup_menu.dart';
+import '../input_colors/theme_popup_menu.dart';
 
 // Panel used to show a mor compact view of the ColorScheme colors.
 class ColorSchemeColors extends StatelessWidget {
   const ColorSchemeColors({
     Key? key,
     required this.controller,
-    required this.isOpen,
-    required this.onTap,
+    this.isOpen = true,
+    this.onTap,
   }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {

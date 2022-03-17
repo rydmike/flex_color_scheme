@@ -10,15 +10,15 @@ import '../../shared/color_scheme_popup_menu.dart';
 
 // Panel used to control the sub-theme for NavigationBar.
 class NavigationBarSettings extends StatelessWidget {
-  const NavigationBarSettings(
-      {Key? key,
-      required this.controller,
-      required this.isOpen,
-      required this.onTap})
-      : super(key: key);
+  const NavigationBarSettings({
+    Key? key,
+    required this.controller,
+    this.isOpen = true,
+    this.onTap,
+  }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   String explainLabelStyle(
       final NavigationDestinationLabelBehavior labelBehavior) {
@@ -41,7 +41,7 @@ class NavigationBarSettings extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('NavigationBar Settings'),
+      title: const Text('NavigationBar'),
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),

@@ -9,15 +9,15 @@ import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class NavigationRailSettings extends StatelessWidget {
-  const NavigationRailSettings(
-      {Key? key,
-      required this.controller,
-      required this.isOpen,
-      required this.onTap})
-      : super(key: key);
+  const NavigationRailSettings({
+    Key? key,
+    required this.controller,
+    this.isOpen = true,
+    this.onTap,
+  }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   String explainLabelStyle(final NavigationRailLabelType labelStyle) {
     switch (labelStyle) {
@@ -43,7 +43,7 @@ class NavigationRailSettings extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('NavigationRail Settings'),
+      title: const Text('NavigationRail'),
       child: Column(
         children: <Widget>[
           ColorSchemePopupMenu(

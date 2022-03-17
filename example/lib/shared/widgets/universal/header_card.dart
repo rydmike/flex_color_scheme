@@ -27,7 +27,7 @@ class HeaderCard extends StatelessWidget {
     this.elevation = 0,
     this.enabled = true,
     this.isOpen = true,
-    required this.onTap,
+    this.onTap,
     this.duration = const Duration(milliseconds: 200),
     this.color,
     this.boldTitle = true,
@@ -83,7 +83,7 @@ class HeaderCard extends StatelessWidget {
   /// You can click on the trailing icon ot the header to trigger the callback.
   /// This widget does not keep any state, it is up to caller
   /// to set [isOpen] to the right state.
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   /// The duration of the show and hide animation of child.
   final Duration duration;
@@ -176,15 +176,17 @@ class HeaderCard extends StatelessWidget {
                 contentPadding: headerPadding,
                 leading: leading,
                 title: cardTitle,
-                trailing: ExpandIcon(
-                  size: 32,
-                  isExpanded: isOpen,
-                  padding: EdgeInsets.zero,
-                  onPressed: (_) {
-                    onTap();
-                  },
-                ),
-                onTap: onTap,
+                trailing: (enabled && onTap != null)
+                    ? ExpandIcon(
+                        size: 32,
+                        isExpanded: isOpen,
+                        padding: EdgeInsets.zero,
+                        onPressed: (_) {
+                          onTap?.call();
+                        },
+                      )
+                    : null,
+                onTap: onTap?.call,
               ),
             ),
           ),

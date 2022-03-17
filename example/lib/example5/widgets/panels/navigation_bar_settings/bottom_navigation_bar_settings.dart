@@ -9,15 +9,15 @@ import '../../shared/color_scheme_popup_menu.dart';
 
 // Panel used to control the sub-theme for BottomNavigationBar.
 class BottomNavigationBarSettings extends StatelessWidget {
-  const BottomNavigationBarSettings(
-      {Key? key,
-      required this.controller,
-      required this.isOpen,
-      required this.onTap})
-      : super(key: key);
+  const BottomNavigationBarSettings({
+    Key? key,
+    required this.controller,
+    this.isOpen = true,
+    this.onTap,
+  }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('BottomNavigationBar Settings'),
+      title: const Text('BottomNavigationBar'),
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),

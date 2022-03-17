@@ -9,15 +9,15 @@ import '../../shared/color_scheme_popup_menu.dart';
 import 'app_bar_style_buttons.dart';
 
 class AppBarSettings extends StatelessWidget {
-  const AppBarSettings(
-      {Key? key,
-      required this.controller,
-      required this.isOpen,
-      required this.onTap})
-      : super(key: key);
+  const AppBarSettings({
+    Key? key,
+    required this.controller,
+    this.isOpen = true,
+    this.onTap,
+  }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   String explainAppBarStyle(final FlexAppBarStyle style, final bool isLight) {
     switch (style) {
@@ -45,7 +45,7 @@ class AppBarSettings extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('AppBar Settings'),
+      title: const Text('AppBar'),
       child: Column(
         children: <Widget>[
           const SizedBox(height: 8),

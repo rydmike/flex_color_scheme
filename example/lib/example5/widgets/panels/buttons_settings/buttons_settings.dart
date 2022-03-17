@@ -10,19 +10,19 @@ class ButtonsSettings extends StatelessWidget {
   const ButtonsSettings({
     Key? key,
     required this.controller,
-    required this.isOpen,
-    required this.onTap,
+    this.isOpen = true,
+    this.onTap,
   }) : super(key: key);
   final ThemeController controller;
   final bool isOpen;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('Button Settings'),
+      title: const Text('Material Buttons'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
