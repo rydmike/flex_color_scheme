@@ -119,12 +119,13 @@ class SeededColorScheme extends StatelessWidget {
                 'instead of using the tone from the computed tonal palette. '
                 'Toggle switches below for each color to keep its effective '
                 'input color. The lock switches are only available when the '
-                'key color based seeded scheme is used.'),
+                'key color based seeded scheme is used. They have separate '
+                'state for light and dark theme mode.'),
           ),
 
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 4),
-            child: SchemeColors(controller: controller),
+            child: SchemeColors(tc: controller),
           ),
           if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
             Padding(

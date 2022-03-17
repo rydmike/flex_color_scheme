@@ -363,6 +363,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ThemedMaterialAndBottomSheet(
+                controller: widget.controller,
                 isOpen: isCardOpen[22],
                 onTap: () {
                   toggleCard(22);

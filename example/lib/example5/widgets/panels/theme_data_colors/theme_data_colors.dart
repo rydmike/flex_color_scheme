@@ -31,6 +31,10 @@ class ThemeDataColors extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: ShowThemeDataColors(),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: RichText(
@@ -40,7 +44,7 @@ class ThemeDataColors extends StatelessWidget {
                     style: spanTextStyle,
                     text:
                         'The effective color properties in your ThemeData are '
-                        'shown below. All direct color properties in '
+                        'shown above. All direct color properties in '
                         'ThemeData are planned to be deprecated and eventually '
                         'removed from Flutter. More info can be found here ',
                   ),
@@ -68,10 +72,6 @@ class ThemeDataColors extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: ShowThemeDataColors(),
           ),
           const SizedBox(height: 8),
         ],

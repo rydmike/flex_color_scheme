@@ -627,6 +627,70 @@ class ThemeServiceMem implements ThemeService {
 
   //----
 
+  /// Loads used keepDarkPrimary setting in example 5.
+  @override
+  Future<bool> keepDarkPrimary() async => ThemeService.defaultKeepDarkPrimary;
+
+  /// Persists keepDarkPrimary setting in example 5.
+  @override
+  Future<void> saveKeepDarkPrimary(bool value) async {}
+
+  //----
+
+  /// Loads used keepDarkSecondary setting in example 5.
+  @override
+  Future<bool> keepDarkSecondary() async =>
+      ThemeService.defaultKeepDarkSecondary;
+
+  /// Persists keepDarkSecondary setting in example 5.
+  @override
+  Future<void> saveKeepDarkSecondary(bool value) async {}
+
+  //----
+
+  /// Loads used keepDarkTertiary setting in example 5.
+  @override
+  Future<bool> keepDarkTertiary() async => ThemeService.defaultKeepDarkTertiary;
+
+  /// Persists keepDarkTertiary setting in example 5.
+  @override
+  Future<void> saveKeepDarkTertiary(bool value) async {}
+
+  //----
+
+  /// Loads used keepDarkNavDivider setting in example 5.
+  @override
+  Future<bool> keepDarkPrimaryContainer() async =>
+      ThemeService.defaultKeepDarkPrimaryContainer;
+
+  /// Persists keepDarkPrimaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepDarkPrimaryContainer(bool value) async {}
+
+  //----
+
+  /// Loads used keepDarkSecondaryContainer setting in example 5.
+  @override
+  Future<bool> keepDarkSecondaryContainer() async =>
+      ThemeService.defaultKeepDarkSecondaryContainer;
+
+  /// Persists keepDarkSecondaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepDarkSecondaryContainer(bool value) async {}
+
+  //----
+
+  /// Loads used keepDarkTertiaryContainer setting in example 5.
+  @override
+  Future<bool> keepDarkTertiaryContainer() async =>
+      ThemeService.defaultKeepDarkTertiaryContainer;
+
+  /// Persists keepDarkTertiaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepDarkTertiaryContainer(bool value) async {}
+
+  //----
+
   /// Loads used textButtonSchemeColor setting.
   @override
   Future<SchemeColor?> textButtonSchemeColor() async =>
@@ -756,6 +820,17 @@ class ThemeServiceMem implements ThemeService {
   /// Persists used fabSchemeColor setting.
   @override
   Future<void> saveFabSchemeColor(SchemeColor? value) async {}
+
+  //----
+
+  /// Loads used snackBarSchemeColor setting.
+  @override
+  Future<SchemeColor?> snackBarSchemeColor() async =>
+      ThemeService.defaultSnackBarSchemeColor;
+
+  /// Persists used snackBarSchemeColor setting.
+  @override
+  Future<void> saveSnackBarSchemeColor(SchemeColor? value) async {}
 
   //----
 

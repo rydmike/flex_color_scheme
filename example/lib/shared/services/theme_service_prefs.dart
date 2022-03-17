@@ -1698,6 +1698,159 @@ class ThemeServicePrefs implements ThemeService {
 
   // ----
 
+  /// Loads used keepDarkPrimary setting in example 5.
+  @override
+  Future<bool> keepDarkPrimary() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyKeepDarkPrimary) ??
+          ThemeService.defaultKeepDarkPrimary;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepDarkPrimary;
+    }
+  }
+
+  /// Persists keepDarkPrimary setting in example 5.
+  @override
+  Future<void> saveKeepDarkPrimary(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepDarkPrimary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkSecondary setting in example 5.
+  @override
+  Future<bool> keepDarkSecondary() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyKeepDarkSecondary) ??
+          ThemeService.defaultKeepDarkSecondary;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepDarkSecondary;
+    }
+  }
+
+  /// Persists keepDarkSecondary setting in example 5.
+  @override
+  Future<void> saveKeepDarkSecondary(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepDarkSecondary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkTertiary setting in example 5.
+  @override
+  Future<bool> keepDarkTertiary() async {
+    try {
+      final bool value = _prefs.getBool(ThemeService.keyKeepDarkTertiary) ??
+          ThemeService.defaultKeepDarkTertiary;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepDarkTertiary;
+    }
+  }
+
+  /// Persists keepDarkTertiary setting in example 5.
+  @override
+  Future<void> saveKeepDarkTertiary(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepDarkTertiary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkPrimaryContainer setting in example 5.
+  @override
+  Future<bool> keepDarkPrimaryContainer() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyKeepDarkPrimaryContainer) ??
+              ThemeService.defaultKeepDarkPrimaryContainer;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepDarkPrimaryContainer;
+    }
+  }
+
+  /// Persists keepDarkPrimaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepDarkPrimaryContainer(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepDarkPrimaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkSecondaryContainer setting in example 5.
+  @override
+  Future<bool> keepDarkSecondaryContainer() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyKeepDarkSecondaryContainer) ??
+              ThemeService.defaultKeepDarkSecondaryContainer;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepDarkSecondaryContainer;
+    }
+  }
+
+  /// Persists keepDarkSecondaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepDarkSecondaryContainer(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepDarkSecondaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkTertiaryContainer setting in example 5.
+  @override
+  Future<bool> keepDarkTertiaryContainer() async {
+    try {
+      final bool value =
+          _prefs.getBool(ThemeService.keyKeepDarkTertiaryContainer) ??
+              ThemeService.defaultKeepDarkTertiaryContainer;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultKeepDarkTertiaryContainer;
+    }
+  }
+
+  /// Persists keepDarkTertiaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepDarkTertiaryContainer(bool value) async {
+    try {
+      await _prefs.setBool(ThemeService.keyKeepDarkTertiaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
   /// Loads used textButtonSchemeColor setting..
   ///
   /// Nullable, out of range read enum index returned as null.
@@ -2114,6 +2267,41 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveFabSchemeColor(SchemeColor? value) async {
     try {
       await _prefs.setInt(ThemeService.keyFabSchemeColor, value?.index ?? -1);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used snackBarSchemeColor setting..
+  ///
+  /// Nullable, out of range read enum index returned as null.
+  @override
+  Future<SchemeColor?> snackBarSchemeColor() async {
+    try {
+      final int value = _prefs.getInt(ThemeService.keySnackBarSchemeColor) ??
+          ThemeService.defaultSnackBarSchemeColor?.index ??
+          -1;
+      if (value < 0 || value >= SchemeColor.values.length) {
+        return null;
+      } else {
+        return SchemeColor.values[value];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultSnackBarSchemeColor;
+    }
+  }
+
+  /// Persists used snackBarSchemeColor setting.
+  ///
+  /// Nullable, null stored as -1.
+  @override
+  Future<void> saveSnackBarSchemeColor(SchemeColor? value) async {
+    try {
+      await _prefs.setInt(
+          ThemeService.keySnackBarSchemeColor, value?.index ?? -1);
     } catch (e) {
       debugPrint(e.toString());
     }

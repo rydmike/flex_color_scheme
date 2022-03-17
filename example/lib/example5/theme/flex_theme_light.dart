@@ -148,6 +148,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
       // remains circular or stadium shaped in extended mode.
       fabUseShape: controller.fabUseShape,
       fabSchemeColor: controller.fabSchemeColor,
+      snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
       chipSchemeColor: controller.chipSchemeColor,
       // Set some opacity on popup menu, just to show a setting not available
       // via ThemeController in the demo.

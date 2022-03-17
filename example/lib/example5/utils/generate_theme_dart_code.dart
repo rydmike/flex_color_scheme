@@ -222,6 +222,9 @@ String generateThemeDartCode(ThemeController controller) {
               controller.fabSchemeColor == null
           ? ''
           : '    fabSchemeColor: ${controller.fabSchemeColor},\n';
+  final String snackSchemeColor = controller.snackBarSchemeColor == null
+      ? ''
+      : '    snackBarBackgroundSchemeColor: ${controller.snackBarSchemeColor},\n';
   final String chipSchemeColor =
       controller.chipSchemeColor == SchemeColor.primary ||
               controller.chipSchemeColor == null
@@ -429,6 +432,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$fabUseShape'
           '$fabSchemeColor'
+          '$snackSchemeColor'
           '$chipSchemeColor'
           //
           '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
@@ -502,6 +506,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$fabUseShape'
           '$fabSchemeColor'
+          '$snackSchemeColor'
           '$chipSchemeColor'
           //
           '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
@@ -573,7 +578,26 @@ String generateThemeDartCode(ThemeController controller) {
   final String keepTertiaryContainer = controller.keepTertiaryContainer
       ? '    keepTertiaryContainer: ${controller.keepTertiaryContainer},\n'
       : '';
-  String useKeyColors = controller.useKeyColors
+  final String keepDarkPrimary = controller.keepDarkPrimary
+      ? '    keepPrimary: ${controller.keepDarkPrimary},\n'
+      : '';
+  final String keepDarkSecondary = controller.keepDarkSecondary
+      ? '    keepSecondary: ${controller.keepDarkSecondary},\n'
+      : '';
+  final String keepDarkTertiary = controller.keepDarkTertiary
+      ? '    keepTertiary: ${controller.keepDarkTertiary},\n'
+      : '';
+  final String keepDarkPrimaryContainer = controller.keepDarkPrimaryContainer
+      ? '    keepPrimaryContainer: ${controller.keepDarkPrimaryContainer},\n'
+      : '';
+  final String keepDarkSecondaryContainer = controller
+          .keepDarkSecondaryContainer
+      ? '    keepSecondaryContainer: ${controller.keepDarkSecondaryContainer},\n'
+      : '';
+  final String keepDarkTertiaryContainer = controller.keepDarkTertiaryContainer
+      ? '    keepTertiaryContainer: ${controller.keepDarkTertiaryContainer},\n'
+      : '';
+  String useKeyColorsLight = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
           '$useSecondary'
           '$useTertiary'
@@ -585,9 +609,24 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepTertiaryContainer'
           '  ),\n'
       : '';
+  String useKeyColorsDark = controller.useKeyColors
+      ? '  keyColors: const FlexKeyColors(\n'
+          '$useSecondary'
+          '$useTertiary'
+          '$keepDarkPrimary'
+          '$keepDarkSecondary'
+          '$keepDarkTertiary'
+          '$keepDarkPrimaryContainer'
+          '$keepDarkSecondaryContainer'
+          '$keepDarkTertiaryContainer'
+          '  ),\n'
+      : '';
   // Make a prettier version of the constructor if that is all we got.
-  if (useKeyColors == '  keyColors: const FlexKeyColors(\n  ),\n') {
-    useKeyColors = '  keyColors: const FlexKeyColors(),\n';
+  if (useKeyColorsLight == '  keyColors: const FlexKeyColors(\n  ),\n') {
+    useKeyColorsLight = '  keyColors: const FlexKeyColors(),\n';
+  }
+  if (useKeyColorsDark == '  keyColors: const FlexKeyColors(\n  ),\n') {
+    useKeyColorsDark = '  keyColors: const FlexKeyColors(),\n';
   }
   String flexTonesLight = '';
   String flexTonesDark = '';
@@ -627,7 +666,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$tooltipsMatchBackground'
       '$useSubThemes'
       '$lightSubTheme'
-      '$useKeyColors'
+      '$useKeyColorsLight'
       '$useM3ErrorColors'
       '$flexTonesLight'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
@@ -650,7 +689,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$tooltipsMatchBackground'
       '$useSubThemes'
       '$darkSubTheme'
-      '$useKeyColors'
+      '$useKeyColorsDark'
       '$useM3ErrorColors'
       '$flexTonesDark'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'

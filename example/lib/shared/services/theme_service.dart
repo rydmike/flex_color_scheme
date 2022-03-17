@@ -886,6 +886,92 @@ abstract class ThemeService {
 
   // ---------
 
+  /// Key used to read and save the keepDarkPrimary value.
+  static const String keyKeepDarkPrimary = 'keepDarkPrimary';
+
+  /// Default value for the keepDarkPrimary, also to reset settings.
+  static const bool defaultKeepDarkPrimary = false;
+
+  /// Loads used keepDarkPrimary setting in example 5.
+  Future<bool> keepDarkPrimary();
+
+  /// Persists keepDarkPrimary setting in example 5.
+  Future<void> saveKeepDarkPrimary(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepDarkSecondary value.
+  static const String keyKeepDarkSecondary = 'keepDarkSecondary';
+
+  /// Default value for the keepDarkSecondary, also to reset settings.
+  static const bool defaultKeepDarkSecondary = false;
+
+  /// Loads used keepDarkSecondary setting in example 5.
+  Future<bool> keepDarkSecondary();
+
+  /// Persists keepDarkSecondary setting in example 5.
+  Future<void> saveKeepDarkSecondary(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepDarkTertiary value.
+  static const String keyKeepDarkTertiary = 'keepDarkTertiary';
+
+  /// Default value for the keepDarkTertiary, also to reset settings.
+  static const bool defaultKeepDarkTertiary = false;
+
+  /// Loads used keepDarkTertiary setting in example 5.
+  Future<bool> keepDarkTertiary();
+
+  /// Persists keepDarkTertiary setting in example 5.
+  Future<void> saveKeepDarkTertiary(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepDarkPrimaryContainer value.
+  static const String keyKeepDarkPrimaryContainer = 'keepDarkPrimaryContainer';
+
+  /// Default value for the keepDarkPrimaryContainer, also to reset settings.
+  static const bool defaultKeepDarkPrimaryContainer = false;
+
+  /// Loads used keepDarkPrimaryContainer setting in example 5.
+  Future<bool> keepDarkPrimaryContainer();
+
+  /// Persists keepDarkPrimaryContainer setting in example 5.
+  Future<void> saveKeepDarkPrimaryContainer(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepDarkSecondaryContainer value.
+  static const String keyKeepDarkSecondaryContainer =
+      'keepDarkSecondaryContainer';
+
+  /// Default value for the keepDarkSecondaryContainer, also to reset settings.
+  static const bool defaultKeepDarkSecondaryContainer = false;
+
+  /// Loads used keepDarkSecondaryContainer setting in example 5.
+  Future<bool> keepDarkSecondaryContainer();
+
+  /// Persists keepDarkSecondaryContainer setting in example 5.
+  Future<void> saveKeepDarkSecondaryContainer(bool value);
+
+  // ---------
+
+  /// Key used to read and save the keepDarkTertiaryContainer value.
+  static const String keyKeepDarkTertiaryContainer =
+      'keepDarkTertiaryContainer';
+
+  /// Default value for the keepDarkTertiaryContainer, also to reset settings.
+  static const bool defaultKeepDarkTertiaryContainer = false;
+
+  /// Loads used keepDarkTertiaryContainer setting in example 5.
+  Future<bool> keepDarkTertiaryContainer();
+
+  /// Persists keepDarkTertiaryContainer setting in example 5.
+  Future<void> saveKeepDarkTertiaryContainer(bool value);
+
+  // ---------
+
   /// Key used to read and save the textButtonSchemeColor value.
   static const String keyTextButtonSchemeColor = 'textButtonSchemeColor';
 
@@ -1085,6 +1171,22 @@ abstract class ThemeService {
 
   /// Persists used fabSchemeColor setting.
   Future<void> saveFabSchemeColor(SchemeColor? value);
+
+  // ---------
+
+  /// Key used to read and save the snackBarSchemeColor value.
+  static const String keySnackBarSchemeColor = 'snackBarSchemeColor';
+
+  /// Default value for the snackBarSchemeColor, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSnackBarSchemeColor = null;
+
+  /// Loads used snackBarSchemeColor setting.
+  Future<SchemeColor?> snackBarSchemeColor();
+
+  /// Persists used snackBarSchemeColor setting.
+  Future<void> saveSnackBarSchemeColor(SchemeColor? value);
 
   // ---------
 

@@ -2511,7 +2511,7 @@ class FlexColorScheme with Diagnosticable {
       inverseSurface: surfaceSchemeColors.inverseSurface,
       background: inputBackground,
       error: effectiveColors.error!,
-      errorContainer: effectiveColors.errorContainer!,
+      errorContainer: effectiveColors.errorContainer,
       onPrimary: onPrimary ??
           (seed.useKeyColors && seed.keepPrimary
               ? null
@@ -5936,6 +5936,7 @@ class FlexColorScheme with Diagnosticable {
       snackBarTheme: useSubThemes
           ? FlexSubThemes.snackBarTheme(
               elevation: subTheme.snackBarElevation,
+              colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.snackBarBackgroundSchemeColor,
               backgroundColor: isDark
                   ? colorScheme.onSurface

@@ -101,6 +101,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
       //
       fabUseShape: controller.fabUseShape,
       fabSchemeColor: controller.fabSchemeColor,
+      snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
       chipSchemeColor: controller.chipSchemeColor,
       popupMenuOpacity: 0.95,
       //
@@ -169,12 +170,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
       useKeyColors: controller.useKeyColors,
       useSecondary: controller.useSecondary,
       useTertiary: controller.useTertiary,
-      keepPrimary: controller.keepPrimary,
-      keepSecondary: controller.keepSecondary,
-      keepTertiary: controller.keepTertiary,
-      keepPrimaryContainer: controller.keepPrimaryContainer,
-      keepSecondaryContainer: controller.keepSecondaryContainer,
-      keepTertiaryContainer: controller.keepTertiaryContainer,
+      keepPrimary: controller.keepDarkPrimary,
+      keepSecondary: controller.keepDarkSecondary,
+      keepTertiary: controller.keepDarkTertiary,
+      keepPrimaryContainer: controller.keepDarkPrimaryContainer,
+      keepSecondaryContainer: controller.keepDarkSecondaryContainer,
+      keepTertiaryContainer: controller.keepDarkTertiaryContainer,
     ),
     useMaterial3ErrorColors: controller.useM3ErrorColors,
     tones:
