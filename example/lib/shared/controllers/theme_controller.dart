@@ -108,6 +108,14 @@ class ThemeController with ChangeNotifier {
     _keepPrimaryContainer = await _themeService.keepPrimaryContainer();
     _keepSecondaryContainer = await _themeService.keepSecondaryContainer();
     _keepTertiaryContainer = await _themeService.keepTertiaryContainer();
+    _keepDarkPrimary = await _themeService.keepDarkPrimary();
+    _keepDarkSecondary = await _themeService.keepDarkSecondary();
+    _keepDarkTertiary = await _themeService.keepDarkTertiary();
+    _keepDarkPrimaryContainer = await _themeService.keepDarkPrimaryContainer();
+    _keepDarkSecondaryContainer =
+        await _themeService.keepDarkSecondaryContainer();
+    _keepDarkTertiaryContainer =
+        await _themeService.keepDarkTertiaryContainer();
     // New props for v5, more theme scheme colors.
     _textButtonSchemeColor = await _themeService.textButtonSchemeColor();
     _elevatedButtonSchemeColor =
@@ -126,6 +134,7 @@ class ThemeController with ChangeNotifier {
     _appBarBackgroundSchemeColor =
         await _themeService.appBarBackgroundSchemeColor();
     _fabSchemeColor = await _themeService.fabSchemeColor();
+    _snackBarSchemeColor = await _themeService.snackBarSchemeColor();
     _navBarBackgroundSchemeColor =
         await _themeService.navBarBackgroundSchemeColor();
     _unselectedIsColored = await _themeService.unselectedIsColored();
@@ -250,6 +259,15 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultKeepSecondaryContainer, false);
     await setKeepTertiaryContainer(
         ThemeService.defaultKeepTertiaryContainer, false);
+    await setKeepDarkPrimary(ThemeService.defaultKeepDarkPrimary, false);
+    await setKeepDarkSecondary(ThemeService.defaultKeepDarkSecondary, false);
+    await setKeepDarkTertiary(ThemeService.defaultKeepDarkTertiary, false);
+    await setKeepDarkPrimaryContainer(
+        ThemeService.defaultKeepDarkPrimaryContainer, false);
+    await setKeepDarkSecondaryContainer(
+        ThemeService.defaultKeepDarkSecondaryContainer, false);
+    await setKeepDarkTertiaryContainer(
+        ThemeService.defaultKeepDarkTertiaryContainer, false);
     // More props for V5 custom scheme colors.
     await setTextButtonSchemeColor(
         ThemeService.defaultTextButtonSchemeColor, false);
@@ -272,6 +290,8 @@ class ThemeController with ChangeNotifier {
     await setAppBarBackgroundSchemeColor(
         ThemeService.defaultAppBarBackgroundSchemeColor, false);
     await setFabSchemeColor(ThemeService.defaultFabSchemeColor, false);
+    await setSnackBarSchemeColor(
+        ThemeService.defaultSnackBarSchemeColor, false);
     await setNavBarBackgroundSchemeColor(
         ThemeService.defaultNavBarBackgroundSchemeColor, false);
     await setUnselectedIsColored(
@@ -1040,6 +1060,16 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveFabSchemeColor(value);
   }
 
+  late SchemeColor? _snackBarSchemeColor;
+  SchemeColor? get snackBarSchemeColor => _snackBarSchemeColor;
+  Future<void> setSnackBarSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _snackBarSchemeColor) return;
+    _snackBarSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.saveSnackBarSchemeColor(value);
+  }
+
   late SchemeColor? _navBarBackgroundSchemeColor;
   SchemeColor? get navBarBackgroundSchemeColor => _navBarBackgroundSchemeColor;
   Future<void> setNavBarBackgroundSchemeColor(SchemeColor? value,
@@ -1240,6 +1270,69 @@ class ThemeController with ChangeNotifier {
     _keepTertiaryContainer = value;
     if (notify) notifyListeners();
     await _themeService.saveKeepTertiaryContainer(value);
+  }
+
+  late bool _keepDarkPrimary;
+  bool get keepDarkPrimary => _keepDarkPrimary;
+  Future<void> setKeepDarkPrimary(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepDarkPrimary) return;
+    _keepDarkPrimary = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepDarkPrimary(value);
+  }
+
+  late bool _keepDarkSecondary;
+  bool get keepDarkSecondary => _keepDarkSecondary;
+  Future<void> setKeepDarkSecondary(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepDarkSecondary) return;
+    _keepDarkSecondary = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepDarkSecondary(value);
+  }
+
+  late bool _keepDarkTertiary;
+  bool get keepDarkTertiary => _keepDarkTertiary;
+  Future<void> setKeepDarkTertiary(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepDarkTertiary) return;
+    _keepDarkTertiary = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepDarkTertiary(value);
+  }
+
+  late bool _keepDarkPrimaryContainer;
+  bool get keepDarkPrimaryContainer => _keepDarkPrimaryContainer;
+  Future<void> setKeepDarkPrimaryContainer(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepDarkPrimaryContainer) return;
+    _keepDarkPrimaryContainer = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepDarkPrimaryContainer(value);
+  }
+
+  late bool _keepDarkSecondaryContainer;
+  bool get keepDarkSecondaryContainer => _keepDarkSecondaryContainer;
+  Future<void> setKeepDarkSecondaryContainer(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepDarkSecondaryContainer) return;
+    _keepDarkSecondaryContainer = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepDarkSecondaryContainer(value);
+  }
+
+  late bool _keepDarkTertiaryContainer;
+  bool get keepDarkTertiaryContainer => _keepDarkTertiaryContainer;
+  Future<void> setKeepDarkTertiaryContainer(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _keepDarkTertiaryContainer) return;
+    _keepDarkTertiaryContainer = value;
+    if (notify) notifyListeners();
+    await _themeService.saveKeepDarkTertiaryContainer(value);
   }
 
   late bool _unselectedIsColored;

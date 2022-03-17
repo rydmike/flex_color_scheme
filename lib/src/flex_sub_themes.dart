@@ -1766,12 +1766,14 @@ class FlexSubThemes {
     /// used via FlexSubThemesData:
     ///
     /// * In light theme mode:
-    ///   * FCS: onSurface with primary blend at 45% opacity, with tot opacity 95%
+    ///   * FCS: onSurface with primary blend at 45% opacity, with
+    ///     total opacity 95%
     ///   * Flutter SDK uses: onSurface with surface at opacity 80%, blended on
     ///     top of surface.
     ///
     /// * In dark theme mode:
-    ///   * FCS: onSurface with primary blend at 39% opacity, with tot opacity 93%
+    ///   * FCS: onSurface with primary blend at 39% opacity, with total
+    ///     opacity 93%
     ///   * Flutter SDK uses: colorScheme.onSurface
     ///
     /// SnackBar uses ColorScheme.inverseSurface in M3 schemes.

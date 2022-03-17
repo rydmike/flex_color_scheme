@@ -1723,6 +1723,156 @@ class ThemeServiceHive implements ThemeService {
 
   // ----
 
+  /// Loads used keepDarkPrimary setting in example 5.
+  @override
+  Future<bool> keepDarkPrimary() async {
+    try {
+      return _hiveBox.get(ThemeService.keyKeepDarkPrimary,
+          defaultValue: ThemeService.defaultKeepDarkPrimary) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultKeepDarkPrimary;
+    }
+  }
+
+  /// Persists keepDarkPrimary setting in example 5.
+  @override
+  Future<void> saveKeepDarkPrimary(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyKeepDarkPrimary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkSecondary setting in example 5.
+  @override
+  Future<bool> keepDarkSecondary() async {
+    try {
+      return _hiveBox.get(ThemeService.keyKeepDarkSecondary,
+          defaultValue: ThemeService.defaultKeepDarkSecondary) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultKeepDarkSecondary;
+    }
+  }
+
+  /// Persists keepDarkSecondary setting in example 5.
+  @override
+  Future<void> saveKeepDarkSecondary(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyKeepDarkSecondary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkTertiary setting in example 5.
+  @override
+  Future<bool> keepDarkTertiary() async {
+    try {
+      return _hiveBox.get(ThemeService.keyKeepDarkTertiary,
+          defaultValue: ThemeService.defaultKeepDarkTertiary) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultKeepDarkTertiary;
+    }
+  }
+
+  /// Persists keepDarkTertiary setting in example 5.
+  @override
+  Future<void> saveKeepDarkTertiary(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyKeepDarkTertiary, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkPrimaryContainer setting in example 5.
+  @override
+  Future<bool> keepDarkPrimaryContainer() async {
+    try {
+      return _hiveBox.get(ThemeService.keyKeepDarkPrimaryContainer,
+          defaultValue: ThemeService.defaultKeepDarkPrimaryContainer) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultKeepDarkPrimaryContainer;
+    }
+  }
+
+  /// Persists keepDarkPrimaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepDarkPrimaryContainer(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyKeepDarkPrimaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkSecondaryContainer setting in example 5.
+  @override
+  Future<bool> keepDarkSecondaryContainer() async {
+    try {
+      return _hiveBox.get(ThemeService.keyKeepDarkSecondaryContainer,
+          defaultValue: ThemeService.defaultKeepDarkSecondaryContainer) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultKeepDarkSecondaryContainer;
+    }
+  }
+
+  /// Persists keepDarkSecondaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepDarkSecondaryContainer(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyKeepDarkSecondaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used keepDarkTertiaryContainer setting in example 5.
+  @override
+  Future<bool> keepDarkTertiaryContainer() async {
+    try {
+      return _hiveBox.get(ThemeService.keyKeepDarkTertiaryContainer,
+          defaultValue: ThemeService.defaultKeepDarkTertiaryContainer) as bool;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultKeepDarkTertiaryContainer;
+    }
+  }
+
+  /// Persists keepDarkTertiaryContainer setting in example 5.
+  @override
+  Future<void> saveKeepDarkTertiaryContainer(bool value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyKeepDarkTertiaryContainer, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
   /// Loads used textButtonSchemeColor setting.
   @override
   Future<SchemeColor?> textButtonSchemeColor() async {
@@ -2127,6 +2277,40 @@ class ThemeServiceHive implements ThemeService {
   Future<void> saveFabSchemeColor(SchemeColor? value) async {
     try {
       await _hiveBox.put(ThemeService.keyFabSchemeColor, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used snackBarSchemeColor setting.
+  @override
+  Future<SchemeColor?> snackBarSchemeColor() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keySnackBarSchemeColor,
+          defaultValue: ThemeService.defaultSnackBarSchemeColor);
+      // If Hive type adapter converted stored int to null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keySnackBarSchemeColor,
+                defaultValue: ThemeService.defaultSnackBarSchemeColor)
+            as SchemeColor;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultSnackBarSchemeColor;
+    }
+  }
+
+  /// Persists used snackBarSchemeColor setting.
+  @override
+  Future<void> saveSnackBarSchemeColor(SchemeColor? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keySnackBarSchemeColor, value);
     } catch (e) {
       debugPrint(e.toString());
     }

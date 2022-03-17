@@ -50,6 +50,15 @@ All notable changes to the **FlexColorScheme** package are documented here.
   `snackBarBackgroundSchemeColor` in `FlexSubThemesData` and support for it 
   in `FlexSubThemes`.
 
+* Themes Playground improvements:
+  - The switches to keep main input colors for primary, secondary, tertiary
+    and their containers, where separated so that their state and code 
+    generation for light and dark theme mode are separate. This makes them
+    more useful for actual theme config. Before you had to separate by
+    editing the generated code.
+  - Added display of SnackBar style to the Themed Material panel.
+  - Added ColorScheme based color selection theming of SnackBar background color.
+
 * Completed test updates. Now 1381 test, coverage > 99.8%. Some new color value
   tests are still missing. Not critical, they are just const values, but their 
   test are used to make the statement that they are a part of tests and 
