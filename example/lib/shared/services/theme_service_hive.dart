@@ -279,30 +279,6 @@ class ThemeServiceHive implements ThemeService {
     }
   }
 
-  // TODO(rydmike): remove me!
-  // /// Loads used useDefaultRadius setting in example 5.
-  // @override
-  // Future<bool> useDefaultRadius() async {
-  //   try {
-  //     return _hiveBox.get(ThemeService.keyUseDefaultRadius,
-  //         defaultValue: ThemeService.defaultUseDefaultRadius) as bool;
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //     // If something goes wrong we return the default value.
-  //     return ThemeService.defaultUseDefaultRadius;
-  //   }
-  // }
-  //
-  // /// Persists the useDefaultRadius setting in example 5.
-  // @override
-  // Future<void> saveUseDefaultRadius(bool value) async {
-  //   try {
-  //     await _hiveBox.put(ThemeService.keyUseDefaultRadius, value);
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //   }
-  // }
-
   /// Loads used corner radius setting in example 5.
   @override
   Future<double?> cornerRadius() async {

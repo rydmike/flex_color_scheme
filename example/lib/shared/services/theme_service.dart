@@ -117,19 +117,6 @@ abstract class ThemeService {
   /// Persists used themed effects setting in example 5.
   Future<void> saveInteractionEffects(bool value);
 
-  // TODO(rydmike): remove me!
-  // /// Key used to read and save the useDefaultRadius value.
-  // static const String keyUseDefaultRadius = 'useDefaultRadius';
-  //
-  // /// Default value for the useDefaultRadius, also used to reset settings.
-  // static const bool defaultUseDefaultRadius = true;
-  //
-  // /// Loads used useDefaultRadius setting in example 5.
-  // Future<bool> useDefaultRadius();
-  //
-  // /// Persists the useDefaultRadius setting in example 5.
-  // Future<void> saveUseDefaultRadius(bool value);
-
   /// Key used to read and save the cornerRadius value.
   static const String keyCornerRadius = 'cornerRadius';
 
