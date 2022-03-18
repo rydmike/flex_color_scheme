@@ -5296,7 +5296,8 @@ class FlexColorScheme with Diagnosticable {
               : Colors.white;
         case FlexTabBarStyle.universal:
           return // colorScheme.inversePrimary;
-              // TODO(rydmike): Test universal with inversePrimary.
+              // TODO(rydmike): Consider universal using inversePrimary.
+              // -> It is OK with seed generated schemes, but not generally.
               isDark
                   ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
                   : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
@@ -5620,10 +5621,10 @@ class FlexColorScheme with Diagnosticable {
               : Brightness.dark,
 
           // TODO(rydmike): Raise sys-nav AppBar systemOverlayStyle SDK issue.
-          //   Would b useful it could set system navbat properties too and not
+          //   Would be useful it could set system navbar properties too and not
           //   only status bar properties. While it might be odd to do so, it
           //   seems even more odd that a part of the SystemUiOverlayStyle has
-          //   no effect whe used here.
+          //   no effect when used here.
 
           // The systemNavigationBarColor used by default AppBar in SDK is
           // always black, like so:
@@ -6135,13 +6136,17 @@ class FlexColorScheme with Diagnosticable {
     // All falls back to primary, if nothing else is available before that.
     final FlexSchemeColor colors = FlexSchemeColor.from(
       primary: usedPrimary,
-      // TODO(rydmike): Later remove fallback via deprecated variant color.
+      // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
+      //   The fallthrough via internally deprecated primaryVariant is a
+      //   a backwards compatibility with FlexColorScheme before version 5.
       primaryContainer: primaryContainer ??
           primaryVariant ??
           colorScheme?.primaryContainer ??
           usedPrimary,
       secondary: secondary ?? colorScheme?.secondary ?? usedPrimary,
-      // TODO(rydmike): Later remove fallback via deprecated variant color.
+      // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
+      //   The fallthrough via internally deprecated primaryVariant is a
+      //   a backwards compatibility with FlexColorScheme before version 5.
       secondaryContainer: secondaryContainer ??
           secondaryVariant ??
           colorScheme?.secondaryContainer ??

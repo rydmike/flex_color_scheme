@@ -239,30 +239,6 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  // TODO(rydmike): remove me!
-  // /// Loads used useDefaultRadius setting in example 5.
-  // @override
-  // Future<bool> useDefaultRadius() async {
-  //   try {
-  //     final bool value = _prefs.getBool(ThemeService.keyUseDefaultRadius) ??
-  //         ThemeService.defaultUseDefaultRadius;
-  //     return value;
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //     return ThemeService.defaultUseDefaultRadius;
-  //   }
-  // }
-  //
-  // /// Persists the useDefaultRadius setting in example 5.
-  // @override
-  // Future<void> saveUseDefaultRadius(bool value) async {
-  //   try {
-  //     await _prefs.setBool(ThemeService.keyUseDefaultRadius, value);
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //   }
-  // }
-
   /// Loads used corner radius setting in example 5.
   ///
   /// Nullable, Negative value treated as null.

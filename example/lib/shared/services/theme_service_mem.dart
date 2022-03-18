@@ -98,15 +98,6 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> saveInteractionEffects(bool value) async {}
 
-  // TODO(rydmike): remove me!
-  // /// Loads used useDefaultRadius setting in example 5.
-  // @override
-  // Future<bool> useDefaultRadius() async => ThemeService.defaultUseDefaultRadius;
-  //
-  // /// Persists the useDefaultRadius setting in example 5.
-  // @override
-  // Future<void> saveUseDefaultRadius(bool value) async {}
-
   /// Loads used corner radius setting in example 5.
   @override
   Future<double?> cornerRadius() async => ThemeService.defaultCornerRadius;

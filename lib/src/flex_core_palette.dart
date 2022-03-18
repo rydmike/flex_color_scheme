@@ -241,7 +241,7 @@ class FlexCorePalette extends CorePalette {
 //
 // This entire commented private _CorePalette class can be used to create a
 // custom version of CorePalette with the needed [fromSeeds] factory that is
-// a bit more efficient than the extended version above, thanks to reduced
+// a bit more efficient than the extended version above, because of reduced
 // interface overhead. Keeping the code around below if it is needed for
 // efficiency later. Some more ramblings below.
 //

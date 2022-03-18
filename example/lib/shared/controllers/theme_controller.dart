@@ -41,8 +41,6 @@ class ThemeController with ChangeNotifier {
     _schemeIndex = await _themeService.schemeIndex();
     _viewIndex = await _themeService.viewIndex();
     _interactionEffects = await _themeService.interactionEffects();
-    // TODO(rydmike): remove me!
-    // _useDefaultRadius = await _themeService.useDefaultRadius();
     _cornerRadius = await _themeService.cornerRadius();
     _inputDecoratorIsFilled = await _themeService.inputDecoratorIsFilled();
     _inputDecoratorBorderType = await _themeService.inputDecoratorBorderType();
@@ -184,8 +182,6 @@ class ThemeController with ChangeNotifier {
     await setSchemeIndex(ThemeService.defaultSchemeIndex, false);
     await setViewIndex(ThemeService.defaultViewIndex, false);
     await setInteractionEffects(ThemeService.defaultInteractionEffects, false);
-    // TODO(rydmike): remove me!
-    // await setUseDefaultRadius(ThemeService.defaultUseDefaultRadius, false);
     await setCornerRadius(ThemeService.defaultCornerRadius, false);
     await setInputDecoratorIsFilled(
         ThemeService.defaultInputDecoratorIsFilled, false);
@@ -494,17 +490,6 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     await _themeService.saveInteractionEffects(value);
   }
-
-  // TODO(rydmike): remove me!
-  // late bool _useDefaultRadius;
-  // bool get useDefaultRadius => _useDefaultRadius;
-  // Future<void> setUseDefaultRadius(bool? value, [bool notify = true]) async {
-  //   if (value == null) return;
-  //   if (value == _useDefaultRadius) return;
-  //   _useDefaultRadius = value;
-  //   if (notify) notifyListeners();
-  //   await _themeService.saveUseDefaultRadius(value);
-  // }
 
   late double? _cornerRadius;
   double? get cornerRadius => _cornerRadius;
