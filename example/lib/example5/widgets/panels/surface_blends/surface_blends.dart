@@ -41,7 +41,7 @@ class SurfaceBlends extends StatelessWidget {
         return 'Level surfaces, low scaffold\n'
             'Surface & Background 1x  Scaffold 1/2x\n';
       case FlexSurfaceMode.highScaffoldLowSurfaces:
-        return 'High scaffold, low surfaces\n'
+        return 'High scaffold, low surfaces (default)\n'
             'Scaffold 3x  Surface and Background 1/2x\n';
       case FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog:
         return 'Tertiary container dialog, low scaffold\n'

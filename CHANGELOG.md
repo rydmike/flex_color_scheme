@@ -50,18 +50,33 @@ All notable changes to the **FlexColorScheme** package are documented here.
   `snackBarBackgroundSchemeColor` in `FlexSubThemesData` and support for it 
   in `FlexSubThemes`.
 
-* Themes Playground improvements:
-  - First version of a new Focused view, versus the previous "advanced", both
+* Changed the color values for `FlexColor.materialLightSecondaryContainer` and 
+  `FlexColor.materialLightSecondaryContainerHc`. These color properties
+  do not have any specification in Material 2 spec. Updated the colors values
+  that had been made up for **dev.1** release to better match the design intent
+  of those colors for the new Material 3 `ColorScheme`.
+
+* **Themes Playground** improvements:
+  - First version of a new "Focused" view, versus the previous "Advanced". Both
     views can be used and switch to based on what is appropriate when using 
     different media sizes. More work and tuning remains, but the addition
     of this new view was fairly simple and straight forward.
   - The switches to keep main input colors for primary, secondary, tertiary
     and their containers, where separated so that their state and code 
     generation for light and dark theme mode are separate. This makes them
-    more useful for actual theme config. Before you had to separate by
+    more useful for actual theme setup. Before you had to separate them by
     editing the generated code.
   - Added display of SnackBar style to the Themed Material panel.
+  - Added display of more ListTile types.
   - Added ColorScheme based color selection theming of SnackBar background color.
+  - Added CodeView as a panel of its own. It is now possible to view the
+    changes to generated code as settings are changed. Especially in the 
+    advanced view where one can keep it open and close other panels, except one
+    being operated in.
+  - Added missing code gen for button border radius.
+  - Fixed broken code gen for dark mode blend level. New code gen style for
+    dark mode, from light mode computed dark theme. The code gen also generally
+    does not add any code when API default values are used.
 
 * Completed test updates. Now 1381 test, coverage > 99.8%. Some new color value
   tests are still missing. Not critical, they are just const values, but their 

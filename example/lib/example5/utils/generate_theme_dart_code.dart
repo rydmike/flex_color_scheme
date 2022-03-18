@@ -3,7 +3,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/const/app_color.dart';
-import '../../shared/const/app_data.dart';
 import '../../shared/controllers/theme_controller.dart';
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
@@ -12,6 +11,23 @@ import '../../shared/controllers/theme_controller.dart';
 /// The properties are in the order they are in the classes.
 String generateThemeDartCode(ThemeController controller) {
   //
+  // If FlexColorsScheme is not in use, return a default M2 ColorScheme based
+  // theme as a starting point suggestion.
+  //
+  if (!controller.useFlexColorScheme) {
+    return '''
+  // FlexColorScheme is not in use!
+  // Here is a default Material 2 starting point theme setup for you.
+  //  
+  theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
+    typography: Typography.material2018(platform: defaultTargetPlatform),
+  ),
+  darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
+    typography: Typography.material2018(platform: defaultTargetPlatform),
+  ),
+  themeMode: ThemeMode.system,''';
+  }
+  //
   // Code for main theme setup, the effective colors setup.
   //
   final FlexSchemeData scheme = AppColor.scheme(controller);
@@ -19,7 +35,7 @@ String generateThemeDartCode(ThemeController controller) {
   final int flexScheme = controller.schemeIndex - 3;
   // Using a built-in scheme or one of the custom colors in the demo?
   final bool useBuiltIn = controller.schemeIndex > 2 &&
-      controller.schemeIndex < AppColor.schemesCustom.length - 1;
+      controller.schemeIndex < AppColor.schemes.length - 1;
   final String lightScheme = useBuiltIn
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
       : '  colors: const FlexSchemeColor(\n'
@@ -45,7 +61,7 @@ String generateThemeDartCode(ThemeController controller) {
           '    error: ${scheme.dark.error},\n'
           '  ),\n';
 
-  if (controller.useToDarkMethod) {
+  if (controller.useToDarkMethod && !useBuiltIn) {
     darkScheme = '  colors: const FlexSchemeColor(\n'
         '    primary: ${scheme.light.primary},\n'
         '    primaryContainer: ${scheme.light.primaryContainer},\n'
@@ -57,10 +73,18 @@ String generateThemeDartCode(ThemeController controller) {
         '    error: ${scheme.light.error},\n'
         '  ).defaultError.toDark(${controller.darkMethodLevel}, true),\n';
   }
+  if (controller.useToDarkMethod && useBuiltIn) {
+    darkScheme =
+        '  colors: FlexColor.schemes[${FlexScheme.values[flexScheme]}]!\n'
+        '      .light.defaultError.toDark(${controller.darkMethodLevel}, true),\n';
+  }
   //
   // Code for main theme setup, the other properties 'FlexColorScheme.light' and
   // 'FlexColorScheme.dark' factories direct parameters.
-  final String surfaceMode = controller.blendLevel > 0
+  //
+  // We avoid adding any code when API default values are being used.
+  final String surfaceMode = controller.blendLevel > 0 &&
+          controller.surfaceMode != FlexSurfaceMode.highScaffoldLowSurfaces
       ? '  surfaceMode: ${controller.surfaceMode},\n'
       : '';
   final String blendLevel = controller.blendLevel > 0
@@ -68,6 +92,9 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String usedColors = controller.usedColors != 6
       ? '  usedColors: ${controller.usedColors},\n'
+      : '';
+  final String blendLevelDark = controller.blendLevelDark > 0
+      ? '  blendLevel: ${controller.blendLevelDark},\n'
       : '';
   final String lightAppBarStyle =
       controller.lightAppBarStyle != FlexAppBarStyle.primary
@@ -140,11 +167,32 @@ String generateThemeDartCode(ThemeController controller) {
   final String useTextTheme = controller.useTextTheme
       ? ''
       : '    useTextTheme: ${controller.useTextTheme},\n';
-  final String defRadius = controller.useDefaultRadius
-      ? ''
-      : '    defaultRadius: ${controller.cornerRadius},\n';
+  final String defRadius = controller.cornerRadius != null
+      ? '    defaultRadius: ${controller.cornerRadius},\n'
+      : '';
   //
-  // Material button sub themes.
+  // Material button sub themes border radius.
+  final String textButtonBorderRadius =
+      controller.textButtonBorderRadius != null
+          ? '    textButtonRadius: ${controller.textButtonBorderRadius},\n'
+          : '';
+  final String elevatedButtonBorderRadius = controller
+              .elevatedButtonBorderRadius !=
+          null
+      ? '    elevatedButtonRadius: ${controller.elevatedButtonBorderRadius},\n'
+      : '';
+  final String outlinedButtonBorderRadius = controller
+              .outlinedButtonBorderRadius !=
+          null
+      ? '    outlinedButtonRadius: ${controller.outlinedButtonBorderRadius},\n'
+      : '';
+  final String toggleButtonsBorderRadius = controller
+              .toggleButtonsBorderRadius !=
+          null
+      ? '    outlinedButtonRadius: ${controller.toggleButtonsBorderRadius},\n'
+      : '';
+  //
+  // Material button sub themes scheme colors
   final String textButtonSchemeColor =
       controller.textButtonSchemeColor == SchemeColor.primary ||
               controller.textButtonSchemeColor == null
@@ -213,7 +261,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n';
   //
-  // Fab and chip
+  // Fab and chip, snack, card, dialog, popup
   final String fabUseShape = controller.fabUseShape
       ? ''
       : '    fabUseShape: ${controller.fabUseShape},\n';
@@ -230,6 +278,12 @@ String generateThemeDartCode(ThemeController controller) {
               controller.chipSchemeColor == null
           ? ''
           : '    chipSchemeColor: ${controller.chipSchemeColor},\n';
+  final String cardBorderRadius = controller.cardBorderRadius != null
+      ? '    cardRadius: ${controller.cardBorderRadius},\n'
+      : '';
+  final String popupMenuOpacity = controller.popupMenuOpacity != 1
+      ? '    popupMenuOpacity: ${controller.popupMenuOpacity},\n'
+      : '';
   final String dialogBackgroundSchemeColor = controller
               .dialogBackgroundSchemeColor ==
           SchemeColor.surface
@@ -414,6 +468,11 @@ String generateThemeDartCode(ThemeController controller) {
           '$useTextTheme'
           '$defRadius'
           //
+          '$textButtonBorderRadius'
+          '$elevatedButtonBorderRadius'
+          '$outlinedButtonBorderRadius'
+          '$toggleButtonsBorderRadius'
+          //
           '$textButtonSchemeColor'
           '$elevatedButtonSchemeColor'
           '$outlinedButtonSchemeColor'
@@ -434,8 +493,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$fabSchemeColor'
           '$snackSchemeColor'
           '$chipSchemeColor'
+          '$cardBorderRadius'
+
           //
-          '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
+          '$popupMenuOpacity'
           '$dialogBackgroundSchemeColor'
           '$appBarBackgroundSchemeColor'
           '$tabBarItemSchemeColor'
@@ -488,6 +549,11 @@ String generateThemeDartCode(ThemeController controller) {
           '$useTextTheme'
           '$defRadius'
           //
+          '$textButtonBorderRadius'
+          '$elevatedButtonBorderRadius'
+          '$outlinedButtonBorderRadius'
+          '$toggleButtonsBorderRadius'
+          //
           '$textButtonSchemeColor'
           '$elevatedButtonSchemeColor'
           '$outlinedButtonSchemeColor'
@@ -508,8 +574,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$fabSchemeColor'
           '$snackSchemeColor'
           '$chipSchemeColor'
+          '$cardBorderRadius'
           //
-          '    popupMenuOpacity: ${AppData.popupMenuOpacity},\n'
+          '$popupMenuOpacity'
           '$dialogBackgroundSchemeColor'
           '$appBarBackgroundSchemeColor'
           '$tabBarItemSchemeColor'
@@ -649,7 +716,7 @@ String generateThemeDartCode(ThemeController controller) {
     }
   }
   //
-  // Compose the final FlexThemeData code string, from above fragments.
+  // Compose the final FlexThemeData code string, from all above fragments.
   //
   final String code = 'theme: FlexThemeData.light(\n'
       '$lightScheme'
@@ -678,7 +745,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$darkScheme'
       '$usedColors'
       '$surfaceMode'
-      '$blendLevel'
+      '$blendLevelDark'
       '$darkAppBarStyle'
       '$appBarOpacity'
       '$transparentStatusBar'

@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../shared/const/app_data.dart';
-import '../../shared/controllers/theme_controller.dart';
-import '../../shared/pages/sub_pages.dart';
-import 'panels/app_bar_settings/app_bar_settings.dart';
-import 'panels/buttons_settings/buttons_settings.dart';
-import 'panels/card_settings.dart';
-import 'panels/color_scheme_colors/color_scheme_colors.dart';
-import 'panels/component_themes/component_themes.dart';
-import 'panels/date_picker_dialog_settings.dart';
-import 'panels/dialog_settings/dialog_settings.dart';
-import 'panels/input_colors/input_colors.dart';
-import 'panels/introduction/introduction_panel.dart';
-import 'panels/list_tile_settings.dart';
-import 'panels/material_and_bottom_sheet_settings.dart';
-import 'panels/navigation_bar_settings/android_navigation_bar_settings.dart';
-import 'panels/navigation_bar_settings/bottom_navigation_bar_settings.dart';
-import 'panels/navigation_bar_settings/navigation_bar_settings.dart';
-import 'panels/navigation_rail_settings/navigation_rail_settings.dart';
-import 'panels/primary_text_theme_settings.dart';
-import 'panels/seeded_color_scheme/seeded_color_scheme.dart';
-import 'panels/surface_blends/surface_blends.dart';
-import 'panels/switch_settings/switch_settings.dart';
-import 'panels/tab_bar_settings/tab_bar_settings.dart';
-import 'panels/text_field_settings/text_field_settings.dart';
-import 'panels/text_theme_settings.dart';
-import 'panels/theme_data_colors/theme_data_colors.dart';
-import 'panels/time_picker_dialog_settings.dart';
-import 'panels/toggle_fab_chip_settings/toggle_fab_chip_settings.dart';
+import '../../../shared/const/app_data.dart';
+import '../../../shared/controllers/theme_controller.dart';
+import '../../../shared/pages/sub_pages.dart';
+import '../panels/app_bar_settings/app_bar_settings.dart';
+import '../panels/buttons_settings/buttons_settings.dart';
+import '../panels/card_and_material_settings/card_settings.dart';
+import '../panels/card_and_material_settings/material_and_bottom_sheet_settings.dart';
+import '../panels/component_themes/component_themes.dart';
+import '../panels/dialog_settings/date_picker_dialog_settings.dart';
+import '../panels/dialog_settings/dialog_settings.dart';
+import '../panels/dialog_settings/time_picker_dialog_settings.dart';
+import '../panels/fab_toggle_chip_popup_settings/fab_toggle_chip_popup_settings.dart';
+import '../panels/input_colors/input_colors.dart';
+import '../panels/introduction/introduction_panel.dart';
+import '../panels/navigation_bar_settings/android_navigation_bar_settings.dart';
+import '../panels/navigation_bar_settings/bottom_navigation_bar_settings.dart';
+import '../panels/navigation_bar_settings/navigation_bar_settings.dart';
+import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
+import '../panels/seeded_color_scheme/seeded_color_scheme.dart';
+import '../panels/showcase_panels/effective_colors.dart';
+import '../panels/showcase_panels/effective_setup_code.dart';
+import '../panels/surface_blends/surface_blends.dart';
+import '../panels/switch_settings/list_tile_settings.dart';
+import '../panels/switch_settings/switch_settings.dart';
+import '../panels/tab_bar_settings/tab_bar_settings.dart';
+import '../panels/text_field_settings/text_field_settings.dart';
+import '../panels/text_theme_settings/primary_text_theme_settings.dart';
+import '../panels/text_theme_settings/text_theme_settings.dart';
 
 /// This is the super large screen view of the Themes Playground.
 ///
@@ -107,41 +107,41 @@ class _AdvancedViewState extends State<AdvancedView>
               widget.toggleCard(0);
             },
           ),
-          InputColors(
+          EffectiveSetupCode(
             controller: widget.controller,
             isOpen: widget.isCardOpen[1],
             onTap: () {
               widget.toggleCard(1);
             },
           ),
-          SeededColorScheme(
+          InputColors(
             controller: widget.controller,
             isOpen: widget.isCardOpen[2],
             onTap: () {
               widget.toggleCard(2);
             },
           ),
-          ColorSchemeColors(
+          SeededColorScheme(
             controller: widget.controller,
             isOpen: widget.isCardOpen[3],
             onTap: () {
               widget.toggleCard(3);
             },
           ),
-          ThemeDataColors(
+          SurfaceBlends(
             controller: widget.controller,
             isOpen: widget.isCardOpen[4],
             onTap: () {
               widget.toggleCard(4);
             },
+            showAllBlends: showAllBlends,
           ),
-          SurfaceBlends(
+          EffectiveColors(
             controller: widget.controller,
             isOpen: widget.isCardOpen[5],
             onTap: () {
               widget.toggleCard(5);
             },
-            showAllBlends: showAllBlends,
           ),
           ComponentThemes(
             controller: widget.controller,
@@ -206,7 +206,7 @@ class _AdvancedViewState extends State<AdvancedView>
               widget.toggleCard(14);
             },
           ),
-          ToggleFabChipsSettings(
+          FabToggleChipPopupSettings(
             controller: widget.controller,
             isOpen: widget.isCardOpen[15],
             onTap: () {
@@ -253,6 +253,7 @@ class _AdvancedViewState extends State<AdvancedView>
             },
           ),
           CardSettings(
+            controller: widget.controller,
             isOpen: widget.isCardOpen[22],
             onTap: () {
               widget.toggleCard(22);

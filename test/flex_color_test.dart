@@ -19,7 +19,7 @@ void main() {
     // ml, is a reference SDK ColorScheme.light.
     const ColorScheme ml = ColorScheme.light(
       primaryContainer: Color(0xffbb86fc),
-      secondaryContainer: Color(0xFF92F4E5),
+      secondaryContainer: Color(0xffcefaf8),
       tertiary: Color(0xff018786),
       tertiaryContainer: Color(0xFFA4F1EF),
     );
@@ -140,7 +140,7 @@ void main() {
     // ml, is a reference SDK ColorScheme.highContrastLight.
     const ColorScheme ml = ColorScheme.highContrastLight(
       primaryContainer: Color(0xffb6b6ff),
-      secondaryContainer: Color(0xFF90F3EE),
+      secondaryContainer: Color(0xffc8f9f7),
       tertiary: Color(0xff018786),
       tertiaryContainer: Color(0xFFB3F1F0),
     );
@@ -430,7 +430,7 @@ void main() {
     });
     test('FC5 colors Material 2 default light', () {
       expect(
-          FlexColor.materialLightSecondaryContainer, const Color(0xFF92F4E5));
+          FlexColor.materialLightSecondaryContainer, const Color(0xffcefaf8));
     });
     test('FC5 colors Material 2 default light', () {
       expect(FlexColor.materialLightSecondaryVariant, const Color(0xff018786));
@@ -490,7 +490,7 @@ void main() {
     });
     test('FC5 colors Material 2 high contrast light', () {
       expect(
-          FlexColor.materialLightSecondaryContainerHc, const Color(0xFF90F3EE));
+          FlexColor.materialLightSecondaryContainerHc, const Color(0xFFC8F9F7));
     });
     test('FC5 colors Material 2 high contrast light', () {
       expect(

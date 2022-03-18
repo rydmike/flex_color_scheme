@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/universal/header_card.dart';
-import '../../../../shared/widgets/universal/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
@@ -72,53 +72,59 @@ class ComponentThemes extends StatelessWidget {
                       ? controller.setBlendDarkTextTheme
                       : null,
             ),
-          SwitchListTileAdaptive(
-            title: const Text('Use Material 3 rounded corners on UI elements'),
-            subtitle: const Text('ON to use M3 spec border radius, varies '
-                'per component\n'
-                'OFF to set same radius on all widgets, M2 spec is 4\n'
-                'With API you can adjust it per widget with a double value'),
-            value: controller.useDefaultRadius &&
-                controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setUseDefaultRadius
-                : null,
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Used border radius on UI elements'),
+            subtitle: const Text('Default uses Material 3 specification border '
+                'radius, which varies per component. '
+                'A defined value sets it for all components. '
+                'Material 2 specification is 4. '
+                'With API you can adjust it per component. For some components '
+                'you can set it here in the playground too.'),
           ),
-          Visibility(
-            visible: !controller.useDefaultRadius &&
-                controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            maintainSize: true,
-            maintainAnimation: true,
-            maintainState: true,
-            child: ListTile(
-              title: const Text('Border radius on all widgets'),
-              subtitle: Slider.adaptive(
-                max: 30,
-                divisions: 30,
-                label: controller.cornerRadius.toStringAsFixed(0),
-                value: controller.cornerRadius,
-                onChanged: controller.setCornerRadius,
-              ),
-              trailing: Padding(
-                padding: const EdgeInsetsDirectional.only(end: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'dP',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    Text(
-                      controller.cornerRadius.toStringAsFixed(0),
-                      style: Theme.of(context)
-                          .textTheme
-                          .caption!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: Slider.adaptive(
+              min: -1,
+              max: 30,
+              divisions: 31,
+              label: controller.cornerRadius == null ||
+                      (controller.cornerRadius ?? -1) < 0
+                  ? 'default'
+                  : (controller.cornerRadius?.toStringAsFixed(0) ?? ''),
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.cornerRadius ?? -1
+                  : 4,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setCornerRadius(value < 0 ? null : value);
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'RADIUS',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text(
+                    controller.useSubThemes && controller.useFlexColorScheme
+                        ? controller.cornerRadius == null ||
+                                (controller.cornerRadius ?? -1) < 0
+                            ? 'default'
+                            : (controller.cornerRadius?.toStringAsFixed(0) ??
+                                '')
+                        : '4',
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
           ),
@@ -154,7 +160,7 @@ class ComponentThemes extends StatelessWidget {
           ),
           const Divider(height: 1),
           const Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
             child: ShowSubThemeColors(),
           ),
         ],

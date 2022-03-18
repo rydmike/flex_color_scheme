@@ -59,23 +59,28 @@ class AppBarSettings extends StatelessWidget {
           ),
           if (isLight) ...<Widget>[
             ListTile(
-              enabled: controller.useFlexColorScheme,
+              enabled: controller.useFlexColorScheme &&
+                  controller.appBarBackgroundSchemeColor == null,
               title: const Text('Light mode AppBarStyle'),
               subtitle: Text(
                 explainAppBarStyle(
-                    controller.useFlexColorScheme
+                    controller.useFlexColorScheme &&
+                            controller.appBarBackgroundSchemeColor == null
                         ? controller.lightAppBarStyle
                         : FlexAppBarStyle.primary,
                     isLight),
               ),
             ),
             ListTile(
-              enabled: controller.useFlexColorScheme,
+              enabled: controller.useFlexColorScheme &&
+                  controller.appBarBackgroundSchemeColor == null,
               trailing: AppBarStyleButtons(
-                  style: controller.useFlexColorScheme
+                  style: controller.useFlexColorScheme &&
+                          controller.appBarBackgroundSchemeColor == null
                       ? controller.lightAppBarStyle
                       : FlexAppBarStyle.primary,
-                  onChanged: controller.useFlexColorScheme
+                  onChanged: controller.useFlexColorScheme &&
+                          controller.appBarBackgroundSchemeColor == null
                       ? controller.setLightAppBarStyle
                       : null,
                   // To access the custom color we defined for app bar, in this

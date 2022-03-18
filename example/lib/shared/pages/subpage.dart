@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../const/app_data.dart';
 import '../widgets/app/about.dart';
+import '../widgets/app/show_color_scheme_colors.dart';
+import '../widgets/app/show_theme_data_colors.dart';
 import '../widgets/universal/page_body.dart';
-import '../widgets/universal/show_color_scheme_colors.dart';
-import '../widgets/universal/show_theme_data_colors.dart';
 import '../widgets/universal/theme_showcase.dart';
 
 // This sub page is used as a demo in the default example and in examples

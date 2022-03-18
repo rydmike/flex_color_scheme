@@ -87,7 +87,7 @@ class SurfaceModeButtons extends StatelessWidget {
               RotatedBox(quarterTurns: 2, child: Icon(Icons.horizontal_split)),
         ),
         const Tooltip(
-          message: 'High scaffold\nlow surfaces',
+          message: 'High scaffold\nlow surfaces (default)',
           child: Icon(Icons.horizontal_split),
         ),
         if (showAllModes)

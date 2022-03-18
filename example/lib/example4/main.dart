@@ -102,7 +102,7 @@ class DemoApp extends StatelessWidget {
             // We moved the definition of the list of color schemes to use into
             // a separate static class and list. We use the theme controller
             // to change the index of used color scheme from the list.
-            colors: AppColor.schemes[themeController.schemeIndex].light,
+            colors: AppColor.customSchemes[themeController.schemeIndex].light,
             // Here we use another surface blend mode, where the scaffold
             // background gets a strong blend. This type is commonly used
             // on web/desktop when you wrap content on the scaffold in a
@@ -128,9 +128,7 @@ class DemoApp extends StatelessWidget {
               // guide values, when available: https://m3.material.io/
               // If you give it value, "all" Flutter built-in widgets
               // supporting border radius will use the give radius.
-              defaultRadius: themeController.useDefaultRadius
-                  ? null
-                  : themeController.cornerRadius,
+              defaultRadius: themeController.cornerRadius,
             ),
             // Passing in `FlexKeyColors()` to `keyColors` activates Material 3
             // key color seed based schemes. The primary color in your
@@ -172,7 +170,7 @@ class DemoApp extends StatelessWidget {
           // FlexThemeData.dark() and the dark FlexSchemeColors in our
           // AppColor.schemes list instead.
           darkTheme: FlexThemeData.dark(
-            colors: AppColor.schemes[themeController.schemeIndex].dark,
+            colors: AppColor.customSchemes[themeController.schemeIndex].dark,
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             // We go with a slightly stronger blend in dark mode.
             blendLevel: 7,
@@ -187,9 +185,7 @@ class DemoApp extends StatelessWidget {
             ),
             useSubThemes: themeController.useSubThemes,
             subThemesData: FlexSubThemesData(
-              defaultRadius: themeController.useDefaultRadius
-                  ? null
-                  : themeController.cornerRadius,
+              defaultRadius: themeController.cornerRadius,
             ),
             visualDensity: AppData.visualDensity,
             fontFamily: AppData.font,

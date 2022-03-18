@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/widgets/universal/header_card.dart';
-import '../../../shared/widgets/universal/show_color_scheme_colors.dart';
-import '../../../shared/widgets/universal/show_theme_data_colors.dart';
-import '../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/widgets/app/show_color_scheme_colors.dart';
+import '../../../../shared/widgets/app/show_theme_data_colors.dart';
+import '../../../../shared/widgets/universal/header_card.dart';
+import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 /// All the sub demo pages wrapped in a header card.
-class ShowWidgets extends StatelessWidget {
-  const ShowWidgets({
+class WidgetShowcase extends StatelessWidget {
+  const WidgetShowcase({
     Key? key,
     this.isOpen = true,
     this.onTap,
@@ -17,9 +17,9 @@ class ShowWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final TextTheme textTheme = theme.textTheme;
-    final TextStyle headlineMedium = textTheme.headlineMedium!;
+    // final ThemeData theme = Theme.of(context);
+    // final TextTheme textTheme = theme.textTheme;
+    // final TextStyle headline = textTheme.headlineMedium!;
 
     return HeaderCard(
       isOpen: isOpen,
@@ -35,7 +35,8 @@ class ShowWidgets extends StatelessWidget {
             const SizedBox(height: 8),
             const ShowThemeDataColors(),
             const Divider(),
-            Text('Theme Showcase', style: headlineMedium),
+            Text('Widgets', style: Theme.of(context).textTheme.headlineSmall),
+            const SizedBox(height: 16),
             const ThemeShowcase(),
             const SizedBox(height: 8),
           ],

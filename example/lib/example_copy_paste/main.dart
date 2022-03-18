@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -66,53 +67,40 @@ class _DemoAppState extends State<DemoApp> {
 
       theme: FlexThemeData.light(
         scheme: FlexScheme.flutterDash,
-        surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-        blendLevel: 8,
+        blendLevel: 9,
         appBarOpacity: 0.95,
         useSubThemes: true,
         subThemesData: const FlexSubThemesData(
-          blendOnLevel: 17,
+          blendOnLevel: 18,
+          blendOnColors: false,
           unselectedToggleIsColored: true,
-          inputDecoratorSchemeColor: SchemeColor.tertiary,
-          inputDecoratorUnfocusedHasBorder: false,
-          fabSchemeColor: SchemeColor.tertiary,
+          fabUseShape: false,
           popupMenuOpacity: 0.95,
           bottomNavigationBarOpacity: 0.95,
           navigationBarOpacity: 0.95,
           navigationRailOpacity: 0.95,
+          navigationRailLabelType: NavigationRailLabelType.none,
         ),
-        keyColors: const FlexKeyColors(
-          useSecondary: true,
-          useTertiary: true,
-        ),
-        useMaterial3ErrorColors: true,
-        tones: FlexTones.vividSurfaces(Brightness.light),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
       darkTheme: FlexThemeData.dark(
-        scheme: FlexScheme.flutterDash,
-        surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-        blendLevel: 8,
+        colors: FlexColor.schemes[FlexScheme.flutterDash]!.light.defaultError
+            .toDark(19, true),
+        blendLevel: 16,
+        appBarStyle: FlexAppBarStyle.background,
         appBarOpacity: 0.95,
         useSubThemes: true,
         subThemesData: const FlexSubThemesData(
-          blendOnLevel: 30,
+          blendOnLevel: 24,
           unselectedToggleIsColored: true,
-          inputDecoratorSchemeColor: SchemeColor.tertiary,
-          inputDecoratorUnfocusedHasBorder: false,
-          fabSchemeColor: SchemeColor.tertiary,
+          fabUseShape: false,
           popupMenuOpacity: 0.95,
           bottomNavigationBarOpacity: 0.95,
           navigationBarOpacity: 0.95,
           navigationRailOpacity: 0.95,
+          navigationRailLabelType: NavigationRailLabelType.none,
         ),
-        keyColors: const FlexKeyColors(
-          useSecondary: true,
-          useTertiary: true,
-        ),
-        useMaterial3ErrorColors: true,
-        tones: FlexTones.vividSurfaces(Brightness.dark),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
       ),

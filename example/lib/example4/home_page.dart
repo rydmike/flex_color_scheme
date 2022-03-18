@@ -6,10 +6,10 @@ import '../shared/const/app_color.dart';
 import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/widgets/app/about.dart';
+import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
+import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
-import '../shared/widgets/universal/show_color_scheme_colors.dart';
-import '../shared/widgets/universal/show_theme_data_colors.dart';
 import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 import 'widgets/theme_popup_menu.dart';
@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
                             themeMode: controller.themeMode,
                             onThemeModeChanged: controller.setThemeMode,
                             flexSchemeData:
-                                AppColor.schemes[controller.schemeIndex],
+                                AppColor.customSchemes[controller.schemeIndex],
                             optionButtonBorderRadius:
                                 controller.useSubThemes ? 12 : 4,
                             buttonOrder:
@@ -161,64 +161,71 @@ class HomePage extends StatelessWidget {
                             value: controller.useSubThemes,
                             onChanged: controller.setUseSubThemes,
                           ),
-                          SwitchListTileAdaptive(
-                            title: const Text(
-                              'Use Material 3 rounded corners on UI elements',
-                            ),
+                          ListTile(
+                            enabled: controller.useSubThemes &&
+                                controller.useFlexColorScheme,
+                            title:
+                                const Text('Used border radius on UI elements'),
                             subtitle: const Text(
-                                'ON to use M3 spec border radius, varies '
-                                'per component\n'
-                                'OFF to set same radius on all widgets, M2 '
-                                'spec is 4\n'
-                                'With API you can adjust it per widget with a '
-                                'double value'),
-                            value: controller.useDefaultRadius &&
-                                controller.useSubThemes &&
-                                controller.useFlexColorScheme,
-                            onChanged: controller.useSubThemes &&
-                                    controller.useFlexColorScheme
-                                ? controller.setUseDefaultRadius
-                                : null,
+                                'Default uses Material 3 specification border '
+                                'radius, which varies per component. '
+                                'A defined value sets it for all components. '
+                                'Material 2 specification is 4.'),
                           ),
-                          Visibility(
-                            visible: !controller.useDefaultRadius &&
-                                controller.useSubThemes &&
+                          ListTile(
+                            enabled: controller.useSubThemes &&
                                 controller.useFlexColorScheme,
-                            maintainSize: true,
-                            maintainAnimation: true,
-                            maintainState: true,
-                            child: ListTile(
-                              title: const Text('Border radius on all widgets'),
-                              subtitle: Slider.adaptive(
-                                max: 30,
-                                divisions: 30,
-                                label:
-                                    controller.cornerRadius.toStringAsFixed(0),
-                                value: controller.cornerRadius,
-                                onChanged: controller.setCornerRadius,
-                              ),
-                              trailing: Padding(
-                                padding:
-                                    const EdgeInsetsDirectional.only(end: 12),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      'dP',
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
-                                    Text(
-                                      controller.cornerRadius
-                                          .toStringAsFixed(0),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .caption!
-                                          .copyWith(
-                                              fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
+                            title: Slider.adaptive(
+                              min: -1,
+                              max: 30,
+                              divisions: 31,
+                              label: controller.cornerRadius == null ||
+                                      (controller.cornerRadius ?? -1) < 0
+                                  ? 'default'
+                                  : (controller.cornerRadius
+                                          ?.toStringAsFixed(0) ??
+                                      ''),
+                              value: controller.useSubThemes &&
+                                      controller.useFlexColorScheme
+                                  ? controller.cornerRadius ?? -1
+                                  : 4,
+                              onChanged: controller.useSubThemes &&
+                                      controller.useFlexColorScheme
+                                  ? (double value) {
+                                      controller.setCornerRadius(
+                                          value < 0 ? null : value);
+                                    }
+                                  : null,
+                            ),
+                            trailing: Padding(
+                              padding:
+                                  const EdgeInsetsDirectional.only(end: 12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    'RADIUS',
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                  Text(
+                                    controller.useSubThemes &&
+                                            controller.useFlexColorScheme
+                                        ? controller.cornerRadius == null ||
+                                                (controller.cornerRadius ??
+                                                        -1) <
+                                                    0
+                                            ? 'default'
+                                            : (controller.cornerRadius
+                                                    ?.toStringAsFixed(0) ??
+                                                '')
+                                        : '4',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .caption!
+                                        .copyWith(fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
                             ),
                           ),

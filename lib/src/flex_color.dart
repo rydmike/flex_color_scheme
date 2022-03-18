@@ -147,7 +147,7 @@ class FlexColor {
   static const Color materialLightSecondary = Color(0xff03dac6);
 
   /// Material standard default color for light secondary container color.
-  static const Color materialLightSecondaryContainer = Color(0xFF92F4E5);
+  static const Color materialLightSecondaryContainer = Color(0xFFCEFAF8);
 
   /// Material standard default color for light tertiary color.
   static const Color materialLightTertiary = Color(0xff018786);
@@ -212,7 +212,7 @@ class FlexColor {
   static const Color materialLightSecondaryHc = Color(0xff66fff9);
 
   /// Material high contrast color for light secondary container color.
-  static const Color materialLightSecondaryContainerHc = Color(0xFF90F3EE);
+  static const Color materialLightSecondaryContainerHc = Color(0xFFC8F9F7);
 
   /// Material high contrast color for light tertiary container color.
   static const Color materialLightTertiaryHc = Color(0xff018786);

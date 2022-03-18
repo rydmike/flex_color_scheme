@@ -37,7 +37,7 @@ class InputColors extends StatelessWidget {
       await controller.setCustomScheme(AppColor.scheme(controller));
       // After copy, set theme to the custom theme so
       // user can edit it
-      await controller.setSchemeIndex(AppColor.schemesCustom.length - 1);
+      await controller.setSchemeIndex(AppColor.schemes.length - 1);
     }
   }
 
@@ -74,7 +74,7 @@ class InputColors extends StatelessWidget {
             ),
           ThemePopupMenu(controller: controller),
           const SizedBox(height: 8),
-          if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
+          if (controller.schemeIndex != (AppColor.schemes.length - 1))
             ListTile(
               title: const Text('Copy effective input colors to the custom '
                   'scheme?'),

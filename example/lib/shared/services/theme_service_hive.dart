@@ -279,35 +279,44 @@ class ThemeServiceHive implements ThemeService {
     }
   }
 
-  /// Loads used useDefaultRadius setting in example 5.
-  @override
-  Future<bool> useDefaultRadius() async {
-    try {
-      return _hiveBox.get(ThemeService.keyUseDefaultRadius,
-          defaultValue: ThemeService.defaultUseDefaultRadius) as bool;
-    } catch (e) {
-      debugPrint(e.toString());
-      // If something goes wrong we return the default value.
-      return ThemeService.defaultUseDefaultRadius;
-    }
-  }
-
-  /// Persists the useDefaultRadius setting in example 5.
-  @override
-  Future<void> saveUseDefaultRadius(bool value) async {
-    try {
-      await _hiveBox.put(ThemeService.keyUseDefaultRadius, value);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
+  // TODO(rydmike): remove me!
+  // /// Loads used useDefaultRadius setting in example 5.
+  // @override
+  // Future<bool> useDefaultRadius() async {
+  //   try {
+  //     return _hiveBox.get(ThemeService.keyUseDefaultRadius,
+  //         defaultValue: ThemeService.defaultUseDefaultRadius) as bool;
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //     // If something goes wrong we return the default value.
+  //     return ThemeService.defaultUseDefaultRadius;
+  //   }
+  // }
+  //
+  // /// Persists the useDefaultRadius setting in example 5.
+  // @override
+  // Future<void> saveUseDefaultRadius(bool value) async {
+  //   try {
+  //     await _hiveBox.put(ThemeService.keyUseDefaultRadius, value);
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //   }
+  // }
 
   /// Loads used corner radius setting in example 5.
   @override
-  Future<double> cornerRadius() async {
+  Future<double?> cornerRadius() async {
     try {
-      return _hiveBox.get(ThemeService.keyCornerRadius,
-          defaultValue: ThemeService.defaultCornerRadius) as double;
+      final dynamic input = _hiveBox.get(ThemeService.keyCornerRadius,
+          defaultValue: ThemeService.defaultCornerRadius);
+      // If Hive returns stored double as null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyCornerRadius,
+            defaultValue: ThemeService.defaultCornerRadius) as double;
+      }
     } catch (e) {
       debugPrint(e.toString());
       // If something goes wrong we return the default value.
@@ -317,7 +326,7 @@ class ThemeServiceHive implements ThemeService {
 
   /// Persists the used corner radius setting in example 5.
   @override
-  Future<void> saveCornerRadius(double value) async {
+  Future<void> saveCornerRadius(double? value) async {
     try {
       await _hiveBox.put(ThemeService.keyCornerRadius, value);
     } catch (e) {
@@ -664,6 +673,29 @@ class ThemeServiceHive implements ThemeService {
   Future<void> saveAppBarOpacity(double value) async {
     try {
       await _hiveBox.put(ThemeService.keyAppBarOpacity, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used popup menu opacity setting in example 5.
+  @override
+  Future<double> popupMenuOpacity() async {
+    try {
+      return _hiveBox.get(ThemeService.keyPopupMenuOpacity,
+          defaultValue: ThemeService.defaultPopupMenuOpacity) as double;
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultPopupMenuOpacity;
+    }
+  }
+
+  /// Persists the used popup menu opacity setting in example 5.
+  @override
+  Future<void> savePopupMenuOpacity(double value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyPopupMenuOpacity, value);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -2648,7 +2680,7 @@ class ThemeServiceHive implements ThemeService {
       final dynamic input = _hiveBox.get(
           ThemeService.keyElevatedButtonBorderRadius,
           defaultValue: ThemeService.defaultElevatedButtonBorderRadius);
-      // If Hive type adapter converted stored int to null, we don't try to
+      // If Hive returns stored double as null, we don't try to
       // typecast it, we return null instead.
       if (input == null) {
         return null;
@@ -2683,7 +2715,7 @@ class ThemeServiceHive implements ThemeService {
       final dynamic input = _hiveBox.get(
           ThemeService.keyOutlinedButtonBorderRadius,
           defaultValue: ThemeService.defaultOutlinedButtonBorderRadius);
-      // If Hive type adapter converted stored int to null, we don't try to
+      // If Hive returns stored double as null, we don't try to
       // typecast it, we return null instead.
       if (input == null) {
         return null;
@@ -2717,7 +2749,7 @@ class ThemeServiceHive implements ThemeService {
     try {
       final dynamic input = _hiveBox.get(ThemeService.keyTextButtonBorderRadius,
           defaultValue: ThemeService.defaultTextButtonBorderRadius);
-      // If Hive type adapter converted stored int to null, we don't try to
+      // If Hive returns stored double as null, we don't try to
       // typecast it, we return null instead.
       if (input == null) {
         return null;
@@ -2737,6 +2769,74 @@ class ThemeServiceHive implements ThemeService {
   Future<void> saveTextButtonBorderRadius(double? value) async {
     try {
       await _hiveBox.put(ThemeService.keyTextButtonBorderRadius, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used toggleButtonsBorderRadius setting.
+  @override
+  Future<double?> toggleButtonsBorderRadius() async {
+    try {
+      final dynamic input = _hiveBox.get(
+          ThemeService.keyToggleButtonsBorderRadius,
+          defaultValue: ThemeService.defaultToggleButtonsBorderRadius);
+      // If Hive returns stored double as null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyToggleButtonsBorderRadius,
+                defaultValue: ThemeService.defaultToggleButtonsBorderRadius)
+            as double;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultToggleButtonsBorderRadius;
+    }
+  }
+
+  /// Persists used toggleButtonsBorderRadius setting.
+  @override
+  Future<void> saveToggleButtonsBorderRadius(double? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyToggleButtonsBorderRadius, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used cardBorderRadius setting.
+  @override
+  Future<double?> cardBorderRadius() async {
+    try {
+      final dynamic input = _hiveBox.get(ThemeService.keyCardBorderRadius,
+          defaultValue: ThemeService.defaultCardBorderRadius);
+      // If Hive returns stored double as null, we don't try to
+      // typecast it, we return null instead.
+      if (input == null) {
+        return null;
+      } else {
+        return _hiveBox.get(ThemeService.keyCardBorderRadius,
+            defaultValue: ThemeService.defaultCardBorderRadius) as double;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      // If something goes wrong we return the default value.
+      return ThemeService.defaultCardBorderRadius;
+    }
+  }
+
+  /// Persists used cardBorderRadius setting.
+  @override
+  Future<void> saveCardBorderRadius(double? value) async {
+    try {
+      await _hiveBox.put(ThemeService.keyCardBorderRadius, value);
     } catch (e) {
       debugPrint(e.toString());
     }

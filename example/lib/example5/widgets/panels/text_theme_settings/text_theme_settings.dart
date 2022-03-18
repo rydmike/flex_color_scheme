@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/header_card.dart';
-import '../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
-import '../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/header_card.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
+import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 class TextThemeSettings extends StatelessWidget {
   const TextThemeSettings({

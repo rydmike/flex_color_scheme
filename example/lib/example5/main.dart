@@ -4,11 +4,11 @@ import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
 import '../shared/services/theme_service_hive.dart';
 import '../shared/utils/app_scroll_behavior.dart';
-import 'home_page.dart';
 import 'theme/flex_theme_dark.dart';
 import 'theme/flex_theme_light.dart';
 import 'theme/theme_data_from_dark.dart';
 import 'theme/theme_data_from_light.dart';
+import 'widgets/pages/home_page.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 5 - Themes Playground
@@ -117,7 +117,9 @@ class DemoApp extends StatelessWidget {
                 : themeDataFromDark(controller),
             // Use the dark or light theme based on controller setting.
             themeMode: controller.themeMode,
-            // Pass the controller to the HomePage where we modify it.
+            // Pass the controller to the HomePage where we use it to change
+            // the theme settings that will cause themes above to change and
+            // rebuild the entire look of the app based on modified theme.
             home: HomePage(controller: controller),
           );
         });

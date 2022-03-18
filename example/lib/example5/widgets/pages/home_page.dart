@@ -2,16 +2,17 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../shared/const/app_data.dart';
-import '../shared/controllers/theme_controller.dart';
-import '../shared/widgets/app/responsive_scaffold.dart';
-import '../shared/widgets/universal/responsive_dialog.dart';
-import 'utils/generate_colorscheme_dart_code.dart';
-import 'widgets/advanced_view.dart';
-import 'widgets/dialogs/dart_code_dialog_screen.dart';
-import 'widgets/dialogs/reset_settings_dialog.dart';
-import 'widgets/dialogs/show_copy_setup_code_dialog.dart';
-import 'widgets/focused_view.dart';
+import '../../../shared/const/app_color.dart';
+import '../../../shared/const/app_data.dart';
+import '../../../shared/controllers/theme_controller.dart';
+import '../../../shared/widgets/app/responsive_scaffold.dart';
+import '../../../shared/widgets/universal/responsive_dialog.dart';
+import '../../utils/generate_colorscheme_dart_code.dart';
+import '../dialogs/dart_code_dialog_screen.dart';
+import '../dialogs/reset_settings_dialog.dart';
+import '../dialogs/show_copy_setup_code_dialog.dart';
+import 'advanced_view.dart';
+import 'focused_view.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   // Scroll controller
   final ScrollController scrollController = ScrollController();
 
-  // The number of cards in the grid, must match the number we add to grid view.
+  // Cards in the masonry grid, must match the number we actually add to it!
   static const int _nrOfCards = 26;
 
   // Toggle the state of a card as open/closed.
@@ -48,7 +49,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    isCardOpen = List<bool>.generate(_nrOfCards, (int i) => true);
+    isCardOpen = List<bool>.generate(_nrOfCards, (int i) {
+      if (i == 1) {
+        // Always start with code view panel closed.
+        return false;
+      } else {
+        return true;
+      }
+    });
   }
 
   @override
@@ -84,13 +92,16 @@ class _HomePageState extends State<HomePage> {
         useDivider: widget.controller.useNavDivider,
         opacity: widget.controller.sysBarOpacity,
       ),
+
       child: ResponsiveScaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
-        // Make Rail width larger when using it on tablet or desktop.
         railWidth: isPhone ? 52 : 66,
         breakpointShowFullMenu: AppData.desktopBreakpoint,
-        title: Text(AppData.title(context)),
+        title: isPhone
+            ? Text(AppColor.schemes[widget.controller.schemeIndex].name)
+            : Text('${AppData.title(context)} - '
+                '${AppColor.schemes[widget.controller.schemeIndex].name}'),
         menuTitle: const Text(AppData.appName),
         menuLeadingTitle: Text(
           'Themes Playground',
@@ -98,8 +109,7 @@ class _HomePageState extends State<HomePage> {
         ),
         menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
-        // Callback from menu, an item was clicked in the menu, for simplicity
-        // we just use index based actions here.
+        // Callback from menu, using simple index based actions here.
         onSelect: (int index) async {
           // Open all cards
           if (index == 0) {
@@ -117,7 +127,6 @@ class _HomePageState extends State<HomePage> {
           }
           // Copy theme setup code
           if (index == 2) {
-            // Get the theme's Dart and Flutter setup code.
             await showCopySetupCodeDialog(context, widget.controller);
           }
           // Copy ColorScheme code

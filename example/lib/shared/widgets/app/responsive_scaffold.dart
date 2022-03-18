@@ -464,6 +464,8 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
           child: Scaffold(
             appBar: AppBar(
               title: widget.title,
+              // We are using dynamic title content, we want it start aligned.
+              centerTitle: false,
               actions: const <Widget>[AboutIconButton()],
               // Some logic to show the implicit menu button on AppBar when
               // there is no rail or menu.
@@ -588,7 +590,7 @@ class _AppMenuState extends State<_AppMenu> {
   static const List<String> _labels = <String>[
     'Expand all',
     'Close all',
-    'Copy theme setup',
+    'Copy theme code',
     'Copy ColorScheme',
     'Reset settings',
   ];
@@ -732,7 +734,7 @@ class _MenuItem extends StatelessWidget {
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
 
-    final Color textColor = theme.colorScheme.onBackground;
+    final Color textColor = theme.colorScheme.onBackground.withAlpha(0xCC);
 
     // The M3 guide calls for 12dp padding after the selection indicator on
     // the menu highlight in a Drawer or side menu. We can do that, but we
@@ -800,7 +802,7 @@ class _MenuItem extends StatelessWidget {
                           Text(
                             label,
                             style: theme.textTheme.bodyLarge!
-                                .copyWith(color: textColor.withOpacity(0.8)),
+                                .copyWith(color: textColor),
                           )
                       ],
                     ),

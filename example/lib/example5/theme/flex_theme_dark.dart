@@ -42,7 +42,7 @@ ThemeData flexThemeDark(ThemeController controller) =>
 /// more tutorial comments.
 FlexColorScheme flexColorSchemeDark(ThemeController controller) {
   final bool useBuiltIn = controller.schemeIndex > 2 &&
-      controller.schemeIndex < AppColor.schemesCustom.length - 1;
+      controller.schemeIndex < AppColor.schemes.length - 1;
   final int flexScheme = controller.schemeIndex - 3;
 
   return FlexColorScheme.dark(
@@ -77,11 +77,11 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
       blendTextTheme: controller.blendDarkTextTheme,
       useTextTheme: controller.useTextTheme,
       //
-      defaultRadius:
-          controller.useDefaultRadius ? null : controller.cornerRadius,
+      defaultRadius: controller.cornerRadius,
+      textButtonRadius: controller.textButtonBorderRadius,
       elevatedButtonRadius: controller.elevatedButtonBorderRadius,
       outlinedButtonRadius: controller.outlinedButtonBorderRadius,
-      textButtonRadius: controller.textButtonBorderRadius,
+      toggleButtonsRadius: controller.toggleButtonsBorderRadius,
       //
       textButtonSchemeColor: controller.textButtonSchemeColor,
       elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
@@ -103,7 +103,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
       fabSchemeColor: controller.fabSchemeColor,
       snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
       chipSchemeColor: controller.chipSchemeColor,
-      popupMenuOpacity: 0.95,
+      cardRadius: controller.cardBorderRadius,
+      popupMenuOpacity: controller.popupMenuOpacity,
       //
       dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
       appBarBackgroundSchemeColor: controller.appBarBackgroundSchemeColor,

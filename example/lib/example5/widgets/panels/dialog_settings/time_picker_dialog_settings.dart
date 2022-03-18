@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/widgets/universal/header_card.dart';
-import '../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/widgets/universal/header_card.dart';
+import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 class TimePickerDialogSettings extends StatelessWidget {
   const TimePickerDialogSettings({

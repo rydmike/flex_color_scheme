@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/app/show_color_scheme_colors.dart';
+import '../../../../shared/widgets/app/show_theme_data_colors.dart';
 import '../../../../shared/widgets/universal/header_card.dart';
-import '../../../../shared/widgets/universal/show_theme_data_colors.dart';
 
-class ThemeDataColors extends StatelessWidget {
-  const ThemeDataColors({
+class EffectiveColors extends StatelessWidget {
+  const EffectiveColors({
     Key? key,
     required this.controller,
     this.isOpen = true,
@@ -27,10 +28,23 @@ class ThemeDataColors extends StatelessWidget {
     return HeaderCard(
       isOpen: isOpen,
       onTap: onTap,
-      title: const Text('ThemeData Colors'),
+      title: const Text('Effective Colors'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: ShowColorSchemeColors(),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: Text('This shows effective ColorScheme colors in '
+                'a compact form. '
+                'They are presented in the same order as they appear in the '
+                'ColorScheme class. The deprecated colors primaryVariant and '
+                'secondaryVariant are excluded.'),
+          ),
+          const SizedBox(height: 8),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: ShowThemeDataColors(),
@@ -63,11 +77,7 @@ class ThemeDataColors extends StatelessWidget {
                         'ColorScheme, to produce an app with a consistent '
                         'ColorScheme based look on all widgets. It will '
                         'continue to do so as long as the colors exist in '
-                        'ThemeData.\n'
-                        '\n'
-                        'Migration to replacement colors in ColorScheme only '
-                        'or needed component sub-themes is added changes in '
-                        'Flutter SDK stable version proceeds.',
+                        'ThemeData.',
                   ),
                 ],
               ),
