@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.2 - March 16, 2022
+## v5.0.0-dev.2 - March 18, 2022
 
 ###Targets with the dev.2 release are:
 
