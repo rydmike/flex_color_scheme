@@ -886,140 +886,236 @@ void main() {
       expect(FlexColor.deepBlueDarkTertiaryContainer, const Color(0xFF0F5B6A));
     });
 
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura', () {
       expect(FlexColor.sakuraName, 'Pink sakura');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura', () {
       expect(
         FlexColor.sakuraDescription,
         'Pink color theme, based on sakura cherry blossom like colors',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura light', () {
       expect(FlexColor.sakuraLightPrimary, const Color(0xFFCE5B78));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura light', () {
       expect(FlexColor.sakuraLightPrimaryContainer, const Color(0xFFe8b5ce));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura light', () {
+      expect(FlexColor.sakuraLightPrimaryVariant, const Color(0xffe4446c));
+    });
+    test('FC5 colors Pink sakura light', () {
       expect(FlexColor.sakuraLightSecondary, const Color(0xFFfbae9d));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura light', () {
+      expect(FlexColor.sakuraLightSecondaryContainer, const Color(0xFFFFDAD1));
+    });
+    test('FC5 colors Pink sakura light', () {
+      expect(
+          FlexColor.sakuraLightSecondaryVariant, FlexColor.sakuraLightTertiary);
+    });
+    test('FC5 colors Pink sakura light', () {
       expect(FlexColor.sakuraLightTertiary, const Color(0xFFF39682));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura light', () {
+      expect(FlexColor.sakuraLightTertiaryContainer, const Color(0xFFFFCFC3));
+    });
+    test('FC5 colors Pink sakura dark', () {
       expect(FlexColor.sakuraDarkPrimary, const Color(0xFFeec4d8));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura dark', () {
       expect(FlexColor.sakuraDarkPrimaryContainer, const Color(0xFFCE5B78));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura dark', () {
       expect(FlexColor.sakuraDarkSecondary, const Color(0xFFF5D6C6));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Pink sakura dark', () {
+      expect(FlexColor.sakuraDarkSecondaryContainer, const Color(0xFFEBA689));
+    });
+    test('FC5 colors Pink sakura dark', () {
+      expect(
+          FlexColor.sakuraDarkSecondaryVariant, FlexColor.sakuraDarkTertiary);
+    });
+    test('FC5 colors Pink sakura dark', () {
       expect(FlexColor.sakuraDarkTertiary, const Color(0xFFf7e0d4));
     });
+    test('FC5 colors Pink sakura dark', () {
+      expect(FlexColor.sakuraDarkTertiaryContainer, const Color(0xFFEEBDA8));
+    });
 
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red', () {
       expect(FlexColor.mandyRedName, 'Oh Mandy red');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red', () {
       expect(
         FlexColor.mandyRedDescription,
         'Mandy red and Viking blue inspired red theme',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red light', () {
       expect(FlexColor.mandyRedLightPrimary, const Color(0xFFCD5758));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red light', () {
       expect(FlexColor.mandyRedLightPrimaryContainer, const Color(0xFFE49797));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red light', () {
+      expect(FlexColor.mandyRedLightPrimaryVariant, const Color(0xFFA23556));
+    });
+    test('FC5 colors Oh Mandy red light', () {
       expect(FlexColor.mandyRedLightSecondary, const Color(0xFF57C8D3));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red light', () {
+      expect(
+          FlexColor.mandyRedLightSecondaryContainer, const Color(0xFF90F2FC));
+    });
+    test('FC5 colors Oh Mandy red light', () {
       expect(FlexColor.mandyRedLightTertiary, const Color(0xFF69B9CD));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red light', () {
+      expect(FlexColor.mandyRedLightTertiaryContainer, const Color(0xFFA6EDFF));
+    });
+    test('FC5 colors Oh Mandy red dark', () {
       expect(FlexColor.mandyRedDarkPrimary, const Color(0xFFDA8585));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red dark', () {
       expect(FlexColor.mandyRedDarkPrimaryContainer, const Color(0xFFC05253));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red dark', () {
+      expect(FlexColor.mandyRedDarkPrimaryVariant, const Color(0xFFAB4967));
+    });
+    test('FC5 colors Oh Mandy red dark', () {
       expect(FlexColor.mandyRedDarkSecondary, const Color(0xFF68CDD7));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Oh Mandy red dark', () {
+      expect(FlexColor.mandyRedDarkSecondaryContainer, const Color(0xFF037481));
+    });
+    test('FC5 colors Oh Mandy red dark', () {
+      expect(FlexColor.mandyRedDarkSecondaryVariant,
+          FlexColor.mandyRedDarkTertiary);
+    });
+    test('FC5 colors Oh Mandy red dark', () {
       expect(FlexColor.mandyRedDarkTertiary, const Color(0xFF85C6D6));
     });
+    test('FC5 colors Oh Mandy red dark', () {
+      expect(FlexColor.mandyRedDarkTertiaryContainer, const Color(0xFF21859E));
+    });
 
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado', () {
       expect(FlexColor.redName, 'Red tornado');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado', () {
       expect(
         FlexColor.redDescription,
         'Red color theme, based on Material red and pink colors',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado light', () {
       expect(FlexColor.redLightPrimary, const Color(0xFFC62828));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado light', () {
       expect(FlexColor.redLightPrimaryContainer, const Color(0xFFFFCDD2));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado light', () {
+      expect(FlexColor.redLightPrimaryVariant, const Color(0xFFB71C1C));
+    });
+    test('FC5 colors Red tornado light', () {
       expect(FlexColor.redLightSecondary, const Color(0xFFAD1457));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado light', () {
+      expect(FlexColor.redLightSecondaryContainer, const Color(0xFFF8BBD0));
+    });
+    test('FC5 colors Red tornado light', () {
+      expect(FlexColor.redLightSecondaryVariant, FlexColor.redLightTertiary);
+    });
+    test('FC5 colors Red tornado light', () {
       expect(FlexColor.redLightTertiary, const Color(0xFFC2185B));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado light', () {
+      expect(FlexColor.redLightTertiaryContainer, const Color(0xFFFCE4EC));
+    });
+    test('FC5 colors Red tornado dark', () {
       expect(FlexColor.redDarkPrimary, const Color(0xFFEF9A9A));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado dark', () {
       expect(FlexColor.redDarkPrimaryContainer, const Color(0xFFB71C1C));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado dark', () {
+      expect(FlexColor.redDarkPrimaryVariant, const Color(0xFFE57373));
+    });
+    test('FC5 colors Red tornado dark', () {
       expect(FlexColor.redDarkSecondary, const Color(0xFFF8BBD0));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red tornado dark', () {
+      expect(FlexColor.redDarkSecondaryContainer, const Color(0xFFAD1457));
+    });
+    test('FC5 colors Red tornado dark', () {
+      expect(FlexColor.redDarkSecondaryVariant, FlexColor.redDarkTertiary);
+    });
+    test('FC5 colors Red tornado dark', () {
       expect(FlexColor.redDarkTertiary, const Color(0xFFFCE4EC));
     });
+    test('FC5 colors Red tornado dark', () {
+      expect(FlexColor.redDarkTertiaryContainer, const Color(0xFFC2185B));
+    });
 
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine', () {
       expect(FlexColor.redWineName, 'Red red wine');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine', () {
       expect(
         FlexColor.redWineDescription,
         'Red color theme, based on red wine like colors',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine light', () {
       expect(FlexColor.redWineLightPrimary, const Color(0xFF9B1B30));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine light', () {
       expect(FlexColor.redWineLightPrimaryContainer, const Color(0xFFEDBAC2));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine light', () {
+      expect(FlexColor.redWineLightPrimaryVariant, const Color(0xFF6C1322));
+    });
+    test('FC5 colors Red red wine light', () {
       expect(FlexColor.redWineLightSecondary, const Color(0xFFA70043));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine light', () {
+      expect(FlexColor.redWineLightSecondaryContainer, const Color(0xFFFFD9DF));
+    });
+    test('FC5 colors Red red wine light', () {
+      expect(FlexColor.redWineLightSecondaryVariant,
+          FlexColor.redWineLightTertiary);
+    });
+    test('FC5 colors Red red wine light', () {
       expect(FlexColor.redWineLightTertiary, const Color(0xFFA4121C));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine light', () {
+      expect(FlexColor.redWineLightTertiaryContainer, const Color(0xFFFFDAD5));
+    });
+    test('FC5 colors Red red wine dark', () {
       expect(FlexColor.redWineDarkPrimary, const Color(0xFFE4677C));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine dark', () {
       expect(FlexColor.redWineDarkPrimaryContainer, const Color(0xFF9B1B30));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine dark', () {
+      expect(FlexColor.redWineDarkPrimaryVariant, const Color(0xFFB25867));
+    });
+    test('FC5 colors Red red wine dark', () {
       expect(FlexColor.redWineDarkSecondary, const Color(0xFFC87A98));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Red red wine dark', () {
+      expect(FlexColor.redWineDarkSecondaryContainer, const Color(0xFF910037));
+    });
+    test('FC5 colors Red red wine dark', () {
+      expect(
+          FlexColor.redWineDarkSecondaryVariant, FlexColor.redWineDarkTertiary);
+    });
+    test('FC5 colors Red red wine dark', () {
       expect(FlexColor.redWineDarkTertiary, const Color(0xFFBD545B));
+    });
+    test('FC5 colors Red red wine dark', () {
+      expect(FlexColor.redWineDarkTertiaryContainer, const Color(0xFF930012));
     });
 
     test('FC5 colors', () {
@@ -1851,6 +1947,217 @@ void main() {
     });
     test('FC5 colors', () {
       expect(FlexColor.blumineBlueDarkTertiary, const Color(0xFF243E4D));
+    });
+
+    //-----
+
+    test('FC5 colors Flutter Dash', () {
+      expect(FlexColor.dashBlueName, 'Flutter Dash');
+    });
+    test('FC5 colors Flutter Dash', () {
+      expect(
+        FlexColor.dashBlueDescription,
+        'Flutter Dash wallpaper based theme',
+      );
+    });
+    test('FC5 colors Flutter Dash light', () {
+      expect(FlexColor.dashBlueLightPrimary, const Color(0xFF4496E0));
+    });
+    test('FC5 colors Flutter Dash light', () {
+      expect(FlexColor.dashBlueLightPrimaryContainer, const Color(0xFFB4E6FF));
+    });
+    test('FC5 colors Flutter Dash light', () {
+      expect(FlexColor.dashBlueLightSecondary, const Color(0xFF202B6D));
+    });
+    test('FC5 colors Flutter Dash light', () {
+      expect(
+          FlexColor.dashBlueLightSecondaryContainer, const Color(0xFF99CCF9));
+    });
+    test('FC5 colors Flutter Dash light', () {
+      expect(FlexColor.dashBlueLightTertiary, const Color(0xFF514239));
+    });
+    test('FC5 colors Flutter Dash light', () {
+      expect(FlexColor.dashBlueLightTertiaryContainer, const Color(0xFFBAA99D));
+    });
+    test('FC5 colors Flutter Dash dark', () {
+      expect(FlexColor.dashBlueDarkPrimary, const Color(0xFFB4E6FF));
+    });
+    test('FC5 colors Flutter Dash dark', () {
+      expect(FlexColor.dashBlueDarkPrimaryContainer, const Color(0xFF1E8FDB));
+    });
+    test('FC5 colors Flutter Dash dark', () {
+      expect(FlexColor.dashBlueDarkSecondary, const Color(0xFF99CCF9));
+    });
+    test('FC5 colors Flutter Dash dark', () {
+      expect(FlexColor.dashBlueDarkSecondaryContainer, const Color(0xFF202B6D));
+    });
+    test('FC5 colors Flutter Dash dark', () {
+      expect(FlexColor.dashBlueDarkTertiary, const Color(0xFFBAA99D));
+    });
+    test('FC5 colors Flutter Dash dark', () {
+      expect(FlexColor.dashBlueDarkTertiaryContainer, const Color(0xFF514239));
+    });
+
+    //-----
+
+    test('FC5 colors M3 Baseline', () {
+      expect(FlexColor.materialBaselineName, 'M3 baseline');
+    });
+    test('FC5 colors M3 Baseline', () {
+      expect(
+        FlexColor.materialBaselineDescription,
+        'Material guide 3 baseline based theme',
+      );
+    });
+    test('FC5 colors M3 Baseline light', () {
+      expect(FlexColor.materialBaselineLightPrimary, const Color(0xFF6750A4));
+    });
+    test('FC5 colors M3 Baseline light', () {
+      expect(FlexColor.materialBaselineLightPrimaryContainer,
+          const Color(0xFFEADDFF));
+    });
+    test('FC5 colors M3 Baseline light', () {
+      expect(FlexColor.materialBaselineLightSecondary, const Color(0xFF625B71));
+    });
+    test('FC5 colors M3 Baseline light', () {
+      expect(FlexColor.materialBaselineLightSecondaryContainer,
+          const Color(0xFFE8DEF8));
+    });
+    test('FC5 colors M3 Baseline light', () {
+      expect(FlexColor.materialBaselineLightTertiary, const Color(0xFF7D5260));
+    });
+    test('FC5 colors M3 Baseline light', () {
+      expect(FlexColor.materialBaselineLightTertiaryContainer,
+          const Color(0xFFFFD8E4));
+    });
+    test('FC5 colors M3 Baseline dark', () {
+      expect(FlexColor.materialBaselineDarkPrimary, const Color(0xFFD0BCFF));
+    });
+    test('FC5 colors M3 Baseline dark', () {
+      expect(FlexColor.materialBaselineDarkPrimaryContainer,
+          const Color(0xFF4F378B));
+    });
+    test('FC5 colors M3 Baseline dark', () {
+      expect(FlexColor.materialBaselineDarkSecondary, const Color(0xFFCCC2DC));
+    });
+    test('FC5 colors M3 Baseline dark', () {
+      expect(FlexColor.materialBaselineDarkSecondaryContainer,
+          const Color(0xFF4A4458));
+    });
+    test('FC5 colors M3 Baseline dark', () {
+      expect(FlexColor.materialBaselineDarkTertiary, const Color(0xFFEFB8C8));
+    });
+    test('FC5 colors M3 Baseline dark', () {
+      expect(FlexColor.materialBaselineDarkTertiaryContainer,
+          const Color(0xFF633B48));
+    });
+
+    //-----
+
+    test('FC5 colors Verdun green', () {
+      expect(FlexColor.verdunHemlockName, 'Verdun green');
+    });
+    test('FC5 colors Verdun green', () {
+      expect(
+        FlexColor.verdunHemlockDescription,
+        'Material guide 3 verdun and mineral green with hemlock',
+      );
+    });
+    test('FC5 colors Verdun green light', () {
+      expect(FlexColor.verdunHemlockLightPrimary, const Color(0xFF616200));
+    });
+    test('FC5 colors Verdun green light', () {
+      expect(FlexColor.verdunHemlockLightPrimaryContainer,
+          const Color(0xFFE7E885));
+    });
+    test('FC5 colors Verdun green light', () {
+      expect(FlexColor.verdunHemlockLightSecondary, const Color(0xFF606042));
+    });
+    test('FC5 colors Verdun green light', () {
+      expect(FlexColor.verdunHemlockLightSecondaryContainer,
+          const Color(0xFFE6E4C0));
+    });
+    test('FC5 colors Verdun green light', () {
+      expect(FlexColor.verdunHemlockLightTertiary, const Color(0xFF3D6657));
+    });
+    test('FC5 colors Verdun green light', () {
+      expect(FlexColor.verdunHemlockLightTertiaryContainer,
+          const Color(0xFFBFECD9));
+    });
+    test('FC5 colors Verdun green dark', () {
+      expect(FlexColor.verdunHemlockDarkPrimary, const Color(0xFFCBCC58));
+    });
+    test('FC5 colors Verdun green dark', () {
+      expect(
+          FlexColor.verdunHemlockDarkPrimaryContainer, const Color(0xFF494A00));
+    });
+    test('FC5 colors Verdun green dark', () {
+      expect(FlexColor.verdunHemlockDarkSecondary, const Color(0xFFC9C8A4));
+    });
+    test('FC5 colors Verdun green dark', () {
+      expect(FlexColor.verdunHemlockDarkSecondaryContainer,
+          const Color(0xFF48482D));
+    });
+    test('FC5 colors Verdun green dark', () {
+      expect(FlexColor.verdunHemlockDarkTertiary, const Color(0xFFA4D0BE));
+    });
+    test('FC5 colors Verdun green dark', () {
+      expect(FlexColor.verdunHemlockDarkTertiaryContainer,
+          const Color(0xFF254E40));
+    });
+
+    //-----
+
+    test('FC5 colors Dell genoa green', () {
+      expect(FlexColor.dellGenoaGreenName, 'Dell genoa green');
+    });
+    test('FC5 colors Dell genoa green', () {
+      expect(
+        FlexColor.dellGenoaGreenDescription,
+        'Material guide 3 theme with dell, axolotl and genoa greens',
+      );
+    });
+    test('FC5 colors Dell genoa green light', () {
+      expect(FlexColor.dellGenoaGreenLightPrimary, const Color(0xFF386A20));
+    });
+    test('FC5 colors Dell genoa green light', () {
+      expect(FlexColor.dellGenoaGreenLightPrimaryContainer,
+          const Color(0xFFB7F397));
+    });
+    test('FC5 colors Dell genoa green light', () {
+      expect(FlexColor.dellGenoaGreenLightSecondary, const Color(0xFF55624C));
+    });
+    test('FC5 colors Dell genoa green light', () {
+      expect(FlexColor.dellGenoaGreenLightSecondaryContainer,
+          const Color(0xFFD9E7CB));
+    });
+    test('FC5 colors Dell genoa green light', () {
+      expect(FlexColor.dellGenoaGreenLightTertiary, const Color(0xFF19686A));
+    });
+    test('FC5 colors Dell genoa green light', () {
+      expect(FlexColor.dellGenoaGreenLightTertiaryContainer,
+          const Color(0xFFA8EFF0));
+    });
+    test('FC5 colors Dell genoa green dark', () {
+      expect(FlexColor.dellGenoaGreenDarkPrimary, const Color(0xFF9CD67D));
+    });
+    test('FC5 colors Dell genoa green dark', () {
+      expect(FlexColor.dellGenoaGreenDarkPrimaryContainer,
+          const Color(0xFF205107));
+    });
+    test('FC5 colors Dell genoa green dark', () {
+      expect(FlexColor.dellGenoaGreenDarkSecondary, const Color(0xFFBDCBB0));
+    });
+    test('FC5 colors Dell genoa green dark', () {
+      expect(FlexColor.dellGenoaGreenDarkSecondaryContainer,
+          const Color(0xFF3E4A36));
+    });
+    test('FC5 colors Dell genoa green dark', () {
+      expect(FlexColor.dellGenoaGreenDarkTertiary, const Color(0xFFA0CFD0));
+    });
+    test('FC5 colors Dell genoa green dark', () {
+      expect(FlexColor.dellGenoaGreenDarkTertiaryContainer,
+          const Color(0xFF1E4E4F));
     });
   });
 }

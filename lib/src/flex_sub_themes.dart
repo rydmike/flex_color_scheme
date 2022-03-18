@@ -1570,7 +1570,7 @@ class FlexSubThemes {
         ),
       );
 
-  // TODO(rydmike): Consider for Slider value popup background primary blend.
+  // TODO(rydmike): Consider a SliderTheme with value popup using primary blend.
 
   // TODO(rydmike): Dialog content has no padding property, add when supported.
   //  The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp

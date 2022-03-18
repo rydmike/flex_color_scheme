@@ -78,9 +78,9 @@ All notable changes to the **FlexColorScheme** package are documented here.
     dark mode, from light mode computed dark theme. The code gen also generally
     does not add any code when API default values are used.
 
-* Completed test updates. Now 1381 test, coverage > 99.8%. Some new color value
+* Completed test updates. Now 1467 tests, coverage > 99.8%. Many new color value
   tests are still missing. Not critical, they are just const values, but their 
-  test are used to make the statement that they are a part of tests and 
+  tests are used to make the statement that they are a part of tests and 
   version promise. Missing ones to be added before stable 5.0.0. release,
   there are just **a lot** of them to add.
 
