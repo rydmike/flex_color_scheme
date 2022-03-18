@@ -239,36 +239,43 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
-  /// Loads used useDefaultRadius setting in example 5.
-  @override
-  Future<bool> useDefaultRadius() async {
-    try {
-      final bool value = _prefs.getBool(ThemeService.keyUseDefaultRadius) ??
-          ThemeService.defaultUseDefaultRadius;
-      return value;
-    } catch (e) {
-      debugPrint(e.toString());
-      return ThemeService.defaultUseDefaultRadius;
-    }
-  }
-
-  /// Persists the useDefaultRadius setting in example 5.
-  @override
-  Future<void> saveUseDefaultRadius(bool value) async {
-    try {
-      await _prefs.setBool(ThemeService.keyUseDefaultRadius, value);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
+  // TODO(rydmike): remove me!
+  // /// Loads used useDefaultRadius setting in example 5.
+  // @override
+  // Future<bool> useDefaultRadius() async {
+  //   try {
+  //     final bool value = _prefs.getBool(ThemeService.keyUseDefaultRadius) ??
+  //         ThemeService.defaultUseDefaultRadius;
+  //     return value;
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //     return ThemeService.defaultUseDefaultRadius;
+  //   }
+  // }
+  //
+  // /// Persists the useDefaultRadius setting in example 5.
+  // @override
+  // Future<void> saveUseDefaultRadius(bool value) async {
+  //   try {
+  //     await _prefs.setBool(ThemeService.keyUseDefaultRadius, value);
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //   }
+  // }
 
   /// Loads used corner radius setting in example 5.
+  ///
+  /// Nullable, Negative value treated as null.
   @override
-  Future<double> cornerRadius() async {
+  Future<double?> cornerRadius() async {
     try {
-      final double value = _prefs.getDouble(ThemeService.keyCornerRadius) ??
-          ThemeService.defaultCornerRadius;
-      return value;
+      final double value =
+          _prefs.getDouble(ThemeService.keyCornerRadius) ?? -1.0;
+      if (value < 0.0) {
+        return null;
+      } else {
+        return value;
+      }
     } catch (e) {
       debugPrint(e.toString());
       return ThemeService.defaultCornerRadius;
@@ -276,10 +283,12 @@ class ThemeServicePrefs implements ThemeService {
   }
 
   /// Persists the used corner radius setting in example 5.
+  ///
+  /// Nullable, null stored as -1.0.
   @override
-  Future<void> saveCornerRadius(double value) async {
+  Future<void> saveCornerRadius(double? value) async {
     try {
-      await _prefs.setDouble(ThemeService.keyCornerRadius, value);
+      await _prefs.setDouble(ThemeService.keyCornerRadius, value ?? -1.0);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -627,6 +636,29 @@ class ThemeServicePrefs implements ThemeService {
   Future<void> saveAppBarOpacity(double value) async {
     try {
       await _prefs.setDouble(ThemeService.keyAppBarOpacity, value);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  /// Loads used popup menu opacity setting in example 5.
+  @override
+  Future<double> popupMenuOpacity() async {
+    try {
+      final double value = _prefs.getDouble(ThemeService.keyPopupMenuOpacity) ??
+          ThemeService.defaultPopupMenuOpacity;
+      return value;
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultPopupMenuOpacity;
+    }
+  }
+
+  /// Persists the used popup menu opacity setting in example 5.
+  @override
+  Future<void> savePopupMenuOpacity(double value) async {
+    try {
+      await _prefs.setDouble(ThemeService.keyPopupMenuOpacity, value);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -2730,6 +2762,73 @@ class ThemeServicePrefs implements ThemeService {
     try {
       await _prefs.setDouble(
           ThemeService.keyTextButtonBorderRadius, value ?? -1.0);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used toggleButtonsBorderRadius setting.
+  ///
+  /// Nullable, Negative value treated as null.
+  @override
+  Future<double?> toggleButtonsBorderRadius() async {
+    try {
+      final double value =
+          _prefs.getDouble(ThemeService.keyToggleButtonsBorderRadius) ?? -1.0;
+      if (value < 0.0) {
+        return null;
+      } else {
+        return value;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultToggleButtonsBorderRadius;
+    }
+  }
+
+  /// Persists used toggleButtonsBorderRadius setting.
+  ///
+  /// Nullable, null stored as -1.0.
+  @override
+  Future<void> saveToggleButtonsBorderRadius(double? value) async {
+    try {
+      await _prefs.setDouble(
+          ThemeService.keyToggleButtonsBorderRadius, value ?? -1.0);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // ----
+
+  /// Loads used cardBorderRadius setting.
+  ///
+  /// Nullable, Negative value treated as null.
+  @override
+  Future<double?> cardBorderRadius() async {
+    try {
+      final double value =
+          _prefs.getDouble(ThemeService.keyCardBorderRadius) ?? -1.0;
+      if (value < 0.0) {
+        return null;
+      } else {
+        return value;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return ThemeService.defaultCardBorderRadius;
+    }
+  }
+
+  /// Persists used cardBorderRadius setting.
+  ///
+  /// Nullable, null stored as -1.0.
+  @override
+  Future<void> saveCardBorderRadius(double? value) async {
+    try {
+      await _prefs.setDouble(ThemeService.keyCardBorderRadius, value ?? -1.0);
     } catch (e) {
       debugPrint(e.toString());
     }

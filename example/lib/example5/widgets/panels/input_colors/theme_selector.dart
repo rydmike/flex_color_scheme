@@ -76,13 +76,14 @@ class _ThemeSelectorState extends State<ThemeSelector> {
               controller: scrollController,
               physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: AppColor.schemesCustom.length,
+              itemCount: AppColor.schemes.length,
               itemBuilder: (BuildContext context, int index) {
                 return FlexThemeModeOptionButton(
-                  optionButtonBorderRadius: widget.controller.useSubThemes
-                      ? widget.controller.useDefaultRadius
-                          ? 12
-                          : widget.controller.cornerRadius
+                  optionButtonBorderRadius: widget.controller.useSubThemes &&
+                          widget.controller.useFlexColorScheme
+                      // M3 default for Card is 12.
+                      ? (widget.controller.cornerRadius ?? 12)
+                      // M2 default for Card.
                       : 4,
                   height: 30,
                   width: 30,

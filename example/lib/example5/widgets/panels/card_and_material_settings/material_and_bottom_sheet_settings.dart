@@ -1,10 +1,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/header_card.dart';
-import '../../../shared/widgets/universal/theme_showcase.dart';
-import '../shared/color_scheme_popup_menu.dart';
+import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/header_card.dart';
+import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../shared/color_scheme_popup_menu.dart';
 
 class MaterialAndBottomSheetSettings extends StatelessWidget {
   const MaterialAndBottomSheetSettings({

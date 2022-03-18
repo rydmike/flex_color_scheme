@@ -98,21 +98,22 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> saveInteractionEffects(bool value) async {}
 
-  /// Loads used useDefaultRadius setting in example 5.
-  @override
-  Future<bool> useDefaultRadius() async => ThemeService.defaultUseDefaultRadius;
-
-  /// Persists the useDefaultRadius setting in example 5.
-  @override
-  Future<void> saveUseDefaultRadius(bool value) async {}
+  // TODO(rydmike): remove me!
+  // /// Loads used useDefaultRadius setting in example 5.
+  // @override
+  // Future<bool> useDefaultRadius() async => ThemeService.defaultUseDefaultRadius;
+  //
+  // /// Persists the useDefaultRadius setting in example 5.
+  // @override
+  // Future<void> saveUseDefaultRadius(bool value) async {}
 
   /// Loads used corner radius setting in example 5.
   @override
-  Future<double> cornerRadius() async => ThemeService.defaultCornerRadius;
+  Future<double?> cornerRadius() async => ThemeService.defaultCornerRadius;
 
   /// Persists the used corner radius setting in example 5.
   @override
-  Future<void> saveCornerRadius(double value) async {}
+  Future<void> saveCornerRadius(double? value) async {}
 
   /// Loads used inputDecoratorIsFilled setting in example 5.
   @override
@@ -233,6 +234,15 @@ class ThemeServiceMem implements ThemeService {
   /// Persists the used app bar opacity setting in example 5.
   @override
   Future<void> saveAppBarOpacity(double value) async {}
+
+  /// Loads used popup menu opacity setting in example 5.
+  @override
+  Future<double> popupMenuOpacity() async =>
+      ThemeService.defaultPopupMenuOpacity;
+
+  /// Persists the used popup menu opacity setting in example 5.
+  @override
+  Future<void> savePopupMenuOpacity(double value) async {}
 
   /// Loads used app bar elevation setting in example 5.
   @override
@@ -992,6 +1002,28 @@ class ThemeServiceMem implements ThemeService {
   /// Persists used textButtonBorderRadius setting.
   @override
   Future<void> saveTextButtonBorderRadius(double? value) async {}
+
+  //----
+
+  /// Loads used toggleButtonsBorderRadius setting.
+  @override
+  Future<double?> toggleButtonsBorderRadius() async =>
+      ThemeService.defaultToggleButtonsBorderRadius;
+
+  /// Persists used toggleButtonsBorderRadius setting.
+  @override
+  Future<void> saveToggleButtonsBorderRadius(double? value) async {}
+
+  //----
+
+  /// Loads used cardBorderRadius setting.
+  @override
+  Future<double?> cardBorderRadius() async =>
+      ThemeService.defaultCardBorderRadius;
+
+  /// Persists used cardBorderRadius setting.
+  @override
+  Future<void> saveCardBorderRadius(double? value) async {}
 
   //----
 

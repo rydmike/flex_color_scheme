@@ -10,32 +10,11 @@ import 'dart_code_dialog_screen.dart';
 Future<void> showCopySetupCodeDialog(
     BuildContext context, ThemeController controller) async {
   final String code = generateThemeDartCode(controller);
-  if (controller.useFlexColorScheme) {
-    await showResponsiveDialog<void>(
-      context: context,
-      child: DartCodeDialogScreen(
-          dialogHeader: 'Copy Theme Setup Code',
-          copyMessage: 'FlexColorScheme setup code copied to the clipboard!',
-          code: code),
-    );
-  } else {
-    await showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Copy Theme Setup Code'),
-          content: const Text('Copying the theme code is only available\n'
-              'when using FlexColorScheme theming is enabled'),
-          actions: <Widget>[
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('CLOSE')),
-          ],
-          actionsPadding: const EdgeInsets.symmetric(horizontal: 16),
-        );
-      },
-    );
-  }
+  await showResponsiveDialog<void>(
+    context: context,
+    child: DartCodeDialogScreen(
+        dialogHeader: 'Copy Theme Setup Code',
+        copyMessage: 'FlexColorScheme setup code copied to the clipboard!',
+        code: code),
+  );
 }

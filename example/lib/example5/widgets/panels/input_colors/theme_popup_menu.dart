@@ -25,7 +25,7 @@ class ThemePopupMenu extends StatelessWidget {
       padding: EdgeInsets.zero,
       onSelected: controller.setSchemeIndex,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i < AppColor.schemesCustom.length; i++)
+        for (int i = 0; i < AppColor.schemes.length; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
@@ -34,7 +34,7 @@ class ThemePopupMenu extends StatelessWidget {
                       ? AppColor.schemeAtIndex(i, controller).light.primary
                       : AppColor.schemeAtIndex(i, controller).dark.primary,
                   size: 35),
-              title: Text(AppColor.schemesCustom[i].name),
+              title: Text(AppColor.schemes[i].name),
             ),
           )
       ],
@@ -42,10 +42,9 @@ class ThemePopupMenu extends StatelessWidget {
         contentPadding:
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
         title: Text(
-          '${AppColor.schemesCustom[controller.schemeIndex].name} color scheme',
+          '${AppColor.schemes[controller.schemeIndex].name} color scheme',
         ),
-        subtitle:
-            Text(AppColor.schemesCustom[controller.schemeIndex].description),
+        subtitle: Text(AppColor.schemes[controller.schemeIndex].description),
         trailing: Icon(
           Icons.lens,
           color: colorScheme.primary,

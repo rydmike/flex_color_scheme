@@ -99,12 +99,12 @@ class AppColor {
   // probably the ones we want to use primarily, so we put them first. After our
   // custom schemes, we add all the pre-defined built-in ones, offering them as
   // options users can switch to and use if they like.
-  static final List<FlexSchemeData> schemes = <FlexSchemeData>[
+  static final List<FlexSchemeData> customSchemes = <FlexSchemeData>[
     // We add our custom light and dark FlexSchemeColor schemes we defined
     // to a list of FlexSchemeData, where we can bundle each light and dark
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
-      name: 'C1: Midnight',
+      name: 'Custom Midnight',
       description: 'Midnight blue theme, created by using custom color values '
           'for all colors in the scheme',
       // FlexSchemeData holds separate defined color schemes for light and
@@ -116,7 +116,7 @@ class AppColor {
     ),
     // Do the same for our second custom scheme.
     FlexSchemeData(
-      name: 'C2: Greens',
+      name: 'Custom Greens',
       description: 'Vivid green theme, created from one primary color in light '
           'mode and another primary for dark mode',
       light: _myScheme2Light,
@@ -125,7 +125,7 @@ class AppColor {
     // We also do the same for our 3rd custom scheme, BUT we create its matching
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
-      name: 'C3: Red & Blue',
+      name: 'Custom Red & Blue',
       description: 'Classic read and blue, created from only light theme mode '
           'primary and secondary colors',
       light: _myScheme3Light,
@@ -158,11 +158,11 @@ class AppColor {
   /// Instead we are making it a final and will add a const placeholder for the
   /// last index for the customized colors and use another static helper
   /// function to get right colors see next step.
-  static final List<FlexSchemeData> schemesCustom = <FlexSchemeData>[
+  static final List<FlexSchemeData> schemes = <FlexSchemeData>[
     // Use all the built-in FlexColor schemes we setup for example 4
-    ...schemes,
-    // and a placeholder for the custom colors
-    FlexColor.customColors,
+    ...customSchemes,
+    // and a placeholder for the custom colors, here overriding its name too.
+    FlexColor.customColors.copyWith(name: 'Customizable'),
   ];
 
   /// Used by example 5, the Themes Playground.
@@ -174,7 +174,7 @@ class AppColor {
   /// `ThemeController.customScheme` for the last item, when the controllers
   /// index  is last item in list, otherwise it returns FlexSchemeData at index,
   /// well almost, we include also the logic for computed dark mode colors, in
-  /// next helper.
+  /// the schemeAtIndex helper it uses to get the scheme at an index.
   static FlexSchemeData scheme(final ThemeController controller) =>
       schemeAtIndex(controller.schemeIndex, controller);
 
@@ -188,16 +188,16 @@ class AppColor {
   /// of example 5 and we get right dark colors in ThemeSelector and Popup too.
   static FlexSchemeData schemeAtIndex(
       final int index, final ThemeController controller) {
-    if (index == schemesCustom.length - 1) {
+    if (index == schemes.length - 1) {
       return controller.customScheme.copyWith(
           dark: controller.useToDarkMethod
               ? controller.customScheme.light.defaultError
                   .toDark(controller.darkMethodLevel, true)
               : null);
     }
-    return schemesCustom[index].copyWith(
+    return schemes[index].copyWith(
         dark: controller.useToDarkMethod
-            ? schemesCustom[index]
+            ? schemes[index]
                 .light
                 .defaultError
                 .toDark(controller.darkMethodLevel, true)

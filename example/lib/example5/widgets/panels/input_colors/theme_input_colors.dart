@@ -33,7 +33,7 @@ class ThemeInputColors extends StatelessWidget {
     // We can only pick colors when custom theme is selected, which is
     // last index in out list of color schemes.
     final bool isCustomTheme =
-        (AppColor.schemesCustom.length - 1) == controller.schemeIndex;
+        (AppColor.schemes.length - 1) == controller.schemeIndex;
     // Are colors swapped?
     final bool swapLight = controller.swapLightColors;
     final bool swapDark = controller.swapDarkColors;

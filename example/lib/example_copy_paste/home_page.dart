@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 
 import '../shared/const/app_data.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
+import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
+import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
-import '../shared/widgets/universal/show_color_scheme_colors.dart';
-import '../shared/widgets/universal/show_theme_data_colors.dart';
 import '../shared/widgets/universal/stateful_header_card.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';

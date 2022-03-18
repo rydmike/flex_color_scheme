@@ -41,7 +41,8 @@ class ThemeController with ChangeNotifier {
     _schemeIndex = await _themeService.schemeIndex();
     _viewIndex = await _themeService.viewIndex();
     _interactionEffects = await _themeService.interactionEffects();
-    _useDefaultRadius = await _themeService.useDefaultRadius();
+    // TODO(rydmike): remove me!
+    // _useDefaultRadius = await _themeService.useDefaultRadius();
     _cornerRadius = await _themeService.cornerRadius();
     _inputDecoratorIsFilled = await _themeService.inputDecoratorIsFilled();
     _inputDecoratorBorderType = await _themeService.inputDecoratorBorderType();
@@ -59,6 +60,7 @@ class ThemeController with ChangeNotifier {
     _lightAppBarStyle = await _themeService.lightAppBarStyle();
     _darkAppBarStyle = await _themeService.darkAppBarStyle();
     _appBarOpacity = await _themeService.appBarOpacity();
+    _popupMenuOpacity = await _themeService.popupMenuOpacity();
     _appBarElevation = await _themeService.appBarElevation();
     _navBarStyle = await _themeService.navBarStyle();
     _navBarSelectedSchemeColor = await _themeService.navSelectedSchemeColor();
@@ -154,6 +156,9 @@ class ThemeController with ChangeNotifier {
     _outlinedButtonBorderRadius =
         await _themeService.outlinedButtonBorderRadius();
     _textButtonBorderRadius = await _themeService.textButtonBorderRadius();
+    _toggleButtonsBorderRadius =
+        await _themeService.toggleButtonsBorderRadius();
+    _cardBorderRadius = await _themeService.cardBorderRadius();
     _sysBarOpacity = await _themeService.sysBarOpacity();
     // Not using the ThemeService just a local toggle for platform, resets
     // to actual default platform when settings are loaded.
@@ -179,7 +184,8 @@ class ThemeController with ChangeNotifier {
     await setSchemeIndex(ThemeService.defaultSchemeIndex, false);
     await setViewIndex(ThemeService.defaultViewIndex, false);
     await setInteractionEffects(ThemeService.defaultInteractionEffects, false);
-    await setUseDefaultRadius(ThemeService.defaultUseDefaultRadius, false);
+    // TODO(rydmike): remove me!
+    // await setUseDefaultRadius(ThemeService.defaultUseDefaultRadius, false);
     await setCornerRadius(ThemeService.defaultCornerRadius, false);
     await setInputDecoratorIsFilled(
         ThemeService.defaultInputDecoratorIsFilled, false);
@@ -201,6 +207,7 @@ class ThemeController with ChangeNotifier {
     await setLightAppBarStyle(ThemeService.defaultLightAppBarStyle, false);
     await setDarkAppBarStyle(ThemeService.defaultDarkAppBarStyle, false);
     await setAppBarOpacity(ThemeService.defaultAppBarOpacity, false);
+    await setPopupMenuOpacity(ThemeService.defaultPopupMenuOpacity, false);
     await setAppBarElevation(ThemeService.defaultAppBarElevation, false);
     await setTransparentStatusBar(
         ThemeService.defaultTransparentStatusBar, false);
@@ -321,6 +328,9 @@ class ThemeController with ChangeNotifier {
         ThemeService.defaultOutlinedButtonBorderRadius, false);
     await setTextButtonBorderRadius(
         ThemeService.defaultTextButtonBorderRadius, false);
+    await setToggleButtonsBorderRadius(
+        ThemeService.defaultToggleButtonsBorderRadius, false);
+    await setCardBorderRadius(ThemeService.defaultCardBorderRadius, false);
     await setSysBarOpacity(ThemeService.defaultSysBarOpacity, false);
     // Not using ThemeService, just a locally controlled switched.
     await setPlatform(defaultTargetPlatform, false);
@@ -485,20 +495,20 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveInteractionEffects(value);
   }
 
-  late bool _useDefaultRadius;
-  bool get useDefaultRadius => _useDefaultRadius;
-  Future<void> setUseDefaultRadius(bool? value, [bool notify = true]) async {
-    if (value == null) return;
-    if (value == _useDefaultRadius) return;
-    _useDefaultRadius = value;
-    if (notify) notifyListeners();
-    await _themeService.saveUseDefaultRadius(value);
-  }
+  // TODO(rydmike): remove me!
+  // late bool _useDefaultRadius;
+  // bool get useDefaultRadius => _useDefaultRadius;
+  // Future<void> setUseDefaultRadius(bool? value, [bool notify = true]) async {
+  //   if (value == null) return;
+  //   if (value == _useDefaultRadius) return;
+  //   _useDefaultRadius = value;
+  //   if (notify) notifyListeners();
+  //   await _themeService.saveUseDefaultRadius(value);
+  // }
 
-  late double _cornerRadius;
-  double get cornerRadius => _cornerRadius;
+  late double? _cornerRadius;
+  double? get cornerRadius => _cornerRadius;
   Future<void> setCornerRadius(double? value, [bool notify = true]) async {
-    if (value == null) return;
     if (value == _cornerRadius) return;
     _cornerRadius = value;
     if (notify) notifyListeners();
@@ -589,6 +599,16 @@ class ThemeController with ChangeNotifier {
     _appBarOpacity = value;
     if (notify) notifyListeners();
     await _themeService.saveAppBarOpacity(value);
+  }
+
+  late double _popupMenuOpacity;
+  double get popupMenuOpacity => _popupMenuOpacity;
+  Future<void> setPopupMenuOpacity(double? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _popupMenuOpacity) return;
+    _popupMenuOpacity = value;
+    if (notify) notifyListeners();
+    await _themeService.savePopupMenuOpacity(value);
   }
 
   late double _appBarElevation;
@@ -1484,6 +1504,25 @@ class ThemeController with ChangeNotifier {
     _textButtonBorderRadius = value;
     if (notify) notifyListeners();
     await _themeService.saveTextButtonBorderRadius(value);
+  }
+
+  late double? _toggleButtonsBorderRadius;
+  double? get toggleButtonsBorderRadius => _toggleButtonsBorderRadius;
+  Future<void> setToggleButtonsBorderRadius(double? value,
+      [bool notify = true]) async {
+    if (value == _toggleButtonsBorderRadius) return;
+    _toggleButtonsBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.saveToggleButtonsBorderRadius(value);
+  }
+
+  late double? _cardBorderRadius;
+  double? get cardBorderRadius => _cardBorderRadius;
+  Future<void> setCardBorderRadius(double? value, [bool notify = true]) async {
+    if (value == _cardBorderRadius) return;
+    _cardBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.saveCardBorderRadius(value);
   }
 
   late double _sysBarOpacity;

@@ -117,29 +117,30 @@ abstract class ThemeService {
   /// Persists used themed effects setting in example 5.
   Future<void> saveInteractionEffects(bool value);
 
-  /// Key used to read and save the useDefaultRadius value.
-  static const String keyUseDefaultRadius = 'useDefaultRadius';
-
-  /// Default value for the useDefaultRadius, also used to reset settings.
-  static const bool defaultUseDefaultRadius = true;
-
-  /// Loads used useDefaultRadius setting in example 5.
-  Future<bool> useDefaultRadius();
-
-  /// Persists the useDefaultRadius setting in example 5.
-  Future<void> saveUseDefaultRadius(bool value);
+  // TODO(rydmike): remove me!
+  // /// Key used to read and save the useDefaultRadius value.
+  // static const String keyUseDefaultRadius = 'useDefaultRadius';
+  //
+  // /// Default value for the useDefaultRadius, also used to reset settings.
+  // static const bool defaultUseDefaultRadius = true;
+  //
+  // /// Loads used useDefaultRadius setting in example 5.
+  // Future<bool> useDefaultRadius();
+  //
+  // /// Persists the useDefaultRadius setting in example 5.
+  // Future<void> saveUseDefaultRadius(bool value);
 
   /// Key used to read and save the cornerRadius value.
   static const String keyCornerRadius = 'cornerRadius';
 
   /// Default value for the cornerRadius, also used to reset settings.
-  static const double defaultCornerRadius = 16;
+  static const double? defaultCornerRadius = null;
 
   /// Loads used corner radius setting in example 5.
-  Future<double> cornerRadius();
+  Future<double?> cornerRadius();
 
   /// Persists the used corner radius setting in example 5.
-  Future<void> saveCornerRadius(double value);
+  Future<void> saveCornerRadius(double? value);
 
   /// Key used to read and save the inputDecoratorIsFilled value.
   static const String keyInputDecoratorIsFilled = 'inputDecoratorIsFilled';
@@ -317,6 +318,8 @@ abstract class ThemeService {
   /// Persists the used app bar style for dark theme setting in example 5.
   Future<void> saveDarkAppBarStyle(FlexAppBarStyle value);
 
+  //-----
+
   /// Key used to read and save the appBarOpacity value.
   static const String keyAppBarOpacity = 'appBarOpacity';
 
@@ -328,6 +331,22 @@ abstract class ThemeService {
 
   /// Persists the used app bar opacity setting in example 5.
   Future<void> saveAppBarOpacity(double value);
+
+  //-----
+
+  /// Key used to read and save the popupMenuOpacity value.
+  static const String keyPopupMenuOpacity = 'popupMenuOpacity';
+
+  /// Default value for the popupMenuOpacity, also used to reset settings.
+  static const double defaultPopupMenuOpacity = 0.95;
+
+  /// Loads used popupMenuOpacity setting in example 5.
+  Future<double> popupMenuOpacity();
+
+  /// Persists the used popupMenuOpacity setting in example 5.
+  Future<void> savePopupMenuOpacity(double value);
+
+  //-----
 
   /// Key used to read and save the appBarElevation value.
   static const String keyAppBarElevation = 'appBarElevation';
@@ -472,7 +491,7 @@ abstract class ThemeService {
   static const String keyTooltipsMatchBackground = 'tooltipsMatchBackground';
 
   /// Default value for the tooltipsMatchBackground, also to reset settings.
-  static const bool defaultTooltipsMatchBackground = true;
+  static const bool defaultTooltipsMatchBackground = false;
 
   /// Loads used tooltip style setting in example 5.
   Future<bool> tooltipsMatchBackground();
@@ -1429,6 +1448,40 @@ abstract class ThemeService {
 
   /// Persists used textButtonBorderRadius setting.
   Future<void> saveTextButtonBorderRadius(double? value);
+
+  // ---------
+
+  /// Key used to read and save the toggleButtonsBorderRadius value.
+  static const String keyToggleButtonsBorderRadius =
+      'toggleButtonsBorderRadius';
+
+  /// Default value for the toggleButtonsBorderRadius, also used to
+  /// reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const double? defaultToggleButtonsBorderRadius = null;
+
+  /// Loads used toggleButtonsBorderRadius setting.
+  Future<double?> toggleButtonsBorderRadius();
+
+  /// Persists used toggleButtonsBorderRadius setting.
+  Future<void> saveToggleButtonsBorderRadius(double? value);
+
+  // ---------
+
+  /// Key used to read and save the cardBorderRadius value.
+  static const String keyCardBorderRadius = 'cardBorderRadius';
+
+  /// Default value for the cardBorderRadius, also used to reset settings.
+  ///
+  /// We use NULL as default, on nullable settings.
+  static const double? defaultCardBorderRadius = null;
+
+  /// Loads used cardBorderRadius setting.
+  Future<double?> cardBorderRadius();
+
+  /// Persists used cardBorderRadius setting.
+  Future<void> saveCardBorderRadius(double? value);
 
   // ---------
 

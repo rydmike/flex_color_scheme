@@ -37,8 +37,7 @@ class SchemeColors extends StatelessWidget {
     // Used to enable & disable color selection on the color boxes.
     // We can only pick colors when custom theme is selected, which is
     // last index in out list of color schemes.
-    final bool isCustomTheme =
-        (AppColor.schemesCustom.length - 1) == tc.schemeIndex;
+    final bool isCustomTheme = (AppColor.schemes.length - 1) == tc.schemeIndex;
     // Are colors swapped?
     final bool swapLight = tc.swapLightColors;
     final bool swapDark = tc.swapDarkColors;

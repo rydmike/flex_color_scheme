@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // The width size of the scrolling button.
-const double _kWidthOfScrollItem = 110;
+const double _kWidthOfScrollItem = 115;
 
 /// Horizontal panel selector of.
 class PanelSelector extends StatefulWidget {
@@ -43,7 +43,7 @@ class _PanelSelectorState extends State<PanelSelector> {
     if (widget.index != viewIndex) {
       viewIndex = widget.index;
       scrollController.animateTo(_kWidthOfScrollItem * viewIndex,
-          duration: const Duration(milliseconds: 350),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic);
     }
     super.didChangeDependencies();
@@ -52,7 +52,7 @@ class _PanelSelectorState extends State<PanelSelector> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 140,
+      height: _kWidthOfScrollItem + 15,
       child: Row(
         children: <Widget>[
           Expanded(
@@ -66,6 +66,9 @@ class _PanelSelectorState extends State<PanelSelector> {
                 return PanelButton(
                   item: _panelItems[index],
                   onSelect: () {
+                    scrollController.animateTo(_kWidthOfScrollItem * index,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeOutCubic);
                     viewIndex = index;
                     widget.onChanged(index);
                   },
@@ -95,6 +98,14 @@ class PanelButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
+    final bool isLight = theme.brightness == Brightness.light;
+
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    final Color textColor = theme.colorScheme.onBackground.withAlpha(0xCC);
 
     // Get the card's ShapeBorder from the theme card shape
     ShapeBorder? shapeBorder = theme.cardTheme.shape;
@@ -104,10 +115,7 @@ class PanelButton extends StatelessWidget {
     // If we had one shape, copy in a border side to it.
     if (shapeBorder is RoundedRectangleBorder) {
       shapeBorder = shapeBorder.copyWith(
-        side: BorderSide(
-          color: scheme.primary.withAlpha(0xAA),
-          width: 5,
-        ),
+        side: BorderSide(color: iconColor, width: 5),
       );
       // If
     } else {
@@ -118,8 +126,8 @@ class PanelButton extends StatelessWidget {
       shapeBorder ??= RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         side: BorderSide(
-          color: theme.dividerColor,
-          width: 1,
+          color: scheme.primary.withAlpha(0xAA),
+          width: 5,
         ),
       );
     }
@@ -132,19 +140,21 @@ class PanelButton extends StatelessWidget {
         child: InkWell(
           onTap: onSelect,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Icon(item.icon,
-                    size: 50,
-                    color: selected
-                        ? scheme.primary
-                        : scheme.onSurface.withAlpha(0xAA)),
+                Icon(
+                  item.icon,
+                  size: 45,
+                  color: iconColor,
+                ),
                 Text(
                   item.label,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                        color: textColor,
+                      ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -181,16 +191,12 @@ const List<PanelItem> _panelItems = <PanelItem>[
     icon: Icons.colorize_outlined,
   ),
   PanelItem(
-    label: 'ColorScheme',
-    icon: Icons.gradient_outlined,
-  ),
-  PanelItem(
-    label: 'ThemeData',
-    icon: Icons.table_view_outlined,
-  ),
-  PanelItem(
     label: 'Surface\nblends',
     icon: Icons.invert_colors_outlined,
+  ),
+  PanelItem(
+    label: 'Effective\ncolors',
+    icon: Icons.gradient_outlined,
   ),
   PanelItem(
     label: 'Component\nthemes',
@@ -198,7 +204,7 @@ const List<PanelItem> _panelItems = <PanelItem>[
   ),
   PanelItem(
     label: 'TextField',
-    icon: Icons.keyboard_outlined,
+    icon: Icons.pin_outlined,
   ),
   PanelItem(
     label: 'AppBar',
@@ -226,10 +232,10 @@ const List<PanelItem> _panelItems = <PanelItem>[
   ),
   PanelItem(
     label: 'Material\nButtons',
-    icon: Icons.smart_button_outlined,
+    icon: Icons.crop_16_9_outlined,
   ),
   PanelItem(
-    label: 'ToggleButtons\nFAB',
+    label: 'FAB\nToggleButtons',
     icon: Icons.add_circle,
   ),
   PanelItem(
@@ -274,6 +280,10 @@ const List<PanelItem> _panelItems = <PanelItem>[
   ),
   PanelItem(
     label: 'Widget\nshowcase',
-    icon: Icons.article_outlined,
+    icon: Icons.flutter_dash,
+  ),
+  PanelItem(
+    label: 'Theme\ncode',
+    icon: Icons.integration_instructions_outlined,
   ),
 ];

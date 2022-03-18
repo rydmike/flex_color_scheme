@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/widgets/app/about.dart';
+import '../shared/widgets/app/show_color_scheme_colors.dart';
+import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
-import '../shared/widgets/universal/show_color_scheme_colors.dart';
-import '../shared/widgets/universal/show_theme_data_colors.dart';
 import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 

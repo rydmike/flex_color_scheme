@@ -2377,7 +2377,7 @@ class FlexColorScheme with Diagnosticable {
     final FlexScheme flexScheme = scheme ?? FlexScheme.material;
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
-        colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
+        colors ?? FlexColor.schemes[flexScheme]!.light;
     // If the passed in property values are not null, or there was a colorScheme
     // provided, we will override the colors properties with them. Doing it here
     // gets also correct effective and swap behavior on directly passed in
@@ -2450,7 +2450,7 @@ class FlexColorScheme with Diagnosticable {
         errorContainer: seedScheme.errorContainer,
       );
     }
-    // Compute surface blends, they may also be added on seeded surfaces.
+    // Compute surface blends, they are also be added to seeded surfaces.
     final FlexSchemeSurfaceColors surfaceSchemeColors =
         FlexSchemeSurfaceColors.blend(
       brightness: Brightness.light,

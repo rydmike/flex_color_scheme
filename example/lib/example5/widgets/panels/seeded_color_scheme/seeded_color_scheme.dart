@@ -129,7 +129,7 @@ class SeededColorScheme extends StatelessWidget {
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 4),
             child: SchemeColors(tc: controller),
           ),
-          if (controller.schemeIndex != (AppColor.schemesCustom.length - 1))
+          if (controller.schemeIndex != (AppColor.schemes.length - 1))
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -141,7 +141,7 @@ class SeededColorScheme extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
-          if (controller.schemeIndex == (AppColor.schemesCustom.length - 1))
+          if (controller.schemeIndex == (AppColor.schemes.length - 1))
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(

@@ -253,18 +253,6 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.inversePrimary,
                 textColor: colorScheme.primary,
               ),
-              // TODO(rydmike): Remove completely, used for legacy testing.
-              // ColorCard(
-              //   label: 'Primary\nVariant\n(deprecated)',
-              //   color: colorScheme.primaryVariant,
-              //   textColor: _onColor(colorScheme.primaryVariant, background),
-              // ),
-              // ColorCard(
-              //   label: 'Secondary\nVariant\n(deprecated)',
-              //   color: colorScheme.secondaryVariant,
-              //   textColor: _onColor(colorScheme.secondaryVariant,
-              //   background),
-              // ),
             ],
           ),
         ],

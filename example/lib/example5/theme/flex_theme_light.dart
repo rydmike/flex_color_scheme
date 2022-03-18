@@ -36,7 +36,7 @@ ThemeData flexThemeLight(ThemeController controller) =>
 FlexColorScheme flexColorSchemeLight(ThemeController controller) {
   // Using a built-in scheme or one of the custom colors in the demo?
   final bool useBuiltIn = controller.schemeIndex > 2 &&
-      controller.schemeIndex < AppColor.schemesCustom.length - 1;
+      controller.schemeIndex < AppColor.schemes.length - 1;
   // Get the enum index of scheme
   final int flexScheme = controller.schemeIndex - 3;
 
@@ -112,13 +112,13 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
       // guide values, when available: https://m3.material.io/
       // If you give it value, "all" Flutter built-in widgets
       // supporting border radius will use the give radius.
-      defaultRadius:
-          controller.useDefaultRadius ? null : controller.cornerRadius,
+      defaultRadius: controller.cornerRadius,
       // Border radius can be customized per widget too, here are three
       // example of that, it overrides M3 default and global default setting.
       elevatedButtonRadius: controller.elevatedButtonBorderRadius,
       outlinedButtonRadius: controller.outlinedButtonBorderRadius,
       textButtonRadius: controller.textButtonBorderRadius,
+      toggleButtonsRadius: controller.toggleButtonsBorderRadius,
       // SchemeColor based ColorScheme color used on buttons & toggles.
       textButtonSchemeColor: controller.textButtonSchemeColor,
       elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
@@ -150,9 +150,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
       fabSchemeColor: controller.fabSchemeColor,
       snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
       chipSchemeColor: controller.chipSchemeColor,
-      // Set some opacity on popup menu, just to show a setting not available
-      // via ThemeController in the demo.
-      popupMenuOpacity: 0.96,
+      cardRadius: controller.cardBorderRadius,
+      // Set some opacity on popup menu.
+      popupMenuOpacity: controller.popupMenuOpacity,
       // ColorScheme used on various widgets.
       dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
       appBarBackgroundSchemeColor: controller.appBarBackgroundSchemeColor,
