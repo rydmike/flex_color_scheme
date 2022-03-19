@@ -39,17 +39,17 @@ abstract class ThemeService {
 
   //------
 
-  /// Key used to read and save the advancedView value.
-  static const String keyAdvancedView = 'advancedView';
+  /// Key used to read and save the isLargeGridView value.
+  static const String keyIsLargeGridView = 'isLargeGridView';
 
-  /// Default value for the advancedView, also used to reset settings.
-  static const bool defaultAdvancedView = false;
+  /// Default value for the isLargeGridView, also used to reset settings.
+  static const bool defaultIsLargeGridView = false;
 
-  /// Loads the advancedView setting in example 5.
-  Future<bool> advancedView();
+  /// Loads the isLargeGridView setting in example 5.
+  Future<bool> isLargeGridView();
 
-  /// Persists the advancedView setting in example 5.
-  Future<void> saveAdvancedView(bool value);
+  /// Persists the isLargeGridView setting in example 5.
+  Future<void> saveIsLargeGridView(bool value);
 
   //------
 

@@ -53,15 +53,15 @@ class _ThemeSelectorState extends State<ThemeSelector> {
   }
 
   @override
-  void didChangeDependencies() {
-    // Index got updated in popup and deps changed, animate it to new index.
+  void didUpdateWidget(covariant ThemeSelector oldWidget) {
+    // Index got updated in popup and index changed, animate it to new index.
     if (widget.controller.schemeIndex != schemeIndex) {
       schemeIndex = widget.controller.schemeIndex;
       scrollController.animateTo(_kWidthOfScrollItem * schemeIndex,
           duration: const Duration(milliseconds: 350),
           curve: Curves.easeOutCubic);
     }
-    super.didChangeDependencies();
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

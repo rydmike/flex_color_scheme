@@ -35,7 +35,7 @@ class ThemeController with ChangeNotifier {
   Future<void> loadAll() async {
     _themeMode = await _themeService.themeMode();
     _useSubThemes = await _themeService.useSubThemes();
-    _advancedView = await _themeService.advancedView();
+    _isLargeGridView = await _themeService.isLargeGridView();
     _useTextTheme = await _themeService.useTextTheme();
     _usedScheme = await _themeService.usedScheme();
     _schemeIndex = await _themeService.schemeIndex();
@@ -370,14 +370,14 @@ class ThemeController with ChangeNotifier {
     await _themeService.saveUseSubThemes(value);
   }
 
-  late bool _advancedView;
-  bool get advancedView => _advancedView;
+  late bool _isLargeGridView;
+  bool get isLargeGridView => _isLargeGridView;
   Future<void> setAdvancedView(bool? value, [bool notify = true]) async {
     if (value == null) return;
-    if (value == _advancedView) return;
-    _advancedView = value;
+    if (value == _isLargeGridView) return;
+    _isLargeGridView = value;
     if (notify) notifyListeners();
-    await _themeService.saveAdvancedView(value);
+    await _themeService.saveIsLargeGridView(value);
   }
 
   late int _viewIndex;

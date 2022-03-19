@@ -37,7 +37,7 @@ class _PanelSelectorState extends State<PanelSelector> {
   }
 
   @override
-  void didChangeDependencies() {
+  void didUpdateWidget(covariant PanelSelector oldWidget) {
     // Index got updated externally, by the page view in this case
     // and dependencies changed, animate to new index.
     if (widget.index != viewIndex) {
@@ -46,7 +46,7 @@ class _PanelSelectorState extends State<PanelSelector> {
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic);
     }
-    super.didChangeDependencies();
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

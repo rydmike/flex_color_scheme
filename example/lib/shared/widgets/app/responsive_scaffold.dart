@@ -27,6 +27,38 @@ const double _kBreakpointShowFullMenu = 900;
 // Flutter SDK uses for its Drawer open/close animation
 const Duration _kMenuAnimationDuration = Duration(milliseconds: 246);
 
+/// Used to define tap items for the the responsive Scaffold menu.
+@immutable
+class ResponsiveMenuItems {
+  const ResponsiveMenuItems({
+    this.label = '',
+    this.icon = Icons.info,
+    String? tooltip,
+    String? labelSecondary,
+    String? tooltipSecondary,
+    IconData? iconSecondary,
+  })  : _tooltip = tooltip,
+        _labelSecondary = labelSecondary,
+        _tooltipSecondary = tooltipSecondary,
+        _iconSecondary = iconSecondary;
+
+  final String label;
+  final IconData icon;
+  final String? _tooltip;
+  final String? _labelSecondary;
+  final String? _tooltipSecondary;
+  final IconData? _iconSecondary;
+
+  String get tooltip => _tooltip ?? label;
+  String get labelSecondary => _labelSecondary ?? label;
+  String get tooltipSecondary => _tooltipSecondary ?? tooltip;
+  IconData get iconSecondary => _iconSecondary ?? icon;
+}
+
+// Enum used to represent available icon states in the responsive Scaffold
+// menus items.
+enum ResponsiveMenuItemIconState { primary, secondary }
+
 /// A simplistic animated responsive Scaffold.
 ///
 /// Q: Is this Flexfold?
@@ -60,6 +92,9 @@ class ResponsiveScaffold extends StatefulWidget {
     this.menuLeadingTitle,
     this.menuLeadingSubtitle,
     this.menuLeadingAvatarLabel = '',
+    required this.menuItems,
+    this.menuItemsEnabled,
+    this.menuItemsIconState,
     this.onSelect,
     this.railWidth = _kRailWidth,
     this.menuWidth = _kMenuWidth,
@@ -112,6 +147,15 @@ class ResponsiveScaffold extends StatefulWidget {
 
   /// A label for the avatar for the leading menu item.
   final String menuLeadingAvatarLabel;
+
+  /// Responsive menu tap items.
+  final List<ResponsiveMenuItems> menuItems;
+
+  /// Responsive menu tap items enabled/disabled.
+  final List<bool>? menuItemsEnabled;
+
+  /// Responsive menu tap items used icon state.
+  final List<ResponsiveMenuItemIconState>? menuItemsIconState;
 
   /// Callback called with menu index when user taps on a menu item.
   final ValueChanged<int>? onSelect;
@@ -366,6 +410,27 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   bool isMenuClosed = false;
   // Menu completed closing.
   bool menuDoneClosing = false;
+  // Enabled state of each menuItem.
+  late List<bool> menuItemsEnabled;
+  // Active state of each menuItem.
+  late List<ResponsiveMenuItemIconState> menuItemsIconState;
+
+  @override
+  void didUpdateWidget(covariant ResponsiveScaffold oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.menuItemsEnabled != null) {
+      if (widget.menuItemsEnabled != oldWidget.menuItemsEnabled &&
+          (widget.menuItemsEnabled?.length ?? 0) == widget.menuItems.length) {
+        menuItemsEnabled = widget.menuItemsEnabled!;
+      }
+    }
+    if (widget.menuItemsIconState != null) {
+      if (widget.menuItemsIconState != oldWidget.menuItemsIconState &&
+          (widget.menuItemsIconState?.length ?? 0) == widget.menuItems.length) {
+        menuItemsIconState = widget.menuItemsIconState!;
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -375,6 +440,23 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     // menu max width dynamically while running app.
     activeMenuWidth = widget.menuWidth;
     previousMenuWidth = activeMenuWidth;
+    // No value provided for enabled or state used, will default to
+    // enabled and primary state.
+    menuItemsEnabled =
+        List<bool>.generate(widget.menuItems.length, (int i) => true);
+    if (widget.menuItemsEnabled != null) {
+      if ((widget.menuItemsEnabled?.length ?? 0) == widget.menuItems.length) {
+        menuItemsEnabled = widget.menuItemsEnabled!;
+      }
+    }
+    menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
+        widget.menuItems.length,
+        (int i) => ResponsiveMenuItemIconState.primary);
+    if (widget.menuItemsIconState != null) {
+      if ((widget.menuItemsIconState?.length ?? 0) == widget.menuItems.length) {
+        menuItemsIconState = widget.menuItemsIconState!;
+      }
+    }
   }
 
   @override
@@ -426,13 +508,14 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                 });
               },
               width: activeMenuWidth,
-              // The menu is just a fixed hard coded thing for the demo app
-              // but you could make it something more and configurable.
               child: _AppMenu(
                 title: widget.menuTitle,
                 menuLeadingTitle: widget.menuLeadingTitle,
                 menuLeadingSubtitle: widget.menuLeadingSubtitle,
                 menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
+                menuItems: widget.menuItems,
+                menuItemsEnabled: menuItemsEnabled,
+                menuItemsIconState: menuItemsIconState,
                 maxWidth: widget.menuWidth,
                 railWidth: widget.railWidth,
                 onSelect: widget.onSelect,
@@ -484,6 +567,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                   menuLeadingTitle: widget.menuLeadingTitle,
                   menuLeadingSubtitle: widget.menuLeadingSubtitle,
                   menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
+                  menuItems: widget.menuItems,
+                  menuItemsEnabled: menuItemsEnabled,
+                  menuItemsIconState: menuItemsIconState,
                   maxWidth: widget.menuWidth,
                   railWidth: widget.railWidth,
                   onSelect: (int index) {
@@ -562,6 +648,9 @@ class _AppMenu extends StatefulWidget {
     this.menuLeadingTitle,
     this.menuLeadingSubtitle,
     this.menuLeadingAvatarLabel = '',
+    required this.menuItems,
+    required this.menuItemsEnabled,
+    required this.menuItemsIconState,
   }) : super(key: key);
   final Widget? title;
   final double maxWidth;
@@ -571,6 +660,9 @@ class _AppMenu extends StatefulWidget {
   final Widget? menuLeadingTitle;
   final Widget? menuLeadingSubtitle;
   final String menuLeadingAvatarLabel;
+  final List<ResponsiveMenuItems> menuItems;
+  final List<bool> menuItemsEnabled;
+  final List<ResponsiveMenuItemIconState> menuItemsIconState;
 
   @override
   _AppMenuState createState() => _AppMenuState();
@@ -579,36 +671,8 @@ class _AppMenu extends StatefulWidget {
 class _AppMenuState extends State<_AppMenu> {
   int selectedItem = 0;
 
-  static const List<IconData> _icons = <IconData>[
-    Icons.open_in_full_outlined,
-    Icons.close_fullscreen_outlined,
-    Icons.integration_instructions_outlined,
-    Icons.palette_outlined,
-    Icons.replay_outlined,
-  ];
-
-  static const List<String> _labels = <String>[
-    'Expand all',
-    'Close all',
-    'Copy theme code',
-    'Copy ColorScheme',
-    'Reset settings',
-  ];
-
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final bool isDark = theme.brightness == Brightness.dark;
-    final List<IconData> usedIcons = <IconData>[
-      ..._icons,
-      if (isDark) Icons.wb_sunny else Icons.bedtime,
-      Icons.calendar_view_month_outlined,
-    ];
-    final List<String> usedLabels = <String>[
-      ..._labels,
-      if (isDark) 'Light mode' else 'Dark mode',
-      'View mode',
-    ];
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints size) {
         // The overflow box is not the prettiest approach, but has some
@@ -662,7 +726,7 @@ class _AppMenuState extends State<_AppMenu> {
                                 widget.menuLeadingAvatarLabel,
                           ),
                           // Add all the menu items.
-                          for (int i = 0; i < usedIcons.length; i++)
+                          for (int i = 0; i < widget.menuItems.length; i++)
                             _MenuItem(
                               width: size.maxWidth,
                               menuWidth: widget.maxWidth,
@@ -673,8 +737,19 @@ class _AppMenuState extends State<_AppMenu> {
                                 widget.onSelect?.call(i);
                               },
                               selected: selectedItem == i,
-                              icon: usedIcons[i],
-                              label: usedLabels[i],
+                              icon: widget.menuItemsIconState[i] ==
+                                      ResponsiveMenuItemIconState.primary
+                                  ? widget.menuItems[i].icon
+                                  : widget.menuItems[i].iconSecondary,
+                              label: widget.menuItemsIconState[i] ==
+                                      ResponsiveMenuItemIconState.primary
+                                  ? widget.menuItems[i].label
+                                  : widget.menuItems[i].labelSecondary,
+                              tooltip: widget.menuItemsIconState[i] ==
+                                      ResponsiveMenuItemIconState.primary
+                                  ? widget.menuItems[i].tooltip
+                                  : widget.menuItems[i].tooltipSecondary,
+                              enabled: widget.menuItemsEnabled[i],
                               showDivider: i.isEven,
                               railWidth: widget.railWidth,
                             ),
@@ -703,8 +778,10 @@ class _MenuItem extends StatelessWidget {
     this.selected = false,
     required this.icon,
     required this.label,
+    required this.tooltip,
     this.showDivider = false,
     required this.railWidth,
+    this.enabled = true,
   }) : super(key: key);
 
   final double width;
@@ -713,8 +790,10 @@ class _MenuItem extends StatelessWidget {
   final bool selected;
   final IconData icon;
   final String label;
+  final String tooltip;
   final bool showDivider;
   final double railWidth;
+  final bool enabled;
 
   // Height of the menu item.
   static const double _itemHeight = 50;
@@ -728,14 +807,16 @@ class _MenuItem extends StatelessWidget {
     // custom elements in your app they react to theme changes and use the theme
     // colors. You can make elaborate hues and opacities of the colors in the
     // theme's color schemes, like here:
-    final Color iconColor = isLight
-        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
-        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
-
-    final Color textColor = theme.colorScheme.onBackground.withAlpha(0xCC);
-
+    final Color iconColor = enabled
+        ? isLight
+            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+                theme.colorScheme.onBackground)
+            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+                theme.colorScheme.onBackground)
+        : theme.colorScheme.onBackground.withAlpha(0x55);
+    final Color textColor = enabled
+        ? theme.colorScheme.onBackground.withAlpha(0xCC)
+        : theme.colorScheme.onBackground.withAlpha(0x55);
     // The M3 guide calls for 12dp padding after the selection indicator on
     // the menu highlight in a Drawer or side menu. We can do that, but we
     // have such a narrow rail for phone size, so at rail sizes we will make it
@@ -769,7 +850,7 @@ class _MenuItem extends StatelessWidget {
               // color: selected ? theme.focusColor : Colors.transparent,
               color: Colors.transparent,
               child: InkWell(
-                onTap: onTap,
+                onTap: enabled ? onTap : null,
                 child: SizedBox(
                   height: _itemHeight,
                   width: width - endPadding,
@@ -780,10 +861,14 @@ class _MenuItem extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         MaybeTooltip(
-                          // Show tooltips only at rail size.
-                          condition: width == railWidth,
+                          // Show tooltips only at rail size or if
+                          // the label and tooltip are different and when
+                          // tooltip is not empty string and item is enabled.
+                          condition: (width == railWidth || label != tooltip) &&
+                              tooltip != '' &&
+                              enabled,
                           // The item menu labels is a tooltip on rail size.
-                          message: label,
+                          message: tooltip,
                           // Just to get the tooltip outside the rail.
                           margin: const EdgeInsetsDirectional.only(start: 50),
                           // Constrain icon to min of rail width.

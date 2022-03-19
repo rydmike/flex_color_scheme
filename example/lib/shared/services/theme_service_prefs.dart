@@ -97,24 +97,24 @@ class ThemeServicePrefs implements ThemeService {
 
   // -------
 
-  /// Loads the advancedView setting used in examples 5.
+  /// Loads the isLargeGridView setting used in examples 5.
   @override
-  Future<bool> advancedView() async {
+  Future<bool> isLargeGridView() async {
     try {
-      final bool value = _prefs.getBool(ThemeService.keyAdvancedView) ??
-          ThemeService.defaultAdvancedView;
+      final bool value = _prefs.getBool(ThemeService.keyIsLargeGridView) ??
+          ThemeService.defaultIsLargeGridView;
       return value;
     } catch (e) {
       debugPrint(e.toString());
-      return ThemeService.defaultAdvancedView;
+      return ThemeService.defaultIsLargeGridView;
     }
   }
 
-  /// Persists the saveAdvancedView setting used in examples 5.
+  /// Persists the isLargeGridView setting used in examples 5.
   @override
-  Future<void> saveAdvancedView(bool value) async {
+  Future<void> saveIsLargeGridView(bool value) async {
     try {
-      await _prefs.setBool(ThemeService.keyAdvancedView, value);
+      await _prefs.setBool(ThemeService.keyIsLargeGridView, value);
     } catch (e) {
       debugPrint(e.toString());
     }
