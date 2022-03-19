@@ -69,13 +69,14 @@ class _HomePageState extends State<HomePage> {
         ),
         menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
+        menuItems: AppData.menuItems,
         // Make Rail width larger when using it on tablet or desktop.
         railWidth: isPhone ? 52 : 66,
         breakpointShowFullMenu: AppData.desktopBreakpoint,
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
-          if (index == 5) {
+          if (index == 0) {
             if (isDark) {
               widget.onThemeModeChanged(ThemeMode.light);
             } else {

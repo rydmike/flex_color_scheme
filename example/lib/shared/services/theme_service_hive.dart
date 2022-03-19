@@ -137,24 +137,24 @@ class ThemeServiceHive implements ThemeService {
 
   // ----------
 
-  /// Loads the advancedView from Hive box for example 5.
+  /// Loads the isLargeGridView from Hive box for example 5.
   @override
-  Future<bool> advancedView() async {
+  Future<bool> isLargeGridView() async {
     try {
-      return _hiveBox.get(ThemeService.keyAdvancedView,
-          defaultValue: ThemeService.defaultAdvancedView) as bool;
+      return _hiveBox.get(ThemeService.keyIsLargeGridView,
+          defaultValue: ThemeService.defaultIsLargeGridView) as bool;
     } catch (e) {
       debugPrint(e.toString());
       // If something goes wrong we return the default value.
-      return ThemeService.defaultAdvancedView;
+      return ThemeService.defaultIsLargeGridView;
     }
   }
 
-  /// Persists the advancedView from Hive box for example 5.
+  /// Persists the isLargeGridView from Hive box for example 5.
   @override
-  Future<void> saveAdvancedView(bool value) async {
+  Future<void> saveIsLargeGridView(bool value) async {
     try {
-      await _hiveBox.put(ThemeService.keyAdvancedView, value);
+      await _hiveBox.put(ThemeService.keyIsLargeGridView, value);
     } catch (e) {
       debugPrint(e.toString());
     }

@@ -45,13 +45,13 @@ class ThemeServiceMem implements ThemeService {
   Future<void> saveUseSubThemes(bool value) async {}
 
   // -----------
-  /// Loads the advancedView setting from mem in example 5.
+  /// Loads the isLargeGridView setting from mem in example 5.
   @override
-  Future<bool> advancedView() async => ThemeService.defaultAdvancedView;
+  Future<bool> isLargeGridView() async => ThemeService.defaultIsLargeGridView;
 
-  /// Persists the advancedView setting to mem in example 5.
+  /// Persists the isLargeGridView setting to mem in example 5.
   @override
-  Future<void> saveAdvancedView(bool value) async {}
+  Future<void> saveIsLargeGridView(bool value) async {}
 
   // -----------
 

@@ -11,8 +11,8 @@ import '../../utils/generate_colorscheme_dart_code.dart';
 import '../dialogs/dart_code_dialog_screen.dart';
 import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
-import 'advanced_view.dart';
-import 'focused_view.dart';
+import 'large_grid_view.dart';
+import 'panel_view.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
@@ -33,6 +33,12 @@ class _HomePageState extends State<HomePage> {
   // Open close/state of each card.
   late List<bool> isCardOpen;
 
+  // Enabled state of each menuItem.
+  late List<bool> menuItemsEnabled;
+
+  // Active state of each menuItem.
+  late List<ResponsiveMenuItemIconState> menuItemsIconState;
+
   // Scroll controller
   final ScrollController scrollController = ScrollController();
 
@@ -49,14 +55,40 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    // Set enabled menu items.
+    menuItemsEnabled =
+        List<bool>.generate(AppData.menuItems.length, (int i) => true);
+    menuItemsEnabled[4] = widget.controller.isLargeGridView;
+    menuItemsEnabled[5] = widget.controller.isLargeGridView;
+
+    // Set menu icons states.
+    menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
+        AppData.menuItems.length,
+        (int i) => ResponsiveMenuItemIconState.primary);
+    menuItemsIconState[1] = widget.controller.isLargeGridView
+        ? ResponsiveMenuItemIconState.secondary
+        : ResponsiveMenuItemIconState.primary;
+
+    // The Cords can only be opened/closed on the large grid view
     isCardOpen = List<bool>.generate(_nrOfCards, (int i) {
-      if (i == 1) {
-        // Always start with code view panel closed.
+      if (i == 1 || i == 0) {
+        // Always start with info and code view panel closed.
         return false;
       } else {
         return true;
       }
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    menuItemsIconState[0] = isLight
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
   }
 
   @override
@@ -109,24 +141,33 @@ class _HomePageState extends State<HomePage> {
         ),
         menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
+        menuItems: AppData.menuItems,
+        menuItemsEnabled: menuItemsEnabled,
+        menuItemsIconState: menuItemsIconState,
         // Callback from menu, using simple index based actions here.
         onSelect: (int index) async {
-          // Open all cards
+          // Set theme-mode light/dark
           if (index == 0) {
-            for (int i = 0; i < isCardOpen.length; i++) {
-              isCardOpen[i] = true;
+            if (isDark) {
+              await widget.controller.setThemeMode(ThemeMode.light);
+            } else {
+              await widget.controller.setThemeMode(ThemeMode.dark);
             }
-            setState(() {});
           }
-          // Close all cards
+          // Toggle advanced view mode true/false
           if (index == 1) {
-            for (int i = 0; i < isCardOpen.length; i++) {
-              isCardOpen[i] = false;
-            }
+            await widget.controller
+                .setAdvancedView(!widget.controller.isLargeGridView);
+            menuItemsEnabled[4] = !menuItemsEnabled[4];
+            menuItemsEnabled[5] = !menuItemsEnabled[5];
+            menuItemsIconState[index] = widget.controller.isLargeGridView
+                ? ResponsiveMenuItemIconState.secondary
+                : ResponsiveMenuItemIconState.primary;
             setState(() {});
           }
           // Copy theme setup code
           if (index == 2) {
+            // ignore: use_build_context_synchronously
             await showCopySetupCodeDialog(context, widget.controller);
           }
           // Copy ColorScheme code
@@ -142,8 +183,22 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           }
-          // Reset theme settings.
+          // Open all cards
           if (index == 4) {
+            for (int i = 0; i < isCardOpen.length; i++) {
+              isCardOpen[i] = true;
+            }
+            setState(() {});
+          }
+          // Close all cards
+          if (index == 5) {
+            for (int i = 0; i < isCardOpen.length; i++) {
+              isCardOpen[i] = false;
+            }
+            setState(() {});
+          }
+          // Reset theme settings.
+          if (index == 6) {
             final bool? reset = await showDialog<bool?>(
               context: context,
               builder: (BuildContext context) {
@@ -154,28 +209,15 @@ class _HomePageState extends State<HomePage> {
               await widget.controller.resetAllToDefaults();
             }
           }
-          // Set theme-mode light/dark
-          if (index == 5) {
-            if (isDark) {
-              await widget.controller.setThemeMode(ThemeMode.light);
-            } else {
-              await widget.controller.setThemeMode(ThemeMode.dark);
-            }
-          }
-          // Toggle advanced view mode true/false
-          if (index == 6) {
-            await widget.controller
-                .setAdvancedView(!widget.controller.advancedView);
-          }
         },
-        body: widget.controller.advancedView
-            ? AdvancedView(
+        body: widget.controller.isLargeGridView
+            ? LargeGridView(
                 controller: widget.controller,
                 scrollController: scrollController,
                 isCardOpen: isCardOpen,
                 toggleCard: toggleCard,
               )
-            : FocusedView(controller: widget.controller),
+            : PanelView(controller: widget.controller),
       ),
     );
   }

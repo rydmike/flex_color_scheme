@@ -34,11 +34,12 @@ import '../panels/text_theme_settings/primary_text_theme_settings.dart';
 import '../panels/text_theme_settings/text_theme_settings.dart';
 import 'panel_selector.dart';
 
-/// This is the smaller mor focused vied of the Themes Playground.
+/// This is the smaller mor focused single panel view of the Themes Playground.
 ///
-/// It shows only one panel at a time as a PageView.
-class FocusedView extends StatelessWidget {
-  const FocusedView({
+/// It shows only one panel at a time as a PageView. This is a nice layout
+/// on mid size screen, like tablets, might be preferable on a phone too.
+class PanelView extends StatelessWidget {
+  const PanelView({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -72,7 +73,7 @@ class FocusedView extends StatelessWidget {
             onChanged: (int index) {
               controller.setViewIndex(index);
               pageController.animateToPage(index,
-                  duration: const Duration(milliseconds: 350),
+                  duration: const Duration(milliseconds: 400),
                   curve: Curves.easeOutCubic);
             },
           ),

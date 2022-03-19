@@ -2,6 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../widgets/app/responsive_scaffold.dart';
+
 /// App static functions and constants used in the example applications.
 ///
 /// In a real app you probably prefer putting these into different static
@@ -111,4 +113,39 @@ class AppData {
       letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
     ),
   );
+
+  static const List<ResponsiveMenuItems> menuItems = <ResponsiveMenuItems>[
+    ResponsiveMenuItems(
+      label: 'Dark mode',
+      labelSecondary: 'Light mode',
+      icon: Icons.bedtime,
+      iconSecondary: Icons.wb_sunny,
+    ),
+    ResponsiveMenuItems(
+      label: 'Grid view',
+      labelSecondary: 'Page view',
+      icon: Icons.calendar_view_month_outlined,
+      iconSecondary: Icons.view_array_outlined,
+    ),
+    ResponsiveMenuItems(
+      label: 'Copy theme code',
+      icon: Icons.integration_instructions_outlined,
+    ),
+    ResponsiveMenuItems(
+      label: 'Copy ColorScheme',
+      icon: Icons.palette_outlined,
+    ),
+    ResponsiveMenuItems(
+      label: 'Expand all',
+      icon: Icons.open_in_full_outlined,
+    ),
+    ResponsiveMenuItems(
+      label: 'Close all',
+      icon: Icons.close_fullscreen_outlined,
+    ),
+    ResponsiveMenuItems(
+      label: 'Reset settings',
+      icon: Icons.replay_outlined,
+    ),
+  ];
 }

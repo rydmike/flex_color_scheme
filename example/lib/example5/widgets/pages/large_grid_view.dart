@@ -30,11 +30,13 @@ import '../panels/text_field_settings/text_field_settings.dart';
 import '../panels/text_theme_settings/primary_text_theme_settings.dart';
 import '../panels/text_theme_settings/text_theme_settings.dart';
 
-/// This is the super large screen view of the Themes Playground.
+/// This is the super large masonry grid view layout of the Themes Playground.
 ///
 /// It is nice on a 4k screen where you can see a lot of settings in one glance.
-class AdvancedView extends StatefulWidget {
-  const AdvancedView({
+/// It works thanks to collapsible panels and responsive layout down to
+/// phone size too, but a page view may be more convenient on eg tablet size.
+class LargeGridView extends StatefulWidget {
+  const LargeGridView({
     Key? key,
     required this.controller,
     required this.scrollController,
@@ -47,10 +49,10 @@ class AdvancedView extends StatefulWidget {
   final ValueChanged<int> toggleCard;
 
   @override
-  State<AdvancedView> createState() => _AdvancedViewState();
+  State<LargeGridView> createState() => _LargeGridViewState();
 }
 
-class _AdvancedViewState extends State<AdvancedView>
+class _LargeGridViewState extends State<LargeGridView>
     with AutomaticKeepAliveClientMixin {
   // final ScrollController scrollController = ScrollController();
 
