@@ -4,23 +4,28 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 ## v5.0.0-dev.2 - March 21, 2022
 
-###Targets with the dev.2 release are:
+**BREAKING**
 
-* Documentation updates. The bulk of the readme will be migrated to its own site.
-* Minor fixes and cleaning, hopefully only internal.
-* Completion of tests.
-* Completion of the removal of in version 4 deprecated property `surfaceStyle`. 
-  As stated in v4.2, this was to be done for v5.0.0 stable release.
-* Improvements to Themes Playground, fewer light/dark and widget coupled
-  properties. Maybe image based theme and maybe an alternative UI.
+* Completed in version 4.0.0 planned, for version 5.0.0, removal of 
+  deprecated property `surfaceStyle`, including all its implementing classes, 
+  enums and helpers:
+  - Removed property: `surfaceStyle` in `FlexColorScheme.light`.
+  - Removed property: `surfaceStyle` in `FlexColorScheme.dark`.
+  - Removed: enum `FlexSurface`, that `surfaceStyle` where.
+  - Removed: factory `FlexSchemeSurfaceColors.from` that was used to create
+    surface using the `FlexSurface`. The factory `FlexSchemeSurfaceColors.blend`
+    replaced in version 4.0.0 already when using `surfaceMode` and `blendLevel`.
+  - Removed tests and modified tests needing to consider above removals.
 
-### Completed targets:
+**FIX**
 
 * Pub.dev analysis does not like document references to deprecated Flutter
   properties. Changed the [primaryVariant] and [secondaryVariant] references
   in document comments to `primaryVariant` and `secondaryVariant`. Nor does it
   like when you use tests to deprecated Flutter SDK members, removed them too,
   they were not needed either after some redesign of a few tests.
+
+**CHANGE**
 
 * Changed the priority in FlexColorScheme when using direct input color 
   properties, `colorScheme` input and using key color seeded ColorScheme
@@ -33,15 +38,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   is `primary`, `secondary`, `tertiary` or their container colors. In that case
   the `keyColors`, "keep" property determines if those colors are kept or not.
 
-* Completely removed deprecated property `surfaceStyle`, including its
-  implementing classes, enums and helpers:
-  - Removed property: `surfaceStyle` in `FlexColorScheme.light`.
-  - Removed property: `surfaceStyle` in `FlexColorScheme.dark`.
-  - Removed: enum `FlexSurface`, that `surfaceStyle` where.
-  - Removed: factory `FlexSchemeSurfaceColors.from` that was used to create
-    surface using the `FlexSurface`. The factory `FlexSchemeSurfaceColors.blend`
-    replaced in version 4.0.0 already when using `surfaceMode` and `blendLevel`.
-  - Removed tests and modified tests needing to consider above removals.
+**NEW**
 
 * Added `SchemeColor` based theming of `SnackBar` background color via 
   `snackBarBackgroundSchemeColor` in `FlexSubThemesData` and support for it 
@@ -53,11 +50,13 @@ All notable changes to the **FlexColorScheme** package are documented here.
   that had been made up for **dev.1** release to better match the design intent
   of those colors for the new Material 3 `ColorScheme`.
 
+**DEMO APPS**
+
 * **Themes Playground** improvements:
   - First version of a new single panel "Page" view, versus the previous 
-    large masonry grid view. Both
-    views can be used and switch to based on what is appropriate when using 
-    different media sizes. 
+    large masonry grid view. Both views can be used and switch to based on what 
+    is appropriate when using different media sizes. It is just a quick version
+    of it and is not intended to be perfect design, but seem to work well enough.
   - The switches to keep main input colors for primary, secondary, tertiary
     and their containers, where separated so that their state and code 
     generation for light and dark theme mode are separate. This makes them
@@ -74,6 +73,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
   - Fixed broken code gen for dark mode blend level. New code gen style for
     dark mode, from light mode computed dark theme. The code gen also generally
     does not add any code when using API default values.
+
+**TESTS**
 
 * Completed test updates. Now 1467 tests, coverage > 99.8%. Many new color value
   tests are still missing. Not critical, they are just const values, but their 
@@ -125,6 +126,7 @@ breaking changes, and most of them are rarely used properties, so migration
 should be relatively easy, despite the long list of changes and new features.
 
 **BREAKING**  
+
 * Requires at least Flutter stable 2.10.0.This release uses new M3 `ColorScheme` 
   properties that are not included before Flutter version 2.10.0, as well 
   as the `ThemeData` flag `useMaterial3`.
@@ -852,7 +854,7 @@ to the TODO section at the end of this page and read more
   and integer `blendLevel`. Consider using them instead of previous 
   `surfaceStyle`.
   The surface color blend style `surfaceStyle` is still default, and not yet
-  deprecated, but may be so in later versions. It is not really needed anymore,
+  deprecated, but may be so in version 5. It is not really needed anymore,
   but there was no major reason to break things by removing it either.
 * **New:** Major new feature; easy sub-theming of Flutter SDK UI widgets.  
   * You can opt in on nice looking opinionated widget sub-themes by setting
