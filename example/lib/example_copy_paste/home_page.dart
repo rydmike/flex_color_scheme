@@ -391,11 +391,16 @@ class _PrimaryTextThemeShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StatefulHeaderCard(
-      color: Theme.of(context).colorScheme.primary,
       title: const Text('Themed PrimaryTextTheme'),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: PrimaryTextThemeShowcase(),
+      child: SizedBox(
+        width: double.infinity,
+        child: Material(
+          color: Theme.of(context).colorScheme.primary,
+          child: const Padding(
+            padding: EdgeInsets.all(16),
+            child: PrimaryTextThemeShowcase(),
+          ),
+        ),
       ),
     );
   }

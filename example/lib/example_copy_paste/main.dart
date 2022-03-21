@@ -76,9 +76,20 @@ class _DemoAppState extends State<DemoApp> {
           fabUseShape: false,
           popupMenuOpacity: 0.95,
           bottomNavigationBarOpacity: 0.95,
+          navigationRailLabelType: NavigationRailLabelType.all,
           navigationBarOpacity: 0.95,
           navigationRailOpacity: 0.95,
-          navigationRailLabelType: NavigationRailLabelType.none,
+          //
+          // Some wild demo custom icons size examples, not available in
+          // Themes Playground generated API. There are some more APIs not
+          // available via code generated from the Themes Playground app.
+          //
+          // bottomNavigationBarSelectedIconSize: 30,
+          // bottomNavigationBarUnselectedIconSize: 20,
+          // navigationBarSelectedIconSize: 34,
+          // navigationBarUnselectedIconSize: 18,
+          // navigationRailSelectedIconSize: 40,
+          // navigationRailUnselectedIconSize: 25,
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
