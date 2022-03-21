@@ -547,11 +547,13 @@ should be relatively easy, despite the long list of changes and new features.
   on color should be used on the `error` colors. In dark mode for the default
   error `FlexColor.materialDarkError` and the high contrast dark mode error
   color `FlexColor.materialDarkErrorHc`, this resulted in correctly computed
-  contrast color value **white** being used on them. Regardless of this the
-  Material 2 guide specifies and Flutter SDK uses the on color for these 
-  colors as **black**. These two cases were added as special considerations
-  to return black color for these two particular cases, even if the Flutter 
-  contrast color computation says it should be white, but M2 spec is black.
+  contrast color value **white** being used on them. Regardless of this, the
+  Material 2 guide specifies and Flutter SDK uses, **black** as the on color 
+  for these colors. These two cases were added as special considerations
+  to return black color for these two particular color cases, even if the Flutter 
+  contrast color computation says it should be white, but since M2 spec is black,
+  we decided to go with that despite this. It is a borderline case, both work
+  but results in different style.
 
 **KNOWN ISSUES**
 
