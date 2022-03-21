@@ -49,6 +49,9 @@ class HeaderCard extends StatelessWidget {
 
   /// Additional content displayed below the title.
   ///
+  /// Normal you would not use the property in the HeaderCard, but it
+  /// is possible if required.
+  ///
   /// Typically a [Text] widget.
   final Widget? subtitle;
 
@@ -100,29 +103,44 @@ class HeaderCard extends StatelessWidget {
   /// The child to be revealed.
   final Widget? child;
 
+  static bool _colorsAreClose(Color a, Color b) {
+    final int dR = a.red - b.red;
+    final int dG = a.green - b.green;
+    final int dB = a.blue - b.blue;
+    final int distance = dR * dR + dG * dG + dB * dB;
+    // Calculating orthogonal distance between colors should take the the
+    // square root as well, but we don't need that extra compute step.
+    // We just need a number to represents some relative closeness of the
+    // colors. We use this to determine a level when we should draw a border
+    // around our panel.
+    // This value was just determined by visually testing what was a good
+    // trigger for when the border appeared and disappeared during testing.
+    if (distance < 120) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
-
-    final bool isDark = theme.brightness == Brightness.dark;
-    // Scaling for the blend value, used to tune the look a bit.
-    final int blendFactor = isDark ? 3 : 2;
-
+    final Color background = theme.scaffoldBackgroundColor;
     // Use passed in color for the Card, or default themed Card theme color.
     final Color cardColor = color ?? theme.cardColor;
-    // Compute a header color with fixed primary blend, make a stronger tint
-    // of current blended on card color using same primary as card has, if any.
-    final Color headerColor = Color.alphaBlend(
-        scheme.primary.withAlpha(5 * blendFactor), theme.cardColor);
-
+    // Compute a header color with fixed primary blend from the card color,
+    final Color headerColor =
+        Color.alphaBlend(scheme.primary.withAlpha(20), cardColor);
     // Get the card's ShapeBorder from the theme card shape
     ShapeBorder? shapeBorder = theme.cardTheme.shape;
-    // Make a shape border if card or its header color is equal to scaffold
-    // background color, because if we have a theme where that happens
-    // we want to separate the header card from the background with a border.
-    if (cardColor == theme.scaffoldBackgroundColor ||
-        headerColor == theme.scaffoldBackgroundColor) {
+    final bool useHeading =
+        title != null || subtitle != null || leading != null;
+    // Make a shape border if Card or its header color are close in color
+    // to the scaffold background color, because if that happens we want to
+    // separate the header card from the background with a border.
+    if (_colorsAreClose(cardColor, background) ||
+        (_colorsAreClose(headerColor, background) && useHeading)) {
       // If we had one shape, copy in a border side to it.
       if (shapeBorder is RoundedRectangleBorder) {
         shapeBorder = shapeBorder.copyWith(
@@ -168,14 +186,15 @@ class HeaderCard extends StatelessWidget {
       elevation: elevation,
       child: Column(
         children: <Widget>[
-          Theme(
-            data: theme.copyWith(cardColor: headerColor),
-            child: Material(
+          if (useHeading)
+            Material(
               type: MaterialType.card,
+              color: headerColor,
               child: ListTile(
                 contentPadding: headerPadding,
                 leading: leading,
                 title: cardTitle,
+                subtitle: subtitle,
                 trailing: (enabled && onTap != null)
                     ? ExpandIcon(
                         size: 32,
@@ -189,7 +208,6 @@ class HeaderCard extends StatelessWidget {
                 onTap: onTap?.call,
               ),
             ),
-          ),
           AnimatedSwitcher(
             duration: duration,
             transitionBuilder: (Widget child, Animation<double> animation) {

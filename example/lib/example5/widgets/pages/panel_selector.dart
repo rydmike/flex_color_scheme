@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // The width size of the scrolling button.
 const double _kWidthOfScrollItem = 115;
 
-/// Horizontal panel selector of.
+/// Horizontal panel selector of active panel page to view.
 class PanelSelector extends StatefulWidget {
   const PanelSelector({
     Key? key,
@@ -24,10 +24,11 @@ class _PanelSelectorState extends State<PanelSelector> {
   @override
   void initState() {
     super.initState();
-    viewIndex = widget.index; //widget.controller.viewIndex;
+    viewIndex = widget.index;
     scrollController = ScrollController(
-        keepScrollOffset: true,
-        initialScrollOffset: _kWidthOfScrollItem * viewIndex);
+      keepScrollOffset: true,
+      initialScrollOffset: _kWidthOfScrollItem * viewIndex,
+    );
   }
 
   @override
@@ -38,46 +39,51 @@ class _PanelSelectorState extends State<PanelSelector> {
 
   @override
   void didUpdateWidget(covariant PanelSelector oldWidget) {
-    // Index got updated externally, by the page view in this case
-    // and dependencies changed, animate to new index.
+    super.didUpdateWidget(oldWidget);
     if (widget.index != viewIndex) {
       viewIndex = widget.index;
       scrollController.animateTo(_kWidthOfScrollItem * viewIndex,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic);
     }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: _kWidthOfScrollItem + 15,
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(12),
-              controller: scrollController,
-              physics: const ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: _panelItems.length,
-              itemBuilder: (BuildContext context, int index) {
-                return PanelButton(
-                  item: _panelItems[index],
-                  onSelect: () {
-                    scrollController.animateTo(_kWidthOfScrollItem * index,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeOutCubic);
-                    viewIndex = index;
-                    widget.onChanged(index);
-                  },
-                  selected: widget.index == index,
-                );
-              },
+    final MediaQueryData media = MediaQuery.of(context);
+    // Paddings so content shows up in visible area when we use Scaffold props
+    // extendBodyBehindAppBar and extendBody.
+    final double topPadding = media.padding.top; // + kToolbarHeight;
+    return Padding(
+      padding: EdgeInsets.only(top: topPadding),
+      child: SizedBox(
+        height: _kWidthOfScrollItem + 15,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(12),
+                controller: scrollController,
+                physics: const ClampingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: _panelItems.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return PanelButton(
+                    item: _panelItems[index],
+                    onSelect: () {
+                      scrollController.animateTo(_kWidthOfScrollItem * index,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeOutCubic);
+                      viewIndex = index;
+                      widget.onChanged(index);
+                    },
+                    selected: widget.index == index,
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -90,14 +96,38 @@ class PanelButton extends StatelessWidget {
     required this.selected,
     required this.onSelect,
   }) : super(key: key);
-  final PanelItem item;
+  final _PanelItem item;
   final bool selected;
   final VoidCallback onSelect;
+
+  static bool _colorsAreClose(Color a, Color b) {
+    final int dR = a.red - b.red;
+    final int dG = a.green - b.green;
+    final int dB = a.blue - b.blue;
+    final int distance = dR * dR + dG * dG + dB * dB;
+    // Calculating orthogonal distance between colors should take the the
+    // square root as well, but we don't need that extra compute step.
+    // We just need a number to represents some relative closeness of the
+    // colors. We use this to determine a level when we should draw a border
+    // around our panel.
+    // This value was just determined by visually testing what was a good
+    // trigger for when the border appeared and disappeared during testing.
+    if (distance < 120) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
+    final Color cardColor = theme.cardColor;
+    final Color scaffoldColor = theme.scaffoldBackgroundColor;
+    final Color background =
+        Color.alphaBlend(scheme.primary.withAlpha(15), cardColor);
+    final bool closeColors = _colorsAreClose(background, scaffoldColor);
     final bool isLight = theme.brightness == Brightness.light;
 
     final Color iconColor = isLight
@@ -109,13 +139,20 @@ class PanelButton extends StatelessWidget {
 
     // Get the card's ShapeBorder from the theme card shape
     ShapeBorder? shapeBorder = theme.cardTheme.shape;
-    // Make a shape border if card or its header color is equal to scaffold
-    // background color, because if we have a theme where that happens
-    // we want to separate the header card from the background with a border.
+    // Make a shape border if our background color is close in color
+    // to the scaffold background color, because if that happens we want to
+    // separate it from the background with a border.
     // If we had one shape, copy in a border side to it.
     if (shapeBorder is RoundedRectangleBorder) {
       shapeBorder = shapeBorder.copyWith(
-        side: BorderSide(color: iconColor, width: 5),
+        side: selected
+            ? BorderSide(color: iconColor, width: 5)
+            : closeColors
+                ? BorderSide(
+                    color: theme.dividerColor,
+                    width: 1,
+                  )
+                : BorderSide.none,
       );
       // If
     } else {
@@ -125,18 +162,23 @@ class PanelButton extends StatelessWidget {
       // RoundedRectangleBorder, we don't know what it was, just let it be.
       shapeBorder ??= RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
-        side: BorderSide(
-          color: scheme.primary.withAlpha(0xAA),
-          width: 5,
-        ),
+        side: selected
+            ? BorderSide(color: iconColor, width: 5)
+            : closeColors
+                ? BorderSide(
+                    color: theme.dividerColor,
+                    width: 1,
+                  )
+                : BorderSide.none,
       );
     }
 
     return SizedBox(
       width: _kWidthOfScrollItem,
       child: Card(
-        color: null, //selected ? scheme.primaryContainer.lighten(10) : null,
-        shape: selected ? shapeBorder : null,
+        color: background,
+        // null, //selected ? scheme.primaryContainer.lighten(10) : null,
+        shape: shapeBorder,
         child: InkWell(
           onTap: onSelect,
           child: Padding(
@@ -167,8 +209,8 @@ class PanelButton extends StatelessWidget {
 }
 
 @immutable
-class PanelItem {
-  const PanelItem({
+class _PanelItem {
+  const _PanelItem({
     required this.label,
     required this.icon,
   });
@@ -177,112 +219,112 @@ class PanelItem {
   final IconData icon;
 }
 
-const List<PanelItem> _panelItems = <PanelItem>[
-  PanelItem(
+const List<_PanelItem> _panelItems = <_PanelItem>[
+  _PanelItem(
     label: 'Introduction',
     icon: Icons.info_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Input\ncolors',
     icon: Icons.palette_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Seeded\nColorScheme',
     icon: Icons.colorize_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Surface\nblends',
     icon: Icons.invert_colors_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Effective\ncolors',
     icon: Icons.gradient_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Component\nthemes',
     icon: Icons.widgets_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'TextField',
     icon: Icons.pin_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'AppBar',
     icon: Icons.web_asset_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'TabBar',
     icon: Icons.tab_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'NavigationBar',
     icon: Icons.video_label_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Bottom\nNavigationBar',
     icon: Icons.video_label_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Navigation\nRail',
     icon: Icons.view_sidebar_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'AndroidBar',
     icon: Icons.android_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Material\nButtons',
     icon: Icons.crop_16_9_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'FAB\nToggleButtons',
     icon: Icons.add_circle,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Switch\nCheckBox',
     icon: Icons.toggle_on_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'ListTile',
     icon: Icons.dns_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Dialog',
     icon: Icons.branding_watermark_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'TimePicker\nDialog',
     icon: Icons.schedule_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'DatePicker\nDialog',
     icon: Icons.event_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Material\nBanner, Snack',
     icon: Icons.call_to_action_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Card',
     icon: Icons.picture_in_picture_alt_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Text\nTheme',
     icon: Icons.font_download_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Primary\nTextTheme',
     icon: Icons.font_download_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Page\nExamples',
     icon: Icons.article_outlined,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Widget\nshowcase',
     icon: Icons.flutter_dash,
   ),
-  PanelItem(
+  _PanelItem(
     label: 'Theme\ncode',
     icon: Icons.integration_instructions_outlined,
   ),

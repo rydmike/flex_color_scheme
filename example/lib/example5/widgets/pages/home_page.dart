@@ -39,9 +39,6 @@ class _HomePageState extends State<HomePage> {
   // Active state of each menuItem.
   late List<ResponsiveMenuItemIconState> menuItemsIconState;
 
-  // Scroll controller
-  final ScrollController scrollController = ScrollController();
-
   // Cards in the masonry grid, must match the number we actually add to it!
   static const int _nrOfCards = 26;
 
@@ -89,12 +86,6 @@ class _HomePageState extends State<HomePage> {
     menuItemsIconState[0] = isLight
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
-  }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -213,7 +204,6 @@ class _HomePageState extends State<HomePage> {
         body: widget.controller.isLargeGridView
             ? LargeGridView(
                 controller: widget.controller,
-                scrollController: scrollController,
                 isCardOpen: isCardOpen,
                 toggleCard: toggleCard,
               )

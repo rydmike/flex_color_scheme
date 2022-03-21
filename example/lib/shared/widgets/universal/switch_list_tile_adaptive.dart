@@ -110,7 +110,7 @@ class SwitchListTileAdaptive extends StatelessWidget {
               .switchTheme
               .thumbColor
               ?.resolve(<MaterialState>{MaterialState.selected}) ??
-          Theme.of(context).colorScheme.secondary,
+          Theme.of(context).toggleableActiveColor,
       value: value,
       onChanged: onChanged,
       title: title,
