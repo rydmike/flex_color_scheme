@@ -111,86 +111,108 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
     });
   }
 
+  static bool _colorsAreClose(Color a, Color b) {
+    final int dR = a.red - b.red;
+    final int dG = a.green - b.green;
+    final int dB = a.blue - b.blue;
+    final int distance = dR * dR + dG * dG + dB * dB;
+    // Calculating orthogonal distance between colors should take the the
+    // square root as well, but we don't need that extra compute step.
+    // We just need a number to represents some relative closeness of the
+    // colors. We use this to determine a level when we should draw a border
+    // around our panel.
+    // This value was just determined by visually testing what was a good
+    // trigger for when the border appeared and disappeared during testing.
+    if (distance < 120) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
-    final bool isDark = theme.brightness == Brightness.dark;
-    // Scaling for the blend value, used to tune the look a bit.
-    final int blendFactor = isDark ? 3 : 2;
-
-    // start with no extra blend on card, assume it is bit different from
-    // scaffold background where this Card is designed to be placed.
-    Color cardColor = theme.cardColor;
-    // Compute a header color with fixed primary blend, make a stronger tint
-    // of current blended on card color using same primary as card has, if any.
-    Color headerColor =
-        Color.alphaBlend(scheme.primary.withAlpha(5 * blendFactor), cardColor);
-    // If card or its header color, is equal to scaffold background, we will
-    // adjust both and make them more primary tinted. This happens e.g. when we
-    // use not blend level, or with the all level blend mode. In this
-    // design we want the Card on the scaffold to always have a slightly
-    // different background color from scaffold background where it is placed,
-    // not necessarily a lot, but always a bit at least.
-    if (cardColor == theme.scaffoldBackgroundColor ||
-        headerColor == theme.scaffoldBackgroundColor) {
-      cardColor = Color.alphaBlend(
-          scheme.primary.withAlpha(4 * blendFactor), cardColor);
-      headerColor = Color.alphaBlend(
-          scheme.primary.withAlpha(4 * blendFactor), headerColor);
-    }
-    // If it was header color that was equal, the adjustment on card, may
-    // have caused card body to become equal to scaffold background, let's
-    // check for it and adjust only it once again if it happened. Very unlikely
-    // that this happens, but it is possible.
-    if (cardColor == theme.scaffoldBackgroundColor) {
-      cardColor = Color.alphaBlend(
-          scheme.primary.withAlpha(2 * blendFactor), cardColor);
+    final Color background = theme.scaffoldBackgroundColor;
+    // Use passed in color for the Card, or default themed Card theme color.
+    final Color cardColor = widget.color ?? theme.cardColor;
+    // Compute a header color with fixed primary blend from the card color,
+    final Color headerColor =
+        Color.alphaBlend(scheme.primary.withAlpha(20), cardColor);
+    // Get the card's ShapeBorder from the theme card shape
+    ShapeBorder? shapeBorder = theme.cardTheme.shape;
+    final bool useHeading = widget.title != null ||
+        widget.subtitle != null ||
+        widget.leading != null;
+    // Make a shape border if Card or its header color are close in color
+    // to the scaffold background color, because if that happens we want to
+    // separate the header card from the background with a border.
+    if (_colorsAreClose(cardColor, background) ||
+        (_colorsAreClose(headerColor, background) && useHeading)) {
+      // If we had one shape, copy in a border side to it.
+      if (shapeBorder is RoundedRectangleBorder) {
+        shapeBorder = shapeBorder.copyWith(
+          side: BorderSide(
+            color: theme.dividerColor,
+            width: 1,
+          ),
+        );
+        // If
+      } else {
+        // If border was null, make one matching Card default, but with a
+        // BorderSide, if it was not null, we leave it as it was, it means it
+        // has some other preexisting ShapeBorder, but it was not a
+        // RoundedRectangleBorder, we don't know what it was, just let it be.
+        shapeBorder ??= RoundedRectangleBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(4)),
+          side: BorderSide(
+            color: theme.dividerColor,
+            width: 1,
+          ),
+        );
+      }
     }
 
     // Force title widget for Card header to use opinionated bold style,
     // if we have a title, boldTitle is true and title was a Text.
-    Widget? usedTitle = widget.title;
-    if (usedTitle != null && usedTitle is Text && widget.boldTitle) {
-      final Text textTitle = usedTitle;
-      final TextStyle? usedTitleStyle = usedTitle.style;
-      final String useText = textTitle.data ?? '';
-      usedTitle = Text(
-        useText,
-        style: usedTitleStyle?.copyWith(fontWeight: FontWeight.bold) ??
+    Widget? cardTitle = widget.title;
+    if (cardTitle != null && cardTitle is Text && widget.boldTitle) {
+      final Text textTitle = cardTitle;
+      final TextStyle? cardTitleStyle = cardTitle.style;
+      final String cardTitleText = textTitle.data ?? '';
+      cardTitle = Text(
+        cardTitleText,
+        style: cardTitleStyle?.copyWith(fontWeight: FontWeight.bold) ??
             const TextStyle(fontWeight: FontWeight.bold),
       );
     }
 
-    // If in rare occasion we had passed a background card color, we just
-    // use that as color. This is intended to be an exception when we need
-    // to present something in the card that must be on a certain color.
-    // Like primary text theme, text must be on primary color.
-    if (widget.color != null) cardColor = widget.color!;
-
     return Card(
       margin: widget.margin,
       color: cardColor,
+      shape: shapeBorder,
       child: Column(
         children: <Widget>[
-          Theme(
-            data: theme.copyWith(cardColor: headerColor),
-            child: Material(
-              type: MaterialType.card,
-              child: ListTile(
-                contentPadding: widget.headerPadding,
-                leading: widget.leading,
-                title: usedTitle,
-                trailing: ExpandIcon(
-                  size: 32,
-                  isExpanded: _isOpen,
-                  padding: EdgeInsets.zero,
-                  onPressed: (_) {
-                    _handleTap();
-                  },
-                ),
-                onTap: _handleTap,
-              ),
+          Material(
+            type: MaterialType.card,
+            color: headerColor,
+            child: ListTile(
+              contentPadding: widget.headerPadding,
+              leading: widget.leading,
+              title: cardTitle,
+              subtitle: widget.subtitle,
+              trailing: widget.enabled
+                  ? ExpandIcon(
+                      size: 32,
+                      isExpanded: _isOpen,
+                      padding: EdgeInsets.zero,
+                      onPressed: (_) {
+                        _handleTap();
+                      },
+                    )
+                  : null,
+              onTap: widget.enabled ? _handleTap : null,
             ),
           ),
           AnimatedSwitcher(

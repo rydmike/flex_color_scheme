@@ -1118,142 +1118,248 @@ void main() {
       expect(FlexColor.redWineDarkTertiaryContainer, const Color(0xFF930012));
     });
 
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown', () {
       expect(FlexColor.purpleBrownName, 'Purple brown');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown', () {
       expect(
         FlexColor.purpleBrownDescription,
         'Purple brown tinted aubergine and eggplant colored theme',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown light', () {
       expect(FlexColor.purpleBrownLightPrimary, const Color(0xFF450A0F));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown light', () {
       expect(
           FlexColor.purpleBrownLightPrimaryContainer, const Color(0xFFB9A6A8));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown light', () {
+      expect(FlexColor.purpleBrownLightPrimaryVariant, const Color(0xFF682A2C));
+    });
+    test('FC5 colors Purple brown light', () {
       expect(FlexColor.purpleBrownLightSecondary, const Color(0xFF60234F));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown light', () {
+      expect(FlexColor.purpleBrownLightSecondaryContainer,
+          const Color(0xFFE9CEDD));
+    });
+    test('FC5 colors Purple brown light', () {
+      expect(FlexColor.purpleBrownLightSecondaryVariant,
+          FlexColor.purpleBrownLightTertiary);
+    });
+    test('FC5 colors Purple brown light', () {
       expect(FlexColor.purpleBrownLightTertiary, const Color(0xFF4A0635));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown light', () {
+      expect(
+          FlexColor.purpleBrownLightTertiaryContainer, const Color(0xFFE3B0C5));
+    });
+    test('FC5 colors Purple brown dark', () {
       expect(FlexColor.purpleBrownDarkPrimary, const Color(0xFFA98085));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown dark', () {
       expect(
           FlexColor.purpleBrownDarkPrimaryContainer, const Color(0xFF682A2C));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown dark', () {
+      expect(FlexColor.purpleBrownDarkPrimaryVariant, const Color(0xFF73494A));
+    });
+    test('FC5 colors Purple brown dark', () {
       expect(FlexColor.purpleBrownDarkSecondary, const Color(0xFF975384));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Purple brown dark', () {
+      expect(
+          FlexColor.purpleBrownDarkSecondaryContainer, const Color(0xFF6A2357));
+    });
+    test('FC5 colors Purple brown dark', () {
+      expect(FlexColor.purpleBrownDarkSecondaryVariant,
+          FlexColor.purpleBrownDarkTertiary);
+    });
+    test('FC5 colors Purple brown dark', () {
       expect(FlexColor.purpleBrownDarkTertiary, const Color(0xFF5F4C5A));
+    });
+    test('FC5 colors Purple brown dark', () {
+      expect(
+          FlexColor.purpleBrownDarkTertiaryContainer, const Color(0xFF501A3C));
     });
 
     test('FC5 colors', () {
       expect(FlexColor.greenName, 'Green forest');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green forest', () {
       expect(
         FlexColor.greenDescription,
         'Green color theme, based on Material green and cyan colors',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green forest', () {
       expect(FlexColor.greenLightPrimary, const Color(0xFF2E7D32));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green forest light', () {
       expect(FlexColor.greenLightPrimaryContainer, const Color(0xFFA5D6A7));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green forest light', () {
+      expect(FlexColor.greenLightPrimaryVariant, const Color(0xFF1B5E20));
+    });
+    test('FC5 colors Green forest light', () {
       expect(FlexColor.greenLightSecondary, const Color(0xFF00695C));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green forest light', () {
+      expect(FlexColor.greenLightSecondaryContainer, const Color(0xFF7DCEC4));
+    });
+    test('FC5 colors Green forest light', () {
+      expect(
+          FlexColor.greenLightSecondaryVariant, FlexColor.greenLightTertiary);
+    });
+    test('FC5 colors Green forest light', () {
       expect(FlexColor.greenLightTertiary, const Color(0xFF004D40));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green forest light', () {
+      expect(FlexColor.greenLightTertiaryContainer, const Color(0xFF59B1A1));
+    });
+    test('FC5 colors Green forest dark', () {
       expect(FlexColor.greenDarkPrimary, const Color(0xFFA5D6A7));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green forest dark', () {
       expect(FlexColor.greenDarkPrimaryContainer, const Color(0xFF1B5E20));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green forest dark', () {
+      expect(FlexColor.greenDarkPrimaryVariant, const Color(0xFF81C784));
+    });
+    test('FC5 colors Green forest dark', () {
       expect(FlexColor.greenDarkSecondary, const Color(0xFF80CBC4));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green forest dark', () {
+      expect(FlexColor.greenDarkSecondaryContainer, const Color(0xFF00695C));
+    });
+    test('FC5 colors Green forest dark', () {
+      expect(FlexColor.greenDarkSecondaryVariant, FlexColor.greenDarkTertiary);
+    });
+    test('FC5 colors Green forest dark', () {
       expect(FlexColor.greenDarkTertiary, const Color(0xFF4DB6AC));
     });
+    test('FC5 colors Green forest dark', () {
+      expect(FlexColor.greenDarkTertiaryContainer, const Color(0xFF05514A));
+    });
 
-    test('FC5 colors', () {
+    test('FC5 colors Green money', () {
       expect(FlexColor.moneyName, 'Green money');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green money', () {
       expect(
         FlexColor.moneyDescription,
         'Green money and finance style color theme',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green money light', () {
       expect(FlexColor.moneyLightPrimary, const Color(0xFF264E36));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green money light', () {
       expect(FlexColor.moneyLightPrimaryContainer, const Color(0xFF94BDA5));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green money light', () {
+      expect(FlexColor.moneyLightPrimaryVariant, const Color(0xFF224430));
+    });
+    test('FC5 colors Green money light', () {
       expect(FlexColor.moneyLightSecondary, const Color(0xFF797b3a));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green money light', () {
+      expect(FlexColor.moneyLightSecondaryContainer, const Color(0xffbfc0a0));
+    });
+    test('FC5 colors Green money light', () {
+      expect(
+          FlexColor.moneyLightSecondaryVariant, FlexColor.moneyLightTertiary);
+    });
+    test('FC5 colors Green money light', () {
       expect(FlexColor.moneyLightTertiary, const Color(0xFF555729));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green money light', () {
+      expect(FlexColor.moneyLightTertiaryContainer, const Color(0xFF9EA089));
+    });
+    test('FC5 colors Green money dark', () {
       expect(FlexColor.moneyDarkPrimary, const Color(0xFF7AB893));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green money dark', () {
       expect(FlexColor.moneyDarkPrimaryContainer, const Color(0xFF224430));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green money dark', () {
+      expect(FlexColor.moneyDarkPrimaryVariant, const Color(0xFF6AAF85));
+    });
+    test('FC5 colors Green money dark', () {
       expect(FlexColor.moneyDarkSecondary, const Color(0xFFd5d6a8));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green money dark', () {
+      expect(FlexColor.moneyDarkSecondaryContainer, const Color(0xFF515402));
+    });
+    test('FC5 colors Green money dark', () {
+      expect(FlexColor.moneyDarkSecondaryVariant, FlexColor.moneyDarkTertiary);
+    });
+    test('FC5 colors Green money dark', () {
       expect(FlexColor.moneyDarkTertiary, const Color(0xFFbbbe74));
     });
+    test('FC5 colors Green money dark', () {
+      expect(FlexColor.moneyDarkTertiaryContainer, const Color(0xFF404204));
+    });
 
-    test('FC5 colors', () {
+    test('FC5 colors Green jungle', () {
       expect(FlexColor.jungleName, 'Green jungle');
     });
-    test('FC5 colors', () {
+    test('FC5 colorsGreen jungle', () {
       expect(
         FlexColor.jungleDescription,
         'Green jungle and rain forest color theme',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green jungle light', () {
       expect(FlexColor.jungleLightPrimary, const Color(0xFF004E15));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green jungle light', () {
       expect(FlexColor.jungleLightPrimaryContainer, const Color(0xFF8FB99B));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green jungle light', () {
+      expect(FlexColor.jungleLightPrimaryVariant, const Color(0xFF00411F));
+    });
+    test('FC5 colors Green jungle light', () {
       expect(FlexColor.jungleLightSecondary, const Color(0xFF007256));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green jungle light', () {
+      expect(FlexColor.jungleLightSecondaryContainer, const Color(0xFF83BCAD));
+    });
+    test('FC5 colors Green jungle light', () {
+      expect(
+          FlexColor.jungleLightSecondaryVariant, FlexColor.jungleLightTertiary);
+    });
+    test('FC5 colors Green jungle light', () {
       expect(FlexColor.jungleLightTertiary, const Color(0xFF295300));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green jungle light', () {
+      expect(FlexColor.jungleLightTertiaryContainer, const Color(0xFF8FAA78));
+    });
+    test('FC5 colors Green jungle dark', () {
       expect(FlexColor.jungleDarkPrimary, const Color(0xFF519E67));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green jungle dark', () {
       expect(FlexColor.jungleDarkPrimaryContainer, const Color(0xFF27683A));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green jungle dark', () {
+      expect(FlexColor.jungleDarkPrimaryVariant, const Color(0xFF3F9368));
+    });
+    test('FC5 colors Green jungle dark', () {
       expect(FlexColor.jungleDarkSecondary, const Color(0xFF479985));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Green jungle dark', () {
+      expect(FlexColor.jungleDarkSecondaryContainer, const Color(0xFF00513B));
+    });
+    test('FC5 colors Green jungle dark', () {
+      expect(
+          FlexColor.jungleDarkSecondaryVariant, FlexColor.jungleDarkTertiary);
+    });
+    test('FC5 colors Green jungle dark', () {
       expect(FlexColor.jungleDarkTertiary, const Color(0xFF73A497));
+    });
+    test('FC5 colors Green jungle dark', () {
+      expect(FlexColor.jungleDarkTertiaryContainer, const Color(0xFF275000));
     });
 
     test('FC5 colors', () {

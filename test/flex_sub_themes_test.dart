@@ -98,6 +98,8 @@ void main() {
           opacity: 0.5,
           unselectedAlphaBlend: 0xFA,
           unselectedAlpha: 0x45,
+          selectedIconSize: 31,
+          unselectedIconSize: 27,
         ),
         equals(
           BottomNavigationBarThemeData(
@@ -107,7 +109,7 @@ void main() {
             selectedItemColor: colorScheme.secondary,
             selectedIconTheme: IconThemeData(
               color: colorScheme.secondaryContainer,
-              size: 24,
+              size: 31,
               opacity: 1,
             ),
             selectedLabelStyle: TextStyle(
@@ -127,7 +129,7 @@ void main() {
               color: colorScheme.tertiary
                   .blendAlpha(colorScheme.tertiary, 0xFA)
                   .withAlpha(0x45),
-              size: 24,
+              size: 27,
               opacity: 1,
             ),
           ),
@@ -1805,6 +1807,8 @@ void main() {
         indicatorAlpha: 0x3D,
         unselectedAlphaBlend: 0x66,
         unselectedAlpha: 0xA5,
+        selectedIconSize: 28,
+        unselectedIconSize: 25,
       );
       expect(
         navBarTheme.toString(),
@@ -1828,11 +1832,11 @@ void main() {
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
                   return IconThemeData(
-                    size: 24,
+                    size: 28,
                     color: colorScheme.secondaryContainer,
                   );
                 }
-                return IconThemeData(size: 24, color: colorScheme.onSurface);
+                return IconThemeData(size: 25, color: colorScheme.onSurface);
               },
             ),
           ).toString(),
@@ -1845,10 +1849,19 @@ void main() {
         equals(colorScheme.secondaryContainer),
       );
       expect(
+        navBarTheme.iconTheme!
+            .resolve(<MaterialState>{MaterialState.selected})?.size,
+        equals(28),
+      );
+      expect(
         navBarTheme.iconTheme!.resolve(<MaterialState>{})?.color,
         equals(
           colorScheme.onSurface,
         ),
+      );
+      expect(
+        navBarTheme.iconTheme!.resolve(<MaterialState>{})?.size,
+        equals(25),
       );
       expect(
         navBarTheme.labelTextStyle!
@@ -2503,6 +2516,64 @@ void main() {
                   .blendAlpha(colorScheme.tertiary, 0xFA)
                   .withAlpha(0x45),
               size: 24,
+              opacity: 1,
+            ),
+            useIndicator: true,
+            indicatorColor: const Color(0x00000000),
+            labelType: NavigationRailLabelType.all,
+            groupAlignment: 0,
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.23custom: GIVEN a custom FlexSubTheme.navigationRailTheme() '
+        'EXPECT equal to NavigationRailThemeData() version '
+        'with same values Icons Size test', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.navigationRailTheme(
+          colorScheme: colorScheme,
+          selectedLabelSchemeColor: SchemeColor.secondary,
+          selectedIconSchemeColor: SchemeColor.secondaryContainer,
+          unselectedLabelSchemeColor: SchemeColor.onSurface,
+          unselectedIconSchemeColor: SchemeColor.tertiary,
+          backgroundSchemeColor: SchemeColor.surface,
+          mutedUnselectedIcon: true,
+          mutedUnselectedLabel: true,
+          unselectedIconSize: 30,
+          selectedIconSize: 32,
+          elevation: 1,
+          opacity: 0.5,
+          unselectedAlphaBlend: 0xFA,
+          unselectedAlpha: 0x45,
+          labelType: NavigationRailLabelType.all,
+          groupAlignment: 0,
+        ),
+        equals(
+          NavigationRailThemeData(
+            elevation: 1,
+            backgroundColor: colorScheme.surface.withOpacity(0.5),
+            selectedIconTheme: IconThemeData(
+              color: colorScheme.secondaryContainer,
+              size: 32,
+              opacity: 1,
+            ),
+            selectedLabelTextStyle: TextStyle(
+              color: colorScheme.secondary,
+              fontSize: 14,
+            ),
+            unselectedLabelTextStyle: TextStyle(
+              color: colorScheme.onSurface
+                  .blendAlpha(colorScheme.onSurface, 0xFA)
+                  .withAlpha(0x45),
+              fontSize: 14,
+            ),
+            unselectedIconTheme: IconThemeData(
+              color: colorScheme.tertiary
+                  .blendAlpha(colorScheme.tertiary, 0xFA)
+                  .withAlpha(0x45),
+              size: 30,
               opacity: 1,
             ),
             useIndicator: true,
