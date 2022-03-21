@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.2 - March 18, 2022
+## v5.0.0-dev.2 - March 21, 2022
 
 ###Targets with the dev.2 release are:
 
@@ -12,7 +12,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 * Completion of the removal of in version 4 deprecated property `surfaceStyle`. 
   As stated in v4.2, this was to be done for v5.0.0 stable release.
 * Improvements to Themes Playground, fewer light/dark and widget coupled
-  properties. Maybe image based theme and maybe an alternative UI
+  properties. Maybe image based theme and maybe an alternative UI.
 
 ### Completed targets:
 
@@ -32,9 +32,6 @@ All notable changes to the **FlexColorScheme** package are documented here.
   The direct properties overrides the seeded color scheme as before, unless it
   is `primary`, `secondary`, `tertiary` or their container colors. In that case
   the `keyColors`, "keep" property determines if those colors are kept or not.
-  This keeps the `keepPrimary`, `keepSecondary` etc. in `FlexKeyColors` behaving
-  in a consistent manner when using key color seeded ColorScheme's, regardless
-  of their input source.
 
 * Completely removed deprecated property `surfaceStyle`, including its
   implementing classes, enums and helpers:
@@ -57,14 +54,14 @@ All notable changes to the **FlexColorScheme** package are documented here.
   of those colors for the new Material 3 `ColorScheme`.
 
 * **Themes Playground** improvements:
-  - First version of a new "Focused" view, versus the previous "Advanced". Both
+  - First version of a new single panel "Page" view, versus the previous 
+    large masonry grid view. Both
     views can be used and switch to based on what is appropriate when using 
-    different media sizes. More work and tuning remains, but the addition
-    of this new view was fairly simple and straight forward.
+    different media sizes. 
   - The switches to keep main input colors for primary, secondary, tertiary
     and their containers, where separated so that their state and code 
     generation for light and dark theme mode are separate. This makes them
-    more useful for actual theme setup. Before you had to separate them by
+    more useful for actual theme setup. Earlier you had to separate them by
     editing the generated code.
   - Added display of SnackBar style to the Themed Material panel.
   - Added display of more ListTile types.
@@ -76,11 +73,11 @@ All notable changes to the **FlexColorScheme** package are documented here.
   - Added missing code gen for button border radius.
   - Fixed broken code gen for dark mode blend level. New code gen style for
     dark mode, from light mode computed dark theme. The code gen also generally
-    does not add any code when API default values are used.
+    does not add any code when using API default values.
 
 * Completed test updates. Now 1467 tests, coverage > 99.8%. Many new color value
   tests are still missing. Not critical, they are just const values, but their 
-  tests are used to make the statement that they are a part of tests and 
+  tests make the statement that they are a part of tested  
   version promise. Missing ones to be added before stable 5.0.0. release,
   there are just **a lot** of them to add.
 
@@ -105,7 +102,7 @@ the generated `ColorScheme`. Using `secondary` and `teritary` colors can each
 optionally be turned OFF. If both are, the result is same as when using 
 `ColorScheme.fromSeed`, with the `primary` color as seed key color.
 
-When using a key seed color generated `ColorScheme`, it may sometimes, e.g. for
+When using a key seed color generated `ColorScheme`, it may sometimes, e.g., for
 branding purposes, be useful to lock a certain color in the resulting 
 `ColorScheme` to the actual key color value used for `primary`, `secondary` 
 and `tertiary`. `FlexColorScheme` includes scheme appropriate colors for 
@@ -123,7 +120,7 @@ M3 impacts and ThemeData color property deprecations commits landed in Flutter
 master channel that I reviewed and prepared for in advance when possible.
 
 Much work on tests, and readme documentation updates remain, but API docs are 
-up-to-date. And this book long change log should help. There are only a few 
+up-to-date. This book long change log may also help. There are only a few 
 breaking changes, and most of them are rarely used properties, so migration 
 should be relatively easy, despite the long list of changes and new features.
 
@@ -164,7 +161,7 @@ should be relatively easy, despite the long list of changes and new features.
 
   In `FlexThemeData` the property `navigationBarIsStyled` was removed. It is 
   no longer needed. The same end result it enabled can be achieved by
-  by setting all NavigationBar related properties in `FlexSubThemesData` that 
+  setting all NavigationBar related properties in `FlexSubThemesData` that 
   have a none null default value to null.
 
   The following parameters were renamed in `FlexSubThemes.navigationBarTheme`:
@@ -212,8 +209,8 @@ should be relatively easy, despite the long list of changes and new features.
    still work as inputs, and they produce same equivalent `ColorScheme` results 
    as before. This is done by the values still being assigned as fallback value 
    in custom schemes so that new:  
-   - `primaryContainer`, if not assigned, falls back via old `primaryVariant`. 
-   - `secondaryContainer`, if not assigned, falls back via old `secondaryVariant`.
+   - `primaryContainer` if not assigned, falls back via old `primaryVariant`. 
+   - `secondaryContainer` if not assigned, falls back via old `secondaryVariant`.
 
    When it comes to the new built-in scheme designs, the color used on past: 
    - `secondaryVariant` was a reasonable fit for new M3 `tertiary` color property
@@ -367,9 +364,9 @@ should be relatively easy, despite the long list of changes and new features.
   configuration and flexibility on how to use key colors as seed colors. It
   does so without the need to go to lower API levels to produce custom tonal
   palettes and use them manually in the `ColorScheme` definition. The
-  implementation makes it easy to use use a combination of key seeded colors and
+  implementation makes it easy to use a combination of key seeded colors and
   fixed colors, in any combination, to produce the color scheme.
-  This makes using seeded colors an option for supplementary colors while e.g.
+  This makes using seeded colors an option for supplementary colors while e.g.,
   primary color is locked to a given brand or design color value, but
   other colors in the ColorScheme are less critical, and it is more important
   that they match the tone of the over all theme.
@@ -388,7 +385,7 @@ should be relatively easy, despite the long list of changes and new features.
   to control which color tone from the relevant `TonalPalette` is used for 
   each color property in generated `ColorScheme`.
   Obviously making poor selections produces bad results, but there are some
-  tuning that works very well for different needs, e.g. primary could 
+  tuning that works very well for different needs, e.g., primary could 
   be assigned a one step lower value in light mode, to produce seeded color
   schemes that are more vivid or saturated.
 
@@ -407,8 +404,8 @@ should be relatively easy, despite the long list of changes and new features.
   for dark or light mode brightness themes. There is `FlexTones.material`, it is 
   an alternative `Brightness` input based API for `FlexTones.light` and 
  `FlexTones.dark` to get the default Material 3 design guide config. 
-  In a similar fashion there are 3 alternative configurations.
-  * `FlexTones.soft`, for even softer and more earthy tones than 
+  Similarly, there are 3 alternative configurations.
+  * `FlexTones.soft` for even softer and more earthy tones than 
      M3 defaults, that are pretty soft and pastel like to begin with. 
   * If you prefer more vivid tones to be generated, try `FlexTones.vivid`.
   * If you like or need more contrast differences between your colors, you can 
@@ -481,7 +478,7 @@ should be relatively easy, despite the long list of changes and new features.
   the new M3 typography (text size and letter spacing), for what presumably will 
   become `EnglishLike2021` as `Typography` when it is included in Flutter. 
   This typography (font geometry) is not yet available in Flutter 2.10.0 and 
-  was not even in master at the time when when Flutter 2.10.0 was released. 
+  was not even in master at the time when Flutter 2.10.0 was released. 
   FlexColorScheme has included a EnglishLike2021 geometry since version
   4.0.0, now it also uses the correct `TextStyle` names since they became
   available in Flutter 2.10.0. The actual `EnglishLike2021` will arrive in
@@ -562,9 +559,8 @@ should be relatively easy, despite the long list of changes and new features.
   systemNavigationBarIconBrightness on Android 11" a number of temporary
   changes were made to `FlexColorScheme.themedSystemNavigationBar`. The
   divider feature is disabled until the issue has been resolved. There is
-  also a temporary workaround implemented that attempts to keep system icon 
-  brightness getting the wrong brightness on Android 11, it may not always
-  work.
+  also a temporary workaround implemented, it attempts to keep system icons from 
+  getting the wrong brightness on Android 11. It may not always work.
 
 **EXAMPLES and Themes Playground**
 * Update examples 1...4
@@ -606,7 +602,7 @@ should be relatively easy, despite the long list of changes and new features.
   - Added border radius individual override adjustments on buttons, to demo 
     that the API can do it too.
   - NavigationBar, BottomNavigationBar and Android system navigation bar were
-    given separate panels and many new configuration options. They still share
+    given separate panels, and many new configuration options. They still share
     some controller values, might separate them in some future version of
     the app.
   - Added NavigationRail Settings panel, with similar settings and NavigationBar.
@@ -660,7 +656,7 @@ to the TODO section at the end of this page and read more
   use FlexColorScheme for its surface color branding and easy sub-theming. 
   This capability will also be very useful when Material 3 based `ColorScheme`
   in Flutter SDK arrives in the stable channel. With Material 3, color schemes 
-  may be created using new Material 3 design based color tools, e.g. from
+  may be created using new Material 3 design based color tools, e.g., from
   seed color(s) or using dynamic colors extracted from system wallpaper colors.
   With this feature it will then be able to feed those colors directly into 
   FlexColorScheme, and use them as colors to create your `ThemeData`. 
@@ -750,10 +746,10 @@ to the TODO section at the end of this page and read more
     to a version that disables them and resets their state while disabled. 
     Plus a few controls are hidden but take up same space.
     Hiding the controls caused the panels to change size, often causing relayout 
-    of the masonry grid layout. This was confusing UX, as entire panels might
+    of the masonry-grid layout. This was confusing UX, as entire panels might
     move into new places. While the UI hide animations were cool, this keeps
     the panels in same place in the grid, which is less confusing to use.
-    Panels can still be closed and it of course causes relayout of the grid too,
+    Panels can still be closed, and it of course causes relayout of the grid too,
     but in that use case it is expected.
   * Changed ColorScheme indicator boxes to use the themed border radius.
   * Added a button to copy theme, and improved the explanations to make the 
@@ -895,7 +891,7 @@ to the TODO section at the end of this page and read more
     you make custom sub themes yourself, you often need access to
     the `ColorScheme` that is defined in current `FlexColorScheme()` instance. 
     You can get it with `FlexColorScheme().toScheme`. Then use this 
-    this standard `ColorScheme` or any of its colors, in your custom sub theme 
+    standard `ColorScheme` or any of its colors, in your custom sub theme 
     definitions, that you then add with copyWith to your FlexColorScheme based 
     theme, like `FlexColorScheme().toTheme.copyWith(..."your sub themes and  
     other ThemeData over-rides here")`. 
@@ -977,8 +973,8 @@ to the TODO section at the end of this page and read more
     You are the UI and can edit prop values and use hot-reload to see changes.
   * All examples now use the new `FlexThemeData` extension syntax to create the
     `ThemeData` and `surfaceMode` to define the alpha blended surfaces.
-  * Examples 2 to 5 also use the in Flutter 2.5 new skeleton architecture with
-    a ChangeNotifier based controller, AnimatedBuilder to listen to it and
+  * Examples 2 to 5 also use the in Flutter 2.5 new skeleton architecture, with
+    a ChangeNotifier based controller. AnimatedBuilder to listen to it, and
     an abstract service to get and persist the theme settings, with a concrete
     in-memory implementation, plus the implementations to persist the theme.
     * Examples 2 to 4 use the Hive implementation. 
@@ -1103,17 +1099,17 @@ to the TODO section at the end of this page and read more
   app was completely rebuilt. This has been fixed, see API docs for more info. 
 * **Feature:** The `FlexColorScheme.themedSystemNavigationBar` for styling the system navigation bar got a
   new convenience property `systemNavBarStyle` that takes a `FlexSystemNavBarStyle` enum with values:
-  * `system`:  For default white system nav bar in light theme and black in dark theme mode.
-  * `surface`: The system navigation bar will be the same color as active theme `colorScheme.surface` color. 
+  * `system` for default white system nav bar in light theme and black in dark theme mode.
+  * `surface` the system navigation bar will be the same color as active theme `colorScheme.surface` color. 
     If your FlexColorScheme definition is set to use primary branded surface and background colors, the 
     same primary color blend that the surface color has received will be used.
-  * `background`: The system navigation bar will be the same color as active theme `colorScheme.background` color.
+  * `background` the system navigation bar will be the same color as active theme `colorScheme.background` color.
     If your FlexColorScheme definition is set to use primary branded surface and background colors, the
     same primary color blend that the background color has received will be used.
-  * `scaffoldBackground`: The system navigation bar will be the same color as active theme `scaffoldBackground` color.
+  * `scaffoldBackground` the system navigation bar will be the same color as active theme `scaffoldBackground` color.
     If your FlexColorScheme definition is set to use primary branded surface and background colors, the
     same primary color blend that the scaffoldBackground color has received will be used.
-  * `transparent`: An experimental feature. The goal is to make the system navigation bar fully transparent, 
+  * `transparent` an experimental feature. The goal is to make the system navigation bar fully transparent, 
     showing the background, while navigation buttons float over the background. This feature only works if it is 
     also configured in the Android embedder and on SDK 30 or higher.
     More information in this example: https://github.com/rydmike/sysnavbar
@@ -1201,7 +1197,7 @@ to the TODO section at the end of this page and read more
   * Changed example one and the intro, to use the new simpler `scheme` property when using built-in schemes.
   * Added a section that lists which sub-themes, and which of their properties, are NOT null when creating a theme data 
     object with FlexColorScheme.toTheme.  
-  * Removed the "back to contents" link after each chapter. It was nice and worked fine on GitHub, but for some reason
+  * Removed the "back to content" link after each chapter. It was nice and worked fine on GitHub, but for some reason
     it did not on pub.dev.
   * Tried finding and adding comments for the 3 missing API comments needed to reach 100% API
     documentation comments, not sure if it succeeded. I will see when the update is published.
@@ -1219,7 +1215,7 @@ to the TODO section at the end of this page and read more
 * The tests will make the migration to null-safety easier by providing some quality control checks.
 * Added GitHub actions to run all the tests and automated test coverage analysis with Codecov.
 * Documentation improvements and API doc fixes.  
-  In previous version API doc analysis says
+  In previous version API-doc analysis says
   "441 out of 444 API elements (99.3 %) have documentation comments.". I have not been able to find any missing ones.
   The result from this update will only be seen after it has been uploaded, but I doubt it will change much. If
   somebody happens to find the missing doc comments let my know, the IDE analyser does not find them either.
