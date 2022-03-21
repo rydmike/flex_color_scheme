@@ -172,15 +172,18 @@ class ThemeController with ChangeNotifier {
   Future<void> resetAllToDefaults() async {
     await setThemeMode(ThemeService.defaultThemeMode, false);
     await setUseSubThemes(ThemeService.defaultUseSubThemes, false);
-    //
+    // TODO(rydmike): Remove this comment.
     // We are not going to reset view mode, we will keep what was used last,
-    // it was annoying when it chnaged viewmode wheh you reset the settings.
+    // it was annoying when it changed view mode when you reset the settings.
     //
     // await setAdvancedView(ThemeService.defaultAdvancedView, false);
     await setUseTextTheme(ThemeService.defaultUseTextTheme, false);
     await setUsedScheme(ThemeService.defaultUsedScheme, false);
     await setSchemeIndex(ThemeService.defaultSchemeIndex, false);
-    await setViewIndex(ThemeService.defaultViewIndex, false);
+    // TODO(rydmike): Remove this comment.
+    // Same with viewIndex, we want to keep that also when we reset to defaults.
+    //
+    //await setViewIndex(ThemeService.defaultViewIndex, false);
     await setInteractionEffects(ThemeService.defaultInteractionEffects, false);
     await setCornerRadius(ThemeService.defaultCornerRadius, false);
     await setInputDecoratorIsFilled(

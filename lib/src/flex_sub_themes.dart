@@ -1065,7 +1065,7 @@ class FlexSubThemes {
         // adjustment that the other buttons do via Theme automatically
         // based on theme setting, to do so this theme can accept a
         // VisualDensity property. Give it the same value that your theme
-        // uses, defaults to same value that ThemeData default.
+        // uses. This defaults to same value that ThemeData uses by default.
         minWidth: minButtonSize.width -
             borderWidth * 2 +
             usedVisualDensity.baseSizeAdjustment.dx,

@@ -39,12 +39,10 @@ class LargeGridView extends StatefulWidget {
   const LargeGridView({
     Key? key,
     required this.controller,
-    required this.scrollController,
     required this.isCardOpen,
     required this.toggleCard,
   }) : super(key: key);
   final ThemeController controller;
-  final ScrollController scrollController;
   final List<bool> isCardOpen;
   final ValueChanged<int> toggleCard;
 
@@ -54,17 +52,9 @@ class LargeGridView extends StatefulWidget {
 
 class _LargeGridViewState extends State<LargeGridView>
     with AutomaticKeepAliveClientMixin {
-  // final ScrollController scrollController = ScrollController();
-
   // Override `wantKeepAlive` when using `AutomaticKeepAliveClientMixin`.
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  void dispose() {
-    // scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +80,7 @@ class _LargeGridViewState extends State<LargeGridView>
       if (columns >= 4) margins = AppData.edgeInsetsBigDesktop;
 
       return MasonryGridView.count(
-        controller: widget.scrollController,
+        controller: ScrollController(),
         crossAxisCount: columns,
         mainAxisSpacing: margins,
         crossAxisSpacing: margins,
