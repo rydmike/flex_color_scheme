@@ -4,18 +4,10 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/app/show_color_scheme_colors.dart';
 import '../../../../shared/widgets/app/show_theme_data_colors.dart';
-import '../../../../shared/widgets/universal/header_card.dart';
 
 class EffectiveColors extends StatelessWidget {
-  const EffectiveColors({
-    Key? key,
-    required this.controller,
-    this.isOpen = true,
-    this.onTap,
-  }) : super(key: key);
+  const EffectiveColors({Key? key, required this.controller}) : super(key: key);
   final ThemeController controller;
-  final bool isOpen;
-  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,67 +17,61 @@ class EffectiveColors extends StatelessWidget {
     final TextStyle linkStyle =
         theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.primary);
 
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Effective Colors'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: ShowColorSchemeColors(),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(16),
-            child: Text('This shows effective ColorScheme colors in '
-                'a compact form. '
-                'They are presented in the same order as they appear in the '
-                'ColorScheme class. The deprecated colors primaryVariant and '
-                'secondaryVariant are excluded.'),
-          ),
-          const SizedBox(height: 8),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: ShowThemeDataColors(),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: RichText(
-              text: TextSpan(
-                children: <TextSpan>[
-                  TextSpan(
-                    style: spanTextStyle,
-                    text:
-                        'The effective color properties in your ThemeData are '
-                        'shown above. All direct color properties in '
-                        'ThemeData are planned to be deprecated and eventually '
-                        'removed from Flutter. More info can be found here ',
-                  ),
-                  LinkTextSpan(
-                    style: linkStyle,
-                    url: 'https://github.com/flutter/flutter/issues/91772',
-                    text: 'in issue #91772',
-                  ),
-                  TextSpan(
-                    style: spanTextStyle,
-                    text: '.\n\n'
-                        'These colors are still critical in Flutter 2.10.x and '
-                        'earlier. Many UI Widgets still use them for their '
-                        'default colors. FlexColorScheme has since its first '
-                        'version kept all of them in sync with provided '
-                        'ColorScheme, to produce an app with a consistent '
-                        'ColorScheme based look on all widgets. It will '
-                        'continue to do so as long as the colors exist in '
-                        'ThemeData.',
-                  ),
-                ],
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: ShowColorSchemeColors(),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16),
+          child: Text('This shows effective ColorScheme colors in '
+              'a compact form. '
+              'They are presented in the same order as they appear in the '
+              'ColorScheme class. The deprecated colors primaryVariant and '
+              'secondaryVariant are excluded.'),
+        ),
+        const SizedBox(height: 8),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: ShowThemeDataColors(),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'The effective color properties in your ThemeData are '
+                      'shown above. All direct color properties in '
+                      'ThemeData are planned to be deprecated and eventually '
+                      'removed from Flutter. More info can be found here ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  url: 'https://github.com/flutter/flutter/issues/91772',
+                  text: 'in issue #91772',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n\n'
+                      'These colors are still critical in Flutter 2.10.x and '
+                      'earlier. Many UI Widgets still use them for their '
+                      'default colors. FlexColorScheme has since its first '
+                      'version kept all of them in sync with provided '
+                      'ColorScheme, to produce an app with a consistent '
+                      'ColorScheme based look on all widgets. It will '
+                      'continue to do so as long as the colors exist in '
+                      'ThemeData.',
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 8),
-        ],
-      ),
+        ),
+        const SizedBox(height: 8),
+      ],
     );
   }
 }

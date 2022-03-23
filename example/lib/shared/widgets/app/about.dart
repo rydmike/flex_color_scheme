@@ -27,11 +27,23 @@ class AboutIconButton extends StatelessWidget {
 // This [showAppAboutDialog] function is based on the [AboutDialog] example
 // that exist(ed) in the Flutter Gallery App.
 void showAppAboutDialog(BuildContext context) {
-  final ThemeData themeData = Theme.of(context);
-  final TextStyle aboutTextStyle = themeData.textTheme.bodyLarge!;
-  final TextStyle footerStyle = themeData.textTheme.bodySmall!;
-  final TextStyle linkStyle = themeData.textTheme.bodyLarge!
-      .copyWith(color: themeData.colorScheme.primary);
+  final ThemeData theme = Theme.of(context);
+  final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
+  final TextStyle footerStyle = theme.textTheme.bodySmall!;
+  final TextStyle linkStyle =
+      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+
+  // Get the card's ShapeBorder from the themed card shape.
+  // This was kind of interesting to do, seem to work, for this case at least.
+  final ShapeBorder? shapeBorder = theme.cardTheme.shape;
+  double buttonRadius = 4; // Default un-themed value
+  if (shapeBorder is RoundedRectangleBorder?) {
+    final BorderRadiusGeometry? border = shapeBorder?.borderRadius;
+    if (border is BorderRadius?) {
+      final Radius? radius = border?.topLeft;
+      buttonRadius = radius?.x == radius?.y ? (radius?.x ?? 4.0) : 4.0;
+    }
+  }
 
   showAboutDialog(
     context: context,
@@ -41,14 +53,15 @@ void showAppAboutDialog(BuildContext context) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         FlexThemeModeOptionButton(
+          optionButtonBorderRadius: buttonRadius,
           selected: true,
           width: 30,
           height: 30,
           flexSchemeColor: FlexSchemeColor(
-            primary: themeData.colorScheme.primary,
-            primaryContainer: themeData.colorScheme.primaryContainer,
-            secondary: themeData.colorScheme.secondary,
-            secondaryContainer: themeData.colorScheme.secondaryContainer,
+            primary: theme.colorScheme.primary,
+            primaryContainer: theme.colorScheme.primaryContainer,
+            secondary: theme.colorScheme.secondary,
+            secondaryContainer: theme.colorScheme.secondaryContainer,
           ),
         ),
       ],

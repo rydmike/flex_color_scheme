@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../pages/sub_pages.dart';
+import '../../pages/page_examples.dart';
+import '../universal/header_card.dart';
 
-// Due to issue with StaggeredGridview in example 5, we had to make [SubPages]
-// stateless, so here we wrap it in a state keeping version for main example
-// and example nr 4. Then we do not have to keep state in them to be able to
-// use the toggle. Not so pretty, but it shows how you can wrap a stateless
-// Widget in one that keeps its state, might be useful info.
+// Used by main example and example 4.
 class ShowSubPages extends StatefulWidget {
   const ShowSubPages({Key? key}) : super(key: key);
 
@@ -19,13 +16,15 @@ class _ShowSubPagesState extends State<ShowSubPages> {
 
   @override
   Widget build(BuildContext context) {
-    return SubPagesDemo(
+    return HeaderCard(
+      title: const Text('Page Examples'),
       isOpen: isOpen,
       onTap: () {
         setState(() {
           isOpen = !isOpen;
         });
       },
+      child: const PageExamples(),
     );
   }
 }

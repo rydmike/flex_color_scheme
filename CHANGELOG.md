@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.2 - March 21, 2022
+## v5.0.0-dev.2 - March 23, 2022
 
 **BREAKING**
 
@@ -53,10 +53,9 @@ All notable changes to the **FlexColorScheme** package are documented here.
 **DEMO APPS**
 
 * **Themes Playground** improvements:
-  - First version of a new single panel "Page" view, versus the previous 
-    large masonry grid view. Both views can be used and switch to based on what 
-    is appropriate when using different media sizes. It is just a quick version
-    of it and is not intended to be perfect design, but seem to work well enough.
+  - Added a new single panel "Page" view. The previous large masonry grid view
+    is still available too. Both views can be used and switch to based on what 
+    is appropriate when using different media sizes.  
   - The switches to keep main input colors for primary, secondary, tertiary
     and their containers, where separated so that their state and code 
     generation for light and dark theme mode are separate. This makes them
@@ -66,17 +65,20 @@ All notable changes to the **FlexColorScheme** package are documented here.
   - Added display of more ListTile types.
   - Added ColorScheme based color selection theming of SnackBar background color.
   - Added CodeView as a panel of its own. It is now possible to view the
-    changes to generated code as settings are changed. Especially in the 
+    changes to generated code as settings are changed. In the 
     advanced view where one can keep it open and close other panels, except one
-    being operated in.
+    being operated in. In page view it is shown as last page, however if
+    the media is large enough, it is shown side-by-side with controls on current
+    page. This is a really handy view for studying what each control does in 
+    the generated code.
   - Added missing code gen for button border radius.
-  - Fixed broken code gen for dark mode blend level. New code gen style for
-    dark mode, from light mode computed dark theme. The code gen also generally
-    does not add any code when using API default values.
+  - Fixed broken code gen for dark mode blend level. 
+  - Changed, the code gen style for dark mode when using from light mode computed dark theme.
+  - Changed, the code gen now does not add any code when using API default values.
 
 **TESTS**
 
-* Completed test updates. Now 1467 tests, coverage > 99.8%. Many new color value
+* Completed test updates. Now 1500 tests, coverage > 99.8%. Some new color value
   tests are still missing. Not critical, they are just const values, but their 
   tests make the statement that they are a part of tested  
   version promise. Missing ones to be added before stable 5.0.0. release,

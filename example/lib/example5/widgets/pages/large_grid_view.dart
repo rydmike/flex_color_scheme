@@ -3,16 +3,16 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/pages/sub_pages.dart';
+import '../../../shared/pages/page_examples.dart';
+import '../../../shared/widgets/universal/header_card.dart';
 import '../panels/app_bar_settings/app_bar_settings.dart';
 import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_and_material_settings/card_settings.dart';
 import '../panels/card_and_material_settings/material_and_bottom_sheet_settings.dart';
 import '../panels/component_themes/component_themes.dart';
-import '../panels/dialog_settings/date_picker_dialog_settings.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
-import '../panels/dialog_settings/time_picker_dialog_settings.dart';
 import '../panels/fab_toggle_chip_popup_settings/fab_toggle_chip_popup_settings.dart';
+import '../panels/grid_item.dart';
 import '../panels/input_colors/input_colors.dart';
 import '../panels/introduction/introduction_panel.dart';
 import '../panels/navigation_bar_settings/android_navigation_bar_settings.dart';
@@ -21,7 +21,7 @@ import '../panels/navigation_bar_settings/navigation_bar_settings.dart';
 import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
 import '../panels/seeded_color_scheme/seeded_color_scheme.dart';
 import '../panels/showcase_panels/effective_colors.dart';
-import '../panels/showcase_panels/effective_setup_code.dart';
+import '../panels/showcase_panels/theme_code.dart';
 import '../panels/surface_blends/surface_blends.dart';
 import '../panels/switch_settings/list_tile_settings.dart';
 import '../panels/switch_settings/switch_settings.dart';
@@ -63,6 +63,13 @@ class _LargeGridViewState extends State<LargeGridView>
 
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
 
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -91,187 +98,43 @@ class _LargeGridViewState extends State<LargeGridView>
           margins,
         ),
         itemCount: widget.isCardOpen.length,
-        itemBuilder: (BuildContext context, int index) => <Widget>[
-          IntroductionPanel(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[0],
-            onTap: () {
-              widget.toggleCard(0);
-            },
-          ),
-          EffectiveSetupCode(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[1],
-            onTap: () {
-              widget.toggleCard(1);
-            },
-          ),
-          InputColors(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[2],
-            onTap: () {
-              widget.toggleCard(2);
-            },
-          ),
-          SeededColorScheme(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[3],
-            onTap: () {
-              widget.toggleCard(3);
-            },
-          ),
-          SurfaceBlends(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[4],
-            onTap: () {
-              widget.toggleCard(4);
-            },
-            showAllBlends: showAllBlends,
-          ),
-          EffectiveColors(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[5],
-            onTap: () {
-              widget.toggleCard(5);
-            },
-          ),
-          ComponentThemes(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[6],
-            onTap: () {
-              widget.toggleCard(6);
-            },
-          ),
-          TextFieldSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[7],
-            onTap: () {
-              widget.toggleCard(7);
-            },
-          ),
-          AppBarSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[8],
-            onTap: () {
-              widget.toggleCard(8);
-            },
-          ),
-          TabBarSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[9],
-            onTap: () {
-              widget.toggleCard(9);
-            },
-          ),
-          NavigationBarSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[10],
-            onTap: () {
-              widget.toggleCard(10);
-            },
-          ),
-          BottomNavigationBarSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[11],
-            onTap: () {
-              widget.toggleCard(11);
-            },
-          ),
-          NavigationRailSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[12],
-            onTap: () {
-              widget.toggleCard(12);
-            },
-          ),
-          AndroidNavigationBarSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[13],
-            onTap: () {
-              widget.toggleCard(13);
-            },
-          ),
-          ButtonsSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[14],
-            onTap: () {
-              widget.toggleCard(14);
-            },
-          ),
-          FabToggleChipPopupSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[15],
-            onTap: () {
-              widget.toggleCard(15);
-            },
-          ),
-          SwitchesSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[16],
-            onTap: () {
-              widget.toggleCard(16);
-            },
-          ),
-          ListTileSettings(
-            isOpen: widget.isCardOpen[17],
-            onTap: () {
-              widget.toggleCard(17);
-            },
-          ),
-          DialogSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[18],
-            onTap: () {
-              widget.toggleCard(18);
-            },
-          ),
-          TimePickerDialogSettings(
-            isOpen: widget.isCardOpen[19],
-            onTap: () {
-              widget.toggleCard(19);
-            },
-          ),
-          DatePickerDialogSettings(
-            isOpen: widget.isCardOpen[20],
-            onTap: () {
-              widget.toggleCard(20);
-            },
-          ),
-          MaterialAndBottomSheetSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[21],
-            onTap: () {
-              widget.toggleCard(21);
-            },
-          ),
-          CardSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[22],
-            onTap: () {
-              widget.toggleCard(22);
-            },
-          ),
-          TextThemeSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[23],
-            onTap: () {
-              widget.toggleCard(23);
-            },
-          ),
-          PrimaryTextThemeSettings(
-            controller: widget.controller,
-            isOpen: widget.isCardOpen[24],
-            onTap: () {
-              widget.toggleCard(24);
-            },
-          ),
-          SubPagesDemo(
-            isOpen: widget.isCardOpen[25],
-            onTap: () {
-              widget.toggleCard(25);
-            },
-          ),
-        ].elementAt(index),
+        itemBuilder: (BuildContext context, int itemIndex) => HeaderCard(
+          title: Text(gridItems[itemIndex].panelLabel),
+          leading: Icon(gridItems[itemIndex].icon, color: iconColor),
+          isOpen: widget.isCardOpen[itemIndex],
+          onTap: () {
+            widget.toggleCard(itemIndex);
+          },
+          child: <Widget>[
+            IntroductionPanel(controller: widget.controller),
+            ThemeCode(controller: widget.controller),
+            InputColors(controller: widget.controller),
+            SeededColorScheme(controller: widget.controller),
+            SurfaceBlends(
+              controller: widget.controller,
+              showAllBlends: showAllBlends,
+            ),
+            EffectiveColors(controller: widget.controller),
+            ComponentThemes(controller: widget.controller),
+            TextFieldSettings(controller: widget.controller),
+            AppBarSettings(controller: widget.controller),
+            TabBarSettings(controller: widget.controller),
+            NavigationBarSettings(controller: widget.controller),
+            BottomNavigationBarSettings(controller: widget.controller),
+            NavigationRailSettings(controller: widget.controller),
+            AndroidNavigationBarSettings(controller: widget.controller),
+            ButtonsSettings(controller: widget.controller),
+            FabToggleChipPopupSettings(controller: widget.controller),
+            SwitchesSettings(controller: widget.controller),
+            const ListTileSettings(),
+            DialogSettings(controller: widget.controller),
+            MaterialAndBottomSheetSettings(controller: widget.controller),
+            CardSettings(controller: widget.controller),
+            TextThemeSettings(controller: widget.controller),
+            PrimaryTextThemeSettings(controller: widget.controller),
+            const PageExamples(),
+          ].elementAt(itemIndex),
+        ),
       );
     });
   }

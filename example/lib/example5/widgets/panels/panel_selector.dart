@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-// The width size of the scrolling button.
-const double _kWidthOfScrollItem = 115;
+import '../../../shared/const/app_data.dart';
+import 'panel_item.dart';
 
 /// Horizontal panel selector of active panel page to view.
 class PanelSelector extends StatefulWidget {
@@ -27,7 +27,7 @@ class _PanelSelectorState extends State<PanelSelector> {
     viewIndex = widget.index;
     scrollController = ScrollController(
       keepScrollOffset: true,
-      initialScrollOffset: _kWidthOfScrollItem * viewIndex,
+      initialScrollOffset: AppData.widthOfScrollItem * viewIndex,
     );
   }
 
@@ -42,7 +42,12 @@ class _PanelSelectorState extends State<PanelSelector> {
     super.didUpdateWidget(oldWidget);
     if (widget.index != viewIndex) {
       viewIndex = widget.index;
-      scrollController.animateTo(_kWidthOfScrollItem * viewIndex,
+      final MediaQueryData media = MediaQuery.of(context);
+      // We are on phone width media, adjust size a bit, make it tighter:
+      final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+      final double effectiveWidth =
+          AppData.widthOfScrollItem + (isPhone ? AppData.phoneShrink : 0);
+      scrollController.animateTo(effectiveWidth * viewIndex,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic);
     }
@@ -51,13 +56,18 @@ class _PanelSelectorState extends State<PanelSelector> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
+    // We are on phone width media, adjust size a bit, make it tighter:
+    final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+    final double effectiveWidth =
+        AppData.widthOfScrollItem + (isPhone ? AppData.phoneShrink : 0);
+
     // Paddings so content shows up in visible area when we use Scaffold props
     // extendBodyBehindAppBar and extendBody.
     final double topPadding = media.padding.top; // + kToolbarHeight;
     return Padding(
       padding: EdgeInsets.only(top: topPadding),
       child: SizedBox(
-        height: _kWidthOfScrollItem + 15,
+        height: effectiveWidth + 15,
         child: Row(
           children: <Widget>[
             Expanded(
@@ -66,12 +76,12 @@ class _PanelSelectorState extends State<PanelSelector> {
                 controller: scrollController,
                 physics: const ClampingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemCount: _panelItems.length,
+                itemCount: panelItems.length,
                 itemBuilder: (BuildContext context, int index) {
                   return PanelButton(
-                    item: _panelItems[index],
+                    item: panelItems[index],
                     onSelect: () {
-                      scrollController.animateTo(_kWidthOfScrollItem * index,
+                      scrollController.animateTo(effectiveWidth * index,
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeOutCubic);
                       viewIndex = index;
@@ -96,7 +106,7 @@ class PanelButton extends StatelessWidget {
     required this.selected,
     required this.onSelect,
   }) : super(key: key);
-  final _PanelItem item;
+  final PanelItem item;
   final bool selected;
   final VoidCallback onSelect;
 
@@ -121,6 +131,14 @@ class PanelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // We are on phone width media, adjust size a bit, make it tighter:
+    final bool isPhone =
+        MediaQuery.of(context).size.width < AppData.phoneBreakpoint;
+    final double effectiveWidth =
+        AppData.widthOfScrollItem + (isPhone ? AppData.phoneShrink : 0);
+    final double textSize = isPhone ? 10 : 11;
+    final double iconSize = isPhone ? 38 : 45;
+
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
     final Color cardColor = theme.cardColor;
@@ -174,10 +192,9 @@ class PanelButton extends StatelessWidget {
     }
 
     return SizedBox(
-      width: _kWidthOfScrollItem,
+      width: effectiveWidth,
       child: Card(
         color: background,
-        // null, //selected ? scheme.primaryContainer.lighten(10) : null,
         shape: shapeBorder,
         child: InkWell(
           onTap: onSelect,
@@ -189,13 +206,14 @@ class PanelButton extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   item.icon,
-                  size: 45,
+                  size: iconSize,
                   color: iconColor,
                 ),
                 Text(
-                  item.label,
+                  item.buttonLabel,
                   style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: textColor,
+                        fontSize: textSize,
                       ),
                   textAlign: TextAlign.center,
                 ),
@@ -207,125 +225,3 @@ class PanelButton extends StatelessWidget {
     );
   }
 }
-
-@immutable
-class _PanelItem {
-  const _PanelItem({
-    required this.label,
-    required this.icon,
-  });
-
-  final String label;
-  final IconData icon;
-}
-
-const List<_PanelItem> _panelItems = <_PanelItem>[
-  _PanelItem(
-    label: 'Introduction',
-    icon: Icons.info_outlined,
-  ),
-  _PanelItem(
-    label: 'Input\ncolors',
-    icon: Icons.palette_outlined,
-  ),
-  _PanelItem(
-    label: 'Seeded\nColorScheme',
-    icon: Icons.colorize_outlined,
-  ),
-  _PanelItem(
-    label: 'Surface\nblends',
-    icon: Icons.invert_colors_outlined,
-  ),
-  _PanelItem(
-    label: 'Effective\ncolors',
-    icon: Icons.gradient_outlined,
-  ),
-  _PanelItem(
-    label: 'Component\nthemes',
-    icon: Icons.widgets_outlined,
-  ),
-  _PanelItem(
-    label: 'TextField',
-    icon: Icons.pin_outlined,
-  ),
-  _PanelItem(
-    label: 'AppBar',
-    icon: Icons.web_asset_outlined,
-  ),
-  _PanelItem(
-    label: 'TabBar',
-    icon: Icons.tab_outlined,
-  ),
-  _PanelItem(
-    label: 'NavigationBar',
-    icon: Icons.video_label_outlined,
-  ),
-  _PanelItem(
-    label: 'Bottom\nNavigationBar',
-    icon: Icons.video_label_outlined,
-  ),
-  _PanelItem(
-    label: 'Navigation\nRail',
-    icon: Icons.view_sidebar_outlined,
-  ),
-  _PanelItem(
-    label: 'AndroidBar',
-    icon: Icons.android_outlined,
-  ),
-  _PanelItem(
-    label: 'Material\nButtons',
-    icon: Icons.crop_16_9_outlined,
-  ),
-  _PanelItem(
-    label: 'FAB\nToggleButtons',
-    icon: Icons.add_circle,
-  ),
-  _PanelItem(
-    label: 'Switch\nCheckBox',
-    icon: Icons.toggle_on_outlined,
-  ),
-  _PanelItem(
-    label: 'ListTile',
-    icon: Icons.dns_outlined,
-  ),
-  _PanelItem(
-    label: 'Dialog',
-    icon: Icons.branding_watermark_outlined,
-  ),
-  _PanelItem(
-    label: 'TimePicker\nDialog',
-    icon: Icons.schedule_outlined,
-  ),
-  _PanelItem(
-    label: 'DatePicker\nDialog',
-    icon: Icons.event_outlined,
-  ),
-  _PanelItem(
-    label: 'Material\nBanner, Snack',
-    icon: Icons.call_to_action_outlined,
-  ),
-  _PanelItem(
-    label: 'Card',
-    icon: Icons.picture_in_picture_alt_outlined,
-  ),
-  _PanelItem(
-    label: 'Text\nTheme',
-    icon: Icons.font_download_outlined,
-  ),
-  _PanelItem(
-    label: 'Primary\nTextTheme',
-    icon: Icons.font_download_outlined,
-  ),
-  _PanelItem(
-    label: 'Page\nExamples',
-    icon: Icons.article_outlined,
-  ),
-  _PanelItem(
-    label: 'Widget\nshowcase',
-    icon: Icons.flutter_dash,
-  ),
-  _PanelItem(
-    label: 'Theme\ncode',
-    icon: Icons.integration_instructions_outlined,
-  ),
-];

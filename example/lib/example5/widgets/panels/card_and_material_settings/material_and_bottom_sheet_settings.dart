@@ -2,21 +2,14 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/header_card.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class MaterialAndBottomSheetSettings extends StatelessWidget {
-  const MaterialAndBottomSheetSettings({
-    Key? key,
-    required this.controller,
-    this.isOpen = true,
-    this.onTap,
-  }) : super(key: key);
+  const MaterialAndBottomSheetSettings({Key? key, required this.controller})
+      : super(key: key);
 
   final ThemeController controller;
-  final bool isOpen;
-  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,34 +21,29 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
         : (controller.useSubThemes && controller.useFlexColorScheme)
             ? 'default null (dark primary, 95% opacity)'
             : 'default null (dark grey)';
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Material, Banner, Sheet and SnackBar'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.all(16),
-            child: MaterialAndBottomSheetShowcase(),
-          ),
-          ColorSchemePopupMenu(
-            title: const Text('SnackBar background color'),
-            labelForDefault: labelForDefaultSelectedItem,
-            index: controller.snackBarSchemeColor?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setSnackBarSchemeColor(null);
-                    } else {
-                      controller
-                          .setSnackBarSchemeColor(SchemeColor.values[index]);
-                    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(
+          padding: EdgeInsets.all(16),
+          child: MaterialAndBottomSheetShowcase(),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('SnackBar background color'),
+          labelForDefault: labelForDefaultSelectedItem,
+          index: controller.snackBarSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSnackBarSchemeColor(null);
+                  } else {
+                    controller
+                        .setSnackBarSchemeColor(SchemeColor.values[index]);
                   }
-                : null,
-          ),
-        ],
-      ),
+                }
+              : null,
+        ),
+      ],
     );
   }
 }

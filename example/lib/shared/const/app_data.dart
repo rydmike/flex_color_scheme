@@ -52,6 +52,11 @@ class AppData {
   // Used by grid layout when in >= 4 column layout mode.
   static const double edgeInsetsBigDesktop = 24;
 
+  // The width size of the scrolling button panel buttons in example 5 panel
+  // view, and how much it shrinks when we go to phone size.
+  static const double widthOfScrollItem = 115;
+  static const double phoneShrink = -10;
+
   // Opacity of the popup menu in example 5, just set via a const to
   // show and use a property not in the controller.
   static const double popupMenuOpacity = 0.95;
@@ -114,18 +119,19 @@ class AppData {
     ),
   );
 
+  // The menu items that we use on the responsive side menu.
   static const List<ResponsiveMenuItems> menuItems = <ResponsiveMenuItems>[
-    ResponsiveMenuItems(
-      label: 'Dark mode',
-      labelSecondary: 'Light mode',
-      icon: Icons.bedtime,
-      iconSecondary: Icons.wb_sunny,
-    ),
     ResponsiveMenuItems(
       label: 'Grid view',
       labelSecondary: 'Page view',
       icon: Icons.calendar_view_month_outlined,
       iconSecondary: Icons.view_array_outlined,
+    ),
+    ResponsiveMenuItems(
+      label: 'Dark mode',
+      labelSecondary: 'Light mode',
+      icon: Icons.bedtime,
+      iconSecondary: Icons.wb_sunny,
     ),
     ResponsiveMenuItems(
       label: 'Copy theme code',
