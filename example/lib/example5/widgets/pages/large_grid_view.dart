@@ -126,7 +126,7 @@ class _LargeGridViewState extends State<LargeGridView>
             ButtonsSettings(controller: widget.controller),
             FabToggleChipPopupSettings(controller: widget.controller),
             SwitchesSettings(controller: widget.controller),
-            const ListTileSettings(),
+            ListTileSettings(controller: widget.controller),
             DialogSettings(controller: widget.controller),
             MaterialAndBottomSheetSettings(controller: widget.controller),
             CardSettings(controller: widget.controller),

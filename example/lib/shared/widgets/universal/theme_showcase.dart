@@ -1025,7 +1025,7 @@ class ListTileShowcase extends StatelessWidget {
           selected: true,
           onTap: () {},
         ),
-        const Divider(),
+        const Divider(height: 1),
         SwitchListTile(
           secondary: const Icon(Icons.info),
           title: const Text('SwitchListTile'),
@@ -1040,7 +1040,7 @@ class ListTileShowcase extends StatelessWidget {
           value: true,
           onChanged: (bool value) {},
         ),
-        const Divider(),
+        const Divider(height: 1),
         CheckboxListTile(
           secondary: const Icon(Icons.info),
           title: const Text('CheckboxListTile'),
@@ -1063,7 +1063,7 @@ class ListTileShowcase extends StatelessWidget {
           value: null,
           onChanged: (bool? value) {},
         ),
-        const Divider(),
+        const Divider(height: 1),
         RadioListTile<int>(
           secondary: const Icon(Icons.info),
           title: const Text('RadioListTile'),
