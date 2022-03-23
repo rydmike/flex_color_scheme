@@ -2,21 +2,13 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/header_card.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'tab_bar_style_buttons.dart';
 
 class TabBarSettings extends StatelessWidget {
-  const TabBarSettings({
-    Key? key,
-    required this.controller,
-    this.isOpen = true,
-    this.onTap,
-  }) : super(key: key);
+  const TabBarSettings({Key? key, required this.controller}) : super(key: key);
   final ThemeController controller;
-  final bool isOpen;
-  final VoidCallback? onTap;
 
   String explainTabStyle(final FlexTabBarStyle style) {
     switch (style) {
@@ -40,85 +32,80 @@ class TabBarSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('TabBar'),
-      child: Column(
-        children: <Widget>[
-          const SizedBox(height: 8),
-          ListTile(
-            enabled: controller.useFlexColorScheme,
-            title: const Text('Choose TabBarStyle that fits your use case'),
-            subtitle: Text(explainTabStyle(controller.useFlexColorScheme
+    return Column(
+      children: <Widget>[
+        const SizedBox(height: 8),
+        ListTile(
+          enabled: controller.useFlexColorScheme,
+          title: const Text('Choose TabBarStyle that fits your use case'),
+          subtitle: Text(explainTabStyle(controller.useFlexColorScheme
+              ? controller.tabBarStyle
+              : FlexTabBarStyle.flutterDefault)),
+        ),
+        // const SizedBox(height: 4),
+        ListTile(
+          enabled: controller.useFlexColorScheme,
+          trailing: TabBarStyleButtons(
+            style: controller.useFlexColorScheme
                 ? controller.tabBarStyle
-                : FlexTabBarStyle.flutterDefault)),
-          ),
-          // const SizedBox(height: 4),
-          ListTile(
-            enabled: controller.useFlexColorScheme,
-            trailing: TabBarStyleButtons(
-              style: controller.useFlexColorScheme
-                  ? controller.tabBarStyle
-                  : FlexTabBarStyle.flutterDefault,
-              onChanged: controller.useFlexColorScheme
-                  ? controller.setTabBarStyle
-                  : null,
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: TabBarForAppBarShowcase(),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: TabBarForBackgroundShowcase(),
-          ),
-          const SizedBox(height: 8),
-          const Divider(),
-          const ListTile(
-            title: Text('Custom colors'),
-            subtitle: Text('With sub-themes you can select scheme color for '
-                'the items and indicator separately. '
-                'Using TabBarStyle is easier, but this offers more control. '
-                'These settings overrides used TabBarStyle, set them '
-                'back to default (null) to use TabBarStyle again. '
-                'With API you can set different color in light and dark '
-                'mode. This app shares same input for both modes, but you '
-                'can easily modify the generated setup code.'),
-          ),
-          ColorSchemePopupMenu(
-            title: const Text('TabBar items color'),
-            labelForDefault: 'null (TabBarStyle)',
-            index: controller.tabBarItemSchemeColor?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setTabBarItemSchemeColor(null);
-                    } else {
-                      controller
-                          .setTabBarItemSchemeColor(SchemeColor.values[index]);
-                    }
-                  }
+                : FlexTabBarStyle.flutterDefault,
+            onChanged: controller.useFlexColorScheme
+                ? controller.setTabBarStyle
                 : null,
           ),
-          ColorSchemePopupMenu(
-            title: const Text('TabBar indicator color'),
-            labelForDefault: 'null (TabBarStyle)',
-            index: controller.tabBarIndicator?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setTabBarIndicator(null);
-                    } else {
-                      controller.setTabBarIndicator(SchemeColor.values[index]);
-                    }
+        ),
+        const SizedBox(height: 8),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: TabBarForAppBarShowcase(),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: TabBarForBackgroundShowcase(),
+        ),
+        const SizedBox(height: 8),
+        const Divider(),
+        const ListTile(
+          title: Text('Custom colors'),
+          subtitle: Text('With sub-themes you can select scheme color for '
+              'the items and indicator separately. '
+              'Using TabBarStyle is easier, but this offers more control. '
+              'These settings overrides used TabBarStyle, set them '
+              'back to default (null) to use TabBarStyle again. '
+              'With API you can set different color in light and dark '
+              'mode. This app shares same input for both modes, but you '
+              'can easily modify the generated setup code.'),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('TabBar items color'),
+          labelForDefault: 'null (TabBarStyle)',
+          index: controller.tabBarItemSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setTabBarItemSchemeColor(null);
+                  } else {
+                    controller
+                        .setTabBarItemSchemeColor(SchemeColor.values[index]);
                   }
-                : null,
-          ),
-        ],
-      ),
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('TabBar indicator color'),
+          labelForDefault: 'null (TabBarStyle)',
+          index: controller.tabBarIndicator?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setTabBarIndicator(null);
+                  } else {
+                    controller.setTabBarIndicator(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+      ],
     );
   }
 }

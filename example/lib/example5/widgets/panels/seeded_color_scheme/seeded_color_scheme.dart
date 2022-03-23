@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/header_card.dart';
 import 'flex_tone_config_buttons.dart';
 import 'scheme_colors.dart';
 import 'show_tonal_palette.dart';
@@ -14,13 +13,9 @@ class SeededColorScheme extends StatelessWidget {
   const SeededColorScheme({
     Key? key,
     required this.controller,
-    this.isOpen = true,
-    this.onTap,
     this.showKeyButtons = true,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isOpen;
-  final VoidCallback? onTap;
   final bool showKeyButtons;
 
   String _describeFlexToneLabel(int colors) {
@@ -98,101 +93,96 @@ class SeededColorScheme extends StatelessWidget {
     final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
             (!isLight && controller.blendLevelDark > 0)) &&
         controller.useKeyColors;
-    return HeaderCard(
-      isOpen: isOpen,
-      onTap: onTap,
-      title: const Text('Seeded ColorScheme'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(height: 8),
-          if (showKeyButtons)
-            ListTile(
-              title: const Text('Use effective input colors as keys to seed '
-                  'the ColorScheme'),
-              subtitle: Text(AppColor.explainUsedColors(controller)),
-            ),
-          if (showKeyButtons)
-            ListTile(trailing: UseKeyColorsButtons(controller: controller)),
-          const ListTile(
-            title: Text('Keep effective input color'),
-            subtitle: Text('When using a seeded ColorScheme, '
-                'you can lock primary, secondary, tertiary and their '
-                'container colors to their effective input color value, '
-                'instead of using the tone from the computed tonal palette. '
-                'Toggle switches below for each color to keep its effective '
-                'input color. The lock switches are only available when the '
-                'key color based seeded scheme is used. They have separate '
-                'state for light and dark theme mode.'),
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 4),
-            child: SchemeColors(tc: controller),
-          ),
-          if (controller.schemeIndex != (AppColor.schemes.length - 1))
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'Tap a color code to copy it to the clipboard.\n'
-                // ignore: lines_longer_than_80_chars
-                "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color below. ' : ''}"
-                // ignore: lines_longer_than_80_chars
-                "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, that may not be found in palettes when hovered.' : '\n'}",
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
-            ),
-          if (controller.schemeIndex == (AppColor.schemes.length - 1))
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'This is the custom color theme, you can tap primary, '
-                'secondary or tertiary, plus their container colors to '
-                'change them.',
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
-            ),
-          const ListTile(title: Text('Generated tonal palettes')),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ShowTonalPalette(controller: controller),
-          ),
-          const ListTile(
-            subtitle: Text(
-              'With FlexTones you can configure which tone from '
-              'generated tonal palettes each color in the ColorScheme use. '
-              'You can also set limits on used CAM16 chroma values '
-              'for the three color values used as keys to seed the M3 primary, '
-              'secondary and tertiary TonalPalette.',
-            ),
-          ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const SizedBox(height: 8),
+        if (showKeyButtons)
           ListTile(
-            title: Text('Used FlexTones setup: '
-                // ignore: lines_longer_than_80_chars
-                '${_describeFlexToneLabel(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}'),
-            subtitle: Text(
-              _describeFlexToneShort(
-                  controller.useKeyColors ? controller.usedFlexToneSetup : 0),
-            ),
-            trailing: FlexToneConfigButtons(controller: controller),
+            title: const Text('Use effective input colors as keys to seed '
+                'the ColorScheme'),
+            subtitle: Text(AppColor.explainUsedColors(controller)),
           ),
-          ListTile(
-            title: Text(
-                // ignore: lines_longer_than_80_chars
-                '${_describeFlexToneLabel(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}'
-                ' FlexTones setup has CAM16 chroma:'),
-            subtitle: Text(
+        if (showKeyButtons)
+          ListTile(trailing: UseKeyColorsButtons(controller: controller)),
+        const ListTile(
+          title: Text('Keep effective input color'),
+          subtitle: Text('When using a seeded ColorScheme, '
+              'you can lock primary, secondary, tertiary and their '
+              'container colors to their effective input color value, '
+              'instead of using the tone from the computed tonal palette. '
+              'Toggle switches below for each color to keep its effective '
+              'input color. The lock switches are only available when the '
+              'key color based seeded scheme is used. They have separate '
+              'state for light and dark theme mode.'),
+        ),
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 4),
+          child: SchemeColors(tc: controller),
+        ),
+        if (controller.schemeIndex != (AppColor.schemes.length - 1))
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Tap a color code to copy it to the clipboard.\n'
               // ignore: lines_longer_than_80_chars
-              '${_describeFlexToneLong(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}\n'
-              'In this version you can choose between the default Material 3 '
-              'tone mapping and four pre-defined custom FlexTones setups. With '
-              'the API you can make your own FlexTones configurations. A '
-              'future version of this app may add interactive configuration of '
-              'tone to ColorScheme color mapping.',
+              "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color below. ' : ''}"
+              // ignore: lines_longer_than_80_chars
+              "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, that may not be found in palettes when hovered.' : '\n'}",
+              style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-          const SizedBox(height: 8),
-        ],
-      ),
+        if (controller.schemeIndex == (AppColor.schemes.length - 1))
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'This is the custom color theme, you can tap primary, '
+              'secondary or tertiary, plus their container colors to '
+              'change them.',
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+          ),
+        const ListTile(title: Text('Generated tonal palettes')),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ShowTonalPalette(controller: controller),
+        ),
+        const ListTile(
+          subtitle: Text(
+            'With FlexTones you can configure which tone from '
+            'generated tonal palettes each color in the ColorScheme use. '
+            'You can also set limits on used CAM16 chroma values '
+            'for the three color values used as keys to seed the M3 primary, '
+            'secondary and tertiary TonalPalette.',
+          ),
+        ),
+        ListTile(
+          title: Text('Used FlexTones setup: '
+              // ignore: lines_longer_than_80_chars
+              '${_describeFlexToneLabel(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}'),
+          subtitle: Text(
+            _describeFlexToneShort(
+                controller.useKeyColors ? controller.usedFlexToneSetup : 0),
+          ),
+          trailing: FlexToneConfigButtons(controller: controller),
+        ),
+        ListTile(
+          title: Text(
+              // ignore: lines_longer_than_80_chars
+              '${_describeFlexToneLabel(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}'
+              ' FlexTones setup has CAM16 chroma:'),
+          subtitle: Text(
+            // ignore: lines_longer_than_80_chars
+            '${_describeFlexToneLong(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}\n'
+            'In this version you can choose between the default Material 3 '
+            'tone mapping and four pre-defined custom FlexTones setups. With '
+            'the API you can make your own FlexTones configurations. A '
+            'future version of this app may add interactive configuration of '
+            'tone to ColorScheme color mapping.',
+          ),
+        ),
+        const SizedBox(height: 8),
+      ],
     );
   }
 }

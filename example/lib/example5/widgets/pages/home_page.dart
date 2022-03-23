@@ -11,6 +11,7 @@ import '../../utils/generate_colorscheme_dart_code.dart';
 import '../dialogs/dart_code_dialog_screen.dart';
 import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
+import '../panels/grid_item.dart';
 import 'large_grid_view.dart';
 import 'panel_view.dart';
 
@@ -39,9 +40,6 @@ class _HomePageState extends State<HomePage> {
   // Active state of each menuItem.
   late List<ResponsiveMenuItemIconState> menuItemsIconState;
 
-  // Cards in the masonry grid, must match the number we actually add to it!
-  static const int _nrOfCards = 26;
-
   // Toggle the state of a card as open/closed.
   void toggleCard(int index) {
     setState(() {
@@ -63,12 +61,12 @@ class _HomePageState extends State<HomePage> {
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
         AppData.menuItems.length,
         (int i) => ResponsiveMenuItemIconState.primary);
-    menuItemsIconState[1] = widget.controller.isLargeGridView
+    menuItemsIconState[0] = widget.controller.isLargeGridView
         ? ResponsiveMenuItemIconState.secondary
         : ResponsiveMenuItemIconState.primary;
 
     // The Cords can only be opened/closed on the large grid view
-    isCardOpen = List<bool>.generate(_nrOfCards, (int i) {
+    isCardOpen = List<bool>.generate(gridItems.length, (int i) {
       if (i == 1 || i == 0) {
         // Always start with info and code view panel closed.
         return false;
@@ -83,7 +81,7 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    menuItemsIconState[0] = isLight
+    menuItemsIconState[1] = isLight
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
   }
@@ -94,28 +92,16 @@ class _HomePageState extends State<HomePage> {
     final bool isDark = theme.brightness == Brightness.dark;
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
-    // We are on phone width media, based on our definition in this app.
     final bool isPhone =
         MediaQuery.of(context).size.width < AppData.phoneBreakpoint;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      // FlexColorScheme contains a static helper that can be use to theme
-      // the system navigation bar using the AnnotatedRegion. Without this
-      // wrapper the system navigation bar in Android will not change
-      // color as we change themes for the page. This is normal Flutter
-      // behavior. By using an annotated region with the helper function
-      // FlexColorScheme.themedSystemNavigationBar, we can make the
-      // navigation bar follow desired background color and theme-mode easily.
-      // This looks much better and as it should on Android devices.
-      // It also supports system navbar with opacity or fully transparent
-      // Android system navigation bar on Android SDK >= 29.
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
         systemNavBarStyle: widget.controller.navBarStyle,
         useDivider: widget.controller.useNavDivider,
         opacity: widget.controller.sysBarOpacity,
       ),
-
       child: ResponsiveScaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -137,16 +123,8 @@ class _HomePageState extends State<HomePage> {
         menuItemsIconState: menuItemsIconState,
         // Callback from menu, using simple index based actions here.
         onSelect: (int index) async {
-          // Set theme-mode light/dark
+          // Toggle grid view mode true/false.
           if (index == 0) {
-            if (isDark) {
-              await widget.controller.setThemeMode(ThemeMode.light);
-            } else {
-              await widget.controller.setThemeMode(ThemeMode.dark);
-            }
-          }
-          // Toggle advanced view mode true/false
-          if (index == 1) {
             await widget.controller
                 .setAdvancedView(!widget.controller.isLargeGridView);
             menuItemsEnabled[4] = !menuItemsEnabled[4];
@@ -155,6 +133,14 @@ class _HomePageState extends State<HomePage> {
                 ? ResponsiveMenuItemIconState.secondary
                 : ResponsiveMenuItemIconState.primary;
             setState(() {});
+          }
+          // Set theme-mode light/dark
+          if (index == 1) {
+            if (isDark) {
+              await widget.controller.setThemeMode(ThemeMode.light);
+            } else {
+              await widget.controller.setThemeMode(ThemeMode.dark);
+            }
           }
           // Copy theme setup code
           if (index == 2) {
@@ -207,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                 isCardOpen: isCardOpen,
                 toggleCard: toggleCard,
               )
-            : PanelView(controller: widget.controller),
+            : PanelView(tc: widget.controller),
       ),
     );
   }

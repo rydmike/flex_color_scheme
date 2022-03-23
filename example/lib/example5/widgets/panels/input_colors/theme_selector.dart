@@ -74,6 +74,7 @@ class _ThemeSelectorState extends State<ThemeSelector> {
           Expanded(
             child: ListView.builder(
               controller: scrollController,
+              padding: const EdgeInsetsDirectional.only(start: 8, end: 16),
               physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: AppColor.schemes.length,
