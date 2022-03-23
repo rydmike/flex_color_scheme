@@ -127,7 +127,7 @@ class _PanelViewState extends State<PanelView> {
             PanelPage(FabToggleChipPopupSettings(controller: widget.tc), page,
                 widget.tc),
             PanelPage(SwitchesSettings(controller: widget.tc), page, widget.tc),
-            PanelPage(const ListTileSettings(), page, widget.tc),
+            PanelPage(ListTileSettings(controller: widget.tc), page, widget.tc),
             PanelPage(DialogSettings(controller: widget.tc), page, widget.tc),
             PanelPage(MaterialAndBottomSheetSettings(controller: widget.tc),
                 page, widget.tc),
