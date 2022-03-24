@@ -81,143 +81,149 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
     tooltipsMatchBackground: controller.tooltipsMatchBackground,
     //
     // Opt in/out of using opinionated sub-themes.
-    useSubThemes: controller.useSubThemes,
-    // Options used to modify the sub-themes, there are more
-    // properties than this, but here we use:
-    subThemesData: FlexSubThemesData(
-      // Want color themed disable hover, focus, highlight and
-      // splash colors? Then keep this one on.
-      interactionEffects: controller.interactionEffects,
-      // Blend level for on colors for on colors, primary
-      // secondary and tertiary and their containers.
-      blendOnLevel: controller.blendOnLevel,
-      // Use blend level values also with main on colors, not
-      // only with container and on surfaces.
-      blendOnColors: controller.blendLightOnColors,
-      // By default sub themes mode also opts in on using colored text for
-      // the themed text. If you plan to put text on surfaces that are not
-      // primary color tinted or primary colored, then you may need to
-      // turn this off, or make custom text themes for those surfaces.
-      // Material3 has containers with matching colors too, they work great
-      // for contrast colored text, do use them too.
-      blendTextTheme: controller.blendLightTextTheme,
-      // Opt in/out of the Material 3 style matched TextTheme geometry, or
-      // Typography, as it is called in Flutter SDK. The M3 Typography is not
-      // yet natively available in Flutter SDK 2.10.3 or earlier, this offers it
-      // as a way to use it already now.
-      useTextTheme: controller.useTextTheme,
-      // Value to adjust themed border radius on widgets with
-      // an adjustable corner rounding, this one is very handy.
-      // If null, it defaults to Material3 (You) design
-      // guide values, when available: https://m3.material.io/
-      // If you give it value, "all" Flutter built-in widgets
-      // supporting border radius will use the give radius.
-      defaultRadius: controller.cornerRadius,
-      // Border radius can be customized per widget too, here are three
-      // example of that, it overrides M3 default and global default setting.
-      elevatedButtonRadius: controller.elevatedButtonBorderRadius,
-      outlinedButtonRadius: controller.outlinedButtonBorderRadius,
-      textButtonRadius: controller.textButtonBorderRadius,
-      toggleButtonsRadius: controller.toggleButtonsBorderRadius,
-      // SchemeColor based ColorScheme color used on buttons & toggles.
-      textButtonSchemeColor: controller.textButtonSchemeColor,
-      elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
-      outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
-      materialButtonSchemeColor: controller.materialButtonSchemeColor,
-      toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
-      switchSchemeColor: controller.switchSchemeColor,
-      checkboxSchemeColor: controller.checkboxSchemeColor,
-      radioSchemeColor: controller.radioSchemeColor,
-      // Style of unselected switch/checkbox/radio.
-      unselectedToggleIsColored: controller.unselectedIsColored,
-      //
-      // Base ColorScheme used by TextField InputDecorator.
-      inputDecoratorSchemeColor: controller.inputDecoratorSchemeColor,
-      // Text input field uses a themed fill color.
-      inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
-      // Do you like underline or outline border type?
-      // (Might add some new styles in a future update)
-      inputDecoratorBorderType: controller.inputDecoratorBorderType,
-      // Only want a border when the text input has focus
-      // or error, then set this to false. By default it always
-      // has a border of selected style, but thinner.
-      inputDecoratorUnfocusedHasBorder:
-          controller.inputDecoratorUnfocusedHasBorder,
-      // Set to false to keep using M2 style FAB and ignore
-      // M3 type default and global radius on the FAB, it thus
-      // remains circular or stadium shaped in extended mode.
-      fabUseShape: controller.fabUseShape,
-      fabSchemeColor: controller.fabSchemeColor,
-      snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
-      chipSchemeColor: controller.chipSchemeColor,
-      cardRadius: controller.cardBorderRadius,
-      // Set some opacity on popup menu.
-      popupMenuOpacity: controller.popupMenuOpacity,
-      // ColorScheme used on various widgets.
-      dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
-      appBarBackgroundSchemeColor: controller.appBarBackgroundSchemeColor,
-      tabBarItemSchemeColor: controller.tabBarItemSchemeColor,
-      tabBarIndicatorSchemeColor: controller.tabBarIndicator,
-      //
-      // BottomNavigationBar settings
-      // Shares input with BottomNavigationBar.
-      bottomNavigationBarSelectedLabelSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      bottomNavigationBarUnselectedLabelSchemeColor:
-          controller.navUnselectedSchemeColor,
-      bottomNavigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
-      bottomNavigationBarSelectedIconSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      bottomNavigationBarUnselectedIconSchemeColor:
-          controller.navUnselectedSchemeColor,
-      bottomNavigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
-      bottomNavigationBarBackgroundSchemeColor:
-          controller.navBarBackgroundSchemeColor,
-      bottomNavigationBarOpacity: controller.bottomNavigationBarOpacity,
-      bottomNavigationBarElevation: controller.bottomNavigationBarElevation,
-      bottomNavigationBarShowSelectedLabels:
-          controller.bottomNavShowSelectedLabels,
-      bottomNavigationBarShowUnselectedLabels:
-          controller.bottomNavShowUnselectedLabels,
-      //
-      // NavigationBar settings
-      // Shares input with BottomNavigationBar and Rail.
-      navigationBarSelectedLabelSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      navigationBarUnselectedLabelSchemeColor:
-          controller.navUnselectedSchemeColor,
-      navigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
-      navigationBarSelectedIconSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      navigationBarUnselectedIconSchemeColor:
-          controller.navUnselectedSchemeColor,
-      navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
-      navigationBarHighlightSchemeColor: controller.navBarHighlight,
-      navigationBarBackgroundSchemeColor:
-          controller.navBarBackgroundSchemeColor,
-      navigationBarOpacity: controller.bottomNavigationBarOpacity,
-      navigationBarLabelBehavior: controller.navBarLabelBehavior,
-      //
-      // NavigationRail settings
-      // Shares controller values with nav bars in this demo.
-      navigationRailSelectedLabelSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      navigationRailUnselectedLabelSchemeColor:
-          controller.navUnselectedSchemeColor,
-      navigationRailMutedUnselectedLabel: controller.navBarMuteUnselected,
-      navigationRailSelectedIconSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      navigationRailUnselectedIconSchemeColor:
-          controller.navUnselectedSchemeColor,
-      navigationRailMutedUnselectedIcon: controller.navBarMuteUnselected,
-      navigationRailUseIndicator: controller.useIndicator,
-      navigationRailIndicatorSchemeColor: controller.navBarHighlight,
-      navigationRailBackgroundSchemeColor:
-          controller.navBarBackgroundSchemeColor,
-      navigationRailOpacity: controller.bottomNavigationBarOpacity,
-      navigationRailElevation: controller.bottomNavigationBarElevation,
-      navigationRailLabelType: controller.navRailLabelType,
-    ),
+    subThemesData: controller.useSubThemes
+        ?
+        // Options used to modify the sub-themes, there are more
+        // properties than this, but here we use:
+        FlexSubThemesData(
+            // Want color themed disable hover, focus, highlight and
+            // splash colors? Then keep this one on.
+            interactionEffects: controller.interactionEffects,
+            // Blend level for on colors for on colors, primary
+            // secondary and tertiary and their containers.
+            blendOnLevel: controller.blendOnLevel,
+            // Use blend level values also with main on colors, not
+            // only with container and on surfaces.
+            blendOnColors: controller.blendLightOnColors,
+            // By default sub themes mode also opts in on using colored text for
+            // the themed text. If you plan to put text on surfaces that are not
+            // primary color tinted or primary colored, then you may need to
+            // turn this off, or make custom text themes for those surfaces.
+            // Material3 has containers with matching colors too, they work
+            // great for contrast colored text, do use them too.
+            blendTextTheme: controller.blendLightTextTheme,
+            // Opt in/out of the Material 3 style matched TextTheme geometry, or
+            // Typography, as it is called in Flutter SDK. The M3 Typography is
+            // not yet natively available in Flutter SDK 2.10.3 or earlier,
+            // this offers it as a way to use it already now.
+            useTextTheme: controller.useTextTheme,
+            // Value to adjust themed border radius on widgets with
+            // an adjustable corner rounding, this one is very handy.
+            // If null, it defaults to Material3 (You) design
+            // guide values, when available: https://m3.material.io/
+            // If you give it value, "all" Flutter built-in widgets
+            // supporting border radius will use the give radius.
+            defaultRadius: controller.cornerRadius,
+            // Border radius can be customized per widget too, here are three
+            // example of that, it overrides M3 default and global default
+            // setting.
+            elevatedButtonRadius: controller.elevatedButtonBorderRadius,
+            outlinedButtonRadius: controller.outlinedButtonBorderRadius,
+            textButtonRadius: controller.textButtonBorderRadius,
+            toggleButtonsRadius: controller.toggleButtonsBorderRadius,
+            // SchemeColor based ColorScheme color used on buttons & toggles.
+            textButtonSchemeColor: controller.textButtonSchemeColor,
+            elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
+            outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
+            materialButtonSchemeColor: controller.materialButtonSchemeColor,
+            toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
+            switchSchemeColor: controller.switchSchemeColor,
+            checkboxSchemeColor: controller.checkboxSchemeColor,
+            radioSchemeColor: controller.radioSchemeColor,
+            // Style of unselected switch/checkbox/radio.
+            unselectedToggleIsColored: controller.unselectedIsColored,
+            //
+            // Base ColorScheme used by TextField InputDecorator.
+            inputDecoratorSchemeColor: controller.inputDecoratorSchemeColor,
+            // Text input field uses a themed fill color.
+            inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
+            // Do you like underline or outline border type?
+            // (Might add some new styles in a future update)
+            inputDecoratorBorderType: controller.inputDecoratorBorderType,
+            // Only want a border when the text input has focus
+            // or error, then set this to false. By default it always
+            // has a border of selected style, but thinner.
+            inputDecoratorUnfocusedHasBorder:
+                controller.inputDecoratorUnfocusedHasBorder,
+            // Set to false to keep using M2 style FAB and ignore
+            // M3 type default and global radius on the FAB, it thus
+            // remains circular or stadium shaped in extended mode.
+            fabUseShape: controller.fabUseShape,
+            fabSchemeColor: controller.fabSchemeColor,
+            snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
+            chipSchemeColor: controller.chipSchemeColor,
+            cardRadius: controller.cardBorderRadius,
+            // Set some opacity on popup menu.
+            popupMenuOpacity: controller.popupMenuOpacity,
+            // ColorScheme used on various widgets.
+            dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
+            appBarBackgroundSchemeColor: controller.appBarBackgroundSchemeColor,
+            tabBarItemSchemeColor: controller.tabBarItemSchemeColor,
+            tabBarIndicatorSchemeColor: controller.tabBarIndicator,
+            //
+            // BottomNavigationBar settings
+            // Shares input with BottomNavigationBar.
+            bottomNavigationBarSelectedLabelSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            bottomNavigationBarUnselectedLabelSchemeColor:
+                controller.navUnselectedSchemeColor,
+            bottomNavigationBarMutedUnselectedLabel:
+                controller.navBarMuteUnselected,
+            bottomNavigationBarSelectedIconSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            bottomNavigationBarUnselectedIconSchemeColor:
+                controller.navUnselectedSchemeColor,
+            bottomNavigationBarMutedUnselectedIcon:
+                controller.navBarMuteUnselected,
+            bottomNavigationBarBackgroundSchemeColor:
+                controller.navBarBackgroundSchemeColor,
+            bottomNavigationBarOpacity: controller.bottomNavigationBarOpacity,
+            bottomNavigationBarElevation:
+                controller.bottomNavigationBarElevation,
+            bottomNavigationBarShowSelectedLabels:
+                controller.bottomNavShowSelectedLabels,
+            bottomNavigationBarShowUnselectedLabels:
+                controller.bottomNavShowUnselectedLabels,
+            //
+            // NavigationBar settings
+            // Shares input with BottomNavigationBar and Rail.
+            navigationBarSelectedLabelSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            navigationBarUnselectedLabelSchemeColor:
+                controller.navUnselectedSchemeColor,
+            navigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
+            navigationBarSelectedIconSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            navigationBarUnselectedIconSchemeColor:
+                controller.navUnselectedSchemeColor,
+            navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
+            navigationBarHighlightSchemeColor: controller.navBarHighlight,
+            navigationBarBackgroundSchemeColor:
+                controller.navBarBackgroundSchemeColor,
+            navigationBarOpacity: controller.bottomNavigationBarOpacity,
+            navigationBarLabelBehavior: controller.navBarLabelBehavior,
+            //
+            // NavigationRail settings
+            // Shares controller values with nav bars in this demo.
+            navigationRailSelectedLabelSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            navigationRailUnselectedLabelSchemeColor:
+                controller.navUnselectedSchemeColor,
+            navigationRailMutedUnselectedLabel: controller.navBarMuteUnselected,
+            navigationRailSelectedIconSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            navigationRailUnselectedIconSchemeColor:
+                controller.navUnselectedSchemeColor,
+            navigationRailMutedUnselectedIcon: controller.navBarMuteUnselected,
+            navigationRailUseIndicator: controller.useIndicator,
+            navigationRailIndicatorSchemeColor: controller.navBarHighlight,
+            navigationRailBackgroundSchemeColor:
+                controller.navBarBackgroundSchemeColor,
+            navigationRailOpacity: controller.bottomNavigationBarOpacity,
+            navigationRailElevation: controller.bottomNavigationBarElevation,
+            navigationRailLabelType: controller.navRailLabelType,
+          )
+        : null,
     //
     // Advanced color properties for seed generated ColorScheme's
     //

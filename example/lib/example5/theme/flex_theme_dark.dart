@@ -69,101 +69,105 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
     swapColors: controller.swapDarkColors,
     tooltipsMatchBackground: controller.tooltipsMatchBackground,
     //
-    useSubThemes: controller.useSubThemes,
-    subThemesData: FlexSubThemesData(
-      interactionEffects: controller.interactionEffects,
-      blendOnLevel: controller.blendOnLevelDark,
-      blendOnColors: controller.blendDarkOnColors,
-      blendTextTheme: controller.blendDarkTextTheme,
-      useTextTheme: controller.useTextTheme,
-      //
-      defaultRadius: controller.cornerRadius,
-      textButtonRadius: controller.textButtonBorderRadius,
-      elevatedButtonRadius: controller.elevatedButtonBorderRadius,
-      outlinedButtonRadius: controller.outlinedButtonBorderRadius,
-      toggleButtonsRadius: controller.toggleButtonsBorderRadius,
-      //
-      textButtonSchemeColor: controller.textButtonSchemeColor,
-      elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
-      outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
-      materialButtonSchemeColor: controller.materialButtonSchemeColor,
-      toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
-      switchSchemeColor: controller.switchSchemeColor,
-      checkboxSchemeColor: controller.checkboxSchemeColor,
-      radioSchemeColor: controller.radioSchemeColor,
-      unselectedToggleIsColored: controller.unselectedIsColored,
-      //
-      inputDecoratorSchemeColor: controller.inputDecoratorSchemeColor,
-      inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
-      inputDecoratorBorderType: controller.inputDecoratorBorderType,
-      inputDecoratorUnfocusedHasBorder:
-          controller.inputDecoratorUnfocusedHasBorder,
-      //
-      fabUseShape: controller.fabUseShape,
-      fabSchemeColor: controller.fabSchemeColor,
-      snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
-      chipSchemeColor: controller.chipSchemeColor,
-      cardRadius: controller.cardBorderRadius,
-      popupMenuOpacity: controller.popupMenuOpacity,
-      //
-      dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
-      appBarBackgroundSchemeColor: controller.appBarBackgroundSchemeColor,
-      tabBarItemSchemeColor: controller.tabBarItemSchemeColor,
-      tabBarIndicatorSchemeColor: controller.tabBarIndicator,
-      // BottomNavigationBar settings
-      bottomNavigationBarSelectedLabelSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      bottomNavigationBarUnselectedLabelSchemeColor:
-          controller.navUnselectedSchemeColor,
-      bottomNavigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
-      bottomNavigationBarSelectedIconSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      bottomNavigationBarUnselectedIconSchemeColor:
-          controller.navUnselectedSchemeColor,
-      bottomNavigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
-      bottomNavigationBarBackgroundSchemeColor:
-          controller.navBarBackgroundSchemeColor,
-      bottomNavigationBarOpacity: controller.bottomNavigationBarOpacity,
-      bottomNavigationBarElevation: controller.bottomNavigationBarElevation,
-      bottomNavigationBarShowSelectedLabels:
-          controller.bottomNavShowSelectedLabels,
-      bottomNavigationBarShowUnselectedLabels:
-          controller.bottomNavShowUnselectedLabels,
-      // NavigationBar settings
-      navigationBarSelectedLabelSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      navigationBarUnselectedLabelSchemeColor:
-          controller.navUnselectedSchemeColor,
-      navigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
-      navigationBarSelectedIconSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      navigationBarUnselectedIconSchemeColor:
-          controller.navUnselectedSchemeColor,
-      navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
-      navigationBarHighlightSchemeColor: controller.navBarHighlight,
-      navigationBarBackgroundSchemeColor:
-          controller.navBarBackgroundSchemeColor,
-      navigationBarOpacity: controller.bottomNavigationBarOpacity,
-      navigationBarLabelBehavior: controller.navBarLabelBehavior,
-      // NavigationRail settings
-      navigationRailSelectedLabelSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      navigationRailUnselectedLabelSchemeColor:
-          controller.navUnselectedSchemeColor,
-      navigationRailMutedUnselectedLabel: controller.navBarMuteUnselected,
-      navigationRailSelectedIconSchemeColor:
-          controller.navBarSelectedSchemeColor,
-      navigationRailUnselectedIconSchemeColor:
-          controller.navUnselectedSchemeColor,
-      navigationRailMutedUnselectedIcon: controller.navBarMuteUnselected,
-      navigationRailUseIndicator: controller.useIndicator,
-      navigationRailIndicatorSchemeColor: controller.navBarHighlight,
-      navigationRailBackgroundSchemeColor:
-          controller.navBarBackgroundSchemeColor,
-      navigationRailOpacity: controller.bottomNavigationBarOpacity,
-      navigationRailElevation: controller.bottomNavigationBarElevation,
-      navigationRailLabelType: controller.navRailLabelType,
-    ),
+    subThemesData: controller.useSubThemes
+        ? FlexSubThemesData(
+            interactionEffects: controller.interactionEffects,
+            blendOnLevel: controller.blendOnLevelDark,
+            blendOnColors: controller.blendDarkOnColors,
+            blendTextTheme: controller.blendDarkTextTheme,
+            useTextTheme: controller.useTextTheme,
+            //
+            defaultRadius: controller.cornerRadius,
+            textButtonRadius: controller.textButtonBorderRadius,
+            elevatedButtonRadius: controller.elevatedButtonBorderRadius,
+            outlinedButtonRadius: controller.outlinedButtonBorderRadius,
+            toggleButtonsRadius: controller.toggleButtonsBorderRadius,
+            //
+            textButtonSchemeColor: controller.textButtonSchemeColor,
+            elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
+            outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
+            materialButtonSchemeColor: controller.materialButtonSchemeColor,
+            toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
+            switchSchemeColor: controller.switchSchemeColor,
+            checkboxSchemeColor: controller.checkboxSchemeColor,
+            radioSchemeColor: controller.radioSchemeColor,
+            unselectedToggleIsColored: controller.unselectedIsColored,
+            //
+            inputDecoratorSchemeColor: controller.inputDecoratorSchemeColor,
+            inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
+            inputDecoratorBorderType: controller.inputDecoratorBorderType,
+            inputDecoratorUnfocusedHasBorder:
+                controller.inputDecoratorUnfocusedHasBorder,
+            //
+            fabUseShape: controller.fabUseShape,
+            fabSchemeColor: controller.fabSchemeColor,
+            snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
+            chipSchemeColor: controller.chipSchemeColor,
+            cardRadius: controller.cardBorderRadius,
+            popupMenuOpacity: controller.popupMenuOpacity,
+            //
+            dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
+            appBarBackgroundSchemeColor: controller.appBarBackgroundSchemeColor,
+            tabBarItemSchemeColor: controller.tabBarItemSchemeColor,
+            tabBarIndicatorSchemeColor: controller.tabBarIndicator,
+            // BottomNavigationBar settings
+            bottomNavigationBarSelectedLabelSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            bottomNavigationBarUnselectedLabelSchemeColor:
+                controller.navUnselectedSchemeColor,
+            bottomNavigationBarMutedUnselectedLabel:
+                controller.navBarMuteUnselected,
+            bottomNavigationBarSelectedIconSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            bottomNavigationBarUnselectedIconSchemeColor:
+                controller.navUnselectedSchemeColor,
+            bottomNavigationBarMutedUnselectedIcon:
+                controller.navBarMuteUnselected,
+            bottomNavigationBarBackgroundSchemeColor:
+                controller.navBarBackgroundSchemeColor,
+            bottomNavigationBarOpacity: controller.bottomNavigationBarOpacity,
+            bottomNavigationBarElevation:
+                controller.bottomNavigationBarElevation,
+            bottomNavigationBarShowSelectedLabels:
+                controller.bottomNavShowSelectedLabels,
+            bottomNavigationBarShowUnselectedLabels:
+                controller.bottomNavShowUnselectedLabels,
+            // NavigationBar settings
+            navigationBarSelectedLabelSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            navigationBarUnselectedLabelSchemeColor:
+                controller.navUnselectedSchemeColor,
+            navigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
+            navigationBarSelectedIconSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            navigationBarUnselectedIconSchemeColor:
+                controller.navUnselectedSchemeColor,
+            navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
+            navigationBarHighlightSchemeColor: controller.navBarHighlight,
+            navigationBarBackgroundSchemeColor:
+                controller.navBarBackgroundSchemeColor,
+            navigationBarOpacity: controller.bottomNavigationBarOpacity,
+            navigationBarLabelBehavior: controller.navBarLabelBehavior,
+            // NavigationRail settings
+            navigationRailSelectedLabelSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            navigationRailUnselectedLabelSchemeColor:
+                controller.navUnselectedSchemeColor,
+            navigationRailMutedUnselectedLabel: controller.navBarMuteUnselected,
+            navigationRailSelectedIconSchemeColor:
+                controller.navBarSelectedSchemeColor,
+            navigationRailUnselectedIconSchemeColor:
+                controller.navUnselectedSchemeColor,
+            navigationRailMutedUnselectedIcon: controller.navBarMuteUnselected,
+            navigationRailUseIndicator: controller.useIndicator,
+            navigationRailIndicatorSchemeColor: controller.navBarHighlight,
+            navigationRailBackgroundSchemeColor:
+                controller.navBarBackgroundSchemeColor,
+            navigationRailOpacity: controller.bottomNavigationBarOpacity,
+            navigationRailElevation: controller.bottomNavigationBarElevation,
+            navigationRailLabelType: controller.navRailLabelType,
+          )
+        : null,
     //
     // Advanced color properties for seed generated ColorScheme's
     // Use key color based M3 ColorScheme.

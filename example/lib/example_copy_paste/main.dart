@@ -68,7 +68,6 @@ class _DemoAppState extends State<DemoApp> {
         scheme: FlexScheme.flutterDash,
         blendLevel: 9,
         appBarOpacity: 0.95,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(
           blendOnLevel: 18,
           blendOnColors: false,
@@ -100,7 +99,6 @@ class _DemoAppState extends State<DemoApp> {
         blendLevel: 16,
         appBarStyle: FlexAppBarStyle.background,
         appBarOpacity: 0.95,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(
           blendOnLevel: 24,
           unselectedToggleIsColored: true,

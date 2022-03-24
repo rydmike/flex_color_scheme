@@ -113,23 +113,24 @@ class DemoApp extends StatelessWidget {
             blendLevel: 5,
             appBarElevation: 0.5,
             // Opt-in/out on using the additional opinionated
-            // component sub-themes. You ca also use property `subThemesData`
+            // component sub-themes. You can use property `subThemesData`
             // to pass in a `FlexSubThemesData()` data object that contains a
             // large number of easy to use configuration parameters that you
             // can use for quick styling of the sub-themes per component.
-            useSubThemes: themeController.useSubThemes,
-            // Below we show one example for configuring the component
-            // sub-themes. In example 5 we will use many more of them, but not
-            // even there all of them.
-            subThemesData: FlexSubThemesData(
-              // Value to adjust themed border radius on widgets with
-              // an adjustable corner rounding, this one is very handy.
-              // If null, it defaults to Material3 (You) design
-              // guide values, when available: https://m3.material.io/
-              // If you give it value, "all" Flutter built-in widgets
-              // supporting border radius will use the give radius.
-              defaultRadius: themeController.cornerRadius,
-            ),
+            subThemesData: themeController.useSubThemes
+                // Below we show one example for configuring the component
+                // sub-themes. In example 5 we will use many more of them, but
+                // not even there all of them.
+                ? FlexSubThemesData(
+                    // Value to adjust themed border radius on widgets with
+                    // an adjustable corner rounding, this one is very handy.
+                    // If null, it defaults to Material3 (You) design
+                    // guide values, when available: https://m3.material.io/
+                    // If you give it value, "all" Flutter built-in widgets
+                    // supporting border radius will use the give radius.
+                    defaultRadius: themeController.cornerRadius,
+                  )
+                : null,
             // Passing in `FlexKeyColors()` to `keyColors` activates Material 3
             // key color seed based schemes. The primary color in your
             // active theme is always used as main "primary" key for the
@@ -183,10 +184,11 @@ class DemoApp extends StatelessWidget {
               keepSecondary: themeController.keepSecondary,
               keepTertiary: themeController.keepTertiary,
             ),
-            useSubThemes: themeController.useSubThemes,
-            subThemesData: FlexSubThemesData(
-              defaultRadius: themeController.cornerRadius,
-            ),
+            subThemesData: themeController.useSubThemes
+                ? FlexSubThemesData(
+                    defaultRadius: themeController.cornerRadius,
+                  )
+                : null,
             visualDensity: AppData.visualDensity,
             fontFamily: AppData.font,
           ),

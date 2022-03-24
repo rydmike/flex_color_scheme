@@ -136,7 +136,8 @@ class DemoApp extends StatelessWidget {
             // to pass in a `FlexSubThemesData()` data object that contains a
             // large number of easy to use configuration parameters that you
             // can use for quick styling of the sub-themes per component.
-            useSubThemes: themeController.useSubThemes,
+            subThemesData:
+                themeController.useSubThemes ? const FlexSubThemesData() : null,
             // Passing in `FlexKeyColors()` to `keyColors` activates Material 3
             // key color seed based schemes. The primary color in your
             // active theme is always used as main "primary" key for the
@@ -189,7 +190,8 @@ class DemoApp extends StatelessWidget {
             // goes better together with the highScaffoldLowSurfaces mode.
             blendLevel: 12,
             appBarElevation: 1,
-            useSubThemes: themeController.useSubThemes,
+            subThemesData:
+                themeController.useSubThemes ? const FlexSubThemesData() : null,
             keyColors: FlexKeyColors(
               useKeyColors: themeController.useKeyColors,
               useSecondary: themeController.useSecondary,

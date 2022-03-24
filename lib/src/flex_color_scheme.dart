@@ -574,7 +574,12 @@ class FlexColorScheme with Diagnosticable {
     final this.platform,
     final this.typography,
     final this.applyElevationOverlayColor = true,
-    final this.useSubThemes = false,
+    @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
+        'opinionated component sub-themes are added by adding a default '
+        'constructor FlexSubThemesData() to subThemesData. This creates '
+        'sub-themes using the FlexColorScheme opinionated defaults. You can '
+        'modify the sub-themes by changing the FlexSubThemesData properties.')
+        final this.useSubThemes = false,
     final this.subThemesData,
     final this.useMaterial3 = false,
   })  : assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.'),
@@ -1102,24 +1107,62 @@ class FlexColorScheme with Diagnosticable {
   /// https://github.com/flutter/flutter/issues/90353
   final bool applyElevationOverlayColor;
 
-  /// Set to true to opt in on using additional opinionated widget sub themes.
+  /// This property has no function after 4.2.0. Prior to version 5 this
+  /// property was used to activate the opinionated component sub-themes.
+  /// Starting with version 5 they are now enabled by adding a default
+  /// constructor `FlexSubThemesData()` to [subThemesData].
+  ///
+  /// Defaults to false.
+  @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
+      'opinionated component sub-themes are added by adding a default '
+      'constructor FlexSubThemesData() to subThemesData. This creates '
+      'sub-themes using the FlexColorScheme opinionated defaults. You can '
+      'modify the sub-themes by changing the FlexSubThemesData properties.')
+  final bool useSubThemes;
+
+  /// Activate using FlexColorScheme opinionated component sub-themes by
+  /// passing in a default `FlexSubThemesData()`.
+  ///
+  /// To further configure the sub-themes, change the simple flat value
+  /// properties as desired in `FlexSubThemesData()`.
   ///
   /// By default [FlexThemeData.light], [FlexThemeData.dark] and
-  /// [FlexColorScheme.toTheme], tries to do as
-  /// little as they need to just provide a consistent color schemed theme.
+  /// [FlexColorScheme.toTheme], do as little as they need to just
+  /// provide a consistent Material 2 color schemed theme. The additions they
+  /// do are described in [FlexColorScheme.toTheme].
   ///
-  /// By opting in with [useSubThemes] set to true you get an opinionated set of
-  /// widget sub themes applied. They can be conveniently customized via the
-  /// [subThemesData] property, that holds quick and easy sub theme
-  /// configuration values in the data class [FlexSubThemesData].
+  /// The original purpose of the opinionated sub-themes was to make it easy
+  /// to add themed corner radius to all Widgets that support it, and to
+  /// provide a consistent look on all buttons, including [ToggleButtons].
+  ///
+  /// Therefore the sub themes are a convenient way to opt-in on customized
+  /// corner radius on Widgets using above themes. By opting in you can set
+  /// corner radius for all covered Widgets to same corner radius in one go.
+  /// There are also properties to override the global default for each widget
+  /// to set different rounding per widget if so desired.
+  ///
+  /// By default, if a `defaultRadius` is not specified, each widgets corner
+  /// radius and some other styling take inspiration from the Material 3 (M3)
+  /// specification https://m3.material.io/ and uses its specifications as
+  /// defaults when it is possible to do so in Flutter SDK theming, within
+  /// its current Material 2 (M2) design limitations.
+  ///
+  /// In version 5, by opting in via a default [subThemesData] you
+  /// get an extensive set of widget component sub themes applied.
+  /// They can be customized via the [subThemesData] property, that has
+  /// quick and flat sub theme configuration values in the data class
+  /// [FlexSubThemesData].
   ///
   /// Opinionated sub themes are provided for:
   ///
   /// * [TextButton]
   /// * [ElevatedButton]
   /// * [OutlinedButton]
-  /// * Older deprecated legacy buttons using [ButtonThemeData]
+  /// * Older buttons using [ButtonThemeData]
   /// * [ToggleButtons]
+  /// * [Switch]
+  /// * [Checkbox]
+  /// * [Radio]
   /// * [InputDecoration]
   /// * [FloatingActionButton]
   /// * [Chip]
@@ -1128,45 +1171,17 @@ class FlexColorScheme with Diagnosticable {
   /// * [Dialog]
   /// * [TimePickerDialog]
   /// * [SnackBar]
+  /// * [Tooltip]
   /// * [BottomSheet]
   /// * [BottomNavigationBar]
   /// * [NavigationBar]
+  /// * [NavigationRail]
   ///
-  /// * The [ButtonThemeData] still provides matching themed styling
-  ///   for the deprecated legacy buttons if they are used. Please consider
-  ///   phasing them out though, as the are deprecated and may soon be
-  ///   removed from the SDK.
+  /// * The custom [ButtonTextTheme] even still provides matching styling to
+  ///   for the deprecated legacy buttons if they are used.
   ///
-  /// The sub themes are a convenient way to opt-in on customized corner
-  /// radius on Widgets using above themes. By opting in you can set corner
-  /// radius for all above Widgets to same corner radius in one go. There are
-  /// also properties to override the global default for each widget to set
-  /// different rounding per widget if so desired.
-  ///
-  /// By default each widgets corner radius and some other styling take
-  /// inspiration from the Material 3 (M3) specification https://m3.material.io
-  /// and uses its values as defaults when it is possible to do so in Flutter
-  /// SDK theming within its current Material 2 (M2) design limitations.
-  ///
-  /// Defaults to false.
-  final bool useSubThemes;
-
-  /// Optional configuration parameters for the opt-in widget sub-themes.
-  ///
-  /// If you opt-in to use the opinionated sub theming offered by
-  /// [FlexColorScheme] you can also configure them by passing in a
-  /// [FlexSubThemesData] that allows you to modify their style and behavior.
-  ///
-  /// The primary purpose of the opinionated sub themes is to make it easy
-  /// to add themed corner radius to all Widgets that support it, and to
-  /// provide a consistent look on all buttons, including [ToggleButtons].
-  ///
-  /// The default values is also a a quick way to give your Material 2 themed
-  /// based  application a look that to large extents follows the Material3
-  /// (M3) guide before the option is fully implemented in Flutter SDK.
-  ///
-  /// Defaults to null, resulting in a default [FlexSubThemesData] being used
-  /// when [useSubThemes] is set to true.
+  /// Defaults to null, resulting in FlexColorScheme not using any extra
+  /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
   final FlexSubThemesData? subThemesData;
 
   /// A temporary flag used to opt-in to new Material 3 features.
@@ -2061,16 +2076,51 @@ class FlexColorScheme with Diagnosticable {
     /// suitable for multiline tooltips.
     final bool tooltipsMatchBackground = false,
 
-    /// Set to true to opt-in on using additional opinionated widget sub themes.
+    /// This property has no function after 4.2.0. Prior to version 5 this
+    /// property was used to activate the opinionated component sub-themes.
+    /// Starting with version 5 they are now enabled by adding a default
+    /// constructor `FlexSubThemesData()` to [subThemesData].
+    ///
+    /// Defaults to false.
+    @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
+        'opinionated component sub-themes are added by adding a default '
+        'constructor FlexSubThemesData() to subThemesData. This creates '
+        'sub-themes using the FlexColorScheme opinionated defaults. You can '
+        'modify the sub-themes by changing the FlexSubThemesData properties.')
+        final bool useSubThemes = false,
+
+    /// Activate using FlexColorScheme opinionated component sub-themes by
+    /// passing in a default `FlexSubThemesData()`.
+    ///
+    /// To further configure the sub-themes, change the simple flat value
+    /// properties as desired in `FlexSubThemesData()`.
     ///
     /// By default [FlexThemeData.light], [FlexThemeData.dark] and
-    /// [FlexColorScheme.toTheme], tries to do as
-    /// little as they need to just provide a consistent color schemed theme.
+    /// [FlexColorScheme.toTheme], do as little as they need to just
+    /// provide a consistent Material 2 color schemed theme. The additions they
+    /// do are described in [FlexColorScheme.toTheme].
     ///
-    /// By opting in with [useSubThemes] set to true you get an opinionated set
-    /// of widget sub themes applied. They can be conveniently customized via
-    /// the [subThemesData] property, that holds quick and easy sub theme
-    /// configuration values in the data class [FlexSubThemesData].
+    /// The original purpose of the opinionated sub-themes was to make it easy
+    /// to add themed corner radius to all Widgets that support it, and to
+    /// provide a consistent look on all buttons, including [ToggleButtons].
+    ///
+    /// Therefore the sub themes are a convenient way to opt-in on customized
+    /// corner radius on Widgets using above themes. By opting in you can set
+    /// corner radius for all covered Widgets to same corner radius in one go.
+    /// There are also properties to override the global default for each widget
+    /// to set different rounding per widget if so desired.
+    ///
+    /// By default, if a `defaultRadius` is not specified, each widgets corner
+    /// radius and some other styling take inspiration from the Material 3 (M3)
+    /// specification https://m3.material.io/ and uses its specifications as
+    /// defaults when it is possible to do so in Flutter SDK theming, within
+    /// its current Material 2 (M2) design limitations.
+    ///
+    /// In version 5, by opting in via a default [subThemesData] you
+    /// get an extensive set of widget component sub themes applied.
+    /// They can be customized via the [subThemesData] property, that has
+    /// quick and flat sub theme configuration values in the data class
+    /// [FlexSubThemesData].
     ///
     /// Opinionated sub themes are provided for:
     ///
@@ -2099,33 +2149,8 @@ class FlexColorScheme with Diagnosticable {
     /// * The custom [ButtonTextTheme] even still provides matching styling to
     ///   for the deprecated legacy buttons if they are used.
     ///
-    /// The sub themes are a convenient way to opt-in on customized corner
-    /// radius on Widgets using above themes. By opting in you can set corner
-    /// radius for all above Widgets to same corner radius in one go. There are
-    /// also properties to override the global default for each widget to set
-    /// different rounding per widget if so desired.
-    ///
-    /// By default each widgets corner radius and some other styling take
-    /// inspiration from the Material 3 (M3) Specification
-    /// https://m3.material.io/ and uses its values as defaults when it is
-    /// possible to do so in Flutter SDK theming within its current
-    /// Material 2 (M2) design limitations.
-    ///
-    /// Defaults to false.
-    final bool useSubThemes = false,
-
-    /// Optional configuration parameters for the opt in sub-themes.
-    ///
-    /// If you opt-in to use the opinionated sub-theming offered by
-    /// [FlexColorScheme] you can also configure them by passing
-    /// in a [FlexSubThemesData] that allows you to modify them.
-    ///
-    /// The primary purpose of the opinionated sub-themes is to make it easy
-    /// to add themed corner radius to all Widgets that support it, and to
-    /// provide a consistent look on all buttons, including [ToggleButtons].
-    ///
-    /// Defaults to null, resulting in a default [FlexSubThemesData] being used
-    /// when [useSubThemes] is set to true.
+    /// Defaults to null, resulting in FlexColorScheme not using any extra
+    /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
     final FlexSubThemesData? subThemesData,
 
     /// To use and activate Material 3 color system based [ColorScheme]
@@ -2471,6 +2496,10 @@ class FlexColorScheme with Diagnosticable {
           // Default surfaces are used as starting point for blended ones.
           : null,
     );
+    // We on purpose shadow deprecated this.useSubThemesData that has
+    // been deprecated, and set it it true if a none null subThemesData was
+    // provided.
+    final bool useSubThemes = subThemesData != null;
     // Use passed in sub-theme config data, or a default one, if none given.
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
@@ -2734,7 +2763,6 @@ class FlexColorScheme with Diagnosticable {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
-      useSubThemes: useSubThemes,
       subThemesData: subThemesData,
       useMaterial3: useMaterial3,
     );
@@ -3594,16 +3622,51 @@ class FlexColorScheme with Diagnosticable {
     /// suitable for multiline tooltips.
     final bool tooltipsMatchBackground = false,
 
-    /// Set to true to opt-in on using additional opinionated widget sub themes.
+    /// This property has no function after 4.2.0. Prior to version 5 this
+    /// property was used to activate the opinionated component sub-themes.
+    /// Starting with version 5 they are now enabled by adding a default
+    /// constructor `FlexSubThemesData()` to [subThemesData].
+    ///
+    /// Defaults to false.
+    @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
+        'opinionated component sub-themes are added by adding a default '
+        'constructor FlexSubThemesData() to subThemesData. This creates '
+        'sub-themes using the FlexColorScheme opinionated defaults. You can '
+        'modify the sub-themes by changing its properties.')
+        final bool useSubThemes = false,
+
+    /// Activate using FlexColorScheme opinionated component sub-themes by
+    /// passing in a default `FlexSubThemesData()`.
+    ///
+    /// To further configure the sub-themes, change the simple flat value
+    /// properties as desired in `FlexSubThemesData()`.
     ///
     /// By default [FlexThemeData.light], [FlexThemeData.dark] and
-    /// [FlexColorScheme.toTheme], tries to do as little as they need to just
-    /// provide a consistent color schemed theme.
+    /// [FlexColorScheme.toTheme], do as little as they need to just
+    /// provide a consistent Material 2 color schemed theme. The additions they
+    /// do are described in [FlexColorScheme.toTheme].
     ///
-    /// By opting in with [useSubThemes] set to true you get an opinionated set
-    /// of widget sub themes applied. They can be conveniently customized via
-    /// the [subThemesData] property, that holds quick and easy sub theme
-    /// configuration values in the data class [FlexSubThemesData].
+    /// The original purpose of the opinionated sub-themes was to make it easy
+    /// to add themed corner radius to all Widgets that support it, and to
+    /// provide a consistent look on all buttons, including [ToggleButtons].
+    ///
+    /// Therefore the sub themes are a convenient way to opt-in on customized
+    /// corner radius on Widgets using above themes. By opting in you can set
+    /// corner radius for all covered Widgets to same corner radius in one go.
+    /// There are also properties to override the global default for each widget
+    /// to set different rounding per widget if so desired.
+    ///
+    /// By default, if a `defaultRadius` is not specified, each widgets corner
+    /// radius and some other styling take inspiration from the Material 3 (M3)
+    /// specification https://m3.material.io/ and uses its specifications as
+    /// defaults when it is possible to do so in Flutter SDK theming, within
+    /// its current Material 2 (M2) design limitations.
+    ///
+    /// In version 5, by opting in via a default [subThemesData] you
+    /// get an extensive set of widget component sub themes applied.
+    /// They can be customized via the [subThemesData] property, that has
+    /// quick and flat sub theme configuration values in the data class
+    /// [FlexSubThemesData].
     ///
     /// Opinionated sub themes are provided for:
     ///
@@ -3632,33 +3695,8 @@ class FlexColorScheme with Diagnosticable {
     /// * The custom [ButtonTextTheme] even still provides matching styling to
     ///   for the deprecated legacy buttons if they are used.
     ///
-    /// The sub themes are a convenient way to opt-in on customized corner
-    /// radius on Widgets using above themes. By opting in you can set corner
-    /// radius for all above Widgets to same corner radius in one go. There are
-    /// also properties to override the global default for each widget to set
-    /// different rounding per widget if so desired.
-    ///
-    /// By default each widgets corner radius and some other styling take
-    /// inspiration from the Material 3 (M3) Specification
-    /// https://m3.material.io/ and uses its values as defaults when it is
-    /// possible to do so in Flutter SDK theming within its current
-    /// Material 2 (M2) design limitations.
-    ///
-    /// Defaults to false.
-    final bool useSubThemes = false,
-
-    /// Optional configuration parameters for the opt in sub-themes.
-    ///
-    /// If you opt-in to use the opinionated sub-theming offered by
-    /// [FlexColorScheme] you can also configure them by passing
-    /// in a [FlexSubThemesData] that allows you to modify them.
-    ///
-    /// The primary purpose of the opinionated sub-themes is to make it easy
-    /// to add themed corner radius to all Widgets that support it, and to
-    /// provide a consistent look on all buttons, including [ToggleButtons].
-    ///
-    /// Defaults to null, resulting in a default [FlexSubThemesData] being used
-    /// when [useSubThemes] is set to true.
+    /// Defaults to null, resulting in FlexColorScheme not using any extra
+    /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
     final FlexSubThemesData? subThemesData,
 
     /// To use and activate Material 3 color system based [ColorScheme]
@@ -4031,6 +4069,10 @@ class FlexColorScheme with Diagnosticable {
           // Default surfaces are used as starting point for blended ones.
           : null,
     );
+    // We on purpose shadow deprecated this.useSubThemesData that has
+    // been deprecated, and set it it true if a none null subThemesData was
+    // provided.
+    final bool useSubThemes = subThemesData != null;
     // Use passed in sub-theme config data, or a default one, if none given.
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
@@ -4296,7 +4338,6 @@ class FlexColorScheme with Diagnosticable {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
-      useSubThemes: useSubThemes,
       subThemesData: subThemesData,
       useMaterial3: useMaterial3,
     );
@@ -5079,7 +5120,13 @@ class FlexColorScheme with Diagnosticable {
   ///   > for the active theme.
   ///   > See example 5 for a demo on how to use this.
   ThemeData get toTheme {
-    // Use passed in sub-theme config data or a default one if none given.
+    // We on purpose shadow deprecated this.useSubThemesData that has
+    // been deprecated, and set it it true if a none null subThemesData was
+    // provided.
+    final bool useSubThemes = subThemesData != null;
+    // If we did not have any sub-theme data, we make one instead that cannot
+    // be null. It makes the logic easier to deal with when we create
+    // sub-themes, when it cannot be nullable.
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
 
@@ -6364,7 +6411,6 @@ class FlexColorScheme with Diagnosticable {
     TargetPlatform? platform,
     Typography? typography,
     bool? applyElevationOverlayColor,
-    bool? useSubThemes,
     FlexSubThemesData? subThemesData,
     bool? useMaterial3,
   }) {
@@ -6409,7 +6455,6 @@ class FlexColorScheme with Diagnosticable {
       typography: typography ?? this.typography,
       applyElevationOverlayColor:
           applyElevationOverlayColor ?? this.applyElevationOverlayColor,
-      useSubThemes: useSubThemes ?? this.useSubThemes,
       subThemesData: subThemesData ?? this.subThemesData,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
     );
@@ -6458,7 +6503,6 @@ class FlexColorScheme with Diagnosticable {
         other.platform == platform &&
         other.typography == typography &&
         other.applyElevationOverlayColor == applyElevationOverlayColor &&
-        other.useSubThemes == useSubThemes &&
         other.subThemesData == subThemesData &&
         other.useMaterial3 == useMaterial3;
   }
@@ -6503,7 +6547,6 @@ class FlexColorScheme with Diagnosticable {
         platform,
         typography,
         applyElevationOverlayColor,
-        useSubThemes,
         subThemesData,
         useMaterial3,
       ]);
@@ -6556,7 +6599,6 @@ class FlexColorScheme with Diagnosticable {
     properties.add(DiagnosticsProperty<Typography>('typography', typography));
     properties.add(DiagnosticsProperty<bool>(
         'applyElevationOverlayColor', applyElevationOverlayColor));
-    properties.add(DiagnosticsProperty<bool>('useSubThemes', useSubThemes));
     properties.add(
         DiagnosticsProperty<FlexSubThemesData>('subThemesData', subThemesData));
     properties.add(DiagnosticsProperty<bool>('useMaterial3', useMaterial3));
