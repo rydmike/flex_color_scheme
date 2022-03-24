@@ -788,7 +788,7 @@ abstract class ThemeService {
   static const String keyUseMaterial3 = 'useMaterial3';
 
   /// Default value for the useMaterial3, also to reset settings.
-  static const bool defaultUseMaterial3 = false;
+  static const bool defaultUseMaterial3 = true;
 
   /// Loads used useMaterial3 setting in example 5.
   Future<bool> useMaterial3();

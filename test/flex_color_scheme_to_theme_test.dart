@@ -1935,7 +1935,6 @@ void main() {
         platform: null,
         typography: null,
         applyElevationOverlayColor: true,
-        useSubThemes: false,
         subThemesData: null);
 
     // Doing a string version for easy comparisons.
@@ -2064,7 +2063,6 @@ void main() {
         platform: null,
         typography: null,
         applyElevationOverlayColor: true,
-        useSubThemes: false,
         subThemesData: null);
 
     test(
@@ -2163,7 +2161,6 @@ void main() {
       tooltipsMatchBackground: false,
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
-      useSubThemes: true,
       subThemesData: const FlexSubThemesData(
         defaultRadius: 8,
         tabBarIndicatorSchemeColor: SchemeColor.secondary,
@@ -2200,7 +2197,6 @@ void main() {
       tooltipsMatchBackground: false,
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
-      useSubThemes: true,
       subThemesData: const FlexSubThemesData(
         defaultRadius: 12,
         tabBarIndicatorSchemeColor: SchemeColor.error,
@@ -2244,7 +2240,6 @@ void main() {
       tooltipsMatchBackground: false,
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
-      useSubThemes: true,
       subThemesData: const FlexSubThemesData(
         defaultRadius: 8,
         tabBarIndicatorSchemeColor: SchemeColor.secondary,
@@ -2269,7 +2264,6 @@ void main() {
       tooltipsMatchBackground: false,
       transparentStatusBar: false,
       bottomAppBarElevation: 1,
-      useSubThemes: true,
       subThemesData: const FlexSubThemesData(
         defaultRadius: 8,
         tabBarIndicatorSchemeColor: SchemeColor.secondary,

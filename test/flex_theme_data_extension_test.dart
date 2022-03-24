@@ -1826,7 +1826,6 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
 
@@ -1864,7 +1863,6 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
 
@@ -1913,7 +1911,6 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
       // Check to String equality
@@ -2000,7 +1997,6 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
 
@@ -2043,7 +2039,6 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
 
@@ -2097,7 +2092,6 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
       // Check to String equality
@@ -2204,7 +2198,6 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
 
@@ -2245,7 +2238,6 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
 
@@ -2295,7 +2287,6 @@ void main() {
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(),
       );
       // Check to String equality

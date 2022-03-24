@@ -131,9 +131,6 @@ String generateThemeDartCode(ThemeController controller) {
   final String tooltipsMatchBackground = controller.tooltipsMatchBackground
       ? '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
       : '';
-  final String useSubThemes = controller.useSubThemes
-      ? '  useSubThemes: ${controller.useSubThemes},\n'
-      : '';
   final String useM3ErrorColors = controller.useM3ErrorColors
       ? '  useMaterial3ErrorColors: ${controller.useM3ErrorColors},\n'
       : '';
@@ -731,7 +728,6 @@ String generateThemeDartCode(ThemeController controller) {
       '$lightIsWhite'
       '$swapLightColors'
       '$tooltipsMatchBackground'
-      '$useSubThemes'
       '$lightSubTheme'
       '$useKeyColorsLight'
       '$useM3ErrorColors'
@@ -754,7 +750,6 @@ String generateThemeDartCode(ThemeController controller) {
       '$darkIsTrueBlack'
       '$swapDarkColors'
       '$tooltipsMatchBackground'
-      '$useSubThemes'
       '$darkSubTheme'
       '$useKeyColorsDark'
       '$useM3ErrorColors'

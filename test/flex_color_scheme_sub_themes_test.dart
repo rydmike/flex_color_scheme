@@ -16,15 +16,14 @@ void main() {
     // Test that sub-theme props implemented in toTheme work as intended.
     // Most sub-themes are tested via sub-theme unit tests.
     test(
-        'FCS8.001-light: GIVEN a FlexColorScheme.light with keyColors using '
-        'three seed colors and sub-theme with props coded in toTheme '
+        'FCS8.001-light: GIVEN a FlexColorScheme.light with sub themes '
+        'and sub-theme with props coded in toTheme '
         'EXPECT sub-theme using the requested props, with onSurface '
         'text theme blends.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         scheme: FlexScheme.redWine,
         surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
         blendLevel: 40,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
@@ -47,22 +46,21 @@ void main() {
         fcs.toTheme.tabBarTheme.labelColor,
         equals(fcs.toTheme.colorScheme.onSurfaceVariant),
       );
-      // We get onSurface as blend color for blended TextTheme
+      // We get onSurface as blend color for blended TextTheme in light mode.
       expect(
         fcsScheme.onBackground.red > fcsScheme.onSurface.red,
         equals(true),
       );
     });
     test(
-        'FCS8.001-dark: GIVEN a FlexColorScheme.dark with keyColors using '
-        'three seed colors and sub-theme with props coded in toTheme '
+        'FCS8.001-dark: GIVEN a FlexColorScheme.dark with sub themes '
+        'and sub-theme with props coded in toTheme '
         'EXPECT sub-theme using the requested props, with onSurface '
         'text theme blends.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         scheme: FlexScheme.redWine,
         surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
         blendLevel: 40,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
@@ -85,22 +83,21 @@ void main() {
         fcs.toTheme.tabBarTheme.labelColor,
         equals(fcs.toTheme.colorScheme.onSurfaceVariant),
       );
-      // We get onSurface as blend color for blended TextTheme
+      // We get onSurface as blend color for blended TextTheme in dark mode.
       expect(
         fcsScheme.onBackground.red < fcsScheme.onSurface.red,
         equals(true),
       );
     });
     test(
-        'FCS8.002-light: GIVEN a FlexColorScheme.light with keyColors using '
-        'three seed colors and sub-theme with props coded in toTheme '
+        'FCS8.002-light: GIVEN a FlexColorScheme.light with sub themes '
+        'and sub-theme with props coded in toTheme '
         'EXPECT sub-theme using the requested props, with onBackground '
         'text theme blends.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         scheme: FlexScheme.red,
         surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
         blendLevel: 40,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
@@ -130,15 +127,14 @@ void main() {
       );
     });
     test(
-        'FCS8.002-dark: GIVEN a FlexColorScheme.dark with keyColors using '
-        'three seed colors and sub-theme with props coded in toTheme '
+        'FCS8.002-dark: GIVEN a FlexColorScheme.dark with sub themes '
+        'and sub-theme with props coded in toTheme '
         'EXPECT sub-theme using the requested props, with onBackground '
         'text theme blends.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         scheme: FlexScheme.red,
         surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
         blendLevel: 40,
-        useSubThemes: true,
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,

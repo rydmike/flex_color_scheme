@@ -132,7 +132,9 @@ class DemoApp extends StatelessWidget {
               // name and description.
               colors: _myFlexScheme.light,
               // Opt in/out on FlexColorScheme sub-themes with theme controller.
-              useSubThemes: themeController.useSubThemes,
+              subThemesData: themeController.useSubThemes
+                  ? const FlexSubThemesData()
+                  : null,
               // Use very low elevation light theme mode. On light colored
               // AppBars this show up as a nice thin underline effect.
               appBarElevation: 0.5,
@@ -153,7 +155,9 @@ class DemoApp extends StatelessWidget {
             // Same setup for the dark theme, but using FlexThemeData.dark().
             darkTheme: FlexThemeData.dark(
               colors: _myFlexScheme.dark,
-              useSubThemes: themeController.useSubThemes,
+              subThemesData: themeController.useSubThemes
+                  ? const FlexSubThemesData()
+                  : null,
               appBarElevation: 1,
               visualDensity: VisualDensity.standard,
               fontFamily: GoogleFonts.notoSans().fontFamily,

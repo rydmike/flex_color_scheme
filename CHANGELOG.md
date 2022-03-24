@@ -16,6 +16,16 @@ All notable changes to the **FlexColorScheme** package are documented here.
     surface using the `FlexSurface`. The factory `FlexSchemeSurfaceColors.blend`
     replaced in version 4.0.0 already when using `surfaceMode` and `blendLevel`.
   - Removed tests and modified tests needing to consider above removals.
+  
+* Deprecated property `useSubThemes`. This property has no function after 
+  4.2.0 stable and 5.0.0-dev.1. FlexColorScheme opinionated component sub-themes 
+  are now created by adding a default constructor `FlexSubThemesData()` or one with 
+  some custom property values set, to `subThemesData`. This creates sub-themes 
+  using the FlexColorScheme opinionated sub-themes. Removing this property makes the
+  API more consistent, so that it follows the same design as used for `keyColors` 
+  with `FlexKeyColors` and `tones` with `FlexTones`.
+  Setting the property `useSubThemes` will not cause an error, it just has no effect.
+  You can safely remove it.   
 
 **FIX**
 
