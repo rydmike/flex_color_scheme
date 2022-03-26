@@ -1156,6 +1156,17 @@ class FlexSubThemes {
     /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
     /// and errorBorder, so error thus has a border also when it is not focused.
     final bool unfocusedHasBorder = true,
+
+    /// Unfocused input decoration border uses the color baseScheme color.
+    ///
+    /// Applies to both outline and underline mode.
+    ///
+    /// When set to true, the unfocused borders also uses the `baseSchemeColor`.
+    /// If set to false, the color uses the SDK default unselected border color.
+    /// This is Color xx in light mode, and Color yy in dark mode.
+    ///
+    /// Defaults to true.
+    final bool unfocusedUseColor = true,
   }) {
     // Get selected color, defaults to primary.
     final Color baseColor = baseSchemeColor == null

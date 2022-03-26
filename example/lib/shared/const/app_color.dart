@@ -165,20 +165,25 @@ class AppColor {
     FlexColor.customColors.copyWith(name: 'Customizable'),
   ];
 
+  /// Return current FlexSchemeData based on theme current Theme controller.
+  ///
   /// Used by example 5, the Themes Playground.
-  /// Helper function to return current FlexSchemeData at controller index.
   ///
   /// Instead of getting the colors directly from a list that changes frequently
   /// we make a separate helper function that takes a ThemeController and
   /// returns the right FlexSchemeData from the list, but returning the
   /// `ThemeController.customScheme` for the last item, when the controllers
-  /// index  is last item in list, otherwise it returns FlexSchemeData at index,
-  /// well almost, we include also the logic for computed dark mode colors, in
-  /// the schemeAtIndex helper it uses to get the scheme at an index.
+  /// index is last item in list, otherwise it returns FlexSchemeData at index,
+  /// well almost, we include also the logic for computed dark mode colors and
+  /// dark mode seed color behavior, in the schemeAtIndex helper it uses to
+  /// get the scheme at an index.
   static FlexSchemeData scheme(final ThemeController controller) =>
       schemeAtIndex(controller.schemeIndex, controller);
 
+  /// Get the FlexSchemeData at current scheme index.
+  ///
   /// Used by example 5, the Themes Playground.
+  ///
   /// Helper function to return current FlexSchemeData at given index, also
   /// needed this functionality in theme selector and popup menu, so made
   /// it a sub function to getting the FlexSchemeData at its current index.
@@ -186,6 +191,29 @@ class AppColor {
   /// when controller says we are using that as well, instead of the defined
   /// dark mode scheme. This simplifies our logic in the MaterialApp
   /// of example 5 and we get right dark colors in ThemeSelector and Popup too.
+  ///
+  /// It also handles the case when we are using a seeded color scheme in dark
+  /// theme mode. When using a color scheme and getting the FlexSchemeColor
+  /// `colors` at an index, we should like the `useToDarkMethod` case base the
+  /// input colors for that on the same light colors.
+  ///
+  /// This is of course more of a design  and use case choice. However,
+  /// the seed algorithm is based on using the same
+  /// seed colors for light and dark mode and thus use the same resulting
+  /// tonal palettes to make the ColorScheme.
+  ///
+  /// On the other hand, if you have custom color values also for your dark
+  /// theme, that you want to lock down down when using seeded colors, you
+  /// cannot really use the light scheme as input for your dark colors then,
+  /// since only the dark scheme holds those color value you want to keep.
+  /// If you base your seeded dark color scheme on light mode colors, and
+  /// lock some value down to their input colors, you get the light theme
+  /// mode colors if you base your seeded dark mode color scheme on same
+  /// colors as for the lgiht mode. So for that use case, you may want keep
+  /// using the defined dark mode colors also when using seeded color schemes.
+  ///
+  /// This application contains a toggle `useCustomDarkColorsForSeed' that can
+  /// be set to true or false depending on the design need.
   static FlexSchemeData schemeAtIndex(
       final int index, final ThemeController controller) {
     if (index == schemes.length - 1) {
@@ -196,12 +224,14 @@ class AppColor {
               : null);
     }
     return schemes[index].copyWith(
-        dark: controller.useToDarkMethod
-            ? schemes[index]
-                .light
-                .defaultError
-                .toDark(controller.darkMethodLevel, true)
-            : null);
+        dark: controller.useKeyColors
+            ? schemes[index].light
+            : controller.useToDarkMethod
+                ? schemes[index]
+                    .light
+                    .defaultError
+                    .toDark(controller.darkMethodLevel, true)
+                : null);
   }
 
   /// Return [FlexTones] based on passed in [brightness] and [tones] value.

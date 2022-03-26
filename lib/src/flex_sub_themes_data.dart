@@ -75,6 +75,7 @@ class FlexSubThemesData with Diagnosticable {
     this.interactionEffects = true,
     this.blendOnLevel = 0,
     this.blendOnColors = true,
+    this.defaultToSDK = false,
     //
     this.blendTextTheme = true,
     this.useTextTheme = true,
@@ -312,6 +313,20 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Defaults to true.
   final bool blendOnColors;
+
+  /// When set to `true`, all properties that in `FlexSubThemesData` are
+  /// nullable, will when they are undefined (null) cause the theme sub-theme
+  /// depending on the property to default to SDK un-themed default value.
+  ///
+  /// Normally created sub-themes, will when a nullable property is undefined,
+  /// cause the sub-theme depending on the property to default to
+  /// [FlexColorScheme]'s opinionated sub-theme defaults, even if such a
+  /// property is undefined. Setting `defaultToSDK` causes them all to default
+  /// what the SDK uses by default when for the property when it is undefined.
+  /// This **only** applies to nullable properties.
+  ///
+  /// Default to false.
+  final bool defaultToSDK;
 
   /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend primary color into text themes
@@ -1407,6 +1422,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? interactionEffects,
     final int? blendOnLevel,
     final bool? blendOnColors,
+    final bool? defaultToSDK,
     final bool? blendTextTheme,
     final bool? useTextTheme,
     final double? defaultRadius,
@@ -1518,6 +1534,7 @@ class FlexSubThemesData with Diagnosticable {
       interactionEffects: interactionEffects ?? this.interactionEffects,
       blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendOnColors: blendOnColors ?? this.blendOnColors,
+      defaultToSDK: defaultToSDK ?? this.defaultToSDK,
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
       defaultRadius: defaultRadius ?? this.defaultRadius,
@@ -1726,6 +1743,7 @@ class FlexSubThemesData with Diagnosticable {
         other.interactionEffects == interactionEffects &&
         other.blendOnLevel == blendOnLevel &&
         other.blendOnColors == blendOnColors &&
+        other.defaultToSDK == defaultToSDK &&
         other.blendTextTheme == blendTextTheme &&
         other.useTextTheme == useTextTheme &&
         other.defaultRadius == defaultRadius &&
@@ -1877,6 +1895,7 @@ class FlexSubThemesData with Diagnosticable {
         interactionEffects,
         blendOnLevel,
         blendOnColors,
+        defaultToSDK,
         //
         blendTextTheme,
         useTextTheme,
@@ -2004,6 +2023,7 @@ class FlexSubThemesData with Diagnosticable {
         DiagnosticsProperty<bool>('interactionEffects', interactionEffects));
     properties.add(DiagnosticsProperty<int>('blendOnLevel ', blendOnLevel));
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
+    properties.add(DiagnosticsProperty<bool>('defaultToSDK', defaultToSDK));
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
     properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));

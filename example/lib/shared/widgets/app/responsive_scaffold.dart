@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../const/app_data.dart';
 import '../universal/maybe_tooltip.dart';
 import 'about.dart';
 
@@ -19,7 +20,7 @@ const double _kRailWidth = 52;
 // Only at higher than this breakpoint will the menu open and be possible
 // to toggle between menu and rail. Below this breakpoint it toggles between
 // hidden in the Drawer and rail, also on phones. This is just the default
-// value for the constructor and it can be set differently in
+// value for the constructor and it can be set differently in the
 // ResponsiveScaffold constructor.
 const double _kBreakpointShowFullMenu = 900;
 
@@ -78,9 +79,10 @@ enum ResponsiveMenuItemIconState { primary, secondary }
 ///
 /// This is not really a Flutter "Universal" Widget that only depends on the
 /// SDK, it also depends on another widget in the project the universal
-/// `MaybeTooltip`. It of course also contains code that is not reusable since
-/// it is app specific. Hence the 'app' level widget classification. This
-/// widget could however easily be made "universal" and become quite useful.
+/// `MaybeTooltip`. It of course also contains code that may not be 100%
+/// reusable since it is a bit app specific. Hence the 'app' level widget
+/// classification. This widget could however easily be made "universal"
+/// and become quite useful.
 ///
 /// (c) BSD 3-clause - Mike Rydstrom (@RydMike)
 class ResponsiveScaffold extends StatefulWidget {
@@ -414,10 +416,31 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   late List<bool> menuItemsEnabled;
   // Active state of each menuItem.
   late List<ResponsiveMenuItemIconState> menuItemsIconState;
+  // Previous media size.
+  late Size mediaSize;
 
   @override
   void didUpdateWidget(covariant ResponsiveScaffold oldWidget) {
     super.didUpdateWidget(oldWidget);
+    final MediaQueryData media = MediaQuery.of(context);
+    if (media.size != mediaSize) {
+      mediaSize = media.size;
+      final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+      // This make the rail menu auto-close on phone size and open back up if
+      // moving to landscape or none phone size. You can still open a very
+      // narrow rail also in phone size, but if you resize the canvas at phone
+      // sizes, it will auto close again, but as long as you keep media size the
+      // same it stays pen. So on a phone with fixed media size, you only see
+      // it appearing when you rotate the device, in a logical way.
+      // On web/desktop you would no use it this small, but if/when you do the
+      // the auto-closing of the thin rail, might feel strange. I just call
+      // consider it as a "the UI knows it is too narrow" for even a rail case.
+      if (isPhone) {
+        isMenuClosed = true;
+      } else {
+        isMenuClosed = false;
+      }
+    }
     if (widget.menuItemsEnabled != null) {
       if (widget.menuItemsEnabled != oldWidget.menuItemsEnabled &&
           (widget.menuItemsEnabled?.length ?? 0) == widget.menuItems.length) {
@@ -435,6 +458,8 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   @override
   void initState() {
     super.initState();
+    // Assume zero media size;
+    mediaSize = Size.zero;
     // Not set again if changed in the app, only on init,  you can make it do
     // that too if you need it, which you do if want to change the expanded
     // menu max width dynamically while running app.

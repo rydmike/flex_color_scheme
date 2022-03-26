@@ -7,10 +7,7 @@ import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class TextFieldSettings extends StatelessWidget {
-  const TextFieldSettings({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const TextFieldSettings(this.controller, {Key? key}) : super(key: key);
   final ThemeController controller;
 
   @override

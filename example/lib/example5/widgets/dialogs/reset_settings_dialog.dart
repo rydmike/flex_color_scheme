@@ -8,9 +8,8 @@ class ResetSettingsDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Reset Theme Settings'),
-      content: const Text('Reset all settings back to their default values?\n'
-          'Persisted theme settings will also be updated '
-          'to default values.'),
+      content: const Text('Reset all settings back to their default values? '
+          'Persisted theme settings will also be updated to default values.'),
       actions: <Widget>[
         TextButton(
             onPressed: () {

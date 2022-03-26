@@ -102,9 +102,10 @@ class FlexKeyColors with Diagnosticable {
   /// generated [ColorScheme], even if you pass a [FlexKeyColors] instance to
   /// the [keyColors] parameter in [FlexColorScheme.light] or
   /// [FlexColorScheme.dark] factories. The property is true by default, it
-  /// exists mainly so you can more easily build configurable toggles to enable
-  /// and disable using seed generated FlexColorSchemes, while keeping still
-  /// passing in a configuration object with other properties set.
+  /// exists mainly for debugging and to enable easier construction of
+  /// configurable toggles to enable and disable using seed generated
+  /// FlexColorSchemes, while still passing in a configuration object with
+  /// other properties set, that have no effect if [useKeyColors] is false.
   const FlexKeyColors({
     final this.useKeyColors = true,
     final this.useSecondary = false,

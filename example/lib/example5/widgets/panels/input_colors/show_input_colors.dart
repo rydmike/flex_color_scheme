@@ -11,8 +11,8 @@ import '../../shared/color_picker_inkwell.dart';
 //
 // Allow user to edit the colors, if we are we are viewing the last color
 // scheme, which is the custom color scheme.
-class ThemeInputColors extends StatelessWidget {
-  const ThemeInputColors({
+class ShowInputColors extends StatelessWidget {
+  const ShowInputColors({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -38,7 +38,7 @@ class ThemeInputColors extends StatelessWidget {
     final bool swapLight = controller.swapLightColors;
     final bool swapDark = controller.swapDarkColors;
     // Size of the color boxes
-    const double boxWidth = 155;
+    const double boxWidth = 152; // Was 155, 150 OK on Android
     const double boxHeight = 140;
 
     // Theme values...

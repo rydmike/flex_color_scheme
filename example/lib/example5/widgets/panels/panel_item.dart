@@ -124,7 +124,7 @@ const List<PanelItem> panelItems = <PanelItem>[
   PanelItem(
     panelLabel: 'PrimaryTextTheme',
     buttonLabel: 'Primary\nTextTheme',
-    icon: Icons.font_download_outlined,
+    icon: Icons.font_download,
   ),
   PanelItem(
     panelLabel: 'Page Examples',

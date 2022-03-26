@@ -42,7 +42,7 @@ class SchemeColors extends StatelessWidget {
     final bool swapLight = tc.swapLightColors;
     final bool swapDark = tc.swapDarkColors;
     // Size of the color presentation boxes
-    const double boxWidth = 155;
+    const double boxWidth = 152;
     const double boxHeight = 360;
 
     // Theme values...
@@ -245,7 +245,7 @@ class SchemeColors extends StatelessWidget {
                           child: ColorNameValue(
                             color: primaryContainer,
                             textColor: colorScheme.onPrimaryContainer,
-                            label: 'primaryContainer',
+                            label: 'primary\u200BContainer',
                             tone: tones.primaryContainerTone,
                             showTone: _locked(isLight, !tc.keepPrimaryContainer,
                                 !tc.keepDarkPrimaryContainer),
@@ -277,7 +277,7 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.onPrimaryContainer,
                           textColor: colorScheme.primaryContainer,
-                          label: 'onPrimaryContainer',
+                          label: 'onPrimary\u200BContainer',
                           tone: tones.onPrimaryContainerTone,
                           showTone: _locked(isLight, !tc.keepPrimaryContainer,
                               !tc.keepDarkPrimaryContainer),
@@ -433,7 +433,7 @@ class SchemeColors extends StatelessWidget {
                           child: ColorNameValue(
                             color: secondaryContainer,
                             textColor: colorScheme.onSecondaryContainer,
-                            label: 'secondaryContainer',
+                            label: 'secondary\u200BContainer',
                             tone: tones.secondaryContainerTone,
                             showTone: _locked(
                                 isLight,
@@ -469,7 +469,7 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.onSecondaryContainer,
                           textColor: secondaryContainer,
-                          label: 'onSecondaryContainer',
+                          label: 'onSecondary\u200BContainer',
                           tone: tones.onSecondaryContainerTone,
                           showTone: _locked(isLight, !tc.keepSecondaryContainer,
                               !tc.keepDarkSecondaryContainer),
@@ -605,7 +605,7 @@ class SchemeColors extends StatelessWidget {
                           child: ColorNameValue(
                             color: tertiaryContainer,
                             textColor: colorScheme.onTertiaryContainer,
-                            label: 'tertiaryContainer',
+                            label: 'tertiary\u200BContainer',
                             tone: tones.tertiaryContainerTone,
                             showTone: _locked(
                                 isLight,
@@ -639,7 +639,7 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.onTertiaryContainer,
                           textColor: tertiaryContainer,
-                          label: 'onTertiaryContainer',
+                          label: 'onTertiary\u200BContainer',
                           tone: tones.onTertiaryContainerTone,
                           showTone: _locked(isLight, !tc.keepTertiaryContainer,
                               !tc.keepDarkTertiaryContainer),
@@ -746,7 +746,7 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.onErrorContainer,
                           textColor: colorScheme.errorContainer,
-                          label: 'onErrorContainer',
+                          label: 'onError\u200BContainer',
                           tone: tones.onErrorContainerTone,
                           showTone: showTones,
                         ),

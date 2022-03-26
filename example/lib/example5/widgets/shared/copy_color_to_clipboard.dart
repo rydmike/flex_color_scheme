@@ -32,8 +32,12 @@ Future<void> copyColorToClipboard(BuildContext context, Color color) async {
             ),
           ),
           const SizedBox(width: 8),
-          Text('Copied color $nameThatColor $materialName${space}to '
-              'the clipboard'),
+          Expanded(
+            child: Text(
+              'Copied color $nameThatColor $materialName${space}to '
+              'the clipboard',
+            ),
+          ),
         ],
       ),
       duration: const Duration(milliseconds: 2000),

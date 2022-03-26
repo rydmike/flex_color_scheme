@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(AppData.title(context)),
         menuTitle: const Text(AppData.appName),
         menuLeadingTitle: Text(
-          'Copy Playground Theme',
+          AppData.title(context),
           style: Theme.of(context)
               .textTheme
               .titleSmall!

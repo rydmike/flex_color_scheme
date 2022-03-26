@@ -45,21 +45,24 @@ class AppData {
   // The minimum media width treated as a phone device in this demo.
   static const double phoneBreakpoint = 600;
 
+  // The height when we want to pin the panel or color selector, instead of
+  // letting it float and snap back.
+  static const double pinnedSelector = 1000;
+
   // Edge padding insets for page content on the screen.
   static const double edgeInsetsPhone = 8;
-  static const double edgeInsetsTablet = 14;
+  static const double edgeInsetsTablet = 12;
   static const double edgeInsetsDesktop = 18;
   // Used by grid layout when in >= 4 column layout mode.
   static const double edgeInsetsBigDesktop = 24;
 
-  // The width size of the scrolling button panel buttons in example 5 panel
-  // view, and how much it shrinks when we go to phone size.
-  static const double widthOfScrollItem = 115;
-  static const double phoneShrink = -10;
-
-  // Opacity of the popup menu in example 5, just set via a const to
-  // show and use a property not in the controller.
-  static const double popupMenuOpacity = 0.95;
+  // The width, and height of the scrolling button panel buttons in example 5
+  // panel view, and how much it shrinks in both dimensions when we go to
+  // phone size.
+  static const double panelButtonWidth = 115;
+  static const double panelButtonHeight = 100;
+  static const double panelButtonPhoneWidthReduce = -16;
+  static const double panelButtonPhoneHeightReduce = -30;
 
   // Responsive insets based on width. The width may be from LayoutBuilder or
   // MediaQuery, depending on what is appropriate for the use case.

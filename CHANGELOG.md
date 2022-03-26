@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.2 - March 23, 2022
+## v5.0.0-dev.2 - March 27, 2022
 
 **BREAKING**
 
@@ -85,6 +85,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   - Fixed broken code gen for dark mode blend level. 
   - Changed, the code gen style for dark mode when using from light mode computed dark theme.
   - Changed, the code gen now does not add any code when using API default values.
+  - Changed, ThemeService to use generic types. 
 
 **TESTS**
 

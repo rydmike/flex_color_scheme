@@ -112,7 +112,7 @@ class DemoApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          scrollBehavior: AppScrollBehavior(),
+          scrollBehavior: const AppScrollBehavior(),
           title: 'Four Themes',
           // Select used light theme for the app by using the ThemeController
           // usedScheme, that contains the value of currently selected

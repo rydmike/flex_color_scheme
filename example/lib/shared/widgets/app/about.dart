@@ -47,7 +47,7 @@ void showAppAboutDialog(BuildContext context) {
 
   showAboutDialog(
     context: context,
-    applicationName: AppData.appName,
+    applicationName: AppData.title(context),
     applicationVersion: AppData.version,
     applicationIcon: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -76,8 +76,9 @@ void showAppAboutDialog(BuildContext context) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'This example shows some features of the '
-                    '${AppData.appName} Flutter theming package.\n'
+                text: 'The ${AppData.title(context)} application demonstrates '
+                    'features of the ${AppData.appName} Flutter theming '
+                    'package.\n\n'
                     'To learn more, check out the package on ',
               ),
               LinkTextSpan(
@@ -87,8 +88,7 @@ void showAppAboutDialog(BuildContext context) {
               ),
               TextSpan(
                 style: aboutTextStyle,
-                text: '.\n'
-                    'It is thoroughly documented and includes the source '
+                text: '. It also includes the source '
                     'code of this application.\n\n',
               ),
               TextSpan(

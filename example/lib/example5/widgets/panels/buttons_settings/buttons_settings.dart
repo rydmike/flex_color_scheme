@@ -6,15 +6,11 @@ import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class ButtonsSettings extends StatelessWidget {
-  const ButtonsSettings({
+  const ButtonsSettings(
+    this.controller, {
     Key? key,
-    required this.controller,
-    this.isOpen = true,
-    this.onTap,
   }) : super(key: key);
   final ThemeController controller;
-  final bool isOpen;
-  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {

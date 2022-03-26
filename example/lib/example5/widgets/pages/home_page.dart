@@ -31,8 +31,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Open close/state of each card.
-  late List<bool> isCardOpen;
+  // Open close/state of each panel in the large masonry grid view.
+  late List<bool> isPanelOpen;
 
   // Enabled state of each menuItem.
   late List<bool> menuItemsEnabled;
@@ -40,10 +40,10 @@ class _HomePageState extends State<HomePage> {
   // Active state of each menuItem.
   late List<ResponsiveMenuItemIconState> menuItemsIconState;
 
-  // Toggle the state of a card as open/closed.
-  void toggleCard(int index) {
+  // Toggle the state of a card between open/closed.
+  void togglePanelOpenClose(int index) {
     setState(() {
-      isCardOpen[index] = !isCardOpen[index];
+      isPanelOpen[index] = !isPanelOpen[index];
     });
   }
 
@@ -57,7 +57,8 @@ class _HomePageState extends State<HomePage> {
     menuItemsEnabled[4] = widget.controller.isLargeGridView;
     menuItemsEnabled[5] = widget.controller.isLargeGridView;
 
-    // Set menu icons states.
+    // Set menu icons states to initial states, some are a loaded from
+    // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
         AppData.menuItems.length,
         (int i) => ResponsiveMenuItemIconState.primary);
@@ -65,8 +66,11 @@ class _HomePageState extends State<HomePage> {
         ? ResponsiveMenuItemIconState.secondary
         : ResponsiveMenuItemIconState.primary;
 
-    // The Cords can only be opened/closed on the large grid view
-    isCardOpen = List<bool>.generate(gridItems.length, (int i) {
+    // The panels can only be opened/closed on the large masonry grid view.
+    // Since by default users will start with the page view, they will have
+    // seen the "intro" panel already, so by default we close it here.
+    // The code view panel can also be opened on demand in the grid view.
+    isPanelOpen = List<bool>.generate(gridItems.length, (int i) {
       if (i == 1 || i == 0) {
         // Always start with info and code view panel closed.
         return false;
@@ -113,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                 '${AppColor.schemes[widget.controller.schemeIndex].name}'),
         menuTitle: const Text(AppData.appName),
         menuLeadingTitle: Text(
-          'Themes Playground',
+          AppData.title(context),
           style: textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w600),
         ),
         menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
@@ -162,15 +166,15 @@ class _HomePageState extends State<HomePage> {
           }
           // Open all cards
           if (index == 4) {
-            for (int i = 0; i < isCardOpen.length; i++) {
-              isCardOpen[i] = true;
+            for (int i = 0; i < isPanelOpen.length; i++) {
+              isPanelOpen[i] = true;
             }
             setState(() {});
           }
           // Close all cards
           if (index == 5) {
-            for (int i = 0; i < isCardOpen.length; i++) {
-              isCardOpen[i] = false;
+            for (int i = 0; i < isPanelOpen.length; i++) {
+              isPanelOpen[i] = false;
             }
             setState(() {});
           }
@@ -190,10 +194,10 @@ class _HomePageState extends State<HomePage> {
         body: widget.controller.isLargeGridView
             ? LargeGridView(
                 controller: widget.controller,
-                isCardOpen: isCardOpen,
-                toggleCard: toggleCard,
+                isCardOpen: isPanelOpen,
+                toggleCard: togglePanelOpenClose,
               )
-            : PanelView(tc: widget.controller),
+            : PanelView(themeController: widget.controller),
       ),
     );
   }

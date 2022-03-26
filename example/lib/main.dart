@@ -761,7 +761,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(AppData.title(context)),
         menuTitle: const Text(AppData.appName),
         menuLeadingTitle: Text(
-          'Reload Playground',
+          AppData.title(context),
           style: Theme.of(context)
               .textTheme
               .titleSmall!

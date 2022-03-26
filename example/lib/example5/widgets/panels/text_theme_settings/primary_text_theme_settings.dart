@@ -5,8 +5,7 @@ import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 class PrimaryTextThemeSettings extends StatelessWidget {
-  const PrimaryTextThemeSettings({Key? key, required this.controller})
-      : super(key: key);
+  const PrimaryTextThemeSettings(this.controller, {Key? key}) : super(key: key);
   final ThemeController controller;
 
   @override

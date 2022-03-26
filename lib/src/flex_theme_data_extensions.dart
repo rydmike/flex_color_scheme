@@ -240,13 +240,23 @@ extension FlexThemeData on ThemeData {
     /// to the primary color.
     final FlexAppBarStyle appBarStyle = FlexAppBarStyle.primary,
 
-    /// Themed app bar opacity.
+    /// Themed [AppBar] opacity.
     ///
-    /// The opacity is applied to resulting app bar background color determined
-    /// by [appBarStyle]. It is also used on tab bars in the app bar. Typically
-    /// you would apply an opacity of 0.85 to 0.95 when using the [Scaffold]
-    /// property [extendBodyBehindAppBar] set to true, in order to partially
-    /// show scrolling content behind the app bar.
+    /// The opacity is applied to the effective AppBar color, which may be from
+    /// used [appBarStyle], that gets its color selection from used [scheme]
+    /// or [colors]. Or that color may have been overridden by AppBar sub-theme
+    /// and there selected [SchemeColor] based color.
+    /// Lastly and with highest priority it may be from here directly supplied
+    /// [appBarBackground] color.
+    ///
+    /// A useful opacity range is from 0.85 to 0.95 when using the [Scaffold]
+    /// property [extendBodyBehindAppBar] set to true, to partially show
+    /// scrolling content behind the app bar. To use more opacity, in a way
+    /// that the AppBar does not become too transparent, you also need to blur
+    /// the background to create a frosted glass effect. This cannot
+    /// be made with only theming, you need a custom AppBar Widget for that.
+    /// Frosted glass UI effect is thus beyond the scope of what
+    /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
     /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
     final double appBarOpacity = 1,
@@ -546,6 +556,9 @@ extension FlexThemeData on ThemeData {
     /// [FlexSchemeColor] [colors] or for this color defined when using a
     /// pre-defined color scheme based on [FlexScheme] `scheme` property and
     /// the [FlexAppBarStyle] [appBarStyle] property.
+    ///
+    /// Thus custom color will also override any scheme color based selection
+    /// for the [AppBAr] in active used sub-themes.
     final Color? appBarBackground,
 
     /// A color that is clearly legible when drawn on [primary] color.
@@ -1306,13 +1319,23 @@ extension FlexThemeData on ThemeData {
     /// to the surface color.
     final FlexAppBarStyle appBarStyle = FlexAppBarStyle.material,
 
-    /// Themed app bar opacity.
+    /// Themed [AppBar] opacity.
     ///
-    /// The opacity is applied to resulting app bar background color determined
-    /// by [appBarStyle]. It is also used on tab bars in the app bar. Typically
-    /// you would apply an opacity of 0.85 to 0.95 when using the [Scaffold]
-    /// property [extendBodyBehindAppBar] set to true, in order to partially
-    /// show scrolling content behind the app bar.
+    /// The opacity is applied to the effective AppBar color, which may be from
+    /// used [appBarStyle], that gets its color selection from used [scheme]
+    /// or [colors]. Or that color may have been overridden by AppBar sub-theme
+    /// and there selected [SchemeColor] based color.
+    /// Lastly and with highest priority it may be from here directly supplied
+    /// [appBarBackground] color.
+    ///
+    /// A useful opacity range is from 0.85 to 0.95 when using the [Scaffold]
+    /// property [extendBodyBehindAppBar] set to true, to partially show
+    /// scrolling content behind the app bar. To use more opacity, in a way
+    /// that the AppBar does not become too transparent, you also need to blur
+    /// the background to create a frosted glass effect. This cannot
+    /// be made with only theming, you need a custom AppBar Widget for that.
+    /// Frosted glass UI effect is thus beyond the scope of what
+    /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
     /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
     final double appBarOpacity = 1,
@@ -1611,8 +1634,11 @@ extension FlexThemeData on ThemeData {
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
     /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property and
+    /// pre-defined color scheme based on [FlexScheme] `scheme` property and
     /// the [FlexAppBarStyle] [appBarStyle] property.
+    ///
+    /// Thus custom color will also override any scheme color based selection
+    /// for the [AppBAr] in active used sub-themes.
     final Color? appBarBackground,
 
     /// A color that is clearly legible when drawn on [primary] color.

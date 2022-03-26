@@ -5,10 +5,7 @@ import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 class TextThemeSettings extends StatelessWidget {
-  const TextThemeSettings({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const TextThemeSettings(this.controller, {Key? key}) : super(key: key);
   final ThemeController controller;
 
   @override

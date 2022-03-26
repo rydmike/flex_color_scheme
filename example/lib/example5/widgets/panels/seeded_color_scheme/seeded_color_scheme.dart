@@ -10,9 +10,9 @@ import 'use_key_colors_buttons.dart';
 // Panel used to show effective color scheme, when using keys to seed it
 // and just using raw FlexSchemeColors input data too based ColorScheme too.
 class SeededColorScheme extends StatelessWidget {
-  const SeededColorScheme({
+  const SeededColorScheme(
+    this.controller, {
     Key? key,
-    required this.controller,
     this.showKeyButtons = true,
   }) : super(key: key);
   final ThemeController controller;

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -32,13 +31,6 @@ import '../panels/text_theme_settings/primary_text_theme_settings.dart';
 import '../panels/text_theme_settings/text_theme_settings.dart';
 import '../panels/theme_selector.dart';
 
-// Set the bool flag to true to show debug prints. Even if it is forgotten
-// to set it to false, debug prints will not show in release builds.
-// The handy part is that if it gets in the way in debugging, it is an easy
-// toggle to turn it off there too. Often I just leave them true if it is one
-// I want to see in dev mode, unless it is too chatty.
-const bool _debug = !kReleaseMode && false;
-
 /// This is the super large masonry grid view layout of the Themes Playground.
 ///
 /// It is nice on a 4k screen where you can see a lot of settings in one glance.
@@ -61,7 +53,7 @@ class LargeGridView extends StatefulWidget {
 
 class _LargeGridViewState extends State<LargeGridView>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  late final ScrollController scrollController;
+  // late final ScrollController scrollController;
   late int previousTheme;
 
   // Override `wantKeepAlive` when using `AutomaticKeepAliveClientMixin`.
@@ -71,7 +63,7 @@ class _LargeGridViewState extends State<LargeGridView>
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController();
+    // scrollController = ScrollController();
     previousTheme = widget.controller.schemeIndex;
   }
 
@@ -85,7 +77,7 @@ class _LargeGridViewState extends State<LargeGridView>
 
   @override
   void dispose() {
-    scrollController.dispose();
+    // scrollController.dispose();
     super.dispose();
   }
 
@@ -107,14 +99,6 @@ class _LargeGridViewState extends State<LargeGridView>
 
     final ThemeController themeCtrl = widget.controller;
 
-    if (_debug) {
-      // debugPrint('margins ................. : $margins');
-      debugPrint('kToolbarHeight .......... : $kToolbarHeight');
-      debugPrint('media.viewPadding.top.... : ${media.viewPadding.top}');
-      debugPrint('media.padding.top ....... : ${media.padding.top}');
-      debugPrint('media.size.width ........ : ${media.size.width}');
-      debugPrint('media.size.height ....... : ${media.size.height}');
-    }
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       // Just a suitable breakpoint for when we want to have more
@@ -133,73 +117,73 @@ class _LargeGridViewState extends State<LargeGridView>
 
       final double headerExtent = 54 + media.padding.top + margins * 2;
 
-      return CustomScrollView(
-        controller: scrollController,
-        slivers: <Widget>[
-          SliverPadding(
-            padding: EdgeInsetsDirectional.fromSTEB(
-              margins,
-              margins + media.padding.top,
-              margins,
-              0,
-            ),
-            sliver: SliverPersistentHeader(
-              pinned: isPinned,
-              floating: true,
-              delegate: ThemeSelectorHeaderDelegate(
-                vsync: this,
-                extent: headerExtent,
-                controller: themeCtrl,
-                previousTheme: previousTheme,
+      return NestedScrollView(
+        floatHeaderSlivers: true,
+        controller: ScrollController(),
+        headerSliverBuilder: (BuildContext context, bool value) {
+          return <Widget>[
+            SliverPadding(
+              padding: EdgeInsetsDirectional.fromSTEB(
+                margins,
+                margins + media.padding.top,
+                margins,
+                0,
+              ),
+              sliver: SliverPersistentHeader(
+                pinned: isPinned,
+                floating: true,
+                delegate: ThemeSelectorHeaderDelegate(
+                  vsync: this,
+                  extent: headerExtent,
+                  controller: themeCtrl,
+                  previousTheme: previousTheme,
+                ),
               ),
             ),
+          ];
+        },
+        body: MasonryGridView.count(
+          // controller: scrollController,
+          crossAxisCount: columns,
+          mainAxisSpacing: margins,
+          crossAxisSpacing: margins,
+          padding: EdgeInsets.all(margins),
+          itemCount: widget.isCardOpen.length,
+          itemBuilder: (BuildContext context, int itemIndex) => HeaderCard(
+            title: Text(gridItems[itemIndex].panelLabel),
+            leading: Icon(gridItems[itemIndex].icon, color: iconColor),
+            isOpen: widget.isCardOpen[itemIndex],
+            onTap: () {
+              widget.toggleCard(itemIndex);
+            },
+            child: <Widget>[
+              IntroductionPanel(themeCtrl),
+              ThemeCode(themeCtrl),
+              InputColors(themeCtrl, showSelector: false),
+              SeededColorScheme(themeCtrl),
+              SurfaceBlends(themeCtrl, allBlends: showAllBlends),
+              EffectiveColors(themeCtrl),
+              ComponentThemes(themeCtrl),
+              TextFieldSettings(themeCtrl),
+              AppBarSettings(themeCtrl),
+              TabBarSettings(themeCtrl),
+              NavigationBarSettings(themeCtrl),
+              BottomNavigationBarSettings(themeCtrl),
+              NavigationRailSettings(themeCtrl),
+              AndroidNavigationBarSettings(themeCtrl),
+              ButtonsSettings(themeCtrl),
+              FabToggleChipPopupSettings(themeCtrl),
+              SwitchesSettings(themeCtrl),
+              ListTileSettings(themeCtrl),
+              DialogSettings(themeCtrl),
+              MaterialAndBottomSheetSettings(themeCtrl),
+              CardSettings(themeCtrl),
+              TextThemeSettings(themeCtrl),
+              PrimaryTextThemeSettings(themeCtrl),
+              const PageExamples(),
+            ].elementAt(itemIndex),
           ),
-          SliverPadding(
-            padding: EdgeInsets.all(margins),
-            sliver: SliverMasonryGrid.count(
-              // controller: scrollController,
-              crossAxisCount: columns,
-              mainAxisSpacing: margins,
-              crossAxisSpacing: margins,
-              // padding: EdgeInsets.all(margins),
-              childCount: widget.isCardOpen.length,
-              itemBuilder: (BuildContext context, int itemIndex) => HeaderCard(
-                title: Text(gridItems[itemIndex].panelLabel),
-                leading: Icon(gridItems[itemIndex].icon, color: iconColor),
-                isOpen: widget.isCardOpen[itemIndex],
-                onTap: () {
-                  widget.toggleCard(itemIndex);
-                },
-                child: <Widget>[
-                  IntroductionPanel(themeCtrl),
-                  ThemeCode(themeCtrl),
-                  InputColors(themeCtrl, showSelector: false),
-                  SeededColorScheme(themeCtrl),
-                  SurfaceBlends(themeCtrl, allBlends: showAllBlends),
-                  EffectiveColors(themeCtrl),
-                  ComponentThemes(themeCtrl),
-                  TextFieldSettings(themeCtrl),
-                  AppBarSettings(themeCtrl),
-                  TabBarSettings(themeCtrl),
-                  NavigationBarSettings(themeCtrl),
-                  BottomNavigationBarSettings(themeCtrl),
-                  NavigationRailSettings(themeCtrl),
-                  AndroidNavigationBarSettings(themeCtrl),
-                  ButtonsSettings(themeCtrl),
-                  FabToggleChipPopupSettings(themeCtrl),
-                  SwitchesSettings(themeCtrl),
-                  ListTileSettings(themeCtrl),
-                  DialogSettings(themeCtrl),
-                  MaterialAndBottomSheetSettings(themeCtrl),
-                  CardSettings(themeCtrl),
-                  TextThemeSettings(themeCtrl),
-                  PrimaryTextThemeSettings(themeCtrl),
-                  const PageExamples(),
-                ].elementAt(itemIndex),
-              ),
-            ),
-          ),
-        ],
+        ),
       );
     });
   }
