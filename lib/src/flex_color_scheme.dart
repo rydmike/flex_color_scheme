@@ -771,16 +771,16 @@ class FlexColorScheme with Diagnosticable {
 
   /// Background theme color for the [AppBar].
   ///
-  /// This theme color cannot be controlled separately with Flutter's standard
-  /// [ThemeData.from] a [ColorScheme]. [FlexColorScheme] enables you to specify
-  /// an app bar theme color that is independent of the primary color in light
-  /// theme and in dark mode of the dark theme's dark surface color.
+  /// This AppBar theme color cannot be controlled separately with only
+  /// standard [ThemeData.from] a [ColorScheme]. [FlexColorScheme] enables you
+  /// to specify an AppBar theme color that is independent of the primary color
+  /// in light theme and in dark mode of the dark theme's dark surface color.
   ///
-  /// If you use it, the correct text and icon contrast color is computed and
+  /// When you use it, the correct text and icon contrast color is computed and
   /// set automatically based on provided color.
   ///
-  /// If no color is given it defaults to the Flutter standard color scheme
-  /// based light and dark app bar theme colors.
+  /// This AppBar color will also override any scheme color based selection
+  /// in active used sub-themes if you have selected on for the AppBar there.
   final Color? appBarBackground;
 
   /// A color that is clearly legible when drawn on [primary] color.
@@ -1552,13 +1552,23 @@ class FlexColorScheme with Diagnosticable {
     /// to the primary color.
     final FlexAppBarStyle appBarStyle = FlexAppBarStyle.primary,
 
-    /// Themed app bar opacity.
+    /// Themed [AppBar] opacity.
     ///
-    /// The opacity is applied to resulting app bar background color determined
-    /// by [appBarStyle]. It is also used on tab bars in the app bar. Typically
-    /// you would apply an opacity of 0.85 to 0.95 when using the [Scaffold]
-    /// property [extendBodyBehindAppBar] set to true, in order to partially
-    /// show scrolling content behind the app bar.
+    /// The opacity is applied to the effective AppBar color, which may be from
+    /// used [appBarStyle], that gets its color selection from used [scheme]
+    /// or [colors]. Or that color may have been overridden by AppBar sub-theme
+    /// and there selected [SchemeColor] based color.
+    /// Lastly and with highest priority it may be from here directly supplied
+    /// [appBarBackground] color.
+    ///
+    /// A useful opacity range is from 0.85 to 0.95 when using the [Scaffold]
+    /// property [extendBodyBehindAppBar] set to true, to partially show
+    /// scrolling content behind the app bar. To use more opacity, in a way
+    /// that the AppBar does not become too transparent, you also need to blur
+    /// the background to create a frosted glass effect. This cannot
+    /// be made with only theming, you need a custom AppBar Widget for that.
+    /// Frosted glass UI effect is thus beyond the scope of what
+    /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
     /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
     final double appBarOpacity = 1,
@@ -1861,6 +1871,9 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSchemeColor] [colors] or for this color defined when using a
     /// pre-defined color scheme based on [FlexScheme] `scheme` property and
     /// the [FlexAppBarStyle] [appBarStyle] property.
+    ///
+    /// Thus custom color will also override any scheme color based selection
+    /// for the [AppBAr] in active used sub-themes.
     final Color? appBarBackground,
 
     /// A color that is clearly legible when drawn on [primary] color.
@@ -2620,96 +2633,109 @@ class FlexColorScheme with Diagnosticable {
         ? dialogBackground?.lighten(5) ??
             surfaceSchemeColors.dialogBackground.lighten(5)
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
-    // Get the effective app bar color based on the style and opacity.
-    Color? effectiveAppBarColor;
-    switch (appBarStyle) {
-      case FlexAppBarStyle.primary:
-        effectiveAppBarColor = effectiveColors.primary;
-        break;
-      case FlexAppBarStyle.material:
-        effectiveAppBarColor = FlexColor.materialLightSurface;
-        break;
-      case FlexAppBarStyle.background:
-        effectiveAppBarColor = effectiveBackgroundColor;
-        break;
-      case FlexAppBarStyle.surface:
-        effectiveAppBarColor = effectiveSurfaceColor;
-        break;
-      case FlexAppBarStyle.custom:
-        effectiveAppBarColor =
-            effectiveColors.appBarColor ?? effectiveColors.primary;
-        break;
-    }
-    effectiveAppBarColor =
-        appBarBackground ?? effectiveAppBarColor.withOpacity(appBarOpacity);
 
-    return FlexColorScheme(
-      colorScheme:
+    // Compute the effective ColorScheme based on all selection options.
+    final ColorScheme effectiveColorScheme = seedScheme?.copyWith(
           // We made a seeded color scheme, we use it as given but set
           // override values for props we have not handled via FCS direct
           // props further below. We don't adjust onColors for
           // surfaceVariant and inverseSurface on purpose.
-          seedScheme?.copyWith(
-                surfaceVariant: effectiveSurfaceVariantColor,
-                inverseSurface: effectiveInverseSurfaceColor,
-              ) ??
-              // We had a colorScheme passed in, we use as passed in, but set
-              // override values for props we have not handled via FCS direct
-              // props further below.
-              colorScheme?.copyWith(
-                surfaceVariant: effectiveSurfaceVariantColor,
-                onSurfaceVariant: onColors.onSurfaceVariant,
-                inverseSurface: effectiveInverseSurfaceColor,
-                onInverseSurface: onColors.onInverseSurface,
-              ) ??
-              // In order to avoid using a ColorScheme.light that sets
-              // some opinionated defaults on deprecated members that we do not
-              // want, we make a full one matching the target. Values that
-              // exist as direct properties in FlexColorScheme, will actually
-              // be used via them further below, but we need this ColorScheme
-              // to provide the properties we are not handling via FCS
-              // constructor. An alternative would be to add missing ColorScheme
-              // properties to FlexColorScheme as direct override properties,
-              // might do so later.
-              ColorScheme(
-                brightness: Brightness.light,
-                primary: effectiveColors.primary,
-                onPrimary: onColors.onPrimary,
-                primaryContainer: effectiveColors.primaryContainer,
-                onPrimaryContainer: onColors.onPrimaryContainer,
-                secondary: effectiveColors.secondary,
-                onSecondary: onColors.onSecondary,
-                secondaryContainer: effectiveColors.secondaryContainer,
-                onSecondaryContainer: onColors.onSecondaryContainer,
-                tertiary: effectiveColors.tertiary,
-                onTertiary: onColors.onTertiary,
-                tertiaryContainer: effectiveColors.tertiaryContainer,
-                onTertiaryContainer: onColors.onTertiaryContainer,
-                error: useMaterial3ErrorColors && !seed.useKeyColors
-                    ? FlexColor.material3LightError
-                    : effectiveColors.error!,
-                onError: useMaterial3ErrorColors && !seed.useKeyColors
-                    ? FlexColor.material3LightOnError
-                    : onColors.onError,
-                errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
-                    ? FlexColor.material3LightErrorContainer
-                    : effectiveColors.errorContainer!,
-                onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
-                    ? FlexColor.material3LightOnErrorContainer
-                    : onColors.onErrorContainer,
-                background: effectiveBackgroundColor,
-                onBackground: onColors.onBackground,
-                surface: effectiveSurfaceColor,
-                onSurface: onColors.onSurface,
-                surfaceVariant: effectiveSurfaceVariantColor,
-                onSurfaceVariant: onColors.onSurfaceVariant,
-                inverseSurface: effectiveInverseSurfaceColor,
-                onInverseSurface: onColors.onInverseSurface,
-                inversePrimary: _inversePrimary(Brightness.light,
-                    effectiveColors.primary, effectiveSurfaceColor),
-                shadow: Colors.black,
-                outline: _outlineColor(Brightness.light, onColors.onBackground),
-              ),
+          surfaceVariant: effectiveSurfaceVariantColor,
+          inverseSurface: effectiveInverseSurfaceColor,
+        ) ??
+        // We had a colorScheme passed in, we use as passed in, but set
+        // override values for props we have not handled via FCS direct
+        // props further below.
+        colorScheme?.copyWith(
+          surfaceVariant: effectiveSurfaceVariantColor,
+          onSurfaceVariant: onColors.onSurfaceVariant,
+          inverseSurface: effectiveInverseSurfaceColor,
+          onInverseSurface: onColors.onInverseSurface,
+        ) ??
+        // In order to avoid using a ColorScheme.light that sets
+        // some opinionated defaults on deprecated members that we do not
+        // want, we make a full one matching the target. Values that
+        // exist as direct properties in FlexColorScheme, will actually
+        // be used via them further below, but we need this ColorScheme
+        // to provide the properties we are not handling via FCS
+        // constructor. An alternative would be to add missing ColorScheme
+        // properties to FlexColorScheme as direct override properties,
+        // might do so later.
+        ColorScheme(
+          brightness: Brightness.light,
+          primary: effectiveColors.primary,
+          onPrimary: onColors.onPrimary,
+          primaryContainer: effectiveColors.primaryContainer,
+          onPrimaryContainer: onColors.onPrimaryContainer,
+          secondary: effectiveColors.secondary,
+          onSecondary: onColors.onSecondary,
+          secondaryContainer: effectiveColors.secondaryContainer,
+          onSecondaryContainer: onColors.onSecondaryContainer,
+          tertiary: effectiveColors.tertiary,
+          onTertiary: onColors.onTertiary,
+          tertiaryContainer: effectiveColors.tertiaryContainer,
+          onTertiaryContainer: onColors.onTertiaryContainer,
+          error: useMaterial3ErrorColors && !seed.useKeyColors
+              ? FlexColor.material3LightError
+              : effectiveColors.error!,
+          onError: useMaterial3ErrorColors && !seed.useKeyColors
+              ? FlexColor.material3LightOnError
+              : onColors.onError,
+          errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+              ? FlexColor.material3LightErrorContainer
+              : effectiveColors.errorContainer!,
+          onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+              ? FlexColor.material3LightOnErrorContainer
+              : onColors.onErrorContainer,
+          background: effectiveBackgroundColor,
+          onBackground: onColors.onBackground,
+          surface: effectiveSurfaceColor,
+          onSurface: onColors.onSurface,
+          surfaceVariant: effectiveSurfaceVariantColor,
+          onSurfaceVariant: onColors.onSurfaceVariant,
+          inverseSurface: effectiveInverseSurfaceColor,
+          onInverseSurface: onColors.onInverseSurface,
+          inversePrimary: _inversePrimary(
+              Brightness.light, effectiveColors.primary, effectiveSurfaceColor),
+          shadow: Colors.black,
+          outline: _outlineColor(Brightness.light, onColors.onBackground),
+        );
+
+    // Determine the effective AppBar color:
+    // - First priority, passed in color value.
+    Color? effectiveAppBarColor = appBarBackground;
+    // - Second priority, sub-theme based scheme color.
+    effectiveAppBarColor ??=
+        useSubThemes && subTheme.appBarBackgroundSchemeColor != null
+            ? FlexSubThemes.schemeColor(
+                subTheme.appBarBackgroundSchemeColor!, effectiveColorScheme)
+            : null;
+    // Third priority [appBarStyle] based.
+    if (effectiveAppBarColor == null) {
+      switch (appBarStyle) {
+        case FlexAppBarStyle.primary:
+          effectiveAppBarColor = effectiveColors.primary;
+          break;
+        case FlexAppBarStyle.material:
+          effectiveAppBarColor = FlexColor.materialLightSurface;
+          break;
+        case FlexAppBarStyle.background:
+          effectiveAppBarColor = effectiveBackgroundColor;
+          break;
+        case FlexAppBarStyle.surface:
+          effectiveAppBarColor = effectiveSurfaceColor;
+          break;
+        case FlexAppBarStyle.custom:
+          effectiveAppBarColor =
+              effectiveColors.appBarColor ?? effectiveColors.primary;
+          break;
+      }
+    }
+    // Apply specified opacity on on the resulting color.
+    effectiveAppBarColor = effectiveAppBarColor.withOpacity(appBarOpacity);
+
+    return FlexColorScheme(
+      colorScheme: effectiveColorScheme,
       // This is the light theme factory so we always set brightness to light.
       brightness: Brightness.light,
       // Primary colors for the application
@@ -2733,8 +2759,7 @@ class FlexColorScheme with Diagnosticable {
       // Color of dialog background elements, a passed in dialogBackground
       // color will override the factory style, if provided.
       dialogBackground: effectiveDialogBackground,
-      // Set app bar background to effective background color, but a passed
-      // in appBarBackground will override it if provided.
+      // Set app bar background to effective background color.
       appBarBackground: effectiveAppBarColor,
       // Effective error color and null fallback.
       error: useMaterial3ErrorColors && !seed.useKeyColors
@@ -3100,13 +3125,23 @@ class FlexColorScheme with Diagnosticable {
     /// to the surface color.
     final FlexAppBarStyle appBarStyle = FlexAppBarStyle.material,
 
-    /// Themed app bar opacity.
+    /// Themed [AppBar] opacity.
     ///
-    /// The opacity is applied to resulting app bar background color determined
-    /// by [appBarStyle]. It is also used on tab bars in the app bar. Typically
-    /// you would apply an opacity of 0.85 to 0.95 when using the [Scaffold]
-    /// property [extendBodyBehindAppBar] set to true, in order to partially
-    /// show scrolling content behind the app bar.
+    /// The opacity is applied to the effective AppBar color, which may be from
+    /// used [appBarStyle], that gets its color selection from used [scheme]
+    /// or [colors]. Or that color may have been overridden by AppBar sub-theme
+    /// and there selected [SchemeColor] based color.
+    /// Lastly and with highest priority it may be from here directly supplied
+    /// [appBarBackground] color.
+    ///
+    /// A useful opacity range is from 0.85 to 0.95 when using the [Scaffold]
+    /// property [extendBodyBehindAppBar] set to true, to partially show
+    /// scrolling content behind the app bar. To use more opacity, in a way
+    /// that the AppBar does not become too transparent, you also need to blur
+    /// the background to create a frosted glass effect. This cannot
+    /// be made with only theming, you need a custom AppBar Widget for that.
+    /// Frosted glass UI effect is thus beyond the scope of what
+    /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
     /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
     final double appBarOpacity = 1,
@@ -3405,8 +3440,11 @@ class FlexColorScheme with Diagnosticable {
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
     /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property and
+    /// pre-defined color scheme based on [FlexScheme] `scheme` property and
     /// the [FlexAppBarStyle] [appBarStyle] property.
+    ///
+    /// Thus custom color will also override any scheme color based selection
+    /// for the [AppBAr] in active used sub-themes.
     final Color? appBarBackground,
 
     /// A color that is clearly legible when drawn on [primary] color.
@@ -4192,97 +4230,109 @@ class FlexColorScheme with Diagnosticable {
         ? dialogBackground?.darken(5) ??
             surfaceSchemeColors.dialogBackground.darken(5)
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
-    // Get the effective app bar color based on the style and opacity.
-    Color? effectiveAppBarColor;
-    switch (appBarStyle) {
-      case FlexAppBarStyle.primary:
-        effectiveAppBarColor = effectiveColors.primary;
-        break;
-      case FlexAppBarStyle.material:
-        effectiveAppBarColor =
-            darkIsTrueBlack ? Colors.black : FlexColor.materialDarkSurface;
-        break;
-      case FlexAppBarStyle.background:
-        effectiveAppBarColor = effectiveBackgroundColor;
-        break;
-      case FlexAppBarStyle.surface:
-        effectiveAppBarColor = effectiveSurfaceColor;
-        break;
-      case FlexAppBarStyle.custom:
-        effectiveAppBarColor = effectiveColors.appBarColor ??
-            (darkIsTrueBlack ? Colors.black : FlexColor.materialDarkSurface);
-        break;
-    }
-    effectiveAppBarColor =
-        appBarBackground ?? effectiveAppBarColor.withOpacity(appBarOpacity);
 
-    return FlexColorScheme(
-      colorScheme:
+    // Compute the effective ColorScheme based on all selection options.
+    final ColorScheme effectiveColorScheme = seedScheme?.copyWith(
           // We made a seeded color scheme, we use it as given but set
           // override values for props we have not handled via FCS direct
           // props further below. We don't adjust onColors for
           // surfaceVariant and inverseSurface on purpose.
-          seedScheme?.copyWith(
-                surfaceVariant: effectiveSurfaceVariantColor,
-                inverseSurface: effectiveInverseSurfaceColor,
-              ) ??
-              // We had a colorScheme passed in, we use as passed in, but set
-              // override values for props we have not handled via FCS direct
-              // props further below.
-              colorScheme?.copyWith(
-                surfaceVariant: effectiveSurfaceVariantColor,
-                onSurfaceVariant: onColors.onSurfaceVariant,
-                inverseSurface: effectiveInverseSurfaceColor,
-                onInverseSurface: onColors.onInverseSurface,
-              ) ??
-              // In order to avoid using a ColorScheme.light that sets
-              // some opinionated defaults on deprecated members that we do not
-              // want, we make a full one matching the target. Values that
-              // exist as direct properties in FlexColorScheme, will actually
-              // be used via them further below, but we need this ColorScheme
-              // to provide the properties we are not handling via FCS
-              // constructor. An alternative would be to add missing ColorScheme
-              // properties to FlexColorScheme as direct override properties,
-              // might do so later.
-              ColorScheme(
-                brightness: Brightness.dark,
-                primary: effectiveColors.primary,
-                onPrimary: onColors.onPrimary,
-                primaryContainer: effectiveColors.primaryContainer,
-                onPrimaryContainer: onColors.onPrimaryContainer,
-                secondary: effectiveColors.secondary,
-                onSecondary: onColors.onSecondary,
-                secondaryContainer: effectiveColors.secondaryContainer,
-                onSecondaryContainer: onColors.onSecondaryContainer,
-                tertiary: effectiveColors.tertiary,
-                onTertiary: onColors.onTertiary,
-                tertiaryContainer: effectiveColors.tertiaryContainer,
-                onTertiaryContainer: onColors.onTertiaryContainer,
-                error: useMaterial3ErrorColors && !seed.useKeyColors
-                    ? FlexColor.material3DarkError
-                    : effectiveColors.error ?? FlexColor.materialDarkError,
-                onError: useMaterial3ErrorColors && !seed.useKeyColors
-                    ? FlexColor.material3DarkOnError
-                    : onColors.onError,
-                errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
-                    ? FlexColor.material3DarkErrorContainer
-                    : effectiveColors.errorContainer!,
-                onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
-                    ? FlexColor.material3DarkOnErrorContainer
-                    : onColors.onErrorContainer,
-                background: effectiveBackgroundColor,
-                onBackground: onColors.onBackground,
-                surface: effectiveSurfaceColor,
-                onSurface: onColors.onSurface,
-                surfaceVariant: effectiveSurfaceVariantColor,
-                onSurfaceVariant: onColors.onSurfaceVariant,
-                inverseSurface: effectiveInverseSurfaceColor,
-                onInverseSurface: onColors.onInverseSurface,
-                inversePrimary: _inversePrimary(Brightness.dark,
-                    effectiveColors.primary, effectiveSurfaceColor),
-                shadow: Colors.black,
-                outline: _outlineColor(Brightness.dark, onColors.onBackground),
-              ),
+          surfaceVariant: effectiveSurfaceVariantColor,
+          inverseSurface: effectiveInverseSurfaceColor,
+        ) ??
+        // We had a colorScheme passed in, we use as passed in, but set
+        // override values for props we have not handled via FCS direct
+        // props further below.
+        colorScheme?.copyWith(
+          surfaceVariant: effectiveSurfaceVariantColor,
+          onSurfaceVariant: onColors.onSurfaceVariant,
+          inverseSurface: effectiveInverseSurfaceColor,
+          onInverseSurface: onColors.onInverseSurface,
+        ) ??
+        // In order to avoid using a ColorScheme.light that sets
+        // some opinionated defaults on deprecated members that we do not
+        // want, we make a full one matching the target. Values that
+        // exist as direct properties in FlexColorScheme, will actually
+        // be used via them further below, but we need this ColorScheme
+        // to provide the properties we are not handling via FCS
+        // constructor. An alternative would be to add missing ColorScheme
+        // properties to FlexColorScheme as direct override properties,
+        // might do so later.
+        ColorScheme(
+          brightness: Brightness.dark,
+          primary: effectiveColors.primary,
+          onPrimary: onColors.onPrimary,
+          primaryContainer: effectiveColors.primaryContainer,
+          onPrimaryContainer: onColors.onPrimaryContainer,
+          secondary: effectiveColors.secondary,
+          onSecondary: onColors.onSecondary,
+          secondaryContainer: effectiveColors.secondaryContainer,
+          onSecondaryContainer: onColors.onSecondaryContainer,
+          tertiary: effectiveColors.tertiary,
+          onTertiary: onColors.onTertiary,
+          tertiaryContainer: effectiveColors.tertiaryContainer,
+          onTertiaryContainer: onColors.onTertiaryContainer,
+          error: useMaterial3ErrorColors && !seed.useKeyColors
+              ? FlexColor.material3DarkError
+              : effectiveColors.error ?? FlexColor.materialDarkError,
+          onError: useMaterial3ErrorColors && !seed.useKeyColors
+              ? FlexColor.material3DarkOnError
+              : onColors.onError,
+          errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+              ? FlexColor.material3DarkErrorContainer
+              : effectiveColors.errorContainer!,
+          onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+              ? FlexColor.material3DarkOnErrorContainer
+              : onColors.onErrorContainer,
+          background: effectiveBackgroundColor,
+          onBackground: onColors.onBackground,
+          surface: effectiveSurfaceColor,
+          onSurface: onColors.onSurface,
+          surfaceVariant: effectiveSurfaceVariantColor,
+          onSurfaceVariant: onColors.onSurfaceVariant,
+          inverseSurface: effectiveInverseSurfaceColor,
+          onInverseSurface: onColors.onInverseSurface,
+          inversePrimary: _inversePrimary(
+              Brightness.dark, effectiveColors.primary, effectiveSurfaceColor),
+          shadow: Colors.black,
+          outline: _outlineColor(Brightness.dark, onColors.onBackground),
+        );
+
+    // Determine the effective AppBar color:
+    // - First priority, passed in color value.
+    Color? effectiveAppBarColor = appBarBackground;
+    // - Second priority, sub-theme based scheme color.
+    effectiveAppBarColor ??=
+        useSubThemes && subTheme.appBarBackgroundSchemeColor != null
+            ? FlexSubThemes.schemeColor(
+                subTheme.appBarBackgroundSchemeColor!, effectiveColorScheme)
+            : null;
+    // Third priority [appBarStyle] based.
+    if (effectiveAppBarColor == null) {
+      switch (appBarStyle) {
+        case FlexAppBarStyle.primary:
+          effectiveAppBarColor = effectiveColors.primary;
+          break;
+        case FlexAppBarStyle.material:
+          effectiveAppBarColor = FlexColor.materialLightSurface;
+          break;
+        case FlexAppBarStyle.background:
+          effectiveAppBarColor = effectiveBackgroundColor;
+          break;
+        case FlexAppBarStyle.surface:
+          effectiveAppBarColor = effectiveSurfaceColor;
+          break;
+        case FlexAppBarStyle.custom:
+          effectiveAppBarColor =
+              effectiveColors.appBarColor ?? effectiveColors.primary;
+          break;
+      }
+    }
+    // Apply specified opacity on on the resulting color.
+    effectiveAppBarColor = effectiveAppBarColor.withOpacity(appBarOpacity);
+
+    return FlexColorScheme(
+      colorScheme: effectiveColorScheme,
       // This is the dark theme factory so we always set brightness to dark.
       brightness: Brightness.dark,
       // Primary colors for the application
@@ -5298,17 +5348,19 @@ class FlexColorScheme with Diagnosticable {
         isDark ? primarySwatch[700]! : primarySwatch[800]!;
     final Color primaryColorLight = primarySwatch[100]!;
     final Color secondaryHeaderColor = primarySwatch[50]!;
-    // AppBar background color: If we use sub themes and a defined scheme color
-    // we use it, else if a custom color for the AppBar was passed in, we use
-    // it instead. If neither, we use the surface color in dark mode and
-    // primary color in light mode. Which is the same logic that the
-    // Flutter SDK ThemeData.from factory sets the AppBar background color to.
-    final Color effectiveAppBarColor =
-        useSubThemes && subTheme.appBarBackgroundSchemeColor != null
+    // AppBar background color:
+    // - If a color is passed in, that is used first.
+    // - If we use sub-themes, we use its scheme based color.
+    // - If neither was given we use the surface color in dark mode and
+    //   primary color in light mode, the same logic that Flutter SDK
+    //   ThemeData.from factory sets the AppBar background color to.
+    final Color effectiveAppBarColor = appBarBackground ??
+        (useSubThemes && subTheme.appBarBackgroundSchemeColor != null
             ? FlexSubThemes.schemeColor(
                 subTheme.appBarBackgroundSchemeColor!, colorScheme)
-            : (appBarBackground ??
-                (isDark ? colorScheme.surface : colorScheme.primary));
+            : isDark
+                ? colorScheme.surface
+                : colorScheme.primary);
     final Brightness appBarBrightness =
         ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
     Color appBarForeground =

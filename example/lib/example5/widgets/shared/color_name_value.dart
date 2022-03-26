@@ -76,7 +76,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(7),
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[

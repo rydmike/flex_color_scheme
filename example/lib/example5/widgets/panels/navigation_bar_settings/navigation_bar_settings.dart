@@ -9,8 +9,7 @@ import '../../shared/color_scheme_popup_menu.dart';
 
 // Panel used to control the sub-theme for NavigationBar.
 class NavigationBarSettings extends StatelessWidget {
-  const NavigationBarSettings({Key? key, required this.controller})
-      : super(key: key);
+  const NavigationBarSettings(this.controller, {Key? key}) : super(key: key);
   final ThemeController controller;
 
   String explainLabelStyle(

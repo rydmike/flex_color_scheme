@@ -5,8 +5,8 @@ import '../../../../shared/controllers/theme_controller.dart';
 
 /// Popup used to change the used FlexSchemeData index in the theme controller
 /// and via that the selected active theme.
-class ThemePopupMenu extends StatelessWidget {
-  const ThemePopupMenu({
+class InputColorsPopupMenu extends StatelessWidget {
+  const InputColorsPopupMenu({
     Key? key,
     required this.controller,
     this.contentPadding,

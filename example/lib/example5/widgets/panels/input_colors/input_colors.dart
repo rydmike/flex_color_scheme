@@ -5,19 +5,19 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_mode_switch.dart';
 import '../../dialogs/copy_scheme_to_custom_dialog.dart';
-import 'theme_input_colors.dart';
-import 'theme_popup_menu.dart';
-import 'theme_selector.dart';
+import 'input_colors_popup_menu.dart';
+import 'input_colors_selector.dart';
+import 'show_input_colors.dart';
 import 'used_colors_popup_menu.dart';
 
 class InputColors extends StatelessWidget {
-  const InputColors({
+  const InputColors(
+    this.controller, {
     Key? key,
-    required this.controller,
-    this.showThemeSelector = true,
+    this.showSelector = true,
   }) : super(key: key);
   final ThemeController controller;
-  final bool showThemeSelector;
+  final bool showSelector;
 
   Future<void> _handleCopySchemeTap(BuildContext context) async {
     final bool? copy = await showDialog<bool?>(
@@ -59,19 +59,19 @@ class InputColors extends StatelessWidget {
             }
           },
         ),
-        if (showThemeSelector)
+        if (showSelector)
           Padding(
             padding: const EdgeInsets.only(top: 16),
-            child: ThemeSelector(controller: controller),
+            child: InputColorsSelector(controller: controller),
           ),
-        ThemePopupMenu(controller: controller),
+        InputColorsPopupMenu(controller: controller),
         const SizedBox(height: 8),
         if (controller.schemeIndex != (AppColor.schemes.length - 1))
           ListTile(
             title: const Text('Copy effective input colors to the custom '
                 'scheme?'),
-            subtitle: const Text('Applies effective input color value to '
-                'the last scheme, the custom one, that you can modify'),
+            subtitle: const Text('Copies the effective color values to '
+                'the last scheme, the one that you can modify'),
             trailing: ElevatedButton(
               onPressed: () async {
                 await _handleCopySchemeTap(context);
@@ -90,7 +90,7 @@ class InputColors extends StatelessWidget {
           ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
-          child: ThemeInputColors(controller: controller),
+          child: ShowInputColors(controller: controller),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -106,20 +106,26 @@ class InputColors extends StatelessWidget {
               'change the effective input colors that are used to define '
               'the ColorScheme. The input color values show the color before '
               'input modifiers, the surrounding color is the effective input '
-              'color.'),
+              'color. Using a seeded ColorScheme also modifies the input '
+              'colors, above you can see how.'),
         ),
         SwitchListTileAdaptive(
           title: const Text('Use Material 3 error colors'),
           subtitle: const Text('Override defined M2 error colors and use M3 '
               'error colors also when not using seeded ColorScheme'),
-          value: controller.useM3ErrorColors,
-          onChanged: controller.setUseM3ErrorColors,
+          value: controller.useM3ErrorColors &&
+              controller.useFlexColorScheme &&
+              !controller.useKeyColors,
+          onChanged: controller.useFlexColorScheme && !controller.useKeyColors
+              ? controller.setUseM3ErrorColors
+              : null,
         ),
         UsedColorsPopupMenu(
           title: const Text('Input limiter, use fewer of the six '
               'main input color values'),
           index: controller.usedColors,
-          onChanged: controller.setUsedColors,
+          onChanged:
+              controller.useFlexColorScheme ? controller.setUsedColors : null,
         ),
         if (isLight)
           SwitchListTileAdaptive(
@@ -127,8 +133,10 @@ class InputColors extends StatelessWidget {
             subtitle: const Text(
               'Swap primary, secondary and their container colors',
             ),
-            value: controller.swapLightColors,
-            onChanged: controller.setSwapLightColors,
+            value: controller.swapLightColors && controller.useFlexColorScheme,
+            onChanged: controller.useFlexColorScheme
+                ? controller.setSwapLightColors
+                : null,
           )
         else
           SwitchListTileAdaptive(
@@ -136,8 +144,10 @@ class InputColors extends StatelessWidget {
             subtitle: const Text(
               'Swap primary, secondary and their container colors',
             ),
-            value: controller.swapDarkColors,
-            onChanged: controller.setSwapDarkColors,
+            value: controller.swapDarkColors && controller.useFlexColorScheme,
+            onChanged: controller.useFlexColorScheme
+                ? controller.setSwapDarkColors
+                : null,
           ),
         Visibility(
           visible: !isLight,

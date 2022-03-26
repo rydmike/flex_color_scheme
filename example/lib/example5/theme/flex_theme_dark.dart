@@ -44,14 +44,14 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
   final bool useBuiltIn = controller.schemeIndex > 2 &&
       controller.schemeIndex < AppColor.schemes.length - 1;
   final int flexScheme = controller.schemeIndex - 3;
+  final bool useScheme = useBuiltIn && !controller.useToDarkMethod;
 
   return FlexColorScheme.dark(
-    colors: !useBuiltIn || controller.useToDarkMethod
-        ? AppColor.scheme(controller).dark
-        : null,
-    scheme: useBuiltIn && !controller.useToDarkMethod
-        ? FlexScheme.values[flexScheme]
-        : null,
+    // Use scheme based config, when we are using a `FlexScheme` based scheme.
+    scheme: useScheme ? FlexScheme.values[flexScheme] : null,
+    // Switch to using `FlexSchemeColor` when using 3 first custom schemes or
+    // the last one that is customizable, we also switch to
+    colors: !useScheme ? AppColor.scheme(controller).dark : null,
     usedColors: controller.usedColors,
     // For reduced complexity in this demo, we use the same
     // control value for surface mode selection and blend level

@@ -8,7 +8,7 @@ import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 //
 // Settings are available for border radius and a few other options.
 class ComponentThemes extends StatelessWidget {
-  const ComponentThemes({Key? key, required this.controller}) : super(key: key);
+  const ComponentThemes(this.controller, {Key? key}) : super(key: key);
   final ThemeController controller;
 
   @override

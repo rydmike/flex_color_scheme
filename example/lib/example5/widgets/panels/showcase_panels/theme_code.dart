@@ -7,7 +7,7 @@ import '../../../../shared/widgets/universal/syntax_highlighter.dart';
 import '../../../utils/generate_theme_dart_code.dart';
 
 class ThemeCode extends StatelessWidget {
-  const ThemeCode({Key? key, required this.controller}) : super(key: key);
+  const ThemeCode(this.controller, {Key? key}) : super(key: key);
   final ThemeController controller;
 
   Future<void> _handleCopyCode(BuildContext context, String text) async {

@@ -8,8 +8,7 @@ import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class NavigationRailSettings extends StatelessWidget {
-  const NavigationRailSettings({Key? key, required this.controller})
-      : super(key: key);
+  const NavigationRailSettings(this.controller, {Key? key}) : super(key: key);
   final ThemeController controller;
 
   String explainLabelStyle(final NavigationRailLabelType labelStyle) {

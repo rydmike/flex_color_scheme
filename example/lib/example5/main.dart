@@ -34,7 +34,7 @@ import 'widgets/pages/home_page.dart';
 // The color value definition and list of FlexSchemeData is tucked into
 // a static class as AppColor.schemesCustom.
 //
-// The Google font Noto Sans is used to show how to use custom fonts.
+// The Google font NotoSans is used to show how to use custom fonts.
 //
 // A ThemeService and ThemeController is used to manage the theme settings.
 // This follows the example architecture you get when you
@@ -75,6 +75,7 @@ Future<void> main() async {
   // The ThemeServiceHive constructor requires a box name, the others do not.
   // The box name is just a file name for the file that stores the settings.
   final ThemeService themeService = ThemeServiceHive('flex_scheme_box_5');
+  // final ThemeService themeService = ThemeServicePrefs();
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.
@@ -103,7 +104,7 @@ class DemoApp extends StatelessWidget {
         builder: (BuildContext context, Widget? child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            scrollBehavior: AppScrollBehavior(),
+            scrollBehavior: const AppScrollBehavior(),
             title: 'Themes Playground',
             // The Theme controller controls if we use FlexColorScheme made
             // ThemeData or standard SDK ThemeData.from a ColorScheme. It also

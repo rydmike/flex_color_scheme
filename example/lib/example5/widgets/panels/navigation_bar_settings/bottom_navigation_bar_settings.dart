@@ -8,7 +8,7 @@ import '../../shared/color_scheme_popup_menu.dart';
 
 // Panel used to control the sub-theme for BottomNavigationBar.
 class BottomNavigationBarSettings extends StatelessWidget {
-  const BottomNavigationBarSettings({Key? key, required this.controller})
+  const BottomNavigationBarSettings(this.controller, {Key? key})
       : super(key: key);
   final ThemeController controller;
 

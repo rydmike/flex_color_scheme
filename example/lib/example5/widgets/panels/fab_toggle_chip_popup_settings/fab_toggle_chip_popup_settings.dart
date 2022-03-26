@@ -7,7 +7,7 @@ import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class FabToggleChipPopupSettings extends StatelessWidget {
-  const FabToggleChipPopupSettings({Key? key, required this.controller})
+  const FabToggleChipPopupSettings(this.controller, {Key? key})
       : super(key: key);
   final ThemeController controller;
 

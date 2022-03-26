@@ -8,13 +8,13 @@ import 'surface_mode_buttons.dart';
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
 class SurfaceBlends extends StatelessWidget {
-  const SurfaceBlends({
+  const SurfaceBlends(
+    this.controller, {
     Key? key,
-    required this.controller,
-    required this.showAllBlends,
+    required this.allBlends,
   }) : super(key: key);
   final ThemeController controller;
-  final bool showAllBlends;
+  final bool allBlends;
 
   String explainMode(final FlexSurfaceMode mode) {
     switch (mode) {
@@ -85,7 +85,7 @@ class SurfaceBlends extends StatelessWidget {
             SurfaceModeButtons(
               mode: controller.surfaceMode,
               onChanged: controller.setSurfaceMode,
-              showAllModes: showAllBlends,
+              showAllModes: allBlends,
             ),
             const SizedBox(width: 16),
           ],

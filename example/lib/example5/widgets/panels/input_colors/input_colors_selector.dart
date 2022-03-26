@@ -21,8 +21,8 @@ const double _kWidthOfScrollItem = 67.2;
 /// active theme. The one via the popup menu buttons does te same thing, but
 /// this version is kind of cooler. Just to show different ways of doing the
 /// same things. This is of course a bit more complicated to build.
-class ThemeSelector extends StatefulWidget {
-  const ThemeSelector({
+class InputColorsSelector extends StatefulWidget {
+  const InputColorsSelector({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -30,10 +30,10 @@ class ThemeSelector extends StatefulWidget {
   final ThemeController controller;
 
   @override
-  _ThemeSelectorState createState() => _ThemeSelectorState();
+  _InputColorsSelectorState createState() => _InputColorsSelectorState();
 }
 
-class _ThemeSelectorState extends State<ThemeSelector> {
+class _InputColorsSelectorState extends State<InputColorsSelector> {
   late ScrollController scrollController;
   late int schemeIndex;
 
@@ -53,7 +53,7 @@ class _ThemeSelectorState extends State<ThemeSelector> {
   }
 
   @override
-  void didUpdateWidget(covariant ThemeSelector oldWidget) {
+  void didUpdateWidget(covariant InputColorsSelector oldWidget) {
     // Index got updated in popup and index changed, animate it to new index.
     if (widget.controller.schemeIndex != schemeIndex) {
       schemeIndex = widget.controller.schemeIndex;

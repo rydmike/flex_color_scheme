@@ -129,7 +129,7 @@ const List<GridItem> gridItems = <GridItem>[
   GridItem(
     panelLabel: 'PrimaryTextTheme',
     buttonLabel: 'Primary\nTextTheme',
-    icon: Icons.font_download_outlined,
+    icon: Icons.font_download,
   ),
   GridItem(
     panelLabel: 'Page Examples',

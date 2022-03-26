@@ -20,8 +20,6 @@ class ThemeModeAdapter extends TypeAdapter<ThemeMode> {
 }
 
 /// A Hive data type adapter for class Color.
-///
-/// Not in use now, but plan to use it later.
 class ColorAdapter extends TypeAdapter<Color> {
   @override
   Color read(BinaryReader reader) {

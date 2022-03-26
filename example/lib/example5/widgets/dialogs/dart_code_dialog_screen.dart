@@ -24,7 +24,7 @@ class DartCodeDialogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // We want to show the snackbar only in this screen, not on the main
+    // We want to show the snack bar only in this screen, not on the main
     // screen too. So we create a scoped ScaffoldMessenger that we use instead
     // of the default one. If we use the default one the snack bar shows
     // also on the main screen when we view the code in a dialog, as well as

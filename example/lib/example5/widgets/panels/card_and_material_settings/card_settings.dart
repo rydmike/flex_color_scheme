@@ -4,11 +4,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 class CardSettings extends StatelessWidget {
-  const CardSettings({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
-
+  const CardSettings(this.controller, {Key? key}) : super(key: key);
   final ThemeController controller;
 
   @override

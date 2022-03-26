@@ -60,8 +60,21 @@ String generateThemeDartCode(ThemeController controller) {
           '    appBarColor: ${scheme.dark.appBarColor},\n'
           '    error: ${scheme.dark.error},\n'
           '  ),\n';
+  // TODO(rydmike): Remove me when not needed!
+  // if (!useBuiltIn && controller.useKeyColors) {
+  //   darkScheme = '  colors: const FlexSchemeColor(\n'
+  //       '    primary: ${scheme.light.primary},\n'
+  //       '    primaryContainer: ${scheme.light.primaryContainer},\n'
+  //       '    secondary: ${scheme.light.secondary},\n'
+  //       '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
+  //       '    tertiary: ${scheme.light.tertiary},\n'
+  //       '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
+  //       '    appBarColor: ${scheme.light.appBarColor},\n'
+  //       '    error: ${scheme.light.error},\n'
+  //       '  ),\n';
+  // }
 
-  if (controller.useToDarkMethod && !useBuiltIn) {
+  if (controller.useToDarkMethod && !useBuiltIn && !controller.useKeyColors) {
     darkScheme = '  colors: const FlexSchemeColor(\n'
         '    primary: ${scheme.light.primary},\n'
         '    primaryContainer: ${scheme.light.primaryContainer},\n'
@@ -73,7 +86,7 @@ String generateThemeDartCode(ThemeController controller) {
         '    error: ${scheme.light.error},\n'
         '  ).defaultError.toDark(${controller.darkMethodLevel}, true),\n';
   }
-  if (controller.useToDarkMethod && useBuiltIn) {
+  if (controller.useToDarkMethod && useBuiltIn && !controller.useKeyColors) {
     darkScheme =
         '  colors: FlexColor.schemes[${FlexScheme.values[flexScheme]}]!\n'
         '      .light.defaultError.toDark(${controller.darkMethodLevel}, true),\n';
@@ -131,9 +144,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String tooltipsMatchBackground = controller.tooltipsMatchBackground
       ? '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
       : '';
-  final String useM3ErrorColors = controller.useM3ErrorColors
-      ? '  useMaterial3ErrorColors: ${controller.useM3ErrorColors},\n'
-      : '';
+  final String useM3ErrorColors =
+      controller.useM3ErrorColors && !controller.useKeyColors
+          ? '  useMaterial3ErrorColors: ${controller.useM3ErrorColors},\n'
+          : '';
   final String useMaterial3 = controller.useMaterial3
       ? '  useMaterial3: ${controller.useMaterial3},\n'
       : '';

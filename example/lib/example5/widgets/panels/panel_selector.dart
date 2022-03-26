@@ -1,7 +1,57 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../../../shared/const/app_data.dart';
 import 'panel_item.dart';
+
+// PanelSelectorHeaderDelegate for our custom SliverPersistentHeader.
+//
+// Used to keep a part of our nested scroll view pinned to the top
+// (in tablet desktop view), and floating on phone and snapping
+// back when scrolling back just a bit.
+class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
+  PanelSelectorHeaderDelegate({
+    required this.vsync,
+    required this.extent,
+    required this.page,
+    required this.previousPage,
+    required this.onChanged,
+  });
+  @override
+  final TickerProvider vsync;
+  final double extent;
+  final int page;
+  final int previousPage;
+  final ValueChanged<int> onChanged;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return PanelSelector(
+      index: page,
+      onChanged: onChanged,
+    );
+  }
+
+  @override
+  double get maxExtent => extent;
+
+  @override
+  double get minExtent => extent;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return oldDelegate.maxExtent != maxExtent ||
+        oldDelegate.minExtent != minExtent ||
+        previousPage != page;
+  }
+
+  @override
+  FloatingHeaderSnapConfiguration? get snapConfiguration =>
+      FloatingHeaderSnapConfiguration();
+}
 
 /// Horizontal panel selector of active panel page to view.
 class PanelSelector extends StatefulWidget {
@@ -27,7 +77,7 @@ class _PanelSelectorState extends State<PanelSelector> {
     viewIndex = widget.index;
     scrollController = ScrollController(
       keepScrollOffset: true,
-      initialScrollOffset: AppData.widthOfScrollItem * viewIndex,
+      initialScrollOffset: AppData.panelButtonWidth * viewIndex,
     );
   }
 
@@ -43,10 +93,9 @@ class _PanelSelectorState extends State<PanelSelector> {
     if (widget.index != viewIndex) {
       viewIndex = widget.index;
       final MediaQueryData media = MediaQuery.of(context);
-      // We are on phone width media, adjust size a bit, make it tighter:
       final bool isPhone = media.size.width < AppData.phoneBreakpoint;
-      final double effectiveWidth =
-          AppData.widthOfScrollItem + (isPhone ? AppData.phoneShrink : 0);
+      final double effectiveWidth = AppData.panelButtonWidth +
+          (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
       scrollController.animateTo(effectiveWidth * viewIndex,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic);
@@ -56,43 +105,52 @@ class _PanelSelectorState extends State<PanelSelector> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    // We are on phone width media, adjust size a bit, make it tighter:
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
-    final double effectiveWidth =
-        AppData.widthOfScrollItem + (isPhone ? AppData.phoneShrink : 0);
-
-    // Paddings so content shows up in visible area when we use Scaffold props
-    // extendBodyBehindAppBar and extendBody.
-    final double topPadding = media.padding.top; // + kToolbarHeight;
-    return Padding(
-      padding: EdgeInsets.only(top: topPadding),
-      child: SizedBox(
-        height: effectiveWidth + 15,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(12),
-                controller: scrollController,
-                physics: const ClampingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: panelItems.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return PanelButton(
-                    item: panelItems[index],
-                    onSelect: () {
-                      scrollController.animateTo(effectiveWidth * index,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeOutCubic);
-                      viewIndex = index;
-                      widget.onChanged(index);
-                    },
-                    selected: widget.index == index,
-                  );
-                },
+    final double margins = AppData.responsiveInsets(media.size.width);
+    final double effectiveWidth = AppData.panelButtonWidth +
+        (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
+    final double effectiveHeight = AppData.panelButtonHeight +
+        margins * 2 +
+        (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
+    final double topPadding = media.padding.top;
+    return Material(
+      color: Theme.of(context).colorScheme.primary.withAlpha(0x38),
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Padding(
+            padding:
+                EdgeInsets.only(top: topPadding + margins, bottom: margins),
+            child: SizedBox(
+              height: effectiveHeight - margins,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: ListView.builder(
+                      padding: EdgeInsets.symmetric(horizontal: margins - 4),
+                      controller: scrollController,
+                      physics: const ClampingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: panelItems.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return PanelButton(
+                          item: panelItems[index],
+                          onSelect: () {
+                            scrollController.animateTo(effectiveWidth * index,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeOutCubic);
+                            viewIndex = index;
+                            widget.onChanged(index);
+                          },
+                          selected: widget.index == index,
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -131,14 +189,14 @@ class PanelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // We are on phone width media, adjust size a bit, make it tighter:
     final bool isPhone =
         MediaQuery.of(context).size.width < AppData.phoneBreakpoint;
-    final double effectiveWidth =
-        AppData.widthOfScrollItem + (isPhone ? AppData.phoneShrink : 0);
+    final double effectiveWidth = AppData.panelButtonWidth +
+        (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
     final double textSize = isPhone ? 10 : 11;
-    final double iconSize = isPhone ? 38 : 45;
-
+    final double iconSize = isPhone ? 30 : 45;
+    final double borderWidth = isPhone ? 3 : 5;
+    final double verticalPadding = isPhone ? 6 : 10;
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
     final Color cardColor = theme.cardColor;
@@ -147,7 +205,6 @@ class PanelButton extends StatelessWidget {
         Color.alphaBlend(scheme.primary.withAlpha(15), cardColor);
     final bool closeColors = _colorsAreClose(background, scaffoldColor);
     final bool isLight = theme.brightness == Brightness.light;
-
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
             theme.colorScheme.onBackground)
@@ -164,7 +221,7 @@ class PanelButton extends StatelessWidget {
     if (shapeBorder is RoundedRectangleBorder) {
       shapeBorder = shapeBorder.copyWith(
         side: selected
-            ? BorderSide(color: iconColor, width: 5)
+            ? BorderSide(color: iconColor, width: borderWidth)
             : closeColors
                 ? BorderSide(
                     color: theme.dividerColor,
@@ -181,7 +238,7 @@ class PanelButton extends StatelessWidget {
       shapeBorder ??= RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         side: selected
-            ? BorderSide(color: iconColor, width: 5)
+            ? BorderSide(color: iconColor, width: borderWidth)
             : closeColors
                 ? BorderSide(
                     color: theme.dividerColor,
@@ -194,12 +251,13 @@ class PanelButton extends StatelessWidget {
     return SizedBox(
       width: effectiveWidth,
       child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 4),
         color: background,
         shape: shapeBorder,
         child: InkWell(
           onTap: onSelect,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: EdgeInsets.symmetric(vertical: verticalPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
