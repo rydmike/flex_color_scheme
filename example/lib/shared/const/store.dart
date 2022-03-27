@@ -1,6 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import 'app_color.dart';
+
 // A simple const class for holding storage keys and default value for each
 // stored key-value pair.
 //
@@ -142,11 +144,10 @@ class Store {
   // Default value for the darkIsTrueBlack, also to reset settings.
   static const bool defaultDarkIsTrueBlack = false;
 
-  // Key used to read and save the useCustomDarkColorsForSeed value.
-  static const String keyUseCustomDarkColorsForSeed =
-      'useCustomDarkColorsForSeed';
+  // Key used to read and save the useDarkColorsForSeed value.
+  static const String keyUseDarkColorsForSeed = 'useDarkColorsForSeed';
   // Default value for the useCustomDarkColorsForSeed, also to reset settings.
-  static const bool defaultUseCustomDarkColorsForSeed = false;
+  static const bool defaultUseDarkColorsForSeed = false;
 
   // Key used to read and save the useToDarkMethod value.
   static const String keyUseToDarkMethod = 'useToDarkMethod';
@@ -315,27 +316,37 @@ class Store {
   // AppBar SETTINGS.
   // ===========================================================================
 
-  // Key used to read and save the lightAppBarStyle value.
-  static const String keyLightAppBarStyle = 'lightAppBarStyle';
-  // Default value for the lightAppBarStyle, also used to reset settings.
-  static const FlexAppBarStyle defaultLightAppBarStyle =
+  // Key used to read and save the appBarStyleLight value.
+  static const String keyAppBarStyleLight = 'lightAppBarStyle';
+  // Default value for the appBarStyleLight, also used to reset settings.
+  static const FlexAppBarStyle defaultAppBarStyleLight =
       FlexAppBarStyle.primary;
 
-  // Key used to read and save the darkAppBarStyle value.
-  static const String keyDarkAppBarStyle = 'darkAppBarStyle';
-  // Default value for the darkAppBarStyle, also used to reset settings.
-  static const FlexAppBarStyle defaultDarkAppBarStyle =
+  // Key used to read and save the appBarStyleDark value.
+  static const String keyAppBarStyleDark = 'darkAppBarStyle';
+  // Default value for the appBarStyleDark, also used to reset settings.
+  static const FlexAppBarStyle defaultAppBarStyleDark =
       FlexAppBarStyle.background;
 
-  // Key used to read and save the appBarOpacity value.
-  static const String keyAppBarOpacity = 'appBarOpacity';
-  // Default value for the appBarOpacity, also used to reset settings.
-  static const double defaultAppBarOpacity = 0.95;
+  // Key used to read and save the appBarOpacityLight value.
+  static const String keyAppBarOpacityLight = 'appBarOpacity';
+  // Default value for the appBarOpacityLight, also used to reset settings.
+  static const double defaultAppBarOpacityLight = 0.95;
+
+  // Key used to read and save the appBarOpacityDark value.
+  static const String keyAppBarOpacityDark = 'appBarOpacityDark';
+  // Default value for the appBarOpacityDark, also used to reset settings.
+  static const double defaultAppBarOpacityDark = 0.9;
 
   // Key used to read and save the appBarElevation value.
-  static const String keyAppBarElevation = 'appBarElevation';
+  static const String keyAppBarElevationLight = 'appBarElevation';
   // Default value for the appBarElevation, also used to reset settings.
-  static const double defaultAppBarElevation = 0.5;
+  static const double defaultAppBarElevationLight = 0.5;
+
+  // Key used to read and save the appBarElevationDark value.
+  static const String keyAppBarElevationDark = 'appBarElevationDark';
+  // Default value for the appBarElevationDark, also used to reset settings.
+  static const double defaultAppBarElevationDark = 1.0;
 
   // Key used to read and save the transparentStatusBar value.
   static const String keyTransparentStatusBar = 'transparentStatusBar';
@@ -343,12 +354,20 @@ class Store {
   static const bool defaultTransparentStatusBar = true;
 
   // Key used to read and save the appBarBackgroundSchemeColor value.
-  static const String keyAppBarBackgroundSchemeColor =
+  static const String keyAppBarBackgroundSchemeColorLight =
       'appBarBackgroundSchemeColor';
   // Default value for the appBarBackgroundSchemeColor, also used to
   // reset settings.
   // We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultAppBarBackgroundSchemeColor = null;
+  static const SchemeColor? defaultAppBarBackgroundSchemeColorLight = null;
+
+  // Key used to read and save the appBarBackgroundSchemeColorDark value.
+  static const String keyAppBarBackgroundSchemeColorDark =
+      'appBarBackgroundSchemeColorDark';
+  // Default value for the appBarBackgroundSchemeColorDark, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultAppBarBackgroundSchemeColorDark = null;
 
   // TabBar SETTINGS.
   // ===========================================================================
@@ -620,68 +639,68 @@ class Store {
   // Key used to read and save the primaryLight color value.
   static const String keyPrimaryLight = 'primaryLight';
   // Default value for the primaryLight color, also to reset settings.
-  static const Color defaultPrimaryLight = FlexColor.materialLightPrimary;
+  static const Color defaultPrimaryLight = AppColor.customPrimaryLight;
 
   // Key used to read and save the primaryContainerLight color value.
   static const String keyPrimaryContainerLight = 'primaryContainerLight';
   // Default value for the primaryLight color, also to reset settings.
   static const Color defaultPrimaryContainerLight =
-      FlexColor.materialLightPrimaryContainer;
+      AppColor.customPrimaryContainerLight;
 
   // Key used to read and save the secondaryLight color value.
   static const String keySecondaryLight = 'secondaryLight';
   // Default value for the secondaryLight color, also to reset settings.
-  static const Color defaultSecondaryLight = FlexColor.materialLightSecondary;
+  static const Color defaultSecondaryLight = AppColor.customSecondaryLight;
 
   // Key used to read and save the secondaryContainerLight color value.
   static const String keySecondaryContainerLight = 'secondaryContainerLight';
   // Default value for the secondaryLight color, also to reset settings.
   static const Color defaultSecondaryContainerLight =
-      FlexColor.materialLightTertiary;
+      AppColor.customSecondaryContainerLight;
 
   // Key used to read and save the tertiaryLight color value.
   static const String keyTertiaryLight = 'tertiaryLight';
   // Default value for the tertiaryLight color, also to reset settings.
-  static const Color defaultTertiaryLight = FlexColor.materialLightTertiary;
+  static const Color defaultTertiaryLight = AppColor.customTertiaryLight;
 
   // Key used to read and save the tertiaryContainerLight color value.
   static const String keyTertiaryContainerLight = 'tertiaryContainerLight';
   // Default value for the tertiaryLight color, also to reset settings.
   static const Color defaultTertiaryContainerLight =
-      FlexColor.materialLightTertiary;
+      AppColor.customTertiaryContainerLight;
 
   // Key used to read and save the primaryDark color value.
   static const String keyPrimaryDark = 'primaryDark';
   // Default value for the primaryDark color, also to reset settings.
-  static const Color defaultPrimaryDark = FlexColor.materialDarkPrimary;
+  static const Color defaultPrimaryDark = AppColor.customPrimaryDark;
 
   // Key used to read and save the primaryContainerDark color value.
   static const String keyPrimaryContainerDark = 'primaryContainerDark';
   // Default value for the primaryDark color, also to reset settings.
   static const Color defaultPrimaryContainerDark =
-      FlexColor.materialDarkPrimaryContainer;
+      AppColor.customPrimaryContainerDark;
 
   // Key used to read and save the secondaryDark color value.
   static const String keySecondaryDark = 'secondaryDark';
   // Default value for the secondaryDark color, also to reset settings.
-  static const Color defaultSecondaryDark = FlexColor.materialDarkSecondary;
+  static const Color defaultSecondaryDark = AppColor.customSecondaryDark;
 
   // Key used to read and save the secondaryContainerDark color value.
   static const String keySecondaryContainerDark = 'secondaryContainerDark';
   // Default value for the secondaryDark color, also to reset settings.
   static const Color defaultSecondaryContainerDark =
-      FlexColor.materialDarkTertiary;
+      AppColor.customSecondaryContainerDark;
 
   // Key used to read and save the tertiaryDark color value.
   static const String keyTertiaryDark = 'tertiaryDark';
   // Default value for the tertiaryDark color, also to reset settings.
-  static const Color defaultTertiaryDark = FlexColor.materialDarkTertiary;
+  static const Color defaultTertiaryDark = AppColor.customTertiaryDark;
 
   // Key used to read and save the tertiaryContainerDark color value.
   static const String keyTertiaryContainerDark = 'tertiaryContainerDark';
   // Default value for the tertiaryDark color, also to reset settings.
   static const Color defaultTertiaryContainerDark =
-      FlexColor.materialDarkTertiary;
+      AppColor.customTertiaryContainerDark;
 
   // Not yet implemented SETTINGS.
   // ===========================================================================

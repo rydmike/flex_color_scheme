@@ -60,10 +60,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
     // can mix and match whatever fits your design goals.
     surfaceMode: controller.surfaceMode,
     blendLevel: controller.blendLevelDark,
-    appBarStyle: controller.darkAppBarStyle,
-    appBarOpacity: controller.appBarOpacity,
+    appBarStyle: controller.appBarStyleDark,
+    appBarOpacity: controller.appBarOpacityDark,
     transparentStatusBar: controller.transparentStatusBar,
-    appBarElevation: controller.appBarElevation,
+    appBarElevation: controller.appBarElevationDark,
     tabBarStyle: controller.tabBarStyle,
     darkIsTrueBlack: controller.darkIsTrueBlack,
     swapColors: controller.swapDarkColors,
@@ -109,7 +109,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             popupMenuOpacity: controller.popupMenuOpacity,
             //
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
-            appBarBackgroundSchemeColor: controller.appBarBackgroundSchemeColor,
+            appBarBackgroundSchemeColor:
+                controller.appBarBackgroundSchemeColorDark,
             tabBarItemSchemeColor: controller.tabBarItemSchemeColor,
             tabBarIndicatorSchemeColor: controller.tabBarIndicator,
             // BottomNavigationBar settings

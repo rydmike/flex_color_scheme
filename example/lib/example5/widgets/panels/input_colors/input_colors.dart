@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_mode_switch.dart';
 import '../../dialogs/copy_scheme_to_custom_dialog.dart';
+import '../../dialogs/reset_custom_colors_dialog.dart';
 import 'input_colors_popup_menu.dart';
 import 'input_colors_selector.dart';
 import 'show_input_colors.dart';
@@ -30,9 +31,20 @@ class InputColors extends StatelessWidget {
       // Copy scheme to custom scheme, by setting custom scheme
       // to scheme of current scheme index.
       await controller.setCustomScheme(AppColor.scheme(controller));
-      // After copy, set theme to the custom theme so
-      // user can edit it
+      // After copy, set input colors to the custom one so user can edit it.
       await controller.setSchemeIndex(AppColor.schemes.length - 1);
+    }
+  }
+
+  Future<void> _handleResetSchemeTap(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const ResetCustomColorsDialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.resetCustomColorsToDefaults();
     }
   }
 
@@ -83,10 +95,16 @@ class InputColors extends StatelessWidget {
             },
           )
         else
-          const ListTile(
-            title: Text('Custom color scheme'),
-            subtitle: Text('Tap the primary, secondary, tertiary color or '
-                ' their container colors to change the colors'),
+          ListTile(
+            title: const Text('Custom color scheme'),
+            subtitle: const Text('Tap the primary, secondary, tertiary color '
+                'or their container colors to change the colors'),
+            trailing: ElevatedButton(
+              onPressed: () async {
+                await _handleResetSchemeTap(context);
+              },
+              child: const Text('Reset'),
+            ),
           ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),

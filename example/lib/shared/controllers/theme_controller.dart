@@ -104,9 +104,8 @@ class ThemeController with ChangeNotifier {
         Store.keyLightIsWhite, Store.defaultLightIsWhite);
     _darkIsTrueBlack = await _themeService.load(
         Store.keyDarkIsTrueBlack, Store.defaultDarkIsTrueBlack);
-    _useCustomDarkColorsForSeed = await _themeService.load(
-        Store.keyUseCustomDarkColorsForSeed,
-        Store.defaultUseCustomDarkColorsForSeed);
+    _useDarkColorsForSeed = await _themeService.load(
+        Store.keyUseDarkColorsForSeed, Store.defaultUseDarkColorsForSeed);
     _useToDarkMethod = await _themeService.load(
         Store.keyUseToDarkMethod, Store.defaultUseToDarkMethod);
     _darkMethodLevel = await _themeService.load(
@@ -178,19 +177,26 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorUnfocusedBorderIsColored);
     //
     // AppBar SETTINGS.
-    _lightAppBarStyle = await _themeService.load(
-        Store.keyLightAppBarStyle, Store.defaultLightAppBarStyle);
-    _darkAppBarStyle = await _themeService.load(
-        Store.keyDarkAppBarStyle, Store.defaultDarkAppBarStyle);
-    _appBarOpacity = await _themeService.load(
-        Store.keyAppBarOpacity, Store.defaultAppBarOpacity);
-    _appBarElevation = await _themeService.load(
-        Store.keyAppBarElevation, Store.defaultAppBarElevation);
+    _appBarStyleLight = await _themeService.load(
+        Store.keyAppBarStyleLight, Store.defaultAppBarStyleLight);
+    _appBarStyleDark = await _themeService.load(
+        Store.keyAppBarStyleDark, Store.defaultAppBarStyleDark);
+    _appBarOpacityLight = await _themeService.load(
+        Store.keyAppBarOpacityLight, Store.defaultAppBarOpacityLight);
+    _appBarOpacityDark = await _themeService.load(
+        Store.keyAppBarOpacityDark, Store.defaultAppBarOpacityDark);
+    _appBarElevationLight = await _themeService.load(
+        Store.keyAppBarElevationLight, Store.defaultAppBarElevationLight);
+    _appBarElevationDark = await _themeService.load(
+        Store.keyAppBarElevationDark, Store.defaultAppBarElevationDark);
     _transparentStatusBar = await _themeService.load(
         Store.keyTransparentStatusBar, Store.defaultTransparentStatusBar);
-    _appBarBackgroundSchemeColor = await _themeService.load(
-        Store.keyAppBarBackgroundSchemeColor,
-        Store.defaultAppBarBackgroundSchemeColor);
+    _appBarBackgroundSchemeColorLight = await _themeService.load(
+        Store.keyAppBarBackgroundSchemeColorLight,
+        Store.defaultAppBarBackgroundSchemeColorLight);
+    _appBarBackgroundSchemeColorDark = await _themeService.load(
+        Store.keyAppBarBackgroundSchemeColorDark,
+        Store.defaultAppBarBackgroundSchemeColorDark);
     //
     // TabBar SETTINGS.
     _tabBarStyle = await _themeService.load(
@@ -342,6 +348,10 @@ class ThemeController with ChangeNotifier {
   /// deviate from their default value are changed. The property setters manage
   /// this. They are all set with not notification and notifyListeners() is
   /// only called once, weh all updates have been made.
+  ///
+  /// Does not reset the custom colors to their default, only theme settings.
+  /// We keep the custom colors at their specified value even if theme settings
+  /// are reset. There is a separate function to reset the custom colors.
   Future<void> resetAllToDefaults() async {
     //
     // GENERAL SETTINGS.
@@ -371,8 +381,7 @@ class ThemeController with ChangeNotifier {
     await setSwapDarkColors(Store.defaultSwapDarkColors, false);
     await setLightIsWhite(Store.defaultLightIsWhite, false);
     await setDarkIsTrueBlack(Store.defaultDarkIsTrueBlack, false);
-    await setUseCustomDarkColorsForSeed(
-        Store.defaultUseCustomDarkColorsForSeed, false);
+    await setUseDarkColorsForSeed(Store.defaultUseDarkColorsForSeed, false);
     await setUseToDarkMethod(Store.defaultUseToDarkMethod, false);
     await setDarkMethodLevel(Store.defaultDarkMethodLevel, false);
     await setBlendLightOnColors(Store.defaultBlendLightOnColors, false);
@@ -415,13 +424,17 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorUnfocusedBorderIsColored, false);
     //
     // AppBar SETTINGS.
-    await setLightAppBarStyle(Store.defaultLightAppBarStyle, false);
-    await setDarkAppBarStyle(Store.defaultDarkAppBarStyle, false);
-    await setAppBarOpacity(Store.defaultAppBarOpacity, false);
-    await setAppBarElevation(Store.defaultAppBarElevation, false);
+    await setAppBarStyleLight(Store.defaultAppBarStyleLight, false);
+    await setAppBarStyleDark(Store.defaultAppBarStyleDark, false);
+    await setAppBarOpacityLight(Store.defaultAppBarOpacityLight, false);
+    await setAppBarOpacityDark(Store.defaultAppBarOpacityDark, false);
+    await setAppBarElevationLight(Store.defaultAppBarElevationLight, false);
+    await setAppBarElevationDark(Store.defaultAppBarElevationDark, false);
     await setTransparentStatusBar(Store.defaultTransparentStatusBar, false);
-    await setAppBarBackgroundSchemeColor(
-        Store.defaultAppBarBackgroundSchemeColor, false);
+    await setAppBarBackgroundSchemeColorLight(
+        Store.defaultAppBarBackgroundSchemeColorLight, false);
+    await setAppBarBackgroundSchemeColorDark(
+        Store.defaultAppBarBackgroundSchemeColorDark, false);
     //
     // TabBar SETTINGS.
     await setTabBarStyle(Store.defaultTabBarStyle, false);
@@ -482,7 +495,6 @@ class ThemeController with ChangeNotifier {
     await setSwitchSchemeColor(Store.defaultSwitchSchemeColor, false);
     await setCheckboxSchemeColor(Store.defaultCheckboxSchemeColor, false);
     await setRadioSchemeColor(Store.defaultRadioSchemeColor, false);
-
     //
     // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
     await setFabUseShape(Store.defaultFabUseShape, false);
@@ -493,8 +505,24 @@ class ThemeController with ChangeNotifier {
     await setCardBorderRadius(Store.defaultCardBorderRadius, false);
     await setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
-    //
-    // Custom color SETTINGS.
+
+    // Not persisted, locally controlled popup selection for ThemeService,
+    // resets to actual used platform when settings are reset or app loaded.
+    await setPlatform(defaultTargetPlatform, false);
+    notifyListeners();
+  }
+
+  /// Reset the custom color values to their default values.
+  ///
+  /// Calls setters with notify = false, and calls notifyListeners once
+  /// after all values have been reset and persisted.
+  ///
+  /// The reset to default actually, sets and persist all property values that
+  /// deviates from its defined default value. Only values that actually
+  /// deviate from their default value are changed. The property setters manage
+  /// this. They are all set with not notification and notifyListeners() is
+  /// only called once, weh all updates have been made.
+  Future<void> resetCustomColorsToDefaults() async {
     await setPrimaryLight(Store.defaultPrimaryLight, false);
     await setPrimaryContainerLight(Store.defaultPrimaryContainerLight, false);
     await setSecondaryLight(Store.defaultSecondaryLight, false);
@@ -508,10 +536,6 @@ class ThemeController with ChangeNotifier {
     await setSecondaryContainerDark(Store.defaultSecondaryContainerDark, false);
     await setTertiaryDark(Store.defaultTertiaryDark, false);
     await setTertiaryContainerDark(Store.defaultTertiaryContainerDark, false);
-
-    // Not persisted, locally controlled popup selection for ThemeService,
-    // resets to actual used platform when settings are reset or app loaded.
-    await setPlatform(defaultTargetPlatform, false);
     notifyListeners();
   }
 
@@ -758,15 +782,15 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyDarkIsTrueBlack, value);
   }
 
-  late bool _useCustomDarkColorsForSeed;
-  bool get useCustomDarkColorsForSeed => _useCustomDarkColorsForSeed;
-  Future<void> setUseCustomDarkColorsForSeed(bool? value,
+  late bool _useDarkColorsForSeed;
+  bool get useDarkColorsForSeed => _useDarkColorsForSeed;
+  Future<void> setUseDarkColorsForSeed(bool? value,
       [bool notify = true]) async {
     if (value == null) return;
-    if (value == _useCustomDarkColorsForSeed) return;
-    _useCustomDarkColorsForSeed = value;
+    if (value == _useDarkColorsForSeed) return;
+    _useDarkColorsForSeed = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyUseCustomDarkColorsForSeed, value);
+    await _themeService.save(Store.keyUseDarkColorsForSeed, value);
   }
 
   late bool _useToDarkMethod;
@@ -1083,46 +1107,69 @@ class ThemeController with ChangeNotifier {
   // AppBar SETTINGS.
   // ===========================================================================
 
-  late FlexAppBarStyle _lightAppBarStyle;
-  FlexAppBarStyle get lightAppBarStyle => _lightAppBarStyle;
-  Future<void> setLightAppBarStyle(FlexAppBarStyle? value,
+  late FlexAppBarStyle _appBarStyleLight;
+  FlexAppBarStyle get appBarStyleLight => _appBarStyleLight;
+  Future<void> setAppBarStyleLight(FlexAppBarStyle? value,
       [bool notify = true]) async {
     if (value == null) return;
-    if (value == _lightAppBarStyle) return;
-    _lightAppBarStyle = value;
+    if (value == _appBarStyleLight) return;
+    _appBarStyleLight = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyLightAppBarStyle, value);
+    await _themeService.save(Store.keyAppBarStyleLight, value);
   }
 
-  late FlexAppBarStyle _darkAppBarStyle;
-  FlexAppBarStyle get darkAppBarStyle => _darkAppBarStyle;
-  Future<void> setDarkAppBarStyle(FlexAppBarStyle? value,
+  late FlexAppBarStyle _appBarStyleDark;
+  FlexAppBarStyle get appBarStyleDark => _appBarStyleDark;
+  Future<void> setAppBarStyleDark(FlexAppBarStyle? value,
       [bool notify = true]) async {
     if (value == null) return;
-    if (value == _darkAppBarStyle) return;
-    _darkAppBarStyle = value;
+    if (value == _appBarStyleDark) return;
+    _appBarStyleDark = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyDarkAppBarStyle, value);
+    await _themeService.save(Store.keyAppBarStyleDark, value);
   }
 
-  late double _appBarOpacity;
-  double get appBarOpacity => _appBarOpacity;
-  Future<void> setAppBarOpacity(double? value, [bool notify = true]) async {
+  late double _appBarOpacityLight;
+  double get appBarOpacityLight => _appBarOpacityLight;
+  Future<void> setAppBarOpacityLight(double? value,
+      [bool notify = true]) async {
     if (value == null) return;
-    if (value == _appBarOpacity) return;
-    _appBarOpacity = value;
+    if (value == _appBarOpacityLight) return;
+    _appBarOpacityLight = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyAppBarOpacity, value);
+    await _themeService.save(Store.keyAppBarOpacityLight, value);
   }
 
-  late double _appBarElevation;
-  double get appBarElevation => _appBarElevation;
-  Future<void> setAppBarElevation(double? value, [bool notify = true]) async {
+  late double _appBarOpacityDark;
+  double get appBarOpacityDark => _appBarOpacityDark;
+  Future<void> setAppBarOpacityDark(double? value, [bool notify = true]) async {
     if (value == null) return;
-    if (value == _appBarElevation) return;
-    _appBarElevation = value;
+    if (value == _appBarOpacityDark) return;
+    _appBarOpacityDark = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyAppBarElevation, value);
+    await _themeService.save(Store.keyAppBarOpacityDark, value);
+  }
+
+  late double _appBarElevationLight;
+  double get appBarElevationLight => _appBarElevationLight;
+  Future<void> setAppBarElevationLight(double? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _appBarElevationLight) return;
+    _appBarElevationLight = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyAppBarElevationLight, value);
+  }
+
+  late double _appBarElevationDark;
+  double get appBarElevationDark => _appBarElevationDark;
+  Future<void> setAppBarElevationDark(double? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _appBarElevationDark) return;
+    _appBarElevationDark = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyAppBarElevationDark, value);
   }
 
   late bool _transparentStatusBar;
@@ -1136,14 +1183,26 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyTransparentStatusBar, value);
   }
 
-  late SchemeColor? _appBarBackgroundSchemeColor;
-  SchemeColor? get appBarBackgroundSchemeColor => _appBarBackgroundSchemeColor;
-  Future<void> setAppBarBackgroundSchemeColor(SchemeColor? value,
+  late SchemeColor? _appBarBackgroundSchemeColorLight;
+  SchemeColor? get appBarBackgroundSchemeColorLight =>
+      _appBarBackgroundSchemeColorLight;
+  Future<void> setAppBarBackgroundSchemeColorLight(SchemeColor? value,
       [bool notify = true]) async {
-    if (value == _appBarBackgroundSchemeColor) return;
-    _appBarBackgroundSchemeColor = value;
+    if (value == _appBarBackgroundSchemeColorLight) return;
+    _appBarBackgroundSchemeColorLight = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyAppBarBackgroundSchemeColor, value);
+    await _themeService.save(Store.keyAppBarBackgroundSchemeColorLight, value);
+  }
+
+  late SchemeColor? _appBarBackgroundSchemeColorDark;
+  SchemeColor? get appBarBackgroundSchemeColorDark =>
+      _appBarBackgroundSchemeColorDark;
+  Future<void> setAppBarBackgroundSchemeColorDark(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _appBarBackgroundSchemeColorDark) return;
+    _appBarBackgroundSchemeColorDark = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyAppBarBackgroundSchemeColorDark, value);
   }
 
   // TabBar SETTINGS.

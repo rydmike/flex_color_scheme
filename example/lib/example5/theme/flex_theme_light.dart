@@ -58,13 +58,13 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
     // surface blends applied to surfaces and backgrounds.
     blendLevel: controller.blendLevel,
     // Enum used to select what AppBar style we use.
-    appBarStyle: controller.lightAppBarStyle,
+    appBarStyle: controller.appBarStyleLight,
     // Set background opacity on app bar.
-    appBarOpacity: controller.appBarOpacity,
+    appBarOpacity: controller.appBarOpacityLight,
     // Used to control if we use one or two toned status bar.
     transparentStatusBar: controller.transparentStatusBar,
     // Used to modify the themed AppBar elevation.
-    appBarElevation: controller.appBarElevation,
+    appBarElevation: controller.appBarElevationLight,
     // Enum used to select what TabBar style we use.
     tabBarStyle: controller.tabBarStyle,
     // Keep scaffold plain white in all blend modes.
@@ -161,7 +161,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             popupMenuOpacity: controller.popupMenuOpacity,
             // ColorScheme used on various widgets.
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
-            appBarBackgroundSchemeColor: controller.appBarBackgroundSchemeColor,
+            appBarBackgroundSchemeColor:
+                controller.appBarBackgroundSchemeColorLight,
             tabBarItemSchemeColor: controller.tabBarItemSchemeColor,
             tabBarIndicatorSchemeColor: controller.tabBarIndicator,
             //

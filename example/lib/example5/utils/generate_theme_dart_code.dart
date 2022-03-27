@@ -109,22 +109,28 @@ String generateThemeDartCode(ThemeController controller) {
   final String blendLevelDark = controller.blendLevelDark > 0
       ? '  blendLevel: ${controller.blendLevelDark},\n'
       : '';
-  final String lightAppBarStyle =
-      controller.lightAppBarStyle != FlexAppBarStyle.primary
-          ? '  appBarStyle: ${controller.lightAppBarStyle},\n'
+  final String appBarStyleLight =
+      controller.appBarStyleLight != FlexAppBarStyle.primary
+          ? '  appBarStyle: ${controller.appBarStyleLight},\n'
           : '';
-  final String darkAppBarStyle =
-      controller.darkAppBarStyle != FlexAppBarStyle.material
-          ? '  appBarStyle: ${controller.darkAppBarStyle},\n'
+  final String appBarStyleDark =
+      controller.appBarStyleDark != FlexAppBarStyle.material
+          ? '  appBarStyle: ${controller.appBarStyleDark},\n'
           : '';
-  final String appBarOpacity = controller.appBarOpacity != 1
-      ? '  appBarOpacity: ${controller.appBarOpacity},\n'
+  final String appBarOpacityLight = controller.appBarOpacityLight != 1
+      ? '  appBarOpacity: ${controller.appBarOpacityLight},\n'
+      : '';
+  final String appBarOpacityDark = controller.appBarOpacityDark != 1
+      ? '  appBarOpacity: ${controller.appBarOpacityDark},\n'
       : '';
   final String transparentStatusBar = controller.transparentStatusBar
       ? ''
       : '  transparentStatusBar: ${controller.transparentStatusBar},\n';
-  final String appBarElevation = controller.appBarElevation != 0
-      ? '  appBarElevation: ${controller.appBarElevation},\n'
+  final String appBarElevationLight = controller.appBarElevationLight != 0
+      ? '  appBarElevation: ${controller.appBarElevationLight},\n'
+      : '';
+  final String appBarElevationDark = controller.appBarElevationDark != 0
+      ? '  appBarElevation: ${controller.appBarElevationDark},\n'
       : '';
   final String tabBarStyle = controller.tabBarStyle != FlexTabBarStyle.forAppBar
       ? '  tabBarStyle: ${controller.tabBarStyle},\n'
@@ -304,11 +310,16 @@ String generateThemeDartCode(ThemeController controller) {
           SchemeColor.surface
       ? ''
       : '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundSchemeColor},\n';
-  final String appBarBackgroundSchemeColor = controller
-              .appBarBackgroundSchemeColor ==
+  final String appBarBackgroundSchemeColorLight = controller
+              .appBarBackgroundSchemeColorLight ==
           null
       ? ''
-      : '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColor},\n';
+      : '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColorLight},\n';
+  final String appBarBackgroundSchemeColorDark = controller
+              .appBarBackgroundSchemeColorDark ==
+          null
+      ? ''
+      : '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColorDark},\n';
   final String tabBarItemSchemeColor = controller.tabBarItemSchemeColor == null
       ? ''
       : '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColor},\n';
@@ -514,7 +525,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$popupMenuOpacity'
           '$dialogBackgroundSchemeColor'
-          '$appBarBackgroundSchemeColor'
+          '$appBarBackgroundSchemeColorLight'
           '$tabBarItemSchemeColor'
           '$tabBarIndicatorSchemeColor'
           //
@@ -595,7 +606,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$popupMenuOpacity'
           '$dialogBackgroundSchemeColor'
-          '$appBarBackgroundSchemeColor'
+          '$appBarBackgroundSchemeColorDark'
           '$tabBarItemSchemeColor'
           '$tabBarIndicatorSchemeColor'
           //
@@ -740,10 +751,10 @@ String generateThemeDartCode(ThemeController controller) {
       '$usedColors'
       '$surfaceMode'
       '$blendLevel'
-      '$lightAppBarStyle'
-      '$appBarOpacity'
+      '$appBarStyleLight'
+      '$appBarOpacityLight'
       '$transparentStatusBar'
-      '$appBarElevation'
+      '$appBarElevationLight'
       '$tabBarStyle'
       '$lightIsWhite'
       '$swapLightColors'
@@ -762,10 +773,10 @@ String generateThemeDartCode(ThemeController controller) {
       '$usedColors'
       '$surfaceMode'
       '$blendLevelDark'
-      '$darkAppBarStyle'
-      '$appBarOpacity'
+      '$appBarStyleDark'
+      '$appBarOpacityDark'
       '$transparentStatusBar'
-      '$appBarElevation'
+      '$appBarElevationDark'
       '$tabBarStyle'
       '$darkIsTrueBlack'
       '$swapDarkColors'

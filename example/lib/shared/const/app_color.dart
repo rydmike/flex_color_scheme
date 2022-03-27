@@ -93,6 +93,21 @@ class AppColor {
     brightness: Brightness.light,
   );
 
+  // These colors are used as default for the customizable colors in
+  // example 5, the Themes Playground.
+  static const Color customPrimaryLight = Color(0xFF004881);
+  static const Color customPrimaryContainerLight = Color(0xFFD0E4FF);
+  static const Color customSecondaryLight = Color(0xFFAC3306);
+  static const Color customSecondaryContainerLight = Color(0xFFFFDBCF);
+  static const Color customTertiaryLight = Color(0xFF006875);
+  static const Color customTertiaryContainerLight = Color(0xFF95F0FF);
+  static const Color customPrimaryDark = Color(0xFF9FC9FF);
+  static const Color customPrimaryContainerDark = Color(0xFF00325B);
+  static const Color customSecondaryDark = Color(0xFFFFB59D);
+  static const Color customSecondaryContainerDark = Color(0xFF872100);
+  static const Color customTertiaryDark = Color(0xFF86D2E1);
+  static const Color customTertiaryContainerDark = Color(0xFF004E59);
+
   // Used by example 4, the "All themes" dmo.
   // Finally we create a list with all color schemes we will use. Starting with
   // our custom schemes, since normally when we make custom schemes, those are
@@ -209,7 +224,7 @@ class AppColor {
   /// If you base your seeded dark color scheme on light mode colors, and
   /// lock some value down to their input colors, you get the light theme
   /// mode colors if you base your seeded dark mode color scheme on same
-  /// colors as for the lgiht mode. So for that use case, you may want keep
+  /// colors as for the light mode. So for that use case, you may want keep
   /// using the defined dark mode colors also when using seeded color schemes.
   ///
   /// This application contains a toggle `useCustomDarkColorsForSeed' that can
@@ -218,14 +233,25 @@ class AppColor {
       final int index, final ThemeController controller) {
     if (index == schemes.length - 1) {
       return controller.customScheme.copyWith(
-          dark: controller.useToDarkMethod
-              ? controller.customScheme.light.defaultError
-                  .toDark(controller.darkMethodLevel, true)
-              : null);
+          dark: controller.useKeyColors
+              ? controller.useDarkColorsForSeed
+                  ? controller.customScheme.dark
+                  : controller.customScheme.light
+              : controller.useToDarkMethod
+                  ? controller.customScheme.light.defaultError
+                      .toDark(controller.darkMethodLevel, true)
+                  : null);
+
+      // dark: controller.useToDarkMethod
+      //     ? controller.customScheme.light.defaultError
+      //         .toDark(controller.darkMethodLevel, true)
+      //     : null);
     }
     return schemes[index].copyWith(
         dark: controller.useKeyColors
-            ? schemes[index].light
+            ? controller.useDarkColorsForSeed
+                ? schemes[index].dark
+                : schemes[index].light
             : controller.useToDarkMethod
                 ? schemes[index]
                     .light

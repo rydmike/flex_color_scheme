@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import 'flex_tone_config_buttons.dart';
 import 'scheme_colors.dart';
 import 'show_tonal_palette.dart';
@@ -105,6 +106,22 @@ class SeededColorScheme extends StatelessWidget {
           ),
         if (showKeyButtons)
           ListTile(trailing: UseKeyColorsButtons(controller: controller)),
+        Visibility(
+          visible: !isLight,
+          maintainSize: true,
+          maintainAnimation: true,
+          maintainState: true,
+          child: SwitchListTileAdaptive(
+              title: const Text('Custom dark seeded schemes input colors'),
+              subtitle: const Text(
+                'M3 spec is OFF. If you keep dark mode input colors, turn ON '
+                'to use custom schemes own input color definitions.',
+              ),
+              value: controller.useDarkColorsForSeed && controller.useKeyColors,
+              onChanged: controller.useKeyColors
+                  ? controller.setUseDarkColorsForSeed
+                  : null),
+        ),
         const ListTile(
           title: Text('Keep effective input color'),
           subtitle: Text('When using a seeded ColorScheme, '

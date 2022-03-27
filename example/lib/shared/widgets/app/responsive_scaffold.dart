@@ -955,84 +955,75 @@ class _MenuLeadingItemState extends State<_MenuLeadingItem> {
     final TextTheme primaryTextTheme = theme.primaryTextTheme;
     const double hPadding = 5;
 
-    return Material(
-      // As an effect for theme demos, we put themed surface color on
-      // Material used as background for the leading widget. This gives
-      // a it a slightly different tone for the background with themes that use
-      // a blend mode where the blend strength is different for background
-      // and surface, since this widget is placed on Material with background
-      // color it will show up in such theme modes.
-      color: theme.colorScheme.surface,
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            visualDensity: VisualDensity.comfortable,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: hPadding,
-              vertical: hPadding,
+    return Column(
+      children: <Widget>[
+        ListTile(
+          visualDensity: VisualDensity.comfortable,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: hPadding,
+            vertical: hPadding,
+          ),
+          leading: CircleAvatar(
+            backgroundColor: theme.colorScheme.primary,
+            radius: widget.railWidth / 2 - hPadding,
+            child: Text(
+              widget.menuLeadingAvatarLabel,
+              style: primaryTextTheme.subtitle1!.copyWith(
+                  color: theme.colorScheme.onPrimary,
+                  fontWeight: FontWeight.w600),
             ),
-            leading: CircleAvatar(
-              backgroundColor: theme.colorScheme.primary,
-              radius: widget.railWidth / 2 - hPadding,
-              child: Text(
-                widget.menuLeadingAvatarLabel,
-                style: primaryTextTheme.subtitle1!.copyWith(
-                    color: theme.colorScheme.onPrimary,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            title: widget.menuLeadingTitle,
-            subtitle: widget.menuLeadingSubtitle,
-            trailing: ExpandIcon(
-              isExpanded: !_collapsed,
-              size: 32,
-              padding: EdgeInsets.zero,
-              onPressed: (_) {
-                setState(() {
-                  _collapsed = !_collapsed;
-                });
-              },
-            ),
-            onTap: () {
+          ),
+          title: widget.menuLeadingTitle,
+          subtitle: widget.menuLeadingSubtitle,
+          trailing: ExpandIcon(
+            isExpanded: !_collapsed,
+            size: 32,
+            padding: EdgeInsets.zero,
+            onPressed: (_) {
               setState(() {
                 _collapsed = !_collapsed;
               });
             },
           ),
-          // Add some expand actions for access to mock functionality.
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 200),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return SizeTransition(
-                sizeFactor: animation,
-                child: child,
-              );
-            },
-            child: _collapsed
-                ? const SizedBox.shrink()
-                : Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Row(
-                      children: <Widget>[
-                        const Spacer(),
-                        TextButton(
-                          onPressed: () {
-                            showAppAboutDialog(context);
-                          },
-                          child: Column(
-                            children: <Widget>[
-                              const Icon(Icons.info, size: 30),
-                              Text('About', style: textTheme.labelSmall),
-                            ],
-                          ),
+          onTap: () {
+            setState(() {
+              _collapsed = !_collapsed;
+            });
+          },
+        ),
+        // Add some expand actions for access to mock functionality.
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return SizeTransition(
+              sizeFactor: animation,
+              child: child,
+            );
+          },
+          child: _collapsed
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                    children: <Widget>[
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {
+                          showAppAboutDialog(context);
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            const Icon(Icons.info, size: 30),
+                            Text('About', style: textTheme.labelSmall),
+                          ],
                         ),
-                        const SizedBox(width: 8),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: 8),
+                    ],
                   ),
-          ),
-        ],
-      ),
+                ),
+        ),
+      ],
     );
   }
 }
