@@ -69,14 +69,6 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (widget.themeController.viewIndex != previousPage) {
-      previousPage = widget.themeController.viewIndex;
-    }
-  }
-
-  @override
   void dispose() {
     pageController.dispose();
     super.dispose();
@@ -113,6 +105,9 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
               page: themeCtrl.viewIndex,
               previousPage: previousPage,
               onChanged: (int page) {
+                setState(() {
+                  previousPage = themeCtrl.viewIndex;
+                });
                 themeCtrl.setViewIndex(page);
                 pageController.animateToPage(page,
                     duration: const Duration(milliseconds: 500),
