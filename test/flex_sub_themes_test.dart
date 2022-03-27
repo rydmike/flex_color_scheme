@@ -2102,7 +2102,7 @@ void main() {
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .trackColor!
             .resolve(<MaterialState>{}),
-        equals(colorScheme.secondary.withAlpha(0x30)),
+        equals(colorScheme.secondary.withAlpha(0x70)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -2188,7 +2188,7 @@ void main() {
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .trackColor!
             .resolve(<MaterialState>{}),
-        equals(colorScheme.secondary.withAlpha(0x25)),
+        equals(colorScheme.secondary.withAlpha(0x70)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(

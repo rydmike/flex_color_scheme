@@ -127,7 +127,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             bottomNavigationBarMutedUnselectedIcon:
                 controller.navBarMuteUnselected,
             bottomNavigationBarBackgroundSchemeColor:
-                controller.navBarBackgroundSchemeColor,
+                controller.bottomNavBarBackgroundSchemeColor,
             bottomNavigationBarOpacity: controller.bottomNavigationBarOpacity,
             bottomNavigationBarElevation:
                 controller.bottomNavigationBarElevation,
@@ -149,7 +149,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             navigationBarHighlightSchemeColor: controller.navBarHighlight,
             navigationBarBackgroundSchemeColor:
                 controller.navBarBackgroundSchemeColor,
-            navigationBarOpacity: controller.navigationBarOpacity,
+            navigationBarOpacity: controller.navBarOpacity,
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
             // NavigationRail settings
             navigationRailSelectedLabelSchemeColor:
@@ -162,11 +162,11 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             navigationRailUnselectedIconSchemeColor:
                 controller.navUnselectedSchemeColor,
             navigationRailMutedUnselectedIcon: controller.navBarMuteUnselected,
-            navigationRailUseIndicator: controller.useIndicator,
+            navigationRailUseIndicator: controller.navRailUseIndicator,
             navigationRailIndicatorSchemeColor: controller.navBarHighlight,
             navigationRailBackgroundSchemeColor:
-                controller.navBarBackgroundSchemeColor,
-            navigationRailOpacity: controller.navigationRailOpacity,
+                controller.navRailBackgroundSchemeColor,
+            navigationRailOpacity: controller.navRailOpacity,
             navigationRailElevation: controller.bottomNavigationBarElevation,
             navigationRailLabelType: controller.navRailLabelType,
           )

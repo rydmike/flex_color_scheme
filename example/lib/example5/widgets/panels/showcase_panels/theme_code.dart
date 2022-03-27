@@ -35,8 +35,7 @@ class ThemeCode extends StatelessWidget {
         ListTile(
           title: const Text('FlexColorScheme code'),
           subtitle: const Text('This is the setup code for the light and dark '
-              'theme you have configured. It changes as you adjust your '
-              'settings, cool way to study the API.'),
+              'theme you have configured. It changes as you adjust settings.'),
           trailing: ElevatedButton(
             onPressed: () {
               _handleCopyCode(context, code);

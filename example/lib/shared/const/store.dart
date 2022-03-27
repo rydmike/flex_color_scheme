@@ -411,6 +411,14 @@ class Store {
   // BottomNavigationBar SETTINGS.
   // ===========================================================================
 
+  // Key used to read and save the bottomNavBarBackgroundSchemeColor value.
+  static const String keyBottomNavBarBackgroundSchemeColor =
+      'bottomNavBarBackgroundSchemeColor';
+  // Default value for the bottomNavBarBackgroundSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor defaultBottomNavBarBackgroundSchemeColor =
+      SchemeColor.background;
+
   // Key used to read and save the bottomNavigationBarOpacity value.
   static const String keyBottomNavigationBarOpacity =
       'bottomNavigationBarOpacity';
@@ -446,10 +454,10 @@ class Store {
   static const SchemeColor defaultNavBarBackgroundSchemeColor =
       SchemeColor.background;
 
-  // Key used to read and save the navigationBarOpacity value.
-  static const String keyNavigationBarOpacity = 'navigationBarOpacity';
-  // Default value for the navigationBarOpacity, also to reset settings.
-  static const double defaultNavigationBarOpacity = 1.0;
+  // Key used to read and save the navBarOpacity value.
+  static const String keyNavBarOpacity = 'navBarOpacity';
+  // Default value for the navBarOpacity, also to reset settings.
+  static const double defaultNavBarOpacity = 1.0;
 
   // Key used to read and save the navSelectedSchemeColor value.
   static const String keyNavSelectedSchemeColor = 'navSelectedSchemeColor';
@@ -484,10 +492,18 @@ class Store {
   // NavigationRail SETTINGS.
   // ===========================================================================
 
+  // Key used to read and save the navRailBackgroundSchemeColor value.
+  static const String keyNavRailBackgroundSchemeColor =
+      'navRailBackgroundSchemeColor';
+  // Default value for the navRailBackgroundSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor defaultNavRailBackgroundSchemeColor =
+      SchemeColor.background;
+
   // Key used to read and save the navigationRailOpacity value.
-  static const String keyNavigationRailOpacity = 'navigationRailOpacity';
+  static const String keyNavRailOpacity = 'navRailOpacity';
   // Default value for the navigationRailOpacity, also to reset settings.
-  static const double defaultNavigationRailOpacity = 1.0;
+  static const double defaultNavRailOpacity = 1.0;
 
   // Key used to read and save the navRailLabelType value.
   static const String keyNavRailLabelType = 'navRailLabelType';
@@ -496,10 +512,10 @@ class Store {
   static const NavigationRailLabelType defaultNavRailLabelType =
       NavigationRailLabelType.all;
 
-  // Key used to read and save the useIndicator value.
-  static const String keyUseIndicator = 'useIndicator';
-  // Default value for the useIndicator, also to reset settings.
-  static const bool defaultUseIndicator = true;
+  // Key used to read and save the navRailUseIndicator value.
+  static const String keyNavRailUseIndicator = 'navRailUseIndicator';
+  // Default value for the navRailUseIndicator, also to reset settings.
+  static const bool defaultNavRailUseIndicator = true;
 
   // Button SETTINGS.
   // ===========================================================================

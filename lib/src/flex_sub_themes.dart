@@ -832,9 +832,7 @@ class FlexSubThemes {
           }
           // Opinionated color on track when not selected
           if (unselectedIsColored) {
-            return isLight
-                ? baseColor.withAlpha(0x30)
-                : baseColor.withAlpha(0x25);
+            return baseColor.withAlpha(0x70);
           }
           // This is SDK default.
           return isLight ? const Color(0x52000000) : Colors.white30;
