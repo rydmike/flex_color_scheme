@@ -56,14 +56,12 @@ class PanelView extends StatefulWidget {
 }
 
 class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
-  // late final ScrollController scrollController;
   late final PageController pageController;
   late int previousPage;
 
   @override
   void initState() {
     super.initState();
-    // scrollController = ScrollController();
     pageController = PageController(
       initialPage: widget.themeController.viewIndex,
     );
@@ -80,7 +78,6 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    // scrollController.dispose();
     pageController.dispose();
     super.dispose();
   }

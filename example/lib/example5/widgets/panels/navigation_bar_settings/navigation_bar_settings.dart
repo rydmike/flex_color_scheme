@@ -28,7 +28,7 @@ class NavigationBarSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final double navBarOpacity =
         controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.navigationBarOpacity
+            ? controller.navBarOpacity
             : 1;
     return Column(
       children: <Widget>[
@@ -60,7 +60,7 @@ class NavigationBarSettings extends StatelessWidget {
             value: navBarOpacity * 100,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setNavigationBarOpacity(value / 100);
+                    controller.setNavBarOpacity(value / 100);
                   }
                 : null,
           ),

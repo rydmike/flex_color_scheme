@@ -32,16 +32,14 @@ class BottomNavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          subtitle: const Text('Shared setting in this app, '
-              'but APIs have own properties'),
           labelForDefault: 'null (background)',
-          index: controller.navBarBackgroundSchemeColor?.index ?? -1,
+          index: controller.bottomNavBarBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarBackgroundSchemeColor(null);
+                    controller.setBottomNavBarBackgroundSchemeColor(null);
                   } else {
-                    controller.setNavBarBackgroundSchemeColor(
+                    controller.setBottomNavBarBackgroundSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }

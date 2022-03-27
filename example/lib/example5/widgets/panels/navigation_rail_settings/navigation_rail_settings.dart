@@ -26,7 +26,7 @@ class NavigationRailSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final double navRailOpacity =
         controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.navigationRailOpacity
+            ? controller.navRailOpacity
             : 1;
     final double navBarElevation =
         controller.useSubThemes && controller.useFlexColorScheme
@@ -37,16 +37,14 @@ class NavigationRailSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          subtitle: const Text('Shared setting, also used by '
-              'navigation bars. APIs have own properties'),
           labelForDefault: 'null (surface)',
-          index: controller.navBarBackgroundSchemeColor?.index ?? -1,
+          index: controller.navRailBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarBackgroundSchemeColor(null);
+                    controller.setNavRailBackgroundSchemeColor(null);
                   } else {
-                    controller.setNavBarBackgroundSchemeColor(
+                    controller.setNavRailBackgroundSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }
@@ -61,7 +59,7 @@ class NavigationRailSettings extends StatelessWidget {
             value: navRailOpacity * 100,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setNavigationRailOpacity(value / 100);
+                    controller.setNavRailOpacity(value / 100);
                   }
                 : null,
           ),
@@ -142,12 +140,12 @@ class NavigationRailSettings extends StatelessWidget {
                 title: const Text('Use selection indicator'),
                 subtitle: const Text('Also ON when ThemeData.useMaterial3 '
                     'is true, turn OFF sub-themes and try it'),
-                value: controller.useIndicator &&
+                value: controller.navRailUseIndicator &&
                     controller.useSubThemes &&
                     controller.useFlexColorScheme,
                 onChanged:
                     controller.useSubThemes && controller.useFlexColorScheme
-                        ? controller.setUseIndicator
+                        ? controller.setNavRailUseIndicator
                         : null,
               ),
               ColorSchemePopupMenu(

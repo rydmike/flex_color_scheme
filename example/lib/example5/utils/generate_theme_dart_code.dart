@@ -344,10 +344,10 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    bottomNavigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
   final String bottomNavigationBarBackgroundSchemeColor = controller
-              .navBarBackgroundSchemeColor ==
+              .bottomNavBarBackgroundSchemeColor ==
           SchemeColor.background
       ? ''
-      : '    bottomNavigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
+      : '    bottomNavigationBarBackgroundSchemeColor: ${controller.bottomNavBarBackgroundSchemeColor},\n';
   final String bottomNavigationBarOpacity = controller
               .bottomNavigationBarOpacity !=
           1
@@ -405,8 +405,8 @@ String generateThemeDartCode(ThemeController controller) {
           SchemeColor.background
       ? ''
       : '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
-  final String navigationBarOpacity = controller.navigationBarOpacity != 1
-      ? '    navigationBarOpacity: ${controller.navigationBarOpacity},\n'
+  final String navigationBarOpacity = controller.navBarOpacity != 1
+      ? '    navigationBarOpacity: ${controller.navBarOpacity},\n'
       : '';
   final String navigationBarLabelBehavior = controller.navBarLabelBehavior !=
           NavigationDestinationLabelBehavior.alwaysShow
@@ -442,21 +442,21 @@ String generateThemeDartCode(ThemeController controller) {
           .navBarMuteUnselected
       ? ''
       : '    navigationRailMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
-  final String navigationRailUseIndicator = controller.useIndicator
+  final String navigationRailUseIndicator = controller.navRailUseIndicator
       ? ''
-      : '    navigationRailUseIndicator: ${controller.useIndicator},\n';
+      : '    navigationRailUseIndicator: ${controller.navRailUseIndicator},\n';
   final String navigationRailIndicatorSchemeColor = controller
               .navBarHighlight ==
           SchemeColor.primary
       ? ''
       : '    navigationRailIndicatorSchemeColor: ${controller.navBarHighlight},\n';
   final String navigationRailBackgroundSchemeColor = controller
-              .navBarBackgroundSchemeColor ==
+              .navRailBackgroundSchemeColor ==
           SchemeColor.background
       ? ''
-      : '    navigationRailBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
-  final String navigationRailOpacity = controller.navigationRailOpacity != 1
-      ? '    navigationRailOpacity: ${controller.navigationRailOpacity},\n'
+      : '    navigationRailBackgroundSchemeColor: ${controller.navRailBackgroundSchemeColor},\n';
+  final String navigationRailOpacity = controller.navRailOpacity != 1
+      ? '    navigationRailOpacity: ${controller.navRailOpacity},\n'
       : '';
   final String navigationRailElevation = controller
               .bottomNavigationBarElevation !=
