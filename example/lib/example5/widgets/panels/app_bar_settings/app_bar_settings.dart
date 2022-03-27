@@ -48,28 +48,28 @@ class AppBarSettings extends StatelessWidget {
         if (isLight) ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme &&
-                controller.appBarBackgroundSchemeColor == null,
+                controller.appBarBackgroundSchemeColorLight == null,
             title: const Text('Light mode AppBarStyle'),
             subtitle: Text(
               explainAppBarStyle(
                   controller.useFlexColorScheme &&
-                          controller.appBarBackgroundSchemeColor == null
-                      ? controller.lightAppBarStyle
+                          controller.appBarBackgroundSchemeColorLight == null
+                      ? controller.appBarStyleLight
                       : FlexAppBarStyle.primary,
                   isLight),
             ),
           ),
           ListTile(
             enabled: controller.useFlexColorScheme &&
-                controller.appBarBackgroundSchemeColor == null,
+                controller.appBarBackgroundSchemeColorLight == null,
             trailing: AppBarStyleButtons(
                 style: controller.useFlexColorScheme &&
-                        controller.appBarBackgroundSchemeColor == null
-                    ? controller.lightAppBarStyle
+                        controller.appBarBackgroundSchemeColorLight == null
+                    ? controller.appBarStyleLight
                     : FlexAppBarStyle.primary,
                 onChanged: controller.useFlexColorScheme &&
-                        controller.appBarBackgroundSchemeColor == null
-                    ? controller.setLightAppBarStyle
+                        controller.appBarBackgroundSchemeColorLight == null
+                    ? controller.setAppBarStyleLight
                     : null,
                 // To access the custom color we defined for app bar, in this
                 // toggle buttons widget, we have to pass along, or the
@@ -91,7 +91,7 @@ class AppBarSettings extends StatelessWidget {
             subtitle: Text(
               explainAppBarStyle(
                   controller.useFlexColorScheme
-                      ? controller.darkAppBarStyle
+                      ? controller.appBarStyleDark
                       : FlexAppBarStyle.material,
                   isLight),
             ),
@@ -100,10 +100,10 @@ class AppBarSettings extends StatelessWidget {
             enabled: controller.useFlexColorScheme,
             trailing: AppBarStyleButtons(
                 style: controller.useFlexColorScheme
-                    ? controller.darkAppBarStyle
+                    ? controller.appBarStyleDark
                     : FlexAppBarStyle.material,
                 onChanged: controller.useFlexColorScheme
-                    ? controller.setDarkAppBarStyle
+                    ? controller.setAppBarStyleDark
                     : null,
                 customAppBarColor:
                     AppColor.scheme(controller).dark.appBarColor),
@@ -121,103 +121,190 @@ class AppBarSettings extends StatelessWidget {
               ? controller.setTransparentStatusBar
               : null,
         ),
-        ListTile(
-          enabled: controller.useFlexColorScheme,
-          title: const Text('Elevation'),
-          subtitle: Slider.adaptive(
-            max: 24,
-            divisions: 48,
-            label: controller.appBarElevation.toStringAsFixed(1),
-            value: controller.appBarElevation,
-            onChanged: controller.useFlexColorScheme
-                ? controller.setAppBarElevation
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'ELEV',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                Text(
-                  controller.appBarElevation.toStringAsFixed(1),
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
+        if (isLight) ...<Widget>[
+          ListTile(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Light mode elevation'),
+            subtitle: Slider.adaptive(
+              max: 24,
+              divisions: 48,
+              label: controller.appBarElevationLight.toStringAsFixed(1),
+              value: controller.appBarElevationLight,
+              onChanged: controller.useFlexColorScheme
+                  ? controller.setAppBarElevationLight
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text(
+                    controller.appBarElevationLight.toStringAsFixed(1),
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        ListTile(
-          enabled: controller.useFlexColorScheme,
-          title: const Text('Opacity'),
-          subtitle: const Text('Themed opacity, try 85% to 98%'),
-        ),
-        ListTile(
-          title: Slider.adaptive(
-            max: 100,
-            divisions: 100,
-            label: (controller.appBarOpacity * 100).toStringAsFixed(0),
-            value: controller.appBarOpacity * 100,
-            onChanged: controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setAppBarOpacity(value / 100);
-                  }
-                : null,
+          ListTile(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Light mode opacity'),
+            subtitle: const Text('Themed opacity, try 85% to 98%'),
           ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                Text(
-                  '${(controller.appBarOpacity * 100).toStringAsFixed(0)}'
-                  ' %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
+          ListTile(
+            title: Slider.adaptive(
+              max: 100,
+              divisions: 100,
+              label: (controller.appBarOpacityLight * 100).toStringAsFixed(0),
+              value: controller.appBarOpacityLight * 100,
+              onChanged: controller.useFlexColorScheme
+                  ? (double value) {
+                      controller.setAppBarOpacityLight(value / 100);
+                    }
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'OPACITY',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text(
+                    '${(controller.appBarOpacityLight * 100).toStringAsFixed(0)}'
+                    ' %',
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
+        ] else ...<Widget>[
+          ListTile(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Dark mode elevation'),
+            subtitle: Slider.adaptive(
+              max: 24,
+              divisions: 48,
+              label: controller.appBarElevationDark.toStringAsFixed(1),
+              value: controller.appBarElevationDark,
+              onChanged: controller.useFlexColorScheme
+                  ? controller.setAppBarElevationDark
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text(
+                    controller.appBarElevationDark.toStringAsFixed(1),
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ListTile(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Dark mode opacity'),
+            subtitle: const Text('Themed opacity, try 85% to 98%'),
+          ),
+          ListTile(
+            title: Slider.adaptive(
+              max: 100,
+              divisions: 100,
+              label: (controller.appBarOpacityDark * 100).toStringAsFixed(0),
+              value: controller.appBarOpacityDark * 100,
+              onChanged: controller.useFlexColorScheme
+                  ? (double value) {
+                      controller.setAppBarOpacityDark(value / 100);
+                    }
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'OPACITY',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Text(
+                    '${(controller.appBarOpacityDark * 100).toStringAsFixed(0)}'
+                    ' %',
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
         const Divider(),
         const ListTile(
           title: Text('Custom color'),
           subtitle: Text('With sub-themes you can set scheme color for the '
               'AppBar background color. '
               'Using AppBarStyle is easier, but this offers more colors. '
-              'This overrides used AppBarStyle and passed in color, set it '
-              'back to default (null) to use AppBarStyle again. '
-              'With API you can set different color in light and dark '
-              'mode. This app shares same input for both modes, but you '
-              'can easily modify the generated setup code.'),
+              'This overrides used AppBarStyle, set it back to default '
+              '(null) to use AppBarStyle again.'),
         ),
-        ColorSchemePopupMenu(
-          title: const Text('AppBar background color'),
-          labelForDefault: 'null (AppBarStyle)',
-          index: controller.appBarBackgroundSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setAppBarBackgroundSchemeColor(null);
-                  } else {
-                    controller.setAppBarBackgroundSchemeColor(
-                        SchemeColor.values[index]);
+        if (isLight)
+          ColorSchemePopupMenu(
+            title: const Text('Light mode AppBar background color'),
+            labelForDefault: 'null (AppBarStyle)',
+            index: controller.appBarBackgroundSchemeColorLight?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setAppBarBackgroundSchemeColorLight(null);
+                    } else {
+                      controller.setAppBarBackgroundSchemeColorLight(
+                          SchemeColor.values[index]);
+                    }
                   }
-                }
-              : null,
-        ),
+                : null,
+          )
+        else
+          ColorSchemePopupMenu(
+            title: const Text('Dark mode AppBar background color'),
+            labelForDefault: 'null (AppBarStyle)',
+            index: controller.appBarBackgroundSchemeColorDark?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setAppBarBackgroundSchemeColorDark(null);
+                    } else {
+                      controller.setAppBarBackgroundSchemeColorDark(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
       ],
     );
   }
