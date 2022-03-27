@@ -75,24 +75,24 @@ class SurfaceBlends extends StatelessWidget {
             'blend strength by surface type.',
           ),
         ),
-        ListTile(
-          title: const Text('Blend mode'),
-          subtitle: Text(explainMode(controller.surfaceMode)),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            SurfaceModeButtons(
-              mode: controller.surfaceMode,
-              onChanged: controller.setSurfaceMode,
-              showAllModes: allBlends,
-            ),
-            const SizedBox(width: 16),
-          ],
-        ),
         if (isLight) ...<Widget>[
+          ListTile(
+            title: const Text('Light theme blend mode'),
+            subtitle: Text(explainMode(controller.surfaceModeLight)),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              SurfaceModeButtons(
+                mode: controller.surfaceModeLight,
+                onChanged: controller.setSurfaceModeLight,
+                showAllModes: allBlends,
+              ),
+              const SizedBox(width: 16),
+            ],
+          ),
           const ListTile(
-            title: Text('Light mode blend level'),
+            title: Text('Light theme blend level'),
             subtitle: Text('Adjust the surface, background, scaffold and '
                 'dialog blend level. Also impacts surfaces when '
                 'seed colors are used. Seed based surfaces already include '
@@ -132,7 +132,7 @@ class SurfaceBlends extends StatelessWidget {
           ),
           ListTile(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            title: const Text('Light mode onColors blend level'),
+            title: const Text('Light theme onColors blend level'),
             subtitle: const Text('When seed colors are not used, this affects '
                 'onContainers, onSurface and onBackground, plus main '
                 'onColors when the onColor blending switch is ON'),
@@ -176,14 +176,13 @@ class SurfaceBlends extends StatelessWidget {
             ),
           ),
           SwitchListTileAdaptive(
-            title: const Text('Light mode main colors use onColor blending'),
+            title: const Text('Light theme main colors use onColor blending'),
             subtitle: const Text(
                 'In M3 seeded light design only container colors use color '
                 'pair tinted onColor, main colors use black or white. '
-                'Keep this OFF to do so, or ON to also use it with '
-                'onPrimary, onSecondary, onTertiary and onError, in light '
-                'mode when seed colors are not used. Recommend OFF, but a '
-                'low onColor blend level is fine too'),
+                'Keep this OFF to do so. Set ON to also use it with '
+                'onPrimary, onSecondary, onTertiary and onError, when seed '
+                'colors are not used'),
             value: controller.blendLightOnColors &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -191,9 +190,33 @@ class SurfaceBlends extends StatelessWidget {
                 ? controller.setBlendLightOnColors
                 : null,
           ),
+          SwitchListTileAdaptive(
+            title: const Text('Plain white'),
+            subtitle: const Text(
+              'White Scaffold in all blend modes, '
+              'other surfaces become 5% lighter',
+            ),
+            value: controller.lightIsWhite,
+            onChanged: controller.setLightIsWhite,
+          ),
         ] else ...<Widget>[
+          ListTile(
+            title: const Text('Dark theme blend mode'),
+            subtitle: Text(explainMode(controller.surfaceModeDark)),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              SurfaceModeButtons(
+                mode: controller.surfaceModeDark,
+                onChanged: controller.setSurfaceModeDark,
+                showAllModes: allBlends,
+              ),
+              const SizedBox(width: 16),
+            ],
+          ),
           const ListTile(
-            title: Text('Dark mode blend level'),
+            title: Text('Dark theme blend level'),
             subtitle: Text('Adjust the surface, background, scaffold and '
                 'dialog blend level. Also impacts surfaces when '
                 'seed colors are used. Seed based surfaces already include '
@@ -233,7 +256,7 @@ class SurfaceBlends extends StatelessWidget {
           ),
           ListTile(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            title: const Text('Dark mode onColors blend level'),
+            title: const Text('Dark theme onColors blend level'),
             subtitle: const Text('When seed colors are not used, this affects '
                 'onContainers, onSurface and onBackground, plus main '
                 'onColors when the onColor blending switch is ON'),
@@ -277,7 +300,7 @@ class SurfaceBlends extends StatelessWidget {
             ),
           ),
           SwitchListTileAdaptive(
-            title: const Text('Dark mode main colors use onColor blending'),
+            title: const Text('Dark theme main colors use onColor blending'),
             subtitle: const Text(
                 'In M3 seeded dark design, not only container colors use '
                 'color pair tinted onColor, but also the main colors do. '
@@ -291,19 +314,6 @@ class SurfaceBlends extends StatelessWidget {
                 ? controller.setBlendDarkOnColors
                 : null,
           ),
-        ],
-        // Set dark mode to use true black!
-        if (isLight)
-          SwitchListTileAdaptive(
-            title: const Text('Plain white'),
-            subtitle: const Text(
-              'White Scaffold in all blend modes, '
-              'other surfaces become 5% lighter',
-            ),
-            value: controller.lightIsWhite,
-            onChanged: controller.setLightIsWhite,
-          )
-        else
           SwitchListTileAdaptive(
             title: const Text('True black'),
             subtitle: const Text(
@@ -313,6 +323,7 @@ class SurfaceBlends extends StatelessWidget {
             value: controller.darkIsTrueBlack,
             onChanged: controller.setDarkIsTrueBlack,
           ),
+        ],
       ],
     );
   }

@@ -47,18 +47,14 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
   final bool useScheme = useBuiltIn && !controller.useToDarkMethod;
 
   return FlexColorScheme.dark(
-    // Use scheme based config, when we are using a `FlexScheme` based scheme.
+    // Use scheme based config, when we are using a built-in `FlexScheme`
+    // based schemes.
     scheme: useScheme ? FlexScheme.values[flexScheme] : null,
     // Switch to using `FlexSchemeColor` when using 3 first custom schemes or
-    // the last one that is customizable, we also switch to
+    // the last one that is customizable.
     colors: !useScheme ? AppColor.scheme(controller).dark : null,
     usedColors: controller.usedColors,
-    // For reduced complexity in this demo, we use the same
-    // control value for surface mode selection and blend level
-    // for light and dark mode. They can as shown in earlier
-    // examples be different and in light and dark mode, you
-    // can mix and match whatever fits your design goals.
-    surfaceMode: controller.surfaceMode,
+    surfaceMode: controller.surfaceModeDark,
     blendLevel: controller.blendLevelDark,
     appBarStyle: controller.appBarStyleDark,
     appBarOpacity: controller.appBarOpacityDark,

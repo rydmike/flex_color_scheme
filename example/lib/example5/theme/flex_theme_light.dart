@@ -53,7 +53,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
     // Used number of colors from the selected input FlexColorScheme based theme
     usedColors: controller.usedColors,
     // Use controller to select surface mode
-    surfaceMode: controller.surfaceMode,
+    surfaceMode: controller.surfaceModeLight,
     // Integer used to control the level of primary color
     // surface blends applied to surfaces and backgrounds.
     blendLevel: controller.blendLevel,

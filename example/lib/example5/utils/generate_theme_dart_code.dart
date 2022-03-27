@@ -82,9 +82,13 @@ String generateThemeDartCode(ThemeController controller) {
   // 'FlexColorScheme.dark' factories direct parameters.
   //
   // We avoid adding any code when API default values are being used.
-  final String surfaceMode = controller.blendLevel > 0 &&
-          controller.surfaceMode != FlexSurfaceMode.highScaffoldLowSurfaces
-      ? '  surfaceMode: ${controller.surfaceMode},\n'
+  final String surfaceModeLight = controller.blendLevel > 0 &&
+          controller.surfaceModeLight != FlexSurfaceMode.highScaffoldLowSurfaces
+      ? '  surfaceMode: ${controller.surfaceModeLight},\n'
+      : '';
+  final String surfaceModeDark = controller.blendLevel > 0 &&
+          controller.surfaceModeDark != FlexSurfaceMode.highScaffoldLowSurfaces
+      ? '  surfaceMode: ${controller.surfaceModeDark},\n'
       : '';
   final String blendLevel = controller.blendLevel > 0
       ? '  blendLevel: ${controller.blendLevel},\n'
@@ -734,7 +738,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String code = 'theme: FlexThemeData.light(\n'
       '$lightScheme'
       '$usedColors'
-      '$surfaceMode'
+      '$surfaceModeLight'
       '$blendLevel'
       '$appBarStyleLight'
       '$appBarOpacityLight'
@@ -756,7 +760,7 @@ String generateThemeDartCode(ThemeController controller) {
       'darkTheme: FlexThemeData.dark(\n'
       '$darkScheme'
       '$usedColors'
-      '$surfaceMode'
+      '$surfaceModeDark'
       '$blendLevelDark'
       '$appBarStyleDark'
       '$appBarOpacityDark'
