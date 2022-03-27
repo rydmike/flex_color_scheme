@@ -79,6 +79,15 @@ class TextFieldSettings extends StatelessWidget {
               ? controller.setInputDecoratorUnfocusedHasBorder
               : null,
         ),
+        SwitchListTileAdaptive(
+          title: const Text('Unfocused border is colored'),
+          value: controller.inputDecoratorUnfocusedBorderIsColored &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setInputDecoratorUnfocusedBorderIsColored
+              : null,
+        ),
         const Padding(
           padding: EdgeInsets.all(16),
           child: TextInputField(),

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../utils/app_data_dir/app_data_dir.dart';

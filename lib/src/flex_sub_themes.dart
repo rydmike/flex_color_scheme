@@ -212,7 +212,7 @@ enum SchemeColor {
 ///   it also gets a bit more rounded than when not opting in on sub themes.
 /// * [Scrollbar], rounding on edges of scrollbars are left to platform default.
 /// * [AppBar] and [BottomAppBar] shape properties are left to their defaults.
-/// * [SnackBar] the floating snackbar should be sub themed to also include
+/// * [SnackBar] the floating SnackBar should be sub themed to also include
 ///   border radius, but the none floating one should remain
 ///   straight. Unclear if it can be done via SDK's current theming features,
 ///   will investigate more in future version.
@@ -1161,12 +1161,16 @@ class FlexSubThemes {
     ///
     /// Applies to both outline and underline mode.
     ///
-    /// When set to true, the unfocused borders also uses the `baseSchemeColor`.
-    /// If set to false, the color uses the SDK default unselected border color.
-    /// This is Color xx in light mode, and Color yy in dark mode.
+    /// When set to true, the unfocused borders also uses the [baseSchemeColor]
+    /// as its border color, but with alpha [kEnabledBorderAlpha] (90%).
+    ///
+    /// If set to false, the color uses the SDK default unselected border color,
+    /// which is [ColorScheme.onSurface] with 38% opacity.
+    ///
+    /// The unfocused border color selection also applies to it hovered state.
     ///
     /// Defaults to true.
-    final bool unfocusedUseColor = true,
+    final bool unfocusedBorderIsColored = true,
   }) {
     // Get selected color, defaults to primary.
     final Color baseColor = baseSchemeColor == null
@@ -1177,6 +1181,10 @@ class FlexSubThemes {
         (colorScheme.brightness == Brightness.dark
             ? baseColor.withAlpha(kFillColorAlphaDark)
             : baseColor.withAlpha(kFillColorAlphaLight));
+
+    final Color enabledBorder = unfocusedBorderIsColored
+        ? baseColor.withAlpha(kEnabledBorderAlpha)
+        : colorScheme.onSurface.withOpacity(0.38);
 
     switch (borderType) {
       case FlexInputBorderType.outline:
@@ -1220,7 +1228,7 @@ class FlexSubThemes {
                 BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
-                    color: baseColor.withAlpha(kEnabledBorderAlpha),
+                    color: enabledBorder,
                     width: unfocusedBorderWidth,
                   )
                 : BorderSide.none,
@@ -1300,7 +1308,7 @@ class FlexSubThemes {
             ),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
-                    color: baseColor.withAlpha(kEnabledBorderAlpha),
+                    color: enabledBorder,
                     width: unfocusedBorderWidth,
                   )
                 : BorderSide.none,
@@ -1788,7 +1796,7 @@ class FlexSubThemes {
     ///   * Flutter SDK uses: colorScheme.onSurface
     ///
     /// SnackBar uses ColorScheme.inverseSurface in M3 schemes.
-    /// While FlexColorScheme has own custom default primary tinted snackbar
+    /// While FlexColorScheme has own custom default primary tinted SnackBar
     /// color, it can also easily be themed also to [ColorScheme.inverseSurface]
     /// via the [backgroundSchemeColor].
     final Color? backgroundColor,

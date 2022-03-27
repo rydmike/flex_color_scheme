@@ -637,6 +637,81 @@ void main() {
       );
     });
     test(
+        'FST1.08b.light: GIVEN a FlexSubTheme.inputDecorationTheme( '
+        'unfocusedBorderIsColored: false) '
+        'EXPECT equal to InputDecorationTheme() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme, unfocusedBorderIsColored: false),
+        equals(
+          InputDecorationTheme(
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error) &&
+                  states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.error)) {
+                return TextStyle(
+                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                );
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: colorScheme.primary);
+            }),
+            filled: true,
+            fillColor: colorScheme.primary.withAlpha(0x0D),
+            hoverColor: colorScheme.primary.withAlpha(0x0D),
+            focusColor: colorScheme.primary.withAlpha(0x26),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.primary,
+                width: 2,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.onSurface.withOpacity(0.38),
+                width: 1.5,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .withAlpha(0x31),
+                width: 1.5,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.error,
+                width: 2,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.error.withAlpha(0xA7),
+                width: 1.5,
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
         'FST1.08a.dark: GIVEN a default FlexSubTheme.inputDecorationTheme() '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -679,6 +754,81 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide(
                 color: colorScheme.primary.withAlpha(0xA7),
+                width: 1.5,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .withAlpha(0x31),
+                width: 1.5,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.error,
+                width: 2,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.error.withAlpha(0xA7),
+                width: 1.5,
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.08b.dark: GIVEN a default FlexSubTheme.inputDecorationTheme( '
+        'unfocusedBorderIsColored: false) '
+        'EXPECT equal to InputDecorationTheme() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme, unfocusedBorderIsColored: false),
+        equals(
+          InputDecorationTheme(
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error) &&
+                  states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.error)) {
+                return TextStyle(
+                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                );
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: colorScheme.primary);
+            }),
+            filled: true,
+            fillColor: colorScheme.primary.withAlpha(0x14),
+            hoverColor: colorScheme.primary.withAlpha(0x0D),
+            focusColor: colorScheme.primary.withAlpha(0x26),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.primary,
+                width: 2,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(
+                color: colorScheme.onSurface.withOpacity(0.38),
                 width: 1.5,
               ),
             ),
