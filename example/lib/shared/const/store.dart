@@ -393,20 +393,20 @@ class Store {
   // ===========================================================================
 
   // Key used to read and save the navBarStyle value.
-  static const String keyNavBarStyle = 'navBarStyle';
+  static const String keySysNavBarStyle = 'sysNavBarStyle';
   // Default value for the navBarStyle, also used to reset settings.
-  static const FlexSystemNavBarStyle defaultNavBarStyle =
+  static const FlexSystemNavBarStyle defaultSysNavBarStyle =
       FlexSystemNavBarStyle.background;
 
   // Key used to read and save the sysBarOpacity value.
-  static const String keySysBarOpacity = 'sysBarOpacity';
+  static const String keySysNavBarOpacity = 'sysSysNavBarOpacity';
   // Default value for the sysBarOpacity, also used to reset settings.
   static const double defaultSysBarOpacity = 1.0;
 
   // Key used to read and save the useNavDivider value.
-  static const String keyUseNavDivider = 'useNavDivider';
+  static const String keyUseSysNavDivider = 'useSysNavDivider';
   // Default value for the useNavDivider, also to reset settings.
-  static const bool defaultUseNavDivider = false;
+  static const bool defaultUseSysNavDivider = false;
 
   // BottomNavigationBar SETTINGS.
   // ===========================================================================
@@ -415,7 +415,7 @@ class Store {
   static const String keyBottomNavigationBarOpacity =
       'bottomNavigationBarOpacity';
   // Default value for the bottomNavigationBarOpacity, also to reset settings.
-  static const double defaultBottomNavigationBarOpacity = 0.95;
+  static const double defaultBottomNavigationBarOpacity = 1.0;
 
   // Key used to read and save the bottomNavigationBarElevation value.
   static const String keyBottomNavigationBarElevation =
@@ -437,6 +437,19 @@ class Store {
 
   // NavigationBar SETTINGS.
   // ===========================================================================
+
+  // Key used to read and save the navBarBackgroundSchemeColor value.
+  static const String keyNavBarBackgroundSchemeColor =
+      'navBarBackgroundSchemeColor';
+  // Default value for the navBarBackgroundSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor defaultNavBarBackgroundSchemeColor =
+      SchemeColor.background;
+
+  // Key used to read and save the navigationBarOpacity value.
+  static const String keyNavigationBarOpacity = 'navigationBarOpacity';
+  // Default value for the navigationBarOpacity, also to reset settings.
+  static const double defaultNavigationBarOpacity = 1.0;
 
   // Key used to read and save the navSelectedSchemeColor value.
   static const String keyNavSelectedSchemeColor = 'navSelectedSchemeColor';
@@ -468,16 +481,13 @@ class Store {
   static const NavigationDestinationLabelBehavior defaultNavBarLabelBehavior =
       NavigationDestinationLabelBehavior.alwaysShow;
 
-  // Key used to read and save the navBarBackgroundSchemeColor value.
-  static const String keyNavBarBackgroundSchemeColor =
-      'navBarBackgroundSchemeColor';
-  // Default value for the navBarBackgroundSchemeColor, also used to
-  // reset settings.
-  static const SchemeColor defaultNavBarBackgroundSchemeColor =
-      SchemeColor.background;
-
   // NavigationRail SETTINGS.
   // ===========================================================================
+
+  // Key used to read and save the navigationRailOpacity value.
+  static const String keyNavigationRailOpacity = 'navigationRailOpacity';
+  // Default value for the navigationRailOpacity, also to reset settings.
+  static const double defaultNavigationRailOpacity = 1.0;
 
   // Key used to read and save the navRailLabelType value.
   static const String keyNavRailLabelType = 'navRailLabelType';

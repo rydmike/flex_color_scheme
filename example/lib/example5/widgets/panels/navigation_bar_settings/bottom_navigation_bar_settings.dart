@@ -50,12 +50,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Background opacity'),
-          subtitle: const Text('Shared setting in this app, but APIs have '
-              'own properties'),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
+          subtitle: Slider.adaptive(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),

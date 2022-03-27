@@ -28,7 +28,7 @@ class NavigationBarSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final double navBarOpacity =
         controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.bottomNavigationBarOpacity
+            ? controller.navigationBarOpacity
             : 1;
     return Column(
       children: <Widget>[
@@ -53,19 +53,14 @@ class NavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Background opacity'),
-          subtitle: const Text('Shared setting in this app, but APIs have '
-              'own properties'),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
+          subtitle: Slider.adaptive(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
             value: navBarOpacity * 100,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setBottomNavigationBarOpacity(value / 100);
+                    controller.setNavigationBarOpacity(value / 100);
                   }
                 : null,
           ),

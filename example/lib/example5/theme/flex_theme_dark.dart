@@ -149,7 +149,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             navigationBarHighlightSchemeColor: controller.navBarHighlight,
             navigationBarBackgroundSchemeColor:
                 controller.navBarBackgroundSchemeColor,
-            navigationBarOpacity: controller.bottomNavigationBarOpacity,
+            navigationBarOpacity: controller.navigationBarOpacity,
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
             // NavigationRail settings
             navigationRailSelectedLabelSchemeColor:
@@ -166,7 +166,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             navigationRailIndicatorSchemeColor: controller.navBarHighlight,
             navigationRailBackgroundSchemeColor:
                 controller.navBarBackgroundSchemeColor,
-            navigationRailOpacity: controller.bottomNavigationBarOpacity,
+            navigationRailOpacity: controller.navigationRailOpacity,
             navigationRailElevation: controller.bottomNavigationBarElevation,
             navigationRailLabelType: controller.navRailLabelType,
           )

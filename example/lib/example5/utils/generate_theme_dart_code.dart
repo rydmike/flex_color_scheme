@@ -60,20 +60,6 @@ String generateThemeDartCode(ThemeController controller) {
           '    appBarColor: ${scheme.dark.appBarColor},\n'
           '    error: ${scheme.dark.error},\n'
           '  ),\n';
-  // TODO(rydmike): Remove me when not needed!
-  // if (!useBuiltIn && controller.useKeyColors) {
-  //   darkScheme = '  colors: const FlexSchemeColor(\n'
-  //       '    primary: ${scheme.light.primary},\n'
-  //       '    primaryContainer: ${scheme.light.primaryContainer},\n'
-  //       '    secondary: ${scheme.light.secondary},\n'
-  //       '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
-  //       '    tertiary: ${scheme.light.tertiary},\n'
-  //       '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
-  //       '    appBarColor: ${scheme.light.appBarColor},\n'
-  //       '    error: ${scheme.light.error},\n'
-  //       '  ),\n';
-  // }
-
   if (controller.useToDarkMethod && !useBuiltIn && !controller.useKeyColors) {
     darkScheme = '  colors: const FlexSchemeColor(\n'
         '    primary: ${scheme.light.primary},\n'
@@ -419,8 +405,8 @@ String generateThemeDartCode(ThemeController controller) {
           SchemeColor.background
       ? ''
       : '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
-  final String navigationBarOpacity = controller.bottomNavigationBarOpacity != 1
-      ? '    navigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
+  final String navigationBarOpacity = controller.navigationBarOpacity != 1
+      ? '    navigationBarOpacity: ${controller.navigationBarOpacity},\n'
       : '';
   final String navigationBarLabelBehavior = controller.navBarLabelBehavior !=
           NavigationDestinationLabelBehavior.alwaysShow
@@ -469,9 +455,8 @@ String generateThemeDartCode(ThemeController controller) {
           SchemeColor.background
       ? ''
       : '    navigationRailBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
-  final String navigationRailOpacity = controller.bottomNavigationBarOpacity !=
-          1
-      ? '    navigationRailOpacity: ${controller.bottomNavigationBarOpacity},\n'
+  final String navigationRailOpacity = controller.navigationRailOpacity != 1
+      ? '    navigationRailOpacity: ${controller.navigationRailOpacity},\n'
       : '';
   final String navigationRailElevation = controller
               .bottomNavigationBarElevation !=
