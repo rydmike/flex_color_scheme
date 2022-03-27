@@ -4314,7 +4314,7 @@ class FlexColorScheme with Diagnosticable {
           effectiveAppBarColor = effectiveColors.primary;
           break;
         case FlexAppBarStyle.material:
-          effectiveAppBarColor = FlexColor.materialLightSurface;
+          effectiveAppBarColor = FlexColor.materialDarkSurface;
           break;
         case FlexAppBarStyle.background:
           effectiveAppBarColor = effectiveBackgroundColor;
