@@ -88,10 +88,16 @@ class Store {
   // Surface and blend SETTINGS.
   // ===========================================================================
 
-  // Key used to read and save the surfaceMode value.
-  static const String keySurfaceMode = 'surfaceMode';
-  // Default value for the surfaceMode, also used to reset settings.
-  static const FlexSurfaceMode defaultSurfaceMode =
+  // Key used to read and save the surfaceModeLight value.
+  static const String keySurfaceModeLight = 'surfaceModeLight';
+  // Default value for the surfaceModeLight, also used to reset settings.
+  static const FlexSurfaceMode defaultSurfaceModeLight =
+      FlexSurfaceMode.highScaffoldLowSurface;
+
+  // Key used to read and save the surfaceModeDark value.
+  static const String keySurfaceModeDark = 'surfaceModeDark';
+  // Default value for the surfaceModeDark, also used to reset settings.
+  static const FlexSurfaceMode defaultSurfaceModeDark =
       FlexSurfaceMode.highScaffoldLowSurface;
 
   // Key used to read and save the blendLevel value.

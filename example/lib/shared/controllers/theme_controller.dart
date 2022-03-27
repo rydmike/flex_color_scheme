@@ -84,8 +84,10 @@ class ThemeController with ChangeNotifier {
         Store.keyTooltipsMatchBackground, Store.defaultTooltipsMatchBackground);
     //
     // Surface and blend SETTINGS.
-    _surfaceMode = await _themeService.load(
-        Store.keySurfaceMode, Store.defaultSurfaceMode);
+    _surfaceModeLight = await _themeService.load(
+        Store.keySurfaceModeLight, Store.defaultSurfaceModeLight);
+    _surfaceModeDark = await _themeService.load(
+        Store.keySurfaceModeDark, Store.defaultSurfaceModeDark);
     _blendLevel =
         await _themeService.load(Store.keyBlendLevel, Store.defaultBlendLevel);
     _blendLevelDark = await _themeService.load(
@@ -382,7 +384,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultTooltipsMatchBackground, false);
     //
     // Surface and blend SETTINGS.
-    await setSurfaceMode(Store.defaultSurfaceMode, false);
+    await setSurfaceModeLight(Store.defaultSurfaceModeLight, false);
+    await setSurfaceModeDark(Store.defaultSurfaceModeDark, false);
     await setBlendLevel(Store.defaultBlendLevel, false);
     await setBlendLevelDark(Store.defaultBlendLevelDark, false);
     await setBlendOnLevel(Store.defaultBlendOnLevel, false);
@@ -699,15 +702,26 @@ class ThemeController with ChangeNotifier {
   // Surface and blend SETTINGS.
   // ===========================================================================
 
-  late FlexSurfaceMode _surfaceMode;
-  FlexSurfaceMode get surfaceMode => _surfaceMode;
-  Future<void> setSurfaceMode(FlexSurfaceMode? value,
+  late FlexSurfaceMode _surfaceModeLight;
+  FlexSurfaceMode get surfaceModeLight => _surfaceModeLight;
+  Future<void> setSurfaceModeLight(FlexSurfaceMode? value,
       [bool notify = true]) async {
     if (value == null) return;
-    if (value == _surfaceMode) return;
-    _surfaceMode = value;
+    if (value == _surfaceModeLight) return;
+    _surfaceModeLight = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keySurfaceMode, value);
+    await _themeService.save(Store.keySurfaceModeLight, value);
+  }
+
+  late FlexSurfaceMode _surfaceModeDark;
+  FlexSurfaceMode get surfaceModeDark => _surfaceModeDark;
+  Future<void> setSurfaceModeDark(FlexSurfaceMode? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _surfaceModeDark) return;
+    _surfaceModeDark = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keySurfaceModeDark, value);
   }
 
   late int _blendLevel;
