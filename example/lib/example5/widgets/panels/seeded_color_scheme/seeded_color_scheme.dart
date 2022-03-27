@@ -98,9 +98,19 @@ class SeededColorScheme extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const ListTile(
+          subtitle: Text('In Material 3 design, seed generated light and '
+              'dark mode ColorSchemes are based on same key colors to generate '
+              'six tonal palettes. Both the light and '
+              'dark mode ColorScheme colors are picked from these six '
+              'palettes using different tones. For light and dark mode to use '
+              'identical tonal palettes, FlexColorScheme automatically '
+              'uses the light input for built in schemes. '
+              'With custom schemes you can decide if you do so or not.'),
+        ),
         if (showKeyButtons)
           ListTile(
-            title: const Text('Use effective input colors as keys to seed '
+            title: const Text('Input colors used as keys to seed '
                 'the ColorScheme'),
             subtitle: Text(AppColor.explainUsedColors(controller)),
           ),
@@ -112,13 +122,23 @@ class SeededColorScheme extends StatelessWidget {
           maintainAnimation: true,
           maintainState: true,
           child: SwitchListTileAdaptive(
-              title: const Text('Custom dark seeded schemes input colors'),
+              title: const Text('Custom dark colors used as key colors'),
               subtitle: const Text(
-                'M3 spec is OFF. If you keep dark mode input colors, turn ON '
-                'to use custom schemes own input color definitions.',
+                'Option only available on custom schemes. If you "keep" dark '
+                'mode input colors on custom schemes, turn ON '
+                'to use its custom dark mode input color definitions.',
               ),
-              value: controller.useDarkColorsForSeed && controller.useKeyColors,
-              onChanged: controller.useKeyColors
+              value: controller.useDarkColorsForSeed &&
+                  controller.useKeyColors &&
+                  (controller.schemeIndex == 0 ||
+                      controller.schemeIndex == 1 ||
+                      controller.schemeIndex == 2 ||
+                      controller.schemeIndex == AppColor.schemes.length - 1),
+              onChanged: controller.useKeyColors &&
+                      (controller.schemeIndex == 0 ||
+                          controller.schemeIndex == 1 ||
+                          controller.schemeIndex == 2 ||
+                          controller.schemeIndex == AppColor.schemes.length - 1)
                   ? controller.setUseDarkColorsForSeed
                   : null),
         ),

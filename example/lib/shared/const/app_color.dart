@@ -234,22 +234,25 @@ class AppColor {
     if (index == schemes.length - 1) {
       return controller.customScheme.copyWith(
           dark: controller.useKeyColors
-              ? controller.useDarkColorsForSeed
+              ? controller.useDarkColorsForSeed &&
+                      (index == 0 ||
+                          index == 1 ||
+                          index == 2 ||
+                          index == AppColor.schemes.length - 1)
                   ? controller.customScheme.dark
                   : controller.customScheme.light
               : controller.useToDarkMethod
                   ? controller.customScheme.light.defaultError
                       .toDark(controller.darkMethodLevel, true)
                   : null);
-
-      // dark: controller.useToDarkMethod
-      //     ? controller.customScheme.light.defaultError
-      //         .toDark(controller.darkMethodLevel, true)
-      //     : null);
     }
     return schemes[index].copyWith(
         dark: controller.useKeyColors
-            ? controller.useDarkColorsForSeed
+            ? controller.useDarkColorsForSeed &&
+                    (index == 0 ||
+                        index == 1 ||
+                        index == 2 ||
+                        index == AppColor.schemes.length - 1)
                 ? schemes[index].dark
                 : schemes[index].light
             : controller.useToDarkMethod
