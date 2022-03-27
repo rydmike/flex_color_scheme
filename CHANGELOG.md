@@ -34,6 +34,17 @@ All notable changes to the **FlexColorScheme** package are documented here.
   in document comments to `primaryVariant` and `secondaryVariant`. Nor does it
   like when you use tests to deprecated Flutter SDK members, removed them too,
   they were not needed either after some redesign of a few tests.
+  
+* Fixed. When using sub-themes and selecting a `ColorScheme` based color, as 
+  color for the `AppBar`, instead of using `abbBarStyle` in light and dark 
+  factories, the `appBarOpacity` was not applied to the selected color. The
+  priority of effective `AppBar` color was also revised to follow the norm, 
+  which from lowest to highest is: 
+  - `abbBarStyle` in light/dark factories and ThemeData extensions, which 
+     selects the used color from active `scheme` or `colors`, in the same
+     factories or extensions.
+  - `appBarBackgroundSchemeColor` in `FlexSubThemesData` when used.
+  - `appBarBackground` in FlexColorScheme.
 
 **CHANGE**
 
@@ -59,6 +70,12 @@ All notable changes to the **FlexColorScheme** package are documented here.
   do not have any specification in Material 2 spec. Updated the colors values
   that had been made up for **dev.1** release to better match the design intent
   of those colors for the new Material 3 `ColorScheme`.
+  
+* Added `inputDecoratorUnfocusedBorderIsColored` to `FlexSubThemesData` and 
+  support for it in `FlexSubThemes` via `unfocusedBorderIsColored`. Previously
+  an unfocused or hovered border/underline always had a hint of selected
+  base color. Setting this to false, leaves it at the grey defaults used by
+  Flutter defaults.
 
 **DEMO APPS**
 

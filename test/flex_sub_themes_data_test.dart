@@ -16,7 +16,7 @@ void main() {
     const FlexSubThemesData m2 = FlexSubThemesData(
       interactionEffects: true,
       blendOnColors: true,
-      defaultToSDK: false,
+      useFlutterDefaults: false,
       blendTextTheme: true,
       useTextTheme: true,
       buttonMinSize: Size(40, 40),
@@ -27,6 +27,7 @@ void main() {
       inputDecoratorIsFilled: true,
       inputDecoratorBorderType: FlexInputBorderType.outline,
       inputDecoratorUnfocusedHasBorder: true,
+      inputDecoratorUnfocusedBorderIsColored: true,
       fabUseShape: true,
       cardElevation: 0,
       popupMenuElevation: 3,
@@ -46,7 +47,7 @@ void main() {
     const FlexSubThemesData m3 = FlexSubThemesData(
       interactionEffects: true,
       blendOnColors: true,
-      defaultToSDK: false,
+      useFlutterDefaults: false,
       blendTextTheme: true,
       useTextTheme: true,
       buttonMinSize: Size(40, 40),
@@ -57,6 +58,7 @@ void main() {
       inputDecoratorIsFilled: true,
       inputDecoratorBorderType: FlexInputBorderType.underline, // <--diff
       inputDecoratorUnfocusedHasBorder: true,
+      inputDecoratorUnfocusedBorderIsColored: true,
       fabUseShape: true,
       cardElevation: 0,
       popupMenuElevation: 3,
@@ -76,7 +78,7 @@ void main() {
     const FlexSubThemesData m4 = FlexSubThemesData(
       interactionEffects: false,
       blendOnColors: false,
-      defaultToSDK: true,
+      useFlutterDefaults: true,
       blendTextTheme: false,
       useTextTheme: false,
       buttonMinSize: Size(44, 49),
@@ -87,6 +89,7 @@ void main() {
       inputDecoratorIsFilled: false,
       inputDecoratorBorderType: FlexInputBorderType.underline,
       inputDecoratorUnfocusedHasBorder: false,
+      inputDecoratorUnfocusedBorderIsColored: false,
       fabUseShape: false,
       cardElevation: 1,
       popupMenuElevation: 5,
@@ -155,7 +158,7 @@ void main() {
         m4.copyWith(
           interactionEffects: true,
           blendOnColors: true,
-          defaultToSDK: false,
+          useFlutterDefaults: false,
           blendTextTheme: true,
           useTextTheme: true,
           buttonMinSize: const Size(40, 40),
@@ -166,6 +169,7 @@ void main() {
           inputDecoratorIsFilled: true,
           inputDecoratorBorderType: FlexInputBorderType.outline,
           inputDecoratorUnfocusedHasBorder: true,
+          inputDecoratorUnfocusedBorderIsColored: true,
           fabUseShape: true,
           cardElevation: 0,
           popupMenuElevation: 3,
@@ -193,7 +197,7 @@ void main() {
     const FlexSubThemesData m5 = FlexSubThemesData(
       interactionEffects: true,
       blendOnColors: true,
-      defaultToSDK: true,
+      useFlutterDefaults: true,
       blendTextTheme: true,
       useTextTheme: true,
       defaultRadius: 14,
@@ -212,6 +216,7 @@ void main() {
       inputDecoratorFillColor: null,
       inputDecoratorBorderType: FlexInputBorderType.outline,
       inputDecoratorUnfocusedHasBorder: true,
+      inputDecoratorUnfocusedBorderIsColored: true,
       fabRadius: 12,
       fabUseShape: true,
       fabSchemeColor: SchemeColor.primary,
@@ -278,7 +283,7 @@ void main() {
         equals(m4.copyWith(
           interactionEffects: true,
           blendOnColors: true,
-          defaultToSDK: true,
+          useFlutterDefaults: true,
           blendTextTheme: true,
           useTextTheme: true,
           defaultRadius: 14,
@@ -297,6 +302,7 @@ void main() {
           inputDecoratorFillColor: null,
           inputDecoratorBorderType: FlexInputBorderType.outline,
           inputDecoratorUnfocusedHasBorder: true,
+          inputDecoratorUnfocusedBorderIsColored: true,
           fabRadius: 12,
           fabUseShape: true,
           fabSchemeColor: SchemeColor.primary,
@@ -370,7 +376,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSubThemesData#00000(interactionEffects: true, blendOnLevel : 0, blendOnColors: true, defaultToSDK: false, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, textButtonSchemeColor: primary, elevatedButtonSchemeColor: primary, outlinedButtonSchemeColor: primary, materialButtonSchemeColor: primary, toggleButtonsSchemeColor: primary, switchSchemeColor: secondary, checkboxSchemeColor: secondary, radioSchemeColor: secondary, unselectedToggleIsColored: false, inputDecorationRadius: null, inputDecoratorSchemeColor: primary, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, fabRadius: null, fabUseShape: true, fabSchemeColor: secondary, chipRadius: null, chipSchemeColor: primary, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, dialogBackgroundSchemeColor: surface, timePickerDialogRadius: null, snackBarElevation: 4.0, snackBarBackgroundSchemeColor: null, appBarBackgroundSchemeColor: null, tabBarItemSchemeColor: null, tabBarIndicatorSchemeColor: null, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarLabelTextStyle: null, bottomNavigationBarSelectedLabelSize: null, bottomNavigationBarUnselectedLabelSize: null, bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.primary, bottomNavigationBarUnselectedLabelSchemeColor: SchemeColor.onSurface, bottomNavigationBarMutedUnselectedLabel: true, bottomNavigationBarSelectedIconSize: null, bottomNavigationBarUnselectedIconSize: null, bottomNavigationBarSelectedIconSchemeColor: primary, bottomNavigationBarUnselectedIconSchemeColor: onSurface, bottomNavigationBarMutedUnselectedIcon: true, bottomNavigationBarBackgroundSchemeColor: SchemeColor.background, bottomNavigationBarOpacity: 1.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarShowSelectedLabels: true, bottomNavigationBarShowUnselectedLabels: true, bottomNavigationBarType: fixed, bottomNavigationBarLandscapeLayout: null, navigationBarLabelTextStyle: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedLabelSchemeColor: SchemeColor.primary, navigationBarUnselectedLabelSchemeColor: SchemeColor.onSurface, navigationBarMutedUnselectedLabel: true, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarSelectedIconSchemeColor: primary, navigationBarUnselectedIconSchemeColor: onSurface, navigationBarMutedUnselectedIcon: true, navigationBarHighlightSchemeColor: primary, navigationBarBackgroundSchemeColor: background, navigationBarOpacity: 1.0, navigationBarHeight: 62.0, navigationBarLabelBehavior: alwaysShow, navigationRailLabelTextStyle: null, navigationRailSelectedLabelSize: null, navigationRailUnselectedLabelSize: null, navigationRailSelectedLabelSchemeColor: SchemeColor.primary, navigationRailUnselectedLabelSchemeColor: SchemeColor.onSurface, navigationRailMutedUnselectedLabel: true, navigationRailSelectedIconSize: null, navigationRailUnselectedIconSize: null, navigationRailSelectedIconSchemeColor: primary, navigationRailUnselectedIconSchemeColor: onSurface, navigationRailMutedUnselectedIcon: true, navigationRailUseIndicator: true, navigationRailIndicatorSchemeColor: SchemeColor.primary, navigationRailBackgroundSchemeColor: SchemeColor.background, navigationRailOpacity: 1.0, navigationRailElevation: 0.0, navigationRailLabelType: all, navigationRailGroupAlignment: null)'));
+              'FlexSubThemesData#00000(interactionEffects: true, blendOnLevel : 0, blendOnColors: true, useFlutterDefaults: false, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: Size(40.0, 40.0), buttonPadding: EdgeInsets(16.0, 0.0, 16.0, 0.0), thickBorderWidth: 2.0, thinBorderWidth: 1.5, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: 1.0, outlinedButtonRadius: null, toggleButtonsRadius: null, textButtonSchemeColor: primary, elevatedButtonSchemeColor: primary, outlinedButtonSchemeColor: primary, materialButtonSchemeColor: primary, toggleButtonsSchemeColor: primary, switchSchemeColor: secondary, checkboxSchemeColor: secondary, radioSchemeColor: secondary, unselectedToggleIsColored: false, inputDecorationRadius: null, inputDecoratorSchemeColor: primary, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, inputDecoratorUnfocusedBorderIsColored: true, fabRadius: null, fabUseShape: true, fabSchemeColor: secondary, chipRadius: null, chipSchemeColor: primary, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 10.0, dialogBackgroundSchemeColor: surface, timePickerDialogRadius: null, snackBarElevation: 4.0, snackBarBackgroundSchemeColor: null, appBarBackgroundSchemeColor: null, tabBarItemSchemeColor: null, tabBarIndicatorSchemeColor: null, bottomSheetRadius: null, bottomSheetElevation: 4.0, bottomSheetModalElevation: 8.0, bottomNavigationBarLabelTextStyle: null, bottomNavigationBarSelectedLabelSize: null, bottomNavigationBarUnselectedLabelSize: null, bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.primary, bottomNavigationBarUnselectedLabelSchemeColor: SchemeColor.onSurface, bottomNavigationBarMutedUnselectedLabel: true, bottomNavigationBarSelectedIconSize: null, bottomNavigationBarUnselectedIconSize: null, bottomNavigationBarSelectedIconSchemeColor: primary, bottomNavigationBarUnselectedIconSchemeColor: onSurface, bottomNavigationBarMutedUnselectedIcon: true, bottomNavigationBarBackgroundSchemeColor: SchemeColor.background, bottomNavigationBarOpacity: 1.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarShowSelectedLabels: true, bottomNavigationBarShowUnselectedLabels: true, bottomNavigationBarType: fixed, bottomNavigationBarLandscapeLayout: null, navigationBarLabelTextStyle: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedLabelSchemeColor: SchemeColor.primary, navigationBarUnselectedLabelSchemeColor: SchemeColor.onSurface, navigationBarMutedUnselectedLabel: true, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarSelectedIconSchemeColor: primary, navigationBarUnselectedIconSchemeColor: onSurface, navigationBarMutedUnselectedIcon: true, navigationBarHighlightSchemeColor: primary, navigationBarBackgroundSchemeColor: background, navigationBarOpacity: 1.0, navigationBarHeight: 62.0, navigationBarLabelBehavior: alwaysShow, navigationRailLabelTextStyle: null, navigationRailSelectedLabelSize: null, navigationRailUnselectedLabelSize: null, navigationRailSelectedLabelSchemeColor: SchemeColor.primary, navigationRailUnselectedLabelSchemeColor: SchemeColor.onSurface, navigationRailMutedUnselectedLabel: true, navigationRailSelectedIconSize: null, navigationRailUnselectedIconSize: null, navigationRailSelectedIconSchemeColor: primary, navigationRailUnselectedIconSchemeColor: onSurface, navigationRailMutedUnselectedIcon: true, navigationRailUseIndicator: true, navigationRailIndicatorSchemeColor: SchemeColor.primary, navigationRailBackgroundSchemeColor: SchemeColor.background, navigationRailOpacity: 1.0, navigationRailElevation: 0.0, navigationRailLabelType: all, navigationRailGroupAlignment: null)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '

@@ -145,6 +145,10 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             // has a border of selected style, but thinner.
             inputDecoratorUnfocusedHasBorder:
                 controller.inputDecoratorUnfocusedHasBorder,
+            // Want to use uncolored border/underline when unfocused,
+            // set this to false
+            inputDecoratorUnfocusedBorderIsColored:
+                controller.inputDecoratorUnfocusedBorderIsColored,
             // Set to false to keep using M2 style FAB and ignore
             // M3 type default and global radius on the FAB, it thus
             // remains circular or stadium shaped in extended mode.

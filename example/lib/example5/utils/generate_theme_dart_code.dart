@@ -271,6 +271,10 @@ String generateThemeDartCode(ThemeController controller) {
           .inputDecoratorUnfocusedHasBorder
       ? ''
       : '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n';
+  final String inputDecoratorUnfocusedBorderIsColored = controller
+          .inputDecoratorUnfocusedBorderIsColored
+      ? ''
+      : '    inputDecoratorUnfocusedBorderIsColored: ${controller.inputDecoratorUnfocusedBorderIsColored},\n';
   //
   // Fab and chip, snack, card, dialog, popup
   final String fabUseShape = controller.fabUseShape
@@ -499,6 +503,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorIsFilled'
           '$inputDecoratorBorderType'
           '$inputDecoratorUnfocusedHasBorder'
+          '$inputDecoratorUnfocusedBorderIsColored'
           //
           '$fabUseShape'
           '$fabSchemeColor'
@@ -580,6 +585,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorIsFilled'
           '$inputDecoratorBorderType'
           '$inputDecoratorUnfocusedHasBorder'
+          '$inputDecoratorUnfocusedBorderIsColored'
           //
           '$fabUseShape'
           '$fabSchemeColor'

@@ -5490,7 +5490,8 @@ class FlexColorScheme with Diagnosticable {
             focusedBorderWidth: subTheme.thickBorderWidth,
             unfocusedBorderWidth: subTheme.thinBorderWidth,
             unfocusedHasBorder: subTheme.inputDecoratorUnfocusedHasBorder,
-          )
+            unfocusedBorderIsColored:
+                subTheme.inputDecoratorUnfocusedBorderIsColored)
         // Default one is also a bit opinionated, this is the FCS standard
         // in all previous versions before version 4.0.0. Kept for
         // backwards defaults compatibility.

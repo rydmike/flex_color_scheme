@@ -36,6 +36,11 @@ class Store {
   // Default value for the useSubThemes, also used to reset settings.
   static const bool defaultUseSubThemes = true;
 
+  // Key used to read and save the useFlutterDefaults  value.
+  static const String keyUseFlutterDefaults = 'useFlutterDefaults';
+  // Default value for the useCustomDarkColorsForSeed, also to reset settings.
+  static const bool defaultUseFlutterDefaults = true;
+
   // Key used to read and save the isLargeGridView value.
   static const String keyIsLargeGridView = 'isLargeGridView';
   // Default value for the isLargeGridView, also used to reset settings.
@@ -136,6 +141,12 @@ class Store {
   static const String keyDarkIsTrueBlack = 'darkIsTrueBlack';
   // Default value for the darkIsTrueBlack, also to reset settings.
   static const bool defaultDarkIsTrueBlack = false;
+
+  // Key used to read and save the useCustomDarkColorsForSeed value.
+  static const String keyUseCustomDarkColorsForSeed =
+      'useCustomDarkColorsForSeed';
+  // Default value for the useCustomDarkColorsForSeed, also to reset settings.
+  static const bool defaultUseCustomDarkColorsForSeed = false;
 
   // Key used to read and save the useToDarkMethod value.
   static const String keyUseToDarkMethod = 'useToDarkMethod';
@@ -270,6 +281,13 @@ class Store {
   // InputDecorator SETTINGS.
   // ===========================================================================
 
+  // Key used to read and save the inputDecoratorSchemeColor value.
+  static const String keyInputDecoratorSchemeColor =
+      'inputDecoratorSchemeColor';
+  // Default value for the inputDecoratorSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorSchemeColor = null;
+
   // Key used to read and save the inputDecoratorIsFilled value.
   static const String keyInputDecoratorIsFilled = 'inputDecoratorIsFilled';
   // Default value for the inputDecoratorIsFilled, also used to reset settings.
@@ -287,12 +305,12 @@ class Store {
   // Default value for the inputDecoratorUnfocusedHasBorder, reset settings.
   static const bool defaultInputDecoratorUnfocusedHasBorder = true;
 
-  // Key used to read and save the inputDecoratorSchemeColor value.
-  static const String keyInputDecoratorSchemeColor =
-      'inputDecoratorSchemeColor';
-  // Default value for the inputDecoratorSchemeColor, reset settings.
-  // We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultInputDecoratorSchemeColor = null;
+  // Key used to read and save the inputDecoratorUnfocusedBorderIsColored value.
+  static const String keyInputDecoratorUnfocusedBorderIsColored =
+      'inputDecoratorUnfocusedBorderIsColored';
+  // Default value for the inputDecoratorUnfocusedBorderIsColored, also used to
+  // reset settings.
+  static const bool defaultInputDecoratorUnfocusedBorderIsColored = true;
 
   // AppBar SETTINGS.
   // ===========================================================================
@@ -668,20 +686,4 @@ class Store {
   // Not yet implemented SETTINGS.
   // ===========================================================================
 
-  // Key used to read and save the useCustomDarkColorsForSeed value.
-  static const String keyUseCustomDarkColorsForSeed =
-      'useCustomDarkColorsForSeed';
-  // Default value for the useCustomDarkColorsForSeed, also to reset settings.
-  static const bool defaultUseCustomDarkColorsForSeed = true;
-
-  // Key used to read and save the useFlutterDefaults  value.
-  static const String keyUseFlutterDefaults = 'useFlutterDefaults';
-  // Default value for the useCustomDarkColorsForSeed, also to reset settings.
-  static const bool defaultUseFlutterDefaults = true;
-
-  // Key used to read and save the inputDecoratorUnfocusedBorderIsColored value.
-  static const String keyInputDecoratorUnfocusedBorderIsColored =
-      'inputDecoratorUnfocusedBorderIsColored';
-  // Default value for the useCustomDarkColorsForSeed, also to reset settings.
-  static const bool defaultInputDecoratorUnfocusedBorderIsColored = true;
 }

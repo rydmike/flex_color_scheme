@@ -75,7 +75,7 @@ class FlexSubThemesData with Diagnosticable {
     this.interactionEffects = true,
     this.blendOnLevel = 0,
     this.blendOnColors = true,
-    this.defaultToSDK = false,
+    this.useFlutterDefaults = false,
     //
     this.blendTextTheme = true,
     this.useTextTheme = true,
@@ -110,6 +110,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorFillColor,
     this.inputDecoratorBorderType = FlexInputBorderType.outline,
     this.inputDecoratorUnfocusedHasBorder = true,
+    this.inputDecoratorUnfocusedBorderIsColored = true,
     //
     this.fabRadius,
     this.fabUseShape = true,
@@ -314,19 +315,35 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool blendOnColors;
 
-  /// When set to `true`, all properties that in `FlexSubThemesData` are
-  /// nullable, will when they are undefined (null) cause the theme sub-theme
-  /// depending on the property to default to SDK un-themed default value.
+  /// Set to true to use Flutter SDK default component theme designs.
   ///
-  /// Normally created sub-themes, will when a nullable property is undefined,
-  /// cause the sub-theme depending on the property to default to
-  /// [FlexColorScheme]'s opinionated sub-theme defaults, even if such a
-  /// property is undefined. Setting `defaultToSDK` causes them all to default
-  /// what the SDK uses by default when for the property when it is undefined.
-  /// This **only** applies to nullable properties.
+  /// When set to `true`, many properties that in [FlexSubThemesData] are
+  /// nullable and default to 'null, but that as undefined default to using
+  /// theming choices that differ from Flutter SDK default component theme
+  /// designs, will when this property is set to true default to
+  /// using Flutter SDK defaults, instead of its own opinionated defaults.
   ///
-  /// Default to false.
-  final bool defaultToSDK;
+  /// When you use this flag you loose many of the harmonizing defaults
+  /// [FlexColorScheme.subThemesData] bring, but it may server as an optional
+  /// starting point for your own custom component themes with fewer `copyWith`
+  /// overrides needed for its opinionated choices.
+  ///
+  /// The individual [FlexSubThemesData] properties document their adherence
+  /// to this setting, they are also listed here:
+  ///
+  /// - NN1
+  ///   * false: FlexColorScheme
+  ///   * true: Flutter
+  /// - NN2
+  ///   * false: FlexColorScheme
+  ///   * true: Flutter
+  /// - NN3
+  ///   * false: FlexColorScheme
+  ///   * true: Flutter
+  ///
+  ///
+  /// Defaults to false.
+  final bool useFlutterDefaults;
 
   /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend primary color into text themes
@@ -636,6 +653,25 @@ class FlexSubThemesData with Diagnosticable {
   /// continue to emphasize error state with an error border even when
   /// this property is set to false.
   final bool inputDecoratorUnfocusedHasBorder;
+
+  /// Determines if the [InputDecorator] unfocused state has a colored border.
+  ///
+  /// Defaults to true.
+  ///
+  /// Applies to both outline and underline mode. Does not have any effect
+  /// if [inputDecoratorUnfocusedHasBorder] is false.
+  ///
+  /// The default design in FlexColorScheme when this is true, creates
+  /// unfocused border that use [inputDecoratorSchemeColor] as it s color with
+  /// alpha set to [kEnabledBorderAlpha] (90%) using the [thinBorderWidth] as
+  /// its width.
+  ///
+  /// When false the border/underline will revert back to using Flutter M2
+  /// defaults when unselected, which is [ColorScheme.onSurface] with 38%
+  /// opacity.
+  ///
+  /// The unfocused border color selection also applies to it hovered state.
+  final bool inputDecoratorUnfocusedBorderIsColored;
 
   /// Border radius override value for [FloatingActionButton].
   final double? fabRadius;
@@ -1422,7 +1458,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? interactionEffects,
     final int? blendOnLevel,
     final bool? blendOnColors,
-    final bool? defaultToSDK,
+    final bool? useFlutterDefaults,
     final bool? blendTextTheme,
     final bool? useTextTheme,
     final double? defaultRadius,
@@ -1443,6 +1479,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? switchSchemeColor,
     final SchemeColor? checkboxSchemeColor,
     final SchemeColor? radioSchemeColor,
+    //
     final bool? unselectedToggleIsColored,
     final double? inputDecorationRadius,
     final SchemeColor? inputDecoratorSchemeColor,
@@ -1450,6 +1487,8 @@ class FlexSubThemesData with Diagnosticable {
     final Color? inputDecoratorFillColor,
     final FlexInputBorderType? inputDecoratorBorderType,
     final bool? inputDecoratorUnfocusedHasBorder,
+    final bool? inputDecoratorUnfocusedBorderIsColored,
+    //
     final double? fabRadius,
     final bool? fabUseShape,
     final SchemeColor? fabSchemeColor,
@@ -1534,7 +1573,7 @@ class FlexSubThemesData with Diagnosticable {
       interactionEffects: interactionEffects ?? this.interactionEffects,
       blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendOnColors: blendOnColors ?? this.blendOnColors,
-      defaultToSDK: defaultToSDK ?? this.defaultToSDK,
+      useFlutterDefaults: useFlutterDefaults ?? this.useFlutterDefaults,
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
       defaultRadius: defaultRadius ?? this.defaultRadius,
@@ -1575,6 +1614,10 @@ class FlexSubThemesData with Diagnosticable {
           inputDecoratorBorderType ?? this.inputDecoratorBorderType,
       inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ??
           this.inputDecoratorUnfocusedHasBorder,
+      inputDecoratorUnfocusedBorderIsColored:
+          inputDecoratorUnfocusedBorderIsColored ??
+              this.inputDecoratorUnfocusedBorderIsColored,
+      //
       fabRadius: fabRadius ?? this.fabRadius,
       fabUseShape: fabUseShape ?? this.fabUseShape,
       fabSchemeColor: fabSchemeColor ?? this.fabSchemeColor,
@@ -1743,7 +1786,7 @@ class FlexSubThemesData with Diagnosticable {
         other.interactionEffects == interactionEffects &&
         other.blendOnLevel == blendOnLevel &&
         other.blendOnColors == blendOnColors &&
-        other.defaultToSDK == defaultToSDK &&
+        other.useFlutterDefaults == useFlutterDefaults &&
         other.blendTextTheme == blendTextTheme &&
         other.useTextTheme == useTextTheme &&
         other.defaultRadius == defaultRadius &&
@@ -1772,6 +1815,8 @@ class FlexSubThemesData with Diagnosticable {
         other.inputDecoratorBorderType == inputDecoratorBorderType &&
         other.inputDecoratorUnfocusedHasBorder ==
             inputDecoratorUnfocusedHasBorder &&
+        other.inputDecoratorUnfocusedBorderIsColored ==
+            inputDecoratorUnfocusedBorderIsColored &&
         other.fabRadius == fabRadius &&
         other.fabUseShape == fabUseShape &&
         other.fabSchemeColor == fabSchemeColor &&
@@ -1895,7 +1940,7 @@ class FlexSubThemesData with Diagnosticable {
         interactionEffects,
         blendOnLevel,
         blendOnColors,
-        defaultToSDK,
+        useFlutterDefaults,
         //
         blendTextTheme,
         useTextTheme,
@@ -1929,6 +1974,7 @@ class FlexSubThemesData with Diagnosticable {
         inputDecoratorFillColor,
         inputDecoratorBorderType,
         inputDecoratorUnfocusedHasBorder,
+        inputDecoratorUnfocusedBorderIsColored,
         //
         fabRadius,
         fabUseShape,
@@ -2023,7 +2069,8 @@ class FlexSubThemesData with Diagnosticable {
         DiagnosticsProperty<bool>('interactionEffects', interactionEffects));
     properties.add(DiagnosticsProperty<int>('blendOnLevel ', blendOnLevel));
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
-    properties.add(DiagnosticsProperty<bool>('defaultToSDK', defaultToSDK));
+    properties.add(
+        DiagnosticsProperty<bool>('useFlutterDefaults', useFlutterDefaults));
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
     properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));
@@ -2074,6 +2121,9 @@ class FlexSubThemesData with Diagnosticable {
         'inputDecoratorBorderType', inputDecoratorBorderType));
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
+    properties.add(DiagnosticsProperty<bool>(
+        'inputDecoratorUnfocusedBorderIsColored',
+        inputDecoratorUnfocusedBorderIsColored));
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
     properties.add(EnumProperty<SchemeColor>('fabSchemeColor', fabSchemeColor));

@@ -62,6 +62,8 @@ class ThemeController with ChangeNotifier {
         Store.keyUseFlexColorScheme, Store.defaultUseFlexColorScheme);
     _useSubThemes = await _themeService.load(
         Store.keyUseSubThemes, Store.defaultUseSubThemes);
+    _useFlutterDefaults = await _themeService.load(
+        Store.keyUseFlutterDefaults, Store.defaultUseFlutterDefaults);
     _isLargeGridView = await _themeService.load(
         Store.keyIsLargeGridView, Store.defaultIsLargeGridView);
     _viewIndex =
@@ -102,6 +104,9 @@ class ThemeController with ChangeNotifier {
         Store.keyLightIsWhite, Store.defaultLightIsWhite);
     _darkIsTrueBlack = await _themeService.load(
         Store.keyDarkIsTrueBlack, Store.defaultDarkIsTrueBlack);
+    _useCustomDarkColorsForSeed = await _themeService.load(
+        Store.keyUseCustomDarkColorsForSeed,
+        Store.defaultUseCustomDarkColorsForSeed);
     _useToDarkMethod = await _themeService.load(
         Store.keyUseToDarkMethod, Store.defaultUseToDarkMethod);
     _darkMethodLevel = await _themeService.load(
@@ -157,6 +162,9 @@ class ThemeController with ChangeNotifier {
         Store.keyUseM3ErrorColors, Store.defaultUseM3ErrorColors);
     //
     // InputDecorator SETTINGS.
+    _inputDecoratorSchemeColor = await _themeService.load(
+        Store.keyInputDecoratorSchemeColor,
+        Store.defaultInputDecoratorSchemeColor);
     _inputDecoratorIsFilled = await _themeService.load(
         Store.keyInputDecoratorIsFilled, Store.defaultInputDecoratorIsFilled);
     _inputDecoratorBorderType = await _themeService.load(
@@ -165,9 +173,9 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorUnfocusedHasBorder = await _themeService.load(
         Store.keyInputDecoratorUnfocusedHasBorder,
         Store.defaultInputDecoratorUnfocusedHasBorder);
-    _inputDecoratorSchemeColor = await _themeService.load(
-        Store.keyInputDecoratorSchemeColor,
-        Store.defaultInputDecoratorSchemeColor);
+    _inputDecoratorUnfocusedBorderIsColored = await _themeService.load(
+        Store.keyInputDecoratorUnfocusedBorderIsColored,
+        Store.defaultInputDecoratorUnfocusedBorderIsColored);
     //
     // AppBar SETTINGS.
     _lightAppBarStyle = await _themeService.load(
@@ -341,6 +349,7 @@ class ThemeController with ChangeNotifier {
     await setThemeMode(Store.defaultThemeMode, false);
     await setUseFlexColorScheme(Store.defaultUseFlexColorScheme, false);
     await setUseSubThemes(Store.defaultUseSubThemes, false);
+    await setUseFlutterDefaults(Store.defaultUseFlutterDefaults, false);
     // The IsLargeGridView and ViewIndex settings are never reset to default in
     // a reset, we always keep the current screen and panel on page/panel view.
     await setUseTextTheme(Store.defaultUseTextTheme, false);
@@ -362,6 +371,8 @@ class ThemeController with ChangeNotifier {
     await setSwapDarkColors(Store.defaultSwapDarkColors, false);
     await setLightIsWhite(Store.defaultLightIsWhite, false);
     await setDarkIsTrueBlack(Store.defaultDarkIsTrueBlack, false);
+    await setUseCustomDarkColorsForSeed(
+        Store.defaultUseCustomDarkColorsForSeed, false);
     await setUseToDarkMethod(Store.defaultUseToDarkMethod, false);
     await setDarkMethodLevel(Store.defaultDarkMethodLevel, false);
     await setBlendLightOnColors(Store.defaultBlendLightOnColors, false);
@@ -393,13 +404,15 @@ class ThemeController with ChangeNotifier {
     await setUseM3ErrorColors(Store.defaultUseM3ErrorColors, false);
     //
     // InputDecorator SETTINGS.
+    await setInputDecoratorSchemeColor(
+        Store.defaultInputDecoratorSchemeColor, false);
     await setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
     await setInputDecoratorBorderType(
         Store.defaultInputDecoratorBorderType, false);
     await setInputDecoratorUnfocusedHasBorder(
         Store.defaultInputDecoratorUnfocusedHasBorder, false);
-    await setInputDecoratorSchemeColor(
-        Store.defaultInputDecoratorSchemeColor, false);
+    await setInputDecoratorUnfocusedBorderIsColored(
+        Store.defaultInputDecoratorUnfocusedBorderIsColored, false);
     //
     // AppBar SETTINGS.
     await setLightAppBarStyle(Store.defaultLightAppBarStyle, false);
@@ -549,6 +562,16 @@ class ThemeController with ChangeNotifier {
     _useSubThemes = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyUseSubThemes, value);
+  }
+
+  late bool _useFlutterDefaults;
+  bool get useFlutterDefaults => _useFlutterDefaults;
+  Future<void> setUseFlutterDefaults(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useFlutterDefaults) return;
+    _useFlutterDefaults = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyUseFlutterDefaults, value);
   }
 
   late bool _isLargeGridView;
@@ -733,6 +756,17 @@ class ThemeController with ChangeNotifier {
     _darkIsTrueBlack = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyDarkIsTrueBlack, value);
+  }
+
+  late bool _useCustomDarkColorsForSeed;
+  bool get useCustomDarkColorsForSeed => _useCustomDarkColorsForSeed;
+  Future<void> setUseCustomDarkColorsForSeed(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useCustomDarkColorsForSeed) return;
+    _useCustomDarkColorsForSeed = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyUseCustomDarkColorsForSeed, value);
   }
 
   late bool _useToDarkMethod;
@@ -989,6 +1023,16 @@ class ThemeController with ChangeNotifier {
   // InputDecorator SETTINGS.
   // ===========================================================================
 
+  late SchemeColor? _inputDecoratorSchemeColor;
+  SchemeColor? get inputDecoratorSchemeColor => _inputDecoratorSchemeColor;
+  Future<void> setInputDecoratorSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _inputDecoratorSchemeColor) return;
+    _inputDecoratorSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyInputDecoratorSchemeColor, value);
+  }
+
   late bool _inputDecoratorIsFilled;
   bool get inputDecoratorIsFilled => _inputDecoratorIsFilled;
   Future<void> setInputDecoratorIsFilled(bool? value,
@@ -1023,14 +1067,17 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyInputDecoratorUnfocusedHasBorder, value);
   }
 
-  late SchemeColor? _inputDecoratorSchemeColor;
-  SchemeColor? get inputDecoratorSchemeColor => _inputDecoratorSchemeColor;
-  Future<void> setInputDecoratorSchemeColor(SchemeColor? value,
+  late bool _inputDecoratorUnfocusedBorderIsColored;
+  bool get inputDecoratorUnfocusedBorderIsColored =>
+      _inputDecoratorUnfocusedBorderIsColored;
+  Future<void> setInputDecoratorUnfocusedBorderIsColored(bool? value,
       [bool notify = true]) async {
-    if (value == _inputDecoratorSchemeColor) return;
-    _inputDecoratorSchemeColor = value;
+    if (value == null) return;
+    if (value == _inputDecoratorUnfocusedBorderIsColored) return;
+    _inputDecoratorUnfocusedBorderIsColored = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyInputDecoratorSchemeColor, value);
+    await _themeService.save(
+        Store.keyInputDecoratorUnfocusedBorderIsColored, value);
   }
 
   // AppBar SETTINGS.
