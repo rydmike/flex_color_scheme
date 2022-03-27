@@ -24,9 +24,9 @@ class NavigationRailSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double navBarOpacity =
+    final double navRailOpacity =
         controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.bottomNavigationBarOpacity
+            ? controller.navigationRailOpacity
             : 1;
     final double navBarElevation =
         controller.useSubThemes && controller.useFlexColorScheme
@@ -52,20 +52,16 @@ class NavigationRailSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const ListTile(
-          title: Text('Background opacity'),
-          subtitle: Text('Opacity on background, also used by '
-              'navigation bars. APIs have own properties'),
-        ),
         ListTile(
-          title: Slider.adaptive(
+          title: const Text('Background opacity'),
+          subtitle: Slider.adaptive(
             max: 100,
             divisions: 100,
-            label: (navBarOpacity * 100).toStringAsFixed(0),
-            value: navBarOpacity * 100,
+            label: (navRailOpacity * 100).toStringAsFixed(0),
+            value: navRailOpacity * 100,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setBottomNavigationBarOpacity(value / 100);
+                    controller.setNavigationRailOpacity(value / 100);
                   }
                 : null,
           ),
@@ -80,7 +76,7 @@ class NavigationRailSettings extends StatelessWidget {
                 ),
                 Text(
                   // ignore: lines_longer_than_80_chars
-                  '${(navBarOpacity * 100).toStringAsFixed(0)} %',
+                  '${(navRailOpacity * 100).toStringAsFixed(0)} %',
                   style: Theme.of(context)
                       .textTheme
                       .caption!

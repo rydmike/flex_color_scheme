@@ -38,7 +38,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
-    final double navBarOpacity = controller.sysBarOpacity;
+    final double navBarOpacity = controller.sysNavBarOpacity;
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -91,12 +91,12 @@ class AndroidNavigationBarSettings extends StatelessWidget {
         ListTile(
           title: const Text('Android system navigation bar style'),
           subtitle: Text('Using themedSystemNavigationBar\n'
-              '${explainStyle(controller.navBarStyle, isLight)}'),
+              '${explainStyle(controller.sysNavBarStyle, isLight)}'),
         ),
         ListTile(
           trailing: SystemNavBarStyleButtons(
-            style: controller.navBarStyle,
-            onChanged: controller.setNavBarStyle,
+            style: controller.sysNavBarStyle,
+            onChanged: controller.setSysNavBarStyle,
           ),
         ),
         // TODO(rydmike): Put back when issue #100027 is resolved.

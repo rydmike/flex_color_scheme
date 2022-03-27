@@ -207,12 +207,12 @@ class ThemeController with ChangeNotifier {
         Store.keyTabBarItemSchemeColor, Store.defaultTabBarItemSchemeColor);
     //
     // Android System Navigator bar SETTINGS.
-    _navBarStyle = await _themeService.load(
-        Store.keyNavBarStyle, Store.defaultNavBarStyle);
-    _sysBarOpacity = await _themeService.load(
-        Store.keySysBarOpacity, Store.defaultSysBarOpacity);
-    _useNavDivider = await _themeService.load(
-        Store.keyUseNavDivider, Store.defaultUseNavDivider);
+    _sysNavBarStyle = await _themeService.load(
+        Store.keySysNavBarStyle, Store.defaultSysNavBarStyle);
+    _sysNavBarOpacity = await _themeService.load(
+        Store.keySysNavBarOpacity, Store.defaultSysBarOpacity);
+    _useSysNavDivider = await _themeService.load(
+        Store.keyUseSysNavDivider, Store.defaultUseSysNavDivider);
     //
     // BottomNavigationBar SETTINGS.
     _bottomNavigationBarOpacity = await _themeService.load(
@@ -229,6 +229,11 @@ class ThemeController with ChangeNotifier {
         Store.defaultBottomNavShowUnselectedLabels);
     //
     // NavigationBar SETTINGS.
+    _navBarBackgroundSchemeColor = await _themeService.load(
+        Store.keyNavBarBackgroundSchemeColor,
+        Store.defaultNavBarBackgroundSchemeColor);
+    _navigationBarOpacity = await _themeService.load(
+        Store.keyNavigationBarOpacity, Store.defaultNavigationBarOpacity);
     _navBarSelectedSchemeColor = await _themeService.load(
         Store.keyNavSelectedSchemeColor, Store.defaultNavSelectedSchemeColor);
     _navUnselectedSchemeColor = await _themeService.load(
@@ -240,11 +245,10 @@ class ThemeController with ChangeNotifier {
         Store.keyNavBarMuteUnselected, Store.defaultNavBarMuteUnselected);
     _navBarLabelBehavior = await _themeService.load(
         Store.keyNavBarLabelBehavior, Store.defaultNavBarLabelBehavior);
-    _navBarBackgroundSchemeColor = await _themeService.load(
-        Store.keyNavBarBackgroundSchemeColor,
-        Store.defaultNavBarBackgroundSchemeColor);
     //
     // NavigationRail SETTINGS.
+    _navigationRailOpacity = await _themeService.load(
+        Store.keyNavigationRailOpacity, Store.defaultNavigationRailOpacity);
     _navRailLabelType = await _themeService.load(
         Store.keyNavRailLabelType, Store.defaultNavRailLabelType);
     _useIndicator = await _themeService.load(
@@ -442,9 +446,9 @@ class ThemeController with ChangeNotifier {
     await setTabBarItemSchemeColor(Store.defaultTabBarItemSchemeColor, false);
     //
     // Android System Navigator bar SETTINGS.
-    await setNavBarStyle(Store.defaultNavBarStyle, false);
+    await setSysNavBarStyle(Store.defaultSysNavBarStyle, false);
     await setSysBarOpacity(Store.defaultSysBarOpacity, false);
-    await setUseNavDivider(Store.defaultUseNavDivider, false);
+    await setUseSysNavDivider(Store.defaultUseSysNavDivider, false);
     //
     // BottomNavigationBar SETTINGS.
     await setBottomNavigationBarOpacity(
@@ -457,6 +461,9 @@ class ThemeController with ChangeNotifier {
         Store.defaultBottomNavShowUnselectedLabels, false);
     //
     // NavigationBar SETTINGS.
+    await setNavBarBackgroundSchemeColor(
+        Store.defaultNavBarBackgroundSchemeColor, false);
+    await setNavigationBarOpacity(Store.defaultNavigationBarOpacity, false);
     await setNavBarSelectedSchemeColor(
         Store.defaultNavSelectedSchemeColor, false);
     await setNavUnselectedSchemeColor(
@@ -464,10 +471,9 @@ class ThemeController with ChangeNotifier {
     await setNavBarHighlight(Store.defaultNavBarHighlight, false);
     await setNavBarMuteUnselected(Store.defaultNavBarMuteUnselected, false);
     await setNavBarLabelBehavior(Store.defaultNavBarLabelBehavior, false);
-    await setNavBarBackgroundSchemeColor(
-        Store.defaultNavBarBackgroundSchemeColor, false);
     //
     // NavigationRail SETTINGS.
+    await setNavigationRailOpacity(Store.defaultNavigationRailOpacity, false);
     await setNavRailLabelType(Store.defaultNavRailLabelType, false);
     await setUseIndicator(Store.defaultUseIndicator, false);
     //
@@ -1242,35 +1248,35 @@ class ThemeController with ChangeNotifier {
   // Android System Navigator bar SETTINGS.
   // ===========================================================================
 
-  late FlexSystemNavBarStyle _navBarStyle;
-  FlexSystemNavBarStyle get navBarStyle => _navBarStyle;
-  Future<void> setNavBarStyle(FlexSystemNavBarStyle? value,
+  late FlexSystemNavBarStyle _sysNavBarStyle;
+  FlexSystemNavBarStyle get sysNavBarStyle => _sysNavBarStyle;
+  Future<void> setSysNavBarStyle(FlexSystemNavBarStyle? value,
       [bool notify = true]) async {
     if (value == null) return;
-    if (value == _navBarStyle) return;
-    _navBarStyle = value;
+    if (value == _sysNavBarStyle) return;
+    _sysNavBarStyle = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyNavBarStyle, value);
+    await _themeService.save(Store.keySysNavBarStyle, value);
   }
 
-  late double _sysBarOpacity;
-  double get sysBarOpacity => _sysBarOpacity;
+  late double _sysNavBarOpacity;
+  double get sysNavBarOpacity => _sysNavBarOpacity;
   Future<void> setSysBarOpacity(double? value, [bool notify = true]) async {
     if (value == null) return;
-    if (value == _sysBarOpacity) return;
-    _sysBarOpacity = value;
+    if (value == _sysNavBarOpacity) return;
+    _sysNavBarOpacity = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keySysBarOpacity, value);
+    await _themeService.save(Store.keySysNavBarOpacity, value);
   }
 
-  late bool _useNavDivider;
-  bool get useNavDivider => _useNavDivider;
-  Future<void> setUseNavDivider(bool? value, [bool notify = true]) async {
+  late bool _useSysNavDivider;
+  bool get useSysNavDivider => _useSysNavDivider;
+  Future<void> setUseSysNavDivider(bool? value, [bool notify = true]) async {
     if (value == null) return;
-    if (value == _useNavDivider) return;
-    _useNavDivider = value;
+    if (value == _useSysNavDivider) return;
+    _useSysNavDivider = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyUseNavDivider, value);
+    await _themeService.save(Store.keyUseSysNavDivider, value);
   }
 
   // BottomNavigationBar SETTINGS.
@@ -1322,6 +1328,27 @@ class ThemeController with ChangeNotifier {
 
   // NavigationBar SETTINGS.
   // ===========================================================================
+
+  late SchemeColor? _navBarBackgroundSchemeColor;
+  SchemeColor? get navBarBackgroundSchemeColor => _navBarBackgroundSchemeColor;
+  Future<void> setNavBarBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _navBarBackgroundSchemeColor) return;
+    _navBarBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavBarBackgroundSchemeColor, value);
+  }
+
+  late double _navigationBarOpacity;
+  double get navigationBarOpacity => _navigationBarOpacity;
+  Future<void> setNavigationBarOpacity(double? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _navigationBarOpacity) return;
+    _navigationBarOpacity = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavigationBarOpacity, value);
+  }
 
   late SchemeColor? _navBarSelectedSchemeColor;
   SchemeColor? get navBarSelectedSchemeColor => _navBarSelectedSchemeColor;
@@ -1375,18 +1402,19 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyNavBarLabelBehavior, value);
   }
 
-  late SchemeColor? _navBarBackgroundSchemeColor;
-  SchemeColor? get navBarBackgroundSchemeColor => _navBarBackgroundSchemeColor;
-  Future<void> setNavBarBackgroundSchemeColor(SchemeColor? value,
-      [bool notify = true]) async {
-    if (value == _navBarBackgroundSchemeColor) return;
-    _navBarBackgroundSchemeColor = value;
-    if (notify) notifyListeners();
-    await _themeService.save(Store.keyNavBarBackgroundSchemeColor, value);
-  }
-
   // NavigationRail SETTINGS.
   // ===========================================================================
+
+  late double _navigationRailOpacity;
+  double get navigationRailOpacity => _navigationRailOpacity;
+  Future<void> setNavigationRailOpacity(double? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _navigationRailOpacity) return;
+    _navigationRailOpacity = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavigationRailOpacity, value);
+  }
 
   late NavigationRailLabelType _navRailLabelType;
   NavigationRailLabelType get navRailLabelType => _navRailLabelType;
