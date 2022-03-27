@@ -289,8 +289,9 @@ class ThemeController with ChangeNotifier {
         Store.defaultMaterialButtonSchemeColor);
     //
     // Toggleable SETTINGS.
-    _unselectedIsColored = await _themeService.load(
-        Store.keyUnselectedIsColored, Store.defaultUnselectedIsColored);
+    _unselectedToggleIsColored = await _themeService.load(
+        Store.keyUnselectedToggleIsColored,
+        Store.defaultUnselectedToggleIsColored);
     _switchSchemeColor = await _themeService.load(
         Store.keySwitchSchemeColor, Store.defaultSwitchSchemeColor);
     _checkboxSchemeColor = await _themeService.load(
@@ -507,7 +508,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultMaterialButtonSchemeColor, false);
     //
     // Toggleable SETTINGS.
-    await setUnselectedIsColored(Store.defaultUnselectedIsColored, false);
+    await setUnselectedToggleIsColored(
+        Store.defaultUnselectedToggleIsColored, false);
     await setSwitchSchemeColor(Store.defaultSwitchSchemeColor, false);
     await setCheckboxSchemeColor(Store.defaultCheckboxSchemeColor, false);
     await setRadioSchemeColor(Store.defaultRadioSchemeColor, false);
@@ -1563,14 +1565,15 @@ class ThemeController with ChangeNotifier {
   // Toggleable SETTINGS.
   // ===========================================================================
 
-  late bool _unselectedIsColored;
-  bool get unselectedIsColored => _unselectedIsColored;
-  Future<void> setUnselectedIsColored(bool? value, [bool notify = true]) async {
+  late bool _unselectedToggleIsColored;
+  bool get unselectedToggleIsColored => _unselectedToggleIsColored;
+  Future<void> setUnselectedToggleIsColored(bool? value,
+      [bool notify = true]) async {
     if (value == null) return;
-    if (value == _unselectedIsColored) return;
-    _unselectedIsColored = value;
+    if (value == _unselectedToggleIsColored) return;
+    _unselectedToggleIsColored = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyUnselectedIsColored, value);
+    await _themeService.save(Store.keyUnselectedToggleIsColored, value);
   }
 
   late SchemeColor? _switchSchemeColor;

@@ -91,7 +91,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,
             radioSchemeColor: controller.radioSchemeColor,
-            unselectedToggleIsColored: controller.unselectedIsColored,
+            unselectedToggleIsColored: controller.unselectedToggleIsColored,
             //
             inputDecoratorSchemeColor: controller.inputDecoratorSchemeColor,
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
