@@ -400,10 +400,11 @@ String generateThemeDartCode(ThemeController controller) {
           .navBarMuteUnselected
       ? ''
       : '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
-  final String navigationBarHighlightSchemeColor = controller.navBarHighlight ==
+  final String navigationBarHighlightSchemeColor = controller
+              .navBarIndicatorSchemeColor ==
           SchemeColor.primary
       ? ''
-      : '    navigationBarHighlightSchemeColor: ${controller.navBarHighlight},\n';
+      : '    navigationBarHighlightSchemeColor: ${controller.navBarIndicatorSchemeColor},\n';
   final String navigationBarBackgroundSchemeColor = controller
               .navBarBackgroundSchemeColor ==
           SchemeColor.background
@@ -450,10 +451,10 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    navigationRailUseIndicator: ${controller.navRailUseIndicator},\n';
   final String navigationRailIndicatorSchemeColor = controller
-              .navBarHighlight ==
+              .navRailIndicatorSchemeColor ==
           SchemeColor.primary
       ? ''
-      : '    navigationRailIndicatorSchemeColor: ${controller.navBarHighlight},\n';
+      : '    navigationRailIndicatorSchemeColor: ${controller.navRailIndicatorSchemeColor},\n';
   final String navigationRailBackgroundSchemeColor = controller
               .navRailBackgroundSchemeColor ==
           SchemeColor.background

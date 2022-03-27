@@ -87,16 +87,15 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
-          subtitle: const Text('Shared setting in this app, but APIs have '
-              'own properties'),
           labelForDefault: 'null (secondary)',
-          index: controller.navBarHighlight?.index ?? -1,
+          index: controller.navBarIndicatorSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarHighlight(null);
+                    controller.setNavBarIndicatorSchemeColor(null);
                   } else {
-                    controller.setNavBarHighlight(SchemeColor.values[index]);
+                    controller.setNavBarIndicatorSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,

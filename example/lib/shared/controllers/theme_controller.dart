@@ -244,8 +244,9 @@ class ThemeController with ChangeNotifier {
     _navUnselectedSchemeColor = await _themeService.load(
         Store.keyNavUnselectedSchemeColor,
         Store.defaultNavUnselectedSchemeColor);
-    _navBarHighlight = await _themeService.load(
-        Store.keyNavBarHighlight, Store.defaultNavBarHighlight);
+    _navBarIndicatorSchemeColor = await _themeService.load(
+        Store.keyNavBarIndicatorSchemeColor,
+        Store.defaultNavBarIndicatorSchemeColor);
     _navBarMuteUnselected = await _themeService.load(
         Store.keyNavBarMuteUnselected, Store.defaultNavBarMuteUnselected);
     _navBarLabelBehavior = await _themeService.load(
@@ -261,6 +262,9 @@ class ThemeController with ChangeNotifier {
         Store.keyNavRailLabelType, Store.defaultNavRailLabelType);
     _navRailUseIndicator = await _themeService.load(
         Store.keyNavRailUseIndicator, Store.defaultNavRailUseIndicator);
+    _navRailIndicatorSchemeColor = await _themeService.load(
+        Store.keyNavRailIndicatorSchemeColor,
+        Store.defaultNavRailIndicatorSchemeColor);
     //
     // Button SETTINGS.
     _textButtonSchemeColor = await _themeService.load(
@@ -480,7 +484,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavSelectedSchemeColor, false);
     await setNavUnselectedSchemeColor(
         Store.defaultNavUnselectedSchemeColor, false);
-    await setNavBarHighlight(Store.defaultNavBarHighlight, false);
+    await setNavBarIndicatorSchemeColor(
+        Store.defaultNavBarIndicatorSchemeColor, false);
     await setNavBarMuteUnselected(Store.defaultNavBarMuteUnselected, false);
     await setNavBarLabelBehavior(Store.defaultNavBarLabelBehavior, false);
     //
@@ -490,6 +495,8 @@ class ThemeController with ChangeNotifier {
     await setNavRailOpacity(Store.defaultNavRailOpacity, false);
     await setNavRailLabelType(Store.defaultNavRailLabelType, false);
     await setNavRailUseIndicator(Store.defaultNavRailUseIndicator, false);
+    await setNavRailIndicatorSchemeColor(
+        Store.defaultNavRailIndicatorSchemeColor, false);
     //
     // Button SETTINGS.
     await setTextButtonSchemeColor(Store.defaultTextButtonSchemeColor, false);
@@ -1406,14 +1413,14 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyNavUnselectedSchemeColor, value);
   }
 
-  late SchemeColor? _navBarHighlight;
-  SchemeColor? get navBarHighlight => _navBarHighlight;
-  Future<void> setNavBarHighlight(SchemeColor? value,
+  late SchemeColor? _navBarIndicatorSchemeColor;
+  SchemeColor? get navBarIndicatorSchemeColor => _navBarIndicatorSchemeColor;
+  Future<void> setNavBarIndicatorSchemeColor(SchemeColor? value,
       [bool notify = true]) async {
-    if (value == _navBarHighlight) return;
-    _navBarHighlight = value;
+    if (value == _navBarIndicatorSchemeColor) return;
+    _navBarIndicatorSchemeColor = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyNavBarHighlight, value);
+    await _themeService.save(Store.keyNavBarIndicatorSchemeColor, value);
   }
 
   late bool _navBarMuteUnselected;
@@ -1480,6 +1487,16 @@ class ThemeController with ChangeNotifier {
     _navRailUseIndicator = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyNavRailUseIndicator, value);
+  }
+
+  late SchemeColor? _navRailIndicatorSchemeColor;
+  SchemeColor? get navRailIndicatorSchemeColor => _navRailIndicatorSchemeColor;
+  Future<void> setNavRailIndicatorSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _navRailIndicatorSchemeColor) return;
+    _navRailIndicatorSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavRailIndicatorSchemeColor, value);
   }
 
   // Button SETTINGS.

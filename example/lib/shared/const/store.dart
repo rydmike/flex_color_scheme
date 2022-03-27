@@ -477,11 +477,13 @@ class Store {
   static const SchemeColor defaultNavUnselectedSchemeColor =
       SchemeColor.onSurface;
 
-  // Key used to read and save the navBarHighlight value.
-  static const String keyNavBarHighlight = 'navBarHighlight';
-  // Default value for the navBarHighlight, also used to reset settings.
-  // We use NULL as default, on nullable settings.
-  static const SchemeColor defaultNavBarHighlight = SchemeColor.primary;
+  // Key used to read and save the navBarIndicatorSchemeColor value.
+  static const String keyNavBarIndicatorSchemeColor =
+      'navBarIndicatorSchemeColor';
+  // Default value for the navBarIndicatorSchemeColor, also used to reset
+  // settings. We use NULL as default, on nullable settings.
+  static const SchemeColor defaultNavBarIndicatorSchemeColor =
+      SchemeColor.primary;
 
   // Key used to read and save the navBarMuteUnselected value.
   static const String keyNavBarMuteUnselected = 'navBarMuteUnselected';
@@ -522,6 +524,14 @@ class Store {
   static const String keyNavRailUseIndicator = 'navRailUseIndicator';
   // Default value for the navRailUseIndicator, also to reset settings.
   static const bool defaultNavRailUseIndicator = true;
+
+  // Key used to read and save the navRailIndicatorSchemeColor value.
+  static const String keyNavRailIndicatorSchemeColor =
+      'navRailIndicatorSchemeColor';
+  // Default value for the navRailIndicatorSchemeColor, also used to reset
+  // settings. We use NULL as default, on nullable settings.
+  static const SchemeColor defaultNavRailIndicatorSchemeColor =
+      SchemeColor.primary;
 
   // Button SETTINGS.
   // ===========================================================================
