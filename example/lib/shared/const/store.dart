@@ -591,10 +591,11 @@ class Store {
   // Toggleable SETTINGS.
   // ===========================================================================
 
-  // Key used to read and save the unselectedIsColored value.
-  static const String keyUnselectedIsColored = 'unselectedIsColored';
-  // Default value for the unselectedIsColored, also to reset settings.
-  static const bool defaultUnselectedIsColored = true;
+  // Key used to read and save the unselectedToggleIsColored value.
+  static const String keyUnselectedToggleIsColored =
+      'unselectedToggleIsColored';
+  // Default value for the unselectedToggleIsColored, also to reset settings.
+  static const bool defaultUnselectedToggleIsColored = false;
 
   // Key used to read and save the switchSchemeColor value.
   static const String keySwitchSchemeColor = 'switchSchemeColor';

@@ -241,8 +241,8 @@ String generateThemeDartCode(ThemeController controller) {
               controller.radioSchemeColor == null
           ? ''
           : '    radioSchemeColor: ${controller.radioSchemeColor},\n';
-  final String unselectedIsColored = controller.unselectedIsColored
-      ? '    unselectedToggleIsColored: ${controller.unselectedIsColored},\n'
+  final String unselectedIsColored = controller.unselectedToggleIsColored
+      ? '    unselectedToggleIsColored: ${controller.unselectedToggleIsColored},\n'
       : '';
   //
   // Input decorator
