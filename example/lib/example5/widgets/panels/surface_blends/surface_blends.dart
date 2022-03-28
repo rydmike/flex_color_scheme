@@ -61,10 +61,10 @@ class SurfaceBlends extends StatelessWidget {
           title: Text('Blended surfaces and backgrounds'),
           isThreeLine: true,
           subtitle: Text(
-            'Material 2 design use white and almost black surface colors. '
+            'Material Design 2 uses white and almost black surface colors. '
             'The M2 guide mentions using surfaces with different alpha '
             'blends, by blending primary color into different surfaces. '
-            'Blend mode and level does that.\n'
+            'Blend mode and level does this.\n'
             '\n'
             'Material Design 3 introduces a new color system, where a hint '
             'of primary color is also used on surfaces via neutral tonal '

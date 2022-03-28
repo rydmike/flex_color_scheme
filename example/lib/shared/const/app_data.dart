@@ -23,7 +23,7 @@ class AppData {
   static const String version = '$versionMajor.0.0-dev.2';
   static const String packageVersion = 'FlexColorScheme package $version';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
-  static const String flutterVersion = 'stable v2.10.3';
+  static const String flutterVersion = 'stable v2.10.4';
   static const String copyright = '© 2020, 2021, 2022';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
