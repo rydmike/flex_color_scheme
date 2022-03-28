@@ -41,30 +41,16 @@ class AppData {
   // hidden in the Drawer and rail, also on phones. This size was mostly chosen
   // based on what worked well for the content in the staggered column view.
   static const double desktopBreakpoint = 1150;
+  // This breakpoint is only used to further increase margins and insets on
+  // very large desktops.
   static const double bigDesktopBreakpoint = 2800;
-
   // The minimum media width treated as a phone device in this demo.
   static const double phoneBreakpoint = 600;
-
-  // The height when we want to pin the panel or color selector, instead of
-  // letting it float and snap back.
-  static const double pinnedSelector = 1000;
-
-  // Edge padding insets for page content on the screen.
+  // Edge insets and margins for content at above breakpoints.
   static const double edgeInsetsPhone = 8;
   static const double edgeInsetsTablet = 12;
   static const double edgeInsetsDesktop = 18;
-  // Used by grid layout when in >= 4 column layout mode.
   static const double edgeInsetsBigDesktop = 24;
-
-  // The width, and height of the scrolling button panel buttons in example 5
-  // panel view, and how much it shrinks in both dimensions when we go to
-  // phone size.
-  static const double panelButtonWidth = 115;
-  static const double panelButtonHeight = 100;
-  static const double panelButtonPhoneWidthReduce = -16;
-  static const double panelButtonPhoneHeightReduce = -30;
-
   // Responsive insets based on width. The width may be from LayoutBuilder or
   // MediaQuery, depending on what is appropriate for the use case.
   static double responsiveInsets(double width) {
@@ -73,6 +59,16 @@ class AppData {
     if (width < bigDesktopBreakpoint) return edgeInsetsDesktop;
     return edgeInsetsBigDesktop;
   }
+
+  // The height when we want to pin the panel or color selector, instead of
+  // letting it float and snap back.
+  static const double pinnedSelector = 1000;
+  // The width, and height of the scrolling panel buttons in Themes Playground
+  // page view, and how much it shrinks when we go to phone size.
+  static const double panelButtonWidth = 115;
+  static const double panelButtonHeight = 100;
+  static const double panelButtonPhoneWidthReduce = -16;
+  static const double panelButtonPhoneHeightReduce = -30;
 
   // Returns the title of the MaterialApp. Used to set title on pages to
   // same that is defined in each example as its app name. Handy as we only
