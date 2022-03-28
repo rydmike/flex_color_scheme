@@ -31,10 +31,7 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return ThemeSelector(
-      controller: controller,
-      usedInHeaderDelegate: true,
-    );
+    return ThemeSelectorDelegateWrapper(controller: controller);
   }
 
   @override
@@ -56,6 +53,40 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
       FloatingHeaderSnapConfiguration();
 }
 
+// A wrapper for the ThemeSelector when it is used in persistent header
+// delegate.
+//
+// The wrapper is used to add the correct padding and frosted glass effect
+// when it is used as a SliverPersistentHeaderDelegate in the Masonry grid
+// in a custom scroll view.
+class ThemeSelectorDelegateWrapper extends StatelessWidget {
+  const ThemeSelectorDelegateWrapper({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+  final ThemeController controller;
+  @override
+  Widget build(BuildContext context) {
+    final MediaQueryData media = MediaQuery.of(context);
+    final double margins = AppData.responsiveInsets(media.size.width);
+    return Material(
+      color: Theme.of(context).colorScheme.primary.withAlpha(0x38),
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: media.padding.top + margins,
+              bottom: margins,
+            ),
+            child: ThemeSelector(controller: controller),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 // A header card wrapped, without heading. Used to select them colors using
 // the Theme Selector and can also turn ON/OFF FlexColorScheme and component
 // themes.
@@ -63,22 +94,16 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 // Used at the top of the Masonry grid view and between page and panel page
 // selector on the page view.
 class ThemeSelector extends StatelessWidget {
-  const ThemeSelector({
-    Key? key,
-    required this.controller,
-    this.usedInHeaderDelegate = false,
-  }) : super(key: key);
+  const ThemeSelector({Key? key, required this.controller}) : super(key: key);
 
   final ThemeController controller;
-  final bool usedInHeaderDelegate;
 
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
-
-    Widget child = HeaderCard(
+    return HeaderCard(
       margin: EdgeInsets.symmetric(horizontal: margins),
       child: Column(
         children: <Widget>[
@@ -89,107 +114,39 @@ class ThemeSelector extends StatelessWidget {
           SizedBox(
             height: 52,
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: SwitchListTileAdaptive(
-                      contentPadding: isPhone
-                          ? const EdgeInsetsDirectional.only(start: 16, end: 0)
-                          : null,
-                      title: const Text('Flex\u200BColor\u200BScheme'),
-                      dense: isPhone,
-                      value: controller.useFlexColorScheme,
-                      onChanged: controller.setUseFlexColorScheme,
-                    ),
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: SwitchListTileAdaptive(
+                    contentPadding: isPhone
+                        ? const EdgeInsetsDirectional.only(start: 16, end: 0)
+                        : null,
+                    title: const Text('Flex\u200BColor\u200BScheme'),
+                    dense: isPhone,
+                    value: controller.useFlexColorScheme,
+                    onChanged: controller.setUseFlexColorScheme,
                   ),
-                  Expanded(
-                    child: SwitchListTileAdaptive(
-                      contentPadding: isPhone
-                          ? const EdgeInsets.symmetric(horizontal: 8)
-                          : null,
-                      dense: isPhone,
-                      title: const Text('Compo\u200Bnent themes'),
-                      value: controller.useSubThemes &&
-                          controller.useFlexColorScheme,
-                      onChanged: controller.useFlexColorScheme
-                          ? controller.setUseSubThemes
-                          : null,
-                    ),
+                ),
+                Expanded(
+                  child: SwitchListTileAdaptive(
+                    contentPadding: isPhone
+                        ? const EdgeInsets.symmetric(horizontal: 8)
+                        : null,
+                    dense: isPhone,
+                    title: const Text('Compo\u200Bnent themes'),
+                    value: controller.useSubThemes &&
+                        controller.useFlexColorScheme,
+                    onChanged: controller.useFlexColorScheme
+                        ? controller.setUseSubThemes
+                        : null,
                   ),
-                ]),
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
-
-    if (usedInHeaderDelegate) {
-      child = Material(
-        color: Theme.of(context).colorScheme.primary.withAlpha(0x38),
-        child: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Padding(
-              padding: EdgeInsets.only(
-                top: media.padding.top + margins,
-                bottom: margins,
-              ),
-              child: child,
-            ),
-          ),
-        ),
-      );
-    }
-    return child;
-
-    // return HeaderCard(
-    //   margin: usedInHeaderDelegate
-    //       ? EdgeInsets.only(
-    //           top: media.padding.top + margins,
-    //           bottom: margins,
-    //         )
-    //       : EdgeInsets.zero,
-    //   child: Column(
-    //     children: <Widget>[
-    //       Padding(
-    //         padding: EdgeInsets.fromLTRB(0, margins, 0, 0),
-    //         child: InputColorsSelector(controller: controller),
-    //       ),
-    //       SizedBox(
-    //         height: 52,
-    //         child: Row(
-    //             mainAxisAlignment: MainAxisAlignment.start,
-    //             crossAxisAlignment: CrossAxisAlignment.start,
-    //             children: <Widget>[
-    //               Expanded(
-    //                 child: SwitchListTileAdaptive(
-    //                   contentPadding: isPhone
-    //                       ? const EdgeInsetsDirectional.only(start: 16, end: 0)
-    //                       : null,
-    //                   title: const Text('Flex\u200BColor\u200BScheme'),
-    //                   dense: isPhone,
-    //                   value: controller.useFlexColorScheme,
-    //                   onChanged: controller.setUseFlexColorScheme,
-    //                 ),
-    //               ),
-    //               Expanded(
-    //                 child: SwitchListTileAdaptive(
-    //                   contentPadding: isPhone
-    //                       ? const EdgeInsets.symmetric(horizontal: 8)
-    //                       : null,
-    //                   dense: isPhone,
-    //                   title: const Text('Compo\u200Bnent themes'),
-    //                   value: controller.useSubThemes &&
-    //                       controller.useFlexColorScheme,
-    //                   onChanged: controller.useFlexColorScheme
-    //                       ? controller.setUseSubThemes
-    //                       : null,
-    //                 ),
-    //               ),
-    //             ]),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }
