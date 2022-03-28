@@ -110,6 +110,9 @@ class ThemeController with ChangeNotifier {
         Store.keyUseDarkColorsForSeed, Store.defaultUseDarkColorsForSeed);
     _useToDarkMethod = await _themeService.load(
         Store.keyUseToDarkMethod, Store.defaultUseToDarkMethod);
+    _toDarkSwapPrimaryAndContainer = await _themeService.load(
+        Store.keyToDarkSwapPrimaryAndContainer,
+        Store.defaultToDarkSwapPrimaryAndContainer);
     _darkMethodLevel = await _themeService.load(
         Store.keyDarkMethodLevel, Store.defaultDarkMethodLevel);
     _blendLightOnColors = await _themeService.load(
@@ -401,6 +404,8 @@ class ThemeController with ChangeNotifier {
     await setDarkIsTrueBlack(Store.defaultDarkIsTrueBlack, false);
     await setUseDarkColorsForSeed(Store.defaultUseDarkColorsForSeed, false);
     await setUseToDarkMethod(Store.defaultUseToDarkMethod, false);
+    await setToDarkSwapPrimaryAndContainer(
+        Store.defaultToDarkSwapPrimaryAndContainer, false);
     await setDarkMethodLevel(Store.defaultDarkMethodLevel, false);
     await setBlendLightOnColors(Store.defaultBlendLightOnColors, false);
     await setBlendDarkOnColors(Store.defaultBlendDarkOnColors, false);
@@ -840,6 +845,17 @@ class ThemeController with ChangeNotifier {
     _useToDarkMethod = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyUseToDarkMethod, value);
+  }
+
+  late bool _toDarkSwapPrimaryAndContainer;
+  bool get toDarkSwapPrimaryAndContainer => _toDarkSwapPrimaryAndContainer;
+  Future<void> setToDarkSwapPrimaryAndContainer(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _toDarkSwapPrimaryAndContainer) return;
+    _toDarkSwapPrimaryAndContainer = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyToDarkSwapPrimaryAndContainer, value);
   }
 
   late int _darkMethodLevel;

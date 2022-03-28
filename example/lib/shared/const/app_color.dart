@@ -242,8 +242,9 @@ class AppColor {
                   ? controller.customScheme.dark
                   : controller.customScheme.light
               : controller.useToDarkMethod
-                  ? controller.customScheme.light.defaultError
-                      .toDark(controller.darkMethodLevel, true)
+                  ? controller.customScheme.light.defaultError.toDark(
+                      controller.darkMethodLevel,
+                      controller.toDarkSwapPrimaryAndContainer)
                   : null);
     }
     return schemes[index].copyWith(
@@ -256,10 +257,9 @@ class AppColor {
                 ? schemes[index].dark
                 : schemes[index].light
             : controller.useToDarkMethod
-                ? schemes[index]
-                    .light
-                    .defaultError
-                    .toDark(controller.darkMethodLevel, true)
+                ? schemes[index].light.defaultError.toDark(
+                    controller.darkMethodLevel,
+                    controller.toDarkSwapPrimaryAndContainer)
                 : null);
   }
 

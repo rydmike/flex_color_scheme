@@ -70,12 +70,12 @@ String generateThemeDartCode(ThemeController controller) {
         '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
         '    appBarColor: ${scheme.light.appBarColor},\n'
         '    error: ${scheme.light.error},\n'
-        '  ).defaultError.toDark(${controller.darkMethodLevel}, true),\n';
+        '  ).defaultError.toDark(${controller.darkMethodLevel}, ${controller.toDarkSwapPrimaryAndContainer}),\n';
   }
   if (controller.useToDarkMethod && useBuiltIn && !controller.useKeyColors) {
     darkScheme =
         '  colors: FlexColor.schemes[${FlexScheme.values[flexScheme]}]!\n'
-        '      .light.defaultError.toDark(${controller.darkMethodLevel}, true),\n';
+        '      .light.defaultError.toDark(${controller.darkMethodLevel}, ${controller.toDarkSwapPrimaryAndContainer}),\n';
   }
   //
   // Code for main theme setup, the other properties 'FlexColorScheme.light' and

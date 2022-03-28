@@ -72,10 +72,8 @@ class InputColors extends StatelessWidget {
         const SizedBox(height: 8),
         if (controller.schemeIndex != (AppColor.schemes.length - 1))
           ListTile(
-            title: const Text('Copy effective input colors to the custom '
+            title: const Text('Copy effective input colors to customizable '
                 'scheme?'),
-            subtitle: const Text('Copies the effective color values to '
-                'the last scheme, the one that you can modify'),
             trailing: ElevatedButton(
               onPressed: () async {
                 await _handleCopySchemeTap(context);
@@ -88,9 +86,9 @@ class InputColors extends StatelessWidget {
           )
         else
           ListTile(
-            title: const Text('Custom color scheme'),
+            title: const Text('Customizable color scheme'),
             subtitle: const Text('Tap the primary, secondary, tertiary color '
-                'or their container colors to change the colors'),
+                'or their container colors to change color'),
             trailing: ElevatedButton(
               onPressed: () async {
                 await _handleResetSchemeTap(context);
@@ -112,17 +110,16 @@ class InputColors extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTile(
           title: Text('Input color modifiers'),
-          subtitle: Text('You can use the input color modifiers below to '
-              'change the effective input colors that are used to define '
-              'the ColorScheme. The input color values show the color before '
-              'input modifiers, the surrounding color is the effective input '
-              'color. Using a seeded ColorScheme also modifies the input '
-              'colors, above you can see how.'),
+          subtitle: Text('Use input modifiers to change the effective colors '
+              'that define the ColorScheme. The input color values show the '
+              'color before input modifiers, surrounding color is the '
+              'effective result. Seeded ColorSchemes also modify '
+              'input colors, here you can see how.'),
         ),
         SwitchListTileAdaptive(
           title: const Text('Use Material 3 error colors'),
-          subtitle: const Text('Override defined M2 error colors and use M3 '
-              'error colors also when not using seeded ColorScheme'),
+          subtitle: const Text('Override default M2 error colors and use M3 '
+              'error colors, also when not using seeded ColorSchemes'),
           value: controller.useM3ErrorColors &&
               controller.useFlexColorScheme &&
               !controller.useKeyColors,
@@ -131,8 +128,7 @@ class InputColors extends StatelessWidget {
               : null,
         ),
         UsedColorsPopupMenu(
-          title: const Text('Input limiter, use fewer of the six '
-              'main input color values'),
+          title: const Text('Reduce amount of used input colors'),
           index: controller.usedColors,
           onChanged:
               controller.useFlexColorScheme ? controller.setUsedColors : null,
@@ -164,57 +160,70 @@ class InputColors extends StatelessWidget {
           maintainSize: true,
           maintainAnimation: true,
           maintainState: true,
-          child: SwitchListTileAdaptive(
-            title: const Text('Compute dark theme'),
-            subtitle: const Text(
-              'Calculate dark mode colors from light scheme color values, '
-              'instead of using the predefined dark ones. Using M3 seed key '
-              'colors does this too, using a more involved and expensive '
-              'algorithm. This option has no effect if seed colors '
-              'are used, it is kept disabled then.',
-            ),
-            value: controller.useToDarkMethod && !controller.useKeyColors,
-            onChanged: controller.useSubThemes && !controller.useKeyColors
-                ? controller.setUseToDarkMethod
-                : null,
-          ),
-        ),
-        Visibility(
-          visible: !isLight,
-          maintainSize: true,
-          maintainAnimation: true,
-          maintainState: true,
-          child: ListTile(
-            title: Slider.adaptive(
-              max: 100,
-              divisions: 100,
-              label: controller.darkMethodLevel.toString(),
-              value: controller.darkMethodLevel.toDouble(),
-              onChanged: controller.useToDarkMethod && !controller.useKeyColors
-                  ? (double value) {
-                      controller.setDarkMethodLevel(value.floor());
-                    }
-                  : null,
-            ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    'LEVEL',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  Text(
-                    '${controller.darkMethodLevel} %',
-                    style: Theme.of(context)
-                        .textTheme
-                        .caption!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
+          child: Column(
+            children: <Widget>[
+              SwitchListTileAdaptive(
+                title: const Text('Compute dark theme'),
+                subtitle: const Text('Compute dark theme from light color '
+                    'values, instead of using predefined dark colors'),
+                value: controller.useToDarkMethod &&
+                    controller.useFlexColorScheme &&
+                    !controller.useKeyColors,
+                onChanged:
+                    controller.useFlexColorScheme && !controller.useKeyColors
+                        ? controller.setUseToDarkMethod
+                        : null,
               ),
-            ),
+              SwitchListTileAdaptive(
+                title: const Text('Computed dark swaps main and container'),
+                subtitle: const Text('If swapped, you can often use them '
+                    'as they are with no white blend level, if light colors '
+                    'use M3 design intent.'),
+                value: controller.toDarkSwapPrimaryAndContainer &&
+                    controller.useToDarkMethod &&
+                    controller.useFlexColorScheme &&
+                    !controller.useKeyColors,
+                onChanged: controller.useToDarkMethod &&
+                        controller.useFlexColorScheme &&
+                        !controller.useKeyColors
+                    ? controller.setToDarkSwapPrimaryAndContainer
+                    : null,
+              ),
+              ListTile(
+                title: Slider.adaptive(
+                  max: 100,
+                  divisions: 100,
+                  label: controller.darkMethodLevel.toString(),
+                  value: controller.darkMethodLevel.toDouble(),
+                  onChanged: controller.useToDarkMethod &&
+                          controller.useFlexColorScheme &&
+                          !controller.useKeyColors
+                      ? (double value) {
+                          controller.setDarkMethodLevel(value.floor());
+                        }
+                      : null,
+                ),
+                trailing: Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        'LEVEL',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      Text(
+                        '${controller.darkMethodLevel} %',
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],

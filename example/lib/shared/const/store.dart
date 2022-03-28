@@ -160,6 +160,12 @@ class Store {
   // Default value for the useToDarkMethod, also to reset settings.
   static const bool defaultUseToDarkMethod = false;
 
+  // Key used to read and save the toDarkSwapPrimaryAndContainer value.
+  static const String keyToDarkSwapPrimaryAndContainer =
+      'toDarkSwapPrimaryAndContainer';
+  // Default value for the useToDarkMethod, also to reset settings.
+  static const bool defaultToDarkSwapPrimaryAndContainer = true;
+
   // Key used to read and save the darkMethodLevel value.
   static const String keyDarkMethodLevel = 'darkMethodLevel';
   // Default value for the darkMethodLevel, also used to reset settings.
