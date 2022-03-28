@@ -49,7 +49,7 @@ class AppBarSettings extends StatelessWidget {
           ListTile(
             enabled: controller.useFlexColorScheme &&
                 controller.appBarBackgroundSchemeColorLight == null,
-            title: const Text('Light mode AppBarStyle'),
+            title: const Text('Light theme AppBarStyle'),
             subtitle: Text(
               explainAppBarStyle(
                   controller.useFlexColorScheme &&
@@ -87,7 +87,7 @@ class AppBarSettings extends StatelessWidget {
         ] else ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Dark mode AppBarStyle'),
+            title: const Text('Dark theme AppBarStyle'),
             subtitle: Text(
               explainAppBarStyle(
                   controller.useFlexColorScheme
@@ -124,7 +124,7 @@ class AppBarSettings extends StatelessWidget {
         if (isLight) ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Light mode elevation'),
+            title: const Text('Light theme elevation'),
             subtitle: Slider.adaptive(
               max: 24,
               divisions: 48,
@@ -156,7 +156,7 @@ class AppBarSettings extends StatelessWidget {
           ),
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Light mode opacity'),
+            title: const Text('Light theme opacity'),
             subtitle: const Text('Themed opacity, try 85% to 98%'),
           ),
           ListTile(
@@ -195,7 +195,7 @@ class AppBarSettings extends StatelessWidget {
         ] else ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Dark mode elevation'),
+            title: const Text('Dark theme elevation'),
             subtitle: Slider.adaptive(
               max: 24,
               divisions: 48,
@@ -227,7 +227,7 @@ class AppBarSettings extends StatelessWidget {
           ),
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Dark mode opacity'),
+            title: const Text('Dark theme opacity'),
             subtitle: const Text('Themed opacity, try 85% to 98%'),
           ),
           ListTile(
@@ -269,13 +269,13 @@ class AppBarSettings extends StatelessWidget {
           title: Text('Custom color'),
           subtitle: Text('With sub-themes you can set scheme color for the '
               'AppBar background color. '
-              'Using AppBarStyle is easier, but this offers more colors. '
+              'Using AppBarStyle is convenient, but this offers more colors. '
               'This overrides used AppBarStyle, set it back to default '
               '(null) to use AppBarStyle again.'),
         ),
         if (isLight)
           ColorSchemePopupMenu(
-            title: const Text('Light mode AppBar background color'),
+            title: const Text('Light theme AppBar background color'),
             labelForDefault: 'null (AppBarStyle)',
             index: controller.appBarBackgroundSchemeColorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -291,7 +291,7 @@ class AppBarSettings extends StatelessWidget {
           )
         else
           ColorSchemePopupMenu(
-            title: const Text('Dark mode AppBar background color'),
+            title: const Text('Dark theme AppBar background color'),
             labelForDefault: 'null (AppBarStyle)',
             index: controller.appBarBackgroundSchemeColorDark?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme

@@ -40,8 +40,8 @@ class Store {
 
   // Key used to read and save the useFlutterDefaults  value.
   static const String keyUseFlutterDefaults = 'useFlutterDefaults';
-  // Default value for the useCustomDarkColorsForSeed, also to reset settings.
-  static const bool defaultUseFlutterDefaults = true;
+  // Default value for the useFlutterDefaults, also to reset settings.
+  static const bool defaultUseFlutterDefaults = false;
 
   // Key used to read and save the isLargeGridView value.
   static const String keyIsLargeGridView = 'isLargeGridView';
@@ -422,8 +422,7 @@ class Store {
       'bottomNavBarBackgroundSchemeColor';
   // Default value for the bottomNavBarBackgroundSchemeColor, also used to
   // reset settings.
-  static const SchemeColor defaultBottomNavBarBackgroundSchemeColor =
-      SchemeColor.background;
+  static const SchemeColor? defaultBottomNavBarBackgroundSchemeColor = null;
 
   // Key used to read and save the bottomNavigationBarOpacity value.
   static const String keyBottomNavigationBarOpacity =
@@ -457,8 +456,7 @@ class Store {
       'navBarBackgroundSchemeColor';
   // Default value for the navBarBackgroundSchemeColor, also used to
   // reset settings.
-  static const SchemeColor defaultNavBarBackgroundSchemeColor =
-      SchemeColor.background;
+  static const SchemeColor? defaultNavBarBackgroundSchemeColor = null;
 
   // Key used to read and save the navBarOpacity value.
   static const String keyNavBarOpacity = 'navBarOpacity';

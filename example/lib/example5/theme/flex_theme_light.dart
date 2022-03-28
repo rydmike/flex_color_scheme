@@ -107,6 +107,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             // not yet natively available in Flutter SDK 2.10.3 or earlier,
             // this offers it as a way to use it already now.
             useTextTheme: controller.useTextTheme,
+            // Prefer Flutter SDK null default behavior for sub-themes, when
+            // possible.
+            useFlutterDefaults: controller.useFlutterDefaults,
             // Value to adjust themed border radius on widgets with
             // an adjustable corner rounding, this one is very handy.
             // If null, it defaults to Material3 (You) design

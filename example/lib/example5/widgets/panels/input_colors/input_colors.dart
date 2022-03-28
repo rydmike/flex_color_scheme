@@ -7,7 +7,6 @@ import '../../../../shared/widgets/universal/theme_mode_switch.dart';
 import '../../dialogs/copy_scheme_to_custom_dialog.dart';
 import '../../dialogs/reset_custom_colors_dialog.dart';
 import 'input_colors_popup_menu.dart';
-import 'input_colors_selector.dart';
 import 'show_input_colors.dart';
 import 'used_colors_popup_menu.dart';
 
@@ -15,10 +14,8 @@ class InputColors extends StatelessWidget {
   const InputColors(
     this.controller, {
     Key? key,
-    this.showSelector = true,
   }) : super(key: key);
   final ThemeController controller;
-  final bool showSelector;
 
   Future<void> _handleCopySchemeTap(BuildContext context) async {
     final bool? copy = await showDialog<bool?>(
@@ -71,11 +68,6 @@ class InputColors extends StatelessWidget {
             }
           },
         ),
-        if (showSelector)
-          Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: InputColorsSelector(controller: controller),
-          ),
         InputColorsPopupMenu(controller: controller),
         const SizedBox(height: 8),
         if (controller.schemeIndex != (AppColor.schemes.length - 1))

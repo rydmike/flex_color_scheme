@@ -129,8 +129,9 @@ class ShowSubThemeColors extends StatelessWidget {
             colorScheme.background;
     final Color bottomNavBarItemColor =
         theme.bottomNavigationBarTheme.selectedItemColor ?? colorScheme.primary;
-    final Color navigationBarColor =
-        theme.navigationBarTheme.backgroundColor ?? colorScheme.background;
+    final Color navigationBarColor = theme.navigationBarTheme.backgroundColor ??
+        ElevationOverlay.colorWithOverlay(
+            colorScheme.surface, colorScheme.onSurface, 3.0);
     final Color navigationBarItemColor = theme.navigationBarTheme.iconTheme
             ?.resolve(<MaterialState>{MaterialState.selected})?.color ??
         colorScheme.primary;

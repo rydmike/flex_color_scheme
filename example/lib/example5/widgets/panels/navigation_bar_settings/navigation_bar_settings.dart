@@ -35,9 +35,11 @@ class NavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          subtitle: const Text('Shared setting in this app, '
-              'but APIs have own properties'),
-          labelForDefault: 'null (surface with onSurface overlay)',
+          labelForDefault: controller.useFlutterDefaults ||
+                  !controller.useSubThemes ||
+                  !controller.useFlexColorScheme
+              ? 'null (surface with onSurface overlay)'
+              : 'null (background)',
           index: controller.navBarBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

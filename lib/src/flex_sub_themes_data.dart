@@ -155,7 +155,7 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarSelectedIconSchemeColor = SchemeColor.primary,
     this.bottomNavigationBarUnselectedIconSchemeColor = SchemeColor.onSurface,
     this.bottomNavigationBarMutedUnselectedIcon = true,
-    this.bottomNavigationBarBackgroundSchemeColor = SchemeColor.background,
+    this.bottomNavigationBarBackgroundSchemeColor,
     this.bottomNavigationBarOpacity = 1,
     this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
     this.bottomNavigationBarShowSelectedLabels = true,
@@ -196,7 +196,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarUnselectedIconSchemeColor = SchemeColor.onSurface,
     this.navigationBarMutedUnselectedIcon = true,
     this.navigationBarHighlightSchemeColor = SchemeColor.primary,
-    this.navigationBarBackgroundSchemeColor = SchemeColor.background,
+    this.navigationBarBackgroundSchemeColor,
     this.navigationBarOpacity = 1,
     this.navigationBarHeight = 62,
     this.navigationBarLabelBehavior =
@@ -324,16 +324,16 @@ class FlexSubThemesData with Diagnosticable {
   /// using Flutter SDK defaults, instead of its own opinionated defaults.
   ///
   /// When you use this flag you loose many of the harmonizing defaults
-  /// [FlexColorScheme.subThemesData] bring, but it may server as an optional
+  /// [FlexColorScheme.subThemesData] bring, but it may serve as an optional
   /// starting point for your own custom component themes with fewer `copyWith`
   /// overrides needed for its opinionated choices.
   ///
   /// The individual [FlexSubThemesData] properties document their adherence
   /// to this setting, they are also listed here:
   ///
-  /// - NN1
-  ///   * false: FlexColorScheme
-  ///   * true: Flutter
+  /// - [navigationBarBackgroundSchemeColor]
+  ///   * false: [ColorScheme.background]
+  ///   * true: [ColorScheme.surface] with onSurface overlay elevation 3.
   /// - NN2
   ///   * false: FlexColorScheme
   ///   * true: Flutter
@@ -1065,18 +1065,11 @@ class FlexSubThemesData with Diagnosticable {
 
   /// This property has no function after version 4.2.0.
   ///
-  /// To harmonize [NavigationBar], [BottomNavigationBar] and
-  /// [NavigationRail] [FlexSubThemes] this property in [FlexSubThemesData]
-  /// no longer has any use in version 5 and later.
-  ///
   /// This past feature feature no longer exists, but the same effect can be
-  /// reached by setting all NavigationBar properties in [FlexSubThemesData]
-  /// that have a none null default value to null.
-  @Deprecated('This property has no function after 4.2.0. To harmonize '
-      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-      'version 5 and later. The feature no longer exists, but same effect '
-      'can be reached by setting all NavigationBar properties in '
-      'FlexSubThemesData that have a none null default value to null.')
+  /// reached by setting [FlexSubThemesData.useFlutterDefaults] to true.
+  @Deprecated('This property has no function after 4.2.0. The feature no '
+      'longer exists, but same effect can be reached by setting '
+      'FlexSubThemesData.useFlutterDefaults to true.')
   final bool? navigationBarIsStyled;
 
   /// Optional text style for the [NavigationBar] labels.

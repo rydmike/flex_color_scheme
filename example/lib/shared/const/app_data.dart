@@ -41,6 +41,7 @@ class AppData {
   // hidden in the Drawer and rail, also on phones. This size was mostly chosen
   // based on what worked well for the content in the staggered column view.
   static const double desktopBreakpoint = 1150;
+  static const double bigDesktopBreakpoint = 2800;
 
   // The minimum media width treated as a phone device in this demo.
   static const double phoneBreakpoint = 600;
@@ -69,7 +70,8 @@ class AppData {
   static double responsiveInsets(double width) {
     if (width < phoneBreakpoint) return edgeInsetsPhone;
     if (width < desktopBreakpoint) return edgeInsetsTablet;
-    return edgeInsetsDesktop;
+    if (width < bigDesktopBreakpoint) return edgeInsetsDesktop;
+    return edgeInsetsBigDesktop;
   }
 
   // Returns the title of the MaterialApp. Used to set title on pages to
