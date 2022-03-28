@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -17,19 +20,20 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
     required this.vsync,
     required this.extent,
     required this.controller,
-    required this.previousTheme,
+    required this.updateDelegate,
   });
   @override
   final TickerProvider vsync;
   final double extent;
   final ThemeController controller;
-  final int previousTheme;
+  final bool updateDelegate;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return ThemeSelector(
       controller: controller,
+      usedInHeaderDelegate: true,
     );
   }
 
@@ -41,9 +45,10 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    // return true;
     return oldDelegate.maxExtent != maxExtent ||
         oldDelegate.minExtent != minExtent ||
-        previousTheme != controller.schemeIndex;
+        updateDelegate;
   }
 
   @override
@@ -58,9 +63,14 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 // Used at the top of the Masonry grid view and between page and panel page
 // selector on the page view.
 class ThemeSelector extends StatelessWidget {
-  const ThemeSelector({Key? key, required this.controller}) : super(key: key);
+  const ThemeSelector({
+    Key? key,
+    required this.controller,
+    this.usedInHeaderDelegate = false,
+  }) : super(key: key);
 
   final ThemeController controller;
+  final bool usedInHeaderDelegate;
 
   @override
   Widget build(BuildContext context) {
@@ -68,42 +78,118 @@ class ThemeSelector extends StatelessWidget {
     final bool isPhone = media.size.width < AppData.phoneBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
 
-    return HeaderCard(
-      margin: EdgeInsets.zero,
+    Widget child = HeaderCard(
+      margin: EdgeInsets.symmetric(horizontal: margins),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(0, margins, 0, 0),
             child: InputColorsSelector(controller: controller),
           ),
-          Row(children: <Widget>[
-            Expanded(
-              child: SwitchListTileAdaptive(
-                contentPadding: isPhone
-                    ? const EdgeInsetsDirectional.only(start: 16, end: 0)
-                    : null,
-                title: const Text('Flex\u200BColor\u200BScheme'),
-                dense: isPhone,
-                value: controller.useFlexColorScheme,
-                onChanged: controller.setUseFlexColorScheme,
-              ),
-            ),
-            Expanded(
-              child: SwitchListTileAdaptive(
-                contentPadding:
-                    isPhone ? const EdgeInsets.symmetric(horizontal: 8) : null,
-                dense: isPhone,
-                title: const Text('Compo\u200Bnent themes'),
-                value: controller.useSubThemes && controller.useFlexColorScheme,
-                onChanged: controller.useFlexColorScheme
-                    ? controller.setUseSubThemes
-                    : null,
-              ),
-            ),
-          ]),
+          SizedBox(
+            height: 52,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: SwitchListTileAdaptive(
+                      contentPadding: isPhone
+                          ? const EdgeInsetsDirectional.only(start: 16, end: 0)
+                          : null,
+                      title: const Text('Flex\u200BColor\u200BScheme'),
+                      dense: isPhone,
+                      value: controller.useFlexColorScheme,
+                      onChanged: controller.setUseFlexColorScheme,
+                    ),
+                  ),
+                  Expanded(
+                    child: SwitchListTileAdaptive(
+                      contentPadding: isPhone
+                          ? const EdgeInsets.symmetric(horizontal: 8)
+                          : null,
+                      dense: isPhone,
+                      title: const Text('Compo\u200Bnent themes'),
+                      value: controller.useSubThemes &&
+                          controller.useFlexColorScheme,
+                      onChanged: controller.useFlexColorScheme
+                          ? controller.setUseSubThemes
+                          : null,
+                    ),
+                  ),
+                ]),
+          ),
         ],
       ),
     );
+
+    if (usedInHeaderDelegate) {
+      child = Material(
+        color: Theme.of(context).colorScheme.primary.withAlpha(0x38),
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: media.padding.top + margins,
+                bottom: margins,
+              ),
+              child: child,
+            ),
+          ),
+        ),
+      );
+    }
+    return child;
+
+    // return HeaderCard(
+    //   margin: usedInHeaderDelegate
+    //       ? EdgeInsets.only(
+    //           top: media.padding.top + margins,
+    //           bottom: margins,
+    //         )
+    //       : EdgeInsets.zero,
+    //   child: Column(
+    //     children: <Widget>[
+    //       Padding(
+    //         padding: EdgeInsets.fromLTRB(0, margins, 0, 0),
+    //         child: InputColorsSelector(controller: controller),
+    //       ),
+    //       SizedBox(
+    //         height: 52,
+    //         child: Row(
+    //             mainAxisAlignment: MainAxisAlignment.start,
+    //             crossAxisAlignment: CrossAxisAlignment.start,
+    //             children: <Widget>[
+    //               Expanded(
+    //                 child: SwitchListTileAdaptive(
+    //                   contentPadding: isPhone
+    //                       ? const EdgeInsetsDirectional.only(start: 16, end: 0)
+    //                       : null,
+    //                   title: const Text('Flex\u200BColor\u200BScheme'),
+    //                   dense: isPhone,
+    //                   value: controller.useFlexColorScheme,
+    //                   onChanged: controller.setUseFlexColorScheme,
+    //                 ),
+    //               ),
+    //               Expanded(
+    //                 child: SwitchListTileAdaptive(
+    //                   contentPadding: isPhone
+    //                       ? const EdgeInsets.symmetric(horizontal: 8)
+    //                       : null,
+    //                   dense: isPhone,
+    //                   title: const Text('Compo\u200Bnent themes'),
+    //                   value: controller.useSubThemes &&
+    //                       controller.useFlexColorScheme,
+    //                   onChanged: controller.useFlexColorScheme
+    //                       ? controller.setUseSubThemes
+    //                       : null,
+    //                 ),
+    //               ),
+    //             ]),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 }

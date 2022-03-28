@@ -174,6 +174,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String useTextTheme = controller.useTextTheme
       ? ''
       : '    useTextTheme: ${controller.useTextTheme},\n';
+  final String useFlutterDefaults = controller.useFlutterDefaults
+      ? '    useFlutterDefaults: ${controller.useFlutterDefaults},\n'
+      : '';
   final String defRadius = controller.cornerRadius != null
       ? '    defaultRadius: ${controller.cornerRadius},\n'
       : '';
@@ -349,7 +352,7 @@ String generateThemeDartCode(ThemeController controller) {
       : '    bottomNavigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
   final String bottomNavigationBarBackgroundSchemeColor = controller
               .bottomNavBarBackgroundSchemeColor ==
-          SchemeColor.background
+          null
       ? ''
       : '    bottomNavigationBarBackgroundSchemeColor: ${controller.bottomNavBarBackgroundSchemeColor},\n';
   final String bottomNavigationBarOpacity = controller
@@ -407,7 +410,7 @@ String generateThemeDartCode(ThemeController controller) {
       : '    navigationBarHighlightSchemeColor: ${controller.navBarIndicatorSchemeColor},\n';
   final String navigationBarBackgroundSchemeColor = controller
               .navBarBackgroundSchemeColor ==
-          SchemeColor.background
+          null
       ? ''
       : '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
   final String navigationBarOpacity = controller.navBarOpacity != 1
@@ -477,6 +480,7 @@ String generateThemeDartCode(ThemeController controller) {
   //
   final String lightSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
+          '$useFlutterDefaults'
           '$interactionEffects'
           '$blendOnLevelLight'
           '$blendLightOnColors'
@@ -559,6 +563,7 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String darkSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
+          '$useFlutterDefaults'
           '$interactionEffects'
           '$blendOnLevelDark'
           '$blendDarkOnColors'

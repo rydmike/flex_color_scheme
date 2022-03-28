@@ -68,7 +68,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return SizedBox(
-      height: 76,
+      height: 66,
       child: Row(
         children: <Widget>[
           Expanded(

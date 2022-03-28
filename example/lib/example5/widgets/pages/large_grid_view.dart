@@ -62,7 +62,10 @@ class LargeGridView extends StatefulWidget {
 class _LargeGridViewState extends State<LargeGridView>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late final ScrollController scrollController;
-  late int previousTheme;
+  late int previousSchemeIndex;
+  late bool previousUseFlexColorScheme;
+  late bool previousUseSubThemes;
+  late bool updateDelegate;
 
   // Override `wantKeepAlive` when using `AutomaticKeepAliveClientMixin`.
   @override
@@ -72,14 +75,27 @@ class _LargeGridViewState extends State<LargeGridView>
   void initState() {
     super.initState();
     scrollController = ScrollController();
-    previousTheme = widget.controller.schemeIndex;
+    previousSchemeIndex = widget.controller.schemeIndex;
+    previousUseFlexColorScheme = widget.controller.useFlexColorScheme;
+    previousUseSubThemes = widget.controller.useSubThemes;
+    updateDelegate = false;
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (widget.controller.schemeIndex != previousTheme) {
-      previousTheme = widget.controller.schemeIndex;
+    updateDelegate = false;
+    if (widget.controller.schemeIndex != previousSchemeIndex) {
+      previousSchemeIndex = widget.controller.schemeIndex;
+      updateDelegate = true;
+    }
+    if (widget.controller.useFlexColorScheme != previousUseFlexColorScheme) {
+      previousUseFlexColorScheme = widget.controller.useFlexColorScheme;
+      updateDelegate = true;
+    }
+    if (widget.controller.useSubThemes != previousUseSubThemes) {
+      previousUseSubThemes = widget.controller.useSubThemes;
+      updateDelegate = true;
     }
   }
 
@@ -93,10 +109,8 @@ class _LargeGridViewState extends State<LargeGridView>
   Widget build(BuildContext context) {
     // Call `super.build` when using `AutomaticKeepAliveClientMixin`.
     super.build(context);
-
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPinned = media.size.height >= AppData.pinnedSelector;
-    final bool isPhone = media.size.width < AppData.phoneBreakpoint;
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
@@ -104,64 +118,46 @@ class _LargeGridViewState extends State<LargeGridView>
             theme.colorScheme.onBackground)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
-
     final ThemeController themeCtrl = widget.controller;
-
-    if (_debug) {
-      // debugPrint('margins ................. : $margins');
-      debugPrint('kToolbarHeight .......... : $kToolbarHeight');
-      debugPrint('media.viewPadding.top.... : ${media.viewPadding.top}');
-      debugPrint('media.padding.top ....... : ${media.padding.top}');
-      debugPrint('media.size.width ........ : ${media.size.width}');
-      debugPrint('media.size.height ....... : ${media.size.height}');
-    }
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       // Just a suitable breakpoint for when we want to have more
       // than one column in the body with this particular content.
       final int columns = constraints.maxWidth ~/ 860 + 1;
-
       // Flag used to hide some blend mode options that wont fit when
       // using toggle buttons on small media.
       final bool showAllBlends = constraints.maxWidth / columns > 445;
-      // Make margins respond to media size and nr of shown columns, this is
-      // a bit different than our [AppData.responsiveInsets].
-      double margins = AppData.edgeInsetsPhone;
-      if (!isPhone && columns == 1) margins = AppData.edgeInsetsTablet;
-      if (columns >= 2) margins = AppData.edgeInsetsDesktop;
-      if (columns >= 4) margins = AppData.edgeInsetsBigDesktop;
-
-      final double headerExtent = 54 + media.padding.top + margins * 2;
-
+      final double margins = AppData.responsiveInsets(media.size.width);
+      const double selectorBoxHeight = 118;
+      final double headerExtent =
+          selectorBoxHeight + media.padding.top + margins * 3;
+      if (_debug) {
+        debugPrint('margins ................. : $margins');
+        debugPrint('kToolbarHeight .......... : $kToolbarHeight');
+        debugPrint('media.viewPadding.top.... : ${media.viewPadding.top}');
+        debugPrint('media.padding.top ....... : ${media.padding.top}');
+        debugPrint('media.size.width ........ : ${media.size.width}');
+        debugPrint('media.size.height ....... : ${media.size.height}');
+      }
       return CustomScrollView(
         controller: scrollController,
         slivers: <Widget>[
-          SliverPadding(
-            padding: EdgeInsetsDirectional.fromSTEB(
-              margins,
-              margins + media.padding.top,
-              margins,
-              0,
-            ),
-            sliver: SliverPersistentHeader(
-              pinned: isPinned,
-              floating: true,
-              delegate: ThemeSelectorHeaderDelegate(
-                vsync: this,
-                extent: headerExtent,
-                controller: themeCtrl,
-                previousTheme: previousTheme,
-              ),
+          SliverPersistentHeader(
+            pinned: isPinned,
+            floating: true,
+            delegate: ThemeSelectorHeaderDelegate(
+              vsync: this,
+              extent: headerExtent,
+              controller: themeCtrl,
+              updateDelegate: updateDelegate,
             ),
           ),
           SliverPadding(
             padding: EdgeInsets.all(margins),
             sliver: SliverMasonryGrid.count(
-              // controller: scrollController,
               crossAxisCount: columns,
               mainAxisSpacing: margins,
               crossAxisSpacing: margins,
-              // padding: EdgeInsets.all(margins),
               childCount: widget.isCardOpen.length,
               itemBuilder: (BuildContext context, int itemIndex) => HeaderCard(
                 title: Text(gridItems[itemIndex].panelLabel),
@@ -173,7 +169,7 @@ class _LargeGridViewState extends State<LargeGridView>
                 child: <Widget>[
                   IntroductionPanel(themeCtrl),
                   ThemeCode(themeCtrl),
-                  InputColors(themeCtrl, showSelector: false),
+                  InputColors(themeCtrl),
                   SeededColorScheme(themeCtrl),
                   SurfaceBlends(themeCtrl, allBlends: showAllBlends),
                   EffectiveColors(themeCtrl),

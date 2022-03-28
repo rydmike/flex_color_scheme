@@ -6123,8 +6123,9 @@ class FlexColorScheme with Diagnosticable {
                   subTheme.navigationBarUnselectedIconSchemeColor,
               mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon,
               highlightSchemeColor: subTheme.navigationBarHighlightSchemeColor,
-              backgroundSchemeColor:
-                  subTheme.navigationBarBackgroundSchemeColor,
+              backgroundSchemeColor: subTheme
+                      .navigationBarBackgroundSchemeColor ??
+                  (subTheme.useFlutterDefaults ? null : SchemeColor.background),
               opacity: subTheme.navigationBarOpacity,
               height: subTheme.navigationBarHeight,
               labelBehavior: subTheme.navigationBarLabelBehavior,

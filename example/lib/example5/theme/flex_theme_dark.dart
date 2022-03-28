@@ -71,6 +71,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             blendOnLevel: controller.blendOnLevelDark,
             blendOnColors: controller.blendDarkOnColors,
             blendTextTheme: controller.blendDarkTextTheme,
+            useFlutterDefaults: controller.useFlutterDefaults,
             useTextTheme: controller.useTextTheme,
             //
             defaultRadius: controller.cornerRadius,

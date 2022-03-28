@@ -118,7 +118,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
           // SliverAppBar(),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(margins),
+              padding: EdgeInsets.symmetric(vertical: margins),
               child: ThemeSelector(controller: themeCtrl),
             ),
           ),
@@ -131,8 +131,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
         itemBuilder: (BuildContext context, int page) {
           return <Widget>[
             PanelPage(IntroductionPanel(themeCtrl), page, themeCtrl),
-            PanelPage(
-                InputColors(themeCtrl, showSelector: false), page, themeCtrl),
+            PanelPage(InputColors(themeCtrl), page, themeCtrl),
             PanelPage(SeededColorScheme(themeCtrl), page, themeCtrl),
             PanelPage(
                 SurfaceBlends(themeCtrl, allBlends: true), page, themeCtrl),
