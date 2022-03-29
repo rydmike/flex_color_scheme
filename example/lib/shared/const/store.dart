@@ -694,6 +694,12 @@ class Store {
   // Default value for the fabUseShape, also to reset settings.
   static const bool defaultFabUseShape = true;
 
+  // Key used to read and save the fabBorderRadius value.
+  static const String keyFabBorderRadius = 'fabBorderRadius';
+  // Default value for the fabBorderRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultFabBorderRadius = null;
+
   // Key used to read and save the fabSchemeColor value.
   static const String keyFabSchemeColor = 'fabSchemeColor';
   // Default value for the fabSchemeColor, also used to reset settings.

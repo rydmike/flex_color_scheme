@@ -37,10 +37,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           title: const Text('Use themed Shape on FloatingActionButton'),
-          subtitle: const Text('OFF removes the custom Shape usage from its '
-              'component theme, making it use effective default un-themed '
-              'style, regardless of global border radius setting or its own '
-              'radius setting.'),
+          subtitle: const Text('OFF removes Shape usage, making it use default '
+              'style, regardless of global border radius setting or own radius '
+              'setting. It is like "useFlutterDefaults", but only for the FAB'),
           value: controller.fabUseShape &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -51,6 +50,60 @@ class FabToggleChipPopupSettings extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: FabShowcase(),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('FloatingActionButton border radius'),
+          subtitle: Slider.adaptive(
+            min: -1,
+            max: 40,
+            divisions: 41,
+            label: controller.fabBorderRadius == null ||
+                    (controller.fabBorderRadius ?? -1) < 0 ||
+                    !controller.fabUseShape ||
+                    !controller.useSubThemes ||
+                    !controller.useFlexColorScheme
+                ? 'default'
+                : (controller.fabBorderRadius?.toStringAsFixed(0) ?? ''),
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.fabUseShape
+                ? controller.fabBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.fabUseShape
+                ? (double value) {
+                    controller.setFabBorderRadius(value < 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.fabBorderRadius == null ||
+                              (controller.fabBorderRadius ?? -1) < 0 ||
+                              !controller.fabUseShape
+                          ? 'default'
+                          : (controller.fabBorderRadius?.toStringAsFixed(0) ??
+                              '')
+                      : 'default',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
         ),
         const Divider(),
         ColorSchemePopupMenu(
@@ -76,8 +129,8 @@ class FabToggleChipPopupSettings extends StatelessWidget {
           title: const Text('ToggleButtons border radius'),
           subtitle: Slider.adaptive(
             min: -1,
-            max: 30,
-            divisions: 31,
+            max: 40,
+            divisions: 41,
             label: controller.toggleButtonsBorderRadius == null ||
                     (controller.toggleButtonsBorderRadius ?? -1) < 0
                 ? 'default'
