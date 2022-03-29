@@ -354,6 +354,8 @@ class ThemeController with ChangeNotifier {
     _dialogBackgroundSchemeColor = await _themeService.load(
         Store.keyDialogBackgroundSchemeColor,
         Store.defaultDialogBackgroundSchemeColor);
+    _dialogBorderRadius = await _themeService.load(
+        Store.keyDialogBorderRadius, Store.defaultDialogBorderRadius);
     //
     // Custom color SETTINGS.
     _primaryLight = await _themeService.load(
@@ -587,7 +589,7 @@ class ThemeController with ChangeNotifier {
     await setCardBorderRadius(Store.defaultCardBorderRadius, false);
     await setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
-
+    await setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
     // Not persisted, locally controlled popup selection for ThemeService,
     // resets to actual used platform when settings are reset or app loaded.
     await setPlatform(defaultTargetPlatform, false);
@@ -1887,6 +1889,16 @@ class ThemeController with ChangeNotifier {
     _dialogBackgroundSchemeColor = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyDialogBackgroundSchemeColor, value);
+  }
+
+  late double? _dialogBorderRadius;
+  double? get dialogBorderRadius => _dialogBorderRadius;
+  Future<void> setDialogBorderRadius(double? value,
+      [bool notify = true]) async {
+    if (value == _dialogBorderRadius) return;
+    _dialogBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyDialogBorderRadius, value);
   }
 
   // Custom color SETTINGS.

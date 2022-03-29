@@ -108,6 +108,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             popupMenuOpacity: controller.popupMenuOpacity,
             //
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
+            dialogRadius: controller.dialogBorderRadius,
+            timePickerDialogRadius: controller.dialogBorderRadius,
             appBarBackgroundSchemeColor:
                 controller.appBarBackgroundSchemeColorDark,
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
