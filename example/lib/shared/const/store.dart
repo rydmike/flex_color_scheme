@@ -456,6 +456,24 @@ class Store {
   // Default value for the bottomNavigationBarElevation, also reset settings.
   static const double defaultBottomNavigationBarElevation = 0;
 
+  // Key used to read and save the bottomNavBarSelectedItemSchemeColor value.
+  static const String keyBottomNavBarSelectedItemSchemeColor =
+      'bottomNavBarSelectedItemSchemeColor';
+  // Default value for the bottomNavBarSelectedItemSchemeColor.
+  static const SchemeColor? defaultBottomNavBarSelectedItemSchemeColor = null;
+
+  // Key used to read and save the bottomNavBarUnselectedItemSchemeColor value.
+  static const String keyBottomNavBarUnselectedSchemeColor =
+      'bottomNavBarUnselectedItemSchemeColor';
+  // Default bottomNavBarUnselectedItemSchemeColor.
+  static const SchemeColor? defaultBottomNavBarUnselectedSchemeColor = null;
+
+  // Key used to read and save the bottomNavBarMuteUnselected value.
+  static const String keyBottomNavBarMuteUnselected =
+      'bottomNavBarMuteUnselected';
+  // Default value for the bottomNavBarMuteUnselected, also to reset settings.
+  static const bool defaultBottomNavBarMuteUnselected = true;
+
   // Key used to read and save the bottomNavShowSelectedLabels value.
   static const String keyBottomNavShowSelectedLabels =
       'bottomNavShowSelectedLabels';
@@ -495,17 +513,17 @@ class Store {
   // Default navBarUnselectedItemSchemeColor.
   static const SchemeColor? defaultNavBarUnselectedSchemeColor = null;
 
+  // Key used to read and save the navBarMuteUnselected value.
+  static const String keyNavBarMuteUnselected = 'navBarMuteUnselected';
+  // Default value for the navBarMuteUnselected, also used to reset settings.
+  static const bool defaultNavBarMuteUnselected = true;
+
   // Key used to read and save the navBarIndicatorSchemeColor value.
   static const String keyNavBarIndicatorSchemeColor =
       'navBarIndicatorSchemeColor';
   // Default value for the navBarIndicatorSchemeColor, also used to reset
   // settings. We use NULL as default, on nullable settings.
   static const SchemeColor? defaultNavBarIndicatorSchemeColor = null;
-
-  // Key used to read and save the navBarMuteUnselected value.
-  static const String keyNavBarMuteUnselected = 'navBarMuteUnselected';
-  // Default value for the navBarMuteUnselected, also used to reset settings.
-  static const bool defaultNavBarMuteUnselected = true;
 
   // Key used to read and save the navBarLabelBehavior value.
   static const String keyNavBarLabelBehavior = 'navBarLabelBehavior';

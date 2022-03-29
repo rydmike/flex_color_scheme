@@ -122,13 +122,13 @@ class BottomNavigationBarSettings extends StatelessWidget {
           subtitle: const Text('Shared setting in this app, but APIs have '
               'own properties'),
           labelForDefault: labelForDefaultSelectedItem,
-          index: controller.navBarSelectedSchemeColor?.index ?? -1,
+          index: controller.bottomNavBarSelectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarSelectedSchemeColor(null);
+                    controller.setBottomNavBarSelectedSchemeColor(null);
                   } else {
-                    controller.setNavBarSelectedSchemeColor(
+                    controller.setBottomNavBarSelectedSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }
@@ -142,13 +142,13 @@ class BottomNavigationBarSettings extends StatelessWidget {
               controller.useSubThemes && controller.useFlexColorScheme
                   ? 'null (onSurface)'
                   : 'null (onSurface with opacity)',
-          index: controller.navBarUnselectedSchemeColor?.index ?? -1,
+          index: controller.bottomNavBarUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarUnselectedSchemeColor(null);
+                    controller.setBottomNavBarUnselectedSchemeColor(null);
                   } else {
-                    controller.setNavBarUnselectedSchemeColor(
+                    controller.setBottomNavBarUnselectedSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }
@@ -157,11 +157,11 @@ class BottomNavigationBarSettings extends StatelessWidget {
         SwitchListTileAdaptive(
           title: const Text('Mute unselected items'),
           subtitle: const Text('Unselected icon and text are less bright.\n'),
-          value: controller.navBarMuteUnselected &&
+          value: controller.bottomNavBarMuteUnselected &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setNavBarMuteUnselected
+              ? controller.setBottomNavBarMuteUnselected
               : null,
         ),
         SwitchListTileAdaptive(
