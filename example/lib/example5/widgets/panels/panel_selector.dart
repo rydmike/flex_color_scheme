@@ -93,7 +93,8 @@ class _PanelSelectorState extends State<PanelSelector> {
     if (widget.index != viewIndex) {
       viewIndex = widget.index;
       final MediaQueryData media = MediaQuery.of(context);
-      final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+      final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+          media.size.height < AppData.phoneHeightBreakpoint;
       final double effectiveWidth = AppData.panelButtonWidth +
           (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
       scrollController.animateTo(effectiveWidth * viewIndex,
@@ -105,7 +106,8 @@ class _PanelSelectorState extends State<PanelSelector> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
     final double effectiveWidth = AppData.panelButtonWidth +
         (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
@@ -189,8 +191,9 @@ class PanelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isPhone =
-        MediaQuery.of(context).size.width < AppData.phoneBreakpoint;
+    final MediaQueryData media = MediaQuery.of(context);
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
     final double effectiveWidth = AppData.panelButtonWidth +
         (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
     final double textSize = isPhone ? 10 : 11;

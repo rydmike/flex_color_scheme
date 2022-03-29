@@ -31,21 +31,38 @@ class AppData {
 
   // The max dp width used for layout content on the screen in the available
   // body area. Wider content gets growing side padding, kind of like on most
-  // web pages when they are used on super wide screen. Just a design used for
-  // this demo app, that works pretty well in this use case too.
+  // web pages when they are used on super wide screen. This is typically used
+  // pages in the example apps that use content that is width constrained,
+  // typically via the PageBody widget.
   static const double maxBodyWidth = 1000;
 
-  // The minimum media size needed for desktop/large tablet menu view.
-  // Only at higher than this breakpoint will the menu open and be possible
-  // to toggle between menu and rail. Below this breakpoint it toggles between
-  // hidden in the Drawer and rail, also on phones. This size was mostly chosen
-  // based on what worked well for the content in the staggered column view.
-  static const double desktopBreakpoint = 1150;
+  // Breakpoint needed to show code view side by side breakpoint for the
+  // panel page view. This available content layout width, not media size.
+  // This min width was chosen because it gives at least the primary, secondary
+  // and tertiary colors in one Wrap row on panels Input Colors and Seeded
+  // ColorScheme, also when the side-by-side code view appears.
+  static const double codeViewWidthBreakpoint = 1024;
+
+  // The minimum media size needed for desktop/large tablet menu view,
+  // this is media size.
+  // Only at higher than this breakpoint will the menu expand from rail and
+  // be possible to toggle between menu and rail. Below this breakpoint it
+  // toggles between hidden in the Drawer and being a Rail, also on phones.
+  // This size was chosen because in combination codeViewWidthBreakpoint, it
+  // gives us a breakpoint where we get code side by side view in desktop
+  // rail mode already, and when it switches to menu mode, the desktop is
+  // wide enough to show both the full width menu and keep showing the
+  // code in side-by-side view. We could do lower the desktop width breakpoint,
+  // but then that view switches temporarily to now showing the code view,
+  // and it is just to much dynamic changes happening, it does not nice.
+  static const double desktopWidthBreakpoint = 1350;
   // This breakpoint is only used to further increase margins and insets on
   // very large desktops.
-  static const double bigDesktopBreakpoint = 2800;
+  static const double bigDesktopWidthBreakpoint = 2800;
   // The minimum media width treated as a phone device in this demo.
-  static const double phoneBreakpoint = 600;
+  static const double phoneWidthBreakpoint = 600;
+  // The minimum media height treated as a phone device in this demo.
+  static const double phoneHeightBreakpoint = 700;
   // Edge insets and margins for content at above breakpoints.
   static const double edgeInsetsPhone = 8;
   static const double edgeInsetsTablet = 12;
@@ -54,9 +71,9 @@ class AppData {
   // Responsive insets based on width. The width may be from LayoutBuilder or
   // MediaQuery, depending on what is appropriate for the use case.
   static double responsiveInsets(double width) {
-    if (width < phoneBreakpoint) return edgeInsetsPhone;
-    if (width < desktopBreakpoint) return edgeInsetsTablet;
-    if (width < bigDesktopBreakpoint) return edgeInsetsDesktop;
+    if (width < phoneWidthBreakpoint) return edgeInsetsPhone;
+    if (width < desktopWidthBreakpoint) return edgeInsetsTablet;
+    if (width < bigDesktopWidthBreakpoint) return edgeInsetsDesktop;
     return edgeInsetsBigDesktop;
   }
 

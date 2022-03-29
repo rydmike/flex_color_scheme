@@ -96,9 +96,9 @@ class _HomePageState extends State<HomePage> {
     final bool isDark = theme.brightness == Brightness.dark;
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
-    final bool isPhone =
-        MediaQuery.of(context).size.width < AppData.phoneBreakpoint;
-
+    final MediaQueryData media = MediaQuery.of(context);
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
         extendBodyBehindAppBar: true,
         extendBody: true,
         railWidth: isPhone ? 52 : 66,
-        breakpointShowFullMenu: AppData.desktopBreakpoint,
+        breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
         title: isPhone
             ? Text(AppColor.schemes[widget.controller.schemeIndex].name)
             : Text('${AppData.title(context)} - '

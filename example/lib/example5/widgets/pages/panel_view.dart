@@ -79,7 +79,8 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
     final ThemeController themeCtrl = widget.themeController;
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPinned = media.size.height >= AppData.pinnedSelector;
-    final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
     final double buttonHeight = AppData.panelButtonHeight +
         (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
@@ -201,7 +202,8 @@ class PanelPage extends StatelessWidget {
       // we show the code panel in a side-by side view, but only if we are not
       // on the last 3 pages, there we do not want it.
       final bool showCodeSideBySide =
-          constraints.maxWidth >= 1200 && panelPage < panelItems.length - 3;
+          constraints.maxWidth >= AppData.codeViewWidthBreakpoint &&
+              panelPage < panelItems.length - 3;
       final double margins =
           AppData.responsiveInsets(MediaQuery.of(context).size.width);
 

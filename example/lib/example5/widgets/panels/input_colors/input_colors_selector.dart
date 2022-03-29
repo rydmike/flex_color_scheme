@@ -53,15 +53,12 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
   }
 
   @override
-  void didUpdateWidget(covariant InputColorsSelector oldWidget) {
-    // Index got updated in popup and index changed, animate it to new index.
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     if (widget.controller.schemeIndex != schemeIndex) {
       schemeIndex = widget.controller.schemeIndex;
-      scrollController.animateTo(_kWidthOfScrollItem * schemeIndex,
-          duration: const Duration(milliseconds: 350),
-          curve: Curves.easeOutCubic);
+      scrollController.jumpTo(_kWidthOfScrollItem * schemeIndex);
     }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override

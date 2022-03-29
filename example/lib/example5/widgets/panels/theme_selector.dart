@@ -101,7 +101,8 @@ class ThemeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
     return HeaderCard(
       margin: EdgeInsets.symmetric(horizontal: margins),

@@ -39,7 +39,7 @@ class _SubpageState extends State<Subpage> {
     final double bottomPadding =
         media.padding.bottom + kBottomNavigationBarHeight;
 
-    final bool isNarrow = media.size.width < AppData.phoneBreakpoint;
+    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
     final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
 
     return DefaultTabController(

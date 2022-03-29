@@ -490,10 +490,10 @@ class Store {
   static const SchemeColor? defaultNavBarSelectedItemSchemeColor = null;
 
   // Key used to read and save the navBarUnselectedItemSchemeColor value.
-  static const String keyNavUnselectedSchemeColor =
+  static const String keyNavBarUnselectedSchemeColor =
       'navBarUnselectedItemSchemeColor';
   // Default navBarUnselectedItemSchemeColor.
-  static const SchemeColor? defaultNavUnselectedSchemeColor = null;
+  static const SchemeColor? defaultNavBarUnselectedSchemeColor = null;
 
   // Key used to read and save the navBarIndicatorSchemeColor value.
   static const String keyNavBarIndicatorSchemeColor =

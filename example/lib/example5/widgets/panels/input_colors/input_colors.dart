@@ -69,11 +69,12 @@ class InputColors extends StatelessWidget {
           },
         ),
         InputColorsPopupMenu(controller: controller),
-        const SizedBox(height: 8),
         if (controller.schemeIndex != (AppColor.schemes.length - 1))
           ListTile(
             title: const Text('Copy effective input colors to customizable '
                 'scheme?'),
+            subtitle:
+                const Text('Or tap a color code to copy it to the clipboard'),
             trailing: ElevatedButton(
               onPressed: () async {
                 await _handleCopySchemeTap(context);
@@ -100,14 +101,6 @@ class InputColors extends StatelessWidget {
           padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
           child: ShowInputColors(controller: controller),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            'Tap a color code to copy it to the clipboard',
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-        ),
-        const SizedBox(height: 8),
         const ListTile(
           title: Text('Input color modifiers'),
           subtitle: Text('Use input modifiers to change the effective colors '

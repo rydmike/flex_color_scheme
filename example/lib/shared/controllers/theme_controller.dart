@@ -252,8 +252,8 @@ class ThemeController with ChangeNotifier {
         Store.keyNavBarSelectedItemSchemeColor,
         Store.defaultNavBarSelectedItemSchemeColor);
     _navUnselectedSchemeColor = await _themeService.load(
-        Store.keyNavUnselectedSchemeColor,
-        Store.defaultNavUnselectedSchemeColor);
+        Store.keyNavBarUnselectedSchemeColor,
+        Store.defaultNavBarUnselectedSchemeColor);
     _navBarIndicatorSchemeColor = await _themeService.load(
         Store.keyNavBarIndicatorSchemeColor,
         Store.defaultNavBarIndicatorSchemeColor);
@@ -501,7 +501,7 @@ class ThemeController with ChangeNotifier {
     await setNavBarSelectedSchemeColor(
         Store.defaultNavBarSelectedItemSchemeColor, false);
     await setNavUnselectedSchemeColor(
-        Store.defaultNavUnselectedSchemeColor, false);
+        Store.defaultNavBarUnselectedSchemeColor, false);
     await setNavBarIndicatorSchemeColor(
         Store.defaultNavBarIndicatorSchemeColor, false);
     await setNavBarMuteUnselected(Store.defaultNavBarMuteUnselected, false);
@@ -1461,7 +1461,7 @@ class ThemeController with ChangeNotifier {
     if (value == _navUnselectedSchemeColor) return;
     _navUnselectedSchemeColor = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyNavUnselectedSchemeColor, value);
+    await _themeService.save(Store.keyNavBarUnselectedSchemeColor, value);
   }
 
   late SchemeColor? _navBarIndicatorSchemeColor;

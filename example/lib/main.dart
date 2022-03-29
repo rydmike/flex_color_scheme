@@ -723,7 +723,8 @@ class _HomePageState extends State<HomePage> {
     final double margins = AppData.responsiveInsets(media.size.width);
     final double topPadding = media.padding.top + kToolbarHeight + margins;
     final double bottomPadding = media.padding.bottom + margins;
-    final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headlineMedium = textTheme.headlineMedium!;
@@ -771,7 +772,7 @@ class _HomePageState extends State<HomePage> {
         menuLeadingAvatarLabel: 'FCS',
         menuItems: AppData.menuItems,
         railWidth: isPhone ? 52 : 66,
-        breakpointShowFullMenu: AppData.desktopBreakpoint,
+        breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
