@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -53,7 +52,7 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
       FloatingHeaderSnapConfiguration();
 }
 
-// A wrapper for the ThemeSelector when it is used in persistent header
+// A wrapper for the ThemeSelector when it is used via a persistent header
 // delegate.
 //
 // The wrapper is used to add the correct padding and frosted glass effect
@@ -98,22 +97,29 @@ class ThemeSelector extends StatelessWidget {
 
   final ThemeController controller;
 
+  // The height of the scrolling widget.
+  static const double _kHeightOfScrollWidget = 52;
+
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
+    final double phoneReduce = isPhone ? AppData.colorButtonPhoneReduce : 0;
     return HeaderCard(
       margin: EdgeInsets.symmetric(horizontal: margins),
       child: Column(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(0, margins, 0, 0),
-            child: InputColorsSelector(controller: controller),
+            child: InputColorsSelector(
+              controller: controller,
+              isPhone: isPhone,
+            ),
           ),
           SizedBox(
-            height: 52,
+            height: _kHeightOfScrollWidget + phoneReduce,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
