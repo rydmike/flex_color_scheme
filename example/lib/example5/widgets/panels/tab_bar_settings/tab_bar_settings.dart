@@ -32,6 +32,8 @@ class TabBarSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -67,44 +69,77 @@ class TabBarSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('Custom colors'),
-          subtitle: Text('With sub-themes you can select scheme color for '
-              'the items and indicator separately. '
-              'Using TabBarStyle is easier, but this offers more control. '
-              'These settings overrides used TabBarStyle, set them '
-              'back to default (null) to use TabBarStyle again. '
-              'With API you can set different color in light and dark '
-              'mode. This app shares same input for both modes, but you '
-              'can easily modify the generated setup code.'),
+          subtitle: Text('With component themes enabled you can select '
+              'scheme color for the tab items and their indicator separately. '
+              'Using TabBarStyle is handy to use to sync the style to active '
+              'AppBar theme, that may changes dynamically. This offers more '
+              'options if that is not needed. '
+              'These settings override used TabBarStyle, set them '
+              'back to default (null) to use TabBarStyle again.'),
         ),
-        ColorSchemePopupMenu(
-          title: const Text('TabBar items color'),
-          labelForDefault: 'null (TabBarStyle)',
-          index: controller.tabBarItemSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setTabBarItemSchemeColor(null);
-                  } else {
-                    controller
-                        .setTabBarItemSchemeColor(SchemeColor.values[index]);
+        if (isLight) ...<Widget>[
+          ColorSchemePopupMenu(
+            title: const Text('Light TabBar items color'),
+            labelForDefault: 'null (TabBarStyle)',
+            index: controller.tabBarItemSchemeColorLight?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setTabBarItemSchemeColorLight(null);
+                    } else {
+                      controller.setTabBarItemSchemeColorLight(
+                          SchemeColor.values[index]);
+                    }
                   }
-                }
-              : null,
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('TabBar indicator color'),
-          labelForDefault: 'null (TabBarStyle)',
-          index: controller.tabBarIndicator?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setTabBarIndicator(null);
-                  } else {
-                    controller.setTabBarIndicator(SchemeColor.values[index]);
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Light TabBar indicator color'),
+            labelForDefault: 'null (TabBarStyle)',
+            index: controller.tabBarIndicatorLight?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setTabBarIndicatorLight(null);
+                    } else {
+                      controller
+                          .setTabBarIndicatorLight(SchemeColor.values[index]);
+                    }
                   }
-                }
-              : null,
-        ),
+                : null,
+          )
+        ] else ...<Widget>[
+          ColorSchemePopupMenu(
+            title: const Text('Dark TabBar items color'),
+            labelForDefault: 'null (TabBarStyle)',
+            index: controller.tabBarItemSchemeColorDark?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setTabBarItemSchemeColorDark(null);
+                    } else {
+                      controller.setTabBarItemSchemeColorDark(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Dark TabBar indicator color'),
+            labelForDefault: 'null (TabBarStyle)',
+            index: controller.tabBarIndicatorDark?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setTabBarIndicatorDark(null);
+                    } else {
+                      controller
+                          .setTabBarIndicatorDark(SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          )
+        ]
       ],
     );
   }

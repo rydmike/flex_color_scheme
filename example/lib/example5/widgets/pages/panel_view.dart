@@ -127,7 +127,12 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
       body: PageView.builder(
         controller: pageController,
         itemCount: panelItems.length,
-        onPageChanged: themeCtrl.setViewIndex,
+        onPageChanged: (int page) {
+          setState(() {
+            previousPage = themeCtrl.viewIndex;
+          });
+          themeCtrl.setViewIndex(page);
+        },
         itemBuilder: (BuildContext context, int page) {
           return <Widget>[
             PanelPage(IntroductionPanel(themeCtrl), page, themeCtrl),
@@ -140,8 +145,8 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
             PanelPage(TextFieldSettings(themeCtrl), page, themeCtrl),
             PanelPage(AppBarSettings(themeCtrl), page, themeCtrl),
             PanelPage(TabBarSettings(themeCtrl), page, themeCtrl),
-            PanelPage(NavigationBarSettings(themeCtrl), page, themeCtrl),
             PanelPage(BottomNavigationBarSettings(themeCtrl), page, themeCtrl),
+            PanelPage(NavigationBarSettings(themeCtrl), page, themeCtrl),
             PanelPage(NavigationRailSettings(themeCtrl), page, themeCtrl),
             PanelPage(AndroidNavigationBarSettings(themeCtrl), page, themeCtrl),
             PanelPage(ButtonsSettings(themeCtrl), page, themeCtrl),
@@ -165,8 +170,8 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
 }
 
 // A PanelPage wrapper that puts the content of our panels, in a ListView
-// inside in HeaderCard. The ListView is needed so it can scroll inside
-// the PageView.
+// inside a HeaderCard. The ListView is needed so it grows as far as needed
+// inside the page in the PageView.
 class PanelPage extends StatelessWidget {
   const PanelPage(
     this.child,

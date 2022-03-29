@@ -208,12 +208,12 @@ class Store {
   // Key used to read and save the useSecondary value.
   static const String keyUseSecondary = 'useSecondary';
   // Default value for the useSecondary, also to reset settings.
-  static const bool defaultUseSecondary = true;
+  static const bool defaultUseSecondary = false;
 
   // Key used to read and save the useTertiary value.
   static const String keyUseTertiary = 'useTertiary';
   // Default value for the useTertiary, also to reset settings.
-  static const bool defaultUseTertiary = true;
+  static const bool defaultUseTertiary = false;
 
   // Key used to read and save the keepPrimary value.
   static const String keyKeepPrimary = 'keepPrimary';
@@ -389,17 +389,31 @@ class Store {
   // Default value for the tabBarStyle, also used to reset settings.
   static const FlexTabBarStyle defaultTabBarStyle = FlexTabBarStyle.forAppBar;
 
-  // Key used to read and save the tabBarIndicator value.
-  static const String keyTabBarIndicator = 'tabBarIndicator';
-  // Default value for the tabBarIndicator, also used to reset settings.
+  // Key used to read and save the tabBarIndicatorLight value.
+  static const String keyTabBarIndicatorLight = 'tabBarIndicatorLight';
+  // Default value for the tabBarIndicatorLight, also used to reset settings.
   // We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultTabBarIndicator = null;
+  static const SchemeColor? defaultTabBarIndicatorLight = null;
+
+  // Key used to read and save the tabBarIndicatorDark value.
+  static const String keyTabBarIndicatorDark = 'tabBarIndicatorDark';
+  // Default value for the tabBarIndicatorDark, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultTabBarIndicatorDark = null;
 
   // Key used to read and save the tabBarItemSchemeColor value.
-  static const String keyTabBarItemSchemeColor = 'tabBarItemSchemeColor';
+  static const String keyTabBarItemSchemeColorLight =
+      'tabBarItemSchemeColorLight';
   // Default value for the tabBarItemSchemeColor, also used to reset settings.
   // We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultTabBarItemSchemeColor = null;
+  static const SchemeColor? defaultTabBarItemSchemeColorLight = null;
+
+  // Key used to read and save the tabBarItemSchemeColorDark value.
+  static const String keyTabBarItemSchemeColorDark =
+      'tabBarItemSchemeColorDark';
+  // Default value for the tabBarItemSchemeColorDark, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultTabBarItemSchemeColorDark = null;
 
   // Android System Navigator bar SETTINGS.
   // ===========================================================================
@@ -469,25 +483,24 @@ class Store {
   // Default value for the navBarOpacity, also to reset settings.
   static const double defaultNavBarOpacity = 1.0;
 
-  // Key used to read and save the navSelectedSchemeColor value.
-  static const String keyNavSelectedSchemeColor = 'navSelectedSchemeColor';
-  // Default value for the navSelectedSchemeColor, also used to reset settings.
-  static const SchemeColor defaultNavSelectedSchemeColor = SchemeColor.primary;
+  // Key used to read and save the navBarSelectedItemSchemeColor value.
+  static const String keyNavBarSelectedItemSchemeColor =
+      'navBarSelectedItemSchemeColor';
+  // Default value for the navBarSelectedItemSchemeColor.
+  static const SchemeColor? defaultNavBarSelectedItemSchemeColor = null;
 
-  // Key used to read and save the navUnselectedSchemeColor value.
-  static const String keyNavUnselectedSchemeColor = 'navUnselectedSchemeColor';
-  // Default value for the navUnselectedSchemeColor, also used to
-  // reset settings.
-  static const SchemeColor defaultNavUnselectedSchemeColor =
-      SchemeColor.onSurface;
+  // Key used to read and save the navBarUnselectedItemSchemeColor value.
+  static const String keyNavUnselectedSchemeColor =
+      'navBarUnselectedItemSchemeColor';
+  // Default navBarUnselectedItemSchemeColor.
+  static const SchemeColor? defaultNavUnselectedSchemeColor = null;
 
   // Key used to read and save the navBarIndicatorSchemeColor value.
   static const String keyNavBarIndicatorSchemeColor =
       'navBarIndicatorSchemeColor';
   // Default value for the navBarIndicatorSchemeColor, also used to reset
   // settings. We use NULL as default, on nullable settings.
-  static const SchemeColor defaultNavBarIndicatorSchemeColor =
-      SchemeColor.primary;
+  static const SchemeColor? defaultNavBarIndicatorSchemeColor = null;
 
   // Key used to read and save the navBarMuteUnselected value.
   static const String keyNavBarMuteUnselected = 'navBarMuteUnselected';
@@ -509,13 +522,17 @@ class Store {
       'navRailBackgroundSchemeColor';
   // Default value for the navRailBackgroundSchemeColor, also used to
   // reset settings.
-  static const SchemeColor defaultNavRailBackgroundSchemeColor =
-      SchemeColor.background;
+  static const SchemeColor? defaultNavRailBackgroundSchemeColor = null;
 
   // Key used to read and save the navigationRailOpacity value.
   static const String keyNavRailOpacity = 'navRailOpacity';
   // Default value for the navigationRailOpacity, also to reset settings.
   static const double defaultNavRailOpacity = 1.0;
+
+  // Key used to read and save the navigationRailElevation value.
+  static const String keyNavigationRailElevation = 'navigationRailElevation';
+  // Default value for the navigationRailElevation, also reset settings.
+  static const double defaultNavigationRailElevation = 0;
 
   // Key used to read and save the navRailLabelType value.
   static const String keyNavRailLabelType = 'navRailLabelType';
@@ -534,8 +551,7 @@ class Store {
       'navRailIndicatorSchemeColor';
   // Default value for the navRailIndicatorSchemeColor, also used to reset
   // settings. We use NULL as default, on nullable settings.
-  static const SchemeColor defaultNavRailIndicatorSchemeColor =
-      SchemeColor.primary;
+  static const SchemeColor? defaultNavRailIndicatorSchemeColor = null;
 
   // Button SETTINGS.
   // ===========================================================================
@@ -677,8 +693,7 @@ class Store {
       'dialogBackgroundSchemeColor';
   // Default value for the dialogBackgroundSchemeColor, also used to
   // reset settings.
-  static const SchemeColor defaultDialogBackgroundSchemeColor =
-      SchemeColor.surface;
+  static const SchemeColor? defaultDialogBackgroundSchemeColor = null;
 
   // Custom color SETTINGS.
   // ===========================================================================

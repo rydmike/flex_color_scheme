@@ -19,13 +19,13 @@ class ListTileSettings extends StatelessWidget {
             'There are four different ListTile types in Flutter. They '
             'are very useful widgets for settings and options. '
             'In FlexColorScheme you can '
-            'for now only quick theme them ,by theming the colors of the '
+            'for now only quick theme them, by theming the colors of the '
             'switches, checkboxes and radio buttons they use.',
           ),
         ),
         SwitchListTileAdaptive(
           title: const Text('Unselected toggle color'),
-          subtitle: const Text('ON: Use theme color   OFF: SDK neutral'),
+          subtitle: const Text('ON: Use theme color   OFF: default grey'),
           value: controller.unselectedToggleIsColored &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

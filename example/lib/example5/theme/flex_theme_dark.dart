@@ -108,8 +108,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
             appBarBackgroundSchemeColor:
                 controller.appBarBackgroundSchemeColorDark,
-            tabBarItemSchemeColor: controller.tabBarItemSchemeColor,
-            tabBarIndicatorSchemeColor: controller.tabBarIndicator,
+            tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
+            tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,
             // BottomNavigationBar settings
             bottomNavigationBarSelectedLabelSchemeColor:
                 controller.navBarSelectedSchemeColor,
@@ -166,7 +166,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             navigationRailBackgroundSchemeColor:
                 controller.navRailBackgroundSchemeColor,
             navigationRailOpacity: controller.navRailOpacity,
-            navigationRailElevation: controller.bottomNavigationBarElevation,
+            navigationRailElevation: controller.navigationRailElevation,
             navigationRailLabelType: controller.navRailLabelType,
           )
         : null,

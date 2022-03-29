@@ -20,7 +20,7 @@ class SwitchesSettings extends StatelessWidget {
         const SizedBox(height: 8),
         SwitchListTileAdaptive(
           title: const Text('Unselected toggle color'),
-          subtitle: const Text('ON: Use theme color   OFF: SDK neutral'),
+          subtitle: const Text('ON: Use theme color   OFF: default grey'),
           value: controller.unselectedToggleIsColored &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

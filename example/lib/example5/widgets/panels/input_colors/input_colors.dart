@@ -114,7 +114,7 @@ class InputColors extends StatelessWidget {
               'that define the ColorScheme. The input color values show the '
               'color before input modifiers, surrounding color is the '
               'effective result. Seeded ColorSchemes also modify '
-              'input colors, here you can see how.'),
+              'input colors, above you can see how.'),
         ),
         SwitchListTileAdaptive(
           title: const Text('Use Material 3 error colors'),
@@ -135,9 +135,9 @@ class InputColors extends StatelessWidget {
         ),
         if (isLight)
           SwitchListTileAdaptive(
-            title: const Text('Light mode swap colors'),
+            title: const Text('Light theme swap colors'),
             subtitle: const Text(
-              'Swap primary, secondary and their container colors',
+              'Swap primary and secondary, and their container colors',
             ),
             value: controller.swapLightColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
@@ -146,9 +146,9 @@ class InputColors extends StatelessWidget {
           )
         else
           SwitchListTileAdaptive(
-            title: const Text('Dark mode swap colors'),
+            title: const Text('Dark theme swap colors'),
             subtitle: const Text(
-              'Swap primary, secondary and their container colors',
+              'Swap primary and secondary, and their container colors',
             ),
             value: controller.swapDarkColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme

@@ -37,14 +37,10 @@ class FabToggleChipPopupSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           title: const Text('Use themed Shape on FloatingActionButton'),
-          subtitle: const Text('OFF removes the Shape usage from its '
-              'component theme, making it use the default un-themed style. '
-              'This is circular while M2 remain its default un-themed style. '
-              'It may become the M3 style later. Currently even setting '
-              'ThemeData useMaterial3 to true, does not switch it '
-              'to M3 style. FlexColorScheme component sub-themes defaults '
-              'it to M3 style, unless you remove its shape completely with '
-              'this flag.'),
+          subtitle: const Text('OFF removes the custom Shape usage from its '
+              'component theme, making it use effective default un-themed '
+              'style, regardless of global border radius setting or its own '
+              'radius setting.'),
           value: controller.fabUseShape &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

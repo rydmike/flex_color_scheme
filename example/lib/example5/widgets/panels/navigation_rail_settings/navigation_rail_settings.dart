@@ -24,13 +24,14 @@ class NavigationRailSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double navRailOpacity =
+    final double navRailOpacity = controller.useSubThemes &&
+            controller.useFlexColorScheme &&
+            controller.navRailBackgroundSchemeColor?.index != null
+        ? controller.navRailOpacity
+        : 1;
+    final double navRailElevation =
         controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.navRailOpacity
-            : 1;
-    final double navBarElevation =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.bottomNavigationBarElevation
+            ? controller.navigationRailElevation
             : 8;
     return Column(
       children: <Widget>[
@@ -51,13 +52,18 @@ class NavigationRailSettings extends StatelessWidget {
               : null,
         ),
         ListTile(
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              controller.navRailBackgroundSchemeColor?.index != null,
           title: const Text('Background opacity'),
           subtitle: Slider.adaptive(
             max: 100,
             divisions: 100,
             label: (navRailOpacity * 100).toStringAsFixed(0),
             value: navRailOpacity * 100,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.navRailBackgroundSchemeColor?.index != null
                 ? (double value) {
                     controller.setNavRailOpacity(value / 100);
                   }
@@ -85,18 +91,15 @@ class NavigationRailSettings extends StatelessWidget {
           ),
         ),
         // const Divider(),
-        const ListTile(
-            title: Text('Elevation'),
-            subtitle: Text('Setting shared with BottomNavigationBar. '
-                'APIs have own properties')),
         ListTile(
-          title: Slider.adaptive(
+          title: const Text('Elevation'),
+          subtitle: Slider.adaptive(
             max: 24,
             divisions: 48,
-            label: navBarElevation.toStringAsFixed(1),
-            value: navBarElevation,
+            label: navRailElevation.toStringAsFixed(1),
+            value: navRailElevation,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setBottomNavigationBarElevation
+                ? controller.setNavigationRailElevation
                 : null,
           ),
           trailing: Padding(
@@ -109,7 +112,7 @@ class NavigationRailSettings extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(
-                  navBarElevation.toStringAsFixed(1),
+                  navRailElevation.toStringAsFixed(1),
                   style: Theme.of(context)
                       .textTheme
                       .caption!

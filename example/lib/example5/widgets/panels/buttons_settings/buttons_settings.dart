@@ -19,14 +19,9 @@ class ButtonsSettings extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
-          subtitle: Text('You can change button theme color, default is '
-              'primary via SDK default and component sub-theme defaults. '
-              'With API you can set different color in light and dark '
-              'mode. This app shares same input for both modes, but you '
-              'can easily modify the generated setup code.\n'
-              '\n'
-              'All component themes with border radius can also have their '
-              'radius overridden and changed individually. It then either '
+          subtitle: Text('You can change button theme colors, default is '
+              'primary color. All component themes with border radius can '
+              'also have their own radius changed individually. It then either '
               'overrides the M3 default or the set global radius default, '
               'depending on what is in use. This is demonstrated here with '
               'the standard buttons. Use API to modify radius individually '

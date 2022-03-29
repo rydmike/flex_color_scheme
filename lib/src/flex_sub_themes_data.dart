@@ -93,19 +93,19 @@ class FlexSubThemesData with Diagnosticable {
     this.outlinedButtonRadius,
     this.toggleButtonsRadius,
     //
-    this.textButtonSchemeColor = SchemeColor.primary,
-    this.elevatedButtonSchemeColor = SchemeColor.primary,
-    this.outlinedButtonSchemeColor = SchemeColor.primary,
-    this.materialButtonSchemeColor = SchemeColor.primary,
-    this.toggleButtonsSchemeColor = SchemeColor.primary,
+    this.textButtonSchemeColor,
+    this.elevatedButtonSchemeColor,
+    this.outlinedButtonSchemeColor,
+    this.materialButtonSchemeColor,
+    this.toggleButtonsSchemeColor,
     //
-    this.switchSchemeColor = SchemeColor.secondary,
-    this.checkboxSchemeColor = SchemeColor.secondary,
-    this.radioSchemeColor = SchemeColor.secondary,
+    this.switchSchemeColor,
+    this.checkboxSchemeColor,
+    this.radioSchemeColor,
     this.unselectedToggleIsColored = false,
     //
     this.inputDecorationRadius,
-    this.inputDecoratorSchemeColor = SchemeColor.primary,
+    this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
     this.inputDecoratorBorderType = FlexInputBorderType.outline,
@@ -114,9 +114,9 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.fabRadius,
     this.fabUseShape = true,
-    this.fabSchemeColor = SchemeColor.secondary,
+    this.fabSchemeColor,
     this.chipRadius,
-    this.chipSchemeColor = SchemeColor.primary,
+    this.chipSchemeColor,
     //
     this.cardRadius,
     this.cardElevation = kCardElevation,
@@ -126,7 +126,7 @@ class FlexSubThemesData with Diagnosticable {
     this.popupMenuOpacity = 1,
     this.dialogRadius,
     this.dialogElevation = kDialogElevation,
-    this.dialogBackgroundSchemeColor = SchemeColor.surface,
+    this.dialogBackgroundSchemeColor,
     this.timePickerDialogRadius,
     this.snackBarElevation = kSnackBarElevation,
     this.snackBarBackgroundSchemeColor,
@@ -142,18 +142,18 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarLabelTextStyle,
     this.bottomNavigationBarSelectedLabelSize,
     this.bottomNavigationBarUnselectedLabelSize,
-    this.bottomNavigationBarSelectedLabelSchemeColor = SchemeColor.primary,
+    this.bottomNavigationBarSelectedLabelSchemeColor,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
         'version 5 and later this property has been replaced by: '
         'bottomNavigationBarSelectedLabelSchemeColor.')
         this.bottomNavigationBarSchemeColor,
-    this.bottomNavigationBarUnselectedLabelSchemeColor = SchemeColor.onSurface,
+    this.bottomNavigationBarUnselectedLabelSchemeColor,
     this.bottomNavigationBarMutedUnselectedLabel = true,
     this.bottomNavigationBarSelectedIconSize,
     this.bottomNavigationBarUnselectedIconSize,
-    this.bottomNavigationBarSelectedIconSchemeColor = SchemeColor.primary,
-    this.bottomNavigationBarUnselectedIconSchemeColor = SchemeColor.onSurface,
+    this.bottomNavigationBarSelectedIconSchemeColor,
+    this.bottomNavigationBarUnselectedIconSchemeColor,
     this.bottomNavigationBarMutedUnselectedIcon = true,
     this.bottomNavigationBarBackgroundSchemeColor,
     this.bottomNavigationBarOpacity = 1,
@@ -172,13 +172,13 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarLabelTextStyle,
     this.navigationBarSelectedLabelSize,
     this.navigationBarUnselectedLabelSize,
-    this.navigationBarSelectedLabelSchemeColor = SchemeColor.primary,
+    this.navigationBarSelectedLabelSchemeColor,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
         'version 5 and later this property has been replaced by: '
         'navigationBarSelectedLabelSchemeColor.')
         this.navigationBarTextSchemeColor,
-    this.navigationBarUnselectedLabelSchemeColor = SchemeColor.onSurface,
+    this.navigationBarUnselectedLabelSchemeColor,
     this.navigationBarMutedUnselectedLabel = true,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
@@ -187,35 +187,35 @@ class FlexSubThemesData with Diagnosticable {
         this.navigationBarMutedUnselectedText,
     this.navigationBarSelectedIconSize,
     this.navigationBarUnselectedIconSize,
-    this.navigationBarSelectedIconSchemeColor = SchemeColor.primary,
+    this.navigationBarSelectedIconSchemeColor,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
         'version 5 and later this property has been replaced by: '
         'navigationBarSelectedIconSchemeColor.')
         this.navigationBarIconSchemeColor,
-    this.navigationBarUnselectedIconSchemeColor = SchemeColor.onSurface,
+    this.navigationBarUnselectedIconSchemeColor,
     this.navigationBarMutedUnselectedIcon = true,
-    this.navigationBarHighlightSchemeColor = SchemeColor.primary,
+    this.navigationBarHighlightSchemeColor,
     this.navigationBarBackgroundSchemeColor,
     this.navigationBarOpacity = 1,
-    this.navigationBarHeight = 62,
+    this.navigationBarHeight = kNavigationBarHeight,
     this.navigationBarLabelBehavior =
         NavigationDestinationLabelBehavior.alwaysShow,
     //
     this.navigationRailLabelTextStyle,
     this.navigationRailSelectedLabelSize,
     this.navigationRailUnselectedLabelSize,
-    this.navigationRailSelectedLabelSchemeColor = SchemeColor.primary,
-    this.navigationRailUnselectedLabelSchemeColor = SchemeColor.onSurface,
+    this.navigationRailSelectedLabelSchemeColor,
+    this.navigationRailUnselectedLabelSchemeColor,
     this.navigationRailMutedUnselectedLabel = true,
     this.navigationRailSelectedIconSize,
     this.navigationRailUnselectedIconSize,
-    this.navigationRailSelectedIconSchemeColor = SchemeColor.primary,
-    this.navigationRailUnselectedIconSchemeColor = SchemeColor.onSurface,
+    this.navigationRailSelectedIconSchemeColor,
+    this.navigationRailUnselectedIconSchemeColor,
     this.navigationRailMutedUnselectedIcon = true,
     this.navigationRailUseIndicator = true,
-    this.navigationRailIndicatorSchemeColor = SchemeColor.primary,
-    this.navigationRailBackgroundSchemeColor = SchemeColor.background,
+    this.navigationRailIndicatorSchemeColor,
+    this.navigationRailBackgroundSchemeColor,
     this.navigationRailOpacity = 1,
     this.navigationRailElevation = kNavigationRailElevation,
     this.navigationRailLabelType = NavigationRailLabelType.all,
@@ -416,13 +416,14 @@ class FlexSubThemesData with Diagnosticable {
   /// * [OutlinedButton]
   /// * Older deprecated buttons using [ButtonThemeData]
   /// * [ToggleButtons]
+  /// * [FloatingActionButton]
   /// * [InputDecoration]
   /// * [Card]
+  /// * [Chip]
   /// * [PopupMenuButton]
   /// * [Dialog]
   /// * [TimePickerDialog]
   /// * [BottomSheet]
-  /// * [BottomNavigationBar]
   ///
   /// Defaults to null.
   ///
