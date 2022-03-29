@@ -176,6 +176,11 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    defaultRadius: ${controller.cornerRadius!.toStringAsFixed(1)},\n'
       : '';
   //
+  // Material bottom sheet.
+  final String bottomSheetRadius = controller.bottomSheetBorderRadius != null
+      ? '    bottomSheetRadius: ${controller.bottomSheetBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  //
   // Material button sub themes border radius.
   final String textButtonBorderRadius = controller.textButtonBorderRadius !=
           null
@@ -507,6 +512,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$useTextTheme'
           '$defRadius'
           //
+          '$bottomSheetRadius'
           '$textButtonBorderRadius'
           '$elevatedButtonBorderRadius'
           '$outlinedButtonBorderRadius'
@@ -594,6 +600,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$useTextTheme'
           '$defRadius'
           //
+          '$bottomSheetRadius'
           '$textButtonBorderRadius'
           '$elevatedButtonBorderRadius'
           '$outlinedButtonBorderRadius'

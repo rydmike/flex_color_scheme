@@ -353,12 +353,12 @@ class Store {
   // Key used to read and save the appBarElevation value.
   static const String keyAppBarElevationLight = 'appBarElevation';
   // Default value for the appBarElevation, also used to reset settings.
-  static const double defaultAppBarElevationLight = 0.5;
+  static const double defaultAppBarElevationLight = 0.0;
 
   // Key used to read and save the appBarElevationDark value.
   static const String keyAppBarElevationDark = 'appBarElevationDark';
   // Default value for the appBarElevationDark, also used to reset settings.
-  static const double defaultAppBarElevationDark = 1.0;
+  static const double defaultAppBarElevationDark = 0.0;
 
   // Key used to read and save the transparentStatusBar value.
   static const String keyTransparentStatusBar = 'transparentStatusBar';
@@ -414,6 +414,15 @@ class Store {
   // Default value for the tabBarItemSchemeColorDark, also to reset settings.
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultTabBarItemSchemeColorDark = null;
+
+  // BottomSheet SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the bottomSheetBorderRadius value.
+  static const String keyBottomSheetBorderRadius = 'bottomSheetBorderRadius';
+  // Default value for the bottomSheetBorderRadius, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultBottomSheetBorderRadius = null;
 
   // Android System Navigator bar SETTINGS.
   // ===========================================================================
