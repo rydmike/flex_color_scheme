@@ -166,6 +166,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             popupMenuOpacity: controller.popupMenuOpacity,
             // ColorScheme used on various widgets.
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
+            dialogRadius: controller.dialogBorderRadius,
+            timePickerDialogRadius: controller.dialogBorderRadius,
             appBarBackgroundSchemeColor:
                 controller.appBarBackgroundSchemeColorLight,
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorLight,

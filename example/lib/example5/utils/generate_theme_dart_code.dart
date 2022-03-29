@@ -73,7 +73,6 @@ String generateThemeDartCode(ThemeController controller) {
         '  colors: FlexColor.schemes[${FlexScheme.values[flexScheme]}]!\n'
         '      .light.defaultError.toDark(${controller.darkMethodLevel}, ${controller.toDarkSwapPrimaryAndContainer}),\n';
   }
-  //
   // Code for main theme setup, the other properties 'FlexColorScheme.light' and
   // 'FlexColorScheme.dark' factories direct parameters.
   //
@@ -303,6 +302,12 @@ String generateThemeDartCode(ThemeController controller) {
               .dialogBackgroundSchemeColor !=
           null
       ? '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundSchemeColor},\n'
+      : '';
+  final String dialogBorderRadius = controller.dialogBorderRadius != null
+      ? '    dialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String timePickerDialogRadius = controller.dialogBorderRadius != null
+      ? '    timePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
       : '';
   final String appBarBackgroundSchemeColorLight = controller
               .appBarBackgroundSchemeColorLight !=
@@ -535,6 +540,8 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$popupMenuOpacity'
           '$dialogBackgroundSchemeColor'
+          '$dialogBorderRadius'
+          '$timePickerDialogRadius'
           '$appBarBackgroundSchemeColorLight'
           '$tabBarItemSchemeColorLight'
           '$tabBarIndicatorSchemeColorLight'
@@ -619,6 +626,8 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$popupMenuOpacity'
           '$dialogBackgroundSchemeColor'
+          '$dialogBorderRadius'
+          '$timePickerDialogRadius'
           '$appBarBackgroundSchemeColorDark'
           '$tabBarItemSchemeColorDark'
           '$tabBarIndicatorSchemeColorDark'

@@ -742,6 +742,12 @@ class Store {
   // reset settings.
   static const SchemeColor? defaultDialogBackgroundSchemeColor = null;
 
+  // Key used to read and save the dialogBorderRadius value.
+  static const String keyDialogBorderRadius = 'dialogBorderRadius';
+  // Default value for the dialogBorderRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDialogBorderRadius = null;
+
   // Custom color SETTINGS.
   // ===========================================================================
 
