@@ -156,6 +156,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             // M3 type default and global radius on the FAB, it thus
             // remains circular or stadium shaped in extended mode.
             fabUseShape: controller.fabUseShape,
+            fabRadius: controller.fabBorderRadius,
             fabSchemeColor: controller.fabSchemeColor,
             snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
             chipSchemeColor: controller.chipSchemeColor,

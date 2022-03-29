@@ -275,6 +275,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String fabUseShape = controller.fabUseShape
       ? ''
       : '    fabUseShape: ${controller.fabUseShape},\n';
+  final String fabBorderRadius =
+      controller.fabBorderRadius != null && controller.fabUseShape
+          ? '    fabRadius: ${controller.fabBorderRadius},\n'
+          : '';
   final String fabSchemeColor =
       controller.fabSchemeColor == SchemeColor.secondary ||
               controller.fabSchemeColor == null
@@ -518,6 +522,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorUnfocusedBorderIsColored'
           //
           '$fabUseShape'
+          '$fabBorderRadius'
           '$fabSchemeColor'
           '$snackSchemeColor'
           '$chipSchemeColor'
@@ -601,6 +606,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorUnfocusedBorderIsColored'
           //
           '$fabUseShape'
+          '$fabBorderRadius'
           '$fabSchemeColor'
           '$snackSchemeColor'
           '$chipSchemeColor'

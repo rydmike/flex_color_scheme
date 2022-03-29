@@ -337,6 +337,8 @@ class ThemeController with ChangeNotifier {
     // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
     _fabUseShape = await _themeService.load(
         Store.keyFabUseShape, Store.defaultFabUseShape);
+    _fabBorderRadius = await _themeService.load(
+        Store.keyFabBorderRadius, Store.defaultFabBorderRadius);
     _fabSchemeColor = await _themeService.load(
         Store.keyFabSchemeColor, Store.defaultFabSchemeColor);
     _chipSchemeColor = await _themeService.load(
@@ -574,6 +576,7 @@ class ThemeController with ChangeNotifier {
     //
     // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
     await setFabUseShape(Store.defaultFabUseShape, false);
+    await setFabBorderRadius(Store.defaultFabBorderRadius, false);
     await setFabSchemeColor(Store.defaultFabSchemeColor, false);
     await setChipSchemeColor(Store.defaultChipSchemeColor, false);
     await setSnackBarSchemeColor(Store.defaultSnackBarSchemeColor, false);
@@ -1804,6 +1807,15 @@ class ThemeController with ChangeNotifier {
     _fabUseShape = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyFabUseShape, value);
+  }
+
+  late double? _fabBorderRadius;
+  double? get fabBorderRadius => _fabBorderRadius;
+  Future<void> setFabBorderRadius(double? value, [bool notify = true]) async {
+    if (value == _fabBorderRadius) return;
+    _fabBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyFabBorderRadius, value);
   }
 
   late SchemeColor? _fabSchemeColor;
