@@ -329,33 +329,33 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   //
   final String bottomNavigationBarSelectedLabelSchemeColor = controller
-              .navBarSelectedSchemeColor !=
+              .bottomNavBarSelectedSchemeColor !=
           null
-      ? '    bottomNavigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      ? '    bottomNavigationBarSelectedLabelSchemeColor: ${controller.bottomNavBarSelectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarUnselectedLabelSchemeColor = controller
-              .navBarUnselectedSchemeColor !=
+              .bottomNavBarUnselectedSchemeColor !=
           null
-      ? '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.navBarUnselectedSchemeColor},\n'
+      ? '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.bottomNavBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedLabel = controller
-          .navBarMuteUnselected
+          .bottomNavBarMuteUnselected
       ? ''
-      : '    bottomNavigationBarMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
+      : '    bottomNavigationBarMutedUnselectedLabel: ${controller.bottomNavBarMuteUnselected},\n';
   final String bottomNavigationBarSelectedIconSchemeColor = controller
-              .navBarSelectedSchemeColor !=
+              .bottomNavBarSelectedSchemeColor !=
           null
-      ? '    bottomNavigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      ? '    bottomNavigationBarSelectedIconSchemeColor: ${controller.bottomNavBarSelectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarUnselectedIconSchemeColor = controller
-              .navBarUnselectedSchemeColor !=
+              .bottomNavBarUnselectedSchemeColor !=
           null
-      ? '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.navBarUnselectedSchemeColor},\n'
+      ? '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.bottomNavBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedIcon = controller
-          .navBarMuteUnselected
+          .bottomNavBarMuteUnselected
       ? ''
-      : '    bottomNavigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
+      : '    bottomNavigationBarMutedUnselectedIcon: ${controller.bottomNavBarMuteUnselected},\n';
   final String bottomNavigationBarBackgroundSchemeColor = controller
               .bottomNavBarBackgroundSchemeColor !=
           null

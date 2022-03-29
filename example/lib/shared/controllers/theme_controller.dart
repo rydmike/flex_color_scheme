@@ -235,6 +235,15 @@ class ThemeController with ChangeNotifier {
     _bottomNavigationBarElevation = await _themeService.load(
         Store.keyBottomNavigationBarElevation,
         Store.defaultBottomNavigationBarElevation);
+    _bottomNavBarSelectedSchemeColor = await _themeService.load(
+        Store.keyBottomNavBarSelectedItemSchemeColor,
+        Store.defaultBottomNavBarSelectedItemSchemeColor);
+    _bottomNavBarUnselectedSchemeColor = await _themeService.load(
+        Store.keyBottomNavBarUnselectedSchemeColor,
+        Store.defaultBottomNavBarUnselectedSchemeColor);
+    _bottomNavBarMuteUnselected = await _themeService.load(
+        Store.keyBottomNavBarMuteUnselected,
+        Store.defaultBottomNavBarMuteUnselected);
     _bottomNavShowSelectedLabels = await _themeService.load(
         Store.keyBottomNavShowSelectedLabels,
         Store.defaultBottomNavShowSelectedLabels);
@@ -254,11 +263,11 @@ class ThemeController with ChangeNotifier {
     _navBarUnselectedSchemeColor = await _themeService.load(
         Store.keyNavBarUnselectedSchemeColor,
         Store.defaultNavBarUnselectedSchemeColor);
+    _navBarMuteUnselected = await _themeService.load(
+        Store.keyNavBarMuteUnselected, Store.defaultNavBarMuteUnselected);
     _navBarIndicatorSchemeColor = await _themeService.load(
         Store.keyNavBarIndicatorSchemeColor,
         Store.defaultNavBarIndicatorSchemeColor);
-    _navBarMuteUnselected = await _themeService.load(
-        Store.keyNavBarMuteUnselected, Store.defaultNavBarMuteUnselected);
     _navBarLabelBehavior = await _themeService.load(
         Store.keyNavBarLabelBehavior, Store.defaultNavBarLabelBehavior);
     //
@@ -497,6 +506,12 @@ class ThemeController with ChangeNotifier {
         Store.defaultBottomNavigationBarOpacity, false);
     await setBottomNavigationBarElevation(
         Store.defaultBottomNavigationBarElevation, false);
+    await setBottomNavBarSelectedSchemeColor(
+        Store.defaultBottomNavBarSelectedItemSchemeColor, false);
+    await setBottomNavBarUnselectedSchemeColor(
+        Store.defaultBottomNavBarUnselectedSchemeColor, false);
+    await setBottomNavBarMuteUnselected(
+        Store.defaultBottomNavBarMuteUnselected, false);
     await setBottomNavShowSelectedLabels(
         Store.defaultBottomNavShowSelectedLabels, false);
     await setBottomNavShowUnselectedLabels(
@@ -510,9 +525,9 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavBarSelectedItemSchemeColor, false);
     await setNavBarUnselectedSchemeColor(
         Store.defaultNavBarUnselectedSchemeColor, false);
+    await setNavBarMuteUnselected(Store.defaultNavBarMuteUnselected, false);
     await setNavBarIndicatorSchemeColor(
         Store.defaultNavBarIndicatorSchemeColor, false);
-    await setNavBarMuteUnselected(Store.defaultNavBarMuteUnselected, false);
     await setNavBarLabelBehavior(Store.defaultNavBarLabelBehavior, false);
     //
     // NavigationRail SETTINGS.
@@ -1412,6 +1427,40 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyBottomNavigationBarElevation, value);
   }
 
+  late SchemeColor? _bottomNavBarSelectedSchemeColor;
+  SchemeColor? get bottomNavBarSelectedSchemeColor =>
+      _bottomNavBarSelectedSchemeColor;
+  Future<void> setBottomNavBarSelectedSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _bottomNavBarSelectedSchemeColor) return;
+    _bottomNavBarSelectedSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(
+        Store.keyBottomNavBarSelectedItemSchemeColor, value);
+  }
+
+  late SchemeColor? _bottomNavBarUnselectedSchemeColor;
+  SchemeColor? get bottomNavBarUnselectedSchemeColor =>
+      _bottomNavBarUnselectedSchemeColor;
+  Future<void> setBottomNavBarUnselectedSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _bottomNavBarUnselectedSchemeColor) return;
+    _bottomNavBarUnselectedSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyBottomNavBarUnselectedSchemeColor, value);
+  }
+
+  late bool _bottomNavBarMuteUnselected;
+  bool get bottomNavBarMuteUnselected => _bottomNavBarMuteUnselected;
+  Future<void> setBottomNavBarMuteUnselected(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _bottomNavBarMuteUnselected) return;
+    _bottomNavBarMuteUnselected = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyBottomNavBarMuteUnselected, value);
+  }
+
   late bool _bottomNavShowSelectedLabels;
   bool get bottomNavShowSelectedLabels => _bottomNavShowSelectedLabels;
   Future<void> setBottomNavShowSelectedLabels(bool? value,
@@ -1477,16 +1526,6 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyNavBarUnselectedSchemeColor, value);
   }
 
-  late SchemeColor? _navBarIndicatorSchemeColor;
-  SchemeColor? get navBarIndicatorSchemeColor => _navBarIndicatorSchemeColor;
-  Future<void> setNavBarIndicatorSchemeColor(SchemeColor? value,
-      [bool notify = true]) async {
-    if (value == _navBarIndicatorSchemeColor) return;
-    _navBarIndicatorSchemeColor = value;
-    if (notify) notifyListeners();
-    await _themeService.save(Store.keyNavBarIndicatorSchemeColor, value);
-  }
-
   late bool _navBarMuteUnselected;
   bool get navBarMuteUnselected => _navBarMuteUnselected;
   Future<void> setNavBarMuteUnselected(bool? value,
@@ -1496,6 +1535,16 @@ class ThemeController with ChangeNotifier {
     _navBarMuteUnselected = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyNavBarMuteUnselected, value);
+  }
+
+  late SchemeColor? _navBarIndicatorSchemeColor;
+  SchemeColor? get navBarIndicatorSchemeColor => _navBarIndicatorSchemeColor;
+  Future<void> setNavBarIndicatorSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _navBarIndicatorSchemeColor) return;
+    _navBarIndicatorSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavBarIndicatorSchemeColor, value);
   }
 
   late NavigationDestinationLabelBehavior _navBarLabelBehavior;

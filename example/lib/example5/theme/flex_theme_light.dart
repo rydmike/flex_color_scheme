@@ -170,17 +170,17 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorLight,
             // BottomNavigationBar settings
             bottomNavigationBarSelectedLabelSchemeColor:
-                controller.navBarSelectedSchemeColor,
+                controller.bottomNavBarSelectedSchemeColor,
             bottomNavigationBarUnselectedLabelSchemeColor:
-                controller.navBarUnselectedSchemeColor,
+                controller.bottomNavBarUnselectedSchemeColor,
             bottomNavigationBarMutedUnselectedLabel:
-                controller.navBarMuteUnselected,
+                controller.bottomNavBarMuteUnselected,
             bottomNavigationBarSelectedIconSchemeColor:
-                controller.navBarSelectedSchemeColor,
+                controller.bottomNavBarSelectedSchemeColor,
             bottomNavigationBarUnselectedIconSchemeColor:
-                controller.navBarUnselectedSchemeColor,
+                controller.bottomNavBarUnselectedSchemeColor,
             bottomNavigationBarMutedUnselectedIcon:
-                controller.navBarMuteUnselected,
+                controller.bottomNavBarMuteUnselected,
             bottomNavigationBarBackgroundSchemeColor:
                 controller.bottomNavBarBackgroundSchemeColor,
             bottomNavigationBarOpacity: controller.bottomNavigationBarOpacity,
