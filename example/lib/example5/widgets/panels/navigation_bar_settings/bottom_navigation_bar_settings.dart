@@ -142,14 +142,14 @@ class BottomNavigationBarSettings extends StatelessWidget {
               controller.useSubThemes && controller.useFlexColorScheme
                   ? 'null (onSurface)'
                   : 'null (onSurface with opacity)',
-          index: controller.navUnselectedSchemeColor?.index ?? -1,
+          index: controller.navBarUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavUnselectedSchemeColor(null);
+                    controller.setNavBarUnselectedSchemeColor(null);
                   } else {
-                    controller
-                        .setNavUnselectedSchemeColor(SchemeColor.values[index]);
+                    controller.setNavBarUnselectedSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,
