@@ -20,15 +20,15 @@ class ComponentThemes extends StatelessWidget {
         const SizedBox(height: 8),
         SwitchListTileAdaptive(
           title: const Text('Use component themes'),
-          subtitle: const Text('Enable opinionated widget sub themes'),
+          subtitle: const Text('Enable opinionated widget themes'),
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
         ),
         SwitchListTileAdaptive(
           title: const Text('Use Flutter defaults'),
-          subtitle: const Text('When possible, prefer Flutter null defaults '
-              'for sub-themes, instead of FlexColorScheme defaults'),
+          subtitle: const Text('When offered, prefer Flutter defaults '
+              'for sub-themes. See docs for details'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -51,8 +51,7 @@ class ComponentThemes extends StatelessWidget {
         if (isLight)
           SwitchListTileAdaptive(
             title: const Text('Light mode TextTheme is primary colored'),
-            subtitle: const Text('A hint of primary color is mixed into '
-                'main text theme'),
+            subtitle: const Text('Primary color is mixed into main text theme'),
             value: controller.blendLightTextTheme &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -63,8 +62,7 @@ class ComponentThemes extends StatelessWidget {
         else
           SwitchListTileAdaptive(
             title: const Text('Dark mode TextTheme is primary colored'),
-            subtitle: const Text('A hint of primary color is mixed into '
-                'main text theme'),
+            subtitle: const Text('Primary color is mixed into main text theme'),
             value: controller.blendDarkTextTheme &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -74,13 +72,13 @@ class ComponentThemes extends StatelessWidget {
           ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Used border radius on UI elements'),
-          subtitle: const Text('Default uses Material 3 specification border '
-              'radius, which varies per component. '
-              'A defined value sets it for all components. '
-              'Material 2 specification is 4. '
-              'With API you can adjust it per component. For some components '
-              'you can set it here in the playground too.'),
+          title: const Text('Global border radius on components'),
+          subtitle: const Text('Defaults are based on Material 3 '
+              'specification, it varies per component. '
+              'If you set a global value, all components will use it. '
+              'Material 2 specification is 4. With the API you can adjust it '
+              'per component. On some component settings in this app, '
+              'you can set it individually here too.'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -130,7 +128,7 @@ class ComponentThemes extends StatelessWidget {
           title: const Text('Themed interaction effects'),
           subtitle: const Text('Disable, hover, focus, highlight and '
               'splash are based on primary color.\n'
-              'OFF for Flutter SDK defaults'),
+              'OFF for Flutter grey defaults'),
           value: controller.interactionEffects &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

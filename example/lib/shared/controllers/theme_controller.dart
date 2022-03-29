@@ -206,10 +206,16 @@ class ThemeController with ChangeNotifier {
     // TabBar SETTINGS.
     _tabBarStyle = await _themeService.load(
         Store.keyTabBarStyle, Store.defaultTabBarStyle);
-    _tabBarIndicator = await _themeService.load(
-        Store.keyTabBarIndicator, Store.defaultTabBarIndicator);
-    _tabBarItemSchemeColor = await _themeService.load(
-        Store.keyTabBarItemSchemeColor, Store.defaultTabBarItemSchemeColor);
+    _tabBarIndicatorLight = await _themeService.load(
+        Store.keyTabBarIndicatorLight, Store.defaultTabBarIndicatorLight);
+    _tabBarIndicatorDark = await _themeService.load(
+        Store.keyTabBarIndicatorDark, Store.defaultTabBarIndicatorDark);
+    _tabBarItemSchemeColorLight = await _themeService.load(
+        Store.keyTabBarItemSchemeColorLight,
+        Store.defaultTabBarItemSchemeColorLight);
+    _tabBarItemSchemeColorDark = await _themeService.load(
+        Store.keyTabBarItemSchemeColorDark,
+        Store.defaultTabBarItemSchemeColorDark);
     //
     // Android System Navigator bar SETTINGS.
     _sysNavBarStyle = await _themeService.load(
@@ -243,7 +249,8 @@ class ThemeController with ChangeNotifier {
     _navBarOpacity = await _themeService.load(
         Store.keyNavBarOpacity, Store.defaultNavBarOpacity);
     _navBarSelectedSchemeColor = await _themeService.load(
-        Store.keyNavSelectedSchemeColor, Store.defaultNavSelectedSchemeColor);
+        Store.keyNavBarSelectedItemSchemeColor,
+        Store.defaultNavBarSelectedItemSchemeColor);
     _navUnselectedSchemeColor = await _themeService.load(
         Store.keyNavUnselectedSchemeColor,
         Store.defaultNavUnselectedSchemeColor);
@@ -261,6 +268,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavRailBackgroundSchemeColor);
     _navRailOpacity = await _themeService.load(
         Store.keyNavRailOpacity, Store.defaultNavRailOpacity);
+    _navigationRailElevation = await _themeService.load(
+        Store.keyNavigationRailElevation, Store.defaultNavigationRailElevation);
     _navRailLabelType = await _themeService.load(
         Store.keyNavRailLabelType, Store.defaultNavRailLabelType);
     _navRailUseIndicator = await _themeService.load(
@@ -461,8 +470,12 @@ class ThemeController with ChangeNotifier {
     //
     // TabBar SETTINGS.
     await setTabBarStyle(Store.defaultTabBarStyle, false);
-    await setTabBarIndicator(Store.defaultTabBarIndicator, false);
-    await setTabBarItemSchemeColor(Store.defaultTabBarItemSchemeColor, false);
+    await setTabBarIndicatorLight(Store.defaultTabBarIndicatorLight, false);
+    await setTabBarIndicatorDark(Store.defaultTabBarIndicatorDark, false);
+    await setTabBarItemSchemeColorLight(
+        Store.defaultTabBarItemSchemeColorLight, false);
+    await setTabBarItemSchemeColorDark(
+        Store.defaultTabBarItemSchemeColorDark, false);
     //
     // Android System Navigator bar SETTINGS.
     await setSysNavBarStyle(Store.defaultSysNavBarStyle, false);
@@ -486,7 +499,7 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavBarBackgroundSchemeColor, false);
     await setNavBarOpacity(Store.defaultNavBarOpacity, false);
     await setNavBarSelectedSchemeColor(
-        Store.defaultNavSelectedSchemeColor, false);
+        Store.defaultNavBarSelectedItemSchemeColor, false);
     await setNavUnselectedSchemeColor(
         Store.defaultNavUnselectedSchemeColor, false);
     await setNavBarIndicatorSchemeColor(
@@ -498,6 +511,8 @@ class ThemeController with ChangeNotifier {
     await setNavRailBackgroundSchemeColor(
         Store.defaultNavRailBackgroundSchemeColor, false);
     await setNavRailOpacity(Store.defaultNavRailOpacity, false);
+    await setNavigationRailElevation(
+        Store.defaultNavigationRailElevation, false);
     await setNavRailLabelType(Store.defaultNavRailLabelType, false);
     await setNavRailUseIndicator(Store.defaultNavRailUseIndicator, false);
     await setNavRailIndicatorSchemeColor(
@@ -1274,24 +1289,44 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyTabBarStyle, value);
   }
 
-  late SchemeColor? _tabBarIndicator;
-  SchemeColor? get tabBarIndicator => _tabBarIndicator;
-  Future<void> setTabBarIndicator(SchemeColor? value,
+  late SchemeColor? _tabBarIndicatorLight;
+  SchemeColor? get tabBarIndicatorLight => _tabBarIndicatorLight;
+  Future<void> setTabBarIndicatorLight(SchemeColor? value,
       [bool notify = true]) async {
-    if (value == _tabBarIndicator) return;
-    _tabBarIndicator = value;
+    if (value == _tabBarIndicatorLight) return;
+    _tabBarIndicatorLight = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyTabBarIndicator, value);
+    await _themeService.save(Store.keyTabBarIndicatorLight, value);
   }
 
-  late SchemeColor? _tabBarItemSchemeColor;
-  SchemeColor? get tabBarItemSchemeColor => _tabBarItemSchemeColor;
-  Future<void> setTabBarItemSchemeColor(SchemeColor? value,
+  late SchemeColor? _tabBarIndicatorDark;
+  SchemeColor? get tabBarIndicatorDark => _tabBarIndicatorDark;
+  Future<void> setTabBarIndicatorDark(SchemeColor? value,
       [bool notify = true]) async {
-    if (value == _tabBarItemSchemeColor) return;
-    _tabBarItemSchemeColor = value;
+    if (value == _tabBarIndicatorDark) return;
+    _tabBarIndicatorDark = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyTabBarItemSchemeColor, value);
+    await _themeService.save(Store.keyTabBarIndicatorDark, value);
+  }
+
+  late SchemeColor? _tabBarItemSchemeColorLight;
+  SchemeColor? get tabBarItemSchemeColorLight => _tabBarItemSchemeColorLight;
+  Future<void> setTabBarItemSchemeColorLight(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _tabBarItemSchemeColorLight) return;
+    _tabBarItemSchemeColorLight = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyTabBarItemSchemeColorLight, value);
+  }
+
+  late SchemeColor? _tabBarItemSchemeColorDark;
+  SchemeColor? get tabBarItemSchemeColorDark => _tabBarItemSchemeColorDark;
+  Future<void> setTabBarItemSchemeColorDark(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _tabBarItemSchemeColorDark) return;
+    _tabBarItemSchemeColorDark = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyTabBarItemSchemeColorDark, value);
   }
 
   // Android System Navigator bar SETTINGS.
@@ -1416,7 +1451,7 @@ class ThemeController with ChangeNotifier {
     if (value == _navBarSelectedSchemeColor) return;
     _navBarSelectedSchemeColor = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyNavSelectedSchemeColor, value);
+    await _themeService.save(Store.keyNavBarSelectedItemSchemeColor, value);
   }
 
   late SchemeColor? _navUnselectedSchemeColor;
@@ -1483,6 +1518,17 @@ class ThemeController with ChangeNotifier {
     _navRailOpacity = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyNavRailOpacity, value);
+  }
+
+  late double _navigationRailElevation;
+  double get navigationRailElevation => _navigationRailElevation;
+  Future<void> setNavigationRailElevation(double? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _navigationRailElevation) return;
+    _navigationRailElevation = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavigationRailElevation, value);
   }
 
   late NavigationRailLabelType _navRailLabelType;

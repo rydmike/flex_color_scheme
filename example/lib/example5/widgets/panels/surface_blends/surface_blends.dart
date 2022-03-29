@@ -61,18 +61,16 @@ class SurfaceBlends extends StatelessWidget {
           title: Text('Blended surfaces and backgrounds'),
           isThreeLine: true,
           subtitle: Text(
-            'Material Design 2 uses white and almost black surface colors. '
-            'The M2 guide mentions using surfaces with different alpha '
-            'blends, by blending primary color into different surfaces. '
-            'Blend mode and level does this.\n'
+            'Material Design 2 guide briefly mentions using surfaces with '
+            'primary color alpha blends. FlexColorScheme surface blends '
+            'implements it.\n'
             '\n'
-            'Material Design 3 introduces a new color system, where a hint '
-            'of primary color is also used on surfaces via neutral tonal '
-            'palettes, shifted slightly towards the primary color. If you '
-            'use key color seeded ColorScheme and set blend level to zero, '
-            'you get the pure M3 design. When you use it with blends, you '
-            'can further strengthen the surface blends and also vary '
-            'blend strength by surface type.',
+            'Material Design 3 has a new color system where a hint of primary '
+            'color is also used on surfaces. It is done via its neutral tonal '
+            'palettes that are shifted slightly towards the primary color. '
+            'If you use M3 seeded ColorSchemes and set blend level to zero, '
+            'you get the M3 design. With surface blends, you can further '
+            'strengthen the effect and vary blend levels by surface type.',
           ),
         ),
         if (isLight) ...<Widget>[
@@ -177,12 +175,12 @@ class SurfaceBlends extends StatelessWidget {
           ),
           SwitchListTileAdaptive(
             title: const Text('Light theme main colors use onColor blending'),
-            subtitle: const Text(
-                'In M3 seeded light design only container colors use color '
-                'pair tinted onColor, main colors use black or white. '
-                'Keep this OFF to do so. Set ON to also use it with '
-                'onPrimary, onSecondary, onTertiary and onError, when seed '
-                'colors are not used'),
+            subtitle:
+                const Text('In M3 design, only container colors use color '
+                    'pair tinted onColor. Main colors use black or white. '
+                    'Keep this OFF to do so. Set to ON to use it with '
+                    'onPrimary, onSecondary, onTertiary and onError, when seed '
+                    'colors are not used'),
             value: controller.blendLightOnColors &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -302,10 +300,10 @@ class SurfaceBlends extends StatelessWidget {
           SwitchListTileAdaptive(
             title: const Text('Dark theme main colors use onColor blending'),
             subtitle: const Text(
-                'In M3 seeded dark design, not only container colors use '
-                'color pair tinted onColor, but also the main colors do. '
+                'In M3 dark design, not only container colors use '
+                'color pair tinted onColor, but also main colors do. '
                 'Keep this ON to also use it with onPrimary, onSecondary, '
-                'onTertiary and onError colors in dark mode when seed colors '
+                'onTertiary and onError colors in dark mode, when seed colors '
                 'are not used'),
             value: controller.blendDarkOnColors &&
                 controller.useSubThemes &&

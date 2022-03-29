@@ -24,11 +24,11 @@ class EffectiveColors extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: ShowColorSchemeColors(),
         ),
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: Text('The effective ColorScheme colors '
-              'are presented in the same order as they appear in the '
-              'ColorScheme class. The deprecated colors primaryVariant and '
+        const SizedBox(height: 8),
+        const ListTile(
+          subtitle: Text('The effective ColorScheme colors '
+              'are presented in the order they appear in the '
+              'ColorScheme class. Deprecated colors primaryVariant and '
               'secondaryVariant are excluded.'),
         ),
         const SizedBox(height: 8),
@@ -43,10 +43,10 @@ class EffectiveColors extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'The effective color properties in your ThemeData are '
-                      'shown above. All direct color properties in '
-                      'ThemeData are planned to be deprecated and eventually '
-                      'removed from Flutter. More info can be found in ',
+                  text: 'Effective color properties in ThemeData class. '
+                      'All direct color properties in ThemeData are planned '
+                      'to be deprecated and removed from Flutter. '
+                      'More info in ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -56,14 +56,16 @@ class EffectiveColors extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: '.\n\n'
-                      'These colors are still critical in Flutter 2.10.x and '
-                      'earlier. Many UI Widgets depend on them for their '
-                      'default colors. FlexColorScheme has since its first '
-                      'version kept all of them in sync with provided '
+                      'ThemeData colors are still critical in Flutter 2.10.x '
+                      'and earlier. Many UI Widgets still depend on them for '
+                      'their default colors. FlexColorScheme has since its '
+                      'first version kept all of them in sync with provided '
                       'ColorScheme, to produce an app with consistent '
                       'ColorScheme based colors on all widgets. It will '
                       'continue to do so as long as these colors exist in '
-                      'ThemeData.',
+                      'ThemeData. If you switch to dark theme mode and toggle '
+                      'FlexColorScheme ON/OFF, you can see that many colors in '
+                      'ThemeData loose their relation to active ColorScheme.',
                 ),
               ],
             ),

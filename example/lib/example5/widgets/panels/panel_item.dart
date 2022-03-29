@@ -64,13 +64,14 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.tab_outlined,
   ),
   PanelItem(
-    panelLabel: 'NavigationBar',
-    icon: Icons.video_label_outlined,
-  ),
-  PanelItem(
     panelLabel: 'BottomNavigationBar',
     buttonLabel: 'Bottom\nNavigationBar',
-    icon: Icons.video_label_outlined,
+    icon: Icons.video_label,
+  ),
+  PanelItem(
+    panelLabel: 'NavigationBar',
+    buttonLabel: 'Navigation\nBar',
+    icon: Icons.call_to_action,
   ),
   PanelItem(
     panelLabel: 'NavigationRail',

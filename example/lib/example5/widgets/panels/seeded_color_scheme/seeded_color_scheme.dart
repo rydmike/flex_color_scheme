@@ -99,18 +99,18 @@ class SeededColorScheme extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
-          subtitle: Text('In Material 3 design, seed generated light and '
-              'dark mode ColorSchemes are based on same key colors to generate '
-              'six tonal palettes. Both the light and '
-              'dark mode ColorScheme colors are picked from these six '
-              'palettes using different tones. For light and dark mode to use '
-              'identical tonal palettes, FlexColorScheme automatically '
-              'uses the light input for built in schemes. '
-              'With custom schemes you can decide if you do so or not.'),
+          subtitle: Text('In Material Design 3, seed generated light and '
+              'dark mode ColorSchemes use same key colors to generate six '
+              'tonal palettes. Both light and dark theme ColorScheme colors '
+              'are picked from these palettes, but using different tones. '
+              'To ensure light and dark themes use identical tonal palettes, '
+              'FlexColorScheme automatically only uses the light mode colors '
+              'from built in schemes to seed ColorSchemes. '
+              'When using custom colors you can decide if you do so or not.'),
         ),
         if (showKeyButtons)
           ListTile(
-            title: const Text('Input colors used as keys to seed '
+            title: const Text('Light input colors used to seed '
                 'the ColorScheme'),
             subtitle: Text(AppColor.explainUsedColors(controller)),
           ),
@@ -122,11 +122,11 @@ class SeededColorScheme extends StatelessWidget {
           maintainAnimation: true,
           maintainState: true,
           child: SwitchListTileAdaptive(
-              title: const Text('Custom dark colors used as key colors'),
+              title: const Text('Custom dark scheme uses its own key colors'),
               subtitle: const Text(
-                'Option only available on custom schemes. If you "keep" dark '
-                'mode input colors on custom schemes, turn ON '
-                'to use its custom dark mode input color definitions.',
+                'This option is only available on custom dark schemes. If '
+                'you "keep" dark input colors with custom dark schemes, '
+                'turn this ON to use its own input color definition.',
               ),
               value: controller.useDarkColorsForSeed &&
                   controller.useKeyColors &&
@@ -143,18 +143,15 @@ class SeededColorScheme extends StatelessWidget {
                   : null),
         ),
         const ListTile(
-          title: Text('Keep effective input color'),
-          subtitle: Text('When using a seeded ColorScheme, '
-              'you can lock primary, secondary, tertiary and their '
-              'container colors to their effective input color value, '
-              'instead of using the tone from the computed tonal palette. '
-              'Toggle switches below for each color to keep its effective '
-              'input color. The lock switches are only available when the '
-              'key color based seeded scheme is used. They have separate '
-              'state for light and dark theme mode.'),
+          title: Text('Keep input color'),
+          subtitle: Text('You can lock primary, secondary, tertiary and their '
+              'container colors to their input colors, '
+              'instead of using its color from seeded tonal palette. '
+              'Switches have separate states for light and dark theme mode.'),
         ),
+        const ListTile(title: Text('Effective ColorScheme')),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 4),
+          padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 4),
           child: SchemeColors(tc: controller),
         ),
         if (controller.schemeIndex != (AppColor.schemes.length - 1))
@@ -165,7 +162,7 @@ class SeededColorScheme extends StatelessWidget {
               // ignore: lines_longer_than_80_chars
               "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color below. ' : ''}"
               // ignore: lines_longer_than_80_chars
-              "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, that may not be found in palettes when hovered.' : '\n'}",
+              "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
@@ -186,10 +183,10 @@ class SeededColorScheme extends StatelessWidget {
         ),
         const ListTile(
           subtitle: Text(
-            'With FlexTones you can configure which tone from '
-            'generated tonal palettes each color in the ColorScheme use. '
-            'You can also set limits on used CAM16 chroma values '
-            'for the three color values used as keys to seed the M3 primary, '
+            'With FlexTones, configure which tone from '
+            'generated palettes, each color in the ColorScheme use. '
+            'Also set limits on used CAM16 chroma values '
+            'for the three colors used as keys to seed the primary, '
             'secondary and tertiary TonalPalette.',
           ),
         ),
@@ -211,10 +208,10 @@ class SeededColorScheme extends StatelessWidget {
           subtitle: Text(
             // ignore: lines_longer_than_80_chars
             '${_describeFlexToneLong(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}\n'
-            'In this version you can choose between the default Material 3 '
+            'In this app you can choose between the default Material 3 '
             'tone mapping and four pre-defined custom FlexTones setups. With '
             'the API you can make your own FlexTones configurations. A '
-            'future version of this app may add interactive configuration of '
+            'future version of the app may add interactive configuration of '
             'tone to ColorScheme color mapping.',
           ),
         ),

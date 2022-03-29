@@ -166,11 +166,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
             appBarBackgroundSchemeColor:
                 controller.appBarBackgroundSchemeColorLight,
-            tabBarItemSchemeColor: controller.tabBarItemSchemeColor,
-            tabBarIndicatorSchemeColor: controller.tabBarIndicator,
-            //
+            tabBarItemSchemeColor: controller.tabBarItemSchemeColorLight,
+            tabBarIndicatorSchemeColor: controller.tabBarIndicatorLight,
             // BottomNavigationBar settings
-            // Shares input with BottomNavigationBar.
             bottomNavigationBarSelectedLabelSchemeColor:
                 controller.navBarSelectedSchemeColor,
             bottomNavigationBarUnselectedLabelSchemeColor:
@@ -192,9 +190,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
                 controller.bottomNavShowSelectedLabels,
             bottomNavigationBarShowUnselectedLabels:
                 controller.bottomNavShowUnselectedLabels,
-            //
             // NavigationBar settings
-            // Shares input with BottomNavigationBar and Rail.
             navigationBarSelectedLabelSchemeColor:
                 controller.navBarSelectedSchemeColor,
             navigationBarUnselectedLabelSchemeColor:
@@ -211,9 +207,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
                 controller.navBarBackgroundSchemeColor,
             navigationBarOpacity: controller.navBarOpacity,
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
-            //
             // NavigationRail settings
-            // Shares controller values with nav bars in this demo.
             navigationRailSelectedLabelSchemeColor:
                 controller.navBarSelectedSchemeColor,
             navigationRailUnselectedLabelSchemeColor:
@@ -230,7 +224,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             navigationRailBackgroundSchemeColor:
                 controller.navRailBackgroundSchemeColor,
             navigationRailOpacity: controller.navRailOpacity,
-            navigationRailElevation: controller.bottomNavigationBarElevation,
+            navigationRailElevation: controller.navigationRailElevation,
             navigationRailLabelType: controller.navRailLabelType,
           )
         : null,

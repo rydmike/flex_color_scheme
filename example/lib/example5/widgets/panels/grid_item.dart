@@ -69,13 +69,14 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.tab_outlined,
   ),
   GridItem(
-    panelLabel: 'NavigationBar',
-    icon: Icons.video_label_outlined,
-  ),
-  GridItem(
     panelLabel: 'BottomNavigationBar',
     buttonLabel: 'Bottom\nNavigationBar',
-    icon: Icons.video_label_outlined,
+    icon: Icons.video_label,
+  ),
+  GridItem(
+    panelLabel: 'NavigationBar',
+    buttonLabel: 'Navigation\nBar',
+    icon: Icons.call_to_action,
   ),
   GridItem(
     panelLabel: 'NavigationRail',

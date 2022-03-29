@@ -15,15 +15,8 @@ class TextFieldSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 8),
-        const ListTile(
-          title: Text('Adjust TextField style'),
-          subtitle: Text('When sub themes are enabled you can adjust the '
-              'style of the TextField input via easy to use '
-              'InputDecorator theme options'),
-        ),
         ColorSchemePopupMenu(
-          title: const Text('Base color of text field'),
+          title: const Text('Base color of TextField'),
           index: controller.inputDecoratorSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -38,7 +31,7 @@ class TextFieldSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           title: const Text(
-            'Field has fill color',
+            'TextField uses fill color',
           ),
           value: controller.inputDecoratorIsFilled &&
               controller.useSubThemes &&
@@ -71,7 +64,7 @@ class TextFieldSettings extends StatelessWidget {
               : null,
         ),
         SwitchListTileAdaptive(
-          title: const Text('Unfocused field has border'),
+          title: const Text('Unfocused field has a border'),
           value: controller.inputDecoratorUnfocusedHasBorder &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

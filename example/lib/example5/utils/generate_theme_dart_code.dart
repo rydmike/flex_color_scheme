@@ -10,10 +10,8 @@ import '../../shared/controllers/theme_controller.dart';
 ///
 /// The properties are in the order they are in the classes.
 String generateThemeDartCode(ThemeController controller) {
-  //
   // If FlexColorsScheme is not in use, return a default M2 ColorScheme based
   // theme as a starting point suggestion.
-  //
   if (!controller.useFlexColorScheme) {
     return '''
   // FlexColorScheme is not in use!
@@ -27,9 +25,7 @@ String generateThemeDartCode(ThemeController controller) {
   ),
   themeMode: ThemeMode.system,''';
   }
-  //
   // Code for main theme setup, the effective colors setup.
-  //
   final FlexSchemeData scheme = AppColor.scheme(controller);
   // Get the enum index of scheme
   final int flexScheme = controller.schemeIndex - 3;
@@ -284,14 +280,12 @@ String generateThemeDartCode(ThemeController controller) {
               controller.fabSchemeColor == null
           ? ''
           : '    fabSchemeColor: ${controller.fabSchemeColor},\n';
-  final String snackSchemeColor = controller.snackBarSchemeColor == null
-      ? ''
-      : '    snackBarBackgroundSchemeColor: ${controller.snackBarSchemeColor},\n';
-  final String chipSchemeColor =
-      controller.chipSchemeColor == SchemeColor.primary ||
-              controller.chipSchemeColor == null
-          ? ''
-          : '    chipSchemeColor: ${controller.chipSchemeColor},\n';
+  final String snackSchemeColor = controller.snackBarSchemeColor != null
+      ? '    snackBarBackgroundSchemeColor: ${controller.snackBarSchemeColor},\n'
+      : '';
+  final String chipSchemeColor = controller.chipSchemeColor != null
+      ? '    chipSchemeColor: ${controller.chipSchemeColor},\n'
+      : '';
   final String cardBorderRadius = controller.cardBorderRadius != null
       ? '    cardRadius: ${controller.cardBorderRadius},\n'
       : '';
@@ -299,65 +293,78 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    popupMenuOpacity: ${controller.popupMenuOpacity},\n'
       : '';
   final String dialogBackgroundSchemeColor = controller
-              .dialogBackgroundSchemeColor ==
-          SchemeColor.surface
-      ? ''
-      : '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundSchemeColor},\n';
+              .dialogBackgroundSchemeColor !=
+          null
+      ? '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundSchemeColor},\n'
+      : '';
   final String appBarBackgroundSchemeColorLight = controller
-              .appBarBackgroundSchemeColorLight ==
+              .appBarBackgroundSchemeColorLight !=
           null
-      ? ''
-      : '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColorLight},\n';
+      ? '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColorLight},\n'
+      : '';
   final String appBarBackgroundSchemeColorDark = controller
-              .appBarBackgroundSchemeColorDark ==
+              .appBarBackgroundSchemeColorDark !=
           null
-      ? ''
-      : '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColorDark},\n';
-  final String tabBarItemSchemeColor = controller.tabBarItemSchemeColor == null
-      ? ''
-      : '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColor},\n';
-
-  final String tabBarIndicatorSchemeColor = controller.tabBarIndicator == null
-      ? ''
-      : '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicator},\n';
-  //
+      ? '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColorDark},\n'
+      : '';
+  final String tabBarItemSchemeColorLight = controller
+              .tabBarItemSchemeColorLight !=
+          null
+      ? '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColorLight},\n'
+      : '';
+  final String tabBarIndicatorSchemeColorLight = controller
+              .tabBarIndicatorLight !=
+          null
+      ? '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicatorLight},\n'
+      : '';
+  final String tabBarItemSchemeColorDark = controller
+              .tabBarItemSchemeColorDark !=
+          null
+      ? '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColorDark},\n'
+      : '';
+  final String tabBarIndicatorSchemeColorDark = controller
+              .tabBarIndicatorDark !=
+          null
+      ? '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicatorDark},\n'
+      : '';
   //
   final String bottomNavigationBarSelectedLabelSchemeColor = controller
-              .navBarSelectedSchemeColor ==
-          SchemeColor.primary
-      ? ''
-      : '    bottomNavigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+              .navBarSelectedSchemeColor !=
+          null
+      ? '    bottomNavigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      : '';
   final String bottomNavigationBarUnselectedLabelSchemeColor = controller
-              .navUnselectedSchemeColor ==
-          SchemeColor.onSurface
-      ? ''
-      : '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+              .navUnselectedSchemeColor !=
+          null
+      ? '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      : '';
   final String bottomNavigationBarMutedUnselectedLabel = controller
           .navBarMuteUnselected
       ? ''
       : '    bottomNavigationBarMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
   final String bottomNavigationBarSelectedIconSchemeColor = controller
-              .navBarSelectedSchemeColor ==
-          SchemeColor.primary
-      ? ''
-      : '    bottomNavigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+              .navBarSelectedSchemeColor !=
+          null
+      ? '    bottomNavigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      : '';
   final String bottomNavigationBarUnselectedIconSchemeColor = controller
-              .navUnselectedSchemeColor ==
-          SchemeColor.onSurface
-      ? ''
-      : '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+              .navUnselectedSchemeColor !=
+          null
+      ? '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      : '';
   final String bottomNavigationBarMutedUnselectedIcon = controller
           .navBarMuteUnselected
       ? ''
       : '    bottomNavigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
   final String bottomNavigationBarBackgroundSchemeColor = controller
-              .bottomNavBarBackgroundSchemeColor ==
+              .bottomNavBarBackgroundSchemeColor !=
           null
-      ? ''
-      : '    bottomNavigationBarBackgroundSchemeColor: ${controller.bottomNavBarBackgroundSchemeColor},\n';
+      ? '    bottomNavigationBarBackgroundSchemeColor: ${controller.bottomNavBarBackgroundSchemeColor},\n'
+      : '';
   final String bottomNavigationBarOpacity = controller
-              .bottomNavigationBarOpacity !=
-          1
+                  .bottomNavigationBarOpacity !=
+              1 &&
+          controller.bottomNavBarBackgroundSchemeColor?.index != null
       ? '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity},\n'
       : '';
   final String bottomNavigationBarElevation = controller
@@ -376,44 +383,45 @@ String generateThemeDartCode(ThemeController controller) {
   //
   //
   final String navigationBarSelectedLabelSchemeColor = controller
-              .navBarSelectedSchemeColor ==
-          SchemeColor.primary
-      ? ''
-      : '    navigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+              .navBarSelectedSchemeColor !=
+          null
+      ? '    navigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      : '';
   final String navigationBarUnselectedLabelSchemeColor = controller
-              .navUnselectedSchemeColor ==
-          SchemeColor.onSurface
-      ? ''
-      : '    navigationBarUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+              .navUnselectedSchemeColor !=
+          null
+      ? '    navigationBarUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      : '';
   final String navigationBarMutedUnselectedLabel = controller
           .navBarMuteUnselected
       ? ''
       : '    navigationBarMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
   final String navigationBarSelectedIconSchemeColor = controller
-              .navBarSelectedSchemeColor ==
-          SchemeColor.primary
-      ? ''
-      : '    navigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+              .navBarSelectedSchemeColor !=
+          null
+      ? '    navigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      : '';
   final String navigationBarUnselectedIconSchemeColor = controller
-              .navUnselectedSchemeColor ==
-          SchemeColor.onSurface
-      ? ''
-      : '    navigationBarUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+              .navUnselectedSchemeColor !=
+          null
+      ? '    navigationBarUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      : '';
   final String navigationBarMutedUnselectedIcon = controller
           .navBarMuteUnselected
       ? ''
       : '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
   final String navigationBarHighlightSchemeColor = controller
-              .navBarIndicatorSchemeColor ==
-          SchemeColor.primary
-      ? ''
-      : '    navigationBarHighlightSchemeColor: ${controller.navBarIndicatorSchemeColor},\n';
-  final String navigationBarBackgroundSchemeColor = controller
-              .navBarBackgroundSchemeColor ==
+              .navBarIndicatorSchemeColor !=
           null
-      ? ''
-      : '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n';
-  final String navigationBarOpacity = controller.navBarOpacity != 1
+      ? '    navigationBarHighlightSchemeColor: ${controller.navBarIndicatorSchemeColor},\n'
+      : '';
+  final String navigationBarBackgroundSchemeColor = controller
+              .navBarBackgroundSchemeColor !=
+          null
+      ? '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n'
+      : '';
+  final String navigationBarOpacity = controller.navBarOpacity != 1 &&
+          controller.navBarBackgroundSchemeColor?.index != null
       ? '    navigationBarOpacity: ${controller.navBarOpacity},\n'
       : '';
   final String navigationBarLabelBehavior = controller.navBarLabelBehavior !=
@@ -423,29 +431,29 @@ String generateThemeDartCode(ThemeController controller) {
   //
   //
   final String navigationRailSelectedLabelSchemeColor = controller
-              .navBarSelectedSchemeColor ==
-          SchemeColor.primary
-      ? ''
-      : '    navigationRailSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+              .navBarSelectedSchemeColor !=
+          null
+      ? '    navigationRailSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      : '';
   final String navigationRailUnselectedLabelSchemeColor = controller
-              .navUnselectedSchemeColor ==
-          SchemeColor.onSurface
-      ? ''
-      : '    navigationRailUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+              .navUnselectedSchemeColor !=
+          null
+      ? '    navigationRailUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      : '';
   final String navigationRailMutedUnselectedLabel = controller
           .navBarMuteUnselected
       ? ''
       : '    navigationRailMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
   final String navigationRailSelectedIconSchemeColor = controller
-              .navBarSelectedSchemeColor ==
-          SchemeColor.primary
-      ? ''
-      : '    navigationRailSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n';
+              .navBarSelectedSchemeColor !=
+          null
+      ? '    navigationRailSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      : '';
   final String navigationRailUnselectedIconSchemeColor = controller
-              .navUnselectedSchemeColor ==
-          SchemeColor.onSurface
-      ? ''
-      : '    navigationRailUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n';
+              .navUnselectedSchemeColor !=
+          null
+      ? '    navigationRailUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      : '';
   final String navigationRailMutedUnselectedIcon = controller
           .navBarMuteUnselected
       ? ''
@@ -454,22 +462,21 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    navigationRailUseIndicator: ${controller.navRailUseIndicator},\n';
   final String navigationRailIndicatorSchemeColor = controller
-              .navRailIndicatorSchemeColor ==
-          SchemeColor.primary
-      ? ''
-      : '    navigationRailIndicatorSchemeColor: ${controller.navRailIndicatorSchemeColor},\n';
+              .navRailIndicatorSchemeColor !=
+          null
+      ? '    navigationRailIndicatorSchemeColor: ${controller.navRailIndicatorSchemeColor},\n'
+      : '';
   final String navigationRailBackgroundSchemeColor = controller
-              .navRailBackgroundSchemeColor ==
-          SchemeColor.background
-      ? ''
-      : '    navigationRailBackgroundSchemeColor: ${controller.navRailBackgroundSchemeColor},\n';
-  final String navigationRailOpacity = controller.navRailOpacity != 1
+              .navRailBackgroundSchemeColor !=
+          null
+      ? '    navigationRailBackgroundSchemeColor: ${controller.navRailBackgroundSchemeColor},\n'
+      : '';
+  final String navigationRailOpacity = controller.navRailOpacity != 1 &&
+          controller.navRailBackgroundSchemeColor?.index != null
       ? '    navigationRailOpacity: ${controller.navRailOpacity},\n'
       : '';
-  final String navigationRailElevation = controller
-              .bottomNavigationBarElevation !=
-          0
-      ? '    navigationRailElevation: ${controller.bottomNavigationBarElevation},\n'
+  final String navigationRailElevation = controller.navigationRailElevation != 0
+      ? '    navigationRailElevation: ${controller.navigationRailElevation},\n'
       : '';
   final String navigationRailLabelType =
       controller.navRailLabelType != NavigationRailLabelType.all
@@ -520,8 +527,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$popupMenuOpacity'
           '$dialogBackgroundSchemeColor'
           '$appBarBackgroundSchemeColorLight'
-          '$tabBarItemSchemeColor'
-          '$tabBarIndicatorSchemeColor'
+          '$tabBarItemSchemeColorLight'
+          '$tabBarIndicatorSchemeColorLight'
           //
           '$bottomNavigationBarSelectedLabelSchemeColor'
           '$bottomNavigationBarUnselectedLabelSchemeColor'
@@ -602,8 +609,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$popupMenuOpacity'
           '$dialogBackgroundSchemeColor'
           '$appBarBackgroundSchemeColorDark'
-          '$tabBarItemSchemeColor'
-          '$tabBarIndicatorSchemeColor'
+          '$tabBarItemSchemeColorDark'
+          '$tabBarIndicatorSchemeColorDark'
           //
           '$bottomNavigationBarSelectedLabelSchemeColor'
           '$bottomNavigationBarUnselectedLabelSchemeColor'

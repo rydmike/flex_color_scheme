@@ -19,10 +19,11 @@ class BottomNavigationBarSettings extends StatelessWidget {
         (isDark && !controller.useFlexColorScheme)
             ? 'null (secondary)'
             : 'null (primary)';
-    final double navBarOpacity =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.bottomNavigationBarOpacity
-            : 1;
+    final double navBarOpacity = controller.useSubThemes &&
+            controller.useFlexColorScheme &&
+            controller.bottomNavBarBackgroundSchemeColor?.index != null
+        ? controller.bottomNavigationBarOpacity
+        : 1;
     final double navBarElevation =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.bottomNavigationBarElevation
@@ -46,14 +47,18 @@ class BottomNavigationBarSettings extends StatelessWidget {
               : null,
         ),
         ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              controller.bottomNavBarBackgroundSchemeColor?.index != null,
           title: const Text('Background opacity'),
           subtitle: Slider.adaptive(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
             value: navBarOpacity * 100,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.bottomNavBarBackgroundSchemeColor?.index != null
                 ? (double value) {
                     controller.setBottomNavigationBarOpacity(value / 100);
                   }
@@ -83,12 +88,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Elevation'),
-          subtitle: const Text('Shared setting with NavigationRail, APIs '
-              'have own properties'),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
+          subtitle: Slider.adaptive(
             max: 24,
             divisions: 48,
             label: navBarElevation.toStringAsFixed(1),

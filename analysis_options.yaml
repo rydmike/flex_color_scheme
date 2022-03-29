@@ -107,7 +107,7 @@ linter:
     #
     # https://dart-lang.github.io/linter/lints/always_put_required_named_parameters_first.html
     #
-    # Conflicts with the convention used by flutter, which puts `Key key`
+    # Conflicts with the convention used by Flutter, which puts `Key key` first
     # and `@required Widget child` last.
     #
     # Other known linters use:
