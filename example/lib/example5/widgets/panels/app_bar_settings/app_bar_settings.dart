@@ -182,6 +182,7 @@ class AppBarSettings extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Text(
+                    // ignore: lines_longer_than_80_chars
                     '${(controller.appBarOpacityLight * 100).toStringAsFixed(0)}'
                     ' %',
                     style: Theme.of(context)

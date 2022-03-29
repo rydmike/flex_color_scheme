@@ -110,6 +110,9 @@ class _LargeGridViewState extends State<LargeGridView>
     // Call `super.build` when using `AutomaticKeepAliveClientMixin`.
     super.build(context);
     final MediaQueryData media = MediaQuery.of(context);
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
+    final double phoneReduce = isPhone ? AppData.colorButtonPhoneReduce : 0;
     final bool isPinned = media.size.height >= AppData.pinnedSelector;
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
@@ -130,7 +133,7 @@ class _LargeGridViewState extends State<LargeGridView>
       final double margins = AppData.responsiveInsets(media.size.width);
       const double selectorBoxHeight = 118;
       final double headerExtent =
-          selectorBoxHeight + media.padding.top + margins * 3;
+          selectorBoxHeight + media.padding.top + margins * 3 + phoneReduce;
       if (_debug) {
         debugPrint('margins ................. : $margins');
         debugPrint('kToolbarHeight .......... : $kToolbarHeight');

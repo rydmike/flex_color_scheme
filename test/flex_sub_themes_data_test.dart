@@ -371,8 +371,8 @@ void main() {
           blendTextTheme: false,
           useTextTheme: true,
           defaultRadius: 14,
-          buttonMinSize: Size(41, 41),
-          buttonPadding: EdgeInsets.symmetric(horizontal: 14),
+          buttonMinSize: const Size(41, 41),
+          buttonPadding: const EdgeInsets.symmetric(horizontal: 14),
           thickBorderWidth: 3,
           thinBorderWidth: 2,
           textButtonRadius: 10,
@@ -392,7 +392,7 @@ void main() {
           inputDecorationRadius: 8,
           inputDecoratorSchemeColor: SchemeColor.secondary,
           inputDecoratorIsFilled: true,
-          inputDecoratorFillColor: Color(0xFF348924),
+          inputDecoratorFillColor: const Color(0xFF348924),
           inputDecoratorBorderType: FlexInputBorderType.outline,
           inputDecoratorUnfocusedHasBorder: true,
           inputDecoratorUnfocusedBorderIsColored: false,
@@ -419,7 +419,7 @@ void main() {
           bottomSheetElevation: 10,
           bottomSheetModalElevation: 8,
           //
-          bottomNavigationBarLabelTextStyle: TextStyle(),
+          bottomNavigationBarLabelTextStyle: const TextStyle(),
           bottomNavigationBarSelectedLabelSize: 14,
           bottomNavigationBarUnselectedLabelSize: 12,
           bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.primary,
@@ -439,7 +439,7 @@ void main() {
           bottomNavigationBarLandscapeLayout:
               BottomNavigationBarLandscapeLayout.centered,
           //
-          navigationBarLabelTextStyle: TextStyle(),
+          navigationBarLabelTextStyle: const TextStyle(),
           navigationBarSelectedLabelSize: 14,
           navigationBarUnselectedLabelSize: 12,
           navigationBarSelectedLabelSchemeColor: SchemeColor.primary,
@@ -457,7 +457,7 @@ void main() {
           navigationBarLabelBehavior:
               NavigationDestinationLabelBehavior.alwaysShow,
           //
-          navigationRailLabelTextStyle: TextStyle(),
+          navigationRailLabelTextStyle: const TextStyle(),
           navigationRailSelectedLabelSize: 36,
           navigationRailUnselectedLabelSize: 30,
           navigationRailSelectedLabelSchemeColor:

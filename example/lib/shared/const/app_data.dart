@@ -86,6 +86,8 @@ class AppData {
   static const double panelButtonHeight = 100;
   static const double panelButtonPhoneWidthReduce = -16;
   static const double panelButtonPhoneHeightReduce = -30;
+  // The width and height reduction of input color selection box in phone size.
+  static const double colorButtonPhoneReduce = -12;
 
   // Returns the title of the MaterialApp. Used to set title on pages to
   // same that is defined in each example as its app name. Handy as we only
