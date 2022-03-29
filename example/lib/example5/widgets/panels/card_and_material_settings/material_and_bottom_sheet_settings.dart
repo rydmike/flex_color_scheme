@@ -28,6 +28,55 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: MaterialAndBottomSheetShowcase(),
         ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('BottomSheet border radius'),
+          subtitle: Slider.adaptive(
+            min: -1,
+            max: 50,
+            divisions: 51,
+            label: controller.bottomSheetBorderRadius == null ||
+                    (controller.bottomSheetBorderRadius ?? -1) < 0
+                ? 'default'
+                : (controller.bottomSheetBorderRadius?.toStringAsFixed(0) ??
+                    ''),
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.bottomSheetBorderRadius ?? -1
+                : 0,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller
+                        .setBottomSheetBorderRadius(value < 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.bottomSheetBorderRadius == null ||
+                              (controller.bottomSheetBorderRadius ?? -1) < 0
+                          ? 'default'
+                          : (controller.bottomSheetBorderRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : '0',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         ColorSchemePopupMenu(
           title: const Text('SnackBar background color'),
           labelForDefault: labelForDefaultSelectedItem,

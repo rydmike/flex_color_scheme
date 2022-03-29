@@ -27,8 +27,8 @@ class CardSettings extends StatelessWidget {
           title: const Text('Card border radius'),
           subtitle: Slider.adaptive(
             min: -1,
-            max: 30,
-            divisions: 31,
+            max: 40,
+            divisions: 41,
             label: controller.cardBorderRadius == null ||
                     (controller.cardBorderRadius ?? -1) < 0
                 ? 'default'

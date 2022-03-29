@@ -217,6 +217,10 @@ class ThemeController with ChangeNotifier {
         Store.keyTabBarItemSchemeColorDark,
         Store.defaultTabBarItemSchemeColorDark);
     //
+    // BottomSheet SETTINGS.
+    _bottomSheetBorderRadius = await _themeService.load(
+        Store.keyBottomSheetBorderRadius, Store.defaultBottomSheetBorderRadius);
+    //
     // Android System Navigator bar SETTINGS.
     _sysNavBarStyle = await _themeService.load(
         Store.keySysNavBarStyle, Store.defaultSysNavBarStyle);
@@ -499,6 +503,10 @@ class ThemeController with ChangeNotifier {
         Store.defaultTabBarItemSchemeColorLight, false);
     await setTabBarItemSchemeColorDark(
         Store.defaultTabBarItemSchemeColorDark, false);
+    //
+    // BottomSheet SETTINGS.
+    await setBottomSheetBorderRadius(
+        Store.defaultBottomSheetBorderRadius, false);
     //
     // Android System Navigator bar SETTINGS.
     await setSysNavBarStyle(Store.defaultSysNavBarStyle, false);
@@ -1363,6 +1371,19 @@ class ThemeController with ChangeNotifier {
     _tabBarItemSchemeColorDark = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyTabBarItemSchemeColorDark, value);
+  }
+
+  //
+  // BottomSheet SETTINGS.
+
+  late double? _bottomSheetBorderRadius;
+  double? get bottomSheetBorderRadius => _bottomSheetBorderRadius;
+  Future<void> setBottomSheetBorderRadius(double? value,
+      [bool notify = true]) async {
+    if (value == _bottomSheetBorderRadius) return;
+    _bottomSheetBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyBottomSheetBorderRadius, value);
   }
 
   // Android System Navigator bar SETTINGS.
