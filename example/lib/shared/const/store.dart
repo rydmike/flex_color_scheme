@@ -712,6 +712,12 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultChipSchemeColor = null;
 
+  // Key used to read and save the chipBorderRadius value.
+  static const String keyChipBorderRadius = 'chipBorderRadius';
+  // Default value for the chipBorderRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultChipBorderRadius = null;
+
   // Key used to read and save the snackBarSchemeColor value.
   static const String keySnackBarSchemeColor = 'snackBarSchemeColor';
   // Default value for the snackBarSchemeColor, also used to reset settings.
