@@ -191,6 +191,54 @@ class FabToggleChipPopupSettings extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
           child: ChipShowcase(),
         ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Chip border radius'),
+          subtitle: Slider.adaptive(
+            min: -1,
+            max: 40,
+            divisions: 41,
+            label: controller.chipBorderRadius == null ||
+                    (controller.chipBorderRadius ?? -1) < 0 ||
+                    !controller.useSubThemes ||
+                    !controller.useFlexColorScheme
+                ? 'default'
+                : (controller.chipBorderRadius?.toStringAsFixed(0) ?? ''),
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.chipBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setChipBorderRadius(value < 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.chipBorderRadius == null ||
+                              (controller.chipBorderRadius ?? -1) < 0
+                          ? 'default'
+                          : (controller.chipBorderRadius?.toStringAsFixed(0) ??
+                              '')
+                      : 'default',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,

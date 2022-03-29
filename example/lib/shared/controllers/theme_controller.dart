@@ -343,6 +343,8 @@ class ThemeController with ChangeNotifier {
         Store.keyFabSchemeColor, Store.defaultFabSchemeColor);
     _chipSchemeColor = await _themeService.load(
         Store.keyChipSchemeColor, Store.defaultChipSchemeColor);
+    _chipBorderRadius = await _themeService.load(
+        Store.keyChipBorderRadius, Store.defaultChipBorderRadius);
     _snackBarSchemeColor = await _themeService.load(
         Store.keySnackBarSchemeColor, Store.defaultSnackBarSchemeColor);
     _popupMenuOpacity = await _themeService.load(
@@ -579,6 +581,7 @@ class ThemeController with ChangeNotifier {
     await setFabBorderRadius(Store.defaultFabBorderRadius, false);
     await setFabSchemeColor(Store.defaultFabSchemeColor, false);
     await setChipSchemeColor(Store.defaultChipSchemeColor, false);
+    await setChipBorderRadius(Store.defaultChipBorderRadius, false);
     await setSnackBarSchemeColor(Store.defaultSnackBarSchemeColor, false);
     await setPopupMenuOpacity(Store.defaultPopupMenuOpacity, false);
     await setCardBorderRadius(Store.defaultCardBorderRadius, false);
@@ -1836,6 +1839,15 @@ class ThemeController with ChangeNotifier {
     _chipSchemeColor = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyChipSchemeColor, value);
+  }
+
+  late double? _chipBorderRadius;
+  double? get chipBorderRadius => _chipBorderRadius;
+  Future<void> setChipBorderRadius(double? value, [bool notify = true]) async {
+    if (value == _chipBorderRadius) return;
+    _chipBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyChipBorderRadius, value);
   }
 
   late SchemeColor? _snackBarSchemeColor;
