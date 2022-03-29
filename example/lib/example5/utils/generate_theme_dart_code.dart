@@ -334,9 +334,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarUnselectedLabelSchemeColor = controller
-              .navUnselectedSchemeColor !=
+              .navBarUnselectedSchemeColor !=
           null
-      ? '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      ? '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.navBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedLabel = controller
           .navBarMuteUnselected
@@ -348,9 +348,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarUnselectedIconSchemeColor = controller
-              .navUnselectedSchemeColor !=
+              .navBarUnselectedSchemeColor !=
           null
-      ? '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      ? '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.navBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedIcon = controller
           .navBarMuteUnselected
@@ -388,9 +388,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
       : '';
   final String navigationBarUnselectedLabelSchemeColor = controller
-              .navUnselectedSchemeColor !=
+              .navBarUnselectedSchemeColor !=
           null
-      ? '    navigationBarUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      ? '    navigationBarUnselectedLabelSchemeColor: ${controller.navBarUnselectedSchemeColor},\n'
       : '';
   final String navigationBarMutedUnselectedLabel = controller
           .navBarMuteUnselected
@@ -402,9 +402,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
       : '';
   final String navigationBarUnselectedIconSchemeColor = controller
-              .navUnselectedSchemeColor !=
+              .navBarUnselectedSchemeColor !=
           null
-      ? '    navigationBarUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      ? '    navigationBarUnselectedIconSchemeColor: ${controller.navBarUnselectedSchemeColor},\n'
       : '';
   final String navigationBarMutedUnselectedIcon = controller
           .navBarMuteUnselected
@@ -431,33 +431,33 @@ String generateThemeDartCode(ThemeController controller) {
   //
   //
   final String navigationRailSelectedLabelSchemeColor = controller
-              .navBarSelectedSchemeColor !=
+              .navRailSelectedSchemeColor !=
           null
-      ? '    navigationRailSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      ? '    navigationRailSelectedLabelSchemeColor: ${controller.navRailSelectedSchemeColor},\n'
       : '';
   final String navigationRailUnselectedLabelSchemeColor = controller
-              .navUnselectedSchemeColor !=
+              .navRailUnselectedSchemeColor !=
           null
-      ? '    navigationRailUnselectedLabelSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      ? '    navigationRailUnselectedLabelSchemeColor: ${controller.navRailUnselectedSchemeColor},\n'
       : '';
   final String navigationRailMutedUnselectedLabel = controller
-          .navBarMuteUnselected
+          .navRailMuteUnselected
       ? ''
-      : '    navigationRailMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
+      : '    navigationRailMutedUnselectedLabel: ${controller.navRailMuteUnselected},\n';
   final String navigationRailSelectedIconSchemeColor = controller
-              .navBarSelectedSchemeColor !=
+              .navRailSelectedSchemeColor !=
           null
-      ? '    navigationRailSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      ? '    navigationRailSelectedIconSchemeColor: ${controller.navRailSelectedSchemeColor},\n'
       : '';
   final String navigationRailUnselectedIconSchemeColor = controller
-              .navUnselectedSchemeColor !=
+              .navRailUnselectedSchemeColor !=
           null
-      ? '    navigationRailUnselectedIconSchemeColor: ${controller.navUnselectedSchemeColor},\n'
+      ? '    navigationRailUnselectedIconSchemeColor: ${controller.navRailUnselectedSchemeColor},\n'
       : '';
   final String navigationRailMutedUnselectedIcon = controller
-          .navBarMuteUnselected
+          .navRailMuteUnselected
       ? ''
-      : '    navigationRailMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
+      : '    navigationRailMutedUnselectedIcon: ${controller.navRailMuteUnselected},\n';
   final String navigationRailUseIndicator = controller.navRailUseIndicator
       ? ''
       : '    navigationRailUseIndicator: ${controller.navRailUseIndicator},\n';

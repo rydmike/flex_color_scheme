@@ -129,14 +129,14 @@ class NavigationBarSettings extends StatelessWidget {
           subtitle: const Text('Shared setting in this app, but APIs have '
               'own properties'),
           labelForDefault: 'null (onSurface)',
-          index: controller.navUnselectedSchemeColor?.index ?? -1,
+          index: controller.navBarUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavUnselectedSchemeColor(null);
+                    controller.setNavBarUnselectedSchemeColor(null);
                   } else {
-                    controller
-                        .setNavUnselectedSchemeColor(SchemeColor.values[index]);
+                    controller.setNavBarUnselectedSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,

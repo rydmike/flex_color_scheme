@@ -114,13 +114,13 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             bottomNavigationBarSelectedLabelSchemeColor:
                 controller.navBarSelectedSchemeColor,
             bottomNavigationBarUnselectedLabelSchemeColor:
-                controller.navUnselectedSchemeColor,
+                controller.navBarUnselectedSchemeColor,
             bottomNavigationBarMutedUnselectedLabel:
                 controller.navBarMuteUnselected,
             bottomNavigationBarSelectedIconSchemeColor:
                 controller.navBarSelectedSchemeColor,
             bottomNavigationBarUnselectedIconSchemeColor:
-                controller.navUnselectedSchemeColor,
+                controller.navBarUnselectedSchemeColor,
             bottomNavigationBarMutedUnselectedIcon:
                 controller.navBarMuteUnselected,
             bottomNavigationBarBackgroundSchemeColor:
@@ -136,12 +136,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             navigationBarSelectedLabelSchemeColor:
                 controller.navBarSelectedSchemeColor,
             navigationBarUnselectedLabelSchemeColor:
-                controller.navUnselectedSchemeColor,
+                controller.navBarUnselectedSchemeColor,
             navigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
             navigationBarSelectedIconSchemeColor:
                 controller.navBarSelectedSchemeColor,
             navigationBarUnselectedIconSchemeColor:
-                controller.navUnselectedSchemeColor,
+                controller.navBarUnselectedSchemeColor,
             navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
             navigationBarHighlightSchemeColor:
                 controller.navBarIndicatorSchemeColor,
@@ -151,15 +151,16 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
             // NavigationRail settings
             navigationRailSelectedLabelSchemeColor:
-                controller.navBarSelectedSchemeColor,
+                controller.navRailSelectedSchemeColor,
             navigationRailUnselectedLabelSchemeColor:
-                controller.navUnselectedSchemeColor,
-            navigationRailMutedUnselectedLabel: controller.navBarMuteUnselected,
+                controller.navRailUnselectedSchemeColor,
+            navigationRailMutedUnselectedLabel:
+                controller.navRailMuteUnselected,
             navigationRailSelectedIconSchemeColor:
-                controller.navBarSelectedSchemeColor,
+                controller.navRailSelectedSchemeColor,
             navigationRailUnselectedIconSchemeColor:
-                controller.navUnselectedSchemeColor,
-            navigationRailMutedUnselectedIcon: controller.navBarMuteUnselected,
+                controller.navRailUnselectedSchemeColor,
+            navigationRailMutedUnselectedIcon: controller.navRailMuteUnselected,
             navigationRailUseIndicator: controller.navRailUseIndicator,
             navigationRailIndicatorSchemeColor:
                 controller.navRailIndicatorSchemeColor,

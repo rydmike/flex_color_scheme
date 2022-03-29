@@ -155,7 +155,8 @@ class NavigationRailSettings extends StatelessWidget {
                 title: const Text('Selection indicator color'),
                 labelForDefault: 'null (secondary)',
                 index: controller.navRailIndicatorSchemeColor?.index ?? -1,
-                onChanged: controller.useSubThemes &&
+                onChanged: controller.navRailUseIndicator &&
+                        controller.useSubThemes &&
                         controller.useFlexColorScheme
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
@@ -173,14 +174,14 @@ class NavigationRailSettings extends StatelessWidget {
                     const Text('Shared setting with navigation bars, APIs '
                         'have own properties'),
                 labelForDefault: 'null (primary)',
-                index: controller.navBarSelectedSchemeColor?.index ?? -1,
+                index: controller.navRailSelectedSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setNavBarSelectedSchemeColor(null);
+                          controller.setNavRailSelectedSchemeColor(null);
                         } else {
-                          controller.setNavBarSelectedSchemeColor(
+                          controller.setNavRailSelectedSchemeColor(
                               SchemeColor.values[index]);
                         }
                       }
@@ -195,14 +196,14 @@ class NavigationRailSettings extends StatelessWidget {
                     controller.useSubThemes && controller.useFlexColorScheme
                         ? 'null (onSurface)'
                         : 'null (onSurface with opacity)',
-                index: controller.navUnselectedSchemeColor?.index ?? -1,
+                index: controller.navRailUnselectedSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setNavUnselectedSchemeColor(null);
+                          controller.setNavRailUnselectedSchemeColor(null);
                         } else {
-                          controller.setNavUnselectedSchemeColor(
+                          controller.setNavRailUnselectedSchemeColor(
                               SchemeColor.values[index]);
                         }
                       }
@@ -215,12 +216,12 @@ class NavigationRailSettings extends StatelessWidget {
                     'Rail will also use muted unselected items via SDK '
                     'default when this is OFF, if all item colors and sizes '
                     'are also at their default (null) values'),
-                value: controller.navBarMuteUnselected &&
+                value: controller.navRailMuteUnselected &&
                     controller.useSubThemes &&
                     controller.useFlexColorScheme,
                 onChanged:
                     controller.useSubThemes && controller.useFlexColorScheme
-                        ? controller.setNavBarMuteUnselected
+                        ? controller.setNavRailMuteUnselected
                         : null,
               ),
               ListTile(

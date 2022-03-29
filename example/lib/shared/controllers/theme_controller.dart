@@ -251,7 +251,7 @@ class ThemeController with ChangeNotifier {
     _navBarSelectedSchemeColor = await _themeService.load(
         Store.keyNavBarSelectedItemSchemeColor,
         Store.defaultNavBarSelectedItemSchemeColor);
-    _navUnselectedSchemeColor = await _themeService.load(
+    _navBarUnselectedSchemeColor = await _themeService.load(
         Store.keyNavBarUnselectedSchemeColor,
         Store.defaultNavBarUnselectedSchemeColor);
     _navBarIndicatorSchemeColor = await _themeService.load(
@@ -270,6 +270,14 @@ class ThemeController with ChangeNotifier {
         Store.keyNavRailOpacity, Store.defaultNavRailOpacity);
     _navigationRailElevation = await _themeService.load(
         Store.keyNavigationRailElevation, Store.defaultNavigationRailElevation);
+    _navRailSelectedSchemeColor = await _themeService.load(
+        Store.keyNavRailSelectedItemSchemeColor,
+        Store.defaultNavRailSelectedItemSchemeColor);
+    _navRailUnselectedSchemeColor = await _themeService.load(
+        Store.keyNavRailUnselectedSchemeColor,
+        Store.defaultNavRailUnselectedSchemeColor);
+    _navRailMuteUnselected = await _themeService.load(
+        Store.keyNavRailMuteUnselected, Store.defaultNavRailMuteUnselected);
     _navRailLabelType = await _themeService.load(
         Store.keyNavRailLabelType, Store.defaultNavRailLabelType);
     _navRailUseIndicator = await _themeService.load(
@@ -500,7 +508,7 @@ class ThemeController with ChangeNotifier {
     await setNavBarOpacity(Store.defaultNavBarOpacity, false);
     await setNavBarSelectedSchemeColor(
         Store.defaultNavBarSelectedItemSchemeColor, false);
-    await setNavUnselectedSchemeColor(
+    await setNavBarUnselectedSchemeColor(
         Store.defaultNavBarUnselectedSchemeColor, false);
     await setNavBarIndicatorSchemeColor(
         Store.defaultNavBarIndicatorSchemeColor, false);
@@ -513,6 +521,11 @@ class ThemeController with ChangeNotifier {
     await setNavRailOpacity(Store.defaultNavRailOpacity, false);
     await setNavigationRailElevation(
         Store.defaultNavigationRailElevation, false);
+    await setNavRailSelectedSchemeColor(
+        Store.defaultNavRailSelectedItemSchemeColor, false);
+    await setNavRailUnselectedSchemeColor(
+        Store.defaultNavRailUnselectedSchemeColor, false);
+    await setNavRailMuteUnselected(Store.defaultNavRailMuteUnselected, false);
     await setNavRailLabelType(Store.defaultNavRailLabelType, false);
     await setNavRailUseIndicator(Store.defaultNavRailUseIndicator, false);
     await setNavRailIndicatorSchemeColor(
@@ -1454,12 +1467,12 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyNavBarSelectedItemSchemeColor, value);
   }
 
-  late SchemeColor? _navUnselectedSchemeColor;
-  SchemeColor? get navUnselectedSchemeColor => _navUnselectedSchemeColor;
-  Future<void> setNavUnselectedSchemeColor(SchemeColor? value,
+  late SchemeColor? _navBarUnselectedSchemeColor;
+  SchemeColor? get navBarUnselectedSchemeColor => _navBarUnselectedSchemeColor;
+  Future<void> setNavBarUnselectedSchemeColor(SchemeColor? value,
       [bool notify = true]) async {
-    if (value == _navUnselectedSchemeColor) return;
-    _navUnselectedSchemeColor = value;
+    if (value == _navBarUnselectedSchemeColor) return;
+    _navBarUnselectedSchemeColor = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyNavBarUnselectedSchemeColor, value);
   }
@@ -1529,6 +1542,38 @@ class ThemeController with ChangeNotifier {
     _navigationRailElevation = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyNavigationRailElevation, value);
+  }
+
+  late SchemeColor? _navRailSelectedSchemeColor;
+  SchemeColor? get navRailSelectedSchemeColor => _navRailSelectedSchemeColor;
+  Future<void> setNavRailSelectedSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _navRailSelectedSchemeColor) return;
+    _navRailSelectedSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavRailSelectedItemSchemeColor, value);
+  }
+
+  late SchemeColor? _navRailUnselectedSchemeColor;
+  SchemeColor? get navRailUnselectedSchemeColor =>
+      _navRailUnselectedSchemeColor;
+  Future<void> setNavRailUnselectedSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _navRailUnselectedSchemeColor) return;
+    _navRailUnselectedSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavRailUnselectedSchemeColor, value);
+  }
+
+  late bool _navRailMuteUnselected;
+  bool get navRailMuteUnselected => _navRailMuteUnselected;
+  Future<void> setNavRailMuteUnselected(bool? value,
+      [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _navRailMuteUnselected) return;
+    _navRailMuteUnselected = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavRailMuteUnselected, value);
   }
 
   late NavigationRailLabelType _navRailLabelType;

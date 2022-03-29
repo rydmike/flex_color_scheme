@@ -534,6 +534,23 @@ class Store {
   // Default value for the navigationRailElevation, also reset settings.
   static const double defaultNavigationRailElevation = 0;
 
+  // Key used to read and save the navRailSelectedItemSchemeColor value.
+  static const String keyNavRailSelectedItemSchemeColor =
+      'navRailSelectedItemSchemeColor';
+  // Default value for the navRailSelectedItemSchemeColor.
+  static const SchemeColor? defaultNavRailSelectedItemSchemeColor = null;
+
+  // Key used to read and save the navRailUnselectedItemSchemeColor value.
+  static const String keyNavRailUnselectedSchemeColor =
+      'navRailUnselectedItemSchemeColor';
+  // Default navRailUnselectedItemSchemeColor.
+  static const SchemeColor? defaultNavRailUnselectedSchemeColor = null;
+
+  // Key used to read and save the navRailMuteUnselected value.
+  static const String keyNavRailMuteUnselected = 'navRailMuteUnselected';
+  // Default value for the navRailMuteUnselected, also used to reset settings.
+  static const bool defaultNavRailMuteUnselected = true;
+
   // Key used to read and save the navRailLabelType value.
   static const String keyNavRailLabelType = 'navRailLabelType';
   // Default value for the navRailLabelType, also used to
