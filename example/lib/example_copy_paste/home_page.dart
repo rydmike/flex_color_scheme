@@ -49,9 +49,9 @@ class _HomePageState extends State<HomePage> {
     final double margins = AppData.responsiveInsets(media.size.width);
     final double topPadding = media.padding.top + kToolbarHeight + margins;
     final double bottomPadding = media.padding.bottom + margins;
-    final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
         menuItems: AppData.menuItems,
         // Make Rail width larger when using it on tablet or desktop.
         railWidth: isPhone ? 52 : 66,
-        breakpointShowFullMenu: AppData.desktopBreakpoint,
+        breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {

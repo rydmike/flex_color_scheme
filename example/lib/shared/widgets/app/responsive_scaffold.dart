@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -425,7 +427,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     final MediaQueryData media = MediaQuery.of(context);
     if (media.size != mediaSize) {
       mediaSize = media.size;
-      final bool isPhone = media.size.width < AppData.phoneBreakpoint;
+      // On purpose not checking the the height here, we want to keep and auto
+      // open the rail if this is possibly a phone in landscape mode.
+      final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint;
       // This make the rail menu auto-close on phone size and open back up if
       // moving to landscape or none phone size. You can still open a very
       // narrow rail also in phone size, but if you resize the canvas at phone
@@ -874,15 +878,15 @@ class _MenuItem extends StatelessWidget {
               // should remain highlighted and show last selected item:
               // color: selected ? theme.focusColor : Colors.transparent,
               color: Colors.transparent,
-              child: InkWell(
-                onTap: enabled ? onTap : null,
-                child: SizedBox(
-                  height: _itemHeight,
-                  width: width - endPadding,
-                  child: OverflowBox(
-                    alignment: AlignmentDirectional.topStart,
-                    minWidth: 0,
-                    maxWidth: menuWidth,
+              child: SizedBox(
+                height: _itemHeight,
+                width: math.max(width - endPadding, 0),
+                child: OverflowBox(
+                  alignment: AlignmentDirectional.topStart,
+                  minWidth: 0,
+                  maxWidth: math.max(menuWidth, 0),
+                  child: InkWell(
+                    onTap: enabled ? onTap : null,
                     child: Row(
                       children: <Widget>[
                         MaybeTooltip(
