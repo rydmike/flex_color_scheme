@@ -128,15 +128,17 @@ const int kDarkBlendBackgroundHeavy = 14;
 /// Used by FlexColorScheme.surfaceStyle based surface branding.
 const int kDarkBlendScaffoldHeavy = 2;
 
-/// General default border radius on Widgets that support corner radius
-/// rounding.
+/// Default border radius on Navigation drawer menu.
 ///
-/// Used as default for widgets where the M3 spec is unknown or the spec is 16.
-///
-/// 16 dp is the new standard eg on floating action buttons and Drawer.
-/// https://m3.material.io/components/floating-action-button/specs
+/// Follows Material M3 guide.
 /// https://m3.material.io/components/navigation-drawer/specs
-const double kDefaultRadius = 16;
+const double kDrawerRadius = 16;
+
+/// Default border radius on Floating Action Buttons.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/floating-action-button/specs
+const double kFabRadius = 16;
 
 /// Default border radius on Chips.
 ///
@@ -147,7 +149,7 @@ const double kChipRadius = 8;
 /// Default border radius on all buttons.
 ///
 /// Follows Material M3 guide.
-/// https://m3.material.io/components/all-buttons
+/// https://m3.material.io/components/buttons/specs
 const double kButtonRadius = 20;
 
 /// Default border radius on input decoration.
@@ -155,16 +157,17 @@ const double kButtonRadius = 20;
 /// Will follows Material M3 guide.
 /// https://m3.material.io/components/all-buttons
 ///
-/// Currently not specified in M3 guide what it should be then.
-/// Will be adjusted when known. Now set to same as button radius (2) so
-/// it matches them, could be same as FAB, Drawer, Sheet, ie 16.
+/// Was not specified in M3 guide what it should be.
+/// Will be adjusted when known. Now set to same as button radius (20dp), so
+/// it matches them. The M3 design intent may also be that it should
+/// be same as FAB and Drawer, ie 16dp.
 const double kInputDecoratorRadius = kButtonRadius;
 
 /// Default border radius on top edge of bottom sheet.
 ///
-/// Not specified in M3 guide, using same as Drawer, would fit with
-/// that design since this is like a drawer, but from the bottom.
-const double kBottomSheetBorderRadius = kDefaultRadius;
+/// Not specified in M3 guide, using same as Drawer, as this would fit with
+/// same design since this is like a drawer, but from the bottom.
+const double kBottomSheetBorderRadius = kDrawerRadius;
 
 /// Default border radius on dialogs.
 ///
@@ -178,11 +181,12 @@ const double kDialogRadius = 28;
 /// https://m3.material.io/components/cards/specs
 const double kCardRadius = 12;
 
-/// Default border radius on popup menus.
+/// Default border radius on menus, typically small popup menus.
+/// Drawer menu has its own default.
 ///
-/// The spec for this in M3 is not known, this is a guess.
-/// Will be adjusted when known.
-const double kPopupRadius = 10;
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/menus/specs
+const double kMenuRadius = 4;
 
 /// Default elevation on [Card] widgets.
 const double kCardElevation = 0;

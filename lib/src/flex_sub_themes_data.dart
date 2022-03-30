@@ -336,12 +336,17 @@ class FlexSubThemesData with Diagnosticable {
   /// - [navigationBarBackgroundSchemeColor]
   ///   * false: [ColorScheme.background]
   ///   * true: [ColorScheme.surface] with onSurface overlay elevation 3.
-  /// - NN2
-  ///   * false: FlexColorScheme
-  ///   * true: Flutter
-  /// - NN3
-  ///   * false: FlexColorScheme
-  ///   * true: Flutter
+  /// - [bottomNavigationBarBackgroundSchemeColor]
+  ///   * false: [ColorScheme.background]
+  ///   * true: [ColorScheme.background]
+  /// - [bottomNavigationBarSelectedLabelSchemeColor]
+  /// - [bottomNavigationBarSelectedIconSchemeColor]
+  ///   * false: [ColorScheme.primary]
+  ///   * true: light [ColorScheme.primary], dark [ColorScheme.secondary]
+  /// - [bottomNavigationBarUnselectedLabelSchemeColor]
+  /// - [bottomNavigationBarUnselectedIconSchemeColor]
+  ///   * false: [ColorScheme.onSurface] (opacity via toggle)
+  ///   * true: [ColorScheme.onSurface] with opacity
   ///
   ///
   /// Defaults to false.
@@ -430,17 +435,16 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to null.
   ///
   /// When it is null, the sub-themes will use their null default behavior
-  /// that aim to follow Material 3 standard for all widgets it includes.
+  /// that follow the Material 3 standard for all widgets it includes.
   ///
   /// When you set [defaultRadius] to a value, it will override the defaults
   /// with this global default. You can still set and lock each individual
   /// border radius back for individual widget sub-themes to some specific
-  /// value, or set it back to its Material 3 standard, which is mentioned
-  /// in each theme as the used default when its value is null.
+  /// value, or set it back to its Material 3 standard.
   ///
   /// Flutter current SDK general border radius is 4, as defined by the
-  /// Material 2 design guide. Material 3 (You) uses much
-  /// higher border radius, but it varies by UI widget type. You can find the
+  /// Material 2 design guide. Material 3 uses much higher border radius, and
+  /// it varies by UI component type. You can find the
   /// specifications [here](https://m3.material.io).
   final double? defaultRadius;
 
@@ -479,12 +483,16 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Border radius override value for [TextButton].
   ///
-  /// Defaults to 20 [kButtonRadius] if not defined, M3 specification.
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp, based on M3 Specification
+  /// https://m3.material.io/components/buttons/specs
   final double? textButtonRadius;
 
-  /// Border radius override value for [ElevatedButton].
+  /// Border radius value for [ElevatedButton].
   ///
-  /// Defaults to 20 [kButtonRadius] if not defined, M3 specification.
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp, based on M3 Specification
+  /// https://m3.material.io/components/buttons/specs
   final double? elevatedButtonRadius;
 
   /// Elevation of [ElevatedButton].
@@ -496,14 +504,22 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to [kElevatedButtonElevation] = 1.
   final double elevatedButtonElevation;
 
-  /// Border radius override value for [OutlinedButton].
+  /// Border radius value for [OutlinedButton].
   ///
-  /// Defaults to 20 [kButtonRadius] if not defined, M3 specification.
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp, based on M3 Specification
+  /// https://m3.material.io/components/buttons/specs
   final double? outlinedButtonRadius;
 
-  /// Border radius override value for [ToggleButtons].
+  /// Border radius value for [ToggleButtons].
   ///
-  /// Defaults to 20 [kButtonRadius] if not defined.
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp.
+  ///
+  /// This is not in M3 specification, but FlexColorScheme component
+  /// sub-themes harmonizes [ToggleButtons] size
+  /// and border radius with the other Material buttons.
   final double? toggleButtonsRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the
@@ -615,9 +631,15 @@ class FlexSubThemesData with Diagnosticable {
       'inputDecoratorRadius, please use it instead.')
   final double? inputDecorationRadius;
 
-  /// Border radius override value for [InputDecoration].
+  /// Border radius value for [InputDecoration].
   ///
-  /// Defaults to 20 [kButtonRadius].
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kInputDecoratorRadius] 20dp.
+  ///
+  /// Was not specified in M3 guide what it should be.
+  /// Will be adjusted when known. Now set to same as button radius (20dp), so
+  /// it matches them. The M3 design intent may also be that it should
+  /// be same as FAB and Drawer, ie 16dp.
   final double? inputDecoratorRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the input decorator
@@ -693,19 +715,31 @@ class FlexSubThemesData with Diagnosticable {
   /// The unfocused border color selection also applies to it hovered state.
   final bool inputDecoratorUnfocusedBorderIsColored;
 
-  /// Border radius override value for [FloatingActionButton].
+  /// Border radius value for [FloatingActionButton].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kFabRadius] 16dp, based on M3 Specification
+  /// https://m3.material.io/components/floating-action-button/specs
   final double? fabRadius;
 
   /// Use shape theming on Floating Action Button (FAB).
   ///
   /// By setting [fabUseShape] to false it is possible to opt out of all
-  /// shape theming on FABs and keep their M2 defaults, while still eg.
-  /// keeping M3 defaults on other widgets or changing their border radius
+  /// shape theming on FABs and keeping tis un-themed defaults, while still
+  /// eg. keeping M3 defaults on other widgets or changing their border radius
   /// with the shared global value.
   ///
   /// You may want to continue to keep the FAB round and extended FAB stadium
   /// shaped as before, despite otherwise using a rounder or M3 design.
   /// The circular M2 FAB goes well with those designs too.
+  ///
+  /// When the [ThemeData.useMaterial3] will start to have an impact in Flutter
+  /// SDK on the [FloatingActionButton] shape and design, setting [fabUseShape]
+  /// to false and [ThemeData.useMaterial3] to true, will result in the
+  /// M3 spec default FAB shape as implemented by the SDK. As long as the
+  /// [ThemeData.useMaterial3] exist in the framework, setting it to false
+  /// and setting [fabUseShape] to false, will continue to produce the M2
+  /// design.
   ///
   /// Defaults to true.
   final bool fabUseShape;
@@ -717,9 +751,12 @@ class FlexSubThemesData with Diagnosticable {
   /// Flutter theme defaults.
   final SchemeColor? fabSchemeColor;
 
-  /// Border radius override value for [Chip] widgets.
+  /// Border radius value for [Chip] widgets.
   ///
-  /// If not defined, defaults to [kChipRadius] = 8, M3 specification.
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kChipRadius] 8dp, based on M3 Specification
+  /// https://m3.material.io/components/chips/specs
   final double? chipRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the Chips
@@ -728,9 +765,11 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined it defaults to theme.colorScheme.primary color.
   final SchemeColor? chipSchemeColor;
 
-  /// Border radius override value for [Card].
+  /// Border radius value for [Card].
   ///
-  /// If not defined, defaults to [kCardRadius] = 12, the M3 default for Card.
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kCardRadius] 12dp, based on M3 Specification
+  /// https://m3.material.io/components/cards/specs
   final double? cardRadius;
 
   /// Elevation of [Card].
@@ -761,7 +800,18 @@ class FlexSubThemesData with Diagnosticable {
   /// inherited default radius values, but to also stay below the usable max
   /// rounding automatically at higher global default border radius values.
   ///
-  /// If not defined, defaults to [kPopupRadius] 10.
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kMenuRadius] 4dp, based on M3 Specification
+  /// https://m3.material.io/components/menus/specs
+  ///
+  /// In versions before v5.0.0-dev.2 it defaulted to 10. The M3 spec for it
+  /// was not available when it was chosen originally. It was assumed to have
+  /// higher border radius like rest of designs. However, the spec has it
+  /// defined [here](https://m3.material.io/components/menus/specs) now, and it
+  /// is 4. Since border radius default values are stated in FlexColorScheme
+  /// sub-theme design goals to follow the M3 design specs, it was updated to
+  /// match the spec. A bit higher rounding, may actually fit better with
+  /// the very round M3 design, try 8 or 10.
   final double? popupMenuRadius;
 
   /// Default elevation of [PopupMenuButton].
@@ -786,9 +836,11 @@ class FlexSubThemesData with Diagnosticable {
   /// If null, defaults to 1, fully opaque.
   final double? popupMenuOpacity;
 
-  /// Border radius override value for [Dialog].
+  /// Border radius value for [Dialog].
   ///
-  /// Defaults to [kDialogRadius] 28 if undefined, M3 specification.
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kDialogRadius] 28dp, based on M3 Specification
+  /// https://m3.material.io/components/dialogs/specs
   final double? dialogRadius;
 
   /// Elevation of [Dialog].
@@ -802,13 +854,13 @@ class FlexSubThemesData with Diagnosticable {
   /// light and contrast poorly with primary color.
   final double dialogElevation;
 
-  /// Defines which [Theme] based [ColorScheme] based color the dialogs use as
+  /// Defines which [Theme] based [ColorScheme] based color dialogs use as
   /// as their background color.
   ///
   /// This will affect both background in [DialogTheme] and
   /// [TimePickerThemeData].
   ///
-  /// Defaults to [SchemeColor.surface].
+  /// If undefined, defaults to [SchemeColor.surface].
   ///
   /// If set to null [Dialog] will use its Flutter SDK default, which is
   /// [ThemeData.dialogBackgroundColor] which again is [ColorScheme.background].
@@ -829,9 +881,11 @@ class FlexSubThemesData with Diagnosticable {
   /// See issue: https://github.com/flutter/flutter/issues/90353
   final SchemeColor? dialogBackgroundSchemeColor;
 
-  /// Border radius override value for [TimePickerDialog].
+  /// Border radius value for [TimePickerDialog].
   ///
-  /// Defaults to [kDialogRadius] 28 if undefined, M3 specification.
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kDialogRadius] 28dp, based on M3 Specification
+  /// https://m3.material.io/components/dialogs/specs
   final double? timePickerDialogRadius;
 
   /// Elevation of [SnackBar].
@@ -843,8 +897,8 @@ class FlexSubThemesData with Diagnosticable {
   /// use as their base color. Typically one of inverse brightness compared
   /// to theme's surface color brightness.
   ///
-  /// If not defined it defaults to the opinionated color FlexColorScheme (FCS)
-  /// choice below when used via [FlexSubThemesData].
+  /// If not defined, it defaults to the opinionated color FlexColorScheme (FCS)
+  /// choices below, when used via [FlexSubThemesData].
   ///
   /// * In light theme mode:
   ///   * FCS: onSurface with primary blend at 45% opacity, with tot opacity 95%
@@ -863,9 +917,9 @@ class FlexSubThemesData with Diagnosticable {
   /// background uses.
   ///
   /// If not defined, [AppBar] uses the color defined in
-  /// [FlexColorScheme.appBarBackground], or made with [FlexColorScheme.light]
-  /// or [FlexColorScheme.dark], and the enum [FlexAppBarStyle] in property
-  /// [appBarStyle] to determine thh [AppBar] color and background
+  /// [FlexColorScheme.appBarBackground]. If made with [FlexColorScheme.light]
+  /// or [FlexColorScheme.dark], then the enum [FlexAppBarStyle] in property
+  /// [appBarStyle], is used to determine the [AppBar] color and background.
   ///
   /// The themed [AppBar] background color is typically determined by defined
   /// [FlexAppBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
@@ -878,12 +932,12 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// items use.
   ///
-  /// If not defined, TabBar items use the factories
+  /// If not defined, TabBar items uses the factories
   /// [FlexColorScheme.light] or [FlexColorScheme.dark] with the enum value
   /// [FlexTabBarStyle] with property [tabBarStyle], to determine
-  /// the [TabBar] item colors.
+  /// the [TabBar] item color.
   ///
-  /// The themed [TabBar] background color is typically determined by defining
+  /// The themed [TabBar] background color is typically defined by
   /// [FlexTabBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
   /// This property is an override that offers more quick config options by
   /// allowing picking any color from the effective [ColorScheme], instead of
@@ -901,9 +955,16 @@ class FlexSubThemesData with Diagnosticable {
   /// a color from the effective [ColorScheme].
   final SchemeColor? tabBarIndicatorSchemeColor;
 
-  /// Border radius override value for [BottomSheet].
+  /// Border radius value for [BottomSheet].
   ///
-  //// If not defined defaults to [kBottomSheetBorderRadius] = 16, M3 spec.
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kBottomSheetBorderRadius] 16p.
+  ///
+  /// This value is not mentioned in the
+  /// M3 Specification. It is based on an assumption that a sliding in
+  /// surface from the bottom should have the same rounding on its top corners
+  /// as the [Drawer] does on its visible side edges.
+  /// /// https://m3.material.io/components/navigation-drawer/specs
   final double? bottomSheetRadius;
 
   /// Elevation of none modal [BottomSheet].

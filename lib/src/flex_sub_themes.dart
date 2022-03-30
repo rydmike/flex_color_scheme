@@ -401,7 +401,9 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// Defaults to `kButtonRadius` = 20.
+    /// If not defined, defaults to [kButtonRadius] 20dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
     /// Padding for the button theme.
@@ -490,7 +492,9 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// Defaults to 20 [kButtonRadius].
+    /// If not defined, defaults to [kButtonRadius] 20dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
     /// The button elevation
@@ -592,7 +596,9 @@ class FlexSubThemes {
 
     /// The button corner border radius.
     ///
-    /// Defaults to 20 [kButtonRadius].
+    /// If not defined, defaults to [kButtonRadius] 20dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
     /// The outline thickness when the button is pressed.
@@ -726,7 +732,9 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// Defaults to 20 [kButtonRadius].
+    /// If not defined, defaults to [kButtonRadius] 20dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
     /// Padding for legacy button.
@@ -990,7 +998,11 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// Defaults to 20 [kButtonRadius].
+    /// If not defined, defaults to [kButtonRadius] 20dp.
+    ///
+    /// This is not in M3 specification, but FlexColorScheme component
+    /// sub-themes harmonizes [ToggleButtons] size
+    /// and border radius with the other Material buttons.
     final double? radius,
 
     /// The width of the borders around the toggle buttons.
@@ -1082,8 +1094,11 @@ class FlexSubThemes {
   /// scheme would typically be equal the color scheme also used to define the
   /// color scheme for your app theme.
   ///
-  /// Its corner [radius] can be adjusted, it defaults to
-  /// [kInputDecoratorRadius] (20).
+  /// The corner [radius] can be adjusted, it defaults to
+  /// [kInputDecoratorRadius] (20), which currently matches the border radius
+  /// default used used on buttons in M3 specification. This value is not
+  /// specified in the M3 design guide, and this default border radius may be
+  /// changed later to match the M3 spec when it is known.
   static InputDecorationTheme inputDecorationTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -1096,9 +1111,14 @@ class FlexSubThemes {
     /// If not defined, [colorScheme.primary] will be used.
     final SchemeColor? baseSchemeColor,
 
-    /// The button corner radius.
+    /// The decorated input fields corner border radius.
     ///
-    /// Defaults to 20 [kInputDecoratorRadius] if not defined, M3 specification.
+    /// If not defined, defaults to [kInputDecoratorRadius] 20dp.
+    ///
+    /// Was not specified in M3 guide what it should be.
+    /// Will be adjusted when known. Now set to same as button radius (20dp), so
+    /// it matches them. The M3 design intent may also be that it should
+    /// be same as FAB and Drawer, ie 16dp.
     final double? radius,
 
     /// Selects input border type.
@@ -1389,9 +1409,11 @@ class FlexSubThemes {
     /// color's contrast color pair in the passed in [colorScheme] property.
     final SchemeColor? backgroundSchemeColor,
 
-    /// Corner radius of FAB.
+    /// Corner radius of the [FloatingActionButton].
     ///
-    /// Defaults to [kDefaultRadius] = 16.
+    /// If not defined, defaults to [kFabRadius] 16dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/floating-action-button/specs
     final double? radius,
 
     /// Set to false, to not apply Shape theming to the FAB.
@@ -1418,27 +1440,28 @@ class FlexSubThemes {
       shape: useShape
           ? RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(radius ?? kDefaultRadius),
+                Radius.circular(radius ?? kFabRadius),
               ),
             )
           : null,
     );
   }
 
-  /// An opinionated [ChipThemeData] with custom border radius and rather
-  /// involved theme.
+  /// An opinionated [ChipThemeData] theme with custom border radius and a
+  /// custom theme that partially mimics the M3 style and works well with
+  /// FlexColorScheme surface blends.
   ///
-  /// The border radius default to 16 [kDefaultRadius], new M3 default.
-  /// https://m3.material.io/components/floating-action-button/specs
+  /// The border radius defaults to 8dp [kChipRadius], new M3 default.
+  /// https://m3.material.io/components/chips/specs
   ///
-  /// This is inspired by M3 Chip design and applies it to the limited theming
-  /// features for old M2 chips, to some extent. Tricky to get this one
-  /// to play nicely, but this setup is pretty ok and fits well with the
-  /// color blended themes.
+  /// This is inspired by M3 Chip design and applies it using the limited
+  /// theming features for old M2 chips in Flutter, to some extent. It is
+  /// tricky to get this theme to play nicely, but this setup is pretty ok
+  /// and fits well with the FlexColorScheme color blended themes.
   ///
-  /// It is possible that there will be new Chips entirely for
-  /// Material 3. This theme brings the M2 Chips look closer to M3 design, but
-  /// cannot reach all the way.
+  /// It is possible that there will be new Chips entirely for Material 3 in
+  /// Flutter. This theme brings the M2 Chips look closer to M3 design, but
+  /// cannot reach it all the way.
   static ChipThemeData chipTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -1459,7 +1482,9 @@ class FlexSubThemes {
 
     /// Corner radius of the Chip.
     ///
-    /// Defaults to [kChipRadius] = 8, M3 defaults for Chips.
+    /// If not defined, defaults to [kChipRadius] 8dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/chips/specs
     final double? radius,
   }) {
     // Get base color, defaults to primary.
@@ -1467,13 +1492,13 @@ class FlexSubThemes {
         ? colorScheme.primary
         : schemeColor(baseSchemeColor, colorScheme);
 
-    // For all Chips  except disabled Chip.
+    // Foreground color for all Chips except disabled Chip.
     final Color foreground = usedBaseColor.blendAlpha(
         colorScheme.onSurface, kChipForegroundAlphaBlend);
     // For selected InputChip & ChoiceChip.
     final Color selectedBackgroundColor = usedBaseColor.blendAlpha(
         colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
-    // Text color, uses the foreground color for all chip style.
+    // Text color, uses the foreground color for all chip styles.
     final TextStyle effectiveLabelStyle =
         labelStyle.copyWith(color: foreground);
 
@@ -1488,13 +1513,13 @@ class FlexSubThemes {
       checkmarkColor: foreground,
       deleteIconColor: usedBaseColor,
       // Same formula as on Elevated button and ToggleButtons. The Chip has
-      // a built in scrim for disabled state, making it look a bit different
+      // a built in scrim for disabled state, making it look a bit different,
       // but it is pretty close.
       disabledColor: usedBaseColor
           .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
           .withAlpha(kDisabledBackgroundAlpha),
       // Same label style on selected and not selected chips, their different
-      // background style make the stand out enough.
+      // background style make them stand out enough.
       labelStyle: effectiveLabelStyle,
       secondaryLabelStyle: effectiveLabelStyle,
       shape: RoundedRectangleBorder(
@@ -1510,12 +1535,14 @@ class FlexSubThemes {
   /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
   /// defaults to [kCardElevation] = 0.
   ///
-  /// The corner radius 12 is the new default on Cards in M3:
-  /// https://m3.material.io/components/cards/specs
+  /// The corner radius 12 is the new default on Cards in M3
+  /// [specification](https://m3.material.io/components/cards/specs).
   static CardTheme cardTheme({
     /// Corner radius
     ///
-    /// If not defined, defaults to [kCardRadius] = 12, the M3 default for Card.
+    /// If not defined, defaults to [kCardRadius] 12dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/cards/specs
     final double? radius,
 
     /// Card elevation defaults to [kCardElevation] = 0.
@@ -1540,7 +1567,7 @@ class FlexSubThemes {
 
   /// An opinionated [PopupMenuThemeData] with custom corner radius.
   ///
-  /// Corner [radius] defaults to [kPopupRadius] (10) and [elevation] to
+  /// Corner [radius] defaults to [kMenuRadius] (4) and [elevation] to
   /// [kPopupMenuElevation] (2), Flutter SDK default is (8).
   ///
   /// When used by [FlexColorScheme] the corner radius of popup menus follows
@@ -1560,16 +1587,10 @@ class FlexSubThemes {
   /// inherited radius values from [FlexSubThemeData.defaultRadius] but to
   /// also stay below the usable max rounding automatically at higher global
   /// border radius values.
-  ///
-  /// The default corner radius in M3 is not yet known, it might be 12  like
-  /// on Card, but with current behaviour on popup menu Overlay in Flutter
-  /// using 12 was not on option, 10 was the highest value that still worked
-  /// OK visually with regards to highlighted item not be clipped on top and
-  /// bottom choice.
   static PopupMenuThemeData popupMenuTheme({
     /// Popup menu corner radius.
     ///
-    /// Defaults to [kPopupRadius] 10.
+    /// Defaults to [kMenuRadius] = 4, M3 specification.
     final double? radius,
 
     /// Popup menu elevation defaults to 3, making it more subtle.
@@ -1583,33 +1604,33 @@ class FlexSubThemes {
         color: color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kPopupRadius),
+            Radius.circular(radius ?? kMenuRadius),
           ),
         ),
       );
 
   // TODO(rydmike): Consider a SliderTheme with value popup using primary blend.
 
-  // TODO(rydmike): Dialog content has no padding property, add when supported.
-  //  The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp
+  // TODO(rydmike): No padding in Flutter M3 dialog theme, add when available.
+  // The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp.
 
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kDialogRadius] = 28 and [elevation] to
   /// [kDialogElevation] = 10.
   ///
-  /// The default radius follows Material M3 guide:
-  /// https://m3.material.io/components/dialogs/specs
+  /// The default radius follows Material M3 guide
+  /// [specification](https://m3.material.io/components/dialogs/specs).
   static DialogTheme dialogTheme({
     /// Dialog background color.
     ///
     /// Defaults to null and gets default via Dialog's default null theme
     /// behavior.
     ///
-    /// This property is here so we can provide a custom themed dialog
-    /// background color when the ThemeData property dialogBackgroundColor
-    /// is deprecated in Flutter SDK, which it will be in 2022, see issue:
-    /// https://github.com/flutter/flutter/issues/91772
+    /// Can be used to make a custom themed dialog with own background color,
+    /// even after the [ThemeData.dialogBackgroundColor] property is
+    /// is deprecated in Flutter SDK. Which it will be in 2022, see
+    /// [issue](https://github.com/flutter/flutter/issues/91772).
     final Color? backgroundColor,
 
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
@@ -1629,9 +1650,11 @@ class FlexSubThemes {
     /// its default as [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
 
-    /// Corner radius.
+    /// Corner radius of the dialog.
     ///
-    /// Defaults to [kDialogRadius] 28 if undefined, M3 specification.
+    /// If not defined, defaults to [kDialogRadius] 28dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/dialogs/specs
     final double? radius,
 
     /// Dialog elevation defaults to 10 [kDialogElevation].
@@ -1655,7 +1678,7 @@ class FlexSubThemes {
 
   /// An opinionated [TimePickerThemeData] with custom corner radius.
   ///
-  /// Corner [radius] defaults to [kDialogRadius]. The internal shapes
+  /// Corner [radius] defaults to [kDialogRadius] 28dp. The internal shapes
   /// in the picker also have rounding, their corner radii are defined by
   /// [elementRadius] that defaults to [kCardRadius] 12.
   ///
@@ -1663,8 +1686,8 @@ class FlexSubThemes {
   /// that matches the main input decoration style and corner rounding it
   /// will be used on the data entry elements in the picker.
   static TimePickerThemeData timePickerTheme({
-    /// Pass the value the `theme.dialogColor` that is set to your `ThemeData`
-    /// and used by other dialogs.
+    /// Pass in value you will you in your ThemeData use for your main
+    /// [DialogTheme], if you let
     ///
     /// If null and [colorScheme] and [backgroundSchemeColor] are also not
     /// defined, this dialog defaults to using [ColorScheme.surface] color and
@@ -1693,7 +1716,9 @@ class FlexSubThemes {
 
     /// Outer corner radius.
     ///
-    /// Defaults to [kDialogRadius] 28 if undefined, M3 specification.
+    /// If not defined, defaults to [kDialogRadius] 28dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/dialogs/specs
     final double? radius,
 
     /// Elements corner radius.
@@ -1855,7 +1880,13 @@ class FlexSubThemes {
   static BottomSheetThemeData bottomSheetTheme({
     /// The corner radius of the top corners.
     ///
-    /// If not defined defaults to [kBottomSheetBorderRadius] = 16, M3 spec.
+    /// If not defined, defaults to [kBottomSheetBorderRadius] 16p.
+    ///
+    /// This value is not mentioned in the
+    /// M3 Specification. It is based on an assumption that a sliding in
+    /// surface from the bottom should have the same rounding on its top corners
+    /// as the [Drawer] does on its visible side edges.
+    /// /// https://m3.material.io/components/navigation-drawer/specs
     final double? radius,
 
     /// The bottom sheet elevation defaults to [kBottomSheetElevation] = 4.
@@ -2119,6 +2150,16 @@ class FlexSubThemes {
     /// This setting is not exposed via [FlexSubThemesData], but can be if
     /// needed later.
     final int unselectedAlpha = kUnselectedAlphaBlend,
+
+    /// Set to true to use Flutter SDK defaults for [BottomNavigationBar]
+    /// theme when properties are undefined (null).
+    ///
+    /// Recommend keeping it false for more color harmonized component theme
+    /// starting points. The flag may be helpful if you want to create custom
+    /// sub-themes starting from less opinionated settings.
+    ///
+    /// Differences when flag is false versus true are:
+    final bool useFlutterDefaults = false,
   }) {
     // Get text color, defaults to primary.
     final Color labelColor = selectedLabelSchemeColor == null

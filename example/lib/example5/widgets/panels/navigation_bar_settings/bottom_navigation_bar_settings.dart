@@ -185,6 +185,17 @@ class BottomNavigationBarSettings extends StatelessWidget {
         const BottomNavigationBarShowcase(),
         const Divider(height: 1),
         const SizedBox(height: 16),
+        SwitchListTileAdaptive(
+          title: const Text('Use Flutter defaults'),
+          subtitle: const Text('If ON Flutter defaults are used that removes '
+              'harmonized scheme with Rail and BottomNavigationBar'),
+          value: controller.useFlutterDefaults &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setUseFlutterDefaults
+              : null,
+        ),
       ],
     );
   }
