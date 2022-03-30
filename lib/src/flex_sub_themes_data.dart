@@ -478,9 +478,13 @@ class FlexSubThemesData with Diagnosticable {
   final double thinBorderWidth;
 
   /// Border radius override value for [TextButton].
+  ///
+  /// Defaults to 20 [kButtonRadius] if not defined, M3 specification.
   final double? textButtonRadius;
 
   /// Border radius override value for [ElevatedButton].
+  ///
+  /// Defaults to 20 [kButtonRadius] if not defined, M3 specification.
   final double? elevatedButtonRadius;
 
   /// Elevation of [ElevatedButton].
@@ -493,9 +497,13 @@ class FlexSubThemesData with Diagnosticable {
   final double elevatedButtonElevation;
 
   /// Border radius override value for [OutlinedButton].
+  ///
+  /// Defaults to 20 [kButtonRadius] if not defined, M3 specification.
   final double? outlinedButtonRadius;
 
   /// Border radius override value for [ToggleButtons].
+  ///
+  /// Defaults to 20 [kButtonRadius] if not defined.
   final double? toggleButtonsRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the
@@ -608,6 +616,8 @@ class FlexSubThemesData with Diagnosticable {
   final double? inputDecorationRadius;
 
   /// Border radius override value for [InputDecoration].
+  ///
+  /// Defaults to 20 [kButtonRadius].
   final double? inputDecoratorRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the input decorator
@@ -708,6 +718,8 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? fabSchemeColor;
 
   /// Border radius override value for [Chip] widgets.
+  ///
+  /// If not defined, defaults to [kChipRadius] = 8, M3 specification.
   final double? chipRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the Chips
@@ -717,6 +729,8 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? chipSchemeColor;
 
   /// Border radius override value for [Card].
+  ///
+  /// If not defined, defaults to [kCardRadius] = 12, the M3 default for Card.
   final double? cardRadius;
 
   /// Elevation of [Card].
@@ -746,6 +760,8 @@ class FlexSubThemesData with Diagnosticable {
   /// The built-in behavior in FlexColorScheme allows it to match at low
   /// inherited default radius values, but to also stay below the usable max
   /// rounding automatically at higher global default border radius values.
+  ///
+  /// If not defined, defaults to [kPopupRadius] 10.
   final double? popupMenuRadius;
 
   /// Default elevation of [PopupMenuButton].
@@ -771,6 +787,8 @@ class FlexSubThemesData with Diagnosticable {
   final double? popupMenuOpacity;
 
   /// Border radius override value for [Dialog].
+  ///
+  /// Defaults to [kDialogRadius] 28 if undefined, M3 specification.
   final double? dialogRadius;
 
   /// Elevation of [Dialog].
@@ -812,6 +830,8 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? dialogBackgroundSchemeColor;
 
   /// Border radius override value for [TimePickerDialog].
+  ///
+  /// Defaults to [kDialogRadius] 28 if undefined, M3 specification.
   final double? timePickerDialogRadius;
 
   /// Elevation of [SnackBar].
@@ -882,6 +902,8 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? tabBarIndicatorSchemeColor;
 
   /// Border radius override value for [BottomSheet].
+  ///
+  //// If not defined defaults to [kBottomSheetBorderRadius] = 16, M3 spec.
   final double? bottomSheetRadius;
 
   /// Elevation of none modal [BottomSheet].

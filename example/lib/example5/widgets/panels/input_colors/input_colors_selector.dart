@@ -91,7 +91,9 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                   optionButtonBorderRadius: widget.controller.useSubThemes &&
                           widget.controller.useFlexColorScheme
                       // M3 default for Card is 12.
-                      ? (widget.controller.cornerRadius ?? 12)
+                      ? (widget.controller.cardBorderRadius ??
+                          widget.controller.cornerRadius ??
+                          12)
                       // M2 default for Card.
                       : 4,
                   height: 30 + phoneReduce / 2,

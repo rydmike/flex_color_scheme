@@ -54,13 +54,14 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             min: -1,
             max: 40,
             divisions: 41,
-            label: controller.fabBorderRadius == null ||
-                    (controller.fabBorderRadius ?? -1) < 0 ||
-                    !controller.fabUseShape ||
-                    !controller.useSubThemes ||
-                    !controller.useFlexColorScheme
-                ? 'default'
-                : (controller.fabBorderRadius?.toStringAsFixed(0) ?? ''),
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.fabUseShape
+                ? controller.fabBorderRadius == null ||
+                        (controller.fabBorderRadius ?? -1) < 0
+                    ? 'default 16'
+                    : (controller.fabBorderRadius?.toStringAsFixed(0) ?? '')
+                : 'circular',
             value: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     controller.fabUseShape
@@ -84,14 +85,15 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          controller.fabUseShape
                       ? controller.fabBorderRadius == null ||
-                              (controller.fabBorderRadius ?? -1) < 0 ||
-                              !controller.fabUseShape
-                          ? 'default'
+                              (controller.fabBorderRadius ?? -1) < 0
+                          ? 'default 16'
                           : (controller.fabBorderRadius?.toStringAsFixed(0) ??
                               '')
-                      : 'default',
+                      : 'circular',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -127,14 +129,17 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             min: -1,
             max: 40,
             divisions: 41,
-            label: controller.toggleButtonsBorderRadius == null ||
-                    (controller.toggleButtonsBorderRadius ?? -1) < 0
-                ? 'default'
-                : (controller.toggleButtonsBorderRadius?.toStringAsFixed(0) ??
-                    ''),
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.toggleButtonsBorderRadius == null ||
+                        (controller.toggleButtonsBorderRadius ?? -1) < 0
+                    ? 'default 20'
+                    : (controller.toggleButtonsBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default 0',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.toggleButtonsBorderRadius ?? -1
-                : 0,
+                : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller
@@ -155,11 +160,11 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.toggleButtonsBorderRadius == null ||
                               (controller.toggleButtonsBorderRadius ?? -1) < 0
-                          ? 'default'
+                          ? 'default 20'
                           : (controller.toggleButtonsBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : '0',
+                      : 'default 0',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -194,12 +199,12 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             min: -1,
             max: 40,
             divisions: 41,
-            label: controller.chipBorderRadius == null ||
-                    (controller.chipBorderRadius ?? -1) < 0 ||
-                    !controller.useSubThemes ||
-                    !controller.useFlexColorScheme
-                ? 'default'
-                : (controller.chipBorderRadius?.toStringAsFixed(0) ?? ''),
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.chipBorderRadius == null ||
+                        (controller.chipBorderRadius ?? -1) < 0
+                    ? 'default 8'
+                    : (controller.chipBorderRadius?.toStringAsFixed(0) ?? '')
+                : 'stadium',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.chipBorderRadius ?? -1
                 : -1,
@@ -222,10 +227,10 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.chipBorderRadius == null ||
                               (controller.chipBorderRadius ?? -1) < 0
-                          ? 'default'
+                          ? 'default 8'
                           : (controller.chipBorderRadius?.toStringAsFixed(0) ??
                               '')
-                      : 'default',
+                      : 'stadium',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -282,13 +287,16 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             min: -1,
             max: 12,
             divisions: 13,
-            label: controller.popupMenuBorderRadius == null ||
-                    (controller.popupMenuBorderRadius ?? -1) < 0
-                ? 'default'
-                : (controller.popupMenuBorderRadius?.toStringAsFixed(0) ?? ''),
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.popupMenuBorderRadius == null ||
+                        (controller.popupMenuBorderRadius ?? -1) < 0
+                    ? 'default 10'
+                    : (controller.popupMenuBorderRadius?.toStringAsFixed(0) ??
+                        '')
+                : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.popupMenuBorderRadius ?? -1
-                : 4,
+                : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller
@@ -309,11 +317,11 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.popupMenuBorderRadius == null ||
                               (controller.popupMenuBorderRadius ?? -1) < 0
-                          ? 'default'
+                          ? 'default 10'
                           : (controller.popupMenuBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : '4',
+                      : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -323,10 +331,20 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: PopupMenuShowcase(),
-        ),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            // The button used in the PopupMenuShowcase to open the PopupMenu
+            // is not native widget, only menu is, and it is the one that
+            // is themed.
+            child: PopupMenuShowcase(
+              popupRadius:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.popupMenuBorderRadius == null ||
+                              (controller.popupMenuBorderRadius ?? -1) < 0
+                          ? 10
+                          : (controller.popupMenuBorderRadius ?? 4)
+                      : 4,
+            )),
         const Divider(),
         const ListTile(
           title: Text('IconButton, CircleAvatar, DropdownButton and Tooltip'),

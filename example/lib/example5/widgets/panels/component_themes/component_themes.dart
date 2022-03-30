@@ -84,15 +84,17 @@ class ComponentThemes extends StatelessWidget {
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: Slider.adaptive(
             min: -1,
-            max: 30,
-            divisions: 31,
-            label: controller.cornerRadius == null ||
-                    (controller.cornerRadius ?? -1) < 0
-                ? 'default'
-                : (controller.cornerRadius?.toStringAsFixed(0) ?? ''),
+            max: 40,
+            divisions: 41,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.cornerRadius == null ||
+                        (controller.cornerRadius ?? -1) < 0
+                    ? 'default'
+                    : (controller.cornerRadius?.toStringAsFixed(0) ?? '')
+                : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.cornerRadius ?? -1
-                : 4,
+                : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller.setCornerRadius(value < 0 ? null : value);
@@ -114,7 +116,7 @@ class ComponentThemes extends StatelessWidget {
                               (controller.cornerRadius ?? -1) < 0
                           ? 'default'
                           : (controller.cornerRadius?.toStringAsFixed(0) ?? '')
-                      : '4',
+                      : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!

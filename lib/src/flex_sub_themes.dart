@@ -1082,7 +1082,8 @@ class FlexSubThemes {
   /// scheme would typically be equal the color scheme also used to define the
   /// color scheme for your app theme.
   ///
-  /// Its corner [radius] can be adjusted, it defaults to [kButtonRadius] (20).
+  /// Its corner [radius] can be adjusted, it defaults to
+  /// [kInputDecoratorRadius] (20).
   static InputDecorationTheme inputDecorationTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -1097,7 +1098,7 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// Defaults to 20 [kButtonRadius].
+    /// Defaults to 20 [kInputDecoratorRadius] if not defined, M3 specification.
     final double? radius,
 
     /// Selects input border type.
@@ -1213,8 +1214,8 @@ class FlexSubThemes {
           focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
           focusedBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius:
-                BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
+            borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kInputDecoratorRadius)),
             borderSide: BorderSide(
               color: baseColor,
               width: focusedBorderWidth,
@@ -1222,8 +1223,8 @@ class FlexSubThemes {
           ),
           enabledBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius:
-                BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
+            borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kInputDecoratorRadius)),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
                     color: enabledBorder,
@@ -1233,8 +1234,8 @@ class FlexSubThemes {
           ),
           disabledBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius:
-                BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
+            borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kInputDecoratorRadius)),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
                     color: baseColor
@@ -1246,8 +1247,8 @@ class FlexSubThemes {
           ),
           focusedErrorBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius:
-                BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
+            borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kInputDecoratorRadius)),
             borderSide: BorderSide(
               color: colorScheme.error,
               width: focusedBorderWidth,
@@ -1255,8 +1256,8 @@ class FlexSubThemes {
           ),
           errorBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius:
-                BorderRadius.all(Radius.circular(radius ?? kButtonRadius)),
+            borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kInputDecoratorRadius)),
             borderSide: BorderSide(
               color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
               width: unfocusedBorderWidth,
@@ -1291,8 +1292,8 @@ class FlexSubThemes {
           focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
           focusedBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kButtonRadius),
-              topRight: Radius.circular(radius ?? kButtonRadius),
+              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
+              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
             ),
             borderSide: BorderSide(
               color: baseColor,
@@ -1301,8 +1302,8 @@ class FlexSubThemes {
           ),
           enabledBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kButtonRadius),
-              topRight: Radius.circular(radius ?? kButtonRadius),
+              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
+              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
             ),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
@@ -1313,8 +1314,8 @@ class FlexSubThemes {
           ),
           disabledBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kButtonRadius),
-              topRight: Radius.circular(radius ?? kButtonRadius),
+              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
+              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
             ),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
@@ -1327,8 +1328,8 @@ class FlexSubThemes {
           ),
           focusedErrorBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kButtonRadius),
-              topRight: Radius.circular(radius ?? kButtonRadius),
+              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
+              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
             ),
             borderSide: BorderSide(
               color: colorScheme.error,
@@ -1337,8 +1338,8 @@ class FlexSubThemes {
           ),
           errorBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kButtonRadius),
-              topRight: Radius.circular(radius ?? kButtonRadius),
+              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
+              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
             ),
             borderSide: BorderSide(
               color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
@@ -1514,7 +1515,7 @@ class FlexSubThemes {
   static CardTheme cardTheme({
     /// Corner radius
     ///
-    /// Defaults to [kCardRadius] = 12, M3 defaults for Cards.
+    /// If not defined, defaults to [kCardRadius] = 12, the M3 default for Card.
     final double? radius,
 
     /// Card elevation defaults to [kCardElevation] = 0.
@@ -1630,7 +1631,7 @@ class FlexSubThemes {
 
     /// Corner radius.
     ///
-    /// Defaults to [kDialogRadius] = 28.
+    /// Defaults to [kDialogRadius] 28 if undefined, M3 specification.
     final double? radius,
 
     /// Dialog elevation defaults to 10 [kDialogElevation].
@@ -1692,7 +1693,7 @@ class FlexSubThemes {
 
     /// Outer corner radius.
     ///
-    /// Defaults to [kDialogRadius] = 28.
+    /// Defaults to [kDialogRadius] 28 if undefined, M3 specification.
     final double? radius,
 
     /// Elements corner radius.
@@ -1848,11 +1849,13 @@ class FlexSubThemes {
   /// An opinionated [BottomSheetThemeData] with custom top corner
   /// radius.
   ///
-  /// Corner [radius] defaults to [kDefaultRadius] = 16, [elevation] to
-  /// [kBottomSheetElevation] = 4 and [modalElevation] to
+  /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 16,
+  /// [elevation] to [kBottomSheetElevation] = 4 and [modalElevation] to
   /// [kBottomSheetModalElevation] = 8.
   static BottomSheetThemeData bottomSheetTheme({
-    /// The corner radius defaults to 16 for the top corners.
+    /// The corner radius of the top corners.
+    ///
+    /// If not defined defaults to [kBottomSheetBorderRadius] = 16, M3 spec.
     final double? radius,
 
     /// The bottom sheet elevation defaults to [kBottomSheetElevation] = 4.
@@ -1874,8 +1877,8 @@ class FlexSubThemes {
         modalElevation: modalElevation,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(radius ?? kDefaultRadius),
-            topRight: Radius.circular(radius ?? kDefaultRadius),
+            topLeft: Radius.circular(radius ?? kBottomSheetBorderRadius),
+            topRight: Radius.circular(radius ?? kBottomSheetBorderRadius),
           ),
         ),
       );
