@@ -2152,18 +2152,36 @@ class FlexSubThemes {
     final int unselectedAlpha = kUnselectedAlphaBlend,
 
     /// Set to true to use Flutter SDK defaults for [BottomNavigationBar]
-    /// theme when properties are undefined (null).
+    /// theme when its color, size and text style properties are undefined,
+    /// instead of using [FlexColorScheme]'s own defaults.
     ///
-    /// Recommend keeping it false for more color harmonized component theme
-    /// starting points. The flag may be helpful if you want to create custom
-    /// sub-themes starting from less opinionated settings.
+    /// Recommend keeping it **false** for a more color harmonized component
+    /// theme starting point. This flag may be helpful if you want to create
+    /// custom sub-themes starting from less opinionated settings.
     ///
-    /// Differences when flag is false versus true are:
+    /// When all required properties are undefined and flag is false or true,
+    /// the effective default styles for undefined inputs become:
+    ///
+    /// ```
+    ///                    FCS defaults   Flutter defaults
+    /// useFlutterDefaults false          true
+    /// - selected icon    primary        light theme primary, dark secondary
+    /// - Selected label   primary        light theme primary, dark secondary
+    /// - unselected icon  onSurface      onSurface, with opacity
+    /// - unSelected label onSurface      onSurface, with opacity
+    ///
+    /// FCS further applies both an alpha blend and slight opacity to
+    /// unselected icon and unselected label, but only if
+    /// [mutedUnselectedLabel] is true, this also applies to undefined
+    /// color inputs.
+    /// ```
     final bool useFlutterDefaults = false,
   }) {
     // Get text color, defaults to primary.
     final Color labelColor = selectedLabelSchemeColor == null
-        ? colorScheme.primary
+        ? useFlutterDefaults && colorScheme.brightness == Brightness.dark
+            ? colorScheme.secondary
+            : colorScheme.primary
         : schemeColor(selectedLabelSchemeColor, colorScheme);
 
     // Get unselected label color, defaults to onSurface.
@@ -2177,23 +2195,25 @@ class FlexSubThemes {
 
     // Get effective text sizes.
     final double labelSize = selectedLabelSize ?? textStyle.fontSize ?? 14;
-    // If not specified, unselected is label size us 2dp smaller than selected,
-    // but always at least 8dp.
+    // If not specified, unselected is label size, use 2dp smaller than
+    // selected, but always at least 8dp.
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? math.max(labelSize - 2, 8);
 
-    // Determine if we should use a custom text style at all, if all text
-    // modifier props are null, we should fall back to widget defaults.
-    final bool useTextStyle = labelTextStyle != null ||
-        selectedLabelSize != null ||
-        unselectedLabelSize != null ||
-        selectedLabelSchemeColor != null ||
-        unselectedLabelSchemeColor != null ||
-        (mutedUnselectedLabel ?? false);
+    // Determine if we should use default text style when all are null,
+    // meaning we fall back to Flutter SDK default.
+    final bool useDefaultTextStyle = labelTextStyle == null &&
+        selectedLabelSize == null &&
+        unselectedLabelSize == null &&
+        selectedLabelSchemeColor == null &&
+        unselectedLabelSchemeColor == null &&
+        useFlutterDefaults;
 
     // Get icon color, defaults to primary.
     final Color iconColor = selectedIconSchemeColor == null
-        ? colorScheme.primary
+        ? useFlutterDefaults && colorScheme.brightness == Brightness.dark
+            ? colorScheme.secondary
+            : colorScheme.primary
         : schemeColor(selectedIconSchemeColor, colorScheme);
 
     // Get unselected icon color, defaults to onSurface.
@@ -2205,21 +2225,22 @@ class FlexSubThemes {
     final double iconSize = selectedIconSize ?? 24;
     final double effectiveUnselectedIconSize = unselectedIconSize ?? iconSize;
 
-    // Determine if we should use a custom icon theme at all, if these props
-    // are null, we should not and just fall back to widget defaults.
-    final bool useIconTheme = selectedIconSize != null ||
-        unselectedIconSize != null ||
-        selectedIconSchemeColor != null ||
-        unselectedIconSchemeColor != null ||
-        (mutedUnselectedIcon ?? false);
+    // Determine if we should use default icon style when all are null,
+    // meaning we fall back to Flutter SDK default.
+    final bool useDefaultIconTheme = selectedIconSize == null &&
+        unselectedIconSize == null &&
+        selectedIconSchemeColor == null &&
+        unselectedIconSchemeColor == null &&
+        useFlutterDefaults;
 
     return BottomNavigationBarThemeData(
       backgroundColor: backgroundSchemeColor != null
           ? schemeColor(backgroundSchemeColor, colorScheme).withOpacity(opacity)
           : null,
       elevation: elevation,
-      unselectedIconTheme: useIconTheme
-          ? IconThemeData(
+      unselectedIconTheme: useDefaultIconTheme
+          ? null
+          : IconThemeData(
               size: effectiveUnselectedIconSize,
               opacity: 1,
               color: (mutedUnselectedIcon ?? false)
@@ -2227,39 +2248,38 @@ class FlexSubThemes {
                       .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
                   : unselectedIconColor,
-            )
-          : null,
-      selectedIconTheme: useIconTheme
-          ? IconThemeData(
+            ),
+      selectedIconTheme: useDefaultIconTheme
+          ? null
+          : IconThemeData(
               size: iconSize,
               opacity: 1,
               color: iconColor,
-            )
-          : null,
-      selectedItemColor: useTextStyle ? labelColor : null,
-      unselectedItemColor: useTextStyle
-          ? (mutedUnselectedLabel ?? false)
+            ),
+      selectedItemColor: useDefaultTextStyle ? null : labelColor,
+      unselectedItemColor: useDefaultTextStyle
+          ? null
+          : (mutedUnselectedLabel ?? false)
               ? unselectedLabelColor
                   .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
                   .withAlpha(unselectedAlpha)
-              : unselectedLabelColor
-          : null,
-      unselectedLabelStyle: useTextStyle
-          ? textStyle.copyWith(
+              : unselectedLabelColor,
+      unselectedLabelStyle: useDefaultTextStyle
+          ? null
+          : textStyle.copyWith(
               fontSize: effectiveUnselectedLabelSize,
               color: (mutedUnselectedLabel ?? false)
                   ? unselectedLabelColor
                       .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
                   : unselectedLabelColor,
-            )
-          : null,
-      selectedLabelStyle: useTextStyle
-          ? textStyle.copyWith(
+            ),
+      selectedLabelStyle: useDefaultTextStyle
+          ? null
+          : textStyle.copyWith(
               fontSize: labelSize,
               color: labelColor,
-            )
-          : null,
+            ),
       showSelectedLabels: showSelectedLabels,
       showUnselectedLabels: showUnselectedLabels,
       type: type,
@@ -2519,6 +2539,19 @@ class FlexSubThemes {
     /// This setting is not exposed via [FlexSubThemesData], but can be if
     /// needed later.
     final int unselectedAlpha = kUnselectedAlphaBlend,
+
+    /// Set to true to use Flutter SDK defaults for [NavigationBar]
+    /// theme when its properties are undefined (null) instead of using
+    /// [FlexColorScheme]'s own defaults.
+    ///
+    /// Recommend keeping it **false** for a more color harmonized component
+    /// theme starting point. This flag may be helpful if you want to create
+    /// custom sub-themes starting from less opinionated settings.
+    ///
+    /// Differences when flag is false versus true are:
+    ///
+    // TODO(rydmike): Add useFlutterDefaults flag state differences to doc.
+    final bool useFlutterDefaults = false,
   }) {
     // Get text color, defaults to onSurface.
     final Color labelColor = selectedLabelSchemeColor == null
@@ -2892,6 +2925,11 @@ class FlexSubThemes {
 
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
+    /// Used internally to enable this sub-theme to when used by
+    /// [FlexColorScheme] respect the [ThemeData.useMaterial3] flag.
+    ///
+    /// Flutter SDK [useMaterial3] documentation:
+    ///
     /// If true, then components that have been migrated to Material 3 will
     /// start using new colors, typography and other features of Material 3.
     /// If false, they will use the Material 2 look and feel.
@@ -2910,6 +2948,19 @@ class FlexSubThemes {
     /// all uses of it. Everything will use the Material 3 look and feel at
     /// that point.
     final bool useMaterial3 = false,
+
+    /// Set to true to use Flutter SDK defaults for [NavigationRail]
+    /// theme when its properties are undefined (null) instead of using
+    /// [FlexColorScheme]'s own defaults.
+    ///
+    /// Recommend keeping it **false** for a more color harmonized component
+    /// theme starting point. This flag may be helpful if you want to create
+    /// custom sub-themes starting from less opinionated settings.
+    ///
+    /// Differences when flag is false versus true are:
+    ///
+    // TODO(rydmike): Add useFlutterDefaults flag state differences to doc.
+    final bool useFlutterDefaults = false,
   }) {
     // Get text color, defaults to primary.
     final Color labelColor = selectedLabelSchemeColor == null

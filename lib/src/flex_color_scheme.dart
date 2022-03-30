@@ -6071,7 +6071,8 @@ class FlexColorScheme with Diagnosticable {
                   subTheme.bottomNavigationBarSelectedLabelSchemeColor,
               unselectedLabelSchemeColor:
                   subTheme.bottomNavigationBarUnselectedLabelSchemeColor,
-              mutedUnselectedLabel: subTheme.bottomNavigationBarMutedUnselectedLabel,
+              mutedUnselectedLabel:
+                  subTheme.bottomNavigationBarMutedUnselectedLabel,
               selectedIconSize: subTheme.bottomNavigationBarSelectedIconSize,
               unselectedIconSize:
                   subTheme.bottomNavigationBarUnselectedIconSize,
@@ -6079,9 +6080,10 @@ class FlexColorScheme with Diagnosticable {
                   subTheme.bottomNavigationBarSelectedIconSchemeColor,
               unselectedIconSchemeColor:
                   subTheme.bottomNavigationBarUnselectedIconSchemeColor,
-              mutedUnselectedIcon: subTheme.bottomNavigationBarMutedUnselectedIcon,
-              backgroundSchemeColor: subTheme
-                      .bottomNavigationBarBackgroundSchemeColor,
+              mutedUnselectedIcon:
+                  subTheme.bottomNavigationBarMutedUnselectedIcon,
+              backgroundSchemeColor:
+                  subTheme.bottomNavigationBarBackgroundSchemeColor,
               opacity: subTheme.bottomNavigationBarOpacity,
               elevation: subTheme.bottomNavigationBarElevation,
               type: subTheme.bottomNavigationBarType,
@@ -6130,6 +6132,7 @@ class FlexColorScheme with Diagnosticable {
               indicatorAlpha: kNavigationBarIndicatorAlpha,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
+              useFlutterDefaults: subTheme.useFlutterDefaults,
             )
           : null,
       // Opinionated sub theme for Material 3 based Navigation Bar
@@ -6164,6 +6167,7 @@ class FlexColorScheme with Diagnosticable {
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
+              useFlutterDefaults: subTheme.useFlutterDefaults,
             )
           : null,
     );

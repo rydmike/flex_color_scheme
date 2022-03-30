@@ -15,10 +15,19 @@ class BottomNavigationBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    final String labelForDefaultSelectedItem =
-        (isDark && !controller.useFlexColorScheme)
-            ? 'null (secondary)'
-            : 'null (primary)';
+    final String labelForDefaultSelectedItem = isDark &&
+            (!controller.useFlexColorScheme ||
+                (controller.useFlutterDefaults &&
+                    controller.bottomNavBarSelectedSchemeColor == null))
+        ? 'null (secondary)'
+        : 'null (primary)';
+    final String labelForDefaultUnelectedItem =
+        (!controller.useFlexColorScheme ||
+                !controller.useSubThemes ||
+                (controller.useFlutterDefaults &&
+                    controller.bottomNavBarUnselectedSchemeColor == null))
+            ? 'null (onSurface with opacity)'
+            : 'null (onSurface, blend & opacity)';
     final double navBarOpacity = controller.useSubThemes &&
             controller.useFlexColorScheme &&
             controller.bottomNavBarBackgroundSchemeColor?.index != null
@@ -119,8 +128,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),
-          subtitle: const Text('Shared setting in this app, but APIs have '
-              'own properties'),
+          subtitle: const Text('Label and icon, but own properties in API'),
           labelForDefault: labelForDefaultSelectedItem,
           index: controller.bottomNavBarSelectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -136,12 +144,8 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Unselected item color'),
-          subtitle: const Text('Shared setting in this app, but APIs have '
-              'own properties'),
-          labelForDefault:
-              controller.useSubThemes && controller.useFlexColorScheme
-                  ? 'null (onSurface)'
-                  : 'null (onSurface with opacity)',
+          subtitle: const Text('Label and icon, but own properties in API'),
+          labelForDefault: labelForDefaultUnelectedItem,
           index: controller.bottomNavBarUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -187,8 +191,9 @@ class BottomNavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 16),
         SwitchListTileAdaptive(
           title: const Text('Use Flutter defaults'),
-          subtitle: const Text('If ON Flutter defaults are used that removes '
-              'harmonized scheme with Rail and BottomNavigationBar'),
+          subtitle: const Text('Undefined color values will fall back to '
+              'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
+              'See API docs for more info.'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
