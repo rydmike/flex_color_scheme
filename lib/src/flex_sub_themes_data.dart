@@ -735,7 +735,13 @@ class FlexSubThemesData with Diagnosticable {
   /// good, the highlight inside the menu will start to overflow the corners and
   /// it is not clipped along the border radius. The underlying Widget is not
   /// designed with this high border rounding in mind, which makes sense since
-  /// it does not look good with too much rounding on a small menu.
+  /// it does not look good with too much rounding on a typically small
+  /// phone popup menu, that the widget was designed for originally.
+  ///
+  /// It will still look fairly OK with a border radius of max 12, the selected
+  /// item highlight corner overflow at top and bottom is barely visible. If
+  /// you configure it manually, max 12 might still be considered usable.
+  /// To be on the safe side it only follows the [defaultBorder] to max 10.
   ///
   /// The built-in behavior in FlexColorScheme allows it to match at low
   /// inherited default radius values, but to also stay below the usable max

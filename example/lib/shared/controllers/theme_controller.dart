@@ -355,6 +355,8 @@ class ThemeController with ChangeNotifier {
         Store.keySnackBarSchemeColor, Store.defaultSnackBarSchemeColor);
     _popupMenuOpacity = await _themeService.load(
         Store.keyPopupMenuOpacity, Store.defaultPopupMenuOpacity);
+    _popupMenuBorderRadius = await _themeService.load(
+        Store.keyPopupMenuBorderRadius, Store.defaultPopupMenuBorderRadius);
     _cardBorderRadius = await _themeService.load(
         Store.keyCardBorderRadius, Store.defaultCardBorderRadius);
     _dialogBackgroundSchemeColor = await _themeService.load(
@@ -595,6 +597,7 @@ class ThemeController with ChangeNotifier {
     await setChipBorderRadius(Store.defaultChipBorderRadius, false);
     await setSnackBarSchemeColor(Store.defaultSnackBarSchemeColor, false);
     await setPopupMenuOpacity(Store.defaultPopupMenuOpacity, false);
+    await setPopupMenuBorderRadius(Store.defaultPopupMenuBorderRadius, false);
     await setCardBorderRadius(Store.defaultCardBorderRadius, false);
     await setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
@@ -1903,6 +1906,16 @@ class ThemeController with ChangeNotifier {
     _popupMenuOpacity = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyPopupMenuOpacity, value);
+  }
+
+  late double? _popupMenuBorderRadius;
+  double? get popupMenuBorderRadius => _popupMenuBorderRadius;
+  Future<void> setPopupMenuBorderRadius(double? value,
+      [bool notify = true]) async {
+    if (value == _popupMenuBorderRadius) return;
+    _popupMenuBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyPopupMenuBorderRadius, value);
   }
 
   late double? _cardBorderRadius;

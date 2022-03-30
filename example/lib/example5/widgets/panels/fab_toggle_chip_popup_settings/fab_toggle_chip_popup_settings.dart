@@ -36,7 +36,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
               : null,
         ),
         SwitchListTileAdaptive(
-          title: const Text('Use themed Shape on FloatingActionButton'),
+          title: const Text('Use themed Shape'),
           subtitle: const Text('OFF removes Shape usage, making it use default '
               'style, regardless of global border radius setting or own radius '
               'setting. It is like "useFlutterDefaults", but only for the FAB'),
@@ -47,13 +47,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
               ? controller.setFabUseShape
               : null,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: FabShowcase(),
-        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('FloatingActionButton border radius'),
+          title: const Text('Border radius'),
           subtitle: Slider.adaptive(
             min: -1,
             max: 40,
@@ -105,6 +101,10 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: FabShowcase(),
+        ),
         const Divider(),
         ColorSchemePopupMenu(
           title: const Text('ToggleButtons color'),
@@ -120,13 +120,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: ToggleButtonsShowcase(),
-        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('ToggleButtons border radius'),
+          title: const Text('Border radius'),
           subtitle: Slider.adaptive(
             min: -1,
             max: 40,
@@ -173,9 +169,13 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+          child: ToggleButtonsShowcase(),
+        ),
         const Divider(),
         ColorSchemePopupMenu(
-          title: const Text('Chip color'),
+          title: const Text('Chip color base'),
           index: controller.chipSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -187,13 +187,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: ChipShowcase(),
-        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Chip border radius'),
+          title: const Text('Border radius'),
           subtitle: Slider.adaptive(
             min: -1,
             max: 40,
@@ -239,6 +235,10 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+          child: ChipShowcase(),
+        ),
         const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -275,14 +275,80 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             ),
           ),
         ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Border radius'),
+          subtitle: Slider.adaptive(
+            min: -1,
+            max: 12,
+            divisions: 13,
+            label: controller.popupMenuBorderRadius == null ||
+                    (controller.popupMenuBorderRadius ?? -1) < 0
+                ? 'default'
+                : (controller.popupMenuBorderRadius?.toStringAsFixed(0) ?? ''),
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.popupMenuBorderRadius ?? -1
+                : 4,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller
+                        .setPopupMenuBorderRadius(value < 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.popupMenuBorderRadius == null ||
+                              (controller.popupMenuBorderRadius ?? -1) < 0
+                          ? 'default'
+                          : (controller.popupMenuBorderRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : '4',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: PopupDropdownButtonsShowcase(),
+          child: PopupMenuShowcase(),
         ),
         const Divider(),
+        const ListTile(
+          title: Text('IconButton, CircleAvatar, DropdownButton and Tooltip'),
+          subtitle: Text('Included to show their effective themed style'),
+        ),
+        SwitchListTileAdaptive(
+          title: const Text(
+            'Tooltip background brightness',
+          ),
+          subtitle: const Text(
+            'OFF theme mode inverted, common on Web\n'
+            'ON theme mode brightness, like Windows',
+          ),
+          value: controller.tooltipsMatchBackground &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useFlexColorScheme
+              ? controller.setTooltipsMatchBackground
+              : null,
+        ),
         const Padding(
           padding: EdgeInsets.all(16),
-          child: CircleAvatarAndTooltipShowcase(),
+          child: IconButtonCircleAvatarDropdownTooltipShowcase(),
         ),
       ],
     );

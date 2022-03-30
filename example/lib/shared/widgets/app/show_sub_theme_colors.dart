@@ -169,11 +169,10 @@ class ShowSubThemeColors extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
             title: Text('Component sub-themes effective colors'),
             subtitle: Text("Color settings are controlled in each component's "
-                'settings panel. This shows default or selected ColorScheme '
-                'based used theme color, for each component.'),
+                'settings panel. This shows default or currently selected '
+                'ColorScheme based used theme color, for each component.'),
           ),
-          // A Wrap widget is just the right handy widget for this type of
-          // widget to make it responsive.
+          const SizedBox(height: 8),
           Wrap(
             spacing: 6,
             runSpacing: 6,

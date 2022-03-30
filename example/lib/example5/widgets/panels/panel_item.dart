@@ -89,13 +89,13 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.crop_16_9_outlined,
   ),
   PanelItem(
-    panelLabel: 'FAB, ToggleButtons, Chips and Popup',
-    buttonLabel: 'FAB\nToggleButtons',
+    panelLabel: 'FAB, ToggleButtons, Chip and Popup',
+    buttonLabel: 'FAB Toggle\nChip Popup',
     icon: Icons.add_circle,
   ),
   PanelItem(
     panelLabel: 'Switch, CheckBox and Radio',
-    buttonLabel: 'Switch\nCheckBox',
+    buttonLabel: 'Switch\nCheck Radio',
     icon: Icons.toggle_on_outlined,
   ),
   PanelItem(
