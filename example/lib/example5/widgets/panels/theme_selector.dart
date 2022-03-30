@@ -119,37 +119,41 @@ class ThemeSelector extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: _kHeightOfScrollWidget + phoneReduce,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: SwitchListTileAdaptive(
-                    contentPadding: isPhone
-                        ? const EdgeInsetsDirectional.only(start: 16, end: 0)
-                        : null,
-                    title: const Text('Flex\u200BColor\u200BScheme'),
-                    dense: isPhone,
-                    value: controller.useFlexColorScheme,
-                    onChanged: controller.setUseFlexColorScheme,
+            height:
+                _kHeightOfScrollWidget + phoneReduce + (isPhone ? margins : 0),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, isPhone ? margins : 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: SwitchListTileAdaptive(
+                      contentPadding: isPhone
+                          ? const EdgeInsetsDirectional.only(start: 16, end: 0)
+                          : null,
+                      title: const Text('Flex\u200BColor\u200BScheme'),
+                      dense: isPhone,
+                      value: controller.useFlexColorScheme,
+                      onChanged: controller.setUseFlexColorScheme,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: SwitchListTileAdaptive(
-                    contentPadding: isPhone
-                        ? const EdgeInsets.symmetric(horizontal: 8)
-                        : null,
-                    dense: isPhone,
-                    title: const Text('Compo\u200Bnent themes'),
-                    value: controller.useSubThemes &&
-                        controller.useFlexColorScheme,
-                    onChanged: controller.useFlexColorScheme
-                        ? controller.setUseSubThemes
-                        : null,
+                  Expanded(
+                    child: SwitchListTileAdaptive(
+                      contentPadding: isPhone
+                          ? const EdgeInsets.symmetric(horizontal: 8)
+                          : null,
+                      dense: isPhone,
+                      title: const Text('Compo\u200Bnent themes'),
+                      value: controller.useSubThemes &&
+                          controller.useFlexColorScheme,
+                      onChanged: controller.useFlexColorScheme
+                          ? controller.setUseSubThemes
+                          : null,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

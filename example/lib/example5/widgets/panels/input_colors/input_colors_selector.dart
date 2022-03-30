@@ -39,6 +39,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
 
   // The width size of the scrolling button.
   static const double _kWidthOfScrollItem = 67.2;
+  static const double _kHeightOfScrollItem = 66;
 
   @override
   void initState() {
@@ -46,9 +47,12 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     schemeIndex = widget.controller.schemeIndex;
     final double phoneReduce =
         widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
+    final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
     scrollController = ScrollController(
       keepScrollOffset: true,
-      initialScrollOffset: (_kWidthOfScrollItem + phoneReduce) * schemeIndex,
+      initialScrollOffset:
+          (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
+              schemeIndex,
     );
   }
 
@@ -64,9 +68,11 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     if (widget.controller.schemeIndex != schemeIndex) {
       final double phoneReduce =
           widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
+      final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
       schemeIndex = widget.controller.schemeIndex;
-      scrollController
-          .jumpTo((_kWidthOfScrollItem + phoneReduce) * schemeIndex);
+      scrollController.jumpTo(
+          (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
+              schemeIndex);
     }
   }
 
@@ -75,8 +81,9 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     final double phoneReduce =
         widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
+    final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
     return SizedBox(
-      height: 66,
+      height: _kHeightOfScrollItem + phoneReduce,
       child: Row(
         children: <Widget>[
           Expanded(
@@ -88,6 +95,8 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
               itemCount: AppColor.schemes.length,
               itemBuilder: (BuildContext context, int index) {
                 return FlexThemeModeOptionButton(
+                  optionButtonPadding: EdgeInsetsDirectional.only(
+                      start: 6 + phoneButtonsSpacingReduce),
                   optionButtonBorderRadius: widget.controller.useSubThemes &&
                           widget.controller.useFlexColorScheme
                       // M3 default for Card is 12.
@@ -108,7 +117,10 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                   ),
                   onSelect: () {
                     scrollController.animateTo(
-                        (_kWidthOfScrollItem + phoneReduce) * index,
+                        (_kWidthOfScrollItem +
+                                phoneReduce +
+                                phoneButtonsSpacingReduce) *
+                            index,
                         duration: const Duration(milliseconds: 350),
                         curve: Curves.easeOutCubic);
                     schemeIndex = index;

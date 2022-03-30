@@ -51,8 +51,8 @@ class ThemeServiceHive implements ThemeService {
     // settings on local builds if SharedPreferences would have been used for
     // all examples. Wanted to avoid that, which we can do with Hive. Sure we
     // could have used only Hive too, but SharedPreferences is a very popular
-    // and sensible choice for this feature, wanted to show how it can be
-    // used as well. We always show this in none release builds.
+    // choice for this type of feature. I wanted to show how it can be
+    // used as well. We always show this path info in none release builds.
     if (!kReleaseMode) {
       debugPrint(
           'Hive using storage path: $appDataDir and file name: $boxName');

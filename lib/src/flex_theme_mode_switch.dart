@@ -408,11 +408,11 @@ class FlexThemeModeOptionButton extends StatelessWidget {
 
   /// Padding around the option button.
   /// If null, defaults to `const EdgeInsetsDirectional.only(start: 6)`.
-  final EdgeInsets? optionButtonPadding;
+  final EdgeInsetsGeometry? optionButtonPadding;
 
   /// The margin inside the option button before the scheme color boxes.
   /// If null, defaults to `EdgeInsets.all(4)`.
-  final EdgeInsets? optionButtonMargin;
+  final EdgeInsetsGeometry? optionButtonMargin;
 
   /// The circular borderRadius of the option button
   /// Defaults to 5 dp.
@@ -430,7 +430,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
 
   /// Padding around an individual scheme color box.
   /// If null, default to `const EdgeInsets.all(3)`
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// The InkWell hover color for the option button.
   ///
@@ -577,7 +577,7 @@ class _SchemeColorBox extends StatelessWidget {
 
   /// Padding around an individual scheme color box.
   /// If null, default to `const EdgeInsets.all(3)`
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
