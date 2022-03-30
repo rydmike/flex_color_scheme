@@ -6063,8 +6063,7 @@ class FlexColorScheme with Diagnosticable {
       bottomNavigationBarTheme: useSubThemes
           ? FlexSubThemes.bottomNavigationBar(
               colorScheme: colorScheme,
-              labelTextStyle: subTheme.bottomNavigationBarLabelTextStyle ??
-                  effectiveTextTheme.bodyMedium,
+              labelTextStyle: subTheme.bottomNavigationBarLabelTextStyle,
               selectedLabelSize: subTheme.bottomNavigationBarSelectedLabelSize,
               unselectedLabelSize:
                   subTheme.bottomNavigationBarUnselectedLabelSize,
@@ -6072,8 +6071,7 @@ class FlexColorScheme with Diagnosticable {
                   subTheme.bottomNavigationBarSelectedLabelSchemeColor,
               unselectedLabelSchemeColor:
                   subTheme.bottomNavigationBarUnselectedLabelSchemeColor,
-              mutedUnselectedLabel:
-                  subTheme.bottomNavigationBarMutedUnselectedLabel,
+              mutedUnselectedLabel: subTheme.bottomNavigationBarMutedUnselectedLabel,
               selectedIconSize: subTheme.bottomNavigationBarSelectedIconSize,
               unselectedIconSize:
                   subTheme.bottomNavigationBarUnselectedIconSize,
@@ -6081,10 +6079,9 @@ class FlexColorScheme with Diagnosticable {
                   subTheme.bottomNavigationBarSelectedIconSchemeColor,
               unselectedIconSchemeColor:
                   subTheme.bottomNavigationBarUnselectedIconSchemeColor,
-              mutedUnselectedIcon:
-                  subTheme.bottomNavigationBarMutedUnselectedIcon,
-              backgroundSchemeColor:
-                  subTheme.bottomNavigationBarBackgroundSchemeColor,
+              mutedUnselectedIcon: subTheme.bottomNavigationBarMutedUnselectedIcon,
+              backgroundSchemeColor: subTheme
+                      .bottomNavigationBarBackgroundSchemeColor,
               opacity: subTheme.bottomNavigationBarOpacity,
               elevation: subTheme.bottomNavigationBarElevation,
               type: subTheme.bottomNavigationBarType,
@@ -6095,6 +6092,7 @@ class FlexColorScheme with Diagnosticable {
               landscapeLayout: subTheme.bottomNavigationBarLandscapeLayout,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
+              useFlutterDefaults: subTheme.useFlutterDefaults,
             )
           : BottomNavigationBarThemeData(
               selectedIconTheme: IconThemeData(

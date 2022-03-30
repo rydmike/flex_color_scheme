@@ -47,6 +47,17 @@ All notable changes to the **FlexColorScheme** package are documented here.
   replaced with `inputDecoratorRadius`, to harmonize the text fields `InputDecoration`
   property names.
 
+* The `FlexSubThemesData` property now defaults to 4.
+  In versions before v5.0.0-dev.2 it defaulted to 10. The M3 spec for it
+  was not available when it was chosen originally. It was assumed to have
+  higher border radius like rest of designs. However, the spec has it
+  defined [here](https://m3.material.io/components/menus/specs) now, and it
+  is 4. Since border radius default values are stated in FlexColorScheme
+  sub-theme design goals to follow the M3 design specs, it was updated to
+  match the spec. A bit higher rounding, may actually fit better with
+  the very round M3 design, try 8 or 10. It is very simple to change bach with
+  the API.
+
 **FIX**
 
 * Pub.dev analysis does not like document references to deprecated Flutter

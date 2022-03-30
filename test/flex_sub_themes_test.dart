@@ -386,7 +386,7 @@ void main() {
             elevation: 3,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(10),
+                Radius.circular(4),
               ),
             ),
           ),
