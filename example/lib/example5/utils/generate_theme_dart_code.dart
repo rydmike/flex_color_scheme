@@ -281,7 +281,8 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n';
   final String inputDecoratorUnfocusedBorderIsColored = controller
-          .inputDecoratorUnfocusedBorderIsColored
+              .inputDecoratorUnfocusedBorderIsColored ||
+          !controller.inputDecoratorUnfocusedHasBorder
       ? ''
       : '    inputDecoratorUnfocusedBorderIsColored: ${controller.inputDecoratorUnfocusedBorderIsColored},\n';
   //

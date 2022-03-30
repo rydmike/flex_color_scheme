@@ -144,9 +144,12 @@ class TextFieldSettings extends StatelessWidget {
         SwitchListTileAdaptive(
           title: const Text('Unfocused border is colored'),
           value: controller.inputDecoratorUnfocusedBorderIsColored &&
+              controller.inputDecoratorUnfocusedHasBorder &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: controller.useSubThemes &&
+                  controller.inputDecoratorUnfocusedHasBorder &&
+                  controller.useFlexColorScheme
               ? controller.setInputDecoratorUnfocusedBorderIsColored
               : null,
         ),
