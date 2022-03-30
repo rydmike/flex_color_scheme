@@ -319,6 +319,13 @@ class Store {
   static const FlexInputBorderType defaultInputDecoratorBorderType =
       FlexInputBorderType.outline;
 
+  // Key used to read and save the inputDecoratorBorderRadius value.
+  static const String keyInputDecoratorBorderRadius =
+      'inputDecoratorBorderRadius';
+  // Default value for the inputDecoratorBorderRadius, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultInputDecoratorBorderRadius = null;
+
   // Key used to read and save the inputDecoratorUnfocusedHasBorder value.
   static const String keyInputDecoratorUnfocusedHasBorder =
       'inputDecoratorUnfocusedHasBorder';

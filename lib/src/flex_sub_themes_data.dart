@@ -104,7 +104,11 @@ class FlexSubThemesData with Diagnosticable {
     this.radioSchemeColor,
     this.unselectedToggleIsColored = false,
     //
-    this.inputDecorationRadius,
+    @Deprecated('This property has been replaced after 4.2.0. To harmonize '
+        'input decorator property names it has been renamed to '
+        'inputDecoratorRadius, please use it instead.')
+        this.inputDecorationRadius,
+    this.inputDecoratorRadius,
     this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
@@ -163,11 +167,9 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarType = BottomNavigationBarType.fixed,
     this.bottomNavigationBarLandscapeLayout,
     //
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later. The feature no longer exists, but same effect '
-        'can be reached by setting all NavigationBar properties in '
-        'FlexSubThemesData that have a none null default value to null.')
+    @Deprecated('This property has no function after 4.2.0. It has been '
+        'replaced by FlexSubThemesData.useFlutterDefaults, please see it '
+        'for more details.')
         this.navigationBarIsStyled = true,
     this.navigationBarLabelTextStyle,
     this.navigationBarSelectedLabelSize,
@@ -598,8 +600,15 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to false, set it to for slightly different style.
   final bool unselectedToggleIsColored;
 
-  /// Border radius override value for [InputDecoration].
+  /// Deprecated border radius override value for [InputDecoration],
+  /// this property has been replaced by [inputDecoratorRadius].
+  @Deprecated('This property has been replaced after 4.2.0. To harmonize '
+      'input decorator property names it has been renamed to '
+      'inputDecoratorRadius, please use it instead.')
   final double? inputDecorationRadius;
+
+  /// Border radius override value for [InputDecoration].
+  final double? inputDecoratorRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the input decorator
   /// uses as color for the border and fill color when they are used.
@@ -634,7 +643,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [defaultRadius] also with underline borer type.
   ///
   /// To change input decorator's border radius separately define
-  /// [inputDecorationRadius] that will then override [defaultRadius].
+  /// [inputDecoratorRadius] that will then override [defaultRadius].
   final FlexInputBorderType inputDecoratorBorderType;
 
   /// Determines if the [InputDecorator] unfocused state has a border.
@@ -1064,13 +1073,15 @@ class FlexSubThemesData with Diagnosticable {
   //
   // ---------------------------------------------------------------------------
 
-  /// This property has no function after version 4.2.0.
+  /// Deprecated and removed styling property that caused the NavigationBar
+  /// to default to its Flutter SDK default theme when sub-theme properties
+  /// were null.
   ///
-  /// This past feature feature no longer exists, but the same effect can be
-  /// reached by setting [FlexSubThemesData.useFlutterDefaults] to true.
-  @Deprecated('This property has no function after 4.2.0. The feature no '
-      'longer exists, but same effect can be reached by setting '
-      'FlexSubThemesData.useFlutterDefaults to true.')
+  /// This property has no function after 4.2.0. It has been replaced by
+  /// [FlexSubThemesData.useFlutterDefaults], please see it for more details.
+  @Deprecated('This property has no function after 4.2.0. It has been '
+      'replaced by FlexSubThemesData.useFlutterDefaults, please see it '
+      'for more details.')
   final bool? navigationBarIsStyled;
 
   /// Optional text style for the [NavigationBar] labels.
@@ -1475,7 +1486,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? radioSchemeColor,
     //
     final bool? unselectedToggleIsColored,
-    final double? inputDecorationRadius,
+    final double? inputDecoratorRadius,
     final SchemeColor? inputDecoratorSchemeColor,
     final bool? inputDecoratorIsFilled,
     final Color? inputDecoratorFillColor,
@@ -1596,8 +1607,7 @@ class FlexSubThemesData with Diagnosticable {
       radioSchemeColor: radioSchemeColor ?? this.radioSchemeColor,
       unselectedToggleIsColored:
           unselectedToggleIsColored ?? this.unselectedToggleIsColored,
-      inputDecorationRadius:
-          inputDecorationRadius ?? this.inputDecorationRadius,
+      inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
       inputDecoratorSchemeColor:
           inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
       inputDecoratorIsFilled:
@@ -1802,7 +1812,7 @@ class FlexSubThemesData with Diagnosticable {
         other.checkboxSchemeColor == checkboxSchemeColor &&
         other.radioSchemeColor == radioSchemeColor &&
         other.unselectedToggleIsColored == unselectedToggleIsColored &&
-        other.inputDecorationRadius == inputDecorationRadius &&
+        other.inputDecoratorRadius == inputDecoratorRadius &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
@@ -1962,7 +1972,7 @@ class FlexSubThemesData with Diagnosticable {
         radioSchemeColor,
         unselectedToggleIsColored,
         //
-        inputDecorationRadius,
+        inputDecoratorRadius,
         inputDecoratorSchemeColor,
         inputDecoratorIsFilled,
         inputDecoratorFillColor,
@@ -2104,7 +2114,7 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>(
         'unselectedToggleIsColored', unselectedToggleIsColored));
     properties.add(DiagnosticsProperty<double>(
-        'inputDecorationRadius', inputDecorationRadius));
+        'inputDecoratorRadius', inputDecoratorRadius));
     properties.add(EnumProperty<SchemeColor>(
         'inputDecoratorSchemeColor', inputDecoratorSchemeColor));
     properties.add(DiagnosticsProperty<bool>(

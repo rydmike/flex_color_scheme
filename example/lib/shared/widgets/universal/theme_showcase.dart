@@ -572,18 +572,22 @@ class TextInputField extends StatefulWidget {
 }
 
 class _TextInputFieldState extends State<TextInputField> {
-  late TextEditingController _textController;
-  bool _errorState = false;
+  late TextEditingController _textController1;
+  late TextEditingController _textController2;
+  bool _errorState1 = false;
+  bool _errorState2 = false;
 
   @override
   void initState() {
     super.initState();
-    _textController = TextEditingController();
+    _textController1 = TextEditingController();
+    _textController2 = TextEditingController();
   }
 
   @override
   void dispose() {
-    _textController.dispose();
+    _textController1.dispose();
+    _textController2.dispose();
     super.dispose();
   }
 
@@ -595,18 +599,39 @@ class _TextInputFieldState extends State<TextInputField> {
           onChanged: (String text) {
             setState(() {
               if (text.contains('a') | text.isEmpty) {
-                _errorState = false;
+                _errorState1 = false;
               } else {
-                _errorState = true;
+                _errorState1 = true;
               }
             });
           },
           key: const Key('TextField1'),
-          controller: _textController,
+          controller: _textController1,
           decoration: InputDecoration(
             hintText: 'Write something...',
             labelText: 'Text entry',
-            errorText: _errorState
+            errorText: _errorState1
+                ? "Any entry without an 'a' will trigger this error"
+                : null,
+          ),
+        ),
+        const SizedBox(height: 8),
+        TextField(
+          onChanged: (String text) {
+            setState(() {
+              if (text.contains('a') | text.isEmpty) {
+                _errorState2 = false;
+              } else {
+                _errorState2 = true;
+              }
+            });
+          },
+          key: const Key('TextField2'),
+          controller: _textController2,
+          decoration: InputDecoration(
+            hintText: 'Write something...',
+            labelText: 'Another text entry',
+            errorText: _errorState2
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
           ),

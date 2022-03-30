@@ -177,6 +177,9 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorBorderType = await _themeService.load(
         Store.keyInputDecoratorBorderType,
         Store.defaultInputDecoratorBorderType);
+    _inputDecoratorBorderRadius = await _themeService.load(
+        Store.keyInputDecoratorBorderRadius,
+        Store.defaultInputDecoratorBorderRadius);
     _inputDecoratorUnfocusedHasBorder = await _themeService.load(
         Store.keyInputDecoratorUnfocusedHasBorder,
         Store.defaultInputDecoratorUnfocusedHasBorder);
@@ -476,6 +479,8 @@ class ThemeController with ChangeNotifier {
     await setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
     await setInputDecoratorBorderType(
         Store.defaultInputDecoratorBorderType, false);
+    await setInputDecoratorBorderRadius(
+        Store.defaultInputDecoratorBorderRadius, false);
     await setInputDecoratorUnfocusedHasBorder(
         Store.defaultInputDecoratorUnfocusedHasBorder, false);
     await setInputDecoratorUnfocusedBorderIsColored(
@@ -1199,6 +1204,16 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorBorderType = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyInputDecoratorBorderType, value);
+  }
+
+  late double? _inputDecoratorBorderRadius;
+  double? get inputDecoratorBorderRadius => _inputDecoratorBorderRadius;
+  Future<void> setInputDecoratorBorderRadius(double? value,
+      [bool notify = true]) async {
+    if (value == _inputDecoratorBorderRadius) return;
+    _inputDecoratorBorderRadius = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyInputDecoratorBorderRadius, value);
   }
 
   late bool _inputDecoratorUnfocusedHasBorder;

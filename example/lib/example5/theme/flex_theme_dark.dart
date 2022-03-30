@@ -93,6 +93,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             inputDecoratorSchemeColor: controller.inputDecoratorSchemeColorDark,
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
+            inputDecoratorRadius: controller.inputDecoratorBorderRadius,
             inputDecoratorUnfocusedHasBorder:
                 controller.inputDecoratorUnfocusedHasBorder,
             inputDecoratorUnfocusedBorderIsColored:
