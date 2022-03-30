@@ -105,6 +105,10 @@ class _LargeGridViewState extends State<LargeGridView>
     super.dispose();
   }
 
+  // The fixed height of the theme selector control, before any margin and
+  // media size adjustments
+  static const double _kHeightSelector = 118;
+
   @override
   Widget build(BuildContext context) {
     // Call `super.build` when using `AutomaticKeepAliveClientMixin`.
@@ -131,9 +135,8 @@ class _LargeGridViewState extends State<LargeGridView>
       // using toggle buttons on small media.
       final bool showAllBlends = constraints.maxWidth / columns > 445;
       final double margins = AppData.responsiveInsets(media.size.width);
-      const double selectorBoxHeight = 118;
       final double headerExtent =
-          selectorBoxHeight + media.padding.top + margins * 3 + phoneReduce;
+          _kHeightSelector + media.padding.top + margins * 3 + phoneReduce;
       if (_debug) {
         debugPrint('margins ................. : $margins');
         debugPrint('kToolbarHeight .......... : $kToolbarHeight');
