@@ -166,9 +166,12 @@ class ThemeController with ChangeNotifier {
         Store.keyUseM3ErrorColors, Store.defaultUseM3ErrorColors);
     //
     // InputDecorator SETTINGS.
-    _inputDecoratorSchemeColor = await _themeService.load(
-        Store.keyInputDecoratorSchemeColor,
-        Store.defaultInputDecoratorSchemeColor);
+    _inputDecoratorSchemeColorLight = await _themeService.load(
+        Store.keyInputDecoratorSchemeColorLight,
+        Store.defaultInputDecoratorSchemeColorLight);
+    _inputDecoratorSchemeColorDark = await _themeService.load(
+        Store.keyInputDecoratorSchemeColorDark,
+        Store.defaultInputDecoratorSchemeColorDark);
     _inputDecoratorIsFilled = await _themeService.load(
         Store.keyInputDecoratorIsFilled, Store.defaultInputDecoratorIsFilled);
     _inputDecoratorBorderType = await _themeService.load(
@@ -322,10 +325,6 @@ class ThemeController with ChangeNotifier {
     _toggleButtonsBorderRadius = await _themeService.load(
         Store.keyToggleButtonsBorderRadius,
         Store.defaultToggleButtonsBorderRadius);
-    // TODO(rydmike): Consider removing, will deprecated soon in Flutter SDK.
-    _materialButtonSchemeColor = await _themeService.load(
-        Store.keyMaterialButtonSchemeColor,
-        Store.defaultMaterialButtonSchemeColor);
     //
     // Toggleable SETTINGS.
     _unselectedToggleIsColored = await _themeService.load(
@@ -472,8 +471,8 @@ class ThemeController with ChangeNotifier {
     await setUseM3ErrorColors(Store.defaultUseM3ErrorColors, false);
     //
     // InputDecorator SETTINGS.
-    await setInputDecoratorSchemeColor(
-        Store.defaultInputDecoratorSchemeColor, false);
+    await setInputDecoratorSchemeColorLight(
+        Store.defaultInputDecoratorSchemeColorLight, false);
     await setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
     await setInputDecoratorBorderType(
         Store.defaultInputDecoratorBorderType, false);
@@ -575,9 +574,6 @@ class ThemeController with ChangeNotifier {
         Store.defaultToggleButtonsSchemeColor, false);
     await setToggleButtonsBorderRadius(
         Store.defaultToggleButtonsBorderRadius, false);
-    // TODO(rydmike): Consider removing, will deprecated soon in Flutter SDK.
-    await setMaterialButtonSchemeColor(
-        Store.defaultMaterialButtonSchemeColor, false);
     //
     // Toggleable SETTINGS.
     await setUnselectedToggleIsColored(
@@ -1161,14 +1157,26 @@ class ThemeController with ChangeNotifier {
   // InputDecorator SETTINGS.
   // ===========================================================================
 
-  late SchemeColor? _inputDecoratorSchemeColor;
-  SchemeColor? get inputDecoratorSchemeColor => _inputDecoratorSchemeColor;
-  Future<void> setInputDecoratorSchemeColor(SchemeColor? value,
+  late SchemeColor? _inputDecoratorSchemeColorLight;
+  SchemeColor? get inputDecoratorSchemeColorLight =>
+      _inputDecoratorSchemeColorLight;
+  Future<void> setInputDecoratorSchemeColorLight(SchemeColor? value,
       [bool notify = true]) async {
-    if (value == _inputDecoratorSchemeColor) return;
-    _inputDecoratorSchemeColor = value;
+    if (value == _inputDecoratorSchemeColorLight) return;
+    _inputDecoratorSchemeColorLight = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyInputDecoratorSchemeColor, value);
+    await _themeService.save(Store.keyInputDecoratorSchemeColorLight, value);
+  }
+
+  late SchemeColor? _inputDecoratorSchemeColorDark;
+  SchemeColor? get inputDecoratorSchemeColorDark =>
+      _inputDecoratorSchemeColorDark;
+  Future<void> setInputDecoratorSchemeColorDark(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _inputDecoratorSchemeColorDark) return;
+    _inputDecoratorSchemeColorDark = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyInputDecoratorSchemeColorDark, value);
   }
 
   late bool _inputDecoratorIsFilled;
@@ -1765,17 +1773,6 @@ class ThemeController with ChangeNotifier {
     _toggleButtonsBorderRadius = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyToggleButtonsBorderRadius, value);
-  }
-
-  // TODO(rydmike): Consider removing, will deprecated soon in Flutter SDK.
-  late SchemeColor? _materialButtonSchemeColor;
-  SchemeColor? get materialButtonSchemeColor => _materialButtonSchemeColor;
-  Future<void> setMaterialButtonSchemeColor(SchemeColor? value,
-      [bool notify = true]) async {
-    if (value == _materialButtonSchemeColor) return;
-    _materialButtonSchemeColor = value;
-    if (notify) notifyListeners();
-    await _themeService.save(Store.keyMaterialButtonSchemeColor, value);
   }
 
   // Toggleable SETTINGS.

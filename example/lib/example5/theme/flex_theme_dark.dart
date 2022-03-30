@@ -84,14 +84,13 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             textButtonSchemeColor: controller.textButtonSchemeColor,
             elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
-            materialButtonSchemeColor: controller.materialButtonSchemeColor,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,
             radioSchemeColor: controller.radioSchemeColor,
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
             //
-            inputDecoratorSchemeColor: controller.inputDecoratorSchemeColor,
+            inputDecoratorSchemeColor: controller.inputDecoratorSchemeColorDark,
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
             inputDecoratorUnfocusedHasBorder:

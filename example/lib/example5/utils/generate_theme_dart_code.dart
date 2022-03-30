@@ -220,12 +220,12 @@ String generateThemeDartCode(ThemeController controller) {
           controller.outlinedButtonSchemeColor == null
       ? ''
       : '    outlinedButtonSchemeColor: ${controller.outlinedButtonSchemeColor},\n';
-  final String materialButtonSchemeColor = controller
-                  .materialButtonSchemeColor ==
-              SchemeColor.primary ||
-          controller.materialButtonSchemeColor == null
-      ? ''
-      : '    materialButtonSchemeColor: ${controller.materialButtonSchemeColor},\n';
+  // final String materialButtonSchemeColor = controller
+  //                 .materialButtonSchemeColor ==
+  //             SchemeColor.primary ||
+  //         controller.materialButtonSchemeColor == null
+  //     ? ''
+  //     : '    materialButtonSchemeColor: ${controller.materialButtonSchemeColor},\n';
   final String toggleButtonsSchemeColor = controller.toggleButtonsSchemeColor ==
               SchemeColor.primary ||
           controller.toggleButtonsSchemeColor == null
@@ -253,12 +253,18 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   //
   // Input decorator
-  final String inputDecoratorSchemeColor = controller
-                  .inputDecoratorSchemeColor ==
+  final String inputDecoratorSchemeColorLight = controller
+                  .inputDecoratorSchemeColorLight ==
               SchemeColor.primary ||
-          controller.inputDecoratorSchemeColor == null
+          controller.inputDecoratorSchemeColorLight == null
       ? ''
-      : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColor},\n';
+      : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColorLight},\n';
+  final String inputDecoratorSchemeColorDark = controller
+                  .inputDecoratorSchemeColorDark ==
+              SchemeColor.primary ||
+          controller.inputDecoratorSchemeColorDark == null
+      ? ''
+      : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColorDark},\n';
   final String inputDecoratorIsFilled = controller.inputDecoratorIsFilled
       ? ''
       : '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n';
@@ -521,7 +527,6 @@ String generateThemeDartCode(ThemeController controller) {
           '$textButtonSchemeColor'
           '$elevatedButtonSchemeColor'
           '$outlinedButtonSchemeColor'
-          '$materialButtonSchemeColor'
           '$toggleButtonsSchemeColor'
           //
           '$switchSchemeColor'
@@ -529,7 +534,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$radioSchemeColor'
           '$unselectedIsColored'
           //
-          '$inputDecoratorSchemeColor'
+          '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
           '$inputDecoratorBorderType'
           '$inputDecoratorUnfocusedHasBorder'
@@ -609,7 +614,6 @@ String generateThemeDartCode(ThemeController controller) {
           '$textButtonSchemeColor'
           '$elevatedButtonSchemeColor'
           '$outlinedButtonSchemeColor'
-          '$materialButtonSchemeColor'
           '$toggleButtonsSchemeColor'
           //
           '$switchSchemeColor'
@@ -617,7 +621,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$radioSchemeColor'
           '$unselectedIsColored'
           //
-          '$inputDecoratorSchemeColor'
+          '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'
           '$inputDecoratorBorderType'
           '$inputDecoratorUnfocusedHasBorder'

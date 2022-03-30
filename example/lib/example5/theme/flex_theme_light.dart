@@ -128,7 +128,6 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             textButtonSchemeColor: controller.textButtonSchemeColor,
             elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
-            materialButtonSchemeColor: controller.materialButtonSchemeColor,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,
@@ -137,7 +136,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
             //
             // Base ColorScheme used by TextField InputDecorator.
-            inputDecoratorSchemeColor: controller.inputDecoratorSchemeColor,
+            inputDecoratorSchemeColor:
+                controller.inputDecoratorSchemeColorLight,
             // Text input field uses a themed fill color.
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
             // Do you like underline or outline border type?
