@@ -63,17 +63,93 @@ void main() {
     // FlexSubThemes BottomNavigationBar tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.02: GIVEN a default FlexSubTheme.bottomNavigationBar() '
+        'FST1.02-flutter-default-light: GIVEN a LIGHT default '
+        'FlexSubTheme.bottomNavigationBar() with FlutterDefault '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.bottomNavigationBar(
           colorScheme: colorScheme,
+          useFlutterDefaults: true,
         ),
         equals(
           const BottomNavigationBarThemeData(
             elevation: 0,
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.02-flutter-default-dark: GIVEN a DARK default '
+        'FlexSubTheme.bottomNavigationBar() with FlutterDefault '
+        'EXPECT equal to BottomNavigationBarThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.bottomNavigationBar(
+          colorScheme: colorScheme,
+          useFlutterDefaults: true,
+        ),
+        equals(
+          const BottomNavigationBarThemeData(
+            elevation: 0,
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.02-fcs-default-light: GIVEN a default LIGHT '
+        'FlexSubTheme.bottomNavigationBar() with FCS default '
+        'EXPECT equal to BottomNavigationBarThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.bottomNavigationBar(
+          colorScheme: colorScheme,
+          // useFlutterDefaults: false, <<- Expect this to be default too
+        ),
+        equals(
+          const BottomNavigationBarThemeData(
+            elevation: 0,
+            selectedIconTheme: IconThemeData(
+                color: Color(0xff6200ee), opacity: 1.0, size: 24.0),
+            unselectedIconTheme: IconThemeData(
+                color: Color(0xff000000), opacity: 1.0, size: 24.0),
+            selectedItemColor: Color(0xff6200ee),
+            unselectedItemColor: Color(0xff000000),
+            selectedLabelStyle: TextStyle(
+                inherit: true, color: Color(0xff6200ee), fontSize: 14.0),
+            unselectedLabelStyle: TextStyle(
+                inherit: true, color: Color(0xff000000), fontSize: 12.0),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.02-fcs-default-light: GIVEN a default LIGHT '
+        'FlexSubTheme.bottomNavigationBar() with FCS default '
+        'EXPECT equal to BottomNavigationBarThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.bottomNavigationBar(
+          colorScheme: colorScheme,
+          // useFlutterDefaults: false, <<- Expect this to be default too
+        ),
+        equals(
+          const BottomNavigationBarThemeData(
+            elevation: 0,
+            selectedIconTheme: IconThemeData(
+                color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
+            unselectedIconTheme: IconThemeData(
+                color: Color(0xffffffff), opacity: 1.0, size: 24.0),
+            selectedItemColor: Color(0xffbb86fc),
+            unselectedItemColor: Color(0xffffffff),
+            selectedLabelStyle: TextStyle(
+                inherit: true, color: Color(0xffbb86fc), fontSize: 14.0),
+            unselectedLabelStyle: TextStyle(
+                inherit: true, color: Color(0xffffffff), fontSize: 12.0),
           ),
         ),
       );

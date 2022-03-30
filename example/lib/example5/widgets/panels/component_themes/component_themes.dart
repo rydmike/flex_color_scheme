@@ -26,17 +26,6 @@ class ComponentThemes extends StatelessWidget {
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
         ),
         SwitchListTileAdaptive(
-          title: const Text('Use Flutter defaults'),
-          subtitle: const Text('When offered, prefer Flutter defaults '
-              'for sub-themes. See docs for details'),
-          value: controller.useFlutterDefaults &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUseFlutterDefaults
-              : null,
-        ),
-        SwitchListTileAdaptive(
           title: const Text('Use Material 3 TextTheme'),
           subtitle: const Text("ON to use FlexColorScheme's M3 text styles "
               'and geometry\n'
@@ -160,6 +149,18 @@ class ComponentThemes extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
           child: ShowSubThemeColors(),
+        ),
+        SwitchListTileAdaptive(
+          title: const Text('Use Flutter defaults'),
+          subtitle: const Text('Undefined sub-theme color values will fall '
+              'back to Flutter SDK defaults. Prefer OFF to use FCS defaults. '
+              'See API docs for more info.'),
+          value: controller.useFlutterDefaults &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setUseFlutterDefaults
+              : null,
         ),
       ],
     );

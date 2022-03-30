@@ -319,7 +319,11 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Set to true to use Flutter SDK default component theme designs.
   ///
-  /// When set to `true`, many properties that in [FlexSubThemesData] are
+  /// Default to false.
+  ///
+  /// Prefer false to use FlexColorScheme (FCS) defaults.
+  ///
+  /// When set to `true`, many color properties that in [FlexSubThemesData] are
   /// nullable and default to 'null, but that as undefined default to using
   /// theming choices that differ from Flutter SDK default component theme
   /// designs, will when this property is set to true default to
@@ -330,24 +334,44 @@ class FlexSubThemesData with Diagnosticable {
   /// starting point for your own custom component themes with fewer `copyWith`
   /// overrides needed for its opinionated choices.
   ///
-  /// The individual [FlexSubThemesData] properties document their adherence
-  /// to this setting, they are also listed here:
+  /// The individual [FlexSubThemesData] properties and [FlexSubThemes]
+  /// document their adherence to this setting, they are also listed here:
   ///
   /// - [navigationBarBackgroundSchemeColor]
   ///   * false: [ColorScheme.background]
   ///   * true: [ColorScheme.surface] with onSurface overlay elevation 3.
-  /// - [bottomNavigationBarBackgroundSchemeColor]
-  ///   * false: [ColorScheme.background]
-  ///   * true: [ColorScheme.background]
-  /// - [bottomNavigationBarSelectedLabelSchemeColor]
-  /// - [bottomNavigationBarSelectedIconSchemeColor]
-  ///   * false: [ColorScheme.primary]
-  ///   * true: light [ColorScheme.primary], dark [ColorScheme.secondary]
-  /// - [bottomNavigationBarUnselectedLabelSchemeColor]
-  /// - [bottomNavigationBarUnselectedIconSchemeColor]
-  ///   * false: [ColorScheme.onSurface] (opacity via toggle)
-  ///   * true: [ColorScheme.onSurface] with opacity
   ///
+  /// Impact on [BottomNavigationBarThemeData] sub-theming:
+  ///
+  /// ```
+  ///                    FCS defaults   Flutter defaults
+  /// useFlutterDefaults false          true
+  /// - selected icon    primary        light theme primary, dark secondary
+  /// - Selected label   primary        light theme primary, dark secondary
+  /// - unselected icon  onSurface      onSurface, with opacity
+  /// - unSelected label onSurface      onSurface, with opacity
+  ///
+  /// FCS further applies both an alpha blend and slight opacity to
+  /// unselected icon and unselected label, but only if
+  /// [mutedUnselectedLabel] is true, this also applies to undefined
+  /// color inputs.
+  /// ```
+  ///
+  /// Impact on [NavigationBarThemeData] sub-theming:
+  ///
+  /// ```
+  ///                    FCS defaults   Flutter defaults
+  /// useFlutterDefaults false          true
+  /// - background       background     surface, with onSurface overlay elev 3.
+  /// - height           62             80
+  /// ```
+  ///
+  /// Impact on [NavigationRailThemeData] sub-theming:
+  ///
+  /// ```
+  ///                    FCS defaults   Flutter defaults
+  /// useFlutterDefaults false          true
+  /// ```
   ///
   /// Defaults to false.
   final bool useFlutterDefaults;
