@@ -752,6 +752,12 @@ class Store {
   // Default value for the popupMenuOpacity, also used to reset settings.
   static const double defaultPopupMenuOpacity = 0.95;
 
+  // Key used to read and save the popupMenuBorderRadius value.
+  static const String keyPopupMenuBorderRadius = 'popupMenuBorderRadius';
+  // Default value for the popupMenuBorderRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultPopupMenuBorderRadius = null;
+
   // Key used to read and save the cardBorderRadius value.
   static const String keyCardBorderRadius = 'cardBorderRadius';
   // Default value for the cardBorderRadius, also used to reset settings.

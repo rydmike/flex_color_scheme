@@ -94,13 +94,13 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.crop_16_9_outlined,
   ),
   GridItem(
-    panelLabel: 'FAB, ToggleButtons, Chips and Popup',
-    buttonLabel: 'FAB\nToggleButtons',
+    panelLabel: 'FAB, ToggleButtons, Chip and Popup',
+    buttonLabel: 'FAB Toggle\nChip Popup',
     icon: Icons.add_circle,
   ),
   GridItem(
     panelLabel: 'Switch, CheckBox and Radio',
-    buttonLabel: 'Switch\nCheckBox',
+    buttonLabel: 'Switch\nCheck Radio',
     icon: Icons.toggle_on_outlined,
   ),
   GridItem(

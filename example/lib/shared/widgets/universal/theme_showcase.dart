@@ -37,9 +37,9 @@ class ThemeShowcase extends StatelessWidget {
         const SwitchShowcase(),
         const CheckboxShowcase(),
         const RadioShowcase(),
-        const PopupDropdownButtonsShowcase(),
+        const PopupMenuShowcase(),
         const SizedBox(height: 8),
-        const CircleAvatarAndTooltipShowcase(),
+        const IconButtonCircleAvatarDropdownTooltipShowcase(),
         const SizedBox(height: 8),
         const ChipShowcase(),
         const Divider(),
@@ -361,9 +361,8 @@ class RadioShowcase extends StatelessWidget {
   }
 }
 
-class PopupDropdownButtonsShowcase extends StatelessWidget {
-  const PopupDropdownButtonsShowcase({Key? key, this.enabled = true})
-      : super(key: key);
+class PopupMenuShowcase extends StatelessWidget {
+  const PopupMenuShowcase({Key? key, this.enabled = true}) : super(key: key);
   final bool enabled;
 
   @override
@@ -374,7 +373,6 @@ class PopupDropdownButtonsShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         _PopupMenuButton(enabled: enabled),
-        const _DropDownButton(),
       ],
     );
   }
@@ -484,14 +482,15 @@ class _DropDownButtonFormFieldState extends State<_DropDownButtonFormField> {
   }
 }
 
-class CircleAvatarAndTooltipShowcase extends StatelessWidget {
-  const CircleAvatarAndTooltipShowcase({Key? key}) : super(key: key);
+class IconButtonCircleAvatarDropdownTooltipShowcase extends StatelessWidget {
+  const IconButtonCircleAvatarDropdownTooltipShowcase({Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
+      spacing: 16,
       runSpacing: 4,
       children: <Widget>[
         Padding(
@@ -508,6 +507,7 @@ class CircleAvatarAndTooltipShowcase extends StatelessWidget {
             child: Text('AV'),
           ),
         ),
+        const _DropDownButton(),
         const Tooltip(
           message: 'Current tooltip theme.\nThis a two row tooltip.',
           child: Text('Text with tooltip'),

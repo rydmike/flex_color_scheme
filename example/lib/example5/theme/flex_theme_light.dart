@@ -162,8 +162,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             chipSchemeColor: controller.chipSchemeColor,
             chipRadius: controller.chipBorderRadius,
             cardRadius: controller.cardBorderRadius,
-            // Set some opacity on popup menu.
             popupMenuOpacity: controller.popupMenuOpacity,
+            popupMenuRadius: controller.popupMenuBorderRadius,
             // ColorScheme used on various widgets.
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
             dialogRadius: controller.dialogBorderRadius,
