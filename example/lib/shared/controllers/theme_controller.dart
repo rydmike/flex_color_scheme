@@ -478,6 +478,8 @@ class ThemeController with ChangeNotifier {
     // InputDecorator SETTINGS.
     await setInputDecoratorSchemeColorLight(
         Store.defaultInputDecoratorSchemeColorLight, false);
+    await setInputDecoratorSchemeColorDark(
+        Store.defaultInputDecoratorSchemeColorDark, false);
     await setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
     await setInputDecoratorBorderType(
         Store.defaultInputDecoratorBorderType, false);
