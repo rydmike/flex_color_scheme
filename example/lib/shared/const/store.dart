@@ -294,12 +294,19 @@ class Store {
   // InputDecorator SETTINGS.
   // ===========================================================================
 
-  // Key used to read and save the inputDecoratorSchemeColor value.
-  static const String keyInputDecoratorSchemeColor =
-      'inputDecoratorSchemeColor';
-  // Default value for the inputDecoratorSchemeColor, reset settings.
+  // Key used to read and save the inputDecoratorSchemeColorLight value.
+  static const String keyInputDecoratorSchemeColorLight =
+      'inputDecoratorSchemeColorLight';
+  // Default value for the inputDecoratorSchemeColorLight, reset settings.
   // We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultInputDecoratorSchemeColor = null;
+  static const SchemeColor? defaultInputDecoratorSchemeColorLight = null;
+
+  // Key used to read and save the inputDecoratorSchemeColorDark value.
+  static const String keyInputDecoratorSchemeColorDark =
+      'inputDecoratorSchemeColorDark';
+  // Default value for the inputDecoratorSchemeColorDark, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorSchemeColorDark = null;
 
   // Key used to read and save the inputDecoratorIsFilled value.
   static const String keyInputDecoratorIsFilled = 'inputDecoratorIsFilled';

@@ -12,23 +12,40 @@ class TextFieldSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isLight = Theme.of(context).brightness == Brightness.light;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        ColorSchemePopupMenu(
-          title: const Text('Base color of TextField'),
-          index: controller.inputDecoratorSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setInputDecoratorSchemeColor(null);
-                  } else {
-                    controller.setInputDecoratorSchemeColor(
-                        SchemeColor.values[index]);
+        if (isLight)
+          ColorSchemePopupMenu(
+            title: const Text('Light theme TextField color base'),
+            index: controller.inputDecoratorSchemeColorLight?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorSchemeColorLight(null);
+                    } else {
+                      controller.setInputDecoratorSchemeColorLight(
+                          SchemeColor.values[index]);
+                    }
                   }
-                }
-              : null,
-        ),
+                : null,
+          )
+        else
+          ColorSchemePopupMenu(
+            title: const Text('Dark theme TextField color base'),
+            index: controller.inputDecoratorSchemeColorDark?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorSchemeColorDark(null);
+                    } else {
+                      controller.setInputDecoratorSchemeColorDark(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
         SwitchListTileAdaptive(
           title: const Text(
             'TextField uses fill color',
