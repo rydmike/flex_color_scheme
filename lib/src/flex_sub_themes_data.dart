@@ -200,7 +200,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarHighlightSchemeColor,
     this.navigationBarBackgroundSchemeColor,
     this.navigationBarOpacity = 1,
-    this.navigationBarHeight = kNavigationBarHeight,
+    this.navigationBarHeight,
     this.navigationBarLabelBehavior =
         NavigationDestinationLabelBehavior.alwaysShow,
     //

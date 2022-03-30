@@ -267,6 +267,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavBarBackgroundSchemeColor);
     _navBarOpacity = await _themeService.load(
         Store.keyNavBarOpacity, Store.defaultNavBarOpacity);
+    _navBarHeight = await _themeService.load(
+        Store.keyNavBarHeight, Store.defaultNavBarHeight);
     _navBarSelectedSchemeColor = await _themeService.load(
         Store.keyNavBarSelectedItemSchemeColor,
         Store.defaultNavBarSelectedItemSchemeColor);
@@ -543,6 +545,7 @@ class ThemeController with ChangeNotifier {
     await setNavBarBackgroundSchemeColor(
         Store.defaultNavBarBackgroundSchemeColor, false);
     await setNavBarOpacity(Store.defaultNavBarOpacity, false);
+    await setNavBarHeight(Store.defaultNavBarHeight, false);
     await setNavBarSelectedSchemeColor(
         Store.defaultNavBarSelectedItemSchemeColor, false);
     await setNavBarUnselectedSchemeColor(
@@ -1561,6 +1564,15 @@ class ThemeController with ChangeNotifier {
     _navBarOpacity = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyNavBarOpacity, value);
+  }
+
+  late double? _navBarHeight;
+  double? get navBarHeight => _navBarHeight;
+  Future<void> setNavBarHeight(double? value, [bool notify = true]) async {
+    if (value == _navBarHeight) return;
+    _navBarHeight = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyNavBarHeight, value);
   }
 
   late SchemeColor? _navBarSelectedSchemeColor;

@@ -92,6 +92,51 @@ class NavigationBarSettings extends StatelessWidget {
             ),
           ),
         ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Height'),
+          subtitle: Slider.adaptive(
+            min: 54,
+            max: 100,
+            divisions: 46,
+            label: controller.navBarHeight == null ||
+                    (controller.navBarHeight ?? 54) < 55
+                ? 'default 62'
+                : (controller.navBarHeight?.toStringAsFixed(0) ?? ''),
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.navBarHeight ?? 54
+                : 80,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setNavBarHeight(value < 55 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.navBarHeight == null ||
+                              (controller.navBarHeight ?? 54) < 55
+                          ? 'default 62'
+                          : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
+                      : 'default 80',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
           labelForDefault: 'null (secondary)',
