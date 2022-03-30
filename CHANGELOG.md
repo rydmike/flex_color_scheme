@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.2 - March 29, 2022
+## v5.0.0-dev.2 - March 30, 2022
 
 **BREAKING**
 
@@ -22,10 +22,30 @@ All notable changes to the **FlexColorScheme** package are documented here.
   are now created by adding a default constructor `FlexSubThemesData()` or one with 
   some custom property values set, to `subThemesData`. This creates sub-themes 
   using the FlexColorScheme opinionated sub-themes. Removing this property makes the
-  API more consistent, so that it follows the same design as used for `keyColors` 
+  API more consistent. It now follows the same design that is used for `keyColors` 
   with `FlexKeyColors` and `tones` with `FlexTones`.
   Setting the property `useSubThemes` will not cause an error, it just has no effect.
   You can safely remove it.   
+  
+* The property `navigationBarIsStyled` in `FlexSubThemesData` was removed in
+  **v5.0.0-dev.1** as no longer needed. It now has a new broader replacement called
+  `FlexSubThemesData.useFlutterDefaults`. The in dev.1 version tested API-style to 
+  set various `SchemeColor` properties to null to get SDK default for them was not 
+  very nice. The sub-themes settings API should default to its own preferred 
+  and recommended harmonized defaults when not defined. It is better to offer a 
+  toggle that can be set, to when possible/offered opt-out from some bigger style
+  differences from SDK defaults. This can be useful if one wants to create
+  custom component themes and wish to start from less opinionated ones.
+  The new `useFlutterDefaults` is false by default, and the sub-themes undefined
+  null values result in its own harmonized and recommended settings. By setting
+  it to `true` a bit messier and un-harmonized Flutter default are back. Mostly this
+  refers to different styles and colors on `BottomNavigationBar`, `NavigationBar`,
+  `NavigationRail` and different dialogs. See API docs for details in defaults with 
+  this flag on or off.
+  
+* The `FlexSubThemesData` property `inputDecorationRadius` was deprecated and
+  replaced with `inputDecoratorRadius`, to harmonize the text fields `InputDecoration`
+  property names.
 
 **FIX**
 
@@ -81,7 +101,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 * **Themes Playground** improvements:
   - Added a new single panel "Page" view. The previous large masonry grid view
-    is still available too. Both views can be used and switch to based on what 
+    is still available. Both views can be used and switch to based on what 
     is appropriate when using different media sizes.  
   - The switches to keep main input colors for primary, secondary, tertiary
     and their containers, where separated so that their state and code 
@@ -100,12 +120,13 @@ All notable changes to the **FlexColorScheme** package are documented here.
     the generated code.
   - Added missing code gen for button border radius.
   - Fixed broken code gen for dark mode blend level. 
-  - Decoupled many bundled controls in the app. WIP to decouple them all. 
+  - Decoupled all bundled theming controls in the app.
+  - Added individual override controls for border radius to all components.  
   - Added option to swap or not swap computed dark mode main and container color.
-  - Reduced amount of pre-made defaults in the app, so it starts with simpler setup code.  
-  - Changed, the code gen style for dark mode when using from light mode computed dark theme.
-  - Changed, the code gen now does not add any code when using API default values.
-  - Changed, ThemeService to use generic types. 
+  - Reduced amount of pre-set  defaults in the app, so it starts with simpler setup code.  
+  - Changed the code gen style for dark mode when using from light mode computed dark theme.
+  - Changed the code gen, so it does not add any code when using API default values.
+  - Changed the ThemeService to use generic types. 
 
 **TESTS**
 
@@ -194,7 +215,7 @@ should be relatively easy, despite the long list of changes and new features.
   * `navigationBarIconSchemeColor` -> `navigationBarSelectedIconSchemeColor`
   * `bottomNavigationBarSchemeColor` -> `bottomNavigationBarSelectedLabelSchemeColor`
 
-  In `FlexThemeData` the property `navigationBarIsStyled` was removed. It is 
+  In `FlexSubThemesData` the property `navigationBarIsStyled` was removed. It is 
   no longer needed. The same end result it enabled can be achieved by
   setting all NavigationBar related properties in `FlexSubThemesData` that 
   have a none null default value to null.

@@ -140,9 +140,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
                 controller.inputDecoratorSchemeColorLight,
             // Text input field uses a themed fill color.
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
-            // Do you like underline or outline border type?
-            // (Might add some new styles in a future update)
+            // Underline or outline border type?
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
+            inputDecoratorRadius: controller.inputDecoratorBorderRadius,
             // Only want a border when the text input has focus
             // or error, then set this to false. By default it always
             // has a border of selected style, but thinner.

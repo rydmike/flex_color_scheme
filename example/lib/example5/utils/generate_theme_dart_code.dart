@@ -220,12 +220,6 @@ String generateThemeDartCode(ThemeController controller) {
           controller.outlinedButtonSchemeColor == null
       ? ''
       : '    outlinedButtonSchemeColor: ${controller.outlinedButtonSchemeColor},\n';
-  // final String materialButtonSchemeColor = controller
-  //                 .materialButtonSchemeColor ==
-  //             SchemeColor.primary ||
-  //         controller.materialButtonSchemeColor == null
-  //     ? ''
-  //     : '    materialButtonSchemeColor: ${controller.materialButtonSchemeColor},\n';
   final String toggleButtonsSchemeColor = controller.toggleButtonsSchemeColor ==
               SchemeColor.primary ||
           controller.toggleButtonsSchemeColor == null
@@ -272,6 +266,11 @@ String generateThemeDartCode(ThemeController controller) {
           FlexInputBorderType.outline
       ? ''
       : '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n';
+  final String inputDecoratorBorderRadius = controller
+              .inputDecoratorBorderRadius !=
+          null
+      ? '    inputDecoratorRadius: ${controller.inputDecoratorBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String inputDecoratorUnfocusedHasBorder = controller
           .inputDecoratorUnfocusedHasBorder
       ? ''
@@ -537,6 +536,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
           '$inputDecoratorBorderType'
+          '$inputDecoratorBorderRadius'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
           //
@@ -624,6 +624,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'
           '$inputDecoratorBorderType'
+          '$inputDecoratorBorderRadius'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
           //
