@@ -35,14 +35,16 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
             min: -1,
             max: 50,
             divisions: 51,
-            label: controller.bottomSheetBorderRadius == null ||
-                    (controller.bottomSheetBorderRadius ?? -1) < 0
-                ? 'default'
-                : (controller.bottomSheetBorderRadius?.toStringAsFixed(0) ??
-                    ''),
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.bottomSheetBorderRadius == null ||
+                        (controller.bottomSheetBorderRadius ?? -1) < 0
+                    ? 'default 16'
+                    : (controller.bottomSheetBorderRadius?.toStringAsFixed(0) ??
+                        '')
+                : 'default 0',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.bottomSheetBorderRadius ?? -1
-                : 0,
+                : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller
@@ -63,11 +65,11 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.bottomSheetBorderRadius == null ||
                               (controller.bottomSheetBorderRadius ?? -1) < 0
-                          ? 'default'
+                          ? 'default 16'
                           : (controller.bottomSheetBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : '0',
+                      : 'default 0',
                   style: Theme.of(context)
                       .textTheme
                       .caption!

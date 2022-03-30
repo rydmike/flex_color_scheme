@@ -148,10 +148,23 @@ const double kChipRadius = 8;
 ///
 /// Follows Material M3 guide.
 /// https://m3.material.io/components/all-buttons
-///
-/// In this design it is also used on input decorator. Currently not specified
-/// in M3 guide what it should be then. Will be adjusted when known.
 const double kButtonRadius = 20;
+
+/// Default border radius on input decoration.
+///
+/// Will follows Material M3 guide.
+/// https://m3.material.io/components/all-buttons
+///
+/// Currently not specified in M3 guide what it should be then.
+/// Will be adjusted when known. Now set to same as button radius (2) so
+/// it matches them, could be same as FAB, Drawer, Sheet, ie 16.
+const double kInputDecoratorRadius = kButtonRadius;
+
+/// Default border radius on top edge of bottom sheet.
+///
+/// Not specified in M3 guide, using same as Drawer, would fit with
+/// that design since this is like a drawer, but from the bottom.
+const double kBottomSheetBorderRadius = kDefaultRadius;
 
 /// Default border radius on dialogs.
 ///

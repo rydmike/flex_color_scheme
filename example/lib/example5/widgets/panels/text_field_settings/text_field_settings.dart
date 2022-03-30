@@ -87,14 +87,17 @@ class TextFieldSettings extends StatelessWidget {
             min: -1,
             max: 40,
             divisions: 41,
-            label: controller.inputDecoratorBorderRadius == null ||
-                    (controller.inputDecoratorBorderRadius ?? -1) < 0
-                ? 'default'
-                : (controller.inputDecoratorBorderRadius?.toStringAsFixed(0) ??
-                    ''),
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.inputDecoratorBorderRadius == null ||
+                        (controller.inputDecoratorBorderRadius ?? -1) < 0
+                    ? 'default 20'
+                    : (controller.inputDecoratorBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.inputDecoratorBorderRadius ?? -1
-                : 4,
+                : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller.setInputDecoratorBorderRadius(
@@ -115,11 +118,11 @@ class TextFieldSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.inputDecoratorBorderRadius == null ||
                               (controller.inputDecoratorBorderRadius ?? -1) < 0
-                          ? 'default'
+                          ? 'default 20'
                           : (controller.inputDecoratorBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : '4',
+                      : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!

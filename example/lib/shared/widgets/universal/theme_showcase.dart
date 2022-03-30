@@ -362,8 +362,13 @@ class RadioShowcase extends StatelessWidget {
 }
 
 class PopupMenuShowcase extends StatelessWidget {
-  const PopupMenuShowcase({Key? key, this.enabled = true}) : super(key: key);
+  const PopupMenuShowcase({
+    Key? key,
+    this.enabled = true,
+    this.popupRadius = 10,
+  }) : super(key: key);
   final bool enabled;
+  final double popupRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -372,19 +377,31 @@ class PopupMenuShowcase extends StatelessWidget {
       spacing: 8,
       runSpacing: 4,
       children: <Widget>[
-        _PopupMenuButton(enabled: enabled),
+        _PopupMenuButton(enabled: enabled, radius: popupRadius),
       ],
     );
   }
 }
 
 class _PopupMenuButton extends StatelessWidget {
-  const _PopupMenuButton({Key? key, this.enabled = true}) : super(key: key);
+  const _PopupMenuButton({
+    Key? key,
+    this.enabled = true,
+    this.radius = 10,
+  }) : super(key: key);
   final bool enabled;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme scheme = theme.colorScheme;
+    // The fake card plus button wrapper used to open the PopupMenu is not a
+    // native widget, only menu is, and it is the one that is demoed and themed.
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
+      ),
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.zero,
       child: PopupMenuButton<int>(
@@ -399,13 +416,23 @@ class _PopupMenuButton extends StatelessWidget {
           PopupMenuItem<int>(value: 5, child: Text('Option 5')),
         ],
         child: AbsorbPointer(
-          child: TextButton(
+          child: ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+              primary: scheme.secondary,
+              onPrimary: scheme.onSecondary,
+              onSurface: scheme.onSurface,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(radius)),
+              ),
+            ),
             focusNode: FocusNode(
               skipTraversal: true,
               canRequestFocus: false,
             ),
             onPressed: enabled ? () {} : null,
-            child: const Text('Popup menu'),
+            icon: const Icon(Icons.expand_more_outlined),
+            label: const Text('PopupMenu'),
           ),
         ),
       ),

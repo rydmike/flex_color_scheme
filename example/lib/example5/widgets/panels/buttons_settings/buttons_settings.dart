@@ -50,14 +50,17 @@ class ButtonsSettings extends StatelessWidget {
             min: -1,
             max: 40,
             divisions: 41,
-            label: controller.elevatedButtonBorderRadius == null ||
-                    (controller.elevatedButtonBorderRadius ?? -1) < 0
-                ? 'default'
-                : (controller.elevatedButtonBorderRadius?.toStringAsFixed(0) ??
-                    ''),
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.elevatedButtonBorderRadius == null ||
+                        (controller.elevatedButtonBorderRadius ?? -1) < 0
+                    ? 'default 20'
+                    : (controller.elevatedButtonBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.elevatedButtonBorderRadius ?? -1
-                : 4,
+                : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller.setElevatedButtonBorderRadius(
@@ -78,11 +81,11 @@ class ButtonsSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.elevatedButtonBorderRadius == null ||
                               (controller.elevatedButtonBorderRadius ?? -1) < 0
-                          ? 'default'
+                          ? 'default 20'
                           : (controller.elevatedButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : '4',
+                      : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -117,14 +120,17 @@ class ButtonsSettings extends StatelessWidget {
             min: -1,
             max: 40,
             divisions: 41,
-            label: controller.outlinedButtonBorderRadius == null ||
-                    (controller.outlinedButtonBorderRadius ?? -1) < 0
-                ? 'default'
-                : (controller.outlinedButtonBorderRadius?.toStringAsFixed(0) ??
-                    ''),
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.outlinedButtonBorderRadius == null ||
+                        (controller.outlinedButtonBorderRadius ?? -1) < 0
+                    ? 'default 20'
+                    : (controller.outlinedButtonBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.outlinedButtonBorderRadius ?? -1
-                : 4,
+                : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller.setOutlinedButtonBorderRadius(
@@ -145,11 +151,11 @@ class ButtonsSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.outlinedButtonBorderRadius == null ||
                               (controller.outlinedButtonBorderRadius ?? -1) < 0
-                          ? 'default'
+                          ? 'default 20'
                           : (controller.outlinedButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : '4',
+                      : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -184,13 +190,16 @@ class ButtonsSettings extends StatelessWidget {
             min: -1,
             max: 40,
             divisions: 41,
-            label: controller.textButtonBorderRadius == null ||
-                    (controller.textButtonBorderRadius ?? -1) < 0
-                ? 'default'
-                : (controller.textButtonBorderRadius?.toStringAsFixed(0) ?? ''),
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.textButtonBorderRadius == null ||
+                        (controller.textButtonBorderRadius ?? -1) < 0
+                    ? 'default 20'
+                    : (controller.textButtonBorderRadius?.toStringAsFixed(0) ??
+                        '')
+                : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.textButtonBorderRadius ?? -1
-                : 4,
+                : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller
@@ -211,11 +220,11 @@ class ButtonsSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.textButtonBorderRadius == null ||
                               (controller.textButtonBorderRadius ?? -1) < 0
-                          ? 'default'
+                          ? 'default 20'
                           : (controller.textButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : '4',
+                      : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
