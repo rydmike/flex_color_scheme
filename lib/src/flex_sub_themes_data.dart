@@ -198,6 +198,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarUnselectedIconSchemeColor,
     this.navigationBarMutedUnselectedIcon = true,
     this.navigationBarHighlightSchemeColor,
+    this.navigationBarHighlightOpacity,
     this.navigationBarBackgroundSchemeColor,
     this.navigationBarOpacity = 1,
     this.navigationBarHeight,
@@ -217,6 +218,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailMutedUnselectedIcon = true,
     this.navigationRailUseIndicator = true,
     this.navigationRailIndicatorSchemeColor,
+    this.navigationRailIndicatorOpacity,
     this.navigationRailBackgroundSchemeColor,
     this.navigationRailOpacity = 1,
     this.navigationRailElevation = kNavigationRailElevation,
@@ -337,51 +339,58 @@ class FlexSubThemesData with Diagnosticable {
   /// The individual [FlexSubThemesData] properties and [FlexSubThemes]
   /// document their adherence to this setting, they are also listed here:
   ///
-  /// - [navigationBarBackgroundSchemeColor]
-  ///   * false: [ColorScheme.background]
-  ///   * true: [ColorScheme.surface] with onSurface overlay elevation 3.
-  ///
   /// Impact on [BottomNavigationBarThemeData] sub-theming:
   ///
   /// ```
   ///                    FCS defaults   Flutter defaults
   /// useFlutterDefaults false          true
+  /// - background       background     background
   /// - selected icon    primary        light theme primary, dark secondary
   /// - Selected label   primary        light theme primary, dark secondary
   /// - unselected icon  onSurface      onSurface, with opacity
   /// - unSelected label onSurface      onSurface, with opacity
-  ///
+  /// ```
   /// FCS further applies both an alpha blend and slight opacity to
   /// unselected icon and unselected label, but only if
   /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
   /// this also applies to undefined color inputs.
-  /// ```
   ///
   /// Impact on [NavigationBarThemeData] sub-theming:
   ///
   /// ```
-  ///                    FCS defaults  Flutter defaults
-  /// useFlutterDefaults false         true
-  /// - background       background    surface, with onSurface overlay elev 3.
-  /// - height           62            80
-  /// - indicator        primary       secondary
-  /// - selected icon    primary       onSurface
-  /// - Selected label   primary       onSurface
-  /// - unselected icon  onSurface     onSurface
-  /// - unSelected label onSurface     onSurface
-  ///
+  ///                    FCS defaults   Flutter defaults
+  /// useFlutterDefaults false          true
+  /// - background       background     surface, with onSurface overlay elev 3.
+  /// - height           62             80
+  /// - indicator        primary op24%  secondary op24%
+  /// - selected icon    primary        onSurface
+  /// - Selected label   primary        onSurface
+  /// - unselected icon  onSurface      onSurface
+  /// - unSelected label onSurface      onSurface
+  /// - TextTheme        FCS.labelSmall default.caption
+  /// ```
   /// FCS further applies both an alpha blend and slight opacity to
   /// unselected icon and unselected label, but only if
   /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
   /// this also applies to undefined color inputs.
-  /// ```
   ///
   /// Impact on [NavigationRailThemeData] sub-theming:
   ///
   /// ```
   ///                    FCS defaults   Flutter defaults
   /// useFlutterDefaults false          true
+  /// - background       background     surface
+  /// - indicator        primary op24% secondary op24%
+  /// - selected icon    primary        primary
+  /// - Selected label   primary        primary
+  /// - unselected icon  onSurface      onSurface op64%
+  /// - unSelected label onSurface      onSurface op64%
+  /// - TextTheme        FCS.labelSmall default.caption
   /// ```
+  /// FCS further applies both an alpha blend and slight opacity to
+  /// unselected icon and unselected label, but only if
+  /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
+  /// this also applies to undefined color inputs.
   ///
   /// Defaults to false.
   final bool useFlutterDefaults;
@@ -1338,6 +1347,19 @@ class FlexSubThemesData with Diagnosticable {
   /// color too.
   final SchemeColor? navigationBarHighlightSchemeColor;
 
+  /// Opacity used on the [NavigationBar] indicator.
+  ///
+  ///
+  /// If undefined defaults to 24%.
+  ///
+  /// The default opacity is computed from [kNavigationBarIndicatorAlpha] 0x3D,
+  /// which is 61 giving 24% opacity.
+  /// This value is the same as Flutter SDK uses in Material 2. Material 3 may
+  /// often use no alpha and just different solid color hue instead.
+  /// The default value of this property may be adjusted later as Flutter
+  /// moves towards M3 designs. It might become 1.0.
+  final double? navigationBarHighlightOpacity;
+
   /// Select which color from the theme's [ColorScheme] to use as background
   /// color for the [NavigationBar].
   ///
@@ -1355,7 +1377,7 @@ class FlexSubThemesData with Diagnosticable {
   /// when it is using component sub-themes.
   /// Flutter SDK uses different colors on all three widgets. Our opinion is
   /// that they should all default to using the same [ColorScheme] based
-  /// color. FlexColorScheme uses the background color as that default.
+  /// color. FlexColorScheme uses the background color as this default.
   final SchemeColor? navigationBarBackgroundSchemeColor;
 
   /// Height of the container for the Material 3 [NavigationBar].
@@ -1518,6 +1540,18 @@ class FlexSubThemesData with Diagnosticable {
   /// in Flutter API.
   final SchemeColor? navigationRailIndicatorSchemeColor;
 
+  /// Opacity used on the [NavigationBar] indicator.
+  ///
+  /// If undefined defaults to 24%.
+  ///
+  /// The default opacity is computed from [kNavigationBarIndicatorAlpha] 0x3D,
+  /// which is 61 giving 24% opacity.
+  /// This value is the same as Flutter SDK uses in Material 2. Material 3 may
+  /// often use no alpha and just different solid color hue instead.
+  /// The default value of this property may be adjusted later as Flutter
+  /// moves towards M3 designs. It might become 1.0.
+  final double? navigationRailIndicatorOpacity;
+
   /// Select which color from the theme's [ColorScheme] to use as background
   /// color for the [NavigationRail].
   ///
@@ -1673,6 +1707,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? navigationBarUnselectedIconSchemeColor,
     final bool? navigationBarMutedUnselectedIcon,
     final SchemeColor? navigationBarHighlightSchemeColor,
+    final double? navigationBarHighlightOpacity,
     final SchemeColor? navigationBarBackgroundSchemeColor,
     final double? navigationBarOpacity,
     final double? navigationBarHeight,
@@ -1691,6 +1726,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? navigationRailMutedUnselectedIcon,
     final bool? navigationRailUseIndicator,
     final SchemeColor? navigationRailIndicatorSchemeColor,
+    final double? navigationRailIndicatorOpacity,
     final SchemeColor? navigationRailBackgroundSchemeColor,
     final double? navigationRailOpacity,
     final double? navigationRailElevation,
@@ -1853,6 +1889,8 @@ class FlexSubThemesData with Diagnosticable {
           this.navigationBarMutedUnselectedIcon,
       navigationBarHighlightSchemeColor: navigationBarHighlightSchemeColor ??
           this.navigationBarHighlightSchemeColor,
+      navigationBarHighlightOpacity:
+          navigationBarHighlightOpacity ?? this.navigationBarHighlightOpacity,
       navigationBarBackgroundSchemeColor: navigationBarBackgroundSchemeColor ??
           this.navigationBarBackgroundSchemeColor,
       navigationBarOpacity: navigationBarOpacity ?? this.navigationBarOpacity,
@@ -1890,6 +1928,8 @@ class FlexSubThemesData with Diagnosticable {
           navigationRailUseIndicator ?? this.navigationRailUseIndicator,
       navigationRailIndicatorSchemeColor: navigationRailIndicatorSchemeColor ??
           this.navigationRailIndicatorSchemeColor,
+      navigationRailIndicatorOpacity:
+          navigationRailIndicatorOpacity ?? this.navigationRailIndicatorOpacity,
       navigationRailBackgroundSchemeColor:
           navigationRailBackgroundSchemeColor ??
               this.navigationRailBackgroundSchemeColor,
@@ -2023,6 +2063,7 @@ class FlexSubThemesData with Diagnosticable {
             navigationBarMutedUnselectedIcon &&
         other.navigationBarHighlightSchemeColor ==
             navigationBarHighlightSchemeColor &&
+        other.navigationBarHighlightOpacity == navigationBarHighlightOpacity &&
         other.navigationBarBackgroundSchemeColor ==
             navigationBarBackgroundSchemeColor &&
         other.navigationBarOpacity == navigationBarOpacity &&
@@ -2053,6 +2094,8 @@ class FlexSubThemesData with Diagnosticable {
         other.navigationRailUseIndicator == navigationRailUseIndicator &&
         other.navigationRailIndicatorSchemeColor ==
             navigationRailIndicatorSchemeColor &&
+        other.navigationRailIndicatorOpacity ==
+            navigationRailIndicatorOpacity &&
         other.navigationRailBackgroundSchemeColor ==
             navigationRailBackgroundSchemeColor &&
         other.navigationRailOpacity == navigationRailOpacity &&
@@ -2163,6 +2206,7 @@ class FlexSubThemesData with Diagnosticable {
         navigationBarUnselectedIconSchemeColor,
         navigationBarMutedUnselectedIcon,
         navigationBarHighlightSchemeColor,
+        navigationBarHighlightOpacity,
         navigationBarBackgroundSchemeColor,
         navigationBarOpacity,
         navigationBarHeight,
@@ -2181,6 +2225,7 @@ class FlexSubThemesData with Diagnosticable {
         navigationRailMutedUnselectedIcon,
         navigationRailUseIndicator,
         navigationRailIndicatorSchemeColor,
+        navigationRailIndicatorOpacity,
         navigationRailBackgroundSchemeColor,
         navigationRailOpacity,
         navigationRailElevation,
@@ -2369,6 +2414,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<SchemeColor>(
         'navigationBarHighlightSchemeColor',
         navigationBarHighlightSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarHighlightOpacity', navigationBarHighlightOpacity));
     properties.add(EnumProperty<SchemeColor>(
         'navigationBarBackgroundSchemeColor',
         navigationBarBackgroundSchemeColor));
@@ -2413,6 +2460,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<SchemeColor>(
         'navigationRailIndicatorSchemeColor',
         navigationRailIndicatorSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationRailIndicatorOpacity', navigationRailIndicatorOpacity));
     properties.add(DiagnosticsProperty<SchemeColor>(
         'navigationRailBackgroundSchemeColor',
         navigationRailBackgroundSchemeColor));

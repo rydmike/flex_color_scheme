@@ -215,7 +215,11 @@ const double kBottomNavigationBarElevation = 0;
 /// container height default.
 const double kNavigationBarHeight = 62;
 
-/// Alpha value for the indicator color on the [NavigationBar]
+/// Alpha value for the indicator color on the [NavigationBar] and
+/// [NavigationRail].
+///
+/// The value is the same as Flutter SDK uses in Material 2. Material 3 may
+/// often use no alpha and just different solid color hue instead.
 ///
 /// Value: 0x3D = 61 = 24%
 const int kNavigationBarIndicatorAlpha = 0x3D;
@@ -411,8 +415,8 @@ const int kChipSelectedBackgroundAlphaBlend = 0x96;
 /// Value: 0x66 = 102 = 40%
 const int kUnselectedBackgroundPrimaryAlphaBlend = 0x66;
 
-/// The alpha value for an unselected item, typically
-/// an icon in a TabBar, BottomNavigationBar, NavigationBar or NavigationRail.
+/// The alpha value for an unselected item, typically an icon or text
+/// in a TabBar, BottomNavigationBar, NavigationBar or NavigationRail.
 ///
 /// Value: 0xA5 = 165 = 65%
 const int kUnselectedAlphaBlend = 0xA5;

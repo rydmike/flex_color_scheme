@@ -2552,15 +2552,16 @@ class FlexSubThemes {
     /// the effective default styles for undefined inputs become:
     ///
     /// ```
-    ///                    FCS defaults  Flutter defaults
-    /// useFlutterDefaults false         true
-    /// - background       background    surface, with onSurface overlay elev 3.
-    /// - height           62            80
-    /// - indicator        primary       secondary
-    /// - selected icon    primary       onSurface
-    /// - Selected label   primary       onSurface
-    /// - unselected icon  onSurface     onSurface
-    /// - unSelected label onSurface     onSurface
+    ///                    FCS defaults   Flutter defaults
+    /// useFlutterDefaults false          true
+    /// - background       background     surface, + onSurface overlay elev 3.
+    /// - height           62             80
+    /// - indicator        primary        secondary
+    /// - selected icon    primary        onSurface
+    /// - Selected label   primary        onSurface
+    /// - unselected icon  onSurface      onSurface
+    /// - unSelected label onSurface      onSurface
+    /// - TextTheme        FCS.labelSmall default.caption
     ///
     /// FCS further applies both an alpha blend and slight opacity to
     /// unselected icon and unselected label, but only if
@@ -2987,6 +2988,23 @@ class FlexSubThemes {
     // TODO(rydmike): Add useFlutterDefaults flag state differences to doc.
     final bool useFlutterDefaults = false,
   }) {
+    // Determine if we can even use default icon styles, only when all are null,
+    // can we fall back to Flutter SDK default.
+    final bool useDefaultTextStyle = labelTextStyle == null &&
+        selectedLabelSize == null &&
+        unselectedLabelSize == null &&
+        selectedLabelSchemeColor == null &&
+        unselectedLabelSchemeColor == null &&
+        useFlutterDefaults;
+
+    // Determine if we can even use default icon styles, only when all are null,
+    // can we fall back to Flutter SDK default.
+    final bool useDefaultIconTheme = selectedIconSize == null &&
+        unselectedIconSize == null &&
+        selectedIconSchemeColor == null &&
+        unselectedIconSchemeColor == null &&
+        useFlutterDefaults;
+
     // Get text color, defaults to primary.
     final Color labelColor = selectedLabelSchemeColor == null
         ? colorScheme.primary
@@ -3006,15 +3024,6 @@ class FlexSubThemes {
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? labelSize;
 
-    // Determine if we should use a custom text style at all, if all text
-    // modifier props are null, we should fall back to widget defaults.
-    final bool useTextStyle = labelTextStyle != null ||
-        selectedLabelSize != null ||
-        unselectedLabelSize != null ||
-        selectedLabelSchemeColor != null ||
-        unselectedLabelSchemeColor != null ||
-        (mutedUnselectedLabel ?? false);
-
     // Get icon color, defaults to primary.
     final Color iconColor = selectedIconSchemeColor == null
         ? colorScheme.primary
@@ -3029,47 +3038,51 @@ class FlexSubThemes {
     final double iconSize = selectedIconSize ?? 24;
     final double effectiveUnselectedIconSize = unselectedIconSize ?? iconSize;
 
-    // Determine if we should use a custom icon theme at all, if these props
-    // are null, we should not and just fall back to widget defaults.
-    final bool useIconTheme = selectedIconSize != null ||
-        unselectedIconSize != null ||
-        selectedIconSchemeColor != null ||
-        unselectedIconSchemeColor != null ||
-        (mutedUnselectedIcon ?? false);
-
     // Effective indicator color.
-    final Color effectiveIndicatorColor =
-        schemeColor(indicatorSchemeColor ?? SchemeColor.secondary, colorScheme)
-            .withAlpha(indicatorAlpha);
+    final Color effectiveIndicatorColor = schemeColor(
+            indicatorSchemeColor ??
+                (useFlutterDefaults
+                    ? SchemeColor.secondary
+                    : SchemeColor.primary),
+            colorScheme)
+        .withAlpha(indicatorAlpha);
 
     // Effective usage value for indicator.
     final bool effectiveUseIndicator =
         (useMaterial3 && useIndicator == null) || (useIndicator ?? false);
 
+    // Background color, when using normal default, falls back to background.
+    final Color backgroundColor = schemeColor(
+            backgroundSchemeColor ?? SchemeColor.background, colorScheme)
+        .withOpacity(opacity);
+
     // Property order here as in NavigationRailThemeData
     return NavigationRailThemeData(
-      backgroundColor: backgroundSchemeColor != null
-          ? schemeColor(backgroundSchemeColor, colorScheme).withOpacity(opacity)
-          : null,
+      backgroundColor: backgroundSchemeColor == null
+          ? useFlutterDefaults
+              ? null
+              : backgroundColor
+          : backgroundColor,
       elevation: elevation,
-      unselectedLabelTextStyle: useTextStyle
-          ? textStyle.copyWith(
+      unselectedLabelTextStyle: useDefaultTextStyle
+          ? null
+          : textStyle.copyWith(
               fontSize: effectiveUnselectedLabelSize,
               color: (mutedUnselectedLabel ?? false)
                   ? unselectedLabelColor
                       .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
                   : unselectedLabelColor,
-            )
-          : null,
-      selectedLabelTextStyle: useTextStyle
-          ? textStyle.copyWith(
+            ),
+      selectedLabelTextStyle: useDefaultTextStyle
+          ? null
+          : textStyle.copyWith(
               fontSize: labelSize,
               color: labelColor,
-            )
-          : null,
-      unselectedIconTheme: useIconTheme
-          ? IconThemeData(
+            ),
+      unselectedIconTheme: useDefaultIconTheme
+          ? null
+          : IconThemeData(
               size: effectiveUnselectedIconSize,
               opacity: 1,
               color: (mutedUnselectedIcon ?? false)
@@ -3077,15 +3090,14 @@ class FlexSubThemes {
                       .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
                   : unselectedIconColor,
-            )
-          : null,
-      selectedIconTheme: useIconTheme
-          ? IconThemeData(
+            ),
+      selectedIconTheme: useDefaultIconTheme
+          ? null
+          : IconThemeData(
               size: iconSize,
               opacity: 1,
               color: iconColor,
-            )
-          : null,
+            ),
       groupAlignment: groupAlignment,
       labelType: labelType,
       // Logic to avoid SDKs over eager asserts and get same result.

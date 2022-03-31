@@ -29,7 +29,7 @@ class NavigationBarSettings extends StatelessWidget {
     final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
             (controller.useFlutterDefaults &&
                 controller.navBarIndicatorSchemeColor == null))
-        ? 'null (onSurface)'
+        ? 'null (secondary)'
         : 'null (primary)';
     final String labelForDefaultSelectedItem =
         (!controller.useFlexColorScheme ||
@@ -218,7 +218,7 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           title: const Text('Mute unselected items'),
-          subtitle: const Text('Unselected icon and text are less bright, '
+          subtitle: const Text('Unselected icon and text are less bright. '
               'Shared setting for icon and text, but separate properties '
               'in API'),
           value: controller.navBarMuteUnselected && muteUnselectedEnabled,

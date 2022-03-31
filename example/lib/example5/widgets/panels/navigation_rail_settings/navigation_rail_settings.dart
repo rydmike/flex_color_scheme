@@ -24,11 +24,40 @@ class NavigationRailSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double navRailOpacity = controller.useSubThemes &&
-            controller.useFlexColorScheme &&
-            controller.navRailBackgroundSchemeColor?.index != null
-        ? controller.navRailOpacity
-        : 1;
+    final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
+            (controller.useFlutterDefaults &&
+                controller.navRailIndicatorSchemeColor == null))
+        ? 'null (secondary)'
+        : 'null (primary)';
+    const String labelForDefaultSelectedItem = 'null (primary)';
+    // (!controller.useFlexColorScheme ||
+    //         (controller.useFlutterDefaults &&
+    //             controller.navRailSelectedSchemeColor == null &&
+    //             controller.navRailUnselectedSchemeColor == null))
+    //     ? 'null (primary)'
+    //     : 'null (primary)';
+    final bool muteUnselectedEnabled = controller.useSubThemes &&
+        controller.useFlexColorScheme &&
+        !(controller.useFlutterDefaults &&
+            controller.navRailSelectedSchemeColor == null &&
+            controller.navRailUnselectedSchemeColor == null);
+    final String labelForDefaultUnelectedItem =
+        (!controller.useFlexColorScheme ||
+                !controller.useSubThemes ||
+                (controller.useFlutterDefaults &&
+                    controller.navRailSelectedSchemeColor == null &&
+                    controller.navRailUnselectedSchemeColor == null))
+            ? 'null (onSurface with opacity)'
+            : controller.navRailMuteUnselected && muteUnselectedEnabled
+                ? 'null (onSurface, blend & opacity)'
+                : 'null (onSurface)';
+    final bool navRailOpacityEnabled = controller.useSubThemes &&
+        controller.useFlexColorScheme &&
+        !(controller.navRailBackgroundSchemeColor == null &&
+            controller.useFlutterDefaults);
+    final double navRailOpacity =
+        navRailOpacityEnabled ? controller.navRailOpacity : 1;
+
     final double navRailElevation =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.navigationRailElevation
@@ -38,7 +67,12 @@ class NavigationRailSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: 'null (surface)',
+          labelForDefault: !controller.useSubThemes ||
+                  !controller.useFlexColorScheme ||
+                  (controller.useFlutterDefaults &&
+                      controller.navRailBackgroundSchemeColor == null)
+              ? 'null (surface)'
+              : 'null (background)',
           index: controller.navRailBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -52,18 +86,14 @@ class NavigationRailSettings extends StatelessWidget {
               : null,
         ),
         ListTile(
-          enabled: controller.useSubThemes &&
-              controller.useFlexColorScheme &&
-              controller.navRailBackgroundSchemeColor?.index != null,
+          enabled: navRailOpacityEnabled,
           title: const Text('Background opacity'),
           subtitle: Slider.adaptive(
             max: 100,
             divisions: 100,
             label: (navRailOpacity * 100).toStringAsFixed(0),
             value: navRailOpacity * 100,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.navRailBackgroundSchemeColor?.index != null
+            onChanged: navRailOpacityEnabled
                 ? (double value) {
                     controller.setNavRailOpacity(value / 100);
                   }
@@ -122,8 +152,52 @@ class NavigationRailSettings extends StatelessWidget {
             ),
           ),
         ),
+        SwitchListTileAdaptive(
+          title: const Text('Use selection indicator'),
+          subtitle: const Text('Also ON when ThemeData.useMaterial3 '
+              'is true, turn OFF sub-themes and try it'),
+          value: controller.navRailUseIndicator &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setNavRailUseIndicator
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Selection indicator color'),
+          labelForDefault: labelForDefaultIndicator,
+          index: controller.navRailIndicatorSchemeColor?.index ?? -1,
+          onChanged: controller.navRailUseIndicator &&
+                  controller.useSubThemes &&
+                  controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setNavRailIndicatorSchemeColor(null);
+                  } else {
+                    controller.setNavRailIndicatorSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Labels when rail is collapsed'),
+          subtitle: Text(explainLabelStyle(
+              controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.navRailLabelType
+                  : NavigationRailLabelType.none)),
+          trailing: NavigationRailLabelTypeButtons(
+            style: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.navRailLabelType
+                : NavigationRailLabelType.none,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setNavRailLabelType
+                : null,
+          ),
+        ),
         NavigationRailShowcase(
-          height: 700,
+          height: 650,
           // TODO(rydmike): Still needed? Sometimes worked without it, weird.
           // This is used as a work around to avoid unnecessarily eager
           // assert in SDK.
@@ -139,41 +213,11 @@ class NavigationRailSettings extends StatelessWidget {
                   !controller.useMaterial3,
           child: Column(
             children: <Widget>[
-              SwitchListTileAdaptive(
-                title: const Text('Use selection indicator'),
-                subtitle: const Text('Also ON when ThemeData.useMaterial3 '
-                    'is true, turn OFF sub-themes and try it'),
-                value: controller.navRailUseIndicator &&
-                    controller.useSubThemes &&
-                    controller.useFlexColorScheme,
-                onChanged:
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? controller.setNavRailUseIndicator
-                        : null,
-              ),
-              ColorSchemePopupMenu(
-                title: const Text('Selection indicator color'),
-                labelForDefault: 'null (secondary)',
-                index: controller.navRailIndicatorSchemeColor?.index ?? -1,
-                onChanged: controller.navRailUseIndicator &&
-                        controller.useSubThemes &&
-                        controller.useFlexColorScheme
-                    ? (int index) {
-                        if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setNavRailIndicatorSchemeColor(null);
-                        } else {
-                          controller.setNavRailIndicatorSchemeColor(
-                              SchemeColor.values[index]);
-                        }
-                      }
-                    : null,
-              ),
               ColorSchemePopupMenu(
                 title: const Text('Selected item color'),
                 subtitle:
-                    const Text('Shared setting with navigation bars, APIs '
-                        'have own properties'),
-                labelForDefault: 'null (primary)',
+                    const Text('Label and icon, but own properties in API'),
+                labelForDefault: labelForDefaultSelectedItem,
                 index: controller.navRailSelectedSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
@@ -190,12 +234,8 @@ class NavigationRailSettings extends StatelessWidget {
               ColorSchemePopupMenu(
                 title: const Text('Unselected item color'),
                 subtitle:
-                    const Text('Shared setting with navigation bars, APIs '
-                        'have own properties'),
-                labelForDefault:
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? 'null (onSurface)'
-                        : 'null (onSurface with opacity)',
+                    const Text('Label and icon, but own properties in API'),
+                labelForDefault: labelForDefaultUnelectedItem,
                 index: controller.navRailUnselectedSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
@@ -210,38 +250,35 @@ class NavigationRailSettings extends StatelessWidget {
                     : null,
               ),
               SwitchListTileAdaptive(
-                title: const Text('Mute unselected items on NavigationRail'),
+                title: const Text('Mute unselected items'),
                 subtitle: const Text(
-                    'Unselected icon and text are less bright.\n'
-                    'Rail will also use muted unselected items via SDK '
-                    'default when this is OFF, if all item colors and sizes '
-                    'are also at their default (null) values'),
-                value: controller.navRailMuteUnselected &&
+                    'Unselected icon and text are less bright. Shared '
+                    'setting for icon and text, but separate properties '
+                    'in API'),
+                value: muteUnselectedEnabled
+                    ? controller.navRailMuteUnselected
+                    : !muteUnselectedEnabled,
+                onChanged: muteUnselectedEnabled
+                    ? controller.setNavRailMuteUnselected
+                    : null,
+              ),
+              const Divider(height: 16),
+              SwitchListTileAdaptive(
+                title: const Text('Use Flutter defaults'),
+                subtitle: const Text('Undefined values will fall back to '
+                    'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
+                    'Here, both selected and unselected color have to be null '
+                    'before the item colors can fall back to Flutter defaults. '
+                    'This setting affects many component themes that implement '
+                    'it. It is included on panels where it has an impact. '
+                    'See API docs for more info.'),
+                value: controller.useFlutterDefaults &&
                     controller.useSubThemes &&
                     controller.useFlexColorScheme,
                 onChanged:
                     controller.useSubThemes && controller.useFlexColorScheme
-                        ? controller.setNavRailMuteUnselected
+                        ? controller.setUseFlutterDefaults
                         : null,
-              ),
-              ListTile(
-                enabled:
-                    controller.useSubThemes && controller.useFlexColorScheme,
-                title: const Text('Labels when rail is collapsed'),
-                subtitle: Text(explainLabelStyle(
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? controller.navRailLabelType
-                        : NavigationRailLabelType.none)),
-                trailing: NavigationRailLabelTypeButtons(
-                  style:
-                      controller.useSubThemes && controller.useFlexColorScheme
-                          ? controller.navRailLabelType
-                          : NavigationRailLabelType.none,
-                  onChanged:
-                      controller.useSubThemes && controller.useFlexColorScheme
-                          ? controller.setNavRailLabelType
-                          : null,
-                ),
               ),
             ],
           ),
