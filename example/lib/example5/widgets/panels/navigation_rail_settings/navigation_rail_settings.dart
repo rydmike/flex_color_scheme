@@ -30,12 +30,6 @@ class NavigationRailSettings extends StatelessWidget {
         ? 'null (secondary)'
         : 'null (primary)';
     const String labelForDefaultSelectedItem = 'null (primary)';
-    // (!controller.useFlexColorScheme ||
-    //         (controller.useFlutterDefaults &&
-    //             controller.navRailSelectedSchemeColor == null &&
-    //             controller.navRailUnselectedSchemeColor == null))
-    //     ? 'null (primary)'
-    //     : 'null (primary)';
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
@@ -57,7 +51,15 @@ class NavigationRailSettings extends StatelessWidget {
             controller.useFlutterDefaults);
     final double navRailOpacity =
         navRailOpacityEnabled ? controller.navRailOpacity : 1;
-
+    final bool navRailIndicatorOpacityEnabled =
+        controller.navRailUseIndicator &&
+            controller.useSubThemes &&
+            controller.useFlexColorScheme &&
+            !(controller.navRailIndicatorSchemeColor == null &&
+                controller.useFlutterDefaults);
+    final double navRailIndicatorOpacity = navRailIndicatorOpacityEnabled
+        ? (controller.navRailIndicatorOpacity ?? -0.01)
+        : -0.01;
     final double navRailElevation =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.navigationRailElevation
@@ -109,7 +111,6 @@ class NavigationRailSettings extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(
-                  // ignore: lines_longer_than_80_chars
                   '${(navRailOpacity * 100).toStringAsFixed(0)} %',
                   style: Theme.of(context)
                       .textTheme
@@ -179,6 +180,54 @@ class NavigationRailSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        ListTile(
+          enabled: navRailIndicatorOpacityEnabled,
+          title: const Text('Selection indicator opacity'),
+          subtitle: Slider.adaptive(
+            min: -1,
+            max: 100,
+            divisions: 101,
+            label: navRailIndicatorOpacityEnabled
+                ? controller.navRailIndicatorOpacity == null ||
+                        (controller.navRailIndicatorOpacity ?? -1) < 0
+                    ? 'default 24%'
+                    : (navRailIndicatorOpacity * 100).toStringAsFixed(0)
+                : 'default 24%',
+            value: navRailIndicatorOpacity * 100,
+            onChanged: navRailIndicatorOpacityEnabled
+                ? (double value) {
+                    controller.setNavRailIndicatorOpacity(
+                        value < 0 ? null : value / 100);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'OPACITY',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  navRailIndicatorOpacityEnabled
+                      ? controller.navRailIndicatorOpacity == null ||
+                              (controller.navRailIndicatorOpacity ?? -1) < 0
+                          ? 'default 24%'
+                          // ignore: lines_longer_than_80_chars
+                          : '${(navRailIndicatorOpacity * 100).toStringAsFixed(0)} %'
+                      : 'default 24%',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,

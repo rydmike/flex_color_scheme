@@ -453,9 +453,16 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
   final String navigationBarHighlightSchemeColor = controller
-              .navBarIndicatorSchemeColor !=
+              .navBarHighlightSchemeColor !=
           null
-      ? '    navigationBarHighlightSchemeColor: ${controller.navBarIndicatorSchemeColor},\n'
+      ? '    navigationBarHighlightSchemeColor: ${controller.navBarHighlightSchemeColor},\n'
+      : '';
+  final String navigationBarHighlightOpacity = controller
+                  .navBarHighlightOpacity !=
+              null &&
+          !(controller.navBarHighlightSchemeColor == null &&
+              controller.useFlutterDefaults)
+      ? '    navigationBarHighlightOpacity: ${controller.navBarHighlightOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String navigationBarBackgroundSchemeColor = controller
               .navBarBackgroundSchemeColor !=
@@ -519,6 +526,14 @@ String generateThemeDartCode(ThemeController controller) {
               null &&
           controller.navRailUseIndicator
       ? '    navigationRailIndicatorSchemeColor: ${controller.navRailIndicatorSchemeColor},\n'
+      : '';
+  final String navigationRailIndicatorOpacity = controller
+                  .navRailIndicatorOpacity !=
+              null &&
+          !(controller.navRailIndicatorSchemeColor == null &&
+              controller.navRailUseIndicator &&
+              controller.useFlutterDefaults)
+      ? '    navigationRailIndicatorOpacity: ${controller.navRailIndicatorOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String navigationRailBackgroundSchemeColor = controller
               .navRailBackgroundSchemeColor !=
@@ -610,6 +625,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarUnselectedIconSchemeColor'
           '$navigationBarMutedUnselectedIcon'
           '$navigationBarHighlightSchemeColor'
+          '$navigationBarHighlightOpacity'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
           '$navigationBarHeight'
@@ -623,6 +639,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailMutedUnselectedIcon'
           '$navigationRailUseIndicator'
           '$navigationRailIndicatorSchemeColor'
+          '$navigationRailIndicatorOpacity'
           '$navigationRailBackgroundSchemeColor'
           '$navigationRailOpacity'
           '$navigationRailElevation'
@@ -699,6 +716,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarUnselectedIconSchemeColor'
           '$navigationBarMutedUnselectedIcon'
           '$navigationBarHighlightSchemeColor'
+          '$navigationBarHighlightOpacity'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
           '$navigationBarHeight'
@@ -712,6 +730,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailMutedUnselectedIcon'
           '$navigationRailUseIndicator'
           '$navigationRailIndicatorSchemeColor'
+          '$navigationRailIndicatorOpacity'
           '$navigationRailBackgroundSchemeColor'
           '$navigationRailOpacity'
           '$navigationRailElevation'

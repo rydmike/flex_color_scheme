@@ -150,9 +150,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
                 controller.navBarUnselectedSchemeColor,
             navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
             navigationBarHighlightSchemeColor:
-                controller.navBarIndicatorSchemeColor,
+                controller.navBarHighlightSchemeColor,
             navigationBarBackgroundSchemeColor:
                 controller.navBarBackgroundSchemeColor,
+            navigationBarHighlightOpacity: controller.navBarHighlightOpacity,
             navigationBarOpacity: controller.navBarOpacity,
             navigationBarHeight: controller.navBarHeight,
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
@@ -171,6 +172,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             navigationRailUseIndicator: controller.navRailUseIndicator,
             navigationRailIndicatorSchemeColor:
                 controller.navRailIndicatorSchemeColor,
+            navigationRailIndicatorOpacity: controller.navRailIndicatorOpacity,
             navigationRailBackgroundSchemeColor:
                 controller.navRailBackgroundSchemeColor,
             navigationRailOpacity: controller.navRailOpacity,

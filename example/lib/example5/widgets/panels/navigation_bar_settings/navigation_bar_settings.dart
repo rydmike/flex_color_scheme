@@ -28,7 +28,7 @@ class NavigationBarSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
             (controller.useFlutterDefaults &&
-                controller.navBarIndicatorSchemeColor == null))
+                controller.navBarHighlightSchemeColor == null))
         ? 'null (secondary)'
         : 'null (primary)';
     final String labelForDefaultSelectedItem =
@@ -59,7 +59,13 @@ class NavigationBarSettings extends StatelessWidget {
             controller.useFlutterDefaults);
     final double navBarOpacity =
         navBarOpacityEnabled ? controller.navBarOpacity : 1;
-
+    final bool navBarHighlightOpacityEnabled = controller.useSubThemes &&
+        controller.useFlexColorScheme &&
+        !(controller.navBarHighlightSchemeColor == null &&
+            controller.useFlutterDefaults);
+    final double navBarHighlightOpacity = navBarHighlightOpacityEnabled
+        ? (controller.navBarHighlightOpacity ?? -0.01)
+        : -0.01;
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -172,17 +178,65 @@ class NavigationBarSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
           labelForDefault: labelForDefaultIndicator,
-          index: controller.navBarIndicatorSchemeColor?.index ?? -1,
+          index: controller.navBarHighlightSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarIndicatorSchemeColor(null);
+                    controller.setNavBarHighlightSchemeColor(null);
                   } else {
-                    controller.setNavBarIndicatorSchemeColor(
+                    controller.setNavBarHighlightSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }
               : null,
+        ),
+        ListTile(
+          enabled: navBarHighlightOpacityEnabled,
+          title: const Text('Selection indicator opacity'),
+          subtitle: Slider.adaptive(
+            min: -1,
+            max: 100,
+            divisions: 101,
+            label: navBarHighlightOpacityEnabled
+                ? controller.navBarHighlightOpacity == null ||
+                        (controller.navBarHighlightOpacity ?? -1) < 0
+                    ? 'default 24%'
+                    : (navBarHighlightOpacity * 100).toStringAsFixed(0)
+                : 'default 24%',
+            value: navBarHighlightOpacity * 100,
+            onChanged: navBarHighlightOpacityEnabled
+                ? (double value) {
+                    controller.setNavBarHighlightOpacity(
+                        value < 0 ? null : value / 100);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'OPACITY',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  navBarHighlightOpacityEnabled
+                      ? controller.navBarHighlightOpacity == null ||
+                              (controller.navBarHighlightOpacity ?? -1) < 0
+                          ? 'default 24%'
+                          // ignore: lines_longer_than_80_chars
+                          : '${(navBarHighlightOpacity * 100).toStringAsFixed(0)} %'
+                      : 'default 24%',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),

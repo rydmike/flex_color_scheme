@@ -86,10 +86,13 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
         (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
     final double headerExtent = buttonHeight + media.padding.top + margins * 2;
     if (_debug) {
+      debugPrint('headerExtent ............ : $headerExtent');
       debugPrint('margins ................. : $margins');
       debugPrint('kToolbarHeight .......... : $kToolbarHeight');
       debugPrint('media.viewPadding.top.... : ${media.viewPadding.top}');
+      debugPrint('media.viewPadding.bottom. : ${media.viewPadding.bottom}');
       debugPrint('media.padding.top ....... : ${media.padding.top}');
+      debugPrint('media.padding.bottom..... : ${media.padding.bottom}');
       debugPrint('media.size.width ........ : ${media.size.width}');
       debugPrint('media.size.height ....... : ${media.size.height}');
     }
@@ -208,7 +211,12 @@ class PanelPage extends StatelessWidget {
           AppData.responsiveInsets(MediaQuery.of(context).size.width);
 
       return ListView(
-        padding: EdgeInsets.fromLTRB(margins, 0, margins, margins),
+        padding: EdgeInsets.fromLTRB(
+          margins,
+          0,
+          margins,
+          margins + MediaQuery.of(context).padding.bottom,
+        ),
         children: <Widget>[
           HeaderCard(
             title: Text(panelItems[panelPage].panelLabel),

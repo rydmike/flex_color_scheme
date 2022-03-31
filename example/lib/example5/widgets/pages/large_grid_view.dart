@@ -105,9 +105,12 @@ class _LargeGridViewState extends State<LargeGridView>
     super.dispose();
   }
 
-  // The fixed height of the theme selector control, before any margin and
-  // media size adjustments
+  // The fixed desktop height of the theme selector control,
+  // before any margin and media size adjustments
   static const double _kHeightSelector = 118;
+  // Magic numbers for normal and dense ListTile
+  static const double _kHeightNormaListTile = 52;
+  static const double _kHeightDenseListTile = 44;
 
   @override
   Widget build(BuildContext context) {
@@ -135,13 +138,23 @@ class _LargeGridViewState extends State<LargeGridView>
       // using toggle buttons on small media.
       final bool showAllBlends = constraints.maxWidth / columns > 445;
       final double margins = AppData.responsiveInsets(media.size.width);
-      final double headerExtent =
-          _kHeightSelector + media.padding.top + margins * 3 + phoneReduce;
+      // The intrinsic height diff of the switch = dense - normal.
+      final double phoneSwitchReduce =
+          isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
+      final double headerExtent = _kHeightSelector +
+          media.padding.top +
+          margins * 3 +
+          phoneReduce +
+          phoneSwitchReduce;
       if (_debug) {
+        debugPrint('headerExtent ............ : $headerExtent');
         debugPrint('margins ................. : $margins');
+        debugPrint('phoneReduce ............. : $phoneReduce');
         debugPrint('kToolbarHeight .......... : $kToolbarHeight');
         debugPrint('media.viewPadding.top.... : ${media.viewPadding.top}');
+        debugPrint('media.viewPadding.bottom. : ${media.viewPadding.bottom}');
         debugPrint('media.padding.top ....... : ${media.padding.top}');
+        debugPrint('media.padding.bottom..... : ${media.padding.bottom}');
         debugPrint('media.size.width ........ : ${media.size.width}');
         debugPrint('media.size.height ....... : ${media.size.height}');
       }
@@ -159,7 +172,8 @@ class _LargeGridViewState extends State<LargeGridView>
             ),
           ),
           SliverPadding(
-            padding: EdgeInsets.all(margins),
+            padding: EdgeInsets.fromLTRB(
+                margins, margins, margins, margins + media.padding.bottom),
             sliver: SliverMasonryGrid.count(
               crossAxisCount: columns,
               mainAxisSpacing: margins,

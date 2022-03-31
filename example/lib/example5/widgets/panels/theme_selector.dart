@@ -97,8 +97,9 @@ class ThemeSelector extends StatelessWidget {
 
   final ThemeController controller;
 
-  // The height of the scrolling widget.
-  static const double _kHeightOfScrollWidget = 52;
+  // Magic numbers for normal and dense ListTile
+  static const double _kHeightNormaListTile = 52;
+  static const double _kHeightDenseListTile = 44;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +107,6 @@ class ThemeSelector extends StatelessWidget {
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
-    final double phoneReduce = isPhone ? AppData.colorButtonPhoneReduce : 0;
     return HeaderCard(
       margin: EdgeInsets.symmetric(horizontal: margins),
       child: Column(
@@ -119,10 +119,9 @@ class ThemeSelector extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height:
-                _kHeightOfScrollWidget + phoneReduce + (isPhone ? margins : 0),
+            height: isPhone ? _kHeightDenseListTile : _kHeightNormaListTile,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, isPhone ? margins : 0),
+              padding: EdgeInsets.fromLTRB(0, 0, margins, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

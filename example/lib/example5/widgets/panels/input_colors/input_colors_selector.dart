@@ -37,8 +37,9 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
   late ScrollController scrollController;
   late int schemeIndex;
 
-  // The width size of the scrolling button.
+  // The fixed width the scrolling button at desktop size.
   static const double _kWidthOfScrollItem = 67.2;
+  // The fixed height of the scrolling button at desktop size.
   static const double _kHeightOfScrollItem = 66;
 
   @override
