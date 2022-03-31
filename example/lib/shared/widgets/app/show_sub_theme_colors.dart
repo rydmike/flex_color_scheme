@@ -135,16 +135,18 @@ class ShowSubThemeColors extends StatelessWidget {
             colorScheme.surface, colorScheme.onSurface, 3.0);
     final Color navigationBarItemColor = theme.navigationBarTheme.iconTheme
             ?.resolve(<MaterialState>{MaterialState.selected})?.color ??
-        colorScheme.primary;
+        colorScheme.onSurface;
     final Color navigationBarIndicatorColor =
-        theme.navigationBarTheme.indicatorColor ?? colorScheme.primary;
+        theme.navigationBarTheme.indicatorColor ??
+            colorScheme.secondary.withOpacity(.24);
     final Color navigationRailColor =
-        theme.navigationRailTheme.backgroundColor ?? colorScheme.background;
+        theme.navigationRailTheme.backgroundColor ?? colorScheme.surface;
     final Color navigationRailItemColor =
         theme.navigationRailTheme.selectedIconTheme?.color ??
             colorScheme.primary;
     final Color navigationRailIndicatorColor =
-        theme.navigationRailTheme.indicatorColor ?? colorScheme.primary;
+        theme.navigationRailTheme.indicatorColor ??
+            colorScheme.secondary.withOpacity(.24);
 
     final Color textColor = theme.textTheme.titleMedium?.color ??
         (isDark ? Colors.white : Colors.black);

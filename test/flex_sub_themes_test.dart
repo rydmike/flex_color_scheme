@@ -2966,19 +2966,99 @@ void main() {
     // FlexSubThemes NavigationRail tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.22: GIVEN a default FlexSubTheme.navigationRailTheme() '
+        'FST1.22-light-flutter default: GIVEN a default '
+        'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
+          useFlutterDefaults: true,
         ),
         equals(
           const NavigationRailThemeData(
             elevation: 0,
             useIndicator: true,
             indicatorColor: Color(0x00000000),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.22-dark-flutter default: GIVEN a default '
+        'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
+        'EXPECT equal to NavigationRailThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.navigationRailTheme(
+          colorScheme: colorScheme,
+          useFlutterDefaults: true,
+        ),
+        equals(
+          const NavigationRailThemeData(
+            elevation: 0,
+            useIndicator: true,
+            indicatorColor: Color(0x00000000),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.22-light-flutter default: GIVEN a default '
+        'FlexSubTheme.navigationRailTheme() that NOT use Flutter defaults '
+        'EXPECT equal to NavigationRailThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.navigationRailTheme(
+          colorScheme: colorScheme,
+          // useFlutterDefaults: false // <<- Asumed as default,
+        ),
+        equals(
+          const NavigationRailThemeData(
+            elevation: 0,
+            useIndicator: true,
+            indicatorColor: Color(0x00000000),
+            backgroundColor: Color(0xffffffff),
+            unselectedLabelTextStyle: TextStyle(
+                inherit: true, color: Color(0xff000000), fontSize: 14.0),
+            selectedLabelTextStyle: TextStyle(
+                inherit: true, color: Color(0xff6200ee), fontSize: 14.0),
+            unselectedIconTheme: IconThemeData(
+                color: Color(0xff000000), opacity: 1.0, size: 24.0),
+            selectedIconTheme: IconThemeData(
+                color: Color(0xff6200ee), opacity: 1.0, size: 24.0),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.22-dark-flutter default: GIVEN a default '
+        'FlexSubTheme.navigationRailTheme() that NOT use Flutter defaults '
+        'EXPECT equal to NavigationRailThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.navigationRailTheme(
+          colorScheme: colorScheme,
+          // useFlutterDefaults: false // <<- Asumed as default,
+        ),
+        equals(
+          const NavigationRailThemeData(
+            elevation: 0,
+            useIndicator: true,
+            indicatorColor: Color(0x00000000),
+            backgroundColor: Color(0xff121212),
+            unselectedLabelTextStyle: TextStyle(
+                inherit: true, color: Color(0xffffffff), fontSize: 14.0),
+            selectedLabelTextStyle: TextStyle(
+                inherit: true, color: Color(0xffbb86fc), fontSize: 14.0),
+            unselectedIconTheme: IconThemeData(
+                color: Color(0xffffffff), opacity: 1.0, size: 24.0),
+            selectedIconTheme: IconThemeData(
+                color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
           ),
         ),
       );

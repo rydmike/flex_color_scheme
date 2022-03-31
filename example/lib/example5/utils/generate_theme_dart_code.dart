@@ -488,7 +488,10 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationRailUnselectedLabelSchemeColor: ${controller.navRailUnselectedSchemeColor},\n'
       : '';
   final String navigationRailMutedUnselectedLabel = controller
-          .navRailMuteUnselected
+              .navRailMuteUnselected ||
+          (controller.useFlutterDefaults &&
+              controller.navRailSelectedSchemeColor == null &&
+              controller.navRailUnselectedSchemeColor == null)
       ? ''
       : '    navigationRailMutedUnselectedLabel: ${controller.navRailMuteUnselected},\n';
   final String navigationRailSelectedIconSchemeColor = controller
@@ -502,15 +505,19 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationRailUnselectedIconSchemeColor: ${controller.navRailUnselectedSchemeColor},\n'
       : '';
   final String navigationRailMutedUnselectedIcon = controller
-          .navRailMuteUnselected
+              .navRailMuteUnselected ||
+          (controller.useFlutterDefaults &&
+              controller.navRailSelectedSchemeColor == null &&
+              controller.navRailUnselectedSchemeColor == null)
       ? ''
       : '    navigationRailMutedUnselectedIcon: ${controller.navRailMuteUnselected},\n';
   final String navigationRailUseIndicator = controller.navRailUseIndicator
       ? ''
       : '    navigationRailUseIndicator: ${controller.navRailUseIndicator},\n';
   final String navigationRailIndicatorSchemeColor = controller
-              .navRailIndicatorSchemeColor !=
-          null
+                  .navRailIndicatorSchemeColor !=
+              null &&
+          controller.navRailUseIndicator
       ? '    navigationRailIndicatorSchemeColor: ${controller.navRailIndicatorSchemeColor},\n'
       : '';
   final String navigationRailBackgroundSchemeColor = controller
