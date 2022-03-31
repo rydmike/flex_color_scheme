@@ -21,6 +21,14 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
         : (controller.useSubThemes && controller.useFlexColorScheme)
             ? 'default null (dark primary, 95% opacity)'
             : 'default null (dark grey)';
+    final String sheetRadiusDefaultLabel =
+        controller.bottomSheetBorderRadius == null &&
+                controller.defaultRadius == null
+            ? 'default 16'
+            : controller.bottomSheetBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -38,7 +46,7 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.bottomSheetBorderRadius == null ||
                         (controller.bottomSheetBorderRadius ?? -1) < 0
-                    ? 'default 16'
+                    ? sheetRadiusDefaultLabel
                     : (controller.bottomSheetBorderRadius?.toStringAsFixed(0) ??
                         '')
                 : 'default 0',
@@ -65,7 +73,7 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.bottomSheetBorderRadius == null ||
                               (controller.bottomSheetBorderRadius ?? -1) < 0
-                          ? 'default 16'
+                          ? sheetRadiusDefaultLabel
                           : (controller.bottomSheetBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')

@@ -179,20 +179,20 @@ class HomePage extends StatelessWidget {
                               min: -1,
                               max: 30,
                               divisions: 31,
-                              label: controller.cornerRadius == null ||
-                                      (controller.cornerRadius ?? -1) < 0
+                              label: controller.defaultRadius == null ||
+                                      (controller.defaultRadius ?? -1) < 0
                                   ? 'default'
-                                  : (controller.cornerRadius
+                                  : (controller.defaultRadius
                                           ?.toStringAsFixed(0) ??
                                       ''),
                               value: controller.useSubThemes &&
                                       controller.useFlexColorScheme
-                                  ? controller.cornerRadius ?? -1
+                                  ? controller.defaultRadius ?? -1
                                   : 4,
                               onChanged: controller.useSubThemes &&
                                       controller.useFlexColorScheme
                                   ? (double value) {
-                                      controller.setCornerRadius(
+                                      controller.setDefaultRadius(
                                           value < 0 ? null : value);
                                     }
                                   : null,
@@ -211,12 +211,12 @@ class HomePage extends StatelessWidget {
                                   Text(
                                     controller.useSubThemes &&
                                             controller.useFlexColorScheme
-                                        ? controller.cornerRadius == null ||
-                                                (controller.cornerRadius ??
+                                        ? controller.defaultRadius == null ||
+                                                (controller.defaultRadius ??
                                                         -1) <
                                                     0
                                             ? 'default'
-                                            : (controller.cornerRadius
+                                            : (controller.defaultRadius
                                                     ?.toStringAsFixed(0) ??
                                                 '')
                                         : '4',

@@ -75,10 +75,10 @@ class Store {
   // Default value for the interactionEffects, also used to reset settings.
   static const bool defaultInteractionEffects = true;
 
-  // Key used to read and save the cornerRadius value.
-  static const String keyCornerRadius = 'cornerRadius';
-  // Default value for the cornerRadius, also used to reset settings.
-  static const double? defaultCornerRadius = null;
+  // Key used to read and save the defaultRadius value.
+  static const String keyDefaultRadius = 'defaultRadius';
+  // Default value for the defaultRadius, also used to reset settings.
+  static const double? defaultDefaultRadius = null;
 
   // Key used to read and save the tooltipsMatchBackground value.
   static const String keyTooltipsMatchBackground = 'tooltipsMatchBackground';

@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.2 - March 30, 2022
+## v5.0.0-dev.2 - April 1, 2022
 
 **BREAKING**
 
@@ -28,26 +28,29 @@ All notable changes to the **FlexColorScheme** package are documented here.
   You can safely remove it.   
   
 * The property `navigationBarIsStyled` in `FlexSubThemesData` was removed in
-  **v5.0.0-dev.1** as no longer needed. It now has a new broader replacement called
-  `FlexSubThemesData.useFlutterDefaults`. The in dev.1 version tested API-style to 
+  **v5.0.0-dev.1** as no longer needed. It now back with a new broader 
+  replacement called `FlexSubThemesData.useFlutterDefaults`. 
+  The in dev.1 version tested API-style to 
   set various `SchemeColor` properties to null to get SDK default for them was not 
-  very nice. The sub-themes settings API should default to its own preferred 
+  nice. The `FlexSubThemesData` should default to its own preferred 
   and recommended harmonized defaults when not defined. It is better to offer a 
-  toggle that can be set, to when possible/offered opt-out from some bigger style
+  toggle that can be set, to when possible/offer an opt-out from some bigger style
   differences from SDK defaults. This can be useful if one wants to create
   custom component themes and wish to start from less opinionated ones.
   The new `useFlutterDefaults` is false by default, and the sub-themes undefined
   null values result in its own harmonized and recommended settings. By setting
-  it to `true` a bit messier and un-harmonized Flutter default are back. Mostly this
-  refers to different styles and colors on `BottomNavigationBar`, `NavigationBar`,
-  `NavigationRail` and different dialogs. See API docs for details in defaults with 
-  this flag on or off.
+  it to `true` a bit messier and un-harmonized Flutter default are back. Currently,
+  this impacts different styles and colors on `BottomNavigationBar`, `NavigationBar`,
+  `NavigationRail` and different dialogs. See API docs for details regarding 
+  defaults with this flag on and off.
   
 * The `FlexSubThemesData` property `inputDecorationRadius` was deprecated and
   replaced with `inputDecoratorRadius`, to harmonize the text fields `InputDecoration`
   property names.
 
-* The `FlexSubThemesData` property now defaults to 4.
+* The `FlexSubThemesData` property `popupMenuRadius` and the radius in
+  corresponding static sub-theme helper `FlexSubThemes.popupMenuTheme`, 
+  now defaults to 4.
   In versions before v5.0.0-dev.2 it defaulted to 10. The M3 spec for it
   was not available when it was chosen originally. It was assumed to have
   higher border radius like rest of designs. However, the spec has it
@@ -108,6 +111,10 @@ All notable changes to the **FlexColorScheme** package are documented here.
   base color. Setting this to false, leaves it at the grey defaults used by
   Flutter defaults.
 
+* Added `navigationBarHighlightOpacity` and `navigationRailIndicatorOpacity` 
+  to `FlexSubThemesData`, to expose their already existing properties in
+  corresponding sub-themes used by `FlexColorScheme`.
+
 **DEMO APPS**
 
 * **Themes Playground** improvements:
@@ -134,6 +141,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   - Decoupled all bundled theming controls in the app.
   - Added individual override controls for border radius to all components.  
   - Added option to swap or not swap computed dark mode main and container color.
+  - Added indicator opacity controls to NavigationBar and NavigationRail.  
   - Reduced amount of pre-set  defaults in the app, so it starts with simpler setup code.  
   - Changed the code gen style for dark mode when using from light mode computed dark theme.
   - Changed the code gen, so it does not add any code when using API default values.

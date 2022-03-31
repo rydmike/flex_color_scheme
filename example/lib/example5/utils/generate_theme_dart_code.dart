@@ -173,8 +173,8 @@ String generateThemeDartCode(ThemeController controller) {
   final String useFlutterDefaults = controller.useFlutterDefaults
       ? '    useFlutterDefaults: ${controller.useFlutterDefaults},\n'
       : '';
-  final String defRadius = controller.cornerRadius != null
-      ? '    defaultRadius: ${controller.cornerRadius!.toStringAsFixed(1)},\n'
+  final String defRadius = controller.defaultRadius != null
+      ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
       : '';
   //
   // Material bottom sheet.

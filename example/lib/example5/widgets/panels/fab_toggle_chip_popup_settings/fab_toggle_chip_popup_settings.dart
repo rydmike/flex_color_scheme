@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +15,41 @@ class FabToggleChipPopupSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String fabRadiusDefaultLabel = controller.fabBorderRadius == null &&
+            controller.defaultRadius == null
+        ? 'default 16'
+        : controller.fabBorderRadius == null && controller.defaultRadius != null
+            ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+            : '';
+    final String toggleButtonRadiusDefaultLabel =
+        controller.toggleButtonsBorderRadius == null &&
+                controller.defaultRadius == null
+            ? 'default 20'
+            : controller.toggleButtonsBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
+    final String chipRadiusDefaultLabel =
+        controller.chipBorderRadius == null && controller.defaultRadius == null
+            ? 'default 8'
+            : controller.chipBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
+
+    final double popupEffectiveRadius = controller.popupMenuBorderRadius ??
+        math.min(controller.defaultRadius ?? 4.0, 10.0);
+    final String popupMenuDefaultLabel =
+        controller.popupMenuBorderRadius == null &&
+                controller.defaultRadius == null
+            ? 'default 4'
+            : controller.popupMenuBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${popupEffectiveRadius.toStringAsFixed(0)}'
+                : '';
+
+    //popupMenuBorderRadius
+
     final double popupOpacity =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.popupMenuOpacity
@@ -59,7 +96,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                     controller.fabUseShape
                 ? controller.fabBorderRadius == null ||
                         (controller.fabBorderRadius ?? -1) < 0
-                    ? 'default 16'
+                    ? fabRadiusDefaultLabel
                     : (controller.fabBorderRadius?.toStringAsFixed(0) ?? '')
                 : 'circular',
             value: controller.useSubThemes &&
@@ -90,7 +127,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                           controller.fabUseShape
                       ? controller.fabBorderRadius == null ||
                               (controller.fabBorderRadius ?? -1) < 0
-                          ? 'default 16'
+                          ? fabRadiusDefaultLabel
                           : (controller.fabBorderRadius?.toStringAsFixed(0) ??
                               '')
                       : 'circular',
@@ -132,7 +169,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.toggleButtonsBorderRadius == null ||
                         (controller.toggleButtonsBorderRadius ?? -1) < 0
-                    ? 'default 20'
+                    ? toggleButtonRadiusDefaultLabel
                     : (controller.toggleButtonsBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
@@ -160,7 +197,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.toggleButtonsBorderRadius == null ||
                               (controller.toggleButtonsBorderRadius ?? -1) < 0
-                          ? 'default 20'
+                          ? toggleButtonRadiusDefaultLabel
                           : (controller.toggleButtonsBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
@@ -202,7 +239,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.chipBorderRadius == null ||
                         (controller.chipBorderRadius ?? -1) < 0
-                    ? 'default 8'
+                    ? chipRadiusDefaultLabel
                     : (controller.chipBorderRadius?.toStringAsFixed(0) ?? '')
                 : 'stadium',
             value: controller.useSubThemes && controller.useFlexColorScheme
@@ -227,7 +264,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.chipBorderRadius == null ||
                               (controller.chipBorderRadius ?? -1) < 0
-                          ? 'default 8'
+                          ? chipRadiusDefaultLabel
                           : (controller.chipBorderRadius?.toStringAsFixed(0) ??
                               '')
                       : 'stadium',
@@ -282,7 +319,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius'),
+          title: const Text('Border radius, follows global to max 10'),
           subtitle: Slider.adaptive(
             min: -1,
             max: 12,
@@ -290,7 +327,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.popupMenuBorderRadius == null ||
                         (controller.popupMenuBorderRadius ?? -1) < 0
-                    ? 'default 10'
+                    ? popupMenuDefaultLabel
                     : (controller.popupMenuBorderRadius?.toStringAsFixed(0) ??
                         '')
                 : 'default 4',
@@ -317,7 +354,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.popupMenuBorderRadius == null ||
                               (controller.popupMenuBorderRadius ?? -1) < 0
-                          ? 'default 10'
+                          ? popupMenuDefaultLabel
                           : (controller.popupMenuBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
@@ -339,10 +376,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             child: PopupMenuShowcase(
               popupRadius:
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.popupMenuBorderRadius == null ||
-                              (controller.popupMenuBorderRadius ?? -1) < 0
-                          ? 10
-                          : (controller.popupMenuBorderRadius ?? 4)
+                      ? popupEffectiveRadius
                       : 4,
             )),
         const Divider(),

@@ -9,6 +9,13 @@ class CardSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String cardRadiusDefaultLabel =
+        controller.cardBorderRadius == null && controller.defaultRadius == null
+            ? 'default 12'
+            : controller.cardBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -29,10 +36,12 @@ class CardSettings extends StatelessWidget {
             min: -1,
             max: 40,
             divisions: 41,
-            label: controller.cardBorderRadius == null ||
-                    (controller.cardBorderRadius ?? -1) < 0
-                ? 'default'
-                : (controller.cardBorderRadius?.toStringAsFixed(0) ?? ''),
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.cardBorderRadius == null ||
+                        (controller.cardBorderRadius ?? -1) < 0
+                    ? cardRadiusDefaultLabel
+                    : (controller.cardBorderRadius?.toStringAsFixed(0) ?? '')
+                : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.cardBorderRadius ?? -1
                 : -1,
@@ -55,7 +64,7 @@ class CardSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.cardBorderRadius == null ||
                               (controller.cardBorderRadius ?? -1) < 0
-                          ? 'default 12'
+                          ? cardRadiusDefaultLabel
                           : (controller.cardBorderRadius?.toStringAsFixed(0) ??
                               '')
                       : 'default 4',

@@ -128,7 +128,7 @@ class DemoApp extends StatelessWidget {
                     // guide values, when available: https://m3.material.io/
                     // If you give it value, "all" Flutter built-in widgets
                     // supporting border radius will use the give radius.
-                    defaultRadius: themeController.cornerRadius,
+                    defaultRadius: themeController.defaultRadius,
                   )
                 : null,
             // Passing in `FlexKeyColors()` to `keyColors` activates Material 3
@@ -186,7 +186,7 @@ class DemoApp extends StatelessWidget {
             ),
             subThemesData: themeController.useSubThemes
                 ? FlexSubThemesData(
-                    defaultRadius: themeController.cornerRadius,
+                    defaultRadius: themeController.defaultRadius,
                   )
                 : null,
             visualDensity: AppData.visualDensity,

@@ -116,7 +116,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             // guide values, when available: https://m3.material.io/
             // If you give it value, "all" Flutter built-in widgets
             // supporting border radius will use the give radius.
-            defaultRadius: controller.cornerRadius,
+            defaultRadius: controller.defaultRadius,
             // Border radius can be customized per widget too, here are
             // examples, it overrides M3 default and global default setting.
             bottomSheetRadius: controller.bottomSheetBorderRadius,
