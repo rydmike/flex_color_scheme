@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5809,6 +5811,7 @@ class FlexColorScheme with Diagnosticable {
           : null,
 
       // TODO(rydmike): Tech debt: Move tooltip themes opt-in to FlexSubThemes.
+      // TODO(rydmike): Offer more tooltip theming options, like tip delays.
       // Opinionated theming of Tooltips, the default theme for Material
       // themed Tooltips are not ideal design choices on desktop and web
       // https://material.io/components/tooltips#specs.
@@ -6007,9 +6010,9 @@ class FlexColorScheme with Diagnosticable {
       popupMenuTheme: useSubThemes
           ? FlexSubThemes.popupMenuTheme(
               radius: subTheme.popupMenuRadius ??
-                  ((subTheme.defaultRadius ?? 16) > 10
-                      ? 10
-                      : subTheme.defaultRadius),
+                  (subTheme.defaultRadius == null
+                      ? null
+                      : math.min(subTheme.defaultRadius!, 10.0)),
               elevation: subTheme.popupMenuElevation,
               color: subTheme.popupMenuOpacity == null
                   ? null

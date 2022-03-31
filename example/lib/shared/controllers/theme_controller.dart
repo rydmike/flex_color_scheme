@@ -76,9 +76,9 @@ class ThemeController with ChangeNotifier {
         Store.keySchemeIndex, Store.defaultSchemeIndex);
     _interactionEffects = await _themeService.load(
         Store.keyInteractionEffects, Store.defaultInteractionEffects);
-    _cornerRadius = await _themeService.load(
-      Store.keyCornerRadius,
-      Store.defaultCornerRadius,
+    _defaultRadius = await _themeService.load(
+      Store.keyDefaultRadius,
+      Store.defaultDefaultRadius,
     );
     _tooltipsMatchBackground = await _themeService.load(
         Store.keyTooltipsMatchBackground, Store.defaultTooltipsMatchBackground);
@@ -432,7 +432,7 @@ class ThemeController with ChangeNotifier {
     await setUsedScheme(Store.defaultUsedScheme, false);
     await setSchemeIndex(Store.defaultSchemeIndex, false);
     await setInteractionEffects(Store.defaultInteractionEffects, false);
-    await setCornerRadius(Store.defaultCornerRadius, false);
+    await setDefaultRadius(Store.defaultDefaultRadius, false);
     await setTooltipsMatchBackground(
         Store.defaultTooltipsMatchBackground, false);
     //
@@ -766,13 +766,13 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyInteractionEffects, value);
   }
 
-  late double? _cornerRadius;
-  double? get cornerRadius => _cornerRadius;
-  Future<void> setCornerRadius(double? value, [bool notify = true]) async {
-    if (value == _cornerRadius) return;
-    _cornerRadius = value;
+  late double? _defaultRadius;
+  double? get defaultRadius => _defaultRadius;
+  Future<void> setDefaultRadius(double? value, [bool notify = true]) async {
+    if (value == _defaultRadius) return;
+    _defaultRadius = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyCornerRadius, value);
+    await _themeService.save(Store.keyDefaultRadius, value);
   }
 
   late bool _tooltipsMatchBackground;

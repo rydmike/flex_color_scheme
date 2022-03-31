@@ -365,7 +365,7 @@ class PopupMenuShowcase extends StatelessWidget {
   const PopupMenuShowcase({
     Key? key,
     this.enabled = true,
-    this.popupRadius = 10,
+    this.popupRadius = 4,
   }) : super(key: key);
   final bool enabled;
   final double popupRadius;
@@ -387,7 +387,7 @@ class _PopupMenuButton extends StatelessWidget {
   const _PopupMenuButton({
     Key? key,
     this.enabled = true,
-    this.radius = 10,
+    this.radius = 4,
   }) : super(key: key);
   final bool enabled;
   final double radius;

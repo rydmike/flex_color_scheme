@@ -76,17 +76,17 @@ class ComponentThemes extends StatelessWidget {
             max: 40,
             divisions: 41,
             label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.cornerRadius == null ||
-                        (controller.cornerRadius ?? -1) < 0
+                ? controller.defaultRadius == null ||
+                        (controller.defaultRadius ?? -1) < 0
                     ? 'default'
-                    : (controller.cornerRadius?.toStringAsFixed(0) ?? '')
+                    : (controller.defaultRadius?.toStringAsFixed(0) ?? '')
                 : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.cornerRadius ?? -1
+                ? controller.defaultRadius ?? -1
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setCornerRadius(value < 0 ? null : value);
+                    controller.setDefaultRadius(value < 0 ? null : value);
                   }
                 : null,
           ),
@@ -101,10 +101,10 @@ class ComponentThemes extends StatelessWidget {
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.cornerRadius == null ||
-                              (controller.cornerRadius ?? -1) < 0
+                      ? controller.defaultRadius == null ||
+                              (controller.defaultRadius ?? -1) < 0
                           ? 'default'
-                          : (controller.cornerRadius?.toStringAsFixed(0) ?? '')
+                          : (controller.defaultRadius?.toStringAsFixed(0) ?? '')
                       : 'default 4',
                   style: Theme.of(context)
                       .textTheme

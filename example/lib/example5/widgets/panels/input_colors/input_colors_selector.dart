@@ -102,7 +102,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                           widget.controller.useFlexColorScheme
                       // M3 default for Card is 12.
                       ? (widget.controller.cardBorderRadius ??
-                          widget.controller.cornerRadius ??
+                          widget.controller.defaultRadius ??
                           12)
                       // M2 default for Card.
                       : 4,

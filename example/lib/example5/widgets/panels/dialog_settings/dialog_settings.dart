@@ -11,6 +11,14 @@ class DialogSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String dialogRadiusDefaultLabel =
+        controller.dialogBorderRadius == null &&
+                controller.defaultRadius == null
+            ? 'default 28'
+            : controller.dialogBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -49,7 +57,7 @@ class DialogSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.dialogBorderRadius == null ||
                         (controller.dialogBorderRadius ?? -1) < 0
-                    ? 'default 28'
+                    ? dialogRadiusDefaultLabel
                     : (controller.dialogBorderRadius?.toStringAsFixed(0) ?? '')
                 : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
@@ -74,7 +82,7 @@ class DialogSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.dialogBorderRadius == null ||
                               (controller.dialogBorderRadius ?? -1) < 0
-                          ? 'default 28'
+                          ? dialogRadiusDefaultLabel
                           : (controller.dialogBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
