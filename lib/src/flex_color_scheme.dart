@@ -6131,7 +6131,10 @@ class FlexColorScheme with Diagnosticable {
               opacity: subTheme.navigationBarOpacity,
               height: subTheme.navigationBarHeight,
               labelBehavior: subTheme.navigationBarLabelBehavior,
-              indicatorAlpha: kNavigationBarIndicatorAlpha,
+              indicatorAlpha: subTheme.navigationBarHighlightOpacity != null
+                  ? Color.getAlphaFromOpacity(
+                      subTheme.navigationBarHighlightOpacity!)
+                  : null,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
               useFlutterDefaults: subTheme.useFlutterDefaults,
@@ -6167,7 +6170,10 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.navigationRailElevation,
               labelType: subTheme.navigationRailLabelType,
               groupAlignment: subTheme.navigationRailGroupAlignment,
-              indicatorAlpha: kNavigationBarIndicatorAlpha,
+              indicatorAlpha: subTheme.navigationRailIndicatorOpacity != null
+                  ? Color.getAlphaFromOpacity(
+                      subTheme.navigationRailIndicatorOpacity!)
+                  : null,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
