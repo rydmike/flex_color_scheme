@@ -26,19 +26,49 @@ class NavigationBarSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double navBarOpacity = controller.useSubThemes &&
-            controller.useFlexColorScheme &&
-            controller.navBarBackgroundSchemeColor?.index != null
-        ? controller.navBarOpacity
-        : 1;
+    final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
+            (controller.useFlutterDefaults &&
+                controller.navBarIndicatorSchemeColor == null))
+        ? 'null (onSurface)'
+        : 'null (primary)';
+    final String labelForDefaultSelectedItem =
+        (!controller.useFlexColorScheme ||
+                (controller.useFlutterDefaults &&
+                    controller.navBarSelectedSchemeColor == null &&
+                    controller.navBarUnselectedSchemeColor == null))
+            ? 'null (onSurface)'
+            : 'null (primary)';
+    final bool muteUnselectedEnabled = controller.useSubThemes &&
+        controller.useFlexColorScheme &&
+        !(controller.useFlutterDefaults &&
+            controller.navBarSelectedSchemeColor == null &&
+            controller.navBarUnselectedSchemeColor == null);
+    final String labelForDefaultUnelectedItem =
+        (!controller.useFlexColorScheme ||
+                !controller.useSubThemes ||
+                (controller.useFlutterDefaults &&
+                    controller.navBarSelectedSchemeColor == null &&
+                    controller.navBarUnselectedSchemeColor == null))
+            ? 'null (onSurface)'
+            : controller.navBarMuteUnselected && muteUnselectedEnabled
+                ? 'null (onSurface, blend & opacity)'
+                : 'null (onSurface)';
+    final bool navBarOpacityEnabled = controller.useSubThemes &&
+        controller.useFlexColorScheme &&
+        !(controller.navBarBackgroundSchemeColor == null &&
+            controller.useFlutterDefaults);
+    final double navBarOpacity =
+        navBarOpacityEnabled ? controller.navBarOpacity : 1;
+
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: controller.useFlutterDefaults ||
-                  !controller.useSubThemes ||
-                  !controller.useFlexColorScheme
+          labelForDefault: !controller.useSubThemes ||
+                  !controller.useFlexColorScheme ||
+                  (controller.useFlutterDefaults &&
+                      controller.navBarBackgroundSchemeColor == null)
               ? 'null (surface with onSurface overlay)'
               : 'null (background)',
           index: controller.navBarBackgroundSchemeColor?.index ?? -1,
@@ -54,18 +84,14 @@ class NavigationBarSettings extends StatelessWidget {
               : null,
         ),
         ListTile(
-          enabled: controller.useSubThemes &&
-              controller.useFlexColorScheme &&
-              controller.navBarBackgroundSchemeColor?.index != null,
+          enabled: navBarOpacityEnabled,
           title: const Text('Background opacity'),
           subtitle: Slider.adaptive(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
             value: navBarOpacity * 100,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.navBarBackgroundSchemeColor?.index != null
+            onChanged: navBarOpacityEnabled
                 ? (double value) {
                     controller.setNavBarOpacity(value / 100);
                   }
@@ -102,7 +128,9 @@ class NavigationBarSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.navBarHeight == null ||
                         (controller.navBarHeight ?? 54) < 55
-                    ? 'default 62'
+                    ? controller.useFlutterDefaults
+                        ? 'default 80'
+                        : 'default 62'
                     : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
                 : 'default 80',
             value: controller.useSubThemes && controller.useFlexColorScheme
@@ -127,7 +155,9 @@ class NavigationBarSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.navBarHeight == null ||
                               (controller.navBarHeight ?? 54) < 55
-                          ? 'default 62'
+                          ? controller.useFlutterDefaults
+                              ? 'default 80'
+                              : 'default 62'
                           : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
                       : 'default 80',
                   style: Theme.of(context)
@@ -141,7 +171,7 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
-          labelForDefault: 'null (secondary)',
+          labelForDefault: labelForDefaultIndicator,
           index: controller.navBarIndicatorSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -156,9 +186,8 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),
-          subtitle: const Text('Shared setting in this app, but APIs have '
-              'own properties'),
-          labelForDefault: 'null (onSurface)',
+          subtitle: const Text('Label and icon, but own properties in API'),
+          labelForDefault: labelForDefaultSelectedItem,
           index: controller.navBarSelectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -173,9 +202,8 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Unselected item color'),
-          subtitle: const Text('Shared setting in this app, but APIs have '
-              'own properties'),
-          labelForDefault: 'null (onSurface)',
+          subtitle: const Text('Label and icon, but own properties in API'),
+          labelForDefault: labelForDefaultUnelectedItem,
           index: controller.navBarUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -190,14 +218,12 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           title: const Text('Mute unselected items'),
-          subtitle: const Text('Unselected icon and text are less bright.\n'
-              'Shared setting in this app, but APIs have own properties'),
-          value: controller.navBarMuteUnselected &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setNavBarMuteUnselected
-              : null,
+          subtitle: const Text('Unselected icon and text are less bright, '
+              'Shared setting for icon and text, but separate properties '
+              'in API'),
+          value: controller.navBarMuteUnselected && muteUnselectedEnabled,
+          onChanged:
+              muteUnselectedEnabled ? controller.setNavBarMuteUnselected : null,
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -218,7 +244,23 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         const NavigationBarShowcase(),
         const Divider(height: 1),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
+        SwitchListTileAdaptive(
+          title: const Text('Use Flutter defaults'),
+          subtitle: const Text('Undefined values will fall back to '
+              'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
+              'Here, both selected and unselected color have to be null before '
+              'the item colors can fall back to Flutter defaults. '
+              'This setting affects many component themes that implement it. '
+              'It is included on panels where it has an impact. '
+              'See API docs for more info.'),
+          value: controller.useFlutterDefaults &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setUseFlutterDefaults
+              : null,
+        ),
       ],
     );
   }

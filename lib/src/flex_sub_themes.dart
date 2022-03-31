@@ -631,7 +631,6 @@ class FlexSubThemes {
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
-    // final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
 
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
@@ -1937,22 +1936,19 @@ class FlexSubThemes {
 
     /// Optional text style for the [BottomNavigationBar] labels.
     ///
-    /// If null, it is kept as null if all text styling properties are
-    /// also null, resulting in default SDK text style being used by the
-    /// [BottomNavigationBar] widget.
-    ///
-    /// If null, but if any of the text styling properties for size and colors
-    /// are defined a default TextStyle() is created that will get the
-    /// effective sizes and colors applied. This optional TextStyle is useful
+    /// If null, a default TextStyle() is created that will get the
+    /// provided sizes and colors applied. Providing a TextStyle is useful
     /// when you want to apply a custom font or adjust letter spacing and
-    /// baseline.
+    /// baseline, or font weight.
     ///
-    /// FlexColorScheme uses [TextTheme.bodyMedium] as its base text style,
-    /// which has size 14dp.
     /// The size is first controlled by the label size
     /// parameters if provided. If not provided, it uses the text style font
     /// size, if font size  has no size, selected item defaults to 14dp, and
     /// unselected items, defaults to 12dp as fallback values.
+    /// The text style provides the font, weight and letter spacing.
+    ///
+    /// FlexColorScheme uses [TextTheme.bodyMedium] as its base text style,
+    /// which has size 14dp.
     ///
     /// The size and colors defined in any of the text size and color properties
     /// are applied as overrides on the effective text style.
@@ -2172,14 +2168,31 @@ class FlexSubThemes {
     ///
     /// FCS further applies both an alpha blend and slight opacity to
     /// unselected icon and unselected label, but only if
-    /// [mutedUnselectedLabel] is true, this also applies to undefined
-    /// color inputs.
+    /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
+    /// this also applies to undefined color inputs.
     /// ```
     final bool useFlutterDefaults = false,
   }) {
+    // Determine if we can even use default text styles, only when all are null,
+    // can we fall back to Flutter SDK default.
+    final bool useDefaultTextStyle = labelTextStyle == null &&
+        selectedLabelSize == null &&
+        unselectedLabelSize == null &&
+        selectedLabelSchemeColor == null &&
+        unselectedLabelSchemeColor == null &&
+        useFlutterDefaults;
+
+    // Determine if we can even use default icon styles, only when all are null,
+    // can we fall back to Flutter SDK default.
+    final bool useDefaultIconTheme = selectedIconSize == null &&
+        unselectedIconSize == null &&
+        selectedIconSchemeColor == null &&
+        unselectedIconSchemeColor == null &&
+        useFlutterDefaults;
+
     // Get text color, defaults to primary.
     final Color labelColor = selectedLabelSchemeColor == null
-        ? useFlutterDefaults && colorScheme.brightness == Brightness.dark
+        ? colorScheme.brightness == Brightness.dark && useDefaultTextStyle
             ? colorScheme.secondary
             : colorScheme.primary
         : schemeColor(selectedLabelSchemeColor, colorScheme);
@@ -2200,18 +2213,9 @@ class FlexSubThemes {
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? math.max(labelSize - 2, 8);
 
-    // Determine if we should use default text style when all are null,
-    // meaning we fall back to Flutter SDK default.
-    final bool useDefaultTextStyle = labelTextStyle == null &&
-        selectedLabelSize == null &&
-        unselectedLabelSize == null &&
-        selectedLabelSchemeColor == null &&
-        unselectedLabelSchemeColor == null &&
-        useFlutterDefaults;
-
     // Get icon color, defaults to primary.
     final Color iconColor = selectedIconSchemeColor == null
-        ? useFlutterDefaults && colorScheme.brightness == Brightness.dark
+        ? useDefaultIconTheme && colorScheme.brightness == Brightness.dark
             ? colorScheme.secondary
             : colorScheme.primary
         : schemeColor(selectedIconSchemeColor, colorScheme);
@@ -2225,18 +2229,17 @@ class FlexSubThemes {
     final double iconSize = selectedIconSize ?? 24;
     final double effectiveUnselectedIconSize = unselectedIconSize ?? iconSize;
 
-    // Determine if we should use default icon style when all are null,
-    // meaning we fall back to Flutter SDK default.
-    final bool useDefaultIconTheme = selectedIconSize == null &&
-        unselectedIconSize == null &&
-        selectedIconSchemeColor == null &&
-        unselectedIconSchemeColor == null &&
-        useFlutterDefaults;
+    // Background color, when using normal default, falls back to background.
+    final Color backgroundColor = schemeColor(
+            backgroundSchemeColor ?? SchemeColor.background, colorScheme)
+        .withOpacity(opacity);
 
     return BottomNavigationBarThemeData(
-      backgroundColor: backgroundSchemeColor != null
-          ? schemeColor(backgroundSchemeColor, colorScheme).withOpacity(opacity)
-          : null,
+      backgroundColor: backgroundSchemeColor == null
+          ? useFlutterDefaults
+              ? null
+              : backgroundColor
+          : backgroundColor,
       elevation: elevation,
       unselectedIconTheme: useDefaultIconTheme
           ? null
@@ -2317,23 +2320,19 @@ class FlexSubThemes {
 
     /// Optional text style for the [NavigationBar] labels.
     ///
-    /// If null, it is kept as null if all text styling properties are
-    /// also null, resulting in default SDK text style being used by the
-    /// [NavigationBar] widget.
-    ///
-    /// If null, but if any of the text styling properties for size and colors
-    /// are defined a default TextStyle() is created that will get the
-    /// effective sizes and colors applied. This optional TextStyle is useful
+    /// If null, a default TextStyle() is created that will get the
+    /// provided sizes and colors applied. Providing a TextStyle is useful
     /// when you want to apply a custom font or adjust letter spacing and
-    /// baseline.
+    /// baseline, or font weight.
+    ///
+    /// The size is first controlled by the label size parameters if provided.
+    /// If not provided, it uses the text style font size, if font size has no
+    /// size information, it defaults to 14dp. The text style provides the
+    /// font, weight and letter spacing.
     ///
     /// Flutter SDK defaults to using the [Theme]'s [TextTheme.overline] which
     /// is size 10dp. FlexColorScheme uses [TextTheme.labelSmall], which
     /// has size 11dp, which is a more appropriate size for the text.
-    /// The size is first controlled by the label size
-    /// parameters if provided. If not provided, it uses the text style font
-    /// size, if font size has no size, it defaults to 14dp.
-    /// The text style provides the font and letter spacing.
     ///
     /// The size and colors defined in any of the text size and color properties
     /// are applied as overrides on the effective text style.
@@ -2492,10 +2491,11 @@ class FlexSubThemes {
 
     /// NavigationBar height.
     ///
-    /// If null, defaults to 80 dp via widget default height design.
+    /// If null and [useFlutterDefault] is true, then defaults to 80 dp
+    /// via widget default height design when, via using null as themed height.
     ///
-    /// The styled opinionated reduced height is kNavigationBarHeight = 62 dp
-    /// which is assigned by FlexColorScheme when it makes th style theme.
+    /// If null and [useFlutterDefault] is false, then defaults to
+    /// [kNavigationBarHeight] 62dp.
     final double? height,
 
     /// Specifies when each [NavigationDestination]'s label should appear.
@@ -2548,14 +2548,47 @@ class FlexSubThemes {
     /// theme starting point. This flag may be helpful if you want to create
     /// custom sub-themes starting from less opinionated settings.
     ///
-    /// Differences when flag is false versus true are:
+    /// When all required properties are undefined and flag is false or true,
+    /// the effective default styles for undefined inputs become:
     ///
-    // TODO(rydmike): Add useFlutterDefaults flag state differences to doc.
+    /// ```
+    ///                    FCS defaults  Flutter defaults
+    /// useFlutterDefaults false         true
+    /// - background       background    surface, with onSurface overlay elev 3.
+    /// - height           62            80
+    /// - indicator        primary       secondary
+    /// - selected icon    primary       onSurface
+    /// - Selected label   primary       onSurface
+    /// - unselected icon  onSurface     onSurface
+    /// - unSelected label onSurface     onSurface
+    ///
+    /// FCS further applies both an alpha blend and slight opacity to
+    /// unselected icon and unselected label, but only if
+    /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
+    /// this also applies to undefined color inputs.
+    /// ```
     final bool useFlutterDefaults = false,
   }) {
-    // Get text color, defaults to onSurface.
+    // Determine if we can even use default icon styles, only when all are null,
+    // can we fall back to Flutter SDK default.
+    final bool useDefaultTextStyle = labelTextStyle == null &&
+        selectedLabelSize == null &&
+        unselectedLabelSize == null &&
+        selectedLabelSchemeColor == null &&
+        unselectedLabelSchemeColor == null &&
+        useFlutterDefaults;
+
+    // Determine if we can even use default icon styles, only when all are null,
+    // can we fall back to Flutter SDK default.
+    final bool useDefaultIconTheme = selectedIconSize == null &&
+        unselectedIconSize == null &&
+        selectedIconSchemeColor == null &&
+        unselectedIconSchemeColor == null &&
+        useFlutterDefaults;
+
+    // Get text color, defaults to primary.
     final Color labelColor = selectedLabelSchemeColor == null
-        ? colorScheme.onSurface
+        ? colorScheme.primary
         : schemeColor(selectedLabelSchemeColor, colorScheme);
 
     // Get unselected label color, defaults to colorScheme.onSurface
@@ -2572,18 +2605,9 @@ class FlexSubThemes {
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? labelSize;
 
-    // Determine if we should use a custom text style at all, if these props
-    // are null, we should not and just fall back to widget defaults.
-    final bool useTextStyle = labelTextStyle != null ||
-        selectedLabelSize != null ||
-        unselectedLabelSize != null ||
-        selectedLabelSchemeColor != null ||
-        unselectedLabelSchemeColor != null ||
-        (mutedUnselectedLabel ?? false);
-
-    // Get icon color, default to onSurface.
+    // Get icon color, default to primary.
     final Color iconColor = selectedIconSchemeColor == null
-        ? colorScheme.onSurface
+        ? colorScheme.primary
         : schemeColor(selectedIconSchemeColor, colorScheme);
 
     // Get unselected icon color, defaults to onSurface.
@@ -2595,25 +2619,31 @@ class FlexSubThemes {
     final double iconSize = selectedIconSize ?? 24;
     final double effectiveUnselectedIconSize = unselectedIconSize ?? iconSize;
 
-    // Determine if we should use a custom icon theme at all, if these props
-    // are null, we should not and just fall back to widget defaults.
-    final bool useIconTheme = selectedIconSize != null ||
-        unselectedIconSize != null ||
-        selectedIconSchemeColor != null ||
-        unselectedIconSchemeColor != null ||
-        (mutedUnselectedIcon ?? false);
+    // Background color, when using normal default, falls back to background.
+    final Color backgroundColor = schemeColor(
+            backgroundSchemeColor ?? SchemeColor.background, colorScheme)
+        .withOpacity(opacity);
+
+    // Indicator color, when using normal default, falls back to primary.
+    final Color indicatorColor =
+        schemeColor(highlightSchemeColor ?? SchemeColor.primary, colorScheme)
+            .withAlpha(indicatorAlpha);
 
     return NavigationBarThemeData(
-      height: height,
-      backgroundColor: backgroundSchemeColor != null
-          ? schemeColor(backgroundSchemeColor, colorScheme).withOpacity(opacity)
-          : null,
-      indicatorColor: highlightSchemeColor != null
-          ? schemeColor(highlightSchemeColor, colorScheme)
-              .withAlpha(indicatorAlpha)
-          : null,
-      labelTextStyle: useTextStyle
-          ? MaterialStateProperty.resolveWith<TextStyle>(
+      height: height ?? (useFlutterDefaults ? null : kNavigationBarHeight),
+      backgroundColor: backgroundSchemeColor == null
+          ? useFlutterDefaults
+              ? null
+              : backgroundColor
+          : backgroundColor,
+      indicatorColor: highlightSchemeColor == null
+          ? useFlutterDefaults
+              ? null
+              : indicatorColor
+          : indicatorColor,
+      labelTextStyle: useDefaultTextStyle
+          ? null
+          : MaterialStateProperty.resolveWith<TextStyle>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
                   return textStyle.copyWith(
@@ -2631,10 +2661,10 @@ class FlexSubThemes {
                       : unselectedLabelColor,
                 );
               },
-            )
-          : null,
-      iconTheme: useIconTheme
-          ? MaterialStateProperty.resolveWith<IconThemeData>(
+            ),
+      iconTheme: useDefaultIconTheme
+          ? null
+          : MaterialStateProperty.resolveWith<IconThemeData>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
                   return IconThemeData(
@@ -2651,8 +2681,7 @@ class FlexSubThemes {
                       : unselectedIconColor,
                 );
               },
-            )
-          : null,
+            ),
       labelBehavior: labelBehavior,
     );
   }
@@ -2682,22 +2711,18 @@ class FlexSubThemes {
 
     /// Optional text style for the [NavigationRail] labels.
     ///
-    /// If null, it is kept as null if all text styling properties are
-    /// also null, resulting in default SDK text style being used by the
-    /// [NavigationRail] widget.
-    ///
-    /// If null, but if any of the text styling properties for size and colors
-    /// are defined a default TextStyle() is created that will get the
-    /// effective sizes and colors applied. This optional TextStyle is useful
+    /// If null, a default TextStyle() is created that will get the
+    /// provided sizes and colors applied. Providing a TextStyle is useful
     /// when you want to apply a custom font or adjust letter spacing and
-    /// baseline.
+    /// baseline, or font weight.
+    ///
+    /// The size is first controlled by the label size
+    /// parameters if provided. If not provided, it uses the text style font
+    /// size, if font size has no size, it defaults to 14dp.
     ///
     /// Flutter SDK defaults to using the [Theme]'s [TextTheme.bodyText1] which
     /// is size 16dp. FlexColorScheme uses bodyMedium, which has size 14dp,
     /// which is a more appropriate size for the rail's text.
-    /// The size is first controlled by the label size
-    /// parameters if provided. If not provided, it uses the text style font
-    /// size, if font size  has no size, it defaults to 14dp.
     ///
     /// The size and colors defined in any of the text size and color properties
     /// are applied as overrides on the effective text style.

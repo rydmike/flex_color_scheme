@@ -112,6 +112,7 @@ void main() {
         equals(
           const BottomNavigationBarThemeData(
             elevation: 0,
+            backgroundColor: Colors.white,
             selectedIconTheme: IconThemeData(
                 color: Color(0xff6200ee), opacity: 1.0, size: 24.0),
             unselectedIconTheme: IconThemeData(
@@ -127,7 +128,7 @@ void main() {
       );
     });
     test(
-        'FST1.02-fcs-default-light: GIVEN a default LIGHT '
+        'FST1.02-fcs-default-dark: GIVEN a default DARK '
         'FlexSubTheme.bottomNavigationBar() with FCS default '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -140,6 +141,7 @@ void main() {
         equals(
           const BottomNavigationBarThemeData(
             elevation: 0,
+            backgroundColor: Color(0xff121212),
             selectedIconTheme: IconThemeData(
                 color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
             unselectedIconTheme: IconThemeData(
@@ -1259,7 +1261,7 @@ void main() {
       );
     });
     test(
-        'FST1.09custom: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'FST1.09custom-1: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -1313,6 +1315,71 @@ void main() {
                   }
                   if (states.contains(MaterialState.pressed)) {
                     return colorScheme.onPrimary.withAlpha(0x33);
+                  }
+                  return Colors.transparent;
+                },
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.09custom-2: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'EXPECT equal to ElevatedButtonThemeData() version with '
+        'same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+                colorScheme: colorScheme,
+                baseSchemeColor: SchemeColor.tertiary,
+                elevation: 1,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                minButtonSize: const Size(55, 55),
+                radius: 12)
+            .toString(),
+        equalsIgnoringHashCodes(
+          ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(55, 55),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
+                ),
+              ), //buttonShape,
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              elevation: 1,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.tertiary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.onTertiary;
+                },
+              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.tertiary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x31);
+                  }
+                  return colorScheme.tertiary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.onTertiary.withAlpha(0x0D);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.onTertiary.withAlpha(0x26);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onTertiary.withAlpha(0x33);
                   }
                   return Colors.transparent;
                 },
@@ -1489,6 +1556,87 @@ void main() {
         )),
       );
     });
+    test(
+        'FST1.10-custom: GIVEN a default FlexSubTheme.outlinedButtonTheme() '
+        'EXPECT '
+        'equal to OutlinedButtonThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primaryContainer,
+          padding: const EdgeInsets.symmetric(horizontal: 17),
+          minButtonSize: const Size(52, 40),
+          radius: 13,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size(52, 40),
+              padding: const EdgeInsets.symmetric(horizontal: 17),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(13),
+                ),
+              ), //buttonShape,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.primaryContainer
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.primaryContainer;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primaryContainer.withAlpha(0x0D);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primaryContainer.withAlpha(0x26);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.primaryContainer.withAlpha(0x33);
+                  }
+                  return Colors.transparent;
+                },
+              ),
+              side: MaterialStateProperty.resolveWith<BorderSide?>(
+                (final Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return BorderSide(
+                      color: colorScheme.primaryContainer
+                          .blendAlpha(colorScheme.onSurface, 0x66)
+                          .withAlpha(0x31),
+                      width: 1.5,
+                    );
+                  }
+                  if (states.contains(MaterialState.error)) {
+                    return BorderSide(
+                      color: colorScheme.error,
+                      width: 2,
+                    );
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return BorderSide(
+                      color: colorScheme.primaryContainer,
+                      width: 2,
+                    );
+                  }
+                  return BorderSide(
+                    color: colorScheme.primaryContainer.withAlpha(0xA7),
+                    width: 1.5,
+                  );
+                },
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
     // -------------------------------------------------------------------------
     // FlexSubThemes TextButton tests
     // -------------------------------------------------------------------------
@@ -1586,6 +1734,54 @@ void main() {
         equals(Colors.transparent),
       );
     });
+    test(
+        'FST1.11-base-color: GIVEN a default FlexSubTheme.textButtonTheme() '
+        'EXPECT equal to TextButtonThemeData() version with same color', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          TextButtonThemeData(
+            style: TextButton.styleFrom(
+              minimumSize: const Size(40, 40),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ), // buttonShape,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.secondary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.secondary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.secondary.withAlpha(0x0D);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.secondary.withAlpha(0x26);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.secondary.withAlpha(0x33);
+                  }
+                  return Colors.transparent;
+                },
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
     // TODO(rydmike): Monitor Flutter SDK deprecation of ButtonThemeData.
     // -------------------------------------------------------------------------
     // FlexSubThemes old material buttons theme tests
@@ -1673,6 +1869,48 @@ void main() {
         ),
       );
     });
+    test(
+        'FST1.12-base-color: GIVEN a default FlexSubTheme.buttonTheme() '
+        'EXPECT equal to ButtonThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.buttonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+        ),
+        equals(
+          ButtonThemeData(
+            colorScheme: colorScheme,
+            minWidth: 40,
+            height: 40,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            layoutBehavior: ButtonBarLayoutBehavior.constrained,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            hoverColor: colorScheme.secondary
+                .blendAlpha(Colors.white, 0x40)
+                .withAlpha(0x19),
+            focusColor: colorScheme.secondary
+                .blendAlpha(Colors.white, 0x4C)
+                .withAlpha(0x4C),
+            highlightColor: colorScheme.secondary
+                .blendAlpha(Colors.white, 0x40)
+                .withAlpha(0x19),
+            splashColor: colorScheme.secondary
+                .blendAlpha(Colors.white, 0x1F)
+                .withAlpha(0x33),
+            disabledColor: colorScheme.secondary
+                .blendAlpha(colorScheme.onSurface, 0x66)
+                .withAlpha(0x31),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
+            textTheme: ButtonTextTheme.primary,
+          ),
+        ),
+      );
+    });
     // -------------------------------------------------------------------------
     // FlexSubThemes ToggleButtons tests
     // -------------------------------------------------------------------------
@@ -1708,6 +1946,53 @@ void main() {
                 .blendAlpha(colorScheme.onSurface, 0x66)
                 .withAlpha(0x5E),
             disabledBorderColor: colorScheme.primary
+                .blendAlpha(colorScheme.onSurface, 0x66)
+                .withAlpha(0x31),
+            borderRadius: BorderRadius.circular(20),
+            constraints: BoxConstraints(
+              minWidth: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dx,
+              minHeight: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dy,
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.13-base-color: GIVEN a default FlexSubTheme.toggleButtonsTheme() '
+        'EXPECT '
+        'equal to ToggleButtonsThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final VisualDensity visualDensity = VisualDensity.adaptivePlatformDensity;
+      expect(
+        FlexSubThemes.toggleButtonsTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+        ),
+        equals(
+          ToggleButtonsThemeData(
+            borderWidth: 1.5,
+            selectedColor: colorScheme.onSecondary.withAlpha(0xE5),
+            color: colorScheme.secondary,
+            fillColor: colorScheme.secondary.blendAlpha(Colors.white, 0x19),
+            borderColor: colorScheme.secondary.withAlpha(0xA7),
+            selectedBorderColor:
+                colorScheme.secondary.blendAlpha(Colors.white, 0x19),
+            hoverColor: colorScheme.secondary
+                .blendAlpha(Colors.white, 0x40 + 0x19)
+                .withAlpha(0x19),
+            focusColor: colorScheme.secondary
+                .blendAlpha(Colors.white, 0x4C + 0x19)
+                .withAlpha(0x4C),
+            highlightColor: colorScheme.secondary
+                .blendAlpha(Colors.white, 0x40 + 0x19)
+                .withAlpha(0x19),
+            splashColor: colorScheme.secondary
+                .blendAlpha(Colors.white, 0x1F + 0x19)
+                .withAlpha(0x33),
+            disabledColor: colorScheme.secondary
+                .blendAlpha(colorScheme.onSurface, 0x66)
+                .withAlpha(0x5E),
+            disabledBorderColor: colorScheme.secondary
                 .blendAlpha(colorScheme.onSurface, 0x66)
                 .withAlpha(0x31),
             borderRadius: BorderRadius.circular(20),
@@ -1908,6 +2193,7 @@ void main() {
       expect(
         FlexSubThemes.navigationBarTheme(
           colorScheme: colorScheme,
+          useFlutterDefaults: true,
         ),
         equals(
           const NavigationBarThemeData(
@@ -1949,6 +2235,7 @@ void main() {
         equalsIgnoringHashCodes(
           NavigationBarThemeData(
             height: 80,
+            backgroundColor: colorScheme.background.withOpacity(0.9),
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             indicatorColor: colorScheme.secondaryContainer.withAlpha(0x3D),
             labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(

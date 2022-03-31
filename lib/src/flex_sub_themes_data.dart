@@ -353,17 +353,27 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// FCS further applies both an alpha blend and slight opacity to
   /// unselected icon and unselected label, but only if
-  /// [mutedUnselectedLabel] is true, this also applies to undefined
-  /// color inputs.
+  /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
+  /// this also applies to undefined color inputs.
   /// ```
   ///
   /// Impact on [NavigationBarThemeData] sub-theming:
   ///
   /// ```
-  ///                    FCS defaults   Flutter defaults
-  /// useFlutterDefaults false          true
-  /// - background       background     surface, with onSurface overlay elev 3.
-  /// - height           62             80
+  ///                    FCS defaults  Flutter defaults
+  /// useFlutterDefaults false         true
+  /// - background       background    surface, with onSurface overlay elev 3.
+  /// - height           62            80
+  /// - indicator        primary       secondary
+  /// - selected icon    primary       onSurface
+  /// - Selected label   primary       onSurface
+  /// - unselected icon  onSurface     onSurface
+  /// - unSelected label onSurface     onSurface
+  ///
+  /// FCS further applies both an alpha blend and slight opacity to
+  /// unselected icon and unselected label, but only if
+  /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
+  /// this also applies to undefined color inputs.
   /// ```
   ///
   /// Impact on [NavigationRailThemeData] sub-theming:
