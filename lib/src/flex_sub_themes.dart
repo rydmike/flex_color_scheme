@@ -2509,14 +2509,12 @@ class FlexSubThemes {
     /// The alpha value used on selection color of the selection indicator on
     /// the [NavigationBar].
     ///
-    /// Defaults to [kNavigationBarIndicatorAlpha], which is 0x3D = 61 = 24%.
+    /// If not defined defaults to [kNavigationBarIndicatorAlpha],
+    /// which is 0x3D = 61 = 24%.
     ///
     /// The default is the same value as Widget SDK default behavior uses on its
     /// used secondary color on its indicator color on the [NavigationBar].
-    ///
-    /// This setting is not exposed via [FlexSubThemesData], but can be if
-    /// needed later.
-    final int indicatorAlpha = kNavigationBarIndicatorAlpha,
+    final int? indicatorAlpha,
 
     /// The icon color alpha blend value for unselected items, used on icon when
     /// [mutedUnselectedIcon] is true and on label when
@@ -2628,7 +2626,7 @@ class FlexSubThemes {
     // Indicator color, when using normal default, falls back to primary.
     final Color indicatorColor =
         schemeColor(highlightSchemeColor ?? SchemeColor.primary, colorScheme)
-            .withAlpha(indicatorAlpha);
+            .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
 
     return NavigationBarThemeData(
       height: height ?? (useFlutterDefaults ? null : kNavigationBarHeight),
@@ -2917,15 +2915,14 @@ class FlexSubThemes {
     /// The alpha value used on selection color of the selection indicator on
     /// the [NavigationRail].
     ///
-    /// Defaults to [kNavigationBarIndicatorAlpha], which is 0x3D = 61 = 24%.
+    /// I undefined, defaults to [kNavigationBarIndicatorAlpha],
+    /// which is 0x3D = 61 = 24%.
     ///
     /// The default is the same value as Widget SDK default behavior uses on its
     /// used secondary color on its indicator color on the [NavigationBar],
     /// here we use same value on the [NavigationRail].
-    ///
-    /// This setting is not exposed via [FlexSubThemesData], but can be if
     /// needed later.
-    final int indicatorAlpha = kNavigationBarIndicatorAlpha,
+    final int? indicatorAlpha,
 
     /// The icon color alpha blend value for unselected items, used on icon when
     /// [mutedUnselectedIcon] is true and on label when
@@ -3045,7 +3042,7 @@ class FlexSubThemes {
                     ? SchemeColor.secondary
                     : SchemeColor.primary),
             colorScheme)
-        .withAlpha(indicatorAlpha);
+        .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
 
     // Effective usage value for indicator.
     final bool effectiveUseIndicator =
