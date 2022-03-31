@@ -6107,7 +6107,9 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.navigationBarTheme(
               colorScheme: colorScheme,
               labelTextStyle: subTheme.navigationBarLabelTextStyle ??
-                  effectiveTextTheme.labelSmall,
+                  (subTheme.useFlutterDefaults
+                      ? null
+                      : effectiveTextTheme.labelSmall),
               selectedLabelSize: subTheme.navigationBarSelectedLabelSize,
               unselectedLabelSize: subTheme.navigationBarUnselectedLabelSize,
               selectedLabelSchemeColor:

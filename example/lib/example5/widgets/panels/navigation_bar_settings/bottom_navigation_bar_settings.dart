@@ -18,21 +18,32 @@ class BottomNavigationBarSettings extends StatelessWidget {
     final String labelForDefaultSelectedItem = isDark &&
             (!controller.useFlexColorScheme ||
                 (controller.useFlutterDefaults &&
-                    controller.bottomNavBarSelectedSchemeColor == null))
+                    controller.bottomNavBarSelectedSchemeColor == null &&
+                    controller.bottomNavBarUnselectedSchemeColor == null))
         ? 'null (secondary)'
         : 'null (primary)';
+    final bool muteUnselectedEnabled = controller.useSubThemes &&
+        controller.useFlexColorScheme &&
+        !(controller.useFlutterDefaults &&
+            controller.bottomNavBarSelectedSchemeColor == null &&
+            controller.bottomNavBarUnselectedSchemeColor == null);
     final String labelForDefaultUnelectedItem =
         (!controller.useFlexColorScheme ||
                 !controller.useSubThemes ||
                 (controller.useFlutterDefaults &&
+                    controller.bottomNavBarUnselectedSchemeColor == null &&
                     controller.bottomNavBarUnselectedSchemeColor == null))
             ? 'null (onSurface with opacity)'
-            : 'null (onSurface, blend & opacity)';
-    final double navBarOpacity = controller.useSubThemes &&
-            controller.useFlexColorScheme &&
-            controller.bottomNavBarBackgroundSchemeColor?.index != null
-        ? controller.bottomNavigationBarOpacity
-        : 1;
+            : controller.bottomNavBarMuteUnselected && muteUnselectedEnabled
+                ? 'null (onSurface, blend & opacity)'
+                : 'null (onSurface)';
+    final bool navBarOpacityEnabled = controller.useSubThemes &&
+        controller.useFlexColorScheme &&
+        !(controller.bottomNavBarBackgroundSchemeColor == null &&
+            controller.useFlutterDefaults);
+    final double navBarOpacity =
+        navBarOpacityEnabled ? controller.bottomNavigationBarOpacity : 1;
+
     final double navBarElevation =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.bottomNavigationBarElevation
@@ -56,18 +67,14 @@ class BottomNavigationBarSettings extends StatelessWidget {
               : null,
         ),
         ListTile(
-          enabled: controller.useSubThemes &&
-              controller.useFlexColorScheme &&
-              controller.bottomNavBarBackgroundSchemeColor?.index != null,
+          enabled: navBarOpacityEnabled,
           title: const Text('Background opacity'),
           subtitle: Slider.adaptive(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
             value: navBarOpacity * 100,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.bottomNavBarBackgroundSchemeColor?.index != null
+            onChanged: navBarOpacityEnabled
                 ? (double value) {
                     controller.setBottomNavigationBarOpacity(value / 100);
                   }
@@ -160,11 +167,13 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           title: const Text('Mute unselected items'),
-          subtitle: const Text('Unselected icon and text are less bright.\n'),
-          value: controller.bottomNavBarMuteUnselected &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          subtitle: const Text('Unselected icon and text are less bright. '
+              'Shared setting for icon and text, but separate properties '
+              'in API'),
+          value: muteUnselectedEnabled
+              ? controller.bottomNavBarMuteUnselected
+              : !muteUnselectedEnabled,
+          onChanged: muteUnselectedEnabled
               ? controller.setBottomNavBarMuteUnselected
               : null,
         ),
@@ -193,6 +202,10 @@ class BottomNavigationBarSettings extends StatelessWidget {
           title: const Text('Use Flutter defaults'),
           subtitle: const Text('Undefined color values will fall back to '
               'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
+              'Here, both selected and unselected color have to be null before '
+              'the item colors can fall back to Flutter defaults. '
+              'This setting affects many component themes that implement it. '
+              'It is included on panels where it has an impact. '
               'See API docs for more info.'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&

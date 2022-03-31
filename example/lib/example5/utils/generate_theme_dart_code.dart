@@ -373,7 +373,10 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.bottomNavBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedLabel = controller
-          .bottomNavBarMuteUnselected
+              .bottomNavBarMuteUnselected ||
+          (controller.useFlutterDefaults &&
+              controller.bottomNavBarSelectedSchemeColor == null &&
+              controller.bottomNavBarUnselectedSchemeColor == null)
       ? ''
       : '    bottomNavigationBarMutedUnselectedLabel: ${controller.bottomNavBarMuteUnselected},\n';
   final String bottomNavigationBarSelectedIconSchemeColor = controller
@@ -387,7 +390,10 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.bottomNavBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedIcon = controller
-          .bottomNavBarMuteUnselected
+              .bottomNavBarMuteUnselected ||
+          (controller.useFlutterDefaults &&
+              controller.bottomNavBarSelectedSchemeColor == null &&
+              controller.bottomNavBarUnselectedSchemeColor == null)
       ? ''
       : '    bottomNavigationBarMutedUnselectedIcon: ${controller.bottomNavBarMuteUnselected},\n';
   final String bottomNavigationBarBackgroundSchemeColor = controller
@@ -398,7 +404,8 @@ String generateThemeDartCode(ThemeController controller) {
   final String bottomNavigationBarOpacity = controller
                   .bottomNavigationBarOpacity !=
               1 &&
-          controller.bottomNavBarBackgroundSchemeColor?.index != null
+          !(controller.bottomNavBarBackgroundSchemeColor == null &&
+              controller.useFlutterDefaults)
       ? '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity.toStringAsFixed(2)},\n'
       : '';
   final String bottomNavigationBarElevation = controller
@@ -456,7 +463,8 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n'
       : '';
   final String navigationBarOpacity = controller.navBarOpacity != 1 &&
-          controller.navBarBackgroundSchemeColor?.index != null
+          !(controller.navBarBackgroundSchemeColor == null &&
+              controller.useFlutterDefaults)
       ? '    navigationBarOpacity: ${controller.navBarOpacity.toStringAsFixed(2)},\n'
       : '';
   final String navigationBarHeight = controller.navBarHeight != null
@@ -511,7 +519,8 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationRailBackgroundSchemeColor: ${controller.navRailBackgroundSchemeColor},\n'
       : '';
   final String navigationRailOpacity = controller.navRailOpacity != 1 &&
-          controller.navRailBackgroundSchemeColor?.index != null
+          !(controller.navRailBackgroundSchemeColor == null &&
+              controller.useFlutterDefaults)
       ? '    navigationRailOpacity: ${controller.navRailOpacity.toStringAsFixed(2)},\n'
       : '';
   final String navigationRailElevation = controller.navigationRailElevation != 0

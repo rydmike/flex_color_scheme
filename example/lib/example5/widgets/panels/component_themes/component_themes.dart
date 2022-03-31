@@ -152,8 +152,10 @@ class ComponentThemes extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           title: const Text('Use Flutter defaults'),
-          subtitle: const Text('Undefined sub-theme color values will fall '
+          subtitle: const Text('Undefined sub-theme values will fall '
               'back to Flutter SDK defaults. Prefer OFF to use FCS defaults. '
+              'This setting affects many component themes that implement it. '
+              'It is included on panels where it has an impact. '
               'See API docs for more info.'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&
