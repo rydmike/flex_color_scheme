@@ -547,11 +547,16 @@ class Store {
   static const bool defaultNavBarMuteUnselected = true;
 
   // Key used to read and save the navBarIndicatorSchemeColor value.
-  static const String keyNavBarIndicatorSchemeColor =
-      'navBarIndicatorSchemeColor';
+  static const String keyNavBarHighlightSchemeColor =
+      'navBarHighlightSchemeColor';
   // Default value for the navBarIndicatorSchemeColor, also used to reset
   // settings. We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultNavBarIndicatorSchemeColor = null;
+  static const SchemeColor? defaultNavBarHighlightSchemeColor = null;
+
+  // Key used to read and save the navBarIndicatorOpacity value.
+  static const String keyNavBarHighlightOpacity = 'navBarHighlightOpacity';
+  // Default value for the navBarIndicatorOpacity, also to reset settings.
+  static const double? defaultNavBarHighlightOpacity = null;
 
   // Key used to read and save the navBarLabelBehavior value.
   static const String keyNavBarLabelBehavior = 'navBarLabelBehavior';
@@ -616,6 +621,11 @@ class Store {
   // settings. We use NULL as default, on nullable settings.
   static const SchemeColor? defaultNavRailIndicatorSchemeColor = null;
 
+  // Key used to read and save the navigationRailIndicatorOpacity value.
+  static const String keyNavRailIndicatorOpacity = 'navRailIndicatorOpacity';
+  // Default value for the navigationRailIndicatorOpacity, also reset settings.
+  static const double? defaultNavRailIndicatorOpacity = null;
+
   // Button SETTINGS.
   // ===========================================================================
 
@@ -677,15 +687,6 @@ class Store {
   // reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultToggleButtonsBorderRadius = null;
-
-  // TODO(rydmike): Consider removing, will deprecated soon in Flutter SDK.
-  // Key used to read and save the materialButtonSchemeColor value.
-  static const String keyMaterialButtonSchemeColor =
-      'materialButtonSchemeColor';
-  // Default value for the materialButtonSchemeColor, also used to
-  // reset settings.
-  // We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultMaterialButtonSchemeColor = null;
 
   // Toggleable SETTINGS.
   // ===========================================================================

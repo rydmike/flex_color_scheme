@@ -62,11 +62,11 @@ class ComponentThemes extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Global border radius on components'),
-          subtitle: const Text('Defaults use Material 3 design '
+          subtitle: const Text('Default setting uses Material 3 design '
               'values, where radius spec varies per component. '
               'Material 2 design uses 4 on all components. '
               'If you set a value, all components will use it. '
-              'You can set per component too, it will then use its own '
+              'You can set radius per component too, it will then use its own '
               'setting, regardless of what is set here'),
         ),
         ListTile(
@@ -154,9 +154,9 @@ class ComponentThemes extends StatelessWidget {
           title: const Text('Use Flutter defaults'),
           subtitle: const Text('Undefined sub-theme values will fall '
               'back to Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-              'This setting affects many component themes that implement it. '
-              'It is included on panels where it has an impact. '
-              'See API docs for more info.'),
+              'This setting affects component themes that implement it, '
+              'currently BottomNavigationBar, NavigationBar and '
+              'NavigationRail. See API docs for more info.'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
