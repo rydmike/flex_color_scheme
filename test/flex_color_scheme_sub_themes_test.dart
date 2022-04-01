@@ -127,7 +127,7 @@ void main() {
       );
     });
     test(
-        'FCS8.002-dark: GIVEN a FlexColorScheme.dark with sub themes '
+        'FCS8.003-dark: GIVEN a FlexColorScheme.dark with sub themes '
         'and sub-theme with props coded in toTheme '
         'EXPECT sub-theme using the requested props, with onBackground '
         'text theme blends.', () {
@@ -163,11 +163,121 @@ void main() {
         equals(true),
       );
     });
-    //
-    // TODO(rydmike): Consider adding more tests that verify the sub-themes.
-    //   Meaning that do do them like above to see we get expected themes.
-    //   The sub-themes test do test them already, but it could be useful to
-    //   to verify they are picked up and applied as expected via the
-    //   configured FlexSubThemesData in subThemesData correctly as well.
+    test(
+        'FCS8.004-light-a: GIVEN a FlexColorScheme raw with sub themes '
+        'and AppBar scheme '
+        'EXPECT sub-theme with given AppBar scheme color.', () {
+      final FlexColorScheme fcs = FlexColorScheme(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF4D31D7),
+          brightness: Brightness.light,
+        ),
+        subThemesData: const FlexSubThemesData(
+          appBarBackgroundSchemeColor: SchemeColor.secondary,
+          blendTextTheme: true,
+          blendOnColors: true,
+          blendOnLevel: 25,
+        ),
+      );
+      expect(
+        fcs.toTheme.appBarTheme.backgroundColor,
+        equals(fcs.toTheme.colorScheme.secondary),
+      );
+    });
+    test(
+        'FCS8.004-light-b: GIVEN a FlexColorScheme raw with sub themes '
+        'and AppBar scheme with override '
+        'EXPECT sub-theme with given AppBar override color.', () {
+      final FlexColorScheme fcs = FlexColorScheme(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF4D31D7),
+          brightness: Brightness.light,
+        ),
+        appBarBackground: const Color(0xFF3DA3C2),
+        subThemesData: const FlexSubThemesData(
+          appBarBackgroundSchemeColor: SchemeColor.secondary,
+          blendTextTheme: true,
+          blendOnColors: true,
+          blendOnLevel: 25,
+        ),
+      );
+      expect(
+        fcs.toTheme.appBarTheme.backgroundColor,
+        equals(const Color(0xFF3DA3C2)),
+      );
+    });
+    test(
+        'FCS8.005-dark-a: GIVEN a FlexColorScheme raw with sub themes '
+        'and AppBar scheme '
+        'EXPECT sub-theme with given AppBar scheme color ', () {
+      final FlexColorScheme fcs = FlexColorScheme(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF4D31D7),
+          brightness: Brightness.dark,
+        ),
+        subThemesData: const FlexSubThemesData(
+          appBarBackgroundSchemeColor: SchemeColor.tertiary,
+          blendTextTheme: true,
+          blendOnColors: true,
+          blendOnLevel: 25,
+        ),
+      );
+      expect(
+        fcs.toTheme.appBarTheme.backgroundColor,
+        equals(fcs.toTheme.colorScheme.tertiary),
+      );
+    });
+    test(
+        'FCS8.005-dark-b: GIVEN a FlexColorScheme raw with sub themes '
+        'and AppBar scheme with override '
+        'EXPECT sub-theme with given AppBar override color ', () {
+      final FlexColorScheme fcs = FlexColorScheme(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF4D31D7),
+          brightness: Brightness.dark,
+        ),
+        appBarBackground: const Color(0xFF30454C),
+        subThemesData: const FlexSubThemesData(
+          appBarBackgroundSchemeColor: SchemeColor.tertiary,
+          blendTextTheme: true,
+          blendOnColors: true,
+          blendOnLevel: 25,
+        ),
+      );
+      final ColorScheme fcsScheme = fcs.toScheme;
+      expect(
+        fcs.toTheme.appBarTheme.backgroundColor,
+        equals(const Color(0xFF30454C)),
+      );
+    });
+    test(
+        'FCS8.006-light-a: GIVEN a FlexColorScheme.light with sub themes '
+        'and custom navigation bar and rail indicator color and '
+        'opacity '
+        'EXPECT sub-themes with given properties. ', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        blendLevel: 20,
+        subThemesData: const FlexSubThemesData(
+          navigationRailIndicatorOpacity: 0.5,
+          navigationRailIndicatorSchemeColor: SchemeColor.onTertiary,
+          navigationBarHighlightOpacity: 0.8,
+          navigationBarHighlightSchemeColor: SchemeColor.primaryContainer,
+          blendTextTheme: true,
+          blendOnColors: true,
+          blendOnLevel: 25,
+        ),
+      );
+      final ColorScheme fcsScheme = fcs.toScheme;
+      final ThemeData fcsTheme = fcs.toTheme;
+      expect(
+        fcsTheme.navigationRailTheme.indicatorColor,
+        equals(fcsScheme.onTertiary.withOpacity(0.5)),
+      );
+      expect(
+        fcsTheme.navigationBarTheme.indicatorColor,
+        equals(fcsScheme.primaryContainer.withOpacity(0.8)),
+      );
+    });
   });
 }
