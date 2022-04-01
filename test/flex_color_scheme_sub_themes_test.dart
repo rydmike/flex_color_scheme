@@ -244,7 +244,6 @@ void main() {
           blendOnLevel: 25,
         ),
       );
-      final ColorScheme fcsScheme = fcs.toScheme;
       expect(
         fcs.toTheme.appBarTheme.backgroundColor,
         equals(const Color(0xFF30454C)),
