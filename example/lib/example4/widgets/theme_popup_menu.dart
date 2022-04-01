@@ -30,6 +30,7 @@ class ThemePopupMenu extends StatelessWidget {
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
+              dense: true,
               leading: Icon(Icons.lens,
                   color: isLight
                       ? AppColor.customSchemes[i].light.primary

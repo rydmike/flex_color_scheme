@@ -827,11 +827,12 @@ class _BottomNavigationBarShowcaseState
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    return SizedBox(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          BottomNavigationBar(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(
+          height: 57,
+          child: BottomNavigationBar(
             currentIndex: buttonIndex,
             onTap: (int value) {
               setState(() {
@@ -856,25 +857,25 @@ class _BottomNavigationBarShowcaseState
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'BottomNavigationBar (Material 2)',
-              style: denseHeader,
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+          child: Text(
+            'BottomNavigationBar (Material 2)',
+            style: denseHeader,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Default SDK background color is theme canvasColor via Material, '
-              'and theme.canvasColor is set to theme.colorScheme.background, '
-              'elevation is 8. FlexColorScheme sub-theme default is '
-              'colorScheme.background and elevation 0.',
-              style: denseBody,
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Text(
+            'Default SDK background color is theme canvasColor via Material, '
+            'and theme.canvasColor is set to theme.colorScheme.background, '
+            'elevation is 8. FlexColorScheme sub-theme default is '
+            'colorScheme.background and elevation 0.',
+            style: denseBody,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -897,11 +898,12 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    return SizedBox(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          NavigationBar(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(
+          height: Theme.of(context).navigationBarTheme.height ?? 80,
+          child: NavigationBar(
             selectedIndex: buttonIndex,
             onDestinationSelected: (int value) {
               setState(() {
@@ -923,24 +925,24 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'NavigationBar (Material 3)',
-              style: denseHeader,
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+          child: Text(
+            'NavigationBar (Material 3)',
+            style: denseHeader,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Default SDK background color is theme.colorScheme.surface with '
-              'an onSurface overlay color with elevation 3. FlexColorScheme '
-              'sub-theme default is colorScheme.background and elevation 0.',
-              style: denseBody,
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Text(
+            'Default SDK background color is theme.colorScheme.surface with '
+            'an onSurface overlay color with elevation 3. FlexColorScheme '
+            'sub-theme default is colorScheme.background and elevation 0.',
+            style: denseBody,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
