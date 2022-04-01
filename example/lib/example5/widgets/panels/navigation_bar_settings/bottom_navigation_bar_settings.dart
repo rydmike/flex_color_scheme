@@ -42,7 +42,9 @@ class BottomNavigationBarSettings extends StatelessWidget {
             ? 'default (onSurface with opacity)'
             : controller.bottomNavBarMuteUnselected && muteUnselectedEnabled
                 ? 'default (onSurface, blend & opacity)'
-                : 'default (onSurface)';
+                : isDark
+                    ? 'default (white70)'
+                    : 'default (black54)';
     final bool navBarOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.bottomNavBarBackgroundSchemeColor == null &&

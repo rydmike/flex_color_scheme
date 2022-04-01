@@ -197,8 +197,13 @@ class FlexSubThemesData with Diagnosticable {
         this.navigationBarIconSchemeColor,
     this.navigationBarUnselectedIconSchemeColor,
     this.navigationBarMutedUnselectedIcon = true,
-    this.navigationBarHighlightSchemeColor,
-    this.navigationBarHighlightOpacity,
+    @Deprecated('This property has no function after 4.2.0. To harmonize '
+        'NavigationBar and NavigationRail sub-themes in '
+        'version 5 and later, this property has been replaced by '
+        'navigationBarIndicatorSchemeColor.')
+        this.navigationBarHighlightSchemeColor,
+    this.navigationBarIndicatorSchemeColor,
+    this.navigationBarIndicatorOpacity,
     this.navigationBarBackgroundSchemeColor,
     this.navigationBarOpacity = 1,
     this.navigationBarHeight,
@@ -345,15 +350,19 @@ class FlexSubThemesData with Diagnosticable {
   ///                    FCS defaults   Flutter defaults
   /// useFlutterDefaults false          true
   /// - background       background     background
-  /// - selected icon    primary        light theme primary, dark secondary
-  /// - Selected label   primary        light theme primary, dark secondary
-  /// - unselected icon  onSurface      onSurface, with opacity
-  /// - unSelected label onSurface      onSurface, with opacity
+  /// - selected icon    primary        light: theme primary, dark: secondary
+  /// - Selected label   primary        light: theme primary, dark: secondary
+  /// - unselected icon  onSurface      light: black54, dark: white70
+  /// - unSelected label onSurface      light: black54, dark: white70
   /// ```
   /// FCS further applies both an alpha blend and slight opacity to
   /// unselected icon and unselected label, but only if
-  /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
+  /// [bottomNavigationBarMutedUnselectedIcon] and
+  /// [bottomNavigationBarMutedUnselectedLabel] are true respectively,
   /// this also applies to undefined color inputs.
+  ///
+  /// When muted unselected options are true, the actual difference to Flutter
+  /// default for unselected items is subtle, FCS has a bit more contrast.
   ///
   /// Impact on [NavigationBarThemeData] sub-theming:
   ///
@@ -371,28 +380,33 @@ class FlexSubThemesData with Diagnosticable {
   /// ```
   /// FCS further applies both an alpha blend and slight opacity to
   /// unselected icon and unselected label, but only if
-  /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
-  /// this also applies to undefined color inputs.
+  /// [navigationBarMutedUnselectedIcon] and [navigationBarMutedUnselectedLabel]
+  /// are true respectively, this also applies to undefined color inputs.
   ///
   /// Impact on [NavigationRailThemeData] sub-theming:
   ///
   /// ```
-  ///                    FCS defaults   Flutter defaults
-  /// useFlutterDefaults false          true
-  /// - background       background     surface
-  /// - indicator        primary op24% secondary op24%
-  /// - selected icon    primary        primary
-  /// - Selected label   primary        primary
-  /// - unselected icon  onSurface      onSurface op64%
-  /// - unSelected label onSurface      onSurface op64%
-  /// - TextTheme        FCS.labelSmall default.caption
+  ///                    FCS defaults    Flutter defaults
+  /// useFlutterDefaults false           true
+  /// - background       background      surface
+  /// - indicator        primary op24%   secondary op24%
+  /// - selected icon    primary         primary
+  /// - Selected label   primary         primary
+  /// - unselected icon  onSurface       onSurface op64%
+  /// - unSelected label onSurface       onSurface op64%
+  /// - TextTheme        FCS.labelMedium default.bodyText1
   /// ```
   /// FCS further applies both an alpha blend and slight opacity to
   /// unselected icon and unselected label, but only if
-  /// [mutedUnselectedIcon] are [mutedUnselectedLabel] true respectively,
+  /// [navigationRailMutedUnselectedIcon] and
+  /// are [navigationRailMutedUnselectedLabel] true respectively,
   /// this also applies to undefined color inputs.
   ///
-  /// Defaults to false.
+  /// If you want a style that is consistent by default across
+  /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
+  /// prefer keeping this setting false.
+  ///
+  /// If undefined, defaults to false.
   final bool useFlutterDefaults;
 
   /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
@@ -1028,20 +1042,21 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Optional text style for the [BottomNavigationBar] labels.
   ///
-  /// If null, it is kept as null if all text styling properties are
-  /// also null, resulting in default SDK text style being used by the
-  /// [BottomNavigationBar] widget.
-  ///
-  /// If null, but if any of the text styling properties for size and colors
-  /// are defined, the text style [FlexColorScheme.m3TextTheme.bodyMedium]
+  /// If [useFlutterDefaults] is false, the text style
+  /// [FlexColorScheme.m3TextTheme.bodyMedium]
   /// will be used as base style for the text style.
   ///
-  /// Flutter SDK defaults to using the theme's [TextTheme.bodyText1] which
-  /// is size 16dp, the FlexColorScheme bodyMedium size is 14dp, which is
-  /// a more appropriate size for the rail's text.
+  /// If [useFlutterDefaults] is true, null will be passed to
+  /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
+  /// labeling modifying properties (size and scheme color) are also null, it
+  /// will then be passed along as null, allowing it to remain undefined
+  /// and widget default behaviour sets the default. If label size or scheme
+  /// is defined, a default TextStyle() will be created, if
+  /// [bottomNavigationBarLabelTextStyle] is undefined, that gets th size and
+  /// color applied.
   ///
   /// The size and colors defined in any of the text size and color properties
-  /// are applied as overrides on the effective text style.
+  /// are applied as overrides on the text style.
   final TextStyle? bottomNavigationBarLabelTextStyle;
 
   /// The size of the text label on selected [BottomNavigationBar] item.
@@ -1053,7 +1068,12 @@ class FlexSubThemesData with Diagnosticable {
   /// The size of the text label on unselected [BottomNavigationBar] items.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
-  /// on unselected items, 14 is used as fallback if needed.
+  /// on unselected items. Defaults to [selectedLabelSize] - 2, but min 8.
+  /// Smaller than 8dp is not legible on most screens.
+  ///
+  /// [BottomNavigationBar] uses this -2dp smaller font on the unselected
+  /// label as default, since it is so based on Material 2 spec. By assigning
+  /// same value as to selectedLabelSize, you can make them the same size.
   final double? bottomNavigationBarUnselectedLabelSize;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
@@ -1061,9 +1081,12 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the
-  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.primary].
+  /// If undefined, defaults to [SchemeColor.primary].
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// label modifying properties are undefined, including the text style,
+  /// the effective color will be [ColorScheme.primary] in light theme and
+  /// [ColorScheme.dark] in dark theme mode.
   final SchemeColor? bottomNavigationBarSelectedLabelSchemeColor;
 
   /// Deprecated and replaced by [bottomNavigationBarSelectedLabelSchemeColor].
@@ -1073,31 +1096,38 @@ class FlexSubThemesData with Diagnosticable {
       'bottomNavigationBarSelectedLabelSchemeColor.')
   final SchemeColor? bottomNavigationBarSchemeColor;
 
-  /// Select which color from the theme's [ColorScheme] to use for
-  /// the [BottomNavigationBar]'s unselected items text color.
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [BottomNavigationBar]'s unselected label text color.
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the
-  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.onSurface].
+  /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
+  /// blend and opacity, if [bottomNavigationBarMutedUnselectedLabel] is true.
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// label modifying properties are undefined, including the text style,
+  /// the effective color will be [ThemeData.unselectedWidgetColor]
+  /// which is [Colors.black54] in light mode and [Colors.white70] in dark.
   final SchemeColor? bottomNavigationBarUnselectedLabelSchemeColor;
 
-  /// If true, the unselected labels in the [BottomNavigationBar] use a more
+  /// If true, the unselected label in the [BottomNavigationBar] use a more
   /// muted color version of the color defined by
   /// [bottomNavigationBarUnselectedLabelSchemeColor].
+  /// The muting is unselected color with
+  /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+  /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If null, defaults to false.
+  /// If undefined, defaults to false.
   final bool? bottomNavigationBarMutedUnselectedLabel;
 
   /// The size of the icon on selected [BottomNavigationBar] item.
   ///
-  /// If null, it defaults to 24.
+  /// If undefined, defaults to 24.
   final double? bottomNavigationBarSelectedIconSize;
 
   /// The size of the icon on unselected [BottomNavigationBar] items.
   ///
-  /// If null, defaults to [bottomNavigationBarSelectedIconSize].
+  /// If undefined, defaults to [bottomNavigationBarSelectedIconSize].
   final double? bottomNavigationBarUnselectedIconSize;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
@@ -1105,9 +1135,11 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the
-  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.primary].
+  /// If undefined, defaults to [SchemeColor.primary].
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// icon modifying properties are undefined, the effective color will be
+  /// [ColorScheme.primary] in light and [ColorScheme.dark] in dark theme mode.
   final SchemeColor? bottomNavigationBarSelectedIconSchemeColor;
 
   /// Select which color from the passed in [ColorScheme] to use as base for
@@ -1115,21 +1147,23 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the
-  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.onSurface].
+  /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
+  /// blend and opacity,if [bottomNavigationBarMutedUnselectedLabel] is true.
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// icon modifying properties are undefined,
+  /// the effective color will be [ThemeData.unselectedWidgetColor]
+  /// which is [Colors.black54] in light mode and [Colors.white70] in dark.
   final SchemeColor? bottomNavigationBarUnselectedIconSchemeColor;
 
   /// If true, the unselected icon in the [BottomNavigationBar] use a more muted
   /// color version of the color defined by
   /// [bottomNavigationBarUnselectedIconSchemeColor].
+  /// The muting is unselected color with
+  /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+  /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// The [BottomNavigationBar] also defaults via Flutter SDK default to a more
-  /// muted unselected color when it uses its defaults, which will happen here
-  /// too when all item colors and sizes are set to their null default,
-  /// even if [bottomNavigationBarMutedUnselectedIcon] is set to false.
-  ///
-  /// If null, defaults to false.
+  /// If undefined, defaults to false.
   final bool? bottomNavigationBarMutedUnselectedIcon;
 
   /// Select which color from the theme's [ColorScheme] to use as background
@@ -1137,17 +1171,17 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.background]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the
-  /// [BottomNavigationBar], which is [Theme]'s [ColorScheme.surface].
+  /// If undefined, defaults to [SchemeColor.background].
   ///
-  /// NOTE:
+  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// the effective background color will also be [ColorScheme.background].
+  ///
   /// FlexColorScheme sets background defaults of [BottomNavigationBar],
   /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
   /// when it is using component sub-themes.
   /// Flutter SDK uses different colors on all three widgets. Our opinion is
   /// that they should all default to using the same [ColorScheme] based
-  /// color. FlexColorScheme uses the background color as that default.
+  /// color. FlexColorScheme uses the background color as this default.
   final SchemeColor? bottomNavigationBarBackgroundSchemeColor;
 
   /// BottomNavigationBar background opacity.
@@ -1218,20 +1252,21 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Optional text style for the [NavigationBar] labels.
   ///
-  /// If null, it is kept as null if all text styling properties are
-  /// also null, resulting in default SDK text style being used by the
-  /// [NavigationBar] widget.
-  ///
-  /// If null, but if any of the text styling properties for size and colors
-  /// are defined, the text style [FlexColorScheme.m3TextTheme.labelSmall]
+  /// If [useFlutterDefaults] is false, the text style
+  /// [FlexColorScheme.m3TextTheme.labelSmall]
   /// will be used as base style for the text style.
   ///
-  /// Flutter SDK defaults to using the theme's [TextTheme.bodyText1] which
-  /// is size 16dp, the FlexColorScheme bodyMedium size is 14dp, which is
-  /// a more appropriate size for the rail's text.
+  /// If [useFlutterDefaults] is true, null will be passed to
+  /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
+  /// labeling modifying properties (size and scheme color) are also null, it
+  /// will then be passed along as null, allowing it to remain undefined
+  /// and widget default behaviour sets the default. If label size or scheme
+  /// is defined, a default TextStyle() will be created, if
+  /// [navigationBarLabelTextStyle] is undefined, that gets the size and
+  /// color applied.
   ///
   /// The size and colors defined in any of the text size and color properties
-  /// are applied as overrides on the effective text style.
+  /// are applied as overrides on the text style.
   final TextStyle? navigationBarLabelTextStyle;
 
   /// The size of the text label on selected [NavigationBar] item.
@@ -1251,9 +1286,11 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
-  /// which is [Theme]'s [ColorScheme.onSurface].
+  /// If undefined, defaults to [SchemeColor.primary].
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// label modifying properties are undefined, including the text style,
+  /// the effective color will be [ColorScheme.onSurface].
   final SchemeColor? navigationBarSelectedLabelSchemeColor;
 
   /// Deprecated and replaced by [navigationBarSelectedLabelSchemeColor].
@@ -1268,15 +1305,22 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
-  /// which is [Theme]'s [ColorScheme.onSurface].
+  /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
+  /// blend and opacity, if [bottomNavigationBarMutedUnselectedLabel] is true.
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// label modifying properties are undefined, including the text style,
+  /// the effective color will be [SchemeColor.onSurface].
   final SchemeColor? navigationBarUnselectedLabelSchemeColor;
 
-  /// If true, the unselected labels in the [NavigationBar] use a more muted
-  /// color version of the color defined by [unselectedLabelSchemeColor].
+  /// If true, the unselected label in the [NavigationBar] use a more
+  /// muted color version of the color defined by
+  /// [navigationBarUnselectedLabelSchemeColor].
+  /// The muting is unselected color with
+  /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+  /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If null, defaults to false.
+  /// If undefined, defaults to false.
   final bool? navigationBarMutedUnselectedLabel;
 
   /// Deprecated and replaced by [navigationBarMutedUnselectedLabel].
@@ -1288,12 +1332,12 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The size of the icon on selected [NavigationBar] item.
   ///
-  /// If null, it defaults to 24.
+  /// If undefined, defaults to 24.
   final double? navigationBarSelectedIconSize;
 
   /// The size of the icon on unselected [NavigationBar] items.
   ///
-  /// If null, defaults to [navigationBarSelectedIconSize].
+  /// If undefined, defaults to [navigationBarSelectedIconSize].
   final double? navigationBarUnselectedIconSize;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
@@ -1301,9 +1345,11 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
-  /// which is [Theme]'s [ColorScheme.onSurface].
+  /// If undefined, defaults to [SchemeColor.primary].
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// icon modifying properties are undefined, the effective color will be
+  /// [ColorScheme.onSurface].
   final SchemeColor? navigationBarSelectedIconSchemeColor;
 
   /// Deprecated and replaced by [navigationBarSelectedIconSchemeColor].
@@ -1318,16 +1364,22 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
-  /// which is [Theme]'s [ColorScheme.onSurface].
+  /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
+  /// blend and opacity,if [navigationBarMutedUnselectedLabel] is true.
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// icon modifying properties are undefined,
+  /// the effective color will be [SchemeColor.onSurface].
   final SchemeColor? navigationBarUnselectedIconSchemeColor;
 
   /// If true, the unselected icon in the [NavigationBar] use a more muted
   /// color version of the color defined by
   /// [navigationBarUnselectedIconSchemeColor].
+  /// The muting is unselected color with
+  /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+  /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If null, defaults to false.
+  /// If undefined, defaults to false.
   final bool? navigationBarMutedUnselectedIcon;
 
   /// Select which color from the theme [ColorScheme] to use as base for
@@ -1335,16 +1387,21 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationBar],
-  /// which is [Theme]'s [ColorScheme.secondary].
+  /// If undefined, defaults to [SchemeColor.primary], additionally
+  /// a default [navigationBarIndicatorOpacity] is applied.
   ///
-  /// NOTE:
-  /// The "Highlight" Color is same concept as "Indicator" color on the
-  /// [NavigationRail], but for some ood reason it is called "Highlight" on the
-  /// [NavigationBar] in the SDK, so the name was used here too. Had
-  /// navigation bar followed prior art, then this should be called indicator
-  /// color too.
+  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// the effective background color will also be [ColorScheme.secondary]
+  /// with opacity 24%.
+  final SchemeColor? navigationBarIndicatorSchemeColor;
+
+  /// Select which color from the theme [ColorScheme] to use as base for
+  /// the selected [NavigationBar]'s highlighted item.
+  /// Deprecated and replaced by [navigationBarIndicatorSchemeColor].
+  @Deprecated('This property has no function after 4.2.0. To harmonize '
+      'NavigationBar  and NavigationRail sub-themes in '
+      'version 5 and later, this property has been replaced by '
+      'navigationBarIndicatorSchemeColor.')
   final SchemeColor? navigationBarHighlightSchemeColor;
 
   /// Opacity used on the [NavigationBar] indicator.
@@ -1358,21 +1415,22 @@ class FlexSubThemesData with Diagnosticable {
   /// often use no alpha and just different solid color hue instead.
   /// The default value of this property may be adjusted later as Flutter
   /// moves towards M3 designs. It might become 1.0.
-  final double? navigationBarHighlightOpacity;
+  final double? navigationBarIndicatorOpacity;
 
   /// Select which color from the theme's [ColorScheme] to use as background
   /// color for the [NavigationBar].
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.background]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
-  /// which is [Theme]'s [ColorScheme.surface], with an [ColorScheme.onSurface]
-  /// used as overlay color with hard coded overlay elevation 3. The actual
-  /// elevation is hard coded to 0.
+  /// If undefined, defaults to [SchemeColor.background].
   ///
-  /// NOTE:
-  /// FlexColorScheme sets background defaults of [NavigationRail],
+  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// the effective background color will be [ColorScheme.surface],
+  /// with an [ColorScheme.onSurface] used as overlay color with hard
+  /// coded overlay elevation 3. The actual Flutter SDK elevation is also
+  /// hard coded to 0.
+  ///
+  /// FlexColorScheme sets background defaults of [BottomNavigationBar],
   /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
   /// when it is using component sub-themes.
   /// Flutter SDK uses different colors on all three widgets. Our opinion is
@@ -1382,10 +1440,10 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Height of the container for the Material 3 [NavigationBar].
   ///
-  /// Defaults to [kNavigationBarHeight] which is 62 dp
+  /// In undefined, defaults to [kNavigationBarHeight] which is 62 dp.
   ///
-  /// If set to null, it will default to the widgets un-themed default height
-  /// which is 80 dp.
+  /// If [useFlutterDefaults] true, and this property is undefined, it defaults
+  /// to 80.
   final double? navigationBarHeight;
 
   /// NavigationBar background opacity.
@@ -1409,32 +1467,33 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Optional text style for the [NavigationRail] labels.
   ///
-  /// If null, it is kept as null if all text styling properties are
-  /// also null, resulting in default SDK text style being used by the
-  /// [NavigationRail] widget.
-  ///
-  /// If null, but if any of the text styling properties for size and colors
-  /// are defined, the text style [FlexColorScheme.m3TextTheme.bodyMedium]
+  /// If [useFlutterDefaults] is false, the text style
+  /// [FlexColorScheme.m3TextTheme.bodyMedium]
   /// will be used as base style for the text style.
   ///
-  /// Flutter SDK defaults to using the theme's [TextTheme.bodyText1] which
-  /// is size 16dp, the FlexColorScheme bodyMedium size is 14dp, which is
-  /// a more appropriate size for the rail's text.
+  /// If [useFlutterDefaults] is true, null will be passed to
+  /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
+  /// labeling modifying properties (size and scheme color) are also null, it
+  /// will then be passed along as null, allowing it to remain undefined
+  /// and widget default behaviour sets the default. If label size or scheme
+  /// is defined, a default TextStyle() will be created, if
+  /// [navigationBarLabelTextStyle] is undefined, that gets the size and
+  /// color applied.
   ///
   /// The size and colors defined in any of the text size and color properties
-  /// are applied as overrides on the effective text style.
+  /// are applied as overrides on the text style.
   final TextStyle? navigationRailLabelTextStyle;
 
   /// The size of the text label on selected [NavigationRail] item.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
-  /// on selected item, 14 is used as fallback if needed.
+  /// on selected item, 11 is used as fallback if needed.
   final double? navigationRailSelectedLabelSize;
 
   /// The size of the text label on unselected [NavigationRail] items.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
-  /// on unselected items, 14 is used as fallback if needed.
+  /// on unselected items, 11 is used as fallback if needed.
   final double? navigationRailUnselectedLabelSize;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
@@ -1442,36 +1501,44 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
-  /// which is [Theme]'s [ColorScheme.primary].
+  /// If undefined, defaults to [SchemeColor.primary].
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// label modifying properties are undefined, including the text style,
+  /// the effective color will also be [ColorScheme.primary].
   final SchemeColor? navigationRailSelectedLabelSchemeColor;
 
-  /// Select which color from the theme's [ColorScheme] to use for
-  /// the [NavigationRail]'s unselected items text color.
+  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// the [NavigationRails]'s unselected label text color.
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
-  /// which is [Theme]'s [ColorScheme.onSurface].
+  /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
+  /// blend and opacity, if [navigationRailMutedUnselectedLabel] is true.
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// label modifying properties are undefined, including the text style,
+  /// the effective color will be [SchemeColor.onSurface] with opacity 64%.
   final SchemeColor? navigationRailUnselectedLabelSchemeColor;
 
-  /// If true, the unselected labels in the [NavigationRail] use a more muted
-  /// color version of the color defined by
+  /// If true, the unselected label in the [NavigationRail] use a more
+  /// muted color version of the color defined by
   /// [navigationRailUnselectedLabelSchemeColor].
+  /// The muting is unselected color with
+  /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+  /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If null, defaults to false.
+  /// If undefined, defaults to false.
   final bool? navigationRailMutedUnselectedLabel;
 
   /// The size of the icon on selected [NavigationRail] item.
   ///
-  /// If null, it defaults to 24.
+  /// If undefined, it defaults to 24.
   final double? navigationRailSelectedIconSize;
 
   /// The size of the icon on unselected [NavigationRail] items.
   ///
-  /// If null, defaults to [navigationRailSelectedIconSize].
+  /// If undefined, defaults to [navigationRailSelectedIconSize].
   final double? navigationRailUnselectedIconSize;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
@@ -1479,9 +1546,11 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
-  /// which is [Theme]'s [ColorScheme.primary].
+  /// If undefined, defaults to [SchemeColor.primary].
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// icon modifying properties are undefined, the effective color will also be
+  /// [ColorScheme.primary].
   final SchemeColor? navigationRailSelectedIconSchemeColor;
 
   /// Select which color from the passed in [ColorScheme] to use as base for
@@ -1489,21 +1558,22 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.onSurface]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
-  /// which is [Theme]'s [ColorScheme.onSurface].
+  /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
+  /// blend and opacity,if [navigationRailMutedUnselectedLabel] is true.
+  ///
+  /// If [useFlutterDefaults] is true, and this property and all other
+  /// icon modifying properties are undefined,
+  /// the effective color will be [SchemeColor.onSurface] with 64% opacity.
   final SchemeColor? navigationRailUnselectedIconSchemeColor;
 
   /// If true, the unselected icon in the [NavigationRail] use a more muted
   /// color version of the color defined by
-  /// [navigationRailUnselectedIconSchemeColor].
+  /// [navigationBarUnselectedIconSchemeColor].
+  /// The muting is unselected color with
+  /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+  /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// The [NavigationRail] also defaults via Flutter SDK default to a more
-  /// muted unselected color when it uses its defaults, which will happen here
-  /// too when all item colors and sizes are set to their null default,
-  /// even if [navigationRailMutedUnselectedIcon] is set to false.
-  ///
-  /// If null, defaults to false.
+  /// If undefined, defaults to false.
   final bool? navigationRailMutedUnselectedIcon;
 
   /// Whether or not the selected [NavigationRail] item should include a
@@ -1516,28 +1586,24 @@ class FlexSubThemesData with Diagnosticable {
   /// [NavigationRailLabelType.none], or a [StadiumBorder] if [labelType] is
   /// [NavigationRailLabelType.all] or [NavigationRailLabelType.selected].
   ///
-  /// If `null`, defaults to [NavigationRailThemeData.useIndicator]. If that is
-  /// `null`, defaults to [ThemeData.useMaterial3].
+  /// If `undefined`, defaults to [NavigationRailThemeData.useIndicator].
+  /// If that is also undefined, then it defaults to [ThemeData.useMaterial3].
   ///
   /// Defaults to true. Can be set to null and then uses above default
   /// widget behavior.
   final bool? navigationRailUseIndicator;
 
-  /// Select which color from the theme's [ColorScheme] to use as base for
-  /// the selected [NavigationRail]'s selected item's pill shaped highlight
-  /// indicator color.
+  /// Select which color from the theme [ColorScheme] to use as base for
+  /// the selected [NavigationRails]'s highlighted item.
   ///
-  /// Defaults to [SchemeColor.primary]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
-  /// which is [Theme]'s [ColorScheme.secondary].
+  /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// NOTE:
-  /// The "Indicator" color is same concept as "Highlight" color on the
-  /// [NavigationBar], but for some ood reason it is called "Indicator" on the
-  /// [NavigationRail] in the SDK, so the name was used here too. Navigation
-  /// rail existed before navigation bar, so it is the navigation bar that
-  /// for some reason deviates from established name for no reason
-  /// in Flutter API.
+  /// If undefined, defaults to [SchemeColor.primary], additionally
+  /// a default [navigationBarIndicatorOpacity] is applied.
+  ///
+  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// the effective background color will also be [ColorScheme.secondary]
+  /// with opacity 24%.
   final SchemeColor? navigationRailIndicatorSchemeColor;
 
   /// Opacity used on the [NavigationBar] indicator.
@@ -1557,17 +1623,17 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// Defaults to [SchemeColor.background]. If set to null, the effective value
-  /// depends on Flutter's default un-themed behaviour for the [NavigationRail],
-  /// which is [Theme]'s [ColorScheme.surface].
+  /// If undefined, defaults to [SchemeColor.background].
   ///
-  /// NOTE:
-  /// FlexColorScheme sets background defaults of [NavigationRail],
+  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// the effective background color will be [ColorScheme.surface].
+  ///
+  /// FlexColorScheme sets background defaults of [BottomNavigationBar],
   /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
   /// when it is using component sub-themes.
   /// Flutter SDK uses different colors on all three widgets. Our opinion is
   /// that they should all default to using the same [ColorScheme] based
-  /// color. FlexColorScheme uses the background color as that default.
+  /// color. FlexColorScheme uses the background color as this default.
   final SchemeColor? navigationRailBackgroundSchemeColor;
 
   /// NavigationRail background opacity.
@@ -1706,8 +1772,8 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? navigationBarSelectedIconSchemeColor,
     final SchemeColor? navigationBarUnselectedIconSchemeColor,
     final bool? navigationBarMutedUnselectedIcon,
-    final SchemeColor? navigationBarHighlightSchemeColor,
-    final double? navigationBarHighlightOpacity,
+    final SchemeColor? navigationBarIndicatorSchemeColor,
+    final double? navigationBarIndicatorOpacity,
     final SchemeColor? navigationBarBackgroundSchemeColor,
     final double? navigationBarOpacity,
     final double? navigationBarHeight,
@@ -1887,10 +1953,10 @@ class FlexSubThemesData with Diagnosticable {
               this.navigationBarUnselectedIconSchemeColor,
       navigationBarMutedUnselectedIcon: navigationBarMutedUnselectedIcon ??
           this.navigationBarMutedUnselectedIcon,
-      navigationBarHighlightSchemeColor: navigationBarHighlightSchemeColor ??
-          this.navigationBarHighlightSchemeColor,
-      navigationBarHighlightOpacity:
-          navigationBarHighlightOpacity ?? this.navigationBarHighlightOpacity,
+      navigationBarIndicatorSchemeColor: navigationBarIndicatorSchemeColor ??
+          this.navigationBarIndicatorSchemeColor,
+      navigationBarIndicatorOpacity:
+          navigationBarIndicatorOpacity ?? this.navigationBarIndicatorOpacity,
       navigationBarBackgroundSchemeColor: navigationBarBackgroundSchemeColor ??
           this.navigationBarBackgroundSchemeColor,
       navigationBarOpacity: navigationBarOpacity ?? this.navigationBarOpacity,
@@ -2061,9 +2127,9 @@ class FlexSubThemesData with Diagnosticable {
             navigationBarUnselectedIconSchemeColor &&
         other.navigationBarMutedUnselectedIcon ==
             navigationBarMutedUnselectedIcon &&
-        other.navigationBarHighlightSchemeColor ==
-            navigationBarHighlightSchemeColor &&
-        other.navigationBarHighlightOpacity == navigationBarHighlightOpacity &&
+        other.navigationBarIndicatorSchemeColor ==
+            navigationBarIndicatorSchemeColor &&
+        other.navigationBarIndicatorOpacity == navigationBarIndicatorOpacity &&
         other.navigationBarBackgroundSchemeColor ==
             navigationBarBackgroundSchemeColor &&
         other.navigationBarOpacity == navigationBarOpacity &&
@@ -2205,8 +2271,8 @@ class FlexSubThemesData with Diagnosticable {
         navigationBarSelectedIconSchemeColor,
         navigationBarUnselectedIconSchemeColor,
         navigationBarMutedUnselectedIcon,
-        navigationBarHighlightSchemeColor,
-        navigationBarHighlightOpacity,
+        navigationBarIndicatorSchemeColor,
+        navigationBarIndicatorOpacity,
         navigationBarBackgroundSchemeColor,
         navigationBarOpacity,
         navigationBarHeight,
@@ -2412,10 +2478,10 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>(
         'navigationBarMutedUnselectedIcon', navigationBarMutedUnselectedIcon));
     properties.add(EnumProperty<SchemeColor>(
-        'navigationBarHighlightSchemeColor',
-        navigationBarHighlightSchemeColor));
+        'navigationBarIndicatorSchemeColor',
+        navigationBarIndicatorSchemeColor));
     properties.add(DiagnosticsProperty<double>(
-        'navigationBarHighlightOpacity', navigationBarHighlightOpacity));
+        'navigationBarHighlightOpacity', navigationBarIndicatorOpacity));
     properties.add(EnumProperty<SchemeColor>(
         'navigationBarBackgroundSchemeColor',
         navigationBarBackgroundSchemeColor));

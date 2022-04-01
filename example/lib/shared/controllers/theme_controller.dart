@@ -277,11 +277,11 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavBarUnselectedSchemeColor);
     _navBarMuteUnselected = await _themeService.load(
         Store.keyNavBarMuteUnselected, Store.defaultNavBarMuteUnselected);
-    _navBarHighlightSchemeColor = await _themeService.load(
-        Store.keyNavBarHighlightSchemeColor,
-        Store.defaultNavBarHighlightSchemeColor);
-    _navBarHighlightOpacity = await _themeService.load(
-        Store.keyNavBarHighlightOpacity, Store.defaultNavBarHighlightOpacity);
+    _navBarIndicatorSchemeColor = await _themeService.load(
+        Store.keyNavBarIndicatorSchemeColor,
+        Store.defaultNavBarIndicatorSchemeColor);
+    _navBarIndicatorOpacity = await _themeService.load(
+        Store.keyNavBarIndicatorOpacity, Store.defaultNavBarIndicatorOpacity);
     _navBarLabelBehavior = await _themeService.load(
         Store.keyNavBarLabelBehavior, Store.defaultNavBarLabelBehavior);
     //
@@ -555,9 +555,9 @@ class ThemeController with ChangeNotifier {
     await setNavBarUnselectedSchemeColor(
         Store.defaultNavBarUnselectedSchemeColor, false);
     await setNavBarMuteUnselected(Store.defaultNavBarMuteUnselected, false);
-    await setNavBarHighlightSchemeColor(
-        Store.defaultNavBarHighlightSchemeColor, false);
-    await setNavBarHighlightOpacity(Store.defaultNavBarHighlightOpacity, false);
+    await setNavBarIndicatorSchemeColor(
+        Store.defaultNavBarIndicatorSchemeColor, false);
+    await setNavBarIndicatorOpacity(Store.defaultNavBarIndicatorOpacity, false);
     await setNavBarLabelBehavior(Store.defaultNavBarLabelBehavior, false);
     //
     // NavigationRail SETTINGS.
@@ -1613,24 +1613,24 @@ class ThemeController with ChangeNotifier {
     await _themeService.save(Store.keyNavBarMuteUnselected, value);
   }
 
-  late SchemeColor? _navBarHighlightSchemeColor;
-  SchemeColor? get navBarHighlightSchemeColor => _navBarHighlightSchemeColor;
-  Future<void> setNavBarHighlightSchemeColor(SchemeColor? value,
+  late SchemeColor? _navBarIndicatorSchemeColor;
+  SchemeColor? get navBarIndicatorSchemeColor => _navBarIndicatorSchemeColor;
+  Future<void> setNavBarIndicatorSchemeColor(SchemeColor? value,
       [bool notify = true]) async {
-    if (value == _navBarHighlightSchemeColor) return;
-    _navBarHighlightSchemeColor = value;
+    if (value == _navBarIndicatorSchemeColor) return;
+    _navBarIndicatorSchemeColor = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyNavBarHighlightSchemeColor, value);
+    await _themeService.save(Store.keyNavBarIndicatorSchemeColor, value);
   }
 
-  late double? _navBarHighlightOpacity;
-  double? get navBarHighlightOpacity => _navBarHighlightOpacity;
-  Future<void> setNavBarHighlightOpacity(double? value,
+  late double? _navBarIndicatorOpacity;
+  double? get navBarIndicatorOpacity => _navBarIndicatorOpacity;
+  Future<void> setNavBarIndicatorOpacity(double? value,
       [bool notify = true]) async {
-    if (value == _navBarHighlightOpacity) return;
-    _navBarHighlightOpacity = value;
+    if (value == _navBarIndicatorOpacity) return;
+    _navBarIndicatorOpacity = value;
     if (notify) notifyListeners();
-    await _themeService.save(Store.keyNavBarHighlightOpacity, value);
+    await _themeService.save(Store.keyNavBarIndicatorOpacity, value);
   }
 
   late NavigationDestinationLabelBehavior _navBarLabelBehavior;

@@ -205,9 +205,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             navigationBarUnselectedIconSchemeColor:
                 controller.navBarUnselectedSchemeColor,
             navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
-            navigationBarHighlightSchemeColor:
-                controller.navBarHighlightSchemeColor,
-            navigationBarHighlightOpacity: controller.navBarHighlightOpacity,
+            navigationBarIndicatorSchemeColor:
+                controller.navBarIndicatorSchemeColor,
+            navigationBarIndicatorOpacity: controller.navBarIndicatorOpacity,
             navigationBarBackgroundSchemeColor:
                 controller.navBarBackgroundSchemeColor,
             navigationBarOpacity: controller.navBarOpacity,

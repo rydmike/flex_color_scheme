@@ -149,11 +149,11 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             navigationBarUnselectedIconSchemeColor:
                 controller.navBarUnselectedSchemeColor,
             navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
-            navigationBarHighlightSchemeColor:
-                controller.navBarHighlightSchemeColor,
+            navigationBarIndicatorSchemeColor:
+                controller.navBarIndicatorSchemeColor,
+            navigationBarIndicatorOpacity: controller.navBarIndicatorOpacity,
             navigationBarBackgroundSchemeColor:
                 controller.navBarBackgroundSchemeColor,
-            navigationBarHighlightOpacity: controller.navBarHighlightOpacity,
             navigationBarOpacity: controller.navBarOpacity,
             navigationBarHeight: controller.navBarHeight,
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
