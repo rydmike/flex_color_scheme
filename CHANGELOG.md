@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.2 - April 1, 2022
+## v5.0.0-dev.2 - April 2, 2022
 
 **BREAKING**
 
@@ -28,7 +28,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   You can safely remove it.   
   
 * The property `navigationBarIsStyled` in `FlexSubThemesData` was removed in
-  **v5.0.0-dev.1** as no longer needed. It now back with a new broader 
+  **v5.0.0-dev.1** as no longer needed. It is now back with a new broader 
   replacement called `FlexSubThemesData.useFlutterDefaults`. 
   The in dev.1 version tested API-style to 
   set various `SchemeColor` properties to null to get SDK default for them was not 
@@ -48,6 +48,12 @@ All notable changes to the **FlexColorScheme** package are documented here.
   replaced with `inputDecoratorRadius`, to harmonize the text fields `InputDecoration`
   property names.
 
+* Deprecated and replaced`navigationBarHighlightSchemeColor` with 
+  `navigationBarIndicatorSchemeColor` in `FlexSubThemesData`, to
+  harmonize the naming standard. Likewise, the parameter `highlightSchemeColor` 
+  ìn `FlexSubThemes.navigationBarTheme` was deprecated and replaced by
+  `indicatorSchemeColor`.
+
 * The `FlexSubThemesData` property `popupMenuRadius` and the radius in
   corresponding static sub-theme helper `FlexSubThemes.popupMenuTheme`, 
   now defaults to 4.
@@ -64,7 +70,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 **FIX**
 
 * Pub.dev analysis does not like document references to deprecated Flutter
-  properties. Changed the [primaryVariant] and [secondaryVariant] references
+  properties. Changed the **primaryVariant** and **secondaryVariant** references
   in document comments to `primaryVariant` and `secondaryVariant`. Nor does it
   like when you use tests to deprecated Flutter SDK members, removed them too,
   they were not needed either after some redesign of a few tests.
@@ -111,7 +117,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   base color. Setting this to false, leaves it at the grey defaults used by
   Flutter defaults.
 
-* Added `navigationBarHighlightOpacity` and `navigationRailIndicatorOpacity` 
+* Added `navigationBarIndicatorOpacity` and `navigationRailIndicatorOpacity` 
   to `FlexSubThemesData`, to expose their already existing properties in
   corresponding sub-themes used by `FlexColorScheme`.
 

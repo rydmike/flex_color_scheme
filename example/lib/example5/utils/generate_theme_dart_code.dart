@@ -452,17 +452,17 @@ String generateThemeDartCode(ThemeController controller) {
           .navBarMuteUnselected
       ? ''
       : '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
-  final String navigationBarHighlightSchemeColor = controller
-              .navBarHighlightSchemeColor !=
+  final String navigationBarIndicatorSchemeColor = controller
+              .navBarIndicatorSchemeColor !=
           null
-      ? '    navigationBarHighlightSchemeColor: ${controller.navBarHighlightSchemeColor},\n'
+      ? '    navigationBarIndicatorSchemeColor: ${controller.navBarIndicatorSchemeColor},\n'
       : '';
-  final String navigationBarHighlightOpacity = controller
-                  .navBarHighlightOpacity !=
+  final String navigationBarIndicatorOpacity = controller
+                  .navBarIndicatorOpacity !=
               null &&
-          !(controller.navBarHighlightSchemeColor == null &&
+          !(controller.navBarIndicatorSchemeColor == null &&
               controller.useFlutterDefaults)
-      ? '    navigationBarHighlightOpacity: ${controller.navBarHighlightOpacity!.toStringAsFixed(2)},\n'
+      ? '    navigationBarIndicatorOpacity: ${controller.navBarIndicatorOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String navigationBarBackgroundSchemeColor = controller
               .navBarBackgroundSchemeColor !=
@@ -624,8 +624,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarSelectedIconSchemeColor'
           '$navigationBarUnselectedIconSchemeColor'
           '$navigationBarMutedUnselectedIcon'
-          '$navigationBarHighlightSchemeColor'
-          '$navigationBarHighlightOpacity'
+          '$navigationBarIndicatorSchemeColor'
+          '$navigationBarIndicatorOpacity'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
           '$navigationBarHeight'
@@ -715,8 +715,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarSelectedIconSchemeColor'
           '$navigationBarUnselectedIconSchemeColor'
           '$navigationBarMutedUnselectedIcon'
-          '$navigationBarHighlightSchemeColor'
-          '$navigationBarHighlightOpacity'
+          '$navigationBarIndicatorSchemeColor'
+          '$navigationBarIndicatorOpacity'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
           '$navigationBarHeight'

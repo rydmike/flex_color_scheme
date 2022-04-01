@@ -547,16 +547,16 @@ class Store {
   static const bool defaultNavBarMuteUnselected = true;
 
   // Key used to read and save the navBarIndicatorSchemeColor value.
-  static const String keyNavBarHighlightSchemeColor =
-      'navBarHighlightSchemeColor';
+  static const String keyNavBarIndicatorSchemeColor =
+      'navBarIndicatorSchemeColor';
   // Default value for the navBarIndicatorSchemeColor, also used to reset
   // settings. We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultNavBarHighlightSchemeColor = null;
+  static const SchemeColor? defaultNavBarIndicatorSchemeColor = null;
 
   // Key used to read and save the navBarIndicatorOpacity value.
-  static const String keyNavBarHighlightOpacity = 'navBarHighlightOpacity';
+  static const String keyNavBarIndicatorOpacity = 'navBarIndicatorOpacity';
   // Default value for the navBarIndicatorOpacity, also to reset settings.
-  static const double? defaultNavBarHighlightOpacity = null;
+  static const double? defaultNavBarIndicatorOpacity = null;
 
   // Key used to read and save the navBarLabelBehavior value.
   static const String keyNavBarLabelBehavior = 'navBarLabelBehavior';

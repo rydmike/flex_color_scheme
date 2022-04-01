@@ -34,7 +34,7 @@ class NavigationBarSettings extends StatelessWidget {
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
             (controller.useFlutterDefaults &&
-                controller.navBarHighlightSchemeColor == null))
+                controller.navBarIndicatorSchemeColor == null))
         ? 'default (secondary)'
         : 'default (primary)';
     final String labelForDefaultSelectedItem =
@@ -67,10 +67,10 @@ class NavigationBarSettings extends StatelessWidget {
         navBarOpacityEnabled ? controller.navBarOpacity : 1;
     final bool navBarHighlightOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
-        !(controller.navBarHighlightSchemeColor == null &&
+        !(controller.navBarIndicatorSchemeColor == null &&
             controller.useFlutterDefaults);
     final double navBarHighlightOpacity = navBarHighlightOpacityEnabled
-        ? (controller.navBarHighlightOpacity ?? -0.01)
+        ? (controller.navBarIndicatorOpacity ?? -0.01)
         : -0.01;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,13 +185,13 @@ class NavigationBarSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
           labelForDefault: labelForDefaultIndicator,
-          index: controller.navBarHighlightSchemeColor?.index ?? -1,
+          index: controller.navBarIndicatorSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarHighlightSchemeColor(null);
+                    controller.setNavBarIndicatorSchemeColor(null);
                   } else {
-                    controller.setNavBarHighlightSchemeColor(
+                    controller.setNavBarIndicatorSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }
@@ -205,15 +205,15 @@ class NavigationBarSettings extends StatelessWidget {
             max: 100,
             divisions: 101,
             label: navBarHighlightOpacityEnabled
-                ? controller.navBarHighlightOpacity == null ||
-                        (controller.navBarHighlightOpacity ?? -1) < 0
+                ? controller.navBarIndicatorOpacity == null ||
+                        (controller.navBarIndicatorOpacity ?? -1) < 0
                     ? 'default 24%'
                     : (navBarHighlightOpacity * 100).toStringAsFixed(0)
                 : 'default 24%',
             value: navBarHighlightOpacity * 100,
             onChanged: navBarHighlightOpacityEnabled
                 ? (double value) {
-                    controller.setNavBarHighlightOpacity(
+                    controller.setNavBarIndicatorOpacity(
                         value < 0 ? null : value / 100);
                   }
                 : null,
@@ -229,8 +229,8 @@ class NavigationBarSettings extends StatelessWidget {
                 ),
                 Text(
                   navBarHighlightOpacityEnabled
-                      ? controller.navBarHighlightOpacity == null ||
-                              (controller.navBarHighlightOpacity ?? -1) < 0
+                      ? controller.navBarIndicatorOpacity == null ||
+                              (controller.navBarIndicatorOpacity ?? -1) < 0
                           ? 'default 24%'
                           // ignore: lines_longer_than_80_chars
                           : '${(navBarHighlightOpacity * 100).toStringAsFixed(0)} %'

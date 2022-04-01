@@ -5473,7 +5473,6 @@ class FlexColorScheme with Diagnosticable {
     // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
     // If our onSurface is primary tinted it has an effect on this divider too.
     final Color dividerColor = colorScheme.onSurface.withAlpha(0x1E); // 12%
-
     // Make the effective input decoration theme, by using FCS sub themes
     // if opted in, otherwise use pre v4 version as before. This decoration
     // theme is also passed into the TimePickerTheme, so we get the same
@@ -5536,7 +5535,6 @@ class FlexColorScheme with Diagnosticable {
       brightness: colorScheme.brightness,
       primaryColor: colorScheme.primary,
       canvasColor: colorScheme.background,
-
       // TODO(rydmike): Monitor Flutter SDK deprecation of scaffoldBackground.
       // See: https://github.com/flutter/flutter/issues/91772
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
@@ -5565,7 +5563,6 @@ class FlexColorScheme with Diagnosticable {
       // Same as ThemeData SDK.
       // hintColor is only used by DropdownButton and InputDecorator in SDK.
       hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
-
       // TODO(rydmike): Monitor Flutter SDK deprecation of interaction colors.
       // See: https://github.com/flutter/flutter/issues/91772
       // Special theming on hover, focus, highlight and splash, if opting in on
@@ -5591,7 +5588,6 @@ class FlexColorScheme with Diagnosticable {
               .blendAlpha(Colors.white, kSplashAlphaBlend)
               .withAlpha(kSplashAlpha)
           : null,
-
       // TODO(rydmike): Monitor Flutter SDK deprecation of dialogBackgroundColor
       // Flutter standard dialogBackgroundColor for color scheme based themes
       // uses colorScheme.background.
@@ -5606,10 +5602,8 @@ class FlexColorScheme with Diagnosticable {
       // in dark mode. See : https://github.com/flutter/flutter/issues/90353
       // The dialogBackgroundColor in ThemeData is going to be deprecated.
       dialogBackgroundColor: dialogBackground ?? colorScheme.surface,
-
       // Define errorColor via color scheme error color.
       errorColor: colorScheme.error,
-
       // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
       // Use TabBar style dependent function for selected Tab as indicatorColor
       // if no color scheme selection for it is made.
@@ -5617,14 +5611,12 @@ class FlexColorScheme with Diagnosticable {
           ? selectedTabColor()
           : FlexSubThemes.schemeColor(
               subTheme.tabBarIndicatorSchemeColor!, colorScheme),
-
       // Elevation overlay on dark material elevation is used on dark themes
       // on surfaces when so requested, applyElevationOverlayColor defaults
       // to true in FlexColorScheme themes, but you can turn it off.
       // Flutter ThemeData.from ColorScheme based
       // themes also uses this by default, but older ThemeData factories do not.
       applyElevationOverlayColor: isDark && applyElevationOverlayColor,
-
       // Pass the from FlexColorScheme defined colorScheme to ThemeData
       // colorScheme. Newer standard Flutter sub themes use the colorScheme
       // for their theming, and all sub themes will eventually be converted to
@@ -5648,7 +5640,6 @@ class FlexColorScheme with Diagnosticable {
       // longer needed corrections or remove totally deprecated
       // ThemeData properties when it is appropriate and timely to do so.
       // ----------------------------------------------------------------------
-
       // TODO(rydmike): Monitor Flutter SDK deprecation of toggleableActive.
       // See: https://github.com/flutter/flutter/pull/95870
       // This color is still important, if it is not set we get a teal color for
@@ -5658,7 +5649,6 @@ class FlexColorScheme with Diagnosticable {
       // color scheme based theme, it should really do the same as below.
       // See issue: https://github.com/flutter/flutter/issues/65782
       toggleableActiveColor: colorScheme.secondary,
-
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
       // See: https://github.com/flutter/flutter/issues/91772
       // The primary dark color no longer exists in ColorScheme themes, but
@@ -5670,7 +5660,6 @@ class FlexColorScheme with Diagnosticable {
       // This property is used by `CircleAvatar` and `Slider`.
       // See issue: https://github.com/flutter/flutter/issues/65782
       primaryColorDark: primaryColorDark,
-
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorLight.
       // See: https://github.com/flutter/flutter/issues/91772
       // The light primary color no longer exists in ColorScheme themes, but it
@@ -5680,7 +5669,6 @@ class FlexColorScheme with Diagnosticable {
       // This property is used by `CircleAvatar` and `Slider`.
       // See issue: https://github.com/flutter/flutter/issues/65782
       primaryColorLight: primaryColorLight,
-
       // TODO(rydmike): Monitor Flutter SDK deprecation of secondaryHeaderColor
       // See: https://github.com/flutter/flutter/issues/91772
       // Define a secondary header color, this property is only used in Flutter
@@ -5689,7 +5677,6 @@ class FlexColorScheme with Diagnosticable {
       // value from the calculated primary swatch.
       // See issue: https://github.com/flutter/flutter/issues/65782
       secondaryHeaderColor: secondaryHeaderColor,
-
       // TODO(rydmike): Tech debt: Move AppBar themes opt-in to FlexSubThemes.
       // The app bar theme allows us to use a custom colored appbar theme
       // in both light and dark themes that is not dependent on theme primary
@@ -5721,20 +5708,17 @@ class FlexColorScheme with Diagnosticable {
           statusBarIconBrightness: appBarBrightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
-
           // TODO(rydmike): Raise sys-nav AppBar systemOverlayStyle SDK issue.
           //   Would be useful it could set system navbar properties too and not
           //   only status bar properties. While it might be odd to do so, it
           //   seems even more odd that a part of the SystemUiOverlayStyle has
           //   no effect when used here.
-
           // The systemNavigationBarColor used by default AppBar in SDK is
           // always black, like so:
           // systemNavigationBarColor: const Color(0xFF000000),
           // We try to set it to scheme background instead in AppBar theme,
-          // does not do anything, result will be black anyway
+          // does not do anything, result will be black anyway.
           systemNavigationBarColor: colorScheme.background,
-
           // The systemNavigationBarIconBrightness used by the AppBar in SDK, is
           // always light, for the black background it get, like so:
           // systemNavigationBarIconBrightness: Brightness.light,
@@ -5743,12 +5727,10 @@ class FlexColorScheme with Diagnosticable {
           // system navbar remains black anyway.
           systemNavigationBarIconBrightness:
               isDark ? Brightness.light : Brightness.dark,
-
           // Keeping the above system navbar changes, even if they up to at
           // least Flutter 2.10.3 did not do anything, maybe they start to
           // work one day, then we do not not need an AnnotatedRegion for it
           // anymore but can get it via AppBar theme, the way it should work.
-
           // The systemNavigationBarDividerColor used by default AppBar in SDK:
           systemNavigationBarDividerColor: null,
           systemNavigationBarContrastEnforced: false,
@@ -5765,7 +5747,6 @@ class FlexColorScheme with Diagnosticable {
         color: colorScheme.background,
         elevation: bottomAppBarElevation,
       ),
-
       // In TextSelectionThemeData, the standard for selectionColor is
       // colorScheme.primary with opacity value 0.4 for dark and 0.12 light
       // mode. Here we use primary with 0.5 for dark mode and 0.3 for light
@@ -5777,7 +5758,6 @@ class FlexColorScheme with Diagnosticable {
             : colorScheme.primary.withAlpha(0x4C), // 30%
         selectionHandleColor: primaryColorDark,
       ),
-
       // TODO(rydmike): Tech debt: Move TabBar themes opt-in to a FlexSubThemes.
       // Defines the TabBar theme that will fit nicely in an AppBar
       // (default) or on background color for use eg in a Scaffold, the choice
@@ -5801,7 +5781,6 @@ class FlexColorScheme with Diagnosticable {
                       subTheme.tabBarItemSchemeColor!, colorScheme)
                   .withAlpha(0x99) // 60%,
           ),
-
       // Set colors for for icons in opted in sub themes.
       iconTheme: useSubThemes
           ? IconThemeData(color: effectiveTextTheme.headline6!.color)
@@ -5809,7 +5788,6 @@ class FlexColorScheme with Diagnosticable {
       primaryIconTheme: useSubThemes
           ? IconThemeData(color: effectivePrimaryTextTheme.headline6!.color)
           : null,
-
       // TODO(rydmike): Tech debt: Move tooltip themes opt-in to FlexSubThemes.
       // TODO(rydmike): Offer more tooltip theming options, like tip delays.
       // Opinionated theming of Tooltips, the default theme for Material
@@ -5869,7 +5847,6 @@ class FlexColorScheme with Diagnosticable {
                   )
                 : null,
       ),
-
       textButtonTheme: useSubThemes
           ? FlexSubThemes.textButtonTheme(
               colorScheme: colorScheme,
@@ -6066,7 +6043,10 @@ class FlexColorScheme with Diagnosticable {
       bottomNavigationBarTheme: useSubThemes
           ? FlexSubThemes.bottomNavigationBar(
               colorScheme: colorScheme,
-              labelTextStyle: subTheme.bottomNavigationBarLabelTextStyle,
+              labelTextStyle: subTheme.bottomNavigationBarLabelTextStyle ??
+                  (subTheme.useFlutterDefaults
+                      ? null
+                      : effectiveTextTheme.bodyMedium),
               selectedLabelSize: subTheme.bottomNavigationBarSelectedLabelSize,
               unselectedLabelSize:
                   subTheme.bottomNavigationBarUnselectedLabelSize,
@@ -6127,16 +6107,16 @@ class FlexColorScheme with Diagnosticable {
               unselectedIconSchemeColor:
                   subTheme.navigationBarUnselectedIconSchemeColor,
               mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon,
-              highlightSchemeColor: subTheme.navigationBarHighlightSchemeColor,
+              indicatorSchemeColor: subTheme.navigationBarIndicatorSchemeColor,
               backgroundSchemeColor: subTheme
                       .navigationBarBackgroundSchemeColor ??
                   (subTheme.useFlutterDefaults ? null : SchemeColor.background),
               opacity: subTheme.navigationBarOpacity,
               height: subTheme.navigationBarHeight,
               labelBehavior: subTheme.navigationBarLabelBehavior,
-              indicatorAlpha: subTheme.navigationBarHighlightOpacity != null
+              indicatorAlpha: subTheme.navigationBarIndicatorOpacity != null
                   ? Color.getAlphaFromOpacity(
-                      subTheme.navigationBarHighlightOpacity!)
+                      subTheme.navigationBarIndicatorOpacity!)
                   : null,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,

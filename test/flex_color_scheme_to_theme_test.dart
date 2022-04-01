@@ -2272,7 +2272,7 @@ void main() {
         navigationBarOpacity: 0.95,
         navigationBarSelectedIconSchemeColor: SchemeColor.primary,
         navigationBarSelectedLabelSchemeColor: SchemeColor.onSurface,
-        navigationBarHighlightSchemeColor: SchemeColor.primaryContainer,
+        navigationBarIndicatorSchemeColor: SchemeColor.primaryContainer,
         navigationBarBackgroundSchemeColor: SchemeColor.background,
         navigationBarMutedUnselectedIcon: true,
         navigationBarMutedUnselectedLabel: true,

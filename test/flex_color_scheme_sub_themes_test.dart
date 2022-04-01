@@ -261,8 +261,8 @@ void main() {
         subThemesData: const FlexSubThemesData(
           navigationRailIndicatorOpacity: 0.5,
           navigationRailIndicatorSchemeColor: SchemeColor.onTertiary,
-          navigationBarHighlightOpacity: 0.8,
-          navigationBarHighlightSchemeColor: SchemeColor.primaryContainer,
+          navigationBarIndicatorOpacity: 0.8,
+          navigationBarIndicatorSchemeColor: SchemeColor.primaryContainer,
           blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
