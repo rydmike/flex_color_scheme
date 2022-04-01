@@ -81,8 +81,8 @@ class _DemoAppState extends State<DemoApp> {
           //
           // Some wild demo custom icons size examples, not available in
           // Themes Playground generated API. There are some more APIs not
-          // available via code generated from the Themes Playground app.
-          //
+          // available via code generated from the Themes Playground app,
+          // like these:
           // bottomNavigationBarSelectedIconSize: 30,
           // bottomNavigationBarUnselectedIconSize: 20,
           // navigationBarSelectedIconSize: 34,

@@ -57,6 +57,7 @@ class PanelView extends StatefulWidget {
 
 class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   late final PageController pageController;
+  late final ScrollController scrollController;
   late int previousPage;
 
   @override
@@ -66,11 +67,13 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
       initialPage: widget.themeController.viewIndex,
     );
     previousPage = widget.themeController.viewIndex;
+    scrollController = ScrollController();
   }
 
   @override
   void dispose() {
     pageController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
@@ -97,7 +100,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
       debugPrint('media.size.height ....... : ${media.size.height}');
     }
     return NestedScrollView(
-      controller: ScrollController(),
+      controller: scrollController,
       headerSliverBuilder: (BuildContext context, bool value) {
         return <Widget>[
           SliverPersistentHeader(

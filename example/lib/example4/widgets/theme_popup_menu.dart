@@ -22,6 +22,7 @@ class ThemePopupMenu extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
 
     return PopupMenuButton<int>(
+      tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: onChanged,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[

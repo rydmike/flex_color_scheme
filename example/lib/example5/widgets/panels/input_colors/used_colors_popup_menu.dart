@@ -72,6 +72,7 @@ class UsedColorsPopupMenu extends StatelessWidget {
     final bool enabled = onChanged != null;
 
     return PopupMenuButton<int>(
+      tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: onChanged,
       enabled: enabled,

@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 /// Uses index out out of range of [SchemeColor] to represent and select
 /// no selection of [SchemeColor] which sets its value to null in parent,
 /// so we can use a selectable item as null input, to represent default value
-/// via no value definition. A bit ugly pragmatic approach. Yes it's possible to
-/// do it prettier with more code, but this works well enough in this demo.
+/// via no value definition. A bit ugly/pragmatic approach.
 class ColorSchemePopupMenu extends StatelessWidget {
   const ColorSchemePopupMenu({
     Key? key,
@@ -16,7 +15,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
     this.title,
     this.subtitle,
     this.contentPadding,
-    this.labelForDefault = 'null (primary)',
+    this.labelForDefault = 'default (primary)',
   }) : super(key: key);
   final int index;
   final ValueChanged<int>? onChanged;
@@ -40,15 +39,13 @@ class ColorSchemePopupMenu extends StatelessWidget {
         : labelForDefault;
 
     return PopupMenuButton<int>(
+      tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
         // We return -1 for index that reached first deprecated color.
         // -1, or any negative value will cause controller for a
-        // SchemeColor to be set to "null", we nd to be able ot do that
+        // SchemeColor to be set to "null", we need to be able to do that
         // to input "null" property value to SchemeColor configs.
-        // To avoid "null" issue with stored values, the services that store
-        // the SchemeColor save it as -1 and returns that as null to
-        // controller too.
         onChanged?.call(index >= SchemeColor.values.length - 2 ? -1 : index);
       },
       enabled: enabled,
@@ -59,6 +56,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
+              dense: true,
               leading: ColorSchemeBox(
                 color: i >= SchemeColor.values.length - 2
                     ? colorScheme.surface
@@ -66,6 +64,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
                         SchemeColor.values[i],
                         colorScheme,
                       ),
+                defaultColor: i >= SchemeColor.values.length - 2,
               ),
               title: i >= SchemeColor.values.length - 2
                   // If we reached first deprecated color, make default label.
@@ -83,7 +82,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             if (subtitle != null) subtitle!,
-            Text('ColorScheme color: $colorName'),
+            Text('ColorScheme color $colorName'),
           ],
         ),
         trailing: ColorSchemeBox(
@@ -93,6 +92,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
                   colorScheme,
                 )
               : colorScheme.surface,
+          defaultColor: useDefault,
         ),
       ),
     );
@@ -104,10 +104,21 @@ class ColorSchemeBox extends StatelessWidget {
     Key? key,
     this.color = Colors.white,
     this.size = const Size(45, 35),
+    this.defaultColor = false,
   }) : super(key: key);
 
   final Color color;
   final Size size;
+  final bool defaultColor;
+
+  // Return true if the color is light, meaning it needs dark text for contrast.
+  static bool _isLight(final Color color) =>
+      FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
+
+  // On color used when a theme color property does not have a theme onColor.
+  static Color _onColor(final Color color) => _isLight(color)
+      ? Colors.black.withOpacity(0.4)
+      : Colors.white.withOpacity(0.4);
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +135,9 @@ class ColorSchemeBox extends StatelessWidget {
             width: 1,
           ),
         ),
+        child: defaultColor
+            ? Icon(Icons.texture_outlined, color: _onColor(color))
+            : Icon(Icons.palette_outlined, color: _onColor(color)),
       ),
     );
   }

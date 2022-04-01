@@ -16,6 +16,7 @@ class TextFieldSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        const SizedBox(height: 8),
         if (isLight)
           ColorSchemePopupMenu(
             title: const Text('Light theme TextField color base'),
@@ -48,7 +49,7 @@ class TextFieldSettings extends StatelessWidget {
           ),
         SwitchListTileAdaptive(
           title: const Text(
-            'TextField uses fill color',
+            'TextField has fill color',
           ),
           value: controller.inputDecoratorIsFilled &&
               controller.useSubThemes &&
@@ -62,7 +63,7 @@ class TextFieldSettings extends StatelessWidget {
             'Border style',
           ),
           subtitle: const Text(
-            'ON for outline  OFF for underline',
+            'ON for outline | OFF for underline',
           ),
           value: controller.inputDecoratorBorderType ==
                   FlexInputBorderType.outline &&

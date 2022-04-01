@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../shared/color_scheme_popup_menu.dart';
 
 /// Popup used to change the used FlexSchemeData index in the theme controller
 /// and via that the selected active theme.
@@ -22,6 +23,7 @@ class InputColorsPopupMenu extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
 
     return PopupMenuButton<int>(
+      tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: controller.setSchemeIndex,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
@@ -29,11 +31,13 @@ class InputColorsPopupMenu extends StatelessWidget {
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
-              leading: Icon(Icons.lens,
-                  color: isLight
-                      ? AppColor.schemeAtIndex(i, controller).light.primary
-                      : AppColor.schemeAtIndex(i, controller).dark.primary,
-                  size: 35),
+              dense: true,
+              leading: ColorSchemeBox(
+                color: isLight
+                    ? AppColor.schemeAtIndex(i, controller).light.primary
+                    : AppColor.schemeAtIndex(i, controller).dark.primary,
+                size: const Size(55, 36),
+              ),
               title: Text(AppColor.schemes[i].name),
             ),
           )
@@ -45,10 +49,9 @@ class InputColorsPopupMenu extends StatelessWidget {
           '${AppColor.schemes[controller.schemeIndex].name} color scheme',
         ),
         subtitle: Text(AppColor.schemes[controller.schemeIndex].description),
-        trailing: Icon(
-          Icons.lens,
+        trailing: ColorSchemeBox(
           color: colorScheme.primary,
-          size: 40,
+          size: const Size(55, 36),
         ),
       ),
     );

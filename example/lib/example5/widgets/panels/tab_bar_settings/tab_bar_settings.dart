@@ -70,17 +70,17 @@ class TabBarSettings extends StatelessWidget {
         const ListTile(
           title: Text('Custom colors'),
           subtitle: Text('With component themes enabled you can select '
-              'scheme color for the tab items and their indicator separately. '
-              'Using TabBarStyle is handy to use to sync the style to active '
-              'AppBar theme, that may changes dynamically. This offers more '
-              'options if that is not needed. '
+              'scheme color for the tab items and indicator separately. '
+              'Using TabBarStyle conveniently syncs the TabBar to active '
+              'AppBar or surface theme, but this offers more '
+              'options if that is needed. '
               'These settings override used TabBarStyle, set them '
-              'back to default (null) to use TabBarStyle again.'),
+              'back to default to use TabBarStyle again.'),
         ),
         if (isLight) ...<Widget>[
           ColorSchemePopupMenu(
             title: const Text('Light TabBar items color'),
-            labelForDefault: 'null (TabBarStyle)',
+            labelForDefault: 'default (TabBarStyle)',
             index: controller.tabBarItemSchemeColorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -95,7 +95,7 @@ class TabBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('Light TabBar indicator color'),
-            labelForDefault: 'null (TabBarStyle)',
+            labelForDefault: 'default (TabBarStyle)',
             index: controller.tabBarIndicatorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -111,7 +111,7 @@ class TabBarSettings extends StatelessWidget {
         ] else ...<Widget>[
           ColorSchemePopupMenu(
             title: const Text('Dark TabBar items color'),
-            labelForDefault: 'null (TabBarStyle)',
+            labelForDefault: 'default (TabBarStyle)',
             index: controller.tabBarItemSchemeColorDark?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -126,7 +126,7 @@ class TabBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('Dark TabBar indicator color'),
-            labelForDefault: 'null (TabBarStyle)',
+            labelForDefault: 'default (TabBarStyle)',
             index: controller.tabBarIndicatorDark?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {

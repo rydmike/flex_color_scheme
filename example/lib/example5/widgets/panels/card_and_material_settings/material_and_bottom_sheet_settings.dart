@@ -16,11 +16,11 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final String labelForDefaultSelectedItem = isDark
         ? (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default null (light primary, 93% opacity)'
-            : 'default null (Light grey)'
+            ? 'default (light primary, 93% opacity)'
+            : 'default (Light grey)'
         : (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default null (dark primary, 95% opacity)'
-            : 'default null (dark grey)';
+            ? 'default (dark primary, 95% opacity)'
+            : 'default (dark grey)';
     final String sheetRadiusDefaultLabel =
         controller.bottomSheetBorderRadius == null &&
                 controller.defaultRadius == null

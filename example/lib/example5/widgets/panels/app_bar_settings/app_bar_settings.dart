@@ -274,15 +274,15 @@ class AppBarSettings extends StatelessWidget {
               'AppBar background color. '
               'Using AppBarStyle is convenient and does not require activating '
               'FlexColorScheme component themes, but this offers more choices. '
-              'Selecting a color hre overrides used AppBarStyle, set it back '
-              'to default (null) to use AppBarStyle again.'),
+              'Selecting a color to override used AppBarStyle, set it back '
+              'to default to use AppBarStyle again.'),
         ),
         if (isLight)
           ColorSchemePopupMenu(
             title: const Text('Light theme AppBar background color'),
             labelForDefault: controller.useFlexColorScheme
-                ? 'null (AppBarStyle)'
-                : 'null (primary)',
+                ? 'default (AppBarStyle)'
+                : 'default (primary)',
             index: controller.appBarBackgroundSchemeColorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -299,8 +299,8 @@ class AppBarSettings extends StatelessWidget {
           ColorSchemePopupMenu(
             title: const Text('Dark theme AppBar background color'),
             labelForDefault: controller.useFlexColorScheme
-                ? 'null (AppBarStyle)'
-                : 'null (surface)',
+                ? 'default (AppBarStyle)'
+                : 'default (surface)',
             index: controller.appBarBackgroundSchemeColorDark?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {

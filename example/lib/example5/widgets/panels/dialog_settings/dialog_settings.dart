@@ -27,14 +27,14 @@ class DialogSettings extends StatelessWidget {
           subtitle: Text('Flutter SDK default background is '
               'colorScheme.background for Dialog and DatePickerDialog, but '
               'colorScheme.surface for TimePickerDialog. FlexColorScheme '
-              'sub-themes use surface as default for all dialogs, to ensure '
+              'sub-themes use surface as default for all dialogs to ensure '
               'that they have the same background by default and that '
               'elevation overlay color works in dark mode.\n\n'
               'You can theme them to a shared color scheme based color too.'),
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: 'null (background)',
+          labelForDefault: 'default (background)',
           index: controller.dialogBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
