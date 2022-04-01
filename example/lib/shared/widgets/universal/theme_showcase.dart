@@ -48,11 +48,17 @@ class ThemeShowcase extends StatelessWidget {
         const ListTileShowcase(),
         const Divider(),
         const TabBarForAppBarShowcase(),
+        const SizedBox(height: 8),
+        const Divider(),
         const TabBarForBackgroundShowcase(),
         const SizedBox(height: 8),
         const Divider(),
         const BottomNavigationBarShowcase(),
+        const SizedBox(height: 8),
+        const Divider(),
         const NavigationBarShowcase(),
+        const SizedBox(height: 8),
+        const Divider(),
         const NavigationRailShowcase(),
         const SizedBox(height: 8),
         const Divider(),
@@ -685,33 +691,21 @@ class TabBarForAppBarShowcase extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextStyle textStyle = theme.textTheme.bodySmall!;
 
     final Color effectiveTabBackground =
         Theme.of(context).appBarTheme.backgroundColor ??
             (isDark ? colorScheme.surface : colorScheme.primary);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return DefaultTabController(
       length: 3,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'TabBar in an AppBar',
-              style: textStyle.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'If the TabBar will always be used in an AppBar, then use '
-              'style FlexTabBarStyle forAppBar (default), '
-              'it will fit contrast wise here',
-              style: textStyle,
-            ),
-          ),
           Material(
             color: effectiveTabBackground,
             child: const SizedBox(
@@ -734,6 +728,22 @@ class TabBarForAppBarShowcase extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'TabBar in an AppBar',
+              style: denseHeader,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'If the TabBar will always be used in an AppBar, then use '
+              'style FlexTabBarStyle forAppBar (default), '
+              'it will fit contrast wise here',
+              style: denseBody,
+            ),
+          ),
         ],
       ),
     );
@@ -746,28 +756,16 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle textStyle = theme.textTheme.bodySmall!;
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return DefaultTabController(
       length: 3,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'TabBar on a surface',
-              style: textStyle.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'If the TabBar will always be used on background and surface '
-              'colors, then use style FlexTabBarStyle forBackground, '
-              'it will fit contrast wise here',
-              style: textStyle,
-            ),
-          ),
           const SizedBox(
             height: 70,
             child: TabBar(
@@ -785,6 +783,22 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
                   icon: Icon(Icons.create_new_folder),
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'TabBar on a surface',
+              style: denseHeader,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'If the TabBar will always be used on background and surface '
+              'colors, then use style FlexTabBarStyle forBackground, '
+              'it will fit contrast wise here',
+              style: denseBody,
             ),
           ),
         ],
@@ -807,30 +821,16 @@ class _BottomNavigationBarShowcaseState
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'BottomNavigationBar (Material 2)',
-              style: Theme.of(context)
-                  .textTheme
-                  .caption!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Default SDK background color is theme canvasColor via Material, '
-              'and theme.canvasColor is set to theme.colorScheme.background, '
-              'elevation is 8. FlexColorScheme sub-theme default is '
-              'colorScheme.background and elevation 0.',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ),
           BottomNavigationBar(
             currentIndex: buttonIndex,
             onTap: (int value) {
@@ -856,6 +856,23 @@ class _BottomNavigationBarShowcaseState
               ),
             ],
           ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'BottomNavigationBar (Material 2)',
+              style: denseHeader,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Default SDK background color is theme canvasColor via Material, '
+              'and theme.canvasColor is set to theme.colorScheme.background, '
+              'elevation is 8. FlexColorScheme sub-theme default is '
+              'colorScheme.background and elevation 0.',
+              style: denseBody,
+            ),
+          ),
         ],
       ),
     );
@@ -874,29 +891,16 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'NavigationBar (Material 3)',
-              style: Theme.of(context)
-                  .textTheme
-                  .caption!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Default SDK background color is theme.colorScheme.surface with '
-              'an onSurface overlay color with elevation 3. FlexColorScheme '
-              'sub-theme default is colorScheme.background and elevation 0.',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ),
           NavigationBar(
             selectedIndex: buttonIndex,
             onDestinationSelected: (int value) {
@@ -918,6 +922,22 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
                 label: 'Folder',
               ),
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'NavigationBar (Material 3)',
+              style: denseHeader,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Default SDK background color is theme.colorScheme.surface with '
+              'an onSurface overlay color with elevation 3. FlexColorScheme '
+              'sub-theme default is colorScheme.background and elevation 0.',
+              style: denseBody,
+            ),
           ),
         ],
       ),
@@ -962,6 +982,12 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -969,10 +995,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
           child: Text(
             'NavigationRail',
-            style: Theme.of(context)
-                .textTheme
-                .caption!
-                .copyWith(fontWeight: FontWeight.bold),
+            style: denseHeader,
           ),
         ),
         Padding(
@@ -980,7 +1003,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
           child: Text(
             'Default SDK background color is theme.colorScheme.surface. '
             'FlexColorScheme sub-theme default is colorScheme.background.',
-            style: Theme.of(context).textTheme.bodySmall,
+            style: denseBody,
           ),
         ),
         const Divider(height: 1),
@@ -1227,6 +1250,11 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
             .textTheme
             .titleMedium!
             .copyWith(color: snackForeground);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1247,18 +1275,12 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        Text(
-          'Material type canvas',
-          style: Theme.of(context)
-              .textTheme
-              .caption!
-              .copyWith(fontWeight: FontWeight.bold),
-        ),
+        Text('Material type canvas', style: denseHeader),
         Text(
           'Default background color is theme canvasColor, and '
           'theme canvasColor is set to theme colorScheme background. The '
           'color canvasColor is going to be deprecated in Flutter SDK',
-          style: Theme.of(context).textTheme.bodySmall,
+          style: denseBody,
         ),
         const Material(
           type: MaterialType.canvas,
@@ -1287,18 +1309,12 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 32),
-        Text(
-          'Material type card',
-          style: Theme.of(context)
-              .textTheme
-              .caption!
-              .copyWith(fontWeight: FontWeight.bold),
-        ),
+        Text('Material type card', style: denseHeader),
         Text(
           'Default background color is theme cardColor, and '
           'theme cardColor is set to theme colorScheme surface. The '
           'color cardColor is going to be deprecated in Flutter SDK',
-          style: Theme.of(context).textTheme.bodySmall,
+          style: denseBody,
         ),
         const Material(
           elevation: 0,
@@ -1377,24 +1393,24 @@ class CardShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            'Card',
-            style: Theme.of(context)
-                .textTheme
-                .caption!
-                .copyWith(fontWeight: FontWeight.bold),
-          ),
+          child: Text('Card', style: denseHeader),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'Default background color comes from Material of type card',
-            style: Theme.of(context).textTheme.bodySmall,
+            style: denseBody,
           ),
         ),
         const Card(

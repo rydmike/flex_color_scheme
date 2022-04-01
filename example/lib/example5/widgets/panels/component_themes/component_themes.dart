@@ -150,7 +150,9 @@ class ComponentThemes extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
           child: ShowSubThemeColors(),
         ),
+        const Divider(height: 16),
         SwitchListTileAdaptive(
+          dense: true,
           title: const Text('Use Flutter defaults'),
           subtitle: const Text('Undefined sub-theme values will fall '
               'back to Flutter SDK defaults. Prefer OFF to use FCS defaults. '
@@ -164,6 +166,7 @@ class ComponentThemes extends StatelessWidget {
               ? controller.setUseFlutterDefaults
               : null,
         ),
+        const SizedBox(height: 8),
       ],
     );
   }
