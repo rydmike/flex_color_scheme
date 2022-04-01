@@ -81,6 +81,7 @@ class UsedColorsPopupMenu extends StatelessWidget {
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
+              dense: true,
               leading: CircleAvatar(child: Text('$i')),
               title: Text(_selectColors(i), style: txtStyle),
             ),

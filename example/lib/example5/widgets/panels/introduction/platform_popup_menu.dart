@@ -101,6 +101,7 @@ class PlatformPopupMenu extends StatelessWidget {
       itemBuilder: (BuildContext context) =>
           <PopupMenuItem<TargetPlatform>>[...platformItems.values.toList()],
       child: ListTile(
+        dense: true,
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 12),
           child: Icon(
