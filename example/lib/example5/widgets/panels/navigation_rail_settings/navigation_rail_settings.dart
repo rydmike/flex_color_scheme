@@ -24,6 +24,12 @@ class NavigationRailSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
             (controller.useFlutterDefaults &&
                 controller.navRailIndicatorSchemeColor == null))
@@ -65,6 +71,7 @@ class NavigationRailSettings extends StatelessWidget {
             ? controller.navigationRailElevation
             : 8;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
@@ -246,7 +253,7 @@ class NavigationRailSettings extends StatelessWidget {
           ),
         ),
         NavigationRailShowcase(
-          height: 650,
+          height: 700,
           // TODO(rydmike): Still needed? Sometimes worked without it, weird.
           // This is used as a work around to avoid unnecessarily eager
           // assert in SDK.
@@ -261,6 +268,7 @@ class NavigationRailSettings extends StatelessWidget {
               (!controller.useSubThemes || !controller.useFlexColorScheme) &&
                   !controller.useMaterial3,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ColorSchemePopupMenu(
                 title: const Text('Selected item color'),
@@ -312,7 +320,28 @@ class NavigationRailSettings extends StatelessWidget {
                     : null,
               ),
               const Divider(height: 16),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: Text(
+                  'More settings with the API',
+                  style: denseHeader,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: Text(
+                  'With the API you can also set the font and icon size '
+                  'individually on selected and unselected items. Use '
+                  'FlexSubThemesData properties: '
+                  'navigationRailSelectedLabelSize, '
+                  'navigationRailUnselectedLabelSize, '
+                  'navigationRailSelectedIconSize and '
+                  'navigationRailUnselectedIconSize.',
+                  style: denseBody,
+                ),
+              ),
               SwitchListTileAdaptive(
+                dense: true,
                 title: const Text('Use Flutter defaults'),
                 subtitle: const Text('Undefined values will fall back to '
                     'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
@@ -329,6 +358,7 @@ class NavigationRailSettings extends StatelessWidget {
                         ? controller.setUseFlutterDefaults
                         : null,
               ),
+              const SizedBox(height: 8),
             ],
           ),
         ),
