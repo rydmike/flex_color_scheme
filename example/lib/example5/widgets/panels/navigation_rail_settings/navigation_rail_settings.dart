@@ -33,9 +33,9 @@ class NavigationRailSettings extends StatelessWidget {
     final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
             (controller.useFlutterDefaults &&
                 controller.navRailIndicatorSchemeColor == null))
-        ? 'null (secondary)'
-        : 'null (primary)';
-    const String labelForDefaultSelectedItem = 'null (primary)';
+        ? 'default (secondary)'
+        : 'default (primary)';
+    const String labelForDefaultSelectedItem = 'default (primary)';
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
@@ -47,10 +47,10 @@ class NavigationRailSettings extends StatelessWidget {
                 (controller.useFlutterDefaults &&
                     controller.navRailSelectedSchemeColor == null &&
                     controller.navRailUnselectedSchemeColor == null))
-            ? 'null (onSurface with opacity)'
+            ? 'default (onSurface with opacity)'
             : controller.navRailMuteUnselected && muteUnselectedEnabled
-                ? 'null (onSurface, blend & opacity)'
-                : 'null (onSurface)';
+                ? 'default (onSurface, blend & opacity)'
+                : 'default (onSurface)';
     final bool navRailOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.navRailBackgroundSchemeColor == null &&
@@ -80,8 +80,8 @@ class NavigationRailSettings extends StatelessWidget {
                   !controller.useFlexColorScheme ||
                   (controller.useFlutterDefaults &&
                       controller.navRailBackgroundSchemeColor == null)
-              ? 'null (surface)'
-              : 'null (background)',
+              ? 'default (surface)'
+              : 'default (background)',
           index: controller.navRailBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

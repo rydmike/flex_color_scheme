@@ -32,8 +32,8 @@ class SwitchesSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Switch color'),
           labelForDefault: !controller.useFlexColorScheme && isDark
-              ? 'null (tealAccent[200])'
-              : 'null (secondary)',
+              ? 'default (tealAccent[200])'
+              : 'default (secondary)',
           index: controller.switchSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -53,8 +53,8 @@ class SwitchesSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Checkbox color'),
           labelForDefault: !controller.useFlexColorScheme && isDark
-              ? 'null (tealAccent[200])'
-              : 'null (secondary)',
+              ? 'default (tealAccent[200])'
+              : 'default (secondary)',
           index: controller.checkboxSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -75,8 +75,8 @@ class SwitchesSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Radio color'),
           labelForDefault: !controller.useFlexColorScheme && isDark
-              ? 'null (tealAccent[200])'
-              : 'null (secondary)',
+              ? 'default (tealAccent[200])'
+              : 'default (secondary)',
           index: controller.radioSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

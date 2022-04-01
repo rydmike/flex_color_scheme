@@ -34,7 +34,7 @@ class InputColorsSelector extends StatefulWidget {
 }
 
 class _InputColorsSelectorState extends State<InputColorsSelector> {
-  late ScrollController scrollController;
+  late final ScrollController scrollController;
   late int schemeIndex;
 
   // The fixed width the scrolling button at desktop size.

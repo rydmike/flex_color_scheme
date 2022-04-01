@@ -92,6 +92,7 @@ class PlatformPopupMenu extends StatelessWidget {
     String subtitle = 'Now set to ${platformString[platform]}';
 
     return PopupMenuButton<TargetPlatform>(
+      tooltip: '',
       padding: const EdgeInsets.all(10),
       onSelected: (TargetPlatform value) {
         subtitle = 'Now set to ${platformString[value]}';

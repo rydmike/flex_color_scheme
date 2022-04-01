@@ -26,8 +26,8 @@ class BottomNavigationBarSettings extends StatelessWidget {
                 (controller.useFlutterDefaults &&
                     controller.bottomNavBarSelectedSchemeColor == null &&
                     controller.bottomNavBarUnselectedSchemeColor == null))
-        ? 'null (secondary)'
-        : 'null (primary)';
+        ? 'default (secondary)'
+        : 'default (primary)';
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
@@ -39,10 +39,10 @@ class BottomNavigationBarSettings extends StatelessWidget {
                 (controller.useFlutterDefaults &&
                     controller.bottomNavBarUnselectedSchemeColor == null &&
                     controller.bottomNavBarUnselectedSchemeColor == null))
-            ? 'null (onSurface with opacity)'
+            ? 'default (onSurface with opacity)'
             : controller.bottomNavBarMuteUnselected && muteUnselectedEnabled
-                ? 'null (onSurface, blend & opacity)'
-                : 'null (onSurface)';
+                ? 'default (onSurface, blend & opacity)'
+                : 'default (onSurface)';
     final bool navBarOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.bottomNavBarBackgroundSchemeColor == null &&
@@ -60,7 +60,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: 'null (background)',
+          labelForDefault: 'default (background)',
           index: controller.bottomNavBarBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

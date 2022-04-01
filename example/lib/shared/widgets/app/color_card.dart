@@ -44,6 +44,7 @@ class ColorCard extends StatelessWidget {
       width: effectiveSize.width,
       height: effectiveSize.height,
       child: Tooltip(
+        waitDuration: const Duration(milliseconds: 700),
         message: 'Color #${color.hexCode} $nameThatColor$space$materialName.'
             '\nTap box to copy RGB value to Clipboard.',
         child: Card(

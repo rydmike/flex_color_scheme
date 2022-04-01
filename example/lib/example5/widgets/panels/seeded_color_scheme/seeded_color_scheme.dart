@@ -105,8 +105,8 @@ class SeededColorScheme extends StatelessWidget {
               'are picked from these palettes, but using different tones. '
               'To ensure light and dark themes use identical tonal palettes, '
               'FlexColorScheme automatically only uses the light mode colors '
-              'from built in schemes to seed ColorSchemes. '
-              'When using custom colors you can decide if you do so or not.'),
+              'from built-in schemes to seed ColorSchemes. '
+              'When using custom colors, you can decide if you do so or not.'),
         ),
         if (showKeyButtons)
           ListTile(
@@ -183,11 +183,11 @@ class SeededColorScheme extends StatelessWidget {
         ),
         const ListTile(
           subtitle: Text(
-            'With FlexTones, configure which tone from '
-            'generated palettes, each color in the ColorScheme use. '
-            'Also set limits on used CAM16 chroma values '
-            'for the three colors used as keys to seed the primary, '
-            'secondary and tertiary TonalPalette.',
+            'With FlexTones, you can configure which tone from '
+            'generated palettes each color in the ColorScheme use. '
+            'Set limits on used CAM16 chroma values '
+            'for the three colors used as keys for primary, '
+            'secondary and tertiary TonalPalettes.',
           ),
         ),
         ListTile(

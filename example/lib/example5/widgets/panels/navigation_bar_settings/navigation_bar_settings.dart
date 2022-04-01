@@ -35,15 +35,15 @@ class NavigationBarSettings extends StatelessWidget {
     final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
             (controller.useFlutterDefaults &&
                 controller.navBarHighlightSchemeColor == null))
-        ? 'null (secondary)'
-        : 'null (primary)';
+        ? 'default (secondary)'
+        : 'default (primary)';
     final String labelForDefaultSelectedItem =
         (!controller.useFlexColorScheme ||
                 (controller.useFlutterDefaults &&
                     controller.navBarSelectedSchemeColor == null &&
                     controller.navBarUnselectedSchemeColor == null))
-            ? 'null (onSurface)'
-            : 'null (primary)';
+            ? 'default (onSurface)'
+            : 'default (primary)';
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
@@ -55,10 +55,10 @@ class NavigationBarSettings extends StatelessWidget {
                 (controller.useFlutterDefaults &&
                     controller.navBarSelectedSchemeColor == null &&
                     controller.navBarUnselectedSchemeColor == null))
-            ? 'null (onSurface)'
+            ? 'default (onSurface)'
             : controller.navBarMuteUnselected && muteUnselectedEnabled
-                ? 'null (onSurface, blend & opacity)'
-                : 'null (onSurface)';
+                ? 'default (onSurface, blend & opacity)'
+                : 'default (onSurface)';
     final bool navBarOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.navBarBackgroundSchemeColor == null &&
@@ -82,8 +82,8 @@ class NavigationBarSettings extends StatelessWidget {
                   !controller.useFlexColorScheme ||
                   (controller.useFlutterDefaults &&
                       controller.navBarBackgroundSchemeColor == null)
-              ? 'null (surface with onSurface overlay)'
-              : 'null (background)',
+              ? 'default (surface with onSurface overlay)'
+              : 'default (background)',
           index: controller.navBarBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

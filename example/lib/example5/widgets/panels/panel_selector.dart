@@ -68,7 +68,7 @@ class PanelSelector extends StatefulWidget {
 }
 
 class _PanelSelectorState extends State<PanelSelector> {
-  late ScrollController scrollController;
+  late final ScrollController scrollController;
   late int viewIndex;
 
   @override
@@ -272,10 +272,10 @@ class PanelButton extends StatelessWidget {
                 ),
                 Text(
                   item.buttonLabel,
-                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                        color: textColor,
-                        fontSize: textSize,
-                      ),
+                  style: theme.textTheme.labelSmall!.copyWith(
+                    color: textColor,
+                    fontSize: textSize,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],

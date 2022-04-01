@@ -29,44 +29,45 @@ class IntroductionPanel extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
-          subtitle: Text('With Themes Playground can try features and themes '
-              'of FlexColorScheme V5. Find a ColorScheme you like, experiment '
-              'with surface blends at different levels. Try how the AppBar '
+          subtitle: Text('Use the Themes Playground to try features and themes '
+              'of FlexColorScheme. Find a scheme you like, experiment '
+              'with surface blends at different levels. See how the AppBar '
               'theme options work. Test the true black option for dark '
               'themes, along with computed dark themes.\n'
               '\n'
               'In version 5, the new Material 3 based ColorScheme is supported '
               'and used by built-in schemes. ColorSchemes can also be '
               'generated using main built-in scheme colors as ColorScheme '
-              'seed keys. You can use primary, '
-              'secondary and tertiary colors as keys or just primary, exactly '
-              'like in ColorScheme.fromSeed. You have more options, as '
-              'you can use more than primary color as seed color, and you '
+              'seed keys. You can use primary color as seed key, just '
+              'like in ColorScheme.fromSeed, but you have more options. '
+              'You can also use secondary and tertiary colors, in addition to '
+              'primary, as key colors to seed your dynamic ColorScheme. You '
               'can even customize the tonal palette generation parameters. '
-              'For branding needs you can lock selected main ColorScheme '
-              'colors to their defined input values, while other colors are '
-              'still seed generated.\n'
+              'For branding needs, you can lock selected main colors to their '
+              'defined input values, while other colors are still seed '
+              'generated.\n'
               '\n'
-              'This demo does not adjust any individual widget properties, '
-              'the application theme is adjusted interactively and all '
-              'Flutter widgets change, as the app theme is modified '
-              'interactively via its controls.\n'
+              'This application does not adjust any individual widget '
+              'properties, the theme is adjusted interactively and all '
+              'Flutter widgets change as the app theme is modified '
+              'interactively via their controls.\n'
               '\n'
-              'The theming settings and impact is shown in topic panels, used '
-              'on two pages with different layouts. The default one is a page '
+              'The theming settings and their impact on widgets are shown in '
+              'widget topic panels. The same panels are used '
+              'on two pages, with different layouts. The default one is a page '
               'view where you see one topic at a time. The second page is a '
               'large masonry grid view, where you can, if your screen is large '
               'enough, see many topics at once. With it you can open and close '
               'topics to view more or less of them at the same time.\n'
               '\n'
               'Both layouts are responsive and work well down to phone sizes. '
-              'This app runs great on modern phones, if you build it for '
-              'device. The app is however primarily intended to '
+              'If you build it, this app fits and runs nicely at on modern '
+              'phones. The app is however primarily intended to '
               'be used on web based desktop browsers, or as a native Windows, '
               'Mac or Linux desktop app.'
               '\n'
               'The three first themes in the app are example custom color '
-              'schemes, made in the tutorial with the API, they are not '
+              'schemes, made in the tutorials with the API, they are not '
               'built-in choices in the package. In the package tutorials '
               'you learn how to make your own custom color schemes and turn '
               'them into advanced themes with FlexColorScheme.\n'
@@ -75,7 +76,7 @@ class IntroductionPanel extends StatelessWidget {
         ),
         const Divider(),
         const ListTile(
-          title: Text('Use FlexColorScheme Theming Features'),
+          title: Text('FlexColorScheme Theming'),
           subtitle: Text("You can turn FlexColorScheme's theming OFF "
               'to see what a theme looks like when using standard Flutter '
               'ThemeData.from(colorScheme), using the same active ColorScheme '
@@ -86,7 +87,7 @@ class IntroductionPanel extends StatelessWidget {
               'own value in ColorScheme.'),
         ),
         SwitchListTileAdaptive(
-          title: const Text('Turn OFF FlexColorScheme'),
+          title: const Text('Turn FlexColorScheme ON/OFF'),
           subtitle: const Text(
             "With the theming disabled, you can see Flutter's default "
             'theming using the same colors. Component theme settings are '
@@ -99,21 +100,21 @@ class IntroductionPanel extends StatelessWidget {
           title: Text('Component Themes'),
           subtitle: Text('The opinionated component widget sub '
               'theming is ON by default in this app, but OFF by default in '
-              'the API. Turn it OFF to observe the differences. '
-              ' When OFF, FlexColorScheme mostly only harmonizing the colors '
-              'and you can adjust a few common sub-theme properties like '
-              'AppBar, see docs to find out more. \n'
+              'the API. '
+              ' When OFF, FlexColorScheme mostly only harmonize the colors '
+              'and you can adjust a few common sub-theme properties, like '
+              'AppBar, see docs to find out more.\n'
               '\n'
-              'The default sub-theming when ON, follows Material Design 3 '
-              'when possible. It is however to some extent still limited '
-              'by Flutter SDK Material 2 based designs. '
+              'The default sub-theming follows Material Design 3 guideline '
+              'when possible. It is however still limited '
+              'by Flutter Material 2 based theming designs. '
               'Most visible change is the corner radius on Widgets that '
-              'depends on Widget type, but also TextTheme size.'),
+              'depends on Widget type, but also font sizes in the TextTheme.'),
         ),
         SwitchListTileAdaptive(
-          title: const Text('Use Component Themes'),
-          subtitle: const Text('Turn ON to use and adjust available '
-              'opinionated component widget sub-themes'),
+          title: const Text('Turn Component Themes ON/OFF'),
+          subtitle: const Text('Turn ON to use the opinionated component '
+              'sub-themes and adjust their settings'),
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
@@ -123,8 +124,8 @@ class IntroductionPanel extends StatelessWidget {
           subtitle: const Text(
               'Want to use a FlexColorScheme theme you configured here in '
               'your Flutter app? '
-              'Just copy the setup code, paste it into your Flutter app, '
-              'import FlexColorScheme, and theming is done.'),
+              'Copy the setup code, paste it into your Flutter app, '
+              'import FlexColorScheme, theming done!'),
           trailing: ElevatedButton(
             onPressed: controller.useFlexColorScheme
                 ? () {
@@ -145,28 +146,27 @@ class IntroductionPanel extends StatelessWidget {
             'The in Flutter 2.10.0 introduced Material 3 ColorScheme is '
             'used and fully supported. However, '
             'components in Flutter 2.10.x do not yet use any of the updated '
-            "ColorScheme's new colors by default. You can enable "
-            "FlexColorScheme's component sub-themes to get "
+            "ColorScheme's new colors by default. When you enable "
+            "FlexColorScheme's component sub-themes you get "
             'a theme that is close to the Material 3 style by default. '
-            'With the component sub-themes you can also change which scheme '
-            'color its themed component uses. This is a convenient way to '
-            'use a themed, none default ColorScheme based color, as the '
-            'color of choice on Material UI widgets included in '
+            'With the component sub-themes settings you can adjust it further, '
+            'and e.g. change which ColorScheme color each component uses. '
+            'This is a convenient way to select and use any ColorScheme based '
+            'color, as the themed color for components included in '
             "FlexColorScheme's supported component theme customization "
             'capabilities.\n'
             '\n'
             'Very few Material 3 widgets and styles are available in '
             'Flutter 2.10.x and earlier. The updated ColorScheme, '
-            'NavigationBar and the flag to use a selection indicator on '
-            'NavigationRail are the only M3 features in the Flutter SDK '
-            '(applies to stable version 2.10.x).\n'
+            'NavigationBar and a flag to use a selection indicator on '
+            'NavigationRail are the only current M3 features.\n'
             '\n'
             'There is a toggle in ThemeData that you can turn on to enable '
             'available built-in M3 styles in Flutter. It still has almost no '
             'effect on UI widget defaults in Flutter. The indicator on the '
             'NavigationRail is the only thing it affects so far. It will be '
             'used more in future Flutter versions. When it is, we can use '
-            'this toggle to see what it does.',
+            'the toggle here to see what it does.',
           ),
         ),
         SwitchListTileAdaptive(
@@ -203,6 +203,7 @@ class IntroductionPanel extends StatelessWidget {
             controller.setPlatform(defaultTargetPlatform);
           },
         ),
+        const SizedBox(height: 8),
       ],
     );
   }

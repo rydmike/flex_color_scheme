@@ -960,6 +960,7 @@ class NavigationRailShowcase extends StatefulWidget {
   /// The vertical space for the navigation bar.
   final double height;
 
+  // TODO(rydmike): Issues: Unnecessary assert, explain why it is problematic.
   // Flag set to true to make a work around to avoid unnecessarily
   // eager assert in SDK.
   //
@@ -1059,7 +1060,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                         SwitchListTileAdaptive(
                           title: const Text('Expand and collapse'),
                           subtitle: const Text('ON to expand  OFF to collapse\n'
-                              'Only used for local control of rail '
+                              'Only used for local control of Rail '
                               'presentation.'),
                           value: isExtended,
                           onChanged: (bool value) {

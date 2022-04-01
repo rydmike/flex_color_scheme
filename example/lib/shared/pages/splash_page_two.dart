@@ -28,6 +28,7 @@ class SplashPageTwo extends StatefulWidget {
 class _SplashPageTwoState extends State<SplashPageTwo> {
   @override
   void initState() {
+    // TODO(rydmike): Test the setEnabledSystemUIMode issue and raise issue.
     // This call should remove the top and bottom UI overlays on Android.
     //
     // For some reason on some newer Android versions, it does not work
