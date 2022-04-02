@@ -132,11 +132,11 @@ enum SchemeColor {
   inversePrimary,
 
   /// The active theme's color scheme primaryVariant color will be used.
-  @Deprecated('Use primaryContainer instead. Deprecated after version 4.2.0')
+  @Deprecated('Use primaryContainer instead. Deprecated after version 4.2.0.')
   primaryVariant,
 
   /// The active theme's color scheme secondaryVariant color will be used.
-  @Deprecated('Use secondaryContainer instead. Deprecated after version 4.2.0')
+  @Deprecated('Use secondaryContainer instead. Deprecated after version 4.2.0.')
   secondaryVariant,
 }
 
@@ -424,9 +424,8 @@ class FlexSubThemes {
     final Size minButtonSize = kButtonMinSize,
   }) {
     // Get selected color, defaults to primary.
-    final Color baseColor = baseSchemeColor == null
-        ? colorScheme.primary
-        : schemeColor(baseSchemeColor, colorScheme);
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
     return TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -629,8 +628,8 @@ class FlexSubThemes {
     final Size minButtonSize = kButtonMinSize,
   }) {
     // Get selected color, defaults to primary.
-    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
-    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
@@ -748,8 +747,8 @@ class FlexSubThemes {
     final Size minButtonSize = kButtonMinSize,
   }) {
     // Get selected color, defaults to primary.
-    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
-    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
     return ButtonThemeData(
       colorScheme: colorScheme,
@@ -812,8 +811,8 @@ class FlexSubThemes {
     final bool unselectedIsColored = true,
   }) {
     // Get selected color, defaults to secondary.
-    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
-    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.secondary, colorScheme);
     final bool isLight = colorScheme.brightness == Brightness.light;
 
     return SwitchThemeData(
@@ -945,8 +944,8 @@ class FlexSubThemes {
     final bool unselectedIsColored = true,
   }) {
     // Get selected color, defaults to secondary.
-    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
-    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.secondary, colorScheme);
     final bool isLight = colorScheme.brightness == Brightness.light;
 
     return RadioThemeData(
@@ -1191,9 +1190,8 @@ class FlexSubThemes {
     final bool unfocusedBorderIsColored = true,
   }) {
     // Get selected color, defaults to primary.
-    final Color baseColor = baseSchemeColor == null
-        ? colorScheme.primary
-        : schemeColor(baseSchemeColor, colorScheme);
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
     final Color usedFillColor = fillColor ??
         (colorScheme.brightness == Brightness.dark
@@ -1487,9 +1485,8 @@ class FlexSubThemes {
     final double? radius,
   }) {
     // Get base color, defaults to primary.
-    final Color usedBaseColor = baseSchemeColor == null
-        ? colorScheme.primary
-        : schemeColor(baseSchemeColor, colorScheme);
+    final Color usedBaseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // Foreground color for all Chips except disabled Chip.
     final Color foreground = usedBaseColor.blendAlpha(
@@ -1982,10 +1979,13 @@ class FlexSubThemes {
     final SchemeColor? selectedLabelSchemeColor,
 
     /// Deprecated and replaced by [selectedLabelSchemeColor].
+    ///
+    /// This property will be completely removed in version 6.0.0.
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
         'version 5 and later this property has been replaced by: '
-        'selectedLabelSchemeColor.')
+        'selectedLabelSchemeColor. '
+        'This property will be completely removed in version 6.0.0.')
         final SchemeColor? baseSchemeColor,
 
     /// Select which color from the passed in [ColorScheme] to use for
@@ -2004,7 +2004,7 @@ class FlexSubThemes {
     /// more muted color version of the color defined by
     /// [unselectedLabelSchemeColor].
     ///
-    /// If null, defaults to false.
+    /// If null, defaults to true.
     final bool? mutedUnselectedLabel,
 
     /// The size of the icon on selected [BottomNavigationBar] item.
@@ -2050,7 +2050,7 @@ class FlexSubThemes {
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
     /// and withAlpha([kUnselectedAlphaBlend]).
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? mutedUnselectedIcon,
 
     /// Select which color from the theme's [ColorScheme] to use as background
@@ -2180,6 +2180,7 @@ class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
+        baseSchemeColor == null &&
         unselectedLabelSchemeColor == null &&
         useFlutterDefaults;
 
@@ -2191,17 +2192,18 @@ class FlexSubThemes {
         unselectedIconSchemeColor == null &&
         useFlutterDefaults;
 
-    // Get text color, defaults to primary.
-    final Color labelColor = selectedLabelSchemeColor == null
-        ? colorScheme.brightness == Brightness.dark && useDefaultTextStyle
-            ? colorScheme.secondary
-            : colorScheme.primary
-        : schemeColor(selectedLabelSchemeColor, colorScheme);
+    // Get text color, defaults to primary in light and to secondary in dark.
+    final Color labelColor = schemeColor(
+        selectedLabelSchemeColor ??
+            baseSchemeColor ??
+            (colorScheme.brightness == Brightness.dark && useDefaultTextStyle
+                ? SchemeColor.secondary
+                : SchemeColor.primary),
+        colorScheme);
 
     // Get unselected label color, defaults to onSurface.
-    final Color unselectedLabelColor = unselectedLabelSchemeColor == null
-        ? colorScheme.onSurface
-        : schemeColor(unselectedLabelSchemeColor, colorScheme);
+    final Color unselectedLabelColor = schemeColor(
+        unselectedLabelSchemeColor ?? SchemeColor.onSurface, colorScheme);
 
     // Get selected text style, defaults to TextStyle(), we can use it since
     // size and color are applied to is separately.
@@ -2214,17 +2216,17 @@ class FlexSubThemes {
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? math.max(labelSize - 2, 8);
 
-    // Get icon color, defaults to primary.
-    final Color iconColor = selectedIconSchemeColor == null
-        ? useDefaultIconTheme && colorScheme.brightness == Brightness.dark
-            ? colorScheme.secondary
-            : colorScheme.primary
-        : schemeColor(selectedIconSchemeColor, colorScheme);
+    // Get icon color, defaults to primary in light, and secondary in dark.
+    final Color iconColor = schemeColor(
+        selectedIconSchemeColor ??
+            (useDefaultIconTheme && colorScheme.brightness == Brightness.dark
+                ? SchemeColor.secondary
+                : SchemeColor.primary),
+        colorScheme);
 
     // Get unselected icon color, defaults to onSurface.
-    final Color unselectedIconColor = unselectedIconSchemeColor == null
-        ? colorScheme.onSurface
-        : schemeColor(unselectedIconSchemeColor, colorScheme);
+    final Color unselectedIconColor = schemeColor(
+        unselectedIconSchemeColor ?? SchemeColor.onSurface, colorScheme);
 
     // Get effective icons sizes.
     final double iconSize = selectedIconSize ?? 24;
@@ -2247,7 +2249,7 @@ class FlexSubThemes {
           : IconThemeData(
               size: effectiveUnselectedIconSize,
               opacity: 1,
-              color: (mutedUnselectedIcon ?? false)
+              color: (mutedUnselectedIcon ?? true)
                   ? unselectedIconColor
                       .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
@@ -2263,7 +2265,7 @@ class FlexSubThemes {
       selectedItemColor: useDefaultTextStyle ? null : labelColor,
       unselectedItemColor: useDefaultTextStyle
           ? null
-          : (mutedUnselectedLabel ?? false)
+          : (mutedUnselectedLabel ?? true)
               ? unselectedLabelColor
                   .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
                   .withAlpha(unselectedAlpha)
@@ -2272,7 +2274,7 @@ class FlexSubThemes {
           ? null
           : textStyle.copyWith(
               fontSize: effectiveUnselectedLabelSize,
-              color: (mutedUnselectedLabel ?? false)
+              color: (mutedUnselectedLabel ?? true)
                   ? unselectedLabelColor
                       .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
@@ -2363,10 +2365,13 @@ class FlexSubThemes {
     final SchemeColor? selectedLabelSchemeColor,
 
     /// Deprecated and replaced by [selectedLabelSchemeColor].
+    ///
+    /// This property will be completely removed in version 6.0.0.
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
         'version 5 and later this property has been replaced by: '
-        'selectedLabelSchemeColor.')
+        'selectedLabelSchemeColor. '
+        'This property will be completely removed in version 6.0.0.')
         final SchemeColor? textSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as base for
@@ -2383,10 +2388,13 @@ class FlexSubThemes {
     final SchemeColor? unselectedLabelSchemeColor,
 
     /// Deprecated and replaced by [unselectedLabelSchemeColor].
+    ///
+    /// This property will be completely removed in version 6.0.0.
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
         'version 5 and later this property has been replaced by: '
-        'unselectedLabelSchemeColor.')
+        'unselectedLabelSchemeColor. '
+        'This property will be completely removed in version 6.0.0.')
         final SchemeColor? unselectedTextSchemeColor,
 
     /// If true, the unselected label in the [NavigationBar] use a more
@@ -2396,14 +2404,17 @@ class FlexSubThemes {
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
     /// and withAlpha([kUnselectedAlphaBlend]).
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? mutedUnselectedLabel,
 
     /// Deprecated and replaced by [mutedUnselectedLabel].
+    ///
+    /// This property will be completely removed in version 6.0.0.
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
         'version 5 and later this property has been replaced by: '
-        'mutedUnselectedLabel.')
+        'mutedUnselectedLabel. '
+        'This property will be completely removed in version 6.0.0.')
         final bool? mutedUnselectedText,
 
     /// The size of the icon on selected [NavigationBar] item.
@@ -2429,10 +2440,13 @@ class FlexSubThemes {
     final SchemeColor? selectedIconSchemeColor,
 
     /// Deprecated and replaced by [selectedIconSchemeColor].
+    ///
+    /// This property will be completely removed in version 6.0.0.
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
         'version 5 and later this property has been replaced by: '
-        'selectedIconSchemeColor.')
+        'selectedIconSchemeColor. '
+        'This property will be completely removed in version 6.0.0.')
         final SchemeColor? iconSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as base for
@@ -2454,7 +2468,7 @@ class FlexSubThemes {
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
     /// and withAlpha([kUnselectedAlphaBlend]).
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? mutedUnselectedIcon,
 
     /// Select which color from the theme [ColorScheme] to use as base for
@@ -2475,10 +2489,13 @@ class FlexSubThemes {
     /// indicator item highlight color.
     ///
     /// Replaced with indicatorSchemeColor.
+    ///
+    /// This property will be completely removed in version 6.0.0.
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar and NavigationRail sub-themes in '
         'version 5 and later this property has been replaced by: '
-        'indicatorSchemeColor.')
+        'indicatorSchemeColor. '
+        'This property will be completely removed in version 6.0.0.')
         final SchemeColor? highlightSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as background
@@ -2599,7 +2616,9 @@ class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
+        textSchemeColor == null &&
         unselectedLabelSchemeColor == null &&
+        unselectedTextSchemeColor == null &&
         useFlutterDefaults;
 
     // Determine if we can even use default icon styles, only when all are null,
@@ -2607,18 +2626,21 @@ class FlexSubThemes {
     final bool useDefaultIconTheme = selectedIconSize == null &&
         unselectedIconSize == null &&
         selectedIconSchemeColor == null &&
+        iconSchemeColor == null &&
         unselectedIconSchemeColor == null &&
         useFlutterDefaults;
 
     // Get text color, defaults to primary.
-    final Color labelColor = selectedLabelSchemeColor == null
-        ? colorScheme.primary
-        : schemeColor(selectedLabelSchemeColor, colorScheme);
+    final Color labelColor = schemeColor(
+        selectedLabelSchemeColor ?? textSchemeColor ?? SchemeColor.primary,
+        colorScheme);
 
     // Get unselected label color, defaults to colorScheme.onSurface
-    final Color unselectedLabelColor = unselectedLabelSchemeColor == null
-        ? colorScheme.onSurface
-        : schemeColor(unselectedLabelSchemeColor, colorScheme);
+    final Color unselectedLabelColor = schemeColor(
+        unselectedLabelSchemeColor ??
+            unselectedTextSchemeColor ??
+            SchemeColor.onSurface,
+        colorScheme);
 
     // Get text style, defaults to TextStyle(), we can use it since
     // size and color are applied to is separately.
@@ -2630,14 +2652,13 @@ class FlexSubThemes {
         unselectedLabelSize ?? labelSize;
 
     // Get icon color, default to primary.
-    final Color iconColor = selectedIconSchemeColor == null
-        ? colorScheme.primary
-        : schemeColor(selectedIconSchemeColor, colorScheme);
+    final Color iconColor = schemeColor(
+        selectedIconSchemeColor ?? iconSchemeColor ?? SchemeColor.primary,
+        colorScheme);
 
     // Get unselected icon color, defaults to onSurface.
-    final Color unselectedIconColor = unselectedIconSchemeColor == null
-        ? colorScheme.onSurface
-        : schemeColor(unselectedIconSchemeColor, colorScheme);
+    final Color unselectedIconColor = schemeColor(
+        unselectedIconSchemeColor ?? SchemeColor.onSurface, colorScheme);
 
     // Get effective icons sizes.
     final double iconSize = selectedIconSize ?? 24;
@@ -2649,9 +2670,10 @@ class FlexSubThemes {
         .withOpacity(opacity);
 
     // Indicator color, when using normal default, falls back to primary.
-    final Color indicatorColor =
-        schemeColor(indicatorSchemeColor ?? SchemeColor.primary, colorScheme)
-            .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
+    final Color indicatorColor = schemeColor(
+            indicatorSchemeColor ?? highlightSchemeColor ?? SchemeColor.primary,
+            colorScheme)
+        .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
 
     return NavigationBarThemeData(
       height: height ?? (useFlutterDefaults ? null : kNavigationBarHeight),
@@ -2677,7 +2699,7 @@ class FlexSubThemes {
                 }
                 return textStyle.copyWith(
                   fontSize: effectiveUnselectedLabelSize,
-                  color: (mutedUnselectedLabel ?? false)
+                  color: (mutedUnselectedLabel ?? mutedUnselectedText ?? true)
                       ? unselectedLabelColor
                           .blendAlpha(
                               unselectedLabelColor, unselectedAlphaBlend)
@@ -2698,7 +2720,7 @@ class FlexSubThemes {
                 }
                 return IconThemeData(
                   size: effectiveUnselectedIconSize,
-                  color: (mutedUnselectedIcon ?? false)
+                  color: (mutedUnselectedIcon ?? true)
                       ? unselectedIconColor
                           .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
                           .withAlpha(unselectedAlpha)
@@ -2795,7 +2817,7 @@ class FlexSubThemes {
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
     /// and withAlpha([kUnselectedAlphaBlend]).
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? mutedUnselectedLabel,
 
     /// The size of the icon on selected [NavigationRail] item.
@@ -2840,7 +2862,7 @@ class FlexSubThemes {
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
     /// and withAlpha([kUnselectedAlphaBlend]).
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? mutedUnselectedIcon,
 
     /// Whether or not the selected [NavigationRail] item should include a
@@ -3109,7 +3131,7 @@ class FlexSubThemes {
           ? null
           : textStyle.copyWith(
               fontSize: effectiveUnselectedLabelSize,
-              color: (mutedUnselectedLabel ?? false)
+              color: (mutedUnselectedLabel ?? true)
                   ? unselectedLabelColor
                       .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
@@ -3126,7 +3148,7 @@ class FlexSubThemes {
           : IconThemeData(
               size: effectiveUnselectedIconSize,
               opacity: 1,
-              color: (mutedUnselectedIcon ?? false)
+              color: (mutedUnselectedIcon ?? true)
                   ? unselectedIconColor
                       .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)

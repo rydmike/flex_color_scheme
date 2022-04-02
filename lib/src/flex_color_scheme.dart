@@ -580,7 +580,8 @@ class FlexColorScheme with Diagnosticable {
         'opinionated component sub-themes are added by adding a default '
         'constructor FlexSubThemesData() to subThemesData. This creates '
         'sub-themes using the FlexColorScheme opinionated defaults. You can '
-        'modify the sub-themes by changing the FlexSubThemesData properties.')
+        'modify the sub-themes by changing the FlexSubThemesData properties. '
+        'This property will be completely removed in version 6.0.0.')
         final this.useSubThemes = false,
     final this.subThemesData,
     final this.useMaterial3 = false,
@@ -645,7 +646,7 @@ class FlexColorScheme with Diagnosticable {
   /// result will be [primary] color.
   final Color? primaryContainer;
 
-  /// (DEPRECATED) A darker version of the primary color.
+  /// (Deprecated) A darker version of the primary color.
   ///
   /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
   /// button color in dark theme mode as a part of predefined widget behavior.
@@ -680,7 +681,7 @@ class FlexColorScheme with Diagnosticable {
   /// to [secondary] color, and if it is not defined either, then [primary].
   final Color? secondaryContainer;
 
-  /// (DEPRECATED) A darker version of the secondary color.
+  /// (Deprecated) A darker version of the secondary color.
   ///
   /// In Flutter SDK the `secondaryVariant` color is not used by in any
   /// built-in widgets default themes or predefined widget behavior.
@@ -1115,11 +1116,14 @@ class FlexColorScheme with Diagnosticable {
   /// constructor `FlexSubThemesData()` to [subThemesData].
   ///
   /// Defaults to false.
+  ///
+  /// This property will be completely removed in version 6.0.0.
   @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
       'opinionated component sub-themes are added by adding a default '
       'constructor FlexSubThemesData() to subThemesData. This creates '
       'sub-themes using the FlexColorScheme opinionated defaults. You can '
-      'modify the sub-themes by changing the FlexSubThemesData properties.')
+      'modify the sub-themes by changing the FlexSubThemesData properties. '
+      'This property will be completely removed in version 6.0.0.')
   final bool useSubThemes;
 
   /// Activate using FlexColorScheme opinionated component sub-themes by

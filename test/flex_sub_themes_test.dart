@@ -116,13 +116,13 @@ void main() {
             selectedIconTheme: IconThemeData(
                 color: Color(0xff6200ee), opacity: 1.0, size: 24.0),
             unselectedIconTheme: IconThemeData(
-                color: Color(0xff000000), opacity: 1.0, size: 24.0),
+                color: Color(0xa5000000), opacity: 1.0, size: 24.0),
             selectedItemColor: Color(0xff6200ee),
-            unselectedItemColor: Color(0xff000000),
+            unselectedItemColor: Color(0xa5000000),
             selectedLabelStyle: TextStyle(
                 inherit: true, color: Color(0xff6200ee), fontSize: 14.0),
             unselectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xff000000), fontSize: 12.0),
+                inherit: true, color: Color(0xa5000000), fontSize: 12.0),
           ),
         ),
       );
@@ -145,13 +145,13 @@ void main() {
             selectedIconTheme: IconThemeData(
                 color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
             unselectedIconTheme: IconThemeData(
-                color: Color(0xffffffff), opacity: 1.0, size: 24.0),
+                color: Color(0xa5ffffff), opacity: 1.0, size: 24.0),
             selectedItemColor: Color(0xffbb86fc),
-            unselectedItemColor: Color(0xffffffff),
+            unselectedItemColor: Color(0xa5ffffff),
             selectedLabelStyle: TextStyle(
                 inherit: true, color: Color(0xffbb86fc), fontSize: 14.0),
             unselectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xffffffff), fontSize: 12.0),
+                inherit: true, color: Color(0xa5ffffff), fontSize: 12.0),
           ),
         ),
       );
@@ -3023,11 +3023,11 @@ void main() {
             indicatorColor: Color(0x00000000),
             backgroundColor: Color(0xffffffff),
             unselectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xff000000), fontSize: 14.0),
+                inherit: true, color: Color(0xa5000000), fontSize: 14.0),
             selectedLabelTextStyle: TextStyle(
                 inherit: true, color: Color(0xff6200ee), fontSize: 14.0),
             unselectedIconTheme: IconThemeData(
-                color: Color(0xff000000), opacity: 1.0, size: 24.0),
+                color: Color(0xa5000000), opacity: 1.0, size: 24.0),
             selectedIconTheme: IconThemeData(
                 color: Color(0xff6200ee), opacity: 1.0, size: 24.0),
           ),
@@ -3043,7 +3043,7 @@ void main() {
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
-          // useFlutterDefaults: false // <<- Asumed as default,
+          // useFlutterDefaults: false // <<- Assumed as default,
         ),
         equals(
           const NavigationRailThemeData(
@@ -3052,11 +3052,11 @@ void main() {
             indicatorColor: Color(0x00000000),
             backgroundColor: Color(0xff121212),
             unselectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xffffffff), fontSize: 14.0),
+                inherit: true, color: Color(0xa5ffffff), fontSize: 14.0),
             selectedLabelTextStyle: TextStyle(
                 inherit: true, color: Color(0xffbb86fc), fontSize: 14.0),
             unselectedIconTheme: IconThemeData(
-                color: Color(0xffffffff), opacity: 1.0, size: 24.0),
+                color: Color(0xa5ffffff), opacity: 1.0, size: 24.0),
             selectedIconTheme: IconThemeData(
                 color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
           ),
