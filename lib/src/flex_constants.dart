@@ -8,7 +8,10 @@ const int kDarkenPrimaryContainer = 10;
 
 /// The percentage amount the primary variant color is darkened from the
 /// primary color when primary variant color is not given.
-@Deprecated('Deprecated use kDarkenPrimaryContainer instead.')
+///
+/// This property will be completely removed in version 6.0.0.
+@Deprecated('Deprecated use kDarkenPrimaryContainer instead. '
+    'This property will be completely removed in version 6.0.0.')
 const int kDarkenPrimaryVariant = kDarkenPrimaryContainer;
 
 /// The percentage amount the secondary color is darkened from the
@@ -23,7 +26,10 @@ const int kDarkenSecondaryContainerFromSecondary = 10;
 /// The percentage amount the secondary variant color is darkened from the
 /// secondary color, when secondary variant color is not given, but the
 /// secondary color is given.
-@Deprecated('Deprecated use kDarkenSecondaryContainerFromSecondary instead.')
+///
+/// This property will be completely removed in version 6.0.0.
+@Deprecated('Deprecated use kDarkenSecondaryContainerFromSecondary instead. '
+    'This property will be completely removed in version 6.0.0.')
 const int kDarkenSecondaryVariantFromSecondary =
     kDarkenSecondaryContainerFromSecondary;
 
@@ -35,7 +41,10 @@ const int kDarkenSecondaryContainer = 14;
 /// The percentage amount the secondary variant color is darkened from the
 /// primary color, when secondary variant color and secondary color are not
 /// given.
-@Deprecated('Deprecated use kDarkenSecondaryContainer instead.')
+///
+/// This property will be completely removed in version 6.0.0.
+@Deprecated('Deprecated use kDarkenSecondaryContainer instead. '
+    'This property will be completely removed in version 6.0.0.')
 const int kDarkenSecondaryVariant = kDarkenSecondaryContainer;
 
 /// Primary surface color light blend percentage value for light theme.

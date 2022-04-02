@@ -104,11 +104,12 @@ class FlexSubThemesData with Diagnosticable {
     this.radioSchemeColor,
     this.unselectedToggleIsColored = false,
     //
+    double? inputDecoratorRadius,
     @Deprecated('This property has been replaced after 4.2.0. To harmonize '
         'input decorator property names it has been renamed to '
-        'inputDecoratorRadius, please use it instead.')
+        'inputDecoratorRadius, please use it instead. '
+        'This property will be completely removed in version 6.0.0.')
         this.inputDecorationRadius,
-    this.inputDecoratorRadius,
     this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
@@ -146,17 +147,19 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarLabelTextStyle,
     this.bottomNavigationBarSelectedLabelSize,
     this.bottomNavigationBarUnselectedLabelSize,
-    this.bottomNavigationBarSelectedLabelSchemeColor,
+    SchemeColor? bottomNavigationBarSelectedLabelSchemeColor,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'bottomNavigationBarSelectedLabelSchemeColor.')
+        'version 5 and later this property has been renamed and split to two '
+        'properties: bottomNavigationBarSelectedLabelSchemeColor and '
+        'bottomNavigationBarSelectedIconSchemeColor. '
+        'This property will be completely removed in version 6.0.0.')
         this.bottomNavigationBarSchemeColor,
     this.bottomNavigationBarUnselectedLabelSchemeColor,
     this.bottomNavigationBarMutedUnselectedLabel = true,
     this.bottomNavigationBarSelectedIconSize,
     this.bottomNavigationBarUnselectedIconSize,
-    this.bottomNavigationBarSelectedIconSchemeColor,
+    SchemeColor? bottomNavigationBarSelectedIconSchemeColor,
     this.bottomNavigationBarUnselectedIconSchemeColor,
     this.bottomNavigationBarMutedUnselectedIcon = true,
     this.bottomNavigationBarBackgroundSchemeColor,
@@ -168,41 +171,47 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarLandscapeLayout,
     //
     @Deprecated('This property has no function after 4.2.0. It has been '
-        'replaced by FlexSubThemesData.useFlutterDefaults, please see it '
-        'for more details.')
+        'replaced by similar function FlexSubThemesData.useFlutterDefaults, '
+        'please see it for more details. If you want to use the new property, '
+        'you have to set it explicitly, it does not fall back via this past '
+        'property. This property will be completely removed in version 6.0.0.')
         this.navigationBarIsStyled = true,
     this.navigationBarLabelTextStyle,
     this.navigationBarSelectedLabelSize,
     this.navigationBarUnselectedLabelSize,
-    this.navigationBarSelectedLabelSchemeColor,
+    SchemeColor? navigationBarSelectedLabelSchemeColor,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'navigationBarSelectedLabelSchemeColor.')
+        'version 5 and later this property has been renamed to: '
+        'navigationBarSelectedLabelSchemeColor. '
+        'This property will be completely removed in version 6.0.0.')
         this.navigationBarTextSchemeColor,
     this.navigationBarUnselectedLabelSchemeColor,
-    this.navigationBarMutedUnselectedLabel = true,
+    bool? navigationBarMutedUnselectedLabel,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'navigationBarMutedUnselectedLabel.')
+        'version 5 and later this property has been renamed to: '
+        'navigationBarMutedUnselectedLabel. '
+        'This property will be completely removed in version 6.0.0.')
         this.navigationBarMutedUnselectedText,
     this.navigationBarSelectedIconSize,
     this.navigationBarUnselectedIconSize,
-    this.navigationBarSelectedIconSchemeColor,
+    SchemeColor? navigationBarSelectedIconSchemeColor,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'navigationBarSelectedIconSchemeColor.')
+        'version 5 and later this property has been renamed to: '
+        'navigationBarSelectedIconSchemeColor. '
+        'This property will be completely removed in version 6.0.0.')
         this.navigationBarIconSchemeColor,
     this.navigationBarUnselectedIconSchemeColor,
     this.navigationBarMutedUnselectedIcon = true,
+    SchemeColor? navigationBarIndicatorSchemeColor,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
         'NavigationBar and NavigationRail sub-themes in '
-        'version 5 and later, this property has been replaced by '
-        'navigationBarIndicatorSchemeColor.')
+        'version 5 and later, this property has been renamed to: '
+        'navigationBarIndicatorSchemeColor. '
+        'This property will be completely removed in version 6.0.0.')
         this.navigationBarHighlightSchemeColor,
-    this.navigationBarIndicatorSchemeColor,
     this.navigationBarIndicatorOpacity,
     this.navigationBarBackgroundSchemeColor,
     this.navigationBarOpacity = 1,
@@ -229,7 +238,17 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailElevation = kNavigationRailElevation,
     this.navigationRailLabelType = NavigationRailLabelType.all,
     this.navigationRailGroupAlignment,
-  });
+  })  : _inputDecoratorRadius = inputDecoratorRadius,
+        _bottomNavigationBarSelectedLabelSchemeColor =
+            bottomNavigationBarSelectedLabelSchemeColor,
+        _bottomNavigationBarSelectedIconSchemeColor =
+            bottomNavigationBarSelectedIconSchemeColor,
+        _navigationBarSelectedLabelSchemeColor =
+            navigationBarSelectedLabelSchemeColor,
+        _navigationBarMutedUnselectedLabel = navigationBarMutedUnselectedLabel,
+        _navigationBarSelectedIconSchemeColor =
+            navigationBarSelectedIconSchemeColor,
+        _navigationBarIndicatorSchemeColor = navigationBarIndicatorSchemeColor;
 
   /// Opt-in on using color branded hover, focus, highlight and splash
   /// interaction state effects.
@@ -681,13 +700,6 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to false, set it to for slightly different style.
   final bool unselectedToggleIsColored;
 
-  /// Deprecated border radius override value for [InputDecoration],
-  /// this property has been replaced by [inputDecoratorRadius].
-  @Deprecated('This property has been replaced after 4.2.0. To harmonize '
-      'input decorator property names it has been renamed to '
-      'inputDecoratorRadius, please use it instead.')
-  final double? inputDecorationRadius;
-
   /// Border radius value for [InputDecoration].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -697,7 +709,18 @@ class FlexSubThemesData with Diagnosticable {
   /// Will be adjusted when known. Now set to same as button radius (20dp), so
   /// it matches them. The M3 design intent may also be that it should
   /// be same as FAB and Drawer, ie 16dp.
-  final double? inputDecoratorRadius;
+  double? get inputDecoratorRadius =>
+      _inputDecoratorRadius ?? inputDecorationRadius;
+  final double? _inputDecoratorRadius;
+
+  /// Deprecated border radius override value for [InputDecoration],
+  /// this property has been replaced by [inputDecoratorRadius].
+  /// This property will be completely removed in version 6.0.0.
+  @Deprecated('This property has been replaced after 4.2.0. To harmonize '
+      'input decorator property names it has been renamed to '
+      'inputDecoratorRadius, please use it instead. '
+      'This property will be completely removed in version 6.0.0.')
+  final double? inputDecorationRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the input decorator
   /// uses as color for the border and fill color when they are used.
@@ -1087,13 +1110,21 @@ class FlexSubThemesData with Diagnosticable {
   /// label modifying properties are undefined, including the text style,
   /// the effective color will be [ColorScheme.primary] in light theme and
   /// [ColorScheme.dark] in dark theme mode.
-  final SchemeColor? bottomNavigationBarSelectedLabelSchemeColor;
+  SchemeColor? get bottomNavigationBarSelectedLabelSchemeColor =>
+      _bottomNavigationBarSelectedLabelSchemeColor ??
+      bottomNavigationBarSchemeColor;
+  final SchemeColor? _bottomNavigationBarSelectedLabelSchemeColor;
 
-  /// Deprecated and replaced by [bottomNavigationBarSelectedLabelSchemeColor].
+  /// Deprecated and replaced by [bottomNavigationBarSelectedLabelSchemeColor]
+  /// and [bottomNavigationBarSelectedIconSchemeColor] that still fall through
+  /// this property.
+  /// This property will be completely removed in version 6.0.0.
   @Deprecated('This property has no function after 4.2.0. To harmonize '
       'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-      'version 5 and later this property has been replaced by: '
-      'bottomNavigationBarSelectedLabelSchemeColor.')
+      'version 5 and later this property has been renamed and split to two '
+      'properties: bottomNavigationBarSelectedLabelSchemeColor and '
+      'bottomNavigationBarSelectedIconSchemeColor. '
+      'This property will be completely removed in version 6.0.0.')
   final SchemeColor? bottomNavigationBarSchemeColor;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
@@ -1117,7 +1148,7 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to false.
+  /// If undefined, defaults to true.
   final bool? bottomNavigationBarMutedUnselectedLabel;
 
   /// The size of the icon on selected [BottomNavigationBar] item.
@@ -1140,7 +1171,10 @@ class FlexSubThemesData with Diagnosticable {
   /// If [useFlutterDefaults] is true, and this property and all other
   /// icon modifying properties are undefined, the effective color will be
   /// [ColorScheme.primary] in light and [ColorScheme.dark] in dark theme mode.
-  final SchemeColor? bottomNavigationBarSelectedIconSchemeColor;
+  SchemeColor? get bottomNavigationBarSelectedIconSchemeColor =>
+      _bottomNavigationBarSelectedIconSchemeColor ??
+      bottomNavigationBarSchemeColor;
+  final SchemeColor? _bottomNavigationBarSelectedIconSchemeColor;
 
   /// Select which color from the passed in [ColorScheme] to use as base for
   /// the [BottomNavigationBar]'s unselected items icon color.
@@ -1163,7 +1197,7 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to false.
+  /// If undefined, defaults to true.
   final bool? bottomNavigationBarMutedUnselectedIcon;
 
   /// Select which color from the theme's [ColorScheme] to use as background
@@ -1245,9 +1279,12 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// This property has no function after 4.2.0. It has been replaced by
   /// [FlexSubThemesData.useFlutterDefaults], please see it for more details.
+  /// This property will be completely removed in version 6.0.0.
   @Deprecated('This property has no function after 4.2.0. It has been '
-      'replaced by FlexSubThemesData.useFlutterDefaults, please see it '
-      'for more details.')
+      'replaced by similar function FlexSubThemesData.useFlutterDefaults, '
+      'please see it for more details. If you want to use the new property, '
+      'you have to set it explicitly, it does not fall back via this past '
+      'property. This property will be completely removed in version 6.0.0.')
   final bool? navigationBarIsStyled;
 
   /// Optional text style for the [NavigationBar] labels.
@@ -1291,13 +1328,17 @@ class FlexSubThemesData with Diagnosticable {
   /// If [useFlutterDefaults] is true, and this property and all other
   /// label modifying properties are undefined, including the text style,
   /// the effective color will be [ColorScheme.onSurface].
-  final SchemeColor? navigationBarSelectedLabelSchemeColor;
+  SchemeColor? get navigationBarSelectedLabelSchemeColor =>
+      _navigationBarSelectedLabelSchemeColor ?? navigationBarTextSchemeColor;
+  final SchemeColor? _navigationBarSelectedLabelSchemeColor;
 
   /// Deprecated and replaced by [navigationBarSelectedLabelSchemeColor].
+  /// This property will be completely removed in version 6.0.0.
   @Deprecated('This property has no function after 4.2.0. To harmonize '
       'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-      'version 5 and later this property has been replaced by: '
-      'navigationBarSelectedLabelSchemeColor.')
+      'version 5 and later this property has been renamed to: '
+      'navigationBarSelectedLabelSchemeColor. '
+      'This property will be completely removed in version 6.0.0.')
   final SchemeColor? navigationBarTextSchemeColor;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
@@ -1320,14 +1361,20 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to false.
-  final bool? navigationBarMutedUnselectedLabel;
+  /// If undefined, defaults to true.
+  bool? get navigationBarMutedUnselectedLabel =>
+      _navigationBarMutedUnselectedLabel ??
+      navigationBarMutedUnselectedText ??
+      true;
+  final bool? _navigationBarMutedUnselectedLabel;
 
   /// Deprecated and replaced by [navigationBarMutedUnselectedLabel].
+  /// This property will be completely removed in version 6.0.0.
   @Deprecated('This property has no function after 4.2.0. To harmonize '
       'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-      'version 5 and later this property has been replaced by: '
-      'navigationBarMutedUnselectedLabel.')
+      'version 5 and later this property has been renamed to: '
+      'navigationBarMutedUnselectedLabel. '
+      'This property will be completely removed in version 6.0.0.')
   final bool? navigationBarMutedUnselectedText;
 
   /// The size of the icon on selected [NavigationBar] item.
@@ -1350,13 +1397,17 @@ class FlexSubThemesData with Diagnosticable {
   /// If [useFlutterDefaults] is true, and this property and all other
   /// icon modifying properties are undefined, the effective color will be
   /// [ColorScheme.onSurface].
-  final SchemeColor? navigationBarSelectedIconSchemeColor;
+  SchemeColor? get navigationBarSelectedIconSchemeColor =>
+      _navigationBarSelectedIconSchemeColor ?? navigationBarIconSchemeColor;
+  final SchemeColor? _navigationBarSelectedIconSchemeColor;
 
   /// Deprecated and replaced by [navigationBarSelectedIconSchemeColor].
+  /// This property will be completely removed in version 6.0.0.
   @Deprecated('This property has no function after 4.2.0. To harmonize '
       'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-      'version 5 and later this property has been replaced by: '
-      'navigationBarSelectedIconSchemeColor.')
+      'version 5 and later this property has been renamed to: '
+      'navigationBarSelectedIconSchemeColor. '
+      'This property will be completely removed in version 6.0.0.')
   final SchemeColor? navigationBarIconSchemeColor;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
@@ -1393,15 +1444,19 @@ class FlexSubThemesData with Diagnosticable {
   /// If [useFlutterDefaults] true, and this property is undefined,
   /// the effective background color will also be [ColorScheme.secondary]
   /// with opacity 24%.
-  final SchemeColor? navigationBarIndicatorSchemeColor;
+  SchemeColor? get navigationBarIndicatorSchemeColor =>
+      _navigationBarIndicatorSchemeColor ?? navigationBarHighlightSchemeColor;
+  final SchemeColor? _navigationBarIndicatorSchemeColor;
 
   /// Select which color from the theme [ColorScheme] to use as base for
   /// the selected [NavigationBar]'s highlighted item.
   /// Deprecated and replaced by [navigationBarIndicatorSchemeColor].
+  /// This property will be completely removed in version 6.0.0.
   @Deprecated('This property has no function after 4.2.0. To harmonize '
       'NavigationBar  and NavigationRail sub-themes in '
-      'version 5 and later, this property has been replaced by '
-      'navigationBarIndicatorSchemeColor.')
+      'version 5 and later, this property has been renamed to: '
+      'navigationBarIndicatorSchemeColor. '
+      'This property will be completely removed in version 6.0.0.')
   final SchemeColor? navigationBarHighlightSchemeColor;
 
   /// Opacity used on the [NavigationBar] indicator.
@@ -1528,7 +1583,7 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to false.
+  /// If undefined, defaults to true.
   final bool? navigationRailMutedUnselectedLabel;
 
   /// The size of the icon on selected [NavigationRail] item.
@@ -1573,7 +1628,7 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to false.
+  /// If undefined, defaults to true.
   final bool? navigationRailMutedUnselectedIcon;
 
   /// Whether or not the selected [NavigationRail] item should include a

@@ -25,10 +25,10 @@ All notable changes to the **FlexColorScheme** package are documented here.
   API more consistent. It now follows the same design that is used for `keyColors` 
   with `FlexKeyColors` and `tones` with `FlexTones`.
   Setting the property `useSubThemes` will not cause an error, it just has no effect.
-  You can safely remove it.   
+  You can safely remove it. The property `useSubThemes` will be removed in release 6.0.0.  
   
 * The property `navigationBarIsStyled` in `FlexSubThemesData` was removed in
-  **v5.0.0-dev.1** as no longer needed. It is now back with a new broader 
+  **v5.0.0-dev.1** as no longer needed. It is now kind of back with a new broader 
   replacement called `FlexSubThemesData.useFlutterDefaults`. 
   The in dev.1 version tested API-style to 
   set various `SchemeColor` properties to null to get SDK default for them was not 
@@ -44,16 +44,6 @@ All notable changes to the **FlexColorScheme** package are documented here.
   `NavigationRail` and different dialogs. See API docs for details regarding 
   defaults with this flag on and off.
   
-* The `FlexSubThemesData` property `inputDecorationRadius` was deprecated and
-  replaced with `inputDecoratorRadius`, to harmonize the text fields `InputDecoration`
-  property names.
-
-* Deprecated and replaced`navigationBarHighlightSchemeColor` with 
-  `navigationBarIndicatorSchemeColor` in `FlexSubThemesData`, to
-  harmonize the naming standard. Likewise, the parameter `highlightSchemeColor` 
-  ìn `FlexSubThemes.navigationBarTheme` was deprecated and replaced by
-  `indicatorSchemeColor`.
-
 * The `FlexSubThemesData` property `popupMenuRadius` and the radius in
   corresponding static sub-theme helper `FlexSubThemes.popupMenuTheme`, 
   now defaults to 4.
@@ -99,6 +89,33 @@ All notable changes to the **FlexColorScheme** package are documented here.
   is `primary`, `secondary`, `tertiary` or their container colors. In that case
   the `keyColors`, "keep" property determines if those colors are kept or not.
 
+* The `FlexSubThemesData` property `inputDecorationRadius` was deprecated and
+  renamed to `inputDecoratorRadius`, to harmonize the other  
+  `InputDecoration` property names in `FlexSubThemesData`. 
+  The old name will be removed in release 6.0.0.
+
+* Deprecated and renamed `navigationBarHighlightSchemeColor` to 
+  `navigationBarIndicatorSchemeColor` in `FlexSubThemesData`, to
+  harmonize the naming standard. Likewise, the parameter `highlightSchemeColor`
+  ìn `FlexSubThemes.navigationBarTheme` was deprecated and replaced by
+  `indicatorSchemeColor`. The old names will be removed in release 6.0.0.
+
+* In 5.0.0-dev.1, the renamed properties were deprecated and broken with 4.2.0. 
+  They are still deprecated, but now fallback via the old properties. They
+  are no longer breaking. This concerns `FlexSubThemesData` properties:
+  - `bottomNavigationBarSchemeColor` -> `bottomNavigationBarSelectedLabelSchemeColor`
+  - `navigationBarTextSchemeColor` -> `navigationBarSelectedLabelSchemeColor`
+  - `navigationBarMutedUnselectedText` -> `navigationBarMutedUnselectedLabel`
+  - `navigationBarIconSchemeColor` -> `navigationBarSelectedIconSchemeColor`
+  And `FlexSubThemes.navigationBarTheme` properties:
+  - `textSchemeColor` -> `selectedLabelSchemeColor`
+  - `unselectedTextSchemeColor` -> `unselectedLabelSchemeColor`
+  - `iconSchemeColor` -> `selectedIconSchemeColor`
+  -  `mutedUnselectedText` -> `mutedUnselectedLabel`
+  And `FlexSubThemes.bottomNavigationBarTheme` properties:
+  - `baseSchemeColor ` -> `selectedLabelSchemeColor`
+  The old property names will be removed in release 6.0.0.
+  
 **NEW**
 
 * Added `SchemeColor` based theming of `SnackBar` background color via 
@@ -155,10 +172,10 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 **TESTS**
 
-* Completed test updates. Now 1500 tests, coverage > 99.8%. Some new color value
+* Completed test updates. Now 1575 tests, coverage > 99.8%. A few new color value
   tests are still missing. Not critical, they are just const values, but their 
   tests make the statement that they are a part of tested  
-  version promise. Missing ones to be added before stable 5.0.0. release,
+  version promise. Missing ones to be added before stable 5.0.0 release,
   there are just **a lot** of them to add.
 
 ## v5.0.0-dev.1 - March 14, 2022
@@ -251,7 +268,7 @@ should be relatively easy, despite the long list of changes and new features.
   * `iconSchemeColor` -> `selectedIconSchemeColor`
   * `mutedUnselectedText` -> `mutedUnselectedLabel`
 
-  The following parameter wa renamed in `FlexSubThemes.bottomNavigationBarTheme`:
+  The following parameter was renamed in `FlexSubThemes.bottomNavigationBarTheme`:
   * `baseSchemeColor ` -> `selectedLabelSchemeColor`
 
 
