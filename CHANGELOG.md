@@ -115,7 +115,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
   -  `mutedUnselectedText` -> `mutedUnselectedLabel`  
   
   And `FlexSubThemes.bottomNavigationBarTheme` properties:  
-  - `baseSchemeColor ` -> `selectedLabelSchemeColor`
+  - `baseSchemeColor ` -> `selectedLabelSchemeColor`  
+  
   The old property names will be removed in release 6.0.0.
   
 **NEW**
