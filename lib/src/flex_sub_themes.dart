@@ -1202,6 +1202,8 @@ class FlexSubThemes {
         ? baseColor.withAlpha(kEnabledBorderAlpha)
         : colorScheme.onSurface.withOpacity(0.38);
 
+    final double effectiveRadius = radius ?? kInputDecoratorRadius;
+
     switch (borderType) {
       case FlexInputBorderType.outline:
         return InputDecorationTheme(
@@ -1231,8 +1233,7 @@ class FlexSubThemes {
           focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
           focusedBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(
-                Radius.circular(radius ?? kInputDecoratorRadius)),
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
             borderSide: BorderSide(
               color: baseColor,
               width: focusedBorderWidth,
@@ -1240,8 +1241,7 @@ class FlexSubThemes {
           ),
           enabledBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(
-                Radius.circular(radius ?? kInputDecoratorRadius)),
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
                     color: enabledBorder,
@@ -1251,8 +1251,7 @@ class FlexSubThemes {
           ),
           disabledBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(
-                Radius.circular(radius ?? kInputDecoratorRadius)),
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
                     color: baseColor
@@ -1264,8 +1263,7 @@ class FlexSubThemes {
           ),
           focusedErrorBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(
-                Radius.circular(radius ?? kInputDecoratorRadius)),
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
             borderSide: BorderSide(
               color: colorScheme.error,
               width: focusedBorderWidth,
@@ -1273,8 +1271,7 @@ class FlexSubThemes {
           ),
           errorBorder: OutlineInputBorder(
             gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(
-                Radius.circular(radius ?? kInputDecoratorRadius)),
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
             borderSide: BorderSide(
               color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
               width: unfocusedBorderWidth,
@@ -1309,8 +1306,8 @@ class FlexSubThemes {
           focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
           focusedBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
-              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
             ),
             borderSide: BorderSide(
               color: baseColor,
@@ -1319,8 +1316,8 @@ class FlexSubThemes {
           ),
           enabledBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
-              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
             ),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
@@ -1331,8 +1328,8 @@ class FlexSubThemes {
           ),
           disabledBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
-              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
             ),
             borderSide: unfocusedHasBorder
                 ? BorderSide(
@@ -1345,8 +1342,8 @@ class FlexSubThemes {
           ),
           focusedErrorBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
-              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
             ),
             borderSide: BorderSide(
               color: colorScheme.error,
@@ -1355,8 +1352,8 @@ class FlexSubThemes {
           ),
           errorBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(radius ?? kInputDecoratorRadius),
-              topRight: Radius.circular(radius ?? kInputDecoratorRadius),
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
             ),
             borderSide: BorderSide(
               color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
