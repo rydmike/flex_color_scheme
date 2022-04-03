@@ -34,7 +34,10 @@ class DialogSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: 'default (background)',
+          labelForDefault:
+              controller.useSubThemes && controller.useFlexColorScheme
+                  ? 'default (surface)'
+                  : 'default (background) time (surface)',
           index: controller.dialogBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

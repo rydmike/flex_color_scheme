@@ -201,7 +201,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String toggleButtonsBorderRadius = controller
               .toggleButtonsBorderRadius !=
           null
-      ? '    outlinedButtonRadius: ${controller.toggleButtonsBorderRadius!.toStringAsFixed(1)},\n'
+      ? '    toggleButtonsRadius: ${controller.toggleButtonsBorderRadius!.toStringAsFixed(1)},\n'
       : '';
   //
   // Material button sub themes scheme colors setup CODE.

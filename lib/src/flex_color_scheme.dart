@@ -2422,6 +2422,7 @@ class FlexColorScheme with Diagnosticable {
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
         colors ?? FlexColor.schemes[flexScheme]!.light;
+
     // If the passed in property values are not null, or there was a colorScheme
     // provided, we will override the colors properties with them. Doing it here
     // gets also correct effective and swap behavior on directly passed in
@@ -2535,15 +2536,14 @@ class FlexColorScheme with Diagnosticable {
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onContainers and onSurface and onBackground.
     final _AlphaValues alphaOnValue = surfaceMode != null && useSubThemes
-        ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel, Brightness.light)
+        ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel)
         : const _AlphaValues();
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onPrimary, onSecondary, onTertiary and onError.
-    final _AlphaValues alphaOnMain = surfaceMode != null &&
-            useSubThemes &&
-            subTheme.blendOnColors
-        ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel, Brightness.light)
-        : const _AlphaValues();
+    final _AlphaValues alphaOnMain =
+        surfaceMode != null && useSubThemes && subTheme.blendOnColors
+            ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel)
+            : const _AlphaValues();
     // Determine the input surface and background colors.
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
     final Color inputBackground = background ?? surfaceSchemeColors.background;
@@ -4133,13 +4133,13 @@ class FlexColorScheme with Diagnosticable {
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onContainers and onSurface and onBackground.
     final _AlphaValues alphaOnValue = surfaceMode != null && useSubThemes
-        ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel, Brightness.dark)
+        ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel)
         : const _AlphaValues();
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onPrimary, onSecondary, onTertiary and onError.
     final _AlphaValues alphaOnMain =
         surfaceMode != null && useSubThemes && subTheme.blendOnColors
-            ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel, Brightness.dark)
+            ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel)
             : const _AlphaValues();
     // Determine the input surface and background colors.
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
@@ -4255,7 +4255,7 @@ class FlexColorScheme with Diagnosticable {
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
         ) ??
-        // In order to avoid using a ColorScheme.light that sets
+        // In order to avoid using a ColorScheme.dark that sets
         // some opinionated defaults on deprecated members that we do not
         // want, we make a full one matching the target. Values that
         // exist as direct properties in FlexColorScheme, will actually
@@ -7038,7 +7038,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     }
     // Get alpha blend values corresponding to used mode, level and brightness.
     final _AlphaValues alphaValue =
-        _AlphaValues.getAlphas(surfaceMode, usedBlendLevel, brightness);
+        _AlphaValues.getAlphas(surfaceMode, usedBlendLevel);
     // Return the computed and resulting surface colors.
     return FlexSchemeSurfaceColors(
       surface: surface.surface
@@ -7179,10 +7179,7 @@ class _AlphaValues {
 
   // Returns alpha values for a given blend level and blend mode and brightness.
   static _AlphaValues getAlphas(
-    final FlexSurfaceMode mode,
-    final int blendLevel,
-    final Brightness brightness,
-  ) {
+      final FlexSurfaceMode mode, final int blendLevel) {
     switch (mode) {
       case FlexSurfaceMode.level:
       case FlexSurfaceMode.custom:

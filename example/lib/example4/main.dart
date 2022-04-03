@@ -120,8 +120,7 @@ class DemoApp extends StatelessWidget {
             // can use for quick styling of the sub-themes per component.
             subThemesData: themeController.useSubThemes
                 // Below we show one example for configuring the component
-                // sub-themes. In example 5 we will use many more of them, but
-                // not even there all of them.
+                // sub-themes. In example 5 we will use almost all of them.
                 ? FlexSubThemesData(
                     // Value to adjust themed border radius on widgets with
                     // an adjustable corner rounding, this one is very handy.

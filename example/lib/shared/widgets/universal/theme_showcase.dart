@@ -62,9 +62,9 @@ class ThemeShowcase extends StatelessWidget {
         const NavigationRailShowcase(),
         const SizedBox(height: 8),
         const Divider(),
+        const AlertDialogShowcase(),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
-        const AlertDialogShowcase(),
         const Divider(),
         const MaterialAndBottomSheetShowcase(),
         const Divider(height: 32),
@@ -830,8 +830,9 @@ class _BottomNavigationBarShowcaseState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(
-          height: 57,
+        MediaQuery.removePadding(
+          context: context,
+          removeBottom: true,
           child: BottomNavigationBar(
             currentIndex: buttonIndex,
             onTap: (int value) {
@@ -901,8 +902,9 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(
-          height: Theme.of(context).navigationBarTheme.height ?? 80,
+        MediaQuery.removePadding(
+          context: context,
+          removeBottom: true,
           child: NavigationBar(
             selectedIndex: buttonIndex,
             onDestinationSelected: (int value) {
