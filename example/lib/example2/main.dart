@@ -55,7 +55,8 @@ Future<void> main() async {
   // This also demonstrates how swap used persistence implementation.
   final ThemeService themeService = ThemeServiceMem();
   // To swap to hive use this instead:
-  // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_2');
+  // final ThemeService themeService =
+  //   ThemeServiceHive('flex_color_scheme_v5_box_2');
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.

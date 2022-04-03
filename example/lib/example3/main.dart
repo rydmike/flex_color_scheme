@@ -63,7 +63,8 @@ Future<void> main() async {
   // with the wheel picker for primary color.
   final ThemeService themeService = ThemeServicePrefs();
   // To swap to Hive use this instead:
-  // final ThemeService themeService = ThemeServiceHive('flex_scheme_box_3');
+  // final ThemeService themeService =
+  //   ThemeServiceHive('flex_color_scheme_v5_box_3');
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.
