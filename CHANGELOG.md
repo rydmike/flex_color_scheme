@@ -175,11 +175,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 **TESTS**
 
-* Completed test updates. Now 1575 tests, coverage > 99.8%. A few new color value
-  tests are still missing. Not critical, they are just const values, but their 
-  tests make the statement that they are a part of tested  
-  version promise. Missing ones to be added before stable 5.0.0 release,
-  there are just **a lot** of them to add.
+* Finalized test updates. Now 1684 tests, coverage about 99.8%. 
 
 ## v5.0.0-dev.1 - March 14, 2022
 
