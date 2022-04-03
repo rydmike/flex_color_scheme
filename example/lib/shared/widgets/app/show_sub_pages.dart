@@ -20,9 +20,9 @@ class _ShowSubPagesState extends State<ShowSubPages> {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-        theme.colorScheme.onBackground)
+            theme.colorScheme.onBackground)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-        theme.colorScheme.onBackground);
+            theme.colorScheme.onBackground);
     return HeaderCard(
       leading: Icon(Icons.article_outlined, color: iconColor),
       title: const Text('Page Examples'),
