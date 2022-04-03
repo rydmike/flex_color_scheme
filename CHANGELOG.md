@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.2 - April 2, 2022
+## v5.0.0-dev.2 - April 3, 2022
 
 **BREAKING**
 
@@ -31,7 +31,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   **v5.0.0-dev.1** as no longer needed. It is now kind of back with a new broader 
   replacement called `FlexSubThemesData.useFlutterDefaults`. 
   The in dev.1 version tested API-style to 
-  set various `SchemeColor` properties to null to get SDK default for them was not 
+  set various `SchemeColor` properties to null, to get SDK default for them was not 
   nice. The `FlexSubThemesData` should default to its own preferred 
   and recommended harmonized defaults when not defined. It is better to offer a 
   toggle that can be set, to when possible/offer an opt-out from some bigger style
@@ -41,7 +41,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   null values result in its own harmonized and recommended settings. By setting
   it to `true` a bit messier and un-harmonized Flutter default are back. Currently,
   this impacts different styles and colors on `BottomNavigationBar`, `NavigationBar`,
-  `NavigationRail` and different dialogs. See API docs for details regarding 
+  and `NavigationRail`. See API docs for details regarding 
   defaults with this flag on and off.
   
 * The `FlexSubThemesData` property `popupMenuRadius` and the radius in
