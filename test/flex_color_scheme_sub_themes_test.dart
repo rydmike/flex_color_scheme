@@ -358,6 +358,7 @@ void main() {
         equals(FlexColor.blumineBlueLightPrimaryVariant),
       );
       expect(
+        // ignore: deprecated_member_use
         fcsScheme.primaryVariant,
         equals(FlexColor.blumineBlueLightPrimary),
       );
@@ -370,6 +371,7 @@ void main() {
         equals(FlexColor.blumineBlueLightSecondaryVariant),
       );
       expect(
+        // ignore: deprecated_member_use
         fcsScheme.secondaryVariant,
         equals(FlexColor.blumineBlueLightSecondary),
       );
@@ -405,6 +407,7 @@ void main() {
         equals(FlexColor.blumineBlueDarkPrimaryVariant),
       );
       expect(
+        // ignore: deprecated_member_use
         fcsScheme.primaryVariant,
         equals(FlexColor.blumineBlueDarkPrimary),
       );
@@ -417,6 +420,7 @@ void main() {
         equals(FlexColor.blumineBlueDarkSecondaryVariant),
       );
       expect(
+        // ignore: deprecated_member_use
         fcsScheme.secondaryVariant,
         equals(FlexColor.blumineBlueDarkSecondary),
       );
@@ -450,6 +454,7 @@ void main() {
         equals(FlexColor.blumineBlueLightPrimaryVariant),
       );
       expect(
+        // ignore: deprecated_member_use
         fcsScheme.primaryVariant,
         equals(FlexColor.blumineBlueLightPrimary),
       );
@@ -462,6 +467,7 @@ void main() {
         equals(FlexColor.blumineBlueLightSecondaryVariant),
       );
       expect(
+        // ignore: deprecated_member_use
         fcsScheme.secondaryVariant,
         equals(FlexColor.blumineBlueLightSecondary),
       );
@@ -495,6 +501,7 @@ void main() {
         equals(FlexColor.blumineBlueDarkPrimaryVariant),
       );
       expect(
+        // ignore: deprecated_member_use
         fcsScheme.primaryVariant,
         equals(FlexColor.blumineBlueDarkPrimary),
       );
@@ -507,6 +514,7 @@ void main() {
         equals(FlexColor.blumineBlueDarkSecondaryVariant),
       );
       expect(
+        // ignore: deprecated_member_use
         fcsScheme.secondaryVariant,
         equals(FlexColor.blumineBlueDarkSecondary),
       );
