@@ -398,16 +398,16 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
 
   // Some FAB (Floating Action Button) settings.
   //
-  // If fabUseShape is false, no shape will be added to FAB theme, it will get
-  // whatever default shape the widget default behavior applies.
-  //
+  // // If fabUseShape is false, no shape will be added to FAB theme, it will get
+  // // whatever default shape the widget default behavior applies.
+  // //
   // fabUseShape: false,
-  //
-  // Select the ColorScheme color used by FABs as their base/background color
-  // Secondary is default so no need to set that, used here as placeholder to
-  // enable easy selection of other options.
-  //
-  // fabSchemeColor: SchemeColor.secondary,
+  // //
+  // // Select the ColorScheme color used by FABs as their base/background color
+  // // Secondary is default so no need to set that, used here as placeholder to
+  // // enable easy selection of other options.
+  // //
+  // fabSchemeColor: SchemeColor.secondaryContainer,
 
   // Select the ColorScheme color used by Chips as their base color
   // Primary is default so no need to set that, used here as placeholder to
@@ -441,15 +441,18 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // remove the comments to try them.
   //
   // // SchemeColor based color for [NavigationBar]'s selected item icon.
-  // navigationBarSelectedIconSchemeColor: SchemeColor.primary,
+  // navigationBarSelectedIconSchemeColor: SchemeColor.tertiary,
   // // SchemeColor based color for [NavigationBar]'s selected item label.
-  // navigationBarSelectedLabelSchemeColor: SchemeColor.primary,
+  // navigationBarSelectedLabelSchemeColor: SchemeColor.tertiary,
   // // SchemeColor based color for [NavigationBar]'s unselected item icons.
   // navigationBarUnselectedIconSchemeColor: SchemeColor.onSurface,
   // // SchemeColor based color for [NavigationBar]'s unselected item icons.
   // navigationBarUnselectedLabelSchemeColor: SchemeColor.onSurface,
   // // SchemeColor based color for [NavigationBar]'s selected item highlight.
-  // navigationBarHighlightSchemeColor: SchemeColor.primaryContainer,
+  // navigationBarIndicatorSchemeColor: SchemeColor.tertiaryContainer,
+  // // If you use suitable M3 designed container color for the indicator, it
+  // // does not need any opacity.
+  // navigationBarIndicatorOpacity: 1,
   // // Select the ColorScheme color used for [NavigationBar]'s background.
   // navigationBarBackgroundSchemeColor: SchemeColor.background,
   // // When set to true [NavigationBar] unselected icons use a more muted
@@ -703,12 +706,35 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final ScrollController scrollController;
+  // Enabled state of each menuItem.
+  late List<bool> menuItemsEnabled;
+  // Active state of each menuItem.
+  late List<ResponsiveMenuItemIconState> menuItemsIconState;
 
   @override
   void initState() {
     super.initState();
     scrollController =
         ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
+    // Set enabled menu items.
+    menuItemsEnabled =
+        List<bool>.generate(AppData.menuItems.length, (int i) => false);
+    menuItemsEnabled[1] = true;
+    // Set menu icons states to initial states, some are a loaded from
+    // persisted values via the theme controller.
+    menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
+        AppData.menuItems.length,
+        (int i) => ResponsiveMenuItemIconState.primary);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    menuItemsIconState[1] = isLight
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
   }
 
   @override
@@ -771,12 +797,14 @@ class _HomePageState extends State<HomePage> {
         menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
         menuItems: AppData.menuItems,
+        menuItemsEnabled: menuItemsEnabled,
+        menuItemsIconState: menuItemsIconState,
         railWidth: isPhone ? 52 : 66,
         breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
-          if (index == 0) {
+          if (index == 1) {
             if (isDark) {
               widget.onThemeModeChanged(ThemeMode.light);
             } else {

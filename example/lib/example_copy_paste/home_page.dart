@@ -29,12 +29,35 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final ScrollController scrollController;
+  // Enabled state of each menuItem.
+  late List<bool> menuItemsEnabled;
+  // Active state of each menuItem.
+  late List<ResponsiveMenuItemIconState> menuItemsIconState;
 
   @override
   void initState() {
     super.initState();
     scrollController =
         ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
+    // Set enabled menu items.
+    menuItemsEnabled =
+        List<bool>.generate(AppData.menuItems.length, (int i) => false);
+    menuItemsEnabled[1] = true;
+    // Set menu icons states to initial states, some are a loaded from
+    // persisted values via the theme controller.
+    menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
+        AppData.menuItems.length,
+        (int i) => ResponsiveMenuItemIconState.primary);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    menuItemsIconState[1] = isLight
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
   }
 
   @override
@@ -70,13 +93,15 @@ class _HomePageState extends State<HomePage> {
         menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
         menuItems: AppData.menuItems,
+        menuItemsEnabled: menuItemsEnabled,
+        menuItemsIconState: menuItemsIconState,
         // Make Rail width larger when using it on tablet or desktop.
         railWidth: isPhone ? 52 : 66,
         breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
-          if (index == 0) {
+          if (index == 1) {
             if (isDark) {
               widget.onThemeModeChanged(ThemeMode.light);
             } else {
@@ -107,15 +132,13 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 8),
               const _ListTileShowcase(),
               const SizedBox(height: 8),
-              const _TabBarAndBottomBarShowCase(),
+              const _TabBarShowCase(),
+              const SizedBox(height: 8),
+              const _BottomBarShowCase(),
               const SizedBox(height: 8),
               const _NavigationRailShowCase(),
               const SizedBox(height: 8),
               const _DialogShowcase(),
-              const SizedBox(height: 8),
-              const _TimePickerDialogShowcase(),
-              const SizedBox(height: 8),
-              const _DatePickerDialogShowcase(),
               const SizedBox(height: 8),
               const _MaterialAndBottomSheetShowcase(),
               const SizedBox(height: 8),
@@ -149,8 +172,15 @@ class _MainPanel extends StatefulWidget {
 class _MainPanelState extends State<_MainPanel> {
   @override
   Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
     return StatefulHeaderCard(
+      leading: Icon(Icons.gradient_outlined, color: iconColor),
       title: const Text('Theme'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,10 +199,10 @@ class _MainPanelState extends State<_MainPanel> {
               onChanged: widget.onThemeModeChanged,
             ),
             onTap: () {
-              if (isDark) {
-                widget.onThemeModeChanged(ThemeMode.light);
-              } else {
+              if (isLight) {
                 widget.onThemeModeChanged(ThemeMode.dark);
+              } else {
+                widget.onThemeModeChanged(ThemeMode.light);
               }
             },
           ),
@@ -195,8 +225,16 @@ class _MaterialButtonsShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
     return StatefulHeaderCard(
-      title: const Text('Themed Material Buttons'),
+      leading: Icon(Icons.crop_16_9_outlined, color: iconColor),
+      title: const Text('Material Buttons'),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -219,8 +257,16 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
     return StatefulHeaderCard(
-      title: const Text('Themed Buttons Switches and Chips'),
+      leading: Icon(Icons.toggle_on_outlined, color: iconColor),
+      title: const Text('ToggleButtons FAB Switches and Chips'),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -248,9 +294,17 @@ class _TextInputFieldShowcase extends StatelessWidget {
   const _TextInputFieldShowcase({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const StatefulHeaderCard(
-      title: Text('Themed TextInput'),
-      child: Padding(
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.pin_outlined, color: iconColor),
+      title: const Text('TextField'),
+      child: const Padding(
         padding: EdgeInsets.all(16),
         child: TextInputField(),
       ),
@@ -262,27 +316,65 @@ class _ListTileShowcase extends StatelessWidget {
   const _ListTileShowcase({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const StatefulHeaderCard(
-      title: Text('Themed ListTile'),
-      child: ListTileShowcase(),
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.pin_outlined, color: iconColor),
+      title: const Text('ListTile'),
+      child: const ListTileShowcase(),
     );
   }
 }
 
-class _TabBarAndBottomBarShowCase extends StatelessWidget {
-  const _TabBarAndBottomBarShowCase({Key? key}) : super(key: key);
+class _TabBarShowCase extends StatelessWidget {
+  const _TabBarShowCase({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
     return StatefulHeaderCard(
+      leading: Icon(Icons.tab_outlined, color: iconColor),
       title: const Text('TabBar and BottomNavigationBar'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const <Widget>[
           SizedBox(height: 8),
           TabBarForAppBarShowcase(),
-          SizedBox(height: 8),
-          TabBarForBackgroundShowcase(),
+        ],
+      ),
+    );
+  }
+}
+
+class _BottomBarShowCase extends StatelessWidget {
+  const _BottomBarShowCase({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.video_label, color: iconColor),
+      title: const Text('BottomNavigationBar and NavigationBar'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
           SizedBox(height: 8),
           BottomNavigationBarShowcase(),
           SizedBox(height: 8),
@@ -298,33 +390,17 @@ class _NavigationRailShowCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const StatefulHeaderCard(
-      title: Text('NavigationRail'),
-      child: NavigationRailShowcase(),
-    );
-  }
-}
-
-class _TimePickerDialogShowcase extends StatelessWidget {
-  const _TimePickerDialogShowcase({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const StatefulHeaderCard(
-      title: Text('Themed TimePickerDialog'),
-      child: TimePickerDialogShowcase(),
-    );
-  }
-}
-
-class _DatePickerDialogShowcase extends StatelessWidget {
-  const _DatePickerDialogShowcase({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const StatefulHeaderCard(
-      title: Text('Themed DatePickerDialog'),
-      child: DatePickerDialogShowcase(),
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.view_sidebar_outlined, color: iconColor),
+      title: const Text('NavigationRail'),
+      child: const NavigationRailShowcase(),
     );
   }
 }
@@ -334,9 +410,27 @@ class _DialogShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const StatefulHeaderCard(
-      title: Text('Themed Dialog'),
-      child: AlertDialogShowcase(),
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.branding_watermark_outlined, color: iconColor),
+      title: const Text('Themed TimePickerDialog'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
+          SizedBox(height: 8),
+          AlertDialogShowcase(),
+          SizedBox(height: 8),
+          TimePickerDialogShowcase(),
+          SizedBox(height: 8),
+          DatePickerDialogShowcase(),
+        ],
+      ),
     );
   }
 }
@@ -346,9 +440,17 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const StatefulHeaderCard(
-      title: Text('Themed Material'),
-      child: Padding(
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.call_to_action_outlined, color: iconColor),
+      title: const Text('Material, Banner, Sheet and SnackBar'),
+      child: const Padding(
         padding: EdgeInsets.all(16),
         child: MaterialAndBottomSheetShowcase(),
       ),
@@ -361,9 +463,17 @@ class _CardShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const StatefulHeaderCard(
-        title: Text('Themed Card'),
-        child: Padding(
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+        leading: Icon(Icons.picture_in_picture_alt_outlined, color: iconColor),
+        title: const Text('Card'),
+        child: const Padding(
           padding: EdgeInsets.all(16),
           child: CardShowcase(),
         ));
@@ -375,9 +485,17 @@ class _TextThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const StatefulHeaderCard(
-      title: Text('Themed TextTheme'),
-      child: Padding(
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.font_download_outlined, color: iconColor),
+      title: const Text('Themed TextTheme'),
+      child: const Padding(
         padding: EdgeInsets.all(16),
         child: TextThemeShowcase(),
       ),
@@ -390,7 +508,15 @@ class _PrimaryTextThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
     return StatefulHeaderCard(
+      leading: Icon(Icons.font_download, color: iconColor),
       title: const Text('Themed PrimaryTextTheme'),
       child: SizedBox(
         width: double.infinity,
