@@ -4151,8 +4151,6 @@ class FlexColorScheme with Diagnosticable {
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
     final Color inputBackground = background ?? surfaceSchemeColors.background;
 
-    debugPrint('Dark onPrimaryContainer before onColor : $onPrimaryContainer');
-
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       primaryContainer: effectiveColors.primaryContainer,
@@ -4245,9 +4243,6 @@ class FlexColorScheme with Diagnosticable {
         ? dialogBackground?.darken(5) ??
             surfaceSchemeColors.dialogBackground.darken(5)
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
-
-    debugPrint('Dark onColors before color scheme ... : $onColors');
-
     // Compute the effective ColorScheme based on all selection options.
     final ColorScheme effectiveColorScheme = seedScheme?.copyWith(
           // We made a seeded color scheme, we use it as given but set
