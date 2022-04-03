@@ -29,15 +29,16 @@ class DialogSettings extends StatelessWidget {
               'colorScheme.surface for TimePickerDialog. FlexColorScheme '
               'sub-themes use surface as default for all dialogs to ensure '
               'that they have the same background by default and that '
-              'elevation overlay color works in dark mode.\n\n'
-              'You can theme them to a shared color scheme based color too.'),
+              'elevation overlay color works in dark mode when it is another '
+              'color than background.\n\n'
+              'You can theme them to a shared color scheme based color too, '
+              'with M3 colors, surface variant is an interesting option.'),
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault:
-              controller.useSubThemes && controller.useFlexColorScheme
-                  ? 'default (surface)'
-                  : 'default (background) time (surface)',
+          labelForDefault: controller.useFlexColorScheme
+              ? 'default (surface)'
+              : 'default (alert-date:background) (time:surface)',
           index: controller.dialogBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
