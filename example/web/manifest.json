@@ -1,11 +1,11 @@
 {
-    "name": "example",
-    "short_name": "example",
+    "name": "FlexColorScheme Themes",
+    "short_name": "Themes",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "FlexColorScheme generated themes.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
