@@ -1792,106 +1792,186 @@ void main() {
           FlexColor.deepPurpleDarkTertiaryContainer, const Color(0xFF0179B6));
     });
 
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay', () {
       expect(FlexColor.ebonyClayName, 'Ebony clay');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay', () {
       expect(
         FlexColor.ebonyClayDescription,
         'Ebony clay dark blue-grey and watercourse green colored theme',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay light', () {
       expect(FlexColor.ebonyClayLightPrimary, const Color(0xFF202541));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay light', () {
       expect(FlexColor.ebonyClayLightPrimaryContainer, const Color(0xFF9BA7CF));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay light', () {
+      expect(FlexColor.ebonyClayLightPrimaryVariant, const Color(0xFF202531));
+    });
+    test('FC5 colors Ebony clay light', () {
       expect(FlexColor.ebonyClayLightSecondary, const Color(0xFF006B54));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay light', () {
+      expect(
+          FlexColor.ebonyClayLightSecondaryContainer, const Color(0xFF8FC3AD));
+    });
+    test('FC5 colors Ebony clay light', () {
+      expect(FlexColor.ebonyClayLightSecondaryVariant,
+          FlexColor.ebonyClayLightTertiary);
+    });
+    test('FC5 colors Ebony clay light', () {
       expect(FlexColor.ebonyClayLightTertiary, const Color(0xFF004B3B));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay light', () {
+      expect(
+          FlexColor.ebonyClayLightTertiaryContainer, const Color(0xFF82BCB5));
+    });
+    test('FC5 colors Ebony clay dark', () {
       expect(FlexColor.ebonyClayDarkPrimary, const Color(0xFF4E597D));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay dark', () {
       expect(FlexColor.ebonyClayDarkPrimaryContainer, const Color(0xFF202541));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay dark', () {
+      expect(FlexColor.ebonyClayDarkPrimaryVariant, const Color(0xFF707EAC));
+    });
+    test('FC5 colors Ebony clay dark', () {
       expect(FlexColor.ebonyClayDarkSecondary, const Color(0xFF4BA390));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Ebony clay dark', () {
+      expect(
+          FlexColor.ebonyClayDarkSecondaryContainer, const Color(0xFF0B5341));
+    });
+    test('FC5 colors Ebony clay dark', () {
+      expect(FlexColor.ebonyClayDarkSecondaryVariant,
+          FlexColor.ebonyClayDarkTertiary);
+    });
+    test('FC5 colors Ebony clay dark', () {
       expect(FlexColor.ebonyClayDarkTertiary, const Color(0xFF3D8475));
     });
+    test('FC5 colors Ebony clay dark', () {
+      expect(FlexColor.ebonyClayDarkTertiaryContainer, const Color(0xFF063F36));
+    });
 
-    test('FC5 colors', () {
+    test('FC5 colors Barossa', () {
       expect(FlexColor.barossaName, 'Barossa');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Barossa', () {
       expect(
         FlexColor.barossaDescription,
         'Barossa red and cardin green colored theme',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Barossa light', () {
       expect(FlexColor.barossaLightPrimary, const Color(0xFF4E0029));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Barossa light', () {
       expect(FlexColor.barossaLightPrimaryContainer, const Color(0xFFBDA5B1));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Barossa light', () {
+      expect(FlexColor.barossaLightSecondaryContainer, const Color(0xFF8DC1A8));
+    });
+    test('FC5 colors Barossa light', () {
       expect(FlexColor.barossaLightSecondary, const Color(0xFF00341A));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Barossa light', () {
+      expect(FlexColor.barossaLightSecondaryContainer, const Color(0xFF8DC1A8));
+    });
+    test('FC5 colors Barossa light', () {
+      expect(FlexColor.barossaLightSecondaryVariant,
+          FlexColor.barossaLightTertiary);
+    });
+    test('FC5 colors Barossa light', () {
       expect(FlexColor.barossaLightTertiary, const Color(0xFF124C2F));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Barossa light', () {
+      expect(FlexColor.barossaLightTertiaryContainer, const Color(0xFFA4D9BF));
+    });
+    test('FC5 colors Barossa dark', () {
       expect(FlexColor.barossaDarkPrimary, const Color(0xFF94667E));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Barossa dark', () {
       expect(FlexColor.barossaDarkPrimaryContainer, const Color(0xFF4E0029));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Barossa dark', () {
+      expect(FlexColor.barossaDarkPrimaryVariant, const Color(0xFFB3718D));
+    });
+    test('FC5 colors Barossa dark', () {
       expect(FlexColor.barossaDarkSecondary, const Color(0xFF6B9882));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Barossa dark', () {
+      expect(FlexColor.barossaDarkSecondaryContainer, const Color(0xFF21614C));
+    });
+    test('FC5 colors Barossa dark', () {
+      expect(
+          FlexColor.barossaDarkSecondaryVariant, FlexColor.barossaDarkTertiary);
+    });
+    test('FC5 colors Barossa dark', () {
       expect(FlexColor.barossaDarkTertiary, const Color(0xFF599B7B));
     });
+    test('FC5 colors Barossa dark', () {
+      expect(FlexColor.barossaDarkTertiaryContainer, const Color(0xFF1D5330));
+    });
 
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange', () {
       expect(FlexColor.sharkName, 'Shark and orange');
     });
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange', () {
       expect(
         FlexColor.sharkDescription,
         'Shark grey and orange ecstasy colored theme',
       );
     });
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange light', () {
       expect(FlexColor.sharkLightPrimary, const Color(0xFF1D2228));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange light', () {
       expect(FlexColor.sharkLightPrimaryContainer, const Color(0xFFB0B2C0));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange light', () {
+      expect(FlexColor.sharkLightPrimaryVariant, const Color(0xFF484C50));
+    });
+    test('FC5 colors Shark and orange light', () {
       expect(FlexColor.sharkLightSecondary, const Color(0xFFFB8122));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange light', () {
+      expect(FlexColor.sharkLightSecondaryContainer, const Color(0xFFFFB680));
+    });
+    test('FC5 colors Shark and orange light', () {
+      expect(
+          FlexColor.sharkLightSecondaryVariant, FlexColor.sharkLightTertiary);
+    });
+    test('FC5 colors Shark and orange light', () {
       expect(FlexColor.sharkLightTertiary, const Color(0xFFEA9654));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange light', () {
+      expect(FlexColor.sharkLightTertiaryContainer, const Color(0xFFE9CBAB));
+    });
+    test('FC5 colors Shark and orange dark', () {
       expect(FlexColor.sharkDarkPrimary, const Color(0xFF777A7E));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange dark', () {
       expect(FlexColor.sharkDarkPrimaryContainer, const Color(0xFF313C42));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange dark', () {
+      expect(FlexColor.sharkDarkPrimaryVariant, const Color(0xFF919396));
+    });
+    test('FC5 colors Shark and orange dark', () {
       expect(FlexColor.sharkDarkSecondary, const Color(0xFFFCB075));
     });
-    test('FC5 colors', () {
+    test('FC5 colors Shark and orange dark', () {
+      expect(FlexColor.sharkDarkSecondaryContainer, const Color(0xFFD97B18));
+    });
+    test('FC5 colors Shark and orange dark', () {
+      expect(FlexColor.sharkDarkSecondaryVariant, FlexColor.sharkDarkTertiary);
+    });
+    test('FC5 colors Shark and orange dark', () {
       expect(FlexColor.sharkDarkTertiary, const Color(0xFFEFB383));
+    });
+    test('FC5 colors Shark and orange dark', () {
+      expect(FlexColor.sharkDarkTertiaryContainer, const Color(0xFFA75F27));
     });
 
     test('FC5 colors', () {
