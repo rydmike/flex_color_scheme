@@ -2535,15 +2535,18 @@ class FlexColorScheme with Diagnosticable {
 
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onContainers and onSurface and onBackground.
-    final _AlphaValues alphaOnValue = surfaceMode != null && useSubThemes
-        ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel)
+    final _AlphaValues alphaOnValue = useSubThemes
+        ? _AlphaValues.getAlphas(
+            surfaceMode ?? FlexSurfaceMode.highScaffoldLowSurfaces,
+            onBlendLevel)
         : const _AlphaValues();
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onPrimary, onSecondary, onTertiary and onError.
-    final _AlphaValues alphaOnMain =
-        surfaceMode != null && useSubThemes && subTheme.blendOnColors
-            ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel)
-            : const _AlphaValues();
+    final _AlphaValues alphaOnMain = useSubThemes && subTheme.blendOnColors
+        ? _AlphaValues.getAlphas(
+            surfaceMode ?? FlexSurfaceMode.highScaffoldLowSurfaces,
+            onBlendLevel)
+        : const _AlphaValues();
     // Determine the input surface and background colors.
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
     final Color inputBackground = background ?? surfaceSchemeColors.background;
@@ -4132,18 +4135,24 @@ class FlexColorScheme with Diagnosticable {
 
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onContainers and onSurface and onBackground.
-    final _AlphaValues alphaOnValue = surfaceMode != null && useSubThemes
-        ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel)
+    final _AlphaValues alphaOnValue = useSubThemes
+        ? _AlphaValues.getAlphas(
+            surfaceMode ?? FlexSurfaceMode.highScaffoldLowSurfaces,
+            onBlendLevel)
         : const _AlphaValues();
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onPrimary, onSecondary, onTertiary and onError.
-    final _AlphaValues alphaOnMain =
-        surfaceMode != null && useSubThemes && subTheme.blendOnColors
-            ? _AlphaValues.getAlphas(surfaceMode, onBlendLevel)
-            : const _AlphaValues();
+    final _AlphaValues alphaOnMain = useSubThemes && subTheme.blendOnColors
+        ? _AlphaValues.getAlphas(
+            surfaceMode ?? FlexSurfaceMode.highScaffoldLowSurfaces,
+            onBlendLevel)
+        : const _AlphaValues();
     // Determine the input surface and background colors.
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
     final Color inputBackground = background ?? surfaceSchemeColors.background;
+
+    debugPrint('Dark onPrimaryContainer before onColor : $onPrimaryContainer');
+
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       primaryContainer: effectiveColors.primaryContainer,
@@ -4236,6 +4245,8 @@ class FlexColorScheme with Diagnosticable {
         ? dialogBackground?.darken(5) ??
             surfaceSchemeColors.dialogBackground.darken(5)
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
+
+    debugPrint('Dark onColors before color scheme ... : $onColors');
 
     // Compute the effective ColorScheme based on all selection options.
     final ColorScheme effectiveColorScheme = seedScheme?.copyWith(
