@@ -20,7 +20,7 @@ on:
     paths-ignore:
       - "**.md"
   push:
-    branches: [none]
+    branches: [master]
     paths-ignore:
       - "**.md"
 jobs:
