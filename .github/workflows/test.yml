@@ -16,11 +16,11 @@
 name: Test
 on:
   pull_request:
-    branches: [master]
+    branches: [none]
     paths-ignore:
       - "**.md"
   push:
-    branches: [version-5-0-0-dev2]
+    branches: [none]
     paths-ignore:
       - "**.md"
 jobs:
