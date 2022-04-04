@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
             ? Text(AppColor.schemes[widget.controller.schemeIndex].name)
             : Text('${AppData.title(context)} - '
                 '${AppColor.schemes[widget.controller.schemeIndex].name}'),
-        menuTitle: const Text(AppData.appName),
+        menuTitle: const Text(AppData.packageName),
         menuLeadingTitle: Text(
           AppData.title(context),
           style: textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w600),

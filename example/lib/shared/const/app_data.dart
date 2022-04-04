@@ -16,12 +16,26 @@ class AppData {
   AppData._();
 
   // Info about the app.
-  // When I build new public web versions of the demos, I just make sure to
-  // update this info before I trigger GitHub actions CI/CD that builds them.
-  static const String appName = 'FlexColor\u{00AD}Scheme';
+
+  // Returns the title of the MaterialApp. Used to set title on pages to
+  // same one that is defined in each example as its app name. Handy as we only
+  // need to update in one place, where it belongs and no need to put it as
+  // a const somewhere and no need to pass it around via a title prop either.
+  // Also used in the About box as app name.
+  static String title(BuildContext context) =>
+      (context as Element).findAncestorWidgetOfExactType<MaterialApp>()!.title;
+
+  // When building new public web versions of the demos, make sure to
+  // update this info before triggering GitHub actions CI/CD that builds them.
+  //
+  // The name of the package this app demonstrates.
+  static const String packageName = 'FlexColor\u{00AD}Scheme';
+  // Version of the WEB build, usually same as package, but it also has a
+  // build numbers.
   static const String versionMajor = '5';
-  static const String version = '$versionMajor.0.0-dev.2';
-  static const String packageVersion = 'FlexColorScheme package $version';
+  static const String versionBuild = '2';
+  static const String version = '$versionMajor.0.0-dev.2 Build-$versionBuild';
+  static const String packageVersion = '5.0.0-dev.2';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
   static const String flutterVersion = 'stable v2.10.4';
   static const String copyright = '© 2020, 2021, 2022';
@@ -88,13 +102,6 @@ class AppData {
   static const double panelButtonPhoneHeightReduce = -30;
   // The width and height reduction of input color selection box in phone size.
   static const double colorButtonPhoneReduce = -12;
-
-  // Returns the title of the MaterialApp. Used to set title on pages to
-  // same that is defined in each example as its app name. Handy as we only
-  // need to update in one place, where it belongs and no need to put it as
-  // a const somewhere and no need to pass it around via a title prop either.
-  static String title(BuildContext context) =>
-      (context as Element).findAncestorWidgetOfExactType<MaterialApp>()!.title;
 
   // Get the main font that is used in some of the examples.
   // Feel free to try different fonts.

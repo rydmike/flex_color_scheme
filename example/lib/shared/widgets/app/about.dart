@@ -77,7 +77,7 @@ void showAppAboutDialog(BuildContext context) {
               TextSpan(
                 style: aboutTextStyle,
                 text: 'The ${AppData.title(context)} application demonstrates '
-                    'features of the ${AppData.appName} Flutter theming '
+                    'features of the ${AppData.packageName} Flutter theming '
                     'package.\n\n'
                     'To learn more, check out the package on ',
               ),
@@ -94,7 +94,8 @@ void showAppAboutDialog(BuildContext context) {
               TextSpan(
                 style: footerStyle,
                 text: 'Built with Flutter ${AppData.flutterVersion}, '
-                    'using ${AppData.packageVersion}\n\n',
+                    'using ${AppData.packageName} '
+                    '${AppData.packageVersion}\n\n',
               ),
             ],
           ),
