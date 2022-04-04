@@ -16,7 +16,7 @@
 name: Test
 on:
   pull_request:
-    branches: [none]
+    branches: [master]
     paths-ignore:
       - "**.md"
   push:
