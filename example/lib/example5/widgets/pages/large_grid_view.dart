@@ -60,7 +60,8 @@ class LargeGridView extends StatefulWidget {
 }
 
 class _LargeGridViewState extends State<LargeGridView>
-    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+    with TickerProviderStateMixin {
+  //, AutomaticKeepAliveClientMixin {
   late final ScrollController scrollController;
   late int previousSchemeIndex;
   late bool previousUseFlexColorScheme;
@@ -68,8 +69,8 @@ class _LargeGridViewState extends State<LargeGridView>
   late bool updateDelegate;
 
   // Override `wantKeepAlive` when using `AutomaticKeepAliveClientMixin`.
-  @override
-  bool get wantKeepAlive => true;
+  // @override
+  // bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -115,7 +116,7 @@ class _LargeGridViewState extends State<LargeGridView>
   @override
   Widget build(BuildContext context) {
     // Call `super.build` when using `AutomaticKeepAliveClientMixin`.
-    super.build(context);
+    // super.build(context);
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
