@@ -7,17 +7,17 @@
 
 ## The documentation is moving
 
-The documentation for FlexColorScheme is moving to its own site powered by [docs.page](https://docs.page/). The work in progress documentation is [**here**](https://docs.page/rydmike/flex_color_scheme_docs).
+The documentation for FlexColorScheme is moving to its own site powered by [docs.page](https://docs.page/).
+
+The work in progress documentation site is [**here**](https://docs.page/rydmike/flex_color_scheme_docs).
+
+**The documentation site has not yet been updated to version 5, it is a work in progress!**
 
 ## Version 5.0.0-dev.2 Release Notice
 
 Version 5 is a big refactor with deprecation of previous `variant` based color names in favor of `container` ones that were added to updated M3 based `ColorScheme` in Flutter 2.10.0. The same additions and changes are now also introduced in FlexColorScheme. Despite being a very big release, with many new features, actual breaking changes are very few and mostly concerns in version 4 deprecated members and of course requiring minimum Flutter 2.10.0 to work.
 
 Version 5 has many new advanced coloring features and fully supports Material 3 based color schemes, including more powerful seed generated color schemes than what is available in Flutter SDK directly. Version 5 also comes with many more convenient component sub-theming options compared to previous versions. The companion app, the [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v5) has been completely revised and has two view modes, the previous large masonry grid, but also a convenient topic based page view. In the new version you can also see the generated theme setup code as you change your theming settings. The app is still open source, more will be written about it in the docs and may an article as well later.
-
-## Summary
-
-**The documentation in this site has not yet been updated to version 5!!**
 
 This is a minor breaking release with many major new Material 3 ColorScheme features. See [change log](https://pub.dev/packages/flex_color_scheme/versions/5.0.0-dev.2/changelog) for detailed change information. Generated API docs are available and up to date with version 5. The samples have also been updated, the live web builds of them are available here:
 * Example 1 [Basic Theme](https://rydmike.com/flexcolorscheme/basictheme-v5)
@@ -31,7 +31,9 @@ This is a minor breaking release with many major new Material 3 ColorScheme feat
   Its comments contain a lot of documentation that will end up in the docs later.
 * The sample with the **Copy Playground Theme** template that can be used to test themes
     using copy-pasted theme setup code from the Themes Playground is also up-to-date.
-----
+
+#### What remains to be done?
+
 * **Q:** Will there be significant changes from 5.0.0-dev.2 to 5.0.0 stable?
 * **A:** No, it is done and ready for release.
 
