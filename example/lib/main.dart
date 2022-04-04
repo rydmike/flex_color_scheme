@@ -786,7 +786,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: ResponsiveScaffold(
         title: Text(AppData.title(context)),
-        menuTitle: const Text(AppData.appName),
+        menuTitle: const Text(AppData.packageName),
         menuLeadingTitle: Text(
           AppData.title(context),
           style: Theme.of(context)

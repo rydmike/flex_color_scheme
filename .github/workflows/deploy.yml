@@ -65,69 +65,69 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: coverage/lcov.info
 
-      # Example 1 Basic theme - Build and deploy
-      - name: "EXAMPLE-1 START BUILD - Flutter clean before build"
-        run: flutter clean && cd example && flutter clean
-      - name: "EXAMPLE-1 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/basictheme-v5/" --release -t lib/example1/main.dart
-      - name: "EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit."
-        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/basictheme-v5'
-          destination_repo: 'rydmike/rydmike.github.io'
-          user_email: 'm.rydstrom@gmail.com'
-          user_name: 'rydmike'
-
-      # Example 2 Custom theme - Build and deploy
-      - name: "EXAMPLE-2 START BUILD - Flutter clean before build"
-        run: flutter clean && cd example && flutter clean
-      - name: "EXAMPLE-2 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/customtheme-v5/" --release -t lib/example2/main.dart
-      - name: "EXAMPLE-2 DEPLOY to GitHub Pages repository, published on commit."
-        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/customtheme-v5'
-          destination_repo: 'rydmike/rydmike.github.io'
-          user_email: 'm.rydstrom@gmail.com'
-          user_name: 'rydmike'
-
-      # Example 3 Four themes - Build and deploy
-      - name: "EXAMPLE-3 START BUILD - Flutter clean before build"
-        run: flutter clean && cd example && flutter clean
-      - name: "EXAMPLE-3 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/fourthemes-v5/" --release -t lib/example3/main.dart
-      - name: "EXAMPLE-3 DEPLOY to GitHub Pages repository, published on commit."
-        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/fourthemes-v5'
-          destination_repo: 'rydmike/rydmike.github.io'
-          user_email: 'm.rydstrom@gmail.com'
-          user_name: 'rydmike'
-
-      # Example 4 All themes - Build and deploy
-      - name: "EXAMPLE-4 START BUILD - Flutter clean before build"
-        run: flutter clean && cd example && flutter clean
-      - name: "EXAMPLE-4 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/allthemes-v5/" --release -t lib/example4/main.dart
-      - name: "EXAMPLE-4 DEPLOY to GitHub Pages repository, published on commit."
-        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/allthemes-v5'
-          destination_repo: 'rydmike/rydmike.github.io'
-          user_email: 'm.rydstrom@gmail.com'
-          user_name: 'rydmike'
+#      # Example 1 Basic theme - Build and deploy
+#      - name: "EXAMPLE-1 START BUILD - Flutter clean before build"
+#        run: flutter clean && cd example && flutter clean
+#      - name: "EXAMPLE-1 WEB release build"
+#        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/basictheme-v5/" --release -t lib/example1/main.dart
+#      - name: "EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit."
+#        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+#        env:
+#          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#        with:
+#          source_file: 'example/build/web/.'
+#          destination_folder: 'flexcolorscheme/basictheme-v5'
+#          destination_repo: 'rydmike/rydmike.github.io'
+#          user_email: 'm.rydstrom@gmail.com'
+#          user_name: 'rydmike'
+#
+#      # Example 2 Custom theme - Build and deploy
+#      - name: "EXAMPLE-2 START BUILD - Flutter clean before build"
+#        run: flutter clean && cd example && flutter clean
+#      - name: "EXAMPLE-2 WEB release build"
+#        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/customtheme-v5/" --release -t lib/example2/main.dart
+#      - name: "EXAMPLE-2 DEPLOY to GitHub Pages repository, published on commit."
+#        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+#        env:
+#          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#        with:
+#          source_file: 'example/build/web/.'
+#          destination_folder: 'flexcolorscheme/customtheme-v5'
+#          destination_repo: 'rydmike/rydmike.github.io'
+#          user_email: 'm.rydstrom@gmail.com'
+#          user_name: 'rydmike'
+#
+#      # Example 3 Four themes - Build and deploy
+#      - name: "EXAMPLE-3 START BUILD - Flutter clean before build"
+#        run: flutter clean && cd example && flutter clean
+#      - name: "EXAMPLE-3 WEB release build"
+#        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/fourthemes-v5/" --release -t lib/example3/main.dart
+#      - name: "EXAMPLE-3 DEPLOY to GitHub Pages repository, published on commit."
+#        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+#        env:
+#          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#        with:
+#          source_file: 'example/build/web/.'
+#          destination_folder: 'flexcolorscheme/fourthemes-v5'
+#          destination_repo: 'rydmike/rydmike.github.io'
+#          user_email: 'm.rydstrom@gmail.com'
+#          user_name: 'rydmike'
+#
+#      # Example 4 All themes - Build and deploy
+#      - name: "EXAMPLE-4 START BUILD - Flutter clean before build"
+#        run: flutter clean && cd example && flutter clean
+#      - name: "EXAMPLE-4 WEB release build"
+#        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/allthemes-v5/" --release -t lib/example4/main.dart
+#      - name: "EXAMPLE-4 DEPLOY to GitHub Pages repository, published on commit."
+#        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+#        env:
+#          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#        with:
+#          source_file: 'example/build/web/.'
+#          destination_folder: 'flexcolorscheme/allthemes-v5'
+#          destination_repo: 'rydmike/rydmike.github.io'
+#          user_email: 'm.rydstrom@gmail.com'
+#          user_name: 'rydmike'
 
       # Example 5 Themes playground - Build and deploy
       - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
