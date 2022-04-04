@@ -7,11 +7,6 @@ environment:
   flutter: '>=2.10.0'
 
 dependencies:
-
-  # Prebuilt transition animations, by Google (flutter.dev).
-  # https://pub.dev/packages/animations
-  animations: ^2.0.2
-
   # Adds the Cupertino Icons font to your application. Used by the
   # CupertinoIcons class for iOS style icons, by Google flutter.dev.
   # https://pub.dev/packages/cupertino_icons
@@ -55,10 +50,6 @@ dependencies:
   # Store value pair shared preference data, by Google flutter.dev.
   # https://pub.dev/packages/shared_preferences
   shared_preferences: ^2.0.13
-
-  # Useful sliver tools, by pietervanloon.com.
-  # https://pub.dev/packages/sliver_tools
-  sliver_tools: ^0.2.5
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
