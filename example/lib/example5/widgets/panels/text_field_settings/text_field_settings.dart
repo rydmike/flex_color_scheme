@@ -13,8 +13,14 @@ class TextFieldSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
-    debugPrint('TextFieldSettings: inputDecoratorBorderType: '
-        '${controller.inputDecoratorBorderType}');
+    final String decoratorRadiusDefaultLabel =
+        controller.inputDecoratorBorderRadius == null &&
+                controller.defaultRadius == null
+            ? 'default 20'
+            : controller.inputDecoratorBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -101,7 +107,7 @@ class TextFieldSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.inputDecoratorBorderRadius == null ||
                         (controller.inputDecoratorBorderRadius ?? -1) < 0
-                    ? 'default 20'
+                    ? decoratorRadiusDefaultLabel
                     : (controller.inputDecoratorBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
@@ -129,7 +135,7 @@ class TextFieldSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.inputDecoratorBorderRadius == null ||
                               (controller.inputDecoratorBorderRadius ?? -1) < 0
-                          ? 'default 20'
+                          ? decoratorRadiusDefaultLabel
                           : (controller.inputDecoratorBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
