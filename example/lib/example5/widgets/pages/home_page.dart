@@ -40,6 +40,10 @@ class _HomePageState extends State<HomePage> {
   // Active state of each menuItem.
   late List<ResponsiveMenuItemIconState> menuItemsIconState;
 
+  // TODO(rydmike): Part of scroll-position keep experiment, see LargeGridView.
+  // // Value to keep the scroll position of the masonry grid
+  // late double gridScrollPosition;
+
   // Toggle the state of a card between open/closed.
   void togglePanelOpenClose(int index) {
     setState(() {
@@ -50,6 +54,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    // TODO(rydmike): Part of scroll-position experiment, see LargeGridView.
+    // // Large MasonryGridView scroll position.
+    // gridScrollPosition = 0.0;
 
     // Set enabled menu items.
     menuItemsEnabled =
@@ -196,6 +204,13 @@ class _HomePageState extends State<HomePage> {
                 controller: widget.controller,
                 isCardOpen: isPanelOpen,
                 toggleCard: togglePanelOpenClose,
+                // TODO(rydmike): Part of scroll-position keep experiment.
+                // scrollPosition: gridScrollPosition,
+                // onScrollChanged: (double scrollPosition) {
+                //   setState(() {
+                //     gridScrollPosition = scrollPosition;
+                //     debugPrint('MasonryGridScroll pos: $gridScrollPosition');
+                //   }); }
               )
             : PanelView(themeController: widget.controller),
       ),
