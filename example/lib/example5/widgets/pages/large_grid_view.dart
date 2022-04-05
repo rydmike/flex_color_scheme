@@ -50,10 +50,15 @@ class LargeGridView extends StatefulWidget {
     required this.controller,
     required this.isCardOpen,
     required this.toggleCard,
+    // required this.scrollPosition,
+    // required this.onScrollChanged,
   }) : super(key: key);
   final ThemeController controller;
   final List<bool> isCardOpen;
   final ValueChanged<int> toggleCard;
+  // TODO(rydmike): Part of scroll-position keep experiment.
+  // final double scrollPosition;
+  // final ValueChanged<double> onScrollChanged;
 
   @override
   State<LargeGridView> createState() => _LargeGridViewState();
@@ -67,10 +72,26 @@ class _LargeGridViewState extends State<LargeGridView>
   late bool previousUseSubThemes;
   late bool updateDelegate;
 
+  // TODO(rydmike): Can we get scroll position offset to work?
+  //  Discuss with letsar and ask if he knows why it does not work. Because
+  //  this attempt did not, not has any other way I tried.
+
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController();
+    // debugPrint('Init GRID MasonryGridScroll pos: ${widget.scrollPosition}');
+    scrollController = ScrollController(
+      keepScrollOffset: true,
+      // initialScrollOffset: widget.scrollPosition,
+      debugLabel: 'masonryGridScrollController',
+    );
+    // scrollController.addListener(
+    //   () {
+    //     if (scrollController.hasClients) {
+    //       widget.onScrollChanged(scrollController.offset);
+    //     }
+    //   },
+    // );
     previousSchemeIndex = widget.controller.schemeIndex;
     previousUseFlexColorScheme = widget.controller.useFlexColorScheme;
     previousUseSubThemes = widget.controller.useSubThemes;
