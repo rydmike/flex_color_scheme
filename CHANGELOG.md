@@ -6,7 +6,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 **BREAKING**
 
-* Completed in version 4.0.0 planned, for version 5.0.0, removal of
+* Completed in version 4.0.0 for version 5.0.0 planned removal of
   deprecated property `surfaceStyle`, including all its implementing classes,
   enums and helpers:
   - Removed property: `surfaceStyle` in `FlexColorScheme.light`.
@@ -84,7 +84,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   always overridden by the seed generate `ColorScheme`. This allows us
   to use a `colorScheme` as input to seed generation, where this color
   scheme could already have been externally seeded generated, but that we want
-  to modify by using custom FlexTones or surface blends in FleColorScheme.
+  to modify by using custom FlexTones or surface blends in FlexColorScheme.
   The direct properties overrides the seeded color scheme as before, unless it
   is `primary`, `secondary`, `tertiary` or their container colors. In that case
   the `keyColors`, "keep" property determines if those colors are kept or not.
@@ -401,7 +401,7 @@ should be relatively easy, despite the long list of changes and new features.
   - `NavigationRailThemeData` via `FlexSubThemes.navigationRailTheme`.
 
   There are many quick and easy configuration parameters added
-  to `FlexSubThemesData`. There following built in widgets now have quick and
+  to `FlexSubThemesData`. The following built-in widgets now have quick and
   easy custom theming option via sub-themes opt-in.
 
   * `TextButton`
