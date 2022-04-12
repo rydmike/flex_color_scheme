@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 ///
 /// If we want to use the old style drag scroll that was in use on Flutter
 /// stable 2.2.x and earlier, also on desktop and web we can use this scroll
-/// behaviour for the entire application.
+/// behavior for the entire application.
 ///
 /// Normally you would probably not use this scroll behavior in real
 /// desktop/web apps, but I like it, so I use it when I can choose! :)
@@ -23,10 +23,10 @@ class AppScrollBehavior extends MaterialScrollBehavior {
       };
 }
 
-/// Another alternative custom scroll behaviour class.
+/// Another alternative custom scroll behavior class.
 /// Using the Apple iOS bouncing scroll and over stretch.
 ///
-/// Currently not used in these apps, but exprimented with it, for some other
+/// Currently not used in these apps, but experimented with it, for some other
 /// type of app it is quite cool.
 @immutable
 class AppleScrollBehavior extends ScrollBehavior {

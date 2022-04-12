@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
+// Settings for the standard Material buttons.
 class ButtonsSettings extends StatelessWidget {
   const ButtonsSettings(
     this.controller, {

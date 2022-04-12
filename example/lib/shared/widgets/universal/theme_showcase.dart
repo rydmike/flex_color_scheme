@@ -17,7 +17,22 @@ import 'switch_list_tile_adaptive.dart';
 /// however not so useful, unless all you really want to do is to show what
 /// Flutter Widgets look like.
 class ThemeShowcase extends StatelessWidget {
-  const ThemeShowcase({Key? key}) : super(key: key);
+  const ThemeShowcase({
+    Key? key,
+    this.useRailAssertWorkAround = true,
+  }) : super(key: key);
+
+  // Flag set to true to make a work around to avoid unnecessarily
+  // eager assert in NavigationRail SDK API.
+  //
+  // Assertion: line 562 pos 7: 'useIndicator || indicatorColor == null'
+  // A flag is used to do trickery with transparency for this
+  // assertion that we cannot avoid since the theme controls the
+  // setup and user it. User may enter combo that has no effect, and
+  // triggers the assert.
+  // It should be obvious that if you have no indicator color
+  // you cannot use an indicator, why assert it? Just don't show one!
+  final bool useRailAssertWorkAround;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +74,7 @@ class ThemeShowcase extends StatelessWidget {
         const NavigationBarShowcase(),
         const SizedBox(height: 8),
         const Divider(),
-        const NavigationRailShowcase(),
+        NavigationRailShowcase(useAssertWorkAround: useRailAssertWorkAround),
         const SizedBox(height: 8),
         const Divider(),
         const AlertDialogShowcase(),
@@ -954,7 +969,7 @@ class NavigationRailShowcase extends StatefulWidget {
     Key? key,
     this.child,
     this.height = 400,
-    this.useAssertWorkAround = false,
+    this.useAssertWorkAround = true,
   }) : super(key: key);
 
   /// A child widget that we can use to place controls on the
@@ -964,7 +979,7 @@ class NavigationRailShowcase extends StatefulWidget {
   /// The vertical space for the navigation bar.
   final double height;
 
-  // TODO(rydmike): Issues: Unnecessary assert, explain why it is problematic.
+  // TODO(rydmike): Unnecessary assert, raise SDK issue explain why not needed.
   // Flag set to true to make a work around to avoid unnecessarily
   // eager assert in SDK.
   //

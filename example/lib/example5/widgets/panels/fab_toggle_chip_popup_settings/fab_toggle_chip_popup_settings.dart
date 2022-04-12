@@ -47,9 +47,6 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${popupEffectiveRadius.toStringAsFixed(0)}'
                 : '';
-
-    //popupMenuBorderRadius
-
     final double popupOpacity =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.popupMenuOpacity
@@ -73,8 +70,8 @@ class FabToggleChipPopupSettings extends StatelessWidget {
               : null,
         ),
         SwitchListTileAdaptive(
-          title: const Text('Use themed Shape'),
-          subtitle: const Text('OFF removes Shape usage, making it use default '
+          title: const Text('Use themed shape'),
+          subtitle: const Text('OFF removes shape usage, making it use default '
               'style, regardless of global border radius setting or own radius '
               'setting. It is like "useFlutterDefaults", but only for the FAB'),
           value: controller.fabUseShape &&

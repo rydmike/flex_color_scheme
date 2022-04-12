@@ -5,7 +5,7 @@ import '../../../shared/widgets/universal/responsive_dialog.dart';
 import '../../utils/generate_theme_dart_code.dart';
 import 'dart_code_dialog_screen.dart';
 
-// Top level function to handle Theme code tap, make the FlexColorScheme
+// Top level function to handle Theme code menu tap, make the FlexColorScheme
 // setup code and copy the code to clipboard.
 Future<void> showCopySetupCodeDialog(
     BuildContext context, ThemeController controller) async {

@@ -81,6 +81,9 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final ThemeController themeCtrl = widget.themeController;
     final MediaQueryData media = MediaQuery.of(context);
+    // Flag used to hide some blend mode options that wont fit when
+    // using toggle buttons on small media.
+    final bool showAllBlends = media.size.width > 445;
     final bool isPinned = media.size.height >= AppData.pinnedSelector;
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
@@ -145,8 +148,8 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
             PanelPage(IntroductionPanel(themeCtrl), page, themeCtrl),
             PanelPage(InputColors(themeCtrl), page, themeCtrl),
             PanelPage(SeededColorScheme(themeCtrl), page, themeCtrl),
-            PanelPage(
-                SurfaceBlends(themeCtrl, allBlends: true), page, themeCtrl),
+            PanelPage(SurfaceBlends(themeCtrl, allBlends: showAllBlends), page,
+                themeCtrl),
             PanelPage(EffectiveColors(themeCtrl), page, themeCtrl),
             PanelPage(ComponentThemes(themeCtrl), page, themeCtrl),
             PanelPage(TextFieldSettings(themeCtrl), page, themeCtrl),

@@ -39,34 +39,36 @@ class AppColor {
     appBarColor: Color(0xFF00102B),
   );
 
-  // You can build a scheme the long way, by specifying all the required hand
-  // picked scheme colors, like above, or you can also build schemes from a
-  // single primary color. With the `FlexSchemeColor.from` factory. When doing
-  // so the only required color is the primary color, the other colors will be
-  // computed. You can optionally also provide the primaryVariant, secondary and
-  // secondaryVariant colors with the factory, but any color that is not
-  // provided will always be computed to get all the required colors in
-  // `FlexSchemeColor`.
+  // We can build a scheme the long way, by specifying all the required
+  // scheme colors, like above, or we can also build schemes from a single
+  // primary color. With the `FlexSchemeColor.from` factory. When doing so the
+  // only required color is the primary color, the other colors will be
+  // computed. We can optionally also provide the `primaryContainer`,
+  // `secondary` and `secondaryContainer` colors with the factory, but any
+  // color that is not provided will always be computed to get all the required
+  // colors in a `FlexSchemeColor`.
 
-  // In this example we create our 2nd color scheme from just a primary color
-  // for the light and dark schemes. The custom app bar color will also
+  // In this example we create our 2nd scheme from just a primary color for the
+  // light and dark schemes. The custom `appBarColor` does in this case also
   // receive the same color value as the one that is computed for
-  // secondaryVariant color, this is default null behavior for custom app bar
-  // color when using this factory.
+  // `secondaryContainer` color. This is its default with the
+  // `FlexSchemeColor.from` factory if the color is not specified.
 
   // When you figure out the actual colors you want, it might be a good idea to
   // use the method in the above case for the custom _myScheme1Light and dark,
   // since that can be const and you can then make your entire list
   // of color schemes a const.
 
-  // The `brightness` parameter in the FlexSchemeColor.from factory is new
-  // from version 5. If brightness is specified the factory computes missing
-  // colors that are better suited for an M3 based ColorScheme, of the given
-  // brightness. If brightness is not specified the algorithm is same as before
-  // version 5, but with two more colors. Such colors schemes fits better for
-  // M2 specification, but they do also work in M3, they just don't follow
-  // the guidelines with respect to the brightness of the color and container
-  // pair color,
+  // The `brightness` parameter in the `FlexSchemeColor.from` factory is new
+  // in version 5. If `brightness` is specified the factory computes missing
+  // colors that are well suited for a Material 3 based ColorScheme, of the
+  // given brightness. If brightness is not specified, then the algorithm is
+  // same as before version 5, but with two more colors. Its produced colors
+  // fit better for M2 specification, they do also work in M3, they just don't
+  // follow the guidelines with respect to the hue of the main color and its
+  // container pair color. When using the `FlexSchemeColor.from` with
+  // Material 3 `ColorScheme`, prefer specifying the brightness value for
+  // results following the Material 3 design intent.
   static final FlexSchemeColor _myScheme2Light = FlexSchemeColor.from(
     primary: const Color(0xFF065808),
     brightness: Brightness.light,
@@ -108,7 +110,7 @@ class AppColor {
   static const Color customTertiaryDark = Color(0xFF86D2E1);
   static const Color customTertiaryContainerDark = Color(0xFF004E59);
 
-  // Used by example 4, the "All themes" dmo.
+  // Used by example 4, the "All themes" demo.
   // Finally we create a list with all color schemes we will use. Starting with
   // our custom schemes, since normally when we make custom schemes, those are
   // probably the ones we want to use primarily, so we put them first. After our
@@ -145,15 +147,14 @@ class AppColor {
           'primary and secondary colors',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.
-      // The `swapColors`parameter is `true` here. It is new in version 5. It
-      // swaps main and container colors values
-      // for the primary its container, likewise for secondary and tertiary and
-      // their containers.
+      // The `swapColors` parameter is `true` here. It is new in version 5. It
+      // swaps main and container colors values for the primary its container,
+      // likewise for secondary and tertiary and their containers.
       //
-      // This is done because in M3 light mode, the main color should be darker
-      // or more saturated than the container, but in dark mode it should be
-      // the other way around. By setting the flag to true, this is done
-      // before the light theme mode colors are reused as dark theme and
+      // This is done because in Material 3 light mode, the main color should
+      // be darker or more saturated than the container, but in dark mode it
+      // should be the other way around. By setting the flag to true, this is
+      // done before the light theme mode colors are reused as dark theme and
       // desaturated using `whiteBlend` level value.
       dark: _myScheme3Light.defaultError.toDark(30, true),
     ),

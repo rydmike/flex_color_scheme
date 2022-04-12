@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 /// Some of the extensions are rewrites of TinyColor's functions
 /// https://pub.dev/packages/tinycolor. The TinyColor algorithms have also
 /// been modified to use Flutter's HSLColor class instead of the custom one in
-/// the TinyColor lib. The functions from TinyColor reimplemented as Color
+/// the TinyColor lib. The functions from TinyColor re-implemented as Color
 /// extensions here are [brighten], [lighten] and [darken]. They are used
 /// for color calculations in FlexColorScheme, but also exposed for reuse.
 ///

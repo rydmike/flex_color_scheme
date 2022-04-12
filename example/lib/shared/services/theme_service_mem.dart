@@ -25,8 +25,6 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> init() async {}
 
-  // ---------
-
   /// Loads a setting from the Theme service, using a key to access it.
   /// Just returning default value for the in memory service that does not
   /// persist values.

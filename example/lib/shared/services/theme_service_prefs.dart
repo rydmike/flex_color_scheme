@@ -42,7 +42,7 @@ class ThemeServicePrefs implements ThemeService {
   // Loads a setting from the Theme service, using a key to access it from
   // the SharedPreferences storage.
   //
-  // SharedPreference does not have type adapters, but we can handle the
+  // SharedPreference does not have type adaptors, but we can handle the
   // different types internally in a a single load wrapper.
   //
   // SharedPreferences cannot handle saving and loading "NULL" values like
@@ -55,7 +55,7 @@ class ThemeServicePrefs implements ThemeService {
   // When you reset the key-value store you can go with a choice of removing
   // all keys, and letting the app coded default values come into effect when
   // a key is missing. Or we can go the route used in this app, that it just
-  // saves set and save from defaults changed key-value pairs to the store,
+  // sets and save from defaults changed key-value pairs to the store,
   // with the value set to the coded default value.
   // In this app we have chosen the latter style, so after a
   // first reset to default, we would with shared prefs and "no key" as null
@@ -88,7 +88,7 @@ class ThemeServicePrefs implements ThemeService {
   // We can do this because this app does not need to persist any negative
   // values, nor any null bool. Sure Flutter SDK has many bool inputs that can
   // be "null", but it defaults to true/false when that is the case. So
-  // selecting the value that gives you the default SDK behaviour for bool
+  // selecting the value that gives you the default SDK behavior for bool
   // inputs is not a problem, you just have to know what the default fallback
   // is.
   //

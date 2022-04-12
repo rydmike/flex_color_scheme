@@ -37,8 +37,7 @@ Future<void> main() async {
   // The controller uses an abstract ThemeService interface to get and save the
   // settings. There are 3 implementations available to choose from:
   //
-  // 0. ThemeService      - Abstract interface base class, contains defaults
-  //                        values and shared storage key value strings.
+  // 0. ThemeService      - Abstract interface base class.
   // 1. ThemeServiceMem   - Only keeps settings in memory.
   // 2. ThemeServicePrefs - Persist settings locally using SharedPreferences.
   // 3. ThemeServiceHive  - Persist settings locally using Hive.

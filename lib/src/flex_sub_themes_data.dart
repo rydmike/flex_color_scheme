@@ -589,7 +589,6 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Border radius value for [ToggleButtons].
   ///
-  ///
   /// If not defined and [defaultRadius] is undefined, defaults to
   /// [kButtonRadius] 20dp.
   ///
@@ -715,6 +714,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Deprecated border radius override value for [InputDecoration],
   /// this property has been replaced by [inputDecoratorRadius].
+  ///
   /// This property will be completely removed in version 6.0.0.
   @Deprecated('This property has been replaced after 4.2.0. To harmonize '
       'input decorator property names it has been renamed to '
@@ -980,7 +980,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, it defaults to the opinionated color FlexColorScheme (FCS)
   /// choices below, when used via [FlexSubThemesData].
   ///
-  /// * In light theme mode:
+  /// * In light theme mode:  ///
   ///   * FCS: onSurface with primary blend at 45% opacity, with tot opacity 95%
   ///   * Flutter SDK uses: onSurface with surface at opacity 80%, blended on
   ///     top of surface.
@@ -1073,7 +1073,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
   /// labeling modifying properties (size and scheme color) are also null, it
   /// will then be passed along as null, allowing it to remain undefined
-  /// and widget default behaviour sets the default. If label size or scheme
+  /// and widget default behavior sets the default. If label size or scheme
   /// is defined, a default TextStyle() will be created, if
   /// [bottomNavigationBarLabelTextStyle] is undefined, that gets th size and
   /// color applied.
@@ -1297,7 +1297,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
   /// labeling modifying properties (size and scheme color) are also null, it
   /// will then be passed along as null, allowing it to remain undefined
-  /// and widget default behaviour sets the default. If label size or scheme
+  /// and widget default behavior sets the default. If label size or scheme
   /// is defined, a default TextStyle() will be created, if
   /// [navigationBarLabelTextStyle] is undefined, that gets the size and
   /// color applied.
@@ -1461,7 +1461,6 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Opacity used on the [NavigationBar] indicator.
   ///
-  ///
   /// If undefined defaults to 24%.
   ///
   /// The default opacity is computed from [kNavigationBarIndicatorAlpha] 0x3D,
@@ -1530,7 +1529,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
   /// labeling modifying properties (size and scheme color) are also null, it
   /// will then be passed along as null, allowing it to remain undefined
-  /// and widget default behaviour sets the default. If label size or scheme
+  /// and widget default behavior sets the default. If label size or scheme
   /// is defined, a default TextStyle() will be created, if
   /// [navigationBarLabelTextStyle] is undefined, that gets the size and
   /// color applied.

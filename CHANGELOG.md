@@ -2,6 +2,148 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
+## v5.0.0 - April 13, 2022
+
+The journey from version 4.2.0 to stable 5.0.0 includes the steps in
+change logs for development versions 5.0.0-dev.2 and 5.0.0-dev.1, please refer
+to them for full details. This change log only contains a summary of breaking
+and other critical changes.
+
+There are no changes affecting FlexColorScheme in 5.0.0 in addition
+to those included in version 5.0.0-dev.2 and 5.0.0-dev.1. All final changes
+concern documentation and tweaks to the bundled example applications.
+### Overview
+
+FlexColorScheme version 5.0 is style wise a big breaking change since all the
+built-in produced `ColorScheme`s the the theme use, have been revised to follow
+the new Material 3 based `ColorScheme`. The color changes to the built-in schemes
+have been kept minimal compared to previous styles. Mostly new color values were
+added to provide support for all the new colors in the Flutter
+Material 3 `ColorScheme` update, that landed in Flutter 2.10.
+The new colors are in style sync with past styles as far possible, while also
+keeping them inline with the Material 3 ColorScheme design intent.
+
+As `ColorScheme.primaryVariant` and `secondaryVariant` have been deprecated
+in Flutter 2.10 SDK, so have they in FlexColorScheme. All past color constants
+for all color values and helper classes with the name "variant" in them, have been
+self deprecated in FlexColorScheme. The variant color values still exists,
+if you have used any of them directly, they still work. The old built-in
+variant color values will remain available at least until version 6.0,
+maybe even 7.0 if so requested by users.
+
+### Breaking: Requires at least Flutter 2.10.0
+
+Version 5.0.0 requires at least Flutter version 2.10.0 to work. This breaking
+change is required since the new color properties in `ColorScheme` do not exist
+in any stable version of Flutter before version 2.10.
+### Breaking: `surfaceStyle` removed
+
+In version 5.0.0, the in version 4.2.0 deprecated property `surfaceStyle`, including all
+its implementing classes, enums, helpers and tests have been removed.
+
+* Removed property: surfaceStyle in FlexColorScheme.light and FlexSchemeData.light.
+* Removed property: surfaceStyle in FlexColorScheme.dark and FlexSchemeData.dark.
+* Removed: enum FlexSurface, that surfaceStyle where.
+* Removed: factory FlexSchemeSurfaceColors.from that was used to create
+  surface using the FlexSurface. The factory FlexSchemeSurfaceColors.blend
+  replaced it in version 4.0.0 already, when using surfaceMode and blendLevel.
+
+**Migration:** Use `surfaceMode` and `blendLevel` instead, it has more blend
+styles and finer granularity than the removed `surfaceStyle`.
+
+```dart
+theme: FlexThemeData.light(
+  scheme: FlexScheme.flutterDash,
+  surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+  blendLevel: 20,
+),
+```
+
+### Breaking: `FlexSubThemesData.navigationBarIsStyled` removed
+
+The property `navigationBarIsStyled` in `FlexSubThemesData` has been
+removed. If you have used it, it has a broader more general replacement called
+`FlexSubThemesData.useFlutterDefaults`.
+
+**Migration:** Consider using `useFlutterDefaults` instead, or set styles manually
+using individual properties to desired styles matching Flutter defaults un-themed
+component designs.
+
+### Breaking: `FlexColorScheme.useSubThemes` no function
+
+Deprecated property `useSubThemes`. This property has no function after 4.2.0
+stable and 5.0.0-dev.1. Previously setting this property to true activated
+the default set and configuration of the optional opinionated component sub-themes,
+even if you did not pass any `FlexSubThemesData()` configuration data to
+`subThemesData`. Before when `useSubThemes` was true and no `subThemesData`
+defined, it created one internally using the default constructor
+`FlexSubThemesData()` and used it. It also ignored any defined and to
+`subThemesData` assigned one, if the flag was set to false.
+
+The default component sub-themes are now instead always activated and created by
+explicitly assigning at least a default constructor `FlexSubThemesData()` to
+`FlexColorScheme.subThemesData`.
+
+**Migration:** If you previously had only set `FlexColorScheme.useSubThemes` to true and not
+specified any `subThemesData` properties, you must now add the default constructor. Likewise,
+if you had set `FlexColorScheme.useSubThemes` to false, and had a `FlexColorScheme.subThemesData`
+defined, you must remove it disable using it. If you need to toggle it ON and OFF, use a bool
+to enabled/disable it, then pass in the `FlexSubThemesData` when enabled,
+and null when not using it.
+
+### Beware: `SchemeColor` values and order
+
+The enum `SchemeColor` has new values and past values are in a new order.
+The order was changed to accommodate all the new color values, and to keep them in
+the same order as their corresponding color properties in Flutter Material 3
+`ColorScheme` color values. The change of order is potentially breaking,
+but highly unlikely to break anything in major ways in normal usage.
+
+### Deprecated: `primaryVariant` and `secondaryVariant`
+
+The colors `primaryVariant` and `secondaryVariant` in FlexColorScheme are
+deprecated and can no longer be used to set colors values that result in any
+color values in Flutter SDK deprecated same named `ColorScheme` color properties.
+
+The `ColorScheme` deprecated properties `primaryVariant` and
+`secondaryVariant` will always get their Flutter SDK default values,
+regardless of what input you give to them in FlexColorScheme. Flutter sets its
+deprecated `primaryVariant` equal to `primary` and `secondaryVariant` equal
+to `secondary`.
+
+This means that if your application used those
+color scheme values on any custom widgets, their colors will change if
+you upgrade from a previous version of FlexColorScheme and don't do any
+other changes. You need to migrate to use `primaryContainer`,
+`secondaryContainer`, `tertiary` or `tertiaryContainer` color, as replacement
+colors in your custom widgets. Which one to use depends on your color design.
+
+If you use a `FlexColorScheme` setup made for a version before version 5.0,
+with version 5.0, and
+- if you have used custom color schemes where you defined the
+   `FlexColorScheme` properties `primaryVariant` and `secondaryVariant`
+- or defined and used them via custom `FlexSchemeColors`, in the `colors` property in
+`FlexColorScheme`.
+
+**Then**, in those cases the **variant** color properties will function as fallback
+input for color properties `primaryContainer` and `secondaryContainer` respectively,
+unless own color values for these properties are provided.
+
+Thus when you upgrade package version to 5.0.0 and have used custom color schemes,
+you will find your custom variant colors on the corresponding new
+container colors. Be aware that past variant color shades are not necessarily a great
+fit for a Material 3 design intent of container colors, but at least you will get
+your past custom colors used in the new theme by default.
+
+**Migration:** Define new custom colors values for all container colors and
+tertiary color. Use them to make your custom `FlexColorScheme` instead.
+Then migrate away from using Flutter SDK `ColorScheme` colors `primaryVariant`
+and `secondaryVariant` anywhere in your application. Instead use any of its new
+`ColorScheme` color properties as fitting with your design. This is something you have
+to do after Flutter 2.10, even if you are not using FlexColorScheme. Sure, not immediately, but
+eventually when the Flutter SDK `ColorScheme` colors `primaryVariant` and `secondaryVariant`
+are removed after a year or so.
+
 ## v5.0.0-dev.2 - April 4, 2022
 
 **BREAKING**

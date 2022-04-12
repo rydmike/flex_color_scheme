@@ -37,7 +37,7 @@ enum TonalPalettes {
 /// be dragged quickly in the UI. Writing this setup for this many properties is
 /// a bit tedious, even if it is simple and very mechanical.
 ///
-/// Normally your would probably not have this many settings properties you
+/// Normally you would probably not have this many settings properties you
 /// want to persist locally (or remotely), in that case this approach is also
 /// the simpler and more convenient one. In this particular case though, well
 /// maybe not with this amount of props.
@@ -412,11 +412,11 @@ class ThemeController with ChangeNotifier {
   /// The reset to default actually, sets and persist all property values that
   /// deviates from its defined default value. Only values that actually
   /// deviate from their default value are changed. The property setters manage
-  /// this. They are all set with not notification and notifyListeners() is
-  /// only called once, weh all updates have been made.
+  /// this. They are all set with no notification and notifyListeners() is
+  /// only called once, after all updates have been made.
   ///
   /// Does not reset the custom colors to their default, only theme settings.
-  /// We keep the custom colors at their specified value even if theme settings
+  /// We keep the custom colors at their specified values even if theme settings
   /// are reset. There is a separate function to reset the custom colors.
   Future<void> resetAllToDefaults() async {
     //
@@ -667,7 +667,7 @@ class ThemeController with ChangeNotifier {
     if (value == _themeMode) return;
     // Otherwise, assign new value to private property.
     _themeMode = value;
-    // Inform all listeners a change has occurred, if notify flag true.
+    // Inform all listeners a change has occurred, if notify flag is true.
     if (notify) notifyListeners();
     // Persist the change to whatever storage is used with the ThemeService.
     await _themeService.save(Store.keyThemeMode, value);

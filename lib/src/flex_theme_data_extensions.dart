@@ -861,7 +861,7 @@ extension FlexThemeData on ThemeData {
     /// or the passed in [colorScheme].
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
-    /// behaviour depends on properties defined in the [FlexKeyColors]
+    /// behavior depends on properties defined in the [FlexKeyColors]
     /// instance. The default constructor makes one where
     /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
     /// of key colors and from them generated color scheme.
@@ -1941,7 +1941,7 @@ extension FlexThemeData on ThemeData {
     /// or the passed in [colorScheme].
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
-    /// behaviour depends on properties defined in the [FlexKeyColors]
+    /// behavior depends on properties defined in the [FlexKeyColors]
     /// instance. The default constructor makes one where
     /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
     /// of key colors and from them generated color scheme.
