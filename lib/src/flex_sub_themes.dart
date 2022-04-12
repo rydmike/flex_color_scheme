@@ -21,16 +21,8 @@ enum FlexInputBorderType {
 }
 
 /// Enum used to described which color from the active theme's
-/// [ColorScheme] should be used by certain widget sub-themes.
-///
-/// This enum can be used for quick color scheme based customization
-/// of sub-themes for:
-///
-/// - [TextField] in [FlexSubThemes.inputDecorationTheme].
-/// - [TabBar] indicator color.
-/// - [BottomNavigationBar] in [FlexSubThemes.bottomNavigationBar].
-/// - [NavigationBar] in [FlexSubThemes.navigationBarTheme].
-/// - [ChipThemeData] from [FlexSubThemes.chipTheme].
+/// [ColorScheme], should be used for by color properties available in
+/// component sub-themes.
 ///
 /// It can be used when opting in on opinionated sub-themes. The opinionated
 /// sub-theme for these widgets have one or more properties called
@@ -140,26 +132,30 @@ enum SchemeColor {
   secondaryVariant,
 }
 
-/// Static sub-theme helpers used by opt-in widget sub theming
+/// Contains static sub-theme helpers used by opt-in widget sub theming
 /// in [FlexColorScheme].
 ///
-/// FlexSubTheme offers opinionated static theme helpers that are opt-in via
-/// [FlexColorScheme.useSubThemes]. You can also change many properties of the
-/// the opt-in setup by defining custom configuration values in the
-/// [FlexSubThemesData] configuration class, and passing it to the
-/// [FlexColorScheme.subThemesData] property.
+/// [FlexSubTheme] offers optional opinionated static theme helpers. You can
+/// change many properties of the the opt-in setup by defining custom
+/// configuration values in the [FlexSubThemesData] configuration class,
+/// and passing it to the [FlexColorScheme.subThemesData] property.
+///
+/// To enable the component sub-themes using default settings, pass a
+/// default constructor [FlexSubThemesData] to [FlexColorScheme.subThemesData].
 ///
 /// The configuration class [FlexSubThemesData] offers easy to use configuration
-/// properties for using these sub-themes in FlexColorScheme. You can also
-/// the static sub-themes without using FlexColorScheme based theming.
-/// However, the [FlexSubThemesData] has no impact on the static helpers, it
-/// is [FlexColorScheme] that uses the [FlexSubThemesData] class to configure
-/// the opt in sub-themes. You can of course also do this if you use
-/// [FlexSubThemesData] outside of [FlexColorScheme] or in `copyWith` on each
-/// sub-theme with custom [ThemeData].
+/// properties for using these sub-themes in FlexColorScheme.
 ///
-/// Sub themes for the following widgets are provided and used via opt-in
-/// property [FlexColorScheme.useSubThemes] :
+/// You can if you wish, also the static sub-themes without even using
+/// FlexColorScheme based theming. The [FlexSubThemesData] configuration has
+/// no direct impact on these static helpers. It is [FlexColorScheme] that uses
+/// the [FlexSubThemesData] class to configure the opt-in sub-themes based on
+/// the setup information provided via [FlexColorScheme.subThemesData]. You
+/// could of course also do this too, if you use [FlexSubThemes] outside
+/// of [FlexColorScheme] or in a `copyWith` on each sub-theme with
+/// custom [ThemeData].
+///
+/// Sub-themes for the following components are available:
 ///
 /// * [TextButton]
 /// * [ElevatedButton]
@@ -220,8 +216,8 @@ enum SchemeColor {
 ///   version (2.8.0) now possible to assign a Shape in drawer theme. But
 ///   Drawer uses same theme when used as Drawer and EndDrawer and the rounding
 ///   should be on end edge on Drawer and start edge in EndDrawer, we cannot do
-///   that without having two Shapes in its theme or other usage behaviour
-///   modifying. A default behaviour in SDK can implement by looking up
+///   that without having two Shapes in its theme or other usage behavior
+///   modifying. A default behavior in SDK can implement by looking up
 ///   if Drawer is being used in Scaffold as Drawer or EndDrawer, but still
 ///   messy and has limitations. Also the M3 16dp rounding on visible edge was
 ///   no longer mentioned in M3 guide. Will still have to wait and see with
@@ -1541,7 +1537,7 @@ class FlexSubThemes {
     /// Card elevation defaults to [kCardElevation] = 0.
     final double elevation = kCardElevation,
 
-    /// The clipBehaviour of the card theme, defaults to
+    /// The clipBehavior of the card theme, defaults to
     /// [Clip.antiAlias] for smooth clipping when using rounded corners.
     ///
     /// There is no config property in [FlexSubThemesData] for [clipBehavior],
@@ -1604,7 +1600,7 @@ class FlexSubThemes {
 
   // TODO(rydmike): Consider a SliderTheme with value popup using primary blend.
 
-  // TODO(rydmike): No padding in Flutter M3 dialog theme, add when available.
+  // TODO(rydmike): No padding in Flutter dialog theme, add when available.
   // The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp.
 
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
@@ -1785,11 +1781,11 @@ class FlexSubThemes {
   //     circular corner radius of 4.0.
   //   Maybe open an issue about the limitation that corner radius on none
   //   pinned one cannot be changed via theme while keeping straight one
-  //   straight. However, I think M3 will need it too, so it will come then.
+  //   straight. However, I think M3 will need it too, so it might come then.
 
   /// An opinionated [SnackBarThemeData] with custom elevation.
   ///
-  /// Its [elevation] defaults to [kSnackBarElevation] (4).
+  /// THe [elevation] defaults to [kSnackBarElevation] (4).
   static SnackBarThemeData snackBarTheme({
     /// SnackBar elevation defaults to [kSnackBarElevation] 4.
     final double? elevation = kSnackBarElevation,
@@ -1875,11 +1871,11 @@ class FlexSubThemes {
     ///
     /// If not defined, defaults to [kBottomSheetBorderRadius] 16p.
     ///
-    /// This value is not mentioned in the
-    /// M3 Specification. It is based on an assumption that a sliding in
+    /// This value is not mentioned in the M3 Specification.
+    /// It is based on an assumption that a sliding in
     /// surface from the bottom should have the same rounding on its top corners
     /// as the [Drawer] does on its visible side edges.
-    /// /// https://m3.material.io/components/navigation-drawer/specs
+    /// https://m3.material.io/components/navigation-drawer/specs
     final double? radius,
 
     /// The bottom sheet elevation defaults to [kBottomSheetElevation] = 4.
@@ -1888,7 +1884,7 @@ class FlexSubThemes {
     /// The bottom sheet elevation defaults to [kBottomSheetModalElevation] = 8.
     final double modalElevation = kBottomSheetModalElevation,
 
-    /// The clipBehaviour of the bottom sheet theme, defaults to
+    /// The clipBehavior of the bottom sheet theme, defaults to
     /// [Clip.antiAlias] for smoother clipping when using rounded corners.
     ///
     /// This property is not available in [FlexSubThemeData] but you can use
@@ -1911,9 +1907,9 @@ class FlexSubThemes {
   ///
   /// This sub-theme uses a style that prefers single use config parameters over
   /// the ones that combines many styling options into TextStyle and icon
-  /// sub-theme properties. This is simpler to use when you want to just
-  /// modify a single property like size and rest is fine. This is done of
-  /// course at the expense that the sub-theme instead has a lot of properties.
+  /// sub-theme properties. This is simpler to use when you want to
+  /// modify a single property like size and rest is fine. This of course comes
+  /// at the expense that the sub-theme instead has more properties.
   ///
   /// Its [elevation] defaults to [kBottomNavigationBarElevation] = 0.
   ///
@@ -1936,7 +1932,7 @@ class FlexSubThemes {
     /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
     /// labeling modifying properties (size and scheme color) are also null, it
     /// will then be passed along as null, allowing it to remain undefined
-    /// and widget default behaviour sets the default. If label size or scheme
+    /// and widget default behavior sets the default. If label size or scheme
     /// is defined, a default TextStyle() will be created, if
     /// [bottomNavigationBarLabelTextStyle] is undefined, that gets th size and
     /// color applied.
@@ -2328,7 +2324,7 @@ class FlexSubThemes {
     /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
     /// labeling modifying properties (size and scheme color) are also null, it
     /// will then be passed along as null, allowing it to remain undefined
-    /// and widget default behaviour sets the default. If label size or scheme
+    /// and widget default behavior sets the default. If label size or scheme
     /// is defined, a default TextStyle() will be created, if
     /// [navigationBarLabelTextStyle] is undefined, that gets the size and
     /// color applied.
@@ -2762,7 +2758,7 @@ class FlexSubThemes {
     /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
     /// labeling modifying properties (size and scheme color) are also null, it
     /// will then be passed along as null, allowing it to remain undefined
-    /// and widget default behaviour sets the default. If label size or scheme
+    /// and widget default behavior sets the default. If label size or scheme
     /// is defined, a default TextStyle() will be created, if
     /// [navigationBarLabelTextStyle] is undefined, that gets the size and
     /// color applied.

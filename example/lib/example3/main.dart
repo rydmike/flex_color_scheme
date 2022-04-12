@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
-// import '../shared/services/theme_service_hive.dart';
 import '../shared/services/theme_service_prefs.dart';
 import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
@@ -40,13 +39,12 @@ Future<void> main() async {
   // The controller uses an abstract ThemeService interface to get and save the
   // settings. There are 3 implementations available to choose from:
   //
-  // 0. ThemeService      - Abstract interface base class, contains defaults
-  //                        values and shared storage key value strings.
+  // 0. ThemeService      - Abstract interface base class.
   // 1. ThemeServiceMem   - Only keeps settings in memory.
   // 2. ThemeServicePrefs - Persist settings locally using SharedPreferences.
   // 3. ThemeServiceHive  - Persist settings locally using Hive.
   //
-  // Here we can use Shared Preferences. The examples are all built using same
+  // Here we use Shared Preferences. The examples are all built using same
   // "example" app. If we use SharedPreferences in more than one of the apps
   // they would use the same storage container and share the settings when you
   // build them locally. By using Hive for most examples, we can change
@@ -176,7 +174,7 @@ class DemoApp extends StatelessWidget {
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
           ),
-          // We do the exact same definition for the dark theme, but using
+          // We make an equivalent definition for the dark theme, but using
           // FlexThemeData.dark() and the dark FlexSchemeColors instead.
           darkTheme: FlexThemeData.dark(
             colors: themeController.usedScheme == FlexScheme.custom

@@ -175,7 +175,7 @@ class PanelButton extends StatelessWidget {
     final int dG = a.green - b.green;
     final int dB = a.blue - b.blue;
     final int distance = dR * dR + dG * dG + dB * dB;
-    // Calculating orthogonal distance between colors should take the the
+    // Calculating orthogonal distance between colors should take the
     // square root as well, but we don't need that extra compute step.
     // We just need a number to represents some relative closeness of the
     // colors. We use this to determine a level when we should draw a border

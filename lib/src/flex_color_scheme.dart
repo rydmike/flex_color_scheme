@@ -4448,7 +4448,9 @@ class FlexColorScheme with Diagnosticable {
   /// names automatically by Flutter SDK from version 2.10.0 in apps that use
   /// this optional theme.
   ///
-  /// The usage of this custom TextTheme will
+  /// The usage of this custom TextTheme might not be needed in later versions
+  /// of FlexColorScheme when the M3 Typography becomes available in
+  /// Flutter stable channel.
   static const TextTheme m3TextTheme = TextTheme(
     // M3 displayLarge, M2 headline1. Material2018 Typography: 96, w300, -1.5
     displayLarge: TextStyle(
@@ -4832,8 +4834,13 @@ class FlexColorScheme with Diagnosticable {
     // If it is not given, we use above flexBackground.
     final Color background = navigationBarColor ?? flexBackground;
 
+    // TODO(rydmike): Remove SysNavBar workaround when issue #100027 solved.
+    // See issue: https://github.com/flutter/flutter/issues/100027
+    // Remove the workaround below when the solution to the issue has landed in
+    // in Flutter stable channel.
+    //
     // A divider will be applied if `useDivider` is true and it will
-    // use provided `systemNavigationBarDividerColor` if a value was given
+    // use provided `systemNavigationBarDividerColor` if a value was given,
     // or fallback to suitable theme mode default divider colors if no
     // color was given.
     //
@@ -4850,7 +4857,7 @@ class FlexColorScheme with Diagnosticable {
     // Worth noticing is also that the opacity does not have any effect on
     // divider color in SDK<29 of Android. We apply some opacity anyway because
     // if you are using transparent system navigation bar on Android API30 or
-    // higher it does, work and it looks nicer when it has some transparency
+    // higher it does work, and it looks nicer when it has some transparency
     // if the navbar is also transparent.
     //
     // Also some of the crazy hoops are designed to work around this issue for
@@ -4923,7 +4930,7 @@ class FlexColorScheme with Diagnosticable {
 
     // Tried work around for A11 issue, including calling SystemUiOverlayStyle
     // with different styles, but nothing worked OK, this
-    // double SystemUiOverlayStyle may be the best option for now.
+    // double SystemUiOverlayStyle call is the best option for now.
     SystemUiOverlayStyle(
       // The top status bar settings.
       systemStatusBarContrastEnforced: false,
@@ -4962,6 +4969,16 @@ class FlexColorScheme with Diagnosticable {
   /// eg `Colors.red[500]` it will not return the same swatch as `Colors.red`.
   /// This function is an approximation and gives an automated way of creating
   /// a Material like primary swatch.
+  ///
+  /// This function is used by [FlexColorScheme.toTheme] to calculate
+  /// suitable colors matching current [ColorScheme.primary] color for
+  /// [ThemeData.primaryColorLight], [ThemeData.primaryColorDark] and
+  /// [ThemeData.secondaryHeaderColor].
+  ///
+  /// When the colors are removed from [ThemeData] and this function is no
+  /// longer need by this library, it will be deprecated and removed.
+  /// Deprecation might e.g. happen in FlexColorScheme version 6, and removal in
+  /// version 7.
   static MaterialColor createPrimarySwatch(final Color? color) {
     // Null default fallback is default material primary light color.
     final Color usedColor = color ?? FlexColor.materialLightPrimary;
@@ -5206,7 +5223,9 @@ class FlexColorScheme with Diagnosticable {
     // Used Typography deviates from the Flutter standard that _still_ uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
     // as default, if one is not provided, we want the Material 2 correct 2018
-    // version to be the default.
+    // version to be the default. Based on notes I have seen in master, the
+    // material2018 will never become default. However, 2021 typography will
+    // and FlexColorScheme should move to it instead as default.
     final Typography effectiveTypography =
         typography ?? Typography.material2018(platform: effectivePlatform);
 
@@ -5409,6 +5428,7 @@ class FlexColorScheme with Diagnosticable {
           return // colorScheme.inversePrimary;
               // TODO(rydmike): Consider universal using inversePrimary.
               // -> It is OK with seed generated schemes, but not generally.
+              // Need a better algo for this some day.
               isDark
                   ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
                   : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
@@ -6243,16 +6263,16 @@ class FlexColorScheme with Diagnosticable {
     final FlexSchemeColor colors = FlexSchemeColor.from(
       primary: usedPrimary,
       // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
-      //   The fallthrough via internally deprecated primaryVariant is a
-      //   a backwards compatibility with FlexColorScheme before version 5.
+      //   The fallthrough via internally deprecated primaryVariant is for
+      //   backwards compatibility with FlexColorScheme before version 5.
       primaryContainer: primaryContainer ??
           primaryVariant ??
           colorScheme?.primaryContainer ??
           usedPrimary,
       secondary: secondary ?? colorScheme?.secondary ?? usedPrimary,
       // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
-      //   The fallthrough via internally deprecated primaryVariant is a
-      //   a backwards compatibility with FlexColorScheme before version 5.
+      //   The fallthrough via internally deprecated primaryVariant is for
+      //   backwards compatibility with FlexColorScheme before version 5.
       secondaryContainer: secondaryContainer ??
           secondaryVariant ??
           colorScheme?.secondaryContainer ??

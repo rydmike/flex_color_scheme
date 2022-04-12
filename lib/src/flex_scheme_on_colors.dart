@@ -5,27 +5,28 @@ import 'flex_color.dart';
 import 'flex_extensions.dart';
 
 /// Immutable data class used to create "on" colors for displaying text
-/// and icons on the surface, background, error colors and the primary,
+/// and icons on surface, background, error colors and the primary,
 /// secondary and tertiary colors.
 ///
-/// Normally the on colors are not provided manually but computed by using the
+/// Normally the on colors are not provided manually, but computed by using the
 /// [FlexSchemeOnColors.from] static function that uses the
 /// [ThemeData.estimateBrightnessForColor] static function for each on color
 /// and returns a [FlexSchemeOnColors] object with the appropriate colors.
 ///
 /// In Material 2 design used in Flutter before version 2.10, the primaryVariant
-/// and SecondaryVariant do not have their own onColor. This is
+/// and SecondaryVariant did not have their own onColor. This was
 /// a limitation imposed by the Flutter SDK [ColorScheme] class and [ThemeData]
-/// using it. It is assumed that the onColor for primary and secondary colors
-/// will also work OK for their variants. This is usually correct if the
-/// variant colors are close in brightness to their none variant
+/// using it. It was assumed that the onColor for primary and secondary colors
+/// will also work OK for their variants. This was usually correct if the
+/// variant colors wre close in brightness to their none variant
 /// versions. In Material 3 design, with updated [ColorScheme] in Flutter
-/// starting with version 2.10, all main colors have their own onColor.
+/// starting with version 2.10, all main colors have their own onColor. Thus
+/// in FlexColorScheme version 5.0.0 and later this challenge no longer exists.
 ///
 /// Scaffold and dialog background colors that FlexColorScheme allows us to
 /// define separately, do not have their own "on" color, it is assumed that they
-/// are close in brightness to the background color, so they uses the same on
-/// color as background.
+/// are close in brightness to the background color, so they uses
+/// the same on color as background.
 @immutable
 class FlexSchemeOnColors with Diagnosticable {
   /// Default constructor. In most situations the factory

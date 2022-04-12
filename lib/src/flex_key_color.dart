@@ -26,7 +26,7 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 /// a seeded generated [ColorScheme] for the active [FlexColorScheme] using its
 /// current primary color as key in a [ColorScheme.fromSeed]
 /// If the default setup is suitable, no further configuration is required.
-/// You can however further customize its behaviour by adjusting the properties
+/// You can however further customize its behavior by adjusting the properties
 /// in [FlexKeyColors].
 ///
 /// Flutter standard [ColorScheme] only offers color scheme creation from one

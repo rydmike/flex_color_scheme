@@ -81,9 +81,9 @@ class _DemoAppState extends State<DemoApp> {
           // // Themes Playground generated API. There are some more APIs not
           // // available via code generated from the Themes Playground app,
           // // like these. Future version of the Themes Playground might
-          // // add configuring some of the options noy yet included in it,
+          // // add configuring some of the options not yet included in it,
           // // but already supported via the API. These choices don't look
-          // // pretty, only intended to show it is possible.
+          // // pretty, they are only intended to show what is possible.
           // bottomNavigationBarSelectedIconSize: 30,
           // bottomNavigationBarUnselectedIconSize: 20,
           // navigationBarSelectedIconSize: 34,

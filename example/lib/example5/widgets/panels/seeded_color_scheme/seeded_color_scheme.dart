@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/app/use_key_colors_buttons.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import 'flex_tone_config_buttons.dart';
 import 'scheme_colors.dart';
 import 'show_tonal_palette.dart';
-import 'use_key_colors_buttons.dart';
 
 // Panel used to show effective color scheme, when using keys to seed it
 // and just using raw FlexSchemeColors input data too based ColorScheme too.

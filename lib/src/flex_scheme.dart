@@ -1,13 +1,13 @@
 // ignore_for_file: comment_references
 
-/// Enum that can be used to lookup predefined `FlexSchemeData` scheme
+/// Enum that can be used to lookup predefined [FlexSchemeData] scheme
 /// definition objects.
 ///
-/// Contains 36 ready to use built-in matched light and dark color schemes.
+/// Contains 40 ready to use built-in matched light and dark color schemes.
 enum FlexScheme {
   /// The example theme used in the Material Design guide.
   ///
-  /// Light scheme version, in Flutter SDK known as `[ColorScheme.light].
+  /// Light scheme version, in Flutter SDK known as [ColorScheme.light].
   /// https://material.io/design/color/the-color-system.html#color-usage-and-palettes
   ///
   /// Dark scheme version, in Flutter SDK known as [ColorScheme.dark].

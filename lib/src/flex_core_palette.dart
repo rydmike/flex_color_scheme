@@ -12,7 +12,7 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 /// to create the M3 ColorScheme needed palettes from 3 different ARGB seed
 /// colors, instead of just one, as provided via [CorePalette.of].
 class FlexCorePalette extends CorePalette {
-  /// Create a [CorePalette] from a fixed-size list of ARGB color ints
+  /// Create a [CorePalette] from a fixed-size list of ARGB color integers
   /// representing concatenated tonal palettes.
   ///
   /// Inverse of [asList].
@@ -247,12 +247,12 @@ class FlexCorePalette extends CorePalette {
 //
 // The conversion of [TonalPalette]es to a list of ints and having super
 // create the CorePalette from this list, has unneeded extra overhead.
-// It would be a bit more efficient to make own implementation
+// It would be a bit more efficient to make an own implementation
 // of this simple mid-layer that has the needed constructors directly.
-// Keeping both versions as small private classes around so I can later
+// Keeping this version around as small private classes around so I can later
 // benchmark and see if it makes a difference. Perhaps it does not matter,
 // in that case extending the parent [CorePalette] is a bit prettier.
-// This interface feels a bit like using a FFI.
+// But its interface feels a bit like using a FFI.
 //
 // The [CorePalette] in Material Color Utilities is just a convenience
 // wrapper for the needed [TonalPalette]s, that are used by an additional

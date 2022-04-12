@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../example5/widgets/panels/seeded_color_scheme/use_key_colors_buttons.dart';
 import '../shared/const/app_color.dart';
 import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
@@ -9,6 +8,7 @@ import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
+import '../shared/widgets/app/use_key_colors_buttons.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
@@ -35,6 +35,7 @@ class HomePage extends StatelessWidget {
     final double margins =
         AppData.responsiveInsets(MediaQuery.of(context).size.width);
     final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headlineMedium = textTheme.headlineMedium!;
 
@@ -47,7 +48,7 @@ class HomePage extends StatelessWidget {
           // available screen, causes the PopupMenu to open up right aligned on
           // its ListTile child used as its activation button. Without this, it
           // is always left aligned on the ListTile and would require a
-          // computed offset. This trick or maybe a bit of a hack, does it
+          // computed offset. This trick, or maybe a bit of a hack, does it
           // automatically. No idea why, just something I noticed by accident.
           child: Scaffold(
             appBar: AppBar(
@@ -62,11 +63,13 @@ class HomePage extends StatelessWidget {
                   const Text(
                     'FlexColorScheme example 4 shows how you can use all the '
                     'built-in color schemes, add 3 custom schemes to '
-                    'it and how to select the used theme. '
+                    'it and select used theme.\n'
                     'A primary color branding style common on desktop and web '
                     'is used. '
-                    'The new opinionated widget theming is ON. You can '
+                    'Widget component theming is ON. You can '
                     'turn it OFF to use default widget themes. '
+                    'Key color generated ColorSchemes can be enabled. '
+                    'Border radius on all widgets can be adjusted.\n'
                     'A theme showcase displays the resulting theme using '
                     'common Material widgets. Settings are persisted',
                   ),
@@ -93,75 +96,102 @@ class HomePage extends StatelessWidget {
                             buttonOrder:
                                 FlexThemeModeButtonOrder.lightSystemDark,
                           ),
-                          const SizedBox(height: 8),
                           // Theme popup menu button to select color scheme.
                           ThemePopupMenu(
                             contentPadding: EdgeInsets.zero,
                             schemeIndex: controller.schemeIndex,
                             onChanged: controller.setSchemeIndex,
                           ),
-                          const SizedBox(height: 8),
                           // Active theme color indicators.
                           const ShowColorSchemeColors(),
                           const SizedBox(height: 8),
-                          // Show all active colors in ThemeData, these will all
-                          // be deprecated in Flutter SDK, for more info see
-                          // https://github.com/flutter/flutter/issues/91772
-                          const ShowThemeDataColors(),
-                          const SizedBox(height: 8),
                           ListTile(
-                            title: const Text('Use input colors as seed keys '
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text('Use input colors as keys '
                                 'for the ColorScheme'),
                             subtitle:
                                 Text(AppColor.explainUsedColors(controller)),
                           ),
                           // const SizedBox(height: 4),
                           ListTile(
+                            contentPadding: EdgeInsets.zero,
                             trailing: UseKeyColorsButtons(
                               controller: controller,
                             ),
                           ),
+                          if (isLight) ...<Widget>[
+                            SwitchListTileAdaptive(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Keep primary color'),
+                              value: controller.useKeyColors &&
+                                  controller.keepPrimary,
+                              onChanged: controller.useKeyColors
+                                  ? controller.setKeepPrimary
+                                  : null,
+                            ),
+                            SwitchListTileAdaptive(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Keep secondary color'),
+                              value: controller.useKeyColors &&
+                                  controller.keepSecondary,
+                              onChanged: controller.useKeyColors
+                                  ? controller.setKeepSecondary
+                                  : null,
+                            ),
+                            SwitchListTileAdaptive(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Keep tertiary color'),
+                              value: controller.useKeyColors &&
+                                  controller.keepTertiary,
+                              onChanged: controller.useKeyColors
+                                  ? controller.setKeepTertiary
+                                  : null,
+                            ),
+                          ] else ...<Widget>[
+                            SwitchListTileAdaptive(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Keep primary color'),
+                              value: controller.useKeyColors &&
+                                  controller.keepDarkPrimary,
+                              onChanged: controller.useKeyColors
+                                  ? controller.setKeepDarkPrimary
+                                  : null,
+                            ),
+                            SwitchListTileAdaptive(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Keep secondary color'),
+                              value: controller.useKeyColors &&
+                                  controller.keepDarkSecondary,
+                              onChanged: controller.useKeyColors
+                                  ? controller.setKeepDarkSecondary
+                                  : null,
+                            ),
+                            SwitchListTileAdaptive(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Keep tertiary color'),
+                              value: controller.useKeyColors &&
+                                  controller.keepDarkTertiary,
+                              onChanged: controller.useKeyColors
+                                  ? controller.setKeepDarkTertiary
+                                  : null,
+                            ),
+                          ],
+                          // Show all active colors in ThemeData, these will all
+                          // be deprecated in Flutter SDK, for more info see
+                          // https://github.com/flutter/flutter/issues/91772
+                          const ShowThemeDataColors(),
+                          const SizedBox(height: 8),
+
                           SwitchListTileAdaptive(
-                            title: const Text('Keep primary color'),
-                            subtitle: const Text(
-                                'When using seeded schemes, keep primary color '
-                                'as defined'),
-                            value: controller.useKeyColors &&
-                                controller.keepPrimary,
-                            onChanged: controller.useKeyColors
-                                ? controller.setKeepPrimary
-                                : null,
-                          ),
-                          SwitchListTileAdaptive(
-                            title: const Text('Keep secondary color'),
-                            subtitle: const Text(
-                                'When using seeded schemes, keep secondary '
-                                'color as defined'),
-                            value: controller.useKeyColors &&
-                                controller.keepSecondary,
-                            onChanged: controller.useKeyColors
-                                ? controller.setKeepSecondary
-                                : null,
-                          ),
-                          SwitchListTileAdaptive(
-                            title: const Text('Keep tertiary color'),
-                            subtitle: const Text(
-                                'When using seeded schemes, keep tertiary '
-                                'color as defined'),
-                            value: controller.useKeyColors &&
-                                controller.keepTertiary,
-                            onChanged: controller.useKeyColors
-                                ? controller.setKeepTertiary
-                                : null,
-                          ),
-                          SwitchListTileAdaptive(
-                            title: const Text('Use component sub themes'),
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text('Use component themes'),
                             subtitle: const Text(
                                 'Enable opinionated widget sub themes'),
                             value: controller.useSubThemes,
                             onChanged: controller.setUseSubThemes,
                           ),
                           ListTile(
+                            contentPadding: EdgeInsets.zero,
                             enabled: controller.useSubThemes &&
                                 controller.useFlexColorScheme,
                             title:
@@ -175,6 +205,7 @@ class HomePage extends StatelessWidget {
                           ListTile(
                             enabled: controller.useSubThemes &&
                                 controller.useFlexColorScheme,
+                            contentPadding: EdgeInsets.zero,
                             title: Slider.adaptive(
                               min: -1,
                               max: 30,
@@ -239,7 +270,9 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 8),
                   const Divider(),
                   Text('Theme Showcase', style: headlineMedium),
-                  const ThemeShowcase(),
+                  ThemeShowcase(
+                    useRailAssertWorkAround: !controller.useSubThemes,
+                  ),
                 ],
               ),
             ),

@@ -11,20 +11,21 @@ import 'package:flutter/material.dart';
 /// so we are using its replacement fallback already now. See:
 /// https://docs.flutter.dev/release/breaking-changes/toggleable-active-color
 ///
-/// The theme sets this color it too, and that is fine for the Material mode.
+/// The theme sets this color too, and that is fine for the Material mode.
 /// However, if we want the color to also have an effect on the switch
 /// when it is in its Cupertino mode, we actually have to set the [activeColor]
-/// the the same color for the switch thumb . The Cupertino thumb switch button
-/// is cannot be changed via Material dependent theme. It cannot even be changed
-/// with a Cupertino theme in a Cupertino app. It is so by design since Apple
-/// want to always be bright green when it is on.
+/// the the same color for the switch thumb. The Cupertino thumb switch button
+/// cannot be changed via Material dependent theme. It cannot even be changed
+/// with a Cupertino theme in a Cupertino app. It is so by design, since Apple
+/// wants it to always be bright green when it is on.
 ///
-/// In this app we want it to follow the the selected theme colo for consistence
+/// In this app we want it to follow the selected theme color for consistency,
 /// so we wrap the widget in a simple wrapper that sets the color to its
-/// themed color, ten it works.
+/// themed color, then it works and we get the themed color also in its
+/// adaptive Cupertino mode.
 ///
-/// This wrapper only wraps most common properties the SwitchListTileAdaptive,
-/// easy to add more when needed.
+/// This wrapper only wraps most common properties that we needed for the
+/// SwitchListTileAdaptive in this application. Easy to add more when needed.
 class SwitchListTileAdaptive extends StatelessWidget {
   const SwitchListTileAdaptive({
     Key? key,
@@ -110,7 +111,7 @@ class SwitchListTileAdaptive extends StatelessWidget {
               .switchTheme
               .thumbColor
               ?.resolve(<MaterialState>{MaterialState.selected}) ??
-          Theme.of(context).toggleableActiveColor,
+          Theme.of(context).colorScheme.secondary,
       value: value,
       onChanged: onChanged,
       title: title,

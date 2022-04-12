@@ -84,7 +84,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 8),
             SwitchListTileAdaptive(
               contentPadding: EdgeInsets.zero,
-              title: const Text('Use sub theming'),
+              title: const Text('Use component themes'),
               subtitle: const Text('Enable opinionated widget sub themes'),
               value: controller.useSubThemes,
               onChanged: controller.setUseSubThemes,
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
             const Divider(),
             Text('Theme Showcase', style: headlineMedium),
             const SizedBox(height: 8),
-            const ThemeShowcase(),
+            ThemeShowcase(useRailAssertWorkAround: !controller.useSubThemes),
           ],
         ),
       ),

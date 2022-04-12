@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'copy_color_to_clipboard.dart';
 
-/// This widget is intended to be wrapped in material with [color].
+/// This widget is intended to be wrapped in Material with [color].
 /// It shows a [label] describing the theme property name of the [color] and
 /// color code name as a Material color, if it is a Material color and a common
 /// color name for the color.

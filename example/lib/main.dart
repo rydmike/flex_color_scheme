@@ -37,8 +37,8 @@ void main() => runApp(const DemoApp());
 // The purpose is to provide an easy to use in-code based playground that
 // you can experiment with and use as a quick starter template to start using
 // FlexColorScheme to make beautiful Flutter themes for your applications.
-// It is also a code and comment based quick guide for devs that don't read
-// long documentation.
+// It is also a code and comment based quick guide for developers that
+// don't read long documentation.
 //
 // This setup is convenient since you can edit the values for both the light
 // and dark theme mode via shared property values and observe the changes
@@ -79,7 +79,6 @@ final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   // derived from the secondary color, instead of from the primary color.
   secondary: const Color(0xFFFF7B00),
   // New in version 5.
-  //
   // Specifying a brightness value computes missing colors based on given colors
   // using a strategy that is compatible with Material3 based ColorScheme
   // introduced in Flutter SDK in version 2.10.0. If you don't specify a
@@ -137,7 +136,7 @@ const double _appBarOpacity = 0.94;
 // want to fine tune your custom dark color scheme colors and use const values.
 const bool _computeDarkTheme = false;
 
-// When you use _computeDarkTheme, use this desaturation % level to calculate
+// When you use _computeDarkTheme, use this de-saturation % level to calculate
 // the dark scheme from the light scheme colors. The default is 35%, but values
 // from 20% might work on less saturated light scheme colors. For more
 // deep and colorful starting values, you can try 40%. Trivia: The default
@@ -216,7 +215,7 @@ const int _usedColors = 6;
 // set any of them to true, to keep the color in question it has as input
 // in your FlexColorScheme.
 const FlexKeyColors _keyColors = FlexKeyColors(
-  useKeyColors: true, // <-- set to true enable M3 seeded ColorScheme.
+  useKeyColors: false, // <-- set to true enable M3 seeded ColorScheme.
   useSecondary: true,
   useTertiary: true,
   keepPrimary: false, // <-- Keep defined value, do not use the seeded result.
@@ -362,7 +361,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
 
   // When it is null = undefined, the sub themes will use their default style
   // behavior that aims to follow new Material 3 (M3) standard for all widget
-  // corner roundings. Current Flutter SDK corner radius is 4, as defined by
+  // corner radius. Current Flutter SDK corner radius is 4, as defined by
   // the Material 2 design guide. M3 uses much higher corner radius, and it
   // varies by widget type.
   //

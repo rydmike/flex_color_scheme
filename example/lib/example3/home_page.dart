@@ -1,13 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../example5/widgets/panels/seeded_color_scheme/use_key_colors_buttons.dart';
 import '../shared/const/app_color.dart';
 import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
+import '../shared/widgets/app/use_key_colors_buttons.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
@@ -51,12 +51,13 @@ class HomePage extends StatelessWidget {
             const Text(
               'FlexColorScheme example 3 shows how to use three built-in '
               'color schemes, plus one custom color scheme as selectable '
-              'themes in an application. '
+              'themes in an application.\n'
               'The example uses primary color alpha blended surface colors. '
-              'The new opinionated widget theming is ON. You can '
+              'Widget component theming is ON. You can '
               'turn it OFF to use default widget themes. '
+              'Key color generated ColorSchemes can be enabled.\n'
               'A theme showcase displays the resulting theme using '
-              'common Material widgets. Settings are persisted',
+              'common Material widgets. Settings are persisted.',
             ),
             const SizedBox(height: 8),
             // The content is wrapped in a card so we can see the
@@ -77,7 +78,9 @@ class HomePage extends StatelessWidget {
                       onThemeModeChanged: controller.setThemeMode,
                       flexSchemeData: flexSchemeData,
                       // This is not an SDK BorderShape themed widget, but we
-                      // can pass it property values to make it match.
+                      // can pass it property values to make it match. It is
+                      // possible to extract it from the surrounding theme too
+                      // and use that value, this is done in another example.
                       optionButtonBorderRadius:
                           controller.useSubThemes ? 12 : 4,
                       buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
@@ -100,21 +103,9 @@ class HomePage extends StatelessWidget {
                     // Show all key active theme colors.
                     const ShowColorSchemeColors(),
                     const SizedBox(height: 8),
-                    // Show all active colors in ThemeData, these will all be
-                    // deprecated in Flutter SDK, for more info see
-                    // https://github.com/flutter/flutter/issues/91772
-                    const ShowThemeDataColors(),
-                    const SizedBox(height: 8),
-                    SwitchListTileAdaptive(
-                      title: const Text('Use component sub themes'),
-                      subtitle:
-                          const Text('Enable opinionated widget sub themes'),
-                      value: controller.useSubThemes,
-                      onChanged: controller.setUseSubThemes,
-                    ),
-                    const SizedBox(height: 8),
                     ListTile(
-                      title: const Text('Use input colors as seed keys '
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text('Use input colors as keys '
                           'for the ColorScheme'),
                       subtitle: Text(AppColor.explainUsedColors(controller)),
                     ),
@@ -124,6 +115,18 @@ class HomePage extends StatelessWidget {
                         controller: controller,
                       ),
                     ),
+                    // Show all active colors in ThemeData, these will all be
+                    // deprecated in Flutter SDK, for more info see
+                    // https://github.com/flutter/flutter/issues/91772
+                    const ShowThemeDataColors(),
+                    SwitchListTileAdaptive(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text('Use component themes'),
+                      subtitle:
+                          const Text('Enable opinionated widget sub themes'),
+                      value: controller.useSubThemes,
+                      onChanged: controller.setUseSubThemes,
+                    ),
                   ],
                 ),
               ),
@@ -132,7 +135,7 @@ class HomePage extends StatelessWidget {
             const Divider(),
             Text('Theme Showcase', style: headlineMedium),
             const SizedBox(height: 8),
-            const ThemeShowcase(),
+            ThemeShowcase(useRailAssertWorkAround: !controller.useSubThemes),
           ],
         ),
       ),
