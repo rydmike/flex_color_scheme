@@ -82,3 +82,5 @@ If you are here for the FlexColorScheme companion application that allows you
 to configure a FlexColorScheme theme, and copy-paste its setup code for use in
 your application, then launch the
 [**Themes Playground app here**](https://rydmike.com/flexcolorscheme/themesplayground-v5).
+
+<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-pg-01-pageview-3.gif?raw=true" alt="Page view demo"/>
