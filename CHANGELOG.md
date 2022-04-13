@@ -212,7 +212,7 @@ are removed after a year or so.
   factories, the `appBarOpacity` was not applied to the selected color. The
   priority of effective `AppBar` color was also revised to follow the norm,
   which from lowest to highest is:
-  - `abbBarStyle` in light/dark factories and ThemeData extensions, which
+  - `appBarStyle` in light/dark factories and ThemeData extensions, which
      selects the used color from active `scheme` or `colors`, in the same
      factories or extensions.
   - `appBarBackgroundSchemeColor` in `FlexSubThemesData` when used.
