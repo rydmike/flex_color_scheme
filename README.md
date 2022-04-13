@@ -67,21 +67,21 @@ key colors, features that are currently not available in Flutter.
 
 ## Documentation
 
-FlexColorSchemes has a dedicated documentation site
+**FlexColorScheme** has its own dedicated documentation site
 [**docs.flexcolorscheme.com**](https://docs.flexcolorscheme.com/).
-Please refer to it for more information and tutorials on its usage and features.
+Please refer to it for more information and guidance on its usage and features.
 The documentation site is powered by [docs.page](https://docs.page/)
 from [Invertase](https://invertase.io/).
 
 Complete generated package
-[API documentation](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/flex_color_scheme-library.html)
+[**API documentation**](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/flex_color_scheme-library.html)
 is also available.
 
 ## Themes Playground
 
 If you are here for the **FlexColorScheme** companion application that allows you
-to configure a FlexColorScheme theme, and copy-paste its setup code for use in
+to configure a theme, and copy-paste its setup code for use in
 your application, then launch the
-[**Themes Playground app here**](https://rydmike.com/flexcolorscheme/themesplayground-v5).
+[**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v5).
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-pg-01-pageview-3.gif?raw=true" alt="Page view demo"/>](https://rydmike.com/flexcolorscheme/themesplayground-v5)
