@@ -14,10 +14,8 @@ class SeededColorScheme extends StatelessWidget {
   const SeededColorScheme(
     this.controller, {
     Key? key,
-    this.showKeyButtons = true,
   }) : super(key: key);
   final ThemeController controller;
-  final bool showKeyButtons;
 
   String _describeFlexToneLabel(int colors) {
     if (colors == 1) {
@@ -108,14 +106,12 @@ class SeededColorScheme extends StatelessWidget {
               'from built-in schemes to seed ColorSchemes. '
               'When using custom colors, you can decide if you do so or not.'),
         ),
-        if (showKeyButtons)
-          ListTile(
-            title: const Text('Light input colors used to seed '
-                'the ColorScheme'),
-            subtitle: Text(AppColor.explainUsedColors(controller)),
-          ),
-        if (showKeyButtons)
-          ListTile(trailing: UseKeyColorsButtons(controller: controller)),
+        ListTile(
+          title: const Text('Light input colors used to seed '
+              'the ColorScheme'),
+          subtitle: Text(AppColor.explainUsedColors(controller)),
+        ),
+        ListTile(trailing: UseKeyColorsButtons(controller: controller)),
         Visibility(
           visible: !isLight,
           maintainSize: true,
