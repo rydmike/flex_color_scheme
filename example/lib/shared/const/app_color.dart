@@ -143,7 +143,7 @@ class AppColor {
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
       name: 'Custom Red & Blue',
-      description: 'Classic read and blue, created from only light theme mode '
+      description: 'Classic red and blue, created from only light theme mode '
           'primary and secondary colors',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.
