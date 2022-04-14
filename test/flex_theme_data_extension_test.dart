@@ -374,19 +374,19 @@ void main() {
     test(
         'FTD1.09: GIVEN a FlexThemeData.raw theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
-        'createPrimarySwatch(primaryColor)[800].', () {
+        'createPrimarySwatch(primaryColor)[900].', () {
       expect(
         themeLight.primaryColorDark,
-        lightSwatch[800],
+        lightSwatch[900],
       );
     });
     test(
         'FTD1.10: GIVEN a FlexThemeData.raw theme with Material scheme dark '
         'colors EXPECT primaryColorDark equality with '
-        'createPrimarySwatch(primaryColor)[700].', () {
+        'createPrimarySwatch(primaryColor)[800].', () {
       expect(
         themeDark.primaryColorDark,
-        darkSwatch[700],
+        darkSwatch[800],
       );
     });
 
@@ -421,10 +421,10 @@ void main() {
     test(
         'FTD1.14: GIVEN a FlexThemeData.raw theme with Material scheme dark '
         'colors EXPECT secondaryHeaderColor equality with '
-        'createPrimarySwatch(primaryColor)[50].', () {
+        'createPrimarySwatch(primaryColor)[900].', () {
       expect(
         themeDark.secondaryHeaderColor,
-        darkSwatch[50],
+        darkSwatch[900],
       );
     });
 

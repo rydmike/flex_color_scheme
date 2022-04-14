@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../const/app_data.dart';
 import 'color_card.dart';
 
 /// Draw a number of boxes showing the colors of key sub theme color properties
@@ -8,16 +9,15 @@ import 'color_card.dart';
 /// This widget is just used so we can visually see the active scheme colors
 /// in the examples and their used FlexColorScheme based themes.
 ///
-/// It also show some warning labels when using surface branding that is too
-/// strong and makes the surface require reverse contrasted text in relation to
-/// text normally associated with the active theme mode.
-///
 /// These are all Flutter "Universal" Widgets that only depends on the SDK and
 /// all the Widgets in this file be dropped into any application. They are
 /// however not so generally reusable.
 class ShowSubThemeColors extends StatelessWidget {
-  const ShowSubThemeColors({Key? key, this.onBackgroundColor})
-      : super(key: key);
+  const ShowSubThemeColors({
+    Key? key,
+    this.onBackgroundColor,
+    this.showSubtitle = true,
+  }) : super(key: key);
 
   /// The color of the background the color widget are being drawn on.
   ///
@@ -27,6 +27,9 @@ class ShowSubThemeColors extends StatelessWidget {
   /// color it is drawn on for that. If not passed in from parent, it is
   /// assumed to be drawn on card color, which usually is close enough.
   final Color? onBackgroundColor;
+
+  /// Show sub-title for the sub-theme colors
+  final bool showSubtitle;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
   static bool _isLight(final Color color) =>
@@ -41,6 +44,11 @@ class ShowSubThemeColors extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isDark = colorScheme.brightness == Brightness.dark;
+
+    final MediaQueryData media = MediaQuery.of(context);
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
+    final double spacing = isPhone ? 3 : 6;
 
     // Get effective background color.
     final Color background =
@@ -68,7 +76,7 @@ class ShowSubThemeColors extends StatelessWidget {
       );
     }
 
-    // Get the colors of all shown component theme colors.
+    // Get the themed or default color of all shown components' colors.
     final Color elevatedButtonColor = theme
             .elevatedButtonTheme.style?.backgroundColor
             ?.resolve(<MaterialState>{}) ??
@@ -94,25 +102,23 @@ class ShowSubThemeColors extends StatelessWidget {
     final Color radioColor = theme.radioTheme.fillColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
         theme.toggleableActiveColor;
+    final Color circleAvatarColor =
+        isDark ? theme.primaryColorLight : theme.primaryColorDark;
     final Color chipColor =
         theme.chipTheme.backgroundColor ?? colorScheme.primary;
-
     final Color inputDecoratorColor =
         theme.inputDecorationTheme.focusColor?.withAlpha(0xFF) ??
             colorScheme.primary;
-
     final Decoration? tooltipDecoration = theme.tooltipTheme.decoration;
     final Color tooltipColor = tooltipDecoration is BoxDecoration
         ? tooltipDecoration.color ?? colorScheme.surface
         : colorScheme.surface;
-
     final Color appBarColor = theme.appBarTheme.backgroundColor ??
         (isDark ? colorScheme.surface : colorScheme.primary);
     final Color tabBarColor = theme.tabBarTheme.labelColor ??
         (isDark ? colorScheme.onSurface : colorScheme.onPrimary);
     final Color dialogColor =
         theme.dialogTheme.backgroundColor ?? theme.dialogBackgroundColor;
-    //
     final Color defaultSnackBackgroundColor = isDark
         ? colorScheme.onSurface
         : Color.alphaBlend(
@@ -123,7 +129,6 @@ class ShowSubThemeColors extends StatelessWidget {
         (ThemeData.estimateBrightnessForColor(snackBarColor) == Brightness.light
             ? Colors.black
             : Colors.white);
-
     final Color bottomNavBarColor =
         theme.bottomNavigationBarTheme.backgroundColor ??
             colorScheme.background;
@@ -147,7 +152,6 @@ class ShowSubThemeColors extends StatelessWidget {
     final Color navigationRailIndicatorColor =
         theme.navigationRailTheme.indicatorColor ??
             colorScheme.secondary.withOpacity(.24);
-
     final Color textColor = theme.textTheme.titleMedium?.color ??
         (isDark ? Colors.white : Colors.black);
     final Color primTextColor = theme.primaryTextTheme.titleMedium?.color ??
@@ -168,18 +172,18 @@ class ShowSubThemeColors extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text('Component sub-themes effective colors'),
-            subtitle: Text("Color settings are controlled in each component's "
-                'settings panel. This shows default or currently selected '
-                'ColorScheme based used theme color, for each component.'),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              'Component Colors',
+              style: theme.textTheme.titleMedium,
+            ),
           ),
-          const SizedBox(height: 8),
           Wrap(
-            spacing: 6,
-            runSpacing: 6,
+            alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: spacing,
+            runSpacing: spacing,
             children: <Widget>[
               ColorCard(
                 label: 'Elevated\nButton',
@@ -222,6 +226,11 @@ class ShowSubThemeColors extends StatelessWidget {
                 textColor: _onColor(floatingActionButtonColor, background),
               ),
               ColorCard(
+                label: 'Circle\nAvatar',
+                color: circleAvatarColor,
+                textColor: _onColor(circleAvatarColor, background),
+              ),
+              ColorCard(
                 label: 'Chips',
                 color: chipColor,
                 textColor: _onColor(chipColor, background),
@@ -242,7 +251,7 @@ class ShowSubThemeColors extends StatelessWidget {
                 textColor: _onColor(appBarColor, background),
               ),
               ColorCard(
-                label: 'TabBar\nitem',
+                label: 'TabBar\nItem',
                 color: tabBarColor,
                 textColor: _onColor(tabBarColor, background),
               ),
@@ -262,42 +271,42 @@ class ShowSubThemeColors extends StatelessWidget {
                 textColor: snackForeground,
               ),
               ColorCard(
-                label: 'Bottom\nNavigationBar\nbackground',
+                label: 'Bottom\nNaviBar\nBackground',
                 color: bottomNavBarColor,
                 textColor: _onColor(bottomNavBarColor, background),
               ),
               ColorCard(
-                label: 'Bottom\nNavigationBar\nselected',
+                label: 'Bottom\nNaviBar\nSelected',
                 color: bottomNavBarItemColor,
                 textColor: _onColor(bottomNavBarItemColor, background),
               ),
               ColorCard(
-                label: 'Navigation\nBar\nbackground',
+                label: 'Navigation\nBar\nBackground',
                 color: navigationBarColor,
                 textColor: _onColor(navigationBarColor, background),
               ),
               ColorCard(
-                label: 'Navigation\nBar\nselected',
+                label: 'Navigation\nBar\nSelected',
                 color: navigationBarItemColor,
                 textColor: _onColor(navigationBarItemColor, background),
               ),
               ColorCard(
-                label: 'Navigation\nBar\nindicator',
+                label: 'Navigation\nBar\nIndicator',
                 color: navigationBarIndicatorColor,
                 textColor: _onColor(navigationBarIndicatorColor, background),
               ),
               ColorCard(
-                label: 'Navigation\nRail\nbackground',
+                label: 'Navigation\nRail\nBackground',
                 color: navigationRailColor,
                 textColor: _onColor(navigationRailColor, background),
               ),
               ColorCard(
-                label: 'Navigation\nRail\nselected',
+                label: 'Navigation\nRail\nSelected',
                 color: navigationRailItemColor,
                 textColor: _onColor(navigationRailItemColor, background),
               ),
               ColorCard(
-                label: 'Navigation\nRail\nindicator',
+                label: 'Navigation\nRail\nIndicator',
                 color: navigationRailIndicatorColor,
                 textColor: _onColor(navigationRailIndicatorColor, background),
               ),

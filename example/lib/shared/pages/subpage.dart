@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../const/app_data.dart';
 import '../widgets/app/about.dart';
 import '../widgets/app/show_color_scheme_colors.dart';
+import '../widgets/app/show_sub_theme_colors.dart';
 import '../widgets/app/show_theme_data_colors.dart';
 import '../widgets/universal/page_body.dart';
 import '../widgets/universal/theme_showcase.dart';
@@ -87,6 +88,11 @@ class _SubpageState extends State<Subpage> {
                 padding:
                     EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
                 child: ShowThemeDataColors(),
+              ),
+                  const Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
+                child: ShowSubThemeColors(),
               ),
               const Divider(),
               Text('Theme Showcase', style: headlineMedium),

@@ -259,7 +259,7 @@ enum FlexSurfaceMode {
   /// to store a custom color you may want to use for special elements on custom
   /// widgets in your application. The secondary variant color is not used
   /// by default by any widget in Flutter SDK, so it can be assigned a color
-  /// without affecting any default color behaviour of SDK widgets. If you do so
+  /// without affecting any default color behavior of SDK widgets. If you do so
   /// and want to get some funky dialog blends using this color, you can use
   /// this surface mode.
   levelSurfacesLowScaffoldVariantDialog,
@@ -293,7 +293,7 @@ enum FlexSurfaceMode {
   /// to store a custom color you may want to use for special elements on custom
   /// widgets in your application. The secondary variant color is not used
   /// by default by any widget in Flutter SDK, so it can be assigned a color
-  /// without affecting any default color behaviour of SDK widgets. If you do so
+  /// without affecting any default color behavior of SDK widgets. If you do so
   /// and want to get some funky dialog blends using this color, you can use
   /// this surface mode.
   highScaffoldLowSurfacesVariantDialog,
@@ -2182,7 +2182,7 @@ class FlexColorScheme with Diagnosticable {
     /// or the passed in [colorScheme].
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
-    /// behaviour depends on properties defined in the [FlexKeyColors]
+    /// behavior depends on properties defined in the [FlexKeyColors]
     /// instance. The default constructor makes one where
     /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
     /// of key colors and from them generated color scheme.
@@ -3756,7 +3756,7 @@ class FlexColorScheme with Diagnosticable {
     /// or the passed in [colorScheme].
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
-    /// behaviour depends on properties defined in the [FlexKeyColors]
+    /// behavior depends on properties defined in the [FlexKeyColors]
     /// instance. The default constructor makes one where
     /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
     /// of key colors and from them generated color scheme.
@@ -5376,9 +5376,10 @@ class FlexColorScheme with Diagnosticable {
     // does when you create a theme from a swatch. This gives us some missing
     // critical shades of the primary color to work with.
     final Color primaryColorDark =
-        isDark ? primarySwatch[700]! : primarySwatch[800]!;
+        isDark ? primarySwatch[800]! : primarySwatch[900]!;
     final Color primaryColorLight = primarySwatch[100]!;
-    final Color secondaryHeaderColor = primarySwatch[50]!;
+    final Color secondaryHeaderColor =
+        isDark ? primarySwatch[900]! : primarySwatch[50]!;
     // AppBar background color:
     // - If a color is passed in, that is used first.
     // - If we use sub-themes, we use its scheme based color.
@@ -6958,7 +6959,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
       }
     }
     // In these modes we use FlexColor default surface color on all surfaces,
-    // when blend leve is > 0.
+    // when blend level is > 0.
     if (surfaceMode == FlexSurfaceMode.level ||
         surfaceMode == FlexSurfaceMode.highScaffoldLowSurface ||
         surfaceMode == FlexSurfaceMode.levelSurfacesLowScaffold ||

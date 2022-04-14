@@ -677,15 +677,20 @@ class _DemoAppState extends State<DemoApp> {
   }
 }
 
+// -----------------------------------------------------------------------------
+// Home Page for the Default Example - Hot Reload Playground
+// -----------------------------------------------------------------------------
+//
 // The content of HomePage below is not so relevant for using FlexColorScheme
 // based application theming. The critical parts are in the MaterialApp
 // theme definitions above. The HomePage contains UI to visually show what
 // the defined example looks like in an application and with common Widgets.
 //
 // The AnnotatedRegion using FlexColorScheme.themedSystemNavigationBar demo
-// is however relevant if you want to see something cool on Android.
+// is however relevant if you want to change the style of the system
+// navigation bar on Android.
 //
-// The contents below does make it handy to see what your theme looks
+// The contents below makes it easy to see what your theme looks
 // like, and the purpose of this demo app is to show that. You can use this
 // example app to experiment with your own themes in code and see the results
 // via this HomePage.

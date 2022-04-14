@@ -33,6 +33,10 @@ void showAppAboutDialog(BuildContext context) {
   final TextStyle linkStyle =
       theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
+  final MediaQueryData media = MediaQuery.of(context);
+  final double width = media.size.width;
+  final double height = media.size.height;
+
   // Get the card's ShapeBorder from the themed card shape.
   // This was kind of interesting to do, seem to work, for this case at least.
   final ShapeBorder? shapeBorder = theme.cardTheme.shape;
@@ -95,7 +99,9 @@ void showAppAboutDialog(BuildContext context) {
                 style: footerStyle,
                 text: 'Built with Flutter ${AppData.flutterVersion}, '
                     'using ${AppData.packageName} '
-                    '${AppData.packageVersion}\n\n',
+                    '${AppData.packageVersion}\n'
+                    'Media size (w:${width.toStringAsFixed(0)}, '
+                    'h:${height.toStringAsFixed(0)})\n\n',
               ),
             ],
           ),

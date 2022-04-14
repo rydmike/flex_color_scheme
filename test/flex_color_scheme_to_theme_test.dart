@@ -1225,19 +1225,19 @@ void main() {
     test(
         'FCS7.09: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
-        'createPrimarySwatch(primaryColor)[800].', () {
+        'createPrimarySwatch(primaryColor)[900].', () {
       expect(
         themeLight.primaryColorDark,
-        equals(lightSwatch[800]),
+        equals(lightSwatch[900]),
       );
     });
     test(
         'FCS7.10: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT primaryColorDark equality with '
-        'createPrimarySwatch(primaryColor)[700].', () {
+        'createPrimarySwatch(primaryColor)[800].', () {
       expect(
         themeDark.primaryColorDark,
-        equals(darkSwatch[700]),
+        equals(darkSwatch[800]),
       );
     });
 
@@ -1272,10 +1272,10 @@ void main() {
     test(
         'FCS7.14: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT secondaryHeaderColor equality with '
-        'createPrimarySwatch(primaryColor)[50].', () {
+        'createPrimarySwatch(primaryColor)[900].', () {
       expect(
         themeDark.secondaryHeaderColor,
-        equals(darkSwatch[50]),
+        equals(darkSwatch[900]),
       );
     });
 
