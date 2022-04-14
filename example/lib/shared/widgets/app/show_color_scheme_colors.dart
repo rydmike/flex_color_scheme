@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../const/app_data.dart';
 import 'color_card.dart';
 
 /// Draw a number of boxes showing the colors of key theme color properties
@@ -8,7 +9,7 @@ import 'color_card.dart';
 /// This widget is just used so we can visually see the active scheme colors
 /// in the examples and their used FlexColorScheme based themes.
 ///
-/// It also show some warning labels when using surface branding that is too
+/// It also shows warning labels when using surface branding that is too
 /// strong and makes the surface require reverse contrasted text in relation to
 /// text normally associated with the active theme mode.
 ///
@@ -45,6 +46,11 @@ class ShowColorSchemeColors extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isDark = colorScheme.brightness == Brightness.dark;
+
+    final MediaQueryData media = MediaQuery.of(context);
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
+    final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -110,13 +116,11 @@ class ShowColorSchemeColors extends StatelessWidget {
               style: theme.textTheme.titleMedium,
             ),
           ),
-          // A Wrap widget is just the right handy widget for this type of
-          // widget to make it responsive.
           Wrap(
             alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 6,
-            runSpacing: 6,
+            spacing: spacing,
+            runSpacing: spacing,
             children: <Widget>[
               ColorCard(
                 label: 'Primary',

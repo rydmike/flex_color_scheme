@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../const/app_data.dart';
 import 'color_card.dart';
 
 /// Draw a number of boxes showing the colors of key theme color properties
@@ -9,7 +10,7 @@ import 'color_card.dart';
 /// This widget is just used so we can visually see the active theme colors
 /// in the examples and their used FlexColorScheme based themes.
 ///
-/// It also show some warning labels when using surface branding that is too
+/// It also shows warning labels when using surface branding that is too
 /// strong and makes the surface require reverse contrasted text in relation to
 /// text normally associated with the active theme mode.
 ///
@@ -17,12 +18,14 @@ import 'color_card.dart';
 /// all the Widgets in this file be dropped into any application. They are
 /// however not so generally reusable.
 class ShowThemeDataColors extends StatelessWidget {
-  const ShowThemeDataColors({Key? key, this.onBackgroundColor})
-      : super(key: key);
+  const ShowThemeDataColors({
+    Key? key,
+    this.onBackgroundColor,
+  }) : super(key: key);
 
   /// The color of the background the color widget are being drawn on.
   ///
-  /// Some of the theme colors may have semi transparent fill color. To compute
+  /// Some of the theme colors may have semi-transparent fill color. To compute
   /// a legible text color for the sum when it shown on a background color, we
   /// need to alpha merge it with background and we need the exact background
   /// color it is drawn on for that. If not passed in from parent, it is
@@ -48,6 +51,11 @@ class ShowThemeDataColors extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isDark = colorScheme.brightness == Brightness.dark;
+
+    final MediaQueryData media = MediaQuery.of(context);
+    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+        media.size.height < AppData.phoneHeightBreakpoint;
+    final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -120,13 +128,10 @@ class ShowThemeDataColors extends StatelessWidget {
               style: theme.textTheme.titleMedium,
             ),
           ),
-          Text('To be deprecated in Flutter SDK',
-              style: theme.textTheme.bodyMedium!
-                  .copyWith(color: theme.textTheme.bodySmall!.color)),
           const SizedBox(height: 8),
           Wrap(
-            spacing: 6,
-            runSpacing: 6,
+            spacing: spacing,
+            runSpacing: spacing,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: <Widget>[
               ColorCard(
@@ -167,12 +172,12 @@ class ShowThemeDataColors extends StatelessWidget {
               ColorCard(
                 label: 'Canvas$backTooHigh',
                 color: theme.canvasColor,
-                textColor: colorScheme.onBackground,
+                textColor: _onColor(theme.canvasColor, background),
               ),
               ColorCard(
                 label: 'Card$surfaceTooHigh',
                 color: theme.cardColor,
-                textColor: colorScheme.onSurface,
+                textColor: _onColor(theme.cardColor, background),
               ),
               ColorCard(
                 label: 'Scaffold\nBackground$scaffoldTooHigh',

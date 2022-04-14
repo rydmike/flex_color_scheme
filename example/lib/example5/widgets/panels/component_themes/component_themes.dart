@@ -147,8 +147,14 @@ class ComponentThemes extends StatelessWidget {
         ),
         const Divider(),
         const Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
           child: ShowSubThemeColors(),
+        ),
+        const ListTile(
+          dense: true,
+          subtitle: Text("Colors are controlled in each component's "
+              'settings panel. Above default or currently selected '
+              'ColorScheme based used theme color for each component.'),
         ),
         const Divider(height: 16),
         SwitchListTileAdaptive(

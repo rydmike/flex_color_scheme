@@ -7,12 +7,19 @@ import '../shared/const/app_data.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
+import '../shared/widgets/app/show_sub_theme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/stateful_header_card.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 
+// -----------------------------------------------------------------------------
+// Home Page for the Copy Paste Playground
+// This hom page is used to visualize and demonstrate the active theme
+// copied from the Themes Playground, by showing all theming colors and
+// commonly used widgets in Flutter with their theme applied.
+// -----------------------------------------------------------------------------
 class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
@@ -122,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                 onThemeModeChanged: widget.onThemeModeChanged,
               ),
               const SizedBox(height: 8),
-              const ShowSubPages(),
+              const ShowSubPages(isOpen: false),
               const SizedBox(height: 8),
               const _MaterialButtonsShowcase(),
               const SizedBox(height: 8),
@@ -211,8 +218,12 @@ class _MainPanelState extends State<_MainPanel> {
             child: ShowColorSchemeColors(),
           ),
           const Padding(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: ShowThemeDataColors(),
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: ShowSubThemeColors(),
           ),
         ],
       ),

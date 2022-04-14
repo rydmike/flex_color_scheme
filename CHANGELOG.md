@@ -2,16 +2,17 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0 - April 13, 2022
+## v5.0.0 - April 15, 2022
 
 The journey from version 4.2.0 to stable 5.0.0 includes the steps in
 change logs for development versions 5.0.0-dev.2 and 5.0.0-dev.1, please refer
 to them for full details. This change log only contains a summary of breaking
 and other critical changes.
 
-There are no changes affecting FlexColorScheme in 5.0.0 in addition
-to those included in version 5.0.0-dev.2 and 5.0.0-dev.1. All final changes
-concern documentation and tweaks to the bundled example applications.
+There is only a minor style changes affecting FlexColorScheme in 5.0.0 in
+addition to those included in version 5.0.0-dev.2 and 5.0.0-dev.1. All final
+changes concern documentation and tweaks to the bundled example applications.
+
 ### Overview
 
 FlexColorScheme version 5.0 is style wise a big breaking change since all the
@@ -90,6 +91,18 @@ if you had set `FlexColorScheme.useSubThemes` to false, and had a `FlexColorSche
 defined, you must remove it disable using it. If you need to toggle it ON and OFF, use a bool
 to enabled/disable it, then pass in the `FlexSubThemesData` when enabled,
 and null when not using it.
+
+### Change: Colors def for `ThemeData` `primaryColorDark` and `secondaryHeaderColor`
+
+Changed `ThemeData.primaryColorDark` in light mode from `primarySwatch` 800 to
+900 and in dark mode from `primarySwatch` 700 to 800. Changed
+`ThemeData.secondaryHeaderColor` dark mode from `primarySwatch` 50 to 900.
+
+These `ThemeData` colors are on a deprecation path and will likely receive some
+new none `ColorSwatch` dependent color defaults when that change happens. The
+above colors should be closer in design style to their original intent, while still
+giving them a primary color base, in dark mode instead of grey. This was and is
+the design intent of them with FlexColorScheme.
 
 ### Beware: `SchemeColor` values and order
 
