@@ -16,7 +16,7 @@ String generateThemeDartCode(ThemeController controller) {
     return '''
   // FlexColorScheme is not in use!
   // Here is a default Material 2 starting point theme setup for you.
-  //  
+  //
   theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
     typography: Typography.material2018(platform: defaultTargetPlatform),
   ),
@@ -82,7 +82,7 @@ String generateThemeDartCode(ThemeController controller) {
           controller.surfaceModeLight != FlexSurfaceMode.highScaffoldLowSurfaces
       ? '  surfaceMode: ${controller.surfaceModeLight},\n'
       : '';
-  final String surfaceModeDark = controller.blendLevel > 0 &&
+  final String surfaceModeDark = controller.blendLevelDark > 0 &&
           controller.surfaceModeDark != FlexSurfaceMode.highScaffoldLowSurfaces
       ? '  surfaceMode: ${controller.surfaceModeDark},\n'
       : '';
