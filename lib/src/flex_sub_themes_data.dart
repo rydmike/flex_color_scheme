@@ -6,15 +6,22 @@ import 'flex_sub_themes.dart';
 
 // ignore_for_file: comment_references
 
-/// Parameters used by [FlexColorScheme] to configure [FlexSubThemes] when
-/// [FlexColorScheme.useSubThemes] is true.
+/// Parameters used by [FlexColorScheme] to configure [FlexSubThemes].
 ///
-/// The list of properties in the flat configuration class has grown to insane
-/// size, while it can be a bit tricky to maintain, using it is easy and quite
+/// To enable the optional component theming feature in FlexColorScheme pass in
+/// at leas a default [FlexSubThemesData] () to its [subThemesData] property.
+/// This gives you the default opinionated component theme setup.
+///
+/// The list of properties in the flat configuration class has grown very large.
+/// While it can be a bit tricky to maintain it, using it is easy and quite
 /// a convenient way to adjust commonly used properties on UI component
-/// widgets' sub-themes.
+/// widgets using simple "flat" property values.
 ///
-/// The main use case for [FlexSubThemes] and the [FlexSubThemesData] is for
+/// No need for deep [ShapeBorder] definitions for simple border radius change,
+/// nor for the complex [MaterialState] properties. At least not as long
+/// as choices and offered flat config options covers what you need.
+///
+/// A common use case for [FlexSubThemes] and the [FlexSubThemesData] is for
 /// easy to use customization of default border radius on all Flutter SDK
 /// Widgets and elements that supports border radius either via [ShapeBorder]
 /// or [BorderRadiusGeometry].

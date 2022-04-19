@@ -144,10 +144,7 @@ enum SchemeColor {
 /// FlexColorScheme based theming. The [FlexSubThemesData] configuration has
 /// no direct impact on these static helpers. It is [FlexColorScheme] that uses
 /// the [FlexSubThemesData] class to configure the opt-in sub-themes based on
-/// the setup information provided via [FlexColorScheme.subThemesData]. You
-/// could of course also do this too, if you use [FlexSubThemes] outside
-/// of [FlexColorScheme] or in a `copyWith` on each sub-theme with
-/// custom [ThemeData].
+/// the setup information provided via [FlexColorScheme.subThemesData].
 ///
 /// These component themes are available:
 ///
@@ -195,27 +192,27 @@ enum SchemeColor {
 /// will be removed from the Flutter SDK in next stable release. Their theme
 /// the [ButtonThemeData] will also son be deprecated and later removed.
 ///
-/// The following widgets that have rounded corners are excluded from the
-/// sub theming:
+/// The following widgets that have rounded corners, but are excluded from the
+/// component theming for now:
+///
 /// * [Tooltip], generally so small that larger prominent rounding the
 ///   opinionated sub-theming is designed for, is not a good fit.
 ///   FlexColorScheme does include out of the box theming options for tooltips,
 ///   that also adapts to color branding when opting in on sub themes,
 ///   it also gets a bit more rounded than when not opting in on sub themes.
 /// * [Scrollbar], rounding on edges of scrollbars are left to platform default.
-/// * [AppBar] and [BottomAppBar] shape properties are left to their defaults.
-/// * [SnackBar] the floating SnackBar should be sub themed to also include
+/// * The `AppBar` and `BottomAppBar` shape properties are left to defaults.
+/// * `SnackBar` the floating SnackBar should be themed to also include
 ///   border radius, but the none floating one should remain
-///   straight. Unclear if it can be done via SDK's current theming features,
-///   will investigate more in future version.
-/// * [Drawer] should have have rounding on shown side edge, it is in recent
-///   version (2.8.0) possible to assign a Shape in drawer theme. But
+///   straight. This cannot can be done via current theming features.
+/// * `Drawer` should have have rounding on shown side edge, it is in recent
+///   version (2.8.0) possible to assign a Shape in the drawer theme. But
 ///   Drawer uses same theme, when used as Drawer and EndDrawer and the rounding
-///   should be on end edge on Drawer and start edge in EndDrawer, we cannot do
-///   this without having two Shapes in its theme or other usage behavior
-///   modifying. A default behavior in SDK can implement by looking up
-///   if Drawer is being used in Scaffold as Drawer or EndDrawer, but support
-///   via theme is needed.
+///   should be on end edge on Drawer and start edge in EndDrawer. It seem we
+///   cannot do   this without having two Shapes in its theme or other usage
+///   behavior modifying it. A default behavior in SDK can implement it by
+///   looking up if the Drawer is being used in Scaffold as Drawer or EndDrawer,
+///   but support via theme is needed too.
 class FlexSubThemes {
   /// Private constructor for the FlexSubThemes static class to prevent it from
   /// being instantiated or extended.

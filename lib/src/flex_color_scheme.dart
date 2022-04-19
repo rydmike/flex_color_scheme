@@ -5125,28 +5125,24 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// The differences from the standard [ThemeData.from] factory are:
   ///
-  ///  * `ScaffoldBackground` has its own color property in `FlexColorScheme`
-  ///    and can if so desired differ from the `ColorScheme.background`
-  ///    color. In the branding implementation, the `scaffoldBackground`
-  ///    typically gets no primary branding applied, only in the heavy choice
-  ///    is there a small amount. Whereas `background` in a FlexColorScheme
-  ///    receives the most color branding of the surface colors. This fits
-  ///    well for where the `background` color is used on Material in Widgets,
-  ///    but it does not go so well together with `scaffoldBackground`, which
-  ///    is the reason why it has its own color value in this implementation.
+  /// * `ScaffoldBackgroundColor` has its own color property in FlexColorScheme
+  ///   and can if so desired differ from the `ColorScheme.background` color.
+  ///   When using primary color blended surfaces and backgrounds, it is
+  ///   important to be able to vary the very prominent ScaffoldBackgroundColor
+  ///   separately from other surfaces and backgrounds.
   ///
-  ///  * The default `dialogBackgroundColor` uses the `ColorScheme.surface`
-  ///    color instead of the `ColorScheme.background`. The `background` color
-  ///    needed the strongest branding when branding is used, but this did not
-  ///    look so good on dialogs, so its color choice was changed to `surface`
-  ///    instead, that gets lighter branding in FlexColorScheme when it is
-  ///    used. With standard Material surface colors the `background` and
-  ///    `surface` colors are the same, so there is no difference when using
-  ///    the default background and surface colors.
+  /// * The `dialogBackgroundColor` uses the `ColorScheme.surface` color
+  ///   instead of the default `ColorScheme.background`. In order to preserve
+  ///   the `elevationOverlayColor` in dark mode when `ColorScheme.surface` and
+  ///   `ColorScheme.background` differs due to different surface blends, the
+  ///   `ColorScheme.surface` was used to ensure dialogs that are always
+  ///   elevated gets the overlay color applied in dark theme mode. For more
+  ///   info see:
+  ///   [issue #90353](https://github.com/flutter/flutter/issues/90353).
   ///
-  ///  * The `indicatorColor` is same as effectiveTabColor which uses a
-  ///    function with logic to determine its color bases on if a TabBarTheme
-  ///    was selected that should work on current app bar background color,
+  ///  * The `indicatorColor` is same as `effectiveTabColor` which uses a
+  ///    function with logic to determine its color based on if a TabBarTheme
+  ///    was selected that should work on current AppBar background color,
   ///    or on surface/background colors.
   ///
   ///  * For `toggleableActiveColor` the `ColorScheme.secondary` color is used.
@@ -5154,6 +5150,8 @@ class FlexColorScheme with Diagnosticable {
   ///    not the actual colors you define in the `ColorScheme` you create your
   ///    theme from. Perhaps an oversight in Flutter?
   ///    See issue: https:///github.com/flutter/flutter/issues/65782.
+  ///    This color property will be deprecated in Flutter, see issue
+  ///    [91772](https://github.com/flutter/flutter/issues/91772).
   ///
   ///  * Flutter themes created with `ThemeData.from` does not define any color
   ///    scheme related color for the `primaryColorDark` color, this method
@@ -5161,6 +5159,8 @@ class FlexColorScheme with Diagnosticable {
   ///    The `ThemeData.from` leaves this color at `ThemeData` factory default,
   ///    this may not match your scheme. Widgets seldom use this color, so the
   ///    issue is rarely seen.
+  ///    This color property will be deprecated in Flutter, see issue
+  ///    [91772](https://github.com/flutter/flutter/issues/91772).
   ///
   ///  * Flutter themes created with `ThemeData.from` does not define any color
   ///    scheme based color for the `primaryColorLight` color, this method does.
@@ -5168,6 +5168,8 @@ class FlexColorScheme with Diagnosticable {
   ///    The `ThemeData.from` leaves this color at `ThemeData` factory default
   ///    this may not match your scheme. Widgets seldom use this color, so the
   ///    issue is rarely seen.
+  ///    This color property will be deprecated in Flutter, see issue
+  ///    [91772](https://github.com/flutter/flutter/issues/91772).
   ///
   ///  * Flutter themes created with `ThemeData.from` does not define any color
   ///    scheme based color for the `secondaryHeaderColor` color, this method
@@ -5175,6 +5177,8 @@ class FlexColorScheme with Diagnosticable {
   ///    `ThemeData.from` leaves this color at `ThemeData` factory default this
   ///    may not match your scheme. Widgets seldom use this color, so the issue
   ///    is rarely seen.
+  ///    This color property will be deprecated in Flutter, see issue
+  ///    [91772](https://github.com/flutter/flutter/issues/91772).
   ///
   ///  * Background color for `AppBarTheme` can use a custom color theme
   ///    in both light and dark themes, that is not dependent on theme
@@ -5201,8 +5205,8 @@ class FlexColorScheme with Diagnosticable {
   ///    surface color.
   ///
   ///  * The `BottomAppBarTheme` elevation defaults to `appBarElevation` or 0 if
-  ///    it is null, an iOs style influenced opinionated choice. It can easily
-  ///    be adjusted directly in the `FlexColorScheme` definition with property
+  ///    it is null. It can easily be adjusted directly in the
+  ///    `FlexColorScheme` definition with property
   ///    value `bottomAppBarElevation` without creating a sub theme or
   ///    using `copyWith`.
   ///
