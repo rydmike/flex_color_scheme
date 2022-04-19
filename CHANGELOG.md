@@ -2,26 +2,29 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0 - April 15, 2022
+## v5.0.0 - April 19, 2022
 
-The journey from version 4.2.0 to stable 5.0.0 includes the steps in
+The full journey from version 4.2.0 to stable 5.0.0 includes the steps in
 change logs for development versions 5.0.0-dev.2 and 5.0.0-dev.1, please refer
-to them for full details. This change log only contains a summary of breaking
-and other critical changes.
+to them for all details. This changelog only contains a summary of breaking
+and other critical changes from version 4.2.0.
 
-There is only a minor style changes affecting FlexColorScheme in 5.0.0 in
-addition to those included in version 5.0.0-dev.2 and 5.0.0-dev.1. All final
-changes concern documentation and tweaks to the bundled example applications.
+Regarding changes affecting FlexColorScheme version 5.0.0 in
+addition to those included in version 5.0.0-dev.2 and 5.0.0-dev.1. Main
+changes from 5.0.0-dev.2 concern documentation and tweaks to the bundled
+example applications. There are some minor style impacting changes mentioned
+below as well, but no API changes from version 5.0.0-dev.2.
 
 ### Overview
 
-FlexColorScheme version 5.0 is style wise a big breaking change since all the
-built-in produced `ColorScheme`s the the theme use, have been revised to follow
-the new Material 3 based `ColorScheme`. The color changes to the built-in schemes
-have been kept minimal compared to previous styles. Mostly new color values were
-added to provide support for all the new colors in the Flutter
-Material 3 `ColorScheme` update, that landed in Flutter 2.10.
-The new colors are in style sync with past styles as far possible, while also
+FlexColorScheme version 5 is style wise a big breaking change since all the
+built-in produced `ColorScheme`s the themes use have been revised to follow
+the new Flutter 2.10.0 Material 3 based `ColorScheme`. The color changes to
+the built-in schemes have been kept minimal compared to previous styles.
+Mostly new color values were added to provide support for all the new
+colors in the Flutter Material 3 `ColorScheme` update, that landed in Flutter
+2.10.0.
+The new colors are style aligned with past styles as far possible, while also
 keeping them inline with the Material 3 ColorScheme design intent.
 
 As `ColorScheme.primaryVariant` and `secondaryVariant` have been deprecated
@@ -37,17 +40,18 @@ maybe even 7.0 if so requested by users.
 Version 5.0.0 requires at least Flutter version 2.10.0 to work. This breaking
 change is required since the new color properties in `ColorScheme` do not exist
 in any stable version of Flutter before version 2.10.
+
 ### Breaking: `surfaceStyle` removed
 
 In version 5.0.0, the in version 4.2.0 deprecated property `surfaceStyle`, including all
 its implementing classes, enums, helpers and tests have been removed.
 
-* Removed property: surfaceStyle in FlexColorScheme.light and FlexSchemeData.light.
-* Removed property: surfaceStyle in FlexColorScheme.dark and FlexSchemeData.dark.
-* Removed: enum FlexSurface, that surfaceStyle where.
-* Removed: factory FlexSchemeSurfaceColors.from that was used to create
-  surface using the FlexSurface. The factory FlexSchemeSurfaceColors.blend
-  replaced it in version 4.0.0 already, when using surfaceMode and blendLevel.
+* Removed property: `surfaceStyle` in `FlexColorScheme.light` and `FlexSchemeData.light`.
+* Removed property: `surfaceStyle` in `FlexColorScheme.dark` and `FlexSchemeData.dark`.
+* Removed: enum `FlexSurface`, that only `surfaceStyle` was using.
+* Removed: factory `FlexSchemeSurfaceColors.from` that was used to create
+  surface using the `surfaceStyle`. The factory `FlexSchemeSurfaceColors.blend`
+  replaced it in version 4.0.0 already, when using `surfaceMode` and `blendLevel`.
 
 **Migration:** Use `surfaceMode` and `blendLevel` instead, it has more blend
 styles and finer granularity than the removed `surfaceStyle`.
@@ -92,19 +96,38 @@ defined, you must remove it disable using it. If you need to toggle it ON and OF
 to enabled/disable it, then pass in the `FlexSubThemesData` when enabled,
 and null when not using it.
 
-### Change: Colors def for `ThemeData` `primaryColorDark` and `secondaryHeaderColor`
+### Change: Custom and "internal" m3TextTheme revised.
 
-Changed `ThemeData.primaryColorDark` in light mode from `primarySwatch` 800 to
-900 and in dark mode from `primarySwatch` 700 to 800. Changed
-`ThemeData.secondaryHeaderColor` dark mode from `primarySwatch` 50 to 900.
+**Style breaking with 4.2.0 and 5.0.0-dev.x**, breaks past used style when opting 
+in on component themes and its optional custom `m3TextTheme` enabled. The updated 
+custom implementation of it now follows the implementation used in Flutter 
+master channel, apart from this [issue](https://github.com/flutter/flutter/issues/102121), 
+where it for now implements the value used in the M3 Web guide. The changes in styles
+otherwise concern the addition of the font geometry, height, which the previous custom 
+implementation did not have. The usage of the custom `m3TextTheme` should be considered internal and 
+temporary, it will be changed to use the actual Flutter implementation once 
+[PR #97829](https://github.com/flutter/flutter/pull/97829) lands in Flutter stable channel.
 
-These `ThemeData` colors are on a deprecation path and will likely receive some
-new none `ColorSwatch` dependent color defaults when that change happens. The
-above colors should be closer in design style to their original intent, while still
-giving them a primary color base, in dark mode instead of grey. This was and is
-the design intent of them with FlexColorScheme.
+### Change: Color definitions for `ThemeData` colors `primaryColorLight`, `primaryColorDark` and
+`secondaryHeaderColor`
 
-### Beware: `SchemeColor` values and order
+**Style breaking with 4.2.0 and 5.0.0-dev.x**, breaks past used styles on these rarely used colors.
+The new colors are better. These `ThemeData` colors are on a deprecation path and will likely 
+receive some new none `MaterialColor` dependent color defaults when that change happens. The new
+`ColorScheme.primary` computed colors for the above rarely used colors are better balanced
+than before, and work well regardless of used `ColorScheme.primary` shade and tint.
+
+### Change: Color definition for `FlexColor.espressoLightPrimary` color was changed
+
+**Style breaking with 4.2.0:** Breaks past used color for this color and theme where used.
+
+The color was changed from 0xFF220804 to 0xFF452F2B. Past color was too dark brown to be
+very usable in a UI. It was very black coffee like, but not very practical in a UI, it was
+too close to black. Since version 5 is anyway major style breaking with the introduction of
+the new Material 3 ColorScheme, the opportunity to improve this color used in the
+`espresso` theme was used.
+
+### Beware: `SchemeColor` values and order, potentially breaking
 
 The enum `SchemeColor` has new values and past values are in a new order.
 The order was changed to accommodate all the new color values, and to keep them in
@@ -129,7 +152,7 @@ color scheme values on any custom widgets, their colors will change if
 you upgrade from a previous version of FlexColorScheme and don't do any
 other changes. You need to migrate to use `primaryContainer`,
 `secondaryContainer`, `tertiary` or `tertiaryContainer` color, as replacement
-colors in your custom widgets. Which one to use depends on your color design.
+colors in your custom widgets. The right choice depends on your color design.
 
 If you use a `FlexColorScheme` setup made for a version before version 5.0,
 with version 5.0, and
@@ -142,7 +165,7 @@ with version 5.0, and
 input for color properties `primaryContainer` and `secondaryContainer` respectively,
 unless own color values for these properties are provided.
 
-Thus when you upgrade package version to 5.0.0 and have used custom color schemes,
+When you upgrade package version to 5.0.0 and have used custom color schemes,
 you will find your custom variant colors on the corresponding new
 container colors. Be aware that past variant color shades are not necessarily a great
 fit for a Material 3 design intent of container colors, but at least you will get
@@ -151,7 +174,7 @@ your past custom colors used in the new theme by default.
 **Migration:** Define new custom colors values for all container colors and
 tertiary color. Use them to make your custom `FlexColorScheme` instead.
 Then migrate away from using Flutter SDK `ColorScheme` colors `primaryVariant`
-and `secondaryVariant` anywhere in your application. Instead use any of its new
+and `secondaryVariant` anywhere in your application. Instead, use any of its new
 `ColorScheme` color properties as fitting with your design. This is something you have
 to do after Flutter 2.10, even if you are not using FlexColorScheme. Sure, not immediately, but
 eventually when the Flutter SDK `ColorScheme` colors `primaryVariant` and `secondaryVariant`
@@ -1602,25 +1625,20 @@ Have a new suggestion and idea? Feel free to open a
 in the repo. There is also a project where active and recent TODOs are
 tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
 
-## TODO
+## PLANNED
 
-- Add a sub-theme for the `NavigationRail`.
-- Consider adding `SchemeColor` color selection to buttons and toggle buttons.
-- Version 5 will add support for Material 3 and will be released when a required
-  level of M3 features have reached the Flutter stable channel. At minimum, it
-  will probably be visually breaking to some extent when it starts using
-  SDK implementation of M3 design guide. Simply because its current own
-  M3 "like" M2 based implementation of existing theming and text capabilities
-  cannot always match the M3 designs, especially on color usage.
-- Version 5 will be breaking, in it, we may consider moving AppBar background
-  to sub-theme and use the full `SchemeColor` based color selection. This would
-  be another breaking change in V5. It might be possible to also add it
-  as a none breaking new feature.
-- For version 5 also consider adding `SchemeColor` selection to TabBar, it might
-  be possible to implement is an additional none-breaking feature.
+- All past planned features have been done and delivered with version 5,
+  and much more actually. Future planned topics will be listed in
+  the documentation.
 
 ## DONE
 
+- Created own documentation site for FlexColorScheme.
+- Version 5.0.0 Added a sub-theme for the `NavigationRail`.
+- Version 5.0.0 Added `SchemeColor` color selection to buttons and toggle buttons.
+- Version 5.0.0 Added support for Material.
+- Version 5.0.0 Added AppBar with optional `SchemeColor` based color selection.
+- Version 5.0.0 Added `SchemeColor` selection to TabBar
 - Version 5.0.0 Added `SchemeColor` color selection to
   the Floating Action Button sub-theme.
 - Version 4.2.0 support making themes from standard ColorScheme. More
@@ -1663,33 +1681,31 @@ tracked [here](https://github.com/rydmike/flex_color_scheme/projects/1).
 
 ## MAYBE
 
-The maybe issues below were on the TODO agenda earlier, however it looks a
-better alternative going forward is to replace them with the Material 3 design
-based color utilities called
+These maybes were on the PLANNED agenda earlier, however for version 5
+and Material 3 the correct alternative was to replace swatches with the
+Material 3 design based color utilities called
 [material_color_utilities](https://pub.dev/packages/material_color_utilities)
-that the Flutter SDK master channel also depends on.
+that the Flutter SDK also depends on.
 While I don't like adding a none SDK library to the package, if Flutter SDK
-uses it as well, then why not.
+uses it as well, then why not. It would still be nice to have the actual
+Material 2 swatch algorithm in Dart as well, then we could:
 
-- Add a property option to use actual Material color shades when a Material
-  color is selected as primary color, for its light/dark shade.
+- Use actual Material 2 color shades when a Material
+  color is selected as primary color, for its light/dark shades.
 
-- For color swatch calculations, find and use the color algorithm Google uses on its
+- For this we need to find and use the color algorithm Google uses on its
   Material colors site [here](https://material.io/design/color/the-color-system.html#tools-for-picking-colors) and [here](https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=582aed&secondary.color=00B0FF).
-- The algorithms for them are actually a bit different. The second link also
-  seems to imply that ColorScheme's should have primary and secondary colors,
-  with light and dark variants. Instead of using just one variant color like
-  current `ColorScheme` class in Flutter. Maybe this is a coming change
-  with Material 3 (You) or perhaps an older design? Status currently unknown.
-
-  - Starting points for the Dart Material color swatch algorithm could be ports
-    of [this](https://stackoverflow.com/questions/32942503/material-design-color-palette)
-    and/or [this](https://github.com/Hammwerk/material-color-palette)
-  - Wait and see if Google might make their Material color swatch algorithm
-    available in Dart/Flutter with MaterialYou.
-  - Interesting and simpler [Ant design](https://2x.ant.design/docs/spec/colors) color swatches.
-  - Color palette [tools](https://onextrapixel.com/best-tools-generate-color-palettes/) as info.
-
+- The algorithms for them are actually even a bit different. The second link also
+  seems to imply that color schemes should have had primary and secondary colors,
+  with light and dark variants. Instead of using just one variant color, like
+  past `ColorScheme` class in Flutter did. This of course all changed with
+  the updated Material 3 ColorScheme, that deprecated the variant colors.
+  As for the actual old Material 2 swatch algorithm see these sources:
+  https://stackoverflow.com/questions/32942503/material-design-color-palette
+  Starting points here:
+  - https://github.com/eugeneford/material-palette-generator
+  - https://github.com/mbitson/mcg/issues/19
+  - https://github.com/edelstone/material-palette-generator
 
 ## OUT OF SCOPE
 

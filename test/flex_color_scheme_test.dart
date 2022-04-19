@@ -901,42 +901,42 @@ void main() {
     });
     test(
         'FCS4.03: GIVEN color: $col '
-        'EXPECT swatch[50] equal to Color(0xffa973f6)', () {
+        'EXPECT swatch[50] equal to Color(0xffdec9fc)', () {
       expect(
         FlexColorScheme.createPrimarySwatch(col)[50],
-        equals(const Color(0xffa973f6)),
+        equals(const Color(0xffdec9fc)),
       );
     });
     test(
         'FCS4.04: GIVEN color: $col '
-        'EXPECT swatch[100] equal to Color(0xffa166f5)', () {
+        'EXPECT swatch[100] equal to Color(0xffd0b3fa)', () {
       expect(
         FlexColorScheme.createPrimarySwatch(col)[100],
-        equals(const Color(0xffa166f5)),
+        equals(const Color(0xffd0b3fa)),
       );
     });
     test(
         'FCS4.05: GIVEN color: $col '
-        'EXPECT swatch[200] equal to Color(0xff914df3)', () {
+        'EXPECT swatch[200] equal to Color(0xffba90f8)', () {
       expect(
         FlexColorScheme.createPrimarySwatch(col)[200],
-        equals(const Color(0xff914df3)),
+        equals(const Color(0xffba90f8)),
       );
     });
     test(
         'FCS4.06: GIVEN color: $col '
-        'EXPECT swatch[300] equal to Color(0xff8133f1)', () {
+        'EXPECT swatch[300] equal to Color(0xff9e63f4)', () {
       expect(
         FlexColorScheme.createPrimarySwatch(col)[300],
-        equals(const Color(0xff8133f1)),
+        equals(const Color(0xff9e63f4)),
       );
     });
     test(
         'FCS4.07: GIVEN color: $col '
-        'EXPECT swatch[400] equal to Color(0xff7219f0)', () {
+        'EXPECT swatch[400] equal to Color(0xff8436f2)', () {
       expect(
         FlexColorScheme.createPrimarySwatch(col)[400],
-        equals(const Color(0xff7219f0)),
+        equals(const Color(0xff8436f2)),
       );
     });
     test(
@@ -957,26 +957,26 @@ void main() {
     });
     test(
         'FCS4.10: GIVEN color: $col '
-        'EXPECT swatch[700] equal to Color(0xff4e00be)', () {
+        'EXPECT swatch[700] equal to Color(0xff4a00b4)', () {
       expect(
         FlexColorScheme.createPrimarySwatch(col)[700],
-        equals(const Color(0xff4e00be)),
+        equals(const Color(0xff4a00b4)),
       );
     });
     test(
         'FCS4.11: GIVEN color: $col '
-        'EXPECT swatch[800] equal to Color(0xff4500a7)', () {
+        'EXPECT swatch[800] equal to Color(0xff3f0098)', () {
       expect(
         FlexColorScheme.createPrimarySwatch(col)[800],
-        equals(const Color(0xff4500a7)),
+        equals(const Color(0xff3f0098)),
       );
     });
     test(
         'FCS4.12: GIVEN color: $col '
-        'EXPECT swatch[900] equal to Color(0xff3b008f)', () {
+        'EXPECT swatch[900] equal to Color(0xff33007b)', () {
       expect(
         FlexColorScheme.createPrimarySwatch(col)[900],
-        equals(const Color(0xff3b008f)),
+        equals(const Color(0xff33007b)),
       );
     });
   });

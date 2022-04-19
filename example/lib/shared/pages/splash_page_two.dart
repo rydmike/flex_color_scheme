@@ -28,7 +28,7 @@ class SplashPageTwo extends StatefulWidget {
 class _SplashPageTwoState extends State<SplashPageTwo> {
   @override
   void initState() {
-    // TODO(rydmike): Test the setEnabledSystemUIMode issue and raise issue.
+    // TODO(rydmike): Test setEnabledSystemUIMode issue and raise Flutter issue.
     // This call should remove the top and bottom UI overlays on Android.
     //
     // For some reason on some newer Android versions, it does not work
@@ -60,6 +60,7 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
 
   @override
   void dispose() {
+    // TODO(rydmike): Raise issue in Flutter to request a way to query UiMode.
     // Set the UI overlays back when we dispose this screen.
     // This screen needs to be stateful so we can correctly manage the
     // life-cycle of the removed overlay and putting them back.
@@ -70,8 +71,6 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     // is put them all back. If we control the parent it is not a problem,
     // because then we know and can but back what it had, but if we use this
     // in a package, it is a not possible.
-    //
-    // TODO(rydmike): Raise issue in SDK to request a way to query UiMode.
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
     super.dispose();

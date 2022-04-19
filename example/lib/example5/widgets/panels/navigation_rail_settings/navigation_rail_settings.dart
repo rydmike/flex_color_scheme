@@ -254,7 +254,7 @@ class NavigationRailSettings extends StatelessWidget {
         ),
         NavigationRailShowcase(
           height: 700,
-          // TODO(rydmike): Still needed? Sometimes worked without it, weird.
+          // TODO(rydmike): Raise Flutter issue about this too eager assert.
           // This is used as a work around to avoid unnecessarily eager
           // assert in SDK.
           // Assertion: line 562: 'useIndicator || indicatorColor == null'

@@ -4421,12 +4421,18 @@ class FlexColorScheme with Diagnosticable {
   /// This is used by the sub themes opt-in toggle to by default make the
   /// TextTheme match Material 3 phone size text theme.
   ///
-  /// See also:
+  /// This static constant will no longer be needed when the full support, with
+  /// Typography for M3 TextTheme lands in flutter stable channel, see:
+  /// https://github.com/flutter/flutter/pull/97829
+  /// When that happens it will be used instead and this TextTheme will
+  /// be deprecated.
+  ///
+  /// Regarding the new TextTheme see also:
   /// https://m3.material.io/styles/typography/overview
   /// and:
   /// https://github.com/flutter/flutter/issues/89853
   ///
-  /// This default [m3TextTheme] when opting in on sub themes, can also be
+  /// This is the default [m3TextTheme] when opting in on sub themes. It can be
   /// turned off by setting [FlexSubThemesData.useTextTheme] to false.
   /// This reverts the text theme back M2 2018 Typography, later it may revert
   /// to M3 2021 Typography when it is default in Flutter SDK.
@@ -4441,110 +4447,167 @@ class FlexColorScheme with Diagnosticable {
   /// M2 or M3 [TextStyle] names, the names are automatically mapped by Flutter
   /// to the other names.
   ///
-  /// This creates a TextTheme based on the M3 names and assigns the
-  /// EnglishLike2021 new Typography (Geometry) to it. This M3 based Typography
-  /// is not available in Flutter stable (2.10.0), or even master when
-  /// Flutter stable (2.10.0) was released. These sizes are mapped to old M2
-  /// names automatically by Flutter SDK from version 2.10.0 in apps that use
-  /// this optional theme.
+  /// Th [m3TextTheme] creates a TextTheme using the new M3 [TextStyle] names
+  /// and assigns the EnglishLike2021 new Typography (Geometry) to it.
+  /// This M3 based Typography and geometry is not available in Flutter
+  /// stable (2.10.x). These new M3 text style names are mapped to old M2 names
+  /// automatically by Flutter SDK from version 2.10.0.
   ///
-  /// The usage of this custom TextTheme might not be needed in later versions
+  /// The usage of this custom TextTheme will not be needed in later versions
   /// of FlexColorScheme when the M3 Typography becomes available in
-  /// Flutter stable channel.
+  /// Flutter stable channel. This is most likely a temporary static const
+  /// in [FlexColorScheme] that will likely get deprecated when no longer
+  /// needed. You may even consider it as mainly internal use, even if it is
+  /// exposed.
+  ///
+  /// When you opt-in on using the FlexColorSchemes M3 TextTheme, it also sets
+  /// default fontFamily to one matching the target platform, if you have not
+  /// specified a fontFamily in you FlexColorScheme. It can however not provide
+  /// the full TextTheme with different fonts for the big header style on
+  /// iOS platform, nor the fallback fonts for Linux platform.
+  ///
+  /// This textTheme geometry was temporarily copied from master channel.
   static const TextTheme m3TextTheme = TextTheme(
     // M3 displayLarge, M2 headline1. Material2018 Typography: 96, w300, -1.5
     displayLarge: TextStyle(
-      fontSize: 57,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-    ),
+        debugLabel: 'englishLike displayLarge 2021',
+        fontSize: 57.0,
+        fontWeight: FontWeight.w400,
+        letterSpacing: -0.25,
+        height: 1.12,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 displayMedium, M2 headline2. In 2018 Typography: 60, w300, -0.5
     displayMedium: TextStyle(
-      fontSize: 45,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-    ),
+        debugLabel: 'englishLike displayMedium 2021',
+        fontSize: 45.0,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.0,
+        height: 1.16,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 displaySmall, M2 headline2. In Material2018 Typography: 48, w400, 0
     displaySmall: TextStyle(
-      fontSize: 36,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-    ),
+        debugLabel: 'englishLike displaySmall 2021',
+        fontSize: 36.0,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.0,
+        height: 1.22,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 headlineMedium, M2 <none>. In Material2018 no equivalent exists.
     headlineLarge: TextStyle(
-      fontSize: 32,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-    ),
+        debugLabel: 'englishLike headlineLarge 2021',
+        fontSize: 32.0,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.0,
+        height: 1.25,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 headlineMedium, M2 headline4. In 2018 Typography: 34, w400, 0.25
     headlineMedium: TextStyle(
-      fontSize: 28,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-    ),
+        debugLabel: 'englishLike headlineMedium 2021',
+        fontSize: 28.0,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.0,
+        height: 1.29,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 headlineSmall, M2 headline5. In Material2018 Typography: 24, w400, 0
     headlineSmall: TextStyle(
-      fontSize: 24,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-    ),
+        debugLabel: 'englishLike headlineSmall 2021',
+        fontSize: 24.0,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.0,
+        height: 1.33,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 titleLarge, M2 headline6. In Material2018 Typography: 20, w500, 0.15
     titleLarge: TextStyle(
-      fontSize: 22,
-      fontWeight: FontWeight.w400,
-      letterSpacing: 0,
-    ),
+        debugLabel: 'englishLike titleLarge 2021',
+        fontSize: 22.0,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.0,
+        height: 1.27,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 titleMedium, M2 subtitle1. In Material2018 Typography: 16, w400, 0.15
     titleMedium: TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.15,
-    ),
+        debugLabel: 'englishLike titleMedium 2021',
+        fontSize: 16.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+        height: 1.50,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 titleSmall, M2 subtitle2. In Material2018 Typography: 14, w500, 0.1
     titleSmall: TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.1,
-    ),
-    // M3 bodyLarge, M2 bodyText1. In Material2018 Typography: 16, w400, 0.5
-    bodyLarge: TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      // M3 Guide says 0.15: https://m3.material.io/styles/typography/tokens
-      // Table here said 0.5: https://github.com/flutter/flutter/issues/89853
-      // Went with M3 Guide value, reported discrepancy.
-      letterSpacing: 0.15,
-    ),
-    // M3 bodyMedium, M2 bodyText2. In Material2018 Typography: 14, w400, 0.25
-    bodyMedium: TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.25,
-    ),
-    // M3 bodySmall, M2 caption. In Material2018 Typography: 12, w400, 0.4
-    bodySmall: TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.4,
-    ),
+        debugLabel: 'englishLike titleSmall 2021',
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        height: 1.43,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 labelLarge, M2 button. In Material2018 Typography: 14, w500, 1.25
     labelLarge: TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.1,
-    ),
+        debugLabel: 'englishLike labelLarge 2021',
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        height: 1.43,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 labelMedium, M2 <none>. In Material2018 no equivalent exists.
     labelMedium: TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.5,
-    ),
+        debugLabel: 'englishLike labelMedium 2021',
+        fontSize: 12.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+        height: 1.33,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
     // M3 labelSmall, M2 overline. In Material2018 Typography: 10, w400, 1.5
     labelSmall: TextStyle(
-      fontSize: 11,
-      fontWeight: FontWeight.w500,
-      letterSpacing: 0.5,
-    ),
+        debugLabel: 'englishLike labelSmall 2021',
+        fontSize: 11.0,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+        height: 1.45,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
+    // M3 bodyLarge, M2 bodyText1. In Material2018 Typography: 16, w400, 0.5
+    bodyLarge: TextStyle(
+        debugLabel: 'englishLike bodyLarge 2021',
+        fontSize: 16.0,
+        fontWeight: FontWeight.w400,
+        // TODO(rydmike): Track Flutter SDK bodyLarge letterSpacing issue.
+        // M3 Guide says 0.15: https://m3.material.io/styles/typography/tokens
+        // Table here said 0.5: https://github.com/flutter/flutter/issues/89853
+        // Went with M3 Guide value, reported discrepancy.
+        // Also reported this: https://github.com/flutter/flutter/issues/102121
+        letterSpacing: 0.15,
+        height: 1.50,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
+    // M3 bodyMedium, M2 bodyText2. In Material2018 Typography: 14, w400, 0.25
+    bodyMedium: TextStyle(
+        debugLabel: 'englishLike bodyMedium 2021',
+        fontSize: 14.0,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+        height: 1.43,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
+    // M3 bodySmall, M2 caption. In Material2018 Typography: 12, w400, 0.4
+    bodySmall: TextStyle(
+        debugLabel: 'englishLike bodySmall 2021',
+        fontSize: 12.0,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+        height: 1.33,
+        textBaseline: TextBaseline.alphabetic,
+        leadingDistribution: TextLeadingDistribution.even),
   );
 
   /// Returns a [VisualDensity] that is [defaultTargetPlatform] adaptive to
@@ -4961,6 +5024,40 @@ class FlexColorScheme with Diagnosticable {
 
   /// Create a primary Material color swatch from a given [color].
   ///
+  /// This function is since version 5.0.0 no longer used by FlexColorScheme.
+  /// In previous version it was used by [FlexColorScheme.toTheme] to provide
+  /// [ColorScheme.primary] matching colors for [ThemeData.primaryColorLight],
+  /// [ThemeData.primaryColorDark] and [ThemeData.secondaryHeaderColor].
+  ///
+  /// Since algorithm does not produce a correct [MaterialColor], it did not
+  /// work so well if the provided color was not of roughly a mid point 500
+  /// index equivalent. So it worked well for light theme mode, but not so well
+  /// for dark theme mode themes were [ColorScheme.primary] is typically much
+  /// lighter than then [MaterialColor] 500 index. FlexColorScheme moved to just
+  /// using lighten and darken to provide primary color matching colors to
+  /// above mentioned colors. Since the colors are very rarely used and on a
+  /// deprecation path in Flutter SDK they are not so critical.
+  ///
+  /// Since this function is no longer need by this library, it may be
+  /// deprecated and removed. Deprecation could e.g. happen in FlexColorScheme
+  /// version 6, and removal in version 7.
+  ///
+  /// There reason why it is not deprecated already is because I would like to
+  /// replace it with the correct Material 2 [MaterialColor] algorithm, which
+  /// is not available in Dart.
+  /// There are reversed engineered JS versions of the official Material Color
+  /// algorithm made from the Material Guide web tools. If anybody has the
+  /// energy to make a Dart version of it, that would be fabulous.
+  /// SO discussion here:
+  /// https://stackoverflow.com/questions/32942503/material-design-color-palette
+  ///
+  /// Starting points here:
+  /// - https://github.com/mbitson/mcg/issues/19
+  /// - Good candidate: https://github.com/eugeneford/material-palette-generator
+  /// - https://github.com/edelstone/material-palette-generator
+  ///
+  /// Old documentation for using [createPrimarySwatch].
+  ///
   /// The provided [color] is used as the Material swatch default color 500
   /// in the returned swatch, with lighter hues for lower indexes and darker
   /// shades for higher index values.
@@ -4970,15 +5067,9 @@ class FlexColorScheme with Diagnosticable {
   /// This function is an approximation and gives an automated way of creating
   /// a Material like primary swatch.
   ///
-  /// This function is used by [FlexColorScheme.toTheme] to calculate
-  /// suitable colors matching current [ColorScheme.primary] color for
-  /// [ThemeData.primaryColorLight], [ThemeData.primaryColorDark] and
-  /// [ThemeData.secondaryHeaderColor].
-  ///
-  /// When the colors are removed from [ThemeData] and this function is no
-  /// longer need by this library, it will be deprecated and removed.
-  /// Deprecation might e.g. happen in FlexColorScheme version 6, and removal in
-  /// version 7.
+  /// The used algorithm is identical to the same named function
+  /// found in ColorTools in FlexColorPicker at
+  /// https://pub.dev/packages/flex_color_picker.
   static MaterialColor createPrimarySwatch(final Color? color) {
     // Null default fallback is default material primary light color.
     final Color usedColor = color ?? FlexColor.materialLightPrimary;
@@ -4997,6 +5088,16 @@ class FlexColorScheme with Diagnosticable {
         1,
       );
     }
+    // The above gives a starting point, this tunes it a bit better, still far
+    // from the real algorithm.
+    swatch[50] = swatch[50]!.lighten(18);
+    swatch[100] = swatch[100]!.lighten(16);
+    swatch[200] = swatch[200]!.lighten(14);
+    swatch[300] = swatch[300]!.lighten(10);
+    swatch[400] = swatch[400]!.lighten(6);
+    swatch[700] = swatch[700]!.darken(2);
+    swatch[800] = swatch[800]!.darken(3);
+    swatch[900] = swatch[900]!.darken(4);
     return MaterialColor(usedColor.value, swatch);
   }
 
@@ -5219,6 +5320,29 @@ class FlexColorScheme with Diagnosticable {
     // Use passed in target platform, else actual host platform.
     final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
 
+    // Returns the default fontFamily for each platform. This is used only by
+    // the custom opt-in FlexColorScheme [m3TextTheme] if no fontFamily is
+    // provided.
+    //
+    // It does not provide the full TextTheme with different fonts for the
+    // header style on iOS fonts, nor the fallback for Linux fonts.
+    // The built [m3TextTheme] will be changed to use SDK built in M3 textTheme
+    // when its Typography lands in the Flutter stable channel.
+    String platformFontFamily() {
+      switch (effectivePlatform) {
+        case TargetPlatform.windows:
+          return 'Segoe UI';
+        case TargetPlatform.iOS:
+          return '.SF UI Text';
+        case TargetPlatform.macOS:
+          return '.AppleSystemUIFont';
+        case TargetPlatform.android:
+        case TargetPlatform.fuchsia:
+        case TargetPlatform.linux:
+          return 'Roboto';
+      }
+    }
+
     // TODO(rydmike): Remove when default in SDK, still T2014 in Flutter 2.10.x.
     // Used Typography deviates from the Flutter standard that _still_ uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
@@ -5240,17 +5364,31 @@ class FlexColorScheme with Diagnosticable {
     TextTheme defPrimaryText =
         primaryIsDark ? effectiveTypography.white : effectiveTypography.black;
 
+    // TODO(rydmike): Remove all the fontfamily experiments, from tests too.
+    // Setup the effective fontFamily, only apply when when provided or need
+    // for the custom m3TextTheme when a font family is not provided.
+    // String? effectiveFontFamily = fontFamily;
+
     if (fontFamily != null) {
       // ThemeData uses this to apply a font from fontFamily. It works OK, but
       // it resets all typography and it uses regular style and weight
       // for all styles in the text theme. Consider defining the text theme
       // explicitly via textTheme and primaryTextTheme with the custom
       // font applied, at least if you want to use custom fonts and keep the
-      // standard  typography, or supply your own complete typography with your
+      // standard typography, or supply your own complete typography with your
       // custom text theme.
       defText = defText.apply(fontFamily: fontFamily);
       defPrimaryText = defPrimaryText.apply(fontFamily: fontFamily);
     }
+    // if (useSubThemes && subTheme.useTextTheme && fontFamily == null) {
+    //   // If opted-in on using the FlexColorScheme custom [m3TextTheme] and no
+    //   // custom [fontFamily] has been specified we must provide one matching
+    //   // to current platform in order to not get surprising none standard
+    //   // results.
+    //   effectiveFontFamily = platformFontFamily();
+    //   defText = defText.apply(fontFamily: effectiveFontFamily);
+    //   defPrimaryText = defPrimaryText.apply(fontFamily: effectiveFontFamily);
+    // }
 
     // TODO(rydmike): Use SDK Material3 Flutter Typography when available.
     // We are using sub themes and blend colors on text themes. If surfaces and
@@ -5352,7 +5490,7 @@ class FlexColorScheme with Diagnosticable {
         labelSmall: defPrimaryText.labelSmall!.copyWith(color: smallPrimary),
       );
     }
-    // Use M3 text theme when sub themes enabled and custom M3 text opt-in used.
+    // Use custom m3TextTheme when sub themes enabled and M3 text opt-in used.
     if (useSubThemes && subTheme.useTextTheme) {
       defText = defText.merge(m3TextTheme);
       defPrimaryText = defPrimaryText.merge(m3TextTheme);
@@ -5362,24 +5500,19 @@ class FlexColorScheme with Diagnosticable {
     final TextTheme effectiveTextTheme = defText.merge(textTheme);
     final TextTheme effectivePrimaryTextTheme =
         defPrimaryText.merge(primaryTextTheme);
-    // When working with color scheme based colors, there is no longer a
-    // Material primary swatch that we can use to create some of the old
-    // Theme colors from. Those colors are still needed by some Flutter Widgets.
-    // To be able to make these colors we compute a complete material like
-    // color swatch from the provided primary color, using the primary color
-    // as the MaterialColor's mid [500] index color.
-    final MaterialColor primarySwatch =
-        createPrimarySwatch(colorScheme.primary);
-    // We now have a swatch of the primary color provided via a color scheme,
-    // we can use it to define some of the traditional theme colors in a way
-    // that relates to the color scheme's primary color, like ThemeData factory
-    // does when you create a theme from a swatch. This gives us some missing
-    // critical shades of the primary color to work with.
-    final Color primaryColorDark =
-        isDark ? primarySwatch[800]! : primarySwatch[900]!;
-    final Color primaryColorLight = primarySwatch[100]!;
-    final Color secondaryHeaderColor =
-        isDark ? primarySwatch[900]! : primarySwatch[50]!;
+
+    // Custom computed shades from primary color using alpha blends works well
+    // for these rarely used colors that are on deprecation path in Flutter SDK.
+    // https://github.com/flutter/flutter/issues/91772
+    final Color primaryColorDark = isDark
+        ? colorScheme.primary.blend(Colors.black, 45)
+        : colorScheme.primary.blend(Colors.black, 40);
+    final Color primaryColorLight = isDark
+        ? colorScheme.primary.blend(Colors.white, 35)
+        : colorScheme.primary.blend(Colors.white, 40);
+    final Color secondaryHeaderColor = isDark
+        ? colorScheme.primary.blend(Colors.black, 60)
+        : colorScheme.primary.blend(Colors.white, 80);
     // AppBar background color:
     // - If a color is passed in, that is used first.
     // - If we use sub-themes, we use its scheme based color.
@@ -5426,13 +5559,10 @@ class FlexColorScheme with Diagnosticable {
               ? Colors.black87
               : Colors.white;
         case FlexTabBarStyle.universal:
-          return // colorScheme.inversePrimary;
-              // TODO(rydmike): Consider universal using inversePrimary.
-              // -> It is OK with seed generated schemes, but not generally.
-              // Need a better algo for this some day.
-              isDark
-                  ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
-                  : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
+          // TODO(rydmike): Need better FlexTabBarStyle.universal algo some day.
+          return isDark
+              ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
+              : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
       }
     }
 
@@ -5549,7 +5679,6 @@ class FlexColorScheme with Diagnosticable {
       // apply them via ThemeData copyWith separately for cases when we want
       // to use them in a FlexColorSchemes, which might often be the case. Some
       // of the values may be null and get defaults via the ThemeData() factory.
-      fontFamily: fontFamily,
       visualDensity: visualDensity,
       useMaterial3: useMaterial3,
       // TextTheme properties use the same logic as in ThemeData, allowing us
@@ -5557,6 +5686,14 @@ class FlexColorScheme with Diagnosticable {
       // been deprecated in Flutter 2.5.0.
       textTheme: effectiveTextTheme,
       primaryTextTheme: effectivePrimaryTextTheme,
+      // TODO(rydmike): Remove all the fontFamily experiments, from tests too.
+      // The fontFamily is passed along as defined if it was defined, even as
+      // null. However, if we used the m3TextTheme, then it gets a platform
+      // default value that is passed along, in a futile attempt to try to use
+      // the right Platform font, works sometimes. This is temporary until
+      // we have the m3 Typography in stable channel from here:
+      // https://github.com/flutter/flutter/pull/97829
+      fontFamily: fontFamily,
       // Pass along custom typography and platform.
       typography: effectiveTypography,
       platform: effectivePlatform,
@@ -5708,7 +5845,7 @@ class FlexColorScheme with Diagnosticable {
       // value from the calculated primary swatch.
       // See issue: https://github.com/flutter/flutter/issues/65782
       secondaryHeaderColor: secondaryHeaderColor,
-      // TODO(rydmike): Tech debt: Move AppBar themes opt-in to FlexSubThemes.
+      // TODO(rydmike): Tech debt: Move AppBar theme opt-in to FlexSubThemes.
       // The app bar theme allows us to use a custom colored appbar theme
       // in both light and dark themes that is not dependent on theme primary
       // or surface color, and still gets a correct working text and icon theme.
@@ -5789,7 +5926,7 @@ class FlexColorScheme with Diagnosticable {
             : colorScheme.primary.withAlpha(0x4C), // 30%
         selectionHandleColor: primaryColorDark,
       ),
-      // TODO(rydmike): Tech debt: Move TabBar themes opt-in to a FlexSubThemes.
+      // TODO(rydmike): Tech debt: Move TabBar theme opt-in to a FlexSubThemes.
       // Defines the TabBar theme that will fit nicely in an AppBar
       // (default) or on background color for use eg in a Scaffold, the choice
       // depends on tabBarStyle `FlexTabBarStyle`, that defaults to
@@ -5819,7 +5956,7 @@ class FlexColorScheme with Diagnosticable {
       primaryIconTheme: useSubThemes
           ? IconThemeData(color: effectivePrimaryTextTheme.headline6!.color)
           : null,
-      // TODO(rydmike): Tech debt: Move tooltip themes opt-in to FlexSubThemes.
+      // TODO(rydmike): Tech debt: Move tooltip theme opt-in to FlexSubThemes.
       // TODO(rydmike): Offer more tooltip theming options, like tip delays.
       // Opinionated theming of Tooltips, the default theme for Material
       // themed Tooltips are not ideal design choices on desktop and web
@@ -6429,7 +6566,7 @@ class FlexColorScheme with Diagnosticable {
         );
   }
 
-  // TODO(rydmike): Consider improving FCS light inversePrimary algorithm.
+  // TODO(rydmike): Consider improving FCS inversePrimary algorithm.
   /// FlexColorScheme default for inversePrimary color, when not using seeds.
   ///
   /// Not the best one in the world, but simple and works fairly well for light

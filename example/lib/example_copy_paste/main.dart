@@ -31,7 +31,10 @@ class _DemoAppState extends State<DemoApp> {
   late final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
   @override
   Widget build(BuildContext context) {
+    final Color darkerPrimary = Color.alphaBlend(
+        Colors.black.withAlpha(0x66), Theme.of(context).colorScheme.primary);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       // To use this app with the Flutter SDK default theme and default
       // Material Design 2 color scheme, uncomment and use the theme setup below
       // and comment the copy-pasted themes further below,
@@ -45,8 +48,8 @@ class _DemoAppState extends State<DemoApp> {
 
       // This is where you would put a copy-pasted theme definition from
       // the Themes Playground. There is already one example below, but do
-      // try your own and copy-paste new setup code from the
-      // Themes Playground app at
+      // try your own copy-paste new setup code from the
+      // Themes Playground app available at:
       // https://rydmike.com/flexcolorscheme/themesplayground-v5
       // And do remember to comment the default Flutter theme above.
 
@@ -105,41 +108,31 @@ class _DemoAppState extends State<DemoApp> {
       //   typography: Typography.material2018(platform: defaultTargetPlatform),
       // ),
 
-      theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xff6750a4),
-          brightness: Brightness.light,
-        ),
-      ),
-      darkTheme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xff6750a4),
-          brightness: Brightness.dark,
-        ),
-      ),
-      // theme: FlexThemeData.light(
-      //   colorScheme: flexSchemeLight,
-      //   keyColors: const FlexKeyColors(),
-      //   subThemesData: const FlexSubThemesData(
-      //     defaultRadius: 4,
-      //     fabUseShape: false,
-      //   ),
-      //   fontFamily: GoogleFonts.roboto().fontFamily,
-      // ),
-      // darkTheme: FlexThemeData.dark(
-      //   colorScheme: flexSchemeDark,
-      //   keyColors: const FlexKeyColors(),
-      //   subThemesData: const FlexSubThemesData(
-      //     defaultRadius: 4,
-      //     fabUseShape: false,
-      //   ),
-      //   fontFamily: GoogleFonts.roboto().fontFamily,
-      // ),
+      // 12) FTD.light(key sub)
+      //    FlexThemeData.light(colorScheme:..., keyColors: ...),
+      //    FlexThemeData.dark(colorScheme:..., keyColors: ...),
       //
-      debugShowCheckedModeBanner: false,
-      // title: 'FlexTD(Scheme Seed SubT)',
-      title: 'TD.from(scheme.fromSeed)',
-      // title: 'Copy Playground Theme',
+      title: '12) FTD.light(key sub)',
+      theme: FlexThemeData.light(
+        colorScheme: flexSchemeLight,
+        keyColors: const FlexKeyColors(),
+        subThemesData: const FlexSubThemesData(
+          defaultRadius: 4,
+          fabUseShape: false,
+          useTextTheme: false,
+        ),
+      ),
+      darkTheme: FlexThemeData.dark(
+        colorScheme: flexSchemeDark,
+        keyColors: const FlexKeyColors(),
+        subThemesData: const FlexSubThemesData(
+          defaultRadius: 4,
+          fabUseShape: false,
+          useTextTheme: false,
+          interactionEffects: false,
+        ),
+      ),
+
       // ThemeMode toggle via callback
       themeMode: themeMode,
       home: HomePage(
@@ -218,9 +211,6 @@ const ColorScheme flexSchemeDark = ColorScheme(
   inversePrimary: Color(0xff635b70),
   shadow: Color(0xff000000),
 );
-
-
-
 
 // // Copy-paste the code for a light ColorScheme you want from the
 // // Themes Playground here and try it with plain vanilla

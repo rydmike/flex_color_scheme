@@ -839,13 +839,13 @@ class _MenuItem extends StatelessWidget {
     final Color iconColor = enabled
         ? isLight
             ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-                theme.colorScheme.onBackground)
+                theme.colorScheme.onSurface)
             : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-                theme.colorScheme.onBackground)
-        : theme.colorScheme.onBackground.withAlpha(0x55);
+                theme.colorScheme.onSurface)
+        : theme.colorScheme.onSurface.withAlpha(0x55);
     final Color textColor = enabled
-        ? theme.colorScheme.onBackground.withAlpha(0xCC)
-        : theme.colorScheme.onBackground.withAlpha(0x55);
+        ? theme.colorScheme.onSurface.withAlpha(0xCC)
+        : theme.colorScheme.onSurface.withAlpha(0x55);
     // The M3 guide calls for 12dp padding after the selection indicator on
     // the menu highlight in a Drawer or side menu. We can do that, but we
     // have such a narrow rail for phone size, so at rail sizes we will make it

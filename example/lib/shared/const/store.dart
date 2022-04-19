@@ -58,6 +58,11 @@ class Store {
   // Default value for the useSubThemes, also used to reset settings.
   static const bool defaultUseTextTheme = true;
 
+  // Key used to read and save the useAppFont value.
+  static const String keyUseAppFont = 'useAppFont';
+  // Default value for the useAppFont, also used to reset settings.
+  static const bool defaultUseAppFont = true;
+
   // Key used to read and save the usedScheme value.
   static const String keyUsedScheme = 'usedScheme';
   // Default value for the usedScheme, also used to reset settings.

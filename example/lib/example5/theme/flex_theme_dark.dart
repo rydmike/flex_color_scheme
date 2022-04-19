@@ -200,7 +200,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
     //
     // ThemeData properties passed along directly to ThemeData.
     visualDensity: AppData.visualDensity,
-    fontFamily: AppData.font,
+    fontFamily: controller.useAppFont ? AppData.font : null,
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
   );

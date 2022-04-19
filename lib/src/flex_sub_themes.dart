@@ -24,23 +24,17 @@ enum FlexInputBorderType {
 /// [ColorScheme], should be used for by color properties available in
 /// component sub-themes.
 ///
-/// It can be used when opting in on opinionated sub-themes. The opinionated
-/// sub-theme for these widgets have one or more properties called
-/// `nnnSchemeColor` where `nnn` describes the color feature that can be set
-/// to a none standard [ColorScheme] based color.
-/// If not set the property is null and the default [ColorScheme] based
-/// color behavior of the opinionated sub-theme will be used. This may differ
-/// from the corresponding Widget's SDK default un-themed color behavior, but
-/// is mostly the same if defined at all.
+/// Used when opting in on component themes. The opinionated component themes
+/// typically have one or more properties called `nnnSchemeColor`. Where
+/// `nnn` describes the color feature that can be set to a none default
+/// [ColorScheme] based color.
+/// If not set, the property is null and the default [ColorScheme] based
+/// color behavior of the opinionated component theme will be used. This may
+/// differ from the corresponding Widget's SDK default un-themed color behavior,
+/// but is often the same if defined at all.
 ///
 /// The enum selection `primaryVariant` and `secondaryVariant` colors have been
-/// deprecated in Flutter SDK 2.1.0 master after after v2.6.0-0.0.pre landed.
-///
-/// This enum to select and override default Widget colors when using
-/// opinionated sub-themes might be applied to more widgets in later release
-/// if so requested and desired. It should be noted though all will not be since
-/// you can still customize FlexColorScheme themes and its sub-themes
-/// totally [ThemeData.copyWith] methods.
+/// deprecated in Flutter SDK 2.10.0 stable, after master v2.6.0-0.0.pre landed.
 enum SchemeColor {
   /// The active theme's color scheme primary color will be used.
   primary,
@@ -155,29 +149,30 @@ enum SchemeColor {
 /// of [FlexColorScheme] or in a `copyWith` on each sub-theme with
 /// custom [ThemeData].
 ///
-/// Sub-themes for the following components are available:
+/// These component themes are available:
 ///
-/// * [TextButton]
-/// * [ElevatedButton]
-/// * [OutlinedButton]
-/// * Older buttons using [ButtonThemeData]
-/// * [ToggleButtons]
-/// * [Switch]
-/// * [Checkbox]
-/// * [Radio]
-/// * [InputDecoration]
-/// * [FloatingActionButton]
-/// * [Chip]
-/// * [Card]
-/// * [PopupMenuButton]
-/// * [Dialog]
-/// * [TimePickerDialog]
-/// * [SnackBar]
-/// * [Tooltip]
-/// * [BottomSheet]
-/// * [BottomNavigationBar]
-/// * [NavigationBar]
-/// * [NavigationRail]
+/// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
+/// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
+///   [bottomNavigationBar].
+/// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
+/// * [CardTheme] for [Card] via [cardTheme].
+/// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
+/// * [ChipThemeData] for [Chip] via [chipTheme].
+/// * [DialogTheme] for [Dialog] via [dialogTheme].
+/// * [ElevatedButtonThemeData] for [ElevatedButton] via [elevatedButtonTheme].
+/// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
+///   [floatingActionButtonTheme].
+/// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
+/// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
+/// * [NavigationRailThemeData] for [NavigationRail] via [navigationRailTheme].
+/// * [OutlinedButtonThemeData] for [OutlinedButton] via [outlinedButtonTheme].
+/// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
+/// * [RadioThemeData] for [Radio] via [radioTheme].
+/// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
+/// * [SwitchThemeData] for [Switch] via [switchTheme].
+/// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
+/// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
+/// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
 ///
 /// In [ToggleButtons] hover, press, selected and focus states are not
 /// an exact match for the main buttons. It does not have as flexible styling
@@ -197,7 +192,8 @@ enum SchemeColor {
 /// styling as the newer buttons. They do follow and match the styling on
 /// [ToggleButtons] when it comes to hover, press, selected and focus.
 /// Please consider phasing out the legacy buttons, as they are deprecated and
-/// may soon be removed from the Flutter SDK.
+/// will be removed from the Flutter SDK in next stable release. Their theme
+/// the [ButtonThemeData] will also son be deprecated and later removed.
 ///
 /// The following widgets that have rounded corners are excluded from the
 /// sub theming:
@@ -213,15 +209,13 @@ enum SchemeColor {
 ///   straight. Unclear if it can be done via SDK's current theming features,
 ///   will investigate more in future version.
 /// * [Drawer] should have have rounding on shown side edge, it is in recent
-///   version (2.8.0) now possible to assign a Shape in drawer theme. But
-///   Drawer uses same theme when used as Drawer and EndDrawer and the rounding
+///   version (2.8.0) possible to assign a Shape in drawer theme. But
+///   Drawer uses same theme, when used as Drawer and EndDrawer and the rounding
 ///   should be on end edge on Drawer and start edge in EndDrawer, we cannot do
-///   that without having two Shapes in its theme or other usage behavior
+///   this without having two Shapes in its theme or other usage behavior
 ///   modifying. A default behavior in SDK can implement by looking up
-///   if Drawer is being used in Scaffold as Drawer or EndDrawer, but still
-///   messy and has limitations. Also the M3 16dp rounding on visible edge was
-///   no longer mentioned in M3 guide. Will still have to wait and see with
-///   this one.
+///   if Drawer is being used in Scaffold as Drawer or EndDrawer, but support
+///   via theme is needed.
 class FlexSubThemes {
   /// Private constructor for the FlexSubThemes static class to prevent it from
   /// being instantiated or extended.
@@ -375,324 +369,6 @@ class FlexSubThemes {
     }
   }
 
-  /// An opinionated [TextButtonThemeData] theme.
-  ///
-  /// Requires a [ColorScheme], the color scheme would
-  /// typically be equal the color scheme also used to define the color scheme
-  /// for your app theme.
-  ///
-  /// The adjustable button corner [radius] defaults to 20. This is the new
-  /// default in M3, Flutter SDK M2 defaults to 4.
-  static TextButtonThemeData textButtonTheme({
-    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-    required final ColorScheme colorScheme,
-
-    /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the button.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.primary] will be used.
-    final SchemeColor? baseSchemeColor,
-
-    /// The button corner radius.
-    ///
-    /// If not defined, defaults to [kButtonRadius] 20dp,
-    /// based on M3 Specification
-    /// https://m3.material.io/components/buttons/specs
-    final double? radius,
-
-    /// Padding for the button theme.
-    ///
-    /// Defaults to null and uses `styleFrom` constructors default padding.
-    ///
-    /// M3 has more horizontal padding 24dp, but the tighter default padding
-    /// in M2 that is 16dp looks fine as well when using stadium borders
-    /// as in M3.
-    /// Making the custom scalable padding and separate one for icon
-    /// versions is rather involved, so sticking to defaults, but exposing the
-    /// padding property for future or external use.
-    final EdgeInsetsGeometry? padding,
-
-    /// Minimum button size.
-    ///
-    /// Defaults to `kButtonMinSize` = Size(40, 40).
-    final Size minButtonSize = kButtonMinSize,
-  }) {
-    // Get selected color, defaults to primary.
-    final Color baseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
-
-    return TextButtonThemeData(
-      style: TextButton.styleFrom(
-        minimumSize: minButtonSize,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kButtonRadius),
-          ),
-        ), // buttonShape,
-        padding: padding,
-      ).copyWith(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledForegroundAlpha);
-            }
-            return baseColor;
-          },
-        ),
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return baseColor.withAlpha(kHoverBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.focused)) {
-              return baseColor.withAlpha(kFocusBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return baseColor.withAlpha(kPressedBackgroundAlpha);
-            }
-            return Colors.transparent;
-          },
-        ),
-      ),
-    );
-  }
-
-  /// An opinionated [ElevatedButtonThemeData] theme.
-  ///
-  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
-  /// typically be equal the color scheme also used to define the color scheme
-  /// for your app theme.
-  ///
-  /// The button [elevation] defaults to 1 [kElevatedButtonElevation], making
-  /// the elevated button a bit more flat. Flutter SDK ElevatedButton
-  /// defaults to elevation 2.
-  ///
-  /// The adjustable button corner [radius] defaults to 20. This is the new
-  /// default in M3, Flutter SDK M2 defaults to 4.
-  static ElevatedButtonThemeData elevatedButtonTheme({
-    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-    required final ColorScheme colorScheme,
-
-    /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the button.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.primary] will be used.
-    final SchemeColor? baseSchemeColor,
-
-    /// The button corner radius.
-    ///
-    /// If not defined, defaults to [kButtonRadius] 20dp,
-    /// based on M3 Specification
-    /// https://m3.material.io/components/buttons/specs
-    final double? radius,
-
-    /// The button elevation
-    ///
-    /// Defaults to [kElevatedButtonElevation] 1, making it a bit more flat in
-    /// its elevation state than Flutter SDK, that defaults to 2.
-    /// An opinionated choice.
-    final double elevation = kElevatedButtonElevation,
-
-    /// Padding for the button theme.
-    ///
-    /// Defaults to null and uses `styleFrom` constructors default padding.
-    ///
-    /// M3 has more horizontal padding 24dp, but the tighter default padding
-    /// in M2 that is 16dp looks fine as well when using stadium borders
-    /// as in M3.
-    /// Making the custom scalable padding and separate one for icon
-    /// versions is rather involved, so sticking to defaults, but exposing the
-    /// padding property for future or external use.
-    final EdgeInsetsGeometry? padding,
-
-    /// Minimum button size.
-    ///
-    /// Defaults to `kButtonMinSize` = Size(40, 40).
-    final Size minButtonSize = kButtonMinSize,
-  }) {
-    // Get selected color, defaults to primary.
-    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
-    final Color baseColor = schemeColor(baseScheme, colorScheme);
-    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
-
-    return ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        minimumSize: minButtonSize,
-        padding: padding,
-        elevation: elevation,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kButtonRadius),
-          ),
-        ), //buttonShape,
-      ).copyWith(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledForegroundAlpha);
-            }
-            return onBaseColor;
-          },
-        ),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledBackgroundAlpha);
-            }
-            return baseColor;
-          },
-        ),
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return onBaseColor.withAlpha(kHoverBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.focused)) {
-              return onBaseColor.withAlpha(kFocusBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return onBaseColor.withAlpha(kPressedBackgroundAlpha);
-            }
-            return Colors.transparent;
-          },
-        ),
-      ),
-    );
-  }
-
-  /// An opinionated [OutlinedButtonThemeData] theme.
-  ///
-  /// Requires a [ColorScheme]. The color scheme would typically be equal the
-  /// color scheme also used to define the color scheme for your app theme.
-  ///
-  /// The adjustable button corner [radius] defaults to 20. This is the new
-  /// default in M3, Flutter SDK M2 defaults to 4.
-  static OutlinedButtonThemeData outlinedButtonTheme({
-    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-    required final ColorScheme colorScheme,
-
-    /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the button.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.primary] will be used.
-    final SchemeColor? baseSchemeColor,
-
-    /// The button corner border radius.
-    ///
-    /// If not defined, defaults to [kButtonRadius] 20dp,
-    /// based on M3 Specification
-    /// https://m3.material.io/components/buttons/specs
-    final double? radius,
-
-    /// The outline thickness when the button is pressed.
-    ///
-    /// Defaults to 2.0.
-    final double pressedOutlineWidth = kThickBorderWidth,
-
-    /// The outline thickness when the button is not selected and not pressed.
-    ///
-    /// Defaults to 1.5.
-    final double outlineWidth = kThinBorderWidth,
-
-    /// Padding for the button theme.
-    ///
-    /// Defaults to null and uses `styleFrom` constructors default padding.
-    ///
-    /// M3 has more horizontal padding 24dp, but the tighter default padding
-    /// in M2 that is 16dp looks fine as well when using stadium borders
-    /// as in M3.
-    /// Making the custom scalable padding and separate one for icon
-    /// versions is rather involved, so sticking to defaults, but exposing the
-    /// padding property for future or external use.
-    final EdgeInsetsGeometry? padding,
-
-    /// Minimum button size.
-    ///
-    /// Defaults to `kButtonMinSize` = Size(40, 40).
-    final Size minButtonSize = kButtonMinSize,
-  }) {
-    // Get selected color, defaults to primary.
-    final Color baseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
-
-    return OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        minimumSize: minButtonSize,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kButtonRadius),
-          ),
-        ), //buttonShape,
-        padding: padding,
-      ).copyWith(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledForegroundAlpha);
-            }
-            return baseColor;
-          },
-        ),
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return baseColor.withAlpha(kHoverBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.focused)) {
-              return baseColor.withAlpha(kFocusBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return baseColor.withAlpha(kPressedBackgroundAlpha);
-            }
-            return Colors.transparent;
-          },
-        ),
-        side: MaterialStateProperty.resolveWith<BorderSide?>(
-          (final Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return BorderSide(
-                color: baseColor
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha),
-                width: outlineWidth,
-              );
-            }
-            if (states.contains(MaterialState.error)) {
-              return BorderSide(
-                color: colorScheme.error,
-                width: pressedOutlineWidth,
-              );
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return BorderSide(
-                color: baseColor,
-                width: pressedOutlineWidth,
-              );
-            }
-            return BorderSide(
-              color: baseColor.withAlpha(kEnabledBorderAlpha),
-              width: outlineWidth,
-            );
-          },
-        ),
-      ),
-    );
-  }
-
   /// An opinionated [ButtonThemeData] theme.
   ///
   /// This theme is used to provide the same opinionated theme and style on
@@ -776,1132 +452,6 @@ class FlexSubThemes {
       textTheme: ButtonTextTheme.primary,
     );
   }
-
-  /// An opinionated [SwitchThemeData] theme.
-  ///
-  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
-  /// typically be equal the color scheme also used to define the color scheme
-  /// for your app theme.
-  ///
-  /// The splashRadius is not used by FlexColorScheme sub-themes.
-  static SwitchThemeData switchTheme({
-    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-    required final ColorScheme colorScheme,
-
-    /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the switch.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.secondary] will be used.
-    final SchemeColor? baseSchemeColor,
-
-    /// The splash radius of the circular Material ink response.
-    ///
-    /// Defaults to kRadialReactionRadius = 20.
-    final double? splashRadius,
-
-    /// Defines if unselected [Switch] is also themed to be [baseSchemeColor].
-    ///
-    /// If false, it is grey like in Flutter SDK. Defaults to true.
-    final bool unselectedIsColored = true,
-  }) {
-    // Get selected color, defaults to secondary.
-    final Color baseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.secondary, colorScheme);
-    final bool isLight = colorScheme.brightness == Brightness.light;
-
-    return SwitchThemeData(
-      splashRadius: splashRadius,
-      thumbColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return baseColor;
-          }
-          return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
-        },
-      ),
-      trackColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.black12 : Colors.white10;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return baseColor.withAlpha(0x70);
-          }
-          // Opinionated color on track when not selected
-          if (unselectedIsColored) {
-            return baseColor.withAlpha(0x70);
-          }
-          // This is SDK default.
-          return isLight ? const Color(0x52000000) : Colors.white30;
-        },
-      ),
-    );
-  }
-
-  /// An opinionated [CheckboxThemeData] theme.
-  ///
-  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
-  /// typically be equal the color scheme also used to define the color scheme
-  /// for your app theme.
-  ///
-  /// The splashRadius is not used by FlexColorScheme sub-themes.
-  static CheckboxThemeData checkboxTheme({
-    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-    required final ColorScheme colorScheme,
-
-    /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the checkbox.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.secondary] will be used.
-    final SchemeColor? baseSchemeColor,
-
-    /// The splash radius of the circular Material ink response.
-    ///
-    /// Defaults to kRadialReactionRadius = 20.
-    final double? splashRadius,
-
-    /// Defines if unselected [Checkbox] is also themed to be [baseSchemeColor].
-    ///
-    /// If false, it is grey like in Flutter SDK. Defaults to true.
-    final bool unselectedIsColored = true,
-  }) {
-    // Get selected color, defaults to secondary.
-    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
-    final Color baseColor = schemeColor(baseScheme, colorScheme);
-    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
-    final bool isLight = colorScheme.brightness == Brightness.light;
-
-    return CheckboxThemeData(
-      splashRadius: splashRadius,
-      checkColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.grey.shade200 : Colors.grey.shade600;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return onBaseColor;
-          }
-          return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
-        },
-      ),
-      fillColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return baseColor;
-          }
-          // Opinionated color on unselected checkbox.
-          if (unselectedIsColored) {
-            return baseColor.withAlpha(0xDD);
-          }
-          // This is SDK default.
-          return isLight ? Colors.black54 : Colors.white70;
-        },
-      ),
-    );
-  }
-
-  /// An opinionated [RadioThemeData] theme.
-  ///
-  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
-  /// typically be equal the color scheme also used to define the color scheme
-  /// for your app theme.
-  ///
-  /// The splashRadius is not used by FlexColorScheme sub-themes.
-  static RadioThemeData radioTheme({
-    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-    required final ColorScheme colorScheme,
-
-    /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the switch.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.secondary] will be used.
-    final SchemeColor? baseSchemeColor,
-
-    /// The splash radius of the circular Material ink response.
-    ///
-    /// Defaults to kRadialReactionRadius = 20.
-    final double? splashRadius,
-
-    /// Defines if unselected [Radio] is also themed to be [baseSchemeColor].
-    ///
-    /// If false, it is grey like in Flutter SDK. Defaults to true.
-    final bool unselectedIsColored = true,
-  }) {
-    // Get selected color, defaults to secondary.
-    final Color baseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.secondary, colorScheme);
-    final bool isLight = colorScheme.brightness == Brightness.light;
-
-    return RadioThemeData(
-      splashRadius: splashRadius,
-      fillColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return baseColor;
-          }
-          // Opinionated color on unselected checkbox.
-          if (unselectedIsColored) {
-            return baseColor.withAlpha(0xDD);
-          }
-          // This is SDK default.
-          return isLight ? Colors.black54 : Colors.white70;
-        },
-      ),
-    );
-  }
-
-  /// An opinionated [ToggleButtonsThemeData] theme.
-  ///
-  /// The adjustable button corner [radius] defaults to 20 this is new
-  /// default in M3, Flutter SDK M2 defaults to 4.
-  ///
-  /// Button border width can be adjusted and defaults to same width
-  /// as outline thickness on selected outline button and input decorator.
-  ///
-  /// Unfortunately [ToggleButtons] cannot be themed to have different border
-  /// width in disabled mode than enabled mode, like [OutlinedButton] can.
-  /// If it is important that the themed border appears similar to the disabled
-  /// border width, then keep the thin and thick outlined borders same or
-  /// reasonably close to each other.
-  static ToggleButtonsThemeData toggleButtonsTheme({
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    required final ColorScheme colorScheme,
-
-    /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the toggle buttons.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.primary] will be used.
-    final SchemeColor? baseSchemeColor,
-
-    /// The button corner radius.
-    ///
-    /// If not defined, defaults to [kButtonRadius] 20dp.
-    ///
-    /// This is not in M3 specification, but FlexColorScheme component
-    /// sub-themes harmonizes [ToggleButtons] size
-    /// and border radius with the other Material buttons.
-    final double? radius,
-
-    /// The width of the borders around the toggle buttons.
-    ///
-    /// In this design it uses the same default as outline thickness for
-    /// selected outline button and input decorator.
-    ///
-    /// Defaults to 1.5.
-    final double borderWidth = kThinBorderWidth,
-
-    /// Minimum button size.
-    ///
-    /// Defaults to Size(40, 40).
-    final Size minButtonSize = kButtonMinSize,
-
-    /// VisualDensity for ToggleButtons.
-    ///
-    /// The ToggleButtons do not implement VisualDensity from theme, but we can
-    /// pass in what we use in ThemeData and adjust its size accordingly.
-    ///
-    /// You should pass in the same visual density that you set on your
-    /// Theme to the ToggleButtons to make them keep the same size as the
-    /// main buttons.
-    ///
-    /// Defaults to null, that results in VisualDensity.adaptivePlatformDensity
-    /// being used, which is same as null default in ThemeData.
-    final VisualDensity? visualDensity,
-  }) {
-    // Get selected color, defaults to primary.
-    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
-    final Color baseColor = schemeColor(baseScheme, colorScheme);
-    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
-
-    final VisualDensity usedVisualDensity =
-        visualDensity ?? VisualDensity.adaptivePlatformDensity;
-    return ToggleButtonsThemeData(
-      borderWidth: borderWidth,
-      selectedColor: onBaseColor.withAlpha(kSelectedAlpha),
-      color: baseColor,
-      fillColor: baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
-      borderColor: baseColor.withAlpha(kEnabledBorderAlpha),
-      selectedBorderColor:
-          baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
-      hoverColor: baseColor
-          .blendAlpha(Colors.white, kHoverAlphaBlend + kAltPrimaryAlphaBlend)
-          .withAlpha(kHoverAlpha),
-      focusColor: baseColor
-          .blendAlpha(Colors.white, kFocusAlphaBlend + kAltPrimaryAlphaBlend)
-          .withAlpha(kFocusAlpha),
-      highlightColor: baseColor
-          .blendAlpha(
-              Colors.white, kHighlightAlphaBlend + kAltPrimaryAlphaBlend)
-          .withAlpha(kHighlightAlpha),
-      splashColor: baseColor
-          .blendAlpha(Colors.white, kSplashAlphaBlend + kAltPrimaryAlphaBlend)
-          .withAlpha(kSplashAlpha),
-      disabledColor: baseColor
-          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-          .withAlpha(kDisabledForegroundAlpha),
-      disabledBorderColor: baseColor
-          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-          .withAlpha(kDisabledBackgroundAlpha),
-      borderRadius: BorderRadius.circular(radius ?? kButtonRadius),
-      constraints: BoxConstraints(
-        // ToggleButtons draws its border outside its constraints, the
-        // ShapeBorder on ElevatedButton, OutlinedButton and TextButton keep
-        // their border inside its size constraints, to make ToggleButtons
-        // same sized, we must adjust the min size shared constraint with
-        // the border width for every side as well as make the VisualDensity
-        // adjustment that the other buttons do via Theme automatically
-        // based on theme setting, to do so this theme can accept a
-        // VisualDensity property. Give it the same value that your theme
-        // uses. This defaults to same value that ThemeData uses by default.
-        minWidth: minButtonSize.width -
-            borderWidth * 2 +
-            usedVisualDensity.baseSizeAdjustment.dx,
-        minHeight: minButtonSize.height -
-            borderWidth * 2 +
-            usedVisualDensity.baseSizeAdjustment.dy,
-      ),
-    );
-  }
-
-  /// An opinionated [OutlineInputBorder] or [UnderlineInputBorder] using
-  /// [InputDecorationTheme], with optional fill color and adjustable
-  /// corner radius.
-  ///
-  /// Requires a [ColorScheme] in [colorScheme]. The color
-  /// scheme would typically be equal the color scheme also used to define the
-  /// color scheme for your app theme.
-  ///
-  /// The corner [radius] can be adjusted, it defaults to
-  /// [kInputDecoratorRadius] (20), which currently matches the border radius
-  /// default used used on buttons in M3 specification. This value is not
-  /// specified in the M3 design guide, and this default border radius may be
-  /// changed later to match the M3 spec when it is known.
-  static InputDecorationTheme inputDecorationTheme({
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    required final ColorScheme colorScheme,
-
-    /// Selects which color from the passed in colorScheme to use for the border
-    /// and fill color of the input decorator.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.primary] will be used.
-    final SchemeColor? baseSchemeColor,
-
-    /// The decorated input fields corner border radius.
-    ///
-    /// If not defined, defaults to [kInputDecoratorRadius] 20dp.
-    ///
-    /// Was not specified in M3 guide what it should be.
-    /// Will be adjusted when known. Now set to same as button radius (20dp), so
-    /// it matches them. The M3 design intent may also be that it should
-    /// be same as FAB and Drawer, ie 16dp.
-    final double? radius,
-
-    /// Selects input border type.
-    ///
-    /// Defaults to [FlexInputBorderType.outline].
-    final FlexInputBorderType borderType = FlexInputBorderType.outline,
-
-    /// If true the decoration's container is filled with [fillColor].
-    ///
-    /// Typically this field set to true if [border] is an
-    /// [UnderlineInputBorder].
-    ///
-    /// The decoration's container is the area, defined by the border's
-    /// [InputBorder.getOuterPath], which is filled if [filled] is
-    /// true and bordered per the [border].
-    ///
-    /// Defaults to true.
-    final bool filled = true,
-
-    /// An optional totally custom fill color used to fill the
-    /// `InputDecorator` background with, when `filled` is true.
-    ///
-    /// If null, defaults to color scheme color defined by `baseColor`
-    /// withAlpha(0x0D) (5%) if color scheme is light and withAlpha(0x14) (8%)
-    /// if color scheme is dark.
-    final Color? fillColor,
-
-    /// The border width when the input is selected.
-    ///
-    /// Defaults to 2.0.
-    final double focusedBorderWidth = kThickBorderWidth,
-
-    /// The border width when the input is unselected or disabled.
-    ///
-    /// Defaults to 1.5.
-    final double unfocusedBorderWidth = kThinBorderWidth,
-
-    /// Horizontal padding on either side of the border's
-    /// [InputDecoration.labelText] width gap.
-    ///
-    /// Defaults to 4, which is also the default in SDK default input decorator.
-    final double gapPadding = 4,
-
-    /// Unfocused input decoration has a border.
-    ///
-    /// Defaults to true.
-    ///
-    /// Applies to both outline and underline mode. You would typically
-    /// use this in a design where you use a fill color and want unfocused
-    /// input fields to only be highlighted by the fill color and not even
-    /// have an unfocused input border style.
-    ///
-    /// When set to false, there is no border bored on states enabledBorder and
-    /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
-    /// and errorBorder, so error thus has a border also when it is not focused.
-    final bool unfocusedHasBorder = true,
-
-    /// Unfocused input decoration border uses the color baseScheme color.
-    ///
-    /// Applies to both outline and underline mode.
-    ///
-    /// When set to true, the unfocused borders also uses the [baseSchemeColor]
-    /// as its border color, but with alpha [kEnabledBorderAlpha] (90%).
-    ///
-    /// If set to false, the color uses the SDK default unselected border color,
-    /// which is [ColorScheme.onSurface] with 38% opacity.
-    ///
-    /// The unfocused border color selection also applies to it hovered state.
-    ///
-    /// Defaults to true.
-    final bool unfocusedBorderIsColored = true,
-  }) {
-    // Get selected color, defaults to primary.
-    final Color baseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
-
-    final Color usedFillColor = fillColor ??
-        (colorScheme.brightness == Brightness.dark
-            ? baseColor.withAlpha(kFillColorAlphaDark)
-            : baseColor.withAlpha(kFillColorAlphaLight));
-
-    final Color enabledBorder = unfocusedBorderIsColored
-        ? baseColor.withAlpha(kEnabledBorderAlpha)
-        : colorScheme.onSurface.withOpacity(0.38);
-
-    final double effectiveRadius = radius ?? kInputDecoratorRadius;
-
-    switch (borderType) {
-      case FlexInputBorderType.outline:
-        return InputDecorationTheme(
-          floatingLabelStyle:
-              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.error) &&
-                states.contains(MaterialState.focused)) {
-              return TextStyle(color: colorScheme.error);
-            }
-            if (states.contains(MaterialState.error)) {
-              return TextStyle(
-                color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-              );
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return TextStyle(
-                color: baseColor
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha),
-              );
-            }
-            return TextStyle(color: baseColor);
-          }),
-          filled: filled,
-          fillColor: usedFillColor,
-          hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
-          focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
-          focusedBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: BorderSide(
-              color: baseColor,
-              width: focusedBorderWidth,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: unfocusedHasBorder
-                ? BorderSide(
-                    color: enabledBorder,
-                    width: unfocusedBorderWidth,
-                  )
-                : BorderSide.none,
-          ),
-          disabledBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: unfocusedHasBorder
-                ? BorderSide(
-                    color: baseColor
-                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                        .withAlpha(kDisabledBackgroundAlpha),
-                    width: unfocusedBorderWidth,
-                  )
-                : BorderSide.none,
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: BorderSide(
-              color: colorScheme.error,
-              width: focusedBorderWidth,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: BorderSide(
-              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-              width: unfocusedBorderWidth,
-            ),
-          ),
-        );
-      case FlexInputBorderType.underline:
-        return InputDecorationTheme(
-          floatingLabelStyle:
-              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.error) &&
-                states.contains(MaterialState.focused)) {
-              return TextStyle(color: colorScheme.error);
-            }
-            if (states.contains(MaterialState.error)) {
-              return TextStyle(
-                color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-              );
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return TextStyle(
-                color: baseColor
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha),
-              );
-            }
-            return TextStyle(color: baseColor);
-          }),
-          filled: filled,
-          fillColor: usedFillColor,
-          hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
-          focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
-          focusedBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: BorderSide(
-              color: baseColor,
-              width: focusedBorderWidth,
-            ),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: unfocusedHasBorder
-                ? BorderSide(
-                    color: enabledBorder,
-                    width: unfocusedBorderWidth,
-                  )
-                : BorderSide.none,
-          ),
-          disabledBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: unfocusedHasBorder
-                ? BorderSide(
-                    color: baseColor
-                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                        .withAlpha(kDisabledBackgroundAlpha),
-                    width: unfocusedBorderWidth,
-                  )
-                : BorderSide.none,
-          ),
-          focusedErrorBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: BorderSide(
-              color: colorScheme.error,
-              width: focusedBorderWidth,
-            ),
-          ),
-          errorBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: BorderSide(
-              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-              width: unfocusedBorderWidth,
-            ),
-          ),
-        );
-    }
-  }
-
-  /// An opinionated [FloatingActionButtonThemeData] with custom border radius.
-  ///
-  /// The border radius defaults to [kDefaultRadius] = 16, the new M3 default.
-  /// https://m3.material.io/components/floating-action-button/specs
-  ///
-  /// By setting [useShape] to false, it is possible to opt out of all
-  /// shape theming on FABs and keep their M2 defaults, while still eg.
-  /// keeping M3 defaults on other widgets or changing their border radius
-  /// with the shared global value.
-  ///
-  /// You may want to continue to keep the FAB circular and extended FAB stadium
-  /// (pill) shaped as before, despite otherwise using a rounder or M3 design.
-  /// The circular M2 FAB goes well with those designs too and is more familiar.
-  static FloatingActionButtonThemeData floatingActionButtonTheme({
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    ///
-    /// Unlike most other sub-themes that can use a passed in [ColorScheme],
-    /// this one is optional. If not provided, the FABs default themed
-    /// foreground and background colors are used. If a [colorScheme] is given,
-    /// the color to use as FAB background color can be selected with the
-    /// [backgroundSchemeColor] parameter.
-    ///
-    /// The optional colorScheme and its behavior was used to keep the API of
-    /// this function backwards compatible with previous versions.
-    final ColorScheme? colorScheme,
-
-    /// Select which color from the passed in [colorScheme] parameter to use as
-    /// the floating action button background color.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, or if passed in [colorScheme] is null, then
-    /// [theme.colorScheme.secondary] will be used via FAB widget's default
-    /// un-themed color behavior.
-    ///
-    /// The foreground color automatically uses the selected background
-    /// color's contrast color pair in the passed in [colorScheme] property.
-    final SchemeColor? backgroundSchemeColor,
-
-    /// Corner radius of the [FloatingActionButton].
-    ///
-    /// If not defined, defaults to [kFabRadius] 16dp,
-    /// based on M3 Specification
-    /// https://m3.material.io/components/floating-action-button/specs
-    final double? radius,
-
-    /// Set to false, to not apply Shape theming to the FAB.
-    ///
-    /// If set to false, the Shape property will be kept null, regardless
-    /// of what border radius was given. This results in that the FAB
-    /// using fab theme data, will use and implement its SDK default
-    /// shape behavior.
-    final bool useShape = true,
-  }) {
-    final Color? background = colorScheme == null
-        ? null
-        : backgroundSchemeColor == null
-            ? null
-            : schemeColor(backgroundSchemeColor, colorScheme);
-    final Color? foreground = background == null ||
-            colorScheme == null ||
-            backgroundSchemeColor == null
-        ? null
-        : schemeColorPair(backgroundSchemeColor, colorScheme);
-    return FloatingActionButtonThemeData(
-      foregroundColor: foreground,
-      backgroundColor: background,
-      shape: useShape
-          ? RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(radius ?? kFabRadius),
-              ),
-            )
-          : null,
-    );
-  }
-
-  /// An opinionated [ChipThemeData] theme with custom border radius and a
-  /// custom theme that partially mimics the M3 style and works well with
-  /// FlexColorScheme surface blends.
-  ///
-  /// The border radius defaults to 8dp [kChipRadius], new M3 default.
-  /// https://m3.material.io/components/chips/specs
-  ///
-  /// This is inspired by M3 Chip design and applies it using the limited
-  /// theming features for old M2 chips in Flutter, to some extent. It is
-  /// tricky to get this theme to play nicely, but this setup is pretty ok
-  /// and fits well with the FlexColorScheme color blended themes.
-  ///
-  /// It is possible that there will be new Chips entirely for Material 3 in
-  /// Flutter. This theme brings the M2 Chips look closer to M3 design, but
-  /// cannot reach it all the way.
-  static ChipThemeData chipTheme({
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    required final ColorScheme colorScheme,
-
-    /// Select which color from the passed in [ColorScheme] to use as the
-    /// chip themes main color.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.primary] will be used.
-    final SchemeColor? baseSchemeColor,
-
-    /// The style to be applied to the chip's label.
-    ///
-    /// This only has an effect on label widgets that respect the
-    /// [DefaultTextStyle], such as [Text].
-    required TextStyle labelStyle,
-
-    /// Corner radius of the Chip.
-    ///
-    /// If not defined, defaults to [kChipRadius] 8dp,
-    /// based on M3 Specification
-    /// https://m3.material.io/components/chips/specs
-    final double? radius,
-  }) {
-    // Get base color, defaults to primary.
-    final Color usedBaseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
-
-    // Foreground color for all Chips except disabled Chip.
-    final Color foreground = usedBaseColor.blendAlpha(
-        colorScheme.onSurface, kChipForegroundAlphaBlend);
-    // For selected InputChip & ChoiceChip.
-    final Color selectedBackgroundColor = usedBaseColor.blendAlpha(
-        colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
-    // Text color, uses the foreground color for all chip styles.
-    final TextStyle effectiveLabelStyle =
-        labelStyle.copyWith(color: foreground);
-
-    return ChipThemeData(
-      brightness: ThemeData.estimateBrightnessForColor(colorScheme.primary),
-      padding: const EdgeInsets.all(4),
-      // For all Chip types, except disabled, InputChip & ChoiceChip.
-      backgroundColor: usedBaseColor.blendAlpha(
-          colorScheme.surface, kChipBackgroundAlphaBlend),
-      selectedColor: selectedBackgroundColor, // Selected InputChip
-      secondarySelectedColor: selectedBackgroundColor, // Selected ChoiceChip
-      checkmarkColor: foreground,
-      deleteIconColor: usedBaseColor,
-      // Same formula as on Elevated button and ToggleButtons. The Chip has
-      // a built in scrim for disabled state, making it look a bit different,
-      // but it is pretty close.
-      disabledColor: usedBaseColor
-          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-          .withAlpha(kDisabledBackgroundAlpha),
-      // Same label style on selected and not selected chips, their different
-      // background style make them stand out enough.
-      labelStyle: effectiveLabelStyle,
-      secondaryLabelStyle: effectiveLabelStyle,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(radius ?? kChipRadius),
-        ),
-      ),
-    );
-  }
-
-  /// An opinionated [CardTheme] with custom corner radius and elevation.
-  ///
-  /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
-  /// defaults to [kCardElevation] = 0.
-  ///
-  /// The corner radius 12 is the new default on Cards in M3
-  /// [specification](https://m3.material.io/components/cards/specs).
-  static CardTheme cardTheme({
-    /// Corner radius
-    ///
-    /// If not defined, defaults to [kCardRadius] 12dp,
-    /// based on M3 Specification
-    /// https://m3.material.io/components/cards/specs
-    final double? radius,
-
-    /// Card elevation defaults to [kCardElevation] = 0.
-    final double elevation = kCardElevation,
-
-    /// The clipBehavior of the card theme, defaults to
-    /// [Clip.antiAlias] for smooth clipping when using rounded corners.
-    ///
-    /// There is no config property in [FlexSubThemesData] for [clipBehavior],
-    /// if needed it can be exposed. Feel free to make a PR or submit an issue.
-    final Clip clipBehavior = Clip.antiAlias,
-  }) =>
-      CardTheme(
-        clipBehavior: clipBehavior,
-        elevation: elevation,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kCardRadius),
-          ),
-        ),
-      );
-
-  /// An opinionated [PopupMenuThemeData] with custom corner radius.
-  ///
-  /// Corner [radius] defaults to [kMenuRadius] (4) and [elevation] to
-  /// [kPopupMenuElevation] (2), Flutter SDK default is (8).
-  ///
-  /// When used by [FlexColorScheme] the corner radius of popup menus follows
-  /// the global [FlexSubThemeData.defaultRadius] if defined, until and
-  /// including 10 dp. After which it stays at 10 dp. If you need a higher
-  /// corner radius on popup menus than 10 dp, with [FlexColorScheme]
-  /// you will have to explicitly override
-  /// [FlexSubThemeData.popupMenuRadius].
-  ///
-  /// It will not look very good when it is
-  /// over 10dp. The highlight inside the menu will start to overflow the
-  /// corners and is not clipped along the border radius. The underlying Widget
-  /// is not designed with this high border rounding in mind. This makes sense
-  /// since it does not look good with too much rounding on a small menu.
-  ///
-  /// The built-in behavior in FlexColorScheme allows it to match at low
-  /// inherited radius values from [FlexSubThemeData.defaultRadius] but to
-  /// also stay below the usable max rounding automatically at higher global
-  /// border radius values.
-  static PopupMenuThemeData popupMenuTheme({
-    /// Popup menu corner radius.
-    ///
-    /// Defaults to [kMenuRadius] = 4, M3 specification.
-    final double? radius,
-
-    /// Popup menu elevation defaults to 3, making it more subtle.
-    final double elevation = kPopupMenuElevation,
-
-    /// The background color of the popup menu.
-    final Color? color,
-  }) =>
-      PopupMenuThemeData(
-        elevation: elevation,
-        color: color,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kMenuRadius),
-          ),
-        ),
-      );
-
-  // TODO(rydmike): Consider a SliderTheme with value popup using primary blend.
-
-  // TODO(rydmike): No padding in Flutter dialog theme, add when available.
-  // The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp.
-
-  /// An opinionated [DialogTheme] with custom corner radius and elevation.
-  ///
-  /// Corner [radius] defaults to [kDialogRadius] = 28 and [elevation] to
-  /// [kDialogElevation] = 10.
-  ///
-  /// The default radius follows Material M3 guide
-  /// [specification](https://m3.material.io/components/dialogs/specs).
-  static DialogTheme dialogTheme({
-    /// Dialog background color.
-    ///
-    /// Defaults to null and gets default via Dialog's default null theme
-    /// behavior.
-    ///
-    /// Can be used to make a custom themed dialog with own background color,
-    /// even after the [ThemeData.dialogBackgroundColor] property is
-    /// is deprecated in Flutter SDK. Which it will be in 2022, see
-    /// [issue](https://github.com/flutter/flutter/issues/91772).
-    final Color? backgroundColor,
-
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    final ColorScheme? colorScheme,
-
-    /// Selects which color from the passed in [colorScheme] to use as
-    /// dialog background color.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined or [colorScheme] is not defined, then the passed in
-    /// [backgroundColor] will be used, which may be null too and dialog then
-    /// falls back to Flutter SDK dialog background color
-    /// [ThemeData.dialogBackgroundColor] which is [ColorScheme.background].
-    ///
-    /// FlexColorScheme uses this property via [FlexSubThemesData] and defines
-    /// its default as [SchemeColor.surface].
-    final SchemeColor? backgroundSchemeColor,
-
-    /// Corner radius of the dialog.
-    ///
-    /// If not defined, defaults to [kDialogRadius] 28dp,
-    /// based on M3 Specification
-    /// https://m3.material.io/components/dialogs/specs
-    final double? radius,
-
-    /// Dialog elevation defaults to 10 [kDialogElevation].
-    final double? elevation = kDialogElevation,
-  }) {
-    final Color? background =
-        (colorScheme == null || backgroundSchemeColor == null)
-            ? backgroundColor // might be null, then SDK theme defaults.
-            : schemeColor(backgroundSchemeColor, colorScheme);
-
-    return DialogTheme(
-      elevation: elevation,
-      backgroundColor: background,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(radius ?? kDialogRadius),
-        ),
-      ),
-    );
-  }
-
-  /// An opinionated [TimePickerThemeData] with custom corner radius.
-  ///
-  /// Corner [radius] defaults to [kDialogRadius] 28dp. The internal shapes
-  /// in the picker also have rounding, their corner radii are defined by
-  /// [elementRadius] that defaults to [kCardRadius] 12.
-  ///
-  /// In the InputDecorator, if you pass it an input decoration style
-  /// that matches the main input decoration style and corner rounding it
-  /// will be used on the data entry elements in the picker.
-  static TimePickerThemeData timePickerTheme({
-    /// Pass in value you will you in your ThemeData use for your main
-    /// [DialogTheme], if you let
-    ///
-    /// If null and [colorScheme] and [backgroundSchemeColor] are also not
-    /// defined, this dialog defaults to using [ColorScheme.surface] color and
-    /// it may not match dialog color used by other dialogs that use
-    /// [ColorScheme.background] by default, this is a peculiar default behavior
-    /// in Flutter SDK.
-    final Color? backgroundColor,
-
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    final ColorScheme? colorScheme,
-
-    /// Selects which color from the passed in colorScheme to use as the dialog
-    /// background color.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined or [colorScheme] is not defined, then the passed in
-    /// [backgroundColor] will be used, which may be null too and dialog then
-    /// falls back to Flutter SDK value for TimePickerDialog, which is
-    /// [colorScheme.surface].
-    ///
-    /// FlexColorScheme sub-theming uses this property to match the background
-    /// color of this dialog to other standard dialogs. It sets it via
-    /// [FlexSubThemesData] to [SchemeColor.background].
-    final SchemeColor? backgroundSchemeColor,
-
-    /// Outer corner radius.
-    ///
-    /// If not defined, defaults to [kDialogRadius] 28dp,
-    /// based on M3 Specification
-    /// https://m3.material.io/components/dialogs/specs
-    final double? radius,
-
-    /// Elements corner radius.
-    ///
-    /// Defaults to [kCardRadius] = 12.
-    final double? elementRadius,
-
-    /// An input decoration theme, for the time picker.
-    ///
-    /// You would typically pass in one that matches the main used input
-    /// decoration theme in order to get same input style with possible
-    /// rounding used in the app otherwise on the input fields in the picker.
-    ///
-    /// It adds the custom overrides to the passed in decorator, that the widget
-    /// does internally to the default null InputDecorationTheme. There is
-    /// no need to add those in the passed in InputDecorationTheme. Just pass
-    /// in your overall used app InputDecorationTheme.
-    final InputDecorationTheme? inputDecorationTheme,
-  }) {
-    final Color? background =
-        (colorScheme == null || backgroundSchemeColor == null)
-            ? backgroundColor // might be null, then SDK theme defaults.
-            : schemeColor(backgroundSchemeColor, colorScheme);
-
-    return TimePickerThemeData(
-      backgroundColor: background,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(radius ?? kDialogRadius),
-        ),
-      ),
-      hourMinuteShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(elementRadius ?? kCardRadius),
-        ),
-      ),
-      dayPeriodShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(elementRadius ?? kCardRadius),
-        ),
-      ),
-      // Custom additions the Widget does internally, but for some reason
-      // only does to null default theme. If you use a custom decorator
-      // you are supposed to know that you have to add these shenanigans
-      // for it to work and look right.
-      inputDecorationTheme: inputDecorationTheme?.copyWith(
-            contentPadding: EdgeInsets.zero,
-            // Prevent the error text from appearing.
-            // See https://github.com/flutter/flutter/issues/54104
-            errorStyle: const TextStyle(fontSize: 0, height: 0),
-          ) ??
-          const InputDecorationTheme().copyWith(
-            contentPadding: EdgeInsets.zero,
-            // Prevent the error text from appearing.
-            // See https://github.com/flutter/flutter/issues/54104
-            errorStyle: const TextStyle(fontSize: 0, height: 0),
-          ),
-    );
-  }
-
-  // TODO(rydmike): SnackBar needs two different corner radius versions.
-  //   The pinned one should not have a shape, but the floating one should.
-  //   Not possible to do via its theme, if it could be then the floating one
-  //   should follow the themed corner radius setting and pinned one
-  //   remain straight. The SnackBar implements different shapes for its
-  //   enum based [SnackBarBehavior], but only if [Shape] property is null:
-  //     If null, [SnackBar] provides different defaults depending on the
-  //     [SnackBarBehavior]. For [SnackBarBehavior.fixed], no overriding shape
-  //     is specified, so the [SnackBar] is rectangular. For
-  //     [SnackBarBehavior.floating], it uses a [RoundedRectangleBorder] with a
-  //     circular corner radius of 4.0.
-  //   Maybe open an issue about the limitation that corner radius on none
-  //   pinned one cannot be changed via theme while keeping straight one
-  //   straight. However, I think M3 will need it too, so it might come then.
-
-  /// An opinionated [SnackBarThemeData] with custom elevation.
-  ///
-  /// THe [elevation] defaults to [kSnackBarElevation] (4).
-  static SnackBarThemeData snackBarTheme({
-    /// SnackBar elevation defaults to [kSnackBarElevation] 4.
-    final double? elevation = kSnackBarElevation,
-
-    /// The background color of the themed SnackBar. Typically one of inverse
-    /// brightness compared to theme's surface color brightness.
-    ///
-    /// If null, then FlexColorScheme (FCS) sets onw default when used via
-    /// FlexSubThemesData as follows, the SDK default is used if this is not
-    /// used via FlexSubThemesData:
-    ///
-    /// * In light theme mode:
-    ///   * FCS: onSurface with primary blend at 45% opacity, with
-    ///     total opacity 95%
-    ///   * Flutter SDK uses: onSurface with surface at opacity 80%, blended on
-    ///     top of surface.
-    ///
-    /// * In dark theme mode:
-    ///   * FCS: onSurface with primary blend at 39% opacity, with total
-    ///     opacity 93%
-    ///   * Flutter SDK uses: colorScheme.onSurface
-    ///
-    /// SnackBar uses ColorScheme.inverseSurface in M3 schemes.
-    /// While FlexColorScheme has own custom default primary tinted SnackBar
-    /// color, it can also easily be themed also to [ColorScheme.inverseSurface]
-    /// via the [backgroundSchemeColor].
-    final Color? backgroundColor,
-
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    final ColorScheme? colorScheme,
-
-    /// Selects which color from the passed in [colorScheme] to use as
-    /// dialog background color.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined or [colorScheme] is not defined, then the passed in
-    /// [backgroundColor] will be used, which may be null too and dialog then
-    /// falls back to to dark grey: `Color(0xFF323232)`, via M2
-    /// Flutter SDK defaults if not defined.
-    ///
-    /// FlexColorScheme uses this property via [FlexSubThemesData] and defines
-    /// its default as [SchemeColor.surface].
-    final SchemeColor? backgroundSchemeColor,
-  }) {
-    final Color? background =
-        (colorScheme == null || backgroundSchemeColor == null)
-            ? backgroundColor // might be null, then SDK theme defaults.
-            : schemeColor(backgroundSchemeColor, colorScheme);
-
-    final Color? foreground =
-        (colorScheme != null && backgroundSchemeColor != null)
-            ? schemeColorPair(backgroundSchemeColor, colorScheme)
-            : background != null
-                ? ThemeData.estimateBrightnessForColor(background) ==
-                        Brightness.light
-                    ? Colors.black
-                    : Colors.white
-                : null;
-
-    final TextStyle? snackTextStyle = foreground != null
-        ? ThemeData(brightness: Brightness.light)
-            .textTheme
-            .titleMedium!
-            .copyWith(color: foreground)
-        : null;
-
-    return SnackBarThemeData(
-      elevation: elevation,
-      backgroundColor: background,
-      contentTextStyle: snackTextStyle,
-    );
-  }
-
-  /// An opinionated [BottomSheetThemeData] with custom top corner
-  /// radius.
-  ///
-  /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 16,
-  /// [elevation] to [kBottomSheetElevation] = 4 and [modalElevation] to
-  /// [kBottomSheetModalElevation] = 8.
-  static BottomSheetThemeData bottomSheetTheme({
-    /// The corner radius of the top corners.
-    ///
-    /// If not defined, defaults to [kBottomSheetBorderRadius] 16p.
-    ///
-    /// This value is not mentioned in the M3 Specification.
-    /// It is based on an assumption that a sliding in
-    /// surface from the bottom should have the same rounding on its top corners
-    /// as the [Drawer] does on its visible side edges.
-    /// https://m3.material.io/components/navigation-drawer/specs
-    final double? radius,
-
-    /// The bottom sheet elevation defaults to [kBottomSheetElevation] = 4.
-    final double elevation = kBottomSheetElevation,
-
-    /// The bottom sheet elevation defaults to [kBottomSheetModalElevation] = 8.
-    final double modalElevation = kBottomSheetModalElevation,
-
-    /// The clipBehavior of the bottom sheet theme, defaults to
-    /// [Clip.antiAlias] for smoother clipping when using rounded corners.
-    ///
-    /// This property is not available in [FlexSubThemeData] but you can use
-    /// it if you otherwise use this as theme helper.
-    final Clip clipBehavior = Clip.antiAlias,
-  }) =>
-      BottomSheetThemeData(
-        clipBehavior: clipBehavior,
-        elevation: elevation,
-        modalElevation: modalElevation,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(radius ?? kBottomSheetBorderRadius),
-            topRight: Radius.circular(radius ?? kBottomSheetBorderRadius),
-          ),
-        ),
-      );
 
   /// An opinionated [BottomNavigationBarThemeData] with custom elevation.
   ///
@@ -2284,6 +834,763 @@ class FlexSubThemes {
       type: type,
       landscapeLayout: landscapeLayout,
     );
+  }
+
+  /// An opinionated [BottomSheetThemeData] with custom top corner
+  /// radius.
+  ///
+  /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 16,
+  /// [elevation] to [kBottomSheetElevation] = 4 and [modalElevation] to
+  /// [kBottomSheetModalElevation] = 8.
+  static BottomSheetThemeData bottomSheetTheme({
+    /// The corner radius of the top corners.
+    ///
+    /// If not defined, defaults to [kBottomSheetBorderRadius] 16p.
+    ///
+    /// This value is not mentioned in the M3 Specification.
+    /// It is based on an assumption that a sliding in
+    /// surface from the bottom should have the same rounding on its top corners
+    /// as the [Drawer] does on its visible side edges.
+    /// https://m3.material.io/components/navigation-drawer/specs
+    final double? radius,
+
+    /// The bottom sheet elevation defaults to [kBottomSheetElevation] = 4.
+    final double elevation = kBottomSheetElevation,
+
+    /// The bottom sheet elevation defaults to [kBottomSheetModalElevation] = 8.
+    final double modalElevation = kBottomSheetModalElevation,
+
+    /// The clipBehavior of the bottom sheet theme, defaults to
+    /// [Clip.antiAlias] for smoother clipping when using rounded corners.
+    ///
+    /// This property is not available in [FlexSubThemeData] but you can use
+    /// it if you otherwise use this as theme helper.
+    final Clip clipBehavior = Clip.antiAlias,
+  }) =>
+      BottomSheetThemeData(
+        clipBehavior: clipBehavior,
+        elevation: elevation,
+        modalElevation: modalElevation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(radius ?? kBottomSheetBorderRadius),
+            topRight: Radius.circular(radius ?? kBottomSheetBorderRadius),
+          ),
+        ),
+      );
+
+  /// An opinionated [CardTheme] with custom corner radius and elevation.
+  ///
+  /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
+  /// defaults to [kCardElevation] = 0.
+  ///
+  /// The corner radius 12 is the new default on Cards in M3
+  /// [specification](https://m3.material.io/components/cards/specs).
+  static CardTheme cardTheme({
+    /// Corner radius
+    ///
+    /// If not defined, defaults to [kCardRadius] 12dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/cards/specs
+    final double? radius,
+
+    /// Card elevation defaults to [kCardElevation] = 0.
+    final double elevation = kCardElevation,
+
+    /// The clipBehavior of the card theme, defaults to
+    /// [Clip.antiAlias] for smooth clipping when using rounded corners.
+    ///
+    /// There is no config property in [FlexSubThemesData] for [clipBehavior],
+    /// if needed it can be exposed. Feel free to make a PR or submit an issue.
+    final Clip clipBehavior = Clip.antiAlias,
+  }) =>
+      CardTheme(
+        clipBehavior: clipBehavior,
+        elevation: elevation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? kCardRadius),
+          ),
+        ),
+      );
+
+  /// An opinionated [CheckboxThemeData] theme.
+  ///
+  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The splashRadius is not used by FlexColorScheme sub-themes.
+  static CheckboxThemeData checkboxTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the checkbox.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.secondary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The splash radius of the circular Material ink response.
+    ///
+    /// Defaults to kRadialReactionRadius = 20.
+    final double? splashRadius,
+
+    /// Defines if unselected [Checkbox] is also themed to be [baseSchemeColor].
+    ///
+    /// If false, it is grey like in Flutter SDK. Defaults to true.
+    final bool unselectedIsColored = true,
+  }) {
+    // Get selected color, defaults to secondary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+    final bool isLight = colorScheme.brightness == Brightness.light;
+
+    return CheckboxThemeData(
+      splashRadius: splashRadius,
+      checkColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.grey.shade200 : Colors.grey.shade600;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return onBaseColor;
+          }
+          return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
+        },
+      ),
+      fillColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return baseColor;
+          }
+          // Opinionated color on unselected checkbox.
+          if (unselectedIsColored) {
+            return baseColor.withAlpha(0xDD);
+          }
+          // This is SDK default.
+          return isLight ? Colors.black54 : Colors.white70;
+        },
+      ),
+    );
+  }
+
+  /// An opinionated [ChipThemeData] theme with custom border radius and a
+  /// custom theme that partially mimics the M3 style and works well with
+  /// FlexColorScheme surface blends.
+  ///
+  /// The border radius defaults to 8dp [kChipRadius], new M3 default.
+  /// https://m3.material.io/components/chips/specs
+  ///
+  /// This is inspired by M3 Chip design and applies it using the limited
+  /// theming features for old M2 chips in Flutter, to some extent. It is
+  /// tricky to get this theme to play nicely, but this setup is pretty ok
+  /// and fits well with the FlexColorScheme color blended themes.
+  ///
+  /// It is possible that there will be new Chips entirely for Material 3 in
+  /// Flutter. This theme brings the M2 Chips look closer to M3 design, but
+  /// cannot reach it all the way.
+  static ChipThemeData chipTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Select which color from the passed in [ColorScheme] to use as the
+    /// chip themes main color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The style to be applied to the chip's label.
+    ///
+    /// This only has an effect on label widgets that respect the
+    /// [DefaultTextStyle], such as [Text].
+    required TextStyle labelStyle,
+
+    /// Corner radius of the Chip.
+    ///
+    /// If not defined, defaults to [kChipRadius] 8dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/chips/specs
+    final double? radius,
+  }) {
+    // Get base color, defaults to primary.
+    final Color usedBaseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    // Foreground color for all Chips except disabled Chip.
+    final Color foreground = usedBaseColor.blendAlpha(
+        colorScheme.onSurface, kChipForegroundAlphaBlend);
+    // For selected InputChip & ChoiceChip.
+    final Color selectedBackgroundColor = usedBaseColor.blendAlpha(
+        colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+    // Text color, uses the foreground color for all chip styles.
+    final TextStyle effectiveLabelStyle =
+        labelStyle.copyWith(color: foreground);
+
+    return ChipThemeData(
+      brightness: ThemeData.estimateBrightnessForColor(colorScheme.primary),
+      padding: const EdgeInsets.all(4),
+      // For all Chip types, except disabled, InputChip & ChoiceChip.
+      backgroundColor: usedBaseColor.blendAlpha(
+          colorScheme.surface, kChipBackgroundAlphaBlend),
+      selectedColor: selectedBackgroundColor, // Selected InputChip
+      secondarySelectedColor: selectedBackgroundColor, // Selected ChoiceChip
+      checkmarkColor: foreground,
+      deleteIconColor: usedBaseColor,
+      // Same formula as on Elevated button and ToggleButtons. The Chip has
+      // a built in scrim for disabled state, making it look a bit different,
+      // but it is pretty close.
+      disabledColor: usedBaseColor
+          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+          .withAlpha(kDisabledBackgroundAlpha),
+      // Same label style on selected and not selected chips, their different
+      // background style make them stand out enough.
+      labelStyle: effectiveLabelStyle,
+      secondaryLabelStyle: effectiveLabelStyle,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kChipRadius),
+        ),
+      ),
+    );
+  }
+
+  // TODO(rydmike): No padding in Flutter dialog theme, add when available.
+  // The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp.
+  /// An opinionated [DialogTheme] with custom corner radius and elevation.
+  ///
+  /// Corner [radius] defaults to [kDialogRadius] = 28 and [elevation] to
+  /// [kDialogElevation] = 10.
+  ///
+  /// The default radius follows Material M3 guide
+  /// [specification](https://m3.material.io/components/dialogs/specs).
+  static DialogTheme dialogTheme({
+    /// Dialog background color.
+    ///
+    /// Defaults to null and gets default via Dialog's default null theme
+    /// behavior.
+    ///
+    /// Can be used to make a custom themed dialog with own background color,
+    /// even after the [ThemeData.dialogBackgroundColor] property is
+    /// is deprecated in Flutter SDK. Which it will be in 2022, see
+    /// [issue](https://github.com/flutter/flutter/issues/91772).
+    final Color? backgroundColor,
+
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    final ColorScheme? colorScheme,
+
+    /// Selects which color from the passed in [colorScheme] to use as
+    /// dialog background color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined or [colorScheme] is not defined, then the passed in
+    /// [backgroundColor] will be used, which may be null too and dialog then
+    /// falls back to Flutter SDK dialog background color
+    /// [ThemeData.dialogBackgroundColor] which is [ColorScheme.background].
+    ///
+    /// FlexColorScheme uses this property via [FlexSubThemesData] and defines
+    /// its default as [SchemeColor.surface].
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Corner radius of the dialog.
+    ///
+    /// If not defined, defaults to [kDialogRadius] 28dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/dialogs/specs
+    final double? radius,
+
+    /// Dialog elevation defaults to 10 [kDialogElevation].
+    final double? elevation = kDialogElevation,
+  }) {
+    final Color? background =
+        (colorScheme == null || backgroundSchemeColor == null)
+            ? backgroundColor // might be null, then SDK theme defaults.
+            : schemeColor(backgroundSchemeColor, colorScheme);
+
+    return DialogTheme(
+      elevation: elevation,
+      backgroundColor: background,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kDialogRadius),
+        ),
+      ),
+    );
+  }
+
+  /// An opinionated [ElevatedButtonThemeData] theme.
+  ///
+  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The button [elevation] defaults to 1 [kElevatedButtonElevation], making
+  /// the elevated button a bit more flat. Flutter SDK ElevatedButton
+  /// defaults to elevation 2.
+  ///
+  /// The adjustable button corner [radius] defaults to 20. This is the new
+  /// default in M3, Flutter SDK M2 defaults to 4.
+  static ElevatedButtonThemeData elevatedButtonTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the button.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The button corner radius.
+    ///
+    /// If not defined, defaults to [kButtonRadius] 20dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/buttons/specs
+    final double? radius,
+
+    /// The button elevation
+    ///
+    /// Defaults to [kElevatedButtonElevation] 1, making it a bit more flat in
+    /// its elevation state than Flutter SDK, that defaults to 2.
+    /// An opinionated choice.
+    final double elevation = kElevatedButtonElevation,
+
+    /// Padding for the button theme.
+    ///
+    /// Defaults to null and uses `styleFrom` constructors default padding.
+    ///
+    /// M3 has more horizontal padding 24dp, but the tighter default padding
+    /// in M2 that is 16dp looks fine as well when using stadium borders
+    /// as in M3.
+    /// Making the custom scalable padding and separate one for icon
+    /// versions is rather involved, so sticking to defaults, but exposing the
+    /// padding property for future or external use.
+    final EdgeInsetsGeometry? padding,
+
+    /// Minimum button size.
+    ///
+    /// Defaults to `kButtonMinSize` = Size(40, 40).
+    final Size minButtonSize = kButtonMinSize,
+  }) {
+    // Get selected color, defaults to primary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+
+    return ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        minimumSize: minButtonSize,
+        padding: padding,
+        elevation: elevation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? kButtonRadius),
+          ),
+        ), //buttonShape,
+      ).copyWith(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledForegroundAlpha);
+            }
+            return onBaseColor;
+          },
+        ),
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledBackgroundAlpha);
+            }
+            return baseColor;
+          },
+        ),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered)) {
+              return onBaseColor.withAlpha(kHoverBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return onBaseColor.withAlpha(kFocusBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return onBaseColor.withAlpha(kPressedBackgroundAlpha);
+            }
+            return Colors.transparent;
+          },
+        ),
+      ),
+    );
+  }
+
+  /// An opinionated [FloatingActionButtonThemeData] with custom border radius.
+  ///
+  /// The border radius defaults to [kDefaultRadius] = 16, the new M3 default.
+  /// https://m3.material.io/components/floating-action-button/specs
+  ///
+  /// By setting [useShape] to false, it is possible to opt out of all
+  /// shape theming on FABs and keep their M2 defaults, while still eg.
+  /// keeping M3 defaults on other widgets or changing their border radius
+  /// with the shared global value.
+  ///
+  /// You may want to continue to keep the FAB circular and extended FAB stadium
+  /// (pill) shaped as before, despite otherwise using a rounder or M3 design.
+  /// The circular M2 FAB goes well with those designs too and is more familiar.
+  static FloatingActionButtonThemeData floatingActionButtonTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    ///
+    /// Unlike most other sub-themes that can use a passed in [ColorScheme],
+    /// this one is optional. If not provided, the FABs default themed
+    /// foreground and background colors are used. If a [colorScheme] is given,
+    /// the color to use as FAB background color can be selected with the
+    /// [backgroundSchemeColor] parameter.
+    ///
+    /// The optional colorScheme and its behavior was used to keep the API of
+    /// this function backwards compatible with previous versions.
+    final ColorScheme? colorScheme,
+
+    /// Select which color from the passed in [colorScheme] parameter to use as
+    /// the floating action button background color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, or if passed in [colorScheme] is null, then
+    /// [theme.colorScheme.secondary] will be used via FAB widget's default
+    /// un-themed color behavior.
+    ///
+    /// The foreground color automatically uses the selected background
+    /// color's contrast color pair in the passed in [colorScheme] property.
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Corner radius of the [FloatingActionButton].
+    ///
+    /// If not defined, defaults to [kFabRadius] 16dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/floating-action-button/specs
+    final double? radius,
+
+    /// Set to false, to not apply Shape theming to the FAB.
+    ///
+    /// If set to false, the Shape property will be kept null, regardless
+    /// of what border radius was given. This results in that the FAB
+    /// using fab theme data, will use and implement its SDK default
+    /// shape behavior.
+    final bool useShape = true,
+  }) {
+    final Color? background = colorScheme == null
+        ? null
+        : backgroundSchemeColor == null
+            ? null
+            : schemeColor(backgroundSchemeColor, colorScheme);
+    final Color? foreground = background == null ||
+            colorScheme == null ||
+            backgroundSchemeColor == null
+        ? null
+        : schemeColorPair(backgroundSchemeColor, colorScheme);
+    return FloatingActionButtonThemeData(
+      foregroundColor: foreground,
+      backgroundColor: background,
+      shape: useShape
+          ? RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kFabRadius),
+              ),
+            )
+          : null,
+    );
+  }
+
+  /// An opinionated [OutlineInputBorder] or [UnderlineInputBorder] using
+  /// [InputDecorationTheme], with optional fill color and adjustable
+  /// corner radius.
+  ///
+  /// Requires a [ColorScheme] in [colorScheme]. The color
+  /// scheme would typically be equal the color scheme also used to define the
+  /// color scheme for your app theme.
+  ///
+  /// The corner [radius] can be adjusted, it defaults to
+  /// [kInputDecoratorRadius] (20), which currently matches the border radius
+  /// default used used on buttons in M3 specification. This value is not
+  /// specified in the M3 design guide, and this default border radius may be
+  /// changed later to match the M3 spec when it is known.
+  static InputDecorationTheme inputDecorationTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use for the border
+    /// and fill color of the input decorator.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The decorated input fields corner border radius.
+    ///
+    /// If not defined, defaults to [kInputDecoratorRadius] 20dp.
+    ///
+    /// Was not specified in M3 guide what it should be.
+    /// Will be adjusted when known. Now set to same as button radius (20dp), so
+    /// it matches them. The M3 design intent may also be that it should
+    /// be same as FAB and Drawer, ie 16dp.
+    final double? radius,
+
+    /// Selects input border type.
+    ///
+    /// Defaults to [FlexInputBorderType.outline].
+    final FlexInputBorderType borderType = FlexInputBorderType.outline,
+
+    /// If true the decoration's container is filled with [fillColor].
+    ///
+    /// Typically this field set to true if [border] is an
+    /// [UnderlineInputBorder].
+    ///
+    /// The decoration's container is the area, defined by the border's
+    /// [InputBorder.getOuterPath], which is filled if [filled] is
+    /// true and bordered per the [border].
+    ///
+    /// Defaults to true.
+    final bool filled = true,
+
+    /// An optional totally custom fill color used to fill the
+    /// `InputDecorator` background with, when `filled` is true.
+    ///
+    /// If null, defaults to color scheme color defined by `baseColor`
+    /// withAlpha(0x0D) (5%) if color scheme is light and withAlpha(0x14) (8%)
+    /// if color scheme is dark.
+    final Color? fillColor,
+
+    /// The border width when the input is selected.
+    ///
+    /// Defaults to 2.0.
+    final double focusedBorderWidth = kThickBorderWidth,
+
+    /// The border width when the input is unselected or disabled.
+    ///
+    /// Defaults to 1.5.
+    final double unfocusedBorderWidth = kThinBorderWidth,
+
+    /// Horizontal padding on either side of the border's
+    /// [InputDecoration.labelText] width gap.
+    ///
+    /// Defaults to 4, which is also the default in SDK default input decorator.
+    final double gapPadding = 4,
+
+    /// Unfocused input decoration has a border.
+    ///
+    /// Defaults to true.
+    ///
+    /// Applies to both outline and underline mode. You would typically
+    /// use this in a design where you use a fill color and want unfocused
+    /// input fields to only be highlighted by the fill color and not even
+    /// have an unfocused input border style.
+    ///
+    /// When set to false, there is no border bored on states enabledBorder and
+    /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
+    /// and errorBorder, so error thus has a border also when it is not focused.
+    final bool unfocusedHasBorder = true,
+
+    /// Unfocused input decoration border uses the color baseScheme color.
+    ///
+    /// Applies to both outline and underline mode.
+    ///
+    /// When set to true, the unfocused borders also uses the [baseSchemeColor]
+    /// as its border color, but with alpha [kEnabledBorderAlpha] (90%).
+    ///
+    /// If set to false, the color uses the SDK default unselected border color,
+    /// which is [ColorScheme.onSurface] with 38% opacity.
+    ///
+    /// The unfocused border color selection also applies to it hovered state.
+    ///
+    /// Defaults to true.
+    final bool unfocusedBorderIsColored = true,
+  }) {
+    // Get selected color, defaults to primary.
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    final Color usedFillColor = fillColor ??
+        (colorScheme.brightness == Brightness.dark
+            ? baseColor.withAlpha(kFillColorAlphaDark)
+            : baseColor.withAlpha(kFillColorAlphaLight));
+
+    final Color enabledBorder = unfocusedBorderIsColored
+        ? baseColor.withAlpha(kEnabledBorderAlpha)
+        : colorScheme.onSurface.withOpacity(0.38);
+
+    final double effectiveRadius = radius ?? kInputDecoratorRadius;
+
+    switch (borderType) {
+      case FlexInputBorderType.outline:
+        return InputDecorationTheme(
+          floatingLabelStyle:
+              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.error) &&
+                states.contains(MaterialState.focused)) {
+              return TextStyle(color: colorScheme.error);
+            }
+            if (states.contains(MaterialState.error)) {
+              return TextStyle(
+                color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              );
+            }
+            if (states.contains(MaterialState.disabled)) {
+              return TextStyle(
+                color: baseColor
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha),
+              );
+            }
+            return TextStyle(color: baseColor);
+          }),
+          filled: filled,
+          fillColor: usedFillColor,
+          hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
+          focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
+          focusedBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
+            borderSide: BorderSide(
+              color: baseColor,
+              width: focusedBorderWidth,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
+            borderSide: unfocusedHasBorder
+                ? BorderSide(
+                    color: enabledBorder,
+                    width: unfocusedBorderWidth,
+                  )
+                : BorderSide.none,
+          ),
+          disabledBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
+            borderSide: unfocusedHasBorder
+                ? BorderSide(
+                    color: baseColor
+                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                        .withAlpha(kDisabledBackgroundAlpha),
+                    width: unfocusedBorderWidth,
+                  )
+                : BorderSide.none,
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: focusedBorderWidth,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            gapPadding: gapPadding,
+            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
+            borderSide: BorderSide(
+              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              width: unfocusedBorderWidth,
+            ),
+          ),
+        );
+      case FlexInputBorderType.underline:
+        return InputDecorationTheme(
+          floatingLabelStyle:
+              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.error) &&
+                states.contains(MaterialState.focused)) {
+              return TextStyle(color: colorScheme.error);
+            }
+            if (states.contains(MaterialState.error)) {
+              return TextStyle(
+                color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              );
+            }
+            if (states.contains(MaterialState.disabled)) {
+              return TextStyle(
+                color: baseColor
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha),
+              );
+            }
+            return TextStyle(color: baseColor);
+          }),
+          filled: filled,
+          fillColor: usedFillColor,
+          hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
+          focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
+          focusedBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
+            ),
+            borderSide: BorderSide(
+              color: baseColor,
+              width: focusedBorderWidth,
+            ),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
+            ),
+            borderSide: unfocusedHasBorder
+                ? BorderSide(
+                    color: enabledBorder,
+                    width: unfocusedBorderWidth,
+                  )
+                : BorderSide.none,
+          ),
+          disabledBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
+            ),
+            borderSide: unfocusedHasBorder
+                ? BorderSide(
+                    color: baseColor
+                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                        .withAlpha(kDisabledBackgroundAlpha),
+                    width: unfocusedBorderWidth,
+                  )
+                : BorderSide.none,
+          ),
+          focusedErrorBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
+            ),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: focusedBorderWidth,
+            ),
+          ),
+          errorBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(effectiveRadius),
+              topRight: Radius.circular(effectiveRadius),
+            ),
+            borderSide: BorderSide(
+              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              width: unfocusedBorderWidth,
+            ),
+          ),
+        );
+    }
   }
 
   /// An opinionated [NavigationBarThemeData] with simpler API.
@@ -3161,6 +2468,697 @@ class FlexSubThemes {
       indicatorColor: effectiveUseIndicator
           ? effectiveIndicatorColor
           : Colors.black.withAlpha(0x00),
+    );
+  }
+
+  /// An opinionated [OutlinedButtonThemeData] theme.
+  ///
+  /// Requires a [ColorScheme]. The color scheme would typically be equal the
+  /// color scheme also used to define the color scheme for your app theme.
+  ///
+  /// The adjustable button corner [radius] defaults to 20. This is the new
+  /// default in M3, Flutter SDK M2 defaults to 4.
+  static OutlinedButtonThemeData outlinedButtonTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the button.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The button corner border radius.
+    ///
+    /// If not defined, defaults to [kButtonRadius] 20dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/buttons/specs
+    final double? radius,
+
+    /// The outline thickness when the button is pressed.
+    ///
+    /// Defaults to 2.0.
+    final double pressedOutlineWidth = kThickBorderWidth,
+
+    /// The outline thickness when the button is not selected and not pressed.
+    ///
+    /// Defaults to 1.5.
+    final double outlineWidth = kThinBorderWidth,
+
+    /// Padding for the button theme.
+    ///
+    /// Defaults to null and uses `styleFrom` constructors default padding.
+    ///
+    /// M3 has more horizontal padding 24dp, but the tighter default padding
+    /// in M2 that is 16dp looks fine as well when using stadium borders
+    /// as in M3.
+    /// Making the custom scalable padding and separate one for icon
+    /// versions is rather involved, so sticking to defaults, but exposing the
+    /// padding property for future or external use.
+    final EdgeInsetsGeometry? padding,
+
+    /// Minimum button size.
+    ///
+    /// Defaults to `kButtonMinSize` = Size(40, 40).
+    final Size minButtonSize = kButtonMinSize,
+  }) {
+    // Get selected color, defaults to primary.
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    return OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        minimumSize: minButtonSize,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? kButtonRadius),
+          ),
+        ), //buttonShape,
+        padding: padding,
+      ).copyWith(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledForegroundAlpha);
+            }
+            return baseColor;
+          },
+        ),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered)) {
+              return baseColor.withAlpha(kHoverBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return baseColor.withAlpha(kFocusBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return baseColor.withAlpha(kPressedBackgroundAlpha);
+            }
+            return Colors.transparent;
+          },
+        ),
+        side: MaterialStateProperty.resolveWith<BorderSide?>(
+          (final Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return BorderSide(
+                color: baseColor
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha),
+                width: outlineWidth,
+              );
+            }
+            if (states.contains(MaterialState.error)) {
+              return BorderSide(
+                color: colorScheme.error,
+                width: pressedOutlineWidth,
+              );
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return BorderSide(
+                color: baseColor,
+                width: pressedOutlineWidth,
+              );
+            }
+            return BorderSide(
+              color: baseColor.withAlpha(kEnabledBorderAlpha),
+              width: outlineWidth,
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  /// An opinionated [PopupMenuThemeData] with custom corner radius.
+  ///
+  /// Corner [radius] defaults to [kMenuRadius] (4) and [elevation] to
+  /// [kPopupMenuElevation] (2), Flutter SDK default is (8).
+  ///
+  /// When used by [FlexColorScheme] the corner radius of popup menus follows
+  /// the global [FlexSubThemeData.defaultRadius] if defined, until and
+  /// including 10 dp. After which it stays at 10 dp. If you need a higher
+  /// corner radius on popup menus than 10 dp, with [FlexColorScheme]
+  /// you will have to explicitly override
+  /// [FlexSubThemeData.popupMenuRadius].
+  ///
+  /// It will not look very good when it is
+  /// over 10dp. The highlight inside the menu will start to overflow the
+  /// corners and is not clipped along the border radius. The underlying Widget
+  /// is not designed with this high border rounding in mind. This makes sense
+  /// since it does not look good with too much rounding on a small menu.
+  ///
+  /// The built-in behavior in FlexColorScheme allows it to match at low
+  /// inherited radius values from [FlexSubThemeData.defaultRadius] but to
+  /// also stay below the usable max rounding automatically at higher global
+  /// border radius values.
+  static PopupMenuThemeData popupMenuTheme({
+    /// Popup menu corner radius.
+    ///
+    /// Defaults to [kMenuRadius] = 4, M3 specification.
+    final double? radius,
+
+    /// Popup menu elevation defaults to 3, making it more subtle.
+    final double elevation = kPopupMenuElevation,
+
+    /// The background color of the popup menu.
+    final Color? color,
+  }) =>
+      PopupMenuThemeData(
+        elevation: elevation,
+        color: color,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? kMenuRadius),
+          ),
+        ),
+      );
+
+  /// An opinionated [RadioThemeData] theme.
+  ///
+  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The splashRadius is not used by FlexColorScheme sub-themes.
+  static RadioThemeData radioTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the switch.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.secondary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The splash radius of the circular Material ink response.
+    ///
+    /// Defaults to kRadialReactionRadius = 20.
+    final double? splashRadius,
+
+    /// Defines if unselected [Radio] is also themed to be [baseSchemeColor].
+    ///
+    /// If false, it is grey like in Flutter SDK. Defaults to true.
+    final bool unselectedIsColored = true,
+  }) {
+    // Get selected color, defaults to secondary.
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.secondary, colorScheme);
+    final bool isLight = colorScheme.brightness == Brightness.light;
+
+    return RadioThemeData(
+      splashRadius: splashRadius,
+      fillColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return baseColor;
+          }
+          // Opinionated color on unselected checkbox.
+          if (unselectedIsColored) {
+            return baseColor.withAlpha(0xDD);
+          }
+          // This is SDK default.
+          return isLight ? Colors.black54 : Colors.white70;
+        },
+      ),
+    );
+  }
+
+  // TODO(rydmike): Consider a SliderTheme with value popup using primary blend.
+  //
+  // /// An opinionated [SliderThemeData].
+  // static SliderThemeData sliderTheme() {
+  //   return const SliderThemeData();
+  // }
+
+  // TODO(rydmike): SnackBar needs two different corner radius versions.
+  //   The pinned one should not have a shape, but the floating one should.
+  //   Not possible to do via its theme, if it could be then the floating one
+  //   should follow the themed corner radius setting and pinned one
+  //   remain straight. The SnackBar implements different shapes for its
+  //   enum based [SnackBarBehavior], but only if [Shape] property is null:
+  //     If null, [SnackBar] provides different defaults depending on the
+  //     [SnackBarBehavior]. For [SnackBarBehavior.fixed], no overriding shape
+  //     is specified, so the [SnackBar] is rectangular. For
+  //     [SnackBarBehavior.floating], it uses a [RoundedRectangleBorder] with a
+  //     circular corner radius of 4.0.
+  //   Maybe open an issue about the limitation that corner radius on none
+  //   pinned one cannot be changed via theme while keeping straight one
+  //   straight. However, I think M3 will need it too, so it might come then.
+  //
+  /// An opinionated [SnackBarThemeData] with custom elevation.
+  ///
+  /// The [elevation] defaults to [kSnackBarElevation] (4).
+  static SnackBarThemeData snackBarTheme({
+    /// SnackBar elevation defaults to [kSnackBarElevation] 4.
+    final double? elevation = kSnackBarElevation,
+
+    /// The background color of the themed SnackBar. Typically one of inverse
+    /// brightness compared to theme's surface color brightness.
+    ///
+    /// If null, then FlexColorScheme (FCS) sets onw default when used via
+    /// FlexSubThemesData as follows, the SDK default is used if this is not
+    /// used via FlexSubThemesData:
+    ///
+    /// * In light theme mode:
+    ///   * FCS: onSurface with primary blend at 45% opacity, with
+    ///     total opacity 95%
+    ///   * Flutter SDK uses: onSurface with surface at opacity 80%, blended on
+    ///     top of surface.
+    ///
+    /// * In dark theme mode:
+    ///   * FCS: onSurface with primary blend at 39% opacity, with total
+    ///     opacity 93%
+    ///   * Flutter SDK uses: colorScheme.onSurface
+    ///
+    /// SnackBar uses ColorScheme.inverseSurface in M3 schemes.
+    /// While FlexColorScheme has own custom default primary tinted SnackBar
+    /// color, it can also easily be themed also to [ColorScheme.inverseSurface]
+    /// via the [backgroundSchemeColor].
+    final Color? backgroundColor,
+
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    final ColorScheme? colorScheme,
+
+    /// Selects which color from the passed in [colorScheme] to use as
+    /// dialog background color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined or [colorScheme] is not defined, then the passed in
+    /// [backgroundColor] will be used, which may be null too and dialog then
+    /// falls back to to dark grey: `Color(0xFF323232)`, via M2
+    /// Flutter SDK defaults if not defined.
+    ///
+    /// FlexColorScheme uses this property via [FlexSubThemesData] and defines
+    /// its default as [SchemeColor.surface].
+    final SchemeColor? backgroundSchemeColor,
+  }) {
+    final Color? background =
+        (colorScheme == null || backgroundSchemeColor == null)
+            ? backgroundColor // might be null, then SDK theme defaults.
+            : schemeColor(backgroundSchemeColor, colorScheme);
+
+    final Color? foreground =
+        (colorScheme != null && backgroundSchemeColor != null)
+            ? schemeColorPair(backgroundSchemeColor, colorScheme)
+            : background != null
+                ? ThemeData.estimateBrightnessForColor(background) ==
+                        Brightness.light
+                    ? Colors.black
+                    : Colors.white
+                : null;
+
+    final TextStyle? snackTextStyle = foreground != null
+        ? ThemeData(brightness: Brightness.light)
+            .textTheme
+            .titleMedium!
+            .copyWith(color: foreground)
+        : null;
+
+    return SnackBarThemeData(
+      elevation: elevation,
+      backgroundColor: background,
+      contentTextStyle: snackTextStyle,
+    );
+  }
+
+  /// An opinionated [SwitchThemeData] theme.
+  ///
+  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The splashRadius is not used by FlexColorScheme sub-themes.
+  static SwitchThemeData switchTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the switch.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.secondary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The splash radius of the circular Material ink response.
+    ///
+    /// Defaults to kRadialReactionRadius = 20.
+    final double? splashRadius,
+
+    /// Defines if unselected [Switch] is also themed to be [baseSchemeColor].
+    ///
+    /// If false, it is grey like in Flutter SDK. Defaults to true.
+    final bool unselectedIsColored = true,
+  }) {
+    // Get selected color, defaults to secondary.
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.secondary, colorScheme);
+    final bool isLight = colorScheme.brightness == Brightness.light;
+
+    return SwitchThemeData(
+      splashRadius: splashRadius,
+      thumbColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return baseColor;
+          }
+          return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
+        },
+      ),
+      trackColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isLight ? Colors.black12 : Colors.white10;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return baseColor.withAlpha(0x70);
+          }
+          // Opinionated color on track when not selected
+          if (unselectedIsColored) {
+            return baseColor.withAlpha(0x70);
+          }
+          // This is SDK default.
+          return isLight ? const Color(0x52000000) : Colors.white30;
+        },
+      ),
+    );
+  }
+
+  /// An opinionated [TextButtonThemeData] theme.
+  ///
+  /// Requires a [ColorScheme], the color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The adjustable button corner [radius] defaults to 20. This is the new
+  /// default in M3, Flutter SDK M2 defaults to 4.
+  static TextButtonThemeData textButtonTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the button.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The button corner radius.
+    ///
+    /// If not defined, defaults to [kButtonRadius] 20dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/buttons/specs
+    final double? radius,
+
+    /// Padding for the button theme.
+    ///
+    /// Defaults to null and uses `styleFrom` constructors default padding.
+    ///
+    /// M3 has more horizontal padding 24dp, but the tighter default padding
+    /// in M2 that is 16dp looks fine as well when using stadium borders
+    /// as in M3.
+    /// Making the custom scalable padding and separate one for icon
+    /// versions is rather involved, so sticking to defaults, but exposing the
+    /// padding property for future or external use.
+    final EdgeInsetsGeometry? padding,
+
+    /// Minimum button size.
+    ///
+    /// Defaults to `kButtonMinSize` = Size(40, 40).
+    final Size minButtonSize = kButtonMinSize,
+  }) {
+    // Get selected color, defaults to primary.
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    return TextButtonThemeData(
+      style: TextButton.styleFrom(
+        minimumSize: minButtonSize,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? kButtonRadius),
+          ),
+        ), // buttonShape,
+        padding: padding,
+      ).copyWith(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledForegroundAlpha);
+            }
+            return baseColor;
+          },
+        ),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered)) {
+              return baseColor.withAlpha(kHoverBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return baseColor.withAlpha(kFocusBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return baseColor.withAlpha(kPressedBackgroundAlpha);
+            }
+            return Colors.transparent;
+          },
+        ),
+      ),
+    );
+  }
+
+  /// An opinionated [TimePickerThemeData] with custom corner radius.
+  ///
+  /// Corner [radius] defaults to [kDialogRadius] 28dp. The internal shapes
+  /// in the picker also have rounding, their corner radii are defined by
+  /// [elementRadius] that defaults to [kCardRadius] 12.
+  ///
+  /// In the InputDecorator, if you pass it an input decoration style
+  /// that matches the main input decoration style and corner rounding it
+  /// will be used on the data entry elements in the picker.
+  static TimePickerThemeData timePickerTheme({
+    /// Pass in value you will you in your ThemeData use for your main
+    /// [DialogTheme], if you let
+    ///
+    /// If null and [colorScheme] and [backgroundSchemeColor] are also not
+    /// defined, this dialog defaults to using [ColorScheme.surface] color and
+    /// it may not match dialog color used by other dialogs that use
+    /// [ColorScheme.background] by default, this is a peculiar default behavior
+    /// in Flutter SDK.
+    final Color? backgroundColor,
+
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    final ColorScheme? colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the dialog
+    /// background color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined or [colorScheme] is not defined, then the passed in
+    /// [backgroundColor] will be used, which may be null too and dialog then
+    /// falls back to Flutter SDK value for TimePickerDialog, which is
+    /// [colorScheme.surface].
+    ///
+    /// FlexColorScheme sub-theming uses this property to match the background
+    /// color of this dialog to other standard dialogs. It sets it via
+    /// [FlexSubThemesData] to [SchemeColor.background].
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Outer corner radius.
+    ///
+    /// If not defined, defaults to [kDialogRadius] 28dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/dialogs/specs
+    final double? radius,
+
+    /// Elements corner radius.
+    ///
+    /// Defaults to [kCardRadius] = 12.
+    final double? elementRadius,
+
+    /// An input decoration theme, for the time picker.
+    ///
+    /// You would typically pass in one that matches the main used input
+    /// decoration theme in order to get same input style with possible
+    /// rounding used in the app otherwise on the input fields in the picker.
+    ///
+    /// It adds the custom overrides to the passed in decorator, that the widget
+    /// does internally to the default null InputDecorationTheme. There is
+    /// no need to add those in the passed in InputDecorationTheme. Just pass
+    /// in your overall used app InputDecorationTheme.
+    final InputDecorationTheme? inputDecorationTheme,
+  }) {
+    final Color? background =
+        (colorScheme == null || backgroundSchemeColor == null)
+            ? backgroundColor // might be null, then SDK theme defaults.
+            : schemeColor(backgroundSchemeColor, colorScheme);
+
+    return TimePickerThemeData(
+      backgroundColor: background,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kDialogRadius),
+        ),
+      ),
+      hourMinuteShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(elementRadius ?? kCardRadius),
+        ),
+      ),
+      dayPeriodShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(elementRadius ?? kCardRadius),
+        ),
+      ),
+      // Custom additions the Widget does internally, but for some reason
+      // only does to null default theme. If you use a custom decorator
+      // you are supposed to know that you have to add these shenanigans
+      // for it to work and look right.
+      inputDecorationTheme: inputDecorationTheme?.copyWith(
+            contentPadding: EdgeInsets.zero,
+            // Prevent the error text from appearing.
+            // See https://github.com/flutter/flutter/issues/54104
+            errorStyle: const TextStyle(fontSize: 0, height: 0),
+          ) ??
+          const InputDecorationTheme().copyWith(
+            contentPadding: EdgeInsets.zero,
+            // Prevent the error text from appearing.
+            // See https://github.com/flutter/flutter/issues/54104
+            errorStyle: const TextStyle(fontSize: 0, height: 0),
+          ),
+    );
+  }
+
+  /// An opinionated [ToggleButtonsThemeData] theme.
+  ///
+  /// The adjustable button corner [radius] defaults to 20 this is new
+  /// default in M3, Flutter SDK M2 defaults to 4.
+  ///
+  /// Button border width can be adjusted and defaults to same width
+  /// as outline thickness on selected outline button and input decorator.
+  ///
+  /// Unfortunately [ToggleButtons] cannot be themed to have different border
+  /// width in disabled mode than enabled mode, like [OutlinedButton] can.
+  /// If it is important that the themed border appears similar to the disabled
+  /// border width, then keep the thin and thick outlined borders same or
+  /// reasonably close to each other.
+  static ToggleButtonsThemeData toggleButtonsTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the toggle buttons.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The button corner radius.
+    ///
+    /// If not defined, defaults to [kButtonRadius] 20dp.
+    ///
+    /// This is not in M3 specification, but FlexColorScheme component
+    /// sub-themes harmonizes [ToggleButtons] size
+    /// and border radius with the other Material buttons.
+    final double? radius,
+
+    /// The width of the borders around the toggle buttons.
+    ///
+    /// In this design it uses the same default as outline thickness for
+    /// selected outline button and input decorator.
+    ///
+    /// Defaults to 1.5.
+    final double borderWidth = kThinBorderWidth,
+
+    /// Minimum button size.
+    ///
+    /// Defaults to Size(40, 40).
+    final Size minButtonSize = kButtonMinSize,
+
+    /// VisualDensity for ToggleButtons.
+    ///
+    /// The ToggleButtons do not implement VisualDensity from theme, but we can
+    /// pass in what we use in ThemeData and adjust its size accordingly.
+    ///
+    /// You should pass in the same visual density that you set on your
+    /// Theme to the ToggleButtons to make them keep the same size as the
+    /// main buttons.
+    ///
+    /// Defaults to null, that results in VisualDensity.adaptivePlatformDensity
+    /// being used, which is same as null default in ThemeData.
+    final VisualDensity? visualDensity,
+  }) {
+    // Get selected color, defaults to primary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
+    final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+
+    final VisualDensity usedVisualDensity =
+        visualDensity ?? VisualDensity.adaptivePlatformDensity;
+    return ToggleButtonsThemeData(
+      borderWidth: borderWidth,
+      selectedColor: onBaseColor.withAlpha(kSelectedAlpha),
+      color: baseColor,
+      fillColor: baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
+      borderColor: baseColor.withAlpha(kEnabledBorderAlpha),
+      selectedBorderColor:
+          baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
+      hoverColor: baseColor
+          .blendAlpha(Colors.white, kHoverAlphaBlend + kAltPrimaryAlphaBlend)
+          .withAlpha(kHoverAlpha),
+      focusColor: baseColor
+          .blendAlpha(Colors.white, kFocusAlphaBlend + kAltPrimaryAlphaBlend)
+          .withAlpha(kFocusAlpha),
+      highlightColor: baseColor
+          .blendAlpha(
+              Colors.white, kHighlightAlphaBlend + kAltPrimaryAlphaBlend)
+          .withAlpha(kHighlightAlpha),
+      splashColor: baseColor
+          .blendAlpha(Colors.white, kSplashAlphaBlend + kAltPrimaryAlphaBlend)
+          .withAlpha(kSplashAlpha),
+      disabledColor: baseColor
+          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+          .withAlpha(kDisabledForegroundAlpha),
+      disabledBorderColor: baseColor
+          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+          .withAlpha(kDisabledBackgroundAlpha),
+      borderRadius: BorderRadius.circular(radius ?? kButtonRadius),
+      constraints: BoxConstraints(
+        // ToggleButtons draws its border outside its constraints, the
+        // ShapeBorder on ElevatedButton, OutlinedButton and TextButton keep
+        // their border inside its size constraints, to make ToggleButtons
+        // same sized, we must adjust the min size shared constraint with
+        // the border width for every side as well as make the VisualDensity
+        // adjustment that the other buttons do via Theme automatically
+        // based on theme setting, to do so this theme can accept a
+        // VisualDensity property. Give it the same value that your theme
+        // uses. This defaults to same value that ThemeData uses by default.
+        minWidth: minButtonSize.width -
+            borderWidth * 2 +
+            usedVisualDensity.baseSizeAdjustment.dx,
+        minHeight: minButtonSize.height -
+            borderWidth * 2 +
+            usedVisualDensity.baseSizeAdjustment.dy,
+      ),
     );
   }
 }

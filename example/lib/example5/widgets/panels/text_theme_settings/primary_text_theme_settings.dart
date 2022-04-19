@@ -51,6 +51,15 @@ class PrimaryTextThemeSettings extends StatelessWidget {
                 ? controller.setBlendDarkTextTheme
                 : null,
           ),
+        SwitchListTileAdaptive(
+          title: const Text("Use the application's font Noto Sans"),
+          subtitle: const Text('You can turn OFF using any app font definition '
+              'here to see what the TextTheme looks like on each platform with '
+              'its default. This is an app toggle, not a FlexColorScheme '
+              'theming toggle.'),
+          value: controller.useAppFont,
+          onChanged: controller.setUseAppFont,
+        ),
         SizedBox(
           width: double.infinity,
           child: Material(
