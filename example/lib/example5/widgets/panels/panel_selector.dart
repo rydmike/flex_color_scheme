@@ -197,7 +197,7 @@ class PanelButton extends StatelessWidget {
     final double effectiveWidth = AppData.panelButtonWidth +
         (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
     final double textSize = isPhone ? 10 : 11;
-    final double iconSize = isPhone ? 30 : 45;
+    final double iconSize = isPhone ? 28 : 45;
     final double borderWidth = isPhone ? 3 : 5;
     final double verticalPadding = isPhone ? 6 : 10;
     final ThemeData theme = Theme.of(context);

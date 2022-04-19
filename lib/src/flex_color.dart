@@ -11,7 +11,7 @@ import 'flex_scheme_data.dart';
 /// predefined [FlexSchemeData] objects that can be used by FlexColorScheme.
 ///
 /// There are also const values for every color value and FlexSchemeData of
-/// of every scheme.
+/// every scheme.
 class FlexColor {
   /// Private constructor for the FlexColor static class to prevent it from
   /// being instantiated or extended.
@@ -2005,7 +2005,15 @@ class FlexColor {
       'Espresso dark brown and crema colored theme';
 
   /// Espresso theme color for light primary color.
-  static const Color espressoLightPrimary = Color(0xFF220804);
+  ///
+  /// This color was revised for version 5, past color was too dark brown to be
+  /// very usable in a UI. It was very black coffee like, but not very
+  /// practical. Considered optional brown: Color(0xFF4C2D27), but decided to
+  /// use same color value as [espressoDarkPrimaryContainer] for symmetry, and
+  /// also because it was a bit darker, to keep maybe a bit more of the black
+  /// coffee like vibe instead of hot chocolate. Previous used color
+  /// value before version 5.0.0 was Color(0xFF220804).
+  static const Color espressoLightPrimary = Color(0xFF452F2B);
 
   /// Espresso theme color for light primary container color.
   static const Color espressoLightPrimaryContainer = Color(0xFFC7BCAC);

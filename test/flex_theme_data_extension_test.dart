@@ -366,65 +366,60 @@ void main() {
         themeDark.colorScheme.secondary,
       );
     });
-    final MaterialColor lightSwatch =
-        FlexColorScheme.createPrimarySwatch(themeLight.colorScheme.primary);
-    final MaterialColor darkSwatch =
-        FlexColorScheme.createPrimarySwatch(themeDark.colorScheme.primary);
-
     test(
         'FTD1.09: GIVEN a FlexThemeData.raw theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
-        'createPrimarySwatch(primaryColor)[900].', () {
+        'blend(Colors.black, 40).', () {
       expect(
         themeLight.primaryColorDark,
-        lightSwatch[900],
+        equals(themeLight.colorScheme.primary.blend(Colors.black, 40)),
       );
     });
     test(
         'FTD1.10: GIVEN a FlexThemeData.raw theme with Material scheme dark '
         'colors EXPECT primaryColorDark equality with '
-        'createPrimarySwatch(primaryColor)[800].', () {
+        'blend(Colors.black, 45).', () {
       expect(
         themeDark.primaryColorDark,
-        darkSwatch[800],
+        equals(themeDark.colorScheme.primary.blend(Colors.black, 45)),
       );
     });
 
     test(
         'FTD1.11: GIVEN a FlexThemeData.raw theme with Material scheme light '
         'colors EXPECT primaryColorLight equality with '
-        'createPrimarySwatch(primaryColor)[100].', () {
+        '.blend(Colors.white, 40).', () {
       expect(
         themeLight.primaryColorLight,
-        lightSwatch[100],
+        equals(themeLight.colorScheme.primary.blend(Colors.white, 40)),
       );
     });
     test(
         'FTD1.12: GIVEN a FlexThemeData.raw theme with Material scheme dark '
         'colors EXPECT primaryColorLight equality with '
-        'createPrimarySwatch(primaryColor)[100].', () {
+        '.blend(Colors.white, 35).', () {
       expect(
         themeDark.primaryColorLight,
-        darkSwatch[100],
+        equals(themeDark.colorScheme.primary.blend(Colors.white, 35)),
       );
     });
 
     test(
         'FTD1.13: GIVEN a FlexThemeData.raw theme with Material scheme light '
         'colors EXPECT secondaryHeaderColor equality with '
-        'createPrimarySwatch(primaryColor)[50].', () {
+        '.blend(Colors.white, 80).', () {
       expect(
         themeLight.secondaryHeaderColor,
-        lightSwatch[50],
+        equals(themeLight.colorScheme.primary.blend(Colors.white, 80)),
       );
     });
     test(
         'FTD1.14: GIVEN a FlexThemeData.raw theme with Material scheme dark '
         'colors EXPECT secondaryHeaderColor equality with '
-        'createPrimarySwatch(primaryColor)[900].', () {
+        'blend(Colors.black, 60).', () {
       expect(
         themeDark.secondaryHeaderColor,
-        darkSwatch[900],
+        equals(themeDark.colorScheme.primary.blend(Colors.black, 60)),
       );
     });
 

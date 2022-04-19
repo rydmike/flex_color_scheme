@@ -70,6 +70,8 @@ class ThemeController with ChangeNotifier {
         await _themeService.load(Store.keyViewIndex, Store.defaultViewIndex);
     _useTextTheme = await _themeService.load(
         Store.keyUseTextTheme, Store.defaultUseTextTheme);
+    _useAppFont = await _themeService.load(
+        Store.keyUseAppFont, Store.defaultUseAppFont);
     _usedScheme =
         await _themeService.load(Store.keyUsedScheme, Store.defaultUsedScheme);
     _schemeIndex = await _themeService.load(
@@ -429,6 +431,7 @@ class ThemeController with ChangeNotifier {
     // The IsLargeGridView and ViewIndex settings are never reset to default in
     // a reset, we always keep the current screen and panel on page/panel view.
     await setUseTextTheme(Store.defaultUseTextTheme, false);
+    await setUseAppFont(Store.defaultUseAppFont, false);
     await setUsedScheme(Store.defaultUsedScheme, false);
     await setSchemeIndex(Store.defaultSchemeIndex, false);
     await setInteractionEffects(Store.defaultInteractionEffects, false);
@@ -734,6 +737,16 @@ class ThemeController with ChangeNotifier {
     _useTextTheme = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyUseTextTheme, value);
+  }
+
+  late bool _useAppFont;
+  bool get useAppFont => _useAppFont;
+  Future<void> setUseAppFont(bool? value, [bool notify = true]) async {
+    if (value == null) return;
+    if (value == _useAppFont) return;
+    _useAppFont = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyUseAppFont, value);
   }
 
   late FlexScheme _usedScheme;

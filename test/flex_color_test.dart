@@ -2237,7 +2237,7 @@ void main() {
       );
     });
     test('FC5 colors Espresso and crema light', () {
-      expect(FlexColor.espressoLightPrimary, const Color(0xFF220804));
+      expect(FlexColor.espressoLightPrimary, const Color(0xFF452F2B));
     });
     test('FC5 colors Espresso and crema light', () {
       expect(FlexColor.espressoLightPrimaryContainer, const Color(0xFFC7BCAC));

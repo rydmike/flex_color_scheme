@@ -37,7 +37,7 @@ ThemeData themeDataFromLight(ThemeController controller) {
   return ThemeData.from(
     textTheme: ThemeData(
       brightness: Brightness.light,
-      fontFamily: AppData.font,
+      fontFamily: controller.useAppFont ? AppData.font : null,
     ).textTheme,
     // The [ColorScheme] we get here is the same one you can also generate
     // Copy/paste code for in the ThemesPlayground UI.

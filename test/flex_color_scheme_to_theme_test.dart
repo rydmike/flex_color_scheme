@@ -1217,65 +1217,60 @@ void main() {
         equals(themeDark.colorScheme.secondary),
       );
     });
-    final MaterialColor lightSwatch =
-        FlexColorScheme.createPrimarySwatch(themeLight.colorScheme.primary);
-    final MaterialColor darkSwatch =
-        FlexColorScheme.createPrimarySwatch(themeDark.colorScheme.primary);
-
     test(
         'FCS7.09: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
-        'createPrimarySwatch(primaryColor)[900].', () {
+        'blend(Colors.black, 40).', () {
       expect(
         themeLight.primaryColorDark,
-        equals(lightSwatch[900]),
+        equals(themeLight.colorScheme.primary.blend(Colors.black, 40)),
       );
     });
     test(
         'FCS7.10: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT primaryColorDark equality with '
-        'createPrimarySwatch(primaryColor)[800].', () {
+        'blend(Colors.black, 45).', () {
       expect(
         themeDark.primaryColorDark,
-        equals(darkSwatch[800]),
+        equals(themeDark.colorScheme.primary.blend(Colors.black, 45)),
       );
     });
 
     test(
         'FCS7.11: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT primaryColorLight equality with '
-        'createPrimarySwatch(primaryColor)[100].', () {
+        '.blend(Colors.white, 40).', () {
       expect(
         themeLight.primaryColorLight,
-        equals(lightSwatch[100]),
+        equals(themeLight.colorScheme.primary.blend(Colors.white, 40)),
       );
     });
     test(
         'FCS7.12: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT primaryColorLight equality with '
-        'createPrimarySwatch(primaryColor)[100].', () {
+        '.blend(Colors.white, 35).', () {
       expect(
         themeDark.primaryColorLight,
-        equals(darkSwatch[100]),
+        equals(themeDark.colorScheme.primary.blend(Colors.white, 35)),
       );
     });
 
     test(
         'FCS7.13: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT secondaryHeaderColor equality with '
-        'createPrimarySwatch(primaryColor)[50].', () {
+        '.blend(Colors.white, 80).', () {
       expect(
         themeLight.secondaryHeaderColor,
-        equals(lightSwatch[50]),
+        equals(themeLight.colorScheme.primary.blend(Colors.white, 80)),
       );
     });
     test(
         'FCS7.14: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT secondaryHeaderColor equality with '
-        'createPrimarySwatch(primaryColor)[900].', () {
+        'blend(Colors.black, 60).', () {
       expect(
         themeDark.secondaryHeaderColor,
-        equals(darkSwatch[900]),
+        equals(themeDark.colorScheme.primary.blend(Colors.black, 60)),
       );
     });
 

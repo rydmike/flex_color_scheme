@@ -266,7 +266,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
     // Modify the value in the AppData class to change it.
     visualDensity: AppData.visualDensity,
     // Custom font, modify in AppData class to change it.
-    fontFamily: AppData.font,
+    fontFamily: controller.useAppFont ? AppData.font : null,
     // The platform can be toggled in the app, but not saved.
     platform: controller.platform,
     // Opt-in/out of using Flutter SDK Material3 based theming
