@@ -5320,29 +5320,6 @@ class FlexColorScheme with Diagnosticable {
     // Use passed in target platform, else actual host platform.
     final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
 
-    // Returns the default fontFamily for each platform. This is used only by
-    // the custom opt-in FlexColorScheme [m3TextTheme] if no fontFamily is
-    // provided.
-    //
-    // It does not provide the full TextTheme with different fonts for the
-    // header style on iOS fonts, nor the fallback for Linux fonts.
-    // The built [m3TextTheme] will be changed to use SDK built in M3 textTheme
-    // when its Typography lands in the Flutter stable channel.
-    String platformFontFamily() {
-      switch (effectivePlatform) {
-        case TargetPlatform.windows:
-          return 'Segoe UI';
-        case TargetPlatform.iOS:
-          return '.SF UI Text';
-        case TargetPlatform.macOS:
-          return '.AppleSystemUIFont';
-        case TargetPlatform.android:
-        case TargetPlatform.fuchsia:
-        case TargetPlatform.linux:
-          return 'Roboto';
-      }
-    }
-
     // TODO(rydmike): Remove when default in SDK, still T2014 in Flutter 2.10.x.
     // Used Typography deviates from the Flutter standard that _still_ uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
@@ -5363,11 +5340,6 @@ class FlexColorScheme with Diagnosticable {
             Brightness.dark;
     TextTheme defPrimaryText =
         primaryIsDark ? effectiveTypography.white : effectiveTypography.black;
-
-    // TODO(rydmike): Remove all the fontfamily experiments, from tests too.
-    // Setup the effective fontFamily, only apply when when provided or need
-    // for the custom m3TextTheme when a font family is not provided.
-    // String? effectiveFontFamily = fontFamily;
 
     if (fontFamily != null) {
       // ThemeData uses this to apply a font from fontFamily. It works OK, but
@@ -5679,6 +5651,7 @@ class FlexColorScheme with Diagnosticable {
       // apply them via ThemeData copyWith separately for cases when we want
       // to use them in a FlexColorSchemes, which might often be the case. Some
       // of the values may be null and get defaults via the ThemeData() factory.
+      fontFamily: fontFamily,
       visualDensity: visualDensity,
       useMaterial3: useMaterial3,
       // TextTheme properties use the same logic as in ThemeData, allowing us
@@ -5686,14 +5659,6 @@ class FlexColorScheme with Diagnosticable {
       // been deprecated in Flutter 2.5.0.
       textTheme: effectiveTextTheme,
       primaryTextTheme: effectivePrimaryTextTheme,
-      // TODO(rydmike): Remove all the fontFamily experiments, from tests too.
-      // The fontFamily is passed along as defined if it was defined, even as
-      // null. However, if we used the m3TextTheme, then it gets a platform
-      // default value that is passed along, in a futile attempt to try to use
-      // the right Platform font, works sometimes. This is temporary until
-      // we have the m3 Typography in stable channel from here:
-      // https://github.com/flutter/flutter/pull/97829
-      fontFamily: fontFamily,
       // Pass along custom typography and platform.
       typography: effectiveTypography,
       platform: effectivePlatform,

@@ -89,7 +89,7 @@ class _SubpageState extends State<Subpage> {
                     EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
                 child: ShowThemeDataColors(),
               ),
-                  const Padding(
+              const Padding(
                 padding:
                     EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
                 child: ShowSubThemeColors(),
