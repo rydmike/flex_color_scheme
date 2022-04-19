@@ -527,7 +527,9 @@ void main() {
         equals(FlexColor.blumineBlueDarkSecondary),
       );
     });
-    // TODO(rydmike): Remove all the fontFamily experiments, from tests too.
+    // TODO(rydmike): Remove all the fontFamily experiments from tests too.
+    // Keeping them around for a while in case I need it again, then the
+    // tests are readily available.
     // test(
     //     'FCS8.012-android: GIVEN a FlexColorScheme raw with sub themes '
     //     'and using sub-theme with custom textTheme '
@@ -538,7 +540,7 @@ void main() {
     //   );
     //   expect(
     //     fcs.toTheme.textTheme.bodyMedium!.fontFamily,
-    //     equals('Roboto_regular'),
+    //     equals('Roboto'),
     //   );
     // });
     // test(
@@ -590,7 +592,7 @@ void main() {
     //   );
     //   expect(
     //     fcs.toTheme.textTheme.bodyMedium!.fontFamily,
-    //     equals('Roboto_regular'),
+    //     equals('Roboto'),
     //   );
     // });
     // test(
@@ -603,7 +605,7 @@ void main() {
     //   );
     //   expect(
     //     fcs.toTheme.textTheme.bodyMedium!.fontFamily,
-    //     equals('Roboto_regular'),
+    //     equals('Roboto'),
     //   );
     // });
   });

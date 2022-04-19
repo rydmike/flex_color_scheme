@@ -70,8 +70,8 @@ class ThemeController with ChangeNotifier {
         await _themeService.load(Store.keyViewIndex, Store.defaultViewIndex);
     _useTextTheme = await _themeService.load(
         Store.keyUseTextTheme, Store.defaultUseTextTheme);
-    _useAppFont = await _themeService.load(
-        Store.keyUseAppFont, Store.defaultUseAppFont);
+    _useAppFont =
+        await _themeService.load(Store.keyUseAppFont, Store.defaultUseAppFont);
     _usedScheme =
         await _themeService.load(Store.keyUsedScheme, Store.defaultUsedScheme);
     _schemeIndex = await _themeService.load(
