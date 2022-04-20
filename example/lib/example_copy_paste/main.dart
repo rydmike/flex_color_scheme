@@ -33,6 +33,7 @@ class _DemoAppState extends State<DemoApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Copy Playground',
       // To use this app with the Flutter SDK default theme and default
       // Material Design 2 color scheme, uncomment and use the theme setup below
       // and comment the copy-pasted themes further below,

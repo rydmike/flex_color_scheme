@@ -190,7 +190,7 @@ enum SchemeColor {
 /// [ToggleButtons] when it comes to hover, press, selected and focus.
 /// Please consider phasing out the legacy buttons, as they are deprecated and
 /// will be removed from the Flutter SDK in next stable release. Their theme
-/// the [ButtonThemeData] will also son be deprecated and later removed.
+/// the [ButtonThemeData] will also soon be deprecated and later removed.
 ///
 /// The following widgets that have rounded corners, but are excluded from the
 /// component theming for now:

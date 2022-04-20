@@ -18,17 +18,8 @@ import 'flex_tones.dart';
 /// * FlexThemeData.light(), based on FlexColorScheme.light().toTheme
 /// * FlexThemeData.dark(), based on FlexColorScheme.dark().toTheme
 ///
-/// The goal is to be able to provide these as static extensions
-/// on ThemeData, so it would be possible to say:
-///
-/// * ThemeData.flexLight(), based on FlexColorScheme.light().toTheme
-/// * ThemeData.flexDark(), based on FlexColorScheme.dark().toTheme
-///
-/// Dart does not yet support such extensions, see:
-/// https://github.com/dart-lang/language/issues/723
-///
-/// Using e.g. [FlexThemeData.light] is a bit shorter than
-/// [FlexColorScheme.light]`.toTheme`, and it may feel more familiar since
+/// Using [FlexThemeData.light] is a bit shorter than
+/// `FlexColorScheme.light().toTheme`, and it may feel more familiar since
 /// you get a [ThemeData] object directly that you can use just like any
 /// other ThemeData object produced by Flutter SDK built in ThemeData factory
 /// constructors.
@@ -42,6 +33,15 @@ import 'flex_tones.dart';
 /// [ThemeData] given by [FlexColorScheme.toTheme]. You can of course do
 /// this with these extensions too, but in that case you will need to store
 /// the theme in an intermediate [ThemeData] object.
+///
+/// It would be nice if it was possible to also provide these as static
+/// extensions on ThemeData, in away that would enable a syntax like this:
+///
+/// * ThemeData.flexLight(), *based on FlexColorScheme.light().toTheme*
+/// * ThemeData.flexDark(), *based on FlexColorScheme.dark().toTheme*
+///
+/// However, Dart does not yet support such extensions, see:
+/// https://github.com/dart-lang/language/issues/723
 extension FlexThemeData on ThemeData {
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.light]
   /// and its [FlexColorScheme.toTheme] method.
@@ -120,12 +120,13 @@ extension FlexThemeData on ThemeData {
     /// default color assignments from the color scheme.
     final ColorScheme? colorScheme,
 
-    /// The number of the four main scheme colors to be used of the ones
-    /// passed in via the required colors [FlexSchemeColor] property.
+    /// The number of the six main scheme colors to be used when creating
+    /// effective [ColorScheme].
     ///
     /// This is a convenience property that allows you to vary which colors to
-    /// use of the primary, secondary and variant colors included in `colors` in
-    /// `FlexSchemeColor` The integer number corresponds to using:
+    /// use of the primary, secondary and tertiary colors and their container
+    /// colors when FlexSchemeColor creates its effective [ColorScheme] from
+    /// the input colors. The integer number corresponds to using:
     ///
     /// * 1 = Only the primary color
     /// * 2 = Primary & Secondary colors
@@ -820,32 +821,40 @@ extension FlexThemeData on ThemeData {
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
-    /// Opinionated sub themes are provided for:
+    /// These component themes are available:
     ///
-    /// * [TextButton]
-    /// * [ElevatedButton]
-    /// * [OutlinedButton]
-    /// * Older buttons using [ButtonThemeData]
-    /// * [ToggleButtons]
-    /// * [Switch]
-    /// * [Checkbox]
-    /// * [Radio]
-    /// * [InputDecoration]
-    /// * [FloatingActionButton]
-    /// * [Chip]
-    /// * [Card]
-    /// * [PopupMenuButton]
-    /// * [Dialog]
-    /// * [TimePickerDialog]
-    /// * [SnackBar]
-    /// * [Tooltip]
-    /// * [BottomSheet]
-    /// * [BottomNavigationBar]
-    /// * [NavigationBar]
-    /// * [NavigationRail]
+    /// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
+    /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
+    ///   [bottomNavigationBar].
+    /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
+    /// * [CardTheme] for [Card] via [cardTheme].
+    /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
+    /// * [ChipThemeData] for [Chip] via [chipTheme].
+    /// * [DialogTheme] for [Dialog] via [dialogTheme].
+    /// * [ElevatedButtonThemeData] for [ElevatedButton] via
+    ///   [elevatedButtonTheme].
+    /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
+    ///   [floatingActionButtonTheme].
+    /// * [InputDecorationTheme] for [InputDecoration] via
+    ///   [inputDecorationTheme].
+    /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
+    /// * [NavigationRailThemeData] for [NavigationRail] via
+    ///   [navigationRailTheme].
+    /// * [OutlinedButtonThemeData] for [OutlinedButton] via
+    ///   [outlinedButtonTheme].
+    /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
+    /// * [RadioThemeData] for [Radio] via [radioTheme].
+    /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
+    /// * [SwitchThemeData] for [Switch] via [switchTheme].
+    /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
+    /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
+    /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
     ///
-    /// * The custom [ButtonTextTheme] even still provides matching styling to
-    ///   for the deprecated legacy buttons if they are used.
+    /// The custom [ButtonThemeData] still provides matching styling
+    /// for the deprecated legacy buttons if they are used.
+    /// Please consider phasing out the legacy buttons, as they are deprecated
+    /// and will be removed from the Flutter SDK in next stable release. Their
+    /// theme [ButtonThemeData] will also soon be deprecated and later removed.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
@@ -1204,12 +1213,13 @@ extension FlexThemeData on ThemeData {
     /// default color assignments from the color scheme.
     final ColorScheme? colorScheme,
 
-    /// The number of the four main scheme colors to be used of the ones
-    /// passed in via the required colors [FlexSchemeColor] property.
+    /// The number of the six main scheme colors to be used when creating
+    /// effective [ColorScheme].
     ///
     /// This is a convenience property that allows you to vary which colors to
-    /// use of the primary, secondary and variant colors included in `colors` in
-    /// `FlexSchemeColor` The integer number corresponds to using:
+    /// use of the primary, secondary and tertiary colors and their container
+    /// colors when FlexSchemeColor creates its effective [ColorScheme] from
+    /// the input colors. The integer number corresponds to using:
     ///
     /// * 1 = Only the primary color
     /// * 2 = Primary & Secondary colors
@@ -1900,32 +1910,40 @@ extension FlexThemeData on ThemeData {
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
-    /// Opinionated sub themes are provided for:
+    /// These component themes are available:
     ///
-    /// * [TextButton]
-    /// * [ElevatedButton]
-    /// * [OutlinedButton]
-    /// * Older buttons using [ButtonThemeData]
-    /// * [ToggleButtons]
-    /// * [Switch]
-    /// * [Checkbox]
-    /// * [Radio]
-    /// * [InputDecoration]
-    /// * [FloatingActionButton]
-    /// * [Chip]
-    /// * [Card]
-    /// * [PopupMenuButton]
-    /// * [Dialog]
-    /// * [TimePickerDialog]
-    /// * [SnackBar]
-    /// * [Tooltip]
-    /// * [BottomSheet]
-    /// * [BottomNavigationBar]
-    /// * [NavigationBar]
-    /// * [NavigationRail]
+    /// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
+    /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
+    ///   [bottomNavigationBar].
+    /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
+    /// * [CardTheme] for [Card] via [cardTheme].
+    /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
+    /// * [ChipThemeData] for [Chip] via [chipTheme].
+    /// * [DialogTheme] for [Dialog] via [dialogTheme].
+    /// * [ElevatedButtonThemeData] for [ElevatedButton] via
+    ///   [elevatedButtonTheme].
+    /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
+    ///   [floatingActionButtonTheme].
+    /// * [InputDecorationTheme] for [InputDecoration] via
+    ///   [inputDecorationTheme].
+    /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
+    /// * [NavigationRailThemeData] for [NavigationRail] via
+    ///   [navigationRailTheme].
+    /// * [OutlinedButtonThemeData] for [OutlinedButton] via
+    ///   [outlinedButtonTheme].
+    /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
+    /// * [RadioThemeData] for [Radio] via [radioTheme].
+    /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
+    /// * [SwitchThemeData] for [Switch] via [switchTheme].
+    /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
+    /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
+    /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
     ///
-    /// * The custom [ButtonTextTheme] even still provides matching styling to
-    ///   for the deprecated legacy buttons if they are used.
+    /// The custom [ButtonThemeData] still provides matching styling
+    /// for the deprecated legacy buttons if they are used.
+    /// Please consider phasing out the legacy buttons, as they are deprecated
+    /// and will be removed from the Flutter SDK in next stable release. Their
+    /// theme [ButtonThemeData] will also soon be deprecated and later removed.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
