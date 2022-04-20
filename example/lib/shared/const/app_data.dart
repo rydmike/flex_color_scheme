@@ -34,8 +34,8 @@ class AppData {
   // build numbers.
   static const String versionMajor = '5';
   static const String versionBuild = '01';
-  static const String version = '$versionMajor.0.0 Build-$versionBuild';
-  static const String packageVersion = '5.0.0';
+  static const String version = '$versionMajor.0.0-dev.3 Build-$versionBuild';
+  static const String packageVersion = '5.0.0-dev.3';
   static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
   static const String flutterVersion = 'stable v2.10.5';
   static const String copyright = '© 2020, 2021, 2022';
