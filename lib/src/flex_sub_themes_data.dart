@@ -6,10 +6,10 @@ import 'flex_sub_themes.dart';
 
 // ignore_for_file: comment_references
 
-/// Parameters used by [FlexColorScheme] to configure [FlexSubThemes].
+/// Parameters used by [FlexColorScheme] to configure its used [FlexSubThemes].
 ///
 /// To enable the optional component theming feature in FlexColorScheme pass in
-/// at leas a default [FlexSubThemesData] () to its [subThemesData] property.
+/// at least a default [FlexSubThemesData] () to its [subThemesData] property.
 /// This gives you the default opinionated component theme setup.
 ///
 /// The list of properties in the flat configuration class has grown very large.
@@ -18,12 +18,12 @@ import 'flex_sub_themes.dart';
 /// widgets using simple "flat" property values.
 ///
 /// No need for deep [ShapeBorder] definitions for simple border radius change,
-/// nor for the complex [MaterialState] properties. At least not as long
+/// nor for the complex [MaterialState] properties. Well, not as long
 /// as choices and offered flat config options covers what you need.
 ///
 /// A common use case for [FlexSubThemes] and the [FlexSubThemesData] is for
 /// easy to use customization of default border radius on all Flutter SDK
-/// Widgets and elements that supports border radius either via [ShapeBorder]
+/// Widgets and elements that supports border radius, either via [ShapeBorder]
 /// or [BorderRadiusGeometry].
 ///
 /// By design the shape border radius rounding on included and
@@ -41,30 +41,7 @@ import 'flex_sub_themes.dart';
 ///
 /// On many sub-themes the used default colors from the theme's colorScheme for
 /// one or more of each component's color properties can be changed with an
-/// enum [SchemeColor] selection value. This is supported by these sub-themes
-/// for:
-///
-/// - [TextField] by [InputDecoration] via [FlexSubThemes.inputDecorationTheme].
-/// - [TextButton] via [FlexSubThemes.textButtonTheme].
-/// - [ElevatedButton] via [FlexSubThemes.elevatedButtonTheme].
-/// - [OutlinedButton] via [FlexSubThemes.outlinedButtonTheme].
-/// - [MaterialButton] and [ButtonBar] via [FlexSubThemes.buttonTheme].
-/// - [ToggleButtons] via [FlexSubThemes.toggleButtonsTheme].
-/// - [Switch] via [FlexSubThemes.switchTheme].
-/// - [Checkbox] via [FlexSubThemes.checkboxTheme].
-/// - [Radio] via [FlexSubThemes.radioTheme].
-/// - [FloatingActionButton] via [FlexSubThemes.floatingActionButtonTheme].
-/// - [BottomNavigationBar] via [FlexSubThemes.bottomNavigationBar].
-/// - [NavigationBar] via [FlexSubThemes.navigationBarTheme].
-/// - Dialog background color via [FlexSubThemes.dialogTheme] and
-///   [FlexSubThemes.timePickerTheme].
-/// - [Chips] via [FlexSubThemes.chipTheme].
-/// - [AppBar] background color. The AppBar sub-theme definition is built into
-///   the [FlexColorScheme.toTheme method (legacy).
-///   May migrate its implementation to own [FlexSubThemes] sub-theme later.
-/// - [TabBar] for indicator and item color. The TabBar sub-theme definition
-///   is currently built into the [FlexColorScheme.toTheme] method (legacy).
-///   May migrate its implementation to own [FlexSubThemes] sub-theme later.
+/// enum [SchemeColor] selection value.
 ///
 /// You can also modify any [FlexColorScheme] produced [ThemeData]
 /// object with [ThemeData.copyWith], just as you can with normal ThemeData,
@@ -75,6 +52,49 @@ import 'flex_sub_themes.dart';
 /// component sub-themes to be configurable via [FlexSubThemesData]. Only a
 /// small sub-set of commonly used properties are available as convenient
 /// quick sub-theme settings via this flat and easy to use configuration class.
+///
+/// There are custom and opinionated component themes available in
+/// [FlexSubThemes] as static theming helpers:
+///
+/// * [ButtonThemeData] for old deprecated buttons, via
+///   [FlexSubThemes.buttonTheme].
+/// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
+///   [FlexSubThemes.bottomNavigationBar].
+/// * [BottomSheetThemeData] for [BottomSheet] via
+///   [FlexSubThemes.bottomSheetTheme].
+/// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+/// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
+/// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+/// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+/// * [ElevatedButtonThemeData] for [ElevatedButton] via
+///   [FlexSubThemes.elevatedButtonTheme].
+/// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
+///   [FlexSubThemes.floatingActionButtonTheme].
+/// * [InputDecorationTheme] for [InputDecoration] via
+///   [FlexSubThemes.inputDecorationTheme].
+/// * [NavigationBarThemeData] for [NavigationBar] via
+///   [FlexSubThemes.navigationBarTheme].
+/// * [NavigationRailThemeData] for [NavigationRail] via
+///   [FlexSubThemes.navigationRailTheme].
+/// * [OutlinedButtonThemeData] for [OutlinedButton] via
+///   [FlexSubThemes.outlinedButtonTheme].
+/// * [PopupMenuThemeData] for [PopupMenuButton] via
+///   [FlexSubThemes.popupMenuTheme].
+/// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+/// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
+/// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+/// * [TextButtonThemeData] for [TextButton] via
+///   [FlexSubThemes.textButtonTheme].
+/// * [TimePickerThemeData] for [TimePickerDialog] via
+///   [FlexSubThemes.timePickerTheme].
+/// * [ToggleButtonsThemeData] for [ToggleButtons] via
+///   [FlexSubThemes.toggleButtonsTheme].
+///
+/// The custom [ButtonThemeData] still provides matching styling
+/// for the deprecated legacy buttons if they are used.
+/// Please consider phasing out the legacy buttons, as they are deprecated
+/// and will be removed from the Flutter SDK in next stable release. Their
+/// theme [ButtonThemeData] will also soon be deprecated and later removed.
 @immutable
 class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.

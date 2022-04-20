@@ -56,7 +56,7 @@ class AppBarStyleButtons extends StatelessWidget {
               color: scheme.background.darken(5)),
         ),
         Tooltip(
-          message: 'Custom, typically\nsecondary variant',
+          message: 'Custom, defaults to\ntertiary in FCS',
           child: Icon(Icons.panorama_wide_angle_select,
               color: customAppBarColor ?? scheme.secondaryContainer),
         ),
