@@ -7,6 +7,7 @@ import '../shared/controllers/theme_controller.dart';
 import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
+import '../shared/widgets/app/show_sub_theme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/app/use_key_colors_buttons.dart';
 import '../shared/widgets/universal/page_body.dart';
@@ -181,7 +182,8 @@ class HomePage extends StatelessWidget {
                           // https://github.com/flutter/flutter/issues/91772
                           const ShowThemeDataColors(),
                           const SizedBox(height: 8),
-
+                          const ShowSubThemeColors(),
+                          const SizedBox(height: 8),
                           SwitchListTileAdaptive(
                             contentPadding: EdgeInsets.zero,
                             title: const Text('Use component themes'),

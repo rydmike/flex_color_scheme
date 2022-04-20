@@ -8,6 +8,7 @@ import 'shared/const/app_data.dart';
 import 'shared/widgets/app/responsive_scaffold.dart';
 import 'shared/widgets/app/show_color_scheme_colors.dart';
 import 'shared/widgets/app/show_sub_pages.dart';
+import 'shared/widgets/app/show_sub_theme_colors.dart';
 import 'shared/widgets/app/show_theme_data_colors.dart';
 import 'shared/widgets/universal/page_body.dart';
 import 'shared/widgets/universal/theme_mode_switch.dart';
@@ -849,6 +850,8 @@ class _HomePageState extends State<HomePage> {
               const ShowColorSchemeColors(),
               const SizedBox(height: 8),
               const ShowThemeDataColors(),
+              const SizedBox(height: 8),
+              const ShowSubThemeColors(),
               const SizedBox(height: 8),
               const ShowSubPages(),
               const Divider(),
