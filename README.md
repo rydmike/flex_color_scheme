@@ -8,7 +8,7 @@
 Use **FlexColorScheme** to make beautiful color scheme based Flutter themes,
 with optional primary color surface blends, or key color seeded schemes.
 The themes are based on the same concept as Flutter's ColorScheme based themes,
-but offers many additional features and a large number of pre-made themes.
+but it offers many additional features and numerous pre-made themes.
 
 <table>
   <tr>
@@ -40,7 +40,7 @@ default to the new rounded corners as specified by the
 [Material 3 guide](https://m3.material.io/), where the
 radius varies by widget type. You can keep this, or set the global widget
 radius to a value you prefer. You can also easily set the themed border
-radius per widget, and override the Material 3 default or the global radius
+radius per widget, and override the Material 3 default, or the global radius
 value you defined.
 
 <table>
