@@ -2,58 +2,215 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.0.0-dev.3 - April 20, 2022
+## v5.0.0 - April 21, 2022
 
-Test release to verify builds and minor changes before stable release.
+The full journey from version 4.2.0 to stable 5.0.0 includes the steps in
+change logs for development versions 5.0.0-dev.3, -dev.2 and -dev.1.
+Please refer to them for all details. This changelog contains a summary of
+breaking and other critical changes from version 4.2.0.
 
-### Documentation update
+### Overview
 
-* The package documentation has now moved too its own site at 
-  [docs.flexcolorscheme.com](https://docs.flexcolorscheme.com).
-  
-* It is a major update and rewrite of previous documentation. It also contains general 
-  Flutter theming guidance. One chapter is still work in progress. When it is completed,
-  the stable v5.0.0 will be released.
+FlexColorScheme version 5 is style wise a big breaking change since all the
+built-in produced `ColorScheme`s the themes use have been revised to follow
+the new Flutter 2.10.0 Material 3 based `ColorScheme`. The color changes to
+the built-in schemes have been kept minimal compared to previous styles.
 
-### Change: Custom "internal" and temporary `m3TextTheme` revised.
+Mostly new color values were added to provide support for all the new
+colors in the Flutter Material 3 `ColorScheme` update, that landed in Flutter
+2.10.0. The new colors are style aligned with past styles as far possible, while
+also keeping them inline with the Material 3 ColorScheme design intent.
 
-* **Style breaking with 4.2.0 and 5.0.0-dev.1 & 2**
-* Breaks past used style when opting in on component themes and its optional 
-  custom `m3TextTheme` enabled. The updated custom implementation of it now follows the 
-  implementation used in Flutter master channel, apart from this 
-  [issue](https://github.com/flutter/flutter/issues/102121), 
+As `ColorScheme.primaryVariant` and `secondaryVariant` have been deprecated
+in Flutter 2.10 SDK, so have they in FlexColorScheme. All past color constants
+for all color values and helper classes with the name "variant" in them, have been
+self deprecated in FlexColorScheme. The variant color values still exists,
+if you have used any of them directly, they still work. The old built-in
+variant color values will remain available at least until version 6.0,
+maybe even 7.0 if so requested by users.
+
+**Breaking**
+
+* Requires at least Flutter 2.10.0.
+  * Version 5.0.0 requires at least Flutter version 2.10.0 to work. This breaking
+    change is required since the new color properties in `ColorScheme` do not exist
+    in any stable version of Flutter before version 2.10.
+
+
+* `surfaceStyle` removed.
+  * In version 5.0.0, the in version 4.2.0 deprecated property `surfaceStyle`, including all
+    its implementing classes, enums, helpers and tests have been removed.
+  * Removed property: `surfaceStyle` in `FlexColorScheme.light` and `FlexSchemeData.light`.
+  * Removed property: `surfaceStyle` in `FlexColorScheme.dark` and `FlexSchemeData.dark`.
+  * Removed: enum `FlexSurface`, that only `surfaceStyle` was using.
+  * Removed: factory `FlexSchemeSurfaceColors.from` that was used to create
+    surface using the `surfaceStyle`. The factory `FlexSchemeSurfaceColors.blend`
+    replaced it in version 4.0.0 already, when using `surfaceMode` and `blendLevel`.
+  * **Migration:** Use `surfaceMode` and `blendLevel` instead, it has more blend
+    styles and finer granularity than the removed `surfaceStyle`.
+
+```dart
+theme: FlexThemeData.light(
+  scheme: FlexScheme.flutterDash,
+  surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+  blendLevel: 20,
+),
+```
+
+* `FlexSubThemesData.navigationBarIsStyled` removed.
+  * The property `navigationBarIsStyled` in `FlexSubThemesData` has been
+    removed. If you have used it, it has a broader more general replacement called
+    `FlexSubThemesData.useFlutterDefaults`.
+  * **Migration:** Consider using `useFlutterDefaults` instead, or set styles
+    manually using individual properties to desired styles matching Flutter defaults
+    un-themed component designs.
+
+
+* `FlexColorScheme.useSubThemes` no function
+  * Deprecated property `useSubThemes`. This property has no function after 4.2.0
+    stable and 5.0.0-dev.1. Previously setting this property to true activated
+    the default set and configuration of the optional opinionated component sub-themes,
+    even if you did not pass any `FlexSubThemesData()` configuration data to
+    `subThemesData`. Before when `useSubThemes` was true and no `subThemesData`
+    defined, it created one internally using the default constructor
+    `FlexSubThemesData()` and used it. It also ignored any defined and to
+    `subThemesData` assigned one, if the flag was set to false.
+  * The default component sub-themes are now instead always activated and created by
+    explicitly assigning at least a default constructor `FlexSubThemesData()` to
+    `FlexColorScheme.subThemesData`.
+  * **Migration:** If you previously had only set `FlexColorScheme.useSubThemes` to true and not
+    specified any `subThemesData` properties, you must now add the default constructor. Likewise,
+    if you had set `FlexColorScheme.useSubThemes` to false, and had a `FlexColorScheme.subThemesData`
+    defined, you must remove it disable using it. If you need to toggle it ON and OFF, use a bool
+    to enabled/disable it, then pass in the `FlexSubThemesData` when enabled,
+    and null when not using it.
+
+**Breaking** and deprecated due to Flutter SDK change in 2.10.0 stable release.
+
+* `primaryVariant` and `secondaryVariant`
+  * The colors `primaryVariant` and `secondaryVariant` in FlexColorScheme are
+    deprecated and can no longer be used to set colors values that result in any
+    color values in Flutter SDK deprecated same named `ColorScheme` color properties.
+  * The `ColorScheme` deprecated properties `primaryVariant` and
+    `secondaryVariant` will always get their Flutter SDK default values,
+    regardless of what input you give to them in FlexColorScheme. Flutter sets its
+    deprecated `primaryVariant` equal to `primary` and `secondaryVariant` equal
+    to `secondary`.
+  * This means that if your application used those color scheme values on any
+    custom widgets, their colors will change if you upgrade from a previous
+    version of FlexColorScheme and don't do any other changes. You need to
+    migrate to use `primaryContainer`, `secondaryContainer`, `tertiary` or
+    `tertiaryContainer` color, as replacement colors in your custom widgets.
+     The right choice depends on your color design.
+  * If you use a `FlexColorScheme` setup made for a version before version 5.0,
+    with version 5.0, and, if you have used custom color schemes where you
+    defined the`FlexColorScheme` properties `primaryVariant` and `secondaryVariant`
+    or defined and used them via custom `FlexSchemeColors`, in the `colors` property in
+    `FlexColorScheme`. **Then**, in those cases the **variant** color
+    properties will function as fallback input for color properties
+    `primaryContainer` and `secondaryContainer` respectively, unless own color
+    values for these properties are provided.
+  * When you upgrade package version to 5.0.0 and have used custom color schemes,
+    you will find your custom variant colors on the corresponding new
+    container colors. Be aware that past variant color shades are not necessarily a great
+    fit for a Material 3 design intent of container colors, but at least you will get
+    your past custom colors used in the new theme by default.
+  * **Migration:** Define new custom colors values for all container colors and
+    tertiary color. Use them to make your custom `FlexColorScheme` instead.
+    Then migrate away from using Flutter SDK `ColorScheme` colors `primaryVariant`
+    and `secondaryVariant` anywhere in your application. Instead, use any of its new
+    `ColorScheme` color properties as fitting with your design. This is something you have
+    to do after Flutter 2.10, even if you are not using FlexColorScheme. Sure, not immediately, but
+    eventually when the Flutter SDK `ColorScheme` colors `primaryVariant` and `secondaryVariant`
+    are removed after a year or so.
+
+**Change** and breaking past style.
+
+* The custom "internal" and temporary `m3TextTheme` was changed.
+  It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2.
+  It breaks past used style when opting in on component themes and its optional
+  custom `m3TextTheme` enabled. The updated custom implementation of it now follows the
+  implementation used in Flutter master channel, apart from this
+  [issue](https://github.com/flutter/flutter/issues/102121),
   where it for now implements the value used in the M3 Web guide.
-* The changes in styles otherwise concern the addition of the font geometry, height, which the 
-  previous custom implementation did not have. The usage of the custom `m3TextTheme` should be 
-  considered internal and temporary, it will be changed to use the actual Flutter implementation
-  once [PR #97829](https://github.com/flutter/flutter/pull/97829) lands in Flutter stable 
+  The changes in styles otherwise concern the addition of the font geometry height, which the
+  previous custom implementation did not have. The usage of the custom `m3TextTheme` should be
+  considered internal and temporary. It will be changed to use the actual Flutter implementation
+  once [PR #97829](https://github.com/flutter/flutter/pull/97829) lands in Flutter stable
   channel. The custom `m3TextTheme` will then be deprecated.
 
-### Change: Computed colors for `ThemeData` colors `primaryColorLight`, `primaryColorDark` and
-`secondaryHeaderColor` were changed. 
-
-* **Style breaking with 4.2.0 and 5.0.0-dev.1 & 2**, breaks past used styles on the rarely used 
-  colors `primaryColorLight`, `primaryColorDark` and  `secondaryHeaderColor`.
-
-* These `ThemeData` colors are on a deprecation path and will likely receive some new none
-  `MaterialColor` dependent color defaults when that change happens. The new `ColorScheme.primary` 
-  computed colors for these rarely used colors are better balanced than before, and work well 
+* The computed colors for `ThemeData` colors `primaryColorLight`, `primaryColorDark` and
+  `secondaryHeaderColor` were changed.
+  It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The change breaks past
+  used styles on these rarely used colors. These `ThemeData` colors are also on
+  a deprecation path and will likely receive some new none `MaterialColor` dependent
+  color defaults when that change happens. The new `ColorScheme.primary` computed
+  colors for these rarely used colors are better balanced than before, and work well
   regardless of used `ColorScheme.primary` shade and tint.
 
-### Change: Color definition for `FlexColor.espressoLightPrimary` color was changed.
-
-* **Style breaking with 4.2.0 and 5.0.0-dev.1 & 2:** New color for `FlexColor.espressoLightPrimary` 
-  breaks past used color for this color constant.
-  
-* The color was changed from `0xFF220804` to `0xFF452F2B`. Past color was too dark brown, almost 
-  black to be very usable in a UI. It was very black coffee like, but not very practical in a UI, 
+* The color definition value for `FlexColor.espressoLightPrimary` color was changed.
+  This is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The new color for
+  `FlexColor.espressoLightPrimary` breaks past used color for this color constant.
+  The color was changed from `0xFF220804` to `0xFF452F2B`. Past color was too dark brown, almost
+  black to be very usable in a UI. It was very black coffee like, but not very practical in a UI,
   it was too close to black. Since version 5 is anyway a major style breaking with the introduction
   of the new Material 3 ColorScheme, the opportunity to improve this color value used in the
   built-in theme `espresso` theme was used.
-  
-### Examples
 
-* Examples contain minor improvements and fixes.
+**Beware**
+
+* `SchemeColor` values and order, potentially breaking.
+  The enum `SchemeColor` has new values and past values are in a new order.
+  The order was changed to accommodate all the new color values, and to keep them in
+  the same order as their corresponding color properties in Flutter Material 3
+  `ColorScheme` color values. The change of order is potentially breaking,
+  but highly unlikely to break anything in major ways in normal usage.
+
+## v5.0.0-dev.3 - April 20, 2022
+
+**CHANGE** - Breaking past style
+
+* The custom "internal" and temporary `m3TextTheme` was changed.
+  It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2.
+  It breaks past used style when opting in on component themes and its optional
+  custom `m3TextTheme` enabled. The updated custom implementation of it now follows the
+  implementation used in Flutter master channel, apart from this
+  [issue](https://github.com/flutter/flutter/issues/102121),
+  where it for now implements the value used in the M3 Web guide.
+  The changes in styles otherwise concern the addition of the font geometry, height, which the
+  previous custom implementation did not have. The usage of the custom `m3TextTheme` should be
+  considered internal and temporary, it will be changed to use the actual Flutter implementation
+  once [PR #97829](https://github.com/flutter/flutter/pull/97829) lands in Flutter stable
+  channel. The custom `m3TextTheme` will then be deprecated.
+
+* The computed colors for `ThemeData` colors `primaryColorLight`, `primaryColorDark` and
+  `secondaryHeaderColor` were changed.
+  It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The change breaks past
+  used styles on these rarely used colors. These `ThemeData` colors are also on
+  a deprecation path and will likely receive some new none `MaterialColor` dependent
+  color defaults when that change happens. The new `ColorScheme.primary` computed
+  colors for these rarely used colors are better balanced than before, and work well
+  regardless of used `ColorScheme.primary` shade and tint.
+
+* The color definition value for `FlexColor.espressoLightPrimary` color was changed.
+  This is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The new color for
+  `FlexColor.espressoLightPrimary` breaks past used color for this color constant.
+  The color was changed from `0xFF220804` to `0xFF452F2B`. Past color was too dark brown, almost
+  black to be very usable in a UI. It was very black coffee like, but not very practical in a UI,
+  it was too close to black. Since version 5 is anyway a major style breaking with the introduction
+  of the new Material 3 ColorScheme, the opportunity to improve this color value used in the
+  built-in theme `espresso` theme was used.
+
+**CHANGE**
+
+* The package documentation has now moved too its own site at
+  [docs.flexcolorscheme.com](https://docs.flexcolorscheme.com).
+  It is a major update and rewrite of previous documentation. It also contains general
+  Flutter theming guidance.
+
+**FIX**
+
+* The examples contain minor improvements and fixes.
 
 ## v5.0.0-dev.2 - April 4, 2022
 

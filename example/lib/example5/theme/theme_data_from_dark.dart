@@ -17,7 +17,7 @@ import 'flex_theme_dark.dart';
 /// We use active [ColorScheme] by grabbing it from active FlexColorScheme
 /// using its toScheme method. Which gives us a standard ColorScheme that we
 /// can use with ThemeData.from to create the ThemeData from the exact same
-/// colors. The color scheme it creates also contains the blends, M3 seeded
+/// colors. The [ColorScheme] it creates also contains the blends, M3 seeded
 /// color etc, but since [ColorScheme], only contains surface and background
 /// colors and is missing [FlexColorScheme] custom Scaffold and dialog color,
 /// it cannot provide those colors.
@@ -39,20 +39,20 @@ ThemeData themeDataFromDark(ThemeController controller) {
       brightness: Brightness.dark,
       fontFamily: controller.useAppFont ? AppData.font : null,
     ).textTheme,
-    // The [ColorScheme] we get here is the same one you can also generate
-    // Copy/paste code for in the ThemesPlayground UI.
+    // The ColorScheme we get here is the same one you can also generate
+    // Copy/paste code for in the ThemesPlayground UI, and it represent the
+    // effective scheme in the Playground app.
     colorScheme: flexColorSchemeDark(controller).toScheme,
+  ).copyWith(
     // To our ThemeData we also apply the visual density, typography, selected
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
-    // ThemeData. WE do this so that the created themes will be using the same
-    // features.
-    // The Flutter SDK new `useMaterial3` flag that is available in the UI,
-    // still does very little in Flutter 2.10.x, but in later versions we can
-    // use it to see what it changes.
-  ).copyWith(
+    // ThemeData. We do this so created themes will be using the same features.
     visualDensity: AppData.visualDensity,
     typography: Typography.material2018(platform: controller.platform),
     platform: controller.platform,
+    // The Flutter SDK new `useMaterial3` flag that is available in the UI,
+    // still does very little in Flutter 2.10.x, but in later versions we can
+    // use it to see what it changes.
     useMaterial3: controller.useMaterial3,
   );
 }

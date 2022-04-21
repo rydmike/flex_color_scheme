@@ -89,7 +89,8 @@ class DemoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Whenever the user updates theme settings, the MaterialApp is rebuilt.
+    // Whenever the theme controller notifies the animation listener in the
+    // AnimatedBuilder, the MaterialApp is rebuilt.
     return AnimatedBuilder(
       animation: themeController,
       builder: (BuildContext context, Widget? child) {
