@@ -498,9 +498,9 @@ class ThemeServicePrefs implements ThemeService {
   // using key, as key for the value.
   //
   // SharedPreferences cannot handle saving "NULL" values like Hive can.
-  // In this app many theme property settings have meaning meaning when they
+  // In this app many theme property settings have meaning when they
   // are null, it typically means we are using Flutter SDK default theme
-  // style. We need to be able to persist and represent this setting for such
+  // style. We need to be able to persist and represent this setting.
   // To be able to also use SharedPreferences as a persistence service for
   // this app, we use a few simple rules.
   //

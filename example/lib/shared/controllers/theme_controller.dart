@@ -28,7 +28,7 @@ enum TonalPalettes {
 /// The controller glues data Services to Flutter Widgets. The ThemeController
 /// uses the ThemeService to save and load theme settings.
 ///
-/// This controller on purpose demonstrates persisting each theme setting value
+/// This setup on purpose demonstrates persisting each theme setting value
 /// as its own string key and value pair. With this amount of values,
 /// bundling them all up in a data class and persisting them all as one big
 /// serialized JSON string, with just one settings key, would be more

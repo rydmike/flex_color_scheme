@@ -18,7 +18,6 @@ import '../../shared/controllers/theme_controller.dart';
 /// The [ThemeData.from] a [ColorScheme] will be used to demonstrate difference
 /// using the exact same [ColorScheme], but using just default [ThemeData] with
 /// no [FlexColorScheme] theming applied.
-///
 ThemeData flexThemeLight(ThemeController controller) =>
     flexColorSchemeLight(controller).toTheme;
 
@@ -257,7 +256,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
     // [TonalPalette] and it's usage in [ColorScheme] config.
     // You can make your custom [FlexTones] object right here
     // and apps it it, this just uses an int value to select
-    // between a few preconfigured ones.
+    // between a few pre-configured ones.
     tones: AppColor.flexTonesConfig(
         Brightness.light, controller.usedFlexToneSetup),
     //
@@ -270,7 +269,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
     // The platform can be toggled in the app, but not saved.
     platform: controller.platform,
     // Opt-in/out of using Flutter SDK Material3 based theming
-    // features. In Flutter SDK 2.10.3 and earlier it has almost no
+    // features. In Flutter SDK 2.10 and earlier it has almost no
     // effect, but it will later and then we can use this toggle
     // with FlexColorScheme too, and in this demo we can see its
     // impact easily.

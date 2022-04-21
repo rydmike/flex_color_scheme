@@ -54,7 +54,6 @@ import 'widgets/pages/home_page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Use a ThemeController, which glues our theme settings to Flutter Widgets.
-  //
   // The controller uses an abstract ThemeService interface to get and save the
   // settings. There are 3 implementations available to choose from:
   //
@@ -75,20 +74,17 @@ Future<void> main() async {
   // The box name is just a file name for the file that stores the settings.
   final ThemeService themeService =
       ThemeServiceHive('flex_color_scheme_v5_box_5');
-  // final ThemeService themeService = ThemeServicePrefs();
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.
   final ThemeController themeController = ThemeController(themeService);
-  // Load all the preferred theme settings, while the app is loading, before
-  // MaterialApp is created. This prevents a sudden theme change when the app
-  // is first displayed.
+  // Load preferred theme settings, while the app is loading, before MaterialApp
+  // is created, this prevents a theme change when the app is first displayed.
   await themeController.loadAll();
   // Run the app and pass in the ThemeController. The app listens to the
-  // ThemeController for changes.
-  // The ThemeController controls all the myriad of Theme settings used
-  // in the demo application and also persists settings with injected
-  // ThemeService.
+  // ThemeController for changes. The same ThemeController as used in example 4
+  // controls all the myriad of Theme settings and the ThemeService also
+  // persists the settings with the injected ThemeServiceHive.
   runApp(DemoApp(controller: themeController));
 }
 
@@ -98,7 +94,8 @@ class DemoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Whenever the user updates theme controller, the MaterialApp is rebuilt.
+    // Whenever the theme controller notifies the animation listener in the
+    // AnimatedBuilder, the MaterialApp is rebuilt.
     return AnimatedBuilder(
         animation: controller,
         builder: (BuildContext context, Widget? child) {

@@ -7488,7 +7488,7 @@ class _AlphaValues {
 /// of freedom in seeded ColorScheme, using defined seed colors for
 /// primary, secondary and tertiary colors. The extended [FlexCorePalette]
 /// version also allows for adjusting chroma usage and levels that are
-/// hard coded into M3 design [CorePalette]. With default values
+/// hard coded into M3 design [CorePalette].
 ///
 /// 2) Configurable tone to ColorScheme mapping.
 ///
@@ -7502,7 +7502,7 @@ class _AlphaValues {
 ///
 /// Keeping this helper class private for now in [FlexColorScheme], if there
 /// ever is a request for making it available directly via the library,
-/// post an issue and we can can consider it.
+/// post an issue and we will consider it.
 class _Scheme {
   final int primary;
   final int onPrimary;
