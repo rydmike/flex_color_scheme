@@ -78,12 +78,15 @@ theme: FlexThemeData.light(
   * The default component sub-themes are now instead always activated and created by
     explicitly assigning at least a default constructor `FlexSubThemesData()` to
     `FlexColorScheme.subThemesData`.
+  * Removing this property makes the API more consistent. It follows the same
+    design that is used for `keyColors`  with `FlexKeyColors` and `tones` with `FlexTones`.
   * **Migration:** If you previously had only set `FlexColorScheme.useSubThemes` to true and not
     specified any `subThemesData` properties, you must now add the default constructor. Likewise,
     if you had set `FlexColorScheme.useSubThemes` to false, and had a `FlexColorScheme.subThemesData`
     defined, you must remove it disable using it. If you need to toggle it ON and OFF, use a bool
     to enabled/disable it, then pass in the `FlexSubThemesData` when enabled,
     and null when not using it.
+
 
 **Breaking** and deprecated due to Flutter SDK change in 2.10.0 stable release.
 
