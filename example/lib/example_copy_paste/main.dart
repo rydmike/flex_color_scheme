@@ -69,8 +69,7 @@ class _DemoAppState extends State<DemoApp> {
       //   fontFamily: GoogleFonts.notoSans().fontFamily,
       // ),
       // darkTheme: FlexThemeData.dark(
-      //   colors: FlexColor.schemes[FlexScheme.flutterDash]!.light.defaultError
-      //       .toDark(19, true),
+      //   scheme: FlexScheme.flutterDash,
       //   blendLevel: 16,
       //   appBarStyle: FlexAppBarStyle.background,
       //   appBarOpacity: 0.95,

@@ -3,10 +3,10 @@
 This file contains all the examples used to create ThemeData in the
 documentation chapter [Roads to ThemeData](https://docs.flexcolorscheme.com/theming_roads).
 
-In the chapter these examples are used with the Copy-Paste Playground to 
+In the chapter these examples are used with the Copy-Paste Playground to
 study the different results.
 
-To use the examples as in the road to ThemeData, you will also need to 
+To use the examples as in the road to ThemeData, you will also need to
 copy in these constants into `main.dart` file.
 
 ```dart
@@ -276,21 +276,12 @@ theme: ThemeData(
   colorScheme: flexSchemeLight,
   brightness: flexSchemeLight.brightness,
   primaryColor: flexSchemeLight.primary,
-  primaryColorLight: flexSchemeLight.brightness == Brightness.dark
-      ? Color.alphaBlend(
-          Colors.white.withAlpha(0x59), flexSchemeLight.primary)
-      : Color.alphaBlend(
-          Colors.white.withAlpha(0x66), flexSchemeLight.primary),
-  primaryColorDark: flexSchemeLight.brightness == Brightness.dark
-      ? Color.alphaBlend(
-          Colors.black.withAlpha(0x72), flexSchemeLight.primary)
-      : Color.alphaBlend(
-          Colors.black.withAlpha(0x66), flexSchemeLight.primary),
-  secondaryHeaderColor: flexSchemeLight.brightness == Brightness.dark
-      ? Color.alphaBlend(
-          Colors.black.withAlpha(0x99), flexSchemeLight.primary)
-      : Color.alphaBlend(
-          Colors.white.withAlpha(0xCC), flexSchemeLight.primary),
+  primaryColorLight: Color.alphaBlend(
+      Colors.white.withAlpha(0x66), flexSchemeLight.primary),
+  primaryColorDark: Color.alphaBlend(
+      Colors.black.withAlpha(0x66), flexSchemeLight.primary),
+  secondaryHeaderColor: Color.alphaBlend(
+      Colors.white.withAlpha(0xCC), flexSchemeLight.primary),
   toggleableActiveColor: flexSchemeLight.secondary,
   scaffoldBackgroundColor: flexSchemeLight.background,
   canvasColor: flexSchemeLight.background,
@@ -301,29 +292,18 @@ theme: ThemeData(
   indicatorColor: flexSchemeLight.onPrimary,
   dividerColor: flexSchemeLight.onSurface.withOpacity(0.12),
   errorColor: flexSchemeLight.error,
-  applyElevationOverlayColor:
-      flexSchemeLight.brightness == Brightness.dark,
+  applyElevationOverlayColor: false,
 ),
-//
 darkTheme: ThemeData(
   colorScheme: flexSchemeDark,
   brightness: flexSchemeDark.brightness,
   primaryColor: flexSchemeDark.primary,
-  primaryColorLight: flexSchemeDark.brightness == Brightness.dark
-      ? Color.alphaBlend(
-          Colors.white.withAlpha(0x59), flexSchemeDark.primary)
-      : Color.alphaBlend(
-          Colors.white.withAlpha(0x66), flexSchemeDark.primary),
-  primaryColorDark: flexSchemeDark.brightness == Brightness.dark
-      ? Color.alphaBlend(
-          Colors.black.withAlpha(0x72), flexSchemeDark.primary)
-      : Color.alphaBlend(
-          Colors.black.withAlpha(0x66), flexSchemeDark.primary),
-  secondaryHeaderColor: flexSchemeDark.brightness == Brightness.dark
-      ? Color.alphaBlend(
-          Colors.black.withAlpha(0x99), flexSchemeDark.primary)
-      : Color.alphaBlend(
-          Colors.white.withAlpha(0xCC), flexSchemeDark.primary),
+  primaryColorLight: Color.alphaBlend(
+      Colors.white.withAlpha(0x59), flexSchemeDark.primary),
+  primaryColorDark: Color.alphaBlend(
+      Colors.black.withAlpha(0x72), flexSchemeDark.primary),
+  secondaryHeaderColor: Color.alphaBlend(
+      Colors.black.withAlpha(0x99), flexSchemeDark.primary),
   toggleableActiveColor: flexSchemeDark.secondary,
   scaffoldBackgroundColor: flexSchemeDark.background,
   canvasColor: flexSchemeDark.background,
@@ -331,13 +311,10 @@ darkTheme: ThemeData(
   cardColor: flexSchemeDark.surface,
   bottomAppBarColor: flexSchemeDark.surface,
   dialogBackgroundColor: flexSchemeDark.surface,
-  indicatorColor: flexSchemeDark.onPrimary,
+  indicatorColor: flexSchemeDark.onBackground,
   dividerColor: flexSchemeDark.onSurface.withOpacity(0.12),
   errorColor: flexSchemeDark.error,
-  applyElevationOverlayColor:
-      flexSchemeDark.brightness == Brightness.dark,
+  applyElevationOverlayColor: true,
 ),
 
 ```
-
-
