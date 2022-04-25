@@ -555,7 +555,7 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Compose the sub themes from above fragments.
   //
-  final String lightSubTheme = controller.useSubThemes
+  String lightSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
           '$useFlutterDefaults'
           '$interactionEffects'
@@ -647,7 +647,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '  ),\n'
       : '';
-  final String darkSubTheme = controller.useSubThemes
+  String darkSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
           '$useFlutterDefaults'
           '$interactionEffects'
@@ -737,6 +737,13 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailLabelType'
           '  ),\n'
       : '';
+  // Make a prettier version of the constructor if we have default one.
+  if (lightSubTheme == '  subThemesData: const FlexSubThemesData(\n  ),\n') {
+    lightSubTheme = '  subThemesData: const FlexSubThemesData(),\n';
+  }
+  if (darkSubTheme == '  subThemesData: const FlexSubThemesData(\n  ),\n') {
+    darkSubTheme = '  subThemesData: const FlexSubThemesData(),\n';
+  }
   //
   // Define code for key color usage and tones.
   final String useSecondary = controller.useSecondary
