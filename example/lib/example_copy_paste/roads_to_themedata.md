@@ -76,7 +76,7 @@ const ColorScheme flexSchemeDark = ColorScheme(
 );
 ```
 
-The examples, cases 1 to 12, and the custom modified ThemeData.from apporach.
+The examples, cases 1 to 12, and the custom modified ThemeData.from approach.
 
 ```dart
 // 1a) TD.light

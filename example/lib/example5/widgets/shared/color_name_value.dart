@@ -232,7 +232,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                                 onTap: () async {
                                   await copyColorToClipboard(
                                     context,
-                                    widget.color,
+                                    // Safe bang, we are checking above != null
+                                    widget.inputColor!,
                                   );
                                 },
                               ),
