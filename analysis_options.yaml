@@ -1,4 +1,4 @@
-# RydMike LINTER Preferences v1.2.8
+# RydMike LINTER Preferences v1.2.9
 #
 # Get this file here: https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
@@ -32,13 +32,15 @@ analyzer:
     - "bin/cache/**"
     - "lib/generated_plugin_registrant.dart"
 
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
 
   errors:
     # Without ignore here, we cause import of all_lint_rules to warn, because some rules conflict.
     # We explicitly enabled even conflicting rules and are fixing the conflicts in this file.
+    # Put it to warning temporarily troubleshoot lint rule settings.
     included_file_warning: ignore
 
     # Treat missing required parameters as an error, not as a hint or a warning.
@@ -63,7 +65,7 @@ analyzer:
     # does get in the way a bit if all you want to do is a null to default value release runtime
     # safety/fallback assignment. For that use case you have to add a local rule override. With
     # null-safety, the need for this kind of null check and re-assignment to default if null,
-    # pretty much goes away. Considering the comment in:
+    # is rarely needed. Considering the comment in:
     # https://dart-lang.github.io/linter/lints/parameter_assignments.html:
     # "Assigning new values to parameters is generally a bad practice unless an operator
     # such as ??= is used. Otherwise, arbitrarily reassigning parameters is usually a mistake."
