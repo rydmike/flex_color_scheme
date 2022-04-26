@@ -14,7 +14,7 @@ dependencies:
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_picker
-  flex_color_picker: ^2.4.0
+  flex_color_picker: ^2.5.0
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_scheme
@@ -31,7 +31,7 @@ dependencies:
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^2.3.1
+  google_fonts: ^2.3.2
 
   # Hive local storage, by Simon Leir.
   # https://pub.dev/packages/hive
@@ -58,7 +58,7 @@ dependencies:
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
-  url_launcher: ^6.0.20
+  url_launcher: ^6.1.0
 
 dev_dependencies:
   flutter_test:
