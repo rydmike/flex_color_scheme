@@ -2,6 +2,17 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
+## v5.0.1 - April 29, 2022
+
+**FIX**
+
+* For the custom and temporary m3TextTheme: Fixed the Typography letterSpacing for bodyLarge to
+  match corrected M3 spec that had wrong specification on the M3 website 0.15 -> 0.5. See
+  Flutter SDK [issue 102121](https://github.com/flutter/flutter/issues/102121).
+* Themes Playground: Fix wrong color code copied to clipboard when tapping input color.
+* Themes Playground: Make prettier default constructor for FlexSubThemesData() if that is 
+  all that was defined in Themes Playground config.
+
 ## v5.0.0 - April 21, 2022
 
 The full journey from version 4.2.0 to stable 5.0.0 includes the steps in

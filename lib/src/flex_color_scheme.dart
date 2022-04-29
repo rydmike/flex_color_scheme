@@ -4600,12 +4600,12 @@ class FlexColorScheme with Diagnosticable {
         debugLabel: 'englishLike bodyLarge 2021',
         fontSize: 16.0,
         fontWeight: FontWeight.w400,
-        // TODO(rydmike): Track Flutter SDK bodyLarge letterSpacing issue.
-        // M3 Guide says 0.15: https://m3.material.io/styles/typography/tokens
+        // M3 Guide said 0.15: https://m3.material.io/styles/typography/tokens
         // Table here said 0.5: https://github.com/flutter/flutter/issues/89853
-        // Went with M3 Guide value, reported discrepancy.
-        // Also reported this: https://github.com/flutter/flutter/issues/102121
-        letterSpacing: 0.15,
+        // Used Guide value first, turned out M3 WEB spec was wrong based on:
+        // https://github.com/flutter/flutter/issues/102121
+        // Changed to 0.5 in fix version 5.0.1
+        letterSpacing: 0.5,
         height: 1.50,
         textBaseline: TextBaseline.alphabetic,
         leadingDistribution: TextLeadingDistribution.even),

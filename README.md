@@ -5,9 +5,9 @@
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
 Use **FlexColorScheme** to make beautiful color scheme based Flutter themes,
-with optional primary color surface blends, or key color seeded schemes.
+with optional primary color surface blends, or key color seeded color schemes.
 The themes are based on the same concept as Flutter's ColorScheme based themes,
-but it offers many additional features and numerous pre-made themes.
+but offers many additional features, and numerous pre-made themes.
 
 <table>
   <tr>
@@ -20,13 +20,14 @@ but it offers many additional features and numerous pre-made themes.
 
 When you theme a Flutter application, all built-in widgets use the colors of the
 `ColorScheme` in your theme. At least in theory, and it is almost so if you defined
-your `ThemeData` by using the `ThemeData.from` factory, but it still misses
+your `ThemeData` by using the `ThemeData.from` factory, but it misses
 a few details.
 
-**FlexColorScheme** ensures that all Flutter SDK widgets gets themed completely by its
-schemes and custom colors you provide. It applies its `ColorScheme` colors
-to relevant color properties in `ThemeData`, as long as they still exist. This
+**FlexColorScheme** ensures that all Flutter SDK UI components gets themed completely
+by its color schemes and custom colors you provide. It applies effective `ColorScheme`
+colors to all color properties in `ThemeData`, as long as they still exist. This
 ensures that all the direct colors properties in `ThemeData` match your `ColorScheme`.
+There are no surprises in `ThemeData` that do not match your `ColorScheme`.
 
 You can opt-in on using opinionated component sub-themes.
 By doing so you can for example adjust the border radius on all UI widgets
@@ -54,8 +55,8 @@ value you defined.
 With **FlexColorScheme** component themes you use simple flat property values.
 No need for verbose Flutter SDK component sub-themes, with `ShapeBorder`
 definitions on multiple widget themes to change their border radius. The component
-theming provides a large amount of easy to configure options via simple
-properties, instead of complicated nested ones. In many cases you can
+theming provides a large amount of easy to configure options via simple flat
+properties, instead of complicated nested ones. In many cases you can also
 avoid the both complicated and confusing `MaterialState` theming properties.
 
 **FlexColorScheme** has many advanced coloring features, like using
