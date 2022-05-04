@@ -452,7 +452,7 @@ class FlexTones with Diagnosticable {
   /// Tone used for [ColorScheme.inversePrimary] from primary [TonalPalette].
   final int inversePrimaryTone;
 
-  /// Cam16 chroma value to use for primary colors [TonalPalette} generation.
+  /// Cam16 chroma value to use for primary colors [TonalPalette] generation.
   ///
   /// If null, the chroma value from the used primary seed key color is used,
   /// if it is larger than [primaryMinChroma].
@@ -463,7 +463,7 @@ class FlexTones with Diagnosticable {
   /// reasonably vivid and usable regardless of uses primary key color.
   ///
   /// To use chroma value from the primary key color, pass in null and keep
-  /// min chroma below  desired threshold for required colorfulness.
+  /// min chroma below desired threshold for required colorfulness.
   final double? primaryChroma;
 
   /// The minimum used chroma value.
@@ -475,7 +475,7 @@ class FlexTones with Diagnosticable {
   /// Flutter SDK uses 48 via a hard coded value and design.
   final double primaryMinChroma;
 
-  /// Cam16 chroma value to use for secondary colors [TonalPalette} generation.
+  /// Cam16 chroma value to use for secondary colors [TonalPalette] generation.
   ///
   /// If null, the chroma value from the used secondary seed key color is used,
   /// if it is larger than [secondaryMinChroma].
@@ -487,7 +487,7 @@ class FlexTones with Diagnosticable {
   /// at the mid-point tones of the palette.
   ///
   /// To use chroma value from the primary key color, pass in null and keep
-  /// min chroma below  desired threshold for required colorfulness.
+  /// min chroma below desired threshold for required colorfulness.
   final double? secondaryChroma;
 
   /// The minimum used chroma value.
@@ -501,7 +501,7 @@ class FlexTones with Diagnosticable {
   /// always locked to 16.
   final double secondaryMinChroma;
 
-  /// Cam16 chroma value to use for tertiary colors [TonalPalette} generation.
+  /// Cam16 chroma value to use for tertiary colors [TonalPalette] generation.
   ///
   /// If null, the chroma value from the used tertiary seed key color is used,
   /// if it is larger than [tertiaryMinChroma].
@@ -514,7 +514,7 @@ class FlexTones with Diagnosticable {
   /// the default secondary tonal palette.
   ///
   /// To use chroma value from the primary key color, pass in null and keep
-  /// min chroma below  desired threshold for required colorfulness.
+  /// min chroma below desired threshold for required colorfulness.
   final double? tertiaryChroma;
 
   /// The minimum used chroma value.
@@ -528,7 +528,7 @@ class FlexTones with Diagnosticable {
   /// always locked to 24.
   final double tertiaryMinChroma;
 
-  /// Cam16 chroma value to use for neutral colors [TonalPalette} generation.
+  /// Cam16 chroma value to use for neutral colors [TonalPalette] generation.
   ///
   /// Always uses chroma from the primary key color, but you can vary the
   /// amount of chroma from primary key color that is used to generate
@@ -539,7 +539,7 @@ class FlexTones with Diagnosticable {
   final double neutralChroma;
 
   /// Cam16 chroma value to use for neutralVariant colors
-  /// [TonalPalette} generation.
+  /// [TonalPalette] generation.
   ///
   /// Always uses chroma from the primary key color, but you can vary the
   /// amount of chroma from primary key color that is used to generate

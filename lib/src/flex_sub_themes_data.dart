@@ -320,17 +320,17 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool interactionEffects;
 
-  /// Sets the blend level strength used of the onColor's color pair's color,
-  /// into the onColor color, for none surface onColors.
+  /// Sets the blend level strength of container color used on its onColor.
   ///
-  /// Use selected [surfaceMode] and [blendOnLevel] in [FlexColorScheme.light]
-  /// and [FlexColorScheme.dark] to also blend in each corresponding
-  /// [ColorScheme] color property's color into onColors, also for
-  /// [onPrimary], [onSecondary] and [onTertiary] if [blendOnColors] is true.
+  /// Use [blendOnLevel] value to in FlexColorScheme themes to also blend in
+  /// each corresponding [ColorScheme] color property's color into its onColors.
   ///
   /// If [blendOnColors] is false, the [blendOnLevel] setting only affects
   /// [onSurface], [onBackGround], [onPrimaryContainer], [onSecondaryContainer]
   /// [onTertiaryContainer] and [onErrorContainer].
+  ///
+  /// If [blendOnColors] is true, it also impacts [onPrimary], [onSecondary]
+  /// [onTertiary] and [onError].
   ///
   /// The blend level is the integer decimal value of the alpha value
   /// used in the alpha blend function. It mixes one color with another
@@ -339,35 +339,40 @@ class FlexSubThemesData with Diagnosticable {
   /// color.
   ///
   /// Blending the on colors results in lower contrast than when not doing so,
-  /// but it still works well on lower blend levels. This design is in line
-  /// with the look one gets when use key color seeded based [ColorScheme]s,
+  /// but it still works well on lower blend levels. This design is in-line
+  /// with the look one gets when using key color seeded based [ColorScheme]s,
   /// but this version is based on alpha blends instead of the Material
-  /// Design 3 Tonal Color Palette and its tones. This version can also use
-  /// blends on main colors, not only the onContainer colors.
+  /// Design 3 Tonal Color Palette and its tones.
   ///
-  /// The effect can be adjusted and can be turned completely off off by
-  /// setting [blendOnLevel] to 0 (zero).
+  /// Blending the on colors results in lower contrast than when not doing so,
+  /// but it works well on lower blend levels. The effect can be adjusted
+  /// with [blendOnLevel] and completely turned off by setting [blendOnLevel]
+  /// to 0 (zero).
   ///
   /// Defaults to 0.
   final int blendOnLevel;
 
-  /// Enable [blendOnLevel] onColor blending on more colors.
+  /// Set to true to enable [blendOnLevel] based onColor blending also on
+  /// [onPrimary], [onSecondary] and [onTertiary] colors.
   ///
-  /// Use selected [surfaceMode] and [blendOnLevel] in [FlexColorScheme.light]
-  /// and [FlexColorScheme.dark] to also blend in each corresponding
-  /// [ColorScheme] color property's color into onColors, also for
-  /// [onPrimary], [onSecondary] and [onTertiary] if [blendOnColors] is true.
+  /// Use [blendOnLevel] value to in FlexColorScheme themes to also blend in
+  /// each corresponding [ColorScheme] color property's color into its onColors.
   ///
   /// If [blendOnColors] is false, the [blendOnLevel] setting only affects
   /// [onSurface], [onBackGround], [onPrimaryContainer], [onSecondaryContainer]
   /// [onTertiaryContainer] and [onErrorContainer].
   ///
+  /// If [blendOnColors] is true, it also impacts [onPrimary], [onSecondary],
+  /// [onTertiary] and [onError].
+  ///
   /// Blending the on colors results in lower contrast than when not doing so,
-  /// but it still works well on lower blend levels. The effect can be adjusted
-  /// with [blendOnLevel] and completely turned off by setting [blendOnColors]
+  /// but it works well on lower blend levels. The effect can be adjusted
+  /// with [blendOnLevel] and completely turned off by setting [blendOnLevel]
   /// to 0 (zero).
   ///
-  /// Defaults to true.
+  /// Defaults to true. Main colors also get hint of its own color in their
+  /// onColor. Consider setting this property true in dark mode, and false in
+  /// light theme mode, for a style that matches the Material 3 color design.
   final bool blendOnColors;
 
   /// Set to true to use Flutter SDK default component theme designs.
