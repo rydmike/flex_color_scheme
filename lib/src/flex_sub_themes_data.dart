@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_sub_themes.dart';
 
@@ -485,39 +486,35 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool blendTextTheme;
 
-  /// Use a Material 3 like and inspired text theme.
+  /// Use Material 3 TextTheme and Typography
   ///
   /// When opting in on using the sub-theming, this flag controls if the
-  /// text theme that uses Material 3 like font sizes and letter spacing,
-  /// (typography) as specified for phones in the
-  /// [Material 3 Design Guide](https://m3.material.io),
-  /// is also used.
+  /// TextTheme will use the new Material 3 [Typography.material2021]
+  /// as specified in the [Material 3 Design Guide](https://m3.material.io).
   ///
-  /// The text theme is defined in [FlexColorScheme.m3TextTheme]. When the
-  /// actual M3 based text themes are defined in Flutter SDK stable release
-  /// they will be used instead. When that happens this style may be deprecated
-  /// and removed. It will likely happen in next stable release. The one
-  /// after Flutter 2.10.x.
+  /// Defaults to true.
   ///
-  /// If you need to use none EnglishLike typography for your locale, then
-  /// using this text theme might not be ideal. It only provides
-  /// the EnglishLike geometry, not the dense and tall ones that some locales
-  /// prefer or need. This limitation will be removed when the M3 Typography is
-  /// supported in Flutter SDK. If this text theme causes issues with your
-  /// locale or it otherwise does not suite your design, then set this
-  /// [useTextTheme] to false.
+  /// If set to true [Typography.material2021] is used.
+  /// Note that [Typography.material2021] will also be used, even if this flag
+  /// is false if [ThemeData.useMaterial3] is true, which can also be set via
+  /// [FlexColorScheme.useMaterial3].
   ///
-  /// After the new M3 Typography becomes available, this toggle we be used to
-  /// opt-in on using it, without need to also set `FlexColorScheme` and via it
-  /// `ThemeData` property `useMaterial3` to true to get the typography.
-  /// Optionally you will then also just be able to configure the Typography
-  /// to the 2021 variant without using Material3 flag too.
+  /// When using [FlexColorScheme], and [ThemeData.useMaterial3] is true and
+  /// sub themes ar not used, or if used and [useTextTheme] is false, then
+  /// default typography is [Typography.material2018]. If [FlexColorScheme] is
+  /// not used at all, and your [ThemeData] has [ThemeData.useMaterial3] false,
+  /// then Flutter defaults to using very old poor [Typography.material2014].
+  /// In such cases consider defining your typography manually to
+  /// [Typography.material2018] or why not even [Typography.material2021].
   ///
   /// FlexColorScheme fully supports using any custom TextTheme and fonts, just
   /// like ThemeData. You apply and use them just as you would with ThemeData.
   /// This text theme is just a custom predefined TextTheme.
   ///
-  /// Defaults to true.
+  /// If you dynamically change the Theme Typography in application, Flutter
+  /// SDK throws an assert error in debug mode, this is Flutter limitation
+  /// and not FlexColorScheme related, see issue:
+  // TODO(rydmike): Add Typography issue link.
   final bool useTextTheme;
 
   /// Border radius used on all widgets when [FlexColorScheme] use its

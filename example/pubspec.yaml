@@ -1,10 +1,10 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 5.0.1
+version: 5.1.0
 publish_to: 'none'
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: '>=2.10.0'
+  sdk: '>=2.17.0 <3.0.0'
+  flutter: '>=3.0.0'
 
 dependencies:
   # Adds the Cupertino Icons font to your application. Used by the
@@ -45,11 +45,11 @@ dependencies:
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
-  path_provider: ^2.0.9
+  path_provider: ^2.0.10
 
   # Store value pair shared preference data, by Google flutter.dev.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.15
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
@@ -58,7 +58,7 @@ dependencies:
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
-  url_launcher: ^6.1.0
+  url_launcher: ^6.1.2
 
 dev_dependencies:
   flutter_test:

@@ -4435,28 +4435,28 @@ class FlexColorScheme with Diagnosticable {
   //
   //****************************************************************************
 
-  /// A Material 3 (M3) like and inspired [TextTheme].
+  /// DEPRECATED: A Material 3 (M3) like and inspired [TextTheme].
   ///
-  /// This is used by the sub themes opt-in toggle to by default make the
-  /// TextTheme match Material 3 phone size text theme.
+  /// This property was deprecated in version 6.0.0. With release of Flutter
+  /// 3.0.0, it is no longer needed in FlexColorScheme. It will be removed in
+  /// FCS version 7.0.0.
   ///
-  /// This static constant will no longer be needed when the full support, with
-  /// Typography for M3 TextTheme lands in flutter stable channel, see:
-  /// https://github.com/flutter/flutter/pull/97829
-  /// When that happens it will be used instead and this TextTheme will
-  /// be deprecated.
+  /// This text theme was used in versions before FCS 6.0.0 when the sub-themes
+  /// text theme opt-in toggle was used, to make a TextTheme that matched the
+  /// Material 3 text theme specification before it existed in Flutter stable
+  /// channel. After release of Flutter 3.0.0, where this landed:
+  /// https://github.com/flutter/flutter/pull/97829. The custom FCS M3 TextTheme
+  /// is no longer need or used. Instead FlexColorScheme uses the in Flutter SDK
+  /// built-in M3 TextTheme Typography when setting
+  /// [FlexColorScheme.useMaterial3] to true **or**
+  /// property [FlexSubThemesData.useTextTheme] in a
+  /// [FlexSubThemesData] passed to [FlexColorScheme.subThemesData] is true.
   ///
-  /// Regarding the new TextTheme see also:
-  /// https://m3.material.io/styles/typography/overview
-  /// and:
-  /// https://github.com/flutter/flutter/issues/89853
+  /// In a FlexSubThemesData() default constructor the
+  /// [FlexSubThemesData.useTextTheme] property defaults to true, as its
+  /// opinionated choice.
   ///
-  /// This is the default [m3TextTheme] when opting in on sub themes. It can be
-  /// turned off by setting [FlexSubThemesData.useTextTheme] to false.
-  /// This reverts the text theme back M2 2018 Typography, later it may revert
-  /// to M3 2021 Typography when it is default in Flutter SDK.
-  ///
-  /// The geometry of M3 styles were made based on this:
+  /// The geometry of the used M3 styles were made based on this:
   /// https://github.com/flutter/flutter/issues/89853
   ///
   /// M3 has 2 more text styles than M3, those are [headlineLarge] and
@@ -4466,26 +4466,14 @@ class FlexColorScheme with Diagnosticable {
   /// M2 or M3 [TextStyle] names, the names are automatically mapped by Flutter
   /// to the other names.
   ///
-  /// Th [m3TextTheme] creates a TextTheme using the new M3 [TextStyle] names
+  /// The [m3TextTheme] creates a TextTheme using the new M3 [TextStyle] names
   /// and assigns the EnglishLike2021 new Typography (Geometry) to it.
   /// This M3 based Typography and geometry is not available in Flutter
   /// stable (2.10.x). These new M3 text style names are mapped to old M2 names
   /// automatically by Flutter SDK from version 2.10.0.
-  ///
-  /// The usage of this custom TextTheme will not be needed in later versions
-  /// of FlexColorScheme when the M3 Typography becomes available in
-  /// Flutter stable channel. This is most likely a temporary static const
-  /// in [FlexColorScheme] that will likely get deprecated when no longer
-  /// needed. You may even consider it as mainly internal use, even if it is
-  /// exposed.
-  ///
-  /// When you opt-in on using the FlexColorSchemes M3 TextTheme, it also sets
-  /// default fontFamily to one matching the target platform, if you have not
-  /// specified a fontFamily in you FlexColorScheme. It can however not provide
-  /// the full TextTheme with different fonts for the big header style on
-  /// iOS platform, nor the fallback fonts for Linux platform.
-  ///
-  /// This textTheme geometry was temporarily copied from master channel.
+  @Deprecated('The m3TextTheme was deprecated in version 6.0.0. With release '
+      'of Flutter 3.0.0, it is no longer needed. It will be removed in version '
+      'FlexColorScheme version 7.0.0.')
   static const TextTheme m3TextTheme = TextTheme(
     // M3 displayLarge, M2 headline1. Material2018 Typography: 96, w300, -1.5
     displayLarge: TextStyle(
@@ -5343,15 +5331,16 @@ class FlexColorScheme with Diagnosticable {
     // Use passed in target platform, else actual host platform.
     final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
 
-    // TODO(rydmike): Remove when default in SDK, still T2014 in Flutter 2.10.x.
     // Used Typography deviates from the Flutter standard that _still_ uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
-    // as default, if one is not provided, we want the Material 2 correct 2018
-    // version to be the default. Based on notes I have seen in master, the
-    // material2018 will never become default. However, 2021 typography will
-    // and FlexColorScheme should move to it instead as default.
-    final Typography effectiveTypography =
-        typography ?? Typography.material2018(platform: effectivePlatform);
+    // as default, if one is not provided. We use the Material 2 correct 2018
+    // as the default when not using M3. If using M3 or opting-in
+    // via sub-themes on using M3 TextTheme geometry, the new 2021 Typography
+    // is used that was released in Flutter 3.0.0.
+    final Typography effectiveTypography = typography ??
+        (((useSubThemes && subTheme.useTextTheme) || useMaterial3)
+            ? Typography.material2021(platform: effectivePlatform)
+            : Typography.material2018(platform: effectivePlatform));
 
     // We need the text themes locally for the theming, so we must form them
     // fully using the same process that the ThemeData() factory uses.
@@ -5375,17 +5364,7 @@ class FlexColorScheme with Diagnosticable {
       defText = defText.apply(fontFamily: fontFamily);
       defPrimaryText = defPrimaryText.apply(fontFamily: fontFamily);
     }
-    // if (useSubThemes && subTheme.useTextTheme && fontFamily == null) {
-    //   // If opted-in on using the FlexColorScheme custom [m3TextTheme] and no
-    //   // custom [fontFamily] has been specified we must provide one matching
-    //   // to current platform in order to not get surprising none standard
-    //   // results.
-    //   effectiveFontFamily = platformFontFamily();
-    //   defText = defText.apply(fontFamily: effectiveFontFamily);
-    //   defPrimaryText = defPrimaryText.apply(fontFamily: effectiveFontFamily);
-    // }
 
-    // TODO(rydmike): Use SDK Material3 Flutter Typography when available.
     // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
     // different, a bit less colorful, but only very marginally.
@@ -5485,11 +5464,12 @@ class FlexColorScheme with Diagnosticable {
         labelSmall: defPrimaryText.labelSmall!.copyWith(color: smallPrimary),
       );
     }
-    // Use custom m3TextTheme when sub themes enabled and M3 text opt-in used.
-    if (useSubThemes && subTheme.useTextTheme) {
-      defText = defText.merge(m3TextTheme);
-      defPrimaryText = defPrimaryText.merge(m3TextTheme);
-    }
+    // TODO(rydmike): Verify that built-in Typo works and remove this!
+    // // Use custom m3TextTheme when sub themes enabled and M3 text opt-in used.
+    // if (useSubThemes && subTheme.useTextTheme) {
+    //   defText = defText.merge(m3TextTheme);
+    //   defPrimaryText = defPrimaryText.merge(m3TextTheme);
+    // }
     // Make our final complete TextTheme, by also merging in the two TextThemes
     // passed in via the constructor, adding any custom text theme definitions.
     final TextTheme effectiveTextTheme = defText.merge(textTheme);
