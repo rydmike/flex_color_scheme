@@ -54,7 +54,7 @@ dependencies:
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
   # https://pub.dev/packages/string_scanner
-  string_scanner: ^1.1.0
+  string_scanner: ^1.1.1
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
