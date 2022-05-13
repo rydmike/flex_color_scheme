@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 /// and onChanged  callback with index of selected item in the popup.
 class UsedColorsPopupMenu extends StatelessWidget {
   const UsedColorsPopupMenu({
-    Key? key,
+    super.key,
     required this.index,
     this.onChanged,
     this.title,
     this.contentPadding,
-  }) : super(key: key);
+  });
   final int index;
   final ValueChanged<int>? onChanged;
   final Widget? title;

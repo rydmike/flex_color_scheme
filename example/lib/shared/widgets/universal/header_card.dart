@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 /// can be dropped into any application.
 class HeaderCard extends StatelessWidget {
   const HeaderCard({
-    Key? key,
+    super.key,
     this.leading,
     this.title,
     this.subtitle,
@@ -32,7 +32,7 @@ class HeaderCard extends StatelessWidget {
     this.color,
     this.boldTitle = true,
     this.child,
-  }) : super(key: key);
+  });
 
   /// A widget to display before the title.
   ///

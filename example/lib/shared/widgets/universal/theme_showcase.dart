@@ -18,9 +18,9 @@ import 'switch_list_tile_adaptive.dart';
 /// Flutter Widgets look like.
 class ThemeShowcase extends StatelessWidget {
   const ThemeShowcase({
-    Key? key,
+    super.key,
     this.useRailAssertWorkAround = true,
-  }) : super(key: key);
+  });
 
   // Flag set to true to make a work around to avoid unnecessarily
   // eager assert in NavigationRail SDK API.
@@ -125,7 +125,7 @@ class ThemeShowcase extends StatelessWidget {
 }
 
 class ElevatedButtonShowcase extends StatelessWidget {
-  const ElevatedButtonShowcase({Key? key}) : super(key: key);
+  const ElevatedButtonShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +153,7 @@ class ElevatedButtonShowcase extends StatelessWidget {
 }
 
 class OutlinedButtonShowcase extends StatelessWidget {
-  const OutlinedButtonShowcase({Key? key}) : super(key: key);
+  const OutlinedButtonShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +181,7 @@ class OutlinedButtonShowcase extends StatelessWidget {
 }
 
 class TextButtonShowcase extends StatelessWidget {
-  const TextButtonShowcase({Key? key}) : super(key: key);
+  const TextButtonShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +209,7 @@ class TextButtonShowcase extends StatelessWidget {
 }
 
 class ToggleButtonsShowcase extends StatelessWidget {
-  const ToggleButtonsShowcase({Key? key}) : super(key: key);
+  const ToggleButtonsShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +242,7 @@ class ToggleButtonsShowcase extends StatelessWidget {
 }
 
 class FabShowcase extends StatelessWidget {
-  const FabShowcase({Key? key}) : super(key: key);
+  const FabShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -286,7 +286,7 @@ class FabShowcase extends StatelessWidget {
 }
 
 class SwitchShowcase extends StatelessWidget {
-  const SwitchShowcase({Key? key}) : super(key: key);
+  const SwitchShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -317,7 +317,7 @@ class SwitchShowcase extends StatelessWidget {
 }
 
 class CheckboxShowcase extends StatelessWidget {
-  const CheckboxShowcase({Key? key}) : super(key: key);
+  const CheckboxShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -348,7 +348,7 @@ class CheckboxShowcase extends StatelessWidget {
 }
 
 class RadioShowcase extends StatelessWidget {
-  const RadioShowcase({Key? key}) : super(key: key);
+  const RadioShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -384,10 +384,10 @@ class RadioShowcase extends StatelessWidget {
 
 class PopupMenuShowcase extends StatelessWidget {
   const PopupMenuShowcase({
-    Key? key,
+    super.key,
     this.enabled = true,
     this.popupRadius,
-  }) : super(key: key);
+  });
   final bool enabled;
   final double? popupRadius;
 
@@ -406,10 +406,9 @@ class PopupMenuShowcase extends StatelessWidget {
 
 class _PopupMenuButton extends StatelessWidget {
   const _PopupMenuButton({
-    Key? key,
     this.enabled = true,
     this.radius,
-  }) : super(key: key);
+  });
   final bool enabled;
   final double? radius;
 
@@ -452,7 +451,7 @@ class _PopupMenuButton extends StatelessWidget {
 }
 
 class _DropDownButton extends StatefulWidget {
-  const _DropDownButton({Key? key}) : super(key: key);
+  const _DropDownButton();
 
   @override
   State<_DropDownButton> createState() => _DropDownButtonState();
@@ -486,7 +485,7 @@ class _DropDownButtonState extends State<_DropDownButton> {
 }
 
 class _DropDownButtonFormField extends StatefulWidget {
-  const _DropDownButtonFormField({Key? key}) : super(key: key);
+  const _DropDownButtonFormField();
 
   @override
   State<_DropDownButtonFormField> createState() =>
@@ -521,8 +520,7 @@ class _DropDownButtonFormFieldState extends State<_DropDownButtonFormField> {
 }
 
 class IconButtonCircleAvatarDropdownTooltipShowcase extends StatelessWidget {
-  const IconButtonCircleAvatarDropdownTooltipShowcase({Key? key})
-      : super(key: key);
+  const IconButtonCircleAvatarDropdownTooltipShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -556,7 +554,7 @@ class IconButtonCircleAvatarDropdownTooltipShowcase extends StatelessWidget {
 }
 
 class ChipShowcase extends StatelessWidget {
-  const ChipShowcase({Key? key}) : super(key: key);
+  const ChipShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -603,7 +601,7 @@ class ChipShowcase extends StatelessWidget {
 }
 
 class TextInputField extends StatefulWidget {
-  const TextInputField({Key? key}) : super(key: key);
+  const TextInputField({super.key});
 
   @override
   _TextInputFieldState createState() => _TextInputFieldState();
@@ -689,7 +687,7 @@ class _TextInputFieldState extends State<TextInputField> {
 }
 
 class TabBarForAppBarShowcase extends StatelessWidget {
-  const TabBarForAppBarShowcase({Key? key}) : super(key: key);
+  const TabBarForAppBarShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -756,7 +754,7 @@ class TabBarForAppBarShowcase extends StatelessWidget {
 }
 
 class TabBarForBackgroundShowcase extends StatelessWidget {
-  const TabBarForBackgroundShowcase({Key? key}) : super(key: key);
+  const TabBarForBackgroundShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -813,7 +811,7 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
 }
 
 class BottomNavigationBarShowcase extends StatefulWidget {
-  const BottomNavigationBarShowcase({Key? key}) : super(key: key);
+  const BottomNavigationBarShowcase({super.key});
 
   @override
   State<BottomNavigationBarShowcase> createState() =>
@@ -887,7 +885,7 @@ class _BottomNavigationBarShowcaseState
 }
 
 class NavigationBarShowcase extends StatefulWidget {
-  const NavigationBarShowcase({Key? key}) : super(key: key);
+  const NavigationBarShowcase({super.key});
 
   @override
   State<NavigationBarShowcase> createState() => _NavigationBarShowcaseState();
@@ -956,11 +954,11 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
 
 class NavigationRailShowcase extends StatefulWidget {
   const NavigationRailShowcase({
-    Key? key,
+    super.key,
     this.child,
     this.height = 400,
     this.useAssertWorkAround = true,
-  }) : super(key: key);
+  });
 
   /// A child widget that we can use to place controls on the
   /// side of the NavigationRail in the show case widget.
@@ -1093,7 +1091,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
 }
 
 class ListTileShowcase extends StatelessWidget {
-  const ListTileShowcase({Key? key}) : super(key: key);
+  const ListTileShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1184,7 +1182,7 @@ class ListTileShowcase extends StatelessWidget {
 }
 
 class TimePickerDialogShowcase extends StatelessWidget {
-  const TimePickerDialogShowcase({Key? key}) : super(key: key);
+  const TimePickerDialogShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1200,7 +1198,7 @@ class TimePickerDialogShowcase extends StatelessWidget {
 }
 
 class DatePickerDialogShowcase extends StatelessWidget {
-  const DatePickerDialogShowcase({Key? key}) : super(key: key);
+  const DatePickerDialogShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1218,7 +1216,7 @@ class DatePickerDialogShowcase extends StatelessWidget {
 }
 
 class AlertDialogShowcase extends StatelessWidget {
-  const AlertDialogShowcase({Key? key}) : super(key: key);
+  const AlertDialogShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1236,7 +1234,7 @@ class AlertDialogShowcase extends StatelessWidget {
 }
 
 class MaterialAndBottomSheetShowcase extends StatelessWidget {
-  const MaterialAndBottomSheetShowcase({Key? key}) : super(key: key);
+  const MaterialAndBottomSheetShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1399,7 +1397,7 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
 }
 
 class CardShowcase extends StatelessWidget {
-  const CardShowcase({Key? key}) : super(key: key);
+  const CardShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1460,7 +1458,7 @@ class CardShowcase extends StatelessWidget {
 }
 
 class TextThemeShowcase extends StatelessWidget {
-  const TextThemeShowcase({Key? key}) : super(key: key);
+  const TextThemeShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1469,7 +1467,7 @@ class TextThemeShowcase extends StatelessWidget {
 }
 
 class PrimaryTextThemeShowcase extends StatelessWidget {
-  const PrimaryTextThemeShowcase({Key? key}) : super(key: key);
+  const PrimaryTextThemeShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1479,8 +1477,7 @@ class PrimaryTextThemeShowcase extends StatelessWidget {
 }
 
 class TextThemeColumnShowcase extends StatelessWidget {
-  const TextThemeColumnShowcase({Key? key, required this.textTheme})
-      : super(key: key);
+  const TextThemeColumnShowcase({super.key, required this.textTheme});
   final TextTheme textTheme;
 
   @override

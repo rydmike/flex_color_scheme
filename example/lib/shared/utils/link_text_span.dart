@@ -14,9 +14,8 @@ class LinkTextSpan extends TextSpan {
   // Since TextSpan itself is @immutable, this means that you would have to
   // manage the recognizer from outside the TextSpan, e.g. in the State of a
   // stateful widget that then hands the recognizer to the TextSpan.
-  LinkTextSpan({TextStyle? style, String? url, String? text})
+  LinkTextSpan({super.style, String? url, String? text})
       : super(
-          style: style,
           text: text ?? url,
           recognizer: TapGestureRecognizer()
             ..onTap = () {

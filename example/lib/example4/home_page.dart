@@ -25,9 +25,9 @@ import 'widgets/theme_popup_menu.dart';
 // -----------------------------------------------------------------------------
 class HomePage extends StatelessWidget {
   const HomePage({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final ThemeController controller;
 

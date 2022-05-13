@@ -6,8 +6,7 @@ import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class MaterialAndBottomSheetSettings extends StatelessWidget {
-  const MaterialAndBottomSheetSettings(this.controller, {Key? key})
-      : super(key: key);
+  const MaterialAndBottomSheetSettings(this.controller, {super.key});
 
   final ThemeController controller;
 

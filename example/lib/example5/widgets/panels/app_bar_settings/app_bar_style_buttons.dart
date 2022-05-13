@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 // Widget used to change the used app bar style mode in example 5.
 class AppBarStyleButtons extends StatelessWidget {
   const AppBarStyleButtons({
-    Key? key,
+    super.key,
     this.style,
     this.onChanged,
     this.customAppBarColor,
-  }) : super(key: key);
+  });
   final FlexAppBarStyle? style;
   final ValueChanged<FlexAppBarStyle>? onChanged;
   final Color? customAppBarColor;

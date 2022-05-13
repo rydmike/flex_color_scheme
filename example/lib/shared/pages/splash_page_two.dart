@@ -9,8 +9,8 @@ import 'package:flutter/services.dart';
 class SplashPageTwo extends StatefulWidget {
   /// Default const constructor.
   const SplashPageTwo({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// A static convenience function show this screen.
   static Future<void> show(BuildContext context) async {

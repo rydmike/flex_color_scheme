@@ -20,9 +20,9 @@ import 'panel_view.dart';
 // -----------------------------------------------------------------------------
 class HomePage extends StatefulWidget {
   const HomePage({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final ThemeController controller;
 

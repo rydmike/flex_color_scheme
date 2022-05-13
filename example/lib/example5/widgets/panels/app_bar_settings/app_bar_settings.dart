@@ -8,7 +8,7 @@ import '../../shared/color_scheme_popup_menu.dart';
 import 'app_bar_style_buttons.dart';
 
 class AppBarSettings extends StatelessWidget {
-  const AppBarSettings(this.controller, {Key? key}) : super(key: key);
+  const AppBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
   String explainAppBarStyle(final FlexAppBarStyle style, final bool isLight) {

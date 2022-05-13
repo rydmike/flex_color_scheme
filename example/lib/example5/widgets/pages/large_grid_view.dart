@@ -46,13 +46,13 @@ const bool _debug = !kReleaseMode && false;
 /// phone size too, but a page view may be more convenient on eg tablet size.
 class LargeGridView extends StatefulWidget {
   const LargeGridView({
-    Key? key,
+    super.key,
     required this.controller,
     required this.isCardOpen,
     required this.toggleCard,
     // required this.scrollPosition,
     // required this.onScrollChanged,
-  }) : super(key: key);
+  });
   final ThemeController controller;
   final List<bool> isCardOpen;
   final ValueChanged<int> toggleCard;

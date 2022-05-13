@@ -8,7 +8,7 @@ import '../../shared/color_scheme_popup_menu.dart';
 
 // Panel used to configure sub themes on Switch, Checkbox and Radio widgets.
 class SwitchesSettings extends StatelessWidget {
-  const SwitchesSettings(this.controller, {Key? key}) : super(key: key);
+  const SwitchesSettings(this.controller, {super.key});
   final ThemeController controller;
 
   @override

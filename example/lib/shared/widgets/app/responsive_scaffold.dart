@@ -89,7 +89,7 @@ enum ResponsiveMenuItemIconState { primary, secondary }
 /// (c) BSD 3-clause - Mike Rydstrom (@RydMike)
 class ResponsiveScaffold extends StatefulWidget {
   const ResponsiveScaffold({
-    Key? key,
+    super.key,
     // ResponsiveScaffold properties.
     this.title,
     this.menuTitle,
@@ -126,7 +126,7 @@ class ResponsiveScaffold extends StatefulWidget {
     this.drawerEnableOpenDragGesture = true,
     this.endDrawerEnableOpenDragGesture = true,
     this.restorationId,
-  }) : super(key: key);
+  });
 
   /// The primary widget displayed in the app bar, just you normal AppBar title.
   ///
@@ -668,7 +668,6 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 /// solution needed for this demo app.
 class _AppMenu extends StatefulWidget {
   const _AppMenu({
-    Key? key,
     this.title,
     required this.maxWidth,
     this.onOperate,
@@ -680,7 +679,7 @@ class _AppMenu extends StatefulWidget {
     required this.menuItems,
     required this.menuItemsEnabled,
     required this.menuItemsIconState,
-  }) : super(key: key);
+  });
   final Widget? title;
   final double maxWidth;
   final VoidCallback? onOperate;
@@ -800,7 +799,6 @@ class _AppMenuState extends State<_AppMenu> {
 /// The items for the menu.
 class _MenuItem extends StatelessWidget {
   const _MenuItem({
-    Key? key,
     required this.width,
     required this.menuWidth,
     required this.onTap,
@@ -811,7 +809,7 @@ class _MenuItem extends StatelessWidget {
     this.showDivider = false,
     required this.railWidth,
     this.enabled = true,
-  }) : super(key: key);
+  });
 
   final double width;
   final double menuWidth;
@@ -934,12 +932,11 @@ class _MenuItem extends StatelessWidget {
 /// Example of a leading item for the entire menu.
 class _MenuLeadingItem extends StatefulWidget {
   const _MenuLeadingItem({
-    Key? key,
     required this.railWidth,
     this.menuLeadingTitle,
     this.menuLeadingSubtitle,
     this.menuLeadingAvatarLabel = '',
-  }) : super(key: key);
+  });
   final double railWidth;
   final Widget? menuLeadingTitle;
   final Widget? menuLeadingSubtitle;

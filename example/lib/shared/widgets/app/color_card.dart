@@ -17,12 +17,12 @@ import '../../const/app_data.dart';
 /// in Dart format.
 class ColorCard extends StatelessWidget {
   const ColorCard({
-    Key? key,
+    super.key,
     required this.label,
     required this.color,
     required this.textColor,
     this.size,
-  }) : super(key: key);
+  });
 
   final String label;
   final Color color;

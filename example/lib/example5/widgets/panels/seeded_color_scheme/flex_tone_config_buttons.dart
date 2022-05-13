@@ -5,8 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 // Widget used to change usage of flex tones configuration for
 // color scheme generation in example 5.
 class FlexToneConfigButtons extends StatelessWidget {
-  const FlexToneConfigButtons({Key? key, required this.controller})
-      : super(key: key);
+  const FlexToneConfigButtons({super.key, required this.controller});
   final ThemeController controller;
 
   @override

@@ -20,7 +20,7 @@ import 'platform_popup_menu.dart';
 /// Has the main controls to turn ON/OFF using FlexColorScheme and
 /// the sub themes too.
 class IntroductionPanel extends StatelessWidget {
-  const IntroductionPanel(this.controller, {Key? key}) : super(key: key);
+  const IntroductionPanel(this.controller, {super.key});
   final ThemeController controller;
 
   @override

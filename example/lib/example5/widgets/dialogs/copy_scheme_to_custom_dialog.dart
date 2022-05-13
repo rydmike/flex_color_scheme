@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Dialog to confirm is active scheme should be copied over to the
 /// custom and modifiable scheme.
 class CopySchemeToCustomDialog extends StatelessWidget {
-  const CopySchemeToCustomDialog({Key? key}) : super(key: key);
+  const CopySchemeToCustomDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,10 +8,10 @@ import '../../shared/color_scheme_popup_menu.dart';
 /// and via that the selected active theme.
 class InputColorsPopupMenu extends StatelessWidget {
   const InputColorsPopupMenu({
-    Key? key,
+    super.key,
     required this.controller,
     this.contentPadding,
-  }) : super(key: key);
+  });
   final ThemeController controller;
   // Defaults to 16, like ListTile does.
   final EdgeInsetsGeometry? contentPadding;

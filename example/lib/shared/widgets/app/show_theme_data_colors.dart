@@ -19,9 +19,9 @@ import 'color_card.dart';
 /// however not so generally reusable.
 class ShowThemeDataColors extends StatelessWidget {
   const ShowThemeDataColors({
-    Key? key,
+    super.key,
     this.onBackgroundColor,
-  }) : super(key: key);
+  });
 
   /// The color of the background the color widget are being drawn on.
   ///

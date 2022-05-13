@@ -6,7 +6,7 @@ import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class DialogSettings extends StatelessWidget {
-  const DialogSettings(this.controller, {Key? key}) : super(key: key);
+  const DialogSettings(this.controller, {super.key});
   final ThemeController controller;
 
   @override

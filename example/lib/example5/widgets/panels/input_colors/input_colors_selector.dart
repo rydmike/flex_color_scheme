@@ -21,10 +21,10 @@ import '../../../../shared/controllers/theme_controller.dart';
 /// same things. This is of course a bit more complicated to build.
 class InputColorsSelector extends StatefulWidget {
   const InputColorsSelector({
-    Key? key,
+    super.key,
     required this.controller,
     required this.isPhone,
-  }) : super(key: key);
+  });
 
   final ThemeController controller;
   final bool isPhone;

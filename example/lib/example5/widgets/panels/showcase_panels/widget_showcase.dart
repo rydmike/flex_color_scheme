@@ -7,7 +7,7 @@ import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 /// All the sub theme show cases in a column.
 class WidgetShowcase extends StatelessWidget {
-  const WidgetShowcase({Key? key}) : super(key: key);
+  const WidgetShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {

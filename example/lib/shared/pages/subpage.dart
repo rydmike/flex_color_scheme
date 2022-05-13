@@ -11,7 +11,7 @@ import '../widgets/universal/theme_showcase.dart';
 // This sub page is used as a demo in the default example and in examples
 // 4 and 5 to show a sub-page using the same FlexColorScheme based theme.
 class Subpage extends StatefulWidget {
-  const Subpage({Key? key}) : super(key: key);
+  const Subpage({super.key});
 
   // A static convenience function show this screen, as pushed on top.
   static Future<void> show(BuildContext context) async {

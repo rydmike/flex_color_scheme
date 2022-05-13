@@ -9,8 +9,8 @@ import '../../shared/color_scheme_popup_menu.dart';
 class ButtonsSettings extends StatelessWidget {
   const ButtonsSettings(
     this.controller, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final ThemeController controller;
 
   @override

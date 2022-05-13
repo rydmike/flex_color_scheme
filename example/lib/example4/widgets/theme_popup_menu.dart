@@ -5,11 +5,11 @@ import '../../shared/const/app_color.dart';
 // Widget used to change the used AppColor.customSchemes[index] in example 4.
 class ThemePopupMenu extends StatelessWidget {
   const ThemePopupMenu({
-    Key? key,
+    super.key,
     required this.schemeIndex,
     required this.onChanged,
     this.contentPadding,
-  }) : super(key: key);
+  });
   final int schemeIndex;
   final ValueChanged<int> onChanged;
   // Defaults to 16, like ListTile does.

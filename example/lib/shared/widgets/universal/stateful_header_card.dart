@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 /// can be dropped into any application.
 class StatefulHeaderCard extends StatefulWidget {
   const StatefulHeaderCard({
-    Key? key,
+    super.key,
     this.leading,
     this.title,
     this.subtitle,
@@ -30,7 +30,7 @@ class StatefulHeaderCard extends StatefulWidget {
     this.color,
     this.boldTitle = true,
     this.child,
-  }) : super(key: key);
+  });
 
   /// A widget to display before the title.
   ///

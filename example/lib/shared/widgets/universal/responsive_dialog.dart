@@ -13,9 +13,9 @@ const double _kWidthForFullScreenDialog = 720;
 /// can be dropped into any application.
 class ResponsiveDialog extends StatelessWidget {
   const ResponsiveDialog({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
 

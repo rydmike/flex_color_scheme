@@ -22,7 +22,7 @@ class FlexCorePalette extends CorePalette {
   /// for final properties, but it does not. The default constructor is private
   /// and using class initializer lists. Clearly the super class is not intended
   /// to be very extension friendly.
-  FlexCorePalette.fromList(List<int> colors) : super.fromList(colors);
+  FlexCorePalette.fromList(super.colors) : super.fromList();
 
   /// Create a [FlexCorePalette] from one to three seed colors.
   ///

@@ -7,9 +7,9 @@ import 'tonal_palette_colors.dart';
 
 class ShowTonalPalette extends StatelessWidget {
   const ShowTonalPalette({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final ThemeController controller;
 

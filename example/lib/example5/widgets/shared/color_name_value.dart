@@ -10,7 +10,7 @@ import 'copy_color_to_clipboard.dart';
 /// color name for the color.
 class ColorNameValue extends StatefulWidget {
   const ColorNameValue({
-    Key? key,
+    super.key,
     required this.color,
     required this.textColor,
     required this.label,
@@ -22,7 +22,7 @@ class ColorNameValue extends StatefulWidget {
     this.showMaterialName = false,
     this.isLocked,
     this.onLocked,
-  }) : super(key: key);
+  });
 
   final Color color;
   final Color textColor;

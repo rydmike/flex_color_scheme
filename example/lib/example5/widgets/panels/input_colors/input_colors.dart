@@ -13,8 +13,8 @@ import 'used_colors_popup_menu.dart';
 class InputColors extends StatelessWidget {
   const InputColors(
     this.controller, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final ThemeController controller;
 
   Future<void> _handleCopySchemeTap(BuildContext context) async {

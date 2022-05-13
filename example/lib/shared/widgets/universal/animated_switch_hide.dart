@@ -12,12 +12,12 @@ import 'package:flutter/material.dart';
 /// can be dropped into any application.
 class AnimatedSwitchHide extends StatelessWidget {
   const AnimatedSwitchHide({
-    Key? key,
+    super.key,
     required this.showChild,
     this.duration = const Duration(milliseconds: 200),
     required this.child,
     this.switchedChild,
-  }) : super(key: key);
+  });
 
   /// Set hide to true to remove the child with size transition.
   final bool showChild;

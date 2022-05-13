@@ -37,9 +37,9 @@ class MyWidget extends StatelessWidget {
   final ColorScheme scheme;
 
   const MyWidget({
-    Key? key,
+    super.key,
     required this.scheme,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

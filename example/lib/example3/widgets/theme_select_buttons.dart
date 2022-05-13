@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 // Widget used to change the used FlexScheme in example 3.
 class ThemeSelectButtons extends StatelessWidget {
   const ThemeSelectButtons({
-    Key? key,
+    super.key,
     required this.scheme,
     required this.onChanged,
-  }) : super(key: key);
+  });
   final FlexScheme scheme;
   final ValueChanged<FlexScheme> onChanged;
 

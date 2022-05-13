@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 /// can be dropped into any application.
 class NavigationRailLabelTypeButtons extends StatelessWidget {
   const NavigationRailLabelTypeButtons({
-    Key? key,
+    super.key,
     this.style,
     this.onChanged,
-  }) : super(key: key);
+  });
   final NavigationRailLabelType? style;
   final ValueChanged<NavigationRailLabelType>? onChanged;
 

@@ -6,7 +6,7 @@ import 'subpage.dart';
 
 /// All the sub demo pages wrapped in a header card.
 class PageExamples extends StatelessWidget {
-  const PageExamples({Key? key}) : super(key: key);
+  const PageExamples({super.key});
 
   @override
   Widget build(BuildContext context) {

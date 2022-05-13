@@ -5,7 +5,7 @@ import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 class ListTileSettings extends StatelessWidget {
-  const ListTileSettings(this.controller, {Key? key}) : super(key: key);
+  const ListTileSettings(this.controller, {super.key});
   final ThemeController controller;
 
   @override

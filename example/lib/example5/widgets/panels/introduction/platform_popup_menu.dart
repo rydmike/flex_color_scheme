@@ -7,10 +7,10 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 // The actual selection is done via platform property in ThemeData.
 class PlatformPopupMenu extends StatelessWidget {
   const PlatformPopupMenu({
-    Key? key,
+    super.key,
     required this.platform,
     required this.onChanged,
-  }) : super(key: key);
+  });
   final TargetPlatform platform;
   final ValueChanged<TargetPlatform> onChanged;
 

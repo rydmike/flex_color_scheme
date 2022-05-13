@@ -56,10 +56,10 @@ class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 /// Horizontal panel selector of active panel page to view.
 class PanelSelector extends StatefulWidget {
   const PanelSelector({
-    Key? key,
+    super.key,
     required this.index,
     required this.onChanged,
-  }) : super(key: key);
+  });
   final int index;
   final ValueChanged<int> onChanged;
 
@@ -161,11 +161,11 @@ class _PanelSelectorState extends State<PanelSelector> {
 
 class PanelButton extends StatelessWidget {
   const PanelButton({
-    Key? key,
+    super.key,
     required this.item,
     required this.selected,
     required this.onSelect,
-  }) : super(key: key);
+  });
   final PanelItem item;
   final bool selected;
   final VoidCallback onSelect;

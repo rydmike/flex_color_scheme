@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 /// can be dropped into any application.
 class MaybeTooltip extends StatelessWidget {
   const MaybeTooltip({
-    Key? key,
+    super.key,
     required this.condition,
     this.message,
     required this.child,
@@ -15,7 +15,7 @@ class MaybeTooltip extends StatelessWidget {
     this.margin,
     this.verticalOffset,
     this.preferBelow,
-  }) : super(key: key);
+  });
 
   /// If the [condition] is met, the child is wrapped with Tooltip.
   final bool condition;

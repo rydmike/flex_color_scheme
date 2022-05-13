@@ -13,9 +13,9 @@ import '../../shared/color_picker_inkwell.dart';
 // scheme, which is the custom color scheme.
 class ShowInputColors extends StatelessWidget {
   const ShowInputColors({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final ThemeController controller;
 
