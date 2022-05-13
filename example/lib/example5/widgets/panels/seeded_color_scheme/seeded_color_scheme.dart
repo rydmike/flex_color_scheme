@@ -13,8 +13,8 @@ import 'show_tonal_palette.dart';
 class SeededColorScheme extends StatelessWidget {
   const SeededColorScheme(
     this.controller, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final ThemeController controller;
 
   String _describeFlexToneLabel(int colors) {

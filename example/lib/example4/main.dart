@@ -84,7 +84,7 @@ Future<void> main() async {
 }
 
 class DemoApp extends StatelessWidget {
-  const DemoApp({Key? key, required this.themeController}) : super(key: key);
+  const DemoApp({super.key, required this.themeController});
   final ThemeController themeController;
 
   @override

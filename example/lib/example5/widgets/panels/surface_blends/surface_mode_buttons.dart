@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 // primary color into surfaces.
 class SurfaceModeButtons extends StatelessWidget {
   const SurfaceModeButtons({
-    Key? key,
+    super.key,
     required this.mode,
     required this.onChanged,
     this.showAllModes = true,
-  }) : super(key: key);
+  });
   final FlexSurfaceMode mode;
   final ValueChanged<FlexSurfaceMode> onChanged;
   final bool showAllModes;

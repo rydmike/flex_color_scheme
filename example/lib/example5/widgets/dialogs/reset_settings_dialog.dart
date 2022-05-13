@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Dialog to confirm if user wants to reset the current FlexColorscheme setup.
 class ResetSettingsDialog extends StatelessWidget {
-  const ResetSettingsDialog({Key? key}) : super(key: key);
+  const ResetSettingsDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

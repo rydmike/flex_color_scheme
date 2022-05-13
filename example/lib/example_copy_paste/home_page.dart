@@ -22,10 +22,10 @@ import '../shared/widgets/universal/theme_showcase.dart';
 // -----------------------------------------------------------------------------
 class HomePage extends StatefulWidget {
   const HomePage({
-    Key? key,
+    super.key,
     required this.themeMode,
     required this.onThemeModeChanged,
-  }) : super(key: key);
+  });
 
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
@@ -164,10 +164,9 @@ class _HomePageState extends State<HomePage> {
 
 class _MainPanel extends StatefulWidget {
   const _MainPanel({
-    Key? key,
     required this.themeMode,
     required this.onThemeModeChanged,
-  }) : super(key: key);
+  });
 
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
@@ -232,7 +231,7 @@ class _MainPanelState extends State<_MainPanel> {
 }
 
 class _MaterialButtonsShowcase extends StatelessWidget {
-  const _MaterialButtonsShowcase({Key? key}) : super(key: key);
+  const _MaterialButtonsShowcase();
 
   @override
   Widget build(BuildContext context) {
@@ -264,7 +263,7 @@ class _MaterialButtonsShowcase extends StatelessWidget {
 }
 
 class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
-  const _ToggleFabSwitchesChipsShowcase({Key? key}) : super(key: key);
+  const _ToggleFabSwitchesChipsShowcase();
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +301,7 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
 }
 
 class _TextInputFieldShowcase extends StatelessWidget {
-  const _TextInputFieldShowcase({Key? key}) : super(key: key);
+  const _TextInputFieldShowcase();
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -324,7 +323,7 @@ class _TextInputFieldShowcase extends StatelessWidget {
 }
 
 class _ListTileShowcase extends StatelessWidget {
-  const _ListTileShowcase({Key? key}) : super(key: key);
+  const _ListTileShowcase();
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -343,7 +342,7 @@ class _ListTileShowcase extends StatelessWidget {
 }
 
 class _TabBarShowCase extends StatelessWidget {
-  const _TabBarShowCase({Key? key}) : super(key: key);
+  const _TabBarShowCase();
 
   @override
   Widget build(BuildContext context) {
@@ -369,7 +368,7 @@ class _TabBarShowCase extends StatelessWidget {
 }
 
 class _BottomBarShowCase extends StatelessWidget {
-  const _BottomBarShowCase({Key? key}) : super(key: key);
+  const _BottomBarShowCase();
 
   @override
   Widget build(BuildContext context) {
@@ -397,7 +396,7 @@ class _BottomBarShowCase extends StatelessWidget {
 }
 
 class _NavigationRailShowCase extends StatelessWidget {
-  const _NavigationRailShowCase({Key? key}) : super(key: key);
+  const _NavigationRailShowCase();
 
   @override
   Widget build(BuildContext context) {
@@ -417,7 +416,7 @@ class _NavigationRailShowCase extends StatelessWidget {
 }
 
 class _DialogShowcase extends StatelessWidget {
-  const _DialogShowcase({Key? key}) : super(key: key);
+  const _DialogShowcase();
 
   @override
   Widget build(BuildContext context) {
@@ -447,7 +446,7 @@ class _DialogShowcase extends StatelessWidget {
 }
 
 class _MaterialAndBottomSheetShowcase extends StatelessWidget {
-  const _MaterialAndBottomSheetShowcase({Key? key}) : super(key: key);
+  const _MaterialAndBottomSheetShowcase();
 
   @override
   Widget build(BuildContext context) {
@@ -470,7 +469,7 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
 }
 
 class _CardShowcase extends StatelessWidget {
-  const _CardShowcase({Key? key}) : super(key: key);
+  const _CardShowcase();
 
   @override
   Widget build(BuildContext context) {
@@ -492,7 +491,7 @@ class _CardShowcase extends StatelessWidget {
 }
 
 class _TextThemeShowcase extends StatelessWidget {
-  const _TextThemeShowcase({Key? key}) : super(key: key);
+  const _TextThemeShowcase();
 
   @override
   Widget build(BuildContext context) {
@@ -515,7 +514,7 @@ class _TextThemeShowcase extends StatelessWidget {
 }
 
 class _PrimaryTextThemeShowcase extends StatelessWidget {
-  const _PrimaryTextThemeShowcase({Key? key}) : super(key: key);
+  const _PrimaryTextThemeShowcase();
 
   @override
   Widget build(BuildContext context) {

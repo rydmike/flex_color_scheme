@@ -6,7 +6,7 @@ import '../../utils/link_text_span.dart';
 
 /// An about icon button used on the example's app app bar.
 class AboutIconButton extends StatelessWidget {
-  const AboutIconButton({Key? key, this.color}) : super(key: key);
+  const AboutIconButton({super.key, this.color});
 
   /// The color used on the icon button.
   ///

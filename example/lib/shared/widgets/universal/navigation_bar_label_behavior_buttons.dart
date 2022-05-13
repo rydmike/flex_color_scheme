@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 /// can be dropped into any application.
 class NavigationBarLabelBehaviorButtons extends StatelessWidget {
   const NavigationBarLabelBehaviorButtons({
-    Key? key,
+    super.key,
     this.labelBehavior,
     this.onChanged,
-  }) : super(key: key);
+  });
   final NavigationDestinationLabelBehavior? labelBehavior;
   final ValueChanged<NavigationDestinationLabelBehavior>? onChanged;
 

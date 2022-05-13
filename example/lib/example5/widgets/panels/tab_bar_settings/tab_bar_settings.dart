@@ -7,7 +7,7 @@ import '../../shared/color_scheme_popup_menu.dart';
 import 'tab_bar_style_buttons.dart';
 
 class TabBarSettings extends StatelessWidget {
-  const TabBarSettings(this.controller, {Key? key}) : super(key: key);
+  const TabBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
   String explainTabStyle(final FlexTabBarStyle style) {

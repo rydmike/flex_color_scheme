@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 /// can be dropped into any application.
 class ThemeModeSwitch extends StatelessWidget {
   const ThemeModeSwitch({
-    Key? key,
+    super.key,
     required this.themeMode,
     required this.onChanged,
-  }) : super(key: key);
+  });
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onChanged;
 

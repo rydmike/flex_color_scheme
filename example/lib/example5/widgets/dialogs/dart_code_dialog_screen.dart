@@ -7,11 +7,11 @@ import '../../../shared/widgets/universal/syntax_highlighter.dart';
 /// Show the code for the Theme in a Dialog screen.
 class DartCodeDialogScreen extends StatelessWidget {
   const DartCodeDialogScreen({
-    Key? key,
+    super.key,
     required this.dialogHeader,
     required this.copyMessage,
     required this.code,
-  }) : super(key: key);
+  });
   final String dialogHeader;
   final String copyMessage;
   final String code;

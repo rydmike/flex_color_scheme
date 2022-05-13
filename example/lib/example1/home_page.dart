@@ -18,11 +18,11 @@ import '../shared/widgets/universal/theme_showcase.dart';
 // -----------------------------------------------------------------------------
 class HomePage extends StatelessWidget {
   const HomePage({
-    Key? key,
+    super.key,
     required this.themeMode,
     required this.onThemeModeChanged,
     required this.flexSchemeData,
-  }) : super(key: key);
+  });
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
   final FlexSchemeData flexSchemeData;

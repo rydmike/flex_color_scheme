@@ -28,7 +28,7 @@ import 'package:flutter/material.dart';
 /// SwitchListTileAdaptive in this application. Easy to add more when needed.
 class SwitchListTileAdaptive extends StatelessWidget {
   const SwitchListTileAdaptive({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.activeColor,
@@ -38,7 +38,7 @@ class SwitchListTileAdaptive extends StatelessWidget {
     this.isThreeLine = false,
     this.dense,
     this.contentPadding,
-  }) : super(key: key);
+  });
 
   /// Whether this switch is checked.
   ///

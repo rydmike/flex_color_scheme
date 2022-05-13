@@ -383,8 +383,8 @@ class ThemeSwitchApp extends StatefulWidget {
     this.selected = true,
     this.hasTitle = true,
     this.title,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final ThemeMode themeMode;
   final bool showSystemMode;
   final FlexThemeModeButtonOrder order;

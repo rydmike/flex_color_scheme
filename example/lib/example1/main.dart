@@ -17,7 +17,7 @@ import 'home_page.dart';
 void main() => runApp(const DemoApp());
 
 class DemoApp extends StatefulWidget {
-  const DemoApp({Key? key}) : super(key: key);
+  const DemoApp({super.key});
 
   @override
   _DemoAppState createState() => _DemoAppState();

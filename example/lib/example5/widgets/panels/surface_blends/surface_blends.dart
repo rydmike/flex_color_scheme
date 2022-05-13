@@ -10,9 +10,9 @@ import 'surface_mode_buttons.dart';
 class SurfaceBlends extends StatelessWidget {
   const SurfaceBlends(
     this.controller, {
-    Key? key,
+    super.key,
     required this.allBlends,
-  }) : super(key: key);
+  });
   final ThemeController controller;
   final bool allBlends;
 

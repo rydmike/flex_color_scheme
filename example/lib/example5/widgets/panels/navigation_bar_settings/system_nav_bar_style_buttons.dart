@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 // Widget used to change the used app bar style mode in example 5.
 class SystemNavBarStyleButtons extends StatelessWidget {
   const SystemNavBarStyleButtons({
-    Key? key,
+    super.key,
     required this.style,
     required this.onChanged,
-  }) : super(key: key);
+  });
   final FlexSystemNavBarStyle style;
   final ValueChanged<FlexSystemNavBarStyle> onChanged;
 

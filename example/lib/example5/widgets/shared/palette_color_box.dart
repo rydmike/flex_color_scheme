@@ -6,13 +6,12 @@ import 'package:flutter/material.dart';
 class PaletteColorBox extends StatelessWidget {
   /// Default const constructor for the color indicator.
   const PaletteColorBox(
-      {Key? key,
+      {super.key,
       this.onTap,
       this.color = Colors.blue,
       this.height = 40,
       this.child})
-      : assert(height > 0, 'Height must be positive.'),
-        super(key: key);
+      : assert(height > 0, 'Height must be positive.');
 
   /// Optional void callback, called when the color indicator is tapped.
   ///

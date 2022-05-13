@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
 /// it can be kept open even though the app under it is being rebuilt.
 class ColorPickerInkWell extends StatelessWidget {
   const ColorPickerInkWell({
-    Key? key,
+    super.key,
     required this.color,
     required this.onChanged,
     this.onHover,
@@ -32,7 +32,7 @@ class ColorPickerInkWell extends StatelessWidget {
     this.pickerSize = 40,
     this.enabled = false,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Color color;
   final ValueChanged<Color> onChanged;

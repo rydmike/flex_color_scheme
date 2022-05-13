@@ -17,8 +17,7 @@ import 'color_card.dart';
 /// all the Widgets in this file be dropped into any application. They are
 /// however not so generally reusable.
 class ShowColorSchemeColors extends StatelessWidget {
-  const ShowColorSchemeColors({Key? key, this.onBackgroundColor})
-      : super(key: key);
+  const ShowColorSchemeColors({super.key, this.onBackgroundColor});
 
   /// The color of the background the color widget are being drawn on.
   ///

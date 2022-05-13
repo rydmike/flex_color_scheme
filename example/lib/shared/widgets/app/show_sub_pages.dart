@@ -12,9 +12,9 @@ import '../universal/header_card.dart';
 // Used by main example, Copy Paste Playground and Example 4 "All Themes"
 class ShowSubPages extends StatefulWidget {
   const ShowSubPages({
-    Key? key,
+    super.key,
     this.isOpen = true,
-  }) : super(key: key);
+  });
 
   final bool isOpen;
 

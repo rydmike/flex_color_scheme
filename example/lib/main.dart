@@ -500,7 +500,7 @@ final VisualDensity _visualDensity = FlexColorScheme.comfortablePlatformDensity;
 final TargetPlatform _platform = defaultTargetPlatform;
 
 class DemoApp extends StatefulWidget {
-  const DemoApp({Key? key}) : super(key: key);
+  const DemoApp({super.key});
 
   @override
   State<DemoApp> createState() => _DemoAppState();
@@ -697,10 +697,10 @@ class _DemoAppState extends State<DemoApp> {
 // via this HomePage.
 class HomePage extends StatefulWidget {
   const HomePage({
-    Key? key,
+    super.key,
     required this.themeMode,
     required this.onThemeModeChanged,
-  }) : super(key: key);
+  });
 
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;

@@ -46,9 +46,9 @@ const bool _debug = !kReleaseMode && false;
 /// on mid size screen, like tablets, might be preferable on a phone too.
 class PanelView extends StatefulWidget {
   const PanelView({
-    Key? key,
+    super.key,
     required this.themeController,
-  }) : super(key: key);
+  });
   final ThemeController themeController;
 
   @override
@@ -187,9 +187,9 @@ class PanelPage extends StatelessWidget {
     this.child,
     this.panelPage,
     this.controller, {
-    Key? key,
+    super.key,
     this.showCodeView = true,
-  }) : super(key: key);
+  });
   final Widget child;
   final int panelPage;
   final ThemeController controller;

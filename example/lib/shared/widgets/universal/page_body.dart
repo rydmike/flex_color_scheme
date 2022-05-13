@@ -20,12 +20,12 @@ import 'package:flutter/material.dart';
 class PageBody extends StatelessWidget {
   /// Default constructor for the constrained PageBody.
   const PageBody({
-    Key? key,
+    super.key,
     this.controller,
     this.constraints = const BoxConstraints(maxWidth: 1000),
     this.padding = EdgeInsets.zero,
     required this.child,
-  }) : super(key: key);
+  });
 
   /// Optional scroll controller for the constrained page body.
   ///

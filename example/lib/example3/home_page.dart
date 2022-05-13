@@ -23,10 +23,10 @@ import 'widgets/theme_select_buttons.dart';
 // -----------------------------------------------------------------------------
 class HomePage extends StatelessWidget {
   const HomePage({
-    Key? key,
+    super.key,
     required this.flexSchemeData,
     required this.controller,
-  }) : super(key: key);
+  });
   final FlexSchemeData flexSchemeData;
   final ThemeController controller;
 

@@ -45,7 +45,7 @@ enum FlexThemeModeButtonOrder {
 class FlexThemeModeSwitch extends StatelessWidget {
   /// Default constructor.
   const FlexThemeModeSwitch({
-    Key? key,
+    super.key,
     required final this.themeMode,
     required final this.onThemeModeChanged,
     required final this.flexSchemeData,
@@ -76,8 +76,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
     final this.hoverColor,
   })  : assert(selectedElevation >= 0.0, 'Selected elevation must be >= 0.0'),
         assert(
-            unselectedElevation >= 0.0, 'Unselected elevation must be >= 0.0'),
-        super(key: key);
+            unselectedElevation >= 0.0, 'Unselected elevation must be >= 0.0');
 
   /// The current themeMode option button to be marked as selected.
   final ThemeMode themeMode;
@@ -342,7 +341,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
 class FlexThemeModeOptionButton extends StatelessWidget {
   /// Default constructor.
   const FlexThemeModeOptionButton({
-    Key? key,
+    super.key,
     required final this.flexSchemeColor,
     final this.backgroundColor,
     final this.label,
@@ -361,8 +360,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
     final this.borderRadius = 4,
     final this.padding,
     final this.hoverColor,
-  })  : assert(elevation >= 0.0, 'Elevation must be >= 0.0'),
-        super(key: key);
+  }) : assert(elevation >= 0.0, 'Elevation must be >= 0.0');
 
   /// The scheme colors used to colorize the option button's four colors.
   final FlexSchemeColor flexSchemeColor;
@@ -553,13 +551,12 @@ class FlexThemeModeOptionButton extends StatelessWidget {
 class _SchemeColorBox extends StatelessWidget {
   /// Default constructor.
   const _SchemeColorBox({
-    Key? key,
     required final this.color,
     final this.height = 24,
     final this.width = 24,
     final this.borderRadius = 4,
     final this.padding,
-  }) : super(key: key);
+  });
 
   /// The background color used to draw an individual scheme color box.
   /// Required, cannot be null.

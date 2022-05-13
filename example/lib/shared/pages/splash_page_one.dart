@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 class SplashPageOne extends StatelessWidget {
   /// Default const constructor.
   const SplashPageOne({
-    Key? key,
+    super.key,
     this.invertStatusIcons = false,
-  }) : super(key: key);
+  });
 
   final bool invertStatusIcons;
 

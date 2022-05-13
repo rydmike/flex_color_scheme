@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Dialog to confirm if user wants to reset the current custom colors.
 class ResetCustomColorsDialog extends StatelessWidget {
-  const ResetCustomColorsDialog({Key? key}) : super(key: key);
+  const ResetCustomColorsDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 // ToggleButtons used to change the used tab bar theme.
 class TabBarStyleButtons extends StatelessWidget {
   const TabBarStyleButtons({
-    Key? key,
+    super.key,
     this.style,
     this.onChanged,
-  }) : super(key: key);
+  });
   final FlexTabBarStyle? style;
   final ValueChanged<FlexTabBarStyle>? onChanged;
 

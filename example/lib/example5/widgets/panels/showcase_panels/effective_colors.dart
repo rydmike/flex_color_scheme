@@ -7,7 +7,7 @@ import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/app/show_theme_data_colors.dart';
 
 class EffectiveColors extends StatelessWidget {
-  const EffectiveColors(this.controller, {Key? key}) : super(key: key);
+  const EffectiveColors(this.controller, {super.key});
   final ThemeController controller;
 
   @override

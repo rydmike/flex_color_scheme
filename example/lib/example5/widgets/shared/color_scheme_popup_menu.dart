@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 /// via no value definition. A bit ugly/pragmatic approach.
 class ColorSchemePopupMenu extends StatelessWidget {
   const ColorSchemePopupMenu({
-    Key? key,
+    super.key,
     required this.index,
     this.onChanged,
     this.title,
     this.subtitle,
     this.contentPadding,
     this.labelForDefault = 'default (primary)',
-  }) : super(key: key);
+  });
   final int index;
   final ValueChanged<int>? onChanged;
   final Widget? title;
@@ -101,11 +101,11 @@ class ColorSchemePopupMenu extends StatelessWidget {
 
 class ColorSchemeBox extends StatelessWidget {
   const ColorSchemeBox({
-    Key? key,
+    super.key,
     this.color = Colors.white,
     this.size = const Size(45, 35),
     this.defaultColor = false,
-  }) : super(key: key);
+  });
 
   final Color color;
   final Size size;

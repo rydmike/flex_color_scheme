@@ -60,9 +60,9 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 // in a custom scroll view.
 class ThemeSelectorDelegateWrapper extends StatelessWidget {
   const ThemeSelectorDelegateWrapper({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
   final ThemeController controller;
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ class ThemeSelectorDelegateWrapper extends StatelessWidget {
 // Used at the top of the Masonry grid view and between page and panel page
 // selector on the page view.
 class ThemeSelector extends StatelessWidget {
-  const ThemeSelector({Key? key, required this.controller}) : super(key: key);
+  const ThemeSelector({super.key, required this.controller});
 
   final ThemeController controller;
 

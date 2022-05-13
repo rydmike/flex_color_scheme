@@ -10,9 +10,9 @@ import '../../controllers/theme_controller.dart';
 // individually.
 class UseKeyColorsButtons extends StatelessWidget {
   const UseKeyColorsButtons({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
   final ThemeController controller;
 
   @override

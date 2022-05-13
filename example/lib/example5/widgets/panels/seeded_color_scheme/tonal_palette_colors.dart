@@ -7,11 +7,11 @@ import '../../shared/palette_color_box.dart';
 class TonalPaletteColors extends StatelessWidget {
   /// Default const constructor.
   const TonalPaletteColors({
-    Key? key,
+    super.key,
     required this.tonalPalette,
     this.selectedColor,
     this.height = 34,
-  }) : super(key: key);
+  });
 
   /// The tonal palette to draw.
   final List<int> tonalPalette;
