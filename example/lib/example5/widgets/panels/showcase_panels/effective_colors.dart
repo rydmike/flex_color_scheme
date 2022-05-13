@@ -16,6 +16,11 @@ class EffectiveColors extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle =
         theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary);
+    final Uri githubIssueUri = Uri(
+      scheme: 'https',
+      host: 'github.com',
+      path: 'flutter/flutter/issues/91772',
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,7 +56,7 @@ class EffectiveColors extends StatelessWidget {
                 ),
                 LinkTextSpan(
                   style: linkStyle,
-                  url: 'https://github.com/flutter/flutter/issues/91772',
+                  uri: githubIssueUri,
                   text: 'issue #91772',
                 ),
               ],

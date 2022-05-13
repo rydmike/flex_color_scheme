@@ -87,7 +87,7 @@ void showAppAboutDialog(BuildContext context) {
               ),
               LinkTextSpan(
                 style: linkStyle,
-                url: AppData.packageUrl,
+                uri: AppData.packageUri,
                 text: 'pub.dev',
               ),
               TextSpan(

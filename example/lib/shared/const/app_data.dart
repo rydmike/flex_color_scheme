@@ -36,12 +36,16 @@ class AppData {
   static const String versionBuild = '01';
   static const String version = '$versionMajor.0.1 Build-$versionBuild';
   static const String packageVersion = '5.0.1';
-  static const String packageUrl = 'https://pub.dev/packages/flex_color_scheme';
   static const String flutterVersion = 'stable v2.10.5';
   static const String copyright = '© 2020, 2021, 2022';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';
+  static final Uri packageUri = Uri(
+    scheme: 'https',
+    host: 'pub.dev',
+    path: 'packages/flex_color_scheme',
+  );
 
   // The max dp width used for layout content on the screen in the available
   // body area. Wider content gets growing side padding, kind of like on most
