@@ -2,11 +2,33 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
+## v5.1.0 - May 13, 2022
+
+* Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
+  example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0
+
+**Change**
+
+* Deprecated `FlexColorScheme.m3TextTheme`. The custom M3 text theme is no longer needed after 
+  Flutter 3.0.0 release that includes the new M3 Typography in addition to its earlier released
+  `TextTheme`. You can opt in on using the new M3 style TextTheme as before by setting 
+  `FlexColorScheme.subThemesData.useTextTheme` to true **or** also by setting 
+  `FlexColorScheme.useMaterial3` to true.
+  
+**FIX**
+
+* Style fix: Default color of Floating Action Button, when opting in on opinionated 
+  component themes, changed to match M3 default color `primaryContainer`.
+* 
+* Style fix: Default color of highlight color on `NavigationBar` and `NavigationRail`,
+  when opting in on opinionated component themes, changed to match M3 default color
+  `primaryContainer`, with no opacity.
+
 ## v5.0.1 - April 29, 2022
 
 **FIX**
 
-* For the custom and temporary m3TextTheme: Fixed the Typography letterSpacing for bodyLarge to
+* For the custom and temporary `m3TextTheme`: Fixed the Typography letterSpacing for bodyLarge to
   match corrected M3 spec that had wrong specification on the M3 website 0.15 -> 0.5. See
   Flutter SDK [issue 102121](https://github.com/flutter/flutter/issues/102121).
 * Themes Playground: Fix wrong color code copied to clipboard when tapping input color.
