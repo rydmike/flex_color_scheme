@@ -14,12 +14,17 @@ All notable changes to the **FlexColorScheme** package are documented here.
   `TextTheme`. You can opt in on using the new M3 style TextTheme as before by setting 
   `FlexColorScheme.subThemesData.useTextTheme` to true **or** also by setting 
   `FlexColorScheme.useMaterial3` to true.
+
+* Deprecated `FlexSubThemes.buttonTheme` that create a opinionated `ButtonThemeData`.
+  The ButtonThemeData is marked as obsolete in Flutter SDK, but not yet deprecated in 
+  Flutter version 3.0.0. FlexColorscheme now marks it as **deprecated**. It will be 
+  removed in FCS released after Flutter SDK fully deprecates `ButtonThemeData`.
   
 **FIX**
 
 * Style fix: Default color of Floating Action Button, when opting in on opinionated 
   component themes, changed to match M3 default color `primaryContainer`.
-* 
+
 * Style fix: Default color of highlight color on `NavigationBar` and `NavigationRail`,
   when opting in on opinionated component themes, changed to match M3 default color
   `primaryContainer`, with no opacity.
