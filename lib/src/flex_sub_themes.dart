@@ -366,7 +366,13 @@ class FlexSubThemes {
     }
   }
 
-  /// An opinionated [ButtonThemeData] theme.
+  // TODO(rydmike): Remove buttonTheme, when ButtonThemeData is deprecated.
+  /// DEPRECATED: An opinionated [ButtonThemeData] theme.
+  ///
+  /// This [ButtonThemeData] is marked as **obsolete** in Flutter SDK
+  /// documentation, but not yet deprecated in Flutter SDK 3.0.0.
+  /// FlexColorscheme now marks it as deprecated. It will be removed in FCS
+  /// released after Flutter SDK fully deprecates ButtonThemeData.
   ///
   /// This theme is used to provide the same opinionated theme and style on
   /// the deprecated buttons `RaisedButton`, `OutlineButtons` and `FlatButton`.
@@ -385,6 +391,10 @@ class FlexSubThemes {
   /// [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
   /// obsolete in SDK docs though) still use this theme. It is thus kept around
   /// in FlexColorScheme package as long as it might have some use.
+  @Deprecated('The ButtonThemeData is marked as obsolete in Flutter SDK, but '
+      'not yet deprecated in Flutter version 3.0.0. FlexColorscheme now marks '
+      'it as deprecated. It will be removed in FCS released after Flutter SDK '
+      'fully deprecates ButtonThemeData.')
   static ButtonThemeData buttonTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
