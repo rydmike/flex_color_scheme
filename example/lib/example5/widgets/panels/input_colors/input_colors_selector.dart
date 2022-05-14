@@ -79,7 +79,9 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final bool useMaterial3 = theme.useMaterial3;
     final double phoneReduce =
         widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
     final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
@@ -104,8 +106,10 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                       ? (widget.controller.cardBorderRadius ??
                           widget.controller.defaultRadius ??
                           12)
-                      // M2 default for Card.
-                      : 4,
+                      // M3 or M2 default for Card.
+                      : useMaterial3
+                          ? 12
+                          : 4,
                   height: 30 + phoneReduce / 2,
                   width: 30 + phoneReduce / 2,
                   padding: const EdgeInsets.all(0.3),
