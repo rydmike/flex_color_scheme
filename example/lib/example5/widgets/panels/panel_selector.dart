@@ -201,6 +201,7 @@ class PanelButton extends StatelessWidget {
     final double borderWidth = isPhone ? 3 : 5;
     final double verticalPadding = isPhone ? 6 : 10;
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color cardColor = theme.cardColor;
     final Color scaffoldColor = theme.scaffoldBackgroundColor;
@@ -239,7 +240,7 @@ class PanelButton extends StatelessWidget {
       // has some other preexisting ShapeBorder, but it was not a
       // RoundedRectangleBorder, we don't know what it was, just let it be.
       shapeBorder ??= RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(4)),
+        borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
         side: selected
             ? BorderSide(color: iconColor, width: borderWidth)
             : closeColors

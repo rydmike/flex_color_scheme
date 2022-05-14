@@ -49,6 +49,7 @@ class SchemeColors extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
+    final bool useMaterial3 = theme.useMaterial3;
     // These color values are also used if picking is cancelled to restore
     // previous color selection.
     final Color primary = colorScheme.primary;
@@ -79,7 +80,7 @@ class SchemeColors extends StatelessWidget {
       // If border was null, make one matching Card default, but with border
       // side, if it was not null, we leave it as it was.
       border ??= RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(4)),
+        borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
         side: BorderSide(
           color: theme.dividerColor,
           width: 1,
