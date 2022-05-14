@@ -117,6 +117,9 @@ enum SchemeColor {
   /// The active theme's color scheme inversePrimary color will be used.
   inversePrimary,
 
+  /// The active theme's color scheme surfaceTint color will be used.
+  surfaceTint,
+
   /// The active theme's color scheme primaryVariant color will be used.
   @Deprecated('Use primaryContainer instead. Deprecated after version 4.2.0.')
   primaryVariant,
@@ -288,6 +291,8 @@ class FlexSubThemes {
         return colorScheme.onInverseSurface;
       case SchemeColor.inversePrimary:
         return colorScheme.inversePrimary;
+      case SchemeColor.surfaceTint:
+        return colorScheme.surfaceTint;
       case SchemeColor.primaryVariant:
         return colorScheme.primaryContainer;
       case SchemeColor.secondaryVariant:
@@ -308,6 +313,7 @@ class FlexSubThemes {
   static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) {
     switch (value) {
       case SchemeColor.primary:
+      case SchemeColor.surfaceTint:
         return colorScheme.onPrimary;
       case SchemeColor.onPrimary:
         return colorScheme.primary;
