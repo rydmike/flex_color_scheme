@@ -5428,6 +5428,9 @@ class FlexColorScheme with Diagnosticable {
         labelMedium: defText.labelMedium!.copyWith(color: smallColor),
         labelSmall: defText.labelSmall!.copyWith(color: smallColor),
       );
+
+      // TODO(rydmike): Remove me!
+      debugPrint('toTheme: defText inherit: ${defText.bodyLarge!.inherit}');
       // Equivalent color blend calculations for primary text theme.
       final Color headerPrimary = primaryIsDark
           ? colorScheme.onPrimary.blend(colorScheme.primary, 16)
@@ -5475,6 +5478,10 @@ class FlexColorScheme with Diagnosticable {
     final TextTheme effectiveTextTheme = defText.merge(textTheme);
     final TextTheme effectivePrimaryTextTheme =
         defPrimaryText.merge(primaryTextTheme);
+
+    // TODO(rydmike): Remove me!
+    debugPrint('toTheme: effectiveTextTheme inherit: '
+        '${effectiveTextTheme.bodyLarge!.inherit}');
 
     // Custom computed shades from primary color using alpha blends works well
     // for these rarely used colors that are on deprecation path in Flutter SDK.
