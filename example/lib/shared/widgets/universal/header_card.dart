@@ -125,6 +125,7 @@ class HeaderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
     // Use passed in color for the Card, or default themed Card theme color.
@@ -156,7 +157,8 @@ class HeaderCard extends StatelessWidget {
         // has some other preexisting ShapeBorder, but it was not a
         // RoundedRectangleBorder, we don't know what it was, just let it be.
         shapeBorder ??= RoundedRectangleBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(4)),
+          borderRadius:
+              BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
           side: BorderSide(
             color: theme.dividerColor,
             width: 1,
@@ -184,6 +186,7 @@ class HeaderCard extends StatelessWidget {
       color: cardColor,
       shape: shapeBorder,
       elevation: elevation,
+      clipBehavior: Clip.hardEdge,
       child: Column(
         children: <Widget>[
           if (useHeading)

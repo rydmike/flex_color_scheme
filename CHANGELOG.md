@@ -20,6 +20,11 @@ All notable changes to the **FlexColorScheme** package are documented here.
   Flutter version 3.0.0. FlexColorscheme now marks it as **deprecated**. It will be 
   removed in FCS released after Flutter SDK fully deprecates `ButtonThemeData`.
   
+* Add support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. The support is
+  in this release at a basic level, it is set to primary color by default, as Flutter 
+  and Material 3 does. Later release will add support in Themes Playground to customize
+  it and also the FlexColorScheme surface blend color will become changeable.
+ 
 **FIX**
 
 * Style fix: Default color of Floating Action Button, when opting in on opinionated 
