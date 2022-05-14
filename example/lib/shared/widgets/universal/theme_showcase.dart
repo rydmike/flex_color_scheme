@@ -251,11 +251,10 @@ class FabShowcase extends StatelessWidget {
       spacing: 8,
       runSpacing: 4,
       children: <Widget>[
-        FloatingActionButton(
+        FloatingActionButton.small(
           heroTag: null,
           onPressed: () {},
-          mini: true,
-          tooltip: 'Tooltip on mini\nFloatingActionButton',
+          tooltip: 'Tooltip on small\nFloatingActionButton',
           child: const Icon(Icons.accessibility),
         ),
         FloatingActionButton.extended(
@@ -278,6 +277,12 @@ class FabShowcase extends StatelessWidget {
           heroTag: null,
           onPressed: () {},
           tooltip: 'Tooltip on default\nFloatingActionButton',
+          child: const Icon(Icons.accessibility),
+        ),
+        FloatingActionButton.large(
+          heroTag: null,
+          onPressed: () {},
+          tooltip: 'Tooltip on large\nFloatingActionButton',
           child: const Icon(Icons.accessibility),
         ),
       ],

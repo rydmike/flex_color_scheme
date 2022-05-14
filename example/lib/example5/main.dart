@@ -99,6 +99,9 @@ class DemoApp extends StatelessWidget {
     return AnimatedBuilder(
         animation: controller,
         builder: (BuildContext context, Widget? child) {
+          // TODO(rydmike): Remove me!
+          debugPrint('ThemeData: effectiveTextTheme inherit: '
+              '${Theme.of(context).textTheme.bodyLarge!.inherit}');
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             scrollBehavior: const AppScrollBehavior(),
