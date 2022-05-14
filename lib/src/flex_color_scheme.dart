@@ -6507,6 +6507,7 @@ class FlexColorScheme with Diagnosticable {
           inversePrimary: colorScheme?.inversePrimary,
           shadow: colorScheme?.shadow,
           outline: colorScheme?.outline,
+          surfaceTint: colorScheme?.surfaceTint,
         ) ??
         ColorScheme(
           brightness: usedBrightness,
@@ -6538,6 +6539,7 @@ class FlexColorScheme with Diagnosticable {
               usedBrightness, colors.primary, effectiveSurfaceColor),
           shadow: Colors.black,
           outline: _outlineColor(usedBrightness, onColors.onBackground),
+          surfaceTint: usedPrimary,
         );
   }
 

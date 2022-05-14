@@ -257,6 +257,11 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.inversePrimary,
                 textColor: colorScheme.primary,
               ),
+              ColorCard(
+                label: 'Surface\nTint',
+                color: colorScheme.surfaceTint,
+                textColor: colorScheme.onPrimary,
+              ),
             ],
           ),
         ],
