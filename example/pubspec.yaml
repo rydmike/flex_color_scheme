@@ -18,8 +18,8 @@ dependencies:
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_scheme
-  flex_color_scheme:
-    path: ../
+  flex_color_scheme: ^5.0.0
+  #  path: ../
 
   # The Flutter SDK, by Google flutter.dev.
   flutter:

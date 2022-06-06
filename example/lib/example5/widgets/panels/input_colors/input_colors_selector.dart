@@ -30,7 +30,7 @@ class InputColorsSelector extends StatefulWidget {
   final bool isPhone;
 
   @override
-  _InputColorsSelectorState createState() => _InputColorsSelectorState();
+  State<InputColorsSelector> createState() => _InputColorsSelectorState();
 }
 
 class _InputColorsSelectorState extends State<InputColorsSelector> {

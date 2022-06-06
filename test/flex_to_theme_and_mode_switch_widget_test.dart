@@ -397,7 +397,7 @@ class ThemeSwitchApp extends StatefulWidget {
   final Widget? title;
 
   @override
-  _ThemeSwitchAppState createState() => _ThemeSwitchAppState();
+  State<ThemeSwitchApp> createState() => _ThemeSwitchAppState();
 }
 
 class _ThemeSwitchAppState extends State<ThemeSwitchApp> {

@@ -37,7 +37,7 @@ class ColorNameValue extends StatefulWidget {
   final ValueChanged<bool?>? onLocked;
 
   @override
-  _ColorNameValueState createState() => _ColorNameValueState();
+  State<ColorNameValue> createState() => _ColorNameValueState();
 }
 
 class _ColorNameValueState extends State<ColorNameValue> {

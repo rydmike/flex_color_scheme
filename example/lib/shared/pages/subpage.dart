@@ -23,7 +23,7 @@ class Subpage extends StatefulWidget {
   }
 
   @override
-  _SubpageState createState() => _SubpageState();
+  State<Subpage> createState() => _SubpageState();
 }
 
 class _SubpageState extends State<Subpage> {

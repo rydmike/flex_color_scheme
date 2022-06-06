@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.1.0 - May 13, 2022
+## v5.1.0 - June 6, 2022
 
 * Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
   example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0
@@ -13,7 +13,17 @@ All notable changes to the **FlexColorScheme** package are documented here.
   Flutter 3.0.0 release that includes the new M3 Typography in addition to its earlier released
   `TextTheme`. You can opt in on using the new M3 style TextTheme as before by setting 
   `FlexColorScheme.subThemesData.useTextTheme` to true **or** also by setting 
-  `FlexColorScheme.useMaterial3` to true.
+  `FlexColorScheme.useMaterial3` to true. Using this does however come with this known issue:
+  https://github.com/flutter/flutter/issues/103864. Dynamically switching from Typography 2014
+  or 2018, to M3 2021 Typography, triggers mentioned assert in issue
+  [#103864](https://github.com/flutter/flutter/issues/103864). This issue has always existed in
+  Flutter SDK with ThemeData with different Typography. FlexColorScheme mostly avoided triggering 
+  it before by only using Typography 2018, also when opting in on M3 TextTheme, that before used 
+  2018 based Typography to make a custom M3 TextTheme. Avoiding this issue is no longer possible 
+  when opting in on M3, that now correctly uses its own and different Typography from M2. 
+  To avoid the Flutter SDK issue, use same Typography for all your themes in your app and don't
+  dynamically switch theme between ThemeData objects that uses different Typography.
+  
 
 * Deprecated `FlexSubThemes.buttonTheme` that create a opinionated `ButtonThemeData`.
   The ButtonThemeData is marked as obsolete in Flutter SDK, but not yet deprecated in 
@@ -27,12 +37,15 @@ All notable changes to the **FlexColorScheme** package are documented here.
  
 **FIX**
 
-* Style fix: Default color of Floating Action Button, when opting in on opinionated 
+* **TODO** Style fix: Default color of Floating Action Button, when opting in on opinionated 
   component themes, changed to match M3 default color `primaryContainer`.
 
-* Style fix: Default color of highlight color on `NavigationBar` and `NavigationRail`,
+* **TODO** Style fix: Default color of highlight color on `NavigationBar` and `NavigationRail`,
   when opting in on opinionated component themes, changed to match M3 default color
   `primaryContainer`, with no opacity.
+
+* Fixed lint: "Avoid using private types in public APIs". Discussion:
+  https://twitter.com/RydMike/status/1533788260320923649
 
 ## v5.0.1 - April 29, 2022
 

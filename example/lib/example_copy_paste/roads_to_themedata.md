@@ -204,7 +204,7 @@ darkTheme: ThemeData(
 ),
 
 // 9) TD.from scheme.fromSeed
-//    ThemeData(colorScheme: ColorScheme.fromSeed(...))
+//    ThemeData.from(colorScheme: ColorScheme.fromSeed(...))
 //
 title: '9) TD.from fromSeed',
 theme: ThemeData.from(
