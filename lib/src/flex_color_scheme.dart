@@ -5473,7 +5473,7 @@ class FlexColorScheme with Diagnosticable {
         labelSmall: defPrimaryText.labelSmall!.copyWith(color: smallPrimary),
       );
     }
-    // TODO(rydmike): Verify that built-in Typo works and remove this!
+    // TODO(rydmike): Verify that built-in Typography works and remove this!
     // // Use custom m3TextTheme when sub themes enabled and M3 text opt-in used.
     // if (useSubThemes && subTheme.useTextTheme) {
     //   defText = defText.merge(m3TextTheme);
@@ -5482,8 +5482,8 @@ class FlexColorScheme with Diagnosticable {
     // Make our final complete TextTheme, by also merging in the two TextThemes
     // passed in via the constructor, adding any custom text theme definitions.
     final TextTheme effectiveTextTheme = defText.merge(textTheme);
-    // TODO(rydmike): Remove me. Failed attempt to wor around issue:
-    //
+    // TODO(rydmike): Remove me. Failed attempt to work around issue:
+    // https://github.com/flutter/flutter/issues/103864
     // final TextTheme effectiveTextTheme = tempTextTheme.copyWith(
     //   displayLarge: defText.displayLarge!.copyWith(inherit: false),
     //   displayMedium: defText.displayMedium!.copyWith(inherit: false),
