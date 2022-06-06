@@ -401,7 +401,7 @@ class ResponsiveScaffold extends StatefulWidget {
   final String? restorationId;
 
   @override
-  _ResponsiveScaffoldState createState() => _ResponsiveScaffoldState();
+  State<ResponsiveScaffold> createState() => _ResponsiveScaffoldState();
 }
 
 class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {

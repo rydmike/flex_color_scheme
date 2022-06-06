@@ -100,7 +100,7 @@ class DemoApp extends StatelessWidget {
         animation: controller,
         builder: (BuildContext context, Widget? child) {
           // TODO(rydmike): Remove me!
-          debugPrint('ThemeData: effectiveTextTheme inherit: '
+          debugPrint('0: Theme.of(context).textTheme inherit: '
               '${Theme.of(context).textTheme.bodyLarge!.inherit}');
           return MaterialApp(
             debugShowCheckedModeBanner: false,

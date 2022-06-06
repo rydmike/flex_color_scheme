@@ -64,7 +64,7 @@ class PanelSelector extends StatefulWidget {
   final ValueChanged<int> onChanged;
 
   @override
-  _PanelSelectorState createState() => _PanelSelectorState();
+  State<PanelSelector> createState() => _PanelSelectorState();
 }
 
 class _PanelSelectorState extends State<PanelSelector> {

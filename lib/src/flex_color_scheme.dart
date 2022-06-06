@@ -5346,6 +5346,8 @@ class FlexColorScheme with Diagnosticable {
     // fully using the same process that the ThemeData() factory uses.
     TextTheme defText =
         isDark ? effectiveTypography.white : effectiveTypography.black;
+    // TODO(rydmike): Remove me!
+    debugPrint('1. toTheme: defText inherit: ${defText.bodyLarge!.inherit}');
 
     final bool primaryIsDark =
         ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
@@ -5364,6 +5366,10 @@ class FlexColorScheme with Diagnosticable {
       defText = defText.apply(fontFamily: fontFamily);
       defPrimaryText = defPrimaryText.apply(fontFamily: fontFamily);
     }
+
+    // TODO(rydmike): Remove me!
+    debugPrint('2. toTheme: defText.apply '
+        'inherit: ${defText.bodyLarge!.inherit}');
 
     // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
@@ -5430,7 +5436,7 @@ class FlexColorScheme with Diagnosticable {
       );
 
       // TODO(rydmike): Remove me!
-      debugPrint('toTheme: defText inherit: ${defText.bodyLarge!.inherit}');
+      debugPrint('3. toTheme: defText inherit: ${defText.bodyLarge!.inherit}');
       // Equivalent color blend calculations for primary text theme.
       final Color headerPrimary = primaryIsDark
           ? colorScheme.onPrimary.blend(colorScheme.primary, 16)
@@ -5476,11 +5482,30 @@ class FlexColorScheme with Diagnosticable {
     // Make our final complete TextTheme, by also merging in the two TextThemes
     // passed in via the constructor, adding any custom text theme definitions.
     final TextTheme effectiveTextTheme = defText.merge(textTheme);
+    // TODO(rydmike): Remove me. Failed attempt to wor around issue:
+    //
+    // final TextTheme effectiveTextTheme = tempTextTheme.copyWith(
+    //   displayLarge: defText.displayLarge!.copyWith(inherit: false),
+    //   displayMedium: defText.displayMedium!.copyWith(inherit: false),
+    //   displaySmall: defText.displaySmall!.copyWith(inherit: false),
+    //   headlineLarge: defText.headlineLarge!.copyWith(inherit: false),
+    //   headlineMedium: defText.headlineMedium!.copyWith(inherit: false),
+    //   headlineSmall: defText.headlineSmall!.copyWith(inherit: false),
+    //   titleLarge: defText.titleLarge!.copyWith(inherit: false),
+    //   titleMedium: defText.titleMedium!.copyWith(inherit: false),
+    //   titleSmall: defText.titleSmall!.copyWith(inherit: false),
+    //   bodyLarge: defText.bodyLarge!.copyWith(inherit: false),
+    //   bodyMedium: defText.bodyMedium!.copyWith(inherit: false),
+    //   bodySmall: defText.bodySmall!.copyWith(inherit: false),
+    //   labelLarge: defText.labelLarge!.copyWith(inherit: false),
+    //   labelMedium: defText.labelMedium!.copyWith(inherit: false),
+    //   labelSmall: defText.labelSmall!.copyWith(inherit: false),
+    // );
     final TextTheme effectivePrimaryTextTheme =
         defPrimaryText.merge(primaryTextTheme);
 
     // TODO(rydmike): Remove me!
-    debugPrint('toTheme: effectiveTextTheme inherit: '
+    debugPrint('4. toTheme: merge effectiveTextTheme inherit: '
         '${effectiveTextTheme.bodyLarge!.inherit}');
 
     // Custom computed shades from primary color using alpha blends works well

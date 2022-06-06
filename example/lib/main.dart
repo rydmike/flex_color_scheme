@@ -706,7 +706,7 @@ class HomePage extends StatefulWidget {
   final ValueChanged<ThemeMode> onThemeModeChanged;
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {

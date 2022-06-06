@@ -20,7 +20,7 @@ class DemoApp extends StatefulWidget {
   const DemoApp({super.key});
 
   @override
-  _DemoAppState createState() => _DemoAppState();
+  State<DemoApp> createState() => _DemoAppState();
 }
 
 class _DemoAppState extends State<DemoApp> {

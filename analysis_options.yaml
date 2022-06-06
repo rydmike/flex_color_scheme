@@ -1,4 +1,4 @@
-# RydMike LINTER Preferences v1.2.9
+# RydMike LINTER Preferences v2.0.0
 #
 # Get this file here: https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
@@ -13,15 +13,15 @@
 # that are turned OFF here, or have a quick placeholder for turning it OFF, are
 # as follows:
 #
-# Core           v1.0.1     : https://pub.dev/packages/lints
-# Recommended    v1.0.1     : https://pub.dev/packages/lints
-# Flutter Lints  v1.0.4     : https://pub.dev/packages/flutter_lints
+# Core           v2.0.0     : https://pub.dev/packages/lints
+# Recommended    v2.0.0     : https://pub.dev/packages/lints
+# Flutter Lints  v2.0.1     : https://pub.dev/packages/flutter_lints
 # Pedantic       v1.11.1    : https://pub.dev/packages/pedantic
 # Effective Dart v1.3.2     : https://pub.dev/packages/effective_dart
-# Flutter repo   v2.8.0-3.2 : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
-# Lint           v1.7.2     : https://pub.dev/packages/lint
-# VG Analysis    v2.4.0     : https://pub.dev/packages/very_good_analysis
-# RydMike        v1.2.7     : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+# Flutter repo   master     : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+# Lint           v1.8.2     : https://pub.dev/packages/lint
+# VG Analysis    v3.0.0     : https://pub.dev/packages/very_good_analysis
+# RydMike        v2.0.0     : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
 include: all_lint_rules.yaml
 analyzer:
@@ -32,6 +32,8 @@ analyzer:
     - "bin/cache/**"
     - "lib/generated_plugin_registrant.dart"
 
+  # For more information see:
+  # https://dart.dev/guides/language/analysis-options#enabling-additional-type-checks
   language:
     strict-casts: true
     strict-inference: true
@@ -40,7 +42,7 @@ analyzer:
   errors:
     # Without ignore here, we cause import of all_lint_rules to warn, because some rules conflict.
     # We explicitly enabled even conflicting rules and are fixing the conflicts in this file.
-    # Put it to warning temporarily troubleshoot lint rule settings.
+    # Put it to warning temporarily, if you need troubleshoot lint rule settings.
     included_file_warning: ignore
 
     # Treat missing required parameters as an error, not as a hint or a warning.
@@ -495,32 +497,6 @@ linter:
     # VG Analysis    enabled  : https://pub.dev/packages/very_good_analysis
     # RydMike        enabled  : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     #flutter_style_todos: false
-
-    # AVOID using library private types in public APIs.
-    #
-    # https://dart-lang.github.io/linter/lints/library_private_types_in_public_api.html
-    #
-    # For the purposes of this lint, a public API is considered to be any top-level or member
-    # declaration unless the declaration is library private or contained in a declaration that's library private.
-    #
-    # Disabled, this lint is triggered when using a private class for createState() in StatefulWidget.
-    # Since that is the default, it is a bit peculiar that this lint is triggered by it. Yes you
-    # can make it with a public class too, but that is not always ideal or the intent either.
-    # Considering this, it is strange the Flutter repo has the rule enabled as well
-    # as Very Good Analysis in version 2.4.0.
-    #
-    # Other known linters use:
-    #
-    # Core           disabled : https://pub.dev/packages/lints
-    # Recommended    disabled : https://pub.dev/packages/lints
-    # Flutter Lints  disabled : https://pub.dev/packages/flutter_lints
-    # Pedantic       disabled : https://pub.dev/packages/pedantic
-    # Effective Dart disabled : https://pub.dev/packages/effective_dart
-    # Flutter repo   enabled  : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
-    # Lint           disabled : https://pub.dev/packages/lint
-    # VG Analysis    enabled  : https://pub.dev/packages/very_good_analysis
-    # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
-    library_private_types_in_public_api: false
 
     # AVOID lines longer than 80 characters
     #

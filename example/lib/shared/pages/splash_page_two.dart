@@ -22,7 +22,7 @@ class SplashPageTwo extends StatefulWidget {
   }
 
   @override
-  _SplashPageTwoState createState() => _SplashPageTwoState();
+  State<SplashPageTwo> createState() => _SplashPageTwoState();
 }
 
 class _SplashPageTwoState extends State<SplashPageTwo> {
