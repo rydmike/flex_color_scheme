@@ -81,7 +81,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
               : null,
         ),
         ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              controller.fabUseShape,
           title: const Text('Border radius'),
           subtitle: Slider.adaptive(
             min: -1,
@@ -94,7 +96,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                         (controller.fabBorderRadius ?? -1) < 0
                     ? fabRadiusDefaultLabel
                     : (controller.fabBorderRadius?.toStringAsFixed(0) ?? '')
-                : 'circular',
+                : controller.useMaterial3
+                    ? 'M3 rounded'
+                    : 'circular',
             value: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     controller.fabUseShape
@@ -126,7 +130,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                           ? fabRadiusDefaultLabel
                           : (controller.fabBorderRadius?.toStringAsFixed(0) ??
                               '')
-                      : 'circular',
+                      : controller.useMaterial3
+                          ? 'M3 rounded'
+                          : 'circular',
                   style: Theme.of(context)
                       .textTheme
                       .caption!

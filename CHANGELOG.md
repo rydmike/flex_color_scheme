@@ -66,6 +66,15 @@ All notable changes to the **FlexColorScheme** package are documented here.
   [discussion](https://twitter.com/RydMike/status/1533788260320923649) about why and when you 
   might run into this lint being triggered by older Stateful Widgets.
 
+**EXAMPLES**
+
+* Added use of Theme Extensions demo to the default example, i.e. the "Hot Reload Playground".
+
+* Themes Playground: Updated style defaults labels for Switches, CheckBoc and Radio.
+
+* Themes Playground: Added to the theme selector an always available "Use Material 3" toggle.
+  Previously this toggle was only available on the introduction page and panel.
+
 ## v5.0.1 - April 29, 2022
 
 **FIX**
