@@ -129,23 +129,23 @@ class ThemeSelector extends StatelessWidget {
                   Expanded(
                     child: SwitchListTileAdaptive(
                       contentPadding: isPhone
-                          ? const EdgeInsetsDirectional.only(start: 16, end: 0)
-                          : null,
-                      title: const Text('Flex\u200BColor\u200BScheme'),
-                      dense: isPhone,
-                      value: controller.useFlexColorScheme,
-                      onChanged: controller.setUseFlexColorScheme,
-                    ),
-                  ),
-                  Expanded(
-                    child: SwitchListTileAdaptive(
-                      contentPadding: isPhone
                           ? const EdgeInsets.symmetric(horizontal: 8)
                           : null,
                       dense: isPhone,
                       title: const Text('Use Material3'),
                       value: controller.useMaterial3,
                       onChanged: controller.setUseMaterial3,
+                    ),
+                  ),
+                  Expanded(
+                    child: SwitchListTileAdaptive(
+                      contentPadding: isPhone
+                          ? const EdgeInsetsDirectional.only(start: 16, end: 0)
+                          : null,
+                      title: const Text('Flex\u200BColor\u200BScheme'),
+                      dense: isPhone,
+                      value: controller.useFlexColorScheme,
+                      onChanged: controller.setUseFlexColorScheme,
                     ),
                   ),
                   Expanded(
