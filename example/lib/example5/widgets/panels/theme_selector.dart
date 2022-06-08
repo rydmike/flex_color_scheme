@@ -143,6 +143,17 @@ class ThemeSelector extends StatelessWidget {
                           ? const EdgeInsets.symmetric(horizontal: 8)
                           : null,
                       dense: isPhone,
+                      title: const Text('Use Material3'),
+                      value: controller.useMaterial3,
+                      onChanged: controller.setUseMaterial3,
+                    ),
+                  ),
+                  Expanded(
+                    child: SwitchListTileAdaptive(
+                      contentPadding: isPhone
+                          ? const EdgeInsets.symmetric(horizontal: 8)
+                          : null,
+                      dense: isPhone,
                       title: const Text('Compo\u200Bnent themes'),
                       value: controller.useSubThemes &&
                           controller.useFlexColorScheme,

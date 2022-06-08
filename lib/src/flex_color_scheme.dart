@@ -5813,7 +5813,12 @@ class FlexColorScheme with Diagnosticable {
       // does not include this, in our opinion for correct application of the
       // color scheme based theme, it should really do the same as below.
       // See issue: https://github.com/flutter/flutter/issues/65782
-      toggleableActiveColor: colorScheme.secondary,
+      // When using sub-themes, or Material 3 style, we use primary color
+      // instead, because it is the best match for M3 ColorDesign for the M2
+      // components using M3 Colors.
+      toggleableActiveColor: useSubThemes || useMaterial3
+          ? colorScheme.primary
+          : colorScheme.secondary,
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
       // See: https://github.com/flutter/flutter/issues/91772
       // The primary dark color no longer exists in ColorScheme themes, but

@@ -57,7 +57,7 @@ class SwitchListTileAdaptive extends StatelessWidget {
   /// The color to use when this switch is on.
   ///
   /// Defaults to selected thumb color of SwitchTheme, and if not defined to
-  /// [Colorscheme.secondary] color of the current [Theme].
+  /// [theme.toggleableActiveColor] color of the current [Theme].
   ///
   /// The Material mode of this switch does this by default, but the iOS remain
   /// iOS active green despite the theme, unless explicitly set via the
@@ -111,7 +111,7 @@ class SwitchListTileAdaptive extends StatelessWidget {
               .switchTheme
               .thumbColor
               ?.resolve(<MaterialState>{MaterialState.selected}) ??
-          Theme.of(context).colorScheme.secondary,
+          Theme.of(context).toggleableActiveColor,
       value: value,
       onChanged: onChanged,
       title: title,
