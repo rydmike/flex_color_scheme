@@ -67,7 +67,7 @@ class DartCodeDialogScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: SelectableText.rich(
                   TextSpan(
-                    style: GoogleFonts.droidSansMono(fontSize: 12),
+                    style: GoogleFonts.firaMono(fontSize: 12),
                     children: <TextSpan>[
                       DartSyntaxHighlighter(style).format(code)
                     ],
