@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.1.0 - June 6, 2022
+## v5.1.0 - June 8, 2022
 
 * Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
   example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0
@@ -29,11 +29,16 @@ All notable changes to the **FlexColorScheme** package are documented here.
   The ButtonThemeData is marked as obsolete in Flutter SDK, but not yet deprecated in 
   Flutter version 3.0.0. FlexColorscheme now marks it as **deprecated**. It will be 
   removed in FCS released after Flutter SDK fully deprecates `ButtonThemeData`.
-  
+
+**New**
+
 * Add support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. The support is
   in this release at a basic level, it is set to primary color by default, as Flutter 
   and Material 3 does. Later release will add support in Themes Playground to customize
   it and also the FlexColorScheme surface blend color will become changeable.
+
+* Added pass through API for using theme extensions directly via FlexColorScheme API, so one
+  does not have to add the extensions with a CopyWith on FlexColorScheme produced ThemeData.
  
 **FIX**
 

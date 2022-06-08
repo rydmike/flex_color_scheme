@@ -536,56 +536,57 @@ class FlexColorScheme with Diagnosticable {
   /// surfaces. As well as using [FlexKeyColors] and [FlexTones] to make and
   /// customize key color seed generated [ColorScheme]s.
   const FlexColorScheme({
-    final this.colorScheme,
-    final this.brightness,
-    final this.primary,
-    final this.primaryContainer,
+    this.colorScheme,
+    this.brightness,
+    this.primary,
+    this.primaryContainer,
     @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
         'due to deprecation in Flutter master from 2.10.0')
-        final this.primaryVariant,
-    final this.secondary,
-    final this.secondaryContainer,
+        this.primaryVariant,
+    this.secondary,
+    this.secondaryContainer,
     @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
         'due to deprecation in Flutter master from 2.10.0')
-        final this.secondaryVariant,
-    final this.tertiary,
-    final this.tertiaryContainer,
-    final this.error,
-    final this.surface,
-    final this.background,
-    final this.scaffoldBackground,
-    final this.dialogBackground,
-    final this.appBarBackground,
-    final this.onPrimary,
-    final this.onPrimaryContainer,
-    final this.onSecondary,
-    final this.onSecondaryContainer,
-    final this.onTertiary,
-    final this.onTertiaryContainer,
-    final this.onSurface,
-    final this.onBackground,
-    final this.onError,
-    final this.tabBarStyle = FlexTabBarStyle.forAppBar,
-    final this.appBarElevation = 0,
-    final this.bottomAppBarElevation = 0,
-    final this.tooltipsMatchBackground = false,
-    final this.transparentStatusBar = true,
-    final this.visualDensity,
-    final this.textTheme,
-    final this.primaryTextTheme,
-    final this.fontFamily,
-    final this.platform,
-    final this.typography,
-    final this.applyElevationOverlayColor = true,
+        this.secondaryVariant,
+    this.tertiary,
+    this.tertiaryContainer,
+    this.error,
+    this.surface,
+    this.background,
+    this.scaffoldBackground,
+    this.dialogBackground,
+    this.appBarBackground,
+    this.onPrimary,
+    this.onPrimaryContainer,
+    this.onSecondary,
+    this.onSecondaryContainer,
+    this.onTertiary,
+    this.onTertiaryContainer,
+    this.onSurface,
+    this.onBackground,
+    this.onError,
+    this.tabBarStyle = FlexTabBarStyle.forAppBar,
+    this.appBarElevation = 0,
+    this.bottomAppBarElevation = 0,
+    this.tooltipsMatchBackground = false,
+    this.transparentStatusBar = true,
+    this.visualDensity,
+    this.textTheme,
+    this.primaryTextTheme,
+    this.fontFamily,
+    this.platform,
+    this.typography,
+    this.applyElevationOverlayColor = true,
     @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
         'opinionated component sub-themes are added by adding a default '
         'constructor FlexSubThemesData() to subThemesData. This creates '
         'sub-themes using the FlexColorScheme opinionated defaults. You can '
         'modify the sub-themes by changing the FlexSubThemesData properties. '
         'This property will be completely removed in version 6.0.0.')
-        final this.useSubThemes = false,
-    final this.subThemesData,
-    final this.useMaterial3 = false,
+        this.useSubThemes = false,
+    this.subThemesData,
+    this.useMaterial3 = false,
+    this.extensions,
   })  : assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.'),
         assert(bottomAppBarElevation >= 0.0,
             'Bottom AppBar elevation must be >= 0.');
@@ -1225,6 +1226,17 @@ class FlexColorScheme with Diagnosticable {
   /// limitations. By default the opinionated sub-themes implement the
   /// Material 3 design and look when it is possible within current SDK limits.
   final bool useMaterial3;
+
+  /// Arbitrary additions to this theme.
+  ///
+  /// This is the same property as [extensions] in ThemeData, it is provided
+  /// as a convenience pass-through to ThemeData.
+  ///
+  /// To define extensions, pass an [Iterable] containing one or more
+  /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
+  ///
+  /// To obtain an extension, use ThemeData.of(context).extension.
+  final Iterable<ThemeExtension<dynamic>>? extensions;
 
   //****************************************************************************
   //
@@ -2406,6 +2418,17 @@ class FlexColorScheme with Diagnosticable {
     /// all uses of it. Everything will use the Material 3 look and feel at
     /// that point. See also: [Material Design 3](https://m3.material.io/).
     final bool useMaterial3 = false,
+
+    /// Arbitrary additions to this theme.
+    ///
+    /// This is the same property as [extensions] in ThemeData, it is provided
+    /// as a convenience pass-through to ThemeData.
+    ///
+    /// To define extensions, pass an [Iterable] containing one or more
+    /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
+    ///
+    /// To obtain an extension, use ThemeData.of(context).extension.
+    final Iterable<ThemeExtension<dynamic>>? extensions,
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6');
@@ -2809,6 +2832,7 @@ class FlexColorScheme with Diagnosticable {
       applyElevationOverlayColor: applyElevationOverlayColor,
       subThemesData: subThemesData,
       useMaterial3: useMaterial3,
+      extensions: extensions,
     );
   }
 
@@ -3989,6 +4013,17 @@ class FlexColorScheme with Diagnosticable {
     /// all uses of it. Everything will use the Material 3 look and feel at
     /// that point. See also: [Material Design 3](https://m3.material.io/).
     final bool useMaterial3 = false,
+
+    /// Arbitrary additions to this theme.
+    ///
+    /// This is the same property as [extensions] in ThemeData, it is provided
+    /// as a convenience pass-through to ThemeData.
+    ///
+    /// To define extensions, pass an [Iterable] containing one or more
+    /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
+    ///
+    /// To obtain an extension, use ThemeData.of(context).extension.
+    final Iterable<ThemeExtension<dynamic>>? extensions,
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6.');
@@ -4421,6 +4456,7 @@ class FlexColorScheme with Diagnosticable {
       applyElevationOverlayColor: applyElevationOverlayColor,
       subThemesData: subThemesData,
       useMaterial3: useMaterial3,
+      extensions: extensions,
     );
   }
 
@@ -5689,6 +5725,7 @@ class FlexColorScheme with Diagnosticable {
       fontFamily: fontFamily,
       visualDensity: visualDensity,
       useMaterial3: useMaterial3,
+      extensions: extensions,
       // TextTheme properties use the same logic as in ThemeData, allowing us
       // to optionally define them. AccentTextTheme is omitted since it has
       // been deprecated in Flutter 2.5.0.
@@ -6591,6 +6628,20 @@ class FlexColorScheme with Diagnosticable {
     }
   }
 
+  // TODO(rydmike): Remove, might not need after all. ThemeData handles it.
+  //
+  // /// Convert the [extensionsIterable] passed to [ThemeData.new] or [copyWith]
+  // /// to the stored [extensions] map, where each entry's key consists of the
+  // /// extension's type.
+  // static Map<Object, ThemeExtension<dynamic>> _themeExtensionIterableToMap(
+  //     Iterable<ThemeExtension<dynamic>> extensionsIterable) {
+  //   return Map<Object, ThemeExtension<dynamic>>.unmodifiable(<Object,
+  //       ThemeExtension<dynamic>>{
+  //     for (final ThemeExtension<dynamic> extension in extensionsIterable)
+  //       extension.type: extension as ThemeExtension<ThemeExtension<dynamic>>
+  //   });
+  // }
+
   /// Copy the object with one or more provided properties changed.
   FlexColorScheme copyWith({
     ColorScheme? colorScheme,
@@ -6632,6 +6683,7 @@ class FlexColorScheme with Diagnosticable {
     bool? applyElevationOverlayColor,
     FlexSubThemesData? subThemesData,
     bool? useMaterial3,
+    Iterable<ThemeExtension<dynamic>>? extensions,
   }) {
     return FlexColorScheme(
       colorScheme: colorScheme ?? this.colorScheme,
@@ -6676,6 +6728,7 @@ class FlexColorScheme with Diagnosticable {
           applyElevationOverlayColor ?? this.applyElevationOverlayColor,
       subThemesData: subThemesData ?? this.subThemesData,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
+      extensions: extensions ?? this.extensions,
     );
   }
 
@@ -6723,7 +6776,8 @@ class FlexColorScheme with Diagnosticable {
         other.typography == typography &&
         other.applyElevationOverlayColor == applyElevationOverlayColor &&
         other.subThemesData == subThemesData &&
-        other.useMaterial3 == useMaterial3;
+        other.useMaterial3 == useMaterial3 &&
+        other.extensions == extensions;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -6768,6 +6822,7 @@ class FlexColorScheme with Diagnosticable {
         applyElevationOverlayColor,
         subThemesData,
         useMaterial3,
+        extensions,
       ]);
 
   /// Flutter debug properties override, includes toString.
@@ -6821,6 +6876,8 @@ class FlexColorScheme with Diagnosticable {
     properties.add(
         DiagnosticsProperty<FlexSubThemesData>('subThemesData', subThemesData));
     properties.add(DiagnosticsProperty<bool>('useMaterial3', useMaterial3));
+    properties.add(
+        IterableProperty<ThemeExtension<dynamic>>('extensions', extensions));
   }
 }
 

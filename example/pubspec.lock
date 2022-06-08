@@ -88,10 +88,10 @@ packages:
   flex_color_scheme:
     dependency: "direct main"
     description:
-      name: flex_color_scheme
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.1"
+      path: ".."
+      relative: true
+    source: path
+    version: "5.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
