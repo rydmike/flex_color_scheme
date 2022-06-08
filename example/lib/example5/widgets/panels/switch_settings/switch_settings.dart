@@ -14,6 +14,13 @@ class SwitchesSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final String labelForDefaultColor =
+        (controller.useSubThemes || controller.useMaterial3) &&
+                controller.useFlexColorScheme
+            ? 'default (primary)'
+            : isDark
+                ? 'default (tealAccent[200])'
+                : 'default (secondary)';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -31,9 +38,7 @@ class SwitchesSettings extends StatelessWidget {
         const Divider(height: 1),
         ColorSchemePopupMenu(
           title: const Text('Switch color'),
-          labelForDefault: !controller.useFlexColorScheme && isDark
-              ? 'default (tealAccent[200])'
-              : 'default (secondary)',
+          labelForDefault: labelForDefaultColor,
           index: controller.switchSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -52,9 +57,7 @@ class SwitchesSettings extends StatelessWidget {
         const Divider(height: 1),
         ColorSchemePopupMenu(
           title: const Text('Checkbox color'),
-          labelForDefault: !controller.useFlexColorScheme && isDark
-              ? 'default (tealAccent[200])'
-              : 'default (secondary)',
+          labelForDefault: labelForDefaultColor,
           index: controller.checkboxSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -74,9 +77,7 @@ class SwitchesSettings extends StatelessWidget {
         const Divider(height: 1),
         ColorSchemePopupMenu(
           title: const Text('Radio color'),
-          labelForDefault: !controller.useFlexColorScheme && isDark
-              ? 'default (tealAccent[200])'
-              : 'default (secondary)',
+          labelForDefault: labelForDefaultColor,
           index: controller.radioSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
