@@ -100,9 +100,6 @@ class _HomePageState extends State<HomePage> {
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
 
-    // TODO(rydmike): Remove me!
-    debugPrint('HOME) Theme.of(context).textTheme inherit: '
-        '${Theme.of(context).textTheme.bodyLarge!.inherit}');
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
