@@ -28,7 +28,7 @@ import 'shared/widgets/universal/theme_showcase.dart';
 /// To learn more about how to use [FlexColorScheme] and all its features,
 /// please go through the five tutorial examples in the readme documentation.
 void main() => runApp(const DemoApp());
-//
+
 // This default example contains a long list of const and final property values
 // that are just passed in to the corresponding properties in
 // FlexThemeData.light() and FlexThemeData.dark() convenience extension on
@@ -499,6 +499,47 @@ final VisualDensity _visualDensity = FlexColorScheme.comfortablePlatformDensity;
 // platforms without using `copyWith` on the resulting theme data.
 final TargetPlatform _platform = defaultTargetPlatform;
 
+/// A theme Extension example with a single custom brand color property.
+///
+/// You can add as many colors and other theme properties as you need, and
+/// you can add multiple different ThemeExtension sub classes as well.
+class BrandTheme extends ThemeExtension<BrandTheme> {
+  const BrandTheme({
+    this.brandColor,
+  });
+  final Color? brandColor;
+
+  // You must override the copyWith method.
+  @override
+  BrandTheme copyWith({
+    Color? brandColor,
+  }) =>
+      BrandTheme(
+        brandColor: brandColor ?? this.brandColor,
+      );
+
+  // You must override the lerp method.
+  @override
+  BrandTheme lerp(ThemeExtension<BrandTheme>? other, double t) {
+    if (other is! BrandTheme) {
+      return this;
+    }
+    return BrandTheme(
+      brandColor: Color.lerp(brandColor, other.brandColor, t),
+    );
+  }
+}
+
+// Custom const theme with our brand color in light mode.
+const BrandTheme lightBrandTheme = BrandTheme(
+  brandColor: Color.fromARGB(255, 8, 79, 71),
+);
+
+// Custom const theme with our brand color in dark mode.
+const BrandTheme darkBrandTheme = BrandTheme(
+  brandColor: Color.fromARGB(255, 167, 227, 218),
+);
+
 class DemoApp extends StatefulWidget {
   const DemoApp({super.key});
 
@@ -595,6 +636,10 @@ class _DemoAppState extends State<DemoApp> {
         subThemesData: _useSubThemes ? _subThemesData : null,
         visualDensity: _visualDensity,
         platform: _platform,
+        // Add all our custom theme extensions, in this case we only have one.
+        extensions: <ThemeExtension<dynamic>>{
+          lightBrandTheme,
+        },
       ),
 
       // Define the corresponding dark theme for the app.
@@ -664,6 +709,10 @@ class _DemoAppState extends State<DemoApp> {
         subThemesData: _useSubThemes ? _subThemesData : null,
         visualDensity: _visualDensity,
         platform: _platform,
+        // Add all our custom theme extensions, in this case we only have one.
+        extensions: <ThemeExtension<dynamic>>{
+          darkBrandTheme,
+        },
       ),
       themeMode: themeMode,
       home: HomePage(
@@ -758,8 +807,13 @@ class _HomePageState extends State<HomePage> {
         media.size.height < AppData.phoneHeightBreakpoint;
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final TextStyle headlineMedium = textTheme.headlineMedium!;
+    final TextStyle headlineMedium = textTheme.headlineSmall!;
     final bool isDark = theme.brightness == Brightness.dark;
+
+    // Get our custom brand color from the BrandTheme extension, with a
+    // fallback to primary color.
+    final Color brandColor =
+        theme.extension<BrandTheme>()!.brandColor ?? theme.colorScheme.primary;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       // FlexColorScheme contains a static helper that can be use to theme
@@ -825,9 +879,13 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.fromLTRB(
                 margins, topPadding, margins, bottomPadding),
             children: <Widget>[
-              const Text('This is FlexColorScheme V5 developers Hot Reload '
-                  'Playground. It has property values that you can modify and '
-                  'hot reload the app to try different options and features.'),
+              Text('Theme Extension Colored Header',
+                  style: headlineMedium.copyWith(color: brandColor)),
+              const Text(
+                'This is FlexColorScheme V5 developers Hot Reload '
+                'Playground. It has property values that you can modify and '
+                'hot reload the app to try different options and features.',
+              ),
               const SizedBox(height: 8),
               ListTile(
                 contentPadding: EdgeInsets.zero,

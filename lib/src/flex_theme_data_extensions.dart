@@ -1084,6 +1084,17 @@ extension FlexThemeData on ThemeData {
     /// all uses of it. Everything will use the Material 3 look and feel at
     /// that point. See also: [Material Design 3](https://m3.material.io/).
     final bool useMaterial3 = false,
+
+    /// Arbitrary additions to this theme.
+    ///
+    /// This is the same property as [extensions] in ThemeData, it is provided
+    /// as a convenience pass-through to ThemeData.
+    ///
+    /// To define extensions, pass an [Iterable] containing one or more
+    /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
+    ///
+    /// To obtain an extension, use ThemeData.of(context).extension.
+    final Iterable<ThemeExtension<dynamic>>? extensions,
   }) =>
       FlexColorScheme.light(
         colors: colors,
@@ -1134,6 +1145,7 @@ extension FlexThemeData on ThemeData {
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
         useMaterial3: useMaterial3,
+        extensions: extensions,
       ).toTheme;
 
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.dark]
@@ -2173,6 +2185,17 @@ extension FlexThemeData on ThemeData {
     /// all uses of it. Everything will use the Material 3 look and feel at
     /// that point. See also: [Material Design 3](https://m3.material.io/).
     final bool useMaterial3 = false,
+
+    /// Arbitrary additions to this theme.
+    ///
+    /// This is the same property as [extensions] in ThemeData, it is provided
+    /// as a convenience pass-through to ThemeData.
+    ///
+    /// To define extensions, pass an [Iterable] containing one or more
+    /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
+    ///
+    /// To obtain an extension, use ThemeData.of(context).extension.
+    final Iterable<ThemeExtension<dynamic>>? extensions,
   }) =>
       FlexColorScheme.dark(
         colorScheme: colorScheme,
@@ -2223,5 +2246,6 @@ extension FlexThemeData on ThemeData {
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
         useMaterial3: useMaterial3,
+        extensions: extensions,
       ).toTheme;
 }
