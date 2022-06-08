@@ -943,7 +943,10 @@ class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined, [colorScheme.secondary] will be used.
+    /// If not defined, [colorScheme.primary] will be used. This is more in-line
+    /// with M3 design, but applied to M2 switch. The M3 color design
+    /// specification for the secondary color, is a poor choice for toggles and
+    /// switches, primary color works better.
     final SchemeColor? baseSchemeColor,
 
     /// The splash radius of the circular Material ink response.
@@ -956,8 +959,8 @@ class FlexSubThemes {
     /// If false, it is grey like in Flutter SDK. Defaults to true.
     final bool unselectedIsColored = true,
   }) {
-    // Get selected color, defaults to secondary.
-    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.secondary;
+    // Get selected color, defaults to primary.
+    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
     final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
     final bool isLight = colorScheme.brightness == Brightness.light;
@@ -2667,7 +2670,10 @@ class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined, [colorScheme.secondary] will be used.
+    /// If not defined, [colorScheme.primary] will be used. This is more in-line
+    /// with M3 design, but applied to M2 Radio. The M3 color design
+    /// specification for the secondary color, is a poor choice for toggles and
+    /// switches, primary color works better.
     final SchemeColor? baseSchemeColor,
 
     /// The splash radius of the circular Material ink response.
@@ -2680,9 +2686,9 @@ class FlexSubThemes {
     /// If false, it is grey like in Flutter SDK. Defaults to true.
     final bool unselectedIsColored = true,
   }) {
-    // Get selected color, defaults to secondary.
+    // Get selected color, defaults to primary.
     final Color baseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.secondary, colorScheme);
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
     final bool isLight = colorScheme.brightness == Brightness.light;
 
     return RadioThemeData(
@@ -2821,7 +2827,10 @@ class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined, [colorScheme.secondary] will be used.
+    /// If not defined, [colorScheme.primary] will be used. This is more in-line
+    /// with M3 design, but applied to M2 switch. The M3 color design
+    /// specification for the secondary color, is a poor choice for toggles and
+    /// switches, primary color works better.
     final SchemeColor? baseSchemeColor,
 
     /// The splash radius of the circular Material ink response.
@@ -2834,9 +2843,9 @@ class FlexSubThemes {
     /// If false, it is grey like in Flutter SDK. Defaults to true.
     final bool unselectedIsColored = true,
   }) {
-    // Get selected color, defaults to secondary.
+    // Get selected color, defaults to primary.
     final Color baseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.secondary, colorScheme);
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
     final bool isLight = colorScheme.brightness == Brightness.light;
 
     return SwitchThemeData(

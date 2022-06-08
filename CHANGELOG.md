@@ -7,22 +7,23 @@ All notable changes to the **FlexColorScheme** package are documented here.
 * Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
   example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0
 
-**New**
+**NEW**
 
-* Add support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. The support is
+* **Added** support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. The support is
   in this release at a basic level, it is set to primary color by default, as Flutter
   and Material 3 does. Later release will add support in Themes Playground to customize
-  it and also the FlexColorScheme surface blend color will become changeable.
+  it, then also the FlexColorScheme surface blend color will become changeable and use the
+  `ColorScheme.surfaceTint` as blend color instead of `ColorScheme.primary`.
 
-* Added pass through API for using Flutter 3.0.0 theme extensions directly via FlexColorScheme API.
-  Added to avoid having to add theme extensions with a CopyWith on FlexColorScheme produced
-  ThemeData. With the `FlexColorScheme.extensions` and `FlexThemeData.extensions` properties
-  you can add custom theme extensions directly via them as well.
+* **Added** pass through API for using Flutter 3.0.0 theme extensions directly via FlexColorScheme 
+  API. It was added to avoid having to add theme extensions with a CopyWith on FlexColorScheme 
+  produced ThemeData. With the `FlexColorScheme.extensions` and `FlexThemeData.extensions` 
+  properties you can add custom theme extensions directly via them as well.
 
 
-**Deprecated**
+**DEPRECATED**
 
-* Deprecated `FlexColorScheme.m3TextTheme`. The custom M3 text theme is no longer needed after 
+* **Deprecated:** `FlexColorScheme.m3TextTheme`. The custom M3 text theme is no longer needed after 
   Flutter 3.0.0 release that includes the new M3 Typography in addition to its earlier released
   `TextTheme`. You can opt in on using the new M3 style TextTheme as before by setting 
   `FlexColorScheme.subThemesData.useTextTheme` to true **or** also by setting 
@@ -39,7 +40,7 @@ All notable changes to the **FlexColorScheme** package are documented here.
   dynamically switch theme between ThemeData objects that uses different Typography in your 
   application. The use cases for doing this are also very few.  
 
-* Deprecated `FlexSubThemes.buttonTheme` that create an opinionated `ButtonThemeData`.
+* **Deprecated:** `FlexSubThemes.buttonTheme` that create an opinionated `ButtonThemeData`.
   The ButtonThemeData is marked as obsolete in Flutter SDK, but not yet deprecated in 
   Flutter version 3.0.0. FlexColorscheme now marks it as **deprecated**. It will be 
   removed in FCS released after Flutter SDK fully deprecates `ButtonThemeData`.
@@ -53,11 +54,15 @@ All notable changes to the **FlexColorScheme** package are documented here.
   when opting in on opinionated component themes, changed to match M3 default color
   `primaryContainer`, with no opacity.
 
-* **TODO** Style fix: Default color of toggles now primary color when opting in on opinionated.  
-  sub themes. This matches the color style of M2 switches, with what they will become in M3 by
-  default.
+* **Style fix:** Default color of toggles (Switch, CheckBoc and Radio) are now using 
+  `primary` color as default themed color when opting in on opinionated sub themes. 
+  The opinionated themes uses a style that matches M3 color design based themes, and in it 
+  switches and toggles are mostly primary color based. In M3 color design, the secondary color is a 
+  poor choice for switches and toggles, and it is therefore not used as default color, as it 
+  does not look nice with M3 based ColorSchemes, created eg using M3 color seeding. If you use a
+  custom M3 color design where secondary color is still prominent, you can of course still use it.
 
-* Fixed lint: "Avoid using private types in public APIs". See tweet 
+* **Fixed lint:** "Avoid using private types in public APIs". See tweet 
   [discussion](https://twitter.com/RydMike/status/1533788260320923649) about why and when you 
   might run into this lint being triggered by older Stateful Widgets.
 

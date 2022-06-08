@@ -670,49 +670,76 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Switch] and [SwitchListTile] use as base themed color.
   ///
-  /// If not defined, it defaults to ThemeData.colorScheme.secondary color via
-  /// FlexColorScheme's default for [ThemeData.toggleableActiveColor].
+  /// When not using sub-themes, the color defaults to
+  /// ThemeData.colorScheme.secondary color that is used as FlexColorScheme's
+  /// default for [ThemeData.toggleableActiveColor].
   ///
   /// The ThemeData property toggleableActiveColor is being deprecated
   /// https://github.com/flutter/flutter/pull/95870. A future change for
   /// FlexColorScheme will be to see if it will be possible to continue to
-  /// offer ThemeData.colorScheme.secondary as default color without opting in
-  /// on using the component sub-themes. Currently the default is
-  /// [ColorScheme.secondary] even without opting in on on sub-themes. It is
-  /// also the default when when opting on its sub themes, but can be modified
-  /// with this property.
+  /// offer ThemeData.colorScheme.secondary as default color when not opting in
+  /// on using the component sub-themes. Currently the default is already
+  /// [ColorScheme.secondary] when not opting in on using sub-themes, matching
+  /// the old Material 2 design standard.
+  ///
+  /// When you opt-in on using opinionated sub-themes, the default color is
+  /// [ColorScheme.primary]. The opinionated themes uses a style that matches
+  /// M3 color design based themes, and in it switches and toggles are mostly
+  /// primary color based. In M3 color design, the secondary color is a poor
+  /// choice for switches and toggles and it is therefore not used as default
+  /// color, since it does not look nice with M3 based ColorSchemes, created
+  /// eg using M3 color seeding. If you use a custom M3 color design where
+  /// secondary color is still prominent, you can of course still use it.
   final SchemeColor? switchSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Checkbox] and [CheckboxListTile] use as base themed color.
   ///
-  /// If not defined, it defaults to ThemeData.colorScheme.secondary color via
-  /// FlexColorScheme's default for [ThemeData.toggleableActiveColor].
+  /// When not using sub-themes, the color defaults to
+  /// ThemeData.colorScheme.secondary color that is used as FlexColorScheme's
+  /// default for [ThemeData.toggleableActiveColor].
   ///
   /// The ThemeData property toggleableActiveColor is being deprecated
   /// https://github.com/flutter/flutter/pull/95870. A future change for
   /// FlexColorScheme will be to see if it will be possible to continue to
-  /// offer ThemeData.colorScheme.secondary as default color without opting in
-  /// on using the component sub-themes. Currently the default is
-  /// [ColorScheme.secondary] even without opting in on on sub-themes. It is
-  /// also the default when when opting on its sub themes, but can be modified
-  /// with this property.
+  /// offer ThemeData.colorScheme.secondary as default color when not opting in
+  /// on using the component sub-themes. Currently the default is already
+  /// [ColorScheme.secondary] when not opting in on using sub-themes, matching
+  /// the old Material 2 design standard.
+  ///
+  /// When you opt-in on using opinionated sub-themes, the default color is
+  /// [ColorScheme.primary]. The opinionated themes uses a style that matches
+  /// M3 color design based themes, and in it switches and toggles are mostly
+  /// primary color based. In M3 color design, the secondary color is a poor
+  /// choice for switches and toggles and it is therefore not used as default
+  /// color, since it does not look nice with M3 based ColorSchemes, created
+  /// eg using M3 color seeding. If you use a custom M3 color design where
+  /// secondary color is still prominent, you can of course still use it.
   final SchemeColor? checkboxSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Radio] and [RadioListTile] use as base themed color.
   ///
-  /// If not defined, it defaults to ThemeData.colorScheme.secondary color via
-  /// FlexColorScheme's default for [ThemeData.toggleableActiveColor].
+  /// When not using sub-themes, the color defaults to
+  /// ThemeData.colorScheme.secondary color that is used as FlexColorScheme's
+  /// default for [ThemeData.toggleableActiveColor].
   ///
   /// The ThemeData property toggleableActiveColor is being deprecated
   /// https://github.com/flutter/flutter/pull/95870. A future change for
   /// FlexColorScheme will be to see if it will be possible to continue to
-  /// offer ThemeData.colorScheme.secondary as default color without opting in
-  /// on using the component sub-themes. Currently the default is
-  /// [ColorScheme.secondary] even without opting in on on sub-themes. It is
-  /// also the default when when opting on its sub themes, but can be modified
-  /// with this property.
+  /// offer ThemeData.colorScheme.secondary as default color when not opting in
+  /// on using the component sub-themes. Currently the default is already
+  /// [ColorScheme.secondary] when not opting in on using sub-themes, matching
+  /// the old Material 2 design standard.
+  ///
+  /// When you opt-in on using opinionated sub-themes, the default color is
+  /// [ColorScheme.primary]. The opinionated themes uses a style that matches
+  /// M3 color design based themes, and in it switches and toggles are mostly
+  /// primary color based. In M3 color design, the secondary color is a poor
+  /// choice for switches and toggles and it is therefore not used as default
+  /// color, since it does not look nice with M3 based ColorSchemes, created
+  /// eg using M3 color seeding. If you use a custom M3 color design where
+  /// secondary color is still prominent, you can of course still use it.
   final SchemeColor? radioSchemeColor;
 
   /// Defines is unselected [Switch], [Checkbox] and [Radio] also use their
