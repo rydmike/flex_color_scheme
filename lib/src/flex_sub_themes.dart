@@ -1283,9 +1283,10 @@ class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined, or if passed in [colorScheme] is null, then
-    /// [theme.colorScheme.secondary] will be used via FAB widget's default
-    /// un-themed color behavior.
+    /// If not defined, or if passed in `colorScheme` is null, then if
+    /// `ThemeData.useMaterial3` is false `theme.colorScheme.secondary` will be
+    /// used, but if `ThemeData.useMaterial3` is true, then
+    /// `theme.colorScheme.primaryContainer` will be used.
     ///
     /// The foreground color automatically uses the selected background
     /// color's contrast color pair in the passed in [colorScheme] property.
@@ -1905,7 +1906,6 @@ class FlexSubThemes {
     /// the effective default styles for undefined inputs become:
     ///
     /// ```
-    /// ```
     ///                    FCS defaults   Flutter defaults
     /// useFlutterDefaults false          true
     /// - background       background     surface, + onSurface overlay elev 3.
@@ -1922,8 +1922,6 @@ class FlexSubThemes {
     /// [navigationBarMutedUnselectedIcon] and
     /// [navigationBarMutedUnselectedLabel] are true respectively, this
     /// also applies to undefined color inputs.
-    ///
-    /// ```
     final bool useFlutterDefaults = false,
   }) {
     // Determine if we can even use default icon styles, only when all are null,
