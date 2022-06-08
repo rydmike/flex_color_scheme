@@ -512,9 +512,9 @@ class FlexSubThemesData with Diagnosticable {
   /// This text theme is just a custom predefined TextTheme.
   ///
   /// If you dynamically change the Theme Typography in application, Flutter
-  /// SDK throws an assert error in debug mode, this is Flutter limitation
-  /// and not FlexColorScheme related, see issue:
-  // TODO(rydmike): Add Typography issue link.
+  /// SDK throws an assert error in debug mode, this is a Flutter limitation
+  /// and not FlexColorScheme related, for more info see issue:
+  /// https://github.com/flutter/flutter/issues/103864.
   final bool useTextTheme;
 
   /// Border radius used on all widgets when [FlexColorScheme] use its

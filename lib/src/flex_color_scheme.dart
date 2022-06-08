@@ -5382,9 +5382,6 @@ class FlexColorScheme with Diagnosticable {
     // fully using the same process that the ThemeData() factory uses.
     TextTheme defText =
         isDark ? effectiveTypography.white : effectiveTypography.black;
-    // TODO(rydmike): Remove me!
-    debugPrint('1. toTheme: defText inherit: ${defText.bodyLarge!.inherit}');
-
     final bool primaryIsDark =
         ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
             Brightness.dark;
@@ -5402,11 +5399,6 @@ class FlexColorScheme with Diagnosticable {
       defText = defText.apply(fontFamily: fontFamily);
       defPrimaryText = defPrimaryText.apply(fontFamily: fontFamily);
     }
-
-    // TODO(rydmike): Remove me!
-    debugPrint('2. toTheme: defText.apply '
-        'inherit: ${defText.bodyLarge!.inherit}');
-
     // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
     // different, a bit less colorful, but only very marginally.
@@ -5470,9 +5462,6 @@ class FlexColorScheme with Diagnosticable {
         labelMedium: defText.labelMedium!.copyWith(color: smallColor),
         labelSmall: defText.labelSmall!.copyWith(color: smallColor),
       );
-
-      // TODO(rydmike): Remove me!
-      debugPrint('3. toTheme: defText inherit: ${defText.bodyLarge!.inherit}');
       // Equivalent color blend calculations for primary text theme.
       final Color headerPrimary = primaryIsDark
           ? colorScheme.onPrimary.blend(colorScheme.primary, 16)
@@ -5509,40 +5498,11 @@ class FlexColorScheme with Diagnosticable {
         labelSmall: defPrimaryText.labelSmall!.copyWith(color: smallPrimary),
       );
     }
-    // TODO(rydmike): Verify that built-in Typography works and remove this!
-    // // Use custom m3TextTheme when sub themes enabled and M3 text opt-in used.
-    // if (useSubThemes && subTheme.useTextTheme) {
-    //   defText = defText.merge(m3TextTheme);
-    //   defPrimaryText = defPrimaryText.merge(m3TextTheme);
-    // }
     // Make our final complete TextTheme, by also merging in the two TextThemes
     // passed in via the constructor, adding any custom text theme definitions.
     final TextTheme effectiveTextTheme = defText.merge(textTheme);
-    // TODO(rydmike): Remove me. Failed attempt to work around issue:
-    // https://github.com/flutter/flutter/issues/103864
-    // final TextTheme effectiveTextTheme = tempTextTheme.copyWith(
-    //   displayLarge: defText.displayLarge!.copyWith(inherit: false),
-    //   displayMedium: defText.displayMedium!.copyWith(inherit: false),
-    //   displaySmall: defText.displaySmall!.copyWith(inherit: false),
-    //   headlineLarge: defText.headlineLarge!.copyWith(inherit: false),
-    //   headlineMedium: defText.headlineMedium!.copyWith(inherit: false),
-    //   headlineSmall: defText.headlineSmall!.copyWith(inherit: false),
-    //   titleLarge: defText.titleLarge!.copyWith(inherit: false),
-    //   titleMedium: defText.titleMedium!.copyWith(inherit: false),
-    //   titleSmall: defText.titleSmall!.copyWith(inherit: false),
-    //   bodyLarge: defText.bodyLarge!.copyWith(inherit: false),
-    //   bodyMedium: defText.bodyMedium!.copyWith(inherit: false),
-    //   bodySmall: defText.bodySmall!.copyWith(inherit: false),
-    //   labelLarge: defText.labelLarge!.copyWith(inherit: false),
-    //   labelMedium: defText.labelMedium!.copyWith(inherit: false),
-    //   labelSmall: defText.labelSmall!.copyWith(inherit: false),
-    // );
     final TextTheme effectivePrimaryTextTheme =
         defPrimaryText.merge(primaryTextTheme);
-
-    // TODO(rydmike): Remove me!
-    debugPrint('4. toTheme: merge effectiveTextTheme inherit: '
-        '${effectiveTextTheme.bodyLarge!.inherit}');
 
     // Custom computed shades from primary color using alpha blends works well
     // for these rarely used colors that are on deprecation path in Flutter SDK.
@@ -6627,20 +6587,6 @@ class FlexColorScheme with Diagnosticable {
       return onBackground.darken(30);
     }
   }
-
-  // TODO(rydmike): Remove, might not need after all. ThemeData handles it.
-  //
-  // /// Convert the [extensionsIterable] passed to [ThemeData.new] or [copyWith]
-  // /// to the stored [extensions] map, where each entry's key consists of the
-  // /// extension's type.
-  // static Map<Object, ThemeExtension<dynamic>> _themeExtensionIterableToMap(
-  //     Iterable<ThemeExtension<dynamic>> extensionsIterable) {
-  //   return Map<Object, ThemeExtension<dynamic>>.unmodifiable(<Object,
-  //       ThemeExtension<dynamic>>{
-  //     for (final ThemeExtension<dynamic> extension in extensionsIterable)
-  //       extension.type: extension as ThemeExtension<ThemeExtension<dynamic>>
-  //   });
-  // }
 
   /// Copy the object with one or more provided properties changed.
   FlexColorScheme copyWith({

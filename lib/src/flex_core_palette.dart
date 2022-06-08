@@ -236,7 +236,7 @@ class FlexCorePalette extends CorePalette {
   }
 }
 
-// TODO(rydmike): Decide if we use CorePalette inherited version or own class?
+// TODO(rydmike): Using CorePalette inherited version for now.
 // Using above extended version for now.
 //
 // This entire commented private _CorePalette class can be used to create a
