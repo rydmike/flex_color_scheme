@@ -2405,7 +2405,7 @@ void main() {
                   return Colors.grey.shade400;
                 }
                 if (states.contains(MaterialState.selected)) {
-                  return colorScheme.secondary;
+                  return colorScheme.primary;
                 }
                 return Colors.grey.shade50;
               },
@@ -2416,10 +2416,10 @@ void main() {
                   return Colors.black12;
                 }
                 if (states.contains(MaterialState.selected)) {
-                  return colorScheme.secondary.withAlpha(0x70);
+                  return colorScheme.primary.withAlpha(0x70);
                 }
                 // Opinionated color on track when not selected
-                return colorScheme.secondary.withAlpha(0x30);
+                return colorScheme.primary.withAlpha(0x30);
               },
             ),
           ).toString(),
@@ -2446,13 +2446,13 @@ void main() {
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .thumbColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.secondary),
+        equals(colorScheme.primary),
       );
       expect(
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .trackColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.secondary.withAlpha(0x70)),
+        equals(colorScheme.primary.withAlpha(0x70)),
       );
       // Default states
       expect(
@@ -2465,7 +2465,7 @@ void main() {
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .trackColor!
             .resolve(<MaterialState>{}),
-        equals(colorScheme.secondary.withAlpha(0x70)),
+        equals(colorScheme.primary.withAlpha(0x70)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -2532,13 +2532,13 @@ void main() {
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .thumbColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.secondary),
+        equals(colorScheme.primary),
       );
       expect(
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .trackColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.secondary.withAlpha(0x70)),
+        equals(colorScheme.primary.withAlpha(0x70)),
       );
       // Default states
       expect(
@@ -2551,7 +2551,7 @@ void main() {
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .trackColor!
             .resolve(<MaterialState>{}),
-        equals(colorScheme.secondary.withAlpha(0x70)),
+        equals(colorScheme.primary.withAlpha(0x70)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -2620,7 +2620,7 @@ void main() {
                   return Colors.grey.shade200;
                 }
                 if (states.contains(MaterialState.selected)) {
-                  return colorScheme.onSecondary;
+                  return colorScheme.onPrimary;
                 }
                 return Colors.grey.shade50;
               },
@@ -2631,10 +2631,10 @@ void main() {
                   return Colors.grey.shade400;
                 }
                 if (states.contains(MaterialState.selected)) {
-                  return colorScheme.secondary;
+                  return colorScheme.primary;
                 }
                 // Opinionated color on track when not selected
-                return colorScheme.secondary.withAlpha(0xDD);
+                return colorScheme.primary.withAlpha(0xDD);
               },
             ),
           ).toString(),
@@ -2661,13 +2661,13 @@ void main() {
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
             .checkColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.onSecondary),
+        equals(colorScheme.onPrimary),
       );
       expect(
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
             .fillColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.secondary),
+        equals(colorScheme.primary),
       );
       // Default states
       expect(
@@ -2680,7 +2680,7 @@ void main() {
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
             .fillColor!
             .resolve(<MaterialState>{}),
-        equals(colorScheme.secondary.withAlpha(0xDD)),
+        equals(colorScheme.primary.withAlpha(0xDD)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -2706,7 +2706,7 @@ void main() {
                   return Colors.grey.shade600;
                 }
                 if (states.contains(MaterialState.selected)) {
-                  return colorScheme.onSecondary;
+                  return colorScheme.onPrimary;
                 }
                 return Colors.grey.shade400;
               },
@@ -2717,10 +2717,10 @@ void main() {
                   return Colors.grey.shade800;
                 }
                 if (states.contains(MaterialState.selected)) {
-                  return colorScheme.secondary;
+                  return colorScheme.primary;
                 }
                 // Opinionated color on track when not selected
-                return colorScheme.secondary.withAlpha(0xDD);
+                return colorScheme.primary.withAlpha(0xDD);
               },
             ),
           ).toString(),
@@ -2747,13 +2747,13 @@ void main() {
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
             .checkColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.onSecondary),
+        equals(colorScheme.onPrimary),
       );
       expect(
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
             .fillColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.secondary),
+        equals(colorScheme.primary),
       );
       // Default states
       expect(
@@ -2766,7 +2766,7 @@ void main() {
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
             .fillColor!
             .resolve(<MaterialState>{}),
-        equals(colorScheme.secondary.withAlpha(0xDD)),
+        equals(colorScheme.primary.withAlpha(0xDD)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -2834,10 +2834,10 @@ void main() {
                   return Colors.grey.shade400;
                 }
                 if (states.contains(MaterialState.selected)) {
-                  return colorScheme.secondary;
+                  return colorScheme.primary;
                 }
                 // Opinionated color on track when not selected
-                return colorScheme.secondary.withAlpha(0xDD);
+                return colorScheme.primary.withAlpha(0xDD);
               },
             ),
           ).toString(),
@@ -2858,14 +2858,14 @@ void main() {
         FlexSubThemes.radioTheme(colorScheme: colorScheme)
             .fillColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.secondary),
+        equals(colorScheme.primary),
       );
       // Default states
       expect(
         FlexSubThemes.radioTheme(colorScheme: colorScheme)
             .fillColor!
             .resolve(<MaterialState>{}),
-        equals(colorScheme.secondary.withAlpha(0xDD)),
+        equals(colorScheme.primary.withAlpha(0xDD)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -2891,10 +2891,10 @@ void main() {
                   return Colors.grey.shade800;
                 }
                 if (states.contains(MaterialState.selected)) {
-                  return colorScheme.secondary;
+                  return colorScheme.primary;
                 }
                 // Opinionated color on track when not selected
-                return colorScheme.secondary.withAlpha(0xDD);
+                return colorScheme.primary.withAlpha(0xDD);
               },
             ),
           ).toString(),
@@ -2915,14 +2915,14 @@ void main() {
         FlexSubThemes.radioTheme(colorScheme: colorScheme)
             .fillColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.secondary),
+        equals(colorScheme.primary),
       );
       // Default states
       expect(
         FlexSubThemes.radioTheme(colorScheme: colorScheme)
             .fillColor!
             .resolve(<MaterialState>{}),
-        equals(colorScheme.secondary.withAlpha(0xDD)),
+        equals(colorScheme.primary.withAlpha(0xDD)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
