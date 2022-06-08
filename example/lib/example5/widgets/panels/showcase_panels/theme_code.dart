@@ -51,7 +51,7 @@ class ThemeCode extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: SelectableText.rich(
             TextSpan(
-              style: GoogleFonts.droidSansMono(fontSize: 12),
+              style: GoogleFonts.firaMono(fontSize: 12),
               children: <TextSpan>[DartSyntaxHighlighter(style).format(code)],
             ),
           ),
