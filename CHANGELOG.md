@@ -7,39 +7,43 @@ All notable changes to the **FlexColorScheme** package are documented here.
 * Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
   example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0
 
-**Change**
+**New**
+
+* Add support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. The support is
+  in this release at a basic level, it is set to primary color by default, as Flutter
+  and Material 3 does. Later release will add support in Themes Playground to customize
+  it and also the FlexColorScheme surface blend color will become changeable.
+
+* Added pass through API for using Flutter 3.0.0 theme extensions directly via FlexColorScheme API.
+  Added to avoid having to add theme extensions with a CopyWith on FlexColorScheme produced
+  ThemeData. With the `FlexColorScheme.extensions` and `FlexThemeData.extensions` properties
+  you can add custom theme extensions directly via them as well.
+
+
+**Deprecated**
 
 * Deprecated `FlexColorScheme.m3TextTheme`. The custom M3 text theme is no longer needed after 
   Flutter 3.0.0 release that includes the new M3 Typography in addition to its earlier released
   `TextTheme`. You can opt in on using the new M3 style TextTheme as before by setting 
   `FlexColorScheme.subThemesData.useTextTheme` to true **or** also by setting 
-  `FlexColorScheme.useMaterial3` to true. Using this does however come with this known issue:
-  https://github.com/flutter/flutter/issues/103864. Dynamically switching from Typography 2014
-  or 2018, to M3 2021 Typography, triggers mentioned assert in issue
+  `FlexColorScheme.useMaterial3` to true. Using either does however come with this known issue:
+  [#103864](https://github.com/flutter/flutter/issues/103864). Dynamically switching from Typography
+  2014 or 2018, to M3 2021 Typography, triggers the mentioned assert in issue
   [#103864](https://github.com/flutter/flutter/issues/103864). This issue has always existed in
-  Flutter SDK with ThemeData with different Typography. FlexColorScheme mostly avoided triggering 
-  it before by only using Typography 2018, also when opting in on M3 TextTheme, that before used 
-  2018 based Typography to make a custom M3 TextTheme. Avoiding this issue is no longer possible 
-  when opting in on M3, that now correctly uses its own and different Typography from M2. 
+  Flutter SDK with ThemeData when dynamically changing between different Typography. 
+  FlexColorScheme avoided triggering it before by only using Typography 2018, also when opting in 
+  on M3 TextTheme, that before used 2018 based Typography to make a custom M3 TextTheme. 
+  Avoiding this issue is no longer possible when opting in on M3, that now correctly uses its own 
+  and different Typography from M2. 
   To avoid the Flutter SDK issue, use same Typography for all your themes in your app and don't
-  dynamically switch theme between ThemeData objects that uses different Typography.
-  
+  dynamically switch theme between ThemeData objects that uses different Typography in your 
+  application. The use cases for doing this are also very few.  
 
-* Deprecated `FlexSubThemes.buttonTheme` that create a opinionated `ButtonThemeData`.
+* Deprecated `FlexSubThemes.buttonTheme` that create an opinionated `ButtonThemeData`.
   The ButtonThemeData is marked as obsolete in Flutter SDK, but not yet deprecated in 
   Flutter version 3.0.0. FlexColorscheme now marks it as **deprecated**. It will be 
   removed in FCS released after Flutter SDK fully deprecates `ButtonThemeData`.
 
-**New**
-
-* Add support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. The support is
-  in this release at a basic level, it is set to primary color by default, as Flutter 
-  and Material 3 does. Later release will add support in Themes Playground to customize
-  it and also the FlexColorScheme surface blend color will become changeable.
-
-* Added pass through API for using theme extensions directly via FlexColorScheme API, so one
-  does not have to add the extensions with a CopyWith on FlexColorScheme produced ThemeData.
- 
 **FIX**
 
 * **TODO** Style fix: Default color of Floating Action Button, when opting in on opinionated 
@@ -49,8 +53,13 @@ All notable changes to the **FlexColorScheme** package are documented here.
   when opting in on opinionated component themes, changed to match M3 default color
   `primaryContainer`, with no opacity.
 
-* Fixed lint: "Avoid using private types in public APIs". Discussion:
-  https://twitter.com/RydMike/status/1533788260320923649
+* **TODO** Style fix: Default color of toggles now primary color when opting in on opinionated.  
+  sub themes. This matches the color style of M2 switches, with what they will become in M3 by
+  default.
+
+* Fixed lint: "Avoid using private types in public APIs". See tweet 
+  [discussion](https://twitter.com/RydMike/status/1533788260320923649) about why and when you 
+  might run into this lint being triggered by older Stateful Widgets.
 
 ## v5.0.1 - April 29, 2022
 
