@@ -47,8 +47,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 **FIX**
 
-* **TODO** Style fix: Default color of Floating Action Button, when opting in on opinionated 
-  component themes, changed to match M3 default color `primaryContainer`.
+* **Style fix**: Default color of Floating Action Button, when opting in on `ThemeData.useMaterail3`
+  use M3 default color `primaryContainer`, otherwise use `secondary` as default.
 
 * **TODO** Style fix: Default color of highlight color on `NavigationBar` and `NavigationRail`,
   when opting in on opinionated component themes, changed to match M3 default color

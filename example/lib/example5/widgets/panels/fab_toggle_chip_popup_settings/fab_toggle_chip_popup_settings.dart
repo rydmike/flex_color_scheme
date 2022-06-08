@@ -56,7 +56,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('FloatingActionButton color'),
-          labelForDefault: 'default (secondary)',
+          labelForDefault: controller.useMaterial3
+              ? 'default (primaryContainer)'
+              : 'default (secondary)',
           index: controller.fabSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
