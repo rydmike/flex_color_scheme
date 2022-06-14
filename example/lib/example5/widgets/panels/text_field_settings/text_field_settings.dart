@@ -92,7 +92,7 @@ class TextFieldSettings extends StatelessWidget {
         // TODO(rydmike): Report Flutter bug on UnderlineInputBorder.
         // When using UnderlineInputBorder the border radius does not update
         // when ThemeData has changed to a new version with different
-        // underline input border radius. this is because UnderlineInputBorder
+        // underline input border radius. This is because UnderlineInputBorder
         // does not implement correctly where as OutlineInputBorder does.
         // Issue is here:
         // https://github.com/flutter/flutter/blob/0b97874895eb3e14c1cf0e65bd7fca3a17c62b02/packages/flutter/lib/src/material/input_border.dart#L244
