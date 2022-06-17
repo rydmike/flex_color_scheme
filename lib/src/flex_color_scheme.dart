@@ -4538,7 +4538,7 @@ class FlexColorScheme with Diagnosticable {
         height: 1.22,
         textBaseline: TextBaseline.alphabetic,
         leadingDistribution: TextLeadingDistribution.even),
-    // M3 headlineMedium, M2 <none>. In Material2018 no equivalent exists.
+    // M3 headlineLarge, M2 <none>. In Material2018 no equivalent exists.
     headlineLarge: TextStyle(
         debugLabel: 'englishLike headlineLarge 2021',
         fontSize: 32.0,
@@ -6573,7 +6573,9 @@ class FlexColorScheme with Diagnosticable {
   // TODO(rydmike): Consider improving FCS inversePrimary algorithm.
   /// FlexColorScheme default for inversePrimary color, when not using seeds.
   ///
-  /// Not the best one in the world, but simple and works fairly well for light
+  /// When using real M3 ColorScheme's that are seeded, this color is not used.
+  ///
+  /// Not the best algo in the world, but simple and works fairly well for light
   /// Brightness, but should be better for dark.
   static Color _inversePrimary(
       Brightness brightness, Color primary, Color surface) {

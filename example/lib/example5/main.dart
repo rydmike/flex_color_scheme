@@ -6,8 +6,8 @@ import '../shared/services/theme_service_hive.dart';
 import '../shared/utils/app_scroll_behavior.dart';
 import 'theme/flex_theme_dark.dart';
 import 'theme/flex_theme_light.dart';
-import 'theme/theme_data_from_dark.dart';
-import 'theme/theme_data_from_light.dart';
+import 'theme/theme_data_dark.dart';
+import 'theme/theme_data_light.dart';
 import 'widgets/pages/home_page.dart';
 
 // -----------------------------------------------------------------------------
@@ -109,10 +109,10 @@ class DemoApp extends StatelessWidget {
             // FlexColorScheme object that produces the ThemeData object.
             theme: controller.useFlexColorScheme
                 ? flexThemeLight(controller)
-                : themeDataFromLight(controller),
+                : themeDataLight(controller),
             darkTheme: controller.useFlexColorScheme
                 ? flexThemeDark(controller)
-                : themeDataFromDark(controller),
+                : themeDataDark(controller),
             // Use the dark or light theme based on controller setting.
             themeMode: controller.themeMode,
             // Pass the controller to the HomePage where we use it to change
