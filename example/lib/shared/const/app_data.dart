@@ -36,7 +36,7 @@ class AppData {
   static const String versionBuild = '01';
   static const String version = '$versionMajor.1.0 Build-$versionBuild';
   static const String packageVersion = '5.1.0';
-  static const String flutterVersion = 'stable v3.0.1';
+  static const String flutterVersion = 'stable v3.0.2';
   static const String copyright = '© 2020, 2021, 2022';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
