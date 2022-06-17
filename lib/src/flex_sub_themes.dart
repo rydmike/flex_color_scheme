@@ -1906,7 +1906,7 @@ class FlexSubThemes {
     /// the effective default styles for undefined inputs become:
     ///
     /// ```
-    ///                    FCS defaults   Flutter defaults
+    ///                    FCS defaults   M2 defaults
     /// useFlutterDefaults false          true
     /// - background       background     surface, + onSurface overlay elev 3.
     /// - height           62             80

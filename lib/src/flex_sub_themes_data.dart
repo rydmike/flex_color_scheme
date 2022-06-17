@@ -1517,7 +1517,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Opacity used on the [NavigationBar] indicator.
   ///
-  /// If undefined defaults to 24%.
+  /// If undefined and [ThemeData.useMaterial3] is false then it defaults to
+  /// 24%.
   ///
   /// The default opacity is computed from [kNavigationBarIndicatorAlpha] 0x3D,
   /// which is 61 giving 24% opacity.

@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.1.0 - June 14, 2022
+## v5.1.0 - June 17, 2022
 
 * Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
   example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0
@@ -80,13 +80,28 @@ All notable changes to the **FlexColorScheme** package are documented here.
   switches, added the "Use Material 3" toggle. Previously this toggle was only available on the
   introduction page/panel.
 
+* Themes Playground: Added a complex workaround to avoid issue
+  [#103864](https://github.com/flutter/flutter/issues/103864) in the Playground app. The workaround
+  is done by always using 2021 Typography but simulating 2018 Typography in the app when by using
+  an EnglishLike 2018 TextTheme, but with the 2021 Typography, to simulate how an app looks
+  that uses other than 2021 Typography. The Playground App actually always stays in 2021
+  Typography, but looks like it switches it. Switching Typography dynamically in ThemeData is broken
+  due to above issue, and if it is done and error ignore the app becomes unstable eventually.
+  This workaround is needed because the Playground app has toggles that may switch Typography 
+  frequently, and it will eventually crash. With this workaround it never switches Typography, it 
+  just looks like it does, but app stays in 2021 Typography all the time. The output code that 
+  creates the configured THemeData uses the actual configured effective Typography mode. This is 
+  fine, since that app will likely never switch used Typography. If it does, it will of course face
+  the same issue the Playground app did, but the issue is a Flutter SDK issue that FlexColorScheme 
+  cannot fix. Most likely 99% of apps will never run into this issue.
+
 ## v5.0.1 - April 29, 2022
 
 **FIX**
 
 * For the custom and temporary `m3TextTheme`: Fixed the Typography letterSpacing for bodyLarge to
   match corrected M3 spec that had wrong specification on the M3 website 0.15 -> 0.5. See
-  Flutter SDK [issue 102121](https://github.com/flutter/flutter/issues/102121).
+  Flutter SDK issue [#102121](https://github.com/flutter/flutter/issues/102121).
 * Themes Playground: Fix wrong color code copied to clipboard when tapping input color.
 * Themes Playground: Make prettier default constructor for FlexSubThemesData() if that is 
   all that was defined in Themes Playground config.
