@@ -436,15 +436,12 @@ class _PopupMenuButton extends StatelessWidget {
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: scheme.secondary,
-            onPrimary: scheme.onSecondary,
+            primary: scheme.primary,
+            onPrimary: scheme.onPrimary,
             onSurface: scheme.onSurface,
-            shape: radius != null
-                ? RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(radius ?? 4)),
-                  )
-                : null,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(radius ?? 8)),
+            ),
           ),
           onPressed: enabled ? () {} : null,
           icon: const Icon(Icons.expand_more_outlined),
