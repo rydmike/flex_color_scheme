@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.1.0 - June 17, 2022
+## v5.1.0 - July 4, 2022
 
 * Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
   example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0
@@ -52,9 +52,12 @@ All notable changes to the **FlexColorScheme** package are documented here.
   `ThemeData.useMaterail3` the M3 color `theme.colorScheme.primaryContainer` is used, 
   otherwise `theme.colorScheme.secondary` is used.
 
-* **TODO** Style fix: Default color of highlight color on `NavigationBar` and `NavigationRail`,
-  when opting in on opinionated component themes, changed to match M3 default color
-  `primaryContainer`, with no opacity.
+* **M3 default support**: Defaults colors of `NavigationBar` when opting in on `useMaterial3` and 
+  not using opinionated component themes, changed to match M3 default colors. The background color
+  will follow M3 style also as default component theme when `useMaterial3` is true, as this style
+  is difficult to replicate with a single color otherwise. The difference is subtle for FCS surface
+  tinted background color. You can still set it to `background` color to replicate past FCS default
+  color when sub-themes were enabled.
 
 * **Style fix:** Default color of toggles (Switch, CheckBox and Radio) are now using 
   `primary` color as default themed color when opting in on opinionated sub themes or setting
@@ -79,6 +82,10 @@ All notable changes to the **FlexColorScheme** package are documented here.
 * Themes Playground: To the top row color theme selector and enable FlexColorScheme and sub-themes 
   switches, added the "Use Material 3" toggle. Previously this toggle was only available on the
   introduction page/panel.
+
+* Themes Playground: Updated style default labels for the NavigationBar. The logic to display 
+  default colors in different config modes (M2/M3/FCS/FCS+M2/FCS+M3) is quite involved, please 
+  report any issues.   
 
 * Themes Playground: Added a complex workaround to avoid issue
   [#103864](https://github.com/flutter/flutter/issues/103864) in the Playground app. The workaround

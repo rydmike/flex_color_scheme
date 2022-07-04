@@ -6262,7 +6262,7 @@ class FlexColorScheme with Diagnosticable {
               labelTextStyle: subTheme.navigationBarLabelTextStyle ??
                   (subTheme.useFlutterDefaults
                       ? null
-                      : effectiveTextTheme.labelSmall),
+                      : effectiveTextTheme.labelMedium),
               selectedLabelSize: subTheme.navigationBarSelectedLabelSize,
               unselectedLabelSize: subTheme.navigationBarUnselectedLabelSize,
               selectedLabelSchemeColor:
@@ -6278,9 +6278,8 @@ class FlexColorScheme with Diagnosticable {
                   subTheme.navigationBarUnselectedIconSchemeColor,
               mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon,
               indicatorSchemeColor: subTheme.navigationBarIndicatorSchemeColor,
-              backgroundSchemeColor: subTheme
-                      .navigationBarBackgroundSchemeColor ??
-                  (subTheme.useFlutterDefaults ? null : SchemeColor.background),
+              backgroundSchemeColor:
+                  subTheme.navigationBarBackgroundSchemeColor,
               opacity: subTheme.navigationBarOpacity,
               height: subTheme.navigationBarHeight,
               labelBehavior: subTheme.navigationBarLabelBehavior,
@@ -6290,6 +6289,7 @@ class FlexColorScheme with Diagnosticable {
                   : null,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
+              useMaterial3: useMaterial3,
               useFlutterDefaults: subTheme.useFlutterDefaults,
             )
           : null,
