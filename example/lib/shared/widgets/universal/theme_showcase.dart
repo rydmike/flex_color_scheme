@@ -1244,7 +1244,6 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
-    final bool useM3 = theme.useMaterial3;
 
     final Color defaultBackgroundColor = isLight
         ? Color.alphaBlend(
@@ -1289,9 +1288,9 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
         const SizedBox(height: 12),
         Text('Material elevation and tint', style: denseHeader),
         Text(
-          'When using useMaterial3 set to true, Material gets no elevation '
+          'When using useMaterial3 set to true, Material gets no elevation, '
           'unless its shadowColor is also specified, which is not needed when '
-          'when it is false and using M2. To in M3 give it surface elevated '
+          'it is false and using M2. To in M3 give it surface elevated '
           'tint, also specify its surfaceTintColor. Below both are used.',
           style: denseBody,
         ),
@@ -1401,7 +1400,7 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
                     Material(
                       color: snackBackground,
                       elevation: 0,
-                      // surfaceTintColor: colorScheme.surfaceTint,
+                      surfaceTintColor: colorScheme.surfaceTint,
                       shadowColor: colorScheme.shadow,
                       child: SizedBox(
                         height: 40,
@@ -1429,6 +1428,7 @@ class CardShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
     );
@@ -1444,37 +1444,46 @@ class CardShowcase extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            'Default background color comes from Material of type card',
+            'Default background color comes from Material of type card. '
+            'When using useMaterial3 set to true, Card gets no elevation '
+            'overlay color in dark mode, unless surfaceTintColor is also '
+            'specified, which is not needed when it is false and using M2. '
+            'To in M3 give it surface elevated '
+            'tint, also specify its surfaceTintColor. Below it is used.',
             style: denseBody,
           ),
         ),
-        const Card(
+        Card(
           elevation: 0,
-          child: SizedBox(
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Card, elevation 0')),
           ),
         ),
         const SizedBox(height: 10),
-        const Card(
+        Card(
           elevation: 1,
-          child: SizedBox(
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Card, elevation 1')),
           ),
         ),
         const SizedBox(height: 10),
-        const Card(
+        Card(
           elevation: 4,
-          child: SizedBox(
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Card, elevation 4')),
           ),
         ),
         const SizedBox(height: 10),
-        const Card(
+        Card(
           elevation: 8,
-          child: SizedBox(
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Card, elevation 8')),
           ),
