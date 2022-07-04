@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** package are documented here.
 
-## v5.1.0 - July 4, 2022
+## v5.1.0 - July 5, 2022
 
 * Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
   example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0
@@ -52,17 +52,21 @@ All notable changes to the **FlexColorScheme** package are documented here.
   `ThemeData.useMaterail3` the M3 color `theme.colorScheme.primaryContainer` is used, 
   otherwise `theme.colorScheme.secondary` is used.
 
-* **M3 default support**: Defaults colors of `NavigationBar` when opting in on `useMaterial3` and 
-  not using opinionated component themes, changed to match M3 default colors. The background color
-  will follow M3 style also as default component theme when `useMaterial3` is true, as this style
-  is difficult to replicate with a single color otherwise. The difference is subtle for FCS surface
-  tinted background color. You can still set it to `background` color to replicate past FCS default
-  color when sub-themes were enabled.
+* **NavigationBar M3 defaults support**: Default colors of `NavigationBar` when opting in on 
+  `useMaterial3` and 
+  not using opinionated component themes, theme will match M3 default colors. The background color
+  will follow M3 style also as default opinionated component theme when `useMaterial3` is true, as 
+  this style is difficult to replicate with a single color otherwise. The difference is subtle for 
+  FCS surface tinted background color. You can still set it to `background` color to replicate past
+  FCS default color when sub-themes were enabled. If opinionated component themes are not used, FCS
+  will use default M3 theme styles on `NavigationBar` when `useMaterial3` is true. If opting in
+  on opinionated component themes, FCS uses its own custom opinionated default style. It can be
+  modified to be the same as default M3 style too, as before.
 
 * **Style fix:** Default color of toggles (Switch, CheckBox and Radio) are now using 
-  `primary` color as default themed color when opting in on opinionated sub themes or setting
+  `primary` color as default themed color when opting in on opinionated component themes or setting
   `ThemeData.useMaterail3` to true.
-  These themes then use a style that matches M3 color design based themes. In it 
+  The Switch, CheckBox and Radio themes then use a style that match the M3 color design. In it 
   switches and toggles are mostly primary color based. In M3 color design, the secondary color is a 
   poor choice for switches and toggles, and it is therefore not used as default color, as it 
   does not look nice with M3 based ColorSchemes, created e.g. using M3 color seeding. If you use a
