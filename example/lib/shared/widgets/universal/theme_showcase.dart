@@ -944,8 +944,9 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
           child: Text(
             'Default SDK background color is theme.colorScheme.surface with '
-            'an onSurface overlay color with elevation 3. FlexColorScheme '
-            'sub-theme default is colorScheme.background and elevation 0.',
+            'in an onSurface (in M2), primary (in M3) overlay color, with '
+            'elevation 3. FlexColorScheme component theme default is '
+            'colorScheme.background, with used surface blend and elevation 0.',
             style: denseBody,
           ),
         ),

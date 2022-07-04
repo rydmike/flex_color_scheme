@@ -32,37 +32,84 @@ class NavigationBarSettings extends StatelessWidget {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
-            (controller.useFlutterDefaults &&
-                controller.navBarIndicatorSchemeColor == null))
-        ? 'default (secondary)'
-        : 'default (primary)';
-    final String labelForDefaultSelectedItem =
-        (!controller.useFlexColorScheme ||
-                (controller.useFlutterDefaults &&
-                    controller.navBarSelectedSchemeColor == null &&
-                    controller.navBarUnselectedSchemeColor == null))
-            ? 'default (onSurface)'
-            : 'default (primary)';
+
+    // Logic for background color label.
+    String backgroundColorLabel() {
+      if (controller.useMaterial3 &&
+          controller.navBarBackgroundSchemeColor == null) {
+        return 'default (surface with primary overlay)';
+      }
+      if (!controller.useSubThemes ||
+          !controller.useFlexColorScheme ||
+          (controller.useFlutterDefaults &&
+              controller.navBarBackgroundSchemeColor == null)) {
+        return 'default (surface with onSurface overlay)';
+      }
+      return 'default (background)';
+    }
+
+    // Logic for indicator color label default value,
+    // custom color selection overrides default label and value.
+    String indicatorColorLabel() {
+      // Use FCS component default, primary.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes) {
+        return 'default (primary)';
+      }
+      // Use M2 default color
+      if (!controller.useMaterial3) {
+        return 'default (secondary)';
+      }
+      // All other cases will use M3 style.
+      return 'default (secondaryContainer)';
+    }
+
+    // Logic for selected item color label default value,
+    // custom color selection overrides default label and value.
+    String selectedItemColorLabel() {
+      // Use FCS component default, primary.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes) {
+        return 'default (primary)';
+      }
+      // Use M2 default color
+      if (!controller.useMaterial3) {
+        return 'default (onSurface)';
+      }
+      // All other cases will use M3 style.
+      return 'default (icon onSecondaryContainer, label onSurface)';
+    }
+
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
             controller.navBarSelectedSchemeColor == null &&
             controller.navBarUnselectedSchemeColor == null);
-    final String labelForDefaultUnelectedItem =
-        (!controller.useFlexColorScheme ||
-                !controller.useSubThemes ||
-                (controller.useFlutterDefaults &&
-                    controller.navBarSelectedSchemeColor == null &&
-                    controller.navBarUnselectedSchemeColor == null))
-            ? 'default (onSurface)'
-            : controller.navBarMuteUnselected && muteUnselectedEnabled
-                ? 'default (onSurface, blend & opacity)'
-                : 'default (onSurface)';
+    // Logic for unselected item color label default value,
+    // custom color selection overrides default label and value.
+    String unselectedItemColorLabel() {
+      // Use FCS component default, onSurface with muted label.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes &&
+          controller.navBarMuteUnselected &&
+          muteUnselectedEnabled) {
+        return 'default (onSurface, with blend & opacity)';
+      }
+      // Use FCS component default, onSurface.
+      if (!controller.useMaterial3 || !controller.useFlutterDefaults) {
+        return 'default (onSurface)';
+      }
+      // All other cases will use M3 style.
+      return 'default (onSurfaceVariant)';
+    }
+
     final bool navBarOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.navBarBackgroundSchemeColor == null &&
-            controller.useFlutterDefaults);
+            (controller.useFlutterDefaults || controller.useMaterial3));
     final double navBarOpacity =
         navBarOpacityEnabled ? controller.navBarOpacity : 1;
     final bool navBarHighlightOpacityEnabled = controller.useSubThemes &&
@@ -78,12 +125,7 @@ class NavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: !controller.useSubThemes ||
-                  !controller.useFlexColorScheme ||
-                  (controller.useFlutterDefaults &&
-                      controller.navBarBackgroundSchemeColor == null)
-              ? 'default (surface with onSurface overlay)'
-              : 'default (background)',
+          labelForDefault: backgroundColorLabel(),
           index: controller.navBarBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -120,7 +162,6 @@ class NavigationBarSettings extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(
-                  // ignore: lines_longer_than_80_chars
                   '${(navBarOpacity * 100).toStringAsFixed(0)} %',
                   style: Theme.of(context)
                       .textTheme
@@ -184,7 +225,7 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
-          labelForDefault: labelForDefaultIndicator,
+          labelForDefault: indicatorColorLabel(),
           index: controller.navBarIndicatorSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -209,7 +250,9 @@ class NavigationBarSettings extends StatelessWidget {
                         (controller.navBarIndicatorOpacity ?? -1) < 0
                     ? 'default 24%'
                     : (navBarHighlightOpacity * 100).toStringAsFixed(0)
-                : 'default 24%',
+                : controller.useMaterial3
+                    ? 'default 100%'
+                    : 'default 24%',
             value: navBarHighlightOpacity * 100,
             onChanged: navBarHighlightOpacityEnabled
                 ? (double value) {
@@ -234,7 +277,9 @@ class NavigationBarSettings extends StatelessWidget {
                           ? 'default 24%'
                           // ignore: lines_longer_than_80_chars
                           : '${(navBarHighlightOpacity * 100).toStringAsFixed(0)} %'
-                      : 'default 24%',
+                      : controller.useMaterial3
+                          ? 'default 100%'
+                          : 'default 24%',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -248,7 +293,7 @@ class NavigationBarSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),
           subtitle: const Text('Label and icon, but own properties in API'),
-          labelForDefault: labelForDefaultSelectedItem,
+          labelForDefault: selectedItemColorLabel(),
           index: controller.navBarSelectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -264,7 +309,7 @@ class NavigationBarSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Unselected item color'),
           subtitle: const Text('Label and icon, but own properties in API'),
-          labelForDefault: labelForDefaultUnelectedItem,
+          labelForDefault: unselectedItemColorLabel(),
           index: controller.navBarUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

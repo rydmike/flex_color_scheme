@@ -41,7 +41,9 @@ class CardSettings extends StatelessWidget {
                         (controller.cardBorderRadius ?? -1) < 0
                     ? cardRadiusDefaultLabel
                     : (controller.cardBorderRadius?.toStringAsFixed(0) ?? '')
-                : 'default 4',
+                : controller.useMaterial3
+                    ? 'default 12'
+                    : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.cardBorderRadius ?? -1
                 : -1,
@@ -67,7 +69,9 @@ class CardSettings extends StatelessWidget {
                           ? cardRadiusDefaultLabel
                           : (controller.cardBorderRadius?.toStringAsFixed(0) ??
                               '')
-                      : 'default 4',
+                      : controller.useMaterial3
+                          ? 'default 12'
+                          : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
