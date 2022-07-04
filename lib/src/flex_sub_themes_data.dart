@@ -1346,17 +1346,17 @@ class FlexSubThemesData with Diagnosticable {
   /// Optional text style for the [NavigationBar] labels.
   ///
   /// If [useFlutterDefaults] is false, the text style
-  /// [FlexColorScheme.m3TextTheme.labelSmall]
+  /// [theme.textTheme.labelMedium]
   /// will be used as base style for the text style.
   ///
   /// If [useFlutterDefaults] is true, null will be passed to
-  /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
+  /// [FlexSubThemes.navigationBarTheme] and along to theme creation, if all
   /// labeling modifying properties (size and scheme color) are also null, it
   /// will then be passed along as null, allowing it to remain undefined
   /// and widget default behavior sets the default. If label size or scheme
   /// is defined, a default TextStyle() will be created, if
-  /// [navigationBarLabelTextStyle] is undefined, that gets the size and
-  /// color applied.
+  /// [navigationBarLabelTextStyle] is undefined, that gets the requested size
+  /// and color applied.
   ///
   /// The size and colors defined in any of the text size and color properties
   /// are applied as overrides on the text style.
@@ -1365,17 +1365,17 @@ class FlexSubThemesData with Diagnosticable {
   /// The size of the text label on selected [NavigationBar] item.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
-  /// on selected item, 11 is used as fallback if needed.
+  /// on selected item, 12 is used as fallback if needed.
   final double? navigationBarSelectedLabelSize;
 
   /// The size of the text label on unselected [NavigationBar] items.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
-  /// on unselected items, 11 is used as fallback if needed.
+  /// on unselected items, 12 is used as fallback if needed.
   final double? navigationBarUnselectedLabelSize;
 
-  /// Select which color from the theme's [ColorScheme] to use as base for
-  /// the [NavigationBar]'s selected label text color.
+  /// Select which color from the passed in [ColorScheme] to use as base for
+  /// the [NavigationBar]'s label text color.
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
@@ -1383,7 +1383,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If [useFlutterDefaults] is true, and this property and all other
   /// label modifying properties are undefined, including the text style,
-  /// the effective color will be [ColorScheme.onSurface].
+  /// the effective color will be [ColorScheme.onSurface] in M2 and M3.
   SchemeColor? get navigationBarSelectedLabelSchemeColor =>
       _navigationBarSelectedLabelSchemeColor ?? navigationBarTextSchemeColor;
   final SchemeColor? _navigationBarSelectedLabelSchemeColor;
@@ -1407,7 +1407,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If [useFlutterDefaults] is true, and this property and all other
   /// label modifying properties are undefined, including the text style,
-  /// the effective color will be [SchemeColor.onSurface].
+  /// the effective color will be [SchemeColor.onSurface] in M2 and
+  /// [SchemeColor.onSurfaceVariant] in M3.
   final SchemeColor? navigationBarUnselectedLabelSchemeColor;
 
   /// If true, the unselected label in the [NavigationBar] use a more
@@ -1452,7 +1453,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If [useFlutterDefaults] is true, and this property and all other
   /// icon modifying properties are undefined, the effective color will be
-  /// [ColorScheme.onSurface].
+  /// [ColorScheme.onSurface] in M2 and [ColorScheme.onSecondaryContainer]
+  /// in M3.
   SchemeColor? get navigationBarSelectedIconSchemeColor =>
       _navigationBarSelectedIconSchemeColor ?? navigationBarIconSchemeColor;
   final SchemeColor? _navigationBarSelectedIconSchemeColor;
@@ -1472,11 +1474,12 @@ class FlexSubThemesData with Diagnosticable {
   /// All colors in the color scheme are not good choices, but some work well.
   ///
   /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
-  /// blend and opacity,if [navigationBarMutedUnselectedLabel] is true.
+  /// blend and opacity, if [navigationBarMutedUnselectedIcon] is true.
   ///
   /// If [useFlutterDefaults] is true, and this property and all other
   /// icon modifying properties are undefined,
-  /// the effective color will be [SchemeColor.onSurface].
+  /// the effective color will be [SchemeColor.onSurface] in M2 and
+  /// [SchemeColor.onSurfaceVariant] in M3.
   final SchemeColor? navigationBarUnselectedIconSchemeColor;
 
   /// If true, the unselected icon in the [NavigationBar] use a more muted
@@ -1490,7 +1493,7 @@ class FlexSubThemesData with Diagnosticable {
   final bool? navigationBarMutedUnselectedIcon;
 
   /// Select which color from the theme [ColorScheme] to use as base for
-  /// the selected [NavigationBar]'s highlighted item.
+  /// the [NavigationBar]'s selected item indicator.
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
@@ -1498,8 +1501,8 @@ class FlexSubThemesData with Diagnosticable {
   /// a default [navigationBarIndicatorOpacity] is applied.
   ///
   /// If [useFlutterDefaults] true, and this property is undefined,
-  /// the effective background color will also be [ColorScheme.secondary]
-  /// with opacity 24%.
+  /// the effective indicator color will be [ColorScheme.secondary]
+  /// with opacity 24% in M2 and [ColorScheme.secondaryContainer] in M3.
   SchemeColor? get navigationBarIndicatorSchemeColor =>
       _navigationBarIndicatorSchemeColor ?? navigationBarHighlightSchemeColor;
   final SchemeColor? _navigationBarIndicatorSchemeColor;
@@ -1533,20 +1536,23 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// All colors in the color scheme are not good choices, but some work well.
   ///
-  /// If undefined, defaults to [SchemeColor.background].
+  /// If undefined, defaults to [SchemeColor.background] in M2 and in M3 to
+  /// [ColorScheme.surface], with an [ColorScheme.primary] used as overlay
+  /// color with hard coded overlay elevation 3.
   ///
   /// If [useFlutterDefaults] true, and this property is undefined,
-  /// the effective background color will be [ColorScheme.surface],
+  /// the effective M2 background color will be [ColorScheme.surface],
   /// with an [ColorScheme.onSurface] used as overlay color with hard
   /// coded overlay elevation 3. The actual Flutter SDK elevation is also
   /// hard coded to 0.
   ///
   /// FlexColorScheme sets background defaults of [BottomNavigationBar],
   /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
-  /// when it is using component sub-themes.
+  /// when it using opinionated component sub-themes.
   /// Flutter SDK uses different colors on all three widgets. Our opinion is
   /// that they should all default to using the same [ColorScheme] based
-  /// color. FlexColorScheme uses the background color as this default.
+  /// color. FlexColorScheme uses and recommend background color as this
+  /// default.
   final SchemeColor? navigationBarBackgroundSchemeColor;
 
   /// Height of the container for the Material 3 [NavigationBar].
