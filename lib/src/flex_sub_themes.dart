@@ -1641,7 +1641,7 @@ class FlexSubThemes {
     /// Optional text style for the [NavigationBar] labels.
     ///
     /// If [useFlutterDefaults] is false, the text style
-    /// [FlexColorScheme.m3TextTheme.labelMedium]
+    /// [theme.textTheme.labelMedium]
     /// will be used as base style for the text style.
     ///
     /// If [useFlutterDefaults] is true, null will be passed to
@@ -1650,8 +1650,8 @@ class FlexSubThemes {
     /// will then be passed along as null, allowing it to remain undefined
     /// and widget default behavior sets the default. If label size or scheme
     /// is defined, a default TextStyle() will be created, if
-    /// [navigationBarLabelTextStyle] is undefined, that gets the size and
-    /// color applied.
+    /// [navigationBarLabelTextStyle] is undefined, that gets the requested size
+    /// and color applied.
     ///
     /// The size and colors defined in any of the text size and color properties
     /// are applied as overrides on the text style.
@@ -1678,7 +1678,7 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// label modifying properties are undefined, including the text style,
-    /// the effective color will be [ColorScheme.onSurface].
+    /// the effective color will be [ColorScheme.onSurface] in M2 and M3.
     final SchemeColor? selectedLabelSchemeColor,
 
     /// Deprecated and replaced by [selectedLabelSchemeColor].
@@ -1701,7 +1701,8 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// label modifying properties are undefined, including the text style,
-    /// the effective color will be [SchemeColor.onSurface].
+    /// the effective color will be [SchemeColor.onSurface] in M2 and
+    /// [SchemeColor.onSurfaceVariant] in M3.
     final SchemeColor? unselectedLabelSchemeColor,
 
     /// Deprecated and replaced by [unselectedLabelSchemeColor].
@@ -1753,7 +1754,8 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// icon modifying properties are undefined, the effective color will be
-    /// [ColorScheme.onSurface].
+    /// [ColorScheme.onSurface] in M2 and [ColorScheme.onSecondaryContainer]
+    /// in M3.
     final SchemeColor? selectedIconSchemeColor,
 
     /// Deprecated and replaced by [selectedIconSchemeColor].
@@ -1776,7 +1778,8 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// icon modifying properties are undefined,
-    /// the effective color will be [SchemeColor.onSurface].
+    /// the effective color will be [SchemeColor.onSurface] in M2 and
+    /// [SchemeColor.onSurfaceVariant] in M3.
     final SchemeColor? unselectedIconSchemeColor,
 
     /// If true, the unselected icon in the [NavigationBar] use a more muted
@@ -1797,8 +1800,8 @@ class FlexSubThemes {
     /// a default [navigationBarIndicatorOpacity] is applied.
     ///
     /// If [useFlutterDefaults] true, and this property is undefined,
-    /// the effective background color will also be [ColorScheme.secondary]
-    /// with opacity 24%.
+    /// the effective indicator color will be [ColorScheme.secondary]
+    /// with opacity 24% in M2 and [ColorScheme.secondaryContainer] in M3.
     final SchemeColor? indicatorSchemeColor,
 
     /// Deprecated, was used to select which color from the passed in
@@ -1820,20 +1823,23 @@ class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If undefined, defaults to [SchemeColor.background].
+    /// If undefined, defaults to [SchemeColor.background] in M2 and in M3 to
+    /// [ColorScheme.surface], with an [ColorScheme.primary] used as overlay
+    /// color with hard coded overlay elevation 3.
     ///
     /// If [useFlutterDefaults] true, and this property is undefined,
-    /// the effective background color will also be [ColorScheme.surface],
+    /// the effective M2 background color will be [ColorScheme.surface],
     /// with an [ColorScheme.onSurface] used as overlay color with hard
     /// coded overlay elevation 3. The actual Flutter SDK elevation is also
     /// hard coded to 0.
     ///
     /// FlexColorScheme sets background defaults of [BottomNavigationBar],
     /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
-    /// when it is using component sub-themes.
+    /// when it using opinionated component sub-themes.
     /// Flutter SDK uses different colors on all three widgets. Our opinion is
     /// that they should all default to using the same [ColorScheme] based
-    /// color. FlexColorScheme uses the background color as this default.
+    /// color. FlexColorScheme uses and recommend background color as this
+    /// default.
     final SchemeColor? backgroundSchemeColor,
 
     /// NavigationBar background opacity.
@@ -1865,11 +1871,12 @@ class FlexSubThemes {
     /// The alpha value used on selection color of the selection indicator on
     /// the [NavigationBar].
     ///
-    /// If not defined defaults to [kNavigationBarIndicatorAlpha],
-    /// which is 0x3D = 61 = 24%.
+    /// If not defined in M2 defaults to [kNavigationBarIndicatorAlpha],
+    /// which is 0x3D = 61 = 24%. In M3 alpha is 0xFF, or opacity 1.
     ///
     /// The default is the same value as Widget SDK default behavior uses on its
-    /// used secondary color on its indicator color on the [NavigationBar].
+    /// used secondary color on its indicator color on the [NavigationBar] in
+    /// its M2 mode.
     final int? indicatorAlpha,
 
     /// The icon color alpha blend value for unselected items, used on icon when
@@ -1895,26 +1902,26 @@ class FlexSubThemes {
     final int unselectedAlpha = kUnselectedAlphaBlend,
 
     /// Use Material3 default style when properties are undefined and Flutter
-    /// defaults are requested with `useFlutterDefaults` property-
+    /// defaults are requested with `useFlutterDefaults` property.
     ///
     /// This setting will override the default undefined background color, from
     /// background color to surface with primary overlay at elevation 3.
     ///
     /// Other defaults will still use FlexColorScheme's own opinionated
-    /// defaults values, unless `useFlutterDefaults` is also set to to true. In
+    /// defaults values, unless `useFlutterDefaults` is also set to true. In
     /// that case the Material 3 default will be used if `useMaterial3` is true,
     /// and Material 2 defaults will be used if it is false.
     ///
-    /// The M2 or M3 defaults will only be used for properties that are not
+    /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     final bool useMaterial3 = false,
 
     /// Set to true to use Flutter SDK defaults for [NavigationBar]
-    /// theme when its properties are undefined (null) instead of using
-    /// [FlexColorScheme]'s own defaults.
+    /// theme when its properties are undefined (null), instead of using
+    /// FlexColorScheme's own opinionated defaults.
     ///
     /// Recommend keeping it **false** for a more color harmonized component
-    /// theme starting point. This flag may be helpful if you want to create
+    /// theme starting point. This flag can be helpful if you want to create
     /// custom sub-themes starting from less opinionated settings.
     ///
     /// When all required properties are undefined and flag is false or true,
@@ -2361,15 +2368,17 @@ class FlexSubThemes {
     /// Differences when flag is false versus true are:
     ///
     /// ```
-    ///                    FCS defaults    Flutter defaults
-    /// useFlutterDefaults false           true
-    /// - background       background      surface
-    /// - indicator        primary op24%   secondary op24%
-    /// - selected icon    primary         primary
-    /// - Selected label   primary         primary
-    /// - unselected icon  onSurface       onSurface op64%
-    /// - unSelected label onSurface       onSurface op64%
-    /// - TextTheme        FCS.labelMedium default.bodyText1
+    ///                    FCS defaults    M2 defaults      useMaterial3:true
+    /// useFlutterDefaults false           true             true
+    /// results in:
+    ///
+    /// - background       background      surface          surface
+    /// - indicator        primary op24%   secondary op24%  secondaryContainer
+    /// - selected icon    primary         primary          onSecondaryContainer
+    /// - Selected label   primary         primary          onSurface
+    /// - unselected icon  onSurface       onSurface op64%  onSurfaceVariant
+    /// - unSelected label onSurface       onSurface op64%  onSurface
+    /// - TextTheme        labelMedium     bodyText1        labelMedium
     /// ```
     /// FCS further applies both an alpha blend and slight opacity to
     /// unselected icon and unselected label, but only if
