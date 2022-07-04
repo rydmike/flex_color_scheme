@@ -1244,6 +1244,7 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
+    final bool useM3 = theme.useMaterial3;
 
     final Color defaultBackgroundColor = isLight
         ? Color.alphaBlend(
@@ -1286,6 +1287,15 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
+        Text('Material elevation and tint', style: denseHeader),
+        Text(
+          'When using useMaterial3 set to true, Material gets no elevation '
+          'unless its shadowColor is also specified, which is not needed when '
+          'when it is false and using M2. To in M3 give it surface elevated '
+          'tint, also specify its surfaceTintColor. Below both are used.',
+          style: denseBody,
+        ),
+        const SizedBox(height: 12),
         Text('Material type canvas', style: denseHeader),
         Text(
           'Default background color is theme canvasColor, and '
@@ -1293,28 +1303,34 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           'color canvasColor is going to be deprecated in Flutter SDK',
           style: denseBody,
         ),
-        const Material(
+        Material(
           type: MaterialType.canvas,
           elevation: 0,
-          child: SizedBox(
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: colorScheme.shadow,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Material type canvas, elevation 0')),
           ),
         ),
         const SizedBox(height: 10),
-        const Material(
+        Material(
           type: MaterialType.canvas,
           elevation: 1,
-          child: SizedBox(
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: colorScheme.shadow,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Material type canvas, elevation 1')),
           ),
         ),
         const SizedBox(height: 10),
-        const Material(
+        Material(
           type: MaterialType.canvas,
           elevation: 4,
-          child: SizedBox(
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: colorScheme.shadow,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Material type canvas, elevation 4')),
           ),
@@ -1327,28 +1343,34 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           'color cardColor is going to be deprecated in Flutter SDK',
           style: denseBody,
         ),
-        const Material(
-          elevation: 0,
+        Material(
           type: MaterialType.card,
-          child: SizedBox(
+          elevation: 0,
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: colorScheme.shadow,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Material type card, elevation 0')),
           ),
         ),
         const SizedBox(height: 10),
-        const Material(
-          elevation: 1,
+        Material(
           type: MaterialType.card,
-          child: SizedBox(
+          elevation: 1,
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: colorScheme.shadow,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Material type card, elevation 1')),
           ),
         ),
         const SizedBox(height: 10),
-        const Material(
-          elevation: 4,
+        Material(
           type: MaterialType.card,
-          child: SizedBox(
+          elevation: 4,
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: colorScheme.shadow,
+          child: const SizedBox(
             height: 50,
             child: Center(child: Text('Material type card, elevation 4')),
           ),
@@ -1379,6 +1401,8 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
                     Material(
                       color: snackBackground,
                       elevation: 0,
+                      // surfaceTintColor: colorScheme.surfaceTint,
+                      shadowColor: colorScheme.shadow,
                       child: SizedBox(
                         height: 40,
                         child: Center(
