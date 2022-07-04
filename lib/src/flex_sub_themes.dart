@@ -1645,7 +1645,7 @@ class FlexSubThemes {
     /// will be used as base style for the text style.
     ///
     /// If [useFlutterDefaults] is true, null will be passed to
-    /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
+    /// [FlexSubThemes.navigationBarTheme] and along to theme creation, if all
     /// labeling modifying properties (size and scheme color) are also null, it
     /// will then be passed along as null, allowing it to remain undefined
     /// and widget default behavior sets the default. If label size or scheme
@@ -1774,7 +1774,7 @@ class FlexSubThemes {
     /// All colors in the color scheme are not good choices, but some work well.
     ///
     /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
-    /// blend and opacity,if [navigationBarMutedUnselectedIcon] is true.
+    /// blend and opacity, if [mutedUnselectedIcon] is true.
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// icon modifying properties are undefined,
@@ -1792,7 +1792,7 @@ class FlexSubThemes {
     final bool? mutedUnselectedIcon,
 
     /// Select which color from the theme [ColorScheme] to use as base for
-    /// the selected [NavigationBar]'s highlighted item.
+    /// the [NavigationBar]'s selected item indicator.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
