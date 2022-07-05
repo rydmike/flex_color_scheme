@@ -143,6 +143,12 @@ String generateThemeDartCode(ThemeController controller) {
   final String useMaterial3 = controller.useMaterial3
       ? '  useMaterial3: ${controller.useMaterial3},\n'
       : '';
+  final String tintLightColor = controller.surfaceTintLight != null
+      ? '  surfaceTint: ${controller.surfaceTintLight},\n'
+      : '';
+  final String tintDarkColor = controller.surfaceTintDark != null
+      ? '  surfaceTint: ${controller.surfaceTintDark},\n'
+      : '';
   //
   // Code for FlexSubThemesData setup.
   //
@@ -855,6 +861,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$tabBarStyle'
       '$lightIsWhite'
       '$swapLightColors'
+      '$tintLightColor'
       '$tooltipsMatchBackground'
       '$lightSubTheme'
       '$useKeyColorsLight'
@@ -877,6 +884,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$tabBarStyle'
       '$darkIsTrueBlack'
       '$swapDarkColors'
+      '$tintDarkColor'
       '$tooltipsMatchBackground'
       '$darkSubTheme'
       '$useKeyColorsDark'

@@ -373,6 +373,12 @@ class ThemeController with ChangeNotifier {
     _dialogBorderRadius = await _themeService.load(
         Store.keyDialogBorderRadius, Store.defaultDialogBorderRadius);
     //
+    // Custom surface tint color SETTINGS.
+    _surfaceTintLight = await _themeService.load(
+        Store.keySurfaceTintLight, Store.defaultSurfaceTintLight);
+    _surfaceTintDark = await _themeService.load(
+        Store.keySurfaceTintDark, Store.defaultSurfaceTintDark);
+    //
     // Custom color SETTINGS.
     _primaryLight = await _themeService.load(
         Store.keyPrimaryLight, Store.defaultPrimaryLight);
@@ -617,6 +623,11 @@ class ThemeController with ChangeNotifier {
     await setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
     await setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
+    //
+    // Surface tint colors.
+    await setSurfaceTintLight(Store.defaultSurfaceTintLight, false);
+    await setSurfaceTintDark(Store.defaultSurfaceTintDark, false);
+    //
     // Not persisted, locally controlled popup selection for ThemeService,
     // resets to actual used platform when settings are reset or app loaded.
     await setPlatform(defaultTargetPlatform, false);
@@ -1999,6 +2010,27 @@ class ThemeController with ChangeNotifier {
     _dialogBorderRadius = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyDialogBorderRadius, value);
+  }
+
+  // Custom surface tint color SETTINGS.
+  // ===========================================================================
+
+  late Color? _surfaceTintLight;
+  Color? get surfaceTintLight => _surfaceTintLight;
+  Future<void> setSurfaceTintLight(Color? value, [bool notify = true]) async {
+    if (value == _surfaceTintLight) return;
+    _surfaceTintLight = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keySurfaceTintLight, value);
+  }
+
+  late Color? _surfaceTintDark;
+  Color? get surfaceTintDark => _surfaceTintDark;
+  Future<void> setSurfaceTintDark(Color? value, [bool notify = true]) async {
+    if (value == _surfaceTintDark) return;
+    _surfaceTintDark = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keySurfaceTintDark, value);
   }
 
   // Custom color SETTINGS.

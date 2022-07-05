@@ -208,6 +208,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
     useMaterial3ErrorColors: controller.useM3ErrorColors,
     tones:
         AppColor.flexTonesConfig(Brightness.dark, controller.usedFlexToneSetup),
+    // Use custom surface tint color.
+    surfaceTint: controller.surfaceTintDark,
     //
     // ThemeData properties passed along directly to ThemeData.
     visualDensity: AppData.visualDensity,

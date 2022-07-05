@@ -270,6 +270,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
     // between a few pre-configured ones.
     tones: AppColor.flexTonesConfig(
         Brightness.light, controller.usedFlexToneSetup),
+    // Use custom surface tint color.
+    surfaceTint: controller.surfaceTintLight,
     //
     // ThemeData properties passed along directly to ThemeData.
     //
