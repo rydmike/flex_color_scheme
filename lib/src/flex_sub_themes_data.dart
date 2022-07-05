@@ -883,8 +883,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the Floating
   /// Action Buttons (FABs) use as their base color.
   ///
-  /// If not defined it defaults to theme.colorScheme.secondary color via
-  /// Flutter theme defaults.
+  /// If not defined, effective default is [ColorScheme.secondary] color in M2
+  /// and [ColorScheme.primaryContainer] in M3 via Flutter theme defaults.
   final SchemeColor? fabSchemeColor;
 
   /// Border radius value for [Chip] widgets.

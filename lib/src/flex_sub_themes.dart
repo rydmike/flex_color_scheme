@@ -1286,7 +1286,7 @@ class FlexSubThemes {
     /// If not defined, or if passed in `colorScheme` is null, then if
     /// `ThemeData.useMaterial3` is false `theme.colorScheme.secondary` will be
     /// used, but if `ThemeData.useMaterial3` is true, then
-    /// `theme.colorScheme.primaryContainer` will be used.
+    /// `ThemeData.colorScheme.primaryContainer` will be used.
     ///
     /// The foreground color automatically uses the selected background
     /// color's contrast color pair in the passed in [colorScheme] property.
