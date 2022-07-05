@@ -1641,8 +1641,8 @@ class FlexSubThemes {
     /// Optional text style for the [NavigationBar] labels.
     ///
     /// If [useFlutterDefaults] is false, the text style
-    /// [theme.textTheme.labelMedium]
-    /// will be used as base style for the text style.
+    /// [ThemeData.textTheme.labelMedium]  will be used as base style for the
+    /// text style.
     ///
     /// If [useFlutterDefaults] is true, null will be passed to
     /// [FlexSubThemes.navigationBarTheme] and along to theme creation, if all
@@ -1701,8 +1701,8 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// label modifying properties are undefined, including the text style,
-    /// the effective color will be [SchemeColor.onSurface] in M2 and
-    /// [SchemeColor.onSurfaceVariant] in M3.
+    /// the effective color will be [ColorScheme.onSurface] in M2 and
+    /// [ColorScheme.onSurfaceVariant] in M3.
     final SchemeColor? unselectedLabelSchemeColor,
 
     /// Deprecated and replaced by [unselectedLabelSchemeColor].
@@ -1778,8 +1778,8 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// icon modifying properties are undefined,
-    /// the effective color will be [SchemeColor.onSurface] in M2 and
-    /// [SchemeColor.onSurfaceVariant] in M3.
+    /// the effective color will be [ColorScheme.onSurface] in M2 and
+    /// [ColorScheme.onSurfaceVariant] in M3.
     final SchemeColor? unselectedIconSchemeColor,
 
     /// If true, the unselected icon in the [NavigationBar] use a more muted
@@ -1833,13 +1833,15 @@ class FlexSubThemes {
     /// coded overlay elevation 3. The actual Flutter SDK elevation is also
     /// hard coded to 0.
     ///
-    /// FlexColorScheme sets background defaults of [BottomNavigationBar],
-    /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
+    /// FlexColorScheme sets background defaults of [NavigationRail],
+    /// [NavigationBar] and [BottomNavigationBar] to [ColorScheme.background]
     /// when it using opinionated component sub-themes.
     /// Flutter SDK uses different colors on all three widgets. Our opinion is
     /// that they should all default to using the same [ColorScheme] based
-    /// color. FlexColorScheme uses and recommend background color as this
-    /// default.
+    /// color. FlexColorScheme uses and recommends background color as this
+    /// default. The [ColorScheme.background] was chosen as it is the same that
+    /// the Drawer uses as well, so when using tinted backgrounds where surface
+    /// and background are different, they will still match.
     final SchemeColor? backgroundSchemeColor,
 
     /// NavigationBar background opacity.
@@ -1901,6 +1903,8 @@ class FlexSubThemes {
     /// needed later.
     final int unselectedAlpha = kUnselectedAlphaBlend,
 
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
     /// Use Material3 default style when properties are undefined and Flutter
     /// defaults are requested with `useFlutterDefaults` property.
     ///
@@ -1914,6 +1918,54 @@ class FlexSubThemes {
     ///
     /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
+    ///
+    /// Flutter SDK 3.0.5 [useMaterial3] documentation:
+    /// -----------------------------------------------
+    /// If true, then components that have been migrated to Material 3 will
+    /// use new colors, typography and other features of Material 3.
+    /// If false, they will use the Material 2 look and feel.
+    ///
+    /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
+    /// some properties will get special defaults. However, just copying a
+    /// [ThemeData] with [useMaterial3] set to true will not change any of
+    /// these properties in the
+    /// resulting [ThemeData]. These properties are:
+    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; }
+    /// td { border: 1px solid }</style>
+    ///
+    /// | Property        | Material 3 default           | Fallback default  |
+    /// | :-------------- | :--------------------------- | :---------------- |
+    /// | [typography] | [Typography.material2021] | [Typography.material2014] |
+    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]       |
+    ///
+    /// \* if and only if the target platform is Android and the app is not
+    /// running on the web, otherwise it will fallback to [InkRipple].
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app. Some components will be migrated
+    /// before others and typography changes will be coming in stages.
+    ///
+    /// [useMaterial3] defaults to false. After all the migrated components
+    /// have landed on stable, we will change this to be true by default. After
+    /// that change has landed on stable, we will deprecate this flag and remove
+    /// all uses of it. Everything will use the Material 3 look and feel at
+    /// that point.
+    ///
+    /// Components that have been migrated to Material 3 are:
+    ///
+    ///   * [AlertDialog]
+    ///   * [AppBar]
+    ///   * [Card]
+    ///   * [Dialog]
+    ///   * [ElevatedButton]
+    ///   * [FloatingActionButton]
+    ///   * [Material]
+    ///   * [NavigationBar]
+    ///   * [NavigationRail]
+    ///   * [OutlinedButton]
+    ///   * [StretchingOverscrollIndicator], replacing the
+    ///     [GlowingOverscrollIndicator]
+    ///   * [TextButton]
     final bool useMaterial3 = false,
 
     /// Set to true to use Flutter SDK defaults for [NavigationBar]
@@ -2098,17 +2150,17 @@ class FlexSubThemes {
     /// Optional text style for the [NavigationRail] labels.
     ///
     /// If [useFlutterDefaults] is false, the text style
-    /// [FlexColorScheme.m3TextTheme.bodyMedium]
-    /// will be used as base style for the text style.
+    /// [ThemeData.textTheme.labelMedium] will be used as base style for
+    /// the text style.
     ///
     /// If [useFlutterDefaults] is true, null will be passed to
-    /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
+    /// [FlexSubThemes.navigationRailTheme] and along to theme creation, if all
     /// labeling modifying properties (size and scheme color) are also null, it
     /// will then be passed along as null, allowing it to remain undefined
     /// and widget default behavior sets the default. If label size or scheme
     /// is defined, a default TextStyle() will be created, if
-    /// [navigationBarLabelTextStyle] is undefined, that gets the size and
-    /// color applied.
+    /// [navigationRailLabelTextStyle] is undefined, that gets the requested
+    /// size and color applied.
     ///
     /// The size and colors defined in any of the text size and color properties
     /// are applied as overrides on the text style.
@@ -2135,7 +2187,8 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// label modifying properties are undefined, including the text style,
-    /// the effective color will also be [ColorScheme.primary].
+    /// the effective color will be [ColorScheme.primary] in M2 and
+    /// [ColorScheme.onSurface] in M3.
     final SchemeColor? selectedLabelSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as base for
@@ -2148,7 +2201,8 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// label modifying properties are undefined, including the text style,
-    /// the effective color will be [SchemeColor.onSurface] with opacity 64%.
+    /// the effective color will be [ColorScheme.onSurface] with opacity 64% in
+    /// M2 and [ColorScheme.onSurface] in M3.
     final SchemeColor? unselectedLabelSchemeColor,
 
     /// If true, the unselected label in the [NavigationRail] use a more
@@ -2179,7 +2233,8 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// icon modifying properties are undefined, the effective color will
-    /// also be [ColorScheme.primary].
+    /// also be [ColorScheme.primary] in M2 and
+    /// [ColorScheme.onSecondaryContainer] in M3.
     final SchemeColor? selectedIconSchemeColor,
 
     /// Select which color from the passed in [ColorScheme] to use as base for
@@ -2192,7 +2247,8 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// icon modifying properties are undefined,
-    /// the effective color will be [SchemeColor.onSurface] with 64% opacity.
+    /// the effective color will be [ColorScheme.onSurface] with 64% opacity
+    /// in M2 and [ColorScheme.onSurfaceVariant] in M3.
     final SchemeColor? unselectedIconSchemeColor,
 
     /// If true, the unselected icon in the [NavigationRail] use a more muted
@@ -2232,7 +2288,7 @@ class FlexSubThemes {
     ///
     /// If [useFlutterDefaults] true, and this property is undefined,
     /// the effective background color will also be [ColorScheme.secondary]
-    /// with opacity 24%.
+    /// with opacity 24% in M2 and [ColorScheme.secondaryContainer] in M3.
     final SchemeColor? indicatorSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as background
@@ -2245,12 +2301,15 @@ class FlexSubThemes {
     /// If [useFlutterDefaults] true, and this property is undefined,
     /// the effective background color will be [ColorScheme.surface].
     ///
-    /// FlexColorScheme sets background defaults of [BottomNavigationBar],
-    /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
-    /// when it is using component sub-themes.
+    /// FlexColorScheme sets background defaults of [NavigationRail],
+    /// [NavigationBar] and [BottomNavigationBar] to [ColorScheme.background]
+    /// when it using opinionated component sub-themes.
     /// Flutter SDK uses different colors on all three widgets. Our opinion is
     /// that they should all default to using the same [ColorScheme] based
-    /// color. FlexColorScheme uses the background color as this default.
+    /// color. FlexColorScheme uses and recommends background color as this
+    /// default. The [ColorScheme.background] was chosen as it is the same that
+    /// the Drawer uses as well, so when using tinted backgrounds where surface
+    /// and background are different, they will still match.
     final SchemeColor? backgroundSchemeColor,
 
     /// NavigationRail background opacity.
@@ -2333,18 +2392,38 @@ class FlexSubThemes {
 
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
-    /// Used internally to enable this sub-theme to when used by
-    /// [FlexColorScheme] respect the [ThemeData.useMaterial3] flag.
+    /// Use Material3 default style when properties are undefined and Flutter
+    /// defaults are requested with `useFlutterDefaults` property.
     ///
-    /// Flutter SDK [useMaterial3] documentation:
+    /// Defaults will still use FlexColorScheme's own opinionated
+    /// defaults values, unless `useFlutterDefaults` is also set to true. In
+    /// that case the Material 3 default will be used if `useMaterial3` is true,
+    /// and Material 2 defaults will be used if it is false.
     ///
+    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// Flutter SDK 3.0.5 [useMaterial3] documentation:
+    /// -----------------------------------------------
     /// If true, then components that have been migrated to Material 3 will
-    /// start using new colors, typography and other features of Material 3.
+    /// use new colors, typography and other features of Material 3.
     /// If false, they will use the Material 2 look and feel.
     ///
-    /// Currently no components have been migrated to support Material 3.
-    /// As they are updated to include Material 3 support this documentation
-    /// will be modified to indicate exactly what widgets this flag will affect.
+    /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
+    /// some properties will get special defaults. However, just copying a
+    /// [ThemeData] with [useMaterial3] set to true will not change any of
+    /// these properties in the
+    /// resulting [ThemeData]. These properties are:
+    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; }
+    /// td { border: 1px solid }</style>
+    ///
+    /// | Property        | Material 3 default           | Fallback default  |
+    /// | :-------------- | :--------------------------- | :---------------- |
+    /// | [typography] | [Typography.material2021] | [Typography.material2014] |
+    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]       |
+    ///
+    /// \* if and only if the target platform is Android and the app is not
+    /// running on the web, otherwise it will fallback to [InkRipple].
     ///
     /// During the migration to Material 3, turning this on may yield
     /// inconsistent look and feel in your app. Some components will be migrated
@@ -2355,6 +2434,22 @@ class FlexSubThemes {
     /// that change has landed on stable, we will deprecate this flag and remove
     /// all uses of it. Everything will use the Material 3 look and feel at
     /// that point.
+    ///
+    /// Components that have been migrated to Material 3 are:
+    ///
+    ///   * [AlertDialog]
+    ///   * [AppBar]
+    ///   * [Card]
+    ///   * [Dialog]
+    ///   * [ElevatedButton]
+    ///   * [FloatingActionButton]
+    ///   * [Material]
+    ///   * [NavigationBar]
+    ///   * [NavigationRail]
+    ///   * [OutlinedButton]
+    ///   * [StretchingOverscrollIndicator], replacing the
+    ///     [GlowingOverscrollIndicator]
+    ///   * [TextButton]
     final bool useMaterial3 = false,
 
     /// Set to true to use Flutter SDK defaults for [NavigationRail]
