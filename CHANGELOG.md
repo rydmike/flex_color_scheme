@@ -61,14 +61,17 @@ All notable changes to the **FlexColorScheme** package are documented here.
   FCS default color when sub-themes were enabled. If opinionated component themes are not used, FCS
   will use default M3 theme styles on `NavigationBar` when `useMaterial3` is true. If opting in
   on opinionated component themes, FCS uses its own custom opinionated default style. It can be
-  modified to be the same as default M3 style too, as before.
+  modified to be the same as default M3 style too, as before. The fix includes a default font
+  size change for FCS opinionated styled navigation bar from 11dp to 12dp to harmonize it with 
+  its M3 style.
 
 * **NavigationRail M3 defaults fix**: Default colors of `NavigationRail` when opting in on
   `useMaterial3` and not using opinionated component themes, theme will match M3 default colors. 
   If opinionated component themes are not used, FCS will use default M3 theme styles on 
   `NavigationRail` when `useMaterial3` is true. If opting in
   on opinionated component themes, FCS uses its own custom opinionated default style. It can be
-  modified to be the same as default M3 style too, just as before.
+  modified to be the same as default M3 style too, just as before. The fix includes a default font
+  size change for FCS opinionated styled rail from 14dp to 12dp to harmonize it with its M3 style.
 
 * **Toggleable M3 Style fix:** Default color of toggles (Switch, CheckBox and Radio) are now using 
   `primary` color as default themed color when opting in on opinionated component themes or setting

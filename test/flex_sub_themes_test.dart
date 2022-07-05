@@ -3023,9 +3023,9 @@ void main() {
             indicatorColor: Color(0x00000000),
             backgroundColor: Color(0xffffffff),
             unselectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xa5000000), fontSize: 14.0),
+                inherit: true, color: Color(0xa5000000), fontSize: 12.0),
             selectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xff6200ee), fontSize: 14.0),
+                inherit: true, color: Color(0xff6200ee), fontSize: 12.0),
             unselectedIconTheme: IconThemeData(
                 color: Color(0xa5000000), opacity: 1.0, size: 24.0),
             selectedIconTheme: IconThemeData(
@@ -3052,9 +3052,9 @@ void main() {
             indicatorColor: Color(0x00000000),
             backgroundColor: Color(0xff121212),
             unselectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xa5ffffff), fontSize: 14.0),
+                inherit: true, color: Color(0xa5ffffff), fontSize: 12.0),
             selectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xffbb86fc), fontSize: 14.0),
+                inherit: true, color: Color(0xffbb86fc), fontSize: 12.0),
             unselectedIconTheme: IconThemeData(
                 color: Color(0xa5ffffff), opacity: 1.0, size: 24.0),
             selectedIconTheme: IconThemeData(
@@ -3096,13 +3096,13 @@ void main() {
             ),
             selectedLabelTextStyle: TextStyle(
               color: colorScheme.secondary,
-              fontSize: 14,
+              fontSize: 12,
             ),
             unselectedLabelTextStyle: TextStyle(
               color: colorScheme.onSurface
                   .blendAlpha(colorScheme.onSurface, 0xFA)
                   .withAlpha(0x45),
-              fontSize: 14,
+              fontSize: 12,
             ),
             unselectedIconTheme: IconThemeData(
               color: colorScheme.tertiary
@@ -3154,13 +3154,13 @@ void main() {
             ),
             selectedLabelTextStyle: TextStyle(
               color: colorScheme.secondary,
-              fontSize: 14,
+              fontSize: 12,
             ),
             unselectedLabelTextStyle: TextStyle(
               color: colorScheme.onSurface
                   .blendAlpha(colorScheme.onSurface, 0xFA)
                   .withAlpha(0x45),
-              fontSize: 14,
+              fontSize: 12,
             ),
             unselectedIconTheme: IconThemeData(
               color: colorScheme.tertiary
