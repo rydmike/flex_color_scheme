@@ -9,11 +9,9 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 **NEW**
 
-* **Added** support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. The support is
-  in this release at a basic level, it is set to primary color by default, as Flutter
-  and Material 3 does. Later release will add support in Themes Playground to customize
-  it, then also the FlexColorScheme surface blend color will become changeable and use the
-  `ColorScheme.surfaceTint` as its blend color instead of `ColorScheme.primary`.
+* **Added** full support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. It is set to 
+  primary color by default, as Flutter and Material 3 does. If a custom `surfaceTint` color is 
+  provided, it is also used as the blend color, instead of `primary` color for surface blend.
 
 * **Added** pass through API for using Flutter 3.0.0 theme extensions directly via FlexColorScheme 
   API. It was added to avoid having to add theme extensions with a CopyWith on FlexColorScheme 
@@ -119,6 +117,9 @@ All notable changes to the **FlexColorScheme** package are documented here.
   fine, since that app will likely never switch used Typography. If it does, it will of course face
   the same issue the Playground app did, but the issue is a Flutter SDK issue that FlexColorScheme 
   cannot fix. Most likely 99% of apps will never run into this issue.
+
+* **TODO**: Add support in Themes Playground to customize `surfaceTint` color and hence also the 
+  used color for surface blends.
 
 ## v5.0.1 - April 29, 2022
 

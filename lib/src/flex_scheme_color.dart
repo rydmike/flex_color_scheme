@@ -8,7 +8,7 @@ import 'flex_extensions.dart';
 // ignore_for_file: comment_references
 
 /// Immutable color data class for the main scheme colors used in a
-///  FlexColorScheme based color scheme and theming engine.
+/// FlexColorScheme based color scheme and theming engine.
 ///
 /// The default constructor requires the main color properties. To make a
 /// [FlexSchemeColor] from a minimum of just the primary color, use the factory

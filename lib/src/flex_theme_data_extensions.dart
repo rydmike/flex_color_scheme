@@ -727,6 +727,20 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
 
+    /// A color used as an overlay on a surface color to indicate a component's
+    /// elevation.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via this extension behavior.
+    /// If a [colorScheme] was provided where this corresponding color is
+    /// defined, this color property will override the same color in it.
+    ///
+    /// This color is used by M3 for colored elevation, it is also used as the
+    /// blend color for FlexColorScheme surface blends.
+    ///
+    /// If undefined it defaults to [primary] color.
+    final Color? surfaceTint,
+
     /// Makes the light theme backgrounds lighter or even white.
     ///
     /// Scaffold background will become white, and other surfaces also get
@@ -1173,6 +1187,7 @@ extension FlexThemeData on ThemeData {
         onSurface: onSurface,
         onBackground: onBackground,
         onError: onError,
+        surfaceTint: surfaceTint,
         lightIsWhite: lightIsWhite,
         swapColors: swapColors,
         tooltipsMatchBackground: tooltipsMatchBackground,
@@ -1871,6 +1886,20 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
 
+    /// A color used as an overlay on a surface color to indicate a component's
+    /// elevation.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via this extension behavior.
+    /// If a [colorScheme] was provided where this corresponding color is
+    /// defined, this color property will override the same color in it.
+    ///
+    /// This color is used by M3 for colored elevation, it is also used as the
+    /// blend color for FlexColorScheme surface blends.
+    ///
+    /// If undefined it defaults to [primary] color.
+    final Color? surfaceTint,
+
     /// Makes the dark theme backgrounds darker or even black.
     ///
     /// Scaffold background will become fully black, and other surfaces also get
@@ -2317,6 +2346,7 @@ extension FlexThemeData on ThemeData {
         onSurface: onSurface,
         onBackground: onBackground,
         onError: onError,
+        surfaceTint: surfaceTint,
         darkIsTrueBlack: darkIsTrueBlack,
         swapColors: swapColors,
         tooltipsMatchBackground: tooltipsMatchBackground,

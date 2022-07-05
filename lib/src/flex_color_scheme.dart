@@ -565,6 +565,7 @@ class FlexColorScheme with Diagnosticable {
     this.onSurface,
     this.onBackground,
     this.onError,
+    this.surfaceTint,
     this.tabBarStyle = FlexTabBarStyle.forAppBar,
     this.appBarElevation = 0,
     this.bottomAppBarElevation = 0,
@@ -885,6 +886,20 @@ class FlexColorScheme with Diagnosticable {
   /// If null, the on color is derived from the brightness of the [error]
   /// color, and will be be black if it is light and white if it is dark.
   final Color? onError;
+
+  /// A color used as an overlay on a surface color to indicate a component's
+  /// elevation.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  /// If a [colorScheme] was provided where this corresponding color is
+  /// defined, this color property will override the same color in it.
+  ///
+  /// This color is used by M3 for colored elevation, it is also used as the
+  /// blend  color for FlexColorScheme surface blends.
+  ///
+  /// If undefined it defaults to [primary] color.
+  final Color? surfaceTint;
 
   /// Select preferred style for the default [TabBarTheme].
   ///
@@ -1438,8 +1453,7 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
     /// you already have a custom [ColorScheme] based color definition that
     /// you want to use with FlexColorScheme theming and its sub-theming
-    /// capabilities. This will become particularly useful when using Material 3
-    /// based design and its seed generated color schemes.
+    /// capabilities.
     ///
     /// If you provide both a [ColorScheme] and some individual direct property
     /// values that also exist in a [ColorScheme], the individual property
@@ -2090,6 +2104,20 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onError,
 
+    /// A color used as an overlay on a surface color to indicate a component's
+    /// elevation.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    /// If a [colorScheme] was provided where this corresponding color is
+    /// defined, this color property will override the same color in it.
+    ///
+    /// This color is used by M3 for colored elevation, it is also used as the
+    /// blend color for FlexColorScheme surface blends.
+    ///
+    /// If undefined it defaults to [primary] color.
+    final Color? surfaceTint,
+
     /// Makes the light theme backgrounds lighter or even white.
     ///
     /// Scaffold background will become white, and other surfaces also get
@@ -2600,6 +2628,9 @@ class FlexColorScheme with Diagnosticable {
         errorContainer: seedScheme.errorContainer,
       );
     }
+    // Get effective surfaceTint color, also used as blend color for surfaces.
+    final Color blendColor =
+        surfaceTint ?? colorScheme?.surfaceTint ?? effectiveColors.primary;
     // Compute surface blends, they are also be added to seeded surfaces.
     final FlexSchemeSurfaceColors surfaceSchemeColors =
         FlexSchemeSurfaceColors.blend(
@@ -2608,6 +2639,14 @@ class FlexColorScheme with Diagnosticable {
       blendLevel: blendLevel,
       surfaceVariantBlendDivide: seed.useKeyColors ? 2 : 1,
       schemeColors: effectiveColors,
+      blendColors: FlexSchemeSurfaceColors(
+        surface: blendColor,
+        surfaceVariant: blendColor,
+        inverseSurface: blendColor,
+        dialogBackground: blendColor,
+        background: blendColor,
+        scaffoldBackground: blendColor,
+      ),
       surfaceColors: seed.useKeyColors
           // Using seed colors, starting surfaces are given by generated scheme.
           ? FlexSchemeSurfaceColors(
@@ -2765,6 +2804,7 @@ class FlexColorScheme with Diagnosticable {
           onSurfaceVariant: onColors.onSurfaceVariant,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
+          surfaceTint: surfaceTint,
         ) ??
         // In order to avoid using a ColorScheme.light that sets
         // some opinionated defaults on deprecated members that we do not
@@ -2813,6 +2853,7 @@ class FlexColorScheme with Diagnosticable {
               Brightness.light, effectiveColors.primary, effectiveSurfaceColor),
           shadow: Colors.black,
           outline: _outlineColor(Brightness.light, onColors.onBackground),
+          surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
     // Determine the effective AppBar color:
@@ -2890,6 +2931,7 @@ class FlexColorScheme with Diagnosticable {
       onError: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3LightOnError
           : onColors.onError,
+      surfaceTint: surfaceTint,
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: effectiveBottomAppBarElevation,
@@ -3728,6 +3770,20 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onError,
 
+    /// A color used as an overlay on a surface color to indicate a component's
+    /// elevation.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    /// If a [colorScheme] was provided where this corresponding color is
+    /// defined, this color property will override the same color in it.
+    ///
+    /// This color is used by M3 for colored elevation, it is also used as the
+    /// blend color for FlexColorScheme surface blends.
+    ///
+    /// If undefined it defaults to [primary] color.
+    final Color? surfaceTint,
+
     /// Makes the dark theme backgrounds darker or even black.
     ///
     /// Scaffold background will become fully black, and other surfaces also get
@@ -4264,6 +4320,9 @@ class FlexColorScheme with Diagnosticable {
         errorContainer: seedScheme.errorContainer,
       );
     }
+    // Get effective surfaceTint color, also used as blend color for surfaces.
+    final Color blendColor =
+        surfaceTint ?? colorScheme?.surfaceTint ?? effectiveColors.primary;
     // Compute surface blends, they may also be added on seeded surfaces.
     final FlexSchemeSurfaceColors surfaceSchemeColors =
         FlexSchemeSurfaceColors.blend(
@@ -4272,6 +4331,14 @@ class FlexColorScheme with Diagnosticable {
       blendLevel: blendLevel,
       surfaceVariantBlendDivide: seed.useKeyColors ? 2 : 1,
       schemeColors: effectiveColors,
+      blendColors: FlexSchemeSurfaceColors(
+        surface: blendColor,
+        surfaceVariant: blendColor,
+        inverseSurface: blendColor,
+        dialogBackground: blendColor,
+        background: blendColor,
+        scaffoldBackground: blendColor,
+      ),
       surfaceColors: seed.useKeyColors
           // Using seed colors, starting surfaces are given by generated scheme.
           ? FlexSchemeSurfaceColors(
@@ -4429,6 +4496,7 @@ class FlexColorScheme with Diagnosticable {
           onSurfaceVariant: onColors.onSurfaceVariant,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
+          surfaceTint: surfaceTint,
         ) ??
         // In order to avoid using a ColorScheme.dark that sets
         // some opinionated defaults on deprecated members that we do not
@@ -4477,6 +4545,7 @@ class FlexColorScheme with Diagnosticable {
               Brightness.dark, effectiveColors.primary, effectiveSurfaceColor),
           shadow: Colors.black,
           outline: _outlineColor(Brightness.dark, onColors.onBackground),
+          surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
     // Determine the effective AppBar color:
@@ -4557,6 +4626,7 @@ class FlexColorScheme with Diagnosticable {
       onError: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3DarkOnError
           : onColors.onError,
+      surfaceTint: surfaceTint,
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: effectiveBottomAppBarElevation,
@@ -6649,8 +6719,11 @@ class FlexColorScheme with Diagnosticable {
           inversePrimary: colorScheme?.inversePrimary,
           shadow: colorScheme?.shadow,
           outline: colorScheme?.outline,
-          surfaceTint: colorScheme?.surfaceTint,
+          surfaceTint:
+              surfaceTint ?? colorScheme?.surfaceTint ?? colors.primary,
         ) ??
+        // No passed in ColorScheme, we create one with the effective
+        // override properties, plus FlexColorScheme ColorScheme defaults.
         ColorScheme(
           brightness: usedBrightness,
           primary: usedPrimary,
@@ -6681,7 +6754,7 @@ class FlexColorScheme with Diagnosticable {
               usedBrightness, colors.primary, effectiveSurfaceColor),
           shadow: Colors.black,
           outline: _outlineColor(usedBrightness, onColors.onBackground),
-          surfaceTint: usedPrimary,
+          surfaceTint: surfaceTint ?? usedPrimary,
         );
   }
 
@@ -6737,6 +6810,7 @@ class FlexColorScheme with Diagnosticable {
     Color? onSurface,
     Color? onBackground,
     Color? onError,
+    Color? surfaceTint,
     FlexTabBarStyle? tabBarStyle,
     double? appBarElevation,
     double? bottomAppBarElevation,
@@ -6779,6 +6853,7 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface ?? this.onSurface,
       onBackground: onBackground ?? this.onBackground,
       onError: onError ?? this.onError,
+      surfaceTint: surfaceTint ?? this.surfaceTint,
       tabBarStyle: tabBarStyle ?? this.tabBarStyle,
       appBarElevation: appBarElevation ?? this.appBarElevation,
       bottomAppBarElevation:
@@ -6831,6 +6906,7 @@ class FlexColorScheme with Diagnosticable {
         other.onSurface == onSurface &&
         other.onBackground == onBackground &&
         other.onError == onError &&
+        other.surfaceTint == surfaceTint &&
         other.tabBarStyle == tabBarStyle &&
         other.appBarElevation == appBarElevation &&
         other.bottomAppBarElevation == bottomAppBarElevation &&
@@ -6876,6 +6952,7 @@ class FlexColorScheme with Diagnosticable {
         onSurface,
         onBackground,
         onError,
+        surfaceTint,
         tabBarStyle,
         appBarElevation,
         bottomAppBarElevation,
@@ -6923,6 +7000,7 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('onSurface', onSurface));
     properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
+    properties.add(ColorProperty('surfaceTint', surfaceTint));
     properties.add(EnumProperty<FlexTabBarStyle>('tabBarStyle', tabBarStyle));
     properties
         .add(DiagnosticsProperty<double>('appBarElevation', appBarElevation));
@@ -7784,6 +7862,7 @@ class _Scheme {
     Color? onInverseSurface,
     Color? inversePrimary,
     Color? shadow,
+    Color? surfaceTint,
   }) {
     final _Scheme scheme;
     switch (brightness) {
@@ -7836,6 +7915,7 @@ class _Scheme {
       onInverseSurface: onInverseSurface ?? Color(scheme.inverseOnSurface),
       inversePrimary: inversePrimary ?? Color(scheme.inversePrimary),
       shadow: shadow ?? Color(scheme.shadow),
+      surfaceTint: surfaceTint ?? Color(scheme.primary),
       brightness: brightness,
     );
   }
