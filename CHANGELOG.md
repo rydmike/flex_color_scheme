@@ -46,13 +46,13 @@ All notable changes to the **FlexColorScheme** package are documented here.
   Flutter version 3.0.0. FlexColorscheme now marks it as **deprecated**. It will be 
   removed in a future FlexColorScheme release when Flutter SDK deprecates `ButtonThemeData`.
 
-**FIX**
+**M3 FIXES**
 
-* **Style fix**: For Floating Action Button background color, when opting in on 
+* **M3 Style fix**: For Floating Action Button background color, when opting in on 
   `ThemeData.useMaterail3` the M3 color `theme.colorScheme.primaryContainer` is used, 
   otherwise `theme.colorScheme.secondary` is used.
 
-* **NavigationBar M3 defaults support**: Default colors of `NavigationBar` when opting in on 
+* **NavigationBar M3 defaults fix**: Default colors of `NavigationBar` when opting in on 
   `useMaterial3` and 
   not using opinionated component themes, theme will match M3 default colors. The background color
   will follow M3 style also as default opinionated component theme when `useMaterial3` is true, as 
@@ -63,7 +63,14 @@ All notable changes to the **FlexColorScheme** package are documented here.
   on opinionated component themes, FCS uses its own custom opinionated default style. It can be
   modified to be the same as default M3 style too, as before.
 
-* **Style fix:** Default color of toggles (Switch, CheckBox and Radio) are now using 
+* **NavigationRail M3 defaults fix**: Default colors of `NavigationRail` when opting in on
+  `useMaterial3` and not using opinionated component themes, theme will match M3 default colors. 
+  If opinionated component themes are not used, FCS will use default M3 theme styles on 
+  `NavigationRail` when `useMaterial3` is true. If opting in
+  on opinionated component themes, FCS uses its own custom opinionated default style. It can be
+  modified to be the same as default M3 style too, just as before.
+
+* **Toggleable M3 Style fix:** Default color of toggles (Switch, CheckBox and Radio) are now using 
   `primary` color as default themed color when opting in on opinionated component themes or setting
   `ThemeData.useMaterail3` to true.
   The Switch, CheckBox and Radio themes then use a style that match the M3 color design. In it 
@@ -89,7 +96,11 @@ All notable changes to the **FlexColorScheme** package are documented here.
 
 * Themes Playground: Updated style default labels for the NavigationBar. The logic to display 
   default colors in different config modes (M2/M3/FCS/FCS+M2/FCS+M3) is quite involved, please 
-  report any issues.   
+  report any issues. 
+
+* Themes Playground: Updated style default labels for the NavigationRail. The logic to display
+  default colors in different config modes (M2/M3/FCS/FCS+M2/FCS+M3) is quite involved, please
+  report any issues.
 
 * Themes Playground: Added a complex workaround to avoid issue
   [#103864](https://github.com/flutter/flutter/issues/103864) in the Playground app. The workaround

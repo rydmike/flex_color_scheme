@@ -30,27 +30,71 @@ class NavigationRailSettings extends StatelessWidget {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    final String labelForDefaultIndicator = (!controller.useFlexColorScheme ||
-            (controller.useFlutterDefaults &&
-                controller.navRailIndicatorSchemeColor == null))
-        ? 'default (secondary)'
-        : 'default (primary)';
-    const String labelForDefaultSelectedItem = 'default (primary)';
+
+    // Logic for indicator color label default value,
+    // custom color selection overrides default label and value.
+    String indicatorColorLabel() {
+      // Use FCS component default, primary.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes) {
+        return 'default (primary)';
+      }
+      // Use M2 default color
+      if (!controller.useMaterial3) {
+        return 'default (primary)';
+      }
+      // All other cases will use M3 style.
+      return 'default (secondaryContainer)';
+    }
+
+    // Logic for selected item color label default value,
+    // custom color selection overrides default label and value.
+    String selectedItemColorLabel() {
+      // Use FCS component default, primary.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes) {
+        return 'default (primary)';
+      }
+      // Use M2 default color
+      if (!controller.useMaterial3) {
+        return 'default (primary)';
+      }
+      // All other cases will use M3 style.
+      return 'default (icon onSecondaryContainer, label onSurface)';
+    }
+
+    // const String labelForDefaultSelectedItem = 'default (primary)';
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
             controller.navRailSelectedSchemeColor == null &&
             controller.navRailUnselectedSchemeColor == null);
-    final String labelForDefaultUnelectedItem =
-        (!controller.useFlexColorScheme ||
-                !controller.useSubThemes ||
-                (controller.useFlutterDefaults &&
-                    controller.navRailSelectedSchemeColor == null &&
-                    controller.navRailUnselectedSchemeColor == null))
-            ? 'default (onSurface with opacity)'
-            : controller.navRailMuteUnselected && muteUnselectedEnabled
-                ? 'default (onSurface, blend & opacity)'
-                : 'default (onSurface)';
+
+    // Logic for unselected item color label default value,
+    // custom color selection overrides default label and value.
+    String unselectedItemColorLabel() {
+      // Use FCS component default, onSurface with muted label.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes &&
+          controller.navRailMuteUnselected &&
+          muteUnselectedEnabled) {
+        return 'default (onSurface, with blend & opacity)';
+      }
+      // Use FCS component default, onSurface.
+      if (!controller.useMaterial3 && controller.useFlutterDefaults) {
+        return 'default (onSurface, with opacity 64%)';
+      }
+      // Use M2 default, onSurface.
+      if (!controller.useMaterial3) {
+        return 'default (onSurface)';
+      }
+      // All other cases will use M3 style.
+      return 'default (icon onSurfaceVariant, label onSurface)';
+    }
+
     final bool navRailOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.navRailBackgroundSchemeColor == null &&
@@ -69,7 +113,7 @@ class NavigationRailSettings extends StatelessWidget {
     final double navRailElevation =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.navigationRailElevation
-            : 8;
+            : 0;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -162,8 +206,8 @@ class NavigationRailSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           title: const Text('Use selection indicator'),
-          subtitle: const Text('Also ON when ThemeData.useMaterial3 '
-              'is true, turn OFF sub-themes and try it'),
+          subtitle: const Text('On by default when useMaterial3 '
+              'is true, turn OFF component themes to see this'),
           value: controller.navRailUseIndicator &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -173,7 +217,7 @@ class NavigationRailSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
-          labelForDefault: labelForDefaultIndicator,
+          labelForDefault: indicatorColorLabel(),
           index: controller.navRailIndicatorSchemeColor?.index ?? -1,
           onChanged: controller.navRailUseIndicator &&
                   controller.useSubThemes &&
@@ -274,7 +318,7 @@ class NavigationRailSettings extends StatelessWidget {
                 title: const Text('Selected item color'),
                 subtitle:
                     const Text('Label and icon, but own properties in API'),
-                labelForDefault: labelForDefaultSelectedItem,
+                labelForDefault: selectedItemColorLabel(),
                 index: controller.navRailSelectedSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
@@ -292,7 +336,7 @@ class NavigationRailSettings extends StatelessWidget {
                 title: const Text('Unselected item color'),
                 subtitle:
                     const Text('Label and icon, but own properties in API'),
-                labelForDefault: labelForDefaultUnelectedItem,
+                labelForDefault: unselectedItemColorLabel(),
                 index: controller.navRailUnselectedSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
