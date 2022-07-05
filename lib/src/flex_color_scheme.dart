@@ -6300,7 +6300,7 @@ class FlexColorScheme with Diagnosticable {
               labelTextStyle: subTheme.navigationRailLabelTextStyle ??
                   (subTheme.useFlutterDefaults
                       ? null
-                      : effectiveTextTheme.bodyMedium),
+                      : effectiveTextTheme.labelMedium),
               selectedLabelSize: subTheme.navigationRailSelectedLabelSize,
               unselectedLabelSize: subTheme.navigationRailUnselectedLabelSize,
               selectedLabelSchemeColor:

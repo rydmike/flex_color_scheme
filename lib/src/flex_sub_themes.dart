@@ -2117,13 +2117,13 @@ class FlexSubThemes {
     /// The size of the text label on selected [NavigationRail] item.
     ///
     /// If defined, it overrides the font size on effective label TextStyle
-    /// on selected item, 11 is used as fallback if needed.
+    /// on selected item, 12 is used as fallback if needed.
     final double? selectedLabelSize,
 
     /// The size of the text label on unselected [NavigationRail] items.
     ///
     /// If defined, it overrides the font size on effective label TextStyle
-    /// on unselected items, 11 is used as fallback if needed.
+    /// on unselected items, 12 is used as fallback if needed.
     final double? unselectedLabelSize,
 
     /// Select which color from the theme's [ColorScheme] to use as base for
@@ -2375,8 +2375,8 @@ class FlexSubThemes {
     /// - background       background      surface          surface
     /// - indicator        primary op24%   secondary op24%  secondaryContainer
     /// - selected icon    primary         primary          onSecondaryContainer
-    /// - Selected label   primary         primary          onSurface
     /// - unselected icon  onSurface       onSurface op64%  onSurfaceVariant
+    /// - selected label   primary         primary          onSurface
     /// - unSelected label onSurface       onSurface op64%  onSurface
     /// - TextTheme        labelMedium     bodyText1        labelMedium
     /// ```
@@ -2425,7 +2425,7 @@ class FlexSubThemes {
     final TextStyle textStyle = labelTextStyle ?? const TextStyle();
 
     // Get effective text sizes.
-    final double labelSize = selectedLabelSize ?? textStyle.fontSize ?? 14;
+    final double labelSize = selectedLabelSize ?? textStyle.fontSize ?? 12;
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? labelSize;
 
@@ -2447,10 +2447,15 @@ class FlexSubThemes {
     final Color effectiveIndicatorColor = schemeColor(
             indicatorSchemeColor ??
                 (useFlutterDefaults
-                    ? SchemeColor.secondary
+                    ? useMaterial3
+                        ? SchemeColor.secondaryContainer
+                        : SchemeColor.secondary
                     : SchemeColor.primary),
             colorScheme)
-        .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
+        .withAlpha(indicatorAlpha ??
+            ((useMaterial3 && useFlutterDefaults)
+                ? 0xFF
+                : kNavigationBarIndicatorAlpha));
 
     // Effective usage value for indicator.
     final bool effectiveUseIndicator =
