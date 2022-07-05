@@ -16,6 +16,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
     this.subtitle,
     this.contentPadding,
     this.labelForDefault = 'default (primary)',
+    this.popupLabelDefault,
   });
   final int index;
   final ValueChanged<int>? onChanged;
@@ -23,6 +24,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
   final Widget? subtitle;
   final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
   final String labelForDefault;
+  final String? popupLabelDefault;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
               ),
               title: i >= SchemeColor.values.length - 2
                   // If we reached first deprecated color, make default label.
-                  ? Text(labelForDefault, style: txtStyle)
+                  ? Text(popupLabelDefault ?? labelForDefault, style: txtStyle)
                   : Text(SchemeColor.values[i].name, style: txtStyle),
             ),
           )

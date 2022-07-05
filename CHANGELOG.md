@@ -118,8 +118,8 @@ All notable changes to the **FlexColorScheme** package are documented here.
   the same issue the Playground app did, but the issue is a Flutter SDK issue that FlexColorScheme 
   cannot fix. Most likely 99% of apps will never run into this issue.
 
-* **TODO**: Add support in Themes Playground to customize `surfaceTint` color and hence also the 
-  used color for surface blends.
+* Added support in Themes Playground to customize `surfaceTint` color, and also use it as custom 
+  color for surface blends.
 
 ## v5.0.1 - April 29, 2022
 

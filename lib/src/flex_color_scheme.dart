@@ -2603,6 +2603,7 @@ class FlexColorScheme with Diagnosticable {
         tertiaryKey: seed.useTertiary ? effectiveColors.tertiary : null,
         // Use provided tones configuration or default one.
         tones: tones ?? const FlexTones.light(),
+        surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined.
@@ -2795,6 +2796,7 @@ class FlexColorScheme with Diagnosticable {
           // surfaceVariant and inverseSurface on purpose.
           surfaceVariant: effectiveSurfaceVariantColor,
           inverseSurface: effectiveInverseSurfaceColor,
+          surfaceTint: surfaceTint,
         ) ??
         // We had a colorScheme passed in, we use as passed in, but set
         // override values for props we have not handled via FCS direct
@@ -4294,6 +4296,7 @@ class FlexColorScheme with Diagnosticable {
         // defaults that can produce same results as Flutter SDK,
         // ColorScheme.fromSeed(color), when only primary color is used as key.
         tones: tones ?? const FlexTones.dark(),
+        surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined. The main colors to keep
@@ -4487,6 +4490,7 @@ class FlexColorScheme with Diagnosticable {
           // surfaceVariant and inverseSurface on purpose.
           surfaceVariant: effectiveSurfaceVariantColor,
           inverseSurface: effectiveInverseSurfaceColor,
+          surfaceTint: surfaceTint,
         ) ??
         // We had a colorScheme passed in, we use as passed in, but set
         // override values for props we have not handled via FCS direct

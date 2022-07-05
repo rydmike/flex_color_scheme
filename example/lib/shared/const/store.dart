@@ -788,6 +788,35 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultDialogBorderRadius = null;
 
+  // Custom surface tint color SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the surfaceTintLight color value.
+  static const String keySurfaceTintLight = 'surfaceTintLight';
+  // Default value for the surfaceTintLight color, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const Color? defaultSurfaceTintLight = null;
+
+  // Key used to read and save the surfaceTintLightSchemeColor value.
+  static const String keySurfaceTintLightSchemeColor =
+      'surfaceTintLightSchemeColor';
+  // Default value for the surfaceTintLightSchemeColor, also used to
+  // reset settings. We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSurfaceTintLightSchemeColor = null;
+
+  // Key used to read and save the surfaceTintDark color value.
+  static const String keySurfaceTintDark = 'surfaceTintDark';
+  // Default value for the surfaceTintDark color, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const Color? defaultSurfaceTintDark = null;
+
+  // Key used to read and save the surfaceTintDarkSchemeColor value.
+  static const String keySurfaceTintDarkSchemeColor =
+      'surfaceTintDarkSchemeColor';
+  // Default value for the surfaceTintDarkSchemeColor, also used to
+  // reset settings. We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSurfaceTintDarkSchemeColor = null;
+
   // Custom color SETTINGS.
   // ===========================================================================
 

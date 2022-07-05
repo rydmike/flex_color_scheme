@@ -1,8 +1,11 @@
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
+import '../../shared/color_picker_inkwell.dart';
+import '../../shared/color_scheme_popup_menu.dart';
 import 'surface_mode_buttons.dart';
 
 // Panel used to define how primary color is blended into surfaces and
@@ -53,7 +56,36 @@ class SurfaceBlends extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final ColorScheme colorScheme = theme.colorScheme;
+
+    // Default color is in use, make a light label to use in custom color.
+    final String defaultTintLightLabel =
+        controller.surfaceTintLight == null ? ' primary (default):' : ':';
+    // Current light tint color
+    final Color? previousTintLight = controller.surfaceTintLight;
+    final Color effectiveTintLight =
+        controller.surfaceTintLight ?? colorScheme.surfaceTint;
+    // Names for the light tint colors.
+    final String materialNameLight =
+        ColorTools.materialName(effectiveTintLight);
+    final String nameThatColorLight =
+        ColorTools.nameThatColor(effectiveTintLight);
+    final String spaceLight = materialNameLight == '' ? '' : ' ';
+    // Default color is in use, make a dark label to use in custom color.
+    final String defaultTintDarkLabel =
+        controller.surfaceTintDark == null ? ' primary (default)' : '';
+    // Current dark tint color.
+    final Color? previousTintDark = controller.surfaceTintDark;
+    final Color effectiveTintDark =
+        controller.surfaceTintDark ?? colorScheme.surfaceTint;
+    // Names for the dark tint colors.
+    final String materialNameDark = ColorTools.materialName(effectiveTintDark);
+    final String nameThatColorDark =
+        ColorTools.nameThatColor(effectiveTintDark);
+    final String spaceDark = materialNameDark == '' ? '' : ' ';
+    //
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -88,6 +120,45 @@ class SurfaceBlends extends StatelessWidget {
               ),
               const SizedBox(width: 16),
             ],
+          ),
+          const SizedBox(height: 8),
+          ListTile(
+            enabled: controller.surfaceTintLight != null,
+            title: const Text('Set light blend and tint color back to default'),
+            subtitle: const Text('Sets custom blend and tint color back '
+                'to primary color'),
+            trailing: ElevatedButton(
+              onPressed: controller.surfaceTintLight != null
+                  ? () {
+                      controller.setSurfaceTintLight(null);
+                    }
+                  : null,
+              child: const Text('Default'),
+            ),
+            onTap: () {
+              controller.setSurfaceTintLight(null);
+            },
+          ),
+          ColorPickerInkWell(
+            color: controller.surfaceTintLight ?? colorScheme.primary,
+            onChanged: controller.setSurfaceTintLight,
+            recentColors: controller.recentColors,
+            onRecentColorsChanged: controller.setRecentColors,
+            wasCancelled: (bool cancelled) {
+              if (cancelled) {
+                controller.setSurfaceTintLight(previousTintLight);
+              }
+            },
+            enabled: true,
+            child: ListTile(
+              title: const Text('Light theme blend and surface tint color'),
+              subtitle: Text('Color$defaultTintLightLabel '
+                  '$nameThatColorLight $materialNameLight$spaceLight'
+                  '#${effectiveTintLight.hexCode}'),
+              trailing: ColorSchemeBox(
+                color: controller.surfaceTintLight ?? colorScheme.primary,
+              ),
+            ),
           ),
           const ListTile(
             title: Text('Light theme blend level'),
@@ -212,6 +283,45 @@ class SurfaceBlends extends StatelessWidget {
               ),
               const SizedBox(width: 16),
             ],
+          ),
+          const SizedBox(height: 8),
+          ListTile(
+            enabled: controller.surfaceTintDark != null,
+            title: const Text('Set dark blend and tint color back to default'),
+            subtitle: const Text('Sets custom blend and tint color back '
+                'to primary color'),
+            trailing: ElevatedButton(
+              onPressed: controller.surfaceTintDark != null
+                  ? () {
+                      controller.setSurfaceTintDark(null);
+                    }
+                  : null,
+              child: const Text('Default'),
+            ),
+            onTap: () {
+              controller.setSurfaceTintDark(null);
+            },
+          ),
+          ColorPickerInkWell(
+            color: controller.surfaceTintDark ?? colorScheme.primary,
+            onChanged: controller.setSurfaceTintDark,
+            recentColors: controller.recentColors,
+            onRecentColorsChanged: controller.setRecentColors,
+            wasCancelled: (bool cancelled) {
+              if (cancelled) {
+                controller.setSurfaceTintDark(previousTintDark);
+              }
+            },
+            enabled: true,
+            child: ListTile(
+              title: const Text('Dark theme blend and surface tint color'),
+              subtitle: Text('Color$defaultTintDarkLabel '
+                  '$nameThatColorDark $materialNameDark$spaceDark'
+                  '#${effectiveTintDark.hexCode}'),
+              trailing: ColorSchemeBox(
+                color: controller.surfaceTintDark ?? colorScheme.primary,
+              ),
+            ),
           ),
           const ListTile(
             title: Text('Dark theme blend level'),

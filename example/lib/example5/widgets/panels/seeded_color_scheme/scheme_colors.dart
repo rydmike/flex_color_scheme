@@ -1049,6 +1049,29 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const Divider(height: 1, thickness: 1),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.surfaceTint);
+                        tc.setHoverTonalPalette(TonalPalettes.primary);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.surfaceTint,
+                        child: ColorNameValue(
+                          color: colorScheme.surfaceTint,
+                          textColor: _onColor(colorScheme.surfaceTint),
+                          label: 'surfaceTint',
+                          tone: tones.primaryTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
