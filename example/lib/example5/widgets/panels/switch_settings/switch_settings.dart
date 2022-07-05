@@ -93,6 +93,7 @@ class SwitchesSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: RadioShowcase(),
         ),
+        const SizedBox(height: 8),
       ],
     );
   }
