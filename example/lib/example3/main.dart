@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -174,6 +175,11 @@ class DemoApp extends StatelessWidget {
             // not as large as on hand held devices.
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
+            // Use predefined M3 typography while this issue is in effect:
+            // https://github.com/flutter/flutter/issues/103864
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
           ),
           // We make an equivalent definition for the dark theme, but using
           // FlexThemeData.dark() and the dark FlexSchemeColors instead.
@@ -199,6 +205,11 @@ class DemoApp extends StatelessWidget {
             ),
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
+            // Use predefined M3 typography while this issue is in effect:
+            // https://github.com/flutter/flutter/issues/103864
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
           ),
           // Use the dark or light theme, based on controller setting.
           themeMode: themeController.themeMode,

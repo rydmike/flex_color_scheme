@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../shared/const/app_color.dart';
@@ -166,6 +167,11 @@ class DemoApp extends StatelessWidget {
             // from a single static source, so we can change it easily there.
             visualDensity: AppData.visualDensity,
             fontFamily: AppData.font,
+            // Use predefined M3 typography while this issue is in effect:
+            // https://github.com/flutter/flutter/issues/103864
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
           ),
           // We do the exact same definition for the dark theme, but using
           // FlexThemeData.dark() and the dark FlexSchemeColors in our
@@ -191,6 +197,11 @@ class DemoApp extends StatelessWidget {
                 : null,
             visualDensity: AppData.visualDensity,
             fontFamily: AppData.font,
+            // Use predefined M3 typography while this issue is in effect:
+            // https://github.com/flutter/flutter/issues/103864
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
           ),
           // Use the dark or light theme based on controller setting.
           themeMode: themeController.themeMode,

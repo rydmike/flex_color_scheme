@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../shared/utils/app_scroll_behavior.dart';
@@ -42,12 +43,22 @@ class _DemoAppState extends State<DemoApp> {
         scheme: usedScheme,
         // Use very subtly themed app bar elevation in light mode.
         appBarElevation: 0.5,
+        // Use predefined M3 typography while this issue is in effect:
+        // https://github.com/flutter/flutter/issues/103864
+        typography: Typography.material2021(
+          platform: defaultTargetPlatform,
+        ),
       ),
       // Same definition for the dark theme, but using FlexThemeData.dark().
       darkTheme: FlexThemeData.dark(
         scheme: usedScheme,
         // Use a bit more themed elevated app bar in dark mode.
         appBarElevation: 2,
+        // Use predefined M3 typography while this issue is in effect:
+        // https://github.com/flutter/flutter/issues/103864
+        typography: Typography.material2021(
+          platform: defaultTargetPlatform,
+        ),
       ),
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
