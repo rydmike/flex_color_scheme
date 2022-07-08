@@ -1,9 +1,10 @@
 name: flex_color_scheme
 description: A Flutter package to use and make beautiful Material design based themes.
 version: 5.1.0
+homepage: https://docs.flexcolorscheme.com
 repository: https://github.com/rydmike/flex_color_scheme
 issue_tracker: https://github.com/rydmike/flex_color_scheme/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc
-documentation: https://docs.flexcolorscheme.com/
+documentation: https://docs.flexcolorscheme.com
 environment:
   sdk: '>=2.17.0 <3.0.0'
   flutter: '>=3.0.0'
