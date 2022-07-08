@@ -674,21 +674,21 @@ void main() {
             hoverColor: colorScheme.primary.withAlpha(0x0D),
             focusColor: colorScheme.primary.withAlpha(0x26),
             focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary,
                 width: 2,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary.withAlpha(0xA7),
                 width: 1.5,
               ),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
@@ -697,14 +697,14 @@ void main() {
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error,
                 width: 2,
               ),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
                 width: 1.5,
@@ -749,21 +749,21 @@ void main() {
             hoverColor: colorScheme.primary.withAlpha(0x0D),
             focusColor: colorScheme.primary.withAlpha(0x26),
             focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary,
                 width: 2,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.38),
                 width: 1.5,
               ),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
@@ -772,14 +772,14 @@ void main() {
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error,
                 width: 2,
               ),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
                 width: 1.5,
@@ -822,21 +822,21 @@ void main() {
             hoverColor: colorScheme.primary.withAlpha(0x0D),
             focusColor: colorScheme.primary.withAlpha(0x26),
             focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary,
                 width: 2,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary.withAlpha(0xA7),
                 width: 1.5,
               ),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
@@ -845,14 +845,14 @@ void main() {
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error,
                 width: 2,
               ),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
                 width: 1.5,
@@ -897,21 +897,21 @@ void main() {
             hoverColor: colorScheme.primary.withAlpha(0x0D),
             focusColor: colorScheme.primary.withAlpha(0x26),
             focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary,
                 width: 2,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.38),
                 width: 1.5,
               ),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
@@ -920,14 +920,14 @@ void main() {
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error,
                 width: 2,
               ),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
                 width: 1.5,
