@@ -2,6 +2,10 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## v5.1.1 - July 8, 2022
+
+* Remove duplicated and old 5.1.0 changelog entry from July 5, 2022.
+
 ## v5.1.0 - July 8, 2022
 
 * Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
@@ -82,7 +86,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 * **Toggleable M3 style change:** Default color of toggles (Switch, CheckBox and Radio) are now 
   using `primary` color as default themed color when opting in on opinionated component themes or
-  setting `ThemeData.useMaterail3` to true. The Switch, CheckBox and Radio themes then use a style
+  setting `ThemeData.useMaterial3` to true. The Switch, CheckBox and Radio themes then use a style
   that match the M3 color design intent. In it, 
   switches and toggles are mostly primary color based. In M3 color design, the secondary color is a 
   poor choice for switches and toggles, and it is therefore not used as their default color. It 
@@ -171,125 +175,6 @@ theming in general.
 * This regression in master channel impacts AppBar icon colors when using Material 3 
   [#107305](https://github.com/flutter/flutter/issues/107305). It has not yet landed in stable 
   channel Flutter 3.0.4, but if you use master channel it is something to be aware of.
-
-## v5.1.0 - July 5, 2022
-
-* Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
-  example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0
-
-**NEW**
-
-* **Added** full support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. It is set to 
-  primary color by default, as Flutter and Material 3 does. If a custom `surfaceTint` color is 
-  provided, it is also used as the blend color, instead of `primary` color for surface blend.
-
-* **Added** pass through API for using Flutter 3.0.0 theme extensions directly via FlexColorScheme 
-  API. It was added to avoid having to add theme extensions with a CopyWith on FlexColorScheme 
-  produced ThemeData. With the `FlexColorScheme.extensions` and `FlexThemeData.extensions` 
-  properties you can add custom theme extensions directly via them as well.
-
-
-**DEPRECATED**
-
-* **Deprecated:** `FlexColorScheme.m3TextTheme`. The custom M3 text theme is no longer needed after 
-  Flutter 3.0.0 release, that includes the new M3 Typography in addition to its earlier released
-  `TextTheme`. You can opt in on using the new M3 style TextTheme as before by setting 
-  `FlexColorScheme.subThemesData.useTextTheme` to true **or** by setting 
-  `FlexColorScheme.useMaterial3` to true. Using either does however come with this known issue:
-  [#103864](https://github.com/flutter/flutter/issues/103864), where dynamically switching 
-  Typography, e.g. from 2014 or 2018, to M3 2021 Typography, triggers the mentioned assert in issue
-  [#103864](https://github.com/flutter/flutter/issues/103864). This issue has always existed in
-  Flutter SDK ThemeData when dynamically changing between different Typography. 
-  FlexColorScheme avoided triggering it before by only using Typography 2018, also when opting in 
-  on M3 TextTheme, that before used 2018 based Typography to make a custom M3 TextTheme. 
-  Avoiding this issue is no longer possible when opting in on M3 that now correctly uses its own 
-  and different Typography from M2, but exposes this issue if you dynamically change ThemeData from
-  one to another Typography.
-  To avoid this Flutter SDK issue, use the same Typography for all your themes in your app and don't
-  dynamically switch theme between ThemeData objects that uses different Typography in your 
-  application. The use cases for doing this are also very few.  
-
-* **Deprecated:** `FlexSubThemes.buttonTheme` that creates an opinionated `ButtonThemeData`.
-  The ButtonThemeData is marked as obsolete in Flutter SDK, but not yet deprecated in 
-  Flutter version 3.0.0. FlexColorscheme now marks it as **deprecated**. It will be 
-  removed in a future FlexColorScheme release when Flutter SDK deprecates `ButtonThemeData`.
-
-**M3 FIXES**
-
-* **M3 Style fix**: For Floating Action Button background color, when opting in on 
-  `ThemeData.useMaterail3` the M3 color `theme.colorScheme.primaryContainer` is used, 
-  otherwise `theme.colorScheme.secondary` is used.
-
-* **NavigationBar M3 defaults fix**: Default colors of `NavigationBar` when opting in on 
-  `useMaterial3` and 
-  not using opinionated component themes, theme will match M3 default colors. The background color
-  will follow M3 style also as default opinionated component theme when `useMaterial3` is true, as 
-  this style is difficult to replicate with a single color otherwise. The difference is subtle for 
-  FCS surface tinted background color. You can still set it to `background` color to replicate past
-  FCS default color when sub-themes were enabled. If opinionated component themes are not used, FCS
-  will use default M3 theme styles on `NavigationBar` when `useMaterial3` is true. If opting in
-  on opinionated component themes, FCS uses its own custom opinionated default style. It can be
-  modified to be the same as default M3 style too, as before. The fix includes a default font
-  size change for FCS opinionated styled navigation bar from 11dp to 12dp to harmonize it with 
-  its M3 style.
-
-* **NavigationRail M3 defaults fix**: Default colors of `NavigationRail` when opting in on
-  `useMaterial3` and not using opinionated component themes, theme will match M3 default colors. 
-  If opinionated component themes are not used, FCS will use default M3 theme styles on 
-  `NavigationRail` when `useMaterial3` is true. If opting in
-  on opinionated component themes, FCS uses its own custom opinionated default style. It can be
-  modified to be the same as default M3 style too, just as before. The fix includes a default font
-  size change for FCS opinionated styled rail from 14dp to 12dp to harmonize it with its M3 style.
-
-* **Toggleable M3 Style fix:** Default color of toggles (Switch, CheckBox and Radio) are now using 
-  `primary` color as default themed color when opting in on opinionated component themes or setting
-  `ThemeData.useMaterail3` to true.
-  The Switch, CheckBox and Radio themes then use a style that match the M3 color design. In it 
-  switches and toggles are mostly primary color based. In M3 color design, the secondary color is a 
-  poor choice for switches and toggles, and it is therefore not used as default color, as it 
-  does not look nice with M3 based ColorSchemes, created e.g. using M3 color seeding. If you use a
-  custom M3 color design where secondary color is still prominent, you can of course still use it.
-
-* **Fixed lint:** "Avoid using private types in public APIs". See tweet 
-  [discussion](https://twitter.com/RydMike/status/1533788260320923649) about why and when you 
-  might run into this lint being triggered by older Stateful Widgets. The lint warning was
-  addressed in the package and examples.
-
-**EXAMPLES**
-
-* Added a Theme Extensions usage demo to the default example, i.e. the "Hot Reload Playground".
-
-* Themes Playground: Updated style defaults labels for Switches, CheckBoc and Radio.
-
-* Themes Playground: To the top row color theme selector and enable FlexColorScheme and sub-themes 
-  switches, added the "Use Material 3" toggle. Previously this toggle was only available on the
-  introduction page/panel.
-
-* Themes Playground: Updated style default labels for the NavigationBar. The logic to display 
-  default colors in different config modes (M2/M3/FCS/FCS+M2/FCS+M3) is quite involved, please 
-  report any issues. 
-
-* Themes Playground: Updated style default labels for the NavigationRail. The logic to display
-  default colors in different config modes (M2/M3/FCS/FCS+M2/FCS+M3) is quite involved, please
-  report any issues.
-
-* Themes Playground: Added a complex workaround to avoid issue
-  [#103864](https://github.com/flutter/flutter/issues/103864) in the Playground app. The workaround
-  is done by always using 2021 Typography but simulating 2018 Typography in the app when by using
-  an EnglishLike 2018 TextTheme, but with the 2021 Typography, to simulate how an app looks
-  that uses other than 2021 Typography. The Playground App actually always stays in 2021
-  Typography, but looks like it switches it. Switching Typography dynamically in ThemeData is broken
-  due to above issue, and if it is done and error ignore the app becomes unstable eventually.
-  This workaround is needed because the Playground app has toggles that may switch Typography 
-  frequently, and it will eventually crash. With this workaround it never switches Typography, it 
-  just looks like it does, but app stays in 2021 Typography all the time. The output code that 
-  creates the configured THemeData uses the actual configured effective Typography mode. This is 
-  fine, since that app will likely never switch used Typography. If it does, it will of course face
-  the same issue the Playground app did, but the issue is a Flutter SDK issue that FlexColorScheme 
-  cannot fix. Most likely 99% of apps will never run into this issue.
-
-* Added support in Themes Playground to customize `surfaceTint` color, and also use it as custom 
-  color for surface blends.
 
 ## v5.0.1 - April 29, 2022
 
