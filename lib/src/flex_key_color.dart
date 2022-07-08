@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
@@ -107,15 +105,15 @@ class FlexKeyColors with Diagnosticable {
   /// FlexColorSchemes, while still passing in a configuration object with
   /// other properties set, that have no effect if [useKeyColors] is false.
   const FlexKeyColors({
-    final this.useKeyColors = true,
-    final this.useSecondary = false,
-    final this.useTertiary = false,
-    final this.keepPrimary = false,
-    final this.keepSecondary = false,
-    final this.keepTertiary = false,
-    final this.keepPrimaryContainer = false,
-    final this.keepSecondaryContainer = false,
-    final this.keepTertiaryContainer = false,
+    this.useKeyColors = true,
+    this.useSecondary = false,
+    this.useTertiary = false,
+    this.keepPrimary = false,
+    this.keepSecondary = false,
+    this.keepTertiary = false,
+    this.keepPrimaryContainer = false,
+    this.keepSecondaryContainer = false,
+    this.keepTertiaryContainer = false,
   });
 
   /// Turn on using Material 3 key color based [TonalPalette] colors for the
@@ -335,7 +333,7 @@ class FlexKeyColors with Diagnosticable {
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode => hashValues(
+  int get hashCode => Object.hash(
         useKeyColors,
         useSecondary,
         useTertiary,

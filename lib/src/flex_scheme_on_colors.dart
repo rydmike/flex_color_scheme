@@ -303,7 +303,7 @@ class FlexSchemeOnColors with Diagnosticable {
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode => hashValues(
+  int get hashCode => Object.hash(
         onPrimary,
         onPrimaryContainer,
         onSecondary,

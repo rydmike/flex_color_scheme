@@ -182,11 +182,6 @@ void main() {
     test('FTO1.12: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
     });
-    // This happens to always equal now in tests, if it start failing, test
-    // 14 is actually enough.
-    test('FTO1.13: Test hashCode exact value.', () {
-      expect(m1.hashCode, 279578120);
-    });
     test('FTO1.14: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));
     });

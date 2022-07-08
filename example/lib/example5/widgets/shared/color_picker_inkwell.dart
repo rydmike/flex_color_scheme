@@ -225,13 +225,6 @@ class ColorPickerInkWell extends StatelessWidget {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
 
     return InkWell(
-      // TODO(rydmike): Remove this commented customized InkWell style.
-      // We want a bit more pronounced hover color for this case than normally.
-      // hoverColor: isLight ? const Color(0x40BCBCBC):const Color(0x30FFFFFF),
-      // splashColor: isLight ? const Color(0x40BCBCBC):const Color(0x30FFFFFF),
-      // focusColor: isLight ? const Color(0x40BCBCBC):const Color(0x30FFFFFF),
-      // highlightColor:
-      //     isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
       onHover: (bool value) {
         onHover?.call(value);
       },

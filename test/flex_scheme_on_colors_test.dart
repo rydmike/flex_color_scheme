@@ -359,12 +359,7 @@ void main() {
     test('FSOC1.08a: Test hashCode has value.', () {
       expect(m7a.hashCode, isNotNull);
     });
-    // This happens to always equal now in tests, if it start failing, test
-    // 08c is actually enough.
-    test('FSOC1.08b: Test hashCode exact value.', () {
-      expect(m7a.hashCode, 391411255);
-    });
-    test('FSOC1.08c: Test hashCode copyWith has same exact value.', () {
+    test('FSOC1.08b Test hashCode copyWith has same exact value.', () {
       expect(m7a.hashCode, equals(m7a.copyWith().hashCode));
     });
   });
