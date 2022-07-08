@@ -14,7 +14,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   color is provided, it is also used as the blend color, instead of `primary` color, for 
   FlexColorScheme's surface blend feature.
 
-* **Added** pass through API for using Flutter 3.0.0 theme extensions directly via FlexColorScheme 
+* **Added** API for using Flutter 3.0.0 theme extensions directly via FlexColorScheme 
   API. It was added as a convenience feature in order to avoid having to add theme extensions with a
  `copyWith` on FlexColorScheme produced ThemeData. With the `FlexColorScheme.extensions` and
  `FlexThemeData.extensions` properties you can add custom theme extensions directly.
@@ -52,8 +52,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   otherwise `theme.colorScheme.secondary` is used.
 
 * **Input Decorator default change**: The `TextField` and its `InputDecorator` border radius 
-  default value was changed from 20dp to 16dp when using opinionated component themes.
-  If opting in on Material 3, the default value for M3 design is used, which is only 4dp.
+  default value was changed from 20dp to 16 dp when using opinionated component themes.
+  If opting in on Material 3, the default value for M3 design is used, which is only 4 dp.
   See specification https://m3.material.io/components/text-fields/specs.
   Flutter 3.0.x does not yet implement the new M3 TextField style, but via this change when
   opting in on M3, FlexColorScheme offers an early approximation of it. 
@@ -349,7 +349,7 @@ maybe even 7.0 if so requested by users.
   * **Migration:** Use `surfaceMode` and `blendLevel` instead, it has more blend
     styles and finer granularity than the removed `surfaceStyle`.
 
-```dart
+```
 theme: FlexThemeData.light(
   scheme: FlexScheme.flutterDash,
   surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
