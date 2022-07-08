@@ -34,8 +34,8 @@ class AppData {
   // build numbers.
   static const String versionMajor = '5';
   static const String versionBuild = '01';
-  static const String version = '$versionMajor.1.0 Build-$versionBuild';
-  static const String packageVersion = '5.1.0';
+  static const String version = '$versionMajor.1.1 Build-$versionBuild';
+  static const String packageVersion = '5.1.1';
   static const String flutterVersion = 'stable v3.0.4';
   static const String copyright = '© 2020, 2021, 2022';
   static const String author = 'Mike Rydstrom';
