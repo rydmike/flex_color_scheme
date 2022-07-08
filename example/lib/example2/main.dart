@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -151,6 +152,11 @@ class DemoApp extends StatelessWidget {
               // textTheme and primaryTextTheme in FlexThemeData. This is
               // just how you would use it with ThemeData too.
               fontFamily: GoogleFonts.notoSans().fontFamily,
+              // Use predefined M3 typography while this issue is in effect:
+              // https://github.com/flutter/flutter/issues/103864
+              typography: Typography.material2021(
+                platform: defaultTargetPlatform,
+              ),
             ),
             // Same setup for the dark theme, but using FlexThemeData.dark().
             darkTheme: FlexThemeData.dark(
@@ -161,6 +167,11 @@ class DemoApp extends StatelessWidget {
               appBarElevation: 1,
               visualDensity: VisualDensity.standard,
               fontFamily: GoogleFonts.notoSans().fontFamily,
+              // Use predefined M3 typography while this issue is in effect:
+              // https://github.com/flutter/flutter/issues/103864
+              typography: Typography.material2021(
+                platform: defaultTargetPlatform,
+              ),
             ),
             // Use the dark or light theme, based on theme controller setting.
             themeMode: themeController.themeMode,

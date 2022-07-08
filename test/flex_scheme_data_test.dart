@@ -253,12 +253,7 @@ void main() {
     test('FSD1.13a: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
     });
-    // This happens to always equal now in tests, if it start failing, test
-    // 13c is actually enough.
-    test('FSD1.13b: Test hashCode exact value.', () {
-      expect(m1.hashCode, 406187442);
-    });
-    test('FSD1.13c: Test hashCode copyWith has same exact value.', () {
+    test('FSD1.13b: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));
     });
   });

@@ -5711,7 +5711,7 @@ class FlexColorScheme with Diagnosticable {
     // - If neither was given we use the surface color in dark mode and
     //   primary color in light mode, the same logic that Flutter SDK
     //   ThemeData.from factory sets the AppBar background color to.
-    final Color effectiveAppBarColor = appBarBackground ??
+    final Color effectiveAppBarBackgroundColor = appBarBackground ??
         (useSubThemes && subTheme.appBarBackgroundSchemeColor != null
             ? FlexSubThemes.schemeColor(
                 subTheme.appBarBackgroundSchemeColor!, colorScheme)
@@ -5719,7 +5719,7 @@ class FlexColorScheme with Diagnosticable {
                 ? colorScheme.surface
                 : colorScheme.primary);
     final Brightness appBarBrightness =
-        ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
+        ThemeData.estimateBrightnessForColor(effectiveAppBarBackgroundColor);
     Color appBarForeground =
         appBarBrightness == Brightness.dark ? Colors.white : Colors.black;
     // Icons are slightly black  transparent in light mode! This per SDK.
@@ -5729,10 +5729,10 @@ class FlexColorScheme with Diagnosticable {
     if (useSubThemes && subTheme.blendTextTheme) {
       if (appBarBrightness == Brightness.dark) {
         appBarForeground =
-            FlexColor.lightSurface.blend(effectiveAppBarColor, 12);
+            FlexColor.lightSurface.blend(effectiveAppBarBackgroundColor, 12);
       } else {
         appBarForeground =
-            FlexColor.darkSurface.blend(effectiveAppBarColor, 12);
+            FlexColor.darkSurface.blend(effectiveAppBarBackgroundColor, 12);
       }
       appBarIconColor = appBarForeground;
     }
@@ -5751,7 +5751,7 @@ class FlexColorScheme with Diagnosticable {
               ? Colors.black87
               : Colors.white;
         case FlexTabBarStyle.universal:
-          // TODO(rydmike): Need better FlexTabBarStyle.universal algo some day.
+          // TODO(rydmike): Chore: Better FlexTabBarStyle.universal algo.
           return isDark
               ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
               : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
@@ -5773,9 +5773,9 @@ class FlexColorScheme with Diagnosticable {
               : colorScheme.onSurface.withAlpha(0x99); // 60%
         case FlexTabBarStyle.forAppBar:
           return (appBarBrightness == Brightness.light &&
-                  (effectiveAppBarColor == Colors.white ||
-                      effectiveAppBarColor == colorScheme.surface ||
-                      effectiveAppBarColor == colorScheme.background))
+                  (effectiveAppBarBackgroundColor == Colors.white ||
+                      effectiveAppBarBackgroundColor == colorScheme.surface ||
+                      effectiveAppBarBackgroundColor == colorScheme.background))
               ? colorScheme.onSurface.withAlpha(0x99) // 60%
               : selectedTabColor().withAlpha(0xB2); // 70% alpha
         case FlexTabBarStyle.universal:
@@ -5837,7 +5837,9 @@ class FlexColorScheme with Diagnosticable {
             baseSchemeColor: subTheme.inputDecoratorSchemeColor,
             radius: subTheme.inputDecoratorRadius ??
                 subTheme.defaultRadius ??
-                kButtonRadius,
+                (useMaterial3
+                    ? kInputDecoratorM3Radius
+                    : kInputDecoratorRadius),
             borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor,
@@ -6047,7 +6049,7 @@ class FlexColorScheme with Diagnosticable {
       // The FlexColorScheme implementation below has been changed to
       // use these new AppBarTheme features in version 2.0.0.
       appBarTheme: AppBarTheme(
-        backgroundColor: effectiveAppBarColor,
+        backgroundColor: effectiveAppBarBackgroundColor,
         foregroundColor: appBarForeground,
         iconTheme: IconThemeData(color: appBarIconColor),
         actionsIconTheme: IconThemeData(color: appBarIconColor),
@@ -6140,7 +6142,7 @@ class FlexColorScheme with Diagnosticable {
                       subTheme.tabBarItemSchemeColor!, colorScheme)
                   .withAlpha(0x99) // 60%,
           ),
-      // Set colors for for icons in opted in sub themes.
+      // Set colors for icons in opted in sub themes.
       iconTheme: useSubThemes
           ? IconThemeData(color: effectiveTextTheme.headline6!.color)
           : null,
@@ -6930,7 +6932,7 @@ class FlexColorScheme with Diagnosticable {
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode => hashList(<Object?>[
+  int get hashCode => Object.hashAll(<Object?>[
         colorScheme,
         brightness,
         primary,
@@ -7465,7 +7467,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode => hashValues(
+  int get hashCode => Object.hash(
         surface,
         surfaceVariant,
         inverseSurface,

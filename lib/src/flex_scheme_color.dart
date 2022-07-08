@@ -36,15 +36,15 @@ class FlexSchemeColor with Diagnosticable {
   /// The appBarColor and error colors are not required, if they
   /// are null, they will be provided by defaults in theme creation later.
   const FlexSchemeColor({
-    required final this.primary,
+    required this.primary,
     Color? primaryContainer,
-    required final this.secondary,
+    required this.secondary,
     Color? secondaryContainer,
     Color? tertiary,
     Color? tertiaryContainer,
-    final this.appBarColor,
-    final this.error,
-    final this.errorContainer,
+    this.appBarColor,
+    this.error,
+    this.errorContainer,
     @Deprecated('Use primaryContainer instead. '
         'In FlexSchemeColor old primaryContainer built-in colors were moved to '
         'the primaryContainer color since their design fitted that role best. '
@@ -619,7 +619,7 @@ class FlexSchemeColor with Diagnosticable {
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode => hashValues(
+  int get hashCode => Object.hash(
         primary,
         primaryContainer,
         secondary,

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 
 import 'flex_scheme_color.dart';
@@ -27,10 +25,10 @@ class FlexSchemeData with Diagnosticable {
   ///
   /// Contains [name], [description] plus [light] and [dark] scheme colors.
   const FlexSchemeData({
-    required final this.name,
-    required final this.description,
-    required final this.light,
-    required final this.dark,
+    required this.name,
+    required this.description,
+    required this.light,
+    required this.dark,
   });
 
   /// A short name for the [FlexSchemeData] based color scheme.
@@ -74,7 +72,7 @@ class FlexSchemeData with Diagnosticable {
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode => hashValues(
+  int get hashCode => Object.hash(
         name,
         description,
         light,

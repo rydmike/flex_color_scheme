@@ -636,6 +636,11 @@ class _DemoAppState extends State<DemoApp> {
         subThemesData: _useSubThemes ? _subThemesData : null,
         visualDensity: _visualDensity,
         platform: _platform,
+        // Use predefined M3 typography while this issue is in effect:
+        // https://github.com/flutter/flutter/issues/103864
+        typography: Typography.material2021(
+          platform: _platform,
+        ),
         // Add all our custom theme extensions, in this case we only have one.
         extensions: <ThemeExtension<dynamic>>{
           lightBrandTheme,
@@ -709,6 +714,11 @@ class _DemoAppState extends State<DemoApp> {
         subThemesData: _useSubThemes ? _subThemesData : null,
         visualDensity: _visualDensity,
         platform: _platform,
+        // Use predefined M3 typography while this issue is in effect:
+        // https://github.com/flutter/flutter/issues/103864
+        typography: Typography.material2021(
+          platform: _platform,
+        ),
         // Add all our custom theme extensions, in this case we only have one.
         extensions: <ThemeExtension<dynamic>>{
           darkBrandTheme,

@@ -149,12 +149,7 @@ void main() {
     test('FKCS1.12: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);
     });
-    // This happens to always equal now in tests, if it start failing, test
-    // 14 is actually enough.
-    test('FKCS1.13: Test hashCode exact value.', () {
-      expect(m1.hashCode, 385085668);
-    });
-    test('FKCS1.14: Test hashCode copyWith has same exact value.', () {
+    test('FKCS1.13: Test hashCode copyWith has same exact value.', () {
       expect(m1.hashCode, equals(m1.copyWith().hashCode));
     });
   });

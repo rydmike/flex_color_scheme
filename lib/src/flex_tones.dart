@@ -676,7 +676,7 @@ class FlexTones with Diagnosticable {
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode => hashList(<Object?>[
+  int get hashCode => Object.hashAll(<Object?>[
         primaryTone,
         onPrimaryTone,
         primaryContainerTone,

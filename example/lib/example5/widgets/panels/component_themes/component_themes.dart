@@ -62,7 +62,7 @@ class ComponentThemes extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Global border radius on components'),
-          subtitle: const Text('Default setting uses Material 3 design '
+          subtitle: const Text('Default setting uses mostly Material 3 design '
               'values, where radius spec varies per component. '
               'Material 2 design uses 4 on all components. '
               'If you set a value, all components will use it. '

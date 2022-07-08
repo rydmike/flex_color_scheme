@@ -16,7 +16,9 @@ class TextFieldSettings extends StatelessWidget {
     final String decoratorRadiusDefaultLabel =
         controller.inputDecoratorBorderRadius == null &&
                 controller.defaultRadius == null
-            ? 'default 20'
+            ? controller.useMaterial3
+                ? 'default 4'
+                : 'default 16'
             : controller.inputDecoratorBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
