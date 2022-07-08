@@ -74,6 +74,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
     this.borderRadius = 4,
     this.padding,
     this.hoverColor,
+
   })  : assert(selectedElevation >= 0.0, 'Selected elevation must be >= 0.0'),
         assert(
             unselectedElevation >= 0.0, 'Unselected elevation must be >= 0.0');
