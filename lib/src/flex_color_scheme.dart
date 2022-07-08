@@ -5837,7 +5837,9 @@ class FlexColorScheme with Diagnosticable {
             baseSchemeColor: subTheme.inputDecoratorSchemeColor,
             radius: subTheme.inputDecoratorRadius ??
                 subTheme.defaultRadius ??
-                kButtonRadius,
+                (useMaterial3
+                    ? kInputDecoratorM3Radius
+                    : kInputDecoratorRadius),
             borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor,

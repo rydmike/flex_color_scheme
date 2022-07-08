@@ -161,16 +161,18 @@ const double kChipRadius = 8;
 /// https://m3.material.io/components/buttons/specs
 const double kButtonRadius = 20;
 
-/// Default border radius on input decoration.
+/// Default border radius on input decoration when using
+/// opinionated component themes.
 ///
-/// Will follows Material M3 guide.
-/// https://m3.material.io/components/all-buttons
+/// Using a more rounded design 16dp, instead of 4dp which is M3's default.
+/// https://m3.material.io/components/text-fields/specs
+const double kInputDecoratorRadius = 16;
+
+/// Default border radius on input decoration when opting in on M3.
 ///
-/// Was not specified in M3 guide what it should be.
-/// Will be adjusted when known. Now set to same as button radius (20dp), so
-/// it matches them. The M3 design intent may also be that it should
-/// be same as FAB and Drawer, ie 16dp.
-const double kInputDecoratorRadius = kButtonRadius;
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/text-fields/specs
+const double kInputDecoratorM3Radius = 4;
 
 /// Default border radius on top edge of bottom sheet.
 ///

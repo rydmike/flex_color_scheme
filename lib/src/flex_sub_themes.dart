@@ -1357,12 +1357,10 @@ class FlexSubThemes {
 
     /// The decorated input fields corner border radius.
     ///
-    /// If not defined, defaults to [kInputDecoratorRadius] 20dp.
-    ///
-    /// Was not specified in M3 guide what it should be.
-    /// Will be adjusted when known. Now set to same as button radius (20dp), so
-    /// it matches them. The M3 design intent may also be that it should
-    /// be same as FAB and Drawer, ie 16dp.
+    /// If not defined, defaults to [kInputDecoratorRadius] 16dp.
+    /// When opting in on using Material3 with `useMaterial3` set to true,
+    /// FlexColorScheme will [kInputDecoratorM3Radius] is value is not
+    /// otherwise specified.
     final double? radius,
 
     /// Selects input border type.

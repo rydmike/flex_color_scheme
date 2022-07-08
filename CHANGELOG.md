@@ -51,6 +51,13 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   `ThemeData.useMaterail3`, use color `theme.colorScheme.primaryContainer`, 
   otherwise `theme.colorScheme.secondary` is used.
 
+* **Input Decorator default change**: The `TextField` and its `InputDecorator` border radius 
+  default value was changed from 20dp to 16dp when using opinionated component themes.
+  If opting in on Material 3, the default value for M3 design is used, which is only 4dp.
+  See specification https://m3.material.io/components/text-fields/specs.
+  Flutter 3.0.x does not yet implement the new M3 TextField style, but via this change when
+  opting in on M3, FlexColorScheme offers an early approximation of it. 
+
 * **NavigationBar M3 defaults change**: Default colors of `NavigationBar` when opting in on 
   `useMaterial3` and not using opinionated component themes will now match M3 default colors. 
   The background color will follow M3 style also by default when component themes are enabled and
@@ -106,6 +113,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   default color labels in different config modes (M2/M3/FCS/FCS+M2/FCS+M3) is quite involved, please
   report any issues.
 
+* Themes Playground: Due to issue [#107190](https://github.com/flutter/flutter/issues/107190), the
+  Playground previous default to use Material 3 was changed to false. 
+
 * Added support in Themes Playground to customize the `surfaceTint` color. It controls both the
   elevation color used for elevated `Material` surfaces in M3. Plus for FlexColorScheme it is also 
   used as the surface blend color. By default, the `surfaceTint` color equals `ColorScheme.primary` 
@@ -149,13 +159,18 @@ theming in general.
   `TimePickerDialog`, `DatePickerDialog`, `MaterialBanner` and `BottomSheet` do not expose these 
   `Material` properties and cannot be elevated. 
  
-* The issue is reported and tracked here [#107190](https://github.com/flutter/flutter/issues/107190) 
+  The issue is reported and tracked here [#107190](https://github.com/flutter/flutter/issues/107190) 
   and also mentioned in the `FlexColorScheme` repo here
   [#54](https://github.com/rydmike/flex_color_scheme/issues/54). There are no good workarounds 
   for using elevation on these widgets when `useMaterial3` is true. The options are to not use
   M3, if such elevations are important to your app design. One working fix is to wrap those widgets
   in a theme where `useMaterial3` is false, then te rest of your app can still use it. This is 
-  however a rather tedious workaround fix.
+  however a rather tedious workaround fix. Due to current SDK `Material` elevation issues when 
+  `useMaterial3` is true, it is recommended to not use it yet.
+
+* This regression in master channel impacts AppBar icon colors when using Material 3 
+  [#107305](https://github.com/flutter/flutter/issues/107305). It has not yet landed in stable 
+  channel Flutter 3.0.4, but if you use master channel it is something to be aware of.
 
 ## v5.0.1 - April 29, 2022
 
