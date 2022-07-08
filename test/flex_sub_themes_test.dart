@@ -3014,7 +3014,7 @@ void main() {
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
-          // useFlutterDefaults: false // <<- Asumed as default,
+          // useFlutterDefaults: false // <<- Assumed as default,
         ),
         equals(
           const NavigationRailThemeData(
