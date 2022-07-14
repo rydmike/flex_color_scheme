@@ -29,7 +29,7 @@ colors to all color properties in `ThemeData`, as long as they still exist. This
 ensures that all the direct colors properties in `ThemeData` match your `ColorScheme`.
 There are no surprises in `ThemeData` that do not match your `ColorScheme`.
 
-You can opt-in on using opinionated component sub-themes.
+You can opt in on using opinionated component sub-themes.
 By doing so you can for example adjust the border radius on all UI widgets
 with a single property value. Flutter's Material UI widgets still default to
 being based on the Material 2 design, and thus use 4 dp corner radius on most
