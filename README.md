@@ -61,7 +61,7 @@ avoid the both complicated and confusing `MaterialState` theming properties.
 
 **FlexColorScheme** has many advanced coloring features, like using
 surface alpha blends. It also fully supports Material 3 based color schemes,
-including seed key color generated `ColorSchemes`. It offers many configuration
+including seed key color generated `ColorSchemes`. It offers different configuration
 options that you can use when you generate your `ColorScheme` from
 key colors, customization features that are currently not available in Flutter.
 
