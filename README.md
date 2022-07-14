@@ -35,7 +35,7 @@ with a single property value. Flutter's Material UI widgets still default to
 being based on the Material 2 design, and thus use 4 dp corner radius on most
 widgets.
 
-When you opt-in on using the component sub-themes, the border radius on widgets
+When you opt in on using the component sub-themes, the border radius on widgets
 default to the new rounded corners as specified by the
 [Material 3 guide](https://m3.material.io/), where the
 radius varies by widget type. You can keep this, or set the global widget
