@@ -2,8 +2,9 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## v5.1.1 - July 8, 2022
+## v5.2.0-dev.1 - July 14, 2022
 
+* This is a dev branch to test features on master 3.1.0 channel
 * Remove duplicated and old 5.1.0 changelog entry from July 5, 2022.
 
 ## v5.1.0 - July 8, 2022
