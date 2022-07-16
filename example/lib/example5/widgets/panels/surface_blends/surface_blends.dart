@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../shared/color_picker_inkwell.dart';
-import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/color_scheme_box.dart';
 import 'surface_mode_buttons.dart';
 
 // Panel used to define how primary color is blended into surfaces and

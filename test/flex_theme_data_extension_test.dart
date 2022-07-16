@@ -2485,5 +2485,52 @@ void main() {
         equals(FlexThemeData.dark()),
       );
     });
+
+    // AppBar test null style, not using M3.
+    final ThemeData tLAppBarNull = FlexThemeData.light(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      // useMaterial3: false, // Default value
+    );
+    test(
+        'FTD3.10 Light: GIVEN a FlexThemeData.light with null appBarStyle and '
+        'not using M3 EXPECT app bar background primary ', () {
+      expect(tLAppBarNull.appBarTheme.backgroundColor,
+          equals(tLAppBarNull.colorScheme.primary));
+    });
+    final ThemeData tDAppBarNull = FlexThemeData.dark(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      // useMaterial3: false, // Default value
+    );
+    test(
+        'FTD3.10 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
+        'not using M3 EXPECT app bar background surface ', () {
+      expect(tDAppBarNull.appBarTheme.backgroundColor,
+          equals(tDAppBarNull.colorScheme.surface));
+    });
+    // AppBar test null style, not using M3.
+    final ThemeData tLAppBarNullM3 = FlexThemeData.light(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      useMaterial3: true,
+    );
+    test(
+        'FTD3.11 Light: GIVEN a FlexThemeData.light with null appBarStyle '
+        'and using M3 EXPECT app bar background surface ', () {
+      expect(tLAppBarNullM3.appBarTheme.backgroundColor,
+          equals(tLAppBarNullM3.colorScheme.surface));
+    });
+    final ThemeData tDAppBarNullM3 = FlexThemeData.dark(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      useMaterial3: true,
+    );
+    test(
+        'FTD3.11 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
+        ' using M3 EXPECT app bar background surface ', () {
+      expect(tDAppBarNullM3.appBarTheme.backgroundColor,
+          equals(tDAppBarNullM3.colorScheme.surface));
+    });
   });
 }

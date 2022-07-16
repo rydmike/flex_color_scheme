@@ -62,6 +62,8 @@ class ThemeShowcase extends StatelessWidget {
         const Divider(),
         const ListTileShowcase(),
         const Divider(),
+        const AppBarShowcase(),
+        const Divider(),
         const TabBarForAppBarShowcase(),
         const SizedBox(height: 8),
         const Divider(),
@@ -746,6 +748,27 @@ class _TextInputFieldState extends State<TextInputField> {
         ),
         const SizedBox(height: 8),
         const _DropDownButtonFormField(),
+      ],
+    );
+  }
+}
+
+class AppBarShowcase extends StatelessWidget {
+  const AppBarShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.menu),
+        onPressed: () {},
+      ),
+      title: const Text('Demo Material AppBar'),
+      actions: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.search),
+          onPressed: () {},
+        ),
       ],
     );
   }

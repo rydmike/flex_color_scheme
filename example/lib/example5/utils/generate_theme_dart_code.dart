@@ -95,14 +95,16 @@ String generateThemeDartCode(ThemeController controller) {
   final String blendLevelDark = controller.blendLevelDark > 0
       ? '  blendLevel: ${controller.blendLevelDark},\n'
       : '';
-  final String appBarStyleLight =
-      controller.appBarStyleLight != FlexAppBarStyle.primary
-          ? '  appBarStyle: ${controller.appBarStyleLight},\n'
-          : '';
-  final String appBarStyleDark =
-      controller.appBarStyleDark != FlexAppBarStyle.material
-          ? '  appBarStyle: ${controller.appBarStyleDark},\n'
-          : '';
+  final String appBarStyleLight = controller.appBarStyleLight == null ||
+          (controller.useMaterial3 &&
+              controller.appBarBackgroundSchemeColorLight != null)
+      ? ''
+      : '  appBarStyle: ${controller.appBarStyleLight},\n';
+  final String appBarStyleDark = controller.appBarStyleDark == null ||
+          (controller.useMaterial3 &&
+              controller.appBarBackgroundSchemeColorDark != null)
+      ? ''
+      : '  appBarStyle: ${controller.appBarStyleDark},\n';
   final String appBarOpacityLight = controller.appBarOpacityLight != 1
       ? '  appBarOpacity: ${controller.appBarOpacityLight.toStringAsFixed(2)},\n'
       : '';

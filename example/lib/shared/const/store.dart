@@ -350,14 +350,15 @@ class Store {
   // Key used to read and save the appBarStyleLight value.
   static const String keyAppBarStyleLight = 'lightAppBarStyle';
   // Default value for the appBarStyleLight, also used to reset settings.
-  static const FlexAppBarStyle defaultAppBarStyleLight =
-      FlexAppBarStyle.primary;
+  static const FlexAppBarStyle? defaultAppBarStyleLight = null;
+  // FlexAppBarStyle.primary;
 
   // Key used to read and save the appBarStyleDark value.
   static const String keyAppBarStyleDark = 'darkAppBarStyle';
   // Default value for the appBarStyleDark, also used to reset settings.
-  static const FlexAppBarStyle defaultAppBarStyleDark =
-      FlexAppBarStyle.background;
+  // TODO(rydmike): Maybe use background as default?
+  static const FlexAppBarStyle? defaultAppBarStyleDark = null;
+  // FlexAppBarStyle.background;
 
   // Key used to read and save the appBarOpacityLight value.
   static const String keyAppBarOpacityLight = 'appBarOpacity';

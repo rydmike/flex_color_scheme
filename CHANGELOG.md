@@ -2,10 +2,24 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## v5.2.0-dev.1 - July 14, 2022
+## v5.2.0-dev.1 - July 16, 2022
 
-* This is a dev branch to test features on master 3.1.0 channel
+This is a dev branch to test features on master 3.1.0 channel
+
 * Remove duplicated and old 5.1.0 changelog entry from July 5, 2022.
+
+* The `FlexAppBarStyle` property was made nullable. It now defaults to null in all constructors.
+  When it is null and `useMaterial3` is false, the app bar will use style `FlexAppBarStyle.primary`
+  in light mode as default as before and `FlexAppBarStyle.material` in dark mode. However, if
+  `useMaterial3` is true, them it will use `FlexAppBarStyle.surface` in both light and dark mode,
+  to match un-themed defaults in Material 3 design.
+
+**EXAMPLE UPDATES**
+
+* Themes Playground: Updated the default AppBar style, it uses a dropdown menu that can also select 
+  'null' choice and use default M2 and M3 theming as defaults via it. The AppBar panel now also
+  displays an AppBar Widget of its own, so one does not have to look at the actual AppBar to
+  see the style.
 
 ## v5.1.0 - July 8, 2022
 
@@ -57,7 +71,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   otherwise `theme.colorScheme.secondary` is used.
 
 * **Input Decorator default change**: The `TextField` and its `InputDecorator` border radius 
-  default value was changed from 20dp to 16 dp when using opinionated component themes.
+  default value was changed from 20dp to 16dp when using opinionated component themes.
   If opting in on Material 3, the default value for M3 design is used, which is only 4 dp.
   See specification https://m3.material.io/components/text-fields/specs.
   Flutter 3.0.x does not yet implement the new M3 TextField style, but via this change when

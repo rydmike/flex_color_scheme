@@ -310,20 +310,26 @@ enum FlexSurfaceMode {
 enum FlexAppBarStyle {
   /// Use the scheme primary color as the AppBar's themed background color.
   ///
-  /// This is the default for light themes.
+  /// This is the default for light themes, when [ThemeData.useMaterial3] is
+  /// false.
   primary,
 
-  /// Use Material surface color as the AppBar's themed background color.
+  /// Use Material 2 default surface color as the AppBar's themed background
+  /// color.
   ///
-  /// This is the default for dark schemes.
+  /// This is the default for dark schemes, when [ThemeData.useMaterial3] is
+  /// false.
   ///
-  /// For a dark scheme this choice will result in a near black app bar. If this
-  /// setting is used in a light scheme, it will result in a white app bar, as
-  /// the standard Material surface color for light scheme is white.
+  /// For a dark scheme this choice will result in a near black app bar with
+  /// color value (#FF121212). If this setting is used in a light scheme, it
+  /// will result in a white app bar, as the standard Material 2 surface color for light scheme is white.
   material,
 
   /// Use scheme surface color as the the AppBar's themed background color,
   /// including any blend color it may have.
+  ///
+  /// This is the default for light and dark theme mode, when
+  /// [ThemeData.useMaterial3] is true.
   surface,
 
   /// Use scheme background color as the the AppBar's themed background color,
@@ -341,10 +347,10 @@ enum FlexAppBarStyle {
   /// custom color for the [AppBar] theme.
   ///
   /// The built-in color schemes have the same color value that is assigned to
-  /// [FlexSchemeColor.secondaryContainer] also assigned to
+  /// [FlexSchemeColor.tertiary] also assigned to
   /// [FlexSchemeColor.appBarColor], so with them, the custom choice always
-  /// results in the [FlexSchemeColor.secondaryContainer] color, which is same
-  /// as output [ColorScheme.secondaryContainer], being used as the [AppBar]
+  /// results in the [FlexSchemeColor.tertiaryContainer] color, which is same
+  /// as output [ColorScheme.tertiaryContainer], being used as the [AppBar]
   /// color when using the [custom] choice with them.
   ///
   /// FlexColorSchemes using custom [FlexSchemeColor] can assign any color
@@ -1610,10 +1616,12 @@ class FlexColorScheme with Diagnosticable {
 
     /// Style used to define the themed color of the AppBar background color.
     ///
-    /// Defaults to [FlexAppBarStyle.primary] which produces the same results
-    /// as a Flutter standard light [ThemeData.from] by tying the app bar color
-    /// to the primary color.
-    final FlexAppBarStyle appBarStyle = FlexAppBarStyle.primary,
+    /// Defaults to null, which when [useMaterial3] is false results in
+    /// [FlexAppBarStyle.primary] which produces the same results
+    /// as a Flutter standard M2 light [ThemeData.from] by tying the app bar
+    /// color to the primary color. If [useMaterial3] is true it defaults
+    /// [FlexAppBarStyle.surface] which is the same as M3 default.
+    final FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.
     ///
@@ -2858,6 +2866,10 @@ class FlexColorScheme with Diagnosticable {
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
+    // Determine effective AppBar style, passed in or default based on M2 or M3.
+    final FlexAppBarStyle effectiveAppBarStyle = appBarStyle ??
+        (useMaterial3 ? FlexAppBarStyle.surface : FlexAppBarStyle.primary);
+
     // Determine the effective AppBar color:
     // - First priority, passed in color value.
     Color? effectiveAppBarColor = appBarBackground;
@@ -2869,7 +2881,7 @@ class FlexColorScheme with Diagnosticable {
             : null;
     // Third priority [appBarStyle] based.
     if (effectiveAppBarColor == null) {
-      switch (appBarStyle) {
+      switch (effectiveAppBarStyle) {
         case FlexAppBarStyle.primary:
           effectiveAppBarColor = effectiveColors.primary;
           break;
@@ -3280,10 +3292,12 @@ class FlexColorScheme with Diagnosticable {
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
-    /// Defaults to [FlexAppBarStyle.material] which produces the same results
-    /// as a Flutter standard dark [ThemeData.from] by tying the app bar color
-    /// to the surface color.
-    final FlexAppBarStyle appBarStyle = FlexAppBarStyle.material,
+    /// Defaults to null, which when [useMaterial3] is false results in
+    /// [FlexAppBarStyle.material] which produces the same results
+    /// as a Flutter standard M2 dark [ThemeData.from] by tying the app bar
+    /// color to the M2 dark Material color. If [useMaterial3] is true it
+    /// defaults [FlexAppBarStyle.surface] which is the same as M3 default.
+    final FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.
     ///
@@ -4552,6 +4566,10 @@ class FlexColorScheme with Diagnosticable {
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
+    // Determine effective AppBar style, passed in or default based on M2 or M3.
+    final FlexAppBarStyle effectiveAppBarStyle = appBarStyle ??
+        (useMaterial3 ? FlexAppBarStyle.surface : FlexAppBarStyle.material);
+
     // Determine the effective AppBar color:
     // - First priority, passed in color value.
     Color? effectiveAppBarColor = appBarBackground;
@@ -4563,7 +4581,7 @@ class FlexColorScheme with Diagnosticable {
             : null;
     // Third priority [appBarStyle] based.
     if (effectiveAppBarColor == null) {
-      switch (appBarStyle) {
+      switch (effectiveAppBarStyle) {
         case FlexAppBarStyle.primary:
           effectiveAppBarColor = effectiveColors.primary;
           break;
@@ -4582,7 +4600,7 @@ class FlexColorScheme with Diagnosticable {
           break;
       }
     }
-    // Apply specified opacity on on the resulting color.
+    // Apply specified opacity on the resulting color.
     effectiveAppBarColor = effectiveAppBarColor.withOpacity(appBarOpacity);
 
     return FlexColorScheme(

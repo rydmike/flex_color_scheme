@@ -2587,5 +2587,52 @@ void main() {
         'typography 2018 and primaryColor set as in FlexColorScheme.dark.', () {
       expect(fCPDText, equals(nCPDText));
     });
+
+    // AppBar test null style, not using M3.
+    final ThemeData tLAppBarNull = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      // useMaterial3: false, // Default value
+    ).toTheme;
+    test(
+        'FCS7.96 Light: GIVEN a FlexColorScheme.light with null appBarStyle and '
+        'not using M3 EXPECT app bar background primary ', () {
+      expect(tLAppBarNull.appBarTheme.backgroundColor,
+          equals(tLAppBarNull.colorScheme.primary));
+    });
+    final ThemeData tDAppBarNull = FlexColorScheme.dark(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      // useMaterial3: false, // Default value
+    ).toTheme;
+    test(
+        'FCS7.96 Dark: GIVEN a FlexColorScheme.dark with null appBarStyle and '
+        'not using M3 EXPECT app bar background surface ', () {
+      expect(tDAppBarNull.appBarTheme.backgroundColor,
+          equals(tDAppBarNull.colorScheme.surface));
+    });
+    // AppBar test null style, not using M3.
+    final ThemeData tLAppBarNullM3 = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      useMaterial3: true,
+    ).toTheme;
+    test(
+        'FCS7.97 Light: GIVEN a FlexColorScheme.light with null appBarStyle '
+        'and using M3 EXPECT app bar background surface ', () {
+      expect(tLAppBarNullM3.appBarTheme.backgroundColor,
+          equals(tLAppBarNullM3.colorScheme.surface));
+    });
+    final ThemeData tDAppBarNullM3 = FlexColorScheme.dark(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      useMaterial3: true,
+    ).toTheme;
+    test(
+        'FCS7.97 Dark: GIVEN a FlexColorScheme.dark with null appBarStyle and '
+        ' using M3 EXPECT app bar background surface ', () {
+      expect(tDAppBarNullM3.appBarTheme.backgroundColor,
+          equals(tDAppBarNullM3.colorScheme.surface));
+    });
   });
 }

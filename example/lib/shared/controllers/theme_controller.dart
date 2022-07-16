@@ -1283,22 +1283,22 @@ class ThemeController with ChangeNotifier {
   // AppBar SETTINGS.
   // ===========================================================================
 
-  late FlexAppBarStyle _appBarStyleLight;
-  FlexAppBarStyle get appBarStyleLight => _appBarStyleLight;
+  late FlexAppBarStyle? _appBarStyleLight;
+  FlexAppBarStyle? get appBarStyleLight => _appBarStyleLight;
   Future<void> setAppBarStyleLight(FlexAppBarStyle? value,
       [bool notify = true]) async {
-    if (value == null) return;
+    // if (value == null) return;
     if (value == _appBarStyleLight) return;
     _appBarStyleLight = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyAppBarStyleLight, value);
   }
 
-  late FlexAppBarStyle _appBarStyleDark;
-  FlexAppBarStyle get appBarStyleDark => _appBarStyleDark;
+  late FlexAppBarStyle? _appBarStyleDark;
+  FlexAppBarStyle? get appBarStyleDark => _appBarStyleDark;
   Future<void> setAppBarStyleDark(FlexAppBarStyle? value,
       [bool notify = true]) async {
-    if (value == null) return;
+    // if (value == null) return;
     if (value == _appBarStyleDark) return;
     _appBarStyleDark = value;
     if (notify) notifyListeners();

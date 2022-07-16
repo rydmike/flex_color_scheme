@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/color_scheme_box.dart';
 
 /// Popup used to change the used FlexSchemeData index in the theme controller
 /// and via that the selected active theme.
