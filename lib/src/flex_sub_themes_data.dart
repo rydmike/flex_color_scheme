@@ -157,6 +157,7 @@ class FlexSubThemesData with Diagnosticable {
     this.popupMenuRadius,
     this.popupMenuElevation = kPopupMenuElevation,
     this.popupMenuOpacity = 1,
+    //
     this.dialogRadius,
     this.dialogElevation = kDialogElevation,
     this.dialogBackgroundSchemeColor,
@@ -165,6 +166,8 @@ class FlexSubThemesData with Diagnosticable {
     this.snackBarBackgroundSchemeColor,
     //
     this.appBarBackgroundSchemeColor,
+    this.appBarCenterTitle,
+    //
     this.tabBarItemSchemeColor,
     this.tabBarIndicatorSchemeColor,
     //
@@ -1065,6 +1068,13 @@ class FlexSubThemesData with Diagnosticable {
   /// ([appBarStyle) factory parameter.
   final SchemeColor? appBarBackgroundSchemeColor;
 
+  /// Whether the AppBar title should be centered.
+  ///
+  /// Overrides the default value of [AppBar.centerTitle] property in all
+  /// descendant [AppBar] widgets. Ff this property is null, then value
+  /// is adapted to the current [TargetPlatform].
+  final bool? appBarCenterTitle;
+
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// items use.
   ///
@@ -1859,7 +1869,10 @@ class FlexSubThemesData with Diagnosticable {
     final double? timePickerDialogRadius,
     final double? snackBarElevation,
     final SchemeColor? snackBarBackgroundSchemeColor,
+    //
     final SchemeColor? appBarBackgroundSchemeColor,
+    final bool? appBarCenterTitle,
+    //
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
     //
@@ -1994,6 +2007,7 @@ class FlexSubThemesData with Diagnosticable {
           snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
       appBarBackgroundSchemeColor:
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
+      appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
       tabBarItemSchemeColor:
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
       tabBarIndicatorSchemeColor:
@@ -2192,7 +2206,10 @@ class FlexSubThemesData with Diagnosticable {
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.snackBarElevation == snackBarElevation &&
         other.snackBarBackgroundSchemeColor == snackBarBackgroundSchemeColor &&
+        //
         other.appBarBackgroundSchemeColor == appBarBackgroundSchemeColor &&
+        other.appBarCenterTitle == appBarCenterTitle &&
+        //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
         other.bottomSheetRadius == bottomSheetRadius &&
@@ -2359,7 +2376,10 @@ class FlexSubThemesData with Diagnosticable {
         //
         snackBarElevation,
         snackBarBackgroundSchemeColor,
+        //
         appBarBackgroundSchemeColor,
+        appBarCenterTitle,
+        //
         tabBarItemSchemeColor,
         tabBarIndicatorSchemeColor,
         //
@@ -2515,6 +2535,8 @@ class FlexSubThemesData with Diagnosticable {
         'snackBarBackgroundSchemeColor', snackBarBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
+    properties
+        .add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
     properties.add(EnumProperty<SchemeColor>(
         'tabBarItemSchemeColor', tabBarItemSchemeColor));
     properties.add(EnumProperty<SchemeColor>(

@@ -14,6 +14,10 @@ This is a dev branch to test features on master 3.1.0 channel
   `useMaterial3` is true, them it will use `FlexAppBarStyle.surface` in both light and dark mode,
   to match un-themed defaults in Material 3 design.
 
+* To `FlexSubThemesData` configuration added `appBarCenterTitle` property that works the 
+  same way as `centerTitle` in `AppBar` and its theme. The property is not available in the Themes
+  Playground app only via the API.
+
 **EXAMPLE UPDATES**
 
 * Themes Playground: Updated the default AppBar style, it uses a dropdown menu that can also select 

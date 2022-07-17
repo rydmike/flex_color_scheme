@@ -2634,5 +2634,34 @@ void main() {
       expect(tDAppBarNullM3.appBarTheme.backgroundColor,
           equals(tDAppBarNullM3.colorScheme.surface));
     });
+    // AppBar test null center title.
+    final ThemeData tLAppBarCenterNull = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+    ).toTheme;
+    test(
+        'FCS7.99 null: GIVEN a FlexColorScheme.light with no centerTitle '
+        'EXPECT app bar center title null ', () {
+      expect(tLAppBarCenterNull.appBarTheme.centerTitle, equals(null));
+    });
+    // AppBar test true center title.
+    final ThemeData tDAppBarCenterTrue = FlexColorScheme.dark(
+      scheme: FlexScheme.flutterDash,
+      subThemesData: const FlexSubThemesData(appBarCenterTitle: true),
+    ).toTheme;
+    test(
+        'FCS7.99 true: GIVEN a FlexColorScheme.dark with no centerTitle '
+        'EXPECT app bar center title true ', () {
+      expect(tDAppBarCenterTrue.appBarTheme.centerTitle, equals(true));
+    });
+    // AppBar test true center title.
+    final ThemeData tLAppBarCenterFalse = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+      subThemesData: const FlexSubThemesData(appBarCenterTitle: false),
+    ).toTheme;
+    test(
+        'FCS7.99 false: GIVEN a FlexColorScheme.light with no centerTitle '
+        'EXPECT app bar center title false ', () {
+      expect(tLAppBarCenterFalse.appBarTheme.centerTitle, equals(false));
+    });
   });
 }

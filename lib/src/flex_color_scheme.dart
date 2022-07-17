@@ -6068,6 +6068,7 @@ class FlexColorScheme with Diagnosticable {
       // The FlexColorScheme implementation below has been changed to
       // use these new AppBarTheme features in version 2.0.0.
       appBarTheme: AppBarTheme(
+        centerTitle: subTheme.appBarCenterTitle,
         backgroundColor: effectiveAppBarBackgroundColor,
         foregroundColor: appBarForeground,
         iconTheme: IconThemeData(color: appBarIconColor),
