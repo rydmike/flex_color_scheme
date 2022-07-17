@@ -200,7 +200,9 @@ class SurfaceBlends extends StatelessWidget {
             ),
           ),
           ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: controller.useSubThemes &&
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
             title: const Text('Light theme onColors blend level'),
             subtitle: const Text('The onColor blending mixes in its own color, '
                 'into the onColor, when seed/M3 colors are not used. This '
@@ -209,21 +211,26 @@ class SurfaceBlends extends StatelessWidget {
                 'for primary, secondary, tertiary and error.'),
           ),
           ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: controller.useSubThemes &&
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
             title: Slider.adaptive(
               min: 0,
               max: 40,
               divisions: 40,
               label: controller.blendOnLevel.toString(),
-              value: controller.useSubThemes && controller.useFlexColorScheme
+              value: controller.useSubThemes &&
+                      controller.useFlexColorScheme &&
+                      !controller.useKeyColors
                   ? controller.blendOnLevel.toDouble()
                   : 0,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? (double value) {
-                          controller.setBlendOnLevel(value.toInt());
-                        }
-                      : null,
+              onChanged: controller.useSubThemes &&
+                      controller.useFlexColorScheme &&
+                      !controller.useKeyColors
+                  ? (double value) {
+                      controller.setBlendOnLevel(value.toInt());
+                    }
+                  : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
@@ -236,7 +243,7 @@ class SurfaceBlends extends StatelessWidget {
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
-                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevel : ""}',
+                    '${controller.useSubThemes && controller.useFlexColorScheme && !controller.useKeyColors ? controller.blendOnLevel : ""}',
                     style: Theme.of(context)
                         .textTheme
                         .caption!
@@ -256,8 +263,11 @@ class SurfaceBlends extends StatelessWidget {
                     'colors are not used'),
             value: controller.blendLightOnColors &&
                 controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useKeyColors
                 ? controller.setBlendLightOnColors
                 : null,
           ),
@@ -365,7 +375,9 @@ class SurfaceBlends extends StatelessWidget {
             ),
           ),
           ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: controller.useSubThemes &&
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
             title: const Text('Dark theme onColors blend level'),
             subtitle: const Text('The onColor blending mixes in its own color, '
                 'into the onColor, when seed/M3 colors are not used. This '
@@ -374,21 +386,26 @@ class SurfaceBlends extends StatelessWidget {
                 'for primary, secondary, tertiary and error.'),
           ),
           ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: controller.useSubThemes &&
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
             title: Slider.adaptive(
               min: 0,
               max: 40,
               divisions: 40,
               label: controller.blendOnLevelDark.toString(),
-              value: controller.useSubThemes && controller.useFlexColorScheme
+              value: controller.useSubThemes &&
+                      controller.useFlexColorScheme &&
+                      !controller.useKeyColors
                   ? controller.blendOnLevelDark.toDouble()
                   : 0,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? (double value) {
-                          controller.setBlendOnLevelDark(value.toInt());
-                        }
-                      : null,
+              onChanged: controller.useSubThemes &&
+                      controller.useFlexColorScheme &&
+                      !controller.useKeyColors
+                  ? (double value) {
+                      controller.setBlendOnLevelDark(value.toInt());
+                    }
+                  : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
@@ -401,7 +418,7 @@ class SurfaceBlends extends StatelessWidget {
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
-                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
+                    '${controller.useSubThemes && controller.useFlexColorScheme && !controller.useKeyColors ? controller.blendOnLevelDark : ""}',
                     style: Theme.of(context)
                         .textTheme
                         .caption!
@@ -421,8 +438,11 @@ class SurfaceBlends extends StatelessWidget {
                 'are not used'),
             value: controller.blendDarkOnColors &&
                 controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useKeyColors
                 ? controller.setBlendDarkOnColors
                 : null,
           ),
