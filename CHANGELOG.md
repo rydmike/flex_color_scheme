@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## v5.2.0-dev.1 - July 16, 2022
+## v5.2.0-dev.1 - July 17, 2022
 
 This is a dev branch to test features on master 3.1.0 channel
 
@@ -19,7 +19,12 @@ This is a dev branch to test features on master 3.1.0 channel
 * Themes Playground: Updated the default AppBar style, it uses a dropdown menu that can also select 
   'null' choice and use default M2 and M3 theming as defaults via it. The AppBar panel now also
   displays an AppBar Widget of its own, so one does not have to look at the actual AppBar to
-  see the style.
+  see the style. It also has widgets below it used to demonstrate the opacity setting.
+
+* Themes Playground: Code gen and control enable/disable for onColor blends updated to lock controls
+  with no impact when using seeded color scheme. Code is also not generated for onColor blend 
+  settings that has no impact when using seeded color schemes.
+  
 
 ## v5.1.0 - July 8, 2022
 

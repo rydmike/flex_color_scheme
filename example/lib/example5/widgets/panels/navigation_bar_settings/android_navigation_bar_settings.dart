@@ -112,6 +112,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
         //   value: controller.useNavDivider,
         //   onChanged: controller.setUseNavDivider,
         // ),
+        const SizedBox(height: 8),
       ],
     );
   }
