@@ -33,7 +33,7 @@ class EffectiveColors extends StatelessWidget {
         const ListTile(
           dense: true,
           subtitle: Text('The effective ColorScheme colors '
-              'are presented in the order they appear in the '
+              'are presented above in the order they appear in the '
               'ColorScheme class. Deprecated colors primaryVariant and '
               'secondaryVariant are excluded.'),
         ),
@@ -65,14 +65,18 @@ class EffectiveColors extends StatelessWidget {
         ),
         const ListTile(
           dense: true,
-          subtitle: Text('ThemeData colors are still important in Flutter 2.10 '
-              'and earlier. Many widgets still depend on them for '
+          subtitle: Text('Above ThemeData colors are still important in '
+              'Flutter 3.0 and earlier. Many widgets still depend on them for '
               'their default colors. FlexColorScheme keeps them in sync '
-              'with ColorScheme, to produce an app with consistent colors '
+              'with ColorScheme to produce an app with consistent colors '
               'on all widgets. It will do so as long as the colors exist '
-              'in ThemeData. If you switch to dark mode and toggle '
-              'FlexColorScheme ON/OFF, you can see that many colors in '
-              'ThemeData loose their relation to active ColorScheme.'),
+              'in ThemeData. If you turn FlexColorScheme OFF, you can see '
+              'that the colors in ThemeData loose their relation to active '
+              'ColorScheme. Widgets in the SDK that still get their default '
+              'colors from these ThemeData color properties will then no '
+              'longer get ColorScheme based colors. FlexColorScheme assigns '
+              'correct ColorScheme based colors to still relevant ThemeData '
+              'colors.'),
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
