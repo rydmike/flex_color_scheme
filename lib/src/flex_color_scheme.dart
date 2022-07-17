@@ -322,7 +322,8 @@ enum FlexAppBarStyle {
   ///
   /// For a dark scheme this choice will result in a near black app bar with
   /// color value (#FF121212). If this setting is used in a light scheme, it
-  /// will result in a white app bar, as the standard Material 2 surface color for light scheme is white.
+  /// will result in a white app bar, as the standard Material 2 surface color
+  /// for light scheme is white.
   material,
 
   /// Use scheme surface color as the the AppBar's themed background color,

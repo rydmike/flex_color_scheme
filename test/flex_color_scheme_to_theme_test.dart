@@ -2595,8 +2595,8 @@ void main() {
       // useMaterial3: false, // Default value
     ).toTheme;
     test(
-        'FCS7.96 Light: GIVEN a FlexColorScheme.light with null appBarStyle and '
-        'not using M3 EXPECT app bar background primary ', () {
+        'FCS7.96 Light: GIVEN a FlexColorScheme.light with null appBarStyle '
+        'and not using M3 EXPECT app bar background primary ', () {
       expect(tLAppBarNull.appBarTheme.backgroundColor,
           equals(tLAppBarNull.colorScheme.primary));
     });

@@ -758,16 +758,53 @@ class AppBarShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () {},
-      ),
-      title: const Text('Demo Material AppBar'),
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: () {},
+    return Stack(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
+            const Text('Example Widgets and text behind AppBar'),
+            Chip(
+              label: const Text('Chip'),
+              onDeleted: () {},
+            ),
+            const Chip(
+              label: Text('Avatar Chip'),
+              avatar: FlutterLogo(),
+            ),
+            FloatingActionButton.small(
+              onPressed: () {},
+              child: const Icon(Icons.add),
+            ),
+            InputChip(
+              label: const Text('Input Chip'),
+              onSelected: (bool value) {},
+            ),
+            InputChip(
+              showCheckmark: true,
+              selected: true,
+              label: const Text('Chip check'),
+              onSelected: (bool value) {},
+            ),
+            ChoiceChip(
+              label: const Text('Selected Chip'),
+              selected: true,
+              onSelected: (bool value) {},
+            ),
+          ]),
+        ),
+        AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {},
+          ),
+          title: const Text('Material AppBar'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {},
+            ),
+          ],
         ),
       ],
     );

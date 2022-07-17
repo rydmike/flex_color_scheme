@@ -51,13 +51,12 @@ class AppBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTile(
           subtitle: Text(
-            'Material 2 themes use primary colored AppBar in light '
-            'mode, and almost black in dark mode. M3 defaults to surface '
+            'Material2 uses primary colored AppBar in light '
+            'mode and almost black in dark mode. Material3 defaults to surface '
             'color in both light and dark theme mode. '
             'Here you can use select '
-            'Primary, Material 2 surface, background and surface colors '
-            'with their primary blends, or even a custom color as the as '
-            'themed AppBar color.',
+            'Primary, Material2 surface, background and surface colors '
+            'with their surfaceTint blends, or use a custom color.',
           ),
         ),
         const AppBarShowcase(),
@@ -269,11 +268,10 @@ class AppBarSettings extends StatelessWidget {
         const ListTile(
           title: Text('Custom color'),
           subtitle: Text('With component themes enabled you can select scheme '
-              'color for the themed '
-              'AppBar background color. '
+              'color for the AppBar background color. '
               'Using AppBarStyle is convenient and does not require activating '
               'FlexColorScheme component themes, but this offers more choices. '
-              'Selecting a color to override used AppBarStyle, set it back '
+              'Selecting a color overrides used AppBarStyle, set it back '
               'to default to use AppBarStyle again.'),
         ),
         if (isLight)

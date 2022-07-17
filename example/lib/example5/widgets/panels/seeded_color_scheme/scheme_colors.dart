@@ -125,7 +125,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: primary,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: primary,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -210,7 +210,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: primaryContainer,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: primaryContainer,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -313,7 +313,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: secondary,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: secondary,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -398,7 +398,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: secondaryContainer,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: secondaryContainer,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -505,7 +505,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: tertiary,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: tertiary,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -582,7 +582,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: tertiaryContainer,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: tertiaryContainer,
                           onChanged: (Color color) {
                             if (isLight) {

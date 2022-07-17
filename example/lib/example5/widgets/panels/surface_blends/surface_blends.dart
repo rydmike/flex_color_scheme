@@ -93,7 +93,7 @@ class SurfaceBlends extends StatelessWidget {
           title: Text('Blended surfaces and backgrounds'),
           isThreeLine: true,
           subtitle: Text(
-            'Material Design 2 guide briefly mentions using surfaces with '
+            'Material Design 2 guide mentions using surfaces with '
             'primary color alpha blends. FlexColorScheme surface blends '
             'implements it.\n'
             '\n'
@@ -139,7 +139,7 @@ class SurfaceBlends extends StatelessWidget {
               controller.setSurfaceTintLight(null);
             },
           ),
-          ColorPickerInkWell(
+          ColorPickerInkWellDialog(
             color: controller.surfaceTintLight ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintLight,
             recentColors: controller.recentColors,
@@ -164,7 +164,7 @@ class SurfaceBlends extends StatelessWidget {
             title: Text('Light theme blend level'),
             subtitle: Text('Adjust the surface, background, scaffold and '
                 'dialog blend level. Also impacts surfaces when '
-                'seed colors are used. Seed based surfaces already include '
+                'seed colors are used. Seed based surfaces always include '
                 'a touch of primary, but you can make it stronger with '
                 'surface blends'),
           ),
@@ -202,9 +202,11 @@ class SurfaceBlends extends StatelessWidget {
           ListTile(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: const Text('Light theme onColors blend level'),
-            subtitle: const Text('When seed colors are not used, this affects '
-                'onContainers, onSurface and onBackground, plus main '
-                'onColors when the onColor blending switch is ON'),
+            subtitle: const Text('The onColor blending mixes in its own color, '
+                'into the onColor, when seed/M3 colors are not used. This '
+                'affects onContainers, onSurface and onBackground. When the '
+                'main onColor blending switch is ON, it also affects on colors '
+                'for primary, secondary, tertiary and error.'),
           ),
           ListTile(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -302,7 +304,7 @@ class SurfaceBlends extends StatelessWidget {
               controller.setSurfaceTintDark(null);
             },
           ),
-          ColorPickerInkWell(
+          ColorPickerInkWellDialog(
             color: controller.surfaceTintDark ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintDark,
             recentColors: controller.recentColors,
@@ -365,9 +367,11 @@ class SurfaceBlends extends StatelessWidget {
           ListTile(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: const Text('Dark theme onColors blend level'),
-            subtitle: const Text('When seed colors are not used, this affects '
-                'onContainers, onSurface and onBackground, plus main '
-                'onColors when the onColor blending switch is ON'),
+            subtitle: const Text('The onColor blending mixes in its own color, '
+                'into the onColor, when seed/M3 colors are not used. This '
+                'affects onContainers, onSurface and onBackground. When the '
+                'main onColor blending switch is ON, it also affects on colors '
+                'for primary, secondary, tertiary and error.'),
           ),
           ListTile(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
