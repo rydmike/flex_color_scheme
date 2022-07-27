@@ -635,32 +635,65 @@ class ChipShowcase extends StatelessWidget {
           onDeleted: () {},
         ),
         const Chip(
-          label: Text('Avatar Chip'),
+          label: Text('Chip'),
           avatar: FlutterLogo(),
         ),
-        InputChip(
-          label: const Text('Input Chip'),
+        ActionChip(
+          label: const Text('ActionChip'),
+          avatar: const Icon(Icons.settings),
+          onPressed: () {},
+        ),
+        const ActionChip(
+          label: Text('ActionChip'),
+          avatar: Icon(Icons.settings),
+        ),
+        FilterChip(
+          label: const Text('FilterChip'),
+          selected: true,
           onSelected: (bool value) {},
+        ),
+        FilterChip(
+          label: const Text('FilterChip'),
+          selected: false,
+          onSelected: (bool value) {},
+        ),
+        const FilterChip(
+          label: Text('FilterChip'),
+          selected: true,
+          onSelected: null,
+        ),
+        ChoiceChip(
+          label: const Text('ChoiceChip'),
+          selected: true,
+          onSelected: (bool value) {},
+        ),
+        ChoiceChip(
+          label: const Text('ChoiceChip'),
+          selected: false,
+          onSelected: (bool value) {},
+        ),
+        const ChoiceChip(
+          label: Text('ChoiceChip'),
+          selected: true,
+        ),
+        InputChip(
+          label: const Text('InputChip'),
+          onSelected: (bool value) {},
+          onDeleted: () {},
         ),
         InputChip(
           showCheckmark: true,
           selected: true,
-          label: const Text('Chip check'),
+          label: const Text('InputChip'),
           onSelected: (bool value) {},
+          onDeleted: () {},
         ),
-        const InputChip(
-          label: Text('Disabled Chip'),
+        InputChip(
+          label: const Text('InputChip'),
           isEnabled: false,
-        ),
-        ChoiceChip(
-          label: const Text('Selected Chip'),
-          selected: true,
           onSelected: (bool value) {},
-        ),
-        ChoiceChip(
-          label: const Text('Not selected Chip'),
-          selected: false,
-          onSelected: (bool value) {},
+          onDeleted: () {},
+          // onDeleted: () {},
         ),
       ],
     );

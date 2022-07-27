@@ -901,7 +901,17 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the Chips
   /// use as their base color.
   ///
-  /// If not defined it defaults to theme.colorScheme.primary color.
+  /// The selected color is only used as base for the [Chip] colors, it also
+  /// uses alpha blend and opacity to create the effective Chip colors using
+  /// the selected scheme color as base.
+  ///
+  /// If not defined it defaults to effective theme based color from using
+  /// [SchemeColor.primary], when [useMaterial3] is false.
+  ///
+  /// If [useMaterial3] is true, using a null [chipSchemeColor] will
+  /// result in M3 default Chip coloring being used without opacity and alpha
+  /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
+  /// pass in [SchemeColor.primary].
   final SchemeColor? chipSchemeColor;
 
   /// Border radius value for [Card].

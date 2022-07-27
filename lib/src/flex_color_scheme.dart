@@ -6351,14 +6351,17 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.chipTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.chipSchemeColor,
-              labelStyle: effectiveTextTheme.button!,
+              labelStyle: effectiveTextTheme.labelLarge!,
               radius: subTheme.chipRadius ?? subTheme.defaultRadius,
+              useMaterial3: useMaterial3,
             )
-          : ChipThemeData.fromDefaults(
-              secondaryColor: colorScheme.primary,
-              brightness: colorScheme.brightness,
-              labelStyle: effectiveTextTheme.bodyText1!,
-            ),
+          : useMaterial3
+              ? null
+              : ChipThemeData.fromDefaults(
+                  secondaryColor: colorScheme.primary,
+                  brightness: colorScheme.brightness,
+                  labelStyle: effectiveTextTheme.bodyText1!,
+                ),
       cardTheme: useSubThemes
           ? FlexSubThemes.cardTheme(
               radius: subTheme.cardRadius ?? subTheme.defaultRadius,

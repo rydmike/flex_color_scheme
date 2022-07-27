@@ -1016,12 +1016,20 @@ class FlexSubThemes {
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
-    /// Select which color from the passed in [ColorScheme] to use as the
-    /// chip themes main color.
+    /// Defines which [Theme] based [ColorScheme] based color the Chips
+    /// use as their base color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// The selected color is only used as base for the [Chip] colors, it also
+    /// uses alpha blend and opacity to create the effective Chip colors using
+    /// the selected scheme color as base.
     ///
-    /// If not defined, [colorScheme.primary] will be used.
+    /// If not defined it defaults to effective theme based color from using
+    /// [SchemeColor.primary], when [useMaterial3] is false.
+    ///
+    /// If [useMaterial3] is true, using a null [chipSchemeColor] will
+    /// result in M3 default Chip coloring being used without opacity and alpha
+    /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
+    /// pass in [SchemeColor.primary].
     final SchemeColor? baseSchemeColor,
 
     /// The style to be applied to the chip's label.
@@ -1036,7 +1044,17 @@ class FlexSubThemes {
     /// based on M3 Specification
     /// https://m3.material.io/components/chips/specs
     final double? radius,
+
+    /// Set to true to opt in on Material 3 styled chips.
+    ///
+    /// If false widgets will use more opinionated FlexColorScheme defaults.
+    final bool? useMaterial3,
   }) {
+    // Flag for not using any defined values, but instead falling back to
+    // effective M3 theme defaults.
+    final bool useM3Defaults =
+        baseSchemeColor == null && (useMaterial3 ?? false);
+
     // Get base color, defaults to primary.
     final Color usedBaseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
@@ -1052,30 +1070,40 @@ class FlexSubThemes {
         labelStyle.copyWith(color: foreground);
 
     return ChipThemeData(
-      brightness: ThemeData.estimateBrightnessForColor(colorScheme.primary),
-      padding: const EdgeInsets.all(4),
+      brightness: useM3Defaults
+          ? null
+          : ThemeData.estimateBrightnessForColor(colorScheme.primary),
+      padding: (useMaterial3 ?? false) ? null : const EdgeInsets.all(4),
       // For all Chip types, except disabled, InputChip & ChoiceChip.
-      backgroundColor: usedBaseColor.blendAlpha(
-          colorScheme.surface, kChipBackgroundAlphaBlend),
-      selectedColor: selectedBackgroundColor, // Selected InputChip
-      secondarySelectedColor: selectedBackgroundColor, // Selected ChoiceChip
-      checkmarkColor: foreground,
-      deleteIconColor: usedBaseColor,
+      backgroundColor: useM3Defaults
+          ? null
+          : usedBaseColor.blendAlpha(
+              colorScheme.surface, kChipBackgroundAlphaBlend),
+      selectedColor:
+          useM3Defaults ? null : selectedBackgroundColor, // Selected InputChip
+      secondarySelectedColor:
+          useM3Defaults ? null : selectedBackgroundColor, // Selected ChoiceChip
+      checkmarkColor: useM3Defaults ? null : foreground,
+      deleteIconColor: useM3Defaults ? null : usedBaseColor,
       // Same formula as on Elevated button and ToggleButtons. The Chip has
       // a built in scrim for disabled state, making it look a bit different,
       // but it is pretty close.
-      disabledColor: usedBaseColor
-          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-          .withAlpha(kDisabledBackgroundAlpha),
+      disabledColor: useM3Defaults
+          ? null
+          : usedBaseColor
+              .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+              .withAlpha(kDisabledBackgroundAlpha),
       // Same label style on selected and not selected chips, their different
       // background style make them stand out enough.
-      labelStyle: effectiveLabelStyle,
-      secondaryLabelStyle: effectiveLabelStyle,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(radius ?? kChipRadius),
-        ),
-      ),
+      labelStyle: useM3Defaults ? null : effectiveLabelStyle,
+      secondaryLabelStyle: useM3Defaults ? null : effectiveLabelStyle,
+      shape: (useMaterial3 ?? false) && radius == null
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kChipRadius),
+              ),
+            ),
     );
   }
 

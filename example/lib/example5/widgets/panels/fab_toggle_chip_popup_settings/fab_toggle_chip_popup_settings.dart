@@ -222,6 +222,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
         const Divider(),
         ColorSchemePopupMenu(
           title: const Text('Chip color base'),
+          labelForDefault: controller.useMaterial3
+              ? 'default M3 (secondary container)'
+              : 'default (primary with opacity)',
           index: controller.chipSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -245,7 +248,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                         (controller.chipBorderRadius ?? -1) < 0
                     ? chipRadiusDefaultLabel
                     : (controller.chipBorderRadius?.toStringAsFixed(0) ?? '')
-                : 'stadium',
+                : controller.useMaterial3
+                    ? 'default 8'
+                    : 'stadium',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.chipBorderRadius ?? -1
                 : -1,
@@ -271,7 +276,9 @@ class FabToggleChipPopupSettings extends StatelessWidget {
                           ? chipRadiusDefaultLabel
                           : (controller.chipBorderRadius?.toStringAsFixed(0) ??
                               '')
-                      : 'stadium',
+                      : controller.useMaterial3
+                          ? 'default 8'
+                          : 'stadium',
                   style: Theme.of(context)
                       .textTheme
                       .caption!

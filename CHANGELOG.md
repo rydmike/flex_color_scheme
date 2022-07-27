@@ -2,11 +2,11 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## v5.2.0-dev.1 - July 17, 2022
+## v5.2.0-dev.1 - July 27, 2022
 
 This is a dev branch to test features on master 3.1.0 channel
 
-* Remove duplicated and old 5.1.0 changelog entry from July 5, 2022.
+* Remove duplicated parts of 5.1.0 changelog entry from July 5, 2022.
 
 * The `FlexAppBarStyle` property was made nullable. It now defaults to null in all constructors.
   When it is null and `useMaterial3` is false, the app bar will use style `FlexAppBarStyle.primary`
@@ -17,6 +17,14 @@ This is a dev branch to test features on master 3.1.0 channel
 * To `FlexSubThemesData` configuration added `appBarCenterTitle` property that works the 
   same way as `centerTitle` in `AppBar` and its theme. The property is not available in the Themes
   Playground app only via the API.
+
+* Chip sub-themes when opting in on using Material 3, now use upcoming M3 styled Chips instead of 
+  its own opinionated custom style, also when the opinionated component sub-themes are enabled. 
+  To get the same opinionated styled colors as before, set component sub-themes data
+  `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`. This
+  feature will only work with intended design effect in stable channel after feature and PR 
+  ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
+  channel. At the time of writing, this PR is only available on master channel.
 
 **EXAMPLE UPDATES**
 

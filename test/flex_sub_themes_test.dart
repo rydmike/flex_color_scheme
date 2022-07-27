@@ -2147,6 +2147,55 @@ void main() {
       );
     });
     test(
+        'FST1.15-M3: GIVEN a default FlexSubTheme.chipTheme(M3 no-null scheme) '
+        'EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final TextTheme textTheme =
+          Typography.material2018(platform: TargetPlatform.android).black;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          labelStyle: textTheme.button!,
+          baseSchemeColor: SchemeColor.primary,
+          useMaterial3: true,
+        ),
+        equals(
+          ChipThemeData(
+            brightness: Brightness.dark,
+            labelStyle:
+                textTheme.button!.copyWith(color: const Color(0xff310077)),
+            secondaryLabelStyle:
+                textTheme.button!.copyWith(color: const Color(0xff310077)),
+            backgroundColor: const Color(0xffdfccfb),
+            deleteIconColor: const Color(0xff6200ee),
+            disabledColor: const Color(0x313a008e),
+            selectedColor: const Color(0xffbe96f8),
+            secondarySelectedColor: const Color(0xffbe96f8),
+            checkmarkColor: const Color(0xff310077),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.15-M3-n: GIVEN a default FlexSubTheme.chipTheme(M3 null scheme) '
+        'EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final TextTheme textTheme =
+          Typography.material2018(platform: TargetPlatform.android).black;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          labelStyle: textTheme.button!,
+          useMaterial3: true,
+        ),
+        equals(
+          const ChipThemeData(),
+        ),
+      );
+    });
+    test(
         'FST1.16: GIVEN a FlexSubTheme.chipTheme() with usedSchemeColor '
         'Secondary EXPECT equal to ChipThemeData() version '
         'with same values', () {

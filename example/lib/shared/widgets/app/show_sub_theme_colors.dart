@@ -114,8 +114,13 @@ class ShowSubThemeColors extends StatelessWidget {
             colorScheme.primary;
     final Decoration? tooltipDecoration = theme.tooltipTheme.decoration;
     final Color tooltipColor = tooltipDecoration is BoxDecoration
-        ? tooltipDecoration.color ?? colorScheme.surface
-        : colorScheme.surface;
+        ? tooltipDecoration.color ??
+            (isDark
+                ? Colors.white.withOpacity(0.9)
+                : Colors.grey[700]!.withOpacity(0.9))
+        : (isDark
+            ? Colors.white.withOpacity(0.9)
+            : Colors.grey[700]!.withOpacity(0.9));
     final Color appBarColor = theme.appBarTheme.backgroundColor ??
         (isDark ? colorScheme.surface : colorScheme.primary);
     final Color tabBarColor = theme.tabBarTheme.labelColor ??
