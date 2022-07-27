@@ -6,7 +6,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 This is a dev branch to test features on master 3.1.0 channel
 
-* Remove duplicated parts of 5.1.0 changelog entry from July 5, 2022.
+* Removed duplicated parts of 5.1.0 changelog entry from July 5, 2022.
 
 * The `FlexAppBarStyle` property was made nullable. It now defaults to null in all constructors.
   When it is null and `useMaterial3` is false, the app bar will use style `FlexAppBarStyle.primary`
