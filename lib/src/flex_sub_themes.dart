@@ -1107,8 +1107,6 @@ class FlexSubThemes {
     );
   }
 
-  // TODO(rydmike): No padding in Flutter dialog theme, add when available.
-  // The M3 guide https://m3.material.io/components/dialogs/specs specs 24 dp.
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kDialogRadius] = 28 and [elevation] to
@@ -1152,8 +1150,22 @@ class FlexSubThemes {
     /// https://m3.material.io/components/dialogs/specs
     final double? radius,
 
-    /// Dialog elevation defaults to 10 [kDialogElevation].
+    /// Dialog elevation defaults to 6 [kDialogElevation].
     final double? elevation = kDialogElevation,
+
+    /// Padding around the set of [actions] at the bottom of the dialog.
+    ///
+    /// Typically used to provide padding to the button bar between the button bar
+    /// and the edges of the dialog.
+    ///
+    /// If there are no [actions], then no padding will be included. It is also
+    /// important to note that [buttonPadding] may contribute to the padding on
+    /// the edges of [actions] as well.
+    ///
+    /// If null defaults to:
+    /// const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0)
+    /// same as M3 default.
+    final EdgeInsetsGeometry? actionsPadding,
   }) {
     final Color? background =
         (colorScheme == null || backgroundSchemeColor == null)
@@ -1163,6 +1175,8 @@ class FlexSubThemes {
     return DialogTheme(
       elevation: elevation,
       backgroundColor: background,
+      actionsPadding: actionsPadding ??
+          const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kDialogRadius),

@@ -38,7 +38,7 @@ class DialogSettings extends StatelessWidget {
           title: const Text('Background color'),
           labelForDefault: controller.useFlexColorScheme
               ? 'default (surface)'
-              : 'default (alert-date:background) (time:surface)',
+              : 'default (alert&date=background) (time=surface)',
           index: controller.dialogBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

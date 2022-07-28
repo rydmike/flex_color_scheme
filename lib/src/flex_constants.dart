@@ -119,7 +119,10 @@ const double kElevatedButtonElevation = 1;
 const double kPopupMenuElevation = 3;
 
 /// Default elevation of [Dialog].
-const double kDialogElevation = 10;
+///
+/// Based on https://m3.material.io/components/dialogs/specs
+/// and Flutter M3 implementation.
+const double kDialogElevation = 6;
 
 /// Default for elevation of none modal [BottomSheet].
 const double kBottomSheetElevation = 4;

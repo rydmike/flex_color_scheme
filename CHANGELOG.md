@@ -18,13 +18,19 @@ This is a dev branch to test features on master 3.1.0 channel
   same way as `centerTitle` in `AppBar` and its theme. The property is not available in the Themes
   Playground app only via the API.
 
-* Chip sub-theme when opting in on using Material 3, now use upcoming M3 styled Chips instead of 
-  its own opinionated custom style, also when the opinionated component sub-themes are enabled. 
-  To get the same opinionated styled colors as before, set component sub-themes data
+* Updated Chip sub-theme when opting in on using Material 3. It now uses upcoming M3 styled Chips 
+  instead of its own opinionated custom style, also when the opinionated component sub-themes are 
+  enabled. To get the same opinionated styled colors as before, set component sub-themes data
   `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`. This
   feature will only work with intended design effect in stable channel after feature and PR 
   ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
   channel. At the time of writing, this PR is only available on master channel.
+
+* Changed opinionated dialog sub-theme defaults to match M3 defaults. Elevation set to 6, was 
+  10 and actionsPadding defaults to `EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0)`, it
+  did not have a custom default before. These are new defaults for the opinionated dialog sub-theme
+  regardless of using M2 or M3.
+  
 
 **EXAMPLE UPDATES**
 

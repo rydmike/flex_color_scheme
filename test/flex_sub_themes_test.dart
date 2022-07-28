@@ -351,7 +351,9 @@ void main() {
         FlexSubThemes.dialogTheme(),
         equals(
           const DialogTheme(
-            elevation: 10,
+            elevation: 6,
+            actionsPadding:
+                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -373,7 +375,9 @@ void main() {
         equals(
           const DialogTheme(
             backgroundColor: Color(0xFF343476),
-            elevation: 10,
+            elevation: 6,
+            actionsPadding:
+                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -397,7 +401,9 @@ void main() {
         equals(
           const DialogTheme(
             backgroundColor: Color(0xFFDDDDDD),
-            elevation: 10,
+            elevation: 6,
+            actionsPadding:
+                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -421,7 +427,9 @@ void main() {
         equals(
           DialogTheme(
             backgroundColor: colorScheme.tertiary,
-            elevation: 10,
+            actionsPadding:
+                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+            elevation: 6,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -438,10 +446,14 @@ void main() {
         FlexSubThemes.dialogTheme(
           elevation: 10,
           radius: 6,
+          actionsPadding:
+              const EdgeInsets.only(left: 12.0, right: 6.0, bottom: 20.0),
         ),
         equals(
           const DialogTheme(
             elevation: 10,
+            actionsPadding:
+                EdgeInsets.only(left: 12.0, right: 6.0, bottom: 20.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(6),
