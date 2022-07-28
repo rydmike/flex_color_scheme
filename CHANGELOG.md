@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## v5.2.0-dev.1 - July 27, 2022
+## v5.2.0-dev.1 - July 28, 2022
 
 This is a dev branch to test features on master 3.1.0 channel
 
@@ -18,7 +18,7 @@ This is a dev branch to test features on master 3.1.0 channel
   same way as `centerTitle` in `AppBar` and its theme. The property is not available in the Themes
   Playground app only via the API.
 
-* Chip sub-themes when opting in on using Material 3, now use upcoming M3 styled Chips instead of 
+* Chip sub-theme when opting in on using Material 3, now use upcoming M3 styled Chips instead of 
   its own opinionated custom style, also when the opinionated component sub-themes are enabled. 
   To get the same opinionated styled colors as before, set component sub-themes data
   `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`. This

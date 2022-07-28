@@ -156,7 +156,6 @@ class ElevatedButtonShowcase extends StatelessWidget {
 
 // These are commented until https://github.com/flutter/flutter/pull/107382
 // lands in master 3.1.0 channel.
-//
 // TODO(rydmike): Add these buttons to showcase
 // TODO(rydmike): FCS fix FCS M3 defaults.
 //

@@ -2872,20 +2872,19 @@ class FlexSubThemes {
   // }
 
   // TODO(rydmike): SnackBar needs two different corner radius versions.
-  //   The pinned one should not have a shape, but the floating one should.
-  //   Not possible to do via its theme, if it could be then the floating one
-  //   should follow the themed corner radius setting and pinned one
-  //   remain straight. The SnackBar implements different shapes for its
-  //   enum based [SnackBarBehavior], but only if [Shape] property is null:
-  //     If null, [SnackBar] provides different defaults depending on the
-  //     [SnackBarBehavior]. For [SnackBarBehavior.fixed], no overriding shape
-  //     is specified, so the [SnackBar] is rectangular. For
-  //     [SnackBarBehavior.floating], it uses a [RoundedRectangleBorder] with a
-  //     circular corner radius of 4.0.
-  //   Maybe open an issue about the limitation that corner radius on none
-  //   pinned one cannot be changed via theme while keeping straight one
-  //   straight. However, I think M3 will need it too, so it might come then.
+  // The fixed one should not have a shape, but the floating one should.
+  // Not possible to do via its theme, if it could be then the floating one
+  // should follow the themed corner radius setting and pinned one
+  // remain straight. The SnackBar implements different shapes for its
+  // enum based [SnackBarBehavior], but only if [Shape] property is null:
+  // If null, [SnackBar] provides different defaults depending on the
+  // [SnackBarBehavior]. For [SnackBarBehavior.fixed], no overriding shape
+  // is specified, so the [SnackBar] is rectangular. For
+  // [SnackBarBehavior.floating], it uses a [RoundedRectangleBorder] with a
+  // circular corner radius of 4.0.
   //
+  // Opened issue: https://github.com/flutter/flutter/issues/108539
+
   /// An opinionated [SnackBarThemeData] with custom elevation.
   ///
   /// The [elevation] defaults to [kSnackBarElevation] (4).

@@ -5980,6 +5980,7 @@ class FlexColorScheme with Diagnosticable {
       // Define errorColor via color scheme error color.
       errorColor: colorScheme.error,
       // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
+      // https://github.com/flutter/flutter/issues/91772#issuecomment-1198206279
       // Use TabBar style dependent function for selected Tab as indicatorColor
       // if no color scheme selection for it is made.
       indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
