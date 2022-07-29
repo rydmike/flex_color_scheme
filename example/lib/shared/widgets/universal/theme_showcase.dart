@@ -790,55 +790,47 @@ class AppBarShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
-            const Text('Example Widgets and text behind AppBar'),
-            Chip(
-              label: const Text('Chip'),
-              onDeleted: () {},
-            ),
-            const Chip(
-              label: Text('Avatar Chip'),
-              avatar: FlutterLogo(),
-            ),
-            FloatingActionButton.small(
-              onPressed: () {},
-              child: const Icon(Icons.add),
-            ),
-            InputChip(
-              label: const Text('Input Chip'),
-              onSelected: (bool value) {},
-            ),
-            InputChip(
-              showCheckmark: true,
-              selected: true,
-              label: const Text('Chip check'),
-              onSelected: (bool value) {},
-            ),
-            ChoiceChip(
-              label: const Text('Selected Chip'),
-              selected: true,
-              onSelected: (bool value) {},
-            ),
-          ]),
-        ),
-        AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {},
+    return MediaQuery.removePadding(
+      context: context,
+      removeBottom: true,
+      removeTop: true,
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
+              const Text('Widgets & text behind AppBar'),
+              FloatingActionButton.small(
+                onPressed: () {},
+                child: const Icon(Icons.add),
+              ),
+              InputChip(
+                label: const Text('Input Chip'),
+                onSelected: (bool value) {},
+              ),
+              InputChip(
+                showCheckmark: true,
+                selected: true,
+                label: const Text('Chip check'),
+                onSelected: (bool value) {},
+              ),
+            ]),
           ),
-          title: const Text('Material AppBar'),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.search),
+          AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.menu),
               onPressed: () {},
             ),
-          ],
-        ),
-      ],
+            title: const Text('Material AppBar'),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -993,6 +985,7 @@ class _BottomNavigationBarShowcaseState
         MediaQuery.removePadding(
           context: context,
           removeBottom: true,
+          removeTop: true,
           child: BottomNavigationBar(
             currentIndex: buttonIndex,
             onTap: (int value) {
@@ -1065,6 +1058,7 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
         MediaQuery.removePadding(
           context: context,
           removeBottom: true,
+          removeTop: true,
           child: NavigationBar(
             selectedIndex: buttonIndex,
             onDestinationSelected: (int value) {
@@ -1186,37 +1180,44 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
               maxHeight: 1200,
               child: Row(
                 children: <Widget>[
-                  NavigationRail(
-                    extended: isExtended,
-                    useIndicator: widget.useAssertWorkAround ? true : null,
-                    minExtendedWidth: 150,
-                    indicatorColor:
-                        widget.useAssertWorkAround ? Colors.transparent : null,
-                    labelType: isExtended ? NavigationRailLabelType.none : null,
-                    selectedIndex: buttonIndex,
-                    onDestinationSelected: (int value) {
-                      setState(() {
-                        buttonIndex = value;
-                      });
-                    },
-                    destinations: const <NavigationRailDestination>[
-                      NavigationRailDestination(
-                        icon: Icon(Icons.chat_bubble),
-                        label: Text('Chat'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.beenhere),
-                        label: Text('Tasks'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.create_new_folder),
-                        label: Text('Folder'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.logout),
-                        label: Text('Logout'),
-                      ),
-                    ],
+                  MediaQuery.removePadding(
+                    context: context,
+                    removeBottom: true,
+                    removeTop: true,
+                    child: NavigationRail(
+                      extended: isExtended,
+                      useIndicator: widget.useAssertWorkAround ? true : null,
+                      minExtendedWidth: 150,
+                      indicatorColor: widget.useAssertWorkAround
+                          ? Colors.transparent
+                          : null,
+                      labelType:
+                          isExtended ? NavigationRailLabelType.none : null,
+                      selectedIndex: buttonIndex,
+                      onDestinationSelected: (int value) {
+                        setState(() {
+                          buttonIndex = value;
+                        });
+                      },
+                      destinations: const <NavigationRailDestination>[
+                        NavigationRailDestination(
+                          icon: Icon(Icons.chat_bubble),
+                          label: Text('Chat'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.beenhere),
+                          label: Text('Tasks'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.create_new_folder),
+                          label: Text('Folder'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.logout),
+                          label: Text('Logout'),
+                        ),
+                      ],
+                    ),
                   ),
                   const VerticalDivider(width: 1),
                   Expanded(
