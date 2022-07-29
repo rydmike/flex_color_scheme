@@ -795,6 +795,7 @@ class AppBarShowcase extends StatelessWidget {
       removeBottom: true,
       removeTop: true,
       child: Stack(
+        alignment: AlignmentDirectional.center,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -986,28 +987,53 @@ class _BottomNavigationBarShowcaseState
           context: context,
           removeBottom: true,
           removeTop: true,
-          child: BottomNavigationBar(
-            currentIndex: buttonIndex,
-            onTap: (int value) {
-              setState(() {
-                buttonIndex = value;
-              });
-            },
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.chat_bubble),
-                label: 'Chat',
-                // title: Text('Item 1'),
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
+                  const Text('Widgets & text behind BottomNavBar'),
+                  FloatingActionButton.small(
+                    onPressed: () {},
+                    child: const Icon(Icons.add),
+                  ),
+                  InputChip(
+                    label: const Text('Input Chip'),
+                    onSelected: (bool value) {},
+                  ),
+                  InputChip(
+                    showCheckmark: true,
+                    selected: true,
+                    label: const Text('Chip check'),
+                    onSelected: (bool value) {},
+                  ),
+                ]),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.beenhere),
-                label: 'Tasks',
-                // title: Text('Item 2'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.create_new_folder),
-                label: 'Folder',
-                // title: Text('Item 3'),
+              BottomNavigationBar(
+                currentIndex: buttonIndex,
+                onTap: (int value) {
+                  setState(() {
+                    buttonIndex = value;
+                  });
+                },
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.chat_bubble),
+                    label: 'Chat',
+                    // title: Text('Item 1'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.beenhere),
+                    label: 'Tasks',
+                    // title: Text('Item 2'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.create_new_folder),
+                    label: 'Folder',
+                    // title: Text('Item 3'),
+                  ),
+                ],
               ),
             ],
           ),
@@ -1059,25 +1085,50 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
           context: context,
           removeBottom: true,
           removeTop: true,
-          child: NavigationBar(
-            selectedIndex: buttonIndex,
-            onDestinationSelected: (int value) {
-              setState(() {
-                buttonIndex = value;
-              });
-            },
-            destinations: const <NavigationDestination>[
-              NavigationDestination(
-                icon: Icon(Icons.chat_bubble),
-                label: 'Chat',
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
+                  const Text('Widgets & text behind NavBar'),
+                  FloatingActionButton.small(
+                    onPressed: () {},
+                    child: const Icon(Icons.add),
+                  ),
+                  InputChip(
+                    label: const Text('Input Chip'),
+                    onSelected: (bool value) {},
+                  ),
+                  InputChip(
+                    showCheckmark: true,
+                    selected: true,
+                    label: const Text('Chip check'),
+                    onSelected: (bool value) {},
+                  ),
+                ]),
               ),
-              NavigationDestination(
-                icon: Icon(Icons.beenhere),
-                label: 'Tasks',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.create_new_folder),
-                label: 'Folder',
+              NavigationBar(
+                selectedIndex: buttonIndex,
+                onDestinationSelected: (int value) {
+                  setState(() {
+                    buttonIndex = value;
+                  });
+                },
+                destinations: const <NavigationDestination>[
+                  NavigationDestination(
+                    icon: Icon(Icons.chat_bubble),
+                    label: 'Chat',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.beenhere),
+                    label: 'Tasks',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.create_new_folder),
+                    label: 'Folder',
+                  ),
+                ],
               ),
             ],
           ),

@@ -428,7 +428,7 @@ void main() {
           DialogTheme(
             backgroundColor: colorScheme.tertiary,
             actionsPadding:
-                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+                const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             elevation: 6,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
