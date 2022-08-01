@@ -2,7 +2,7 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../example5-themes_playground/widgets/shared/copy_color_to_clipboard.dart';
+import '../../../example5_themes_playground/widgets/shared/copy_color_to_clipboard.dart';
 import '../../const/app_data.dart';
 
 /// This is just simple SizedBox in a Card, with a passed in label, background
