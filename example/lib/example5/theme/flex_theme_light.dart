@@ -137,6 +137,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             // SchemeColor based ColorScheme color used on buttons & toggles.
             textButtonSchemeColor: controller.textButtonSchemeColor,
             elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
+            elevatedButtonSecondarySchemeColor:
+                controller.elevatedButtonSecondarySchemeColor,
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
             switchSchemeColor: controller.switchSchemeColor,

@@ -229,6 +229,11 @@ String generateThemeDartCode(ThemeController controller) {
           controller.elevatedButtonSchemeColor == null
       ? ''
       : '    elevatedButtonSchemeColor: ${controller.elevatedButtonSchemeColor},\n';
+  final String elevatedButtonSecondarySchemeColor = controller
+              .elevatedButtonSecondarySchemeColor ==
+          null
+      ? ''
+      : '    elevatedButtonSecondarySchemeColor: ${controller.elevatedButtonSecondarySchemeColor},\n';
   final String outlinedButtonSchemeColor = controller
                   .outlinedButtonSchemeColor ==
               SchemeColor.primary ||
@@ -585,6 +590,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$textButtonSchemeColor'
           '$elevatedButtonSchemeColor'
+          '$elevatedButtonSecondarySchemeColor'
           '$outlinedButtonSchemeColor'
           '$toggleButtonsSchemeColor'
           //
@@ -677,6 +683,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$textButtonSchemeColor'
           '$elevatedButtonSchemeColor'
+          '$elevatedButtonSecondarySchemeColor'
           '$outlinedButtonSchemeColor'
           '$toggleButtonsSchemeColor'
           //

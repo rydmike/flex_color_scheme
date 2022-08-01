@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## v5.2.0-dev.1 - July 28, 2022
+## v5.2.0-dev.1 - Aug 1, 2022
 
 This is a dev branch to test features on master 3.1.0 channel
 
@@ -31,6 +31,18 @@ This is a dev branch to test features on master 3.1.0 channel
   did not have a custom default before. These are new defaults for the opinionated dialog sub-theme
   regardless of using M2 or M3.
   
+* Updated `ElevatedButton` to support M3 defaults concerning foreground and background color 
+  roles. M3 style also uses stadium border, the correct size, padding and elevation defaults, 
+  when M3 is opted in on. To support the new features `FlexSubThemes.elevatedButtonTheme` got two 
+  new properties, `useMaterial3` (default false) and `onBaseSchemeColor` a default null 
+ `SchemeColor?`. 
+  When `useMaterial3` is `false`, the `baseSchemeColor` is used as background color as before, and 
+  the new property `onBaseSchemeColor` is used as foreground color. 
+  However, when `useMaterial3` is `true`, their roles are reversed. To be able to control the
+  `FlexSubThemes.elevatedButtonTheme` property `onBaseSchemeColor`, the class `FlexSubThemesData`
+  got an `elevatedButtonSecondarySchemeColor` property of type `SchemeColor?`.
+ 
+
 
 **EXAMPLE UPDATES**
 
@@ -42,6 +54,8 @@ This is a dev branch to test features on master 3.1.0 channel
 * Themes Playground: Code gen and control enable/disable for onColor blends updated to lock controls
   with no impact when using seeded color scheme. Code is also not generated for onColor blend 
   settings that has no impact when using seeded color schemes.
+
+* Themes Playground: Features and code gen for additional Material button Scheme colors.
   
 
 ## v5.1.0 - July 8, 2022

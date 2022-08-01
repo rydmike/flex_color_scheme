@@ -18,7 +18,9 @@ class ButtonsSettings extends StatelessWidget {
     final String elevatedButtonRadiusDefaultLabel =
         controller.elevatedButtonBorderRadius == null &&
                 controller.defaultRadius == null
-            ? 'default 20'
+            ? controller.useMaterial3
+                ? 'default stadium'
+                : 'default 20'
             : controller.elevatedButtonBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
@@ -26,7 +28,9 @@ class ButtonsSettings extends StatelessWidget {
     final String outlinedButtonRadiusDefaultLabel =
         controller.outlinedButtonBorderRadius == null &&
                 controller.defaultRadius == null
-            ? 'default 20'
+            ? controller.useMaterial3
+                ? 'default stadium'
+                : 'default 20'
             : controller.outlinedButtonBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
@@ -34,7 +38,9 @@ class ButtonsSettings extends StatelessWidget {
     final String textButtonRadiusDefaultLabel =
         controller.textButtonBorderRadius == null &&
                 controller.defaultRadius == null
-            ? 'default 20'
+            ? controller.useMaterial3
+                ? 'default stadium'
+                : 'default 20'
             : controller.textButtonBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
@@ -52,7 +58,10 @@ class ButtonsSettings extends StatelessWidget {
               'depending on what is in use.'),
         ),
         ColorSchemePopupMenu(
-          title: const Text('ElevatedButton color'),
+          title: const Text('ElevatedButton main color'),
+          subtitle: controller.useMaterial3
+              ? const Text('Foreground color')
+              : const Text('Background color'),
           index: controller.elevatedButtonSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -60,6 +69,26 @@ class ButtonsSettings extends StatelessWidget {
                     controller.setElevatedButtonSchemeColor(null);
                   } else {
                     controller.setElevatedButtonSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('ElevatedButton secondary color'),
+          subtitle: controller.useMaterial3
+              ? const Text('Background color')
+              : const Text('Foreground color'),
+          labelForDefault: controller.useMaterial3
+              ? 'default (surface)'
+              : 'default (onPrimary)',
+          index: controller.elevatedButtonSecondarySchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setElevatedButtonSecondarySchemeColor(null);
+                  } else {
+                    controller.setElevatedButtonSecondarySchemeColor(
                         SchemeColor.values[index]);
                   }
                 }
@@ -83,7 +112,9 @@ class ButtonsSettings extends StatelessWidget {
                     : (controller.elevatedButtonBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
-                : 'default 4',
+                : controller.useMaterial3
+                    ? 'default stadium'
+                    : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.elevatedButtonBorderRadius ?? -1
                 : -1,
@@ -111,7 +142,9 @@ class ButtonsSettings extends StatelessWidget {
                           : (controller.elevatedButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : 'default 4',
+                      : controller.useMaterial3
+                          ? 'default stadium'
+                          : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -153,7 +186,9 @@ class ButtonsSettings extends StatelessWidget {
                     : (controller.outlinedButtonBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
-                : 'default 4',
+                : controller.useMaterial3
+                    ? 'default stadium'
+                    : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.outlinedButtonBorderRadius ?? -1
                 : -1,
@@ -181,7 +216,9 @@ class ButtonsSettings extends StatelessWidget {
                           : (controller.outlinedButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : 'default 4',
+                      : controller.useMaterial3
+                          ? 'default stadium'
+                          : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -222,7 +259,9 @@ class ButtonsSettings extends StatelessWidget {
                     ? textButtonRadiusDefaultLabel
                     : (controller.textButtonBorderRadius?.toStringAsFixed(0) ??
                         '')
-                : 'default 4',
+                : controller.useMaterial3
+                    ? 'default stadium'
+                    : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.textButtonBorderRadius ?? -1
                 : -1,
@@ -250,7 +289,9 @@ class ButtonsSettings extends StatelessWidget {
                           : (controller.textButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : 'default 4',
+                      : controller.useMaterial3
+                          ? 'default stadium'
+                          : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!

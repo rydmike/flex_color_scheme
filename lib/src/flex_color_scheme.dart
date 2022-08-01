@@ -6242,10 +6242,12 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.elevatedButtonTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.elevatedButtonSchemeColor,
+              onBaseSchemeColor: subTheme.elevatedButtonSecondarySchemeColor,
               radius: subTheme.elevatedButtonRadius ?? subTheme.defaultRadius,
               elevation: subTheme.elevatedButtonElevation,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
+              useMaterial3: useMaterial3,
             )
           : null,
       outlinedButtonTheme: useSubThemes

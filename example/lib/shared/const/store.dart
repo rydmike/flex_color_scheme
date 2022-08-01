@@ -655,6 +655,14 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultElevatedButtonSchemeColor = null;
 
+  // Key used to read and save the elevatedButtonSecondarySchemeColor value.
+  static const String keyElevatedButtonSecondarySchemeColor =
+      'elevatedButtonSecondarySchemeColor';
+  // Default value for the elevatedButtonSecondarySchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultElevatedButtonSecondarySchemeColor = null;
+
   // Key used to read and save the elevatedButtonBorderRadius value.
   static const String keyElevatedButtonBorderRadius =
       'elevatedButtonBorderRadius';

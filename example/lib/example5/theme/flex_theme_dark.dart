@@ -94,6 +94,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             //
             textButtonSchemeColor: controller.textButtonSchemeColor,
             elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
+            elevatedButtonSecondarySchemeColor:
+                controller.elevatedButtonSecondarySchemeColor,
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
             switchSchemeColor: controller.switchSchemeColor,

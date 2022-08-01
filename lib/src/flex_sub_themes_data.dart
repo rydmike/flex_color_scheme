@@ -117,12 +117,13 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.textButtonRadius,
     this.elevatedButtonRadius,
-    this.elevatedButtonElevation = kElevatedButtonElevation,
+    this.elevatedButtonElevation,
     this.outlinedButtonRadius,
     this.toggleButtonsRadius,
     //
     this.textButtonSchemeColor,
     this.elevatedButtonSchemeColor,
+    this.elevatedButtonSecondarySchemeColor,
     this.outlinedButtonSchemeColor,
     this.materialButtonSchemeColor,
     this.toggleButtonsSchemeColor,
@@ -606,11 +607,13 @@ class FlexSubThemesData with Diagnosticable {
   /// Elevation of [ElevatedButton].
   ///
   /// This design favors a flat design using colors, the elevated button is
-  /// primary colored by default, it thus needs no elevation or ery little in
-  /// this design.
+  /// primary colored by default, it thus needs no elevation or very little in
+  /// FlexColorSchemes custom design.
   ///
-  /// Defaults to [kElevatedButtonElevation] = 1.
-  final double elevatedButtonElevation;
+  /// If null, defaults to [kElevatedButtonElevation] = 1, when [useMaterial3]
+  /// is false. If [useMaterial3] is true, it is kept null and default M3
+  /// elevation of [ElevatedButton] is kept.
+  final double? elevatedButtonElevation;
 
   /// Border radius value for [OutlinedButton].
   ///
@@ -636,12 +639,28 @@ class FlexSubThemesData with Diagnosticable {
   /// FlexColorScheme sub-theme defaults when opting on its sub themes.
   final SchemeColor? textButtonSchemeColor;
 
-  /// Defines which [Theme] based [ColorScheme] based color the
-  /// [ElevatedButton] use as its base theme color.
+  /// Defines which [Theme] based [ColorScheme] based color, that the
+  /// [ElevatedButton] used as its main color.
   ///
-  /// If not defined it defaults to theme.colorScheme.primary color via
-  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  /// If [useMaterial3] is false, the [elevatedButtonSchemeColor] is used as
+  /// button background color in M2 style. If [useMaterial3] is true, it is
+  /// used as the button foreground color for text and icon.
+  ///
+  /// If not defined, it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on sub themes.
   final SchemeColor? elevatedButtonSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color, that the
+  /// [ElevatedButton] uses as its secondary color.
+  ///
+  /// If [useMaterial3] is false, the [elevatedButtonSecondarySchemeColor] is
+  /// used as button foreground color in M2 style. If [useMaterial3] is true,
+  /// it is used as the button background color.
+  ///
+  /// If not defined, the [elevatedButtonSchemeColor]'s on color will be used if
+  /// [useMaterial3] is false, and if it is true, then [colorScheme.surface]
+  /// will be used as default.
+  final SchemeColor? elevatedButtonSecondarySchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [OutlinedButton] use as its base theme color.
@@ -1847,6 +1866,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? toggleButtonsRadius,
     final SchemeColor? textButtonSchemeColor,
     final SchemeColor? elevatedButtonSchemeColor,
+    final SchemeColor? elevatedButtonSecondarySchemeColor,
     final SchemeColor? outlinedButtonSchemeColor,
     final SchemeColor? materialButtonSchemeColor,
     final SchemeColor? toggleButtonsSchemeColor,
@@ -1970,6 +1990,8 @@ class FlexSubThemesData with Diagnosticable {
           textButtonSchemeColor ?? this.textButtonSchemeColor,
       elevatedButtonSchemeColor:
           elevatedButtonSchemeColor ?? this.elevatedButtonSchemeColor,
+      elevatedButtonSecondarySchemeColor: elevatedButtonSecondarySchemeColor ??
+          this.elevatedButtonSecondarySchemeColor,
       outlinedButtonSchemeColor:
           outlinedButtonSchemeColor ?? this.outlinedButtonSchemeColor,
       materialButtonSchemeColor:
@@ -2184,6 +2206,8 @@ class FlexSubThemesData with Diagnosticable {
         other.toggleButtonsRadius == toggleButtonsRadius &&
         other.textButtonSchemeColor == textButtonSchemeColor &&
         other.elevatedButtonSchemeColor == elevatedButtonSchemeColor &&
+        other.elevatedButtonSecondarySchemeColor ==
+            elevatedButtonSecondarySchemeColor &&
         other.outlinedButtonSchemeColor == outlinedButtonSchemeColor &&
         other.materialButtonSchemeColor == materialButtonSchemeColor &&
         other.toggleButtonsSchemeColor == toggleButtonsSchemeColor &&
@@ -2348,6 +2372,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         textButtonSchemeColor,
         elevatedButtonSchemeColor,
+        elevatedButtonSecondarySchemeColor,
         outlinedButtonSchemeColor,
         materialButtonSchemeColor,
         toggleButtonsSchemeColor,
@@ -2489,6 +2514,9 @@ class FlexSubThemesData with Diagnosticable {
         'textButtonSchemeColor', textButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'elevatedButtonSchemeColor', elevatedButtonSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'elevatedButtonSecondarySchemeColor',
+        elevatedButtonSecondarySchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'outlinedButtonSchemeColor', outlinedButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(

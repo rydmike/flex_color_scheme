@@ -1150,7 +1150,7 @@ void main() {
     // FlexSubThemes ElevatedButton tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.09: GIVEN a default FlexSubTheme.elevatedButtonTheme() '
+        'FST1.09-M2: GIVEN a default M2 FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -1206,9 +1206,178 @@ void main() {
         ),
       );
     });
-    test('FST1.09-states: Does ElevatedButton have right material states', () {
+    test(
+        'FST1.09-M3: GIVEN a default M3 FlexSubTheme.elevatedButtonTheme() '
+        'EXPECT equal to ElevatedButtonThemeData() version with '
+        'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
-      // Disabled foreground
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          ElevatedButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.onSurface.withOpacity(0.38);
+                }
+                return colorScheme.primary;
+              }),
+              backgroundColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return colorScheme.onPrimary;
+              }),
+              overlayColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.primary.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.primary.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.primary.withOpacity(0.12);
+                }
+                return null;
+              }),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.09-secondary: GIVEN a default FlexSubTheme.elevatedButtonTheme() '
+        'with secondary color as base color '
+        'EXPECT equal to ElevatedButtonThemeData() version with '
+        'same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(40, 40),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ), //buttonShape,
+              elevation: 1,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.secondary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.onSecondary;
+                },
+              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.secondary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x31);
+                  }
+                  return colorScheme.secondary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.onPrimary.withAlpha(0x0D);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.onPrimary.withAlpha(0x26);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onPrimary.withAlpha(0x33);
+                  }
+                  return Colors.transparent;
+                },
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.09-secondary-onBase: GIVEN a default '
+        'FlexSubTheme.elevatedButtonTheme() '
+        'with secondary color as onBase color '
+        'EXPECT equal to ElevatedButtonThemeData() version with '
+        'same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          onBaseSchemeColor: SchemeColor.secondary,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size(40, 40),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ), //buttonShape,
+              elevation: 1,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.secondary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.onSecondary;
+                },
+              ),
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x31);
+                  }
+                  return colorScheme.primary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.onSecondary.withAlpha(0x0D);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.onSecondary.withAlpha(0x26);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onSecondary.withAlpha(0x33);
+                  }
+                  return Colors.transparent;
+                },
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test('FST1.09-M2-states: Does ElevatedButton have right Material 2 states',
+        () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      // Disabled foreground, default, M2
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
             .style!
@@ -1218,6 +1387,19 @@ void main() {
             .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
             .withAlpha(kDisabledForegroundAlpha)),
       );
+      // Disabled foreground, default, M2
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+                colorScheme: colorScheme,
+                baseSchemeColor: SchemeColor.secondary)
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.secondary
+            .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+            .withAlpha(kDisabledForegroundAlpha)),
+      );
+      // Selected foreground, M2
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
             .style!
@@ -1225,7 +1407,28 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.onPrimary),
       );
-      // Disabled background
+      // Selected foreground, custom color, M2
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+                colorScheme: colorScheme,
+                baseSchemeColor: SchemeColor.secondary)
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.onSecondary),
+      );
+      // Selected foreground, custom colors, M2
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+                colorScheme: colorScheme,
+                baseSchemeColor: SchemeColor.secondary,
+                onBaseSchemeColor: SchemeColor.tertiary)
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      // Disabled background, M2
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
             .style!
@@ -1270,6 +1473,120 @@ void main() {
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(Colors.transparent),
+      );
+    });
+    test('FST1.09-M3-states: Does ElevatedButton have right Material 3 states',
+        () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      // Disabled foreground, default, M3
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      // Disabled foreground, default, M3
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      // Selected foreground, M3
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary),
+      );
+      // Selected foreground, custom color, M3
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary),
+      );
+      // Selected foreground, custom colors, M3
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          onBaseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.secondary),
+      );
+      // Disabled background, M3
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        )
+            .style!
+            .backgroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
+      // Selected background, M3
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        )
+            .style!
+            .backgroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.surface),
+      );
+      // Overlay color states
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withOpacity(0.08)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
       );
     });
     test(
@@ -1345,6 +1662,7 @@ void main() {
         FlexSubThemes.elevatedButtonTheme(
                 colorScheme: colorScheme,
                 baseSchemeColor: SchemeColor.tertiary,
+                onBaseSchemeColor: SchemeColor.secondary,
                 elevation: 1,
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 minButtonSize: const Size(55, 55),
@@ -1369,7 +1687,7 @@ void main() {
                         .blendAlpha(colorScheme.onSurface, 0x66)
                         .withAlpha(0x5E);
                   }
-                  return colorScheme.onTertiary;
+                  return colorScheme.secondary;
                 },
               ),
               backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -1396,6 +1714,130 @@ void main() {
                   return Colors.transparent;
                 },
               ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.09custom-1-M3: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'EXPECT equal to ElevatedButtonThemeData() version with '
+        'same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 1,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          minButtonSize: const Size(50, 50),
+          radius: 10,
+          useMaterial3: true,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          ElevatedButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.onSurface.withOpacity(0.38);
+                }
+                return colorScheme.primary;
+              }),
+              backgroundColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return colorScheme.onPrimary;
+              }),
+              overlayColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.primary.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.primary.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.primary.withOpacity(0.12);
+                }
+                return null;
+              }),
+              minimumSize:
+                  ButtonStyleButton.allOrNull<Size>(const Size(50, 50)),
+              padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
+                  const EdgeInsets.symmetric(horizontal: 8)),
+              elevation: ButtonStyleButton.allOrNull<double>(1),
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+              ), //buttonShape,
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.09custom-2-M3: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'EXPECT equal to ElevatedButtonThemeData() version with '
+        'same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          onBaseSchemeColor: SchemeColor.secondary,
+          elevation: 2,
+          padding: const EdgeInsets.symmetric(horizontal: 9),
+          minButtonSize: const Size(55, 55),
+          radius: 12,
+          useMaterial3: true,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          ElevatedButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.onSurface.withOpacity(0.38);
+                }
+                return colorScheme.tertiary;
+              }),
+              backgroundColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return colorScheme.secondary;
+              }),
+              overlayColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.tertiary.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.tertiary.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.tertiary.withOpacity(0.12);
+                }
+                return null;
+              }),
+              minimumSize:
+                  ButtonStyleButton.allOrNull<Size>(const Size(55, 55)),
+              padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
+                  const EdgeInsets.symmetric(horizontal: 9)),
+              elevation: ButtonStyleButton.allOrNull<double>(2),
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                ),
+              ), //buttonShape,
             ),
           ).toString(),
         ),

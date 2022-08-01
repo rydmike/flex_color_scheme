@@ -321,6 +321,9 @@ class ThemeController with ChangeNotifier {
     _elevatedButtonSchemeColor = await _themeService.load(
         Store.keyElevatedButtonSchemeColor,
         Store.defaultElevatedButtonSchemeColor);
+    _elevatedButtonSecondarySchemeColor = await _themeService.load(
+        Store.keyElevatedButtonSecondarySchemeColor,
+        Store.defaultElevatedButtonSecondarySchemeColor);
     _elevatedButtonBorderRadius = await _themeService.load(
         Store.keyElevatedButtonBorderRadius,
         Store.defaultElevatedButtonBorderRadius);
@@ -592,6 +595,8 @@ class ThemeController with ChangeNotifier {
     await setTextButtonBorderRadius(Store.defaultTextButtonBorderRadius, false);
     await setElevatedButtonSchemeColor(
         Store.defaultElevatedButtonSchemeColor, false);
+    await setElevatedButtonSecondarySchemeColor(
+        Store.defaultElevatedButtonSecondarySchemeColor, false);
     await setElevatedButtonBorderRadius(
         Store.defaultElevatedButtonBorderRadius, false);
     await setOutlinedButtonSchemeColor(
@@ -1806,6 +1811,18 @@ class ThemeController with ChangeNotifier {
     _elevatedButtonSchemeColor = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyElevatedButtonSchemeColor, value);
+  }
+
+  late SchemeColor? _elevatedButtonSecondarySchemeColor;
+  SchemeColor? get elevatedButtonSecondarySchemeColor =>
+      _elevatedButtonSecondarySchemeColor;
+  Future<void> setElevatedButtonSecondarySchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _elevatedButtonSecondarySchemeColor) return;
+    _elevatedButtonSecondarySchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(
+        Store.keyElevatedButtonSecondarySchemeColor, value);
   }
 
   late double? _elevatedButtonBorderRadius;

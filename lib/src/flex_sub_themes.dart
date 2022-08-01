@@ -1204,10 +1204,28 @@ class FlexSubThemes {
     /// Selects which color from the passed in colorScheme to use as the main
     /// color for the button.
     ///
+    /// If [useMaterial3] is false, the [baseSchemeColor] is used as button
+    /// background color in M2 style, and if it is true, it is used as the
+    /// button foreground color for text and icon.
+    ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
     /// If not defined, [colorScheme.primary] will be used.
     final SchemeColor? baseSchemeColor,
+
+    /// Selects which color from the passed in colorScheme to use as the
+    /// secondary color, or on color for for the button.
+    ///
+    /// If [useMaterial3] is false, the [onBaseSchemeColor] is used as button
+    /// foreground color in M2 style, and if it is true, it is used as the
+    /// button background color..
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, the [baseSchemeColor] on color will be used if
+    /// [useMaterial3] is false, if it is true, then [colorScheme.surface] will
+    /// be used.
+    final SchemeColor? onBaseSchemeColor,
 
     /// The button corner radius.
     ///
@@ -1216,12 +1234,23 @@ class FlexSubThemes {
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
-    /// The button elevation
+    /// The button elevation.
     ///
-    /// Defaults to [kElevatedButtonElevation] 1, making it a bit more flat in
-    /// its elevation state than Flutter SDK, that defaults to 2.
-    /// An opinionated choice.
-    final double elevation = kElevatedButtonElevation,
+    /// If null and passed in [useMaterial3] is false then it defaults to using
+    /// [kElevatedButtonElevation] 1 with [ElevatedButton.styleFrom], making it
+    /// a bit more flat in its elevation state than Flutter M2, that defaults
+    /// to 2.
+    ///
+    /// If null and passed in [useMaterial3] is true, then it defaults to using
+    /// the M3 elevation defaults by keeping elevation null and using default
+    /// M3 elevated button style. This requires that the ambient theme also uses
+    /// Material 3.
+    ///
+    /// If a value is passed in, the [ElevatedButton.styleFrom] constructor used
+    /// for M2 style elevation is used with the passed in value. The
+    /// constructor has its own built on logic for the different elevation
+    /// values for its MaterialStateProperty.
+    final double? elevation,
 
     /// Padding for the button theme.
     ///
@@ -1230,68 +1259,193 @@ class FlexSubThemes {
     /// M3 has more horizontal padding 24dp, but the tighter default padding
     /// in M2 that is 16dp looks fine as well when using stadium borders
     /// as in M3.
-    /// Making the custom scalable padding and separate one for icon
-    /// versions is rather involved, so sticking to defaults, but exposing the
-    /// padding property for future or external use.
+    ///
+    /// If null and [useMaterial3] is true in the context, the correct M3
+    /// button theme default computed button padding for M3 will be used.
     final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
-    /// Defaults to `kButtonMinSize` = Size(40, 40).
-    final Size minButtonSize = kButtonMinSize,
+    /// If null, defaults to [kButtonMinSize] (`const Size(64.0, 40.0)`) when
+    /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
+    /// [useMaterial3] is true.
+    final Size? minButtonSize,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
+    /// Use Material3 default style when properties are undefined and Flutter
+    /// defaults are requested with `useFlutterDefaults` property.
+    ///
+    /// Defaults will still use FlexColorScheme's own opinionated
+    /// defaults values, unless `useFlutterDefaults` is also set to true. In
+    /// that case the Material 3 default will be used if `useMaterial3` is true,
+    /// and Material 2 defaults will be used if it is false.
+    ///
+    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// Flutter SDK 3.0.5 [useMaterial3] documentation:
+    /// -----------------------------------------------
+    /// If true, then components that have been migrated to Material 3 will
+    /// use new colors, typography and other features of Material 3.
+    /// If false, they will use the Material 2 look and feel.
+    ///
+    /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
+    /// some properties will get special defaults. However, just copying a
+    /// [ThemeData] with [useMaterial3] set to true will not change any of
+    /// these properties in the
+    /// resulting [ThemeData]. These properties are:
+    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; }
+    /// td { border: 1px solid }</style>
+    ///
+    /// | Property        | Material 3 default           | Fallback default  |
+    /// | :-------------- | :--------------------------- | :---------------- |
+    /// | [typography] | [Typography.material2021] | [Typography.material2014] |
+    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]       |
+    ///
+    /// \* if and only if the target platform is Android and the app is not
+    /// running on the web, otherwise it will fallback to [InkRipple].
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app. Some components will be migrated
+    /// before others and typography changes will be coming in stages.
+    ///
+    /// [useMaterial3] defaults to false. After all the migrated components
+    /// have landed on stable, we will change this to be true by default. After
+    /// that change has landed on stable, we will deprecate this flag and remove
+    /// all uses of it. Everything will use the Material 3 look and feel at
+    /// that point.
+    ///
+    /// Components that have been migrated to Material 3 are:
+    ///
+    ///   * [AlertDialog]
+    ///   * [AppBar]
+    ///   * [Card]
+    ///   * [Dialog]
+    ///   * [ElevatedButton]
+    ///   * [FloatingActionButton]
+    ///   * [Material]
+    ///   * [NavigationBar]
+    ///   * [NavigationRail]
+    ///   * [OutlinedButton]
+    ///   * [StretchingOverscrollIndicator], replacing the
+    ///     [GlowingOverscrollIndicator]
+    ///   * [TextButton]
+    final bool useMaterial3 = false,
   }) {
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
-    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+    final Color onBaseColor = onBaseSchemeColor == null
+        ? useMaterial3
+            ? schemeColor(SchemeColor.surface, colorScheme)
+            : schemeColorPair(baseScheme, colorScheme)
+        : schemeColor(onBaseSchemeColor, colorScheme);
 
-    return ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        minimumSize: minButtonSize,
-        padding: padding,
-        elevation: elevation,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kButtonRadius),
+    // We are using FCS M2 buttons, styled in M3 fashion.
+    if (!useMaterial3) {
+      return ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          minimumSize: minButtonSize ?? kButtonMinSize,
+          padding: padding,
+          elevation: elevation ?? kElevatedButtonElevation,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(radius ?? kButtonRadius),
+            ),
+          ), //buttonShape,
+        ).copyWith(
+          foregroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return baseColor
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledForegroundAlpha);
+              }
+              return onBaseColor;
+            },
           ),
-        ), //buttonShape,
-      ).copyWith(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledForegroundAlpha);
-            }
-            return onBaseColor;
-          },
+          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return baseColor
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              return baseColor;
+            },
+          ),
+          overlayColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.hovered)) {
+                return onBaseColor.withAlpha(kHoverBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return onBaseColor.withAlpha(kFocusBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.pressed)) {
+                return onBaseColor.withAlpha(kPressedBackgroundAlpha);
+              }
+              return Colors.transparent;
+            },
+          ),
         ),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledBackgroundAlpha);
-            }
-            return baseColor;
-          },
+      );
+      //
+      // We are using M3 style buttons, with potentially custom radius,
+      // elevation, foregroundColor, backgroundColor, overlayColor, padding
+      // and minButtonSize.
+    } else {
+      final MaterialStateProperty<Color?> foregroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return colorScheme.onSurface.withOpacity(0.38);
+        }
+        return baseColor;
+      });
+
+      final MaterialStateProperty<Color?> backgroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return colorScheme.onSurface.withOpacity(0.12);
+        }
+        return onBaseColor;
+      });
+
+      final MaterialStateProperty<Color?> overlayColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return baseColor.withOpacity(0.08);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return baseColor.withOpacity(0.12);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return baseColor.withOpacity(0.12);
+        }
+        return null;
+      });
+
+      return ElevatedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: foregroundColor,
+          backgroundColor: backgroundColor,
+          overlayColor: overlayColor,
+          minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
+          padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
+          elevation: ButtonStyleButton.allOrNull<double>(elevation),
+          shape: radius == null
+              ? null
+              : ButtonStyleButton.allOrNull<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(radius),
+                    ),
+                  ),
+                ),
         ),
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return onBaseColor.withAlpha(kHoverBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.focused)) {
-              return onBaseColor.withAlpha(kFocusBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return onBaseColor.withAlpha(kPressedBackgroundAlpha);
-            }
-            return Colors.transparent;
-          },
-        ),
-      ),
-    );
+      );
+    }
   }
 
   /// An opinionated [FloatingActionButtonThemeData] with custom border radius.
