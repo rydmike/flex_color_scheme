@@ -2531,7 +2531,7 @@ class FlexSubThemes {
     /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
     /// prefer keeping this setting false.
     ///
-    /// If undefined, defaults to false.
+    /// Defaults to false.
     final bool useFlutterDefaults = false,
   }) {
     // Determine if we can even use default icon styles, only when all are null,
