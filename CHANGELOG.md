@@ -2,71 +2,122 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## v5.2.0-dev.1 - Aug 1, 2022
+## v5.2.0-dev.1 - Aug 2, 2022
 
-This is a dev branch to test features on master 3.1.0 channel
+This is a dev branch to test features on master 3.1.0 channel and prepare for next step of 
+style and feature alignments when `useMaterial3` is true. 
 
-* Removed duplicated parts of 5.1.0 changelog entry from July 5, 2022.
+Due to a number of known and further below listed
+Flutter SDK issues when using `useMaterial3` set to `true`, we cannot yet recommend using the 
+option. Use it only if you are willing to accept the still incomplete Material 3 implementation in 
+Flutter and the listed issues. If you keep it `false`, and use FCS opinionated, you can optionally 
+create a theme that is visually fairly similar to M3, but still using M2 `ThemeData` mode to avoid
+the issues.
+
+**STYLE CHANGE BREAKING**
 
 * `FlexSubThemesData.fabUseShape` opinionated component theme style default was changed from `true`
-  to `false`. This is a style break with previous versions. The opinionated style change was done
+  to `false`. This is a breaking style with previous versions. The opinionated style change was done
   to use a style that by default matches M3 style when `ThemeData.useMaterial3` is `true`.
   The new default style is also a way to work around issue 
   [#107946](https://github.com/flutter/flutter/issues/107946), where it is shown that you cannot 
   create a theme that replicates the default roundings in M3 of the FAB.
+  **Style migration**: If you had kept `FlexSubThemesData.fabUseShape` unspecified and relayed on
+  default value in a previous version, you must set it to `true` to get the same result as before.
+  These breaking style changes in the opinionated opt in component sub-themes are unfortunate,
+  but required as FlexColorScheme continues to evolve with Flutter SDK to support Material 3 
+  theming, while offering its own opinionated tweaks on some M3 default styles.
+
+**STYLE CHANGE MINOR**
 
 * The `FlexAppBarStyle` property was made nullable. It now defaults to null in all constructors.
   When it is null and `useMaterial3` is false, the app bar will use style `FlexAppBarStyle.primary`
   in light mode as default, like before and `FlexAppBarStyle.material` in dark mode. However, if
   `useMaterial3` is true, then it will use `FlexAppBarStyle.surface` in both light and dark mode,
-  to match the un-themed defaults in Material 3 design.
+  to match the un-themed defaults of Material 3 design `AppBar`.
+
+* Updated `Chip` sub-theme when opting in on `useMaterial3`. When `true` it now uses upcoming M3
+  styled Chips instead of its own opinionated custom style, also when the opinionated component 
+  sub-themes are enabled. To get the same opinionated coloring as before, but on the M3 styled 
+  chips when using M3, set component sub-themes data 
+  `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`. 
+  This feature will only work with intended design in stable channel after feature and PR
+  ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
+  channel. Currently, it is only available in Flutter `master 3.1.0-*`.
+
+* Changed opinionated dialog sub-theme defaults to match M3 defaults. Elevation set to 6, was
+  10 and actionsPadding defaults to `EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0)`, it
+  did not have a custom default before. These are new defaults for the opinionated dialog sub-theme
+  regardless of using M2 or M3.
+
+* Updated `ElevatedButton` to support `useMaterial3` defaults concerning its switched foreground and 
+  background color roles. Using M3 now also uses stadium border, the correct size, padding and 
+  elevation defaults, when `useMaterial3` is opted in on.
+
+**NEW**
 
 * To `FlexSubThemesData` configuration added `appBarCenterTitle` property that works the 
   same way as `centerTitle` in `AppBar` and its theme. The property is not available in the Themes
   Playground app, only via the API.
 
-* Updated `Chip` sub-theme when opting in on using Material 3. It now uses upcoming M3 styled Chips 
-  instead of its own opinionated custom style, also when the opinionated component sub-themes are 
-  enabled. To get the same opinionated styled colors as before, set component sub-themes data
-  `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`. This
-  feature will only work with intended design effect in stable channel after feature and PR 
-  ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
-  channel. At the time of writing, this PR is only available on master channel. As noted in 
-  [PR 107166 comment](https://github.com/flutter/flutter/pull/107166#issuecomment-1189206217), the
-  M3 styles do not yet style plain vanilla Chips when using Material 3. This might be fixed
-  in an additional PR later in the SDK.
-
-* Changed opinionated dialog sub-theme defaults to match M3 defaults. Elevation set to 6, was 
-  10 and actionsPadding defaults to `EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0)`, it
-  did not have a custom default before. These are new defaults for the opinionated dialog sub-theme
-  regardless of using M2 or M3.
-  
-* Updated `ElevatedButton` to support M3 defaults concerning foreground and background color 
-  roles. M3 style also uses stadium border, the correct size, padding and elevation defaults, 
-  when M3 is opted in on. To support the new features `FlexSubThemes.elevatedButtonTheme` got two 
+* To support the new features `FlexSubThemes.elevatedButtonTheme` got two 
   new properties, `useMaterial3` (defaults to false) and `onBaseSchemeColor` a default null 
- `SchemeColor?`.  
-  When `useMaterial3` is `false`, the `baseSchemeColor` is used as background color as before, and 
-  the new property `onBaseSchemeColor` is used as foreground color. 
+ `SchemeColor?`. When `useMaterial3` is `false`, the `baseSchemeColor` is used as background 
+  color as before, and the new property `onBaseSchemeColor` is used as foreground color. 
   However, when `useMaterial3` is `true`, their roles are reversed. To be able to control the
   `FlexSubThemes.elevatedButtonTheme` property `onBaseSchemeColor`, the class `FlexSubThemesData`
   got an `elevatedButtonSecondarySchemeColor` property of type `SchemeColor?`, that 
   `FlexColorScheme.toTheme` uses.
 
+**FIX**
 
-**EXAMPLE UPDATES**
+* Removed duplicated doc parts of 5.1.0 changelog entry from July 5, 2022.
 
-* Themes Playground: Updated the default AppBar style, it uses a dropdown menu that can also select 
+**EXAMPLES**
+
+* *Themes Playground:* Updated the default AppBar style, it uses a dropdown menu that can also select 
   'null' choice and use default M2 and M3 theming as defaults via it. The AppBar panel now also
   displays an AppBar Widget of its own, so one does not have to look at the actual AppBar to
   see the style. It also has widgets below it used to demonstrate the opacity setting.
 
-* Themes Playground: Code gen and control enable/disable for onColor blends updated to lock controls
+* *Themes Playground:* Code gen and control enable/disable for onColor blends updated to lock controls
   with no impact when using seeded color scheme. Code is also not generated for onColor blend 
   settings that has no impact when using seeded color schemes.
 
 * Themes Playground: Features and code gen for additional Material button Scheme colors.
-  
+
+**KNOWN FLUTTER SDK ISSUES**
+
+The issues below in the Flutter SDK itself, are known to impact FlexColorScheme and Flutter
+theming in general.
+
+* The M3 Chip themes available in Flutter `master 3.1.0-*` at the time of writing, do as noted here
+  [PR 107166 comment](https://github.com/flutter/flutter/pull/107166#issuecomment-1189206217),
+  not yet style plain vanilla Chips when using Material 3. This might be fixed in an 
+  additional PR later in the SDK.
+
+* [**#107946**](https://github.com/flutter/flutter/issues/107946) Cannot theme Shape and IconSize 
+  differently for different sized FloatingActionButtons. One of the drivers behind the breaking
+  FAB defaults for the opinionated FAB theme was this issue.
+
+* [**#108539**](https://github.com/flutter/flutter/issues/108539) Cannot theme shape independently 
+  for `SnackBar` with different `behavior`. This is the reason why FCS does not offer a custom shape
+  in its opinionated `SnackBar` theme.
+
+The Flutter SDK M3 `useMaterial3` flag set to `true` continues to have a number of challenges in
+addition to the above ones. We as before still have these issues in Flutter 3.0.5 stable and
+also at least in Flutter master 3.1.0-0.0.pre.2033 and earlier:
+
+* [**#107190**](https://github.com/flutter/flutter/issues/107190) Elevation issue with Material 
+  widget, when opting in on useMaterial3 causes widespread elevation issues.
+
+* [**#103864**](https://github.com/flutter/flutter/issues/103864) Dynamically changing Typography 
+  in ThemeData generates an error
+
+* [**#107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` 
+  properties `iconTheme` and `actionsIconTheme` ignored on master channel when `useMaterial3`
+  is true.
+
 
 ## v5.1.0 - July 8, 2022
 
@@ -160,29 +211,29 @@ This is a dev branch to test features on master 3.1.0 channel
   might run into this lint being triggered by older Stateful Widgets. The lint warning was
   addressed in the package and examples.
 
-**EXAMPLE UPDATES**
+**EXAMPLES**
 
-* Added a **Theme Extensions** example to the default example app, i.e. the "Hot Reload Playground".
+* Added a **Theme Extensions** example to the default example app *Hot Reload Playground*.
 
-* Themes Playground: Updated the default style info labels for Switch, CheckBox and Radio.
+* *Themes Playground:* Updated the default style info labels for Switch, CheckBox and Radio.
 
-* Themes Playground: To the top row theme selector, where the FlexColorScheme and component themes  
+* *Themes Playground:* To the top row theme selector, where the FlexColorScheme and component themes  
   switches are, added the "Use Material 3" toggle. Previously this toggle was only available on the
   introduction panel. The availability in the header makes it easy to toggle it ON and OFF at
   any time, to see what impact it has on widgets.
 
-* Themes Playground: Updated the default style info labels for the NavigationBar. The logic to display 
+* *Themes Playground:* Updated the default style info labels for the NavigationBar. The logic to display 
   default color labels in different config modes (M2/M3/FCS/FCS+M2/FCS+M3) is quite involved, please 
   report any issues. 
 
-* Themes Playground: Updated the default style info labels for the NavigationRail. The logic to display
+* *Themes Playground:* Updated the default style info labels for the NavigationRail. The logic to display
   default color labels in different config modes (M2/M3/FCS/FCS+M2/FCS+M3) is quite involved, please
   report any issues.
 
-* Themes Playground: Due to issue [#107190](https://github.com/flutter/flutter/issues/107190), the
+* *Themes Playground:* Due to issue [#107190](https://github.com/flutter/flutter/issues/107190), the
   Playground previous default to use Material 3 was changed to false. 
 
-* Added support in Themes Playground to customize the `surfaceTint` color. It controls both the
+* *Themes Playground:* Added support to customize the `surfaceTint` color. It controls both the
   elevation color used for elevated `Material` surfaces in M3. Plus for FlexColorScheme it is also 
   used as the surface blend color. By default, the `surfaceTint` color equals `ColorScheme.primary` 
   color. Generally there are not many good design reasons to change the color, but it is now 
@@ -195,11 +246,11 @@ This is a dev branch to test features on master 3.1.0 channel
 The issues below in the Flutter SDK itself, are known to impact FlexColorScheme and Flutter 
 theming in general.
 
-* Switching Typography dynamically in Flutter SDK ThemeData is broken, see
+* Switching `Typography` dynamically in Flutter SDK ThemeData is broken, see
   issue [#103864](https://github.com/flutter/flutter/issues/103864) for more information.
-  If it is done and the error ignored, an app doing so eventually become unstable.
+  If it is done and the error ignored, an app doing so eventually becomes unstable.
 
-* The Themes Playground app contains a workaround to
+* The *Themes Playground* app contains a workaround to
   avoid issue [#103864](https://github.com/flutter/flutter/issues/103864). The workaround
   is done by always using 2021 Typography, but simulating 2018 Typography. This is done by using
   a custom TextTheme that looks like 2018 Typography is used when using M2 theme mode. The
@@ -208,8 +259,8 @@ theming in general.
   like 2018 Typography is used. All other examples also avoid the issue by only using the 
   M3 2021 Typography and not even mimicking a switch between M2 and M3 Typography. 
 
-  The above workaround is needed because the Playground app has toggles that switches Typography
-  frequently, without the workaround it will eventually crash. With this workaround it never
+  The above workaround is needed because the *Themes Playground* app has toggles that switches 
+  `Typography` frequently, without the workaround it will eventually crash. With this workaround it never
   switches Typography, it just looks like it does, but app stays in 2021 Typography all the time.
   The by Themes Playground generated ThemeData config will use the actual real effective 
   Typography. This is also fine, since an app using the theme will likely never switch used 
@@ -230,8 +281,8 @@ theming in general.
   [#54](https://github.com/rydmike/flex_color_scheme/issues/54). There are no good workarounds 
   for using elevation on these widgets when `useMaterial3` is true. The options are to not use
   M3, if such elevations are important to your app design. One working fix is to wrap those widgets
-  in a theme where `useMaterial3` is false, then te rest of your app can still use it. This is 
-  however a rather tedious workaround fix. Due to current SDK `Material` elevation issues when 
+  in a theme where `useMaterial3` is false, then the rest of your app can still use it. This is 
+  however a rather tedious workaround. Due to current Flutter SDK `Material` elevation issues when 
   `useMaterial3` is true, it is recommended to not use it yet.
 
 * This regression in master channel impacts AppBar icon colors when using Material 3 
@@ -276,7 +327,7 @@ if you have used any of them directly, they still work. The old built-in
 variant color values will remain available at least until version 6.0,
 maybe even 7.0 if so requested by users.
 
-**Breaking**
+**BREAKING**
 
 * Requires at least Flutter 2.10.0.
   * Version 5.0.0 requires at least Flutter version 2.10.0 to work. This breaking
@@ -335,7 +386,7 @@ theme: FlexThemeData.light(
     and null when not using it.
 
 
-**Breaking** and deprecated due to Flutter SDK change in 2.10.0 stable release.
+**DEPRECATED and BREAKING** due to Flutter SDK change in 2.10.0 stable release.
 
 * `primaryVariant` and `secondaryVariant`
   * The colors `primaryVariant` and `secondaryVariant` in FlexColorScheme are
@@ -374,7 +425,7 @@ theme: FlexThemeData.light(
     eventually when the Flutter SDK `ColorScheme` colors `primaryVariant` and `secondaryVariant`
     are removed after a year or so.
 
-**Change** and breaking past style.
+**CHANGE** and breaking past style.
 
 * The custom "internal" and temporary `m3TextTheme` was changed.
   It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2.
@@ -407,7 +458,7 @@ theme: FlexThemeData.light(
   of the new Material 3 ColorScheme, the opportunity to improve this color value used in the
   built-in theme `espresso` theme was used.
 
-**Beware**
+**BEWARE**
 
 * `SchemeColor` values and order, potentially breaking.
   The enum `SchemeColor` has new values and past values are in a new order.
@@ -601,9 +652,9 @@ theme: FlexThemeData.light(
   to `FlexSubThemesData`, to expose their already existing properties in
   corresponding sub-themes used by `FlexColorScheme`.
 
-**DEMO APPS**
+**EXAMPLES**
 
-* **Themes Playground** improvements:
+* *Themes Playground:*
   - Added a new single panel "Page" view. The previous large masonry grid view
     is still available. Both views can be used and switch to based on what
     is appropriate when using different media sizes.
@@ -1121,17 +1172,18 @@ should be relatively easy, despite the long list of changes and new features.
   also a temporary workaround implemented, it attempts to keep system icons from
   getting the wrong brightness on Android 11. It may not always work.
 
-**EXAMPLES and Themes Playground**
-* Update examples 1...4
+**EXAMPLES**
+* Updates to examples 1...4
   - Add a few of the new features to examples 3 and 4.
   - Removed showing the old, already in Flutter v1.26 deprecated
     buttons `RaisedButton`, `OutlineButton` and `FlatButton` in ALL the examples.
     They are going away in next stable release of Flutter after 2.10.x, as
     per this notice [#98537](https://github.com/flutter/flutter/issues/98537).
 
-* Update default example app, the **Hot Reload Playground**.
-* Major update for "example 5" the **Themes Playground**
-  to include support for all the new features. Updates listed below:
+* Update default example app *Hot Reload Playground*.
+
+* Major update to example 5 *Themes Playground*, it now
+  includes support for all the new features:
 
   - Added config for unselected toggleable style.
   - Added feature to export the code for the active `ColorScheme`.
