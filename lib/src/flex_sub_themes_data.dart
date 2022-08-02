@@ -125,6 +125,7 @@ class FlexSubThemesData with Diagnosticable {
     this.elevatedButtonSchemeColor,
     this.elevatedButtonSecondarySchemeColor,
     this.outlinedButtonSchemeColor,
+    this.outlinedButtonOutlineSchemeColor,
     this.materialButtonSchemeColor,
     this.toggleButtonsSchemeColor,
     //
@@ -658,19 +659,31 @@ class FlexSubThemesData with Diagnosticable {
   /// it is used as the button background color.
   ///
   /// If not defined, the [elevatedButtonSchemeColor]'s on color will be used if
-  /// [useMaterial3] is false, and if it is true, then [colorScheme.surface]
+  /// [useMaterial3] is false, and if it is true, then [ColorScheme.surface]
   /// will be used as default.
   final SchemeColor? elevatedButtonSecondarySchemeColor;
 
-  /// Defines which [Theme] based [ColorScheme] based color the
-  /// [OutlinedButton] use as its base theme color.
+  /// Defines which [Theme] based [ColorScheme] based color, that the
+  /// [OutlinedButton] use as its main theme color.
   ///
   /// If not defined it defaults to theme.colorScheme.primary color via
   /// FlexColorScheme sub-theme defaults when opting on its sub themes.
   final SchemeColor? outlinedButtonSchemeColor;
 
-  /// Defines which [Theme] based [ColorScheme] based color the old
-  /// [MaterialButton] use as its base theme color.
+  /// Defines which [Theme] based [ColorScheme] based color, that the
+  /// [OutlinedButton] uses as its outline color.
+  ///
+  /// If [useMaterial3] is false, and the [outlinedButtonOutlineSchemeColor] is
+  /// not defined, the [outlinedButtonSchemeColor] is used as default button
+  /// outline color, following M2 style.
+  ///
+  /// If [useMaterial3] is true, and the [outlinedButtonOutlineSchemeColor] is
+  /// not defined, the [ColorScheme.outline] is used as default button
+  /// outline color in M3 style.
+  final SchemeColor? outlinedButtonOutlineSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color, that the old
+  /// [MaterialButton] use as its main theme color.
   ///
   /// The [MaterialButton] is the parent class of old deprecated and removed
   /// buttons `RaisedButton`, `OutlineButton` and `FlatButton`. The theme
@@ -1877,6 +1890,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? elevatedButtonSchemeColor,
     final SchemeColor? elevatedButtonSecondarySchemeColor,
     final SchemeColor? outlinedButtonSchemeColor,
+    final SchemeColor? outlinedButtonOutlineSchemeColor,
     final SchemeColor? materialButtonSchemeColor,
     final SchemeColor? toggleButtonsSchemeColor,
     final SchemeColor? switchSchemeColor,
@@ -2003,6 +2017,8 @@ class FlexSubThemesData with Diagnosticable {
           this.elevatedButtonSecondarySchemeColor,
       outlinedButtonSchemeColor:
           outlinedButtonSchemeColor ?? this.outlinedButtonSchemeColor,
+      outlinedButtonOutlineSchemeColor: outlinedButtonOutlineSchemeColor ??
+          this.outlinedButtonOutlineSchemeColor,
       materialButtonSchemeColor:
           materialButtonSchemeColor ?? this.materialButtonSchemeColor,
       toggleButtonsSchemeColor:
@@ -2218,6 +2234,8 @@ class FlexSubThemesData with Diagnosticable {
         other.elevatedButtonSecondarySchemeColor ==
             elevatedButtonSecondarySchemeColor &&
         other.outlinedButtonSchemeColor == outlinedButtonSchemeColor &&
+        other.outlinedButtonOutlineSchemeColor ==
+            outlinedButtonOutlineSchemeColor &&
         other.materialButtonSchemeColor == materialButtonSchemeColor &&
         other.toggleButtonsSchemeColor == toggleButtonsSchemeColor &&
         other.switchSchemeColor == switchSchemeColor &&
@@ -2383,6 +2401,7 @@ class FlexSubThemesData with Diagnosticable {
         elevatedButtonSchemeColor,
         elevatedButtonSecondarySchemeColor,
         outlinedButtonSchemeColor,
+        outlinedButtonOutlineSchemeColor,
         materialButtonSchemeColor,
         toggleButtonsSchemeColor,
         //
@@ -2528,6 +2547,8 @@ class FlexSubThemesData with Diagnosticable {
         elevatedButtonSecondarySchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'outlinedButtonSchemeColor', outlinedButtonSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'outlinedButtonOutlineSchemeColor', outlinedButtonOutlineSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'materialButtonSchemeColor', materialButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
