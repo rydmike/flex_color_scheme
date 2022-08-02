@@ -147,7 +147,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorUnfocusedBorderIsColored = true,
     //
     this.fabRadius,
-    this.fabUseShape = true,
+    this.fabUseShape = false,
     this.fabSchemeColor,
     this.chipRadius,
     this.chipSchemeColor,
@@ -876,30 +876,39 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius value for [FloatingActionButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kFabRadius] 16dp, based on M3 Specification
+  /// [kFabRadius] 16dp, based on M3 Specification for normal sized FAB.
   /// https://m3.material.io/components/floating-action-button/specs
+  ///
+  /// The border radius is only assigned when [fabUseShape] is true, if
+  /// [fabUseShape] is false, the [fabRadius] has no effect on FAB shapes.
+  ///
+  /// If [ThemeData.useMaterial3] and [fabUseShape] are true, you cannot define
+  /// FAB buttons that get the same rounding style as defined by the M3 spec.
+  /// This is because the FAB cannot be themed in same style as its default null
+  /// shape behavior. See issue
+  /// [#107946](https://github.com/flutter/flutter/issues/107946) for
+  /// more information.
   final double? fabRadius;
 
   /// Use shape theming on Floating Action Button (FAB).
   ///
-  /// By setting [fabUseShape] to false it is possible to opt out of all
-  /// shape theming on FABs and keeping tis un-themed defaults, while still
-  /// eg. keeping M3 defaults on other widgets or changing their border radius
-  /// with the shared global value.
+  /// When [fabUseShape] is false, default since FCS version 5.2.0, no custom
+  /// shape theme is used on FABs, it keeps its un-themed defaults. The
+  /// [fabRadius] properties has no effect when[ fabUseShape] is false.
   ///
-  /// You may want to continue to keep the FAB round and extended FAB stadium
-  /// shaped as before, despite otherwise using a rounder or M3 design.
-  /// The circular M2 FAB goes well with those designs too.
+  /// If [ThemeData.useMaterial3] is false the FAB is circular. If it is true,
+  /// the FAB uses M3 shapes as defined by
+  /// https://m3.material.io/components/floating-action-button/specs
   ///
-  /// When the [ThemeData.useMaterial3] will start to have an impact in Flutter
-  /// SDK on the [FloatingActionButton] shape and design, setting [fabUseShape]
-  /// to false and [ThemeData.useMaterial3] to true, will result in the
-  /// M3 spec default FAB shape as implemented by the SDK. As long as the
-  /// [ThemeData.useMaterial3] exist in the framework, setting it to false
-  /// and setting [fabUseShape] to false, will continue to produce the M2
-  /// design.
+  /// Defaults to false.
   ///
-  /// Defaults to true.
+  /// The default opinionated style was changed from true to false, in
+  /// version 5.2.0. This is a style break with previous versions where it was
+  /// true. The opinionated style change was done to use a style that by default
+  /// matches M3 style, when [ThemeData.useMaterial3] is true.
+  ///
+  /// To make make circular FAB when [ThemeData.useMaterial3] is true, set
+  /// [fabUseShape] to true and [fabRadius] to a high values, like 60.
   final bool fabUseShape;
 
   /// Defines which [Theme] based [ColorScheme] based color the Floating

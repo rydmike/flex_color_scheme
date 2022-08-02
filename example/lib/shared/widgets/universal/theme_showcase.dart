@@ -800,14 +800,10 @@ class AppBarShowcase extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
-              const Text('Widgets & text behind AppBar'),
+              const Text('Behind AppBar'),
               FloatingActionButton.small(
                 onPressed: () {},
                 child: const Icon(Icons.add),
-              ),
-              InputChip(
-                label: const Text('Input Chip'),
-                onSelected: (bool value) {},
               ),
               InputChip(
                 showCheckmark: true,
@@ -993,14 +989,10 @@ class _BottomNavigationBarShowcaseState
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
-                  const Text('Widgets & text behind BottomNavBar'),
+                  const Text('Behind BottomNavBar'),
                   FloatingActionButton.small(
                     onPressed: () {},
                     child: const Icon(Icons.add),
-                  ),
-                  InputChip(
-                    label: const Text('Input Chip'),
-                    onSelected: (bool value) {},
                   ),
                   InputChip(
                     showCheckmark: true,
@@ -1091,14 +1083,10 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
-                  const Text('Widgets & text behind NavBar'),
+                  const Text('Behind NavBar'),
                   FloatingActionButton.small(
                     onPressed: () {},
                     child: const Icon(Icons.add),
-                  ),
-                  InputChip(
-                    label: const Text('Input Chip'),
-                    onSelected: (bool value) {},
                   ),
                   InputChip(
                     showCheckmark: true,

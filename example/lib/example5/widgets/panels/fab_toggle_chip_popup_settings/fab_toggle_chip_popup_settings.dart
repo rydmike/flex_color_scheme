@@ -89,8 +89,8 @@ class FabToggleChipPopupSettings extends StatelessWidget {
           title: const Text('Border radius'),
           subtitle: Slider.adaptive(
             min: -1,
-            max: 40,
-            divisions: 41,
+            max: 60,
+            divisions: 61,
             label: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     controller.fabUseShape

@@ -63,7 +63,9 @@ class DialogSettings extends StatelessWidget {
                         (controller.dialogBorderRadius ?? -1) < 0
                     ? dialogRadiusDefaultLabel
                     : (controller.dialogBorderRadius?.toStringAsFixed(0) ?? '')
-                : 'default 4',
+                : controller.useMaterial3
+                    ? 'default 28'
+                    : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.dialogBorderRadius ?? -1
                 : -1,
@@ -90,7 +92,9 @@ class DialogSettings extends StatelessWidget {
                           : (controller.dialogBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : 'default 4',
+                      : controller.useMaterial3
+                          ? 'default 28'
+                          : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!

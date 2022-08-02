@@ -8,23 +8,33 @@ This is a dev branch to test features on master 3.1.0 channel
 
 * Removed duplicated parts of 5.1.0 changelog entry from July 5, 2022.
 
+* `FlexSubThemesData.fabUseShape` opinionated component theme style default was changed from `true`
+  to `false`. This is a style break with previous versions. The opinionated style change was done
+  to use a style that by default matches M3 style when `ThemeData.useMaterial3` is `true`.
+  The new default style is also a way to work around issue 
+  [#107946](https://github.com/flutter/flutter/issues/107946), where it is shown that you cannot 
+  create a theme that replicates the default roundings in M3 of the FAB.
+
 * The `FlexAppBarStyle` property was made nullable. It now defaults to null in all constructors.
   When it is null and `useMaterial3` is false, the app bar will use style `FlexAppBarStyle.primary`
-  in light mode as default as before and `FlexAppBarStyle.material` in dark mode. However, if
-  `useMaterial3` is true, them it will use `FlexAppBarStyle.surface` in both light and dark mode,
-  to match un-themed defaults in Material 3 design.
+  in light mode as default, like before and `FlexAppBarStyle.material` in dark mode. However, if
+  `useMaterial3` is true, then it will use `FlexAppBarStyle.surface` in both light and dark mode,
+  to match the un-themed defaults in Material 3 design.
 
 * To `FlexSubThemesData` configuration added `appBarCenterTitle` property that works the 
   same way as `centerTitle` in `AppBar` and its theme. The property is not available in the Themes
-  Playground app only via the API.
+  Playground app, only via the API.
 
-* Updated Chip sub-theme when opting in on using Material 3. It now uses upcoming M3 styled Chips 
+* Updated `Chip` sub-theme when opting in on using Material 3. It now uses upcoming M3 styled Chips 
   instead of its own opinionated custom style, also when the opinionated component sub-themes are 
   enabled. To get the same opinionated styled colors as before, set component sub-themes data
   `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`. This
   feature will only work with intended design effect in stable channel after feature and PR 
   ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
-  channel. At the time of writing, this PR is only available on master channel.
+  channel. At the time of writing, this PR is only available on master channel. As noted in 
+  [PR 107166 comment](https://github.com/flutter/flutter/pull/107166#issuecomment-1189206217), the
+  M3 styles do not yet style plain vanilla Chips when using Material 3. This might be fixed
+  in an additional PR later in the SDK.
 
 * Changed opinionated dialog sub-theme defaults to match M3 defaults. Elevation set to 6, was 
   10 and actionsPadding defaults to `EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0)`, it
@@ -34,14 +44,14 @@ This is a dev branch to test features on master 3.1.0 channel
 * Updated `ElevatedButton` to support M3 defaults concerning foreground and background color 
   roles. M3 style also uses stadium border, the correct size, padding and elevation defaults, 
   when M3 is opted in on. To support the new features `FlexSubThemes.elevatedButtonTheme` got two 
-  new properties, `useMaterial3` (default false) and `onBaseSchemeColor` a default null 
- `SchemeColor?`. 
+  new properties, `useMaterial3` (defaults to false) and `onBaseSchemeColor` a default null 
+ `SchemeColor?`.  
   When `useMaterial3` is `false`, the `baseSchemeColor` is used as background color as before, and 
   the new property `onBaseSchemeColor` is used as foreground color. 
   However, when `useMaterial3` is `true`, their roles are reversed. To be able to control the
   `FlexSubThemes.elevatedButtonTheme` property `onBaseSchemeColor`, the class `FlexSubThemesData`
-  got an `elevatedButtonSecondarySchemeColor` property of type `SchemeColor?`.
- 
+  got an `elevatedButtonSecondarySchemeColor` property of type `SchemeColor?`, that 
+  `FlexColorScheme.toTheme` uses.
 
 
 **EXAMPLE UPDATES**

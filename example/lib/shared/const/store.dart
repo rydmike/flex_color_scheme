@@ -735,7 +735,7 @@ class Store {
   // Key used to read and save the fabUseShape value.
   static const String keyFabUseShape = 'fabUseShape';
   // Default value for the fabUseShape, also to reset settings.
-  static const bool defaultFabUseShape = true;
+  static const bool defaultFabUseShape = false;
 
   // Key used to read and save the fabBorderRadius value.
   static const String keyFabBorderRadius = 'fabBorderRadius';

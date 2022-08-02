@@ -306,8 +306,8 @@ String generateThemeDartCode(ThemeController controller) {
   // Fab and chip, snack, card, dialog, popup setup CODE
   //
   final String fabUseShape = controller.fabUseShape
-      ? ''
-      : '    fabUseShape: ${controller.fabUseShape},\n';
+      ? '    fabUseShape: ${controller.fabUseShape},\n'
+      : '';
   final String fabBorderRadius = controller.fabBorderRadius != null &&
           controller.fabUseShape
       ? '    fabRadius: ${controller.fabBorderRadius!.toStringAsFixed(1)},\n'
