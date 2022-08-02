@@ -4,8 +4,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## v5.2.0-dev.1 - Aug 2, 2022
 
-This is a dev branch to test features on master 3.1.0 channel and prepare for next step of 
-style and feature alignments when `useMaterial3` is true. 
+**DEV INFO:** This is a dev branch to test features on Flutter channel *master 3.1.0-x* and to 
+prepare for next style and feature alignments when `useMaterial3` is true. I may be published 
+as release 5.2.0, depending on how well it works on Flutter *stable 3.0.5*.
 
 Due to a number of known and further below listed
 Flutter SDK issues when using `useMaterial3` set to `true`, we cannot yet recommend using the 
@@ -14,7 +15,7 @@ Flutter and the listed issues. If you keep it `false`, and use FCS opinionated, 
 create a theme that is visually fairly similar to M3, but still using M2 `ThemeData` mode to avoid
 the issues.
 
-**STYLE CHANGE BREAKING**
+**STYLE CHANGE - BREAKING**
 
 * `FlexSubThemesData.fabUseShape` opinionated component theme style default was changed from `true`
   to `false`. This is a breaking style with previous versions. The opinionated style change was done
@@ -28,7 +29,7 @@ the issues.
   but required as FlexColorScheme continues to evolve with Flutter SDK to support Material 3 
   theming, while offering its own opinionated tweaks on some M3 default styles.
 
-**STYLE CHANGE MINOR**
+**STYLE CHANGE - MINOR**
 
 * The `FlexAppBarStyle` property was made nullable. It now defaults to null in all constructors.
   When it is null and `useMaterial3` is false, the app bar will use style `FlexAppBarStyle.primary`
@@ -43,7 +44,7 @@ the issues.
   `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`. 
   This feature will only work with intended design in stable channel after feature and PR
   ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
-  channel. Currently, it is only available in Flutter `master 3.1.0-*`.
+  channel. Currently, it is only available in Flutter *master 3.1.0-x*.
 
 * Changed opinionated dialog sub-theme defaults to match M3 defaults. Elevation set to 6, was
   10 and actionsPadding defaults to `EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0)`, it
@@ -84,7 +85,7 @@ the issues.
   with no impact when using seeded color scheme. Code is also not generated for onColor blend 
   settings that has no impact when using seeded color schemes.
 
-* Themes Playground: Features and code gen for additional Material button Scheme colors.
+* *Themes Playground*: Features and code gen for additional Material button Scheme colors.
 
 **KNOWN FLUTTER SDK ISSUES**
 
@@ -105,33 +106,34 @@ theming in general.
   in its opinionated `SnackBar` theme.
 
 The Flutter SDK M3 `useMaterial3` flag set to `true` continues to have a number of challenges in
-addition to the above ones. We as before still have these issues in Flutter 3.0.5 stable and
-also at least in Flutter master 3.1.0-0.0.pre.2033 and earlier:
+addition to the above ones. We as before still have these issues in Flutter *stable 3.0.5* and
+also at least in Flutter *master 3.1.0-0.0.pre.2033* and earlier:
 
-* [**#107190**](https://github.com/flutter/flutter/issues/107190) Elevation issue with Material 
-  widget, when opting in on useMaterial3 causes widespread elevation issues.
+* [**#107190**](https://github.com/flutter/flutter/issues/107190) Elevation issue with `Material` 
+  widget, when opting in on `useMaterial3` causes widespread elevation issues.
 
-* [**#103864**](https://github.com/flutter/flutter/issues/103864) Dynamically changing Typography 
-  in ThemeData generates an error
+* [**#103864**](https://github.com/flutter/flutter/issues/103864) Dynamically changing `Typography` 
+  in `ThemeData` generates an error
 
 * [**#107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` 
   properties `iconTheme` and `actionsIconTheme` ignored on master channel when `useMaterial3`
-  is true.
-
+  is true. This is not in stable Flutter channel *stable 3.0.5*, but if you use 
+  master channel it is something to be aware of, as it exists in Flutter
+  *master 3.1.0-0.0.pre.2033* and many earlier *master 3.1.0-x* versions.
 
 ## v5.1.0 - July 8, 2022
 
-* Updated to support Flutter 3.0.0, Dart 2.17 and latest Flutter package dependencies in
-  example apps. Requires at least Flutter 3.0.0 and Dart 2.17.0.
+* Updated to support *Flutter 3.0.0*, with *Dart 2.17* and latest Flutter package dependencies in
+  example apps. Requires at least *Flutter 3.0.0* and *Dart 2.17.0*.
 
 **NEW**
 
-* **Added** full support for in Flutter 3.0.0 new `ColorScheme.surfaceTint` color. It is set to 
+* **Added** full support for in *Flutter 3.0.0* new `ColorScheme.surfaceTint` color. It is set to 
   `ColorScheme.primary` color by default, as Flutter and Material 3 does. If a custom `surfaceTint` 
   color is provided, it is also used as the blend color, instead of `primary` color, for 
   FlexColorScheme's surface blend feature.
 
-* **Added** API for using Flutter 3.0.0 theme extensions directly via FlexColorScheme 
+* **Added** API for using *Flutter 3.0.0* theme extensions directly via FlexColorScheme 
   API. It was added as a convenience feature in order to avoid having to add theme extensions with a
  `copyWith` on FlexColorScheme produced ThemeData. With the `FlexColorScheme.extensions` and
  `FlexThemeData.extensions` properties you can add custom theme extensions directly.
@@ -159,7 +161,7 @@ also at least in Flutter master 3.1.0-0.0.pre.2033 and earlier:
 
 * **Deprecated:** `FlexSubThemes.buttonTheme` that creates an opinionated `ButtonThemeData`.
   The ButtonThemeData is marked as obsolete in Flutter SDK, but not yet deprecated in 
-  Flutter version 3.0.0. FlexColorscheme now marks it as **deprecated**. It will be 
+  *Flutter 3.0.0*. FlexColorscheme now marks it as **deprecated**. It will be 
   removed in a future FlexColorScheme release when Flutter SDK deprecates `ButtonThemeData`.
 
 **M3 STYLE FIXES AND CHANGES**
@@ -268,8 +270,8 @@ theming in general.
   is a Flutter SDK issue that FlexColorScheme cannot fix. Most likely 99% of apps will never run 
   into this issue.
 
-* In Flutter SDK 3.0.x, when opting in on `useMaterial3:true`, the `Material` widget and other SDK 
-  widgets built on it, gets no elevation when only the `elevation` property is defined. It is 
+* In Flutter *stable 3.0.x*, when opting in on `useMaterial3:true`, the `Material` widget and other
+  SDK widgets built on it, gets no elevation when only the `elevation` property is defined. It is 
   required to also define `shadowColor` and/or `surfaceTintColor` to get any elevation effect.
   When using the `Material` widget itself this is easy to address. However, widgets like
   `Drawer`, `PopupMenuButton`, `BottomNavigationBar`, `NavigationRail`, `Dialog`, `AlertDialog`,
@@ -287,7 +289,7 @@ theming in general.
 
 * This regression in master channel impacts AppBar icon colors when using Material 3 
   [#107305](https://github.com/flutter/flutter/issues/107305). It has not yet landed in stable 
-  channel Flutter 3.0.4, but if you use master channel it is something to be aware of.
+  channel Flutter *stable 3.0.5*, but if you use master channel it is something to be aware of.
 
 ## v5.0.1 - April 29, 2022
 
