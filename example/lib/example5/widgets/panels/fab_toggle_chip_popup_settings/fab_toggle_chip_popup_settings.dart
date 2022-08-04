@@ -54,6 +54,10 @@ class FabToggleChipPopupSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: FabShowcase(),
+        ),
         ColorSchemePopupMenu(
           title: const Text('FloatingActionButton color'),
           labelForDefault: controller.useMaterial3
@@ -144,11 +148,11 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: FabShowcase(),
-        ),
         const Divider(),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+          child: ToggleButtonsShowcase(),
+        ),
         ColorSchemePopupMenu(
           title: const Text('ToggleButtons color'),
           index: controller.toggleButtonsSchemeColor?.index ?? -1,
@@ -215,11 +219,68 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: ToggleButtonsShowcase(),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Border width'),
+          subtitle: const Text('Setting shared with OutlinedButton and '
+              'unfocused TextField'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider.adaptive(
+            min: -0.5,
+            max: 5,
+            divisions: 11,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth == null ||
+                        (controller.thinBorderWidth ?? -0.5) < 0
+                    ? controller.useMaterial3
+                        ? 'default 1'
+                        : 'default 1.5'
+                    : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
+                : 'default 1',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth ?? -0.5
+                : -0.5,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setThinBorderWidth(value < 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.thinBorderWidth == null ||
+                              (controller.thinBorderWidth ?? -0.5) < 0
+                          ? controller.useMaterial3
+                              ? 'default 1'
+                              : 'default 1.5'
+                          : (controller.thinBorderWidth?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 1',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
         ),
         const Divider(),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+          child: ChipShowcase(),
+        ),
         ColorSchemePopupMenu(
           title: const Text('Chip color base'),
           labelForDefault: controller.useMaterial3
@@ -288,45 +349,13 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: ChipShowcase(),
-        ),
         const Divider(),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('PopupMenu opacity'),
-          subtitle: Slider.adaptive(
-            max: 100,
-            divisions: 100,
-            label: (popupOpacity * 100).toStringAsFixed(0),
-            value: popupOpacity * 100,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setPopupMenuOpacity(value / 100);
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                Text(
-                  // ignore: lines_longer_than_80_chars
-                  '${(popupOpacity * 100).toStringAsFixed(0)} %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          // The button used in the PopupMenuShowcase to open the PopupMenu
+          // is not a native widget, only the menu is, and it is the one that
+          // is themed.
+          child: PopupMenuShowcase(),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -379,17 +408,49 @@ class FabToggleChipPopupSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          // The button used in the PopupMenuShowcase to open the PopupMenu
-          // is not a native widget, only the menu is, and it is the one that
-          // is themed.
-          child: PopupMenuShowcase(),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('PopupMenu opacity'),
+          subtitle: Slider.adaptive(
+            max: 100,
+            divisions: 100,
+            label: (popupOpacity * 100).toStringAsFixed(0),
+            value: popupOpacity * 100,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setPopupMenuOpacity(value / 100);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  'OPACITY',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  // ignore: lines_longer_than_80_chars
+                  '${(popupOpacity * 100).toStringAsFixed(0)} %',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
         ),
         const Divider(),
         const ListTile(
           title: Text('IconButton, CircleAvatar, DropdownButton and Tooltip'),
           subtitle: Text('Included to show their effective themed style'),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16),
+          child: IconButtonCircleAvatarDropdownTooltipShowcase(),
         ),
         SwitchListTileAdaptive(
           title: const Text(
@@ -404,10 +465,6 @@ class FabToggleChipPopupSettings extends StatelessWidget {
           onChanged: controller.useFlexColorScheme
               ? controller.setTooltipsMatchBackground
               : null,
-        ),
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: IconButtonCircleAvatarDropdownTooltipShowcase(),
         ),
       ],
     );

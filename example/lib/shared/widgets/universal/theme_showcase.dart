@@ -744,8 +744,9 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField1'),
           controller: _textController1,
           decoration: InputDecoration(
+            filled: widget.filled ?? true,
             hintText: 'Write something...',
-            labelText: 'Text entry - defaults to underline border',
+            labelText: 'TextField - Underline border, if not defined',
             errorText: _errorState1
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
@@ -768,7 +769,7 @@ class _TextInputFieldState extends State<TextInputField> {
             filled: widget.filled ?? true,
             border: const OutlineInputBorder(),
             hintText: 'Write something...',
-            labelText: 'Another text entry - defaults to filled outline border',
+            labelText: 'TextField - Outline border, if not defined',
             prefixIcon: const Icon(Icons.search),
             suffixIcon: const Icon(Icons.info),
             errorText: _errorState2
@@ -780,7 +781,7 @@ class _TextInputFieldState extends State<TextInputField> {
         const TextField(
           enabled: false,
           decoration: InputDecoration(
-            labelText: 'Disabled text input',
+            labelText: 'TextField - Disabled',
           ),
         ),
         const SizedBox(height: 8),

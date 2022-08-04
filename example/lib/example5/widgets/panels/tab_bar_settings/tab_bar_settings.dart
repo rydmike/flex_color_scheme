@@ -37,6 +37,15 @@ class TabBarSettings extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: TabBarForAppBarShowcase(),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: TabBarForBackgroundShowcase(),
+        ),
+        const SizedBox(height: 8),
         ListTile(
           enabled: controller.useFlexColorScheme,
           title: const Text('Choose TabBarStyle that fits your use case'),
@@ -56,17 +65,6 @@ class TabBarSettings extends StatelessWidget {
                 : null,
           ),
         ),
-        const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: TabBarForAppBarShowcase(),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: TabBarForBackgroundShowcase(),
-        ),
-        const SizedBox(height: 8),
-        const Divider(),
         const ListTile(
           title: Text('Custom colors'),
           subtitle: Text('With component themes enabled you can select '

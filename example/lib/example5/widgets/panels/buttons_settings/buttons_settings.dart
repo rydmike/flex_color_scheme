@@ -49,13 +49,9 @@ class ButtonsSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 8),
-        const ListTile(
-          subtitle: Text('You can change button theme colors, default is '
-              'primary color. All component themes with border radius can '
-              'also have their own radius changed individually. It then either '
-              'overrides the M3 default or the set global radius default, '
-              'depending on what is in use.'),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: ElevatedButtonShowcase(),
         ),
         ColorSchemePopupMenu(
           title: const Text('ElevatedButton main color'),
@@ -93,10 +89,6 @@ class ButtonsSettings extends StatelessWidget {
                   }
                 }
               : null,
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: ElevatedButtonShowcase(),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -155,6 +147,10 @@ class ButtonsSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: OutlinedButtonShowcase(),
+        ),
         ColorSchemePopupMenu(
           title: const Text('OutlinedButton foreground color'),
           index: controller.outlinedButtonSchemeColor?.index ?? -1,
@@ -187,10 +183,6 @@ class ButtonsSettings extends StatelessWidget {
                   }
                 }
               : null,
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: OutlinedButtonShowcase(),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -248,7 +240,120 @@ class ButtonsSettings extends StatelessWidget {
             ),
           ),
         ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Unfocused border width'),
+          subtitle: const Text('Setting shared with OutlinedButton and '
+              'ToggleButtons'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider.adaptive(
+            min: -0.5,
+            max: 5,
+            divisions: 11,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth == null ||
+                        (controller.thinBorderWidth ?? -0.5) < 0
+                    ? controller.useMaterial3
+                        ? 'default 1'
+                        : 'default 1.5'
+                    : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
+                : 'default 1',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth ?? -0.5
+                : -0.5,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setThinBorderWidth(value < 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.thinBorderWidth == null ||
+                              (controller.thinBorderWidth ?? -0.5) < 0
+                          ? controller.useMaterial3
+                              ? 'default 1'
+                              : 'default 1.5'
+                          : (controller.thinBorderWidth?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 1',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Focused border width'),
+          subtitle: const Text('Setting shared with pressed OutlinedButton'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider.adaptive(
+            min: -0.5,
+            max: 5,
+            divisions: 11,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thickBorderWidth == null ||
+                        (controller.thickBorderWidth ?? -0.5) < 0
+                    ? 'default 2'
+                    : (controller.thickBorderWidth?.toStringAsFixed(1) ?? '')
+                : 'default 2',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thickBorderWidth ?? -0.5
+                : -0.5,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setThickBorderWidth(value < 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.thickBorderWidth == null ||
+                              (controller.thickBorderWidth ?? -0.5) < 0
+                          ? 'default 2'
+                          : (controller.thickBorderWidth?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 2',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         const Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: TextButtonShowcase(),
+        ),
         ColorSchemePopupMenu(
           title: const Text('TextButton color'),
           index: controller.textButtonSchemeColor?.index ?? -1,
@@ -262,10 +367,6 @@ class ButtonsSettings extends StatelessWidget {
                   }
                 }
               : null,
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: TextButtonShowcase(),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,

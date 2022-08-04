@@ -123,6 +123,7 @@ class NavigationBarSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const NavigationBarShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: backgroundColorLabel(),
@@ -348,7 +349,6 @@ class NavigationBarSettings extends StatelessWidget {
                 : null,
           ),
         ),
-        const NavigationBarShowcase(),
         const Divider(height: 1),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),

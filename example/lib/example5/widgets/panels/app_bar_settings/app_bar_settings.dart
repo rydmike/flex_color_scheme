@@ -48,7 +48,7 @@ class AppBarSettings extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     return Column(
       children: <Widget>[
-        const SizedBox(height: 8),
+        const AppBarShowcase(),
         const ListTile(
           subtitle: Text(
             'Material2 uses primary colored AppBar in light '
@@ -59,8 +59,6 @@ class AppBarSettings extends StatelessWidget {
             'with their surfaceTint blends, or use a custom color.',
           ),
         ),
-        const AppBarShowcase(),
-        const SizedBox(height: 8),
         if (isLight)
           AppBarStylePopupMenu(
             title: const Text('Light theme AppBarStyle'),
@@ -264,9 +262,8 @@ class AppBarSettings extends StatelessWidget {
             ),
           ),
         ],
-        const Divider(),
         const ListTile(
-          title: Text('Custom color'),
+          title: Text('Background color'),
           subtitle: Text('With component themes enabled you can select scheme '
               'color for the AppBar background color. '
               'Using AppBarStyle is convenient and does not require activating '
@@ -276,7 +273,7 @@ class AppBarSettings extends StatelessWidget {
         ),
         if (isLight)
           ColorSchemePopupMenu(
-            title: const Text('Light theme AppBar background color'),
+            title: const Text('Light theme custom background color'),
             labelForDefault: controller.useFlexColorScheme
                 ? 'default (AppBarStyle)'
                 : 'default (primary)',
@@ -294,7 +291,7 @@ class AppBarSettings extends StatelessWidget {
           )
         else
           ColorSchemePopupMenu(
-            title: const Text('Dark theme AppBar background color'),
+            title: const Text('Dark theme custom background color'),
             labelForDefault: controller.useFlexColorScheme
                 ? 'default (AppBarStyle)'
                 : 'default (surface)',
