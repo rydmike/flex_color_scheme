@@ -154,8 +154,9 @@ class ButtonsSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
         ColorSchemePopupMenu(
-          title: const Text('OutlinedButton color'),
+          title: const Text('OutlinedButton foreground color'),
           index: controller.outlinedButtonSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -163,6 +164,25 @@ class ButtonsSettings extends StatelessWidget {
                     controller.setOutlinedButtonSchemeColor(null);
                   } else {
                     controller.setOutlinedButtonSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('OutlinedButton outline color'),
+          labelForDefault: controller.useMaterial3
+              ? 'default (outline)'
+              : controller.useSubThemes && controller.useFlexColorScheme
+                  ? 'default (primary)'
+                  : 'default (onSurface opacity 0.12)',
+          index: controller.outlinedButtonOutlineSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setOutlinedButtonOutlineSchemeColor(null);
+                  } else {
+                    controller.setOutlinedButtonOutlineSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }
@@ -228,6 +248,7 @@ class ButtonsSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
         ColorSchemePopupMenu(
           title: const Text('TextButton color'),
           index: controller.textButtonSchemeColor?.index ?? -1,

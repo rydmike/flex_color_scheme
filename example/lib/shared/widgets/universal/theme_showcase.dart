@@ -700,7 +700,8 @@ class ChipShowcase extends StatelessWidget {
 }
 
 class TextInputField extends StatefulWidget {
-  const TextInputField({super.key});
+  const TextInputField({this.filled, super.key});
+  final bool? filled;
 
   @override
   State<TextInputField> createState() => _TextInputFieldState();
@@ -744,7 +745,7 @@ class _TextInputFieldState extends State<TextInputField> {
           controller: _textController1,
           decoration: InputDecoration(
             hintText: 'Write something...',
-            labelText: 'Text entry',
+            labelText: 'Text entry - defaults to underline border',
             errorText: _errorState1
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
@@ -764,8 +765,12 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField2'),
           controller: _textController2,
           decoration: InputDecoration(
+            filled: widget.filled ?? true,
+            border: const OutlineInputBorder(),
             hintText: 'Write something...',
-            labelText: 'Another text entry',
+            labelText: 'Another text entry - defaults to filled outline border',
+            prefixIcon: const Icon(Icons.search),
+            suffixIcon: const Icon(Icons.info),
             errorText: _errorState2
                 ? "Any entry without an 'a' will trigger this error"
                 : null,

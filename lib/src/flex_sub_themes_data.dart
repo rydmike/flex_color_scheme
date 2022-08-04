@@ -112,8 +112,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.buttonMinSize = kButtonMinSize,
     this.buttonPadding = kButtonPadding,
-    this.thickBorderWidth = kThickBorderWidth,
-    this.thinBorderWidth = kThinBorderWidth,
+    this.thickBorderWidth,
+    this.thinBorderWidth,
     //
     this.textButtonRadius,
     this.elevatedButtonRadius,
@@ -580,16 +580,21 @@ class FlexSubThemesData with Diagnosticable {
   /// Applies to enabled [OutlinedButton] and always to [ToggleButtons], as well
   /// as to selected state of [InputDecorator].
   ///
-  /// Defaults to [kThickBorderWidth].
-  final double thickBorderWidth;
+  ///
+  /// If undefined and [ThemeData.useMaterial3] is false,
+  /// defaults to [kThickBorderWidth].
+  /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
+  final double? thickBorderWidth;
 
   /// Border thickness on unselected input decorator and disabled buttons.
   ///
   /// Applies to disabled [OutlinedButton] and to un-selected state in
   /// [InputDecorator].
   ///
-  /// Defaults to [kThinBorderWidth].
-  final double thinBorderWidth;
+  /// If undefined and [ThemeData.useMaterial3] is false,
+  /// defaults to [kThinBorderWidth].
+  /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
+  final double? thinBorderWidth;
 
   /// Border radius override value for [TextButton].
   ///

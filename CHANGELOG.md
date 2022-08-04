@@ -2,7 +2,7 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## v5.2.0-dev.1 - Aug 2, 2022
+## v5.2.0-dev.1 - Aug 4, 2022
 
 **DEV INFO:** This is a dev branch to test features on Flutter channel *master 3.1.0-x* and to 
 prepare for next style and feature alignments when `useMaterial3` is true. It may be published 
@@ -37,39 +37,69 @@ the issues.
   `useMaterial3` is true, then it will use `FlexAppBarStyle.surface` in both light and dark mode,
   to match the un-themed defaults of Material 3 design `AppBar`.
 
-* Updated `Chip` sub-theme when opting in on `useMaterial3`. When `true` it now uses upcoming M3
-  styled Chips instead of its own opinionated custom style, also when the opinionated component 
-  sub-themes are enabled. To get the same opinionated coloring as before, but on the M3 styled 
-  chips when using M3, set component sub-themes data 
-  `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`. 
-  This feature will only work with intended design in stable channel after feature and PR
-  ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
-  channel. Currently, it is only available in Flutter *master 3.1.0-x*.
+* Updated `ElevatedButton` to support `useMaterial3` defaults concerning its switched foreground and 
+  background color roles. It now also uses stadium border instead of 20dp, M3 size, padding and 
+  elevation defaults, when `useMaterial3` is opted in on.
+
+* Updated `OutlinedButton` to support `useMaterial3` defaults concerning its outline color default.
+  It now also uses stadium border instead of 20dp, M3 size and padding, when `useMaterial3` is 
+  opted in on.
 
 * Changed opinionated dialog sub-theme defaults to match M3 defaults. Elevation set to 6, was
   10 and actionsPadding defaults to `EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0)`, it
   did not have a custom default before. These are new defaults for the opinionated dialog sub-theme
-  regardless of using M2 or M3.
+  for both M2 and M3.
 
-* Updated `ElevatedButton` to support `useMaterial3` defaults concerning its switched foreground and 
-  background color roles. Using M3 now also uses stadium border, the correct size, padding and 
-  elevation defaults, when `useMaterial3` is opted in on.
+* Updated `Chip` sub-theme when opting in on `useMaterial3`. When `true` it now uses upcoming M3
+  styled Chips instead of its own opinionated custom style, also when the opinionated component
+  sub-themes are enabled. To get the same opinionated coloring as before, but on the M3 styled
+  chips when using M3, set component sub-themes data
+  `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`.
+  This feature will only work with intended design in stable channel after feature and PR
+  ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
+  channel. Currently, it is only available in Flutter *master 3.1.0-x*.
+
+* Updated `InputDecoration` default sub-theme when opting in on `useMaterial3`. When `true` it 
+  now results in more upcoming M3 styled `TextField` style, instead of its own totally opinionated 
+  custom style also when the opinionated component sub-themes are enabled. It still uses a touch
+  of its own style. To get the same opinionated coloring as before, but on the M3 styled
+  'TextField' when using M3, set component sub-themes data
+  `subThemesData: const FlexSubThemesData(cinputDecoratorSchemeColor: SchemeColor.primary)`.
+  This feature will only work with intended design in stable channel after feature and PR
+  ["Migrate TextField to Material 3"](https://github.com/flutter/flutter/pull/108366) lands in
+  stable channel. Currently, it is only available in Flutter *master 3.1.0-x*.
 
 **NEW**
 
-* To `FlexSubThemesData` configuration added `appBarCenterTitle` property that works the 
-  same way as `centerTitle` in `AppBar` and its theme. The property is not available in the Themes
-  Playground app, only via the API.
+* Added `appBarCenterTitle` property to `FlexSubThemesData` configuration. It works the 
+  same way as `centerTitle` in `AppBar` and its theme. The property is not available in the 
+  Themes Playground app, only via the API. We recommend keeping it null to use platform
+  adaptive default behavior, but offer it as convenience property for those that like to use
+  same centering style regardless of used platform.
 
-* To support the new features `FlexSubThemes.elevatedButtonTheme` got two 
-  new properties, `useMaterial3` (defaults to false) and `onBaseSchemeColor` a default null 
- `SchemeColor?`. When `useMaterial3` is `false`, the `baseSchemeColor` is used as background 
-  color as before, and the new property `onBaseSchemeColor` is used as foreground color. 
-  However, when `useMaterial3` is `true`, their roles are reversed. To be able to control the
-  `FlexSubThemes.elevatedButtonTheme` property `onBaseSchemeColor`, the class `FlexSubThemesData`
-  got an `elevatedButtonSecondarySchemeColor` property of type `SchemeColor?`, that 
-  `FlexColorScheme.toTheme` uses.
+* Added two new properties to `FlexSubThemes.elevatedButtonTheme`. 
+  * Boolean `useMaterial3`, defaults to false.
+  * `onBaseSchemeColor`, defaults to null `SchemeColor?`.
+  
+  When `useMaterial3` is `false`, the `elevatedButtonTheme.baseSchemeColor` is used as background 
+  color as before, and the new property `elevatedButtonTheme.onBaseSchemeColor` is used as 
+  foreground color. However, when `useMaterial3` is `true`, their foreground and background 
+  color roles are reversed, and `baseSchemeColor` becomes its foreground color and the
+  `onBaseSchemeColor` its background color.
+  
+* Added `elevatedButtonSecondarySchemeColor` property of type `SchemeColor?` to 
+  `FlexSubThemesData`. Use it to control secondary color of the `ElevatedButton` in its 
+  sub-themes. FCS applies this color to `FlexSubThemes.elevatedButtonTheme.onBaseSchemeColor`. 
+  If `useMaterial3` is false, it is the foreground color. If `useMaterial3` is true, it is the
+  background color. Material 3 and 2 have a completely different default elevated button styles.
+  The Material 2 elevated button is color wise, like the M3 filled button, but with elevation.
 
+* Added two new properties to `FlexSubThemes.outlinedButtonTheme`.
+  * Boolean `useMaterial3`, defaults to false.
+  * `outlineSchemeColor`, defaults to null `SchemeColor?`.
+  When `useMaterial3` is `false`, the `outlineSchemeColor` defaults to `baseSchemeColor`.
+  When `useMaterial3` is `true`, the `outlineSchemeColor` defaults to `SchemeColor.outline`.
+  
 **FIX**
 
 * Removed duplicated doc parts of 5.1.0 changelog entry from July 5, 2022.
@@ -85,7 +115,11 @@ the issues.
   with no impact when using seeded color scheme. Code is also not generated for onColor blend 
   settings that has no impact when using seeded color schemes.
 
-* *Themes Playground*: Features and code gen for additional Material button Scheme colors.
+* *Themes Playground*: Features and code gen for additional `Elevated.button` individual foreground
+  and background colors.
+
+* *Themes Playground*: Features and code gen for additional `Outlined.button` separate outline 
+  color.
 
 **KNOWN FLUTTER SDK ISSUES**
 

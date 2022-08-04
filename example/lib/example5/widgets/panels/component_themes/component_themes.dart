@@ -73,8 +73,8 @@ class ComponentThemes extends StatelessWidget {
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: Slider.adaptive(
             min: -1,
-            max: 40,
-            divisions: 41,
+            max: 60,
+            divisions: 61,
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.defaultRadius == null ||
                         (controller.defaultRadius ?? -1) < 0

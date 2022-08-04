@@ -140,6 +140,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             elevatedButtonSecondarySchemeColor:
                 controller.elevatedButtonSecondarySchemeColor,
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
+            outlinedButtonOutlineSchemeColor:
+                controller.outlinedButtonOutlineSchemeColor,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,

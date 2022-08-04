@@ -1847,7 +1847,7 @@ void main() {
     // FlexSubThemes OutlinedButton tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.10: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
+        'FST1.10-M2: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -1919,8 +1919,340 @@ void main() {
         ),
       );
     });
-    test('FST1.10-states: Does OutlinedButton have right material states', () {
+    test(
+        'FST1.10-custom-M2: GIVEN a custom FlexSubTheme.outlinedButtonTheme() '
+        'EXPECT '
+        'equal to OutlinedButtonThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF42AEE7),
+        brightness: Brightness.light,
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primaryContainer,
+          outlineSchemeColor: SchemeColor.secondaryContainer,
+          padding: const EdgeInsets.symmetric(horizontal: 17),
+          minButtonSize: const Size(52, 40),
+          radius: 13,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size(52, 40),
+              padding: const EdgeInsets.symmetric(horizontal: 17),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(13),
+                ),
+              ), //buttonShape,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.primaryContainer
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.primaryContainer;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primaryContainer.withAlpha(0x0D);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primaryContainer.withAlpha(0x26);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.primaryContainer.withAlpha(0x33);
+                  }
+                  return Colors.transparent;
+                },
+              ),
+              side: MaterialStateProperty.resolveWith<BorderSide?>(
+                (final Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return BorderSide(
+                      color: colorScheme.secondaryContainer
+                          .blendAlpha(colorScheme.onSurface, 0x66)
+                          .withAlpha(0x31),
+                      width: 1.5,
+                    );
+                  }
+                  if (states.contains(MaterialState.error)) {
+                    return BorderSide(
+                      color: colorScheme.error,
+                      width: 2,
+                    );
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return BorderSide(
+                      color: colorScheme.secondaryContainer,
+                      width: 2,
+                    );
+                  }
+                  return BorderSide(
+                    color: colorScheme.secondaryContainer.withAlpha(0xA7),
+                    width: 1.5,
+                  );
+                },
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.10-M3: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
+        'equal to OutlinedButtonThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF7142E7),
+        brightness: Brightness.light,
+      );
+      final MaterialStateProperty<Color?> foregroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return colorScheme.onSurface.withOpacity(0.38);
+        }
+        return colorScheme.primary;
+      });
+
+      final MaterialStateProperty<Color?> overlayColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return colorScheme.primary.withOpacity(0.08);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return colorScheme.primary.withOpacity(0.12);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return colorScheme.primary.withOpacity(0.12);
+        }
+        return null;
+      });
+
+      final MaterialStateProperty<BorderSide> side =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return BorderSide(
+            color: colorScheme.onSurface.withOpacity(0.12),
+            width: 1,
+          );
+        }
+        if (states.contains(MaterialState.error)) {
+          return BorderSide(
+            color: colorScheme.error,
+            width: 1,
+          );
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return BorderSide(
+            color: colorScheme.outline,
+            width: 1,
+          );
+        }
+        return BorderSide(
+          color: colorScheme.outline,
+          width: 1,
+        );
+      });
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          OutlinedButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: foregroundColor,
+              backgroundColor:
+                  ButtonStyleButton.allOrNull<Color>(Colors.transparent),
+              overlayColor: overlayColor,
+              elevation: ButtonStyleButton.allOrNull<double>(0.0),
+              side: side,
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.10-outline-M2: GIVEN a custom FlexSubTheme.outlinedButtonTheme() '
+        'EXPECT '
+        'equal to OutlinedButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          outlineSchemeColor: SchemeColor.tertiary,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size(40, 40),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ), //buttonShape,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.secondary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.secondary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.secondary.withAlpha(0x0D);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.secondary.withAlpha(0x26);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.secondary.withAlpha(0x33);
+                  }
+                  return Colors.transparent;
+                },
+              ),
+              side: MaterialStateProperty.resolveWith<BorderSide?>(
+                (final Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return BorderSide(
+                      color: colorScheme.tertiary
+                          .blendAlpha(colorScheme.onSurface, 0x66)
+                          .withAlpha(0x31),
+                      width: 1.5,
+                    );
+                  }
+                  if (states.contains(MaterialState.error)) {
+                    return BorderSide(
+                      color: colorScheme.error,
+                      width: 2,
+                    );
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return BorderSide(
+                      color: colorScheme.tertiary,
+                      width: 2,
+                    );
+                  }
+                  return BorderSide(
+                    color: colorScheme.tertiary.withAlpha(0xA7),
+                    width: 1.5,
+                  );
+                },
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+
+    test(
+        'FST1.10-outline-M3: GIVEN a custom FlexSubTheme.outlinedButtonTheme() '
+        'EXPECT '
+        'equal to OutlinedButtonThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF7142E7),
+        brightness: Brightness.light,
+      );
+      final MaterialStateProperty<Color?> foregroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return colorScheme.onSurface.withOpacity(0.38);
+        }
+        return colorScheme.primary;
+      });
+
+      final MaterialStateProperty<Color?> overlayColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return colorScheme.primary.withOpacity(0.08);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return colorScheme.primary.withOpacity(0.12);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return colorScheme.primary.withOpacity(0.12);
+        }
+        return null;
+      });
+
+      final MaterialStateProperty<BorderSide> side =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return BorderSide(
+            color: colorScheme.onSurface.withOpacity(0.12),
+            width: 1,
+          );
+        }
+        if (states.contains(MaterialState.error)) {
+          return BorderSide(
+            color: colorScheme.error,
+            width: 1,
+          );
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return BorderSide(
+            color: colorScheme.outline,
+            width: 1,
+          );
+        }
+        return BorderSide(
+          color: colorScheme.outline,
+          width: 1,
+        );
+      });
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          outlineSchemeColor: SchemeColor.tertiary,
+          padding: const EdgeInsets.symmetric(horizontal: 17),
+          minButtonSize: const Size(52, 40),
+          radius: 13,
+          useMaterial3: true,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          OutlinedButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: foregroundColor,
+              backgroundColor:
+                  ButtonStyleButton.allOrNull<Color>(Colors.transparent),
+              overlayColor: overlayColor,
+              minimumSize:
+                  ButtonStyleButton.allOrNull<Size>(const Size(52, 40)),
+              padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
+                  const EdgeInsets.symmetric(horizontal: 17)),
+              elevation: ButtonStyleButton.allOrNull<double>(0.0),
+              side: side,
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(13),
+                  ),
+                ),
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+
+    test('FST1.10-states-M2: Does OutlinedButton have right material states',
+        () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
       // Disabled foreground
       expect(
         FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
@@ -2010,87 +2342,352 @@ void main() {
         )),
       );
     });
-    test(
-        'FST1.10-custom: GIVEN a default FlexSubTheme.outlinedButtonTheme() '
-        'EXPECT '
-        'equal to OutlinedButtonThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+    test('FST1.10-states-custom-M2: Does OutlinedButton have right states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF42AEE7),
+        brightness: Brightness.light,
+      );
+      // Disabled foreground
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.primaryContainer,
-          padding: const EdgeInsets.symmetric(horizontal: 17),
-          minButtonSize: const Size(52, 40),
-          radius: 13,
-        ).toString(),
-        equalsIgnoringHashCodes(
-          OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(52, 40),
-              padding: const EdgeInsets.symmetric(horizontal: 17),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(13),
-                ),
-              ), //buttonShape,
-            ).copyWith(
-              foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.primaryContainer
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.primaryContainer;
-                },
-              ),
-              overlayColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primaryContainer.withAlpha(0x0D);
-                  }
-                  if (states.contains(MaterialState.focused)) {
-                    return colorScheme.primaryContainer.withAlpha(0x26);
-                  }
-                  if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.primaryContainer.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
-              side: MaterialStateProperty.resolveWith<BorderSide?>(
-                (final Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return BorderSide(
-                      color: colorScheme.primaryContainer
-                          .blendAlpha(colorScheme.onSurface, 0x66)
-                          .withAlpha(0x31),
-                      width: 1.5,
-                    );
-                  }
-                  if (states.contains(MaterialState.error)) {
-                    return BorderSide(
-                      color: colorScheme.error,
-                      width: 2,
-                    );
-                  }
-                  if (states.contains(MaterialState.pressed)) {
-                    return BorderSide(
-                      color: colorScheme.primaryContainer,
-                      width: 2,
-                    );
-                  }
-                  return BorderSide(
-                    color: colorScheme.primaryContainer.withAlpha(0xA7),
-                    width: 1.5,
-                  );
-                },
-              ),
-            ),
-          ).toString(),
-        ),
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.tertiary
+            .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+            .withAlpha(kDisabledForegroundAlpha)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      // Overlay color states
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.tertiary.withAlpha(kHoverBackgroundAlpha)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.tertiary.withAlpha(kFocusBackgroundAlpha)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.tertiary.withAlpha(kPressedBackgroundAlpha)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(Colors.transparent),
+      );
+      // Border side states
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+            color: colorScheme.primaryContainer
+                .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                .withAlpha(kDisabledBackgroundAlpha),
+            width: 1.5)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.error}),
+        equals(BorderSide(
+          color: colorScheme.error,
+          width: 2,
+        )),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(BorderSide(
+          color: colorScheme.primaryContainer,
+          width: 2,
+        )),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(BorderSide(
+          color: colorScheme.primaryContainer.withAlpha(kEnabledBorderAlpha),
+          width: 1.5,
+        )),
       );
     });
+    test('FST1.10-states-M3: Does OutlinedButton have right material states',
+        () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      // Disabled foreground
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary),
+      );
+      // Overlay color states
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withOpacity(0.08)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Border side states
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+            color: colorScheme.onSurface.withOpacity(0.12), width: 1.0)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.error}),
+        equals(BorderSide(
+          color: colorScheme.error,
+          width: 1.0,
+        )),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(BorderSide(
+          color: colorScheme.outline,
+          width: 1.0,
+        )),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(BorderSide(
+          color: colorScheme.outline,
+          width: 1.0,
+        )),
+      );
+    });
+    test(
+        'FST1.10-states-M3-custom: Does OutlinedButton have right material '
+        'custom states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      // Disabled foreground
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      // Overlay color states
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.tertiary.withOpacity(0.08)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.tertiary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.tertiary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Border side states
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+          color: colorScheme.onSurface.withOpacity(0.12),
+          width: 2.0,
+        )),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.error}),
+        equals(BorderSide(
+          color: colorScheme.error,
+          width: 3.0,
+        )),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(BorderSide(
+          color: colorScheme.primaryContainer,
+          width: 3.0,
+        )),
+      );
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          useMaterial3: true,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(BorderSide(
+          color: colorScheme.primaryContainer,
+          width: 2.0,
+        )),
+      );
+    });
+
     // -------------------------------------------------------------------------
     // FlexSubThemes TextButton tests
     // -------------------------------------------------------------------------

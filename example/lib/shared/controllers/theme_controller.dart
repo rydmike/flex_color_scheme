@@ -330,6 +330,9 @@ class ThemeController with ChangeNotifier {
     _outlinedButtonSchemeColor = await _themeService.load(
         Store.keyOutlinedButtonSchemeColor,
         Store.defaultOutlinedButtonSchemeColor);
+    _outlinedButtonOutlineSchemeColor = await _themeService.load(
+        Store.keyOutlinedButtonOutlineSchemeColor,
+        Store.defaultOutlinedButtonOutlineSchemeColor);
     _outlinedButtonBorderRadius = await _themeService.load(
         Store.keyOutlinedButtonBorderRadius,
         Store.defaultOutlinedButtonBorderRadius);
@@ -601,6 +604,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultElevatedButtonBorderRadius, false);
     await setOutlinedButtonSchemeColor(
         Store.defaultOutlinedButtonSchemeColor, false);
+    await setOutlinedButtonOutlineSchemeColor(
+        Store.defaultOutlinedButtonOutlineSchemeColor, false);
     await setOutlinedButtonBorderRadius(
         Store.defaultOutlinedButtonBorderRadius, false);
     await setToggleButtonsSchemeColor(
@@ -1843,6 +1848,17 @@ class ThemeController with ChangeNotifier {
     _outlinedButtonSchemeColor = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyOutlinedButtonSchemeColor, value);
+  }
+
+  late SchemeColor? _outlinedButtonOutlineSchemeColor;
+  SchemeColor? get outlinedButtonOutlineSchemeColor =>
+      _outlinedButtonOutlineSchemeColor;
+  Future<void> setOutlinedButtonOutlineSchemeColor(SchemeColor? value,
+      [bool notify = true]) async {
+    if (value == _outlinedButtonOutlineSchemeColor) return;
+    _outlinedButtonOutlineSchemeColor = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyOutlinedButtonOutlineSchemeColor, value);
   }
 
   late double? _outlinedButtonBorderRadius;

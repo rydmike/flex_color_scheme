@@ -1284,6 +1284,7 @@ class FlexSubThemes {
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
+    // On color logic with M3 reversal of roles.
     final Color onBaseColor = onBaseSchemeColor == null
         ? useMaterial3
             ? schemeColor(SchemeColor.surface, colorScheme)
@@ -1534,13 +1535,14 @@ class FlexSubThemes {
 
     /// The border width when the input is selected.
     ///
-    /// Defaults to 2.0.
-    final double focusedBorderWidth = kThickBorderWidth,
+    /// If null, defaults to [kThickBorderWidth] = 2.
+    final double? focusedBorderWidth,
 
     /// The border width when the input is unselected or disabled.
     ///
-    /// Defaults to 1.5.
-    final double unfocusedBorderWidth = kThinBorderWidth,
+    /// If null, defaults to [kThinBorderWidth] = 1.5, when
+    /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
+    final double? unfocusedBorderWidth,
 
     /// Horizontal padding on either side of the border's
     /// [InputDecoration.labelText] width gap.
@@ -1576,21 +1578,40 @@ class FlexSubThemes {
     ///
     /// Defaults to true.
     final bool unfocusedBorderIsColored = true,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated defaults values.
+    ///
+    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    final bool useMaterial3 = false,
   }) {
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    final Color usedFillColor = fillColor ??
-        (colorScheme.brightness == Brightness.dark
-            ? baseColor.withAlpha(kFillColorAlphaDark)
-            : baseColor.withAlpha(kFillColorAlphaLight));
+    final Color? usedFillColor = fillColor ??
+        (useMaterial3
+            ? null
+            : (colorScheme.brightness == Brightness.dark
+                ? baseColor.withAlpha(kFillColorAlphaDark)
+                : baseColor.withAlpha(kFillColorAlphaLight)));
 
     final Color enabledBorder = unfocusedBorderIsColored
         ? baseColor.withAlpha(kEnabledBorderAlpha)
         : colorScheme.onSurface.withOpacity(0.38);
 
-    final double effectiveRadius = radius ?? kInputDecoratorRadius;
+    // Default border radius.
+    final double effectiveRadius = radius ??
+        (useMaterial3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+
+    // Default outline widths.
+    final double unfocusedWidth =
+        unfocusedBorderWidth ?? (useMaterial3 ? 1 : kThinBorderWidth);
+    final double focusedWidth = focusedBorderWidth ?? kThickBorderWidth;
 
     switch (borderType) {
       case FlexInputBorderType.outline:
@@ -1624,7 +1645,7 @@ class FlexSubThemes {
             borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
             borderSide: BorderSide(
               color: baseColor,
-              width: focusedBorderWidth,
+              width: focusedWidth,
             ),
           ),
           enabledBorder: OutlineInputBorder(
@@ -1633,7 +1654,7 @@ class FlexSubThemes {
             borderSide: unfocusedHasBorder
                 ? BorderSide(
                     color: enabledBorder,
-                    width: unfocusedBorderWidth,
+                    width: unfocusedWidth,
                   )
                 : BorderSide.none,
           ),
@@ -1645,7 +1666,7 @@ class FlexSubThemes {
                     color: baseColor
                         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                         .withAlpha(kDisabledBackgroundAlpha),
-                    width: unfocusedBorderWidth,
+                    width: unfocusedWidth,
                   )
                 : BorderSide.none,
           ),
@@ -1654,7 +1675,7 @@ class FlexSubThemes {
             borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
             borderSide: BorderSide(
               color: colorScheme.error,
-              width: focusedBorderWidth,
+              width: focusedWidth,
             ),
           ),
           errorBorder: OutlineInputBorder(
@@ -1662,7 +1683,7 @@ class FlexSubThemes {
             borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
             borderSide: BorderSide(
               color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-              width: unfocusedBorderWidth,
+              width: unfocusedWidth,
             ),
           ),
         );
@@ -1699,7 +1720,7 @@ class FlexSubThemes {
             ),
             borderSide: BorderSide(
               color: baseColor,
-              width: focusedBorderWidth,
+              width: focusedWidth,
             ),
           ),
           enabledBorder: UnderlineInputBorder(
@@ -1710,7 +1731,7 @@ class FlexSubThemes {
             borderSide: unfocusedHasBorder
                 ? BorderSide(
                     color: enabledBorder,
-                    width: unfocusedBorderWidth,
+                    width: unfocusedWidth,
                   )
                 : BorderSide.none,
           ),
@@ -1724,7 +1745,7 @@ class FlexSubThemes {
                     color: baseColor
                         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                         .withAlpha(kDisabledBackgroundAlpha),
-                    width: unfocusedBorderWidth,
+                    width: unfocusedWidth,
                   )
                 : BorderSide.none,
           ),
@@ -1735,7 +1756,7 @@ class FlexSubThemes {
             ),
             borderSide: BorderSide(
               color: colorScheme.error,
-              width: focusedBorderWidth,
+              width: focusedWidth,
             ),
           ),
           errorBorder: UnderlineInputBorder(
@@ -1745,7 +1766,7 @@ class FlexSubThemes {
             ),
             borderSide: BorderSide(
               color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-              width: unfocusedBorderWidth,
+              width: unfocusedWidth,
             ),
           ),
         );
@@ -2678,6 +2699,18 @@ class FlexSubThemes {
     /// If not defined, [colorScheme.primary] will be used.
     final SchemeColor? baseSchemeColor,
 
+    /// Defines which [Theme] based [ColorScheme] based color, that the
+    /// [OutlinedButton] uses as its outline color.
+    ///
+    /// If [useMaterial3] is false, and the [baseSchemeColor] is not defined,
+    /// the [baseSchemeColor] is used as default button
+    /// outline color, following M2 style.
+    ///
+    /// If [useMaterial3] is true, and the [outlineSchemeColor] is
+    /// not defined, the [colorScheme.outline] is used as default button
+    /// outline color in M3 style.
+    final SchemeColor? outlineSchemeColor,
+
     /// The button corner border radius.
     ///
     /// If not defined, defaults to [kButtonRadius] 20dp,
@@ -2685,15 +2718,17 @@ class FlexSubThemes {
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
-    /// The outline thickness when the button is pressed.
+    /// The outline thickness when the button is pressed or in error state.
     ///
-    /// Defaults to 2.0.
-    final double pressedOutlineWidth = kThickBorderWidth,
+    /// If null, defaults to [kThickBorderWidth] = 2, when
+    /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
+    final double? pressedOutlineWidth,
 
     /// The outline thickness when the button is not selected and not pressed.
     ///
-    /// Defaults to 1.5.
-    final double outlineWidth = kThinBorderWidth,
+    /// If null, defaults to [kThinBorderWidth] = 1.5, when
+    /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
+    final double? outlineWidth,
 
     /// Padding for the button theme.
     ///
@@ -2702,84 +2737,185 @@ class FlexSubThemes {
     /// M3 has more horizontal padding 24dp, but the tighter default padding
     /// in M2 that is 16dp looks fine as well when using stadium borders
     /// as in M3.
-    /// Making the custom scalable padding and separate one for icon
-    /// versions is rather involved, so sticking to defaults, but exposing the
-    /// padding property for future or external use.
+    ///
+    /// If null and [useMaterial3] is true in the context, the correct M3
+    /// button theme default computed button padding for M3 will be used.
     final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
-    /// Defaults to `kButtonMinSize` = Size(40, 40).
-    final Size minButtonSize = kButtonMinSize,
+    /// If null, defaults to [kButtonMinSize] (`const Size(64.0, 40.0)`) when
+    /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
+    /// [useMaterial3] is true.
+    final Size? minButtonSize,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated defaults values.
+    ///
+    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    final bool useMaterial3 = false,
   }) {
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    return OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        minimumSize: minButtonSize,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kButtonRadius),
-          ),
-        ), //buttonShape,
-        padding: padding,
-      ).copyWith(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledForegroundAlpha);
-            }
-            return baseColor;
-          },
-        ),
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return baseColor.withAlpha(kHoverBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.focused)) {
-              return baseColor.withAlpha(kFocusBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return baseColor.withAlpha(kPressedBackgroundAlpha);
-            }
-            return Colors.transparent;
-          },
-        ),
-        side: MaterialStateProperty.resolveWith<BorderSide?>(
-          (final Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return BorderSide(
-                color: baseColor
+    // Outline color logic with different M2 and M3 defaults.
+    final Color outlineColor = outlineSchemeColor == null
+        ? useMaterial3
+            ? schemeColor(SchemeColor.outline, colorScheme)
+            : baseColor
+        : schemeColor(outlineSchemeColor, colorScheme);
+
+    // Default outline widths.
+    final double normalWidth =
+        outlineWidth ?? (useMaterial3 ? 1 : kThinBorderWidth);
+    final double pressedWidth =
+        pressedOutlineWidth ?? (useMaterial3 ? 1 : kThickBorderWidth);
+
+    // We are using FCS M2 buttons, styled in M3 fashion.
+    if (!useMaterial3) {
+      return OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          minimumSize: minButtonSize ?? kButtonMinSize,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(radius ?? kButtonRadius),
+            ),
+          ), //buttonShape,
+          padding: padding,
+        ).copyWith(
+          foregroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return baseColor
                     .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha),
-                width: outlineWidth,
-              );
-            }
-            if (states.contains(MaterialState.error)) {
+                    .withAlpha(kDisabledForegroundAlpha);
+              }
+              return baseColor;
+            },
+          ),
+          overlayColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.hovered)) {
+                return baseColor.withAlpha(kHoverBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return baseColor.withAlpha(kFocusBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.pressed)) {
+                return baseColor.withAlpha(kPressedBackgroundAlpha);
+              }
+              return Colors.transparent;
+            },
+          ),
+          side: MaterialStateProperty.resolveWith<BorderSide?>(
+            (final Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return BorderSide(
+                  color: outlineColor
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                  width: normalWidth,
+                );
+              }
+              if (states.contains(MaterialState.error)) {
+                return BorderSide(
+                  color: colorScheme.error,
+                  width: pressedWidth,
+                );
+              }
+              if (states.contains(MaterialState.pressed)) {
+                return BorderSide(
+                  color: outlineColor,
+                  width: pressedWidth,
+                );
+              }
               return BorderSide(
-                color: colorScheme.error,
-                width: pressedOutlineWidth,
+                color: outlineColor.withAlpha(kEnabledBorderAlpha),
+                width: normalWidth,
               );
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return BorderSide(
-                color: baseColor,
-                width: pressedOutlineWidth,
-              );
-            }
-            return BorderSide(
-              color: baseColor.withAlpha(kEnabledBorderAlpha),
-              width: outlineWidth,
-            );
-          },
+            },
+          ),
         ),
-      ),
-    );
+      );
+      // We are using M3 style buttons, with potentially custom radius,
+      // foregroundColor, outlineColor, overlayColor, padding
+      // and minButtonSize.
+    } else {
+      final MaterialStateProperty<Color?> foregroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return colorScheme.onSurface.withOpacity(0.38);
+        }
+        return baseColor;
+      });
+
+      final MaterialStateProperty<Color?> overlayColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return baseColor.withOpacity(0.08);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return baseColor.withOpacity(0.12);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return baseColor.withOpacity(0.12);
+        }
+        return null;
+      });
+
+      final MaterialStateProperty<BorderSide> side =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return BorderSide(
+            color: colorScheme.onSurface.withOpacity(0.12),
+            width: normalWidth,
+          );
+        }
+        if (states.contains(MaterialState.error)) {
+          return BorderSide(
+            color: colorScheme.error,
+            width: pressedWidth,
+          );
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return BorderSide(
+            color: outlineColor,
+            width: pressedWidth,
+          );
+        }
+        return BorderSide(
+          color: outlineColor,
+          width: normalWidth,
+        );
+      });
+
+      return OutlinedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: foregroundColor,
+          backgroundColor:
+              ButtonStyleButton.allOrNull<Color>(Colors.transparent),
+          overlayColor: overlayColor,
+          minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
+          padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
+          elevation: ButtonStyleButton.allOrNull<double>(0.0),
+          side: side,
+          shape: radius == null
+              ? null
+              : ButtonStyleButton.allOrNull<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(radius),
+                    ),
+                  ),
+                ),
+        ),
+      );
+    }
   }
 
   /// An opinionated [PopupMenuThemeData] with custom corner radius.
@@ -3279,8 +3415,9 @@ class FlexSubThemes {
     /// In this design it uses the same default as outline thickness for
     /// selected outline button and input decorator.
     ///
-    /// Defaults to 1.5.
-    final double borderWidth = kThinBorderWidth,
+    /// If null, defaults to [kThinBorderWidth] = 1.5, when
+    /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
+    final double? borderWidth,
 
     /// Minimum button size.
     ///
@@ -3299,16 +3436,30 @@ class FlexSubThemes {
     /// Defaults to null, that results in VisualDensity.adaptivePlatformDensity
     /// being used, which is same as null default in ThemeData.
     final VisualDensity? visualDensity,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated defaults values.
+    ///
+    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    final bool useMaterial3 = false,
   }) {
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
     final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
 
+    // Get effective border width.
+    final double effectiveWidth =
+        borderWidth ?? (useMaterial3 ? 1.0 : kThinBorderWidth);
+
     final VisualDensity usedVisualDensity =
         visualDensity ?? VisualDensity.adaptivePlatformDensity;
     return ToggleButtonsThemeData(
-      borderWidth: borderWidth,
+      borderWidth: effectiveWidth,
       selectedColor: onBaseColor.withAlpha(kSelectedAlpha),
       color: baseColor,
       fillColor: baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
@@ -3346,10 +3497,10 @@ class FlexSubThemes {
         // VisualDensity property. Give it the same value that your theme
         // uses. This defaults to same value that ThemeData uses by default.
         minWidth: minButtonSize.width -
-            borderWidth * 2 +
+            effectiveWidth * 2 +
             usedVisualDensity.baseSizeAdjustment.dx,
         minHeight: minButtonSize.height -
-            borderWidth * 2 +
+            effectiveWidth * 2 +
             usedVisualDensity.baseSizeAdjustment.dy,
       ),
     );

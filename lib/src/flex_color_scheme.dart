@@ -5854,11 +5854,7 @@ class FlexColorScheme with Diagnosticable {
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
             baseSchemeColor: subTheme.inputDecoratorSchemeColor,
-            radius: subTheme.inputDecoratorRadius ??
-                subTheme.defaultRadius ??
-                (useMaterial3
-                    ? kInputDecoratorM3Radius
-                    : kInputDecoratorRadius),
+            radius: subTheme.inputDecoratorRadius ?? subTheme.defaultRadius,
             borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor,
@@ -5866,7 +5862,8 @@ class FlexColorScheme with Diagnosticable {
             unfocusedBorderWidth: subTheme.thinBorderWidth,
             unfocusedHasBorder: subTheme.inputDecoratorUnfocusedHasBorder,
             unfocusedBorderIsColored:
-                subTheme.inputDecoratorUnfocusedBorderIsColored)
+                subTheme.inputDecoratorUnfocusedBorderIsColored,
+            useMaterial3: useMaterial3)
         // Default one is also a bit opinionated, this is the FCS standard
         // in all previous versions before version 4.0.0. Kept for
         // backwards defaults compatibility.
@@ -6254,11 +6251,13 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.outlinedButtonTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.outlinedButtonSchemeColor,
+              outlineSchemeColor: subTheme.outlinedButtonOutlineSchemeColor,
               radius: subTheme.outlinedButtonRadius ?? subTheme.defaultRadius,
               pressedOutlineWidth: subTheme.thickBorderWidth,
               outlineWidth: subTheme.thinBorderWidth,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
+              useMaterial3: useMaterial3,
             )
           : null,
       // Since the old buttons have been deprecated in Flutter 2.0.0
@@ -6306,6 +6305,7 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.toggleButtonsRadius ?? subTheme.defaultRadius,
               minButtonSize: subTheme.buttonMinSize,
               visualDensity: visualDensity,
+              useMaterial3: useMaterial3,
             )
           : null,
       // Switch theme.

@@ -23,6 +23,11 @@ class TextFieldSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
+
+    final bool? isFilled =
+        controller.useSubThemes && controller.useFlexColorScheme
+            ? controller.inputDecoratorIsFilled
+            : null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -172,9 +177,9 @@ class TextFieldSettings extends StatelessWidget {
               ? controller.setInputDecoratorUnfocusedBorderIsColored
               : null,
         ),
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: TextInputField(),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: TextInputField(filled: isFilled),
         ),
       ],
     );
