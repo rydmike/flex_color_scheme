@@ -85,15 +85,15 @@ class Store {
   // Default value for the defaultRadius, also used to reset settings.
   static const double? defaultDefaultRadius = null;
 
-  // Key used to read and save the thickBorderWidth value.
-  static const String keyThickBorderWidth = 'thickBorderWidth';
-  // Default value for the thickBorderWidth, also used to reset settings.
-  static const double? defaultThickBorderWidth = null;
-
   // Key used to read and save the thinBorderWidth value.
   static const String keyThinBorderWidth = 'thinBorderWidth';
   // Default value for the thinBorderWidth, also used to reset settings.
   static const double? defaultThinBorderWidth = null;
+
+  // Key used to read and save the thickBorderWidth value.
+  static const String keyThickBorderWidth = 'thickBorderWidth';
+  // Default value for the thickBorderWidth, also used to reset settings.
+  static const double? defaultThickBorderWidth = null;
 
   // Key used to read and save the tooltipsMatchBackground value.
   static const String keyTooltipsMatchBackground = 'tooltipsMatchBackground';

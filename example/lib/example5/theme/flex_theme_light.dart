@@ -117,6 +117,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             // not yet natively available in Flutter SDK 2.10.3 or earlier,
             // this offers it as a way to use it already now.
             useTextTheme: controller.useTextTheme,
+            // Outline thickness theming
+            thinBorderWidth: controller.thinBorderWidth,
+            thickBorderWidth: controller.thickBorderWidth,
             // Prefer Flutter SDK null default behavior for sub-themes, when
             // possible.
             useFlutterDefaults: controller.useFlutterDefaults,

@@ -188,6 +188,12 @@ String generateThemeDartCode(ThemeController controller) {
   final String defRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String thinBorderWidth = controller.thinBorderWidth != null
+      ? '    thinBorderWidth: ${controller.thinBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String thickBorderWidth = controller.thickBorderWidth != null
+      ? '    thickBorderWidth: ${controller.thickBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
   //
   // Material bottom sheet.
   final String bottomSheetRadius = controller.bottomSheetBorderRadius != null
@@ -586,6 +592,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendLightTextTheme'
           '$useTextTheme'
           '$defRadius'
+          '$thinBorderWidth'
+          '$thickBorderWidth'
           //
           '$bottomSheetRadius'
           '$textButtonBorderRadius'
@@ -680,6 +688,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendDarkTextTheme'
           '$useTextTheme'
           '$defRadius'
+          '$thinBorderWidth'
+          '$thickBorderWidth'
           //
           '$bottomSheetRadius'
           '$textButtonBorderRadius'

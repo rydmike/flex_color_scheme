@@ -121,6 +121,9 @@ the issues.
 * *Themes Playground*: Features and code gen for additional `Outlined.button` separate outline 
   color.
 
+* *Themes Playground*: To the component panel added support to customize outline border
+  thickness for `OutlinedButton`, `ToggleButtons` and `TextField`'s `InputDecorator`.
+
 **KNOWN FLUTTER SDK ISSUES**
 
 The issues below in the Flutter SDK itself, are known to impact FlexColorScheme and Flutter

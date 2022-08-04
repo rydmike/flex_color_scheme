@@ -82,6 +82,18 @@ class ThemeController with ChangeNotifier {
       Store.keyDefaultRadius,
       Store.defaultDefaultRadius,
     );
+    _defaultRadius = await _themeService.load(
+      Store.keyDefaultRadius,
+      Store.defaultDefaultRadius,
+    );
+    _thinBorderWidth = await _themeService.load(
+      Store.keyThinBorderWidth,
+      Store.defaultThinBorderWidth,
+    );
+    _thickBorderWidth = await _themeService.load(
+      Store.keyThickBorderWidth,
+      Store.defaultThickBorderWidth,
+    );
     _tooltipsMatchBackground = await _themeService.load(
         Store.keyTooltipsMatchBackground, Store.defaultTooltipsMatchBackground);
     //
@@ -448,6 +460,8 @@ class ThemeController with ChangeNotifier {
     await setSchemeIndex(Store.defaultSchemeIndex, false);
     await setInteractionEffects(Store.defaultInteractionEffects, false);
     await setDefaultRadius(Store.defaultDefaultRadius, false);
+    await setThinBorderWidth(Store.defaultThinBorderWidth, false);
+    await setThickBorderWidth(Store.defaultThickBorderWidth, false);
     await setTooltipsMatchBackground(
         Store.defaultTooltipsMatchBackground, false);
     //
@@ -807,6 +821,24 @@ class ThemeController with ChangeNotifier {
     _defaultRadius = value;
     if (notify) notifyListeners();
     await _themeService.save(Store.keyDefaultRadius, value);
+  }
+
+  late double? _thinBorderWidth;
+  double? get thinBorderWidth => _thinBorderWidth;
+  Future<void> setThinBorderWidth(double? value, [bool notify = true]) async {
+    if (value == _thinBorderWidth) return;
+    _thinBorderWidth = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyThinBorderWidth, value);
+  }
+
+  late double? _thickBorderWidth;
+  double? get thickBorderWidth => _thickBorderWidth;
+  Future<void> setThickBorderWidth(double? value, [bool notify = true]) async {
+    if (value == _thickBorderWidth) return;
+    _thickBorderWidth = value;
+    if (notify) notifyListeners();
+    await _themeService.save(Store.keyThickBorderWidth, value);
   }
 
   late bool _tooltipsMatchBackground;
