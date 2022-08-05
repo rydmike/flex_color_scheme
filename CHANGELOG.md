@@ -375,11 +375,9 @@ maybe even 7.0 if so requested by users.
 
 **BREAKING**
 
-* Requires at least Flutter 2.10.0.
-  * Version 5.0.0 requires at least Flutter version 2.10.0 to work. This breaking
-    change is required since the new color properties in `ColorScheme` do not exist
-    in any stable version of Flutter before version 2.10.
-
+* Version 5.0.0 requires at least Flutter version 2.10.0 to work. This breaking
+  change is required since the new color properties in `ColorScheme` do not exist
+  in any stable version of Flutter before version 2.10.
 
 * `surfaceStyle` removed.
   * In version 5.0.0, the in version 4.2.0 deprecated property `surfaceStyle`, including all
@@ -471,7 +469,14 @@ theme: FlexThemeData.light(
     eventually when the Flutter SDK `ColorScheme` colors `primaryVariant` and `secondaryVariant`
     are removed after a year or so.
 
-**CHANGE** and breaking past style.
+* `SchemeColor` values and order, potentially breaking.
+  The enum `SchemeColor` has new values and past values are in a new order.
+  The order was changed to accommodate all the new color values, and to keep them in
+  the same order as their corresponding color properties in Flutter Material 3
+  `ColorScheme` color values. The change of order is potentially breaking,
+  but highly unlikely to break anything in major ways in normal usage.
+
+**STYLE CHANGE - BREAKING**
 
 * The custom "internal" and temporary `m3TextTheme` was changed.
   It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2.
@@ -504,20 +509,11 @@ theme: FlexThemeData.light(
   of the new Material 3 ColorScheme, the opportunity to improve this color value used in the
   built-in theme `espresso` theme was used.
 
-**BEWARE**
-
-* `SchemeColor` values and order, potentially breaking.
-  The enum `SchemeColor` has new values and past values are in a new order.
-  The order was changed to accommodate all the new color values, and to keep them in
-  the same order as their corresponding color properties in Flutter Material 3
-  `ColorScheme` color values. The change of order is potentially breaking,
-  but highly unlikely to break anything in major ways in normal usage.
-
 ## 5.0.0-dev.3
 
 **April 20, 2022**
 
-**CHANGE** - Breaking past style
+**STYLE CHANGE - BREAKING**
 
 * The custom "internal" and temporary `m3TextTheme` was changed.
   It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2.
@@ -1102,7 +1098,6 @@ should be relatively easy, despite the long list of changes and new features.
    and genoa greens.
    Use enum value `FlexScheme.dellGenoa` for easy access to it.
 
-
 **CHANGE**
 
 * Added all the new `ColorScheme` M3 color properties to `SchemeColor`
@@ -1179,10 +1174,10 @@ should be relatively easy, despite the long list of changes and new features.
   The Colors `primaryVariant` and `secondaryVariant` were removed from it
   since the colors are deprecated in Flutter SDK. The change was from:
 
-   | Before           | Before            |
-   |-------------------|-----------------|
-   | Primary          | Primary variant   |
-   | Secondary        | Secondary variant |
+  | Before           | Before            |
+  |------------------|-------------------|
+  | Primary          | Primary variant   |
+  | Secondary        | Secondary variant |
 
    to:
 
@@ -1190,7 +1185,6 @@ should be relatively easy, despite the long list of changes and new features.
   |--------------------|-----------------|
   | Primary            | Secondary       |
   | Primary container  | Tertiary        |
-
 
 
 **FIX**
@@ -1272,7 +1266,7 @@ should be relatively easy, despite the long list of changes and new features.
     the app.
   - Added NavigationRail Settings panel, with similar settings and NavigationBar.
 
-**TESTS TODO**
+**TESTS**
 
 * Tests are still incomplete and currently down to about 86% coverage,
   but at least all existing (1275) ones are passing and behave as expected.
@@ -1912,10 +1906,12 @@ Includes the changes from [2.0.0-nullsafety.1] and [2.0.0-nullsafety.2].
 First dev version with null-safety. 
 
 **BREAKING** 
+
 * Removed the in version 1.3.0 deprecated `FlexSchemeSurfaceColors.themeSurface`, use
   `FlexSchemeSurfaceColors.surfaceStyle` instead.
 
 **TESTS**
+
 * Number of tests were reduced from 723 to 639, when all null related tests were removed.
 
 ## 1.4.1
