@@ -4,7 +4,7 @@
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
-Use **FlexColorScheme** to make beautiful color scheme based Flutter themes,
+Use **FlexColorScheme** to make beautiful color scheme based Flutter Material design themes,
 with optional primary color surface blends, or key color seeded color schemes.
 The themes are based on the same concept as Flutter's ColorScheme based themes,
 but offers many additional features, and numerous pre-made themes.

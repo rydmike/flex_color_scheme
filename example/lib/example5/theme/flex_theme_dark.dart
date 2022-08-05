@@ -32,10 +32,7 @@ ThemeData flexThemeDark(ThemeController controller) =>
 ///
 /// Normally you would probably only have a few properties offered as possible
 /// features the user can change. Since this is a feature demo of almost
-/// everything [FlexColorScheme] it is a bit wild.
-///
-/// This function returns the Dark theme mode data that we us in the
-/// ThemesPlayground app.
+/// everything [FlexColorScheme] can do, it is a bit wild.
 ///
 /// The function only contains tutorial comments on topics not covered in the
 /// almost identical `flexColorSchemeLight` function. Please see it for

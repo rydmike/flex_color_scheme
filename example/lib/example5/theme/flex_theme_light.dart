@@ -31,7 +31,7 @@ ThemeData flexThemeLight(ThemeController controller) =>
 ///
 /// Normally you would probably only have a few properties offered as possible
 /// features the user can change. Since this is a feature demo of almost
-/// everything [FlexColorScheme] it is a bit wild.
+/// everything [FlexColorScheme] can do, it is a bit wild.
 FlexColorScheme flexColorSchemeLight(ThemeController controller) {
   // Using a built-in scheme or one of the custom colors in the demo?
   final bool useBuiltIn = controller.schemeIndex > 2 &&
