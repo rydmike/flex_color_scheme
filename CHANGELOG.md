@@ -13,8 +13,8 @@ release 5.2.0 depending on how well it works on Flutter *stable 3.0.5*.
 Due to a number of known and below listed Flutter SDK issues when using `useMaterial3` set to
 `true`, we cannot yet recommend using the option. Use it only if you are willing to accept the
 still incomplete Material 3 implementation in Flutter and the listed issues. If you keep it `false`,
-and use FCS opinionated, you can optionally create a theme that is visually fairly similar to M3,
-but still using M2 `ThemeData` mode to avoid the issues.
+and use FCS opinionated component themes, you can create a theme that is visually fairly similar to
+M3, but still using M2 `ThemeData` mode to avoid the issues.
 
 **STYLE CHANGE - BREAKING**
 
@@ -124,6 +124,9 @@ but still using M2 `ThemeData` mode to avoid the issues.
 **DOCS**
 
 * Removed duplicated section of 5.1.0 changelog entry with date July 5, 2022.
+
+* Harmonized the changelog style and its past history. The new style and how it looks will be tested
+  with a dev release to ensure it works well on pub.
 
 **KNOWN FLUTTER SDK ISSUES**
 
