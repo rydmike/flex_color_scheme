@@ -68,7 +68,10 @@ M3, but still using M2 `ThemeData` mode to avoid the issues.
   `subThemesData: const FlexSubThemesData(cinputDecoratorSchemeColor: SchemeColor.primary)`.
   This feature will only work with intended design in stable channel after feature and PR
   ["Migrate TextField to Material 3"](https://github.com/flutter/flutter/pull/108366) lands in
-  stable channel. Currently, it is only available in Flutter *master 3.1.0-x*.
+  stable channel. Currently, it is only available in Flutter *master 3.1.0-x*. 
+  The M3 alignment of FCS still needs more work, like:
+  - Move towards same error container color idea for FCS default, like M3 uses
+  - Option to use FCS component defaults on fill colors and disabled color when opting in on M3.
 
 **NEW**
 
@@ -156,11 +159,13 @@ also at least in Flutter *master 3.1.0-0.0.pre.2033* and earlier:
 * [**#103864**](https://github.com/flutter/flutter/issues/103864) Dynamically changing `Typography` 
   in `ThemeData` generates an error
 
-* [**#107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` 
+* [**FIXED #107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` 
   properties `iconTheme` and `actionsIconTheme` ignored on master channel when `useMaterial3`
   is true. This is not in stable Flutter channel *stable 3.0.5*, but if you use 
   master channel it is something to be aware of, as it exists in Flutter
-  *master 3.1.0-0.0.pre.2033* and many earlier *master 3.1.0-x* versions.
+  *master 3.1.0-0.0.pre.2033* and many earlier *master 3.1.0-x* versions. This issue was fixed via
+  [PR #108332](https://github.com/flutter/flutter/pull/108332) and can no longer be observed in
+  *master, 3.1.0-0.0.pre.2108* or later versions.
 
 ## 5.1.0
 
