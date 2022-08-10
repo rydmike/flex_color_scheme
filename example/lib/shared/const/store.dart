@@ -366,7 +366,6 @@ class Store {
   // Key used to read and save the appBarStyleDark value.
   static const String keyAppBarStyleDark = 'darkAppBarStyle';
   // Default value for the appBarStyleDark, also used to reset settings.
-  // TODO(rydmike): Maybe use background as default?
   static const FlexAppBarStyle? defaultAppBarStyleDark = null;
   // FlexAppBarStyle.background;
 

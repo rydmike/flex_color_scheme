@@ -272,8 +272,16 @@ class TextButtonShowcase extends StatelessWidget {
   }
 }
 
-class ToggleButtonsShowcase extends StatelessWidget {
-  const ToggleButtonsShowcase({super.key});
+class ToggleButtonsShowcase extends StatefulWidget {
+  const ToggleButtonsShowcase({this.showOutlinedButton, super.key});
+  final bool? showOutlinedButton;
+
+  @override
+  State<ToggleButtonsShowcase> createState() => _ToggleButtonsShowcaseState();
+}
+
+class _ToggleButtonsShowcaseState extends State<ToggleButtonsShowcase> {
+  List<bool> selected = <bool>[true, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -283,14 +291,23 @@ class ToggleButtonsShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         ToggleButtons(
-          isSelected: const <bool>[true, false, false],
-          onPressed: (int newIndex) {},
+          isSelected: selected,
+          onPressed: (int toggledIndex) {
+            setState(() {
+              selected[toggledIndex] = !selected[toggledIndex];
+            });
+          },
           children: const <Widget>[
             Icon(Icons.adb),
             Icon(Icons.phone),
             Icon(Icons.account_circle),
           ],
         ),
+        if (widget.showOutlinedButton ?? false)
+          OutlinedButton(
+            onPressed: () {},
+            child: const Text('Outlined'),
+          ),
         ToggleButtons(
           isSelected: const <bool>[true, false, false],
           onPressed: null,
@@ -300,6 +317,11 @@ class ToggleButtonsShowcase extends StatelessWidget {
             Icon(Icons.account_circle),
           ],
         ),
+        if (widget.showOutlinedButton ?? false)
+          const OutlinedButton(
+            onPressed: null,
+            child: Text('Outlined'),
+          ),
       ],
     );
   }
@@ -500,9 +522,9 @@ class _PopupMenuButton extends StatelessWidget {
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: scheme.primary,
-            onPrimary: scheme.onPrimary,
-            onSurface: scheme.onSurface,
+            backgroundColor: scheme.primary,
+            foregroundColor: scheme.onPrimary,
+            disabledForegroundColor: scheme.onSurface,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(radius ?? 8)),
             ),
@@ -642,9 +664,12 @@ class ChipShowcase extends StatelessWidget {
           avatar: const Icon(Icons.settings),
           onPressed: () {},
         ),
-        const ActionChip(
-          label: Text('ActionChip'),
-          avatar: Icon(Icons.settings),
+        ActionChip(
+          label: const Text('ActionChip'),
+          avatar: const Icon(Icons.settings),
+          // TODO(rydmike): Uncomment in 3.1.0 to get disabled ActionChip.
+          // The onPressed is required in 3.0.5 stable, but not in 3.1.0 master.
+          onPressed: () {},
         ),
         FilterChip(
           label: const Text('FilterChip'),

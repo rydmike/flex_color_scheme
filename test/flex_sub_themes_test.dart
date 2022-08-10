@@ -352,6 +352,7 @@ void main() {
         equals(
           const DialogTheme(
             elevation: 6,
+            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             shape: RoundedRectangleBorder(
@@ -376,6 +377,7 @@ void main() {
           const DialogTheme(
             backgroundColor: Color(0xFF343476),
             elevation: 6,
+            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             shape: RoundedRectangleBorder(
@@ -402,6 +404,7 @@ void main() {
           const DialogTheme(
             backgroundColor: Color(0xFFDDDDDD),
             elevation: 6,
+            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             shape: RoundedRectangleBorder(
@@ -427,6 +430,7 @@ void main() {
         equals(
           DialogTheme(
             backgroundColor: colorScheme.tertiary,
+            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             elevation: 6,
@@ -452,6 +456,7 @@ void main() {
         equals(
           const DialogTheme(
             elevation: 10,
+            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 EdgeInsets.only(left: 12.0, right: 6.0, bottom: 20.0),
             shape: RoundedRectangleBorder(

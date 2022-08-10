@@ -5889,6 +5889,7 @@ class FlexColorScheme with Diagnosticable {
       // apply them via ThemeData copyWith separately for cases when we want
       // to use them in a FlexColorSchemes, which might often be the case. Some
       // of the values may be null and get defaults via the ThemeData() factory.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of fontFamily.
       fontFamily: fontFamily,
       visualDensity: visualDensity,
       useMaterial3: useMaterial3,
@@ -5905,7 +5906,9 @@ class FlexColorScheme with Diagnosticable {
       // factory ThemeData.from() for creating a theme from a color scheme and
       // text theme.
       brightness: colorScheme.brightness,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
       primaryColor: colorScheme.primary,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of canvasColor.
       canvasColor: colorScheme.background,
       // TODO(rydmike): Monitor Flutter SDK deprecation of scaffoldBackground.
       // See: https://github.com/flutter/flutter/issues/91772
@@ -5918,10 +5921,14 @@ class FlexColorScheme with Diagnosticable {
       // separately alone. We want to do so in order to make elegantly nuanced
       // primary color branded themes.
       scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.background,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of cardColor.
       // Card, divider and background colors are same as in ThemeData.from.
       cardColor: colorScheme.surface,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
       dividerColor: dividerColor,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of backgroundColor.
       backgroundColor: colorScheme.background,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.
       // Disabled color uses a different style when using themed interaction
       // effects, if not opted in same as before v4.0.0, use ThemeData default.
       disabledColor: themedEffects
@@ -5931,7 +5938,7 @@ class FlexColorScheme with Diagnosticable {
           : isDark
               ? Colors.white38
               : Colors.black38,
-
+      // TODO(rydmike): Monitor Flutter SDK deprecation of hintColor.
       // Same as ThemeData SDK.
       // hintColor is only used by DropdownButton and InputDecorator in SDK.
       hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
@@ -6087,11 +6094,14 @@ class FlexColorScheme with Diagnosticable {
           statusBarIconBrightness: appBarBrightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
-          // TODO(rydmike): Raise sys-nav AppBar systemOverlayStyle SDK issue.
+          // TODO(rydmike): Monitor sys-nav AppBar systemOverlayStyle issue.
           //   Would be useful it could set system navbar properties too and not
           //   only status bar properties. While it might be odd to do so, it
           //   seems even more odd that a part of the SystemUiOverlayStyle has
           //   no effect when used here.
+          //   See https://github.com/flutter/flutter/issues/104410
+          //   and https://github.com/flutter/flutter/issues/100027#issuecomment-1077697819
+          //   PR: https://github.com/flutter/flutter/pull/104827
           // The systemNavigationBarColor used by default AppBar in SDK is
           // always black, like so:
           // systemNavigationBarColor: const Color(0xFF000000),

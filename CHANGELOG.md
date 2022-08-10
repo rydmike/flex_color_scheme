@@ -4,11 +4,13 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 5.2.0-dev.1
 
-**Aug 5, 2022**
+**Aug 10, 2022**
 
 This is a dev branch to test features on Flutter channel *master 3.1.0-x* and to 
 prepare for next style and feature alignments when `useMaterial3` is true. It may be published as
-release 5.2.0 depending on how well it works on Flutter *stable 3.0.5*.
+release 5.2.0 depending on how well it works on Flutter *stable 3.0.5*, but probably not. The
+release of next Flutter stable after 3.0.x, is getting close and this dev release is to
+prepare for that.
 
 Due to a number of known and below listed Flutter SDK issues when using `useMaterial3` set to
 `true`, we cannot yet recommend using the option. Use it only if you are willing to accept the
@@ -29,6 +31,18 @@ M3, but still using M2 `ThemeData` mode to avoid the issues.
   These breaking style changes in the opinionated opt in component sub-themes are unfortunate,
   but required as FlexColorScheme continues to evolve with Flutter SDK to support Material 3 
   theming, while offering its own opinionated tweaks on some M3 default styles.
+
+* The M3 color utilities package *material_color_utilities* from the Material team, that Flutter SDK
+  depends on and FCS also uses, introduced a minor breaking change going from version 0.1.4 to
+  0.1.5. Some colors in the tonal palettes no longer give exactly the same color values as before.
+  This changes the results for some colors when you create a `ColorScheme.fromSeed` or FCS does
+  it internally with its extended version `_Scheme.fromSeeds`. The new algorithm changes for example 
+  all the default M3 error colors slightly. The changes in the color values are minor, and not
+  visually noticeable to the eye. Values are slightly different, and this release uses the new
+  value for FCS M3 error colors. Tests were also updated to use the new values. The change did break
+  FCS color value tests, and should be per its own policy be considered a major breaking change.
+  However, since the Material 3 design and *material_color_utilities* calls this change minor, 
+  then so does FCS.   
 
 **STYLE CHANGE - MINOR**
 
@@ -69,7 +83,7 @@ M3, but still using M2 `ThemeData` mode to avoid the issues.
   This feature will only work with intended design in stable channel after feature and PR
   ["Migrate TextField to Material 3"](https://github.com/flutter/flutter/pull/108366) lands in
   stable channel. Currently, it is only available in Flutter *master 3.1.0-x*. 
-  The M3 alignment of FCS still needs more work, like:
+  The M3 alignment of FCS `InputDecoration` still needs more work, like:
   - Move towards same error container color idea for FCS default, like M3 uses
   - Option to use FCS component defaults on fill colors and disabled color when opting in on M3.
 

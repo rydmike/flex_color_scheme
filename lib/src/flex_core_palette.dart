@@ -249,10 +249,10 @@ class FlexCorePalette extends CorePalette {
 // create the CorePalette from this list, has unneeded extra overhead.
 // It would be a bit more efficient to make an own implementation
 // of this simple mid-layer that has the needed constructors directly.
-// Keeping this version around as small private classes around so I can later
+// Keeping this version around as a small private classes so I can later
 // benchmark and see if it makes a difference. Perhaps it does not matter,
 // in that case extending the parent [CorePalette] is a bit prettier.
-// But its interface feels a bit like using a FFI.
+// But its interface feels a bit like using FFI.
 //
 // The [CorePalette] in Material Color Utilities is just a convenience
 // wrapper for the needed [TonalPalette]s, that are used by an additional

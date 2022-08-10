@@ -149,9 +149,14 @@ class FabToggleChipPopupSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
+        const ListTile(
+          title: Text('ToggleButtons'),
+          subtitle: Text('Component themes style and height aligns '
+              'ToggleButtons with OutlinedButton and FilledButton'),
+        ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: ToggleButtonsShowcase(),
+          child: ToggleButtonsShowcase(showOutlinedButton: true),
         ),
         ColorSchemePopupMenu(
           title: const Text('ToggleButtons color'),
@@ -284,7 +289,7 @@ class FabToggleChipPopupSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Chip color base'),
           labelForDefault: controller.useMaterial3
-              ? 'default M3 (secondary container)'
+              ? 'default M3 (surface & secondaryContainer)'
               : 'default (primary with opacity)',
           index: controller.chipSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme

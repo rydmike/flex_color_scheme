@@ -1,10 +1,10 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 5.2.0
+version: 5.2.0-dev.1
 publish_to: 'none'
 environment:
   sdk: '>=2.17.0 <3.0.0'
-  flutter: '>=3.0.0'
+  flutter: '>=3.1.0-0.0.pre.2111'
 
 dependencies:
   # Adds the Cupertino Icons font to your application. Used by the
@@ -14,7 +14,7 @@ dependencies:
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_picker
-  flex_color_picker: ^2.5.0
+  flex_color_picker: ^2.6.0-dev.1
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_scheme
@@ -54,7 +54,7 @@ dependencies:
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
   # https://pub.dev/packages/string_scanner
-  string_scanner: ^1.1.1
+  string_scanner: ^1.1.0
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher

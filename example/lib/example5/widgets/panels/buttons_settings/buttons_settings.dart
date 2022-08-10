@@ -242,8 +242,8 @@ class ButtonsSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Unfocused border width'),
-          subtitle: const Text('Setting shared with OutlinedButton and '
+          title: const Text('Normal border width'),
+          subtitle: const Text('Setting shared with unfocused TextField and '
               'ToggleButtons'),
         ),
         ListTile(
@@ -299,8 +299,8 @@ class ButtonsSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Focused border width'),
-          subtitle: const Text('Setting shared with pressed OutlinedButton'),
+          title: const Text('Pressed border width'),
+          subtitle: const Text('Setting shared with focused TextField'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,

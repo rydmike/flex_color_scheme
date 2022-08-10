@@ -1175,6 +1175,7 @@ class FlexSubThemes {
     return DialogTheme(
       elevation: elevation,
       backgroundColor: background,
+      // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
       actionsPadding: actionsPadding ??
           const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
       shape: RoundedRectangleBorder(
@@ -3452,10 +3453,10 @@ class FlexSubThemes {
     final Color baseColor = schemeColor(baseScheme, colorScheme);
     final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
 
-    // Get effective border width.
+    // Effective border width, default different with M3.
     final double effectiveWidth =
         borderWidth ?? (useMaterial3 ? 1.0 : kThinBorderWidth);
-
+    // Effective visual density.
     final VisualDensity usedVisualDensity =
         visualDensity ?? VisualDensity.adaptivePlatformDensity;
     return ToggleButtonsThemeData(
