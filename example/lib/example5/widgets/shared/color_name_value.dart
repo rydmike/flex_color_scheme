@@ -99,7 +99,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        'Tone ${widget.tone.toString()}',
+                        'Tone ${widget.tone}',
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.end,
                         maxLines: 1,

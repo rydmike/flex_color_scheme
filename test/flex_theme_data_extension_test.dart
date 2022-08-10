@@ -399,7 +399,7 @@ void main() {
     // [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972)
     //
     // test(
-    //     'FTD1.07: GIVEN a FlexThemeData.raw theme with Material scheme light '
+    //    'FTD1.07: GIVEN a FlexThemeData.raw theme with Material scheme light '
     //     'colors EXPECT toggleableActiveColor equality with '
     //     'colorScheme.secondary.', () {
     //   expect(
