@@ -210,7 +210,7 @@ class ShowSubThemeColors extends StatelessWidget {
               ColorCard(
                 label: 'Outlined\nButton',
                 color: outlinedButtonColor,
-                textColor: _onColor(elevatedButtonColor, background),
+                textColor: _onColor(outlinedButtonColor, background),
               ),
               ColorCard(
                 label: 'Text\nButton',
