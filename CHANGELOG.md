@@ -87,6 +87,22 @@ M3, but still using M2 `ThemeData` mode to avoid the issues.
   - Move towards same error container color idea for FCS default, like M3 uses
   - Option to use FCS component defaults on fill colors and disabled color when opting in on M3.
 
+**CHANGE**
+  
+* To support deprecation of `toggleableActiveColor` when PR 
+  [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972) lands,  
+  while retaining the previous FCS defaults for `Switch`, `CheckBox` and `Radio` widgets, when 
+  not opting in on component sub-themes. The created `SwitchThemeData`, `CheckboxThemeData` and
+  `CheckboxThemeData` can no longer be null, when not opting in on sub-themes like before.
+  To support the previous nicely theme colored
+  toggles in light and dark themes, that were set by defining the right scheme color for
+  `toggleableActiveColor` in M2 and M3 theme modes, sub-themes for them that replicates the color
+  styles must now be created also when not opting in on sub-themes. This update includes the
+  necessary change to do so. This will be reflected in updates to the core defaults documentation.
+  For a migration guide concerning `toggleableActiveColor` see 
+  https://flutter.dev/docs/release/breaking-changes/toggleable-active-color#migration-guide
+
+
 **NEW**
 
 * Added `appBarCenterTitle` property to `FlexSubThemesData` configuration. It works the 
@@ -117,7 +133,7 @@ M3, but still using M2 `ThemeData` mode to avoid the issues.
   * `outlineSchemeColor`, defaults to null `SchemeColor?`.
   When `useMaterial3` is `false`, the `outlineSchemeColor` defaults to `baseSchemeColor`.
   When `useMaterial3` is `true`, the `outlineSchemeColor` defaults to `SchemeColor.outline`.
-  
+
 **EXAMPLES**
 
 * *Themes Playground:* Updated the default AppBar style, it uses a dropdown menu that can also select 
@@ -1308,7 +1324,7 @@ should be relatively easy, despite the long list of changes and new features.
 
 Curious about what is planned next for FlexColorScheme? Head over
 to the TODO section at the end of this page and read more
-[here](#planned-updates-and-new-features).
+[here](#future-features).
 
 ## 4.2.0
 

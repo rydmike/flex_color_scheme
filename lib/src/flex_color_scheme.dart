@@ -6020,6 +6020,7 @@ class FlexColorScheme with Diagnosticable {
       // longer needed corrections or remove totally deprecated
       // ThemeData properties when it is appropriate and timely to do so.
       // ----------------------------------------------------------------------
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of toggleableActive.
       // See: https://github.com/flutter/flutter/pull/95870
       // This color is still important, if it is not set we get a teal color for
@@ -6031,9 +6032,12 @@ class FlexColorScheme with Diagnosticable {
       // When using sub-themes, or Material 3 style, we use primary color
       // instead, because it is the best match for M3 ColorDesign for the M2
       // components using M3 Colors.
-      toggleableActiveColor: useSubThemes || useMaterial3
-          ? colorScheme.primary
-          : colorScheme.secondary,
+      // TODO(rydmike): Try removal of toggleableActiveColor.
+      //   Remove ALL above comments and commented prop when released to stable.
+      // toggleableActiveColor: useSubThemes || useMaterial3
+      //     ? colorScheme.primary
+      //     : colorScheme.secondary,
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
       // See: https://github.com/flutter/flutter/issues/91772
       // The primary dark color no longer exists in ColorScheme themes, but
@@ -6325,7 +6329,12 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.switchSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
-          : null,
+          : FlexSubThemes.switchTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor:
+                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
+              unselectedIsColored: false,
+            ),
       // Checkbox theme.
       checkboxTheme: useSubThemes
           ? FlexSubThemes.checkboxTheme(
@@ -6333,7 +6342,12 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.checkboxSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
-          : null,
+          : FlexSubThemes.checkboxTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor:
+                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
+              unselectedIsColored: false,
+            ),
       // Radio theme.
       radioTheme: useSubThemes
           ? FlexSubThemes.radioTheme(
@@ -6341,7 +6355,12 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.radioSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
-          : null,
+          : FlexSubThemes.radioTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor:
+                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
+              unselectedIsColored: false,
+            ),
       // Input decorator theme.
       inputDecorationTheme: effectiveInputDecorationTheme,
       // FAB, floating action button theme.
